@@ -1,0 +1,144 @@
+{
+	"Q": {
+		"pluginInfo": {
+			"Users": {
+				"version": "0.8.4",
+				"compatible": "0.8",
+				"requires": {"Q": "0.8"},
+				"permissions": ["Users/icons"],
+				"connections": ["Users"]
+			}
+		},
+		"handlersBeforeEvent": {
+			"Q/objects": ["Users/before/Q_objects"],
+			"Q/responseExtras": ["Users/before/Q_responseExtras"],
+			"Q/response/notices": ["Users/before/Q_response_notices"],
+			"Q/session/save": ["Users/before/Q_session_save"],
+			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
+		},
+		"handlersAfterEvent": {
+			"Q/session/write": ["Users/after/Q_session_write"],
+			"Q/session/destroy": ["Users/after/Q_session_destroy"],
+			"Q/reroute": ["Users/after/Q_reroute"],
+			"Q/image/save": ["Users/after/Q_image_save"],
+			"Q/responseExtras": ["Users/after/Q_responseExtras"],
+			"Users/setEmailAddress": ["Users/after/Users_setEmailAddress"],
+			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
+			"Users/addIdentifier": ["Users/after/Users_addIdentifier"]
+		},
+		"routes": {
+			"e/:emailAddress": { "module": "Users", "action": "activate" },
+			"m/:mobileNumber": { "module": "Users", "action": "activate" },
+			"plugins/Users/:action": {"module": "Users"},
+			"uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"}
+		},
+		"session": {
+			"db": {
+				"connection": "Users",
+				"rowClass": "Users_Session",
+				"idField": "id",
+				"dataField": "php",
+				"updatedField": "updatedTime",
+				"durationField": "duration"
+			}
+		}
+	},
+	"Users": {
+		"facebookApps": {
+
+		},
+		"login": {
+			"identifierType": "email,mobile",
+			"using": "native,facebook",
+			"userQueryUri": "Users/user",
+			"iconType": "wavatar",
+			"gravatar": false,
+			"noRegister": false
+		},
+		"paths": {
+			"icons": "files/Users/icons",
+			"uploads": {
+				"files/{{app}}/uploads/Users/{{userId}}": true
+			}
+		},
+		"transactional": {
+			"activation": {
+				"subject": "Welcome! Please verify your email address.",
+				"body": "Users/email/activation.php",
+				"sms": "Users/sms/activation.php"
+			},
+			"identifier": {
+				"subject": "Welcome! Verify your email address.",
+				"body": "Users/email/addEmail.php",
+				"sms": "Users/sms/addMobile.php"
+			},
+			"resend": {
+				"subject": "Hey, did you forget your passphrase?",
+				"body": "Users/email/resend.php",
+				"sms": "Users/sms/resend.php"
+			},
+			"authenticated": {
+				"subject": false,
+				"body": false
+			}
+		},
+		"activation": {
+			"expires": 10080
+		},
+		"notices": {
+			"contact": true
+		},
+		"mobile": {
+			"gateways": {
+				"at&t": "txt.att.net",
+				"sprint": "messaging.sprintpcs.com",
+				"verizon": "vtext.com",
+				"t-mobile": "tmomail.net"
+			}
+		},
+		"exportFields": [
+			"id", "username", "signedUpWith", "icon", "url",
+			"fb_uid", "tw_uid", "g_uid", "y_uid"
+		],
+		"avatarFields": [
+			"id", "username", "icon", "url"
+		],
+		"authorize": {
+			"duration": "year",
+			"terms": {
+				"uri": null,
+				"label": "I have read and agree<br>to the {{link}}",
+				"title": "Terms"
+			},
+			"stateMinLength": 10
+		},
+		"register": {
+			"terms": {
+				"uri": "{{baseUrl}}/terms",
+				"label": "I accept the {{link}}",
+				"title": "Terms"
+			},
+			"icon": {
+				"leaveDefault": false
+			},
+			"delaySMS": 30000
+		},
+		"passphrase": {
+			"hashFunction": "sha1",
+			"hashIterations": 1103,
+			"saltLength": 10
+		},
+		"displayName": {
+			"default": "Someone"
+		},
+		"icon": {
+			"sizes": ["40", "50", "80", "x200", "200x"],
+			"defaultSize": "40"
+		},
+		"vote": {
+			"Users/hinted": {
+				"value": 1
+			}
+		}
+	}
+}

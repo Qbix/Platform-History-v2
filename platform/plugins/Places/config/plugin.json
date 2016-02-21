@@ -1,0 +1,101 @@
+{
+	"Q": {
+		"pluginInfo": {
+			"Places": {
+				"version": "0.4",
+				"compatible": "0.3",
+				"connections": ["Places"],
+				"requires": {"Streams": "0.8"}
+			}
+		},
+		"routes": {
+			"plugins/Places/:action": {"module": "Places"}
+		},
+		"handlersBeforeEvent": {
+			"Q/responseExtras": ["Places/before/Q_responseExtras"]
+		},
+		"handlersAfterEvent": {
+			"Streams/interest/add": ["Places/after/Streams_interest_add"],
+			"Streams/interest/remove": ["Places/after/Streams_interest_remove"]
+		}
+	},
+	"Streams": {
+		"types": {
+			"Places/community": {
+				"edit": true
+			},
+			"Places/location": {
+				"create": true,
+				"edit": true,
+				"messages": {
+					"Places/location/visit": { "post": true },
+					"Places/location/stay": { "post": true }
+				},
+				"defaults": {
+					"title": "Location"
+				}
+			},
+			"Places/nearby": {},
+			"Places/timeslot": {
+				"defaults": {
+					"title": "Nearby Timeslot"
+				}
+			},
+			"Places/interest": {
+				"defaults": {
+					"title": "Nearby Interest"
+				}
+			},
+			"Places/location": {
+				"create": true,
+				"edit": true,
+				"messages": {
+					"Places/location/visit": { "post": true },
+					"Places/location/stay": { "post": true }
+				},
+				"defaults": {
+					"title": "Location"
+				}
+			},
+			"Places/area": {
+				"edit": true,
+				"messages": {
+					"Places/location/visit": { "post": true },
+					"Places/location/stay": { "post": true }
+				},
+				"defaults": {
+					"title": "Area"
+				}
+			},
+			"Places/floor": {
+				"edit": true
+			},
+			"Places/column": {
+				"edit": true
+			}
+		}
+	},
+	"Places": {
+		"nearby": {
+			"miles": [1, 5, 10, 15, 20, 25, 50, 75, 100],
+			"defaultMiles": 20,
+			"minSubscribeMiles": 1,
+			"maxSubscribeMiles": 15
+		},
+		"geolocation": {
+			"requireLogin": false,
+			"allowClientQueries": false
+		},
+		"google": {
+			"keys": {
+				"server": null,
+				"web": null
+			}
+		},
+		"location": {
+			"cache": {
+				"duration": 2592000
+			}
+		}
+	}
+}

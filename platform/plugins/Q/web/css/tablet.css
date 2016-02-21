@@ -1,0 +1,73 @@
+html
+{
+  -webkit-text-size-adjust: none;
+}
+
+#notices_slot > ul > li > span
+{
+  font-size: 13px;  
+}
+
+#dashboard_slot.Q_dashboard_vertical
+{
+	position: relative;
+	width: 256px;
+	float: left;
+}
+
+#column1_slot, #column2_slot
+{
+	width: 382px;
+	float: left;
+	margin: 0 2px;
+	background-color: white;
+}
+
+.Q_portrait #column1_slot, .Q_portrait #column2_slot
+{
+	margin-left: 0;
+	width: 383px;
+}
+
+#column0_slot
+{
+	float: left;
+	background-color: white;
+}
+
+.Q_landscape #column0_slot
+{
+	width: 764px;
+	margin: 0 2px;
+}
+
+.Q_portrait #column0_slot
+{
+	width: 768px;
+}
+
+#column2_slot
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.Q_selected.Q_active
+{
+  color: black !important;
+  background-color: #91C2F2;
+  box-shadow: #AAA 0 0 2px;
+  -webkit-box-shadow: #AAA 0 0 2px;
+  -moz-box-shadow: #AAA 0 0 2px;
+}
+
+.Q_player
+{
+	margin-right: 10px;
+}
+
+.Streams_participant_tool
+{
+	overflow: hidden;
+	padding-bottom: 10px;
+}

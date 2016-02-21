@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS `{$prefix}publisher` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
+  `organization_domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `organization_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `terms` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`publisherId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `{$prefix}user`
+  DROP `organization_domain`,
+  DROP `organization_title`,
+  CHANGE  `terms`  `friend_count` INT( 10 ) UNSIGNED NULL DEFAULT  '0';

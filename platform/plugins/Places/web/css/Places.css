@@ -1,0 +1,60 @@
+.Places_location_set { padding-top: 20px; width: 100%; cursor: pointer; }
+
+.Places_location_map { height: 200px; }
+
+.Places_location_obtained .Places_location_whileObtaining,
+.Places_location_obtaining .Places_location_whileObtained,
+.Places_location_checking .Places_location_whileObtaining,
+.Places_location_checking .Places_location_whileObtained {
+	display: none;
+}
+
+.Places_location_map_container {
+	margin: 10px 0 10px 0;
+	border-radius: 30px;
+	box-shadow: #777 2px 2px 10px;
+}
+
+@keyframes Places_obtaining {
+	from { opacity: 0.75; }
+	to { opacity: 0.25; }
+}
+@-webkit-keyframes Places_obtaining {
+	from { opacity: 0.75; }
+	to { opacity: 0.25; }
+}
+
+.Places_obtaining {
+	opacity: 0.5;
+	animation: Places_obtaining 1s ease-in-out infinite alternate;
+	-webkit-animation: Places_obtaining 1s ease-in-out infinite alternate;
+	position: relative;
+	cursor: wait;
+}
+
+.Places_obtaining:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(57, 74, 213, 0.2);
+	-moz-transition: background .3s linear;
+	-webkit-transition: background .3s linear;
+	-o-transition: background .3s linear;
+	transition: background .3s linear;
+}
+
+.Places_location_update { text-align: center; }
+
+.Q_notMobile .Places_globe_tool { width: 50%; height: 0; padding-bottom: 50%; float: left; }
+.Q_mobile .Places_globe_tool { width: 100%; height: 0; padding-bottom: 100%; }
+.Places_globe_tool canvas { cursor: pointer; }
+
+.Places_countries_tool .Places_countries_select { font-size: 24px; border: 1px solid #555; line-height: 24px; vertical-align: middle; width: 100%; text-overflow: ellipsis; }
+.Places_countries_flag { width: 25px; height: 25px; vertical-align: middle; }
+.Places_countries_flags .Places_countries_flag { position: absolute; top: 50%; margin-top: -12px; margin-left: 5px; }
+.Places_countries_flags .Places_countries_select { text-indent: 24px; }
+.Places_globe_shadow { pointer-events: none; }

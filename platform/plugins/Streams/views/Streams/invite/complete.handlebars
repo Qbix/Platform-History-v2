@@ -1,0 +1,37 @@
+<div id="Streams_complete_overlay" class="Users_login_dialog">
+	<div class="title_slot">
+		<h2 class="Users_dialog_title Q_dialog_title">{{title}}</h2>
+	</div>
+	<div class="dialog_slot Q_dialog_content Q_big_prompt">
+		<form method="post" action="{{action}}" data-form-type="complete">
+			<div class="Streams_login_appear"></div>
+			<table>
+				{{#user}}
+					<tr class="Streams_complete_user">
+						<td><img src="{{icon}}/50.png" title="{{displayName}} icon"></td>
+						<td><div>{{displayName}}</div><div>{{text}}</div></td>
+					</tr>
+				{{/user}}
+					<tr class="Streams_complete_stream">
+						<td><img src="{{stream.fields.icon}}/50.png" title="{{stream.fields.title}}"></td>
+						<td><div>{{stream.fields.title}}</div></td>
+					</tr>
+				{{^displayName}}
+					<tr class="Users_register_form">
+						<td class="Streams_login_picture"><img src="{{icon}}/50.png"></td>
+						<td class="Streams_login_username_block">
+							<label for="Streams_login_username">Let friends recognize you:</label>
+							<br>
+							<input id="Streams_login_username" name="fullName" type="text" class="text" />
+						</td>
+					</tr>
+				{{/displayName}}
+			</table>
+			<input type="hidden" name="token" value="{{token}}"/>
+			<input type="hidden" name="Q.method" value="get"/>
+			<div class="Streams_login_get_started">
+				<button type="submit" class="Q_button Q_main_button Streams_login_start">{{button}}</button>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+.Q_panel_tool { text-align: left; }
+.Q_panel_tool_header { padding: 2px 0 2px 0; font-weight: bold; height: 20px; font-size: 14px; background-color: #EEE; }
+.Q_panel_tool_header button:active { background-color: #CCC; }
+.Q_panel_tool_title { padding: 2px 0 0 5px; }
+.Q_collapsed .Q_panel_tool_title { cursor: pointer; }
+.Q_panel_tool_header .Q_panel_tool_buttons { float: right; }
+.Q_panel_tool_form { display: none; clear: both; padding: 5px; border: solid 1px #EEE; }
+.Q_panel_tool_static { display: block; clear: both; padding: 5px; border: solid 1px #EEE; }
+.Q_panel_tool .Q_editing .Q_panel_tool_static { display: none; }
+.Q_panel_tool .Q_editing .Q_panel_tool_form { display: block; }
+.Q_panel_tool .Q_collapsed .Q_panel_tool_form { display: none; }
+.Q_panel_tool .Q_collapsed .Q_panel_tool_static { display: none; }
+.Q_panel_tool .Q_collapsed .Q_panel_tool_form { display: none; }
+.Q_panel_tool .Q_collapsed .Q_panel_tool_static { display: none; }
+.Q_panel_tool .Q_panel_tool_save { display: none; }
+.Q_panel_tool .Q_panel_tool_cancel { display: none; }
+.Q_panel_tool .Q_editing .Q_panel_tool_cancel { display: inline; }
+.Q_panel_tool .Q_modified .Q_panel_tool_save { display: inline; }
+.Q_panel_tool .Q_notice .Q_panel_tool_header { background: #CAA; }
+.Q_panel_tool .Q_modified .Q_panel_tool_header { background: #f2e097; }
+.Q_panel_tool .Q_editing .Q_panel_tool_edit { display: none; }

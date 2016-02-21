@@ -1,0 +1,10 @@
+{
+  "undef": true,
+  "unused": true,
+  "maxerr": 5000,
+  "browser": true,
+  "devel": true,
+  "jquery": true,
+  "node": true,
+  "predef": ["Q"]
+}

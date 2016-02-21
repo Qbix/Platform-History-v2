@@ -1,0 +1,123 @@
+{
+	"Q": {
+		"defaultTimezone": "America/New_York",
+		"handlersBeforeEvent": {
+			"Q/responseExtras": ["Q/before/Q/responseExtras"],
+			"Q/tool/render": ["Q/before/Q/tool/render"],
+			"Q/view": ["Q/before/Q/view"],
+			"Q/autoload": ["Q/before/Q/autoload"]
+		},
+		"handlersAfterEvent": {
+			"Q/tool/render": ["Q/after/Q/tool/render"]
+		},
+		"routes": {
+			"": {"module": "Q", "action": "welcome"}
+		},
+		"exception": {
+			"showTrace": false,
+			"showFileAndLine": false,
+			"nodeLogName": null,
+			"colors": {
+				"message": ["red"],
+				"fileAndLine": ["black", "light_gray"],
+				"trace": []
+			}
+		},
+		"web": {
+			"ignoreUserAbort": true,
+			"queryField": "_"
+		},
+		"response": {
+			"isBuffered": true
+		},
+		"node" : {
+			"host": "localhost",
+			"port": "10500"
+		},
+		"nodeInternal": {
+			"host": "127.0.0.1",
+			"port": "10501"
+		},
+		"internal": {
+			"umask": "0000",
+			"phpTimeout": 30,
+			"secret": null,
+			"sharding": {
+				"config": "Db/config/shards.json",
+				"upcoming": "Db/config/upcoming.json",
+				"logs": "files/Db/logs",
+				"iterations": 2
+			},
+			"configServer": {
+				"url": null,
+				"internal": false,
+				"interval": 60
+			}
+		},
+		"external": {
+			"secret": null
+		},
+		"configFiles": ["Q/config/bootstrap.json"],
+		"install": {
+			"timeLimit": 600
+		},
+		"session": {
+			"appendSuffix": false,
+			"custom": true,
+			"db": null,
+			"durations": {
+				"session": 86400,
+				"mobile": 0,
+				"tablet": 0,
+				"day": 86400,
+				"month": 2678400, 
+				"year": 31536000,
+				"decade": 315360000
+			},
+			"gc": false
+		},
+		"javascript": {
+			"responseExtras": {
+				"plugins/Q/js/jquery-1.11.1.min.js": true,
+				"plugins/Q/js/jquery.tools.min.js": true,
+				"plugins/Q/js/handlebars-v1.3.0.min.js": true,
+				"plugins/Q/js/Q.js": true
+			}
+		},
+		"stylesheets": {
+			"responseExtras": {
+				"plugins/Q/css/Q.css": true
+			}
+		},
+		"environments": {
+			"*": {
+				"filters": {
+					"css": {
+						"handler": "Q/filters/cssminifier"
+					},
+					"js": {
+						"handler": "Q/filters/googleClosureCompiler",
+						"params": {"compilation_level": "SIMPLE_OPTIMIZATIONS"}
+					}
+				}
+			}
+		},
+		"images": {
+			"maxWidth": 5000,
+			"maxHeight": 5000,
+			"pixabay": null
+		},
+		"uploads": {
+			"limits": {
+				"time": 18000,
+				"width": 5000,
+				"height": 5000
+			}
+		}
+	},
+	"Db": {
+		"sql": {
+			"querySeparator": "\n-------- NEXT QUERY STARTS HERE --------\n"
+		}
+	}
+}

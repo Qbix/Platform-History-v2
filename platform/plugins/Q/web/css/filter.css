@@ -1,0 +1,50 @@
+.Q_filter_results {
+	display: none;
+	position: relative;
+	padding: 5px;
+	border: solid 1px #ccc;
+	background: white;
+	color: black;
+	font-weight: normal;
+	font-style: normal;
+	cursor: pointer;
+}
+
+.Q_filter_notFullscreen .Q_filter_results {
+	max-height: 100px;
+	overflow: auto;
+	position: absolute;
+}
+
+.Q_filter_tool input.Q_filter_input {
+	padding-right: 10% !important;
+	cursor: default;
+}
+
+.Q_filter_begun .Q_filter_input {
+	background-image: url(../img/clear.png) !important;
+	background-repeat: no-repeat !important;
+	background-position: 99% center !important;
+}
+
+.Q_filter_fullscreen.Q_filter_begun {
+	position: relative;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.Q_filter_fullscreen.Q_filter_begun .Q_placeholders_container {
+	width: 100% !important;
+}
+
+.Q_filter_fullscreen.Q_filter_begun .Q_filter_input {
+	width: 100% !important;
+	max-width: 100% !important;
+	margin: 0 !important;
+}
+
+.Q_filter_fullscreen.Q_filter_begun .Q_placeholder {
+	width: 100% !important;
+	margin: 0 !important;
+}

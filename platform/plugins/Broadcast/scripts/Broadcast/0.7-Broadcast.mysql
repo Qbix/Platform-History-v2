@@ -1,0 +1,14 @@
+ALTER TABLE `{$prefix}agreement` CHANGE `userId` `userId` VARCHAR( 31 ) NOT NULL COMMENT 'The user who has agreed to syndicate the message',
+CHANGE `publisherId` `publisherId` VARCHAR( 31 ) NOT NULL COMMENT 'The publisher of the stream being syndicated';
+
+ALTER TABLE  `{$prefix}syndicated` CHANGE  `userId`  `userId` VARCHAR( 31 ) NOT NULL COMMENT  'id of the user who has syndicated the message',
+CHANGE  `publisherId`  `publisherId` VARCHAR( 31 ) NOT NULL COMMENT  'publisher of the stream';
+
+DROP TABLE IF EXISTS `{$prefix}user`;
+CREATE TABLE IF NOT EXISTS `{$prefix}user` (
+  `userId` varchar(31) NOT NULL,
+  `organization_domain` varchar(255) NOT NULL,
+  `organization_title` varchar(255) NOT NULL,
+  `terms` tinyint(3) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`userId`)
+) ENGINE=InnoDB;

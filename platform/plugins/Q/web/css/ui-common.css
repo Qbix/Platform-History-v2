@@ -1,0 +1,330 @@
+html {
+  font: 12px Helvetica;
+  line-height: 16px;
+}
+.Q_only_phone,
+.Q_only_phone_inline,
+.Q_only_tablet {
+  display: none;
+}
+#Q_dashboard_slot {
+  background: #f00;
+  position: absolute;
+  bottom: 0;
+  height: 49px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+}
+#Q_dashboard_slot .Q_dashboard_items {
+  display: inline-block;
+  vertical-align: bottom;
+}
+#Q_dashboard_slot .Q_dashboard_item {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 50px;
+  height: 49px;
+}
+#Q_dashboard_slot .Q_dashboard_item:nth-child(1) {
+  background: #c00;
+}
+#Q_dashboard_slot .Q_dashboard_item:nth-child(2) {
+  background: #a00;
+}
+#Q_dashboard_slot .Q_dashboard_item:nth-child(3) {
+  background: #b00;
+}
+#Q_dashboard_slot .Q_dashboard_item:active {
+  background: #f99;
+}
+#Q_dashboard_slot .Q_dashboard_item .Q_title {
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  height: 14px;
+  margin: 31px 4px 0;
+}
+#Q_status_slot {
+  background: #008000;
+  vertical-align: bottom;
+  display: inline-block;
+  height: 49px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 0 8px;
+}
+#Q_status_slot .Q_userpic {
+  display: block;
+  float: left;
+  width: 35px;
+  height: 35px;
+  background: #ff0;
+  margin: 7px 0 0 0;
+}
+#Q_status_slot .Q_firstName,
+#Q_status_slot .Q_lastName {
+  padding-left: 41px;
+}
+#Q_status_slot .Q_firstName {
+  margin-top: 10.5px;
+}
+#Q_main_area {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 49px;
+  background: #eee;
+}
+#Q_listing_slot {
+  background: #0cf;
+}
+#Q_listing_content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 45px;
+  bottom: 1px;
+}
+#Q_player_slot {
+  background: #0ff;
+}
+.Q_controls {
+  height: 44px;
+  border-bottom: 1px solid #fff;
+  padding: 0 0 0 8px;
+}
+.Q_controls button {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 4px 10px;
+  height: 14px;
+  margin-top: 11px;
+}
+.Q_expand_collapse {
+  display: none;
+}
+#Q_upsteam_content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 45px;
+  display: none;
+}
+#Q_player_content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 45px;
+  bottom: 1px;
+}
+#Q_chat_content {
+  border-left: 1px solid #000;
+  position: absolute;
+  top: 45px;
+  bottom: 1px;
+  display: none;
+}
+#Q_chat_messages {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 41px;
+}
+#Q_chat_publisher {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  border-top: 1px solid #000;
+}
+#Q_chat_publisher input {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  font-size: 14px;
+}
+.Q_chat_visible #Q_player_content {
+  left: 0;
+  right: 151px;
+}
+.Q_chat_visible #Q_chat_content {
+  display: block;
+  width: 150px;
+  right: 0;
+}
+.Q_upstream_visible #Q_player_slot .Q_controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: none;
+  border-top: 1px solid #fff;
+}
+.Q_upstream_visible #Q_player_and_chat_content {
+  display: none;
+}
+.Q_upstream_visible #Q_upsteam_content {
+  display: block;
+}
+@media only screen and (min-width: 481px) {
+  #Q_listing_slot {
+    left: 10px;
+    width: 310px;
+  }
+  #Q_player_slot {
+    left: 330px;
+    right: 10px;
+  }
+  #Q_listing_slot,
+  #Q_player_slot {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-background-clip: padding-box;
+  }
+}
+@media only screen and (orientation: portrait) and (min-width: 481px) {
+  #Q_listing_slot {
+    left: 10px;
+    right: 40px;
+    width: auto;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-background-clip: padding-box;
+  }
+  #Q_player_slot {
+    left: auto;
+    width: 30px;
+    right: 0;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-background-clip: padding-box;
+  }
+  .Q_listing_collapsed #Q_listing_slot {
+    left: 0;
+    width: 30px;
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    border-top-left-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    -webkit-background-clip: padding-box;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-background-clip: padding-box;
+  }
+  .Q_listing_collapsed #Q_player_slot {
+    width: inherit;
+    margin-left: 0;
+    left: 40px;
+    right: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-background-clip: padding-box;
+  }
+}
+@media only screen and (min-width: 481px) {
+  .Q_expand_collapse {
+    cursor: pointer;
+    width: 30px;
+    background: #800000;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+  }
+  .Q_expand_collapse:hover {
+    background: #f00;
+  }
+  #Q_listing_slot .Q_expand_collapse {
+    right: 0;
+  }
+  #Q_player_slot .Q_expand_collapse {
+    left: 0;
+  }
+}
+@media only screen and (orientation: portrait) and (min-width: 481px) {
+  #Q_listing_slot .Q_expand_collapse {
+    display: none;
+  }
+  #Q_listing_slot #Q_expanded_listing {
+    display: block;
+  }
+  #Q_player_slot .Q_expand_collapse {
+    display: block;
+  }
+  #Q_player_slot #Q_expanded_player {
+    display: none;
+  }
+  .Q_listing_collapsed #Q_listing_slot .Q_expand_collapse {
+    display: block;
+  }
+  .Q_listing_collapsed #Q_listing_slot #Q_expanded_listing {
+    display: none;
+  }
+  .Q_listing_collapsed #Q_player_slot .Q_expand_collapse {
+    display: none;
+  }
+  .Q_listing_collapsed #Q_player_slot #Q_expanded_player {
+    display: block;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .Q_only_phone {
+    display: block;
+  }
+  .Q_only_phone_inline {
+    display: inline;
+  }
+  #Q_listing_slot,
+  #Q_player_slot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  #Q_listing_slot {
+    display: block;
+  }
+  #Q_player_slot {
+    display: none;
+  }
+  .Q_listing_collapsed #Q_listing_slot {
+    display: none;
+  }
+  .Q_listing_collapsed #Q_player_slot {
+    display: block;
+  }
+}
+.Q_row {
+  font-size: 20px;
+  padding: 0 0 0 12px;
+  height: 43px;
+  line-height: 43px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+.Q_row:active {
+  background: #f99;
+}

@@ -1,0 +1,303 @@
+# Dump of table {$prefix}access
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}access`;
+
+CREATE TABLE `{$prefix}access` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id of user who owns the stream',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'local to Q server of publisherId',
+  `ofUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user whose subscription access being recorded',
+  `ofContactLabel` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'to grant access to all contacts under a certain label, set byUserId = 0',
+  `grantedByUserId` varchar(31) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'id of the user who granted the access. This is publisherId unless user has adminLevel >= invite',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of publisherId',
+  `readLevel` int(11) NOT NULL DEFAULT '0' COMMENT '<0=ignored, 0=''none'', 10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
+  `writeLevel` int(11) NOT NULL DEFAULT '0' COMMENT '<0=ignored, 0=''none'', 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close',
+  `adminLevel` int(11) NOT NULL DEFAULT '0' COMMENT '<0=ignored, 0=''none'', 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
+  PRIMARY KEY (`publisherId`,`streamName`(20),`ofUserId`,`ofContactLabel`(20)),
+  KEY `subscriber` (`ofUserId`),
+  KEY `contacts` (`ofContactLabel`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
+
+# Dump of table {$prefix}avatar
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}avatar`;
+
+CREATE TABLE `{$prefix}avatar` (
+  `toUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the user the avatar is being displayed to',
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the user whose avatar is being displayed',
+  `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'the time this record was last updated',
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'just a cache of the username',
+  `firstName` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'if not empty, the user can see this first name',
+  `lastName` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'if not empty, the user can see this last name',
+  `icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the icon to display',
+PRIMARY KEY (`toUserId`,`publisherId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
+
+# Dump of table {$prefix}invite
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}invite`;
+
+CREATE TABLE `{$prefix}invite` (
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
+  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id of user who is being invited to the stream',
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id of user who owns the stream',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'local to Q server of publisherId',
+  `invitingUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id of the user who invited the person to the stream. This is publisherId unless user has adminLevel >= invite',
+  `displayName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'display name, computed at invite time',
+  `appUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the application url where user is invited.',
+  `readLevel` int(11) DEFAULT NULL COMMENT '0=none, 10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
+  `writeLevel` int(11) DEFAULT NULL COMMENT '0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
+  `adminLevel` int(11) DEFAULT NULL COMMENT '0=none, 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
+  `state` enum('pending','accepted','declined','forwarded','expired','claimed') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `expireTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`token`),
+  KEY `user` (`userId`,`token`),
+  KEY `stream` (`publisherId`,`streamName`(20),`userId`),
+  KEY `inviting` (`invitingUserId`,`publisherId`,`streamName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores invites to the stream on user id server';
+
+# Dump of table {$prefix}invited
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}invited`;
+
+CREATE TABLE `{$prefix}invited` (
+  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id of user who is being invited to the stream',
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
+  `state` enum('pending','accepted','declined','forwarded','expired','claimed') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `expireTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`userId`,`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores tokens where user is invited on user id server';
+
+# Dump of table {$prefix}message
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}message`;
+
+CREATE TABLE `{$prefix}message` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream to place the message on',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream to place the message on',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `sentTime` timestamp NULL DEFAULT NULL COMMENT 'time on Q server of byUserId',
+  `byUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of the user sending message.',
+  `byClientId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of the Streams client sending message.',
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the type of the message, such as text or video',
+  `content` varchar(1023) COLLATE utf8_unicode_ci NOT NULL COMMENT 'short human-readable content, like twitter and its 140 characters',
+  `instructions` varchar(4092) COLLATE utf8_unicode_ci NOT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding',
+  `weight` decimal(10,4) NOT NULL DEFAULT '1.0000' COMMENT 'this may depend on the reputation of user_by relative to the stream',
+  `ordinal` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Count messages posted to the stream',
+  PRIMARY KEY (`publisherId`,`streamName`,`ordinal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
+
+# Dump of table {$prefix}notification
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}notification`;
+
+CREATE TABLE `{$prefix}notification` (
+  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the user to notify',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream causing the notification',
+  `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'the type of message',
+  `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
+  `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
+  `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
+  PRIMARY KEY (`userId`,`insertedTime`),
+  KEY `viewedTime` (`viewedTime`),
+  KEY `stream` (`publisherId`,`streamName`),
+  KEY `recipient` (`userId`),
+  KEY `count` (`publisherId`,`streamName`,`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on userId''s Q server';
+
+# Dump of table {$prefix}participant
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}participant`;
+
+CREATE TABLE `{$prefix}participant` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'The id of the user publishing the stream',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'The name of the stream where people can chat about this message',
+  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'The id of the user participating in the stream',
+  `streamType` varchar(63) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL DEFAULT NULL,
+  `state` enum('invited','participating','left') COLLATE utf8_unicode_ci NOT NULL COMMENT 'the state of the participant in the stream',
+  `subscribed` enum('yes','no') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'no' COMMENT 'whether the participant is currently subscribed',
+  `posted` enum('yes','no') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'no' COMMENT 'whether the participant has posted a message to this stream',
+  `reason` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'about the participant and why they are in the stream',
+  `enthusiasm` decimal(10,4) NOT NULL DEFAULT '0.0000' COMMENT 'how open they are to meeting someone',
+  `reputation` int(11) NOT NULL DEFAULT '0' COMMENT 'participant''s reputation in the stream, usually used for topics',
+  PRIMARY KEY (`publisherId`,`streamName`,`userId`),
+  KEY `subscribed` (`publisherId`,`streamName`,`subscribed`),
+  KEY `posted` (`publisherId`,`streamName`,`posted`),
+  KEY `inserted` (`publisherId`,`streamName`,`insertedTime`),
+  KEY `updated` (`publisherId`,`streamName`,`updatedTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
+
+# Dump of table {$prefix}participating
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}participating`;
+
+CREATE TABLE `{$prefix}participating` (
+  `userId` varchar(31) NOT NULL,
+  `publisherId` varchar(31) NOT NULL,
+  `streamName` varchar(255) NOT NULL,
+  `state` enum('invited','participating','left') NOT NULL,
+  `fresh` int(10) unsigned NOT NULL DEFAULT '0',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`userId`,`publisherId`,`streamName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='stored primarily on the participating user''s Q server';
+
+# Dump of table {$prefix}related_from
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}related_from`;
+
+CREATE TABLE `{$prefix}related_from` (
+  `fromPublisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'publisherId of member',
+  `fromStreamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'name of member',
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
+  `toPublisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'publisherId of category',
+  `toStreamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'name of category',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`fromPublisherId`,`fromStreamName`,`type`,`toPublisherId`,`toStreamName`),
+  KEY `sorting` (`fromPublisherId`,`fromStreamName`,`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table is owned by publisher of the member stream';
+
+# Dump of table {$prefix}related_to
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}related_to`;
+
+CREATE TABLE `{$prefix}related_to` (
+  `toPublisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'publisherId of category',
+  `toStreamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'name of category',
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
+  `fromPublisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'publisherId of member',
+  `fromStreamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'name of member',
+  `weight` decimal(10,4) NOT NULL DEFAULT '1.0000' COMMENT 'used for sorting',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`toPublisherId`,`toStreamName`,`type`,`fromPublisherId`,`fromStreamName`),
+  KEY `sorting` (`toPublisherId`,`toStreamName`,`type`,`weight`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table is owned by publisher of the aggregator stream';
+
+# Dump of table {$prefix}request
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}request`;
+
+CREATE TABLE `{$prefix}request` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user who owns the stream',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'local to Q server of publisherId',
+  `byUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user who is requesting access to the stream',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `readLevel` int(11) NOT NULL COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
+  `writeLevel` int(11) NOT NULL COMMENT '0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
+  `adminLevel` int(11) NOT NULL DEFAULT '0' COMMENT '10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
+  PRIMARY KEY (`publisherId`,`streamName`,`byUserId`),
+  KEY `subscriber` (`byUserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
+
+# Dump of table {$prefix}rule
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}rule`;
+
+CREATE TABLE `{$prefix}rule` (
+  `ofUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ordinal` int(11) NOT NULL,
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `readyTime` timestamp NULL DEFAULT NULL COMMENT 'time from which user is ready to receive notifications again',
+  `filter` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '{"types": [ array of message types ], "labels": [ ]}',
+  `deliver` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '{"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}',
+  `relevance` decimal(10,4) NOT NULL COMMENT 'used to prioritize messages for display and processing',
+  PRIMARY KEY (`ofUserId`,`publisherId`,`streamName`,`ordinal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='rules applied on the user''s side for notifications coming in';
+
+# Dump of table {$prefix}sent
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}sent`;
+
+CREATE TABLE `{$prefix}sent` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream to place the message on',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream to place the message on',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `sentTime` timestamp NULL DEFAULT NULL COMMENT 'time on Q server of byUserId',
+  `byUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'id of the user sending the message.',
+  `comment` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'short human-readable content, like twitter and its 140 characters',
+  `instructions` varchar(4092) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding',
+  `chatPublisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'If not 0, id of user that publishes the chat stream',
+  `chatStreamName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'The name of the stream where people can chat about this message',
+  KEY `stream` (`publisherId`,`streamName`),
+  KEY `author` (`byUserId`),
+  KEY `insertedTime` (`insertedTime`),
+  KEY `sentTime` (`sentTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on byUserId''s Q server';
+
+# Dump of table {$prefix}stream
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}stream`;
+
+CREATE TABLE `{$prefix}stream` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream',
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the name of the stream',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'the time that this stream row has last changed for whatever reason',
+  `type` varchar(63) COLLATE utf8_unicode_ci NOT NULL COMMENT 'mimetypes plus more types of the form a/b and a/b/c . Can also be "group" or "chat"',
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'human-readable title of the stream',
+  `icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default' COMMENT 'relative path to stream''s icon folder, containing 48.png, 32.png and 16.png',
+  `content` varchar(1023) COLLATE utf8_unicode_ci NOT NULL COMMENT 'This content can be indexable',
+  `attributes` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'attributes are stored as JSON',
+  `readLevel` int(11) NOT NULL DEFAULT '40' COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
+  `writeLevel` int(11) NOT NULL DEFAULT '10' COMMENT '0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close',
+  `adminLevel` int(11) NOT NULL DEFAULT '20' COMMENT '10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
+  `inheritAccess` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'JSON array of [[publisherId, streamName],...] to inherit access from',
+  `messageCount` int(11) NOT NULL DEFAULT '0',
+  `participantCount` int(11) NOT NULL DEFAULT '0',
+  `closedTime` TIMESTAMP NULL DEFAULT NULL COMMENT 'this records the time, if any, that the stream was last closed for updates',
+  PRIMARY KEY (`publisherId`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
+
+# Dump of table {$prefix}subscription
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}subscription`;
+
+CREATE TABLE `{$prefix}subscription` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user who owns the stream',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user who would be publishing the stream',
+  `ofUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'local to Q server of publisherId',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
+  `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of publisherId',
+  `untilTime` timestamp NULL DEFAULT NULL COMMENT 'this is the time after which subscription won''t match',
+  `filter` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `duration` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`),
+  KEY `SUBSCRIBER` (`ofUserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='{"type": [ array of message types ], "notifications": 5}';
+
+# Dump of table {$prefix}total
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{$prefix}total`;
+
+CREATE TABLE `{$prefix}total` (
+  `publisherId` varchar(31) NOT NULL,
+  `streamName` varchar(255) NOT NULL,
+  `messageType` varchar(255) NOT NULL,
+  `messageCount` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`publisherId`,`streamName`,`messageType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Used to count the number of messages of a certain type';

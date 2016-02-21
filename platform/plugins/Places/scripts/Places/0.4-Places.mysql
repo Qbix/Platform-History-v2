@@ -1,0 +1,13 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+CREATE TABLE IF NOT EXISTS `{$prefix}autocomplete` (
+  `query` varchar(255) NOT NULL,
+  `types` varchar(255) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `miles` double NOT NULL,
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL DEFAULT NULL,
+  `results` text NOT NULL,
+  PRIMARY KEY (`query`,`types`,`latitude`,`longitude`,`miles`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

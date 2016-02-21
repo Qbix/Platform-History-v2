@@ -1,0 +1,676 @@
+.Streams_viewer_tool.text_pic { height: 100px; }
+
+.Streams_tools_throbber {
+	text-align: center;
+}
+
+.Streams_comments_tool {
+	width: 400px;
+	font: 11px Tahoma;
+	color: black;
+}
+
+.Streams_comments_tool_content {
+	display: none;
+}
+
+.Streams_comments_tool_loading {
+	text-align: center;
+}
+
+.Streams_comments_tool_user_picture {
+	float: left;
+}
+
+.Streams_comments_tool_form {
+	width: 333px;
+	float: right;
+	background-color: #F2F2F2;
+	border: solid 1px #CCC;
+	padding: 5px;
+}
+
+.Streams_comments_tool_logged_as {
+	margin-bottom: 5px;
+}
+
+.Streams_comments_tool_logged_as span {
+	font: 11px Tahoma;
+}
+
+.Streams_comments_tool_form textarea {
+	width: 325px;
+	height: 50px;
+	border: solid 1px #BDC7D8;
+	font: 11px Tahoma;
+	padding: 3px;
+}
+
+.Streams_comments_tool_form button {
+	margin-left: 7px;
+	padding: 3px 5px;
+	background-color: #637BAD;
+	background-image: url("https://s-static.ak.facebook.com/rsrc.php/v1/yA/r/N8T_oGDfkMw.png");
+	background-position: 0 -98px;
+	background-repeat: no-repeat;
+	border: solid 1px #29447E;
+	color: white;
+	font: 11px Tahoma;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+.Streams_comments_tool_form button:active {
+	background-image: none;
+	background-color: #4F6AA3;
+}
+
+.Streams_comments_tool_form_controls {
+	margin-top: 7px;
+	text-align: right;
+}
+
+.Streams_comments_tool_form_controls label {
+	font: bold 11px Tahoma;
+	color: #666;
+}
+
+.Streams_comments_tool_form_controls input[type="checkbox"] {
+	border: solid 1px #8E8F8F;
+}
+
+.Streams_comments_tool_feed {
+	margin-top: 15px;
+}
+
+.Streams_comments_tool_feed_post {
+	padding: 8px 0;
+	border-bottom: solid 1px #D8DFEA;
+}
+
+.Streams_comments_tool_feed_post_comment {
+	width: 340px;
+	float: right;
+}
+
+.Streams_comments_tool_feed_post_comment .fb-name .fb_link {
+	font-weight: bold;
+}
+
+.Streams_comments_tool_clear {
+	clear: both;
+}
+
+.Streams_comments_tool_feed_post_comment_message {
+	margin: 6px 0;
+	font: 11px Tahoma;
+}
+
+.Streams_comments_tool_post_date {
+	margin-left: 5px;
+	font: 9px Tahoma;
+	color: #808080;
+}
+
+.Streams_comments_tool_feed_post_comment_delete .fb_link {
+	font-size: 9px;
+}
+
+.Streams_comments_tool_loading_small {
+	display: none;
+	width: 50px;
+	margin-top: 13px;
+	text-align: center;
+}
+
+.Streams_comments_tool_footer {
+	text-align: right;
+	padding: 5px 0;
+	font: 11px Tahoma;
+}
+
+.Streams_comments_tool_not_logged_in {
+	display: none;
+	margin-bottom: 8px;
+}
+
+.Streams_photoSelector_container.Streams_photoSelector_oneLine {
+	white-space: nowrap;
+}
+
+.Streams_photoSelector_container {
+	max-height: 100px;
+	overflow: auto;
+}
+
+.Streams_photoSelector_container img {
+	height: 80px;
+	cursor: pointer;
+	margin-right: 2px;
+}
+
+.Streams_photoSelector_container img:hover {
+	box-shadow: #222 0 0 2px;
+}
+
+.Streams_photoSelector_tool_title {
+	font-size: 20px;
+}
+
+.Streams_photoSelector_tool_title:before {
+	content: '2.';
+	color: #FFA800;
+	margin-right: 5px;
+	font-size: 1.5em;
+	font-weight: bold;
+	vertical-align: baseline;
+}
+
+.Streams_photoSelector_no_photos {
+	font-size: 28px;
+	text-align: center;
+}
+
+.Streams_participants_tool {
+	padding: 0 5px 0 5px;
+	overflow: hidden;
+	height: 54px;
+}
+
+.Streams_participants_tool .Users_avatar_tool,
+.Streams_participants_tool .Streams_participants_invite {
+	display: inline-block;
+	width: 44px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+}
+
+.Streams_participants_tool .Streams_participants_invite {
+	cursor: pointer;
+}
+
+.Streams_participants_tool .Users_avatar_name,
+.Streams_participants_tool .Streams_invite_label,
+.Streams_participants_tool .Streams_participants_expand_text {
+	display: block;
+	width: 100%;
+	font-size: 10px;
+	text-indent: 0;
+	text-align: center;
+	position: relative;
+}
+
+.Streams_participants_invite img {
+	width: 40px;
+	height: 40px;
+}
+
+.Streams_participants_tool .Streams_invite_label {
+	color: #228822;
+	font-weight: bold;
+}
+
+.Streams_participants_tool .Users_avatar_icon {
+	box-shadow: #222 0 0 1px;
+}
+
+.Streams_participants_tool .Users_avatar_icon_blank {
+	box-shadow: none;
+}
+
+.Streams_participants_tool .Streams_participants_summary {
+	color: white;
+	float: right;
+	text-shadow: rgba(0, 0, 0, 0.5) 0 0 5px;
+	width: 40px;
+	height: 25px;
+	line-height: 25px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	font-size: 14px;
+	background: rgba(50, 50, 50, 0.4);
+	color: white;
+	font-weight: 100;
+	margin-top: 10px;
+	text-align: center;
+	overflow: hidden;
+	margin-right: 2%;
+}
+
+.Streams_participants_tool .Streams_participants_controls {
+	float: right; width: 40px; display: none; visibility: hidden; pointer-events: none;
+}
+
+.Streams_participants_tool.Q_overflowed .Streams_participants_controls {
+	display: block; visibility: visible; pointer-events: auto;
+}
+
+.Streams_participants_tool .Streams_participants_expand img {
+	width: 40px; height: 40px;
+}
+
+.Streams_participants_tool .Streams_participants_container {
+	overflow: hidden;
+	margin-right: 10px;
+}
+
+.Streams_participant_tool {
+	padding-top: 10px;
+	font-size: 14px;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.Streams_participant_list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.Streams_participant_subscribed_icon {
+	display: inline-block;
+	width: 32px;
+	height: 40px;
+	background: url('../../Q/img/icons/basic32.png') 0 -999px no-repeat;
+}
+
+.Streams_participant_list {
+	height: 57px;
+}
+
+.Streams_participant_list > li {
+	float: left;
+	width: 80px;
+	margin-left: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.Streams_participant_list > li * {
+	pointer-events: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#Streams_login_username {
+	width: 100%;
+}
+
+#Streams_login_password {
+	width: 210px;
+}
+
+.Users_register_form td {
+	vertical-align: top;
+}
+
+.Streams_login_picture img {
+	width: 50px;
+	height: 50px;
+	margin-right: 7px;
+}
+
+.Streams_complete_user td:first-child {
+	width: 1%;
+}
+
+.Streams_complete_stream td:first-child {
+	width: 1%;
+}
+
+.Streams_login_get_started {
+	text-align: center;
+}
+
+.Streams_login_appear table {
+	width: 100%;
+}
+
+.Streams_login_username_block {
+	width: 100%;
+}
+
+.Streams_login_username_block label {
+	font-size: 17px;
+}
+
+.Streams_chat_no_messages {
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.Streams_login_appear {
+	padding: 5px;
+}
+
+.Streams_inplace_tool { display: inline-block; position: relative; }
+
+/* streams basic tool */
+
+.streams_basic_overlay { font-size: 14px; width: 500px; }
+.streams_basic_overlay td { vertical-align: middle; }
+.streams_basic_overlay .q_field_title { width: 150px; text-align: right; padding-right: 10px; }
+
+.Streams_preview { height: auto; }
+.Streams_preview_create { cursor: pointer; }
+.Streams_preview_add,
+.Streams_preview_icon,
+.Streams_preview_contents { display: inline-block; vertical-align: middle; max-width: 100%; }
+.Streams_preview_contents * { max-width: 100%; }
+.Streams_preview_contents .Q_inplace_tool_static,
+.Streams_preview_contents .Q_inplace_tool_static_container
+.Streams_preview_contents>.Streams_preview_title { 
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap; 
+}
+.Streams_preview h3 { margin: 0; padding: 0 0 0 10px; line-height: 50px; font-size: 30px; }
+
+.Streams_preview_icon,
+.Streams_preview_add { width: 50px; }
+.Q_inplace_tool_static_container { vertical-align: middle; }
+
+/* Streams access tool */
+.Streams_access_tool_dialog_container { width: 450px; }
+.Streams_access_tool_dialog_container .Streams_access_controls { padding: 10px; }
+.Streams_access_tool_dialog_container input { width: 97%; }
+.Streams_access_tool_dialog_container .Streams_access_user_array td select { float: right; }
+
+.Streams_access_label_array { font-size: 11px; }
+.Streams_access_label_array img { width: 30px; height: 30px; }
+
+/* phones */
+@media (min-width: 320px) and (max-width: 580px) {
+	.Streams_access_tool_dialog_container, .Streams_access_tool_dialog_container select { width: 100%; }
+	.Streams_access_tool_dialog_container input { width: 96%; }
+	.Streams_access_tool_dialog_container .Streams_access_user_array tr td:first-child { vertical-align: top !important; }
+	.Streams_access_tool_dialog_container .Streams_access_user_array tr td:first-child+td select { width: 98%; float: none; }
+}
+
+/* User Chooser tool  */
+.Streams_userChooser_results a { cursor: pointer; }
+
+/* Streams subcription tool */
+.streams_subscription_container { width: 347px; }
+.streams_subscription_container .remove { cursor: pointer; }
+.Q_overlay .streams_subscription_container { width: 96%; margin: 0 auto; padding: 5px; }
+.Streams_subscription_tool_dialog_container { width: 300px; }
+
+/* for all popups */
+.Streams_popup_content {
+	padding: 7px;
+	word-wrap:break-word;
+}
+
+/* Streams chat tool */
+.Streams_chat_tool {
+
+}
+.Streams_chat_tool h1 {
+	text-align: center;
+	width: 100%;
+}
+.Streams_chat_to_me .Users_avatar_tool {
+	float: left;
+	position: relative;
+}
+.Streams_chat_tool .Users_avatar_icon {
+	position: absolute;
+}
+.Streams_chat_tool .Users_avatar_name {
+	font-size: 10pt;
+	color: #222;
+	display: block;
+	margin-left: 55px;
+}
+.Streams_chat_message {
+	color: #222;
+	width: 96%;
+	max-height: 100px;
+	overflow: hidden;
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	cursor: default;
+}
+.Streams_chat_messages {
+	min-height: 70px;
+	overflow-x: hidden;
+}
+.Streams_chat_item {
+	font-size: 11pt;
+	margin: 10px 0;
+}
+.Streams_chat_noMessages {
+	color: gray;
+	font-size: 12pt;
+	text-align: center;
+	width: 100%;
+	display: block;
+	line-height: 50pt;
+}
+.Streams_chat_composer textarea {
+	font-size: 12pt;
+	margin: 0 auto;
+	display: block;
+	padding: 6px;
+	height: 30px;
+	color: black;
+}
+.Streams_chat_prevent {
+	text-align: center;
+	vertical-align: middle;
+	color: #555;
+	font-style: italic;
+}
+.Streams_chat_posting
+{
+	background: url('../../Q/img/throbbers/loading.gif') center no-repeat;
+}
+.Streams_chat_more {
+	cursor: pointer;
+	background: #eee;
+	color: #555;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 11pt;
+}
+.Streams_chat_more:hover {
+	color: #fff;
+	background: #ccc;
+}
+.Streams_chat_more:active {
+	color: #fff;
+	background: #bbb;
+}
+.Streams_chat_timestamp {
+	margin-right: 15px;
+	text-align: right;
+	float: right;
+	cursor: default;
+	font-size: 10pt;
+	color: gray;
+}
+.Streams_chat_bubble {
+	min-width: 30%;
+	margin-right: 10px;
+	padding: 10px;
+	border: 1px solid #D0D9E4;
+	clear: both;
+}
+.Streams_chat_tick {
+	background: url('../../Streams/img/chat/message-tick.png');
+	width: 9px;
+	height: 13px;
+}
+.Streams_chat_to_me .Streams_chat_tick {
+	float: left;
+	margin: 0 0 0 -19px
+}
+.Streams_chat_to_me .Streams_chat_bubble {
+	border-radius: 13px;
+	margin-left: 50px;
+	background: #DAE3ED;
+}
+.Streams_chat_from_me .Streams_chat_bubble {
+	border-radius: 13px;
+	margin-left: 50px;
+	background: #FFFFFF;
+}
+.Streams_chat_from_me .Streams_chat_tick {
+	float: right;
+	margin: 0 -19px 0 0;
+	background-position: 0 13px;
+}
+.Streams_chat_from_me .Users_avatar_tool {
+	display: none;
+	float: left;
+}
+.Streams_chat_notification {
+	text-align: center;
+	color: gray;
+	font-size: 12pt;
+	font-style: italic;
+}
+/* phones */
+@media (min-width: 320px) and (max-width: 580px) {
+	.Streams_chat_tool .Users_avatar_name {
+		position: absolute;
+		top: 0;
+	}
+	.Streams_chat_date {
+		width: 100%;
+		float: right;
+		margin-top: 15px;
+	}
+}
+
+
+
+
+
+.Q_expandable_count,
+.Q_expandable_tool .Q_selected,
+.Streams_interests_unlisted .Q_selected {
+	background: rgba(255, 180, 180, 0.9);
+    color: #220;
+	text-shadow: none;
+}
+
+.Streams_interest_title,
+.Streams_new_interest_title {
+	font-size: 17px;
+	white-space: nowrap;
+	padding: 0 3px 0 3px;
+	margin: 0 -2px 0 -2px;
+    font-weight: 300;
+}
+
+.Streams_interest_title {
+	cursor: pointer;
+	border: 1px dotted #ccc;
+}
+
+.Q_expanded .Streams_interest_title {
+	/* safari is slow at drawing rounded borders, so wait until animations are done */
+    border-radius: 5px;
+}
+
+.Q_notTouchscreen .Streams_interest_title:hover {
+	text-decoration: underline;
+}
+
+.Streams_interest_title.Q_selected {
+	padding: 0 3px 0 3px;
+	margin: 0 -2px 0 -2px;
+    border-radius: 5px;
+    font-weight: 300;
+}
+
+.Streams_interests_unlisted { font-size: 11px; padding: 5px; }
+
+.Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
+.Streams_image_preview_tool { text-align: center; display: inline-block; }
+.Streams_preview_tool .Streams_preview_icon,
+.Streams_preview_tool .Streams_preview_add { margin-right: 10px; }
+
+.Streams_related_tool .Q_tabs_overflow .Q_inplace_tool_editbuttons { display: none !important; list-style-type: none; padding: 0; }
+
+.Streams_interests_filter_input { width: 100%; box-sizing: border-box; }
+
+.Users_avatar_tool .Users_avatar_name>*{ position: relative; }
+
+.Streams_closed { opacity: 0.75; -webkit-transition: opacity 1s; transition: opacity 1s; }
+
+.Streams_task_progress { border: 1px solid #555; }
+.Streams_task_progress_bar { background: 1px solid #555; width: 0; height: 40px; }
+
+.Streams_invitation { font-size: 20px; text-align: center; padding: 50px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }
+.Streams_invitation ul,
+.Streams_invitation ol { text-align: left; }
+.Streams_invitation li { margin-bottom: 15px; }
+.Streams_callToAction { padding: 10px; border: 1px solid #aaa; text-align: center; }
+.Streams_callToAction h2 { font-size: 30px; }
+.Streams_explanation { text-align: left; }
+
+.Streams_stream_icon { float: left; width: 80px; }
+.Streams_stream_title { line-height: 80px; font-size: 40px;  }
+.Streams_stream_player { clear: both; }
+.Streams_stream_activity_pane { border-top: 1px solid #aaa; }
+
+.Streams_related_composer { display: inline-block; margin-right: 10px; }
+.Streams_file_preview_tool label { cursor: pointer; }
+.Streams_file_form,
+.Streams_file_form input { 
+	top: 0; left: 0; width: 100%; height: 100%;
+	position: absolute; opacity: 0;
+	cursor: pointer;
+}
+
+.Streams_preview_error {
+	opacity: 0.8;
+	font-size: 12px;
+	font-weight: bold;
+	background: red;
+	color: black;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -25%;
+	margin-top: -10px;
+	width: 50%;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer
+}
+
+.Streams_file_preview_tool.Streams_related_stream { position: relative; cursor: pointer; }
+.Q_touchscreen .Streams_preview_file_size { padding-left: 75px; }
+
+.Streams_interests_tool.Streams_interests_anotherUser .Streams_interest_title { display: none; }
+.Streams_interests_tool.Streams_interests_anotherUser .Streams_interest_title.Streams_interests_anotherUser { display: inline; }
+.Streams_interests_anotherUserNone { display: none; }
+
+.Streams_category_preview_tool,
+.Streams_category_preview_tool .Q_inplace_noEditOnClick,
+.Streams_category_preview_tool .Q_inplace_noEditOnClick .Q_inplace_tool_static { cursor: pointer; }
+
+.Q_notMobile .Q_overlay.Streams_completeInvited_dialog,
+.Q_notMobile .Q_overlay.Streams_access_tool_dialog,
+.Q_notMobile .Q_overlay.Streams_subscription_tool_dialog { width: 500px; }
+
+.Streams_inplace_tool.Q_editing { z-index: 99999; }

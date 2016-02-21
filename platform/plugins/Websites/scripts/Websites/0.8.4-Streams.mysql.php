@@ -1,0 +1,18 @@
+<?php
+
+function Websites_0_8_4_Streams_mysql()
+{
+	$app = Q_Config::expect('Q', 'app');
+	$communityId = Users::communityId();
+	
+	// allow inserting images in articles
+	$r = new Streams_RelatedTo();
+	$r->toPublisherId = $communityId;
+	$r->toStreamName = 'Websites/article/';
+	$r->type = 'images';
+	$r->fromPublisherId = $communityId;
+	$r->fromStreamName = 'Streams/image/';
+	$r->save();
+}
+
+Websites_0_8_4_Streams_mysql();

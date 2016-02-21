@@ -1,0 +1,3 @@
+ALTER TABLE {$prefix}identify
+ADD COLUMN insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER identifier,
+ADD COLUMN updatedTime timestamp NULL DEFAULT NULL AFTER insertedTime;

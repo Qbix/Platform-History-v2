@@ -1,0 +1,62 @@
+-- phpMyAdmin SQL Dump
+-- version 3.3.4
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 27, 2011 at 02:02 AM
+-- Server version: 5.1.48
+-- PHP Version: 5.3.3
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: ` Qbix -
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `{$prefix}agreement`
+--
+
+DROP TABLE IF EXISTS `{$prefix}agreement`;
+CREATE TABLE IF NOT EXISTS `{$prefix}agreement` (
+  `userId` bigint(20) unsigned NOT NULL COMMENT 'The user who has agreed to syndicate the message',
+  `publisherId` bigint(20) unsigned NOT NULL COMMENT 'The publisher of the stream being syndicated',
+  `streamName` varchar(255) NOT NULL COMMENT 'The name of the stream being syndicated',
+  `platform` enum('facebook','twitter') NOT NULL COMMENT 'The platform that the user is allowing to syndicate on',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatedTime` datetime NOT NULL,
+  `details_json` varchar(255) NOT NULL COMMENT 'Currently this is not used for anything',
+  KEY `userId` (`userId`,`publisherId`,`streamName`,`platform`),
+  KEY `publisherId` (`publisherId`,`streamName`,`userId`,`platform`)
+) ENGINE=InnoDB COMMENT='Represents an agreement to syndicate a stream''s content on y';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `{$prefix}syndicated`
+--
+
+DROP TABLE IF EXISTS `{$prefix}syndicated`;
+CREATE TABLE IF NOT EXISTS `{$prefix}syndicated` (
+  `userId` bigint(20) unsigned NOT NULL COMMENT 'id of the user who has syndicated the message',
+  `publisherId` bigint(20) unsigned NOT NULL COMMENT 'publisher of the stream',
+  `message_name` varchar(255) NOT NULL COMMENT 'name of the message that was syndicated',
+  `platform` enum('facebook','twitter') NOT NULL,
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `streamName` varchar(255) NOT NULL,
+  KEY `userId` (`userId`,`publisherId`,`message_name`,`platform`),
+  KEY `publisherId` (`publisherId`,`message_name`,`platform`,`userId`)
+) ENGINE=InnoDB COMMENT='Used to indicate that a stream message has already been synd';
+
+
+--
+-- Table structure for table `broadcast_message`
+--
+
+DROP TABLE IF EXISTS `{$prefix}message`;
+CREATE TABLE IF NOT EXISTS `{$prefix}message` (
+  `message_name` varchar(255) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `instructions` text character set utf8 collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`message_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

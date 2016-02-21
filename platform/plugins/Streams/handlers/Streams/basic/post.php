@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * Post one or more fields here to change the corresponding basic streams for the logged-in user. Fields can include:
+ * "firstName": specify the first name directly
+ * "lastName": specify the last name directly
+ * "fullName": the user's full name, which if provided will be split into first and last name and override them
+ * "gender": the user's gender
+ * "birthday_year": the year the user was born
+ * "birthday_month": the month the user was born
+ * "birthday_day": the day the user was born
+ */
+function Streams_basic_post()
+{
+	Q_Valid::nonce(true);
+	$user = Users::loggedInUser(true);
+	$request = $_REQUEST;
+	$fields = array();
+	if (!empty($request['birthday_year'])
+	&& !empty($request['birthday_month'])
+	&& !empty($request['birthday_day'])) {
+		$request['birthday'] = sprintf("%04d-%02d-%02d",
+			$_REQUEST['birthday_year'],
+			$_REQUEST['birthday_month'],
+			$_REQUEST['birthday_day']
+		);
+	}
+//	$request['icon'] = $user->icon;
+	if (isset($request['fullName'])) {
+		$name = Streams::splitFullName($request['fullName']);
+		$request['firstName'] = $name['first'];
+		$request['lastName'] = $name['last'];
+	}
+	foreach (array('firstName', 'lastName', 'birthday', 'gender') as $field) {
+		if (isset($request[$field])) {
+			$fields[] = $field;
+		}
+	}
+	$p = new Q_Tree();
+	$p->load(STREAMS_PLUGIN_CONFIG_DIR.DS.'streams.json');
+	$p->load(APP_CONFIG_DIR.DS.'streams.json');
+	$names = array();
+	foreach ($fields as $field) {
+		$names[] = "Streams/user/$field";
+	}
+	$streams = Streams::fetch($user, $user->id, $names);
+	foreach ($fields as $field) {
+		$name = "Streams/user/$field";
+		$type = $p->get($name, "type", null);
+		if (!$type) {
+			throw new Q_Exception("Missing $name type", $field);
+		}
+		$title = $p->get($name, "title", null);
+		if (!$title) {
+			throw new Q_Exception("Missing $name title", $field);
+		}
+		$stream = $streams[$name];
+		if (isset($stream) and $stream->content === (string)$request[$field]) {
+			continue;
+		}
+		if (!isset($stream)) {
+			$stream = new Streams_Stream();
+			$stream->publisherId = $user->id;
+			$stream->name = $name;
+		}
+		$messageType = $stream->wasRetrieved() ? 'Streams/changed' : 'Streams/created';
+		$stream->content = (string)$request[$field];
+		$stream->type = $type;
+		$stream->title = $title;
+		$stream->changed($user->id, $messageType);
+	}
+}

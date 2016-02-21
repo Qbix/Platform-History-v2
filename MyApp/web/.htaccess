@@ -1,0 +1,15 @@
+RewriteEngine on
+
+# uncomment the following line and modify it, if you're having problems:
+# You will need to do it on Windows:
+#RewriteBase /your_app_local_url/
+
+# we can check if the .html version is here (caching)
+#RewriteRule ^$ index.html [QSA]
+#RewriteRule ^([^.]+)$ $1.html [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# no, so we redirect to our front web controller
+RewriteRule ^(.*)$ index.php [QSA,L]

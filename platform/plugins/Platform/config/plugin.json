@@ -1,0 +1,20 @@
+{
+	"Q": {
+		"handlersBeforeEvent": {
+			"Users/computePassphraseHash": ["Platform/before/Users_computePassphraseHash"]
+		},
+		"routes": {
+			"plugins/Platform/:action": {"module": "Platform"},
+			"Platform/api": {"module": "Platform", "action": "api"},
+			"Platform/iframe": {"module": "Platform", "action": "iframe"}
+		},
+		"pluginInfo": {
+			"Platform": {
+				"version": "0.3",
+				"compatible": "0.3",
+				"requires": {"Q": "0.8", "Users": "0.8.2", "Streams": "0.8.2"},
+				"connections": ["Users", "Streams"]
+			}
+		}
+	}
+}

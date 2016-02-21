@@ -1,0 +1,1 @@
+exports.Q_DIR = '/projects/qbix/Q/platform';

@@ -1,0 +1,3 @@
+ALTER TABLE {$prefix}user
+ADD COLUMN sessionCount INTEGER NOT NULL DEFAULT 0 AFTER sessionId,
+DROP COLUMN mobileToken;

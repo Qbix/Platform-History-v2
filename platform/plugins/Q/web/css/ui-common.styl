@@ -1,0 +1,286 @@
+@import ui-globals
+@import ui-helpers
+
+///////////////////////////////////////////////////////////////////////////////
+// globals
+
+html
+  font             Q_base_font_size Helvetica
+  line-height      Q_base_line_height
+
+
+///////////////////////////////////////////////////////////////////////////////
+// HTML conditionals
+
+.Q_only_phone
+.Q_only_phone_inline
+.Q_only_tablet
+  display          none
+
+
+///////////////////////////////////////////////////////////////////////////////
+// dashboard
+
+#Q_dashboard_slot
+  background       red
+  position         absolute
+  bottom           0px
+  height           Q_dashboard_height
+  left             0px
+  right            0px
+  text-align       center
+  color            white
+
+  .Q_dashboard_items
+    display        inline-block
+    vertical-align bottom
+  .Q_dashboard_item
+    display        inline-block
+    vertical-align bottom
+    width          50px
+    height         Q_dashboard_height
+
+    &:nth-child(1)
+      background   #CC0000
+    &:nth-child(2)
+      background   #AA0000
+    &:nth-child(3)
+      background   #BB0000
+    
+    &:active
+      background   #FF9999
+
+    .Q_title
+      display      block
+      font-size    12px
+      line-height  Q_dashboard_item_title_height
+      height       Q_dashboard_item_title_height
+      margin       (Q_dashboard_height - Q_dashboard_item_title_height - Q_dashboard_item_bottom_margin) Q_dashboard_item_side_margin 0
+
+#Q_status_slot
+  background       green // #FF7777
+  vertical-align   bottom
+  display          inline-block
+  height           Q_dashboard_height
+  text-align       left
+  font-size        Q_status_font_size
+  line-height      Q_status_line_height
+  padding          0 Q_status_padding_horizontal
+
+  .Q_userpic
+    display        block
+    float          left
+    width          Q_userpic_width
+    height         Q_userpic_height
+    background     yellow
+    margin         (Q_dashboard_height/2 - Q_userpic_height/2) 0 0 0
+
+  .Q_firstName, .Q_lastName
+    padding-left   (Q_userpic_width + Q_userpic_margin_right)
+  .Q_firstName
+    margin-top     ((Q_dashboard_height - 2 * Q_status_line_height) * 0.5)
+
+
+///////////////////////////////////////////////////////////////////////////////
+// listing & player common
+
+#Q_main_area
+  pos(absolute, left: 0px, right: 0px, top: 0px, bottom: Q_dashboard_height)
+  background       #eee
+
+#Q_listing_slot
+  background       #00ccff
+#Q_listing_content
+  pos(absolute, top: 45px, bottom: 1px, left: 0px, right: 0px)
+
+#Q_player_slot
+  background       cyan
+
+.Q_controls
+  height           44px
+  border-bottom    1px solid white
+  padding          0 0 0 8px
+
+  button
+    box-sizing     content-box
+    padding        4px 10px
+    height         14px
+    margin-top     11px
+
+.Q_expand_collapse
+  display          none
+
+#Q_upsteam_content
+  // background red
+  pos(absolute, top: 0px, bottom: 45px, left: 0px, right: 0px)
+  display          none
+#Q_player_content
+  pos(absolute, top: 45px, bottom: 1px, left: 0px, right: 0px)
+#Q_chat_content
+  border-left      1px solid black
+  pos(absolute, top: 45px, bottom: 1px)
+  display          none
+#Q_chat_messages
+  pos(absolute, top: 0px, bottom: Q_publisher_height+1, left: 0px, right: 0px)
+#Q_chat_publisher
+  pos(absolute, bottom: 0px, height: Q_publisher_height, left: 0px, right: 0px)
+  border-top       1px solid black
+
+  input
+    pos(absolute, top: 4px, bottom: 4px, left: 4px, right: 4px)
+    font-size      14px
+  
+
+.Q_chat_visible
+  #Q_player_content
+    left           0px
+    right          151px
+  #Q_chat_content
+    display        block
+    width          150px
+    right          0px
+
+.Q_upstream_visible
+  #Q_player_slot .Q_controls
+    pos(absolute, bottom: 0px, left: 0px, right: 0px)
+    border-bottom  none
+    border-top     1px solid white
+  #Q_player_and_chat_content
+    display        none
+  #Q_upsteam_content
+    display        block
+
+///////////////////////////////////////////////////////////////////////////////
+// tablet layout
+
+@media only screen and (min-width: 481px)
+  #Q_listing_slot
+    // -webkit-transition left 0.5s, right 0.5s
+    left             Q_pane_padding_horizontal
+    width            Q_left_pane_width
+
+  #Q_player_slot
+    left             (Q_pane_padding_horizontal + Q_left_pane_width + Q_interpane_gap)
+    right            Q_pane_padding_horizontal
+
+  #Q_listing_slot, #Q_player_slot
+    pos(absolute, top: Q_pane_padding_vertical, bottom: Q_pane_padding_vertical)
+    border-radius    Q_pane_border_radius
+
+
+///////////////////////////////////////////////////////////////////////////////
+// tablet portrait layout
+
+@media only screen and (orientation: portrait) and (min-width: 481px)
+  #Q_listing_slot
+    left             Q_pane_padding_horizontal
+    right            (Q_collapsed_pane_width + Q_interpane_gap)
+    width            auto
+    border-radius    Q_pane_border_radius
+
+  #Q_player_slot
+    left             auto
+    width            Q_collapsed_pane_width
+    right            0
+    border-radius    Q_pane_border_radius
+
+  .Q_listing_collapsed
+    #Q_listing_slot
+      left             0px
+      width            Q_collapsed_pane_width
+      border-radius    0, left
+      border-radius    Q_pane_border_radius, right
+
+    #Q_player_slot
+      width            inherit
+      margin-left      0px
+      left             (Q_collapsed_pane_width + Q_interpane_gap)
+      right            Q_pane_padding_horizontal
+      border-radius    Q_pane_border_radius
+
+
+///////////////////////////////////////////////////////////////////////////////
+// tablet expand/collapse
+
+@media only screen and (min-width: 481px)
+  .Q_expand_collapse
+    cursor         pointer
+    width          30px
+    background     maroon
+    pos(absolute, top: 10px, bottom: 10px)
+
+    &:hover
+      background   red
+  #Q_listing_slot .Q_expand_collapse
+    right          0px
+  #Q_player_slot .Q_expand_collapse
+    left           0px
+
+@media only screen and (orientation: portrait) and (min-width: 481px)
+  #Q_listing_slot
+    .Q_expand_collapse
+      display    none
+    #Q_expanded_listing
+      display    block
+  #Q_player_slot
+    .Q_expand_collapse
+      display    block
+    #Q_expanded_player
+      display    none
+
+  .Q_listing_collapsed
+    #Q_listing_slot
+      .Q_expand_collapse
+        display    block
+      #Q_expanded_listing
+        display    none
+    #Q_player_slot
+      .Q_expand_collapse
+        display    none
+      #Q_expanded_player
+        display    block
+
+
+///////////////////////////////////////////////////////////////////////////////
+// phone layout
+
+@media only screen and (max-width: 480px)
+  .Q_only_phone
+    display        block
+  .Q_only_phone_inline
+    display        inline
+
+  #Q_listing_slot, #Q_player_slot
+    pos(absolute, top: 0, bottom: 0, left: 0, right: 0)
+
+  #Q_listing_slot
+    display        block
+  #Q_player_slot
+    display        none
+  
+  .Q_listing_collapsed
+    #Q_listing_slot
+      display        none
+    #Q_player_slot
+      display        block
+  
+// @media only screen and (max-width: 1480px) and (orientation: portrait)
+//   #Q_listing_slot
+//     display
+
+
+///////////////////////////////////////////////////////////////////////////////
+// fake content
+
+// .Q_scrollable
+
+.Q_row
+  font-size        20px
+  padding          0 0 0 12px
+  height           43px
+  line-height      43px
+  border-bottom    1px solid #ccc
+  cursor           pointer
+
+  &:active
+    background #ff9999

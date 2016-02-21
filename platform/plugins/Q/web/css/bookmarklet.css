@@ -1,0 +1,389 @@
+.Q_bookmarklet_tool
+{
+	max-width: 450px;
+	font-size: 14px;
+}
+
+.Q_bookmarklet_tool_instructions
+{
+	margin-top: 20px;
+	padding-bottom: 20px;
+	border-bottom: solid 1px #D8DFEA;
+}
+
+.Q_bookmarklet_tool_drag_button
+{
+  float: left;
+  width: 170px;
+  height: 105px;
+  margin-right: 20px;
+  padding-right: 30px;
+  text-align: center;
+  background: url('../img/bookmarklet/drag_button_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_sample_button_tip
+{
+	display: inline-block;
+	width: 110px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+.Q_bookmarklet_tool_sample_button
+{
+	display: inline-block;
+	cursor: pointer;
+}
+
+.Q_bookmarklet_tool_button_middle img
+{
+	vertical-align: middle;
+	margin-top: -3px;
+	margin-right: 5px;
+}
+
+.Q_bookmarklet_tool_button_middle a
+{
+	color: black;
+	text-decoration: none;
+	font: 11px Tahoma;
+}
+
+.Q_bookmarklet_tool_button_firefox_windows
+{
+	height: 24px;
+}
+
+.Q_bookmarklet_tool_button_left, .Q_bookmarklet_tool_button_middle, .Q_bookmarklet_tool_button_right
+{
+	float: left;
+	font: normal 11px "Tahoma";
+}
+
+.Q_bookmarklet_tool_bookmarks_bar_sample
+{
+	margin-top: 20px;
+}
+
+.Q_bookmarklet_tool_bar_screenshot
+{
+	float: left;
+	width: 250px;
+  margin-right: 20px;
+}
+
+/* safari mac specific */
+.Q_bookmarklet_tool_button_safari_mac .Q_bookmarklet_tool_button_left
+{
+  width: 6px;
+  height: 16px;
+  background: url('../img/bookmarklet/safari_mac_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_safari_mac .Q_bookmarklet_tool_button_middle
+{
+  line-height: 16px;
+  background: url('../img/bookmarklet/safari_mac_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_safari_mac .Q_bookmarklet_tool_button_middle a
+{
+  color: white;
+  font-weight: bold;
+  text-shadow: black 0 1px 0;
+}
+
+.Q_bookmarklet_tool_button_safari_mac .Q_bookmarklet_tool_button_right
+{
+  width: 6px;
+  height: 16px;
+  background: url('../img/bookmarklet/safari_mac_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_safari_mac
+{
+  height: 79px;
+  background: url('../img/bookmarklet/safari_mac.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_safari_mac .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 51px;
+  margin-left: 66px;
+}
+
+/* safari win specific */
+.Q_bookmarklet_tool_button_safari_windows .Q_bookmarklet_tool_button_left
+{
+  width: 4px;
+  height: 19px;
+  background: url('../img/bookmarklet/safari_win_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_safari_windows .Q_bookmarklet_tool_button_middle
+{
+  line-height: 19px;
+  background: url('../img/bookmarklet/safari_win_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_safari_windows .Q_bookmarklet_tool_button_middle a
+{
+  text-shadow: white 0 1px 0;
+}
+
+.Q_bookmarklet_tool_button_safari_windows .Q_bookmarklet_tool_button_right
+{
+  width: 4px;
+  height: 19px;
+  background: url('../img/bookmarklet/safari_win_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_safari_windows
+{
+  height: 79px;
+  background: url('../img/bookmarklet/safari_win.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_safari_windows .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 55px;
+  margin-left: 66px;
+}
+
+/* chrome win specific */
+.Q_bookmarklet_tool_button_chrome_windows .Q_bookmarklet_tool_button_left
+{
+  width: 5px;
+  height: 24px;
+  background: url('../img/bookmarklet/chrome_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_chrome_windows .Q_bookmarklet_tool_button_middle
+{
+  line-height: 24px;
+  background: url('../img/bookmarklet/chrome_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_chrome_windows .Q_bookmarklet_tool_button_right
+{
+  width: 5px;
+  height: 24px;
+  background: url('../img/bookmarklet/chrome_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_chrome_windows
+{
+  height: 85px;
+  background: url('../img/bookmarklet/chrome_win.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_chrome_windows .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 58px;
+  margin-left: 2px;
+}
+
+/* chrome mac specific */
+.Q_bookmarklet_tool_button_chrome_mac .Q_bookmarklet_tool_button_left
+{
+  width: 5px;
+  height: 24px;
+  background: url('../img/bookmarklet/chrome_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_chrome_mac .Q_bookmarklet_tool_button_middle
+{
+  line-height: 24px;
+  background: url('../img/bookmarklet/chrome_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_chrome_mac .Q_bookmarklet_tool_button_right
+{
+  width: 5px;
+  height: 24px;
+  background: url('../img/bookmarklet/chrome_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_chrome_mac
+{
+  height: 95px;
+  background: url('../img/bookmarklet/chrome_mac.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_chrome_mac .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 68px;
+  margin-left: 2px;
+}
+
+/* firefox mac specific */
+.Q_bookmarklet_tool_button_firefox_mac .Q_bookmarklet_tool_button_left
+{
+  width: 8px;
+  height: 18px;
+  background: url('../img/bookmarklet/firefox_mac_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_firefox_mac .Q_bookmarklet_tool_button_middle
+{
+  line-height: 18px;
+  background: url('../img/bookmarklet/firefox_mac_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_firefox_mac .Q_bookmarklet_tool_button_middle a
+{
+  color: white;
+  font-weight: bold;
+  text-shadow: black 0 1px 0;
+}
+
+.Q_bookmarklet_tool_button_firefox_mac .Q_bookmarklet_tool_button_right
+{
+  width: 8px;
+  height: 18px;
+  background: url('../img/bookmarklet/firefox_mac_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_firefox_mac
+{
+  height: 108px;
+  background: url('../img/bookmarklet/firefox_mac.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_firefox_mac .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 86px;
+  margin-left: 5px;
+}
+
+/* firefox win specific */
+.Q_bookmarklet_tool_button_firefox_windows .Q_bookmarklet_tool_button_left
+{
+  width: 3px;
+  height: 24px;
+  background: url('../img/bookmarklet/firefox_win_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_firefox_windows .Q_bookmarklet_tool_button_middle
+{
+  line-height: 24px;
+  background: url('../img/bookmarklet/firefox_win_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_firefox_windows .Q_bookmarklet_tool_button_right
+{
+  width: 3px;
+  height: 24px;
+  background: url('../img/bookmarklet/firefox_win_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_firefox_windows
+{
+  height: 126px;
+  background: url('../img/bookmarklet/firefox_win.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_firefox_windows .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 100px;
+  margin-left: 2px;
+}
+
+/* opera mac specific */
+.Q_bookmarklet_tool_button_opera_mac .Q_bookmarklet_tool_button_left
+{
+  width: 5px;
+  height: 24px;
+  background: url('../img/bookmarklet/chrome_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_opera_mac .Q_bookmarklet_tool_button_middle
+{
+  line-height: 24px;
+  background: url('../img/bookmarklet/chrome_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_opera_mac .Q_bookmarklet_tool_button_right
+{
+  width: 5px;
+  height: 24px;
+  background: url('../img/bookmarklet/chrome_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_opera_mac
+{
+  height: 110px;
+  background: url('../img/bookmarklet/opera_mac.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_opera_mac .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 84px;
+  margin-left: 5px;
+}
+
+/* ie win specific */
+.Q_bookmarklet_tool_button_explorer_windows .Q_bookmarklet_tool_button_left
+{
+  width: 3px;
+  height: 24px;
+  background: url('../img/bookmarklet/ie_win_button_left_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_button_explorer_windows .Q_bookmarklet_tool_button_middle
+{
+  line-height: 24px;
+  background: url('../img/bookmarklet/ie_win_button_bg.png') repeat-x;
+}
+
+.Q_bookmarklet_tool_button_explorer_windows .Q_bookmarklet_tool_button_right
+{
+  width: 3px;
+  height: 24px;
+  background: url('../img/bookmarklet/ie_win_button_right_bg.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_explorer_windows
+{
+  height: 82px;
+  background: url('../img/bookmarklet/ie_win.png') no-repeat;
+}
+
+.Q_bookmarklet_tool_bar_screenshot_explorer_windows .Q_bookmarklet_tool_sample_button
+{
+  margin-top: 56px;
+  margin-left: 2px;
+}
+
+.Q_bookmarklet_tool_iPhone {
+	width: 280px;
+}
+
+.Q_bookmarklet_tool_step {
+	text-align: left;
+	background: white;
+	border-radius: 10px;
+	padding: 10px;
+	width: 280px;
+	border: 1px solid #D9D9D9;
+	margin: 0 auto 10px auto;
+	overflow: hidden;
+}
+
+.Q_bookmarklet_tool_step .Q_bookmarklet_tool_code {
+	float: left;
+	width: 100px;
+	margin-right: 10px;
+	height: 200px;
+}
+
+.Q_bookmarklet_ios_action_icon {
+	vertical-align: middle;
+}
+
+.Q_bookmarklet_tool_step ul,
+.Q_bookmarklet_tool_step ul li {
+	list-style-type: none !important;
+}

@@ -1,0 +1,68 @@
+/*
+ * ticker
+ */
+
+.Q_ticker {
+	margin: 0;
+	text-indent: 0;
+	padding-left: 0;
+	font-size: 11px;
+	overflow: hidden;
+}
+
+.Q_ticker ul {
+	margin:0;
+	padding:0;
+}
+
+.Q_ticker.vertical {
+	width: 100%;
+	height: 150px;
+}
+
+.Q_ticker.horizontal {
+	width: 100%;
+	height: 50px;
+}
+
+.Q_ticker.horizontal.scrollbars {
+	overflow: hidden;
+	overflow-x: auto;
+}
+
+.Q_ticker.vertical.scrollbars {
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.Q_ticker.vertical .error {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.Q_ticker.horizontal .error {
+	width: 10000px;
+	height:50px;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.Q_ticker.horizontal li {
+	display: inline;
+	width:200px;
+	/*width:1228px;*/
+}
+
+.Q_ticker ul.error li div {
+	display:inline-block;
+	width:220px;
+	height:50px;
+	line-height:50px;
+	font-size:15px;
+	color:white;
+}
+
+.Q_ticker table { padding:0; border-spacing:0; border-collapse:collapse; }
+.Q_ticker td { padding:0; border-spacing:0; border-collapse:collapse; }

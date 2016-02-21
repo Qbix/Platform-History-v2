@@ -1,0 +1,27 @@
+{
+	"Q": {
+		"app": "Invites",
+		"appInfo" : {
+			"version" : "0.1",
+			"compatible": "0.1",
+			"requires": {
+				"Users": "0.8.2",
+				"Streams": "0.8.2"
+			}
+		},
+		"plugins": ["Users", "Streams"],
+		"handlersBeforeEvent": {
+		},
+		"handlersAfterEvent": {
+		},
+		"routes": {
+			"": {"module": "Invites", "action": "welcome"},
+			"$token": {"module": "Invites", "action": "welcome"}
+		},
+		"response": {
+			"Invites": {
+				"slotNames": ["title", "content"]
+			}
+		}
+	}
+}

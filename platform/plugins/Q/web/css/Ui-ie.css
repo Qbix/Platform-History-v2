@@ -1,0 +1,42 @@
+.Q_clickable:hover, .Q_clickable:active
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_contextual
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_segmented_control li, .Q_segmented_control li:first-child,
+.Q_segmented_control li:last-child, .Q_segmented_control li.Q_segment_selected
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_player, .Q_player_buttons li.Q_selected, .Q_player_buttons li:first-child, .Q_player_buttons li:last-child
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_bookmarklet_tool_step, #Q_grammar_tool .Q_grammar_form select
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_overlay, .Q_overlay .Q_title
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+#notices_slot ul, #dashboard_slot, #dashboard .Q_dashboard_logo a, #dashboard .Q_dashboard_search input,
+#dashboard .Q_tabs_tab, .Q_sections .Q_tabs_tab
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_button, .Q_button:focus, .Q_button:hover, .Q_button.focus, #notices_slot button, #notices_slot button:active,
+.Q_tooltip, textarea, textarea:focus, .Q_big_prompt textarea, .Q_big_prompt select
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}

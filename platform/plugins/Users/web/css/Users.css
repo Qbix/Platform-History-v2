@@ -1,0 +1,355 @@
+#dashboard .Users_dashboard_user { text-align: right; }
+#dashboard a.Users_login,
+#dashboard a.Users_logout { padding: 8px 12px 8px 12px; font-weight: bold; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; color: white;  font-size: 14px; }
+
+.Users_profile_image
+{
+	width: 30px;
+}
+
+.Users_tools_throbber
+{
+  text-align: center;
+}
+
+.Users_friendSelector_tool_input_field
+{
+	margin: 15px 0;
+}
+
+.Users_friendSelector_tool_input_field input[type="text"]
+{
+	border: solid 1px #CCC;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font: 12px Tahoma;
+	padding: 5px 23px 5px 5px;
+}
+
+.Users_friendSelector_search_icon
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 22px;
+	height: 19px;
+	background: url("http://static.ak.fbcdn.net/rsrc.php/v1/yF/r/pYIwMweSQ7D.png") no-repeat -81px 0;
+}
+
+.Users_friendSelector_tool ul
+{
+	font: 11px Tahoma;
+	list-style: none;
+	margin: 0;
+  padding-left: 0;
+	height: 580px;
+	overflow:auto;
+	border: solid 1px #333;
+}
+
+.Users_friendSelector_tool ul li
+{
+	height: 54px;
+}
+
+.Users_friendSelector_tool ul li
+{
+	height: 50px;
+	padding: 4px 5px;
+}
+
+.Users_friendSelector_tool ul li:hover
+{
+	background: url('../img/sel_friend_bg.png') repeat-x;
+  cursor: pointer;
+}
+
+.Users_friendSelector_tool_user_picture
+{
+	float: left;
+}
+
+.Users_friendSelector_tool_user_name
+{
+  margin: 5px 7px 0 57px;
+  font: bold 11px Tahoma;
+  text-decoration: none;
+  color: #3B5998;
+}
+
+.Users_friendSelector_tool ul li:hover .Users_friendSelector_tool_user_name
+{
+  color: white;
+}
+
+.Users_friendSelector_tool .Q_placeholder
+{
+  color: #999;
+}
+
+.Users_friendSelector_tool .Q_focus .Q_placeholder
+{
+  color: #CCC;
+}
+
+.Users_friendSelector_tool_title
+{
+  font-size: 20px;
+}
+
+.Users_friendSelector_tool_title:before
+{
+	content: '1.';
+	color: #FFA800;
+	margin-right: 5px;
+	font-size: 1.5em;
+	font-weight: bold;
+	vertical-align: baseline;
+}
+
+.Users_facebookDialog_shadow
+{
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.3;
+}
+
+.Users_facebookDialog
+{
+  position: absolute;
+  z-index: 9100;
+  width: 465px;
+  background-color: rgba(82, 82, 82, 0.7);
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px; 
+  padding: 10px;
+  font: 11px Tahoma;
+}
+
+.Users_facebookDialog_title
+{
+  padding: 5px 10px;
+  color: white;
+  background-color: #6D84B4;
+  font: bold 14px Tahoma;
+  border-top: solid 1px #3B5998;
+  border-left: solid 1px #3B5998;
+  border-right: solid 1px #3B5998;
+}
+
+.Users_facebookDialog_content
+{
+  background-color: white;
+  padding: 8px 10px;
+  line-height: 18px;
+  border-left: solid 1px #555;
+  border-right: solid 1px #555;
+  font-family: "Lucida Grande", Tahoma, Verdana, Arial, Sans-Serif;
+  font-size: 11px;
+  color: black;
+}
+
+.Users_facebookDialog_buttons
+{
+  background-color: #F2F2F2;
+  padding: 8px 10px;
+  border-top: solid 1px #ccc;
+  border-left: solid 1px #555;
+  border-right: solid 1px #555;
+  text-align: right;
+}
+
+.Users_facebookDialog_buttons button, .Users_facebookDialog_buttons button:hover,
+.Users_facebookDialog_buttons button:active, .Users_facebookDialog_buttons button:focus
+{
+	margin-left: 7px;
+  padding: 3px 5px;
+  background-color: #EEEEEE;
+  background-image: url("https://s-static.ak.facebook.com/rsrc.php/v1/yA/r/N8T_oGDfkMw.png");
+  background-position: 0 -49px;
+  background-repeat: no-repeat;
+  border: solid 1px #999;
+  font: bold 13px Tahoma;
+  color: black;
+  cursor: pointer;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.Users_facebookDialog_buttons button.Users_facebookDialog_default_button
+{
+  color: white;
+  border: solid 1px #29447E;
+  background-color: #637BAD;
+  background-image: url("https://s-static.ak.facebook.com/rsrc.php/v1/yA/r/N8T_oGDfkMw.png");
+  background-position: 0 -98px;
+}
+
+.Users_facebookDialog_buttons button.Users_facebookDialog_default_button:active
+{
+  background-image: none;
+  background-color: #4F6AA3;
+}
+
+#Users_prompt_overlay .Q_dialog_content {
+	padding: 10px;
+}
+
+#Users_prompt_overlay .Users_explanation { font-size: 12px; }
+#Users_prompt_overlay .fb_name { font-size: 18px; }
+#Users_prompt_overlay table td { padding: 10px; vertical-align: middle; }
+#Users_prompt_overlay .Users_actions { text-align: center; }
+
+.Users_activation_avatar
+{
+	width: 40px;
+	padding: 10px;
+}
+
+.Users_activation_username
+{
+	vertical-align: middle;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.Q_admin_pane #Q_activation_form
+{
+	width: 50%;
+}
+
+.Q_extra_pane #suggestions
+{
+	list-style-type: none;
+	padding: 0;
+}
+
+.Q_extra_pane #suggestions li
+{
+	list-style-type: none;
+	border-top: solid 1px #aaa;
+}
+
+.Q_admin_pane
+{
+	float: left;
+	padding: 10px 10px 0 10px;
+}
+
+.Q_extra_pane
+{
+	float: right;
+	padding: 10px 0 10px 0;
+}
+
+.Q_mobile .Q_extra_pane
+{
+	float: right;
+	padding: 0 0 10px 10px;
+}
+
+.Users_avatar_icon, .Users_avatar_name
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
+#Users_login_username
+{
+	width: 225px;
+}
+
+#Users_login_password
+{
+	width: 210px;
+}
+
+#Users_login_step2 td {
+	vertical-align: top;
+}
+
+.Users_login_picture img {
+	width: 60px;
+	height: 60px;
+	margin-right: 7px;
+}
+
+
+
+/* user login */
+
+#Users_login_step1_form { width: 100%; }
+#Users_login_identifier { width: 75%; padding: 2%; }
+#Users_setIdentifier_identifier { width: 100%; padding: 2%; }
+#Users_login_go { width: 10%; }
+#Users_login_noPassphrase { font-size: 14px; font-weight: bold; color: #a00; text-align: center; }
+#Users_login_notVerified { font-size: 14px; font-weight: bold; text-align: center; }
+#Users_login_identifierExists { font-size: 12px; color: #555; }
+#Users_login_explanation { font-size: 13px; color: #779; text-indent: 5px; }
+#Users_login_usingProviders { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: left; }
+#Users_form_passphrase { width: 100%; padding: 2%; }
+#Users_login_username { width: 200px; }
+.Users_login_get_started { text-align: center; }
+
+#Users_login_passphrase_div { position: relative; }
+#Users_login_passphrase_forgot { display: block; position: absolute; right: 5px; bottom: 10px; color: #888; padding: 4px; }
+#Users_login_passphrase_forgot:hover { color: #000; background: #eee; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+#Users_login_passphrase_forgot:active { color: #000; background: #ccc; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+
+#Users_login_resend_success { text-align: center; }
+
+
+.Users_app_icon { vertical-align: middle; }
+
+#Users_authorize_welcome * { font-size: 36px; line-height: 80px; text-align: center; }
+#Users_authorize_act { text-align: center; }
+#Users_authorize_terms,
+#Users_authorize_terms * { font-size: 14px; }
+#Users_login_dialog #Users_register_terms,
+#Users_login_dialog #Users_register_terms * { font-size: 14px; }
+#Users_authorize_buttons { padding: 10px; }
+#Users_authorize_buttons .Q_button { font-size: 36px; line-height: 80px; }
+
+.Users_fromServer,
+.Users_fromYahoo { font-family: "Comic Sans MS"; font-weight: 100; }
+
+
+.Users_avatar_icon {
+	width: 40px;
+	height: 40px;
+}
+
+.Users_avatar_icon_blank {
+	width: 40px;
+	height: 40px;
+	-moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
+	border: 1px dotted #ccc;
+}
+
+#Users_login_step1 *,
+#Users_login_step2 *,
+#Users_setIdentifier_step1 * {
+	box-sizing: border-box;
+}
+
+#Users_login_dialog input,
+#Users_setIdentifier_dialog input {
+	margin: 5px 0px 5px 0px;
+}
+
+#Users_login_dialog #Users_agree { margin-right: 5px; }
+
+.Q_notMobile .Q_overlay.Users_login_dialog,
+.Q_notMobile .Q_overlay.Users_setIdentifier_dialog { width: 350px; }

@@ -1,0 +1,11 @@
+ALTER TABLE `{$prefix}message` CHANGE COLUMN `message_name` `ordinal` INT(10) NOT NULL,
+ADD  `publisherId` VARCHAR( 31 ) NOT NULL FIRST ,
+ADD  `streamName` VARCHAR( 255 ) NOT NULL AFTER  `publisherId`,
+DROP PRIMARY KEY,
+ ADD PRIMARY KEY(
+   `publisherId`,
+   `streamName`,
+   `ordinal`);
+
+ALTER TABLE `{$prefix}syndicated` CHANGE COLUMN `message_name` `ordinal` INT(10) NOT NULL COMMENT 'name of the message that was syndicated'  ;
+

@@ -1,0 +1,9 @@
+.Websites_article_tool .Streams_html_tool { min-height: 100px; font-size: 18px; }
+.Websites_article_tool .Streams_image_preview_tool img { width: 100%; }
+.Websites_article_tool .Streams_image_preview_tool h2 { display: none; }
+
+.Q_notMobile .Websites_side_column { float: right; width: 30%; }
+.Q_notMobile .Websites_article_tool .Streams_html_tool { width: 60%; font-size: 24px; }
+
+.Websites_seo_tool .Streams_inplace_tool,
+.Websites_seo_tool .Streams_inplace_tool_container { display: block; text-align: left; }

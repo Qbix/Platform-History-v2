@@ -1,0 +1,8 @@
+CREATE TABLE `{$prefix}permalink` (
+  `uri` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `insertedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` datetime DEFAULT NULL,
+  PRIMARY KEY `URI` (`uri`),
+  KEY `URL` (`url`)
+) ENGINE=InnoDB COMMENT='For permalink lookup';

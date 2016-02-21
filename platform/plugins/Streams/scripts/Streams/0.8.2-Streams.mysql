@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `{$prefix}category`;
+
+CREATE TABLE `{$prefix}category` (
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Qbix server of publisherId',
+  `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'the time that this stream row has last changed for whatever reason',
+  `relatedTo` TEXT COLLATE utf8_unicode_ci NOT NULL COMMENT 'serialized JSON array of related stream types, icons and titles',
+  PRIMARY KEY (`publisherId`,`streamName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='denormalized to speed up display of related streams';

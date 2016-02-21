@@ -1,0 +1,6 @@
+.Q_form_fieldname { width: 150px; }
+.Q_form_tool .Q_form_tool_table { width: 100%; text-align: left; }
+.Q_form_tool .Q_form_tool_table td { vertical-align: middle; padding: 0; border-spacing: 0; border-collapse: separate; }
+.Q_form_tool .Q_form_fieldname { text-align: right; padding-right: 10px; font-weight: bold; }
+.Q_form_tool .Q_form_textareamessage { text-align: center; padding-right: 5%; }
+form textarea { width: 250px; }

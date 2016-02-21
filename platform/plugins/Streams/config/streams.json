@@ -1,0 +1,189 @@
+{
+	"Streams/participating": {
+		"type": "Streams/participating",
+		"title": "Messages about joining/leaving streams",
+		"icon": "",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	},
+	"Streams/user/icon": {
+		"type": "Streams/image",
+		"title": "Icon",
+		"icon": "Streams/image",
+		"name_fb": "pic"
+	},
+	"Streams/user/username": {
+		"type": "Streams/text/name",
+		"title": "Username",
+		"icon": "",
+		"name_fb": "username"
+	},
+	"Streams/user/firstName": {
+		"type": "Streams/text/name",
+		"title": "First name",
+		"icon": "",
+		"name_fb": "first_name"
+	},
+	"Streams/user/middleName": {
+		"type": "Streams/text/name",
+		"title": "Middle name",
+		"icon": "",
+		"name_fb": "middle_name"
+	},	
+	"Streams/user/lastName": {
+		"type": "Streams/text/name",
+		"title": "Last name",
+		"icon": "",
+		"name_fb": "last_name"
+	},
+	"Streams/user/emailAddress": {
+		"type": "Streams/text/emailAddress",
+		"title": "Email Address",
+		"icon": "",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	},
+	"Streams/user/mobileNumber": {
+		"type": "Streams/text/mobileNumber",
+		"title": "Mobile Number",
+		"icon": "",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	},
+	"Streams/user/status": {
+		"type": "Streams/text/small",
+		"title": "Status",
+		"icon": ""
+	},	
+	"Streams/user/description": {
+		"type": "Streams/text/small",
+		"title": "Description",
+		"icon": "",
+		"name_fb": "profile_blurb"
+	},
+	"Streams/user/presence": {
+		"type": "Streams/enum/presence",
+		"title": "Presence",
+		"icon": ""
+	},
+	"Streams/user/interests": {
+		"type": "Streams/category",
+		"title": "Interests",
+		"icon": ""
+	},
+	"Streams/user/website": {
+		"type": "Streams/text/url",
+		"title": "Website",
+		"icon": ""
+	},	
+	"Streams/user/gender": {
+		"type": "Streams/enum/gender",
+		"title": "Gender",
+		"icon": "",
+		"name_fb": "gender"
+	},
+	"Streams/user/height": {
+		"type": "Streams/date/height",
+		"title": "Height",
+		"icon": ""
+	},
+	"Streams/user/birthday": {
+		"type": "Streams/date/birthday",
+		"title": "Birthday",
+		"icon": "",
+		"name_fb": "birthday_date"
+	},
+	"Streams/user/age": {
+		"type": "Streams/number/age",
+		"title": "Age",
+		"icon": ""
+	},
+	"Places/user/hometown_location": {
+		"type": "Places/location",
+		"title": "Hometown Location",
+		"icon": ""
+	},
+	"Streams/user/fb_uid": {
+		"type": "Streams/uid/fb_uid",
+		"title": "My facebook uid",
+		"icon": ""
+	},	
+	"Streams/user/political": {
+		"type": "Streams/text/small",
+		"title": "Political views",
+		"icon": ""
+	},	
+	"Places/user/current_location": {
+		"type": "Places/location",
+		"title": "Current location",
+		"icon": ""
+	},	
+	"Streams/user/hs_info": {
+		"type": "Streams/array/hs_info",
+		"title": "High school",
+		"icon": ""
+	},	
+	"Streams/user/education_history": {
+		"type": "Streams/array/education_history",
+		"title": "Education history",
+		"icon": ""
+	},	
+	"Streams/user/work_history": {
+		"type": "Streams/array/work_history",
+		"title": "Work history",
+		"icon": ""
+	},	
+	"Streams/user/about_me": {
+		"type": "Streams/text/multiline",
+		"title": "Bio",
+		"icon": ""
+	},	
+	"Streams/user/activities": {
+		"type": "Streams/category",
+		"title": "Activities",
+		"icon": ""
+	},	
+	"Streams/user/interests": {
+		"type": "Streams/category",
+		"title": "Interests",
+		"icon": ""
+	},	
+	"Streams/user/music": {
+		"type": "Streams/category",
+		"title": "Music",
+		"icon": ""
+	},	
+	"Streams/user/tv": {
+		"type": "Streams/category",
+		"title": "TV Shows",
+		"icon": ""
+	},	
+	"Streams/user/movies": {
+		"type": "Streams/category",
+		"title": "Movies",
+		"icon": ""
+	},	
+	"Streams/user/books": {
+		"type": "Streams/category",
+		"title": "Books",
+		"icon": ""
+	},	
+	"Streams/user/quotes": {
+		"type": "Streams/category",
+		"title": "Quotes",
+		"icon": ""
+	},
+	"Streams/contacts": {
+		"type": "Streams/resource",
+		"title": "Contacts",
+		"icon": ""
+	},
+	"Streams/labels": {
+		"type": "Streams/resource",
+		"title": "Labels",
+		"icon": ""
+	}
+}

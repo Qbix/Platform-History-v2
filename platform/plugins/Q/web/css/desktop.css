@@ -1,0 +1,84 @@
+html, body
+{
+	height: 100%;
+  overflow: hidden;
+}
+
+#main
+{
+	position: relative;
+	z-index: 10;
+}
+
+#main, #notices_slot
+{
+	max-width: 1024px;
+	margin: 0 auto;
+}
+
+#dashboard_slot
+{
+	position: static;
+	width: 240px;
+	height: auto;
+	float: left;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+	margin: 10px 0;
+	box-shadow: #777 0 0 4px;
+  -webkit-box-shadow: #777 0 0 4px;
+  -moz-box-shadow: #777 0 0 4px;
+  filter: none;
+  behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+#column0_slot, #column1_slot, #column2_slot
+{
+	width: 382px;
+	float: left;
+	margin: 10px;
+	background-color: white;
+	border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: #777 0 0 4px;
+  -webkit-box-shadow: #777 0 0 4px;
+  -moz-box-shadow: #777 0 0 4px;
+  behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+#column0_slot
+{
+	width: 764px;
+}
+
+#column2_slot
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.Q_selected:hover, .Q_selected.Q_hover
+{
+  color: black;
+  background-color: #91C2F2;
+  box-shadow: #AAA 0 0 2px;
+  -webkit-box-shadow: #AAA 0 0 2px;
+  -moz-box-shadow: #AAA 0 0 2px;
+}
+
+.Streams_participant_tool
+{
+	overflow: auto;
+}
+
+.Streams_chat_tool
+{
+	behavior: url('/plugins/Q/js/PIE.htc');
+}
+
+.Q_column1_contents .Q_admin_pane .Q_big_prompt input
+{
+	width: 350px;
+}

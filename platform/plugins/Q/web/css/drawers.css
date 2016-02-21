@@ -1,0 +1,12 @@
+.Q_drawers_placeholder {
+	cursor: default;
+}
+
+.Q_drawers_trigger {
+	display: block;
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	z-index: 99999;
+	cursor: pointer;
+}

@@ -1,0 +1,49 @@
+vendor(prop, args)
+  for vendor in vendors
+    unless vendor == css3
+      -{vendor}-{prop} args
+  {prop} args if css3 in vendors
+
+border-radius(radius, corners = (top-left top-right bottom-left bottom-right))
+  push(corners, top, bottom)               if all in corners
+  push(corners, top-left, top-right)       if top in corners
+  push(corners, bottom-left, bottom-right) if bottom in corners
+  push(corners, top-left, bottom-left)     if left in corners
+  push(corners, top-right, bottom-right)   if right in corners
+
+  if top-left in corners and top-right in corners and bottom-left in corners and bottom-right in corners
+    -webkit-border-radius radius if webkit in vendors
+    -moz-border-radius radius    if moz in vendors
+    border-radius radius         if css3 in vendors or ms in vendors or o in vendors
+  else
+    // workaround for a possible bug:
+    // if specs start out empty, the first pushed element is flattened
+    specs = (foo)
+    push(specs, (top left))     if top-left in corners
+    push(specs, (top right))    if top-right in corners
+    push(specs, (bottom left))  if bottom-left in corners
+    push(specs, (bottom right)) if bottom-right in corners
+    specs = specs[1..10]
+
+    p specs
+    for spec in specs
+      -webkit-border-{spec[0]}-{spec[1]}-radius radius if webkit in vendors
+      -moz-border-radius-{spec[0]}{spec[1]} radius if webkit in vendors
+      border-{spec[0]}-{spec[1]}-radius radius if css3 in vendors or ms in vendors or o in vendors
+
+  -webkit-background-clip padding-box if webkit in vendors
+
+box-sizing(mode)
+  -webkit-box-sizing mode if webkit in vendors
+  -moz-box-sizing mode    if moz in vendors
+  box-sizing mode         if css3 in vendors or o in vendors or ms in vendors
+
+pos(kind=none, left=none, right=none, width=none, top=none, bottom=none, height=none)
+  position: kind   if kind   != none
+  left:   left     if left   != none
+  right:  right    if right  != none
+  width:  width    if width  != none
+  top:    top      if top    != none
+  bottom: bottom   if bottom != none
+  height: height   if height != none
+ 

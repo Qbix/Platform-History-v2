@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `{$prefix}page` (
+  `page_id` varchar(255) NOT NULL,
+  `publisherId` varchar(255) NOT NULL,
+  `heading` VARCHAR(255) NOT NULL DEFAULT '',
+  PRIMARY KEY  (`page_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='for facebook pages';

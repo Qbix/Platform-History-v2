@@ -1,0 +1,80 @@
+{
+	"Q": {
+		"localNotYetConfigured": "REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
+		"web": {
+			"appRootUrl": "http://MyApp.loc",
+			"controllerSuffix": "CAN BE BLANK OR index.php"
+		},
+		"node" : {
+			"host": "MyApp.loc",
+			"port": "10500"
+		},
+		"nodeInternal": {
+			"host": "127.0.0.1",
+			"port": "10501"
+		},
+		"images": {
+			"pixabay": null /* {
+				"username": "YOUR USERNAME HERE",
+				"key": "YOUR SECRET KEY HERE"
+			} */
+		},
+		"external": {
+			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA FOR EXTERNAL CLIENTS"
+		},
+		"internal": {
+			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING INTERNAL MESSAGES"
+		},
+		"environment": "",
+		"response": {
+			"cacheBaseUrl": "MyApp:"
+		}
+	},
+	"Db": {
+		"connections": {
+			"*": {
+				"dsn": "mysql:host=localhost;dbname=DBNAME",
+				"username": "USERNAME",
+				"password": "PASSWORD",
+				"driver_options": { "3": 2 }	
+			},
+			"Users": {
+				"prefix": "users_",
+				"shards": {}
+			},
+			"Streams": {
+				"prefix": "streams_",
+				"shards": {}
+			}
+		}
+	},
+	"Users": {
+		"facebookApps": {
+			"APP NAME HERE": {
+				"name": "FACEBOOK APP NAME HERE",
+				"appId": "FACEBOOK APP ID HERE",
+				"secret": "PUT SECRET HERE",
+				"url": "http:\/\/apps.facebook.com\/YOURAPP",
+				"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
+			}
+		},
+		"email": {
+			"smtp": null, /* {
+				"auth": "login",
+				"username": "USERNAME HERE",
+				"password": "PASSWORD HERE",
+				"ssl": "ssl",
+				"port": 465,
+				"host": "smtp.sendgrid.net"
+			}, */
+			"from": ["notifications@MyApp.com", "MyApp"]
+		},
+		"mobile": {
+			"twilio": null, /* {
+				"sid": "YOUR SID HERE",
+				"token": "YOUR TOKEN HERE"
+			}, */
+			"from": "+1234567890"
+		}
+	}
+}

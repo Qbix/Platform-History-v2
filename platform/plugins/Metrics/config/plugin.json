@@ -1,0 +1,18 @@
+{
+	"Q": {
+		"routes": {
+			"plugins/Metrics/:action": {"module": "Metrics"}
+		},
+		"pluginInfo": {
+			"Metrics": {
+				"version": "0.5",
+				"compatible": "0.5",
+				"requires": {"Q": "0.8"},
+				"connections": ["Metrics"]
+			}
+		}
+	},
+	"Metrics": {
+
+	}
+}

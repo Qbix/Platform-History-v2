@@ -1,0 +1,10 @@
+ALTER TABLE {$prefix}participant
+DROP COLUMN reason,
+DROP COLUMN	enthusiasm,
+DROP COLUMN reputation,
+ADD COLUMN extra varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'JSON containing extra information about this participant'
+AFTER posted;
+
+ALTER TABLE {$prefix}participating
+ADD COLUMN extra varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'JSON containing extra information about this participant'
+AFTER fresh;

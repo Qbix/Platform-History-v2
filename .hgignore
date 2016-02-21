@@ -1,0 +1,37 @@
+syntax: regexp
+
+#Common ignores
+\.DS_Store$
+^\.git$
+^\.gitignore$
+^\.idea/
+^\.bin/
+^platform/\.idea/
+^platform/local/
+^platform/files/Q/sessions/
+^platform/files/sessions/
+^platform/plugins/(?!Users|Streams).*/files/
+^platform/plugins/Users/files/Users/icons/(?!default|future)
+^platform/plugins/Streams/files/Streams/icons/(?!default)
+^platform/plugins/Streams/files/Streams/media/
+^platform/plugins/Awards/classes/Composer/vendor
+^platform/node_modules
+^MyApp/local/.*
+^MyApp/files/(?!.dir|MyApp).+
+^MyApp/files/MyApp/uploads/(?!.dir|Users|Streams).+
+^MyApp/files/MyApp/uploads/Users/(?!.dir).+
+^MyApp/files/MyApp/uploads/Streams/(?!.dir).+
+^MyApp/web/plugins/.*
+^SmartApp/local/.*
+^SmartApp/files/.*
+^SmartApp/web/plugins/.*
+.hgdir$
+
+^api/*
+^\.project
+^\.settings/
+node_modules/
+
+# Class files includes
+.+\.php\.inc$
+.+\.js\.inc$

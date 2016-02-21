@@ -1,0 +1,114 @@
+.Q_columns_tool {
+	overflow: visible;
+	position: relative;
+	max-height: 100%;
+}
+
+.Q_mobile .Q_columns_tool {
+	width: 100%;
+}
+
+.Q_columns_column {
+	display: block;
+	float: left;
+	background: white;
+	overflow: hidden;
+}
+
+.Q_mobile .Q_columns_column {
+	width: 100%;
+	height: 5000px;
+}
+
+.Q_notMobile .Q_columns_column {
+	margin-right: 10px;
+	width: 300px;
+	box-shadow: black 2px 2px 4px;
+	-webkit-box-shadow: black 0 0 4px;
+	-moz-box-shadow: black 0 0 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+}
+
+.Q_columns_title {
+	background: #f8f8f8;
+    border-bottom: 1px solid #aaa;
+	overflow: hidden;
+}
+
+.Q_columns_title .Q_close {
+	width: 40px;
+	height: 40px;
+	float: right;
+	cursor: pointer;
+	font-weight: normal;
+	color: #555;
+	padding: 5px;
+	box-sizing: content-box;
+	opacity: 0.5;
+}
+
+.Q_columns_title .Q_close img {
+	width: 40px;
+	height: 40px;
+}
+
+.Q_columns_column .title_slot {
+	margin: 0;
+	padding: 5px;
+	line-height:40px;
+    width: 80%;
+	height: 40px;
+	box-sizing: content-box;
+}
+
+.Q_columns_column:first-child .title_slot {
+	width: 100%;
+}
+
+.Q_columns_column .column_slot {
+	clear: both;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: relative;
+}
+
+.Q_columns_tool.Q_fullscreen {
+	overflow: visible;
+	height: auto;
+}
+
+.Q_columns_tool.Q_fullscreen .Q_columns_column {
+	float: none;
+	width: 100%;
+}
+
+.Q_columns_tool.Q_fullscreen .Q_columns_title {
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+.Q_columns_tool.Q_fullscreen .column_slot {
+	position: relative;
+	padding-top: 40px;
+	box-sizing: content-box;
+	overflow: hidden;
+}
+.Q_columns_loading { height: 40px; }
+.Q_columns_mask {
+	position: absolute; 
+	top: 0; 
+	bottom: 0; 
+	left: 0; 
+	right: 0; 
+	z-index: 9999; 
+}
+
+.column_slot {
+	z-index: 10;
+}

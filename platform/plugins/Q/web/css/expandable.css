@@ -1,0 +1,57 @@
+.Q_expandable_tool h2 { 
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 300;
+    text-align:  left;
+    font-size: 20px;
+    padding: 0;
+    margin: 10px 0 5px 0;
+}
+
+.Q_expandable_tool h2.Q_hover,
+.Q_expandable_tool h2.Q_expanded {
+	background: rgba(180, 200, 220, 0.7);	
+}
+
+.Q_expandable_tool h2.Q_pressed {
+	background: rgba(180, 200, 220, 0.8);	
+}
+
+
+.Q_expandable_tool h2 img {
+	width:25px; height:25px; vertical-align: middle; margin-left: 5px
+}
+
+.Q_expandable_tool h2 span {
+	vertical-align: middle;
+}
+
+.Q_tool h2.Q_expanded .Q_expandable_count {
+	display: none;
+}
+
+.Q_expandable_count {
+	float: right;
+	margin: 7px;
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.Q_expandable_container {
+    text-align: left;
+    font-weight: 100;
+    font-size: 15px;
+    /* -webkit-mask-image: -webkit-linear-gradient(rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%); */
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+    border: solid 1px rgba(255,255,255,0.2);
+    border-top: 0;
+    margin-top: -12px;
+    padding: 12px 5px 5px 5px;
+    line-height: 25px;
+	width: 100%;
+	display: none;
+}

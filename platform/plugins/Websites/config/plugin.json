@@ -1,0 +1,41 @@
+{
+	"Q": {
+		"pluginInfo": {
+			"Websites": {
+				"version": "0.8.4",
+				"compatible": "0.8",
+				"requires": {"Streams": "0.8.2"},
+				"connections": ["Users", "Streams", "Websites"]
+			}
+		},
+		"handlersBeforeEvent": {
+			"Q/url": ["Websites/before/Q_url"],
+			"Q/uriFromUrl": ["Websites/before/Q_uriFromUrl"],
+			"Q/responseExtras": ["Websites/before/Q_responseExtras"],
+			"Streams/Stream/save/Websites/article": ["Websites/before/Streams_Stream_save_Websites_article"],
+			"Streams/Stream/save/Websites/seo": ["Websites/before/Streams_Stream_save_Websites_seo"]
+		}
+	},
+	"Streams": {
+		"types": {
+			"Websites/seo": {
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Website SEO"
+				}
+			},
+			"Websites/article": {
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Article"
+				},
+				"extend": ["Websites_Article"]
+			}
+		}
+	},
+	"Websites": {
+		"seoReload": true
+	}
+}

@@ -1,0 +1,624 @@
+<?php
+
+/**
+ * Interface that an adapter must support
+ * to implement the Db class.
+ * @package Db
+ */
+
+interface iDb_Query
+{
+	/**
+	 * Constructor
+	 *
+	 * @param iDb $db
+	 *  The database connection
+	 * @param int $type
+	 *  The type of the query. See class constants beginning with TYPE_ .
+	 * @param array $clauses
+	 *  The clauses to add to the query right away
+	 * @param array $parameters
+	 *  The parameters to add to the query right away (to be bound when executing)
+	 */
+	//function __construct (
+	//	iDb $db, 
+	//	$type, 
+	//	array $clauses = array(), 
+	//	array $parameters = array())
+
+	/**
+	 * Builds the query from the clauses
+	 */
+	function build ();
+	
+	/**
+	 * Just builds the query and returns the string that would
+	 * be sent to $pdo->prepare().
+	 * If this results in an exception, the string will contain
+	 * the exception instead.
+	 */
+	function __toString ();
+
+	/**
+	 * Gets the SQL that would be executed with the execute() method.
+	 * @param callable $callback
+	 *  If not set, this function returns the generated SQL string.
+	 *  If it is set, this function calls $callback, passing it the SQL
+	 *  string, and then returns $this, for chainable interface.
+	 * @return {string | Db_Query}
+	 *  Depends on whether $callback is set or not.
+	 */
+	function getSQL ($callback = null);
+
+	/**
+	 * Merges additional replacements over the default replacement array,
+	 * which is currently just
+	 *        array ( 
+	 *           '{$prefix}' => $conn['prefix'] 
+	 *        )
+	 *  The replacements array is used to replace strings in the SQL
+	 *  before using it. Watch out, because it may replace more than you want!
+	 *
+	 * @param array $replacements
+	 *  This must be an array.
+	 */
+	function replace(array $replacements = array());
+
+	/**
+	 * You can bind more parameters to the query manually using this method.
+	 * These parameters are bound in the order they are passed to the query.
+	 * Here is an example:
+	 * $result = $db->select('*', 'foo')
+	 *  ->where(array('a' => $a))
+	 *  ->andWhere('a = :moo')
+	 *  ->bind(array('moo' => $moo))
+	 *  ->execute();
+	 * 
+	 * @param array $parameters
+	 *  An associative array of parameters. The query should contain :name,
+	 *  where :name is a placeholder for the parameter under the key "name".
+	 *  The parameters will be properly escaped.
+	 *  You can also have the query contain question marks (the binding is
+	 *  done using PDO), but then the order of the parameters matters.
+	 * @return {iDb_Query}
+	 *  The resulting object implementing iDb_Query
+	 *  You can use it to chain the calls together.
+	 */
+	function bind(array $parameters = array());
+	
+	/**
+	 * Executes a query against the database and returns the result set.
+	 * 
+	 * @param $prepare_statement
+	 *  Defaults to false. If true, a PDO statement will be prepared
+	 *  from the query before it is executed. It is also saved for
+	 *  future invocations to use.
+	 *  Do this only if the statement will be executed many times with
+	 *  different parameters. Basically you would use ->bind(...) between 
+	 *  invocations of ->execute().
+	 *
+	 * @return {Db_Result}
+	 *  The Db_Result object containing the PDO statement that resulted
+	 *  from the query.
+	 */
+	function execute ($prepare_statement = false);
+	
+	/**
+	 * Begins a transaction right before executing this query.
+	 * The reason this method is part of the query class is because
+	 * you often need the "where" clauses to figure out which database to send it to,
+	 * if sharding is being used.
+	 */
+	function begin();
+	
+	/**
+	 * Rolls back a transaction right before executing this query.
+	 * The reason this method is part of the query class is because
+	 * you often need the "where" clauses to figure out which database to send it to,
+	 * if sharding is being used.
+	 */
+	function rollback();
+	
+	/**
+	 * Commits a transaction right after executing this query.
+	 * The reason this method is part of the query class is because
+	 * you often need the "where" clauses to figure out which database to send it to,
+	 * if sharding is being used.
+	 */
+	function commit();
+	
+	/**
+	 * Creates a query to select fields from one or more tables.
+	 *
+	 * @param string|array $fields 
+	 *  The fields as strings, or array of alias=>field
+	 * @param string|array $tables
+	 *  The tables as strings, or array of alias=>table
+	 * @param bool $reuse
+	 *  If $tables is an array, and select() has
+	 *  already been called with the exact table name and alias
+	 *  as one of the tables in that array, then
+	 *  this table is not appended to the tables list if
+	 *  $reuse is true. Otherwise it is. $reuse is true by default.
+	 *  This is really just for using in your hooks.
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function select ($fields, $tables = '', $reuse = true);
+
+	/**
+	 * Joins another table to use in the query
+	 *
+	 * @param string $table
+	 *  The name of the table. May also be "name AS alias".
+	 * @param Db_Expression|array|string $condition
+	 *  The condition to join on. Thus, JOIN table ON ($condition)
+	 * @param string $join_type
+	 *  The string to prepend to JOIN, such as 'INNER', 'LEFT OUTER', etc.
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function join ($table, $condition, $join_type = 'INNER');
+
+	/**
+	 * Adds a WHERE clause to a query
+	 *
+	 * @param Db_Expression|array $criteria
+	 *  An associative array of expression => value pairs. 
+	 *  The values are automatically escaped using PDO placeholders.
+	 *  Or, this could be a Db_Expression object.
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function where ($criteria);
+
+	/**
+	 * Adds to the WHERE clause, like this:   ... AND (x OR y OR z),
+	 * where x, y and z are the arguments to this function.
+	 *
+	 * @param Db_Expression|string $criteria
+	 * @param Db_Expression|string $or_criteria
+	 * @return {Db_Query}
+	 *  The resulting object implementing iDb_Query
+	 *  You can use it to chain the calls together.
+	 */
+	function andWhere ($criteria, $or_criteria = null);
+
+	/**
+	 * Adds to the WHERE clause, like this:   ... OR (x AND y AND z),
+	 * where x, y and z are the arguments to this function.
+	 *
+	 * @param Db_Expression|string $criteria
+	 * @param Db_Expression|string $and_criteria
+	 * @return {Db_Query}
+	 *  The resulting object implementing iDb_Query
+	 *  You can use it to chain the calls together.
+	 */
+	function orWhere ($criteria, $and_criteria = null);
+
+	/**
+	 * Adds a GROUP BY clause to a query
+	 *
+	 * @param Db_Expression|string $expression
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function groupBy ($expression);
+
+	/**
+	 * Adds a HAVING clause to a query
+	 *
+	 * @param Db_Expression|array $criteria
+	 *  An associative array of expression => value pairs.
+	 *  The values are automatically escaped using PDO placeholders.
+	 *  Or, this could be a Db_Expression object.
+	 * @return {Db_Query}
+	 *  The resulting object implementing iDb_Query
+	 *  You can use it to chain the calls together.
+	 */
+	function having ($criteria);
+
+	
+	/**
+	 * Adds an ORDER BY clause to the query
+	 *
+	 * @param Db_Expression|string $expression
+	 *  A string or Db_Expression with the expression to order the results by.
+	 * @param bool $ascending
+	 *  If false, sorts results as ascending, otherwise descending.
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function orderBy ($expression, $ascending = true);
+
+	/**
+	 * Adds optional LIMIT and OFFSET clauses to the query
+	 *
+	 * @param int $limit
+	 *  A non-negative integer showing how many rows to return
+	 * @param int $offset
+	 *  Optional. A non-negative integer showing what row to start the result set with.
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function limit ($limit, $offset = null);
+
+	
+	/**
+	 * Adds a SET clause to an UPDATE statement
+	 *
+	 * @param array $updates
+	 *  An associative array of column => value pairs. 
+	 *  The values are automatically escaped using PDO placeholders.
+	 * @return {Db_Query}
+	 *  The resulting Db_Query object
+	 */
+	function set (array $updates);
+
+	/**
+	 * Fetches an array of database rows matching the query.
+	 * If this exact query has already been executed and
+	 * fetchAll() has been called on the Db_Result, and
+	 * the return value was cached by the Db_Result, then
+	 * that cached value is returned.
+	 * Otherwise, the query is executed and fetchAll()
+	 * is called on the result.
+	 * 
+	 * See http://us2.php.net/manual/en/pdostatement.fetchall.php
+	 * for documentation.
+	 * 
+	 * @return {array}
+	 */
+	function fetchAll(
+		$fetch_style = PDO::FETCH_BOTH, 
+		$column_index = null,
+		array $ctor_args = array());
+		
+	/**
+	 * Fetches an array of Db_Row objects.
+	 * If this exact query has already been executed and
+	 * fetchAll() has been called on the Db_Result, and
+	 * the return value was cached by the Db_Result, then
+	 * that cached value is returned.
+	 * Otherwise, the query is executed and fetchDbRows()
+	 * is called on the result.
+	 * 
+	 * @param string $class_name
+	 *  The name of the class to instantiate and fill objects from.
+	 *  Must extend Db_Row.
+	 * @param string $fields_prefix
+	 *  This is the prefix, if any, to strip out when fetching the rows.
+	 * @return {array}
+	 */
+	function fetchDbRows(
+		$class_name = 'Db_Row', 
+		$fields_prefix = '');
+
+	/**
+	 * Adds an ON DUPLICATE KEY UPDATE clause to an INSERT statement.
+	 * Use only with MySQL.
+	 *
+	 * @param array $updates
+	 *  An associative array of column => value pairs. 
+	 *  The values are automatically escaped using PDO placeholders.
+	 * @return {Db_Query}
+	 */
+	function onDuplicateKeyUpdate ($updates);
+
+	/**
+	 * This function provides an easy way to provide additional clauses to the query.
+	 * @param array $options
+	 *  An associative array of key => value pairs, where the key is 
+	 *  the name of the method to call, and the value is the array of arguments. 
+	 *  If the value is not an array, it is wrapped in one.
+	 */
+	function options ($options);
+
+};
+
+
+/**
+ * This class lets you create and use Db queries.
+ */
+
+abstract class Db_Query extends Db_Expression
+{	
+	/**#@+
+	 * Types of queries available right now
+	 */
+	const TYPE_RAW = 1;
+	const TYPE_SELECT = 2;
+	const TYPE_INSERT = 3;
+	const TYPE_UPDATE = 4;
+	const TYPE_DELETE = 5;
+	/**#@-*/
+	
+	function copy()
+	{
+		// We only have to do a shallow copy of the object,
+		// because all its properties are arrays, and PHP will copy-on-write
+		// them when we modify them in the copy.
+		return clone($this);
+	}
+	
+	/**
+	 * Analyzes the query's criteria and decides where to execute the query
+	 * @return {array}
+	 *  Returns an array of $shardName => $query pairs, where $shardName
+	 *  can be the name of a shard, or "*" to have the query run on all the shards.
+	 */
+	function shard()
+	{
+		if (!$this->className) {
+			return array("" => $this);
+		}
+		$conn_name = $this->db->connectionName();
+		$class_name = substr($this->className, strlen($conn_name)+1);
+		$index = Q_Config::get('Db', 'connections', $conn_name, 'indexes', $class_name, false);
+		if (!$index) {
+			return array("" => $this);
+		}
+		if (empty($this->criteria)) {
+			return array("*" => $this);
+		}
+		if (empty($index['fields'])) {
+			throw new Exception("Db_Query: index for {$this->className} should have at least one field");
+		}
+		if (!isset($index['partition'])) {
+			return array("" => $this);
+		}
+		$hashed = array();
+		$missing = 0;
+		foreach ($index['fields'] as $field) {
+			if (!isset($this->criteria[$field])) {
+				// this dimension is not set. we shall include all shards in this dimension
+				// in other dimensions we may be more lucky and manage to shorten shard list
+				$missing += 1;
+				continue; 
+			}
+			$value = $this->criteria[$field];
+			$hash = isset($index['hashes'][$field]) ? $index['hashes'][$field] : 'md5';
+			if (is_array($value)) {
+				$arr = array();
+				foreach ($value as $v) {
+					$arr[] = self::applyHash($v, $hash);
+				}
+				$hashed[$field] = $arr;
+			} else if ($value instanceof Db_Range) {
+				if ($hash !== 'normalize') {
+					throw new Exception("Db_Query: ranges don't work with $hash hash");
+				}
+				$hashed_min = self::applyHash($value->min);
+				$hashed_max = self::applyHash($value->max);
+				$hashed[$field] = new Db_Range(
+					$hashed_min, $value->includeMin, $value->includeMax, $hashed_max
+				);
+			} else {
+				$hashed[$field] = self::applyHash($value, $hash);
+			}
+		}
+		if ($missing === count($index['fields']))
+			// none of the dimensions is touched by the query. We shall query ALL shards
+			return array("*" => $this);
+		else
+			// let's get short list of the shards
+			return $this->shard_internal($index, $hashed);
+	}
+	
+	private static function applyHash($value, $hash = 'normalize')
+	{
+		$parts = explode('%', $hash);
+		$len = isset($parts[1]) ? $parts[1] : 7;
+		switch ($parts[0]) {
+			case 'normalize':
+				$hashed = substr(Db::normalize($value), 0, $len);
+				break;
+			case 'md5':
+				$hashed = substr(md5($value), 0, $len);
+				break;
+			default:
+				throw new Exception("Db_Query: The hash $hash is not supported");
+		}
+		return $hashed;
+	}
+	
+	/**
+	 * does a depth first search
+	 * and returns the array of shardname => $query pairs
+	 * corresponding to which shards are affected
+	 */
+	private function shard_internal($index, $hashed)
+	{
+		// final result
+		$result = array();
+		// result candidates
+		$maybe = array();
+		// complete list of fields
+		$fields = $index['fields'];
+		$partition = array();
+		$last_point = '';
+		
+		// let's get highest value by the first field.
+		// we can skip partitions after such value
+		$max = null;
+		if (isset($hashed[$fields[0]])) {
+			$hj = $hashed[$fields[0]];
+			$max = '';
+			if (is_array($hj)) {
+				foreach($hj as $h)
+					if (strcmp($h, $max) > 0) $max = $h;
+			} else 
+				if ($hj instanceof Db_Range) $max = $hj->max;
+				else $max = $hj;
+		}
+		
+		foreach ($index['partition'] as $i => $point) {
+			// let's forget about $j. We use $fuelds and if some field is not set - include all
+			$points = explode('.', $point);
+			if (isset($max)) {
+			 	if (strcmp($points[0], $max) > 0) break; // no valid shards after this point
+			}
+			// feel free to skip some fields at the end of points line
+			// $partition[$i] shall contain complete set of field => point values
+			$points = array_pad($points, count($fields) - count($points), '');
+			$partition[$i] = array_combine($fields, $points);
+			if (strcmp($point, $last_point) <= 0) {
+				throw new Exception("Db_Query: in {$this->className} partition, point $i is not greater than the previous point");
+			}
+			$last_point = $point;
+		}
+
+		// it's not enough to controll only next_point_already_greater or point_already_smaller
+		// code shall be able to keep track of ..._alredy_... variables per partition and thus they shall be
+		// kind of stack
+		// we imitate next_point_already_greater with $head array
+		// $head array at any iteration will contain the set of fields which cannot be checked right away
+		$head = $fields;
+		// and point_already_smaller is imitated with $tail array and contain all fields not included to $head
+		// when $tail loop starts $tail shall contain all fields starting from first field wich increases
+		$tail = array();
+		
+		// let's go trough all partitions. partitions lines are lineary ordered and for some $j ($field)
+		// if $j remains unchanged $j+1 increases. We keep in $head all fields which remain unchanged and
+		// in $tail all other fields where first will increase on next step
+		foreach ($index['partition'] as $i => $point) {
+			
+			if (!isset($partition[$i])) break; // nothing to search anymore
+			
+			// The "mapping" array in the $index is optional.
+			// Shards are named after their points, unless mapping maps them otherwise.
+			$shard = isset($index['mapping'][$point]) ? $index['mapping'][$point] : $point;
+
+			if (!empty($result[$shard])) continue; // this shard was already added
+			
+			// the for $j loop now is split in two loops - by $head and by $tail
+			
+			// in $head loop we check if for some field next point is greater that current,
+			// we keep in $head only previous fields and move other fields including currect to $tail
+			foreach ($head as $j => $field) {
+				$current = $partition[$i][$field];
+				$next = isset($partition[$i+1][$field]) ? $partition[$i+1][$field] : null;
+				// we are interested in case when $current < $next
+				// if they are equal or $next is null go to the next field
+				// also we have a chance to return to our candidates
+				if (!isset($next) || strcmp($current, $next) < 0) {
+					// time to check previous found candidates
+					foreach ($maybe as $s => &$k) {
+						if ($j <= $k) { // current break is earlier than happened for $maybe
+							// we check only at break point
+							if (isset($hashed[$field]) && self::check_range($hashed[$field], $current, $next))
+								// if check fails - definitely NO
+								unset($maybe[$s]);
+							else if (($k = $j) == 0) {
+								// if check passed say YES only if we checked all fields
+								$result[$s] = $this;
+								unset($maybe[$s]);
+							}
+						}
+					}
+					break;
+				}
+				else $j += 1;
+			}
+			// now $field is the point on which first increase happen i.e. $current < $next
+			// let's move all $head members starting from current to $tail
+			$tail = array_merge(array_splice($head, $j), $tail);
+			
+			// now $tail loop contains all fields which need to be checked
+			// also, first $tail element is strictly lower that next one
+			// let's test this point, whose parts are stored in $point = $partition[$i]
+			
+			$disqualify = false;
+			
+			foreach ($tail as $j => $field) {
+				
+				// here is how these tests will work:
+				// 1) see if the range [current, next), which is a
+				//     half-open interval including current but not next
+				//    doesn't intersect the criteria at all. If so, disqualify the point.
+				// 2) if the point hasn't been disqualified by the time we reach the end
+				//     of this loop, then add its shard
+				
+				$current = $partition[$i][$field];
+				$next = isset($partition[$i+1][$field]) ? $partition[$i+1][$field] : null;
+				
+				// no hashed information means criteria for this field is not defined i.e. always included
+				// this $field is approved
+				if (!isset($hashed[$field])) continue;
+				
+				if ($disqualify = self::check_range($hashed[$field], $current, $next)) break;
+				
+				// WOW! this coordinate has passed all checks - keep looping
+			}
+			// we have checked $tail elements. If $disqualify is true skip this shard
+			// If $disqualify is false - we have found the shard and all fields from $tail satisfy all checks
+			if (!$disqualify) {
+				if (!empty($head)) {
+					// we have checked the $tail but we don't know for sure about $head
+					$maybe[$shard] = $j;
+				} else
+					// $head is empty - all checks were done
+					$result[$shard] = $this;
+			}
+			// reset arrays and start over
+			$head = $fields;
+			$tail = array();
+		}
+		// at this moment $maybe is empty
+		return $result;
+	}
+	
+	private static function check_range($hj, $current, $next) {
+
+		// on each field if $current < $next we perform all tests
+		// remember, we started the loop in such situation!
+		// If $current > $next - we have found the matching shard!
+		// current tested value satisfies all conditions for $head fields
+		// and we have tested at least one field from $tail.
+		// Now for current and next fields we have nothing to test
+		if (isset($next) && strcmp($current, $next) > 0) $next = null;
+		
+		// let's run the checks
+		if (is_array($hj)) {
+			$found = false;
+			foreach ($hj as $h) {
+				if (strcmp($current, $h) <= 0 && (!isset($next) || strcmp($h, $next) < 0)) {
+					// current point in checked interval - stop array checks
+					$found = true;
+					break;
+				}
+			}
+			if (!$found) return true; // none of the array members are contained in this shard - test failed
+		} else {
+			// we consider point as collapsed array
+			$min = $max = $hj;
+			$includeMax = true;
+			if ($hj instanceof Db_Range) {
+				$min = $hj->min;
+				$max = $hj->max;
+				$includeMax = $hj->includeMax;
+			}
+			// here we compare the intersection of two ranges
+			// by testing if the min is < the max (or <= depending on includeMax)
+			// This reminds me of a column I wrote 12 years ago:
+			// http://www.flipcode.com/archives/Theory_Practice-Issue_01_Collision_Detection.shtml
+			// wow, time flies :)
+			
+			// check if point interval and range intersect (min1 < max2 && min2 < max1) 
+
+			// for all intervals - make sure upper bound of the range is greater than $current
+			// if the interval lower bound ($current) is above upper bound of the range - skip to next $i
+			if ($includeMax ? strcmp($max, $current) < 0 : strcmp($max, $current) <= 0) return true;
+
+			// if interval is not last and $next is meaningful check lover bound
+			if (isset($next)) {
+				// already checked upper bound and it's not the last interval
+				if (strcmp($min, $next) >= 0) return true;
+			}
+		}
+		return false;
+	}
+
+	static $cache = array();
+
+}
