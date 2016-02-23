@@ -1256,7 +1256,7 @@ abstract class Users extends Base_Users
 		if (empty($directory)) {
 			$app = Q_Config::expect('Q', 'app');
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
-				.DS.$user->id.DS.'icon'.DS.'imported';
+				.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'imported';
 		}
 		if (empty($urls)) {
 			return $directory;

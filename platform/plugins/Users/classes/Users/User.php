@@ -60,7 +60,13 @@ class Users_User extends Base_Users_User
 	 */
 	function iconUrl($basename = null)
 	{
-		return Users::iconUrl(isset($this->icon) ? $this->icon : 'default', $basename);
+		$replacements = array(
+			'userId' => Q_Utils::splitId($this->id)
+		);
+		return Users::iconUrl(
+			isset($this->icon) ? Q::interpolate($this->icon, $replacements) : 'default', 
+			$basename
+		);
 	}
 
 	/**

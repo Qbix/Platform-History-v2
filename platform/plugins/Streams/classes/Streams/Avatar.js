@@ -49,7 +49,7 @@ Streams_Avatar.prototype.displayName = function _Avatar_prototype_displayName (o
 	var fn = this.fields.firstName;
 	var ln = this.fields.lastName;
 	var u = this.fields.username;
-	var fn2, ln2, u2;
+	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
 		fn = fn.encodeHTML();

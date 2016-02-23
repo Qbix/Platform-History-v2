@@ -1211,7 +1211,7 @@ Streams.invitationsPath = function _Streams_invitationsPath(userId) {
 	);
 	return Q.app.FILES_DIR + '/' + subpath.interpolate({
 		app: Q.Config.expect(['Q', 'app'])
-	}) + '/' + userId;
+	}) + '/' + Q.Utils.splitId(userId);
 };
 
 /**

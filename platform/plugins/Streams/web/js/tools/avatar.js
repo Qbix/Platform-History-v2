@@ -150,7 +150,7 @@ Q.Tool.define("Users/avatar", function(options) {
 			state.avatar = avatar;
 			if (state.icon) {
 				fields = Q.extend({}, state.templates.icon.fields, {
-					src: Q.url(Users.iconUrl(this.icon, state.icon), null)
+					src: Q.url(Users.iconUrl(this.fields.icon, state.icon), null)
 				});
 				Q.Template.render('Users/avatar/icon', fields, 
 				function (err, html) {
@@ -228,7 +228,7 @@ Q.Tool.define("Users/avatar", function(options) {
 							path: 'uploads/Users',
 							preprocess: function (callback) {
 								callback({
-									subpath: state.userId+'/icon/'
+									subpath: state.userId.splitId()+'/icon/'
 										+Math.floor(Date.now()/1000)
 								});
 							},

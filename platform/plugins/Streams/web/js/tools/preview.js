@@ -359,10 +359,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 							if (parts[1] === 'Users') {
 								// uploading a user icon
 								path = 'uploads/Users';
-								subpath = state.publisherId + '/icon';
+								subpath = state.publisherId.splitId() + '/icon';
 							} else { // uploading a regular stream icon
 								path = 'uploads/Streams';
-								subpath = state.publisherId + '/'
+								subpath = state.publisherId.splitId() + '/'
 									+ state.streamName + '/icon';
 							}
 							subpath += '/'+Math.floor(Date.now()/1000);

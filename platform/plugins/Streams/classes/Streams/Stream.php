@@ -1740,7 +1740,10 @@ class Streams_Stream extends Base_Streams_Stream
 	function iconUrl($basename = null)
 	{
 		if (empty($this->icon)) return null;
-		$url = Q::interpolate($this->icon, array('baseUrl' => Q_Request::baseUrl()));
+		$url = Q::interpolate($this->icon, array(
+			'baseUrl' => Q_Request::baseUrl(),
+			'publisherId' => Q_Utils::splitId($this->publisherId)
+		));
 		$url = (Q_Valid::url($url))
 			? $url
 			: "plugins/Streams/img/icons/$url";

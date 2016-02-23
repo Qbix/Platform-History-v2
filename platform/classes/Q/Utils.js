@@ -90,7 +90,7 @@ Utils.validate = function (req, res, next) {
 		res.send(JSON.stringify({errors: "Invalid signature"}), 403); // forbidden
 	}
 };
-
+	
 function ksort(obj) {
 	var i, sorted = {}, keys = Object.keys(obj);
 	keys.sort();
@@ -99,10 +99,10 @@ function ksort(obj) {
 }
 
 function urlencode (str) {
-    // http://kevin.vanzonneveld.net
-    str = (str + '').toString();
-    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
-    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
+	// http://kevin.vanzonneveld.net
+	str = (str + '').toString();
+	return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
+	replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
 }
 
 function http_build_query (formdata, numeric_prefix, arg_separator) {
@@ -180,7 +180,7 @@ var smtpTransport = null;
 Utils.sendEmail = function (to, subject, view, fields, options, callback) {
 	var mailer = require('nodemailer'),
 //		mustache = require('mustache'),
-        handlebars = require('handlebars'),
+		handlebars = require('handlebars'),
 		key = Q.Config.get(['Users', 'email', 'log', 'key'], 'email');
 
 	if (typeof fields === 'function') {
@@ -711,8 +711,8 @@ Utils.listen = function(callback) {
 	var server = Q.listen();
 	server.attahed.express.post('/Db/Shards', function Shards_split_handler (req, res, next) {
 		var parsed = req.body;
-        if (!parsed || !parsed['Q/method']) return next();
-        switch (parsed['Q/method']) {
+		if (!parsed || !parsed['Q/method']) return next();
+		switch (parsed['Q/method']) {
 			case 'split':
 				if (Q.Config.get(['Db', 'upcoming', _connection, 'shard'], null) === null) {
 					Q.time("Db/Shards/split");
@@ -1203,5 +1203,27 @@ function _dump_log (phase, onsuccess) {
 			onsuccess && onsuccess();
 		}); // on 'end'
 }
+
+/**
+ * Used to split ids into one or more segments, in order to store millions
+ * of files under a directory, without running into limits of various filesystems
+ * on the number of files in a directory.
+ * Consider using Amazon S3 or another service for uploading files in production.
+ * @method splitId
+ * @static
+ * @param {string} id the id to split
+ * @param {integer} [lengths=3] the lengths of each segment (the last one can be smaller)
+ * @param {string} [delimiter='/'] the delimiter to put between segments
+ * @return {string} the segments, delimited by the delimiter
+ */
+Utils.splitId = function(id, lengths, delimiter) {
+	lengths = lengths || 3;
+	delimiter = delimiter || '/';
+	var segments = [], pos = 0, len = id.length;
+	while (pos < len) {
+		segments.push(id.slice(pos, pos += lengths));
+	}
+	return segments.join(delimiter);
+};
 
 module.exports = Utils;

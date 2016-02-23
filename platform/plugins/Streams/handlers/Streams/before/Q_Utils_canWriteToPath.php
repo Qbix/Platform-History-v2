@@ -23,7 +23,8 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 		$prefix = "files/$app/uploads/Streams/";
 		$len = strlen($prefix);
 		if (substr($sp, 0, $len) === $prefix) {
-			$prefix2 = "files/$app/uploads/Streams/invitations/$userId/";
+			$splitId = Q_Utils::splitId($userId);
+			$prefix2 = "files/$app/uploads/Streams/invitations/$splitId/";
 			if ($userId and substr($sp, 0, strlen($prefix2)) === $prefix2) {
 				$result = true; // user can write any invitations here
 				return;
@@ -31,20 +32,22 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 			$parts = explode('/', substr($sp, $len));
 			$c = count($parts);
 			if ($c >= 3) {
-				$publisherId = $parts[0];
-				$l = 0;
-				for ($i=$c-1; $i>=1; --$i) {
-					$l = $i;
-					if (in_array($parts[$i], array('icon', 'file'))) {
+				$result = false;
+				for ($j=0; $j<$c-3; ++$j) {
+					$publisherId = implode('', array_slice($parts, 0, $j+1));
+					$l = $j;
+					for ($i=$c-1; $i>$j; --$i) {
+						$l = $i;
+						if (in_array($parts[$i], array('icon', 'file'))) {
+							break;
+						}
+					}
+					$name = implode('/', array_slice($parts, $j+1, $l-$j-1));
+					if ($name and $stream = Streams::fetchOne($userId, $publisherId, $name)) {
+						$result = $stream->testWriteLevel('edit');
+						Streams::$cache['canWriteToStream'] = $stream;
 						break;
 					}
-				}
-				$name = implode('/', array_slice($parts, 1, $l-1));
-				if ($name and $stream = Streams::fetchOne($userId, $publisherId, $name)) {
-					$result = $stream->testWriteLevel('edit');
-					Streams::$cache['canWriteToStream'] = $stream;
-				} else {
-					$result = false;
 				}
 			}
 		}

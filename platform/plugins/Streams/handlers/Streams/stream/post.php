@@ -54,6 +54,9 @@ function Streams_stream_post($params = array())
 		$relate['weight'] = "+1"; // TODO: introduce ways to have "1" and "+1" for some admins etc.
 	}
 	
+	// Split the id for saving files in the filesystem
+	$splitId = Q_Utils::splitId($publisherId);
+	
 	// Hold on to any icon that was posted
 	$icon = null;
 	if (!empty($req['icon']) and is_array($req['icon'])) {
@@ -94,7 +97,7 @@ function Streams_stream_post($params = array())
 			$icon['path'] = 'uploads/Streams';
 		}
 		if (empty($icon['subpath'])) {
-			$icon['subpath'] = "$publisherId/{$stream->name}/icon/".time();
+			$icon['subpath'] = "$splitId/{$stream->name}/icon/".time();
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 	}
@@ -108,7 +111,7 @@ function Streams_stream_post($params = array())
 			$file['path'] = 'uploads/Streams';
 		}
 		if (empty($file['subpath'])) {
-			$file['subpath'] = "$publisherId/{$stream->name}/file/".time();
+			$file['subpath'] = "$splitId/{$stream->name}/file/".time();
 		}
 		Q_Response::setSlot('file', Q::event("Q/file/post", $file));
 	}

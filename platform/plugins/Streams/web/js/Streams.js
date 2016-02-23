@@ -2939,7 +2939,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var fn = this.fields.firstName;
 	var ln = this.fields.lastName;
 	var u = this.fields.username;
-	var fn2, ln2, u2;
+	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
 		fn = fn.encodeHTML();
@@ -2986,7 +2986,9 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
  * @return {String} the url
  */
 Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
-	return Users.iconUrl(this.fields.icon, size);
+	return Users.iconUrl(this.fields.icon.interpolate({
+		'userId': this.fields.publisherId.splitId()
+	}), size);
 };
 
 /**

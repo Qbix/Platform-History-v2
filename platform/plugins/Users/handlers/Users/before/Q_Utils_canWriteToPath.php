@@ -20,7 +20,10 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	$paths = array();
 	foreach ($subpaths as $subpath => $can_write) {
 		if (!$can_write) continue;
-		$subpath = Q::interpolate($subpath, array('userId' => $user->id, 'app' => $app));
+		$subpath = Q::interpolate($subpath, array(
+			'userId' => Q_Utils::splitId($user->id),
+			'app' => $app
+		));
 		if ($subpath and ($subpath[0] !== '/' or $subpath[0] !== DS)) {
 			$subpath = DS.$subpath;
 		}

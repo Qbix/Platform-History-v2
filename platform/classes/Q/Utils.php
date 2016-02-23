@@ -906,5 +906,22 @@ class Q_Utils
 		}
 	}
 	
+	/**
+	 * Used to split ids into one or more segments, in order to store millions
+	 * of files under a directory, without running into limits of various filesystems
+	 * on the number of files in a directory.
+	 * Consider using Amazon S3 or another service for uploading files in production.
+	 * @method splitId
+	 * @static
+	 * @param {string} $id the id to split
+	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
+	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
+	 * @return {string} the segments, delimited by the delimiter
+	 */
+	static function splitId($id, $lengths = 3, $delimiter = DIRECTORY_SEPARATOR)
+	{
+		return implode($delimiter, str_split($id, $lengths));
+	}
+	
 	protected static $urand;
 }
