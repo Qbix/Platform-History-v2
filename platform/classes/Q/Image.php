@@ -156,8 +156,8 @@ class Q_Image
 		if ($maxW and $iw > $maxW) {
 			throw new Q_Exception("Uploaded image width exceeds $maxW");
 		}
-		if ($maxH and $iw > $maxH) {
-			throw new Q_Exception("Uploaded image width exceeds $maxH");
+		if ($maxH and $ih > $maxH) {
+			throw new Q_Exception("Uploaded image height exceeds $maxH");
 		}
 	
 		// check whether we can write to this path, and create dirs if needed

@@ -42,14 +42,15 @@ Q.mixin(Streams_Avatar, Q.require('Base/Streams/Avatar'));
  *   @param {boolean} [options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
  *   @param {Boolean} [options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
  *   @param {Boolean} [options.escape] If true, does HTML escaping of the retrieved fields
- * @param {String} [fallback] What to return if there is no info to get displayName from.
+ * @param {String} [fallback='Someone'] What to return if there is no info to get displayName from.
  * @return {String}
  */
 Streams_Avatar.prototype.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var fn = this.fields.firstName;
 	var ln = this.fields.lastName;
 	var u = this.fields.username;
-	var fn2, ln2, u2;	
+	var fn2, ln2, u2, f2;
+	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
 		fn = fn.encodeHTML();
 		ln = ln.encodeHTML();

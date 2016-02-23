@@ -69,7 +69,7 @@ Q.Tool.define("Users/avatar", function(options) {
 		state.user = user;
 		if (state.icon) {
 			fields = Q.extend({}, state.templates.icon.fields, {
-				src: Q.Users.iconUrl(this.icon, state.icon)
+				src: this.iconUrl(state.icon)
 			});
 			Q.Template.render('Users/avatar/icon', fields, function (err, html) {
 				p.fill('icon')(html);

@@ -782,7 +782,9 @@ Users.User = function (fields) {
  * @return {String} the url
  */
 Users.User.prototype.iconUrl = function Users_User_iconUrl(size) {
-	return Users.iconUrl(this.icon, size);
+	return Users.iconUrl(this.icon.interpolate({
+		userId: this.id.splitId()
+	}), size);
 };
 
 Users.User.get = Users.get;

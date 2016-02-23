@@ -2776,7 +2776,7 @@ abstract class Streams extends Base_Streams
 		);
 		return APP_FILES_DIR
 			.DS.Q::interpolate($subpath, compact('app'))
-			.DS.$invitingUserId;
+			.DS.Q_Utils::splitId($invitingUserId);
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)

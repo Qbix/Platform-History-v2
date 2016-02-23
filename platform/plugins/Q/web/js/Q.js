@@ -335,6 +335,26 @@ Sp.startsWith = function _String_prototype_startsWith(prefix) {
 };
 
 /**
+ * Used to split ids into one or more segments, in order to store millions
+ * of files under a directory, without running into limits of various filesystems
+ * on the number of files in a directory.
+ * Consider using Amazon S3 or another service for uploading files in production.
+ * @param {string} id the id to split
+ * @param {integer} [lengths=3] the lengths of each segment (the last one can be smaller)
+ * @param {string} [delimiter='/'] the delimiter to put between segments
+ * @return {string} the segments, delimited by the delimiter
+ */
+Sp.splitId = function(lengths, delimiter) {
+	lengths = lengths || 3;
+	delimiter = delimiter || '/';
+	var segments = [], pos = 0, len = this.length;
+	while (pos < len) {
+		segments.push(this.slice(pos, pos += lengths));
+	}
+	return segments.join(delimiter);
+};
+
+/**
  * @class Function
  * @description Q extended methods for Functions
  */
