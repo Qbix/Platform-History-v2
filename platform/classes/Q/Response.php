@@ -843,7 +843,7 @@ class Q_Response
 	 * @method addTemplate
 	 * @static
 	 * @param {string} $name The location of the template file relative to the "views" folder
-	 * @param {string} [$type="handlebars"]
+	 * @param {string} [$type="handlebars"] The extension, such as 'handlebars' or 'php'
 	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned first by Q_Response::scriptLines.
