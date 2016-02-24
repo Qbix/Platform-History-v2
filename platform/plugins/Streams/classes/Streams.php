@@ -774,13 +774,15 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$fields.name=null] Here you can specify an exact name for the stream to be created. Otherwise a unique one is generated automatically.
 	 * @param {boolean} [$fields.skipAccess=false] Skip all access checks when creating and relating the stream.
 	 * @param {array} [$relate=array()]
-	 *  The user would also be authorized if the stream would be related to
-	 *  an existing category stream, in which the user has a writeLevel of at least "relate",
-	 *  and the user that would be publishing this new stream has a template for this stream type
-	 *  that is related to either the category stream or a template matching the category stream.
-	 *  To test for this, pass an array with the following keys:
-	 * @param {string} $relate.publisherId The id of the user publishing that stream, defaults to $publisherId
-	 * @param {string} $relate.streamName The name of the stream to which the new stream would be related
+	 *  Fill this out in order to relate the newly created stream to a category stream,
+	 *  and also inheritAccess from it. When using this option, a user may be authorized
+	 *  to create a stream they would otherwise not be authorized to create.
+	 *  This happens when the asUserId user has a writeLevel of at least "relate" in the
+	 *  existing category stream, and the publisherId user has a template for this stream
+	 *  type that is related to either the category stream, or a template for the
+	 *  category stream's type.
+	 * @param {string} [$relate.publisherId] The id of the user publishing the category stream, defaults to $publisherId
+	 * @param {string} [$relate.streamName] The name of the category stream
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @return {Streams_Stream|boolean} Returns the stream that was created.
