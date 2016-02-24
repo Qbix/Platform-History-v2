@@ -782,7 +782,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $relate.publisherId The id of the user publishing that stream, defaults to $publisherId
 	 * @param {string} $relate.streamName The name of the stream to which the new stream would be related
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
-	 * @param {string} [$relate.weight] To set the weight for the relation
+	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @return {Streams_Stream|boolean} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
