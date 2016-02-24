@@ -593,7 +593,7 @@ abstract class Streams extends Base_Streams
 			'publisherId' => $publisherId,
 			'streamName' => $names,
 			'ofUserId' => array('', $asUserId)
-		))->fetchDbRows();
+		))->ignoreCache()->fetchDbRows();
 
 		$labels = array();
 		foreach ($accesses as $access) {
