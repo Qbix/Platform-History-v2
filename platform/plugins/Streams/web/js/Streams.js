@@ -1954,7 +1954,7 @@ Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when another stream has been related to this stream
- * @event onRelatedFrom
+ * @event onRelatedTo
  * @static
  * @param publisherId {String} id of publisher which is publishing this stream
  * @param streamName {String} optional name of this stream
