@@ -326,7 +326,7 @@ class Q_Valid
 	 * @param {array} [$source=$_REQUEST] Where to look for the fields
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception
 	 *    on the first violation, or add them to a list.
-	 * @method require
+	 * @method requireFields
 	 * @static
 	 * @return {array} The resulting list of exceptions
 	 */

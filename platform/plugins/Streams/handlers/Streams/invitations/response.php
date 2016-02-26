@@ -22,7 +22,7 @@ function Streams_invitations_response()
 	if (!$stream->testReadLevel('content')) {
 		throw new Users_Exception_NotAuthorized();
 	}
-	$title = Q::ifset($_REQUEST, 'layout', 'title');
+	$title = Q::ifset($_REQUEST, 'title', 'Invitations');
 	$layoutKey = Q::ifset($_REQUEST, 'layout', 'default');
 	$limit = min(1000, Q::ifset($_REQUEST, 'limit', 100));
 	$offset = Q::ifset($_REQUEST, 'offset', 0);

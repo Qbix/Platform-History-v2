@@ -1954,7 +1954,7 @@ Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when another stream has been related to this stream
- * @event onRelatedFrom
+ * @event onRelatedTo
  * @static
  * @param publisherId {String} id of publisher which is publishing this stream
  * @param streamName {String} optional name of this stream
@@ -2936,9 +2936,9 @@ var Ap = Avatar.prototype;
  * @return {String}
  */
 Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
-	var fn = this.fields.firstName;
-	var ln = this.fields.lastName;
-	var u = this.fields.username;
+	var fn = this.firstName;
+	var ln = this.lastName;
+	var u = this.username;
 	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
@@ -2986,8 +2986,8 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
  * @return {String} the url
  */
 Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
-	return Users.iconUrl(this.fields.icon.interpolate({
-		'userId': this.fields.publisherId.splitId()
+	return Users.iconUrl(this.icon.interpolate({
+		'userId': this.publisherId.splitId()
 	}), size);
 };
 

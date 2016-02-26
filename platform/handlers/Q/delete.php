@@ -8,5 +8,6 @@ function Q_delete($params)
 	if (!Q::canHandle("$module/$action/delete")) {
 		throw new Q_Exception_MethodNotSupported(array('method' => 'DELETE'));
 	}
+	Q_Request::requireValidNonce();
 	return Q::event("$module/$action/delete", $params);
 }

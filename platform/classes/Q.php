@@ -789,7 +789,7 @@ class Q
 			return false;
 		}
 		$handler_name_parts = explode('/', $handler_name);
-		$function_name = implode('_', $handler_name_parts);
+		$function_name = str_replace('-', '_', implode('_', $handler_name_parts));
 		if (function_exists($function_name))
 		 	return true;
 		if ($skip_include)
@@ -836,7 +836,7 @@ class Q
 			return null;
 		}
 		$handler_name_parts = explode('/', $handler_name);
-		$function_name = implode('_', $handler_name_parts);
+		$function_name = str_replace('-', '_', implode('_', $handler_name_parts));
 		if (!is_array($params)) {
 			$params = array();
 		}

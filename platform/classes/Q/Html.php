@@ -340,14 +340,14 @@ class Q_Html
 		}
 		
 		$blank_option_html = '';
-		if (isset($includeBlank)) {
+		if (isset($includeBlank) and $includeBlank !== false) {
 			$blankCaption = is_string($includeBlank) ? $includeBlank : '';
 			if (! isset($selected) or $selected === '') {
 				$blank_option_html = '<option value="" selected="selected" disabled="disabled">' 
 				 . self::text($blankCaption) .
 				 '</option>';
 			} else {
-				$blank_option_html = '<option value="">' . $blankCaption . '</option>';
+				$blank_option_html = '<option value="" disabled="disabled">' . $blankCaption . '</option>';
 			}
 		}
 		

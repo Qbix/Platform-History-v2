@@ -4,6 +4,12 @@ function Streams_before_Q_objects()
 {
 	$token = Q_Request::special('Streams.token', null);
 	if ($token === null) return;
+	
+	static $alreadyExecuted = false;
+	if ($alreadyExecuted) {
+		return; // this can happen during e.g. Q_Response::forward()
+	}
+	$alreadyExecuted = true;
 
 	$invite = Streams_Invite::fromToken($token);
 	if (!$invite) {

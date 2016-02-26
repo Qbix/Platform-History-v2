@@ -436,8 +436,28 @@ Date.now = function _Date_now() {
 	return new Date().getTime();
 };
 
+/**
+ * Returns a Date from a dateTimeString
+ * @param {String} dateTimeString
+ * @return {Date}
+ */
 Date.fromDateTime = function _Date_fromDateTime(dateTimeString) {
 	return new Date(dateTimeString.replace(/-/g,"/"));
+};
+
+/**
+ * Returns a Date from a dateTimeString
+ * @param {Boolean} [dateOnly] pass true to return just the date part
+ * @return {String}
+ */
+Date.prototype.toDateTime = function _Date_toDateTime(dateOnly) {
+	return this.getFullYear() 
+		+ "-" + ('0' + (this.getMonth() + 1)).slice(-2)
+		+ "-" + ('0' + this.getDate()).slice(-2)
+		+ (dateOnly ? '' : ' '
+			+ ('0' + this.getHours()).slice(-2) 
+			+ ":" + ('0' + this.getMinutes()).slice(-2)
+			+ ":" + ('0' + this.getSeconds()).slice(-2));
 };
 
 function _returnFalse() { return false; }

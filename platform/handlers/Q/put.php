@@ -8,5 +8,6 @@ function Q_put($params)
 	if (!Q::canHandle("$module/$action/put")) {
 		throw new Q_Exception_MethodNotSupported(array('method' => 'PUT'));
 	}
+	Q_Request::requireValidNonce();
 	return Q::event("$module/$action/put", $params);
 }

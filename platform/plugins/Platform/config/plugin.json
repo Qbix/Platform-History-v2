@@ -15,6 +15,9 @@
 				"requires": {"Q": "0.8", "Users": "0.8.2", "Streams": "0.8.2"},
 				"connections": ["Users", "Streams"]
 			}
+		},
+		"web": {
+			"requireValidNonce": ["Platform"]
 		}
 	}
 }

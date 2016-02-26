@@ -591,11 +591,6 @@ class Q_Request
 		if (isset($source["Q_$fieldname"])) {
 			return $source["Q_$fieldname"];
 		}
-		if ($qf = Q_Config::get('Q', 'web', 'queryField', false)) {
-			if (isset($source[$qf][$fieldname])) {
-				return $source[$qf][$fieldname];
-			}
-		}
 		
 		return $default;
 	}
@@ -748,7 +743,7 @@ class Q_Request
 	 * Convenience method to apply certain criteria to an array.
 	 * and call Q_Response::addError for each one.
 	 * @see Q_Valid::requireFields
-	 * @method require
+	 * @method requireFields
 	 * @static
 	 * @param {array} $fields Array of strings or arrays naming fields that are required
 	 * @return {array} The resulting list of exceptions
@@ -760,6 +755,30 @@ class Q_Request
 		$exceptions = call_user_func_array(array('Q_Valid', 'requireFields'), $args);
 		foreach ($exceptions as $e) {
 			Q_Response::addError($e);
+		}
+	}
+	
+	/**
+	 * Used called internally, by event handlers to see if the requested
+	 * URI requires a valid nonce to be submitted, to prevent CSRF attacks.
+	 * @see Q_Valid::requireValidNonce
+	 * @method requireValidNonce
+	 * @static
+	 * @throws {Q_Exception_FailedValidation}
+	 */
+	static function requireValidNonce()
+	{
+		$list = Q_Config::get('Q', 'web', 'requireValidNonce', array());
+		$uri = Q_Dispatcher::uri();
+		foreach ($list as $l) {
+			$parts = explode('/', $l);
+			if ($uri->module !== $parts[0]) {
+				continue;
+			}
+			if (isset($parts[1]) and $uri->action !== $parts[1]) {
+				continue;
+			}
+			return Q_Valid::nonce(true);
 		}
 	}
 	
