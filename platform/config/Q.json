@@ -24,7 +24,8 @@
 			}
 		},
 		"web": {
-			"ignoreUserAbort": true
+			"ignoreUserAbort": true,
+			"requireValidNonce": []
 		},
 		"response": {
 			"isBuffered": true

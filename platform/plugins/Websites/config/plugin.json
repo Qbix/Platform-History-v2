@@ -14,6 +14,9 @@
 			"Q/responseExtras": ["Websites/before/Q_responseExtras"],
 			"Streams/Stream/save/Websites/article": ["Websites/before/Streams_Stream_save_Websites_article"],
 			"Streams/Stream/save/Websites/seo": ["Websites/before/Streams_Stream_save_Websites_seo"]
+		},
+		"web": {
+			"requireValidNonce": ["Websites"]
 		}
 	},
 	"Streams": {

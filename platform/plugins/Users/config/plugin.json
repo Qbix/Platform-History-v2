@@ -41,6 +41,9 @@
 				"updatedField": "updatedTime",
 				"durationField": "duration"
 			}
+		},
+		"web": {
+			"requireValidNonce": ["Users"]
 		}
 	},
 	"Users": {

@@ -22,5 +22,6 @@ function Q_post($params)
 			}
 		}
 	}
+	Q_Request::requireValidNonce();
 	return Q::event("$module/$action/post", $params);
 }

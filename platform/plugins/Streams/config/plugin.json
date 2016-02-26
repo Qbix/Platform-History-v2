@@ -39,6 +39,9 @@
 			"plugins/Streams/:action": {"module": "Streams"},
 			"plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
 			"i/:token": {"module": "Streams", "action": "invited"}
+		},
+		"web": {
+			"requireValidNonce": ["Streams"]
 		}
 	},
 	"Users": {

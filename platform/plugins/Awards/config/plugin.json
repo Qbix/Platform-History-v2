@@ -16,6 +16,9 @@
 				"requires": {"Q": "0.8", "Streams": "0.8.2"},
 				"connections": ["Awards"]
 			}
+		},
+		"web": {
+			"requireValidNonce": ["Awards"]
 		}
 	},
 	"Streams": {
