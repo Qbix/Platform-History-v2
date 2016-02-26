@@ -591,11 +591,6 @@ class Q_Request
 		if (isset($source["Q_$fieldname"])) {
 			return $source["Q_$fieldname"];
 		}
-		if ($qf = Q_Config::get('Q', 'web', 'queryField', false)) {
-			if (isset($source[$qf][$fieldname])) {
-				return $source[$qf][$fieldname];
-			}
-		}
 		
 		return $default;
 	}

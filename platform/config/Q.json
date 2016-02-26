@@ -24,8 +24,7 @@
 			}
 		},
 		"web": {
-			"ignoreUserAbort": true,
-			"queryField": "_"
+			"ignoreUserAbort": true
 		},
 		"response": {
 			"isBuffered": true
