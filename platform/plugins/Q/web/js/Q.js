@@ -10076,8 +10076,8 @@ Q.confirm = function(message, callback, options) {
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
-			$('<button />').html(o.ok),
-			$('<button />').html(o.cancel)
+			$('<button class="Q_button" />').html(o.ok),
+			$('<button class="Q_button" />').html(o.cancel)
 		),
 		'className': 'Q_confirm',
 		'noClose': o.noClose,
