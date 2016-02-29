@@ -231,10 +231,10 @@ abstract class Base_Streams_RelatedFrom extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for fromPublisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for fromPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_fromPublisherId()
 	{
 
@@ -285,10 +285,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for fromStreamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for fromStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_fromStreamName()
 	{
 
@@ -339,10 +339,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for type column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_type()
 	{
 
@@ -393,10 +393,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for toPublisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for toPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_toPublisherId()
 	{
 
@@ -447,10 +447,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for toStreamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for toStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_toStreamName()
 	{
 
@@ -492,10 +492,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 

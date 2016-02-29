@@ -238,10 +238,10 @@ abstract class Base_Users_Device extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_userId()
 	{
 
@@ -292,10 +292,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for deviceId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for deviceId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_deviceId()
 	{
 
@@ -330,10 +330,10 @@ return array (
 		return array('platform', $value);			
 	}
 
-/**
-* Returns schema information for platform column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for platform column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_platform()
 	{
 
@@ -384,10 +384,10 @@ return array (
 		return 45;			
 	}
 
-/**
-* Returns schema information for version column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for version column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_version()
 	{
 
@@ -438,10 +438,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for sessionId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for sessionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_sessionId()
 	{
 
@@ -479,10 +479,10 @@ return array (
 		return array('formFactor', $value);			
 	}
 
-/**
-* Returns schema information for formFactor column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for formFactor column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_formFactor()
 	{
 
@@ -524,10 +524,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 
@@ -572,10 +572,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 

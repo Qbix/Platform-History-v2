@@ -1921,20 +1921,20 @@ EOT;
 			$columnInfo_php = var_export($columnInfo, true);
 			$columnInfo_js = json_encode($columnInfo);
 			$functions["column_$field_name"]['comment'] = <<<EOT
-$dc
-* Returns schema information for $field_name column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	$dc
+	 * Returns schema information for $field_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 EOT;
 			$functions["column_$field_name"]['args'] = '';
 			$functions["column_$field_name"]['return_statement'] = <<<EOT
 return $columnInfo_php;
 EOT;
 			$js_functions["column_$field_name"]['comment'] = <<<EOT
-$dc
-* Returns schema information for $field_name column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	$dc
+	 * Returns schema information for $field_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 EOT;
 			$js_functions["column_$field_name"]['args'] = '';
 			$js_functions["column_$field_name"]['return_statement'] = <<<EOT

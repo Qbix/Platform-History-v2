@@ -250,10 +250,10 @@ Base.prototype.maxSize_toUserId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for toUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for toUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_toUserId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
@@ -288,10 +288,10 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
@@ -310,10 +310,10 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_updatedTime = function () {
 
 return [["timestamp","31","",false],true,"",null];
@@ -348,10 +348,10 @@ Base.prototype.maxSize_username = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for username column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for username column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_username = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -386,10 +386,10 @@ Base.prototype.maxSize_firstName = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for firstName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for firstName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_firstName = function () {
 
 return [["varchar","255","",false],false,"",""];
@@ -424,10 +424,10 @@ Base.prototype.maxSize_lastName = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for lastName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for lastName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_lastName = function () {
 
 return [["varchar","255","",false],false,"",""];
@@ -462,10 +462,10 @@ Base.prototype.maxSize_icon = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for icon column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_icon = function () {
 
 return [["varchar","255","",false],false,"",null];

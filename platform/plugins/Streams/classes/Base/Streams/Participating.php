@@ -239,10 +239,10 @@ abstract class Base_Streams_Participating extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_userId()
 	{
 
@@ -293,10 +293,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_publisherId()
 	{
 
@@ -347,10 +347,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for streamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_streamName()
 	{
 
@@ -385,10 +385,10 @@ return array (
 		return array('state', $value);			
 	}
 
-/**
-* Returns schema information for state column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_state()
 	{
 
@@ -439,10 +439,10 @@ return array (
 		return 4294967295;			
 	}
 
-/**
-* Returns schema information for fresh column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for fresh column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_fresh()
 	{
 
@@ -493,10 +493,10 @@ return array (
 		return 1023;			
 	}
 
-/**
-* Returns schema information for extra column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for extra column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_extra()
 	{
 
@@ -538,10 +538,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 
@@ -583,10 +583,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 

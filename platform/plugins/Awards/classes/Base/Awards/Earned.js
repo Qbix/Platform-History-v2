@@ -239,10 +239,10 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_userId = function () {
 
 return [["varchar","31","",false],false,"MUL",null];
@@ -277,10 +277,10 @@ Base.prototype.maxSize_app = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for app column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_app = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -315,10 +315,10 @@ Base.prototype.maxSize_badge_name = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for badge_name column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for badge_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_badge_name = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -336,10 +336,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
@@ -374,10 +374,10 @@ Base.prototype.maxSize_associated_id = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for associated_id column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for associated_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_associated_id = function () {
 
 return [["varchar","255","",false],false,"",null];

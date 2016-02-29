@@ -231,10 +231,10 @@ abstract class Base_Awards_Charge extends Db_Row
 		return 255;			
 	}
 
-/**
-* Returns schema information for id column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_id()
 	{
 
@@ -285,10 +285,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_userId()
 	{
 
@@ -339,10 +339,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for subscriptionId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for subscriptionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_subscriptionId()
 	{
 
@@ -393,10 +393,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for description column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for description column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_description()
 	{
 
@@ -447,10 +447,10 @@ return array (
 		return 1023;			
 	}
 
-/**
-* Returns schema information for attributes column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for attributes column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_attributes()
 	{
 
@@ -492,10 +492,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 
@@ -537,10 +537,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 

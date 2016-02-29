@@ -235,10 +235,10 @@ Base.prototype.maxSize_identifier = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for identifier column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for identifier column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_identifier = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -273,10 +273,10 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
@@ -311,10 +311,10 @@ Base.prototype.maxSize_extraInfo = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for extraInfo column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for extraInfo column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_extraInfo = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -332,10 +332,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];

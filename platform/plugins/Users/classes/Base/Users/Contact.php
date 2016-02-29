@@ -224,10 +224,10 @@ abstract class Base_Users_Contact extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_userId()
 	{
 
@@ -278,10 +278,10 @@ return array (
 		return 63;			
 	}
 
-/**
-* Returns schema information for label column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for label column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_label()
 	{
 
@@ -332,10 +332,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for contactUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for contactUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_contactUserId()
 	{
 
@@ -386,10 +386,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for nickname column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for nickname column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_nickname()
 	{
 
@@ -431,10 +431,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 

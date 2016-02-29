@@ -254,10 +254,10 @@ abstract class Base_Streams_Message extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_publisherId()
 	{
 
@@ -308,10 +308,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for streamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_streamName()
 	{
 
@@ -353,10 +353,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 
@@ -401,10 +401,10 @@ return array (
 		return array('sentTime', $value);			
 	}
 
-/**
-* Returns schema information for sentTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for sentTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_sentTime()
 	{
 
@@ -455,10 +455,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for byUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for byUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_byUserId()
 	{
 
@@ -509,10 +509,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for byClientId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for byClientId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_byClientId()
 	{
 
@@ -563,10 +563,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for type column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_type()
 	{
 
@@ -617,10 +617,10 @@ return array (
 		return 1023;			
 	}
 
-/**
-* Returns schema information for content column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for content column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_content()
 	{
 
@@ -671,10 +671,10 @@ return array (
 		return 4092;			
 	}
 
-/**
-* Returns schema information for instructions column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for instructions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_instructions()
 	{
 
@@ -703,10 +703,10 @@ return array (
 		return array('weight', $value);			
 	}
 
-/**
-* Returns schema information for weight column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for weight column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_weight()
 	{
 
@@ -757,10 +757,10 @@ return array (
 		return 4294967295;			
 	}
 
-/**
-* Returns schema information for ordinal column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for ordinal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_ordinal()
 	{
 

@@ -245,10 +245,10 @@ Base.prototype.maxSize_app = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for app column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_app = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -283,10 +283,10 @@ Base.prototype.maxSize_name = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for name column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_name = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -321,10 +321,10 @@ Base.prototype.maxSize_title = function () {
 		return 65535;
 };
 
-/**
-* Returns schema information for title column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for title column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_title = function () {
 
 return [["text",65535,"",false],false,"",null];
@@ -359,10 +359,10 @@ Base.prototype.maxSize_pic_small = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for pic_small column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for pic_small column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_pic_small = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -397,10 +397,10 @@ Base.prototype.maxSize_pic_big = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for pic_big column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for pic_big column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_pic_big = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -432,10 +432,10 @@ Base.prototype.maxSize_points = function () {
 		return 32767;
 };
 
-/**
-* Returns schema information for points column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for points column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_points = function () {
 
 return [["smallint","4","",false],false,"","0"];

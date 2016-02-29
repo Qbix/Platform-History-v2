@@ -245,10 +245,10 @@ Base.prototype.maxSize_forType = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for forType column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for forType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_forType = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
@@ -283,10 +283,10 @@ Base.prototype.maxSize_forId = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for forId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for forId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_forId = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -318,10 +318,10 @@ Base.prototype.maxSize_voteCount = function () {
 		return 9223372036854775807;
 };
 
-/**
-* Returns schema information for voteCount column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for voteCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_voteCount = function () {
 
 return [["bigint","20","",false],false,"","0"];
@@ -342,10 +342,10 @@ Base.prototype.beforeSet_weightTotal = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for weightTotal column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for weightTotal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_weightTotal = function () {
 
 return [["decimal","10,4","",false],false,"","0.0000"];
@@ -366,10 +366,10 @@ Base.prototype.beforeSet_value = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for value column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for value column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_value = function () {
 
 return [["decimal","10,4","",false],false,"","0.0000"];
@@ -388,10 +388,10 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_updatedTime = function () {
 
 return [["timestamp","10,4","",false],true,"","CURRENT_TIMESTAMP"];

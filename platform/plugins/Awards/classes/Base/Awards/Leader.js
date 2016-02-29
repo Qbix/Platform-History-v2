@@ -236,10 +236,10 @@ Base.prototype.maxSize_app = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for app column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_app = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -257,10 +257,10 @@ Base.prototype.beforeSet_day = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for day column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for day column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_day = function () {
 
 return [["date","255","",false],false,"PRI",null];
@@ -295,10 +295,10 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
@@ -330,10 +330,10 @@ Base.prototype.maxSize_points = function () {
 		return 32767;
 };
 
-/**
-* Returns schema information for points column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for points column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_points = function () {
 
 return [["smallint","4","",false],false,"","0"];

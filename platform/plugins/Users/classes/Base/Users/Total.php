@@ -228,10 +228,10 @@ abstract class Base_Users_Total extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for forType column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for forType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_forType()
 	{
 
@@ -282,10 +282,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for forId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for forId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_forId()
 	{
 
@@ -336,10 +336,10 @@ return array (
 		return 9223372036854775807;			
 	}
 
-/**
-* Returns schema information for voteCount column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for voteCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_voteCount()
 	{
 
@@ -368,10 +368,10 @@ return array (
 		return array('weightTotal', $value);			
 	}
 
-/**
-* Returns schema information for weightTotal column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for weightTotal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_weightTotal()
 	{
 
@@ -400,10 +400,10 @@ return array (
 		return array('value', $value);			
 	}
 
-/**
-* Returns schema information for value column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for value column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_value()
 	{
 
@@ -448,10 +448,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 

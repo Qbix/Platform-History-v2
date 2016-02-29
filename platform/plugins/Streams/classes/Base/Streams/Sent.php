@@ -241,10 +241,10 @@ abstract class Base_Streams_Sent extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_publisherId()
 	{
 
@@ -295,10 +295,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for streamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_streamName()
 	{
 
@@ -340,10 +340,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 
@@ -388,10 +388,10 @@ return array (
 		return array('sentTime', $value);			
 	}
 
-/**
-* Returns schema information for sentTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for sentTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_sentTime()
 	{
 
@@ -442,10 +442,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for byUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for byUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_byUserId()
 	{
 
@@ -496,10 +496,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for comment column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for comment column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_comment()
 	{
 
@@ -550,10 +550,10 @@ return array (
 		return 4092;			
 	}
 
-/**
-* Returns schema information for instructions column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for instructions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_instructions()
 	{
 
@@ -604,10 +604,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for chatPublisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for chatPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_chatPublisherId()
 	{
 
@@ -658,10 +658,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for chatStreamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for chatStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_chatStreamName()
 	{
 

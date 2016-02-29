@@ -233,10 +233,10 @@ abstract class Base_Streams_Avatar extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for toUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for toUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_toUserId()
 	{
 
@@ -287,10 +287,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_publisherId()
 	{
 
@@ -335,10 +335,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 
@@ -389,10 +389,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for username column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for username column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_username()
 	{
 
@@ -443,10 +443,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for firstName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for firstName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_firstName()
 	{
 
@@ -497,10 +497,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for lastName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for lastName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_lastName()
 	{
 
@@ -551,10 +551,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for icon column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_icon()
 	{
 

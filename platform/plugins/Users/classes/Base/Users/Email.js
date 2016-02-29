@@ -254,10 +254,10 @@ Base.prototype.maxSize_address = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for address column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for address column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_address = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -275,10 +275,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
@@ -297,10 +297,10 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_updatedTime = function () {
 
 return [["timestamp","255","",false],true,"MUL",null];
@@ -335,10 +335,10 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_userId = function () {
 
 return [["varchar","31","",false],false,"MUL",""];
@@ -358,10 +358,10 @@ Base.prototype.beforeSet_state = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for state column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_state = function () {
 
 return [["enum","'unverified','active','suspended','unsubscribed'","",false],false,"",null];
@@ -396,10 +396,10 @@ Base.prototype.maxSize_activationCode = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for activationCode column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for activationCode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_activationCode = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -417,10 +417,10 @@ Base.prototype.beforeSet_activationCodeExpires = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for activationCodeExpires column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for activationCodeExpires column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_activationCodeExpires = function () {
 
 return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
@@ -455,10 +455,10 @@ Base.prototype.maxSize_authCode = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for authCode column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for authCode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_authCode = function () {
 
 return [["varchar","255","",false],false,"",null];

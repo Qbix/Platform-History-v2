@@ -232,10 +232,10 @@ abstract class Base_Users_Session extends Db_Row
 		return 255;			
 	}
 
-/**
-* Returns schema information for id column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_id()
 	{
 
@@ -286,10 +286,10 @@ return array (
 		return 4095;			
 	}
 
-/**
-* Returns schema information for content column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for content column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_content()
 	{
 
@@ -340,10 +340,10 @@ return array (
 		return 4095;			
 	}
 
-/**
-* Returns schema information for php column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for php column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_php()
 	{
 
@@ -394,10 +394,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for deviceId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for deviceId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_deviceId()
 	{
 
@@ -448,10 +448,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for timeout column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for timeout column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_timeout()
 	{
 
@@ -502,10 +502,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for duration column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for duration column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_duration()
 	{
 
@@ -547,10 +547,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 

@@ -278,10 +278,10 @@ abstract class Base_Streams_Stream extends Db_Row
 		return 31;			
 	}
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_publisherId()
 	{
 
@@ -332,10 +332,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for name column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_name()
 	{
 
@@ -377,10 +377,10 @@ return array (
 		return array('insertedTime', $value);			
 	}
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_insertedTime()
 	{
 
@@ -425,10 +425,10 @@ return array (
 		return array('updatedTime', $value);			
 	}
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_updatedTime()
 	{
 
@@ -479,10 +479,10 @@ return array (
 		return 63;			
 	}
 
-/**
-* Returns schema information for type column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_type()
 	{
 
@@ -533,10 +533,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for title column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for title column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_title()
 	{
 
@@ -587,10 +587,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for icon column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_icon()
 	{
 
@@ -641,10 +641,10 @@ return array (
 		return 1023;			
 	}
 
-/**
-* Returns schema information for content column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for content column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_content()
 	{
 
@@ -695,10 +695,10 @@ return array (
 		return 1023;			
 	}
 
-/**
-* Returns schema information for attributes column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for attributes column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_attributes()
 	{
 
@@ -749,10 +749,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for readLevel column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for readLevel column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_readLevel()
 	{
 
@@ -803,10 +803,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for writeLevel column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for writeLevel column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_writeLevel()
 	{
 
@@ -857,10 +857,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for adminLevel column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for adminLevel column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_adminLevel()
 	{
 
@@ -911,10 +911,10 @@ return array (
 		return 255;			
 	}
 
-/**
-* Returns schema information for inheritAccess column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for inheritAccess column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_inheritAccess()
 	{
 
@@ -965,10 +965,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for messageCount column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for messageCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_messageCount()
 	{
 
@@ -1019,10 +1019,10 @@ return array (
 		return 2147483647;			
 	}
 
-/**
-* Returns schema information for participantCount column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for participantCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_participantCount()
 	{
 
@@ -1067,10 +1067,10 @@ return array (
 		return array('closedTime', $value);			
 	}
 
-/**
-* Returns schema information for closedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for closedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_closedTime()
 	{
 

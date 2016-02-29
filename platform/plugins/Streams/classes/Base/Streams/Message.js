@@ -271,10 +271,10 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
@@ -309,10 +309,10 @@ Base.prototype.maxSize_streamName = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for streamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -330,10 +330,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
@@ -352,10 +352,10 @@ Base.prototype.beforeSet_sentTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for sentTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for sentTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_sentTime = function () {
 
 return [["timestamp","255","",false],true,"",null];
@@ -390,10 +390,10 @@ Base.prototype.maxSize_byUserId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for byUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for byUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_byUserId = function () {
 
 return [["varchar","31","",false],false,"",""];
@@ -428,10 +428,10 @@ Base.prototype.maxSize_byClientId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for byClientId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for byClientId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_byClientId = function () {
 
 return [["varchar","31","",false],false,"",""];
@@ -466,10 +466,10 @@ Base.prototype.maxSize_type = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for type column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_type = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -504,10 +504,10 @@ Base.prototype.maxSize_content = function () {
 		return 1023;
 };
 
-/**
-* Returns schema information for content column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for content column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_content = function () {
 
 return [["varchar","1023","",false],false,"",null];
@@ -542,10 +542,10 @@ Base.prototype.maxSize_instructions = function () {
 		return 4092;
 };
 
-/**
-* Returns schema information for instructions column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for instructions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_instructions = function () {
 
 return [["varchar","4092","",false],false,"",null];
@@ -566,10 +566,10 @@ Base.prototype.beforeSet_weight = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for weight column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for weight column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_weight = function () {
 
 return [["decimal","14,4","",false],false,"","1.0000"];
@@ -601,10 +601,10 @@ Base.prototype.maxSize_ordinal = function () {
 		return 4294967295;
 };
 
-/**
-* Returns schema information for ordinal column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for ordinal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_ordinal = function () {
 
 return [["int","10"," unsigned",true],false,"PRI","0"];

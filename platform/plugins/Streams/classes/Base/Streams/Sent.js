@@ -259,10 +259,10 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"MUL",""];
@@ -297,10 +297,10 @@ Base.prototype.maxSize_streamName = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for streamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_streamName = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -318,10 +318,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"MUL","CURRENT_TIMESTAMP"];
@@ -340,10 +340,10 @@ Base.prototype.beforeSet_sentTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for sentTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for sentTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_sentTime = function () {
 
 return [["timestamp","255","",false],true,"MUL",null];
@@ -378,10 +378,10 @@ Base.prototype.maxSize_byUserId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for byUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for byUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_byUserId = function () {
 
 return [["varchar","31","",false],false,"MUL",null];
@@ -416,10 +416,10 @@ Base.prototype.maxSize_comment = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for comment column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for comment column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_comment = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -453,10 +453,10 @@ Base.prototype.maxSize_instructions = function () {
 		return 4092;
 };
 
-/**
-* Returns schema information for instructions column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for instructions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_instructions = function () {
 
 return [["varchar","4092","",false],true,"",null];
@@ -491,10 +491,10 @@ Base.prototype.maxSize_chatPublisherId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for chatPublisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for chatPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_chatPublisherId = function () {
 
 return [["varchar","31","",false],false,"",""];
@@ -528,10 +528,10 @@ Base.prototype.maxSize_chatStreamName = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for chatStreamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for chatStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_chatStreamName = function () {
 
 return [["varchar","255","",false],true,"",null];

@@ -219,10 +219,10 @@ abstract class Base_Awards_Leader extends Db_Row
 		return 255;			
 	}
 
-/**
-* Returns schema information for app column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_app()
 	{
 
@@ -266,10 +266,10 @@ return array (
 		return array('day', $value);			
 	}
 
-/**
-* Returns schema information for day column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for day column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_day()
 	{
 
@@ -320,10 +320,10 @@ return array (
 		return 31;			
 	}
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_userId()
 	{
 
@@ -374,10 +374,10 @@ return array (
 		return 32767;			
 	}
 
-/**
-* Returns schema information for points column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for points column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 	function column_points()
 	{
 

@@ -256,10 +256,10 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for publisherId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
@@ -294,10 +294,10 @@ Base.prototype.maxSize_streamName = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for streamName column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",""];
@@ -332,10 +332,10 @@ Base.prototype.maxSize_ofUserId = function () {
 		return 31;
 };
 
-/**
-* Returns schema information for ofUserId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for ofUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_ofUserId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
@@ -353,10 +353,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
@@ -375,10 +375,10 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for updatedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_updatedTime = function () {
 
 return [["timestamp","31","",false],true,"",null];
@@ -397,10 +397,10 @@ Base.prototype.beforeSet_untilTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for untilTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for untilTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_untilTime = function () {
 
 return [["timestamp","31","",false],true,"",null];
@@ -435,10 +435,10 @@ Base.prototype.maxSize_filter = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for filter column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for filter column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_filter = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -470,10 +470,10 @@ Base.prototype.maxSize_duration = function () {
 		return 2147483647;
 };
 
-/**
-* Returns schema information for duration column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for duration column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_duration = function () {
 
 return [["int","11","",false],false,"","0"];

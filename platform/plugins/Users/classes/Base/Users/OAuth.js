@@ -256,10 +256,10 @@ Base.prototype.maxSize_client_id = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for client_id column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for client_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_client_id = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -294,10 +294,10 @@ Base.prototype.maxSize_userId = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for userId column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_userId = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -332,10 +332,10 @@ Base.prototype.maxSize_state = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for state column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_state = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
@@ -370,10 +370,10 @@ Base.prototype.maxSize_scope = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for scope column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for scope column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_scope = function () {
 
 return [["varchar","255","",false],false,"","user"];
@@ -408,10 +408,10 @@ Base.prototype.maxSize_redirect_uri = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for redirect_uri column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for redirect_uri column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_redirect_uri = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -446,10 +446,10 @@ Base.prototype.maxSize_access_token = function () {
 		return 255;
 };
 
-/**
-* Returns schema information for access_token column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for access_token column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_access_token = function () {
 
 return [["varchar","255","",false],false,"",null];
@@ -467,10 +467,10 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
-/**
-* Returns schema information for insertedTime column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
@@ -503,10 +503,10 @@ Base.prototype.maxSize_token_expires_seconds = function () {
 		return 2147483647;
 };
 
-/**
-* Returns schema information for token_expires_seconds column
-* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-*/
+	/**
+	 * Returns schema information for token_expires_seconds column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
 Base.prototype.column_token_expires_seconds = function () {
 
 return [["int","11","",false],true,"",null];
