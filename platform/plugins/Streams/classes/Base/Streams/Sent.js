@@ -260,6 +260,26 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_publisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => '',
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_streamName
@@ -289,6 +309,26 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
+* Returns more information for streamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_streamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -298,6 +338,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => 'CURRENT_TIMESTAMP',
+);
 };
 
 /**
@@ -311,6 +371,26 @@ Base.prototype.beforeSet_sentTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for sentTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_sentTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => 'MUL',
+  3 => NULL,
+);
 };
 
 /**
@@ -343,6 +423,26 @@ Base.prototype.maxSize_byUserId = function () {
 };
 
 /**
+* Returns more information for byUserId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_byUserId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_comment
@@ -372,6 +472,26 @@ Base.prototype.maxSize_comment = function () {
 };
 
 /**
+* Returns more information for comment column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_comment = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_instructions
@@ -397,6 +517,26 @@ Base.prototype.beforeSet_instructions = function (value) {
 Base.prototype.maxSize_instructions = function () {
 
 		return 4092;
+};
+
+/**
+* Returns more information for instructions column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_instructions = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '4092',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -429,6 +569,26 @@ Base.prototype.maxSize_chatPublisherId = function () {
 };
 
 /**
+* Returns more information for chatPublisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_chatPublisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_chatStreamName
@@ -454,6 +614,26 @@ Base.prototype.beforeSet_chatStreamName = function (value) {
 Base.prototype.maxSize_chatStreamName = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for chatStreamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_chatStreamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 module.exports = Base;

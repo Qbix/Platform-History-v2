@@ -237,6 +237,26 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_publisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_streamName
@@ -263,6 +283,26 @@ Base.prototype.beforeSet_streamName = function (value) {
 Base.prototype.maxSize_streamName = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for streamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_streamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -295,6 +335,26 @@ Base.prototype.maxSize_messageType = function () {
 };
 
 /**
+* Returns more information for messageType column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_messageType = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_messageCount
  * @param {integer} value
@@ -318,6 +378,26 @@ Base.prototype.beforeSet_messageCount = function (value) {
 Base.prototype.maxSize_messageCount = function () {
 
 		return 9223372036854775807;
+};
+
+/**
+* Returns more information for messageCount column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_messageCount = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);
 };
 
 /**

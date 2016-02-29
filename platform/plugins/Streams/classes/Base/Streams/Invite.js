@@ -280,6 +280,26 @@ Base.prototype.maxSize_token = function () {
 };
 
 /**
+* Returns more information for token column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_token = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_userId
@@ -306,6 +326,26 @@ Base.prototype.beforeSet_userId = function (value) {
 Base.prototype.maxSize_userId = function () {
 
 		return 31;
+};
+
+/**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_userId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);
 };
 
 /**
@@ -338,6 +378,26 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_publisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_streamName
@@ -364,6 +424,26 @@ Base.prototype.beforeSet_streamName = function (value) {
 Base.prototype.maxSize_streamName = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for streamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_streamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -396,6 +476,26 @@ Base.prototype.maxSize_invitingUserId = function () {
 };
 
 /**
+* Returns more information for invitingUserId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_invitingUserId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_displayName
@@ -422,6 +522,26 @@ Base.prototype.beforeSet_displayName = function (value) {
 Base.prototype.maxSize_displayName = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for displayName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_displayName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -454,6 +574,26 @@ Base.prototype.maxSize_appUrl = function () {
 };
 
 /**
+* Returns more information for appUrl column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_appUrl = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_readLevel
  * @param {integer} value
@@ -478,6 +618,26 @@ Base.prototype.beforeSet_readLevel = function (value) {
 Base.prototype.maxSize_readLevel = function () {
 
 		return 2147483647;
+};
+
+/**
+* Returns more information for readLevel column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_readLevel = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -508,6 +668,26 @@ Base.prototype.maxSize_writeLevel = function () {
 };
 
 /**
+* Returns more information for writeLevel column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_writeLevel = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_adminLevel
  * @param {integer} value
@@ -535,6 +715,26 @@ Base.prototype.maxSize_adminLevel = function () {
 };
 
 /**
+* Returns more information for adminLevel column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_adminLevel = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
  * @param {string} value
@@ -546,6 +746,26 @@ Base.prototype.beforeSet_state = function (value) {
 		if (['pending','accepted','declined','forwarded','expired','claimed'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
 		return value;
+};
+
+/**
+* Returns more information for state column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_state = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'pending',
+);
 };
 
 /**
@@ -561,6 +781,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_expireTime
  * @param {String} value
@@ -571,6 +811,26 @@ Base.prototype.beforeSet_expireTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for expireTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_expireTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**

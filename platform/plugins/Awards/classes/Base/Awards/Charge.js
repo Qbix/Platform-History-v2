@@ -250,6 +250,26 @@ Base.prototype.maxSize_id = function () {
 };
 
 /**
+* Returns more information for id column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_id = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_userId
@@ -276,6 +296,26 @@ Base.prototype.beforeSet_userId = function (value) {
 Base.prototype.maxSize_userId = function () {
 
 		return 31;
+};
+
+/**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_userId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -308,6 +348,26 @@ Base.prototype.maxSize_subscriptionId = function () {
 };
 
 /**
+* Returns more information for subscriptionId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_subscriptionId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_description
@@ -334,6 +394,26 @@ Base.prototype.beforeSet_description = function (value) {
 Base.prototype.maxSize_description = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for description column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_description = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -366,6 +446,26 @@ Base.prototype.maxSize_attributes = function () {
 };
 
 /**
+* Returns more information for attributes column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_attributes = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -378,6 +478,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
  * @param {String} value
@@ -387,6 +507,26 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for updatedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_updatedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0000-00-00 00:00:00',
+);
 };
 
 Base.prototype.beforeSave = function (value) {

@@ -254,6 +254,26 @@ Base.prototype.maxSize_toPublisherId = function () {
 };
 
 /**
+* Returns more information for toPublisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_toPublisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_toStreamName
@@ -280,6 +300,26 @@ Base.prototype.beforeSet_toStreamName = function (value) {
 Base.prototype.maxSize_toStreamName = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for toStreamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_toStreamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -312,6 +352,26 @@ Base.prototype.maxSize_type = function () {
 };
 
 /**
+* Returns more information for type column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_type = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_fromPublisherId
@@ -338,6 +398,26 @@ Base.prototype.beforeSet_fromPublisherId = function (value) {
 Base.prototype.maxSize_fromPublisherId = function () {
 
 		return 31;
+};
+
+/**
+* Returns more information for fromPublisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_fromPublisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -370,6 +450,26 @@ Base.prototype.maxSize_fromStreamName = function () {
 };
 
 /**
+* Returns more information for fromStreamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_fromStreamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_weight
  * @param {integer} value
@@ -385,6 +485,26 @@ Base.prototype.beforeSet_weight = function (value) {
 };
 
 /**
+* Returns more information for weight column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_weight = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '14,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '1.0000',
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -394,6 +514,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '14,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
 };
 
 /**

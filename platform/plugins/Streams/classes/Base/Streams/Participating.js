@@ -257,6 +257,26 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_userId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_publisherId
@@ -283,6 +303,26 @@ Base.prototype.beforeSet_publisherId = function (value) {
 Base.prototype.maxSize_publisherId = function () {
 
 		return 31;
+};
+
+/**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_publisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -315,6 +355,26 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
+* Returns more information for streamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_streamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
  * @param {string} value
@@ -326,6 +386,26 @@ Base.prototype.beforeSet_state = function (value) {
 		if (['invited','participating','left'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
 		return value;
+};
+
+/**
+* Returns more information for state column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_state = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'invited\',\'participating\',\'left\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -352,6 +432,26 @@ Base.prototype.beforeSet_fresh = function (value) {
 Base.prototype.maxSize_fresh = function () {
 
 		return 4294967295;
+};
+
+/**
+* Returns more information for fresh column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_fresh = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '10',
+    2 => ' unsigned',
+    3 => true,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);
 };
 
 /**
@@ -384,6 +484,26 @@ Base.prototype.maxSize_extra = function () {
 };
 
 /**
+* Returns more information for extra column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_extra = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '{}',
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -396,6 +516,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
  * @param {String} value
@@ -405,6 +545,26 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for updatedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_updatedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0000-00-00 00:00:00',
+);
 };
 
 /**

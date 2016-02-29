@@ -234,6 +234,27 @@ abstract class Base_Streams_Request extends Db_Row
 		return 31;			
 	}
 
+/**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -265,6 +286,27 @@ abstract class Base_Streams_Request extends Db_Row
 	{
 
 		return 255;			
+	}
+
+/**
+* Returns more information for streamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_streamName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -300,6 +342,27 @@ abstract class Base_Streams_Request extends Db_Row
 		return 31;			
 	}
 
+/**
+* Returns more information for byUserId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_byUserId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
@@ -322,6 +385,27 @@ abstract class Base_Streams_Request extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('insertedTime', $value);			
+	}
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**
@@ -357,6 +441,27 @@ abstract class Base_Streams_Request extends Db_Row
 		return 2147483647;			
 	}
 
+/**
+* Returns more information for readLevel column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_readLevel()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_writeLevel
@@ -390,6 +495,27 @@ abstract class Base_Streams_Request extends Db_Row
 		return 2147483647;			
 	}
 
+/**
+* Returns more information for writeLevel column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_writeLevel()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_adminLevel
@@ -421,6 +547,27 @@ abstract class Base_Streams_Request extends Db_Row
 	{
 
 		return 2147483647;			
+	}
+
+/**
+* Returns more information for adminLevel column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_adminLevel()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**

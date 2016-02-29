@@ -267,6 +267,26 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_userId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_provider
  * @param {string} value
@@ -278,6 +298,26 @@ Base.prototype.beforeSet_provider = function (value) {
 		if (['native','facebook','twitter','google','yahoo'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".provider");
 		return value;
+};
+
+/**
+* Returns more information for provider column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_provider = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'native\',\'facebook\',\'twitter\',\'google\',\'yahoo\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -310,6 +350,26 @@ Base.prototype.maxSize_appId = function () {
 };
 
 /**
+* Returns more information for appId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_appId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -319,6 +379,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
 };
 
 /**
@@ -332,6 +412,26 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for updatedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_updatedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -363,6 +463,26 @@ Base.prototype.maxSize_access_token = function () {
 };
 
 /**
+* Returns more information for access_token column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_access_token = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_session_secret
@@ -388,6 +508,26 @@ Base.prototype.beforeSet_session_secret = function (value) {
 Base.prototype.maxSize_session_secret = function () {
 
 		return 1023;
+};
+
+/**
+* Returns more information for session_secret column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_session_secret = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -419,6 +559,26 @@ Base.prototype.maxSize_session_expires = function () {
 };
 
 /**
+* Returns more information for session_expires column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_session_expires = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
  * @param {string} value
@@ -430,6 +590,26 @@ Base.prototype.beforeSet_state = function (value) {
 		if (['visited','added','removed'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
 		return value;
+};
+
+/**
+* Returns more information for state column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_state = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'visited\',\'added\',\'removed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'visited',
+);
 };
 
 /**
@@ -459,6 +639,26 @@ Base.prototype.beforeSet_provider_uid = function (value) {
 Base.prototype.maxSize_provider_uid = function () {
 
 		return 200;
+};
+
+/**
+* Returns more information for provider_uid column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_provider_uid = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**

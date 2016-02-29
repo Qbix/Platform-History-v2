@@ -233,6 +233,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 		return 31;			
 	}
 
+/**
+* Returns more information for toUserId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_toUserId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -266,6 +287,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 		return 31;			
 	}
 
+/**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_updatedTime
@@ -291,6 +333,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+/**
+* Returns more information for updatedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -326,6 +389,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 		return 255;			
 	}
 
+/**
+* Returns more information for username column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_username()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -357,6 +441,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 	{
 
 		return 255;			
+	}
+
+/**
+* Returns more information for firstName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_firstName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
 	}
 
 	/**
@@ -392,6 +497,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 		return 255;			
 	}
 
+/**
+* Returns more information for lastName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_lastName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -423,6 +549,27 @@ abstract class Base_Streams_Avatar extends Db_Row
 	{
 
 		return 255;			
+	}
+
+/**
+* Returns more information for icon column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_icon()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

@@ -272,6 +272,26 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
+* Returns more information for publisherId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_publisherId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_streamName
@@ -301,6 +321,26 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
+* Returns more information for streamName column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_streamName = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -310,6 +350,26 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_insertedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
 };
 
 /**
@@ -323,6 +383,26 @@ Base.prototype.beforeSet_sentTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for sentTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_sentTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -355,6 +435,26 @@ Base.prototype.maxSize_byUserId = function () {
 };
 
 /**
+* Returns more information for byUserId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_byUserId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_byClientId
@@ -381,6 +481,26 @@ Base.prototype.beforeSet_byClientId = function (value) {
 Base.prototype.maxSize_byClientId = function () {
 
 		return 31;
+};
+
+/**
+* Returns more information for byClientId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_byClientId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);
 };
 
 /**
@@ -413,6 +533,26 @@ Base.prototype.maxSize_type = function () {
 };
 
 /**
+* Returns more information for type column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_type = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_content
@@ -439,6 +579,26 @@ Base.prototype.beforeSet_content = function (value) {
 Base.prototype.maxSize_content = function () {
 
 		return 1023;
+};
+
+/**
+* Returns more information for content column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_content = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -471,6 +631,26 @@ Base.prototype.maxSize_instructions = function () {
 };
 
 /**
+* Returns more information for instructions column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_instructions = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '4092',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_weight
  * @param {integer} value
@@ -483,6 +663,26 @@ Base.prototype.beforeSet_weight = function (value) {
 		if (isNaN(value))
 			throw new Error('Non-number value being assigned to '+this.table()+".weight");
 		return value;
+};
+
+/**
+* Returns more information for weight column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_weight = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '14,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '1.0000',
+);
 };
 
 /**
@@ -509,6 +709,26 @@ Base.prototype.beforeSet_ordinal = function (value) {
 Base.prototype.maxSize_ordinal = function () {
 
 		return 4294967295;
+};
+
+/**
+* Returns more information for ordinal column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_ordinal = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '10',
+    2 => ' unsigned',
+    3 => true,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '0',
+);
 };
 
 /**

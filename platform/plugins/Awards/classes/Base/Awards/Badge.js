@@ -246,6 +246,26 @@ Base.prototype.maxSize_app = function () {
 };
 
 /**
+* Returns more information for app column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_app = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_name
@@ -272,6 +292,26 @@ Base.prototype.beforeSet_name = function (value) {
 Base.prototype.maxSize_name = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for name column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_name = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -304,6 +344,26 @@ Base.prototype.maxSize_title = function () {
 };
 
 /**
+* Returns more information for title column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_title = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'text',
+    1 => 65535,
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_pic_small
@@ -330,6 +390,26 @@ Base.prototype.beforeSet_pic_small = function (value) {
 Base.prototype.maxSize_pic_small = function () {
 
 		return 255;
+};
+
+/**
+* Returns more information for pic_small column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_pic_small = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -362,6 +442,26 @@ Base.prototype.maxSize_pic_big = function () {
 };
 
 /**
+* Returns more information for pic_big column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_pic_big = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_points
  * @param {integer} value
@@ -385,6 +485,26 @@ Base.prototype.beforeSet_points = function (value) {
 Base.prototype.maxSize_points = function () {
 
 		return 32767;
+};
+
+/**
+* Returns more information for points column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_points = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'smallint',
+    1 => '4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);
 };
 
 /**

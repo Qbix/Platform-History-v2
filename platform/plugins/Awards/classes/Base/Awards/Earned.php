@@ -221,6 +221,27 @@ abstract class Base_Awards_Earned extends Db_Row
 		return 31;			
 	}
 
+/**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -252,6 +273,27 @@ abstract class Base_Awards_Earned extends Db_Row
 	{
 
 		return 255;			
+	}
+
+/**
+* Returns more information for app column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_app()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -287,6 +329,27 @@ abstract class Base_Awards_Earned extends Db_Row
 		return 255;			
 	}
 
+/**
+* Returns more information for badge_name column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_badge_name()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
@@ -309,6 +372,27 @@ abstract class Base_Awards_Earned extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('insertedTime', $value);			
+	}
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**
@@ -342,6 +426,27 @@ abstract class Base_Awards_Earned extends Db_Row
 	{
 
 		return 255;			
+	}
+
+/**
+* Returns more information for associated_id column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_associated_id()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

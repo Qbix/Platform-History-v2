@@ -222,6 +222,27 @@ abstract class Base_Users_Identify extends Db_Row
 		return 255;			
 	}
 
+/**
+* Returns more information for identifier column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_identifier()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
@@ -244,6 +265,27 @@ abstract class Base_Users_Identify extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('insertedTime', $value);			
+	}
+
+/**
+* Returns more information for insertedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**
@@ -273,6 +315,27 @@ abstract class Base_Users_Identify extends Db_Row
 		return array('updatedTime', $value);			
 	}
 
+/**
+* Returns more information for updatedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_state
@@ -288,6 +351,27 @@ abstract class Base_Users_Identify extends Db_Row
 		if (!in_array($value, array('verified','future')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".state");
 		return array('state', $value);			
+	}
+
+/**
+* Returns more information for state column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_state()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'verified\',\'future\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -321,6 +405,27 @@ abstract class Base_Users_Identify extends Db_Row
 	{
 
 		return 31;			
+	}
+
+/**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

@@ -247,6 +247,26 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
+* Returns more information for userId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_userId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_forType
@@ -273,6 +293,26 @@ Base.prototype.beforeSet_forType = function (value) {
 Base.prototype.maxSize_forType = function () {
 
 		return 31;
+};
+
+/**
+* Returns more information for forType column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_forType = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
 };
 
 /**
@@ -305,6 +345,26 @@ Base.prototype.maxSize_forId = function () {
 };
 
 /**
+* Returns more information for forId column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_forId = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);
+};
+
+/**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_value
  * @param {integer} value
@@ -317,6 +377,26 @@ Base.prototype.beforeSet_value = function (value) {
 		if (isNaN(value))
 			throw new Error('Non-number value being assigned to '+this.table()+".value");
 		return value;
+};
+
+/**
+* Returns more information for value column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_value = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);
 };
 
 /**
@@ -335,6 +415,26 @@ Base.prototype.beforeSet_weight = function (value) {
 };
 
 /**
+* Returns more information for weight column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_weight = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '1.0000',
+);
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
  * @param {String} value
@@ -345,6 +445,26 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+/**
+* Returns more information for updatedTime column
+* @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+*/
+Base.prototype.column_updatedTime = function () {
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);
 };
 
 /**
