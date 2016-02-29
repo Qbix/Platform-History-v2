@@ -1881,11 +1881,12 @@ Sp.relate = Sp.relateFrom = function _Stream_prototype_relate (type, fromPublish
  * @method unrelateTo
  * @param toPublisherId {String} id of publisher which is publishing the stream
  * @param toStreamName {String} name of stream which the being unrelated
+ * @param relationType {String} the type of the relation, such as "parent" or "photo"
  * @param callback {Function} callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
-Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamName, callback) {
-	return Streams.unrelate(this.fields.publisherId, this.fields.name, toPublisherId, toStreamName, callback);
+Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamName, relationType, callback) {
+	return Streams.unrelate(this.fields.publisherId, this.fields.name, relationType, toPublisherId, toStreamName, callback);
 };
 
 /**
@@ -1894,11 +1895,12 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
  * @method unrelateFrom
  * @param fromPublisherId {String} id of publisher which is publishing the stream
  * @param fromStreamName {String} name of stream which is being unrelated
+ * @param relationType {String} the type of the relation, such as "parent" or "photo"
  * @param callback {Function} callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
-Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, callback) {
-	return Streams.unrelate(fromPublisherId, fromStreamName, type, this.fields.publisherId, this.fields.name, callback);
+Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, relationType, callback) {
+	return Streams.unrelate(fromPublisherId, fromStreamName, relationType, this.fields.publisherId, this.fields.name, callback);
 };
 
 /**
