@@ -242,23 +242,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -291,23 +280,12 @@ Base.prototype.maxSize_label = function () {
 };
 
 /**
-* Returns more information for label column
+* Returns schema information for label column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_label = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '63',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","63","",false],false,"PRI",null];
 };
 
 /**
@@ -340,23 +318,12 @@ Base.prototype.maxSize_contactUserId = function () {
 };
 
 /**
-* Returns more information for contactUserId column
+* Returns schema information for contactUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_contactUserId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -389,23 +356,12 @@ Base.prototype.maxSize_nickname = function () {
 };
 
 /**
-* Returns more information for nickname column
+* Returns schema information for nickname column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_nickname = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '',
-);
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -421,23 +377,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

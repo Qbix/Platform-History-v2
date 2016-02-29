@@ -246,23 +246,12 @@ Base.prototype.maxSize_forType = function () {
 };
 
 /**
-* Returns more information for forType column
+* Returns schema information for forType column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_forType = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -295,23 +284,12 @@ Base.prototype.maxSize_forId = function () {
 };
 
 /**
-* Returns more information for forId column
+* Returns schema information for forId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_forId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -341,23 +319,12 @@ Base.prototype.maxSize_voteCount = function () {
 };
 
 /**
-* Returns more information for voteCount column
+* Returns schema information for voteCount column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_voteCount = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'bigint',
-    1 => '20',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["bigint","20","",false],false,"","0"];
 };
 
 /**
@@ -376,23 +343,12 @@ Base.prototype.beforeSet_weightTotal = function (value) {
 };
 
 /**
-* Returns more information for weightTotal column
+* Returns schema information for weightTotal column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_weightTotal = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'decimal',
-    1 => '10,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0.0000',
-);
+return [["decimal","10,4","",false],false,"","0.0000"];
 };
 
 /**
@@ -411,23 +367,12 @@ Base.prototype.beforeSet_value = function (value) {
 };
 
 /**
-* Returns more information for value column
+* Returns schema information for value column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_value = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'decimal',
-    1 => '10,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0.0000',
-);
+return [["decimal","10,4","",false],false,"","0.0000"];
 };
 
 /**
@@ -444,23 +389,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '10,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","10,4","",false],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**

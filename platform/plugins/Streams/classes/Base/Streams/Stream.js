@@ -296,23 +296,12 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_publisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -345,23 +334,12 @@ Base.prototype.maxSize_name = function () {
 };
 
 /**
-* Returns more information for name column
+* Returns schema information for name column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_name = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -377,23 +355,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -410,23 +377,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**
@@ -459,23 +415,12 @@ Base.prototype.maxSize_type = function () {
 };
 
 /**
-* Returns more information for type column
+* Returns schema information for type column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_type = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '63',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","63","",false],false,"",null];
 };
 
 /**
@@ -508,23 +453,12 @@ Base.prototype.maxSize_title = function () {
 };
 
 /**
-* Returns more information for title column
+* Returns schema information for title column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_title = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -557,23 +491,12 @@ Base.prototype.maxSize_icon = function () {
 };
 
 /**
-* Returns more information for icon column
+* Returns schema information for icon column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_icon = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'default',
-);
+return [["varchar","255","",false],false,"","default"];
 };
 
 /**
@@ -606,23 +529,12 @@ Base.prototype.maxSize_content = function () {
 };
 
 /**
-* Returns more information for content column
+* Returns schema information for content column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_content = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","1023","",false],false,"",null];
 };
 
 /**
@@ -654,23 +566,12 @@ Base.prototype.maxSize_attributes = function () {
 };
 
 /**
-* Returns more information for attributes column
+* Returns schema information for attributes column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_attributes = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","1023","",false],true,"",null];
 };
 
 /**
@@ -700,23 +601,12 @@ Base.prototype.maxSize_readLevel = function () {
 };
 
 /**
-* Returns more information for readLevel column
+* Returns schema information for readLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_readLevel = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '40',
-);
+return [["int","11","",false],false,"","40"];
 };
 
 /**
@@ -746,23 +636,12 @@ Base.prototype.maxSize_writeLevel = function () {
 };
 
 /**
-* Returns more information for writeLevel column
+* Returns schema information for writeLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_writeLevel = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '10',
-);
+return [["int","11","",false],false,"","10"];
 };
 
 /**
@@ -792,23 +671,12 @@ Base.prototype.maxSize_adminLevel = function () {
 };
 
 /**
-* Returns more information for adminLevel column
+* Returns schema information for adminLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_adminLevel = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '20',
-);
+return [["int","11","",false],false,"","20"];
 };
 
 /**
@@ -840,23 +708,12 @@ Base.prototype.maxSize_inheritAccess = function () {
 };
 
 /**
-* Returns more information for inheritAccess column
+* Returns schema information for inheritAccess column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_inheritAccess = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -886,23 +743,12 @@ Base.prototype.maxSize_messageCount = function () {
 };
 
 /**
-* Returns more information for messageCount column
+* Returns schema information for messageCount column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_messageCount = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -932,23 +778,12 @@ Base.prototype.maxSize_participantCount = function () {
 };
 
 /**
-* Returns more information for participantCount column
+* Returns schema information for participantCount column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_participantCount = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -965,23 +800,12 @@ Base.prototype.beforeSet_closedTime = function (value) {
 };
 
 /**
-* Returns more information for closedTime column
+* Returns schema information for closedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_closedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","11","",false],true,"",null];
 };
 
 /**

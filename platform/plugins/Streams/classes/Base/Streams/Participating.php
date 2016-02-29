@@ -240,7 +240,7 @@ abstract class Base_Streams_Participating extends Db_Row
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -294,7 +294,7 @@ return array (
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -348,7 +348,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -386,7 +386,7 @@ return array (
 	}
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_state()
@@ -440,7 +440,7 @@ return array (
 	}
 
 /**
-* Returns more information for fresh column
+* Returns schema information for fresh column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_fresh()
@@ -494,7 +494,7 @@ return array (
 	}
 
 /**
-* Returns more information for extra column
+* Returns schema information for extra column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_extra()
@@ -539,7 +539,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -584,7 +584,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()

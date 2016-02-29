@@ -237,23 +237,12 @@ Base.prototype.maxSize_app = function () {
 };
 
 /**
-* Returns more information for app column
+* Returns schema information for app column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_app = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -269,23 +258,12 @@ Base.prototype.beforeSet_day = function (value) {
 };
 
 /**
-* Returns more information for day column
+* Returns schema information for day column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_day = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'date',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["date","255","",false],false,"PRI",null];
 };
 
 /**
@@ -318,23 +296,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -364,23 +331,12 @@ Base.prototype.maxSize_points = function () {
 };
 
 /**
-* Returns more information for points column
+* Returns schema information for points column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_points = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'smallint',
-    1 => '4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["smallint","4","",false],false,"","0"];
 };
 
 /**

@@ -246,23 +246,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -295,23 +284,12 @@ Base.prototype.maxSize_token = function () {
 };
 
 /**
-* Returns more information for token column
+* Returns schema information for token column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_token = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -329,23 +307,12 @@ Base.prototype.beforeSet_state = function (value) {
 };
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_state = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'pending',
-);
+return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
 };
 
 /**
@@ -361,23 +328,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -393,23 +349,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0000-00-00 00:00:00',
-);
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**
@@ -426,23 +371,12 @@ Base.prototype.beforeSet_expireTime = function (value) {
 };
 
 /**
-* Returns more information for expireTime column
+* Returns schema information for expireTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_expireTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
 };
 
 /**

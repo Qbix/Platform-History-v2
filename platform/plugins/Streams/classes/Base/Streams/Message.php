@@ -255,7 +255,7 @@ abstract class Base_Streams_Message extends Db_Row
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -309,7 +309,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -354,7 +354,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -402,7 +402,7 @@ return array (
 	}
 
 /**
-* Returns more information for sentTime column
+* Returns schema information for sentTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_sentTime()
@@ -456,7 +456,7 @@ return array (
 	}
 
 /**
-* Returns more information for byUserId column
+* Returns schema information for byUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_byUserId()
@@ -510,7 +510,7 @@ return array (
 	}
 
 /**
-* Returns more information for byClientId column
+* Returns schema information for byClientId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_byClientId()
@@ -564,7 +564,7 @@ return array (
 	}
 
 /**
-* Returns more information for type column
+* Returns schema information for type column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_type()
@@ -618,7 +618,7 @@ return array (
 	}
 
 /**
-* Returns more information for content column
+* Returns schema information for content column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_content()
@@ -672,7 +672,7 @@ return array (
 	}
 
 /**
-* Returns more information for instructions column
+* Returns schema information for instructions column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_instructions()
@@ -704,7 +704,7 @@ return array (
 	}
 
 /**
-* Returns more information for weight column
+* Returns schema information for weight column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_weight()
@@ -758,7 +758,7 @@ return array (
 	}
 
 /**
-* Returns more information for ordinal column
+* Returns schema information for ordinal column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_ordinal()

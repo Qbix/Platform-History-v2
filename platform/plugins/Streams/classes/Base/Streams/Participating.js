@@ -257,23 +257,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -306,23 +295,12 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_publisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -355,23 +333,12 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_streamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -389,23 +356,12 @@ Base.prototype.beforeSet_state = function (value) {
 };
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_state = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'invited\',\'participating\',\'left\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["enum","'invited','participating','left'","",false],false,"",null];
 };
 
 /**
@@ -435,23 +391,12 @@ Base.prototype.maxSize_fresh = function () {
 };
 
 /**
-* Returns more information for fresh column
+* Returns schema information for fresh column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_fresh = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '10',
-    2 => ' unsigned',
-    3 => true,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["int","10"," unsigned",true],false,"","0"];
 };
 
 /**
@@ -484,23 +429,12 @@ Base.prototype.maxSize_extra = function () {
 };
 
 /**
-* Returns more information for extra column
+* Returns schema information for extra column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_extra = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '{}',
-);
+return [["varchar","1023","",false],false,"","{}"];
 };
 
 /**
@@ -516,23 +450,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -548,23 +471,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0000-00-00 00:00:00',
-);
+return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**

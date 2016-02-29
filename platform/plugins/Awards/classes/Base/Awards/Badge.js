@@ -246,23 +246,12 @@ Base.prototype.maxSize_app = function () {
 };
 
 /**
-* Returns more information for app column
+* Returns schema information for app column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_app = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -295,23 +284,12 @@ Base.prototype.maxSize_name = function () {
 };
 
 /**
-* Returns more information for name column
+* Returns schema information for name column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_name = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -344,23 +322,12 @@ Base.prototype.maxSize_title = function () {
 };
 
 /**
-* Returns more information for title column
+* Returns schema information for title column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_title = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'text',
-    1 => 65535,
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["text",65535,"",false],false,"",null];
 };
 
 /**
@@ -393,23 +360,12 @@ Base.prototype.maxSize_pic_small = function () {
 };
 
 /**
-* Returns more information for pic_small column
+* Returns schema information for pic_small column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_pic_small = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -442,23 +398,12 @@ Base.prototype.maxSize_pic_big = function () {
 };
 
 /**
-* Returns more information for pic_big column
+* Returns schema information for pic_big column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_pic_big = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -488,23 +433,12 @@ Base.prototype.maxSize_points = function () {
 };
 
 /**
-* Returns more information for points column
+* Returns schema information for points column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_points = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'smallint',
-    1 => '4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["smallint","4","",false],false,"","0"];
 };
 
 /**

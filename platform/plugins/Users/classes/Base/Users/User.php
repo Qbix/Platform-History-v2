@@ -293,7 +293,7 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 /**
-* Returns more information for id column
+* Returns schema information for id column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_id()
@@ -338,7 +338,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -386,7 +386,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
@@ -440,7 +440,7 @@ return array (
 	}
 
 /**
-* Returns more information for sessionId column
+* Returns schema information for sessionId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_sessionId()
@@ -494,7 +494,7 @@ return array (
 	}
 
 /**
-* Returns more information for sessionCount column
+* Returns schema information for sessionCount column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_sessionCount()
@@ -548,7 +548,7 @@ return array (
 	}
 
 /**
-* Returns more information for fb_uid column
+* Returns schema information for fb_uid column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_fb_uid()
@@ -602,7 +602,7 @@ return array (
 	}
 
 /**
-* Returns more information for tw_uid column
+* Returns schema information for tw_uid column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_tw_uid()
@@ -656,7 +656,7 @@ return array (
 	}
 
 /**
-* Returns more information for g_uid column
+* Returns schema information for g_uid column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_g_uid()
@@ -710,7 +710,7 @@ return array (
 	}
 
 /**
-* Returns more information for y_uid column
+* Returns schema information for y_uid column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_y_uid()
@@ -764,7 +764,7 @@ return array (
 	}
 
 /**
-* Returns more information for passphraseHash column
+* Returns schema information for passphraseHash column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_passphraseHash()
@@ -818,7 +818,7 @@ return array (
 	}
 
 /**
-* Returns more information for emailAddress column
+* Returns schema information for emailAddress column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_emailAddress()
@@ -872,7 +872,7 @@ return array (
 	}
 
 /**
-* Returns more information for mobileNumber column
+* Returns schema information for mobileNumber column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_mobileNumber()
@@ -926,7 +926,7 @@ return array (
 	}
 
 /**
-* Returns more information for emailAddressPending column
+* Returns schema information for emailAddressPending column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_emailAddressPending()
@@ -980,7 +980,7 @@ return array (
 	}
 
 /**
-* Returns more information for mobileNumberPending column
+* Returns schema information for mobileNumberPending column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_mobileNumberPending()
@@ -1018,7 +1018,7 @@ return array (
 	}
 
 /**
-* Returns more information for signedUpWith column
+* Returns schema information for signedUpWith column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_signedUpWith()
@@ -1072,7 +1072,7 @@ return array (
 	}
 
 /**
-* Returns more information for username column
+* Returns schema information for username column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_username()
@@ -1126,7 +1126,7 @@ return array (
 	}
 
 /**
-* Returns more information for icon column
+* Returns schema information for icon column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_icon()
@@ -1180,7 +1180,7 @@ return array (
 	}
 
 /**
-* Returns more information for url column
+* Returns schema information for url column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_url()
@@ -1234,7 +1234,7 @@ return array (
 	}
 
 /**
-* Returns more information for pincodeHash column
+* Returns schema information for pincodeHash column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_pincodeHash()

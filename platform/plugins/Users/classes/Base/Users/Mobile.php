@@ -253,7 +253,7 @@ abstract class Base_Users_Mobile extends Db_Row
 	}
 
 /**
-* Returns more information for number column
+* Returns schema information for number column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_number()
@@ -298,7 +298,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -346,7 +346,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
@@ -400,7 +400,7 @@ return array (
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -454,7 +454,7 @@ return array (
 	}
 
 /**
-* Returns more information for extension column
+* Returns schema information for extension column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_extension()
@@ -492,7 +492,7 @@ return array (
 	}
 
 /**
-* Returns more information for carrier column
+* Returns schema information for carrier column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_carrier()
@@ -530,7 +530,7 @@ return array (
 	}
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_state()
@@ -568,7 +568,7 @@ return array (
 	}
 
 /**
-* Returns more information for capabilities column
+* Returns schema information for capabilities column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_capabilities()
@@ -622,7 +622,7 @@ return array (
 	}
 
 /**
-* Returns more information for activationCode column
+* Returns schema information for activationCode column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_activationCode()
@@ -667,7 +667,7 @@ return array (
 	}
 
 /**
-* Returns more information for activationCodeExpires column
+* Returns schema information for activationCodeExpires column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_activationCodeExpires()
@@ -721,7 +721,7 @@ return array (
 	}
 
 /**
-* Returns more information for authCode column
+* Returns schema information for authCode column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_authCode()

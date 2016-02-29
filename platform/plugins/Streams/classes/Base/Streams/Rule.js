@@ -263,23 +263,12 @@ Base.prototype.maxSize_ofUserId = function () {
 };
 
 /**
-* Returns more information for ofUserId column
+* Returns schema information for ofUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_ofUserId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -312,23 +301,12 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_publisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -361,23 +339,12 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_streamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -407,23 +374,12 @@ Base.prototype.maxSize_ordinal = function () {
 };
 
 /**
-* Returns more information for ordinal column
+* Returns schema information for ordinal column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_ordinal = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["int","11","",false],false,"PRI",null];
 };
 
 /**
@@ -439,23 +395,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -472,23 +417,12 @@ Base.prototype.beforeSet_readyTime = function (value) {
 };
 
 /**
-* Returns more information for readyTime column
+* Returns schema information for readyTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_readyTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","11","",false],true,"",null];
 };
 
 /**
@@ -521,23 +455,12 @@ Base.prototype.maxSize_filter = function () {
 };
 
 /**
-* Returns more information for filter column
+* Returns schema information for filter column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_filter = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -570,23 +493,12 @@ Base.prototype.maxSize_deliver = function () {
 };
 
 /**
-* Returns more information for deliver column
+* Returns schema information for deliver column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_deliver = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -605,23 +517,12 @@ Base.prototype.beforeSet_relevance = function (value) {
 };
 
 /**
-* Returns more information for relevance column
+* Returns schema information for relevance column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_relevance = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'decimal',
-    1 => '14,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["decimal","14,4","",false],false,"",null];
 };
 
 /**

@@ -247,23 +247,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -296,23 +285,12 @@ Base.prototype.maxSize_forType = function () {
 };
 
 /**
-* Returns more information for forType column
+* Returns schema information for forType column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_forType = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -345,23 +323,12 @@ Base.prototype.maxSize_forId = function () {
 };
 
 /**
-* Returns more information for forId column
+* Returns schema information for forId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_forId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -380,23 +347,12 @@ Base.prototype.beforeSet_value = function (value) {
 };
 
 /**
-* Returns more information for value column
+* Returns schema information for value column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_value = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'decimal',
-    1 => '10,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["decimal","10,4","",false],false,"",null];
 };
 
 /**
@@ -415,23 +371,12 @@ Base.prototype.beforeSet_weight = function (value) {
 };
 
 /**
-* Returns more information for weight column
+* Returns schema information for weight column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_weight = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'decimal',
-    1 => '10,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '1.0000',
-);
+return [["decimal","10,4","",false],false,"","1.0000"];
 };
 
 /**
@@ -448,23 +393,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '10,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","10,4","",false],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**

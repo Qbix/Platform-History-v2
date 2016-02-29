@@ -256,23 +256,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -305,23 +294,12 @@ Base.prototype.maxSize_deviceId = function () {
 };
 
 /**
-* Returns more information for deviceId column
+* Returns schema information for deviceId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_deviceId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -339,23 +317,12 @@ Base.prototype.beforeSet_platform = function (value) {
 };
 
 /**
-* Returns more information for platform column
+* Returns schema information for platform column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_platform = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'ios\',\'android\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["enum","'ios','android'","",false],false,"",null];
 };
 
 /**
@@ -387,23 +354,12 @@ Base.prototype.maxSize_version = function () {
 };
 
 /**
-* Returns more information for version column
+* Returns schema information for version column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_version = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '45',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","45","",false],true,"",null];
 };
 
 /**
@@ -436,23 +392,12 @@ Base.prototype.maxSize_sessionId = function () {
 };
 
 /**
-* Returns more information for sessionId column
+* Returns schema information for sessionId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_sessionId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -471,23 +416,12 @@ Base.prototype.beforeSet_formFactor = function (value) {
 };
 
 /**
-* Returns more information for formFactor column
+* Returns schema information for formFactor column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_formFactor = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'mobile\',\'tablet\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["enum","'mobile','tablet'","",false],true,"",null];
 };
 
 /**
@@ -503,23 +437,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'mobile\',\'tablet\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","'mobile','tablet'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -536,23 +459,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'mobile\',\'tablet\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","'mobile','tablet'","",false],true,"",null];
 };
 
 /**

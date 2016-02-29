@@ -257,23 +257,12 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_publisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -306,23 +295,12 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_streamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","255","",false],false,"PRI",""];
 };
 
 /**
@@ -355,23 +333,12 @@ Base.prototype.maxSize_ofUserId = function () {
 };
 
 /**
-* Returns more information for ofUserId column
+* Returns schema information for ofUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_ofUserId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -387,23 +354,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -420,23 +376,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","31","",false],true,"",null];
 };
 
 /**
@@ -453,23 +398,12 @@ Base.prototype.beforeSet_untilTime = function (value) {
 };
 
 /**
-* Returns more information for untilTime column
+* Returns schema information for untilTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_untilTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","31","",false],true,"",null];
 };
 
 /**
@@ -502,23 +436,12 @@ Base.prototype.maxSize_filter = function () {
 };
 
 /**
-* Returns more information for filter column
+* Returns schema information for filter column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_filter = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -548,23 +471,12 @@ Base.prototype.maxSize_duration = function () {
 };
 
 /**
-* Returns more information for duration column
+* Returns schema information for duration column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_duration = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["int","11","",false],false,"","0"];
 };
 
 /**

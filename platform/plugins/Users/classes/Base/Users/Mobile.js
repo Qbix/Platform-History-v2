@@ -270,23 +270,12 @@ Base.prototype.maxSize_number = function () {
 };
 
 /**
-* Returns more information for number column
+* Returns schema information for number column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_number = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -302,23 +291,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -335,23 +313,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => 'MUL',
-  3 => NULL,
-);
+return [["timestamp","255","",false],true,"MUL",null];
 };
 
 /**
@@ -384,23 +351,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'MUL',
-  3 => '',
-);
+return [["varchar","31","",false],false,"MUL",""];
 };
 
 /**
@@ -433,23 +389,12 @@ Base.prototype.maxSize_extension = function () {
 };
 
 /**
-* Returns more information for extension column
+* Returns schema information for extension column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_extension = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '7',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '',
-);
+return [["varchar","7","",false],false,"",""];
 };
 
 /**
@@ -467,23 +412,12 @@ Base.prototype.beforeSet_carrier = function (value) {
 };
 
 /**
-* Returns more information for carrier column
+* Returns schema information for carrier column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_carrier = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'unverified\',\'att\',\'cingular\',\'sprint\',\'tmobile\',\'verizon\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'unverified',
-);
+return [["enum","'unverified','att','cingular','sprint','tmobile','verizon'","",false],false,"","unverified"];
 };
 
 /**
@@ -501,23 +435,12 @@ Base.prototype.beforeSet_state = function (value) {
 };
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_state = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'unverified\',\'active\',\'suspended\',\'unsubscribed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'unverified',
-);
+return [["enum","'unverified','active','suspended','unsubscribed'","",false],false,"","unverified"];
 };
 
 /**
@@ -535,23 +458,12 @@ Base.prototype.beforeSet_capabilities = function (value) {
 };
 
 /**
-* Returns more information for capabilities column
+* Returns schema information for capabilities column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_capabilities = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'unverified\',\'sms\',\'wap\',\'internet\',\'sms_and_wap\',\'sms_and_internet\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'unverified',
-);
+return [["enum","'unverified','sms','wap','internet','sms_and_wap','sms_and_internet'","",false],false,"","unverified"];
 };
 
 /**
@@ -584,23 +496,12 @@ Base.prototype.maxSize_activationCode = function () {
 };
 
 /**
-* Returns more information for activationCode column
+* Returns schema information for activationCode column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_activationCode = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -616,23 +517,12 @@ Base.prototype.beforeSet_activationCodeExpires = function (value) {
 };
 
 /**
-* Returns more information for activationCodeExpires column
+* Returns schema information for activationCodeExpires column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_activationCodeExpires = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0000-00-00 00:00:00',
-);
+return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**
@@ -665,23 +555,12 @@ Base.prototype.maxSize_authCode = function () {
 };
 
 /**
-* Returns more information for authCode column
+* Returns schema information for authCode column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_authCode = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**

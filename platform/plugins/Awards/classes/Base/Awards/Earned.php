@@ -222,7 +222,7 @@ abstract class Base_Awards_Earned extends Db_Row
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -276,7 +276,7 @@ return array (
 	}
 
 /**
-* Returns more information for app column
+* Returns schema information for app column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_app()
@@ -330,7 +330,7 @@ return array (
 	}
 
 /**
-* Returns more information for badge_name column
+* Returns schema information for badge_name column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_badge_name()
@@ -375,7 +375,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -429,7 +429,7 @@ return array (
 	}
 
 /**
-* Returns more information for associated_id column
+* Returns schema information for associated_id column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_associated_id()

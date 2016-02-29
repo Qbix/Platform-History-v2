@@ -220,7 +220,7 @@ abstract class Base_Awards_Leader extends Db_Row
 	}
 
 /**
-* Returns more information for app column
+* Returns schema information for app column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_app()
@@ -267,7 +267,7 @@ return array (
 	}
 
 /**
-* Returns more information for day column
+* Returns schema information for day column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_day()
@@ -321,7 +321,7 @@ return array (
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -375,7 +375,7 @@ return array (
 	}
 
 /**
-* Returns more information for points column
+* Returns schema information for points column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_points()

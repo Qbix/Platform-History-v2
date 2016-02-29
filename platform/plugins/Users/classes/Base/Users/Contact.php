@@ -225,7 +225,7 @@ abstract class Base_Users_Contact extends Db_Row
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -279,7 +279,7 @@ return array (
 	}
 
 /**
-* Returns more information for label column
+* Returns schema information for label column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_label()
@@ -333,7 +333,7 @@ return array (
 	}
 
 /**
-* Returns more information for contactUserId column
+* Returns schema information for contactUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_contactUserId()
@@ -387,7 +387,7 @@ return array (
 	}
 
 /**
-* Returns more information for nickname column
+* Returns schema information for nickname column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_nickname()
@@ -432,7 +432,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()

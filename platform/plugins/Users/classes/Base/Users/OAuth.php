@@ -240,7 +240,7 @@ abstract class Base_Users_OAuth extends Db_Row
 	}
 
 /**
-* Returns more information for client_id column
+* Returns schema information for client_id column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_client_id()
@@ -294,7 +294,7 @@ return array (
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -348,7 +348,7 @@ return array (
 	}
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_state()
@@ -402,7 +402,7 @@ return array (
 	}
 
 /**
-* Returns more information for scope column
+* Returns schema information for scope column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_scope()
@@ -456,7 +456,7 @@ return array (
 	}
 
 /**
-* Returns more information for redirect_uri column
+* Returns schema information for redirect_uri column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_redirect_uri()
@@ -510,7 +510,7 @@ return array (
 	}
 
 /**
-* Returns more information for access_token column
+* Returns schema information for access_token column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_access_token()
@@ -555,7 +555,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -612,7 +612,7 @@ return array (
 	}
 
 /**
-* Returns more information for token_expires_seconds column
+* Returns schema information for token_expires_seconds column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_token_expires_seconds()

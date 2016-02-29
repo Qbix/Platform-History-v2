@@ -229,7 +229,7 @@ abstract class Base_Users_Total extends Db_Row
 	}
 
 /**
-* Returns more information for forType column
+* Returns schema information for forType column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_forType()
@@ -283,7 +283,7 @@ return array (
 	}
 
 /**
-* Returns more information for forId column
+* Returns schema information for forId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_forId()
@@ -337,7 +337,7 @@ return array (
 	}
 
 /**
-* Returns more information for voteCount column
+* Returns schema information for voteCount column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_voteCount()
@@ -369,7 +369,7 @@ return array (
 	}
 
 /**
-* Returns more information for weightTotal column
+* Returns schema information for weightTotal column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_weightTotal()
@@ -401,7 +401,7 @@ return array (
 	}
 
 /**
-* Returns more information for value column
+* Returns schema information for value column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_value()
@@ -449,7 +449,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()

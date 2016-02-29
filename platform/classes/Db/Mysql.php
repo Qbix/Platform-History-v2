@@ -1938,7 +1938,7 @@ $dc
 EOT;
 			$js_functions["column_$field_name"]['args'] = '';
 			$js_functions["column_$field_name"]['return_statement'] = <<<EOT
-return $columnInfo_php;
+return $columnInfo_js;
 EOT;
 		
 		}

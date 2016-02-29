@@ -256,23 +256,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -288,23 +277,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","31","",false],false,"PRI","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -337,23 +315,12 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_publisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'MUL',
-  3 => '',
-);
+return [["varchar","31","",false],false,"MUL",""];
 };
 
 /**
@@ -386,23 +353,12 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_streamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -434,23 +390,12 @@ Base.prototype.maxSize_type = function () {
 };
 
 /**
-* Returns more information for type column
+* Returns schema information for type column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_type = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -467,23 +412,12 @@ Base.prototype.beforeSet_viewedTime = function (value) {
 };
 
 /**
-* Returns more information for viewedTime column
+* Returns schema information for viewedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_viewedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => 'MUL',
-  3 => NULL,
-);
+return [["timestamp","255","",false],true,"MUL",null];
 };
 
 /**
@@ -500,23 +434,12 @@ Base.prototype.beforeSet_readTime = function (value) {
 };
 
 /**
-* Returns more information for readTime column
+* Returns schema information for readTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_readTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**
@@ -548,23 +471,12 @@ Base.prototype.maxSize_comment = function () {
 };
 
 /**
-* Returns more information for comment column
+* Returns schema information for comment column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_comment = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],true,"",null];
 };
 
 module.exports = Base;

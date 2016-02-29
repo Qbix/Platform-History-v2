@@ -239,7 +239,7 @@ abstract class Base_Streams_Notification extends Db_Row
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -284,7 +284,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -338,7 +338,7 @@ return array (
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -392,7 +392,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -446,7 +446,7 @@ return array (
 	}
 
 /**
-* Returns more information for type column
+* Returns schema information for type column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_type()
@@ -494,7 +494,7 @@ return array (
 	}
 
 /**
-* Returns more information for viewedTime column
+* Returns schema information for viewedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_viewedTime()
@@ -542,7 +542,7 @@ return array (
 	}
 
 /**
-* Returns more information for readTime column
+* Returns schema information for readTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_readTime()
@@ -596,7 +596,7 @@ return array (
 	}
 
 /**
-* Returns more information for comment column
+* Returns schema information for comment column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_comment()

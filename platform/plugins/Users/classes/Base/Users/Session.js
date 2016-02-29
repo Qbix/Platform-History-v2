@@ -250,23 +250,12 @@ Base.prototype.maxSize_id = function () {
 };
 
 /**
-* Returns more information for id column
+* Returns schema information for id column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_id = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -299,23 +288,12 @@ Base.prototype.maxSize_content = function () {
 };
 
 /**
-* Returns more information for content column
+* Returns schema information for content column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_content = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '4095',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","4095","",false],false,"",null];
 };
 
 /**
@@ -348,23 +326,12 @@ Base.prototype.maxSize_php = function () {
 };
 
 /**
-* Returns more information for php column
+* Returns schema information for php column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_php = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '4095',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","4095","",false],false,"",null];
 };
 
 /**
@@ -397,23 +364,12 @@ Base.prototype.maxSize_deviceId = function () {
 };
 
 /**
-* Returns more information for deviceId column
+* Returns schema information for deviceId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_deviceId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -443,23 +399,12 @@ Base.prototype.maxSize_timeout = function () {
 };
 
 /**
-* Returns more information for timeout column
+* Returns schema information for timeout column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_timeout = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["int","11","",false],false,"",null];
 };
 
 /**
@@ -489,23 +434,12 @@ Base.prototype.maxSize_duration = function () {
 };
 
 /**
-* Returns more information for duration column
+* Returns schema information for duration column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_duration = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -521,23 +455,12 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 };
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_updatedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

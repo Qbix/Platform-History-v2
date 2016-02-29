@@ -280,23 +280,12 @@ Base.prototype.maxSize_token = function () {
 };
 
 /**
-* Returns more information for token column
+* Returns schema information for token column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_token = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -329,23 +318,12 @@ Base.prototype.maxSize_userId = function () {
 };
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_userId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'MUL',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -378,23 +356,12 @@ Base.prototype.maxSize_publisherId = function () {
 };
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_publisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'MUL',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -427,23 +394,12 @@ Base.prototype.maxSize_streamName = function () {
 };
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_streamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -476,23 +432,12 @@ Base.prototype.maxSize_invitingUserId = function () {
 };
 
 /**
-* Returns more information for invitingUserId column
+* Returns schema information for invitingUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_invitingUserId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'MUL',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -525,23 +470,12 @@ Base.prototype.maxSize_displayName = function () {
 };
 
 /**
-* Returns more information for displayName column
+* Returns schema information for displayName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_displayName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -574,23 +508,12 @@ Base.prototype.maxSize_appUrl = function () {
 };
 
 /**
-* Returns more information for appUrl column
+* Returns schema information for appUrl column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_appUrl = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -621,23 +544,12 @@ Base.prototype.maxSize_readLevel = function () {
 };
 
 /**
-* Returns more information for readLevel column
+* Returns schema information for readLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_readLevel = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["int","11","",false],true,"",null];
 };
 
 /**
@@ -668,23 +580,12 @@ Base.prototype.maxSize_writeLevel = function () {
 };
 
 /**
-* Returns more information for writeLevel column
+* Returns schema information for writeLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_writeLevel = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["int","11","",false],true,"",null];
 };
 
 /**
@@ -715,23 +616,12 @@ Base.prototype.maxSize_adminLevel = function () {
 };
 
 /**
-* Returns more information for adminLevel column
+* Returns schema information for adminLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_adminLevel = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["int","11","",false],true,"",null];
 };
 
 /**
@@ -749,23 +639,12 @@ Base.prototype.beforeSet_state = function (value) {
 };
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_state = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'enum',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'pending',
-);
+return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
 };
 
 /**
@@ -781,23 +660,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -814,23 +682,12 @@ Base.prototype.beforeSet_expireTime = function (value) {
 };
 
 /**
-* Returns more information for expireTime column
+* Returns schema information for expireTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_expireTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
 };
 
 /**

@@ -232,7 +232,7 @@ abstract class Base_Streams_RelatedFrom extends Db_Row
 	}
 
 /**
-* Returns more information for fromPublisherId column
+* Returns schema information for fromPublisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_fromPublisherId()
@@ -286,7 +286,7 @@ return array (
 	}
 
 /**
-* Returns more information for fromStreamName column
+* Returns schema information for fromStreamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_fromStreamName()
@@ -340,7 +340,7 @@ return array (
 	}
 
 /**
-* Returns more information for type column
+* Returns schema information for type column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_type()
@@ -394,7 +394,7 @@ return array (
 	}
 
 /**
-* Returns more information for toPublisherId column
+* Returns schema information for toPublisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_toPublisherId()
@@ -448,7 +448,7 @@ return array (
 	}
 
 /**
-* Returns more information for toStreamName column
+* Returns schema information for toStreamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_toStreamName()
@@ -493,7 +493,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()

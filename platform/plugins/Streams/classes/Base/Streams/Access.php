@@ -251,7 +251,7 @@ abstract class Base_Streams_Access extends Db_Row
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -305,7 +305,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -359,7 +359,7 @@ return array (
 	}
 
 /**
-* Returns more information for ofUserId column
+* Returns schema information for ofUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_ofUserId()
@@ -413,7 +413,7 @@ return array (
 	}
 
 /**
-* Returns more information for ofContactLabel column
+* Returns schema information for ofContactLabel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_ofContactLabel()
@@ -467,7 +467,7 @@ return array (
 	}
 
 /**
-* Returns more information for grantedByUserId column
+* Returns schema information for grantedByUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_grantedByUserId()
@@ -512,7 +512,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -560,7 +560,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
@@ -614,7 +614,7 @@ return array (
 	}
 
 /**
-* Returns more information for readLevel column
+* Returns schema information for readLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_readLevel()
@@ -668,7 +668,7 @@ return array (
 	}
 
 /**
-* Returns more information for writeLevel column
+* Returns schema information for writeLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_writeLevel()
@@ -722,7 +722,7 @@ return array (
 	}
 
 /**
-* Returns more information for adminLevel column
+* Returns schema information for adminLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_adminLevel()

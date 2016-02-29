@@ -239,7 +239,7 @@ abstract class Base_Users_Device extends Db_Row
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -293,7 +293,7 @@ return array (
 	}
 
 /**
-* Returns more information for deviceId column
+* Returns schema information for deviceId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_deviceId()
@@ -331,7 +331,7 @@ return array (
 	}
 
 /**
-* Returns more information for platform column
+* Returns schema information for platform column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_platform()
@@ -385,7 +385,7 @@ return array (
 	}
 
 /**
-* Returns more information for version column
+* Returns schema information for version column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_version()
@@ -439,7 +439,7 @@ return array (
 	}
 
 /**
-* Returns more information for sessionId column
+* Returns schema information for sessionId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_sessionId()
@@ -480,7 +480,7 @@ return array (
 	}
 
 /**
-* Returns more information for formFactor column
+* Returns schema information for formFactor column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_formFactor()
@@ -525,7 +525,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -573,7 +573,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()

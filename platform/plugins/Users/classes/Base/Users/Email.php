@@ -238,7 +238,7 @@ abstract class Base_Users_Email extends Db_Row
 	}
 
 /**
-* Returns more information for address column
+* Returns schema information for address column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_address()
@@ -283,7 +283,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -331,7 +331,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
@@ -385,7 +385,7 @@ return array (
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -423,7 +423,7 @@ return array (
 	}
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_state()
@@ -477,7 +477,7 @@ return array (
 	}
 
 /**
-* Returns more information for activationCode column
+* Returns schema information for activationCode column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_activationCode()
@@ -522,7 +522,7 @@ return array (
 	}
 
 /**
-* Returns more information for activationCodeExpires column
+* Returns schema information for activationCodeExpires column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_activationCodeExpires()
@@ -576,7 +576,7 @@ return array (
 	}
 
 /**
-* Returns more information for authCode column
+* Returns schema information for authCode column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_authCode()

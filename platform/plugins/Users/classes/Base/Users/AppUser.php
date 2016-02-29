@@ -250,7 +250,7 @@ abstract class Base_Users_AppUser extends Db_Row
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -288,7 +288,7 @@ return array (
 	}
 
 /**
-* Returns more information for provider column
+* Returns schema information for provider column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_provider()
@@ -342,7 +342,7 @@ return array (
 	}
 
 /**
-* Returns more information for appId column
+* Returns schema information for appId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_appId()
@@ -387,7 +387,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -435,7 +435,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
@@ -489,7 +489,7 @@ return array (
 	}
 
 /**
-* Returns more information for access_token column
+* Returns schema information for access_token column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_access_token()
@@ -543,7 +543,7 @@ return array (
 	}
 
 /**
-* Returns more information for session_secret column
+* Returns schema information for session_secret column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_session_secret()
@@ -597,7 +597,7 @@ return array (
 	}
 
 /**
-* Returns more information for session_expires column
+* Returns schema information for session_expires column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_session_expires()
@@ -635,7 +635,7 @@ return array (
 	}
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_state()
@@ -689,7 +689,7 @@ return array (
 	}
 
 /**
-* Returns more information for provider_uid column
+* Returns schema information for provider_uid column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_provider_uid()

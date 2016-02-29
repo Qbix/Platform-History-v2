@@ -263,7 +263,7 @@ abstract class Base_Streams_Invite extends Db_Row
 	}
 
 /**
-* Returns more information for token column
+* Returns schema information for token column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_token()
@@ -317,7 +317,7 @@ return array (
 	}
 
 /**
-* Returns more information for userId column
+* Returns schema information for userId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_userId()
@@ -371,7 +371,7 @@ return array (
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -425,7 +425,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -479,7 +479,7 @@ return array (
 	}
 
 /**
-* Returns more information for invitingUserId column
+* Returns schema information for invitingUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_invitingUserId()
@@ -533,7 +533,7 @@ return array (
 	}
 
 /**
-* Returns more information for displayName column
+* Returns schema information for displayName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_displayName()
@@ -587,7 +587,7 @@ return array (
 	}
 
 /**
-* Returns more information for appUrl column
+* Returns schema information for appUrl column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_appUrl()
@@ -644,7 +644,7 @@ return array (
 	}
 
 /**
-* Returns more information for readLevel column
+* Returns schema information for readLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_readLevel()
@@ -701,7 +701,7 @@ return array (
 	}
 
 /**
-* Returns more information for writeLevel column
+* Returns schema information for writeLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_writeLevel()
@@ -758,7 +758,7 @@ return array (
 	}
 
 /**
-* Returns more information for adminLevel column
+* Returns schema information for adminLevel column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_adminLevel()
@@ -796,7 +796,7 @@ return array (
 	}
 
 /**
-* Returns more information for state column
+* Returns schema information for state column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_state()
@@ -841,7 +841,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -889,7 +889,7 @@ return array (
 	}
 
 /**
-* Returns more information for expireTime column
+* Returns schema information for expireTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_expireTime()

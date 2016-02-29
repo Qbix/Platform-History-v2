@@ -220,7 +220,7 @@ abstract class Base_Streams_Total extends Db_Row
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -274,7 +274,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -328,7 +328,7 @@ return array (
 	}
 
 /**
-* Returns more information for messageType column
+* Returns schema information for messageType column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_messageType()
@@ -382,7 +382,7 @@ return array (
 	}
 
 /**
-* Returns more information for messageCount column
+* Returns schema information for messageCount column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_messageCount()

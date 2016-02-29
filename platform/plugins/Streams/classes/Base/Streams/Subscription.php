@@ -240,7 +240,7 @@ abstract class Base_Streams_Subscription extends Db_Row
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -294,7 +294,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -348,7 +348,7 @@ return array (
 	}
 
 /**
-* Returns more information for ofUserId column
+* Returns schema information for ofUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_ofUserId()
@@ -393,7 +393,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -441,7 +441,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
@@ -489,7 +489,7 @@ return array (
 	}
 
 /**
-* Returns more information for untilTime column
+* Returns schema information for untilTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_untilTime()
@@ -543,7 +543,7 @@ return array (
 	}
 
 /**
-* Returns more information for filter column
+* Returns schema information for filter column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_filter()
@@ -597,7 +597,7 @@ return array (
 	}
 
 /**
-* Returns more information for duration column
+* Returns schema information for duration column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_duration()

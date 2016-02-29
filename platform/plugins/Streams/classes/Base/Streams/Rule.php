@@ -246,7 +246,7 @@ abstract class Base_Streams_Rule extends Db_Row
 	}
 
 /**
-* Returns more information for ofUserId column
+* Returns schema information for ofUserId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_ofUserId()
@@ -300,7 +300,7 @@ return array (
 	}
 
 /**
-* Returns more information for publisherId column
+* Returns schema information for publisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_publisherId()
@@ -354,7 +354,7 @@ return array (
 	}
 
 /**
-* Returns more information for streamName column
+* Returns schema information for streamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_streamName()
@@ -408,7 +408,7 @@ return array (
 	}
 
 /**
-* Returns more information for ordinal column
+* Returns schema information for ordinal column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_ordinal()
@@ -453,7 +453,7 @@ return array (
 	}
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_insertedTime()
@@ -501,7 +501,7 @@ return array (
 	}
 
 /**
-* Returns more information for readyTime column
+* Returns schema information for readyTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_readyTime()
@@ -555,7 +555,7 @@ return array (
 	}
 
 /**
-* Returns more information for filter column
+* Returns schema information for filter column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_filter()
@@ -609,7 +609,7 @@ return array (
 	}
 
 /**
-* Returns more information for deliver column
+* Returns schema information for deliver column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_deliver()
@@ -641,7 +641,7 @@ return array (
 	}
 
 /**
-* Returns more information for relevance column
+* Returns schema information for relevance column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_relevance()

@@ -254,23 +254,12 @@ Base.prototype.maxSize_toPublisherId = function () {
 };
 
 /**
-* Returns more information for toPublisherId column
+* Returns schema information for toPublisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_toPublisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -303,23 +292,12 @@ Base.prototype.maxSize_toStreamName = function () {
 };
 
 /**
-* Returns more information for toStreamName column
+* Returns schema information for toStreamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_toStreamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -352,23 +330,12 @@ Base.prototype.maxSize_type = function () {
 };
 
 /**
-* Returns more information for type column
+* Returns schema information for type column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_type = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);
+return [["varchar","255","",false],false,"PRI",""];
 };
 
 /**
@@ -401,23 +368,12 @@ Base.prototype.maxSize_fromPublisherId = function () {
 };
 
 /**
-* Returns more information for fromPublisherId column
+* Returns schema information for fromPublisherId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_fromPublisherId = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -450,23 +406,12 @@ Base.prototype.maxSize_fromStreamName = function () {
 };
 
 /**
-* Returns more information for fromStreamName column
+* Returns schema information for fromStreamName column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_fromStreamName = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -485,23 +430,12 @@ Base.prototype.beforeSet_weight = function (value) {
 };
 
 /**
-* Returns more information for weight column
+* Returns schema information for weight column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_weight = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'decimal',
-    1 => '14,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '1.0000',
-);
+return [["decimal","14,4","",false],false,"","1.0000"];
 };
 
 /**
@@ -517,23 +451,12 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 /**
-* Returns more information for insertedTime column
+* Returns schema information for insertedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 Base.prototype.column_insertedTime = function () {
 
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '14,4',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);
+return [["timestamp","14,4","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

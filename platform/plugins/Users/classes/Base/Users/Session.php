@@ -233,7 +233,7 @@ abstract class Base_Users_Session extends Db_Row
 	}
 
 /**
-* Returns more information for id column
+* Returns schema information for id column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_id()
@@ -287,7 +287,7 @@ return array (
 	}
 
 /**
-* Returns more information for content column
+* Returns schema information for content column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_content()
@@ -341,7 +341,7 @@ return array (
 	}
 
 /**
-* Returns more information for php column
+* Returns schema information for php column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_php()
@@ -395,7 +395,7 @@ return array (
 	}
 
 /**
-* Returns more information for deviceId column
+* Returns schema information for deviceId column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_deviceId()
@@ -449,7 +449,7 @@ return array (
 	}
 
 /**
-* Returns more information for timeout column
+* Returns schema information for timeout column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_timeout()
@@ -503,7 +503,7 @@ return array (
 	}
 
 /**
-* Returns more information for duration column
+* Returns schema information for duration column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_duration()
@@ -548,7 +548,7 @@ return array (
 	}
 
 /**
-* Returns more information for updatedTime column
+* Returns schema information for updatedTime column
 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 */
 	function column_updatedTime()
