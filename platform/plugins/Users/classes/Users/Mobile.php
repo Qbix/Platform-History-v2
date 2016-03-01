@@ -198,13 +198,17 @@ class Users_Mobile extends Base_Users_Mobile
 		}
 		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
 			. ' mobileNumber='.urlencode($number);
+		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
+			'authCode' =>  $this->authCode, 
+			'emailAddress' => $this->address
+		));
 		$communityName = Users::communityName();
 		/**
 		 * @event Users/resend {before}
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/resend', compact('user', 'mobile', 'link'), 'before');
+		Q::event('Users/resend', compact('user', 'mobile', 'link', 'unsubscribe'), 'before');
 		$this->save();
 		$fields2 = array_merge($fields, array(
 			'user' => $user,

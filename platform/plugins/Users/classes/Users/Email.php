@@ -202,13 +202,17 @@ class Users_Email extends Base_Users_Email
 		$this->authCode = md5(microtime() + mt_rand());
 		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
 			. ' emailAddress='.urlencode($this->address);
+		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
+			'authCode' =>  $this->authCode, 
+			'emailAddress' => $this->address
+		));
 		$communityName = Users::communityName();
 		/**
 		 * @event Users/resend {before}
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/resend', compact('user', 'email', 'link'), 'before');
+		Q::event('Users/resend', compact('user', 'email', 'link', 'unsubscribe'), 'before');
 		$this->save();
 		$email = $this;
 		$fields2 = array_merge($fields, array(
