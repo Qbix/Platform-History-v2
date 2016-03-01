@@ -429,8 +429,8 @@ class Users_User extends Base_Users_User
 		$email->authCode = md5(microtime() + mt_rand());
 		$link = 'Users/activate?code='.urlencode($email->activationCode) . ' emailAddress='.urlencode($email->address);
 		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
-			'authCode' =>  $this->authCode, 
-			'emailAddress' => $this->address
+			'authCode' =>  $email->authCode, 
+			'emailAddress' => $email->address
 		));
 		$communityName = Users::communityName();
 		/**

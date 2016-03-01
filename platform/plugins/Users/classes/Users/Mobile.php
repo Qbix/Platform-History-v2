@@ -198,10 +198,7 @@ class Users_Mobile extends Base_Users_Mobile
 		}
 		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
 			. ' mobileNumber='.urlencode($number);
-		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
-			'authCode' =>  $this->authCode, 
-			'emailAddress' => $this->address
-		));
+		$unsubscribe = 'Users/unsubscribe?mobileNumber='.urlencode($number);
 		$communityName = Users::communityName();
 		/**
 		 * @event Users/resend {before}
