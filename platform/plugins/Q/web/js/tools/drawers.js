@@ -521,14 +521,15 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 				if (columns.state.currentIndex != columnIndex
 				&& state.$pinnedElement
 				&& state.behind[state.currentIndex]) {
-					state.$pinnedElement
+					state.$hiddenElements = state.$pinnedElement
 					.add(state.$trigger).hide();
 				}
 				columns.state.beforeOpen.set(function (options, index) {
 					if (index !== columnIndex
 					&& state.$pinnedElement
 					&& state.behind[state.currentIndex]) {
-						state.$hiddenElements = state.$pinnedElement.add(state.$trigger).hide();
+						state.$hiddenElements = state.$pinnedElement
+						.add(state.$trigger).hide();
 					}
 				}, tool);
 				columns.state.beforeClose.set(function (index, indexAfterClose) {
