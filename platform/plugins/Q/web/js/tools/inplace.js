@@ -617,7 +617,7 @@ Q.Template.set('Q/inplace/tool',
 +	"</div>"
 +	"<form class='Q_inplace_tool_form' method='{{method}}' action='{{action}}'>"
 +		"{{#if isTextarea}}"
-+			"textarea name='{{field}}' placeholder='{{placeholder}}' rows='5' cols='80'>{{text}}</textarea>"
++			"<textarea name='{{field}}' placeholder='{{placeholder}}' rows='5' cols='80'>{{text}}</textarea>"
 +		"{{/if}}"
 +		"{{#if isText}}"
 +			"<input name='{{field}}' placeholder='{{placeholder}}' value='{{text}}' type='{{type}}' >"
