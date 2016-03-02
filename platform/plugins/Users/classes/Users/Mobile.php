@@ -213,7 +213,8 @@ class Users_Mobile extends Base_Users_Mobile
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
 			'baseUrl' => Q_Request::baseUrl(),
-			'link' => $link
+			'link' => $link,
+			'unsubscribe' => $unsubscribe
 		));
 		$this->sendMessage( 
 			$view, 

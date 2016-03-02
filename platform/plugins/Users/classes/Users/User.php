@@ -461,7 +461,8 @@ class Users_User extends Base_Users_User
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
 			'baseUrl' => Q_Request::baseUrl(),
-			'link' => $link
+			'link' => $link,
+			'unsubscribe' => $unsubscribe
 		));
 		$email->sendMessage(
 			$activationEmailSubject, 

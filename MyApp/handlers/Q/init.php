@@ -26,7 +26,7 @@ function log_shard_query($params)
 	foreach ($params['queries'] as $shard => $query) {
 		if ($query->className === 'Users_Session') {
 			continue;
-		}
+		} 
 		$connection = $query->db->connectionName();
 		if ($begin = $query->getClause('BEGIN')
 		and $query->nestedTransactionCount == 1) {

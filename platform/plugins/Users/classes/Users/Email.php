@@ -32,12 +32,11 @@ class Users_Email extends Base_Users_Email
 	 *  The name of a view for the body. Fields are passed to it.
 	 * @param {array} $fields=array()
 	 *  The fields referenced in the subject and/or view
-	 * @param {array} $options=array()
-	 *  Array of options. Can include:<br/>
-	 *  "html" => Defaults to false. Whether to send as HTML email.<br/>
-	 *  "name" => A human-readable name in addition to the address.<br/>
-	 *  "from" => An array of (emailAddress, human_readable_name)<br/>
-	 *  "delay" => A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {array} [$options=array()] Array of options. Can include:
+	 * @param {array} [$options.html] Defaults to false. Whether to send as HTML email.
+	 * @param {array} [$options.name] A human-readable name in addition to the address to send to.
+	 * @param {array} [$options.from] An array of (emailAddress, humanReadableName)
+	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 */
 	function sendMessage(
 		$subject,
@@ -222,6 +221,7 @@ class Users_Email extends Base_Users_Email
 			'communityName' => $communityName,
 			'baseUrl' => Q_Request::baseUrl(),
 			'link' => $link,
+			'unsubscribe' => $unsubscribe
 		));
 		$this->sendMessage(
 			$subject, 
