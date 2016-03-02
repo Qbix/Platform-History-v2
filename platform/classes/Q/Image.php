@@ -39,6 +39,13 @@ class Q_Image
      * @throws {Q_Exception_WrongValue} If avatar type is not supported
 	 */
 	static function avatar($hash, $size = Q_AVATAR_SIZE, $type = 'wavatar', $gravatar = false) {
+		if (is_string($size)) {
+			$parts = explode('x', $size);
+			$size = max((integer)reset($parts), (integer)next($parts));
+			if ($size === 0) {
+				$size = Q_AVATAR_SIZE;
+			}
+		}
 		if ($gravatar) {
 			$avatar = @file_get_contents("http://www.gravatar.com/avatar/$hash?r=g&d=$type&s=$size");
 		}
