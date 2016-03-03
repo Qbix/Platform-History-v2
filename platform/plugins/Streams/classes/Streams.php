@@ -2618,8 +2618,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $identifier User identifier
 	 * @param {array} $icon=array() User icon
 	 * @param {string} $provider=null Provider
-	 * @param {array} $options=array() An array of options that could include:
-	 *  "activation": The key under "Users"/"transactional" config to use for sending an activation message.
+	 * @param {array} [$options=array()] An array of options that could include:
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else

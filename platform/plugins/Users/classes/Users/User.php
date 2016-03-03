@@ -366,12 +366,12 @@ class Users_User extends Base_Users_User
 	 *  Defaults to true. Whether to send as HTML email.
 	 * @param {array} [$fields=array()]
 	 *  An array of additional fields to pass to the email view.
-	 * @param {array} $options=array()
-	 *  Array of options. Can include:<br/>
-	 *  "html" => Defaults to false. Whether to send as HTML email.<br/>
-	 *  "name" => A human-readable name in addition to the address.<br/>
-	 *  "from" => An array of (emailAddress, human_readable_name)<br/>
-	 *  "delay" => A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {array} [$options=array()] Array of options. Can include:
+	 * @param {string} [$options.html] Defaults to false. Whether to send as HTML email.<br/>
+	 * @param {string} [$options.name] A human-readable name in addition to the address.
+	 * @param {string} [$options.from] An array of (emailAddress, human_readable_name)
+	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
 	 * @return {boolean}
 	 *  Returns true on success.
 	 *  Returns false if this email address is already verified for this user.
@@ -385,8 +385,8 @@ class Users_User extends Base_Users_User
 		$emailAddress,
 		$activationEmailSubject = null,
 		$activationEmailView = null,
-		$fields = array(),
-		$options = array())
+		array $fields = array(),
+		array $options = array())
 	{
 		if (!isset($options['html'])) {
 			$options['html'] = true;
@@ -444,32 +444,33 @@ class Users_User extends Base_Users_User
 		$this->emailAddressPending = $normalized;
 		$this->save();
 		
-		if (!isset($activationEmailView)) {
-			$activationEmailView = Q_Config::get(
-				'Users', 'transactional', 'activation', 'body', 'Users/email/activation.php'
-			);
+		if ($activation = Q::ifset($options, 'activation', 'activation')) {
+			if (!isset($activationEmailView)) {
+				$activationEmailView = Q_Config::get(
+					'Users', 'transactional', $activation, 'body', 'Users/email/activation.php'
+				);
+			}
+			if (!isset($activationEmailSubject)) {
+				$activationEmailSubject = Q_Config::get(
+					'Users', 'transactional', $activation, 'subject', "Welcome! Please confirm your email address." 
+				);
+			}
+			$fields2 = array_merge($fields, array(
+				'user' => $this,
+				'email' => $email,
+				'app' => Q_Config::expect('Q', 'app'),
+				'communityName' => $communityName,
+				'baseUrl' => Q_Request::baseUrl(),
+				'link' => $link,
+				'unsubscribe' => $unsubscribe
+			));
+			$email->sendMessage(
+				$activationEmailSubject, 
+				$activationEmailView, 
+				$fields2,
+				$options
+			); // may throw exception if badly configured
 		}
-		if (!isset($activationEmailSubject)) {
-			$activationEmailSubject = Q_Config::get(
-				'Users', 'transactional', 'activation', 'subject', "Welcome! Please confirm your email address." 
-			);
-		}
-
-		$fields2 = array_merge($fields, array(
-			'user' => $this,
-			'email' => $email,
-			'app' => Q_Config::expect('Q', 'app'),
-			'communityName' => $communityName,
-			'baseUrl' => Q_Request::baseUrl(),
-			'link' => $link,
-			'unsubscribe' => $unsubscribe
-		));
-		$email->sendMessage(
-			$activationEmailSubject, 
-			$activationEmailView, 
-			$fields2,
-			$options
-		); // may throw exception if badly configured
 		
 		/**
 		 * @event Users/addIdentifier {after}
@@ -563,9 +564,9 @@ class Users_User extends Base_Users_User
 	 *  The view to use for the body of the activation message to send.
 	 * @param {array} [$fields=array()]
 	 *  An array of additional fields to pass to the mobile view.
-	 * @param {array} $options=array()
-	 *  Array of options. Can include:<br/>
-	 *  "delay" => A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {array} [$options=array()] Array of options. Can include:
+	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
 	 * @return {boolean}
 	 *  Returns true on success.
 	 *  Returns false if this mobile number is already verified for this user.
@@ -578,8 +579,8 @@ class Users_User extends Base_Users_User
 	function addMobile(
 		$mobileNumber,
 		$activationMessageView = null,
-		$fields = array(),
-		$options = array())
+		array $fields = array(),
+		array $options = array())
 	{
 		if (!Q_Valid::phone($mobileNumber, $normalized)) {
 			throw new Q_Exception_WrongValue(array(
@@ -635,25 +636,26 @@ class Users_User extends Base_Users_User
 		$this->mobileNumberPending = $normalized;
 		$this->save();
 		
-		if (!isset($activationMessageView)) {
-			$activationMessageView = Q_Config::get(
-				'Users', 'transactional', 'activation', 'sms', 'Users/sms/activation.php'
+		if ($activation = Q::ifset($options, 'activation', 'activation')) {
+			if (!isset($activationMessageView)) {
+				$activationMessageView = Q_Config::get(
+					'Users', 'transactional', $activation, 'sms', 'Users/sms/activation.php'
+				);
+			}
+			$fields2 = array_merge($fields, array(
+				'user' => $this,
+				'mobile' => $mobile,
+				'app' => Q_Config::expect('Q', 'app'),
+				'communityName' => $communityName,
+				'baseUrl' => Q_Request::baseUrl(),
+				'link' => $link
+			));
+			$mobile->sendMessage(
+				$activationMessageView, 
+				$fields2,
+				$options
 			);
 		}
-
-		$fields2 = array_merge($fields, array(
-			'user' => $this,
-			'mobile' => $mobile,
-			'app' => Q_Config::expect('Q', 'app'),
-			'communityName' => $communityName,
-			'baseUrl' => Q_Request::baseUrl(),
-			'link' => $link
-		));
-		$mobile->sendMessage(
-			$activationMessageView, 
-			$fields2,
-			$options
-		);
 		
 		Q_Response::removeNotice('Users/mobile');
 		
