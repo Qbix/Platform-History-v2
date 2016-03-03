@@ -2844,7 +2844,7 @@ Participant.get.onError = new Q.Event();
  * @param {Array} fields
  */
 var Avatar = Streams.Avatar = function Streams_Avatar (fields) {
-	this.fields = Q.extend({}, fields);
+	Q.extend(this, fields);
 	this.typename = 'Q.Streams.Avatar';
 };
 
