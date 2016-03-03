@@ -10,9 +10,9 @@
  * @package Q
  */
  
-// Enforce PHP version to be > 5.0
-if (version_compare(PHP_VERSION, '5.0.0', '<')) {
-	die("Q requires PHP version 5.0 or higher.");
+// Enforce PHP version to be > 5.3
+if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+	die("Q requires PHP version 5.3 or higher.");
 }
 
 // Was this loaded? In that case, do nothing.
