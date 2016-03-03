@@ -236,6 +236,15 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -263,6 +272,15 @@ Base.prototype.beforeSet_streamName = function (value) {
 Base.prototype.maxSize_streamName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_streamName = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -294,6 +312,15 @@ Base.prototype.maxSize_messageType = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for messageType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_messageType = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_messageCount
@@ -318,6 +345,15 @@ Base.prototype.beforeSet_messageCount = function (value) {
 Base.prototype.maxSize_messageCount = function () {
 
 		return 9223372036854775807;
+};
+
+	/**
+	 * Returns schema information for messageCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_messageCount = function () {
+
+return [["bigint","20","",false],false,"","0"];
 };
 
 /**

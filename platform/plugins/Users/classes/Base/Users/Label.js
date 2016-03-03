@@ -235,6 +235,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -262,6 +271,15 @@ Base.prototype.beforeSet_label = function (value) {
 Base.prototype.maxSize_label = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for label column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_label = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -293,6 +311,15 @@ Base.prototype.maxSize_icon = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_icon = function () {
+
+return [["varchar","255","",false],false,"","default"];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -320,6 +347,15 @@ Base.prototype.beforeSet_title = function (value) {
 Base.prototype.maxSize_title = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for title column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_title = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**

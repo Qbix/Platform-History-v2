@@ -443,7 +443,7 @@ class Streams_Stream extends Base_Streams_Stream
 		foreach ($classes as $k => $v) {
 			foreach ($v as $f) {
 				if ($f === $field and method_exists($this->rows[$k], "maxSize_$field")) {
-					return call_user_func($this->rows[$k], "maxSize_$field");
+					return call_user_func(array($this->rows[$k], "maxSize_$field"));
 				}
 			}
 		}

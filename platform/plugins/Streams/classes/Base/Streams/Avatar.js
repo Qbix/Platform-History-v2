@@ -250,6 +250,15 @@ Base.prototype.maxSize_toUserId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for toUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_toUserId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -279,6 +288,15 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
@@ -290,6 +308,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","31","",false],true,"",null];
 };
 
 /**
@@ -321,6 +348,15 @@ Base.prototype.maxSize_username = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for username column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_username = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -348,6 +384,15 @@ Base.prototype.beforeSet_firstName = function (value) {
 Base.prototype.maxSize_firstName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for firstName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_firstName = function () {
+
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -379,6 +424,15 @@ Base.prototype.maxSize_lastName = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for lastName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_lastName = function () {
+
+return [["varchar","255","",false],false,"",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -406,6 +460,15 @@ Base.prototype.beforeSet_icon = function (value) {
 Base.prototype.maxSize_icon = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_icon = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**

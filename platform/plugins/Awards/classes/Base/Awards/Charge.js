@@ -249,6 +249,15 @@ Base.prototype.maxSize_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_id = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -276,6 +285,15 @@ Base.prototype.beforeSet_userId = function (value) {
 Base.prototype.maxSize_userId = function () {
 
 		return 31;
+};
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"",null];
 };
 
 /**
@@ -307,6 +325,15 @@ Base.prototype.maxSize_subscriptionId = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for subscriptionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_subscriptionId = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -334,6 +361,15 @@ Base.prototype.beforeSet_description = function (value) {
 Base.prototype.maxSize_description = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for description column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_description = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -365,6 +401,15 @@ Base.prototype.maxSize_attributes = function () {
 		return 1023;
 };
 
+	/**
+	 * Returns schema information for attributes column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_attributes = function () {
+
+return [["varchar","1023","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -377,6 +422,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
@@ -387,6 +441,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 };
 
 Base.prototype.beforeSave = function (value) {

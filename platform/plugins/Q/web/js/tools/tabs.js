@@ -297,14 +297,11 @@ Q.Tool.define("Q/tabs", function(options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
-		var w = $te.width(), w2 = 0, w3 = 0, index = -10;
+		var w = $te.find('.Q_tabs_tabs').width();
+		var w2 = 0, w3 = 0, index = -10;
 		var $o = $('.Q_tabs_overflow', $te);
 		Q.handle(state.beforeRefresh, tool, []);
 		tool.indicateCurrent();
-		var te = tool.element;
-		if (!parseInt(te.style.width)) {
-			w = te.remainingWidth();
-		}
 		if ($o.length) {
 			var cs = $o.state('Q/contextual');
 			if (cs) {

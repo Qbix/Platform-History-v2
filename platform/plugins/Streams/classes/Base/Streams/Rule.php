@@ -246,6 +246,27 @@ abstract class Base_Streams_Rule extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for ofUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_ofUserId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_publisherId
@@ -276,6 +297,27 @@ abstract class Base_Streams_Rule extends Db_Row
 	{
 
 		return 31;			
+	}
+
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
 	}
 
 	/**
@@ -312,6 +354,27 @@ abstract class Base_Streams_Rule extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_streamName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_ordinal
 	 * @param {integer} $value
@@ -345,6 +408,27 @@ abstract class Base_Streams_Rule extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for ordinal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_ordinal()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -366,6 +450,27 @@ abstract class Base_Streams_Rule extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**
@@ -393,6 +498,27 @@ abstract class Base_Streams_Rule extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('readyTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for readyTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_readyTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -429,6 +555,27 @@ abstract class Base_Streams_Rule extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for filter column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_filter()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_deliver
@@ -461,6 +608,27 @@ abstract class Base_Streams_Rule extends Db_Row
 		return 255;			
 	}
 
+	/**
+	 * Returns schema information for deliver column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_deliver()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_relevance($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -470,6 +638,27 @@ abstract class Base_Streams_Rule extends Db_Row
 			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".relevance");
 		$value = floatval($value);
 		return array('relevance', $value);			
+	}
+
+	/**
+	 * Returns schema information for relevance column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_relevance()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '14,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

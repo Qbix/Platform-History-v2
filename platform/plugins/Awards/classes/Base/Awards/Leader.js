@@ -236,6 +236,15 @@ Base.prototype.maxSize_app = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_app = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_day
@@ -246,6 +255,15 @@ Base.prototype.beforeSet_day = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for day column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_day = function () {
+
+return [["date","255","",false],false,"PRI",null];
 };
 
 /**
@@ -277,6 +295,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_points
@@ -301,6 +328,15 @@ Base.prototype.beforeSet_points = function (value) {
 Base.prototype.maxSize_points = function () {
 
 		return 32767;
+};
+
+	/**
+	 * Returns schema information for points column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_points = function () {
+
+return [["smallint","4","",false],false,"","0"];
 };
 
 /**

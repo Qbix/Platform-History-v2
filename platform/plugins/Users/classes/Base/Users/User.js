@@ -309,6 +309,15 @@ Base.prototype.maxSize_id = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_id = function () {
+
+return [["varchar","31","",false],false,"PRI","0"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -319,6 +328,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -332,6 +350,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","31","",false],true,"",null];
 };
 
 /**
@@ -362,6 +389,15 @@ Base.prototype.maxSize_sessionId = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for sessionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_sessionId = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_sessionCount
@@ -386,6 +422,15 @@ Base.prototype.beforeSet_sessionCount = function (value) {
 Base.prototype.maxSize_sessionCount = function () {
 
 		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for sessionCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_sessionCount = function () {
+
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -414,6 +459,15 @@ Base.prototype.maxSize_fb_uid = function () {
 		return 9223372036854775807;
 };
 
+	/**
+	 * Returns schema information for fb_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_fb_uid = function () {
+
+return [["bigint","20","",false],false,"","0"];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_tw_uid
@@ -438,6 +492,15 @@ Base.prototype.beforeSet_tw_uid = function (value) {
 Base.prototype.maxSize_tw_uid = function () {
 
 		return 9223372036854775807;
+};
+
+	/**
+	 * Returns schema information for tw_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_tw_uid = function () {
+
+return [["bigint","20","",false],false,"","0"];
 };
 
 /**
@@ -468,6 +531,15 @@ Base.prototype.maxSize_g_uid = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for g_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_g_uid = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -494,6 +566,15 @@ Base.prototype.beforeSet_y_uid = function (value) {
 Base.prototype.maxSize_y_uid = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for y_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_y_uid = function () {
+
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -524,6 +605,15 @@ Base.prototype.maxSize_passphraseHash = function () {
 		return 64;
 };
 
+	/**
+	 * Returns schema information for passphraseHash column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_passphraseHash = function () {
+
+return [["varbinary","64","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -552,6 +642,15 @@ Base.prototype.maxSize_emailAddress = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for emailAddress column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_emailAddress = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -578,6 +677,15 @@ Base.prototype.beforeSet_mobileNumber = function (value) {
 Base.prototype.maxSize_mobileNumber = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for mobileNumber column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_mobileNumber = function () {
+
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -609,6 +717,15 @@ Base.prototype.maxSize_emailAddressPending = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for emailAddressPending column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_emailAddressPending = function () {
+
+return [["varchar","255","",false],false,"",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -638,6 +755,15 @@ Base.prototype.maxSize_mobileNumberPending = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for mobileNumberPending column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_mobileNumberPending = function () {
+
+return [["varchar","255","",false],false,"",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_signedUpWith
@@ -650,6 +776,15 @@ Base.prototype.beforeSet_signedUpWith = function (value) {
 		if (['none','email','mobile','facebook','twitter','remote'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".signedUpWith");
 		return value;
+};
+
+	/**
+	 * Returns schema information for signedUpWith column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_signedUpWith = function () {
+
+return [["enum","'none','email','mobile','facebook','twitter','remote'","",false],false,"","none"];
 };
 
 /**
@@ -681,6 +816,15 @@ Base.prototype.maxSize_username = function () {
 		return 63;
 };
 
+	/**
+	 * Returns schema information for username column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_username = function () {
+
+return [["varchar","63","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -708,6 +852,15 @@ Base.prototype.beforeSet_icon = function (value) {
 Base.prototype.maxSize_icon = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_icon = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -738,6 +891,15 @@ Base.prototype.maxSize_url = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for url column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_url = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -764,6 +926,15 @@ Base.prototype.beforeSet_pincodeHash = function (value) {
 Base.prototype.maxSize_pincodeHash = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for pincodeHash column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_pincodeHash = function () {
+
+return [["varchar","255","",false],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {

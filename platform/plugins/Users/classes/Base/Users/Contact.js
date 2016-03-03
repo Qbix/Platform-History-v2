@@ -241,6 +241,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -268,6 +277,15 @@ Base.prototype.beforeSet_label = function (value) {
 Base.prototype.maxSize_label = function () {
 
 		return 63;
+};
+
+	/**
+	 * Returns schema information for label column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_label = function () {
+
+return [["varchar","63","",false],false,"PRI",null];
 };
 
 /**
@@ -299,6 +317,15 @@ Base.prototype.maxSize_contactUserId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for contactUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_contactUserId = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -328,6 +355,15 @@ Base.prototype.maxSize_nickname = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for nickname column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_nickname = function () {
+
+return [["varchar","255","",false],false,"",""];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -338,6 +374,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

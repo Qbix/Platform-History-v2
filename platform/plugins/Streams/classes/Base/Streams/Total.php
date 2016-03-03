@@ -220,6 +220,27 @@ abstract class Base_Streams_Total extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_streamName
@@ -250,6 +271,27 @@ abstract class Base_Streams_Total extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_streamName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -286,6 +328,27 @@ abstract class Base_Streams_Total extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for messageType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_messageType()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_messageCount
 	 * @param {integer} $value
@@ -316,6 +379,27 @@ abstract class Base_Streams_Total extends Db_Row
 	{
 
 		return 9223372036854775807;			
+	}
+
+	/**
+	 * Returns schema information for messageCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_messageCount()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**

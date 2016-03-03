@@ -204,7 +204,8 @@ body.Q_preventScroll {
 
 /* buttons */
 
-div.Q_buttons { text-align: center; }
+.Q_buttons { text-align: center; }
+.Q_buttons * { vertical-align: middle; }
 
 .Q_button {
 	white-space: nowrap;

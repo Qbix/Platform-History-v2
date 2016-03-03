@@ -269,6 +269,15 @@ Base.prototype.maxSize_number = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for number column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_number = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -279,6 +288,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -292,6 +310,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","255","",false],true,"MUL",null];
 };
 
 /**
@@ -323,6 +350,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"MUL",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -352,6 +388,15 @@ Base.prototype.maxSize_extension = function () {
 		return 7;
 };
 
+	/**
+	 * Returns schema information for extension column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_extension = function () {
+
+return [["varchar","7","",false],false,"",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_carrier
@@ -364,6 +409,15 @@ Base.prototype.beforeSet_carrier = function (value) {
 		if (['unverified','att','cingular','sprint','tmobile','verizon'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".carrier");
 		return value;
+};
+
+	/**
+	 * Returns schema information for carrier column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_carrier = function () {
+
+return [["enum","'unverified','att','cingular','sprint','tmobile','verizon'","",false],false,"","unverified"];
 };
 
 /**
@@ -380,6 +434,15 @@ Base.prototype.beforeSet_state = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_state = function () {
+
+return [["enum","'unverified','active','suspended','unsubscribed'","",false],false,"","unverified"];
+};
+
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_capabilities
@@ -392,6 +455,15 @@ Base.prototype.beforeSet_capabilities = function (value) {
 		if (['unverified','sms','wap','internet','sms_and_wap','sms_and_internet'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".capabilities");
 		return value;
+};
+
+	/**
+	 * Returns schema information for capabilities column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_capabilities = function () {
+
+return [["enum","'unverified','sms','wap','internet','sms_and_wap','sms_and_internet'","",false],false,"","unverified"];
 };
 
 /**
@@ -423,6 +495,15 @@ Base.prototype.maxSize_activationCode = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for activationCode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_activationCode = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_activationCodeExpires
@@ -433,6 +514,15 @@ Base.prototype.beforeSet_activationCodeExpires = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for activationCodeExpires column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_activationCodeExpires = function () {
+
+return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**
@@ -462,6 +552,15 @@ Base.prototype.beforeSet_authCode = function (value) {
 Base.prototype.maxSize_authCode = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for authCode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_authCode = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**

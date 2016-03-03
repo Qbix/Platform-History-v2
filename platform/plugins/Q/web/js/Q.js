@@ -10076,8 +10076,10 @@ Q.confirm = function(message, callback, options) {
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
-			$('<button />').html(o.ok),
-			$('<button />').html(o.cancel)
+			$('<div class="Q_buttons" />').append(
+				$('<button class="Q_button" />').html(o.ok), ' ',
+				$('<button class="Q_button" />').html(o.cancel)
+			)
 		),
 		'className': 'Q_confirm',
 		'noClose': o.noClose,
@@ -10133,8 +10135,10 @@ Q.prompt = function(message, callback, options) {
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
-			$('<input type="text" />').attr('placeholder', o.placeholder),
-			$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
+			$('<div class="Q_buttons" />').append(
+				$('<input type="text" />').attr('placeholder', o.placeholder), ' ',
+				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
+			)
 		),
 		'className': 'Q_prompt',
 		'onActivate': function(dialog) {

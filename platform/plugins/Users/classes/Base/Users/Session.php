@@ -233,6 +233,27 @@ abstract class Base_Users_Session extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_id()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_content
@@ -263,6 +284,27 @@ abstract class Base_Users_Session extends Db_Row
 	{
 
 		return 4095;			
+	}
+
+	/**
+	 * Returns schema information for content column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_content()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '4095',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -299,6 +341,27 @@ abstract class Base_Users_Session extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for php column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_php()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '4095',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_deviceId
@@ -329,6 +392,27 @@ abstract class Base_Users_Session extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for deviceId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_deviceId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -365,6 +449,27 @@ abstract class Base_Users_Session extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for timeout column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_timeout()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_duration
 	 * @param {integer} $value
@@ -398,6 +503,27 @@ abstract class Base_Users_Session extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for duration column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_duration()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_updatedTime
 	 * @param {string} $value
@@ -419,6 +545,27 @@ abstract class Base_Users_Session extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**

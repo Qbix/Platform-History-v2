@@ -54,8 +54,10 @@ Q.Tool.define("Users/avatar", function(options) {
 	}
 	Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
 	.set(function (fields, field) {
-		tool.$('.Users_avatar_icon').attr('src', 
-			Q.url(Streams.iconUrl(fields.icon), null, {
+		var $img = tool.$('.Users_avatar_icon');
+		var iconSize = state.icon || $img.width();
+		$img.attr('src', 
+			Q.url(Streams.iconUrl(fields.icon, iconSize), null, {
 				cacheBust: state.cacheBustOnUpdate
 			})
 		);

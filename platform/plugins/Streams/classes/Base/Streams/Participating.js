@@ -256,6 +256,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -283,6 +292,15 @@ Base.prototype.beforeSet_publisherId = function (value) {
 Base.prototype.maxSize_publisherId = function () {
 
 		return 31;
+};
+
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -314,6 +332,15 @@ Base.prototype.maxSize_streamName = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_streamName = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
@@ -326,6 +353,15 @@ Base.prototype.beforeSet_state = function (value) {
 		if (['invited','participating','left'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
 		return value;
+};
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_state = function () {
+
+return [["enum","'invited','participating','left'","",false],false,"",null];
 };
 
 /**
@@ -352,6 +388,15 @@ Base.prototype.beforeSet_fresh = function (value) {
 Base.prototype.maxSize_fresh = function () {
 
 		return 4294967295;
+};
+
+	/**
+	 * Returns schema information for fresh column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_fresh = function () {
+
+return [["int","10"," unsigned",true],false,"","0"];
 };
 
 /**
@@ -383,6 +428,15 @@ Base.prototype.maxSize_extra = function () {
 		return 1023;
 };
 
+	/**
+	 * Returns schema information for extra column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_extra = function () {
+
+return [["varchar","1023","",false],false,"","{}"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -395,6 +449,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
@@ -405,6 +468,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**

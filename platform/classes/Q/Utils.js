@@ -167,13 +167,11 @@ function parse_url (str, component) {
  *  of the $fields array.
  * @param {string} view The name of a view for the body. Fields are passed to it.
  * @param {array} [fields={}] The fields referenced in the subject and/or view
- * @param {array} [$options={}] Array of options. Can include:
- *
- * "html": Defaults to false. Whether to send as HTML email.
- * "name": A human-readable name in addition to the address.
- * "from": An array of emailAddress, human_readable_name.
- * "isSource": If true, the view parameter contains the exact source, not the path of the template
- *
+ * @param {array} [options={}] Array of options. Can include:
+ * @param {array} [options.html] Defaults to false. Whether to send as HTML email.
+ * @param {array} [options.name] A human-readable name in addition to the address to send to.
+ * @param {array} [options.from] An array of [emailAddress, humanReadableName].
+ * @param {array} [options.isSource] If true, the view parameter contains the exact source, not the path of the template
  * @param {function} callback Receives error and response objects after complete
  */
 var smtpTransport = null;

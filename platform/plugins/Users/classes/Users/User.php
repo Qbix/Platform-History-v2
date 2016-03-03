@@ -428,13 +428,17 @@ class Users_User extends Base_Users_User
 		);
 		$email->authCode = md5(microtime() + mt_rand());
 		$link = 'Users/activate?code='.urlencode($email->activationCode) . ' emailAddress='.urlencode($email->address);
+		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
+			'authCode' =>  $email->authCode, 
+			'emailAddress' => $email->address
+		));
 		$communityName = Users::communityName();
 		/**
 		 * @event Users/addIdentifier {before}
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/addIdentifier', compact('user', 'email', 'link'), 'before');
+		Q::event('Users/addIdentifier', compact('user', 'email', 'link', 'unsubscribe'), 'before');
 		$email->save();
 		
 		$this->emailAddressPending = $normalized;
@@ -457,7 +461,8 @@ class Users_User extends Base_Users_User
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
 			'baseUrl' => Q_Request::baseUrl(),
-			'link' => $link
+			'link' => $link,
+			'unsubscribe' => $unsubscribe
 		));
 		$email->sendMessage(
 			$activationEmailSubject, 

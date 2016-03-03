@@ -220,6 +220,27 @@ abstract class Base_Awards_Leader extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_app()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the date string
 	 * @method beforeSet_day
 	 * @param {string} $value
@@ -243,6 +264,27 @@ abstract class Base_Awards_Leader extends Db_Row
 		}
 		$value = sprintf("%04d-%02d-%02d", $year, $month, $day);
 		return array('day', $value);			
+	}
+
+	/**
+	 * Returns schema information for day column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_day()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'date',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -279,6 +321,27 @@ abstract class Base_Awards_Leader extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_points
 	 * @param {integer} $value
@@ -309,6 +372,27 @@ abstract class Base_Awards_Leader extends Db_Row
 	{
 
 		return 32767;			
+	}
+
+	/**
+	 * Returns schema information for points column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_points()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'smallint',
+    1 => '4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**

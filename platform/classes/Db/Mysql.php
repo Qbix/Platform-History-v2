@@ -1555,7 +1555,7 @@ EOT;
 			if (isset($pieces[1])) {
 				$pieces2 = explode(')', $pieces[1]);
 				$pieces2_count = count($pieces2);
-				if ($pieces2_count > 2) {
+				if ($pieces2_count > 2) { // could happen if enum's values have ")"
 					$pieces2 = array(
 						implode(')', array_slice($pieces2, 0, -1)), 
 						end($pieces2)
@@ -1911,6 +1911,35 @@ EOT;
 			and ! $auto_inc and !isset($field_default)) {
 				$required_field_names[] = "'$field_name'";
 			}
+			
+			$columnInfo = array(
+				array($type_name, $type_display_range, $type_modifiers, $type_unsigned),
+				$field_null,
+				$table_col['Key'],
+				$table_col['Default']
+			);
+			$columnInfo_php = var_export($columnInfo, true);
+			$columnInfo_js = json_encode($columnInfo);
+			$functions["column_$field_name"]['comment'] = <<<EOT
+	$dc
+	 * Returns schema information for $field_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+EOT;
+			$functions["column_$field_name"]['args'] = '';
+			$functions["column_$field_name"]['return_statement'] = <<<EOT
+return $columnInfo_php;
+EOT;
+			$js_functions["column_$field_name"]['comment'] = <<<EOT
+	$dc
+	 * Returns schema information for $field_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+EOT;
+			$js_functions["column_$field_name"]['args'] = '';
+			$js_functions["column_$field_name"]['return_statement'] = <<<EOT
+return $columnInfo_js;
+EOT;
 		
 		}
 		

@@ -229,6 +229,27 @@ abstract class Base_Streams_Invited extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_token
@@ -262,6 +283,27 @@ abstract class Base_Streams_Invited extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for token column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_token()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_state
 	 * @param {string} $value
@@ -276,6 +318,27 @@ abstract class Base_Streams_Invited extends Db_Row
 		if (!in_array($value, array('pending','accepted','declined','forwarded','expired','claimed')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".state");
 		return array('state', $value);			
+	}
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_state()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'pending',
+);			
 	}
 
 	/**
@@ -303,6 +366,27 @@ abstract class Base_Streams_Invited extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_updatedTime
 	 * @param {string} $value
@@ -324,6 +408,27 @@ abstract class Base_Streams_Invited extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0000-00-00 00:00:00',
+);			
 	}
 
 	/**
@@ -351,6 +456,27 @@ abstract class Base_Streams_Invited extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('expireTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for expireTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_expireTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

@@ -230,6 +230,27 @@ abstract class Base_Users_Vote extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_forType
@@ -260,6 +281,27 @@ abstract class Base_Users_Vote extends Db_Row
 	{
 
 		return 31;			
+	}
+
+	/**
+	 * Returns schema information for forType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_forType()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -295,6 +337,27 @@ abstract class Base_Users_Vote extends Db_Row
 		return 255;			
 	}
 
+	/**
+	 * Returns schema information for forId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_forId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_value($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -306,6 +369,27 @@ abstract class Base_Users_Vote extends Db_Row
 		return array('value', $value);			
 	}
 
+	/**
+	 * Returns schema information for value column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_value()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_weight($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -315,6 +399,27 @@ abstract class Base_Users_Vote extends Db_Row
 			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".weight");
 		$value = floatval($value);
 		return array('weight', $value);			
+	}
+
+	/**
+	 * Returns schema information for weight column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_weight()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '1.0000',
+);			
 	}
 
 	/**
@@ -342,6 +447,27 @@ abstract class Base_Users_Vote extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**

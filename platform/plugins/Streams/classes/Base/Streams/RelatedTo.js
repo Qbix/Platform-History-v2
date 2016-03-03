@@ -253,6 +253,15 @@ Base.prototype.maxSize_toPublisherId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for toPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_toPublisherId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -280,6 +289,15 @@ Base.prototype.beforeSet_toStreamName = function (value) {
 Base.prototype.maxSize_toStreamName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for toStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_toStreamName = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -311,6 +329,15 @@ Base.prototype.maxSize_type = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_type = function () {
+
+return [["varchar","255","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -338,6 +365,15 @@ Base.prototype.beforeSet_fromPublisherId = function (value) {
 Base.prototype.maxSize_fromPublisherId = function () {
 
 		return 31;
+};
+
+	/**
+	 * Returns schema information for fromPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_fromPublisherId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -369,6 +405,15 @@ Base.prototype.maxSize_fromStreamName = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for fromStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_fromStreamName = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_weight
@@ -384,6 +429,15 @@ Base.prototype.beforeSet_weight = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for weight column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_weight = function () {
+
+return [["decimal","14,4","",false],false,"","1.0000"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -394,6 +448,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","14,4","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

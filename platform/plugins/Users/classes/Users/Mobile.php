@@ -198,13 +198,14 @@ class Users_Mobile extends Base_Users_Mobile
 		}
 		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
 			. ' mobileNumber='.urlencode($number);
+		$unsubscribe = 'Users/unsubscribe?mobileNumber='.urlencode($number);
 		$communityName = Users::communityName();
 		/**
 		 * @event Users/resend {before}
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/resend', compact('user', 'mobile', 'link'), 'before');
+		Q::event('Users/resend', compact('user', 'mobile', 'link', 'unsubscribe'), 'before');
 		$this->save();
 		$fields2 = array_merge($fields, array(
 			'user' => $user,
@@ -212,7 +213,8 @@ class Users_Mobile extends Base_Users_Mobile
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
 			'baseUrl' => Q_Request::baseUrl(),
-			'link' => $link
+			'link' => $link,
+			'unsubscribe' => $unsubscribe
 		));
 		$this->sendMessage( 
 			$view, 

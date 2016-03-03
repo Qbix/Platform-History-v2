@@ -256,6 +256,15 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -283,6 +292,15 @@ Base.prototype.beforeSet_streamName = function (value) {
 Base.prototype.maxSize_streamName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_streamName = function () {
+
+return [["varchar","255","",false],false,"PRI",""];
 };
 
 /**
@@ -314,6 +332,15 @@ Base.prototype.maxSize_ofUserId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for ofUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_ofUserId = function () {
+
+return [["varchar","31","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -324,6 +351,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -339,6 +375,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","31","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_untilTime
@@ -350,6 +395,15 @@ Base.prototype.beforeSet_untilTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for untilTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_untilTime = function () {
+
+return [["timestamp","31","",false],true,"",null];
 };
 
 /**
@@ -381,6 +435,15 @@ Base.prototype.maxSize_filter = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for filter column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_filter = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_duration
@@ -405,6 +468,15 @@ Base.prototype.beforeSet_duration = function (value) {
 Base.prototype.maxSize_duration = function () {
 
 		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for duration column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_duration = function () {
+
+return [["int","11","",false],false,"","0"];
 };
 
 /**

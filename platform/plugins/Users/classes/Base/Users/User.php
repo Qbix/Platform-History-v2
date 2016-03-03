@@ -293,6 +293,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_id()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '0',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -314,6 +335,27 @@ abstract class Base_Users_User extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**
@@ -341,6 +383,27 @@ abstract class Base_Users_User extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -377,6 +440,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for sessionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_sessionId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_sessionCount
 	 * @param {integer} $value
@@ -407,6 +491,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for sessionCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_sessionCount()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**
@@ -443,6 +548,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for fb_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_fb_uid()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_tw_uid
 	 * @param {integer} $value
@@ -473,6 +599,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 9223372036854775807;			
+	}
+
+	/**
+	 * Returns schema information for tw_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_tw_uid()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**
@@ -509,6 +656,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for g_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_g_uid()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_y_uid
@@ -539,6 +707,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for y_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_y_uid()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -575,6 +764,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for passphraseHash column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_passphraseHash()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '64',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_emailAddress
@@ -605,6 +815,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for emailAddress column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_emailAddress()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -641,6 +872,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for mobileNumber column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_mobileNumber()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_emailAddressPending
@@ -671,6 +923,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for emailAddressPending column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_emailAddressPending()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
 	}
 
 	/**
@@ -707,6 +980,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for mobileNumberPending column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_mobileNumberPending()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_signedUpWith
 	 * @param {string} $value
@@ -721,6 +1015,27 @@ abstract class Base_Users_User extends Db_Row
 		if (!in_array($value, array('none','email','mobile','facebook','twitter','remote')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".signedUpWith");
 		return array('signedUpWith', $value);			
+	}
+
+	/**
+	 * Returns schema information for signedUpWith column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_signedUpWith()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'none\',\'email\',\'mobile\',\'facebook\',\'twitter\',\'remote\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'none',
+);			
 	}
 
 	/**
@@ -757,6 +1072,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for username column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_username()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '63',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_icon
@@ -787,6 +1123,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_icon()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -823,6 +1180,27 @@ abstract class Base_Users_User extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for url column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_url()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_pincodeHash
@@ -853,6 +1231,27 @@ abstract class Base_Users_User extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for pincodeHash column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_pincodeHash()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	function beforeSave($value)

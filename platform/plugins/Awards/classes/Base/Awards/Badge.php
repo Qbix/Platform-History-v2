@@ -229,6 +229,27 @@ abstract class Base_Awards_Badge extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_app()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_name
@@ -259,6 +280,27 @@ abstract class Base_Awards_Badge extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_name()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -295,6 +337,27 @@ abstract class Base_Awards_Badge extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for title column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_title()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'text',
+    1 => 65535,
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_pic_small
@@ -325,6 +388,27 @@ abstract class Base_Awards_Badge extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for pic_small column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_pic_small()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -361,6 +445,27 @@ abstract class Base_Awards_Badge extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for pic_big column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_pic_big()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_points
 	 * @param {integer} $value
@@ -391,6 +496,27 @@ abstract class Base_Awards_Badge extends Db_Row
 	{
 
 		return 32767;			
+	}
+
+	/**
+	 * Returns schema information for points column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_points()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'smallint',
+    1 => '4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**

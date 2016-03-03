@@ -279,6 +279,15 @@ Base.prototype.maxSize_token = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for token column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_token = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -306,6 +315,15 @@ Base.prototype.beforeSet_userId = function (value) {
 Base.prototype.maxSize_userId = function () {
 
 		return 31;
+};
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -337,6 +355,15 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["varchar","31","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -364,6 +391,15 @@ Base.prototype.beforeSet_streamName = function (value) {
 Base.prototype.maxSize_streamName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_streamName = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -395,6 +431,15 @@ Base.prototype.maxSize_invitingUserId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for invitingUserId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_invitingUserId = function () {
+
+return [["varchar","31","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -422,6 +467,15 @@ Base.prototype.beforeSet_displayName = function (value) {
 Base.prototype.maxSize_displayName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for displayName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_displayName = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -453,6 +507,15 @@ Base.prototype.maxSize_appUrl = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for appUrl column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_appUrl = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_readLevel
@@ -478,6 +541,15 @@ Base.prototype.beforeSet_readLevel = function (value) {
 Base.prototype.maxSize_readLevel = function () {
 
 		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for readLevel column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_readLevel = function () {
+
+return [["int","11","",false],true,"",null];
 };
 
 /**
@@ -507,6 +579,15 @@ Base.prototype.maxSize_writeLevel = function () {
 		return 2147483647;
 };
 
+	/**
+	 * Returns schema information for writeLevel column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_writeLevel = function () {
+
+return [["int","11","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_adminLevel
@@ -534,6 +615,15 @@ Base.prototype.maxSize_adminLevel = function () {
 		return 2147483647;
 };
 
+	/**
+	 * Returns schema information for adminLevel column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_adminLevel = function () {
+
+return [["int","11","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
@@ -548,6 +638,15 @@ Base.prototype.beforeSet_state = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_state = function () {
+
+return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -558,6 +657,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -571,6 +679,15 @@ Base.prototype.beforeSet_expireTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for expireTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_expireTime = function () {
+
+return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
 };
 
 /**

@@ -239,6 +239,27 @@ abstract class Base_Users_Device extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_deviceId
@@ -272,6 +293,27 @@ abstract class Base_Users_Device extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for deviceId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_deviceId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_platform
 	 * @param {string} $value
@@ -286,6 +328,27 @@ abstract class Base_Users_Device extends Db_Row
 		if (!in_array($value, array('ios','android')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".platform");
 		return array('platform', $value);			
+	}
+
+	/**
+	 * Returns schema information for platform column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_platform()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'ios\',\'android\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -322,6 +385,27 @@ abstract class Base_Users_Device extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for version column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_version()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '45',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_sessionId
@@ -355,6 +439,27 @@ abstract class Base_Users_Device extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for sessionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_sessionId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_formFactor
 	 * @param {string} $value
@@ -372,6 +477,27 @@ abstract class Base_Users_Device extends Db_Row
 		if (!in_array($value, array('mobile','tablet')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".formFactor");
 		return array('formFactor', $value);			
+	}
+
+	/**
+	 * Returns schema information for formFactor column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_formFactor()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'mobile\',\'tablet\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -399,6 +525,27 @@ abstract class Base_Users_Device extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'mobile\',\'tablet\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_updatedTime
 	 * @param {string} $value
@@ -423,6 +570,27 @@ abstract class Base_Users_Device extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '\'mobile\',\'tablet\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

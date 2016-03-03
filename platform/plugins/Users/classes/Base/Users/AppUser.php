@@ -250,6 +250,27 @@ abstract class Base_Users_AppUser extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_provider
 	 * @param {string} $value
@@ -264,6 +285,27 @@ abstract class Base_Users_AppUser extends Db_Row
 		if (!in_array($value, array('native','facebook','twitter','google','yahoo')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".provider");
 		return array('provider', $value);			
+	}
+
+	/**
+	 * Returns schema information for provider column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_provider()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'native\',\'facebook\',\'twitter\',\'google\',\'yahoo\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -300,6 +342,27 @@ abstract class Base_Users_AppUser extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_appId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -321,6 +384,27 @@ abstract class Base_Users_AppUser extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
 	}
 
 	/**
@@ -348,6 +432,27 @@ abstract class Base_Users_AppUser extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -384,6 +489,27 @@ abstract class Base_Users_AppUser extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for access_token column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_access_token()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_session_secret
@@ -414,6 +540,27 @@ abstract class Base_Users_AppUser extends Db_Row
 	{
 
 		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for session_secret column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_session_secret()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -450,6 +597,27 @@ abstract class Base_Users_AppUser extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for session_expires column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_session_expires()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_state
 	 * @param {string} $value
@@ -464,6 +632,27 @@ abstract class Base_Users_AppUser extends Db_Row
 		if (!in_array($value, array('visited','added','removed')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".state");
 		return array('state', $value);			
+	}
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_state()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'visited\',\'added\',\'removed\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'visited',
+);			
 	}
 
 	/**
@@ -497,6 +686,27 @@ abstract class Base_Users_AppUser extends Db_Row
 	{
 
 		return 200;			
+	}
+
+	/**
+	 * Returns schema information for provider_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_provider_uid()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

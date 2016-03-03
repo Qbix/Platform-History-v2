@@ -255,6 +255,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -265,6 +274,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","31","",false],false,"PRI","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -296,6 +314,15 @@ Base.prototype.maxSize_publisherId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["varchar","31","",false],false,"MUL",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -323,6 +350,15 @@ Base.prototype.beforeSet_streamName = function (value) {
 Base.prototype.maxSize_streamName = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_streamName = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -353,6 +389,15 @@ Base.prototype.maxSize_type = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_type = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_viewedTime
@@ -366,6 +411,15 @@ Base.prototype.beforeSet_viewedTime = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for viewedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_viewedTime = function () {
+
+return [["timestamp","255","",false],true,"MUL",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_readTime
@@ -377,6 +431,15 @@ Base.prototype.beforeSet_readTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for readTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_readTime = function () {
+
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**
@@ -405,6 +468,15 @@ Base.prototype.beforeSet_comment = function (value) {
 Base.prototype.maxSize_comment = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for comment column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_comment = function () {
+
+return [["varchar","255","",false],true,"",null];
 };
 
 module.exports = Base;

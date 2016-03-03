@@ -239,6 +239,15 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -266,6 +275,15 @@ Base.prototype.beforeSet_app = function (value) {
 Base.prototype.maxSize_app = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for app column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_app = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -297,6 +315,15 @@ Base.prototype.maxSize_badge_name = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for badge_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_badge_name = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -307,6 +334,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -336,6 +372,15 @@ Base.prototype.beforeSet_associated_id = function (value) {
 Base.prototype.maxSize_associated_id = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for associated_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_associated_id = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 module.exports = Base;

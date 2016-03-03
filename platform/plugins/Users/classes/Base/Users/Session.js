@@ -249,6 +249,15 @@ Base.prototype.maxSize_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_id = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -276,6 +285,15 @@ Base.prototype.beforeSet_content = function (value) {
 Base.prototype.maxSize_content = function () {
 
 		return 4095;
+};
+
+	/**
+	 * Returns schema information for content column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_content = function () {
+
+return [["varchar","4095","",false],false,"",null];
 };
 
 /**
@@ -307,6 +325,15 @@ Base.prototype.maxSize_php = function () {
 		return 4095;
 };
 
+	/**
+	 * Returns schema information for php column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_php = function () {
+
+return [["varchar","4095","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -336,6 +363,15 @@ Base.prototype.maxSize_deviceId = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for deviceId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_deviceId = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_timeout
@@ -360,6 +396,15 @@ Base.prototype.beforeSet_timeout = function (value) {
 Base.prototype.maxSize_timeout = function () {
 
 		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for timeout column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_timeout = function () {
+
+return [["int","11","",false],false,"",null];
 };
 
 /**
@@ -388,6 +433,15 @@ Base.prototype.maxSize_duration = function () {
 		return 2147483647;
 };
 
+	/**
+	 * Returns schema information for duration column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_duration = function () {
+
+return [["int","11","",false],false,"","0"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
@@ -398,6 +452,15 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
