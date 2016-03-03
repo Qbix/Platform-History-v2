@@ -301,8 +301,8 @@ Q.Tool.define("Q/tabs", function(options) {
 		var $o = $('.Q_tabs_overflow', $te);
 		Q.handle(state.beforeRefresh, tool, []);
 		tool.indicateCurrent();
-		var te = tool.element;
-		if (!parseInt(te.style.width)) {
+		if (!parseInt($te[0].style.width)
+		&& isNaN(parseInt($te.css('maxWidth')))) {
 			w = te.remainingWidth();
 		}
 		if ($o.length) {
