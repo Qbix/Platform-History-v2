@@ -27,7 +27,7 @@
  *   @param {Mixed} [options.related.type] the type of the relation
  *   @param {Object} [options.related] A hash with properties "publisherId" and "streamName", and usually "type" and "weight". Usually set by a "Streams/related" tool.
  *   @param {Boolean|Array} [options.editable=true] Set to false to avoid showing even authorized users an interface to replace the image or text. Or set to an array naming only certain fields, which the rendering method would hopefully recognize.
- *   @param {Boolean} [options.removable=true] Set to false to avoid showing even authorized users an option to remove (or close) this stream
+ *   @param {Boolean} [options.closeable=true] Set to false to avoid showing even authorized users an option to closeable (or close) this stream
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
  *     @param {String} [options.creatable.title="New Item"] Optional title for the case when streamName = "", i.e. the composer
  *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
@@ -401,7 +401,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var state = tool.state;
 		// check if we should add this behavior
 		if (!state.actions
-		|| state.removable === false
+		|| state.closeable === false
 		|| !tool.stream.testWriteLevel('close')) {
 			return false;
 		}
