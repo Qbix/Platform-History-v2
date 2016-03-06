@@ -278,6 +278,7 @@ class Streams_Message extends Base_Streams_Message
 		foreach ($posted as $publisherId => $arr) {
 			foreach ($arr as $streamName => $m) {
 				$message = $posted[$publisherId][$streamName];
+				$stream = $streams[$publisherId][$streamName];
 				$params = &$eventParams[$publisherId][$streamName];
 				
 				/**

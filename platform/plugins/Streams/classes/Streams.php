@@ -2444,7 +2444,7 @@ abstract class Streams extends Base_Streams
 				: Streams::displayName($asUser),
 			"expiry" => $expiry
 		);
-		if ($template) {
+		if (!empty($template)) {
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;
 		}
