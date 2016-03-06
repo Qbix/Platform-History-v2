@@ -1,1 +1,9 @@
-{{& message.fields.content}}
+<p>
+	{{call "message.get" "displayName"}} has invited you to
+	<a href='{{call "message.get" "invitedUrl"}}'>{{call "message.get" "title"}}</a>
+</p>
+
+<p>
+	Please click the link above, or paste the following URL into your browser:
+	{{call "message.get" "invitedUrl"}}
+</p>
