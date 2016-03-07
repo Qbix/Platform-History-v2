@@ -369,7 +369,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'MUL',
   3 => 'CURRENT_TIMESTAMP',
 );			
 	}
@@ -417,7 +417,7 @@ return array (
     3 => false,
   ),
   1 => true,
-  2 => '',
+  2 => 'MUL',
   3 => NULL,
 );			
 	}
@@ -471,7 +471,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'MUL',
   3 => '',
 );			
 	}
@@ -714,7 +714,7 @@ return array (
   0 => 
   array (
     0 => 'decimal',
-    1 => '10,4',
+    1 => '14,4',
     2 => '',
     3 => false,
   ),

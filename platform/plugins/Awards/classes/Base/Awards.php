@@ -20,14 +20,10 @@ abstract class Base_Awards
 	 * @type array
 	 */
 	static $table_classnames = array (
-  0 => 'Awards_Autocomplete',
-  1 => 'Awards_Domain',
-  2 => 'Awards_HostnameSession',
-  3 => 'Awards_Publisher',
-  4 => 'Awards_Session',
-  5 => 'Awards_Share',
-  6 => 'Awards_Visit',
-  7 => 'Awards_Zipcode',
+  0 => 'Awards_Badge',
+  1 => 'Awards_Charge',
+  2 => 'Awards_Earned',
+  3 => 'Awards_Leader',
 );
 
 	/**

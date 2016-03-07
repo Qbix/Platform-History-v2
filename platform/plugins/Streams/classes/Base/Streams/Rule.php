@@ -651,7 +651,7 @@ return array (
   0 => 
   array (
     0 => 'decimal',
-    1 => '10,4',
+    1 => '14,4',
     2 => '',
     3 => false,
   ),

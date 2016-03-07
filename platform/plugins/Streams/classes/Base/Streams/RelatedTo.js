@@ -53,6 +53,10 @@ Q.mixin(Base, Row);
  * @type weight
  */
 /**
+ * @property {String}
+ * @type customIndex
+ */
+/**
  * @property {String|Db.Expression}
  * @type insertedTime
  */
@@ -220,6 +224,7 @@ Base.prototype.fieldNames = function () {
 		"fromPublisherId",
 		"fromStreamName",
 		"weight",
+		"customIndex",
 		"insertedTime"
 	];
 };
@@ -435,7 +440,45 @@ Base.prototype.beforeSet_weight = function (value) {
 	 */
 Base.prototype.column_weight = function () {
 
-return [["decimal","10,4","",false],false,"","1.0000"];
+return [["decimal","14,4","",false],false,"","1.0000"];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_customIndex
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_customIndex = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a string to '+this.table()+".customIndex");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".customIndex");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the customIndex field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_customIndex = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for customIndex column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_customIndex = function () {
+
+return [["varchar","1023","",false],false,"",""];
 };
 
 /**
@@ -456,7 +499,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.prototype.column_insertedTime = function () {
 
-return [["timestamp","10,4","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

@@ -27,14 +27,12 @@ module.exports = Base;
  * @type array
  */
 Base.tableClasses = [
-	"Metrics_Autocomplete",
 	"Metrics_Domain",
 	"Metrics_HostnameSession",
 	"Metrics_Publisher",
 	"Metrics_Session",
 	"Metrics_Share",
-	"Metrics_Visit",
-	"Metrics_Zipcode"
+	"Metrics_Visit"
 ];
 
 /**
@@ -55,13 +53,6 @@ Base.db = function () {
 Base.connectionName = function() {
 	return 'Metrics';
 };
-
-/**
- * Link to Metrics.Autocomplete model
- * @property Autocomplete
- * @type Metrics.Autocomplete
- */
-Base.Autocomplete = Q.require('Metrics/Autocomplete');
 
 /**
  * Link to Metrics.Domain model
@@ -104,10 +95,3 @@ Base.Share = Q.require('Metrics/Share');
  * @type Metrics.Visit
  */
 Base.Visit = Q.require('Metrics/Visit');
-
-/**
- * Link to Metrics.Zipcode model
- * @property Zipcode
- * @type Metrics.Zipcode
- */
-Base.Zipcode = Q.require('Metrics/Zipcode');

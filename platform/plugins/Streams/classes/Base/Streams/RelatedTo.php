@@ -20,6 +20,7 @@
  * @property {string} $fromPublisherId
  * @property {string} $fromStreamName
  * @property {float} $weight
+ * @property {string} $customIndex
  * @property {string|Db_Expression} $insertedTime
  */
 abstract class Base_Streams_RelatedTo extends Db_Row
@@ -47,6 +48,10 @@ abstract class Base_Streams_RelatedTo extends Db_Row
 	/**
 	 * @property $weight
 	 * @type {float}
+	 */
+	/**
+	 * @property $customIndex
+	 * @type {string}
 	 */
 	/**
 	 * @property $insertedTime
@@ -495,13 +500,67 @@ return array (
   0 => 
   array (
     0 => 'decimal',
-    1 => '10,4',
+    1 => '14,4',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => '',
   3 => '1.0000',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_customIndex
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_customIndex($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('customIndex', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".customIndex");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".customIndex");
+		return array('customIndex', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the customIndex field
+	 * @return {integer}
+	 */
+	function maxSize_customIndex()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for customIndex column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_customIndex()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
 );			
 	}
 
@@ -540,7 +599,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '10,4',
+    1 => '1023',
     2 => '',
     3 => false,
   ),
@@ -580,7 +639,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('toPublisherId', 'toStreamName', 'type', 'fromPublisherId', 'fromStreamName', 'weight', 'insertedTime');
+		$field_names = array('toPublisherId', 'toStreamName', 'type', 'fromPublisherId', 'fromStreamName', 'weight', 'customIndex', 'insertedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

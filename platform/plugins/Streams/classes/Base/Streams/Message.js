@@ -336,7 +336,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.prototype.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","255","",false],false,"MUL","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -358,7 +358,7 @@ Base.prototype.beforeSet_sentTime = function (value) {
 	 */
 Base.prototype.column_sentTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp","255","",false],true,"MUL",null];
 };
 
 /**
@@ -396,7 +396,7 @@ Base.prototype.maxSize_byUserId = function () {
 	 */
 Base.prototype.column_byUserId = function () {
 
-return [["varchar","31","",false],false,"",""];
+return [["varchar","31","",false],false,"MUL",""];
 };
 
 /**
@@ -572,7 +572,7 @@ Base.prototype.beforeSet_weight = function (value) {
 	 */
 Base.prototype.column_weight = function () {
 
-return [["decimal","10,4","",false],false,"","1.0000"];
+return [["decimal","14,4","",false],false,"","1.0000"];
 };
 
 /**

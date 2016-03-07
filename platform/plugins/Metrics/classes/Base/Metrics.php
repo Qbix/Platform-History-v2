@@ -20,14 +20,12 @@ abstract class Base_Metrics
 	 * @type array
 	 */
 	static $table_classnames = array (
-  0 => 'Metrics_Autocomplete',
-  1 => 'Metrics_Domain',
-  2 => 'Metrics_HostnameSession',
-  3 => 'Metrics_Publisher',
-  4 => 'Metrics_Session',
-  5 => 'Metrics_Share',
-  6 => 'Metrics_Visit',
-  7 => 'Metrics_Zipcode',
+  0 => 'Metrics_Domain',
+  1 => 'Metrics_HostnameSession',
+  2 => 'Metrics_Publisher',
+  3 => 'Metrics_Session',
+  4 => 'Metrics_Share',
+  5 => 'Metrics_Visit',
 );
 
 	/**

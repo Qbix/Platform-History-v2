@@ -27,14 +27,10 @@ module.exports = Base;
  * @type array
  */
 Base.tableClasses = [
-	"Awards_Autocomplete",
-	"Awards_Domain",
-	"Awards_HostnameSession",
-	"Awards_Publisher",
-	"Awards_Session",
-	"Awards_Share",
-	"Awards_Visit",
-	"Awards_Zipcode"
+	"Awards_Badge",
+	"Awards_Charge",
+	"Awards_Earned",
+	"Awards_Leader"
 ];
 
 /**
@@ -57,57 +53,29 @@ Base.connectionName = function() {
 };
 
 /**
- * Link to Awards.Autocomplete model
- * @property Autocomplete
- * @type Awards.Autocomplete
+ * Link to Awards.Badge model
+ * @property Badge
+ * @type Awards.Badge
  */
-Base.Autocomplete = Q.require('Awards/Autocomplete');
+Base.Badge = Q.require('Awards/Badge');
 
 /**
- * Link to Awards.Domain model
- * @property Domain
- * @type Awards.Domain
+ * Link to Awards.Charge model
+ * @property Charge
+ * @type Awards.Charge
  */
-Base.Domain = Q.require('Awards/Domain');
+Base.Charge = Q.require('Awards/Charge');
 
 /**
- * Link to Awards.HostnameSession model
- * @property HostnameSession
- * @type Awards.HostnameSession
+ * Link to Awards.Earned model
+ * @property Earned
+ * @type Awards.Earned
  */
-Base.HostnameSession = Q.require('Awards/HostnameSession');
+Base.Earned = Q.require('Awards/Earned');
 
 /**
- * Link to Awards.Publisher model
- * @property Publisher
- * @type Awards.Publisher
+ * Link to Awards.Leader model
+ * @property Leader
+ * @type Awards.Leader
  */
-Base.Publisher = Q.require('Awards/Publisher');
-
-/**
- * Link to Awards.Session model
- * @property Session
- * @type Awards.Session
- */
-Base.Session = Q.require('Awards/Session');
-
-/**
- * Link to Awards.Share model
- * @property Share
- * @type Awards.Share
- */
-Base.Share = Q.require('Awards/Share');
-
-/**
- * Link to Awards.Visit model
- * @property Visit
- * @type Awards.Visit
- */
-Base.Visit = Q.require('Awards/Visit');
-
-/**
- * Link to Awards.Zipcode model
- * @property Zipcode
- * @type Awards.Zipcode
- */
-Base.Zipcode = Q.require('Awards/Zipcode');
+Base.Leader = Q.require('Awards/Leader');

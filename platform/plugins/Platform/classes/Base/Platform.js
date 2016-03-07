@@ -27,14 +27,7 @@ module.exports = Base;
  * @type array
  */
 Base.tableClasses = [
-	"Platform_Autocomplete",
-	"Platform_Domain",
-	"Platform_HostnameSession",
-	"Platform_Publisher",
-	"Platform_Session",
-	"Platform_Share",
-	"Platform_Visit",
-	"Platform_Zipcode"
+	
 ];
 
 /**
@@ -55,59 +48,3 @@ Base.db = function () {
 Base.connectionName = function() {
 	return 'Platform';
 };
-
-/**
- * Link to Platform.Autocomplete model
- * @property Autocomplete
- * @type Platform.Autocomplete
- */
-Base.Autocomplete = Q.require('Platform/Autocomplete');
-
-/**
- * Link to Platform.Domain model
- * @property Domain
- * @type Platform.Domain
- */
-Base.Domain = Q.require('Platform/Domain');
-
-/**
- * Link to Platform.HostnameSession model
- * @property HostnameSession
- * @type Platform.HostnameSession
- */
-Base.HostnameSession = Q.require('Platform/HostnameSession');
-
-/**
- * Link to Platform.Publisher model
- * @property Publisher
- * @type Platform.Publisher
- */
-Base.Publisher = Q.require('Platform/Publisher');
-
-/**
- * Link to Platform.Session model
- * @property Session
- * @type Platform.Session
- */
-Base.Session = Q.require('Platform/Session');
-
-/**
- * Link to Platform.Share model
- * @property Share
- * @type Platform.Share
- */
-Base.Share = Q.require('Platform/Share');
-
-/**
- * Link to Platform.Visit model
- * @property Visit
- * @type Platform.Visit
- */
-Base.Visit = Q.require('Platform/Visit');
-
-/**
- * Link to Platform.Zipcode model
- * @property Zipcode
- * @type Platform.Zipcode
- */
-Base.Zipcode = Q.require('Platform/Zipcode');

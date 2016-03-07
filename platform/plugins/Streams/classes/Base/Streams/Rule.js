@@ -522,7 +522,7 @@ Base.prototype.beforeSet_relevance = function (value) {
 	 */
 Base.prototype.column_relevance = function () {
 
-return [["decimal","10,4","",false],false,"",null];
+return [["decimal","14,4","",false],false,"",null];
 };
 
 /**

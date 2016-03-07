@@ -20,14 +20,6 @@ abstract class Base_Platform
 	 * @type array
 	 */
 	static $table_classnames = array (
-  0 => 'Platform_Autocomplete',
-  1 => 'Platform_Domain',
-  2 => 'Platform_HostnameSession',
-  3 => 'Platform_Publisher',
-  4 => 'Platform_Session',
-  5 => 'Platform_Share',
-  6 => 'Platform_Visit',
-  7 => 'Platform_Zipcode',
 );
 
 	/**
