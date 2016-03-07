@@ -225,6 +225,15 @@ Base.prototype.maxSize_hostname = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for hostname column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_hostname = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -252,6 +261,15 @@ Base.prototype.beforeSet_sessionId = function (value) {
 Base.prototype.maxSize_sessionId = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for sessionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_sessionId = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**

@@ -484,7 +484,7 @@ return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_token_expires_seconds = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 

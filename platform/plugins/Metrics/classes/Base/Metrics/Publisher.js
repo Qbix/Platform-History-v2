@@ -241,6 +241,15 @@ Base.prototype.maxSize_id = function () {
 		return 1.844674407371E+19;
 };
 
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_id = function () {
+
+return [["bigint","20"," unsigned",true],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_insertedTime
@@ -265,6 +274,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 Base.prototype.maxSize_insertedTime = function () {
 
 		return 9223372036854775807;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["bigint","20","",false],false,"",null];
 };
 
 /**
@@ -296,6 +314,15 @@ Base.prototype.maxSize_name = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_name = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -323,6 +350,15 @@ Base.prototype.beforeSet_secret = function (value) {
 Base.prototype.maxSize_secret = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for secret column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_secret = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -354,6 +390,15 @@ Base.prototype.maxSize_session_name = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for session_name column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_session_name = function () {
+
+return [["varchar","255","",false],false,"","qbix_session"];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_min_wait
@@ -378,6 +423,15 @@ Base.prototype.beforeSet_min_wait = function (value) {
 Base.prototype.maxSize_min_wait = function () {
 
 		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for min_wait column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_min_wait = function () {
+
+return [["int","11","",false],false,"","0"];
 };
 
 module.exports = Base;

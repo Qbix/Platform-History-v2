@@ -269,6 +269,15 @@ Base.prototype.maxSize_share_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for share_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_share_id = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -298,6 +307,15 @@ Base.prototype.maxSize_visit_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for visit_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_visit_id = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_insertedTime
@@ -324,6 +342,15 @@ Base.prototype.maxSize_insertedTime = function () {
 		return 9223372036854775807;
 };
 
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["bigint","20","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_shared_time
@@ -348,6 +375,15 @@ Base.prototype.beforeSet_shared_time = function (value) {
 Base.prototype.maxSize_shared_time = function () {
 
 		return 9223372036854775807;
+};
+
+	/**
+	 * Returns schema information for shared_time column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_shared_time = function () {
+
+return [["bigint","20","",false],false,"",null];
 };
 
 /**
@@ -379,6 +415,15 @@ Base.prototype.maxSize_url = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for url column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_url = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -406,6 +451,15 @@ Base.prototype.beforeSet_tag1 = function (value) {
 Base.prototype.maxSize_tag1 = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for tag1 column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_tag1 = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
 };
 
 /**
@@ -437,6 +491,15 @@ Base.prototype.maxSize_tag2 = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for tag2 column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_tag2 = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -466,6 +529,15 @@ Base.prototype.maxSize_tag3 = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for tag3 column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_tag3 = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_publisherId
@@ -490,6 +562,15 @@ Base.prototype.beforeSet_publisherId = function (value) {
 Base.prototype.maxSize_publisherId = function () {
 
 		return 1.844674407371E+19;
+};
+
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["bigint","20"," unsigned",true],false,"",null];
 };
 
 /**
@@ -518,6 +599,15 @@ Base.prototype.maxSize_visit_count = function () {
 		return 4294967295;
 };
 
+	/**
+	 * Returns schema information for visit_count column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_visit_count = function () {
+
+return [["int","10"," unsigned",true],false,"","0"];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_session_count
@@ -542,6 +632,15 @@ Base.prototype.beforeSet_session_count = function (value) {
 Base.prototype.maxSize_session_count = function () {
 
 		return 4294967295;
+};
+
+	/**
+	 * Returns schema information for session_count column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_session_count = function () {
+
+return [["int","10"," unsigned",true],false,"","0"];
 };
 
 module.exports = Base;

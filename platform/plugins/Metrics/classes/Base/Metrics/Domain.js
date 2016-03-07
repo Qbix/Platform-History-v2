@@ -229,6 +229,15 @@ Base.prototype.maxSize_hostname = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for hostname column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_hostname = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_publisherId
@@ -255,6 +264,15 @@ Base.prototype.maxSize_publisherId = function () {
 		return 1.844674407371E+19;
 };
 
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_publisherId = function () {
+
+return [["bigint","20"," unsigned",true],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_status
@@ -267,6 +285,15 @@ Base.prototype.beforeSet_status = function (value) {
 		if (['pending','verified'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".status");
 		return value;
+};
+
+	/**
+	 * Returns schema information for status column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_status = function () {
+
+return [["enum","'pending','verified'","",false],false,"","pending"];
 };
 
 module.exports = Base;

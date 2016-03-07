@@ -252,6 +252,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for share_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_share_id()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_visit_id
@@ -282,6 +303,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for visit_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_visit_id()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -318,6 +360,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_shared_time
 	 * @param {integer} $value
@@ -348,6 +411,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	{
 
 		return 9223372036854775807;			
+	}
+
+	/**
+	 * Returns schema information for shared_time column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_shared_time()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -384,6 +468,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for url column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_url()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_tag1
@@ -414,6 +519,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for tag1 column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_tag1()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -450,6 +576,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for tag2 column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_tag2()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_tag3
@@ -480,6 +627,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	{
 
 		return 255;			
+	}
+
+	/**
+	 * Returns schema information for tag3 column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_tag3()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -516,6 +684,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => ' unsigned',
+    3 => true,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_visit_count
 	 * @param {integer} $value
@@ -549,6 +738,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for visit_count column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_visit_count()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '10',
+    2 => ' unsigned',
+    3 => true,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_session_count
 	 * @param {integer} $value
@@ -579,6 +789,27 @@ abstract class Base_Metrics_Share extends Db_Row
 	{
 
 		return 4294967295;			
+	}
+
+	/**
+	 * Returns schema information for session_count column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_session_count()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '10',
+    2 => ' unsigned',
+    3 => true,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
 	}
 
 	/**

@@ -212,6 +212,27 @@ abstract class Base_Metrics_Domain extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for hostname column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_hostname()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_publisherId
 	 * @param {integer} $value
@@ -245,6 +266,27 @@ abstract class Base_Metrics_Domain extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'bigint',
+    1 => '20',
+    2 => ' unsigned',
+    3 => true,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_status
 	 * @param {string} $value
@@ -259,6 +301,27 @@ abstract class Base_Metrics_Domain extends Db_Row
 		if (!in_array($value, array('pending','verified')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".status");
 		return array('status', $value);			
+	}
+
+	/**
+	 * Returns schema information for status column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_status()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'pending\',\'verified\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'pending',
+);			
 	}
 
 	/**

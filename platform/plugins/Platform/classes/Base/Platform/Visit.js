@@ -249,6 +249,15 @@ Base.prototype.maxSize_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_id = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -276,6 +285,15 @@ Base.prototype.beforeSet_sessionId = function (value) {
 Base.prototype.maxSize_sessionId = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for sessionId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_sessionId = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -307,6 +325,15 @@ Base.prototype.maxSize_insertedTime = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -334,6 +361,15 @@ Base.prototype.beforeSet_url = function (value) {
 Base.prototype.maxSize_url = function () {
 
 		return 255;
+};
+
+	/**
+	 * Returns schema information for url column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_url = function () {
+
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -365,6 +401,15 @@ Base.prototype.maxSize_hostname = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for hostname column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_hostname = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -394,6 +439,15 @@ Base.prototype.maxSize_from_share_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for from_share_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_from_share_id = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_share_count
@@ -418,6 +472,15 @@ Base.prototype.beforeSet_share_count = function (value) {
 Base.prototype.maxSize_share_count = function () {
 
 		return 4294967295;
+};
+
+	/**
+	 * Returns schema information for share_count column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_share_count = function () {
+
+return [["int","10"," unsigned",true],false,"","0"];
 };
 
 module.exports = Base;

@@ -258,6 +258,15 @@ Base.prototype.maxSize_query = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for query column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_query = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -287,6 +296,15 @@ Base.prototype.maxSize_types = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for types column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_types = function () {
+
+return [["varchar","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_latitude
@@ -300,6 +318,15 @@ Base.prototype.beforeSet_latitude = function (value) {
 		if (isNaN(value))
 			throw new Error('Non-number value being assigned to '+this.table()+".latitude");
 		return value;
+};
+
+	/**
+	 * Returns schema information for latitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_latitude = function () {
+
+return [["double","255","",false],false,"PRI",null];
 };
 
 /**
@@ -317,6 +344,15 @@ Base.prototype.beforeSet_longitude = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for longitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_longitude = function () {
+
+return [["double","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_miles
@@ -332,6 +368,15 @@ Base.prototype.beforeSet_miles = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for miles column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_miles = function () {
+
+return [["double","255","",false],false,"PRI",null];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -344,6 +389,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_updatedTime
@@ -351,10 +405,19 @@ Base.prototype.beforeSet_insertedTime = function (value) {
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**
@@ -384,6 +447,15 @@ Base.prototype.beforeSet_results = function (value) {
 Base.prototype.maxSize_results = function () {
 
 		return 65535;
+};
+
+	/**
+	 * Returns schema information for results column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_results = function () {
+
+return [["text",65535,"",false],false,"",null];
 };
 
 /**

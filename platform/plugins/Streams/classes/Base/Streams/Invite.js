@@ -524,7 +524,7 @@ return [["varchar","255","",false],false,"",null];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_readLevel = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
@@ -560,7 +560,7 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_writeLevel = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
@@ -596,7 +596,7 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_adminLevel = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
@@ -675,7 +675,7 @@ return [["timestamp","'pending','accepted','declined','forwarded','expired','cla
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_expireTime = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;

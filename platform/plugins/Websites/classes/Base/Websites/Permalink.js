@@ -234,6 +234,15 @@ Base.prototype.maxSize_uri = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for uri column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_uri = function () {
+
+return [["varchar","255","",false],false,"PRI",""];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -263,6 +272,15 @@ Base.prototype.maxSize_url = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for url column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_url = function () {
+
+return [["varchar","255","",false],false,"MUL",""];
+};
+
 /**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
@@ -270,10 +288,19 @@ Base.prototype.maxSize_url = function () {
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","255","",false],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -283,10 +310,19 @@ Base.prototype.beforeSet_insertedTime = function (value) {
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_updatedTime = function () {
+
+return [["datetime","255","",false],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {

@@ -224,6 +224,15 @@ Base.prototype.maxSize_id = function () {
 		return 255;
 };
 
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_id = function () {
+
+return [["varchar","255","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_insertedTime
@@ -248,6 +257,15 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 Base.prototype.maxSize_insertedTime = function () {
 
 		return 9223372036854775807;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["bigint","20","",false],false,"",null];
 };
 
 module.exports = Base;

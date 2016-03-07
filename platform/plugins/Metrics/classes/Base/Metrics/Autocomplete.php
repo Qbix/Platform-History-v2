@@ -242,6 +242,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for query column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_query()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_types
@@ -274,6 +295,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 		return 255;			
 	}
 
+	/**
+	 * Returns schema information for types column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_types()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_latitude($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -283,6 +325,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".latitude");
 		$value = floatval($value);
 		return array('latitude', $value);			
+	}
+
+	/**
+	 * Returns schema information for latitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_latitude()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'double',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	function beforeSet_longitude($value)
@@ -296,6 +359,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 		return array('longitude', $value);			
 	}
 
+	/**
+	 * Returns schema information for longitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_longitude()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'double',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_miles($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -305,6 +389,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".miles");
 		$value = floatval($value);
 		return array('miles', $value);			
+	}
+
+	/**
+	 * Returns schema information for miles column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_miles()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'double',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -332,6 +437,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_updatedTime
 	 * @param {string} $value
@@ -356,6 +482,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 			$date['hour'], $date['minute'], $date['second']
 		);
 		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -389,6 +536,27 @@ abstract class Base_Metrics_Autocomplete extends Db_Row
 	{
 
 		return 65535;			
+	}
+
+	/**
+	 * Returns schema information for results column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_results()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'text',
+    1 => 65535,
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

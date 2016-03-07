@@ -252,6 +252,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for countryCode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_countryCode()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '2',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_zipcode
@@ -282,6 +303,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	{
 
 		return 10;			
+	}
+
+	/**
+	 * Returns schema information for zipcode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_zipcode()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '10',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -318,6 +360,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for placeName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_placeName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '180',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_stateName
@@ -348,6 +411,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	{
 
 		return 100;			
+	}
+
+	/**
+	 * Returns schema information for stateName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_stateName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '100',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -384,6 +468,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_state()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_regionName
@@ -414,6 +519,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	{
 
 		return 100;			
+	}
+
+	/**
+	 * Returns schema information for regionName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_regionName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '100',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -450,6 +576,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for region column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_region()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '20',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_community
@@ -482,6 +629,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 		return 100;			
 	}
 
+	/**
+	 * Returns schema information for community column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_community()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '100',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_latitude($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -493,6 +661,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 		return array('latitude', $value);			
 	}
 
+	/**
+	 * Returns schema information for latitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_latitude()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'double',
+    1 => '100',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
 	function beforeSet_longitude($value)
 	{
 		if ($value instanceof Db_Expression) {
@@ -502,6 +691,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".longitude");
 		$value = floatval($value);
 		return array('longitude', $value);			
+	}
+
+	/**
+	 * Returns schema information for longitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_longitude()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'double',
+    1 => '100',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -535,6 +745,27 @@ abstract class Base_Platform_Zipcode extends Db_Row
 	{
 
 		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for accuracy column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_accuracy()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**

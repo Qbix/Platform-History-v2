@@ -269,6 +269,15 @@ Base.prototype.maxSize_countryCode = function () {
 		return 2;
 };
 
+	/**
+	 * Returns schema information for countryCode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_countryCode = function () {
+
+return [["varchar","2","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -296,6 +305,15 @@ Base.prototype.beforeSet_zipcode = function (value) {
 Base.prototype.maxSize_zipcode = function () {
 
 		return 10;
+};
+
+	/**
+	 * Returns schema information for zipcode column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_zipcode = function () {
+
+return [["varchar","10","",false],false,"",null];
 };
 
 /**
@@ -327,6 +345,15 @@ Base.prototype.maxSize_placeName = function () {
 		return 180;
 };
 
+	/**
+	 * Returns schema information for placeName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_placeName = function () {
+
+return [["varchar","180","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -354,6 +381,15 @@ Base.prototype.beforeSet_stateName = function (value) {
 Base.prototype.maxSize_stateName = function () {
 
 		return 100;
+};
+
+	/**
+	 * Returns schema information for stateName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_stateName = function () {
+
+return [["varchar","100","",false],false,"",null];
 };
 
 /**
@@ -385,6 +421,15 @@ Base.prototype.maxSize_state = function () {
 		return 20;
 };
 
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_state = function () {
+
+return [["varchar","20","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -412,6 +457,15 @@ Base.prototype.beforeSet_regionName = function (value) {
 Base.prototype.maxSize_regionName = function () {
 
 		return 100;
+};
+
+	/**
+	 * Returns schema information for regionName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_regionName = function () {
+
+return [["varchar","100","",false],false,"",null];
 };
 
 /**
@@ -443,6 +497,15 @@ Base.prototype.maxSize_region = function () {
 		return 20;
 };
 
+	/**
+	 * Returns schema information for region column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_region = function () {
+
+return [["varchar","20","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
@@ -472,6 +535,15 @@ Base.prototype.maxSize_community = function () {
 		return 100;
 };
 
+	/**
+	 * Returns schema information for community column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_community = function () {
+
+return [["varchar","100","",false],false,"",null];
+};
+
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_latitude
@@ -487,6 +559,15 @@ Base.prototype.beforeSet_latitude = function (value) {
 		return value;
 };
 
+	/**
+	 * Returns schema information for latitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_latitude = function () {
+
+return [["double","100","",false],false,"MUL",null];
+};
+
 /**
  * Method is called before setting the field to verify if value is a number
  * @method beforeSet_longitude
@@ -500,6 +581,15 @@ Base.prototype.beforeSet_longitude = function (value) {
 		if (isNaN(value))
 			throw new Error('Non-number value being assigned to '+this.table()+".longitude");
 		return value;
+};
+
+	/**
+	 * Returns schema information for longitude column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_longitude = function () {
+
+return [["double","100","",false],false,"MUL",null];
 };
 
 /**
@@ -526,6 +616,15 @@ Base.prototype.beforeSet_accuracy = function (value) {
 Base.prototype.maxSize_accuracy = function () {
 
 		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for accuracy column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_accuracy = function () {
+
+return [["int","11","",false],false,"",null];
 };
 
 module.exports = Base;
