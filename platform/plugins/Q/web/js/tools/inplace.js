@@ -215,6 +215,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		});
 	}
 	setTimeout(function () {
+		state.onLoad.handle();
+	}, 0); // hopefully it will be inserted into the DOM by then
+	function _sizing() {
 		fieldinput.css({
 			fontSize: static_span.css('fontSize'),
 			fontFamily: static_span.css('fontFamily'),
@@ -237,9 +240,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			var height = static_span.outerHeight() + 'px';
 			fieldinput.add(fieldinput.parent()).css('min-height', height);
 		}
-		state.onLoad.handle();
-	}, 0); // hopefully it will be inserted into the DOM by then
+	}
 	this.handleClick = function(event) {
+		_sizing();
 		var field_width = static_span.outerWidth();
 		var field_height = static_span.outerHeight();
 		changedMaxWidth = changedMaxHeight = false;
