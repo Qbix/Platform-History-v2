@@ -7878,6 +7878,7 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.type='handlebars'] the type and extension of the template
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
+ * @param {String} [options.tool] if the rendered html will be placed inside a tool, pass it here so that its prefix will be used
  */
 Q.Template.render = function _Q_Template_render(name, fields, partials, callback, options) {
 	if (typeof fields === "function") {
@@ -7903,46 +7904,46 @@ Q.Template.render = function _Q_Template_render(name, fields, partials, callback
 			);
 		});
 	}
-	var tba = Q.Tool.beingActivated;
+	var tba = (options && options.tool) || Q.Tool.beingActivated;
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
-			// load the template and partials
-			var p = Q.pipe(['template', 'partials'], function (params) {
-				if (params.template[0]) {
-					return callback(params.template[0]);
-				}
-				var tbaOld = Q.Tool.beingActivated;
-				var pbaOld = Q.Page.beingActivated;
-				Q.Tool.beingActivated = tba;
-				Q.Page.beingActivated = pba;
-				try {
-					var compiled = Q.Template.compile(params.template[1]);
-					callback(null, compiled(fields, {partials: params.partials[0]}));
-				} catch (e) {
-					console.warn(e);
-				}
-				Q.Tool.beingActivated = tbaOld;
-				Q.Page.beingActivated = pbaOld;
-			});
-			Q.Template.load(name, p.fill('template'), options);
-			// pipe for partials
-			if (partials && partials.length) {
-				var pp = Q.pipe(partials, function (params) {
-					var i, partial, part = {};
-					for (i=0; i<partials.length; i++) {
-						partial = partials[i];
-						part[partial] = params[partial][0] ? null : params[partial][1];
-					}
-					p.fill('partials')(part);
-				});
-				for (var i=0; i<partials.length; i++) {
-					Q.Template.load(partials[i], pp.fill(partials[i]), options);
-				}
-			} else {
-				p.fill('partials')();
+		// load the template and partials
+		var p = Q.pipe(['template', 'partials'], function (params) {
+			if (params.template[0]) {
+				return callback(params.template[0]);
 			}
+			var tbaOld = Q.Tool.beingActivated;
+			var pbaOld = Q.Page.beingActivated;
+			Q.Tool.beingActivated = tba;
+			Q.Page.beingActivated = pba;
+			try {
+				var compiled = Q.Template.compile(params.template[1]);
+				callback(null, compiled(fields, {partials: params.partials[0]}));
+			} catch (e) {
+				console.warn(e);
+			}
+			Q.Tool.beingActivated = tbaOld;
+			Q.Page.beingActivated = pbaOld;
+		});
+		var o = Q.copy(options, ['type', 'dir', 'name']);
+		Q.Template.load(name, p.fill('template'), o);
+		// pipe for partials
+		if (partials && partials.length) {
+			var pp = Q.pipe(partials, function (params) {
+				var i, partial, part = {};
+				for (i=0; i<partials.length; i++) {
+					partial = partials[i];
+					part[partial] = params[partial][0] ? null : params[partial][1];
+				}
+				p.fill('partials')(part);
+			});
+			for (var i=0; i<partials.length; i++) {
+				Q.Template.load(partials[i], pp.fill(partials[i]), options);
+			}
+		} else {
+			p.fill('partials')();
 		}
-	);
+	});
 };
 
 var _qsockets = {}, _eventHandlers = {}, _connectHandlers = {}, _ioCleanup = [];
