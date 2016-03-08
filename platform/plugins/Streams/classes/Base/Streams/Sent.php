@@ -23,7 +23,6 @@
  * @property {string} $instructions
  * @property {string} $chatPublisherId
  * @property {string} $chatStreamName
- * @property {integer} $reOrdinal
  */
 abstract class Base_Streams_Sent extends Db_Row
 {
@@ -62,10 +61,6 @@ abstract class Base_Streams_Sent extends Db_Row
 	/**
 	 * @property $chatStreamName
 	 * @type {string}
-	 */
-	/**
-	 * @property $reOrdinal
-	 * @type {integer}
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -685,63 +680,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_reOrdinal
-	 * @param {integer} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
-	 */
-	function beforeSet_reOrdinal($value)
-	{
-		if (!isset($value)) {
-			return array('reOrdinal', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('reOrdinal', $value);
-		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".reOrdinal");
-		$value = intval($value);
-		if ($value < -2147483648 or $value > 2147483647) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".reOrdinal");
-		}
-		return array('reOrdinal', $value);			
-	}
-
-	/**
-	 * @method maxSize_reOrdinal
-	 * Returns the maximum integer that can be assigned to the reOrdinal field
-	 * @return {integer}
-	 */
-	function maxSize_reOrdinal()
-	{
-
-		return 2147483647;			
-	}
-
-	/**
-	 * Returns schema information for reOrdinal column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	function column_reOrdinal()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
 	 * Retrieves field names for class table
 	 * @method fieldNames
 	 * @static
@@ -751,7 +689,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'streamName', 'insertedTime', 'sentTime', 'byUserId', 'comment', 'instructions', 'chatPublisherId', 'chatStreamName', 'reOrdinal');
+		$field_names = array('publisherId', 'streamName', 'insertedTime', 'sentTime', 'byUserId', 'comment', 'instructions', 'chatPublisherId', 'chatStreamName');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
