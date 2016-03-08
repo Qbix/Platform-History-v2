@@ -44,6 +44,9 @@ Q.Tool.define("Streams/inplace", function (options) {
 		var stream = state.stream = this;
 		state.publisherId = stream.fields.publisherId;
 		state.streamName = stream.fields.name;
+		
+		var currentContent = null;
+		var currentHtml = null;
 
 		function _setContent(content) {
 			Q.Streams.get(state.publisherId, state.streamName, function () {
@@ -53,41 +56,31 @@ Q.Tool.define("Streams/inplace", function (options) {
 						+ String(tool.child('Q/inplace').state.placeholder).encodeHTML()
 						+ '</div>'
 					|| '';
-				switch (state.inplaceType) {
-					case 'text':
-						$e = tool.$('input[type!=hidden]');
-						if ($e.val() !== content) $e.val(content);
-						$e = tool.$('.Q_inplace_tool_static');
-						if ($e.html() !== html) $e.html(html);
-						break;
-					case 'textarea':
-						var convert = {};
-						if (content) {
-							var replacements = {
-								"\n": '<br>',
-							 	' ': '&nbsp;'
-							};
-							if (state.convert) {
-								for (var i=0, l=state.convert.length; i<l; ++i) {
-									var c = state.convert[i];
-									convert[c] = replacements[c];
-								}
+					
+				if (state.inplaceType === 'textarea') {
+					var convert = {};
+					if (content) {
+						var replacements = {
+							"\n": '<br>',
+						 	' ': '&nbsp;'
+						};
+						if (state.convert) {
+							for (var i=0, l=state.convert.length; i<l; ++i) {
+								var c = state.convert[i];
+								convert[c] = replacements[c];
 							}
 						}
-						var toSet = html.replaceAll(convert);
-						$e = tool.$('textarea');
-						if ($e.val() !== content) $e.val(content);
-						$e = tool.$('.Q_inplace_tool_blockstatic');
-						if ($e.html !== toSet) $e.html(toSet);
-						break;
-					case 'select':
-						$e = tool.$('select');
-						if ($e.val() !== content) $e.val(content);
-						break;
-					default:
-						throw new Q.Error("Streams/inplace tool: inplaceType must be 'textarea', 'text' or 'select'");
+					}
+					var toSet = html.replaceAll(convert);
 				}
-				var margin = $e.outerHeight() + parseInt($e.css('margin-top'));
+				var $input = tool.inplace.$input;
+				if (currentContent !== content) {
+					$input.val(currentContent = content);
+				}
+				if (currentHtml !== html) {
+					tool.inplace.$static.html(currentHtml = html);
+				}
+				var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
 				tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
 			});
 		};
@@ -179,7 +172,8 @@ Q.Tool.define("Streams/inplace", function (options) {
 		}
 		
 		function _content() {
-			tool.child('Q_inplace').state.onLoad.add(state.onLoad.handle.bind(tool));
+			tool.inplace = tool.child('Q_inplace');
+			tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
 			if (state.attribute) {
 				_setContent(stream.attributes[state.attribute]);
 			} else {

@@ -82,13 +82,7 @@ Q.Tool.define("Q/inplace", function (options) {
 		function (err, html) {
 			if (!html) return;
 			$te.html(html);
-			if (o.type === 'select') {
-				tool.$('select').val(staticHtml.decodeHTML());
-			}
-			if (staticHtml && state.editOnClick) {
-				tool.$('.Q_inplace_tool_static').attr('title', state.placeholder);
-			}
-			return _Q_inplace_tool_constructor.call(tool, this.element, options);
+			return _Q_inplace_tool_constructor.call(tool, this.element, options, staticHtml);
 		}, 
 		o.template
 	);
@@ -155,7 +149,7 @@ function _setSelRange(inputEl, selStart, selend) {
 	}
 }
 
-function _Q_inplace_tool_constructor(element, options) {
+function _Q_inplace_tool_constructor(element, options, staticHtml) {
 
 	// constructor & private declarations
 	var tool = this;
@@ -168,12 +162,11 @@ function _Q_inplace_tool_constructor(element, options) {
 	var $te = $(tool.element);
 	var changedMaxWidth, changedMaxHeight;
 
-	var container_span = tool.$('.Q_inplace_tool_container');
-	var static_span = tool.$('.Q_inplace_tool_static');
-	if (!static_span.length) {
-		static_span = tool.$('.Q_inplace_tool_blockstatic');
-	}
-	tool.$('.Q_inplace_tool_editbuttons').css({ 
+	var container_span = tool.$container = tool.$('.Q_inplace_tool_container');
+	var static_span = tool.$static = tool.$(
+		'.Q_inplace_tool_static, .Q_inplace_tool_blockstatic'
+	).eq(0);
+	tool.$editButtons = tool.$('.Q_inplace_tool_editbuttons').css({ 
 		'margin-top': static_span.outerHeight() + 'px',
 		'line-height': '1px'
 	});
@@ -191,16 +184,22 @@ function _Q_inplace_tool_constructor(element, options) {
 		}
 		_waitUntilVisible();
 	}
-	var edit_button = tool.$('button.Q_inplace_tool_edit');
-	var save_button = tool.$('button.Q_inplace_tool_save');
-	var cancel_button = tool.$('button.Q_inplace_tool_cancel');
-	var fieldinput = tool.$(':input[type!=hidden]').not('button').eq(0)
+	var edit_button = tool.$edit = tool.$('button.Q_inplace_tool_edit');
+	var save_button = tool.$save = tool.$('button.Q_inplace_tool_save');
+	var cancel_button = tool.$cancel = tool.$('button.Q_inplace_tool_cancel');
+	var fieldinput = tool.$input = tool.$(':input[type!=hidden]').not('button').eq(0)
 		.addClass('Q_inplace_tool_fieldinput');
 	var undermessage = tool.$('.Q_inplace_tool_undermessage');
 	var throbber_img = $('<img />')
 		.attr('src', Q.url('plugins/Q/img/throbbers/bars16.gif'));
 	if (container_span.hasClass('Q_nocancel')) {
 		noCancel = true;
+	}
+	if (state.type === 'select') {
+		fieldinput.val(staticHtml.decodeHTML());
+	}
+	if (staticHtml && state.editOnClick) {
+		static_span.attr('title', state.placeholder);
 	}
 	previousValue = fieldinput.val();
 	var maxWidth = state.maxWidth || null;
