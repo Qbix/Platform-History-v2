@@ -10642,14 +10642,19 @@ function _addHandlebarsHelpers() {
 		});
 	}
 	if (!Handlebars.helpers.tool) {
-		Handlebars.registerHelper('tool', function (name, id, options) {
+		Handlebars.registerHelper('tool', function (name, id, tag, options) {
 			if (!name) {
 				return "{{tool missing name}}";
 			}
-			if (typeof id === 'object') {
+			if (Q.isPlainObject(tag)) {
+				options = tag;
+				tag = undefined;
+			}
+			if (Q.isPlainObject(id)) {
 				options = id;
 				id = undefined;
 			}
+			tag = tag || 'div';
 			var ba = Q.Tool.beingActivated;
 			var prefix = (ba ? ba.prefix : '');
 			var o = {};
@@ -10668,7 +10673,7 @@ function _addHandlebarsHelpers() {
 			if (typeof id === 'string' || typeof id === 'number') {
 				id = prefix + name.split('/').join('_') + (id !== '' ? '-'+id : '');
 			}
-			return Q.Tool.setUpElementHTML('div', name, o, id, prefix);
+			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
 		});
 	}
 }
