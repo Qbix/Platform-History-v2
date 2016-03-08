@@ -2,7 +2,6 @@
 
 function Streams_stream_response_Q_inplace()
 {
-	$user = Users::loggedInUser();
 	$stream = isset(Streams::$cache['stream']) ? Streams::$cache['stream'] : null;
 	if (!$stream) {
 		throw new Exception("No stream");

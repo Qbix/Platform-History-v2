@@ -519,6 +519,7 @@ class Streams_Stream extends Base_Streams_Stream
 				if (!isset($modifiedFields[$f])) continue;
 				if (isset($row->$f) and $row->$f === $modifiedFields[$f]) continue;
 				$row->$f = $modifiedFields[$f];
+				$this->$f = $row->$f;
 			}
 			$rows[$k] = $row;
 		}
