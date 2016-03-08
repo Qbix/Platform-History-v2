@@ -4,7 +4,7 @@ function Q_before_Q_tool_render($params, &$result)
 {	
 	$info = $params['info'];
 	$extra = $params['extra'];
-	if (is_string($extra)) {
+	if (is_string($extra) or is_numeric($extra)) {
 		$extra_id = $extra;
 		$extra = array();
 	} else {
@@ -17,7 +17,7 @@ function Q_before_Q_tool_render($params, &$result)
 	$tool_prefixes = array();
 	foreach ($info as $name => $options) {
 		$tool_id = implode('_', explode('/', $name));
-		if (!empty($extra_id)) {
+		if ($extra_id !== '') {
 			$tool_id .= ('-'.$extra_id);
 		}
 		$tool_id = $cur_prefix . $tool_id;

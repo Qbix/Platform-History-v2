@@ -57,6 +57,9 @@ Q.Tool.define("Q/inplace", function (options) {
 	var staticClass = o.type === 'textarea' 
 		? 'Q_inplace_tool_blockstatic' 
 		: 'Q_inplace_tool_static';
+	if (o.type !== 'textarea' && o.type !== 'text' && o.type !== 'select') {
+		throw new Q.Exception("Q/inplace: type must be textarea, text or select");
+	}
 	Q.Template.render(
 		'Q/inplace/tool',
 		{
@@ -166,24 +169,17 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	var static_span = tool.$static = tool.$(
 		'.Q_inplace_tool_static, .Q_inplace_tool_blockstatic'
 	).eq(0);
-	tool.$editButtons = tool.$('.Q_inplace_tool_editbuttons').css({ 
-		'margin-top': static_span.outerHeight() + 'px',
-		'line-height': '1px'
-	});
-	if (!$te.is(':visible')) {
-		function _waitUntilVisible() {
-			if (tool.removed) return;
-			if (!$te.is(':visible')) {
-				setTimeout(_waitUntilVisible, state.timing.waitingInterval);
-			} else {
-				tool.$('.Q_inplace_tool_editbuttons').css({ 
-					'margin-top': static_span.outerHeight() + 'px',
-					'line-height': '1px'
-				});
-			}
+	function _waitUntilVisible() {
+		if (tool.removed) return;
+		if (!$te.is(':visible')) {
+			return setTimeout(_waitUntilVisible, state.timing.waitingInterval);
 		}
-		_waitUntilVisible();
+		tool.$('.Q_inplace_tool_editbuttons').css({ 
+			'margin-top': static_span.outerHeight() + 'px',
+			'line-height': '1px'
+		});
 	}
+	_waitUntilVisible();
 	var edit_button = tool.$edit = tool.$('button.Q_inplace_tool_edit');
 	var save_button = tool.$save = tool.$('button.Q_inplace_tool_save');
 	var cancel_button = tool.$cancel = tool.$('button.Q_inplace_tool_cancel');
