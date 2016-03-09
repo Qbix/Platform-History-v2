@@ -44,7 +44,7 @@ Q.text.Users = {
 		mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend'>Click to re-send the message</a>.",
 		usingOther: "or you can ",
 		facebookSrc: null,
-		username: "Choose a username:",
+		prompt: "Choose a username:",
 		placeholders: {
 			identifier: "your mobile # or email",
 			mobile: "enter your mobile #",
@@ -1154,7 +1154,7 @@ function login_callback(err, response) {
 				$('<td class="Users_login_picture" />').append(img)
 			).append(
 				td = $('<td class="Users_login_username_block" />').append(
-					$('<label for="Users_login_username" />').html(Q.text.Users.login.username)
+					$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
 				).append(
 					$('<input id="Users_login_username" name="username" type="text" class="text" />')
 					.attr('maxlength', Q.text.Users.login.maxlengths.username)

@@ -35,10 +35,13 @@ Q.text.Streams = {
 	},
 
 	login: {
-
-		fullName: "Let friends recognize you:",
+		prompt: "Let friends recognize you:",
 		picTooltip: "You can change this picture later"
-
+	},
+	
+	complete: {
+		// this is just a fallback, see Streams/types/*/invite/dialog config
+		prompt: "Let friends recognize you:"
 	},
 
 	chat: {
@@ -3122,21 +3125,23 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	if (img.tooltip) {
 		img.tooltip();
 	}
-	var td, table = $('<table />').append(
+	var $td = $('<td class="Streams_login_username_block" />');
+	if (Q.text.Streams.login.prompt) {
+		$td.append(
+			$('<label for="Streams_login_username" />').html(Q.text.Streams.login.prompt),
+			'<br>'
+		)
+	}
+	$td.append(
+		$('<input id="Streams_login_username" name="fullName" type="text" class="text" />')
+		.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
+		.attr('placeholder', Q.text.Users.login.placeholders.fullName)
+		.val(firstName+(lastName ? ' ' : '')+lastName)
+	)
+	var table = $('<table />').append(
 		$('<tr />').append(
 			$('<td class="Streams_login_picture" />').append(img)
-		).append(
-			td = $('<td class="Streams_login_username_block" />').append(
-				$('<label for="Streams_login_username" />').html(Q.text.Streams.login.fullName)
-			).append(
-				'<br>'
-			).append(
-				$('<input id="Streams_login_username" name="fullName" type="text" class="text" />')
-				.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
-				.attr('placeholder', Q.text.Users.login.placeholders.fullName)
-				.val(firstName+(lastName ? ' ' : '')+lastName)
-			)
-		)
+		).append($td)
 	);
 	var register_form = $('<form method="post" class="Users_register_form" />')
 	.attr('action', Q.action("Streams/register"))
@@ -3182,7 +3187,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 
 	if (json.termsLabel) {
-		td.append(
+		$td.append(
 			$('<div />').attr("id", "Users_register_terms")
 				.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 				.append($('<label for="Users_agree" />').html(json.termsLabel))
@@ -3526,6 +3531,9 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!params) {
 			return;
 		}
+		params.prompt = (params.prompt !== undefined)
+			? params.prompt
+			: Q.text.Streams.login.prompt;
 		Streams.construct(params.stream, function () {
 			params.stream = this;
 			Q.Template.render('Streams/invite/complete', params, 
