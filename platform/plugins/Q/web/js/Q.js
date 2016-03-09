@@ -420,8 +420,8 @@ Ap.indexOf = function _Array_prototype_indexOf(searchElement /*, fromIndex */ ) 
 	return -1;
 };
 
-if (!Ap.forEach) {
-Ap.forEach = function(callback){
+if (!Ap.forEach)
+Ap.forEach = function(callback) {
 	for (var i = 0; i < this.length; i++){
 		callback.apply(this, [this[i], i, this]);
 	}
