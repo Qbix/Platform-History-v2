@@ -4692,6 +4692,11 @@ Q.Page.push = function (url) {
 	Q.info.url = url;
 };
 
+Q.Page.currentUrl = function () {
+	var url = location.hash.queryField('url');
+	return url ? Q.url(url) : location.href.split('#')[0];
+};
+
 Q.Page.beingLoaded = false;
 Q.Page.beingActivated = false;
 
