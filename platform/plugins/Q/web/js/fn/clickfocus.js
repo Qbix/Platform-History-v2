@@ -11,15 +11,16 @@
 Q.Tool.jQuery("Q/clickfocus",
 
 function _Q_clickfocus(o) {
-	if (this.is('input, textarea, select')) {
-		this.focus();
-		this.click();
+	var $this = this;
+	if ($this.is('input, textarea, select')) {
+		$this.focus();
+		$this.click();
 	}
-	this.focus();
+	$this.focus();
 	setTimeout(function () {
-		this.focus();
+		$this.focus();
 	}, o.timeout);
-	return this;
+	return $this;
 },
 
 {
