@@ -237,6 +237,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			fieldinput.add(fieldinput.parent()).css('min-height', height);
 		}
 	}
+	_sizing();
 	this.handleClick = function(event) {
 		_sizing();
 		var field_width = static_span.outerWidth();
