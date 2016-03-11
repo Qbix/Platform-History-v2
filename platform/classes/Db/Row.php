@@ -1293,7 +1293,7 @@ class Db_Row implements Iterator
 	 */
 	function get(
 	 $key1,
-	 $default)
+	 $default = null)
 	{
 		$args = func_get_args();
 		if (!isset($this->p)) {
