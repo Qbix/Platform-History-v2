@@ -67,9 +67,9 @@ function () {
 			var span = $('<span />')
 				.css('position', 'relative')
 				.addClass('Q_placeholders_container');
-			var cs = $this[0].computedStyle();
-			var csw = cs.width; // the object can change, so get the values now
-			var csh = cs.height;
+			var cs = $this[0].getBoundingClientRect();
+			var csw = cs.right - cs.left; // the object can change, so get the values now
+			var csh = cs.bottom - cs.top;
 			$this.css({
 				'width': csw,
 				'height': csh
