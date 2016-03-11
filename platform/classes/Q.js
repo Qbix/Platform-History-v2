@@ -1763,6 +1763,7 @@ Q.exceptionHandler = function _Q_exceptionHandler(exception) {
 		: null;
 	Q.log("UNCAUGHT EXCEPTION:", name);
 	Q.log(exception, name);
+	process.exit(1);
 };
 process.on('uncaughtException', Q.exceptionHandler);
 
@@ -2287,7 +2288,7 @@ var logStream = {};
  * @method log
  * @param {mixed} message The data to write to log file. If data is string it is written to log, if it has other type
  *	it is converted to string using util.format with depth defined by Q/var_dump_max_levels config key
- * @param {String} [name='Q/app'] If set log file will be named name+'_node.log', otherwise 'Q/app' config value + '_node.log'
+ * @param {String} [name] If set log file will be named name+'_node.log', otherwise it would be named ('Q/app' config value) + '_node.log'
  * @param {boolean} [timestamp=true] Whether to prepend the current timestamp
  * @param {Function} [callback=null] The callback to call after log file is written
  * @return {boolean} false if failed to parse arguments
