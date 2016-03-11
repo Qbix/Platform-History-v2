@@ -102,5 +102,10 @@
 			"Streams/user/gender": true,
 			"Streams/user/height": true
 		}
+	},
+	"MyApp": {
+		"cordova": {
+			"platform": [] /* ["iOS", "Android"] */
+		}
 	}
 }
