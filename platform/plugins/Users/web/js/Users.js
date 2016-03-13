@@ -751,7 +751,7 @@ Users.get = function (userId, callback) {
 	func.call(this, userId, function Users_get_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
 		if (!msg && !data.user) {
-			msg = "Users.get: data.user is missing";
+			msg = "Users.get: no such user";
 		}
 		if (msg) {
 			Users.onError.handle.call(this, msg, err, data.user);
