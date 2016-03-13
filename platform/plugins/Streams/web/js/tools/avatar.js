@@ -40,8 +40,6 @@ var Streams = Q.Streams;
 Q.Tool.define("Users/avatar", function(options) {
 	var tool = this;
 	var state = this.state;
-	Streams.Stream.retain(state.userId, 'Streams/user/firstName', tool);
-	Streams.Stream.retain(state.userId, 'Streams/user/lastName', tool);
 	if (state.icon === true) {
 		state.icon = Users.icon.defaultSize;
 	}
@@ -49,9 +47,11 @@ Q.Tool.define("Users/avatar", function(options) {
 		state.userId = Users.loggedInUserId();
 	}
 	this.refresh();
-	if (!state.reflectChanges) {
+	if (!state.userId || !state.reflectChanges) {
 		return;
 	}
+	Streams.Stream.retain(state.userId, 'Streams/user/firstName', tool);
+	Streams.Stream.retain(state.userId, 'Streams/user/lastName', tool);
 	Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
 	.set(function (fields, field) {
 		var $img = tool.$('.Users_avatar_icon');

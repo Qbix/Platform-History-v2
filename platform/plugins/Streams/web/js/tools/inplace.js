@@ -49,11 +49,16 @@ Q.Tool.define("Streams/inplace", function (options) {
 		var currentHtml = null;
 
 		function _setContent(content) {
+			if (tool.inplace = tool.child('Q_inplace')) {
+				tool.$static = tool.inplace.$static;
+				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
+			}
 			Q.Streams.get(state.publisherId, state.streamName, function () {
 				state.stream = this;
+				var placeholder = tool.inplace && tool.inplace.state.placeholder;
 				var $e, html = String(content || '').encodeHTML()
 					|| '<span class="Q_placeholder">'
-						+ String(tool.child('Q/inplace').state.placeholder).encodeHTML()
+						+ String(placeholder).encodeHTML()
 						+ '</div>'
 					|| '';
 					
@@ -73,12 +78,14 @@ Q.Tool.define("Streams/inplace", function (options) {
 					}
 					var toSet = html.replaceAll(convert);
 				}
-				var $input = tool.inplace.$input;
-				if (currentContent !== content) {
-					$input.val(currentContent = content);
+				if (tool.inplace) {
+					var $input = tool.inplace.$input;
+					if (currentContent !== content) {
+						$input.val(currentContent = content);
+					}
 				}
 				if (currentHtml !== html) {
-					tool.inplace.$static.html(currentHtml = html);
+					tool.$static.html(currentHtml = html);
 				}
 				var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
 				tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
@@ -159,6 +166,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 					div.innerHTML = ipo.staticHtml;
 				}
 				span.appendChild(div);
+				tool.$static = $(div);
 				tool.element.appendChild(span);
 				Q.handle(state.onLoad, tool);
 				return; // leave the html that is currently in the element
@@ -172,9 +180,6 @@ Q.Tool.define("Streams/inplace", function (options) {
 		}
 		
 		function _content() {
-			if (tool.inplace = tool.child('Q_inplace')) {
-				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
-			}
 			if (state.attribute) {
 				_setContent(stream.attributes[state.attribute]);
 			} else {
