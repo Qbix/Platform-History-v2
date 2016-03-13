@@ -1410,6 +1410,16 @@ Sp.getAll = function _Stream_prototype_getAll (usePending) {
 };
 
 /**
+ * Alias of Streams.Stream.prototype.getAll, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method Attribute
+ * @param {String} attributeName
+ * @param {Mixed} value
+ */
+Sp.getAllAttributes = Sp.getAll;
+
+/**
  * Get the value of an attribute
  * 
  * @method get
@@ -1421,6 +1431,16 @@ Sp.get = function _Stream_prototype_get (attributeName, usePending) {
 	var attr = this.getAll(usePending);
 	return attr[attributeName];
 };
+
+/**
+ * Alias of Streams.Stream.prototype.get, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method getAttribute
+ * @param {String} attributeName
+ * @param {Mixed} value
+ */
+Sp.getAttribute = Sp.get;
 
 /**
  * Set the value of an attribute, pending to be saved to the server with the stream
@@ -1442,6 +1462,16 @@ Sp.set = function _Stream_prototype_set (attributeName, value) {
 	}
 	this.pendingFields.attributes = JSON.stringify(this.pendingAttributes);
 };
+
+/**
+ * Alias of Streams.Stream.prototype.set, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method setAttribute
+ * @param {String} attributeName
+ * @param {Mixed} value
+ */
+Sp.setAttribute = Sp.set;
 
 /**
  * Remove an attribute from the stream, pending to be saved to the server
@@ -2502,6 +2532,16 @@ Mp.getAll = function _Message_prototype_getAll () {
 };
 
 /**
+ * Alias of Streams.Message.prototype.getAll, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method getAllInstructions
+ * @param {String} attributeName
+ * @param {Mixed} value
+ */
+Mp.getAllInstructions = Mp.getAll;
+
+/**
  * Get the value of an instruction in the message
  * 
  * @method get
@@ -2511,6 +2551,16 @@ Mp.get = function _Message_prototype_get (instructionName) {
 	var instr = this.getAll();
 	return instr[instructionName];
 };
+
+/**
+ * Alias of Streams.Message.prototype.get, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method getInstruction
+ * @param {String} attributeName
+ * @param {Mixed} value
+ */
+Mp.getInstruction = Mp.get;
 
 /**
  * Get one or more messages, which may result in batch requests to the server.

@@ -136,8 +136,11 @@ Q.Tool.define("Q/columns", function(options) {
 	 *  including events such as "onOpen" and "onClose". Additional options include:
 	 *  @param {String} [options.columnClass] to add a class to the column
 	 *  @param {Object} [options.data] to add data on the column element with jQuery
-	 *  @param {Object} [options.template] template to render for the "content" slot
-	 *  @param {Object} [options.url] a url to request the slots "title" and "content" from
+	 *  @param {Object} [options.template] template to render for the "column" slot
+	 *  @param {Object} [options.fields] fields for the template, if any
+	 *  @param {Object} [options.title] override the title of the column
+	 *  @param {Object} [options.column] override the html of the column
+	 *  @param {Object} [options.url] a url to request the slots "title" and "column" from
 	 * @param {Number} index The index of the column to open
 	 * @param {Function} callback Called when the column is opened
 	 * @return {Boolean} Whether the column will be opened
@@ -240,10 +243,8 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		
 		if (o.template) {
-			Q.Template.render(o.template, function (err, html) {
-				var $element = $('<div />').html(html);
-				o.title = $element.find('.title_slot').html();
-				o.column = $element.find('.column_slot').html();
+			Q.Template.render(o.template, o.fields, function (err, html) {
+				o.column = html;
 				_open();
 			});
 		} else {
