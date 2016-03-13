@@ -172,8 +172,9 @@ Q.Tool.define("Streams/inplace", function (options) {
 		}
 		
 		function _content() {
-			tool.inplace = tool.child('Q_inplace');
-			tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
+			if (tool.inplace = tool.child('Q_inplace')) {
+				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
+			}
 			if (state.attribute) {
 				_setContent(stream.attributes[state.attribute]);
 			} else {
