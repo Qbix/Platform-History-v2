@@ -843,18 +843,18 @@ class Q_Response
 	 * @method addTemplate
 	 * @static
 	 * @param {string} $name The location of the template file relative to the "views" folder
-	 * @param {string} [$type="handlebars"] The extension, such as 'handlebars' or 'php'
-	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned first by Q_Response::scriptLines.
 	 *  The other special value, "Q", is intended for internal use.
+	 * @param {string} [$type="handlebars"] The extension, such as 'handlebars' or 'php'
+	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
 	 * @return {boolean} returns false if template was already added, else returns true
 	 */
 	static function addTemplate (
 		$name, 
+		$slotName = null,
 		$type = 'handlebars', 
-		$params = array(), 
-		$slotName = null)
+		$params = array())
 	{
 		self::$templates[] = compact('name', 'type');
 		// Now, for the slot
@@ -871,6 +871,7 @@ class Q_Response
 			}
 		}
 		$filename = Q::realPath("views/$name.$type");
+
 		if (!$filename) {
 			throw new Q_Exception_MissingFile(array('filename' => "views/$name.$type"));
 		}
