@@ -77,6 +77,12 @@ function Streams_inplace_tool($options)
 		default:
 			return "inplaceType must be 'textarea' or 'text'";
 	}
+	$toolOptions = array(
+		'publisherId' => $stream->publisherId,
+		'streamName' => $stream->name
+	);
+	Q::take($options, array('attribute', 'field', 'convert'), $toolOptions);
+	Q_Response::setToolOptions($toolOptions);
 	if (!$stream->testWriteLevel('suggest')) {
 		if (!isset($options['classes'])) {
 			$options['classes'] = '';
@@ -91,13 +97,7 @@ function Streams_inplace_tool($options)
 		return "<span class='Q_inplace_tool_container $options[classes]' style='position: relative;'>"
 			. "<div class='$staticClass'>$inplace[staticHtml]</div></span>";
 	}
-	$toolOptions = array(
-		'publisherId' => $stream->publisherId,
-		'streamName' => $stream->name,
-		'inplaceType' => $options['inplaceType']
-	);
-	Q::take($options, array('attribute', 'field', 'convert'), $toolOptions);
 	$toolOptions['inplace'] = $inplace;
-	Q_Response::setToolOptions($toolOptions);
+	$toolOptions['inplaceType'] = $options['inplaceType'];
 	return Q::tool("Q/inplace", $inplace);
 }

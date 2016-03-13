@@ -52,15 +52,15 @@ Q.Tool.define("Streams/inplace", function (options) {
 			if (tool.inplace = tool.child('Q_inplace')) {
 				tool.$static = tool.inplace.$static;
 				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
+			} else if (!tool.$static) {
+				tool.$static = tool.$('.Q_inplace_tool_static, .Q_inplace_tool_blockstatic');
 			}
 			Q.Streams.get(state.publisherId, state.streamName, function () {
 				state.stream = this;
-				var placeholder = tool.inplace && tool.inplace.state.placeholder;
+				var placeholder = tool.inplace && tool.inplace.state.placeholder
+					&& String(tool.inplace.state.placeholder).encodeHTML();
 				var $e, html = String(content || '').encodeHTML()
-					|| '<span class="Q_placeholder">'
-						+ String(placeholder).encodeHTML()
-						+ '</div>'
-					|| '';
+					|| '<span class="Q_placeholder">'+placeholder+'</div>';
 					
 				if (state.inplaceType === 'textarea') {
 					var convert = {};
@@ -83,12 +83,12 @@ Q.Tool.define("Streams/inplace", function (options) {
 					if (currentContent !== content) {
 						$input.val(currentContent = content);
 					}
+					var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
+					tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
 				}
 				if (currentHtml !== html) {
 					tool.$static.html(currentHtml = html);
 				}
-				var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
-				tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
 			});
 		};
 
