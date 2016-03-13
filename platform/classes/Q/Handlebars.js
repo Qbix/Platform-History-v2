@@ -76,6 +76,13 @@ handlebars.registerHelper('call', function(path) {
 	return "{{call \""+path+"\" not found}}";
 });
 
+handlebars.registerHelper('url', function(url) {
+	if (!url) {
+		return "{{url missing}}";
+	}
+	return Q.url(url);
+});
+
 /**
  * Creates a Q.Handlebars object
  * @class Handlebars

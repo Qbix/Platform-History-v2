@@ -2715,9 +2715,7 @@ Q.url = function _Q_url(what, fields, options) {
 	var result = '';
 	var baseUrl = (options && options.baseUrl);
 	if (!baseUrl) {
-		var cs = Q.Config.get(['Q', 'web', 'controllerSuffix']);
 		baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
-			+ (cs ? '/' + cs : '');
 	}
 	if (!what) {
 		result = baseUrl + (what === '' ? '/' : '');

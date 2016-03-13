@@ -10695,6 +10695,14 @@ function _addHandlebarsHelpers() {
 			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
 		});
 	}
+	if (!Handlebars.helpers.url) {
+		Handlebars.registerHelper('url', function (url) {
+			if (!url) {
+				return "{{url missing}}";
+			}
+			return Q.url(url);
+		});
+	}
 }
 
 function _Q_trigger_recursive(tool, eventName, args) {
