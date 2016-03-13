@@ -745,21 +745,20 @@ Users.loggedInUserId = function () {
  *  otherwise, first parameter is null and second parameter is a Users.User object
  */
 Users.get = function (userId, callback) {
-	var url = Q.action('Users/avatar');
 	var func = Users.batchFunction(Q.baseUrl({
 		userIds: userId
-	}), 'avatar');
+	}), 'user');
 	func.call(this, userId, function Users_get_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
-		if (!msg && !data.avatar) {
-			msg = "Users.get: data.avatar is missing";
+		if (!msg && !data.user) {
+			msg = "Users.get: data.user is missing";
 		}
 		if (msg) {
-			Users.onError.handle.call(this, msg, err, data.avatar);
-			Users.get.onError.handle.call(this, msg, err, data.avatar);
+			Users.onError.handle.call(this, msg, err, data.user);
+			Users.get.onError.handle.call(this, msg, err, data.user);
 			return callback && callback.call(this, msg);
 		}
-		var user = new Users.User(data.avatar);
+		var user = new Users.User(data.user);
 		callback.call(user, err, user);
 	});
 }

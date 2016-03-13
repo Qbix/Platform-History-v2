@@ -1,9 +1,9 @@
 <?php
 
-function Users_avatar_response($params)
+function Users_user_response($params)
 {
-	$userIds = $batch = null;
-	extract($_REQUEST, EXTR_IF_EXISTS);
+	$userIds = Q::ifset($_REQUEST, 'userIds', null);
+	$batch = Q::ifset($_REQUEST, 'batch', null);
 	
 	if ($batch) {
 		$batch = json_decode($batch, true);
@@ -15,7 +15,7 @@ function Users_avatar_response($params)
 		}
 		$userIds = $batch['userIds'];
 	} else if (!isset($userIds)) {
-		throw new Q_Exception_RequiredField(array('field' => 'userIds'), 'userIds');
+		return;
 	}
 	if (is_string($userIds)) {
 		$userIds = explode(",", $userIds);
@@ -24,19 +24,19 @@ function Users_avatar_response($params)
 	$users = Users_User::select($fields)
 		->where(array('id' => $userIds))
 		->fetchDbRows(null, null, 'id');
-	$avatars = Db::exportArray($users);
+	$users = Db::exportArray($users);
 	if (!isset($batch)) {
-		Q_Response::setSlot('avatars', $avatars);
-		return $avatars;
+		Q_Response::setSlot('users', $users);
+		return $users;
 	}
 	if ($batch) {
 		$result = array();
 		foreach ($userIds as $userId) {
 			$result[] = array('slots' => 
-				array('avatar' => isset($avatars[$userId]) ? $avatars[$userId] : null)
+				array('user' => isset($users[$userId]) ? $users[$userId] : null)
 			);
 		}
 		Q_Response::setSlot('batch', $result);
 	}
-	return $avatars;
+	return false;
 }

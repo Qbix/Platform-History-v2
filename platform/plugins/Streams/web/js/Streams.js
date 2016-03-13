@@ -3288,9 +3288,16 @@ function updateAvatarCache(stream) {
 	};
 	var sf = stream.fields;
 	if (avatarStreamNames[sf.name]) {
-		// Reload User and Avatar from the server
-		Users.get.force(sf.publisherId);
-		Avatar.get.force(sf.publisherId);
+		var field = sf.name.split('/').pop();
+		var userId = sf.publisherId;
+		Avatar.get.cache.each([userId], function (k) {
+			this.data[k].subject[field] = sf.content;
+		});
+		if (field === 'username' || field === 'icon') {
+			Users.get.cache.each([userId], function (k) {
+				this.data[k].subject[field] = sf.content;
+			});
+		}
 	}
 }
 
