@@ -600,7 +600,7 @@ Q.batcher.options = {
 Q.getter = function _Q_getter(original, options) {
 
 
-	function wrapper() {
+	function Q_getter_wrapper() {
 		var i, key, that = this, callbacks = [];
 		var arguments2 = Array.prototype.slice.call(arguments);
 
@@ -615,21 +615,21 @@ Q.getter = function _Q_getter(original, options) {
 		}
 		
 		var ret = { dontCache: false };
-		wrapper.emit('called', this, arguments2, ret);
+		Q_getter_wrapper.emit('called', this, arguments2, ret);
 
 		var cached, cbpos, cbi;
 		Q.getter.usingCached = false;
 
 		// if caching is required check the cache -- maybe the result is there
-		if (wrapper.cache && !ignoreCache) {
-			if (cached = wrapper.cache.get(key)) {
+		if (Q_getter_wrapper.cache && !ignoreCache) {
+			if (cached = Q_getter_wrapper.cache.get(key)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
-					wrapper.emit('result', cached.subject, cached.params, arguments2, ret, original);
+					Q_getter_wrapper.emit('result', cached.subject, cached.params, arguments2, ret, original);
 					Q.getter.usingCached = true;
 					callbacks[cbpos].apply(cached.subject, cached.params);
 					ret.result = Q.getter.CACHED;
-					wrapper.emit('executed', this, arguments2, ret);
+					Q_getter_wrapper.emit('executed', this, arguments2, ret);
 					Q.getter.usingCached = false;
 					return ret; // wrapper found in cache, callback and throttling have run
 				}
@@ -643,7 +643,7 @@ Q.getter = function _Q_getter(original, options) {
 			ret: ret
 		});
 		if (_waiting[key].length > 1) {
-			wrapper.emit('executed', this, arguments2, ret);
+			Q_getter_wrapper.emit('executed', this, arguments2, ret);
 			ret.result = Q.getter.WAITING;
 			return ret; // the request is already in process - let's wait
 		}
@@ -665,47 +665,47 @@ Q.getter = function _Q_getter(original, options) {
 				return function _Q_getter_callback() {
 
 					// save the results in the cache
-					if (wrapper.cache && !ret.dontCache) {
-						wrapper.cache.set(key, cbpos, this, arguments);
+					if (Q_getter_wrapper.cache && !ret.dontCache) {
+						Q_getter_wrapper.cache.set(key, cbpos, this, arguments);
 					}
 
 					// process waiting callbacks
 					var wk = _waiting[key];
 					if (wk) for (i = 0; i < wk.length; i++) {
-						wrapper.emit('result', this, arguments, arguments2, wk[i].ret, original);
+						Q_getter_wrapper.emit('result', this, arguments, arguments2, wk[i].ret, original);
 						wk[i].callbacks[cbpos].apply(this, arguments);
 					}
 					delete _waiting[key];
 
 					// tell throttle to execute the next function, if any
-					if (wrapper.throttle && wrapper.throttle.throttleNext) {
-						wrapper.throttle.throttleNext(this);
+					if (Q_getter_wrapper.throttle && Q_getter_wrapper.throttle.throttleNext) {
+						Q_getter_wrapper.throttle.throttleNext(this);
 					}
 				};
 			})(callbacks[cbi], cbi));
 			++cbi; // the index in the array of callbacks
 		}
 
-		if (!wrapper.throttle) {
+		if (!Q_getter_wrapper.throttle) {
 			// no throttling, just run the function
 			if (false === original.apply(that, args)) {
 				ret.dontCache = true;
 			}
 			ret.result = Q.getter.REQUESTING;
-			wrapper.emit('executed', this, arguments2, ret);
+			Q_getter_wrapper.emit('executed', this, arguments2, ret);
 			return ret;
 		}
 
-		if (!wrapper.throttle.throttleTry) {
+		if (!Q_getter_wrapper.throttle.throttleTry) {
 			// the throttle object is probably not set up yet
 			// so set it up
 			var p = {
-				size: wrapper.throttleSize,
+				size: Q_getter_wrapper.throttleSize,
 				count: 0,
 				queue: [],
 				args: []
 			};
-			wrapper.throttle.throttleTry = function _throttleTry(that, getter, args, ret) {
+			Q_getter_wrapper.throttle.throttleTry = function _throttleTry(that, getter, args, ret) {
 				++p.count;
 				if (p.size === null || p.count <= p.size) {
 					if (false === getter.apply(that, args)) {
@@ -718,7 +718,7 @@ Q.getter = function _Q_getter(original, options) {
 				p.args.push(args);
 				return false;
 			};
-			wrapper.throttle.throttleNext = function _throttleNext(that) {
+			Q_getter_wrapper.throttle.throttleNext = function _throttleNext(that) {
 				if (--p.count < 0) {
 					console.warn("Q.getter: throttle count is negative");
 				}
@@ -727,8 +727,8 @@ Q.getter = function _Q_getter(original, options) {
 				}
 			};
 		}
-		if (!wrapper.throttleSize) {
-			wrapper.throttle.throttleSize = function _throttleSize(newSize) {
+		if (!Q_getter_wrapper.throttleSize) {
+			Q_getter_wrapper.throttle.throttleSize = function _throttleSize(newSize) {
 				if (typeof(newSize) === 'undefined') {
 					return p.size;
 				}
@@ -737,56 +737,56 @@ Q.getter = function _Q_getter(original, options) {
 		}
 
 		// execute the throttle
-		ret.result = wrapper.throttle.throttleTry(this, original, args, ret)
+		ret.result = Q_getter_wrapper.throttle.throttleTry(this, original, args, ret)
 			? Q.getter.REQUESTING
 			: Q.getter.THROTTLING;
-		wrapper.emit('executed', this, arguments2, ret);
+		Q_getter_wrapper.emit('executed', this, arguments2, ret);
 		return ret;
 	}
 
-	Q.extend(wrapper, original, Q.getter.options, options);
-	Q.makeEventEmitter(wrapper);
+	Q.extend(Q_getter_wrapper, original, Q.getter.options, options);
+	Q.makeEventEmitter(Q_getter_wrapper);
 
 	var _waiting = {};
-	if (wrapper.cache === false) {
+	if (Q_getter_wrapper.cache === false) {
 		// no cache
-		wrapper.cache = null;
-	} else if (wrapper.cache === true) {
+		Q_getter_wrapper.cache = null;
+	} else if (Q_getter_wrapper.cache === true) {
 		// create our own Object that will cache locally in the page
-		wrapper.cache = Q.Cache.document(++_Q_getter_i);
+		Q_getter_wrapper.cache = Q.Cache.document(++_Q_getter_i);
 	} else {
 		// assume we were passed an Object that supports the cache interface
 	}
 
-	wrapper.throttle = wrapper.throttle || null;
-	if (wrapper.throttle === true) {
-		wrapper.throttle = '';
+	Q_getter_wrapper.throttle = Q_getter_wrapper.throttle || null;
+	if (Q_getter_wrapper.throttle === true) {
+		Q_getter_wrapper.throttle = '';
 	}
-	if (typeof wrapper.throttle === 'string') {
+	if (typeof Q_getter_wrapper.throttle === 'string') {
 		// use our own objects
-		if (!Q.getter.throttles[wrapper.throttle]) {
-			Q.getter.throttles[wrapper.throttle] = {};
+		if (!Q.getter.throttles[Q_getter_wrapper.throttle]) {
+			Q.getter.throttles[Q_getter_wrapper.throttle] = {};
 		}
-		wrapper.throttle = Q.getter.throttles[wrapper.throttle];
+		Q_getter_wrapper.throttle = Q.getter.throttles[Q_getter_wrapper.throttle];
 	}
 
-	wrapper.forget = function _forget() {
+	Q_getter_wrapper.forget = function _forget() {
 		var key = Q.Cache.key(arguments);
-		if (key && wrapper.cache) {
-			return wrapper.cache.remove(key);
+		if (key && Q_getter_wrapper.cache) {
+			return Q_getter_wrapper.cache.remove(key);
 		}
 	};
 	
 	var ignoreCache = false;
-	wrapper.force = function _force() {
+	Q_getter_wrapper.force = function _force() {
 		ignoreCache = true;
-		wrapper.apply(this, arguments);
+		Q_getter_wrapper.apply(this, arguments);
 	};
 
 	if (original.batch) {
-		wrapper.batch = original.batch;
+		Q_getter_wrapper.batch = original.batch;
 	}
-	return wrapper;
+	return Q_getter_wrapper;
 };
 var _Q_getter_i = 0;
 Q.getter.options = {
