@@ -56,14 +56,22 @@ handlebars.registerHelper('call', function(path) {
 	if (!path) {
 		return "{{call missing method name}}";
 	}
+	var args = Array.prototype.slice.call(
+		arguments, 1, arguments.length-1
+	);
 	var parts = path.split('.');
-	var p0 = parts[0];
-	var p1 = parts[1];
-	if (this[p0] && typeof this[p0][p1] === 'function') {
-		var args = Array.prototype.slice.call(
-			arguments, 1, arguments.length-1
-		);
-		return this[p0][p1].apply(this[p0], args);
+	var subparts = parts.slice(0, -1);
+	var f = Q.getObject(parts, this);
+	if (typeof f === 'function') {
+		return f.apply(Q.getObject(subparts, this), args);
+	}
+	if (parts[0] === 'Q') {
+		parts.shift();
+		subpath.shift();
+		f = Q.getObject(parts, Q);
+		if (typeof f === 'function') {
+			return f.apply(Q.getObject(subparts, Q), args);
+		}
 	}
 	return "{{call \""+path+"\" not found}}";
 });
