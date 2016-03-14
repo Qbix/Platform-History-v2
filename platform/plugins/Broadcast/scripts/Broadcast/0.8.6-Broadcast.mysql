@@ -1,1 +1,0 @@
-ALTER TABLE `{$prefix}agreement` CHANGE COLUMN `insertedTime` `insertedTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;

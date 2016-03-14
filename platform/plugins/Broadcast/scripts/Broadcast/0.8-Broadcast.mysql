@@ -1,6 +1,0 @@
-DROP TABLE IF EXISTS `{$prefix}message`;
-CREATE TABLE IF NOT EXISTS `{$prefix}message` (
-`message_name` VARCHAR( 255 ) NOT NULL ,
-`instructions` TEXT NOT NULL ,
-PRIMARY KEY (  `message_name` )
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ENGINE = INNODB;

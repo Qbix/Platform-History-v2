@@ -25,7 +25,7 @@ QConstructor.prototype = new events.EventEmitter();
 var Q = new QConstructor();
 module.exports = Q;
 
-Q.VERSION = 0.8;
+Q.VERSION = 0.9;
 
 Q.Error = Error;
 
