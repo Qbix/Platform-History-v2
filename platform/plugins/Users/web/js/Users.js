@@ -677,7 +677,9 @@ Users.logout = function(options) {
 				alert(e);
 			}
 		}
-		Users.logout.occurring = false;
+		setTimeout(function () {
+			Users.logout.occurring = false;
+		}, 0);
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 		Users.roles = {};
 		if (Users.facebookApps[Q.info.app]

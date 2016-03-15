@@ -171,22 +171,23 @@ class Q_Session
 		ini_set("session.entropy_file", "/dev/urandom");
 		ini_set("session.entropy_length", "512");
 		ini_set("session.hash_function", "1");
-		$base_url = Q_Request::baseUrl();
-		$name = Q_Config::get('Q', 'session', 'name', 'sessionId');
-		$lifetime = Q_Config::get('Q', 'session', 'durations', Q_Request::formFactor(), 0);
-		$parts = parse_url($base_url);
+		$name = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
+		$durationName = self::durationName();
+		$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+		$baseUrl = Q_Request::baseUrl();
+		$parts = parse_url($baseUrl);
 		$path = !empty($parts['path']) ? $parts['path'] : '/';
 		$domain = '.'.$parts['host'];
 
 		Q::event('Q/session/init', array(
 			'name' => &$name,
-			'lifetime' => &$lifetime,
+			'duration' => &$duration,
 			'path' => &$path,
 			'domain' => &$domain
 		), 'before');
 
 		Q_Session::name($name);
-		session_set_cookie_params(isset($lifetime) ? $lifetime : 0, $path, $domain, false, false);
+		session_set_cookie_params($duration, $path, $domain, false, false);
 		
 		if (Q_Config::get('Q', 'session', 'appendSuffix', false)
 		or isset($_GET[$name])) {
@@ -300,6 +301,9 @@ class Q_Session
 				}
 			}
 			if (!empty($_SERVER['HTTP_HOST'])) {
+				$durationName = self::durationName();
+				$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+				Q_Response::setCookie(self::name(), $id, $duration);
 				session_start();
 			} else if (empty($_SESSION)) {
 				$_SESSION = array();
@@ -362,13 +366,8 @@ class Q_Session
 		session_destroy();
 		self::clear();
 		if (ini_get("session.use_cookies")) {
-		    $params = session_get_cookie_params();
-			$parts = parse_url(Q_Request::baseUrl());
-			$domain = '.'.$parts['host'];
-		    setcookie(self::name(), '', time() - 42000,
-		        $params["path"], $params["domain"],
-		        $params["secure"], $params["httponly"]
-		    );
+		    // note - we no use session_get_cookie_params();
+		    Q_Response::clearCookie(self::name());
 		}
 	}
 	
@@ -709,7 +708,9 @@ class Q_Session
 		$result = Q::event(
 			'Q/session/destroy',
 			compact('id'),
-			'after'
+			'after',
+			false,
+			$result
 		);
 		return $result;
 	}
@@ -717,33 +718,33 @@ class Q_Session
 	/**
 	 * @method gcHandler
 	 * @static
-	 * @param {integer} $max_lifetime
+	 * @param {integer} $max_duration
 	 */
-	static function gcHandler ($max_lifetime)
+	static function gcHandler ($max_duration)
 	{
 		$proceed = Q_Config::get('Q', 'session', 'gc', true);
 		if ($proceed) {
-			self::gc($max_lifetime);
+			self::gc($max_duration);
 		}
 	}
 	
 	/**
 	 * @method gc
 	 * @static
-	 * @param {integer} $max_lifetime
+	 * @param {integer} $max_duration
 	 */
-	static function gc($max_lifetime)
+	static function gc($max_duration)
 	{
 		$id = self::id();
 		/**
 		 * @event Q/session/gc {before}
 		 * @param {string} id
-		 * @param {integer} max_lifetime
+		 * @param {integer} max_duration
 		 * @return {false}
 		 */
 		if (false === Q::event(
 			'Q/session/gc', 
-			compact('id', 'max_lifetime'), 
+			compact('id', 'max_duration'), 
 			'before'
 		)) {
 			return false;
@@ -751,7 +752,7 @@ class Q_Session
 		$durations = Q_Config::get('Q', 'session', 'durations', array());
 		foreach ($durations as $k => $v) {
 			if ($v === null) {
-				$v = $max_lifetime;
+				$v = $max_duration;
 			}
 			if (!$v) {
 				continue;
@@ -777,12 +778,12 @@ class Q_Session
 		/**
 		 * @event Q/session/gc {after}
 		 * @param {string} id
-		 * @param {integer} max_lifetime
+		 * @param {integer} max_duration
 		 * @param {integer} since_time
 		 */
 		Q::event(
 			'Q/session/gc', 
-			compact('id', 'max_lifetime', 'since_time'), 
+			compact('id', 'max_duration', 'since_time'), 
 			'after'
 		);
 		return true;
@@ -812,7 +813,9 @@ class Q_Session
 			$_SESSION['Q']['nonce'] = md5(mt_rand().microtime());
 		}
 		if (!empty($_SERVER['HTTP_HOST'])) {
-			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce']);
+			$durationName = self::durationName();
+			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], $duration);
 		}
 		Q_Session::$nonceWasSet = true;
 	}
@@ -826,7 +829,7 @@ class Q_Session
 		self::start();
 		$_SESSION['Q']['nonce'] = null;
 		if (!empty($_SERVER['HTTP_HOST'])) {
-			Q_Response::setCookie('Q_nonce', null);
+			Q_Response::clearCookie('Q_nonce');
 		}
 	}
 	

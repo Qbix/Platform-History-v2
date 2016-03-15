@@ -6546,7 +6546,7 @@ Q.cookie = function _Q_cookie(name, value, options) {
 };
 
 Q.sessionName = function () {
-	return Q.info.sessionName || 'sessionId';
+	return Q.info.sessionName || 'Q_sessionId';
 };
 
 /**

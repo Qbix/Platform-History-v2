@@ -1454,7 +1454,7 @@ class Q_Response
 			return;
 		}
 		$parts = parse_url(Q_Request::baseUrl());
-		$path = $path ? $path : !empty($parts['path']) ? $parts['path'] : '/';
+		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
 		$domain = '.'.$parts['host'];
 		setcookie($name, $value, $expires, $path, $domain);
 		$_COOKIE[$name] = $value;
@@ -1465,6 +1465,18 @@ class Q_Response
 		);
 		header($header);
 		return $value;
+	}
+	
+	/**
+	 * @method clearCookie
+	 * @static
+	 * @param {string} $name
+	 * @param {string} [$path=false]
+	 * @return {string}
+	 */
+	static function clearCookie($name, $path = false)
+	{
+		self::setCookie($name, '', 1, $path);
 	}
 
 	/**
