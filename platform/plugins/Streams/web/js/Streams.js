@@ -1402,9 +1402,8 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * 
  * @method getAll
  * @param {Boolean} usePending
- * @return {Array}
+ * @return {Object}
  */
-
 Sp.getAll = function _Stream_prototype_getAll (usePending) {
 	return usePending ? this.pendingAttributes : this.attributes;
 };
@@ -1413,9 +1412,7 @@ Sp.getAll = function _Stream_prototype_getAll (usePending) {
  * Alias of Streams.Stream.prototype.getAll, mostly for templates shared between
  * PHP and JS contexts to be able to call the same function.
  * 
- * @method Attribute
- * @param {String} attributeName
- * @param {Mixed} value
+ * @method getAllAttributes
  */
 Sp.getAllAttributes = Sp.getAll;
 
@@ -1438,7 +1435,6 @@ Sp.get = function _Stream_prototype_get (attributeName, usePending) {
  * 
  * @method getAttribute
  * @param {String} attributeName
- * @param {Mixed} value
  */
 Sp.getAttribute = Sp.get;
 
@@ -1492,6 +1488,16 @@ Sp.clear = function _Stream_prototype_clear (attributeName) {
 	}
 	this.pendingFields.attributes = JSON.stringify(this.pendingAttributes);
 };
+
+/**
+ * Alias of Streams.Stream.prototype.clear, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method setAttribute
+ * @param {String} attributeName
+ * @param {Mixed} value
+ */
+Sp.clearAttribute = Sp.clear;
 
 /**
  * Save a stream to the server
@@ -2522,6 +2528,7 @@ var Mp = Message.prototype;
  * Get all the instructions from a message.
  * 
  * @method getAll
+ * @return {Object}
  */
 Mp.getAll = function _Message_prototype_getAll () {
 	try {
@@ -2536,8 +2543,7 @@ Mp.getAll = function _Message_prototype_getAll () {
  * PHP and JS contexts to be able to call the same function.
  * 
  * @method getAllInstructions
- * @param {String} attributeName
- * @param {Mixed} value
+ * @return {Object}
  */
 Mp.getAllInstructions = Mp.getAll;
 
@@ -2557,8 +2563,7 @@ Mp.get = function _Message_prototype_get (instructionName) {
  * PHP and JS contexts to be able to call the same function.
  * 
  * @method getInstruction
- * @param {String} attributeName
- * @param {Mixed} value
+ * @param {String} instructionName
  */
 Mp.getInstruction = Mp.get;
 
@@ -2889,6 +2894,52 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 	});
 };
 Participant.get.onError = new Q.Event();
+
+var Pp = Participant.prototype;
+
+/**
+ * Get all extra attributes
+ * 
+ * @method getAll
+ * @return {Object}
+ */
+Pp.getAll = function _Participant_prototype_getAll () {
+	try {
+		return JSON.parse(this.extra);
+	} catch (e) {
+		return undefined;
+	}
+};
+
+/**
+ * Alias of Streams.Participant.prototype.getAll, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method getAllExtras
+ * @return {Object}
+ */
+Pp.getAllExtras = Pp.getAll;
+
+/**
+ * Get the value of an extra
+ * 
+ * @method get
+ * @param {String} extraName the name of the extra to get
+ * @return {Mixed}
+ */
+Pp.get = function _Participant_prototype_get (extraName) {
+	var attr = this.getAll(usePending);
+	return attr[extraName];
+};
+
+/**
+ * Alias of Streams.Participant.prototype.get, mostly for templates shared between
+ * PHP and JS contexts to be able to call the same function.
+ * 
+ * @method getExtra
+ * @param {String} extraName
+ */
+Pp.getExtra = Pp.get;
 
 /**
  * Constructs an avatar from fields, which are typically returned from the server.
