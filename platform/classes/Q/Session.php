@@ -121,7 +121,7 @@ class Q_Session
 		 * @param {string} id
 		 * @return {string}
 		 */
-		if ($id2 = Q::event('Q/session/id', compact('id'), 'before')) {
+		if ($id2 = Q::event('Q/session/id', array(), 'before', false, $id)) {
 			return $id2;
 		}
 		if (isset($id)) {
@@ -924,7 +924,7 @@ class Q_Session
 		$id = str_replace('-', '', Q_Utils::uuid());
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		if (isset($secret)) {
-			$id .= md5($id . $secret);
+			$id .= hash_hmac('md5', $id, "$secret");
 		}
 		$id = base64_encode(pack('H*', $id));
 		return str_replace(array('z', '+', '/', '='), array('zz', 'za', 'zb', 'zc'), $id);
@@ -965,7 +965,7 @@ class Q_Session
 		$b = substr($result, 32, 32);
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		$c = isset($secret)
-			? ($b === md5($a . $secret))
+			? ($b === Q_Utils::hmac('md5', $a, $secret))
 			: true;
 		return array($c, $a, $b);
 	}

@@ -678,7 +678,7 @@ Users.logout = function(options) {
 			}
 		}
 		Users.logout.occurring = false;
-		Users.sessionId = Q.cookie(Q.sessionName()); // null
+		Users.lastSeenNonce = Q.cookie('Q_nonce');
 		Users.roles = {};
 		if (Users.facebookApps[Q.info.app]
 		&& (o.using.indexOf('facebook') >= 0)) {
@@ -1021,7 +1021,7 @@ function login_callback(err, response) {
 				return;
 			}
 			// success!
-			Users.sessionId = Q.cookie(Q.sessionName());
+			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = response.slots.data.roles || {};
 			switch ($this.data('form-type')) {
 				case 'resend': 
@@ -1827,7 +1827,7 @@ Q.onInit.add(function () {
 		Users.initFacebook();
 	}
 	
-	Users.sessionId = Q.cookie(Q.sessionName());
+	Users.lastSeenNonce = Q.cookie('Q_nonce');
 	
 	Q.Users.login.options = Q.extend({
 		onCancel: new Q.Event(),
@@ -1898,14 +1898,14 @@ Q.beforeActivate.add(function (elem) {
 }, 'Users');
 
 Q.request.options.onProcessed.set(function (err, response) {
-	var sessionId = Q.cookie(Q.sessionName());
-	if (sessionId !== Users.sessionId
+	Q.nonce = Q.cookie('Q_nonce');
+	if (Users.lastSeenNonce !== Q.nonce
 	&& !Users.login.occurring
 	&& !Users.authenticate.occurring
 	&& !Users.logout.occurring) {
 		Q.nonce = Q.cookie('Q_nonce');
 		Q.req("Users/login", 'data', function (err, res) {
-			Q.nonce = Q.cookie('Q_nonce');
+			Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce');
 			var msg = Q.firstErrorMessage(err, res && res.errors);
 			if (msg) {
 				return Users.onError.handle(msg, err);
@@ -1922,7 +1922,7 @@ Q.request.options.onProcessed.set(function (err, response) {
 			}
 		});
 	}
-	Users.sessionId = sessionId;
+	Users.lastSeenNonce = Q.nonce;
 	if (!response || !response.errors) {
 		return;
 	}

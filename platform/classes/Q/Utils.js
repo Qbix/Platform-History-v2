@@ -32,7 +32,7 @@ Utils.signature = function (data, secret) {
 	if (typeof(data) !== 'string') {
 		data = http_build_query(ksort(data));
 	}
-	return Q.md5(data+secret);
+	return Q.Crypto.md5(data, secret);
 };
 
 /**
@@ -85,6 +85,7 @@ Utils.validate = function (req, res, next) {
 	if (signature === Q.Utils.signature(data, secret)) {
 		next();
 	} else {
+		console.log(signature);
 		console.log(data, secret);
 		console.log("Request validation failed");
 		res.send(JSON.stringify({errors: "Invalid signature"}), 403); // forbidden

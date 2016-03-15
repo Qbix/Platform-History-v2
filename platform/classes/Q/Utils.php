@@ -31,7 +31,7 @@ class Q_Utils
 			ksort($data);
 			$data = http_build_query($data);
 		}
-		return md5($data . $secret);
+		return self::hmac('md5', $data, $secret);
 	}
 
 	/**
