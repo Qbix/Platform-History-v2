@@ -2928,7 +2928,7 @@ Pp.getAllExtras = Pp.getAll;
  * @return {Mixed}
  */
 Pp.get = function _Participant_prototype_get (extraName) {
-	var attr = this.getAll(usePending);
+	var attr = this.getAll();
 	return attr[extraName];
 };
 
