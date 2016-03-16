@@ -42,10 +42,10 @@ function Q_columns_tool($options)
 	$result = '<div class="Q_columns_container Q_clearfix">';
 	$columns = array();
 	$i=0;
+	$closeSrc = Q::ifset($options, 'close', 'src', 'plugins/Q/img/x.png"');
+	$backSrc = Q::ifset($options, 'back', 'src', 'plugins/Q/img/back-v.png"');
 	foreach ($options['columns'] as $name => $column) {
 		$close = Q::ifset($column, 'close', $i > 0);
-		$closeSrc = Q::ifset($column, 'close', 'src', "plugins/Q/img/x.png");
-		$backSrc = Q::ifset($column, 'back', 'src', "plugins/Q/img/back-v.png");
 		$Q_close = Q_Request::isMobile() ? 'Q_close' : 'Q_close Q_back';
 		$closeHtml = !$close ? '' : (Q_Request::isMobile()
 			? '<div class="Q_close Q_back">'.Q_Html::img($backSrc, 'Back').'</div>'
