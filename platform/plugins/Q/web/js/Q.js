@@ -4699,8 +4699,22 @@ Q.Page.currentUrl = function () {
 	return url ? Q.url(url) : location.href.split('#')[0];
 };
 
+/**
+ * Whether a page is currently being loaded
+ * @property {boolean} beingLoaded
+ */
 Q.Page.beingLoaded = false;
+/**
+ * Whether a page is currently being activated
+ * @property {boolean} beingActivated
+ */
 Q.Page.beingActivated = false;
+/**
+ * Whether we are currently in the process of unloading the existing page,
+ * and then loading and activating the new page.
+ * @property {boolean} beingProcessed
+ */
+Q.Page.beingProcessed = false;
 
 /**
  * Occurs when the page has begun to load
@@ -6932,6 +6946,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return;
 		}
 		
+		Q.Page.beingProcessed = true;
+		
 		loadTemplates();
 		var newScripts;
 		
@@ -7021,7 +7037,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				if (root.StyleFix) {
 					root.StyleFix.process();
 				}
-
+				
+				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
 			}
 			
