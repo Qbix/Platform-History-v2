@@ -5279,35 +5279,6 @@ Q.layout = function _Q_layout(elementOrEvent) {
 	Q.trigger('Q.layout', elementOrEvent);
 };
 
-Q.clientId = function () {
-	var storage = sessionStorage;
-	if (Q.clientId.value = storage.getItem("Q\tclientId")) {
-		return Q.clientId.value;
-	}
-	var detected = Q.Browser.detect();
-	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
-		+ "\t" + detected.OS.substr(0, 3)
-		+ "\t" + detected.name.substr(0, 3)
-		+ "\t" + detected.mainVersion + (detected.isWebView ? "n" : "w")
-		+ "\t" + Math.floor(Date.now()/1000).toString(36);
-	storage.setItem("Q\tclientId", ret);
-	return ret;
-};
-
-/**
- * Call this function to get an rfc4122 version 4 compliant id for the current client
- * @static
- * @method uuid
- */
-Q.uuid = function () {
-	// TODO: consider replacing with
-	// https://github.com/broofa/node-uuid/blob/master/uuid.js
-	return Q.uuid.value = Q.uuid.value || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-		return v.toString(16);
-	});
-};
-
 /**
  * Returns whether Q.ready() has been called
  * @static
@@ -6545,8 +6516,61 @@ Q.cookie = function _Q_cookie(name, value, options) {
 	return null;
 };
 
+/**
+ * Get the name of the session cookie
+ * @method sessionName 
+ * @static
+ * @return {string}
+ */
 Q.sessionName = function () {
 	return Q.info.sessionName || 'Q_sessionId';
+};
+
+/**
+ * Get the value of the session cookie
+ * @method sessionId
+ * @static
+ * @return {string}
+ */
+Q.sessionId = function () {
+	return Q.cookie(Q.sessionName());
+};
+
+/**
+ * Get a value that identifies the client in a fairly unique way.
+ * This is most useful to tell apart clients used by a particular user.
+ * @method clientId
+ * @static
+ * @return {string}
+ */
+Q.clientId = function () {
+	var storage = sessionStorage;
+	if (Q.clientId.value = storage.getItem("Q\tclientId")) {
+		return Q.clientId.value;
+	}
+	var detected = Q.Browser.detect();
+	var code = Math.floor(Date.now()/1000)*1000 + Math.floor(Math.random()*1000);
+	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
+		+ "\t" + detected.OS.substr(0, 3)
+		+ "\t" + detected.name.substr(0, 3)
+		+ "\t" + detected.mainVersion + (detected.isWebView ? "n" : "w")
+		+ "\t" + code.toString(36);
+	storage.setItem("Q\tclientId", ret);
+	return ret;
+};
+
+/**
+ * Call this function to get an rfc4122 version 4 compliant id for the current client
+ * @static
+ * @method uuid
+ */
+Q.uuid = function () {
+	// TODO: consider replacing with
+	// https://github.com/broofa/node-uuid/blob/master/uuid.js
+	return Q.uuid.value = Q.uuid.value || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+		return v.toString(16);
+	});
 };
 
 /**
@@ -8053,9 +8077,9 @@ function _connectSocketNS(ns, url, callback, force) {
 		}
 		
 		function _connected() {
-			this.emit('session', Q.cookie(Q.sessionName()));
-			Q.Socket.onConnect(ns).handle(socket);
-			Q.Socket.onConnect(ns, url).handle(socket);
+			Q.Socket.onConnect().handle(this, [ns, url]);
+			Q.Socket.onConnect(ns).handle(this, [ns, url]);
+			Q.Socket.onConnect(ns, url).handle(this, [ns, url]);
 			console.log('Socket connected to '+url);
 		}
 	}
