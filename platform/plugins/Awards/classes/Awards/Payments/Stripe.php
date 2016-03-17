@@ -55,13 +55,17 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 	 * @method charge
 	 * @param {double} $amount specify the amount (optional cents after the decimal point)
 	 * @param {string} [$currency='usd'] set the currency, which will affect the amount
-	 * @param {string} [$description=null] description of the charge, to be sent to customer
-	 * @param {string} [$metadata=null] any additional metadata to store with the charge
-	 * @param {string} [$subscriptionStreamName=null] if the charge belongs to a subscription, this is the id (last part of subscription's stream name)
+	 * @param {array} [$options=array()] Any additional options
+	 * @param {string} [$options.token=null] required unless the user is an existing customer
+	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
+	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
+	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream
+	 * @param {string} [$options.subscription.publisherId]
+	 * @param {string} [$options.subscription.streamName]
 	 * @throws \Stripe\Error\Card
 	 * @return {Awards_Charge} the saved database row corresponding to the charge
 	 */
-	function charge($amount, $currency = 'usd', $description = null, $metadata = null, $subscriptionStreamName = null)
+	function charge($amount, $currency = 'usd', $options = array())
 	{
 		$options = $this->options;
 		Q_Valid::requireFields(array('secret', 'user'), $options, true);
@@ -84,12 +88,7 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 			"currency" => $currency,
 			"customer" => $c->customerId
 		);
-		if (isset($description)) {
-			$params['description'] = $description;
-		}
-		if (isset($metadata)) {
-			$params['metadata'] = $metadata;
-		}
+		Q::take($options, array('description', 'metadata'), $params);
 		\Stripe\Charge::create($params); // can throw some exception
 		$charge = new Awards_Charge();
 		$charge->userId = $user->id;
