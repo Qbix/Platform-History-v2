@@ -146,7 +146,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		$customerId = $this->customerId();
 		$paymentProfileId = $this->paymentProfileId($customerId);
 		
-		$options = $this->options;
+		$options = array_merge($this->options, $options);
 		
 		// Common setup for API credentials
 		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();

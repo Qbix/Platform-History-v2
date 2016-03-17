@@ -140,6 +140,7 @@ abstract class Awards extends Base_Awards
 	 * @param {string} $amount specify the amount
 	 * @param {string} [$currency='usd'] set the currency, which will affect the amount
 	 * @param {array} [$options=array()] Any additional options
+	 * @param {string} [$options.token=null] required for stripe unless the user is an existing customer
 	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
 	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
 	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream

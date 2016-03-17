@@ -67,7 +67,7 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 	 */
 	function charge($amount, $currency = 'usd', $options = array())
 	{
-		$options = $this->options;
+		$options = array_merge($this->options, $options);
 		Q_Valid::requireFields(array('secret', 'user'), $options, true);
 		\Stripe\Stripe::setApiKey($options['secret']);
 		$user = $options['user'];
