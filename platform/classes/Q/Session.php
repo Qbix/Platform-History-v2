@@ -303,7 +303,7 @@ class Q_Session
 			if (!empty($_SERVER['HTTP_HOST'])) {
 				$durationName = self::durationName();
 				$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-				Q_Response::setCookie(self::name(), $id, $duration);
+				Q_Response::setCookie(self::name(), $id, time()+$duration);
 				session_start();
 			} else if (empty($_SESSION)) {
 				$_SESSION = array();
@@ -815,7 +815,7 @@ class Q_Session
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], $duration);
+			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], time()+$duration);
 		}
 		Q_Session::$nonceWasSet = true;
 	}

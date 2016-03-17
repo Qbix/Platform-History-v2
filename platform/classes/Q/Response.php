@@ -1438,10 +1438,10 @@ class Q_Response
 	/**
 	 * @method setCookie
 	 * @static
-	 * @param {string} $name
-	 * @param {string} $value
-	 * @param {string} [$expires=0]
-	 * @param {string} [$path=false]
+	 * @param {string} $name The name of the cookie
+	 * @param {string} $value The value of the cookie
+	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means never expires
+	 * @param {string} [$path=false] You can specify a path on the server here for the cookie
 	 * @return {string}
 	 */
 	static function setCookie($name, $value, $expires = 0, $path = false)
