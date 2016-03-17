@@ -27,7 +27,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		Q::includeFile(implode(DS, array(
 			Q_PLUGINS_DIR, 'Awards', 'classes', 'Composer', 'vendor', 'autoload.php'
 		)));
-		$testing = Q_Config::expect('Awards', 'payments', 'authnet', 'testing', true);
+		$testing = Q_Config::expect('Awards', 'payments', 'Authnet', 'testing');
 		$server = $testing
 			? net\authorize\api\constants\ANetEnvironment::SANDBOX
 			: net\authorize\api\constants\ANetEnvironment::PRODUCTION;
@@ -35,8 +35,8 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 			$options['user'] = Users::loggedInUser(true);
 		}
 		$this->options = array_merge(array(
-			'authname' => Q_Config::expect('Awards', 'payments', 'authnet', 'name'),
-			'authkey' => Q_Config::expect('Awards', 'payments', 'authnet', 'transactionKey'),
+			'authname' => Q_Config::expect('Awards', 'payments', 'Authnet', 'name'),
+			'authkey' => Q_Config::expect('Awards', 'payments', 'Authnet', 'transactionKey'),
 			'server' => $server
 		), $options);
 	}
