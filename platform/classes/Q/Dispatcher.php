@@ -83,7 +83,7 @@ class Q_Dispatcher
 	static function showErrors()
 	{
 		// Throw an exception that only the dispatcher should catch.
-		self::$handling_errors = false;
+		self::$handlingErrors = false;
 		throw new Q_Exception_DispatcherErrors();
 	}
 
@@ -124,6 +124,8 @@ class Q_Dispatcher
 		$uri = null, 
 		$check = array('accessible'))
 	{
+		self::$startedDispatch = true;
+		
 		if (!is_array($check)) {
 			$check = array('accessible');
 		}
@@ -319,13 +321,15 @@ class Q_Dispatcher
 				if ($handler !== false) {
 					$ob = new Q_OutputBuffer($handler);
 				}
+				
+				Q_Response::sendCookieHeaders();
 
 				// Generate and render a response
 				/**
 				 * @event Q/response
 				 * @param {array} $routed_uri_array
 				 */
-				self::$response_started = true;
+				self::$startedResponse = true;
 				Q::event("Q/response", $routed_uri_array);
 				if (!empty($ob)) {
 					$ob->endFlush();
@@ -404,19 +408,19 @@ class Q_Dispatcher
 		$module, 
 		$partial_response = null)
 	{
-		self::$errors_occurred = true;
-		$response_started = self::$response_started;
+		self::$errorsOccurred = true;
+		$startedResponse = self::$startedResponse;
 		$errors = Q_Response::getErrors();
 		Q::$toolWasRendered = array();
 		try {
-			if (self::$handling_errors) {
+			if (self::$handlingErrors) {
 				// We need to handle errors, but we
 				// have already tried to do it.
 				// Just show the errors view.
 				Q::event('Q/errors/native', compact('errors', 'exception', 'partial_response', 'response_started'));
 				return;
 			}
-			self::$handling_errors = true;
+			self::$handlingErrors = true;
 		
 			if (Q::canHandle("$module/errors")) {
 				/**
@@ -467,7 +471,7 @@ class Q_Dispatcher
 			);
 		}
 		// We'll be handling errors anew
-		self::$handling_errors = false;
+		self::$handlingErrors = false;
 	}
 	
 	/**
@@ -485,24 +489,31 @@ class Q_Dispatcher
 	 */
 	protected static $skip = array();
 	/**
-	 * @property $handling_errors
+	 * @property $handlingErrors
 	 * @type boolean
 	 * @static
 	 * @protected
 	 */
-	protected static $handling_errors = false;
+	protected static $handlingErrors = false;
 	/**
-	 * @property $errors_occurred
+	 * @property $errorsOccurred
 	 * @type boolean
 	 * @static
 	 * @protected
 	 */
-	protected static $errors_occurred = false;
+	protected static $errorsOccurred = false;
 	/**
-	 * @property $response_started
+	 * @property $startedResponse
 	 * @type boolean
 	 * @static
-	 * @protected
+	 * @public
 	 */
-	protected static $response_started = false;
+	public static $startedDispatch = false;
+	/**
+	 * @property $startedResponse
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $startedResponse = false;
 }

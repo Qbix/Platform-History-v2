@@ -234,16 +234,16 @@ class Q_Response
 	 * Get or set the layout view that should be used in the response
 	 * @method layoutView
 	 * @static
-	 * @param {string} $new_view optionally set the new view, or unset it by passing false
+	 * @param {string} $newView optionally set the new view, or unset it by passing false
 	 * @return {string}
 	 */
-	static function layoutView($new_view = null)
+	static function layoutView($newView = null)
 	{
-		if (isset($new_view)) {
-			return Q_Response::$layout_view = $new_view;
+		if (isset($newView)) {
+			return Q_Response::$layoutView = $newView;
 		}
-		if (Q_Response::$layout_view) {
-			return Q_Response::$layout_view;
+		if (Q_Response::$layoutView) {
+			return Q_Response::$layoutView;
 		}
 		$app = Q_Config::expect('Q', 'app');
 		$layout_view = Q_Config::get('Q', 'response', 'layout', 'html', "$app/layout/html.php");
@@ -1309,12 +1309,12 @@ class Q_Response
 	 */
 	static function faviconUrl($new_url=null)
 	{
-		if (!isset(self::$favicon_url)) {
-			self::$favicon_url = Q_Request::baseUrl().'/favicon.ico';
+		if (!isset(self::$faviconUrl)) {
+			self::$faviconUrl = Q_Request::baseUrl().'/favicon.ico';
 		}
-		$old_url = self::$favicon_url;
+		$old_url = self::$faviconUrl;
 		if (isset($new_url)) {
-			self::$favicon_url = $new_url;
+			self::$faviconUrl = $new_url;
 		}
 		return $old_url;
 	}
@@ -1453,17 +1453,12 @@ class Q_Response
 		if (isset($_COOKIE[$name]) and $_COOKIE[$name] === $value) {
 			return;
 		}
-		$parts = parse_url(Q_Request::baseUrl());
-		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
-		$domain = '.'.$parts['host'];
-		setcookie($name, $value, $expires, $path, $domain);
+		if (Q_Dispatcher::$startedResponse) {
+			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
+		}
+		// see https://bugs.php.net/bug.php?id=38104
+		self::$cookies[$name] = array($value, $expires, $path);
 		$_COOKIE[$name] = $value;
-		$header = 'P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"';
-		$header = Q::event('Q/Response/setCookie',
-			compact('name', 'value', 'expires', 'path', 'header'),
-			'before', false, $header
-		);
-		header($header);
 		return $value;
 	}
 	
@@ -1477,6 +1472,40 @@ class Q_Response
 	static function clearCookie($name, $path = false)
 	{
 		self::setCookie($name, '', 1, $path);
+	}
+	
+	/**
+	 * Outputs all the headers for effecting changes in cookies set by Q_Response::setCookies.
+	 * This is called automatically by the dispatcher before the Q/response event.
+	 * @method sendCookieHeaders
+	 * @static
+	 */
+	static function sendCookieHeaders()
+	{
+		if (empty(self::$cookies)) {
+			return;
+		}
+		foreach (self::$cookies as $name => $args) {
+			list($value, $expires, $path) = $args;
+			self::_cookie($name, $value, $expires, $path);
+		}
+		// A reasonable P3P policy for old IE to allow 3rd party cookies.
+		// Consider overriding it with a real P3P policy for your app.
+		$header = 'P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"';
+		$header = Q::event('Q/Response/setCookie',
+			compact('name', 'value', 'expires', 'path', 'header'),
+			'before', false, $header
+		);
+		header($header);
+		self::$cookies = array();
+	}
+	
+	protected static function _cookie($name, $value, $expires, $path)
+	{
+		$parts = parse_url(Q_Request::baseUrl());
+		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
+		$domain = '.'.$parts['host'];
+		setcookie($name, $value, $expires, $path, $domain);
 	}
 
 	/**
@@ -1653,21 +1682,28 @@ class Q_Response
 	 */
 	protected static $retainSlot = array();
 	/**
-	 * @property $favicon_url
+	 * @property $faviconUrl
 	 * @static
 	 * @type string
 	 */
-	protected static $favicon_url = null;
+	protected static $faviconUrl = null;
 	/**
 	 * @property $layout_view
 	 * @static
 	 * @type string
 	 */
-	protected static $layout_view = null;
+	protected static $layoutView = null;
 	/**
 	 * @property $isBuffered
 	 * @static
+	 * @protected
 	 * @type boolean
 	 */
 	protected static $isBuffered = true; // buffer responses by default
+	/**
+	 * @property $cookies
+	 * @static
+	 * @type array
+	 */
+	public static $cookies = array();
 }
