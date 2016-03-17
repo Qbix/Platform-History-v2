@@ -410,6 +410,9 @@ class Q_Dispatcher
 	{
 		self::$errorsOccurred = true;
 		$startedResponse = self::$startedResponse;
+		if (!$startedResponse) {
+			Q_Response::sendCookieHeaders();
+		}
 		$errors = Q_Response::getErrors();
 		Q::$toolWasRendered = array();
 		try {

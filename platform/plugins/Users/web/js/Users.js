@@ -1011,9 +1011,9 @@ function login_callback(err, response) {
 			$('#Users_form_passphrase').attr('value', '');
 			
 			$('input', $this).css('background-image', 'none');
-			if (err || response.errors) {
+			if (err || (response && response.errors)) {
 				// there were errors
-				if (response.errors) {
+				if (response && response.errors) {
 					$this.data('validator').invalidate(
 						Q.ajaxErrors(response.errors, [first_input.attr('name')]
 					));

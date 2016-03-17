@@ -401,6 +401,12 @@ class Q_Session
 		}
 		session_id($sid = self::generateId()); // generate a new session id
 		session_start(); // start a new session
+		if (!empty($_SERVER['HTTP_HOST'])) {
+			// set the new cookie
+			$durationName = self::durationName();
+			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			Q_Response::setCookie(self::name(), $sid, time()+$duration);
+		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
 
 		return $sid;
