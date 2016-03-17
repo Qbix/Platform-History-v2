@@ -9,8 +9,4 @@ function Awards_before_Q_responseExtras() {
 		$amount = null;
 	}
 	Q_Response::setScriptData('Q.plugins.Awards.credits', compact('amount'));
-	$user = Users::loggedInUser();
-	if ($user) {
-		Q_Response::setScriptData("Q.Users.loggedInUser.displayName", Streams::displayName($user));
-	}
 }

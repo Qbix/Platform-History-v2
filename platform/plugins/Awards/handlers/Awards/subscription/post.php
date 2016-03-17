@@ -10,8 +10,6 @@
 function Awards_subscription_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
-	Q_Valid::nonce(true);
-	$token = $req['signature'];
 	
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'planPublisherId', Users::communityId());

@@ -16,7 +16,8 @@
  *
  * @property {string} $id
  * @property {string} $userId
- * @property {string} $subscriptionId
+ * @property {string} $subscriptionPublisherId
+ * @property {string} $subscriptionStreamName
  * @property {string} $description
  * @property {string} $attributes
  * @property {string|Db_Expression} $insertedTime
@@ -33,7 +34,11 @@ abstract class Base_Awards_Charge extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $subscriptionId
+	 * @property $subscriptionPublisherId
+	 * @type {string}
+	 */
+	/**
+	 * @property $subscriptionStreamName
 	 * @type {string}
 	 */
 	/**
@@ -63,6 +68,7 @@ abstract class Base_Awards_Charge extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
+			  0 => 'userId',
 			)
 		);
 	}
@@ -301,7 +307,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -309,41 +315,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_subscriptionId
+	 * @method beforeSet_subscriptionPublisherId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_subscriptionId($value)
+	function beforeSet_subscriptionPublisherId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('subscriptionId', $value);
+			return array('subscriptionPublisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".subscriptionId");
+			throw new Exception('Must pass a string to '.$this->getTable().".subscriptionPublisherId");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".subscriptionId");
-		return array('subscriptionId', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".subscriptionPublisherId");
+		return array('subscriptionPublisherId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the subscriptionId field
+	 * Returns the maximum string length that can be assigned to the subscriptionPublisherId field
 	 * @return {integer}
 	 */
-	function maxSize_subscriptionId()
+	function maxSize_subscriptionPublisherId()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for subscriptionId column
+	 * Returns schema information for subscriptionPublisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_subscriptionId()
+	function column_subscriptionPublisherId()
 	{
 
 return array (
@@ -356,7 +362,61 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => NULL,
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_subscriptionStreamName
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_subscriptionStreamName($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('subscriptionStreamName', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".subscriptionStreamName");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".subscriptionStreamName");
+		return array('subscriptionStreamName', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the subscriptionStreamName field
+	 * @return {integer}
+	 */
+	function maxSize_subscriptionStreamName()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for subscriptionStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_subscriptionStreamName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
 );			
 	}
 
@@ -558,9 +618,23 @@ return array (
 );			
 	}
 
+	/**
+	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+	 * @method beforeSave
+	 * @param {array} $value The array of fields
+	 * @return {array}
+	 * @throws {Exception} If mandatory field is not set
+	 */
 	function beforeSave($value)
 	{
-						
+		if (!$this->retrieved) {
+			$table = $this->getTable();
+			foreach (array('userId') as $name) {
+				if (!isset($value[$name])) {
+					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+				}
+			}
+		}						
 		// convention: we'll have updatedTime = insertedTime if just created.
 		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			
@@ -576,7 +650,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'userId', 'subscriptionId', 'description', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('id', 'userId', 'subscriptionPublisherId', 'subscriptionStreamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

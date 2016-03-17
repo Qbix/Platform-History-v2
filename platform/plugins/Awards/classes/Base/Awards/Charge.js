@@ -38,7 +38,11 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
- * @type subscriptionId
+ * @type subscriptionPublisherId
+ */
+/**
+ * @property {String}
+ * @type subscriptionStreamName
  */
 /**
  * @property {String}
@@ -199,7 +203,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		
+		"userId"
 	];
 };
 
@@ -212,7 +216,8 @@ Base.prototype.fieldNames = function () {
 	return [
 		"id",
 		"userId",
-		"subscriptionId",
+		"subscriptionPublisherId",
+		"subscriptionStreamName",
 		"description",
 		"attributes",
 		"insertedTime",
@@ -293,45 +298,83 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.prototype.column_userId = function () {
 
-return [["varchar","31","",false],false,"",null];
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_subscriptionId
+ * @method beforeSet_subscriptionPublisherId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_subscriptionId = function (value) {
+Base.prototype.beforeSet_subscriptionPublisherId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".subscriptionId");
+			throw new Error('Must pass a string to '+this.table()+".subscriptionPublisherId");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".subscriptionId");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".subscriptionPublisherId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the subscriptionId field
+	 * Returns the maximum string length that can be assigned to the subscriptionPublisherId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_subscriptionId = function () {
+Base.prototype.maxSize_subscriptionPublisherId = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for subscriptionId column
+	 * Returns schema information for subscriptionPublisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_subscriptionId = function () {
+Base.prototype.column_subscriptionPublisherId = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varchar","255","",false],false,"",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_subscriptionStreamName
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_subscriptionStreamName = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a string to '+this.table()+".subscriptionStreamName");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".subscriptionStreamName");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the subscriptionStreamName field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_subscriptionStreamName = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for subscriptionStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_subscriptionStreamName = function () {
+
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -452,8 +495,23 @@ Base.prototype.column_updatedTime = function () {
 return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 };
 
+/**
+ * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+ * @method beforeSave
+ * @param {array} value The array of fields
+ * @return {array}
+ * @throws {Error} If mandatory field is not set
+ */
 Base.prototype.beforeSave = function (value) {
-
+	var fields = ['userId'], i;
+	if (!this._retrieved) {
+		var table = this.table();
+		for (i=0; i<fields.length; i++) {
+			if (typeof this.fields[fields[i]] === "undefined") {
+				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+			}
+		}
+	}
 	// convention: we'll have updatedTime = insertedTime if just created.
 	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	return value;

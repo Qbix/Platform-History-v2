@@ -14,48 +14,23 @@
  * @class Base_Awards_Customer
  * @extends Db_Row
  *
- * @property {string} $id
  * @property {string} $userId
- * @property {string} $email
- * @property {string} $billing
- * @property {string} $shipping
- * @property {string} $attributes
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
+ * @property {string} $payments
+ * @property {string} $customerId
  */
 abstract class Base_Awards_Customer extends Db_Row
 {
-	/**
-	 * @property $id
-	 * @type {string}
-	 */
 	/**
 	 * @property $userId
 	 * @type {string}
 	 */
 	/**
-	 * @property $email
+	 * @property $payments
 	 * @type {string}
 	 */
 	/**
-	 * @property $billing
+	 * @property $customerId
 	 * @type {string}
-	 */
-	/**
-	 * @property $shipping
-	 * @type {string}
-	 */
-	/**
-	 * @property $attributes
-	 * @type {string}
-	 */
-	/**
-	 * @property $insertedTime
-	 * @type {string|Db_Expression}
-	 */
-	/**
-	 * @property $updatedTime
-	 * @type {string|Db_Expression}
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -68,6 +43,8 @@ abstract class Base_Awards_Customer extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
+			  0 => 'userId',
+			  1 => 'payments',
 			)
 		);
 	}
@@ -206,39 +183,6 @@ abstract class Base_Awards_Customer extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_id
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_id($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('id', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".id");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".id");
-		return array('id', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the id field
-	 * @return {integer}
-	 */
-	function maxSize_id()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_userId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -270,191 +214,116 @@ abstract class Base_Awards_Customer extends Db_Row
 	}
 
 	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * @method beforeSet_payments
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 */
+	function beforeSet_payments($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('payments', $value);
+		}
+		if (!in_array($value, array('stripe','authnet')))
+			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".payments");
+		return array('payments', $value);			
+	}
+
+	/**
+	 * Returns schema information for payments column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_payments()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'stripe\',\'authnet\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => 'stripe',
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_email
+	 * @method beforeSet_customerId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_email($value)
+	function beforeSet_customerId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('email', $value);
+			return array('customerId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".email");
+			throw new Exception('Must pass a string to '.$this->getTable().".customerId");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".email");
-		return array('email', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".customerId");
+		return array('customerId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the email field
+	 * Returns the maximum string length that can be assigned to the customerId field
 	 * @return {integer}
 	 */
-	function maxSize_email()
+	function maxSize_customerId()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_billing
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 * Returns schema information for customerId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function beforeSet_billing($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('billing', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".billing");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".billing");
-		return array('billing', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the billing field
-	 * @return {integer}
-	 */
-	function maxSize_billing()
+	function column_customerId()
 	{
 
-		return 255;			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_shipping
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_shipping($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('shipping', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".shipping");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".shipping");
-		return array('shipping', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the shipping field
-	 * @return {integer}
-	 */
-	function maxSize_shipping()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_attributes
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_attributes($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('attributes', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".attributes");
-		if (strlen($value) > 1023)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".attributes");
-		return array('attributes', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the attributes field
-	 * @return {integer}
-	 */
-	function maxSize_attributes()
-	{
-
-		return 1023;			
-	}
-
-	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_insertedTime
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
-	 */
-	function beforeSet_insertedTime($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('insertedTime', $value);
-		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".insertedTime");
-		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
-		return array('insertedTime', $value);			
-	}
-
-	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_updatedTime
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
-	 */
-	function beforeSet_updatedTime($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('updatedTime', $value);
-		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".updatedTime");
-		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
-		return array('updatedTime', $value);			
-	}
-
-	function beforeSave($value)
-	{
-						
-		// convention: we'll have updatedTime = insertedTime if just created.
-		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
-		return $value;			
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
 	}
 
 	/**
@@ -467,7 +336,7 @@ abstract class Base_Awards_Customer extends Db_Row
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'userId', 'email', 'billing', 'shipping', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'payments', 'customerId');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
