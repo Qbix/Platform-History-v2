@@ -1,3 +1,4 @@
+<div class="Places_location_container Places_location_checking">
 	I'm interested in things taking place within
 	<?php echo Q_Html::select('miles', array(
 		'class' => 'Places_location_miles'
@@ -20,3 +21,4 @@
 			</button>
 		</div>
 	</div>
+</div>
