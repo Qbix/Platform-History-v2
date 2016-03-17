@@ -29,6 +29,7 @@ module.exports = Base;
 Base.tableClasses = [
 	"Awards_Badge",
 	"Awards_Charge",
+	"Awards_Customer",
 	"Awards_Earned",
 	"Awards_Leader"
 ];
@@ -65,6 +66,13 @@ Base.Badge = Q.require('Awards/Badge');
  * @type Awards.Charge
  */
 Base.Charge = Q.require('Awards/Charge');
+
+/**
+ * Link to Awards.Customer model
+ * @property Customer
+ * @type Awards.Customer
+ */
+Base.Customer = Q.require('Awards/Customer');
 
 /**
  * Link to Awards.Earned model

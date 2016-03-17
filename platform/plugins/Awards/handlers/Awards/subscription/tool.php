@@ -16,12 +16,24 @@ function Awards_subscription_tool($options)
 	}
 	$payments = ucfirst($options['payments']);
 	$className = "Awards_Payments_$payments";
-	$adapter = new $className($options);
-    $token = $adapter->authToken();
+	$testing = Q_Config::expect('Awards', 'payments', $payments, 'testing');
+	switch ($payments) {
+		case 'Authnet':
+			$adapter = new $className($options);
+		    $token = $adapter->authToken();
+			$action = $testing
+				? "https://test.authorize.net/profile/manage"
+				: "https://secure.authorize.net/profile/manage";
+			break;
+		case 'Stripe':
+			$publishableKey = Q_Config::expect('Awards', 'payments', 'stripe', 'publishableKey');
+			break;
+	}
 	$paymentButton = Q::ifset($options, 'paymentButton', 'Payment Info');
 	$subscribeButton = Q::ifset($options, 'subscribeButton', 'Start Subscription');
     Q_Response::setToolOptions($options);
 	return Q::view("Awards/tool/subscription/$payments.php", compact(
-		'token', 'paymentButton', 'subscribeButton', 'planStreamName'
+		'token', 'publishableKey', 'action',
+		'paymentButton', 'subscribeButton', 'planStreamName'
 	));
 };

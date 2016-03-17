@@ -134,26 +134,44 @@ abstract class Awards extends Base_Awards
 
 	/**
 	 * Makes a one-time charge on a customer account using a payments processor
+	 * @method charge
+	 * @static
 	 * @param {string} $payments The type of payments processor, could be "Authnet" or "Stripe"
+	 * @param {string} $amount specify the amount
+	 * @param {string} [$currency='usd'] set the currency, which will affect the amount
+	 * @param {array} [$options=array()] Any additional options
+	 * @param {string} [$options.token=null] required for stripe unless the user is an existing customer
+	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
+	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
+	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream
+	 * @param {string} [$options.subscription.publisherId]
+	 * @param {string} [$options.subscription.streamName]
+	 * @throws \Stripe\Error\Card
 	 * @throws Awards_Exception_DuplicateTransaction
 	 * @throws Awards_Exception_HeldForReview
 	 * @throws Awards_Exception_ChargeFailed
 	 * @return {Awards_Charge} the saved database row corresponding to the charge
 	 */
-	static function charge ($payments, $options = array())
+	static function charge($payments, $amount, $currency = 'usd', $options = array())
 	{
 		$className = 'Awards_Payments_' . ucfirst($payments);
 		$adapter = new $className($options);
-		return $adapter->charge();
+		return $adapter->charge($amount, $currency, $options);
 	}
 
 	/**
 	 * Starts a recurring subscription
 	 * @param {Streams_Stream} $plan The subscription plan stream
-	 * @param {string} $payments The type of payments processor, could be "Authnet" or "Stripe"
+	 * @param {string} $payments The type of payments processor, could be "authnet" or "stripe"
 	 * @param {array} [$options=array()] Options for the subscription
 	 * @param {date} [$options.startDate=today] The start date of the subscription
 	 * @param {date} [$options.endDate=today+year] The end date of the subscription
+ 	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to subscribe
+	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
+	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
+	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream
+	 * @param {string} [$options.subscription.publisherId]
+	 * @param {string} [$options.subscription.streamName]
 	 * @throws Awards_Exception_DuplicateTransaction
 	 * @throws Awards_Exception_HeldForReview
 	 * @throws Awards_Exception_ChargeFailed
@@ -161,22 +179,13 @@ abstract class Awards extends Base_Awards
 	 */
 	static function startSubscription($plan, $payments = null, $options = array())
 	{
-		$userId = $user = Users::loggedInUser(true)->id;
-		
-		if (isset($payments)) {
-			$amount = $plan->getAttribute('amount', null);
-			if (!is_numeric($amount)) {
-				throw new Q_Exception_WrongValue(array(
-					'field' => 'amount',
-					'range' => 'an integer'
-				));
-			}
-			Awards::charge($payments, array(
-				'amount' => $amount,
-				'currency' => 'usd'
-			));
+		if (!isset($options['user'])) {
+			$options['user'] = Users::loggedInUser(true);
 		}
-
+		if (!isset($payments)) {
+			throw new Q_Exception_RequiredField(array('field' => 'payment'));
+		}
+		
 		$startDate = Q::ifset($options, 'startDate', date("Y-m-d"));
 		$startDate = date('Y-m-d', strtotime($startDate));
 		$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+1 year", strtotime($startDate))));
@@ -184,7 +193,7 @@ abstract class Awards extends Base_Awards
 
 		$subscription = new Streams_Stream();
 		$subscription->publisherId = Users::communityId();
-		$subscription->name = "Awards/subscription/$userId/".$plan->name;
+		$subscription->name = "Awards/subscription/{$user->id}/{$plan->name}";
 		$subscription->type = "Awards/subscription";
 		$subscription->readLevel = 40;
 		$subscription->writeLevel = 0;
@@ -194,6 +203,16 @@ abstract class Awards extends Base_Awards
 		$subscription->setAttribute('startDate', $startDate);
 		$subscription->setAttribute('endDate', $endDate);
 		$subscription->save(true);
+		
+		$amount = $plan->getAttribute('amount', null);
+		if (!is_numeric($amount)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'amount',
+				'range' => 'an integer'
+			));
+		}
+		$options['subscription'] = $subscription;
+		Awards::charge($payments, $amount, 'usd', $options);
 		
 		/**
 		 * @event Awards/startedSubscription {before}
@@ -207,7 +226,7 @@ abstract class Awards extends Base_Awards
 			'plan', 'subscription', 'startDate', 'endDate'
 		));
 
-		return $stream;
+		return $subscription;
 	}
 
 	static function stopSubscription($subscriptionStream, $options = array()) {

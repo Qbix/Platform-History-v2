@@ -674,9 +674,6 @@ abstract class Users extends Base_Users
 		$deviceId = isset($_SESSION['Users']['deviceId'])
 			? $_SESSION['Users']['deviceId']
 			: null;
-
-		$device = new Users_Device();
-		$device->sessionId = $sessionId; // WARNING: NON-PK LOOKUP. Should store device id in session!
 		
 		if ($user) {
 			Q_Utils::sendToNode(array(

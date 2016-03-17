@@ -30,35 +30,15 @@ Q.mixin(Base, Row);
 
 /**
  * @property {String}
- * @type id
- */
-/**
- * @property {String}
  * @type userId
  */
 /**
  * @property {String}
- * @type email
+ * @type payments
  */
 /**
  * @property {String}
- * @type billing
- */
-/**
- * @property {String}
- * @type shipping
- */
-/**
- * @property {String}
- * @type attributes
- */
-/**
- * @property {String|Db.Expression}
- * @type insertedTime
- */
-/**
- * @property {String|Db.Expression}
- * @type updatedTime
+ * @type customerId
  */
 
 /**
@@ -203,7 +183,8 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		
+		"userId",
+		"payments"
 	];
 };
 
@@ -214,44 +195,10 @@ Base.prototype.primaryKey = function () {
  */
 Base.prototype.fieldNames = function () {
 	return [
-		"id",
 		"userId",
-		"email",
-		"billing",
-		"shipping",
-		"attributes",
-		"insertedTime",
-		"updatedTime"
+		"payments",
+		"customerId"
 	];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_id
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_id = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".id");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".id");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the id field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_id = function () {
-
-		return 255;
 };
 
 /**
@@ -283,151 +230,74 @@ Base.prototype.maxSize_userId = function () {
 		return 31;
 };
 
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_userId = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value belongs to enum values list
+ * @method beforeSet_payments
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ */
+Base.prototype.beforeSet_payments = function (value) {
+		if (value instanceof Db.Expression) return value;
+		if (['stripe','authnet'].indexOf(value) < 0)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".payments");
+		return value;
+};
+
+	/**
+	 * Returns schema information for payments column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_payments = function () {
+
+return [["enum","'stripe','authnet'","",false],false,"PRI","stripe"];
+};
+
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_email
+ * @method beforeSet_customerId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_email = function (value) {
+Base.prototype.beforeSet_customerId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".email");
+			throw new Error('Must pass a string to '+this.table()+".customerId");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".email");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".customerId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the email field
+	 * Returns the maximum string length that can be assigned to the customerId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_email = function () {
+Base.prototype.maxSize_customerId = function () {
 
 		return 255;
 };
 
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_billing
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_billing = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".billing");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".billing");
-		return value;
-};
-
 	/**
-	 * Returns the maximum string length that can be assigned to the billing field
-	 * @return {integer}
+	 * Returns schema information for customerId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.maxSize_billing = function () {
+Base.prototype.column_customerId = function () {
 
-		return 255;
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_shipping
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_shipping = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".shipping");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".shipping");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the shipping field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_shipping = function () {
-
-		return 255;
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_attributes
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_attributes = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".attributes");
-		if (typeof value === "string" && value.length > 1023)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".attributes");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the attributes field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_attributes = function () {
-
-		return 1023;
-};
-
-/**
- * Method is called before setting the field
- * @method beforeSet_insertedTime
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
- */
-Base.prototype.beforeSet_insertedTime = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
-		return value;
-};
-
-/**
- * Method is called before setting the field
- * @method beforeSet_updatedTime
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
- */
-Base.prototype.beforeSet_updatedTime = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
-		return value;
-};
-
-Base.prototype.beforeSave = function (value) {
-
-	// convention: we'll have updatedTime = insertedTime if just created.
-	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
-	return value;
+return [["varchar","255","",false],false,"",""];
 };
 
 module.exports = Base;

@@ -76,5 +76,18 @@
 			}, */
 			"from": "+1234567890"
 		}
+	},
+	"Awards": {
+		"payments":  {
+			"stripe": null, /* {
+				"secret": "XXXXX",
+				"publishableKey": "XXXXX"
+			}, */
+			"authnet": null, /* {
+				"name": "XXXXX",
+				"transactionKey": "XXXXX",
+				"testing": false
+			} */
+		}
 	}
 }

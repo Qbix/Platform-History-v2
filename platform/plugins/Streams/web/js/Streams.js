@@ -3856,14 +3856,14 @@ Q.onInit.add(function _Streams_onInit() {
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
-						node = Q.nodeUrl({
+						Q.Socket.connect('Streams', Q.nodeUrl({
 							publisherId: fields.publisherId,
 							streamName: fields.streamName
-						});
-						Q.Socket.onConnect(node).add(function (socket) {
-							console.log('Listening to stream '+p.publisherId+", "+p.streamName);
-						}, 'Streams');
-						Q.Socket.connect('Streams', node);
+						}, function () {
+							console.log('Listening to stream '
+								+fields.publisherId+", "+fields.streamName
+							);
+						}));
 					}
 					break;
 				case 'Streams/left':
@@ -3874,7 +3874,8 @@ Q.onInit.add(function _Streams_onInit() {
 						});
 						var socket = Q.Socket.get('Streams', node);
 						if (socket) {
-							// only disconnect when you've left all the streams on this node
+							// TODO: only disconnect when you've left
+							// all the streams on this node
 							// socket.disconnect();
 						}
 					}
@@ -4059,6 +4060,12 @@ function _refreshUnlessSocket(publisherId, streamName) {
 		unlessSocket: true
 	});
 }
+
+Q.Socket.onConnect('Streams').set(function (socket) {
+	Q.loadNonce(function () {
+		socket.emit('Streams.session', Q.sessionId(), Q.clientId());	
+	});
+}, 'Streams');
 
 Q.Template.set('Streams/followup/mobile/alert', "The invite was sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 

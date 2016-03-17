@@ -13,6 +13,9 @@
 	margin: 10px 0 10px 0;
 	border-radius: 30px;
 	box-shadow: #777 2px 2px 10px;
+    background-image: url(../../Q/img/throbbers/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @keyframes Places_obtaining {

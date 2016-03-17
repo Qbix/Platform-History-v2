@@ -460,7 +460,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.prototype.column_updatedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","11","",false],false,"MUL","CURRENT_TIMESTAMP"];
 };
 
 /**

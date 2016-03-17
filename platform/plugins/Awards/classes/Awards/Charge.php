@@ -24,6 +24,28 @@ class Awards_Charge extends Base_Awards_Charge
 		// INSERT YOUR CODE HERE
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
+	
+	/**
+	 * Assigns 'id'
+	 * @method beforeSave
+	 * @param {array} $modifiedFields
+	 * @return {array}
+	 */
+	function beforeSave($updatedFields)
+	{
+		if (!$this->retrieved) {
+			if (!isset($updatedFields['id'])) {
+				$this->id = $updatedFields['id'] = 
+					self::db()->uniqueId(self::table(), 'id', null);
+			}
+		}
+		Q::event(
+			'Awards/Charge/save', 
+			array('charge' => $this),
+			'before'
+		);
+		return parent::beforeSave($updatedFields);
+	}
 
 	/* * * */
 	/**

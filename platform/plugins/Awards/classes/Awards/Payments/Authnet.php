@@ -18,21 +18,27 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 	/**
 	 * @constructor
 	 * @param {array} [$options=array()] Any initial options
+ 	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to charge
+	 * @param {string} [$options.authname] Optionally override the authname from config
+	 * @param {string} [$options.authkey] Optionally override the authkey from config
 	 */
 	function __construct($options = array())
 	{
 		Q::includeFile(implode(DS, array(
 			Q_PLUGINS_DIR, 'Awards', 'classes', 'Composer', 'vendor', 'autoload.php'
 		)));
-		$options['authname'] = Q_Config::expect('Awards', 'payments', 'authorize.net', 'name');
-		$options['authkey'] = Q_Config::expect('Awards', 'payments', 'authorize.net', 'transactionKey');
-		$options['server'] = net\authorize\api\constants\ANetEnvironment::SANDBOX;
-		$options += array(
-			'service' => 'authorize.net',
-			'currency' => 'usd',
-			'subscription' => ''
-		);
-		$this->options = $options;
+		$testing = Q_Config::expect('Awards', 'payments', 'authnet', 'testing', true);
+		$server = $testing
+			? net\authorize\api\constants\ANetEnvironment::SANDBOX
+			: net\authorize\api\constants\ANetEnvironment::PRODUCTION;
+		if (!isset($options['user'])) {
+			$options['user'] = Users::loggedInUser(true);
+		}
+		$this->options = array_merge(array(
+			'authname' => Q_Config::expect('Awards', 'payments', 'authnet', 'name'),
+			'authkey' => Q_Config::expect('Awards', 'payments', 'authnet', 'transactionKey'),
+			'server' => $server
+		), $options);
 	}
 	
 	/**
@@ -43,8 +49,6 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 	function customerId()
 	{
 		$options = $this->options;
-		$sub = $options;
-		$sub['amount'] = (int) $options['amount'];
 
 		// Common Set Up for API Credentials
 		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
@@ -52,14 +56,13 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		$merchantAuthentication->setTransactionKey($options['authkey']);
 		$refId = 'ref' . time();
 
-		// TODO: check if customer with corresponding e-mail exists before creating new one
-
-		$merchantCustomerId = Users::loggedInUser(true)->id;
+		$user = $options['user'];
+		$merchantCustomerId = $user->id;
 
 		$customerprofile = new AnetAPI\CustomerProfileType();
 		$customerprofile->setMerchantCustomerId($merchantCustomerId);
-		$customerprofile->setDescription("Customer registered for hosted form payments");
-		$customerprofile->setEmail(Users::loggedInUser()->emailAddress);
+		$customerprofile->setDescription($user->displayName());
+		$customerprofile->setEmail($user->emailAddress);
 
 		$request = new AnetAPI\CreateCustomerProfileRequest();
 		$request->setMerchantAuthentication($merchantAuthentication);
@@ -125,23 +128,25 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 	/**
 	 * Make a one-time charge using the payments processor
 	 * @method charge
-	 * @param {string} [$customerId=null] specify a customer id
-	 * @param {string} [$paymentProfileId=null] specify a payment profile
+	 * @param {double} $amount specify the amount (optional cents after the decimal point)
+	 * @param {string} [$currency='usd'] set the currency, which will affect the amount
+	 * @param {array} [$options=array()] Any additional options
+	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
+	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
+	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream
+	 * @param {string} [$options.subscription.publisherId]
+	 * @param {string} [$options.subscription.streamName]
 	 * @throws Awards_Exception_DuplicateTransaction
 	 * @throws Awards_Exception_HeldForReview
 	 * @throws Awards_Exception_ChargeFailed
 	 * @return {Awards_Charge} the saved database row corresponding to the charge
 	 */
-	function charge($customerId = null, $paymentProfileId = null)
+	function charge($amount, $currency = 'usd', $options = array())
 	{
-		if (!isset($customerId)) {
-			$customerId = $this->customerId();
-		}
-		if (!isset($paymentProfileId)) {
-			$paymentProfileId = $this->paymentProfileId($customerId);
-		}
+		$customerId = $this->customerId();
+		$paymentProfileId = $this->paymentProfileId($customerId);
 		
-		$options = $this->options;
+		$options = array_merge($this->options, $options);
 		
 		// Common setup for API credentials
 		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
@@ -158,7 +163,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 
 		$transactionRequestType = new AnetAPI\TransactionRequestType();
 		$transactionRequestType->setTransactionType("authCaptureTransaction");
-		$transactionRequestType->setAmount($options['amount']);
+		$transactionRequestType->setAmount($amount);
 		$transactionRequestType->setProfile($profileToCharge);
 
 		$request = new AnetAPI\CreateTransactionRequest();
@@ -181,8 +186,12 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		switch ($tresponse->getResponseCode()) {
 		case '1':
 			$charge = new Awards_Charge();
-			//$charge->insert($fields);
-			$charge->save();
+			$charge->userId = $user->id;
+			$charge->subscriptionPublisherId = Q::ifset($options, 'subscription', 'publisherId', '');
+			$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'streamName', '');
+			$charge->description = Q::ifset($options, 'description', '');
+			$charge->attributes = "{}";
+			$charge-save();
 			return $charge;
 		case '3': 
 			throw new Awards_Exception_DuplicateTransaction();
@@ -200,9 +209,6 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		}
 		
 		$options = $this->options;
-
-		$sub = $options;
-		$sub['amount'] = (int) $options['amount'];
 
 		// Common Set Up for API Credentials
 		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
@@ -229,7 +235,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		$fresponse = $controller->executeWithApiResponse($options['server']);
 
 		if (!isset($fresponse) or ($fresponse->getMessages()->getResultCode() != "Ok")) {
-			$messages = $response->getMessages()->getMessage();
+			$messages = $fresponse->getMessages()->getMessage();
 			$message = reset($messages);
 			throw new Awards_Exception_InvalidResponse(array(
 				'response' => $message->getCode() . ' ' . $message->getText()

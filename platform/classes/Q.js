@@ -1955,7 +1955,7 @@ Q.listen = function _Q_listen(options, callback) {
 		// WARNING: the following per-request log may be a bottleneck in high-traffic sites:
 		var a = server.address();
 		if (Q.Config.get('Q', 'node', 'logRequests', true)) {
-			console.log(req.method+" "+req.socket.remoteAddress+ " -> "+a.address+":"+a.port+req.url.split('?', 2)[0] + (req.body['Q/method'] ? ", method: '"+req.body['Q/method']+"'" : ''));
+			Q.log(req.method+" "+req.socket.remoteAddress+ " -> "+a.address+":"+a.port+req.url.split('?', 2)[0] + (req.body['Q/method'] ? ", method: '"+req.body['Q/method']+"'" : ''));
 		}
 		req.info = {
 			port: port,
