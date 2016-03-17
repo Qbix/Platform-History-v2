@@ -22,7 +22,7 @@ function Awards_payment_tool($options)
 		    $token = $adapter->authToken();
 			break;
 		case 'Stripe':
-			$publishableKey = Q_Config::expect('Awards', 'payments', 'stripe', 'publishableKey');
+			$publishableKey = Q_Config::expect('Awards', 'payments', 'Stripe', 'publishableKey');
 			break;
 	}
 	$paymentButton = Q::ifset($options, 'paymentButton', 'Payment Info');

@@ -26,7 +26,7 @@ function Awards_subscription_tool($options)
 				: "https://secure.authorize.net/profile/manage";
 			break;
 		case 'Stripe':
-			$publishableKey = Q_Config::expect('Awards', 'payments', 'stripe', 'publishableKey');
+			$publishableKey = Q_Config::expect('Awards', 'payments', 'Stripe', 'publishableKey');
 			break;
 	}
 	$paymentButton = Q::ifset($options, 'paymentButton', 'Payment Info');

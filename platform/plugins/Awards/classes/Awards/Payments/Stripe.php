@@ -25,8 +25,8 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 			$options['user'] = Users::loggedInUser(true);
 		}
 		$this->options = array_merge(array(
-			'secret' => Q_Config::expect('Awards', 'payments', 'stripe', 'secret'),
-			'publishableKey' => Q_Config::expect('Awards', 'payments', 'stripe', 'publishableKey'),
+			'secret' => Q_Config::expect('Awards', 'payments', 'Stripe', 'secret'),
+			'publishableKey' => Q_Config::expect('Awards', 'payments', 'Stripe', 'publishableKey'),
 		), $options);
 	}
 	
