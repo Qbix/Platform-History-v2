@@ -97,7 +97,10 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 		if (Q.info.isMobile) {
 			var w = state.drawerWidth = $(window).width();
 			$(tool.element).width(w);
-			state.$drawers.width(w);
+			state.$drawers.each(function () {
+				var $this = $(this);
+				$this.width(w - $this.outerWidth(true) + $this.width());
+			});
 			state.$drawers.height();
 		}
 		var sh = $scrolling[0].clientHeight || $scrolling.height();
@@ -397,8 +400,8 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 				if ($drawer.is(':visible')) {
 					var left = $drawer.offset().left
 						- $drawer.offsetParent().offset().left
-						+ $drawer.outerWidth(true)
-						- state.$trigger.outerWidth(true)
+						+ $drawer.outerWidth()
+						- state.$trigger.outerWidth()
 						- state.trigger.rightMargin;
 					var top = $drawer.offset().top
 						- $drawer.offsetParent().offset().top
@@ -484,8 +487,8 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 					var $drawer = tool.state.$drawers.eq(1);
 					var left = $drawer.offset().left
 						- $drawer.offsetParent().offset().left
-						+ $drawer.outerWidth(true)
-						- state.$trigger.outerWidth(true)
+						+ $drawer.outerWidth()
+						- state.$trigger.outerWidth()
 						- state.trigger.rightMargin;
 					var top = $drawer.offset().top
 						- $drawer.offsetParent().offset().top
