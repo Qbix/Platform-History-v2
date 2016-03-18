@@ -12,15 +12,23 @@
  *  @param {String} options.payments can be "authnet" or "stripe"
  *  @param {String} options.planStreamName the name of the subscription plan's stream
  *  @param {String} [options.planPublisherId=Q.Users.communityId] the publisher of the subscription plan's stream
+ *  @param {String} [params.token] If payments is "authnet" then tool must be rendered server-side
+ *  @param {String} [params.action] If payments is "authnet" then tool must be rendered server-side
  */
 
 Q.Tool.define("Awards/subscription", function (options) {
 	var tool = this;
 	var state = tool.state;
 	var $te = $(tool.element);
-
+	var payments = state.payments && state.payments.toLowerCase();
+	if (['authnet', 'stripe'].indexOf(payments) < 0) {
+		throw new Q.Error("Awards/subscription: payments must be either 'authnet' or 'stripe'");
+	}
 	if (!state.planStreamName) {
 		throw new Q.Error("Awards/subscription: planStreamName is required");
+	}
+	if (payments === 'authnet' && !state.token) {
+		throw new Q.Error("Awards/subscription: token is required for authnet");
 	}
 	
 	if (!Q.Users.loggedInUser) {
@@ -29,14 +37,13 @@ Q.Tool.define("Awards/subscription", function (options) {
 		return;
 	}
 	
-	tool.$('.Awards_payment').on(Q.Pointer.click, function () {
-		Q.Awards.Dialogs.payment();
-	});
-	
 	tool.$('.Awards_subscribe').on(Q.Pointer.click, function () {
-		Q.Awards.subscribe(state.payments, state.planPublisherId, state.planStreamName, function () {
-			Q.handle(state.onSubscribe, this, arguments);
+		Q.Awards.Subscriptions[payments](state, function (err) {
+			if (err) {
+				alert(Q.firstErrorMessage(err));
+			}
 		});
+		return false;
 	});
 },
 

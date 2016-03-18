@@ -27,7 +27,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		Q::includeFile(implode(DS, array(
 			Q_PLUGINS_DIR, 'Awards', 'classes', 'Composer', 'vendor', 'autoload.php'
 		)));
-		$testing = Q_Config::expect('Awards', 'payments', 'authnet', 'testing', true);
+		$testing = Q_Config::expect('Awards', 'payments', 'authnet', 'testing');
 		$server = $testing
 			? net\authorize\api\constants\ANetEnvironment::SANDBOX
 			: net\authorize\api\constants\ANetEnvironment::PRODUCTION;
@@ -58,6 +58,13 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 
 		$user = $options['user'];
 		$merchantCustomerId = $user->id;
+		
+		$c = new Awards_Customer();
+		$c->userId = $user->id;
+		$c->payments = 'authnet';
+		if ($c->retrieve()) {
+			return $c->customerId;
+		}
 
 		$customerprofile = new AnetAPI\CustomerProfileType();
 		$customerprofile->setMerchantCustomerId($merchantCustomerId);
@@ -77,19 +84,25 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 			return $response->getCustomerProfileId();
 		}
 		
-		$messages = $response->getMessages()->getMessage();
-		$message = reset($messages);
+		if ($response != null && $response->getMessages()->getResultCode() == "Ok") {
+			$customerId = $response->getCustomerProfileId();
+		} else {
+			$messages = $response->getMessages()->getMessage();
+			$message = reset($messages);
 		
-		if (!isset($response) or ($message->getCode() == "E00039")) {
 			// workaround to get customerProfileId
 			// https://community.developer.authorize.net/t5/Integration-and-Testing/How-to-lookup-customerProfileId-and-paymentProfileId-by/td-p/52501
+			if (isset($response) and ($message->getCode() != "E00039")) {
+				throw new Awards_Exception_InvalidResponse(array(
+					'response' => $message->getCode() . ' ' . $message->getText()
+				));
+			}
 			$parts = explode(' ', $message->getText());
-			return $parts[5];
+			$customerId = $parts[5];
 		}
-		
-		throw new Awards_Exception_InvalidResponse(array(
-			'response' => $message->getCode() . ' ' . $message->getText()
-		));
+		$c->customerId = $customerId;
+		$c->save();
+		return $customerId;
 	}
 	
 	/**

@@ -1,5 +1,4 @@
 <?php echo Q_Html::form($action, 'POST', array('target' => 'Awards_authnet'))?>
 	<?php echo Q_Html::hidden(array('Token' => $token )) ?>
-	<button class="Q_button Awards_payment" type="submit"><?php echo $paymentButton ?></button>
+	<button class="Q_button Awards_subscribe" type="submit"><?php echo $subscribeButton ?></button>
 </form>
-<button class="Q_button Awards_subscribe"><?php echo $subscribeButton ?></button>
