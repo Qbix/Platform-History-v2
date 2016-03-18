@@ -67,8 +67,8 @@
 			"db": null,
 			"durations": {
 				"session": 86400,
-				"mobile": 0,
-				"tablet": 0,
+				"mobile": 315360000,
+				"tablet": 315360000,
 				"day": 86400,
 				"month": 2678400, 
 				"year": 31536000,
