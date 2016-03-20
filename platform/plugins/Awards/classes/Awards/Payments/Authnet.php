@@ -205,9 +205,10 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 			$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'streamName', '');
 			$charge->description = Q::ifset($options, 'description', '');
 			$charge->attributes = Q::json_encode(array(
+				"payments" => "authnet",
+				"customerId" => $customerId,
 				"amount" => $amount,
-				"currency" => $currency,
-				"customerId" => $customerId
+				"currency" => $currency
 			));
 			$charge->save();
 			return $charge;

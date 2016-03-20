@@ -193,20 +193,30 @@ abstract class Awards extends Base_Awards
 		$months = $plan->getAttribute('months', 12);
 		$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$months month", strtotime($startDate))));
 		$endDate = date('Y-m-d', strtotime($endDate));
-
-		$subscription = new Streams_Stream();
-		$subscription->publisherId = Users::communityId();
-		$subscription->name = "Awards/subscription/{$user->id}/{$plan->name}";
-		$subscription->type = "Awards/subscription";
-		$subscription->readLevel = 40;
-		$subscription->writeLevel = 0;
-		$subscription->adminLevel = 0;
-		$subscription->setAttribute('planPublisherId', $plan->publisherId);
-		$subscription->setAttribute('planStreamName', $plan->name);
-		$subscription->setAttribute('startDate', $startDate);
-		$subscription->setAttribute('endDate', $endDate);
-		$subscription->save(true);
 		
+		$communityId = Users::communityId();
+		$subscriptionStreamName = "Awards/subscription/{$user->id}/{$plan->name}";
+		if ($subscription = Streams::fetchOne($communityId, $communityId, $subscriptionStreamName)) {
+			return $subscription; // it already started
+		}
+		$attributes = Q::json_encode(array(
+			'payments' => $payments,
+			'planPublisherId' => $plan->publisherId,
+			'planStreamName' => $plan->name,
+			'startDate' => $startDate,
+			'endDate' => $endDate
+		));
+		$subscription = Streams::create(
+			$communityId,
+			$communityId,
+			"Awards/subscription",
+			array(
+				'name' => $subscriptionStreamName,
+				'readLevel' => Streams::$READ_LEVEL['max'],
+				'writeLevel' => Streams::$WRITE_LEVEL['none'],
+				'adminLevel' => Streams::$ADMIN_LEVEL['none'],
+			)
+		);
 		$amount = $plan->getAttribute('amount', null);
 		if (!is_numeric($amount)) {
 			throw new Q_Exception_WrongValue(array(
