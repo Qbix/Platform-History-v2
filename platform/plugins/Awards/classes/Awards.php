@@ -190,7 +190,8 @@ abstract class Awards extends Base_Awards
 		
 		$startDate = Q::ifset($options, 'startDate', date("Y-m-d"));
 		$startDate = date('Y-m-d', strtotime($startDate));
-		$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+1 year", strtotime($startDate))));
+		$months = $plan->getAttribute('months', 12);
+		$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+$months month", strtotime($startDate))));
 		$endDate = date('Y-m-d', strtotime($endDate));
 
 		$subscription = new Streams_Stream();
