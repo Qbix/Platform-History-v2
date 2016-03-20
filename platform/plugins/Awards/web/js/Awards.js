@@ -173,9 +173,9 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 				planStreamName: options.planStreamName,
 				token: options.token
 			};
-			Q.req('Awards/subscription', 'payment', function (err, response) {
+			Q.req('Awards/subscription', 'subscription', function (err, response) {
 				var msg;
-				if (msg = Q.firstErrorMessage(err, response)) {
+				if (msg = Q.firstErrorMessage(err, response && response.errors)) {
 					return callback(msg, null);
 				}
 				Q.handle(callback, this, [null, response.slots.payment]);
@@ -273,9 +273,11 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 		 */
 		stripe: function (options, callback) {
-			var o = Q.extend({
-				confirm: Q.text.Awards.subscriptions.confirm
-			}, Awards.Payments.stripe.options, options);
+			var o = Q.extend({},
+				Q.text.Awards.payments,
+				Awards.Payments.stripe.options,
+				options
+			);
 			if (!o.amount) {
 				throw new Q.Error("Awards.Payments.stripe: amount is required");
 			}
@@ -284,8 +286,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 				o.amount *= 100;
 				var params = Q.extend({
 					name: o.name,
-					description: plan.fields.title,
-					amount: plan.get('amount') * 100,
+					amount: o.amount * 100
 				}, o);
 				StripeCheckout.configure(Q.extend({
 					key: Awards.Payments.stripe.publishableKey,
@@ -318,7 +319,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 			};
 			Q.req('Awards/payment', 'charge', function (err, response) {
 				var msg;
-				if (msg = Q.firstErrorMessage(err, response)) {
+				if (msg = Q.firstErrorMessage(err, response && response.errors)) {
 					return callback(msg, null);
 				}
 				Q.handle(callback, this, [null, response.slots.charge]);
