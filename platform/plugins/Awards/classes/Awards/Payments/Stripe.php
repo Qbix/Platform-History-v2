@@ -93,12 +93,12 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 		$charge = new Awards_Charge();
 		$charge->userId = $user->id;
 		$charge->subscriptionPublisherId = Q::ifset($options, 'subscription', 'publisherId', '');
-		$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'streamName', '');
+		$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'name', '');
 		$charge->description = Q::ifset($options, 'description', '');
 		$charge->attributes = Q::json_encode(array(
 			"payments" => "stripe",
 			"customerId" => $c->customerId,
-			"amount" => $amount,
+			"amount" => sprintf("%0.2f", $amount),
 			"currency" => $currency
 		));
 		$charge->save(true);
