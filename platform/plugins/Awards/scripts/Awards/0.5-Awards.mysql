@@ -8,4 +8,4 @@ CREATE TABLE `{$prefix}customer` (
 ALTER TABLE `{$prefix}charge`
 ADD COLUMN `subscriptionPublisherId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `userId`,
 CHANGE `subscriptionId` `subscriptionStreamName` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-ADD PRIMARY KEY (userId);
+ADD PRIMARY KEY (id, userId);

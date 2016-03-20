@@ -33,10 +33,15 @@ class Awards_Charge extends Base_Awards_Charge
 	 */
 	function beforeSave($updatedFields)
 	{
+		if (isset($updatedFields['userId'])) {
+			$this->userId = $updatedFields['userId'];
+		}
 		if (!$this->retrieved) {
 			if (!isset($updatedFields['id'])) {
 				$this->id = $updatedFields['id'] = 
-					self::db()->uniqueId(self::table(), 'id', null);
+					self::db()->uniqueId(self::table(), 'id', array(
+						'userId' => $this->userId
+					));
 			}
 		}
 		Q::event(

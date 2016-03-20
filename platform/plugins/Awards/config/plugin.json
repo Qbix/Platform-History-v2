@@ -11,8 +11,8 @@
 		},
 		"pluginInfo": {
 			"Awards": {
-				"version": "0.5",
-				"compatible": "0.5",
+				"version": "0.6",
+				"compatible": "0.6",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Awards"]
 			}
