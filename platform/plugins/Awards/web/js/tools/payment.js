@@ -24,8 +24,8 @@ Q.Tool.define("Awards/payment", function (options) {
 	if (['authnet', 'stripe'].indexOf(payments) < 0) {
 		throw new Q.Error("Awards/payment: payments must be either 'authnet' or 'stripe'");
 	}
-	if (!state.planStreamName) {
-		throw new Q.Error("Awards/payment: planStreamName is required");
+	if (!state.amount) {
+		throw new Q.Error("Awards/payment: amount is required");
 	}
 	if (payments === 'authnet' && !state.token) {
 		throw new Q.Error("Awards/payment: token is required for authnet");
@@ -57,22 +57,6 @@ Q.Tool.define("Awards/payment", function (options) {
 
 
 });
-
-Q.Template.set(
-	'Awards/stripe',
-	'<div class="{{class}}">{{& title}}</div>'
-	+ '<form action="/charge" method="POST">'
-	+ '<script'
-	+ 'src="https://checkout.stripe.com/checkout.js" class="stripe-button"'
-	+ 'data-key="pk_test_jWgB7......."'
-	+ 'data-image="/img/documentation/checkout/marketplace.png"'
-	+ 'data-name="Demo Site"'
-	+ 'data-description="2 widgets"'
-	+ 'data-amount="2000"'
-	+ 'data-locale="auto">'
-	+ '</script>'
-	+ '</form>'
-);
 
 Q.addStylesheet('plugins/Awards/css/Awards.css');
 
