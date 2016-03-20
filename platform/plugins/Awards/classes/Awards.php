@@ -186,6 +186,8 @@ abstract class Awards extends Base_Awards
 			throw new Q_Exception_RequiredField(array('field' => 'payment'));
 		}
 		
+		$user = $options['user'];
+		
 		$startDate = Q::ifset($options, 'startDate', date("Y-m-d"));
 		$startDate = date('Y-m-d', strtotime($startDate));
 		$endDate = date("Y-m-d", strtotime("-1 day", strtotime("+1 year", strtotime($startDate))));

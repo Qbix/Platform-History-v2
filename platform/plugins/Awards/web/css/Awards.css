@@ -25,9 +25,16 @@
 	display: none;
 }
 
+
+.Q_notMobile .Awards_authnet {
+	width: 450px;
+	height: 480px;
+	overflow: auto;
+}
+
 .Q_mobile .Awards_authnet {
 	width: 133%;
-	height: 400px;
+	height: 480px;
     -ms-zoom: 0.75;
     -moz-transform: scale(0.75);
     -moz-transform-origin: 0 0;

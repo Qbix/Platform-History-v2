@@ -7,8 +7,8 @@
 
 Q.text.Awards = {
 	subscriptions: {
+		infoTitle: "Set Payment Information",
 		confirm: {
-			infoTitle: "Set Payment Information",
 			title: "Start Subscription",
 			message: "Would you like to subscribe to {{title}}?",
 			ok: "OK",
@@ -16,8 +16,8 @@ Q.text.Awards = {
 		}
 	},
 	payments: {
+		infoTitle: "Set Payment Information",
 		confirm: {
-			infoTitle: "Set Payment Information",
 			title: "Make a Payment",
 			message: "Do you agree to pay {{symbol}}{{amount}}?",
 			ok: "OK",
@@ -103,6 +103,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 						var message = o.confirm.message.interpolate({
 							title: plan.fields.title
 						});
+						Q.extend(o, Q.text.Awards.subscriptions.confirm);
 						Q.confirm(message, function (result) {
 							if (!result) return;
 							Awards.Subscriptions.subscribe('authnet', o, callback);
@@ -234,8 +235,9 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 					Awards.Currencies.load(function () {
 						var message = o.confirm.message.interpolate({
 							amount: o.amount,
-							symbol: Awards.Currencies.symbol.usd
+							symbol: Awards.Currencies.symbols.USD
 						});
+						Q.extend(o, Q.text.Awards.payments.confirm);
 						Q.confirm(message, function (result) {
 							if (!result) return;
 							Awards.Payments.pay('authnet', o, callback);
