@@ -8,8 +8,7 @@
  *  @param {string} $options.payments can be "authnet" or "stripe"
  *  @param {string} $options.planStreamName the name of the subscription plan's stream
  *  @param {string} [$options.publisherId=Q.Users.communityId] the publisher of the subscription plan's stream
- *  @param {double} [$options.amount] specify the amount (optional cents after the decimal point)
- *  @param {string} [$currency='usd'] set the currency, which will affect the amount (authnet doesn't support this)
+ *  @param {string} [$options.subscribeButton] Can override the title of the subscribe button
  *  @param {array} [$options=array()] Any additional options
  *  @param {string} [$options.token=null] required unless the user is an existing customer
  *  @param {string} [$options.description=null] description of the charge, to be sent to customer
@@ -49,7 +48,6 @@ function Awards_subscription_tool($options)
 	);
 	$subscribeButton = Q::ifset($options, 'subscribeButton', "Subscribe with " . $titles[$payments]);
     Q_Response::setToolOptions($options);
-	Q_Response::addStylesheet('plugins/Awards/css/Awards.css');
 	return Q::view("Awards/tool/subscription/$payments.php", compact(
 		'token', 'publishableKey', 'action',
 		'paymentButton', 'subscribeButton', 'planStreamName'
