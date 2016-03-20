@@ -10,6 +10,7 @@
 function Awards_payment_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
+	Q_Valid::requireFields(array('payments', 'amount'), $req, true);
 	
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'planPublisherId', Users::communityId());
@@ -17,7 +18,11 @@ function Awards_payment_post($params = array())
 	
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
-	
-	$subscription = Awards::startSubscription($plan, $req['payments']);
-	Q_Response::setSlot('subscription', $subscription);
+	if ($req['payments'] === 'authnet') {
+		Q_Valid::requireFields(array('token'), $req, true);
+		$token = $req['token'];
+	}
+	$currency = Q::ifset($req, 'currency', 'USD');
+	$charge = Awards::charge($req['payments'], $req['amount'], $currency, compact('token'));
+	Q_Response::setSlot('charge', $charge);
 }

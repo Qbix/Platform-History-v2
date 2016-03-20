@@ -138,7 +138,7 @@ abstract class Awards extends Base_Awards
 	 * @static
 	 * @param {string} $payments The type of payments processor, could be "Authnet" or "Stripe"
 	 * @param {string} $amount specify the amount
-	 * @param {string} [$currency='usd'] set the currency, which will affect the amount
+	 * @param {string} [$currency='USD'] set the currency, which will affect the amount
 	 * @param {array} [$options=array()] Any additional options
 	 * @param {string} [$options.token=null] required for stripe unless the user is an existing customer
 	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
@@ -152,7 +152,7 @@ abstract class Awards extends Base_Awards
 	 * @throws Awards_Exception_ChargeFailed
 	 * @return {Awards_Charge} the saved database row corresponding to the charge
 	 */
-	static function charge($payments, $amount, $currency = 'usd', $options = array())
+	static function charge($payments, $amount, $currency = 'USD', $options = array())
 	{
 		$className = 'Awards_Payments_' . ucfirst($payments);
 		$adapter = new $className($options);
@@ -215,7 +215,7 @@ abstract class Awards extends Base_Awards
 			));
 		}
 		$options['subscription'] = $subscription;
-		Awards::charge($payments, $amount, 'usd', $options);
+		Awards::charge($payments, $amount, 'USD', $options);
 		
 		/**
 		 * @event Awards/startedSubscription {before}

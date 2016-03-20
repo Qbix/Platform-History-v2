@@ -19,7 +19,7 @@ if (version_compare(PHP_VERSION, '5.0.0', '<')) {
 if (defined('Q_VERSION')) {
 	return;
 }
-define('Q_VERSION', '0.8.0');
+define('Q_VERSION', '0.9.0');
 
 //
 // Constants

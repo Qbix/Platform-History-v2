@@ -308,14 +308,15 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 				payments: payments,
 				planPublisherId: options.planPublisherId,
 				planStreamName: options.planStreamName,
-				token: options.token
+				token: options.token,
+				amount: options.amount
 			};
-			Q.req('Awards/subscription', 'payment', function (err, response) {
+			Q.req('Awards/payment', 'charge', function (err, response) {
 				var msg;
 				if (msg = Q.firstErrorMessage(err, response)) {
 					return callback(msg, null);
 				}
-				Q.handle(callback, this, [null, response.slots.payment]);
+				Q.handle(callback, this, [null, response.slots.charge]);
 			}, {
 				method: 'post',
 				fields: fields
