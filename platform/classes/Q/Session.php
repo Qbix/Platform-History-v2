@@ -303,7 +303,7 @@ class Q_Session
 			if (!empty($_SERVER['HTTP_HOST'])) {
 				$durationName = self::durationName();
 				$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-				Q_Response::setCookie(self::name(), $id, time()+$duration);
+				Q_Response::setCookie(self::name(), $id, $duration ? time()+$duration : 0);
 				session_start();
 			} else if (empty($_SESSION)) {
 				$_SESSION = array();
@@ -401,6 +401,12 @@ class Q_Session
 		}
 		session_id($sid = self::generateId()); // generate a new session id
 		session_start(); // start a new session
+		if (!empty($_SERVER['HTTP_HOST'])) {
+			// set the new cookie
+			$durationName = self::durationName();
+			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			Q_Response::setCookie(self::name(), $sid, $duration ? time()+$duration : 0);
+		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
 
 		return $sid;
@@ -815,7 +821,7 @@ class Q_Session
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], time()+$duration);
+			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], $duration ? time()+$duration : 0);
 		}
 		Q_Session::$nonceWasSet = true;
 	}

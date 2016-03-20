@@ -20,3 +20,7 @@
     text-align: center;
     margin: 20px;
 }
+
+.Users_loggedOut .Awards_subscription_tool {
+	display: none;
+}

@@ -205,7 +205,7 @@ Q.Tool.define("Users/avatar", function(options) {
 						}
 					}, state.inplaces);
 					var e = Q.Tool.setUpElement(
-						'span', 'Streams/inplace', opt, tool.prefix+'Q_inplace-'+vName, tool.prefix
+						'span', 'Streams/inplace', opt, tool.prefix+'Streams_inplace-'+vName, tool.prefix
 					);
 					f.innerHTML = '';
 					f.appendChild(e);

@@ -586,7 +586,7 @@ Base.prototype.beforeSet_passphraseHash = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".passphraseHash");
+			throw new Error('Must pass a string to '+this.table()+".passphraseHash instead of " + value);
 		if (typeof value === "string" && value.length > 64)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".passphraseHash");
 		return value;

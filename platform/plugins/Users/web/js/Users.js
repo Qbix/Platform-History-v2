@@ -1011,9 +1011,9 @@ function login_callback(err, response) {
 			$('#Users_form_passphrase').attr('value', '');
 			
 			$('input', $this).css('background-image', 'none');
-			if (err || response.errors) {
+			if (err || (response && response.errors)) {
 				// there were errors
-				if (response.errors) {
+				if (response && response.errors) {
 					$this.data('validator').invalidate(
 						Q.ajaxErrors(response.errors, [first_input.attr('name')]
 					));
@@ -1822,7 +1822,7 @@ Q.onInit.add(function () {
 	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
 		Q.nonce = Q.cookie('Q_nonce');
 	}
-	document.documentElement.className += Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut';
+	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
     
 	if (Q.plugins.Users.facebookApps[Q.info.app]
 	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
