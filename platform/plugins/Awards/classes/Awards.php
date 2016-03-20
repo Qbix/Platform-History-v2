@@ -156,7 +156,22 @@ abstract class Awards extends Base_Awards
 	{
 		$className = 'Awards_Payments_' . ucfirst($payments);
 		$adapter = new $className($options);
-		return $adapter->charge($amount, $currency, $options);
+		/**
+		 * @event Awards/charge {before}
+		 * @param {Awards_Payments} adapter
+		 * @param {array} options
+		 */
+		$ret = Q::event('Awards/charge', 'before', compact('adapter', 'options'));
+		$charge = $adapter->charge($amount, $currency, $options);
+		/**
+		 * @event Awards/charge {after}
+		 * @param {Awards_charge} charge
+		 * @param {Awards_Payments} adapter
+		 * @param {array} options
+		 */
+		Q::event('Awards/charge', 'after', compact('charge', 'adapter', 'options'));
+
+		return $charge;
 	}
 
 	/**
@@ -228,14 +243,14 @@ abstract class Awards extends Base_Awards
 		Awards::charge($payments, $amount, 'USD', $options);
 		
 		/**
-		 * @event Awards/startedSubscription {before}
+		 * @event Awards/startSubscription {before}
 		 * @param {Streams_Stream} plan
 		 * @param {Streams_Stream} subscription
 		 * @param {string} startDate
 		 * @param {string} endDate
 		 * @return {Users_User}
 		 */
-		Q::event('Awards/startedSubscription', 'before', compact(
+		Q::event('Awards/startSubscription', 'before', compact(
 			'plan', 'subscription', 'startDate', 'endDate'
 		));
 
