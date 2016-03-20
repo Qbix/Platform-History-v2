@@ -209,7 +209,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 				"currency" => $currency,
 				"customerId" => $customerId
 			));
-			$charge-save();
+			$charge->save();
 			return $charge;
 		case '3': 
 			throw new Awards_Exception_DuplicateTransaction();
