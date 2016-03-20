@@ -105,7 +105,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 						var message = o.confirm.message.interpolate({
 							title: plan.fields.title
 						});
-						Q.prompt(message, function (result) {
+						Q.confirm(message, function (result) {
 							if (!result) return;
 							Awards.Subscriptions.subscribe('authnet', o, callback);
 						}, o);
@@ -240,7 +240,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 							amount: o.amount,
 							symbol: Awards.Currencies.symbol.usd
 						});
-						Q.prompt(message, function (result) {
+						Q.confirm(message, function (result) {
 							if (!result) return;
 							Awards.Payments.pay('authnet', o, callback);
 						}, o);
