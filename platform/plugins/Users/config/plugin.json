@@ -3,8 +3,8 @@
 		"pluginInfo": {
 			"Users": {
 				"version": "0.9",
-				"compatible": "0.8",
-				"requires": {"Q": "0.8"},
+				"compatible": "0.9",
+				"requires": {"Q": "0.9"},
 				"permissions": ["Users/icons"],
 				"connections": ["Users"]
 			}

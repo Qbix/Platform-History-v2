@@ -83,7 +83,7 @@
 				"secret": "XXXXX",
 				"publishableKey": "XXXXX"
 			}, */
-			"authnet": null, /* {
+			"authnet": null /* {
 				"name": "XXXXX",
 				"transactionKey": "XXXXX",
 				"testing": false

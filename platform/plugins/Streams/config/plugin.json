@@ -3,8 +3,8 @@
 		"pluginInfo": {
 			"Streams": {
 				"version": "0.9",
-				"compatible": "0.8",
-				"requires": {"Users": "0.8"},
+				"compatible": "0.9",
+				"requires": {"Users": "0.9"},
 				"permissions": ["Streams/icons"],
 				"connections": ["Streams"]
 			}
