@@ -82,17 +82,15 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 				if (!o.action || !o.token) {
 					throw new Q.Error("Awards.Subscriptions.authnet: action and token are required");
 				}
-				var $form = $('<form target="Awards_authnet" />')
+				var $form = $('<form  method="post" target="Awards_authnet" />')
 				.attr('action', o.action)
 				.append($('<input name="Token" type="hidden" />').val(o.token));
 				var html = '<iframe ' +
+					'class="Awards_authnet" ' +
 					'name="Awards_authnet" ' +
 					'src="" ' +
-					'width="480" ' +
-					'height="640" ' +
 					'frameborder="0" ' +
-					'scrolling="no" ' +
-					'class="authnet" ' +
+					'scrolling="yes" ' +
 				'></iframe>';
 				Q.Dialogs.push(Q.extend({
 					title: o.infoTitle,
@@ -215,17 +213,15 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 			if (!o.amount) {
 				throw new Q.Error("Awards.Payments.authnet: amount is required");
 			}
-			var $form = $('<form target="Awards_authnet" />')
+			var $form = $('<form method="post" target="Awards_authnet" />')
 			.attr('action', o.action)
 			.append($('<input name="Token" type="hidden" />').val(o.token));
 			var html = '<iframe ' +
+				'class="Awards_authnet" ' +
 				'name="Awards_authnet" ' +
 				'src="" ' +
-				'width="480" ' +
-				'height="640" ' +
 				'frameborder="0" ' +
-				'scrolling="no" ' +
-				'class="authnet" ' +
+				'scrolling="yes" ' +
 			'></iframe>';
 			Q.Dialogs.push(Q.extend({
 				title: o.infoTitle,
