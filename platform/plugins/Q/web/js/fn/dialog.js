@@ -137,10 +137,10 @@ function _Q_overlay(o) {
 				Q.Animation.play(function (x, y) {
 					if (x === 1) {
 						$this.hide();
+						Q.handle($overlay.options.onClose, $this, []);
 					} else {
 						$this.css('opacity', 1-y);
 					}
-					Q.handle($overlay.options.onClose, $this, []);
 				}, o.fadeTime);
 				if ($overlay.options.mask)
 				{

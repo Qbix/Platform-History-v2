@@ -10007,10 +10007,11 @@ Q.Dialogs = {
 		//}
 		var _onClose = o.onClose;
 		o.onClose = new Q.Event(function() {
-			Q.handle(o.onClose.original, $dialog, [$dialog]);
-			if (!Q.Dialogs.dontPopOnClose)
+			if (!Q.Dialogs.dontPopOnClose) {
 				Q.Dialogs.pop(true);
+			}
 			Q.Dialogs.dontPopOnClose = false;
+			Q.handle(o.onClose.original, $dialog, [$dialog]);
 		}, 'Q.Dialogs');
 		o.onClose.original = _onClose;
 		$dialog.plugin('Q/dialog', o);
@@ -10095,7 +10096,7 @@ Q.Dialogs.push.options = {
 Q.alert = function(message, options) {
 	if (options === undefined) options = {};
 	if (options.title === undefined) options.title = 'Alert';
-	var dialog = Q.Dialogs.push(Q.extend({
+	return Q.Dialogs.push(Q.extend({
 		'title': options.title,
 		'content': '<div class="Q_messagebox Q_big_prompt"><p>' + message + '</p></div>',
 		'className': 'Q_alert',
@@ -10103,7 +10104,6 @@ Q.alert = function(message, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
-	return dialog;
 };
 
 /**
@@ -10128,7 +10128,7 @@ Q.alert = function(message, options) {
 Q.confirm = function(message, callback, options) {
 	var o = Q.extend({}, Q.confirm.options, options);
 	var buttonClicked = false;
-	var dialog = Q.Dialogs.push(Q.extend({
+	var $dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
@@ -10145,17 +10145,17 @@ Q.confirm = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
-	dialog.find('button:first').on(Q.Pointer.end, function() {
+	$dialog.find('.Q_buttons button:first').on(Q.Pointer.end, function() {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
 	});
-	dialog.find('button:last').on(Q.Pointer.end, function() {
+	$dialog.find('.Q_buttons button:last').on(Q.Pointer.end, function() {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
 	});
-	return dialog;
+	return $dialog;
 };
 
 Q.confirm.options = {
@@ -10184,10 +10184,16 @@ Q.confirm.options = {
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
 Q.prompt = function(message, callback, options) {
+	function _done() {
+		buttonClicked = true;
+		var value = dialog.find('input').val();
+		Q.Dialogs.pop();
+		Q.handle(callback, this, [value]);
+	}
 	if (options === undefined) options = {};
 	var o = Q.extend({}, Q.prompt.options, options);
 	var buttonClicked = false;
-	var dialog = Q.Dialogs.push(Q.extend({
+	var $dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
@@ -10218,14 +10224,8 @@ Q.prompt = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
-	dialog.find('button').on(Q.Pointer.click, _done);
-	return dialog;
-	function _done() {
-		buttonClicked = true;
-		var value = dialog.find('input').val();
-		Q.Dialogs.pop();
-		Q.handle(callback, this, [value]);
-	}
+	$dialog.find('button').on(Q.Pointer.click, _done);
+	return $dialog;
 };
 Q.prompt.options = {
 	title: 'Prompt',
