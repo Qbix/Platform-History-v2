@@ -49,6 +49,7 @@ function Awards_subscription_tool($options)
 	);
 	$subscribeButton = Q::ifset($options, 'subscribeButton', "Subscribe with " . $titles[$payments]);
     Q_Response::setToolOptions($options);
+	Q_Response::addStylesheet('plugins/Awards/css/Awards.css');
 	return Q::view("Awards/tool/subscription/$payments.php", compact(
 		'token', 'publishableKey', 'action',
 		'paymentButton', 'subscribeButton', 'planStreamName'

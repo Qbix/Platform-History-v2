@@ -32,8 +32,7 @@ Q.Tool.define("Awards/subscription", function (options) {
 	}
 	
 	if (!Q.Users.loggedInUser) {
-		tool.element.style.display = 'none';
-		console.warn("Don't render tool when user is not logged in");
+		console.warn("Awards/subscription: Don't render tool when user is not logged in");
 		return;
 	}
 	

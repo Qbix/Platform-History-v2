@@ -1285,6 +1285,23 @@ class Q_Response
 		return implode($between, $tags);
 	}
 	
+	/**
+	 * Call this method to add a css class to the HTML element in the layout
+	 * @method addHtmlCssClass
+	 * @static
+	 * @param {string} $className
+	 */
+	static function addHtmlCssClass($className)
+	{
+		self::$htmlCssClasses[$className] = true;
+	}
+	
+	/**
+	 * Returns the string containing all the html attributes
+	 * @method addHtmlCssClass
+	 * @static
+	 * @return {string}
+	 */
 	static function htmlAttributes()
 	{
 		$touchscreen = Q_Request::isTouchscreen() ? 'Q_touchscreen' : 'Q_notTouchscreen';
@@ -1295,6 +1312,9 @@ class Q_Response
 		$ie8 = Q_Request::isIE(0, 8) ? 'Q_ie8OrBelow' : 'Q_notIE8OrBelow';
 		$uri = Q_Dispatcher::uri();
 		$classes = "{$uri->module} {$uri->module}_{$uri->action}";
+		foreach (self::$htmlCssClasses as $k => $v) {
+			$classes .= Q_Html::text(" $k");
+		}
 		$result = 'lang="en" prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
 			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
 		return $result;
@@ -1706,4 +1726,10 @@ class Q_Response
 	 * @type array
 	 */
 	public static $cookies = array();
+	/**
+	 * @property $htmlCssClasses
+	 * @static
+	 * @type array
+	 */
+	public static $htmlCssClasses = array();
 }

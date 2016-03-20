@@ -1822,7 +1822,7 @@ Q.onInit.add(function () {
 	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
 		Q.nonce = Q.cookie('Q_nonce');
 	}
-	document.documentElement.className += Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut';
+	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
     
 	if (Q.plugins.Users.facebookApps[Q.info.app]
 	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
