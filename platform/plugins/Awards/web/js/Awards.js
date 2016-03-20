@@ -279,14 +279,17 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 				throw new Q.Error("Awards.Payments.stripe: amount is required");
 			}
 			Q.addScript(o.javascript, function () {
+				var originalAmount = o.amount;
+				o.amount *= 100;
 				var params = {
 					name: o.name,
-					amount: o.amount * 100,
+					amount: o.amount
 				};
 				StripeCheckout.configure(Q.extend({
 					key: Awards.Payments.stripe.publishableKey,
 					token: function (token) {
 						o.token = token;
+						o.amount = originalAmount;
 						Awards.Payments.pay('stripe', o, callback);
 					}
 				}, o)).open(Q.extend(params, o));

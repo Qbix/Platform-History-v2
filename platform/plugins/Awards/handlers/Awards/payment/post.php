@@ -18,10 +18,8 @@ function Awards_payment_post($params = array())
 	
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
-	if ($req['payments'] === 'authnet') {
-		Q_Valid::requireFields(array('token'), $req, true);
-		$token = $req['token'];
-	}
+	Q_Valid::requireFields(array('token'), $req, true);
+	$token = $req['token'];
 	$currency = Q::ifset($req, 'currency', 'USD');
 	$charge = Awards::charge($req['payments'], $req['amount'], $currency, compact('token'));
 	Q_Response::setSlot('charge', $charge);

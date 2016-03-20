@@ -77,7 +77,7 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 		if (!$c->retrieve()) {
 			Q_Valid::requireFields(array('token'), $options, true);
 			$customer = \Stripe\Customer::create(array(
-				"source" => $options['token'],
+				"source" => $options['token']["id"],
 				"description" => $options['user']->displayName()
 			));
 			$c->customerId = $customer->id;
@@ -95,8 +95,12 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 		$charge->subscriptionPublisherId = Q::ifset($options, 'subscription', 'publisherId', '');
 		$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'streamName', '');
 		$charge->description = Q::ifset($options, 'description', '');
-		$charge->attributes = "{}";
-		$charge-save();
+		$charge->attributes = Q::json_encode(array(
+			"amount" => $amount,
+			"currency" => $currency,
+			"customerId" => $c->customerId
+		));
+		$charge->save(true);
 		return $charge;
 	}
 	

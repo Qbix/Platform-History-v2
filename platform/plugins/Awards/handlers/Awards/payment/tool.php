@@ -31,7 +31,7 @@ function Awards_payment_tool($options)
 	if (!empty($options['image'])) {
 		$options['image'] = Q_Html::themedUrl($options['image']);
 	}
-	if (!empty($options['email'])) {
+	if (empty($options['email'])) {
 		$options['email'] = Users::loggedInUser(true)->emailAddress;
 	}
 	$payments = ucfirst($options['payments']);
