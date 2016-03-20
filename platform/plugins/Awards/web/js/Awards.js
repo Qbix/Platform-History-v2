@@ -206,7 +206,8 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		authnet: function (options, callback) {
 			var o = Q.extend({},
 				Q.text.Awards.payments,
-				Awards.Payments.authnet.options
+				Awards.Payments.authnet.options,
+				options
 			);
 			if (!o.action || !o.token) {
 				throw new Q.Error("Awards.Payments.authnet: action and token are required");
