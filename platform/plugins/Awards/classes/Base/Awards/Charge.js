@@ -203,6 +203,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
+		"id",
 		"userId"
 	];
 };
@@ -260,7 +261,7 @@ Base.prototype.maxSize_id = function () {
 	 */
 Base.prototype.column_id = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -503,7 +504,7 @@ return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
  * @throws {Error} If mandatory field is not set
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['userId'], i;
+	var fields = ['id','userId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

@@ -68,7 +68,8 @@ abstract class Base_Awards_Charge extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
+			  0 => 'id',
+			  1 => 'userId',
 			)
 		);
 	}
@@ -253,7 +254,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -629,7 +630,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('userId') as $name) {
+			foreach (array('id','userId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

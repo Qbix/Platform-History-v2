@@ -137,18 +137,19 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 				}
 				var plan = this;
 				Q.addScript(o.javascript, function () {
-					var params = {
+					var params = Q.extend({
 						name: o.name,
 						description: plan.fields.title,
 						amount: plan.get('amount') * 100,
-					};
+					}, o);
+					params.amount *= 100;
 					StripeCheckout.configure(Q.extend({
 						key: Awards.Payments.stripe.publishableKey,
 						token: function (token) {
 							o.token = token;
 							Awards.Subscriptions.subscribe('stripe', o, callback);
 						}
-					}, o)).open(Q.extend(params, o));
+					}, params)).open();
 				});
 				
 			});
@@ -281,10 +282,11 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 			Q.addScript(o.javascript, function () {
 				var originalAmount = o.amount;
 				o.amount *= 100;
-				var params = {
+				var params = Q.extend({
 					name: o.name,
-					amount: o.amount
-				};
+					description: plan.fields.title,
+					amount: plan.get('amount') * 100,
+				}, o);
 				StripeCheckout.configure(Q.extend({
 					key: Awards.Payments.stripe.publishableKey,
 					token: function (token) {
@@ -292,7 +294,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 						o.amount = originalAmount;
 						Awards.Payments.pay('stripe', o, callback);
 					}
-				}, o)).open(Q.extend(params, o));
+				}, params)).open();
 			});
 		},
 		
