@@ -320,15 +320,15 @@ function Row(fields, retrieved /* false */) {
 	 *   to have .begin() a transaction which locks the row for update. 
 	 *   You should call .save(..., true) to unlock the row, otherwise other 
 	 *   database connections trying to access the row will be blocked.
-	 * @param {boolean|boolean} [modifyQuery.rollbackIfMissing]
+	 * @param {boolean} [modifyQuery.rollbackIfMissing]
 	 *   If begin is true, this option determines whether to
 	 *   rollback the transaction if the row we're trying to retrieve is missing.
 	 *   Defaults to false.
-	 * @param {boolean|boolean} [modifyQuery.ignoreCache]
+	 * @param {boolean} [modifyQuery.ignoreCache]
 	 *   If true, then call ignoreCache on the query
-	 * @param {boolean|boolean} [modifyQuery.caching]
+	 * @param {boolean} [modifyQuery.caching]
 	 *   If provided, then call caching() on the query, passing this value
-	 * @param {boolean|boolean} [modifyQuery.query]
+	 * @param {boolean} [modifyQuery.query]
 	 *   If true, it will return a Db_Query that can be modified, rather than the result. 
 	 * @param {array} [options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @param {function} [callback=null] This function is called when all queries have completed.

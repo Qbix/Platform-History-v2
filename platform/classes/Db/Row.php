@@ -1924,28 +1924,31 @@ class Db_Row implements Iterator
 	 * @method retrieve
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
+	 *  Pass true here to throw an exception if the row is missing.
 	 * @param {boolean} [$useIndex=false] If true, the primary key is used in searching. 
 	 *  An exception is thrown when some fields of the primary key are not specified
-	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query:
-	 * 
-	 * * "begin" => this will cause the query to have ->begin() a transaction
-	 *       which locks the row for update. You should call ->save(..., true)
-	 *       to unlock the row, otherwise other database connections trying to access
-	 *       the row will be blocked.
-	 * * "rollbackIfMissing" => if begin is true, this option determines whether to
-	 *       rollback the transaction if the row we're trying to retrieve is missing.
-	 *       Defaults to false.
-	 * * "ignoreCache" => if true, then call ignoreCache on the query
-	 * * "caching" => if provided, then call caching() on the query, passing this value
-	 * * Any other keys will be sent to $query->options($modifyQuery);
-	 * * "query" => if true, it will return a Db_Query that can be modified, rather than the result. 
+	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query.
 	 *   You can call more methods, like limit, offset, where, orderBy,
 	 *   and so forth, on that Db_Query. After you have modified it sufficiently,
 	 *   get the ultimate result of this function, by calling the resume() method on 
 	 *   the Db_Query object (via the chainable interface).
-	 * 
-	 *  You can also pass true in place of the $modifyQuery field to achieve
-	 *  the same effect as array("query" => true)
+	 *   You can also pass true in place of the modifyQuery field to achieve
+	 *   the same effect as array("query" => true)
+	 * @param {boolean|string} [$modifyQuery.begin] this will cause the query 
+	 *   to have .begin() a transaction which locks the row for update. 
+	 *   You should call .save(..., true) to unlock the row, otherwise other 
+	 *   database connections trying to access the row will be blocked.
+	 * @param {boolean} [$modifyQuery.rollbackIfMissing]
+	 *   If begin is true, this option determines whether to
+	 *   rollback the transaction if the row we're trying to retrieve is missing.
+	 *   Defaults to false.
+	 * @param {boolean} [$modifyQuery.ignoreCache]
+	 *   If true, then call ignoreCache on the query
+	 * @param {boolean} [$modifyQuery.caching]
+	 *   If provided, then call caching() on the query, passing this value
+	 * @param {boolean} [$modifyQuery.query]
+	 *   If true, it will return a Db_Query that can be modified, rather than the result. 
+	 * @param {array} [options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @param {array} [$options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @return {array|Db_Row|false} Returns the row fetched from the Db_Result (or returned by beforeRetrieve)
 	 *  If retrieve() is called with no arguments, may return false if nothing retrieved.
@@ -1959,6 +1962,12 @@ class Db_Row implements Iterator
 		if (is_array($useIndex)) {
 			$options = $useIndex;
 			$useIndex = $modifyQuery = null;
+		}
+		if ($fields === true) {
+			$throwIfMissing = true;
+			$fields = '*';
+		} else {
+			$throwIfMissing = false;
 		}
 		if (!isset($fields)) $fields = '*';
 		if (!isset($useIndex)) $useIndex = false;
@@ -2047,6 +2056,7 @@ class Db_Row implements Iterator
 
 			// Return the result
 			$resume_args[] = $query;
+			$resume_args[] = $throwIfMissing;
 			return call_user_func_array(array($this, 'retrieve_resume'), $resume_args);
 		}
 		
@@ -2063,6 +2073,12 @@ class Db_Row implements Iterator
 			and !empty($modifyQuery['rollbackIfMissing'])) {
 				$this->rollback();
 			}
+			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
+				throw new Q_Exception_MissingRow(array(
+					'table' => $this->getTable(),
+					'criteria' => $use_search_criteria
+				));
+			}
 			return false;
 		}
 	}
@@ -2073,7 +2089,8 @@ class Db_Row implements Iterator
 		$modifyQuery = false,
 		$options = array(),
 		$preserved_vars = array(),
-		$query = null)
+		$query = null,
+		$throwIfMissing = false)
 	{
 		$class_name = get_class($this);
 		if (class_exists('Q')) {
@@ -2124,6 +2141,12 @@ class Db_Row implements Iterator
 		} else {
 			if (!empty($modifyQuery['begin']) and !empty($modifyQuery['rollbackIfMissing'])) {
 				$this->rollback();
+			}
+			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
+				throw new Q_Exception_MissingRow(array(
+					'table' => $this->getTable(),
+					'criteria' => $preserved_vars['use_search_criteria']
+				));
 			}
 			return false;
 		}
