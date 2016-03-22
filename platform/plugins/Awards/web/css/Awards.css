@@ -21,7 +21,8 @@
     margin: 20px;
 }
 
-.Users_loggedOut .Awards_subscription_tool {
+.Users_loggedOut .Awards_subscription_tool,
+.Users_loggedOut .Awards_payment_tool {
 	display: none;
 }
 

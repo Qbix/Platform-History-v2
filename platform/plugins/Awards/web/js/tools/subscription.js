@@ -21,6 +21,9 @@ Q.Tool.define("Awards/subscription", function (options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	var payments = state.payments && state.payments.toLowerCase();
+	if (!Q.Users.loggedInUser) {
+		throw new Q.Error("Awards/subscription: Don't render tool when user is not logged in");
+	}
 	if (['authnet', 'stripe'].indexOf(payments) < 0) {
 		throw new Q.Error("Awards/subscription: payments must be either 'authnet' or 'stripe'");
 	}
@@ -29,11 +32,6 @@ Q.Tool.define("Awards/subscription", function (options) {
 	}
 	if (payments === 'authnet' && !state.token) {
 		throw new Q.Error("Awards/subscription: token is required for authnet");
-	}
-	
-	if (!Q.Users.loggedInUser) {
-		console.warn("Awards/subscription: Don't render tool when user is not logged in");
-		return;
 	}
 	
 	tool.$('.Awards_subscribe').on(Q.Pointer.click, function () {
@@ -57,22 +55,6 @@ Q.Tool.define("Awards/subscription", function (options) {
 
 
 });
-
-Q.Template.set(
-	'Awards/stripe',
-	'<div class="{{class}}">{{& title}}</div>'
-	+ '<form action="/charge" method="POST">'
-	+ '<script'
-	+ 'src="https://checkout.stripe.com/checkout.js" class="stripe-button"'
-	+ 'data-key="pk_test_jWgB7......."'
-	+ 'data-image="/img/documentation/checkout/marketplace.png"'
-	+ 'data-name="Demo Site"'
-	+ 'data-description="2 widgets"'
-	+ 'data-amount="2000"'
-	+ 'data-locale="auto">'
-	+ '</script>'
-	+ '</form>'
-);
 
 Q.addStylesheet('plugins/Awards/css/Awards.css');
 

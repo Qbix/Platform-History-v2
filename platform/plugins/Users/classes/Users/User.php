@@ -296,7 +296,7 @@ class Users_User extends Base_Users_User
 	 */
 	static function removeLabel($label, $userId = null, $asUserId = null)
 	{
-		Users_Label::removeLabel($label, $this->id, $asUserId);
+		Users_Label::removeLabel($label, $userId, $asUserId);
 	}
 	
 	/**

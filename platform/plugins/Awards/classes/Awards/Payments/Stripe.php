@@ -63,7 +63,7 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 	 * @param {string} [$options.subscription.publisherId]
 	 * @param {string} [$options.subscription.streamName]
 	 * @throws \Stripe\Error\Card
-	 * @return {Awards_Charge} the saved database row corresponding to the charge
+	 * @return {string} The customerId of the Awards_Customer that was successfully charged
 	 */
 	function charge($amount, $currency = 'USD', $options = array())
 	{
@@ -71,38 +71,26 @@ class Awards_Payments_Stripe extends Awards_Payments implements iAwards_Payments
 		Q_Valid::requireFields(array('secret', 'user'), $options, true);
 		\Stripe\Stripe::setApiKey($options['secret']);
 		$user = $options['user'];
-		$c = new Awards_Customer();
-		$c->userId = $user->id;
-		$c->payments = 'stripe';
-		if (!$c->retrieve()) {
+		$customer = new Awards_Customer();
+		$customer->userId = $user->id;
+		$customer->payments = 'stripe';
+		if (!$customer->retrieve()) {
 			Q_Valid::requireFields(array('token'), $options, true);
-			$customer = \Stripe\Customer::create(array(
+			$sc = \Stripe\Customer::create(array(
 				"source" => $options['token']["id"],
 				"description" => $options['user']->displayName()
 			));
-			$c->customerId = $customer->id;
-			$c->save();
+			$customer->customerId = $sc->id;
+			$customer->save();
 		}
 		$params = array(
 			"amount" => $amount * 100, // in cents
 			"currency" => $currency,
-			"customer" => $c->customerId
+			"customer" => $customer->customerId
 		);
 		Q::take($options, array('description', 'metadata'), $params);
 		\Stripe\Charge::create($params); // can throw some exception
-		$charge = new Awards_Charge();
-		$charge->userId = $user->id;
-		$charge->subscriptionPublisherId = Q::ifset($options, 'subscription', 'publisherId', '');
-		$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'name', '');
-		$charge->description = Q::ifset($options, 'description', '');
-		$charge->attributes = Q::json_encode(array(
-			"payments" => "stripe",
-			"customerId" => $c->customerId,
-			"amount" => sprintf("%0.2f", $amount),
-			"currency" => $currency
-		));
-		$charge->save(true);
-		return $charge;
+		return $customer->customerId;
 	}
 	
 	function authToken($customerId = null)

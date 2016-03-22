@@ -1,5 +1,5 @@
 <p>
-	Greetings from <?php echo $communityName ?>.
+	Greetings from <?php echo $publisher->displayName() ?>.
 </p>
 
 <p>
@@ -12,5 +12,5 @@
 </p>
 
 <p>
-	See you on <a href="<?php echo Q_Request::baseUrl() ?>"><?php echo $communityName ?></a>!
+	See you on <a href="<?php echo Q_Request::baseUrl() ?>"><?php echo $publisher->displayName() ?></a>!
 </p>

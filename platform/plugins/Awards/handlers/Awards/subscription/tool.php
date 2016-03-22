@@ -11,11 +11,6 @@
  *  @param {string} [$options.subscribeButton] Can override the title of the subscribe button
  *  @param {array} [$options=array()] Any additional options
  *  @param {string} [$options.token=null] required unless the user is an existing customer
- *  @param {string} [$options.description=null] description of the charge, to be sent to customer
- *  @param {string} [$options.metadata=null] any additional metadata to store with the charge
- *  @param {string} [$options.subscription=null] if this charge is related to a subscription stream
- *  @param {string} [$options.subscription.publisherId]
- *  @param {string} [$options.subscription.streamName]
  */
 function Awards_subscription_tool($options)
 {

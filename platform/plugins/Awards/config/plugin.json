@@ -4,15 +4,17 @@
 			"Q/responseExtras": ["Awards/before/Q_responseExtras"]
 		},
 		"handlersAfterEvent": {
-			"Users/insertUser": ["Awards/after/Users_insertUser"]
+			"Users/insertUser": ["Awards/after/Users_insertUser"],
+			"Awards/charge": ["Awards/after/Awards_charge"],
+			"Awards/startSubscription": ["Awards/after/Awards_startSubscription"]
 		},
 		"routes": {
 			"plugins/Awards/:action": {"module": "Awards"}
 		},
 		"pluginInfo": {
 			"Awards": {
-				"version": "0.6",
-				"compatible": "0.6",
+				"version": "0.7",
+				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Awards"]
 			}
@@ -53,6 +55,28 @@
 			},
 			"Awards/received": {
 				"by": "receiving credits"
+			}
+		},
+		"transactional": {
+			"charge": {
+				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+				"body": "Awards/email/charge.php",
+				"sms": "Awards/sms/charge.php"
+			},
+			"charged": {
+				"subject": "Thank you for your payment to {{call 'publisher.displayName'}}",
+				"body": "Awards/email/charged.php",
+				"sms": "Awards/sms/charged.php"
+			},
+			"startSubscription": {
+				"subject": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+				"body": "Awards/email/startSubscription.php",
+				"sms": "Awards/sms/startSubscription.php"
+			},
+			"startedSubscription": {
+				"subject": "You have been subscribed to {{plan.title}}",
+				"body": "Awards/email/startedSubscription.php",
+				"sms": "Awards/sms/startedSubscription.php"
 			}
 		}
 	}

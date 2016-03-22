@@ -16,8 +16,8 @@
  *
  * @property {string} $id
  * @property {string} $userId
- * @property {string} $subscriptionPublisherId
- * @property {string} $subscriptionStreamName
+ * @property {string} $publisherId
+ * @property {string} $streamName
  * @property {string} $description
  * @property {string} $attributes
  * @property {string|Db_Expression} $insertedTime
@@ -34,11 +34,11 @@ abstract class Base_Awards_Charge extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $subscriptionPublisherId
+	 * @property $publisherId
 	 * @type {string}
 	 */
 	/**
-	 * @property $subscriptionStreamName
+	 * @property $streamName
 	 * @type {string}
 	 */
 	/**
@@ -316,41 +316,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_subscriptionPublisherId
+	 * @method beforeSet_publisherId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_subscriptionPublisherId($value)
+	function beforeSet_publisherId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('subscriptionPublisherId', $value);
+			return array('publisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".subscriptionPublisherId");
+			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".subscriptionPublisherId");
-		return array('subscriptionPublisherId', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
+		return array('publisherId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the subscriptionPublisherId field
+	 * Returns the maximum string length that can be assigned to the publisherId field
 	 * @return {integer}
 	 */
-	function maxSize_subscriptionPublisherId()
+	function maxSize_publisherId()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for subscriptionPublisherId column
+	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_subscriptionPublisherId()
+	function column_publisherId()
 	{
 
 return array (
@@ -370,41 +370,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_subscriptionStreamName
+	 * @method beforeSet_streamName
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_subscriptionStreamName($value)
+	function beforeSet_streamName($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('subscriptionStreamName', $value);
+			return array('streamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".subscriptionStreamName");
+			throw new Exception('Must pass a string to '.$this->getTable().".streamName");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".subscriptionStreamName");
-		return array('subscriptionStreamName', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".streamName");
+		return array('streamName', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the subscriptionStreamName field
+	 * Returns the maximum string length that can be assigned to the streamName field
 	 * @return {integer}
 	 */
-	function maxSize_subscriptionStreamName()
+	function maxSize_streamName()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for subscriptionStreamName column
+	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_subscriptionStreamName()
+	function column_streamName()
 	{
 
 return array (
@@ -651,7 +651,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'userId', 'subscriptionPublisherId', 'subscriptionStreamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('id', 'userId', 'publisherId', 'streamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

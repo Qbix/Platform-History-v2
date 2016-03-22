@@ -1,17 +1,19 @@
 <?php
 
 /**
- * Standard tool for starting or managing subscriptions.
- * @class Awards subscription
+ * Standard tool for making payments.
+ * @class Awards payment
  * @constructor
  * @param {array} $options Override various options for this tool
  *  @param {string} $options.payments can be "authnet" or "stripe"
  *  @param {string} $options.amount the amount to pay.
  *  @param {double} [$options.currency="usd"] the currency to pay in. (authnet supports only "usd")
  *  @param {string} [$options.payButton] Can override the title of the pay button
+ *  @param {String} [$options.publisherId=Users::communityId()] The publisherId of the Awards/product or Awards/service stream
+ *  @param {String} [$options.streamName] The name of the Awards/product or Awards/service stream
  *  @param {string} [$options.name=Users::communityName()] The name of the organization the user will be paying
  *  @param {string} [$options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
- *  @param {string} [$options.description] A description of the product or service being purchased.
+ *  @param {string} [$options.description=null] A short name or description of the product or service being purchased.
  *  @param {string} [$options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
  *  @param {string} [$options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
  *  @param {boolean} [$options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
@@ -31,11 +33,11 @@ function Awards_payment_tool($options)
 	if (!empty($options['image'])) {
 		$options['image'] = Q_Html::themedUrl($options['image']);
 	}
+	$options['payments'] = strtolower($options['payments']);
 	if (empty($options['email'])) {
 		$options['email'] = Users::loggedInUser(true)->emailAddress;
 	}
 	$payments = ucfirst($options['payments']);
-	$lcpayments = strtolower($payments);
 	$currency = strtolower(Q::ifset($options, 'currency', 'usd'));
 	if ($payments === 'Authnet' and $currency !== 'usd') {
 		throw new Q_Exception("Authnet doesn't support currencies other than USD", 'currency');
@@ -58,8 +60,8 @@ function Awards_payment_tool($options)
 		'Authnet' => 'Authorize.net',
 		'Stripe' => 'Stripe'
 	);
+	Q_Response::setToolOptions($options);
 	$payButton = Q::ifset($options, 'payButton', "Pay with " . $titles[$payments]);
-    Q_Response::setToolOptions($options);
 	return Q::view("Awards/tool/payment/$payments.php", compact(
 		'token', 'publishableKey', 'action', 'payButton'
 	));

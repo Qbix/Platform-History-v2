@@ -91,6 +91,20 @@ abstract class Users extends Base_Users
 	}
 
 	/**
+	 * Intelligently retrieves user by id
+	 * @method fetch
+	 * @static
+	 * @param {string} $userId
+	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
+	 * @return {Users_User|null}
+	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
+	 */
+	static function fetch ($userId, $throwIfMissing = false)
+	{
+		return Users_User::fetch($userId, $throwIfMissing);
+	}
+
+	/**
 	 * @method oAuth
 	 * @static
 	 * @param {string} $provider Currently only supports the value "facebook".

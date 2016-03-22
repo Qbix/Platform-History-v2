@@ -62,10 +62,10 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		 * @method authnet
 		 * @static
 		 *  @param {Object} [options] Any additional options to pass to the dialog, and also:
-		 *  @param {String} [params.planPublisherId=Q.Users.communityId] The publisherId of the subscription plan
-		 *  @param {String} [params.planStreamName="Awards/plan/main"] The name of the subscription plan's stream
-		 *  @param {String} [params.action] Required. Should be generated with Awards/subscription tool.
-		 *  @param {String} [params.token] Required. Should be generated with Awards/subscription tool.
+		 *  @param {String} [options.planPublisherId=Q.Users.communityId] The publisherId of the subscription plan
+		 *  @param {String} [options.planStreamName="Awards/plan/main"] The name of the subscription plan's stream
+		 *  @param {String} [options.action] Required. Should be generated with Awards/subscription tool.
+		 *  @param {String} [options.token] Required. Should be generated with Awards/subscription tool.
 		 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 		 */
 		authnet: function (options, callback) {
@@ -101,7 +101,8 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 					onClose: {"Awards": function () {
 						// TODO: don't do the subscription if payment info wasn't added
 						var message = o.confirm.message.interpolate({
-							title: plan.fields.title
+							title: plan.fields.title,
+							name: o.name
 						});
 						Q.extend(o, Q.text.Awards.subscriptions.confirm);
 						Q.confirm(message, function (result) {
@@ -199,8 +200,11 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		 * @static
 		 *  @param {Object} [options] Any additional options to pass to the dialog, and also:
 		 *  @param {Number} options.amount the amount to pay. 
-		 *  @param {String} [params.action] Required. Should be generated with Awards/payment tool.
-		 *  @param {String} [params.token] Required. Should be generated with Awards/ayment tool.
+		 *  @param {String} [options.action] Required. Should be generated with Awards/payment tool.
+		 *  @param {String} [options.token] Required. Should be generated with Awards/payment tool.
+		 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Awards/product or Awards/service stream
+		 *  @param {String} [options.streamName] The name of the Awards/product or Awards/service stream
+		 *  @param {String} [options.description] A short name or description of the product or service being purchased.
 		 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 		 */
 		authnet: function (options, callback) {
@@ -236,6 +240,7 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 					Awards.Currencies.load(function () {
 						var message = o.confirm.message.interpolate({
 							amount: o.amount,
+							name: o.name,
 							symbol: Awards.Currencies.symbols.USD
 						});
 						Q.extend(o, Q.text.Awards.payments.confirm);
@@ -258,9 +263,11 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:		
 		 *  @param {Number} options.amount the amount to pay. 
 		 *  @param {String} [options.currency="usd"] the currency to pay in.
+		 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Awards/product or Awards/service stream
+		 *  @param {String} [options.streamName] The name of the Awards/product or Awards/service stream
 		 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
 		 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
-		 *  @param {String} [options.description] A description of the product or service being purchased.
+		 *  @param {String} [options.description] A short name or description of the product or service being purchased.
 		 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
 		 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
 		 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
@@ -299,9 +306,12 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		
 		/**
 		 * Charge the user once you've obtained a token
-		 * @method subscribe
+		 * @method pay
 		 *  @param {String} payments can be "authnet" or "stripe"
-		 *  @param {Object} [options] Any additional options, which include:
+		 *  @param {Object} options Any additional options, which include:
+		 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Awards/product or Awards/service stream
+		 *  @param {String} [options.streamName] The name of the Awards/product or Awards/service stream
+		 *  @param {Number} options.description A short name or description of the product or service being purchased.
 		 *  @param {Number} options.amount the amount to pay. 
 		 *  @param {String} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
 		 *  @param {String} [options.token] the token obtained from the hosted forms
@@ -310,10 +320,11 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 		pay: function (payments, options, callback) {
 			var fields = {
 				payments: payments,
-				planPublisherId: options.planPublisherId,
-				planStreamName: options.planStreamName,
+				publisherId: options.publisherId,
+				streamName: options.streamName,
 				token: options.token,
-				amount: options.amount
+				amount: options.amount,
+				description: options.description
 			};
 			Q.req('Awards/payment', 'charge', function (err, response) {
 				var msg;
@@ -350,7 +361,8 @@ var Awards = Q.Awards = Q.plugins.Awards = {
 
 Awards.Subscriptions.authnet.options = {
 	planPublisherId: Users.communityId,
-	planStreamName: "Awards/plan/main"
+	planStreamName: "Awards/plan/main",
+	name: Users.communityName
 };
 Awards.Subscriptions.stripe.options = {
 	planPublisherId: Users.communityId,
@@ -358,8 +370,12 @@ Awards.Subscriptions.stripe.options = {
 	javascript: 'https://checkout.stripe.com/checkout.js',
 	name: Users.communityName
 };
-Awards.Payments.authnet.options = {};
+Awards.Payments.authnet.options = {
+	name: Users.communityName,
+	description: 'a product or service'
+};
 Awards.Payments.stripe.options = {
+	description: 'a product or service',
 	javascript: 'https://checkout.stripe.com/checkout.js',
 	name: Users.communityName
 };

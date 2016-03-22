@@ -38,11 +38,11 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
- * @type subscriptionPublisherId
+ * @type publisherId
  */
 /**
  * @property {String}
- * @type subscriptionStreamName
+ * @type streamName
  */
 /**
  * @property {String}
@@ -217,8 +217,8 @@ Base.prototype.fieldNames = function () {
 	return [
 		"id",
 		"userId",
-		"subscriptionPublisherId",
-		"subscriptionStreamName",
+		"publisherId",
+		"streamName",
 		"description",
 		"attributes",
 		"insertedTime",
@@ -305,37 +305,37 @@ return [["varchar","31","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_subscriptionPublisherId
+ * @method beforeSet_publisherId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_subscriptionPublisherId = function (value) {
+Base.prototype.beforeSet_publisherId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".subscriptionPublisherId");
+			throw new Error('Must pass a string to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".subscriptionPublisherId");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the subscriptionPublisherId field
+	 * Returns the maximum string length that can be assigned to the publisherId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_subscriptionPublisherId = function () {
+Base.prototype.maxSize_publisherId = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for subscriptionPublisherId column
+	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_subscriptionPublisherId = function () {
+Base.prototype.column_publisherId = function () {
 
 return [["varchar","255","",false],false,"",""];
 };
@@ -343,37 +343,37 @@ return [["varchar","255","",false],false,"",""];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_subscriptionStreamName
+ * @method beforeSet_streamName
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_subscriptionStreamName = function (value) {
+Base.prototype.beforeSet_streamName = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".subscriptionStreamName");
+			throw new Error('Must pass a string to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".subscriptionStreamName");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the subscriptionStreamName field
+	 * Returns the maximum string length that can be assigned to the streamName field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_subscriptionStreamName = function () {
+Base.prototype.maxSize_streamName = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for subscriptionStreamName column
+	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_subscriptionStreamName = function () {
+Base.prototype.column_streamName = function () {
 
 return [["varchar","255","",false],false,"",""];
 };

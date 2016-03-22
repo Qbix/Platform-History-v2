@@ -59,11 +59,11 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		$user = $options['user'];
 		$merchantCustomerId = $user->id;
 		
-		$c = new Awards_Customer();
-		$c->userId = $user->id;
-		$c->payments = 'authnet';
-		if ($c->retrieve()) {
-			return $c->customerId;
+		$customer = new Awards_Customer();
+		$customer->userId = $user->id;
+		$customer->payments = 'authnet';
+		if ($customer->retrieve()) {
+			return $customer->customerId;
 		}
 
 		$customerprofile = new AnetAPI\CustomerProfileType();
@@ -100,8 +100,8 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 			$parts = explode(' ', $message->getText());
 			$customerId = $parts[5];
 		}
-		$c->customerId = $customerId;
-		$c->save();
+		$customer->customerId = $customerId;
+		$customer->save();
 		return $customerId;
 	}
 	
@@ -152,7 +152,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 	 * @throws Awards_Exception_DuplicateTransaction
 	 * @throws Awards_Exception_HeldForReview
 	 * @throws Awards_Exception_ChargeFailed
-	 * @return {Awards_Charge} the saved database row corresponding to the charge
+	 * @return {string} The customerId of the Awards_Customer that was successfully charged
 	 */
 	function charge($amount, $currency = 'USD', $options = array())
 	{
@@ -160,7 +160,6 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		$paymentProfileId = $this->paymentProfileId($customerId);
 		
 		$options = array_merge($this->options, $options);
-		$user = $options['user'];
 		
 		// Common setup for API credentials
 		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
@@ -199,19 +198,7 @@ class Awards_Payments_Authnet extends Awards_Payments implements iAwards_Payment
 		}
 		switch ($tresponse->getResponseCode()) {
 		case '1':
-			$charge = new Awards_Charge();
-			$charge->userId = $user->id;
-			$charge->subscriptionPublisherId = Q::ifset($options, 'subscription', 'publisherId', '');
-			$charge->subscriptionStreamName = Q::ifset($options, 'subscription', 'name', '');
-			$charge->description = Q::ifset($options, 'description', '');
-			$charge->attributes = Q::json_encode(array(
-				"payments" => "authnet",
-				"customerId" => $customerId,
-				"amount" => sprintf("%0.2f", $amount),
-				"currency" => $currency
-			));
-			$charge->save();
-			return $charge;
+			return $customerId;
 		case '3': 
 			throw new Awards_Exception_DuplicateTransaction();
 		case '4':

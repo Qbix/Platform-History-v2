@@ -1,5 +1,5 @@
 <p>
-	Thanks for visiting <?php echo $communityName ?>, <?php echo $user->displayName() ?>.
+	Thanks for visiting <?php echo Q_Html::text($communityName) ?>, <?php echo Q_Html::text($user->displayName()) ?>.
 </p>
 
 <p>
