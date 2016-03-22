@@ -40,6 +40,22 @@
 				"defaults": {
 					"title": "Subscription"
 				}
+			},
+			"Awards/product": {
+				"description": "Product",
+				"create": false, 
+				"edit": false,
+				"defaults": {
+					"title": "Product"
+				}
+			},
+			"Awards/service": {
+				"description": "Service",
+				"create": false, 
+				"edit": false,
+				"defaults": {
+					"title": "Service"
+				}
 			}
 		}	
 	},
