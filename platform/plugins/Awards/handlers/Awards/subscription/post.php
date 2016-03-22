@@ -19,10 +19,7 @@ function Awards_subscription_post($params = array())
 	
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
-	if ($req['payments'] === 'authnet') {
-		Q_Valid::requireFields(array('token'), $req, true);
-		$token = $req['token'];
-	}
+	$token = Q::ifset($req, 'token', null);
 	$subscription = Awards::startSubscription($plan, $req['payments'], compact('token'));
 	Q_Response::setSlot('subscription', $subscription);
 }
