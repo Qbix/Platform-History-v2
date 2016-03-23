@@ -16,6 +16,8 @@ function Streams_after_Users_User_saveExecute($params)
 	if ($user->id === Users::communityId()) {
 		$firstName = Users::communityName();
 		$lastName = Users::communitySuffix();
+		$firstName = $firstName ? $firstName : "";
+		$lastName = $lastName ? $lastName : "";
 	} else {
 		$firstName = Q::ifset(Streams::$cache, 'register', 'first', '');
 		$lastName = Q::ifset(Streams::$cache, 'register', 'last', '');
