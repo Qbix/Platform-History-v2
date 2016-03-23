@@ -152,7 +152,7 @@ class Users_User extends Base_Users_User
 		 */
 		Q::event(
 			'Users/validate/username',
-			array('username' => & $username)
+			array('username' => & $username, 'user' => $this)
 		);
 		return array('username', $username);
 	}
