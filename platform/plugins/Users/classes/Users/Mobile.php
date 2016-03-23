@@ -200,6 +200,7 @@ class Users_Mobile extends Base_Users_Mobile
 			. ' mobileNumber='.urlencode($number);
 		$unsubscribe = 'Users/unsubscribe?mobileNumber='.urlencode($number);
 		$communityName = Users::communityName();
+		$communitySuffix = Users::communitySuffix();
 		/**
 		 * @event Users/resend {before}
 		 * @param {string} user
@@ -212,6 +213,7 @@ class Users_Mobile extends Base_Users_Mobile
 			'mobile' => $this,
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
+			'communitySuffix' => $communitySuffix,
 			'baseUrl' => Q_Request::baseUrl(),
 			'link' => $link,
 			'unsubscribe' => $unsubscribe

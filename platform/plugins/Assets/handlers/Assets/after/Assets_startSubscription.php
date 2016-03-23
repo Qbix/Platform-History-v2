@@ -21,13 +21,14 @@ function Assets_after_Assets_startSubscription($params)
 	$currencyName = $currencies['names'][$currency];
 	$communityId = Users::communityId();
 	$communityName = Users::communityName();
+	$communitySuffix = Users::communitySuffix();
 	$amount = $stream->getAttribute('amount');
 	$months = $stream->getAttribute('months');
 	$link = Q_Request::baseUrl('action.php')
 		. "/Assets/subscription?publisherId=$publisherId&userId=".$user->id;
 
 	$fields = compact(
-		'user', 'publisher', 'publisherId', 'communityId', 'communityName',
+		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency',
 		'name', 'symbol', 'currencyName', 'amount', 'months', 'startDate', 'endDate', 'link'
 	);

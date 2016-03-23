@@ -206,6 +206,7 @@ class Users_Email extends Base_Users_Email
 			'emailAddress' => $this->address
 		));
 		$communityName = Users::communityName();
+		$communitySuffix = Users::communitySuffix();
 		/**
 		 * @event Users/resend {before}
 		 * @param {string} user
@@ -219,6 +220,7 @@ class Users_Email extends Base_Users_Email
 			'email' => $this,
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
+			'communitySuffix' => $communitySuffix,
 			'baseUrl' => Q_Request::baseUrl(),
 			'link' => $link,
 			'unsubscribe' => $unsubscribe

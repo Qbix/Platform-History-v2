@@ -40,11 +40,12 @@ function Assets_after_Assets_charge($params)
 	$currencyName = $currencies['names'][$currency];
 	$communityId = Users::communityId();
 	$communityName = Users::communityName();
+	$communitySuffix = Users::communitySuffix();
 	$link = Q_Request::baseUrl('action.php')
 		. "/Assets/payment?publisherId=$publisherId&userId=".$user->id;
 	
 	$fields = compact(
-		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 
+		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency', 
 		'name', 'symbol', 'currencyName', 'amount', 'months', 'startDate', 'endDate', 'link'
 	);

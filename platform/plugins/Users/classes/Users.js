@@ -46,7 +46,7 @@ Users.clients = {};
 
 /**
  * Get the id of the main community from the config. Defaults to the app name.
- * @return {string} The id of the main community for the installed app.
+ * @return {String} The id of the main community for the installed app.
  */
 Users.communityId = function() {
 	var communityId = Q.Config.get(['Users', 'community', 'id'], null);
@@ -55,11 +55,19 @@ Users.communityId = function() {
 
 /**
  * Get the name of the main community from the config. Defaults to the app name.
- * @return {string} The name of the main community for the installed app.
+ * @return {String} The name of the main community for the installed app.
  */
 Users.communityName = function() {
 	var communityName = Q.Config.get(['Users', 'community', 'name'], null);
 	return communityName ? communityName : Q.Config.expect(['Q', 'app']);
+};
+
+/**
+ * Get the suffix of the main community from the config, such as "Incorporated" or "LLC"
+ * @return {String|null} The suffix of the main community for the installed app.
+ */
+Users.communitySuffix = function() {
+	return Q.Config.get(['Users', 'community', 'suffix'], null);
 };
 
 /**
