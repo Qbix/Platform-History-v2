@@ -77,7 +77,7 @@
 			"from": "+1234567890"
 		}
 	},
-	"Awards": {
+	"Assets": {
 		"payments":  {
 			"stripe": null, /* {
 				"secret": "XXXXX",

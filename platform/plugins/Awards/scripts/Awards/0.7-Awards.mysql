@@ -1,3 +1,0 @@
-ALTER TABLE `{$prefix}charge`
-CHANGE `subscriptionPublisherId` `publisherId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-CHANGE `subscriptionStreamName` `streamName` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';

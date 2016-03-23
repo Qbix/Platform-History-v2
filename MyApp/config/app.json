@@ -103,7 +103,7 @@
 			"Streams/user/height": true
 		}
 	},
-	"Awards": {
+	"Assets": {
 		"transactional": {
 			"charge": {
 				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",

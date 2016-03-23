@@ -40,7 +40,7 @@ Use Qbix to build a social app, or even turn your existing applications into soc
 * Sign up users anywhere: Qbix handles all the details of user signup, either with email, mobile number, or facebook. We've thought through lots of architectural and security implications, and the result "just works". Try it yourself.
 * Viral invitations: Don't simply rely on word of mouth. Let people invite each other through SMS, email and facebook, taking advantage of our one-step invitation system.
 * Increase engagement: When you build an app that lets people collaborate from any device, they will find their own reasons to engage with your app more frequently and meaningfully.
-* Reward your users: Balance incentives and monetize your app using Q's Awards plugin, which powers badges, credits and more. Integrate with any payment processor, such as Stripe.
+* Reward your users: Balance incentives and monetize your app using Q's Assets plugin, which powers badges, credits and more. Integrate with any payment processor, such as Stripe.
 * Measure and optimize: Rather having to guess how your app is doing, use Q's Metrics plugin built specifically to measure virality and engagement. Use up-to-date reports in your meetings to plan your strategy. Of course, you can still integrate Google Analytics or anything else.
 
 ###How Qbix, Inc. can help you

@@ -1,3 +1,0 @@
-ALTER TABLE `{$prefix}charge`
-DROP PRIMARY KEY,
-ADD PRIMARY KEY (userId, id);
