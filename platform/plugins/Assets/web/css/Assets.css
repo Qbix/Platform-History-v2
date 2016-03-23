@@ -1,0 +1,47 @@
+.Q_mobile .Assets_authnet {
+    zoom: 0.75;
+    -moz-transform: scale(0.75);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.75);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.75);
+    -webkit-transform-origin: 0 0;
+}
+
+.Assets_pay {
+    text-align: center;
+}
+
+.Assets_subscribe, .Assets_payment {
+    margin: 10px;
+}
+
+.Assets_pay_confirm {
+    text-align: center;
+    margin: 20px;
+}
+
+.Users_loggedOut .Assets_subscription_tool,
+.Users_loggedOut .Assets_payment_tool {
+	display: none;
+}
+
+
+.Q_notMobile .Assets_authnet {
+	width: 450px;
+	height: 480px;
+	overflow: auto;
+}
+
+.Q_mobile .Assets_authnet {
+	width: 133%;
+	height: 480px;
+    -ms-zoom: 0.75;
+    -moz-transform: scale(0.75);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.75);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.75);
+    -webkit-transform-origin: 0 0;
+	overflow: auto;
+}

@@ -1,0 +1,4 @@
+
+ALTER TABLE `{$prefix}earned` CHANGE `userId` `userId` VARCHAR( 31 ) NOT NULL;
+
+ALTER TABLE `{$prefix}leader` CHANGE `userId` `userId` VARCHAR( 31 ) NOT NULL;
