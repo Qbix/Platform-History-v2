@@ -46,6 +46,9 @@ Q.Tool.define("Users/avatar", function(options) {
 	if (state.me) {
 		state.userId = Users.loggedInUserId();
 	}
+	if (state.editable === true) {
+		state.editable = ['icon', 'name'];
+	}
 	this.refresh();
 	if (!state.userId || !state.reflectChanges) {
 		return;
@@ -62,7 +65,7 @@ Q.Tool.define("Users/avatar", function(options) {
 			})
 		);
 	}, this);
-	if (!state.editable || (Q.isArrayLike(state.editable) && state.editable.indexOf('name') < 0)) {
+	if (!state.editable || state.editable.indexOf('name') < 0) {
 		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/firstName', 'content')
 		.set(handleChange, this);
 		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/lastName', 'content')
