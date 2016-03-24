@@ -35,3 +35,6 @@ node_modules/
 # Class files includes
 .+\.php\.inc$
 .+\.js\.inc$
+
+# Custom plugins
+platform/plugins/Communities
