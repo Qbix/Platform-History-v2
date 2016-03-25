@@ -88,9 +88,6 @@ function Streams_after_Users_User_saveExecute($params)
 		));
 	
 		// Create some standard labels
-		// This also allows the users being invited to have access to
-		// Streams/user/firstName and Streams/user/lastName streams
-		// of the user inviting them.
 		$label = new Users_Label();
 		$label->userId = $user->id;
 		$label->label = 'Streams/invited';
@@ -104,6 +101,32 @@ function Streams_after_Users_User_saveExecute($params)
 		$label2->icon = 'labels/Streams/invitedMe';
 		$label2->title = 'Who invited me';
 		$label2->save(true);
+		
+		// By default, users they invite should see their full name
+		$access = new Streams_Access();
+		$access->publisherId = $user->id;
+		$access->streamName = 'Streams/user/firstName';
+		$access->ofUserId = '';
+		$access->ofContactLabel = 'Streams/invited';
+		$access->grantedByUserId = $user->id;
+		$access->readLevel = Streams::$READ_LEVEL['content'];
+		$access->writeLevel = -1;
+		$access->adminLevel = -1;
+		$access->save();
+		
+		$access = new Streams_Access();
+		$access->publisherId = $user->id;
+		$access->streamName = 'Streams/user/lastName';
+		$access->ofUserId = '';
+		$access->ofContactLabel = 'Streams/invited';
+		$access->grantedByUserId = $user->id;
+		$access->readLevel = Streams::$READ_LEVEL['content'];
+		$access->writeLevel = -1;
+		$access->adminLevel = -1;
+		$access->save();
+		
+		// NOTE: the above saving of access caused Streams::updateAvatar to run,
+		// insert a Streams_Avatar row for the new user, and properly configure it.
 		
 	} else if ($modifiedFields) {
 		if ($updates) {
