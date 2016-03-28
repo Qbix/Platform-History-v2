@@ -14,6 +14,15 @@
 class Q
 {
 	/**
+	 * Returns the id of the currently loaded app, found in the config under "Q"/"app"
+	 * @return {string}
+	 */
+	function app()
+	{
+		return Q_Config::expect('Q', 'app');
+	}
+	
+	/**
 	 * Used for shorthand for avoiding when you don't want to write
 	 * (isset($some_long_expression) ? $some_long_expression: null)
 	 * when you want to avoid possible "undefined variable" errors.
