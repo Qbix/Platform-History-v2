@@ -418,7 +418,7 @@ abstract class Streams extends Base_Streams
 			Q::event("Streams/fetch/$type", $params, 'after', false, $streams);
 		}
 
-		if (!empty($option['dontCache'])) {
+		if (empty($options['dontCache'])) {
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
@@ -428,7 +428,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Fetches one stream from the database.
-	 * @method fetch
+	 * @method fetchOne
 	 * @static
 	 * @param {string} $asUserId
 	 *  Set this to the user for which you are fetching the streams.
@@ -490,7 +490,7 @@ abstract class Streams extends Base_Streams
 	 * After the function returns, you will be able to call the methods
 	 * testReadLevel(), testWriteLevel() and testAdminLevel()
 	 * on these streams before using them on the user's behalf.
-	 * @method fetch
+	 * @method calculateAccess
 	 * @static
 	 * @param {string} $asUserId
 	 *  Set this to the user relative to whom access is calculated.
@@ -501,10 +501,12 @@ abstract class Streams extends Base_Streams
 	 *  The id of the user publishing these streams
 	 * @param {array} $streams
 	 *  An array of streams, obtained for example by Streams::fetch
-	 * @param {boolean} $recalculate=false
+	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
-	 * @param {string} [$actualPublisherId]
+	 * @param {string} [$actualPublisherId=null]
 	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 * @param {string} [$inheritAccess=true]
+	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
 	 *  The number of streams that were recalculated
 	 */
@@ -513,7 +515,8 @@ abstract class Streams extends Base_Streams
 		$publisherId,
 		$streams,
 		$recalculate = false,
-		$actualPublisherId = null)
+		$actualPublisherId = null,
+		$inheritAccess = true)
 	{
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser();
@@ -582,7 +585,7 @@ abstract class Streams extends Base_Streams
 			$streams3[] = $s;
 		}
 		
-		if (empty($names)) {
+		if (empty($streams3)) {
 			return count($streams2);
 		}
 
@@ -666,6 +669,34 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
+		
+		if ($inheritAccess) {
+			$streams4 = array();
+			$toFetch = array();
+			foreach ($streams3 as $s) {
+				if (empty($s->inheritAccess)) {
+					continue;
+				}
+				$inheritAccess = json_decode($s->inheritAccess, true);
+				if (!$inheritAccess or !is_array($inheritAccess)) {
+					return false;
+				}
+				$streams4[] = $s;
+				foreach ($inheritAccess as $ia) {
+					$toFetch[reset($ia)][] = next($ia);
+				}
+			}
+			// group the fetches by publisher and execute them in batches
+			foreach ($toFetch as $publisherId => $streamNames) {
+				$streamNames = array_unique($streamNames);
+				Streams::fetch($asUserId, $publisherId, $streamNames);
+			}
+			// this will now use the cached results of the above calls to Streams::fetch
+			foreach ($streams4 as $s) {
+				$s->inheritAccess(); 
+			}
+		}
+		
 		return count($streams2);
 	}
 	
@@ -2318,7 +2349,7 @@ abstract class Streams extends Base_Streams
 		if (isset($who['label'])) {
 			$label = $who['label'];
 			if (is_string($label)) {
-				$label = array_map('trim', explode("\t", $labels)) ;
+				$label = array_map('trim', explode("\t", $label)) ;
 			}
 			$raw_userIds = array_merge(
 				$raw_userIds, 

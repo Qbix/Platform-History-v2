@@ -2,6 +2,7 @@
 
 function Streams_0_8_7_Streams_mysql()
 {
+	$app = Q_Config::expect('Q', 'app');
 	$communityId = Users::communityId();
 	$user = Users_User::fetch($communityId, true);
 	
@@ -30,7 +31,7 @@ function Streams_0_8_7_Streams_mysql()
 		'streamName' => "Streams/images/",
 		'ofUserId' => '',
 		'grantedByUserId' => null,
-		'ofContactLabel' => "$communityId/admins",
+		'ofContactLabel' => "$app/admins",
 		'readLevel' => Streams::$READ_LEVEL['messages'], 
 		'writeLevel' => Streams::$WRITE_LEVEL['close'], 
 		'adminLevel' => Streams::$ADMIN_LEVEL['invite']

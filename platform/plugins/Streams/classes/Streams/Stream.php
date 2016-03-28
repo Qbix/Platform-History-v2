@@ -384,6 +384,8 @@ class Streams_Stream extends Base_Streams_Stream
 			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
+
+		$stream->calculateAccess();
 		
 		if (!$stream->retrieved) {
 			// The stream was just saved
@@ -1316,15 +1318,13 @@ class Streams_Stream extends Base_Streams_Stream
 		if (empty($this->inheritAccess)) {
 			return false;
 		}
-		$names = json_decode($this->inheritAccess, true);
-		if (!$names or !is_array($names)) {
+		$inheritAccess = json_decode($this->inheritAccess, true);
+		if (!$inheritAccess or !is_array($inheritAccess)) {
 			return false;
 		}
 		$public_source = Streams::$ACCESS_SOURCES['public'];
-		$contact_source = Streams::$ACCESS_SOURCES['contact'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
 		$inherited_public_source = Streams::$ACCESS_SOURCES['inherited_public'];
-		$inherited_contact_source = Streams::$ACCESS_SOURCES['inherited_contact'];
 		$inherited_direct_source = Streams::$ACCESS_SOURCES['inherited_direct'];
 		$direct_sources = array(
 			$inherited_direct_source, $direct_source
@@ -1340,12 +1340,12 @@ class Streams_Stream extends Base_Streams_Stream
 		// Inheritance only goes one "generation" here.
 		// To implement several "generations" of inheritance, you can do things like:
 		// 'inheritAccess' => '[["publisherId","grandparentStreamName"], ["publisherId","parentStreamName"]]'
-		foreach ($names as $name) {
-			if (!is_array($name)) {
+		foreach ($inheritAccess as $ia) {
+			if (!is_array($ia)) {
 				continue;
 			}
-			$publisherId = reset($name);
-			$name = next($name);
+			$publisherId = reset($ia);
+			$name = next($ia);
 			$stream = Streams::fetchOne(
 				$this->get('asUserId', ''),
 				$publisherId,
@@ -1600,28 +1600,32 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 
 	/**
-	 * Set access data for the stream. Access data is calculated:
-	 *	<ol>
-	 * 		<li>from read/write/admin level fields of the stream</li>
-	 *		<li>from labels. Streams_Access record may contain &lt;publisherId&gt;, &lt;streamName&gt;
-	 *			(allowed exact match or generic name "&lt;streamType&gt;/") and 
-	 *			&lt;ofContactLabel&gt;. If &lt;publisherId&gt; is recorded in Users_Contact
-	 *			to have either current user or &lt;ofContactLabel&gt; as contact, access claculation is 
-	 *			considering such record.</li>
-	 *		<li>from user. Stream_Access record may contain &lt;publisherId&gt;, &lt;streamName&gt;
-	 *			(allowed exact match or generic name "&lt;streamType&gt;/") and 
-	 *			&lt;ofUserId&gt;. Such record is considered in access calculation.</li>
-	 *	</ol>
+	 * Calculates the access for the current stream by querying the database.
+	 * Modifies this object, by setting its access levels.
+	 * After the function returns, you will be able to call the methods
+	 * testReadLevel(), testWriteLevel() and testAdminLevel()
+	 * on these streams before using them on the user's behalf.
 	 * @method calculateAccess
-	 * @param {string} $asUserId=null The user relative to whom the access is calculated
+	 * @static
+	 * @param {string} $asUserId
+	 *  Set this to the user relative to whom access is calculated.
 	 *  If this matches the publisherId, just sets full access and calls publishedByFetcher(true).
 	 *  If this is '', only returns the streams anybody can see.
 	 *  If this is null, the logged-in user's id is used, or '' if no one is logged in
-	 * @param {boolean} $recalculate=false Pass true here to force recalculating even if access was already calculated
-	 * @param {string} [$actualPublisherId] for internal use only
-	 * @chainable
+	 * @param {boolean} [$recalculate=false]
+	 *  Pass true here to force recalculating access to streams for which access was already calculated
+	 * @param {string} [$actualPublisherId=null]
+	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 * @param {string} [$inheritAccess=true]
+	 *  Set to false to skip inheriting access from other streams, even if specified
+	 * @return {integer}
+	 *  The number of streams that were recalculated
 	 */
-	function calculateAccess($asUserId = null, $recalculate = false, $actualPublisherId = null)
+	function calculateAccess(
+		$asUserId = null, 
+		$recalculate = false, 
+		$actualPublisherId = null, 
+		$inheritAccess = true)
 	{
 		Streams::calculateAccess($asUserId, $this->publisherId, array($this), $recalculate, $actualPublisherId);
 		return $this;
