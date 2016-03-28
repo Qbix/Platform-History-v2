@@ -5024,7 +5024,7 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 			Q.formPost(action, {"just": "something"}, 'post', function afterFormPost() {
 				// we are hoping this returns after the form post
 				Q.nonce = Q.cookie('Q_nonce');
-				var reason = location.hostname.isIPAddress ? " Saving cookies to IP address is not supported." : "";
+				var reason = location.hostname.isIPAddress() ? " Saving cookies to IP address is not supported." : "";
 				if (!Q.nonce) {
 					alert("Our server couldn't set cookies in this browser." + reason);
 				}
