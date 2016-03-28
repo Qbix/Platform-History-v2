@@ -372,7 +372,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		visibility: 'hidden'
 	};
 	var $div = $('<div />').addClass('Q_overlay').css(css).prependTo('body');
-	var src = $div.css('background-image').match(/url\\(\\"?(.*?)\\"?\\)/)[1];
+	var src = $div.css('background-image').match(/url\(\"?(.*?)\"?\)/)[1];
 	$div.remove();
 	if (src.isUrl() && !bgLoaded) {
 		var $img = $('<img />').on('load', function () {
