@@ -194,8 +194,8 @@ class Q_Session
 			if (self::id()) {
 				$s = "?$name=".self::id();
 				$suffix = Q_Uri::suffix();
-				$suffix[$base_url] = isset($suffix[$base_url])
-					? $suffix[$base_url].$s 
+				$suffix[$baseUrl] = isset($suffix[$baseUrl])
+					? $suffix[$baseUrl].$s
 					: $s;
 				Q_Uri::suffix($suffix);
 			}
