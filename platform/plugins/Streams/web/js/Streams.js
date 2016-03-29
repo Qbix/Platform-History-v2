@@ -2713,7 +2713,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  */
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
-	var latest = Message.latestOrdinal(publisherId, streamName, true);
+	var latest = Message.latestOrdinal(publisherId, streamName);
 	if (!latest && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return false;

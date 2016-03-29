@@ -121,9 +121,7 @@ class Q_Session
 		 * @param {string} id
 		 * @return {string}
 		 */
-		if ($id2 = Q::event('Q/session/id', array(), 'before', false, $id)) {
-			return $id2;
-		}
+		$id = Q::event('Q/session/id', array(), 'before', false, $id);
 		if (isset($id)) {
 			return session_id($id);
 		}
@@ -269,7 +267,7 @@ class Q_Session
 					$class = self::$session_db_row_class;
 					$row = new $class();
 					$row->$id_field = $id;
-					if ($row->retrieve(null, null, array('lock' => 'FOR UPDATE'))) {
+					if ($row->retrieve()) {
 						self::$session_db_row = $row;
 					} else {
 						// Start a new session with our own id
@@ -304,10 +302,10 @@ class Q_Session
 				$durationName = self::durationName();
 				$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
 				Q_Response::setCookie(self::name(), $id, $duration ? time()+$duration : 0);
-				session_start();
 			} else if (empty($_SESSION)) {
 				$_SESSION = array();
 			}
+			session_start();
 		} catch (Exception $e) {
 			$app = Q_Config::get('Q', 'app', null);
 			$prefix = $app ? "$app/" : '';
@@ -558,16 +556,23 @@ class Q_Session
 			if(php_sapi_name() == 'cli') {
 				return false;
 			}
+			
+			$our_SESSION = $_SESSION;
+			$old_data = self::$sess_data;
+			$changed = ($sess_data !== $old_data);
+			$result = false;
 
 			/**
 			 * @event Q/session/write {before}
 			 * @param {string} id
 			 * @param {string} sess_data
+			 * @param {string} old_data
+			 * @param {boolean} changed
 			 * @return {boolean}
 			 */
 			if (false === Q::event(
 				'Q/session/write', 
-				compact('id', 'sess_data'), 
+				compact('id', 'sess_data', 'old_data', 'changed'), 
 				'before'
 			)) {
 				return false;
@@ -575,7 +580,7 @@ class Q_Session
 			if (empty(self::$session_save_path)) {
 				self::$session_save_path = self::savePath();
 			}
-			if (! empty(self::$session_db_connection)) {
+			if (!empty(self::$session_db_connection)) {
 				// Create a new row to be saved in the session table
 				$db_row_class = self::$session_db_row_class;
 				// Make sure it has a primary key!
@@ -590,35 +595,7 @@ class Q_Session
 				$updated_field = self::$session_db_updated_field;
 				$duration_field = self::$session_db_duration_field;
 				$row = self::$session_db_row;
-				if (!$row->wasRetrieved()) {
-					$row->$id_field = $id;
-				}
-				$row->$data_field = $sess_data;
-				$row->$duration_field = Q_Config::get(
-					'Q', 'session', 'durations', Q_Request::formFactor(),
-					Q_Config::expect('Q', 'session', 'durations', 'session')
-				);
-				/**
-				 * @event Q/session/save {before}
-				 * @param {string} id
-				 * @param {string} sess_data
-				 * @return {boolean}
-				 */
-				if (false === Q::event(
-					'Q/session/save', 
-					array(
-						'row' => $row,
-						'id_field' => $id_field,
-						'data_field' => $data_field,
-						'updated_field' => $updated_field,
-						'duration_field' => $duration_field
-					),
-					'before'
-				)) {
-					return false;
-				}
-				$row->save(false, true);
-				$result = true;
+				$row->$id_field = $id;
 			} else {
 				$duration_name = self::durationName();
 				$id1 = substr($id, 0, 4);
@@ -626,42 +603,98 @@ class Q_Session
 				$ssp = self::$session_save_path;
 				$sess_file = $ssp . DS . "$duration_name/$id1/$id2";
 				$dir = $ssp . DS . "$duration_name/$id1/";
-				if (!is_dir($dir)) {
-					mkdir($dir, fileperms($ssp), true);
+			}
+			if ($changed) {
+				// Apparently, we want to save some changes.
+				// The convention to avoid locking is that everything
+				// stored in sessions must be mergeable using the
+				// Q_Tree merge algorithm.
+				// So we will retrieve the latest session data again,
+				// merge our changes over it, and save.
+				$params = array(
+					'id_field' => $id_field,
+					'data_field' => $data_field,
+					'updated_field' => $updated_field,
+					'duration_field' => $duration_field,
+					'changed' => $changed,
+					'sess_data' => $sess_data,
+					'old_data' => $old_data
+				);
+				if (!empty(self::$session_db_connection)) {
+					$row->retrieve();
+					$existing_data = Q::ifset($row, $data_field, "");
+					$params['row'] = $row;
+				} else {
+					if (!is_dir($dir)) {
+						mkdir($dir, fileperms($ssp), true);
+					}
+					if (!is_writable($dir)) {
+						// alert the developer to this problem
+						Q::log("$sess_file is not writable", 'fatal');
+						die("$sess_file is not writable");
+					}
+					$file = fopen($sess_file, "w");
+					if (!$file) {
+						return false;
+					}
+					$params['row'] = $row;
+					$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
+					$existing_data = fread($file, $maxlength);
 				}
-				if (!is_writable($dir)) {
-					// alert the developer to this problem
-					Q::log("$sess_file is not writable", 'fatal');
-					die("$sess_file is not writable");
-				}
-				$fp = fopen($sess_file, "w");
-				if (!$fp) {
+				$_SESSION = array($existing_data);
+				session_decode();
+				$t = new Q_Tree($_SESSION);
+				$t->merge($our_SESSION);
+				$_SESSION = $t->getAll();
+				$params['existing_data'] = $existing_data;
+				$params['merged_data'] = $merged_data = session_encode();
+				/**
+				 * @event Q/session/save {before}
+				 * @param {string} sess_data
+				 * @param {string} old_data
+				 * @param {string} existing_data
+				 * @param {string} merged_data
+				 * @param {boolean} changed
+				 * @param {Db_Row} row
+				 * @return {boolean}
+				 */
+				if (false === Q::event('Q/session/save', $params, 'before')) {
 					return false;
 				}
-				$result = fwrite($fp, $sess_data);
-				fclose($fp);
+				if (! empty(self::$session_db_connection)) {
+					$row->$data_field = $merged_data;
+					$row->$duration_field = Q_Config::get(
+						'Q', 'session', 'durations', Q_Request::formFactor(),
+						Q_Config::expect('Q', 'session', 'durations', 'session')
+					);
+					$row->save();
+					$result = true;
+				} else {
+					$result = fwrite($file, $merged_data);
+					fclose($file);
+				}
 			}
-			$changed = ($sess_data !== self::$sess_data);
-			$old_data = self::$sess_data;
 			/**
 			 * @event Q/session/write {after}
 			 * @param {string} id
+			 * @param {boolean} changed
 			 * @param {string} sess_data
+			 * @param {string} old_data
+			 * @param {string} existing_data
+			 * @param {string} merged_data
 			 * @param {string} data_field
 			 * @param {string} updated_field
 			 * @param {string} duration_field
 			 * @param {string} sess_file
 			 * @param {integer} row
-			 * @param {boolean} changed
-			 * @param {string} old_data
 			 * @return {mixed}
 			 */
 			$result = Q::event(
 				'Q/session/write', 
 				compact(
-					'id', 'sess_data', 'data_field', 
-					'updated_field', 'duration_field', 'sess_file', 'row',
-					'changed', 'old_data'
+					'id', 'data_field', 'updated_field', 'duration_field', 
+					'sess_file', 'row',
+					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
 				), 
 				'after'
 			);

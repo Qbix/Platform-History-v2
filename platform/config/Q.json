@@ -74,7 +74,8 @@
 				"year": 31536000,
 				"decade": 315360000
 			},
-			"gc": false
+			"gc": false,
+			"maxlength": 4095
 		},
 		"javascript": {
 			"responseExtras": {
