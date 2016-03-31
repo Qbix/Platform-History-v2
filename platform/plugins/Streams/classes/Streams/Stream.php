@@ -1596,6 +1596,9 @@ class Streams_Stream extends Base_Streams_Stream
 			'adminLevel' => $this->get('adminLevel', $this->adminLevel)
 		);
 		$result['isRequired'] = $this->isRequired();
+		if ($this->get('participant')) {
+			$result['participant'] = $this->get('participant')->exportArray();
+		}
 		return $result;
 	}
 
@@ -1698,14 +1701,12 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Fetch participants of the stream.
 	 * @method getParticipants
-	 * @param {array} [options=array()] An array of options determining how messages will be fetched, which can include:
-	 *   "state" => One of "invited", "participating", "left"
-	 *   Can also be negative, then the value will be substracted from maximum number of existing messages and +1 will be added
-	 *   to guarantee that $max = -1 means highest message ordinal.
-	 *   "limit" => Number of the participants to be selected. Defaults to 1000.
-	 *   "offset" => Number of the messages to be selected. Defaults to 1000.
-	 *   "ascending" => Sorting of fetched participants by insertedTime. If true, sorting is ascending, if false - descending. Defaults to false.
-	 *   "type" => Optional string specifying the particular type of messages to get
+	 * @param {array} [$options=array()] An array of options determining how messages will be fetched, which can include:
+	 * @param {string} [$options.state] One of "invited", "participating", "left"
+	 * @param {string} [$options.limit] Number of the participants to be selected. Defaults to 1000.
+	 * @param {string} [$options.offset] Number of the messages to be selected. Defaults to 1000.
+	 * @param {string} [$options.ascending] Sorting of fetched participants by insertedTime. If true, sorting is ascending, if false - descending. Defaults to false.
+	 * @param {string} [$options.type] Optional string specifying the particular type of messages to get
 	 */
 	function getParticipants($options)
 	{
@@ -1735,6 +1736,25 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$q->orderBy('insertedTime', isset($options['ascending']) ? $options['ascending'] : $ascending);
 		return $q->fetchDbRows(null, '', 'userId');
+	}
+	
+	/**
+	 * Fetch a particular participant in the stream, if it exists.
+	 * @method getParticipant
+	 * @param {string} [$userId=Users::loggedInUser(true)->id] The id of the user who may or may not be participating in the stream
+	 * @return {Db_Row|null}
+	 */
+	function getParticipant($userId = null)
+	{
+		if (!$userId) {
+			$userId = Users::loggedInUser(true)->id;
+		}
+		$rows = Streams_Participant::select('*')->where(array(
+			'publisherId' => $this->publisherId,
+			'streamName' => $this->name,
+			'userId' => $userId
+		))->limit(1)->fetchDbRows();
+		return $rows ? reset($rows) : null;
 	}
 	
 	/**

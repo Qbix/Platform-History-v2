@@ -611,10 +611,7 @@ Streams.create = function (fields, callback, related, options) {
 			return callback && callback.call(this, msg, args);
 		}
 		if (related) {
-			Streams.related.cache.each([related.publisherId, related.streamName],
-			function (key) {
-				Streams.related.cache.remove(key);
-			});
+			Streams.related.cache.removeEach([related.publisherId, related.streamName]);
 		}
 		Streams.construct(data.slots.stream, {}, function Stream_create_construct_handler (err, stream) {
 			var msg = Q.firstErrorMessage(err);
@@ -637,10 +634,7 @@ Streams.create = function (fields, callback, related, options) {
 			}
 			callback && callback.call(stream, null, stream, extra, data.slots);
 			// process various messages posted to Streams/participating
-			Stream.refresh(
-				Users.loggedInUserId(), 'Streams/participating', null,
-				{ messages: true, unlessSocket: true }
-			);
+			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
 			return;
 		});
 	}, { 
@@ -854,7 +848,6 @@ Streams.getParticipating = function(callback) {
  * @param {Object} [options] A hash of options, including:
  *   @param {Boolean} [options.messages] If set to true, then besides just reloading the stream, attempt to catch up on the latest messages
  *   @param {Number} [options.max] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
- *   @param {Number} [options.unlessSocket] Whether to avoid doing any requests when a socket is attached
  *   @param {Array} [options.duringEvents] Streams.refresh.options.duringEvents are the window events that can lead to an automatic refresh
  *   @param {Number} [options.minSeconds] Streams.refresh.options.minEvents is the minimum number of seconds to wait between automatic refreshes
  *   @param {Number} [options.timeout] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
@@ -1360,7 +1353,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 				if (options && options.extra) {
 					params.concat(extra);
 				}
-				callback && callback.apply(this, params);
+				callback.apply(this, params);
 			}
 		});
 		result = true;
@@ -1531,10 +1524,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		var stream = data.slots.stream || null;
 		if (stream) {
 			// process the Streams/changed message, if stream was retained
-			Stream.refresh(stream.publisherId, stream.name, callback, Q.extend({
-				messages: true,
-				unlessSocket: true
-			}, options));
+			_refreshUnlessSocket(stream.publisherId, stream.name, callback, options);
 		} else {
 			callback && callback.call(that, null, stream);
 		}
@@ -2176,14 +2166,8 @@ Stream.close = function _Stream_remove (publisherId, streamName, callback) {
 		var stream = data.slots.stream;
 		if (stream) {
 			// process the Streams/closed message, if stream was retained
-			Stream.refresh(stream.publisherId, stream.name, null, {
-				messages: true,
-				unlessSocket: true
-			});
-			Stream.refresh(
-				Users.loggedInUserId(), 'Streams/participating', null,
-				{ messages: true, unlessSocket: true }
-			);
+			_refreshUnlessSocket(stream.publisherId, stream.name);
+			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
 		}
 		callback && callback.call(this, err, data.slots.result || null);
 	}, { method: 'delete', fields: fields, baseUrl: baseUrl });
@@ -3518,7 +3502,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Streams.getParticipating = Q.getter(Streams.getParticipating, {
-		cache: Q.Cache.document("Streams.getParticipating", 10)
+		cache: Q.Cache[where]("Streams.getParticipating", 10)
 	});
 
 	Streams.related = Q.getter(Streams.related, {
@@ -3988,8 +3972,25 @@ Q.onInit.add(function _Streams_onInit() {
 					// the correct data into the cache
 				}
 
-				function updateRelatedCache(fields) {
+				function updateRelatedCache(instructions) {
 					Streams.related.cache.removeEach([msg.publisherId, msg.streamName]);
+					if (instructions.toPublisherId) {
+						Streams.related.cache.removeEach(
+							[instructions.toPublisherId, instructions.toStreamName]
+						);
+						Streams.Stream.refresh(
+							instructions.toPublisherId, instructions.toStreamName, 
+							null, { messages: true }
+						);
+					} else if (instructions.fromPublisherId) {
+						Streams.related.cache.removeEach(
+							[instructions.fromPublisherId, instructions.fromStreamName]
+						);
+						Streams.Stream.refresh(
+							instructions.fromPublisherId, instructions.fromStreamName,
+							null, { messages: true }
+						);
+					}
 				}
 			});
 		}
@@ -4054,11 +4055,11 @@ function _scheduleUpdate() {
 	}, ms);
 }
 
-function _refreshUnlessSocket(publisherId, streamName) {
-	Stream.refresh(publisherId, streamName, null, {
+function _refreshUnlessSocket(publisherId, streamName, callback, options) {
+	Stream.refresh(publisherId, streamName, callback || null, Q.extend({
 		messages: true,
 		unlessSocket: true
-	});
+	}, options));
 }
 
 Q.Socket.onConnect('Streams').set(function (socket) {

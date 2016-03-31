@@ -177,10 +177,9 @@ function parse_url (str, component) {
  */
 var smtpTransport = null;
 Utils.sendEmail = function (to, subject, view, fields, options, callback) {
-	var mailer = require('nodemailer'),
-//		mustache = require('mustache'),
-		handlebars = require('handlebars'),
-		key = Q.Config.get(['Users', 'email', 'log', 'key'], 'email');
+	var mailer = require('nodemailer');
+	var handlebars = require('handlebars');
+	var key = Q.Config.get(['Users', 'email', 'log', 'key'], 'email');
 
 	if (typeof fields === 'function') {
 		callback = fields;
@@ -235,7 +234,6 @@ Utils.sendEmail = function (to, subject, view, fields, options, callback) {
 	var logContent = 'Sent email message to ' + to
 		+ ":\n" + mailOptions.subject
 		+ "\n" + (mailOptions.html || mailOptions.text);
-	var key;
 	if (smtpTransport) {
 		smtpTransport.sendMail(mailOptions, callback);
 	} else {
@@ -266,8 +264,8 @@ Utils.sendEmail = function (to, subject, view, fields, options, callback) {
 var twilioClient = null;
 Utils.sendSMS = function (to, view, fields, options, callback) {
 	// some mobile number normalization
-	var number, provider, address = [],
-		key = Q.Config.get(['Users', 'mobile', 'log', 'key'], 'mobile');
+	var number, provider, address = [];
+	var key = Q.Config.get(['Users', 'mobile', 'log', 'key'], 'mobile');
 	if (to.slice(0, 2) === "00") {
 		// convert 00 to + in international numbers
 		number = '+'+to.slice(2);
@@ -309,9 +307,7 @@ Utils.sendSMS = function (to, view, fields, options, callback) {
 	// no twilio - see if we can send via smtp
 	if (!Q.Config.get(['Users', 'email', 'smtp'], {host: 'sendmail'})) {
 		if (key) {
-			Q.log('would have sent message to '
-				+number+":\n"+content, key
-			);
+			Q.log('would have sent message to '+number+":\n"+content, key);
 		}
 		callback(null, 'log');
 		return;

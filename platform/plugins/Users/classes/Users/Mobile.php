@@ -62,16 +62,6 @@ class Users_Mobile extends Base_Users_Mobile
 		$app = Q_Config::expect('Q', 'app');
 		$body = Q::view($view, $fields);
 
-		$overrideLog = Q::event(
-			'Users/mobile/log', 
-			compact('mobileNumber', 'body'), 
-			'before'
-		);
-		if(is_null($overrideLog)
-		and $key = Q_Config::get('Users', 'mobile', 'log', 'key', null)) {
-			Q::log("\nSent mobile message to {$this->number}:\n$body", $key);
-		}
-
 		$sent = false;
 		if (!empty($options['delay'])) {
 			// Try to use Node.js to send the message
@@ -97,13 +87,12 @@ class Users_Mobile extends Base_Users_Mobile
 			$token = Q_Config::get('Users', 'mobile', 'twilio', 'token', null);
 
 			if ($sid and $token) {
-					$client = new Services_Twilio($sid, $token);
-					$message = $client->account->sms_messages->create(
-						$from, // From a valid Twilio number
-						$number, // Text this number
-						Q::view($view, $fields)
-					);
-
+				$client = new Services_Twilio($sid, $token);
+				$message = $client->account->sms_messages->create(
+					$from, // From a valid Twilio number
+					$number, // Text this number
+					$body
+				);
 			} else {
 				if(!Q_Config::get('Users', 'email', 'smtp', null)){
 					Q_Response::setNotice("Q/mobile", "Please set up transport in Users/mobile/twilio as in docs", false);
@@ -115,7 +104,8 @@ class Users_Mobile extends Base_Users_Mobile
 				}
 
 				// Set up the default mail transport
-				$host = Q_Config::get('Users', 'email', 'smtp', 'host', 'sendmail');
+				$smtp = Q_Config::get('Users', 'email', 'smtp', array('host' => 'sendmail'));
+				$host = Q::ifset($smtp, 'host', null);
 				if ($host === 'sendmail') {
 					$transport = new Zend_Mail_Transport_Sendmail('-f'.reset($from));
 				} else {
@@ -123,10 +113,19 @@ class Users_Mobile extends Base_Users_Mobile
 						$smtp = $host;
 						$host = $smtp['host'];
 						unset($smtp['host']);
+						$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
 					} else {
 						$smtp = null;
 					}
-					$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
+				}
+				
+				if ($key = Q_Config::get('Users', 'mobile', 'log', 'key', 'mobile')) {
+					$logMessage = "Sent message to $number:\n$body";
+					if (!isset($transport)) {
+						Q_Response::setNotice("Q/mobile", "Please set up Twilio in Users/mobile/twilio as in docs.", false);
+						$logMessage = "Would have $logMessage";
+					}
+					Q::log($logMessage, $key);
 				}
 
 				$mail = new Zend_Mail();
@@ -160,7 +159,7 @@ class Users_Mobile extends Base_Users_Mobile
 		 */
 		Q::event(
 			'Users/email/sendMessage', 
-			compact('view', 'fields', 'options', 'mail', 'app'),
+			compact('view', 'fields', 'options', 'mail', 'app', 'message', 'mail'),
 			'after'
 		);
 		return true;
