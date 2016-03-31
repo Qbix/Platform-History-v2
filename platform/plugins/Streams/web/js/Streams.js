@@ -1238,7 +1238,8 @@ var Stream = Streams.Stream = function (fields) {
 		'inheritAccess',
 		'closedTime',
 		'access',
-		'isRequired'
+		'isRequired',
+		'participant'
 	]);
 	this.typename = 'Q.Streams.Stream';
 	prepareStream(this, fields);
@@ -3450,6 +3451,10 @@ function prepareStream(stream) {
 	if (stream.fields.access) {
 		stream.access = Q.copy(stream.fields.access);
 		delete stream.fields.access;
+	}
+	if (stream.fields.participant) {
+		stream.participant = Q.copy(stream.fields.participant);
+		delete stream.fields.participant;
 	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
