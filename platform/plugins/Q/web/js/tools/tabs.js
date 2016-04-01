@@ -12,6 +12,7 @@
  *  @param {Array} [options.tabs] An associative array of name: title pairs.
  *  @param {Array} [options.urls] An associative array of name: url pairs to override the default urls.
  *  @param {String} [options.field='tab'] Uses this field when urls doesn't contain the tab name.
+ *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
  *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
  *  @param {Boolean} [options.compact=false] Display the tabs interface in a compact space with a contextual menu
  *  @param {Object} [options.overflow]
@@ -74,6 +75,7 @@ Q.Tool.define("Q/tabs", function(options) {
 	field: 'tab',
 	slot: 'content,title',
 	selectors: { content: '#content_slot' },
+	checkQueryString: false,
 	overflow: {
 		content: '<span><span>{{count}} more</span></span>',
 		glyph: '&#9662;',
@@ -233,7 +235,7 @@ Q.Tool.define("Q/tabs", function(options) {
 		var name = tool.getName(tab);
 		var url = location.hash.queryField('url');
 		if (url === undefined) {
-			url = window.location.href.split('#')[0];
+			url = window.location.href.split(state.checkQueryString ? '#' : '?')[0];
 		} else {
 			url = Q.url(url);
 		}
