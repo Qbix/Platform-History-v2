@@ -305,6 +305,8 @@ class Q_Session
 			} else if (empty($_SESSION)) {
 				$_SESSION = array();
 			}
+			ini_set('session.use_cookies', 0); // we are gonna handle the cookies, thanks
+			session_cache_limiter(''); // don't send the cache limiter headers either
 			session_start();
 		} catch (Exception $e) {
 			$app = Q_Config::get('Q', 'app', null);
