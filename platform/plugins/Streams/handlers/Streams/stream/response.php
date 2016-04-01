@@ -21,7 +21,9 @@ function Streams_stream_response()
 			$userId,
 			$publisherId,
 			$name,
-			$fields ? $fields : '*');
+			$fields ? $fields : '*',
+			array('withParticipant' => true)
+		);
 		if (Q_Request::slotName('streams')) {
 			Q_Response::setSlot('streams', Db::exportArray($streams));
 		}
@@ -50,7 +52,6 @@ function Streams_stream_response()
 	if ($userId && !empty($_REQUEST['join'])) {
 		$stream->join(); // NOTE: one of the rare times we may change state in a response handler
 	}
-	$stream->set('participant', $stream->getParticipant());
 	if (Q_Request::slotName('stream')) {
 		Q_Response::setSlot('stream', $stream->exportArray());
 	}

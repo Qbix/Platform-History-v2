@@ -1403,35 +1403,34 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Fetch all the streams which are related to, or from, this stream.
+	 * Fetch all the streams which are related to, or from, this stream
 	 * @method related
 	 * @static
 	 * @param {string} $asUserId
 	 *  The user who is fetching
-	 * @param {string} $publisherId
-	 *  An array of criteria that includes either
-	 * @param {string} $toStreamName
-	 *  The name of the category
-	 * @param {mixed} $isCategory
+	 * @param {mixed} $isCategory=true
 	 *  If false, returns the categories that this stream is related to.
 	 *  If true, returns all the streams this related to this category.
 	 *  If a string, returns all the streams related to this category with names prefixed by this string.
 	 * @param {array} $options=array()
-	 *	'limit' =>  number of records to fetch
-	 *	'offset' => offset to start
-	 *  'orderBy' => defaults to false, which means order by descending weight
-	 *  'type' =>  if specified, this filters the type of the relation
-	 *  'prefix' => if specified, this filters by the prefix of the related streams
-	 *	'where' =>  you can also specify any extra conditions here
-	 *  'extra' => An array of any extra options to pass to Streams::fetch when fetching streams
-	 *	'relationsOnly' =>  If true, returns only the relations to/from stream, doesn't fetch the streams.
-	 *		Useful if publisher id of relation objects is not the same as provided by publisherId.
-	 *  'streamsOnly' => If true, returns only the streams related to/from stream, doesn't return the relations.
-	 *      Useful for shorthand in while( ) statements.
-	 *  'streamFields' => If specified, fetches only the fields listed here for any streams
-	 *  'skipFields' => Optional array of field names. If specified, skips these fields when fetching streams
+	 * @param {boolean} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight.
+	 * @param {integer} [$options.limit] number of records to fetch
+	 * @param {integer} [$options.offset] offset to start from
+	 * @param {double} [$options.min] the minimum orderBy value (inclusive) to filter by, if any
+	 * @param {double} [$options.max] the maximum orderBy value (inclusive) to filter by, if any
+	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
+	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
+	 * @param {array} [$options.where] you can also specify any extra conditions here
+	 * @param {array} [$options.fetchOptions] An array of any options to pass to Streams::fetch when fetching streams
+	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
+	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
+	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
+	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
+	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
 	 * @return {array}
-	 *  Returns array($relations, $relatedStreams, $this)
+	 *  Returns array($relations, $relatedStreams, $stream).
+	 *  However, if $streamName wasn't a string or ended in "/"
+	 *  then these third parameter is an array of streams.
 	 */
 	function related(
 		$asUserId,

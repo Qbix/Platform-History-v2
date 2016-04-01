@@ -11,11 +11,16 @@ function Streams_stream_response_streams()
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
 
+	$options = array('withParticipant' => true);
+	if (isset($limit)) {
+		$options['limit'] = $limit;
+	}
 	$streams = Streams::fetch(
 		$userId,
 		$publisherId,
 		$name,
 		$fields ? $fields : '*',
-		$limit ? compact('limit') : array());
+		$options
+	);
 	return Streams::$cache['streams'] = Db::exportArray($streams);
 }

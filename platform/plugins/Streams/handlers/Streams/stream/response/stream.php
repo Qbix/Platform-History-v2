@@ -13,6 +13,9 @@ function Streams_stream_response_stream()
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
 
-	Streams::$cache['stream'] = $stream = Streams::fetchOne( $userId, $publisherId, $name, $fields);
+	Streams::$cache['stream'] = $stream = Streams::fetchOne(
+		$userId, $publisherId, $name, $fields,
+		array('withParticipant' => true)
+	);
 	return $stream ? $stream->exportArray() : null;
 }
