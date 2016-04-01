@@ -418,7 +418,7 @@ abstract class Streams extends Base_Streams
 			Q::event("Streams/fetch/$type", $params, 'after', false, $streams);
 		}
 
-		if (empty($options['dontCache'])) {
+		if (!self::$dontCache and empty($options['dontCache'])) {
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
@@ -2885,4 +2885,12 @@ abstract class Streams extends Base_Streams
 	static $requestedName_override = null;
 	static $beingSaved = null;
 	static $beingSavedQuery = null;
+	/**
+	 * You can set this to false to prevent caching for a while,
+	 * e.g. during installer scripts, but make sure to set it back to true when done.
+	 * @property $dontCache
+	 * @static
+	 * @type string
+	 */
+	static $dontCache = true;
 };

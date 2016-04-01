@@ -54,7 +54,7 @@ class Users_Label extends Base_Users_Label
 		}
 		Users::canManageLabels($asUserId, $userId, $label, true);
 		if (empty($title)) {
-			$parts = explode("/");
+			$parts = explode("/", $label);
 			$title = ucfirst(end($parts));
 		}
 		$l = new Users_Label();
