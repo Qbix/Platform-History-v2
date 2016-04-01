@@ -2715,13 +2715,16 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	});
 	var socket = Q.Socket.get('Streams', node);
 	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
-		var participant;
-		Streams.get.cache.each([publisherId, streamName], function (key, info) {
-			if (info.subject.participant) {
-				participant = info.subject.participant;
-				return false;
-			}
-		});
+		if (o.unlessSocket) {
+			var participant;
+			Streams.get.cache.each([publisherId, streamName], function (key, info) {
+				var p = info.subject.participant;
+				if (p && p.state === 'participating') {
+					participant = p;
+					return false;
+				}
+			});
+		}
 		return (o.unlessSocket && socket && participant) ? false : _tryLoading();
 	}
 	// ok, wait a little while
