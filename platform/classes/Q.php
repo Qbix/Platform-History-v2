@@ -17,7 +17,7 @@ class Q
 	 * Returns the id of the currently loaded app, found in the config under "Q"/"app"
 	 * @return {string}
 	 */
-	function app()
+	static function app()
 	{
 		return Q_Config::expect('Q', 'app');
 	}
