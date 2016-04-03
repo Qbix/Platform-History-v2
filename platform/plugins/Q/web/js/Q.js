@@ -10060,7 +10060,7 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
-		return dialog;
+		return $dialog;
 	}
 
 };
