@@ -10049,7 +10049,7 @@ Q.Dialogs = {
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].show();
 		}
-		if (!dontTriggerClose && dialog) {
+		if (!dontTriggerClose && $dialog) {
 			Q.Dialogs.dontPopOnClose = true;
 			if ($dialog.data('Q/overlay')) {
 				$dialog.data('Q/overlay').close();
@@ -10060,7 +10060,7 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
-		return dialog;
+		return $dialog;
 	}
 
 };
