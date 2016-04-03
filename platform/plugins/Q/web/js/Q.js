@@ -7887,7 +7887,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	
 	// check if template is cached
 	var n = Q.normalize(name);
-	if (tpl && tpl[n]) {
+	if (tpl && typeof tpl[n] === 'string') {
 		var result = tpl[n];
 		callback(null, result);
 		return true;
