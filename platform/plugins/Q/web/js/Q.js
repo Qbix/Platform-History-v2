@@ -10045,16 +10045,16 @@ Q.Dialogs = {
 			dontTriggerClose = false;
 		}
 		
-		var dialog = this.dialogs.pop();
+		var $dialog = this.dialogs.pop();
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].show();
 		}
 		if (!dontTriggerClose && dialog) {
 			Q.Dialogs.dontPopOnClose = true;
-			if (dialog.data('Q/overlay')) {
-				dialog.data('Q/overlay').close();
-			} else if (dialog.data('Q/dialog')) {
-				dialog.data('Q/dialog').close();
+			if ($dialog.data('Q/overlay')) {
+				$dialog.data('Q/overlay').close();
+			} else if ($dialog.data('Q/dialog')) {
+				$dialog.data('Q/dialog').close();
 			}
 		}
 		if (!this.dialogs.length) {
@@ -10190,7 +10190,7 @@ Q.confirm.options = {
 Q.prompt = function(message, callback, options) {
 	function _done() {
 		buttonClicked = true;
-		var value = dialog.find('input').val();
+		var value = $dialog.find('input').val();
 		Q.Dialogs.pop();
 		Q.handle(callback, this, [value]);
 	}
