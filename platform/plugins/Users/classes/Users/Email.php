@@ -111,9 +111,11 @@ class Users_Email extends Base_Users_Email
 					unset($smtp['host']);
 				} else if (is_string($smtp)) {
 					$host = $smtp;
-					$smtp = null;
+					$smtp = array();
 				}
-				$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
+				if (isset($host)) {
+					$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
+				}
 			}
 			
 			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
