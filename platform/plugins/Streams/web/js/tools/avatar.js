@@ -46,6 +46,9 @@ Q.Tool.define("Users/avatar", function(options) {
 	if (state.me) {
 		state.userId = Users.loggedInUserId();
 	}
+	if (state.editable === true) {
+		state.editable = ['icon', 'name'];
+	}
 	this.refresh();
 	if (!state.userId || !state.reflectChanges) {
 		return;

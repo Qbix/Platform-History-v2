@@ -152,7 +152,7 @@ class Users_User extends Base_Users_User
 		 */
 		Q::event(
 			'Users/validate/username',
-			array('username' => & $username)
+			array('username' => & $username, 'user' => $this)
 		);
 		return array('username', $username);
 	}
@@ -296,7 +296,7 @@ class Users_User extends Base_Users_User
 	 */
 	static function removeLabel($label, $userId = null, $asUserId = null)
 	{
-		Users_Label::removeLabel($label, $this->id, $asUserId);
+		Users_Label::removeLabel($label, $userId, $asUserId);
 	}
 	
 	/**
@@ -433,6 +433,7 @@ class Users_User extends Base_Users_User
 			'emailAddress' => $email->address
 		));
 		$communityName = Users::communityName();
+		$communitySuffix = Users::communitySuffix();
 		/**
 		 * @event Users/addIdentifier {before}
 		 * @param {string} user
@@ -460,6 +461,7 @@ class Users_User extends Base_Users_User
 				'email' => $email,
 				'app' => Q_Config::expect('Q', 'app'),
 				'communityName' => $communityName,
+				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
 				'link' => $link,
 				'unsubscribe' => $unsubscribe
@@ -625,6 +627,7 @@ class Users_User extends Base_Users_User
 		$link = 'Users/activate?code='.urlencode($mobile->activationCode)
 			. ' mobileNumber='.urlencode($number);
 		$communityName = Users::communityName();
+		$communitySuffix = Users::communitySuffix();
 		/**
 		 * @event Users/addIdentifier {before}
 		 * @param {string} user
@@ -647,6 +650,7 @@ class Users_User extends Base_Users_User
 				'mobile' => $mobile,
 				'app' => Q_Config::expect('Q', 'app'),
 				'communityName' => $communityName,
+				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
 				'link' => $link
 			));

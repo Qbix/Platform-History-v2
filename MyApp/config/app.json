@@ -103,9 +103,33 @@
 			"Streams/user/height": true
 		}
 	},
+	"Assets": {
+		"transactional": {
+			"charge": {
+				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+				"body": "MyApp/email/charge.php",
+				"sms": "MyApp/sms/charge.php"
+			},
+			"charged": {
+				"subject": "Thank you for your payment to {{call 'publisher.displayName'}}",
+				"body": "MyApp/email/charged.php",
+				"sms": "MyApp/sms/charged.php"
+			},
+			"startSubscription": {
+				"subject": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+				"body": "MyApp/email/startSubscription.php",
+				"sms": "MyApp/sms/startSubscription.php"
+			},
+			"startedSubscription": {
+				"subject": "You have been subscribed to {{plan.title}}",
+				"body": "MyApp/email/startedSubscription.php",
+				"sms": "MyApp/sms/startedSubscription.php"
+			}
+		}
+	},
 	"MyApp": {
 		"cordova": {
-			"platform": [] /* ["iOS", "Android"] */
+			"platforms": [] /* ["iOS", "Android"] */
 		}
 	}
 }

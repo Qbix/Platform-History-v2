@@ -175,6 +175,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			}, overrides);
 			state.beforeCreate.handle.call(tool);
 			tool.loading();
+			var r = state.related;
 			Q.Streams.retainWith(tool)
 			.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
 				if (err) {
@@ -182,8 +183,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					Q.handle(callback, tool, [err]);
 					return err;
 				}
-				var r = state.related;
-				state.related.weight = Q.getObject(['related', 'weight'], extra);
+				if (r) {
+					r.weight = Q.getObject(['related', 'weight'], extra);
+				}
 				state.publisherId = this.fields.publisherId;
 				state.streamName = this.fields.name;
 				tool.stream = this;
@@ -198,7 +200,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					Q.handle(callback, tool, [tool.stream]);
 					tool.preview();
 				}
-			}, state.related, state.creatable.options);
+			}, r, state.creatable.options);
 		}
 		var tool = this;
 		var state = tool.state;

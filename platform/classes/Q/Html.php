@@ -263,7 +263,7 @@ class Q_Html
 			$attributes = array();
 		}
 		$tag_params = array_merge(compact('name', 'rows', 'cols'), $attributes);
-		return self::tag('textarea', $tag_params, $contents);
+		return self::tag('textarea', $tag_params, Q::t($contents));
 	}
 	
 	/**
@@ -962,7 +962,7 @@ class Q_Html
 		if (!is_array($convert)) {
 			$convert = array();
 		}
-		$result = htmlentities($content, ENT_QUOTES, 'UTF-8');
+		$result = htmlentities(Q::t($content), ENT_QUOTES, 'UTF-8');
 		if ($convert or $unconvert) {
 			$conversions = array(
 				"\n" => "<br>",

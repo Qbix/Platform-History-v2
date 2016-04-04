@@ -57,6 +57,15 @@ abstract class Users extends Base_Users
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
 		return $communityName ? $communityName : Q_Config::expect('Q', 'app');
 	}
+	
+	/**
+	 * Get the suffix of the main community from the config, such as "Incorporated" or "LLC"
+	 * @return {string|null} The suffix of the main community for the installed app.
+	 */
+	static function communitySuffix()
+	{
+		return Q_Config::get('Users', 'community', 'suffix', null);
+	}
 
 	/**
 	 * @param string [$publisherId] The id of the publisher relative to whom to calculate the roles. Defaults to the app name.
@@ -88,6 +97,20 @@ abstract class Users extends Base_Users
 			->options($options)
 			->fetchDbRows(null, null, 'label');
 		return $contacts;
+	}
+
+	/**
+	 * Intelligently retrieves user by id
+	 * @method fetch
+	 * @static
+	 * @param {string} $userId
+	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
+	 * @return {Users_User|null}
+	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
+	 */
+	static function fetch ($userId, $throwIfMissing = false)
+	{
+		return Users_User::fetch($userId, $throwIfMissing);
 	}
 
 	/**

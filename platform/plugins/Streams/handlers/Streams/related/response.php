@@ -15,7 +15,8 @@ function Streams_related_response()
 	$streams_requested = in_array('relatedStreams', $slotNames);
 	$options = array(
 		'relationsOnly' => !$streams_requested,
-		'orderBy' => !empty($_REQUEST['ascending'])
+		'orderBy' => !empty($_REQUEST['ascending']),
+		'fetchOptions' => array('withParticipant' => true)
 	);
 	if (isset($_REQUEST['limit'])) $options['limit'] = $_REQUEST['limit'];
 	if (isset($_REQUEST['offset'])) $options['offset'] = $_REQUEST['offset'];

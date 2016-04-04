@@ -1,5 +1,5 @@
 <p>
-	Thanks for signing up with <?php echo $communityName ?>.
+	Thanks for signing up with <?php echo $publisher->displayName() ?>.
 </p>
 
 <p>
@@ -8,7 +8,7 @@
 </p>
 
 <p>
-	See you on <a href="<?php echo Q_Request::baseUrl() ?>"><?php echo $communityName ?></a>!
+	See you on <a href="<?php echo Q_Request::baseUrl() ?>"><?php echo $publisher->displayName() ?></a>!
 </p>
 
 <p style="margin-top: 100px;">

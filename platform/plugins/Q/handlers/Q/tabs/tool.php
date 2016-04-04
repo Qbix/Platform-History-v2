@@ -12,6 +12,7 @@
  *  @param {array} [$options.tabs] An associative array of name: title pairs.
  *  @param {array} [$options.urls] An associative array of name: url pairs to override the default urls.
  *  @param {string} [$options.field='tab'] Uses this field when urls doesn't contain the tab name.
+ *  @param {boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
  *  @param {boolean} [$options.vertical=false] Stack the tabs vertically instead of horizontally
  *  @param {boolean} [$options.compact=false] Display the tabs interface in a compact space with a contextual menu
  *  @param {Object} [$options.overflow]

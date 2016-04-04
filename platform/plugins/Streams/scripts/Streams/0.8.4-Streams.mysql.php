@@ -11,8 +11,8 @@ function Streams_0_8_4_Streams_mysql()
 	$avatar->toUserId = $communityId;
 	$avatar->publisherId = $communityId;
 	$avatar->username = $user->username;
-	$avatar->firstName = '';
-	$avatar->lastName = '';
+	$avatar->firstName = Users::communityName();
+	$avatar->lastName = Users::communitySuffix();
 	$avatar->icon = $user->icon;
 	$avatar->save();
 

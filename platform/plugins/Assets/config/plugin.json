@@ -1,0 +1,99 @@
+{
+	"Q": {
+		"handlersBeforeEvent": {
+			"Q/responseExtras": ["Assets/before/Q_responseExtras"]
+		},
+		"handlersAfterEvent": {
+			"Users/insertUser": ["Assets/after/Users_insertUser"],
+			"Assets/charge": ["Assets/after/Assets_charge"],
+			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"]
+		},
+		"routes": {
+			"plugins/Assets/:action": {"module": "Assets"}
+		},
+		"pluginInfo": {
+			"Assets": {
+				"version": "0.7",
+				"compatible": "0.7",
+				"requires": {"Q": "0.9", "Streams": "0.9"},
+				"connections": ["Assets"]
+			}
+		},
+		"web": {
+			"requireValidNonce": ["Assets"]
+		}
+	},
+	"Streams": {
+		"types": {
+			"Assets/plan": {
+				"description": "Subscription plan",
+				"create": true, 
+				"edit": true,
+				"defaults": {
+					"title": "Subscription plan"
+				}
+			},
+			"Assets/subscription": {
+				"description": "Subscription",
+				"create": false, 
+				"edit": false,
+				"defaults": {
+					"title": "Subscription"
+				}
+			},
+			"Assets/product": {
+				"description": "Product",
+				"create": false, 
+				"edit": false,
+				"defaults": {
+					"title": "Product"
+				}
+			},
+			"Assets/service": {
+				"description": "Service",
+				"create": false, 
+				"edit": false,
+				"defaults": {
+					"title": "Service"
+				}
+			}
+		}	
+	},
+	"Assets": {
+		"credits": {
+			"amounts": {
+				"Users/insertUser": 20
+			}
+		},
+		"reasons": {
+			"Assets/purchased": {
+				"by": "purchasing credits"
+			},
+			"Assets/received": {
+				"by": "receiving credits"
+			}
+		},
+		"transactional": {
+			"charge": {
+				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+				"body": "Assets/email/charge.php",
+				"sms": "Assets/sms/charge.php"
+			},
+			"charged": {
+				"subject": "Thank you for your payment to {{call 'publisher.displayName'}}",
+				"body": "Assets/email/charged.php",
+				"sms": "Assets/sms/charged.php"
+			},
+			"startSubscription": {
+				"subject": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+				"body": "Assets/email/startSubscription.php",
+				"sms": "Assets/sms/startSubscription.php"
+			},
+			"startedSubscription": {
+				"subject": "You have been subscribed to {{plan.title}}",
+				"body": "Assets/email/startedSubscription.php",
+				"sms": "Assets/sms/startedSubscription.php"
+			}
+		}
+	}
+}

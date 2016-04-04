@@ -71,20 +71,6 @@ class Users_Email extends Base_Users_Email
 		$app = Q_Config::expect('Q', 'app');
 		$subject = Q_Handlebars::renderSource($subject, $fields);
 		$body = Q::view($view, $fields);
-		
-		if(!Q_Config::get('Users', 'email', 'smtp', 'sendmail')) {
-			Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
-			return true;
-		}
-		$overrideLog = Q::event(
-			'Users/email/log', 
-			compact('emailAddress', 'subject', 'body'),
-			'before'
-		);
-		if(!isset($overrideLog)
-		and $key = Q_Config::get('Users', 'email', 'log', 'key', null)) {
-			Q::log("\nSent email message to $emailAddress:\n$subject\n$body", $key);
-		}
 
 		$from = Q::ifset($options, 'from', Q_Config::get('Users', 'email', 'from', null));
 		if (!isset($from)) {
@@ -116,7 +102,7 @@ class Users_Email extends Base_Users_Email
 		if (!$sent) {
 			// Set up the default mail transport
 			$smtp = Q_Config::get('Users', 'email', 'smtp', array('host' => 'sendmail'));
-			$host = Q::ifset($smtp, 'host', 'sendmail');
+			$host = Q::ifset($smtp, 'host', null);
 			if ($host === 'sendmail') {
 				$transport = new Zend_Mail_Transport_Sendmail('-f'.reset($from));
 			} else {
@@ -125,9 +111,20 @@ class Users_Email extends Base_Users_Email
 					unset($smtp['host']);
 				} else if (is_string($smtp)) {
 					$host = $smtp;
-					$smtp = null;
+					$smtp = array();
 				}
-				$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
+				if (isset($host)) {
+					$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
+				}
+			}
+			
+			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
+				$logMessage = "Sent message to $emailAddress:\n$subject\n$body";
+				if (!isset($transport)) {
+					Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
+					$logMessage = "Would have $logMessage";
+				}
+				Q::log($logMessage, $key);
 			}
 
 			$mail = new Zend_Mail();
@@ -206,6 +203,7 @@ class Users_Email extends Base_Users_Email
 			'emailAddress' => $this->address
 		));
 		$communityName = Users::communityName();
+		$communitySuffix = Users::communitySuffix();
 		/**
 		 * @event Users/resend {before}
 		 * @param {string} user
@@ -219,6 +217,7 @@ class Users_Email extends Base_Users_Email
 			'email' => $this,
 			'app' => Q_Config::expect('Q', 'app'),
 			'communityName' => $communityName,
+			'communitySuffix' => $communitySuffix,
 			'baseUrl' => Q_Request::baseUrl(),
 			'link' => $link,
 			'unsubscribe' => $unsubscribe

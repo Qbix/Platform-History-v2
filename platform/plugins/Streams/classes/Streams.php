@@ -293,6 +293,8 @@ abstract class Streams extends Base_Streams
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
 	 *   fetching the streams
+	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
+	 *   on the stream objects, with the participant object corresponding to $asUserId, if any.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -353,6 +355,17 @@ abstract class Streams extends Base_Streams
 				->options($options)
 				->fetchDbRows(null, '', 'name')
 			: array();
+		
+		if (!empty($options['withParticipant'])) {
+			$prows = Streams_Participant::select('*')->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $namesToFetch,
+				'userId' => $asUserId
+			))->fetchDbRows(null, '', 'streamName');
+			foreach ($allRetrieved as &$s) {
+				$s->set('participant', Q::ifset($prows, $s->name, null));
+			}
+		}
 
 		$streams = $allCached ? array_merge($allCached, $allRetrieved) : $allRetrieved;
 
@@ -418,7 +431,7 @@ abstract class Streams extends Base_Streams
 			Q::event("Streams/fetch/$type", $params, 'after', false, $streams);
 		}
 
-		if (!empty($option['dontCache'])) {
+		if (!self::$dontCache and empty($options['dontCache'])) {
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
@@ -428,7 +441,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Fetches one stream from the database.
-	 * @method fetch
+	 * @method fetchOne
 	 * @static
 	 * @param {string} $asUserId
 	 *  Set this to the user for which you are fetching the streams.
@@ -452,6 +465,8 @@ abstract class Streams extends Base_Streams
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
 	 *   fetching the streams
+	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
+	 *   on the stream object, with the participant object corresponding to $asUserId, if any.
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -490,7 +505,7 @@ abstract class Streams extends Base_Streams
 	 * After the function returns, you will be able to call the methods
 	 * testReadLevel(), testWriteLevel() and testAdminLevel()
 	 * on these streams before using them on the user's behalf.
-	 * @method fetch
+	 * @method calculateAccess
 	 * @static
 	 * @param {string} $asUserId
 	 *  Set this to the user relative to whom access is calculated.
@@ -501,10 +516,12 @@ abstract class Streams extends Base_Streams
 	 *  The id of the user publishing these streams
 	 * @param {array} $streams
 	 *  An array of streams, obtained for example by Streams::fetch
-	 * @param {boolean} $recalculate=false
+	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
-	 * @param {string} [$actualPublisherId]
+	 * @param {string} [$actualPublisherId=null]
 	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 * @param {string} [$inheritAccess=true]
+	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
 	 *  The number of streams that were recalculated
 	 */
@@ -513,7 +530,8 @@ abstract class Streams extends Base_Streams
 		$publisherId,
 		$streams,
 		$recalculate = false,
-		$actualPublisherId = null)
+		$actualPublisherId = null,
+		$inheritAccess = true)
 	{
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser();
@@ -582,7 +600,7 @@ abstract class Streams extends Base_Streams
 			$streams3[] = $s;
 		}
 		
-		if (empty($names)) {
+		if (empty($streams3)) {
 			return count($streams2);
 		}
 
@@ -666,6 +684,34 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
+		
+		if ($inheritAccess) {
+			$streams4 = array();
+			$toFetch = array();
+			foreach ($streams3 as $s) {
+				if (empty($s->inheritAccess)) {
+					continue;
+				}
+				$inheritAccess = json_decode($s->inheritAccess, true);
+				if (!$inheritAccess or !is_array($inheritAccess)) {
+					return false;
+				}
+				$streams4[] = $s;
+				foreach ($inheritAccess as $ia) {
+					$toFetch[reset($ia)][] = next($ia);
+				}
+			}
+			// group the fetches by publisher and execute them in batches
+			foreach ($toFetch as $publisherId => $streamNames) {
+				$streamNames = array_unique($streamNames);
+				Streams::fetch($asUserId, $publisherId, $streamNames);
+			}
+			// this will now use the cached results of the above calls to Streams::fetch
+			foreach ($streams4 as $s) {
+				$s->inheritAccess(); 
+			}
+		}
+		
 		return count($streams2);
 	}
 	
@@ -1938,7 +1984,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
 	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
 	 * @param {array} [$options.where] you can also specify any extra conditions here
-	 * @param {array} [$options.extra] An array of any extra info to pass to Streams::fetch when fetching streams
+	 * @param {array} [$options.fetchOptions] An array of any options to pass to Streams::fetch when fetching streams
 	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
@@ -1966,7 +2012,8 @@ abstract class Streams extends Base_Streams
 		}
 
 		// Check access to stream
-		$rows = Streams::fetch($asUserId, $publisherId, $streamName);
+		$fetchOptions = isset($options['fetchOptions']) ? $options['fetchOptions'] : null;
+		$rows = Streams::fetch($asUserId, $publisherId, $streamName, '*', $fetchOptions);
 		$streams = array();
 		foreach($rows as $n => $row) {
 			if (!$row) continue;
@@ -2074,7 +2121,6 @@ abstract class Streams extends Base_Streams
 				? $options['streamFields']
 				: implode(',', $options['streamFields']);
 		}
-		$extra = isset($options['extra']) ? $options['extra'] : null;
 		$names = array();
 		$FTP=$FT.'PublisherId';
 		foreach ($relations as $name => $r) {
@@ -2082,7 +2128,7 @@ abstract class Streams extends Base_Streams
 				$names[] = $name;
 			}
 		}
-		$relatedStreams = Streams::fetch($asUserId, $publisherId, $names, $fields, $extra);
+		$relatedStreams = Streams::fetch($asUserId, $publisherId, $names, $fields, $fetchOptions);
 		foreach ($relatedStreams as $name => $s) {
 			if (!$s) continue;
 			$s->weight = isset($relations[$name]->weight)
@@ -2318,7 +2364,7 @@ abstract class Streams extends Base_Streams
 		if (isset($who['label'])) {
 			$label = $who['label'];
 			if (is_string($label)) {
-				$label = array_map('trim', explode("\t", $labels)) ;
+				$label = array_map('trim', explode("\t", $label)) ;
 			}
 			$raw_userIds = array_merge(
 				$raw_userIds, 
@@ -2854,4 +2900,12 @@ abstract class Streams extends Base_Streams
 	static $requestedName_override = null;
 	static $beingSaved = null;
 	static $beingSavedQuery = null;
+	/**
+	 * You can set this to false to prevent caching for a while,
+	 * e.g. during installer scripts, but make sure to set it back to true when done.
+	 * @property $dontCache
+	 * @static
+	 * @type string
+	 */
+	static $dontCache = true;
 };

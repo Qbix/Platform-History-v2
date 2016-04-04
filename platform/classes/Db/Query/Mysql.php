@@ -1297,6 +1297,9 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 */
 	function limit ($limit, $offset = null)
 	{
+		if (!isset($limit)) {
+			return;
+		}
 		if (!is_numeric($limit) or $limit < 0 or floor($limit) != $limit) {
 			throw new Exception("the limit must be a non-negative integer");
 		}

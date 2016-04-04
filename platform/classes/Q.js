@@ -599,8 +599,7 @@ Q.batcher.options = {
  */
 Q.getter = function _Q_getter(original, options) {
 
-
-	function Q_getter_wrapper() {
+	var gw = function Q_getter_wrapper() {
 		var i, key, that = this, callbacks = [];
 		var arguments2 = Array.prototype.slice.call(arguments);
 
@@ -615,21 +614,21 @@ Q.getter = function _Q_getter(original, options) {
 		}
 		
 		var ret = { dontCache: false };
-		Q_getter_wrapper.emit('called', this, arguments2, ret);
+		gw.emit('called', this, arguments2, ret);
 
 		var cached, cbpos, cbi;
 		Q.getter.usingCached = false;
 
 		// if caching is required check the cache -- maybe the result is there
-		if (Q_getter_wrapper.cache && !ignoreCache) {
-			if (cached = Q_getter_wrapper.cache.get(key)) {
+		if (gw.cache && !ignoreCache) {
+			if (cached = gw.cache.get(key)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
-					Q_getter_wrapper.emit('result', cached.subject, cached.params, arguments2, ret, original);
+					gw.emit('result', cached.subject, cached.params, arguments2, ret, original);
 					Q.getter.usingCached = true;
 					callbacks[cbpos].apply(cached.subject, cached.params);
 					ret.result = Q.getter.CACHED;
-					Q_getter_wrapper.emit('executed', this, arguments2, ret);
+					gw.emit('executed', this, arguments2, ret);
 					Q.getter.usingCached = false;
 					return ret; // wrapper found in cache, callback and throttling have run
 				}
@@ -643,7 +642,7 @@ Q.getter = function _Q_getter(original, options) {
 			ret: ret
 		});
 		if (_waiting[key].length > 1) {
-			Q_getter_wrapper.emit('executed', this, arguments2, ret);
+			gw.emit('executed', this, arguments2, ret);
 			ret.result = Q.getter.WAITING;
 			return ret; // the request is already in process - let's wait
 		}
@@ -665,47 +664,47 @@ Q.getter = function _Q_getter(original, options) {
 				return function _Q_getter_callback() {
 
 					// save the results in the cache
-					if (Q_getter_wrapper.cache && !ret.dontCache) {
-						Q_getter_wrapper.cache.set(key, cbpos, this, arguments);
+					if (gw.cache && !ret.dontCache) {
+						gw.cache.set(key, cbpos, this, arguments);
 					}
 
 					// process waiting callbacks
 					var wk = _waiting[key];
 					if (wk) for (i = 0; i < wk.length; i++) {
-						Q_getter_wrapper.emit('result', this, arguments, arguments2, wk[i].ret, original);
+						gw.emit('result', this, arguments, arguments2, wk[i].ret, original);
 						wk[i].callbacks[cbpos].apply(this, arguments);
 					}
 					delete _waiting[key];
 
 					// tell throttle to execute the next function, if any
-					if (Q_getter_wrapper.throttle && Q_getter_wrapper.throttle.throttleNext) {
-						Q_getter_wrapper.throttle.throttleNext(this);
+					if (gw.throttle && gw.throttle.throttleNext) {
+						gw.throttle.throttleNext(this);
 					}
 				};
 			})(callbacks[cbi], cbi));
 			++cbi; // the index in the array of callbacks
 		}
 
-		if (!Q_getter_wrapper.throttle) {
+		if (!gw.throttle) {
 			// no throttling, just run the function
 			if (false === original.apply(that, args)) {
 				ret.dontCache = true;
 			}
 			ret.result = Q.getter.REQUESTING;
-			Q_getter_wrapper.emit('executed', this, arguments2, ret);
+			gw.emit('executed', this, arguments2, ret);
 			return ret;
 		}
 
-		if (!Q_getter_wrapper.throttle.throttleTry) {
+		if (!gw.throttle.throttleTry) {
 			// the throttle object is probably not set up yet
 			// so set it up
 			var p = {
-				size: Q_getter_wrapper.throttleSize,
+				size: gw.throttleSize,
 				count: 0,
 				queue: [],
 				args: []
 			};
-			Q_getter_wrapper.throttle.throttleTry = function _throttleTry(that, getter, args, ret) {
+			gw.throttle.throttleTry = function _throttleTry(that, getter, args, ret) {
 				++p.count;
 				if (p.size === null || p.count <= p.size) {
 					if (false === getter.apply(that, args)) {
@@ -718,7 +717,7 @@ Q.getter = function _Q_getter(original, options) {
 				p.args.push(args);
 				return false;
 			};
-			Q_getter_wrapper.throttle.throttleNext = function _throttleNext(that) {
+			gw.throttle.throttleNext = function _throttleNext(that) {
 				if (--p.count < 0) {
 					console.warn("Q.getter: throttle count is negative");
 				}
@@ -727,8 +726,8 @@ Q.getter = function _Q_getter(original, options) {
 				}
 			};
 		}
-		if (!Q_getter_wrapper.throttleSize) {
-			Q_getter_wrapper.throttle.throttleSize = function _throttleSize(newSize) {
+		if (!gw.throttleSize) {
+			gw.throttle.throttleSize = function _throttleSize(newSize) {
 				if (typeof(newSize) === 'undefined') {
 					return p.size;
 				}
@@ -737,56 +736,56 @@ Q.getter = function _Q_getter(original, options) {
 		}
 
 		// execute the throttle
-		ret.result = Q_getter_wrapper.throttle.throttleTry(this, original, args, ret)
+		ret.result = gw.throttle.throttleTry(this, original, args, ret)
 			? Q.getter.REQUESTING
 			: Q.getter.THROTTLING;
-		Q_getter_wrapper.emit('executed', this, arguments2, ret);
+		gw.emit('executed', this, arguments2, ret);
 		return ret;
 	}
 
-	Q.extend(Q_getter_wrapper, original, Q.getter.options, options);
-	Q.makeEventEmitter(Q_getter_wrapper);
+	Q.extend(gw, original, Q.getter.options, options);
+	Q.makeEventEmitter(gw);
 
 	var _waiting = {};
-	if (Q_getter_wrapper.cache === false) {
+	if (gw.cache === false) {
 		// no cache
-		Q_getter_wrapper.cache = null;
-	} else if (Q_getter_wrapper.cache === true) {
+		gw.cache = null;
+	} else if (gw.cache === true) {
 		// create our own Object that will cache locally in the page
-		Q_getter_wrapper.cache = Q.Cache.document(++_Q_getter_i);
+		gw.cache = Q.Cache.document(++_Q_getter_i);
 	} else {
 		// assume we were passed an Object that supports the cache interface
 	}
 
-	Q_getter_wrapper.throttle = Q_getter_wrapper.throttle || null;
-	if (Q_getter_wrapper.throttle === true) {
-		Q_getter_wrapper.throttle = '';
+	gw.throttle = gw.throttle || null;
+	if (gw.throttle === true) {
+		gw.throttle = '';
 	}
-	if (typeof Q_getter_wrapper.throttle === 'string') {
+	if (typeof gw.throttle === 'string') {
 		// use our own objects
-		if (!Q.getter.throttles[Q_getter_wrapper.throttle]) {
-			Q.getter.throttles[Q_getter_wrapper.throttle] = {};
+		if (!Q.getter.throttles[gw.throttle]) {
+			Q.getter.throttles[gw.throttle] = {};
 		}
-		Q_getter_wrapper.throttle = Q.getter.throttles[Q_getter_wrapper.throttle];
+		gw.throttle = Q.getter.throttles[gw.throttle];
 	}
 
-	Q_getter_wrapper.forget = function _forget() {
+	gw.forget = function _forget() {
 		var key = Q.Cache.key(arguments);
-		if (key && Q_getter_wrapper.cache) {
-			return Q_getter_wrapper.cache.remove(key);
+		if (key && gw.cache) {
+			return gw.cache.remove(key);
 		}
 	};
 	
 	var ignoreCache = false;
-	Q_getter_wrapper.force = function _force() {
+	gw.force = function _force() {
 		ignoreCache = true;
-		Q_getter_wrapper.apply(this, arguments);
+		gw.apply(this, arguments);
 	};
 
 	if (original.batch) {
-		Q_getter_wrapper.batch = original.batch;
+		gw.batch = original.batch;
 	}
-	return Q_getter_wrapper;
+	return gw;
 };
 var _Q_getter_i = 0;
 Q.getter.options = {

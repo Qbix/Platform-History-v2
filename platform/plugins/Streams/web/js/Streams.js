@@ -611,10 +611,7 @@ Streams.create = function (fields, callback, related, options) {
 			return callback && callback.call(this, msg, args);
 		}
 		if (related) {
-			Streams.related.cache.each([related.publisherId, related.streamName],
-			function (key) {
-				Streams.related.cache.remove(key);
-			});
+			Streams.related.cache.removeEach([related.publisherId, related.streamName]);
 		}
 		Streams.construct(data.slots.stream, {}, function Stream_create_construct_handler (err, stream) {
 			var msg = Q.firstErrorMessage(err);
@@ -637,10 +634,7 @@ Streams.create = function (fields, callback, related, options) {
 			}
 			callback && callback.call(stream, null, stream, extra, data.slots);
 			// process various messages posted to Streams/participating
-			Stream.refresh(
-				Users.loggedInUserId(), 'Streams/participating', null,
-				{ messages: true, unlessSocket: true }
-			);
+			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
 			return;
 		});
 	}, { 
@@ -854,7 +848,6 @@ Streams.getParticipating = function(callback) {
  * @param {Object} [options] A hash of options, including:
  *   @param {Boolean} [options.messages] If set to true, then besides just reloading the stream, attempt to catch up on the latest messages
  *   @param {Number} [options.max] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
- *   @param {Number} [options.unlessSocket] Whether to avoid doing any requests when a socket is attached
  *   @param {Array} [options.duringEvents] Streams.refresh.options.duringEvents are the window events that can lead to an automatic refresh
  *   @param {Number} [options.minSeconds] Streams.refresh.options.minEvents is the minimum number of seconds to wait between automatic refreshes
  *   @param {Number} [options.timeout] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
@@ -1245,7 +1238,8 @@ var Stream = Streams.Stream = function (fields) {
 		'inheritAccess',
 		'closedTime',
 		'access',
-		'isRequired'
+		'isRequired',
+		'participant'
 	]);
 	this.typename = 'Q.Streams.Stream';
 	prepareStream(this, fields);
@@ -1360,7 +1354,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 				if (options && options.extra) {
 					params.concat(extra);
 				}
-				callback && callback.apply(this, params);
+				callback.apply(this, params);
 			}
 		});
 		result = true;
@@ -1531,10 +1525,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		var stream = data.slots.stream || null;
 		if (stream) {
 			// process the Streams/changed message, if stream was retained
-			Stream.refresh(stream.publisherId, stream.name, callback, Q.extend({
-				messages: true,
-				unlessSocket: true
-			}, options));
+			_refreshUnlessSocket(stream.publisherId, stream.name, callback, options);
 		} else {
 			callback && callback.call(that, null, stream);
 		}
@@ -2176,14 +2167,8 @@ Stream.close = function _Stream_remove (publisherId, streamName, callback) {
 		var stream = data.slots.stream;
 		if (stream) {
 			// process the Streams/closed message, if stream was retained
-			Stream.refresh(stream.publisherId, stream.name, null, {
-				messages: true,
-				unlessSocket: true
-			});
-			Stream.refresh(
-				Users.loggedInUserId(), 'Streams/participating', null,
-				{ messages: true, unlessSocket: true }
-			);
+			_refreshUnlessSocket(stream.publisherId, stream.name);
+			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
 		}
 		callback && callback.call(this, err, data.slots.result || null);
 	}, { method: 'delete', fields: fields, baseUrl: baseUrl });
@@ -2703,7 +2688,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  * @param {Object} [options] A hash of options which can include:
  *   @param {Number} [options.max=5] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
  *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
- *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached
+ *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached and user is a participant in the stream
  *   @param {Boolean} [options.evenIfNotRetained] Set this to true to fetch all messages posted to the stream, in the event that it wasn't cached or retained.
  * @return {Boolean|Number|Q.Pipe}
  *   Returns false if no attempt was made because stream wasn't cached,
@@ -2713,7 +2698,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  */
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
-	var latest = Message.latestOrdinal(publisherId, streamName, true);
+	var latest = Message.latestOrdinal(publisherId, streamName);
 	if (!latest && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return false;
@@ -2730,7 +2715,17 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	});
 	var socket = Q.Socket.get('Streams', node);
 	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
-		return (socket && o.unlessSocket) ? false : _tryLoading();
+		if (o.unlessSocket) {
+			var participant;
+			Streams.get.cache.each([publisherId, streamName], function (key, info) {
+				var p = info.subject.participant;
+				if (p && p.state === 'participating') {
+					participant = p;
+					return false;
+				}
+			});
+		}
+		return (o.unlessSocket && socket && participant) ? false : _tryLoading();
 	}
 	// ok, wait a little while
 	var t = setTimeout(_tryLoading, o.timeout);
@@ -3467,6 +3462,10 @@ function prepareStream(stream) {
 		stream.access = Q.copy(stream.fields.access);
 		delete stream.fields.access;
 	}
+	if (stream.fields.participant) {
+		stream.participant = Q.copy(stream.fields.participant);
+		delete stream.fields.participant;
+	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
 		delete stream.fields.isRequired;
@@ -3518,7 +3517,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Streams.getParticipating = Q.getter(Streams.getParticipating, {
-		cache: Q.Cache.document("Streams.getParticipating", 10)
+		cache: Q.Cache[where]("Streams.getParticipating", 10)
 	});
 
 	Streams.related = Q.getter(Streams.related, {
@@ -3988,8 +3987,25 @@ Q.onInit.add(function _Streams_onInit() {
 					// the correct data into the cache
 				}
 
-				function updateRelatedCache(fields) {
+				function updateRelatedCache(instructions) {
 					Streams.related.cache.removeEach([msg.publisherId, msg.streamName]);
+					if (instructions.toPublisherId) {
+						Streams.related.cache.removeEach(
+							[instructions.toPublisherId, instructions.toStreamName]
+						);
+						Streams.Stream.refresh(
+							instructions.toPublisherId, instructions.toStreamName, 
+							null, { messages: true }
+						);
+					} else if (instructions.fromPublisherId) {
+						Streams.related.cache.removeEach(
+							[instructions.fromPublisherId, instructions.fromStreamName]
+						);
+						Streams.Stream.refresh(
+							instructions.fromPublisherId, instructions.fromStreamName,
+							null, { messages: true }
+						);
+					}
 				}
 			});
 		}
@@ -4054,11 +4070,11 @@ function _scheduleUpdate() {
 	}, ms);
 }
 
-function _refreshUnlessSocket(publisherId, streamName) {
-	Stream.refresh(publisherId, streamName, null, {
+function _refreshUnlessSocket(publisherId, streamName, callback, options) {
+	Stream.refresh(publisherId, streamName, callback || null, Q.extend({
 		messages: true,
 		unlessSocket: true
-	});
+	}, options));
 }
 
 Q.Socket.onConnect('Streams').set(function (socket) {
