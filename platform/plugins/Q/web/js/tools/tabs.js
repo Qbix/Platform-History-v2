@@ -3,7 +3,7 @@
 /**
  * @module Q-tools
  */
-	
+
 /**
  * This tool renders a nice set of tabs that adapts to different environments
  * @class Q tabs
@@ -235,7 +235,10 @@ Q.Tool.define("Q/tabs", function(options) {
 		var name = tool.getName(tab);
 		var url = location.hash.queryField('url');
 		if (url === undefined) {
-			url = window.location.href.split(state.checkQueryString ? '#' : '?')[0];
+			url = window.location.href.split('#')[0];
+			if (state.checkQueryString) {
+				url = url.split('?')[0];
+			}
 		} else {
 			url = Q.url(url);
 		}
