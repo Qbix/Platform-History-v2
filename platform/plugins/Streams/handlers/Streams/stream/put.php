@@ -65,7 +65,10 @@ function Streams_stream_put($params) {
 		}
 	}
 	
-	$restricted = array('readLevel', 'writeLevel', 'adminLevel', 'inheritAccess', 'closedTime');
+	$restricted = array(
+		'readLevel', 'writeLevel', 'adminLevel', 
+		'permissions', 'inheritAccess', 'closedTime'
+	);
 	$owned = $stream->testAdminLevel('own'); // owners can reopen streams
 	foreach ($restricted as $r) {
 		if (isset($req[$r]) and !$owned) {

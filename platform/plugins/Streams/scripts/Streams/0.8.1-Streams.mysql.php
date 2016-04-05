@@ -12,9 +12,9 @@ function Streams_0_8_1_Streams_mysql()
 	$stream->type = 'Streams/template';
 	$stream->title = "Community";
 	$stream->content = '';
-	$readLevel = Streams::$READ_LEVEL['content'];
-	$writeLevel = Streams::$WRITE_LEVEL['join'];
-	$adminLevel = Streams::$ADMIN_LEVEL['invite'];
+	$stream->readLevel = Streams::$READ_LEVEL['content'];
+	$stream->writeLevel = Streams::$WRITE_LEVEL['join'];
+	$stream->adminLevel = Streams::$ADMIN_LEVEL['invite'];
 	$stream->save();
 	
 	// app community stream, for announcements

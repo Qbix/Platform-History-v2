@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.9",
+				"version": "0.9.1",
 				"compatible": "0.9",
 				"requires": {"Users": "0.9"},
 				"permissions": ["Streams/icons"],

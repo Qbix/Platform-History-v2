@@ -588,9 +588,11 @@ abstract class Streams extends Base_Streams
 			$s->set('readLevel', $s->readLevel);
 			$s->set('writeLevel', $s->writeLevel);
 			$s->set('adminLevel', $s->adminLevel);
+			$s->set('permissions', $s->getAllPermissions());
 			$s->set('readLevel_source', $public_source);
 			$s->set('writeLevel_source', $public_source);
 			$s->set('adminLevel_source', $public_source);
+			$s->set('permissions_source', $public_source);
 			if (empty($asUserId)) {
 				continue; // No need to fetch further access info.
 			}
@@ -654,6 +656,10 @@ abstract class Streams extends Base_Streams
 							$stream->set('adminLevel', $access->adminLevel);
 							$stream->set('adminLevel_source', $contact_source);
 						}
+						$p1 = $access->getAllPermissions();
+						$p2 = $stream->get('permissions', array());
+						$stream->set('permissions', array_unique(array_merge($p1, $p2)));
+						$stream->set('permissions_source', $contact_source);
 					}
 				}
 			}
@@ -681,6 +687,8 @@ abstract class Streams extends Base_Streams
 						$stream->set('adminLevel', $access->adminLevel);
 						$stream->set('adminLevel_source', $direct_source);
 					}
+					$stream->set('permissions', $access->getAllPermissions());
+					$stream->set('permissions_source', $direct_source);
 				}
 			}
 		}

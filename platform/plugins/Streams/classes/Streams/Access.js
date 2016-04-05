@@ -32,6 +32,100 @@ function Streams_Access (fields) {
 
 Q.mixin(Streams_Access, Q.require('Base/Streams/Access'));
 
+/**
+ * @method getAllPermissions
+ * @return {Array}
+ */
+Streams_Access.prototype.getAllPermissions = function () {
+	try {
+		return this.permissions ? JSON.parse(this.permissions) : [];
+	} catch (e) {
+		return [];
+	}
+};
+
+/**
+ * @method hasPermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+Streams_Access.prototype.hasPermission = function (permission) {
+	return (this.getAllPermissions().indexOf(permission) >= 0);
+};
+
+/**
+ * @method addPermission
+ * @param {String} permission
+ */
+Streams_Access.prototype.addPermission = function (permission) {
+	var permissions = this.getAllPermissions();
+	if (permissions.indexOf(permission) < 0) {
+		permissions.push(permission);
+	}
+	this.permissions = JSON.stringify(permissions);
+};
+
+/**
+ * @method removePermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+Streams_Access.prototype.removePermission = function (permission) {
+	var permissions = this.getAllPermissions();
+	var index = permissions.indexOf(permission);
+	if (index >= 0) {
+		permissions.splice(index, 1);
+	}
+	this.permissions = JSON.stringify(permissions);
+};
+
+/**
+ * @method getAllPermissions
+ * @return {Array}
+ */
+this.getAllPermissions = function () {
+	try {
+		return this.permissions ? JSON.parse(this.permissions) : [];
+	} catch (e) {
+		return [];
+	}
+};
+
+/**
+ * @method hasPermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+this.hasPermission = function (permission) {
+	return (this.getAllPermissions().indexOf(permission) >= 0);
+};
+
+/**
+ * @method addPermission
+ * @param {String} permission
+ */
+this.addPermission = function (permission) {
+	var permissions = this.getAllPermissions();
+	if (permissions.indexOf(permission) < 0) {
+		permissions.push(permission);
+	}
+	this.permissions = JSON.stringify(permissions);
+};
+
+/**
+ * @method removePermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+this.removePermission = function (permission) {
+	var permissions = this.getAllPermissions();
+	var index = permissions.indexOf(permission);
+	if (index >= 0) {
+		permissions.splice(index, 1);
+	}
+	this.permissions = JSON.stringify(permissions);
+};
+
 /*
  * Add any public methods here by assigning them to Streams_Access.prototype
  */

@@ -15,8 +15,8 @@
  * @extends Db_Row
  *
  * @property {string} $publisherId
- * @property {string} $userId
  * @property {string} $xid
+ * @property {string} $userId
  * @property {string|Db_Expression} $insertedTime
  * @property {string} $nickname
  */
@@ -27,11 +27,11 @@ abstract class Base_Users_ExternalFrom extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $userId
+	 * @property $xid
 	 * @type {string}
 	 */
 	/**
-	 * @property $xid
+	 * @property $userId
 	 * @type {string}
 	 */
 	/**
@@ -247,60 +247,6 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_userId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_userId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('userId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".userId");
-		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
-		return array('userId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the userId field
-	 * @return {integer}
-	 */
-	function maxSize_userId()
-	{
-
-		return 31;			
-	}
-
-	/**
-	 * Returns schema information for userId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	function column_userId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_xid
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -348,6 +294,60 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_userId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_userId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('userId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
+		return array('userId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+	function maxSize_userId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -481,7 +481,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'userId', 'xid', 'insertedTime', 'nickname');
+		$field_names = array('publisherId', 'xid', 'userId', 'insertedTime', 'nickname');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
