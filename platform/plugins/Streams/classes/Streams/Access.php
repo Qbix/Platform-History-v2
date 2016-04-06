@@ -22,13 +22,14 @@ class Streams_Access extends Base_Streams_Access
 	{
 		parent::setUp();
 	}
+	
 	/**
-	 * Check if user has 'own' rights for a publisher
+	 * Check if user "owns" a stream template for a publisher
 	 * @method isOwner
 	 * @static
 	 * @param {string} $publisherId
 	 * @param {string} $type
-	 * @param {string|Users_User} $user=null
+	 * @param {string|Users_User} [$user=null]
 	 * @return {boolean}
 	 */
 	static function isOwner($publisherId, $type, $user = null) {
@@ -37,15 +38,83 @@ class Streams_Access extends Base_Streams_Access
 		} else if (is_string($user)) {
 			$user = Users_User::fetch($user);
 		}
-		if (!isset($user)) return false;
+		if (!isset($user)) {
+			return false;
+		}
 
-		// check if user is owher of stream template
+		// check if user is owner of stream template
 		$stream = new Streams_Stream();
 		$stream->publisherId = $publisherId;
 		$stream->name = $type.'/';
-		if (!$stream->retrieve()) return false;
+		if (!$stream->retrieve()) {
+			return false;
+		}
 		$stream->calculateAccess($user->id);
 		return $stream->testAdminLevel('own');
+	}
+	
+	/**
+	 * @method getAllPermissions
+	 * @return {array}
+	 */
+	function getAllPermissions()
+	{
+		if ($permissions = $this->permissions) {
+			return Q::json_decode($permissions, true);
+		}
+		return array();
+	}
+	
+	/**
+	 * @method hasPermission
+	 * @param {string} $permission
+	 * @return {boolean}
+	 */
+	function hasPermission($permission)
+	{
+		return in_array($permission, $this->getAllPermissions());
+	}
+	
+	/**
+	 * @method addPermission
+	 * @param {string} $permissions
+	 */
+	function addPermission($permission)
+	{
+		$permissions = $this->getAllPermissions();
+		if (!in_array($permission, $permissions)) {
+			$permissions[] = $permission;
+			$this->permissions = Q::json_encode($permissions);
+		}
+	}
+	
+	/**
+	 * @method removePermission
+	 * @param {string} $permission
+	 */
+	function removePermission($permission)
+	{
+		$permissions = array_diff($this->getAllPermissions(), array($permission));
+		$this->permissions = Q::json_encode($permissions);
+	}
+	
+	/**
+	 * Method is called before setting the field and verifies that, if it is a string,
+	 * it contains a JSON array.
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (is_string($value)) {
+			$decoded = Q::json_decode($value, true);
+			if (!is_array($decoded) or Q::isAssociative($decoded)) {
+				throw new Q_Exception_WrongValue(array('field' => 'permissions', 'range' => 'JSON array'));
+			}
+		}
+		return parent::beforeSet_permissions($value);
 	}
 
 	/**

@@ -1494,6 +1494,67 @@ Sp.clear = function _Stream_prototype_clear (attributeName) {
 Sp.clearAttribute = Sp.clear;
 
 /**
+ * @method getAllPermissions
+ * @param {Boolean} usePending
+ * @return {Array}
+ */
+Sp.getAllPermissions = function _Stream_prototype_getAllPermissions(usePending) {
+	try {
+		var permissions = usePending && this.pendingFields.permissions
+			? this.pendingFields.permissions
+			: this.fields.permissions;
+		return permissions ? JSON.parse(permissions) : [];
+	} catch (e) {
+		return [];
+	}
+};
+
+/**
+ * @method hasPermission
+ * @param {String} permission
+ * @param {Boolean} usePending
+ * @return {Boolean}
+ */
+Sp.hasPermission = function _Stream_prototype_hasPermission(permission, usePending) {
+	var permissions = this.getAllPermissions(usePending);
+	return (permissions.indexOf(permission) >= 0);
+};
+
+/**
+ * @method addPermission
+ * @param {String} permission
+ */
+Sp.addPermission = function (permission) {
+	var pf = this.pendingFields;
+	if (!pf.permissions || pf.permissions === this.fields.permissions) {
+		pf.permissions = Q.copy(this.fields.permissions) || []; // copy on write
+	}
+	var permissions = this.getAllPermissions(true);
+	if (permissions.indexOf(permission) < 0) {
+		permissions.push(permission);
+	}
+	pf.permissions = JSON.stringify(permissions);
+};
+
+/**
+ * @method removePermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+Sp.removePermission = function (permission) {
+	var pf = this.pendingFields;
+	if (!pf.permissions || pf.permissions === this.fields.permissions) {
+		pf.permissions = Q.copy(this.fields.permissions) || []; // copy on write
+	}
+	var permissions = this.getAllPermissions(true);
+	var index = permissions.indexOf(permission);
+	if (index >= 0) {
+		permissions.splice(index, 1);
+	}
+	pf.permissions = JSON.stringify(permissions);
+};
+
+/**
  * Save a stream to the server
  * 
  * @method save
@@ -2519,7 +2580,7 @@ Mp.getAll = function _Message_prototype_getAll () {
 	try {
 		return JSON.parse(this.instructions);
 	} catch (e) {
-		return undefined;
+		return {};
 	}
 };
 
@@ -2902,7 +2963,7 @@ Pp.getAll = function _Participant_prototype_getAll () {
 	try {
 		return JSON.parse(this.extra);
 	} catch (e) {
-		return undefined;
+		return {};
 	}
 };
 

@@ -214,9 +214,12 @@ class Streams_Stream extends Base_Streams_Stream
 	function beforeSave($modifiedFields)
 	{
 		if (empty($this->attributes)) {
-			$this->attributes = '{}';
+			unset($this->attributes);
 		}
-		
+		if (empty($this->permissions)) {
+			unset($this->permissions);
+		}
+
 		if (!$this->retrieved) {
 			// Generate a unique name for the stream
 			if (!isset($modifiedFields['name'])) {
@@ -618,6 +621,70 @@ class Streams_Stream extends Base_Streams_Stream
 	function clearAllAttributes()
 	{
 		$this->attributes = '{}';
+	}
+	
+	/**
+	 * @method getAllPermissions
+	 * @return {array}
+	 */
+	function getAllPermissions()
+	{
+		if ($permissions = $this->permissions) {
+			return Q::json_decode($permissions, true);
+		}
+		return array();
+	}
+	
+	/**
+	 * @method hasPermission
+	 * @param {string} $permission
+	 * @return {boolean}
+	 */
+	function hasPermission($permission)
+	{
+		return in_array($permission, $this->getAllPermissions());
+	}
+	
+	/**
+	 * @method addPermission
+	 * @param {string} $permissions
+	 */
+	function addPermission($permission)
+	{
+		$permissions = $this->getAllPermissions();
+		if (!in_array($permission, $permissions)) {
+			$permissions[] = $permission;
+			$this->permissions = Q::json_encode($permissions);
+		}
+	}
+	
+	/**
+	 * @method removePermission
+	 * @param {string} $permission
+	 */
+	function removePermission($permission)
+	{
+		$permissions = array_diff($this->getAllPermissions(), array($permission));
+		$this->permissions = Q::json_encode($permissions);
+	}
+	
+	/**
+	 * Method is called before setting the field and verifies that, if it is a string,
+	 * it contains a JSON array.
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (is_string($value)) {
+			$decoded = Q::json_decode($value, true);
+			if (!is_array($decoded) or Q::isAssociative($decoded)) {
+				throw new Q_Exception_WrongValue(array('field' => 'permissions', 'range' => 'JSON array'));
+			}
+		}
+		return parent::beforeSet_permissions($value);
 	}
 	
 	/**
@@ -1280,6 +1347,47 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
+	 * Verifies whether the user has at least the given permission
+	 * @method testPermission
+	 * @param {string|array} $permission The name of the permission
+	 * @return {boolean}
+	 */
+	function testPermission($permission)
+	{
+		if (is_array($permission)) {
+			foreach ($permission as $p) {
+				if (!$this->testPermission($p)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		if ($this->publishedByFetcher) {
+			return true;
+		}
+		if (!empty($this->closedTime) and !$this->testWriteLevel('close')) {
+			return false;
+		}
+		$permissions = $this->get('permissions', array());
+		if (in_array($permission, $permissions)) {
+			return true;
+		}
+		$permissions_source = $this->get('permissions_source', 0);
+		if ($permissions_source === Streams::$ACCESS_SOURCES['direct']
+		or $permissions_source === Streams::$ACCESS_SOURCES['inherited_direct']) {
+			return false;
+		}
+		if (!$this->inheritAccess()) {
+			return false;
+		}
+		$permissions = $this->get('permissions', array());
+		if (in_array($permission, $permissions)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Returns whether the stream is required for the user, and thus shouldn't be deleted,
 	 * even if it has been marked closed.
 	 * @return {Boolean}
@@ -1592,7 +1700,8 @@ class Streams_Stream extends Base_Streams_Stream
 		$result['access'] = array(
 			'readLevel' => $this->get('readLevel', $this->readLevel),
 			'writeLevel' => $this->get('writeLevel', $this->writeLevel),
-			'adminLevel' => $this->get('adminLevel', $this->adminLevel)
+			'adminLevel' => $this->get('adminLevel', $this->adminLevel),
+			'permissions' => $this->get('permissions', $this->getAllPermissions())
 		);
 		$result['isRequired'] = $this->isRequired();
 		if ($this->get('participant')) {

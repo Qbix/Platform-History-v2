@@ -14,4 +14,4 @@ class Q_Exception_DbQuery extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_DbQuery', 'DbQuery Exception: {{message}} ... Query was: {{sql}}');
+Q_Exception::add('Q_Exception_DbQuery', 'DbQuery Exception: {{msg}} ... Query was: {{sql}}');

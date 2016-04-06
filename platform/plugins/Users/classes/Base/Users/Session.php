@@ -563,7 +563,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'MUL',
+  2 => '',
   3 => 'CURRENT_TIMESTAMP',
 );			
 	}
