@@ -2303,14 +2303,14 @@ abstract class Streams extends Base_Streams
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.label] label or an array of labels for adding publisher's contacts
-	 *  @param {string|array} [$options.myLabel] label or an array of labels for adding logged-in user's contacts
+	 *  @param {string|array} [$options.myLabel] label or an array of labels for adding asUserId's contacts
 	 *  @param {integer} [$options.readLevel] => the read level to grant those who are invited
 	 *  @param {integer} [$options.writeLevel] => the write level to grant those who are invited
 	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited
 	 *	@param {string} [$options.displayName] => the display name to use to represent the inviting user
 	 *  @param {string} [$options.appUrl] => Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] => an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName
-	 * @param {array} [$options.asUserId=null] Invite as this user id
+	 * @param {array} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
 	 * @see Users::addLink()
 	 * @return {array} returns array with keys "success", "invited", "statuses", "identifierTypes", "alreadyParticipating"
 	 */
@@ -2461,10 +2461,16 @@ abstract class Streams extends Base_Streams
 		$expiry = $duration ? strtotime($duration) : null;
 		
 		if ($label = Q::ifset($options, 'label', null)) {
+			if (is_string($label)) {
+				$label = explode("\t", $label);
+			}
 			Users_Label::addLabel($label, $publisherId, null, null, false);
 		}
 		if ($myLabel = Q::ifset($options, 'myLabel', null)) {
-			Users_Label::addLabel($label, $asUserId, null, null, false);
+			if (is_string($myLabel)) {
+				$myLabel = explode("\t", $myLabel);
+			}
+			Users_Label::addLabel($myLabel, $asUserId, null, null, false);
 		}
 		
 		foreach ($raw_userIds as $userId) {

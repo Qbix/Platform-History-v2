@@ -27,7 +27,7 @@ $usage
 EOT;
 
 #Is it a call for help?
-if (isset($argv[1]) and $argv[1] == '-help')
+if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h')))
 	die($help);
 
 #Check primary arguments count: 1 if running /app/scripts/Q/urls.php, 2 if running /framework/scripts/app.php
