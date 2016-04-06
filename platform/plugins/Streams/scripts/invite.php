@@ -51,7 +51,7 @@ if ($count < ($FROM_APP ? 2 : 3))
 $LOCAL_DIR = $FROM_APP ? APP_DIR : $argv[1];
 
 #Check paths
-if (!file_exists($Q_filename = APP_DIR . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR .  'Q.inc.php')) #Q Platform
+if (!file_exists($Q_filename = Q_DIR . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR .  'Q.inc.php')) #Q Platform
 	die("[ERROR] $Q_filename not found" . PHP_EOL);
 
 if (!is_dir($LOCAL_DIR)) #App dir
@@ -71,8 +71,8 @@ try {
 $app = Q_Config::expect('Q', 'app');
 $identifier = $FROM_APP ? $argv[1] : $argv[2];
 $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
-$labels = Q::ifset($argv, $FROM_APP ? 3 : 4, "$app/admins");
-$label = str_replace(" ", "\t", $labels);
+$labels = array_slice($argv, $FROM_APP ? 3 : 4);
+$label = empty($labels) ? "$app/admins" : $labels;
 $asUserId = $app;
 
 Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('label', 'asUserId'));
