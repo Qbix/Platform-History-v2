@@ -214,10 +214,10 @@ class Streams_Stream extends Base_Streams_Stream
 	function beforeSave($modifiedFields)
 	{
 		if (empty($this->attributes)) {
-			unset($this->attributes);
+			$this->attributes = null;
 		}
 		if (empty($this->permissions)) {
-			unset($this->permissions);
+			$this->permissions = null;
 		}
 
 		if (!$this->retrieved) {
