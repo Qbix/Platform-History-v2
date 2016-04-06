@@ -3107,6 +3107,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		fn = fn.encodeHTML();
 		ln = ln.encodeHTML();
 		u = u.encodeHTML();
+		fallback = fallback.encodeHTML();
 	}
 	if (options && options.html) {
 		fn2 = '<span class="Streams_firstName">'+fn+'</span>';
@@ -3129,7 +3130,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		return parts.join(' ');
 	}
 	if (options && options.short) {
-		return fn ? fn2 : u2;
+		return fn ? fn2 : (u ? u2 : f2);
 	} else if (fn && ln) {
 		return fn + ' ' + ln2;
 	} else if (fn && !ln) {
