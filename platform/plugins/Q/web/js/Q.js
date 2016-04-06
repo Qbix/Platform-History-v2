@@ -518,9 +518,9 @@ Elp.contains = function (child) {
 };
 
 /**
- * Returns the computed style of an element
+ * Returns a snapshot of the computed style of an element.
  * @method computedStyle
- * @param {String} name Optional. If provided, the value of a property is returned instead of the whole style object.
+ * @param {String} [name] If provided, the value of a property is returned instead of the whole style object.
  * @return {Object|String}
  */
 Elp.computedStyle = function(name) {
@@ -529,7 +529,7 @@ Elp.computedStyle = function(name) {
 		: this.currentStyle;
 	return name
 		? (computedStyle ? computedStyle[name] : null)
-		: computedStyle;
+		: Q.extend({}, computedStyle);
 };
 
 /**
@@ -556,6 +556,23 @@ Elp.copyComputedStyle = function(src) {
 		}
 	}
 	return this;
+};
+
+/**
+ * Retrieves the width and height of the element, if any were set it in css,
+ * as specified in either pixels or percentages, or "auto".
+ * Very useful when sizing other elements to match the dimensions.
+ * @return {Object} Returns object with properties "width" and "height" as strings.
+ */
+Elp.cssDimensions = function () {
+    var cn = this.cloneNode();
+    var div = document.createElement('div');
+    div.appendChild(cn);
+    div.style.display = 'none';
+    document.body.appendChild(div);
+    var cs = Q.copy(cn.computedStyle());
+    document.body.removeChild(div);
+    return { width: cs.width, height: cs.height };
 };
 
 /**
@@ -1310,7 +1327,7 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Q.typeOf(x) === 'array') {
-		return Array.prototype.slice.call(x, 0);
+		var arr = Array.prototype.slice.call(x, 0);
 	}
 	if (x && typeof x.copy === 'function') {
 		return x.copy();
