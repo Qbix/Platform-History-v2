@@ -170,7 +170,6 @@ Q.mixin(Streams_Stream, Q.require('Base/Streams/Stream'));
 
 Streams_Stream.construct = function Streams_Stream_construct(fields) {
 	if (Q.isEmpty(fields)) {
-		Q.handle(callback, this, ["Streams.Stream constructor: fields are missing"]);
 		return false;
 	}
 	if (fields.fields) {
