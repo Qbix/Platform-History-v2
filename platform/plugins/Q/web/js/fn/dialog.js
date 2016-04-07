@@ -137,10 +137,10 @@ function _Q_overlay(o) {
 				Q.Animation.play(function (x, y) {
 					if (x === 1) {
 						$this.hide();
+						Q.handle($overlay.options.onClose, $this, []);
 					} else {
 						$this.css('opacity', 1-y);
 					}
-					Q.handle($overlay.options.onClose, $this, []);
 				}, o.fadeTime);
 				if ($overlay.options.mask)
 				{
@@ -372,7 +372,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		visibility: 'hidden'
 	};
 	var $div = $('<div />').addClass('Q_overlay').css(css).prependTo('body');
-	var src = $div.css('background-image').match(/url\((.*)\)/)[1];
+	var src = $div.css('background-image').match(/url\(\"?(.*?)\"?\)/)[1];
 	$div.remove();
 	if (src.isUrl() && !bgLoaded) {
 		var $img = $('<img />').on('load', function () {

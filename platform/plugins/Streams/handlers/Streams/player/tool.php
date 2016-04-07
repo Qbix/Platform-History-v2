@@ -32,8 +32,12 @@ function Streams_player_tool($options)
 			return $strem->content;
 		case 'Streams/category': // TODO: implement
 		case 'Streams/chat': // TODO: implement
+		case 'Streams/community': // TODO: implement
 		default:
-			return Q::event("Streams/player/{$stream->type}", $options);
-			// return $stream->content;
+			$event = "Streams/player/".$stream->type;
+			if (Q::canHandle($event)) {
+				return Q::event($event, $options);
+			}
+			return $stream->content;
 	}
 }

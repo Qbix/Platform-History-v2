@@ -40,18 +40,21 @@ var Streams = Q.Streams;
 Q.Tool.define("Users/avatar", function(options) {
 	var tool = this;
 	var state = this.state;
-	Streams.Stream.retain(state.userId, 'Streams/user/firstName', tool);
-	Streams.Stream.retain(state.userId, 'Streams/user/lastName', tool);
 	if (state.icon === true) {
 		state.icon = Users.icon.defaultSize;
 	}
 	if (state.me) {
 		state.userId = Users.loggedInUserId();
 	}
+	if (state.editable === true) {
+		state.editable = ['icon', 'name'];
+	}
 	this.refresh();
-	if (!state.reflectChanges) {
+	if (!state.userId || !state.reflectChanges) {
 		return;
 	}
+	Streams.Stream.retain(state.userId, 'Streams/user/firstName', tool);
+	Streams.Stream.retain(state.userId, 'Streams/user/lastName', tool);
 	Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
 	.set(function (fields, field) {
 		var $img = tool.$('.Users_avatar_icon');
@@ -205,7 +208,7 @@ Q.Tool.define("Users/avatar", function(options) {
 						}
 					}, state.inplaces);
 					var e = Q.Tool.setUpElement(
-						'span', 'Streams/inplace', opt, tool.prefix+'Q_inplace-'+vName, tool.prefix
+						'span', 'Streams/inplace', opt, tool.prefix+'Streams_inplace-'+vName, tool.prefix
 					);
 					f.innerHTML = '';
 					f.appendChild(e);

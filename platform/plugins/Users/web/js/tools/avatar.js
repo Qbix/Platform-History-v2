@@ -35,8 +35,7 @@ Q.Tool.define("Users/avatar", function(options) {
 	var tool = this;
 	var state = this.state;
 	if (state.userId === undefined) {
-		console.warn("Users/avatar: no userId provided");
-		return; // empty
+		return;
 	}
 	if (state.icon === true) {
 		state.icon = Users.icon.defaultSize;

@@ -38,3 +38,5 @@ node_modules/
 *.php.inc
 *.js.inc
 
+# Custom plugins
+platform/plugins/Communities

@@ -234,16 +234,16 @@ class Q_Response
 	 * Get or set the layout view that should be used in the response
 	 * @method layoutView
 	 * @static
-	 * @param {string} $new_view optionally set the new view, or unset it by passing false
+	 * @param {string} $newView optionally set the new view, or unset it by passing false
 	 * @return {string}
 	 */
-	static function layoutView($new_view = null)
+	static function layoutView($newView = null)
 	{
-		if (isset($new_view)) {
-			return Q_Response::$layout_view = $new_view;
+		if (isset($newView)) {
+			return Q_Response::$layoutView = $newView;
 		}
-		if (Q_Response::$layout_view) {
-			return Q_Response::$layout_view;
+		if (Q_Response::$layoutView) {
+			return Q_Response::$layoutView;
 		}
 		$app = Q_Config::expect('Q', 'app');
 		$layout_view = Q_Config::get('Q', 'response', 'layout', 'html', "$app/layout/html.php");
@@ -843,18 +843,18 @@ class Q_Response
 	 * @method addTemplate
 	 * @static
 	 * @param {string} $name The location of the template file relative to the "views" folder
-	 * @param {string} [$type="handlebars"] The extension, such as 'handlebars' or 'php'
-	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned first by Q_Response::scriptLines.
 	 *  The other special value, "Q", is intended for internal use.
+	 * @param {string} [$type="handlebars"] The extension, such as 'handlebars' or 'php'
+	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
 	 * @return {boolean} returns false if template was already added, else returns true
 	 */
 	static function addTemplate (
 		$name, 
+		$slotName = null,
 		$type = 'handlebars', 
-		$params = array(), 
-		$slotName = null)
+		$params = array())
 	{
 		self::$templates[] = compact('name', 'type');
 		// Now, for the slot
@@ -871,6 +871,7 @@ class Q_Response
 			}
 		}
 		$filename = Q::realPath("views/$name.$type");
+
 		if (!$filename) {
 			throw new Q_Exception_MissingFile(array('filename' => "views/$name.$type"));
 		}
@@ -1284,6 +1285,23 @@ class Q_Response
 		return implode($between, $tags);
 	}
 	
+	/**
+	 * Call this method to add a css class to the HTML element in the layout
+	 * @method addHtmlCssClass
+	 * @static
+	 * @param {string} $className
+	 */
+	static function addHtmlCssClass($className)
+	{
+		self::$htmlCssClasses[$className] = true;
+	}
+	
+	/**
+	 * Returns the string containing all the html attributes
+	 * @method addHtmlCssClass
+	 * @static
+	 * @return {string}
+	 */
 	static function htmlAttributes()
 	{
 		$touchscreen = Q_Request::isTouchscreen() ? 'Q_touchscreen' : 'Q_notTouchscreen';
@@ -1294,6 +1312,9 @@ class Q_Response
 		$ie8 = Q_Request::isIE(0, 8) ? 'Q_ie8OrBelow' : 'Q_notIE8OrBelow';
 		$uri = Q_Dispatcher::uri();
 		$classes = "{$uri->module} {$uri->module}_{$uri->action}";
+		foreach (self::$htmlCssClasses as $k => $v) {
+			$classes .= Q_Html::text(" $k");
+		}
 		$result = 'lang="en" prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
 			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
 		return $result;
@@ -1308,12 +1329,12 @@ class Q_Response
 	 */
 	static function faviconUrl($new_url=null)
 	{
-		if (!isset(self::$favicon_url)) {
-			self::$favicon_url = Q_Request::baseUrl().'/favicon.ico';
+		if (!isset(self::$faviconUrl)) {
+			self::$faviconUrl = Q_Request::baseUrl().'/favicon.ico';
 		}
-		$old_url = self::$favicon_url;
+		$old_url = self::$faviconUrl;
 		if (isset($new_url)) {
-			self::$favicon_url = $new_url;
+			self::$faviconUrl = $new_url;
 		}
 		return $old_url;
 	}
@@ -1437,10 +1458,10 @@ class Q_Response
 	/**
 	 * @method setCookie
 	 * @static
-	 * @param {string} $name
-	 * @param {string} $value
-	 * @param {string} [$expires=0]
-	 * @param {string} [$path=false]
+	 * @param {string} $name The name of the cookie
+	 * @param {string} $value The value of the cookie
+	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means never expires
+	 * @param {string} [$path=false] You can specify a path on the server here for the cookie
 	 * @return {string}
 	 */
 	static function setCookie($name, $value, $expires = 0, $path = false)
@@ -1452,18 +1473,59 @@ class Q_Response
 		if (isset($_COOKIE[$name]) and $_COOKIE[$name] === $value) {
 			return;
 		}
-		$parts = parse_url(Q_Request::baseUrl());
-		$path = $path ? $path : !empty($parts['path']) ? $parts['path'] : '/';
-		$domain = '.'.$parts['host'];
-		setcookie($name, $value, $expires, $path, $domain);
+		if (Q_Dispatcher::$startedResponse) {
+			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
+		}
+		// see https://bugs.php.net/bug.php?id=38104
+		self::$cookies[$name] = array($value, $expires, $path);
 		$_COOKIE[$name] = $value;
+		return $value;
+	}
+	
+	/**
+	 * @method clearCookie
+	 * @static
+	 * @param {string} $name
+	 * @param {string} [$path=false]
+	 * @return {string}
+	 */
+	static function clearCookie($name, $path = false)
+	{
+		self::setCookie($name, '', 1, $path);
+	}
+	
+	/**
+	 * Outputs all the headers for effecting changes in cookies set by Q_Response::setCookies.
+	 * This is called automatically by the dispatcher before the Q/response event.
+	 * @method sendCookieHeaders
+	 * @static
+	 */
+	static function sendCookieHeaders()
+	{
+		if (empty(self::$cookies)) {
+			return;
+		}
+		foreach (self::$cookies as $name => $args) {
+			list($value, $expires, $path) = $args;
+			self::_cookie($name, $value, $expires, $path);
+		}
+		// A reasonable P3P policy for old IE to allow 3rd party cookies.
+		// Consider overriding it with a real P3P policy for your app.
 		$header = 'P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"';
 		$header = Q::event('Q/Response/setCookie',
 			compact('name', 'value', 'expires', 'path', 'header'),
 			'before', false, $header
 		);
 		header($header);
-		return $value;
+		self::$cookies = array();
+	}
+	
+	protected static function _cookie($name, $value, $expires, $path)
+	{
+		$parts = parse_url(Q_Request::baseUrl());
+		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
+		$domain = '.'.$parts['host'];
+		setcookie($name, $value, $expires, $path, $domain);
 	}
 
 	/**
@@ -1640,21 +1702,34 @@ class Q_Response
 	 */
 	protected static $retainSlot = array();
 	/**
-	 * @property $favicon_url
+	 * @property $faviconUrl
 	 * @static
 	 * @type string
 	 */
-	protected static $favicon_url = null;
+	protected static $faviconUrl = null;
 	/**
 	 * @property $layout_view
 	 * @static
 	 * @type string
 	 */
-	protected static $layout_view = null;
+	protected static $layoutView = null;
 	/**
 	 * @property $isBuffered
 	 * @static
+	 * @protected
 	 * @type boolean
 	 */
 	protected static $isBuffered = true; // buffer responses by default
+	/**
+	 * @property $cookies
+	 * @static
+	 * @type array
+	 */
+	public static $cookies = array();
+	/**
+	 * @property $htmlCssClasses
+	 * @static
+	 * @type array
+	 */
+	public static $htmlCssClasses = array();
 }

@@ -19,7 +19,7 @@
  */
 Q.Tool.jQuery('Q/textfill',
 
-    function _Q_textfill(options) {
+	function _Q_textfill(options) {
 
 		var $this = $(this);
 		$this.plugin('Q/textfill', 'refresh', options);
@@ -31,53 +31,64 @@ Q.Tool.jQuery('Q/textfill',
 			});
 		}
 
-    },
+	},
 
-    {},
+	{},
 
-    {
-        refresh: function (options) {
+	{
+		refresh: function (options) {
 			var o = Q.extend({}, this.state('Q/textfill'), options);
-            var ourElement, ourText = "";
-            this.children(':visible').each(function () {
-                var $t = $(this);
-                if ($t.text().length > ourText.length) {
-                    ourElement = $t;
-                    ourText = $t.text();
-                }
-            });
+			var ourElement, ourText = "";
+			this.children(':visible').each(function () {
+				var $t = $(this);
+				if ($t.text().length > ourText.length) {
+					ourElement = $t;
+					ourText = $t.text();
+				}
+			});
 			if (!ourElement) {
 				var e = new Q.Error("Q/textfill missing a visible element inside the container");
 				console.warn(e);
 				return false;
 			}
-            var fontSize = o.maxFontPixels || (ourElement.height() + 10);
 			var $this = $(this);
-            var maxHeight = o.fillPadding ? $this.innerHeight() : $this.height();
-            var maxWidth = o.fillPadding ? $this.innerWidth() : $this.width();
-            var textHeight;
-            var textWidth;
-			var lines;
-            do {
-                ourElement.css('font-size', fontSize);
-                textHeight = ourElement.outerHeight(true);
-                textWidth = ourElement.outerWidth(true);
+			var fontSize = o.maxFontPixels || ($this.height() + 10);
+			var lastGoodFontSize = 0, lastBadFontSize = fontSize, jump;
+			var maxHeight = o.fillPadding ? $this.innerHeight() : $this.height();
+			var maxWidth = o.fillPadding ? $this.innerWidth() : $this.width();
+			var textHeight, textWidth, lines, tooBig;
+			for (var i=0; i<100; ++i) {
+				ourElement.css('font-size', fontSize + 'px');
+				textHeight = ourElement.outerHeight(true);
+				textWidth = ourElement.outerWidth(true);
 				if (o.maxLines) {
-					lines = textHeight / Math.floor(parseInt(fontSize.toString().replace('px','')) * 1.5);
+					lines = textHeight / Math.floor(fontSize * 1.5);
 				}
-            } while (--fontSize > 3
-				&& (
-					textHeight > maxHeight || textWidth > maxWidth
-					|| (o.maxLines && lines > o.maxLines)
-				)
-			);
-            return this;
-        },
+				if (tooBig = (textHeight > maxHeight || textWidth > maxWidth
+				|| (o.maxLines && lines > o.maxLines))) {
+					lastBadFontSize = fontSize;
+					jump = (lastGoodFontSize - fontSize) / 2;
+				} else {
+					lastGoodFontSize = fontSize;
+					jump = (lastBadFontSize - fontSize) / 2
+				}
+				if (Math.abs(jump) < 1) {
+					break;
+				}
+				fontSize = Math.floor(fontSize + jump);
+				if (fontSize < 3) {
+					lastGoodFontSize = 3;
+					break; // container is super small
+				}
+			};
+			ourElement.css('font-size', lastGoodFontSize + 'px');
+			return this;
+		},
 		
 		remove: function () {
 			Q.onLayout(this[0]).remove(this.state('Q/textfill').layoutEventKey);
 		}
-    }
+	}
 
 );
 

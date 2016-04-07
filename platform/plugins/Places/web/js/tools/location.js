@@ -19,6 +19,7 @@
 Q.Tool.define("Places/location", function (options) {
 	var tool = this;
 	var state = tool.state;
+	var $te = $(tool.element);
 	if (!Q.Users.loggedInUser) {
 		tool.element.style.display = 'none';
 		console.warn("Don't render Places/location when user is not logged in");
@@ -27,7 +28,7 @@ Q.Tool.define("Places/location", function (options) {
 	var publisherId = Q.Users.loggedInUser.id;
 	var streamName = "Places/user/location";
 	
-	$(tool.element).addClass('Places_location_checking');
+	$te.find('.Places_location_container').addClass('Places_location_checking');
 	
 	var pipe = Q.pipe(['info', 'show'], function (params) {
 		_showMap.apply(this, params.info);
@@ -58,10 +59,10 @@ Q.Tool.define("Places/location", function (options) {
 			}
 		}
 		if (!latitude || !longitude || !miles) {
-			$(tool.element)
-				.removeClass('Places_location_obtained')
-				.removeClass('Places_location_checking')
+			$te.removeClass('Places_location_obtained')
 				.addClass('Places_location_obtaining');
+			$te.find('.Places_location_container')
+				.removeClass('Places_location_checking');
 			Q.handle(state.onUnset, tool, [err, stream]);
 		}
 		setTimeout(function () {
@@ -211,10 +212,10 @@ Q.Tool.define("Places/location", function (options) {
 		};
 
 		Q.Places.loadGoogleMaps(function () {
-			$(tool.element)
-				.removeClass('Places_location_obtaining')
-				.removeClass('Places_location_checking')
+			$te.removeClass('Places_location_obtaining')
 				.addClass('Places_location_obtained');
+			$te.find('.Places_location_container')
+				.removeClass('Places_location_checking');
 			setTimeout(function () {
 				tool.$('.Places_location_map_container').show();
 				tool.$('.Places_location_update').slideDown(800);

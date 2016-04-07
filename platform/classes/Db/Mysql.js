@@ -61,9 +61,9 @@ function Db_Mysql(connName, dsn) {
 	 */
 	var connections = {};
 
-	function mysqlConnection(host, port, user, password, database, options) {
+	function mysqlConnection(host, port, user, password, database, options, ignoreExisting) {
 		var key = [host, port, user, password, database].join("\t");
-		if (connections[key]) {
+		if (!ignoreExisting && connections[key]) {
 			return connections[key];
 		}
 		var o = Q.extend({
@@ -94,9 +94,51 @@ function Db_Mysql(connName, dsn) {
 	 * @method reallyConnect
 	 * @param {Function} callback The callback is fired after connection is complete. mysql.Connection is passed as argument
 	 * @param {String} [shardName=''] The name of the shard to connect
-	 * @param {object} [modifications={}] Additional modifications to table information. If supplied override shard modifications
+	 * @param {Object} [modifications={}] Additional modifications to table information. If supplied override shard modifications
+	 * @param {Boolean} [dontReconnect=false] Pass true here to avoid automatically reconnecting when connection is lost
 	 */
-	dbm.reallyConnect = function(callback, shardName, modifications) {
+	dbm.reallyConnect = function(callback, shardName, modifications, dontReconnect) {
+	
+		function _setUpConnection() {
+			if (Q.Config.get(['Db', 'debug'], false)) {
+				connection._original_query = connection.query;
+				connection.query = function (sql) {
+					Q.log(
+						"--> db="+connection.config.database+": " + sql.replace(/[\n\t]+/g, " ") + "\n",
+						'mysql'
+					);
+					return connection._original_query.apply(connection, arguments);
+				};
+			}
+			connection.on('error', function _Db_Mysql_onConnectionError(err, mq) {
+				if (err.code === "PROTOCOL_CONNECTION_LOST" && !dontReconnect) {
+					connection = mysqlConnection(
+						info.host,
+						info.port || 3306,
+						info.username,
+						info.password,
+						info.dbname,
+						info.options,
+						true
+					);
+					connection.connect(function (err) {
+						if (err) {
+							throw new Q.Exception("Db.Mysql connection failed to reconnect to " + connection.config.database, 'mysql')
+							return;
+						}
+						Q.log("Db.Mysql reconnected to " + connection.config.database, 'mysql');
+					});
+					return _setUpConnection();
+				}
+				Q.log("Db.Mysql error: " + err, 'mysql');
+				mq.getSQL(function (repres) {
+					Q.log("Query was: " + repres, 'mysql');
+				});
+				// our app will survive mysql errors, and continue operating
+			});
+			connection.query('SET NAMES UTF8');
+		}
+		
 		info = this.info(shardName, modifications);
 		var connection = mysqlConnection(
 			info.host,
@@ -106,28 +148,12 @@ function Db_Mysql(connName, dsn) {
 			info.dbname,
 			info.options
 		);
-		if (!callback) return connection;
-		if (!dbm.connected && Q.Config.get(['Db', 'debug'], false)) {
-			connection._original_query = connection.query;
-			connection.query = function (sql) {
-				console.log("--> db="+connection.database+": ", sql.replace(/\n+/g, " "));
-				return connection._original_query.apply(connection, arguments);
-			};
-		}
-		if (!dbm.connected)
-		{
-			// add an error listener to handle mysql errors,
-			// so the client won't crash
-			dbm.on('error', function(err, mq) {
-				console.log("Db.Mysql error: " + err);
-				mq.getSQL(function (repres) {
-					console.log("Query was: " + repres);
-				});
-			});
-			connection.query('SET NAMES UTF8');
+		if (!dbm.connected) {
+			_setUpConnection();
 			dbm.connected = true;
 		}
-		callback(connection);
+		callback && callback(connection);
+		return connection;
 	};
 	/**
 	 * Retrieves table prefix to use with connection

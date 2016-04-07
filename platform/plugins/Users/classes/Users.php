@@ -57,6 +57,15 @@ abstract class Users extends Base_Users
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
 		return $communityName ? $communityName : Q_Config::expect('Q', 'app');
 	}
+	
+	/**
+	 * Get the suffix of the main community from the config, such as "Incorporated" or "LLC"
+	 * @return {string|null} The suffix of the main community for the installed app.
+	 */
+	static function communitySuffix()
+	{
+		return Q_Config::get('Users', 'community', 'suffix', null);
+	}
 
 	/**
 	 * @param string [$publisherId] The id of the publisher relative to whom to calculate the roles. Defaults to the app name.
@@ -88,6 +97,20 @@ abstract class Users extends Base_Users
 			->options($options)
 			->fetchDbRows(null, null, 'label');
 		return $contacts;
+	}
+
+	/**
+	 * Intelligently retrieves user by id
+	 * @method fetch
+	 * @static
+	 * @param {string} $userId
+	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
+	 * @return {Users_User|null}
+	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
+	 */
+	static function fetch ($userId, $throwIfMissing = false)
+	{
+		return Users_User::fetch($userId, $throwIfMissing);
 	}
 
 	/**
@@ -674,9 +697,6 @@ abstract class Users extends Base_Users
 		$deviceId = isset($_SESSION['Users']['deviceId'])
 			? $_SESSION['Users']['deviceId']
 			: null;
-
-		$device = new Users_Device();
-		$device->sessionId = $sessionId; // WARNING: NON-PK LOOKUP. Should store device id in session!
 		
 		if ($user) {
 			Q_Utils::sendToNode(array(
@@ -813,8 +833,8 @@ abstract class Users extends Base_Users
 	 * @param {string} $identifier User identifier
 	 * @param {array|string} [$icon=array()] Array of filename => url pairs
 	 * @param {string} [$provider=null] Provider
-	 * @param {array} $options=array() An array of options that could include:
-	 *  "activation": The key under "Users"/"transactional" config to use for sending an activation message.
+	 * @param {array} [$options=array()] An array of options that could include:
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -980,12 +1000,16 @@ abstract class Users extends Base_Users
 			// Add an email address or mobile number to the user, that they'll have to verify
 			try {
 				$activation = Q::ifset($options, 'activation', 'activation');
-				$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
-				$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
+				if ($activation) {
+					$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
+					$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
+				} else {
+					$subject = $body = null;
+				}
 				if ($type === 'email') {
-					$user->addEmail($identifier, $subject, $body);
+					$user->addEmail($identifier, $subject, $body, array(), $options);
 				} else if ($type === 'mobile') {
-					$p = array();
+					$p = $options;
 					if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
 						$p['delay'] = $delay;
 					}

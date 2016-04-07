@@ -121,9 +121,7 @@ class Q_Session
 		 * @param {string} id
 		 * @return {string}
 		 */
-		if ($id2 = Q::event('Q/session/id', compact('id'), 'before')) {
-			return $id2;
-		}
+		$id = Q::event('Q/session/id', array(), 'before', false, $id);
 		if (isset($id)) {
 			return session_id($id);
 		}
@@ -171,30 +169,31 @@ class Q_Session
 		ini_set("session.entropy_file", "/dev/urandom");
 		ini_set("session.entropy_length", "512");
 		ini_set("session.hash_function", "1");
-		$base_url = Q_Request::baseUrl();
-		$name = Q_Config::get('Q', 'session', 'name', 'sessionId');
-		$lifetime = Q_Config::get('Q', 'session', 'durations', Q_Request::formFactor(), 0);
-		$parts = parse_url($base_url);
+		$name = Q_Config::get('Q', 'session', 'name', 'Q_sessionId');
+		$durationName = self::durationName();
+		$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+		$baseUrl = Q_Request::baseUrl();
+		$parts = parse_url($baseUrl);
 		$path = !empty($parts['path']) ? $parts['path'] : '/';
 		$domain = '.'.$parts['host'];
 
 		Q::event('Q/session/init', array(
 			'name' => &$name,
-			'lifetime' => &$lifetime,
+			'duration' => &$duration,
 			'path' => &$path,
 			'domain' => &$domain
 		), 'before');
 
 		Q_Session::name($name);
-		session_set_cookie_params(isset($lifetime) ? $lifetime : 0, $path, $domain, false, false);
+		session_set_cookie_params($duration, $path, $domain, false, false);
 		
 		if (Q_Config::get('Q', 'session', 'appendSuffix', false)
 		or isset($_GET[$name])) {
 			if (self::id()) {
 				$s = "?$name=".self::id();
 				$suffix = Q_Uri::suffix();
-				$suffix[$base_url] = isset($suffix[$base_url])
-					? $suffix[$base_url].$s 
+				$suffix[$baseUrl] = isset($suffix[$baseUrl])
+					? $suffix[$baseUrl].$s
 					: $s;
 				Q_Uri::suffix($suffix);
 			}
@@ -268,11 +267,11 @@ class Q_Session
 					$class = self::$session_db_row_class;
 					$row = new $class();
 					$row->$id_field = $id;
-					if ($row->retrieve(null, null, array('lock' => 'FOR UPDATE'))) {
+					if ($row->retrieve()) {
 						self::$session_db_row = $row;
 					} else {
 						// Start a new session with our own id
-						$row->$id_field = self::generateId();
+						$id = $row->$id_field = self::generateId();
 						$row->$data_field = "";
 						$row->$updated_field = date('Y-m-d H:i:s');
 						$row->$duration_field = Q_Config::get(
@@ -295,15 +294,19 @@ class Q_Session
 							self::$session_db_row = $row;
 						}
 					}
-				} else {
-					self::id($id);
 				}
+				self::id($id);
 			}
 			if (!empty($_SERVER['HTTP_HOST'])) {
-				session_start();
+				$durationName = self::durationName();
+				$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+				Q_Response::setCookie(self::name(), $id, $duration ? time()+$duration : 0);
 			} else if (empty($_SESSION)) {
 				$_SESSION = array();
 			}
+			ini_set('session.use_cookies', 0); // we are gonna handle the cookies, thanks
+			session_cache_limiter(''); // don't send the cache limiter headers either
+			session_start();
 		} catch (Exception $e) {
 			$app = Q_Config::get('Q', 'app', null);
 			$prefix = $app ? "$app/" : '';
@@ -362,13 +365,8 @@ class Q_Session
 		session_destroy();
 		self::clear();
 		if (ini_get("session.use_cookies")) {
-		    $params = session_get_cookie_params();
-			$parts = parse_url(Q_Request::baseUrl());
-			$domain = '.'.$parts['host'];
-		    setcookie(self::name(), '', time() - 42000,
-		        $params["path"], $params["domain"],
-		        $params["secure"], $params["httponly"]
-		    );
+		    // note - we no use session_get_cookie_params();
+		    Q_Response::clearCookie(self::name());
 		}
 	}
 	
@@ -402,6 +400,12 @@ class Q_Session
 		}
 		session_id($sid = self::generateId()); // generate a new session id
 		session_start(); // start a new session
+		if (!empty($_SERVER['HTTP_HOST'])) {
+			// set the new cookie
+			$durationName = self::durationName();
+			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			Q_Response::setCookie(self::name(), $sid, $duration ? time()+$duration : 0);
+		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
 
 		return $sid;
@@ -553,16 +557,23 @@ class Q_Session
 			if(php_sapi_name() == 'cli') {
 				return false;
 			}
+			
+			$our_SESSION = $_SESSION;
+			$old_data = self::$sess_data;
+			$changed = ($sess_data !== $old_data);
+			$result = false;
 
 			/**
 			 * @event Q/session/write {before}
 			 * @param {string} id
 			 * @param {string} sess_data
+			 * @param {string} old_data
+			 * @param {boolean} changed
 			 * @return {boolean}
 			 */
 			if (false === Q::event(
 				'Q/session/write', 
-				compact('id', 'sess_data'), 
+				compact('id', 'sess_data', 'old_data', 'changed'), 
 				'before'
 			)) {
 				return false;
@@ -570,7 +581,7 @@ class Q_Session
 			if (empty(self::$session_save_path)) {
 				self::$session_save_path = self::savePath();
 			}
-			if (! empty(self::$session_db_connection)) {
+			if (!empty(self::$session_db_connection)) {
 				// Create a new row to be saved in the session table
 				$db_row_class = self::$session_db_row_class;
 				// Make sure it has a primary key!
@@ -585,35 +596,7 @@ class Q_Session
 				$updated_field = self::$session_db_updated_field;
 				$duration_field = self::$session_db_duration_field;
 				$row = self::$session_db_row;
-				if (!$row->wasRetrieved()) {
-					$row->$id_field = $id;
-				}
-				$row->$data_field = $sess_data;
-				$row->$duration_field = Q_Config::get(
-					'Q', 'session', 'durations', Q_Request::formFactor(),
-					Q_Config::expect('Q', 'session', 'durations', 'session')
-				);
-				/**
-				 * @event Q/session/save {before}
-				 * @param {string} id
-				 * @param {string} sess_data
-				 * @return {boolean}
-				 */
-				if (false === Q::event(
-					'Q/session/save', 
-					array(
-						'row' => $row,
-						'id_field' => $id_field,
-						'data_field' => $data_field,
-						'updated_field' => $updated_field,
-						'duration_field' => $duration_field
-					),
-					'before'
-				)) {
-					return false;
-				}
-				$row->save(false, true);
-				$result = true;
+				$row->$id_field = $id;
 			} else {
 				$duration_name = self::durationName();
 				$id1 = substr($id, 0, 4);
@@ -621,42 +604,100 @@ class Q_Session
 				$ssp = self::$session_save_path;
 				$sess_file = $ssp . DS . "$duration_name/$id1/$id2";
 				$dir = $ssp . DS . "$duration_name/$id1/";
-				if (!is_dir($dir)) {
-					mkdir($dir, fileperms($ssp), true);
+			}
+			if ($changed) {
+				// Apparently, we want to save some changes.
+				// The convention to avoid locking is that everything
+				// stored in sessions must be mergeable using the
+				// Q_Tree merge algorithm.
+				// So we will retrieve the latest session data again,
+				// merge our changes over it, and save.
+				$params = array(
+					'id_field' => $id_field,
+					'data_field' => $data_field,
+					'updated_field' => $updated_field,
+					'duration_field' => $duration_field,
+					'changed' => $changed,
+					'sess_data' => $sess_data,
+					'old_data' => $old_data
+				);
+				if (!empty(self::$session_db_connection)) {
+					$row->retrieve();
+					$existing_data = Q::ifset($row, $data_field, "");
+					$params['row'] = $row;
+				} else {
+					if (!is_dir($dir)) {
+						mkdir($dir, fileperms($ssp), true);
+					}
+					if (!is_writable($dir)) {
+						// alert the developer to this problem
+						Q::log("$sess_file is not writable", 'fatal');
+						die("$sess_file is not writable");
+					}
+					$file = fopen($sess_file, "w");
+					if (!$file) {
+						return false;
+					}
+					$params['row'] = $row;
+					$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
+					$existing_data = fread($file, $maxlength);
 				}
-				if (!is_writable($dir)) {
-					// alert the developer to this problem
-					Q::log("$sess_file is not writable", 'fatal');
-					die("$sess_file is not writable");
+				$_SESSION = session_decode($existing_data);
+				if (!$_SESSION) {
+					$_SESSION = array();
 				}
-				$fp = fopen($sess_file, "w");
-				if (!$fp) {
+				$t = new Q_Tree($_SESSION);
+				$t->merge($our_SESSION);
+				$_SESSION = $t->getAll();
+				$params['existing_data'] = $existing_data;
+				$params['merged_data'] = $merged_data = session_encode();
+				/**
+				 * @event Q/session/save {before}
+				 * @param {string} sess_data
+				 * @param {string} old_data
+				 * @param {string} existing_data
+				 * @param {string} merged_data
+				 * @param {boolean} changed
+				 * @param {Db_Row} row
+				 * @return {boolean}
+				 */
+				if (false === Q::event('Q/session/save', $params, 'before')) {
 					return false;
 				}
-				$result = fwrite($fp, $sess_data);
-				fclose($fp);
+				if (! empty(self::$session_db_connection)) {
+					$row->$data_field = $merged_data;
+					$row->$duration_field = Q_Config::get(
+						'Q', 'session', 'durations', Q_Request::formFactor(),
+						Q_Config::expect('Q', 'session', 'durations', 'session')
+					);
+					$row->save();
+					$result = true;
+				} else {
+					$result = fwrite($file, $merged_data);
+					fclose($file);
+				}
 			}
-			$changed = ($sess_data !== self::$sess_data);
-			$old_data = self::$sess_data;
 			/**
 			 * @event Q/session/write {after}
 			 * @param {string} id
+			 * @param {boolean} changed
 			 * @param {string} sess_data
+			 * @param {string} old_data
+			 * @param {string} existing_data
+			 * @param {string} merged_data
 			 * @param {string} data_field
 			 * @param {string} updated_field
 			 * @param {string} duration_field
 			 * @param {string} sess_file
 			 * @param {integer} row
-			 * @param {boolean} changed
-			 * @param {string} old_data
 			 * @return {mixed}
 			 */
 			$result = Q::event(
 				'Q/session/write', 
 				compact(
-					'id', 'sess_data', 'data_field', 
-					'updated_field', 'duration_field', 'sess_file', 'row',
-					'changed', 'old_data'
+					'id', 'data_field', 'updated_field', 'duration_field', 
+					'sess_file', 'row',
+					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
 				), 
 				'after'
 			);
@@ -709,7 +750,9 @@ class Q_Session
 		$result = Q::event(
 			'Q/session/destroy',
 			compact('id'),
-			'after'
+			'after',
+			false,
+			$result
 		);
 		return $result;
 	}
@@ -717,33 +760,33 @@ class Q_Session
 	/**
 	 * @method gcHandler
 	 * @static
-	 * @param {integer} $max_lifetime
+	 * @param {integer} $max_duration
 	 */
-	static function gcHandler ($max_lifetime)
+	static function gcHandler ($max_duration)
 	{
 		$proceed = Q_Config::get('Q', 'session', 'gc', true);
 		if ($proceed) {
-			self::gc($max_lifetime);
+			self::gc($max_duration);
 		}
 	}
 	
 	/**
 	 * @method gc
 	 * @static
-	 * @param {integer} $max_lifetime
+	 * @param {integer} $max_duration
 	 */
-	static function gc($max_lifetime)
+	static function gc($max_duration)
 	{
 		$id = self::id();
 		/**
 		 * @event Q/session/gc {before}
 		 * @param {string} id
-		 * @param {integer} max_lifetime
+		 * @param {integer} max_duration
 		 * @return {false}
 		 */
 		if (false === Q::event(
 			'Q/session/gc', 
-			compact('id', 'max_lifetime'), 
+			compact('id', 'max_duration'), 
 			'before'
 		)) {
 			return false;
@@ -751,7 +794,7 @@ class Q_Session
 		$durations = Q_Config::get('Q', 'session', 'durations', array());
 		foreach ($durations as $k => $v) {
 			if ($v === null) {
-				$v = $max_lifetime;
+				$v = $max_duration;
 			}
 			if (!$v) {
 				continue;
@@ -777,12 +820,12 @@ class Q_Session
 		/**
 		 * @event Q/session/gc {after}
 		 * @param {string} id
-		 * @param {integer} max_lifetime
+		 * @param {integer} max_duration
 		 * @param {integer} since_time
 		 */
 		Q::event(
 			'Q/session/gc', 
-			compact('id', 'max_lifetime', 'since_time'), 
+			compact('id', 'max_duration', 'since_time'), 
 			'after'
 		);
 		return true;
@@ -812,7 +855,9 @@ class Q_Session
 			$_SESSION['Q']['nonce'] = md5(mt_rand().microtime());
 		}
 		if (!empty($_SERVER['HTTP_HOST'])) {
-			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce']);
+			$durationName = self::durationName();
+			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], $duration ? time()+$duration : 0);
 		}
 		Q_Session::$nonceWasSet = true;
 	}
@@ -826,7 +871,7 @@ class Q_Session
 		self::start();
 		$_SESSION['Q']['nonce'] = null;
 		if (!empty($_SERVER['HTTP_HOST'])) {
-			Q_Response::setCookie('Q_nonce', null);
+			Q_Response::clearCookie('Q_nonce');
 		}
 	}
 	
@@ -924,7 +969,7 @@ class Q_Session
 		$id = str_replace('-', '', Q_Utils::uuid());
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		if (isset($secret)) {
-			$id .= md5($id . $secret);
+			$id .= hash_hmac('md5', $id, "$secret");
 		}
 		$id = base64_encode(pack('H*', $id));
 		return str_replace(array('z', '+', '/', '='), array('zz', 'za', 'zb', 'zc'), $id);
@@ -965,7 +1010,7 @@ class Q_Session
 		$b = substr($result, 32, 32);
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		$c = isset($secret)
-			? ($b === md5($a . $secret))
+			? ($b === Q_Utils::hmac('md5', $a, $secret))
 			: true;
 		return array($c, $a, $b);
 	}

@@ -12,14 +12,14 @@
  
 // Enforce PHP version to be > 5.0
 if (version_compare(PHP_VERSION, '5.0.0', '<')) {
-	die("Q requires PHP version 5.0 or higher.");
+	die("Q requires PHP version 5.0 or higher. It works even better with PHP 5.4 and above.");
 }
 
 // Was this loaded? In that case, do nothing.
 if (defined('Q_VERSION')) {
 	return;
 }
-define('Q_VERSION', '0.8.0');
+define('Q_VERSION', '0.9.0');
 
 //
 // Constants

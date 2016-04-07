@@ -9,6 +9,29 @@
  * @class Q drawers
  * @constructor
  * @param {Object}   [options] Override various options for this tool
+ *  @param {Element} [options.container=null] Optional container element for handling scrolling
+ *  @param {Object}   [options.initial] Information for the initial animation
+ *  @param {Number}   [options.initial.index=1] The index of the drawer to show, either 0 or 1
+ *  @param {Number}   [options.initial.delay=0] Delay before starting initial animation
+ *  @param {Number}   [options.initial.duration=300] The duration of the initial animation
+ *  @param {Function} [options.initial.ease=Q.Animation.linear] The easing function of the initial animation
+ *  @param {Object}   [options.transition] Information for the transition animation
+ *  @param {Number}   [options.transition.duration=300] The duration of the transition animation
+ *  @param {Function}   [options.transition.ease=Q.Animation.linear] The easing function of the transition animation
+ *  @param {Function}   [options.width] Override the function that computes the width of the drawers
+ *  @param {Function}   [options.height] Override the function that computes the height drawers tool
+ *  @param {Array}   [options.heights=[100,100]] Array of [height0, height1] for drawers that are pinned
+ *  @param {Array}   [options.placeholders=['','']] Array of [html0, html1] for drawers that are pinned
+ *  @param {Array}   [options.behind=[true,false]] Array of [boolean0, boolean1] to indicate which drawer is behind the others
+ *  @param {Array}   [options.bottom=[false,false]] Array of [boolean0, boolean1] to indicate whether to scroll to the bottom of a drawer after switching to it
+ *  @param {Array}   [options.triggers=['plugins/Q/img/drawers/up.png', 'plugins/Q/img/drawers/down.png']] Array of [src0, src1] for img elements that act as triggers to swap drawers. Set array elements to false to avoid rendering a trigger.
+ *  @param {Object}   [options.trigger]] Options for the trigger elements
+ *  @param {Number}   [options.trigger.rightMargin=10]] How many pixels from the right side of the drawers
+ *  @param {Number}   [options.transition=300]] Number of milliseconds for fading in the trigger images
+ *  @param {Boolean}   [options.fullscreen=Q.info.isMobile && Q.info.isAndroid(1000)]] Whether the drawers should take up the whole screen
+ *  @param {Number}   [options.foregroundZIndex=50] The z-index of the drawer in the foreground
+ *  @param {Number}   [options.beforeSwap=new Q.Event()] Occurs right before drawer swap
+ *  @param {Number}   [options.onSwap=new Q.Event()] Occurs right after drawer swap
  * @return {Q.Tool}
  */
 Q.Tool.define("Q/drawers", function _Q_drawers(options) {
@@ -16,7 +39,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	var $scrolling = state.$scrolling = 
-		state.fullscreen ? $(window) : $(state.container);
+		$(state.container && !state.fullscreen ? state.container : window);
 	state.swapCount = 0;
 	
 	Q.addStylesheet('plugins/Q/css/drawers.css');
@@ -44,7 +67,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 		state.lastScrollingHeight = $scrolling[0].clientHeight || $scrolling.height();
 		tool.swap(_layout);
 		Q.onLayout(tool).set(_layout, tool);
-	}, state.initialDelay);
+	}, state.initial.delay);
 	
 	$te.parents().each(function () {
 		var $this = $(this);
@@ -74,7 +97,10 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 		if (Q.info.isMobile) {
 			var w = state.drawerWidth = $(window).width();
 			$(tool.element).width(w);
-			state.$drawers.width(w);
+			state.$drawers.each(function () {
+				var $this = $(this);
+				$this.width(w - $this.outerWidth(true) + $this.width());
+			});
 			state.$drawers.height();
 		}
 		var sh = $scrolling[0].clientHeight || $scrolling.height();
@@ -98,15 +124,12 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 
 {
 	initial: {
+		delay: 0,
 		duration: 300,
 		ease: Q.Animation.linear,
 		index: 1
 	},
 	transition: {
-		duration: 300,
-		easing: Q.Animation.linear
-	},
-	reversion: {
 		duration: 300,
 		easing: Q.Animation.linear
 	},
@@ -124,7 +147,6 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 		});
 		return result;
 	},
-	initialDelay: 0,
 	currentIndex: null,
 	placeholders: ['', ''],
 	heights: [100, 100],
@@ -156,7 +178,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			? state.height : Q.getObject(state.height).apply(tool);
 		var sHeights = (state.heights instanceof Array)
 			? state.heights : Q.getObject(state.heights).apply(tool);
-		var $scrolling = state.fullscreen ? $(window) : $(state.container);
+		var $scrolling = $(state.container && !state.fullscreen ? state.container : window);
 		var behind = state.behind[index];
 		var fromHeight = behind 
 			? sHeights[index] 
@@ -378,8 +400,8 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 				if ($drawer.is(':visible')) {
 					var left = $drawer.offset().left
 						- $drawer.offsetParent().offset().left
-						+ $drawer.outerWidth(true)
-						- state.$trigger.outerWidth(true)
+						+ $drawer.outerWidth()
+						- state.$trigger.outerWidth()
 						- state.trigger.rightMargin;
 					var top = $drawer.offset().top
 						- $drawer.offsetParent().offset().top
@@ -465,8 +487,8 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 					var $drawer = tool.state.$drawers.eq(1);
 					var left = $drawer.offset().left
 						- $drawer.offsetParent().offset().left
-						+ $drawer.outerWidth(true)
-						- state.$trigger.outerWidth(true)
+						+ $drawer.outerWidth()
+						- state.$trigger.outerWidth()
 						- state.trigger.rightMargin;
 					var top = $drawer.offset().top
 						- $drawer.offsetParent().offset().top

@@ -27,7 +27,7 @@ class Users_Label extends Base_Users_Label
 	 * Add a contact label
 	 * @method {boolean} addLabel
 	 * @static
-	 * @param {string} $label
+	 * @param {string|array} $label A label or array of labels
 	 * @param {string} [$userId=null] user current user if not provided
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
 	 * @param {string} [$icon='default']
@@ -42,6 +42,12 @@ class Users_Label extends Base_Users_Label
 		$icon = 'default',
 		$asUserId = null)
 	{
+		if (is_array($label)) {
+			foreach ($label as $l) {
+				self::addLabel($l, $userId, $title, $icon, $asUserId);
+			}
+			return;
+		}
 		if (!isset($title)) {
 			$title = '';
 		}
@@ -54,7 +60,7 @@ class Users_Label extends Base_Users_Label
 		}
 		Users::canManageLabels($asUserId, $userId, $label, true);
 		if (empty($title)) {
-			$parts = explode("/");
+			$parts = explode("/", $label);
 			$title = ucfirst(end($parts));
 		}
 		$l = new Users_Label();

@@ -2,9 +2,9 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.8.9",
-				"compatible": "0.8",
-				"requires": {"Users": "0.8"},
+				"version": "0.9.1",
+				"compatible": "0.9",
+				"requires": {"Users": "0.9"},
 				"permissions": ["Streams/icons"],
 				"connections": ["Streams"]
 			}
@@ -77,6 +77,7 @@
 						},
 						"related": {
 						},
+						"prompt": "Let friends recognize you:",
 						"button": "Get Started"
 					}
 				},

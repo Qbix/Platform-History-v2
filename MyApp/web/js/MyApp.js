@@ -20,14 +20,9 @@ var MyApp = (function (Q, $) {
 		}
 	};
 	
-	Q.page("MyApp/welcome", function () { 
-		// when loading
-		return function () {
-			// unloading;
-		};
-	}, 'MyApp');
-	
-	Q.page('', function () { // all pages
+	// The following code is for all pages.
+	// For specific pages, see web/js/pages directory. 
+	Q.page('', function () {
 		
 		$('.MyApp_login').on(Q.Pointer.click, function () {
 			Q.Users.login();

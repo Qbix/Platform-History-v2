@@ -292,6 +292,7 @@
 
 #Users_login_step1_form { width: 100%; }
 #Users_login_identifier { width: 75%; padding: 2%; }
+#Users_login_username { width: 96%; padding: 2%; }
 #Users_setIdentifier_identifier { width: 100%; padding: 2%; }
 #Users_login_go { width: 10%; }
 #Users_login_noPassphrase { font-size: 14px; font-weight: bold; color: #a00; text-align: center; }

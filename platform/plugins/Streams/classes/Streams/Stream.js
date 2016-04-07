@@ -65,58 +65,106 @@ function Streams_Stream (fields) {
 		else delete p[key];
 	};
 	
-	/**
-	 * @method getAllAttributes
-	 * @return {Object} The object of all attributes set in the stream
-	 */
-	this.getAllAttributes = function() {
-		return this.fields.attributes ? JSON.parse(this.fields.attributes) : {};
-	};
-	
-	/**
-	 * @method getAttribute
-	 * @param {String} attributeName The name of the attribute to get
-	 * @param {mixed} def The value to return if the attribute is missing
-	 * @return {mixed} The value of the attribute, or the default value, or null
-	 */
-	this.getAttribute = function(attributeName, def) {
-		var attr = this.getAllAttributes();
-		return (attributeName in attr) ? attr[attributeName] : def;
-	};
-	
-	/**
-	 * @method setAttribute
-	 * @param {string} attributeName The name of the attribute to set,
-	 *  or an array of {attributeName: attributeValue} pairs
-	 * @param {mixed} value The value to set the attribute to
-	 */
-	this.setAttribute = function(attributeName, value) {
-		var attr = this.getAllAttributes();
-		if (Q.isPlainObject(attributeName)) {
-			Q.extend(attr, attributeName);
-		} else {
-			attr[attributeName] = value;
-		}
-		this.fields.attributes = JSON.stringify(attr);
-	};
-	
-	/**
-	 * @method clearAttribute
-	 * @param {String} attributeName The name of the attribute to remove
-	 */
-	this.clearAttribute = function(attributeName) {
-		var attr = this.getAllAttributes();
-		delete attr[attributeName];
-		this.fields.attributes = JSON.stringify(attr);
-	};
-	
-	/**
-	 * @method clearAllAttributes
-	 */
-	this.clearAllAttributes = function() {
-		this.fields.attributes = '{}';
-	};
 }
+
+/**
+ * @method getAllAttributes
+ * @return {Object} The object of all attributes set in the stream
+ */
+Streams_Stream.prototype.getAllAttributes = function() {
+	return this.fields.attributes ? JSON.parse(this.fields.attributes) : {};
+};
+
+/**
+ * @method getAttribute
+ * @param {String} attributeName The name of the attribute to get
+ * @param {mixed} def The value to return if the attribute is missing
+ * @return {mixed} The value of the attribute, or the default value, or null
+ */
+Streams_Stream.prototype.getAttribute = function(attributeName, def) {
+	var attr = this.getAllAttributes();
+	return (attributeName in attr) ? attr[attributeName] : def;
+};
+
+/**
+ * @method setAttribute
+ * @param {string} attributeName The name of the attribute to set,
+ *  or an array of {attributeName: attributeValue} pairs
+ * @param {mixed} value The value to set the attribute to
+ */
+Streams_Stream.prototype.setAttribute = function(attributeName, value) {
+	var attr = this.getAllAttributes();
+	if (Q.isPlainObject(attributeName)) {
+		Q.extend(attr, attributeName);
+	} else {
+		attr[attributeName] = value;
+	}
+	this.fields.attributes = JSON.stringify(attr);
+};
+
+/**
+ * @method clearAttribute
+ * @param {String} attributeName The name of the attribute to remove
+ */
+Streams_Stream.prototype.clearAttribute = function(attributeName) {
+	var attr = this.getAllAttributes();
+	delete attr[attributeName];
+	this.fields.attributes = JSON.stringify(attr);
+};
+
+/**
+ * @method clearAllAttributes
+ */
+Streams_Stream.prototype.clearAllAttributes = function() {
+	this.fields.attributes = '{}';
+};
+
+/**
+ * @method getAllPermissions
+ * @return {Array}
+ */
+Streams_Stream.prototype.getAllPermissions = function () {
+	try {
+		return this.fields.permissions ? JSON.parse(this.fields.permissions) : [];
+	} catch (e) {
+		return [];
+	}
+};
+
+/**
+ * @method hasPermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+Streams_Stream.prototype.hasPermission = function (permission) {
+	return (this.getAllPermissions().indexOf(permission) >= 0);
+};
+
+/**
+ * @method addPermission
+ * @param {String} permission
+ */
+Streams_Stream.prototype.addPermission = function (permission) {
+	var permissions = this.getAllPermissions();
+	if (permissions.indexOf(permission) < 0) {
+		permissions.push(permission);
+	}
+	this.permissions = JSON.stringify(permissions);
+};
+
+/**
+ * @method removePermission
+ * @param {String} permission
+ * @param {Boolean}
+ */
+Streams_Stream.prototype.removePermission = function (permission) {
+	var permissions = this.getAllPermissions();
+	var index = permissions.indexOf(permission);
+	if (index >= 0) {
+		permissions.splice(index, 1);
+	}
+	this.permissions = JSON.stringify(permissions);
+};
 
 Q.mixin(Streams_Stream, Q.require('Base/Streams/Stream'));
 
@@ -362,9 +410,11 @@ Sp.calculateAccess = function(asUserId, callback) {
 	this.set('readLevel', this.fields.readLevel);
 	this.set('writeLevel', this.fields.writeLevel);
 	this.set('adminLevel', this.fields.adminLevel);
+	this.set('permissions', this.getAllPermissions());
 	this.set('readLevel_source', public_source);
 	this.set('writeLevel_source', public_source);
 	this.set('adminLevel_source', public_source);
+	this.set('permissions_source', public_source);
 
 	if (!asUserId) {
 		callback.call(subj); // No need to fetch further access info. Just return what we got.
@@ -421,7 +471,16 @@ Sp.calculateAccess = function(asUserId, callback) {
 										subj.set('adminLevel', row.fields.adminLevel);
 										subj.set('adminLevel_source', contact_source);
 									}
-
+									var p1 = subj.get('permissions', []);
+									var p2 = row.getAllPermissions();
+									var p3 = [].concat(p1);
+									for (var k=0; k<p2.length; ++k) {
+										if (p3.indexOf(p2[k]) < 0) {
+											p3.push(p2[k]);
+										}
+									}
+									subj.set('permissions', p3);
+									subj.set('permissions_source', contact_source);
 								}
 							}
 							_perUserData(subj, rows, callback);
@@ -465,6 +524,8 @@ Sp.calculateAccess = function(asUserId, callback) {
 					subj.set('adminLevel', row.fields.adminLevel);
 					subj.set('adminLevel_source', direct_source);
 				}
+				subj.set('permissions', row.getAllPermissions());
+				subj.set('permissions_source', direct_source);
 			}
 		}
 		callback.call(subj);
@@ -594,6 +655,7 @@ Sp.inheritAccess = function (callback) {
  *	String describing the level (see Streams.READ_LEVEL) or integer
  * @param callback=null {function}
  *	Callback receives "error" and boolean as arguments - whether the access is granted.
+ * @return {Boolean}
  */
 Sp.testReadLevel = function(level, callback) {
 	return testLevel (this, 'readLevel', 'READ_LEVEL', level, callback);
@@ -602,10 +664,11 @@ Sp.testReadLevel = function(level, callback) {
  * Verifies wheather Stream can be written. Can be called syncronously and in such case skips
  * verification of inherited access or asyncronously to make ful check
  * @method testWriteLevel
- * @param {string|integer} level
+ * @param {String|integer} level
  *	String describing the level (see Streams.WRITE_LEVEL) or integer
  * @param callback=null {function}
  *	Callback receives "error" and boolean as arguments - whether the access is granted.
+ * @return {Boolean}
  */
 Sp.testWriteLevel = function(level, callback) {
 	return testLevel (this, 'writeLevel', 'WRITE_LEVEL', level, callback);
@@ -614,14 +677,63 @@ Sp.testWriteLevel = function(level, callback) {
  * Verifies wheather Stream can be administered. Can be called syncronously and in such case skips
  * verification of inherited access or asyncronously to make ful check
  * @method testAdminLevel
- * @param {string|integer} level
+ * @param {String|integer} level
  *	String describing the level (see Streams.ADMIN_LEVEL) or integer
  * @param callback=null {function}
  *	Callback receives "error" and boolean as arguments - whether the access is granted.
+ * @return {Boolean}
  */
 Sp.testAdminLevel = function(level, callback) {
 	return testLevel (this, 'adminLevel', 'ADMIN_LEVEL', level, callback);
 };
+/**
+ * Verifies whether the user has at least the given permission
+ * @method testPermission
+ * @param {String|Array} permission The name of the permission
+ * @param callback=null {function}
+ *	Callback receives "error" and boolean as arguments - whether the access is granted.
+ * @return {Boolean}
+ */
+Sp.testPermission = function(permission, callback)
+{
+	if (Q.isArrayLike(permission)) {
+		for (var i=0, l=permission.length; i<l; ++i) {
+			if (!this.testPermission(permission[i])) {
+				return false
+			}
+		}
+		return true;
+	}
+	if (subj.publishedByFetcher) {
+		callback && callback.call(subj, null, true);
+		return true;
+	}
+	if (subj.closedTime && level !== 'close' && !subj.testWriteLevel('close')) {
+		return false;
+	}
+	var permissions = subj.get('permissions', []);
+	if (permissions.indexOf(permission) >= 0) {
+		return true;
+	}
+	var permissionsSource = subj.get('permissions_source', 0);
+	if (permissionsSource === Streams.ACCESS_SOURCES['direct'] ||
+		permissionsSource == Streams.ACCESS_SOURCES['inherited_direct']) {
+		callback && callback.call(subj, null, false);
+		return false;
+	}
+	callback && subj.inheritAccess(function(err, res) {
+		if (err) {
+			callback.call(subj, err);
+		} else if (!res) {
+			callback.call(subj, null, false);
+		} else {
+			var permissions = subj.get('permissions', []);
+			var result = (permissions.indexOf(permission) >= 0);
+			callback && callback.call(subj, null, true);
+		}
+	});
+	return false;
+}
 
 Sp._fetchAsUser = function (options, callback) {
 	var stream = this;

@@ -214,9 +214,12 @@ class Streams_Stream extends Base_Streams_Stream
 	function beforeSave($modifiedFields)
 	{
 		if (empty($this->attributes)) {
-			$this->attributes = '{}';
+			$this->attributes = null;
 		}
-		
+		if (empty($this->permissions)) {
+			$this->permissions = null;
+		}
+
 		if (!$this->retrieved) {
 			// Generate a unique name for the stream
 			if (!isset($modifiedFields['name'])) {
@@ -384,6 +387,8 @@ class Streams_Stream extends Base_Streams_Stream
 			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
+
+		$stream->calculateAccess();
 		
 		if (!$stream->retrieved) {
 			// The stream was just saved
@@ -519,6 +524,7 @@ class Streams_Stream extends Base_Streams_Stream
 				if (!isset($modifiedFields[$f])) continue;
 				if (isset($row->$f) and $row->$f === $modifiedFields[$f]) continue;
 				$row->$f = $modifiedFields[$f];
+				$this->$f = $row->$f;
 			}
 			$rows[$k] = $row;
 		}
@@ -615,6 +621,70 @@ class Streams_Stream extends Base_Streams_Stream
 	function clearAllAttributes()
 	{
 		$this->attributes = '{}';
+	}
+	
+	/**
+	 * @method getAllPermissions
+	 * @return {array}
+	 */
+	function getAllPermissions()
+	{
+		if ($permissions = $this->permissions) {
+			return Q::json_decode($permissions, true);
+		}
+		return array();
+	}
+	
+	/**
+	 * @method hasPermission
+	 * @param {string} $permission
+	 * @return {boolean}
+	 */
+	function hasPermission($permission)
+	{
+		return in_array($permission, $this->getAllPermissions());
+	}
+	
+	/**
+	 * @method addPermission
+	 * @param {string} $permissions
+	 */
+	function addPermission($permission)
+	{
+		$permissions = $this->getAllPermissions();
+		if (!in_array($permission, $permissions)) {
+			$permissions[] = $permission;
+			$this->permissions = Q::json_encode($permissions);
+		}
+	}
+	
+	/**
+	 * @method removePermission
+	 * @param {string} $permission
+	 */
+	function removePermission($permission)
+	{
+		$permissions = array_diff($this->getAllPermissions(), array($permission));
+		$this->permissions = Q::json_encode($permissions);
+	}
+	
+	/**
+	 * Method is called before setting the field and verifies that, if it is a string,
+	 * it contains a JSON array.
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (is_string($value)) {
+			$decoded = Q::json_decode($value, true);
+			if (!is_array($decoded) or Q::isAssociative($decoded)) {
+				throw new Q_Exception_WrongValue(array('field' => 'permissions', 'range' => 'JSON array'));
+			}
+		}
+		return parent::beforeSet_permissions($value);
 	}
 	
 	/**
@@ -1277,6 +1347,47 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
+	 * Verifies whether the user has at least the given permission
+	 * @method testPermission
+	 * @param {string|array} $permission The name of the permission
+	 * @return {boolean}
+	 */
+	function testPermission($permission)
+	{
+		if (is_array($permission)) {
+			foreach ($permission as $p) {
+				if (!$this->testPermission($p)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		if ($this->publishedByFetcher) {
+			return true;
+		}
+		if (!empty($this->closedTime) and !$this->testWriteLevel('close')) {
+			return false;
+		}
+		$permissions = $this->get('permissions', array());
+		if (in_array($permission, $permissions)) {
+			return true;
+		}
+		$permissions_source = $this->get('permissions_source', 0);
+		if ($permissions_source === Streams::$ACCESS_SOURCES['direct']
+		or $permissions_source === Streams::$ACCESS_SOURCES['inherited_direct']) {
+			return false;
+		}
+		if (!$this->inheritAccess()) {
+			return false;
+		}
+		$permissions = $this->get('permissions', array());
+		if (in_array($permission, $permissions)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Returns whether the stream is required for the user, and thus shouldn't be deleted,
 	 * even if it has been marked closed.
 	 * @return {Boolean}
@@ -1315,15 +1426,13 @@ class Streams_Stream extends Base_Streams_Stream
 		if (empty($this->inheritAccess)) {
 			return false;
 		}
-		$names = json_decode($this->inheritAccess, true);
-		if (!$names or !is_array($names)) {
+		$inheritAccess = json_decode($this->inheritAccess, true);
+		if (!$inheritAccess or !is_array($inheritAccess)) {
 			return false;
 		}
 		$public_source = Streams::$ACCESS_SOURCES['public'];
-		$contact_source = Streams::$ACCESS_SOURCES['contact'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
 		$inherited_public_source = Streams::$ACCESS_SOURCES['inherited_public'];
-		$inherited_contact_source = Streams::$ACCESS_SOURCES['inherited_contact'];
 		$inherited_direct_source = Streams::$ACCESS_SOURCES['inherited_direct'];
 		$direct_sources = array(
 			$inherited_direct_source, $direct_source
@@ -1339,12 +1448,12 @@ class Streams_Stream extends Base_Streams_Stream
 		// Inheritance only goes one "generation" here.
 		// To implement several "generations" of inheritance, you can do things like:
 		// 'inheritAccess' => '[["publisherId","grandparentStreamName"], ["publisherId","parentStreamName"]]'
-		foreach ($names as $name) {
-			if (!is_array($name)) {
+		foreach ($inheritAccess as $ia) {
+			if (!is_array($ia)) {
 				continue;
 			}
-			$publisherId = reset($name);
-			$name = next($name);
+			$publisherId = reset($ia);
+			$name = next($ia);
 			$stream = Streams::fetchOne(
 				$this->get('asUserId', ''),
 				$publisherId,
@@ -1402,35 +1511,34 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Fetch all the streams which are related to, or from, this stream.
+	 * Fetch all the streams which are related to, or from, this stream
 	 * @method related
 	 * @static
 	 * @param {string} $asUserId
 	 *  The user who is fetching
-	 * @param {string} $publisherId
-	 *  An array of criteria that includes either
-	 * @param {string} $toStreamName
-	 *  The name of the category
-	 * @param {mixed} $isCategory
+	 * @param {mixed} $isCategory=true
 	 *  If false, returns the categories that this stream is related to.
 	 *  If true, returns all the streams this related to this category.
 	 *  If a string, returns all the streams related to this category with names prefixed by this string.
 	 * @param {array} $options=array()
-	 *	'limit' =>  number of records to fetch
-	 *	'offset' => offset to start
-	 *  'orderBy' => defaults to false, which means order by descending weight
-	 *  'type' =>  if specified, this filters the type of the relation
-	 *  'prefix' => if specified, this filters by the prefix of the related streams
-	 *	'where' =>  you can also specify any extra conditions here
-	 *  'extra' => An array of any extra options to pass to Streams::fetch when fetching streams
-	 *	'relationsOnly' =>  If true, returns only the relations to/from stream, doesn't fetch the streams.
-	 *		Useful if publisher id of relation objects is not the same as provided by publisherId.
-	 *  'streamsOnly' => If true, returns only the streams related to/from stream, doesn't return the relations.
-	 *      Useful for shorthand in while( ) statements.
-	 *  'streamFields' => If specified, fetches only the fields listed here for any streams
-	 *  'skipFields' => Optional array of field names. If specified, skips these fields when fetching streams
+	 * @param {boolean} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight.
+	 * @param {integer} [$options.limit] number of records to fetch
+	 * @param {integer} [$options.offset] offset to start from
+	 * @param {double} [$options.min] the minimum orderBy value (inclusive) to filter by, if any
+	 * @param {double} [$options.max] the maximum orderBy value (inclusive) to filter by, if any
+	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
+	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
+	 * @param {array} [$options.where] you can also specify any extra conditions here
+	 * @param {array} [$options.fetchOptions] An array of any options to pass to Streams::fetch when fetching streams
+	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
+	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
+	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
+	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
+	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
 	 * @return {array}
-	 *  Returns array($relations, $relatedStreams, $this)
+	 *  Returns array($relations, $relatedStreams, $stream).
+	 *  However, if $streamName wasn't a string or ended in "/"
+	 *  then these third parameter is an array of streams.
 	 */
 	function related(
 		$asUserId,
@@ -1592,35 +1700,43 @@ class Streams_Stream extends Base_Streams_Stream
 		$result['access'] = array(
 			'readLevel' => $this->get('readLevel', $this->readLevel),
 			'writeLevel' => $this->get('writeLevel', $this->writeLevel),
-			'adminLevel' => $this->get('adminLevel', $this->adminLevel)
+			'adminLevel' => $this->get('adminLevel', $this->adminLevel),
+			'permissions' => $this->get('permissions', $this->getAllPermissions())
 		);
 		$result['isRequired'] = $this->isRequired();
+		if ($this->get('participant')) {
+			$result['participant'] = $this->get('participant')->exportArray();
+		}
 		return $result;
 	}
 
 	/**
-	 * Set access data for the stream. Access data is calculated:
-	 *	<ol>
-	 * 		<li>from read/write/admin level fields of the stream</li>
-	 *		<li>from labels. Streams_Access record may contain &lt;publisherId&gt;, &lt;streamName&gt;
-	 *			(allowed exact match or generic name "&lt;streamType&gt;/") and 
-	 *			&lt;ofContactLabel&gt;. If &lt;publisherId&gt; is recorded in Users_Contact
-	 *			to have either current user or &lt;ofContactLabel&gt; as contact, access claculation is 
-	 *			considering such record.</li>
-	 *		<li>from user. Stream_Access record may contain &lt;publisherId&gt;, &lt;streamName&gt;
-	 *			(allowed exact match or generic name "&lt;streamType&gt;/") and 
-	 *			&lt;ofUserId&gt;. Such record is considered in access calculation.</li>
-	 *	</ol>
+	 * Calculates the access for the current stream by querying the database.
+	 * Modifies this object, by setting its access levels.
+	 * After the function returns, you will be able to call the methods
+	 * testReadLevel(), testWriteLevel() and testAdminLevel()
+	 * on these streams before using them on the user's behalf.
 	 * @method calculateAccess
-	 * @param {string} $asUserId=null The user relative to whom the access is calculated
+	 * @static
+	 * @param {string} $asUserId
+	 *  Set this to the user relative to whom access is calculated.
 	 *  If this matches the publisherId, just sets full access and calls publishedByFetcher(true).
 	 *  If this is '', only returns the streams anybody can see.
 	 *  If this is null, the logged-in user's id is used, or '' if no one is logged in
-	 * @param {boolean} $recalculate=false Pass true here to force recalculating even if access was already calculated
-	 * @param {string} [$actualPublisherId] for internal use only
-	 * @chainable
+	 * @param {boolean} [$recalculate=false]
+	 *  Pass true here to force recalculating access to streams for which access was already calculated
+	 * @param {string} [$actualPublisherId=null]
+	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 * @param {string} [$inheritAccess=true]
+	 *  Set to false to skip inheriting access from other streams, even if specified
+	 * @return {integer}
+	 *  The number of streams that were recalculated
 	 */
-	function calculateAccess($asUserId = null, $recalculate = false, $actualPublisherId = null)
+	function calculateAccess(
+		$asUserId = null, 
+		$recalculate = false, 
+		$actualPublisherId = null, 
+		$inheritAccess = true)
 	{
 		Streams::calculateAccess($asUserId, $this->publisherId, array($this), $recalculate, $actualPublisherId);
 		return $this;
@@ -1693,14 +1809,12 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Fetch participants of the stream.
 	 * @method getParticipants
-	 * @param {array} [options=array()] An array of options determining how messages will be fetched, which can include:
-	 *   "state" => One of "invited", "participating", "left"
-	 *   Can also be negative, then the value will be substracted from maximum number of existing messages and +1 will be added
-	 *   to guarantee that $max = -1 means highest message ordinal.
-	 *   "limit" => Number of the participants to be selected. Defaults to 1000.
-	 *   "offset" => Number of the messages to be selected. Defaults to 1000.
-	 *   "ascending" => Sorting of fetched participants by insertedTime. If true, sorting is ascending, if false - descending. Defaults to false.
-	 *   "type" => Optional string specifying the particular type of messages to get
+	 * @param {array} [$options=array()] An array of options determining how messages will be fetched, which can include:
+	 * @param {string} [$options.state] One of "invited", "participating", "left"
+	 * @param {string} [$options.limit] Number of the participants to be selected. Defaults to 1000.
+	 * @param {string} [$options.offset] Number of the messages to be selected. Defaults to 1000.
+	 * @param {string} [$options.ascending] Sorting of fetched participants by insertedTime. If true, sorting is ascending, if false - descending. Defaults to false.
+	 * @param {string} [$options.type] Optional string specifying the particular type of messages to get
 	 */
 	function getParticipants($options)
 	{
@@ -1730,6 +1844,25 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$q->orderBy('insertedTime', isset($options['ascending']) ? $options['ascending'] : $ascending);
 		return $q->fetchDbRows(null, '', 'userId');
+	}
+	
+	/**
+	 * Fetch a particular participant in the stream, if it exists.
+	 * @method getParticipant
+	 * @param {string} [$userId=Users::loggedInUser(true)->id] The id of the user who may or may not be participating in the stream
+	 * @return {Db_Row|null}
+	 */
+	function getParticipant($userId = null)
+	{
+		if (!$userId) {
+			$userId = Users::loggedInUser(true)->id;
+		}
+		$rows = Streams_Participant::select('*')->where(array(
+			'publisherId' => $this->publisherId,
+			'streamName' => $this->name,
+			'userId' => $userId
+		))->limit(1)->fetchDbRows();
+		return $rows ? reset($rows) : null;
 	}
 	
 	/**

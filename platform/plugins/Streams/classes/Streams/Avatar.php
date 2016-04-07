@@ -150,7 +150,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
 	 *   @param {boolean} [$options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
 	 *   @param {boolean} [$options.escape] If true, does HTML escaping of the retrieved fields
-	 * @param {string} [$fallback='Someone'] What to return if there is no info to get displayName from.
+	 * @param {string} [$fallback='Someone'] HTML to return if there is no info to get displayName from.
 	 * @return {string|null}
 	 */
 	function displayName($options = array(), $fallback = 'Someone')
@@ -162,6 +162,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 			$fn = Q_Html::text($fn);
 			$ln = Q_Html::text($ln);	
 			$u = Q_Html::text($u);
+			$fallback = Q_Html::text($fallback);
 		}
 
 		if (!empty($options['html'])) {

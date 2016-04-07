@@ -346,7 +346,7 @@ return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
@@ -370,8 +370,7 @@ return [["timestamp","31","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_sessionId = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".sessionId");
@@ -512,8 +511,7 @@ return [["bigint","20","",false],false,"","0"];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_g_uid = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".g_uid");
@@ -549,8 +547,7 @@ return [["varchar","255","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_y_uid = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".y_uid");
@@ -586,8 +583,7 @@ return [["varchar","255","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_passphraseHash = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".passphraseHash");
@@ -623,8 +619,7 @@ return [["varbinary","64","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_emailAddress = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".emailAddress");
@@ -660,8 +655,7 @@ return [["varchar","255","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_mobileNumber = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".mobileNumber");
@@ -872,8 +866,7 @@ return [["varchar","255","",false],false,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_url = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".url");
@@ -909,8 +902,7 @@ return [["varchar","255","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_pincodeHash = function (value) {
-		if (!value) return value;
-		if (!value) return value;
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".pincodeHash");

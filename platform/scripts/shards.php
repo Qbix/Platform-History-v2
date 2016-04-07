@@ -58,11 +58,11 @@ $usage
 EOT;
 
 #Is it a call for help?
-if (isset($argv[1]) and in_array($argv[1], array('-help', '--help')))
+if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h')))
 	die($help);
 
-#Check primary arguments count: 1 if running /app/scripts/Q/install.php, 2 if running /framework/scripts/app.php
-if ($count < 2)
+#Check primary arguments count: 1 if running /app/scripts/Q/shards.php, 2 if running /framework/scripts/app.php
+if ($count < $FROM_APP ? 1 : 2)
 	die($usage);
 
 #Read primary arguments

@@ -20,8 +20,10 @@
 					<tr class="Users_register_form">
 						<td class="Streams_login_picture"><img src="{{icon}}/50.png"></td>
 						<td class="Streams_login_username_block">
-							<label for="Streams_login_username">Let friends recognize you:</label>
-							<br>
+							{{#if prompt}}
+								<label for="Streams_login_username">{{prompt}}</label>
+								<br>
+							{{/if}}
 							<input id="Streams_login_username" name="fullName" type="text" class="text" />
 						</td>
 					</tr>

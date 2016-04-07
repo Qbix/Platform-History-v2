@@ -31,7 +31,7 @@ class Q_Utils
 			ksort($data);
 			$data = http_build_query($data);
 		}
-		return md5($data . $secret);
+		return self::hmac('md5', $data, $secret);
 	}
 
 	/**
@@ -613,11 +613,11 @@ class Q_Utils
 			throw new Q_Exception_RequiredField(array('field' => 'Q/method'));
 		}
 		
-		$ssid = Q_Request::special('clientId', null);
-		if (isset($ssid)) {
-			$data['Q.clientId'] = $ssid;
+		$clientId = Q_Request::special('clientId', null);
+		if (isset($clientId)) {
+			$data['Q.clientId'] = $clientId;
 		}
-
+		
 		// The following hook may modify the url
 		/**
 		 * @event Q/Utils/sendToNode {before}

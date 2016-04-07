@@ -167,6 +167,8 @@ class Q_Plugin
 			// echo "Begin transaction".PHP_EOL;
 			// $query = $db->rawQuery('')->begin()->execute();
 
+			$original_version = $current_version;
+
 			// Process script files
 			foreach ($scripts as $script) {
 
@@ -202,8 +204,12 @@ class Q_Plugin
 					$errorCode = $pdo->errorCode();
 					if ($errorCode != '00000') {
 						$info = $pdo->errorInfo();
+						$message = $info[2];
+						if (isset($e->params['sql'])) {
+							$message .= "\nQuery was: " . $e->params['sql'];
+						}
 						$err = new Q_Exception(
-							"$info[2]", array(), $errorCode, 
+							$message, array(), $errorCode,
 							$e->getFile(), $e->getLine(),
 							$e->getTrace(), $e->getTraceAsString()
 						);
@@ -229,13 +235,21 @@ class Q_Plugin
 				if ($pdo->errorCode() != '00000') {
 					// echo "Rollback".PHP_EOL;
 					// $query = $db->rawQuery('')->rollback()->execute();
-					// $err = $pdo->errorInfo();
-					throw new Exception("$err[2]");
+					$info = $pdo->errorInfo();
+					$message = $info[2];
+					if (isset($e->params['sql'])) {
+						$message .= "\nQuery was: " . $e->params['sql'];
+					}
+					throw new Q_Exception(
+						$message, array(), $pdo->errorCode(),
+						$e->getFile(), $e->getLine(),
+						$e->getTrace(), $e->getTraceAsString()
+					);
 				}
 			}
 			// echo "Commit transaction".PHP_EOL;
 			// $query = $db->rawQuery('')->commit()->execute();
-			echo '+ ' . ucfirst($type) . " '$name' schema on '$conn_name'$shard_text (v. $current_version -> $version) installed".PHP_EOL;
+			echo '+ ' . ucfirst($type) . " '$name' schema on '$conn_name'$shard_text (v. $original_version -> $version) installed".PHP_EOL;
 		}
 	}
 

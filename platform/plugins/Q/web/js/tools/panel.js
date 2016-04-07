@@ -22,7 +22,7 @@ Q.Tool.define("Q/panel", function() {
 	
 	Q.addStylesheet('plugins/Q/css/panel.css');
 
-	this.forEachChild('Q/form').add(function (options) {
+	this.forEachChild('Q/form', function (options) {
 		this.state.onSubmit.set(function() {
 			var buttons = $('.Q_panel_tool_buttons', $te);
 			buttons.addClass('Q_throb');

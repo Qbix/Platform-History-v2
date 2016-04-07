@@ -48,6 +48,7 @@ class Q_Handlebars {
 			));
 			self::$handlebars->addHelper('call', array('Q_Handlebars', 'helperCall'));
 			self::$handlebars->addHelper('tool', array('Q_Handlebars', 'helperTool'));
+			self::$handlebars->addHelper('url', array('Q_Handlebars', 'helperUrl'));
 		}
 		return self::$handlebars;
 	}
@@ -93,6 +94,15 @@ class Q_Handlebars {
 			$o = array_merge($o, $fields["id:$id"]);
 		}
 		return Q::tool($name, $o, compact('id'));
+	}
+	
+	static function helperUrl($template, $context, $args, $source)
+	{
+		if (empty($args[0])) {
+			return "{{url missing}}";
+		}
+		$url = $args[0];
+		return Q_Html::themedUrl($url);
 	}
 
 	private static $handlebars = null;

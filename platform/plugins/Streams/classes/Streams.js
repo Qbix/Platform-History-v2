@@ -326,7 +326,6 @@ Streams.define = function (type, ctor, methods) {
  * @param {object} options={}
  *  So far no options are implemented.
  */
-var _closedSessions = {};
 Streams.listen = function (options) {
 
 	// Start internal server
@@ -381,10 +380,10 @@ Streams.listen = function (options) {
 		});
 	}
 
-	function _updateBadge (badge, token) {
+	function _updateBadge (badge, deviceId) {
 		var server = Q.listen(), apn = server.attached.apn;
 		if (!apn) return;
-		apn.createMessage().device(token).badge(badge).send(function (err) {
+		apn.createMessage().device(deviceId).badge(badge).send(function (err) {
 			if (err) {
 			    Q.log("Error sending push notification: "+err.message);
 		    }
@@ -398,35 +397,37 @@ Streams.listen = function (options) {
 		if (!parsed || !parsed['Q/method']) {
 			return next();
 		}
-		var participant, stream, msg, posted, streams, token, title, k;
-		var ssid = parsed["Q.clientId"];
+		var participant, stream, msg, posted, streams, deviceId, title, k;
+		var clientId = parsed["Q.clientId"];
 		var stream = parsed.stream
 			&& Streams.Stream.construct(JSON.parse(parsed.stream));
 		switch (parsed['Q/method']) {
 			case 'Users/device':
-				if (!(token = parsed.deviceId)) break;
+				if (!(deviceId = parsed.deviceId)) break;
 				Streams.Participant.unsubscribe(parsed.userId, parsed.userId, 'Streams/invited');
-				var badge = Streams.pushNotification.badge ? Streams.pushNotification.badge(parsed.userId, 'login', null, function(b) { _updateBadge(b, token); }) : 0;
-				if (badge !== undefined) _updateBadge(badge, token);
+				var badge = Streams.pushNotification.badge ? Streams.pushNotification.badge(parsed.userId, 'login', null, function(b) { _updateBadge(b, deviceId); }) : 0;
+				if (badge !== undefined) _updateBadge(badge, deviceId);
 				break;
 			case 'Users/logout':
-				var uid = parsed.userId, sid = parsed.sessionId;
-				if (uid && sid) {
-					if (!_closedSessions[uid]) {
-						_closedSessions[uid] = [];
+				var userId = parsed.userId;
+				var sessionId = parsed.sessionId;
+				if (userId && sessionId) {
+					var clients = Streams.clients[userId];
+					for (var cid in clients) {
+						if (clients[cid].sessionId === sessionId) {
+							clients[cid].disconnect();
+						}
 					}
-					_closedSessions[uid].push(sid);
 				}
-				token = parsed.deviceId;
-				if (token) {
-					_updateBadge(0, token);
-					Streams.Participant.subscribe(uid, uid, 'Streams/invited');
+				if (deviceId = parsed.deviceId) {
+					_updateBadge(0, deviceId);
+					Streams.Participant.subscribe(userId, userId, 'Streams/invited');
 				}
 				break;
 			case 'Streams/Stream/join':
 				participant = new Streams.Participant(JSON.parse(parsed.participant));
 				participant.fillMagicFields();
-				uid = participant.userId;
+				userId = participant.userId;
 				if (Q.Config.get(['Streams', 'logging'], false)) {
 					Q.log('Streams.listen: Streams/Stream/join {'
 						+ '"publisherId": "' + stream.fields.publisherId
@@ -437,20 +438,20 @@ Streams.listen = function (options) {
 				// invalidate cache for this stream
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
-				Streams.emitToUser(uid, 'join', participant);
+				Streams.emitToUser(userId, 'join', participant);
 				stream.incParticipants(function () {
-					Streams.Stream.emit('join', stream, uid, ssid);
+					Streams.Stream.emit('join', stream, userId, clientId);
 				});
 				break;
 			case 'Streams/Stream/visit':
 				participant = JSON.parse(parsed.participant);
-				uid = participant.userId;
-				Streams.Stream.emit('visit', stream, uid, ssid);
+				userId = participant.userId;
+				Streams.Stream.emit('visit', stream, userId, clientId);
 				break;
 			case 'Streams/Stream/leave':
 				participant = JSON.parse(parsed.participant);
 				participant.fillMagicFields();
-				uid = participant.userId;
+				userId = participant.userId;
 				if (Q.Config.get(['Streams', 'logging'], false)) {
 					Q.log('Streams.listen: Streams/Stream/leave {'
 						+ '"publisherId": "' + stream.fields.publisherId
@@ -461,9 +462,9 @@ Streams.listen = function (options) {
 				// invalidate cache for this stream
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
-				Streams.emitToUser(uid, 'leave', participant);
+				Streams.emitToUser(userId, 'leave', participant);
 				stream.decParticipants(function () {
-					Streams.Stream.emit('leave', stream, uid, ssid);
+					Streams.Stream.emit('leave', stream, userId, clientId);
 				});
 				break;
 			case 'Streams/Stream/remove':
@@ -479,7 +480,7 @@ Streams.listen = function (options) {
 					publisherId: stream.fields.publisherId, 
 					name: stream.fields.name
 				});
-				Streams.Stream.emit('remove', stream, ssid);
+				Streams.Stream.emit('remove', stream, clientId);
 				break;
 			case 'Streams/Stream/create':
 				if (Q.Config.get(['Streams', 'logging'], false)) {
@@ -489,7 +490,7 @@ Streams.listen = function (options) {
 						+ '"}'
 					);
 				}
-				Streams.Stream.emit('create', stream, ssid);
+				Streams.Stream.emit('create', stream, clientId);
 				// no need to notify anyone
 				break;
 			case 'Streams/Message/post':
@@ -503,7 +504,7 @@ Streams.listen = function (options) {
 						+ '"}'
 					);
 				}
-				Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, ssid);
+				Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
 				break;
 			case 'Streams/Message/postMessages':
 				posted = JSON.parse(parsed.posted);
@@ -521,7 +522,7 @@ Streams.listen = function (options) {
 							+ '"}'
 						);
 					}
-					Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, ssid);
+					Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
 				}
 				break;
 			case 'Streams/Stream/invite':
@@ -725,7 +726,7 @@ Streams.listen = function (options) {
 	    }
 	});
 
-	Streams.Stream.on('post', function (stream, byUserId, msg, ssid) {
+	Streams.Stream.on('post', function (stream, byUserId, msg, clientId) {
 		if (_messageHandlers[msg.fields.type]) {
 			_messageHandlers[msg.fields.type].call(this, msg);
 		}
@@ -750,7 +751,7 @@ Streams.listen = function (options) {
 	socketServer = Q.Socket.listen({host: pubHost, port: pubPort}).of('/Streams');
 
 	socketServer.on('connection', function(client) {
-		console.log("Socket.IO client connected " + client.id);
+		Q.log("Socket.IO client connected " + client.id);
 		/**
 		 * Socket connection
 		 * @event connection
@@ -769,15 +770,16 @@ Streams.on('connection', function(client) {
 		return;
 	}
 	client.alreadyListening = true;
-	client.on('session', function (sid) {
-		Users.userFromSession(sid, function(u) {
-			if (!u) {
+	client.on('Streams.session', function (sessionId, clientId) {
+		
+		Users.userFromSession(sessionId, function (user) {
+			if (!user) {
 				// force disconnect
 				client.disconnect();
 				return;
 			}
-			
-			var userId = u.id;
+		
+			var userId = user.id;
 
 			if (!Streams.clients[userId]) {
 				Streams.clients[userId] = {};
@@ -785,8 +787,9 @@ Streams.on('connection', function(client) {
 
 			var connected = Object.keys(Streams.clients[userId]).length;
 
-			client.sessionId = sid;
 			client.userId = userId;
+			client.sessionId = sessionId;
+			client.clientId = clientId;
 			Streams.clients[userId][client.id] = client;
 			if (!connected) {
 				if (timeout[userId]) {
@@ -805,19 +808,27 @@ Streams.on('connection', function(client) {
 				}
 				delete timeout[userId];
 			} else {
-			    Q.log('New client connected: ' + userId);
+			    Q.log('New client connected: ' + userId + '('+clientId+')');
 			}
 		});
 	});
 	client.on('disconnect', function(){
-		var userId = client.userId, sid = client.sessionId, i;
-		if(!userId || !Streams.clients[userId]) return;
+		var userId = client.userId;
+		var i;
+		if (!userId || !Streams.clients[userId]) {
+			return;
+		}
+		Q.log('Client disconnected: ' + userId);
 		var clients = Streams.clients[userId];
-		delete clients[client.id];
-
-		if (!Object.keys(clients).length) {
-			timeout[userId] = setTimeout(function () {
-				delete timeout[userId];
+		delete clients[this.id];
+		if (Q.isEmpty(clients)) {
+			// All the clients have been disconnected.
+			// Let's wait a bit and if none of them reconnect within the timeout period,
+			// we'll post a message saying the user disconnected.
+			var timeout = setTimeout(function () {
+				if (!Q.isEmpty(clients)) {
+					return;
+				}
 				// post "disconnected" message to Streams/participating stream
 				new Streams.Stream({
 					publisherId: userId,
@@ -830,19 +841,6 @@ Streams.on('connection', function(client) {
 					Q.log('User disconnected: ' + userId);
 				});
 			}, Q.Config.get(["Streams", "socket", "disconnectTimeout"], 1000));
-		} else {
-			Q.log('Client disconnected: ' + userId);
-
-			// now check if user is still logged in
-			if (_closedSessions[userId] && (i = _closedSessions[userId].indexOf(sid) >= 0)) {
-				_closedSessions[userId].splice(i, 1);
-				for (var cid in clients) {
-					if (clients[cid].sessionId === sid) {
-						clients[cid].disconnect();
-						delete clients[cid];
-					}
-				}
-			}
 		}
 	});
 });
@@ -908,19 +906,19 @@ Streams.emitToUser = function(userId, event, data, excludeSessionIds) {
  * @param data {object}
  *  The data accompanying the event
  */
-Streams.pushNotification = function (userId, tokens, event, data) {
+Streams.pushNotification = function (userId, deviceIds, event, data) {
 	var server = Q.listen(), apn = server.attached.apn;
-	var ios = tokens.ios, i;
+	var ios = deviceIds.ios, i;
 	if (!apn || !ios) return; // nothing works!!!
 	function _onError (err) {
 		if (!err) return;
 		Q.log("Error sending push notification: "+err.message);
 	}
 	for (i=0; i<ios.length; i++) {
-		(function (token) {
+		(function (deviceId) {
 			var p = new Q.Pipe(['badge', 'alert', 'sound', 'data'], function (params) {
 				if (!params.badge.length && !params.alert.length && !params.sound.length && !params.data.length) return;
-				var message = apn.createMessage().device(token);
+				var message = apn.createMessage().device(deviceId);
 				if (params.badge[0] !== undefined) message.badge(params.badge[0]);
 				if (params.alert[0]) message.alert('body', params.alert[0]);
 				if (params.sound[0]) message.sound(params.sound[0]);

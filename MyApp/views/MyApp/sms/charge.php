@@ -1,0 +1,1 @@
+<?php echo $user->displayName() ?> has been charged <?php echo "$symbol$amount" ?> in <?php echo $publisher->displayName() ?> for <?php echo $description ?>.

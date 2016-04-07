@@ -10,9 +10,13 @@ function Users_validate_username($params)
 	if (empty($username)) {
 		return;
 	}
-	if ($first = mb_substr($username, 0, 1, "UTF-8")
-	and mb_strtolower($first, "UTF-8") != $first) {
-		return; // first letter is uppercase, this represents an organization
+	if (!empty($user)) {
+		$first = mb_substr($user->id, 0, 1, "UTF-8");
+		if (mb_strtolower($first, "UTF-8") != $first) {
+			// first letter is uppercase, this represents a specially recognized
+			// organization or app, so allow anything in the username
+			return;
+		}
 	}
 	if (strlen($username) < 4) {
 		throw new Q_Exception("usernames are at least 4 characters long", array('username'));

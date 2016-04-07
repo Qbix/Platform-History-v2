@@ -420,6 +420,13 @@ Ap.indexOf = function _Array_prototype_indexOf(searchElement /*, fromIndex */ ) 
 	return -1;
 };
 
+if (!Ap.forEach)
+Ap.forEach = function(callback) {
+	for (var i = 0; i < this.length; i++){
+		callback.apply(this, [this[i], i, this]);
+	}
+};
+
 /**
  * @class Date
  * @description Q methods for Date
@@ -511,9 +518,9 @@ Elp.contains = function (child) {
 };
 
 /**
- * Returns the computed style of an element
+ * Returns a snapshot of the computed style of an element.
  * @method computedStyle
- * @param {String} name Optional. If provided, the value of a property is returned instead of the whole style object.
+ * @param {String} [name] If provided, the value of a property is returned instead of the whole style object.
  * @return {Object|String}
  */
 Elp.computedStyle = function(name) {
@@ -522,7 +529,7 @@ Elp.computedStyle = function(name) {
 		: this.currentStyle;
 	return name
 		? (computedStyle ? computedStyle[name] : null)
-		: computedStyle;
+		: Q.extend({}, computedStyle);
 };
 
 /**
@@ -549,6 +556,23 @@ Elp.copyComputedStyle = function(src) {
 		}
 	}
 	return this;
+};
+
+/**
+ * Retrieves the width and height of the element, if any were set it in css,
+ * as specified in either pixels or percentages, or "auto".
+ * Very useful when sizing other elements to match the dimensions.
+ * @return {Object} Returns object with properties "width" and "height" as strings.
+ */
+Elp.cssDimensions = function () {
+    var cn = this.cloneNode();
+    var div = document.createElement('div');
+    div.appendChild(cn);
+    div.style.display = 'none';
+    document.body.appendChild(div);
+    var cs = Q.copy(cn.computedStyle());
+    document.body.removeChild(div);
+    return { width: cs.width, height: cs.height };
 };
 
 /**
@@ -761,15 +785,17 @@ Elp.remainingWidth = function () {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
-	var w = this.parentNode.getBoundingClientRect().width;
+	var rect2 = this.parentNode.getBoundingClientRect();
+	var w = rect2.right - rect2.left;
 	Q.each(this.parentNode.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
-		var rect2 = this.getBoundingClientRect();
-		if (rect1.top > rect2.bottom || rect1.bottom < rect2.top) {
+		var rect3 = this.getBoundingClientRect();
+		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
-		w -= rect2.width + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+		w -= (rect3.right - rect3.left + 
+			parseFloat(style.marginLeft) + parseFloat(style.marginRight));
 	});	
 	return w;
 };
@@ -1301,7 +1327,7 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Q.typeOf(x) === 'array') {
-		return Array.prototype.slice.call(x, 0);
+		var arr = Array.prototype.slice.call(x, 0);
 	}
 	if (x && typeof x.copy === 'function') {
 		return x.copy();
@@ -1451,7 +1477,10 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 	return target;
 };
 
-Q.extend.dontCopy = { "Q.Tool": true };
+Q.extend.dontCopy = {
+	"Q.Tool": true,
+	"Q.Cache": true
+};
 
 /**
  * Returns whether an object contains a property directly
@@ -2832,7 +2861,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  */
 Q.getter = function _Q_getter(original, options) {
 
-	function wrapper() {
+	var gw = function Q_getter_wrapper() {
 		var i, key, that = this, callbacks = [];
 		var arguments2 = Array.prototype.slice.call(arguments);
 
@@ -2847,21 +2876,21 @@ Q.getter = function _Q_getter(original, options) {
 		}
 		
 		var ret = { dontCache: false };
-		wrapper.onCalled.handle.call(this, arguments2, ret);
+		gw.onCalled.handle.call(this, arguments2, ret);
 
 		var cached, cbpos, cbi;
 		Q.getter.usingCached = false;
 
 		// if caching is required, check the cache -- maybe the result is there
-		if (wrapper.cache && !ignoreCache) {
-			if (cached = wrapper.cache.get(key)) {
+		if (gw.cache && !ignoreCache) {
+			if (cached = gw.cache.get(key)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
-					wrapper.onResult.handle(cached.subject, cached.params, arguments2, ret, original);
+					gw.onResult.handle(cached.subject, cached.params, arguments2, ret, original);
 					Q.getter.usingCached = true;
 					callbacks[cbpos].apply(cached.subject, cached.params);
 					ret.result = Q.getter.CACHED;
-					wrapper.onExecuted.handle.call(this, arguments2, ret);
+					gw.onExecuted.handle.call(this, arguments2, ret);
 					Q.getter.usingCached = false;
 					return ret; // wrapper found in cache, callback and throttling have run
 				}
@@ -2875,7 +2904,7 @@ Q.getter = function _Q_getter(original, options) {
 			ret: ret
 		});
 		if (_waiting[key].length > 1) {
-			wrapper.onExecuted.handle.call(this, arguments2, ret);
+			gw.onExecuted.handle.call(this, arguments2, ret);
 			ret.result = Q.getter.WAITING;
 			return ret; // the request is already in process - let's wait
 		}
@@ -2894,45 +2923,45 @@ Q.getter = function _Q_getter(original, options) {
 				// the throttle
 				return function _Q_getter_callback() {
 					// save the results in the cache
-					if (wrapper.cache && !ret.dontCache) {
-						wrapper.cache.set(key, cbpos, this, arguments);
+					if (gw.cache && !ret.dontCache) {
+						gw.cache.set(key, cbpos, this, arguments);
 					}
 					// process waiting callbacks
 					var wk = _waiting[key];
 					if (wk) for (i = 0; i < wk.length; i++) {
-						wrapper.onResult.handle(this, arguments, arguments2, wk[i].ret, original);
+						gw.onResult.handle(this, arguments, arguments2, wk[i].ret, original);
 						wk[i].callbacks[cbpos].apply(this, arguments);
 					}
 					delete _waiting[key]; 
 					// tell throttle to execute the next function, if any
-					if (wrapper.throttle && wrapper.throttle.throttleNext) {
-						wrapper.throttle.throttleNext(this);
+					if (gw.throttle && gw.throttle.throttleNext) {
+						gw.throttle.throttleNext(this);
 					}
 				};
 			})(callbacks[cbi], cbi));
 			++cbi; // the index in the array of callbacks
 		}
 
-		if (!wrapper.throttle) {
+		if (!gw.throttle) {
 			// no throttling, just run the function
 			if (false === original.apply(that, args)) {
 				ret.dontCache = true;
 			}
 			ret.result = Q.getter.REQUESTING;
-			wrapper.onExecuted.handle.call(this, arguments2, ret);
+			gw.onExecuted.handle.call(this, arguments2, ret);
 			return ret;
 		}
 
-		if (!wrapper.throttle.throttleTry) {
+		if (!gw.throttle.throttleTry) {
 			// the throttle object is probably not set up yet
 			// so set it up
 			var p = {
-				size: wrapper.throttleSize,
+				size: gw.throttleSize,
 				count: 0,
 				queue: [],
 				args: []
 			};
-			wrapper.throttle.throttleTry = function _throttleTry(that, getter, args, ret) {
+			gw.throttle.throttleTry = function _throttleTry(that, getter, args, ret) {
 				++p.count;
 				if (p.size === null || p.count <= p.size) {
 					if (false === getter.apply(that, args)) {
@@ -2945,7 +2974,7 @@ Q.getter = function _Q_getter(original, options) {
 				p.args.push(args);
 				return false;
 			};
-			wrapper.throttle.throttleNext = function _throttleNext(that) {
+			gw.throttle.throttleNext = function _throttleNext(that) {
 				if (--p.count < 0) {
 					console.warn("Q.getter: throttle count is negative. This probably means you passed a callback somewhere it shouldn't have been passed.");
 				}
@@ -2954,8 +2983,8 @@ Q.getter = function _Q_getter(original, options) {
 				}
 			};
 		}
-		if (!wrapper.throttleSize) {
-			wrapper.throttle.throttleSize = function _throttleSize(newSize) {
+		if (!gw.throttleSize) {
+			gw.throttle.throttleSize = function _throttleSize(newSize) {
 				if (typeof newSize === 'undefined') {
 					return p.size;
 				}
@@ -2964,56 +2993,56 @@ Q.getter = function _Q_getter(original, options) {
 		}
 
 		// execute the throttle
-		ret.result = wrapper.throttle.throttleTry(this, original, args, ret)
+		ret.result = gw.throttle.throttleTry(this, original, args, ret)
 			? Q.getter.REQUESTING
 			: Q.getter.THROTTLING;
-		wrapper.onExecuted.handle.call(this, arguments2, ret);
+		gw.onExecuted.handle.call(this, arguments2, ret);
 		return ret;
 	}
 
-	Q.extend(wrapper, original, Q.getter.options, options);
-	wrapper.onCalled = new Q.Event();
-	wrapper.onExecuted = new Q.Event();
-	wrapper.onResult = new Q.Event();
+	Q.extend(gw, original, Q.getter.options, options);
+	gw.onCalled = new Q.Event();
+	gw.onExecuted = new Q.Event();
+	gw.onResult = new Q.Event();
 
 	var _waiting = {};
-	if (wrapper.cache === false) {
+	if (gw.cache === false) {
 		// no cache
-		wrapper.cache = null;
-	} else if (wrapper.cache === true) {
+		gw.cache = null;
+	} else if (gw.cache === true) {
 		// create our own Object that will cache locally in the page
-		wrapper.cache = Q.Cache.document(++_Q_getter_i);
+		gw.cache = Q.Cache.document(++_Q_getter_i);
 	} // else assume we were passed an Object that supports the cache interface
 
-	wrapper.throttle = wrapper.throttle || null;
-	if (wrapper.throttle === true) {
-		wrapper.throttle = '';
+	gw.throttle = gw.throttle || null;
+	if (gw.throttle === true) {
+		gw.throttle = '';
 	}
-	if (typeof wrapper.throttle === 'string') {
+	if (typeof gw.throttle === 'string') {
 		// use our own objects
-		if (!Q.getter.throttles[wrapper.throttle]) {
-			Q.getter.throttles[wrapper.throttle] = {};
+		if (!Q.getter.throttles[gw.throttle]) {
+			Q.getter.throttles[gw.throttle] = {};
 		}
-		wrapper.throttle = Q.getter.throttles[wrapper.throttle];
+		gw.throttle = Q.getter.throttles[gw.throttle];
 	}
 
-	wrapper.forget = function _forget() {
+	gw.forget = function _forget() {
 		var key = Q.Cache.key(arguments);
-		if (key && wrapper.cache) {
-			return wrapper.cache.remove(key);
+		if (key && gw.cache) {
+			return gw.cache.remove(key);
 		}
 	};
 	
 	var ignoreCache = false;
-	wrapper.force = function _force() {
+	gw.force = function _force() {
 		ignoreCache = true;
-		wrapper.apply(this, arguments);
+		gw.apply(this, arguments);
 	};
 
 	if (original.batch) {
-		wrapper.batch = original.batch;
+		gw.batch = original.batch;
 	}
-	return wrapper;
+	return gw;
 };
 var _Q_getter_i = 0;
 Q.getter.options = {
@@ -4251,6 +4280,7 @@ Q.Cache = function _Q_Cache(options) {
 		throw new Q.Error("Q.Pipe: omitted keyword new");
 	}
 	options = options || {};
+	this.typename = 'Q.Cache';
 	this.localStorage = !!options.localStorage;
 	this.sessionStorage = !!options.sessionStorage;
 	this.name = options.name;
@@ -4685,8 +4715,27 @@ Q.Page.push = function (url) {
 	Q.info.url = url;
 };
 
+Q.Page.currentUrl = function () {
+	var url = location.hash.queryField('url');
+	return url ? Q.url(url) : location.href.split('#')[0];
+};
+
+/**
+ * Whether a page is currently being loaded
+ * @property {boolean} beingLoaded
+ */
 Q.Page.beingLoaded = false;
+/**
+ * Whether a page is currently being activated
+ * @property {boolean} beingActivated
+ */
 Q.Page.beingActivated = false;
+/**
+ * Whether we are currently in the process of unloading the existing page,
+ * and then loading and activating the new page.
+ * @property {boolean} beingProcessed
+ */
+Q.Page.beingProcessed = false;
 
 /**
  * Occurs when the page has begun to load
@@ -4996,7 +5045,7 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 			Q.formPost(action, {"just": "something"}, 'post', function afterFormPost() {
 				// we are hoping this returns after the form post
 				Q.nonce = Q.cookie('Q_nonce');
-				var reason = location.hostname.isIPAddress ? " Saving cookies to IP address is not supported." : "";
+				var reason = location.hostname.isIPAddress() ? " Saving cookies to IP address is not supported." : "";
 				if (!Q.nonce) {
 					alert("Our server couldn't set cookies in this browser." + reason);
 				}
@@ -5263,35 +5312,6 @@ Q.layout = function _Q_layout(elementOrEvent) {
 		event.handle.call(event, e, elementOrEvent);
 	});
 	Q.trigger('Q.layout', elementOrEvent);
-};
-
-Q.clientId = function () {
-	var storage = sessionStorage;
-	if (Q.clientId.value = storage.getItem("Q\tclientId")) {
-		return Q.clientId.value;
-	}
-	var detected = Q.Browser.detect();
-	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
-		+ "\t" + detected.OS.substr(0, 3)
-		+ "\t" + detected.name.substr(0, 3)
-		+ "\t" + detected.mainVersion + (detected.isWebView ? "n" : "w")
-		+ "\t" + Math.floor(Date.now()/1000).toString(36);
-	storage.setItem("Q\tclientId", ret);
-	return ret;
-};
-
-/**
- * Call this function to get an rfc4122 version 4 compliant id for the current client
- * @static
- * @method uuid
- */
-Q.uuid = function () {
-	// TODO: consider replacing with
-	// https://github.com/broofa/node-uuid/blob/master/uuid.js
-	return Q.uuid.value = Q.uuid.value || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-		return v.toString(16);
-	});
 };
 
 /**
@@ -6531,8 +6551,61 @@ Q.cookie = function _Q_cookie(name, value, options) {
 	return null;
 };
 
+/**
+ * Get the name of the session cookie
+ * @method sessionName 
+ * @static
+ * @return {string}
+ */
 Q.sessionName = function () {
-	return Q.info.sessionName || 'sessionId';
+	return Q.info.sessionName || 'Q_sessionId';
+};
+
+/**
+ * Get the value of the session cookie
+ * @method sessionId
+ * @static
+ * @return {string}
+ */
+Q.sessionId = function () {
+	return Q.cookie(Q.sessionName());
+};
+
+/**
+ * Get a value that identifies the client in a fairly unique way.
+ * This is most useful to tell apart clients used by a particular user.
+ * @method clientId
+ * @static
+ * @return {string}
+ */
+Q.clientId = function () {
+	var storage = sessionStorage;
+	if (Q.clientId.value = storage.getItem("Q\tclientId")) {
+		return Q.clientId.value;
+	}
+	var detected = Q.Browser.detect();
+	var code = Math.floor(Date.now()/1000)*1000 + Math.floor(Math.random()*1000);
+	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
+		+ "\t" + detected.OS.substr(0, 3)
+		+ "\t" + detected.name.substr(0, 3)
+		+ "\t" + detected.mainVersion + (detected.isWebView ? "n" : "w")
+		+ "\t" + code.toString(36);
+	storage.setItem("Q\tclientId", ret);
+	return ret;
+};
+
+/**
+ * Call this function to get an rfc4122 version 4 compliant id for the current client
+ * @static
+ * @method uuid
+ */
+Q.uuid = function () {
+	// TODO: consider replacing with
+	// https://github.com/broofa/node-uuid/blob/master/uuid.js
+	return Q.uuid.value = Q.uuid.value || 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+		return v.toString(16);
+	});
 };
 
 /**
@@ -6894,6 +6967,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return;
 		}
 		
+		Q.Page.beingProcessed = true;
+		
 		loadTemplates();
 		var newScripts;
 		
@@ -6983,7 +7058,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				if (root.StyleFix) {
 					root.StyleFix.process();
 				}
-
+				
+				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
 			}
 			
@@ -7828,7 +7904,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	
 	// check if template is cached
 	var n = Q.normalize(name);
-	if (tpl && tpl[n]) {
+	if (tpl && typeof tpl[n] === 'string') {
 		var result = tpl[n];
 		callback(null, result);
 		return true;
@@ -7878,6 +7954,7 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.type='handlebars'] the type and extension of the template
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
+ * @param {String} [options.tool] if the rendered html will be placed inside a tool, pass it here so that its prefix will be used
  */
 Q.Template.render = function _Q_Template_render(name, fields, partials, callback, options) {
 	if (typeof fields === "function") {
@@ -7903,46 +7980,46 @@ Q.Template.render = function _Q_Template_render(name, fields, partials, callback
 			);
 		});
 	}
-	var tba = Q.Tool.beingActivated;
+	var tba = (options && options.tool) || Q.Tool.beingActivated;
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
-			// load the template and partials
-			var p = Q.pipe(['template', 'partials'], function (params) {
-				if (params.template[0]) {
-					return callback(params.template[0]);
-				}
-				var tbaOld = Q.Tool.beingActivated;
-				var pbaOld = Q.Page.beingActivated;
-				Q.Tool.beingActivated = tba;
-				Q.Page.beingActivated = pba;
-				try {
-					var compiled = Q.Template.compile(params.template[1]);
-					callback(null, compiled(fields, {partials: params.partials[0]}));
-				} catch (e) {
-					console.warn(e);
-				}
-				Q.Tool.beingActivated = tbaOld;
-				Q.Page.beingActivated = pbaOld;
-			});
-			Q.Template.load(name, p.fill('template'), options);
-			// pipe for partials
-			if (partials && partials.length) {
-				var pp = Q.pipe(partials, function (params) {
-					var i, partial, part = {};
-					for (i=0; i<partials.length; i++) {
-						partial = partials[i];
-						part[partial] = params[partial][0] ? null : params[partial][1];
-					}
-					p.fill('partials')(part);
-				});
-				for (var i=0; i<partials.length; i++) {
-					Q.Template.load(partials[i], pp.fill(partials[i]), options);
-				}
-			} else {
-				p.fill('partials')();
+		// load the template and partials
+		var p = Q.pipe(['template', 'partials'], function (params) {
+			if (params.template[0]) {
+				return callback(params.template[0]);
 			}
+			var tbaOld = Q.Tool.beingActivated;
+			var pbaOld = Q.Page.beingActivated;
+			Q.Tool.beingActivated = tba;
+			Q.Page.beingActivated = pba;
+			try {
+				var compiled = Q.Template.compile(params.template[1]);
+				callback(null, compiled(fields, {partials: params.partials[0]}));
+			} catch (e) {
+				console.warn(e);
+			}
+			Q.Tool.beingActivated = tbaOld;
+			Q.Page.beingActivated = pbaOld;
+		});
+		var o = Q.copy(options, ['type', 'dir', 'name']);
+		Q.Template.load(name, p.fill('template'), o);
+		// pipe for partials
+		if (partials && partials.length) {
+			var pp = Q.pipe(partials, function (params) {
+				var i, partial, part = {};
+				for (i=0; i<partials.length; i++) {
+					partial = partials[i];
+					part[partial] = params[partial][0] ? null : params[partial][1];
+				}
+				p.fill('partials')(part);
+			});
+			for (var i=0; i<partials.length; i++) {
+				Q.Template.load(partials[i], pp.fill(partials[i]), options);
+			}
+		} else {
+			p.fill('partials')();
 		}
-	);
+	});
 };
 
 var _qsockets = {}, _eventHandlers = {}, _connectHandlers = {}, _ioCleanup = [];
@@ -8038,9 +8115,9 @@ function _connectSocketNS(ns, url, callback, force) {
 		}
 		
 		function _connected() {
-			this.emit('session', Q.cookie(Q.sessionName()));
-			Q.Socket.onConnect(ns).handle(socket);
-			Q.Socket.onConnect(ns, url).handle(socket);
+			Q.Socket.onConnect().handle(this, [ns, url]);
+			Q.Socket.onConnect(ns).handle(this, [ns, url]);
+			Q.Socket.onConnect(ns, url).handle(this, [ns, url]);
 			console.log('Socket connected to '+url);
 		}
 	}
@@ -9951,10 +10028,11 @@ Q.Dialogs = {
 		//}
 		var _onClose = o.onClose;
 		o.onClose = new Q.Event(function() {
-			Q.handle(o.onClose.original, $dialog, [$dialog]);
-			if (!Q.Dialogs.dontPopOnClose)
+			if (!Q.Dialogs.dontPopOnClose) {
 				Q.Dialogs.pop(true);
+			}
 			Q.Dialogs.dontPopOnClose = false;
+			Q.handle(o.onClose.original, $dialog, [$dialog]);
 		}, 'Q.Dialogs');
 		o.onClose.original = _onClose;
 		$dialog.plugin('Q/dialog', o);
@@ -9984,22 +10062,22 @@ Q.Dialogs = {
 			dontTriggerClose = false;
 		}
 		
-		var dialog = this.dialogs.pop();
+		var $dialog = this.dialogs.pop();
 		if (this.dialogs.length) {
 			this.dialogs[this.dialogs.length - 1].show();
 		}
-		if (!dontTriggerClose && dialog) {
+		if (!dontTriggerClose && $dialog) {
 			Q.Dialogs.dontPopOnClose = true;
-			if (dialog.data('Q/overlay')) {
-				dialog.data('Q/overlay').close();
-			} else if (dialog.data('Q/dialog')) {
-				dialog.data('Q/dialog').close();
+			if ($dialog.data('Q/overlay')) {
+				$dialog.data('Q/overlay').close();
+			} else if ($dialog.data('Q/dialog')) {
+				$dialog.data('Q/dialog').close();
 			}
 		}
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
-		return dialog;
+		return $dialog;
 	}
 
 };
@@ -10039,7 +10117,7 @@ Q.Dialogs.push.options = {
 Q.alert = function(message, options) {
 	if (options === undefined) options = {};
 	if (options.title === undefined) options.title = 'Alert';
-	var dialog = Q.Dialogs.push(Q.extend({
+	return Q.Dialogs.push(Q.extend({
 		'title': options.title,
 		'content': '<div class="Q_messagebox Q_big_prompt"><p>' + message + '</p></div>',
 		'className': 'Q_alert',
@@ -10047,7 +10125,6 @@ Q.alert = function(message, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
-	return dialog;
 };
 
 /**
@@ -10072,7 +10149,7 @@ Q.alert = function(message, options) {
 Q.confirm = function(message, callback, options) {
 	var o = Q.extend({}, Q.confirm.options, options);
 	var buttonClicked = false;
-	var dialog = Q.Dialogs.push(Q.extend({
+	var $dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
@@ -10089,17 +10166,17 @@ Q.confirm = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
-	dialog.find('button:first').on(Q.Pointer.end, function() {
+	$dialog.find('.Q_buttons button:first').on(Q.Pointer.end, function() {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
 	});
-	dialog.find('button:last').on(Q.Pointer.end, function() {
+	$dialog.find('.Q_buttons button:last').on(Q.Pointer.end, function() {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
 	});
-	return dialog;
+	return $dialog;
 };
 
 Q.confirm.options = {
@@ -10128,10 +10205,16 @@ Q.confirm.options = {
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
 Q.prompt = function(message, callback, options) {
+	function _done() {
+		buttonClicked = true;
+		var value = $dialog.find('input').val();
+		Q.Dialogs.pop();
+		Q.handle(callback, this, [value]);
+	}
 	if (options === undefined) options = {};
 	var o = Q.extend({}, Q.prompt.options, options);
 	var buttonClicked = false;
-	var dialog = Q.Dialogs.push(Q.extend({
+	var $dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
@@ -10162,14 +10245,8 @@ Q.prompt = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
-	dialog.find('button').on(Q.Pointer.click, _done);
-	return dialog;
-	function _done() {
-		buttonClicked = true;
-		var value = dialog.find('input').val();
-		Q.Dialogs.pop();
-		Q.handle(callback, this, [value]);
-	}
+	$dialog.find('button').on(Q.Pointer.click, _done);
+	return $dialog;
 };
 Q.prompt.options = {
 	title: 'Prompt',
@@ -10629,27 +10706,36 @@ function _addHandlebarsHelpers() {
 			if (!path) {
 				return "{{call missing method name}}";
 			}
+			var args = Array.prototype.slice.call(
+				arguments, 1, arguments.length-1
+			);
 			var parts = path.split('.');
-			var p0 = parts[0];
-			var p1 = parts[1];
-			if (this[p0] && typeof this[p0][p1] === 'function') {
-				var args = Array.prototype.slice.call(
-					arguments, 1, arguments.length-1
-				);
-				return this[p0][p1].apply(this[p0], args);
+			var subparts = parts.slice(0, -1);
+			var f = Q.getObject(parts, this);
+			if (typeof f === 'function') {
+				return f.apply(Q.getObject(subparts, this), args);
+			}
+			var f = Q.getObject(parts);
+			if (typeof f === 'function') {
+				return f.apply(Q.getObject(subparts), args);
 			}
 			return "{{call "+path+" not found}}";
 		});
 	}
 	if (!Handlebars.helpers.tool) {
-		Handlebars.registerHelper('tool', function (name, id, options) {
+		Handlebars.registerHelper('tool', function (name, id, tag, options) {
 			if (!name) {
 				return "{{tool missing name}}";
 			}
-			if (typeof id === 'object') {
+			if (Q.isPlainObject(tag)) {
+				options = tag;
+				tag = undefined;
+			}
+			if (Q.isPlainObject(id)) {
 				options = id;
 				id = undefined;
 			}
+			tag = tag || 'div';
 			var ba = Q.Tool.beingActivated;
 			var prefix = (ba ? ba.prefix : '');
 			var o = {};
@@ -10668,7 +10754,15 @@ function _addHandlebarsHelpers() {
 			if (typeof id === 'string' || typeof id === 'number') {
 				id = prefix + name.split('/').join('_') + (id !== '' ? '-'+id : '');
 			}
-			return Q.Tool.setUpElementHTML('div', name, o, id, prefix);
+			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
+		});
+	}
+	if (!Handlebars.helpers.url) {
+		Handlebars.registerHelper('url', function (url) {
+			if (!url) {
+				return "{{url missing}}";
+			}
+			return Q.url(url);
 		});
 	}
 }

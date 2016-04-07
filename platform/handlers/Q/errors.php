@@ -7,7 +7,7 @@ function Q_errors($params) {
 	extract($params);
 	/**
 	 * @var Exception $exception
-	 * @var boolean $response_started
+	 * @var boolean $startedResponse
 	 */
 
 	if (!empty($exception)) {
@@ -76,7 +76,7 @@ EOT;
 		return Q::view('Q/errors.php', $params2);
 	}
 
-	if (!$response_started) {
+	if (!$startedResponse) {
 		try {
 			// Try rendering the response, expecting it to
 			// display the errors along with the rest.

@@ -46,7 +46,7 @@ Users.clients = {};
 
 /**
  * Get the id of the main community from the config. Defaults to the app name.
- * @return {string} The id of the main community for the installed app.
+ * @return {String} The id of the main community for the installed app.
  */
 Users.communityId = function() {
 	var communityId = Q.Config.get(['Users', 'community', 'id'], null);
@@ -55,11 +55,19 @@ Users.communityId = function() {
 
 /**
  * Get the name of the main community from the config. Defaults to the app name.
- * @return {string} The name of the main community for the installed app.
+ * @return {String} The name of the main community for the installed app.
  */
 Users.communityName = function() {
 	var communityName = Q.Config.get(['Users', 'community', 'name'], null);
 	return communityName ? communityName : Q.Config.expect(['Q', 'app']);
+};
+
+/**
+ * Get the suffix of the main community from the config, such as "Incorporated" or "LLC"
+ * @return {String|null} The suffix of the main community for the installed app.
+ */
+Users.communitySuffix = function() {
+	return Q.Config.get(['Users', 'community', 'suffix'], null);
 };
 
 /**
@@ -79,20 +87,19 @@ Users.userFromSession = function (sessionId, callback) {
 			id: sessionId
 		}).execute(function(err, results){
 			if (!results || results.length === 0) {
+				return callback(null, null);
+			}
+			if (results[0].fields.content === undefined) {
+				Q.log(err, results);
+				throw new Q.Error("Users.userFromSession session.fields.content is undefined");
+			}
+			var sess = JSON.parse(results[0].fields.content);
+			
+			if (!Q.isSet(sess, ['Users', 'loggedInUser'])) {
 				callback(null);
 			} else {
-				if (results[0].fields.content === undefined) {
-					Q.log(err, results);
-					throw new Q.Error("Users.userFromSession session.fields.content is undefined");
-				}
-				var sess = JSON.parse(results[0].fields.content);
-				
-				if (!Q.isSet(sess, ['Users', 'loggedInUser'])) {
-					callback(null);
-				} else {
-					Users.sessions[sessionId] = { Users: sess.Users };
-					callback(Users.sessions[sessionId].Users.loggedInUser);
-				}
+				Users.sessions[sessionId] = { Users: sess.Users };
+				callback(sess.Users.loggedInUser, sess.Q && sess.Q.nonce);
 			}
 		});
 	}
@@ -102,21 +109,23 @@ Users.userFromSession = function (sessionId, callback) {
  * Gets an array of user's device tokens associated with userId and passes it to callback.
  * Data is filtered for platforms listed in config array `{app}/cordova/platform` or `Q/cordova/platform`
  * @method tokensForUser
+ * @static
  * @param userId {string}
  *	User Id
  * @param callback {function}
  *  Passes arrays of device ids per platform and array of device sessions
  */
 Users.tokensForUser = function (userId, callback) {
-	var self = this,
-	    app = Q.Config.get(["Q", "app"], "Q"),
-	    platforms = Q.Config.get([app, "cordova", "platform"], []);
+	var app = Q.Config.get(["Q", "app"], "Q");
+	var platforms = Q.Config.get([app, "cordova", "platform"], []);
 	Users.Device.SELECT('*').where({
 		userId: userId,
 		platform: platforms
 	}).execute(function(err, res) {
 		if (err) return;
-		var tokens = {}, sessions = [], i, platform;
+		var tokens = {};
+		var sessions = [];
+		var i, platform;
 		for(i=0; i<res.length; i++) {
 			platform = res[i].fields.platform;
 			if (!tokens[platform]) {
@@ -125,7 +134,7 @@ Users.tokensForUser = function (userId, callback) {
 			tokens[platform].push(res[i].fields.deviceId);
 			sessions.push(res[i].fields.sessionId);
 		}
-		callback.call(self, tokens, sessions);
+		callback.call(Users, tokens, sessions);
 	});
 };
 
@@ -151,8 +160,7 @@ Users.listen = function (options) {
  *  So far no options are implemented.
  */
 Users.fetch = function (id, callback) {
-	new Users.User({id: id})
-	.retrieve(callback);
+	new Users.User({id: id}).retrieve(callback);
 };;
 
 function internalServerHandler(req, res, next) {

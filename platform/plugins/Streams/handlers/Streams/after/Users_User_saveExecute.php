@@ -13,8 +13,15 @@ function Streams_after_Users_User_saveExecute($params)
 	if (isset($modifiedFields['icon'])) {
 		$updates['icon'] = $modifiedFields['icon'];
 	}
-	$firstName = Q::ifset(Streams::$cache, 'register', 'first', '');
-	$lastName = Q::ifset(Streams::$cache, 'register', 'last', '');
+	if ($user->id === Users::communityId()) {
+		$firstName = Users::communityName();
+		$lastName = Users::communitySuffix();
+		$firstName = $firstName ? $firstName : "";
+		$lastName = $lastName ? $lastName : "";
+	} else {
+		$firstName = Q::ifset(Streams::$cache, 'register', 'first', '');
+		$lastName = Q::ifset(Streams::$cache, 'register', 'last', '');
+	}
 	if ($params['inserted']) {
 		
 		// create some standard streams for them
@@ -117,6 +124,9 @@ function Streams_after_Users_User_saveExecute($params)
 		$access->writeLevel = -1;
 		$access->adminLevel = -1;
 		$access->save();
+		
+		// NOTE: the above saving of access caused Streams::updateAvatar to run,
+		// insert a Streams_Avatar row for the new user, and properly configure it.
 		
 	} else if ($modifiedFields) {
 		if ($updates) {

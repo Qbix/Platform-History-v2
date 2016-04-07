@@ -190,6 +190,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
+	vertical-align: top;
 }
 
 .Streams_participants_tool .Streams_participants_invite {
@@ -309,7 +310,7 @@
 }
 
 #Streams_login_username {
-	width: 100%;
+	width: 96%; padding: 2%;
 }
 
 #Streams_login_password {
@@ -317,13 +318,14 @@
 }
 
 .Users_register_form td {
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .Streams_login_picture img {
 	width: 50px;
 	height: 50px;
 	margin-right: 7px;
+	vertical-align: middle;
 }
 
 .Streams_complete_user td:first-child {

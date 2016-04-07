@@ -44,7 +44,7 @@ Q.text.Users = {
 		mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend'>Click to re-send the message</a>.",
 		usingOther: "or you can ",
 		facebookSrc: null,
-		username: "Choose a username:",
+		prompt: "Choose a username:",
 		placeholders: {
 			identifier: "your mobile # or email",
 			mobile: "enter your mobile #",
@@ -677,8 +677,10 @@ Users.logout = function(options) {
 				alert(e);
 			}
 		}
-		Users.logout.occurring = false;
-		Users.sessionId = Q.cookie(Q.sessionName()); // null
+		setTimeout(function () {
+			Users.logout.occurring = false;
+		}, 0);
+		Users.lastSeenNonce = Q.cookie('Q_nonce');
 		Users.roles = {};
 		if (Users.facebookApps[Q.info.app]
 		&& (o.using.indexOf('facebook') >= 0)) {
@@ -745,21 +747,20 @@ Users.loggedInUserId = function () {
  *  otherwise, first parameter is null and second parameter is a Users.User object
  */
 Users.get = function (userId, callback) {
-	var url = Q.action('Users/avatar');
 	var func = Users.batchFunction(Q.baseUrl({
 		userIds: userId
-	}), 'avatar');
+	}), 'user');
 	func.call(this, userId, function Users_get_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
-		if (!msg && !data.avatar) {
-			msg = "Users.get: data.avatar is missing";
+		if (!msg && !data.user) {
+			msg = "Users.get: no such user";
 		}
 		if (msg) {
-			Users.onError.handle.call(this, msg, err, data.avatar);
-			Users.get.onError.handle.call(this, msg, err, data.avatar);
+			Users.onError.handle.call(this, msg, err, data.user);
+			Users.get.onError.handle.call(this, msg, err, data.user);
 			return callback && callback.call(this, msg);
 		}
-		var user = new Users.User(data.avatar);
+		var user = new Users.User(data.user);
 		callback.call(user, err, user);
 	});
 }
@@ -1010,9 +1011,9 @@ function login_callback(err, response) {
 			$('#Users_form_passphrase').attr('value', '');
 			
 			$('input', $this).css('background-image', 'none');
-			if (err || response.errors) {
+			if (err || (response && response.errors)) {
 				// there were errors
-				if (response.errors) {
+				if (response && response.errors) {
 					$this.data('validator').invalidate(
 						Q.ajaxErrors(response.errors, [first_input.attr('name')]
 					));
@@ -1022,7 +1023,7 @@ function login_callback(err, response) {
 				return;
 			}
 			// success!
-			Users.sessionId = Q.cookie(Q.sessionName());
+			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = response.slots.data.roles || {};
 			switch ($this.data('form-type')) {
 				case 'resend': 
@@ -1154,7 +1155,7 @@ function login_callback(err, response) {
 				$('<td class="Users_login_picture" />').append(img)
 			).append(
 				td = $('<td class="Users_login_username_block" />').append(
-					$('<label for="Users_login_username" />').html(Q.text.Users.login.username)
+					$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
 				).append(
 					$('<input id="Users_login_username" name="username" type="text" class="text" />')
 					.attr('maxlength', Q.text.Users.login.maxlengths.username)
@@ -1821,14 +1822,14 @@ Q.onInit.add(function () {
 	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
 		Q.nonce = Q.cookie('Q_nonce');
 	}
-	document.documentElement.className += Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut';
+	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
     
 	if (Q.plugins.Users.facebookApps[Q.info.app]
 	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
 		Users.initFacebook();
 	}
 	
-	Users.sessionId = Q.cookie(Q.sessionName());
+	Users.lastSeenNonce = Q.cookie('Q_nonce');
 	
 	Q.Users.login.options = Q.extend({
 		onCancel: new Q.Event(),
@@ -1899,14 +1900,14 @@ Q.beforeActivate.add(function (elem) {
 }, 'Users');
 
 Q.request.options.onProcessed.set(function (err, response) {
-	var sessionId = Q.cookie(Q.sessionName());
-	if (sessionId !== Users.sessionId
+	Q.nonce = Q.cookie('Q_nonce');
+	if (Users.lastSeenNonce !== Q.nonce
 	&& !Users.login.occurring
 	&& !Users.authenticate.occurring
 	&& !Users.logout.occurring) {
 		Q.nonce = Q.cookie('Q_nonce');
 		Q.req("Users/login", 'data', function (err, res) {
-			Q.nonce = Q.cookie('Q_nonce');
+			Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce');
 			var msg = Q.firstErrorMessage(err, res && res.errors);
 			if (msg) {
 				return Users.onError.handle(msg, err);
@@ -1923,7 +1924,7 @@ Q.request.options.onProcessed.set(function (err, response) {
 			}
 		});
 	}
-	Users.sessionId = sessionId;
+	Users.lastSeenNonce = Q.nonce;
 	if (!response || !response.errors) {
 		return;
 	}

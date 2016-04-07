@@ -27,7 +27,7 @@
  *   @param {Mixed} [options.related.type] the type of the relation
  *   @param {Object} [options.related] A hash with properties "publisherId" and "streamName", and usually "type" and "weight". Usually set by a "Streams/related" tool.
  *   @param {Boolean|Array} [options.editable=true] Set to false to avoid showing even authorized users an interface to replace the image or text. Or set to an array naming only certain fields, which the rendering method would hopefully recognize.
- *   @param {Boolean} [options.removable=true] Set to false to avoid showing even authorized users an option to remove (or close) this stream
+ *   @param {Boolean} [options.closeable=true] Set to false to avoid showing even authorized users an option to closeable (or close) this stream
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
  *     @param {String} [options.creatable.title="New Item"] Optional title for the case when streamName = "", i.e. the composer
  *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
@@ -46,6 +46,7 @@
  *   @param {Q.Event} [options.onComposer] An event that occurs after a composer is rendered
  *   @param {Q.Event} [options.onRefresh] An event that occurs after a stream preview is rendered for an existing stream
  *   @param {Q.Event} [options.onLoad] An event that occurs after the refresh calls its callback, which should happen when everything has fully rendered
+ *   @param {Q.Event} [options.beforeClose] Optionally set to a function that takes a callback, to display e.g. a dialog box confirming whether to close the stream. It should call the callback with no arguments, in order to proceed with the closing.
  *   @param {Q.Event} [options.onClose] An event that occurs after a stream with a preview has been closed
  *   @param {Object} [options.templates] Under the keys "views", "edit" and "create" you can override options for Q.Template.render .
  *   The fields passed to the template include "alt", "titleTag" and "titleClass"
@@ -102,7 +103,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		options: {}
 	},
 	throbber: "plugins/Q/img/throbbers/loading.gif",
-	
+
 	imagepicker: {
 		showSize: "50",
 		fullSize: "200x"
@@ -115,6 +116,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	actions: {
 		position: 'mr'
 	},
+	beforeClose: null,
 	
 	beforeCreate: new Q.Event(),
 	onCreate: new Q.Event(),
@@ -173,6 +175,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			}, overrides);
 			state.beforeCreate.handle.call(tool);
 			tool.loading();
+			var r = state.related;
 			Q.Streams.retainWith(tool)
 			.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
 				if (err) {
@@ -180,8 +183,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					Q.handle(callback, tool, [err]);
 					return err;
 				}
-				var r = state.related;
-				state.related.weight = Q.getObject(['related', 'weight'], extra);
+				if (r) {
+					r.weight = Q.getObject(['related', 'weight'], extra);
+				}
 				state.publisherId = this.fields.publisherId;
 				state.streamName = this.fields.name;
 				tool.stream = this;
@@ -196,7 +200,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					Q.handle(callback, tool, [tool.stream]);
 					tool.preview();
 				}
-			}, state.related, state.creatable.options);
+			}, r, state.creatable.options);
 		}
 		var tool = this;
 		var state = tool.state;
@@ -399,7 +403,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var state = tool.state;
 		// check if we should add this behavior
 		if (!state.actions
-		|| state.removable === false
+		|| state.closeable === false
 		|| !tool.stream.testWriteLevel('close')) {
 			return false;
 		}
@@ -417,14 +421,22 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			};
 		} else {
 			actions[action] = function () {
-				tool.element.addClass('Q_working');
-				Q.Masks.show(tool, {
-					shouldCover: tool.element, className: 'Q_removing'
-				});
-				tool.stream.close(function (err) {
-					if (err) return;
-					tool.state.onClose.handle.call(tool, !tool.stream.isRequired);
-				});
+				if (state.beforeClose) {
+					Q.handle(state.beforeClose, tool, [_remove]);
+				} else {
+					_remove();
+				}
+				function _remove(cancel) {
+					if (cancel) return;
+					tool.element.addClass('Q_working');
+					Q.Masks.show(tool, {
+						shouldCover: tool.element, className: 'Q_removing'
+					});
+					tool.stream.close(function (err) {
+						if (err) return;
+						tool.state.onClose.handle.call(tool, !tool.stream.isRequired);
+					});
+				}
 			};
 		}
 		var ao = Q.extend({}, state.actions, { actions: actions });

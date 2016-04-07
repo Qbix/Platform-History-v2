@@ -1,8 +1,10 @@
 <?php
-
+	
 function Users_user_validate()
 {
-	Q_Valid::nonce(true);
+	if (isset($_REQUEST['userIds']) or isset($_REQUEST['batch'])) {
+		return;
+	}
 	$type = isset($_REQUEST['identifierType'])
 		? $_REQUEST['identifierType']
 		: Q_Config::get("Users", "login", "identifierType", "email,mobile");
@@ -30,5 +32,36 @@ function Users_user_validate()
 		if (!Q_Valid::phone($_REQUEST['identifier'])) {
 			throw new Q_Exception("a valid $expected is required", $fields);
 		}
+	}
+	
+	$identifier = Users::requestedIdentifier($type);
+
+	// check our db
+	if ($user = Users::userFromContactInfo($type, $identifier)) {
+		$verified = !!Users::identify($type, $identifier);
+		return array(
+			'exists' => $user->id,
+			'verified' => $verified,
+			'username' => $user->username,
+			'icon' => $user->icon,
+			'passphrase_set' => !empty($user->passphraseHash),
+			'fb_uid' => $user->fb_uid ? $user->fb_uid : null
+		);
+	}
+	if ($type === 'email') {
+		$email = new Users_Email();
+		Q_Valid::email($identifier, $normalized);
+		$email->address = $normalized;
+		$exists = $email->retrieve();
+	} else if ($type === 'mobile') {
+		$mobile = new Users_Mobile();
+		Q_Valid::phone($identifier, $normalized);
+		$mobile->number = $normalized;
+		$exists = $mobile->retrieve();
+	}
+
+	if (empty($exists) and Q_Config::get('Users', 'login', 'noRegister', false)) {
+		$nicetype = ($type === 'email') ? 'email address' : 'mobile number';
+		throw new Q_Exception("This $nicetype was not registered", array('identifier'));
 	}
 }

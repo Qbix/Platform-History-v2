@@ -74,7 +74,7 @@
 	background: -o-linear-gradient(top,  #aaa 0%,#eee 100%);
 	background: -ms-linear-gradient(top,  #aaa 0%,#eee 100%);
 	background: linear-gradient(top,  #aaa 0%,#eee 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf5ff', endColorstr='#98bede',GradientType=0 );
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#eeeeee',GradientType=0 );
 	border-top: solid 1px #999;
 	border-bottom: solid 1px #ccc;
 	box-sizing: border-box;

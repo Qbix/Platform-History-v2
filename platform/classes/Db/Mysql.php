@@ -1611,7 +1611,7 @@ EOT;
 			$null_check = $field_null ? "if (!isset(\$value)) {\n\t\t\treturn array('$field_name', \$value);\n\t\t}\n\t\t" : '';
 			$null_fix = $field_null ? '' : "if (!isset(\$value)) {\n\t\t\t\$value='';\n\t\t}\n\t\t";
 			$dbe_check = "if (\$value instanceof Db_Expression) {\n\t\t\treturn array('$field_name', \$value);\n\t\t}\n\t\t";
-			$js_null_check = $field_null ? "if (!value) return value;\n\t\t" : '';
+			$js_null_check = $field_null ? "if (value == undefined) return value;\n\t\t" : '';
 			$js_null_fix = $field_null ? '' : "if (value == null) {\n\t\t\tvalue='';\n\t\t}\n\t\t";
 			$js_dbe_check = "if (value instanceof Db.Expression) return value;\n\t\t";
 			if (! isset($functions["beforeSet_$field_name"]))
@@ -1761,7 +1761,7 @@ EOT;
 		return $type_display_range;
 EOT;
 					$js_functions["beforeSet_$field_name"][] = <<<EOT
-		{$js_null_check}{$js_null_check}{$js_null_fix}{$js_dbe_check}if (typeof value !== "string" && typeof value !== "number")
+		{$js_null_check}{$js_null_fix}{$js_dbe_check}if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".$field_name");
 		if (typeof value === "string" && value.length > $type_display_range)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".$field_name");

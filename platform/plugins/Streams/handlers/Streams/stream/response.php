@@ -21,7 +21,9 @@ function Streams_stream_response()
 			$userId,
 			$publisherId,
 			$name,
-			$fields ? $fields : '*');
+			$fields ? $fields : '*',
+			array('withParticipant' => true)
+		);
 		if (Q_Request::slotName('streams')) {
 			Q_Response::setSlot('streams', Db::exportArray($streams));
 		}

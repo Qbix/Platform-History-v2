@@ -539,10 +539,13 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 						if (!isset($sql)) {
 							$sql = $this->getSQL();
 						}
-						if (class_exists('Q_Exception_DbQuery')) {
-							throw new Exception("query could not be prepared");
+						if (!class_exists('Q_Exception_DbQuery')) {
+							throw new Exception("query could not be prepared [query was: $sql ]", - 1);
 						}
-						throw new Exception("query could not be prepared [query was: $sql ]", - 1);
+						throw new Q_Exception_DbQuery(array(
+							'sql' => $sql,
+							'msg' => 'query could not be prepared'
+						));
 					}
 				}
 			}
@@ -608,10 +611,16 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 							$query->statement->execute();
 							$stmt = $query->statement;
 						} catch (Exception $e) {
-							if (class_exists('Q_Exception_DbQuery')) {
-								throw $e;
+							if (!isset($sql)) {
+								$sql = $query->getSQL();
 							}
-							throw new Exception($e->getMessage() . "\n... Query was: $sql", - 1);
+							if (!class_exists('Q_Exception_DbQuery')) {
+								throw new Exception($e->getMessage() . " [query was: $sql]", -1);
+							}
+							throw new Q_Exception_DbQuery(array(
+								'sql' => $sql,
+								'msg' => $e->getMessage()
+							));
 						}
 					} else {
 						// Obtain the full SQL code ourselves
@@ -724,11 +733,11 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 				'after'
 			);
 			if (!class_exists('Q_Exception_DbQuery')) {
-				throw $exception;
+				throw new Exception($e->getMessage() . " [query was: $sql]", -1);
 			}
 			throw new Q_Exception_DbQuery(array(
 				'sql' => $sql,
-				'message' => $exception->getMessage() . "[query was: $sql]"
+				'msg' => $exception->getMessage()
 			));
 		}
 		/**
@@ -1297,6 +1306,9 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 */
 	function limit ($limit, $offset = null)
 	{
+		if (!isset($limit)) {
+			return;
+		}
 		if (!is_numeric($limit) or $limit < 0 or floor($limit) != $limit) {
 			throw new Exception("the limit must be a non-negative integer");
 		}

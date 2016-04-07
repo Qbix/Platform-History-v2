@@ -10,8 +10,8 @@
  * @constructor
  * @param {array} [$options] An associative array of parameters, containing:
  *   @param {string} $options.fieldInput  Required. HTML representing a text input, textarea, or select.
- *   @param {string} $options.type  Required. The type of the input. Can be "textarea", "text" or "select"
  *   @param {string} $options.staticHtml  Required. The static HTML to display when the input isn't showing.
+ *   @param {string} [$options.type='textarea']  The type of the input. Can be "textarea", "text" or "select"
  *   @param {string} [$options.action=""]  The uri or url to submit to
  *   @param {string} [$options.method="put"]  The method to use for submitting the form.
  *   @param {boolean} [$options.editing]  If true, then renders the inplace tool in editing mode.
@@ -37,6 +37,9 @@ function Q_inplace_tool($options)
 	if (isset($inplace)) {
 		extract($inplace);
 	}
+	if (!isset($fieldInput)) {
+		throw new Q_Exception_RequiredField(array('field' => 'fieldInput'));
+	}
 	$staticClass = ($type === 'textarea')
 		? 'Q_inplace_tool_blockstatic'
 		: 'Q_inplace_tool_static';
@@ -52,7 +55,7 @@ function Q_inplace_tool($options)
 	$classes = !empty($editing) ? 'Q_editing Q_nocancel' : '';
 	$options = compact(
 		'editOnClick', 'selectOnEdit', 'showEditButtons',
-		'maxWidth', 'beforeSave', 'onSave', 'placeholder'
+		'maxWidth', 'beforeSave', 'onSave', 'placeholder', 'type'
 	);
 	Q_Response::setToolOptions($options);
 	$sh = $staticHtml
