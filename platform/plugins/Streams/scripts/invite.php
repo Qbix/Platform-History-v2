@@ -17,6 +17,9 @@ $usage
 
 Parameters:
 
+identifier
+Can be an email address or mobile number
+
 communityId
 Defaults to the app's name, as found under the "Q"/"app" config.
 
