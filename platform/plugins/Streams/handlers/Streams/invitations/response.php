@@ -31,7 +31,7 @@ function Streams_invitations_response()
 	$filenames = glob($pattern);
 	$parts = array();
 	foreach ($filenames as $f) {
-		if (--$offset > 0) {
+		if (--$offset >= 0) {
 			continue;
 		}
 		$parts[] = file_get_contents($f);
