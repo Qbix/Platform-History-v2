@@ -2300,10 +2300,10 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 					var stream = logStream[name] = fs.createWriteStream(
 						filename, {flags: 'a', encoding: 'utf-8'}
 					);
-					stream.write(message);
 					while (log.length) {
 						stream.write(log.shift());
 					}
+					stream.write(message);
 				});
 			}
 		});
