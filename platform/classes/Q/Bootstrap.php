@@ -222,7 +222,6 @@ class Q_Bootstrap
 			if (!$plugin_path) {
 				throw new Q_Exception_MissingPlugin(compact('plugin'));
 			}
-			Q_Config::load($plugin_path.DS.'config'.DS.'plugin.json');
 			array_splice($paths, 1, 0, array($plugin_path));
 			$PLUGIN = strtoupper($plugin);
 			if (!defined($PLUGIN.'_PLUGIN_DIR'))
@@ -249,6 +248,10 @@ class Q_Bootstrap
 		}
 		$paths = array_unique($paths);
 		set_include_path(implode(PS, $paths));
+
+		foreach (self::$plugins as $plugin => $plugin_path) {
+			Q_Config::load($plugin_path.DS.'config'.DS.'plugin.json');
+		}
 		
 		// Now, we can merge in our app's config
 		Q_Config::merge($app_tree);

@@ -216,7 +216,7 @@ class Q_Tree
 				// get file contents, remove comments and parse
 				$json = file_get_contents($filename2);
 				$json = preg_replace('/\s*(?!<\")\/\*[^\*]+\*\/(?!\")\s*/', '', $json);
-				$arr = json_decode($json, true);
+				$arr = Q::json_decode($json, true);
 			} catch (Exception $e) {
 				$arr = null;
 			}
