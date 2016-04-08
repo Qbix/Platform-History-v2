@@ -14,6 +14,8 @@
 		"mustache": "0.7.x",
 		"handlebars": "2.0.x",
 		"nodemailer": "2.3.x",
+		"nodemailer-smtp-transport": "2.3.x",
+		"nodemailer-sendmail-transport": "1.x",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
 		"apnagent": "1.x.x"
