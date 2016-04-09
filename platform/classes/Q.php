@@ -1724,7 +1724,15 @@ class Q
 	 * @static
 	 */
 	public static $cache = array();
-	
+
+	/**
+	 * This is set to true when the bootstrapping process has completed successfully.
+	 * @property $bootstrapped
+	 * @type boolean
+	 * @static
+	 */
+	public static $bootstrapped = false;
+
 	/**
 	 * @property $toolName
 	 * @type string

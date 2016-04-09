@@ -175,7 +175,7 @@ function parse_url (str, component) {
  * @param {array} [options.isSource] If true, the view parameter contains the exact source, not the path of the template
  * @param {function} callback Receives error and response objects after complete
  */
-var smtpTransport = null;
+var _transport = null;
 Utils.sendEmail = function (to, subject, view, fields, options, callback) {
 	var mailer = require('nodemailer');
 	var handlebars = require('handlebars');
@@ -211,31 +211,36 @@ Utils.sendEmail = function (to, subject, view, fields, options, callback) {
 		: Q.Handlebars.render(view, fields);
 
 	var smtp = Q.Config.get(['Users', 'email', 'smtp'], {host: 'sendmail'});
-	if (!smtpTransport && smtp) {
+	if (!_transport && smtp) {
 		// Set up the default mail transport
 		var host = smtp.host || 'sendmail';
-
 		if (host === "sendmail") {
-			smtpTransport = mailer.createTransport("sendmail");
+			var sendmailTransport = require("nodemailer-sendmail-transport");
+			_transport = mailer.createTransport(sendmailTransport());
 		} else {
-			host = {host: host};
+			var smtpTransport = require("nodemailer-smtp-transport");
+			host = {
+				host: host
+			};
 			if (smtp.port) host.port = smtp.port;
 			if (smtp.auth === "login") {
-				if (smtp.ssl) host.secureConnection = true;
+				if (smtp.ssl) {
+					host.secureConnection = true;
+				}
 				host.auth = {
 					user: smtp.username,
 					pass: smtp.password
 				};
 			}
-			smtpTransport = mailer.createTransport("SMTP", host);
+			_transport = mailer.createTransport(smtpTransport(host));
 		}
 	}
 	
 	var logContent = 'Sent email message to ' + to
 		+ ":\n" + mailOptions.subject
 		+ "\n" + (mailOptions.html || mailOptions.text);
-	if (smtpTransport) {
-		smtpTransport.sendMail(mailOptions, callback);
+	if (_transport) {
+		_transport.sendMail(mailOptions, callback);
 	} else {
 		logContent = 'Would have ' + logContent;
 		setTimeout(function () {
@@ -243,7 +248,7 @@ Utils.sendEmail = function (to, subject, view, fields, options, callback) {
 		}, 0);
 	}
 	if (key) {
-		Q.log(logContent);
+		Q.log(logContent, key);
 	}
 };
 

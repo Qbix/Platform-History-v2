@@ -752,7 +752,7 @@ Q.getter = function _Q_getter(original, options) {
 		gw.cache = null;
 	} else if (gw.cache === true) {
 		// create our own Object that will cache locally in the page
-		gw.cache = Q.Cache.document(++_Q_getter_i);
+		gw.cache = Q.Cache.local(++_Q_getter_i);
 	} else {
 		// assume we were passed an Object that supports the cache interface
 	}
@@ -2231,7 +2231,35 @@ Q.require = function _Q_require(what) {
 	return require(realPath);
 };
 
-var logStream = {};
+var getLogStream = Q.getter(function (name, callback) {
+	var path = ((Q.app && Q.app.FILES_DIR)
+		? Q.app.FILES_DIR
+		: Q.FILES_DIR)+Q.DS+'Q'+Q.DS+Q.Config.get(['Q', 'internal', 'logDir'], 'logs');
+	var filename = path+Q.DS+name+'_node.log';
+	Q.Utils.preparePath(filename, function (err) {
+		if (err) {
+			console.error("Failed to create directory '"+path+"', Error:", err.message);
+			return callback && callback(err);
+		}
+		try {
+			var stats = fs.statSync(filename);
+		} catch (err) {
+			if (err && err.code !== 'ENOENT') {
+				err.message = "Could not stat '"+filename+"', Error:", err.message;
+				callback && callback(err);
+				return;
+			}
+		}
+		if (stats && !stats.isFile()) {
+			callback && callback(new Error("'"+filename+"' exists but is not a file"));
+			return;
+		}
+		var stream = fs.createWriteStream(
+			filename, {flags: 'a', encoding: 'utf-8'}
+		);
+		callback(null, stream);
+	});
+});
 
 /**
  * Writes a string to application log. If run outside Qbix application writes to console.
@@ -2275,45 +2303,13 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 	if (!name) {
 		return console.log(message);
 	}
-	if (typeof logStream[name] === "undefined") {
-		logStream[name] = [];
-		var path = ((Q.app && Q.app.FILES_DIR) ? Q.app.FILES_DIR : Q.FILES_DIR)+Q.DS+'Q'+Q.DS+Q.Config.get(['Q', 'internal', 'logDir'], 'logs');
-		var filename = path+Q.DS+name+'_node.log';
-		Q.Utils.preparePath(filename, function (err) {
-			if (err) {
-				console.error("Failed to create directory '"+path+"', Error:", err.message);
-				callback && callback(err);
-			} else {
-				fs.stat(filename, function (err, stats) {
-					if (err && err.code !== 'ENOENT') {
-						console.error("Could not stat '"+filename+"', Error:", err.message);
-						callback && callback(err);
-						return;
-					} else if (err && err.code === 'ENOENT') {
-						logStream[name].unshift(message);
-					} else if (!stats.isFile()) {
-						console.error("'"+filename+"' exists but is not a file");
-						callback && callback(new Error("'"+filename+"' exists but is not a file"));
-						return;
-					}
-					var log = logStream[name];
-					var stream = logStream[name] = fs.createWriteStream(
-						filename, {flags: 'a', encoding: 'utf-8'}
-					);
-					stream.write(message);
-					while (log.length) {
-						stream.write(log.shift());
-					}
-				});
-			}
-		});
-	} else if (!logStream[name].path) {
-		logStream[name].push(message);
-		callback && callback();
-	} else {
-		logStream[name].write(message);
-		callback && callback();
-	}
+	getLogStream(name, function (err, stream) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		stream.write(message);
+	});
 };
 
 String.prototype.toCapitalized = function _String_prototype_toCapitalized() {

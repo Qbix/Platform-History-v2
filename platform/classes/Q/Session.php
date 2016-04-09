@@ -642,8 +642,10 @@ class Q_Session
 					$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
 					$existing_data = fread($file, $maxlength);
 				}
-				$_SESSION = array($existing_data);
-				session_decode();
+				$_SESSION = session_decode($existing_data);
+				if (!$_SESSION) {
+					$_SESSION = array();
+				}
 				$t = new Q_Tree($_SESSION);
 				$t->merge($our_SESSION);
 				$_SESSION = $t->getAll();

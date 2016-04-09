@@ -64,16 +64,13 @@ function () {
 			if (!$this.is(':visible')) {
 				return;
 			}
+			var dim = $this[0].cssDimensions();
 			var span = $('<span />')
-				.css('position', 'relative')
-				.addClass('Q_placeholders_container');
-			var cs = $this[0].getBoundingClientRect();
-			var csw = cs.right - cs.left; // the object can change, so get the values now
-			var csh = cs.bottom - cs.top;
-			$this.css({
-				'width': csw,
-				'height': csh
-			}); // because they might have been percentages
+				.css({
+					position: 'relative',
+					width: dim.width,
+					height: dim.height
+				}).addClass('Q_placeholders_container');
 			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
 				$this.css('padding-'+pos, $this.css('padding-'+pos))
 					.css('margin-'+pos, $this.css('margin-'+pos));
@@ -98,8 +95,8 @@ function () {
 				'font-weight': $this.css('font-weight'),
 				'line-height': $this.css('line-height'),
 				'overflow': 'hidden',
-				'width': $this.css('width'),
-				'height': $this.css('height'),
+				'width': '100%',
+				'height': '100%',
 				'text-align': $this.css('text-align'),
 				'pointer-events': 'none',
 				'color': $this.css('color'),

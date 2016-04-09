@@ -237,7 +237,8 @@
 			"layout": {
 				"default": "Streams/layout/invitations.php"
 			},
-			"subpath": "{{app}}/uploads/Streams/invitations"
+			"subpath": "{{app}}/uploads/Streams/invitations",
+			"sort": {}
 		},
 		"interests": {
 			"allowClientQueries": false
