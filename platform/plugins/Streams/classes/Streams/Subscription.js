@@ -57,10 +57,15 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 			return callback(err);
 		}
 		var types = filter.types, notifications = filter.notifications;
-		var isStreamsType = (msgType.substring(0, 8) === 'Streams/'
-			&& msgType !== "Streams/invite"
-			&& msgType !== "Streams/chat/message");
-		if (isStreamsType
+		var streamsMessageTypes = [
+			"Streams/invite", "Streams/chat/message",
+			"Streams/relatedTo", "Streams/relatedFrom"
+		];
+		var ignoreMessageType = (
+			msgType.substring(0, 8) === 'Streams/'
+			&& streamsMessageTypes.indexOf(msgType) < 0
+		);
+		if (ignoreMessageType
 		|| (types && types.length && types.indexOf(msgType) < 0)) {
 			return callback(null, []); // no subscription to type
 		}
