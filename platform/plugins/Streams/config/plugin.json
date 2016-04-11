@@ -38,7 +38,8 @@
 		"routes": {
 			"plugins/Streams/:action": {"module": "Streams"},
 			"plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
-			"i/:token": {"module": "Streams", "action": "invited"}
+			"i/:token": {"module": "Streams", "action": "invited"},
+			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"}
 		},
 		"web": {
 			"requireValidNonce": ["Streams"]
@@ -113,7 +114,8 @@
 					"adminLevel": 20,
 					"messageCount": 0,
 					"participantCount": 0
-				}
+				},
+				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}"
 			},
 			"Streams/resource": {
 				"description": "for managing access to a resource and posting messages about updates"

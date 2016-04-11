@@ -1,7 +1,15 @@
 <html>
-<h2>{{stream.fields.title}}</h2>
+{{#if (call 'message.get' 'fromUrl')}}
+	<h2><a href="{{call 'message.get' 'fromUrl'}}">{{stream.fields.title}}</a></h2>
+{{else}}
+	<h2>{{stream.fields.title}}</h2>
+{{/if}}
 <div>
 has been posted to:
 </div>
-<h2>{{call "message.get" "toTitle"}}</h2>
+{{#if (call 'message.get' 'toUrl')}}
+	<h2><a href="{{call 'message.get' 'toUrl'}}">{{call 'message.get' 'toTitle'}}</a></h2>
+{{else}}
+	<h2>{{call 'message.get' 'toTitle'}}</h2>
+{{/if}}
 </html>

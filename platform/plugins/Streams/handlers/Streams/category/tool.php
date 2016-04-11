@@ -14,30 +14,18 @@
 
 function Streams_category_tool($options) {
 	extract($options);
-	
-	$user = Users::loggedInUser(true);
-	
-	$userId = $user->id;
-	
-	// PK of stream to manage categories
+	$userId = Users::loggedInUser(true)->id;
 	$publisherId = Streams::requestedPublisherId(true);
 	$name = Streams::requestedName(true);
-	
-	$stream = Streams::get($userId, $publisherId, $name, null, true);
-	if (!$stream) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'stream', 
-			'criteria' => "{publisherId: $publisherId, name: $name}"
-		));
-	}
-	
-	// activate tool frontend
-	$default = array('publisherId' => $stream->publisherId, 'name' => $stream->name);
-	$options = array_merge($default, $options);
+	$stream = Streams::fetchOne($userId, $publisherId, $name, true);
+	$options = array_merge(array(
+		'publisherId' => $stream->publisherId, 
+		'name' => $stream->name
+	), $options);
 	Q_Response::setToolOptions($options);
-	
-	// get the list of categories
-	list($relations, $categories) = Streams::related($userId, $publisherId, $name, true);
-	
-	return Q::view("Streams/tool/category.php", compact('relations', 'categories', 'stream'));
+	return Q::tool('Streams/related', array_merge(array(
+		'publisherId' => Users::communityId(),
+		'streamName' => 'Streams/category/admins',
+		'relationType' => ''
+	), $options));
 }

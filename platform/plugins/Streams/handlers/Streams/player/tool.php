@@ -10,6 +10,7 @@ function Streams_player_tool($options)
 		$streamName_html = Q_Html::text($stream->name);
 		return "<a href='#$streamName_html'>hidden</a>";
 	}
+	$options['streamName'] = $stream->name;
 	$parts = explode('/', $stream->type);
 	switch ($parts[0]) {
 		case 'Streams/text/small':
@@ -34,10 +35,12 @@ function Streams_player_tool($options)
 		case 'Streams/chat': // TODO: implement
 		case 'Streams/community': // TODO: implement
 		default:
-			$event = "Streams/player/".$stream->type;
+			$event = $stream->type."/tool";
 			if (Q::canHandle($event)) {
-				return Q::event($event, $options);
+				return Q::tool($stream->type, $options);
 			}
-			return $stream->content;
+			return Q_Html::tag('div', array(
+				'class' => 'Streams_player_stream_content'
+			), Q_Html::text($stream->content));
 	}
 }

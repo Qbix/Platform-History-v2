@@ -82,17 +82,17 @@ Q.Tool.define("Websites/seo", function () {
 		name: "Websites/seo"
 	},
 	inplace: {
-		url: { inplace: { placeholder: "Url" } },
-		title: { inplace: { placeholder: "Title" } },
-		keywords: { inplace: { placeholder: "Keywords" } },
-		description: { inplace: { placeholder: "Description" } }
+		urlInplace: { inplace: { placeholder: "Url" } },
+		titleInplace: { inplace: { placeholder: "Title" } },
+		keywordsInplace: { inplace: { placeholder: "Keywords" } },
+		descriptionInplace: { inplace: { placeholder: "Description" } }
 	}
 }
 
 );
 
 Q.Template.set("Websites/seo",
-	"{{& url}}{{& title}}{{& keywords}}{{& description}}"
+	"{{& urlInplace}}{{& titleInplace}}{{& keywordsInplace}}{{& descriptionInplace}}"
 );
 
 })(Q, jQuery, window, document);

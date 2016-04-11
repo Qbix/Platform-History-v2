@@ -1115,8 +1115,10 @@ abstract class Streams extends Base_Streams
 			$result = $_REQUEST['streamName'];
 		} else if (isset($_REQUEST['name'])) {
 			$result = $_REQUEST['name'];
+		} else if (isset($uri->streamName)) {
+			$result = $uri->streamName;
 		} else if (isset($uri->name)) {
-			$result = is_array($uri->name) ? implode('/', $uri->name) : $uri->name;
+			$result = $uri->name;
 		}
 		if (isset($result)) {
 			if ($returnAs === 'string' and is_array($result)) {
@@ -1807,23 +1809,39 @@ abstract class Streams extends Base_Streams
 			// JUNK: this leaves junk in the database, but preserves consistency
 			throw new Streams_Exception_Relation();
 		}
-		
+
+		$fromUrl = $stream->url();
 		$fromIcon = $stream->icon;
 		$fromTitle = $stream->title;
 		$fromType = $stream->type;
 		$fromDisplayType = Streams_Stream::displayType($fromType);
+		$toUrl = $category->url();
 		$toIcon = $category->icon;
 		$toTitle = $category->title;
 		$toType = $category->type;
 		$toDisplayType = Streams_Stream::displayType($toType);
 		$parts = explode('/', $type);
 		$displayType = substr(end($parts), 0, -1);
-		
+		$categoryName = explode('/', $category->name);
+		$streamName = explode('/', $stream->name);
+
 		$params = compact(
 			'relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream',
-			'fromTitle', 'fromIcon', 'fromType', 'fromDisplayType',
-			'toIcon', 'toTitle', 'toType', 'toDisplayType', 'displayType'
+			'fromUrl', 'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType',
+			'toUrl', 'toIcon', 'toTitle', 'toType', 'toDisplayType', 'displayType',
+			'categoryName', 'streamName'
 		);
+
+		if ($u = Streams_Stream::getConfigField($category->type, array('relatedTo', $type, 'uri'),
+			Streams_Stream::getConfigField($category->type, array('relatedTo', '*', 'uri', null)))
+		) {
+			$fromUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
+		}
+		if ($u = Streams_Stream::getConfigField($stream->type, array('relatedFrom', $type, 'uri'),
+			Streams_Stream::getConfigField($stream->type, array('relatedFrom', '*', 'uri', null)))
+		) {
+			$toUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
+		}
 		
 		$description = Q_Handlebars::renderSource(
 			Streams_Stream::getConfigField($category->type, array('relatedTo', $type, 'description'),
@@ -1841,6 +1859,7 @@ abstract class Streams extends Base_Streams
 			'type' => 'Streams/relatedTo',
 			'instructions' => Q::json_encode(compact(
 				'fromPublisherId', 'fromStreamName', 'type', 'weight', 'displayType',
+				'fromUrl', 'toUrl',
 				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
 			))
 		), true);
@@ -1867,6 +1886,7 @@ abstract class Streams extends Base_Streams
 			'type' => 'Streams/relatedFrom',
 			'instructions' => Q::json_encode(compact(
 				'toPublisherId', 'toStreamName', 'type', 'weight', 'displayType',
+				'fromUrl', 'toUrl',
 				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'description'
 			))
 		), true);

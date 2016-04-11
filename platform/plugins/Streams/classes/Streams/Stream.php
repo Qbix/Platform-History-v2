@@ -1968,6 +1968,24 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
+	 * Returns the canonical url of the stream, if any
+	 * @return {string|null|false}
+	 */
+	function url()
+	{
+		$uri = self::getConfigField($this->type, 'uri', null);
+		if (!$uri) {
+			return null;
+		}
+		$uriString = Q_Handlebars::renderSource($uri, array(
+			'publisherId' => $this->publisherId,
+			'streamName' => explode('/', $this->name),
+			'name' => $this->name
+		));
+		return Q_Uri::from($uriString)->toUrl();
+	}
+	
+	/**
 	 * Returns the type name to display from a stream type
 	 * @method displayType
 	 * @static

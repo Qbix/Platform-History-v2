@@ -58,6 +58,11 @@
 				},
 				"defaults": {
 					"title": "Location"
+				},
+				"relatedFrom": {
+					"*": {
+						"description": "Posted to an entire location"
+					}
 				}
 			},
 			"Places/area": {
@@ -68,13 +73,28 @@
 				},
 				"defaults": {
 					"title": "Area"
+				},
+				"relatedFrom": {
+					"*": {
+						"description": "Posted to a specific area"
+					}
 				}
 			},
 			"Places/floor": {
-				"edit": true
+				"edit": true,
+				"relatedFrom": {
+					"*": {
+						"description": "Posted to entire floor"
+					}
+				}
 			},
 			"Places/column": {
-				"edit": true
+				"edit": true,
+				"relatedFrom": {
+					"*": {
+						"description": "Posted to entire column"
+					}
+				}
 			}
 		}
 	},
