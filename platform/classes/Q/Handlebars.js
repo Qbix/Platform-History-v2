@@ -83,6 +83,11 @@ handlebars.registerHelper('url', function(url) {
 	return Q.url(url);
 });
 
+handlebars.registerHelper('ucfirst', function(text) {
+	text = text || '';
+	return text.charAt(0).toUpperCase() + text.slice(1);
+});
+
 /**
  * Creates a Q.Handlebars object
  * @class Handlebars

@@ -1051,6 +1051,7 @@ Sp.notify = function(participant, event, uid, message, callback) {
 						userId: userId,
 						publisherId: participant.fields.publisherId,
 						streamName: participant.fields.streamName,
+						messageOrdinal: message.fields.ordinal,
 						type: message.fields.type
 					}).save(function(err) {
 						callback && callback(err, deliveries);

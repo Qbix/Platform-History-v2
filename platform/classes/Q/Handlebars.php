@@ -49,6 +49,7 @@ class Q_Handlebars {
 			self::$handlebars->addHelper('call', array('Q_Handlebars', 'helperCall'));
 			self::$handlebars->addHelper('tool', array('Q_Handlebars', 'helperTool'));
 			self::$handlebars->addHelper('url', array('Q_Handlebars', 'helperUrl'));
+			self::$handlebars->addHelper('ucfirst', array('Q_Handlebars', 'helperUcFirst'));
 		}
 		return self::$handlebars;
 	}
@@ -101,8 +102,12 @@ class Q_Handlebars {
 		if (empty($args[0])) {
 			return "{{url missing}}";
 		}
-		$url = $args[0];
-		return Q_Html::themedUrl($url);
+		return Q_Html::themedUrl($args[0]);
+	}
+	
+	static function helperUcFirst($template, $context, $args, $source)
+	{
+		return isset($args[0]) ? ucfirst($args[0]) : '';
 	}
 
 	private static $handlebars = null;

@@ -109,16 +109,16 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 								return p.fill(o)(err);
 							}
 							// NOTE: all Streams/participating for a given stream must be on the same shard
-							var time_online = res.length
+							var timeOnline = res.length
 								? res.reduce(function(pv, cv) {
 									var cvd = new Date(cv.sentTime);
 									return pv > cvd ? pv : cvd;
 								}, new Date(res[0].sentTime))
 								: (readyTime ? readyTime : new Date(0));
-							// now check notifictions since time_online
+							// now check notifications since timeOnline
 							Streams.Notification.SELECT('COUNT(1) as count').where({
 								userId: userId,
-								"insertedTime >": Q.date('c', time_online),
+								"insertedTime >": Q.date('c', timeOnline),
 								publisherId: publisherId,
 								streamName: streamName,
 								type: msgType

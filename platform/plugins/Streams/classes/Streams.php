@@ -1611,6 +1611,10 @@ abstract class Streams extends Base_Streams
 	 *  The publisher of the member stream(s)
 	 * @param {string} $fromStreamName
 	 *  The name of the member stream(s)
+	 * @param {Streams_RelatedTo} $relatedTo reference
+	 * @param {Streams_RelatedFrom} $relatedFrom reference
+	 * @param {Streams_Stream} $category reference
+	 * @param {Streams_Stream} $stream reference
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just relates the stream to the category
@@ -1760,11 +1764,13 @@ abstract class Streams extends Base_Streams
 		 * @param {string} relatedTo
 		 * @param {string} relatedFrom
 		 * @param {string} asUserId
+		 * @param {Streams_Stream} category
+		 * @param {Streams_Stream} stream
 		 * @return {false} To cancel further processing
 		 */
 		if (false === Q::event(
 			"Streams/relate/{$stream->type}",
-			compact('relatedTo', 'relatedFrom', 'asUserId'),
+			compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
 			'before'
 		)) {
 			return false;
@@ -1801,6 +1807,31 @@ abstract class Streams extends Base_Streams
 			// JUNK: this leaves junk in the database, but preserves consistency
 			throw new Streams_Exception_Relation();
 		}
+		
+		$fromIcon = $stream->icon;
+		$fromTitle = $stream->title;
+		$fromType = $stream->type;
+		$fromDisplayType = Streams_Stream::displayType($fromType);
+		$toIcon = $category->icon;
+		$toTitle = $category->title;
+		$toType = $category->type;
+		$toDisplayType = Streams_Stream::displayType($toType);
+		$parts = explode('/', $type);
+		$displayType = substr(end($parts), 0, -1);
+		
+		$params = compact(
+			'relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream',
+			'fromTitle', 'fromIcon', 'fromType', 'fromDisplayType',
+			'toIcon', 'toTitle', 'toType', 'toDisplayType', 'displayType'
+		);
+		
+		$description = Q_Handlebars::renderSource(
+			Streams_Stream::getConfigField($category->type, array('relatedTo', $type, 'description'),
+				Streams_Stream::getConfigField($category->type, array('relatedTo', '*', 'description'),
+				"New $displayType added"
+			)),
+			$params
+		);
 
 		// Send Streams/relatedTo message to a stream
 		// node server will be notified by Streams_Message::post
@@ -1808,7 +1839,10 @@ abstract class Streams extends Base_Streams
 		// so posting this message may require internet communication.
 		$relatedTo_message = Streams_Message::post($asUserId, $toPublisherId, $toStreamName, array(
 			'type' => 'Streams/relatedTo',
-			'instructions' => Q::json_encode(compact('fromPublisherId', 'fromStreamName', 'type', 'weight'))
+			'instructions' => Q::json_encode(compact(
+				'fromPublisherId', 'fromStreamName', 'type', 'weight', 'displayType',
+				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
+			))
 		), true);
 
 		try {
@@ -1816,6 +1850,14 @@ abstract class Streams extends Base_Streams
 		} catch (Exception $e) {
 			throw new Streams_Exception_Relation();
 		}
+		
+		$description = Q_Handlebars::renderSource(
+			Streams_Stream::getConfigField($category->type, array('relatedFrom', $type, 'description'),
+				Streams_Stream::getConfigField($category->type, array('relatedFrom', '*', 'description'),
+				"Added to {{toDisplayType}} as $displayType"
+			)),
+			$params
+		);
 
 		// Send Streams/relatedFrom message to a stream
 		// node server will be notified by Streams_Message::post
@@ -1823,7 +1865,10 @@ abstract class Streams extends Base_Streams
 		// so posting this message may require internet communication.
 		$relatedFrom_message = Streams_Message::post($asUserId, $fromPublisherId, $fromStreamName, array(
 			'type' => 'Streams/relatedFrom',
-			'instructions' => Q::json_encode(compact('toPublisherId', 'toStreamName', 'type', 'weight'))
+			'instructions' => Q::json_encode(compact(
+				'toPublisherId', 'toStreamName', 'type', 'weight', 'displayType',
+				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'description'
+			))
 		), true);
 
 		/**
@@ -1831,10 +1876,12 @@ abstract class Streams extends Base_Streams
 		 * @param {string} relatedTo
 		 * @param {string} relatedFrom
 		 * @param {string} asUserId
+		 * @param {Streams_Stream} category
+		 * @param {Streams_Stream} stream
 		 */
 		Q::event(
 			"Streams/relate/{$stream->type}",
-			compact('relatedTo', 'relatedFrom', 'asUserId'),
+			compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
 			'after'
 		);
 

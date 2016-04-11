@@ -1934,15 +1934,20 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @method getConfigField
 	 * @static
 	 * @param {string} $type The type of the stream
-	 * @param {string} $field The name of the field
+	 * @param {string|array} $field The name of the field
 	 * @param {mixed} $default The value to return if the config field isn't specified
 	 * @param {boolean} [$merge=true] if arrays are found in both places, merge them
 	 * @return mixed
 	 */
 	static function getConfigField($type, $field, $default, $merge = true)
 	{
-		$bottom = Q_Config::get('Streams', 'types', '*', $field, $default);
-		$top = Q_Config::get('Streams', 'types', $type, $field, null);
+		if (is_string($field)) {
+			$field = array($field);
+		}
+		$args1 = array_merge(array('Streams', 'types', '*'), $field, array($default));
+		$args2 = array_merge(array('Streams', 'types', $type), $field, array(null));
+		$bottom = call_user_func_array(array('Q_Config', 'get'), $args1);
+		$top = call_user_func_array(array('Q_Config', 'get'), $args2);
 		if ($merge and is_array($bottom) and is_array($top)) {
 			return array_merge($bottom, $top);
 		}
@@ -1960,6 +1965,19 @@ class Streams_Stream extends Base_Streams_Stream
 	static function extendedBy(Db_Row $row)
 	{
 		return $row->get('Streams_Stream', null);
+	}
+	
+	/**
+	 * Returns the type name to display from a stream type
+	 * @method displayType
+	 * @static
+	 * @return {string}
+	 */
+	static function displayType($streamType)
+	{
+		$parts = explode('/', $streamType);
+		$default = end($parts);
+		return self::getConfigField($streamType, 'displayType', $default);
 	}
 
 	/* * * */

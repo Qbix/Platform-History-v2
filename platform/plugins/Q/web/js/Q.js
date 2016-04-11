@@ -10765,6 +10765,12 @@ function _addHandlebarsHelpers() {
 			return Q.url(url);
 		});
 	}
+	if (!Handlebars.helpers.ucfirst) {
+		Handlebars.registerHelper('ucfirst', function(text) {
+			text = text || '';
+			return text.charAt(0).toUpperCase() + text.slice(1);
+		});
+	}
 }
 
 function _Q_trigger_recursive(tool, eventName, args) {
