@@ -274,6 +274,16 @@ Q.Tool.define("Streams/html", function (options) {
 	preprocess: null,
 	onSave: new Q.Event(),
 	onCancel: new Q.Event()
+},
+
+{
+	Q: {
+		beforeRemove: function () {
+			if (this.state.froala) {
+				$(this.element).froalaEditor('destroy');
+			}
+		}
+	}
 }
 
 );

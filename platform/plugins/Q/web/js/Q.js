@@ -10758,7 +10758,7 @@ function _addHandlebarsHelpers() {
 		});
 	}
 	if (!Handlebars.helpers.url) {
-		Handlebars.registerHelper('url', function (url) {
+		Handlebars.registerHelper('toUrl', function (url) {
 			if (!url) {
 				return "{{url missing}}";
 			}
@@ -10766,7 +10766,7 @@ function _addHandlebarsHelpers() {
 		});
 	}
 	if (!Handlebars.helpers.ucfirst) {
-		Handlebars.registerHelper('ucfirst', function(text) {
+		Handlebars.registerHelper('toCapitalized', function(text) {
 			text = text || '';
 			return text.charAt(0).toUpperCase() + text.slice(1);
 		});
