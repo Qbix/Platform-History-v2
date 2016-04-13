@@ -9525,6 +9525,9 @@ Q.Pointer = {
 				if (typeof targets === 'string') {
 					targets = document.querySelectorAll(targets);
 				}
+				if (Q.isEmpty(targets)) {
+					return;
+				}
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
