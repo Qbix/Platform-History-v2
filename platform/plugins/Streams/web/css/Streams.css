@@ -676,3 +676,5 @@
 .Q_notMobile .Q_overlay.Streams_subscription_tool_dialog { width: 500px; }
 
 .Streams_inplace_tool.Q_editing { z-index: 99999; }
+
+.fr-tooltip { z-index: 10000; }
