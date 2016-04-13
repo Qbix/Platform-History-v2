@@ -98,6 +98,7 @@ Q.Tool.define("Streams/html", function (options) {
 				"plugins/Q/js/froala/js/plugins/paragraph_style.min.js",
 				"plugins/Q/js/froala/js/plugins/paragraph_format.min.js",
 				"plugins/Q/js/froala/js/plugins/quote.min.js",
+				"plugins/Q/js/froala/js/plugins/link.min.js",
 				"plugins/Q/js/froala/js/plugins/image.min.js",
 				"plugins/Q/js/froala/js/plugins/image_manager.min.js",
 				"plugins/Q/js/froala/js/plugins/video.min.js"
@@ -245,7 +246,7 @@ Q.Tool.define("Streams/html", function (options) {
 			"inlineStyle", "paragraphStyle", "paragraphFormat", "|",
 			"align", "formatOL", "formatUL", "|",
 			"outdent", "indent", "quote", "-", 
-			"insertHR", "createLink", "|",
+			"insertHR", "insertLink", "|",
 			"insertImage", "insertTable", "|", "html"
 		],
 		fontFamily: {
