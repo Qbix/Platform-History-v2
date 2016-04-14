@@ -349,7 +349,7 @@ class Q_Uri
 				'action' => 'welcome'
 			));
 		}
-		$base_url = Q_Request::baseUrl(true, true);
+		$base_url = Q_Request::baseUrl(true);
 
 		$len = strlen($base_url);
 		$head = substr($url, 0, $len);
