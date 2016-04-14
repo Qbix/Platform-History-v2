@@ -82,10 +82,10 @@
 	$('#activate_passphrase').plugin('Q/placeholders').plugin('Q/clickfocus');
 	
 	// this used to work:
-	var url = 'http://query.yahooapis.com/v1/public/yql?format=json&diagnostics=false&q=select%20abstract%20from%20search.news%20where%20query%3D%22$noun_ue%22';
+	// var url = 'http://query.yahooapis.com/v1/public/yql?format=json&diagnostics=false&q=select%20abstract%20from%20search.news%20where%20query%3D%22$verb_ue%22';
 	// but YAHOO now deprecated the search.news table.
 	// later we can pay for BOSS to do this. But for now, here is what we do:
-	var url = 'http://query.yahooapis.com/v1/public/yql?format=json&diagnostics=false&q=select%20Rating.LastReviewIntro%20from%20local.search%20where%20zip%3D%2294085%22%20and%20query%3D%22$noun_ue%22';
+	var url = 'http://query.yahooapis.com/v1/public/yql?format=json&diagnostics=false&q=SELECT+Rating.LastReviewIntro+from+local.search+WHERE+zip+%3D+%2210001%22+AND+%28query%3D%22$verb_ue%22+OR+query%3D%22$noun_ue%22%29+AND+Rating.LastReviewIntro+MATCHES+%22%5E.%2B%22+LIMIT+10';
 	
 	Q.request(url, null, function(err, data) {
 		if (data.query && data.query.results && data.query.results.Result) {
