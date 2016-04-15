@@ -129,6 +129,7 @@ Q.Tool.define("Streams/html", function (options) {
 					var streamName = parts.slice(-6, -3).join('/');
 					Q.Streams.Stream.close(publisherId, streamName);
 				});
+				this.state.froalaEditor = true;
             });
 		}
 		function _blur() {
@@ -281,7 +282,7 @@ Q.Tool.define("Streams/html", function (options) {
 {
 	Q: {
 		beforeRemove: function () {
-			if (this.state.froala) {
+			if (this.state.froalaEditor) {
 				$(this.element).froalaEditor('destroy');
 			}
 		}

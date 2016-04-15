@@ -6257,7 +6257,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			// hopefully, moving the script element won't change the order of execution
 			p = scripts[i];
 			var outside = true;
-	    	while (p = p.parentNode) {
+			while (p = p.parentNode) {
 				if (p === container) {
 					outside = false;
     				break;
@@ -6325,7 +6325,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	script.wasProcessedByQ = true;
 	Q.addEventListener(script, 'error', onerror2);
 	
-	if ('async' in firstScript) { // modern browsers
+	if ('async' in script) { // modern browsers
 		script.setAttribute('src', src);
 		script.async = false;
 		container.appendChild(script);
