@@ -129,7 +129,7 @@ Q.Tool.define("Streams/html", function (options) {
 					var streamName = parts.slice(-6, -3).join('/');
 					Q.Streams.Stream.close(publisherId, streamName);
 				});
-				this.state.froalaEditor = true;
+				state.froalaEditor = true;
             });
 		}
 		function _blur() {
