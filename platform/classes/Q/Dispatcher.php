@@ -322,6 +322,9 @@ class Q_Dispatcher
 					$ob = new Q_OutputBuffer($handler);
 				}
 				
+				if (!empty($_GET['Q_ct'])) {
+					Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
+				}
 				Q_Response::sendCookieHeaders();
 
 				// Generate and render a response
