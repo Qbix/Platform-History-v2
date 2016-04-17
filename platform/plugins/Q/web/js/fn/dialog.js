@@ -40,7 +40,7 @@ function _Q_overlay(o) {
 			$this.css({ 'left': ((parentWidth - width) / 2) + 'px' });
 		} else if (typeof(o.left) == 'string' && o.left.indexOf('%') != -1) {
 			var percentage = parseInt(o.left) / 100;
-			$this.css({ 'left': (o.alignParent ? $(o.alignParent).width() * percentage : window.innerWidth * percentage) + 'px' });
+			$this.css({ 'left': (o.alignParent ? $(o.alignParent).width() * percentage : Q.Pointer.windowWidth() * percentage) + 'px' });
 		} else {
 			$this.css({ 'left': o.left + 'px' });
 		}
@@ -52,7 +52,7 @@ function _Q_overlay(o) {
 			$this.css({ 'top': ((parentHeight - height) / 2) + 'px' });
 		} else if (typeof(o.top) == 'string' && o.top.indexOf('%') != -1) {
 			percentage = parseInt(o.top) / 100;
-			$this.css({ 'top': (o.alignParent ? $(o.alignParent).height() * percentage : Q.Pointer.scrollTop() + window.innerHeight * percentage) + 'px' });
+			$this.css({ 'top': (o.alignParent ? $(o.alignParent).height() * percentage : Q.Pointer.scrollTop() + Q.Pointer.windowHeight() * percentage) + 'px' });
 		} else {
 			$this.css({ 'top': Q.Pointer.scrollTop() + o.top + 'px' });
 		}
@@ -253,7 +253,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		var topPos = Q.Dialogs.options.topMargin;
 		if (Q.info.isMobile) {
 			if (topPos.indexOf('%') != -1) {
-				topPos = parseInt(topPos) / 100 * window.innerHeight;
+				topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
 			}
 			var noticeSlot = $('#notices_slot');
 			if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
@@ -305,8 +305,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		$(document.body).prepend($this);
 		$this.addClass('Q_fullscreen_dialog');
 		$this.css({
-			'width': window.innerWidth + 'px',
-			'height': window.innerHeight + 'px'
+			'width': Q.Pointer.windowWidth() + 'px',
+			'height': Q.Pointer.windowHeight() + 'px'
 		});
 		var $close = $('<a class="Q_close" />');
 		$this.append($close);
@@ -319,8 +319,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					return;
 				}
 				$this.css({
-					'width': window.innerWidth + 'px',
-					'height': window.innerHeight + 'px'
+					'width': Q.Pointer.windowWidth() + 'px',
+					'height': Q.Pointer.windowHeight() + 'px'
 				});
 				for (var i = 0; i < hiddenChildren.length; i++) {
 					hiddenChildren[i].hide();
@@ -510,7 +510,9 @@ function _handlePosAndScroll(o)
 		if ($this.css('display') == 'block')
 		{
 			topMargin = Q.Dialogs.options.topMargin;
-			parentHeight = (!o.alignByParent || parent[0] == document.body) ? window.innerHeight : parent.height();
+			parentHeight = (!o.alignByParent || parent[0] == document.body)
+				? Q.Pointer.windowWidth()
+				: parent.height();
 			if (typeof(topMargin) == 'string') // percentage
 				topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
 			bottomMargin = Q.Dialogs.options.bottomMargin;
@@ -521,8 +523,8 @@ function _handlePosAndScroll(o)
 			var outerWidth = Math.ceil(parseFloat(cs.width)
 				+ parseFloat(cs.paddingLeft)
 				+ parseFloat(cs.paddingRight));
-			var winInnerWidth = window.innerWidth;
-			var winInnerHeight = window.innerHeight;
+			var winInnerWidth = Q.Pointer.windowWidth();
+			var winInnerHeight = Q.Pointer.windowHeight();
 			if (Q.info.isMobile)
 			{
 				// correcting x-pos
