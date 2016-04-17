@@ -34,7 +34,9 @@ function _Q_overlay(o) {
 			height = parseInt($this.css('height'));
 
 		if (o.left == 'center') {
-			var parentWidth = o.alignParent ? $(o.alignParent).width() : window.innerWidth;
+			var parentWidth = o.alignParent
+				? $(o.alignParent).width()
+				: Q.Pointer.windowWidth();
 			$this.css({ 'left': ((parentWidth - width) / 2) + 'px' });
 		} else if (typeof(o.left) == 'string' && o.left.indexOf('%') != -1) {
 			var percentage = parseInt(o.left) / 100;
@@ -44,7 +46,9 @@ function _Q_overlay(o) {
 		}
 
 		if (o.top == 'middle') {
-			var parentHeight = o.alignParent ? $(o.alignParent).height() : window.innerHeight;
+			var parentHeight = o.alignParent
+				? $(o.alignParent).height()
+				: Q.Pointer.windowHeight();
 			$this.css({ 'top': ((parentHeight - height) / 2) + 'px' });
 		} else if (typeof(o.top) == 'string' && o.top.indexOf('%') != -1) {
 			percentage = parseInt(o.top) / 100;
@@ -377,7 +381,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	if (src.isUrl() && !bgLoaded) {
 		var $img = $('<img />').on('load', function () {
 			bgLoaded = true;
-			$img.remove();
+			$(this).remove();
 			_loadIt();
 		}).css(css)
 		.attr('src', src)

@@ -3731,7 +3731,9 @@ Q.onInit.add(function _Streams_onInit() {
 							var $input = $('input', dialog).eq(0);
 							$input.plugin('Q/clickfocus');
 							interval = setInterval(function () {
-								if ($input.val()) return;
+								if ($input.val() || $input[0] === document.activeElement) {
+									return clearInterval(interval);
+								}
 								$input.plugin('Q/clickfocus');
 							}, 100);
 						}

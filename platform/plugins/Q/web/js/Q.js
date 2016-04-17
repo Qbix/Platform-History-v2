@@ -9243,7 +9243,7 @@ Q.Pointer = {
 		return function _Q_fastclick_on_wrapper (e) {
 			var elem = Q.Pointer.elementFromPoint(Q.Pointer.getX(e), Q.Pointer.getY(e));
 			if (Q.Pointer.canceledClick
-			|| !this.contains(Q.Pointer.started)
+			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {
 				return Q.Pointer.preventDefault(e);
 			}
