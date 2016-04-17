@@ -118,7 +118,7 @@
                 {
                     endIndicator.css({
                         'position': 'fixed',
-                        'top': (window.innerHeight - endIndicator.outerHeight()) + 'px',
+                        'top': (Q.Pointer.windowHeight() - endIndicator.outerHeight()) + 'px',
                         'margin-top': ''
                     });
                 }

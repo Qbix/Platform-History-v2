@@ -555,10 +555,10 @@ Q.Layout = {
 			if (browser.name == 'explorer' && parseInt(browser.mainVersion) <= 8)
 			{
 				Q.Layout.isIE8orLess = true;
-				if (window.innerWidth === undefined && window.innerHeight === undefined)
+				if (Q.Pointer.windowWidth() === undefined && Q.Pointer.windowHeight() === undefined)
 				{
-					window.innerWidth = document.documentElement.clientWidth;
-					window.innerHeight = document.documentElement.clientHeight;
+					Q.Pointer.windowWidth() = document.documentElement.clientWidth;
+					Q.Pointer.windowHeight() = document.documentElement.clientHeight;
 				}
 				$('.Q_player:last').after('<div style="font-size: 1px">&nbsp;</div>');
 			}
@@ -581,17 +581,17 @@ Q.Layout = {
 					window.scrollTo(0, 0);
 					setTimeout(function()
 					{
-						Q.Layout.heightWithAddressBar = window.innerHeight;
+						Q.Layout.heightWithAddressBar = Q.Pointer.windowHeight();
 					}, 300);
 				}
 				else
 				{
-					Q.Layout.heightWithAddressBar = window.innerHeight;
+					Q.Layout.heightWithAddressBar = Q.Pointer.windowHeight();
 				}
 			}
 			else
 			{
-				Q.Layout.fullScreenHeight = window.innerHeight;
+				Q.Layout.fullScreenHeight = Q.Pointer.windowHeight();
 			}
 
 			Q.Interval.set(Q.Layout.checkOrientation, Q.Layout.options.checkOrientationInterval, 'Q.Layout.checkOrientation');
@@ -617,7 +617,7 @@ Q.Layout = {
 						Q.Layout.hideAddressBar();
 						if (++tries >= 4)
 						{
-							Q.Layout.fullScreenHeight = window.innerHeight;
+							Q.Layout.fullScreenHeight = Q.Pointer.windowHeight();
 							Q.Layout.addressBarHeight = Q.Layout.fullScreenHeight - Q.Layout.heightWithAddressBar;
 							if (Q.info.platform == 'android')
 							{
@@ -647,7 +647,7 @@ Q.Layout = {
 						{
 							Q.Layout.hideAddressBar(true);
 							Q.Masks.hide('Q.screen.mask');
-							if ($('#main').height() != window.innerHeight)
+							if ($('#main').height() != Q.Pointer.windowHeight())
 								Q.Layout.orientationChange(false, true);
 						}
 					});
@@ -824,13 +824,13 @@ Q.Layout = {
 						if (Q.info.platform == 'android')
 						{
 							var participants = $('.Streams_participant_tool_wrapper');
-							var participantsWidth = window.innerWidth, participantsLeft = 0;
+							var participantsWidth = Q.Pointer.windowWidth(), participantsLeft = 0;
 							if (Q.info.isMobile)
 							{
 								if (Q.Layout.orientation == 'landscape')
 								{
-									participantsWidth = window.innerWidth * 0.75 - 2;
-									participantsLeft = window.innerWidth - participantsWidth;
+									participantsWidth = Q.Pointer.windowWidth() * 0.75 - 2;
+									participantsLeft = Q.Pointer.windowWidth() - participantsWidth;
 								}
 							}
 							participants.css({
@@ -957,7 +957,7 @@ Q.Layout = {
 	 */
 	hideAddressBar: function(doNotResize)
 	{
-		if (Q.info.platform == 'android' && document.body.offsetHeight >= window.innerHeight)
+		if (Q.info.platform == 'android' && document.body.offsetHeight >= Q.Pointer.windowHeight())
 			doNotResize = true;
 		else if (doNotResize === undefined)
 			doNotResize = false;
@@ -966,9 +966,9 @@ Q.Layout = {
 			$(document.body).css({ 'height': '1000px' });
 		
 		window.scrollTo(0, Q.Layout.scrollToOffset);
-		if (window.innerHeight > Q.Layout.heightWithAddressBar)
+		if (Q.Pointer.windowHeight() > Q.Layout.heightWithAddressBar)
 		{
-			Q.Layout.fullScreenHeight = window.innerHeight;
+			Q.Layout.fullScreenHeight = Q.Pointer.windowHeight();
 			if (Q.Layout.addressBarHeight !== 0)
 				Q.Layout.heightWithAddressBar = Q.Layout.fullScreenHeight - Q.Layout.addressBarHeight;
 		}
@@ -994,7 +994,7 @@ Q.Layout = {
 	},
 
 	/**
-	 * Periodically checks window.innerWidth or window.orientation properties to detect device orientation change.
+	 * Periodically checks Q.Pointer.windowWidth() or window.orientation properties to detect device orientation change.
 	 * Applicable mostly to mobile devices, on desktop will adjust layout if window size changes.
 	 * Doensn't have to be called manually.
 	 * @method checkOrientation
@@ -1002,26 +1002,26 @@ Q.Layout = {
 	 */
 	checkOrientation: function()
 	{
-		if (Q.Layout.lastWindowWidth === undefined)
-			Q.Layout.lastWindowWidth = 0;
+		if (Q.Layout.lastwindowWidth() === undefined)
+			Q.Layout.lastwindowWidth() = 0;
 		if (Q.Layout.lastOrientation === undefined)
 			Q.Layout.lastOrientation = -1;
 		
-		var windowWidth = window.innerWidth, windowHeight = window.innerHeight, orientation = window.orientation;
-		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth !== Q.Layout.lastWindowWidth) ||
-				(orientation === undefined && windowWidth !== Q.Layout.lastWindowWidth))
+		var windowWidth() = Q.Pointer.windowWidth(), windowHeight() = Q.Pointer.windowHeight(), orientation = window.orientation;
+		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastwindowWidth()) ||
+				(orientation === undefined && windowWidth() !== Q.Layout.lastwindowWidth()))
 		{
 			var previousOrientation = Q.Layout.orientation;
 			if (orientation !== undefined)
 			{
-				Q.Layout.lastWindowWidth = windowWidth;
+				Q.Layout.lastwindowWidth() = windowWidth();
 				Q.Layout.lastOrientation = orientation;
 				Q.Layout.orientation = ((orientation === 0 || orientation === 180) ? 'portrait' : 'landscape');
 			}
 			else
 			{
-				Q.Layout.lastWindowWidth = windowWidth;
-				Q.Layout.orientation = (windowWidth > windowHeight ? 'landscape' : 'portrait');
+				Q.Layout.lastwindowWidth() = windowWidth();
+				Q.Layout.orientation = (windowWidth() > windowHeight() ? 'landscape' : 'portrait');
 			}
 			if (!Q.Layout.orientationOnLoad)
 			{
@@ -1046,9 +1046,9 @@ Q.Layout = {
 				);
 			}
 			orientationMask.css({
-				'width': windowWidth + 'px',
-				'height': windowHeight + 'px',
-				'line-height': windowHeight + 'px',
+				'width': windowWidth() + 'px',
+				'height': windowHeight() + 'px',
+				'line-height': windowHeight() + 'px',
 				'opacity': '1'
 			});
 			orientationMask.show();
@@ -1057,16 +1057,16 @@ Q.Layout = {
 			{
 				if (Q.Layout.fullScreenHeight != 0 && Q.Layout.addressBarHeight != 0)
 				{
-					Q.Layout.fullScreenHeight = windowHeight;
+					Q.Layout.fullScreenHeight = windowHeight();
 					Q.Layout.heightWithAddressBar = Q.Layout.fullScreenHeight - Q.Layout.addressBarHeight;
 				}
 				Q.Layout.orientationChange(previousOrientation != Q.Layout.orientation);
 			}, 0);
 		}
-		if (Q.Layout.fullScreenHeight && windowHeight < Q.Layout.fullScreenHeight &&
-				((Q.info.isMobile && (windowHeight != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
+		if (Q.Layout.fullScreenHeight && windowHeight() < Q.Layout.fullScreenHeight &&
+				((Q.info.isMobile && (windowHeight() != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
 		{
-			Q.Layout.heightWithKeyboard = windowHeight;
+			Q.Layout.heightWithKeyboard = windowHeight();
 			Q.Layout.keyboardVisible = true;
 		}
 		else if (!Q.Layout.focusEventOccured)
@@ -1074,16 +1074,16 @@ Q.Layout = {
 			Q.Layout.keyboardVisible = false;
 		}
 		var main = $('#main');
-		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight)
+		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight())
 		{
 			// if it's 'height-only' orientation change and if keyboard appeared
 			// we shouldn't run orientationChange() in such case
 			// also there's no need to adjust height if it's address bar appeared
-			if (!Q.Layout.keyboardVisible && windowHeight != Q.Layout.heightWithAddressBar)
+			if (!Q.Layout.keyboardVisible && windowHeight() != Q.Layout.heightWithAddressBar)
 				Q.Layout.orientationChange(false, true, true);
 		}
 		if (Q.Layout.handleAddressBarAppearing && Q.Layout.heightWithAddressBar < Q.Layout.fullScreenHeight &&
-				window.innerHeight == Q.Layout.heightWithAddressBar && !Q.Masks.isVisible('Q.screen.mask'))
+				Q.Pointer.windowHeight() == Q.Layout.heightWithAddressBar && !Q.Masks.isVisible('Q.screen.mask'))
 		{
 			Q.Masks.show('Q.screen.mask');
 			Q.Layout.addressBarVisible = true;
@@ -1151,10 +1151,10 @@ Q.Layout = {
 				{
 					if (Q.Layout.orientation == 'landscape')
 				 	{
-						var dashboardWidth = window.innerWidth * 0.25;
+						var dashboardWidth = Q.Pointer.windowWidth() * 0.25;
 						dashboard.css({ 'width': dashboardWidth + 'px' });
 						dashboard.data('Q_dashboard_width', dashboardWidth);
-						var columnsWidth = window.innerWidth * 0.75 - 2;
+						var columnsWidth = Q.Pointer.windowWidth() * 0.75 - 2;
 						dashboardWidth += 2;
 						var dashboardHeight = dashboard.outerHeight();
 						column0Slot.css({
@@ -1191,7 +1191,7 @@ Q.Layout = {
 		
 		if (Q.info.isMobile && Q.Layout.orientation == 'landscape') {
 			var w = parseInt(dashboard.css('width'));
-			dashboard.data('Q_dashboard_width', Math.min(window.innerWidth - column1Slot.width() - 2, column1Slot.width()));
+			dashboard.data('Q_dashboard_width', Math.min(Q.Pointer.windowWidth() - column1Slot.width() - 2, column1Slot.width()));
 		}
 		
 		if (Q.info.platform == 'android')
@@ -1216,7 +1216,7 @@ Q.Layout = {
 			// and only when initial orientation on app load was landscape: after orientation change landscape => portrait
 			// document body is offset to the left behind left border of the screen
 			var body = $(document.body);
-			body.css({ 'width': window.innerWidth + 'px' });
+			body.css({ 'width': Q.Pointer.windowWidth() + 'px' });
 			if (switched && Q.info.isLocalFile && Q.Layout.orientation == 'portrait' &&
 					Q.Layout.orientationOnLoad == 'landscape' && Q.info.isTablet && Q.info.platform == 'ios')
 			{
@@ -1239,15 +1239,15 @@ Q.Layout = {
 			
 			if (Q.info.platform != 'android')
 			{
-				main.css({ 'height': window.innerHeight + 'px' });
+				main.css({ 'height': Q.Pointer.windowHeight() + 'px' });
 			}
 		}
 		
 		var orientationMask = $('.Q_orientation_mask');
 		orientationMask.css({
-			'width': window.innerWidth + 'px',
-			'height': window.innerHeight + 'px',
-			'line-height': window.innerHeight + 'px'
+			'width': Q.Pointer.windowWidth() + 'px',
+			'height': Q.Pointer.windowHeight() + 'px',
+			'line-height': Q.Pointer.windowHeight() + 'px'
 		});
 		
 		if (!heightOnly)
@@ -1273,7 +1273,7 @@ Q.Layout = {
 		{
 			if (Q.Layout.orientation == 'portrait')
 			{
-				columnsHeight = window.innerHeight - topStub.height() - dashboard.outerHeight();
+				columnsHeight = Q.Pointer.windowHeight() - topStub.height() - dashboard.outerHeight();
 			}
 			else
 			{
@@ -1530,7 +1530,7 @@ Q.Layout = {
 	adjustColumnsHeight: function()
 	{
 		var column1Slot = $('#column1_slot'), column2Slot = $('#column2_slot'), dashboard = $('#dashboard_slot');
-		var columnsAvailableHeight = window.innerHeight - (Q.Layout.orientation == 'portrait' ? dashboard.outerHeight() : 0);
+		var columnsAvailableHeight = Q.Pointer.windowHeight() - (Q.Layout.orientation == 'portrait' ? dashboard.outerHeight() : 0);
 		if (column1Slot.children('.Q_column1_contents').outerHeight() < columnsAvailableHeight)
 		{
 			column1Slot.css({ 'height': columnsAvailableHeight + 'px' });
@@ -1645,11 +1645,11 @@ Q.Layout = {
 		{
 			if (Q.info.isMobile)
 			{
-				layoutUpdateOptions.participantsWidth = window.innerWidth, layoutUpdateOptions.participantsLeft = 0;
+				layoutUpdateOptions.participantsWidth = Q.Pointer.windowWidth(), layoutUpdateOptions.participantsLeft = 0;
 				if (Q.Layout.orientation == 'landscape')
 				{
-					participantsWidth = window.innerWidth * 0.75 - 2;
-					participantsLeft = window.innerWidth - participantsWidth;
+					participantsWidth = Q.Pointer.windowWidth() * 0.75 - 2;
+					participantsLeft = Q.Pointer.windowWidth() - participantsWidth;
 				}
 				// TODO (DT): move this to participants tool 'onLayout' after refactoring
 				/*participants.css({
@@ -2037,7 +2037,7 @@ Q.Dashboard = {
 		
 		if (!Q.info.isTouchscreen || (Q.info.isTouchscreen && Q.Layout.orientation == 'landscape'))
 		{
-			var mainHeight = Q.info.isTouchscreen ? window.innerHeight : $('#main').height();
+			var mainHeight = Q.info.isTouchscreen ? Q.Pointer.windowHeight() : $('#main').height();
 			Q.Dashboard.availableHeight = Q.info.isTouchscreen
 					? mainHeight - noticesSlot.outerHeight()
 					: $('#column1_slot').outerHeight();
@@ -2046,9 +2046,9 @@ Q.Dashboard = {
 				'top': '',
 				'height': 'auto'
 			});
-			if (Q.Dashboard.options.fullheight && dashboard.height() < window.innerHeight)
+			if (Q.Dashboard.options.fullheight && dashboard.height() < Q.Pointer.windowHeight())
 			{
-				var dashboardHeight = window.innerHeight - parseInt(dashboard.css('margin-top')) - parseInt(dashboard.css('margin-top'));
+				var dashboardHeight = Q.Pointer.windowHeight() - parseInt(dashboard.css('margin-top')) - parseInt(dashboard.css('margin-top'));
 				dashboard.css({ 'min-height': dashboardHeight + 'px' });
 			}
 			dashboard.find('#Q_dashboard_item_app').plugin('Q/contextual', 'remove');
@@ -2075,7 +2075,7 @@ Q.Dashboard = {
 		else
 		{
 			dashboard.addClass('Q_dashboard_horizontal');
-			dashboard.css({ 'width': window.innerWidth + 'px', 'height': '', 'min-height': '' });
+			dashboard.css({ 'width': Q.Pointer.windowWidth() + 'px', 'height': '', 'min-height': '' });
 			items.off(Q.Pointer.start + '.Q_expandable').addClass('Q_dashboard_item_horizontal');
 			items.find('br').remove();
 			items.find('img, .Q_people_icon, .Q_dashboard_back_icon_small').after('<br />');
@@ -2245,7 +2245,7 @@ Q.Dashboard = {
 		
 		if (Q.Dashboard.isBuilt)
 		{
-			var mainHeight = Q.info.isTouchscreen ? window.innerHeight : $('#main').height();
+			var mainHeight = Q.info.isTouchscreen ? Q.Pointer.windowHeight() : $('#main').height();
 			var dashboard = $('#dashboard_slot');
 			var noticesSlot = $('#notices_slot');
 			Q.Dashboard.availableHeight = mainHeight - noticesSlot.outerHeight() - parseInt($('#column1_slot').css('margin-top'))
@@ -3000,7 +3000,7 @@ Q.Contextual = {
 			height = Q.Contextual.options.height;
 			if (typeof(height) == 'string' && height.indexOf('%') != -1)
 			{
-				height = window.innerHeight * (parseInt(height) / 100);
+				height = Q.Pointer.windowHeight() * (parseInt(height) / 100);
 			}
 		}
 		
@@ -3423,7 +3423,7 @@ Q.Notice = {
 						if (Q.info.platform == 'android')
 						{
 							if ((column2Slot.css('visibility') == 'visible') &&
-									(document.body.scrollTop + window.innerHeight >= document.body.scrollHeight))
+									(document.body.scrollTop + Q.Pointer.windowHeight() >= document.body.scrollHeight))
 							{
 								document.body.scrollTop = 10000;
 							}
