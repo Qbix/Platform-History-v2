@@ -802,8 +802,8 @@ Elp.remainingWidth = function () {
 			return;
 		}
 		w -= (rect3.right - rect3.left
-			+ (isNaN(style.marginLeft) ? 0 : parseFloat(style.marginLeft))
-			+ (isNaN(style.marginRight) ? 0 : parseFloat(style.marginRight)));
+			+ (style.marginLeft.substr(-2) == 'px' ? parseFloat(style.marginLeft) : 0)
+			+ (style.marginRight.substr(-2) == 'px' ? parseFloat(style.marginRight) : 0));
 	});	
 	return w;
 };
