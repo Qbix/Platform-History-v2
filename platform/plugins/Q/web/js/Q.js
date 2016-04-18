@@ -531,7 +531,7 @@ Elp.computedStyle = function(name) {
 	for (var k in computedStyle) {
 		var k2 = root.getComputedStyle ? k : k.replace(/-(\w)/gi, function (word, letter) {
 			return letter.toUpperCase()
-	    }).toLowerCase();
+		});
 		result[k2] = computedStyle[k];
 	}
 	return name ? result[name.replace(/-(\w)/gi, function (word, letter) {
