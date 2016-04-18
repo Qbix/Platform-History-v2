@@ -792,7 +792,7 @@ Elp.remainingWidth = function () {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
-	var w = this.parentNode.clientWidth;
+	var w = Math.floor(this.parentNode.clientWidth);
 	Q.each(this.parentNode.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
@@ -806,7 +806,7 @@ Elp.remainingWidth = function () {
 			+ (style.marginRight.substr(style.marginRight.length-2) == 'px'
 				? parseFloat(style.marginRight) : 0));
 	});	
-	return document.addEventListener ? w : w-1; // one pixel less in IE8 and below
+	return w;
 };
 
 if (!Elp.getElementsByClassName) {
