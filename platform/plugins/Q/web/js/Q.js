@@ -784,9 +784,10 @@ Elp.isVisible = function () {
 /**
  * Gets the width remaining after subtracting all the siblings on the same line
  * @method remainingWidth
+ * @param {boolean} subpixelAccuracy
  * @return {number|null} Returns the remaining width, or null if element has no parent
  */
-Elp.remainingWidth = function () {
+Elp.remainingWidth = function (subpixelAccuracy) {
 	var element = this;
 	if (!this.parentNode) {
 		return null;
@@ -806,8 +807,8 @@ Elp.remainingWidth = function () {
 		}
 		w -= (rect3.right - rect3.left
 			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
-	});	
-	return document.addEventListener ? w : w-1; // one pixel less in IE8
+	});
+	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
 function _parseFloat(value) {
