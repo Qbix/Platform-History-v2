@@ -983,6 +983,9 @@ Q.typeOf = function _Q_typeOf(value) {
  * @throws {Q.Error} If container is not array, object or string
  */
 Q.each = function _Q_each(container, callback, options) {
+	function _byKeys(a, b) { 
+		return a > b ? 1 : (a < b ? -1 : 0); 
+	}
 	function _byFields(a, b) { 
 		return container[a][s] > container[b][s] ? 1
 			: (container[a][s] < container[b][s] ? -1 : 0); 
