@@ -807,7 +807,7 @@ Elp.remainingWidth = function (subpixelAccuracy) {
 		}
 		w -= (rect3.right - rect3.left
 			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
-	});
+	});	
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
