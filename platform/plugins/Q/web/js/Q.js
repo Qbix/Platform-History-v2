@@ -792,22 +792,21 @@ Elp.remainingWidth = function () {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
-	var rect2 = this.parentNode.getBoundingClientRect();
-	var w = rect2.right - rect2.left;
+	var w = this.parentNode.clientWidth;
 	Q.each(this.parentNode.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
-		var rect3 = this.getBoundingClientRect();
-		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
+		var rect2 = this.getBoundingClientRect();
+		if (rect1.top > rect2.bottom || rect1.bottom < rect2.top) {
 			return;
 		}
-		w -= (rect3.right - rect3.left
+		w -= (rect2.right - rect2.left
 			+ (style.marginLeft.substr(style.marginLeft.length-2) == 'px'
 				? parseFloat(style.marginLeft) : 0)
 			+ (style.marginRight.substr(style.marginRight.length-2) == 'px'
 				? parseFloat(style.marginRight) : 0));
 	});	
-	return w;
+	return document.addEventListener ? w : w-1; // one pixel less in IE8 and below
 };
 
 if (!Elp.getElementsByClassName) {
@@ -2398,7 +2397,7 @@ var _layoutElements = [];
 var _layoutEvents = [];
 /**
  * Call this function to get an event which occurs every time
- * Q.layout() is called on the given element or its parent.
+ * Q.layout() is called on the given element or one of its parents.
  * @param {Element} [element=document.documentElement] 
  * @event onLayout
  */
