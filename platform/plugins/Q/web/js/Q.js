@@ -792,22 +792,27 @@ Elp.remainingWidth = function () {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
-	var w = Math.floor(this.parentNode.clientWidth);
+	var rect2 = this.parentNode.getBoundingClientRect();
+	var w = (rect2.right - rect2.left); // could be fractional
+	var cs = this.parentNode.computedStyle();
+	w -= _parseFloat(cs.paddingLeft) + _parseFloat(cs.paddingRight)
+		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
 	Q.each(this.parentNode.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
-		var rect2 = this.getBoundingClientRect();
-		if (rect1.top > rect2.bottom || rect1.bottom < rect2.top) {
+		var rect3 = this.getBoundingClientRect();
+		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
-		w -= (rect2.right - rect2.left
-			+ (style.marginLeft.substr(style.marginLeft.length-2) == 'px'
-				? parseFloat(style.marginLeft) : 0)
-			+ (style.marginRight.substr(style.marginRight.length-2) == 'px'
-				? parseFloat(style.marginRight) : 0));
+		w -= (rect3.right - rect3.left
+			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
 	});	
-	return w;
+	return document.addEventListener ? w : w-1; // one pixel less in IE8
 };
+
+function _parseFloat(value) {
+	return value.substr(value.length-2) == 'px' ? parseFloat(value) : 0;
+}
 
 if (!Elp.getElementsByClassName) {
 	Elp.getElementsByClassName = document.getElementsByClassName;
