@@ -527,9 +527,16 @@ Elp.computedStyle = function(name) {
 	var computedStyle = root.getComputedStyle
 		? getComputedStyle(this, null)
 		: this.currentStyle;
-	return name
-		? (computedStyle ? computedStyle[name] : null)
-		: Q.extend({}, computedStyle);
+	var result = {};
+	for (var k in computedStyle) {
+		var k2 = root.getComputedStyle ? k : k.replace(/-(\w)/gi, function (word, letter) {
+			return letter.toUpperCase()
+	    }).toLowerCase();
+		result[k2] = computedStyle[k];
+	}
+	return name ? result[name.replace(/-(\w)/gi, function (word, letter) {
+		return letter.toUpperCase();
+    })] : result;
 };
 
 /**
@@ -794,8 +801,9 @@ Elp.remainingWidth = function () {
 		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
-		w -= (rect3.right - rect3.left + 
-			parseFloat(style.marginLeft) + parseFloat(style.marginRight));
+		w -= (rect3.right - rect3.left
+			+ isNaN(style.marginLeft) ? 0 : parseFloat(style.marginLeft)
+			+ isNaN(style.marginRight) ? 0 : parseFloat(style.marginRight));
 	});	
 	return w;
 };
