@@ -530,13 +530,13 @@ Elp.computedStyle = function(name) {
 	var result = {};
 	for (var k in computedStyle) {
 		var k2 = root.getComputedStyle ? k : k.replace(/-(\w)/gi, function (word, letter) {
-			return letter.toUpperCase()
+			return letter.toUpperCase();
 		});
 		result[k2] = computedStyle[k];
 	}
 	return name ? result[name.replace(/-(\w)/gi, function (word, letter) {
 		return letter.toUpperCase();
-    })] : result;
+	})] : result;
 };
 
 /**
@@ -802,8 +802,10 @@ Elp.remainingWidth = function () {
 			return;
 		}
 		w -= (rect3.right - rect3.left
-			+ (style.marginLeft.substr(-2) == 'px' ? parseFloat(style.marginLeft) : 0)
-			+ (style.marginRight.substr(-2) == 'px' ? parseFloat(style.marginRight) : 0));
+			+ (style.marginLeft.substr(style.marginLeft.length-2) == 'px'
+				? parseFloat(style.marginLeft) : 0)
+			+ (style.marginRight.substr(style.marginRight.length-2) == 'px'
+				? parseFloat(style.marginRight) : 0));
 	});	
 	return w;
 };
