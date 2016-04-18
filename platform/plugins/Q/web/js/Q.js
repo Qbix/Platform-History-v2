@@ -811,14 +811,14 @@ Elp.remainingWidth = function (subpixelAccuracy) {
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
-function _parseFloat(value) {
-	return value.substr(value.length-2) == 'px' ? parseFloat(value) : 0;
-}
-
 if (!Elp.getElementsByClassName) {
 	Elp.getElementsByClassName = document.getElementsByClassName;
 }
 
+}
+
+function _parseFloat(value) {
+	return value.substr(value.length-2) == 'px' ? parseFloat(value) : 0;
 }
 	
 (function() {
