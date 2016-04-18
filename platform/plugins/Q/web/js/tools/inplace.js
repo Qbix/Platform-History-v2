@@ -98,7 +98,7 @@ Q.Tool.define("Q/inplace", function (options) {
 	selectOnEdit: true,
 	showEditButtons: false,
 	maxWidth: null,
-	minWidth: 100,
+	minWidth: '.Q_placeholder',
 	placeholder: 'Type something...',
 	cancelPrompt: "Would you like to save your changes?",
 	template: {
@@ -264,14 +264,16 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 					position: (pos === 'static') ? 'relative' : pos
 				});
 		}
-		fieldinput.plugin('Q/autogrow', {
-			maxWidth: state.maxWidth || maxWidth,
-			minWidth: state.minWidth || 0,
-			onResize: {"Q/inplace": function () {
-				var margin = this.outerHeight() + parseInt(this.css('margin-top'));
-				tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
-			}}
-		}).plugin('Q/placeholders');
+		fieldinput.plugin('Q/placeholders', {}, function () {
+			this.plugin('Q/autogrow', {
+				maxWidth: state.maxWidth || maxWidth,
+				minWidth: state.minWidth || 0,
+				onResize: {"Q/inplace": function () {
+					var margin = this.outerHeight() + parseInt(this.css('margin-top'));
+					tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
+				}}
+			});
+		});
 		if (fieldinput.is('select')) {
 			field_width += 40;
 		} else if (fieldinput.is('input[type=text]')) {

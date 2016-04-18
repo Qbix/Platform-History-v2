@@ -72,11 +72,12 @@ function _Streams_file_preview(options, preview) {
 		var tool = this;
 		var state = tool.state;
 		var ps = tool.preview.state;
+		var $te = $(tool.element);
 		// set up a pipe to know when the icon has loaded
 		var p = Q.pipe(['inplace', 'icon'], function () {
 			Q.handle(onLoad, tool);
 		});
-		$(tool.element).removeClass('Q_uploading');
+		$te.removeClass('Q_uploading');
 		// set up the inplace options
 		var inplace = null;
 		if (state.inplace) {
@@ -89,6 +90,8 @@ function _Streams_file_preview(options, preview) {
 			var se = ps.editable;
 			if (!se || (se !== true && se.indexOf('title') < 0)) {
 				inplaceOptions.editable = false;
+			} else {
+				$te.addClass('Streams_editable_title');
 			}
 			inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 		}
