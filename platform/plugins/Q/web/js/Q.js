@@ -1042,7 +1042,6 @@ Q.each = function _Q_each(container, callback, options) {
 				}
 				var s = options.sort;
 				var t = typeof(s);
-				var _byKeys = undefined;
 				var compare = (t === 'function') ? s : (t === 'string'
 					? (options.numeric ? _byFieldsNumeric : _byFields)
 					: (options.numeric ? _byKeysNumeric : _byKeys));
