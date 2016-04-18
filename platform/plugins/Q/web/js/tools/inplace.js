@@ -551,7 +551,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		if (!focusedOn) {
 			return false;
 		}
-		var kc = (window.event) ? event.which : e.keyCode;
+		var kc = (window.event) ? (event.keyCode || event.which) : e.keyCode;
 		var sk = (window.event) ? event.shiftKey : e.shiftKey;
 		if (kc == 13) {
 			if (! fieldinput.is('textarea')) {
