@@ -1464,8 +1464,12 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 				tak = Q.typeOf(argk);
 				if (ttk === 'Q.Event') {
 					if (argk && argk.constructor === Object) {
-						for (var m in argk) {
+						for (m in argk) {
 							target[k].set(argk[m], m);
+						}
+					} else if (tak === 'Q.Event') {
+						for (m in argk.handlers) {
+							target[k].set(argk.handlers[m], m);
 						}
 					} else {
 						target[k].set(argk, namespace);
@@ -3431,8 +3435,10 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 	Q.find(elem, true, null,
 	function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
-		for (var i=tn.length-1; i>=0; --i) {
-			toolElement.Q.tools[tn[i]].remove(removeCached);
+		if (tn) {
+			for (var i=tn.length-1; i>=0; --i) {
+				toolElement.Q.tools[tn[i]].remove(removeCached);
+			}
 		}
 	});
 };
