@@ -653,6 +653,9 @@ Streams.listen = function (options) {
 								user: this,
 								invite: invite,
 								link: invite.url(),
+								app: Q.app,
+								communityId: Users.communityId(),
+								communityName: Users.communityName(),
 								appRootUrl: Q.Config.expect(['Q', 'web', 'appRootUrl'])
 							});
 							var html = Q.Handlebars.render(parsed.template, fields);
