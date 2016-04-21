@@ -98,9 +98,13 @@ class Users_Mobile extends Base_Users_Mobile
 					Q_Response::setNotice("Q/mobile", "Please set up transport in Users/mobile/twilio as in docs", false);
 					return true;
 				}
-				
-				if (!is_array($from)) {
-					$from = array($from, "$app activation");
+
+				$from = Q::ifset($options, 'from', Q_Config::get('Users', 'email', 'from', null));
+				if (!isset($from)) {
+					// deduce from base url
+					$url_parts = parse_url(Q_Request::baseUrl());
+					$domain = $url_parts['host'];
+					$from = array("notifications@$domain", $domain);
 				}
 
 				// Set up the default mail transport
@@ -134,8 +138,7 @@ class Users_Mobile extends Base_Users_Mobile
 
 				if ($transport) {
 					$mail = new Zend_Mail();
-					$from_name = reset($from);
-					$mail->setFrom(next($from), $from_name);
+					$mail->setFrom(reset($from), next($from));
 					$gateways = Q_Config::get('Users', 'mobile', 'gateways', array(
 						'at&t' => 'txt.att.net',
 						'sprint' => 'messaging.sprintpcs.com',
