@@ -381,14 +381,14 @@ class Streams_Stream extends Base_Streams_Stream
 	function afterSaveExecute($result, $query, $modifiedFields, $where)
 	{
 		$stream = $this;
-		
-		$asUserId = $stream->get('asUserId', null);
+
+		$asUserId = $stream->get('asUserId', $stream->get('createdAsUserId', null));
 		if (!$asUserId) {
 			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
 
-		$stream->calculateAccess();
+		$stream->calculateAccess($asUserId);
 		
 		if (!$stream->retrieved) {
 			// The stream was just saved

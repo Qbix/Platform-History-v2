@@ -924,6 +924,7 @@ abstract class Streams extends Base_Streams
 			}
 			$stream->inheritAccess = $inheritAccess;
 		}
+		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
 		$stream->post($asUserId, array(
 			'type' => 'Streams/created',
