@@ -142,7 +142,7 @@ class Q_Request
 	 * Get the URL that was requested, possibly with a querystring
 	 * @method url
 	 * @static
-	 * @param {mixed} [$query_fields=array()] If true, includes the entire querystring as requested.
+	 * @param {mixed} [$queryFields=array()] If true, includes the entire querystring as requested.
 	 *  If a string, appends the querystring correctly to the current URL.
 	 *  If an associative array, adds these fields, with their values
 	 *  to the existing querystring, while subtracting the fields corresponding
@@ -153,7 +153,7 @@ class Q_Request
 	 * @return {string} Returns the URL that was requested, possibly with a querystring.
 	 */
 	static function url(
-	 $query_fields = array())
+	 $queryFields = array())
 	{
 		if (!isset($_SERVER['REQUEST_URI'])) {
 			// this was not requested from the web
@@ -183,7 +183,7 @@ class Q_Request
 				$request_uri);
 		}
 				
-		if (!$query_fields) {
+		if (!$queryFields) {
 			return self::$url;
 		}
 		
@@ -191,12 +191,11 @@ class Q_Request
 		if ($request_querystring) {
 			Q::parse_str($request_querystring, $query);
 		}
-		if (is_string($query_fields)) {
-			Q::parse_str($query_fields, $qf_array);
+		if (is_string($queryFields)) {
+			Q::parse_str($queryFields, $qf_array);
 			$query = array_merge($query, $qf_array);
-		} else if (is_array($query_fields)) {
-			$qf = array_merge(array('_' => null), $query_fields);
-			foreach ($qf as $key => $value) {
+		} else if (is_array($queryFields)) {
+			foreach ($queryFields as $key => $value) {
 				if (isset($value)) {
 					$query[$key] = $value;
 				} else {
