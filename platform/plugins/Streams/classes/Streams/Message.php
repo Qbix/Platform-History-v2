@@ -90,7 +90,7 @@ class Streams_Message extends Base_Streams_Message
 	
 	/**
 	 * Post (potentially) multiple messages to multiple streams.
-	 * With one call to this function you can post at most one message per stream.
+	 * @method postMessages
 	 * @static
 	 * @param {string} $asUserId
 	 *  The user to post the message as
@@ -144,6 +144,7 @@ class Streams_Message extends Base_Streams_Message
 		$streams = array();
 		$messages2 = array();
 		$totals2 = array();
+		$updates = array();
 		$clientId = Q_Request::special('clientId', '');
 		$sendToNode = true;
 		foreach ($messages as $publisherId => $arr) {
@@ -152,21 +153,7 @@ class Streams_Message extends Base_Streams_Message
 				$asUserId, $publisherId, $streamNames, '*', 
 				array('refetch' => true, 'begin' => true) // lock for updates
 			);
-			foreach ($arr as $streamName => $message) {
-				$p = &$posted[$publisherId][$streamName];
-				$p = false;
-				$type = isset($message['type']) ? $message['type'] : 'text/small';
-				$content = isset($message['content']) ? $message['content'] : '';
-				$instructions = isset($message['instructions']) ? $message['instructions'] : '';
-				$weight = isset($message['weight']) ? $message['weight'] : 1;;
-				if (!isset($message['byClientId'])) {
-					$message['byClientId'] = $clientId ? substr($clientId, 0, 255) : '';
-				}
-				if (is_array($instructions)) {
-					$instructions = Q::json_encode($instructions);
-				}
-				$byClientId = $message['byClientId'];
-				
+			foreach ($arr as $streamName => $m) {
 				// Get the Streams_Stream object
 				if (!isset($fetched[$streamName])) {
 					$p = new Q_Exception_MissingRow(array(
@@ -175,126 +162,150 @@ class Streams_Message extends Base_Streams_Message
 					));
 					continue;
 				}
-				$stream = $fetched[$streamName];
+				$p = &$posted[$publisherId][$streamName];
+				$p = array();
+				$messages3 = is_array($m) && !Q::isAssociative($m) ? $m : array($m);
+				$count = count($messages3);
+				$i = 0;
+				foreach ($messages3 as $message) {
+					++$i;
+					$type = isset($message['type']) ? $message['type'] : 'text/small';
+					$content = isset($message['content']) ? $message['content'] : '';
+					$instructions = isset($message['instructions']) ? $message['instructions'] : '';
+					$weight = isset($message['weight']) ? $message['weight'] : 1;;
+					if (!isset($message['byClientId'])) {
+						$message['byClientId'] = $clientId ? substr($clientId, 0, 255) : '';
+					}
+					if (is_array($instructions)) {
+						$instructions = Q::json_encode($instructions);
+					}
+					$byClientId = $message['byClientId'];
+					$stream = $fetched[$streamName];
 				
-				// Make a Streams_Message object
-				$message = new Streams_Message();
-				$message->publisherId = $publisherId;
-				$message->streamName = $streamName;
-				$message->insertedTime = new Db_Expression("CURRENT_TIMESTAMP");
-				$message->sentTime = new Db_Expression("CURRENT_TIMESTAMP");
-				$message->byUserId = $asUserId;
-				$message->byClientId = $byClientId ? substr($byClientId, 0, 31) : '';
-				$message->type = $type;
-				$message->content = $content;
-				$message->instructions = $instructions;
-				$message->weight = $weight;
-				$message->ordinal = $stream->messageCount + 1; // thanks to transaction
+					// Make a Streams_Message object
+					$message = new Streams_Message();
+					$message->publisherId = $publisherId;
+					$message->streamName = $streamName;
+					$message->insertedTime = new Db_Expression("CURRENT_TIMESTAMP");
+					$message->sentTime = new Db_Expression("CURRENT_TIMESTAMP");
+					$message->byUserId = $asUserId;
+					$message->byClientId = $byClientId ? substr($byClientId, 0, 31) : '';
+					$message->type = $type;
+					$message->content = $content;
+					$message->instructions = $instructions;
+					$message->weight = $weight;
+					$message->ordinal = $stream->messageCount + $i; // thanks to transaction
 				
-				// Set up some parameters for the event hooks
-				$eventParams[$publisherId][$streamName] = array(
-					'publisherId' => $publisherId,
-					'message' => $message,
-					'skipAccess' => $skipAccess,
-					'sendToNode' => &$sendToNode, // sending to node can be canceled
-					'stream' => $stream
-				);
-				$params = $eventParams[$publisherId][$streamName];
+					// Set up some parameters for the event hooks
+					$params = $eventParams[$publisherId][$streamName][] = array(
+						'publisherId' => $publisherId,
+						'message' => $message,
+						'skipAccess' => $skipAccess,
+						'sendToNode' => &$sendToNode, // sending to node can be canceled
+						'stream' => $stream
+					);
 				
-				/**
-				 * @event Streams/post/$streamType {before}
-				 * @param {string} publisherId
-				 * @param {Streams_Stream} stream
-				 * @param {string} message
-				 * @return {false} To cancel further processing
-				 */
-				if (Q::event("Streams/post/{$stream->type}", $params, 'before') === false) {
-					$results[$stream->name] = false;
-					continue;
-				}
-				
-				/**
-				 * @event Streams/message/$messageType {before}
-				 * @param {string} publisherId
-				 * @param {Streams_Stream} stream
-				 * @param {string} message
-				 * @return {false} To cancel further processing
-				 */
-				if (Q::event("Streams/message/$type", $params, 'before') === false) {
-					$results[$stream->name] = false;
-					continue;
-				}
-				
-				if (!$skipAccess && !$stream->testWriteLevel('post')) {
-					$p = new Users_Exception_NotAuthorized();
 					/**
-					 * @event Streams/notAuthorized {before}
+					 * @event Streams/post/$streamType {before}
+					 * @param {string} publisherId
+					 * @param {Streams_Stream} stream
+					 * @param {string} message
+					 * @return {false} To cancel further processing
+					 */
+					if (Q::event("Streams/post/{$stream->type}", $params, 'before') === false) {
+						$results[$stream->name] = false;
+						continue;
+					}
+				
+					/**
+					 * @event Streams/message/$messageType {before}
+					 * @param {string} publisherId
+					 * @param {Streams_Stream} stream
+					 * @param {string} message
+					 * @return {false} To cancel further processing
+					 */
+					if (Q::event("Streams/message/$type", $params, 'before') === false) {
+						$results[$stream->name] = false;
+						continue;
+					}
+				
+					if (!$skipAccess && !$stream->testWriteLevel('post')) {
+						$p[] = new Users_Exception_NotAuthorized();
+						/**
+						 * @event Streams/notAuthorized {before}
+						 * @param {string} publisherId
+						 * @param {Streams_Stream} stream
+						 * @param {string} message
+						 */
+						Q::event("Streams/notAuthorized", $params, 'after');
+						continue;
+					}
+
+					// if we are still here, mark the message as "in the database"
+					$message->wasRetrieved(true);
+					$p[] = $message;
+				
+					// build the arrays of rows to insert
+					$messages2[] = $mf = $message->fields;
+				}
+				$totals2[$count][] = array(
+					'publisherId' => $mf['publisherId'],
+					'streamName' => $mf['streamName'],
+					'messageType' => $mf['type'],
+					'messageCount' => $count
+				);
+				$updates[$publisherId][$count][] = $streamName;
+			}
+		}
+
+		foreach ($totals2 as $count => $records) {
+			Streams_Total::insertManyAndExecute($records, array(
+				'onDuplicateKeyUpdate' => array(
+					'messageCount' => new Db_Expression("messageCount + $count")
+				)
+			));
+		}
+
+		if ($messages2) {
+			Streams_Message::insertManyAndExecute($messages2);
+		}
+
+		// time to update the stream rows and commit the transaction
+		// on all the shards where the streams were fetched.
+		foreach ($updates as $publisherId => $arr) {
+			foreach ($arr as $count => $streamNames) {
+				Streams_Stream::update()
+					->set(array(
+						'messageCount' => new Db_Expression("messageCount + $count")
+					))->where(array(
+						'publisherId' => $publisherId,
+						'name' => $streamNames
+					))->commit()
+					->execute();
+			}
+		}
+		
+		// handle all the events for successfully posting
+		foreach ($posted as $publisherId => $arr) {
+			foreach ($arr as $streamName => $messages3) {
+				$stream = $streams[$publisherId][$streamName];
+				foreach ($messages3 as $i => $message) {
+					$params = $eventParams[$publisherId][$streamName][$i];
+					/**
+					 * @event Streams/message/$messageType {after}
 					 * @param {string} publisherId
 					 * @param {Streams_Stream} stream
 					 * @param {string} message
 					 */
-					Q::event("Streams/notAuthorized", $params, 'after');
-					continue;
+					Q::event("Streams/message/{$message->type}", $params, 'after', false);
+					/**
+					 * @event Streams/post/$streamType {after}
+					 * @param {string} publisherId
+					 * @param {Streams_Stream} stream
+					 * @param {string} message
+					 */
+					Q::event("Streams/post/{$stream->type}", $params, 'after', false);
 				}
-
-				// if we are still here, mark the message as "in the database"
-				$message->wasRetrieved(true);
-				$posted[$publisherId][$streamName] = $message;
-				
-				// build the arrays of rows to insert
-				$messages2[] = $mf = $message->fields;
-				$totals2[] = array(
-					'publisherId' => $mf['publisherId'],
-					'streamName' => $mf['streamName'],
-					'messageType' => $mf['type'],
-					'messageCount' => 1
-				);
-			}
-		}
-
-		if ($totals2) {
-			Streams_Total::insertManyAndExecute($totals2, array(
-				'onDuplicateKeyUpdate' => array(
-					'messageCount' => new Db_Expression('messageCount + 1')
-				)
-			));
-		}
-		if ($messages2) {
-			Streams_Message::insertManyAndExecute($messages2);
-		}
-		
-		// time to update the stream rows and commit the transaction
-		// on all the shards where the streams were fetched.
-		Streams_Stream::update()
-			->set(array(
-				'messageCount' => new Db_Expression("messageCount+1")
-			))->where(array(
-				'publisherId' => $publisherId,
-				'name' => $streamNames
-			))->commit()
-			->execute();
-		
-		// handle all the events for successfully posting
-		foreach ($posted as $publisherId => $arr) {
-			foreach ($arr as $streamName => $m) {
-				$message = $posted[$publisherId][$streamName];
-				$stream = $streams[$publisherId][$streamName];
-				$params = &$eventParams[$publisherId][$streamName];
-				
-				/**
-				 * @event Streams/message/$messageType {after}
-				 * @param {string} publisherId
-				 * @param {Streams_Stream} stream
-				 * @param {string} message
-				 */
-				Q::event("Streams/message/{$message->type}", $params, 'after', false);
-				/**
-				 * @event Streams/post/$streamType {after}
-				 * @param {string} publisherId
-				 * @param {Streams_Stream} stream
-				 * @param {string} message
-				 */
-				Q::event("Streams/post/{$stream->type}", $params, 'after', false);
 			}
 		}
 		/**
@@ -314,7 +325,7 @@ class Streams_Message extends Base_Streams_Message
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Streams/Message/postMessages",
 				"posted" => Q::json_encode($messages2),
-				"streams" => Q::json_encode($streams)
+				"streams" => Q::json_encode(Db::exportArray($streams))
 			));
 		}
 		

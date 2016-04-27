@@ -2358,6 +2358,197 @@ abstract class Streams extends Base_Streams
 	}
 	
 	/**
+	 * If the user is not participating in the stream yet, 
+	 * inserts a participant record and posts a "Streams/join" type message to the stream.
+	 * Otherwise updates the participant record's timestamp and other things
+	 * @method join
+	 * @static
+	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
+	 * @param {string} $publisherId The id of the user publishing all the streams
+	 * @param {array} $streams An array of Streams_Stream objects or stream names
+	 * @param $options=array() {array} An associative array of options.
+	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
+	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
+	 * @param {array} [$options.extra] Any extra information for the message
+	 * @param {string} [$options.userId] The user who is joining the stream. Defaults to the logged-in user.
+	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
+	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
+	 * @return {array} Returns an array of (streamName => x) pairs, where x is either a Streams_Participant row corresponding to an updated participant, or an array corresponding to a newly inserted participant.
+	 */
+	static function join(
+		$asUserId,
+		$publisherId, 
+		$streams,
+		$options = array())
+	{
+		if (!isset($asUserId)) {
+			$asUserId = Users::loggedInUser(true)->id;
+		}
+		Users::fetch($asUserId, true);
+		$names = array();
+		$streams2 = array();
+		foreach ($streams as $s) {
+			if (is_string($s)) {
+				$names[] = $s;
+			} else if ($s instanceof Streams_Stream) {
+				$streams2 = $s;
+			} else {
+				throw new Q_Exception_Wrong(array(
+					'field' => 'stream',
+					'type' => 'Streams_Stream or string'
+				));
+			}
+		}
+		$rows = Streams::fetch($asUserId, $publisherId, $names, array('refetch' => true));
+		$streams2 = array_merge($streams2, $rows);
+		$streamNames = array();
+		foreach ($streams2 as $s) {
+			$streamNames[] = $s->name;
+		}
+		if (empty($options['skipAccess'])) {
+			foreach ($streamNames as $sn) {
+				$stream = $streams2[$sn];
+				if (!$stream->testWriteLevel('join')) {
+					if (!$stream->testReadLevel('see')) {
+						throw new Streams_Exception_NoSuchStream();
+					}
+					throw new Users_Exception_NotAuthorized();
+				}
+			}
+		}
+		$participants = Streams_Participant::select('*')
+		->where(array(
+			'publisherId' => $publisherId,
+			'streamName' => $streamNames,
+			'userId' => $asUserId
+		))->ignoreCache()->fetchDbRows(null, null, 'streamName');
+		$streamNamesMissing = array();
+		$streamNamesUpdate = array();
+		$messages = array();
+		$pMessages = array();
+		$results = array();
+		foreach ($streamNames as $sn) {
+			if (!isset($participants[$sn])) {
+				$streamNamesMissing[] = $sn;
+				continue;
+			}
+			$stream = $streams2[$sn];
+			$participant = &$participants[$sn];
+			if (isset($options['subscribed'])) {
+				$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
+				$participant->subscribed = $subscribed;
+				$streamNamesUpdate[] = $sn;
+			}
+			$type = ($participant->state === 'participating') ? 'visit' : 'join';
+			if (empty($options['noVisit']) or $type !== 'visit') {
+				// Send a message to Node
+				Q_Utils::sendToNode(array(
+					"Q/method" => "Streams/Stream/$type",
+					"participant" => Q::json_encode($participant->toArray()),
+					"stream" => Q::json_encode($stream->toArray())
+				));
+				// Stream messages to post
+				$messages[$publisherId][$sn] = array(
+					'type' => "Streams/$type",
+					'instructions' => Q::json_encode(array(
+						'extra' => isset($participant->extra) ? $participant->extra : array()
+					))
+				);
+				$pMessages[] = array(
+					'type' => "Streams/{$type}ed",
+					'instructions' => Q::json_encode(array(
+						'publisherId' => $publisherId,
+						'streamName' => $sn
+					))
+				);
+			}
+			$results[$sn] = $participant;
+		}
+		$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
+		Streams_Participant::update()
+			->set(compact('subscribed'))
+			->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $streamNamesUpdate,
+				'userId' => $asUserId
+			))->execute();
+		if ($streamNamesMissing) {
+			$rows = array();
+			foreach ($streamNamesMissing as $sn) {
+				$stream = $streams2[$sn];
+				$results[$sn] = $rows[$sn] = array(
+					'publisherId' => $publisherId,
+					'streamName' => $sn,
+					'userId' => $asUserId,
+					'streamType' => $stream->type,
+					'state' => 'participating',
+					'subscribed' => !empty($options['subscribed']) ? 'yes' : 'no',
+					'posted' => !empty($options['posted']) ? 'yes' : 'no',
+					'extra' => !empty($options['extra']) ? $options['extra'] : ''
+				);
+			}
+			Streams_Participant::insertManyAndExecute($rows);
+			foreach ($streamNamesMissing as $sn) {
+				$stream = $streams2[$sn];
+				// Send a message to Node
+				Q_Utils::sendToNode(array(
+					"Q/method" => "Streams/Stream/join",
+					"participant" => Q::json_encode($rows[$sn]),
+					"stream" => Q::json_encode($stream->toArray())
+				));
+				// Stream messages to post
+				$messages[$publisherId][$sn] = array(
+					'type' => 'Streams/join',
+					'instructions' => Q::json_encode(array(
+						'extra' => isset($participant->extra) ? $participant->extra : array()
+					))
+				);
+				$pMessages[] = array(
+					'type' => "Streams/joined",
+					'instructions' => Q::json_encode(array(
+						'publisherId' => $publisherId,
+						'streamName' => $sn
+					))
+				);
+			}
+		}
+		Streams_Message::postMessages($asUserId, $messages, true);
+		Streams_Message::postMessages($asUserId, array(
+			$asUserId => array('Streams/participating' => $pMessages)
+		), true);
+		return array($results, $rows);
+	}
+	
+	/**
+	 * Subscribe to one or more streams.
+	 *	If options are not given check the subscription templates:
+	 *	1. exact stream name and exact user id
+	 *	2. generic stream name and exact user id
+	 *	3. exact stream name and generic user
+	 *	4. generic stream name and generic user
+	 *	default is to subscribe to ALL messages.
+	 *	If options supplied - skip templates and use options<br/><br/>
+	 * Using subscribe if subscription is already active will modify existing
+	 * subscription - change type(s) or modify notifications
+	 * @method subscribe
+	 * @static
+	 * @param $options=array() {array}
+	 * @param {array} [$options.types] array of message types, if this is empty then subscribes to all types
+	 * @param {integer} [$options.notifications=0] limit number of notifications, 0 means no limit
+	 * @param {datetime} [$options.untilTime=null] time limit, if any for subscription
+	 * @param {datetime} [$options.readyTime] time from which user is ready to receive notifications again
+	 * @param {string} [$options.userId] the user subscribing to the stream. Defaults to the logged in user.
+	 * @param {array} [$options.deliver=array('to'=>'default')] under "to" key, named the field under Streams/rules/deliver config, which will contain the names of destinations, which can include "email", "mobile", "email+pending", "mobile+pending"
+	 * @param {boolean} [$options.skipRules]  if true, do not attempt to create rules
+	 * @param {boolean} [$options.skipAccess]  if true, skip access check for whether user can subscribe
+	 * @return {Streams_Subscription|false}
+	 */
+	static function subscribe($asUserId, $streams, $options = array())
+	{
+		
+	}
+	
+	/**
 	 * Invites a user (or a future user) to a stream .
 	 * @method invite
 	 * @static

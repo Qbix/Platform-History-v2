@@ -553,8 +553,7 @@ class Streams_Stream extends Base_Streams_Stream
 			return $this;
 		}
 		$stream = Streams::fetchOne($userId, 
-			$this->publisherId, $this->name, '*', 
-			array('refetch' => true)
+			$this->publisherId, $this->name, array('refetch' => true)
 		);
 		if (!$stream) { // this should never happen
 			throw new Q_Exception("Error getting {$this->name} stream published by {$this->publisherId} for user '$userId'");
@@ -690,19 +689,15 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * If the user is not participating in the stream yet, 
 	 * inserts a participant record and posts a "Streams/join" type message to the stream.
-	 * Otherwise update timestamp
+	 * Otherwise updates the participant record's timestamp and other things
 	 * @method join
-	 * @param $options=array() {array}
-	 *  An associative array of options. The keys can be:<br/>
-	 *  "subscribed" => boolean<br/>
-	 *  "posted" => boolean<br/>
-	 *  "extra" => array<br/>
-	 *  "userId" => The user who is joining the stream. Defaults to the logged-in user.
-	 *  "noVisit" => If user is already participating, don't post a "Streams/visited" message
-	 *  "skipAccess": if true, skip access check for whether user can join
-	 * @param $participant=null {reference}
-	 *  Optional reference to a participant object that will be filled
-	 *  to point to the participant object, if any.
+	 * @param $options=array() {array} An associative array of options.
+	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
+	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
+	 * @param {array} [$options.extra] Any extra information for the message
+	 * @param {string} [$options.userId] The user who is joining the stream. Defaults to the logged-in user.
+	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
+	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @return {Streams_Participant|false}
 	 */
 	function join($options = array(), &$participant = null)
@@ -758,10 +753,9 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 		} else {
 			$participant->streamType = $stream->type;
+			$participant->state = 'participating';
 			$participant->subscribed = !empty($options['subscribed']) ? 'yes' : 'no';
 			$participant->posted = !empty($options['posted']) ? 'yes' : 'no';
-			$participant->reputation = !empty($options['reputation']) ? $options['reputation'] : 0;
-			$participant->state = 'participating';
 			$participant->extra = !empty($options['extra']) ? $options['extra'] : '';
 
 			if (!$participant->save(true)) {
@@ -798,10 +792,9 @@ class Streams_Stream extends Base_Streams_Stream
 	 * If the user is participating in the stream, sets state of participant row
 	 * as "left" and posts a "Streams/leave" type message to the stream
 	 * @method leave
-	 * @param $options=array() {array}
-	 *  An associative array of options. The keys can be:<br/>
-	 *  "userId": The user who is leaving the stream. Defaults to the logged-in user.
-	 *  "skipAccess": if true, skip access check for whether user can join
+	 * @param $options=array() {array} An associative array of options.
+	 * @param {string} [$options.userId] The user who is leaving the stream. Defaults to the logged-in user.
+	 * @param {string} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @param $participant=null {reference}
 	 *  Optional reference to a participant object that will be filled
 	 *  to point to the participant object, if any.
