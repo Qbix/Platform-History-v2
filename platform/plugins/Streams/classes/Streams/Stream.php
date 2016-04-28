@@ -537,30 +537,16 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 	}
 
-	protected function fetchAsUser ($options, &$userId, &$user = null) {
+	protected function _verifyUser ($options, &$user = null) {
 		if (isset($options['userId'])) {
-			$user = Users_User::fetch($options['userId']);
-			if (!$user) {
-				throw new Q_Exception_MissingRow(array(
-					'table' => 'user',
-					'criteria' => "id = ".$options['userId']
-				));
-			}
+			$user = Users_User::fetch($options['userId'], true);
 		} else {
 			$user = Users::loggedInUser(true);
 		}
-		$userId = $user->id;
-		if (!empty($options['skipAccess'])
-		or $userId === $this->get('asUserId', null)) {
-			return $this;
-		}
-		$stream = Streams::fetchOne($userId, 
-			$this->publisherId, $this->name, array('refetch' => true)
+		$stream = Streams::fetchOne($user->id, 
+			$this->publisherId, $this->name, true, array('refetch' => true)
 		);
-		if (!$stream) { // this should never happen
-			throw new Q_Exception("Error getting {$this->name} stream published by {$this->publisherId} for user '$userId'");
-		}
-		return $stream;
+		return $user->id;
 	}
 	
 	/**
@@ -690,8 +676,11 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * If the user is not participating in the stream yet, 
-	 * inserts a participant record and posts a "Streams/join" type message to the stream.
-	 * Otherwise updates the participant record's timestamp and other things
+	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
+	 * to the stream, depending on whether the user is already participating in the stream.
+	 * Otherwise updates the participant record's timestamp and other things.
+	 * Also a posts "Streams/joined" or "Streams/visited" message on the user's
+	 * "Streams/participating" stream.
 	 * @method join
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
@@ -700,99 +689,21 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} [$options.userId] The user who is joining the stream. Defaults to the logged-in user.
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
-	 * @return {Streams_Participant|false}
+	 * @return {Streams_Participant|null}
 	 */
 	function join($options = array(), &$participant = null)
 	{
-		$stream = $this->fetchAsUser($options, $userId);
-
-		if (empty($options['skipAccess'])
-		and !$stream->testWriteLevel('join')) {
-			if (!$stream->testReadLevel('see')) {
-				throw new Streams_Exception_NoSuchStream();
-			}
-			throw new Users_Exception_NotAuthorized();
-		}
-
-		// Add to participant list
-		$participant = new Streams_Participant();
-		$participant->publisherId = $stream->publisherId;
-		$participant->streamName = $stream->name;
-		$participant->userId = $userId;
-
-		if($participant->retrieve(null, null, array('ignoreCache' => true))) {
-			if (isset($options['subscribed'])) {
-				$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
-				$participant->subscribed = $subscribed;
-			}
-			$type = ($participant->state === 'participating') ? 'visit' : 'join';
-			$participant->state = 'participating';
-			if (!$participant->save()) {
-				return false;
-			}
-			if (empty($options['noVisit']) or $type !== 'visit') {
-				// Send a message to Node
-				Q_Utils::sendToNode(array(
-					"Q/method" => "Streams/Stream/$type",
-					"participant" => Q::json_encode($participant->toArray()),
-					"stream" => Q::json_encode($stream->toArray())
-				));
-				// Post a message
-				$stream->post($userId, array(
-					'type' => "Streams/$type",
-					'instructions' => Q::json_encode(array(
-						'extra' => isset($participant->extra) ? $participant->extra : array()
-					))
-				), true);
-				// Now post Streams/joined message to Streams/participating
-				Streams_Message::post($userId, $userId, 'Streams/participating', array(
-					'type' => "Streams/{$type}ed",
-					'instructions' => Q::json_encode(array(
-						'publisherId' => $stream->publisherId,
-						'streamName' => $stream->name
-					))
-				), true);
-			}
-		} else {
-			$participant->streamType = $stream->type;
-			$participant->state = 'participating';
-			$participant->subscribed = !empty($options['subscribed']) ? 'yes' : 'no';
-			$participant->posted = !empty($options['posted']) ? 'yes' : 'no';
-			$participant->extra = !empty($options['extra']) ? $options['extra'] : '';
-
-			if (!$participant->save(true)) {
-				return false;
-			}
-			// Send a message to Node
-			Q_Utils::sendToNode(array(
-				"Q/method" => "Streams/Stream/join", 
-				"participant" => Q::json_encode($participant->toArray()),
-				"stream" => Q::json_encode($stream->toArray())
-			));
-
-			// Post Streams/join message to the stream
-			$stream->post($userId, array(
-				'type' => 'Streams/join',
-				'instructions' => Q::json_encode(array(
-					'extra' => isset($participant->extra) ? $participant->extra : array()
-				))
-			), true);
-
-			// Now post Streams/joined message to Streams/participating
-			Streams_Message::post($userId, $userId, 'Streams/participating', array(
-				'type' => "Streams/joined",
-				'instructions' => Q::json_encode(array(
-					'publisherId' => $stream->publisherId,
-					'streamName' => $stream->name
-				))
-			), true);	
-		}
-		return $participant;
+		$userId = $this->_verifyUser($options);
+		$participants = Streams::join(
+			$userId, $this->publisherId, array($this->name), $options
+		);
+		return $participants ? reset($participants) : null;
 	} 
 	
 	/**
 	 * If the user is participating in the stream, sets state of participant row
-	 * as "left" and posts a "Streams/leave" type message to the stream
+	 * as "left" and posts a "Streams/leave" type message to the stream.
+	 * Also posts "Streams/left" message on user's "Streams/participating" stream
 	 * @method leave
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {string} [$options.userId] The user who is leaving the stream. Defaults to the logged-in user.
@@ -800,248 +711,74 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param $participant=null {reference}
 	 *  Optional reference to a participant object that will be filled
 	 *  to point to the participant object, if any.
-	 * @return {boolean}
+	 * @return {Streams_Participant|null}
 	 */
 	function leave($options = array(), &$participant = null)
 	{
-		$stream = $this->fetchAsUser($options, $userId);
-		
-		if (empty($options['skipAccess'])
-		and !$stream->testWriteLevel('join')) {
-			if (!$stream->testReadLevel('see')) {
-				throw new Streams_Exception_NoSuchStream();
-			}
-			throw new Users_Exception_NotAuthorized();
-		}
-		
-		$participant = new Streams_Participant();
-		$participant->publisherId = $stream->publisherId;
-		$participant->streamName = $stream->name;
-		$participant->userId = $userId;
-
-		if(!$participant->retrieve()) {
-			throw new Q_Exception_MissingRow(array(
-				'table' => 'participant', 
-				'criteria' => "userId = $userId, publisherId = {$stream->publisherId}, name = {$stream->name}"
-			));
-		}
-
-		// Remove from participant list
-		if ($participant->state === 'left') {
-			return false;
-		}
-		$participant->state = 'left';
-		if (!$participant->save()) {
-			return false;
-		}
-		Q_Utils::sendToNode(array(
-			"Q/method" => "Streams/Stream/leave",
-			"participant" => Q::json_encode($participant->toArray()),
-			"stream" => Q::json_encode($stream->toArray())
-		));
-		
-		// Post Streams/leave message to the stream
-		$stream->post($userId, array('type' => 'Streams/leave'), true);
-		
-		// Now post Streams/left message to Streams/participating
-		Streams_Message::post($userId, $userId, 'Streams/participating', array(
-			'type' => 'Streams/left',
-			'content' => '',
-			'instructions' => Q::json_encode(array(
-				'publisherId' => $stream->publisherId,
-				'streamName' => $stream->name
-			))
-		), true);
-		return true;
+		$userId = $this->_verifyUser($options);
+		$participants = Streams::leave(
+			$userId, $this->publisherId, array($this->name), $options
+		);
+		return $participants ? reset($participants) : null;
 	}
 
 	/**
-	 * Subscribe to the stream's messages<br/>
+	 * Subscribe to the stream, to start receiving notifications.
+	 * Posts a "Streams/subscribe" message to the stream.
+	 * Also posts a "Streams/subscribed" message to user's "Streams/participating" stream.
 	 *	If options are not given check the subscription templates:
-	 *	1. exact stream name and exact user id
-	 *	2. generic stream name and exact user id
-	 *	3. exact stream name and generic user
-	 *	4. generic stream name and generic user
+	 *	1. generic publisher id and generic user
+	 *	2. exact publisher id and generic user
+	 *	3. generic publisher id and exact user
 	 *	default is to subscribe to ALL messages.
-	 *	If options supplied - skip templates and use options<br/><br/>
+	 *	If options are supplied - skip templates and use options.
 	 * Using subscribe if subscription is already active will modify existing
 	 * subscription - change type(s) or modify notifications
-	 * @method subscribe
 	 * @param {array} [$options=array()]
-	 * @param {array} [$options.types] array of message types, if this is empty then subscribes to all types
-	 * @param {integer} [$options.notifications=0] limit number of notifications, 0 means no limit
+	 * @param {array} [$options.filter] optional array with two keys
+	 * @param {array} [$options.filter.types] array of message types, if this is empty then subscribes to all types
+	 * @param {array} [$options.filter.notifications=0] limit number of notifications, 0 means no limit
 	 * @param {datetime} [$options.untilTime=null] time limit, if any for subscription
-	 * @param {datetime} [$options.readyTime] time from which user is ready to receive notifications again
+	 * @param {array} [$options.rule=array()] optionally override the rule for new subscriptions
+	 * @param {array} [$options.rule.deliver=array('to'=>'default')] under "to" key,
+	 *   named the field under Streams/rules/deliver config, which will contain the names of destinations,
+	 *   which can include "email", "mobile", "email+pending", "mobile+pending"
+	 * @param {datetime} [$options.rule.readyTime] time from which user is ready to receive notifications again
+	 * @param {array} [$options.rule.filter] optionally set a filter for the rules to add
+	 * @param {boolean} [$options.skipRules] if true, do not attempt to create rules for new subscriptions
+	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
 	 * @param {string} [$options.userId] the user subscribing to the stream. Defaults to the logged in user.
-	 * @param {array} [$options.deliver=array('to'=>'default')] under "to" key, named the field under Streams/rules/deliver config, which will contain the names of destinations, which can include "email", "mobile", "email+pending", "mobile+pending" or "default"
-	 * @param {boolean} [$options.skipRules]  if true, do not attempt to create rules
-	 * @param {boolean} [$options.skipAccess]  if true, skip access check for whether user can subscribe
-	 * @return {Streams_Subscription|false}
+	 * @return {Streams_Participant|null}
 	 */
 	function subscribe($options = array())
 	{
-		$stream = $this->fetchAsUser($options, $userId, $user);
-		
-		if (empty($options['skipAccess'])
-		and !$stream->testReadLevel('messages')) {
-			if (!$stream->testReadLevel('see')) {
-				throw new Streams_Exception_NoSuchStream();
-			}
-			throw new Users_Exception_NotAuthorized();
-		}
-		
-		// first make user a participant
-		$stream->join(array(
-			"userId" => $userId,
-			"subscribed" => true,
-			"noVisit" => true,
-			"skipAccess" => Q::ifset($options, 'skipAccess', false)
-		));
-
-		// check for 'messages' level
-
-		$s = new Streams_Subscription();
-		$s->publisherId = $stream->publisherId;
-		$s->streamName = $stream->name;
-		$s->ofUserId = $userId;
-		$s->retrieve();
-
-		$type = null;
-		if ($template = $stream->getSubscriptionTemplate(
-			'Streams_Subscription', $userId, $type
-		)) {
-			$filter = json_decode($template->filter, true);
-		} else {
-			$filter = array(
-				'types' => array(),
-				'notifications' => 0
-			);
-		}
-		if (isset($options['types'])) {
-			$filter['types'] = !empty($options['types'])
-				? $options['types']
-				: $filter['types'];
-		}
-		if (isset($options['notifications'])) {
-			$filter['notifications'] =  $options['notifications'];
-		}
-
-		$s->filter = Q::json_encode($filter);
-
-		if (isset($options['untilTime'])) {
-			$s->untilTime = $options['untilTime'];
-		} else if ($type > 0 and $template and $template->duration > 0) {
-			$d = $template->duration;
-			$s->untilTime = new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $d SECOND");
-		}
-		if (!$s->save(true)) {
-			return false;
-		}
-
-		if (empty($options['skipRules'])) {
-			// Now let's handle rules.
-			// We might have a template for the subscription, consisting of up to one rule.
-			$type2 = null;
-			$template = $stream->getSubscriptionTemplate('Streams_Rule', $userId, $type2);
-
-			$ruleSuccess = true;
-			if ($type2 !== 0) {
-				$rule = new Streams_Rule();
-				$rule->ofUserId = $userId;
-				$rule->publisherId = $stream->publisherId;
-				$rule->streamName = $stream->name;
-				$rule->ordinal = 1;
-				if (empty($template) and $rule->retrieve()) {
-					$ruleSuccess = false;
-				} else {
-					$rule->readyTime = isset($options['readyTime'])
-						? $options['readyTime']
-						: new Db_Expression('CURRENT_TIMESTAMP');
-					$rule->filter = !empty($template->filter) 
-						? $template->filter 
-						: '{"types":[],"labels":[]}';
-					$rule->relevance = !empty($template->relevance)
-						? $template->relevance
-						: 1;
-					$rule->deliver = !empty($template->deliver)
-						? $template->deliver
-						: Q::json_encode(Q::ifset($options, 'deliver', array('to' => 'default')));
-					$ruleSuccess = !!$rule->save();
-				}
-			}
-		}
-
-		// skip error testing for rule save BUT inform node.
-		// Node can notify user to check the rules
-		Q_Utils::sendToNode(array(
-			"Q/method" => "Streams/Stream/subscribe",
-			"subscription" => Q::json_encode($s->toArray()),
-			"stream" => Q::json_encode($stream->toArray()),
-			"success" => Q::json_encode($ruleSuccess)
-		));
-		
-		// Post Streams/subscribe message to the stream
-		$stream->post($userId, array('type' => 'Streams/subscribe'), true);
-		
-		// Now post Streams/subscribed message to Streams/participating
-		Streams_Message::post($userId, $userId, 'Streams/participating', array(
-			'type' => 'Streams/subscribed',
-			'instructions' => Q::json_encode(array(
-				'publisherId' => $stream->publisherId,
-				'streamName' => $stream->name
-			))
-		), true);
-
-		return $s;
+		$userId = $this->_verifyUser($options);
+		$participants = Streams::subscribe(
+			$userId, $this->publisherId, array($this->name), $options
+		);
+		return $participants ? reset($participants) : null;
 	}
 
 	/**
-	 * Unsubcsribe from all or specific stream's messages
+	 * Unsubscribe from a stream, to stop receiving notifications.
+	 * Posts a "Streams/unsubscribe" message to the stream.
+	 * Also posts a "Streams/unsubscribed" message to user's "Streams/participating" stream.
+	 * Does not change the actual subscription, but only the participant row.
+	 * (When subscribing again, the existing subscription will be used.)
 	 * @method unsubscribe
 	 * @param $options=array() {array}
-	 *  "userId": The user who is unsubscribing from the stream. Defaults to the logged-in user.
-	 *  "skipAccess": if true, skip access check for whether user can unsubscribe
-	 * @return {boolean}
+	 * @param {boolean} [$options.leave] set to true to also leave the streams
+	 * @param {boolean} [$options.userId] the user who is unsubscribing from the stream. Defaults to the logged-in user.
+	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
+	 * @return {Streams_Participant|null}
 	 */
-	function unsubscribe($options = array()) {
-
-		$stream = $this->fetchAsUser($options, $userId);
-		
-		if (empty($options['skipAccess'])
-		and !$stream->testReadLevel('messages')) {
-			if (!$stream->testReadLevel('see')) {
-				throw new Streams_Exception_NoSuchStream();
-			}
-			throw new Users_Exception_NotAuthorized();
-		}
-		
-		$participant = $stream->join(array(
-			"userId" => $userId,
-			'subscribed' => false,
-			'noVisit' => true,
-			"skipAccess" => Q::ifset($options, 'skipAccess', false)
-		));
-
-		Q_Utils::sendToNode(array(
-			"Q/method" => "Streams/Stream/unsubscribe",
-			"stream" => Q::json_encode($stream->toArray()),
-			"participant" => Q::json_encode($participant),
-			"success" => Q::json_encode(!!$participant)
-		));
-		
-		// Post Streams/unsubscribe message to the stream
-		$stream->post($userId, array('type' => 'Streams/unsubscribe'), true);
-		
-		// Now post Streams/unsubscribed message to Streams/participating
-		Streams_Message::post($userId, $userId, 'Streams/participating', array(
-			'type' => 'Streams/unsubscribed',
-			'instructions' => Q::json_encode(array(
-				'publisherId' => $stream->publisherId,
-				'streamName' => $stream->name
-			))
-		), true);
-
-		return !!$participant;
+	function unsubscribe($options = array())
+	{
+		$userId = $this->_verifyUser($options);
+		$participants = Streams::unsubscribe(
+			$userId, $this->publisherId, array($this->name), $options
+		);
+		return $participants ? reset($participants) : null;
 	}
 	
 	/**
@@ -1928,11 +1665,11 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @static
 	 * @param {string} $type The type of the stream
 	 * @param {string|array} $field The name of the field
-	 * @param {mixed} $default The value to return if the config field isn't specified
+	 * @param {mixed} [$default=null] The value to return if the config field isn't specified
 	 * @param {boolean} [$merge=true] if arrays are found in both places, merge them
 	 * @return mixed
 	 */
-	static function getConfigField($type, $field, $default, $merge = true)
+	static function getConfigField($type, $field, $default = null, $merge = true)
 	{
 		if (is_string($field)) {
 			$field = array($field);

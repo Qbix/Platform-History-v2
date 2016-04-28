@@ -79,6 +79,7 @@ class Streams_Message extends Base_Streams_Message
 		list($posted, $streams) = self::postMessages($asUserId, $messages, $skipAccess);
 		if (is_string($streamName)) {
 			$arr = reset($posted);
+			$arr = reset($arr);
 			return reset($arr);
 		}
 		$results = array();
@@ -180,10 +181,12 @@ class Streams_Message extends Base_Streams_Message
 				$p = &$posted[$publisherId][$streamName];
 				$p = array();
 				if (!$m) {
+					$updates[$publisherId]['noMessages'][] = $streamName;
 					continue;
 				}
 				$messages3 = is_array($m) && !Q::isAssociative($m) ? $m : array($m);
 				$count = count($messages3);
+				$updates[$publisherId][$count][] = $streamName;
 				$i = 0;
 				foreach ($messages3 as $message) {
 					++$i;
@@ -272,7 +275,6 @@ class Streams_Message extends Base_Streams_Message
 					'messageType' => $mf['type'],
 					'messageCount' => $count
 				);
-				$updates[$publisherId][$count][] = $streamName;
 			}
 		}
 
@@ -292,10 +294,11 @@ class Streams_Message extends Base_Streams_Message
 		// on all the shards where the streams were fetched.
 		foreach ($updates as $publisherId => $arr) {
 			foreach ($arr as $count => $streamNames) {
+				$suffix = is_numeric($count) ? " + $count" : '';
 				Streams_Stream::update()
 					->set(array(
-						'messageCount' => new Db_Expression("messageCount + $count")
-					))->where(array(
+						'messageCount' => new Db_Expression('messageCount'.$suffix))
+					)->where(array(
 						'publisherId' => $publisherId,
 						'name' => $streamNames
 					))->commit()

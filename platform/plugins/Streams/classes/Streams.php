@@ -2361,7 +2361,7 @@ abstract class Streams extends Base_Streams
 	 * If the user is not participating in the stream yet, 
 	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
-	 * Otherwise updates the participant record's timestamp and other things
+	 * Otherwise updates the participant record's timestamp and other things.
 	 * Also posts "Streams/joined" or "Streams/visited" messages on the user's
 	 * "Streams/participating" stream for every stream that was joined or visited, respectively.
 	 * @method join
@@ -2598,7 +2598,9 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Subscribe to one or more streams.
+	 * Subscribe to one or more streams, to start receiving notifications.
+	 * Posts "Streams/subscribe" message to the streams.
+	 * Also posts "Streams/subscribed" messages to user's "Streams/participating" stream.
 	 *	If options are not given check the subscription templates:
 	 *	1. generic publisher id and generic user
 	 *	2. exact publisher id and generic user
@@ -2625,9 +2627,13 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.rule.filter] optionally set a filter for the rules to add
 	 * @param {boolean} [$options.skipRules] if true, do not attempt to create rules for new subscriptions
 	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
-	 * @return {array} The array of subscriptions
+	 * @return {array} An array of Streams_Participant rows from the database.
 	 */
-	static function subscribe($asUserId, $publisherId, $streams, $options = array())
+	static function subscribe(
+		$asUserId, 
+		$publisherId, 
+		$streams, 
+		$options = array())
 	{
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
@@ -2637,7 +2643,7 @@ abstract class Streams extends Base_Streams
 		if (empty($options['skipAccess'])) {
 			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
-		Streams::join($asUserId, $publisherId, $streams2, array(
+		$participants = Streams::join($asUserId, $publisherId, $streams2, array(
 			'subscribed' => true,
 			'noVisit' => true,
 			'skipAccess' => Q::ifset($options, 'skipAccess', false)
@@ -2804,15 +2810,14 @@ abstract class Streams extends Base_Streams
 				"rule" => Q::json_encode($rules[$sn])
 			));
 		}
-
-		Streams_Message::postMessages($asUserId, $messages, true);
-		Streams_Message::postMessages($asUserId, array(
-			$asUserId => array('Streams/participating' => $pMessages)
-		), true);
+		
+		return $participants;
 	}
 	
 	/**
-	 * Unsubscribe from one or more streams.
+	 * Unsubscribe from one or more streams, to stop receiving notifications.
+	 * Posts "Streams/unsubscribe" message to the streams.
+	 * Also posts "Streams/unsubscribed" messages to user's "Streams/participating" stream.
 	 * Does not change the actual subscription, but only the participant row.
 	 * (When subscribing again, the existing subscription will be used.)
 	 * @method unsubscribe
@@ -2823,8 +2828,13 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.leave] set to true to also leave the streams
 	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
+	 * @return {array} Returns an array of Streams_Participant rows, if any were in the database.
 	 */
-	static function unsubscribe($asUserId, $publisherId, $streams, $options = array())
+	static function unsubscribe(
+		$asUserId, 
+		$publisherId, 
+		$streams, 
+		$options = array())
 	{
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
@@ -2881,6 +2891,7 @@ abstract class Streams extends Base_Streams
 		Streams_Message::postMessages($asUserId, array(
 			$asUserId => array('Streams/participating' => $pMessages)
 		), true);
+		return $participants;
 	}
 
 	private static function _getStreams($asUserId, $publisherId, $streams)
