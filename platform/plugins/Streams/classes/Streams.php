@@ -2369,7 +2369,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
-	 * @param $options=array() {array} An associative array of options.
+	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
 	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
 	 * @param {array} [$options.extra] Any extra information for the message
@@ -2516,7 +2516,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
-	 * @param $options=array() {array} An associative array of options.
+	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @return {array} Returns an array of (streamName => x) pairs, where x is either a Streams_Participant row corresponding to an updated participant, or an array corresponding to a newly inserted participant.
 	 */
