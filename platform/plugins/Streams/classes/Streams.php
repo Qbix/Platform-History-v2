@@ -2370,7 +2370,6 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
 	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
 	 * @param {array} [$options.extra] Any extra information for the message
-	 * @param {string} [$options.userId] The user who is joining the stream. Defaults to the logged-in user.
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @return {array} Returns an array of (streamName => x) pairs, where x is either a Streams_Participant row corresponding to an updated participant, or an array corresponding to a newly inserted participant.
@@ -2381,40 +2380,13 @@ abstract class Streams extends Base_Streams
 		$streams,
 		$options = array())
 	{
-		if (!isset($asUserId)) {
-			$asUserId = Users::loggedInUser(true)->id;
-		}
-		Users::fetch($asUserId, true);
-		$names = array();
-		$streams2 = array();
-		foreach ($streams as $s) {
-			if (is_string($s)) {
-				$names[] = $s;
-			} else if ($s instanceof Streams_Stream) {
-				$streams2 = $s;
-			} else {
-				throw new Q_Exception_Wrong(array(
-					'field' => 'stream',
-					'type' => 'Streams_Stream or string'
-				));
-			}
-		}
-		$rows = Streams::fetch($asUserId, $publisherId, $names, array('refetch' => true));
-		$streams2 = array_merge($streams2, $rows);
+		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {
 			$streamNames[] = $s->name;
 		}
 		if (empty($options['skipAccess'])) {
-			foreach ($streamNames as $sn) {
-				$stream = $streams2[$sn];
-				if (!$stream->testWriteLevel('join')) {
-					if (!$stream->testReadLevel('see')) {
-						throw new Streams_Exception_NoSuchStream();
-					}
-					throw new Users_Exception_NotAuthorized();
-				}
-			}
+			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
 		$participants = Streams_Participant::select('*')
 		->where(array(
@@ -2465,13 +2437,15 @@ abstract class Streams extends Base_Streams
 			$results[$sn] = $participant;
 		}
 		$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
-		Streams_Participant::update()
-			->set(compact('subscribed'))
-			->where(array(
-				'publisherId' => $publisherId,
-				'streamName' => $streamNamesUpdate,
-				'userId' => $asUserId
-			))->execute();
+		if ($streamNamesUpdate) {
+			Streams_Participant::update()
+				->set(compact('subscribed'))
+				->where(array(
+					'publisherId' => $publisherId,
+					'streamName' => $streamNamesUpdate,
+					'userId' => $asUserId
+				))->execute();
+		}
 		if ($streamNamesMissing) {
 			$rows = array();
 			foreach ($streamNamesMissing as $sn) {
@@ -2518,7 +2492,7 @@ abstract class Streams extends Base_Streams
 		), true);
 		return array($results, $rows);
 	}
-	
+
 	/**
 	 * Subscribe to one or more streams.
 	 *	If options are not given check the subscription templates:
@@ -2532,20 +2506,243 @@ abstract class Streams extends Base_Streams
 	 * subscription - change type(s) or modify notifications
 	 * @method subscribe
 	 * @static
-	 * @param $options=array() {array}
-	 * @param {array} [$options.types] array of message types, if this is empty then subscribes to all types
-	 * @param {integer} [$options.notifications=0] limit number of notifications, 0 means no limit
+	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
+	 * @param {string} $publisherId The id of the user publishing all the streams
+	 * @param {array} $streams An array of Streams_Stream objects or stream names
+	 * @param {array} [$options=array()]
+	 * @param {array} [$options.filter] optional array with two keys
+	 * @param {array} [$options.filter.types] array of message types, if this is empty then subscribes to all types
+	 * @param {array} [$options.filter.notifications=0] limit number of notifications, 0 means no limit
 	 * @param {datetime} [$options.untilTime=null] time limit, if any for subscription
-	 * @param {datetime} [$options.readyTime] time from which user is ready to receive notifications again
-	 * @param {string} [$options.userId] the user subscribing to the stream. Defaults to the logged in user.
-	 * @param {array} [$options.deliver=array('to'=>'default')] under "to" key, named the field under Streams/rules/deliver config, which will contain the names of destinations, which can include "email", "mobile", "email+pending", "mobile+pending"
-	 * @param {boolean} [$options.skipRules]  if true, do not attempt to create rules
-	 * @param {boolean} [$options.skipAccess]  if true, skip access check for whether user can subscribe
-	 * @return {Streams_Subscription|false}
+	 * @param {array} [$options.rule=array()] optionally override the rule for new subscriptions
+	 * @param {array} [$options.rule.deliver=array('to'=>'default')] under "to" key,
+	 *   named the field under Streams/rules/deliver config, which will contain the names of destinations,
+	 *   which can include "email", "mobile", "email+pending", "mobile+pending"
+	 * @param {datetime} [$options.rule.readyTime] time from which user is ready to receive notifications again
+	 * @param {array} [$options.rule.filter] optionally set a filter for the rules to add
+	 * @param {boolean} [$options.skipRules] if true, do not attempt to create rules for new subscriptions
+	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
+	 * @return {array} The array of subscriptions
 	 */
-	static function subscribe($asUserId, $streams, $options = array())
+	static function subscribe($asUserId, $publisherId, $streams, $options = array())
 	{
-		
+		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
+		$streamNames = array();
+		foreach ($streams2 as $s) {
+			$streamNames[] = $s->name;
+		}
+		if (empty($options['skipAccess'])) {
+			self::_accessExceptions($streams2, $streamNames, 'join');
+		}
+		Streams::join($asUserId, $publisherId, $streams2, array(
+			'subscribed' => true,
+			'noVisit' => true,
+			'skipAccess' => Q::ifset($options, 'skipAccess', false)
+		));
+		$shouldUpdate = false;
+		if (isset($options['filter'])) {
+			$filter = Q::json_encode($options['filter']);
+			$shouldUpdate = true;
+		}
+		$db = Streams_Subscription::db();
+		if (isset($options['untilTime'])) {
+			$untilTime = $db->toDateTime($options['untilTime']);
+			$shouldUpdate = true;
+		}
+		$subscriptions = array();
+		$rows = Streams_Subscription::select('*')
+		->where(array(
+			'publisherId' => $publisherId,
+			'streamName' => $streamNames,
+			'ofUserId' => $asUserId
+		))->fetchAll(PDO::FETCH_ASSOC);
+		foreach ($rows as $row) {
+			$sn = $row['streamName'];
+			$subscriptions[$sn] = $row;
+		}
+		$messages = array();
+		$pMessages = array();
+		$streamNamesMissing = array();
+		$streamNamesUpdate = array();
+		foreach ($streamNames as $sn) {
+			$messages[$publisherId][$sn] = array('type' => 'Streams/subscribe');
+			$pMessages[] = array(
+				'type' => 'Streams/subscribed',
+				'instructions' => Q::json_encode(array(
+					'publisherId' => $publisherId,
+					'streamName' => $sn
+				))
+			);
+			if (empty($subscriptions[$sn])) {
+				$streamNamesMissing[] = $sn;
+				continue;
+			}
+			if ($shouldUpdate) {
+				$streamNamesUpdate[] = $sn;
+			}
+		}
+		if ($streamNamesUpdate) {
+			Streams_Subscription::update()
+			->set(compact('filter', 'untilTime'))
+			->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $streamNamesUpdate,
+				'ofUserId' => $asUserId
+			))->execute();
+		}
+		$rules = array();
+		if ($streamNamesMissing) {
+			$types = array();
+			foreach ($streamNamesMissing as $sn) {
+				$stream = $streams2[$sn];
+				$types[$stream->type][] = $sn;
+			}
+			$subscriptionRows = array();
+			$ruleRows = array();
+			foreach ($types as $type => $sns) {
+				// insert subscriptions
+				if (!isset($filter) or !isset($untilTime)) {
+					$templates = Streams_Subscription::select('*')
+						->where(array(
+							'publisherId' => array('', $publisherId),
+							'streamName' => $type.'/',
+							'ofUserId' => array('', $asUserId)
+						))->fetchAll(PDO::FETCH_ASSOC);
+					$selected = null;
+					foreach ($templates as $template) {
+						if (!$selected) {
+							$selected = $template;
+						} else if ($selected['publisherId'] == '' and $template['publisherId'] !== '') {
+							$selected = $template;
+						} else if ($selected['userId'] == '' and $template['userId'] !== '') {
+							$selected = $template;
+						}
+					}
+				}
+				if (!isset($filter)) {
+					$filter = $selected ? $selected['filter'] : '{"types":[],"notifications":0}';
+				}
+				if (!isset($untilTime)) {
+					$untilTime = ($selected and $selected['duration'] > 0)
+						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL {$selected[duration]} SECOND")
+						: null;
+				}
+				foreach ($sns as $sn) {
+					$subscriptions[$sn] = $subscriptionRows[] = array(
+						'publisherId' => $publisherId,
+						'streamName' => $sn,
+						'ofUserId' => $asUserId,
+						'untilTime' => $untilTime,
+						'filter' => $filter
+					);
+				}
+
+				if (!empty($options['skipRules'])) {
+					continue;
+				}
+
+				// insert up to one rule per subscription
+				if (isset($options['rule'])) {
+					$rule = $options['rule'];
+					if (isset($rule['readyTime'])) {
+						$rule['readyTime'] = $db->toDateTime($rule['readyTime']);
+					}
+					if (isset($rule['filter']) and is_array($rule['filter'])) {
+						$rule['filter'] = Q::json_encode($rule['filter']);
+					}
+					if (isset($rule['deliver']) and is_array($rule['deliver'])) {
+						$rule['deliver'] = Q::json_encode($rule['deliver']);
+					}
+				}
+				if (!isset($rule)) {
+					$templates = Streams_Rule::select('*')
+						->where(array(
+							'ofUserId' => array('', $asUserId),
+							'publisherId' => array('', $publisherId),
+							'streamName' => $type.'/',
+							'ordinal' => 1
+						))->fetchAll(PDO::FETCH_ASSOC);
+					$selected = null;
+					foreach ($templates as $template) {
+						if (!$selected) {
+							$selected = $template;
+						} else if ($selected['userId'] == '' and $template['userId'] !== '') {
+							$selected = $template;
+						} else if ($selected['publisherId'] == '' and $template['publisherId'] !== '') {
+							$selected = $template;
+						}
+					}
+				}
+				foreach ($sns as $sn) {
+					$row = isset($rule) ? $rule : $selected;
+					$row['ofUserId'] = $asUserId;
+					$row['publisherId'] = $publisherId;
+					$row['streamName'] = $sn;
+					$row['ordinal'] = 1;
+					$rules[$sn] = $ruleRows[] = $row;
+					$messages[$publisherId][$sn]['instructions'] = Q::json_encode(array(
+						'rule' => $row
+					));
+				}
+			}
+			Streams_Subscription::insertManyAndExecute($subscriptionRows);
+			Streams_Rule::insertManyAndExecute($ruleRows);
+		}
+
+		foreach ($streamNames as $sn) {
+			$subscription = $subscriptions[$sn];
+			$stream = $streams2[$sn];
+			// skip error testing for rule save BUT inform node.
+			// Node can notify user to check the rules
+			Q_Utils::sendToNode(array(
+				"Q/method" => "Streams/Stream/subscribe",
+				"subscription" => Q::json_encode($subscription),
+				"stream" => Q::json_encode($stream->toArray()),
+				"rule" => Q::json_encode($rules[$sn])
+			));
+		}
+
+		Streams_Message::postMessages($asUserId, $messages, true);
+		Streams_Message::postMessages($asUserId, array(
+			$asUserId => array('Streams/participating' => $pMessages)
+		), true);
+	}
+
+	private static function _getStreams($asUserId, $publisherId, $streams)
+	{
+		if (!isset($asUserId)) {
+			$asUserId = Users::loggedInUser(true)->id;
+		}
+		Users::fetch($asUserId, true);
+		$names = array();
+		$streams2 = array();
+		foreach ($streams as $s) {
+			if (is_string($s)) {
+				$names[] = $s;
+			} else if ($s instanceof Streams_Stream) {
+				$streams2[$s->name] = $s;
+			} else {
+				throw new Q_Exception_Wrong(array(
+					'field' => 'stream',
+					'type' => 'Streams_Stream or string'
+				));
+			}
+		}
+		$rows = Streams::fetch($asUserId, $publisherId, $names, array('refetch' => true));
+		return array_merge($streams2, $rows);
+	}
+
+	private static function _accessExceptions($streams2, $streamNames, $writeLevel)
+	{
+		foreach ($streamNames as $sn) {
+			$stream = $streams2[$sn];
+			if (!$stream->testWriteLevel($writeLevel)) {
+				if (!$stream->testReadLevel('see')) {
+					throw new Streams_Exception_NoSuchStream();
+				}
+				throw new Users_Exception_NotAuthorized();
+			}
+		}
 	}
 	
 	/**

@@ -150,6 +150,8 @@ class Streams_Stream extends Base_Streams_Stream
 		//	1. generic stream name and exact publisher id
 		//	2. exact stream name and generic publisher
 		//	3. generic stream name and generic publisher
+		// Note: Only -1, 1 and 3 are possible values stored in $type
+		// since templates are always selected ending in "/"
 		foreach ($templates as $t) {
 			$pos = strlen($t->$name_field) - 1;
 			$name = $t->$name_field;
@@ -865,13 +867,13 @@ class Streams_Stream extends Base_Streams_Stream
 	 * Using subscribe if subscription is already active will modify existing
 	 * subscription - change type(s) or modify notifications
 	 * @method subscribe
-	 * @param $options=array() {array}
+	 * @param {array} [$options=array()]
 	 * @param {array} [$options.types] array of message types, if this is empty then subscribes to all types
 	 * @param {integer} [$options.notifications=0] limit number of notifications, 0 means no limit
 	 * @param {datetime} [$options.untilTime=null] time limit, if any for subscription
 	 * @param {datetime} [$options.readyTime] time from which user is ready to receive notifications again
 	 * @param {string} [$options.userId] the user subscribing to the stream. Defaults to the logged in user.
-	 * @param {array} [$options.deliver=array('to'=>'default')] under "to" key, named the field under Streams/rules/deliver config, which will contain the names of destinations, which can include "email", "mobile", "email+pending", "mobile+pending"
+	 * @param {array} [$options.deliver=array('to'=>'default')] under "to" key, named the field under Streams/rules/deliver config, which will contain the names of destinations, which can include "email", "mobile", "email+pending", "mobile+pending" or "default"
 	 * @param {boolean} [$options.skipRules]  if true, do not attempt to create rules
 	 * @param {boolean} [$options.skipAccess]  if true, skip access check for whether user can subscribe
 	 * @return {Streams_Subscription|false}
@@ -929,14 +931,16 @@ class Streams_Stream extends Base_Streams_Stream
 		if (isset($options['untilTime'])) {
 			$s->untilTime = $options['untilTime'];
 		} else if ($type > 0 and $template and $template->duration > 0) {
-			$s->untilTime = date("c", time() + $template->duration);
+			$d = $template->duration;
+			$s->untilTime = new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $d SECOND");
 		}
 		if (!$s->save(true)) {
 			return false;
 		}
 
 		if (empty($options['skipRules'])) {
-			// Now let's handle rules
+			// Now let's handle rules.
+			// We might have a template for the subscription, consisting of up to one rule.
 			$type2 = null;
 			$template = $stream->getSubscriptionTemplate('Streams_Rule', $userId, $type2);
 
@@ -946,6 +950,7 @@ class Streams_Stream extends Base_Streams_Stream
 				$rule->ofUserId = $userId;
 				$rule->publisherId = $stream->publisherId;
 				$rule->streamName = $stream->name;
+				$rule->ordinal = 1;
 				if (empty($template) and $rule->retrieve()) {
 					$ruleSuccess = false;
 				} else {
@@ -958,12 +963,9 @@ class Streams_Stream extends Base_Streams_Stream
 					$rule->relevance = !empty($template->relevance)
 						? $template->relevance
 						: 1;
-			
 					$rule->deliver = !empty($template->deliver)
 						? $template->deliver
-						: Q::json_encode(Q::ifset($options, 'deliver', 
-							array('to' => 'default')
-						));
+						: Q::json_encode(Q::ifset($options, 'deliver', array('to' => 'default')));
 					$ruleSuccess = !!$rule->save();
 				}
 			}
@@ -1655,7 +1657,6 @@ class Streams_Stream extends Base_Streams_Stream
 		$this->calculateAccess($asUserId);
 		if ($this->testReadLevel('content')) {
 			$result = $this->toArray();
-			$result['icon'] = $this->iconUrl();
 		} else {
 			if (!$this->testReadLevel('see')) {
 				return array();
@@ -1666,7 +1667,6 @@ class Streams_Stream extends Base_Streams_Stream
 				'name',
 				'type',
 				'title',
-				'icon',
 				'insertedTime',
 				'updatedTime'
 			);
@@ -1676,11 +1676,11 @@ class Streams_Stream extends Base_Streams_Stream
 				));
 			}
 			foreach ($fields as $field) {
-				$result[$field] = ($field === 'icon')
-					? $this->iconUrl()
-					: $this->$field;
+				$result[$field] = $this->$field;
 			}
 		}
+		$result['icon'] = $this->iconUrl();
+		$result['url'] = $this->url();
 		$classes = Streams::getExtendClasses($this->type);
 		$fieldNames = array();
 		foreach ($classes as $k => $v) {

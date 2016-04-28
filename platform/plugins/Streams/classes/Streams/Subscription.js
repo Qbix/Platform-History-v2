@@ -75,7 +75,7 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 			streamName: streamName
 		}).execute(function(err, rules) {
 			if (err) return callback(err);
-			var waitFor = rules.map(function(r){ return r.fields.ordinal; });
+			var waitFor = rules.map(r => function(r){ return r.fields.ordinal; });
 			var p = new Q.Pipe(waitFor, function (params) {
 				var deliveries = [], ordinal, param;
 				for (ordinal in params) {
@@ -118,7 +118,7 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 							// now check notifications since timeOnline
 							Streams.Notification.SELECT('COUNT(1) as count').where({
 								userId: userId,
-								"insertedTime >": Q.date('c', timeOnline),
+								"insertedTime >": Db.Mysql.toDateTime(timeOnline.getTime()),
 								publisherId: publisherId,
 								streamName: streamName,
 								type: msgType

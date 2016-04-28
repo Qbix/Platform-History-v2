@@ -137,6 +137,21 @@ class Streams_Message extends Base_Streams_Message
 				}
 			}
 		}
+
+		// Check if there are any messages to post
+		$atLeastOne = false;
+		foreach ($messages as $publisherId => $arr) {
+			foreach ($arr as $streamName => $m) {
+				if (!$m) {
+					continue;
+				}
+				$atLeastOne = true;
+				break 2;
+			}
+		}
+		if (!$atLeastOne) {
+			return array(array(), array());
+		}
 		
 		// Start posting messages, publisher by publisher
 		$eventParams = array();
@@ -164,6 +179,9 @@ class Streams_Message extends Base_Streams_Message
 				}
 				$p = &$posted[$publisherId][$streamName];
 				$p = array();
+				if (!$m) {
+					continue;
+				}
 				$messages3 = is_array($m) && !Q::isAssociative($m) ? $m : array($m);
 				$count = count($messages3);
 				$i = 0;

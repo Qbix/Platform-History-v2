@@ -957,8 +957,9 @@ Sp.subscribe = function(options, callback) {
 					} else {
 						if (template && template.template_type > 0
 						&& template.fields.duration > 0) {
-							s.fields.untilTime = Q.date(
-								'c', Date.now() + template.fields.duration
+							var d = template.fields.duration;
+							s.fields.untilTime = new Db.Expression(
+								'CURRENT_TIMESTAMP + INTERVAL ' + d + ' SECOND'
 							);
 						}
 					}
