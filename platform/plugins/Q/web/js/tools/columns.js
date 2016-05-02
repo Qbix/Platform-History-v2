@@ -302,13 +302,17 @@ Q.Tool.define("Q/columns", function(options) {
 			$(columnSlot).activate(p.fill('activated2'));
 			p.add(waitFor, function () {
 				var data = tool.data(index);
-				Q.handle(callback, tool, [options, index, div, data]);
-				state.onOpen.handle.call(tool, options, index, div, data);
-				Q.handle(options.onOpen, tool, [options, index, div, data]);
-				setTimeout(function () {
+				if ($(div).closest('html').length) {
+					Q.handle(callback, tool, [options, index, div, data]);
+					state.onOpen.handle.call(tool, options, index, div, data);
+					Q.handle(options.onOpen, tool, [options, index, div, data]);
+					setTimeout(function () {
+						$mask.remove();
+						Q.handle(options.afterDelay, tool, [options, index, div, data]);
+					}, o.delay.duration);
+				} else {
 					$mask.remove();
-					Q.handle(options.afterDelay, tool, [options, index, div, data]);
-				}, o.delay.duration);
+				}
 			}).run();
 			
 			Q.each(['on', 'before'], function (k, prefix) {
