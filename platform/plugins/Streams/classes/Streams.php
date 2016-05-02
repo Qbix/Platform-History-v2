@@ -3026,7 +3026,7 @@ abstract class Streams extends Base_Streams
 				$names[] = $s;
 			} else if ($s instanceof Streams_Stream) {
 				$streams2[$s->name] = $s;
-			} else {
+			} else if (isset($s)) {
 				throw new Q_Exception_WrongType(array(
 					'field' => 'stream',
 					'type' => 'Streams_Stream or string'
@@ -3034,7 +3034,13 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		$rows = Streams::fetch($asUserId, $publisherId, $names, array('refetch' => true));
-		return array_merge($streams2, $rows);
+		$result = array_merge($streams2, $rows);
+		foreach ($result as $k => $v) {
+			if (!isset($v)) {
+				unset($result[$k]);
+			}
+		}
+		return $result;
 	}
 
 	private static function _accessExceptions($streams2, $streamNames, $writeLevel)
