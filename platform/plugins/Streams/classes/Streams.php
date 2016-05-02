@@ -2927,6 +2927,10 @@ abstract class Streams extends Base_Streams
 				"rule" => isset($rules[$sn]) ? Q::json_encode($rules[$sn]) : null
 			));
 		}
+		Streams_Message::postMessages($asUserId, $messages, true);
+		Streams_Message::postMessages($asUserId, array(
+			$asUserId => array('Streams/participating' => $pMessages)
+		), true);
 		
 		return $participants;
 	}
