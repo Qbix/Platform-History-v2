@@ -86,7 +86,9 @@ function Streams_stream_post($params = array())
 	);
 	$fields = Q::take($req, $allowedFields);
 	$stream = Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
-	$messageTo = isset($result['messageTo']) ? $result['messageTo']->exportArray() : false;
+	$messageTo = isset($result['messagesTo'])
+		? reset($result['messagesTo'])->exportArray()
+		: false;
 	Q_Response::setSlot('messageTo', $messageTo);
 	
 	// Process any icon that was posted

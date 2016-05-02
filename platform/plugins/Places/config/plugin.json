@@ -42,6 +42,11 @@
 			"Places/timeslot": {
 				"defaults": {
 					"title": "Nearby Timeslot"
+				},
+				"relatedTo": {
+					"*": {
+						"description": "New {{fromDisplayType}} scheduled in timeslot"
+					}
 				}
 			},
 			"Places/interest": {
