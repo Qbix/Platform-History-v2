@@ -1890,6 +1890,7 @@ abstract class Streams extends Base_Streams
 			
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
+			$weight = $weights2[$category->name];
 			
 			$fromUrl = $stream->url();
 			$fromIcon = $stream->icon;
