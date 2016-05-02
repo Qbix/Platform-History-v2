@@ -3027,7 +3027,7 @@ abstract class Streams extends Base_Streams
 			} else if ($s instanceof Streams_Stream) {
 				$streams2[$s->name] = $s;
 			} else {
-				throw new Q_Exception_Wrong(array(
+				throw new Q_Exception_WrongType(array(
 					'field' => 'stream',
 					'type' => 'Streams_Stream or string'
 				));
