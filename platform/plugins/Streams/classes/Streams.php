@@ -852,10 +852,8 @@ abstract class Streams extends Base_Streams
 	{
 		$skipAccess = Q::ifset($fields, 'skipAccess', false);
 		if (!isset($asUserId)) {
-			$asUserId = Users::loggedInUser();
-			if (!$asUserId) $asUserId = "";
-		}
-		if ($asUserId instanceof Users_User) {
+			$asUserId = Users::loggedInUser(true)->id;
+		} else if ($asUserId instanceof Users_User) {
 			$asUserId = $asUserId->id;
 		}
 		if ($publisherId instanceof Users_User) {
@@ -1622,7 +1620,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just relates the stream to the category
 	 */
 	private static function getRelations(
-		$asUserId,
+		&$asUserId,
 		$toPublisherId,
 		&$toStreamName,
 		$type,
@@ -1633,17 +1631,18 @@ abstract class Streams extends Base_Streams
 		&$categories,
 		&$streams,
 		&$arrayField,
-		$options = array())
+		&$options = array())
 	{
 		if (!isset($asUserId)) {
-			$asUserId = Users::loggedInUser();
-			if (!$asUserId) $asUserId = "";
-		}
-		if ($asUserId instanceof Users_User) {
+			$asUserId = Users::loggedInUser(true)->id;
+		} else if ($asUserId instanceof Users_User) {
 			$asUserId = $asUserId->id;
 		}
 		if ($toPublisherId instanceof Users_User) {
 			$toPublisherId = $toPublisherId->id;
+		}
+		if (!isset($options)) {
+			$options = array();
 		}
 		
 		if (is_array($toStreamName)) {
@@ -1764,21 +1763,7 @@ abstract class Streams extends Base_Streams
 		$fromPublisherId,
 		$fromStreamName,
 		$options = array())
-	{
-		if (!isset($asUserId)) {
-			$asUserId = Users::loggedInUser();
-			if (!$asUserId) $asUserId = "";
-		}
-		if ($asUserId instanceof Users_User) {
-			$asUserId = $asUserId->id;
-		}
-		if ($toPublisherId instanceof Users_User) {
-			$toPublisherId = $toPublisherId->id;
-		}
-		if (!isset($options)) {
-			$options = array();
-		}
-		
+	{		
 		self::getRelations(
 			$asUserId,
 			$toPublisherId,
@@ -2939,7 +2924,7 @@ abstract class Streams extends Base_Streams
 				"Q/method" => "Streams/Stream/subscribe",
 				"subscription" => Q::json_encode($subscription),
 				"stream" => Q::json_encode($stream->toArray()),
-				"rule" => Q::json_encode($rules[$sn])
+				"rule" => isset($rules[$sn]) ? Q::json_encode($rules[$sn]) : null
 			));
 		}
 		
@@ -3026,10 +3011,12 @@ abstract class Streams extends Base_Streams
 		return $participants;
 	}
 
-	private static function _getStreams($asUserId, $publisherId, $streams)
+	private static function _getStreams(&$asUserId, $publisherId, $streams)
 	{
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser(true)->id;
+		} else if ($asUserId instanceof Users_User) {
+			$asUserId = $asUserId->id;
 		}
 		Users::fetch($asUserId, true);
 		$names = array();

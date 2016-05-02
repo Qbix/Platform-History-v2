@@ -128,7 +128,14 @@ class Places_Nearby
 		$publisherId = null,
 		$options = array())
 	{
-		return self::subscribersDo($latitude, $longitude, $miles, $publisherId, $options, 'subscribe');
+		$user = Users::loggedInUser(true);
+		if (!isset($publisherId)) {
+			$publisherId = Users::communityId();
+		}
+		$options['forSubscribers'] = true;
+		$options['miles'] = $miles;
+		$streams = Places_Nearby::streams($publisherId, $latitude, $longitude, $options);
+		return Streams::subscribe($user->id, $publisherId, $streams, $options);
 	}
 	
 	/**
@@ -153,64 +160,14 @@ class Places_Nearby
 		$publisherId = null,
 		$options = array())
 	{
-		return self::subscribersDo($latitude, $longitude, $miles, $publisherId, $options, 'unsubscribe');
-	}
-	
-	protected static function subscribersDo(
-		$latitude, 
-		$longitude, 
-		$miles,
-		$publisherId = null,
-		$options = array(),
-		$action = null)
-	{
 		$user = Users::loggedInUser(true);
-		$nearby = Places_Nearby::forSubscribers($latitude, $longitude, $miles);
-		if (!$nearby) {
-			return array();
-		}
 		if (!isset($publisherId)) {
 			$publisherId = Users::communityId();
 		}
-		if ($transform = Q::ifset($options, 'transform', null)) {
-			$create = Q::ifset($options, 'create', null);
-			$transformed = call_user_func($transform, $nearby, $options);
-		} else {
-			$transformed = array_keys($nearby);
-			$createMethod = ($action === 'subscribe')
-				? array('Places_Nearby', '_create')
-				: null;
-			$create = Q::ifset($options, 'create', $createMethod);
-		}
-		$streams = Streams::fetch(null, $publisherId, $transformed);
-		$participants = Streams_Participant::select('*')
-			->where(array(
-				'publisherId' => $publisherId,
-				'streamName' => $transformed,
-				'userId' => $user->id
-			))->ignoreCache()->fetchDbRows(null, null, 'streamName');
-		foreach ($nearby as $name => $info) {
-			$name = isset($transformed[$name]) ? $transformed[$name] : $name;
-			if (empty($streams[$name])) {
-				if (empty($create)) {
-					continue;
-				}
-				$params = compact(
-					'publisherId', 'latitude', 'longitude',
-					'transformed', 'miles',
-					'nearby', 'name', 'info', 'streams'
-				);
-				$streams[$name] = call_user_func($create, $params, $options);
-			}
-			$stream = $streams[$name];
-			$subscribed = ('yes' === Q::ifset($participants, $name, 'subscribed', 'no'));
-			if ($action === 'subscribe' and !$subscribed) {
-				$stream->subscribe($options);
-			} else if ($action === 'unsubscribe' and $subscribed) {
-				$stream->unsubscribe($options);
-			}
-		}
-		return $streams;
+		$options['forSubscribers'] = true;
+		$options['miles'] = $miles;
+		$streams = Places_Nearby::streams($publisherId, $latitude, $longitude, $options);
+		return Streams::unsubscribe($user->id, $publisherId, $streams, $options);
 	}
 	
 	/**
@@ -241,7 +198,8 @@ class Places_Nearby
 	 * @param {double} $latitude The latitude of the coordinates near which to relate
 	 * @param {double} $longitude The longitude of the coordinates near which to relate
 	 * @param {array} $options The options to pass to the Streams::relate and Streams::create functions. Also can contain the following options:
-	 * @param {array} [$options.miles] Override the default set of distances found in the config under Places/nearby/miles
+	 * @param {boolean} [$options.forSubscribers] Set to true to return the streams that are relevant to subscribers instead of publishers, i.e. users who want to know when something relevant happens, rather than users who want to relate the streams they publish to categories.
+	 * @param {array|double} [$options.miles] Override the default array of distances found in the config under Places/nearby/miles. If options.forSubscribers is true, however, this should be one of the entries from the array in Places/nearby/miles config.
 	 * @param {callable} [$options.create] If set, this callback will be used to create streams when they don't already exist. It receives the $options array and should return a Streams_Stream object. If this option is set to null, new streams won't be created.
 	 * @param {callable} [$options.transform="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forPublishers, and this $options array, and returns the array of ($originalStreamName => $newStreamName) pairs.
 	 * @param {array} [$streamNames=null] Optional reference to fill with the stream names
@@ -255,7 +213,9 @@ class Places_Nearby
 		&$streamNames = null)
 	{
 		$miles = Q::ifset($options, 'miles', null);
-		$nearby = Places_Nearby::forPublishers($latitude, $longitude, $miles);
+		$nearby = empty($options['forSubscribers'])
+			? Places_Nearby::forPublishers($latitude, $longitude, $miles)
+			: Places_Nearby::forSubscribers($latitude, $longitude, $miles);
 		if (!isset($fromPublisherId)) {
 			$fromPublisherId = Users::communityId();
 		}
@@ -279,7 +239,6 @@ class Places_Nearby
 				$params = compact(
 					'publisherId', 'latitude', 'longitude',
 					'fromPublisherId', 'fromStreamName',
-					'relationType',
 					'transformed', 'miles',
 					'nearby', 'name', 'info', 'streams'
 				);
