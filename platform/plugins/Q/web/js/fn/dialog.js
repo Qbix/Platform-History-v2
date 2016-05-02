@@ -335,7 +335,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						});
 					});
 				} else {
-					Q.activate(this, {}, function () {
+					Q.activate($this[0], {}, function () {
 						Q.handle(o.onActivate, $this, [$this]);
 					});
 				}
