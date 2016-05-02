@@ -231,7 +231,7 @@
 			}
 		},
 		"categorize": {
-			"relationTypes": ["Streams/interest"],
+			"relationTypes": ["Streams/interests"],
 			"streamTypes": ["Streams/category"]
 		},
 		"invites": {
