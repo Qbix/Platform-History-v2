@@ -76,7 +76,7 @@ function Streams_interest_post()
 		$user->id,
 		$user->id,
 		'Streams/user/interests',
-		'Streams/interest',
+		'Streams/interests',
 		$publisherId,
 		$name,
 		array('weight' => '+1')

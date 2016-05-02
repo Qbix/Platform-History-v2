@@ -3,43 +3,41 @@
 class Places_Timeslot
 {
 	/**
-	 * Call this function to relate a stream to category streams for things happening
+	 * Fetch (and create, if necessary) category streams for things happening
 	 * around the given location, during a particular hour.
-	 * @method relateTo
+	 * @method streams
 	 * @static
 	 * @param {string} $publisherId The publisherId of the category streams
 	 * @param {double} $latitude The latitude of the coordinates near which to relate
 	 * @param {double} $longitude The longitude of the coordinates near which to relate
 	 * @param {double} $timestamp Timestamp the stream "takes place", used to determine the hour
-	 * @param {string} $fromPublisherId The publisherId of the stream to relate
-	 * @param {string} $fromStreamName The name of the stream to relate
 	 * @param {string} $relationType The type of the relation to add
 	 * @param {array} $options The options to pass to the Streams::relate and Streams::create functions. Also can contain the following options:
 	 * @param {array} [$options.miles] Override the default set of distances found in the config under Places/nearby/miles
+	 * @param {callable} [$options.create] If set, this callback will be used to create streams when they don't already exist. It receives the $options array and should return a Streams_Stream object. If this option is set to null, new streams won't be created.
+	 * @param {callable} [$options.transform="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forPublishers, and this $options array, and returns the array of ($originalStreamName => $newStreamName) pairs.
+	 * @param {array} [$streamNames=null] Optional reference to fill with the stream names
 	 * @return {array|boolean} Returns the array of category streams
 	 */
-	static function relateTo(
+	static function streams(
 		$publisherId,
 		$latitude, 
 		$longitude, 
 		$timestamp,
-		$fromPublisherId,
-		$fromStreamName,
-		$options = array())
+		$options = array(),
+		&$streamNames = array())
 	{
 		$options = array_merge(array(
 			'transform' => array('Places_Timeslot', '_transform'),
 			'create' => array('Places_Timeslot', '_create'),
 			'timestamp' => $timestamp
 		), $options);
-		Places_Nearby::relateTo(
+		return Places_Nearby::streams(
 			$publisherId,
 			$latitude,
 			$longitude,
-			$fromPublisherId,
-			$fromStreamName,
-			Q::ifset($options, 'relationType', 'Places/timeslot'),
-			$options
+			$options,
+			$streamNames
 		);
 	}
 	

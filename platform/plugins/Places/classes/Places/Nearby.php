@@ -166,7 +166,9 @@ class Places_Nearby
 	{
 		$user = Users::loggedInUser(true);
 		$nearby = Places_Nearby::forSubscribers($latitude, $longitude, $miles);
-		if (!$nearby) { return array(); }
+		if (!$nearby) {
+			return array();
+		}
 		if (!isset($publisherId)) {
 			$publisherId = Users::communityId();
 		}
@@ -212,30 +214,45 @@ class Places_Nearby
 	}
 	
 	/**
-	 * Call this function to relate a stream to category streams for things happening
-	 * around the given location.
-	 * @method relateTo
+	 * Obtain the name of a "Places/nearby" stream
+	 * corresponding to the given parameters
+	 * @method streamName
+	 * @static
+	 * @param {double} $latitude The latitude of the coordinates near which to relate
+	 * @param {double} $longitude The longitude of the coordinates near which to relate
+	 * @param {double} $miles The radius, in miles
+	 */
+	static function streamName($latitude, $longitude, $miles)
+	{
+		if ($before = Q::event('Places/streamName',
+		compact('latitude', 'longitude', 'miles'), 'before')) {
+			return $before;
+		}
+		$geohash = Places_Geohash::encode($latitude, $longitude, 6);
+		return "Places/nearby/$geohash/$miles";
+	}
+
+	/**
+	 * Fetch (and create, if necessary) "Places/nearby" streams
+	 * corresponding ot the given parameters.
+	 * @method streams
 	 * @static
 	 * @param {string} $publisherId The publisherId of the category streams
 	 * @param {double} $latitude The latitude of the coordinates near which to relate
 	 * @param {double} $longitude The longitude of the coordinates near which to relate
-	 * @param {string} $fromPublisherId The publisherId of the stream to relate
-	 * @param {string} $fromStreamName The name of the stream to relate
-	 * @param {string} $relationType The type of the relation to add
 	 * @param {array} $options The options to pass to the Streams::relate and Streams::create functions. Also can contain the following options:
 	 * @param {array} [$options.miles] Override the default set of distances found in the config under Places/nearby/miles
-	 * @param {callable} [$options.create] If set, this callback will be used to create streams when they don't already exist. It receives the $options array and should return a Streams_Stream object. Otherwise the category stream is skipped.
-	 * @param {callable} [$options.transform="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forPublishers, and this $options array, and returns the array of ($originalName => $newCategoryName) pairs.
+	 * @param {callable} [$options.create] If set, this callback will be used to create streams when they don't already exist. It receives the $options array and should return a Streams_Stream object. If this option is set to null, new streams won't be created.
+	 * @param {callable} [$options.transform="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forPublishers, and this $options array, and returns the array of ($originalStreamName => $newStreamName) pairs.
+	 * @param {array} [$streamNames=null] Optional reference to fill with the stream names
 	 * @return {array|boolean} Returns the array of category streams
 	 */
-	static function relateTo(
+	static function streams(
 		$publisherId,
-		$latitude, 
-		$longitude, 
-		$fromPublisherId,
-		$fromStreamName,
-		$relationType,
-		$options = array())
+		$latitude,
+		$longitude,
+		$options = array(),
+		&$streamNames = null)
 	{
 		$miles = Q::ifset($options, 'miles', null);
 		$nearby = Places_Nearby::forPublishers($latitude, $longitude, $miles);
@@ -250,6 +267,9 @@ class Places_Nearby
 			$create = Q::ifset($options, 'create', array('Places_Nearby', '_create'));
 		}
 		$streams = Streams::fetch(null, $publisherId, $transformed);
+		if (!isset($streamNames)) {
+			$streamNames = array();
+		}
 		foreach ($nearby as $k => $info) {
 			$name = isset($transformed[$k]) ? $transformed[$k] : $k;
 			if (empty($streams[$name])) {
@@ -265,43 +285,16 @@ class Places_Nearby
 				);
 				$streams[$name] = call_user_func($create, $params, $options);
 			}
-			$stream = $streams[$name];
-			Streams::relate(
-				null,
-				$stream->publisherId,
-				$stream->name,
-				$relationType,
-				$fromPublisherId,
-				$fromStreamName,
-				$options
-			);
+			if (!in_array($name, $streamNames)) {
+				$streamNames[] = $name;
+			}
 		}
 		return $streams;
 	}
 	
 	/**
-	 * Obtain the name of a "Places/nearby" stream
-	 * corresponding to the given parameters
-	 * @method streamName
-	 * @static
-	 * @param {double} $latitude,
-	 * @param {double} $longitude
-	 * @param {double} $miles
-	 */
-	static function streamName($latitude, $longitude, $miles)
-	{
-		if ($before = Q::event('Places/streamName',
-		compact('latitude', 'longitude', 'miles'), 'before')) {
-			return $before;
-		}
-		$geohash = Places_Geohash::encode($latitude, $longitude, 6);
-		return "Places/nearby/$geohash/$miles";
-	}
-	
-	/**
-	 * Fetch a stream on which messages are posted relating to things happening
-	 * a given number of $miles around the given location.
-	 * If it doesn't exist, create it.
+	 * Fetch (and create, if necessary) stream on which messages are posted relating
+	 * to things happening a given number of $miles around the given location.
 	 * @method stream
 	 * @static
 	 * @param {double} $latitude The latitude of the coordinates to search around

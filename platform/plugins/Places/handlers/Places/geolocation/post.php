@@ -110,7 +110,7 @@ function Places_geolocation_post()
 	if (!$noChange) {
 		if ($shouldUnsubscribe or $shouldSubscribe) {
 			$myInterests = Streams_Category::getRelatedTo(
-				$user->id, 'Streams/user/interests', 'Streams/interest'
+				$user->id, 'Streams/user/interests', 'Streams/interests'
 			);
 			if (!isset($myInterests)) {
 				$myInterests = array();
@@ -119,6 +119,7 @@ function Places_geolocation_post()
 	
 		if ($shouldUnsubscribe) {
 			// TODO: implement mass unsubscribe
+
 			foreach ($myInterests as $weight => $info) {
 				Places_Nearby::unsubscribe(
 					$oldLatitude,
