@@ -75,7 +75,7 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 			streamName: streamName
 		}).execute(function(err, rules) {
 			if (err) return callback(err);
-			var waitFor = rules.map(r => function(r){ return r.fields.ordinal; });
+			var waitFor = rules.map(function(r){ return r.fields.ordinal; });
 			var p = new Q.Pipe(waitFor, function (params) {
 				var deliveries = [], ordinal, param;
 				for (ordinal in params) {
