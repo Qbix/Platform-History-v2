@@ -1691,7 +1691,7 @@ abstract class Streams extends Base_Streams
 		
 		// Recover from inconsistency:
 		// if one exists but not the other, delete both
-		$removeRT = $removeRF = array();
+		$removeRT = $removeRF = $fieldRT = $fieldRF = array();
 		foreach ($relatedTo as $sn => $rt) {
 			if (empty($relatedFrom[$sn])) {
 				$removeRT[] = $sn;
@@ -1704,7 +1704,7 @@ abstract class Streams extends Base_Streams
 				$fieldRF[] = $rf->$arrayField;
 			}
 		}
-		if ($removeRF) {
+		if ($removeRT) {
 			foreach ($removeRT as $sn) {
 				unset($relatedTo[$sn]);
 			}
@@ -1714,7 +1714,7 @@ abstract class Streams extends Base_Streams
 				->where($criteria2)
 				->execute();
 		}
-		if ($removeRT) {
+		if ($removeRF) {
 			foreach ($removeRF as $sn) {
 				unset($relatedFrom[$sn]);
 			}
