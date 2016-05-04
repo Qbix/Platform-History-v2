@@ -6933,7 +6933,6 @@ var _latestLoadUrlObjects = {};
 Q.loadUrl = function _Q_loadUrl(url, options) {
 	url = Q.url(url);
 	var o = Q.extend({}, Q.loadUrl.options, options);
-	Q.handle(o.onLoadStart, this, [url, o]);
 
 	var handler = o.handler;
 	var slotNames = o.slotNames;
