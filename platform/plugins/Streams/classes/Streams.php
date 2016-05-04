@@ -1875,7 +1875,10 @@ abstract class Streams extends Base_Streams
 			
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
-			$weight = $weights2[$category->name];
+			$weight = isset($options['weight']) and is_numeric($options['weight'])
+				? $options['weight']
+				: null;
+			$weight = Q::ifset($weights2, $category->name, $weight);
 			
 			$fromUrl = $stream->url();
 			$fromIcon = $stream->icon;
