@@ -3238,13 +3238,13 @@ abstract class Streams extends Base_Streams
 			if (is_string($label)) {
 				$label = explode("\t", $label);
 			}
-			Users_Label::addLabel($label, $publisherId, null, null, false);
+			Users_Label::addLabel($label, $publisherId, null, null, $asUserId);
 		}
 		if ($myLabel = Q::ifset($options, 'myLabel', null)) {
 			if (is_string($myLabel)) {
 				$myLabel = explode("\t", $myLabel);
 			}
-			Users_Label::addLabel($myLabel, $asUserId, null, null, false);
+			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId);
 		}
 		
 		foreach ($raw_userIds as $userId) {
@@ -3253,10 +3253,10 @@ abstract class Streams extends Base_Streams
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false);
 			if ($label) {
-				Users_Contact::addContact($publisherId, $label, $userId, null, false);
+				Users_Contact::addContact($publisherId, $label, $userId, null, $asUserId);
 			}
 			if ($myLabel) {
-				Users_Contact::addContact($publisherId, $label, $userId, null, false);
+				Users_Contact::addContact($asUserId, $label, $userId, null, $asUserId);
 			}
 		}
 

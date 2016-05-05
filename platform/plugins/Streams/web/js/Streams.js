@@ -530,12 +530,12 @@ Streams.batchFunction = function Streams_batchFunction(baseUrl, action) {
 	action = action || 'batch';
 	return Q.batcher.factory(Streams.batchFunction.functions, baseUrl,
 		"/action.php/Streams/"+action, "batch", "batch",
-		_Streams_batchFunction_preprocess[action]
+		_Streams_batchFunction_options[action]
 	);
 };
 Streams.batchFunction.functions = {};
 
-var _Streams_batchFunction_preprocess = {
+var _Streams_batchFunction_options = {
 	avatar: {
 		preprocess: function (args) {
 			var userIds = [], i;
