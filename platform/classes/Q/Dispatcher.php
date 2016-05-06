@@ -322,6 +322,9 @@ class Q_Dispatcher
 					$ob = new Q_OutputBuffer($handler);
 				}
 				
+				if (!empty($_GET['Q_ct'])) {
+					Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
+				}
 				Q_Response::sendCookieHeaders();
 
 				// Generate and render a response
@@ -344,18 +347,18 @@ class Q_Dispatcher
 				self::handleForwardException($e);
 			} catch (Q_Exception_DispatcherErrors $e) {
 				if (!empty($ob)) {
-					$partial_response = $ob->getClean();
+					$partialResponse = $ob->getClean();
 				} else {
-					$partial_response = null;
+					$partialResponse = null;
 				}
-				self::errors(null, $module, $partial_response);
+				self::errors(null, $module, $partialResponse);
 				self::result("Rendered errors");
 				return true;	
 			} catch (Exception $exception) {
 				if (!empty($ob)) {
-					$partial_response = $ob->getClean();
+					$partialResponse = $ob->getClean();
 				} else {
-					$partial_response = null;
+					$partialResponse = null;
 				}
 				$message = $exception->getMessage();
 				$file = $exception->getFile();
@@ -370,7 +373,7 @@ class Q_Dispatcher
 				);
 				self::result("Exception occurred:\n\n$colored");
 				try {
-					self::errors($exception, $module, $partial_response);
+					self::errors($exception, $module, $partialResponse);
 				} catch (Exception $e) {
 					if (!empty($forwarding_to_error_action)) {
 						// Looks like there were errors in the error action
@@ -401,12 +404,12 @@ class Q_Dispatcher
 	 * @protected
 	 * @param {Exception} $exception
 	 * @param {string} $module
-	 * @param {string} [$partial_response=null]
+	 * @param {string} [$partialResponse=null]
 	 */
 	protected static function errors(
 		$exception, 
 		$module, 
-		$partial_response = null)
+		$partialResponse = null)
 	{
 		self::$errorsOccurred = true;
 		$startedResponse = self::$startedResponse;
@@ -420,7 +423,7 @@ class Q_Dispatcher
 				// We need to handle errors, but we
 				// have already tried to do it.
 				// Just show the errors view.
-				Q::event('Q/errors/native', compact('errors', 'exception', 'partial_response', 'response_started'));
+				Q::event('Q/errors/native', compact('errors', 'exception', 'partialResponse', 'startedResponse'));
 				return;
 			}
 			self::$handlingErrors = true;
@@ -430,17 +433,17 @@ class Q_Dispatcher
 				 * @event $module/errors
 				 * @param {Exception} exception
 				 * @param {string} module
-				 * @param {string} partial_response
+				 * @param {string} partialResponse
 				 */
-				Q::event("$module/errors", compact('errors', 'exception', 'partial_response', 'response_started'));
+				Q::event("$module/errors", compact('errors', 'exception', 'partialResponse', 'startedResponse'));
 			} else {
 				/**
 				 * @event Q/errors
 				 * @param {Exception} exception
 				 * @param {string} module
-				 * @param {string} partial_response
+				 * @param {string} partialResponse
 				 */
-				Q::event("Q/errors", compact('errors', 'exception', 'partial_response', 'response_started'));
+				Q::event("Q/errors", compact('errors', 'exception', 'partialResponse', 'startedResponse'));
 			}
 		} catch (Exception $e) {
 			Q_Exception::rethrow($e, ''); // may be for forwarding

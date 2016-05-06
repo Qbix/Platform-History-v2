@@ -17,6 +17,7 @@ function Streams_join_post()
 	if (isset($_REQUEST['extra'])) {
 		$options['extra'] = json_decode($_REQUEST['extra'], true);
 	}
-	$stream->join($options, $participant);
-	Q_Response::setSlot('participant', $participant->exportArray());
+	if ($participant = $stream->join($options)) {
+		Q_Response::setSlot('participant', $participant->exportArray());
+	}
 }

@@ -16,10 +16,6 @@ function Q_response($params)
 	if (empty($errors)) {
 		$errors = Q_Response::getErrors();
 	}
-	
-	if (!empty($_GET['Q_ct'])) {
-		Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
-	}
 
 	// If output is set, use that
 	$output = Q_Response::output();

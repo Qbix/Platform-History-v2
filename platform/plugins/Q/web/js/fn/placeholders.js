@@ -64,9 +64,13 @@ function () {
 			if (!$this.is(':visible')) {
 				return;
 			}
+			var dim = $this[0].cssDimensions();
 			var span = $('<span />')
-				.css('position', 'relative')
-				.addClass('Q_placeholders_container');
+				.css({
+					position: 'relative',
+					width: dim.width,
+					height: dim.height
+				}).addClass('Q_placeholders_container');
 			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
 				$this.css('padding-'+pos, $this.css('padding-'+pos))
 					.css('margin-'+pos, $this.css('margin-'+pos));
@@ -76,7 +80,6 @@ function () {
 			span.on(Q.Pointer.fastclick, function() {
 				$this.trigger('focus');
 			});
-			var dim = $this[0].cssDimensions();
 			var $placeholder = $('<div />').text(plch).css({
 				'position': 'absolute',
 				'left': $this.position().left,
@@ -92,8 +95,8 @@ function () {
 				'font-weight': $this.css('font-weight'),
 				'line-height': $this.css('line-height'),
 				'overflow': 'hidden',
-				'width': dim.width,
-				'height': dim.height,
+				'width': '100%',
+				'height': '100%',
 				'text-align': $this.css('text-align'),
 				'pointer-events': 'none',
 				'color': $this.css('color'),

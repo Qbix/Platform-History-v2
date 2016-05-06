@@ -72,11 +72,12 @@ function _Streams_file_preview(options, preview) {
 		var tool = this;
 		var state = tool.state;
 		var ps = tool.preview.state;
+		var $te = $(tool.element);
 		// set up a pipe to know when the icon has loaded
 		var p = Q.pipe(['inplace', 'icon'], function () {
 			Q.handle(onLoad, tool);
 		});
-		$(tool.element).removeClass('Q_uploading');
+		$te.removeClass('Q_uploading');
 		// set up the inplace options
 		var inplace = null;
 		if (state.inplace) {
@@ -89,6 +90,8 @@ function _Streams_file_preview(options, preview) {
 			var se = ps.editable;
 			if (!se || (se !== true && se.indexOf('title') < 0)) {
 				inplaceOptions.editable = false;
+			} else {
+				$te.addClass('Streams_editable_title');
 			}
 			inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 		}
@@ -113,6 +116,12 @@ function _Streams_file_preview(options, preview) {
 					// load the icon
 					var jq = tool.$('img.Streams_preview_icon');
 					tool.preview.icon(jq[0], p.fill('icon'));
+					var $pc = tool.$('.Streams_preview_contents');
+					$pc.width(0).width($pc[0].remainingWidth());
+					Q.onLayout(tool.element).set(function () {
+						var $pc = tool.$('.Streams_preview_contents');
+						$pc.width($pc[0].remainingWidth());	
+					}, tool);
 					var inplace = tool.child('Streams_inplace');
 					if (!inplace) {
 						return p.fill('inplace').apply(this, arguments);
@@ -120,12 +129,6 @@ function _Streams_file_preview(options, preview) {
 					inplace.state.onLoad.add(function () {
 						p.fill('inplace').apply(this, arguments);
 					});
-					var $pc = tool.$('.Streams_preview_contents');
-					$pc.width(0).width($pc[0].remainingWidth());
-					Q.onLayout(tool.element).set(function () {
-						var $pc = tool.$('.Streams_preview_contents');
-						$pc.width($pc[0].remainingWidth());	
-					}, tool);
 				});
 				$(tool.element).on(Q.Pointer.click, function () {
 					var url = stream.get('file.url');

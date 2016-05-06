@@ -527,9 +527,16 @@ Elp.computedStyle = function(name) {
 	var computedStyle = root.getComputedStyle
 		? getComputedStyle(this, null)
 		: this.currentStyle;
-	return name
-		? (computedStyle ? computedStyle[name] : null)
-		: Q.extend({}, computedStyle);
+	var result = {};
+	for (var k in computedStyle) {
+		var k2 = root.getComputedStyle ? k : k.replace(/-(\w)/gi, function (word, letter) {
+			return letter.toUpperCase();
+		});
+		result[k2] = computedStyle[k];
+	}
+	return name ? result[name.replace(/-(\w)/gi, function (word, letter) {
+		return letter.toUpperCase();
+	})] : result;
 };
 
 /**
@@ -777,16 +784,20 @@ Elp.isVisible = function () {
 /**
  * Gets the width remaining after subtracting all the siblings on the same line
  * @method remainingWidth
+ * @param {boolean} subpixelAccuracy
  * @return {number|null} Returns the remaining width, or null if element has no parent
  */
-Elp.remainingWidth = function () {
+Elp.remainingWidth = function (subpixelAccuracy) {
 	var element = this;
 	if (!this.parentNode) {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
 	var rect2 = this.parentNode.getBoundingClientRect();
-	var w = rect2.right - rect2.left;
+	var w = (rect2.right - rect2.left); // could be fractional
+	var cs = this.parentNode.computedStyle();
+	w -= _parseFloat(cs.paddingLeft) + _parseFloat(cs.paddingRight)
+		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
 	Q.each(this.parentNode.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
@@ -794,16 +805,20 @@ Elp.remainingWidth = function () {
 		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
-		w -= (rect3.right - rect3.left + 
-			parseFloat(style.marginLeft) + parseFloat(style.marginRight));
+		w -= (rect3.right - rect3.left
+			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
 	});	
-	return w;
+	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
 if (!Elp.getElementsByClassName) {
 	Elp.getElementsByClassName = document.getElementsByClassName;
 }
 
+}
+
+function _parseFloat(value) {
+	return value.substr(value.length-2) == 'px' ? parseFloat(value) : 0;
 }
 	
 (function() {
@@ -968,6 +983,9 @@ Q.typeOf = function _Q_typeOf(value) {
  * @throws {Q.Error} If container is not array, object or string
  */
 Q.each = function _Q_each(container, callback, options) {
+	function _byKeys(a, b) { 
+		return a > b ? 1 : (a < b ? -1 : 0); 
+	}
 	function _byFields(a, b) { 
 		return container[a][s] > container[b][s] ? 1
 			: (container[a][s] < container[b][s] ? -1 : 0); 
@@ -1024,7 +1042,6 @@ Q.each = function _Q_each(container, callback, options) {
 				}
 				var s = options.sort;
 				var t = typeof(s);
-				var _byKeys = undefined;
 				var compare = (t === 'function') ? s : (t === 'string'
 					? (options.numeric ? _byFieldsNumeric : _byFields)
 					: (options.numeric ? _byKeysNumeric : _byKeys));
@@ -1449,8 +1466,12 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 				tak = Q.typeOf(argk);
 				if (ttk === 'Q.Event') {
 					if (argk && argk.constructor === Object) {
-						for (var m in argk) {
+						for (m in argk) {
 							target[k].set(argk[m], m);
+						}
+					} else if (tak === 'Q.Event') {
+						for (m in argk.handlers) {
+							target[k].set(argk.handlers[m], m);
 						}
 					} else {
 						target[k].set(argk, namespace);
@@ -2388,7 +2409,7 @@ var _layoutElements = [];
 var _layoutEvents = [];
 /**
  * Call this function to get an event which occurs every time
- * Q.layout() is called on the given element or its parent.
+ * Q.layout() is called on the given element or one of its parents.
  * @param {Element} [element=document.documentElement] 
  * @event onLayout
  */
@@ -3416,8 +3437,10 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 	Q.find(elem, true, null,
 	function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
-		for (var i=tn.length-1; i>=0; --i) {
-			toolElement.Q.tools[tn[i]].remove(removeCached);
+		if (tn) {
+			for (var i=tn.length-1; i>=0; --i) {
+				toolElement.Q.tools[tn[i]].remove(removeCached);
+			}
 		}
 	});
 };
@@ -6257,7 +6280,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			// hopefully, moving the script element won't change the order of execution
 			p = scripts[i];
 			var outside = true;
-	    	while (p = p.parentNode) {
+			while (p = p.parentNode) {
 				if (p === container) {
 					outside = false;
     				break;
@@ -6325,7 +6348,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	script.wasProcessedByQ = true;
 	Q.addEventListener(script, 'error', onerror2);
 	
-	if ('async' in firstScript) { // modern browsers
+	if ('async' in script) { // modern browsers
 		script.setAttribute('src', src);
 		script.async = false;
 		container.appendChild(script);
@@ -6910,7 +6933,6 @@ var _latestLoadUrlObjects = {};
 Q.loadUrl = function _Q_loadUrl(url, options) {
 	url = Q.url(url);
 	var o = Q.extend({}, Q.loadUrl.options, options);
-	Q.handle(o.onLoadStart, this, [url, o]);
 
 	var handler = o.handler;
 	var slotNames = o.slotNames;
@@ -9243,7 +9265,7 @@ Q.Pointer = {
 		return function _Q_fastclick_on_wrapper (e) {
 			var elem = Q.Pointer.elementFromPoint(Q.Pointer.getX(e), Q.Pointer.getY(e));
 			if (Q.Pointer.canceledClick
-			|| !this.contains(Q.Pointer.started)
+			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {
 				return Q.Pointer.preventDefault(e);
 			}
@@ -9524,6 +9546,9 @@ Q.Pointer = {
 				var imgs = [img1];
 				if (typeof targets === 'string') {
 					targets = document.querySelectorAll(targets);
+				}
+				if (Q.isEmpty(targets)) {
+					return;
 				}
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
@@ -10758,11 +10783,17 @@ function _addHandlebarsHelpers() {
 		});
 	}
 	if (!Handlebars.helpers.url) {
-		Handlebars.registerHelper('url', function (url) {
+		Handlebars.registerHelper('toUrl', function (url) {
 			if (!url) {
 				return "{{url missing}}";
 			}
 			return Q.url(url);
+		});
+	}
+	if (!Handlebars.helpers.ucfirst) {
+		Handlebars.registerHelper('toCapitalized', function(text) {
+			text = text || '';
+			return text.charAt(0).toUpperCase() + text.slice(1);
 		});
 	}
 }

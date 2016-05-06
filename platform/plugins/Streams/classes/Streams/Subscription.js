@@ -57,10 +57,15 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 			return callback(err);
 		}
 		var types = filter.types, notifications = filter.notifications;
-		var isStreamsType = (msgType.substring(0, 8) === 'Streams/'
-			&& msgType !== "Streams/invite"
-			&& msgType !== "Streams/chat/message");
-		if (isStreamsType
+		var streamsMessageTypes = [
+			"Streams/invite", "Streams/chat/message",
+			"Streams/relatedTo", "Streams/relatedFrom"
+		];
+		var ignoreMessageType = (
+			msgType.substring(0, 8) === 'Streams/'
+			&& streamsMessageTypes.indexOf(msgType) < 0
+		);
+		if (ignoreMessageType
 		|| (types && types.length && types.indexOf(msgType) < 0)) {
 			return callback(null, []); // no subscription to type
 		}
@@ -104,16 +109,16 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 								return p.fill(o)(err);
 							}
 							// NOTE: all Streams/participating for a given stream must be on the same shard
-							var time_online = res.length
+							var timeOnline = res.length
 								? res.reduce(function(pv, cv) {
 									var cvd = new Date(cv.sentTime);
 									return pv > cvd ? pv : cvd;
 								}, new Date(res[0].sentTime))
 								: (readyTime ? readyTime : new Date(0));
-							// now check notifictions since time_online
+							// now check notifications since timeOnline
 							Streams.Notification.SELECT('COUNT(1) as count').where({
 								userId: userId,
-								"insertedTime >": Q.date('c', time_online),
+								"insertedTime >": Db.Mysql.toDateTime(timeOnline.getTime()),
 								publisherId: publisherId,
 								streamName: streamName,
 								type: msgType

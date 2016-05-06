@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.9.1",
+				"version": "0.9.2",
 				"compatible": "0.9",
 				"requires": {"Users": "0.9"},
 				"permissions": ["Streams/icons"],
@@ -38,7 +38,8 @@
 		"routes": {
 			"plugins/Streams/:action": {"module": "Streams"},
 			"plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
-			"i/:token": {"module": "Streams", "action": "invited"}
+			"i/:token": {"module": "Streams", "action": "invited"},
+			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"}
 		},
 		"web": {
 			"requireValidNonce": ["Streams"]
@@ -78,13 +79,14 @@
 						"related": {
 						},
 						"prompt": "Let friends recognize you:",
-						"button": "Get Started"
+						"button": "Get Started",
+						"templateName": "Streams/invite/complete"
 					}
 				},
 				"getMessagesLimit": 100,
 				"messages": {
 					"": {
-						"subject": "Message \"{{& message.type}}\" to \"{{& stream.fields.title}}\""
+						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""
 					},
 					"Streams/changed": {
 						"subject": "Changes in {{stream.fields.title}}"
@@ -94,6 +96,12 @@
 					},
 					"Streams/chat/message": {
 						"subject": "Chat in {{stream.fields.title}}"
+					},
+					"Streams/relatedTo": {
+						"subject": "{{&call 'message.get' 'description'}}"
+					},
+					"Streams/relatedFrom": {
+						"subject": "{{&call 'message.get' 'description'}}"
 					}
 				},
 				"defaults": {
@@ -107,7 +115,8 @@
 					"adminLevel": 20,
 					"messageCount": 0,
 					"participantCount": 0
-				}
+				},
+				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}"
 			},
 			"Streams/resource": {
 				"description": "for managing access to a resource and posting messages about updates"
@@ -223,7 +232,7 @@
 			}
 		},
 		"categorize": {
-			"relationTypes": ["Streams/interest"],
+			"relationTypes": ["Streams/interests"],
 			"streamTypes": ["Streams/category"]
 		},
 		"invites": {
@@ -237,7 +246,8 @@
 			"layout": {
 				"default": "Streams/layout/invitations.php"
 			},
-			"subpath": "{{app}}/uploads/Streams/invitations"
+			"subpath": "{{app}}/uploads/Streams/invitations",
+			"sort": {}
 		},
 		"interests": {
 			"allowClientQueries": false

@@ -26,7 +26,6 @@
  * @property {integer} $readLevel
  * @property {integer} $writeLevel
  * @property {integer} $adminLevel
- * @property {string} $permissions
  * @property {string} $inheritAccess
  * @property {integer} $messageCount
  * @property {integer} $participantCount
@@ -81,10 +80,6 @@ abstract class Base_Streams_Stream extends Db_Row
 	/**
 	 * @property $adminLevel
 	 * @type {integer}
-	 */
-	/**
-	 * @property $permissions
-	 * @type {string}
 	 */
 	/**
 	 * @property $inheritAccess
@@ -886,60 +881,6 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_permissions
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_permissions($value)
-	{
-		if (!isset($value)) {
-			return array('permissions', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('permissions', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
-		if (strlen($value) > 1023)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
-		return array('permissions', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the permissions field
-	 * @return {integer}
-	 */
-	function maxSize_permissions()
-	{
-
-		return 1023;			
-	}
-
-	/**
-	 * Returns schema information for permissions column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	function column_permissions()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_inheritAccess
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -1179,7 +1120,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'inheritAccess', 'messageCount', 'participantCount', 'closedTime');
+		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess', 'messageCount', 'participantCount', 'closedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

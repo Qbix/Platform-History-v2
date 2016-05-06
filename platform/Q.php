@@ -113,6 +113,7 @@ if (defined('APP_WEB_DIR')) {
 	Q_Bootstrap::addAlias();
 	Q_Request::baseUrl();
 }
+Q::$bootstrapped = true;
 
 //
 // Give the project a chance to load aggregated files, etc.

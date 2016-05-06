@@ -103,16 +103,37 @@ function _Q_autogrow(o) {
 	});
 
 	this.filter('input:text').each(function() {
-		var minWidth = o.minWidth || 20;
-		var val = '';
-		var input = $(this);
-		var testSubject = $(this).data('Q-tester');
 		var $t = $(this);
-		if (!testSubject) {
-			testSubject = $('<div class="Q_tester"/>');
-			$(this).data('Q-tester', testSubject);
-			testSubject.insertAfter(input);
+		var input = $t;
+		var minWidth = (typeof o.minWidth === 'string')
+			? ($t.parent().children(o.minWidth)[0] || 20)
+			: o.minWidth || 20;
+		if (minWidth && Q.instanceOf(minWidth, Element)) {
+			var $testSubject = $('<div class="Q_tester"/>').css({
+				position: 'absolute',
+				top: -9999,
+				left: -9999,
+				visibility: 'hidden',
+				'pointer-events': 'none',
+				width: 'auto',
+				'max-width': 'none',
+				'max-height': 'none',
+				whiteSpace: 'nowrap'
+			}).appendTo('body');
+			var cs = minWidth.computedStyle();
+			$testSubject.css({
+				fontSize: cs.fontSize,
+				fontFamily: cs.fontFamily,
+				fontWeight: cs.fontWeight,
+				letterSpacing: cs.letterSpacing,
+				padding: cs.padding,
+				margin: cs.margin,
+			})
+			$testSubject.html(minWidth.innerHTML);
+			minWidth = $testSubject.outerWidth(true);
+			$testSubject.remove();
 		}
+		var val = '';
 		function updateWidth() {
 			val = input.val();
 			if (!val) {
@@ -121,13 +142,16 @@ function _Q_autogrow(o) {
 
 			// Enter new content into testSubject
 			var escaped = val.encodeHTML();
-			testSubject.css({
+			var $testSubject = $('<div class="Q_tester"/>').css({
 				position: 'absolute',
 				top: -9999,
 				left: -9999,
+				visibility: 'hidden',
+				'pointer-events': 'none',
 				width: 'auto',
 				'max-width': 'none',
 				'max-height': 'none',
+				whiteSpace: 'nowrap',
 				fontSize: input.css('fontSize'),
 				fontFamily: input.css('fontFamily'),
 				fontWeight: input.css('fontWeight'),
@@ -135,13 +159,12 @@ function _Q_autogrow(o) {
 				padding: input.css('padding'),
 				margin: input.css('margin'),
 				whiteSpace: 'nowrap'
-			});
-			testSubject.html(escaped);
+			}).appendTo('body');
+			$testSubject.html(escaped);
 
 			// Calculate new width + whether to change
-			testSubject.show();
-			var testerWidth = testSubject.outerWidth(true);
-			testSubject.hide();
+			var testerWidth = $testSubject.outerWidth(true);
+			$testSubject.remove();
 			var newWidth = Math.max(testerWidth + o.comfortZone, minWidth);
 			var currentWidth = input.outerWidth(true);
 			var maxWidth = (typeof o.maxWidth === 'string')
@@ -151,18 +174,18 @@ function _Q_autogrow(o) {
 				maxWidth = Q.instanceOf(maxWidth, Element)
 					? $(maxWidth).innerWidth()
 					: maxWidth;
+				newWidth = Math.min(newWidth, maxWidth);
 			}
-			var isValidWidthChange = ((
-				(newWidth < currentWidth && newWidth >= minWidth)
-				|| (newWidth > minWidth)
-			) && (!maxWidth || newWidth <= maxWidth));
+			var isValidWidthChange = (
+				(newWidth < currentWidth && newWidth >= minWidth) || (newWidth > minWidth)
+			);
 
 			// Animate width
 			if (isValidWidthChange) {
-				input.width(newWidth);
+				input.add(input.parent('.Q_placeholders_container')).width(newWidth);
 				Q.handle(o.onResize, $t, [newWidth]);
 			} else if (input.width() < minWidth) {
-				input.width(minWidth);
+				input.add(input.parent('.Q_placeholders_container')).width(minWidth);
 			}
 
 		};
@@ -178,7 +201,7 @@ function _Q_autogrow(o) {
 
 {	// default options:
 	maxWidth: 1000,
-	minWidth: 0,
+	minWidth: '.Q_placeholder',
 	comfortZone: 10,
 	onResize: new Q.Event()
 }

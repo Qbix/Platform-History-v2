@@ -26,7 +26,7 @@ function Streams_subscription_put($params) {
 		'ofUserId'    => $user->id,
 		'publisherId' => $publisherId,
 		'streamName'  => $streamName
-	))->fetchDbRows(null, '', 'name');
+	))->fetchDbRows(null, '', 'ordinal');
 
 	$types = Q_Config::get('Streams', 'types', $stream->type, 'messages', array());
 

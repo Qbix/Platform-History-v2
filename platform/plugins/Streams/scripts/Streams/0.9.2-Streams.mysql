@@ -1,0 +1,16 @@
+ALTER TABLE {$prefix}notification
+DROP PRIMARY KEY,
+DROP INDEX viewedTime,
+DROP INDEX stream,
+DROP INDEX recipient,
+DROP INDEX count,
+ADD COLUMN messageOrdinal int(11) NOT NULL AFTER streamName,
+MODIFY COLUMN insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER messageOrdinal;
+
+# The old data won't work with the primary key.
+# We can do this since we didn't release Q publicly yet,
+# so we know that no apps will be affected by the following statement:
+TRUNCATE TABLE {$prefix}notification;
+
+ALTER TABLE {$prefix}notification
+ADD PRIMARY KEY (userId, publisherId, streamName, messageOrdinal);

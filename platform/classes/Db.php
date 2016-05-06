@@ -597,8 +597,7 @@ abstract class Db
 	 *
 	 * @method exportArray
 	 * @static
-	 * @param {mixed} $what
-	 *  Could be an array of Db_Row objects or a Db_Row object
+	 * @param {mixed} $what Could be a (multidimensional) array of Db_Row objects or a Db_Row object
 	 * @param {array} $options Currently supports one option:
 	 * @param {array} [$options.numeric]: Makes a plain numerically indexed array, even if $what has keys
 	 * @return {string}
@@ -607,21 +606,18 @@ abstract class Db
 	{
 		$arr = is_array($what) ? $what : array($what);
 		$result = array();
-		if (empty($options['numeric'])) {
-			foreach ($arr as $k => $row) {
-				$result[$k] = $row
-					? (method_exists($row, 'exportArray')
-						? $row->exportArray($options)
-						: $row->fields)
-					: $row;
-			}
-		} else {
-			foreach ($arr as $k => $row) {
-				$result[] = $row
-					? (method_exists($row, 'exportArray')
-						? $row->exportArray($options)
-						: $row->fields)
-					: $row;
+		foreach ($arr as $k => $row) {
+			$r = is_array($row) ? self::exportArray($row, $options) : (
+				$row ? (
+					method_exists($row, 'exportArray')
+					? $row->exportArray($options)
+					: $row->fields
+				) : $row
+			);
+			if (empty($options['numeric'])) {
+				$result[$k] = $r;
+			} else {
+				$result[] = $r;
 			}
 		}
 		return $result;

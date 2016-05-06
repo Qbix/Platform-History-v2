@@ -29,6 +29,7 @@
 				}
 			},
 			"Websites/article": {
+				"description": "An HTML document that various users can view and edit",
 				"create": true,
 				"edit": true,
 				"defaults": {

@@ -1965,7 +1965,7 @@ abstract class Users extends Base_Users
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
 	static function canManageContacts(
-		&$asUserId, 
+		$asUserId, 
 		$userId, 
 		$label, 
 		$throwIfNotAuthorized = false

@@ -29,9 +29,12 @@ function Streams_invitations_response()
 	$layout = Q_Config::expect('Streams', 'invites', 'layout', $layoutKey);
 	$pattern = Streams::invitationsPath($invitingUserId) . DS . $batch . DS . "*.html";
 	$filenames = glob($pattern);
+	if ($sort = Q_Config::get('Streams', 'invites', 'sort', $batch, null)) {
+		usort($filenames, $sort);
+	}
 	$parts = array();
 	foreach ($filenames as $f) {
-		if (--$offset > 0) {
+		if (--$offset >= 0) {
 			continue;
 		}
 		$parts[] = file_get_contents($f);

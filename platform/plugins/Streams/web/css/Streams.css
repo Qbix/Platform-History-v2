@@ -661,7 +661,7 @@
 }
 
 .Streams_file_preview_tool.Streams_related_stream { position: relative; cursor: pointer; }
-.Q_touchscreen .Streams_preview_file_size { padding-left: 75px; }
+.Q_touchscreen .Streams_editable_title .Streams_preview_file_size { padding-left: 75px; }
 
 .Streams_interests_tool.Streams_interests_anotherUser .Streams_interest_title { display: none; }
 .Streams_interests_tool.Streams_interests_anotherUser .Streams_interest_title.Streams_interests_anotherUser { display: inline; }
@@ -670,9 +670,12 @@
 .Streams_category_preview_tool,
 .Streams_category_preview_tool .Q_inplace_noEditOnClick,
 .Streams_category_preview_tool .Q_inplace_noEditOnClick .Q_inplace_tool_static { cursor: pointer; }
+.Q_notMobile .Streams_category_dialog { width: 60%; }
 
 .Q_notMobile .Q_overlay.Streams_completeInvited_dialog,
 .Q_notMobile .Q_overlay.Streams_access_tool_dialog,
 .Q_notMobile .Q_overlay.Streams_subscription_tool_dialog { width: 500px; }
 
 .Streams_inplace_tool.Q_editing { z-index: 99999; }
+
+.fr-toolbar.fr-inline { z-index: 10000; }

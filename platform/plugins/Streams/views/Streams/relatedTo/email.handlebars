@@ -1,0 +1,15 @@
+<html>
+{{#if (call 'message.get' 'toUrl')}}
+	<h2><a href="{{call 'message.get' 'toUrl'}}">{{stream.fields.title}}</a></h2>
+{{else}}
+	<h2>{{stream.fields.title}}</h2>
+{{/if}}
+<div>
+has a new {{call 'message.get' 'displayType'}}:
+</div>
+{{#if (call 'message.get' 'fromUrl')}}
+	<h2><a href="{{call 'message.get' 'fromUrl'}}">{{call 'message.get' 'fromTitle'}}</a></h2>
+{{else}}
+	<h2>{{call 'message.get' 'fromTitle'}}</h2>
+{{/if}}
+</html>

@@ -110,27 +110,29 @@ function Places_geolocation_post()
 	if (!$noChange) {
 		if ($shouldUnsubscribe or $shouldSubscribe) {
 			$myInterests = Streams_Category::getRelatedTo(
-				$user->id, 'Streams/user/interests', 'Streams/interest'
+				$user->id, 'Streams/user/interests', 'Streams/interests'
 			);
 			if (!isset($myInterests)) {
 				$myInterests = array();
 			}
 		}
-	
+
+		$options = array('miles' => $oldMiles, 'skipAccess' => true, 'forSubscribers' => true);
+
 		if ($shouldUnsubscribe) {
-			// TODO: implement mass unsubscribe
+			$results = array();
 			foreach ($myInterests as $weight => $info) {
-				Places_Nearby::unsubscribe(
-					$oldLatitude,
-					$oldLongitude,
-					$oldMiles,
-					$info[0],
-					array(
-						'transform' => array('Places_Interest', '_transform'),
-						'title' => $info[2],
-						'skipAccess' => true
-					)
-				);
+				$publisherId = $info[0];
+				if (!isset($results[$publisherId])) {
+					$results[$publisherId] = array();
+				}
+				$results[$publisherId] = array_merge(
+					$results[$publisherId], Places_Interest::streams(
+						$publisherId, $oldLatitude, $oldLongitude, $info[2],
+						$options));
+			}
+			foreach ($results as $publisherId => $streams) {
+				Streams::unsubscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
 			}
 			$attributes['unsubscribed'] = Places_Nearby::unsubscribe(
 				$oldLatitude, $oldLongitude, $oldMiles
@@ -138,20 +140,19 @@ function Places_geolocation_post()
 		}
 	
 		if ($shouldSubscribe) {
-			// TODO: implement mass subscribe
+			$results = array();
 			foreach ($myInterests as $weight => $info) {
-				Places_Nearby::subscribe(
-					$latitude,
-					$longitude,
-					$miles,
-					$info[0],
-					array(
-						'transform' => array('Places_Interest', '_transform'),
-						'create' => array('Places_Interest', '_create'),
-						'title' => $info[2],
-						'skipAccess' => true
-					)
-				);
+				$publisherId = $info[0];
+				if (!isset($results[$publisherId])) {
+					$results[$publisherId] = array();
+				}
+				$results[$publisherId] = array_merge(
+					$results[$publisherId], Places_Interest::streams(
+					$publisherId, $latitude, $longitude, $info[2],
+					$options));
+			}
+			foreach ($results as $publisherId => $streams) {
+				Streams::subscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
 			}
 			$attributes['subscribed'] = Places_Nearby::subscribe(
 				$latitude, $longitude, $miles

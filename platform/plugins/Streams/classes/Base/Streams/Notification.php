@@ -15,9 +15,10 @@
  * @extends Db_Row
  *
  * @property {string} $userId
- * @property {string|Db_Expression} $insertedTime
  * @property {string} $publisherId
  * @property {string} $streamName
+ * @property {integer} $messageOrdinal
+ * @property {string|Db_Expression} $insertedTime
  * @property {string} $type
  * @property {string|Db_Expression} $viewedTime
  * @property {string|Db_Expression} $readTime
@@ -30,16 +31,20 @@ abstract class Base_Streams_Notification extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $insertedTime
-	 * @type {string|Db_Expression}
-	 */
-	/**
 	 * @property $publisherId
 	 * @type {string}
 	 */
 	/**
 	 * @property $streamName
 	 * @type {string}
+	 */
+	/**
+	 * @property $messageOrdinal
+	 * @type {integer}
+	 */
+	/**
+	 * @property $insertedTime
+	 * @type {string|Db_Expression}
 	 */
 	/**
 	 * @property $type
@@ -69,7 +74,9 @@ abstract class Base_Streams_Notification extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'userId',
-			  1 => 'insertedTime',
+			  1 => 'publisherId',
+			  2 => 'streamName',
+			  3 => 'messageOrdinal',
 			)
 		);
 	}
@@ -260,51 +267,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_insertedTime
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
-	 */
-	function beforeSet_insertedTime($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('insertedTime', $value);
-		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".insertedTime");
-		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
-		return array('insertedTime', $value);			
-	}
-
-	/**
-	 * Returns schema information for insertedTime column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	function column_insertedTime()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => 'CURRENT_TIMESTAMP',
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_publisherId
@@ -353,7 +315,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'MUL',
+  2 => 'PRI',
   3 => '',
 );			
 	}
@@ -407,8 +369,107 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'PRI',
   3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * @method beforeSet_messageOrdinal
+	 * @param {integer} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 */
+	function beforeSet_messageOrdinal($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('messageOrdinal', $value);
+		}
+		if (!is_numeric($value) or floor($value) != $value)
+			throw new Exception('Non-integer value being assigned to '.$this->getTable().".messageOrdinal");
+		$value = intval($value);
+		if ($value < -2147483648 or $value > 2147483647) {
+			$json = json_encode($value);
+			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".messageOrdinal");
+		}
+		return array('messageOrdinal', $value);			
+	}
+
+	/**
+	 * @method maxSize_messageOrdinal
+	 * Returns the maximum integer that can be assigned to the messageOrdinal field
+	 * @return {integer}
+	 */
+	function maxSize_messageOrdinal()
+	{
+
+		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for messageOrdinal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_messageOrdinal()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_insertedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_insertedTime($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('insertedTime', $value);
+		}
+		$date = date_parse($value);
+		if (!empty($date['errors'])) {
+			$json = json_encode($value);
+			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".insertedTime");
+		}
+		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
+			$date['year'], $date['month'], $date['day'], 
+			$date['hour'], $date['minute'], $date['second']
+		);
+		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
 );			
 	}
 
@@ -509,7 +570,7 @@ return array (
     3 => false,
   ),
   1 => true,
-  2 => 'MUL',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -617,6 +678,26 @@ return array (
 	}
 
 	/**
+	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+	 * @method beforeSave
+	 * @param {array} $value The array of fields
+	 * @return {array}
+	 * @throws {Exception} If mandatory field is not set
+	 */
+	function beforeSave($value)
+	{
+		if (!$this->retrieved) {
+			$table = $this->getTable();
+			foreach (array('streamName','messageOrdinal') as $name) {
+				if (!isset($value[$name])) {
+					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+				}
+			}
+		}
+		return $value;			
+	}
+
+	/**
 	 * Retrieves field names for class table
 	 * @method fieldNames
 	 * @static
@@ -626,7 +707,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'insertedTime', 'publisherId', 'streamName', 'type', 'viewedTime', 'readTime', 'comment');
+		$field_names = array('userId', 'publisherId', 'streamName', 'messageOrdinal', 'insertedTime', 'type', 'viewedTime', 'readTime', 'comment');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

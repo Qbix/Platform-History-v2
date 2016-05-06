@@ -408,7 +408,7 @@ Q.Tool.define({
 	"Streams/image/preview": "plugins/Streams/js/tools/image/preview.js",
 	"Streams/file/preview" : "plugins/Streams/js/tools/file/preview.js",
 	"Streams/category/preview" : "plugins/Streams/js/tools/category/preview.js",
-	"Streams/category/player" : "plugins/Streams/js/tools/category/player.js",
+	"Streams/category"     : "plugins/Streams/js/tools/category.js",
 	"Streams/form"         : "plugins/Streams/js/tools/form.js",
 	"Streams/activity"     : "plugins/Streams/js/tools/activity.js"
 });
@@ -530,12 +530,12 @@ Streams.batchFunction = function Streams_batchFunction(baseUrl, action) {
 	action = action || 'batch';
 	return Q.batcher.factory(Streams.batchFunction.functions, baseUrl,
 		"/action.php/Streams/"+action, "batch", "batch",
-		_Streams_batchFunction_preprocess[action]
+		_Streams_batchFunction_options[action]
 	);
 };
 Streams.batchFunction.functions = {};
 
-var _Streams_batchFunction_preprocess = {
+var _Streams_batchFunction_options = {
 	avatar: {
 		preprocess: function (args) {
 			var userIds = [], i;
@@ -3700,12 +3700,13 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!params) {
 			return;
 		}
+		var templateName = params.templateName || 'Streams/invite/complete';
 		params.prompt = (params.prompt !== undefined)
 			? params.prompt
 			: Q.text.Streams.login.prompt;
 		Streams.construct(params.stream, function () {
 			params.stream = this;
-			Q.Template.render('Streams/invite/complete', params, 
+			Q.Template.render(templateName, params, 
 			function(err, html) {
 				var dialog = $(html);
 				var interval;
@@ -3731,7 +3732,9 @@ Q.onInit.add(function _Streams_onInit() {
 							var $input = $('input', dialog).eq(0);
 							$input.plugin('Q/clickfocus');
 							interval = setInterval(function () {
-								if ($input.val()) return;
+								if ($input.val() || $input[0] === document.activeElement) {
+									return clearInterval(interval);
+								}
 								$input.plugin('Q/clickfocus');
 							}, 100);
 						}

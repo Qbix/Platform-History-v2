@@ -1,0 +1,2 @@
+ALTER TABLE {$prefix}user
+MODIFY COLUMN passphraseHash varchar(64) DEFAULT NULL;

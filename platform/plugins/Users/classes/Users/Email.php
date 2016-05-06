@@ -115,6 +115,8 @@ class Users_Email extends Base_Users_Email
 				}
 				if (isset($host)) {
 					$transport = new Zend_Mail_Transport_Smtp($host, $smtp);
+				} else {
+					$transport = null;
 				}
 			}
 			
@@ -127,23 +129,25 @@ class Users_Email extends Base_Users_Email
 				Q::log($logMessage, $key);
 			}
 
-			$mail = new Zend_Mail();
-			$mail->setFrom(reset($from), next($from));
-			if (isset($options['name'])) {
-				$mail->addTo($emailAddress, $options['name']);
-			} else {
-				$mail->addTo($emailAddress);
-			}
-			$mail->setSubject($subject);
-			if (empty($options['html'])) {
-				$mail->setBodyText($body);
-			} else {
-				$mail->setBodyHtml($body);
-			}
-			try {
-				$mail->send($transport);
-			} catch (Exception $e) {
-				throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
+			if ($transport) {
+				$mail = new Zend_Mail();
+				$mail->setFrom(reset($from), next($from));
+				if (isset($options['name'])) {
+					$mail->addTo($emailAddress, $options['name']);
+				} else {
+					$mail->addTo($emailAddress);
+				}
+				$mail->setSubject($subject);
+				if (empty($options['html'])) {
+					$mail->setBodyText($body);
+				} else {
+					$mail->setBodyHtml($body);
+				}
+				try {
+					$mail->send($transport);
+				} catch (Exception $e) {
+					throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
+				}
 			}
 		}
 		

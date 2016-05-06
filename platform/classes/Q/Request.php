@@ -13,22 +13,43 @@ class Q_Request
 	 * Get the base URL, possibly with a controller script
 	 * @method baseUrl
 	 * @static
-	 * @param {boolean} [$with_possible_controller=false] If this is true, and if the URL contains 
+	 * @param {boolean} [$withPossibleController=false]
+	 *  If this is true, and if the URL contains 
 	 *  the controller script, then the controller script is included 
 	 *  in the return value. You can also pass a string here, which
 	 *  will then be simply appended as the controller.
+	 * @param {boolean} [$canonical=false]
+	 *  Pass true here to just use the canonical info specified in the "Q"/"web" config.
 	 */
 	static function baseUrl(
-	 $with_possible_controller = false)
+	 $withPossibleController = false,
+	 $canonical = false)
 	{
+		if ($canonical) {
+			$ar = Q_Config::get('Q', 'web', 'appRootUrl', false);
+			if (!$ar) {
+				throw new Q_Exception_MissingConfig(array(
+					'fieldpath' => 'Q/web/appRootUrl'
+				));
+			}
+			$cs = Q_Config::get('Q', 'web', 'controllerSuffix', '');
+			if (!$withPossibleController) {
+				return $ar;
+			}
+			if (is_string($withPossibleController)) {
+				return $ar . "/" . $withPossibleController;
+			}
+			return $ar . (!$cs || substr($cs, 0, 1) === '/' ? $cs : "/$cs");
+		}
+		
 		if (isset(self::$base_url)) {
-			if (is_string($with_possible_controller)) {
-				if (empty($with_possible_controller)) {
+			if (is_string($withPossibleController)) {
+				if (empty($withPossibleController)) {
 					return self::$app_root_url;
 				}
-				return self::$app_root_url . "/" . $with_possible_controller;
+				return self::$app_root_url . "/" . $withPossibleController;
 			}
-			if ($with_possible_controller) {
+			if ($withPossibleController) {
 				return self::$base_url;
 			}
 			return self::$app_root_url;
@@ -80,7 +101,6 @@ class Q_Request
 		} else {
 			// This is not a web request, and we absolutely need
 			// the canonical app root URL to have been specified.
-			
 			$ar = Q_Config::get('Q', 'web', 'appRootUrl', false);
 			if (!$ar) {
 				throw new Q_Exception_MissingConfig(array(
@@ -89,15 +109,15 @@ class Q_Request
 			}
 			$cs = Q_Config::get('Q', 'web', 'controllerSuffix', '');
 			self::$app_root_url = $ar;
-			self::$controller_url = $ar . $cs;
+			self::$controller_url = $ar . (substr($cs, 0, 1) === '/' ? $cs : "/$cs");
 			self::$controller_present = false;
-			self::$base_url = self::$app_root_url;
+			self::$base_url = self::$controller_url;
 		}
 		
-		if (is_string($with_possible_controller)) {
-			return self::$app_root_url . "/" . $with_possible_controller;
+		if (is_string($withPossibleController)) {
+			return self::$app_root_url . "/" . $withPossibleController;
 		}
-		if ($with_possible_controller) {
+		if ($withPossibleController) {
 			return self::$base_url;
 		}
 		return self::$app_root_url;
@@ -107,22 +127,22 @@ class Q_Request
 	 * Returns the base URL, run through a proxy
 	 * @method proxyBaseUrl
 	 * @static
-	 * @param {boolean} [$with_possible_controller=false] If this is true, and if the URL contains 
+	 * @param {boolean} [$withPossibleController=false] If this is true, and if the URL contains 
 	 *  the controller script, then the controller script is included 
 	 *  in the base url. You can also pass a string here, which
 	 *  will then be simply appended as the controller.
 	 */
 	static function proxyBaseUrl(
-		$with_possible_controller = false)
+		$withPossibleController = false)
 	{
-		return Q_Uri::proxySource(self::baseUrl($with_possible_controller));
+		return Q_Uri::proxySource(self::baseUrl($withPossibleController));
 	}
 	
 	/**
 	 * Get the URL that was requested, possibly with a querystring
 	 * @method url
 	 * @static
-	 * @param {mixed} [$query_fields=array()] If true, includes the entire querystring as requested.
+	 * @param {mixed} [$queryFields=array()] If true, includes the entire querystring as requested.
 	 *  If a string, appends the querystring correctly to the current URL.
 	 *  If an associative array, adds these fields, with their values
 	 *  to the existing querystring, while subtracting the fields corresponding
@@ -133,7 +153,7 @@ class Q_Request
 	 * @return {string} Returns the URL that was requested, possibly with a querystring.
 	 */
 	static function url(
-	 $query_fields = array())
+	 $queryFields = array())
 	{
 		if (!isset($_SERVER['REQUEST_URI'])) {
 			// this was not requested from the web
@@ -163,7 +183,7 @@ class Q_Request
 				$request_uri);
 		}
 				
-		if (!$query_fields) {
+		if (!$queryFields) {
 			return self::$url;
 		}
 		
@@ -171,12 +191,11 @@ class Q_Request
 		if ($request_querystring) {
 			Q::parse_str($request_querystring, $query);
 		}
-		if (is_string($query_fields)) {
-			Q::parse_str($query_fields, $qf_array);
+		if (is_string($queryFields)) {
+			Q::parse_str($queryFields, $qf_array);
 			$query = array_merge($query, $qf_array);
-		} else if (is_array($query_fields)) {
-			$qf = array_merge(array('_' => null), $query_fields);
-			foreach ($qf as $key => $value) {
+		} else if (is_array($queryFields)) {
+			foreach ($queryFields as $key => $value) {
 				if (isset($value)) {
 					$query[$key] = $value;
 				} else {

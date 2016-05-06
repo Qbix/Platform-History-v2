@@ -607,7 +607,7 @@ Base.prototype.maxSize_passphraseHash = function () {
 	 */
 Base.prototype.column_passphraseHash = function () {
 
-return [["varbinary","64","",false],true,"",null];
+return [["varchar","64","",false],true,"",null];
 };
 
 /**

@@ -76,11 +76,16 @@ handlebars.registerHelper('call', function(path) {
 	return "{{call \""+path+"\" not found}}";
 });
 
-handlebars.registerHelper('url', function(url) {
+handlebars.registerHelper('toUrl', function(url) {
 	if (!url) {
 		return "{{url missing}}";
 	}
 	return Q.url(url);
+});
+
+handlebars.registerHelper('toCapitalized', function(text) {
+	text = text || '';
+	return text.charAt(0).toUpperCase() + text.slice(1);
 });
 
 /**

@@ -273,8 +273,8 @@ function _Q_clickable(o) {
 				} else if (evt.type === 'release') {
 					jq = $this;
 				} else {
-					var x = (evt.pageX !== undefined) ? evt.pageX : evt.changedTouches[0].pageX,
-						y = (evt.pageY !== undefined) ? evt.pageY : evt.changedTouches[0].pageY;
+					var x = Q.Pointer.getX(evt);
+					var y = Q.Pointer.getY(evt);
 					jq = $(Q.Pointer.elementFromPoint(x, y));
 				}
 				Q.Pointer.onEnded.remove(state.onEndedKey);

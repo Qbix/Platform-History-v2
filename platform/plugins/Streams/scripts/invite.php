@@ -17,6 +17,9 @@ $usage
 
 Parameters:
 
+identifier
+Can be an email address or mobile number
+
 communityId
 Defaults to the app's name, as found under the "Q"/"app" config.
 
@@ -74,6 +77,7 @@ $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
 $labels = array_slice($argv, $FROM_APP ? 3 : 4);
 $label = empty($labels) ? "$app/admins" : $labels;
 $asUserId = $app;
+$skipAccess = true;
 
-Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('label', 'asUserId'));
+Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('label', 'asUserId', 'skipAccess'));
 echo "Successfully invited $identifier\n";
