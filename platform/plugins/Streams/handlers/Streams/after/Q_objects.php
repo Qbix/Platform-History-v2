@@ -27,6 +27,11 @@ function Streams_after_Q_objects () {
 		false
 	);
 	
+	$templateName = Streams_Stream::getConfigField(
+		$stream->type,
+		array('invite', 'dialog', 'templateName'),
+		'Streams/invite/complete'
+	);
 	$params = array(
 		'displayName' => null,
 		'action' => 'Streams/basic',
@@ -34,8 +39,11 @@ function Streams_after_Q_objects () {
 		'token' => $invite->token,
 		'user' => array(
 			'icon' => $invitingUser->iconUrl(),
-			'displayName' => $invitingUser->displayName(array('fullAccess' => true))
+			'displayName' => $invitingUser->displayName(array(
+				'fullAccess' => true
+			))
 		),
+		'templateName' => $templateName,
 		'stream' => $stream->exportArray(),
 		'relations' => Db::exportArray($relations),
 		'related' => Db::exportArray($related)
@@ -48,7 +56,7 @@ function Streams_after_Q_objects () {
 		$dialogData = $tree->getAll();
 		if ($dialogData) {
 			Q_Response::setScriptData('Q.plugins.Streams.invite.dialog', $dialogData);
-			Q_Response::addTemplate('Streams/invite/complete');
+			Q_Response::addTemplate($templateName);
 		}
 	}
 }

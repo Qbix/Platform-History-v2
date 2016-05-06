@@ -79,7 +79,8 @@
 						"related": {
 						},
 						"prompt": "Let friends recognize you:",
-						"button": "Get Started"
+						"button": "Get Started",
+						"templateName": "Streams/invite/complete"
 					}
 				},
 				"getMessagesLimit": 100,

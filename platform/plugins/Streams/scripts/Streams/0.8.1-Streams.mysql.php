@@ -21,7 +21,7 @@ function Streams_0_8_1_Streams_mysql()
 	Streams::create($commmunityId, $commmunityId, 'Streams/community', array(
 		'skipAccess' => true,
 		'name' => 'Streams/community/main',
-		'title' => "$app Community"
+		'title' => Users::communityName()
 	));
 	
 	// symlink the labels folder

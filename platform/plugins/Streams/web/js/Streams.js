@@ -3700,12 +3700,13 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!params) {
 			return;
 		}
+		var templateName = params.templateName || 'Streams/invite/complete';
 		params.prompt = (params.prompt !== undefined)
 			? params.prompt
 			: Q.text.Streams.login.prompt;
 		Streams.construct(params.stream, function () {
 			params.stream = this;
-			Q.Template.render('Streams/invite/complete', params, 
+			Q.Template.render(templateName, params, 
 			function(err, html) {
 				var dialog = $(html);
 				var interval;

@@ -3083,8 +3083,9 @@ abstract class Streams extends Base_Streams
 	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited
 	 *	@param {string} [$options.displayName] => the display name to use to represent the inviting user
 	 *  @param {string} [$options.appUrl] => Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
-	 *	@param {array} [$options.html] => an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName
-	 * @param {array} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
+	 *	@param {array} [$options.html] => an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
+	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
+	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
 	 * @see Users::addLink()
 	 * @return {array} returns array with keys "success", "invited", "statuses", "identifierTypes", "alreadyParticipating"
 	 */
@@ -3234,17 +3235,19 @@ abstract class Streams extends Base_Streams
 		$duration = Q_Config::get("Streams", "types", $stream->type, "invite", "duration", false);
 		$expiry = $duration ? strtotime($duration) : null;
 		
+		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
+		
 		if ($label = Q::ifset($options, 'label', null)) {
 			if (is_string($label)) {
 				$label = explode("\t", $label);
 			}
-			Users_Label::addLabel($label, $publisherId, null, null, $asUserId);
+			Users_Label::addLabel($label, $publisherId, null, null, $asUserId2);
 		}
 		if ($myLabel = Q::ifset($options, 'myLabel', null)) {
 			if (is_string($myLabel)) {
 				$myLabel = explode("\t", $myLabel);
 			}
-			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId);
+			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId2);
 		}
 		
 		foreach ($raw_userIds as $userId) {
@@ -3253,10 +3256,10 @@ abstract class Streams extends Base_Streams
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false);
 			if ($label) {
-				Users_Contact::addContact($publisherId, $label, $userId, null, $asUserId);
+				Users_Contact::addContact($publisherId, $label, $userId, null, $asUserId2);
 			}
 			if ($myLabel) {
-				Users_Contact::addContact($asUserId, $label, $userId, null, $asUserId);
+				Users_Contact::addContact($asUserId, $label, $userId, null, $asUserId2);
 			}
 		}
 
