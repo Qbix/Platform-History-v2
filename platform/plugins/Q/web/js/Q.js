@@ -9993,8 +9993,8 @@ Q.Dialogs = {
 	 *  to fetch the "title" and "dialog" slots, to display in the dialog. 
 	 *  Thus the default content provided by 'title' and 'content' options
 	 *  given below will be replaced after the response comes back.
-	 *	@param {String} [options.title='Dialog'] initial dialog title.
-	 *	@param {String} [options.content] initial dialog content, defaults to 
+	 *	@param {String|Element} [options.title='Dialog'] initial dialog title.
+	 *	@param {String|Element} [options.content] initial dialog content, defaults to 
 	 *   loading and displaying a throbber immage.
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
@@ -10619,7 +10619,8 @@ function processStylesheets() {
 	var links = document.getElementsByTagName('link');
 	var slots = processStylesheets.slots;
 	for (var i=0; i<links.length; ++i) {
-		if (links[i].getAttribute('rel').toLowerCase() !== 'stylesheet') {
+		var rel = links[i].getAttribute('rel');
+		if (!rel || rel.toLowerCase() !== 'stylesheet') {
 			continue;
 		}
 		var href = links[i].getAttribute('href');

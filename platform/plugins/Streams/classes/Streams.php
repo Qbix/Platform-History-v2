@@ -821,7 +821,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$fields.title=null] You can set the stream's title
 	 * @param {string} [$fields.icon=null] You can set the stream's icon
 	 * @param {string} [$fields.title=null] You can set the stream's content
-	 * @param {string} [$fields.attributes=null] You can set the stream's attributes directly as a JSON string
+	 * @param {string|array} [$fields.attributes=null] You can set the stream's attributes directly as a JSON string
 	 * @param {string|integer} [$fields.readLevel=null] You can set the stream's read access level, see Streams::$READ_LEVEL
 	 * @param {string|integer} [$fields.writeLevel=null] You can set the stream's write access level, see Streams::$WRITE_LEVEL
 	 * @param {string|integer} [$fields.adminLevel=null] You can set the stream's admin access level, see Streams::$ADMIN_LEVEL
@@ -886,8 +886,12 @@ abstract class Streams extends Base_Streams
 		}
 		
 		// prepare attributes field
-		if (isset($fields['attributes']) and is_array($fields['attributes'])) {
-			$fields['attributes'] = json_encode($fields['attributes']);
+		if (isset($fields['attributes'])) {
+			if (is_array($fields['attributes'])) {
+				$fields['attributes'] = Q::json_encode($fields['attributes']);
+			} else if (is_string($fields['attributes'])) {
+				Q::json_decode($fields['attributes']); // may throw an exception
+			}
 		}
 
 		// extend with any config defaults for this stream type

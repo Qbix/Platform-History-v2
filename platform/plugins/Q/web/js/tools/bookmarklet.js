@@ -122,13 +122,16 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 									'<div class="Q_bookmarklet_tool_step">' +
 										'<h3>Step 4: Installation complete.</h3>' +
 										'<p>Installation should be complete!</p>' +
-										'<p>Tap the bookmark icon next to the address bar, then tap "'+o.title+'" to use it.</p>' +
+										'<p>Tap the bookmark icon next to the address bar, then tap "'+o.title+'" to use it on any page.</p>' +
 									'</div>' +
 								'</div>');
 				break;
 				
 			case 'ios':
-				var icon = '<img src="'+Q.url('plugins/Q/img/bookmarklet/ios_action.png')+'" class="Q_bookmarklet_ios_action_icon" />';
+				var url = Q.info.browser.mainVersion >= 8
+					? 'plugins/Q/img/bookmarklet/ios8_action.png'
+					: 'plugins/Q/img/bookmarklet/ios_action.png';
+				var icon = '<img src="'+Q.url(url)+'" class="Q_bookmarklet_ios_action_icon" />';
 				if (browser.device === 'iPad') {
 					$this.addClass('Q_bookmarklet_tool_iPad');
 					$this.append( '<div class="Q_bookmarklet_tool_instructions">' +
@@ -161,7 +164,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 										'<div class="Q_bookmarklet_tool_step">' +
 											'<h3>Step 4: Installation complete.</h3>' +
 											'<p>Installation should be complete!</p>' +
-											'<p>Select the "'+o.title+'" bookmark from your Bookmarks list to use it.</p>' +
+											'<p>Select the "'+o.title+'" bookmark from your Bookmarks list to use it on any page.</p>' +
 										'</div>' +
 									'</div>');
 				} else {
@@ -196,7 +199,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 										'<div class="Q_bookmarklet_tool_step">' +
 											'<h3>Step 4: Installation complete.</h3>' +
 											'<p>Installation should be complete!</p>' +
-											'<p>Select the "'+o.title+'" bookmark from your Bookmarks list to use it.</p>' +
+											'<p>Select the "'+o.title+'" bookmark from your Bookmarks list to use it on any page.</p>' +
 										'</div>' +
 									'</div>');
 				}
