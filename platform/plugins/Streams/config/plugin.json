@@ -151,7 +151,7 @@
 				"description": "visual image",
 				"create": true,
 				"edit": true,
-				"sizes": ["40", "50", "80", "x200", "200x"],
+				"sizes": ["40", "50", "80", "200", "x200", "200x"],
 				"defaults": {
 					"title": "Untitled Image",
 					"icon": "Streams/image"
