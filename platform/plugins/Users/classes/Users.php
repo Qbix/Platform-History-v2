@@ -1840,13 +1840,12 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * Get the email address or mobile number from the request, if it can be deduced
+	 * Get the email address or mobile number from the request, if it can be deduced.
+	 * Note: it should still be tested for validity.
 	 * @method requestedIdentifier
 	 * @static
 	 * @param {&string} [$type=null] The identifier's type will be filled here. Might be "email", "mobile" or "token".
 	 * @return {string|null} The identifier, or null if one wasn't requested
-	 *
-	 * **Note:** *we still have to test it for validity.*
 	 */
 	static function requestedIdentifier(&$type = null)
 	{
