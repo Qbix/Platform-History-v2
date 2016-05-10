@@ -38,7 +38,8 @@ function Users_before_Q_responseExtras()
 		if ($user) {
 			$u = $user->exportArray();
 			$u['sessionCount'] = $user->sessionCount;
-			Q_Response::setScriptData('Q.plugins.Users.loggedInUser', $u);
+			$ujson = Q::json_encode($u);
+			Q_Response::addScriptLine("Q.plugins.Users.loggedInUser = new Q.Users.User($ujson)");
 		}
 	}
 	Q_Response::setScriptData('Q.plugins.Users.communityId', Users::communityId());

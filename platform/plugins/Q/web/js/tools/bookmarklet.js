@@ -13,7 +13,7 @@
  * @class Q bookmarklet
  * @constructor
  * @param {Object} options This is an object with properties for this function
- *	 @param {String} options.content Javascript code or url of the script.
+ *	 @param {String} options.content Javascript code or url of the script, with the "javascript:" prefix.
  *	 @param {String} options.title Title for the button which will be added to user's browser bar.
  *	 @param {String} options.usage Text which is appended to instructions, identifying purpose and usage of this bookmarklet.
  *	 @param {String} [options.icon] Icon for the button which will be added to user's browser bar.
@@ -251,7 +251,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 			var buttons = $this.find('.Q_bookmarklet_tool_button_middle a');
 			if (o.content.substr(0, 11) === 'javascript:')
 			{
-				buttons.attr('href', 'javascript:' + encodeURIComponent(o.content.substr(11)));
+				buttons.attr('href', 'javascript:' + encodeURIComponent(o.content.substr(11).replace('\n', ' ')));
 			}
 			else
 			{

@@ -9,6 +9,7 @@
 (function (undefined) {
 
 var root = this;
+var $ = root.jQuery;
 
 // private properties
 var _isReady = false;
@@ -3590,7 +3591,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 	Q.ensure(root.jQuery, Q.onJQuery.add, _onJQuery);
 	Q.Tool.latestName = name;
 	function _onJQuery() {
-		var $ = root.jQuery;
+		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
 			if (typeof options === 'string') {
 				var method = options;
