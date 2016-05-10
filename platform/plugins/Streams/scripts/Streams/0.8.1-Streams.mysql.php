@@ -28,7 +28,7 @@ function Streams_0_8_1_Streams_mysql()
 	if (!file_exists('Streams')) {
 		Q_Utils::symlink(
 			STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'labels'.DS.'Streams',
-			USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'icons'.DS.'Streams'
+			USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'icons'.DS.'labels'.DS.'Streams'
 		);
 	}
 }
