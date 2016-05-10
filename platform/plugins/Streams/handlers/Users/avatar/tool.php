@@ -4,22 +4,23 @@
  * This tool renders a user avatar
  *
  * @param {array} $options An associative array of parameters, containing:
- * @param {boolean} [options.userId]
- *   "userId" => The user's id. Defaults to id of the logged-in user, if any.
+ * @param {string} [$options.userId]
+ *   The user's id. Defaults to id of the logged-in user, if any.
+ *   Can be '' for a blank-looking avatar.
  * @param {boolean} [options.short]
- *   "short" => Optional. Renders the short version of the display name.
+ *   Optional. Renders the short version of the display name.
  * @param {boolean|integer} [options.icon=false]
- *   "icon" => Optional. Pass the size in pixels of the (square) icon to render
+ *   Optional. Pass the size in pixels of the (square) icon to render
  *   before the username. Or pass true to render the default size.
  * @param {array} [options.iconAttributes]
- *   "iconAttributes" => Optional. Array of attributes to render for the icon.
+ *   Optional. Array of attributes to render for the icon.
  * @param {boolean} [options.editable=false]
- *   "editable" => Optional. Whether to provide an interface for editing the user's info. Can be array containing one or more of "icon", "name".
- *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
+ *   Optional. Whether to provide an interface for editing the user's info. Can be array containing one or more of "icon", "name".
+ * @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
  * @param {boolean} [options.cacheBust=null]
- *   "cacheBust" => Number of milliseconds to use for Q_Uri::cacheBust for combating unintended caching on some environments.
+ *   Number of milliseconds to use for Q_Uri::cacheBust for combating unintended caching on some environments.
  * @param {boolean} [options.renderOnClient]
- *    If true, only the html container is rendered, so the client will do the rest.
+ *   If true, only the html container is rendered, so the client will do the rest.
  */
 function Users_avatar_tool($options)
 {

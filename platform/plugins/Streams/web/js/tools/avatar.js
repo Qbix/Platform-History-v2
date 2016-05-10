@@ -15,7 +15,7 @@ var Streams = Q.Streams;
  * @constructor
  * @param {String} prefix Prefix of the tool to be constructed.
  * @param {Object} [options] A hash of options, containing:
- *   @param {String} options.userId The id of the user object. Can be '' for a blank-looking avatar.
+ *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
  *   @param {Number} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon.
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
  *   @param {Boolean|Array} [options.editable=false] If true, and userId is the logged-in user's id, the tool presents an interface for the logged-in user to edit their name and icon. This can also be an array containing one or more of 'icon', 'name'.
@@ -37,13 +37,13 @@ var Streams = Q.Streams;
  *   @param {Q.Event} [options.onUpdate]  An event that occurs when the icon is updated via this tool
  *   @param {Q.Event} [options.onImagepicker]  An event that occurs when the imagepicker is activated
  */
-Q.Tool.define("Users/avatar", function(options) {
+Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	var tool = this;
 	var state = this.state;
 	if (state.icon === true) {
 		state.icon = Users.icon.defaultSize;
 	}
-	if (state.me) {
+	if (state.userId == null) {
 		state.userId = Users.loggedInUserId();
 	}
 	if (state.editable === true) {
@@ -79,7 +79,7 @@ Q.Tool.define("Users/avatar", function(options) {
 },
 
 {
-	userId: null,
+	userId: undefined,
 	icon: Users.icon.defaultSize,
 	"short": false,
 	reflectChanges: true,

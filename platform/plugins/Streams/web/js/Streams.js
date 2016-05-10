@@ -3132,7 +3132,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	if (options && options.short) {
 		return fn ? fn2 : (u ? u2 : f2);
 	} else if (fn && ln) {
-		return fn + ' ' + ln2;
+		return fn2 + ' ' + ln2;
 	} else if (fn && !ln) {
 		return u ? fn2 + ' ' + u2 : fn2;
 	} else if (!fn && ln) {
