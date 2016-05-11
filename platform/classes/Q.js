@@ -1306,10 +1306,8 @@ Q.first = function _Q_first(container, options) {
  * Returns the first key or index in a container with a value that's not undefined
  * @method firstKey
  * @param {Array|Object|String} container
- * @param {Object} options
- *  "firstKey": return the first non-empty key
- * @return {Number|String}
- *  the index in the container, or null
+ * @param {boolean} [options.nonEmptyKey] return the first non-empty key
+ * @return {Number|String} the index in the container, or null
  * @throws {Q.Exception} If container is not array, object or string
  */
 Q.firstKey = function _Q_firstKey(container, options) {
@@ -2312,17 +2310,17 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 	});
 };
 
-String.prototype.toCapitalized = function _String_prototype_toCapitalized() {
+Sp.toCapitalized = function _String_prototype_toCapitalized() {
 	return (this + '').replace(/^([a-z])|\s+([a-z])/g, function (found) {
 		return found.toUpperCase();
 	});
 };
 
-String.prototype.isUrl = function () {
+Sp.isUrl = function () {
 	return this.match(/^[A-Za-z]*:\/\//);
 };
 
-String.prototype.encodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
+Sp.encodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
 	return this.replaceAll({
 		'&': '&amp;',
 		'<': '&lt;',
@@ -2332,7 +2330,7 @@ String.prototype.encodeHTML = function _String_prototype_encodHTML(quote_style, 
 	});
 };
 
-String.prototype.decodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
+Sp.decodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
 	return this.replaceAll({
 		'&amp;': '&',
 		'&lt;': '<',
@@ -2342,7 +2340,7 @@ String.prototype.decodeHTML = function _String_prototype_encodHTML(quote_style, 
 	});
 };
 
-String.prototype.hashCode = function() {
+Sp.hashCode = function() {
 	var hash = 0;
 	if (this.length == 0) return hash;
 	for (i = 0; i < this.length; i++) {
@@ -2687,13 +2685,15 @@ if (!Object.getPrototypeOf) {
 	};
 }
 
-String.prototype.toCapitalized = function _String_prototype_toCapitalized() {
+var Sp = String.prototype;
+
+Sp.toCapitalized = function _String_prototype_toCapitalized() {
 	return (this + '').replace(/^([a-z])|\s+([a-z])/g, function (found) {
 		return found.toUpperCase();
 	});
 };
 
-String.prototype.encodeHTML = function _String_prototype_htmlentities(quote_style, charset, double_encode) {
+Sp.encodeHTML = function _String_prototype_htmlentities(quote_style, charset, double_encode) {
 	return this.replaceAll({
 		'&': '&amp;',
 		'<': '&lt;',
@@ -2703,7 +2703,7 @@ String.prototype.encodeHTML = function _String_prototype_htmlentities(quote_styl
 	});
 };
 
-String.prototype.quote = function _String_prototype_quote() {
+Sp.quote = function _String_prototype_quote() {
 	var c, i, l = this.length, o = '"';
 	for (i = 0; i < l; i += 1) {
 		c = this.charAt(i);
@@ -2750,7 +2750,7 @@ String.prototype.quote = function _String_prototype_quote() {
  * @return {string}
  *  The result of the interpolation
  */
-String.prototype.interpolate = function _String_prototype_interpolate(params) {
+Sp.interpolate = function _String_prototype_interpolate(params) {
 	return this.replace(/\{\{([^{}]*)\}\}/g,
 		function (a, b) {
 			var r = params[b];
@@ -2759,7 +2759,7 @@ String.prototype.interpolate = function _String_prototype_interpolate(params) {
 	);
 };
 
-String.prototype.replaceAll = function _String_prototype_replaceAll(pairs) {
+Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 	var result = this;
 	for (var k in pairs) {
 		result = result.replace(new RegExp(k, 'g'), pairs[k]);
@@ -2774,7 +2774,7 @@ String.prototype.replaceAll = function _String_prototype_replaceAll(pairs) {
  * @param {String} value Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
  * @return {String} the value of the field in the source, or if value was not undefined, the resulting querystring
  */
-String.prototype.queryField = function Q_queryField(name, value) {
+Sp.queryField = function Q_queryField(name, value) {
 	var what = this;
 	var prefixes = ['#!', '#', '?', '!'], count = prefixes.length, prefix = '', i, l, p, keys, parsed;
 	for (var i=0; i<count; ++i) {
@@ -2814,11 +2814,62 @@ String.prototype.queryField = function Q_queryField(name, value) {
 	}
 };
 
-if (!String.prototype.trim) {
-	String.prototype.trim = function _String_prototype_trim() {
+if (!Sp.trim) {
+	Sp.trim = function _String_prototype_trim() {
 		return this.replace(/^\s+|\s+$/g, "");
 	};
 }
+
+/**
+ * Analogous to PHP's parse_url function
+ * @method parseUrl
+ * @param {String} component Optional name of component to return
+ * @return {String}
+ */
+Sp.parseUrl = function _String_prototype_parseUrl (component) {
+	// http://kevin.vanzonneveld.net
+	// modified by N.I for 'php' parse mode
+	var key = ['source', 'scheme', 'authority', 'userInfo', 'user', 'pass', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'fragment'],
+		parser = /^(?:([^:\/?#]+):)?(?:\/\/()(?:(?:()(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?))?()(?:(()(?:(?:[^?#\/]*\/)*)()(?:[^?#]*))(?:\?([^#]*))?(?:#(.*))?)/;
+	var m = parser.exec(this), uri = {}, i = 14;
+	while (i--) {
+		if (m[i]) uri[key[i]] = m[i];
+	}
+	if (component) {
+		return uri[component.replace('PHP_URL_', '').toLowerCase()];
+	}
+	delete uri.source;
+	return uri;
+};
+
+/**
+ * @method sameDomain
+ * @param {String} url2 The url to compare against
+ * @param {Object} options can include the following:
+ * @param {boolean} [options.compareScheme] boolean for whether the url scheme should be compared also
+ * @return {boolean}
+ * @private
+ */
+Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
+	var parsed1 = this.parseUrl(),
+		parsed2 = url2.parseUrl();
+	var same = (parsed1.host === parsed2.host)
+		&& (parsed1.user === parsed2.user)
+		&& (parsed1.pass === parsed2.pass)
+		&& (parsed1.port === parsed2.port);
+	return options && options.compareScheme
+		? same && (parsed1.scheme === parsed2.scheme)
+		: same;
+};
+
+/**
+ * @method startsWith
+ * @param {String} prefix
+ * @return {boolean}
+ */
+Sp.startsWith = function _String_prototype_startsWith(prefix) {
+	return this.substr(0, prefix.length) === prefix;
+};
 
 /**
  * Binds a method to an object, so "this" inside the method

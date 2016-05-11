@@ -821,7 +821,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$fields.title=null] You can set the stream's title
 	 * @param {string} [$fields.icon=null] You can set the stream's icon
 	 * @param {string} [$fields.title=null] You can set the stream's content
-	 * @param {string} [$fields.attributes=null] You can set the stream's attributes directly as a JSON string
+	 * @param {string|array} [$fields.attributes=null] You can set the stream's attributes directly as a JSON string
 	 * @param {string|integer} [$fields.readLevel=null] You can set the stream's read access level, see Streams::$READ_LEVEL
 	 * @param {string|integer} [$fields.writeLevel=null] You can set the stream's write access level, see Streams::$WRITE_LEVEL
 	 * @param {string|integer} [$fields.adminLevel=null] You can set the stream's admin access level, see Streams::$ADMIN_LEVEL
@@ -886,8 +886,12 @@ abstract class Streams extends Base_Streams
 		}
 		
 		// prepare attributes field
-		if (isset($fields['attributes']) and is_array($fields['attributes'])) {
-			$fields['attributes'] = json_encode($fields['attributes']);
+		if (isset($fields['attributes'])) {
+			if (is_array($fields['attributes'])) {
+				$fields['attributes'] = Q::json_encode($fields['attributes']);
+			} else if (is_string($fields['attributes'])) {
+				Q::json_decode($fields['attributes']); // may throw an exception
+			}
 		}
 
 		// extend with any config defaults for this stream type
@@ -3453,8 +3457,8 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $fullName The full name of the user in the format 'First Last' or 'Last, First'
 	 * @param {string} $identifier User identifier
-	 * @param {array} $icon=array() User icon
-	 * @param {string} $provider=null Provider
+	 * @param {array} [$icon=array()] User icon
+	 * @param {string} [$provider=null] Provider
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -3493,19 +3497,7 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Please enter your name properly", 'name');
 		}
 
-		self::$cache['register'] = $name;
-
-		if ($provider !== 'invite') {
-			$user = Users::register("", $identifier, $icon, $provider, $options);
-		} else {
-			if (!empty($identifier)) {
-				$rid = Users::requestedIdentifier($type);
-				$user = Users::userFromContactInfo($type, $rid);
-				if (!$user) throw new Users_Exception_NoSuchUser();
-			} else {
-				$user = Users::loggedInUser();
-			}
-		}
+		$user = Users::register("", $identifier, $icon, $provider, $options);
 
 		/**
 		 * @event Users/register {after}

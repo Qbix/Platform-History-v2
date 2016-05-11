@@ -13,8 +13,7 @@ var Users = Q.Users;
  * @class Users avatar
  * @constructor
  * @param {Object} [options] this object contains function parameters
- *   @param {String} [options.userId] The id of the user object. Can be '' for a blank-looking avatar.
- *   @required
+ *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
  *   @param {String} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon.
  *   @param {Object} [options.templates] Object for avatar template parameters
  *     @param {Object} [options.templates.icon]
@@ -28,14 +27,14 @@ var Users = Q.Users;
  *       @param {Object} [options.templates.contents.fields]
  *         @param {String} [options.templates.contents.fields.tag="span"]
  */
-Q.Tool.define("Users/avatar", function(options) {
+Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	if (this.element.childNodes.length) {
 		return;
 	}
 	var tool = this;
 	var state = this.state;
-	if (state.userId === undefined) {
-		return;
+	if (state.userId == null) {
+		state.userId = Users.loggedInUserId();
 	}
 	if (state.icon === true) {
 		state.icon = Users.icon.defaultSize;
@@ -44,10 +43,6 @@ Q.Tool.define("Users/avatar", function(options) {
 	var p = new Q.Pipe(['icon', 'contents'], function (params) {
 		tool.element.innerHTML = params.icon[0] + params.contents[0];
 	});
-	
-	if (state.me) {
-		state.userId = Users.loggedInUserId();
-	}
 	
 	if (state.userId === '') {
 		var fields = Q.extend({}, state.templates.contents.fields, {
