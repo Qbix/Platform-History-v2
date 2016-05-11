@@ -25,7 +25,7 @@ function Streams_related_response()
 		$options
 	);
 
-	$fields = Q::isset($_REQUEST, 'fields', null);
+	$fields = Q::ifset($_REQUEST, 'fields', null);
 	$exportOptions = array('numeric' => true);
 	if (isset($fields)) {
 		if (is_string($fields)) {
