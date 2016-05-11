@@ -331,6 +331,11 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
 		: same;
 };
 
+/**
+ * @method startsWith
+ * @param {String} prefix
+ * @return {boolean}
+ */
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
 	return this.substr(0, prefix.length) === prefix;
 };
@@ -1155,8 +1160,7 @@ Q.first = function _Q_first(container, options) {
  * @param {Array|Object|String} container
  * @param {Object} options
  * @param {boolean} [options.nonEmptyKey] return the first non-empty key
- * @return {Number|String}
- *  the index in the container, or null
+ * @return {Number|String} the index in the container, or null
  * @throws {Q.Error} If container is not array, object or string
  */
 Q.firstKey = function _Q_firstKey(container, options) {
