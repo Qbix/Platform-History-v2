@@ -127,12 +127,13 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 					// load the icon
 					ps.imagepicker.onSuccess = {
 						"Streams/image/preview": function (data, key, file) {
-							if (!file || !file.name) return;
-							ps.stream.fields.title = file.name;
-							ps.stream.save(null, {
-								messages: true,
-								changed: { icon: true }
-							});
+							if (state.updateTitle && file && file.name) {
+								ps.stream.fields.title = file.name;
+								ps.stream.save(null, {
+									messages: true,
+									changed: { icon: true }
+								});
+							}
 						}
 					};
 					var $jq = tool.$('img.Streams_image_preview_icon');

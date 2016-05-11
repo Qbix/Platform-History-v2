@@ -1037,6 +1037,7 @@ Streams.invite.options = {
  *   @param {Number} [options.min] the minimum weight (inclusive) to filter by, if any
  *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
  *   @param {String} [options.prefix] optional prefix to filter the streams by
+ *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
  *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream (ignores cache)
  *   @param {Mixed} [options.participants]  optional. Pass a limit here to fetch that many participants (ignores cache). Only honored if streamName is a string.
  *   @param {Boolean} [options.messages]
@@ -1083,6 +1084,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	fields.omitRedundantInfo = true;
 	if (isCategory !== undefined) {
 		fields.isCategory = isCategory;
+	}
+	if (Q.isArrayLike(fields.fields)) {
+		fields.fields = fields.join(',');
 	}
 
 	var cached = Streams.get.cache.get([publisherId, streamName]);
