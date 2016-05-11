@@ -1579,7 +1579,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
+			return Q.handle(callback, this, [msg, args]);
 		}
 		// the rest will occur in the handler for the stream.onUpdated event
 		// coming from the socket
@@ -1588,7 +1588,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 			// process the Streams/changed message, if stream was retained
 			_refreshUnlessSocket(stream.publisherId, stream.name, callback, options);
 		} else {
-			callback && callback.call(that, null, stream);
+			return Q.handle(callback, that, [null, stream]);
 		}
 	}, { method: 'put', fields: pf, baseUrl: baseUrl });
 };

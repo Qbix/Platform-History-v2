@@ -17,7 +17,7 @@
  *   @param {string} [$options.stream] You can pass a Streams_Stream object here instead of "publisherId" and "streamName"
  *   @param {string} [$options.relationType=""] The type of the relation.
  *   @param {boolean} [$options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
- *   @param {array} [$options.relationOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max' and 'prefix'
+ *   @param {array} [$options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max' and 'prefix'
  *   @param {boolean} [$options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text
  *   @param {array} [$options.creatable]  Optional pairs of {streamType: toolOptions}  to render Streams/preview tools create new related streams.
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
