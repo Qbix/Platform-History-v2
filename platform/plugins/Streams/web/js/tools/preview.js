@@ -172,7 +172,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var fields = Q.extend({
 				publisherId: state.publisherId,
 				type: state.creatable.streamType || "Streams/text/small"
-			}, overrides);
+			}, 10, overrides);
 			state.beforeCreate.handle.call(tool);
 			tool.loading();
 			var r = state.related;
@@ -219,7 +219,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			title: "New Item",
 			src: Q.url('plugins/Streams/img/actions/add.png'),
 			prefix: tool.prefix
-		}, state.templates.create.fields, f, state.creatable);
+		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
 		tool.element.addClass('Streams_preview_create');
 		Q.Template.render(
 			'Streams/preview/create',
@@ -354,7 +354,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				$(element).off('load.Streams-preview')
 				.on('load.Streams-preview', function () {
 					// add imagepicker
-					var ipo = Q.extend({}, si, {
+					var ipo = Q.extend({}, si, 10, {
 						preprocess: function (callback) {
 							var subpath;
 							var parts = tool.stream.iconUrl(40).split('/');
@@ -439,7 +439,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				}
 			};
 		}
-		var ao = Q.extend({}, state.actions, { actions: actions });
+		var ao = Q.extend({}, state.actions, 10, { actions: actions });
 		tool.$().plugin('Q/actions', ao);
 		return this;
 	},

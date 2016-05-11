@@ -17,7 +17,7 @@
  *   @param {Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
  *   @param {Stream} [options.relationType =""] The type of the relation.
  *   @param {Boolean} [options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
- *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max' and 'prefix'
+ *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
  *   @param {Boolean} [options.closeable] Set to false to avoid showing even authorized users an interface to close related streams
  *   @param {Object} [options.creatable]  Optional pairs of {streamType: toolOptions} to render Streams/preview tools create new related streams.

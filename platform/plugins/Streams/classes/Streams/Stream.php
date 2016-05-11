@@ -1379,9 +1379,11 @@ class Streams_Stream extends Base_Streams_Stream
 	 * Returns array of fields allowed for user
 	 * @method exportArray
 	 * @param {array} $options=array()
-	 *  Options can include:
-	 *  "asUserId" => Defaults to the logged in user, or "" if not logged in
-	 *	If access is not set for the stream it will be calculated for <code>$asUserId</code>
+	 * @param {string} [$options.asUserId] Defaults to the logged in user, or "" if not logged in
+	 *	If access is not already set for the stream, it will be calculated for $asUserId.
+	 * @param {array} [$fields] By default, all fields from tables used to "extend" the
+	 *  stream are returned. You can indicate here an array consisting of only the names of
+	 *  fields to export. An empty array means no extended fields will be exported.
 	 * @return {array}
 	 */
 	function exportArray($options = null)
@@ -1422,6 +1424,10 @@ class Streams_Stream extends Base_Streams_Stream
 		$fieldNames = array();
 		foreach ($classes as $k => $v) {
 			foreach ($v as $f) {
+				if (isset($options['fields'])
+				and !in_array($f, $options['fields'])) {
+					continue;
+				}
 				foreach ($fieldNames as $key) {
 					$result[$f] = isset($this->$f) ? $this->$f : null;
 				}

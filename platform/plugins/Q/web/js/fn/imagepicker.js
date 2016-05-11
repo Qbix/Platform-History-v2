@@ -79,8 +79,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			return _doUpload(null, null);
 		}
 		var reader = new FileReader();
-		reader.onload = function(file) {
-			$this.state('Q/imagepicker').file = file;
+		reader.onload = function(event) {
 			$this.plugin('Q/imagepicker', 'pick', this.result);
 		};
 		reader.onerror = function () { 
@@ -88,7 +87,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				callback("Error reading file", res);
 			}, 0);
 		};
-		reader.readAsDataURL(this.files[0]);
+		state.file = this.files[0];
+		reader.readAsDataURL(state.file);
 
 		// clear the input, see http://stackoverflow.com/a/13351234/467460
 		state.input.wrap('<form>').closest('form').get(0).reset();
