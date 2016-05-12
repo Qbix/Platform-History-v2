@@ -184,13 +184,23 @@ class Q
 	 * Test whether $text is prefixed by $prefix
 	 * @method startsWith
 	 * @static
-	 * @param {string} $text The string to check
+	 * @param {string|array} $text The string or array of strings to check
 	 * @param {string} $prefix
 	 * @return {boolean}
 	 */
 	static function startsWith($text, $prefix)
 	{
-		return substr($text, 0, strlen($prefix)) === $prefix;
+		if (is_string($text)) {
+			return substr($text, 0, strlen($prefix)) === $prefix;	
+		}
+		if (is_array($text)) {
+			foreach ($text as $t) {
+				if (!self::startsWith($t, $prefix)) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 
 	/**

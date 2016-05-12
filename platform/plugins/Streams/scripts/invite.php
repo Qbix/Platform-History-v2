@@ -75,9 +75,9 @@ $app = Q_Config::expect('Q', 'app');
 $identifier = $FROM_APP ? $argv[1] : $argv[2];
 $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
 $labels = array_slice($argv, $FROM_APP ? 3 : 4);
-$label = empty($labels) ? "$app/admins" : $labels;
+$addLabel = empty($labels) ? "$app/admins" : $labels;
 $asUserId = $app;
 $skipAccess = true;
 
-Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('label', 'asUserId', 'skipAccess'));
+Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess'));
 echo "Successfully invited $identifier\n";

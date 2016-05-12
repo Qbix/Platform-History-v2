@@ -533,9 +533,9 @@ Streams.listen = function (options) {
 					invitingUserId = parsed.invitingUserId;
 					username = parsed.username;
 					appUrl = parsed.appUrl;
-					readLevel = parsed.readLevel && JSON.parse(parsed.readLevel) || null;
-					writeLevel = parsed.writeLevel && JSON.parse(parsed.writeLevel) || null;
-					adminLevel = parsed.adminLevel && JSON.parse(parsed.adminLevel) || null;
+					readLevel = parsed.readLevel || null;
+					writeLevel = parsed.writeLevel || null;
+					adminLevel = parsed.adminLevel || null;
 					displayName = parsed.displayName || '';
 					expiry = parsed.expiry ? new Date(parsed.expiry*1000) : null;
 				} catch (e) {

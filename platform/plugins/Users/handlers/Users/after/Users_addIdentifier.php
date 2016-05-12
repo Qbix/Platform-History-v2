@@ -6,8 +6,8 @@ function Users_after_Users_addIdentifier($params)
 	if (!Q_Config::get('Users', 'notices', 'identifier', true)) {
 		return;
 	}
-	$logged_in_user = Users::loggedInUser();
-	if (!$logged_in_user or $logged_in_user->id !== $user->id) {
+	$loggedInUser = Users::loggedInUser();
+	if (!$loggedInUser or $loggedInUser->id !== $user->id) {
 		return;
 	}
 	if (isset($email)) {

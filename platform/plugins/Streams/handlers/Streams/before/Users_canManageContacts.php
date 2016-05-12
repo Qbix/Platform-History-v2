@@ -14,7 +14,7 @@ function Streams_before_Users_canManageContacts($params, &$result)
 	if ($stream and $stream->testWriteLevel('edit')) {
 		if ($prefixes = $stream->getAttribute('prefixes', null)) {
 			foreach ($prefixes as $prefix) {
-				if (substr($label, 0, strlen($prefix)) === $prefix) {
+				if (Q::startsWith($label, $prefix)) {
 					$result = true;
 					return;
 				}

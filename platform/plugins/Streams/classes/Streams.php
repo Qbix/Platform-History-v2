@@ -3080,8 +3080,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {array} [$options=array()]
-	 *  @param {string|array} [$options.label] label or an array of labels for adding publisher's contacts
-	 *  @param {string|array} [$options.myLabel] label or an array of labels for adding asUserId's contacts
+	 *  @param {string|array} [$options.addLabel] label or an array of labels for adding publisher's contacts
+	 *  @param {string|array} [$options.addMyLabel] label or an array of labels for adding asUserId's contacts
 	 *  @param {integer} [$options.readLevel] => the read level to grant those who are invited
 	 *  @param {integer} [$options.writeLevel] => the write level to grant those who are invited
 	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited
@@ -3210,6 +3210,7 @@ abstract class Streams extends Base_Streams
 		// now check and define levels for invited user
 		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
 		if (isset($readLevel)) {
+			$readLevel = Streams_Stream::numericReadLevel($readLevel);
 			if (!$stream->testReadLevel($readLevel)) {
 				// We can't assign greater read level to other people than we have ourselves!
 				throw new Users_Exception_NotAuthorized();
@@ -3217,6 +3218,7 @@ abstract class Streams extends Base_Streams
 		}
 		$writeLevel = isset($options['writeLevel']) ? $options['writeLevel'] : null;
 		if (isset($writeLevel)) {
+			$writeLevel = Streams_Stream::numericWriteLevel($writeLevel);
 			if (!$stream->testWriteLevel($writeLevel)) {
 				// We can't assign greater write level to other people than we have ourselves!
 				throw new Users_Exception_NotAuthorized();
@@ -3224,6 +3226,7 @@ abstract class Streams extends Base_Streams
 		}
 		$adminLevel = isset($options['adminLevel']) ? $options['adminLevel'] : null;
 		if (isset($adminLevel)) {
+			$adminLevel = Streams_Stream::numericAdminLevel($adminLevel);
 			if (!$stream->testAdminLevel($adminLevel+1)) {
 				// We can't assign an admin level greater, or equal, to our own!
 				// A stream's publisher can assign owners. Owners can assign admins.
@@ -3241,13 +3244,13 @@ abstract class Streams extends Base_Streams
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
 		
-		if ($label = Q::ifset($options, 'label', null)) {
+		if ($label = Q::ifset($options, 'addLabel', null)) {
 			if (is_string($label)) {
 				$label = explode("\t", $label);
 			}
 			Users_Label::addLabel($label, $publisherId, null, null, $asUserId2);
 		}
-		if ($myLabel = Q::ifset($options, 'myLabel', null)) {
+		if ($myLabel = Q::ifset($options, 'addMyLabel', null)) {
 			if (is_string($myLabel)) {
 				$myLabel = explode("\t", $myLabel);
 			}

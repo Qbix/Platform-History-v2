@@ -2,7 +2,15 @@
 
 function Users_identifier_post()
 {
-	$user = Users::loggedInUser(true);
+	$userId = Q::ifset($_REQUEST, 'userId', null);
+	if (isset($userId)) {
+		$user = Users_User::fetch($userId, true);
+		if ($user->emailAddress or $user->mobileNumber) {
+			throw new Q_Exception("This user is already able to log in and set their own email and mobile number.");
+		}
+	} else {
+		$user = Users::loggedInUser(true);
+	}
 	$app = Q_Config::expect('Q', 'app');
 	$fields = array();
 

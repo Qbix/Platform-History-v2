@@ -1,16 +1,17 @@
-ALTER TABLE {$prefix}notification
-DROP PRIMARY KEY,
-DROP INDEX viewedTime,
-DROP INDEX stream,
-DROP INDEX recipient,
-DROP INDEX count,
-ADD COLUMN messageOrdinal int(11) NOT NULL AFTER streamName,
-MODIFY COLUMN insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER messageOrdinal;
-
 # The old data won't work with the primary key.
 # We can do this since we didn't release Q publicly yet,
 # so we know that no apps will be affected by the following statement:
-TRUNCATE TABLE {$prefix}notification;
+DROP TABLE IF EXISTS `{$prefix}notification`;
 
-ALTER TABLE {$prefix}notification
-ADD PRIMARY KEY (userId, publisherId, streamName, messageOrdinal);
+CREATE TABLE `{$prefix}notification` (
+  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the user to notify',
+  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
+  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream causing the notification',
+  `messageOrdinal` int(11) NOT NULL COMMENT 'the ordinal of the message being notified about',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'the type of message',
+  `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
+  `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
+  `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
+  PRIMARY KEY (userId, publisherId, streamName, messageOrdinal)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on userId''s Q server';

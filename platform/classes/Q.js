@@ -2260,99 +2260,6 @@ var getLogStream = Q.getter(function (name, callback) {
 });
 
 /**
- * Writes a string to application log. If run outside Qbix application writes to console.
- * @method log
- * @param {mixed} message The data to write to log file. If data is string it is written to log, if it has other type
- *	it is converted to string using util.format with depth defined by Q/var_dump_max_levels config key
- * @param {String} [name] If set log file will be named name+'_node.log', otherwise it would be named ('Q/app' config value) + '_node.log'
- * @param {boolean} [timestamp=true] Whether to prepend the current timestamp
- * @param {Function} [callback=null] The callback to call after log file is written
- * @return {boolean} false if failed to parse arguments
- */
-Q.log = function _Q_log(message, name, timestamp, callback) {
-	if (typeof timestamp === "undefined") timestamp = true;
-	if (typeof name === "function") {
-		callback = name;
-		timestamp = true;
-		name = Q.Config.get(['Q', 'app'], false);
-	} else if (typeof timestamp === "function") {
-		callback = timestamp;
-		timestamp = true;
-	}
-	if (typeof name === "undefined" || name === true) {
-		name = Q.Config.get(['Q', 'app'], false);
-	}
-
-	if (typeof message !== "string") {
-		if (message instanceof Error
-		|| (message.fileName && message.stack)) {
-			var error = message;
-			message = error.name + ": " + error.message
-				+ "\n" + "in " + error.fileName
-					+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
-				+ "\n" + error.stack;
-		} else {
-			message = 'inspecting "'+Q.typeOf(message)+'":\n'+util.inspect(message, false, Q.Config.get('Q', 'var_dump_max_levels', 5));
-		}
-	}
-
-	message = (timestamp ? '['+Q.date('Y-m-d h:i:s')+'] ' : '')+(name ? name : 'Q')+': ' + message + "\n";
-
-	if (!name) {
-		return console.log(message);
-	}
-	getLogStream(name, function (err, stream) {
-		if (err) {
-			console.log(err);
-			return;
-		}
-		stream.write(message);
-	});
-};
-
-Sp.toCapitalized = function _String_prototype_toCapitalized() {
-	return (this + '').replace(/^([a-z])|\s+([a-z])/g, function (found) {
-		return found.toUpperCase();
-	});
-};
-
-Sp.isUrl = function () {
-	return this.match(/^[A-Za-z]*:\/\//);
-};
-
-Sp.encodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
-	return this.replaceAll({
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		"'": '&apos;'
-	});
-};
-
-Sp.decodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
-	return this.replaceAll({
-		'&amp;': '&',
-		'&lt;': '<',
-		'&gt;': '>',
-		'&quot;': '"',
-		'&apos;': "'"
-	});
-};
-
-Sp.hashCode = function() {
-	var hash = 0;
-	if (this.length == 0) return hash;
-	for (i = 0; i < this.length; i++) {
-		var c = this.charCodeAt(i);
-		hash = hash % 16777216;
-		hash = ((hash<<5)-hash)+c;
-		hash = hash & 0xffffffff; // Convert to 32bit integer
-	}
-	return hash;
-};
-
-/**
  * Returns date/time string formatted the same way as PHP date function does
  * @method date
  * @param {String} format The format string
@@ -2630,6 +2537,57 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 };
 
 /**
+ * Writes a string to application log. If run outside Qbix application writes to console.
+ * @method log
+ * @param {mixed} message The data to write to log file. If data is string it is written to log, if it has other type
+ *	it is converted to string using util.format with depth defined by Q/var_dump_max_levels config key
+ * @param {String} [name] If set log file will be named name+'_node.log', otherwise it would be named ('Q/app' config value) + '_node.log'
+ * @param {boolean} [timestamp=true] Whether to prepend the current timestamp
+ * @param {Function} [callback=null] The callback to call after log file is written
+ * @return {boolean} false if failed to parse arguments
+ */
+Q.log = function _Q_log(message, name, timestamp, callback) {
+	if (typeof timestamp === "undefined") timestamp = true;
+	if (typeof name === "function") {
+		callback = name;
+		timestamp = true;
+		name = Q.Config.get(['Q', 'app'], false);
+	} else if (typeof timestamp === "function") {
+		callback = timestamp;
+		timestamp = true;
+	}
+	if (typeof name === "undefined" || name === true) {
+		name = Q.Config.get(['Q', 'app'], false);
+	}
+
+	if (typeof message !== "string") {
+		if (message instanceof Error
+		|| (message.fileName && message.stack)) {
+			var error = message;
+			message = error.name + ": " + error.message
+				+ "\n" + "in " + error.fileName
+					+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
+				+ "\n" + error.stack;
+		} else {
+			message = 'inspecting "'+Q.typeOf(message)+'":\n'+util.inspect(message, false, Q.Config.get('Q', 'var_dump_max_levels', 5));
+		}
+	}
+
+	message = (timestamp ? '['+Q.date('Y-m-d h:i:s')+'] ' : '')+(name ? name : 'Q')+': ' + message + "\n";
+
+	if (!name) {
+		return console.log(message);
+	}
+	getLogStream(name, function (err, stream) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		stream.write(message);
+	});
+};
+
+/**
  * Obtain a URL
  * @method url
  * @param {Object} what
@@ -2693,7 +2651,11 @@ Sp.toCapitalized = function _String_prototype_toCapitalized() {
 	});
 };
 
-Sp.encodeHTML = function _String_prototype_htmlentities(quote_style, charset, double_encode) {
+Sp.isUrl = function () {
+	return this.match(/^[A-Za-z]*:\/\//);
+};
+
+Sp.encodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
 	return this.replaceAll({
 		'&': '&amp;',
 		'<': '&lt;',
@@ -2701,6 +2663,28 @@ Sp.encodeHTML = function _String_prototype_htmlentities(quote_style, charset, do
 		'"': '&quot;',
 		"'": '&apos;'
 	});
+};
+
+Sp.decodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
+	return this.replaceAll({
+		'&amp;': '&',
+		'&lt;': '<',
+		'&gt;': '>',
+		'&quot;': '"',
+		'&apos;': "'"
+	});
+};
+
+Sp.hashCode = function() {
+	var hash = 0;
+	if (this.length == 0) return hash;
+	for (i = 0; i < this.length; i++) {
+		var c = this.charCodeAt(i);
+		hash = hash % 16777216;
+		hash = ((hash<<5)-hash)+c;
+		hash = hash & 0xffffffff; // Convert to 32bit integer
+	}
+	return hash;
 };
 
 Sp.quote = function _String_prototype_quote() {
