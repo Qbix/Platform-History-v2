@@ -7,12 +7,7 @@
 				'clickable' => false
 			),
 			'imagepicker' => array(
-				'showSize' => '200x',
-				'saveSizeName' => array(
-					'40' => '40',
-					'50' => '50',
-					'200x' => '200x'
-				)
+				'showSize' => '200x'
 			),
 			'actions' => null
 		),

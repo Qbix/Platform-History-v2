@@ -33,16 +33,20 @@ Q.mixin(Base, Row);
  * @type userId
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
- */
-/**
  * @property {String}
  * @type publisherId
  */
 /**
  * @property {String}
  * @type streamName
+ */
+/**
+ * @property {integer}
+ * @type messageOrdinal
+ */
+/**
+ * @property {String|Db.Expression}
+ * @type insertedTime
  */
 /**
  * @property {String}
@@ -204,7 +208,9 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"userId",
-		"insertedTime"
+		"publisherId",
+		"streamName",
+		"messageOrdinal"
 	];
 };
 
@@ -216,9 +222,10 @@ Base.prototype.primaryKey = function () {
 Base.prototype.fieldNames = function () {
 	return [
 		"userId",
-		"insertedTime",
 		"publisherId",
 		"streamName",
+		"messageOrdinal",
+		"insertedTime",
 		"type",
 		"viewedTime",
 		"readTime",
@@ -265,27 +272,6 @@ return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
- * Method is called before setting the field
- * @method beforeSet_insertedTime
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
- */
-Base.prototype.beforeSet_insertedTime = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
-		return value;
-};
-
-	/**
-	 * Returns schema information for insertedTime column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.prototype.column_insertedTime = function () {
-
-return [["timestamp","31","",false],false,"PRI","CURRENT_TIMESTAMP"];
-};
-
-/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_publisherId
@@ -320,7 +306,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.prototype.column_publisherId = function () {
 
-return [["varchar","31","",false],false,"MUL",""];
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -358,7 +344,63 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.prototype.column_streamName = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varchar","255","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * @method beforeSet_messageOrdinal
+ * @param {integer} value
+ * @return {integer} The value
+ * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ */
+Base.prototype.beforeSet_messageOrdinal = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value) || Math.floor(value) != value) 
+			throw new Error('Non-integer value being assigned to '+this.table()+".messageOrdinal");
+		if (value < -2147483648 || value > 2147483647)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".messageOrdinal");
+		return value;
+};
+
+/**
+ * Returns the maximum integer that can be assigned to the messageOrdinal field
+ * @return {integer}
+ */
+Base.prototype.maxSize_messageOrdinal = function () {
+
+		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for messageOrdinal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_messageOrdinal = function () {
+
+return [["int","11","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.prototype.column_insertedTime = function () {
+
+return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -416,7 +458,7 @@ Base.prototype.beforeSet_viewedTime = function (value) {
 	 */
 Base.prototype.column_viewedTime = function () {
 
-return [["timestamp","255","",false],true,"MUL",null];
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**
@@ -475,6 +517,26 @@ Base.prototype.maxSize_comment = function () {
 Base.prototype.column_comment = function () {
 
 return [["varchar","255","",false],true,"",null];
+};
+
+/**
+ * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+ * @method beforeSave
+ * @param {array} value The array of fields
+ * @return {array}
+ * @throws {Error} If mandatory field is not set
+ */
+Base.prototype.beforeSave = function (value) {
+	var fields = ['streamName','messageOrdinal'], i;
+	if (!this._retrieved) {
+		var table = this.table();
+		for (i=0; i<fields.length; i++) {
+			if (typeof this.fields[fields[i]] === "undefined") {
+				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+			}
+		}
+	}
+	return value;
 };
 
 module.exports = Base;

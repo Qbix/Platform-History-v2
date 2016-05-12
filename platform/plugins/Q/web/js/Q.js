@@ -9,6 +9,7 @@
 (function (undefined) {
 
 var root = this;
+var $ = root.jQuery;
 
 // private properties
 var _isReady = false;
@@ -330,6 +331,11 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
 		: same;
 };
 
+/**
+ * @method startsWith
+ * @param {String} prefix
+ * @return {boolean}
+ */
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
 	return this.substr(0, prefix.length) === prefix;
 };
@@ -527,9 +533,16 @@ Elp.computedStyle = function(name) {
 	var computedStyle = root.getComputedStyle
 		? getComputedStyle(this, null)
 		: this.currentStyle;
-	return name
-		? (computedStyle ? computedStyle[name] : null)
-		: Q.extend({}, computedStyle);
+	var result = {};
+	for (var k in computedStyle) {
+		var k2 = root.getComputedStyle ? k : k.replace(/-(\w)/gi, function (word, letter) {
+			return letter.toUpperCase();
+		});
+		result[k2] = computedStyle[k];
+	}
+	return name ? result[name.replace(/-(\w)/gi, function (word, letter) {
+		return letter.toUpperCase();
+	})] : result;
 };
 
 /**
@@ -777,16 +790,20 @@ Elp.isVisible = function () {
 /**
  * Gets the width remaining after subtracting all the siblings on the same line
  * @method remainingWidth
+ * @param {boolean} subpixelAccuracy
  * @return {number|null} Returns the remaining width, or null if element has no parent
  */
-Elp.remainingWidth = function () {
+Elp.remainingWidth = function (subpixelAccuracy) {
 	var element = this;
 	if (!this.parentNode) {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
 	var rect2 = this.parentNode.getBoundingClientRect();
-	var w = rect2.right - rect2.left;
+	var w = (rect2.right - rect2.left); // could be fractional
+	var cs = this.parentNode.computedStyle();
+	w -= _parseFloat(cs.paddingLeft) + _parseFloat(cs.paddingRight)
+		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
 	Q.each(this.parentNode.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
@@ -794,16 +811,20 @@ Elp.remainingWidth = function () {
 		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
-		w -= (rect3.right - rect3.left + 
-			parseFloat(style.marginLeft) + parseFloat(style.marginRight));
+		w -= (rect3.right - rect3.left
+			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
 	});	
-	return w;
+	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
 if (!Elp.getElementsByClassName) {
 	Elp.getElementsByClassName = document.getElementsByClassName;
 }
 
+}
+
+function _parseFloat(value) {
+	return value.substr(value.length-2) == 'px' ? parseFloat(value) : 0;
 }
 	
 (function() {
@@ -968,6 +989,9 @@ Q.typeOf = function _Q_typeOf(value) {
  * @throws {Q.Error} If container is not array, object or string
  */
 Q.each = function _Q_each(container, callback, options) {
+	function _byKeys(a, b) { 
+		return a > b ? 1 : (a < b ? -1 : 0); 
+	}
 	function _byFields(a, b) { 
 		return container[a][s] > container[b][s] ? 1
 			: (container[a][s] < container[b][s] ? -1 : 0); 
@@ -1024,7 +1048,6 @@ Q.each = function _Q_each(container, callback, options) {
 				}
 				var s = options.sort;
 				var t = typeof(s);
-				var _byKeys = undefined;
 				var compare = (t === 'function') ? s : (t === 'string'
 					? (options.numeric ? _byFieldsNumeric : _byFields)
 					: (options.numeric ? _byKeysNumeric : _byKeys));
@@ -1137,8 +1160,7 @@ Q.first = function _Q_first(container, options) {
  * @param {Array|Object|String} container
  * @param {Object} options
  * @param {boolean} [options.nonEmptyKey] return the first non-empty key
- * @return {Number|String}
- *  the index in the container, or null
+ * @return {Number|String} the index in the container, or null
  * @throws {Q.Error} If container is not array, object or string
  */
 Q.firstKey = function _Q_firstKey(container, options) {
@@ -1449,8 +1471,12 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 				tak = Q.typeOf(argk);
 				if (ttk === 'Q.Event') {
 					if (argk && argk.constructor === Object) {
-						for (var m in argk) {
+						for (m in argk) {
 							target[k].set(argk[m], m);
+						}
+					} else if (tak === 'Q.Event') {
+						for (m in argk.handlers) {
+							target[k].set(argk.handlers[m], m);
 						}
 					} else {
 						target[k].set(argk, namespace);
@@ -2388,7 +2414,7 @@ var _layoutElements = [];
 var _layoutEvents = [];
 /**
  * Call this function to get an event which occurs every time
- * Q.layout() is called on the given element or its parent.
+ * Q.layout() is called on the given element or one of its parents.
  * @param {Element} [element=document.documentElement] 
  * @event onLayout
  */
@@ -3216,9 +3242,18 @@ Q.Tool = function _Q_Tool(element, options) {
 	// ID and prefix
 	if (!this.element.id) {
 		var prefix = Q.Tool.beingActivated ? Q.Tool.beingActivated.prefix : '';
-		this.element.id = (
-			prefix + this.name + '-' + (Q.Tool.nextDefaultId++) + "_tool"
-		).toLowerCase();
+		if (!prefix) {
+			var e = this.element.parentNode;
+			do {
+				if (e.hasClass('Q_tool')) {
+					prefix = Q.getObject('Q.tool.prefix', e)
+						|| Q.Tool.calculatePrefix(e.id);
+					break;
+				}
+			} while (e = e.parentNode);
+		}
+		this.element.id = prefix + Q.Tool.names[this.name].split('/').join('_')
+			'-' + (Q.Tool.nextDefaultId++) + "_tool";
 		Q.Tool.nextDefaultId %= 1000000;
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
@@ -3347,6 +3382,7 @@ Q.Tool.options = {
 };
 
 Q.Tool.active = {};
+Q.Tool.names = {};
 Q.Tool.latestName = null;
 Q.Tool.latestNames = {};
 
@@ -3416,8 +3452,10 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 	Q.find(elem, true, null,
 	function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
-		for (var i=tn.length-1; i>=0; --i) {
-			toolElement.Q.tools[tn[i]].remove(removeCached);
+		if (tn) {
+			for (var i=tn.length-1; i>=0; --i) {
+				toolElement.Q.tools[tn[i]].remove(removeCached);
+			}
 		}
 	});
 };
@@ -3478,31 +3516,32 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	}
 	for (name in ctors) {
 		ctor = ctors[name];
-		name = Q.normalize(name);
+		var n = Q.normalize(name);
+		Q.Tool.names[n] = name;
 		if (typeof ctor === 'string') {
-			if (typeof Q.Tool.constructors[name] !== 'function') {
-				_qtdo[name] = _qtdo[name] || {};
-				Q.Tool.constructors[name] = ctor;
+			if (typeof Q.Tool.constructors[n] !== 'function') {
+				_qtdo[n] = _qtdo[n] || {};
+				Q.Tool.constructors[n] = ctor;
 			}
 			continue;
 		}
-		ctor.toolName = name;
+		ctor.toolName = n;
 		if (typeof stateKeys === 'object') {
 			methods = stateKeys;
 			stateKeys = undefined;
 		}
 		ctor.options = Q.extend(
-			defaultOptions, Q.Tool.options.levels, _qtdo[name]
+			defaultOptions, Q.Tool.options.levels, _qtdo[n]
 		);
 		ctor.stateKeys = stateKeys;
 		if (typeof ctor !== 'function') {
 			throw new Q.Error("Q.Tool.define requires ctor to be a string or a function");
 		}
 		Q.extend(ctor.prototype, 10, methods);
-		Q.Tool.constructors[name] = ctor;
-		Q.Tool.onLoadedConstructor(name).handle(name, ctor);
-		Q.Tool.onLoadedConstructor("").handle(name, ctor);
-		Q.Tool.latestName = name;
+		Q.Tool.constructors[n] = ctor;
+		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
+		Q.Tool.onLoadedConstructor("").handle(n, ctor);
+		Q.Tool.latestName = n;
 	}
 	return ctor;
 };
@@ -3550,24 +3589,25 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		}
 		return;
 	}
-	name = Q.normalize(name);
+	var n = Q.normalize(name);
+	Q.Tool.names[n] = name;
 	if (typeof ctor === 'string') {
 		if (root.jQuery
-		&& typeof jQuery.fn.plugin[name] !== 'function') {
-			_qtjo[name] = _qtjo[name] || {};
-			jQuery.fn.plugin[name] = Q.Tool.constructors[name] = ctor;
+		&& typeof jQuery.fn.plugin[n] !== 'function') {
+			_qtjo[n] = _qtjo[n] || {};
+			jQuery.fn.plugin[n] = Q.Tool.constructors[n] = ctor;
 		}
 		return ctor;
 	}
-	ctor.toolName = name;
+	ctor.toolName = n;
 	if (typeof stateKeys === 'object') {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
 	Q.ensure(root.jQuery, Q.onJQuery.add, _onJQuery);
-	Q.Tool.latestName = name;
+	Q.Tool.latestName = n;
 	function _onJQuery() {
-		var $ = root.jQuery;
+		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
 			if (typeof options === 'string') {
 				var method = options;
@@ -3581,13 +3621,13 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 				var args = Array.prototype.slice.call(arguments, 0);
 				args[0] = Q.extend({}, 10, jQueryPluginConstructor.options, 10, options);
 				$(this).each(function () {
-					var key = name + ' state';
+					var key = n + ' state';
 					var $this = $(this);
 					if ($this.data(key)) {
 						// This jQuery plugin was already applied here,
 						// so call remove method if it's defined,
 						// before calling constructor again
-						$this.plugin(name, 'remove');
+						$this.plugin(n, 'remove');
 					}
 					$this.data(key, Q.copy(args[0], stateKeys));
 					ctor.apply($this, args);
@@ -3596,24 +3636,24 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 			return this;
 		}
 		jQueryPluginConstructor.options = Q.extend(
-			defaultOptions, Q.Tool.options.levels, _qtjo[name]
+			defaultOptions, Q.Tool.options.levels, _qtjo[n]
 		);
 		jQueryPluginConstructor.methods = methods || {};
-		$.fn[name] = jQueryPluginConstructor;
-		var ToolConstructor = Q.Tool.define(name,
+		$.fn[n] = jQueryPluginConstructor;
+		var ToolConstructor = Q.Tool.define(n,
 		function _Q_Tool_jQuery_constructor(options) {
 			var $te = $(this.element);
-			$te.plugin(name, options, this);
-			this.state = $te.state(name);
+			$te.plugin(n, options, this);
+			this.state = $te.state(n);
 			this.Q.beforeRemove.set(function () {
-				$(this.element).plugin(name, 'remove', this);
+				$(this.element).plugin(n, 'remove', this);
 			}, 'Q');
 		});
 		ToolConstructor.prototype.$ = {};
 		Q.each(methods, function (method) {
 			ToolConstructor.prototype.$[method] = function _Q_Tool_jQuery_method() {
 				var args = Array.prototype.slice.call(arguments, 0);
-				args.unshift(name, method);
+				args.unshift(n, method);
 				var $te = $(this.element);
 				$te.plugin.apply($te, args);
 			};
@@ -6257,7 +6297,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			// hopefully, moving the script element won't change the order of execution
 			p = scripts[i];
 			var outside = true;
-	    	while (p = p.parentNode) {
+			while (p = p.parentNode) {
 				if (p === container) {
 					outside = false;
     				break;
@@ -6325,7 +6365,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	script.wasProcessedByQ = true;
 	Q.addEventListener(script, 'error', onerror2);
 	
-	if ('async' in firstScript) { // modern browsers
+	if ('async' in script) { // modern browsers
 		script.setAttribute('src', src);
 		script.async = false;
 		container.appendChild(script);
@@ -6910,7 +6950,6 @@ var _latestLoadUrlObjects = {};
 Q.loadUrl = function _Q_loadUrl(url, options) {
 	url = Q.url(url);
 	var o = Q.extend({}, Q.loadUrl.options, options);
-	Q.handle(o.onLoadStart, this, [url, o]);
 
 	var handler = o.handler;
 	var slotNames = o.slotNames;
@@ -9243,7 +9282,7 @@ Q.Pointer = {
 		return function _Q_fastclick_on_wrapper (e) {
 			var elem = Q.Pointer.elementFromPoint(Q.Pointer.getX(e), Q.Pointer.getY(e));
 			if (Q.Pointer.canceledClick
-			|| !this.contains(Q.Pointer.started)
+			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {
 				return Q.Pointer.preventDefault(e);
 			}
@@ -9524,6 +9563,9 @@ Q.Pointer = {
 				var imgs = [img1];
 				if (typeof targets === 'string') {
 					targets = document.querySelectorAll(targets);
+				}
+				if (Q.isEmpty(targets)) {
+					return;
 				}
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
@@ -9968,8 +10010,8 @@ Q.Dialogs = {
 	 *  to fetch the "title" and "dialog" slots, to display in the dialog. 
 	 *  Thus the default content provided by 'title' and 'content' options
 	 *  given below will be replaced after the response comes back.
-	 *	@param {String} [options.title='Dialog'] initial dialog title.
-	 *	@param {String} [options.content] initial dialog content, defaults to 
+	 *	@param {String|Element} [options.title='Dialog'] initial dialog title.
+	 *	@param {String|Element} [options.content] initial dialog content, defaults to 
 	 *   loading and displaying a throbber immage.
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
@@ -10594,7 +10636,8 @@ function processStylesheets() {
 	var links = document.getElementsByTagName('link');
 	var slots = processStylesheets.slots;
 	for (var i=0; i<links.length; ++i) {
-		if (links[i].getAttribute('rel').toLowerCase() !== 'stylesheet') {
+		var rel = links[i].getAttribute('rel');
+		if (!rel || rel.toLowerCase() !== 'stylesheet') {
 			continue;
 		}
 		var href = links[i].getAttribute('href');
@@ -10758,11 +10801,17 @@ function _addHandlebarsHelpers() {
 		});
 	}
 	if (!Handlebars.helpers.url) {
-		Handlebars.registerHelper('url', function (url) {
+		Handlebars.registerHelper('toUrl', function (url) {
 			if (!url) {
 				return "{{url missing}}";
 			}
 			return Q.url(url);
+		});
+	}
+	if (!Handlebars.helpers.ucfirst) {
+		Handlebars.registerHelper('toCapitalized', function(text) {
+			text = text || '';
+			return text.charAt(0).toUpperCase() + text.slice(1);
 		});
 	}
 }

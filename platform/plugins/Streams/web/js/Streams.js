@@ -408,7 +408,7 @@ Q.Tool.define({
 	"Streams/image/preview": "plugins/Streams/js/tools/image/preview.js",
 	"Streams/file/preview" : "plugins/Streams/js/tools/file/preview.js",
 	"Streams/category/preview" : "plugins/Streams/js/tools/category/preview.js",
-	"Streams/category/player" : "plugins/Streams/js/tools/category/player.js",
+	"Streams/category"     : "plugins/Streams/js/tools/category.js",
 	"Streams/form"         : "plugins/Streams/js/tools/form.js",
 	"Streams/activity"     : "plugins/Streams/js/tools/activity.js"
 });
@@ -530,12 +530,12 @@ Streams.batchFunction = function Streams_batchFunction(baseUrl, action) {
 	action = action || 'batch';
 	return Q.batcher.factory(Streams.batchFunction.functions, baseUrl,
 		"/action.php/Streams/"+action, "batch", "batch",
-		_Streams_batchFunction_preprocess[action]
+		_Streams_batchFunction_options[action]
 	);
 };
 Streams.batchFunction.functions = {};
 
-var _Streams_batchFunction_preprocess = {
+var _Streams_batchFunction_options = {
 	avatar: {
 		preprocess: function (args) {
 			var userIds = [], i;
@@ -1037,6 +1037,7 @@ Streams.invite.options = {
  *   @param {Number} [options.min] the minimum weight (inclusive) to filter by, if any
  *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
  *   @param {String} [options.prefix] optional prefix to filter the streams by
+ *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
  *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream (ignores cache)
  *   @param {Mixed} [options.participants]  optional. Pass a limit here to fetch that many participants (ignores cache). Only honored if streamName is a string.
  *   @param {Boolean} [options.messages]
@@ -1083,6 +1084,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	fields.omitRedundantInfo = true;
 	if (isCategory !== undefined) {
 		fields.isCategory = isCategory;
+	}
+	if (Q.isArrayLike(fields.fields)) {
+		fields.fields = fields.join(',');
 	}
 
 	var cached = Streams.get.cache.get([publisherId, streamName]);
@@ -1579,7 +1583,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
+			return Q.handle(callback, this, [msg, args]);
 		}
 		// the rest will occur in the handler for the stream.onUpdated event
 		// coming from the socket
@@ -1588,7 +1592,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 			// process the Streams/changed message, if stream was retained
 			_refreshUnlessSocket(stream.publisherId, stream.name, callback, options);
 		} else {
-			callback && callback.call(that, null, stream);
+			return Q.handle(callback, that, [null, stream]);
 		}
 	}, { method: 'put', fields: pf, baseUrl: baseUrl });
 };
@@ -3132,7 +3136,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	if (options && options.short) {
 		return fn ? fn2 : (u ? u2 : f2);
 	} else if (fn && ln) {
-		return fn + ' ' + ln2;
+		return fn2 + ' ' + ln2;
 	} else if (fn && !ln) {
 		return u ? fn2 + ' ' + u2 : fn2;
 	} else if (!fn && ln) {
@@ -3700,12 +3704,13 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!params) {
 			return;
 		}
+		var templateName = params.templateName || 'Streams/invite/complete';
 		params.prompt = (params.prompt !== undefined)
 			? params.prompt
 			: Q.text.Streams.login.prompt;
 		Streams.construct(params.stream, function () {
 			params.stream = this;
-			Q.Template.render('Streams/invite/complete', params, 
+			Q.Template.render(templateName, params, 
 			function(err, html) {
 				var dialog = $(html);
 				var interval;
@@ -3731,7 +3736,9 @@ Q.onInit.add(function _Streams_onInit() {
 							var $input = $('input', dialog).eq(0);
 							$input.plugin('Q/clickfocus');
 							interval = setInterval(function () {
-								if ($input.val()) return;
+								if ($input.val() || $input[0] === document.activeElement) {
+									return clearInterval(interval);
+								}
 								$input.plugin('Q/clickfocus');
 							}, 100);
 						}

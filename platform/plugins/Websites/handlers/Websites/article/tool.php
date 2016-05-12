@@ -12,6 +12,7 @@
  * @param {Object} [$options] parameters for the tool
  *   @param {String} $options.publisherId The article publisher's user id
  *   @param {String} $options.streamName The article's stream name
+ *   @param {String} $options.stream The article's stream, if it is already fetched
  *   @param {String} [$options.html=array()] Any additional for the Streams/html editor
  *   @param {String} [$options.getintouch=array()] Additional options for the Users/getintouch tool, in case it's rendered
  */
@@ -19,7 +20,7 @@ function Websites_article_tool($options)
 {
 	$publisherId = $options['publisherId'];
 	$streamName = $options['streamName'];
-	$article = Streams::fetchOne(null, $publisherId, $streamName);
+	$article = Q::ifset($options, 'stream', Streams::fetchOne(null, $publisherId, $streamName));
 	if (!$article) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'article', 
@@ -33,7 +34,7 @@ function Websites_article_tool($options)
 		'call' => true,
 		'between' => "",
 		'emailSubject' => 'Reaching out from your website',
-		'classes' => 'Q_button Q_clickable'
+		'class' => 'Q_button Q_clickable'
 	), Q::ifset($options, 'getintouch', array()));
 	$canView = $article->testReadLevel('content');
 	$canEdit = $article->testWriteLevel('edit');
@@ -42,6 +43,7 @@ function Websites_article_tool($options)
 			$getintouch = array_merge($getintouch, $git);
 		}
 	}
+	$getintouch['class'] = 'Q_button';
 	if (!$canView) {
 		throw new Users_Exception_NotAuthorized();
 	}

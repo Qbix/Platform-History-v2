@@ -13,17 +13,10 @@ function Streams_related_response()
 	$isCategory = !empty($_REQUEST['isCategory']);
 	$slotNames = Q_Request::slotNames();
 	$streams_requested = in_array('relatedStreams', $slotNames);
-	$options = array(
-		'relationsOnly' => !$streams_requested,
-		'orderBy' => !empty($_REQUEST['ascending']),
-		'fetchOptions' => array('withParticipant' => true)
-	);
-	if (isset($_REQUEST['limit'])) $options['limit'] = $_REQUEST['limit'];
-	if (isset($_REQUEST['offset'])) $options['offset'] = $_REQUEST['offset'];
-	if (isset($_REQUEST['min'])) $options['min'] = $_REQUEST['min'];
-	if (isset($_REQUEST['max'])) $options['max'] = $_REQUEST['max'];
-	if (isset($_REQUEST['type'])) $options['type'] = $_REQUEST['type'];
-	if (isset($_REQUEST['prefix'])) $options['prefix'] = $_REQUEST['prefix'];
+	$options = Q::take($_REQUEST, array('limit', 'offset', 'min', 'max', 'type', 'prefix'));
+	$options['relationsOnly'] = !$streams_requested;
+	$options['orderBy'] = empty($_REQUEST['ascending']);
+	$options['fetchOptions'] = array('withParticipant' => true);
 	$result = Streams::related(
 		$asUserId,
 		$publisherId,
@@ -32,10 +25,18 @@ function Streams_related_response()
 		$options
 	);
 
+	$fields = Q::ifset($_REQUEST, 'fields', null);
+	$exportOptions = array('numeric' => true);
+	if (isset($fields)) {
+		if (is_string($fields)) {
+			$fields = array_map('trim', explode(',', $fields));
+		}
+		$exportOptions['fields'] = $fields;
+	}
 	if ($streams_requested) {
-		$rel = Db::exportArray($result[0], array('numeric' => true));
+		$rel = Db::exportArray($result[0], $exportOptions);
 	} else {
-		$rel = Db::exportArray($result, array('numeric' => true));
+		$rel = Db::exportArray($result, $exportOptions);
 	}
 
 	if (!empty($_REQUEST['omitRedundantInfo'])) {

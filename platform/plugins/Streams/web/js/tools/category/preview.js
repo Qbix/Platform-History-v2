@@ -112,7 +112,7 @@ function _Streams_category_preview(options, preview) {
 							title: stream.fields.title,
 							content: Q.Tool.setUpElement(
 								'div',
-								'Streams/category/player',
+								'Streams/category',
 								Q.extend(
 									{related: relatedState}, 
 									state.subcategory, 

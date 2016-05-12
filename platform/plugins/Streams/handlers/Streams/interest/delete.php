@@ -42,7 +42,7 @@ function Streams_interest_delete()
 		$user->id,
 		$user->id,
 		'Streams/user/interests',
-		'Streams/interest',
+		'Streams/interests',
 		$publisherId,
 		$name,
 		array('adjustWeights' => true)

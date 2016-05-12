@@ -83,8 +83,10 @@ Q.Tool.define("Streams/inplace", function (options) {
 					if (currentContent !== content) {
 						$input.val(currentContent = content);
 					}
-					var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
-					tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
+					if ($input.is(":visible")) {
+						var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
+						tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
+					}
 				}
 				if (currentHtml !== html) {
 					tool.$static.html(currentHtml = html);

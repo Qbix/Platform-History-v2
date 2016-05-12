@@ -4,14 +4,15 @@
  * This tool renders a user avatar
  *
  * @param {array} $options An associative array of parameters, containing:
- * @param {boolean} [$options.userId]
- *   "userId" => The user's id. Defaults to id of the logged-in user, if any.
+ * @param {string} [$options.userId]
+ *   The user's id. Defaults to id of the logged-in user, if any.
+ *   Can be '' for a blank-looking avatar.
  * @param {boolean} [$options.icon]
- *   "icon" => Optional. Render icon before the username.
+ *   Optional. Render icon before the username.
  * @param {boolean} [$options.iconAttributes]
- *   "iconAttributes" => Optional. Array of attributes to render for the icon.
+ *   Optional. Array of attributes to render for the icon.
  * @param {boolean} [$options.editable]
- *   "editable" => Optional. Whether to provide an interface for editing the user's info. Can be array containing "icon", "name".
+ *   Optional. Whether to provide an interface for editing the user's info. Can be array containing "icon", "name".
  * @param {array} [$options.inplaces] Additional fields to pass to the child Streams/inplace tools, if any
  * @param {boolean} [$options.renderOnClient]
  *    If true, only the html container is rendered, so the client will do the rest.

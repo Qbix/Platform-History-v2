@@ -94,8 +94,8 @@ function _Q_clickable(o) {
 			'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,
 			'zoom': 1,
 			'position': position === 'static' ? 'relative' : position,
-			'left': position === 'static' ? 0 : $this.position().left,
-			'top': position === 'static' ? 0 : $this.position().top,
+			'left': position === 'static' ? 0 : $this.css('left'),
+			'top': position === 'static' ? 0 : $this.css('top'),
 			'margin': $this.css('margin'),
 			'padding': '0px',
 			'border': '0px solid transparent',
@@ -273,8 +273,8 @@ function _Q_clickable(o) {
 				} else if (evt.type === 'release') {
 					jq = $this;
 				} else {
-					var x = (evt.pageX !== undefined) ? evt.pageX : evt.changedTouches[0].pageX,
-						y = (evt.pageY !== undefined) ? evt.pageY : evt.changedTouches[0].pageY;
+					var x = Q.Pointer.getX(evt);
+					var y = Q.Pointer.getY(evt);
 					jq = $(Q.Pointer.elementFromPoint(x, y));
 				}
 				Q.Pointer.onEnded.remove(state.onEndedKey);

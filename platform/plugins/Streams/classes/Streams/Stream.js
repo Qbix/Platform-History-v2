@@ -67,11 +67,13 @@ function Streams_Stream (fields) {
 	
 }
 
+Sp = Streams_Stream.prototype;
+
 /**
  * @method getAllAttributes
  * @return {Object} The object of all attributes set in the stream
  */
-Streams_Stream.prototype.getAllAttributes = function() {
+Sp.getAllAttributes = function() {
 	return this.fields.attributes ? JSON.parse(this.fields.attributes) : {};
 };
 
@@ -81,7 +83,7 @@ Streams_Stream.prototype.getAllAttributes = function() {
  * @param {mixed} def The value to return if the attribute is missing
  * @return {mixed} The value of the attribute, or the default value, or null
  */
-Streams_Stream.prototype.getAttribute = function(attributeName, def) {
+Sp.getAttribute = function(attributeName, def) {
 	var attr = this.getAllAttributes();
 	return (attributeName in attr) ? attr[attributeName] : def;
 };
@@ -92,7 +94,7 @@ Streams_Stream.prototype.getAttribute = function(attributeName, def) {
  *  or an array of {attributeName: attributeValue} pairs
  * @param {mixed} value The value to set the attribute to
  */
-Streams_Stream.prototype.setAttribute = function(attributeName, value) {
+Sp.setAttribute = function(attributeName, value) {
 	var attr = this.getAllAttributes();
 	if (Q.isPlainObject(attributeName)) {
 		Q.extend(attr, attributeName);
@@ -106,7 +108,7 @@ Streams_Stream.prototype.setAttribute = function(attributeName, value) {
  * @method clearAttribute
  * @param {String} attributeName The name of the attribute to remove
  */
-Streams_Stream.prototype.clearAttribute = function(attributeName) {
+Sp.clearAttribute = function(attributeName) {
 	var attr = this.getAllAttributes();
 	delete attr[attributeName];
 	this.fields.attributes = JSON.stringify(attr);
@@ -115,7 +117,7 @@ Streams_Stream.prototype.clearAttribute = function(attributeName) {
 /**
  * @method clearAllAttributes
  */
-Streams_Stream.prototype.clearAllAttributes = function() {
+Sp.clearAllAttributes = function() {
 	this.fields.attributes = '{}';
 };
 
@@ -123,7 +125,7 @@ Streams_Stream.prototype.clearAllAttributes = function() {
  * @method getAllPermissions
  * @return {Array}
  */
-Streams_Stream.prototype.getAllPermissions = function () {
+Sp.getAllPermissions = function () {
 	try {
 		return this.fields.permissions ? JSON.parse(this.fields.permissions) : [];
 	} catch (e) {
@@ -136,7 +138,7 @@ Streams_Stream.prototype.getAllPermissions = function () {
  * @param {String} permission
  * @param {Boolean}
  */
-Streams_Stream.prototype.hasPermission = function (permission) {
+Sp.hasPermission = function (permission) {
 	return (this.getAllPermissions().indexOf(permission) >= 0);
 };
 
@@ -144,7 +146,7 @@ Streams_Stream.prototype.hasPermission = function (permission) {
  * @method addPermission
  * @param {String} permission
  */
-Streams_Stream.prototype.addPermission = function (permission) {
+Sp.addPermission = function (permission) {
 	var permissions = this.getAllPermissions();
 	if (permissions.indexOf(permission) < 0) {
 		permissions.push(permission);
@@ -157,7 +159,7 @@ Streams_Stream.prototype.addPermission = function (permission) {
  * @param {String} permission
  * @param {Boolean}
  */
-Streams_Stream.prototype.removePermission = function (permission) {
+Sp.removePermission = function (permission) {
 	var permissions = this.getAllPermissions();
 	var index = permissions.indexOf(permission);
 	if (index >= 0) {
@@ -193,7 +195,32 @@ Streams_Stream.construct = function Streams_Stream_construct(fields) {
 
 Streams_Stream.define = Streams.define;
 
-Sp = Streams_Stream.prototype;
+/**
+ * Gets a value from the config corresponding to this stream type and a field name,
+ * using defaults from "Streams"/"types"/"*" and merging the value under
+ * "Streams"/"types"/$stream->type, if any.
+ * @method getConfigField
+ * @static
+ * @param {String} type The type of the stream
+ * @param {String|Array} field The name of the field, or array of path keys
+ * @param {mixed} def The value to return if the config field isn't specified
+ * @param {Boolean} [merge=true] if objects are found in both places, merge them
+ * @return mixed
+ */
+Streams_Stream.getConfigField = function (type, field, def, merge)
+{
+	if (typeof field === 'string') {
+		field = [field];
+	}
+	var path1 = ['Streams', 'types', '*'].concat(field);
+	var path2 = ['Streams', 'types', type].concat(field);
+	var bottom = Q.Config.get(path1, def);
+	var top = Q.Config.get(path2, null);
+	if (merge && Q.isPlainObject(bottom) && Q.isPlainObject(top)) {
+		return Q.extend({}, bottom, top);
+	}
+	return top ? top : bottom;
+}
 
 /**
  * The setUp() method is called the first time
@@ -930,8 +957,9 @@ Sp.subscribe = function(options, callback) {
 					} else {
 						if (template && template.template_type > 0
 						&& template.fields.duration > 0) {
-							s.fields.untilTime = Q.date(
-								'c', Date.now() + template.fields.duration
+							var d = template.fields.duration;
+							s.fields.untilTime = new Db.Expression(
+								'CURRENT_TIMESTAMP + INTERVAL ' + d + ' SECOND'
 							);
 						}
 					}
@@ -1051,6 +1079,7 @@ Sp.notify = function(participant, event, uid, message, callback) {
 						userId: userId,
 						publisherId: participant.fields.publisherId,
 						streamName: participant.fields.streamName,
+						messageOrdinal: message.fields.ordinal,
 						type: message.fields.type
 					}).save(function(err) {
 						callback && callback(err, deliveries);
@@ -1154,5 +1183,23 @@ Sp.post = function (asUserId, fields, callback) {
 		byUserId: asUserId
 	}, fields), callback);
 };
+
+/**
+ * Returns the canonical url of the stream, if any
+ * @return {string|null|false}
+ */
+Sp.url = function ()
+{
+	var uri = Streams_Stream.getConfigField(this.fields.type, 'uri', null);
+	if (!uri) {
+		return null;
+	}
+	var uriString = Q.Handlebars.renderSource(uri, {
+		publisherId: this.fields.publisherId,
+		streamName: this.fields.name.split('/'),
+		name: this.fields.name
+	});
+	return Q.Uri && Q.Uri.from(uriString).toUrl();
+}
 
 module.exports = Streams_Stream;

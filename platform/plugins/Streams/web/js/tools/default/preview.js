@@ -91,13 +91,6 @@ function _Streams_default_preview(options, preview) {
 					// load the icon
 					var jq = tool.$('img.Streams_preview_icon');
 					tool.preview.icon(jq[0], p.fill('icon'));
-					var inplace = tool.child('Streams_inplace');
-					if (!inplace) {
-						return p.fill('inplace').apply(this, arguments);
-					}
-					inplace.state.onLoad.add(function () {
-						p.fill('inplace').apply(this, arguments);
-					});
 					var $pc = tool.$('.Streams_preview_contents');
 					$pc.width(0).width($pc[0].remainingWidth());
 					Q.onLayout(tool.element).set(function () {
@@ -106,6 +99,13 @@ function _Streams_default_preview(options, preview) {
 							$pc.width($pc[0].remainingWidth());	
 						}
 					}, tool);
+					var inplace = tool.child('Streams_inplace');
+					if (!inplace) {
+						return p.fill('inplace').apply(this, arguments);
+					}
+					inplace.state.onLoad.add(function () {
+						p.fill('inplace').apply(this, arguments);
+					});
 				});
 			},
 			state.templates[tpl]

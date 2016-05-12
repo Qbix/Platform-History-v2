@@ -46,6 +46,7 @@ function Users_activate_response_content()
 		//$suggestions[] = strtolower("$pre1 $noun1 $verb $pre2 $adj $noun2");
 		$suggestions[] = strtolower("$pre1 $noun1 $verb $pre2 $noun2");
 	}
+	$verb_ue = urlencode($arr['verbs'][mt_rand()%count($arr['verbs'])]);
 	$noun_ue = urlencode($arr['nouns'][mt_rand()%count($arr['nouns'])]);
 	$code = Q::ifset($_REQUEST['code']);
 
@@ -58,6 +59,6 @@ function Users_activate_response_content()
 	
 	return Q::view($view, compact(
 		'identifier', 'type', 'user', 'code',
-		'suggestions', 'noun_ue', 't', 'app', 'home', 'complete'
+		'suggestions', 'verb_ue', 'noun_ue', 't', 'app', 'home', 'complete'
 	));
 }

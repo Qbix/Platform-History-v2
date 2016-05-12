@@ -8,7 +8,7 @@
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-title" content="Groups">
+	<meta name="apple-mobile-web-app-title" content="<?php echo Q_Html::text(Users::communityName()) ?>">
 	<meta name="mobile-web-app-capable" content="yes">
 	<?php if (Q_Request::platform() !== 'android'): ?>
 	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo Q_Html::themedUrl('img/icon/76.png') ?>" />

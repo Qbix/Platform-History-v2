@@ -21,14 +21,14 @@ function Streams_0_8_1_Streams_mysql()
 	Streams::create($commmunityId, $commmunityId, 'Streams/community', array(
 		'skipAccess' => true,
 		'name' => 'Streams/community/main',
-		'title' => "$app Community"
+		'title' => Users::communityName()
 	));
 	
 	// symlink the labels folder
 	if (!file_exists('Streams')) {
 		Q_Utils::symlink(
 			STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'labels'.DS.'Streams',
-			USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'icons'.DS.'Streams'
+			USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'icons'.DS.'labels'.DS.'Streams'
 		);
 	}
 }

@@ -23,6 +23,6 @@ function Streams_interest_response_interests()
 		throw new Users_Exception_NotLoggedIn();
 	}
 	return Streams_Category::getRelatedTo(
-		$user->id, 'Streams/user/interests', 'Streams/interest'
+		$user->id, 'Streams/user/interests', 'Streams/interests'
 	);
 }

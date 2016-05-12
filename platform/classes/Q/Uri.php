@@ -132,7 +132,7 @@ class Q_Uri
 			return $source;
 		}
 		if ($source === true) {
-			$source = Q_Request::baseUrl($controller);
+			$source = Q_Request::baseUrl($controller, true);
 		}
 
 		if (($source instanceof Q_Uri) and $source->Q_url) {
@@ -468,7 +468,7 @@ class Q_Uri
 		
 		$routes = Q_Config::get('Q', 'routes', array());
 		if (empty($routes)) {
-			return Q_Request::baseUrl($controller);
+			return Q_Request::baseUrl($controller, true);
 		}
 
 		if ($routePattern) {
@@ -699,7 +699,7 @@ class Q_Uri
 			}
 		}
 
-		$url = Q_Request::baseUrl($controller).'/'.implode('/', $segments);
+		$url = Q_Request::baseUrl($controller, true).'/'.implode('/', $segments);
 		return $url;
 	}
 	
@@ -843,7 +843,7 @@ class Q_Uri
 		if (empty($timestamp)) {
 			return $url;
 		}
-		$urlRelativeToBase = substr($url, strlen(Q_Request::baseUrl()));
+		$urlRelativeToBase = substr($url, strlen(Q_Request::baseUrl(false, true)));
 		$parts = explode('/', $urlRelativeToBase);
 		$parts[] = null;
 		$tree = new Q_Tree(Q_Uri::$urls);

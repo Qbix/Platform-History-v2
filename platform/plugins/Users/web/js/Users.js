@@ -1008,7 +1008,7 @@ function login_callback(err, response) {
 		var url = $this.attr('action')+'?'+$this.serialize();
 		Q.request(url, 'data', function (err, response) {
 			
-			$('#Users_form_passphrase').attr('value', '');
+			$('#Users_form_passphrase').attr('value', '').trigger('change');
 			
 			$('input', $this).css('background-image', 'none');
 			if (err || (response && response.errors)) {

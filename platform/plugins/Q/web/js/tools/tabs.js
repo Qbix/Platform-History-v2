@@ -236,7 +236,7 @@ Q.Tool.define("Q/tabs", function(options) {
 		var url = location.hash.queryField('url');
 		if (url === undefined) {
 			url = window.location.href.split('#')[0];
-			if (state.checkQueryString) {
+			if (!state.checkQueryString) {
 				url = url.split('?')[0];
 			}
 		} else {

@@ -64,18 +64,24 @@ function () {
 			if (!$this.is(':visible')) {
 				return;
 			}
+			var props = {};
+			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
+				props['padding-'+pos] = $this.css('padding-'+pos);
+				props['margin-'+pos] = $this.css('margin-'+pos);
+			});
 			var dim = $this[0].cssDimensions();
 			var span = $('<span />')
 				.css({
 					position: 'relative',
 					width: dim.width,
-					height: dim.height
+					height: dim.height,
+					display: $this.css('display'),
+					'margin-top': props['margin-top'],
+					'margin-bottom': props['margin-bottom'],
+					'margin-left': props['margin-left'],
+					'margin-right': props['margin-right']
 				}).addClass('Q_placeholders_container');
-			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
-				$this.css('padding-'+pos, $this.css('padding-'+pos))
-					.css('margin-'+pos, $this.css('margin-'+pos));
-			});
-			$this.wrap(span);
+			$this.wrap(span).css('margin', '0');
 			span = $this.parent();
 			span.on(Q.Pointer.fastclick, function() {
 				$this.trigger('focus');
@@ -84,10 +90,9 @@ function () {
 				'position': 'absolute',
 				'left': $this.position().left,
 				'top': $this.position().top,
-				'margin-top': $this.css('margin-top'),
-				'margin-left': $this.css('margin-left'),
-				'padding-left': parseInt($this.css('padding-left'))+3+'px',
-				'padding-top': $this.css('padding-top'),
+				'margin': 0,
+				'padding-left': parseInt(props['padding-left'])+3+'px',
+				'padding-top': props['padding-top'],
 				'border-top': 'solid ' + $this.css('border-top-width') + ' transparent',
 				'border-left': 'solid ' + $this.css('border-left-width') + ' transparent',
 				'box-sizing': $this.css('box-sizing'),

@@ -773,7 +773,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '64',
     2 => '',
     3 => false,

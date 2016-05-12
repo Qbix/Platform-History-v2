@@ -220,7 +220,7 @@ CREATE TABLE `{$prefix}user` (
   `tw_uid` bigint(20) NOT NULL DEFAULT '0' COMMENT 'The twitter id of the user',
   `g_uid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `y_uid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `passphraseHash` varbinary(64) DEFAULT NULL,
+  `passphraseHash` varchar(64) DEFAULT NULL,
   `emailAddress` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobileNumber` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emailAddressPending` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',

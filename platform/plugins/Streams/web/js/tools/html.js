@@ -98,6 +98,7 @@ Q.Tool.define("Streams/html", function (options) {
 				"plugins/Q/js/froala/js/plugins/paragraph_style.min.js",
 				"plugins/Q/js/froala/js/plugins/paragraph_format.min.js",
 				"plugins/Q/js/froala/js/plugins/quote.min.js",
+				"plugins/Q/js/froala/js/plugins/link.min.js",
 				"plugins/Q/js/froala/js/plugins/image.min.js",
 				"plugins/Q/js/froala/js/plugins/image_manager.min.js",
 				"plugins/Q/js/froala/js/plugins/video.min.js"
@@ -128,6 +129,7 @@ Q.Tool.define("Streams/html", function (options) {
 					var streamName = parts.slice(-6, -3).join('/');
 					Q.Streams.Stream.close(publisherId, streamName);
 				});
+				state.froalaEditor = true;
             });
 		}
 		function _blur() {
@@ -241,10 +243,11 @@ Q.Tool.define("Streams/html", function (options) {
 		imagePaste: true,
 		toolbarButtons: [
 			"bold", "italic", "underline", "strikeThrough", "subscript", "superscript", "|",
-			"fontFamily", "fontSize", "color", "|",
+			"fontFamily", "fontSize", "color", "-",
 			"inlineStyle", "paragraphStyle", "paragraphFormat", "|",
 			"align", "formatOL", "formatUL", "|",
-			"outdent", "indent", "quote", "insertHR", "createLink", "|",
+			"outdent", "indent", "quote", "-", 
+			"insertHR", "insertLink", "|",
 			"insertImage", "insertTable", "|", "html"
 		],
 		fontFamily: {
@@ -274,6 +277,16 @@ Q.Tool.define("Streams/html", function (options) {
 	preprocess: null,
 	onSave: new Q.Event(),
 	onCancel: new Q.Event()
+},
+
+{
+	Q: {
+		beforeRemove: function () {
+			if (this.state.froalaEditor) {
+				$(this.element).froalaEditor('destroy');
+			}
+		}
+	}
 }
 
 );

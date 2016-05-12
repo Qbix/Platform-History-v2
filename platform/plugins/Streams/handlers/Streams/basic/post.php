@@ -59,9 +59,9 @@ function Streams_basic_post()
 			continue;
 		}
 		if (!isset($stream)) {
-			$stream = new Streams_Stream();
-			$stream->publisherId = $user->id;
-			$stream->name = $name;
+			$stream = Streams::create($user->id, $user->id, $type, array(
+				'name' => $name
+			));
 		}
 		$messageType = $stream->wasRetrieved() ? 'Streams/changed' : 'Streams/created';
 		$stream->content = (string)$request[$field];

@@ -689,6 +689,9 @@ class Db_Mysql implements iDb
 	 */
 	function fromDateTime ($datetime)
 	{
+		if (is_numeric($datetime)) {
+			return $datetime;
+		}
 		$year = substr($datetime, 0, 4);
 		$month = substr($datetime, 5, 2);
 		$day = substr($datetime, 8, 2);
@@ -707,6 +710,9 @@ class Db_Mysql implements iDb
 	 */
 	function toDate ($timestamp)
 	{
+		if (!is_numeric($timestamp)) {
+			$timestamp = strtotime($timestamp);
+		}
 		if ($timestamp > 10000000000) {
 			$timestamp = $timestamp / 1000;
 		}
@@ -721,6 +727,9 @@ class Db_Mysql implements iDb
 	 */
 	function toDateTime ($timestamp)
 	{
+		if (!is_numeric($timestamp)) {
+			$timestamp = strtotime($timestamp);
+		}
 		if ($timestamp > 10000000000) {
 			$timestamp = $timestamp / 1000;
 		}
