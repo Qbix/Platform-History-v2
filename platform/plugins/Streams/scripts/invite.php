@@ -78,6 +78,7 @@ $labels = array_slice($argv, $FROM_APP ? 3 : 4);
 $addLabel = empty($labels) ? "$app/admins" : $labels;
 $asUserId = $app;
 $skipAccess = true;
+$appUrl = Q_Uri::url('Communities/onboarding');
 
-Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess'));
+Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl'));
 echo "Successfully invited $identifier\n";
