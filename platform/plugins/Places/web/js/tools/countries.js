@@ -48,7 +48,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 		tool.refresh();
 		$select.on('change', tool,
 		Q.preventRecursion('Places/countries onchange', function () {
-			var countryCode = tool.$select.val();
+			var countryCode = tool.$select.val() || state.countryCode;
 			if (state.globe) {
 				state.globe.rotateToCountry(countryCode);
 			}

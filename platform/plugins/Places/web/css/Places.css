@@ -56,7 +56,7 @@
 .Q_mobile .Places_globe_tool { width: 100%; height: 0; padding-bottom: 100%; }
 .Places_globe_tool canvas { cursor: pointer; }
 
-.Places_countries_tool .Places_countries_select { font-size: 24px; border: 1px solid #555; line-height: 24px; vertical-align: middle; width: 100%; text-overflow: ellipsis; }
+.Places_countries_tool .Places_countries_select { font-size: 24px; border: 1px solid #555; line-height: 24px; vertical-align: middle; width: 100%; text-overflow: ellipsis; clear: both; }
 .Places_countries_flag { width: 25px; height: 25px; vertical-align: middle; }
 .Places_countries_flags .Places_countries_flag { position: absolute; top: 50%; margin-top: -12px; margin-left: 5px; }
 .Places_countries_flags .Places_countries_select { text-indent: 24px; }
