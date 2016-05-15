@@ -101,7 +101,7 @@ class Handlebars_Arguments
      * @param string $args_string Handlebars_Arguments string as passed to a helper.
      *
      * @return {void}
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      */
     protected function parse($args_string)
     {

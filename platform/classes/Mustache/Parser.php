@@ -37,7 +37,7 @@ class Mustache_Parser
      *
      * @return {array} Mustache Token parse tree
      *
-     * @throws {$1} when nesting errors or mismatched section tags are encountered.
+     * @throws {InvalidArgumentException} when nesting errors or mismatched section tags are encountered.
      */
     private function buildTree(ArrayIterator $tokens, array $parent = null)
     {

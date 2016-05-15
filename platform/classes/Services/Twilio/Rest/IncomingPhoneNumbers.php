@@ -15,7 +15,7 @@ class Services_Twilio_Rest_IncomingPhoneNumbers
      * @return {Services_Twilio_Rest_IncomingPhoneNumber|null} The number object, 
      *      or null
      * 
-     * @throws {$1} if the number is invalid, not 
+     * @throws {InvalidArgumentException} if the number is invalid, not 
      *      provided in E.164 format or for any other API exception.
      */
     public function getNumber($number) {

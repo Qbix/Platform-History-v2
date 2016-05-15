@@ -114,7 +114,7 @@ class Handlebars_Engine
      *
      * @param array $options array of options to set
      *
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      */
     public function __construct(array $options = array())
     {
@@ -348,7 +348,7 @@ class Handlebars_Engine
      *
      * @param callable $escape function
      *
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      * @return {void}
      */
     public function setEscape($escape)

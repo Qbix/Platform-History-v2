@@ -49,7 +49,7 @@ class Handlebars_Helpers
      * @param array|bool $defaults add defaults helper
      *          (if, unless, each,with, bindAttr)
      *
-     * @throws {$1} when $helpers is not an array
+     * @throws {InvalidArgumentException} when $helpers is not an array
      * (or traversable) or helper is not a callable
      */
     public function __construct($helpers = null, $defaults = true)
@@ -92,7 +92,7 @@ class Handlebars_Helpers
      * @param string $name   helper name
      * @param mixed  $helper a callable or Handlebars_Helper implementation as a helper
      *
-     * @throws {$1} if $helper is not a callable
+     * @throws {InvalidArgumentException} if $helper is not a callable
      * @return {void}
      */
     public function add($name, $helper)
@@ -129,7 +129,7 @@ class Handlebars_Helpers
      * @param array                $args     The arguments passed the the helper
      * @param string               $source   The source
      *
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      * @return {mixed} The helper return value
      */
     public function call($name, Handlebars_Template $template, Handlebars_Context $context, $args, $source)
@@ -164,7 +164,7 @@ class Handlebars_Helpers
      *
      * @param string $name helper name
      *
-     * @throws {$1} if $name is not available
+     * @throws {InvalidArgumentException} if $name is not available
      * @return {callable} helper function
      */
     public function __get($name)
@@ -219,7 +219,7 @@ class Handlebars_Helpers
      *
      * @param string $name helper name
      *
-     * @throws {$1} if the requested helper is not present.
+     * @throws {InvalidArgumentException} if the requested helper is not present.
      * @return {void}
      */
     public function remove($name)

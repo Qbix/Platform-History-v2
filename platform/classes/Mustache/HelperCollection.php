@@ -21,7 +21,7 @@ class Mustache_HelperCollection
      *
      * Optionally accepts an array (or Traversable) of `$name => $helper` pairs.
      *
-     * @throws {$1} if the $helpers argument isn't an array or Traversable
+     * @throws {InvalidArgumentException} if the $helpers argument isn't an array or Traversable
      *
      * @param array|Traversable $helpers (default: null)
      */
@@ -133,7 +133,7 @@ class Mustache_HelperCollection
     /**
      * Check whether a given helper is present in the collection.
      *
-     * @throws {$1} if the requested helper is not present.
+     * @throws {InvalidArgumentException} if the requested helper is not present.
      *
      * @param string $name
      */

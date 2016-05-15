@@ -181,7 +181,7 @@ class Services_Twilio extends Services_Twilio_Resource
      * @param array $response 3-tuple containing status, headers, and body
      *
      * @return {object} PHP object decoded from JSON
-     * @throws {$1} (Response in 300-500 class)
+     * @throws {Services_Twilio_RestException} (Response in 300-500 class)
      */
     private function _processResponse($response)
     {

@@ -57,7 +57,7 @@ class Handlebars_Parser
      *
      * @param ArrayIterator $tokens Stream of tokens
      *
-     * @throws {$1} when nesting errors or mismatched section tags
+     * @throws {RuntimeException} when nesting errors or mismatched section tags
      * are encountered.
      * @return {array} Token parse tree
      *

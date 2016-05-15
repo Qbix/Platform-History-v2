@@ -804,7 +804,7 @@ abstract class BaseFacebook
    * @param array $params Method call object
    *
    * @return {mixed} The decoded response object
-   * @throws {$1}
+   * @throws {InvalidArgumentException}
    */
   protected function _restserver($params) {
     // generic application level parameters
@@ -855,7 +855,7 @@ abstract class BaseFacebook
    * @param array $params The query/post data
    *
    * @return {mixed} The decoded response object
-   * @throws {$1}
+   * @throws {InvalidArgumentException}
    */
   protected function _graph($path, $method = 'GET', $params = array()) {
     if (is_array($method) && empty($params)) {
@@ -892,7 +892,7 @@ abstract class BaseFacebook
    * @param array $params The query/post data
    *
    * @return {string} The decoded response object
-   * @throws {$1}
+   * @throws {InvalidArgumentException}
    */
   protected function _oauthRequest($url, $params) {
     if (!isset($params['access_token'])) {
