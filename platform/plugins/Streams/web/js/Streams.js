@@ -964,6 +964,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		return Q.req(o.uri, ['data'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
 			if (msg) {
+				alert(msg);
 				var args = [err, response];
 				return Streams.onError.handle.call(this, msg, args);
 			}
