@@ -1833,7 +1833,7 @@ Q.calculateKey = function _Q_Event_calculateKey(key, container, start) {
 		while (container[key]) {
 			key = 'AUTOKEY_' + (++i);
 		}
-	} else if (typeof key !== 'string') {
+	} else if (key !== undefined && typeof key !== 'string') {
 		throw new Q.Error("Q.calculateKey: key must be a String, Q.Tool, true, or undefined");
 	}
 	return key;
