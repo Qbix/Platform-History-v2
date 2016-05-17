@@ -56,6 +56,9 @@ class Q_Handlebars {
 	
 	static function helperCall($template, $context, $args, $source)
 	{
+		if (is_string($args)) {
+			$args = $template->parseArguments($args);
+		}
 		if (empty($args[0])) {
 			return "{{call missing method name}}";
 		}
@@ -79,6 +82,9 @@ class Q_Handlebars {
 	
 	static function helperTool($template, $context, $args, $source)
 	{
+		if (is_string($args)) {
+			$args = $template->parseArguments($args);
+		}
 		if (empty($args[0])) {
 			return "{{tool missing name}}";
 		}
@@ -99,6 +105,9 @@ class Q_Handlebars {
 	
 	static function helperToUrl($template, $context, $args, $source)
 	{
+		if (is_string($args)) {
+			$args = $template->parseArguments($args);
+		}
 		if (empty($args[0])) {
 			return "{{url missing}}";
 		}
@@ -107,6 +116,9 @@ class Q_Handlebars {
 	
 	static function helperToCapitalized($template, $context, $args, $source)
 	{
+		if (is_string($args)) {
+			$args = $template->parseArguments($args);
+		}
 		return isset($args[0]) ? ucfirst($args[0]) : '';
 	}
 

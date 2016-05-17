@@ -10764,7 +10764,7 @@ function _addHandlebarsHelpers() {
 			if (typeof f === 'function') {
 				return f.apply(Q.getObject(subparts), args);
 			}
-			return "{{call "+path+" not found}}";
+			return "{{call '"+path+"' not found}}";
 		});
 	}
 	if (!Handlebars.helpers.tool) {

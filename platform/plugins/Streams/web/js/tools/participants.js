@@ -178,7 +178,7 @@ function _Streams_participants(options) {
 						var $element = 
 						$('<div class="Streams_participants_invite" />')
 						.html(html)
-						.appendTo(tool.$avatars)
+						.prependTo(tool.$avatars)
 						.addClass('Streams_inviteTrigger');
 						var filter = '.Streams_inviteTrigger';
 						$(tool.element)
