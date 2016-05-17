@@ -68,10 +68,21 @@ class Q_Handlebars {
 		if (is_array($args)) {
 			return $args;
 		}
-		$args = $template->parseArguments($args);
+		$parsed = array_merge(
+			$template->parseArguments($args),
+			$template->parseNamedArguments($args)
+		);
 		$results = array();
-		foreach ($args as $k => $arg) {
-			$results[$k] = $context->get($arg);
+		foreach ($parsed as $k => $arg) {
+			$result = $context->get($arg);
+			if (!isset($result)) {
+				try {
+					$result = Q::json_decode($arg);
+				} catch (Exception $e) {
+
+				}
+			}
+			$results[$k] = $result;
 		}
 		return $results;
 	}
@@ -107,13 +118,18 @@ class Q_Handlebars {
 			return "{{tool missing name}}";
 		}
 		$name = $args[0];
-		if (count($args) > 1 && (is_string($args[1]) || is_numeric($args[1]))) {
+		if (isset($args[1]) && (is_string($args[1]) || is_numeric($args[1]))) {
 			$id = $args[1];
 		}
-		$o = Q::ifset($args, 'hash', array());
+		$o = array();
+		foreach ($args as $k => $v) {
+			if (!is_numeric($k)) {
+				$o[$k] = $v;
+			}
+		}
 		$fields = $context->fields();
 		if (isset($fields[$name])) {
-			$o = array_merge($o, $fields[$name]);
+			$o = array_merge($args, $fields[$name]);
 		}
 		if ($id && isset($fields["id:$id"])) {
 			$o = array_merge($o, $fields["id:$id"]);

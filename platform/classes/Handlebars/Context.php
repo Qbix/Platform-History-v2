@@ -206,11 +206,11 @@ class Handlebars_Context
         }
         if (count($this->stack) < $level) {
             if ($strict) {
-                throw new InvalidArgumentException(
-                    'can not find variable in context'
-                );
+                throw new InvalidArgumentException(sprintf(
+                    'Can not find variable in context: "%s"',
+                    $variableName
+                ));
             }
-
             return '';
         }
         if (substr($variableName, 0, 6) == '@root.') {
@@ -225,9 +225,10 @@ class Handlebars_Context
         $current = current($this->stack);
         if (!$variableName) {
             if ($strict) {
-                throw new InvalidArgumentException(
-                    'can not find variable in context'
-                );
+	            throw new InvalidArgumentException(sprintf(
+		            'Can not find variable in context: "%s"',
+		            $variableName
+	            ));
             }
             return '';
         } elseif ($variableName == '.' || $variableName == 'this') {
@@ -237,9 +238,10 @@ class Handlebars_Context
             if (isset($specialVariables[$variableName])) {
                 return $specialVariables[$variableName];
             } elseif ($strict) {
-                throw new InvalidArgumentException(
-                    'can not find variable in context'
-                );
+	            throw new InvalidArgumentException(sprintf(
+		            'Can not find variable in context: "%s"',
+		            $variableName
+	            ));
             } else {
                 return '';
             }
