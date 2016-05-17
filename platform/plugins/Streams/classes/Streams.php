@@ -2052,6 +2052,12 @@ abstract class Streams extends Base_Streams
 		$relatedFrom = reset($relatedFrom);
 		$category = reset($categories);
 		$stream = reset($streams);
+		if (is_array($toStreamName)) {
+			$toStreamName = reset($toStreamName);
+		}
+		if (is_array($fromStreamName)) {
+			$fromStreamName = reset($fromStreamName);
+		}
 
 		// Now, clean up the relation.
 		/**
