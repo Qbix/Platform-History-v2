@@ -3642,7 +3642,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		);
 		jQueryPluginConstructor.methods = methods || {};
 		$.fn[n] = jQueryPluginConstructor;
-		var ToolConstructor = Q.Tool.define(n,
+		var ToolConstructor = Q.Tool.define(name,
 		function _Q_Tool_jQuery_constructor(options) {
 			var $te = $(this.element);
 			$te.plugin(n, options, this);
