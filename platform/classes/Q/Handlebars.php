@@ -53,12 +53,32 @@ class Q_Handlebars {
 		}
 		return self::$handlebars;
 	}
+
+	/**
+	 * Call this in your helpers to parse the args into a useful array
+	 * @method parseArgs
+	 * @static
+	 * @param {Handlebars_Template} $template
+	 * @param {Handlebars_Context} $context
+	 * @param {string|array} $args
+	 * @return {array}
+	 */
+	static function parseArgs($template, $context, $args)
+	{
+		if (is_array($args)) {
+			return $args;
+		}
+		$args = $template->parseArguments($args);
+		$results = array();
+		foreach ($args as $k => $arg) {
+			$results[$k] = $context->get($arg);
+		}
+		return $results;
+	}
 	
 	static function helperCall($template, $context, $args, $source)
 	{
-		if (is_string($args)) {
-			$args = $template->parseArguments($args);
-		}
+		$args = self::parseArgs($template, $context, $args);
 		if (empty($args[0])) {
 			return "{{call missing method name}}";
 		}
@@ -82,9 +102,7 @@ class Q_Handlebars {
 	
 	static function helperTool($template, $context, $args, $source)
 	{
-		if (is_string($args)) {
-			$args = $template->parseArguments($args);
-		}
+		$args = self::parseArgs($template, $context, $args);
 		if (empty($args[0])) {
 			return "{{tool missing name}}";
 		}
@@ -105,9 +123,7 @@ class Q_Handlebars {
 	
 	static function helperToUrl($template, $context, $args, $source)
 	{
-		if (is_string($args)) {
-			$args = $template->parseArguments($args);
-		}
+		$args = self::parseArgs($template, $context, $args);
 		if (empty($args[0])) {
 			return "{{url missing}}";
 		}
@@ -116,9 +132,7 @@ class Q_Handlebars {
 	
 	static function helperToCapitalized($template, $context, $args, $source)
 	{
-		if (is_string($args)) {
-			$args = $template->parseArguments($args);
-		}
+		$args = self::parseArgs($template, $context, $args);
 		return isset($args[0]) ? ucfirst($args[0]) : '';
 	}
 
