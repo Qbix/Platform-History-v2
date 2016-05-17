@@ -1607,7 +1607,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} $asUserId=null
 	 *	The id of the user from whose point of view the access should be calculated.
 	 *  If this matches the publisherId, just sets full access and calls publishedByFetcher(true).
-	 *  If this is '', only returns the streams anybody can see.
+	 *  If this is '', only preloads the streams anybody can see.
 	 *  If this is null, the logged-in user's id is used, or '' if no one is logged in
 	 */
 	function addPreloaded($asUserId=null)

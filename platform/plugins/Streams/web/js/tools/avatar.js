@@ -73,7 +73,6 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	}
 	function handleChange(fields, field) {
 		Streams.Avatar.get.forget(state.userId);
-		tool.element.innerHTML = '';
 		tool.refresh();
 	}
 },
@@ -207,13 +206,12 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 							staticHtml: f.innerHTML
 						}
 					}, state.inplaces);
-					var e = Q.Tool.setUpElement(
-						'span', 'Streams/inplace', opt, tool.prefix+'Streams_inplace-'+vName, tool.prefix
+					Q.Tool.setUpElement(
+						f, 'Streams/inplace', opt,
+						tool.prefix+'Streams_inplace-'+vName, tool.prefix
 					);
-					f.innerHTML = '';
-					f.appendChild(e);
 					f.style.zIndex = --zIndex;
-					Q.activate(e);
+					Q.activate(f);
 				});
 			}
 			if (state.editable.indexOf('icon') >= 0 && Users.loggedInUser) {

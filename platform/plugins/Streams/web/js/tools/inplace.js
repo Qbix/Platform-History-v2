@@ -174,9 +174,8 @@ Q.Tool.define("Streams/inplace", function (options) {
 				return; // leave the html that is currently in the element
 			}
 
-			inplace = tool.setUpElement('div', 'Q/inplace', ipo);
-			$(tool.element).empty().append(inplace);
-			Q.activate(inplace, _content);
+			tool.setUpElement(tool.element, 'Q/inplace', ipo);
+			Q.activate(tool.element, _content);
 		} else {
 			tool.Q.onInit.add(_content, tool);
 		}
