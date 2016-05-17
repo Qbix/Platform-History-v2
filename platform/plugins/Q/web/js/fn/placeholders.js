@@ -70,12 +70,16 @@ function () {
 				props['margin-'+pos] = $this.css('margin-'+pos);
 			});
 			var dim = $this[0].cssDimensions();
+			var display = $this.css('display');
+			if (display === 'inline') {
+				display = 'inline-block';
+			}
 			var span = $('<span />')
 				.css({
 					position: 'relative',
 					width: dim.width,
 					height: dim.height,
-					display: $this.css('display'),
+					display: display,
 					'margin-top': props['margin-top'],
 					'margin-bottom': props['margin-bottom'],
 					'margin-left': props['margin-left'],

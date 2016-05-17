@@ -125,6 +125,7 @@ h2 { margin: 0; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal { margin: 0; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab { padding: 5px 10px; background: #222; color: white; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; }
+#dashboard .Q_tabs_tab * { white-space: nowrap; overflow-x: hidden; overflow-y: visible; text-overflow: ellipsis; vertical-align: middle; }
 #dashboard .Q_tabs_vertical .Q_tabs_tab { background: transparent; }
 #dashboard .Q_tabs_tab:first-child { border-top: 0 solid #e5e5e5; border-left: 0; }
 #dashboard .Q_tabs_tab,
