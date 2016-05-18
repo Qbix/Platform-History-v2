@@ -176,10 +176,10 @@ function _Streams_participants(options) {
 					function (err, html) {
 						if (err) return;
 						var $element = 
-						$('<div class="Streams_participants_invite" />')
-						.html(html)
-						.prependTo(tool.$avatars)
-						.addClass('Streams_inviteTrigger');
+						tool.$invite = $('<div class="Streams_participants_invite" />')
+							.html(html)
+							.insertBefore(tool.$avatars)
+							.addClass('Streams_inviteTrigger');
 						var filter = '.Streams_inviteTrigger';
 						$(tool.element)
 						.on(Q.Pointer.fastclick, filter, function () {
