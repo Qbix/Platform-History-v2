@@ -329,7 +329,7 @@ class Q_Bootstrap
 					$installed_version = isset($local[$required_plugin]['version']) ? $local[$required_plugin]['version'] : 0;
 					$compatible_version = isset($local[$required_plugin]['compatible']) ? $local[$required_plugin]['compatible'] : 0;
 
-					if (Q::compare_version($installed_version, $required_version) < 0) {
+					if (Q::compareVersion($installed_version, $required_version) < 0) {
 						throw new Q_Exception_RequirementVersion(array(
 							'plugin' => $required_plugin,
 							'version' => $required_version,
@@ -339,7 +339,7 @@ class Q_Bootstrap
 						));
 					}
 
-					if (Q::compare_version($compatible_version, $required_version) > 0) {
+					if (Q::compareVersion($compatible_version, $required_version) > 0) {
 						throw new Q_Exception_RequirementVersion(array(
 							'plugin' => $required_plugin,
 							'version' => $required_version,
@@ -383,7 +383,7 @@ class Q_Bootstrap
 			$installed_version = isset($local[$required_plugin]['version']) ? $local[$required_plugin]['version'] : 0;
 			$compatible_version = isset($local[$required_plugin]['compatible']) ? $local[$required_plugin]['compatible'] : 0;
 
-			if (Q::compare_version($installed_version, $required_version) < 0) {
+			if (Q::compareVersion($installed_version, $required_version) < 0) {
 				throw new Q_Exception_AppRequirementVersion(array(
 					'plugin' => $required_plugin,
 					'version' => $required_version,
@@ -393,7 +393,7 @@ class Q_Bootstrap
 				));
 			}
 
-			if (Q::compare_version($compatible_version, $required_version) > 0) {
+			if (Q::compareVersion($compatible_version, $required_version) > 0) {
 				throw new Q_Exception_AppRequirementVersion(array(
 					'plugin' => $required_plugin,
 					'version' => $required_version,

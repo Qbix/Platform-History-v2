@@ -68,6 +68,13 @@ interface iDb
 	function dsn ();
 	
 	/**
+	 * Returns the lowercase name of the dbms (e.g. "mysql")
+	 * @method dbms
+	 * @return {string}
+	 */
+	function dbms ();
+	
+	/**
 	 * Returns the name of the database used
 	 * @method dbName
 	 * @return {string}

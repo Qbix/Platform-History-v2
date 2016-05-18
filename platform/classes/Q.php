@@ -1447,13 +1447,13 @@ class Q
 
 	/**
 	 * Compares version strings in the format A.B.C...
-	 * @method compare_version
+	 * @method compareVersion
 	 * @static
 	 * @param {string} $a
 	 * @param {string} $b
 	 * @return {-1|0|1}
 	 */
-	static function compare_version($a, $b)
+	static function compareVersion($a, $b)
 	{
 		if ($a && !$b) return 1;
 		if ($b && !$a) return -1;
