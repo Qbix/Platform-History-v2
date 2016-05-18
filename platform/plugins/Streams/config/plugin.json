@@ -3,7 +3,7 @@
 		"pluginInfo": {
 			"Streams": {
 				"version": "0.9.3",
-				"compatible": "0.9.3",
+				"compatible": "0.9",
 				"requires": {"Users": "0.9"},
 				"permissions": ["Streams/icons"],
 				"connections": ["Streams"]
@@ -68,7 +68,7 @@
 					"insertedTime",
 					"updatedTime",
 					"messageCount",
-					"participantCount"
+					"participantCounts"
 				],
 				"invite": {
 					"dialog": {
@@ -114,7 +114,7 @@
 					"writeLevel": 10,
 					"adminLevel": 20,
 					"messageCount": 0,
-					"participantCount": "[0, 0, 0]"
+					"participantCounts": "[0, 0, 0]"
 				},
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}"
 			},

@@ -3941,10 +3941,10 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					updateParticipantCache('participating', msg.get('prevState'));
+					updateParticipantCache('participating', message.get('prevState'), usingCached);
 					break;
 				case 'Streams/leave':
-					updateParticipantCache('left', msg.get('prevState'));
+					updateParticipantCache('left', message.get('prevState'), usingCached);
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
@@ -4060,19 +4060,28 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				}
 
-				function updateParticipantCache(newState, prevState) {
+				function updateParticipantCache(newState, prevState, usingCached) {
+					Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
+					if (!usingCached) {
+						return;
+					}
 					var states = Streams.Participant.states;
 					var prevIndex = states.indexOf(prevState);
 					var newIndex = states.indexOf(newState);
 					if (newIndex < 0) {
 						throw new Q.Error("Streams updateParticipantCache: prevState" + prevState + " not valid");
 					}
+					var sawStreams = [];
 					Streams.get.cache.each([msg.publisherId, msg.streamName],
 					function (k, v) {
 						var stream = (v && !v.params[0]) ? v.subject : null;
 						if (!stream) {
 							return;
 						}
+						if (sawStreams.indexOf(stream) >= 0) {
+							return;
+						}
+						sawStreams.push(stream);
 						if (prevIndex >= 0) {
 							--stream.participantCounts[prevIndex];
 						}
@@ -4083,9 +4092,6 @@ Q.onInit.add(function _Streams_onInit() {
 							this.remove(k);
 						}
 					});
-					Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
-					// later, we can refactor this to insert
-					// the correct data into the cache
 				}
 
 				function updateRelatedCache(instructions) {

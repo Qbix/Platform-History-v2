@@ -39,6 +39,10 @@ function Streams_Stream (fields) {
 		p[key] = value;
 	};
 	
+	this.participantCounts = fields.participantCounts
+		? JSON.parse(fields.participantCounts)
+		: [0, 0, 0];
+	
 	/**
 	 * Gets the value of an extra field
 	 * @method get
@@ -170,16 +174,13 @@ Sp.removePermission = function (permission) {
 
 Q.mixin(Streams_Stream, Q.require('Base/Streams/Stream'));
 
-Streams_Stream.construct = function Streams_Stream_construct(fields) {
+Streams_Stream.construct = function Streams_Stream_construct(fields, retrieved) {
 	if (Q.isEmpty(fields)) {
 		return false;
 	}
 	if (fields.fields) {
 		fields = fields.fields;
 	}
-	this.participantCounts = fields.participantCounts
-		? JSON.parse(fields.participantCounts)
-		: [0, 0, 0];
 	var type = Q.normalize(fields.type);
 	var SC = Streams.defined[type];
 	if (!SC) {
@@ -193,7 +194,12 @@ Streams_Stream.construct = function Streams_Stream_construct(fields) {
 		};
 		Q.mixin(SC, Streams_Stream);
 	}
-	return new SC(fields);
+	var stream = new SC(fields);
+	if (retrieved) {
+		stream.retrieved = true;
+		stream._fieldsModified = {};
+	}
+	return stream;
 };
 
 Streams_Stream.define = Streams.define;
@@ -235,7 +241,7 @@ Sp.setUp = function () {
 };
 
 Sp.beforeSave = function (modifiedFields) {
-	modifiedFields[participantCounts] = JSON.stringify(this.participantCounts);
+	modifiedFields.participantCounts = JSON.stringify(this.participantCounts);
 	return modifiedFields;
 };
 
@@ -364,10 +370,10 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 	}
 	var participantCounts = this.participantCounts;
 	if (prevIndex >= 0) {
-		--stream.participantCounts[prevIndex];
+		--this.participantCounts[prevIndex];
 	}
-	++stream.participantCounts[newIndex];
-	stream.save(callback);
+	++this.participantCounts[newIndex];
+	this.save(callback);
 };
 
 /**
@@ -843,7 +849,7 @@ Sp.join = function(options, callback) {
 				Streams.emitToUser(userId, 'join', sp.fillMagicFields().getFields());
 				
 				var f = sp.fields;
-				stream.updateParticipantCounts('join', f.state);
+				stream.updateParticipantCounts('participating', f.state);
 				stream.post(userId, {
 					type: type,
 					instructions: JSON.stringify({

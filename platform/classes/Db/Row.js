@@ -45,11 +45,11 @@ function Row(fields, retrieved /* false */) {
 	/**
 	 * Whether this Db_Row was retrieved or not.
 	 * The save() method uses this to decide whether to insert or update.
-	 * @property _retrieved
+	 * @property retrieved
 	 * @type boolean
-	 * @private
 	 */
-	var _retrieved;
+	this.retrieved = false;
+	
 	/**
 	 * The value of the primary key of the row
 	 * Is set automatically if the Db_Row was fetched from a Db_Result.
@@ -124,26 +124,19 @@ function Row(fields, retrieved /* false */) {
 			this.fields[k] = fields[k];
 		}
 	}
-	if ((_retrieved = !!retrieved)) {
+	if ((this.retrieved = !!retrieved)) {
 		this._fieldsModified = {};
 	}
-
-	/**
-	 * Whether this Db_Row was retrieved or not.
-	 * @property retrieved
-	 * @type boolean
-	 */
-	this.__defineGetter__('retrieved', function () {
-		return _retrieved;
-	});
 	
 	/**
 	 * Whether this Db_Row was retrieved or not.
 	 * @property retrieved
 	 * @type boolean
 	 */
-	this.__defineGetter__('pkValue', function () {
-		return _pkValue;
+	Object.defineProperty(this, 'pkValue', {
+		get: function () {
+			return _pkValue;
+		}
 	});
 
 	_pkValue = calculatePKValue() || {};
@@ -172,6 +165,7 @@ function Row(fields, retrieved /* false */) {
 	 */
 	this.save = function (onDuplicateKeyUpdate /* = false */, commit /* = false */, callback) {
 
+		var me = this;
 		var _continue = true;
 		var rowClass = Q.require( this.className.split('_').join('/') );
 
@@ -240,7 +234,7 @@ function Row(fields, retrieved /* false */) {
 			if (!(db = self.db()))
 				throw new Error("The database was not specified!");
 
-			if (_retrieved) {
+			if (me.retrieved) {
 				// update the table
 				query = rowClass.UPDATE().set(modifiedFields).where(_pkValue);
 				_inserting = false;
@@ -261,7 +255,7 @@ function Row(fields, retrieved /* false */) {
 					}
 					_pkValue = calculatePKValue() || {};
 					self._fieldsModified = {};
-					_retrieved = true;
+					me.retrieved = true;
 					callback && callback.call(self);
 				}
 				query = null;
@@ -508,6 +502,7 @@ function Row(fields, retrieved /* false */) {
  	 */
 	this.remove = function (search_criteria /* null */, useIndex /* false */, callback) {
 
+		var me = this;
 		var _continue = true;
 		var rowClass = Q.require( this.className.split('_').join('/') );
 
@@ -539,7 +534,7 @@ function Row(fields, retrieved /* false */) {
 		}
 		// If search criteria are not specified, try to compute them.
 		if (!search_criteria) {
-			if (_retrieved) {
+			if (me.retrieved) {
 				// use primary key
 				search_criteria = primaryKeyValue;
 			} else {
@@ -588,7 +583,7 @@ function Row(fields, retrieved /* false */) {
 				if (error) callback && callback.call(self, error);
 				else {
 					self._fields = {};
-					_retrieved = false;
+					me.retrieved = false;
 					_pkValue = {};
 					self._fieldsModified = {};
 					callback && callback.call(self, null, result);
@@ -687,7 +682,7 @@ function Row(fields, retrieved /* false */) {
 	 * @return {Db_Row} returns this object, for chaining
 	 */
 	this.copyFromRow = function (row) {
-		_retrieved = row.retrieved;
+		this.retrieved = row.retrieved;
 		for (var key in row.fields) {
 			this.fields[key] = row.fields[key];
 		}

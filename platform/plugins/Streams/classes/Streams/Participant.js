@@ -64,7 +64,7 @@ Streams_Participant.prototype.unsubscribe = function(callback) {
  */
 Streams_Participant.states = function() {
 	var column = Base.column_state();
-	return JSON.parse(('[' + column[0][1] + ']').replace("'", '"'));
+	return JSON.parse(('[' + column[0][1] + ']').replaceAll({"'": '"'}));
 };
 
 /**

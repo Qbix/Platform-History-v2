@@ -2699,11 +2699,11 @@ abstract class Streams extends Base_Streams
 		foreach ($streamNames as $sn) {
 			$stream = $streams2[$sn];
 			$participant = Q::ifset($participants, $sn, null);
-			$prevState = $participant ? $participant->state : null;
+			$prevState = $participant ? $participant->get('prevState', null) : null;
 			// Send a message to Node
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Streams/Stream/leave",
-				"participant" => Q::json_encode($participant),
+				"participant" => Q::json_encode($participant->toArray()),
 				"stream" => Q::json_encode($stream->toArray()),
 				"prevState" => $prevState
 			));
@@ -2712,7 +2712,7 @@ abstract class Streams extends Base_Streams
 				'type' => 'Streams/leave',
 				'instructions' => array(
 					'prevState' => $prevState,
-					'extra' => isset($participant['extra']) ? $participant['extra'] : array()
+					'extra' => isset($participant->extra) ? $participant->extra : array()
 				)
 			);
 			$pMessages[] = array(
