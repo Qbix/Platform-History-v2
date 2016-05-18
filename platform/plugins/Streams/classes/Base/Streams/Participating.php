@@ -243,7 +243,7 @@ abstract class Base_Streams_Participating extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -297,7 +297,7 @@ return array (
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -351,7 +351,7 @@ return array (
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamName()
+	static function column_streamName()
 	{
 
 return array (
@@ -389,7 +389,7 @@ return array (
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_state()
+	static function column_state()
 	{
 
 return array (
@@ -443,7 +443,7 @@ return array (
 	 * Returns schema information for fresh column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_fresh()
+	static function column_fresh()
 	{
 
 return array (
@@ -497,7 +497,7 @@ return array (
 	 * Returns schema information for extra column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_extra()
+	static function column_extra()
 	{
 
 return array (
@@ -542,7 +542,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -587,7 +587,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (

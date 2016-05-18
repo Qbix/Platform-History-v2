@@ -48,7 +48,7 @@ class Mustache_Compiler
     /**
      * Helper function for walking the Mustache token parse tree.
      *
-     * @throws {$1} upon encountering unknown token types.
+     * @throws {InvalidArgumentException} upon encountering unknown token types.
      *
      * @param array $tree  Parse tree of Mustache tokens
      * @param int   $level (default: 0)

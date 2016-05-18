@@ -223,7 +223,7 @@ abstract class Base_Assets_Leader extends Db_Row
 	 * Returns schema information for app column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_app()
+	static function column_app()
 	{
 
 return array (
@@ -270,7 +270,7 @@ return array (
 	 * Returns schema information for day column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_day()
+	static function column_day()
 	{
 
 return array (
@@ -324,7 +324,7 @@ return array (
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -378,7 +378,7 @@ return array (
 	 * Returns schema information for points column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_points()
+	static function column_points()
 	{
 
 return array (

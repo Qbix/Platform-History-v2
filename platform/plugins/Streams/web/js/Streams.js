@@ -928,9 +928,19 @@ Streams.release = function (key) {
  * @param {String} options] More options that are passed to the API, which can include:
  *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+ *   @param {String} [options.userId] user id or an array of user ids to invite
+ *   @param {String} [options.fb_uid] fb user id or array of fb user ids to invite
+ *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
+ *   @param {String} [options.identifier] identifier or an array of identifiers
+ *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
+ *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ *   @param {String} [options.readLevel] the read level to grant those who are invited
+ *   @param {String} [options.writeLevel] the write level to grant those who are invited
+ *   @param {String} [options.adminLevel] the admin level to grant those who are invited
  *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
  *   @param {String} [options.callback] Also can be used to provide callbacks.
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only when the invited user hasn't registered yet.
+ *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result)
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
@@ -944,17 +954,22 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var o = Q.extend({}, Streams.invite.options, options);
+	var o = Q.extend({
+		uri: 'Streams/invite'
+	}, Streams.invite.options, options);
 	o.publisherId = publisherId,
 	o.streamName = streamName;
 	o.displayName = o.displayName || Users.loggedInUser.displayName;
 	function _request() {
-		return Q.req('Streams/invite', ['data'], function (err, response) {
+		return Q.req(o.uri, ['data'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
 			if (msg) {
+				alert(msg);
 				var args = [err, response];
 				return Streams.onError.handle.call(this, msg, args);
 			}
+			Participant.get.cache.removeEach([publisherId, streamName]);
+			Streams.get.cache.removeEach([publisherId, streamName]);
 			var rsd = response.slots.data;
 			Q.handle(o && o.callback, null, [err, response, msg]);
 			Q.handle(callback, null, [err, response, msg]);
@@ -1233,7 +1248,7 @@ var Stream = Streams.Stream = function (fields) {
 		'attributes',
 		'icon',
 		'messageCount',
-		'participantCount',
+		'participantCounts',
 		'insertedTime',
 		'updatedTime',
 		'readLevel',
@@ -1881,10 +1896,17 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *   @param {String} [fields.identifier] Required for now. An email address or mobile number to invite. Might not belong to an existing user yet.
  *   @required
  *   @param {String} [fields.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+ * @param {String} options] More options that are passed to the API, which can include:
+ *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
+ *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+ *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
+ *   @param {String} [options.callback] Also can be used to provide callbacks.
+ *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only when the invited user hasn't registered yet.
  * @param {Function} callback Called with (err, result)
+ * @return {Q.Request} represents the request that was made if an identifier was provided
  */
-Sp.invite = function (fields, callback) {
-	Streams.invite(this.fields.publisherId, this.fields.name, fields, callback);
+Sp.invite = function (fields, options, callback) {
+	Streams.invite(this.fields.publisherId, this.fields.name, fields, options, callback);
 };
 
 /**
@@ -3521,8 +3543,10 @@ function prepareStream(stream) {
 	if (stream.fields.messageCount) {
 		stream.fields.messageCount = parseInt(stream.fields.messageCount);
 	}
-	if (stream.fields.participantCount) {
-		stream.fields.participantCount = parseInt(stream.fields.participantCount);
+	if (stream.fields.participantCounts) {
+		stream.participantCounts = JSON.parse(stream.fields.participantCounts);
+	} else {
+		stream.participantCounts = [0, 0, 0];
 	}
 	if (stream.fields.access) {
 		stream.access = Q.copy(stream.fields.access);
@@ -3917,10 +3941,10 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					updateParticipantCache(1);
+					updateParticipantCache('participating', message.get('prevState'), usingCached);
 					break;
 				case 'Streams/leave':
-					updateParticipantCache(-1);
+					updateParticipantCache('left', message.get('prevState'), usingCached);
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
@@ -4036,24 +4060,38 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				}
 
-				function updateParticipantCache(incrementCount) {
+				function updateParticipantCache(newState, prevState, usingCached) {
+					Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
+					if (!usingCached) {
+						return;
+					}
+					var states = Streams.Participant.states;
+					var prevIndex = states.indexOf(prevState);
+					var newIndex = states.indexOf(newState);
+					if (newIndex < 0) {
+						throw new Q.Error("Streams updateParticipantCache: prevState" + prevState + " not valid");
+					}
+					var sawStreams = [];
 					Streams.get.cache.each([msg.publisherId, msg.streamName],
 					function (k, v) {
 						var stream = (v && !v.params[0]) ? v.subject : null;
 						if (!stream) {
 							return;
 						}
-						if ('participantCount' in stream.fields) {
-							stream.fields.participantCount += incrementCount; // increment participant count
+						if (sawStreams.indexOf(stream) >= 0) {
+							return;
 						}
-						var args = JSON.parse(k), extra = args[2];
+						sawStreams.push(stream);
+						if (prevIndex >= 0) {
+							--stream.participantCounts[prevIndex];
+						}
+						++stream.participantCounts[newIndex];
+						var args = JSON.parse(k);
+						var extra = args[2];
 						if (extra && extra.participants) {
 							this.remove(k);
 						}
 					});
-					Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
-					// later, we can refactor this to insert
-					// the correct data into the cache
 				}
 
 				function updateRelatedCache(instructions) {

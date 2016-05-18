@@ -400,7 +400,7 @@ Streams.listen = function (options) {
 		var participant, stream, msg, posted, streams, deviceId, title, k;
 		var clientId = parsed["Q.clientId"];
 		var stream = parsed.stream
-			&& Streams.Stream.construct(JSON.parse(parsed.stream));
+			&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
 		switch (parsed['Q/method']) {
 			case 'Users/device':
 				if (!(deviceId = parsed.deviceId)) break;
@@ -439,7 +439,7 @@ Streams.listen = function (options) {
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
 				Streams.emitToUser(userId, 'join', participant);
-				stream.incParticipants(function () {
+				stream.updateParticipantCounts('participating', parsed.prevState, function () {
 					Streams.Stream.emit('join', stream, userId, clientId);
 				});
 				break;
@@ -449,7 +449,7 @@ Streams.listen = function (options) {
 				Streams.Stream.emit('visit', stream, userId, clientId);
 				break;
 			case 'Streams/Stream/leave':
-				participant = JSON.parse(parsed.participant);
+				participant = new Streams.Participant(JSON.parse(parsed.participant));
 				participant.fillMagicFields();
 				userId = participant.userId;
 				if (Q.Config.get(['Streams', 'logging'], false)) {
@@ -463,7 +463,7 @@ Streams.listen = function (options) {
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
 				Streams.emitToUser(userId, 'leave', participant);
-				stream.decParticipants(function () {
+				stream.updateParticipantCounts('left', parsed.prevState, function () {
 					Streams.Stream.emit('leave', stream, userId, clientId);
 				});
 				break;
@@ -494,7 +494,7 @@ Streams.listen = function (options) {
 				// no need to notify anyone
 				break;
 			case 'Streams/Message/post':
-				msg = Streams.Message.construct(JSON.parse(parsed.message));
+				msg = Streams.Message.construct(JSON.parse(parsed.message), true);
 				msg.fillMagicFields();
 				if (Q.Config.get(['Streams', 'logging'], false)) {
 					Q.log('Streams.listen: Streams/Message/post {'
@@ -511,9 +511,11 @@ Streams.listen = function (options) {
 				streams = parsed.streams && JSON.parse(parsed.streams);
 				if (!streams) break;
 				for (k in posted) {
-					msg = Streams.Message.construct(posted[k]);
+					msg = Streams.Message.construct(posted[k], true);
 					msg.fillMagicFields();
-					stream = Streams.Stream.construct(streams[msg.fields.publisherId][msg.fields.streamName]);
+					stream = Streams.Stream.construct(
+						streams[msg.fields.publisherId][msg.fields.streamName], true
+					);
 					if (Q.Config.get(['Streams', 'logging'], false)) {
 						Q.log('Streams.listen: Streams/Message/post {'
 							+ '"publisherId": "' + stream.fields.publisherId
@@ -533,9 +535,9 @@ Streams.listen = function (options) {
 					invitingUserId = parsed.invitingUserId;
 					username = parsed.username;
 					appUrl = parsed.appUrl;
-					readLevel = parsed.readLevel && JSON.parse(parsed.readLevel) || null;
-					writeLevel = parsed.writeLevel && JSON.parse(parsed.writeLevel) || null;
-					adminLevel = parsed.adminLevel && JSON.parse(parsed.adminLevel) || null;
+					readLevel = parsed.readLevel || null;
+					writeLevel = parsed.writeLevel || null;
+					adminLevel = parsed.adminLevel || null;
 					displayName = parsed.displayName || '';
 					expiry = parsed.expiry ? new Date(parsed.expiry*1000) : null;
 				} catch (e) {

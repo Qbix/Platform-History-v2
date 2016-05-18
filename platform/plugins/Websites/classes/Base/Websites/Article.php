@@ -227,7 +227,7 @@ abstract class Base_Websites_Article extends Db_Row
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -281,7 +281,7 @@ return array (
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamName()
+	static function column_streamName()
 	{
 
 return array (
@@ -335,7 +335,7 @@ return array (
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -389,7 +389,7 @@ return array (
 	 * Returns schema information for article column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_article()
+	static function column_article()
 	{
 
 return array (
@@ -443,7 +443,7 @@ return array (
 	 * Returns schema information for getintouch column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_getintouch()
+	static function column_getintouch()
 	{
 
 return array (

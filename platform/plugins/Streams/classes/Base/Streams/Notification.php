@@ -249,7 +249,7 @@ abstract class Base_Streams_Notification extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -303,7 +303,7 @@ return array (
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -357,7 +357,7 @@ return array (
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamName()
+	static function column_streamName()
 	{
 
 return array (
@@ -411,7 +411,7 @@ return array (
 	 * Returns schema information for messageOrdinal column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_messageOrdinal()
+	static function column_messageOrdinal()
 	{
 
 return array (
@@ -456,7 +456,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -510,7 +510,7 @@ return array (
 	 * Returns schema information for type column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_type()
+	static function column_type()
 	{
 
 return array (
@@ -558,7 +558,7 @@ return array (
 	 * Returns schema information for viewedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_viewedTime()
+	static function column_viewedTime()
 	{
 
 return array (
@@ -606,7 +606,7 @@ return array (
 	 * Returns schema information for readTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_readTime()
+	static function column_readTime()
 	{
 
 return array (
@@ -660,7 +660,7 @@ return array (
 	 * Returns schema information for comment column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_comment()
+	static function column_comment()
 	{
 
 return array (

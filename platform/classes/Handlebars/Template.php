@@ -149,7 +149,7 @@ class Handlebars_Template
      *
      * @param mixed $context current context
      *
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      * @return {string}
      */
     public function render($context)
@@ -316,7 +316,6 @@ class Handlebars_Template
     {
         $helpers = $this->handlebars->getHelpers();
         $sectionName = $current[Handlebars_Tokenizer::NAME];
-
         if (isset($current[Handlebars_Tokenizer::END])) {
             $source = substr(
                 $this->getSource(),
@@ -326,7 +325,6 @@ class Handlebars_Template
         } else {
             $source = '';
         }
-
         // subexpression parsing loop
         $subexprs = array(); // will contain all subexpressions inside outermost brackets
         $insideOf = array( 'single' => false, 'double' => false );
@@ -352,10 +350,8 @@ class Handlebars_Template
                 if ($lvl == 0) {
                     $subexprs[] = substr($current[Handlebars_Tokenizer::ARGS], $cur_start, $i - $cur_start);
                 }
-
             }
         }
-
         if (! empty($subexprs)) {
             foreach ($subexprs as $expr) {
                 $cmd = explode(" ", $expr);
@@ -375,26 +371,8 @@ class Handlebars_Template
                 $current[Handlebars_Tokenizer::ARGS] = str_replace('('.$expr.')', '"' . $resolved . '"', $current[Handlebars_Tokenizer::ARGS]);
             }
         }
-
-        $pattern = '/(([A-Z][A-Z0-9]*)=)|(true|false|([0-9\.]+)|(["]).*?([^\\\\]["]))/i';
-        preg_match_all($pattern, $current[Handlebars_Tokenizer::ARGS], $matches);
-        $args = array();
-        $m = $matches[0];
-        $c = count($m);
-        for ($i=0; $i<$c; ++$i) {
-            if (substr($m[$i], -1) === '=') {
-                $key = substr($m[$i], 0, strlen($m[$i])-1);
-                $args['hash'][$key] = json_decode($m[$i+1], true);
-                ++$i;
-            } else { 
-                $args[] = json_decode($m[$i], true);
-            }
-        }
-
-        $return = $helpers->call($sectionName, $this, $context, $args, $source);
-        
-
-        if ($return instanceof Handlebars_String) {
+        $return = $helpers->call($sectionName, $this, $context, $current[Handlebars_Tokenizer::ARGS], $source);
+        if ($return instanceof StringWrapper) {
             return $this->handlebars->loadString($return)->render($context);
         } else {
             return $return;
@@ -407,7 +385,7 @@ class Handlebars_Template
      * @param Handlebars_Context $context current context
      * @param array   $current section node data
      *
-     * @throws {$1}
+     * @throws {RuntimeException}
      * @return {mixed|string}
      */
     private function _mustacheStyleSection(Handlebars_Context $context, $current)
@@ -464,7 +442,7 @@ class Handlebars_Template
      * @param Handlebars_Context $context current context
      * @param array   $current section node data
      *
-     * @throws {$1}
+     * @throws {RuntimeException}
      * @return {string} the result
      */
     private function _section(Handlebars_Context $context, $current)
@@ -640,7 +618,7 @@ class Handlebars_Template
      *
      * @param string $string Argument Handlebars_String as passed to a helper
      *
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      * @return {array} the argument list as an array
      */
     public function parseArguments($string)

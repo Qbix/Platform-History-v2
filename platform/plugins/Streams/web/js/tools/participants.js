@@ -176,10 +176,10 @@ function _Streams_participants(options) {
 					function (err, html) {
 						if (err) return;
 						var $element = 
-						$('<div class="Streams_participants_invite" />')
-						.html(html)
-						.appendTo(tool.$avatars)
-						.addClass('Streams_inviteTrigger');
+						tool.$invite = $('<div class="Streams_participants_invite" />')
+							.html(html)
+							.insertBefore(tool.$avatars)
+							.addClass('Streams_inviteTrigger');
 						var filter = '.Streams_inviteTrigger';
 						$(tool.element)
 						.on(Q.Pointer.fastclick, filter, function () {
@@ -281,7 +281,7 @@ function _Streams_participants(options) {
 				userId: userId,
 				"short": true,
 				icon: (window.devicePixelRatio > 1 ? '80' : '40'),
-			})).addClass(userId ? '' : 'Streams_inviteTrigger');
+			}));
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [$element])) {
 				$elements[userId] = $element;

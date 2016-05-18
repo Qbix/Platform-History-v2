@@ -250,7 +250,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -288,7 +288,7 @@ Base.prototype.maxSize_forType = function () {
 	 * Returns schema information for forType column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_forType = function () {
+Base.column_forType = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -326,7 +326,7 @@ Base.prototype.maxSize_forId = function () {
 	 * Returns schema information for forId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_forId = function () {
+Base.column_forId = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -350,7 +350,7 @@ Base.prototype.beforeSet_value = function (value) {
 	 * Returns schema information for value column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_value = function () {
+Base.column_value = function () {
 
 return [["decimal","10,4","",false],false,"",null];
 };
@@ -374,7 +374,7 @@ Base.prototype.beforeSet_weight = function (value) {
 	 * Returns schema information for weight column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_weight = function () {
+Base.column_weight = function () {
 
 return [["decimal","10,4","",false],false,"","1.0000"];
 };
@@ -396,7 +396,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","10,4","",false],true,"","CURRENT_TIMESTAMP"];
 };

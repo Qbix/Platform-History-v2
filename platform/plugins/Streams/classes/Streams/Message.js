@@ -38,7 +38,7 @@ Q.mixin(Streams_Message, Base_Streams_Message);
 
 Streams_Message.defined = {};
 
-Streams_Message.construct = function Streams_Message_construct(fields) {
+Streams_Message.construct = function Streams_Message_construct(fields, retrieved) {
 	if (Q.isEmpty(fields)) {
 		Q.handle(callback, this, ["Streams.Message constructor: fields are missing"]);
 		return false;
@@ -59,7 +59,12 @@ Streams_Message.construct = function Streams_Message_construct(fields) {
 		};
 		Q.mixin(MC, Streams_Message);
 	}
-	return new MC(fields);
+	var message = new MC(fields);
+	if (retrieved) {
+		message.retrieved = true;
+		message._fieldsModified = {};
+	}
+	return message;
 };
 
 /**
@@ -206,7 +211,7 @@ Streams_Message.post = function (fields, callback)
 			return callback && callback(err);
 		}
 		var results = params[""][1];
-		var stream = Streams.Stream.construct(results[5][0]);
+		var stream = Streams.Stream.construct(results[5][0], true);
 		var message = Streams.Message.construct(results[6][0]);
 		Streams.Stream.emit('post', stream, f.byUserId, message, stream);
 		callback && callback.call(stream, null, f.byUserId, message);

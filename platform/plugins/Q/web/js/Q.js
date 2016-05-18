@@ -1833,6 +1833,8 @@ Q.calculateKey = function _Q_Event_calculateKey(key, container, start) {
 		while (container[key]) {
 			key = 'AUTOKEY_' + (++i);
 		}
+	} else if (key !== undefined && typeof key !== 'string') {
+		throw new Q.Error("Q.calculateKey: key must be a String, Q.Tool, true, or undefined");
 	}
 	return key;
 };
@@ -3242,9 +3244,18 @@ Q.Tool = function _Q_Tool(element, options) {
 	// ID and prefix
 	if (!this.element.id) {
 		var prefix = Q.Tool.beingActivated ? Q.Tool.beingActivated.prefix : '';
-		this.element.id = (
-			prefix + this.name + '-' + (Q.Tool.nextDefaultId++) + "_tool"
-		).toLowerCase();
+		if (!prefix) {
+			var e = this.element.parentNode;
+			do {
+				if (e.hasClass('Q_tool')) {
+					prefix = Q.getObject('Q.tool.prefix', e)
+						|| Q.Tool.calculatePrefix(e.id);
+					break;
+				}
+			} while (e = e.parentNode);
+		}
+		this.element.id = prefix + Q.Tool.names[this.name].split('/').join('_')
+			'-' + (Q.Tool.nextDefaultId++) + "_tool";
 		Q.Tool.nextDefaultId %= 1000000;
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
@@ -3373,6 +3384,7 @@ Q.Tool.options = {
 };
 
 Q.Tool.active = {};
+Q.Tool.names = {};
 Q.Tool.latestName = null;
 Q.Tool.latestNames = {};
 
@@ -3506,31 +3518,32 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	}
 	for (name in ctors) {
 		ctor = ctors[name];
-		name = Q.normalize(name);
+		var n = Q.normalize(name);
+		Q.Tool.names[n] = name;
 		if (typeof ctor === 'string') {
-			if (typeof Q.Tool.constructors[name] !== 'function') {
-				_qtdo[name] = _qtdo[name] || {};
-				Q.Tool.constructors[name] = ctor;
+			if (typeof Q.Tool.constructors[n] !== 'function') {
+				_qtdo[n] = _qtdo[n] || {};
+				Q.Tool.constructors[n] = ctor;
 			}
 			continue;
 		}
-		ctor.toolName = name;
+		ctor.toolName = n;
 		if (typeof stateKeys === 'object') {
 			methods = stateKeys;
 			stateKeys = undefined;
 		}
 		ctor.options = Q.extend(
-			defaultOptions, Q.Tool.options.levels, _qtdo[name]
+			defaultOptions, Q.Tool.options.levels, _qtdo[n]
 		);
 		ctor.stateKeys = stateKeys;
 		if (typeof ctor !== 'function') {
 			throw new Q.Error("Q.Tool.define requires ctor to be a string or a function");
 		}
 		Q.extend(ctor.prototype, 10, methods);
-		Q.Tool.constructors[name] = ctor;
-		Q.Tool.onLoadedConstructor(name).handle(name, ctor);
-		Q.Tool.onLoadedConstructor("").handle(name, ctor);
-		Q.Tool.latestName = name;
+		Q.Tool.constructors[n] = ctor;
+		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
+		Q.Tool.onLoadedConstructor("").handle(n, ctor);
+		Q.Tool.latestName = n;
 	}
 	return ctor;
 };
@@ -3578,22 +3591,23 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		}
 		return;
 	}
-	name = Q.normalize(name);
+	var n = Q.normalize(name);
+	Q.Tool.names[n] = name;
 	if (typeof ctor === 'string') {
 		if (root.jQuery
-		&& typeof jQuery.fn.plugin[name] !== 'function') {
-			_qtjo[name] = _qtjo[name] || {};
-			jQuery.fn.plugin[name] = Q.Tool.constructors[name] = ctor;
+		&& typeof jQuery.fn.plugin[n] !== 'function') {
+			_qtjo[n] = _qtjo[n] || {};
+			jQuery.fn.plugin[n] = Q.Tool.constructors[n] = ctor;
 		}
 		return ctor;
 	}
-	ctor.toolName = name;
+	ctor.toolName = n;
 	if (typeof stateKeys === 'object') {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
 	Q.ensure(root.jQuery, Q.onJQuery.add, _onJQuery);
-	Q.Tool.latestName = name;
+	Q.Tool.latestName = n;
 	function _onJQuery() {
 		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
@@ -3609,13 +3623,13 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 				var args = Array.prototype.slice.call(arguments, 0);
 				args[0] = Q.extend({}, 10, jQueryPluginConstructor.options, 10, options);
 				$(this).each(function () {
-					var key = name + ' state';
+					var key = n + ' state';
 					var $this = $(this);
 					if ($this.data(key)) {
 						// This jQuery plugin was already applied here,
 						// so call remove method if it's defined,
 						// before calling constructor again
-						$this.plugin(name, 'remove');
+						$this.plugin(n, 'remove');
 					}
 					$this.data(key, Q.copy(args[0], stateKeys));
 					ctor.apply($this, args);
@@ -3624,24 +3638,24 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 			return this;
 		}
 		jQueryPluginConstructor.options = Q.extend(
-			defaultOptions, Q.Tool.options.levels, _qtjo[name]
+			defaultOptions, Q.Tool.options.levels, _qtjo[n]
 		);
 		jQueryPluginConstructor.methods = methods || {};
-		$.fn[name] = jQueryPluginConstructor;
+		$.fn[n] = jQueryPluginConstructor;
 		var ToolConstructor = Q.Tool.define(name,
 		function _Q_Tool_jQuery_constructor(options) {
 			var $te = $(this.element);
-			$te.plugin(name, options, this);
-			this.state = $te.state(name);
+			$te.plugin(n, options, this);
+			this.state = $te.state(n);
 			this.Q.beforeRemove.set(function () {
-				$(this.element).plugin(name, 'remove', this);
+				$(this.element).plugin(n, 'remove', this);
 			}, 'Q');
 		});
 		ToolConstructor.prototype.$ = {};
 		Q.each(methods, function (method) {
 			ToolConstructor.prototype.$[method] = function _Q_Tool_jQuery_method() {
 				var args = Array.prototype.slice.call(arguments, 0);
-				args.unshift(name, method);
+				args.unshift(n, method);
 				var $te = $(this.element);
 				$te.plugin.apply($te, args);
 			};
@@ -10750,7 +10764,7 @@ function _addHandlebarsHelpers() {
 			if (typeof f === 'function') {
 				return f.apply(Q.getObject(subparts), args);
 			}
-			return "{{call "+path+" not found}}";
+			return "{{call '"+path+"' not found}}";
 		});
 	}
 	if (!Handlebars.helpers.tool) {

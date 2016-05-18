@@ -266,7 +266,7 @@ Base.prototype.maxSize_ofUserId = function () {
 	 * Returns schema information for ofUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_ofUserId = function () {
+Base.column_ofUserId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -304,7 +304,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_publisherId = function () {
+Base.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -342,7 +342,7 @@ Base.prototype.maxSize_streamName = function () {
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_streamName = function () {
+Base.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -377,7 +377,7 @@ Base.prototype.maxSize_ordinal = function () {
 	 * Returns schema information for ordinal column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_ordinal = function () {
+Base.column_ordinal = function () {
 
 return [["int","11","",false],false,"PRI",null];
 };
@@ -398,7 +398,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -420,7 +420,7 @@ Base.prototype.beforeSet_readyTime = function (value) {
 	 * Returns schema information for readyTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_readyTime = function () {
+Base.column_readyTime = function () {
 
 return [["timestamp","11","",false],true,"",null];
 };
@@ -458,7 +458,7 @@ Base.prototype.maxSize_filter = function () {
 	 * Returns schema information for filter column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_filter = function () {
+Base.column_filter = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -496,7 +496,7 @@ Base.prototype.maxSize_deliver = function () {
 	 * Returns schema information for deliver column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_deliver = function () {
+Base.column_deliver = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -520,7 +520,7 @@ Base.prototype.beforeSet_relevance = function (value) {
 	 * Returns schema information for relevance column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_relevance = function () {
+Base.column_relevance = function () {
 
 return [["decimal","14,4","",false],false,"",null];
 };

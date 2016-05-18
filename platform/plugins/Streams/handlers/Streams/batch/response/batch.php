@@ -20,23 +20,20 @@ function Streams_batch_response_batch()
 	}
 
 	// Gather the publisher ids and stream names to fetch
-	$to_fetch = array();
+	$toFetch = array();
 	foreach ($batch['args'] as $args) {
 		if (count($args) < 4) {
 			continue;
 		}
 		list($action, $slots, $publisherId, $name) = $args;
-		if (empty($to_fetch[$publisherId])) {
-			$to_fetch[$publisherId] = array();
-		}
-		$to_fetch[$publisherId][] = $name;
+		$toFetch[$publisherId][] = $name;
 	}
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
 	
 	// Fetch the actual streams
 	$streams = array();
-	foreach ($to_fetch as $publisherId => $names) {
+	foreach ($toFetch as $publisherId => $names) {
 		if (empty($streams[$publisherId])) {
 			$streams[$publisherId] = array();
 		}

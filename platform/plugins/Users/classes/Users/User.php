@@ -856,7 +856,7 @@ class Users_User extends Base_Users_User
 				throw new Q_Exception_WrongType(array(
 					'field' => 'identifier',
 					'type' => 'email address or mobile number'
-				), array('emailAddress', 'mobileNumber'));
+				), array('identifier', 'emailAddress', 'mobileNumber'));
 			}
 			$status = null;
 			$users[] = $user = Users::futureUser($type, $ui_identifier, $status);

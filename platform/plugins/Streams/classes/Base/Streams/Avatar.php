@@ -237,7 +237,7 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 * Returns schema information for toUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_toUserId()
+	static function column_toUserId()
 	{
 
 return array (
@@ -291,7 +291,7 @@ return array (
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -339,7 +339,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -393,7 +393,7 @@ return array (
 	 * Returns schema information for username column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_username()
+	static function column_username()
 	{
 
 return array (
@@ -447,7 +447,7 @@ return array (
 	 * Returns schema information for firstName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_firstName()
+	static function column_firstName()
 	{
 
 return array (
@@ -501,7 +501,7 @@ return array (
 	 * Returns schema information for lastName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_lastName()
+	static function column_lastName()
 	{
 
 return array (
@@ -555,7 +555,7 @@ return array (
 	 * Returns schema information for icon column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_icon()
+	static function column_icon()
 	{
 
 return array (

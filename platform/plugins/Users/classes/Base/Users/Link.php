@@ -222,7 +222,7 @@ abstract class Base_Users_Link extends Db_Row
 	 * Returns schema information for identifier column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_identifier()
+	static function column_identifier()
 	{
 
 return array (
@@ -276,7 +276,7 @@ return array (
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -330,7 +330,7 @@ return array (
 	 * Returns schema information for extraInfo column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_extraInfo()
+	static function column_extraInfo()
 	{
 
 return array (
@@ -375,7 +375,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (

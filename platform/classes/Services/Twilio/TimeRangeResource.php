@@ -15,7 +15,7 @@ class Services_Twilio_TimeRangeResource extends Services_Twilio_UsageResource {
      *      list of valid categories, please see the documentation at 
      *      http://www.twilio.com/docs/api/rest/usage-records#usage-all-categories
      * @return {Services_Twilio_Rest_UsageRecord}
-     * @throws {$1}
+     * @throws {Services_Twilio_RestException}
      */
     public function getCategory($category) {
         $page = $this->getPage(0, 1, array(

@@ -234,7 +234,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -257,7 +257,7 @@ Base.prototype.beforeSet_payments = function (value) {
 	 * Returns schema information for payments column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_payments = function () {
+Base.column_payments = function () {
 
 return [["enum","'stripe','authnet'","",false],false,"PRI","stripe"];
 };
@@ -295,7 +295,7 @@ Base.prototype.maxSize_customerId = function () {
 	 * Returns schema information for customerId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_customerId = function () {
+Base.column_customerId = function () {
 
 return [["varchar","255","",false],false,"",""];
 };

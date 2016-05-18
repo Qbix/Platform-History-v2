@@ -188,9 +188,9 @@ class Handlebars_Context
      * @param string  $variableName variable name to get from current context
      * @param boolean $strict       strict search? if not found then throw exception
      *
-     * @throws {$1} in strict mode and variable not found
-     * @throws {$1} if supplied argument is a malformed quoted string 
-     * @throws {$1} if variable name is invalid
+     * @throws {InvalidArgumentException} in strict mode and variable not found
+     * @throws {InvalidArgumentException} if supplied argument is a malformed quoted string
+     * @throws {InvalidArgumentException} if variable name is invalid
      * @return {mixed}
      */
     public function get($variableName, $strict = false)
@@ -206,11 +206,11 @@ class Handlebars_Context
         }
         if (count($this->stack) < $level) {
             if ($strict) {
-                throw new InvalidArgumentException(
-                    'can not find variable in context'
-                );
+                throw new InvalidArgumentException(sprintf(
+                    'Can not find variable in context: "%s"',
+                    $variableName
+                ));
             }
-
             return '';
         }
         if (substr($variableName, 0, 6) == '@root.') {
@@ -225,9 +225,10 @@ class Handlebars_Context
         $current = current($this->stack);
         if (!$variableName) {
             if ($strict) {
-                throw new InvalidArgumentException(
-                    'can not find variable in context'
-                );
+	            throw new InvalidArgumentException(sprintf(
+		            'Can not find variable in context: "%s"',
+		            $variableName
+	            ));
             }
             return '';
         } elseif ($variableName == '.' || $variableName == 'this') {
@@ -237,9 +238,10 @@ class Handlebars_Context
             if (isset($specialVariables[$variableName])) {
                 return $specialVariables[$variableName];
             } elseif ($strict) {
-                throw new InvalidArgumentException(
-                    'can not find variable in context'
-                );
+	            throw new InvalidArgumentException(sprintf(
+		            'Can not find variable in context: "%s"',
+		            $variableName
+	            ));
             } else {
                 return '';
             }
@@ -262,7 +264,7 @@ class Handlebars_Context
      * @param string  $inside   property/method to check
      * @param boolean $strict   strict search? if not found then throw exception
      *
-     * @throws {$1} in strict mode and variable not found
+     * @throws {InvalidArgumentException} in strict mode and variable not found
      * @return {boolean} true if exists
      */
     private function _findVariableInContext($variable, $inside, $strict = false)
@@ -296,7 +298,7 @@ class Handlebars_Context
      *
      * @param string $variableName Fully qualified name of a variable.
      *
-     * @throws {$1} if variable name is invalid.
+     * @throws {InvalidArgumentException} if variable name is invalid.
      * @return {array}
      */
     private function _splitVariableName($variableName)

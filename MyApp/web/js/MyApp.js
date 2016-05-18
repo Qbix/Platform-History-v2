@@ -47,7 +47,7 @@ var MyApp = (function (Q, $) {
 				}
 				Q.layout();
 			});
-			if (key = encodeURIComponent($this.attr('data-key'))) {
+			if (key = $this.attr('data-key')) {
 				Q.req('Q/notice', 'data', null, { 
 					method: 'delete', 
 					fields: {key: key} 

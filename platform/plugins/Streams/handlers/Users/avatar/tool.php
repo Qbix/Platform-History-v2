@@ -76,6 +76,15 @@ function Users_avatar_tool($options)
 	} else if ($options['editable'] === true) {
 		$o['show'] = 'fl';
 	}
+	if (!empty($options['editable'])
+	and in_array('name', $options['editable'])) {
+		$streams = Streams::fetch(null, $options['userId'], array(
+			'Streams/user/firstName', 'Streams/user/lastName', 'Streams/user/username'
+		));
+		foreach ($streams as $s) {
+			$s->addPreloaded();
+		}
+	}
 	$displayName = $avatar->displayName($o, 'Someone');
 	$result .= "<span class='Users_avatar_name'>$displayName</span>";
 	return $result;

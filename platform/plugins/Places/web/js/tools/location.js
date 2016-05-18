@@ -28,146 +28,149 @@ Q.Tool.define("Places/location", function (options) {
 	var publisherId = Q.Users.loggedInUser.id;
 	var streamName = "Places/user/location";
 	
-	$te.find('.Places_location_container').addClass('Places_location_checking');
+	Q.Template.render('Places/location', options, function (err, html) {
+		tool.element.innerHTML = html;
+		$te.find('.Places_location_container').addClass('Places_location_checking');
 	
-	var pipe = Q.pipe(['info', 'show'], function (params) {
-		_showMap.apply(this, params.info);
-	});
+		var pipe = Q.pipe(['info', 'show'], function (params) {
+			_showMap.apply(this, params.info);
+		});
 	
-	Q.Streams.Stream
-	.onRefresh(publisherId, streamName)
-	.set(function () {
-		var miles = this.get('miles');
-		var latitude = this.get('latitude');
-		var longitude = this.get('longitude');
-		if (miles) {
-			tool.$('.Places_location_miles').val(miles);
-		};
-		pipe.fill('info')(latitude, longitude, miles, state.onUpdate.handle);
-		state.stream = this; // in case it was missing before
-	});
-	
-	Q.Streams.retainWith(this)
-	.get(publisherId, streamName, function (err) {
-		if (!err) {
-			var stream = state.stream = this;
-			var miles = stream.get('miles');
-			var latitude = stream.get('latitude');
-			var longitude = stream.get('longitude');
+		Q.Streams.Stream
+		.onRefresh(publisherId, streamName)
+		.set(function () {
+			var miles = this.get('miles');
+			var latitude = this.get('latitude');
+			var longitude = this.get('longitude');
 			if (miles) {
 				tool.$('.Places_location_miles').val(miles);
-			}
-		}
-		if (!latitude || !longitude || !miles) {
-			$te.removeClass('Places_location_obtained')
-				.addClass('Places_location_obtaining');
-			$te.find('.Places_location_container')
-				.removeClass('Places_location_checking');
-			Q.handle(state.onUnset, tool, [err, stream]);
-		}
-		setTimeout(function () {
-			pipe.fill('show')();
-		}, state.map.delay);
-		
-		if (stream && Q.getter.usingCached) {
-			stream.refresh();
-		}
-	});
-	
-	tool.$('.Places_location_miles').on('change', function () {
-		_submit();
-	});
-	
-	tool.$('.Places_location_set, .Places_location_update_button')
-	.on(Q.Pointer.click, function () {
-		var $this = $(this);
-		$this.addClass('Places_obtaining');
-		if (!navigator.geolocation) {
-			return geolocationFailed();
-		}
-		var timeout = setTimeout(geolocationFailed, state.timeout);
-		var handledFail = false;
-		Q.Places.loadGoogleMaps(function () {
-			navigator.geolocation.getCurrentPosition(
-			function (geo) {
-				clearTimeout(timeout);
-				if (handledFail) return;
-				var geocoder = new google.maps.Geocoder();
-				geocoder.geocode({'latLng': {
-					lat: geo.coords.latitude,
-					lng: geo.coords.longitude
-				}}, function(results, status) {
-					var country, state, placeName;
-					if (status == google.maps.GeocoderStatus.OK && results[0]) {
-						country = getComponent(results, 'country');
-						state = getComponent(results, 'administrative_area_level_1');
-						placeName = getComponent(results, 'locality')
-							|| getComponent(results, 'sublocality');
-					}
-					var fields = Q.extend({
-						unsubscribe: true,
-						subscribe: true,
-						miles: $('select[name=miles]').val(),
-						timezone: (new Date()).getTimezoneOffset(),
-						placeName: placeName,
-						state: state,
-						country: country
-					}, true, geo.coords);
-					Q.req("Places/geolocation", [], 
-					function (err, data) {
-						Q.Streams.Stream.refresh(
-							publisherId, streamName, null,
-							{ messages: 1, evenIfNotRetained: true}
-						);
-						$this.removeClass('Places_obtaining').hide(500);
-					}, {method: 'post', fields: fields});
-				});
-			}, function () {
-				clearTimeout(timeout);
-				if (handledFail) return;
-				geolocationFailed();
-			}, {
-				maximumAge: 300000,
-				timeout: state.timeout
-			});
+			};
+			pipe.fill('info')(latitude, longitude, miles, state.onUpdate.handle);
+			state.stream = this; // in case it was missing before
 		});
+	
+		Q.Streams.retainWith(tool)
+		.get(publisherId, streamName, function (err) {
+			if (!err) {
+				var stream = state.stream = this;
+				var miles = stream.get('miles');
+				var latitude = stream.get('latitude');
+				var longitude = stream.get('longitude');
+				if (miles) {
+					tool.$('.Places_location_miles').val(miles);
+				}
+			}
+			if (!latitude || !longitude || !miles) {
+				$te.removeClass('Places_location_obtained')
+					.addClass('Places_location_obtaining');
+				$te.find('.Places_location_container')
+					.removeClass('Places_location_checking');
+				Q.handle(state.onUnset, tool, [err, stream]);
+			}
+			setTimeout(function () {
+				pipe.fill('show')();
+			}, state.map.delay);
 		
-		function geolocationFailed() {
-			handledFail = true;
-			Q.prompt("Please enter your zipcode:",
-			function (zipcode, dialog) {
-				if (zipcode) {
-					_submit(zipcode);
-				}
-			}, {
-				title: "My Location",
-				ok: "Update",
-				onClose: function () {
-					$this.removeClass('Places_obtaining');	
-				}
+			if (stream && Q.getter.usingCached) {
+				stream.refresh();
+			}
+		});
+	
+		tool.$('.Places_location_miles').on('change', function () {
+			_submit();
+		});
+	
+		tool.$('.Places_location_set, .Places_location_update_button')
+		.on(Q.Pointer.click, function () {
+			var $this = $(this);
+			$this.addClass('Places_obtaining');
+			if (!navigator.geolocation) {
+				return geolocationFailed();
+			}
+			var timeout = setTimeout(geolocationFailed, state.timeout);
+			var handledFail = false;
+			Q.Places.loadGoogleMaps(function () {
+				navigator.geolocation.getCurrentPosition(
+				function (geo) {
+					clearTimeout(timeout);
+					if (handledFail) return;
+					var geocoder = new google.maps.Geocoder();
+					geocoder.geocode({'latLng': {
+						lat: geo.coords.latitude,
+						lng: geo.coords.longitude
+					}}, function(results, status) {
+						var country, state, placeName;
+						if (status == google.maps.GeocoderStatus.OK && results[0]) {
+							country = getComponent(results, 'country');
+							state = getComponent(results, 'administrative_area_level_1');
+							placeName = getComponent(results, 'locality')
+								|| getComponent(results, 'sublocality');
+						}
+						var fields = Q.extend({
+							unsubscribe: true,
+							subscribe: true,
+							miles: $('select[name=miles]').val(),
+							timezone: (new Date()).getTimezoneOffset(),
+							placeName: placeName,
+							state: state,
+							country: country
+						}, true, geo.coords);
+						Q.req("Places/geolocation", [], 
+						function (err, data) {
+							Q.Streams.Stream.refresh(
+								publisherId, streamName, null,
+								{ messages: 1, evenIfNotRetained: true}
+							);
+							$this.removeClass('Places_obtaining').hide(500);
+						}, {method: 'post', fields: fields});
+					});
+				}, function () {
+					clearTimeout(timeout);
+					if (handledFail) return;
+					geolocationFailed();
+				}, {
+					maximumAge: 300000,
+					timeout: state.timeout
+				});
 			});
-		}
 		
-		function getComponent(results, desiredType) {
-			for (var i = 0; i < results[0].address_components.length; i++) {
-				var shortname = results[0].address_components[i].short_name;
-				var longname = results[0].address_components[i].long_name;
-				var type = results[0].address_components[i].types;
-				if (type.indexOf(desiredType) != -1) {
-					if (!isNullOrWhitespace(shortname)) {
-					    return shortname;
+			function geolocationFailed() {
+				handledFail = true;
+				Q.prompt("Please enter your zipcode:",
+				function (zipcode, dialog) {
+					if (zipcode) {
+						_submit(zipcode);
 					}
-					return longname;
-				}
-		    }
-		}
+				}, {
+					title: "My Location",
+					ok: "Update",
+					onClose: function () {
+						$this.removeClass('Places_obtaining');	
+					}
+				});
+			}
+		
+			function getComponent(results, desiredType) {
+				for (var i = 0; i < results[0].address_components.length; i++) {
+					var shortname = results[0].address_components[i].short_name;
+					var longname = results[0].address_components[i].long_name;
+					var type = results[0].address_components[i].types;
+					if (type.indexOf(desiredType) != -1) {
+						if (!isNullOrWhitespace(shortname)) {
+						    return shortname;
+						}
+						return longname;
+					}
+			    }
+			}
 
-		function isNullOrWhitespace(text) {
-		    if (text == null) {
-		        return true;
-		    }
-		    return text.replace(/\s/gi, '').length < 1;
-		}
+			function isNullOrWhitespace(text) {
+			    if (text == null) {
+			        return true;
+			    }
+			    return text.replace(/\s/gi, '').length < 1;
+			}
+		});
 	});
 	
 	function _submit(zipcode) {
@@ -273,5 +276,30 @@ Q.Tool.define("Places/location", function (options) {
 { // methods go here
 	
 });
+
+Q.Template.set('Places/location', 
+	'<div class="Places_location_container Places_location_checking">'
+		+ 'I\'m interested in things taking place within'
+		+ '<select name="miles" class="Places_location_miles">'
+			+ '{{#each miles}}'
+				+ '<option value="{{@key}}">{{this}}</option>'
+			+ '{{/each}}'
+		+ '</select>'
+		+ 'of'
+		+ '<div class="Places_location_whileObtaining">'
+			+ '<img src="{{map.prompt}}" title="map" class="Places_location_set">'
+		+ '</div>'
+		+ '<div class="Places_location_whileObtained">'
+			+ '<div class="Places_location_map_container">'
+				+ '<div class="Places_location_map"></div>'
+			+ '</div>'
+			+ '<div class="Places_location_update Places_location_whileObtained">'
+				+ '<button class="Places_location_update_button Q_button">'
+					+ 'Update my location'
+				+ '</button>'
+			+ '</div>'
+		+ '</div>'
+	+ '</div>'
+);
 
 })(Q, jQuery, window, document);

@@ -262,7 +262,7 @@ Base.prototype.maxSize_query = function () {
 	 * Returns schema information for query column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_query = function () {
+Base.column_query = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -300,7 +300,7 @@ Base.prototype.maxSize_types = function () {
 	 * Returns schema information for types column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_types = function () {
+Base.column_types = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -324,7 +324,7 @@ Base.prototype.beforeSet_latitude = function (value) {
 	 * Returns schema information for latitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_latitude = function () {
+Base.column_latitude = function () {
 
 return [["double","255","",false],false,"PRI",null];
 };
@@ -348,7 +348,7 @@ Base.prototype.beforeSet_longitude = function (value) {
 	 * Returns schema information for longitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_longitude = function () {
+Base.column_longitude = function () {
 
 return [["double","255","",false],false,"PRI",null];
 };
@@ -372,7 +372,7 @@ Base.prototype.beforeSet_miles = function (value) {
 	 * Returns schema information for miles column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_miles = function () {
+Base.column_miles = function () {
 
 return [["double","255","",false],false,"PRI",null];
 };
@@ -393,7 +393,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -415,7 +415,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","255","",false],true,"",null];
 };
@@ -453,7 +453,7 @@ Base.prototype.maxSize_results = function () {
 	 * Returns schema information for results column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_results = function () {
+Base.column_results = function () {
 
 return [["text",65535,"",false],false,"",null];
 };

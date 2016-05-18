@@ -35,7 +35,8 @@ function _subscribe(what, userId, publisherId, streamName, callback) {
 	}).execute(callback);
 }
 
-Q.mixin(Streams_Participant, Q.require('Base/Streams/Participant'));
+var Base = Q.require('Base/Streams/Participant');
+Q.mixin(Streams_Participant, Base);
 
 
 Streams_Participant.subscribe = function (userId, publisherId, streamName, callback) {
@@ -53,6 +54,17 @@ Streams_Participant.prototype.subscribe = function(callback) {
 
 Streams_Participant.prototype.unsubscribe = function(callback) {
 	_subscribe(false, this.fields.userId, this.fields.publisherId, this.fields.streamName, callback);
+};
+
+/**
+ * Get the names of the possible states
+ * @method states
+ * @static
+ * @return {Array}
+ */
+Streams_Participant.states = function() {
+	var column = Base.column_state();
+	return JSON.parse(('[' + column[0][1] + ']').replaceAll({"'": '"'}));
 };
 
 /**

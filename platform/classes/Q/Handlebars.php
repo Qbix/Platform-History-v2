@@ -53,9 +53,43 @@ class Q_Handlebars {
 		}
 		return self::$handlebars;
 	}
+
+	/**
+	 * Call this in your helpers to parse the args into a useful array
+	 * @method parseArgs
+	 * @static
+	 * @param {Handlebars_Template} $template
+	 * @param {Handlebars_Context} $context
+	 * @param {string|array} $args
+	 * @return {array}
+	 */
+	static function parseArgs($template, $context, $args)
+	{
+		if (is_array($args)) {
+			return $args;
+		}
+		$parsed = array_merge(
+			$template->parseArguments($args),
+			$template->parseNamedArguments($args)
+		);
+		$results = array();
+		foreach ($parsed as $k => $arg) {
+			$result = $context->get($arg);
+			if (!isset($result)) {
+				try {
+					$result = Q::json_decode($arg);
+				} catch (Exception $e) {
+
+				}
+			}
+			$results[$k] = $result;
+		}
+		return $results;
+	}
 	
 	static function helperCall($template, $context, $args, $source)
 	{
+		$args = self::parseArgs($template, $context, $args);
 		if (empty($args[0])) {
 			return "{{call missing method name}}";
 		}
@@ -79,17 +113,23 @@ class Q_Handlebars {
 	
 	static function helperTool($template, $context, $args, $source)
 	{
+		$args = self::parseArgs($template, $context, $args);
 		if (empty($args[0])) {
 			return "{{tool missing name}}";
 		}
 		$name = $args[0];
-		if (count($args) > 1 && (is_string($args[1]) || is_numeric($args[1]))) {
+		if (isset($args[1]) && (is_string($args[1]) || is_numeric($args[1]))) {
 			$id = $args[1];
 		}
-		$o = Q::ifset($args, 'hash', array());
+		$o = array();
+		foreach ($args as $k => $v) {
+			if (!is_numeric($k)) {
+				$o[$k] = $v;
+			}
+		}
 		$fields = $context->fields();
 		if (isset($fields[$name])) {
-			$o = array_merge($o, $fields[$name]);
+			$o = array_merge($args, $fields[$name]);
 		}
 		if ($id && isset($fields["id:$id"])) {
 			$o = array_merge($o, $fields["id:$id"]);
@@ -99,6 +139,7 @@ class Q_Handlebars {
 	
 	static function helperToUrl($template, $context, $args, $source)
 	{
+		$args = self::parseArgs($template, $context, $args);
 		if (empty($args[0])) {
 			return "{{url missing}}";
 		}
@@ -107,6 +148,7 @@ class Q_Handlebars {
 	
 	static function helperToCapitalized($template, $context, $args, $source)
 	{
+		$args = self::parseArgs($template, $context, $args);
 		return isset($args[0]) ? ucfirst($args[0]) : '';
 	}
 

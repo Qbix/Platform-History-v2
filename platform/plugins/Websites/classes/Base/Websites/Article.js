@@ -244,7 +244,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_publisherId = function () {
+Base.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -282,7 +282,7 @@ Base.prototype.maxSize_streamName = function () {
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_streamName = function () {
+Base.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -320,7 +320,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"",null];
 };
@@ -358,7 +358,7 @@ Base.prototype.maxSize_article = function () {
 	 * Returns schema information for article column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_article = function () {
+Base.column_article = function () {
 
 return [["text",65535,"",false],false,"",null];
 };
@@ -396,7 +396,7 @@ Base.prototype.maxSize_getintouch = function () {
 	 * Returns schema information for getintouch column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_getintouch = function () {
+Base.column_getintouch = function () {
 
 return [["varchar","255","",false],false,"","{}"];
 };

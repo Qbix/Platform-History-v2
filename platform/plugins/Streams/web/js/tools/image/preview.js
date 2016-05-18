@@ -125,7 +125,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 				tool.element.innerHTML = html;
 				Q.activate(tool, function () {
 					// load the icon
-					ps.imagepicker.onSuccess = {
+					Q.extend(ps.imagepicker.onSuccess, {
 						"Streams/image/preview": function (data, key, file) {
 							if (state.updateTitle && file && file.name) {
 								ps.stream.fields.title = file.name;
@@ -135,7 +135,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 								});
 							}
 						}
-					};
+					});
 					var $jq = tool.$('img.Streams_image_preview_icon');
 					tool.preview.icon($jq[0], p.fill('icon'));
 					var child = tool.child('Streams_inplace');
