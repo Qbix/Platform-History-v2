@@ -49,7 +49,7 @@ Q.Tool.define("Places/location", function (options) {
 			state.stream = this; // in case it was missing before
 		});
 	
-		Q.Streams.retainWith(this)
+		Q.Streams.retainWith(tool)
 		.get(publisherId, streamName, function (err) {
 			if (!err) {
 				var stream = state.stream = this;
