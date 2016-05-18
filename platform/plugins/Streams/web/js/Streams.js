@@ -4081,6 +4081,11 @@ Q.onInit.add(function _Streams_onInit() {
 						if (!stream) {
 							return;
 						}
+						var args = JSON.parse(k);
+						var extra = args[2];
+						if (extra && extra.participants) {
+							this.remove(k);
+						}
 						if (sawStreams.indexOf(stream) >= 0) {
 							return;
 						}
@@ -4089,11 +4094,6 @@ Q.onInit.add(function _Streams_onInit() {
 							--stream.participantCounts[prevIndex];
 						}
 						++stream.participantCounts[newIndex];
-						var args = JSON.parse(k);
-						var extra = args[2];
-						if (extra && extra.participants) {
-							this.remove(k);
-						}
 					});
 				}
 
