@@ -281,7 +281,7 @@ function _Streams_participants(options) {
 				userId: userId,
 				"short": true,
 				icon: (window.devicePixelRatio > 1 ? '80' : '40'),
-			})).addClass(userId ? '' : 'Streams_inviteTrigger');
+			}));
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [$element])) {
 				$elements[userId] = $element;
