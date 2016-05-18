@@ -255,7 +255,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_publisherId = function () {
+Base.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -293,7 +293,7 @@ Base.prototype.maxSize_streamName = function () {
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_streamName = function () {
+Base.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -331,7 +331,7 @@ Base.prototype.maxSize_byUserId = function () {
 	 * Returns schema information for byUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_byUserId = function () {
+Base.column_byUserId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -352,7 +352,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -387,7 +387,7 @@ Base.prototype.maxSize_readLevel = function () {
 	 * Returns schema information for readLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_readLevel = function () {
+Base.column_readLevel = function () {
 
 return [["int","11","",false],false,"",null];
 };
@@ -422,7 +422,7 @@ Base.prototype.maxSize_writeLevel = function () {
 	 * Returns schema information for writeLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_writeLevel = function () {
+Base.column_writeLevel = function () {
 
 return [["int","11","",false],false,"",null];
 };
@@ -457,7 +457,7 @@ Base.prototype.maxSize_adminLevel = function () {
 	 * Returns schema information for adminLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_adminLevel = function () {
+Base.column_adminLevel = function () {
 
 return [["int","11","",false],false,"","0"];
 };

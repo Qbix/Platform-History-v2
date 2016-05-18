@@ -185,6 +185,18 @@ class Streams_Participant extends Base_Streams_Participant
 		$p->remove();
 		return true;
 	}
+	
+	/**
+	 * Get the names of the possible states
+	 * @method states
+	 * @static
+	 * @return {array}
+	 */
+	static function states()
+	{
+		$column = Base_Streams_Participant::column_state();
+		return Q::json_decode(str_replace("'", '"',  '['.$column[0][1].']'));
+	}
 
 	/* * * */
 	/**

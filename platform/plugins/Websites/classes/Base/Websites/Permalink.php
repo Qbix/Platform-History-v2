@@ -221,7 +221,7 @@ abstract class Base_Websites_Permalink extends Db_Row
 	 * Returns schema information for uri column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_uri()
+	static function column_uri()
 	{
 
 return array (
@@ -275,7 +275,7 @@ return array (
 	 * Returns schema information for url column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_url()
+	static function column_url()
 	{
 
 return array (
@@ -323,7 +323,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -371,7 +371,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (

@@ -245,7 +245,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -283,7 +283,7 @@ Base.prototype.maxSize_label = function () {
 	 * Returns schema information for label column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_label = function () {
+Base.column_label = function () {
 
 return [["varchar","63","",false],false,"PRI",null];
 };
@@ -321,7 +321,7 @@ Base.prototype.maxSize_contactUserId = function () {
 	 * Returns schema information for contactUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_contactUserId = function () {
+Base.column_contactUserId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -359,7 +359,7 @@ Base.prototype.maxSize_nickname = function () {
 	 * Returns schema information for nickname column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_nickname = function () {
+Base.column_nickname = function () {
 
 return [["varchar","255","",false],false,"",""];
 };
@@ -380,7 +380,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };

@@ -439,7 +439,7 @@ Streams.listen = function (options) {
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
 				Streams.emitToUser(userId, 'join', participant);
-				stream.incParticipants(function () {
+				stream.updateParticipantCounts('join', parsed.prevState, function () {
 					Streams.Stream.emit('join', stream, userId, clientId);
 				});
 				break;
@@ -463,7 +463,7 @@ Streams.listen = function (options) {
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
 				Streams.emitToUser(userId, 'leave', participant);
-				stream.decParticipants(function () {
+				stream.updateParticipantCounts('left', parsed.prevState, function () {
 					Streams.Stream.emit('leave', stream, userId, clientId);
 				});
 				break;

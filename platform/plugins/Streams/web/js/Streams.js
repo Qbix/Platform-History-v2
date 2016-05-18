@@ -1248,7 +1248,7 @@ var Stream = Streams.Stream = function (fields) {
 		'attributes',
 		'icon',
 		'messageCount',
-		'participantCount',
+		'participantCounts',
 		'insertedTime',
 		'updatedTime',
 		'readLevel',
@@ -3543,8 +3543,10 @@ function prepareStream(stream) {
 	if (stream.fields.messageCount) {
 		stream.fields.messageCount = parseInt(stream.fields.messageCount);
 	}
-	if (stream.fields.participantCount) {
-		stream.fields.participantCount = parseInt(stream.fields.participantCount);
+	if (stream.fields.participantCounts) {
+		stream.participantCounts = JSON.parse(stream.fields.participantCounts);
+	} else {
+		stream.participantCounts = [0, 0, 0];
 	}
 	if (stream.fields.access) {
 		stream.access = Q.copy(stream.fields.access);
@@ -3939,10 +3941,10 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					updateParticipantCache(1);
+					updateParticipantCache('participating', msg.get('prevState'));
 					break;
 				case 'Streams/leave':
-					updateParticipantCache(-1);
+					updateParticipantCache('left', msg.get('prevState'));
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
@@ -4058,17 +4060,25 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				}
 
-				function updateParticipantCache(incrementCount) {
+				function updateParticipantCache(newState, prevState) {
+					var states = Streams.Participant.states;
+					var prevIndex = states.indexOf(prevState);
+					var newIndex = states.indexOf(newState);
+					if (newIndex < 0) {
+						throw new Q.Error("Streams updateParticipantCache: prevState" + prevState + " not valid");
+					}
 					Streams.get.cache.each([msg.publisherId, msg.streamName],
 					function (k, v) {
 						var stream = (v && !v.params[0]) ? v.subject : null;
 						if (!stream) {
 							return;
 						}
-						if ('participantCount' in stream.fields) {
-							stream.fields.participantCount += incrementCount; // increment participant count
+						if (prevIndex >= 0) {
+							--stream.participantCounts[prevIndex];
 						}
-						var args = JSON.parse(k), extra = args[2];
+						++stream.participantCounts[newIndex];
+						var args = JSON.parse(k);
+						var extra = args[2];
 						if (extra && extra.participants) {
 							this.remove(k);
 						}

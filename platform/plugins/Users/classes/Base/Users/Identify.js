@@ -243,7 +243,7 @@ Base.prototype.maxSize_identifier = function () {
 	 * Returns schema information for identifier column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_identifier = function () {
+Base.column_identifier = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -264,7 +264,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -286,7 +286,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","255","",false],true,"",null];
 };
@@ -309,7 +309,7 @@ Base.prototype.beforeSet_state = function (value) {
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_state = function () {
+Base.column_state = function () {
 
 return [["enum","'verified','future'","",false],false,"",null];
 };
@@ -347,7 +347,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"",null];
 };

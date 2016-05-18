@@ -232,7 +232,7 @@ abstract class Base_Streams_Invited extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -286,7 +286,7 @@ return array (
 	 * Returns schema information for token column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_token()
+	static function column_token()
 	{
 
 return array (
@@ -324,7 +324,7 @@ return array (
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_state()
+	static function column_state()
 	{
 
 return array (
@@ -369,7 +369,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -414,7 +414,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -462,7 +462,7 @@ return array (
 	 * Returns schema information for expireTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_expireTime()
+	static function column_expireTime()
 	{
 
 return array (

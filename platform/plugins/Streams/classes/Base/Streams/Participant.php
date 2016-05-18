@@ -253,7 +253,7 @@ abstract class Base_Streams_Participant extends Db_Row
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -307,7 +307,7 @@ return array (
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamName()
+	static function column_streamName()
 	{
 
 return array (
@@ -361,7 +361,7 @@ return array (
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -415,7 +415,7 @@ return array (
 	 * Returns schema information for streamType column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamType()
+	static function column_streamType()
 	{
 
 return array (
@@ -460,7 +460,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -508,7 +508,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -546,7 +546,7 @@ return array (
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_state()
+	static function column_state()
 	{
 
 return array (
@@ -584,7 +584,7 @@ return array (
 	 * Returns schema information for subscribed column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_subscribed()
+	static function column_subscribed()
 	{
 
 return array (
@@ -622,7 +622,7 @@ return array (
 	 * Returns schema information for posted column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_posted()
+	static function column_posted()
 	{
 
 return array (
@@ -676,7 +676,7 @@ return array (
 	 * Returns schema information for extra column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_extra()
+	static function column_extra()
 	{
 
 return array (

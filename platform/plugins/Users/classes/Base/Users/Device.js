@@ -259,7 +259,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -297,7 +297,7 @@ Base.prototype.maxSize_deviceId = function () {
 	 * Returns schema information for deviceId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_deviceId = function () {
+Base.column_deviceId = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -320,7 +320,7 @@ Base.prototype.beforeSet_platform = function (value) {
 	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_platform = function () {
+Base.column_platform = function () {
 
 return [["enum","'ios','android'","",false],false,"",null];
 };
@@ -356,7 +356,7 @@ Base.prototype.maxSize_version = function () {
 	 * Returns schema information for version column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_version = function () {
+Base.column_version = function () {
 
 return [["varchar","45","",false],true,"",null];
 };
@@ -394,7 +394,7 @@ Base.prototype.maxSize_sessionId = function () {
 	 * Returns schema information for sessionId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_sessionId = function () {
+Base.column_sessionId = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -418,7 +418,7 @@ Base.prototype.beforeSet_formFactor = function (value) {
 	 * Returns schema information for formFactor column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_formFactor = function () {
+Base.column_formFactor = function () {
 
 return [["enum","'mobile','tablet'","",false],true,"",null];
 };
@@ -439,7 +439,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","'mobile','tablet'","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -461,7 +461,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","'mobile','tablet'","",false],true,"",null];
 };

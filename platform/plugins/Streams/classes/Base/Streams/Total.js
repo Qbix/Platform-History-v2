@@ -240,7 +240,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_publisherId = function () {
+Base.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -278,7 +278,7 @@ Base.prototype.maxSize_streamName = function () {
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_streamName = function () {
+Base.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -316,7 +316,7 @@ Base.prototype.maxSize_messageType = function () {
 	 * Returns schema information for messageType column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_messageType = function () {
+Base.column_messageType = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -351,7 +351,7 @@ Base.prototype.maxSize_messageCount = function () {
 	 * Returns schema information for messageCount column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_messageCount = function () {
+Base.column_messageCount = function () {
 
 return [["bigint","20","",false],false,"","0"];
 };

@@ -245,7 +245,7 @@ abstract class Base_Streams_Sent extends Db_Row
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -299,7 +299,7 @@ return array (
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamName()
+	static function column_streamName()
 	{
 
 return array (
@@ -344,7 +344,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -392,7 +392,7 @@ return array (
 	 * Returns schema information for sentTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_sentTime()
+	static function column_sentTime()
 	{
 
 return array (
@@ -446,7 +446,7 @@ return array (
 	 * Returns schema information for byUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_byUserId()
+	static function column_byUserId()
 	{
 
 return array (
@@ -500,7 +500,7 @@ return array (
 	 * Returns schema information for comment column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_comment()
+	static function column_comment()
 	{
 
 return array (
@@ -554,7 +554,7 @@ return array (
 	 * Returns schema information for instructions column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_instructions()
+	static function column_instructions()
 	{
 
 return array (
@@ -608,7 +608,7 @@ return array (
 	 * Returns schema information for chatPublisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_chatPublisherId()
+	static function column_chatPublisherId()
 	{
 
 return array (
@@ -662,7 +662,7 @@ return array (
 	 * Returns schema information for chatStreamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_chatStreamName()
+	static function column_chatStreamName()
 	{
 
 return array (

@@ -245,7 +245,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 * Returns schema information for query column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_query()
+	static function column_query()
 	{
 
 return array (
@@ -299,7 +299,7 @@ return array (
 	 * Returns schema information for types column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_types()
+	static function column_types()
 	{
 
 return array (
@@ -331,7 +331,7 @@ return array (
 	 * Returns schema information for latitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_latitude()
+	static function column_latitude()
 	{
 
 return array (
@@ -363,7 +363,7 @@ return array (
 	 * Returns schema information for longitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_longitude()
+	static function column_longitude()
 	{
 
 return array (
@@ -395,7 +395,7 @@ return array (
 	 * Returns schema information for miles column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_miles()
+	static function column_miles()
 	{
 
 return array (
@@ -440,7 +440,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -488,7 +488,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -542,7 +542,7 @@ return array (
 	 * Returns schema information for results column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_results()
+	static function column_results()
 	{
 
 return array (

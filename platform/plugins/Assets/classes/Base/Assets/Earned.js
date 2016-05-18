@@ -243,7 +243,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"MUL",null];
 };
@@ -281,7 +281,7 @@ Base.prototype.maxSize_app = function () {
 	 * Returns schema information for app column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_app = function () {
+Base.column_app = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -319,7 +319,7 @@ Base.prototype.maxSize_badge_name = function () {
 	 * Returns schema information for badge_name column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_badge_name = function () {
+Base.column_badge_name = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -340,7 +340,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -378,7 +378,7 @@ Base.prototype.maxSize_associated_id = function () {
 	 * Returns schema information for associated_id column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_associated_id = function () {
+Base.column_associated_id = function () {
 
 return [["varchar","255","",false],false,"",null];
 };

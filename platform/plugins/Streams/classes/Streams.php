@@ -2318,7 +2318,7 @@ abstract class Streams extends Base_Streams
 				: implode(',', $options['streamFields']);
 		}
 		$names = array();
-		$FTP=$FT.'PublisherId';
+		$FTP = $FT.'PublisherId';
 		foreach ($relations as $name => $r) {
 			if ($r->$FTP === $publisherId) {
 				$names[] = $name;
@@ -2550,18 +2550,21 @@ abstract class Streams extends Base_Streams
 			}
 			$streamNamesUpdate[] = $sn;
 			$type = ($participant->state === 'participating') ? 'visit' : 'join';
+			$prevState = $participant->state;
 			$participant->state = $state;
 			if (empty($options['noVisit']) or $type !== 'visit') {
 				// Send a message to Node
 				Q_Utils::sendToNode(array(
 					"Q/method" => "Streams/Stream/$type",
 					"participant" => Q::json_encode($participant->toArray()),
-					"stream" => Q::json_encode($stream->toArray())
+					"stream" => Q::json_encode($stream->toArray()),
+					"prevState" => $prevState
 				));
 				// Stream messages to post
 				$messages[$publisherId][$sn] = array(
 					'type' => "Streams/$type",
 					'instructions' => array(
+						'prevState' => $prevState,
 						'extra' => isset($participant->extra) ? $participant->extra : array()
 					)
 				);
@@ -2569,7 +2572,8 @@ abstract class Streams extends Base_Streams
 					'type' => "Streams/{$type}ed",
 					'instructions' => array(
 						'publisherId' => $publisherId,
-						'streamName' => $sn
+						'streamName' => $sn,
+						'prevState' => $prevState
 					)
 				);
 			}
@@ -2584,8 +2588,8 @@ abstract class Streams extends Base_Streams
 					'userId' => $asUserId
 				))->execute();
 		}
-		$rows = array();
 		if ($streamNamesMissing) {
+			$rows = array();
 			foreach ($streamNamesMissing as $sn) {
 				$stream = $streams2[$sn];
 				$results[$sn] = $rows[$sn] = array(
@@ -2600,23 +2604,21 @@ abstract class Streams extends Base_Streams
 				);
 			}
 			Streams_Participant::insertManyAndExecute($rows);
-			foreach ($streamNames as $sn) {
+			foreach ($streamNamesMissing as $sn) {
 				$stream = $streams2[$sn];
-				if ($participant = Q::ifset($participants, $sn, null)) {
-					if ($participant instanceof Streams_Participant) {
-						$participant = $participant->toArray();
-					}
-				}
+				$participant = $rows[$sn];
 				// Send a message to Node
 				Q_Utils::sendToNode(array(
 					"Q/method" => "Streams/Stream/join",
-					"participant" => Q::json_encode($rows[$sn]),
-					"stream" => Q::json_encode($stream->toArray())
+					"participant" => Q::json_encode($participant),
+					"stream" => Q::json_encode($stream->toArray()),
+					"prevState" => null
 				));
 				// Stream messages to post
 				$messages[$publisherId][$sn] = array(
 					'type' => 'Streams/join',
 					'instructions' => array(
+						'prevState' => null,
 						'extra' => isset($participant['extra']) ? $participant['extra'] : array()
 					)
 				);
@@ -2624,7 +2626,8 @@ abstract class Streams extends Base_Streams
 					'type' => "Streams/joined",
 					'instructions' => Q::json_encode(array(
 						'publisherId' => $publisherId,
-						'streamName' => $sn
+						'streamName' => $sn,
+						'prevState' => null
 					))
 				);
 			}
@@ -2633,7 +2636,7 @@ abstract class Streams extends Base_Streams
 		Streams_Message::postMessages($asUserId, array(
 			$asUserId => array('Streams/participating' => $pMessages)
 		), true);
-		return $rows ? array_merge($results, $rows) : $results;
+		return $results;
 	}
 	
 	/**
@@ -2679,7 +2682,8 @@ abstract class Streams extends Base_Streams
 				$streamNamesMissing[] = $sn;
 				continue;
 			}
-			$streamNamesUpdate[] = $sn;;
+			$streamNamesUpdate[] = $sn;
+			$p->set('prevState', $p->state);
 			$p->state = 'left';
 		}
 		if (!$streamNamesUpdate) {
@@ -2694,21 +2698,20 @@ abstract class Streams extends Base_Streams
 			))->execute();
 		foreach ($streamNames as $sn) {
 			$stream = $streams2[$sn];
-			if ($participant = Q::ifset($participants, $sn, null)) {
-				if ($participant instanceof Streams_Participant) {
-					$participant = $participant->toArray();
-				}
-			}
+			$participant = Q::ifset($participants, $sn, null);
+			$prevState = $participant ? $participant->state : null;
 			// Send a message to Node
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Streams/Stream/leave",
 				"participant" => Q::json_encode($participant),
-				"stream" => Q::json_encode($stream->toArray())
+				"stream" => Q::json_encode($stream->toArray()),
+				"prevState" => $prevState
 			));
 			// Stream messages to post
 			$messages[$publisherId][$sn] = array(
 				'type' => 'Streams/leave',
 				'instructions' => array(
+					'prevState' => $prevState,
 					'extra' => isset($participant['extra']) ? $participant['extra'] : array()
 				)
 			);
@@ -2716,7 +2719,8 @@ abstract class Streams extends Base_Streams
 				'type' => "Streams/left",
 				'instructions' => array(
 					'publisherId' => $publisherId,
-					'streamName' => $sn
+					'streamName' => $sn,
+					'prevState' => $prevState
 				)
 			);
 		}

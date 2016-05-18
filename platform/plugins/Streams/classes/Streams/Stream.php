@@ -80,14 +80,14 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	/**
 	 * @config $DEFAULTS['messageCount']
-	 * @type string
+	 * @type integer
 	 * @default 0
 	 * @final
 	 */
 	/**
-	 * @config $DEFAULTS['participantCount']
+	 * @config $DEFAULTS['participantCounts']
 	 * @type string
-	 * @default 0
+	 * @default '[0, 0, 0]'
 	 * @final
 	 */
 	public static $DEFAULTS = array(
@@ -100,7 +100,7 @@ class Streams_Stream extends Base_Streams_Stream
 		'writeLevel' => 10,
 		'adminLevel' => 20,
 		'messageCount' => 0,
-		'participantCount' => 0
+		'participantCounts' => array(0, 0, 0)
 	);
 	
 	/**
@@ -220,6 +220,10 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		if (empty($this->permissions)) {
 			$this->permissions = null;
+		}
+		if (isset($this->participantCounts)
+		and is_array($this->participantCounts)) {
+			$this->participantCounts = Q::json_encode($this->participantCounts);
 		}
 
 		if (!$this->retrieved) {

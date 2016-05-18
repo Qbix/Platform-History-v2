@@ -26,9 +26,10 @@
  * @property {integer} $readLevel
  * @property {integer} $writeLevel
  * @property {integer} $adminLevel
+ * @property {string} $permissions
  * @property {string} $inheritAccess
  * @property {integer} $messageCount
- * @property {integer} $participantCount
+ * @property {string} $participantCounts
  * @property {string|Db_Expression} $closedTime
  */
 abstract class Base_Streams_Stream extends Db_Row
@@ -82,6 +83,10 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @type {integer}
 	 */
 	/**
+	 * @property $permissions
+	 * @type {string}
+	 */
+	/**
 	 * @property $inheritAccess
 	 * @type {string}
 	 */
@@ -90,8 +95,8 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @type {integer}
 	 */
 	/**
-	 * @property $participantCount
-	 * @type {integer}
+	 * @property $participantCounts
+	 * @type {string}
 	 */
 	/**
 	 * @property $closedTime
@@ -282,7 +287,7 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -336,7 +341,7 @@ return array (
 	 * Returns schema information for name column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_name()
+	static function column_name()
 	{
 
 return array (
@@ -381,7 +386,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -429,7 +434,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -483,7 +488,7 @@ return array (
 	 * Returns schema information for type column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_type()
+	static function column_type()
 	{
 
 return array (
@@ -537,7 +542,7 @@ return array (
 	 * Returns schema information for title column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_title()
+	static function column_title()
 	{
 
 return array (
@@ -591,7 +596,7 @@ return array (
 	 * Returns schema information for icon column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_icon()
+	static function column_icon()
 	{
 
 return array (
@@ -645,7 +650,7 @@ return array (
 	 * Returns schema information for content column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_content()
+	static function column_content()
 	{
 
 return array (
@@ -699,7 +704,7 @@ return array (
 	 * Returns schema information for attributes column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_attributes()
+	static function column_attributes()
 	{
 
 return array (
@@ -753,7 +758,7 @@ return array (
 	 * Returns schema information for readLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_readLevel()
+	static function column_readLevel()
 	{
 
 return array (
@@ -807,7 +812,7 @@ return array (
 	 * Returns schema information for writeLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_writeLevel()
+	static function column_writeLevel()
 	{
 
 return array (
@@ -861,7 +866,7 @@ return array (
 	 * Returns schema information for adminLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_adminLevel()
+	static function column_adminLevel()
 	{
 
 return array (
@@ -875,6 +880,60 @@ return array (
   1 => false,
   2 => '',
   3 => '20',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (!isset($value)) {
+			return array('permissions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('permissions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
+		return array('permissions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+	function maxSize_permissions()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_permissions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -915,7 +974,7 @@ return array (
 	 * Returns schema information for inheritAccess column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_inheritAccess()
+	static function column_inheritAccess()
 	{
 
 return array (
@@ -969,7 +1028,7 @@ return array (
 	 * Returns schema information for messageCount column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_messageCount()
+	static function column_messageCount()
 	{
 
 return array (
@@ -987,56 +1046,56 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_participantCount
-	 * @param {integer} $value
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_participantCounts
+	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_participantCount($value)
+	function beforeSet_participantCounts($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression) {
-			return array('participantCount', $value);
+			return array('participantCounts', $value);
 		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".participantCount");
-		$value = intval($value);
-		if ($value < -2147483648 or $value > 2147483647) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".participantCount");
-		}
-		return array('participantCount', $value);			
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".participantCounts");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".participantCounts");
+		return array('participantCounts', $value);			
 	}
 
 	/**
-	 * @method maxSize_participantCount
-	 * Returns the maximum integer that can be assigned to the participantCount field
+	 * Returns the maximum string length that can be assigned to the participantCounts field
 	 * @return {integer}
 	 */
-	function maxSize_participantCount()
+	function maxSize_participantCounts()
 	{
 
-		return 2147483647;			
+		return 255;			
 	}
 
 	/**
-	 * Returns schema information for participantCount column
+	 * Returns schema information for participantCounts column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_participantCount()
+	static function column_participantCounts()
 	{
 
 return array (
   0 => 
   array (
-    0 => 'int',
-    1 => '11',
+    0 => 'varchar',
+    1 => '255',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => '',
-  3 => '0',
+  3 => '[0, 0, 0]',
 );			
 	}
 
@@ -1071,14 +1130,14 @@ return array (
 	 * Returns schema information for closedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_closedTime()
+	static function column_closedTime()
 	{
 
 return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '11',
+    1 => '255',
     2 => '',
     3 => false,
   ),
@@ -1120,7 +1179,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess', 'messageCount', 'participantCount', 'closedTime');
+		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'inheritAccess', 'messageCount', 'participantCounts', 'closedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

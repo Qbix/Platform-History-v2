@@ -259,7 +259,7 @@ Base.prototype.maxSize_id = function () {
 	 * Returns schema information for id column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_id = function () {
+Base.column_id = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -297,7 +297,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -335,7 +335,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_publisherId = function () {
+Base.column_publisherId = function () {
 
 return [["varchar","255","",false],false,"",""];
 };
@@ -373,7 +373,7 @@ Base.prototype.maxSize_streamName = function () {
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_streamName = function () {
+Base.column_streamName = function () {
 
 return [["varchar","255","",false],false,"",""];
 };
@@ -411,7 +411,7 @@ Base.prototype.maxSize_description = function () {
 	 * Returns schema information for description column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_description = function () {
+Base.column_description = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -449,7 +449,7 @@ Base.prototype.maxSize_attributes = function () {
 	 * Returns schema information for attributes column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_attributes = function () {
+Base.column_attributes = function () {
 
 return [["varchar","1023","",false],false,"",null];
 };
@@ -470,7 +470,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -491,7 +491,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 };
