@@ -3545,6 +3545,9 @@ function prepareStream(stream) {
 	}
 	if (stream.fields.participantCounts) {
 		stream.participantCounts = JSON.parse(stream.fields.participantCounts);
+		for (var i=0, l=stream.participantCounts.length; i<l; ++i) {
+			stream.participantCounts[i] = parseInt(stream.participantCounts[i]);
+		}
 	} else {
 		stream.participantCounts = [0, 0, 0];
 	}

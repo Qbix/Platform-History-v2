@@ -9,7 +9,11 @@ function Streams_0_9_3_Streams()
 	$c = count($results);
 	$i = 0;
 	foreach ($results as $r) {
-		$counts = array($r['invitedCount'], $r['participatingCount'], $r['leftCount']);
+		$counts = array(
+			intval($r['invitedCount']), 
+			intval($r['participatingCount']), 
+			intval($r['leftCount'])
+		);
 		Streams_Stream::update()->set(array(
 			'participantCounts' => json_encode($counts)
 		))->where(array(
