@@ -427,7 +427,7 @@ class Db_Utils
 		if (!empty($current_version)) {
 			$current_version = $current_version[0]['version'];
 			$version = Q_Config::get('Q', "pluginInfo", $plugin, 'version', null);
-			if (Q::compare_version($current_version, $version) < 0) {
+			if (Q::compareVersion($current_version, $version) < 0) {
 				echo "Please, update plugin '$plugin' to version '$version' (currently $current_version)\n";
 				return false;
 			}

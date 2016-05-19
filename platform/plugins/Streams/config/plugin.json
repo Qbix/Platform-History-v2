@@ -68,7 +68,9 @@
 					"insertedTime",
 					"updatedTime",
 					"messageCount",
-					"participantCounts"
+					"invitedCount",
+					"participatingCount",
+					"leftCount"
 				],
 				"invite": {
 					"dialog": {
@@ -114,7 +116,9 @@
 					"writeLevel": 10,
 					"adminLevel": 20,
 					"messageCount": 0,
-					"participantCounts": "[0, 0, 0]"
+					"invitedCount": 0,
+					"participatingCount": 0,
+					"leftCount": 0
 				},
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}"
 			},
