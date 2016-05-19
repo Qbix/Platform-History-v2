@@ -29,7 +29,9 @@
  * @property {string} $permissions
  * @property {string} $inheritAccess
  * @property {integer} $messageCount
- * @property {string} $participantCounts
+ * @property {integer} $invitedCount
+ * @property {integer} $participatingCount
+ * @property {integer} $leftCount
  * @property {string|Db_Expression} $closedTime
  */
 abstract class Base_Streams_Stream extends Db_Row
@@ -95,8 +97,16 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @type {integer}
 	 */
 	/**
-	 * @property $participantCounts
-	 * @type {string}
+	 * @property $invitedCount
+	 * @type {integer}
+	 */
+	/**
+	 * @property $participatingCount
+	 * @type {integer}
+	 */
+	/**
+	 * @property $leftCount
+	 * @type {integer}
 	 */
 	/**
 	 * @property $closedTime
@@ -1046,56 +1056,164 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_participantCounts
-	 * @param {string} $value
+	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * @method beforeSet_invitedCount
+	 * @param {integer} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
 	 */
-	function beforeSet_participantCounts($value)
+	function beforeSet_invitedCount($value)
 	{
-		if (!isset($value)) {
-			$value='';
-		}
 		if ($value instanceof Db_Expression) {
-			return array('participantCounts', $value);
+			return array('invitedCount', $value);
 		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".participantCounts");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".participantCounts");
-		return array('participantCounts', $value);			
+		if (!is_numeric($value) or floor($value) != $value)
+			throw new Exception('Non-integer value being assigned to '.$this->getTable().".invitedCount");
+		$value = intval($value);
+		if ($value < -2147483648 or $value > 2147483647) {
+			$json = json_encode($value);
+			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".invitedCount");
+		}
+		return array('invitedCount', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the participantCounts field
+	 * @method maxSize_invitedCount
+	 * Returns the maximum integer that can be assigned to the invitedCount field
 	 * @return {integer}
 	 */
-	function maxSize_participantCounts()
+	function maxSize_invitedCount()
 	{
 
-		return 255;			
+		return 2147483647;			
 	}
 
 	/**
-	 * Returns schema information for participantCounts column
+	 * Returns schema information for invitedCount column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_participantCounts()
+	static function column_invitedCount()
 	{
 
 return array (
   0 => 
   array (
-    0 => 'varchar',
-    1 => '255',
+    0 => 'int',
+    1 => '11',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => '',
-  3 => '[0, 0, 0]',
+  3 => '0',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * @method beforeSet_participatingCount
+	 * @param {integer} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 */
+	function beforeSet_participatingCount($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('participatingCount', $value);
+		}
+		if (!is_numeric($value) or floor($value) != $value)
+			throw new Exception('Non-integer value being assigned to '.$this->getTable().".participatingCount");
+		$value = intval($value);
+		if ($value < -2147483648 or $value > 2147483647) {
+			$json = json_encode($value);
+			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".participatingCount");
+		}
+		return array('participatingCount', $value);			
+	}
+
+	/**
+	 * @method maxSize_participatingCount
+	 * Returns the maximum integer that can be assigned to the participatingCount field
+	 * @return {integer}
+	 */
+	function maxSize_participatingCount()
+	{
+
+		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for participatingCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_participatingCount()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * @method beforeSet_leftCount
+	 * @param {integer} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 */
+	function beforeSet_leftCount($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('leftCount', $value);
+		}
+		if (!is_numeric($value) or floor($value) != $value)
+			throw new Exception('Non-integer value being assigned to '.$this->getTable().".leftCount");
+		$value = intval($value);
+		if ($value < -2147483648 or $value > 2147483647) {
+			$json = json_encode($value);
+			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".leftCount");
+		}
+		return array('leftCount', $value);			
+	}
+
+	/**
+	 * @method maxSize_leftCount
+	 * Returns the maximum integer that can be assigned to the leftCount field
+	 * @return {integer}
+	 */
+	function maxSize_leftCount()
+	{
+
+		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for leftCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_leftCount()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '0',
 );			
 	}
 
@@ -1137,7 +1255,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
+    1 => '11',
     2 => '',
     3 => false,
   ),
@@ -1179,7 +1297,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'inheritAccess', 'messageCount', 'participantCounts', 'closedTime');
+		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'inheritAccess', 'messageCount', 'invitedCount', 'participatingCount', 'leftCount', 'closedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

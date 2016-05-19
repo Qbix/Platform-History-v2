@@ -89,8 +89,16 @@ Q.mixin(Base, Row);
  * @type messageCount
  */
 /**
- * @property {String}
- * @type participantCounts
+ * @property {integer}
+ * @type invitedCount
+ */
+/**
+ * @property {integer}
+ * @type participatingCount
+ */
+/**
+ * @property {integer}
+ * @type leftCount
  */
 /**
  * @property {String|Db.Expression}
@@ -266,7 +274,9 @@ Base.prototype.fieldNames = function () {
 		"permissions",
 		"inheritAccess",
 		"messageCount",
-		"participantCounts",
+		"invitedCount",
+		"participatingCount",
+		"leftCount",
 		"closedTime"
 	];
 };
@@ -791,41 +801,108 @@ return [["int","11","",false],false,"","0"];
 };
 
 /**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_participantCounts
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * @method beforeSet_invitedCount
+ * @param {integer} value
+ * @return {integer} The value
+ * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
-Base.prototype.beforeSet_participantCounts = function (value) {
-		if (value == null) {
-			value='';
-		}
+Base.prototype.beforeSet_invitedCount = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".participantCounts");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".participantCounts");
+		value = Number(value);
+		if (isNaN(value) || Math.floor(value) != value) 
+			throw new Error('Non-integer value being assigned to '+this.table()+".invitedCount");
+		if (value < -2147483648 || value > 2147483647)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".invitedCount");
 		return value;
 };
 
-	/**
-	 * Returns the maximum string length that can be assigned to the participantCounts field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_participantCounts = function () {
+/**
+ * Returns the maximum integer that can be assigned to the invitedCount field
+ * @return {integer}
+ */
+Base.prototype.maxSize_invitedCount = function () {
 
-		return 255;
+		return 2147483647;
 };
 
 	/**
-	 * Returns schema information for participantCounts column
+	 * Returns schema information for invitedCount column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_participantCounts = function () {
+Base.column_invitedCount = function () {
 
-return [["varchar","255","",false],false,"","[0, 0, 0]"];
+return [["int","11","",false],false,"","0"];
+};
+
+/**
+ * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * @method beforeSet_participatingCount
+ * @param {integer} value
+ * @return {integer} The value
+ * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ */
+Base.prototype.beforeSet_participatingCount = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value) || Math.floor(value) != value) 
+			throw new Error('Non-integer value being assigned to '+this.table()+".participatingCount");
+		if (value < -2147483648 || value > 2147483647)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".participatingCount");
+		return value;
+};
+
+/**
+ * Returns the maximum integer that can be assigned to the participatingCount field
+ * @return {integer}
+ */
+Base.prototype.maxSize_participatingCount = function () {
+
+		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for participatingCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_participatingCount = function () {
+
+return [["int","11","",false],false,"","0"];
+};
+
+/**
+ * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * @method beforeSet_leftCount
+ * @param {integer} value
+ * @return {integer} The value
+ * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ */
+Base.prototype.beforeSet_leftCount = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value) || Math.floor(value) != value) 
+			throw new Error('Non-integer value being assigned to '+this.table()+".leftCount");
+		if (value < -2147483648 || value > 2147483647)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".leftCount");
+		return value;
+};
+
+/**
+ * Returns the maximum integer that can be assigned to the leftCount field
+ * @return {integer}
+ */
+Base.prototype.maxSize_leftCount = function () {
+
+		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for leftCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_leftCount = function () {
+
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -847,7 +924,7 @@ Base.prototype.beforeSet_closedTime = function (value) {
 	 */
 Base.column_closedTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp","11","",false],true,"",null];
 };
 
 /**

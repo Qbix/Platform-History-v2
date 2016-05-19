@@ -39,10 +39,6 @@ function Streams_Stream (fields) {
 		p[key] = value;
 	};
 	
-	this.participantCounts = fields.participantCounts
-		? JSON.parse(fields.participantCounts)
-		: [0, 0, 0];
-	
 	/**
 	 * Gets the value of an extra field
 	 * @method get
@@ -240,11 +236,6 @@ Sp.setUp = function () {
 	// put any code here
 };
 
-Sp.beforeSave = function (modifiedFields) {
-	modifiedFields.participantCounts = JSON.stringify(this.participantCounts);
-	return modifiedFields;
-};
-
 /**
  * Verifies wheather Stream can be handled. Can be called syncronously and in such case skips
  * verification of inherited access or asyncronously to make ful check
@@ -362,17 +353,10 @@ Sp.getSubscriptionTemplate = function(className, userId, callback) {
  *	Callback receives "error" and "result" as arguments
  */
 Sp.updateParticipantCounts = function (newState, prevState, callback) {
-	var states = Streams.Participant.states();
-	var prevIndex = states.indexOf(prevState);
-	var newIndex = states.indexOf(newState);
-	if (newIndex < 0) {
-		throw new Q.Error("Streams.prototype.updateParticipantCounts: prevState" + prevState + " not valid");
+	if (prevState) {
+		--this.fields[prevState+'Count'];
 	}
-	var participantCounts = this.participantCounts;
-	if (prevIndex >= 0) {
-		--this.participantCounts[prevIndex];
-	}
-	++this.participantCounts[newIndex];
+	++this.fields[newState+'Count'];
 	this.save(callback);
 };
 

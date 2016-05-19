@@ -1248,7 +1248,9 @@ var Stream = Streams.Stream = function (fields) {
 		'attributes',
 		'icon',
 		'messageCount',
-		'participantCounts',
+		'invitedCount',
+		'participatingCount',
+		'leftCount',
 		'insertedTime',
 		'updatedTime',
 		'readLevel',
@@ -3543,14 +3545,6 @@ function prepareStream(stream) {
 	if (stream.fields.messageCount) {
 		stream.fields.messageCount = parseInt(stream.fields.messageCount);
 	}
-	if (stream.fields.participantCounts) {
-		stream.participantCounts = JSON.parse(stream.fields.participantCounts);
-		for (var i=0, l=stream.participantCounts.length; i<l; ++i) {
-			stream.participantCounts[i] = parseInt(stream.participantCounts[i]);
-		}
-	} else {
-		stream.participantCounts = [0, 0, 0];
-	}
 	if (stream.fields.access) {
 		stream.access = Q.copy(stream.fields.access);
 		delete stream.fields.access;
@@ -4068,12 +4062,6 @@ Q.onInit.add(function _Streams_onInit() {
 					if (!usingCached) {
 						return;
 					}
-					var states = Streams.Participant.states;
-					var prevIndex = states.indexOf(prevState);
-					var newIndex = states.indexOf(newState);
-					if (newIndex < 0) {
-						throw new Q.Error("Streams updateParticipantCache: prevState" + prevState + " not valid");
-					}
 					var sawStreams = [];
 					Streams.get.cache.each([msg.publisherId, msg.streamName],
 					function (k, v) {
@@ -4090,10 +4078,10 @@ Q.onInit.add(function _Streams_onInit() {
 							return;
 						}
 						sawStreams.push(stream);
-						if (prevIndex >= 0) {
-							--stream.participantCounts[prevIndex];
+						if (prevState) {
+							--stream.fields[prevState+'Count'];
 						}
-						++stream.participantCounts[newIndex];
+						++stream.fields[newState+'Count'];
 					});
 				}
 
