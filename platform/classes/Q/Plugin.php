@@ -143,9 +143,10 @@ class Q_Plugin
 				$current_version = $res[0]['version'];
 				$current_versionPHP = $res[0]['versionPHP'];
 				echo ucfirst($type)." '$name' schema on '$conn_name'$shard_text (SQL $current_version, PHP $current_versionPHP) is already installed" . PHP_EOL;
-				if (Q::compareVersion($current_version, $version) < 0)
-					echo "Upgrading '$name' on '$conn_name'$shard_text schema to version: $version" . PHP_EOL;
-				else continue;
+				if (Q::compareVersion($current_version, $version) < 0
+				or Q::compareVersion($current_versionPHP, $version) < 0) {
+					echo "Upgrading '$name' on '$conn_name'$shard_text schema to version: SQL $version" . PHP_EOL;
+				}
 			} else {
 				// Otherwise considering that plugin has version '0' to override it for getSqlScripts()
 				$current_version = $current_versionPHP = 0;
@@ -260,7 +261,9 @@ class Q_Plugin
 				}
 			}
 			try {
-				if (Q::compareVersion($version, $current_version) > 0) {
+				if (Q::compareVersion($version, $current_version) > 0
+				or Q::compareVersion($version, $current_versionPHP) > 0) {
+					echo '+ ' . ucfirst($type) . " '$name' schema on '$conn_name'$shard_text (v. $original_version -> $version) installed".PHP_EOL;
 					$db->insert("{$prefix}Q_{$type}", array(
 						$type => $name, 
 						'version' => $version,
@@ -288,7 +291,6 @@ class Q_Plugin
 			}
 			// echo "Commit transaction".PHP_EOL;
 			// $query = $db->rawQuery('')->commit()->execute();
-			echo '+ ' . ucfirst($type) . " '$name' schema on '$conn_name'$shard_text (v. $original_version -> $version) installed".PHP_EOL;
 		}
 	}
 
