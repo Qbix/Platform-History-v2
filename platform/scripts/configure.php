@@ -21,7 +21,7 @@ if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h
 	die($help);
 
 #Check primary arguments count: 1 if running /app/scripts/Q/install.php
-if ($count < 2 or !$FROM_APP)
+if ($count < 2)
 	die($usage);
 
 #Read primary arguments

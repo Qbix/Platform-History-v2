@@ -88,9 +88,7 @@ try {
 	$Q_installing = true;
 	$Q_Bootstrap_config_plugin_limit = 1;
 	include($Q_filename);
-}
-catch (Exception $e)
-{
+} catch (Exception $e) {
 	die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
 }
 
@@ -194,20 +192,20 @@ echo 'Q Platform app installer'.PHP_EOL;
 
 if ($auto_plugins) {
 	$plugins = Q_Config::get('Q', 'plugins', array());
-	if (!in_array("Q", $plugins)) array_unshift($plugins, "Q");
-	foreach ($plugins as $plugin) {
-		$cons = Q_Config::get('Q', 'pluginInfo', $plugin, 'connections', array());
-		foreach ($cons as $con) {
-			if (empty($options['sql'][$con])) {
-				$options['sql'][$con] = array('enabled' => true);
-			}
-		}
+	if (!in_array("Q", $plugins)) {
+		array_unshift($plugins, "Q");
 	}
 }
 
 Q_Plugin::checkPermissions(APP_FILES_DIR, array_merge($options, array('deep' => true)));
 
 foreach ($plugins as $plugin) {
+	$cons = Q_Config::get('Q', 'pluginInfo', $plugin, 'connections', array());
+	foreach ($cons as $con) {
+		if (empty($options['sql'][$con])) {
+			$options['sql'][$con] = array('enabled' => true);
+		}
+	}
 	Q_Plugin::installPlugin($plugin, $options);
 	++$Q_Bootstrap_config_plugin_limit;
 	Q_Bootstrap::configure(true);
