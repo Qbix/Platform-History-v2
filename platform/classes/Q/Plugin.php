@@ -262,8 +262,9 @@ class Q_Plugin
 			try {
 				if (Q::compareVersion($version, $current_version) > 0) {
 					$db->insert("{$prefix}Q_{$type}", array(
-						$type=>$name, 
-						'version'=>$version
+						$type => $name, 
+						'version' => $version,
+						'versionPHP' => $version
 					))->onDuplicateKeyUpdate(array(
 						'version' => $version,
 						'versionPHP' => $version
