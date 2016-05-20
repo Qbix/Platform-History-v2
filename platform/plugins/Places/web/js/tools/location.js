@@ -5,13 +5,21 @@
  * @module Places-tools
  */
 
+var Users = Q.Users;
+var Streams = Q.Streams;
+var Places = Q.Places;
+
 /**
  * Allows the logged-in user to indicate their location
  * @class Places location
  * @constructor
  * @param {Object} [options] used to pass options
+ * @param {array} [options.miles] array of { miles: title } pairs, by default is generated from Places/nearby/miles config
+ * @param {array} [options.defaultMiles] override the key in the miles array to select by default. Defaults to "Places/nearby/defaultMiles" config
+ * @param {String} [options.updateButton="Update my location"] the title of the update button
  * @param {Object} [options.map] options for the map
  * @param {Number} [options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
+ * @param {Q.Event} [options.onReady] this event occurs when the tool interface is ready
  * @param {Q.Event} [options.onUpdate] this event occurs when the location is updated
  * @param {Q.Event} [options.onUnset] this event occurs when the location is unset
  */
@@ -20,23 +28,36 @@ Q.Tool.define("Places/location", function (options) {
 	var tool = this;
 	var state = tool.state;
 	var $te = $(tool.element);
-	if (!Q.Users.loggedInUser) {
+	if (!Users.loggedInUser) {
 		tool.element.style.display = 'none';
 		console.warn("Don't render Places/location when user is not logged in");
 		return;
 	}
-	var publisherId = Q.Users.loggedInUser.id;
+	var publisherId = Users.loggedInUser.id;
 	var streamName = "Places/user/location";
 	
-	Q.Template.render('Places/location', options, function (err, html) {
+	if (!state.miles) {
+		state.miles = {};
+		var pnm = Places.nearby.miles;
+		for (var i=0, l=pnm.length; i<l; ++i) {
+			var m = pnm[i];
+			state.miles[m] = m + (m === 1 ? ' mile' : ' miles');
+		}
+	}
+	if (state.defaultMiles === undefined) {
+		state.defaultMiles = Places.nearby.defaultMiles;
+	}
+	
+	Q.Template.render('Places/location', state, function (err, html) {
 		tool.element.innerHTML = html;
-		$te.find('.Places_location_container').addClass('Places_location_checking');
+		$te.find('.Places_location_container')
+		.addClass('Places_location_checking');
 	
 		var pipe = Q.pipe(['info', 'show'], function (params) {
 			_showMap.apply(this, params.info);
 		});
 	
-		Q.Streams.Stream
+		Streams.Stream
 		.onRefresh(publisherId, streamName)
 		.set(function () {
 			var miles = this.get('miles');
@@ -49,7 +70,7 @@ Q.Tool.define("Places/location", function (options) {
 			state.stream = this; // in case it was missing before
 		});
 	
-		Q.Streams.retainWith(tool)
+		Streams.retainWith(tool)
 		.get(publisherId, streamName, function (err) {
 			if (!err) {
 				var stream = state.stream = this;
@@ -66,6 +87,7 @@ Q.Tool.define("Places/location", function (options) {
 				$te.find('.Places_location_container')
 					.removeClass('Places_location_checking');
 				Q.handle(state.onUnset, tool, [err, stream]);
+				Q.handle(state.onReady, tool, [err, stream]);
 			}
 			setTimeout(function () {
 				pipe.fill('show')();
@@ -89,7 +111,7 @@ Q.Tool.define("Places/location", function (options) {
 			}
 			var timeout = setTimeout(geolocationFailed, state.timeout);
 			var handledFail = false;
-			Q.Places.loadGoogleMaps(function () {
+			Places.loadGoogleMaps(function () {
 				navigator.geolocation.getCurrentPosition(
 				function (geo) {
 					clearTimeout(timeout);
@@ -117,7 +139,7 @@ Q.Tool.define("Places/location", function (options) {
 						}, true, geo.coords);
 						Q.req("Places/geolocation", [], 
 						function (err, data) {
-							Q.Streams.Stream.refresh(
+							Streams.Stream.refresh(
 								publisherId, streamName, null,
 								{ messages: 1, evenIfNotRetained: true}
 							);
@@ -179,7 +201,7 @@ Q.Tool.define("Places/location", function (options) {
 			if (msg) {
 				return alert(msg);
 			}
-			Q.Streams.Stream.refresh(
+			Streams.Stream.refresh(
 				publisherId, streamName, null,
 				{ messages: 1, evenIfNotRetained: true }
 			);
@@ -214,7 +236,7 @@ Q.Tool.define("Places/location", function (options) {
 			miles: miles
 		};
 
-		Q.Places.loadGoogleMaps(function () {
+		Places.loadGoogleMaps(function () {
 			$te.removeClass('Places_location_obtaining')
 				.addClass('Places_location_obtained');
 			$te.find('.Places_location_container')
@@ -226,6 +248,7 @@ Q.Tool.define("Places/location", function (options) {
 					_showLocationAndCircle();
 				}, 300);
 			}, 0);
+			Q.handle(state.onReady, tool, [null, state.stream]);
 		});
 
 		function _showLocationAndCircle() {
@@ -265,10 +288,13 @@ Q.Tool.define("Places/location", function (options) {
 },
 
 { // default options here
+	updateButton: 'Update my location',
 	map: {
-		delay: 300
+		delay: 300,
+		prompt: Q.url('plugins/Places/img/map.png')
 	},
 	timeout: 10000,
+	onReady: new Q.Event(),
 	onUnset: new Q.Event(),
 	onUpdate: new Q.Event()
 },
@@ -295,7 +321,7 @@ Q.Template.set('Places/location',
 			+ '</div>'
 			+ '<div class="Places_location_update Places_location_whileObtained">'
 				+ '<button class="Places_location_update_button Q_button">'
-					+ 'Update my location'
+					+ '{{updateButton}}'
 				+ '</button>'
 			+ '</div>'
 		+ '</div>'
