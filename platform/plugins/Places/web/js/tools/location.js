@@ -20,8 +20,9 @@ var Places = Q.Places;
  * @param {Object} [options.map] options for the map
  * @param {Number} [options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
  * @param {Q.Event} [options.onReady] this event occurs when the tool interface is ready
- * @param {Q.Event} [options.onUpdate] this event occurs when the location is updated
+ * @param {Q.Event} [options.onSet] this event occurs when the location is set somehow
  * @param {Q.Event} [options.onUnset] this event occurs when the location is unset
+ * @param {Q.Event} [options.onUpdate] this event occurs when the location is updated via the tool
  */
 
 Q.Tool.define("Places/location", function (options) {
@@ -66,7 +67,7 @@ Q.Tool.define("Places/location", function (options) {
 			if (miles) {
 				tool.$('.Places_location_miles').val(miles);
 			};
-			pipe.fill('info')(latitude, longitude, miles, state.onUpdate.handle);
+			pipe.fill('info')(latitude, longitude, miles, state.onSet.handle);
 			state.stream = this; // in case it was missing before
 		});
 	
@@ -128,23 +129,11 @@ Q.Tool.define("Places/location", function (options) {
 							placeName = getComponent(results, 'locality')
 								|| getComponent(results, 'sublocality');
 						}
-						var fields = Q.extend({
-							unsubscribe: true,
-							subscribe: true,
-							miles: $('select[name=miles]').val(),
-							timezone: (new Date()).getTimezoneOffset(),
+						_submit(null, Q.extend({
 							placeName: placeName,
 							state: state,
 							country: country
-						}, true, geo.coords);
-						Q.req("Places/geolocation", [], 
-						function (err, data) {
-							Streams.Stream.refresh(
-								publisherId, streamName, null,
-								{ messages: 1, evenIfNotRetained: true}
-							);
-							$this.removeClass('Places_obtaining').hide(500);
-						}, {method: 'post', fields: fields});
+						}, true, geo.coords));
 					});
 				}, function () {
 					clearTimeout(timeout);
@@ -195,25 +184,36 @@ Q.Tool.define("Places/location", function (options) {
 		});
 	});
 	
-	function _submit(zipcode) {
-		Q.req('Places/geolocation', ['attributes'], function (err, data) {
+	function _submit(zipcode, fields) {
+		fields = Q.extend({}, {
+			subscribe: true,
+			unsubscribe: true,
+			miles: tool.$('.Places_location_miles').val(),
+			timezone: (new Date()).getTimezoneOffset() / 60
+		});
+		if (zipcode) {
+			fields.zipcode = zipcode;
+		}
+		Q.req('Places/geolocation', [], function (err, data) {
 			var msg = Q.firstErrorMessage(err, data && data.errors);
 			if (msg) {
 				return alert(msg);
 			}
-			Streams.Stream.refresh(
-				publisherId, streamName, null,
-				{ messages: 1, evenIfNotRetained: true }
-			);
+			Streams.Stream.refresh(publisherId, streamName, function () {
+				var miles = this.get('miles');
+				var latitude = this.get('latitude');
+				var longitude = this.get('longitude');
+				if (miles) {
+					tool.$('.Places_location_miles').val(miles);
+				};
+				Q.handle(state.onUpdate, tool, [latitude, longitude, miles]);
+			}, { 
+				messages: 1,
+				evenIfNotRetained: true
+			});
 		}, {
 			method: 'post',
-			fields: {
-				subscribe: true,
-				unsubscribe: true,
-				zipcode: zipcode || '',
-				miles: tool.$('.Places_location_miles').val(),
-				timezone: (new Date()).getTimezoneOffset() / 60
-			}
+			fields: fields
 		});
 	}
 	
@@ -253,7 +253,7 @@ Q.Tool.define("Places/location", function (options) {
 
 		function _showLocationAndCircle() {
 			var element = tool.$('.Places_location_map')[0];
-			var map = new google.maps.Map(element, {
+			var map = state.map = new google.maps.Map(element, {
 				center: new google.maps.LatLng(latitude, longitude),
 				zoom: 12 - Math.floor(Math.log(miles) / Math.log(2)),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -269,9 +269,9 @@ Q.Tool.define("Places/location", function (options) {
 			
 			// Create marker 
 			var marker = new google.maps.Marker({
-			  map: map,
-			  position: new google.maps.LatLng(latitude, longitude),
-			  title: 'My location'
+				map: map,
+				position: new google.maps.LatLng(latitude, longitude),
+				title: 'My location'
 			});
 
 			// Add circle overlay and bind to marker
@@ -295,6 +295,7 @@ Q.Tool.define("Places/location", function (options) {
 	},
 	timeout: 10000,
 	onReady: new Q.Event(),
+	onSet: new Q.Event(),
 	onUnset: new Q.Event(),
 	onUpdate: new Q.Event()
 },
