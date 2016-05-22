@@ -58,33 +58,32 @@ function () {
 		
 			var plch = $this.attr('placeholder');
 			$this.removeAttr('placeholder');
-			if(!(plch))
+			if(!(plch)) {
 				return;
+			}
 
 			if (!$this.is(':visible')) {
 				return;
 			}
-			var props = {};
-			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
-				props['padding-'+pos] = $this.css('padding-'+pos);
-				props['margin-'+pos] = $this.css('margin-'+pos);
-			});
 			var dim = $this[0].cssDimensions();
 			var display = $this.css('display');
 			if (display === 'inline') {
 				display = 'inline-block';
 			}
-			var span = $('<span />')
-				.css({
-					position: 'relative',
-					width: dim.width,
-					height: dim.height,
-					display: display,
-					'margin-top': props['margin-top'],
-					'margin-bottom': props['margin-bottom'],
-					'margin-left': props['margin-left'],
-					'margin-right': props['margin-right']
-				}).addClass('Q_placeholders_container');
+			var span = $('<span />').css({
+				position: 'relative',
+				width: dim.width,
+				height: dim.height,
+				display: display
+			}).addClass('Q_placeholders_container');
+			var props = {};
+			$this.hide(); // to get percentage values, if any, for margins & padding
+			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
+				props['padding-'+pos] = $this.css('padding-'+pos);
+				props['margin-'+pos] = $this.css('margin-'+pos);
+				span.css('margin-'+pos, props['margin-'+pos]);
+			});
+			$this.show();
 			$this.wrap(span).css('margin', '0');
 			span = $this.parent();
 			span.on(Q.Pointer.fastclick, function() {
@@ -96,7 +95,9 @@ function () {
 				'top': $this.position().top,
 				'margin': 0,
 				'padding-left': parseInt(props['padding-left'])+3+'px',
+				'padding-right': props['padding-right'],
 				'padding-top': props['padding-top'],
+				'padding-bottom': props['padding-bottom'],
 				'border-top': 'solid ' + $this.css('border-top-width') + ' transparent',
 				'border-left': 'solid ' + $this.css('border-left-width') + ' transparent',
 				'box-sizing': $this.css('box-sizing'),
@@ -109,7 +110,8 @@ function () {
 				'text-align': $this.css('text-align'),
 				'pointer-events': 'none',
 				'color': $this.css('color'),
-				'opacity': '0.5'
+				'opacity': '0.5',
+				'box-sizing': 'border-box'
 			}).addClass('Q_placeholder').insertAfter($this);
 			if (t === 'input') {
 				$placeholder.css('white-space', 'nowrap');

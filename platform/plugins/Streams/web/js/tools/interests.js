@@ -18,6 +18,7 @@ var Interests = Streams.Interests;
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
  *  @param {String} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cachebust=1000*60*60*24] How often to reload the list of major community interests
+ *  @param {Q.Event} [options.onReady] this event occurs when the tool interface is ready
  */
 Q.Tool.define("Streams/interests", function (options) {
 	var tool = this;
@@ -61,7 +62,7 @@ Q.Tool.define("Streams/interests", function (options) {
 		}, state.expandable);
 		var $expandable = $(Q.Tool.setUpElement(
 			'div', 'Q/expandable', expandableOptions, 
-			'Q_expandable_' + Q.normalize(category))
+			tool.prefix + 'Q_expandable_' + Q.normalize(category))
 		);
 		$expandable.appendTo(tool.element).activate(p.fill(category));
 	}
@@ -148,6 +149,9 @@ Q.Tool.define("Streams/interests", function (options) {
 				});
 				tool.$('.Streams_interest_sep').html(' ');
 			}
+			state.interests = interests;
+			state.otherInterests = otherInterests;
+			Q.handle(state.onReady, tool);
 		});
 		
 		Q.each(Interests.all[state.communityId], addExpandable, {ascending: true});
@@ -380,7 +384,8 @@ Q.Tool.define("Streams/interests", function (options) {
 {
 	communityId: null,
 	expandable: {},
-	cacheBust: 1000*60*60*24
+	cacheBust: 1000*60*60*24,
+	onReady: new Q.Event()
 }
 
 );
