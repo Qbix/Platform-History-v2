@@ -110,9 +110,11 @@ function _Q_clickable(o) {
 			'vertical-align': $this.css('vertical-align'),
 			'text-align': $this.css('text-align')
 		}).addClass('Q_clickable_container')
+		$this.hide(); // to get percentage values, if any, for margins & padding
 		Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
 			$container.css('margin-'+pos, $this.css('margin-'+pos));
 		});
+		$this.show();
 		$this.css('margin', 0);
 		$container.insertAfter($this);
 		// $this.css('height', h);

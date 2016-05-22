@@ -61,6 +61,9 @@ function _Q_overlay(o) {
 	var $this = this;
 	$this.addClass('Q_overlay');
 	$this.css('position', Q.info.platform === 'ios' ? 'absolute' : 'fixed');
+	if (Q.info.platform === 'ios') {
+		$this.css('max-height', Q.Pointer.windowHeight() - $this.offset().top);
+	}
 
 	function closeThisOverlayOnEsc(e)
 	{

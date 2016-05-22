@@ -206,7 +206,9 @@ Q.Tool.define("Places/location", function (options) {
 				if (miles) {
 					tool.$('.Places_location_miles').val(miles);
 				};
-				Q.handle(state.onUpdate, tool, [latitude, longitude, miles]);
+				if (latitude && longitude) {
+					Q.handle(state.onUpdate, tool, [latitude, longitude, miles]);
+				}
 			}, { 
 				messages: 1,
 				evenIfNotRetained: true

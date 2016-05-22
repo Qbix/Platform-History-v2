@@ -3247,7 +3247,7 @@ Q.Tool = function _Q_Tool(element, options) {
 		if (!prefix) {
 			var e = this.element.parentNode;
 			do {
-				if (e.hasClass('Q_tool')) {
+				if (e.hasClass && e.hasClass('Q_tool')) {
 					prefix = Q.getObject('Q.tool.prefix', e)
 						|| Q.Tool.calculatePrefix(e.id);
 					break;

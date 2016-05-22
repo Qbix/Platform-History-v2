@@ -16,7 +16,8 @@ var Interests = Streams.Interests;
  * @param {Object} [options] This is an object of parameters for this function
  *  @param {String} [options.communityId=Q.info.app] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
- *  @param {String} [options.expandable={}] Any options to pass to the expandable tools
+ *  @param {Array} [options.ordering={}] To override what interest categories to show and in what order
+ *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cachebust=1000*60*60*24] How often to reload the list of major community interests
  *  @param {Q.Event} [options.onReady] this event occurs when the tool interface is ready
  */
@@ -29,10 +30,11 @@ Q.Tool.define("Streams/interests", function (options) {
 	var revealingNewInterest = false;
 	var $te = $(tool.element);
 	var anotherUser = state.userId;
-	
 	if (anotherUser) {
 		$te.addClass('Streams_interests_anotherUser');
 	}
+	
+	state.ordering = state.ordering || Object.keys(Interests.all[state.communityId])
 	
 	if (!$te.children().length) {
 		$te.html(
@@ -56,9 +58,10 @@ Q.Tool.define("Streams/interests", function (options) {
 			count += Object.keys(interests).length;
 		});
 		var expandableOptions = Q.extend({
-			title: img+"<span>"+category+"</span>",
+			title: img+"<span class='Streams_interests_category_title'>"+category+"</span>",
 			content: content,
-            count: ''
+            count: '',
+			category: category
 		}, state.expandable);
 		var $expandable = $(Q.Tool.setUpElement(
 			'div', 'Q/expandable', expandableOptions, 
@@ -71,7 +74,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	var criteria = { communityId: state.communityId };
 	Q.addScript(Q.url(src, criteria, { cacheBust: state.cacheBust }),
 	function () {
-		var categories = Object.keys(Interests.all[state.communityId]);
+		var categories = state.ordering;
 		var waitFor = categories.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
 		p.add(waitFor, 1, function (params, subjects) {
 			tool.$('.Streams_interest_title').removeClass('Q_selected');
@@ -154,7 +157,13 @@ Q.Tool.define("Streams/interests", function (options) {
 			Q.handle(state.onReady, tool);
 		});
 		
-		Q.each(Interests.all[state.communityId], addExpandable, {ascending: true});
+		Q.each(state.ordering, function (i, category) {
+			addExpandable(
+				category, 
+				Interests.all[state.communityId][category], 
+				{ascending: true}
+			);
+		})
 		
 		var $unlisted1 = $("<div />").html("Don't see it? Try some synonyms.");
 		var $unlisted2 = $("<div class='Streams_interest_unlisted1' />")
@@ -385,6 +394,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	communityId: null,
 	expandable: {},
 	cacheBust: 1000*60*60*24,
+	ordering: null,
 	onReady: new Q.Event()
 }
 
@@ -407,5 +417,14 @@ function _listInterests(category, interests) {
 	}
 	return lines.join('<span class="Streams_interest_sep">, </span>');
 }
+
+Q.Template.set('Streams/interests', 
+'{{#if filter}}'
++ '<div class="Streams_interests_filter">'
+	+ '<input class="Streams_interests_filter_input" placeholder="What do you enjoy?"></input>'
++ '</div>'
++ '{{/filter}}'
++ '<div class="Streams_interests_all"></div>'
+);
 
 })(window, Q, jQuery);
