@@ -2325,9 +2325,12 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 			return e;
 		}
 		var e = new Q.Event();
+		e.factory = _Q_Event_factory;
+		e.name = name;
 		if (callback) {
 			callback.apply(e, args);
 		}
+		_Q_Event_factory.onNewEvent.handle.apply(e, args);
 		Q.setObject(name, e, collection, delimiter);
 		if (removeOnEmpty) {
 			e.onEmpty().set(_remove);
@@ -2336,6 +2339,7 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 		return e;
 	}
 	_Q_Event_factory.collection = collection;
+	_Q_Event_factory.onNewEvent = new Q.Event();
 	return _Q_Event_factory;
 };
 
