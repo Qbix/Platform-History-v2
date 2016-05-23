@@ -3510,6 +3510,8 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Please enter your name properly", 'name');
 		}
 
+		Streams::$cache['register'] = $name;
+
 		$user = Users::register("", $identifier, $icon, $provider, $options);
 
 		/**
