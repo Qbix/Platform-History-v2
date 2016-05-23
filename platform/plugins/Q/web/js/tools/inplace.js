@@ -198,7 +198,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		static_span.attr('title', state.placeholder);
 	}
 	previousValue = fieldinput.val();
-	var maxWidth = state.maxWidth || null;
+	var maxWidth = state.maxWidth;
 	if (!maxWidth) {
 		$te.parents().each(function () {
 			var $this = $(this);

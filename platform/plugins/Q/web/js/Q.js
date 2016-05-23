@@ -579,12 +579,10 @@ Elp.copyComputedStyle = function(src) {
  */
 Elp.cssDimensions = function () {
     var cn = this.cloneNode();
-    var div = document.createElement('div');
-    div.appendChild(cn);
-    div.style.display = 'none';
-    document.body.appendChild(div);
+	cn.style.display = 'none';
+    this.parentNode.appendChild(cn);
     var cs = Q.copy(cn.computedStyle());
-    document.body.removeChild(div);
+    this.parentNode.removeChild(cn);
     return { width: cs.width, height: cs.height };
 };
 
