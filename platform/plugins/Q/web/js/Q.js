@@ -7729,7 +7729,7 @@ function _activateTools(toolElement, options, shared) {
 				// be initialized without waiting for any child tools.
 				// tool.element.Q.supportsChildren = true
 				// set by tool.supportsChildren(true)
-				Q.activate(toolElement, options);
+				Q.activate(toolElement.children || toolElement.childNodes, options);
 			}
 			
 			if (uniqueToolId) {
