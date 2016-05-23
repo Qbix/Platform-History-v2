@@ -3866,6 +3866,15 @@ Tp.parent = function Q_Tool_prototype_parent() {
 };
 
 /**
+ * Returns a tool on the same element
+ * @method sibling
+ * @return {Q.Tool|null}
+ */
+Tp.sibling = function Q_Tool_prototype_sibling(name) {
+	return this.element.Q(name);
+};
+
+/**
  * Called when a tool instance is removed, possibly
  * being replaced by another.
  * Typically happens after an AJAX call which returns
