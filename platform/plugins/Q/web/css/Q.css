@@ -164,6 +164,11 @@ body.Q_preventScroll {
 .Q_dialog_content {
 	overflow: auto;
 }
+.Q_alert .Q_dialog_content,
+.Q_confirm .Q_dialog_content,
+.Q_prompt .Q_dialog_content {
+	text-align: center;
+}
 .Q_fullscreen_dialog
 {
 	overflow: visible;
