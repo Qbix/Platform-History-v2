@@ -56,14 +56,23 @@ function _Q_overlay(o) {
 		} else {
 			$this.css({ 'top': Q.Pointer.scrollTop() + o.top + 'px' });
 		}
+		if (!o.fullscreen) {
+			var topMargin = Q.Dialogs.options.topMargin;
+			var parentHeight = (!o.alignByParent || parent[0] == document.body)
+				? Q.Pointer.windowWidth()
+				: parent.height();
+			if (typeof(topMargin) == 'string') // percentage
+				topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
+			var bottomMargin = Q.Dialogs.options.bottomMargin;
+			if (typeof(bottomMargin) == 'string') // percentage
+				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
+			$this.find('.dialog_slot').css('max-height', Q.Pointer.windowHeight() - topMargin - bottomMargin - $this.find('.title_slot').height() + 'px');
+		}
 	}
 
 	var $this = this;
 	$this.addClass('Q_overlay');
 	$this.css('position', Q.info.platform === 'ios' ? 'absolute' : 'fixed');
-	if (Q.info.platform === 'ios') {
-		$this.css('max-height', Q.Pointer.windowHeight() - $this.offset().top);
-	}
 
 	function closeThisOverlayOnEsc(e)
 	{
@@ -128,6 +137,7 @@ function _Q_overlay(o) {
 				}
 				Q.handle($overlay.options.onLoad, $this, [$this]);
 			}
+			calculatePosition($this);
 		},
 		close: function(e)
 		{

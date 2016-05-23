@@ -510,6 +510,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 					_streamRefreshHandlers
 				);
 				Q.handle(handler, stream, []);
+				Streams.get.onStream.handle.call(stream);
 				return ret;
 			}
 		);
@@ -517,6 +518,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	_retain = undefined;
 };
 Streams.get.onError = new Q.Event();
+Streams.get.onStream = new Q.Event();
 
 /**
  * @static
@@ -3067,8 +3069,10 @@ Avatar.get = function _Avatar_get (userId, callback) {
 			0, avatar, [err, avatar]
 		);
 		callback && callback.call(avatar, null, avatar);
+		Avatar.get.onAvatar.handle.call(avatar);
 	});
 };
+Avatar.get.onAvatar = new Q.Event();
 Avatar.get.onError = new Q.Event();
 
 /**
@@ -3715,26 +3719,46 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 	
+	// handle updates
+	function _updateDisplayName(fields, k) {
+		Avatar.get.force(Users.loggedInUser.id, function () {
+			var liu = Q.Users.loggedInUser;
+			liu.username = this.username;
+			liu.displayName = this.displayName();
+			liu.icon = this.icon;
+		});
+	}
+	if (Users.loggedInUser) {
+		var key = 'Streams.updateDisplayName';
+		Q.Streams.Stream.onFieldChanged(
+			Users.loggedInUser.id, "Streams/user/firstName", "content"
+		).or(Q.Streams.Stream.onFieldChanged(
+			Users.loggedInUser.id, "Streams/user/lastName", "content"), key, key
+		).or(Q.Streams.Stream.onFieldChanged(
+			Users.loggedInUser.id, "Streams/user/username", "content"), key, key
+		).debounce(50, key).set(_updateDisplayName, 'Streams');
+	}
+	
 	// handle going online after being offline
 	Q.onOnline.set(function () {
 		_connectSockets(true);
 	}, 'Streams');
 
-	// set up full name request dialog
+	// set up invite complete dialog
 	Q.Page.onLoad('').add(function _Streams_onPageLoad() {
-		if (Q.getObject("Q.plugins.Users.loggedInUser.displayName")) {
-			return;
-		}
 		var params = Q.getObject("Q.plugins.Streams.invite.dialog");
 		if (!params) {
 			return;
 		}
+		Q.setObject("Q.plugins.Streams.invite.dialog", null);
 		var templateName = params.templateName || 'Streams/invite/complete';
 		params.prompt = (params.prompt !== undefined)
 			? params.prompt
 			: Q.text.Streams.login.prompt;
 		Streams.construct(params.stream, function () {
 			params.stream = this;
+			params.communityId = Q.Users.communityId;
+			params.communityName = Q.Users.communityName;
 			Q.Template.render(templateName, params, 
 			function(err, html) {
 				var dialog = $(html);

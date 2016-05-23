@@ -88,7 +88,9 @@ Q.Tool.define("Places/location", function (options) {
 				$te.find('.Places_location_container')
 					.removeClass('Places_location_checking');
 				Q.handle(state.onUnset, tool, [err, stream]);
-				Q.handle(state.onReady, tool, [err, stream]);
+				if (!state.onReady.occurred) {
+					Q.handle(state.onReady, tool, [err, stream]);
+				}
 			}
 			setTimeout(function () {
 				pipe.fill('show')();
@@ -189,7 +191,8 @@ Q.Tool.define("Places/location", function (options) {
 			subscribe: true,
 			unsubscribe: true,
 			miles: tool.$('.Places_location_miles').val(),
-			timezone: (new Date()).getTimezoneOffset() / 60
+			timezone: (new Date()).getTimezoneOffset() / 60,
+			defaultMiles: state.defaultMiles
 		});
 		if (zipcode) {
 			fields.zipcode = zipcode;
@@ -250,7 +253,9 @@ Q.Tool.define("Places/location", function (options) {
 					_showLocationAndCircle();
 				}, 300);
 			}, 0);
-			Q.handle(state.onReady, tool, [null, state.stream]);
+			if (!state.onReady.occurred) {
+				Q.handle(state.onReady, tool, [null, state.stream]);
+			}
 		});
 
 		function _showLocationAndCircle() {
@@ -311,10 +316,10 @@ Q.Template.set('Places/location',
 		+ 'I\'m interested in things taking place within'
 		+ '<select name="miles" class="Places_location_miles">'
 			+ '{{#each miles}}'
-				+ '<option value="{{@key}}">{{this}}</option>'
+				+ '{{option @key this ../defaultMiles}}'
 			+ '{{/each}}'
 		+ '</select>'
-		+ 'of'
+		+ ' of '
 		+ '<div class="Places_location_whileObtaining">'
 			+ '<img src="{{map.prompt}}" title="map" class="Places_location_set">'
 		+ '</div>'

@@ -6,7 +6,13 @@ function Streams_after_Q_objects () {
 	$invite = Streams::$followedInvite;
 	if (!$invite) return;
 	$displayName = $user->displayName();
-	if ($displayName) return;
+	$showDialog = !$displayName;
+	
+	$p = compact('user', 'invite', 'displayName');
+	Q::event('Streams/inviteDialog', $p, 'before', false, $showDialog);
+	if (!$showDialog) {
+		return;
+	}
 
 	$stream = new Streams_Stream();
 	$stream->publisherId = $invite->publisherId;
@@ -33,7 +39,7 @@ function Streams_after_Q_objects () {
 		'Streams/invite/complete'
 	);
 	$params = array(
-		'displayName' => null,
+		'displayName' => $displayName,
 		'action' => 'Streams/basic',
 		'icon' => $user->iconUrl(),
 		'token' => $invite->token,
