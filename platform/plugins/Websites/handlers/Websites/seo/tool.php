@@ -35,4 +35,18 @@ function Websites_seo_tool($options)
 	Q_Response::addStylesheet('plugins/Websites/css/Websites.css');
 	Q_Response::addScript("plugins/Websites/js/Websites.js");
 	Q_Response::setToolOptions($options);
+	
+	$user = Users::loggedInUser(false, false);
+	$userId = $user ? $user->id : "";
+	$communityId = Users::communityId();
+	$sha1 = sha1(Q_Dispatcher::uri());
+	$seoStreamName = "Websites/seo/$sha1";
+	$streams = Streams::fetch($userId, $communityId, array(
+		"Websites/header", "Websites/title", "Websites/slogan", $seoStreamName
+	));
+	foreach ($streams as $name => $s) {
+		if ($s) {
+			$s->addPreloaded($userId);
+		}
+	}
 }

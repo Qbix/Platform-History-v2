@@ -2325,9 +2325,12 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 			return e;
 		}
 		var e = new Q.Event();
+		e.factory = _Q_Event_factory;
+		e.name = name;
 		if (callback) {
 			callback.apply(e, args);
 		}
+		_Q_Event_factory.onNewEvent.handle.apply(e, args);
 		Q.setObject(name, e, collection, delimiter);
 		if (removeOnEmpty) {
 			e.onEmpty().set(_remove);
@@ -2336,6 +2339,7 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 		return e;
 	}
 	_Q_Event_factory.collection = collection;
+	_Q_Event_factory.onNewEvent = new Q.Event();
 	return _Q_Event_factory;
 };
 
@@ -3153,9 +3157,7 @@ Q.queue = function (original, milliseconds) {
 		var args = Array.prototype.slice.call(arguments, 0);
 		var len = _queue.push([this, args]);
 		if (!_timeout) {
-			_timeout = setTimeout(function () {
-				_Q_queue_next();
-			}, 0);
+			_timeout = setTimeout(_Q_queue_next, 0);
 		}
 		return len;
 	};
@@ -3178,7 +3180,7 @@ Q.debounce = function (original, milliseconds, defaultValue) {
 			clearTimeout(_timeout);
 		}
 		var t = this, a = arguments;
-		_timeout = setTimeout(function () {
+		_timeout = setTimeout(function _Q_debounce_handler() {
 			original.apply(t, a);
 		}, milliseconds);
 		return defaultValue;
@@ -3247,7 +3249,7 @@ Q.Tool = function _Q_Tool(element, options) {
 		if (!prefix) {
 			var e = this.element.parentNode;
 			do {
-				if (e.hasClass('Q_tool')) {
+				if (e.hasClass && e.hasClass('Q_tool')) {
 					prefix = Q.getObject('Q.tool.prefix', e)
 						|| Q.Tool.calculatePrefix(e.id);
 					break;
@@ -3861,6 +3863,15 @@ Tp.parent = function Q_Tool_prototype_parent() {
 	var ids = [];
 	ids = this.parentIds();
 	return ids.length ? Q.Tool.active[ids[0]] : null;
+};
+
+/**
+ * Returns a tool on the same element
+ * @method sibling
+ * @return {Q.Tool|null}
+ */
+Tp.sibling = function Q_Tool_prototype_sibling(name) {
+	return this.element.Q(name);
 };
 
 /**
@@ -9629,6 +9640,7 @@ Q.Pointer = {
 		}));
 		if (!Q.Pointer.hint.addedListeners) {
 			Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
+			Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
 			Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
 			Q.Pointer.hint.addedListeners = true;
 		}
@@ -10810,10 +10822,18 @@ function _addHandlebarsHelpers() {
 			return Q.url(url);
 		});
 	}
-	if (!Handlebars.helpers.ucfirst) {
+	if (!Handlebars.helpers.toCapitalized) {
 		Handlebars.registerHelper('toCapitalized', function(text) {
 			text = text || '';
 			return text.charAt(0).toUpperCase() + text.slice(1);
+		});
+	}
+	if (!Handlebars.helpers.option) {
+		Handlebars.registerHelper('option', function(value, html, selectedValue) {
+			var attr = value == selectedValue ? ' selected="selected"' : '';
+			return new Handlebars.SafeString(
+				'<option value="'+value.encodeHTML()+'"'+attr+'>'+html+"</option>"
+			);
 		});
 	}
 }

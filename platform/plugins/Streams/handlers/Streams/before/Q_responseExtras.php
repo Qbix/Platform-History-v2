@@ -8,7 +8,10 @@ function Streams_before_Q_responseExtras()
 	$port = Q_Config::get('Streams', 'node', 'port', Q_Config::get('Q', 'node', 'port', null));
 	$user = Users::loggedInUser();
 	if ($user) {
-		Q_Response::setScriptData('Q.plugins.Users.loggedInUser.displayName', Streams::displayName($user));
+		Q_Response::setScriptData(
+			'Q.plugins.Users.loggedInUser.displayName', 
+			Streams::displayName($user)
+		);
 	}
 	if (!Q_Request::isAjax()) {
 		$invite_url = Q_Config::get('Streams', 'invite', 'url', "http://invites.to");

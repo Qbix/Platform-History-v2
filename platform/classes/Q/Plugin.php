@@ -55,7 +55,11 @@ class Q_Plugin
 	static function installSchema($base_dir, $name, $type, $conn_name, $options)
 	{
 		// is schema installation requested?
-		if (!isset($options['sql']) || empty($options['sql'][$conn_name]) || !$options['sql'][$conn_name]['enabled']) return;
+		if (!isset($options['sql'])
+		|| empty($options['sql'][$conn_name])
+		|| !$options['sql'][$conn_name]['enabled']) {
+			return;
+		}
 
 		$config = $type === 'app'
 			? Q_Config::get('Q', "{$type}Info", null)
@@ -167,7 +171,8 @@ class Q_Plugin
 				// wrong filename format
 				if (count($parts) < 2) continue;
 				list($sqlver, $tail) = $parts;
-				if ($tail !== "$conn_name.$dbms" and $tail !== "$conn_name.$dbms.php") {
+				if ($tail !== "$conn_name.$dbms"
+				and $tail !== "$conn_name.$dbms.php") {
 					continue; // not schema file or php script
 				}
 
@@ -179,10 +184,10 @@ class Q_Plugin
 				// we shall install this script!
 				if ($tail === "$conn_name.$dbms"
 				and Q::compareVersion($sqlver, $current_version) > 0) {
-					$scriptsSQL["$sqlver.mysql"] = $entry;
+					$scriptsSQL["$sqlver"] = $entry;
 				} else if ($tail === "$conn_name.$dbms.php"
 				and Q::compareVersion($sqlver, $current_versionPHP) > 0) {
-					$scriptsPHP["$sqlver.php"] = $entry;
+					$scriptsPHP["$sqlver"] = $entry;
 				}
 			}
 
@@ -196,7 +201,13 @@ class Q_Plugin
 				echo "Running SQL scripts for $type $name on $conn_name ($dbms)".PHP_EOL;
 			}
 			
-			$scripts = array_merge($scriptsSQL, $scriptsPHP);
+			$scripts = array();
+			foreach ($scriptsSQL as $s) {
+				$scripts[] = $s;
+			}
+			foreach ($scriptsPHP as $s) {
+				$scripts[] = $s;
+			}
 
 			// echo "Begin transaction".PHP_EOL;
 			// $query = $db->rawQuery('')->begin()->execute();

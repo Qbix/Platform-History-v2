@@ -35,7 +35,7 @@ Q.Tool.define("Q/inplace", function (options) {
 	var $te = $(tool.element);
 	var container = tool.$('.Q_inplace_tool_container');
 	if (container.length) {
-		return _Q_inplace_tool_constructor.call(tool, this.element, options);
+		return _Q_inplace_tool_constructor.call(tool, this.element, state);
 	}
 	
 	Q.addStylesheet('plugins/Q/css/inplace.css');
@@ -46,7 +46,7 @@ Q.Tool.define("Q/inplace", function (options) {
 	//	- method: request method, defaults to 'PUT'
 	//	- type: type of the input - 'text' or 'textarea', defaults to 'textarea'
 
-	var o = options;
+	var o = state;
 	if (!o || !o.action) {
 		return console.error("Q/inplace tool: missing option 'action'", o);
 	}
@@ -85,7 +85,7 @@ Q.Tool.define("Q/inplace", function (options) {
 		function (err, html) {
 			if (!html) return;
 			$te.html(html);
-			return _Q_inplace_tool_constructor.call(tool, this.element, options, staticHtml);
+			return _Q_inplace_tool_constructor.call(tool, this.element, state, staticHtml);
 		}, 
 		o.template
 	);
@@ -342,7 +342,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			.css('display', 'block')
 			.removeClass('Q_error');
 		focusedOn = 'fieldinput';
-		var method = options.method || (form.length && form.attr('method')) || 'post';
+		var method = state.method || (form.length && form.attr('method')) || 'post';
 		var url = form.attr('action');
 
 		var used_placeholder = false;

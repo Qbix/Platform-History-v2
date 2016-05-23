@@ -897,7 +897,7 @@ Q.debounce = function (original, milliseconds, defaultValue) {
 			clearTimeout(_timeout);
 		}
 		var t = this, a = arguments;
-		_timeout = setTimeout(function () {
+		_timeout = setTimeout(function _Q_debounce_handler() {
 			original.apply(t, a);
 		}, milliseconds);
 		return defaultValue;

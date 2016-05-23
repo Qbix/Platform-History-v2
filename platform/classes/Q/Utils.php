@@ -589,7 +589,7 @@ class Q_Utils
 
 		// delete the above line to throw on error
 		if (isset($result['errors'])) {
-			throw reset($result['errors']);
+			throw new Q_Exception(reset($result['errors']));
 		}
 		return isset($result['data']) ? $result['data'] : null;
 	}
