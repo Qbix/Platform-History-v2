@@ -140,7 +140,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 		if (sp === document.documentElement) {
 			return Q.Pointer.windowHeight() - $(this.element).offset().top;
 		}
-		return this.clientHeight;
+		return sp.clientHeight;
 	},
 	currentIndex: null,
 	placeholders: ['', ''],
