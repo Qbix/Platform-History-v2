@@ -3980,7 +3980,7 @@ Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(cla
 /**
  * Do something for every and future child tool that is activated inside this element
  * @method forEachChild
- * @param {String} [name=""] The name of the child tool, such as "Q/inplace"
+ * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {number} [levels] Optionally pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
  * @param {Function} callback The callback to execute at the right time
  */
@@ -3989,7 +3989,7 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, callback
 		callback = levels;
 		levels = null;
 	}
-	name = Q.normalize(name);
+	name = name && Q.normalize(name);
 	var tool = this;
 	var children = tool.children(name, levels);
 	for (var id in children) {
@@ -4144,7 +4144,7 @@ Tp.setUpElementHTML = function (element, toolName, toolOptions, id) {
  * @method from
  * @param toolElement {Element}
  *   the root element of the desired tool
- * @param {String} toolName
+ * @param {String} [toolName]
  *   optional name of the tool attached to the element
  * @return {Q.Tool|null}
  *   the tool corresponding to the given element, otherwise null
