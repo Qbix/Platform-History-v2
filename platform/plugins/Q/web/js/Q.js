@@ -8568,23 +8568,14 @@ Q.Animation.ease = {
 };
 
 function _listenForVisibilityChange() {
-	var hidden, visibilityChange; 
-	if ('hidden' in document) { // Opera 12.10 and Firefox 18 and later support 
-		hidden = 'hidden';
-		visibilityChange = 'visibilitychange';
-	} else if ('mozHidden' in document) {
-		hidden = 'mozHidden';
-		visibilityChange = 'mozvisibilitychange';
-	} else if ('msHidden' in document) {
-		hidden = 'msHidden';
-		visibilityChange = 'msvisibilitychange';
-	} else if ('webkitHidden' in document) {
-		hidden = 'webkitHidden';
-		visibilityChange = 'webkitvisibilitychange';
-	} else if ('oHidden' in document) {
-		hidden = 'oHidden';
-		visibilityChange = 'ovisibilitychange';
-	}
+	var hidden, visibilityChange;
+	Q.each(['', 'moz', 'ms', 'webkit', 'o'], function (i, k) {
+		hidden = k ? k+'Hidden' : 'hidden';
+		if (hidden in document) {
+			visibilityChange = k+'visibilitychange';
+			return false;
+		}
+	});
 	Q.addEventListener(document, visibilityChange, function () {
 		Q.onVisibilityChange.handle(document, [document[hidden]]);
 	}, false);
