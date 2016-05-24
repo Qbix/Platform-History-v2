@@ -1200,7 +1200,7 @@ Q.firstKey = function _Q_firstKey(container, options) {
  * @method diff
  * @param {Array|Object} container to subtract items from to form the result
  * @param {Array|Object} container whose items are subtracted in the result
- * @param {Function} comparator accepts item1, item2, index1, index2) and returns whether two items are equal
+ * @param {Function} [comparator] accepts item1, item2, index1, index2) and returns whether two items are equal
  * @return {Array|Object} a container of the same type as container1, but without elements of container2
  */
 Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
@@ -1211,7 +1211,10 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	var len = arguments.length;
 	var comparator = arguments[len-1];
 	if (typeof comparator !== 'function') {
-		throw new Q.Error("Q.diff: comparator must be a function");
+		comparator = function _Q_diff_default_comparator(v1, v2) {
+			return v1 === v2;
+		}
+		++len;
 	}
 	var isArr = Q.isArrayLike(container1);
 	var result = isArr ? [] : {};
@@ -11011,5 +11014,8 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 }
 
 Q.globalNames = Object.keys(root); // to find stray globals
+Q.globalNamesAdded = function () {
+	return Q.diff(Object.keys(window), Q.globalNames);
+};
 
 }).call(this);
