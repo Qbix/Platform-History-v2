@@ -89,6 +89,9 @@ function () {
 			span.on(Q.Pointer.fastclick, function() {
 				$this.trigger('focus');
 			});
+			var lineHeight = $this[0].style.lineHeight
+				? $this[0].style.lineHeight
+				: $this.height() + 'px';
 			var $placeholder = $('<div />').text(plch).css({
 				'position': 'absolute',
 				'left': $this.position().left,
@@ -103,7 +106,7 @@ function () {
 				'box-sizing': $this.css('box-sizing'),
 				'font-size': $this.css('font-size'),
 				'font-weight': $this.css('font-weight'),
-				'line-height': $this.css('line-height'),
+				'line-height': lineHeight,
 				'overflow': 'hidden',
 				'width': '100%',
 				'height': '100%',
