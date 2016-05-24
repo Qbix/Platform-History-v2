@@ -3985,6 +3985,11 @@ Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(cla
  * @param {Function} callback The callback to execute at the right time
  */
 Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, callback) {
+	if (typeof name !== 'string') {
+		levels = name;
+		callback = levels;
+		name = null;
+	}
 	if (typeof levels !== 'number') {
 		callback = levels;
 		levels = null;
