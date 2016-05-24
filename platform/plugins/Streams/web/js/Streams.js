@@ -436,6 +436,12 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	var url = Q.action('Streams/stream?')+
 		Q.serializeFields({"publisherId": publisherId, "name": streamName});
 	var slotNames = ['stream'];
+	if (!publisherId) {
+		throw new Q.Error("Streams.get: publisherId is empty");
+	}
+	if (!streamName) {
+		throw new Q.Error("Streams.get: streamName is empty");
+	}
 	if (extra) {
 		if (extra.participants) {
 			url += '&'+$.param({"participants": extra.participants});
@@ -1099,7 +1105,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	}
 	Q.extend(fields, options);
 	fields.omitRedundantInfo = true;
-	if (isCategory !== undefined) {
+	if (isCategory) {
 		fields.isCategory = isCategory;
 	}
 	if (Q.isArrayLike(fields.fields)) {
@@ -1951,7 +1957,7 @@ Sp.refresh = function _Stream_prototype_refresh (callback, options) {
  *  First parameter is the error, the second one is an object of Streams.RelatedFrom objects you can iterate over with Q.each
  */
 Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, callback) {
-	return Streams.related(this.fields.publisherId, this.fields.name, relationType, true, options, callback);
+	return Streams.related(this.fields.publisherId, this.fields.name, relationType, false, options, callback);
 };
 
 /**
@@ -1969,7 +1975,7 @@ Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, 
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
 Sp.relatedTo = function _Stream_prototype_relatedTo (relationType, options, callback) {
-	return Streams.related(this.fields.publisherId, this.fields.name, relationType, false, options, callback);
+	return Streams.related(this.fields.publisherId, this.fields.name, relationType, true, options, callback);
 };
 
 /**
