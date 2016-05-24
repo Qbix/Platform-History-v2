@@ -415,6 +415,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		static_span.attr('title', state.placeholder);
 		undermessage.empty().css('display', 'none').addClass('Q_error');
 		tool.restoreActions();
+		fieldinput.blur();
 		container_span.removeClass('Q_editing')
 			.removeClass('Q_nocancel')
 			.removeClass('Q_discouragePointerEvents');

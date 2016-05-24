@@ -3293,8 +3293,10 @@ Q.Tool = function _Q_Tool(element, options) {
 	
 	for (i = len-1; i >= 0; --i) {
 		var pid = pids[i];
-		if (Q.isEmpty(Q.Tool.active[pid].state)) continue;
-		o = Q.extend(o, Q.Tool.options.levels, Q.Tool.active[pid].state);
+		if (Q.isEmpty(Q.getObject([pid, this.name, 'state'], Q.Tool.active))) {
+			continue;
+		}
+		o = Q.extend(o, Q.Tool.options.levels, Q.Tool.active[pid][this.name].state);
 	}
 	
 	// .Q_something
@@ -3344,7 +3346,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	element.Q.toolNames.push(normalizedName);
 	element.Q.tools[normalizedName] = this;
 	element.Q.tool = this;
-	Q.Tool.active[this.id] = this;
+	Q.setObject([this.id, this.name], this, Q.Tool.active);
 	
 	// Add a Q property on the object and extend it with the prototype.Q if any
 	this.Q = Q.extend({
@@ -3759,35 +3761,36 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
 };
 
 /**
- * Gets child tools contained in the tool, as determined by their prefixes
- * based on the prefix of the tool.
+ * Gets child tools contained in the tool, as determined by their ids.
  * @method children
  * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace"
  * @param {number} [levels] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
- * @return {Object} A hash of {prefix: Tool} pairs
+ * @return {Object} A two-level hash of pairs like {id: {name: Tool}}
  */
 Tp.children = function Q_Tool_prototype_children(name, levels) {
 	var result = {};
 	var prefix = this.prefix;
-	var id, ni, i, ids;
+	var id, n, i, ids;
 	name = name && Q.normalize(name);
 	for (id in Q.Tool.active) {
-		var tool = Q.Tool.active[id];
-		if ((name && tool.name != name)
-		|| id.length <= prefix.length
-		|| id.substr(0, prefix.length) != prefix) {
-			continue;
-		}
-		if (!levels) {
-			result[id] = Q.Tool.active[id];
-			continue;
-		}
-		ids = tool.parentIds();
-		var l = Math.min(levels, ids.length);
-		for (i=0; i<l; ++i) {
-			if (ids[i] === this.id) {
-				result[id] = tool;
+		for (n in Q.Tool.active[id]) {
+			if ((name && name != n)
+			|| id.length <= prefix.length
+			|| id.substr(0, prefix.length) != prefix) {
 				break;
+			}
+			var tool = Q.Tool.active[id][n];
+			if (!levels) {
+				Q.setObject([id, name], tool, result);
+				break;
+			}
+			ids = tool.parentIds();
+			var l = Math.min(levels, ids.length);
+			for (i=0; i<l; ++i) {
+				if (ids[i] === this.id) {
+					Q.setObject([id, name], tool, result);
+					break;
+				}
 			}
 		}
 	}
@@ -3798,17 +3801,23 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  * Gets one child tool contained in the tool, which matches the prefix
  * based on the prefix of the tool.
  * @method child
- * @param {String} append The string to append to the tool prefix to find the child tool
+ * @param {String} append The string to append to the tool prefix to find the child tool id
+ * @param {String} [name=""] Filter by tool name, such as "Q/inplace"
  * @return {Q.Tool|null}
  */
-Tp.child = function Q_Tool_prototype_child(append) {
+Tp.child = function Q_Tool_prototype_child(append, name) {
 	var prefix2 = Q.normalize(this.prefix + (append || ""));
-	var id, ni;
+	var id, ni, n;
 	for (id in Q.Tool.active) {
 		ni = Q.normalize(id);
-		if (id.length >= prefix2.length + (append ? 0 : 1)
-		&& ni.substr(0, prefix2.length) == prefix2) {
-			return Q.Tool.active[id];
+		for (n in Q.Tool.active[id]) {
+			if (name && name != n) {
+				break;
+			}
+			if (id.length >= prefix2.length + (append ? 0 : 1)
+			&& ni.substr(0, prefix2.length) == prefix2) {
+				return Q.Tool.active[id][n];
+			}
 		}
 	}
 	return null;
@@ -3817,7 +3826,7 @@ Tp.child = function Q_Tool_prototype_child(append) {
 /**
  * Gets the ids of the parent, grandparent, etc. tools (in that order) of the given tool
  * @method parentIds
- * @return {Q.Tool|null}
+ * @return {Array|null}
  */
 Tp.parentIds = function Q_Tool_prototype_parentIds() {
 	var prefix2 = Q.normalize(this.prefix), ids = [], id, ni;
@@ -3838,8 +3847,9 @@ Tp.parentIds = function Q_Tool_prototype_parentIds() {
 
 /**
  * Gets parent tools, as determined by parentIds()
+ * Note that several sibling tools may be activated on the same tool id.
  * @method parents
- * @return {Object} A hash of {prefix: Q.Tool} pairs
+ * @return {Object} A two-level hash of pairs like {id: {name: Q.Tool}}
  */
 Tp.parents = function Q_Tool_prototype_parents() {
 	var ids = [], i, id;
@@ -3853,14 +3863,15 @@ Tp.parents = function Q_Tool_prototype_parents() {
 };
 
 /**
- * Returns the immediate parent tool, if any
+ * Returns the immediate parent tool, if any, by using parentIds().
+ * If more than one tool is activated with the same parent id, returns the first one.
  * @method parent
  * @return {Q.Tool|null}
  */
 Tp.parent = function Q_Tool_prototype_parent() {
 	var ids = [];
 	ids = this.parentIds();
-	return ids.length ? Q.Tool.active[ids[0]] : null;
+	return ids.length ? Q.first(Q.Tool.active[ids[0]]) : null;
 };
 
 /**
@@ -3903,8 +3914,10 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
 	_beforeRemoveToolHandlers[""].handle.call(this);
 	Q.handle(this.Q.beforeRemove, this, []);
 	
-	delete this.element.Q.tools[Q.normalize(this.name)];
-	if (Q.isEmpty(this.element.Q.tools)) {
+	var nn = Q.normalize(this.name);
+	delete this.element.Q.tools[nn];
+	delete Q.Tool.active[this.id][nn];
+	if (Q.isEmpty(Q.Tool.active[this.id])) {
 		Q.removeElement(this.element);
 		delete Q.Tool.active[this.id];
 	}
@@ -3976,10 +3989,15 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, callback
 	}
 	name = Q.normalize(name);
 	var tool = this;
-	Q.each(tool.children(name, levels), callback);
+	var children = tool.children(name, levels);
+	for (var id in children) {
+		for (var n in children[id]) {
+			Q.handle(callback, children[id][n]);
+		}
+	}
 	var onActivate = Q.Tool.onActivate(name);
 	var key = onActivate.set(function () {
-		if (this.prefix.substr(0, tool.prefix.length) === tool.prefix) {
+		if (this.prefix.startsWith(tool.prefix)) {
 			Q.handle(callback, this, arguments);
 		}
 	});
@@ -4144,11 +4162,18 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
  * @method byId
  * @param {String} id
  * @param {String} name optional name of the tool, useful if more than one tool was activated on the same element
- * @return {Q.Tool|null}
+ * @return {Q.Tool|null|undefined}
  */
 Q.Tool.byId = function _Q_Tool_byId(id, name) {
-	var tool = Q.Tool.active[id];
-	return (tool && name && tool.name !== name ? tool.element.Q(name) : tool) || null;
+	if (name) {
+		return Q.Tool.active[id] ? Q.Tool.active[id][name] : null;
+	}
+	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
+	if (!tool) {
+		return null;
+	}
+	var q = tool.element.Q;
+	return tool.element.Q(q.toolNames[q.toolNames.length-1]);
 };
 
 /**
@@ -4662,7 +4687,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 	var cache = this;
 	if (this.documentStorage) {
 		return Q.each(this.data, function (k, v) {
-			if (prefix && k.substring(0, prefix.length) !== prefix) {
+			if (prefix && k.startsWith(prefix)) {
 				return;
 			}
 			if (callback.call(cache, k, v) === false) {
@@ -4678,7 +4703,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 			}
 			lastkey = key;
 			key = item.next;
-			if (prefix && key.substring(0, prefix.length) !== prefix) {
+			if (prefix && key.startsWith(prefix)) {
 				return;
 			}
 			if (callback.call(this, lastkey, item) === false) {
@@ -10844,9 +10869,12 @@ function _Q_trigger_recursive(tool, eventName, args) {
 	if (obj) {
 		Q.handle(obj, tool, args);
 	}
-	Q.each(tool.children('', 1), function () {
-		_Q_trigger_recursive(this, eventName, args);
-	});
+	var children = tool.children('', 1);
+	for (var id in children) {
+		for (var n in children[id]) {
+			_Q_trigger_recursive(children[id][n], eventName, args);
+		}
+	}
 }
 
 function _Q_loadUrl_fillSlots (res, url, options) {

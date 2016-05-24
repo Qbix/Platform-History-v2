@@ -99,8 +99,13 @@ function _Q_overlay(o) {
 				left: $body.css('left'),
 				top: $body.css('top')
 			};
-			var sl = Q.Pointer.scrollLeft();
-			var st = Q.Pointer.scrollTop();
+			var hs = document.documentElement.style;
+			var sl = (hs.width === '100%' && hs.overflowX === 'hidden') 
+				? 0
+				: Q.Pointer.scrollLeft();
+			var st = (hs.height === '100%' && hs.overflowY === 'hidden') 
+				? 0
+				: Q.Pointer.scrollTop();
 			$body.css({
 				left: -sl + 'px',
 				top: -st + 'px'
@@ -182,7 +187,7 @@ function _Q_overlay(o) {
 	{
 		var $close = $('<a class="Q_close" />');
 		$this.append($close);
-		$close.on(Q.Pointer.click, $this.data('Q/overlay').close);
+		$close.on(Q.Pointer.fastclick, $this.data('Q/overlay').close);
 	}
 },
 
@@ -372,7 +377,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			}
 		};
 
-		$close.on(Q.Pointer.click, dialogData.close);
+		$close.on(Q.Pointer.fastclick, dialogData.close);
 
 		$(document).on('keydown', function(e) {
 			if (e.which == 27) {
