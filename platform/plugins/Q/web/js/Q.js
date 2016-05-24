@@ -337,6 +337,9 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
  * @return {boolean}
  */
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
+	if (this.length < prefix.length) {
+		return false;
+	}
 	return this.substr(0, prefix.length) === prefix;
 };
 
@@ -3775,21 +3778,20 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
 	for (id in Q.Tool.active) {
 		for (n in Q.Tool.active[id]) {
 			if ((name && name != n)
-			|| id.length <= prefix.length
-			|| id.substr(0, prefix.length) != prefix) {
-				break;
+			|| !id.startsWith(prefix)) {
+				continue;
 			}
 			var tool = Q.Tool.active[id][n];
 			if (!levels) {
-				Q.setObject([id, name], tool, result);
-				break;
+				Q.setObject([id, n], tool, result);
+				continue;
 			}
 			ids = tool.parentIds();
 			var l = Math.min(levels, ids.length);
 			for (i=0; i<l; ++i) {
 				if (ids[i] === this.id) {
-					Q.setObject([id, name], tool, result);
-					break;
+					Q.setObject([id, n], tool, result);
+					continue;
 				}
 			}
 		}
