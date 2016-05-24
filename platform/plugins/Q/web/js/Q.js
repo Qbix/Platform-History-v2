@@ -3859,7 +3859,10 @@ Tp.parents = function Q_Tool_prototype_parents() {
 	var result = {}, len = ids.length;
 	for (i=0; i<len; ++i) {
 		id = ids[i];
-		result[id] = Q.Tool.active[id];
+		result[id] = {};
+		for (var n in Q.Tool.active[id]) {
+			result[id][n] = Q.Tool.active[id][n];
+		}
 	}
 	return result;
 };

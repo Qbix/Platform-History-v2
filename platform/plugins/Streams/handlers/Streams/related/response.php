@@ -10,7 +10,7 @@ function Streams_related_response()
 	$asUserId = $user ? $user->id : '';
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true, 'original');
-	$isCategory = !empty($_REQUEST['isCategory']);
+	$isCategory = !(empty($_REQUEST['isCategory']) or strtolower($_REQUEST['isCategory']) === 'false');
 	$slotNames = Q_Request::slotNames();
 	$streams_requested = in_array('relatedStreams', $slotNames);
 	$options = Q::take($_REQUEST, array('limit', 'offset', 'min', 'max', 'type', 'prefix'));
