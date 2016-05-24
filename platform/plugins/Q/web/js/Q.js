@@ -11010,6 +11010,6 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	root.Q = Q;
 }
 
-Q.windowProperties = Object.keys(window); // to find stray globals
+Q.globalNames = Object.keys(root); // to find stray globals
 
 }).call(this);
