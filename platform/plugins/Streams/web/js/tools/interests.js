@@ -34,8 +34,6 @@ Q.Tool.define("Streams/interests", function (options) {
 		$te.addClass('Streams_interests_anotherUser');
 	}
 	
-	state.ordering = state.ordering || Object.keys(Interests.all[state.communityId])
-	
 	if (!$te.children().length) {
 		$te.html(
 			'<div class="Streams_interests_filter">' +
@@ -74,7 +72,15 @@ Q.Tool.define("Streams/interests", function (options) {
 	var criteria = { communityId: state.communityId };
 	Q.addScript(Q.url(src, criteria, { cacheBust: state.cacheBust }),
 	function () {
-		var categories = state.ordering;
+		var categories = state.ordering
+			= state.ordering || Object.keys(Interests.all[state.communityId]);
+		Q.each(state.ordering, function (i, category) {
+			addExpandable(
+				category, 
+				Interests.all[state.communityId][category], 
+				{ascending: true}
+			);
+		});
 		var waitFor = categories.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
 		p.add(waitFor, 1, function (params, subjects) {
 			tool.$('.Streams_interest_title').removeClass('Q_selected');
@@ -156,14 +162,6 @@ Q.Tool.define("Streams/interests", function (options) {
 			state.otherInterests = otherInterests;
 			Q.handle(state.onReady, tool);
 		});
-		
-		Q.each(state.ordering, function (i, category) {
-			addExpandable(
-				category, 
-				Interests.all[state.communityId][category], 
-				{ascending: true}
-			);
-		})
 		
 		var $unlisted1 = $("<div />").html("Don't see it? Try some synonyms.");
 		var $unlisted2 = $("<div class='Streams_interest_unlisted1' />")
