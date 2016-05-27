@@ -1,7 +1,7 @@
 CREATE TABLE `{$prefix}customer` (
-  `userId` varchar(31) NOT NULL DEFAULT '',
-  `payments` enum('stripe','authnet') NOT NULL DEFAULT 'stripe',
-  `customerId` varchar(255) NOT NULL DEFAULT '',
+  `userId` varchar(31) NOT NULL DEFAULT ''
+  `payments` enum('stripe','authnet') NOT NULL DEFAULT 'stripe' COMMENT 'the payment processor for the customer',
+  `customerId` varchar(255) NOT NULL DEFAULT '' COMMENT 'the customer id in the payments processor',
   PRIMARY KEY (`userId`,`payments`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
