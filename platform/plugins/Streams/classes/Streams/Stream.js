@@ -354,10 +354,12 @@ Sp.getSubscriptionTemplate = function(className, userId, callback) {
  */
 Sp.updateParticipantCounts = function (newState, prevState, callback) {
 	if (prevState) {
-		--this.fields[prevState+'Count'];
+		this.fields[prevState+'Count'] = new Db.Expression(prevState+'Count - 1');
 	}
-	++this.fields[newState+'Count'];
-	this.save(callback);
+	this.fields[newState+'Count'] = new Db.Expression(newState+'Count + 1');
+	this.save(function () {
+		this.retrieve('*', true, callback);
+	});
 };
 
 /**
