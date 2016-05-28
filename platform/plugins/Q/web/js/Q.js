@@ -4700,7 +4700,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 	var cache = this;
 	if (this.documentStorage) {
 		return Q.each(this.data, function (k, v) {
-			if (prefix && k.startsWith(prefix)) {
+			if (prefix && !k.startsWith(prefix)) {
 				return;
 			}
 			if (callback.call(cache, k, v) === false) {
