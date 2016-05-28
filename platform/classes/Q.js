@@ -1064,11 +1064,11 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback) {
 		var json = Q.Cache.key(args);
 		prefix = json.substring(0, json.length-1);
 	}
-	return Q.each(this.data, function (key, item) {
-		if (prefix && k.substring(0, prefix.length) !== prefix) {
+	return Q.each(this.data, function (k, v) {
+		if (prefix && !k.startsWith(prefix)) {
 			return;
 		}
-		if (callback.call(cache, key, item) === false) {
+		if (callback.call(cache, k, v) === false) {
 			return false;
 		}
 	});
