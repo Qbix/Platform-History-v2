@@ -90,13 +90,13 @@ function _Q_clickable(o) {
 		var csw = Math.ceil(rect.width);
 		var csh = Math.ceil(rect.height);
 		// $this.css('height', $this.height()+'px');
-		var container = $('<span class="Q_clickable_container" />').css({
+		var $container = $('<span class="Q_clickable_container" />').css({
 			'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,
 			'zoom': 1,
 			'position': position === 'static' ? 'relative' : position,
 			'left': position === 'static' ? 0 : $this.css('left'),
 			'top': position === 'static' ? 0 : $this.css('top'),
-			'margin': $this.css('margin'),
+			'margin': '0px',
 			'padding': '0px',
 			'border': '0px solid transparent',
 			'float': $this.css('float'),
@@ -110,10 +110,16 @@ function _Q_clickable(o) {
 			'vertical-align': $this.css('vertical-align'),
 			'text-align': $this.css('text-align')
 		}).addClass('Q_clickable_container')
-		.insertAfter($this);
+		$this.hide(); // to get percentage values, if any, for margins & padding
+		Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
+			$container.css('margin-'+pos, $this.css('margin-'+pos));
+		});
+		$this.show();
+		$this.css('margin', 0);
+		$container.insertAfter($this);
 		// $this.css('height', h);
 		if (display === 'inline') {
-			container.html('&nbsp;');
+			$container.html('&nbsp;');
 		}
 		if (!o.allowCallout) {
 			$this.css('-webkit-touch-callout', 'none');
@@ -121,7 +127,7 @@ function _Q_clickable(o) {
 		if (o.shadow && o.shadow.src) {
 			var shadow = $('<img />').addClass('Q_clickable_shadow')
 				.attr('src', Q.url(o.shadow.src));
-			shadow.css('display', 'none').appendTo(container).load(function () {
+			shadow.css('display', 'none').appendTo($container).load(function () {
 				var $this = $(this);
 				var width = csw * o.shadow.stretch;
 				var height = Math.min($this.height() * width / $this.width(), csh/2);
@@ -142,7 +148,7 @@ function _Q_clickable(o) {
 				$this.css(toSet);
 			});
 		}
-		var stretcher = $('<div class="Q_clickable_stretcher" />').css({
+		var $stretcher = $('<div class="Q_clickable_stretcher" />').css({
 			'position': 'absolute',
 			'left': '0px',
 			'top': '0px',
@@ -151,15 +157,15 @@ function _Q_clickable(o) {
 			'overflow': 'visible',
 			'padding': '0px',
 			'margin': '0px'
-		}).appendTo(container);
-		var triggers = stretcher;
+		}).appendTo($container);
+		var triggers = $stretcher;
 		var width = csw;
 		var height = csh;
-		var left = parseInt(container.css('left'));
-		var top = parseInt(container.css('top'));
+		var left = parseInt($container.css('left'));
+		var top = parseInt($container.css('top'));
 		var tw = $this.outerWidth();
 		var th = $this.outerHeight();
-		$this.appendTo(stretcher).css({
+		$this.appendTo($stretcher).css({
 			position: 'absolute',
 			left: '0px',
 			top: '0px'
@@ -169,13 +175,13 @@ function _Q_clickable(o) {
 		var zindex;
 		var anim = null;
 	
-		triggers = stretcher;
+		triggers = $stretcher;
 		if ($triggers && $triggers.length) {
 			if (!Q.info.isTouchscreen) {
 				$triggers.mouseenter(function () {
-					container.addClass('Q_hover');
+					$container.addClass('Q_hover');
 				}).mouseleave(function () {
-					container.removeClass('Q_hover');
+					$container.removeClass('Q_hover');
 				});
 			}
 			triggers = triggers.add($triggers);
@@ -201,7 +207,7 @@ function _Q_clickable(o) {
 				triggers[0].preventSelections(true);
 			}
 			zindex = $this.css('z-index');
-			container.css('z-index', 1000000);
+			$container.css('z-index', 1000000);
 			Q.handle(o.onPress, $this, [evt, triggers]);
 			state.animation = Q.Animation.play(function(x, y) {
 				scale(1 + y * (o.press.size-1));
@@ -211,7 +217,7 @@ function _Q_clickable(o) {
 			//	return false;
 			//});
 			var pos = null;
-			container.parents().each(function () {
+			$container.parents().each(function () {
 				var $t = $(this);
 				$t.data('Q/clickable scrollLeft', $t.scrollLeft());
 				$t.data('Q/clickable scrollTop', $t.scrollTop());
@@ -226,7 +232,7 @@ function _Q_clickable(o) {
 					extraInfo.toY
 				));
 				var scrolled = false;
-				container.parents().each(function () {
+				$container.parents().each(function () {
 					var $t = $(this);
 					if ($t.data('Q/clickable scrollLeft') != $t.scrollLeft()
 					|| $t.data('Q/clickable scrollTop') != $t.scrollTop()
@@ -260,7 +266,7 @@ function _Q_clickable(o) {
 				setTimeout(function () { 
 					_released = false;
 				}, 0);
-				container.parents().each(function () {
+				$container.parents().each(function () {
 					$(this).removeData(
 						['Q/clickable scrollTop',
 						 'Q/clickable scrollTop', 
@@ -295,7 +301,7 @@ function _Q_clickable(o) {
 						state.animation.onComplete.set(function () {
 							Q.handle(o.afterRelease, $this, [evt, overElement]);
 							$this.trigger('afterRelease', $this, evt, overElement);
-							container.css('z-index', zindex);
+							$container.css('z-index', zindex);
 							// $this.unbind('click.Q_clickable');
 							// $this.trigger('click');
 							state.animation = null;
@@ -315,7 +321,7 @@ function _Q_clickable(o) {
 					setTimeout(function () {
 						Q.handle(o.afterRelease, $this, [evt, overElement]);
 						$this.trigger('afterRelease', $this, evt, overElement);
-						container.css('z-index', zindex);
+						$container.css('z-index', zindex);
 						state.animation = null;
 					}, o.release.duration);
 				}
@@ -335,7 +341,7 @@ function _Q_clickable(o) {
 			function scale(factor) {
 				scale.factor = factor;
 				if (!Q.info.isIE(0, 8)) {
-					stretcher.css({
+					$stretcher.css({
 						'-moz-transform': 'scale('+factor+')',
 						'-webkit-transform': 'scale('+factor+')',
 						'-o-transform': 'scale('+factor+')',
@@ -344,7 +350,7 @@ function _Q_clickable(o) {
 					});
 				} else if (!scale.started) {
 					scale.started = true;
-					stretcher.css({
+					$stretcher.css({
 						left: width * (o.center.x - factor/2) * factor +'px',
 						top: height * (o.center.y - factor/2) * factor +'px',
 						zoom: factor
@@ -374,11 +380,11 @@ function _Q_clickable(o) {
 					if (!$this.is(':visible')) {
 						return;
 					}
-					container.css({
+					$container.css({
 						'width': csw,
 						'height': csh
 					});
-					stretcher.css({
+					$stretcher.css({
 						'width': csw+'px',
 						'height': csh+'px'
 					});
@@ -438,12 +444,12 @@ function _Q_clickable(o) {
 
 {
 	remove: function () {
-		var container = this.parent().parent();
+		var $container = this.parent().parent();
 		var state = this.state('Q/clickable');
-		this.attr('style', state.oldStyle || "").insertAfter(container);
+		this.attr('style', state.oldStyle || "").insertAfter($container);
 		this[0].restoreSelections();
 		Q.Pointer.onEnded.remove(state.onEndedKey);
-		container.remove();
+		$container.remove();
 	}
 }
 

@@ -80,13 +80,25 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	/**
 	 * @config $DEFAULTS['messageCount']
-	 * @type string
+	 * @type integer
 	 * @default 0
 	 * @final
 	 */
 	/**
-	 * @config $DEFAULTS['participantCount']
-	 * @type string
+	 * @config $DEFAULTS['invitedCount']
+	 * @type integer
+	 * @default 0
+	 * @final
+	 */
+	/**
+	 * @config $DEFAULTS['participatingCount']
+	 * @type integer
+	 * @default 0
+	 * @final
+	 */
+	/**
+	 * @config $DEFAULTS['leftCount']
+	 * @type integer
 	 * @default 0
 	 * @final
 	 */
@@ -100,7 +112,9 @@ class Streams_Stream extends Base_Streams_Stream
 		'writeLevel' => 10,
 		'adminLevel' => 20,
 		'messageCount' => 0,
-		'participantCount' => 0
+		'invitedCount' => 0,
+		'participatingCount' => 0,
+		'leftCount' => 0
 	);
 	
 	/**
@@ -122,8 +136,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {array} [$options=array()]
-	 *  @param {string|array} [$options.label] label or an array of labels for adding publisher's contacts
-	 *  @param {string|array} [$options.myLabel] label or an array of labels for adding logged-in user's contacts
+	 *  @param {string|array} [$options.addLabel] label or an array of labels for adding publisher's contacts
+	 *  @param {string|array} [$options.addMyLabel] label or an array of labels for adding logged-in user's contacts
 	 *  @param {integer} [$options.readLevel] => the read level to grant those who are invited
 	 *  @param {integer} [$options.writeLevel] => the write level to grant those who are invited
 	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited
@@ -946,21 +960,9 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!empty($this->closedTime) and !$this->testWriteLevel('close')) {
 			return false;
 		}
-		if (!is_numeric($level)) {
-			$level = isset(Streams::$READ_LEVEL[$level])
-				? Streams::$READ_LEVEL[$level]
-				: null;
-			if (!isset($level)) {
-				throw new Q_Exception_WrongValue(
-					array(
-						'field' => 'level', 
-						'range' => 'one of: ' . implode(', ', array_keys(Streams::$READ_LEVEL))
-					)
-				);
-			}
-		}
+		$numeric = Streams_Stream::numericReadLevel($level);
 		$readLevel = $this->get('readLevel', 0);
-		if ($readLevel >= 0 and $readLevel >= $level) {
+		if ($readLevel >= 0 and $readLevel >= $numeric) {
 			return true;
 		}
 		$readLevel_source = $this->get('readLevel_source', 0);
@@ -972,7 +974,7 @@ class Streams_Stream extends Base_Streams_Stream
 			return false;
 		}
 		$readLevel = $this->get('readLevel', 0);
-		if ($readLevel >= 0 and $readLevel >= $level) {
+		if ($readLevel >= 0 and $readLevel >= $numeric) {
 			return true;
 		}
 		return false;
@@ -987,7 +989,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @throws {Q_Exception_WrongValue}
 	 *	If string is not referring to Streams::$WRITE_LEVEL
 	 */
-	function testWriteLevel($level)
+	function testWriteLevel($level, &$numeric)
 	{
 		if ($this->publishedByFetcher) {
 			return true;
@@ -995,21 +997,9 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!empty($this->closedTime) and $level !== 'close' and !$this->testWriteLevel('close')) {
 			return false;
 		}
-		if (!is_numeric($level)) {
-			$level = isset(Streams::$WRITE_LEVEL[$level])
-				? Streams::$WRITE_LEVEL[$level]
-				: null;
-			if (!isset($level)) {
-				throw new Q_Exception_WrongValue(
-					array(
-						'field' => 'level', 
-						'range' => 'one of: ' . implode(', ', array_keys(Streams::$WRITE_LEVEL))
-					)
-				);
-			}
-		}
+		$numeric = Streams_Stream::numericWriteLevel($level);
 		$writeLevel = $this->get('writeLevel', 0);
-		if ($writeLevel >= 0 and $writeLevel >= $level) {
+		if ($writeLevel >= 0 and $writeLevel >= $numeric) {
 			return true;
 		}
 		$writeLevel_source = $this->get('writeLevel_source', 0);
@@ -1021,7 +1011,7 @@ class Streams_Stream extends Base_Streams_Stream
 			return false;
 		}
 		$writeLevel = $this->get('writeLevel', 0);
-		if ($writeLevel >= 0 and $writeLevel >= $level) {
+		if ($writeLevel >= 0 and $writeLevel >= $numeric) {
 			return true;
 		}
 		return false;
@@ -1044,23 +1034,9 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!empty($this->closedTime) and !$this->testWriteLevel('close')) {
 			return false;
 		}
-
-		if (!is_numeric($level)) {
-			$level = isset(Streams::$ADMIN_LEVEL[$level])
-				? Streams::$ADMIN_LEVEL[$level]
-				: null;
-			if (!isset($level)) {
-				throw new Q_Exception_WrongValue(
-					array(
-						'field' => 'level', 
-						'range' => 'one of: ' . implode(', ', array_keys(Streams::$ADMIN_LEVEL))
-					)
-				);
-			}
-		}
-
+		$numeric = Streams_Stream::numericAdminLevel($level);
 		$adminLevel = $this->get('adminLevel', 0);
-		if ($adminLevel >= 0 and $adminLevel >= $level) {
+		if ($adminLevel >= 0 and $adminLevel >= $numeric) {
 			return true;
 		}
 		if (!$this->inheritAccess()) {
@@ -1072,7 +1048,7 @@ class Streams_Stream extends Base_Streams_Stream
 			return false;
 		}
 		$adminLevel = $this->get('adminLevel', 0);
-		if ($adminLevel >= 0 and $adminLevel >= $level) {
+		if ($adminLevel >= 0 and $adminLevel >= $numeric) {
 			return true;
 		}
 		return false;
@@ -1645,7 +1621,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} $asUserId=null
 	 *	The id of the user from whose point of view the access should be calculated.
 	 *  If this matches the publisherId, just sets full access and calls publishedByFetcher(true).
-	 *  If this is '', only returns the streams anybody can see.
+	 *  If this is '', only preloads the streams anybody can see.
 	 *  If this is null, the logged-in user's id is used, or '' if no one is logged in
 	 */
 	function addPreloaded($asUserId=null)
@@ -1719,6 +1695,69 @@ class Streams_Stream extends Base_Streams_Stream
 			'name' => $this->name
 		));
 		return Q_Uri::from($uriString)->toUrl();
+	}
+
+	/**
+	 * @method numericReadLevel
+	 * @static
+	 * @param {integer|string} $level
+	 * @return integer
+	 * @throws Q_Exception_WrongValue
+	 */
+	static function numericReadLevel($level)
+	{
+		if (is_numeric($level)) {
+			return $level;
+		}
+		if (isset(Streams::$READ_LEVEL[$level])) {
+			return Streams::$READ_LEVEL[$level];
+		}
+		throw new Q_Exception_WrongValue(array(
+			'field' => 'level',
+			'range' => 'one of: ' . implode(', ', array_keys(Streams::$READ_LEVEL))
+		));
+	}
+
+	/**
+	 * @method numericWriteLevel
+	 * @static
+	 * @param {integer|string} $level
+	 * @return integer
+	 * @throws Q_Exception_WrongValue
+	 */
+	static function numericWriteLevel($level)
+	{
+		if (is_numeric($level)) {
+			return $level;
+		}
+		if (isset(Streams::$WRITE_LEVEL[$level])) {
+			return Streams::$WRITE_LEVEL[$level];
+		}
+		throw new Q_Exception_WrongValue(array(
+			'field' => 'level',
+			'range' => 'one of: ' . implode(', ', array_keys(Streams::$WRITE_LEVEL))
+		));
+	}
+
+	/**
+	 * @method numericAdminLevel
+	 * @static
+	 * @param {integer|string} $level
+	 * @return integer
+	 * @throws Q_Exception_WrongValue
+	 */
+	static function numericAdminLevel($level)
+	{
+		if (is_numeric($level)) {
+			return $level;
+		}
+		if (isset(Streams::$ADMIN_LEVEL[$level])) {
+			return Streams::$ADMIN_LEVEL[$level];
+		}
+		throw new Q_Exception_WrongValue(array(
+			'field' => 'level',
+			'range' => 'one of: ' . implode(', ', array_keys(Streams::$ADMIN_LEVEL))
+		));
 	}
 	
 	/**

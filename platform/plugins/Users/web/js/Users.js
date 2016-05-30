@@ -481,7 +481,7 @@ and 'used' is "native", or the name of the provider used, such as "facebook".
  *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
  *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with provider = "using" option
  *  @param {String} [options.scope="email,publish_stream"] permissions to request from the authentication provider
- *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
+ *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
  */
 Users.login = function(options) {
 
@@ -879,6 +879,7 @@ Users.importContacts = function(provider)
  * @param {Object} [options] You can pass several options here
  *  It is passed the user information if the user changed.
  *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
+ *  @param {String} [options.userId] You can set this to the id of a user in the database who doesn't have any email or mobile number set yet. This can happen if the user was e.g. invited via a printed invitation and lost it, and allows someone to help set up the first identifier for that user.
  *  @param {Q.Event} [options.onSuccess] event that occurs on success
  *  @param {Q.Event} [options.onCancel] event that occurs if the dialog is canceled
  *  @param {Function} [options.onResult] event that occurs before either onSuccess or onCancel
@@ -1485,12 +1486,12 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 		beforeLoad: function()
 		{
 			$('#Users_login_step1').css('opacity', 1).nextAll().hide();
-			$('input', dialog).val('');
+			$('input[type!=hidden]', dialog).val('');
 		},
 		onActivate: function()
 		{
 			dialog.plugin('Q/placeholders');
-			$('input', dialog).eq(0).val('').plugin('Q/clickfocus');
+			$('input[type!=hidden]', dialog).eq(0).val('').plugin('Q/clickfocus');
 		},
 		onClose: function()
 		{
@@ -1602,6 +1603,13 @@ function setIdentifier_setupDialog(identifierType, options) {
 		event.preventDefault();
 		return;
 	});
+	if (options.userId) {
+		step1_form.append($('<input />').attr({
+			type: "hidden",
+			name: "userId",
+			value: options.userId
+		}));
+	}
 	step1_form.validator();
 	
 	var dialog = $('<div id="Users_setIdentifier_dialog" class="Users_setIdentifier_dialog" />');
@@ -1615,12 +1623,12 @@ function setIdentifier_setupDialog(identifierType, options) {
 		alignByParent: true,
 		beforeLoad: function()
 		{
-			$('input', dialog).val('');
+			$('input[type!=hidden]', dialog).val('');
 		},
 		onActivate: function()
 		{
 			dialog.plugin('Q/placeholders');
-			$('input', dialog).eq(0).val('').plugin('Q/clickfocus');
+			$('input[type!=hidden]', dialog).eq(0).val('').plugin('Q/clickfocus');
 		},
 		onClose: function()
 		{

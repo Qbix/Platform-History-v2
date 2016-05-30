@@ -7,4 +7,8 @@ function Places_before_Q_responseExtras()
 	if ($key = Q_Config::get('Places', 'google', 'keys', 'web', null)) {
 		Q_Response::setScriptData("Q.Places.loadGoogleMaps.key", $key);
 	}
+	$miles = Q_Config::expect('Places', 'nearby', 'miles');
+	Q_Response::setScriptData("Q.Places.nearby.miles", $miles);
+	$defaultMiles = Q_Config::expect('Places', 'nearby', 'defaultMiles');
+	Q_Response::setScriptData("Q.Places.nearby.defaultMiles", $defaultMiles);
 }

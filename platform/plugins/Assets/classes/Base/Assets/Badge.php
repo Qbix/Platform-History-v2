@@ -232,7 +232,7 @@ abstract class Base_Assets_Badge extends Db_Row
 	 * Returns schema information for app column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_app()
+	static function column_app()
 	{
 
 return array (
@@ -286,7 +286,7 @@ return array (
 	 * Returns schema information for name column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_name()
+	static function column_name()
 	{
 
 return array (
@@ -340,7 +340,7 @@ return array (
 	 * Returns schema information for title column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_title()
+	static function column_title()
 	{
 
 return array (
@@ -394,7 +394,7 @@ return array (
 	 * Returns schema information for pic_small column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_pic_small()
+	static function column_pic_small()
 	{
 
 return array (
@@ -448,7 +448,7 @@ return array (
 	 * Returns schema information for pic_big column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_pic_big()
+	static function column_pic_big()
 	{
 
 return array (
@@ -502,7 +502,7 @@ return array (
 	 * Returns schema information for points column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_points()
+	static function column_points()
 	{
 
 return array (

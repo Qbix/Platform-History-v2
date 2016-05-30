@@ -233,7 +233,7 @@ abstract class Base_Users_Vote extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -287,7 +287,7 @@ return array (
 	 * Returns schema information for forType column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_forType()
+	static function column_forType()
 	{
 
 return array (
@@ -341,7 +341,7 @@ return array (
 	 * Returns schema information for forId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_forId()
+	static function column_forId()
 	{
 
 return array (
@@ -373,7 +373,7 @@ return array (
 	 * Returns schema information for value column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_value()
+	static function column_value()
 	{
 
 return array (
@@ -405,7 +405,7 @@ return array (
 	 * Returns schema information for weight column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_weight()
+	static function column_weight()
 	{
 
 return array (
@@ -453,7 +453,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (

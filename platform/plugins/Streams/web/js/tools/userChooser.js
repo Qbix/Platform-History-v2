@@ -31,7 +31,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	var input = $('input', element);
 	var cached = {};
 	var focusedResults = false;
-	var results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
+	var $results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
 		.css({
 			display: 'none',
 			position: 'absolute',
@@ -49,15 +49,15 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	var t = null;
 	element.on('Q-closingOverlay', function() {
 		input.blur();
-		results.remove();
+		$results.remove();
 	});
 	input.on('blur', function (event) {
 		setTimeout(function () {
 			if (!focusedResults) {
-				results.remove();
+				$results.remove();
 			} else {
 				$(document).one('mouseup', function () {
-					results.remove();
+					$results.remove();
 				});
 			}
 			focusedResults = false;
@@ -69,7 +69,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 		var query = input.val();
 
-		var cur = $('.Q_selected', results);
+		var cur = $('.Q_selected', $results);
 
 		switch (event.keyCode) {
 			case 38: // up arrow
@@ -78,9 +78,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				var prev = cur.prev();
 				if (!prev.length) {
-					prev = results.children().last();
+					prev = $results.children().last();
 				}
-				results.children().removeClass('Q_selected');
+				$results.children().removeClass('Q_selected');
 				prev.addClass('Q_selected');
 				return false;
 			case 40: // down arrow
@@ -89,9 +89,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				var next = cur.next();
 				if (!next.length) {
-					next = results.children().first();
+					next = $results.children().first();
 				}
-				results.children().removeClass('Q_selected');
+				$results.children().removeClass('Q_selected');
 				next.addClass('Q_selected');
 				return false;
 			case 13: // enter
@@ -107,7 +107,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					return;
 				}
 				if (!query) {
-					results.remove();
+					$results.remove();
 					return;
 				}
 				input.css({
@@ -130,9 +130,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				return; // silently return
 			}
 			if (Q.isEmpty(avatars)) {
-				return results.remove();
+				return $results.remove();
 			}
-			results.empty();
+			$results.empty();
 			var show = 0;
 			for (var k in avatars) {
 				if (k in me.exclude && me.exclude[k]) {
@@ -145,10 +145,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				).append(
 					$('<span />').html(avatars[k].displayName())
 				).mouseenter(function () {
-					$('*', results).removeClass('Q_selected');
+					$('*', $results).removeClass('Q_selected');
 					$(this).addClass('Q_selected');
 				}).mouseleave(function () {
-					$('*', results).removeClass('Q_selected');
+					$('*', $results).removeClass('Q_selected');
 					$(this).addClass('Q_selected');
 				}).mouseup(function () {
 					onChoose($(this));
@@ -156,20 +156,20 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				.data('avatar', avatars[k])
 				.on('mousedown focusin', function () {
 					focusedResults = true;
-				}).appendTo(results);
+				}).appendTo($results);
 				if (!show) {
 					result.addClass('Q_selected');
 				}
 				++show;
 			}
 			if (show) {
-				results.css({
+				$results.css({
 					left: input.offset().left + 'px',
 					top: input.offset().top + input.outerHeight() + 'px',
 					width: input.outerWidth()
 				}).appendTo('body').show();
 			} else {
-				results.remove();
+				$results.remove();
 			}
 		}
 	}

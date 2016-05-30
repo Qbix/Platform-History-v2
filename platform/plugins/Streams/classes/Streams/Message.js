@@ -38,7 +38,7 @@ Q.mixin(Streams_Message, Base_Streams_Message);
 
 Streams_Message.defined = {};
 
-Streams_Message.construct = function Streams_Message_construct(fields) {
+Streams_Message.construct = function Streams_Message_construct(fields, retrieved) {
 	if (Q.isEmpty(fields)) {
 		Q.handle(callback, this, ["Streams.Message constructor: fields are missing"]);
 		return false;
@@ -59,7 +59,12 @@ Streams_Message.construct = function Streams_Message_construct(fields) {
 		};
 		Q.mixin(MC, Streams_Message);
 	}
-	return new MC(fields);
+	var message = new MC(fields);
+	if (retrieved) {
+		message.retrieved = true;
+		message._fieldsModified = {};
+	}
+	return message;
 };
 
 /**
@@ -157,12 +162,12 @@ Streams_Message.post = function (fields, callback)
 	var query = 
 	 " START TRANSACTION;"
 	+"		SELECT messageCount"
-	+"		  FROM streams_stream"
+	+"		  FROM {$prefix}stream"
 	+"		  WHERE publisherId = ?"
 	+"		  AND name = ?"
 	+"		  INTO @Streams_messageCount"
 	+"        FOR UPDATE;"
-	+"		INSERT INTO streams_message("
+	+"		INSERT INTO {$prefix}message("
 	+"			publisherId, streamName, byUserId, byClientId, sentTime, "
 	+"			type, content, instructions, weight, ordinal"
 	+"		)"
@@ -170,25 +175,25 @@ Streams_Message.post = function (fields, callback)
 	+"			?, ?, ?, ?, CURRENT_TIMESTAMP,"
 	+"			?, ?, ?, ?, @Streams_messageCount+1"
 	+"		);"
-	+"		INSERT INTO streams_total("
+	+"		INSERT INTO {$prefix}total("
 	+"			publisherId, streamName, messageType, messageCount"
 	+"		)"
 	+"		VALUES("
 	+"			?, ?, ?, @Streams_messageCount+1"
 	+"		)"
 	+"		ON DUPLICATE KEY UPDATE messageCount = messageCount+1;"
-	+"		UPDATE streams_stream"
+	+"		UPDATE {$prefix}stream"
 	+"		  SET messageCount = @Streams_messageCount+1"
 	+"		  WHERE publisherId = ?"
 	+"		  AND name = ?;"
-	+"		SELECT * FROM streams_stream"
+	+"		SELECT * FROM {$prefix}stream"
 	+"		  WHERE publisherId = ?"
 	+"		  AND name = ?;"
-	+"		SELECT * FROM streams_message"
+	+"		SELECT * FROM {$prefix}message"
 	+"		  WHERE publisherId = ?"
 	+"		  AND streamName = ?"
 	+"		  AND ordinal = @Streams_messageCount+1;"
-	+" COMMIT;"
+	+" COMMIT;";
 	var values = [
 		f.publisherId, f.streamName,
 		f.publisherId, f.streamName, f.byUserId, f.byClientId,
@@ -206,7 +211,7 @@ Streams_Message.post = function (fields, callback)
 			return callback && callback(err);
 		}
 		var results = params[""][1];
-		var stream = Streams.Stream.construct(results[5][0]);
+		var stream = Streams.Stream.construct(results[5][0], true);
 		var message = Streams.Message.construct(results[6][0]);
 		Streams.Stream.emit('post', stream, f.byUserId, message, stream);
 		callback && callback.call(stream, null, f.byUserId, message);

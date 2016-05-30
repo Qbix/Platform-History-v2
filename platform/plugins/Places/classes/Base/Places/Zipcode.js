@@ -273,7 +273,7 @@ Base.prototype.maxSize_countryCode = function () {
 	 * Returns schema information for countryCode column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_countryCode = function () {
+Base.column_countryCode = function () {
 
 return [["varchar","2","",false],false,"MUL",null];
 };
@@ -311,7 +311,7 @@ Base.prototype.maxSize_zipcode = function () {
 	 * Returns schema information for zipcode column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_zipcode = function () {
+Base.column_zipcode = function () {
 
 return [["varchar","10","",false],false,"",null];
 };
@@ -349,7 +349,7 @@ Base.prototype.maxSize_placeName = function () {
 	 * Returns schema information for placeName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_placeName = function () {
+Base.column_placeName = function () {
 
 return [["varchar","180","",false],false,"",null];
 };
@@ -387,7 +387,7 @@ Base.prototype.maxSize_stateName = function () {
 	 * Returns schema information for stateName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_stateName = function () {
+Base.column_stateName = function () {
 
 return [["varchar","100","",false],false,"",null];
 };
@@ -425,7 +425,7 @@ Base.prototype.maxSize_state = function () {
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_state = function () {
+Base.column_state = function () {
 
 return [["varchar","20","",false],false,"",null];
 };
@@ -463,7 +463,7 @@ Base.prototype.maxSize_regionName = function () {
 	 * Returns schema information for regionName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_regionName = function () {
+Base.column_regionName = function () {
 
 return [["varchar","100","",false],false,"",null];
 };
@@ -501,7 +501,7 @@ Base.prototype.maxSize_region = function () {
 	 * Returns schema information for region column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_region = function () {
+Base.column_region = function () {
 
 return [["varchar","20","",false],false,"",null];
 };
@@ -539,7 +539,7 @@ Base.prototype.maxSize_community = function () {
 	 * Returns schema information for community column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_community = function () {
+Base.column_community = function () {
 
 return [["varchar","100","",false],false,"",null];
 };
@@ -563,7 +563,7 @@ Base.prototype.beforeSet_latitude = function (value) {
 	 * Returns schema information for latitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_latitude = function () {
+Base.column_latitude = function () {
 
 return [["double","100","",false],false,"MUL",null];
 };
@@ -587,7 +587,7 @@ Base.prototype.beforeSet_longitude = function (value) {
 	 * Returns schema information for longitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_longitude = function () {
+Base.column_longitude = function () {
 
 return [["double","100","",false],false,"MUL",null];
 };
@@ -622,7 +622,7 @@ Base.prototype.maxSize_accuracy = function () {
 	 * Returns schema information for accuracy column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_accuracy = function () {
+Base.column_accuracy = function () {
 
 return [["int","11","",false],false,"",null];
 };

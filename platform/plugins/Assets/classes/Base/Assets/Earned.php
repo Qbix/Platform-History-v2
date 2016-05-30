@@ -225,7 +225,7 @@ abstract class Base_Assets_Earned extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -279,7 +279,7 @@ return array (
 	 * Returns schema information for app column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_app()
+	static function column_app()
 	{
 
 return array (
@@ -333,7 +333,7 @@ return array (
 	 * Returns schema information for badge_name column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_badge_name()
+	static function column_badge_name()
 	{
 
 return array (
@@ -378,7 +378,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -432,7 +432,7 @@ return array (
 	 * Returns schema information for associated_id column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_associated_id()
+	static function column_associated_id()
 	{
 
 return array (

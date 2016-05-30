@@ -68,6 +68,10 @@ Q.mixin(Base, Row);
  * @property {integer}
  * @type adminLevel
  */
+/**
+ * @property {String}
+ * @type permissions
+ */
 
 /**
  * This method calls Db.connect() using information stored in the configuration.
@@ -234,7 +238,8 @@ Base.prototype.fieldNames = function () {
 		"updatedTime",
 		"readLevel",
 		"writeLevel",
-		"adminLevel"
+		"adminLevel",
+		"permissions"
 	];
 };
 
@@ -271,7 +276,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_publisherId = function () {
+Base.column_publisherId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -309,7 +314,7 @@ Base.prototype.maxSize_streamName = function () {
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_streamName = function () {
+Base.column_streamName = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -347,7 +352,7 @@ Base.prototype.maxSize_ofUserId = function () {
 	 * Returns schema information for ofUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_ofUserId = function () {
+Base.column_ofUserId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -385,7 +390,7 @@ Base.prototype.maxSize_ofContactLabel = function () {
 	 * Returns schema information for ofContactLabel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_ofContactLabel = function () {
+Base.column_ofContactLabel = function () {
 
 return [["varchar","255","",false],false,"PRI",""];
 };
@@ -421,7 +426,7 @@ Base.prototype.maxSize_grantedByUserId = function () {
 	 * Returns schema information for grantedByUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_grantedByUserId = function () {
+Base.column_grantedByUserId = function () {
 
 return [["varchar","31","",false],true,"",null];
 };
@@ -442,7 +447,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -464,7 +469,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","31","",false],true,"",null];
 };
@@ -499,7 +504,7 @@ Base.prototype.maxSize_readLevel = function () {
 	 * Returns schema information for readLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_readLevel = function () {
+Base.column_readLevel = function () {
 
 return [["int","11","",false],false,"","0"];
 };
@@ -534,7 +539,7 @@ Base.prototype.maxSize_writeLevel = function () {
 	 * Returns schema information for writeLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_writeLevel = function () {
+Base.column_writeLevel = function () {
 
 return [["int","11","",false],false,"","0"];
 };
@@ -569,9 +574,45 @@ Base.prototype.maxSize_adminLevel = function () {
 	 * Returns schema information for adminLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_adminLevel = function () {
+Base.column_adminLevel = function () {
 
 return [["int","11","",false],false,"","0"];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_permissions
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_permissions = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a string to '+this.table()+".permissions");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_permissions = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_permissions = function () {
+
+return [["varchar","1023","",false],true,"",null];
 };
 
 /**

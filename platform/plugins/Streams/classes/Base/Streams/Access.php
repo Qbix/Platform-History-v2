@@ -24,6 +24,7 @@
  * @property {integer} $readLevel
  * @property {integer} $writeLevel
  * @property {integer} $adminLevel
+ * @property {string} $permissions
  */
 abstract class Base_Streams_Access extends Db_Row
 {
@@ -66,6 +67,10 @@ abstract class Base_Streams_Access extends Db_Row
 	/**
 	 * @property $adminLevel
 	 * @type {integer}
+	 */
+	/**
+	 * @property $permissions
+	 * @type {string}
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -254,7 +259,7 @@ abstract class Base_Streams_Access extends Db_Row
 	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_publisherId()
+	static function column_publisherId()
 	{
 
 return array (
@@ -308,7 +313,7 @@ return array (
 	 * Returns schema information for streamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_streamName()
+	static function column_streamName()
 	{
 
 return array (
@@ -362,7 +367,7 @@ return array (
 	 * Returns schema information for ofUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_ofUserId()
+	static function column_ofUserId()
 	{
 
 return array (
@@ -416,7 +421,7 @@ return array (
 	 * Returns schema information for ofContactLabel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_ofContactLabel()
+	static function column_ofContactLabel()
 	{
 
 return array (
@@ -470,7 +475,7 @@ return array (
 	 * Returns schema information for grantedByUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_grantedByUserId()
+	static function column_grantedByUserId()
 	{
 
 return array (
@@ -515,7 +520,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -563,7 +568,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -617,7 +622,7 @@ return array (
 	 * Returns schema information for readLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_readLevel()
+	static function column_readLevel()
 	{
 
 return array (
@@ -671,7 +676,7 @@ return array (
 	 * Returns schema information for writeLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_writeLevel()
+	static function column_writeLevel()
 	{
 
 return array (
@@ -725,7 +730,7 @@ return array (
 	 * Returns schema information for adminLevel column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_adminLevel()
+	static function column_adminLevel()
 	{
 
 return array (
@@ -739,6 +744,60 @@ return array (
   1 => false,
   2 => '',
   3 => '0',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (!isset($value)) {
+			return array('permissions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('permissions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
+		return array('permissions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+	function maxSize_permissions()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_permissions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -774,7 +833,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'streamName', 'ofUserId', 'ofContactLabel', 'grantedByUserId', 'insertedTime', 'updatedTime', 'readLevel', 'writeLevel', 'adminLevel');
+		$field_names = array('publisherId', 'streamName', 'ofUserId', 'ofContactLabel', 'grantedByUserId', 'insertedTime', 'updatedTime', 'readLevel', 'writeLevel', 'adminLevel', 'permissions');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

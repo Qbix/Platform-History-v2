@@ -170,7 +170,7 @@ Sp.removePermission = function (permission) {
 
 Q.mixin(Streams_Stream, Q.require('Base/Streams/Stream'));
 
-Streams_Stream.construct = function Streams_Stream_construct(fields) {
+Streams_Stream.construct = function Streams_Stream_construct(fields, retrieved) {
 	if (Q.isEmpty(fields)) {
 		return false;
 	}
@@ -190,7 +190,12 @@ Streams_Stream.construct = function Streams_Stream_construct(fields) {
 		};
 		Q.mixin(SC, Streams_Stream);
 	}
-	return new SC(fields);
+	var stream = new SC(fields);
+	if (retrieved) {
+		stream.retrieved = true;
+		stream._fieldsModified = {};
+	}
+	return stream;
 };
 
 Streams_Stream.define = Streams.define;
@@ -230,26 +235,6 @@ Streams_Stream.getConfigField = function (type, field, def, merge)
 Sp.setUp = function () {
 	// put any code here
 };
-
-/**
- * Updates a field using an arithmetic expression
- * @method updateField
- * @private
- * @param {string} field
- *	The name of the field to update
- * @param {string} expr
- *	Will be wrapped in a Db.Expression
- * @param {function} callback=null
- *	Callback receives error and result as arguments
- */
-function updateField (field, expr, callback) {
-	var o = {};
-	o[field] = new Db.Expression(expr);
-	Q.require('Streams').Stream.UPDATE().where({
-		publisherId: this.fields.publisherId,
-		name: this.fields.name
-	}).set(o).execute(callback);
-}
 
 /**
  * Verifies wheather Stream can be handled. Can be called syncronously and in such case skips
@@ -360,23 +345,21 @@ Sp.getSubscriptionTemplate = function(className, userId, callback) {
 };
 
 /**
- * Increase participant count for the stream
- * @method incParticipants
- * @param callback=null {function}
+ * Update the participant counts
+ * @method updateParticipantCounts
+ * @param {String} newState
+ * @param {String} prevState
+ * @param {Function} [callback=null]
  *	Callback receives "error" and "result" as arguments
  */
-Sp.incParticipants = function (callback) {
-	updateField.call(this, 'participantCount', "participantCount + 1", callback);
-};
-
-/**
- * Decrease participant count for the stream
- * @method decParticipants
- * @param callback=null {function}
- *	Callback receives "error" and "result" as arguments
- */
-Sp.decParticipants = function (callback) {
-	updateField.call(this, 'participantCount', "participantCount - 1", callback);
+Sp.updateParticipantCounts = function (newState, prevState, callback) {
+	if (prevState) {
+		this.fields[prevState+'Count'] = new Db.Expression(prevState+'Count - 1');
+	}
+	this.fields[newState+'Count'] = new Db.Expression(newState+'Count + 1');
+	this.save(function () {
+		this.retrieve('*', true, callback);
+	});
 };
 
 /**
@@ -850,9 +833,9 @@ Sp.join = function(options, callback) {
 			function _afterSaveParticipant(err) {
 				if (err) return callback.call(stream, err);
 				Streams.emitToUser(userId, 'join', sp.fillMagicFields().getFields());
-				stream.incParticipants(/* empty callback*/);
 				
 				var f = sp.fields;
+				stream.updateParticipantCounts('participating', f.state);
 				stream.post(userId, {
 					type: type,
 					instructions: JSON.stringify({
@@ -893,17 +876,17 @@ Sp.leave = function(options, callback) {
  * Subscribe to the stream's messages<br/>
  *	If options are not given check the subscription templates:
  *	<ol>
- *		<li>1. exact stream name and exact user id</li>
- *		<li>2. generic stream name and exact user id</li>
- *		<li>3. exact stream name and generic user</li>
- *		<li>4. generic stream name and generic user</li>
+ *		<li>exact stream name and exact user id</li>
+ *		<li>generic stream name and exact user id</li>
+ *		<li>exact stream name and generic user</li>
+ *		<li>generic stream name and generic user</li>
  *	</ol>
  *	default is to subscribe to ALL messages.<br/>
  *	If options supplied - skip templates and use options<br/><br/>
  * Using subscribe if subscription is already active will modify existing
  * subscription - change type(s) or modify notifications
  * @method subscribe
- * @param options={} {object}
+ * @param {object} [options={}]
  * @param {Array} [options.types] array of message types, if this is empty then subscribes to all types
  * @param {integer} [options.notifications=0] limit number of notifications, 0 means no limit
  * @param {datetime} [options.untilTime=null] time limit, if any for subscription

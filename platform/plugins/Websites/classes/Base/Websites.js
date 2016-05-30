@@ -27,7 +27,8 @@ module.exports = Base;
  * @type array
  */
 Base.tableClasses = [
-	
+	"Websites_Article",
+	"Websites_Permalink"
 ];
 
 /**
@@ -48,3 +49,17 @@ Base.db = function () {
 Base.connectionName = function() {
 	return 'Websites';
 };
+
+/**
+ * Link to Websites.Article model
+ * @property Article
+ * @type Websites.Article
+ */
+Base.Article = Q.require('Websites/Article');
+
+/**
+ * Link to Websites.Permalink model
+ * @property Permalink
+ * @type Websites.Permalink
+ */
+Base.Permalink = Q.require('Websites/Permalink');

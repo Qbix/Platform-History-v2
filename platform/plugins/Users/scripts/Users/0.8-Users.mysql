@@ -4,19 +4,19 @@
 DROP TABLE IF EXISTS `{$prefix}app_user`;
 
 CREATE TABLE `{$prefix}app_user` (
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `provider` enum('native','facebook','twitter','google','yahoo') COLLATE utf8_unicode_ci NOT NULL,
-  `appId` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `provider` enum('native','facebook','twitter','google','yahoo')  NOT NULL,
+  `appId` varchar(200)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `access_token` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'The OAuth access token',
+  `access_token` varchar(1023)  DEFAULT NULL COMMENT 'The OAuth access token',
   `session_secret` varchar(1023) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `session_expires` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `state` enum('visited','added','removed') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'visited',
-  `provider_uid` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `session_expires` varchar(255)  DEFAULT NULL,
+  `state` enum('visited','added','removed')  NOT NULL DEFAULT 'visited',
+  `provider_uid` varchar(200)  NOT NULL,
   PRIMARY KEY (`userId`,`provider`,`appId`),
   UNIQUE KEY `provider` (`provider`,`appId`,`provider_uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a user in our 3rd party app with a provider like facebook';
 
 # Dump of table {$prefix}contact
 # ------------------------------------------------------------
@@ -24,13 +24,13 @@ CREATE TABLE `{$prefix}app_user` (
 DROP TABLE IF EXISTS `{$prefix}contact`;
 
 CREATE TABLE `{$prefix}contact` (
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `label` varchar(63) COLLATE utf8_unicode_ci NOT NULL,
-  `contactUserId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `nickname` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `label` varchar(63)  NOT NULL,
+  `contactUserId` varchar(31)  NOT NULL DEFAULT '',
+  `nickname` varchar(255)  NOT NULL DEFAULT '',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`userId`,`label`,`contactUserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents user contacts in the system';
 
 # Dump of table {$prefix}device
 # ------------------------------------------------------------
@@ -38,16 +38,16 @@ CREATE TABLE `{$prefix}contact` (
 DROP TABLE IF EXISTS `{$prefix}device`;
 
 CREATE TABLE `{$prefix}device` (
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `deviceId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `platform` enum('ios','android') COLLATE utf8_unicode_ci NOT NULL,
-  `version` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sessionId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `formFactor` enum('mobile','tablet') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `userId` varchar(31)  NOT NULL,
+  `deviceId` varchar(255)  NOT NULL,
+  `platform` enum('ios','android')  NOT NULL,
+  `version` varchar(45)  DEFAULT NULL,
+  `sessionId` varchar(255)  NOT NULL,
+  `formFactor` enum('mobile','tablet')  DEFAULT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userId`,`deviceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents devices that can receive push notifications, etc.';
 
 # Dump of table {$prefix}email
 # ------------------------------------------------------------
@@ -55,14 +55,14 @@ CREATE TABLE `{$prefix}device` (
 DROP TABLE IF EXISTS `{$prefix}email`;
 
 CREATE TABLE `{$prefix}email` (
-  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `state` enum('unverified','active','suspended','unsubscribed') COLLATE utf8_unicode_ci NOT NULL,
-  `activationCode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL,
+  `activationCode` varchar(255)  NOT NULL,
   `activationCodeExpires` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `authCode` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Used in all links sent by email, to authenticate the source',
+  `authCode` varchar(255)  NOT NULL COMMENT 'Used in all links sent by email, to authenticate the source',
   PRIMARY KEY (`address`),
   UNIQUE KEY `address` (`address`),
   KEY `updatedTime` (`updatedTime`),
@@ -75,13 +75,13 @@ CREATE TABLE `{$prefix}email` (
 DROP TABLE IF EXISTS `{$prefix}external_from`;
 
 CREATE TABLE `{$prefix}external_from` (
-  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `xid` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'The external user id',
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
+  `publisherId` varchar(31)  NOT NULL,
+  `xid` varchar(31)  NOT NULL COMMENT 'The external user id',
+  `userId` varchar(31)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `nickname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nickname` varchar(255)  NOT NULL,
   PRIMARY KEY (`publisherId`,`xid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores external ids for users';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Stores external ids for users';
 
 # Dump of table {$prefix}external_to
 # ------------------------------------------------------------
@@ -89,12 +89,12 @@ CREATE TABLE `{$prefix}external_from` (
 DROP TABLE IF EXISTS `{$prefix}external_to`;
 
 CREATE TABLE `{$prefix}external_to` (
-  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `xid` varchar(31) COLLATE utf8_unicode_ci NOT NULL COMMENT 'The external user id',
+  `publisherId` varchar(31)  NOT NULL,
+  `userId` varchar(31)  NOT NULL,
+  `xid` varchar(31)  NOT NULL COMMENT 'The external user id',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`publisherId`,`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores external ids for users';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Stores external ids for users';
 
 # Dump of table {$prefix}identify
 # ------------------------------------------------------------
@@ -102,9 +102,9 @@ CREATE TABLE `{$prefix}external_to` (
 DROP TABLE IF EXISTS `{$prefix}identify`;
 
 CREATE TABLE `{$prefix}identify` (
-  `identifier` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `state` enum('verified','future') COLLATE utf8_unicode_ci NOT NULL COMMENT '"future" is a mapping to a user which may later be adopted by someone',
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
+  `identifier` varchar(255)  NOT NULL,
+  `state` enum('verified','future')  NOT NULL COMMENT '"future" is a mapping to a user which may later be adopted by someone',
+  `userId` varchar(31)  NOT NULL,
   PRIMARY KEY (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Mapping table for finding users based on various info';
 
@@ -119,7 +119,7 @@ CREATE TABLE `{$prefix}label` (
   `icon` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`,`label`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='enables display and renaming of labels and their icons';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Enables display and renaming of labels and their icons';
 
 # Dump of table {$prefix}link
 # ------------------------------------------------------------
@@ -127,12 +127,12 @@ CREATE TABLE `{$prefix}label` (
 DROP TABLE IF EXISTS `{$prefix}link`;
 
 CREATE TABLE `{$prefix}link` (
-  `identifier` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `extraInfo` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
+  `identifier` varchar(255)  NOT NULL,
+  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `extraInfo` varchar(255)  NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`identifier`, `userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents imported contact links that can turn into contacts';
 
 # Dump of table {$prefix}mobile
 # ------------------------------------------------------------
@@ -140,22 +140,22 @@ CREATE TABLE `{$prefix}link` (
 DROP TABLE IF EXISTS `{$prefix}mobile`;
 
 CREATE TABLE `{$prefix}mobile` (
-  `number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `number` varchar(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `extension` varchar(7) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `carrier` enum('unverified','att','cingular','sprint','tmobile','verizon') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unverified',
-  `state` enum('unverified','active','suspended','unsubscribed') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unverified',
-  `capabilities` enum('unverified','sms','wap','internet','sms_and_wap','sms_and_internet') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unverified',
-  `activationCode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `extension` varchar(7)  NOT NULL DEFAULT '',
+  `carrier` enum('unverified','att','cingular','sprint','tmobile','verizon')  NOT NULL DEFAULT 'unverified',
+  `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL DEFAULT 'unverified',
+  `capabilities` enum('unverified','sms','wap','internet','sms_and_wap','sms_and_internet')  NOT NULL DEFAULT 'unverified',
+  `activationCode` varchar(255)  NOT NULL,
   `activationCodeExpires` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `authCode` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Used in all links sent by sms, to authenticate the source',
+  `authCode` varchar(255)  NOT NULL COMMENT 'Used in all links sent by sms, to authenticate the source',
   PRIMARY KEY (`number`),
   UNIQUE KEY `number` (`number`),
   KEY `updatedTime` (`updatedTime`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents mobile accounts that can receive sms via mobile numbers';
 
 # Dump of table {$prefix}oAuth
 # ------------------------------------------------------------
@@ -180,15 +180,15 @@ CREATE TABLE `{$prefix}oAuth` (
 DROP TABLE IF EXISTS `{$prefix}session`;
 
 CREATE TABLE `{$prefix}session` (
-  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the session id',
-  `content` varchar(4095) COLLATE utf8_unicode_ci NOT NULL COMMENT 'json format',
-  `php` varchar(4095) COLLATE utf8_unicode_ci NOT NULL COMMENT 'php serialized session data',
-  `deviceId` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the id of the device in {$prefix}devices',
+  `id` varchar(255)  NOT NULL COMMENT 'the session id',
+  `content` varchar(4095)  NOT NULL COMMENT 'json format',
+  `php` varchar(4095)  NOT NULL COMMENT 'php serialized session data',
+  `deviceId` varchar(255)  NOT NULL COMMENT 'the id of the device in {$prefix}devices',
   `timeout` int(11) NOT NULL COMMENT 'how long until the pincode needs to be entered',
   `duration` int(11) NOT NULL DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'PHP timestamp of last time this row was saved',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table is used to replicate PHP sessions information for';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';
 
 # Dump of table {$prefix}total
 # ------------------------------------------------------------
@@ -196,8 +196,8 @@ CREATE TABLE `{$prefix}session` (
 DROP TABLE IF EXISTS `{$prefix}total`;
 
 CREATE TABLE `{$prefix}total` (
-  `forType` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `forId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `forType` varchar(31)  NOT NULL,
+  `forId` varchar(255)  NOT NULL,
   `voteCount` bigint(20) NOT NULL DEFAULT '0',
   `weightTotal` decimal(10,4) NOT NULL DEFAULT '0.0000',
   `value` decimal(10,4) NOT NULL DEFAULT '0.0000',
@@ -211,27 +211,27 @@ CREATE TABLE `{$prefix}total` (
 DROP TABLE IF EXISTS `{$prefix}user`;
 
 CREATE TABLE `{$prefix}user` (
-  `id` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `id` varchar(31)  NOT NULL DEFAULT '0',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `sessionId` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'The session id from the most recent authenticated request from this user.',
-  `mobileToken` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'access token stored on the user''s mobile phone, until they deactivate it',
+  `sessionId` varchar(255)  DEFAULT NULL COMMENT 'The session id from the most recent authenticated request from this user.',
+  `mobileToken` varchar(255)  DEFAULT NULL COMMENT 'access token stored on the user''s mobile phone, until they deactivate it',
   `fb_uid` bigint(20) NOT NULL DEFAULT '0' COMMENT 'The facebook id of the user',
   `tw_uid` bigint(20) NOT NULL DEFAULT '0' COMMENT 'The twitter id of the user',
-  `g_uid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `y_uid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `g_uid` varchar(255)  DEFAULT NULL,
+  `y_uid` varchar(255)  DEFAULT NULL,
   `passphraseHash` varchar(64) DEFAULT NULL,
-  `emailAddress` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `mobileNumber` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emailAddressPending` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `mobileNumberPending` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `signedUpWith` enum('none','email','mobile','facebook','twitter','remote') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'none',
-  `username` varchar(63) COLLATE utf8_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'relative path to user''s icon folder, containing 48.png, 32.png and 16.png',
-  `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'the url of this user''s fm server',
-  `pincodeHash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'a smaller security code for when user is already logged in',
+  `emailAddress` varchar(255)  DEFAULT NULL,
+  `mobileNumber` varchar(255)  DEFAULT NULL,
+  `emailAddressPending` varchar(255)  NOT NULL DEFAULT '',
+  `mobileNumberPending` varchar(255)  NOT NULL DEFAULT '',
+  `signedUpWith` enum('none','email','mobile','facebook','twitter','remote')  NOT NULL DEFAULT 'none',
+  `username` varchar(63)  NOT NULL,
+  `icon` varchar(255)  NOT NULL COMMENT 'relative path to user''s icon folder, containing 48.png, 32.png and 16.png',
+  `url` varchar(255)  DEFAULT NULL COMMENT 'the url of this user''s fm server',
+  `pincodeHash` varchar(255)  DEFAULT NULL COMMENT 'a smaller security code for when user is already logged in',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a user in the system';
 
 # Dump of table {$prefix}vote
 # ------------------------------------------------------------
@@ -239,9 +239,9 @@ CREATE TABLE `{$prefix}user` (
 DROP TABLE IF EXISTS `{$prefix}vote`;
 
 CREATE TABLE `{$prefix}vote` (
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `forType` varchar(31) COLLATE utf8_unicode_ci NOT NULL,
-  `forId` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `userId` varchar(31)  NOT NULL,
+  `forType` varchar(31)  NOT NULL,
+  `forId` varchar(255)  NOT NULL,
   `value` decimal(10,4) NOT NULL,
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000',
   `updatedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

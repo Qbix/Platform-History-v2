@@ -263,6 +263,16 @@ class Db_Mysql implements iDb
 	}
 	
 	/**
+	 * Returns the lowercase name of the dbms (e.g. "mysql")
+	 * @method dbms
+	 * @return {string}
+	 */
+	function dbms()
+	{
+		return 'mysql';
+	}
+	
+	/**
 	 * Returns the name of the database used
 	 * @method dbName
 	 * @return {string}
@@ -1935,10 +1945,12 @@ EOT;
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 EOT;
+			$functions["column_$field_name"]['static'] = true;
 			$functions["column_$field_name"]['args'] = '';
 			$functions["column_$field_name"]['return_statement'] = <<<EOT
 return $columnInfo_php;
 EOT;
+			$js_functions["column_$field_name"]['static'] = true;
 			$js_functions["column_$field_name"]['comment'] = <<<EOT
 	$dc
 	 * Returns schema information for $field_name column
@@ -2093,7 +2105,7 @@ EOT;
 		$functions['fieldNames'][] = $fieldNames_code;
 		$functions['fieldNames']['return_statement'] = $return_statement;
 		$functions['fieldNames']['args'] = '$table_alias = null, $field_alias_prefix = null';
-		$functions['fieldNames']['modifiers'] = 'static';
+		$functions['fieldNames']['static'] = true;
 		$functions['fieldNames']['comment'] = <<<EOT
 	$dc
 	 * Retrieves field names for class table
@@ -2107,7 +2119,7 @@ EOT;
 		$functions_code = array();
 		foreach ($functions as $func_name => $func_code) {
 			$func_args = isset($func_code['args']) ? $func_code['args'] : '$value';
-			$func_modifiers = isset($func_code['modifiers']) ? $func_code['modifiers'].' ' : '';
+			$func_modifiers = !empty($func_code['static']) ? 'static ' : '';
 			$func_code_string = isset($func_code['comment']) ? $func_code['comment']."\n" : '';
 			$func_code_string .= <<<EOT
 	{$func_modifiers}function $func_name($func_args)
@@ -2135,8 +2147,9 @@ EOT;
 			$func_args = isset($func_code['args']) ? $func_code['args'] : 'value';
 			$instance = isset($func_code['instance']) ? '.prototype' : '';
 			$func_code_string = isset($func_code['comment']) ? $func_code['comment']."\n" : '';
+			$prototype = empty($func_code['static']) ? 'prototype.' : '';
 			$func_code_string .= <<<EOT
-Base.prototype.$func_name = function ($func_args) {
+Base.$prototype$func_name = function ($func_args) {
 
 EOT;
 			if (is_array($func_code) and ! empty($func_code)) {

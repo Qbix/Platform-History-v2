@@ -313,7 +313,7 @@ Base.prototype.maxSize_id = function () {
 	 * Returns schema information for id column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_id = function () {
+Base.column_id = function () {
 
 return [["varchar","31","",false],false,"PRI","0"];
 };
@@ -334,7 +334,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -356,7 +356,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","31","",false],true,"",null];
 };
@@ -392,7 +392,7 @@ Base.prototype.maxSize_sessionId = function () {
 	 * Returns schema information for sessionId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_sessionId = function () {
+Base.column_sessionId = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -427,7 +427,7 @@ Base.prototype.maxSize_sessionCount = function () {
 	 * Returns schema information for sessionCount column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_sessionCount = function () {
+Base.column_sessionCount = function () {
 
 return [["int","11","",false],false,"","0"];
 };
@@ -462,7 +462,7 @@ Base.prototype.maxSize_fb_uid = function () {
 	 * Returns schema information for fb_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_fb_uid = function () {
+Base.column_fb_uid = function () {
 
 return [["bigint","20","",false],false,"","0"];
 };
@@ -497,7 +497,7 @@ Base.prototype.maxSize_tw_uid = function () {
 	 * Returns schema information for tw_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_tw_uid = function () {
+Base.column_tw_uid = function () {
 
 return [["bigint","20","",false],false,"","0"];
 };
@@ -533,7 +533,7 @@ Base.prototype.maxSize_g_uid = function () {
 	 * Returns schema information for g_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_g_uid = function () {
+Base.column_g_uid = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -569,7 +569,7 @@ Base.prototype.maxSize_y_uid = function () {
 	 * Returns schema information for y_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_y_uid = function () {
+Base.column_y_uid = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -605,7 +605,7 @@ Base.prototype.maxSize_passphraseHash = function () {
 	 * Returns schema information for passphraseHash column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_passphraseHash = function () {
+Base.column_passphraseHash = function () {
 
 return [["varchar","64","",false],true,"",null];
 };
@@ -641,7 +641,7 @@ Base.prototype.maxSize_emailAddress = function () {
 	 * Returns schema information for emailAddress column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_emailAddress = function () {
+Base.column_emailAddress = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -677,7 +677,7 @@ Base.prototype.maxSize_mobileNumber = function () {
 	 * Returns schema information for mobileNumber column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_mobileNumber = function () {
+Base.column_mobileNumber = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -715,7 +715,7 @@ Base.prototype.maxSize_emailAddressPending = function () {
 	 * Returns schema information for emailAddressPending column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_emailAddressPending = function () {
+Base.column_emailAddressPending = function () {
 
 return [["varchar","255","",false],false,"",""];
 };
@@ -753,7 +753,7 @@ Base.prototype.maxSize_mobileNumberPending = function () {
 	 * Returns schema information for mobileNumberPending column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_mobileNumberPending = function () {
+Base.column_mobileNumberPending = function () {
 
 return [["varchar","255","",false],false,"",""];
 };
@@ -776,7 +776,7 @@ Base.prototype.beforeSet_signedUpWith = function (value) {
 	 * Returns schema information for signedUpWith column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_signedUpWith = function () {
+Base.column_signedUpWith = function () {
 
 return [["enum","'none','email','mobile','facebook','twitter','remote'","",false],false,"","none"];
 };
@@ -814,7 +814,7 @@ Base.prototype.maxSize_username = function () {
 	 * Returns schema information for username column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_username = function () {
+Base.column_username = function () {
 
 return [["varchar","63","",false],false,"",null];
 };
@@ -852,7 +852,7 @@ Base.prototype.maxSize_icon = function () {
 	 * Returns schema information for icon column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_icon = function () {
+Base.column_icon = function () {
 
 return [["varchar","255","",false],false,"",null];
 };
@@ -888,7 +888,7 @@ Base.prototype.maxSize_url = function () {
 	 * Returns schema information for url column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_url = function () {
+Base.column_url = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -924,7 +924,7 @@ Base.prototype.maxSize_pincodeHash = function () {
 	 * Returns schema information for pincodeHash column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_pincodeHash = function () {
+Base.column_pincodeHash = function () {
 
 return [["varchar","255","",false],true,"",null];
 };

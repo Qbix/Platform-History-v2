@@ -255,7 +255,7 @@ abstract class Base_Places_Zipcode extends Db_Row
 	 * Returns schema information for countryCode column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_countryCode()
+	static function column_countryCode()
 	{
 
 return array (
@@ -309,7 +309,7 @@ return array (
 	 * Returns schema information for zipcode column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_zipcode()
+	static function column_zipcode()
 	{
 
 return array (
@@ -363,7 +363,7 @@ return array (
 	 * Returns schema information for placeName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_placeName()
+	static function column_placeName()
 	{
 
 return array (
@@ -417,7 +417,7 @@ return array (
 	 * Returns schema information for stateName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_stateName()
+	static function column_stateName()
 	{
 
 return array (
@@ -471,7 +471,7 @@ return array (
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_state()
+	static function column_state()
 	{
 
 return array (
@@ -525,7 +525,7 @@ return array (
 	 * Returns schema information for regionName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_regionName()
+	static function column_regionName()
 	{
 
 return array (
@@ -579,7 +579,7 @@ return array (
 	 * Returns schema information for region column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_region()
+	static function column_region()
 	{
 
 return array (
@@ -633,7 +633,7 @@ return array (
 	 * Returns schema information for community column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_community()
+	static function column_community()
 	{
 
 return array (
@@ -665,7 +665,7 @@ return array (
 	 * Returns schema information for latitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_latitude()
+	static function column_latitude()
 	{
 
 return array (
@@ -697,7 +697,7 @@ return array (
 	 * Returns schema information for longitude column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_longitude()
+	static function column_longitude()
 	{
 
 return array (
@@ -751,7 +751,7 @@ return array (
 	 * Returns schema information for accuracy column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_accuracy()
+	static function column_accuracy()
 	{
 
 return array (

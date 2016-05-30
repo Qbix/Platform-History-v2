@@ -183,9 +183,12 @@
 	height: 54px;
 }
 
+.Users_avatar_tool {
+	display: inline-block;
+}
+
 .Streams_participants_tool .Users_avatar_tool,
 .Streams_participants_tool .Streams_participants_invite {
-	display: inline-block;
 	width: 44px;
 	overflow: hidden;
 	text-overflow: ellipsis;

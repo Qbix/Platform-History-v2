@@ -253,7 +253,7 @@ abstract class Base_Users_AppUser extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -291,7 +291,7 @@ return array (
 	 * Returns schema information for provider column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_provider()
+	static function column_provider()
 	{
 
 return array (
@@ -345,7 +345,7 @@ return array (
 	 * Returns schema information for appId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_appId()
+	static function column_appId()
 	{
 
 return array (
@@ -390,7 +390,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -438,7 +438,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -492,7 +492,7 @@ return array (
 	 * Returns schema information for access_token column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_access_token()
+	static function column_access_token()
 	{
 
 return array (
@@ -546,7 +546,7 @@ return array (
 	 * Returns schema information for session_secret column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_session_secret()
+	static function column_session_secret()
 	{
 
 return array (
@@ -600,7 +600,7 @@ return array (
 	 * Returns schema information for session_expires column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_session_expires()
+	static function column_session_expires()
 	{
 
 return array (
@@ -638,7 +638,7 @@ return array (
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_state()
+	static function column_state()
 	{
 
 return array (
@@ -692,7 +692,7 @@ return array (
 	 * Returns schema information for provider_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_provider_uid()
+	static function column_provider_uid()
 	{
 
 return array (

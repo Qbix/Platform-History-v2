@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+$Q_Bootstrap_config_plugin_limit = 1;
 include dirname(__FILE__).'/../Q.inc.php';
 
 $script_name = pathinfo($_SERVER["SCRIPT_NAME"]);

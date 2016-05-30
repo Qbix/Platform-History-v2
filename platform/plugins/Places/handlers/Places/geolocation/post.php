@@ -117,9 +117,7 @@ function Places_geolocation_post()
 			}
 		}
 
-		$options = array('miles' => $oldMiles, 'skipAccess' => true, 'forSubscribers' => true);
-
-		if ($shouldUnsubscribe) {
+		if ($shouldUnsubscribe and $oldLatitude and $oldLongitude and $oldMiles) {
 			$results = array();
 			foreach ($myInterests as $weight => $info) {
 				$publisherId = $info[0];
@@ -128,8 +126,13 @@ function Places_geolocation_post()
 				}
 				$results[$publisherId] = array_merge(
 					$results[$publisherId], Places_Interest::streams(
-						$publisherId, $oldLatitude, $oldLongitude, $info[2],
-						$options));
+						$publisherId, $oldLatitude, $oldLongitude, $info[2], array(
+							'miles' => $oldMiles,
+							'skipAccess' => true,
+							'forSubscribers' => true
+						)
+					)
+				);
 			}
 			foreach ($results as $publisherId => $streams) {
 				Streams::unsubscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
@@ -148,8 +151,13 @@ function Places_geolocation_post()
 				}
 				$results[$publisherId] = array_merge(
 					$results[$publisherId], Places_Interest::streams(
-					$publisherId, $latitude, $longitude, $info[2],
-					$options));
+						$publisherId, $latitude, $longitude, $info[2], array(
+							'miles' => $miles,
+							'skipAccess' => true,
+							'forSubscribers' => true
+						)
+					)
+				);
 			}
 			foreach ($results as $publisherId => $streams) {
 				Streams::subscribe($user->id, $publisherId, $streams, array('skipAccess' => true));

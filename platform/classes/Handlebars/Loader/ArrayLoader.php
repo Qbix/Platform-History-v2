@@ -57,7 +57,7 @@ class Handlebars_Loader_ArrayLoader implements Handlebars_Loader
      *
      * @param string $name template name to load
      *
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
      * @return {Handlebars_String}
      */
     public function load($name)

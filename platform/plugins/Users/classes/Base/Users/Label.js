@@ -239,7 +239,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -277,7 +277,7 @@ Base.prototype.maxSize_label = function () {
 	 * Returns schema information for label column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_label = function () {
+Base.column_label = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -315,7 +315,7 @@ Base.prototype.maxSize_icon = function () {
 	 * Returns schema information for icon column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_icon = function () {
+Base.column_icon = function () {
 
 return [["varchar","255","",false],false,"","default"];
 };
@@ -353,7 +353,7 @@ Base.prototype.maxSize_title = function () {
 	 * Returns schema information for title column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_title = function () {
+Base.column_title = function () {
 
 return [["varchar","255","",false],false,"",null];
 };

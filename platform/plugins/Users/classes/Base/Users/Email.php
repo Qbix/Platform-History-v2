@@ -241,7 +241,7 @@ abstract class Base_Users_Email extends Db_Row
 	 * Returns schema information for address column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_address()
+	static function column_address()
 	{
 
 return array (
@@ -286,7 +286,7 @@ return array (
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_insertedTime()
+	static function column_insertedTime()
 	{
 
 return array (
@@ -334,7 +334,7 @@ return array (
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_updatedTime()
+	static function column_updatedTime()
 	{
 
 return array (
@@ -388,7 +388,7 @@ return array (
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -426,7 +426,7 @@ return array (
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_state()
+	static function column_state()
 	{
 
 return array (
@@ -480,7 +480,7 @@ return array (
 	 * Returns schema information for activationCode column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_activationCode()
+	static function column_activationCode()
 	{
 
 return array (
@@ -525,7 +525,7 @@ return array (
 	 * Returns schema information for activationCodeExpires column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_activationCodeExpires()
+	static function column_activationCodeExpires()
 	{
 
 return array (
@@ -579,7 +579,7 @@ return array (
 	 * Returns schema information for authCode column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_authCode()
+	static function column_authCode()
 	{
 
 return array (

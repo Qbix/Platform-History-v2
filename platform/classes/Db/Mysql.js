@@ -181,6 +181,9 @@ function Db_Mysql(connName, dsn) {
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 */
 	dbm.rawQuery = function(query, parameters) {
+		query = query.replaceAll({
+			'{$prefix}': dbm.prefix()
+		});
 		return new Db.Query.Mysql(this, Db.Query.TYPE_RAW, {"RAW": query}, parameters);
 	};
 

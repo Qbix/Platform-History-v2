@@ -1,0 +1,5 @@
+ALTER TABLE {$prefix}stream
+DROP COLUMN participantCount,
+ADD COLUMN invitedCount INT(11) NOT NULL DEFAULT 0 COMMENT 'number of users invited' AFTER messageCount,
+ADD COLUMN participatingCount INT(11) NOT NULL DEFAULT 0 COMMENT 'number of users participating' AFTER invitedCount,
+ADD COLUMN leftCount INT(11) NOT NULL DEFAULT 0 COMMENT 'number of users who left after participating' AFTER participatingCount;

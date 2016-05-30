@@ -136,16 +136,11 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	container: null,
 	width: function () { return $(this.element).width() },
 	height: function () {
-		var result = Q.Pointer.windowHeight() - $(this.element).offset().top;
-		$(this.element).parents().each(function () {
-			var $this = $(this);
-			var overflow = $this.css('overflow');
-			if (['hidden', 'visible'].indexOf(overflow) < 0) {
-				result = this.clientHeight;
-				return false;
-			}
-		});
-		return result;
+		var sp = this.element.scrollingParent();
+		if (sp === document.documentElement) {
+			return Q.Pointer.windowHeight() - $(this.element).offset().top;
+		}
+		return sp.clientHeight;
 	},
 	currentIndex: null,
 	placeholders: ['', ''],

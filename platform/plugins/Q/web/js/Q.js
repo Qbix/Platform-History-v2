@@ -337,6 +337,9 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
  * @return {boolean}
  */
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
+	if (this.length < prefix.length) {
+		return false;
+	}
 	return this.substr(0, prefix.length) === prefix;
 };
 
@@ -579,12 +582,10 @@ Elp.copyComputedStyle = function(src) {
  */
 Elp.cssDimensions = function () {
     var cn = this.cloneNode();
-    var div = document.createElement('div');
-    div.appendChild(cn);
-    div.style.display = 'none';
-    document.body.appendChild(div);
+	cn.style.display = 'none';
+    this.parentNode.appendChild(cn);
     var cs = Q.copy(cn.computedStyle());
-    document.body.removeChild(div);
+    this.parentNode.removeChild(cn);
     return { width: cs.width, height: cs.height };
 };
 
@@ -1199,7 +1200,7 @@ Q.firstKey = function _Q_firstKey(container, options) {
  * @method diff
  * @param {Array|Object} container to subtract items from to form the result
  * @param {Array|Object} container whose items are subtracted in the result
- * @param {Function} comparator accepts item1, item2, index1, index2) and returns whether two items are equal
+ * @param {Function} [comparator] accepts item1, item2, index1, index2) and returns whether two items are equal
  * @return {Array|Object} a container of the same type as container1, but without elements of container2
  */
 Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
@@ -1210,7 +1211,10 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 	var len = arguments.length;
 	var comparator = arguments[len-1];
 	if (typeof comparator !== 'function') {
-		throw new Q.Error("Q.diff: comparator must be a function");
+		comparator = function _Q_diff_default_comparator(v1, v2) {
+			return v1 === v2;
+		}
+		++len;
 	}
 	var isArr = Q.isArrayLike(container1);
 	var result = isArr ? [] : {};
@@ -1833,6 +1837,8 @@ Q.calculateKey = function _Q_Event_calculateKey(key, container, start) {
 		while (container[key]) {
 			key = 'AUTOKEY_' + (++i);
 		}
+	} else if (key !== undefined && typeof key !== 'string') {
+		throw new Q.Error("Q.calculateKey: key must be a String, Q.Tool, true, or undefined");
 	}
 	return key;
 };
@@ -2323,9 +2329,12 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 			return e;
 		}
 		var e = new Q.Event();
+		e.factory = _Q_Event_factory;
+		e.name = name;
 		if (callback) {
 			callback.apply(e, args);
 		}
+		_Q_Event_factory.onNewEvent.handle.apply(e, args);
 		Q.setObject(name, e, collection, delimiter);
 		if (removeOnEmpty) {
 			e.onEmpty().set(_remove);
@@ -2334,6 +2343,7 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 		return e;
 	}
 	_Q_Event_factory.collection = collection;
+	_Q_Event_factory.onNewEvent = new Q.Event();
 	return _Q_Event_factory;
 };
 
@@ -3151,9 +3161,7 @@ Q.queue = function (original, milliseconds) {
 		var args = Array.prototype.slice.call(arguments, 0);
 		var len = _queue.push([this, args]);
 		if (!_timeout) {
-			_timeout = setTimeout(function () {
-				_Q_queue_next();
-			}, 0);
+			_timeout = setTimeout(_Q_queue_next, 0);
 		}
 		return len;
 	};
@@ -3176,7 +3184,7 @@ Q.debounce = function (original, milliseconds, defaultValue) {
 			clearTimeout(_timeout);
 		}
 		var t = this, a = arguments;
-		_timeout = setTimeout(function () {
+		_timeout = setTimeout(function _Q_debounce_handler() {
 			original.apply(t, a);
 		}, milliseconds);
 		return defaultValue;
@@ -3245,7 +3253,7 @@ Q.Tool = function _Q_Tool(element, options) {
 		if (!prefix) {
 			var e = this.element.parentNode;
 			do {
-				if (e.hasClass('Q_tool')) {
+				if (e.hasClass && e.hasClass('Q_tool')) {
 					prefix = Q.getObject('Q.tool.prefix', e)
 						|| Q.Tool.calculatePrefix(e.id);
 					break;
@@ -3291,8 +3299,10 @@ Q.Tool = function _Q_Tool(element, options) {
 	
 	for (i = len-1; i >= 0; --i) {
 		var pid = pids[i];
-		if (Q.isEmpty(Q.Tool.active[pid].state)) continue;
-		o = Q.extend(o, Q.Tool.options.levels, Q.Tool.active[pid].state);
+		if (Q.isEmpty(Q.getObject([pid, this.name, 'state'], Q.Tool.active))) {
+			continue;
+		}
+		o = Q.extend(o, Q.Tool.options.levels, Q.Tool.active[pid][this.name].state);
 	}
 	
 	// .Q_something
@@ -3342,7 +3352,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	element.Q.toolNames.push(normalizedName);
 	element.Q.tools[normalizedName] = this;
 	element.Q.tool = this;
-	Q.Tool.active[this.id] = this;
+	Q.setObject([this.id, this.name], this, Q.Tool.active);
 	
 	// Add a Q property on the object and extend it with the prototype.Q if any
 	this.Q = Q.extend({
@@ -3640,7 +3650,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		);
 		jQueryPluginConstructor.methods = methods || {};
 		$.fn[n] = jQueryPluginConstructor;
-		var ToolConstructor = Q.Tool.define(n,
+		var ToolConstructor = Q.Tool.define(name,
 		function _Q_Tool_jQuery_constructor(options) {
 			var $te = $(this.element);
 			$te.plugin(n, options, this);
@@ -3757,35 +3767,35 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
 };
 
 /**
- * Gets child tools contained in the tool, as determined by their prefixes
- * based on the prefix of the tool.
+ * Gets child tools contained in the tool, as determined by their ids.
  * @method children
  * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace"
  * @param {number} [levels] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
- * @return {Object} A hash of {prefix: Tool} pairs
+ * @return {Object} A two-level hash of pairs like {id: {name: Tool}}
  */
 Tp.children = function Q_Tool_prototype_children(name, levels) {
 	var result = {};
 	var prefix = this.prefix;
-	var id, ni, i, ids;
+	var id, n, i, ids;
 	name = name && Q.normalize(name);
 	for (id in Q.Tool.active) {
-		var tool = Q.Tool.active[id];
-		if ((name && tool.name != name)
-		|| id.length <= prefix.length
-		|| id.substr(0, prefix.length) != prefix) {
-			continue;
-		}
-		if (!levels) {
-			result[id] = Q.Tool.active[id];
-			continue;
-		}
-		ids = tool.parentIds();
-		var l = Math.min(levels, ids.length);
-		for (i=0; i<l; ++i) {
-			if (ids[i] === this.id) {
-				result[id] = tool;
-				break;
+		for (n in Q.Tool.active[id]) {
+			if ((name && name != n)
+			|| !id.startsWith(prefix)) {
+				continue;
+			}
+			var tool = Q.Tool.active[id][n];
+			if (!levels) {
+				Q.setObject([id, n], tool, result);
+				continue;
+			}
+			ids = tool.parentIds();
+			var l = Math.min(levels, ids.length);
+			for (i=0; i<l; ++i) {
+				if (ids[i] === this.id) {
+					Q.setObject([id, n], tool, result);
+					continue;
+				}
 			}
 		}
 	}
@@ -3796,17 +3806,23 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  * Gets one child tool contained in the tool, which matches the prefix
  * based on the prefix of the tool.
  * @method child
- * @param {String} append The string to append to the tool prefix to find the child tool
+ * @param {String} append The string to append to the tool prefix to find the child tool id
+ * @param {String} [name=""] Filter by tool name, such as "Q/inplace"
  * @return {Q.Tool|null}
  */
-Tp.child = function Q_Tool_prototype_child(append) {
+Tp.child = function Q_Tool_prototype_child(append, name) {
 	var prefix2 = Q.normalize(this.prefix + (append || ""));
-	var id, ni;
+	var id, ni, n;
 	for (id in Q.Tool.active) {
 		ni = Q.normalize(id);
-		if (id.length >= prefix2.length + (append ? 0 : 1)
-		&& ni.substr(0, prefix2.length) == prefix2) {
-			return Q.Tool.active[id];
+		for (n in Q.Tool.active[id]) {
+			if (name && name != n) {
+				break;
+			}
+			if (id.length >= prefix2.length + (append ? 0 : 1)
+			&& ni.substr(0, prefix2.length) == prefix2) {
+				return Q.Tool.active[id][n];
+			}
 		}
 	}
 	return null;
@@ -3815,7 +3831,7 @@ Tp.child = function Q_Tool_prototype_child(append) {
 /**
  * Gets the ids of the parent, grandparent, etc. tools (in that order) of the given tool
  * @method parentIds
- * @return {Q.Tool|null}
+ * @return {Array|null}
  */
 Tp.parentIds = function Q_Tool_prototype_parentIds() {
 	var prefix2 = Q.normalize(this.prefix), ids = [], id, ni;
@@ -3836,8 +3852,9 @@ Tp.parentIds = function Q_Tool_prototype_parentIds() {
 
 /**
  * Gets parent tools, as determined by parentIds()
+ * Note that several sibling tools may be activated on the same tool id.
  * @method parents
- * @return {Object} A hash of {prefix: Q.Tool} pairs
+ * @return {Object} A two-level hash of pairs like {id: {name: Q.Tool}}
  */
 Tp.parents = function Q_Tool_prototype_parents() {
 	var ids = [], i, id;
@@ -3845,20 +3862,33 @@ Tp.parents = function Q_Tool_prototype_parents() {
 	var result = {}, len = ids.length;
 	for (i=0; i<len; ++i) {
 		id = ids[i];
-		result[id] = Q.Tool.active[id];
+		result[id] = {};
+		for (var n in Q.Tool.active[id]) {
+			result[id][n] = Q.Tool.active[id][n];
+		}
 	}
 	return result;
 };
 
 /**
- * Returns the immediate parent tool, if any
+ * Returns the immediate parent tool, if any, by using parentIds().
+ * If more than one tool is activated with the same parent id, returns the first one.
  * @method parent
  * @return {Q.Tool|null}
  */
 Tp.parent = function Q_Tool_prototype_parent() {
 	var ids = [];
 	ids = this.parentIds();
-	return ids.length ? Q.Tool.active[ids[0]] : null;
+	return ids.length ? Q.first(Q.Tool.active[ids[0]]) : null;
+};
+
+/**
+ * Returns a tool on the same element
+ * @method sibling
+ * @return {Q.Tool|null}
+ */
+Tp.sibling = function Q_Tool_prototype_sibling(name) {
+	return this.element.Q(name);
 };
 
 /**
@@ -3892,8 +3922,10 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
 	_beforeRemoveToolHandlers[""].handle.call(this);
 	Q.handle(this.Q.beforeRemove, this, []);
 	
-	delete this.element.Q.tools[Q.normalize(this.name)];
-	if (Q.isEmpty(this.element.Q.tools)) {
+	var nn = Q.normalize(this.name);
+	delete this.element.Q.tools[nn];
+	delete Q.Tool.active[this.id][nn];
+	if (Q.isEmpty(Q.Tool.active[this.id])) {
 		Q.removeElement(this.element);
 		delete Q.Tool.active[this.id];
 	}
@@ -3954,21 +3986,31 @@ Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(cla
 /**
  * Do something for every and future child tool that is activated inside this element
  * @method forEachChild
- * @param {String} [name=""] The name of the child tool, such as "Q/inplace"
+ * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {number} [levels] Optionally pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
  * @param {Function} callback The callback to execute at the right time
  */
 Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, callback) {
+	if (typeof name !== 'string') {
+		levels = name;
+		callback = levels;
+		name = null;
+	}
 	if (typeof levels !== 'number') {
 		callback = levels;
 		levels = null;
 	}
-	name = Q.normalize(name);
+	name = name && Q.normalize(name);
 	var tool = this;
-	Q.each(tool.children(name, levels), callback);
+	var children = tool.children(name, levels);
+	for (var id in children) {
+		for (var n in children[id]) {
+			Q.handle(callback, children[id][n]);
+		}
+	}
 	var onActivate = Q.Tool.onActivate(name);
 	var key = onActivate.set(function () {
-		if (this.prefix.substr(0, tool.prefix.length) === tool.prefix) {
+		if (this.prefix.startsWith(tool.prefix)) {
 			Q.handle(callback, this, arguments);
 		}
 	});
@@ -4113,7 +4155,7 @@ Tp.setUpElementHTML = function (element, toolName, toolOptions, id) {
  * @method from
  * @param toolElement {Element}
  *   the root element of the desired tool
- * @param {String} toolName
+ * @param {String} [toolName]
  *   optional name of the tool attached to the element
  * @return {Q.Tool|null}
  *   the tool corresponding to the given element, otherwise null
@@ -4133,11 +4175,18 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
  * @method byId
  * @param {String} id
  * @param {String} name optional name of the tool, useful if more than one tool was activated on the same element
- * @return {Q.Tool|null}
+ * @return {Q.Tool|null|undefined}
  */
 Q.Tool.byId = function _Q_Tool_byId(id, name) {
-	var tool = Q.Tool.active[id];
-	return (tool && name && tool.name !== name ? tool.element.Q(name) : tool) || null;
+	if (name) {
+		return Q.Tool.active[id] ? Q.Tool.active[id][name] : null;
+	}
+	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
+	if (!tool) {
+		return null;
+	}
+	var q = tool.element.Q;
+	return tool.element.Q(q.toolNames[q.toolNames.length-1]);
 };
 
 /**
@@ -4651,7 +4700,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 	var cache = this;
 	if (this.documentStorage) {
 		return Q.each(this.data, function (k, v) {
-			if (prefix && k.substring(0, prefix.length) !== prefix) {
+			if (prefix && !k.startsWith(prefix)) {
 				return;
 			}
 			if (callback.call(cache, k, v) === false) {
@@ -4667,7 +4716,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 			}
 			lastkey = key;
 			key = item.next;
-			if (prefix && key.substring(0, prefix.length) !== prefix) {
+			if (prefix && key.startsWith(prefix)) {
 				return;
 			}
 			if (callback.call(this, lastkey, item) === false) {
@@ -7718,7 +7767,7 @@ function _activateTools(toolElement, options, shared) {
 				// be initialized without waiting for any child tools.
 				// tool.element.Q.supportsChildren = true
 				// set by tool.supportsChildren(true)
-				Q.activate(toolElement, options);
+				Q.activate(toolElement.children || toolElement.childNodes, options);
 			}
 			
 			if (uniqueToolId) {
@@ -8519,23 +8568,14 @@ Q.Animation.ease = {
 };
 
 function _listenForVisibilityChange() {
-	var hidden, visibilityChange; 
-	if ('hidden' in document) { // Opera 12.10 and Firefox 18 and later support 
-		hidden = 'hidden';
-		visibilityChange = 'visibilitychange';
-	} else if ('mozHidden' in document) {
-		hidden = 'mozHidden';
-		visibilityChange = 'mozvisibilitychange';
-	} else if ('msHidden' in document) {
-		hidden = 'msHidden';
-		visibilityChange = 'msvisibilitychange';
-	} else if ('webkitHidden' in document) {
-		hidden = 'webkitHidden';
-		visibilityChange = 'webkitvisibilitychange';
-	} else if ('oHidden' in document) {
-		hidden = 'oHidden';
-		visibilityChange = 'ovisibilitychange';
-	}
+	var hidden, visibilityChange;
+	Q.each(['', 'moz', 'ms', 'webkit', 'o'], function (i, k) {
+		hidden = k ? k+'Hidden' : 'hidden';
+		if (hidden in document) {
+			visibilityChange = k+'visibilitychange';
+			return false;
+		}
+	});
 	Q.addEventListener(document, visibilityChange, function () {
 		Q.onVisibilityChange.handle(document, [document[hidden]]);
 	}, false);
@@ -9627,6 +9667,7 @@ Q.Pointer = {
 		}));
 		if (!Q.Pointer.hint.addedListeners) {
 			Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
+			Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
 			Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
 			Q.Pointer.hint.addedListeners = true;
 		}
@@ -10762,7 +10803,7 @@ function _addHandlebarsHelpers() {
 			if (typeof f === 'function') {
 				return f.apply(Q.getObject(subparts), args);
 			}
-			return "{{call "+path+" not found}}";
+			return "{{call '"+path+"' not found}}";
 		});
 	}
 	if (!Handlebars.helpers.tool) {
@@ -10808,10 +10849,18 @@ function _addHandlebarsHelpers() {
 			return Q.url(url);
 		});
 	}
-	if (!Handlebars.helpers.ucfirst) {
+	if (!Handlebars.helpers.toCapitalized) {
 		Handlebars.registerHelper('toCapitalized', function(text) {
 			text = text || '';
 			return text.charAt(0).toUpperCase() + text.slice(1);
+		});
+	}
+	if (!Handlebars.helpers.option) {
+		Handlebars.registerHelper('option', function(value, html, selectedValue) {
+			var attr = value == selectedValue ? ' selected="selected"' : '';
+			return new Handlebars.SafeString(
+				'<option value="'+value.encodeHTML()+'"'+attr+'>'+html+"</option>"
+			);
 		});
 	}
 }
@@ -10824,9 +10873,12 @@ function _Q_trigger_recursive(tool, eventName, args) {
 	if (obj) {
 		Q.handle(obj, tool, args);
 	}
-	Q.each(tool.children('', 1), function () {
-		_Q_trigger_recursive(this, eventName, args);
-	});
+	var children = tool.children('', 1);
+	for (var id in children) {
+		for (var n in children[id]) {
+			_Q_trigger_recursive(children[id][n], eventName, args);
+		}
+	}
 }
 
 function _Q_loadUrl_fillSlots (res, url, options) {
@@ -10951,5 +11003,10 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	var oldQ = root.Q;
 	root.Q = Q;
 }
+
+Q.globalNames = Object.keys(root); // to find stray globals
+Q.globalNamesAdded = function () {
+	return Q.diff(Object.keys(window), Q.globalNames);
+};
 
 }).call(this);

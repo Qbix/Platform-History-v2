@@ -270,7 +270,7 @@ Base.prototype.maxSize_userId = function () {
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_userId = function () {
+Base.column_userId = function () {
 
 return [["varchar","31","",false],false,"PRI",""];
 };
@@ -293,7 +293,7 @@ Base.prototype.beforeSet_provider = function (value) {
 	 * Returns schema information for provider column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_provider = function () {
+Base.column_provider = function () {
 
 return [["enum","'native','facebook','twitter','google','yahoo'","",false],false,"PRI",null];
 };
@@ -331,7 +331,7 @@ Base.prototype.maxSize_appId = function () {
 	 * Returns schema information for appId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_appId = function () {
+Base.column_appId = function () {
 
 return [["varchar","200","",false],false,"PRI",null];
 };
@@ -352,7 +352,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","200","",false],false,"","CURRENT_TIMESTAMP"];
 };
@@ -374,7 +374,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["timestamp","200","",false],true,"",null];
 };
@@ -410,7 +410,7 @@ Base.prototype.maxSize_access_token = function () {
 	 * Returns schema information for access_token column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_access_token = function () {
+Base.column_access_token = function () {
 
 return [["varchar","1023","",false],true,"",null];
 };
@@ -446,7 +446,7 @@ Base.prototype.maxSize_session_secret = function () {
 	 * Returns schema information for session_secret column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_session_secret = function () {
+Base.column_session_secret = function () {
 
 return [["varchar","1023","",false],true,"",null];
 };
@@ -482,7 +482,7 @@ Base.prototype.maxSize_session_expires = function () {
 	 * Returns schema information for session_expires column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_session_expires = function () {
+Base.column_session_expires = function () {
 
 return [["varchar","255","",false],true,"",null];
 };
@@ -505,7 +505,7 @@ Base.prototype.beforeSet_state = function (value) {
 	 * Returns schema information for state column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_state = function () {
+Base.column_state = function () {
 
 return [["enum","'visited','added','removed'","",false],false,"","visited"];
 };
@@ -543,7 +543,7 @@ Base.prototype.maxSize_provider_uid = function () {
 	 * Returns schema information for provider_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_provider_uid = function () {
+Base.column_provider_uid = function () {
 
 return [["varchar","200","",false],false,"",null];
 };

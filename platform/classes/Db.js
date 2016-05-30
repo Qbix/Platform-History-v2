@@ -140,13 +140,14 @@ Db.connect = function(name) {
 		return dbs[name];
 	}
 
-	var dsn = Db.parseDsnString(info['dsn']),
-		dbms = dsn['dbms'];
+	var dsn = Db.parseDsnString(info['dsn']);
+	var dbms = dsn['dbms'];
 	var moduleName =  dbms.charAt(0).toUpperCase() + dbms.substr(1);
 	Db[moduleName] = Q.require('Db/' + moduleName);
 
 	return dbs[name] = new Db[moduleName](name, dsn);
 };
+
 /**
  * @method listen
  * @param {Object} [options={}]

@@ -212,7 +212,7 @@ class Mustache_Engine
     /**
      * Set partials for the current partials Loader instance.
      *
-     * @throws {$1} If the current Loader instance is immutable
+     * @throws {RuntimeException} If the current Loader instance is immutable
      *
      * @param array $partials (default: array())
      */
@@ -233,7 +233,7 @@ class Mustache_Engine
      * any other valid Mustache context value. They will be prepended to the context stack, so they will be available in
      * any template loaded by this Mustache instance.
      *
-     * @throws {$1} if $helpers is not an array or Traversable
+     * @throws {InvalidArgumentException} if $helpers is not an array or Traversable
      *
      * @param array|Traversable $helpers
      */
@@ -562,7 +562,7 @@ class Mustache_Engine
     /**
      * Helper method to dump a generated Mustache Template subclass to the file cache.
      *
-     * @throws {$1} if unable to write to $fileName.
+     * @throws {RuntimeException} if unable to write to $fileName.
      *
      * @param string $fileName
      * @param string $source

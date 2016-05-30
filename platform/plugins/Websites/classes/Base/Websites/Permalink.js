@@ -238,7 +238,7 @@ Base.prototype.maxSize_uri = function () {
 	 * Returns schema information for uri column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_uri = function () {
+Base.column_uri = function () {
 
 return [["varchar","255","",false],false,"PRI",""];
 };
@@ -276,7 +276,7 @@ Base.prototype.maxSize_url = function () {
 	 * Returns schema information for url column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_url = function () {
+Base.column_url = function () {
 
 return [["varchar","255","",false],false,"MUL",""];
 };
@@ -298,7 +298,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 * Returns schema information for insertedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_insertedTime = function () {
+Base.column_insertedTime = function () {
 
 return [["timestamp","255","",false],true,"","CURRENT_TIMESTAMP"];
 };
@@ -320,7 +320,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 * Returns schema information for updatedTime column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.prototype.column_updatedTime = function () {
+Base.column_updatedTime = function () {
 
 return [["datetime","255","",false],true,"",null];
 };

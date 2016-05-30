@@ -217,7 +217,7 @@ abstract class Base_Assets_Customer extends Db_Row
 	 * Returns schema information for userId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_userId()
+	static function column_userId()
 	{
 
 return array (
@@ -255,7 +255,7 @@ return array (
 	 * Returns schema information for payments column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_payments()
+	static function column_payments()
 	{
 
 return array (
@@ -309,7 +309,7 @@ return array (
 	 * Returns schema information for customerId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	function column_customerId()
+	static function column_customerId()
 	{
 
 return array (

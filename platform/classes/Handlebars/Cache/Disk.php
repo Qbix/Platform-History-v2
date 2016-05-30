@@ -42,8 +42,8 @@ class Handlebars_Cache_Disk implements Handlebars_Cache
      * @param string $prefix optional file prefix, defaults to empty string
      * @param string $suffix optional file extension, defaults to empty string
      *
-     * @throws {$1}
-     * @throws {$1}
+     * @throws {InvalidArgumentException}
+     * @throws {RuntimeException}
      */
     public function __construct($path, $prefix = '', $suffix = '')
     {
