@@ -93,7 +93,7 @@ function _Streams_participants(options) {
 			tool.$count = $("<span class='Streams_participants_count'></span>");
 			tool.$max = $("<span class='Streams_participants_max'></span>");
 			tool.$pet = $("<span class='Streams_participants_expand_text'>See All</span>");
-			tool.$pei = $('<img class="Streams_participants_expand_img" />', {
+			tool.$pei = $('<img class="Streams_participants_expand_img" />').attr({
 				src: Q.url('plugins/Q/img/expand.png'),
 				alt: "expand"
 			});

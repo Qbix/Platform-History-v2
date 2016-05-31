@@ -53,16 +53,28 @@ Q.text = {
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
 
-Q.Error = Error;
+/**
+ * Throws Q.Error with complaint if condition evaluates to something falsy
+ * @method assert
+ * @static
+ * @param {Boolean} condition
+ * @param {String} complaint
+ */
+Q.assert = function (condition, complaint) {
+	if (!condition) {
+		throw new Q.Error(complaint);
+	}
+};
 
 /*
  * Extend some built-in prototypes
  */
 
 /**
- * @class Object
- * @description Q extended methods for Objects
+ * @class Q.Error
+ * @description Throw this when throwing errors in Javascript
  */
+Q.Error = Error;
 
 if (!Object.getPrototypeOf)
 /**
@@ -252,7 +264,7 @@ Sp.queryField = function Q_queryField(name, value) {
 				delete parsed[k];
 			}
 		}
-		return prefix + Q.serializeFields(parsed, keys);
+		return prefix + Q.queryString(parsed, keys);
 	} else {
 		keys = [];
 		parsed = Q.parseQueryString(what, keys);
@@ -260,7 +272,7 @@ Sp.queryField = function Q_queryField(name, value) {
 			keys.push(name);
 		}
 		parsed[name] = value;
-		return prefix + Q.serializeFields(parsed, keys);
+		return prefix + Q.queryString(parsed, keys);
 	}
 };
 
@@ -1329,14 +1341,27 @@ Q.isPlainObject = function (x) {
 };
 
 /**
- * Convenience method for testing instanceof, even in IE
+ * Use this instead of instanceof, it works with Q.mixin, even in IE
  * @static
  * @method instanceOf
  * @param {mixed} testing
  * @param {Function} Constructor
  */
 Q.instanceOf = function (testing, Constructor) {
-	return testing && typeof testing === 'object' && (testing instanceof Constructor);
+	if (!testing || typeof testing !== 'object') {
+		return false;
+	}
+	if (testing instanceof Constructor) {
+		return true;
+	}
+	if (Constructor.__mixins) {
+		for (var mixin in Constructor.__mixins) {
+			if (testing instanceof mixin) {
+				return true;
+			}
+		}
+	}
+	return false;
 };
 
 /**
@@ -2877,28 +2902,29 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  *  and update it on next call to getter (if it happen)
  * @static
  * @method getter
- * @param original {Function}
+ * @param {Function} original
  *  The original getter function to be wrapped
  *  Can also be an array of [getter, execute] which you can use if
  *  your getter does "batching", and waits a tiny bit before sending the batch request,
  *  to see if any more will be requested. In this case, the execute function
  *  is supposed to execute the batched request without waiting any more.
  *  If the original function returns false, the caching is canceled for that call.
- * @param options {Object}
- *  An optional hash of possible options, which include:
- *  "throttle" => a String id to throttle on, or an Object that supports the throttle interface:
- *	"throttle.throttleTry" => function(subject, getter, args) - applies or throttles getter with subject, args
- *	"throttle.throttleNext" => function (subject) - applies next getter with subject
- *	"throttleSize" => defaults to 100. Integer representing the size of the throttle, if it is enabled
- *	"cache" => pass false here to prevent caching, or an object which supports the Q.Cache interface
+ * @param {Object} [options={}] An optional hash of possible options, which include:
+ * @param {Function} [options.prepare] This is a function that is run to copy-construct objects from cached data. It gets (subject, parameters, callback) and is supposed to call callback(subject2, parameters2)
+ * @param {String} [options.throttle] an id to throttle on, or an Object that supports the throttle interface:
+ * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
+ * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
+ * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
+ * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
- *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING
+ *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
+ *  This function also contains Q.Events called onCalled, onResult and onExecuted.
  */
 Q.getter = function _Q_getter(original, options) {
 
 	var gw = function Q_getter_wrapper() {
-		var i, key, that = this, callbacks = [];
+		var i, key, callbacks = [];
 		var arguments2 = Array.prototype.slice.call(arguments);
 
 		// separate fields and callbacks
@@ -2916,18 +2942,29 @@ Q.getter = function _Q_getter(original, options) {
 
 		var cached, cbpos, cbi;
 		Q.getter.usingCached = false;
+		
+		function _prepare(subject, params, callback, ret, cached) {
+			if (gw.prepare) {
+				gw.prepare.call(gw, subject, params, _result);
+			} else {
+				_result(subject, params);
+			}
+			function _result(subject, params) {
+				gw.onResult.handle(subject, params, arguments2, ret, gw);
+				Q.getter.usingCached = cached;
+				callback.apply(subject, params);
+				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
+				Q.getter.usingCached = false;
+			}
+		}
 
 		// if caching is required, check the cache -- maybe the result is there
 		if (gw.cache && !ignoreCache) {
 			if (cached = gw.cache.get(key)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
-					gw.onResult.handle(cached.subject, cached.params, arguments2, ret, original);
-					Q.getter.usingCached = true;
-					callbacks[cbpos].apply(cached.subject, cached.params);
+					_prepare(cached.subject, cached.params, callbacks[cbpos], ret, true);
 					ret.result = Q.getter.CACHED;
-					gw.onExecuted.handle.call(this, arguments2, ret);
-					Q.getter.usingCached = false;
 					return ret; // wrapper found in cache, callback and throttling have run
 				}
 			}
@@ -2965,8 +3002,7 @@ Q.getter = function _Q_getter(original, options) {
 					// process waiting callbacks
 					var wk = _waiting[key];
 					if (wk) for (i = 0; i < wk.length; i++) {
-						gw.onResult.handle(this, arguments, arguments2, wk[i].ret, original);
-						wk[i].callbacks[cbpos].apply(this, arguments);
+						_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, false);
 					}
 					delete _waiting[key]; 
 					// tell throttle to execute the next function, if any
@@ -2980,7 +3016,7 @@ Q.getter = function _Q_getter(original, options) {
 
 		if (!gw.throttle) {
 			// no throttling, just run the function
-			if (false === original.apply(that, args)) {
+			if (false === original.apply(this, args)) {
 				ret.dontCache = true;
 			}
 			ret.result = Q.getter.REQUESTING;
@@ -3037,6 +3073,7 @@ Q.getter = function _Q_getter(original, options) {
 	}
 
 	Q.extend(gw, original, Q.getter.options, options);
+	gw.original = original;
 	gw.onCalled = new Q.Event();
 	gw.onExecuted = new Q.Event();
 	gw.onResult = new Q.Event();
@@ -4362,7 +4399,8 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
  * @param {boolean} [options.localStorage] use local storage instead of page storage
  * @param {boolean} [options.sessionStorage] use session storage instead of page storage
  * @param {String} [options.name] the name of the cache, not really used for now
- * @param {number} [options.max=100] the maximum number of items the cache should hold. Defaults to 100.
+ * @param {Integer} [options.max=100] the maximum number of items the cache should hold. Defaults to 100.
+ * @param {Q.Cache} [options.after] pass an existing cache with max > this cache's max, to look in first
  */
 Q.Cache = function _Q_Cache(options) {
 	if (this === Q) {
@@ -4452,6 +4490,37 @@ Q.Cache = function _Q_Cache(options) {
 			}
 		}
 	};
+	if (options.after) {
+		var cache = options.after;
+		if (!(cache instanceof Q.Cache)) {
+			throw new Q.Exception("Q.Cache after option must be a Q.Cache instance");
+		}
+		if (cache.max < this.max) {
+			throw new Q.Exception("Q.Cache after.max cannot be less than this.max");
+		}
+		var _set = this.set;
+		var _get = this.get;
+		var _remove = this.remove;
+		var _clear = this.clear;
+		this.set = function () {
+			cache.set.apply(this, arguments);
+			return _set.apply(this, arguments);
+		};
+		this.get = function () {
+			cache.get.apply(this, arguments);
+			return _get.apply(this, arguments);
+		};
+		this.remove = function () {
+			cache.remove.call(this, arguments);
+			return _remove.apply(this, arguments);
+		};
+		this.clear = function () {
+			this.each([], function () {
+				cache.remove.apply(this, arguments);
+			});
+			return _clear.apply(this, arguments);
+		};
+	}
 };
 function Q_Cache_get(cache, key, special) {
 	if (cache.documentStorage) {
@@ -4470,22 +4539,9 @@ function Q_Cache_set(cache, key, obj, special) {
 			cache.data[key] = obj;
 		}
 	} else {
-		var k, f=1, json, value;
-		try {
-			json = JSON.stringify(obj);
-		} catch (e) {
-			// we only stuff Objects into the cache
-			json = '{';
-			for (k in obj) {
-				if (!f) json += ',';
-				try { value = JSON.stringify(obj[k]); json += JSON.stringify(k) + ':' + (value === undefined ? null : value); }
-				catch (e) { json += JSON.stringify(k) + "null"; }
-				f=0;
-			}
-			json += '}';
-		}
+		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, json);
+		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
 	}
 }
 function Q_Cache_remove(cache, key, special) {
@@ -4566,7 +4622,6 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 			this.count(count);
 		}
 	}
-
 	var value = {
 		cbpos: cbpos,
 		subject: subject,
@@ -4667,14 +4722,14 @@ Cp.clear = function _Q_Cache_prototype_clear() {
 		this.special = {};
 		this.data = {};
 	} else {
-		var key = this.earliest(), lastkey, item;
+		var key = this.earliest(), prevkey, item;
 		// delete the cached items one by one
 		while (key) {
 			item = Q_Cache_get(this, key);
 			if (item === undefined) break;
-			lastkey = key;
+			prevkey = key;
 			key = item.next;
-			Q_Cache_remove(this, lastkey);
+			Q_Cache_remove(this, prevkey);
 		}
 	}
 	this.earliest(null);
@@ -4689,13 +4744,15 @@ Cp.clear = function _Q_Cache_prototype_clear() {
  */
 Cp.each = function _Q_Cache_prototype_each(args, callback) {
 	var prefix = null;
-	if (!callback) return;
 	if (typeof args === 'function') {
 		callback = args;
 		args = undefined;
 	} else {
 		var json = Q.Cache.key(args);
 		prefix = json.substring(0, json.length-1);
+	}
+	if (!callback) {
+		return;
 	}
 	var cache = this;
 	if (this.documentStorage) {
@@ -4708,19 +4765,19 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 			}
 		});
 	} else {
-		var key = cache.earliest(), lastkey, item;
+		var key = cache.earliest(), prevkey, item;
 		while (key) {
 			item = Q_Cache_get(this, key);
 			if (item === undefined) {
 				break;
 			}
-			lastkey = key;
+			prevkey = key;
 			key = item.next;
-			if (prefix && key.startsWith(prefix)) {
-				return;
+			if (prefix && !prevkey.startsWith(prefix)) {
+				continue;
 			}
-			if (callback.call(this, lastkey, item) === false) {
-				return false;
+			if (callback.call(this, prevkey, item) === false) {
+				break;
 			}
 		}
 	}
@@ -4738,19 +4795,30 @@ Cp.removeEach = function _Q_Cache_prototype_each(args) {
 };
 Q.Cache.document = function _Q_Cache_document(name, max) {
 	if (!Q.Cache.document.caches[name]) {
-		Q.Cache.document.caches[name] = new Q.Cache({name: name, max: max});
+		var cache = Q.Cache.document.caches[name] = new Q.Cache({
+			max: max
+		});
+		cache.name = name;
 	}
 	return Q.Cache.document.caches[name];
 };
 Q.Cache.local = function _Q_Cache_local(name, max) {
 	if (!Q.Cache.local.caches[name]) {
-		Q.Cache.local.caches[name] = new Q.Cache({name: name, localStorage: true, max: max});
+		var cache = Q.Cache.local.caches[name] = new Q.Cache({
+			localStorage: true,
+			max: max
+		});
+		cache.name = name;
 	}
 	return Q.Cache.local.caches[name];
 };
 Q.Cache.session = function _Q_Cache_session(name, max) {
 	if (!Q.Cache.session.caches[name]) {
-		Q.Cache.session.caches[name] = new Q.Cache({name: name, sessionStorage: true, max: max});
+		var cache = Q.Cache.session.caches[name] = new Q.Cache({
+			sessionStorage: true,
+			max: max
+		});
+		cache.name = name;
 	}
 	return Q.Cache.session.caches[name];
 };
@@ -5706,7 +5774,7 @@ Q.request = function (url, slotNames, callback, options) {
 		callback = arguments[3];
 		options = arguments[4];
 		delim = (url.indexOf('?') < 0) ? '?' : '&';
-		url += delim + Q.serializeFields(fields);
+		url += delim + Q.queryString(fields);
 	}
 	if (typeof slotNames === 'function') {
 		options = callback;
@@ -5830,7 +5898,7 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.extend(xmlhttp, o.xhr);
 				sync = sync || xmlhttp.sync;
 			}
-			var content = Q.serializeFields(o.fields);
+			var content = Q.queryString(o.fields);
 			request.xmlhttp = xmlhttp;
 			if (verb === 'GET') {
 				xmlhttp.open('GET', url + (content ? '&' + content : ''), !sync);
@@ -5903,7 +5971,7 @@ Q.request = function (url, slotNames, callback, options) {
 		}
 		if (options.fields) {
 			delim = (url.indexOf('?') < 0) ? '?' : '&';
-			url2 += delim + Q.serializeFields(options.fields);
+			url2 += delim + Q.queryString(options.fields);
 		}
 		if (o.query) {
 			return url2;
@@ -6015,7 +6083,7 @@ Q.jsonRequest = Q.request;
 /**
  * Serialize a plain object, with possible sub-objects, into an http querystring.
  * @static
- * @method serializeFields
+ * @method queryString
  * @param {Object|String|HTMLElement} fields
  *  The object to serialize into a querystring that can be sent to PHP or something.
  *  The algorithm will recursively walk the object, and skip undefined values.
@@ -6027,7 +6095,7 @@ Q.jsonRequest = Q.request;
  * @return {String}
  *  A querystring that can be used with HTTP requests
  */
-Q.serializeFields = function _Q_serializeFields(fields, keys, returnAsObject) {
+Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	if (Q.isEmpty(fields)) {
 		return '';
 	}
@@ -6036,7 +6104,7 @@ Q.serializeFields = function _Q_serializeFields(fields, keys, returnAsObject) {
 	}
 	if (fields instanceof Element) {
 		if (fields.tagName.toUpperCase() !== 'FORM') {
-			throw new Q.Error("Q.serializeFields: element must be a FORM");
+			throw new Q.Error("Q.queryString: element must be a FORM");
 		}
 		var result = '';
 		Q.each(fields.querySelectorAll('input, textarea, select'), function () {
@@ -6168,7 +6236,7 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 	form.setAttribute("action", action);
 
 	var hiddenFields = [];
-	var fields2 = Q.serializeFields(fields, null, true);
+	var fields2 = Q.queryString(fields, null, true);
 	for(var key in fields2) {
 		if(fields2.hasOwnProperty(key)) {
 			var hiddenField = document.createElement("input");
@@ -7602,16 +7670,6 @@ Q.parseQueryString = function Q_parseQueryString(queryString, keys) {
 	});
 	return result;
 };
-
-/**
- * Builds a querystring from an object
- * @static
- * @method buildQueryString
- * @param from {Object} An object containing {key: value} pairs
- * @param keys {Array} An array of keys in the object, in the order in which the querystring should be built
- * @return {String} the resulting querystring
- */
-Q.buildQueryString = Q.serializeFields;
 
 function Q_hashChangeHandler() {
 	var url = location.hash.queryField('url'), result = null;
@@ -10469,6 +10527,8 @@ Q.audio = Q.getter(function _Q_audio(url, handler, options) {
 	} else {
 		audio.onCanPlayThrough.add(handler);
 	}
+}, {
+	cache: Q.Cache.document('Q.audio', 100)
 });
 
 /**

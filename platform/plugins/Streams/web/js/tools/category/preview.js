@@ -142,7 +142,7 @@ function _Streams_category_preview(options, preview) {
 );
 
 Q.Template.set('Streams/category/preview/view',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
@@ -150,7 +150,7 @@ Q.Template.set('Streams/category/preview/view',
 );
 
 Q.Template.set('Streams/category/preview/edit',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
