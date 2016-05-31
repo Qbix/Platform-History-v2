@@ -3613,7 +3613,7 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 
 Q.beforeInit.add(function _Streams_beforeInit() {
 
-	var where = Streams.cache.where || 'local';
+	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
 		cache: Q.Cache[where]("Streams.get", 100), 
@@ -3639,7 +3639,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			if (params[0]) { // some error
 				return callback(subject, params);
 			}
-			var keys = Object.keys(subject.relatedStreams).push('stream');
+			var keys = Object.keys(subject.relatedStreams).concat(['stream']);
 			var pipe = Q.pipe(keys, function () {
 				callback(subject, params);
 			});
