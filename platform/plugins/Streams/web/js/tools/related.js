@@ -231,9 +231,9 @@ function _Streams_related_tool (options)
 		
 		var $te = $(tool.element);
 		if (state.editable) {
-			$te.removeClass('Streams_editable').addClass('Streams_related_notEditable');
+			$te.removeClass('Streams_related_editable').addClass('Streams_related_notEditable');
 		} else {
-			$te.removeClass('Streams_related_notEditable').addClass('Streams_editable');
+			$te.removeClass('Streams_related_notEditable').addClass('Streams_related_editable');
 		}
 		
 		function relatedResult(errorMessage) {
