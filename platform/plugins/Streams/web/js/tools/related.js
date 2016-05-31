@@ -229,6 +229,13 @@ function _Streams_related_tool (options)
 			relatedResult
 		);
 		
+		var $te = $(tool.element);
+		if (state.editable) {
+			$te.removeClass('Streams_editable').addClass('Streams_related_notEditable');
+		} else {
+			$te.removeClass('Streams_related_notEditable').addClass('Streams_editable');
+		}
+		
 		function relatedResult(errorMessage) {
 			if (errorMessage) {
 				console.warn("Streams/related refresh: " + errorMessage);
