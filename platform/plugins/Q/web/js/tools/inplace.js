@@ -379,7 +379,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			onSaveSuccess(response);
 		}, {
 			method: method,
-			fields: Q.serializeFields(form[0])
+			fields: Q.queryString(form[0])
 		});
 
 		if (used_placeholder) {

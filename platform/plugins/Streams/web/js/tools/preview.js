@@ -467,7 +467,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 );
 
 Q.Template.set('Streams/preview/create',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_create Q_clearfix">'
 	+ '<img src="{{& src}}" alt="{{alt}}" class="Streams_preview_add">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'

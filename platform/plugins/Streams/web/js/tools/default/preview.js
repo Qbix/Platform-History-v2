@@ -116,15 +116,15 @@ function _Streams_default_preview(options, preview) {
 );
 
 Q.Template.set('Streams/default/preview/view',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
-	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
+	+ '<{{titleTag}} class="Streams_preview_title Streams_preview_view">{{title}}</{{titleTag}}>'
 	+ '</div></div>'
 );
 
 Q.Template.set('Streams/default/preview/edit',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'

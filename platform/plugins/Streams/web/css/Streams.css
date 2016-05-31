@@ -682,3 +682,5 @@
 .Streams_inplace_tool.Q_editing { z-index: 99999; }
 
 .fr-toolbar.fr-inline { z-index: 10000; }
+
+.Q_tabs_tool.Streams_related_tool .Streams_preview_contents  { white-space: nowrap; overflow: visible; text-overflow: ellipsis; vertical-align: middle; }

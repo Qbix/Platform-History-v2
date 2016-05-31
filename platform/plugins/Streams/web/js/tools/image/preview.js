@@ -162,7 +162,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 );
 
 Q.Template.set('Streams/image/preview/view',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_image_preview_icon">'
 	+ '<div class="Streams_image_preview_title {{titleClass}}">'
 	+ '{{#if showTitle}}'
@@ -172,7 +172,7 @@ Q.Template.set('Streams/image/preview/view',
 );
 
 Q.Template.set('Streams/image/preview/edit',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_image_preview_icon">'
 	+ '<div class="Streams_image_preview_title {{titleClass}}">'
 	+ '{{#if showTitle}}'
@@ -182,7 +182,7 @@ Q.Template.set('Streams/image/preview/edit',
 );
 
 Q.Template.set('Streams/image/preview/create',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_create Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_add">'
 	+ '<div class="Streams_image_preview_title {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'

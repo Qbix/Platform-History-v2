@@ -434,7 +434,7 @@ Q.Tool.define({
 Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	var args = arguments;
 	var url = Q.action('Streams/stream?')+
-		Q.serializeFields({"publisherId": publisherId, "name": streamName});
+		Q.queryString({"publisherId": publisherId, "name": streamName});
 	var slotNames = ['stream'];
 	if (!publisherId) {
 		throw new Q.Error("Streams.get: publisherId is empty");
@@ -677,8 +677,11 @@ Streams.construct = function _Streams_construct(fields, extra, callback) {
 	}
 
 	if (Q.typeOf(fields) === 'Q.Streams.Stream') {
-		Q.handle(callback, fields, [null, fields]);
-		return false;
+		fields = Q.extend({}, fields.fields, {
+			access: fields.access,
+			participant: fields.participant,
+			isRequired: fields.isRequired
+		});
 	}
 
 	if (Q.isEmpty(fields)) {
@@ -1374,7 +1377,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		}
 		// We sent a request to get the latest messages.
 		// But we will also force-get the stream, to trigger any handlers
-		// set for a streams refresh event.
+		// set for the stream's onRefresh event
 		Streams.get.force(publisherId, streamName, function (err, stream) {
 			if (!err) {
 				var ps = Streams.key(publisherId, streamName);
@@ -3585,8 +3588,8 @@ function _onCalledHandler(args, shared) {
 	_retain = undefined;
 }
 
-function _onResultHandler(subject, params, args, ret, original) {
-	var key = ret.retainUnderKey;
+function _onResultHandler(subject, params, args, shared, original) {
+	var key = shared.retainUnderKey;
 	if (key == undefined || params[0] || !subject) {
 		return; // either retainWith was not called or an error occurred during the request
 	}
@@ -3610,11 +3613,19 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 
 Q.beforeInit.add(function _Streams_beforeInit() {
 
-	var where = Streams.cache.where || 'document';
+	var where = Streams.cache.where || 'local';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
 		cache: Q.Cache[where]("Streams.get", 100), 
-		throttle: 'Streams.get'
+		throttle: 'Streams.get',
+		prepare: function (subject, params, callback) {
+			if (params[0]) {
+				return callback(this, params);
+			}
+			Streams.construct(subject, {}, function () {
+				callback(this, [null, this]);
+			});
+		}
 	});
 
 	Streams.getParticipating = Q.getter(Streams.getParticipating, {
@@ -3623,7 +3634,26 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 
 	Streams.related = Q.getter(Streams.related, {
 		cache: Q.Cache[where]("Streams.related", 100), 
-		throttle: 'Streams.related'
+		throttle: 'Streams.related',
+		prepare: function (subject, params, callback) {
+			if (params[0]) { // some error
+				return callback(subject, params);
+			}
+			var keys = Object.keys(subject.relatedStreams).push('stream');
+			var pipe = Q.pipe(keys, function () {
+				callback(subject, params);
+			});
+			Streams.construct(subject.stream, {}, function () {
+				subject.stream = this;
+				pipe.fill('stream')();
+			});
+			Q.each(subject.relatedStreams, function (i) {
+				Streams.construct(this, function () {
+					subject.relatedStreams[i] = this;
+					pipe.fill(i)();
+				});
+			});
+		}
 	});
 
 	Message.get = Q.getter(Message.get, {
