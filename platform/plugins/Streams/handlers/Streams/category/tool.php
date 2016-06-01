@@ -3,29 +3,24 @@
 /**
  * This tool generates a category selector.
  *
- * @param array $options
- *  An associative array of parameters, containing:
- *  "publisherId" => Optional. publisherId of the stream to present. If "stream" parameter is empty
- *    defaults to Streams::requestedPublisherId()
- *  "name" => Optional. the name of the stream to present. If "stream" parameter is empty
- *    defaults to Streams::requestedName()
- *  "stream" => Optional. Object. The stream objects to show categories.
+ * @param {array} $options An associative array of parameters, containing:
+ * @param {string} [$options.publisherId=Streams::requestedPublisherId()] The publisherId of the stream to present. If "stream" parameter is empty
+ * @param {string} [$options.streamName=Streams::requestedName()] The streamName of the stream to present. If "stream" parameter is empty
+ * @param {string} [options.relationType=null] Filter the relation type.
  */
 
 function Streams_category_tool($options) {
 	extract($options);
-	$userId = Users::loggedInUser(true)->id;
-	$publisherId = Streams::requestedPublisherId(true);
-	$name = Streams::requestedName(true);
-	$stream = Streams::fetchOne($userId, $publisherId, $name, true);
-	$options = array_merge(array(
-		'publisherId' => $stream->publisherId, 
-		'name' => $stream->name
-	), $options);
+	if (!$publisherId) {
+		$options['publisherId'] = $publisherId = Streams::requestedPublisherId(true);
+	}
+	if (!$streamName) {
+		$options['streamName'] = $streamName = Streams::requestedName(true);
+	}
 	Q_Response::setToolOptions($options);
+	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$userId = Users::loggedInUser(true)->id;
 	return Q::tool('Streams/related', array_merge(array(
-		'publisherId' => Users::communityId(),
-		'streamName' => 'Streams/category/admins',
-		'relationType' => ''
+		'publisherId' => Users::communityId()
 	), $options));
 }

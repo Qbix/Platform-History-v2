@@ -14,8 +14,8 @@
  *   @param {String} [options.publisherId] Either this or "stream" is required. Publisher id of the stream to which the others are related
  *   @param {String} [options.streamName] Either this or "stream" is required. Name of the stream to which the others are related
  *   @param {String} [options.tag="div"] The type of element to contain the preview tool for each related stream.
- *   @param {Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
- *   @param {Stream} [options.relationType =""] The type of the relation.
+ *   @param {Q.Streams.Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
+ *   @param {string} [options.relationType=null] The type of the relation.
  *   @param {Boolean} [options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
@@ -36,12 +36,9 @@ function _Streams_related_tool (options)
 {
 	// check for required options
 	var state = this.state;
-	if ((!options.publisherId || !options.streamName)
-	&& (!options.stream || Q.typeOf(options.stream) !== 'Streams.Stream')) {
+	if ((!state.publisherId || !state.streamName)
+	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
 		throw new Q.Error("Streams/related tool: missing options.stream");
-	}
-	if (options.relationType === undefined) {
-		throw new Q.Error("Streams/related tool: missing options.relationType");
 	}
 
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
@@ -56,6 +53,7 @@ function _Streams_related_tool (options)
 {
 	publisherId: Q.info.app,
 	isCategory: true,
+	relationType: null,
 	realtime: false,
 	editable: true,
 	closeable: true,
@@ -348,12 +346,12 @@ function _Streams_related_tool (options)
 			}
 		}
 		var t = tool;
-		while (t) {
+		do {
 			tabs = tool.tabs = t.sibling('Q/tabs');
 			if (tabs) {
 				break;
 			}
-		} do (t = t.parent());
+		} while (t = t.parent());
 		if (tabs) {
 			var $composer = tool.$('.Streams_related_composer');
 			$composer.addClass('Q_tabs_tab');

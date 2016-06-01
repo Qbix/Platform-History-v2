@@ -58,9 +58,10 @@ function Users_avatar_tool($options)
 		$attributes = isset($options['iconAttributes'])
 			? $options['iconAttributes']
 			: array();
+		$class = "Users_avatar_icon Users_avatar_icon_$icon";
 		$attributes['class'] = isset($attributes['class'])
-			? $attributes['class'] . ' Users_avatar_icon'
-			: 'Users_avatar_icon';
+			? $attributes['class'] . ' ' . $class
+			: $class;
 		if (isset($options['cacheBust'])) {
 			$attributes['cacheBust'] = $options['cacheBust'];
 		}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Used to create a new stream
+ * Used to add an interest
  *
  * @param {array} $_REQUEST 
  * @param {String} [$_REQUEST.title] Required. The title of the interest.
@@ -54,9 +54,7 @@ function Streams_interest_post()
 	}
 	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
 	if ($subscribe) {
-		if (!$stream->subscription($user->id)) {
-			$stream->subscribe();
-		}
+		$stream->subscribe();
 	} else {
 		$stream->join();
 	}

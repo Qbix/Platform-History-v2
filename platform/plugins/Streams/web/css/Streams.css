@@ -631,11 +631,6 @@
 .Streams_callToAction h2 { font-size: 25px; }
 .Streams_explanation { text-align: left; }
 
-.Streams_stream_icon { float: left; width: 80px; }
-.Streams_stream_title { line-height: 80px; font-size: 40px;  }
-.Streams_stream_player { clear: both; }
-.Streams_stream_activity_pane { border-top: 1px solid #aaa; }
-
 .Streams_related_composer { display: inline-block; margin-right: 10px; }
 .Streams_file_preview_tool label { cursor: pointer; }
 .Streams_file_form,

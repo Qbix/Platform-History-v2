@@ -18,24 +18,23 @@ Q.Tool.define('Streams/category', function () {
 	var tool = this;
 	var state = tool.state;
 	
-	if (!state.publisherId) {
-		throw new Q.Error("Streams/category tool: missing options.publisherId");
-	}
 	if (!state.streamName) {
 		throw new Q.Error("Streams/category tool: missing options.streamName");
 	}
 	
-	var element = Q.Tool.setUpElement('div', 'Streams/related',
-	Q.extend(state.related, {
-		publisherId: state.publisherId,
-		streamName: state.streamName
-	}));
-	$(element).appendTo(tool.element).activate();
-	
+	if (!this.$('.Streams_related_tool').legnth) {
+		var element = Q.Tool.setUpElement('div', 'Streams/related',
+		Q.extend(state.related, {
+			publisherId: state.publisherId,
+			streamName: state.streamName
+		}));
+		$(element).appendTo(tool.element).activate();
+	}	
 },
 
 {
 	// default options
+	publisherId: Q.Users.communityId,
 	related: {}
 },
 
