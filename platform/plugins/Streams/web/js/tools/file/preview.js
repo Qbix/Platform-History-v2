@@ -180,7 +180,7 @@ function _formatSize(bytes)
 }
 
 Q.Template.set('Streams/file/preview/view',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
@@ -189,7 +189,7 @@ Q.Template.set('Streams/file/preview/view',
 );
 
 Q.Template.set('Streams/file/preview/edit',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
@@ -198,7 +198,7 @@ Q.Template.set('Streams/file/preview/edit',
 );
 
 Q.Template.set('Streams/file/preview/create',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_create Q_clearfix">'
 	+ '<img src="{{& src}}" alt="{{alt}}" class="Streams_preview_add">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'

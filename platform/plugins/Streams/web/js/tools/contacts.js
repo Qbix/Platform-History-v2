@@ -56,7 +56,7 @@ Q.Tool.define("Streams/contacts", function(options) {
 );
 
 Q.Template.set('Streams/contacts/contact/view',
-	'<div class="Streams_preview_container Q_clearfix">'
+	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_image_preview_icon">'
 	+ '<div class="Streams_image_preview_title {{titleClass}}">'
 	+ '{{#if showTitle}}'
