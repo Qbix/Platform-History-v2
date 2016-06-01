@@ -24,6 +24,7 @@ function Streams_interest_post()
 			'name' => $name,
 			'title' => $title
 		));
+	}
 		$parts = explode(': ', $title, 2);
 		$keywords = implode(' ', $parts);
 		$tries = array($keywords, $parts[1]);
@@ -58,7 +59,6 @@ function Streams_interest_post()
 			$stream->icon = $name;
 		}
 		$stream->save();
-	}
 	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
 	if ($subscribe) {
 		$stream->subscribe();

@@ -22,7 +22,7 @@ Q.Tool.define('Streams/category', function () {
 		throw new Q.Error("Streams/category tool: missing options.streamName");
 	}
 	
-	if (!this.$('.Streams_related_tool').legnth) {
+	if (!this.$('.Streams_related_tool').length) {
 		var element = Q.Tool.setUpElement('div', 'Streams/related',
 		Q.extend(state.related, {
 			publisherId: state.publisherId,
