@@ -9,7 +9,7 @@
  * @class Streams category
  * @constructor
  * @param {Object} [options] this object contains function parameters
- * @param {Object} options.publisherId The id of the user publishing the Streams/category
+ * @param {Object} [options.publisherId=Q.Users.communityId] The id of the user publishing the Streams/category
  * @param {Object} options.streamName The name of the Streams/category stream
  * @param {Object} [options.related] Any options to pass to the Streams/related tool
  */

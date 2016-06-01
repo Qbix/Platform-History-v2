@@ -20,7 +20,5 @@ function Streams_category_tool($options) {
 	Q_Response::setToolOptions($options);
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 	$userId = Users::loggedInUser(true)->id;
-	return Q::tool('Streams/related', array_merge(array(
-		'publisherId' => Users::communityId()
-	), $options));
+	return Q::tool('Streams/related', $options);
 }
