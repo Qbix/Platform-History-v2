@@ -187,7 +187,7 @@ Q.Tool.define("Places/location", function (options) {
 	});
 	
 	function _submit(zipcode, fields) {
-		fields = Q.extend({}, {
+		fields = Q.extend({}, fields, {
 			subscribe: true,
 			unsubscribe: true,
 			miles: tool.$('.Places_location_miles').val(),
