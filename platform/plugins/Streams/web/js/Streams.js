@@ -3623,7 +3623,8 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 				return callback(this, params);
 			}
 			Streams.construct(subject, {}, function () {
-				callback(this, [null, this]);
+				params[1] = this;
+				callback(this, params);
 			});
 		}
 	});

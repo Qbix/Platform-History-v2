@@ -2535,6 +2535,7 @@ abstract class Streams extends Base_Streams
 		$state = 'participating';
 		$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
 		$posted = empty($options['posted']) ? 'no' : 'yes';
+		$updateCounts = array();
 		foreach ($streamNames as $sn) {
 			if (!isset($participants[$sn])) {
 				$streamNamesMissing[] = $sn;
@@ -2552,6 +2553,7 @@ abstract class Streams extends Base_Streams
 			$type = ($participant->state === 'participating') ? 'visit' : 'join';
 			$prevState = $participant->state;
 			$participant->state = $state;
+			$updateCounts[$prevState][] = $sn;
 			if (empty($options['noVisit']) or $type !== 'visit') {
 				// Send a message to Node
 				Q_Utils::sendToNode(array(
@@ -2588,6 +2590,7 @@ abstract class Streams extends Base_Streams
 					'userId' => $asUserId
 				))->execute();
 		}
+		self::_updateCounts($publisherId, $updateCounts, $state);
 		if ($streamNamesMissing) {
 			$rows = array();
 			foreach ($streamNamesMissing as $sn) {
@@ -2674,8 +2677,10 @@ abstract class Streams extends Base_Streams
 			'userId' => $asUserId
 		))->ignoreCache()->fetchDbRows(null, null, 'streamName');
 		$streamNamesUpdate = array();
+		$updateCounts = array();
+		$state = 'left';
 		foreach ($participants as $sn => &$p) {
-			if ($p->state === 'left') {
+			if ($p->state === $state) {
 				continue;
 			}
 			if (!isset($participants[$sn])) {
@@ -2683,19 +2688,21 @@ abstract class Streams extends Base_Streams
 				continue;
 			}
 			$streamNamesUpdate[] = $sn;
+			$updateCounts[$p->state][] = $sn;
 			$p->set('prevState', $p->state);
-			$p->state = 'left';
+			$p->state = $state;
 		}
 		if (!$streamNamesUpdate) {
 			return array();
 		}
 		Streams_Participant::update()
-			->set(array('state' => 'left'))
+			->set(compact('state'))
 			->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $streamNamesUpdate,
 				'userId' => $asUserId
 			))->execute();
+		self::_updateCounts($publisherId, $updateCounts, $state);
 		foreach ($streamNames as $sn) {
 			$stream = $streams2[$sn];
 			$participant = Q::ifset($participants, $sn, null);
@@ -3074,6 +3081,25 @@ abstract class Streams extends Base_Streams
 				}
 				throw new Users_Exception_NotAuthorized();
 			}
+		}
+	}
+	
+	private static function _updateCounts($publisherId, $updateCounts, $state)
+	{
+		foreach ($updateCounts as $prevState => $names) {
+			if ($prevState === $state) {
+				continue;
+			}
+			$prevStateField = $prevState.'Count';
+			$newStateField = $state.'Count';
+			Streams_Stream::update()
+				->set(array(
+					$prevStateField => new Db_Expression("$prevStateField - 1"),
+					$newStateField => new Db_Expression("$newStateField + 1")
+				))->where(array(
+					'publisherId' => $publisherId,
+					'name' => $names
+				))->execute();
 		}
 	}
 	

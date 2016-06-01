@@ -439,9 +439,7 @@ Streams.listen = function (options) {
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
 				Streams.emitToUser(userId, 'join', participant);
-				stream.updateParticipantCounts('participating', parsed.prevState, function () {
-					Streams.Stream.emit('join', stream, userId, clientId);
-				});
+				Streams.Stream.emit('join', stream, userId, clientId);
 				break;
 			case 'Streams/Stream/visit':
 				participant = JSON.parse(parsed.participant);
@@ -463,9 +461,7 @@ Streams.listen = function (options) {
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 				// inform user's clients about change
 				Streams.emitToUser(userId, 'leave', participant);
-				stream.updateParticipantCounts('left', parsed.prevState, function () {
-					Streams.Stream.emit('leave', stream, userId, clientId);
-				});
+				Streams.Stream.emit('leave', stream, userId, clientId);
 				break;
 			case 'Streams/Stream/remove':
 				if (Q.Config.get(['Streams', 'logging'], false)) {
