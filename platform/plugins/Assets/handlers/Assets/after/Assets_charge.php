@@ -29,7 +29,7 @@ function Assets_after_Assets_charge($params)
 	if (isset($options['description'])) {
 		$description = $options['description'];
 	}
-	$currencies = Q::json_decode(file_get_contents(AWARDS_PLUGIN_CONFIG_DIR.DS.'currencies.json'), true);
+	$currencies = Q::json_decode(file_get_contents(ASSETS_PLUGIN_CONFIG_DIR.DS.'currencies.json'), true);
 	if (!isset($currencies['symbols'][$currency])) {
 		throw new Q_Exception_BadValue(array('internal' => 'currency', 'problem' => 'no symbol found'), 'currency');
 	}
