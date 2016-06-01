@@ -26,18 +26,25 @@ function Streams_interest_post()
 		));
 		$parts = explode(': ', $title, 2);
 		$keywords = implode(' ', $parts);
-		try {
-			$data = Q_Image::pixabay($keywords, array(
-				'orientation' => 'horizontal',
-				'min_width' => '500',
-				'safesearch' => 'true',
-				'image_type' => 'photo'
-			), true);
-		} catch (Exception $e) {
-			Q::log("Exception during Streams/interest post: ". $e->getMessage());
-			$data = null;
+		$tries = array($keywords, $parts[1]);
+		$data = null;
+		foreach ($tries as $t) {
+			try {
+				$data = Q_Image::pixabay($t, array(
+					'orientation' => 'horizontal',
+					'min_width' => '500',
+					'safesearch' => 'true',
+					'image_type' => 'photo'
+				), true);
+			} catch (Exception $e) {
+				Q::log("Exception during Streams/interest post: " . $e->getMessage());
+				$data = null;
+			}
+			if ($data) {
+				break;
+			}
 		}
-		if (!empty($data)) {
+		if ($data) {
 			$sizes = Q_Config::expect('Streams', 'icons', 'sizes');
 			ksort($sizes);
 			$params = array(
