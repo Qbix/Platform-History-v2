@@ -338,7 +338,7 @@ function _Streams_related_tool (options)
 	 *  The elements of the tools representing the related streams
 	 */
 	integrateWithTabs: function (elements) {
-		var id, parents, tabs, i;
+		var id, tabs, i;
 		var tool = this;
 		var state = tool.state;
 		if (typeof state.tabs === 'string') {
@@ -347,11 +347,14 @@ function _Streams_related_tool (options)
 				throw new Q.Error("Q/related tool: state.tabs does not refer to a function");
 			}
 		}
-		parents = tool.parents();
-		parents[tool.id] = tool;
-		for (id in parents) {
-			var tabs = tool.tabs = Q.Tool.from(parents[id].element, "Q/tabs");
-			if (!tabs) continue;
+		var t = tool;
+		while (t) {
+			tabs = tool.tabs = t.sibling('Q/tabs');
+			if (tabs) {
+				break;
+			}
+		} do (t = t.parent());
+		if (tabs) {
 			var $composer = tool.$('.Streams_related_composer');
 			$composer.addClass('Q_tabs_tab');
 			Q.each(elements, function (i) {
@@ -376,7 +379,6 @@ function _Streams_related_tool (options)
 				});
 			});
 			tabs.refresh();
-			break;
 		}
 	},
 	Q: {
