@@ -2538,6 +2538,7 @@ abstract class Streams extends Base_Streams
 		$updateCounts = array();
 		foreach ($streamNames as $sn) {
 			if (!isset($participants[$sn])) {
+				$updateCounts[''][] = $sn;
 				$streamNamesMissing[] = $sn;
 				continue;
 			}
@@ -3090,13 +3091,17 @@ abstract class Streams extends Base_Streams
 			if ($prevState === $state) {
 				continue;
 			}
-			$prevStateField = $prevState.'Count';
 			$newStateField = $state.'Count';
+			$updates = array(
+				$newStateField => new Db_Expression("$newStateField + 1")
+			);
+			if ($prevState) {
+				$prevStateField = $prevState.'Count';
+				$updates[$prevStateField] = new Db_Expression("$prevStateField - 1");
+			}
 			Streams_Stream::update()
-				->set(array(
-					$prevStateField => new Db_Expression("$prevStateField - 1"),
-					$newStateField => new Db_Expression("$newStateField + 1")
-				))->where(array(
+				->set($updates)
+				->where(array(
 					'publisherId' => $publisherId,
 					'name' => $names
 				))->execute();
