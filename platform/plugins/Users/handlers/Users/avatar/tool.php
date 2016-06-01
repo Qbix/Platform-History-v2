@@ -52,9 +52,10 @@ function Users_avatar_tool($options)
 		$attributes = isset($options['iconAttributes'])
 			? $options['iconAttributes']
 			: array();
+		$class = "Users_avatar_icon Users_avatar_icon_$icon";
 		$attributes['class'] = isset($attributes['class'])
-			? $attributes['class'] . ' Users_avatar_icon'
-			: 'Users_avatar_icon';
+			? $attributes['class'] . ' ' . $class
+			: $class;
 		$result .= Q_Html::img($user->iconUrl($icon), 'user icon', $attributes);
 	}
 	$result .= '<span class="Users_avatar_name">' . $user->username . '</span>';

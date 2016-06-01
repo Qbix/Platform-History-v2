@@ -989,7 +989,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @throws {Q_Exception_WrongValue}
 	 *	If string is not referring to Streams::$WRITE_LEVEL
 	 */
-	function testWriteLevel($level, &$numeric)
+	function testWriteLevel($level)
 	{
 		if ($this->publishedByFetcher) {
 			return true;
@@ -1481,7 +1481,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$q = Streams_Message::select('*')->where($criteria);
 		
 		// getting $min and $max
-		$result = Streams_Message::select("MIN(ordinal) AS min, MAX(ordinal) AS max")
+		$result = Streams_Message::select("MIN(ordinal) min, MAX(ordinal) max")
 				->where($criteria)
 				->fetchAll(PDO::FETCH_ASSOC);
 		if (!$result[0]) return array();

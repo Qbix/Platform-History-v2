@@ -1053,7 +1053,7 @@ Streams.invite.options = {
  *  Publisher's user id
  * @param name {string}
  *	Name of the stream to/from which the others are related
- * @param relationType {String} the type of the relation
+ * @param relationType {String|null} the type of the relation
  * @param isCategory {boolean} defaults to false. If true, then gets streams related TO this stream.
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
@@ -1074,12 +1074,12 @@ Streams.invite.options = {
  *  otherwise, first parameter is null and the "this" object is the data containing "stream", "relations" and "streams"
  */
 Streams.related = function _Streams_related(publisherId, streamName, relationType, isCategory, options, callback) {
-	if (typeof publisherId !== 'string'
-	|| typeof relationType !== 'string') {
-		throw new Q.Error("Streams.related is expecting publisherId, relationType as strings");
-	}
 	if (!publisherId || !streamName) {
 		throw new Q.Error("Streams.related is expecting publisherId and streamName to be non-empty");
+	}
+	if (typeof publisherId !== 'string'
+	|| (relationType && typeof relationType !== 'string')) {
+		throw new Q.Error("Streams.related is expecting publisherId, relationType as strings");
 	}
 	if (typeof isCategory !== 'boolean') {
 		callback = options;

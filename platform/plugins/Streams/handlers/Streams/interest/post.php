@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Used to create a new stream
+ * Used to add an interest
  *
  * @param {array} $_REQUEST 
  * @param {String} [$_REQUEST.title] Required. The title of the interest.
@@ -24,20 +24,28 @@ function Streams_interest_post()
 			'name' => $name,
 			'title' => $title
 		));
+	}
 		$parts = explode(': ', $title, 2);
 		$keywords = implode(' ', $parts);
-		try {
-			$data = Q_Image::pixabay($keywords, array(
-				'orientation' => 'horizontal',
-				'min_width' => '500',
-				'safesearch' => 'true',
-				'image_type' => 'photo'
-			), true);
-		} catch (Exception $e) {
-			Q::log("Exception during Streams/interest post: ". $e->getMessage());
-			$data = null;
+		$tries = array($keywords, $parts[1]);
+		$data = null;
+		foreach ($tries as $t) {
+			try {
+				$data = Q_Image::pixabay($t, array(
+					'orientation' => 'horizontal',
+					'min_width' => '500',
+					'safesearch' => 'true',
+					'image_type' => 'photo'
+				), true);
+			} catch (Exception $e) {
+				Q::log("Exception during Streams/interest post: " . $e->getMessage());
+				$data = null;
+			}
+			if ($data) {
+				break;
+			}
 		}
-		if (!empty($data)) {
+		if ($data) {
 			$sizes = Q_Config::expect('Streams', 'icons', 'sizes');
 			ksort($sizes);
 			$params = array(
@@ -51,12 +59,9 @@ function Streams_interest_post()
 			$stream->icon = $name;
 		}
 		$stream->save();
-	}
 	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
 	if ($subscribe) {
-		if (!$stream->subscription($user->id)) {
-			$stream->subscribe();
-		}
+		$stream->subscribe();
 	} else {
 		$stream->join();
 	}
