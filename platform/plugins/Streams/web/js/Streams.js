@@ -3369,15 +3369,17 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		$('<div class="Streams_login_get_started">&nbsp;</div>')
 		.append($b)
 	).submit(Q.throttle(function (e) {
-		e.preventDefault();
+		var $this = $(this);
+		$this.removeData('cancelSubmit');
+		document.activeElement.blur();
 		if (!$('#Users_agree').attr('checked')) {
-			$(this).data('cancelSubmit', true);
-			if (!confirm(Q.text.Users.login.confirmTerms)) {
-				$(this).data('cancelSubmit', true);
-			} else {
-				$(this).data('cancelSubmit', false);
-				$('#Users_agree').attr('checked', 'checked');
-			}
+			$this.data('cancelSubmit', true);
+			setTimeout(function () {
+				if (confirm(Q.text.Users.login.confirmTerms)) {
+					$('#Users_agree').attr('checked', 'checked');
+					$this.submit();
+				}
+			}, 300);
 		}
 	}, 300)).on('keydown', function (e) {
 		if ((e.keyCode || e.which) === 13) {
