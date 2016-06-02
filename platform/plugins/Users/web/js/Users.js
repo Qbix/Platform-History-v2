@@ -1180,13 +1180,17 @@ function login_callback(err, response) {
 			$('<button type="submit" class="Q_button Users_login_start Q_main_button" />')
 			.html(Q.text.Users.login.registerButton)
 		)).submit(function () {
-			$(this).removeData('cancelSubmit');
+			var $this = $(this);
+			$this.removeData('cancelSubmit');
+			document.activeElement.blur();
 			if (!$('#Users_agree').attr('checked')) {
-				if (!confirm(Q.text.Users.login.confirmTerms)) {
-					$(this).data('cancelSubmit', true);
-				} else {
-					$('#Users_agree').attr('checked', 'checked');
-				}
+				$this.data('cancelSubmit', true);
+				setTimeout(function () {
+					if (confirm(Q.text.Users.login.confirmTerms)) {
+						$('#Users_agree').attr('checked', 'checked');
+						$this.submit();
+					}
+				}, 300);
 			}
 		});
 		
@@ -1271,7 +1275,9 @@ function login_callback(err, response) {
 	$('#Users_login_step1').animate({"opacity": 0.5}, 'fast');
 	$('#Users_login_step1 .Q_button').attr('disabled', 'disabled');
 	if (!autologin) {
-		step2_form.validator().submit(Q.throttle(onFormSubmit, 300));
+		step2_form.validator().submit(function (e) {
+			e.preventDefault();
+		}).submit(Q.throttle(onFormSubmit, 300));
 		$('input', step2_form).add('select', step2_form).on('input', function () {
 			if (step2_form.data('validator')) {
 				step2_form.data('validator').reset($(this));
