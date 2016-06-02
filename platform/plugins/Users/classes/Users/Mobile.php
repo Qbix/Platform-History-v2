@@ -40,17 +40,6 @@ class Users_Mobile extends Base_Users_Mobile
 		$fields = array(),
 		$options = array())
 	{
-		/**
-		 * @event Users/sms/sendMessage {before}
-		 * @param {string} view
-		 * @param {array} fields
-		 * @param {array} options
-		 * @return {boolean}
-		 */
-		$result = Q::event('Users/sms/sendMessage', compact('view', 'fields', 'options'), 'before');
-		if (isset($result)) {
-			return $result;
-		}
 		if (!Q_Valid::phone($this->number, $number)) {
 			throw new Q_Exception_WrongType(array(
 				'field' => '$this->number',
@@ -61,6 +50,18 @@ class Users_Mobile extends Base_Users_Mobile
 		
 		$app = Q_Config::expect('Q', 'app');
 		$body = Q::view($view, $fields);
+		
+		/**
+		 * @event Users/mobile/sendMessage {before}
+		 * @param {string} view
+		 * @param {array} fields
+		 * @param {array} options
+		 * @return {boolean}
+		 */
+		$result = Q::event('Users/mobile/sendMessage', compact('view', 'body', 'fields', 'options'), 'before');
+		if (isset($result)) {
+			return $result;
+		}
 
 		$sent = false;
 		if (!empty($options['delay'])) {
@@ -88,6 +89,18 @@ class Users_Mobile extends Base_Users_Mobile
 
 			if ($sid and $token) {
 				$client = new Services_Twilio($sid, $token);
+				/**
+				 * @event Users/mobile/sendMessage/twilio {before}
+				 * @param {string} view
+				 * @param {array} fields
+				 * @param {array} options
+				 * @param {Services_Twilio} client You can call methods on this before sending sms
+				 * @return {boolean}
+				 */
+				$result = Q::event('Users/mobile/sendMessage/twilio', compact('view', 'body', 'fields', 'options', 'client'), 'before');
+				if (isset($result)) {
+					return $result;
+				}
 				$message = $client->account->sms_messages->create(
 					$from, // From a valid Twilio number
 					$number, // Text this number
@@ -137,8 +150,8 @@ class Users_Mobile extends Base_Users_Mobile
 				}
 
 				if ($transport) {
-					$mail = new Zend_Mail();
-					$mail->setFrom(reset($from), next($from));
+					$email = new Zend_Mail();
+					$email->setFrom(reset($from), next($from));
 					$gateways = Q_Config::get('Users', 'mobile', 'gateways', array(
 						'at&t' => 'txt.att.net',
 						'sprint' => 'messaging.sprintpcs.com',
@@ -147,11 +160,23 @@ class Users_Mobile extends Base_Users_Mobile
 					));
 					$number2 = substr($this->number, 2);
 					foreach ($gateways as $k => $v) {
-						$mail->addTo($number2.'@'.$v);
+						$email->addTo($number2.'@'.$v);
 					}
-					$mail->setBodyText($body);
+					$email->setBodyText($body);
 					try {
-						$mail->send($transport);
+						/**
+						 * @event Users/mobile/sendMessage/gateway {before}
+						 * @param {string} view
+						 * @param {array} fields
+						 * @param {array} options
+						 * @param {Zend_Mail} email You can call methods on this before sending sms
+						 * @return {boolean}
+						 */
+						$result = Q::event('Users/mobile/sendMessage/gateway', compact('view', 'body', 'fields', 'options', 'email'), 'before');
+						if (isset($result)) {
+							return $result;
+						}
+						$email->send($transport);
 					} catch (Exception $e) {
 						throw new Users_Exception_MobileMessage(array('error' => $e->getMessage()));
 					}	
@@ -160,14 +185,14 @@ class Users_Mobile extends Base_Users_Mobile
 		}
 		
 		/**
-		 * @event Users/sms/sendMessage {after}
+		 * @event Users/mobile/sendMessage {after}
 		 * @param {string} view
 		 * @param {array} fields
 		 * @param {array} options
 		 * @param {string} mail
 		 */
 		Q::event(
-			'Users/email/sendMessage', 
+			'Users/mobile/sendMessage', 
 			compact('view', 'fields', 'options', 'mail', 'app', 'message', 'mail'),
 			'after'
 		);

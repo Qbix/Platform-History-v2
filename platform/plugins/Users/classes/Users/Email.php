@@ -44,22 +44,6 @@ class Users_Email extends Base_Users_Email
 		$fields = array(),
 		$options = array())
 	{
-		/**
-		 * @event Users/email/sendMessage {before}
-		 * @param {string} subject
-		 * @param {string} view
-		 * @param {array} fields
-		 * @param {array} options
-		 * @return {boolean}
-		 */
-		$result = Q::event(
-			'Users/email/sendMessage', 
-			compact('subject', 'view', 'fields', 'options'), 
-			'before'
-		);
-		if (isset($result)) {
-			return $result;
-		}
 		if (!Q_Valid::email($this->address, $emailAddress)) {
 			throw new Q_Exception_WrongType(array(
 				'field' => '$this->address',
@@ -84,6 +68,23 @@ class Users_Email extends Base_Users_Email
 				'field' => '$options["from"]',
 				'type' => 'array'
 			));
+		}
+		
+		/**
+		 * @event Users/email/sendMessage {before}
+		 * @param {string} subject
+		 * @param {string} view
+		 * @param {array} fields
+		 * @param {array} options
+		 * @return {boolean}
+		 */
+		$result = Q::event(
+			'Users/email/sendMessage', 
+			compact('view', 'fields', 'options', 'subject', 'body', 'from'), 
+			'before'
+		);
+		if (isset($result)) {
+			return $result;
 		}
 		
 		$sent = false;
@@ -130,21 +131,38 @@ class Users_Email extends Base_Users_Email
 			}
 
 			if ($transport) {
-				$mail = new Zend_Mail();
-				$mail->setFrom(reset($from), next($from));
+				$email = new Zend_Mail();
+				$email->setFrom(reset($from), next($from));
 				if (isset($options['name'])) {
-					$mail->addTo($emailAddress, $options['name']);
+					$email->addTo($emailAddress, $options['name']);
 				} else {
-					$mail->addTo($emailAddress);
+					$email->addTo($emailAddress);
 				}
-				$mail->setSubject($subject);
+				$email->setSubject($subject);
 				if (empty($options['html'])) {
-					$mail->setBodyText($body);
+					$email->setBodyText($body);
 				} else {
-					$mail->setBodyHtml($body);
+					$email->setBodyHtml($body);
+				}
+				/**
+				 * @event Users/email/sendMessage/email {before}
+				 * @param {string} subject
+				 * @param {string} view
+				 * @param {array} fields
+				 * @param {array} options
+				 * @param {Zend_Mail} email You can use this object's methods to add bcc and more.
+				 * @return {boolean}
+				 */
+				$result = Q::event(
+					'Users/email/sendMessage/mail', 
+					compact('view', 'fields', 'options', 'subject', 'body', 'from', 'email'), 
+					'before'
+				);
+				if (isset($result)) {
+					return $result;
 				}
 				try {
-					$mail->send($transport);
+					$email->send($transport);
 				} catch (Exception $e) {
 					throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
 				}
