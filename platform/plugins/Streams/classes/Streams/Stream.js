@@ -1035,8 +1035,8 @@ Sp.notify = function(participant, event, uid, message, callback) {
 			    break;
 			}
 		}
-		// check if the message generated some significant event
-		// and proceed only if no device is online
+		// check if the message generated some significant event,
+		// otherwise send offline notification only if no socket clients are online
 		if (Streams.Participating.freshEvent(online, event, message, uid)) {
 			Streams.pushNotification(userId, tokens, event, message);
 		}
