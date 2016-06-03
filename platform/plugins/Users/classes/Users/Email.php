@@ -154,7 +154,7 @@ class Users_Email extends Base_Users_Email
 				 * @return {boolean}
 				 */
 				$result = Q::event(
-					'Users/email/sendMessage/mail', 
+					'Users/email/sendMessage/email', 
 					compact('view', 'fields', 'options', 'subject', 'body', 'from', 'email'), 
 					'before'
 				);
