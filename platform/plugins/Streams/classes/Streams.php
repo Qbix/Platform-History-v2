@@ -1866,6 +1866,8 @@ abstract class Streams extends Base_Streams
 				}
 				$weights2[$tsn] += $calculateWeights;
 				$newRT[$sn]['weight'] = $weights2[$tsn];
+			} else if (isset($options['weight'])) {
+				$weights2[$tsn] = $newRT[$sn]['weight'] = $options['weight'];
 			}
 			foreach (array('toStreamName', 'fromStreamName') as $f) {
 				$newRT[$sn][$f] = $newRF[$sn][$f] = ($f === $arrayField) ? $sn : $$f;
@@ -1879,7 +1881,7 @@ abstract class Streams extends Base_Streams
 			
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
-			$weight = isset($options['weight']) and is_numeric($options['weight'])
+			$weight = (isset($options['weight']) && is_numeric($options['weight']))
 				? $options['weight']
 				: null;
 			$weight = Q::ifset($weights2, $category->name, $weight);
