@@ -91,7 +91,7 @@ interface iDb
 	function select ($fields, $tables = '');
 
 	/**
-	 * Creates a query to insert a record into a table
+	 * Creates a query to insert a row into a table
 	 * @method insert
 	 * @param {string} $table_into
 	 *  The name of the table to insert into
@@ -104,27 +104,28 @@ interface iDb
 	function insert ($table_into, array $fields = array());
 
 	/**
-	 * Inserts multiple records into a single table, preparing the statement only once,
+	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
 	 * @method insertManyAndExecute
-	 * @param {string} $table_into
-	 *  The name of the table to insert into
-	 * @param {array} $records=array()
-	 *  The array of records to insert. 
-	 *  (The field names for the prepared statement are taken from the first record.)
-	 *  You cannot use Db_Expression objects here, because the function binds all parameters with PDO.
-	 * @default array()
-	 * @param {array} $options=array()
-	 *  An associative array of options, including:
-	 *  "chunkSize" => The number of rows to insert at a time. defaults to 20.
-	 *  "onDuplicateKeyUpdate" => You can put an array of fieldname => value pairs here,
+	 * @param {string} $table_into The name of the table to insert into
+	 * @param {array} [$rows=array()] The array of rows to insert. 
+	 * Each row should be an array of ($field => $value) pairs, with the exact
+	 * same set of keys (field names) in each array. It can also be a Db_Row.
+	 * @param {array} [$options=array()] An associative array of options, including:
+	 * @param {string} [$options.className]
+	 *    If you provide the class name, the system will be able to use any sharding
+	 *    indexes under that class name in the config.
+	 * @param {integer} [$options.chunkSize]
+	 *    The number of rows to insert at a time. Defaults to 20.
+	 *    You can also put 0 here, which means unlimited chunks, but it's not recommended.
+	 * @param {array} [$options.onDuplicateKeyUpdate]
+	 *    You can put an array of fieldname => value pairs here,
 	 *    which will add an ON DUPLICATE KEY UPDATE clause to the query.
-	 * @default array()
 	 */
-	function insertManyAndExecute ($table_into, array $records = array(), $options = array());
+	function insertManyAndExecute ($table_into, array $rows = array(), $options = array());
 
 	/**
-	 * Creates a query to update records. Needs to be used with Db_Query::set()
+	 * Creates a query to update rows. Needs to be used with Db_Query::set()
 	 * @method update
 	 * @param {string} $table
 	 *  The table to update
@@ -134,7 +135,7 @@ interface iDb
 	function update ($table);
 
 	/**
-	 * Creates a query to delete records.
+	 * Creates a query to delete rows.
 	 * @method delete
 	 * @param {string} $table_from
 	 *  The table to delete from

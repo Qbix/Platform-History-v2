@@ -2505,7 +2505,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.extra] Any extra information for the message
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
-	 * @return {array} Returns an array of (streamName => x) pairs, where x is either a Streams_Participant row corresponding to an updated participant, or an array corresponding to a newly inserted participant.
+	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs.
+	 *  The newly inserted rows will have wasInserted() return true.
 	 */
 	static function join(
 		$asUserId,
@@ -2596,7 +2597,7 @@ abstract class Streams extends Base_Streams
 			$rows = array();
 			foreach ($streamNamesMissing as $sn) {
 				$stream = $streams2[$sn];
-				$results[$sn] = $rows[$sn] = array(
+				$results[$sn] = $rows[$sn] = new Streams_Participant(array(
 					'publisherId' => $publisherId,
 					'streamName' => $sn,
 					'userId' => $asUserId,
@@ -2605,7 +2606,7 @@ abstract class Streams extends Base_Streams
 					'subscribed' => !empty($options['subscribed']) ? 'yes' : 'no',
 					'posted' => !empty($options['posted']) ? 'yes' : 'no',
 					'extra' => !empty($options['extra']) ? $options['extra'] : ''
-				);
+				));
 			}
 			Streams_Participant::insertManyAndExecute($rows);
 			foreach ($streamNamesMissing as $sn) {
@@ -2614,7 +2615,7 @@ abstract class Streams extends Base_Streams
 				// Send a message to Node
 				Q_Utils::sendToNode(array(
 					"Q/method" => "Streams/Stream/join",
-					"participant" => Q::json_encode($participant),
+					"participant" => Q::json_encode($participant->fields),
 					"stream" => Q::json_encode($stream->toArray()),
 					"prevState" => null
 				));
@@ -2623,7 +2624,7 @@ abstract class Streams extends Base_Streams
 					'type' => 'Streams/join',
 					'instructions' => array(
 						'prevState' => null,
-						'extra' => isset($participant['extra']) ? $participant['extra'] : array()
+						'extra' => isset($participant->extra) ? $participant->extra : array()
 					)
 				);
 				$pMessages[] = array(
@@ -2655,7 +2656,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
 	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
-	 * @return {array} Returns an array of (streamName => x) pairs, where x is either a Streams_Participant row corresponding to an updated participant, or an array corresponding to a newly inserted participant.
+	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs
 	 */
 	static function leave(
 		$asUserId,
@@ -2680,7 +2681,13 @@ abstract class Streams extends Base_Streams
 		$streamNamesUpdate = array();
 		$updateCounts = array();
 		$state = 'left';
-		foreach ($participants as $sn => &$p) {
+		foreach ($streamNames as $sn) {
+			if (!isset($participants[$sn])) {
+				$updateCounts[''][] = $sn;
+				$streamNamesMissing[] = $sn;
+				continue;
+			}
+			$p = &$participants[$sn];
 			if ($p->state === $state) {
 				continue;
 			}
@@ -2693,17 +2700,33 @@ abstract class Streams extends Base_Streams
 			$p->set('prevState', $p->state);
 			$p->state = $state;
 		}
-		if (!$streamNamesUpdate) {
-			return array();
+		if ($streamNamesUpdate) {
+			Streams_Participant::update()
+				->set(compact('state'))
+				->where(array(
+					'publisherId' => $publisherId,
+					'streamName' => $streamNamesUpdate,
+					'userId' => $asUserId
+				))->execute();
 		}
-		Streams_Participant::update()
-			->set(compact('state'))
-			->where(array(
-				'publisherId' => $publisherId,
-				'streamName' => $streamNamesUpdate,
-				'userId' => $asUserId
-			))->execute();
 		self::_updateCounts($publisherId, $updateCounts, $state);
+		if ($streamNamesMissing) {
+			$rows = array();
+			foreach ($streamNamesMissing as $sn) {
+				$stream = $streams2[$sn];
+				$participants[$sn] = $rows[$sn] = new Streams_Participant(array(
+					'publisherId' => $publisherId,
+					'streamName' => $sn,
+					'userId' => $asUserId,
+					'streamType' => $stream->type,
+					'state' => 'participating',
+					'subscribed' => !empty($options['subscribed']) ? 'yes' : 'no',
+					'posted' => !empty($options['posted']) ? 'yes' : 'no',
+					'extra' => !empty($options['extra']) ? $options['extra'] : ''
+				));
+			}
+			Streams_Participant::insertManyAndExecute($rows);
+		}
 		foreach ($streamNames as $sn) {
 			$stream = $streams2[$sn];
 			$participant = Q::ifset($participants, $sn, null);
@@ -2879,13 +2902,13 @@ abstract class Streams extends Base_Streams
 						: null;
 				}
 				foreach ($sns as $sn) {
-					$subscriptions[$sn] = $subscriptionRows[] = array(
+					$subscriptions[$sn] = $subscriptionRows[] = new Streams_Subscription(array(
 						'publisherId' => $publisherId,
 						'streamName' => $sn,
 						'ofUserId' => $asUserId,
 						'untilTime' => $untilTime,
 						'filter' => $filter
-					);
+					));
 				}
 
 				if (!empty($options['skipRules'])) {

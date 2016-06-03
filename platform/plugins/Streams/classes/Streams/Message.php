@@ -278,8 +278,8 @@ class Streams_Message extends Base_Streams_Message
 			}
 		}
 
-		foreach ($totals2 as $count => $records) {
-			Streams_Total::insertManyAndExecute($records, array(
+		foreach ($totals2 as $count => $rows) {
+			Streams_Total::insertManyAndExecute($rows, array(
 				'onDuplicateKeyUpdate' => array(
 					'messageCount' => new Db_Expression("messageCount + $count")
 				)

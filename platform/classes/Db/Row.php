@@ -152,7 +152,15 @@ class Db_Row implements Iterator
 	}
 
 	/**
-	 * Whether this Db_Row was retrieved or not.
+	 * Whether this Db_Row was inserted into the database or not.
+	 * @property $inserted
+	 * @type boolean
+	 * @protected
+	 */
+	protected $inserted = false;
+
+	/**
+	 * Whether this Db_Row was retrieved from, or saved to the database.
 	 * The save() method uses this to decide whether to insert or update.
 	 * @property $retrieved
 	 * @type boolean
@@ -661,7 +669,8 @@ class Db_Row implements Iterator
 	}
 
 	/**
-	 * Returns whether this Db_Row contains information retrieved from the database.
+	 * Returns whether this Db_Row contains information retrieved from the database,
+	 * or saved to the database.
 	 * @method wasRetrieved
 	 * @param {boolean} [$new_value=null] If set, then this function sets the "retrieved" status to the new value.
 	 *  Otherwise, it just gets the "retrieved" status of the row.
@@ -669,10 +678,27 @@ class Db_Row implements Iterator
 	 */
 	function wasRetrieved ($new_value = null)
 	{
-		if (isset($new_value))
+		if (isset($new_value)) {
 			$this->retrieved = $new_value;
+		}
 		return $this->retrieved;
 	}
+
+	/**
+	 * Returns whether this Db_Row was inserted into the database.
+	 * @method wasInserted
+	 * @param {boolean} [$new_value=null] If set, then this function sets the "inserted" status to the new value.
+	 *  Otherwise, it just gets the "retrieved" status of the row.
+	 * @return {boolean} Whether the row is marked as inserted into the Db.
+	 */
+	function wasInserted ($new_value = null)
+	{
+		if (isset($new_value)) {
+			$this->inserted = $new_value;
+		}
+		return $this->inserted;
+	}
+
 
 	/**
 	 * Marks a particular field as not modified since retrieval or creation of the object.
@@ -1869,6 +1895,7 @@ class Db_Row implements Iterator
 			}
 			$result = $query->execute();
 			if ($inserting) {
+				$this->inserted = true; // Record that this row was inserted
 				$this->retrieved = true; // Now treat as retrieved
 				
 				// If this was an insert with a single autoincrement field,
