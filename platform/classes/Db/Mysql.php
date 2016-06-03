@@ -303,7 +303,7 @@ class Db_Mysql implements iDb
 	}
 
 	/**
-	 * Creates a query to insert a record into a table
+	 * Creates a query to insert a row into a table
 	 * @method insert
 	 * @param {string} $table_into The name of the table to insert into
 	 * @param {array} $fields=array() The fields as an array of column=>value pairs
@@ -338,13 +338,13 @@ class Db_Mysql implements iDb
 	}
 
 	/**
-	 * Inserts multiple records into a single table, preparing the statement only once,
+	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
 	 * @method insertManyAndExecute
 	 * @param {string} $table_into The name of the table to insert into
-	 * @param {array} [$records=array()] The array of records to insert. 
-	 * Each record should be an array of ($field => $value) pairs, with the exact
-	 * same set of keys (field names) in each array.
+	 * @param {array} [$rows=array()] The array of rows to insert. 
+	 * Each row should be an array of ($field => $value) pairs, with the exact
+	 * same set of keys (field names) in each array. It can also be a Db_Row.
 	 * @param {array} [$options=array()] An associative array of options, including:
 	 * @param {string} [$options.className]
 	 *    If you provide the class name, the system will be able to use any sharding
@@ -356,13 +356,13 @@ class Db_Mysql implements iDb
 	 *    You can put an array of fieldname => value pairs here,
 	 *    which will add an ON DUPLICATE KEY UPDATE clause to the query.
 	 */
-	function insertManyAndExecute ($table_into, array $records = array(), $options = array())
+	function insertManyAndExecute ($table_into, array $rows = array(), $options = array())
 	{
 		// Validate and get options
 		if (empty($table_into)) {
 			throw new Exception("table not specified in call to 'insertManyAndExecute'.");
 		}
-		if (empty($records)) {
+		if (empty($rows)) {
 			return false;
 		}
 		$chunkSize = isset($options['chunkSize']) ? $options['chunkSize'] : 20;
@@ -374,7 +374,8 @@ class Db_Mysql implements iDb
 		$className = isset($options['className']) ? $options['className'] : null;
 		
 		// Get the columns list
-		$record = reset($records);
+		$row = reset($rows);
+		$record = ($row instanceof Db_Row) ? $row->fields : $row;
 		foreach ($record as $column => $value) {
 			$columns_list[] = Db_Query_Mysql::column($column);
 		}
@@ -404,8 +405,9 @@ class Db_Mysql implements iDb
 		$bindings = array();
 		$last_q = array();
 		$last_queries = array();
-		foreach ($records as $record) {
+		foreach ($rows as $row) {
 			// get shard, if any
+			$record = ($row instanceof Db_Row) ? $row->fields : $row;
 			$query = new Db_Query_Mysql($this, Db_Query::TYPE_INSERT);
 			$shard = '';
 			if (isset($className)) {
@@ -477,10 +479,17 @@ class Db_Mysql implements iDb
 			}
 			$query->execute(true);
 		}
+		
+		foreach ($rows as $row) {
+			if ($row instanceof Db_Row) {
+				$row->wasInserted(true);
+				$row->wasRetrieved(true);
+			}
+		}
 	}
 
 	/**
-	 * Creates a query to update records. Needs to be used with {@link Db_Query::set}
+	 * Creates a query to update rows. Needs to be used with {@link Db_Query::set}
 	 * @method update
 	 * @param {string} $table The table to update
 	 * @return {Db_Query_Mysql} The resulting Db_Query object
@@ -495,7 +504,7 @@ class Db_Mysql implements iDb
 	}
 
 	/**
-	 * Creates a query to delete records.
+	 * Creates a query to delete rows.
 	 * @method delete
 	 * @param {string} $table_from The table to delete from
 	 * @param {string} [$table_using=null] If set, adds a USING clause with this table. You can then use ->join() with the resulting Db_Query.
@@ -2351,12 +2360,12 @@ $field_hints
 		return \$q;
 	}
 	$dc
-	 * Inserts multiple records into a single table, preparing the statement only once,
+	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
 	 * @method insertManyAndExecute
 	 * @static
-	 * @param {array} [\$records=array()] The array of records to insert. 
-	 * (The field names for the prepared statement are taken from the first record.)
+	 * @param {array} [\$rows=array()] The array of rows to insert. 
+	 * (The field names for the prepared statement are taken from the first row.)
 	 * You cannot use Db_Expression objects here, because the function binds all parameters with PDO.
 	 * @param {array} [\$options=array()]
 	 *   An associative array of options, including:
@@ -2366,10 +2375,10 @@ $field_hints
 	 * 		which will add an ON DUPLICATE KEY UPDATE clause to the query.
 	 *
 	 */
-	static function insertManyAndExecute(\$records = array(), \$options = array())
+	static function insertManyAndExecute(\$rows = array(), \$options = array())
 	{
 		self::db()->insertManyAndExecute(
-			self::table(), \$records,
+			self::table(), \$rows,
 			array_merge(\$options, array('className' => $class_name_var))
 		);
 	}

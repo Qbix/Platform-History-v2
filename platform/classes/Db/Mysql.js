@@ -214,7 +214,7 @@ function Db_Mysql(connName, dsn) {
 	};
 	
 	/**
-	 * Creates a query to insert a record into a table
+	 * Creates a query to insert a row into a table
 	 * @method INSERT
 	 * @param {String} table_into The name of the table to insert into
 	 * @param {Object} fields The fields as an associative of `{column: value}` pairs
@@ -251,7 +251,7 @@ function Db_Mysql(connName, dsn) {
 	};
 	
 	/**
-	 * Creates a query to update records. Must be used with Db.Query.set
+	 * Creates a query to update rows. Must be used with Db.Query.set
 	 * @method UPDATE
 	 * @param {String} table The table to update
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
@@ -264,7 +264,7 @@ function Db_Mysql(connName, dsn) {
 	};
 
 	/**
-	 * Creates a query to delete records.
+	 * Creates a query to delete rows.
 	 * @method DELETE
 	 * @param {String} table_from The table to delete from
 	 * @param {String} [table_using=null] If set, adds a USING clause with this table.

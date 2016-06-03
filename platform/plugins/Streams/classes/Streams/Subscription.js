@@ -56,7 +56,8 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 		} catch (err) {
 			return callback(err);
 		}
-		var types = filter.types, notifications = filter.notifications;
+		var types = filter.types;
+		var notifications = filter.notifications;
 		var streamsMessageTypes = [
 			"Streams/invite", "Streams/chat/message",
 			"Streams/relatedTo", "Streams/relatedFrom"
@@ -76,7 +77,9 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 		}).execute(function(err, rules) {
 			if (err) return callback(err);
 			var waitFor = rules.map(function(r){ return r.fields.ordinal; });
-			var p = new Q.Pipe(waitFor, function (params) {
+			var p = new Q.Pipe(waitFor, 1, function (params) {
+				// Notification is delivered only once, even if multiple rules pass.
+				// We only need one rule to pass, to deliver notification.
 				var deliveries = [], ordinal, param;
 				for (ordinal in params) {
 					param = params[ordinal];

@@ -189,12 +189,12 @@ abstract class Base_Streams_Notification extends Db_Row
 		return $q;
 	}
 	/**
-	 * Inserts multiple records into a single table, preparing the statement only once,
+	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
 	 * @method insertManyAndExecute
 	 * @static
-	 * @param {array} [$records=array()] The array of records to insert. 
-	 * (The field names for the prepared statement are taken from the first record.)
+	 * @param {array} [$rows=array()] The array of rows to insert. 
+	 * (The field names for the prepared statement are taken from the first row.)
 	 * You cannot use Db_Expression objects here, because the function binds all parameters with PDO.
 	 * @param {array} [$options=array()]
 	 *   An associative array of options, including:
@@ -204,10 +204,10 @@ abstract class Base_Streams_Notification extends Db_Row
 	 * 		which will add an ON DUPLICATE KEY UPDATE clause to the query.
 	 *
 	 */
-	static function insertManyAndExecute($records = array(), $options = array())
+	static function insertManyAndExecute($rows = array(), $options = array())
 	{
 		self::db()->insertManyAndExecute(
-			self::table(), $records,
+			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Notification'))
 		);
 	}
