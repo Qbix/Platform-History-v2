@@ -39,7 +39,7 @@ class Users_Email extends Base_Users_Email
 	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 */
 	function sendMessage(
-		$subject,
+		$subject, 
 		$view,
 		$fields = array(),
 		$options = array())

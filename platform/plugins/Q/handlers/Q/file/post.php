@@ -6,7 +6,7 @@
 
 /**
  * Used by HTTP clients to upload a new file to the server
- * @class Q/file
+ * @class HTTP Q file
  * @method post
  * @param {array} [$params] Parameters that can come from the request
  *   @param {string} [$params.data]  Required if $_FILES is empty. Base64-encoded image data URI - see RFC 2397
