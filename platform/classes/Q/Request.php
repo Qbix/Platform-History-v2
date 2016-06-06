@@ -600,7 +600,7 @@ class Q_Request
 	static function special($fieldname, $default, $source = null)
 	{
 		if (!$source) {
-			$source = $_REQUEST;
+			$source = array_merge($_GET, $_POST, $_COOKIE);
 		}
 		// PHP replaces dots with underscores
 		if (isset($source["Q_$fieldname"])) {
