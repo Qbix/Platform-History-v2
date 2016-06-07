@@ -865,7 +865,6 @@ class Q_Response
 			self::$inlineTemplates[$slotName] = array();
 		}
 		foreach (self::$inlineTemplates[$slotName] as $template) {
-			Q::log("=====\n\n".$template['name']);
 			if ($template['name'] == $name && $template['type'] == $type) {
 				return false; // already added
 			}

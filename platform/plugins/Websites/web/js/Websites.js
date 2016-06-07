@@ -3,10 +3,11 @@
  *
  * @module Websites
  * @class Websites
+ * @main
  */
 
 (function(Q, $) {
-	
+
 var Websites = Q.Websites = Q.plugins.Websites = {
 
 };

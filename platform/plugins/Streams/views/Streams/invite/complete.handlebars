@@ -6,19 +6,19 @@
 		<form method="post" action="{{action}}" data-form-type="complete">
 			<div class="Streams_login_appear"></div>
 			<table>
-				{{#user}}
+				{{#if user}}
 					<tr class="Streams_complete_user">
-						<td><img src="{{icon}}/50.png" title="{{displayName}} icon"></td>
-						<td><div>{{displayName}}</div><div>{{text}}</div></td>
+						<td><img src="{{user.icon}}/50.png" title="{{user.displayName}} icon"></td>
+						<td><div>{{user.displayName}}</div><div>{{user.text}}</div></td>
 					</tr>
-				{{/user}}
+				{{/if}}
 					<tr class="Streams_complete_stream">
 						<td><img src="{{stream.fields.icon}}/50.png" title="{{stream.fields.title}}"></td>
 						<td><div>{{stream.fields.title}}</div></td>
 					</tr>
-				{{^displayName}}
+				{{#unless displayName}}
 					<tr class="Users_register_form">
-						<td class="Streams_login_picture"><img src="{{icon}}/50.png"></td>
+						<td class="Streams_login_picture"><img src="{{user.icon}}/50.png"></td>
 						<td class="Streams_login_username_block">
 							{{#if prompt}}
 								<label for="Streams_login_username">{{prompt}}</label>
@@ -27,7 +27,7 @@
 							<input id="Streams_login_username" name="fullName" type="text" class="text" />
 						</td>
 					</tr>
-				{{/displayName}}
+				{{/unless}}
 			</table>
 			<input type="hidden" name="token" value="{{token}}"/>
 			<input type="hidden" name="Q.method" value="get"/>

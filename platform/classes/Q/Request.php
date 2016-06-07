@@ -600,7 +600,7 @@ class Q_Request
 	static function special($fieldname, $default, $source = null)
 	{
 		if (!$source) {
-			$source = $_REQUEST;
+			$source = array_merge($_GET, $_POST, $_COOKIE);
 		}
 		// PHP replaces dots with underscores
 		if (isset($source["Q_$fieldname"])) {
@@ -749,13 +749,7 @@ class Q_Request
 	 */
 	static function cacheTimestamp()
 	{
-		if (isset($_REQUEST['Q_ct'])) {
-			return $_REQUEST['Q_ct'];
-		}
-		if (isset($_COOKIE['Q_ct'])) {
-			return $_COOKIE['Q_ct'];
-		}
-		return null;
+		return self::special('ct', null);
 	}
 	
 	/**
