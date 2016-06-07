@@ -8,8 +8,8 @@
 			<table>
 				{{#if user}}
 					<tr class="Streams_complete_user">
-						<td><img src="{{icon}}/50.png" title="{{displayName}} icon"></td>
-						<td><div>{{displayName}}</div><div>{{text}}</div></td>
+						<td><img src="{{user.icon}}/50.png" title="{{user.displayName}} icon"></td>
+						<td><div>{{user.displayName}}</div><div>{{text}}</div></td>
 					</tr>
 				{{/if}}
 					<tr class="Streams_complete_stream">
@@ -18,7 +18,7 @@
 					</tr>
 				{{#unless displayName}}
 					<tr class="Users_register_form">
-						<td class="Streams_login_picture"><img src="{{icon}}/50.png"></td>
+						<td class="Streams_login_picture"><img src="{{user.icon}}/50.png"></td>
 						<td class="Streams_login_username_block">
 							{{#if prompt}}
 								<label for="Streams_login_username">{{prompt}}</label>
