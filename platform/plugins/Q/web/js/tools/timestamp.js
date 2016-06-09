@@ -13,6 +13,7 @@
 	 * @class Q timestamp
 	 * @constructor
 	 * @param {Object} [options] This is an object of parameters for this tool
+	 *    @param {Boolean} [options.capitalized=false] Whether to capitalize the displayed text
 	 *    @param {Number} [options.time=new Date().getTime()/1000] Unix timestamp (in seconds).
 	 *    @param {String} [options.format='{day-week} {date+week} {year+year} %l:%M %P'] formatting string which makes specific timestamp representation. Can contain placeholders supported by strftime() and also few special placeholders with specific functionality.
 	 *         Including time, time-day, time-week, day, day-week, longday, longday-week, date, date+week, year, year+year
@@ -47,21 +48,24 @@
 			var day = strftime('%a', time);
 			var longday = strftime('%A', time);
 			if (diffToday < 0 && diffToday > -dayLength / 8) {
-				day = longday = 'Last night';
+				day = longday = 'last night';
 			} if (diffToday < 0 && diffToday > -dayLength / 4) {
-				day = longday = 'Last eve';
+				day = longday = 'last eve';
 			} else if (diffToday < 0 && diffToday > -dayLength) {
-				day = longday = 'Yesterday';
+				day = longday = 'yesterday';
 			} else if (diffToday < dayLength * 0.4) {
-				day = longday = 'This morn';
+				day = longday = 'this morn';
 			} else if (diffToday < dayLength * 3 / 4) {
-				day = longday = 'Today';
+				day = longday = 'today';
 			} else if (diffToday < dayLength) {
-				day = longday = 'Tonight';
+				day = longday = 'tonight';
 			} else if (diffToday < dayLength * 1.4) {
-				day = longday = 'Tom morn'
+				day = longday = 'tom morn'
 			} else if (diffToday < dayLength * 2) {
-				day = longday = 'Tomorrow'
+				day = longday = 'tomorrow'
+			}
+			if (o.capitalized) {
+				day = day.toCapitalized();
 			}
 
 			// regular formatting using strftime()
