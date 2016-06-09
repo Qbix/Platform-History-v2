@@ -69,7 +69,7 @@ Designers
 
 Build beautiful interfaces through which people will interact with one another.
 
-* Separation of concerns: Qbix is built to enable teams to work together. Choose your templating engine, or use the ones that come with Qbix (PHP and Mustache) and don't worry about breaking the developers' code. Design layouts, views, email templates, and more.
+* Separation of concerns: Qbix is built to enable teams to work together. Choose your templating engine, or use the ones that come with Qbix (PHP and Handlebars) and don't worry about breaking the developers' code. Design layouts, views, email templates, and more.
 * Multiple targets: Apps built on Qbix are able to run on desktop browsers, tablets and mobile phones practically out of the box. Your themes will be accessed by users wherever they are. Qbix conventions enable you to design themes that work with different device orientations, properly support touch events, and more.
 * Dynamic interfaces: The front end interface in Qbix consists of one or more virtual pages, that load dynamically yet work correctly with the back button and browser history, taking advantage of HTML5 whenever possible.
 * Building blocks: Take advantage of reusable, self-contained tools that anyone can place on pages, or help build your own.

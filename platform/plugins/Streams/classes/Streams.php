@@ -2884,23 +2884,29 @@ abstract class Streams extends Base_Streams
 							'streamName' => $type.'/',
 							'ofUserId' => array('', $asUserId)
 						))->fetchAll(PDO::FETCH_ASSOC);
-					$selected = null;
-					foreach ($templates as $template) {
-						if (!$selected) {
-							$selected = $template;
-						} else if ($selected['publisherId'] == '' and $template['publisherId'] !== '') {
-							$selected = $template;
-						} else if ($selected['userId'] == '' and $template['userId'] !== '') {
-							$selected = $template;
+					$template = null;
+					foreach ($templates as $t) {
+						if (!$template
+						or ($template['publisherId'] == '' and $t['publisherId'] !== '')
+						or ($template['userId'] == '' and $t['userId'] !== '')) {
+							$template = $t;
 						}
 					}
 				}
 				if (!isset($filter)) {
-					$filter = $selected ? $selected['filter'] : '{"types":[],"notifications":0}';
+					$filter = Q::json_encode($template
+						? Q::json_decode($template['filter'])
+						: Streams_Stream::getConfigField($type, array(
+							'subscriptions', 'filter'
+						), array(
+							"types" => array("Streams/invited"),
+							"notifications" => 0
+						))
+					);
 				}
 				if (!isset($untilTime)) {
-					$untilTime = ($selected and $selected['duration'] > 0)
-						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL {$selected[duration]} SECOND")
+					$untilTime = ($template and $template['duration'] > 0)
+						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $template[duration] SECOND")
 						: null;
 				}
 				foreach ($sns as $sn) {
@@ -2918,6 +2924,7 @@ abstract class Streams extends Base_Streams
 				}
 
 				// insert up to one rule per subscription
+				$rule = null;
 				if (isset($options['rule'])) {
 					$rule = $options['rule'];
 					if (isset($rule['readyTime'])) {
@@ -2938,27 +2945,35 @@ abstract class Streams extends Base_Streams
 							'streamName' => $type.'/',
 							'ordinal' => 1
 						))->fetchAll(PDO::FETCH_ASSOC);
-					$selected = null;
-					foreach ($templates as $template) {
-						if (!$selected) {
-							$selected = $template;
-						} else if ($selected['userId'] == '' and $template['userId'] !== '') {
-							$selected = $template;
-						} else if ($selected['publisherId'] == '' and $template['publisherId'] !== '') {
-							$selected = $template;
+					foreach ($templates as $t) {
+						if (!$rule
+						or ($rule['userId'] == '' and $t['userId'] !== '')
+						or ($rule['publisherId'] == '' and $t['publisherId'] !== '')) {
+							$rule = $t;
 						}
 					}
 				}
-				foreach ($sns as $sn) {
-					$row = isset($rule) ? $rule : $selected;
-					$row['ofUserId'] = $asUserId;
-					$row['publisherId'] = $publisherId;
-					$row['streamName'] = $sn;
-					$row['ordinal'] = 1;
-					$rules[$sn] = $ruleRows[] = $row;
-					$messages[$publisherId][$sn]['instructions'] = Q::json_encode(array(
-						'rule' => $row
-					));
+				if (!isset($rule)) {
+					$rule = array(
+						'deliver' => '{"to": "default"}',
+						'filter' => '{"types": [], "labels": []}'
+					);
+				}
+				if ($rule) {
+					$rule['ofUserId'] = $asUserId;
+					$rule['publisherId'] = $publisherId;
+					if (empty($rule['readyTime'])) {
+						$rule['readyTime'] = new Db_Expression("CURRENT_TIMESTAMP");
+					}
+					foreach ($sns as $sn) {
+						$row = $rule;
+						$row['streamName'] = $sn;
+						$row['ordinal'] = 1;
+						$rules[$sn] = $ruleRows[] = $row;
+						$messages[$publisherId][$sn]['instructions'] = Q::json_encode(array(
+							'rule' => $row
+						));
+					}
 				}
 			}
 			Streams_Subscription::insertManyAndExecute($subscriptionRows);

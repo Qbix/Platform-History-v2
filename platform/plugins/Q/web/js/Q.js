@@ -7927,7 +7927,7 @@ Q.nodeUrl = function _Q_node(where) {
 			return result;
 		}
 	}
-	return Q.info.socketUrl;
+	return Q.info.nodeUrl;
 };
 Q.nodeUrl.routers = []; // functions returning a custom url
 
@@ -8080,7 +8080,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 
 Q.Template.load.options = {
 	type: "handlebars",
-	types: { "handlebars": true, "mustache": true, "php": true },
+	types: { "handlebars": true, "php": true },
 	dir: "views"
 };
 

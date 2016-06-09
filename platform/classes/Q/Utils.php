@@ -689,11 +689,17 @@ class Q_Utils
 
 	/**
 	 * Returns base url for socket.io connection
-	 * @method socketUrl
+	 * @method nodeUrl
 	 * @static
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function socketUrl () {
+	static function nodeUrl () {
+		$url = Q_Config::get('Q', 'node', 'url', null);
+		if (isset($url)) {
+			return Q::interpolate($url, array(
+				'baseUrl' => Q_Request::baseUrl()
+			));
+		}
 		$host = Q_Config::get('Q', 'node', 'host', null);
 		$port = Q_Config::get('Q', 'node', 'port', null);
 		if (!isset($port) || !isset($host)) return null;

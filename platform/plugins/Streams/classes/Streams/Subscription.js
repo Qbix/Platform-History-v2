@@ -34,17 +34,17 @@ Q.mixin(Streams_Subscription, Q.require('Base/Streams/Subscription'));
  * Test message according to filters set up for the user and generate array of subscription rules
  * @method test
  * @static
- * @param userId {string}
- * @param publisherId {string}
- * @param streamName {string}
- * @param callback {function} Callback have error and array of delivery methods as arguments
+ * @param {String} userId
+ * @param {String} publisherId
+ * @param {Q.Streams.Stream} stream
+ * @param {Function} callback Callback have error and array of delivery methods as arguments
  */
-Streams_Subscription.test = function _Subscription_test(userId, publisherId, streamName, msgType, callback) {
+Streams_Subscription.test = function _Subscription_test(userId, stream, msgType, callback) {
 	if (!callback) return;
 	(new Streams.Subscription({
 		ofUserId: userId,
-		publisherId: publisherId,
-		streamName: streamName
+		publisherId: stream.fields.publisherId,
+		streamName: stream.fields.name
 	})).retrieve(function(err, sub) {
 		if (err) return callback(err);
 		if (!sub.length) return callback(null, []); // no active subscriptions
@@ -52,47 +52,61 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 		if (sub.fields.untilTime && sub.fields.untilTime > new Date()) return callback(null, []); // date passed
 		var filter;
 		try {
-			filter = JSON.parse(sub.fields.filter);
+			if (sub.fields.filter) {
+				filter = JSON.parse(sub.fields.filter);
+			} else {
+				filter = Stream.getConfigField(
+					stream.fields.type, 
+					['subscriptions', 'filter'],
+					{ types: ["Streams/invited"], notifications: 0 }
+				);
+			}
 		} catch (err) {
 			return callback(err);
 		}
 		var types = filter.types;
-		var notifications = filter.notifications;
-		var streamsMessageTypes = [
-			"Streams/invite", "Streams/chat/message",
-			"Streams/relatedTo", "Streams/relatedFrom"
-		];
-		var ignoreMessageType = (
-			msgType.substring(0, 8) === 'Streams/'
-			&& streamsMessageTypes.indexOf(msgType) < 0
-		);
-		if (ignoreMessageType
-		|| (types && types.length && types.indexOf(msgType) < 0)) {
-			return callback(null, []); // no subscription to type
+		var matched = false;
+		for (var i=0, l=types.length; i<l; ++i) {
+			if (msgType.match(types[i])) {
+				matched = true;
+				break;
+			}
 		}
+		var notifications = filter.notifications;
+		if (!matched) {
+			return callback(null, []); // not subscribed to this message type
+		}
+		var match = true;
 		Streams.Rule.SELECT('*').where({
 			ofUserId: userId,
-			publisherId: publisherId,
-			streamName: streamName
+			publisherId: stream.fields.publisherId,
+			streamName: stream.fields.name
 		}).execute(function(err, rules) {
 			if (err) return callback(err);
 			var waitFor = rules.map(function(r){ return r.fields.ordinal; });
 			var p = new Q.Pipe(waitFor, 1, function (params) {
-				// Notification is delivered only once, even if multiple rules pass.
-				// We only need one rule to pass, to deliver notification.
 				var deliveries = [], ordinal, param;
 				for (ordinal in params) {
 					param = params[ordinal];
-					if (param[0]) return callback(param[0]);
-					if (param[1]) deliveries.push(param[1]);
+					if (param[0]) {
+						return callback(param[0]);
+					}
+					if (param[1]) {
+						deliveries.push(param[1]);
+					}
 				}
+				// Notification should be delivered only once to each endpoint
+				deliveries = deliveries.filter(function (value, index, arr) {
+					return arr.indexOf(value) === index;
+				});
 				callback(null, deliveries);
 			});
+			p.run();
 			rules.forEach(function (rule) {
 				var o = rule.fields.ordinal;
 				var readyTime = new Date(rule.fields.readyTime);
 				try {
-					filter = JSON.parse(rule.fields.filter);
+					filter = rule.fields.filter ? JSON.parse(rule.fields.filter) : {};
 				} catch (e) {
 					return p.fill(o)(e);
 				}
@@ -122,8 +136,8 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 							Streams.Notification.SELECT('COUNT(1) as count').where({
 								userId: userId,
 								"insertedTime >": Db.Mysql.toDateTime(timeOnline.getTime()),
-								publisherId: publisherId,
-								streamName: streamName,
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.streamName,
 								type: msgType
 							}).execute(function (err, res) {
 								if (err) return p.fill(o)(err);
@@ -145,8 +159,7 @@ Streams_Subscription.test = function _Subscription_test(userId, publisherId, str
 				function _checkDelivery() {
 					var deliver;
 					try {
-						deliver = JSON.parse(rule.fields.deliver);
-						if (Q.typeOf(deliver) !== "object") deliver = null;
+						deliver = rule.fields.deliver ? JSON.parse(rule.fields.deliver) : null;
 					} catch (e) {
 						p.fill(o)(e);
 					}

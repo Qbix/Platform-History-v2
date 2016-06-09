@@ -2244,12 +2244,6 @@ Q.init = function _Q_init(app, notListen) {
 	 * @type {object}
 	 */
 	Q.Dispatcher = require('./Q/Dispatcher');
-	/**
-	 * Reference to Q.Mustache class
-	 * @property Mustache
-	 * @type {object}
-	 */
-	Q.Mustache = require('./Q/Mustache');
     /**
      * Reference to Q.Handlebars class
      * @property Handlebars
@@ -2757,7 +2751,7 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 					+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
 				+ "\n" + error.stack;
 		} else {
-			message = 'inspecting "'+Q.typeOf(message)+'":\n'+util.inspect(message, false, Q.Config.get('Q', 'var_dump_max_levels', 5));
+			message = 'inspecting '+Q.typeOf(message)+':\n'+util.inspect(message, false, Q.Config.get('Q', 'var_dump_max_levels', 5));
 		}
 	}
 
