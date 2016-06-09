@@ -33,7 +33,10 @@
 				"create": true,
 				"edit": true,
 				"defaults": {
-					"title": "Article"
+					"title": "Article",
+					"readLevel": 10,
+					"writeLevel": 0,
+					"adminLevel": 10
 				},
 				"extend": ["Websites_Article"]
 			}

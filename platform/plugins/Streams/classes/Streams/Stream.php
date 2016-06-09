@@ -152,7 +152,7 @@ class Streams_Stream extends Base_Streams_Stream
 		return Streams::invite($this->publisherId, $this->name, $who, $options);
 	}
 
-	private static function sortTemplateTypes($templates, $user_field, &$type, $name_field = 'streamName') {
+	private static function sortTemplateTypes($templates, $user_field, &$type, $nameField = 'streamName') {
 		$returnAll = ($type === true);
 		$ret = array(array(), array(), array(), array());
 		if (!$templates) {
@@ -167,8 +167,8 @@ class Streams_Stream extends Base_Streams_Stream
 		// Note: Only -1, 1 and 3 are possible values stored in $type
 		// since templates are always selected ending in "/"
 		foreach ($templates as $t) {
-			$pos = strlen($t->$name_field) - 1;
-			$name = $t->$name_field;
+			$name = $t->$nameField;
+			$pos = strlen($name) - 1;
 			if ($t->$user_field === '') {
 				$key = ($name[$pos] === '/' ? 3 : 2); // generic publisher;
 			} else {
@@ -188,10 +188,7 @@ class Streams_Stream extends Base_Streams_Stream
 				return $ret[$i][0];
 			}
 		}
-		if (!$templates) {
-			$type = -1;
-			return $returnAll ? $ret : null;
-		}
+		return null;
 	}
 
 	protected function getStreamTemplate($class_name, &$type = null) {

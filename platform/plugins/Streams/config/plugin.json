@@ -85,6 +85,12 @@
 						"templateName": "Streams/invite/complete"
 					}
 				},
+				"subscriptions": {
+					"filter": {
+						"types": ["^(?!(Users/)|(Streams/)).*/", "Streams/relatedTo", "Streams/chat/message"],
+						"notifications": 0
+					}
+				},
 				"getMessagesLimit": 100,
 				"messages": {
 					"": {
@@ -121,6 +127,14 @@
 					"leftCount": 0
 				},
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}"
+			},
+			"Streams/invited": {
+				"subscriptions": {
+					"filter": {
+						"types": ["Streams/invited"],
+						"notifications": 0
+					}
+				}
 			},
 			"Streams/resource": {
 				"description": "for managing access to a resource and posting messages about updates"
@@ -320,8 +334,8 @@
 		},
 		"rules": {
 			"deliver": {
-				"default": ["email", "mobile"],
-				"invited": ["email+pending", "mobile+pending"]
+				"default": ["mobile", "email"],
+				"invited": ["mobile+pending", "email+pending"]
 			}
 		}
 	}

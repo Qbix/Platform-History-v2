@@ -276,7 +276,14 @@ Streams_Message.prototype.deliver = function(stream, toUserId, delivery, avatar,
 		Streams_Message.emit('deliver/before', o);
 		var viewPath;
 		var result = [];
-		if (emailAddress) {
+		if (mobileNumber) {
+			viewPath = messageType+'/mobile.handlebars';
+			if (!Q.Handlebars.template(viewPath)) {
+				viewPath = 'Streams/message/mobile.handlebars';
+			}
+			Q.Utils.sendSMS(mobileNumber, viewPath, o.fields, {}, callback);
+			result.push('mobile');
+		} else if (emailAddress) {
 			viewPath = messageType+'/email.handlebars';
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/email.handlebars';
@@ -285,14 +292,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, delivery, avatar,
 				emailAddress, o.subject, viewPath, o.fields, {html: true}, callback
 			);
 			result.push('email');
-		}
-		if (mobileNumber) {
-			viewPath = messageType+'/mobile.handlebars';
-			if (!Q.Handlebars.template(viewPath)) {
-				viewPath = 'Streams/message/mobile.handlebars';
-			}
-			Q.Utils.sendSMS(mobileNumber, viewPath, o.fields, {}, callback);
-			result.push('mobile');
 		}
 		return result;
 	});

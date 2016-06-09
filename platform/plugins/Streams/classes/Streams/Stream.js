@@ -289,49 +289,47 @@ function testLevel (subj, type, values, level, callback) {
 	return false;
 }
 
-function _sortTemplateTypes(templates, field, type, shortName) {
-	if (templates.length) {
-		// let's sort templates out
-		// we'll check to find first match:
-		//	1. exact stream name and exact publisher id - this is record for existing row
-		//	2. generic stream name and exact publisher id
-		//	3. exact stream name and generic publisher
-		//	4. generic stream name and generic publisher
-		var sts = [[], [], [], []], i, t, pos, n, key;
-		var name = shortName ? 'name' : 'streamName';
-		for (i=0; i<templates.length; i++) {
-			t = templates[i];
-			pos = t.fields[name].length - 1;
-			if (t.fields[field] === '') {
-				// generic publisher
-				key = (n[pos] === '/') ? 3 : 2;
-			} else {
-				// userId
-				key = (n[pos] === '/') ? 1 : 0;
-			}
-			if (type) sts[key].push(t);
-			else sts[key] = t;
-		}
-
-		if (type) {
-			// we are looking for all templates
-			for (i=0; i<sts.length; i++) {
-				if (sts[i].length) return sts;
-			}
+function _sortTemplateTypes(templates, field, returnAll, nameField) {
+	var ret = [[], [], [], []];
+	if (!templates.length) {
+		ret.templateType = -1;
+		return returnAll ? ret : null;
+	}
+	// The order of the templates will be from most specific to most generic:
+	// 	0. exact stream name and exact publisher id - this would be the row itself
+	//	1. generic stream name and exact publisher id
+	//	2. exact stream name and generic publisher
+	//	3. generic stream name and generic publisher
+	// Note: Only -1, 1 and 3 are possible values stored in $type
+	// since templates are always selected ending in "/"
+	var i, l, t, pos, name, key;
+	nameField = nameField || 'streamName';
+	for (i=0, l=templates.length; i<l; i++) {
+		t = templates[i];
+		name = t[nameField];
+		pos = t.fields[nameField].length - 1;
+		if (t.fields[field] === '') {
+			key = (name[pos] === '/') ? 3 : 2; // generic publisher
 		} else {
-			// we are looking for exactly one template
-			for (type=0; type < 4; type++) {
-				if (sts[type]) {
-					sts.template_type = type;
-					return sts[type];
-				}
-			}
+			key = (name[pos] === '/') ? 1 : 0; // userId
+		}
+		ret[key].push(t);
+	}
+	if (returnAll) {
+		// we are looking for all templates
+		return ret;
+	}
+	// we are looking for exactly one template
+	for (i=0; i < 4; type++) {
+		if (ret[i]) {
+			ret.templateType = i;
+			return ret[i];
 		}
 	}
 	return null;
 }
 
-Sp.getSubscriptionTemplate = function(className, userId, callback) {
+Sp.getSubscriptionTemplate = function(className, userId, callback, returnAll) {
 	// fetch template for subscription's PK - publisher, name & user
 	var stream = this;
 	Streams[className].SELECT('*').where({
@@ -339,8 +337,10 @@ Sp.getSubscriptionTemplate = function(className, userId, callback) {
 		streamName: [stream.fields.name, stream.fields.type+'/'],
 		ofUserId: ['', userId]
 	}).execute(function(err, res) {
-		if (err) return callback.call(stream, err);
-		callback.call(stream, null, _sortTemplateTypes(res, 'ofUserId'));
+		if (err) {
+			return callback.call(stream, err);
+		}
+		callback.call(stream, null, _sortTemplateTypes(res, 'ofUserId', returnAll));
 	});
 };
 
@@ -887,12 +887,19 @@ Sp.leave = function(options, callback) {
  * subscription - change type(s) or modify notifications
  * @method subscribe
  * @param {object} [options={}]
- * @param {Array} [options.types] array of message types, if this is empty then subscribes to all types
- * @param {integer} [options.notifications=0] limit number of notifications, 0 means no limit
+ * @param {array} [options.filter] optional array with two keys
+ * @param {Array} [options.filter.types] array of message types, if this is empty then subscribes to all types
+ * @param {integer} [options.filter.notifications=0] limit number of notifications, 0 means no limit
  * @param {datetime} [options.untilTime=null] time limit, if any for subscription
  * @param {datetime} [options.readyTime] time from which user is ready to receive notifications again
  * @param {String} [options.userId] the user subscribing to the stream. Defaults to the logged in user.
- * @param {Object} [options.deliver={"to":"default"}] under "to" key, names the field under Streams/rules/deliver config, which will contain the names of destinations, which can include "email", "mobile", "email+pending", "mobile+pending"
+ * @param {array} [options.rule=array()] optionally override the rule for new subscriptions
+ * @param {array} [options.rule.deliver=array('to'=>'default')] under "to" key,
+ *   named the field under Streams/rules/deliver config, which will contain the names of destinations,
+ *   which can include "email", "mobile", "email+pending", "mobile+pending"
+ * @param {datetime} [options.rule.readyTime] time from which user is ready to receive notifications again
+ * @param {array} [options.rule.filter] optionally set a filter for the rules to add
+ * @param {boolean} [options.skipRules] if true, do not attempt to create rules for new subscriptions
  * @return {Streams_Subscription|false}
  */
 Sp.subscribe = function(options, callback) {
@@ -902,6 +909,7 @@ Sp.subscribe = function(options, callback) {
 		callback = options;
 		options = {};
 	}
+	options = options || {};
 	this._fetchAsUser(options, function(err, stream, userId, user) {
 		if (err) return callback.call(stream, err);
 		stream.join({
@@ -914,31 +922,33 @@ Sp.subscribe = function(options, callback) {
 				streamName: stream.fields.name,
 				ofUserId: userId
 			}).retrieve(function(err, s) {
-				if (err) return callback.call(stream, err);
-				if (s.length) s = s[0];
-				else s = new Streams.Subscription({
-					publisherId: stream.fields.publisherId,
-					streamName: stream.fields.name,
-					ofUserId: userId
-				});
+				if (err) {
+					return callback.call(stream, err);
+				}
+				if (s.length) {
+					s = s[0];
+				} else {
+					s = new Streams.Subscription({
+						publisherId: stream.fields.publisherId,
+						streamName: stream.fields.name,
+						ofUserId: userId
+					});
+				}
 				stream.getSubscriptionTemplate('Subscription', userId,
 				function (err, template) {
 					if (err) return callback.call(stream, err);
-					var filter = template 
+					var filter = options.filter || (template 
 						? JSON.parse(template.fields.filter)
-						: {types: [], notifications: 0};
-					if (options['types']) {
-						filter['types'] = options['types'];
-					}
-					if (options['notifications']) {
-						filter['notifications'] = options['notifications'];
-					}
+						: Stream.getConfigField(
+							stream.fields.type,
+							['subscriptions', 'filter'],
+							{ types: ["Streams/invited"], notifications: 0 }
+						));
 					s.fields.filter = JSON.stringify(filter);
-
-					if (options['untilTime']) {
-						s.fields.untilTime = options['untilTime'];
+					if (options.untilTime != undefined) {
+						s.fields.untilTime = options.untilTime;
 					} else {
-						if (template && template.template_type > 0
+						if (template && template.templateType > 0
 						&& template.fields.duration > 0) {
 							var d = template.fields.duration;
 							s.fields.untilTime = new Db.Expression(
@@ -949,23 +959,38 @@ Sp.subscribe = function(options, callback) {
 					s.save(true, function (err) {
 						if (err) return callback.call(stream, err);
 						// Now let's handle rules
-						stream.getSubscriptionTemplate('Rule', userId,
-						function (err, template) {
-							var deliver;
-							if (err) return callback.call(stream, err);
-							if (!template || template.template_type !== 0) {
-								deliver = (template && template.fields.deliver)
-									? template.fields.deliver
-									: JSON.stringify(
-										options.deliver || {to: 'default'}
-									);
-								var filter = template && template.fields.filter
-									? template.fields.filter
-									: '{"types":[],"labels":[]}';
-								var readyTime = options['readyTime']
-									? options['readyTime']
-									: new Db.Expression('CURRENT_TIMESTAMP');
-								new Streams.Rule({
+						if (options.skipRules) {
+							return callback.call(stream, null, s);
+						}
+						// insert up to one rule per subscription
+						var rule = null;
+						if (options.rule) {
+							rule = options.rule;
+							var db = Streams.Subscription.db();
+							if (rule.readyTime) {
+								rule.readyTime = db.toDateTime(rule.readyTime);
+							} else {
+								rule.readyTime = new Db.Expression('CURRENT_TIMESTAMP');
+							}
+							if (rule.filter && typeof rule.filter !== 'string') {
+								rule.filter = JSON.stringify(rule.filter);
+							}
+							if (rule.deliver && typeof rule.deliver !== 'string') {
+								rule.deliver = JSON.stringify(rule.deliver);
+							}
+							_insertRule(rule);
+						} else {
+							stream.getSubscriptionTemplate('Rule', userId,
+							function (err, template) {
+								if (err) return callback.call(stream, err);
+								var deliver = '{"to": "default"}';
+								var filter = '{"types":[],"labels":[]}';
+								var readyTime = new Db.Expression('CURRENT_TIMESTAMP');
+								if (template && template.templateType !== 0) {
+									deliver = template.fields.deliver;
+									filter = template.fields.filter;
+								}
+								_insertRule({
 									ofUserId: userId,
 									publisherId: stream.fields.publisherId,
 									streamName: stream.fields.name,
@@ -973,34 +998,47 @@ Sp.subscribe = function(options, callback) {
 									filter: filter,
 									deliver: deliver,
 									relevance: 1
-								}).save(function(err) {
-									if (err) return callback.call(stream, err);
-									stream.post(userId, {
-										type: 'Streams/subscribe'
-									}, function(err) {
-										if (err) return callback.call(stream, err);
-										new Streams.Stream({
-											publisherId: userId,
-											name: 'Streams/participating'
-										}).retrieve(function (err, pstream) {
-											if (err || !pstream.length) {
-												return callback.call(stream, err);
-											}
-											pstream[0].post(userId, {
-												type: 'Streams/subscribed',
-												instructions: JSON.stringify({
-													publisherId: stream.fields.publisherId,
-													streamName: stream.fields.name
-												})
-											}, function (err) {
-												if (err) return callback.call(stream, err);
-												callback.call(stream, null, s);
-											});
-										});
-									});
 								});
-							}
-						});
+							});
+						}
+						function _insertRule(fields) {
+							new Streams.Rule(fields).save(function(err) {
+								if (err) {
+									return callback.call(stream, err);
+								}
+								_postSubscribeMessage();
+							});
+						}
+						function _postSubscribeMessage() {
+							stream.post(userId, {
+								type: 'Streams/subscribe'
+							}, function(err) {
+								if (err) {
+									return callback.call(stream, err);
+								}
+								_postSubscribedMessage();
+							});
+						}
+						function _postSubscribedMessage() {
+							new Streams.Stream({
+								publisherId: userId,
+								name: 'Streams/participating'
+							}).retrieve(function (err, pstream) {
+								if (err || !pstream.length) {
+									return callback.call(stream, err);
+								}
+								pstream[0].post(userId, {
+									type: 'Streams/subscribed',
+									instructions: JSON.stringify({
+										publisherId: stream.fields.publisherId,
+										streamName: stream.fields.name
+									})
+								}, function (err) {
+									if (err) return callback.call(stream, err);
+									callback.call(stream, null, s);
+								});
+							});
+						}
 					});
 				});
 			});
@@ -1049,10 +1087,11 @@ Sp.notify = function(participant, event, uid, message, callback) {
 			return; // no need to notify the user of their own actions
 		}
 		if (participant.fields.subscribed === 'yes') {
-			Streams.Subscription.test(
-			userId, stream.fields.publisherId, stream.fields.name, message.fields.type,
+			Streams.Subscription.test(userId, stream, message.fields.type,
 			function(err, deliveries) {
-				if (err || !deliveries.length) return callback && callback(err);
+				if (err || !deliveries.length) {
+					return callback && callback(err);
+				}
 				var waitingFor = deliveries.map(function(d) { return JSON.stringify(d); });
 				var p = new Q.Pipe(waitingFor, function(params) {
 					for (var d in params) {
