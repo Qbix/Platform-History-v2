@@ -3783,13 +3783,15 @@ Q.onInit.add(function _Streams_onInit() {
 		_connectSockets(true);
 	}, 'Streams');
 
+	var _showedComplete = true;
+
 	// set up invite complete dialog
 	Q.Page.onLoad('').add(function _Streams_onPageLoad() {
 		var params = Q.getObject("Q.plugins.Streams.invite.dialog");
-		if (!params) {
+		if (!params || _showedComplete) {
 			return;
 		}
-		Q.setObject("Q.plugins.Streams.invite.dialog", null);
+		_showedComplete = true;
 		var templateName = params.templateName || 'Streams/invite/complete';
 		params.prompt = (params.prompt !== undefined)
 			? params.prompt
