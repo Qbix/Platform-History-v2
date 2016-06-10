@@ -182,7 +182,7 @@ class Streams_Stream extends Base_Streams_Stream
 			return $ret;
 		}
 		// we are looking for exactly one template
-		for ($i=0; $i < 4; $i++) {
+		for ($i=0; $i<4; $i++) {
 			if (!empty($ret[$i][0])) {
 				$type = $i;
 				return $ret[$i][0];

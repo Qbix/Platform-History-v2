@@ -306,8 +306,8 @@ function _sortTemplateTypes(templates, field, returnAll, nameField) {
 	nameField = nameField || 'streamName';
 	for (i=0, l=templates.length; i<l; i++) {
 		t = templates[i];
-		name = t[nameField];
-		pos = t.fields[nameField].length - 1;
+		name = t.fields[nameField];
+		pos = name.length - 1;
 		if (t.fields[field] === '') {
 			key = (name[pos] === '/') ? 3 : 2; // generic publisher
 		} else {
@@ -320,10 +320,10 @@ function _sortTemplateTypes(templates, field, returnAll, nameField) {
 		return ret;
 	}
 	// we are looking for exactly one template
-	for (i=0; i < 4; type++) {
-		if (ret[i]) {
+	for (i=0; i<4; type++) {
+		if (ret[i][0]) {
 			ret.templateType = i;
-			return ret[i];
+			return ret[i]][0];
 		}
 	}
 	return null;
