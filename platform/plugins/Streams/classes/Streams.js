@@ -1148,35 +1148,35 @@ function getInvitedStream (asUserId, forUserId, callback) {
 	if (!callback) return;
 	Streams.fetch(asUserId, forUserId, 'Streams/invited', function (err, streams) {
 		if (err) return callback(err);
-		if (!streams['Streams/invited']) {
-			// stream does not exist yet
-			(new Streams.Stream({
-				publisherId: forUserId,
-				name: 'Streams/invited',
-				type: 'Streams/invited',
-				title: 'Streams/invited',
-				content: 'Post message here when user is invited to some stream',
-				readLevel: Streams.READ_LEVEL['none'],
-				writeLevel: Streams.WRITE_LEVEL['post'], // anyone can post messages
-				adminLevel: Streams.ADMIN_LEVEL['none']
-			})).save(function (err) {
-				var stream = this;
+		if (streams['Streams/invited']) {
+			return callback(null, streams['Streams/invited']);
+		}
+		// stream does not exist yet
+		(new Streams.Stream({
+			publisherId: forUserId,
+			name: 'Streams/invited',
+			type: 'Streams/invited',
+			title: 'Streams/invited',
+			content: 'Post message here when user is invited to some stream',
+			readLevel: Streams.READ_LEVEL['none'],
+			writeLevel: Streams.WRITE_LEVEL['post'], // anyone can post messages
+			adminLevel: Streams.ADMIN_LEVEL['none']
+		})).save(function (err) {
+			if (err) return callback(err);
+			this.calculateAccess(asUserId, _afterCalculateAccess.bind(this));
+		});
+		function _afterCalculateAccess(err) {
+			var stream = this;
+			if (err) return callback(err);
+			stream.subscribe({
+				userId: forUserId, 
+				rule: {
+					deliver: {"to": "invited"}
+				}
+			}, function (err) {
 				if (err) return callback(err);
-				this.calculateAccess(asUserId, function(err) {
-					if (err) return callback(err);
-					this.subscribe({
-						userId: forUserId, 
-						rule: {
-							deliver: {"to": "invited"}
-						}
-					}, function (err) {
-						if (err) return callback(err);
-						callback(null, stream);
-					});
-				});
+				callback(null, stream);
 			});
-		} else {
-			callback(null, streams['Streams/invited']);
 		}
 	});
 }

@@ -945,7 +945,14 @@ Sp.subscribe = function(options, callback) {
 						: Streams_Stream.getConfigField(
 							stream.fields.type,
 							['subscriptions', 'filter'],
-							{ types: ["Streams/invited"], notifications: 0 }
+							{ 
+								types: [
+									"^(?!(Users/)|(Streams/)).*/", 
+									"Streams/relatedTo", 
+									"Streams/chat/message"
+								], 
+								notifications: 0
+							}
 						));
 					s.fields.filter = JSON.stringify(filter);
 					if (options.untilTime != undefined) {

@@ -2899,7 +2899,11 @@ abstract class Streams extends Base_Streams
 						: Streams_Stream::getConfigField($type, array(
 							'subscriptions', 'filter'
 						), array(
-							"types" => array("Streams/invited"),
+							"types" => array(
+								"^(?!(Users/)|(Streams/)).*/",
+								"Streams/relatedTo",
+								"Streams/chat/message"
+							),
 							"notifications" => 0
 						))
 					);

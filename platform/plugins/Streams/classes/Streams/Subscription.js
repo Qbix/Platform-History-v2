@@ -58,7 +58,14 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 				filter = Stream.getConfigField(
 					stream.fields.type, 
 					['subscriptions', 'filter'],
-					{ types: ["Streams/invited"], notifications: 0 }
+					{ 
+						types: [
+							"^(?!(Users/)|(Streams/)).*/", 
+							"Streams/relatedTo", 
+							"Streams/chat/message"
+						], 
+						notifications: 0
+					}
 				);
 			}
 		} catch (err) {

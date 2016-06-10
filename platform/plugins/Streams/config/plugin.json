@@ -131,7 +131,7 @@
 			"Streams/invited": {
 				"subscriptions": {
 					"filter": {
-						"types": ["Streams/invited"],
+						"types": ["Streams/invite"],
 						"notifications": 0
 					}
 				}
