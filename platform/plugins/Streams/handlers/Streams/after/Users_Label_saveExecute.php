@@ -7,7 +7,7 @@ function Streams_after_Users_Label_saveExecute($params)
 	$modifiedFields = $params['modifiedFields'];
 	$label = $params['row'];
 	if ($inserted) {
-		Streams_Message::post(null, $contact->userId, 'Streams/labels', array(
+		Streams_Message::post(null, $label->userId, 'Streams/labels', array(
 			'type' => 'Streams/labels/inserted',
 			'instructions' => array('label' => $label->exportArray())
 		), true);
