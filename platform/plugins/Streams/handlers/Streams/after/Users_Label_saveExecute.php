@@ -3,6 +3,7 @@
 function Streams_after_Users_Label_saveExecute($params)
 {
 	// The icon or title might have been modified
+	$inserted = $params['inserted'];
 	$modifiedFields = $params['modifiedFields'];
 	$label = $params['row'];
 	if ($inserted) {
