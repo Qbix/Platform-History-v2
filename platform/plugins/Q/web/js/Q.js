@@ -4625,7 +4625,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	var value = {
 		cbpos: cbpos,
 		subject: subject,
-		params: params,
+		params: (params instanceof Array) ? params : Array.prototype.slice.call(params),
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest()),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};
@@ -4765,18 +4765,23 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 			}
 		});
 	} else {
-		var key = cache.earliest(), prevkey, item;
+		var results = {}, seen = {}, key = cache.earliest(), item;
 		while (key) {
 			item = Q_Cache_get(this, key);
 			if (item === undefined) {
 				break;
 			}
-			prevkey = key;
-			key = item.next;
-			if (prefix && !prevkey.startsWith(prefix)) {
-				continue;
+			if (!prefix || key.startsWith(prefix)) {
+				results[key] = item;
 			}
-			if (callback.call(this, prevkey, item) === false) {
+			if (seen[key]) {
+				throw new Q.Error("Q.Cache.prototype.each: "+this.name+" has an infinite loop");
+			}
+			seen[key] = true;
+			key = item.next;
+		}
+		for (key in results) {
+			if (false === callback.call(this, key, results[key])) {
 				break;
 			}
 		}

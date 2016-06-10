@@ -102,10 +102,6 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 						deliveries.push(param[1]);
 					}
 				}
-				// Notification should be delivered only once to each endpoint
-				deliveries = deliveries.filter(function (value, index, arr) {
-					return arr.indexOf(value) === index;
-				});
 				callback(null, deliveries);
 			});
 			p.run();

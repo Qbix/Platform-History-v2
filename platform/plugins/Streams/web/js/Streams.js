@@ -518,7 +518,8 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 				Q.handle(handler, stream, []);
 				Streams.get.onStream.handle.call(stream);
 				return ret;
-			}
+			},
+			true // so the callback will already have the cache set
 		);
 	}, extra);
 	_retain = undefined;
@@ -621,7 +622,8 @@ Streams.create = function (fields, callback, related, options) {
 		if (related) {
 			Streams.related.cache.removeEach([related.publisherId, related.streamName]);
 		}
-		Streams.construct(data.slots.stream, {}, function Stream_create_construct_handler (err, stream) {
+		Streams.construct(data.slots.stream, {},
+		function Stream_create_construct_handler (err, stream) {
 			var msg = Q.firstErrorMessage(err);
 			if (msg) {
 				return callback && callback.call(stream, msg, stream, data.slots.icon);
@@ -632,7 +634,7 @@ Streams.create = function (fields, callback, related, options) {
 			var extra = {};
 			extra.icon = data.slots.icon;
 			if (related && data.slots.messageTo) {
-				var m = extra.messageTo = Streams.Message.construct(data.slots.messageTo);
+				var m = extra.messageTo = Streams.Message.construct(data.slots.messageTo, true);
 				extra.related = {
 					publisherId: related.publisherId,
 					streamName: related.streamName,
@@ -644,7 +646,7 @@ Streams.create = function (fields, callback, related, options) {
 			// process various messages posted to Streams/participating
 			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
 			return;
-		});
+		}, true);
 	}, { 
 		method: 'post', 
 		fields: fields, 
@@ -663,13 +665,14 @@ Streams.create.onError = new Q.Event();
  * They have very similar conventions.
  * @static
  * @method construct
- * @param fields {Object} Provide any stream fields here. Requires at least the "type" of the stream.
- * @param extra {Object} Can include "messages" and "participants"
- * @param callback {Function} The function to call when all constructors and event handlers have executed
+ * @param {Object} fields Provide any stream fields here. Requires at least the "type" of the stream.
+ * @param {Object} [extra={}] Can include "messages" and "participants"
+ * @param {Function} [callback] The function to call when all constructors and event handlers have executed
  *  The first parameter is an error, in case something went wrong. The second one is the stream object.
+ * @param {Boolean} [updateCache=false] Whether to update the Streams.get cache after constructing the stream
  * @return {Q.Stream}
  */
-Streams.construct = function _Streams_construct(fields, extra, callback) {
+Streams.construct = function _Streams_construct(fields, extra, callback, updateCache) {
 
 	if (typeof extra === 'function') {
 		callback = extra;
@@ -723,17 +726,17 @@ Streams.construct = function _Streams_construct(fields, extra, callback) {
 			streamFunc.streamConstructor = function Streams_Stream(fields) {
 				// run any constructors
 				streamFunc.streamConstructor.constructors.apply(this, arguments);
-
+				
 				var f = this.fields;
-
-				// update the Streams.get cache
-				if (f.publisherId && f.name) {
-					Streams.get.cache
-					.removeEach([f.publisherId, f.name])
-					.set(
-						[f.publisherId, f.name], 0,
-						this, [null, this]
-					);
+				if (updateCache) { // update the Streams.get cache
+					if (f.publisherId && f.name) {
+						Streams.get.cache
+						.removeEach([f.publisherId, f.name])
+						.set(
+							[f.publisherId, f.name], 0,
+							this, [null, this]
+						);
+					}
 				}
 
 				// call any onConstruct handlers
@@ -755,7 +758,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback) {
 		if (extra && extra.messages) {
 			Q.each(extra.messages, function (ordinal, message) {
 				if (Q.typeOf(message) !== 'Q.Streams.Message') {
-					message = Message.construct(message);
+					message = Message.construct(message, true);
 				}
 				messages[ordinal] = message;
 			});
@@ -1148,9 +1151,10 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 				extra.participants = data.slots.participants;
 			}
 			if (!data.slots.stream) {
-				callback && callback.call(this, "Streams/related missing stream " + streamName + ' published by ' + publisherId);
+				msg = "Streams/related missing stream "+streamName+' published by '+publisherId;
+				callback && callback.call(this, msg);
 			} else {
-				Streams.construct(data.slots.stream, extra, _processResults);
+				Streams.construct(data.slots.stream, extra, _processResults, true);
 			}
 		}
 
@@ -1171,7 +1175,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 				Streams.construct(fields, {}, function () {
 					streams[key] = this;
 					p.fill(key)();
-				});
+				}, true);
 			});
 			
 			// Now process all the relations
@@ -2552,7 +2556,17 @@ var Message = Streams.Message = function Streams_Message(fields) {
 	this.typename = 'Q.Streams.Message';
 };
 
-Message.construct = function Streams_Message_construct(fields) {
+/**
+ * Constructs a Streams.Message from fields.
+ * If the Streams.Message.define() function was not called,
+ * uses a default constructor for the message, which simply copies the fields.
+ * @static
+ * @method construct
+ * @param {Object} fields Provide any message fields here. Requires at least the "type" of the stream.
+ * @param {Boolean} [updateCache=false] Whether to update the Message.get cache after constructing the stream
+ * @return {Q.Stream}
+ */
+Message.construct = function Streams_Message_construct(fields, updateCache) {
 	if (Q.isEmpty(fields)) {
 		return false;
 	}
@@ -2572,10 +2586,12 @@ Message.construct = function Streams_Message_construct(fields) {
 		messageFunc.messageConstructor = function Streams_Message(fields) {
 			// run any constructors
 			messageFunc.messageConstructor.constructors.apply(this, arguments);
-			Message.get.cache.set(
-				[this.publisherId, this.streamName, parseInt(this.ordinal)],
-				0, this, [null, this]
-			);
+			if (updateCache) {
+				Message.get.cache.set(
+					[this.publisherId, this.streamName, parseInt(this.ordinal)],
+					0, this, [null, this]
+				);
+			}
 		};
 		Q.mixin(messageFunc, Streams.Message);
 		Q.mixin(messageFunc.messageConstructor, messageFunc);
@@ -2707,7 +2723,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 		}
 		Q.each(messages, function (ordinal, message) {
 			if (Q.typeOf(message) !== 'Q.Streams.Message') {
-				message = Message.construct(message);
+				message = Message.construct(message, true);
 			}
 			messages[ordinal] = message;
 		});
@@ -3073,10 +3089,6 @@ Avatar.get = function _Avatar_get (userId, callback) {
 			return callback && callback.call(this, msg, args);
 		}
 		var avatar = data.avatar ? new Avatar(data.avatar) : null;
-		Avatar.get.cache.set(
-			[userId],
-			0, avatar, [err, avatar]
-		);
 		callback && callback.call(avatar, null, avatar);
 		Avatar.get.onAvatar.handle.call(avatar);
 	});
@@ -3122,7 +3134,6 @@ Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 			avatars[userId] = avatar = new Avatar(avatar);
 			Avatar.get.cache.set([userId], 0, avatar, [null, avatar]);
 		});
-		Avatar.byPrefix.cache.set([prefix], 0, this, [null, avatars]);
 		callback && callback.call(this, null, avatars);
 	}, { fields: fields });
 };
@@ -3442,18 +3453,33 @@ function updateAvatarCache(stream) {
 		'Streams/user/icon': true
 	};
 	var sf = stream.fields;
+	var cache, item;
 	if (avatarStreamNames[sf.name]) {
 		var field = sf.name.split('/').pop();
 		var userId = sf.publisherId;
-		Avatar.get.cache.each([userId], function (k) {
-			this.data[k].subject[field] = sf.content;
-		});
+		cache = Avatar.get.cache;
+		if (item = cache.get([userId])) {
+			item.subject[field] = sf.content;
+			cache.set([userId], 0, item.subject, [null, item.subject]);
+		}
 		if (field === 'username' || field === 'icon') {
-			Users.get.cache.each([userId], function (k) {
-				this.data[k].subject[field] = sf.content;
-			});
+			cache = Users.get.cache;
+			if (item = cache.get([userId])) {
+				var user = item.subject;
+				avatar[field] = sf.content;
+				cache.set([userId], 0, item.subject, [null, item.subject]);
+			}
 		}
 	}
+}
+
+function updateStreamCache(stream) {
+	Streams.get.cache.each(
+		[stream.fields.publisherId, stream.fields.name], 
+		function (k) {
+			this.set(k, 0, stream, [null, stream]);
+		}
+	);
 }
 
 Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedFields) {
@@ -3556,8 +3582,9 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	}
 	// Now time to replace the fields in the stream with the incoming fields
 	Q.extend(stream.fields, fields);
-	updateAvatarCache(stream);
 	prepareStream(stream);
+	updateAvatarCache(stream);
+	updateStreamCache(stream);
 }
 
 function prepareStream(stream) {
@@ -3615,7 +3642,7 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 
 Q.beforeInit.add(function _Streams_beforeInit() {
 
-	var where = Streams.cache.where || 'document';
+	var where = Streams.cache.where || 'local';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
 		cache: Q.Cache[where]("Streams.get", 100), 
@@ -3707,7 +3734,7 @@ Q.onInit.add(function _Streams_onInit() {
 		Q.Socket.destroyAll();
 	}, "Streams");
 	if (Users.loggedInUser) {
-		_connectSockets();
+		_connectSockets(true); // refresh streams
 	}
 
 	var pushNotification = window.plugins && window.plugins.pushNotification;
@@ -3889,7 +3916,7 @@ Q.onInit.add(function _Streams_onInit() {
 					}}
 				});
 			});
-		});
+		}, true);
 	}, "Streams");
 
 	Streams.onEvent('debug').set(function _Streams_debug_handler (msg) {
@@ -3948,7 +3975,7 @@ Q.onInit.add(function _Streams_onInit() {
 			console.log('Streams.onEvent("post")', msg);
 			var message = (Q.typeOf(msg) === 'Q.Streams.Message')
 				? msg
-				: Message.construct(msg);
+				: Message.construct(msg, true);
 			Message.latest[ptn] = parseInt(msg.ordinal);
 			var cached = Streams.get.cache.get(
 				[msg.publisherId, msg.streamName]
