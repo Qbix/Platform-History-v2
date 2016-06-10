@@ -6561,7 +6561,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		return false;
 	}
 	href = Q.url(href);
-	if (!media) media = 'screen, print';
+	if (!media) media = 'screen,print';
 	var links = document.getElementsByTagName('link');
 	for (i=0; i<links.length; ++i) {
 		if (links[i].getAttribute('href') !== href) continue;

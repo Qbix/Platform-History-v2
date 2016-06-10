@@ -65,7 +65,7 @@ function Q_before_Q_responseExtras()
 	foreach (Q_Config::get('Q', 'stylesheets', 'responseExtras', array()) as $src => $media) {
 		if (!$media) continue;
 		if ($media === true) {
-			$media = 'screen, print';
+			$media = 'screen,print';
 		}
 		Q_Response::addStylesheet($src, null, $media);
 	}

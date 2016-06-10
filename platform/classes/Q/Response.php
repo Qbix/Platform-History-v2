@@ -1089,7 +1089,7 @@ class Q_Response
 		$tags = array();
 		foreach ($scripts as $script) {
 			$src = '';
-			// $media = 'screen, print';
+			// $media = 'screen,print';
 			$type = 'text/css';
 			extract($script, EXTR_IF_EXISTS);
 			$tags[] = Q_Html::tag(
@@ -1106,11 +1106,11 @@ class Q_Response
 	 * @static
 	 * @param {string} $href
 	 * @param {string} [$slotName=null]
-	 * @param {string} [$media='screen, print']
+	 * @param {string} [$media='screen,print']
 	 * @param {string} [$type='text/css']
 	 * @return {boolean} returns false if a stylesheet with exactly the same parameters has already been added, else true.
 	 */
-	static function addStylesheet ($href, $slotName = null, $media = 'screen, print', $type = 'text/css')
+	static function addStylesheet ($href, $slotName = null, $media = 'screen,print', $type = 'text/css')
 	{
 		/**
 		 * @event Q/response/addStylesheet {before}
@@ -1231,7 +1231,7 @@ class Q_Response
 		if (!empty($sheets)) {
 			foreach ($sheets as $stylesheet) {
 				$href = '';
-				$media = 'screen, print';
+				$media = 'screen,print';
 				$type = 'text/css';
 				extract($stylesheet, EXTR_IF_EXISTS);
 
@@ -1274,7 +1274,7 @@ class Q_Response
 		foreach ($stylesheets as $stylesheet) {
 			$rel = 'stylesheet';
 			$href = '';
-			$media = 'screen, print';
+			$media = 'screen,print';
 			$type = 'text/css';
 			extract($stylesheet, EXTR_IF_EXISTS);
 			$attributes = compact('rel', 'type', 'href', 'media');
