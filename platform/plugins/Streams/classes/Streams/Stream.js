@@ -323,7 +323,7 @@ function _sortTemplateTypes(templates, field, returnAll, nameField) {
 	for (i=0; i<4; type++) {
 		if (ret[i][0]) {
 			ret.templateType = i;
-			return ret[i]][0];
+			return ret[i][0];
 		}
 	}
 	return null;
