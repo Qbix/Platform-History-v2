@@ -746,10 +746,10 @@ Sp.testPermission = function(permission, callback)
 
 Sp._fetchAsUser = function (options, callback) {
 	var stream = this;
-	if (!options['userId']) {
+	if (!options.userId) {
 		return callback.call(stream, new Error("No user id provided"));
 	}
-	var user = new Users.User({ id: options['userId'] });
+	var user = new Users.User({ id: options.userId });
 	user.retrieve(function (err, users) {
 		if (err) return callback.call(stream, err);
 		if (!users.length) return callback.call(stream, new Error("User not found"));
@@ -798,7 +798,7 @@ Sp.join = function(options, callback) {
 			var type = 'Streams/join';
 			if (sp.length) {
 				sp = sp[0];
-				var save = false, subscribed = options['subscribed'];
+				var save = false, subscribed = options.subscribed;
 				var yn = subscribed ? 'yes' : 'no';
 				if (subscribed && sp.fields.subscribed !== yn) {
 					sp.fields.subscribed = yn;
@@ -822,20 +822,23 @@ Sp.join = function(options, callback) {
 					streamName: stream.fields.name,
 					userId: userId,
 					streamType: stream.fields.type,
-					subscribed: options['subscribed'] ? 'yes' : 'no',
-					posted: options['posted'] ? 'yes' : 'no',
-					reputation: options['reputation'] || 0,
+					subscribed: options.subscribed ? 'yes' : 'no',
+					posted: options.posted ? 'yes' : 'no',
+					reputation: options.reputation || 0,
 					state: 'participating',
-					extra: options['extra'] || '{}'
+					extra: options.extra || '{}'
 				});
 				sp.save(_afterSaveParticipant);
 			}
 			function _afterSaveParticipant(err) {
 				if (err) return callback.call(stream, err);
 				Streams.emitToUser(userId, 'join', sp.fillMagicFields().getFields());
-				
+				stream.updateParticipantCounts(
+					'participating', sp.fields.state, _afterUpdateParticipantCounts
+				);
+			}
+			function _afterUpdateParticipantCounts() {
 				var f = sp.fields;
-				stream.updateParticipantCounts('participating', f.state);
 				stream.post(userId, {
 					type: type,
 					instructions: JSON.stringify({
@@ -939,7 +942,7 @@ Sp.subscribe = function(options, callback) {
 					if (err) return callback.call(stream, err);
 					var filter = options.filter || (template 
 						? JSON.parse(template.fields.filter)
-						: Stream.getConfigField(
+						: Streams_Stream.getConfigField(
 							stream.fields.type,
 							['subscriptions', 'filter'],
 							{ types: ["Streams/invited"], notifications: 0 }
@@ -963,14 +966,20 @@ Sp.subscribe = function(options, callback) {
 							return callback.call(stream, null, s);
 						}
 						// insert up to one rule per subscription
-						var rule = null;
+						var rule = {
+							ofUserId: userId,
+							publisherId: stream.fields.publisherId,
+							streamName: stream.fields.name,
+							readyTime: new Db.Expression('CURRENT_TIMESTAMP'),
+							filter: '{"types":[],"labels":[]}',
+							deliver: '{"to": "default"}',
+							relevance: 1
+						};
 						if (options.rule) {
-							rule = options.rule;
+							Q.extend(rule, options.rule);
 							var db = Streams.Subscription.db();
-							if (rule.readyTime) {
+							if (options.rule.readyTime) {
 								rule.readyTime = db.toDateTime(rule.readyTime);
-							} else {
-								rule.readyTime = new Db.Expression('CURRENT_TIMESTAMP');
 							}
 							if (rule.filter && typeof rule.filter !== 'string') {
 								rule.filter = JSON.stringify(rule.filter);
@@ -983,22 +992,11 @@ Sp.subscribe = function(options, callback) {
 							stream.getSubscriptionTemplate('Rule', userId,
 							function (err, template) {
 								if (err) return callback.call(stream, err);
-								var deliver = '{"to": "default"}';
-								var filter = '{"types":[],"labels":[]}';
-								var readyTime = new Db.Expression('CURRENT_TIMESTAMP');
 								if (template && template.templateType !== 0) {
-									deliver = template.fields.deliver;
-									filter = template.fields.filter;
+									rule.deliver = template.fields.deliver;
+									rule.filter = template.fields.filter;
 								}
-								_insertRule({
-									ofUserId: userId,
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name,
-									readyTime: readyTime,
-									filter: filter,
-									deliver: deliver,
-									relevance: 1
-								});
+								_insertRule(rule);
 							});
 						}
 						function _insertRule(fields) {

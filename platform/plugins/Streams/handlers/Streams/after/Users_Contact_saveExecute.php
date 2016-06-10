@@ -12,7 +12,7 @@ function Streams_after_Users_Contact_saveExecute($params)
 		), true);
 	} else {
 		$updates = Q::take($modifiedFields, array('nickname'));
-		$updates = array_merge($updates, $contact->toArray());
+		$updates = array_merge($contact->toArray(), $updates);
 		Streams_Message::post(null, $contact->userId, 'Streams/contacts', array(
 			'type' => 'Streams/contacts/updated',
 			'instructions' => compact('updates')

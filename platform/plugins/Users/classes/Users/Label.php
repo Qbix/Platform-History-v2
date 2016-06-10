@@ -33,6 +33,8 @@ class Users_Label extends Base_Users_Label
 	 * @param {string} [$icon='default']
 	 * @param {string} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
+	 * @param boolean [$unlessExists=false] If true, skips adding label if it already exists
+	 *   in the database.
 	 * @return {Users_Label}
 	 */
 	static function addLabel(
@@ -40,11 +42,12 @@ class Users_Label extends Base_Users_Label
 		$userId = null, 
 		$title = '', 
 		$icon = 'default',
-		$asUserId = null)
+		$asUserId = null,
+		$unlessExists = false)
 	{
 		if (is_array($label)) {
 			foreach ($label as $l) {
-				self::addLabel($l, $userId, $title, $icon, $asUserId);
+				self::addLabel($l, $userId, $title, $icon, $asUserId, $unlessExists);
 			}
 			return;
 		}
@@ -64,9 +67,12 @@ class Users_Label extends Base_Users_Label
 			$title = ucfirst(end($parts));
 		}
 		$l = new Users_Label();
-		self::_icon($l, $icon, $userId);
 		$l->label = $label;
 		$l->userId = $userId;
+		if ($l->retrieve() and $unlessExists) {
+			return $l;
+		}
+		self::_icon($l, $icon, $userId);
 		$l->title = $title;
 		$l->icon = $icon;
 		$l->save(true); 
