@@ -624,7 +624,7 @@ Q.Layout = {
 								Q.Layout.orientationChange(false, true, true);
 							}
 							Q.Interval.clear('Q.Layout.hideAddressBar');
-							if (Q.info.isMobile && Q.info.platform != 'android')
+							if (!Q.info.isAndroid())
 							{
 								Q.Layout.handleAddressBarAppearing = true;
 							}
@@ -1115,7 +1115,7 @@ Q.Layout = {
 		else if (dontHideAddressBar === undefined)
 			dontHideAddressBar = false;
 		
-		if (Q.info.isMobile && Q.info.platform != 'android')
+		if (Q.info.isMobile && !Q.info.isAndroid())
 		{
 			Q.Layout.handleAddressBarAppearing = false;
 		}
@@ -1348,7 +1348,7 @@ Q.Layout = {
 		
 		Q.Layout.browserSpecifics();
 
-		if (Q.info.isMobile && Q.info.platform != 'android') {
+		if (Q.info.isMobile && !Q.info.isAndroid()) {
 			Q.Layout.handleAddressBarAppearing = true;
 		}
 		Q.handle(Q.Layout.onOrientationChangeEvent);

@@ -20,17 +20,14 @@
  */
 Q.Tool.jQuery('Q/bookmarklet', function (o) {
 	
-	if (!o.content)
-	{
-		alert("Please provide 'content' for bookmarklet.");
+	if (!o.content) {
+		console.warn("Please provide 'content' for bookmarklet.");
 	}
-	if (!o.title)
-	{
-		alert("Please provide 'title' for bookmarklet.");
+	if (!o.title) {
+		console.warn("Please provide 'title' for bookmarklet.");
 	}
-	if (!o.title)
-	{
-		alert("Please provide 'usage' for bookmarklet.");
+	if (!o.title) {
+		console.warn("Please provide 'usage' for bookmarklet.");
 	}
 	
 	Q.addStylesheet('plugins/Q/css/inplace.css');
@@ -248,33 +245,25 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 									 'After you drag the button to the Bookmarks Bar, it will look like this.' +
 								 '</div>' +
 							 '</div>');
-			var buttons = $this.find('.Q_bookmarklet_tool_button_middle a');
-			if (o.content.substr(0, 11) === 'javascript:')
-			{
-				buttons.attr('href', 'javascript:' + encodeURIComponent(o.content.substr(11).replace('\n', ' ')));
+			var $a = $this.find('.Q_bookmarklet_tool_button_middle a');
+			var content = null;
+			if (o.content) {
+				content = o.content;
+				if (o.content.substr(0, 11) !== 'javascript:') {
+					o.content = 'javascript:'+o.content;
+				}
+				$a.attr('href', encodeURIComponent(o.content.replace('\n', ' ')));
 			}
-			else
-			{
-				$.get(o.content, function(data)
-				{
-					var constants = "var BASE_URL = '" + Q.info.proxyBaseUrl + "';";
-					buttons.attr('href', 'javascript:' + encodeURIComponent(constants + data));
-				}, 'text');
-			}
-			$(buttons[0]).click(function()
-			{
-				alert('This is a bookmarklet, drag it to your bookmarks bar.');
-				return false;
-			});
-			$(buttons[1]).click(function()
-			{
+			$a.eq(0).on('click.Q_bookmarklet', function() {
+				alert(o.clickPrompt);
 				return false;
 			});
 		}
 },
 
 {
-	icon: null
+	icon: null,
+	clickPrompt: 'This is a bookmarklet, drag it to your bookmarks bar.'
 });
 
 })(Q, jQuery, window, document);

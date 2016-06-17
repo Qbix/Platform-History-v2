@@ -91,8 +91,8 @@ Q.Tool.define("Q/columns", function(options) {
 	title: '<img class="Q_columns_loading" src="' + Q.url('plugins/Q/img/throbbers/loading.gif') +'" alt="">',
 	column: undefined,
 	scrollbarsAutoHide: {},
-	fullscreen: Q.info.isMobile && Q.info.isAndroid(1000),
-	hideBackgroundColumns: Q.info.isMobile && Q.info.isAndroid(1000),
+	fullscreen: Q.info.isMobile && Q.info.isAndroid(1000) && Q.info.isAndroidStock,
+	hideBackgroundColumns: Q.info.isMobile && Q.info.isAndroid(1000) && Q.info.isAndroidStock,
 	beforeOpen: new Q.Event(),
 	beforeClose: new Q.Event(),
 	onOpen: new Q.Event(function () {

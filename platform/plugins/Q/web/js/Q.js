@@ -9138,7 +9138,7 @@ Q.Browser = {
 
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
-var isTablet = navigator.userAgent.match(new RegExp('tablet|ipad', 'i'))
+var isTablet = navigator.userAgent.match(/tablet|ipad|/i)
 	|| (isTouchscreen && !navigator.userAgent.match(new RegExp('mobi', 'i')));
 /**
  * Useful info about the page and environment
@@ -9164,6 +9164,8 @@ Q.info = {
 			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
 	}
 };
+Q.info.isAndroidStock = !!(Q.info.platform === 'android'
+	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
 Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
 var de = document.documentElement;
@@ -10229,21 +10231,21 @@ Q.Dialogs = {
 };
 
 Q.Dialogs.push.options = {
-	'dialog': null,
-	'url': null,
-	'title': 'Dialog',
-	'content': '',
-	'className': null,
-	'fullscreen': Q.info.isAndroid(undefined, 1000),
-	'appendTo': document.body,
-	'alignByParent': false,
-	'beforeLoad': new Q.Event(),
-	'onActivate': new Q.Event(),
-	'beforeClose': new Q.Event(),
-	'onClose': null,
-	'closeOnEsc': true,
-	'removeOnClose': null,
-	'hidePrevious': true
+	dialog: null,
+	url: null,
+	title: 'Dialog',
+	content: '',
+	className: null,
+	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(undefined, 1000),
+	appendTo: document.body,
+	alignByParent: false,
+	beforeLoad: new Q.Event(),
+	onActivate: new Q.Event(),
+	beforeClose: new Q.Event(),
+	onClose: null,
+	closeOnEsc: true,
+	removeOnClose: null,
+	hidePrevious: true
 };
 
 /**

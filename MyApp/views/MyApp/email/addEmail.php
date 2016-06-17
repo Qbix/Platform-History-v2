@@ -1,5 +1,5 @@
 <p>
-	Greetings from <?php echo Q_Html::text($publisherId->displayName()) ?>.
+	Greetings from <?php echo Q_Html::text($publisher->displayName()) ?>.
 </p>
 
 <p>
