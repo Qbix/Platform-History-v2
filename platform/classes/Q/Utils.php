@@ -922,11 +922,18 @@ class Q_Utils
 	 * @param {string} $id the id to split
 	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
 	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
+	 * @param {string} [$internalDelimiter='/'] the internal delimiter, if it is set then only the last part is split, and instances of internalDelimiter are replaced by delimiter
 	 * @return {string} the segments, delimited by the delimiter
 	 */
-	static function splitId($id, $lengths = 3, $delimiter = DIRECTORY_SEPARATOR)
+	static function splitId($id, $lengths = 3, $delimiter = DIRECTORY_SEPARATOR, $internalDelimiter = '/')
 	{
-		return implode($delimiter, str_split($id, $lengths));
+		if (!$internalDelimiter) {
+			return implode($delimiter, str_split($id, $lengths));
+		}
+		$parts = explode($internalDelimiter, $id);
+		$last = array_pop($parts);
+		$prefix = $parts ? (implode($delimiter, $parts) . $delimiter) : '';
+		return $prefix . implode($delimiter, str_split($last, $lengths));
 	}
 	
 	protected static $urand;

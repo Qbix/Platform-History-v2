@@ -1213,17 +1213,32 @@ function _dump_log (phase, onsuccess) {
  * @static
  * @param {string} id the id to split
  * @param {integer} [lengths=3] the lengths of each segment (the last one can be smaller)
- * @param {string} [delimiter='/'] the delimiter to put between segments
+ * @param {string} [delimiter=path.sep] the delimiter to put between segments
+ * @param {string} [internalDelimiter='/'] the internal delimiter, if it is set then only the last part is split, and instances of internalDelimiter are replaced by delimiter
  * @return {string} the segments, delimited by the delimiter
  */
-Utils.splitId = function(id, lengths, delimiter) {
+Utils.splitId = function(id, lengths, delimiter, internalDelimiter) {
 	lengths = lengths || 3;
-	delimiter = delimiter || '/';
-	var segments = [], pos = 0, len = id.length;
+	delimiter = delimiter || path.sep;
+	if (internalDelimiter === undefined) {
+		internalDelimiter = '/';
+	}
+	var prefix = '';
+	var parts = [];
+	if (internalDelimiter) {
+		parts = id.split(internalDelimiter);
+		id = parts.pop();
+	}
+	var prefix = parts.length > 0
+		? parts.join(delimiter) + delimiter
+		: '';
+	var segments = [];
+	var pos = 0;
+	var len = id.length;
 	while (pos < len) {
 		segments.push(id.slice(pos, pos += lengths));
 	}
-	return segments.join(delimiter);
+	return prefix + segments.join(delimiter);
 };
 
 module.exports = Utils;
