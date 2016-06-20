@@ -252,18 +252,28 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 			if (o.scripts && o.scripts.length) {
 				var scripts = [];
 				for (var i=0; i<o.scripts.length; ++i) {
-					scripts.push(Q.url(o.scripts[i]));
+					var orig = o.scripts[i];
+					var url = Q.url(orig);
+					scripts.push(url);
+					if (o.skip && o.skip[orig]) {
+						o.skip[url] = o.skip[orig];
+						if (url !== orig) {
+							delete o.skip[orig];
+						}
+					}
 				}
 				var json = JSON.stringify({
 					scripts: scripts,
 					skip: o.skip,
 					code: o.code
 				});
+				var baseUrlJson = JSON.stringify(Q.info.baseUrl);
 				code =
   '(function () {'
 + ' var o = ' + json + ';'
++ '	var i=-1, loaded = {};'
 + ' function loadScript(url, callback) {'
-+ '   if (o.skip && getObject(o.skip[url]) !== undefined) {'
++ '   if (loaded[url] || (o.skip && getObject(o.skip[url]) !== undefined)) {'
 + ' 	return callback();'
 + '   }'
 + '   var script = document.createElement("script");'
@@ -272,18 +282,19 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 + '     script.onreadystatechange = function () {'
 + '       if (script.readyState == "loaded" || script.readyState == "complete") {'
 + '         script.onreadystatechange = null;'
++ '         loaded[url] = true;'
 + '         callback();'
 + '       }'
 + '     };'
 + '   } else {'
 + '     script.onload = function () {'
++ '         loaded[url] = true;'
 + '         callback();'
 + '     };'
 + '  }'
 + '  script.src = url;'
 + '  document.getElementsByTagName("head")[0].appendChild(script);'
 + ' }'
-+ '	var i=-1;'
 + '	function loadNextScript() {'
 + '   if (++i < o.scripts.length) {'
 + ' 	loadScript(o.scripts[i], loadNextScript);'
@@ -293,24 +304,32 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 + '	}'
 + '	function afterScripts() {'
 + '   if (o.code) {'
-+ ' 	eval(o.code);'
++ '     var f = new Function("baseUrl", o.code);'
++ ' 	f(' + baseUrlJson + ');'
 + '   }'
 + '	}'
 + '	function getObject (name) {'
-+ '   var p, i = 0, context = window;'
++ '   if (!name) return;'
++ '   var p, i = 0, c = window;'
 + '   var parts = name.split(".");'
-+ '   if (!parts.length) return context;'
-+ '   while (context && (p = parts[i++]) !== undefined){'
-+ ' 	context = context[p];'
++ '   if (!parts.length) return c;'
++ '   while (c && (p = parts[i++]) !== undefined){'
++ ' 	c = c[p];'
 + '   }'
-+ '   return context;'
++ '   return c;'
 + '	}'
 + '	loadNextScript();'
 + '})();';
 			} else {
 				code = o.code;
 			}
-			code = 'javascript:'+encodeURIComponent(code.replaceAll({'\n': ' '}));
+			// NOTE: code should be under 2000 total characters
+			// see http://stackoverflow.com/a/417184/467460
+			code = 'javascript:'+encodeURIComponent(code.replaceAll({
+				'\n': ' ',
+				'    ': ' ',
+				'  ': ' '
+			}));
 			$a.attr('href', code);
 			$a.eq(0).on('click.Q_bookmarklet', function() {
 				alert(o.clickPrompt);
