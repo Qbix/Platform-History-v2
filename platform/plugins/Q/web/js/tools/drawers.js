@@ -149,7 +149,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	bottom: [false, false],
 	triggers: ['plugins/Q/img/drawers/up.png', 'plugins/Q/img/drawers/down.png'],
 	trigger: { rightMargin: 10, transition: 300 },
-	fullscreen: Q.info.isMobile && Q.info.isAndroid(1000),
+	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(1000),
 	foregroundZIndex: 50,
 	beforeSwap: new Q.Event(),
 	onSwap: new Q.Event()
@@ -369,7 +369,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			state.locked = false;
 			++state.swapCount;
 			
-			if (Q.info.isTouchscreen && !Q.info.isAndroid()) {
+			if (Q.info.isTouchscreen && !(Q.info.isAndroidStock)) {
 				_addTouchEvents();
 			}
 			

@@ -2899,7 +2899,11 @@ abstract class Streams extends Base_Streams
 						: Streams_Stream::getConfigField($type, array(
 							'subscriptions', 'filter'
 						), array(
-							"types" => array("Streams/invited"),
+							"types" => array(
+								"^(?!(Users/)|(Streams/)).*/",
+								"Streams/relatedTo",
+								"Streams/chat/message"
+							),
 							"notifications" => 0
 						))
 					);
@@ -3329,25 +3333,25 @@ abstract class Streams extends Base_Streams
 			if (is_string($label)) {
 				$label = explode("\t", $label);
 			}
-			Users_Label::addLabel($label, $publisherId, null, null, $asUserId2);
+			Users_Label::addLabel($label, $publisherId, null, null, $asUserId2, true);
 		}
 		if ($myLabel = Q::ifset($options, 'addMyLabel', null)) {
 			if (is_string($myLabel)) {
 				$myLabel = explode("\t", $myLabel);
 			}
-			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId2);
+			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId2, true);
 		}
 		
 		foreach ($raw_userIds as $userId) {
-			Users_Contact::addContact($asUserId, "Streams/invited", $userId, null, false);
-			Users_Contact::addContact($asUserId, "Streams/invited/{$stream->type}", $userId, null, false);
-			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false);
-			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false);
+			Users_Contact::addContact($asUserId, "Streams/invited", $userId, null, false, true);
+			Users_Contact::addContact($asUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
+			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false, true);
+			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false, true);
 			if ($label) {
-				Users_Contact::addContact($publisherId, $label, $userId, null, $asUserId2);
+				Users_Contact::addContact($publisherId, $label, $userId, null, $asUserId2, true);
 			}
 			if ($myLabel) {
-				Users_Contact::addContact($asUserId, $label, $userId, null, $asUserId2);
+				Users_Contact::addContact($asUserId, $label, $userId, null, $asUserId2, true);
 			}
 		}
 

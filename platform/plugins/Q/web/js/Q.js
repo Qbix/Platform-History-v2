@@ -4625,7 +4625,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	var value = {
 		cbpos: cbpos,
 		subject: subject,
-		params: params,
+		params: (params instanceof Array) ? params : Array.prototype.slice.call(params),
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest()),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};
@@ -4765,18 +4765,23 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 			}
 		});
 	} else {
-		var key = cache.earliest(), prevkey, item;
+		var results = {}, seen = {}, key = cache.earliest(), item;
 		while (key) {
 			item = Q_Cache_get(this, key);
 			if (item === undefined) {
 				break;
 			}
-			prevkey = key;
-			key = item.next;
-			if (prefix && !prevkey.startsWith(prefix)) {
-				continue;
+			if (!prefix || key.startsWith(prefix)) {
+				results[key] = item;
 			}
-			if (callback.call(this, prevkey, item) === false) {
+			if (seen[key]) {
+				throw new Q.Error("Q.Cache.prototype.each: "+this.name+" has an infinite loop");
+			}
+			seen[key] = true;
+			key = item.next;
+		}
+		for (key in results) {
+			if (false === callback.call(this, key, results[key])) {
 				break;
 			}
 		}
@@ -6561,7 +6566,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		return false;
 	}
 	href = Q.url(href);
-	if (!media) media = 'screen, print';
+	if (!media) media = 'screen,print';
 	var links = document.getElementsByTagName('link');
 	for (i=0; i<links.length; ++i) {
 		if (links[i].getAttribute('href') !== href) continue;
@@ -9133,7 +9138,7 @@ Q.Browser = {
 
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
-var isTablet = navigator.userAgent.match(new RegExp('tablet|ipad', 'i'))
+var isTablet = navigator.userAgent.match(/tablet|ipad|/i)
 	|| (isTouchscreen && !navigator.userAgent.match(new RegExp('mobi', 'i')));
 /**
  * Useful info about the page and environment
@@ -9159,6 +9164,8 @@ Q.info = {
 			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
 	}
 };
+Q.info.isAndroidStock = !!(Q.info.platform === 'android'
+	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
 Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
 var de = document.documentElement;
@@ -10224,21 +10231,21 @@ Q.Dialogs = {
 };
 
 Q.Dialogs.push.options = {
-	'dialog': null,
-	'url': null,
-	'title': 'Dialog',
-	'content': '',
-	'className': null,
-	'fullscreen': Q.info.isAndroid(undefined, 1000),
-	'appendTo': document.body,
-	'alignByParent': false,
-	'beforeLoad': new Q.Event(),
-	'onActivate': new Q.Event(),
-	'beforeClose': new Q.Event(),
-	'onClose': null,
-	'closeOnEsc': true,
-	'removeOnClose': null,
-	'hidePrevious': true
+	dialog: null,
+	url: null,
+	title: 'Dialog',
+	content: '',
+	className: null,
+	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(undefined, 1000),
+	appendTo: document.body,
+	alignByParent: false,
+	beforeLoad: new Q.Event(),
+	onActivate: new Q.Event(),
+	beforeClose: new Q.Event(),
+	onClose: null,
+	closeOnEsc: true,
+	removeOnClose: null,
+	hidePrevious: true
 };
 
 /**

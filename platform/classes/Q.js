@@ -1038,7 +1038,7 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 	var value = {
 		cbpos: cbpos,
 		subject: subject,
-		params: params,
+		params: (params instanceof Array) ? params : Array.prototype.slice.call(params),
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};

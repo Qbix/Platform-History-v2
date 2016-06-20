@@ -38,11 +38,19 @@ class Users_Contact extends Base_Users_Contact
 	 *  Optional nickname to assign to the contact
 	 * @param {string} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
+	 * @param boolean [$unlessExists=false] If true, skips adding contact if it already exists
+	 *   in the database.
 	 * @throws {Q_Exception_RequiredField}
 	 *	if $label is missing
 	 * @return {array} Array of contacts that are saved
 	 */
-	static function addContact($userId, $label, $contactUserId, $nickname = '', $asUserId = null)
+	static function addContact(
+		$userId, 
+		$label, 
+		$contactUserId, 
+		$nickname = '', 
+		$asUserId = null,
+		$unlessExists = false)
 	{
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
@@ -53,13 +61,17 @@ class Users_Contact extends Base_Users_Contact
 		Users_User::fetch($userId, true);
 		Users_User::fetch($contactUserId, true);
 		$labels = is_array($label) ? $label : array($label);
-		// Insert the contacts one by one
+		// Insert the contacts one by one to trigger the hooks
 		$contacts = array();
 		foreach ($labels as $l) {
 			$contact = new Users_Contact();
 			$contact->userId = $userId;
 			$contact->label = $l;
 			$contact->contactUserId = $contactUserId;
+			if ($contact->retrieve() and $unlessExists) {
+				$contacts[] = $contact;
+				continue;
+			}
 			if (isset($nickname)) {
 				$contact->nickname = $nickname;
 			}

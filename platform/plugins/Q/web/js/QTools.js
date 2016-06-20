@@ -555,11 +555,6 @@ Q.Layout = {
 			if (browser.name == 'explorer' && parseInt(browser.mainVersion) <= 8)
 			{
 				Q.Layout.isIE8orLess = true;
-				if (Q.Pointer.windowWidth() === undefined && Q.Pointer.windowHeight() === undefined)
-				{
-					Q.Pointer.windowWidth() = document.documentElement.clientWidth;
-					Q.Pointer.windowHeight() = document.documentElement.clientHeight;
-				}
 				$('.Q_player:last').after('<div style="font-size: 1px">&nbsp;</div>');
 			}
 			
@@ -624,7 +619,7 @@ Q.Layout = {
 								Q.Layout.orientationChange(false, true, true);
 							}
 							Q.Interval.clear('Q.Layout.hideAddressBar');
-							if (Q.info.isMobile && Q.info.platform != 'android')
+							if (!Q.info.isAndroid())
 							{
 								Q.Layout.handleAddressBarAppearing = true;
 							}
@@ -1002,27 +997,27 @@ Q.Layout = {
 	 */
 	checkOrientation: function()
 	{
-		if (Q.Layout.lastwindowWidth() === undefined)
-			Q.Layout.lastwindowWidth() = 0;
+		if (Q.Layout.lastWindowWidth() === undefined)
+			Q.Layout.lastWindowWidth = 0;
 		if (Q.Layout.lastOrientation === undefined)
 			Q.Layout.lastOrientation = -1;
 		
 		var windowWidth = Q.Pointer.windowWidth();
 		var windowHeight = Q.Pointer.windowHeight();
 		var orientation = window.orientation;
-		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastwindowWidth()) ||
-				(orientation === undefined && windowWidth() !== Q.Layout.lastwindowWidth()))
+		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastWindowWidth()) ||
+				(orientation === undefined && windowWidth() !== Q.Layout.lastWindowWidth()))
 		{
 			var previousOrientation = Q.Layout.orientation;
 			if (orientation !== undefined)
 			{
-				Q.Layout.lastwindowWidth() = windowWidth();
+				Q.Layout.lastWindowWidth = windowWidth();
 				Q.Layout.lastOrientation = orientation;
 				Q.Layout.orientation = ((orientation === 0 || orientation === 180) ? 'portrait' : 'landscape');
 			}
 			else
 			{
-				Q.Layout.lastwindowWidth() = windowWidth();
+				Q.Layout.lastWindowWidth = windowWidth();
 				Q.Layout.orientation = (windowWidth() > windowHeight() ? 'landscape' : 'portrait');
 			}
 			if (!Q.Layout.orientationOnLoad)
@@ -1115,7 +1110,7 @@ Q.Layout = {
 		else if (dontHideAddressBar === undefined)
 			dontHideAddressBar = false;
 		
-		if (Q.info.isMobile && Q.info.platform != 'android')
+		if (Q.info.isMobile && !Q.info.isAndroid())
 		{
 			Q.Layout.handleAddressBarAppearing = false;
 		}
@@ -1348,7 +1343,7 @@ Q.Layout = {
 		
 		Q.Layout.browserSpecifics();
 
-		if (Q.info.isMobile && Q.info.platform != 'android') {
+		if (Q.info.isMobile && !Q.info.isAndroid()) {
 			Q.Layout.handleAddressBarAppearing = true;
 		}
 		Q.handle(Q.Layout.onOrientationChangeEvent);

@@ -493,10 +493,10 @@ class Q_Request
 	 * @param {number} [$min_version=0] optional minimum version of IE to check (major number like 7, 8, 9 etc).
 	 * If provided, the method will return true only if the browser is IE and the major version is greater or equal than $min_version.
 	 * @param {number} [$max_version=0] optional maximum version of IE to check (major number like 7, 8, 9 etc).
-	 * If provided, the method will return true only if the browser is IE and the major version is less or equale than $max_version.
+	 * If provided, the method will return true only if the browser is IE and the major version is less or equal than $max_version.
 	 * @return {boolean}
 	 */
-	static function isIE($min_version = 0, $max_version = 20)
+	static function isIE($min_version = 0, $max_version = 100)
 	{
 		static $result;
 		if (isset($result)) {
@@ -520,6 +520,25 @@ class Q_Request
 			$result = ($version >= $min_version && $version <= $max_version);
 		}
 		return $result;
+	}
+	
+	/**
+	 * Detects whether the request is coming from an Internet Explorer browser
+	 * @method isAndroidStock
+	 * @static
+	 * If provided, the method will return true only if the platform is Android and the major version is less or equal than $max_version.
+	 * @return {boolean}
+	 */
+	static function isAndroidStock()
+	{
+		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+			return null;
+		}
+		if (self::platform() !== 'android') {
+			return false;
+		}
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		return !!preg_match('/Android .*Version\/[\d]+\.[\d]+/i', $useragent);
 	}
 	
 	/**

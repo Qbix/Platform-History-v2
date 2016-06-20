@@ -1,7 +1,7 @@
 <p>
 	Hey <?php echo Q_Html::text($user->displayName()) ?>, you've started your subscription
 	to <?php echo Q_Html::text($plan->title) ?>
-	with <?php echo Q_Html::text($publisherId->displayName()) ?>
+	with <?php echo Q_Html::text($publisher->displayName()) ?>
 	at <?php echo Q_Html::text("$symbol$amount") ?> for <?php echo $months ?> months.
 </p>
 

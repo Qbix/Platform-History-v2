@@ -350,8 +350,9 @@ function Row(fields, retrieved /* false */) {
 		} else if (typeof modifyQuery === 'function') {
 			callback = modifyQuery;
 			modifyQuery = false;
-		} else if (typeof callback !== 'function' && !modifyQuery)
+		} else if (typeof callback !== 'function' && !modifyQuery) {
 			throw new Error("Callback for retrieve method was not specified for " + this.className + ".");
+		}
 
 		if (this.className === "Row")
 			throw new Error("If you're going to save, please extend Db.Row.");

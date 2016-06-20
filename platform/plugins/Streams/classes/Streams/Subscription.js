@@ -58,7 +58,14 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 				filter = Stream.getConfigField(
 					stream.fields.type, 
 					['subscriptions', 'filter'],
-					{ types: ["Streams/invited"], notifications: 0 }
+					{ 
+						types: [
+							"^(?!(Users/)|(Streams/)).*/", 
+							"Streams/relatedTo", 
+							"Streams/chat/message"
+						], 
+						notifications: 0
+					}
 				);
 			}
 		} catch (err) {
@@ -95,10 +102,6 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 						deliveries.push(param[1]);
 					}
 				}
-				// Notification should be delivered only once to each endpoint
-				deliveries = deliveries.filter(function (value, index, arr) {
-					return arr.indexOf(value) === index;
-				});
 				callback(null, deliveries);
 			});
 			p.run();

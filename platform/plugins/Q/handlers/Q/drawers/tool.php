@@ -31,7 +31,7 @@
  *  @param {array}   [$options.trigger]] Options for the trigger elements
  *  @param {integer}   [$options.trigger.rightMargin=10]] How many pixels from the right side of the drawers
  *  @param {integer}   [$options.transition=300]] Number of milliseconds for fading in the trigger images
- *  @param {boolean}   [$options.fullscreen=Q.info.isMobile && Q.info.isAndroid(1000)]] Whether the drawers should take up the whole screen
+ *  @param {boolean}   [$options.fullscreen=Q.info.isAndroidStock && Q.info.isAndroid(1000)]] Whether the drawers should take up the whole screen
  *  @param {integer}   [$options.foregroundZIndex=50] The z-index of the drawer in the foreground
  *  @param {integer}   [$options.beforeSwap=new Q.Event()] Occurs right before drawer swap
  *  @param {integer}   [$options.onSwap=new Q.Event()] Occurs right after drawer swap

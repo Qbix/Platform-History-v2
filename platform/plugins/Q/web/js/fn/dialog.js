@@ -415,19 +415,19 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 },
 
 {
-	'alignByParent': false,
-	'mask': true,
-	'fullscreen': Q.info.isMobile && Q.info.isAndroid(1000),
-	'asyncLoad': !Q.info.isTouchscreen,
-	'noClose': false,
-	'closeOnEsc': true,
-	'removeOnClose': false,
-	'loadUrl': {},
-	'beforeLoad': new Q.Event(),
-	'onLoad': new Q.Event(),
-	'onActivate': new Q.Event(),
-	'beforeClose': new Q.Event(),
-	'onClose': new Q.Event()
+	alignByParent: false,
+	mask: true,
+	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(1000),
+	asyncLoad: !Q.info.isTouchscreen,
+	noClose: false,
+	closeOnEsc: true,
+	removeOnClose: false,
+	loadUrl: {},
+	beforeLoad: new Q.Event(),
+	onLoad: new Q.Event(),
+	onActivate: new Q.Event(),
+	beforeClose: new Q.Event(),
+	onClose: new Q.Event()
 },
 
 {
