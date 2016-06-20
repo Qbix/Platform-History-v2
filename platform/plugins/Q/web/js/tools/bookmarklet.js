@@ -13,15 +13,17 @@
  * @class Q bookmarklet
  * @constructor
  * @param {Object} options This is an object with properties for this function
- *	 @param {String} options.content Javascript code or url of the script, with the "javascript:" prefix.
+ *   @param {Array} [options.scripts] Array of one or more script urls (will be run through Q.url()) to load and execute in order
+ *   @param {Object} [options.skip] Object of {url: path.to.object} pairs to avoid loading script at the url if path.to.object is already defined. Typically names an object which has been defined by the loaded script.
+ *	 @param {String} [options.code] Literal Javascript code to execute, typically a function call. If scripts option is provided, this code is executed after the scripts have been loaded.
  *	 @param {String} options.title Title for the button which will be added to user's browser bar.
  *	 @param {String} options.usage Text which is appended to instructions, identifying purpose and usage of this bookmarklet.
  *	 @param {String} [options.icon] Icon for the button which will be added to user's browser bar.
  */
 Q.Tool.jQuery('Q/bookmarklet', function (o) {
 	
-	if (!o.content) {
-		console.warn("Please provide 'content' for bookmarklet.");
+	if (!o.scripts && !o.code) {
+		throw new Q.Error("Q/bookmarklet: please provide the bookmarklet's scripts or code");
 	}
 	if (!o.title) {
 		console.warn("Please provide 'title' for bookmarklet.");
@@ -98,7 +100,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 									'<div class="Q_bookmarklet_tool_step">' +
 										'<h3>Step 1: Select the text and copy it.</h3>' +
 										'<textarea class="Q_bookmarklet_tool_code">' +
-											o.content +
+											o.code +
 										'</textarea>' +
 										'<ul>' +
 											'<li>Tap inside.</li>' +
@@ -139,7 +141,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 										'<div class="Q_bookmarklet_tool_step">' +
 											'<h3>Step 2: Select the text and copy it.</h3>' +
 											'<textarea class="Q_bookmarklet_tool_code">' +
-												o.content +
+												o.code +
 											'</textarea>' +
 											'<ul>' +
 												'<li>Tap inside.</li>' +
@@ -174,7 +176,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 										'<div class="Q_bookmarklet_tool_step">' +
 											'<h3>Step 2: Select the text and copy it.</h3>' +
 											'<textarea class="Q_bookmarklet_tool_code">' +
-												o.content +
+												o.code +
 											'</textarea>' +
 											'<ul>' +
 												'<li>Tap inside.</li>' +
@@ -246,14 +248,70 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 								 '</div>' +
 							 '</div>');
 			var $a = $this.find('.Q_bookmarklet_tool_button_middle a');
-			var content = null;
-			if (o.content) {
-				content = o.content;
-				if (o.content.substr(0, 11) !== 'javascript:') {
-					o.content = 'javascript:'+o.content;
+			var code = null;
+			if (o.scripts && o.scripts.length) {
+				var scripts = [];
+				for (var i=0; i<o.scripts.length; ++i) {
+					scripts.push(Q.url(o.scripts[i]));
 				}
-				$a.attr('href', encodeURIComponent(o.content.replace('\n', ' ')));
+				var json = JSON.stringify({
+					scripts: scripts,
+					skip: o.skip,
+					code: o.code
+				});
+				code =
+  '(function () {'
++ ' var o = ' + json + ';'
++ ' function loadScript(url, callback) {'
++ '   if (o.skip && getObject(o.skip[url]) !== undefined) {'
++ ' 	return callback();'
++ '   }'
++ '   var script = document.createElement("script");'
++ '   script.type = "text/javascript";'
++ '   if (script.readyState) {'
++ '     script.onreadystatechange = function () {'
++ '       if (script.readyState == "loaded" || script.readyState == "complete") {'
++ '         script.onreadystatechange = null;'
++ '         callback();'
++ '       }'
++ '     };'
++ '   } else {'
++ '     script.onload = function () {'
++ '         callback();'
++ '     };'
++ '  }'
++ '  script.src = url;'
++ '  document.getElementsByTagName("head")[0].appendChild(script);'
++ ' }'
++ '	var i=-1;'
++ '	function loadNextScript() {'
++ '   if (++i < o.scripts.length) {'
++ ' 	loadScript(o.scripts[i], loadNextScript);'
++ '   } else {'
++ ' 	afterScripts();'
++ '   }'
++ '	}'
++ '	function afterScripts() {'
++ '   if (o.code) {'
++ ' 	eval(o.code);'
++ '   }'
++ '	}'
++ '	function getObject (name) {'
++ '   var p, i = 0, context = window;'
++ '   var parts = name.split(".");'
++ '   if (!parts.length) return context;'
++ '   while (context && (p = parts[i++]) !== undefined){'
++ ' 	context = context[p];'
++ '   }'
++ '   return context;'
++ '	}'
++ '	loadNextScript();'
++ '})();';
+			} else {
+				code = o.code;
 			}
+			code = 'javascript:'+encodeURIComponent(code.replaceAll({'\n': ' '}));
+			$a.attr('href', code);
 			$a.eq(0).on('click.Q_bookmarklet', function() {
 				alert(o.clickPrompt);
 				return false;
