@@ -10131,6 +10131,7 @@ Q.Dialogs = {
 	 *   will be hidden. Thus dialog will occupy all window space, but still 
 	 *   will behave like regular dialog, i.e. it can be closed
 	 *   by clicking / tapping close icon.
+	 *  @param {boolean} [options.hidePrevious=false] Whether to hide the current topmost dialog, and show it again when this newly displayed dialog will be closed
 	 *	@param {HTMLElement, jQuery} [options.appendTo] Can be DOM element, jQuery object 
 	 *    or jQuery selector matching element where dialog should be appended.
 	 *    Moreover, dialog is centered relatively to this element. 

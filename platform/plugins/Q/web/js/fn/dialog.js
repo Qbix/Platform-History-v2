@@ -80,11 +80,9 @@ function _Q_overlay(o) {
 
 	function closeThisOverlayOnEsc(e)
 	{
-		if (o.noClose || !o.closeOnEsc)
-			return;
-			
-		if (e.keyCode == 27)
+		if (e.keyCode == 27 && !o.noClose && o.closeOnEsc && $this.is(":visible")) {
 			$this.data('Q/overlay').close(e);
+		}
 	}
 
 	$this.data('Q/overlay', {
