@@ -3300,11 +3300,16 @@ Q.Tool = function _Q_Tool(element, options) {
 			} while (e = e.parentNode);
 		}
 		this.element.id = prefix + Q.Tool.names[this.name].split('/').join('_')
-			'-' + (Q.Tool.nextDefaultId++) + "_tool";
+			+ '-' + (Q.Tool.nextDefaultId++) + "_tool";
 		Q.Tool.nextDefaultId %= 1000000;
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
 	this.id = this.prefix.substr(0, this.prefix.length-1);
+	
+	if (Q.Tool.byId(this.id, this.name)) {
+		var toolName = Q.Tool.names[this.name];
+		throw new Q.Error("A " + toolName + " tool with id " + this.id + " is already active");
+	}
 
 	// for later use
 	var classes = (this.element.className && this.element.className.split(/\s+/) || []);
