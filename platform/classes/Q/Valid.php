@@ -269,7 +269,9 @@ class Q_Valid
 		if ($missingIsValid and !isset($sn)) {
 			return true;
 		}
-		if (!isset($sn) or $_SESSION['Q']['nonce'] != Q_Request::special($snf, null)) {
+		$gp = array_merge($_GET, $_POST);
+		$rn = Q_Request::special($snf, null, $gp);
+		if (!isset($sn) or $_SESSION['Q']['nonce'] != $rn) {
 			if (!$throwIfInvalid) {
 				return false;
 			}
