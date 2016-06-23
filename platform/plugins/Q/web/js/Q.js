@@ -9138,8 +9138,8 @@ Q.Browser = {
 
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
-var isTablet = navigator.userAgent.match(/tablet|ipad|/i)
-	|| (isTouchscreen && !navigator.userAgent.match(new RegExp('mobi', 'i')));
+var isTablet = navigator.userAgent.match(/tablet|ipad/i)
+	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
 /**
  * Useful info about the page and environment
  * @property {Object} info
