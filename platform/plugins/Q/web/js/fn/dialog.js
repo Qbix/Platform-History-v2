@@ -66,7 +66,7 @@ function _Q_overlay(o) {
 			var bottomMargin = Q.Dialogs.options.bottomMargin;
 			if (typeof(bottomMargin) == 'string') // percentage
 				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
-			$this.find('.dialog_slot').css('max-height', Q.Pointer.windowHeight() - topMargin - bottomMargin - $this.find('.title_slot').height() + 'px');
+			$this.find('.Q_dialog_slot').css('max-height', Q.Pointer.windowHeight() - topMargin - bottomMargin - $this.find('.Q_title_slot').height() + 'px');
 		}
 	}
 
@@ -256,14 +256,14 @@ function _Q_overlay(o) {
 Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	
 	var $this = this;
-	var ots = $('.title_slot', $this);
-	var ods = $('.dialog_slot', $this);
+	var ots = $('.Q_title_slot', $this);
+	var ods = $('.Q_dialog_slot', $this);
 	if (!ots.length) {
-		alert("Please add an element with the class 'title_slot' before calling dialog()");
+		alert("Please add an element with the class 'Q_title_slot' before calling dialog()");
 		return;
 	}
 	if (!ods.length) {
-		alert("Please add an element with the class 'dialog_slot' before calling dialog()");
+		alert("Please add an element with the class 'Q_dialog_slot' before calling dialog()");
 		return;
 	}
 	
@@ -443,8 +443,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 
 function _loadUrl(o, cb) {
 	var $this = this;
-	var ots = $('.title_slot', $this);
-	var ods = $('.dialog_slot', $this);
+	var ots = $('.Q_title_slot', $this);
+	var ods = $('.Q_dialog_slot', $this);
 	$this.addClass('Q_loading');
 	ods.empty().addClass('Q_throb');
 
@@ -474,8 +474,8 @@ function _loadUrl(o, cb) {
 function _handlePosAndScroll(o)
 {
 	var $this = this;
-	var ots = $('.title_slot', $this);
-	var ods = $('.dialog_slot', $this);
+	var ots = $('.Q_title_slot', $this);
+	var ods = $('.Q_dialog_slot', $this);
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
 	var lastOrientation = null; // for touch devices

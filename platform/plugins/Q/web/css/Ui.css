@@ -1791,7 +1791,7 @@ input[type=radio] { margin-right: 5px; }
 	height: 40px;
 }
 
-.Q_columns_column .title_slot {
+.Q_columns_column .Q_title_slot {
 	margin: 0;
 	padding: 5px;
 	line-height:40px;
@@ -1799,11 +1799,11 @@ input[type=radio] { margin-right: 5px; }
 	height: 40px;
 }
 
-.Q_columns_column:first-child .title_slot {
+.Q_columns_column:first-child .Q_title_slot {
 	width: 100%;
 }
 
-.Q_columns_column .column_slot {
+.Q_columns_column .Q_column_slot {
 	clear: both;
 	overflow: auto;
 	overflow-x: hidden;
@@ -1828,7 +1828,7 @@ input[type=radio] { margin-right: 5px; }
 	top: 0;
 	left: 0;
 }
-.Q_columns_tool.Q_fullscreen .column_slot {
+.Q_columns_tool.Q_fullscreen .Q_column_slot {
 	position: relative;
 	padding-top: 40px;
 	overflow: hidden;
