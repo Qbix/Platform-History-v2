@@ -35,55 +35,82 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 	Q.addStylesheet('plugins/Q/css/inplace.css');
 	
 	var bookmarkletSettings = {
-		'common': {
+		common: {
 			'instructions': 'Drag me to your Bookmarks Bar to ' + o.usage + '.<br /><br />' +
-			'If you can\'t see the Bookmarks Bar, Choose "Show Bookmarks Bar" from your browser "View" menu.'
+				'If you can\'t see the Bookmarks Bar, Choose {{command}} from your browser {{menu}} menu.'
 		}
 	};
 	Q.extend(bookmarkletSettings, {
 		'safari': {
 			'mac': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Show Favorites Bar"
+				}),
 				'icon': false
 			},
 			'windows': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Show Favorites Bar"
+				}),
 				'icon': false
 			}
 		},
 		'chrome': {
 			'mac': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Show Bookmarks Bar"
+				}),
 				'icon': 'chrome_default_icon.png'
 			},
 			'windows': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Show Bookmarks Bar"
+				}),
 				'icon': 'chrome_default_icon.png'
 			}
 		},
 		'firefox': {
 			'mac': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Toolbars > Bookmarks > Toolbar"
+				}),
 				'icon': 'firefox_mac_default_icon.png'
 			},
 			'windows': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Toolbars > Bookmarks > Toolbar"
+				}),
 				'icon': 'firefox_win_default_icon.png'
 			}
 		},
 		'opera': {
 			'mac': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Settings -> Show the bookmarks bar"
+				}),
 				'icon': 'opera_mac_default_icon.png'
 			},
 			'windows': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "View", 
+					command: "Settings -> Show the bookmarks bar"
+				}),
 				'icon': 'opera_win_default_icon.png'
 			}
 		},
 		'explorer': {
 			'windows': {
-				'instructions': bookmarkletSettings.common.instructions,
+				'instructions': bookmarkletSettings.common.instructions.interpolate({
+					menu: "Tools", 
+					command: "Toolbars -> Favorites"
+				}),
 				'icon': 'ie_default_icon.png'
 			}
 		}
