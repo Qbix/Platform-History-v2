@@ -9,5 +9,5 @@ function Users_after_Q_responseExtras() {
 	}
 	Q_Response::setScriptData('Q.plugins.Users.roles', Users::roles());
 	$user = Users::loggedInUser();
-	Q_Response::addHtmlCssClass($user ? 'Q_loggedIn' : 'Q_loggedOut');
+	Q_Response::addHtmlCssClass($user ? 'Users_loggedIn' : 'Users_loggedOut');
 }
