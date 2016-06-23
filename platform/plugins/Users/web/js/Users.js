@@ -385,9 +385,9 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 		content_div.append(_usingInformation(uid, areUsing)).append(_authenticateActions(caption));
 
 		Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
-		var titleSlot = $('<div class="title_slot" />');
+		var titleSlot = $('<div class="Q_title_slot" />');
 		titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(title));
-		var dialogSlot = $('<div class="dialog_slot Q_dialog_content">');
+		var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
 		dialogSlot.append(content_div);
 		Users.prompt.overlay.append(titleSlot).append(dialogSlot)
 		.prependTo(o.dialogContainer);
@@ -1482,9 +1482,9 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	});
 	
 	var dialog = $('<div id="Users_login_dialog" class="Users_login_dialog" />');
-	var titleSlot = $('<div class="title_slot" />');
+	var titleSlot = $('<div class="Q_title_slot" />');
 	titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
-	var dialogSlot = $('<div class="dialog_slot Q_dialog_content">');
+	var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
 	dialogSlot.append(step1_div).append(step2_div);
 	dialog.append(titleSlot).append(dialogSlot).prependTo(dialogContainer);
 	dialog.plugin('Q/dialog', {
@@ -1619,11 +1619,11 @@ function setIdentifier_setupDialog(identifierType, options) {
 	step1_form.validator();
 	
 	var dialog = $('<div id="Users_setIdentifier_dialog" class="Users_setIdentifier_dialog" />');
-	var titleSlot = $('<div class="title_slot">').append(
+	var titleSlot = $('<div class="Q_title_slot">').append(
 		$('<h2 class="Users_dialog_title Q_dialog_title" />')
 		.html(options.title || Q.text.Users.setIdentifier.title)
 	);
-	var dialogSlot = $('<div class="dialog_slot Q_dialog_content">').append(step1_div);
+	var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">').append(step1_div);
 	dialog.append(titleSlot).append(dialogSlot).prependTo(options.dialogContainer);
 	dialog.plugin('Q/dialog', {
 		alignByParent: true,

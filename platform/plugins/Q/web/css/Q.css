@@ -188,7 +188,7 @@ body.Q_preventScroll {
 	background-image: url(../img/ui/close_big.png);
 	cursor: pointer;
 }
-.Q_fullscreen_dialog .title_slot {
+.Q_fullscreen_dialog .Q_title_slot {
 	position: fixed;
 	width: 100%;
 }

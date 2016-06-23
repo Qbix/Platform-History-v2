@@ -180,11 +180,11 @@ Q.Tool.define("Q/columns", function(options) {
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
-			var $ts = $('<h2 class="title_slot"></h2>');
+			var $ts = $('<h2 class="Q_title_slot"></h2>');
 			titleSlot = $ts[0];
 			$title = $('<div class="Q_columns_title"></div>')
 				.append($ts);
-			columnSlot = document.createElement('div').addClass('column_slot');
+			columnSlot = document.createElement('div').addClass('Q_column_slot');
 			state.container = tool.$('.Q_columns_container')[0];
 			$div.append($title, columnSlot)
 				.data(dataKey_index, index)
@@ -198,8 +198,8 @@ Q.Tool.define("Q/columns", function(options) {
 			$div = $(div);
 			$close = $('.Q_close', div);
 			$title = $('.Q_columns_title', div);
-			titleSlot = $('.title_slot', div)[0];
-			columnSlot = $('.column_slot', div)[0];
+			titleSlot = $('.Q_title_slot', div)[0];
+			columnSlot = $('.Q_column_slot', div)[0];
 		}
 		if (options && options.columnClass) {
 			$div.addClass(options.columnClass);
@@ -365,7 +365,7 @@ Q.Tool.define("Q/columns", function(options) {
 				// open animation
 				var duration = o.animation.duration;
 				var $sc = $(state.container);
-				var $cs = $('.column_slot', $div);
+				var $cs = $('.Q_column_slot', $div);
 				var $ct = $('.Q_columns_title', $div);
 				
 				var $prev = $div.prev();
@@ -587,7 +587,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var $te = $(tool.element);
 		var $columns = $('.Q_columns_column', $te);
 		var $container = $('.Q_columns_container', $te);
-		var $cs = $('.Q_columns_column .column_slot', $te);
+		var $cs = $('.Q_columns_column .Q_column_slot', $te);
 		var top = 0;
 		
 		$te.prevAll()
@@ -643,7 +643,7 @@ Q.Template.set('Q/columns/column',
 
 function presentColumn(tool) {
 	if (!tool.state.$currentColumn || !tool.state.$currentColumn.length) return;
-	var $cs = $('.column_slot', tool.state.$currentColumn);
+	var $cs = $('.Q_column_slot', tool.state.$currentColumn);
 	if (tool.state.fullscreen) {
 		var $ct = tool.$('.Q_columns_title');
 		$ct.css('position', 'fixed');

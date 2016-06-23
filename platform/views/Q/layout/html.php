@@ -15,8 +15,8 @@
 		<?php echo $content ?>
 	</div>
 	<div id="dialog" style="display: none;">
-		<div class="title_slot"></div>
-		<div class="dialog_slot"></div>
+		<div class="Q_title_slot"></div>
+		<div class="Q_dialog_slot"></div>
 	</div>
 </body>
 </html>

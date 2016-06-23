@@ -9138,8 +9138,8 @@ Q.Browser = {
 
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
-var isTablet = navigator.userAgent.match(/tablet|ipad|/i)
-	|| (isTouchscreen && !navigator.userAgent.match(new RegExp('mobi', 'i')));
+var isTablet = navigator.userAgent.match(/tablet|ipad/i)
+	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
 /**
  * Useful info about the page and environment
  * @property {Object} info
@@ -10110,7 +10110,7 @@ Q.Dialogs = {
 	 *  should show the "apply" style button to close dialog
 	 * @param {Element|jQuery} [options.dialog] If provided, may be Element or 
 	 *   jQuery object containing already prepared dialog html
-	 *	 structure with 'title_slot', 'dialog_slot' and appropriate content in them. 
+	 *	 structure with 'Q_title_slot', 'Q_dialog_slot' and appropriate content in them. 
 	 *   If it's provided, then 'title' and 'content' options given below are ignored.
 	 *	@param {String} [options.url] Optional. If provided, this url will be used 
 	 *  to fetch the "title" and "dialog" slots, to display in the dialog. 
@@ -10158,11 +10158,11 @@ Q.Dialogs = {
 		if (!$dialog.length) {
 			// create this dialog element
 			$dialog = $('<div />').append(
-				$('<div class="title_slot" />')
+				$('<div class="Q_title_slot" />')
 				.append($('<h2 class="Q_dialog_title" />')
 				.append(o.title))
 			).append(
-				$('<div class="dialog_slot Q_dialog_content" id="dialog_slot" />').append(o.content)
+				$('<div class="Q_dialog_slot Q_dialog_content" />').append(o.content)
 			);
 			if (o.className) $dialog.addClass(o.className);
 			if (o.apply) $dialog.addClass('Q_overlay_apply');

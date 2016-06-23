@@ -76,9 +76,9 @@ EOT;
 	<div class="Q_columns_column $classes" data-index="$i" data-name="$n" $attrs>
 		<div class="Q_columns_title">
 			$closeHtml
-			<h2 class="title_slot">$titleHtml</h2>
+			<h2 class="Q_title_slot">$titleHtml</h2>
 		</div>
-		<div class="column_slot">$columnHtml</div>
+		<div class="Q_column_slot">$columnHtml</div>
 	</div>
 EOT;
 		}
