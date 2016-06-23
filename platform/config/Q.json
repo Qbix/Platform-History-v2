@@ -83,7 +83,8 @@
 				"plugins/Q/js/jquery.tools.min.js": true,
 				"plugins/Q/js/handlebars-v1.3.0.min.js": true,
 				"plugins/Q/js/Q.js": true
-			}
+			},
+			"prettyPrintData": true
 		},
 		"stylesheets": {
 			"responseExtras": {

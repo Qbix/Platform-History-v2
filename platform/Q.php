@@ -72,7 +72,7 @@ if (defined('APP_DIR')) {
 		define('APP_WEB_DIR', APP_DIR.DS.'web');
 }
 
-// Get ready for PHP 5.4
+// For backwards compatibility
 if (!defined('JSON_UNESCAPED_SLASHES')) define('JSON_UNESCAPED_SLASHES', 0);
 if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
 

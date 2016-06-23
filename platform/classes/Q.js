@@ -1674,7 +1674,9 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... *
 				var argk = arg[k];
 				var ttk = Q.typeOf(target[k]);
 				var tak = Q.typeOf(argk);
-				if (levels && (target[k] && typeof target[k] === 'object') 
+				if (levels 
+				&& target[k]
+				&& (typeof target[k] === 'object' || typeof target[k] === 'function') 
 				&& (Q.isPlainObject(argk) || (ttk === 'array' && tak === 'array'))) {
 					target[k] = (ttk === 'array' && ('replace' in argk))
 						? Q.copy(argk.replace)

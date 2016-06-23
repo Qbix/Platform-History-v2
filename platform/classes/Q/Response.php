@@ -605,13 +605,28 @@ class Q_Response
 		if (!$without_script_data) {
 			$tested = array();
 			if ($data = self::scriptData($slotName)) {
-				$json = Q::json_encode($data);
-				$parts = array();
+				$extend = array();
 				foreach ($data as $k => $v) {
-					$parts[] = Q::json_encode($k) . ": " . str_replace('\/', '/', Q::json_encode($v));
+					$parts = explode(".", $k);
+					$e = &$extend;
+					foreach ($parts as $p) {
+						$e = &$e[$p]; // inserts null under key if nothing was there
+					}
+					$e = $v;
 				}
-				$corpus = implode(",\n\t", $parts);
-				$scriptDataLines = array("Q.setObject({\n\t$corpus\n});");
+				$options = Q_Config::get('Q', 'javascript', 'prettyPrintData', true)
+					? JSON_PRETTY_PRINT
+					: 0;
+				if (!empty($extend['Q'])) {
+					$json = Q::json_encode($extend['Q'], $options);
+					$scriptDataLines = array("Q.extend(Q, 100, $json);");
+					unset($extend['Q']);
+				}
+				if (!empty($extend)) {
+					$json = Q::json_encode($extend, $options);
+					$scriptDataLines = array("Q.extend(window, 100, $json);");
+					unset($extend['Q']);
+				}
 			}
 		}
 		$scriptLines = array_merge($scriptDataLines, $scriptLines);
