@@ -1,6 +1,6 @@
 .Q_bookmarklet_tool
 {
-	max-width: 450px;
+	max-width: 500px;
 	font-size: 14px;
 }
 
@@ -14,7 +14,7 @@
 .Q_bookmarklet_tool_drag_button
 {
   float: left;
-  width: 170px;
+  width: 200px;
   height: 105px;
   margin-right: 20px;
   padding-right: 30px;
