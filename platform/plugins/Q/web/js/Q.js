@@ -5202,7 +5202,11 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 		Q.handle(callback, context, args);
 		return;
 	}
-	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded() {
+	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			throw new Q.Error(msg);
+		}
 		Q.nonce = Q.cookie('Q_nonce');
 		if (Q.nonce) {
 			Q.handle(callback, context, args);
@@ -6001,7 +6005,7 @@ Q.request.callbacks = []; // used by Q.request
  * Try to find an error message assuming typical error data structures for the arguments
  * @static
  * @method firstErrorMessage
- * @param {Object} data an object where the errors may be found, you can pass as many of these as you want
+ * @param {Object} data An object where the errors may be found. You can pass as many of these as you want. If it contains "errors" property, then errors[0] is the first error. If it contains an "error" property, than that's the first error. Otherwise, for the first argument only, if it is nonempty, then it's considered an error.
  * @return {String|null} The first error message found, or null
  */
 Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
@@ -6017,7 +6021,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 			error = d.error;
 		} else if (Q.isArrayLike(d)) {
 			error = d[0];
-		} else {
+		} else if (!i) {
 			error = d;
 		}
 		if (error) {
@@ -10563,6 +10567,7 @@ Q.Masks = {
 	 * @param {String} [options.className=''] CSS class name for the mask to style it properly.
 	 * @param {number} [options.fadeIn=0] Milliseconds it should take to fade in the mask
 	 * @param {number} [options.fadeOut=0] Milliseconds it should take to fade out the mask.
+	 * @param {number} [options.zIndex] You can override the mask's default z-index here
 	 * @param {String} [options.html=''] Any HTML to insert into the mask.
 	 * @param {HTMLElement} [options.shouldCover=null] Optional element in the DOM to cover.
 	 * @return {Object} the mask info
@@ -10585,6 +10590,9 @@ Q.Masks = {
 		document.body.appendChild(me);
 		me.style.display = 'none';
 		mask.counter = 0;
+		if (options && options.zIndex) {
+			me.style.zIndex = options.zIndex;
+		}
 		return Q.Masks.collection[key] = mask;
 	},
 	/**

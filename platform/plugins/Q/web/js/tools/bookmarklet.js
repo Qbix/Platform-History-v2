@@ -20,15 +20,18 @@
  *	 @param {String} options.usage Text which is appended to instructions, identifying purpose and usage of this bookmarklet.
  *	 @param {String} [options.icon] Icon for the button which will be added to user's browser bar.
  */
-Q.Tool.jQuery('Q/bookmarklet', function (o) {
+Q.Tool.define('Q/bookmarklet', function () {
 	
-	if (!o.scripts && !o.code) {
+	var tool = this;
+	var state = tool.state;
+	
+	if (!state.scripts && !state.code) {
 		throw new Q.Error("Q/bookmarklet: please provide the bookmarklet's scripts or code");
 	}
-	if (!o.title) {
+	if (!state.title) {
 		console.warn("Please provide 'title' for bookmarklet.");
 	}
-	if (!o.title) {
+	if (!state.title) {
 		console.warn("Please provide 'usage' for bookmarklet.");
 	}
 	
@@ -36,7 +39,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 	
 	var bookmarkletSettings = {
 		common: {
-			'instructions': 'Drag me to your Bookmarks Bar to ' + o.usage + '.<br /><br />' +
+			'instructions': 'Drag me to your Bookmarks Bar to ' + state.usage + '.<br /><br />' +
 				'If you can\'t see the Bookmarks Bar, Choose {{command}} from your browser {{menu}} menu.'
 		}
 	};
@@ -117,25 +120,25 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 	});
 	
 	var code = null;
-	if (o.scripts && o.scripts.length) {
+	if (state.scripts && state.scripts.length) {
 		var scripts = [];
-		for (var i=0; i<o.scripts.length; ++i) {
-			var orig = o.scripts[i];
+		for (var i=0; i<state.scripts.length; ++i) {
+			var orig = state.scripts[i];
 			var url = Q.url(orig);
 			scripts.push(url);
-			if (o.skip && o.skip[orig]) {
-				o.skip[url] = o.skip[orig];
+			if (state.skip && state.skip[orig]) {
+				state.skip[url] = state.skip[orig];
 				if (url !== orig) {
-					delete o.skip[orig];
+					delete state.skip[orig];
 				}
 			}
 		}
 		var json = JSON.stringify({
 			scripts: scripts,
-			skip: o.skip,
-			code: o.code
+			skip: state.skip,
+			code: state.code
 		});
-		var baseUrlJson = JSON.stringify(Q.info.baseUrl);
+		var baseUrlJson = JSON.stringify(Q.infstate.baseUrl);
 		code =
   '(function () {'
 + ' var o = ' + json + ';'
@@ -189,7 +192,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 + '	loadNextScript();'
 + '})();';
 	} else {
-		code = o.code;
+		code = state.code;
 	}
 	// NOTE: code should be under 2000 total characters
 	// see http://stackoverflow.com/a/417184/467460
@@ -231,7 +234,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 							'<div class="Q_bookmarklet_tool_step">' +
 								'<h3>Step 4: Installation complete.</h3>' +
 								'<p>Installation should be complete!</p>' +
-								'<p>Tap the bookmark icon next to the address bar, then tap "'+o.title+'" to use it on any page.</p>' +
+								'<p>Tap the bookmark icon next to the address bar, then tap "'+state.title+'" to use it on any page.</p>' +
 							'</div>' +
 						'</div>');
 		break;
@@ -265,7 +268,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 									'<h3>Step 3: Edit the bookmark.</h3>' +
 									'<ol>' +
 										'<li>Tap the Bookmarks button in the toolbar.</li>' +
-										'<li>Tap <b>Edit</b>. Select the "'+o.title+'" bookmark to edit.</li>' +
+										'<li>Tap <b>Edit</b>. Select the "'+state.title+'" bookmark to edit.</li>' +
 										'<li>Tap its URL, tap the <b>x</b> to clear it, tap-and-hold for the magnifying glass, then tap <b>Paste</b>.</li>' +
 										'<li> Save the changes by tapping <b>Done</b>.</li>' +
 									'</ol>' +
@@ -273,7 +276,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 								'<div class="Q_bookmarklet_tool_step">' +
 									'<h3>Step 4: Installation complete.</h3>' +
 									'<p>Installation should be complete!</p>' +
-									'<p>Select the "'+o.title+'" bookmark from your Bookmarks list to use it on any page.</p>' +
+									'<p>Select the "'+state.title+'" bookmark from your Bookmarks list to use it on any page.</p>' +
 								'</div>' +
 							'</div>');
 		} else {
@@ -300,7 +303,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 									'<h3>Step 3: Edit the bookmark.</h3>' +
 									'<ol>' +
 										'<li>Tap the Bookmarks button in the toolbar.</li>' +
-										'<li>Tap <b>Edit</b>. Select the "'+o.title+'" bookmark to edit.</li>' +
+										'<li>Tap <b>Edit</b>. Select the "'+state.title+'" bookmark to edit.</li>' +
 										'<li>Tap its URL, tap the <b>x</b> to clear it, tap-and-hold for the magnifying glass, then tap <b>Paste</b>.</li>' +
 										'<li> Save the changes by tapping <b>Done</b>.</li>' +
 									'</ol>' +
@@ -308,7 +311,7 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 								'<div class="Q_bookmarklet_tool_step">' +
 									'<h3>Step 4: Installation complete.</h3>' +
 									'<p>Installation should be complete!</p>' +
-									'<p>Select the "'+o.title+'" bookmark from your Bookmarks list to use it on any page.</p>' +
+									'<p>Select the "'+state.title+'" bookmark from your Bookmarks list to use it on any page.</p>' +
 								'</div>' +
 							'</div>');
 		}
@@ -323,10 +326,10 @@ Q.Tool.jQuery('Q/bookmarklet', function (o) {
 										 '<a href="#">' +
 											 (bookmarkletSettings[browser.name][browser.OS]['icon'] ?
 												'<img src="' +
-												(o.icon ? o.icon : Q.info.proxyBaseUrl + '/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
+												(state.icon ? state.icon : Q.info.proxyBaseUrl + '/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
 												'" alt="" />'
 												: '') +
-											 o.title +
+											 state.title +
 										 '</a>' +
 									 '</div>' +
 									 '<div class="Q_bookmarklet_tool_button_right"></div>' +
@@ -344,10 +347,10 @@ $this.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
 									 '<a href="#">' +
 										 (bookmarkletSettings[browser.name][browser.OS]['icon'] ?
 											'<img src="' +
-											(o.icon ? o.icon : Q.info.proxyBaseUrl + '/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
+											(state.icon ? state.icon : Q.info.proxyBaseUrl + '/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
 											'" alt="" />'
 											: '') +
-										 o.title +
+										 state.title +
 									 '</a>' +
 								 '</div>' +
 								 '<div class="Q_bookmarklet_tool_button_right"></div>' +
@@ -360,7 +363,7 @@ $this.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
 		var $a = $this.find('.Q_bookmarklet_tool_button_middle a');
 		$a.attr('href', code);
 		$a.eq(0).on('click.Q_bookmarklet', function() {
-			alert(o.clickPrompt);
+			alert(state.clickPrompt);
 			return false;
 		});
 	}

@@ -751,7 +751,7 @@ Users.get = function (userId, callback) {
 		userIds: userId
 	}), 'user');
 	func.call(this, userId, function Users_get_response_handler (err, data) {
-		var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (!msg && !data.user) {
 			msg = "Users.get: no such user";
 		}

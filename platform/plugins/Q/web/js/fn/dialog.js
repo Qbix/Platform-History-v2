@@ -94,6 +94,14 @@ function _Q_overlay(o) {
 			if ($this.css('display') == 'block') {
 				return;
 			}
+			var topZ = 0;
+			$('body').children().each(function () {
+				var z = parseInt($(this).css('z-index'));
+				if (!isNaN(z)) {
+					topZ = Math.max(topZ, $(this).css('z-index'))
+				}
+			});
+			$this.css('z-index', topZ);
 			Q.handle($overlay.options.beforeLoad, $this, [$this]);
 			calculatePosition($this);
 			var $body = $('body');
@@ -128,7 +136,8 @@ function _Q_overlay(o) {
 				{
 					Q.Masks.show('Q.screen.mask', { 
 						fadeTime: o.fadeTime,
-						className: 'Q_dialog_mask'
+						className: 'Q_dialog_mask',
+						zIndex: $this.css('z-index') - 1
 					});
 				}
 			}
@@ -137,7 +146,10 @@ function _Q_overlay(o) {
 				$this.show();
 				if ($overlay.options.mask)
 				{
-					Q.Masks.show('Q.screen.mask', { 'className': 'Q_screen_mask' });
+					Q.Masks.show('Q.screen.mask', {
+						className: 'Q_screen_mask',
+						zIndex: $this.css('z-index') - 1
+					});
 				}
 				if (!$overlay.options.noClose && $overlay.options.closeOnEsc) {
 					$(document).on('keydown', closeThisOverlayOnEsc);

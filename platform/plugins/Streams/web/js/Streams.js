@@ -241,7 +241,7 @@ Streams.onError = new Q.Event(function (err, data) {
 	var errors = data && data.errors
 		&& (data[0] && data[0].errors)
 		&& (data[1] && data[1].errors);
-	console.warn(Q.firstErrorMessage(err, data && data.errors));
+	console.warn(Q.firstErrorMessage(err, data));
 }, 'Streams.onError');
 
 /**
@@ -459,7 +459,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	func.call(this, 'stream', slotNames, publisherId, streamName,
 	
 	function Streams_get_response_handler (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (!msg && (!data || !data.stream)) {
 			msg = "Streams.get: data.stream is missing";
 		}
@@ -612,7 +612,7 @@ Streams.create = function (fields, callback, related, options) {
 	}
 	var _r = _retain;
 	Q.req('Streams/stream', slotNames, function Stream_create_response_handler(err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -1133,7 +1133,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		streamName: streamName
 	});
 	Q.req('Streams/related', slotNames, function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -1186,7 +1186,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 					// Fetch all the related streams from other publishers
 					keys.push(key);
 					Streams.get(relation[farPublisherId], relation[farStreamName], function (err, data) {
-						var msg = Q.firstErrorMessage(err, data && data.errors);
+						var msg = Q.firstErrorMessage(err, data);
 						if (msg) {
 							p.fill(key)(msg);
 							return;
@@ -1615,7 +1615,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		streamName: pf.name
 	});
 	Q.req('Streams/stream', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -2186,7 +2186,7 @@ Stream.join = function _Stream_join (publisherId, streamName, callback) {
 		"Q.clientId": Q.clientId()
 	});
 	Q.req('Streams/join', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -2230,7 +2230,7 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 		streamName: streamName
 	});
 	Q.req('Streams/leave', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -2265,7 +2265,7 @@ Stream.close = function _Stream_remove (publisherId, streamName, callback) {
 		streamName: streamName
 	});
 	Q.req('Streams/stream', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -2448,7 +2448,7 @@ Streams.relate = function _Streams_relate (publisherId, streamName, relationType
 		streamName: streamName
 	});
 	Q.req('Streams/related', [slotName], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		var messageFrom = Q.getObject('slots.result.messageFrom', data);
 		var messageTo = Q.getObject('slots.result.messageTo', data);
 		// wait for messages from cached streams -- from, to or both!
@@ -2708,7 +2708,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 	}));
 	func.call(this, 'message', slotName, publisherId, streamName, criteria,
 	function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -2752,7 +2752,7 @@ Message.post = function _Message_post (msg, callback) {
 	});
 	msg["Q.clientId"] = Q.clientId();
 	Q.req('Streams/message', [], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -2981,7 +2981,7 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 	}));
 	func.call(this, 'participant', slotName, publisherId, streamName, criteria, function (err, data) {
 		var participants = {};
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -3081,7 +3081,7 @@ var Avatar = Streams.Avatar = function Streams_Avatar (fields) {
 Avatar.get = function _Avatar_get (userId, callback) {
 	var func = Streams.batchFunction(Q.baseUrl({userId: userId}), 'avatar');
 	func.call(this, userId, function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -3122,7 +3122,7 @@ Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 	var fields = Q.take(options, ['limit', 'offset', 'public']);
 	Q.extend(fields, {prefix: prefix});
 	Q.req('Streams/avatar', ['avatars'], function (err, data) {
-		var msg = Q.firstErrorMessage(err, data && data.errors);
+		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
 			Streams.onError.handle.call(this, msg, args);
@@ -3869,9 +3869,7 @@ Q.onInit.add(function _Streams_onInit() {
 							});
 							var url = 'Streams/basic?' + $(this).serialize();
 							Q.req(url, ['data'], function _Streams_basic(err, data) {
-								var msg = Q.firstErrorMessage(
-									err, data && data.errors
-								);
+								var msg = Q.firstErrorMessage(err, data);
 								if (data && data.errors) {
 									$complete_form.data('validator').invalidate(
 										Q.ajaxErrors(data.errors, ['fullName'])

@@ -75,7 +75,11 @@
 				"decade": 315360000
 			},
 			"gc": false,
-			"maxlength": 4095
+			"maxlength": 4095,
+			"nonceMessages": {
+				"sameDomain": "Session expired. Refresh the page and try again.",
+				"otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+			}
 		},
 		"javascript": {
 			"responseExtras": {
