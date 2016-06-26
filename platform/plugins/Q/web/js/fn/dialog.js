@@ -11,7 +11,7 @@
  * @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
  * @param {DOMElement} [options.alignParent]  Can be DOM element, jQuery object or jQuery selector.
  * If provided overlay will be positioned relatively to that element. If null, overlay will be positioned considering window dimensions. Optional.
- * @param {Boolean} [options.mask=false] If true, mask behind the overlay will be shown, making it modal-like.
+ * @param {Boolean} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
  * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
  * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
@@ -120,6 +120,8 @@ function _Q_overlay(o) {
 				left: -sl + 'px',
 				top: -st + 'px'
 			}).addClass('Q_preventScroll');
+			var oom = $overlay.options.mask;
+			var mcn = (typeof oom === 'string') ? ' ' + oom : '';
 			if ($overlay.options.fadeInOut)
 			{
 				$this.css('opacity', 0).show();
@@ -136,7 +138,7 @@ function _Q_overlay(o) {
 				{
 					Q.Masks.show('Q.screen.mask', { 
 						fadeTime: o.fadeTime,
-						className: 'Q_dialog_mask',
+						className: 'Q_dialog_mask' + mcn,
 						zIndex: $this.css('z-index') - 1
 					});
 				}
@@ -147,7 +149,7 @@ function _Q_overlay(o) {
 				if ($overlay.options.mask)
 				{
 					Q.Masks.show('Q.screen.mask', {
-						className: 'Q_screen_mask',
+						className: 'Q_screen_mask' + mcn,
 						zIndex: $this.css('z-index') - 1
 					});
 				}

@@ -24,6 +24,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 	
 	var tool = this;
 	var state = tool.state;
+	var $te = $(tool.element);
 	
 	if (!state.scripts && !state.code) {
 		throw new Q.Error("Q/bookmarklet: please provide the bookmarklet's scripts or code");
@@ -138,7 +139,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 			skip: state.skip,
 			code: state.code
 		});
-		var baseUrlJson = JSON.stringify(Q.infstate.baseUrl);
+		var baseUrlJson = JSON.stringify(Q.info.baseUrl);
 		code =
   '(function () {'
 + ' var o = ' + json + ';'
@@ -201,15 +202,13 @@ Q.Tool.define('Q/bookmarklet', function () {
 		'    ': ' ',
 		'  ': ' '
 	}));
-
-	var $this = $(this);
 	
 	var browser = Q.Browser.detect();
 
-	$this.addClass('Q_clearfix');
+	$te.addClass('Q_clearfix');
 	switch (browser.OS) {
 	case 'android':
-		$this.append( '<div class="Q_bookmarklet_tool_instructions">' +
+		$te.append( '<div class="Q_bookmarklet_tool_instructions">' +
 							'<div class="Q_bookmarklet_tool_step">' +
 								'<h3>Step 1: Select the text and copy it.</h3>' +
 								'<textarea class="Q_bookmarklet_tool_code">' +
@@ -245,8 +244,8 @@ Q.Tool.define('Q/bookmarklet', function () {
 			: 'plugins/Q/img/bookmarklet/ios_action.png';
 		var icon = '<img src="'+Q.url(url)+'" class="Q_bookmarklet_ios_action_icon" />';
 		if (browser.device === 'iPad') {
-			$this.addClass('Q_bookmarklet_tool_iPad');
-			$this.append( '<div class="Q_bookmarklet_tool_instructions">' +
+			$te.addClass('Q_bookmarklet_tool_iPad');
+			$te.append( '<div class="Q_bookmarklet_tool_instructions">' +
 								'<div class="Q_bookmarklet_tool_step">' +
 									'<h3>Step 1: Bookmark this page.</h3>' +
 									'<p>Tap the '+icon+' icon, then tap Add Bookmark, then tap Save.</p>' +
@@ -280,8 +279,8 @@ Q.Tool.define('Q/bookmarklet', function () {
 								'</div>' +
 							'</div>');
 		} else {
-			$this.addClass('Q_bookmarklet_tool_iPhone');
-			$this.append( '<div class="Q_bookmarklet_tool_instructions">' +
+			$te.addClass('Q_bookmarklet_tool_iPhone');
+			$te.append( '<div class="Q_bookmarklet_tool_instructions">' +
 								'<div class="Q_bookmarklet_tool_step">' +
 									'<h3>Step 1: Bookmark this page.</h3>' +
 									'<p>Tap the '+icon+' icon below, then tap Add Bookmark, then tap Save.</p>' +
@@ -317,7 +316,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 		}
 		break;
 	default:
-		$this.append('<div class="Q_bookmarklet_tool_instructions">' + 
+		$te.append('<div class="Q_bookmarklet_tool_instructions">' + 
 						 '<div class="Q_bookmarklet_tool_drag_button">' +
 							 '<div class="Q_bookmarklet_tool_sample_button_tip">Drag me to your<br />Bookmarks Bar</div><br />' +
 							 '<div class="Q_bookmarklet_tool_sample_button Q_bookmarklet_tool_button_' + browser.name + '_' + browser.OS + '">' +
@@ -339,7 +338,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 							 bookmarkletSettings[browser.name][browser.OS]['instructions'] +
 						 '</div>' +
 					 '</div>');
-$this.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
+$te.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
 						 '<div class="Q_bookmarklet_tool_bar_screenshot Q_bookmarklet_tool_bar_screenshot_' + browser.name + '_' + browser.OS + '"">' +
 							 '<div class="Q_bookmarklet_tool_sample_button Q_bookmarklet_tool_button_' + browser.name + '_' + browser.OS + '">' +
 								 '<div class="Q_bookmarklet_tool_button_left"></div>' +
@@ -360,7 +359,7 @@ $this.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
 							 'After you drag the button to the Bookmarks Bar, it will look like this.' +
 						 '</div>' +
 					 '</div>');
-		var $a = $this.find('.Q_bookmarklet_tool_button_middle a');
+		var $a = $te.find('.Q_bookmarklet_tool_button_middle a');
 		$a.attr('href', code);
 		$a.eq(0).on('click.Q_bookmarklet', function() {
 			alert(state.clickPrompt);

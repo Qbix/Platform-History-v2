@@ -473,6 +473,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 				forget = true;
 			}
 			if (forget && Streams.get.forget) {
+				Streams.get.forget.apply(this, args);
 				setTimeout(function () {
 					Streams.get.forget.apply(this, args);
 				}, 0);

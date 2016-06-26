@@ -27,7 +27,8 @@ function Q () {
 Q.libraries = {
 	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
 	promise: 'plugins/Q/js/Promise.js',
-	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js'
+	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js',
+	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
 };
 
 /**
@@ -662,7 +663,7 @@ Elp.preventSelections = function (deep, callouts) {
 	Q.each(this.children || this.childNodes, function () {
 		if (this.preventSelections
 		&& ['INPUT', 'TEXTAREA'].indexOf(this.tagName.toUpperCase()) < 0
-		&& !this.hasClass('Q_selectable')) {
+		&& this.hasClass && !this.hasClass('Q_selectable')) {
 			this.preventSelections(deep);
 		}
 	});
@@ -3488,12 +3489,14 @@ Q.Tool.onInit = Q.Event.factory(_initToolHandlers, ["", _toolEventFactoryNormali
 Q.Tool.beforeRemove = Q.Event.factory(_beforeRemoveToolHandlers, ["", _toolEventFactoryNormalizeKey], null, true);
 
 /**
- * Traverses elements in a particular container, including the container, and removes + destroys all tools.
+ * Traverses elements in a particular container, including the container itself,
+ * and removes + destroys all tools.
+ * Should be called before removing elements.
  * @static
  * @method remove
- * @param elem {HTMLElement}
+ * @param {HTMLElement} elem
  *  The container to traverse
- * @param removeCached {boolean}
+ * @param {boolean} removeCached
  *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
  *  should be removed.
  */
@@ -3516,13 +3519,14 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 
 /**
  * Traverses children in a particular container and removes + destroys all tools.
+ * Should be called before removing elements.
  * @static
  * @method clear
- * @param elem {HTMLElement}
+ * @param {HTMLElement} elem 
  *  The container to traverse
- * @param removeCached {boolean}
+ * @param {boolean} removeCached 
  *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
- *  should be removed.
+ *  should be removed...
  */
 Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
 	if (typeof elem === 'string') {
@@ -3658,7 +3662,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
-	Q.ensure(root.jQuery, Q.onJQuery.add, _onJQuery);
+	Q.ensure(root.jQuery, Q.libraries.jQuery, _onJQuery);
 	Q.Tool.latestName = n;
 	function _onJQuery() {
 		$ = root.jQuery;
@@ -4991,22 +4995,20 @@ Q.page = function _Q_page(page, handler, key) {
  *  "isLocalFile": defaults to false. Set this to true if you are calling Q.init from local file:/// context.
  */
 Q.init = function _Q_init(options) {
-
+	if (Q.init.called) {
+		return false;
+	}
+	Q.init.called = true;
 	Q.info.imgLoading = Q.info.imgLoading ||
 		Q.url('plugins/Q/img/throbbers/loading.gif');
-
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
-
 	_detectOrientation();
-
 	Q.handle(Q.beforeInit);
 	Q.handle(Q.onInit); // Call all the onInit handlers
-
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
-
 	var checks = ["ready"];
 	if (Q.info.isCordova
 	&& root.cordova && Q.typeOf(cordova).substr(0, 4) !== 'HTML') {
@@ -5168,20 +5170,22 @@ Q.ready = function _Q_ready() {
 		});
 
 		// This is an HTML document loaded from our server
-		var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
-		try {
-			Q.Page.beingLoaded = true;
-			Q.Page.onLoad('').handle();
-			Q.Page.onLoad(moduleSlashAction).handle();
-			if (Q.info.uriString !== moduleSlashAction) {
-				Q.Page.onLoad(Q.info.uriString).handle();
+		if (Q.info.uri && Q.info.uri.module) {
+			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
+			try {
+				Q.Page.beingLoaded = true;
+				Q.Page.onLoad('').handle();
+				Q.Page.onLoad(moduleSlashAction).handle();
+				if (Q.info.uriString !== moduleSlashAction) {
+					Q.Page.onLoad(Q.info.uriString).handle();
+				}
+			} catch (e) {
+				debugger; // pause here if debugging
+				Q.Page.beingLoaded = false;
+				throw e;
 			}
-			Q.Page.beingLoaded = false;
-		} catch (e) {
-			debugger; // pause here if debugging
-			Q.Page.beingLoaded = false;
-			throw e;
 		}
+		Q.Page.beingLoaded = false;
 		
 	}
 	Q.loadNonce(readyWithNonce);
@@ -10132,7 +10136,7 @@ Q.Dialogs = {
 	 *   loading and displaying a throbber immage.
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
-	 *  @param {boolean} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog.
+	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
 	 *	@param {boolean} [options.fullscreen] Defaults to true only on Android
 	 *   and false on all other platforms. 
 	 *   If true, dialog will be shown not as overlay but instead will be 
@@ -10689,7 +10693,7 @@ Q.Masks = {
 				mask.rect.bottom = Math.max(mask.rect.bottom, Q.Pointer.windowHeight());
 				var body = document.getElementsByTagName('body')[0];
 				Q.each(body.children || body.childNodes, function () {
-					if (this.hasClass('Q_mask')) return;
+					if (!this.hasClass || this.hasClass('Q_mask')) return;
 					var rect = this.getBoundingClientRect();
 					if (!rect || rect.right - rect.left == 0) return;
 					mask.rect.left = Math.min(mask.rect.left, rect.left);
@@ -10773,6 +10777,9 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
+	if (!Q.info.baseUrl) {
+		throw new Q.Error("Please define Q.info.baseUrl before calling Q.init()");
+	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.info.baseUrl.length + 1);
 	if (window.history.pushState) {
