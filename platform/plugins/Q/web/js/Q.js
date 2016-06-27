@@ -3662,7 +3662,9 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
-	Q.ensure(root.jQuery, Q.libraries.jQuery, _onJQuery);
+	if (root.jQuery) {
+		_onJQuery();
+	}
 	Q.Tool.latestName = n;
 	function _onJQuery() {
 		$ = root.jQuery;
@@ -11093,20 +11095,6 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	var oldQ = root.Q;
 	root.Q = Q;
 }
-
-/**
- * Can be used to construct another instance of Q
- * (possibly alongside other instances in the document).
- * This is typically followed by calling Q2.extend(Q2, ...)
- * to set some properties, followed by a call to Q2.init();
- * Useful e.g. for bookmarklets and other javascript widgets.
- * @method anotherQ
- * @static
- * @return {Function} Another instance of Q
- */
-Q.anotherQ = function () {
-	return _Q_setup.call(root, undefined, true); 
-};
 
 Q.globalNames = Object.keys(root); // to find stray globals
 Q.globalNamesAdded = function () {
