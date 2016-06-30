@@ -123,7 +123,7 @@
 	},
 	"Db": {
 		"sql": {
-			"querySeparator": "\n-------- NEXT QUERY STARTS HERE --------\n"
+			"querySeparator": "-------- NEXT QUERY STARTS HERE --------"
 		}
 	}
 }
