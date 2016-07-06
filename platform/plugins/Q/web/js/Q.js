@@ -5761,7 +5761,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {String} [options.method] if set, adds a &Q.method= that value to the querystring, default "get"
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
- * @param {String} [options.resultFunction=null] The path to the function to handle inside the
+ * @param {String} [options.resultFunction="result"] The path to the function to handle inside the
  *  contentWindow of the resulting iframe, e.g. "Foo.result". 
  *  Your document is supposed to define this function if it wants to return results to the
  *  callback's second parameter, otherwise it will be undefined
