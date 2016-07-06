@@ -75,7 +75,11 @@
 				"decade": 315360000
 			},
 			"gc": false,
-			"maxlength": 4095
+			"maxlength": 4095,
+			"nonceMessages": {
+				"sameDomain": "Session expired. Refresh the page and try again.",
+				"otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+			}
 		},
 		"javascript": {
 			"responseExtras": {
@@ -83,7 +87,8 @@
 				"plugins/Q/js/jquery.tools.min.js": true,
 				"plugins/Q/js/handlebars-v1.3.0.min.js": true,
 				"plugins/Q/js/Q.js": true
-			}
+			},
+			"prettyPrintData": true
 		},
 		"stylesheets": {
 			"responseExtras": {
@@ -118,7 +123,7 @@
 	},
 	"Db": {
 		"sql": {
-			"querySeparator": "\n-------- NEXT QUERY STARTS HERE --------\n"
+			"querySeparator": "-------- NEXT QUERY STARTS HERE --------"
 		}
 	}
 }

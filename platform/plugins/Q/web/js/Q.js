@@ -6,7 +6,7 @@
  */
 "use strict";
 /* jshint -W014 */
-(function (undefined) {
+(function _Q_setup(undefined, dontSetGlobals) {
 
 var root = this;
 var $ = root.jQuery;
@@ -20,14 +20,15 @@ var _isOnline = null;
  * @constructor
  */
 function Q () {
-	// not called right now
+	// explore the docs at http://qbix.com/platform/client
 }
 
 // external libraries, which you can override
 Q.libraries = {
 	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
 	promise: 'plugins/Q/js/Promise.js',
-	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js'
+	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js',
+	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
 };
 
 /**
@@ -662,7 +663,7 @@ Elp.preventSelections = function (deep, callouts) {
 	Q.each(this.children || this.childNodes, function () {
 		if (this.preventSelections
 		&& ['INPUT', 'TEXTAREA'].indexOf(this.tagName.toUpperCase()) < 0
-		&& !this.hasClass('Q_selectable')) {
+		&& this.hasClass && !this.hasClass('Q_selectable')) {
 			this.preventSelections(deep);
 		}
 	});
@@ -1510,7 +1511,9 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 					} else {
 						target[k].set(argk, namespace);
 					}
-				} else if (levels && (target[k] && typeof target[k] === 'object') 
+				} else if (levels 
+				&& target[k]
+				&& (typeof target[k] === 'object' || typeof target[k] === 'function') 
 				&& tak !== 'Q.Event'
 				&& (Q.isPlainObject(argk) || (ttk === 'array' && tak === 'array'))) {
 					target[k] = (ttk === 'array' && ('replace' in argk))
@@ -3298,11 +3301,16 @@ Q.Tool = function _Q_Tool(element, options) {
 			} while (e = e.parentNode);
 		}
 		this.element.id = prefix + Q.Tool.names[this.name].split('/').join('_')
-			'-' + (Q.Tool.nextDefaultId++) + "_tool";
+			+ '-' + (Q.Tool.nextDefaultId++) + "_tool";
 		Q.Tool.nextDefaultId %= 1000000;
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
 	this.id = this.prefix.substr(0, this.prefix.length-1);
+	
+	if (Q.Tool.byId(this.id, this.name)) {
+		var toolName = Q.Tool.names[this.name];
+		throw new Q.Error("A " + toolName + " tool with id " + this.id + " is already active");
+	}
 
 	// for later use
 	var classes = (this.element.className && this.element.className.split(/\s+/) || []);
@@ -3481,12 +3489,14 @@ Q.Tool.onInit = Q.Event.factory(_initToolHandlers, ["", _toolEventFactoryNormali
 Q.Tool.beforeRemove = Q.Event.factory(_beforeRemoveToolHandlers, ["", _toolEventFactoryNormalizeKey], null, true);
 
 /**
- * Traverses elements in a particular container, including the container, and removes + destroys all tools.
+ * Traverses elements in a particular container, including the container itself,
+ * and removes + destroys all tools.
+ * Should be called before removing elements.
  * @static
  * @method remove
- * @param elem {HTMLElement}
+ * @param {HTMLElement} elem
  *  The container to traverse
- * @param removeCached {boolean}
+ * @param {boolean} removeCached
  *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
  *  should be removed.
  */
@@ -3509,13 +3519,14 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 
 /**
  * Traverses children in a particular container and removes + destroys all tools.
+ * Should be called before removing elements.
  * @static
  * @method clear
- * @param elem {HTMLElement}
+ * @param {HTMLElement} elem 
  *  The container to traverse
- * @param removeCached {boolean}
+ * @param {boolean} removeCached 
  *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
- *  should be removed.
+ *  should be removed...
  */
 Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
 	if (typeof elem === 'string') {
@@ -3651,7 +3662,9 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
-	Q.ensure(root.jQuery, Q.onJQuery.add, _onJQuery);
+	if (root.jQuery) {
+		_onJQuery();
+	}
 	Q.Tool.latestName = n;
 	function _onJQuery() {
 		$ = root.jQuery;
@@ -4984,22 +4997,20 @@ Q.page = function _Q_page(page, handler, key) {
  *  "isLocalFile": defaults to false. Set this to true if you are calling Q.init from local file:/// context.
  */
 Q.init = function _Q_init(options) {
-
+	if (Q.init.called) {
+		return false;
+	}
+	Q.init.called = true;
 	Q.info.imgLoading = Q.info.imgLoading ||
 		Q.url('plugins/Q/img/throbbers/loading.gif');
-
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
-
 	_detectOrientation();
-
 	Q.handle(Q.beforeInit);
 	Q.handle(Q.onInit); // Call all the onInit handlers
-
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
-
 	var checks = ["ready"];
 	if (Q.info.isCordova
 	&& root.cordova && Q.typeOf(cordova).substr(0, 4) !== 'HTML') {
@@ -5161,20 +5172,22 @@ Q.ready = function _Q_ready() {
 		});
 
 		// This is an HTML document loaded from our server
-		var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
-		try {
-			Q.Page.beingLoaded = true;
-			Q.Page.onLoad('').handle();
-			Q.Page.onLoad(moduleSlashAction).handle();
-			if (Q.info.uriString !== moduleSlashAction) {
-				Q.Page.onLoad(Q.info.uriString).handle();
+		if (Q.info.uri && Q.info.uri.module) {
+			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
+			try {
+				Q.Page.beingLoaded = true;
+				Q.Page.onLoad('').handle();
+				Q.Page.onLoad(moduleSlashAction).handle();
+				if (Q.info.uriString !== moduleSlashAction) {
+					Q.Page.onLoad(Q.info.uriString).handle();
+				}
+			} catch (e) {
+				debugger; // pause here if debugging
+				Q.Page.beingLoaded = false;
+				throw e;
 			}
-			Q.Page.beingLoaded = false;
-		} catch (e) {
-			debugger; // pause here if debugging
-			Q.Page.beingLoaded = false;
-			throw e;
 		}
+		Q.Page.beingLoaded = false;
 		
 	}
 	Q.loadNonce(readyWithNonce);
@@ -5195,7 +5208,11 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 		Q.handle(callback, context, args);
 		return;
 	}
-	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded() {
+	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			throw new Q.Error(msg);
+		}
 		Q.nonce = Q.cookie('Q_nonce');
 		if (Q.nonce) {
 			Q.handle(callback, context, args);
@@ -5744,7 +5761,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {String} [options.method] if set, adds a &Q.method= that value to the querystring, default "get"
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
- * @param {String} [options.resultFunction=null] The path to the function to handle inside the
+ * @param {String} [options.resultFunction="result"] The path to the function to handle inside the
  *  contentWindow of the resulting iframe, e.g. "Foo.result". 
  *  Your document is supposed to define this function if it wants to return results to the
  *  callback's second parameter, otherwise it will be undefined
@@ -5994,7 +6011,7 @@ Q.request.callbacks = []; // used by Q.request
  * Try to find an error message assuming typical error data structures for the arguments
  * @static
  * @method firstErrorMessage
- * @param {Object} data an object where the errors may be found, you can pass as many of these as you want
+ * @param {Object} data An object where the errors may be found. You can pass as many of these as you want. If it contains "errors" property, then errors[0] is the first error. If it contains an "error" property, than that's the first error. Otherwise, for the first argument only, if it is nonempty, then it's considered an error.
  * @return {String|null} The first error message found, or null
  */
 Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
@@ -6010,7 +6027,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 			error = d.error;
 		} else if (Q.isArrayLike(d)) {
 			error = d[0];
-		} else {
+		} else if (!i) {
 			error = d;
 		}
 		if (error) {
@@ -10113,15 +10130,15 @@ Q.Dialogs = {
 	 *	 structure with 'Q_title_slot', 'Q_dialog_slot' and appropriate content in them. 
 	 *   If it's provided, then 'title' and 'content' options given below are ignored.
 	 *	@param {String} [options.url] Optional. If provided, this url will be used 
-	 *  to fetch the "title" and "dialog" slots, to display in the dialog. 
-	 *  Thus the default content provided by 'title' and 'content' options
-	 *  given below will be replaced after the response comes back.
+	 *   to fetch the "title" and "dialog" slots, to display in the dialog. 
+	 *   Thus the default content provided by 'title' and 'content' options
+	 *   given below will be replaced after the response comes back.
 	 *	@param {String|Element} [options.title='Dialog'] initial dialog title.
 	 *	@param {String|Element} [options.content] initial dialog content, defaults to 
 	 *   loading and displaying a throbber immage.
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
-	 *  @param {boolean} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog.
+	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
 	 *	@param {boolean} [options.fullscreen] Defaults to true only on Android
 	 *   and false on all other platforms. 
 	 *   If true, dialog will be shown not as overlay but instead will be 
@@ -10129,6 +10146,7 @@ Q.Dialogs = {
 	 *   will be hidden. Thus dialog will occupy all window space, but still 
 	 *   will behave like regular dialog, i.e. it can be closed
 	 *   by clicking / tapping close icon.
+	 *  @param {boolean} [options.hidePrevious=false] Whether to hide the current topmost dialog, and show it again when this newly displayed dialog will be closed
 	 *	@param {HTMLElement, jQuery} [options.appendTo] Can be DOM element, jQuery object 
 	 *    or jQuery selector matching element where dialog should be appended.
 	 *    Moreover, dialog is centered relatively to this element. 
@@ -10555,6 +10573,7 @@ Q.Masks = {
 	 * @param {String} [options.className=''] CSS class name for the mask to style it properly.
 	 * @param {number} [options.fadeIn=0] Milliseconds it should take to fade in the mask
 	 * @param {number} [options.fadeOut=0] Milliseconds it should take to fade out the mask.
+	 * @param {number} [options.zIndex] You can override the mask's default z-index here
 	 * @param {String} [options.html=''] Any HTML to insert into the mask.
 	 * @param {HTMLElement} [options.shouldCover=null] Optional element in the DOM to cover.
 	 * @return {Object} the mask info
@@ -10577,6 +10596,9 @@ Q.Masks = {
 		document.body.appendChild(me);
 		me.style.display = 'none';
 		mask.counter = 0;
+		if (options && options.zIndex) {
+			me.style.zIndex = options.zIndex;
+		}
 		return Q.Masks.collection[key] = mask;
 	},
 	/**
@@ -10673,7 +10695,7 @@ Q.Masks = {
 				mask.rect.bottom = Math.max(mask.rect.bottom, Q.Pointer.windowHeight());
 				var body = document.getElementsByTagName('body')[0];
 				Q.each(body.children || body.childNodes, function () {
-					if (this.hasClass('Q_mask')) return;
+					if (!this.hasClass || this.hasClass('Q_mask')) return;
 					var rect = this.getBoundingClientRect();
 					if (!rect || rect.right - rect.left == 0) return;
 					mask.rect.left = Math.min(mask.rect.left, rect.left);
@@ -10757,6 +10779,9 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
+	if (!Q.info.baseUrl) {
+		throw new Q.Error("Please define Q.info.baseUrl before calling Q.init()");
+	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.info.baseUrl.length + 1);
 	if (window.history.pushState) {
@@ -11005,6 +11030,7 @@ Q.request.options = {
 			quiet: true
 		});
 	},
+	resultFunction: "result",
 	onLoadStart: new Q.Event(),
 	onShowCancel: new Q.Event(),
 	onLoadEnd: new Q.Event(),
@@ -11049,7 +11075,7 @@ Q.onReady.set(function _Q_masks() {
 if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	// Assume we are in a Node.js environment, e.g. running tests
 	module.exports = Q;
-} else {
+} else if (!dontSetGlobals) {
 	// We are in a browser environment
 	/**
 	 * This method restores the old window.Q and returns an instance of itself.
@@ -11075,5 +11101,7 @@ Q.globalNames = Object.keys(root); // to find stray globals
 Q.globalNamesAdded = function () {
 	return Q.diff(Object.keys(window), Q.globalNames);
 };
+
+return Q;
 
 }).call(this);

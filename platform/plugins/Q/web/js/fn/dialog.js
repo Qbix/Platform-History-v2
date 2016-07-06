@@ -5,15 +5,16 @@
  * Suitable for showing dialogs, for example.
  * This is replacement for jQuery Tools overlay, it has similar behavoir and API.
  * @method overlay
- * @param {Object} [options] options is an object of parameters
- * @param {Boolean} apply Optional. Set to true if the dialog should show the "apply" style button to close dialog
+ * @param {Object} [options]
+ * @param {Boolean} [options.apply] Set to true if the dialog should show the "apply" style button to close dialog
  * @param {String} [options.left='center'] left is a Horizontal position of the overlay, May have 'center' value to be centered horizontally or have a percentage or absolute (pixels) value of offset from the left border of 'alignParent'.
  * @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
- * @param {DOMElement} [options.alignParent] alignParent Can be DOM element, jQuery object or jQuery selector.
+ * @param {DOMElement} [options.alignParent]  Can be DOM element, jQuery object or jQuery selector.
  * If provided overlay will be positioned relatively to that element. If null, overlay will be positioned considering window dimensions. Optional.
- * @param {Boolean} [options.mask=false] mask If true, mask behind the overlay will be shown, making it modal-like.
- * @param {Boolean} [options.noClose=false] noClose  If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
+ * @param {Boolean} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
+ * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
+ * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
  * @param {Boolean} [options.fadeInOut=true] fadeInOut Indicates whether to use fadeIn() / fadeOut() animations when loading dialog.
  * Note: if set to false, 'onLoad' callback will be called synchronously with dialog load,
  * otherwise it will be called on fadeIn() animation completion.
@@ -27,6 +28,9 @@ Q.Tool.jQuery('Q/overlay',
 
 function _Q_overlay(o) {
 	function calculatePosition($this) {
+		if (o.noCalculatePosition) {
+			return;
+		}
 		var width = $this.outerWidth(), height = $this.outerHeight();
 		if (!width && $this.css('width'))
 			width = parseInt($this.css('width'));
@@ -76,11 +80,9 @@ function _Q_overlay(o) {
 
 	function closeThisOverlayOnEsc(e)
 	{
-		if (o.noClose || !o.closeOnEsc)
-			return;
-			
-		if (e.keyCode == 27)
+		if (e.keyCode == 27 && !o.noClose && o.closeOnEsc && $this.is(":visible")) {
 			$this.data('Q/overlay').close(e);
+		}
 	}
 
 	$this.data('Q/overlay', {
@@ -92,6 +94,14 @@ function _Q_overlay(o) {
 			if ($this.css('display') == 'block') {
 				return;
 			}
+			var topZ = 0;
+			$('body').children().each(function () {
+				var z = parseInt($(this).css('z-index'));
+				if (!isNaN(z)) {
+					topZ = Math.max(topZ, $(this).css('z-index'))
+				}
+			});
+			$this.css('z-index', topZ);
 			Q.handle($overlay.options.beforeLoad, $this, [$this]);
 			calculatePosition($this);
 			var $body = $('body');
@@ -110,6 +120,8 @@ function _Q_overlay(o) {
 				left: -sl + 'px',
 				top: -st + 'px'
 			}).addClass('Q_preventScroll');
+			var oom = $overlay.options.mask;
+			var mcn = (typeof oom === 'string') ? ' ' + oom : '';
 			if ($overlay.options.fadeInOut)
 			{
 				$this.css('opacity', 0).show();
@@ -126,7 +138,8 @@ function _Q_overlay(o) {
 				{
 					Q.Masks.show('Q.screen.mask', { 
 						fadeTime: o.fadeTime,
-						className: 'Q_dialog_mask'
+						className: 'Q_dialog_mask' + mcn,
+						zIndex: $this.css('z-index') - 1
 					});
 				}
 			}
@@ -135,7 +148,10 @@ function _Q_overlay(o) {
 				$this.show();
 				if ($overlay.options.mask)
 				{
-					Q.Masks.show('Q.screen.mask', { 'className': 'Q_screen_mask' });
+					Q.Masks.show('Q.screen.mask', {
+						className: 'Q_screen_mask' + mcn,
+						zIndex: $this.css('z-index') - 1
+					});
 				}
 				if (!$overlay.options.noClose && $overlay.options.closeOnEsc) {
 					$(document).on('keydown', closeThisOverlayOnEsc);
@@ -245,6 +261,7 @@ function _Q_overlay(o) {
  *   @param {Boolean} [options.closeOnEsc=true]
  *   Indicates whether to close dialog on 'Esc' key press. Has sense only if 'noClose' is false.
  *   @param {Boolean} [options.removeOnClose=false] If true, dialog DOM element will be removed from the document on close.
+ * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
  *   @param {Q.Event} [options.beforeLoad]  Q.Event or function which is called before dialog is loaded.
  *   @param {Q.Event} [options.onActivate]  Q.Event or function which is called when dialog is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
  *   @optional
@@ -306,6 +323,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				}
 				Q.handle(o.onClose, $this, [$this]);
 			}},
+			noCalculatePosition: o.noCalculatePosition,
 			alignParent: (o.alignByParent && !Q.info.isMobile ? $this.parent() : null),
 			fadeInOut: o.asyncLoad
 		});
@@ -541,7 +559,7 @@ function _handlePosAndScroll(o)
 			var outerWidth = $this.outerWidth();
 			var winInnerWidth = Q.Pointer.windowWidth();
 			var winInnerHeight = Q.Pointer.windowHeight();
-			if (Q.info.isMobile)
+			if (Q.info.isMobile && !o.noCalculatePosition)
 			{
 				// correcting x-pos
 				var left = Math.ceil((winInnerWidth - outerWidth) / 2);
@@ -588,7 +606,7 @@ function _handlePosAndScroll(o)
 					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 			}
-			else
+			else if (!o.noCalculatePosition)
 			{
 				// correcting x-pos
 				if (parseInt($this.css('left')) != Math.ceil((winInnerWidth - outerWidth) / 2))

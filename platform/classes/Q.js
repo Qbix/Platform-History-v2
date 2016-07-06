@@ -1674,7 +1674,9 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... *
 				var argk = arg[k];
 				var ttk = Q.typeOf(target[k]);
 				var tak = Q.typeOf(argk);
-				if (levels && (target[k] && typeof target[k] === 'object') 
+				if (levels 
+				&& target[k]
+				&& (typeof target[k] === 'object' || typeof target[k] === 'function') 
 				&& (Q.isPlainObject(argk) || (ttk === 'array' && tak === 'array'))) {
 					target[k] = (ttk === 'array' && ('replace' in argk))
 						? Q.copy(argk.replace)
@@ -2686,8 +2688,9 @@ Q.timeEnd = function _Q_timeEnd(handle) {
 
 /**
  * Try to find an error message assuming typical error data structures for the arguments
+ * @static
  * @method firstErrorMessage
- * @param {Object} data an object where the errors may be found, you can pass as many of these as you want
+ * @param {Object} data An object where the errors may be found. You can pass as many of these as you want. If it contains "errors" property, then errors[0] is the first error. If it contains an "error" property, than that's the first error. Otherwise, for the first argument only, if it is nonempty, then it's considered an error.
  * @return {String|null} The first error message found, or null
  */
 Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
@@ -2703,7 +2706,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 			error = d.error;
 		} else if (Q.isArrayLike(d)) {
 			error = d[0];
-		} else {
+		} else if (!i) {
 			error = d;
 		}
 		if (error) {

@@ -28,7 +28,7 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="<?php echo Q_Html::themedUrl('img/icon/144.png') ?>">
 
-	<title><?php echo $title; ?></title>
+	<title id="title_slot"><?php echo $title; ?></title>
 	<link rel="shortcut icon" href="<?php echo Q_Request::baseUrl() ?>/favicon.ico" type="image/x-icon">
 	
 	<script type="text/javascript">

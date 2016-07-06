@@ -1046,7 +1046,8 @@ class Q
 	 * @param {bool} $timestamp=true
 	 *  whether to prepend the current timestamp
 	 * @param {array} $options
-	 *  Can be used to override "maxLength" and $depth
+	 * @param {integer} [$options.maxLength=ini_get('log_errors_max_len')]
+	 * @param {integer} [$options.maxDepth=3]
 	 * @throws {Q_Exception_MissingFile}
 	 *	If unable to create directory or file for the log
 	 */

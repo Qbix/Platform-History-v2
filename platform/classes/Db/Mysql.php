@@ -830,7 +830,7 @@ class Db_Mysql implements iDb
 		if (class_exists('Q_Config')) {
 			$separator = Q_Config::expect('Db', 'sql', 'querySeparator');
 		} else {
-			$separator = "\n-------- NEXT QUERY STARTS HERE --------\n";
+			$separator = "-------- NEXT QUERY STARTS HERE --------";
 		}
 		$found = strpos($script, $separator);
 		if ($found !== false) {
