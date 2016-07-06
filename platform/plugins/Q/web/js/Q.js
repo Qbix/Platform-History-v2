@@ -11030,6 +11030,7 @@ Q.request.options = {
 			quiet: true
 		});
 	},
+	resultFunction: "result",
 	onLoadStart: new Q.Event(),
 	onShowCancel: new Q.Event(),
 	onLoadEnd: new Q.Event(),
