@@ -2948,7 +2948,7 @@ Q.getter = function _Q_getter(original, options) {
 		
 		function _prepare(subject, params, callback, ret, cached) {
 			if (gw.prepare) {
-				gw.prepare.call(gw, subject, params, _result);
+				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
 				_result(subject, params);
 			}

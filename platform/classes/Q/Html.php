@@ -1000,16 +1000,17 @@ class Q_Html
 	
 	/**
 	 * Returns an HTML element ID, constrained to alphanumeric
-	 * characters with underscores, and possibly prefixed.
+	 * characters with dashes and underscores, and possibly prefixed.
 	 * @method id
 	 * @static
-	 * @param string $id Any string
+	 * @param {string} $id Any string
+	 * @param {string} [$prefix] To override the default prefix
 	 * @return {string}
 	 */
-	static function id($id)
+	static function id($id, $prefix = null)
 	{
-		$id = preg_replace('/[^A-Za-z0-9]/', '_', $id);
-		$prefix = self::getIdPrefix();
+		$id = preg_replace('/[^A-Za-z0-9-]/', '_', $id);
+		$prefix = isset($prefix) ? $prefix : self::getIdPrefix();
 		return $prefix ? $prefix.$id : $id;
 	}
 	
