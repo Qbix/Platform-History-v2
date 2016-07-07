@@ -26,9 +26,8 @@ function Streams_after_Q_file_save($params)
 	$stream->icon = file_exists($dirname.DS.$extension)
 		? "$urlPrefix/$extension"
 		: "$urlPrefix/_blank";
-	$user = Users::loggedInUser(); // may be null
 	if (empty(Streams::$beingSavedQuery)) {
-		$stream->changed($user->id);
+		$stream->changed();
 	} else {
 		$stream->save();
 	}
