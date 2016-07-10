@@ -6770,10 +6770,10 @@ Q.clientId = function () {
 	var detected = Q.Browser.detect();
 	var code = Math.floor(Date.now()/1000)*1000 + Math.floor(Math.random()*1000);
 	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
-		+ "\t" + detected.OS.substr(0, 3)
-		+ "\t" + detected.name.substr(0, 3)
-		+ "\t" + detected.mainVersion + (detected.isWebView ? "n" : "w")
-		+ "\t" + code.toString(36);
+		+ "-" + Q.normalize(detected.OS.substr(0, 3))
+		+ "-" + Q.normalize(detected.name.substr(0, 3))
+		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
+		+ "-" + code.toString(36);
 	storage.setItem("Q\tclientId", ret);
 	return ret;
 };
