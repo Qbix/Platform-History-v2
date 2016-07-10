@@ -1824,19 +1824,21 @@ Q.onInit.add(function () {
 		}, 'Q.Layout');
 	}
 	
-	//jQuery Tools tooltip and validator plugins configuration
-	var tooltipConf = jQuery.tools.tooltip.conf;
-	tooltipConf.tipClass = 'Q_tooltip';
-	tooltipConf.effect = 'fade';
-	tooltipConf.opacity = 1;
-	tooltipConf.position = 'bottom center';
-	tooltipConf.offset = [0, 0];
-	var validatorConf = jQuery.tools.validator.conf;
-	validatorConf.errorClass = 'Q_errors';
-	validatorConf.messageClass = 'Q_error_message';
-	validatorConf.position = 'bottom left';
-	validatorConf.offset = [0, 0];
-	// end of jQuery Tools configuration
+	if (window.jQuery && jQuery.tools) {
+		//jQuery Tools tooltip and validator plugins configuration
+		var tooltipConf = jQuery.tools.tooltip.conf;
+		tooltipConf.tipClass = 'Q_tooltip';
+		tooltipConf.effect = 'fade';
+		tooltipConf.opacity = 1;
+		tooltipConf.position = 'bottom center';
+		tooltipConf.offset = [0, 0];
+		var validatorConf = jQuery.tools.validator.conf;
+		validatorConf.errorClass = 'Q_errors';
+		validatorConf.messageClass = 'Q_error_message';
+		validatorConf.position = 'bottom left';
+		validatorConf.offset = [0, 0];
+		// end of jQuery Tools configuration
+	}
 	
 }, 'Q.Layout');
 
