@@ -5203,9 +5203,14 @@ Q.ready = function _Q_ready() {
  * @param {Array} args The arguments to pass to the callback
  */
 Q.loadNonce = function _Q_loadNonce(callback, context, args) {
-	// Q.nonce = Q.cookie('Q_nonce');
 	if (Q.nonce) {
 		Q.handle(callback, context, args);
+		return;
+	}
+	var p1 = Q.info.baseUrl.parseUrl();
+	var p2 = location.href.parseUrl();
+	if (p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
+		Q.handle(callback, context, args); // nonce won't load cross-origin anyway
 		return;
 	}
 	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
