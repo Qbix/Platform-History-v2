@@ -9,7 +9,8 @@ class Q_Exception_CantWriteToPath extends Q_Exception
 	 * @class Q_Exception_CantWriteToPath
 	 * @constructor
 	 * @extends Q_Exception
-	 * @param {string} $keys
+	 * @param {string} $path
+	 * @param {string} $mkdirIfMissing
 	 */
 };
 

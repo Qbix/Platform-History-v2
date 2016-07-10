@@ -50,7 +50,7 @@ class Q_File
 			$writePath .= DS;
 		}
 		$skipAccess = !empty($params['skipAccess']);
-		Q_Utils::canWriteToPath($writePath, !$skipAccess, true);
+		Q_Utils::canWriteToPath($writePath, $skipAccess ? null : true, true);
 		file_put_contents($writePath.$name, $data);
 
 		$tailUrl = $subpath ? "$path/$subpath/$name" : "$path/$name";
