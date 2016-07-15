@@ -5712,7 +5712,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			}
 		}
 		if ('nonce' in Q) {
-			what2.["Q.nonce"] = Q.nonce;
+			what2["Q.nonce"] = Q.nonce;
 		}
 	}
 	return what2;
