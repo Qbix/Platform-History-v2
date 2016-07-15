@@ -9289,12 +9289,12 @@ _touchBlurHandler.options = {
 };
 
 function _detectOrientation(e) {
-	var w = window,
-	    d = document,
-	    h = d.documentElement,
-	    b = d.getElementsByTagName('body')[0],
-	    x = w.innerWidth || h.clientWidth || b.clientWidth,
-	    y = w.innerHeight|| h.clientHeight|| b.clientHeight;
+	var w = window;
+	var d = document;
+	var h = d.documentElement;
+	var b = d.getElementsByTagName('body')[0];
+	var x = w.innerWidth || h.clientWidth || (b && b.clientWidth);
+	var y = w.innerHeight|| h.clientHeight|| (b && b.clientHeight);
 	if (x > y) {
 		h.removeClass('Q_verticalOrientation')
 			.addClass('Q_horizontalOrientation');
