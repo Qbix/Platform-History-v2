@@ -6227,8 +6227,10 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 		method = form.method;
 	} else if (o.form) {
 		method = method || o.form.method || "POST";
+		action = action || o.form.action || "";
 	} else {
 		method = method || "POST";
+		action = action || "";
 	}
 	method = method.toUpperCase();
 	var onload;
