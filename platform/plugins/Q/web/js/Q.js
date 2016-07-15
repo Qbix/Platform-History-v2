@@ -5950,12 +5950,11 @@ Q.request = function (url, slotNames, callback, options) {
 		}
 
 		if (o.form) {
-			var method = options.method || 'GET';
 			if (o.extend !== false) {
 				overrides.iframe = true;
 				url = Q.ajaxExtend(url, slotNames, overrides);
 			}
-			Q.formPost(url, o.fields, method, {
+			Q.formPost(url, o.fields, o.method, {
 				form: o.form,
 				onLoad: function (iframe) {
 					var resultFunction = o.resultFunction
@@ -6204,7 +6203,7 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
  * @param {String|HTMLElement} action The form action. You can also pass an
  *  HTML form element here, and skip fields and method.
  * @param {Object} [fields]  The parameters of the form
- * @param {String} [method] The method with which to submit the form
+ * @param {String} [method] The method with which to submit the form. Defaults to the form's method, or "post" if missing.
  * @param {Object|Boolean} options 
  *  You can pass true here to just submit the form and load the results in a new page in this window.
  *  Or provide an optional object which can contain the following:
@@ -6226,9 +6225,12 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 		o.form = action;
 		action = action.action;
 		method = form.method;
+	} else if (o.form) {
+		method = method || o.form.method || "POST";
 	} else {
-		method = method || "post"; // Set method to post by default, if not specified.
+		method = method || "POST";
 	}
+	method = method.toUpperCase();
 	var onload;
 	if (o.onLoad) {
 		onload = (o.onLoad.typename === 'Q.Event')

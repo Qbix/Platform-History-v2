@@ -92,12 +92,13 @@ function Row(fields, retrieved /* false */) {
 		return function Db_Row_setter(x) {
 			var row = this._row;
 			// we shall skip beforeSet_xxx during shards split process to get exact copy of the data
-			if (!_split && row["beforeSet_" + k]
-			&& (typeof row["beforeSet_" + k] === "function")) {
+			var safe = k.replace(/[^0-9a-zA-Z\_]/, '_');
+			if (!_split && row["beforeSet_" + safe]
+			&& (typeof row["beforeSet_" + safe] === "function")) {
 				// NOTE: this is synchronous, we wouldn't be able to do any async,
 				// and since Node is a single thread, we shouldn't do I/O at all in them!
 				// This should be documented.
-				var result = row["beforeSet_" + k].call(row, x, row._fields);
+				var result = row["beforeSet_" + safe].call(row, x, row._fields);
 				if (result !== undefined) {
 					x = result;
 				}

@@ -94,6 +94,7 @@ class Db_Row implements Iterator
 	 *  <li>
 	 *     <b>beforeSet_$name($value)</b>
 	 *     Called before the field named $name is set.
+	 *     (Any illegal characters for function names are replaced with underscores)
 	 *     Return <i>array($internal_name, $value)</i> of the field.
 	 *     Handy when changing the name of the field inside the database layer,
 	 *     as well as validating the value, etc.
@@ -101,6 +102,7 @@ class Db_Row implements Iterator
 	 *  <li>
 	 *     <b>afterSet_$name($value)</b>
 	 *     Called after the field named $name has been set.
+	 *     (Any illegal characters for function names are replaced with underscores)
 	 *  </li>
 	 *  <li>
 	 *     <b>afterSet($name, $value)</b>
@@ -931,8 +933,9 @@ class Db_Row implements Iterator
 	function __set ($name, $value)
 	{
 		$name_internal = $name;
-	
-		$callback = array($this, "beforeSet_$name");
+		$name_safe = preg_replace('/[^0-9a-zA-Z\_]/', '_', $name);
+		
+		$callback = array($this, "beforeSet_$name_safe");
 		if (is_callable($callback))
 			list ($name_internal, $value) = call_user_func($callback, $value);
 
@@ -942,7 +945,7 @@ class Db_Row implements Iterator
 		$this->fields[$name_internal] = $value;
 		$this->fieldsModified[$name_internal] = true;
 		
-		$callback = array($this, "afterSet_$name");
+		$callback = array($this, "afterSet_$name_safe");
 		if (is_callable($callback)) {
 			$value = call_user_func($callback, $value);
 		}
