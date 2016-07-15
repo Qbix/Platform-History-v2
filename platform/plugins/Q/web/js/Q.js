@@ -6299,15 +6299,17 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 		form.setAttribute("target", name);
 	}
 	form.submit();
-	if (!o.form) {
-		Q.removeElement(form);
-	} else {
-		for (var i=hiddenFields.length-1; i>=0; --i) {
-			Q.removeElement(hiddenFields[i]);
+	setTimeout(function () {
+		if (!o.form) {
+			Q.removeElement(form);
+		} else {
+			for (var i=hiddenFields.length-1; i>=0; --i) {
+				Q.removeElement(hiddenFields[i]);
+			}
+			form.action = oldAction;
+			form.method = oldMethod;
 		}
-		form.action = oldAction;
-		form.method = oldMethod;
-	}
+	}, 0);
 };
 Q.formPost.counter = 0;
 
