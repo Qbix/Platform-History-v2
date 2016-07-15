@@ -16,11 +16,7 @@ function Q_before_Q_tool_render($params, &$result)
 	$tool_ids = array();
 	$tool_prefixes = array();
 	foreach ($info as $name => $options) {
-		$tool_id = implode('_', explode('/', $name));
-		if ($extra_id !== '') {
-			$tool_id .= ('-'.$extra_id);
-		}
-		$tool_id = $cur_prefix . $tool_id;
+		$tool_id = Q_Html::id($name . ($extra_id === '' ? '' : "-$extra_id"), $cur_prefix);
 		$tool_ids[$name] = $tool_id;
 		$tool_prefix = $tool_id.'_';
 		if (isset(Q::$toolWasRendered[$tool_prefix])) {

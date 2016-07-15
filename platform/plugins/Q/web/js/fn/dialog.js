@@ -540,6 +540,9 @@ function _handlePosAndScroll(o)
 		clearInterval(interval);
 	}
 
+	// TODO: LET'S PLEASE GET RID OF ALL DEPENDENCIES ON QTools.js
+	// AND REMOVE IT FROM THE PLATFORM
+
 	Q.addScript("plugins/Q/js/QTools.js", function () {
 
 	interval = setInterval(function() {

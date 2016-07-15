@@ -2948,7 +2948,7 @@ Q.getter = function _Q_getter(original, options) {
 		
 		function _prepare(subject, params, callback, ret, cached) {
 			if (gw.prepare) {
-				gw.prepare.call(gw, subject, params, _result);
+				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
 				_result(subject, params);
 			}
@@ -5203,9 +5203,14 @@ Q.ready = function _Q_ready() {
  * @param {Array} args The arguments to pass to the callback
  */
 Q.loadNonce = function _Q_loadNonce(callback, context, args) {
-	// Q.nonce = Q.cookie('Q_nonce');
 	if (Q.nonce) {
 		Q.handle(callback, context, args);
+		return;
+	}
+	var p1 = Q.info.baseUrl.parseUrl();
+	var p2 = location.href.parseUrl();
+	if (p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
+		Q.handle(callback, context, args); // nonce won't load cross-origin anyway
 		return;
 	}
 	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
@@ -6765,10 +6770,10 @@ Q.clientId = function () {
 	var detected = Q.Browser.detect();
 	var code = Math.floor(Date.now()/1000)*1000 + Math.floor(Math.random()*1000);
 	var ret = Q.clientId.value = (detected.device || "desktop").substr(0, 4)
-		+ "\t" + detected.OS.substr(0, 3)
-		+ "\t" + detected.name.substr(0, 3)
-		+ "\t" + detected.mainVersion + (detected.isWebView ? "n" : "w")
-		+ "\t" + code.toString(36);
+		+ "-" + Q.normalize(detected.OS.substr(0, 3))
+		+ "-" + Q.normalize(detected.name.substr(0, 3))
+		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
+		+ "-" + code.toString(36);
 	storage.setItem("Q\tclientId", ret);
 	return ret;
 };

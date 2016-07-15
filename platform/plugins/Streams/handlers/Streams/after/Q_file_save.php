@@ -2,7 +2,6 @@
 
 function Streams_after_Q_file_save($params)
 {
-	$user = Users::loggedInUser(true);
 	$path = $subpath = $name = $writePath = $data = $tailUrl = null;
 	extract($params, EXTR_OVERWRITE);
 	if (!empty(Streams::$cache['canWriteToStream'])) {
@@ -28,7 +27,7 @@ function Streams_after_Q_file_save($params)
 		? "$urlPrefix/$extension"
 		: "$urlPrefix/_blank";
 	if (empty(Streams::$beingSavedQuery)) {
-		$stream->changed($user->id);
+		$stream->changed();
 	} else {
 		$stream->save();
 	}

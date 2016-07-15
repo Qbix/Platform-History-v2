@@ -2564,7 +2564,7 @@ var Message = Streams.Message = function Streams_Message(fields) {
  * @static
  * @method construct
  * @param {Object} fields Provide any message fields here. Requires at least the "type" of the stream.
- * @param {Boolean} [updateCache=false] Whether to update the Message.get cache after constructing the stream
+ * @param {Boolean} [updateCache=false] Whether to update the Message.get cache after constructing the Message
  * @return {Q.Stream}
  */
 Message.construct = function Streams_Message_construct(fields, updateCache) {
@@ -3689,17 +3689,57 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 
 	Message.get = Q.getter(Message.get, {
 		cache: Q.Cache[where]("Streams.Message.get", 1000), 
-		throttle: 'Streams.Message.get'
+		throttle: 'Streams.Message.get',
+		prepare: function (subject, params, callback, args) {
+			if (params[0]) {
+				return callback(this, params);
+			}
+			if (params[0]) {
+				return callback(this, params);
+			}
+			if (Q.isPlainObject(args[2])) {
+				var p1 = params[1];
+				Q.each(p1, function (ordinal, message) {
+					message = Message.construct(message, true);
+					p1[ordinal] = message;
+				});
+			} else {
+				params[1] = Message.construct(message, true);
+			}
+			callback(params[1], params);
+		}
 	});
 
 	Participant.get = Q.getter(Participant.get, {
 		cache: Q.Cache[where]("Streams.Participant.get", 1000), 
-		throttle: 'Streams.Participant.get'
+		throttle: 'Streams.Participant.get',
+		prepare: function (subject, params, callback, args) {
+			if (params[0]) {
+				return callback(this, params);
+			}
+			if (Q.isPlainObject(args[2])) {
+				var p1 = params[1];
+				Q.each(p1, function (userId, participant) {
+					participant = new Participant(participant);
+					p1[userId] = participant;
+				});
+			} else {
+				params[1] = new Participant(subject);
+			}
+			callback(params[1], params);
+		}
 	});
 
 	Avatar.get = Q.getter(Avatar.get, {
 		cache: Q.Cache[where]("Streams.Avatar.get", 1000), 
-		throttle: 'Streams.Avatar.get'
+		throttle: 'Streams.Avatar.get',
+		prepare: function (subject, params, callback) {
+			if (params[0]) {
+				return callback(this, params);
+			}
+			params[1] = new Avatar(subject);
+			callback(params[1], params);
+		}
 	});
 
 	Avatar.byPrefix = Q.getter(Avatar.byPrefix, {

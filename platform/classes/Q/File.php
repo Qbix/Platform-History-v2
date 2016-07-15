@@ -49,9 +49,9 @@ class Q_File
 		if ($lastChar !== DS and $lastChar !== '/') {
 			$writePath .= DS;
 		}
-		$throwIfNotWritable = empty($params['skipAccess']) ? true : null;
-		Q_Utils::canWriteToPath($writePath, $throwIfNotWritable, true);
-		file_put_contents($writePath.DS.$name, $data);
+		$skipAccess = !empty($params['skipAccess']);
+		Q_Utils::canWriteToPath($writePath, $skipAccess ? null : true, true);
+		file_put_contents($writePath.$name, $data);
 
 		$tailUrl = $subpath ? "$path/$subpath/$name" : "$path/$name";
 
@@ -66,7 +66,7 @@ class Q_File
 		 */
 		Q::event(
 			'Q/file/save', 
-			compact('path', 'subpath', 'name', 'writePath', 'data', 'tailUrl'),
+			compact('path', 'subpath', 'name', 'writePath', 'data', 'tailUrl', 'skipAccess'),
 			'after'
 		);
 		return array($name => $tailUrl);
