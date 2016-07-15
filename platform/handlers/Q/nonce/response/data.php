@@ -6,7 +6,6 @@ function Q_nonce_response_data()
 	if ($method !== 'POST') {
 		throw new Q_Exception_MethodNotSupported($method);
 	}
-	Q_Session::setNonce();
 
 	// we could technically return the nonce in the response,
 	// because other sites can't read the response from a cross-domain post
