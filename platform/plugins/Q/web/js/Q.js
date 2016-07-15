@@ -5655,14 +5655,14 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			: (options.idPrefixes && options.idPrefixes.join(',')))
 		: '';
 	var timestamp = Date.now();
+	var ajax = options.iframe ? 'iframe'
+		: (options.loadExtras ? 'loadExtras' : 'json');
 	if (typeof what == 'string') {
 		var what2 = what;
 		if (Q.info && Q.info.baseUrl === what2) {
 			what2 += '/'; // otherwise we will have 301 redirect with trailing slash on most servers
 		}
 		what2 += (what.indexOf('?') < 0) ? '?' : '&';
-		var ajax = options.iframe ? 'iframe'
-			: (options.loadExtras ? 'loadExtras' : 'json');
 		what2 += encodeURI('Q.ajax='+ajax);
 		if (options.timestamp) {
 			what2 += encodeURI('&Q.timestamp=')+encodeURIComponent(timestamp);
@@ -5693,26 +5693,26 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 		for (var k in what) {
 			what2[k] =  what[k];
 		}
-		what2.Q = { "ajax": "json" };
+		what2["Q.ajax"] = ajax;
 		if (options.timestamp) {
-			what2.Q.timestamp = timestamp;
+			what2["Q.timestamp"] = timestamp;
 		}
 		if (slotNames) {
-			what2.slotNames = slotNames2;
+			what2["Q.slotNames"] = slotNames2;
 		}
 		if (options) {
 			if (options.callback) {
-				what2.Q.callback = options.callback;
+				what2["Q.callback"] = options.callback;
 			}
 			if ('echo' in options) {
-				what2.Q.echo = options.echo;
+				what2["Q.echo"] = options.echo;
 			}
 			if (options.method) {
-				what2.Q.method = options.method;
+				what2["Q.method"] = options.method;
 			}
 		}
 		if ('nonce' in Q) {
-			what2.Q.nonce = Q.nonce;
+			what2.["Q.nonce"] = Q.nonce;
 		}
 	}
 	return what2;
@@ -5952,7 +5952,7 @@ Q.request = function (url, slotNames, callback, options) {
 		if (o.form) {
 			if (o.extend !== false) {
 				overrides.iframe = true;
-				url = Q.ajaxExtend(url, slotNames, overrides);
+				o.fields = Q.ajaxExtend(o.fields || {}, slotNames, overrides);
 			}
 			Q.formPost(url, o.fields, o.method, {
 				form: o.form,
