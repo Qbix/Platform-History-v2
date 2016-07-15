@@ -3643,7 +3643,7 @@ Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 
 Q.beforeInit.add(function _Streams_beforeInit() {
 
-	var where = Streams.cache.where || 'local';
+	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
 		cache: Q.Cache[where]("Streams.get", 100), 
