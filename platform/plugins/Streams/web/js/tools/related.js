@@ -38,7 +38,7 @@ function _Streams_related_tool (options)
 	var state = this.state;
 	if ((!state.publisherId || !state.streamName)
 	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
-		throw new Q.Error("Streams/related tool: missing options.stream");
+		throw new Q.Error("Streams/related tool: missing publisherId and streamName");
 	}
 
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
@@ -181,7 +181,7 @@ function _Streams_related_tool (options)
 			}
 		}
 		
-		var elements = [];
+		tool.previewElements = [];
 		Q.each(result.relations, function (i) {
 			if (!this.from) return;
 			var tff = this.from.fields;
@@ -192,12 +192,18 @@ function _Streams_related_tool (options)
 				this.weight
 			);
 			$(element).addClass('Streams_related_stream');
-			elements.push(element);
+			tool.previewElements.push(element);
 			$container.append(element);
 		});
 		Q.activate(tool.element, function () {
-			tool.integrateWithTabs(elements);
+			var tpe = this.previewElements;
+			tool.integrateWithTabs(tpe);
 			tool.state.onRefresh.handle.call(tool);
+			tool.previewTools = {};
+			for (var i=0, l=tpe.length; i<l; ++i) {
+				var ps = tpe[i].Q("Streams/preview").state;
+				Q.setObject([ps.publisherId, ps.name], tpe[i], tool.previewTools);
+			}
 		});
 		// The elements should animate to their respective positions, like in D3.
 
@@ -378,6 +384,9 @@ function _Streams_related_tool (options)
 			});
 			tabs.refresh();
 		}
+	},
+	previewToolFromStream: function (publisherId, streamName) {
+		return Q.getObject([publisherId, streamName], this.previewTools);
 	},
 	Q: {
 		beforeRemove: function () {
