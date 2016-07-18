@@ -867,7 +867,7 @@ Streams.getParticipating = function(callback) {
  *   @param {Number} [options.minSeconds] Streams.refresh.options.minEvents is the minimum number of seconds to wait between automatic refreshes
  *   @param {Number} [options.timeout] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
  *   @param {Number} [options.unlessSocket] Whether to avoid doing any requests when a socket is attached
- *   @param {Object} [options.changed] An Object of {fieldName: true} pairs naming fields to trigger change events for, even if their values stayed the same
+ *   @param {Object} [options.changed=null] An Object of {fieldName: true} pairs naming fields to trigger change events for, even if their values stayed the same.
  *   @param {Boolean} [options.evenIfNotRetained] If the stream wasn't retained (for example because it was missing last time), then refresh anyway
  *   @param {Object} [options.extra] Any extra parameters to pass to the callback
  * @return {boolean} whether the refresh occurred
@@ -1348,7 +1348,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  *   @param {Number} [options.max] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
  *   @param {Number} [options.timeout] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
  *   @param {Number} [options.unlessSocket] Whether to avoid doing any requests when a socket is attached
- *   @param {Object} [options.changed] An Object of {fieldName: true} pairs naming fields to trigger change events for, even if their values stayed the same
+ *   @param {Object} [options.changed=null] An Object of {fieldName: true} pairs naming fields to trigger change events for, even if their values stayed the same.
  *   @param {Boolean} [options.evenIfNotRetained] If the stream wasn't retained (for example because it was missing last time), then refresh anyway
  *   @param {Object} [options.extra] Any extra parameters to pass to the callback
  * @return {boolean} Whether callback will be called, or false if the refresh has been canceled
@@ -1387,7 +1387,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			if (!err) {
 				var ps = Streams.key(publisherId, streamName);
 				var changed = (options && options.changed) || {};
-				Stream.update(_retainedStreams[ps], this.fields, changed);
+				Stream.update(_retainedStreams[ps], this.fields, changed || {});
 				_retainedStreams[ps] = this;
 			}
 			if (callback) {
@@ -2799,6 +2799,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
 /**
  * Wait until a particular message is posted.
  * Used by Streams plugin to make sure messages arrive in order.
+ * Call this with ordinal = -1 to load the latest messages.
  * 
  * @static
  * @method wait
@@ -3495,7 +3496,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	for (k in fields) {
 		if (onlyChangedFields
 		&& fields[k] === stream.fields[k]
-		&& !(k in onlyChangedFields)) {
+		&& !Q.has(onlyChangedFields, k)) {
 			continue;
 		}
 		Q.handle(

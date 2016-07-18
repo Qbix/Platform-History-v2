@@ -41,7 +41,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 		if (err) {
 			return tool.state.onError.handle(err);
 		}
-		var stream = state.stream = this;
+		var stream = this;
 		state.publisherId = stream.fields.publisherId;
 		state.streamName = stream.fields.name;
 		
@@ -56,7 +56,6 @@ Q.Tool.define("Streams/inplace", function (options) {
 				tool.$static = tool.$('.Q_inplace_tool_static, .Q_inplace_tool_blockstatic');
 			}
 			Q.Streams.get(state.publisherId, state.streamName, function () {
-				state.stream = this;
 				var placeholder = tool.inplace && tool.inplace.state.placeholder
 					&& String(tool.inplace.state.placeholder).encodeHTML();
 				var $e, html = String(content || '').encodeHTML()
@@ -100,7 +99,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				if (attributes[k] !== null) {
 					_setContent(attributes[k]);
 				} else {
-					state.stream.refresh(function () {
+					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
 						_setContent(this.get(k));
 					});
 				}
@@ -111,7 +110,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				if (fields[k] !== null) {
 					_setContent(fields[k]);
 				} else {
-					state.stream.refresh(function () {
+					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
 						_setContent(this.fields[k]);
 					});
 				}
@@ -126,9 +125,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				field: state.field,
 				type: state.inplaceType,
 				onSave: { 'Streams/inplace': function () {
-					state.stream.refresh(function () {
-						state.onUpdate.handle.call(tool);
-					}, {messages: true});
+					Q.Streams.Message.wait(state.publisherId, state.streamName, -1, null);
 				}}
 			});
 			var value = (state.attribute ? stream.get(state.attribute) : stream.fields[state.field]) || "";
@@ -190,8 +187,9 @@ Q.Tool.define("Streams/inplace", function (options) {
 	}
 	
 	if (state.stream) {
-		state.publisherId = state.stream.publisherId;
-		state.streamName = state.stream.name;
+		state.publisherId = state.stream.fields.publisherId;
+		state.streamName = state.stream.fields.name;
+		delete state.stream;
 	}
 	if (!state.publisherId || !state.streamName) {
 		throw new Q.Error("Streams/inplace tool: stream is undefined");
@@ -223,7 +221,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				return;
 			}
 			inplace.state.onSave.set(function () {
-				state.stream.refresh(function () {
+				Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
 					state.onUpdate.handle.call(tool);
 				}, {messages: true});
 			}, 'Streams/inplace');

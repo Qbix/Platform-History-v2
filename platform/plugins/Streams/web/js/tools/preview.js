@@ -188,16 +188,16 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				}
 				state.publisherId = this.fields.publisherId;
 				state.streamName = this.fields.name;
-				tool.stream = this;
 				var wait = this.refresh(Streams_preview_afterCreateRefresh, {
 					messages: true
 				});
 				if (wait === false) {
 					Streams_preview_afterCreateRefresh();
 				}
+				var stream = this;
 				function Streams_preview_afterCreateRefresh(r) {
-					state.onCreate.handle.call(tool, tool.stream);
-					Q.handle(callback, tool, [tool.stream]);
+					state.onCreate.handle.call(tool, stream);
+					Q.handle(callback, tool, [stream]);
 					tool.preview();
 				}
 			}, r, state.creatable.options);
@@ -270,7 +270,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				$(tool.element).addClass('Streams_closed');
 			}
 			// trigger the refresh when it's ready
-			tool.stream = this;
 			state.onRefresh.handle.call(tool, this, state.onLoad.handle);
 			setTimeout(function () {
 				tool.actions();
@@ -278,7 +277,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		});
 		Q.Streams.Stream.onFieldChanged(state.publisherId, state.streamName)
 		.set(function (fields, updated) {
-			tool.stream = this;
 			setTimeout(function () {
 				for (var i=0, l=fields.length; i<l; ++i) {
 					tool.stateChanged('stream.fields.'+field[i]);
@@ -309,7 +307,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var state = tool.state;
 		options = options || {};
 		Q.Streams.get(state.publisherId, state.streamName, function () {
-			tool.stream = this;
 			// icon and imagepicker
 			var oss = state.overrideShowSize;
 			var fields = this.fields;
@@ -357,23 +354,25 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					var ipo = Q.extend({}, si, 10, {
 						preprocess: function (callback) {
 							var subpath;
-							var parts = tool.stream.iconUrl(40).split('/');
-							var iconUrl = parts.slice(0, parts.length-1).join('/')
-								.substr(Q.info.baseUrl.length+1);
-							if (parts[1] === 'Users') {
-								// uploading a user icon
-								path = 'uploads/Users';
-								subpath = state.publisherId.splitId() + '/icon';
-							} else { // uploading a regular stream icon
-								path = 'uploads/Streams';
-								subpath = state.publisherId.splitId() + '/'
-									+ state.streamName + '/icon';
-							}
-							subpath += '/'+Math.floor(Date.now()/1000);
-							callback({ path: path, subpath: subpath });
+							Q.Streams.get(tool.publisherId, tool.streamName, function () {
+								var parts = this.iconUrl(40).split('/');
+								var iconUrl = parts.slice(0, parts.length-1).join('/')
+									.substr(Q.info.baseUrl.length+1);
+								if (parts[1] === 'Users') {
+									// uploading a user icon
+									path = 'uploads/Users';
+									subpath = state.publisherId.splitId() + '/icon';
+								} else { // uploading a regular stream icon
+									path = 'uploads/Streams';
+									subpath = state.publisherId.splitId() + '/'
+										+ state.streamName + '/icon';
+								}
+								subpath += '/'+Math.floor(Date.now()/1000);
+								callback({ path: path, subpath: subpath });
+							});
 						},
 						onSuccess: {'Streams/preview': function (data, key, file) {
-							tool.stream.refresh(null, {
+							Q.Streams.Stream.refresh(state.publisherId, state.streamName, null, {
 								messages: true,
 								changed: {icon: true}
 							});
@@ -401,57 +400,61 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	actions: function _actions () {
 		var tool = this;
 		var state = tool.state;
-		// check if we should add this behavior
-		if (!state.actions
-		|| state.closeable === false
-		|| !tool.stream.testWriteLevel('close')) {
-			return false;
-		}
-		// add some actions
-		var actions = {};
-		var action = tool.stream.isRequired
-			? (tool.stream.fields.closedTime ? 'open' : 'close')
-			: 'remove';
-		if (action === 'open') {
-			actions[action] = function () {
-				tool.stream.reopen(function (err) {
-					if (err) return;
-					tool.state.onReopen.handle.call(tool);
-				});
-			};
-		} else {
-			actions[action] = function () {
-				if (state.beforeClose) {
-					Q.handle(state.beforeClose, tool, [_remove]);
-				} else {
-					_remove();
-				}
-				function _remove(cancel) {
-					if (cancel) return;
-					tool.element.addClass('Q_working');
-					Q.Masks.show(tool, {
-						shouldCover: tool.element, className: 'Q_removing'
-					});
-					tool.stream.close(function (err) {
+		Q.Streams.get(state.publisherId, state.streamName, function () {
+			// check if we should add this behavior
+			if (!state.actions
+			|| state.closeable === false
+			|| !this.testWriteLevel('close')) {
+				return false;
+			}
+			// add some actions
+			var actions = {};
+			var action = this.isRequired
+				? (this.fields.closedTime ? 'open' : 'close')
+				: 'remove';
+			if (action === 'open') {
+				actions[action] = function () {
+					this.reopen(function (err) {
 						if (err) return;
-						tool.state.onClose.handle.call(tool, !tool.stream.isRequired);
+						tool.state.onReopen.handle.call(tool);
 					});
-				}
-			};
-		}
-		var ao = Q.extend({}, state.actions, 10, { actions: actions });
-		tool.$().plugin('Q/actions', ao);
+				};
+			} else {
+				actions[action] = function () {
+					if (state.beforeClose) {
+						Q.handle(state.beforeClose, tool, [_remove]);
+					} else {
+						_remove();
+					}
+					function _remove(cancel) {
+						if (cancel) return;
+						tool.element.addClass('Q_working');
+						Q.Masks.show(tool, {
+							shouldCover: tool.element, className: 'Q_removing'
+						});
+						this.close(function (err) {
+							if (err) return;
+							tool.state.onClose.handle.call(tool, !this.isRequired);
+						});
+					}
+				};
+			}
+			var ao = Q.extend({}, state.actions, 10, { actions: actions });
+			tool.$().plugin('Q/actions', ao);	
+		});
 		return this;
 	},
 	close: function _close() {
 		var tool = this;
 		var state = tool.state;
-		tool.stream.close(function (err) {
-			if (err) {
-				alert(err);
-				return;
-			}
-			state.onClose.handle.call(tool);
+		Q.Streams.get(state.publisherId, state.streamName, function () {
+			this.close(function (err) {
+				if (err) {
+					alert(err);
+					return;
+				}
+				state.onClose.handle.call(tool);
+			});
 		});
 	},
 	Q: {
