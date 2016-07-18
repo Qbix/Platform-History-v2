@@ -3502,17 +3502,17 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		Q.handle(
 			Q.getObject([publisherId, streamName, k], _streamFieldChangedHandlers),
 			stream,
-			[fields, k]
+			[fields, k, onlyChangedFields]
 		);
 		Q.handle(
 			Q.getObject([publisherId, '', k], _streamFieldChangedHandlers),
 			stream,
-			[fields, k]
+			[fields, k, onlyChangedFields]
 		);
 		Q.handle(
 			Q.getObject(['', streamName, k], _streamFieldChangedHandlers),
 			stream,
-			[fields, k]
+			[fields, k, onlyChangedFields]
 		);
 		updated[k] = fields[k];
 	}
@@ -3520,17 +3520,17 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		Q.handle(
 			Q.getObject([publisherId, streamName, ''], _streamFieldChangedHandlers),
 			stream,
-			[fields, updated]
+			[fields, updated, onlyChangedFields]
 		);
 		Q.handle(
 			Q.getObject([publisherId, '', ''], _streamFieldChangedHandlers),
 			stream,
-			[fields, updated]
+			[fields, updated, onlyChangedFields]
 		);
 		Q.handle(
 			Q.getObject(['', streamName, ''], _streamFieldChangedHandlers),
 			stream,
-			[fields, updated]
+			[fields, updated, onlyChangedFields]
 		);
 	}
 	if (('attributes' in fields)
@@ -3551,7 +3551,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			Q.handle(
 				Q.getObject([publisherId, streamName, k], _streamUpdatedHandlers),
 				stream,
-				[fields, obj, [k]]
+				[fields, obj, [k], onlyChangedFields]
 			);
 			updated[k] = undefined;
 			cleared.push(k);
@@ -3567,19 +3567,19 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			Q.handle(
 				Q.getObject([publisherId, streamName, k], _streamUpdatedHandlers),
 				stream,
-				[attributes, k]
+				[attributes, k, onlyChangedFields]
 			);
 			updated[k] = attributes[k];
 		}
 		Q.handle(
 			Q.getObject([publisherId, streamName, ''], _streamUpdatedHandlers),
 			stream,
-			[attributes, updated, cleared]
+			[attributes, updated, cleared, onlyChangedFields]
 		);
 		Q.handle(
 			Q.getObject([publisherId, '', ''], _streamUpdatedHandlers),
 			stream,
-			[attributes, updated, cleared]
+			[attributes, updated, cleared, onlyChangedFields]
 		);
 	}
 	// Now time to replace the fields in the stream with the incoming fields

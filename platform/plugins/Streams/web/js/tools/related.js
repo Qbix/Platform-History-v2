@@ -181,7 +181,7 @@ function _Streams_related_tool (options)
 			}
 		}
 		
-		tool.previewElements = [];
+		tool.previewElements = {};
 		Q.each(result.relations, function (i) {
 			if (!this.from) return;
 			var tff = this.from.fields;
@@ -192,18 +192,13 @@ function _Streams_related_tool (options)
 				this.weight
 			);
 			$(element).addClass('Streams_related_stream');
-			tool.previewElements.push(element);
+			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 			$container.append(element);
 		});
 		Q.activate(tool.element, function () {
 			var tpe = this.previewElements;
 			tool.integrateWithTabs(tpe);
 			tool.state.onRefresh.handle.call(tool);
-			tool.previewTools = {};
-			for (var i=0, l=tpe.length; i<l; ++i) {
-				var ps = tpe[i].Q("Streams/preview").state;
-				Q.setObject([ps.publisherId, ps.streamName], tpe[i], tool.previewTools);
-			}
 		});
 		// The elements should animate to their respective positions, like in D3.
 
@@ -385,8 +380,11 @@ function _Streams_related_tool (options)
 			tabs.refresh();
 		}
 	},
-	previewToolFromStream: function (publisherId, streamName) {
-		return Q.getObject([publisherId, streamName], this.previewTools);
+	previewElement: function (publisherId, streamName) {
+		return Q.getObject([publisherId, streamName], this.previewElements);
+	},
+	previewTool: function (publisherId, streamName) {
+		return Q.getObject([publisherId, streamName, 'Q', 'tool'], this.previewElements);
 	},
 	Q: {
 		beforeRemove: function () {
