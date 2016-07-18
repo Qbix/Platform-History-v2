@@ -202,7 +202,7 @@ function _Streams_related_tool (options)
 			tool.previewTools = {};
 			for (var i=0, l=tpe.length; i<l; ++i) {
 				var ps = tpe[i].Q("Streams/preview").state;
-				Q.setObject([ps.publisherId, ps.name], tpe[i], tool.previewTools);
+				Q.setObject([ps.publisherId, ps.streamName], tpe[i], tool.previewTools);
 			}
 		});
 		// The elements should animate to their respective positions, like in D3.
