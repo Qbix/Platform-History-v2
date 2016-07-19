@@ -182,6 +182,7 @@ function _Streams_related_tool (options)
 		}
 		
 		tool.previewElements = {};
+		var elements = [];
 		Q.each(result.relations, function (i) {
 			if (!this.from) return;
 			var tff = this.from.fields;
@@ -191,15 +192,24 @@ function _Streams_related_tool (options)
 				tff.type, 
 				this.weight
 			);
+			elements.push(element);
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 			$container.append(element);
 		});
-		Q.activate(tool.element, function () {
-			var tpe = this.previewElements;
-			tool.integrateWithTabs(tpe);
-			tool.state.onRefresh.handle.call(tool);
-		});
+		var i=0;
+		setTimeout(function _activatePreview() {
+			var element = elements[i++];
+			if (!element) {
+				var tpe = this.previewElements;
+				tool.integrateWithTabs(tpe);
+				tool.state.onRefresh.handle.call(tool);
+				return;
+			}
+			Q.activate(element, null, function () {
+				setTimeout(_activatePreview, 0);
+			});
+		}, 0);
 		// The elements should animate to their respective positions, like in D3.
 
 	}, "Streams/related"),
