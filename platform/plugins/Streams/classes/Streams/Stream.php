@@ -219,7 +219,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$field = ($className === 'Streams_Stream' ? 'name' : 'streamName');
 		$rows = call_user_func(array($className, 'select'), '*')
 			->where(array(
-				'publisherId' => array('', $this->publisherId), // generic or specific publisher
+				'publisherId' => array('', $publisherId), // generic or specific publisher
 				$field => $streamType.'/'
 			))->fetchDbRows();
 		return self::sortTemplateTypes($rows, 'publisherId', $templateType, $field);
