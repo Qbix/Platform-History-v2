@@ -152,11 +152,16 @@ class Streams_Stream extends Base_Streams_Stream
 		return Streams::invite($this->publisherId, $this->name, $who, $options);
 	}
 
-	private static function sortTemplateTypes($templates, $user_field, &$type, $nameField = 'streamName') {
-		$returnAll = ($type === true);
+	private static function sortTemplateTypes(
+		$templates, 
+		$userField, 
+		&$templateType, 
+		$nameField = 'streamName'
+	) {
+		$returnAll = ($templateType === true);
 		$ret = array(array(), array(), array(), array());
 		if (!$templates) {
-			$type = -1;
+			$templateType = -1;
 			return $returnAll ? $ret : null;
 		}
 		// The order of the templates will be from most specific to most generic:
@@ -164,12 +169,12 @@ class Streams_Stream extends Base_Streams_Stream
 		//	1. generic stream name and exact publisher id
 		//	2. exact stream name and generic publisher
 		//	3. generic stream name and generic publisher
-		// Note: Only -1, 1 and 3 are possible values stored in $type
+		// Note: Only -1, 1 and 3 are possible values stored in $templateType
 		// since templates are always selected ending in "/"
 		foreach ($templates as $t) {
 			$name = $t->$nameField;
 			$pos = strlen($name) - 1;
-			if ($t->$user_field === '') {
+			if ($t->$userField === '') {
 				$key = ($name[$pos] === '/' ? 3 : 2); // generic publisher;
 			} else {
 				$key = ($name[$pos] === '/' ? 1 : 0); // $userId
@@ -184,35 +189,69 @@ class Streams_Stream extends Base_Streams_Stream
 		// we are looking for exactly one template
 		for ($i=0; $i<4; $i++) {
 			if (!empty($ret[$i][0])) {
-				$type = $i;
+				$templateType = $i;
 				return $ret[$i][0];
 			}
 		}
 		return null;
 	}
 
-	protected function getStreamTemplate($class_name, &$type = null) {
+	/**
+	 * @method getStreamTemplate
+	 * @static
+	 * @param {string} $publisherId The publisher of the stream
+	 * @param {string} $streamType The type of the stream
+	 * @param {string} $className The class extending Db_Row to fetch from the database
+	 * @param {&integer} [$templateType=null] Gets filled with the template type 0-4. 
+	 *   Set to true to return all templates.
+	 * @return {Streams_Stream|array} Returns the template stream, 
+	 *   or an array if $templateType is true
+	 */
+	static function getStreamTemplate(
+		$publisherId, 
+		$streamType, 
+		$className, 
+		&$templateType = null
+	) {
 		// fetch template for stream's PK - publisher & name
-		// if $type == true return all found templates sorted by type,
+		// if $templateType == true return all found templates sorted by type,
 		// otherwise return one template and its type
-		$field = ($class_name === 'Streams_Stream' ? 'name' : 'streamName');
-		$rows = call_user_func(array($class_name, 'select'), '*')
+		$field = ($className === 'Streams_Stream' ? 'name' : 'streamName');
+		$rows = call_user_func(array($className, 'select'), '*')
 			->where(array(
 				'publisherId' => array('', $this->publisherId), // generic or specific publisher
-				$field => $this->type.'/'
+				$field => $streamType.'/'
 			))->fetchDbRows();
-		return self::sortTemplateTypes($rows, 'publisherId', $type, $field);
+		return self::sortTemplateTypes($rows, 'publisherId', $templateType, $field);
 	}
 	
-	protected function getSubscriptionTemplate($class_name, $userId, &$type = null) {
+	/**
+	 * @method getSubscriptionTemplate
+	 * @static
+	 * @param {string} $publisherId The publisher of the stream
+	 * @param {string} $streamType The type of the stream
+	 * @param {string} $className The class extending Db_Row to fetch from the database
+	 * @param {string} $ofUserId The id of the possible subscriber
+	 * @param {&integer} [$templateType=null] Gets filled with the template type 0-4. 
+	 *   Set to true to return all templates.
+	 * @return {Streams_Subscription|array} Returns the template subscription, 
+	 *   or an array if $templateType is true
+	 */
+	static function getSubscriptionTemplate(
+		$publisherId, 
+		$streamType, 
+		$className, 
+		$ofUserId, 
+		&$templateType = null
+	) {
 		// fetch template for subscription's PK - publisher, name & user
-		$rows = call_user_func(array($class_name, 'select'), '*')
+		$rows = call_user_func(array($className, 'select'), '*')
 			->where(array(
-				'publisherId' => $this->publisherId,
-				'streamName' => $this->type.'/', // generic or specific stream name
-				'ofUserId' => array('', $userId) // generic or specific subscriber user
+				'publisherId' => $publisherId,
+				'streamName' => $streamType.'/', // generic or specific stream name
+				'ofUserId' => array('', $ofUserId) // generic or specific subscriber user
 			))->fetchDbRows();
-		return self::sortTemplateTypes($rows , 'ofUserId', $type, 'streamName');
+		return self::sortTemplateTypes($rows , 'ofUserId', $templateType, 'streamName');
 	}
 
 	/**
@@ -248,7 +287,9 @@ class Streams_Stream extends Base_Streams_Stream
 			$magicFieldNames = array('insertedTime', 'updatedTime');
 			$privateFieldNames = array_diff($privateFieldNames, $magicFieldNames);
 
-			$streamTemplate = $this->getStreamTemplate('Streams_Stream');
+			$streamTemplate = self::getStreamTemplate(
+				$this->publisherId, $this->type, 'Streams_Stream'
+			);
 			$fieldNames = Streams_Stream::fieldNames();
 
 			if ($streamTemplate) {
@@ -287,8 +328,10 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 
 			// Get all access templates and save corresponding access
-			$type = true;
-			$accessTemplates = $this->getStreamTemplate('Streams_Access', $type);
+			$templateType = true;
+			$accessTemplates = self::getStreamTemplate(
+				$this->publisherid, $this->type, 'Streams_Access', $templateType
+			);
 			for ($i=1; $i<=3; ++$i) {
 				foreach ($accessTemplates[$i] as $template) {
 					$access = new Streams_Access();
@@ -1095,6 +1138,7 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Returns whether the stream is required for the user, and thus shouldn't be deleted,
 	 * even if it has been marked closed.
+	 * @method isRequired
 	 * @return {Boolean}
 	 */
 	function isRequired()
@@ -1768,6 +1812,29 @@ class Streams_Stream extends Base_Streams_Stream
 		$parts = explode('/', $streamType);
 		$default = end($parts);
 		return self::getConfigField($streamType, 'displayType', $default);
+	}
+	
+	/**
+	 * Find out whether a certain field is restricted from being
+	 * edited by clients via the regular Streams REST API.
+	 * @method restrictedFromClient
+	 * @static
+	 * @param {string} $streamType
+	 * @param {string} $fieldName
+	 * @param {string} [$whenCreating=false]
+	 * @return {boolean}
+	 */
+	static function restrictedFromClient($streamType, $fieldName, $whenCreating = false)
+	{
+		$during = $whenCreating ? 'create' : 'edit';
+		$info = Streams_Stream::getConfigField($streamType, $during, false);
+		if (!$info) {
+			return true;
+		}
+		if (is_array($info) and !in_array($fieldName, $info)) {
+			return true;
+		}
+		return false;
 	}
 
 	/* * * */

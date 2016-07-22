@@ -329,13 +329,22 @@ function _sortTemplateTypes(templates, field, returnAll, nameField) {
 	return null;
 }
 
-Sp.getSubscriptionTemplate = function(className, userId, callback, returnAll) {
+/**
+ * @method getSubscriptionTemplate
+ * @param {String} className The class extending Db_Row to fetch from the database
+ * @param {String} ofUserId The id of the possible subscriber
+ * @param {&integer} [templateType=null] Gets filled with the template type 0-4. 
+ *   Set to true to return all templates.
+ * @return {Streams.Subscription|Array} Returns the template subscription, 
+ *   or an array if $templateType is true
+ */
+Sp.getSubscriptionTemplate = function(className, ofUserId, callback, returnAll) {
 	// fetch template for subscription's PK - publisher, name & user
 	var stream = this;
 	Streams[className].SELECT('*').where({
 		publisherId: stream.fields.publisherId,
-		streamName: [stream.fields.name, stream.fields.type+'/'],
-		ofUserId: ['', userId]
+		streamName: stream.fields.type+'/',
+		ofUserId: ['', ofUserId]
 	}).execute(function(err, res) {
 		if (err) {
 			return callback.call(stream, err);
@@ -1228,5 +1237,29 @@ Sp.url = function ()
 	});
 	return Q.Uri && Q.Uri.from(uriString).toUrl();
 }
+
+/**
+ * Find out whether a certain field is restricted from being
+ * edited by clients via the regular Streams REST API.
+ * @method restrictedFromClient
+ * @static
+ * @param {String} streamType
+ * @param {String} fieldName
+ * @param {String} [whenCreating=false]
+ * @return {Boolean}
+ */
+Streams_Stream.restrictedFromClient = function Streams_Stream_restrictedFromClient(
+	streamType, fieldName, whenCreating
+) {
+	var during = whenCreating ? 'create' : 'edit';
+	var info = Streams_Stream.getConfigField(streamType, during, false);
+	if (!info) {
+		return true;
+	}
+	if (Q.isArrayLike(info) && info.indexOf(fieldName) < 0) {
+		return true;
+	}
+	return false;
+};
 
 module.exports = Streams_Stream;
