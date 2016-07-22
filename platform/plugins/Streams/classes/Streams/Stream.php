@@ -330,7 +330,7 @@ class Streams_Stream extends Base_Streams_Stream
 			// Get all access templates and save corresponding access
 			$templateType = true;
 			$accessTemplates = self::getStreamTemplate(
-				$this->publisherid, $this->type, 'Streams_Access', $templateType
+				$this->publisherId, $this->type, 'Streams_Access', $templateType
 			);
 			for ($i=1; $i<=3; ++$i) {
 				foreach ($accessTemplates[$i] as $template) {
