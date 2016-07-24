@@ -97,7 +97,7 @@ abstract class Places extends Base_Places
 					$cd = Q_Config::get('Places', 'cache', 'duration', 60*60*24*30);
 					if ($ct - $ut < $cd) {
 						// there are cached autocomplete results that are still viable
-						return json_decode($pa->results, true);
+						return Q::json_decode($pa->results, true);
 					}
 				}
 			}

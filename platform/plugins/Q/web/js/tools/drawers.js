@@ -20,8 +20,8 @@
  *  @param {Function}   [options.transition.ease=Q.Animation.linear] The easing function of the transition animation
  *  @param {Function}   [options.width] Override the function that computes the width of the drawers
  *  @param {Function}   [options.height] Override the function that computes the height drawers tool
- *  @param {Array}   [options.heights=[100,100]] Array of [height0, height1] for drawers that are pinned
- *  @param {Array}   [options.placeholders=['','']] Array of [html0, html1] for drawers that are pinned
+ *  @param {Array}   [options.heights=[100,100]] Array of [height0, height1] for drawers that are pinned. Can contain numbers or functions returning numbers, or names of functions.
+ *  @param {Array}   [options.placeholders=['','']] Array of [html0, html1] for drawers that are pinned.
  *  @param {Array}   [options.behind=[true,false]] Array of [boolean0, boolean1] to indicate which drawer is behind the others
  *  @param {Array}   [options.bottom=[false,false]] Array of [boolean0, boolean1] to indicate whether to scroll to the bottom of a drawer after switching to it
  *  @param {Array}   [options.triggers=['plugins/Q/img/drawers/up.png', 'plugins/Q/img/drawers/down.png']] Array of [src0, src1] for img elements that act as triggers to swap drawers. Set array elements to false to avoid rendering a trigger.
