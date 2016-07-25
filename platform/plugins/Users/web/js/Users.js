@@ -1489,6 +1489,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	dialog.append(titleSlot).append(dialogSlot).prependTo(dialogContainer);
 	dialog.plugin('Q/dialog', {
 		alignByParent: true,
+		fullscreen: false,
 		beforeLoad: function()
 		{
 			$('#Users_login_step1').css('opacity', 1).nextAll().hide();
@@ -1627,6 +1628,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 	dialog.append(titleSlot).append(dialogSlot).prependTo(options.dialogContainer);
 	dialog.plugin('Q/dialog', {
 		alignByParent: true,
+		fullscreen: false,
 		beforeLoad: function()
 		{
 			$('input[type!=hidden]', dialog).val('');

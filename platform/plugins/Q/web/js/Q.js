@@ -613,8 +613,8 @@ Elp.scrollingParent = function() {
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
-		var overflow = p.computedStyle().overflow;
-		if (['hidden', 'visible'].indexOf(overflow) < 0) {
+		var overflow = p.computedStyle().overflow || p.style.overflow;
+		if (overflow && ['hidden', 'visible'].indexOf(overflow) < 0) {
 			return p;
 		}
 	}
@@ -3314,6 +3314,7 @@ Q.Tool = function _Q_Tool(element, options) {
 
 	// for later use
 	var classes = (this.element.className && this.element.className.split(/\s+/) || []);
+	var key = Q.calculateKey(this);
 
 	// options from data attribute
 	var dataOptions = element.getAttribute('data-' + Q.normalize(this.name, '-'));
@@ -3328,7 +3329,7 @@ Q.Tool = function _Q_Tool(element, options) {
 			parsed = tail && JSON.parse(tail);
 		}
 		if (parsed) {
-			Q.extend(this.options, Q.Tool.options.levels, parsed, 'Q.Tool');
+			Q.extend(this.options, Q.Tool.options.levels, parsed, key);
 		}
 	}
 
@@ -3356,12 +3357,12 @@ Q.Tool = function _Q_Tool(element, options) {
 		var cn = Q.normalize(className.substr(0, className.length-5));
 		partial = o['.' + className];
 		if (partial && (className.substr(-5) !== '_tool' || cn === this.name)) {
-			Q.extend(this.options, Q.Tool.options.levels, partial, 'Q.Tool');
+			Q.extend(this.options, Q.Tool.options.levels, partial, key);
 		}
 	}
 	// #Q_parent_child_tool
 	if ((partial = o['#' + this.element.id])) {
-		Q.extend(this.options, Q.Tool.options.levels, partial, 'Q.Tool');
+		Q.extend(this.options, Q.Tool.options.levels, partial, key);
 		for (k in o) {
 			if (k.startsWith('#' + this.prefix)) {
 				this.options[k] = o[k];
@@ -3372,14 +3373,14 @@ Q.Tool = function _Q_Tool(element, options) {
 	var _idcomps = this.element.id.split('_');
 	for (i = 0; i < _idcomps.length-1; ++i) {
 		if ((partial = o['#' + _idcomps.slice(i).join('_')])) {
-			Q.extend(this.options, Q.Tool.options.levels, partial, 'Q.Tool');
+			Q.extend(this.options, Q.Tool.options.levels, partial, key);
 		}
 	}
 
 	// get options from options property on element
 	var eo = element.options;
 	if (eo && eo[normalizedName]) {
-		Q.extend(this.options, Q.Tool.options.levels, eo[normalizedName], 'Q.Tool');
+		Q.extend(this.options, Q.Tool.options.levels, eo[normalizedName], key);
 	}
 	
 	// override prototype Q function on the element to associate things with it
@@ -3930,6 +3931,26 @@ Tp.parent = function Q_Tool_prototype_parent() {
 	var ids = [];
 	ids = this.parentIds();
 	return ids.length ? Q.first(Q.Tool.active[ids[0]]) : null;
+};
+
+/**
+ * Returns the closest ancestor, if any, with the given tool name
+ * If more than one tool is activated with the same parent id, returns the first one.
+ * @method ancestor
+ * @param {String} name
+ * @return {Q.Tool|null}
+ */
+Tp.ancestor = function Q_Tool_prototype_parent(name) {
+	name = Q.normalize(name);
+	var parents = this.parents();
+	for (var id in parents) {
+		for (n in parents[id]) {
+			if (n === name) {
+				return parents[id][n];
+			}
+		}
+	}
+	return null;
 };
 
 /**
@@ -10910,6 +10931,10 @@ function _addHandlebarsHelpers() {
 		});
 	}
 	if (!Handlebars.helpers.tool) {
+		Handlebars.registerHelper('idPrefix', function () {
+			var ba = Q.Tool.beingActivated;
+			return (ba ? ba.prefix : '');
+		});
 		Handlebars.registerHelper('tool', function (name, id, tag, options) {
 			if (!name) {
 				return "{{tool missing name}}";

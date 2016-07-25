@@ -48,6 +48,7 @@ class Q_Handlebars {
 			));
 			self::$handlebars->addHelper('call', array('Q_Handlebars', 'helperCall'));
 			self::$handlebars->addHelper('tool', array('Q_Handlebars', 'helperTool'));
+			self::$handlebars->addHelper('idPrefix', array('Q_Handlebars', 'helperIdPrefix'));
 			self::$handlebars->addHelper('toUrl', array('Q_Handlebars', 'helperToUrl'));
 			self::$handlebars->addHelper('toCapitalized', array('Q_Handlebars', 'helperToCapitalized'));
 		}
@@ -135,6 +136,11 @@ class Q_Handlebars {
 			$o = array_merge($o, $fields["id:$id"]);
 		}
 		return Q::tool($name, $o, compact('id'));
+	}
+	
+	static function helperIdPrefix($template, $context, $args, $source)
+	{
+		return Q_Html::getIdPrefix();
 	}
 	
 	static function helperToUrl($template, $context, $args, $source)

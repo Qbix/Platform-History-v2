@@ -252,8 +252,8 @@ function _Q_overlay(o) {
  *   @optional
  *   @param {Boolean} [options.alignByParent=false] If true, the dialog will be aligned to the center of not the entire window, but to the center of containing element instead.
  *   @param {Boolean} [options.mask=true] If true, adds a mask to cover the screen behind the dialog.
- *   @param {Boolean} [options.fullscreen=true]
- *   Only on Android and false on all other platforms. If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon.
+ *   @param {Boolean} [options.fullscreen]
+ *   If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon. Defaults to true on Android stock browser, false everywhere else.
  *   @param {Boolean} [options.asyncLoad=true]
  *   For desktop and false for touch devices. If true, dialog will load asynchronously with fade animation and 'onLoad' will be called when fade animation is completed. If false, dialog will appear immediately and 'onLoad' will be called at the same time.
  *   @param {Boolean} [options.noClose=false]
