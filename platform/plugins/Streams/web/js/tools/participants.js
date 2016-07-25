@@ -79,6 +79,8 @@ function _Streams_participants(options) {
 		var $elements = {};
 		state.avatarsWidth = 0;
 		
+		$te.addClass('Q_throb');
+		
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
@@ -125,6 +127,7 @@ function _Streams_participants(options) {
 			var stream = tool.stream = this;
 			var keys = Object.keys(extra.participants);
 			var i = 0, c = 0;
+			$te.removeClass('Q_throb');
 			tool.$avatars.empty();
 			tool.$blanks.empty();
 			Q.each(extra.participants, function (userId, participant) {
