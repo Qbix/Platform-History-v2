@@ -679,3 +679,9 @@
 .fr-toolbar.fr-inline { z-index: 10000; }
 
 .Q_tabs_tool.Streams_related_tool .Streams_preview_contents  { white-space: nowrap; overflow: visible; text-overflow: ellipsis; vertical-align: middle; }
+
+.Streams_participants_loading { background-image: url(../../Q/img/throbbers/balls2.gif); background-repeat: no-repeat; background-position: 5% 50%; }
+
+.Streams_participants_loading .Streams_participants_summary {
+	visibility: hidden;
+}
