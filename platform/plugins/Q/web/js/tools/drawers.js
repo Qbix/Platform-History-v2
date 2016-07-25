@@ -67,7 +67,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	var lastScrollingHeight;
 	setTimeout(function () {
 		var $column = $(tool.element).closest('.Q_columns_column');
-		if (!$column.length || $column.hasClass('Q_columns_opened')) {
+		if (!$column.length || $column.hasClass('Q_columns_opened') || !state.fullscreen) {
 			return _initialize();
 		}
 		var columns = $column.closest('.Q_tool')[0].Q("Q/columns");
