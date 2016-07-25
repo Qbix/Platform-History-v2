@@ -6643,8 +6643,12 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		links = document.getElementsByTagName('link');
 		for (var j=0; j<links.length; ++j) {
 			if (links[j].href !== href) continue;
-			links[j].onload = onload2;
-			links[j].onreadystatechange = onload2; // for IE6
+			if (Q.info.isAndroidStock) {
+				onload2.call(links[j]); // it doesn't support onload
+			} else {
+				links[j].onload = onload2;
+				links[j].onreadystatechange = onload2; // for IE6
+			}
 			break;
 		}
 		return options.returnAll ? links[i] : false; // don't add
