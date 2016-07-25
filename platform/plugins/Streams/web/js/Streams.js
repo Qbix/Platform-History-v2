@@ -3852,7 +3852,7 @@ Q.onInit.add(function _Streams_onInit() {
 		_connectSockets(true);
 	}, 'Streams');
 
-	var _showedComplete = true;
+	var _showedComplete = false;
 
 	// set up invite complete dialog
 	Q.Page.onLoad('').add(function _Streams_onPageLoad() {
