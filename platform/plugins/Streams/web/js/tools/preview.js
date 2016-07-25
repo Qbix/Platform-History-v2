@@ -401,6 +401,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var tool = this;
 		var state = tool.state;
 		Q.Streams.get(state.publisherId, state.streamName, function () {
+			var stream = this;
 			// check if we should add this behavior
 			if (!state.actions
 			|| state.closeable === false
@@ -432,7 +433,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 						Q.Masks.show(tool, {
 							shouldCover: tool.element, className: 'Q_removing'
 						});
-						this.close(function (err) {
+						stream.close(function (err) {
 							if (err) return;
 							tool.state.onClose.handle.call(tool, !this.isRequired);
 						});
