@@ -1891,6 +1891,9 @@ abstract class Streams extends Base_Streams
 			$fromTitle = $stream->title;
 			$fromType = $stream->type;
 			$fromDisplayType = Streams_Stream::displayType($fromType);
+			if (!$category) {
+				continue;
+			}
 			$toUrl = $category->url();
 			$toIcon = $category->icon;
 			$toTitle = $category->title;
