@@ -66,13 +66,18 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	state.canceledSwap = null;
 	var lastScrollingHeight;
 	setTimeout(function () {
+		_initialize();
 		var $column = $(tool.element).closest('.Q_columns_column');
-		if (!$column.length || $column.hasClass('Q_columns_opened') || !state.fullscreen) {
-			return _initialize();
+		if (!$column.length || $column.hasClass('Q_columns_opened')) {
+			return;
 		}
 		var columns = $column.closest('.Q_tool')[0].Q("Q/columns");
 		var key = columns.state.onOpen.set(function () {
-			_initialize();
+			if (state.fullscreen) {
+				_initialize();
+			} else {
+				_layout();
+			}
 			columns.state.onOpen.remove(key);
 		}, tool);
 	}, state.initial.delay || 0);

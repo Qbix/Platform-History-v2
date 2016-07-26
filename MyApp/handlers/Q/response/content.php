@@ -1,7 +1,7 @@
 <?php
 
 function Q_response_content()
-{		
+{
 	$app = Q_Config::expect('Q', 'app');
 	$url = Q_Request::url();
 	$module = Q_Dispatcher::uri()->module;
@@ -13,6 +13,8 @@ function Q_response_content()
 	if (!Q::canHandle($event)) {
 		return Q::event("$app/notFound/response/content");
 	}
+	
+	Q_Response::setMeta('format-detection', 'telephone=no,date=no,address=no,email=no,url=no');
 		
 	// Go ahead and fire the event, returning the result.
 	return Q::event($event);
