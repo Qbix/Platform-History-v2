@@ -198,6 +198,10 @@ Q.Tool.define('Streams/chat', function(options) {
 				&& !state.stream.testWriteLevel('post')) {
 					tool.$('.Streams_chat_composer').hide();
 				}
+				
+				tool.$('.Streams_chat_composer').submit(function () {
+					return false;
+				});
 
 				state.$inputElement = tool.$('.Streams_chat_composer textarea');
 				callback && callback();
@@ -732,9 +736,10 @@ Q.Template.set('Streams/chat/main',
 		'{{/isClick}}'+
 		'<!-- messages -->'+
 	'</div>'+
-	'<div class="Streams_chat_composer">'+
+	'<form class="Streams_chat_composer" action="" method="post">'+
 		'<textarea placeholder="{{placeholder}}"></textarea>'+
-	'</div>'+
+		'<input type="submit" style="display:none">' +
+	'</form>'+
 	'<hr />'+
 	'<div class="Q_clear"></div>'
 );
