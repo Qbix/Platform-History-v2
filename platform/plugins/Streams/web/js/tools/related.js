@@ -201,11 +201,11 @@ function _Streams_related_tool (options)
 		setTimeout(function _activatePreview() {
 			var element = elements[i++];
 			if (!element) {
-				tool.integrateWithTabs(elements);
 				tool.state.onRefresh.handle.call(tool);
 				return;
 			}
 			Q.activate(element, null, function () {
+				tool.integrateWithTabs([element]);
 				setTimeout(_activatePreview, 0);
 			});
 		}, 0);
