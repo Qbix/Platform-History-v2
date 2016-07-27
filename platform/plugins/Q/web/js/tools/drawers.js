@@ -101,13 +101,22 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	
 	// Accomodate mobile keyboard
 	if (Q.info.isMobile) {
+		var scrollTop = null;
 		state.$drawers.eq(0).on(Q.Pointer.focusin, tool, function () {
-			state.$drawers.eq(1).hide();
-			state.$trigger.hide();
+			scrollTop = $scrolling.scrollTop();
+			setTimeout(function () {
+				state.$drawers.eq(1).hide();
+				state.$placeholder.hide();
+				state.$trigger.hide();
+			}, 100);
 		});
 		state.$drawers.eq(0).on(Q.Pointer.focusout, tool, function () {
 			state.$drawers.eq(1).show();
+			state.$placeholder.show();
 			state.$trigger.show();
+			setTimeout(function () {
+				$scrolling.scrollTop(scrollTop);
+			}, 0);
 		});
 	}
 

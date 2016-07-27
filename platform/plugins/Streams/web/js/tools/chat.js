@@ -13,12 +13,12 @@
  *   @param {String} [options.publisherId] Required if stream option is empty. The publisher's user id.
  *   @param {String} [options.streamName] Required if stream option is empty. The stream's name.
  *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
- *   @param {String} [options.messageMaxHeight] The maximum height, in pixels, of a rendered message
+ *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
+ *   @param {Stream} [options.inputType="text"] Can be either "text" or "textarea"
  *   @param {String} [options.messagesToLoad] The number of "Streams/chat" messages to load at a time.
- *   @param {String} [options.animations] Options for animation, which can include:
- *     <ul>
- *         <li>"duration" - defaults to 300</li>
- *     </ul>
+ *   @param {String} [options.messageMaxHeight] The maximum height, in pixels, of a rendered message
+ *   @param {String} [options.animations] Options for animations, which can include:
+ *   @param {String} [options.animations.duration=300] The duration of the animation
  *   @param {Object} [options.loadMore] May be "scroll", "click" or null/false. Defaults to "click".
  *     <ul>
  *         <li>"click" will show label with "Click to see earlier messages" (configurable in Q.text.Streams.chat.loadMore.click string), and when the user clicks it, new messages will be loaded.</li>
@@ -187,6 +187,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = tool.state;
 
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
+		fields.textarea = (state.inputType === 'textarea');
 		Q.Template.render(
 			'Streams/chat/main',
 			fields,
@@ -425,16 +426,22 @@ Q.Tool.define('Streams/chat', function(options) {
 		/*
 		 * activate the composer
 		 */
-		tool.$('.Streams_chat_composer textarea')
+		var $composer = tool.$('.Streams_chat_composer textarea')
 		.plugin('Q/autogrow', {
-			maxWidth: $(tool.element).width() 
-		}, function () {
+			maxWidth: $(tool.element).width()
+		}, _nicer);
+		if (!$composer.length) {
+			$composer = tool.$('.Streams_chat_composer input[type=text]');
+			_nicer.call($composer);
+		}
+		function _nicer() {
 			this.plugin('Q/placeholders', {}, function () {
 				if (!Q.info.isTouchscreen) {
 					this.plugin('Q/clickfocus');
 				}
 			});
-		}).keypress(function(event) {
+		}
+		$composer.keypress(function(event) {
 			if (event.keyCode != 13) {
 				return;
 			}
@@ -737,7 +744,11 @@ Q.Template.set('Streams/chat/main',
 		'<!-- messages -->'+
 	'</div>'+
 	'<form class="Streams_chat_composer" action="" method="post">'+
-		'<textarea placeholder="{{placeholder}}"></textarea>'+
+		'{{#if textarea}}' +
+			'<textarea placeholder="{{placeholder}}"></textarea>'+
+		'{{else}}' +
+			'<input type="text" placeholder="{{placeholder}}">'+
+		'{{/if}}' +
 		'<input type="submit" style="display:none">' +
 	'</form>'+
 	'<hr />'+

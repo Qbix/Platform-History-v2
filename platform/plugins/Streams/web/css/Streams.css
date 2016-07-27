@@ -472,6 +472,16 @@
 	margin: 0 auto;
 	display: block;
 	padding: 6px;
+	margin-left: 50px;
+	height: 30px;
+	color: black;
+}
+.Streams_chat_composer input {
+	font-size: 12pt;
+	margin: 0 auto;
+	display: block;
+	padding: 6px;
+	margin-left: 50px;
 	height: 30px;
 	color: black;
 }
