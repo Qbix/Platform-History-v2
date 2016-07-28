@@ -49,7 +49,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 		var currentHtml = null;
 
 		function _setContent(content) {
-			if (tool.inplace = tool.sibling('Q/inplace') || tool.child('Q_inplace')) {
+			if (tool.inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace')) {
 				tool.$static = tool.inplace.$static;
 				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
 			} else if (!tool.$static) {

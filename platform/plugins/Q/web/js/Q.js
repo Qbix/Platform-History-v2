@@ -3862,6 +3862,7 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
  * @return {Q.Tool|null}
  */
 Tp.child = function Q_Tool_prototype_child(append, name) {
+	name = name && Q.normalize(name);
 	var prefix2 = Q.normalize(this.prefix + (append || ""));
 	var id, ni, n;
 	for (id in Q.Tool.active) {
