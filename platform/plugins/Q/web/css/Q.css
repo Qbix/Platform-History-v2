@@ -113,12 +113,13 @@ table { border-spacing:0; border-collapse:collapse; }
 	-webkit-transform: translateZ(0);
 }
 
-.Q_mask { display: none; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
+.Q_mask { display: none; opacity: 0; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
 .Q_cancel_mask { z-index: 2000; text-align: center; }
 .Q_load_cancel_button { vertical-align: middle; margin-top: 80px; }
 .Q_notice_mask,
 .Q_screen_mask,
-.Q_dialog_mask { background-color: black; opacity: 0.2; filter:	alpha(opacity=30); }
+.Q_dialog_mask { background-color: black; opacity: 0.2; filter:	alpha(opacity=20); }
+.Q_load_data_mask { background-color: #777; opacity: 0.3; filter:	alpha(opacity=30); transition: opacity 1s; -webkit-transition: opacity 1s; }
 
 /* Clear fix */
 

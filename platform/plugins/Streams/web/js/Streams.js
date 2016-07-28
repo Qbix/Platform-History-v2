@@ -3214,6 +3214,11 @@ Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
  * @class Streams.Interests
  * @constructor
  * @param {Object} fields
+ * @param {Function} [callback]
+ * @param {Object} [options] Can be used to override any options for the call to Q.req
+ *   as well as provide the following options:
+ * @param {Object} [options.subscribe=false] Set this to true to also subscribe to the interest
+ * @param {Object} [options.publisherId=Q.Users.communityId] Can be used to override the community id
  */
 var Interests = Streams.Interests = {
 	add: function (title, callback, options) {
@@ -3238,10 +3243,10 @@ var Interests = Streams.Interests = {
 			if (s) {
 				_refreshUnlessSocket(s.publisherId, s.streamName);
 			}
-		}, {
+		}, Q.extend({
 			method: 'post', 
 			fields: fields
-		});
+		}, options));
 	},
 	remove: function (title, callback) {
 		if (!Users.loggedInUser) {

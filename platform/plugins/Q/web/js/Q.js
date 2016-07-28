@@ -3967,8 +3967,8 @@ Tp.sibling = function Q_Tool_prototype_sibling(name) {
  * being replaced by another.
  * Typically happens after an AJAX call which returns
  * markup for the new instance tool.
- * Also can be used for removing a tool instance
- * and all of its children.
+ * You should call Q.Tool.remove unless, for some reason, you plan to
+ * remove this exact tool instance, and not its children or siblings.
  * @method remove
  * @param {boolean} removeCached
  *  Defaults to false. Whether or not to remove the actual tool if its containing element

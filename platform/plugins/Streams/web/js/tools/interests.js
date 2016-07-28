@@ -109,7 +109,8 @@ Q.Tool.define("Streams/interests", function (options) {
 					var parts = interestTitle.split(': ');
 					var category = parts[0];
 					var title = parts[1];
-					var $expandable = $('#Q_expandable_'+Q.normalize(category));
+					var id = 'Q_expandable_'+Q.normalize(category);
+					var $expandable = $('#' + tool.prefix + id);
 					var $content = $expandable.find('.Q_expandable_content');
 					if (!$expandable.length) {
 						continue;
@@ -189,18 +190,21 @@ Q.Tool.define("Streams/interests", function (options) {
 					revealingNewInterest = true;
 					var parentElement = tool.element.parentNode;
 					var toolId = tool.id;
-					tool.remove();
+					Q.Tool.remove(tool.element);
 					$(Q.Tool.setUpElement('div', 'Streams/interests', toolId))
 					.appendTo(parentElement)
 					.activate(function () {
-						var tool = Q.Tool.byId('Q_expandable_' + Q.normalize(category));
-						tool.expand({
-							scrollToElement: tool.$('.Streams_interests_other')
+						var id = 'Q_expandable_' + Q.normalize(category);
+						this.child(id).expand({
+							scrollToElement: tool.$('.Streams_interests_other')[0]
 						}, function () {
 							revealingNewInterest = false;
 						});
 					});
-				}, {subscribe: true});
+				}, {
+					subscribe: true,
+					quiet: false
+				});
 			});
 		var $unlisted = $('<div />')
 			.addClass("Streams_interests_unlisted")
@@ -296,12 +300,21 @@ Q.Tool.define("Streams/interests", function (options) {
 						var $span = $('#'+id);
 						if (!$span.length) continue;
 						var matched = false;
-						var parts = interest.split(' ');
-						var category = parts[0];
-						var pl = parts.length;
-						for (var i=0; i<pl; ++i) {
-							if (val === parts[i].substr(0, len).toLowerCase()) {
-								matched = true;
+						var parts1 = val.split(' ');
+						var parts2 = interest.split(' ');
+						var pl1 = parts1.length;
+						var pl2 = parts2.length;
+						for (var i1=0; i1<pl1; ++i1) {
+							matched = false;
+							for (var i2=0; i2<pl2; ++i2) {
+								var p1 = parts1[i1];
+								var p2 = parts2[i2].substr(0, p1.length).toLowerCase();
+								if (p1 === p2) {
+									matched = true;
+									break;
+								}
+							}
+							if (matched === false) {
 								break;
 							}
 						}
