@@ -8733,6 +8733,10 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		if (!this.length) return this;
 		var args;
 		switch (Q.typeOf(options)) {
+			case 'function': // this is probably a callback
+				callback = options;
+				options = {};
+				args = [];
 			case 'array': // passing a bunch of parameters to a plugin
 				args = options;
 				break;
