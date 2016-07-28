@@ -639,9 +639,10 @@ Q.Tool.define('Streams/chat', function(options) {
 	processDOM: function() {
 		var state = this.state;
 		this.$('.Streams_chat_message').each(function () {
-			if (this.isOverflowed()) {
-				this.style.cursor = 'pointer';
+			if (!this.isOverflowed()) {
+				return;
 			}
+			this.style.cursor = 'pointer';
 			var $indicator = $('<img />', {
 				"src": Q.url(state.overflowed.src),
 				"class": "Streams_chat_overflowed_indicator"
