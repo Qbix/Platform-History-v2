@@ -1001,9 +1001,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					},
 					fields,
 					function (params) {
-						var url = "mailto:" + o.identifier;
-						url += '?subject=' + encodeURIComponent(params.subject[1]);
-						url += '&body=' + encodeURIComponent(params.body[1]);
+						var url = Q.Links.email(
+							params.subject[1], params.body[1], o.identifier
+						);
 						if (params.alert[1]) {
 							alert(params.alert[1]);
 						}
@@ -1016,10 +1016,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						alert: 'Streams/followup/mobile/alert'
 					}, fields,
 					function (params) {
-						var url = "sms:" + o.identifier;
-						if (Q.info.browser.OS !== 'ios') {
-							url += '?body=' + encodeURIComponent(params.text[1]);
-						}
+						url = Q.Links.sms(params.text[1], o.identifier);
 						if (params.alert[1]) {
 							alert(params.alert[1]);
 						}

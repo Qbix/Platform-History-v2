@@ -4402,6 +4402,63 @@ Q.Tool.onMissingConstructor = new Q.Event();
 
 
 /**
+ * Methods for working with links
+ * @class Q.Links
+ */
+Q.Links = {
+	/**
+	 * Generates a link for sending an sms message
+	 * @static
+	 * @method sms
+	 * @param {String} [body]
+	 * @param {String|Array} [mobileNumbers]
+	 * @return {String}
+	 */
+	sms: function (body, mobileNumbers) {
+		var ios = (Q.info.browser.OS !== 'ios');
+		if (mobileNumbers && Q.isArrayLike(mobileNumbers)) {
+			mobileNumbers = ios ? mobileNumbers[0] : mobileNumbers.join(',');
+		}
+		var url = "sms:" + mobileNumbers;
+		var char = ios ? '?' : '&';
+		return url + char + 'body=' + encodeURIComponent(body);
+	},
+	/**
+	 * Generates a link for sending an sms message
+	 * @static
+	 * @method email
+	 * @param {String} [subject]
+	 * @param {String} [body]
+	 * @param {String|Array} [to]
+	 * @param {String|Array} [cc]
+	 * @param {String|Array} [bcc]
+	 * @return {String}
+	 */
+	email: function (subject, body, to, cc, bcc) {
+		var ios = (Q.info.browser.OS !== 'ios');
+		to = to && Q.isArrayLike(to) ? to.join(',') : to;
+		cc = cc && Q.isArrayLike(cc) ? cc.join(',') : cc;
+		bcc = bcc && Q.isArrayLike(bcc) ? bcc.join(',') : bcc;
+		var names = ['cc', 'bcc', 'subject', 'body'];
+		var parts = [cc, bcc, subject, body];
+		var url = "mailto:" + encodeURIComponent(to || '');
+		var char = '?';
+		for (var i=0, l=names.length; i<l; ++i) {
+			if (parts[i]) {
+				url += char + names[i] + '=' + encodeURIComponent(parts[i])
+				char = '&';
+			}
+		}
+		return url;
+	}
+};
+
+Q.Session = function _Q_Session() {
+	// TODO: Set a timer for when session expires?
+	return {};
+};
+
+/**
  * A Q.Session object represents a session, and implements things like an "expiring" dialog
  * @class Q.Session
  * @constructor
