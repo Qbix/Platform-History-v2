@@ -362,9 +362,9 @@
 
 .Streams_chat_overflowed_indicator {
 	position: absolute;
-	left: 0;
+	left: 2%;
 	bottom: 0;
-	width: 100%;
+	width: 96%;
 	height: 50px;
 }
 
@@ -528,12 +528,12 @@
 	color: gray;
 }
 .Streams_chat_bubble {
+	position: relative;
 	min-width: 30%;
 	margin-right: 10px;
 	padding: 10px;
 	border: 1px solid #D0D9E4;
 	clear: both;
-	position: relative;
 }
 .Streams_chat_tick {
 	background: url('../../Streams/img/chat/message-tick.png');
