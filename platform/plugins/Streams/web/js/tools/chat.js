@@ -68,6 +68,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		duration: 300
 	},
 	scrollToBottom: true,
+	overflowed: {
+		src: 'plugins/Streams/img/chat/message-overflowed.png',
+		title: 'Message from {{displayName}}'
+	},
 	onRefresh: new Q.Event(),
 	templates: {
 		main: {
@@ -380,7 +384,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (!$element.is('.Streams_chat_message')) {
 				$element = $element.parents('.Streams_chat_message');
 			}
-			if (!$element[0].isOverflowed()) return;
+			if (!$element[0].isOverflowed()) {
+				return;
+			}
 			
 			var $container = $element.parents('.Streams_chat_item');
 			var displayName   = $('.Users_avatar_name', $container).text();
@@ -390,7 +396,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.Dialogs.push({
-				title  : 'Message from ' + displayName,
+				title: state.overflowed.title.interpolate({
+					displayName: displayName
+				}),
 				content: '<div class="Streams_popup_content">' + $(e.target).html() + '</div>'
 			});
 		});
@@ -634,6 +642,13 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (this.isOverflowed()) {
 				this.style.cursor = 'pointer';
 			}
+			var $indicator = $('<img />', {
+				"src": Q.url(state.overflowed.src),
+				"class": "Streams_chat_overflowed_indicator"
+			});
+			$(this).closest('.Streams_chat_bubble')
+				.addClass('Streams_chat_overflowed')
+				.append($indicator);
 		});
 		if (!Q.info.isTouchscreen && state.hadFocus) {
 			$(this.state.$inputElement).plugin('Q/clickfocus');
