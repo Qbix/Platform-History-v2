@@ -366,6 +366,7 @@
 	bottom: 10px;
 	width: 96%;
 	height: 50px;
+	pointer-events: none;
 }
 
 .Streams_login_appear {
