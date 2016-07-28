@@ -216,7 +216,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 	Q: {
 		onInit: {"Streams/inplace": function () {
 			var tool = this, state = tool.state;
-			var inplace = tool.sibling('Q/inplace') || tool.child('Q_inplace');
+			var inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace');
 			if (!inplace) {
 				return;
 			}
