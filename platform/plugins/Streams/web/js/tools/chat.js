@@ -426,22 +426,20 @@ Q.Tool.define('Streams/chat', function(options) {
 		/*
 		 * activate the composer
 		 */
-		var $composer = tool.$('.Streams_chat_composer textarea')
-		.plugin('Q/autogrow', {
-			maxWidth: $(tool.element).width()
-		}, _nicer);
-		if (!$composer.length) {
-			$composer = tool.$('.Streams_chat_composer input[type=text]');
-			_nicer.call($composer);
-		}
-		function _nicer() {
-			this.plugin('Q/placeholders', {}, function () {
-				if (!Q.info.isTouchscreen) {
-					this.plugin('Q/clickfocus');
-				}
-			});
-		}
-		$composer.keypress(function(event) {
+		var isTextarea = (state.inputType === 'textarea');
+		var sel1 = '.Streams_chat_composer textarea';
+		var sel2 = '.Streams_chat_composer input[type=text]';
+		var $input = $(isTextarea ? sel1: sel2);
+		$input.plugin('Q/placeholders', {}, function () {
+			if (isTextarea) {
+				this.plugin('Q/autogrow', {
+					maxWidth: $(tool.element).width()
+				});
+			}
+			if (!Q.info.isTouchscreen) {
+				this.plugin('Q/clickfocus');
+			}
+		}).keypress(function(event) {
 			if (event.keyCode != 13) {
 				return;
 			}

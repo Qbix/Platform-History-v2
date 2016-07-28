@@ -221,10 +221,6 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			letterSpacing: static_span.css('letterSpacing'),
 			textAlign: static_span.css('textAlign')
 		});
-		fieldinput.plugin('Q/autogrow', {
-			maxWidth: state.maxWidth || maxWidth,
-			minWidth: state.minWidth || 0
-		});
 		if (!fieldinput.data('inplace')) {
 			fieldinput.data('inplace', {});
 		}
@@ -234,9 +230,15 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		}
 		if (fieldinput.is('textarea') && !fieldinput.val()) {
 			var height = static_span.outerHeight() + 'px';
-			fieldinput.add(fieldinput.parent()).css('min-height', height);
+			fieldinput.add(static_span).css('min-height', height);
 		}
 	}
+	fieldinput.plugin('Q/placeholders', function () {
+		fieldinput.plugin('Q/autogrow', {
+			maxWidth: state.maxWidth || maxWidth,
+			minWidth: state.minWidth || 0
+		}, _adjustButtonLayout);
+	});
 	_sizing();
 	this.handleClick = function(event) {
 		_sizing();
@@ -268,10 +270,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			this.plugin('Q/autogrow', {
 				maxWidth: state.maxWidth || maxWidth,
 				minWidth: state.minWidth || 0,
-				onResize: {"Q/inplace": function () {
-					var margin = this.outerHeight() + parseInt(this.css('margin-top'));
-					tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
-				}}
+				onResize: {"Q/inplace": _adjustButtonLayout}
 			});
 		});
 		if (fieldinput.is('select')) {
@@ -412,6 +411,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 				+state.placeholder.encodeHTML()+'</span>'
 			);
 		}
+		_adjustButtonLayout();
 		static_span.attr('title', state.placeholder);
 		undermessage.empty().css('display', 'none').addClass('Q_error');
 		tool.restoreActions();
@@ -507,6 +507,15 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			$('.Q_inplace_tool_editbuttons', container_span).css('display', 'none');
 		}
 	}
+	function _adjustButtonLayout() {
+		var $placeholder = fieldinput.closest('.Q_placeholders_container')
+			.find('.Q_placeholder');
+		var $element = fieldinput.is(":visible")
+			? fieldinput
+			: ($placeholder.length ? $placeholder : static_span);
+		var margin = $element.outerHeight() + parseInt($element.css('margin-top'));
+		tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
+	}
 	_editButtons();
 	container_span.mouseout(function() {
 		container_span.removeClass('Q_hover');
@@ -536,18 +545,33 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	cancel_button.add(save_button).add(edit_button).on(Q.Pointer.end, function() {
 		return false;
 	});
-	cancel_button.on('focus '+Q.Pointer.start, function() { setTimeout(function() {
-		focusedOn = 'cancel_button'; }, 50);
+	cancel_button.on('focus '+Q.Pointer.start, function() {
+		setTimeout(function() {
+			focusedOn = 'cancel_button';
+		}, 50);
 	});
-	cancel_button.blur(function() { focusedOn = null; setTimeout(onBlur, 100); });
+	cancel_button.blur(function() {
+		focusedOn = null;
+		setTimeout(onBlur, 100); 
+	});
 	save_button.on(Q.Pointer.fastclick, function() { onSave(); return false; });
-	save_button.on('focus '+Q.Pointer.start, function() { setTimeout(function() {
-		focusedOn = 'save_button'; }, 50);
+	save_button.on('focus '+Q.Pointer.start, function() {
+		setTimeout(function() {
+			focusedOn = 'save_button';
+		}, 50);
 	});
-	save_button.blur(function() { focusedOn = null; setTimeout(onBlur, 100); });
+	save_button.blur(function() { 
+		focusedOn = null;
+		setTimeout(onBlur, 100);
+	});
 	fieldinput.on('keyup input', _updateSaveButton);
-	fieldinput.focus(function() { focusedOn = 'fieldinput'; });
-	fieldinput.blur(function() { focusedOn = null; setTimeout(onBlur, 100); });
+	fieldinput.focus(function() {
+		focusedOn = 'fieldinput';
+	});
+	fieldinput.blur(function() {
+		focusedOn = null;
+		setTimeout(onBlur, 100); 
+	});
 	fieldinput.keydown(function _Q_inplace_keydown(e) {
 		if (!focusedOn) {
 			return false;

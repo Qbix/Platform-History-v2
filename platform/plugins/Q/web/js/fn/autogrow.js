@@ -51,7 +51,7 @@ function _Q_autogrow(o) {
 		++p.count;
 		var $c = $t.parent();
 		if (!$c.hasClass('Q_autogrow_container')) {
-			$c = $('<div id="jQuery_fn_autogrow_'+p.count+'" class="Q_autogrow_container"></div>');
+			$c = $('<div id="Q_autogrow_container_'+p.count+'" class="Q_autogrow_container"></div>');
 			$t.before($c);
 			$t.appendTo($c);
 		}
@@ -194,6 +194,8 @@ function _Q_autogrow(o) {
 		updateWidth();
 
 	});
+	
+	Q.handle(o.onResize, $(this), []);
 
 	return this;
 
@@ -203,7 +205,24 @@ function _Q_autogrow(o) {
 	maxWidth: 1000,
 	minWidth: '.Q_placeholder',
 	comfortZone: 10,
-	onResize: new Q.Event()
+	onResize: new Q.Event(function () {
+		var $container = this.closest('.Q_placeholders_container');
+		if (!$container.length) {
+			return;
+		}
+		$container.css({
+			width: 'auto',
+			height: 'auto'
+		});
+		var $placeholder = $container.find('.Q_placeholder');
+		var h = $placeholder[0].style.height;
+		$placeholder[0].style.height = 'auto';
+		var $t = $(this);
+		setTimeout(function () {
+			$t.add($container).css('min-height', $placeholder.outerHeight() + 'px');
+			$placeholder[0].style.height = h;
+		}, 0);
+	}, 'Q/autogrow')
 }
 
 );

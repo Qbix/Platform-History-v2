@@ -49,7 +49,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 		var currentHtml = null;
 
 		function _setContent(content) {
-			if (tool.inplace = tool.sibling('Q/inplace')) {
+			if (tool.inplace = tool.sibling('Q/inplace') || tool.child('Q_inplace')) {
 				tool.$static = tool.inplace.$static;
 				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
 			} else if (!tool.$static) {
@@ -216,7 +216,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 	Q: {
 		onInit: {"Streams/inplace": function () {
 			var tool = this, state = tool.state;
-			var inplace = tool.sibling('Q/inplace');
+			var inplace = tool.sibling('Q/inplace') || tool.child('Q_inplace');
 			if (!inplace) {
 				return;
 			}
