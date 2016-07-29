@@ -217,11 +217,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 		onInit: {"Streams/inplace": function () {
 			var tool = this
 			var state = tool.state;
-			var inplace = tool.sibling('Q/inplace');
-			if (inplace) {
-				_setup.call(inplace);
-			}
-			this.forEachChild('Q/inplace', 1, false, _setup);
+			this.forEachChild('Q/inplace', 1, true, _setup);
 			function _setup() {
 				this.state.onSave.set(function () {
 					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
