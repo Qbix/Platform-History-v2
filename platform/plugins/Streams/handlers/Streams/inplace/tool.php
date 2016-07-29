@@ -62,7 +62,7 @@ function Streams_inplace_tool($options)
 	switch ($inplaceType) {
 		case 'text':
 			$inplace['fieldInput'] = Q_Html::input($field, $content, array(
-				'placeholder' => Q::ifset($input, 'placeholder', null),
+				'placeholder' => Q::ifset($inplace, 'placeholder', null),
 				'maxlength' => $maxlength
 			));
 			$inplace['staticHtml'] = Q_Html::text($content);
