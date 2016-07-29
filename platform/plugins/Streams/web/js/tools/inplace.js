@@ -15,8 +15,8 @@
  *   @param {String} [options.publisherId] Required if stream option is empty. The publisher's user id.
  *   @param {String} [options.streamName] Required if stream option is empty. The stream's name.
  *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
- *   @param {String} [options.field] Optional, name of an field to change instead of the content of the stream
- *   @param {String} [options.attribute] Optional, name of an attribute to change instead of any field.
+ *   @param {String} [options.field] Optional, name of a field to change instead of the content of the stream
+ *   @param {String} [options.attribute] Optional, name of an attribute to change instead of a field.
  *   @param {Object} [options.inplace] Additional fields to pass to the child Q/inplace tool, if any
  *   @param {Function} [options.create] Optional. You can pass a function here, which takes the tool as "this"
  *     and a callback as the first parameter, is supposed to create a stream and
@@ -215,16 +215,20 @@ Q.Tool.define("Streams/inplace", function (options) {
 {
 	Q: {
 		onInit: {"Streams/inplace": function () {
-			var tool = this, state = tool.state;
-			var inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace');
-			if (!inplace) {
-				return;
+			var tool = this
+			var state = tool.state;
+			var inplace = tool.sibling('Q/inplace');
+			if (inplace) {
+				_setup.call(inplace);
 			}
-			inplace.state.onSave.set(function () {
-				Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
-					state.onUpdate.handle.call(tool);
-				}, {messages: true});
-			}, 'Streams/inplace');
+			this.forEachChild('Q/inplace', 1, false, _setup);
+			function _setup() {
+				this.state.onSave.set(function () {
+					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
+						state.onUpdate.handle.call(tool);
+					}, {messages: true});
+				}, 'Streams/inplace');
+			}
 		}}
 	}
 }

@@ -3448,6 +3448,8 @@ var _initToolHandlers = {};
 var _beforeRemoveToolHandlers = {};
 var _waitingParentStack = [];
 var _pendingParentStack = [];
+var _toolsToInit = {};
+var _toolsWaitingForInit = {};
 
 function _toolEventFactoryNormalizeKey(key) {
 	var parts = key.split(':', 2);
@@ -4060,17 +4062,22 @@ Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(cla
  * @method forEachChild
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {number} [levels] Optionally pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
+ * @param {boolean} [withSiblings=false] Optionally pass true here to also get the siblings
  * @param {Function} callback The callback to execute at the right time
  */
-Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, callback) {
+Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSiblings, callback) {
 	if (typeof name !== 'string') {
 		levels = name;
 		callback = levels;
 		name = null;
 	}
 	if (typeof levels !== 'number') {
-		callback = levels;
+		withSiblings = levels;
 		levels = null;
+	}
+	if (typeof withSiblings !== 'boolean') {
+		callback = withSiblings;
+		withSiblings = false;
 	}
 	name = name && Q.normalize(name);
 	var tool = this;
@@ -4083,7 +4090,9 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, callback
 	var onActivate = Q.Tool.onActivate(name);
 	var key = onActivate.set(function () {
 		if (this.prefix.startsWith(tool.prefix)) {
-			Q.handle(callback, this, arguments);
+			if (withSiblings || this.prefix.length > tool.prefix.length) {
+				Q.handle(callback, this, arguments);
+			}
 		}
 	});
 	tool.Q.beforeRemove.set(function () {
@@ -4309,20 +4318,15 @@ Tp.toString = function _Q_Tool_prototype_toString() {
  * @method _loadToolScript
  * @param {DOMElement} toolElement
  * @param {Function} callback  The callback to call when the corresponding script has been loaded and executed
- * @param {Mixed} shared pass this only when constructing a tool
- * @param {Q.Pipe} you can pass a parent pipe which will be filled later
+ * @param {Mixed} [shared] pass this only when constructing a tool
+ * @param {String} [parentId] used internally to pass id of parent tools waiting for init
  * @return {boolean} whether the script needed to be loaded
  */
-function _loadToolScript(toolElement, callback, shared, parentPipe) {
-	var id = toolElement.id;
+function _loadToolScript(toolElement, callback, shared, parentId) {
+	var toolId = Q.Tool.calculateId(toolElement.id);
+	var normalizedId = Q.normalize(toolId);
 	var classNames = toolElement.className.split(' ');
 	var toolNames = [];
-	var normalizedId = Q.normalize(Q.Tool.calculateId(id));
-	if (parentPipe) {
-		if (!parentPipe.waitForIdNames) {
-			parentPipe.waitForIdNames = [];
-		}
-	}
 	for (var i=0, nl = classNames.length; i<nl; ++i) {
 		var className = classNames[i];
 		if (className === 'Q_tool'
@@ -4365,9 +4369,9 @@ function _loadToolScript(toolElement, callback, shared, parentPipe) {
 				}; 
 			}
 		}
-		if (parentPipe) {
-			var normalizedName = Q.normalize(toolName);
-			parentPipe.waitForIdNames.push(normalizedId+"\t"+normalizedName);
+		if (parentId) {
+			Q.setObject([toolId, parentId], true, _toolsToInit);
+			Q.setObject([parentId, toolId], true, _toolsWaitingForInit);
 		}
 		if (shared) {
 			var uniqueToolId = "tool " + (shared.waitingForTools.length+1)
@@ -7850,6 +7854,8 @@ function _activateTools(toolElement, options, shared) {
 	var pendingCurrentEvent = new Q.Event();
 	pendingCurrentEvent.toolElement = toolElement; // just to keep track for debugging
 	_pendingParentStack.push(pendingCurrentEvent); // wait for construct of parent tool
+	var toolId = Q.Tool.calculateId(toolElement.id);
+	_waitingParentStack.push(toolId); // wait for init of child tools
 	_loadToolScript(toolElement,
 	function _activateTools_doConstruct(toolElement, toolFunc, toolName, uniqueToolId) {
 		if (!_constructors[toolName]) {
@@ -7950,11 +7956,10 @@ function _activateTools(toolElement, options, shared) {
 				}
 				shared.pipe.fill(uniqueToolId)();
 			}
-			pendingCurrentEvent.handle.call(result, options);
+			pendingCurrentEvent.handle.call(tool, options, result);
 			pendingCurrentEvent.removeAllHandlers();
 		}
 	}, shared);
-	_waitingParentStack.push(new Q.Pipe()); // wait for init of child tools
 }
 
 _activateTools.alreadyActivated = {};
@@ -7969,44 +7974,59 @@ _activateTools.alreadyActivated = {};
  */
 function _initTools(toolElement) {
 	
-	function _handleInit() {
-		var tn, tool, normalizedName, normalizedId;
-		var tools = toolElement.Q.tools;
-		for (tn in tools) {
-			tool = tools[tn];
-			normalizedName = Q.normalize(tn);
-			normalizedId = Q.normalize(tool.id);
-			if (!tool.initialized) {
-				tool.initialized = true;
-				Q.handle(tool.Q && tool.Q.onInit, tool, [tool.options]);
-				_initToolHandlers[""] &&
-				_initToolHandlers[""].handle.call(tool, tool.options);
-				_initToolHandlers[normalizedName] &&
-				_initToolHandlers[normalizedName].handle.call(tool, tool.options);
-				_initToolHandlers["id:"+normalizedId] &&
-				_initToolHandlers["id:"+normalizedId].handle.call(tool, tool.options);
+	var currentEvent = _pendingParentStack[_pendingParentStack.length-1];
+	_pendingParentStack.pop(); // it was pushed during tool activate
+	var currentId = _waitingParentStack.pop();
+	var parentId = _waitingParentStack[_waitingParentStack.length-1];
+	
+	_loadToolScript(toolElement,
+	function _initTools_doInit(toolElement, toolFunc, toolName, uniqueToolId) {
+		currentEvent.add(_doInit, "WAITING TO INIT "+parentId+" FOR "+currentId);
+	}, null, parentId);
+	
+	function _doInit() {
+		var tool = this;
+		var normalizedName = Q.normalize(tool.name);
+		var normalizedId = Q.normalize(tool.id);
+		var waiting = _toolsWaitingForInit[tool.id];
+		if (tool.initialized || waiting) {
+			return;
+		}
+		tool.initialized = true;
+		Q.handle(tool.Q && tool.Q.onInit, tool, [tool.options]);
+		_initToolHandlers[""] &&
+		_initToolHandlers[""].handle.call(tool, tool.options);
+		_initToolHandlers[normalizedName] &&
+		_initToolHandlers[normalizedName].handle.call(tool, tool.options);
+		_initToolHandlers["id:"+normalizedId] &&
+		_initToolHandlers["id:"+normalizedId].handle.call(tool, tool.options);
+		// Initialize parent tools which are ready to be initialized
+		var toInit = _toolsToInit[tool.id];
+		for (var parentId in toInit) {
+			if (!Q.Tool.active[parentId]) {
+				return;
 			}
-			if (parentPipe) {
-				parentPipe.fill(normalizedId+"\t"+normalizedName).call(tool, tool.options);
+			var allInitialized = true;
+			var childIds = _toolsWaitingForInit[parentId];
+			for (var childId in childIds) {
+				for (var childName in Q.Tool.active[childId]) {
+					var c = Q.Tool.active[childId][childName];
+					if (!c || !c.initialized) {
+						allInitialized = false;
+						break;
+					}
+				}
+			}
+			if (allInitialized) {
+				delete _toolsWaitingForInit[parentId];
+				for (var parentName in Q.Tool.active[parentId]) {
+					var p = Q.Tool.active[parentId][parentName];
+					_doInit.call(p);
+				}
 			}
 		}
+		delete _toolsToInit[tool.id];
 	}
-	
-	_pendingParentStack.pop();
-	
-	var currentPipe = _waitingParentStack.pop();
-	var parentPipe = _waitingParentStack.length
-		? _waitingParentStack[_waitingParentStack.length-1]
-		: null;
-	
-	_loadToolScript(toolElement, function () {
-		var wfin = currentPipe.waitForIdNames;
-		if (wfin) {
-			currentPipe.add(wfin, 1, _handleInit).run();
-		} else {
-			_handleInit(); // just a slight optimization
-		}
-	}, null, parentPipe);
 }
 
 /**
