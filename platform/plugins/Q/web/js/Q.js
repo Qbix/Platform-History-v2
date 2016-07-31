@@ -7923,33 +7923,21 @@ function _activateTools(toolElement, options, shared) {
 		}
 		var key;
 		if (pendingParentEvent) {
-			key = pendingParentEvent.add(_reallyConstruct, null);
+			key = pendingParentEvent.add(_reallyConstruct, toolId);
 		} else {
 			_reallyConstruct();
 		}
 		function _reallyConstruct() {
+			// NOTE: inside the tool constructor, after you add
+			// any child elements, call Q.activate() and Qbix
+			// will work correctly, whether it's sync or async.
 			var _constructor = _constructors[toolName];
 			var result = new _constructor(toolElement, options);
 			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			shared.tools[tool.id] = shared.tool = tool;
-			
-			if (result !== _activateTools.alreadyActivated) {
-				// recursively activate whatever was inside,
-				// handle _initTools events, etc.
-				
-				// TODO: make a mechanism for the tools
-				// to tell Q to go deeper inside, and otherwise
-				// we can skip the subtree on every Q.activate
-				// when it hits an element where no tool on that
-				// element said to go deeper. Which also means
-				// no child tools will be activated, so nothing
-				// was added to waitForIdNames and the tool will
-				// be initialized without waiting for any child tools.
-				// tool.element.Q.supportsChildren = true
-				// set by tool.supportsChildren(true)
-				Q.activate(toolElement.children || toolElement.childNodes, options);
+			if (!tool) {
+				return;
 			}
-			
+			shared.tools[tool.id] = shared.tool = tool;
 			if (uniqueToolId) {
 				if (uniqueToolId === shared.firstToolId) {
 					shared.firstTool = tool;
@@ -7981,7 +7969,7 @@ function _initTools(toolElement) {
 	
 	_loadToolScript(toolElement,
 	function _initTools_doInit(toolElement, toolFunc, toolName, uniqueToolId) {
-		currentEvent.add(_doInit, "WAITING TO INIT "+parentId+" FOR "+currentId);
+		currentEvent.add(_doInit, currentId);
 	}, null, parentId);
 	
 	function _doInit() {
