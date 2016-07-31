@@ -7934,15 +7934,15 @@ function _activateTools(toolElement, options, shared) {
 			var _constructor = _constructors[toolName];
 			var result = new _constructor(toolElement, options);
 			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			if (!tool) {
-				return;
-			}
-			shared.tools[tool.id] = shared.tool = tool;
+			shared.tools[toolId] = shared.tool = tool;
 			if (uniqueToolId) {
 				if (uniqueToolId === shared.firstToolId) {
 					shared.firstTool = tool;
 				}
 				shared.pipe.fill(uniqueToolId)();
+			}
+			if (!tool) {
+				return;
 			}
 			pendingCurrentEvent.handle.call(tool, options, result);
 			pendingCurrentEvent.removeAllHandlers();
