@@ -10831,7 +10831,7 @@ Q.Masks = {
 
 Q.Masks.options = {
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
-	'Q.request.load.mask': { className: 'Q_load_data_mask', fadeIn: 200 },
+	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
 };
 
