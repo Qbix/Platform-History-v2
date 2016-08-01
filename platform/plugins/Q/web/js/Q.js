@@ -9053,6 +9053,7 @@ Q.Browser = {
 		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
 			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
 		var isStandalone = navigator.standalone
+			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
 			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
 			|| false;
 		if (OS === 'Android') {
@@ -9296,6 +9297,8 @@ de.addClass('Q_js');
 de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
 de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
+de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
+de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
 
 Q.Page.onLoad('').set(function () {
 	de.addClass(Q.info.uri.module + '_' + Q.info.uri.action)

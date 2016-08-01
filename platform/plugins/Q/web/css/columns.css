@@ -38,6 +38,10 @@
 	overflow: hidden;
 }
 
+html.Q_ios.Q_standalone .Q_columns_title {
+	background-color: white;
+}
+
 .Q_columns_title .Q_close {
 	width: 40px;
 	height: 40px;

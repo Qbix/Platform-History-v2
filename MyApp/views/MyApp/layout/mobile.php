@@ -5,11 +5,11 @@
 	<?php echo Q_Response::metas(true, "\n\t") ?>
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="viewport" content="minimal-ui, shrink-to-fit=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0<?php if (Q_Request::platform() == 'android'): ?>, target-densitydpi=medium-dpi<?php endif ?>" />
+	<meta name="theme-color" content="#f8f8f8">
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="<?php Q_Html::text(Users::communityName()) ?>">
-	<meta name="mobile-web-app-capable" content="yes">
 	<?php if (Q_Request::platform() !== 'android'): ?>
 	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo Q_Html::themedUrl('img/icon/76.png') ?>" />
 	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php echo Q_Html::themedUrl('img/icon/120.png') ?>" />
