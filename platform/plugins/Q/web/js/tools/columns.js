@@ -57,7 +57,7 @@ Q.Tool.define("Q/columns", function(options) {
 		if (state.$currentColumn) {
 			state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
 		}
-	}, 100));
+	}, 100), tool);
 	
 	tool.refresh();
 	Q.onLayout(tool).set(function () {

@@ -1379,7 +1379,7 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Q.typeOf(x) === 'array') {
-		var arr = Array.prototype.slice.call(x, 0);
+		return Array.prototype.slice.call(x, 0);
 	}
 	if (x && typeof x.copy === 'function') {
 		return x.copy();
