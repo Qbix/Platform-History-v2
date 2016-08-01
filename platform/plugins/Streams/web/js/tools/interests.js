@@ -288,7 +288,11 @@ Q.Tool.define("Streams/interests", function (options) {
 			var image = val ? 'clear' : 'filter';
 			if (image != lastImage) {
 				var src = Q.url('plugins/Q/img/white/'+image+'.png');
-				$this.css('background-image', 'url('+src+')')
+				$this.css({
+					'background-image': 'url('+src+')',
+					'background-position': '100% 50%',
+					'background-repeat': 'no-repeat'
+				});
 				lastImage = image;
 			}
 			if (val) {
