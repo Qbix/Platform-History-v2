@@ -292,8 +292,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				lastImage = image;
 			}
 			if (val) {
-				tool.$('.Q_expandable_tool').hide();
-				tool.$('.Q_expandable_tool h3').hide();
+				var showElements = [];
 				tool.$('.Streams_interest_sep').html(' ');
 				Q.each(allInterests, function (interest, ids) {
 					for (var id in ids) {
@@ -320,24 +319,35 @@ Q.Tool.define("Streams/interests", function (options) {
 						}
 						if (matched) {
 							$span.show();
-							$span.prevAll('h3').eq(0).show();
 							var $expandable = $span.closest('.Q_expandable_tool');
-							$expandable.show();
+							var $h3 = $span.prevAll('h3');
+							showElements.push($expandable[0]);
+							showElements.push($h3[0]);
+							!$expandable.is(":visible") && $expandable.show();
+							!$h3.is("visible") && $h3.show();
 							$expandable[0].Q("Q/expandable").expand({
 								autoCollapseSiblings: false,
 								scrollContainer: false
 							});
-							existing[$span.data('category')] = true;
+							existing[$span.data('category')] = interest;
 						} else {
 							$span.hide();
 						}
+					}
+				});
+				tool.$('.Q_expandable_tool')
+				.add(tool.$('.Q_expandable_tool h3'))
+				.each(function () {
+					if (showElements.indexOf(this) < 0) {
+						$(this).is(":visible") && $(this).hide();
 					}
 				});
 				
 				var count = 0;
 				$select.empty();
 				Q.each(Interests.all[state.communityId], function (category) {
-					if (existing[category]) {
+					if (existing[category]
+					&& Q.normalize(existing[category]) === Q.normalize(val)) {
 						return;
 					}
 					$('<option />', { value: category })

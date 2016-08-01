@@ -28,7 +28,6 @@ function _Q_clickfocus(o) {
 				$div.remove();
 			});
 		}
-		// $this[0].scrollIntoView();
 		var scrollTop = $this[0].getBoundingClientRect().top
 		 	- $p[0].getBoundingClientRect().top
 		 	- o.scrollTopMargin;
