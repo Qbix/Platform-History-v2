@@ -9396,7 +9396,8 @@ function _detectOrientation(e) {
 	var b = d.getElementsByTagName('body')[0];
 	var x = w.innerWidth || h.clientWidth || (b && b.clientWidth);
 	var y = w.innerHeight|| h.clientHeight|| (b && b.clientHeight);
-	if (x > y) {
+	var m = w.matchMedia;
+	if ((m && m("(orientation: landscape)").matches) || x > y) {
 		h.removeClass('Q_verticalOrientation')
 			.addClass('Q_horizontalOrientation');
 		Q.info.isVertical = false;
