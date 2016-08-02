@@ -5,8 +5,9 @@
 	<?php echo Q_Response::metas(true, "\n\t") ?>
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="viewport" content="minimal-ui, shrink-to-fit=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0<?php if (Q_Request::platform() == 'android'): ?>, target-densitydpi=medium-dpi<?php endif ?>" />
-	<meta name="theme-color" content="#f8f8f8">
 	<meta name="mobile-web-app-capable" content="yes" />
+	<link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#f8f8f8">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="<?php Q_Html::text(Users::communityName()) ?>">
@@ -15,6 +16,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php echo Q_Html::themedUrl('img/icon/120.png') ?>" />
 	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php echo Q_Html::themedUrl('img/icon/152.png') ?>" />
 	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php echo Q_Html::themedUrl('img/icon/180.png') ?>" />
+	<link rel="apple-touch-startup-image" href="<?php echo Q_Html::themedUrl('img/startup/320x460.png') ?>">
 	<?php endif; ?>
 	<link rel="shortcut icon" sizes="196x196" href="<?php echo Q_Html::themedUrl('img/icon/196.png') ?>" />
 	<?php if (Q_Request::platform() === 'android'): ?>
