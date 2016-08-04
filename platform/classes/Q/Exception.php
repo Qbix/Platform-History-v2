@@ -45,7 +45,10 @@ class Q_Exception extends Exception
 		}
 		
 		if (is_string($params)) {
-			parent::__construct($params, isset($code) ? $code : 1);
+			parent::__construct($params, is_numeric($code) ? $code : -1);
+			if (isset($code)) {
+				$this->code = $code; // Q_Exception allows non-numeric codes
+			}
 			return;
 		}
 		$this->params = is_array($params) ? $params : array();
@@ -96,11 +99,6 @@ class Q_Exception extends Exception
 		$this->params[$param] = $value;
 	}
 	
-	function set()
-	{
-		
-	}
-	
 	/**
 	 * Returns the array of parameters the exception was created with.
 	 * @method params
@@ -125,25 +123,33 @@ class Q_Exception extends Exception
 	 * Registers a new exception class that extends Q_Exception
 	 * @method add
 	 * @static
-	 * @param {string} $class_name The name of the exception class.
+	 * @param {string} $className The name of the exception class.
 	 * @param {string} $message The description of the error. Will be eval()-ed before rendering,
 	 *  so it can include references to parameters, such as $my_param.
-	 * @param {array} [$rethrow_dest_class=array()] The name of the class that should handle this exception,
+	 * @param {string} [$baseClassName=null] Here you can pass the name of different base class than Q_Exception
+	 * @param {array} [$rethrowDestClasses=array()] The name of the class that should handle this exception,
 	 *  should it be thrown. Almost all catch() blocks in your code should use
 	 *  `Q_Exception::rethrow($e, __CLASS__)` as the first statement, 
 	 *  if the exception might have to be re-thrown further down the stack.
 	 */
 	static function add(
-	 $class_name,
+	 $className,
 	 $message,
-	 $rethrow_dest_classes = array())
+	 $baseClassName = null,
+	 $rethrowDestClasses = array())
 	{
 		static $exception_code = 10000;
 		++$exception_code; // TODO: improve this somehow
-		
-		self::$codes[$class_name] = $exception_code;
-		self::$messages[$class_name] = $message;
-		self::$rethrowDestClasses[$class_name] = $rethrow_dest_classes;
+		self::$codes[$className] = $exception_code;
+		self::$messages[$className] = $message;
+		self::$rethrowDestClasses[$className] = $rethrowDestClasses;
+		if (is_array($baseClassName)) {
+			$rethrowDestClasses = $baseClassName;
+			$baseClassName = null;
+		}
+		if (isset($baseClassName)) {
+			self::$baseClasses[$className] = isset($baseClass) ? $baseClass : 'Q_Exception';
+		}
 	}
 	
 	/**
@@ -153,19 +159,20 @@ class Q_Exception extends Exception
 	 * @static
 	 * @param {Exception} $exception The exception that was thrown. It is analyzed for
 	 *  whether it should be re-thrown.
-	 * @param {string} $current_class If the $rethrow_dest_classes was specified in Q_Exception::add
+	 * @param {string} $currentClass If the $rethrowDestClasses was specified in Q_Exception::add
 	 *  when creating this exception's class, and it does not contain
-	 *  $current_class, this function throws the exception again.
+	 *  $currentClass, this function throws the exception again.
 	 */
 	static function rethrow(
 	 $exception, 
-	 $current_class)
+	 $currentClass)
 	{
-		if (!is_callable(array($exception, 'rethrowDestClasses')))
+		if (!is_callable(array($exception, 'rethrowDestClasses'))) {
 			return false;
+		}
 
 		$rdc = $exception->rethrowDestClasses();
-		if ($rdc and !in_array($current_class, $rdc)) {
+		if ($rdc and !in_array($currentClass, $rdc)) {
 			throw $exception;
 		}
 	}
@@ -177,9 +184,9 @@ class Q_Exception extends Exception
 	 */
 	function rethrowDestClasses()
 	{
-		$class_name = get_class($this);
-		if (isset(self::$rethrowDestClasses[$class_name])) {
-			return self::$rethrowDestClasses[$class_name];
+		$className = get_class($this);
+		if (isset(self::$rethrowDestClasses[$className])) {
+			return self::$rethrowDestClasses[$className];
 		}
 		return array();
 	}
@@ -344,6 +351,12 @@ class Q_Exception extends Exception
 	 */
 	protected static $rethrowDestClasses = array();
 	/**
+	 * @property $baseClasses
+	 * @protected
+	 * @type array
+	 */
+	protected static $baseClasses = array();
+	/**
 	 * @property $trace
 	 * @protected
 	 * @type array
@@ -355,5 +368,10 @@ class Q_Exception extends Exception
 	 * @type string
 	 */
 	protected $traceAsString = null;
-
+	/**
+	 * @property $code
+	 * @protected
+	 * @type string
+	 */
+	protected $code = null;
 }
