@@ -1011,14 +1011,14 @@ Q.Layout = {
 			var previousOrientation = Q.Layout.orientation;
 			if (orientation !== undefined)
 			{
-				Q.Layout.lastWindowWidth = windowWidth();
+				Q.Layout.lastWindowWidth = windowWidth;
 				Q.Layout.lastOrientation = orientation;
 				Q.Layout.orientation = ((orientation === 0 || orientation === 180) ? 'portrait' : 'landscape');
 			}
 			else
 			{
-				Q.Layout.lastWindowWidth = windowWidth();
-				Q.Layout.orientation = (windowWidth() > windowHeight() ? 'landscape' : 'portrait');
+				Q.Layout.lastWindowWidth = windowWidth;
+				Q.Layout.orientation = (windowWidth > windowHeight ? 'landscape' : 'portrait');
 			}
 			if (!Q.Layout.orientationOnLoad)
 			{
@@ -1043,9 +1043,9 @@ Q.Layout = {
 				);
 			}
 			orientationMask.css({
-				'width': windowWidth() + 'px',
-				'height': windowHeight() + 'px',
-				'line-height': windowHeight() + 'px',
+				'width': windowWidth + 'px',
+				'height': windowHeight + 'px',
+				'line-height': windowHeight + 'px',
 				'opacity': '1'
 			});
 			orientationMask.show();
@@ -1054,16 +1054,16 @@ Q.Layout = {
 			{
 				if (Q.Layout.fullScreenHeight != 0 && Q.Layout.addressBarHeight != 0)
 				{
-					Q.Layout.fullScreenHeight = windowHeight();
+					Q.Layout.fullScreenHeight = windowHeight;
 					Q.Layout.heightWithAddressBar = Q.Layout.fullScreenHeight - Q.Layout.addressBarHeight;
 				}
 				Q.Layout.orientationChange(previousOrientation != Q.Layout.orientation);
 			}, 0);
 		}
-		if (Q.Layout.fullScreenHeight && windowHeight() < Q.Layout.fullScreenHeight &&
-				((Q.info.isMobile && (windowHeight() != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
+		if (Q.Layout.fullScreenHeight && windowHeight < Q.Layout.fullScreenHeight &&
+				((Q.info.isMobile && (windowHeight != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
 		{
-			Q.Layout.heightWithKeyboard = windowHeight();
+			Q.Layout.heightWithKeyboard = windowHeight;
 			Q.Layout.keyboardVisible = true;
 		}
 		else if (!Q.Layout.focusEventOccured)
@@ -1071,12 +1071,12 @@ Q.Layout = {
 			Q.Layout.keyboardVisible = false;
 		}
 		var main = $('#main');
-		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight())
+		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight)
 		{
 			// if it's 'height-only' orientation change and if keyboard appeared
 			// we shouldn't run orientationChange() in such case
 			// also there's no need to adjust height if it's address bar appeared
-			if (!Q.Layout.keyboardVisible && windowHeight() != Q.Layout.heightWithAddressBar)
+			if (!Q.Layout.keyboardVisible && windowHeight != Q.Layout.heightWithAddressBar)
 				Q.Layout.orientationChange(false, true, true);
 		}
 		if (Q.Layout.handleAddressBarAppearing && Q.Layout.heightWithAddressBar < Q.Layout.fullScreenHeight &&
