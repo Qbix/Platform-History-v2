@@ -997,7 +997,7 @@ Q.Layout = {
 	 */
 	checkOrientation: function()
 	{
-		if (Q.Layout.lastWindowWidth() === undefined)
+		if (Q.Layout.lastWindowWidth === undefined)
 			Q.Layout.lastWindowWidth = 0;
 		if (Q.Layout.lastOrientation === undefined)
 			Q.Layout.lastOrientation = -1;
@@ -1005,8 +1005,8 @@ Q.Layout = {
 		var windowWidth = Q.Pointer.windowWidth();
 		var windowHeight = Q.Pointer.windowHeight();
 		var orientation = window.orientation;
-		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastWindowWidth()) ||
-				(orientation === undefined && windowWidth() !== Q.Layout.lastWindowWidth()))
+		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastWindowWidth) ||
+				(orientation === undefined && windowWidth() !== Q.Layout.lastWindowWidth))
 		{
 			var previousOrientation = Q.Layout.orientation;
 			if (orientation !== undefined)
