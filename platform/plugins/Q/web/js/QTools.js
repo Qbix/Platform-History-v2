@@ -819,7 +819,7 @@ Q.Layout = {
 						if (Q.info.platform == 'android')
 						{
 							var participants = $('.Streams_participant_tool_wrapper');
-							var participantsWidth = Q.Pointer.windowWidth(), participantsLeft = 0;
+							var participantsWidth = Q.Pointer.windowWidth, participantsLeft = 0;
 							if (Q.info.isMobile)
 							{
 								if (Q.Layout.orientation == 'landscape')
@@ -1005,8 +1005,8 @@ Q.Layout = {
 		var windowWidth = Q.Pointer.windowWidth();
 		var windowHeight = Q.Pointer.windowHeight();
 		var orientation = window.orientation;
-		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastWindowWidth) ||
-				(orientation === undefined && windowWidth() !== Q.Layout.lastWindowWidth))
+		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth !== Q.Layout.lastWindowWidth) ||
+				(orientation === undefined && windowWidth !== Q.Layout.lastWindowWidth))
 		{
 			var previousOrientation = Q.Layout.orientation;
 			if (orientation !== undefined)
