@@ -12,8 +12,8 @@
  * @class Q clickable
  * @constructor
  * @param {Object} [options] options for function configuration
- * @param {Object} [options.shadow] shadow effect configuration
- * @param {String} [options.shadow.src="plugins/Q/img/shadow3d.png"] src , path to image
+ * @param {Object|null} [options.shadow] shadow effect configuration, or false for no shadow
+ * @param {String} [options.shadow.src="plugins/Q/img/shadow3d.png"] url of the shadow image
  * @param {Number} [options.shadow.stretch=1.5] stretch
  * @param {Number} [options.shadow.dip=0.25] dip
  * @param {Number} [options.shadow.opacity=0.5] opacity

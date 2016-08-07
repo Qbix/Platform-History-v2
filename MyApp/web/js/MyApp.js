@@ -76,7 +76,8 @@ var MyApp = (function (Q, $) {
 	if (Q.info.isTouchscreen) {
 		Q.Tool.jQuery.options("Q/clickable", {
 			press: { size: 1.5 },
-			release: { size: 3 }
+			release: { size: 3 },
+			shadow: null
 		});
 	}
 	
