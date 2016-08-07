@@ -8917,6 +8917,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 			Q.activate(element, options, callback);
 		});
 	};
+	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;
 	
 	Q.each({
 		'on': 'off',
@@ -9062,8 +9063,9 @@ Q.Browser = {
 			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
 			|| false;
 		if (OS === 'Android') {
-			isStandalone = screen.height-document.documentElement.clientHeight<40
-			             || screen.width-document.documentElement.clientHeight<40;
+			var w = screen.width-document.documentElement.clientHeight;
+			var h = screen.height-document.documentElement.clientHeight;
+			isStandalone = (0<h && h<40)|| (0<w && w<40);
 		}
 		if (/(.*)QWebView(.*)/.test(navigator.userAgent)) {
 			isStandalone = false;
@@ -9297,6 +9299,8 @@ Q.info.isAndroidStock = !!(Q.info.platform === 'android'
 	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
 Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
+Q.info.useFullscreen = Q.info.isMobile && Q.info.isAndroid(1000)
+	&& Q.info.isAndroidStock && Q.info.browserMainVersion < 11;
 var de = document.documentElement;
 de.addClass('Q_js');
 de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
@@ -9304,6 +9308,9 @@ de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
 de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
 de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
+if (Q.info.isAndroidStock) {
+	de.addClass('Q_androidStock');
+}
 
 Q.Page.onLoad('').set(function () {
 	de.addClass(Q.info.uri.module + '_' + Q.info.uri.action)

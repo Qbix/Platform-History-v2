@@ -435,7 +435,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 {
 	alignByParent: false,
 	mask: true,
-	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(1000),
+	fullscreen: Q.info.useFullscreen,
 	asyncLoad: !Q.info.isTouchscreen,
 	noClose: false,
 	closeOnEsc: true,

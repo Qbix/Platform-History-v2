@@ -463,8 +463,7 @@ class Q_Request
 		if (preg_match('/tablet|ipad/i', $useragent)) {
 			return true;
 		}
-		if ((preg_match('/android/i', $useragent) || preg_match('/silk/i', $useragent))
-		&& !preg_match('/mobi/i', $useragent)) {
+		if (!preg_match('/mobi/i', $useragent)) {
 			return true;
 		}
 		return false;

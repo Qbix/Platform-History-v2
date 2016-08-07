@@ -144,7 +144,7 @@ html[xmlns] .Q_clearfix { display: block; }
 .Q_overlay { background: url(../img/bg/overlay.png); display:none; text-align:left; padding: 0; border: 2px solid #444; z-index: 9000;
  opacity: 1; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px; -moz-box-shadow: 0 0 20px #333; -webkit-box-shadow: 0 0 50px #333; }
 
-.Q_notMobile .Q_overlay { max-width: 60%; }
+.Q_notMobile .Q_overlay { max-width: 500px; }
 .Q_mobile .Q_overlay { max-width: 95%; }
 
 body.Q_preventScroll {
@@ -206,7 +206,6 @@ body.Q_preventScroll {
 .Q_fullscreen_dialog.Q_overlay_apply .Q_close { 
 	background-image:url(../img/apply.png);
 }
-
 
 /* buttons */
 

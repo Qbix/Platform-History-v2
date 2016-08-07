@@ -59,6 +59,14 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 	}, 100), tool);
 	
+	if (Q.info.isAndroidStock) {
+		var w = Q.Pointer.windowWidth();
+		$(tool.element).parents().andSelf().each(function () {
+			$(this).data('Q/columns maxWidth', this.style.maxWidth)
+				.css('max-width', w);
+		});
+	}
+	
 	tool.refresh();
 	Q.onLayout(tool).set(function () {
 		tool.refresh();
@@ -91,7 +99,7 @@ Q.Tool.define("Q/columns", function(options) {
 	title: '<img class="Q_columns_loading" src="' + Q.url('plugins/Q/img/throbbers/loading.gif') +'" alt="">',
 	column: undefined,
 	scrollbarsAutoHide: {},
-	fullscreen: Q.info.isMobile && Q.info.isAndroid(1000) && Q.info.isAndroidStock,
+	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(),
 	beforeClose: new Q.Event(),
@@ -388,9 +396,13 @@ Q.Tool.define("Q/columns", function(options) {
 						? $te.parents()
 						: $te;
 					$toScroll.each(function () {
-						$(this).animate({
+						var $this = $(this);
+						$this.animate({
 							scrollLeft: this.scrollWidth
 						});
+						if ($this.css('overflow') !== 'visible') {
+							return false;
+						}
 					});
 				}
 				
@@ -637,6 +649,14 @@ Q.Tool.define("Q/columns", function(options) {
 				prepareColumns(tool);
 				tool.refresh();
 			}, 0);
+		},
+		beforeRemove: function () {
+			if (Q.info.isAndroidStock) {
+				var w = Q.Pointer.windowWidth();
+				$(this.element).parents().andSelf().each(function () {
+					this.style.maxWidth = $(this).data('Q/columns maxWidth');
+				});
+			}
 		}
 	}
 }
