@@ -3483,7 +3483,7 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Retrieve the user's stream needed to post invite messages
-	 * If stream does not exists - create it. May return null if save failed.
+	 * If stream does not exist - create it. May return null if save failed.
 	 * @method getInvitedStream
 	 * @static
 	 * @param $asUserId {string}
@@ -3494,7 +3494,9 @@ abstract class Streams extends Base_Streams
 	 */
 	static function getInvitedStream ($asUserId, $forUserId) {
 		$invited = Streams::fetch($asUserId, $forUserId, 'Streams/invited');
-		if (!empty($invited)) return $invited['Streams/invited'];
+		if (!empty($invited)) {
+			return $invited['Streams/invited'];
+		}
 		$invited = new Streams_Stream();
 		$invited->publisherId = $forUserId;
 		$invited->name = 'Streams/invited';
@@ -3505,8 +3507,16 @@ abstract class Streams extends Base_Streams
 		$invited->writeLevel = Streams::$WRITE_LEVEL['post']; // anyone can post messages
 		$invited->adminLevel = Streams::$ADMIN_LEVEL['none'];
 		$result = $invited->save(true);
-		//Streams::calculateAccess($asUserId, $forUserId, array('Streams/invited' => $invited), false);
-		return $result ? $invited : null;
+		if (!$result) {
+			return null;
+		}
+		$streams = array('Streams/invited' => $invited);
+		Streams::calculateAccess($asUserId, $forUserId, $streams, false);
+		$invited->subscribe(array(
+			"userId": $forUserId, 
+			"rule"=> array('deliver' => array('to' => 'invited'))
+		));
+		return $invited;
 	}
 
 	/**
