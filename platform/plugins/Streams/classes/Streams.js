@@ -1032,11 +1032,11 @@ Streams.getParticipants = function(publisherId, streamName, callback) {
  *	The name of the stream, or an array of names, or a Db.Range
  * @param callback=null {function}
  *	Callback receives the (err, stream) as parameters
- *  You can skip this argument if you want.
  * @param {String} [fields='*']
  *  Comma delimited list of fields to retrieve in the stream.
  *  Must include at least "publisherId" and "name".
  *  since make up the primary key of the stream table.
+ *  You can skip this argument if you want.
  * @param {Object} [options={}]
  *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
  *  @see Db_Query_Mysql::options().
@@ -1090,11 +1090,11 @@ Streams.fetch = function (asUserId, publisherId, streamName, callback, fields, o
  *	The name of the stream
  * @param callback=null {function}
  *	Callback receives the (err, stream) as parameters
- *  You can skip this argument if you want.
  * @param {String} [fields='*']
  *  Comma delimited list of fields to retrieve in the stream.
  *  Must include at least "publisherId" and "name".
  *  since make up the primary key of the stream table.
+ *  You can skip this argument if you want.
  * @param {Object} [options={}]
  *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
  *  @see Db_Query_Mysql::options().
