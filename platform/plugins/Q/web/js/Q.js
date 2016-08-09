@@ -67,6 +67,31 @@ Q.assert = function (condition, complaint) {
 	}
 };
 
+/**
+ * Parses a querystring
+ * @static
+ * @method parseQueryString
+ * @param {String} queryString  The string to parse
+ * @param {Array} keys  Optional array onto which the keys are pushed
+ * @return {Object} an object with the resulting {key: value} pairs
+ */
+Q.parseQueryString = function Q_parseQueryString(queryString, keys) {
+	if (!queryString) return {};
+	if (queryString[0] === '?' || queryString[0] === '#') {
+		queryString = queryString.substr(1);
+	}
+	var result = {};
+	Q.each(queryString.split('&'), function (i, clause) {
+		var parts = clause.split('=');
+		var key = decodeURIComponent(parts[0]);
+		var value = (parts[1] == null) ? null : decodeURIComponent(parts[1]);
+		if (!key) return;
+		if (keys) keys.push(key);
+		result[key] = value;
+	});
+	return result;
+};
+
 /*
  * Extend some built-in prototypes
  */
@@ -7773,31 +7798,6 @@ Q.handle.onUrl = new Q.Event(function () {
 	});
 	Q.Pointer.stopHints();
 }, "Q");
-
-/**
- * Parses a querystring
- * @static
- * @method parseQueryString
- * @param {String} queryString  The string to parse
- * @param {Array} keys  Optional array onto which the keys are pushed
- * @return {Object} an object with the resulting {key: value} pairs
- */
-Q.parseQueryString = function Q_parseQueryString(queryString, keys) {
-	if (!queryString) return {};
-	if (queryString[0] === '?' || queryString[0] === '#') {
-		queryString = queryString.substr(1);
-	}
-	var result = {};
-	Q.each(queryString.split('&'), function (i, clause) {
-		var parts = clause.split('=');
-		var key = decodeURIComponent(parts[0]);
-		var value = (parts[1] == null) ? null : decodeURIComponent(parts[1]);
-		if (!key) return;
-		if (keys) keys.push(key);
-		result[key] = value;
-	});
-	return result;
-};
 
 function Q_hashChangeHandler() {
 	var url = location.hash.queryField('url'), result = null;
