@@ -581,23 +581,9 @@ Streams.listen = function (options) {
 						// User is already a participant in the stream.
 						return;
 					}
-					(new Streams.Invited({
-						"userId": userId,
-						"state": 'pending'
-					})).save(_invited);
-				}
-
-				function _invited(err) {
-					if (err) {
-						Q.log("ERROR: Failed to save Streams.Invited for user '"+userId+"' during invite");
-						Q.log(err);
-						return;
-					}
-					token = this.fields.token;
-					// now ready to save invite
 					(new Streams.Invite({
-						"token": token,
 						"userId": userId,
+						"state": "pending",
 						"publisherId": stream.fields.publisherId,
 						"streamName": stream.fields.name,
 						"invitingUserId": invitingUserId,
@@ -606,7 +592,6 @@ Streams.listen = function (options) {
 						"readLevel": readLevel,
 						"writeLevel": writeLevel,
 						"adminLevel": adminLevel,
-						"state": 'pending',
 						"expireTime": expiry
 					})).save(_inviteSaved);
 				}
@@ -614,6 +599,22 @@ Streams.listen = function (options) {
 				function _inviteSaved(err) {
 					if (err) {
 						Q.log("ERROR: Failed to save Streams.Invite for user '"+userId+"' during invite");
+						Q.log(err);
+						return;
+					}
+					token = this.fields.token;
+					// now ready to save Streams.Invited row
+					(new Streams.Invited({
+						"token": token,
+						"userId": userId,
+						"state": "pending",
+						"expireTime": expiry
+					})).save(_invitedSaved);
+				}
+
+				function _invitedSaved(err) {
+					if (err) {
+						Q.log("ERROR: Failed to save Streams.Invited for user '"+userId+"' during invite");
 						Q.log(err);
 						return;
 					}
@@ -678,7 +679,6 @@ Streams.listen = function (options) {
 					Streams.Stream.emit('invite', invited.getFields(), userId, stream);
 					if (!invited.testWriteLevel('post')) {
 						Q.log("ERROR: Not authorized to post to invited stream for user '"+userId+"' during invite");
-						Q.log(err);
 						return;
 					}
 					var invitedUrl = Streams.invitedUrl(token);

@@ -38,7 +38,10 @@ Streams_Invite.prototype.url = function _Streams_Invite_prototype_getUrl() {
 };
 
 Streams_Invite.prototype.beforeSave = function _Streams_Invite_prototype_beforeSave(fields, callback) {
-	Base.prototype.beforeSave.apply(this, arguments);
+	var that = this;
+	if (fields.token) {
+		return Base.prototype.beforeSave.apply(this, arguments);
+	}
 	Streams.db().uniqueId(
 		Streams.Invite.table(), 'token', _uniqueId, null, {
 			length: Q.Config.get(['Streams', 'invites', 'tokens', 'length'], 16),
@@ -50,7 +53,8 @@ Streams_Invite.prototype.beforeSave = function _Streams_Invite_prototype_beforeS
 	);
 	function _uniqueId(token) {
 		var f = Q.copy(fields);
-		f.token = token;
+		that.fields.token = f.token = token;
+		Base.prototype.beforeSave.call(that, f, arguments)
 		callback(null, f);
 	}
 	return null;

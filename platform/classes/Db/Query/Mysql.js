@@ -59,26 +59,24 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * Connects to one or more shard(s) as necessary.
 	 * @param callback {function} This function is called when the queries have all completed.
 	 *  It is passed the following arguments:
-	 *
 	 * * errors: an Object. If there were any errors, it will contain shardName: error pairs
 	 * * results: an array of results merged from all the shards (for SELECT queries)
 	 *    for INSERT queries results contains the value of LAST_INSERT_ID()
 	 * * fields: an array of fields merged from all the shards (for SELECT queries)
-	 *
 	 *  It is passed an object whose keys are the shard names and the values
 	 *  are arrays of [err, results, fields] as returned from the mysql module.
 	 * @method execute
-	 * @param {object} [options={}]
-	 *  You can override the following options:
-	 *
-	 * * "plain": defaults to false
-	 *    If true, returns array of plain object instead of instances
-	 * * "raw": defaults to false.
-	 *    If true, or if the query type is Db.Query.TYPE_RAW, the callback will be passed an object
- pairs representing the results returned
-	 *    from the mysql query on each shard. Note that the results array will contain raw objects
-	 *    of the form "{fieldName: fieldValue};", and not objects which have Db.Row mixed in.
-	 * * "queries": Manually specify the queries, to bypass the sharding.
+	 * @param {Object} [options={}] You can override the following options:
+	 * @param {boolean} [options.plain=false]
+	 *    If true, returns array of plain object instead of Db.Row instances
+	 * @param {boolean} [options.raw=false]
+	 *    If true, or if the query type is Db.Query.TYPE_RAW, the callback
+	 *    will be passed an object of pairs representing the results returned
+	 *    from the mysql query on each shard. Note that the results array will
+	 *    contain raw objects of the form "{fieldName: fieldValue};",
+	 *    and not objects which have Db.Row mixed in.
+	 * @param {Object} [options.queries=false]
+	 *    Manually specify the queries as {shardName: query}, to bypass the sharding.
 	 */
 	mq.execute = function(callback, options) {
 		options = options || {};

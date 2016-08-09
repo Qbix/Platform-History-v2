@@ -2751,7 +2751,9 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 	}
 
 	if (typeof message !== "string") {
-		if (message instanceof Error
+		if (!message) {
+			message = JSON.stringify(message);
+		} else if (message instanceof Error
 		|| (message.fileName && message.stack)) {
 			var error = message;
 			message = error.name + ": " + error.message
