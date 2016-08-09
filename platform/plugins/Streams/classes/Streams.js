@@ -567,7 +567,7 @@ Streams.listen = function (options) {
 		
 			Q.each(userIds, function (i, userId) {
 				var token = null;
-
+								
 			    // TODO: Change this to a getter, so that we can do throttling in case there are too many userIds
 				(new Streams.Participant({
 					"publisherId": stream.fields.publisherId,
@@ -581,23 +581,8 @@ Streams.listen = function (options) {
 						// User is already a participant in the stream.
 						return;
 					}
-					Streams.db().uniqueId(
-						Streams.Invite.table(), 'token', _uniqueId, null, 
-						{
-							length: Q.Config.get(['Streams', 'invites', 'tokens', 'length'], 16),
-							characters: Q.Config.get(
-							    ['Streams', 'invites', 'tokens', 'characters'],
-							    'abcdefghijklmnopqrstuvwxyz'
-							)
-						}
-					);
-				}
-				
-				function _uniqueId(t) {
-					token = t;
 					(new Streams.Invited({
 						"userId": userId,
-						"token": token,
 						"state": 'pending'
 					})).save(_invited);
 				}
@@ -608,6 +593,7 @@ Streams.listen = function (options) {
 						Q.log(err);
 						return;
 					}
+					token = this.fields.token;
 					// now ready to save invite
 					(new Streams.Invite({
 						"token": token,
@@ -680,7 +666,7 @@ Streams.listen = function (options) {
 					}
 
 					// Now post a message to Streams/invited stream
-					getInvitedStream(invitingUserId, userId, _stream);
+					Streams.fetchOne(invitingUserId, userId, 'Streams/invited', _stream);
 				}
 
 				function _stream(err, invited) {
@@ -1045,7 +1031,8 @@ Streams.getParticipants = function(publisherId, streamName, callback) {
  * @param streamName {String|Array|Db.Range}
  *	The name of the stream, or an array of names, or a Db.Range
  * @param callback=null {function}
- *	Callback receives the error (if any) and stream as parameters
+ *	Callback receives the (err, stream) as parameters
+ *  You can skip this argument if you want.
  * @param {String} [fields='*']
  *  Comma delimited list of fields to retrieve in the stream.
  *  Must include at least "publisherId" and "name".
@@ -1065,17 +1052,18 @@ Streams.fetch = function (asUserId, publisherId, streamName, callback, fields, o
 		fields = '*';
 	}
 	fields = fields || '*';
-	var q = Streams.Stream.SELECT(fields)
+	Streams.Stream.SELECT(fields)
 	.where({publisherId: publisherId, name: streamName})
-	.options(options);
-	q.execute(function(err, res) {
+	.options(options)
+	.execute(function(err, res) {
 		if (err) {
 		    return callback(err);
 		}
 		if (!res.length) {
 		    return callback(null, []);
 		}
-		var p = new Q.Pipe(res.map(function(a) { return a.fields.name; }), function(params, subjects) {
+		var p = new Q.Pipe(res.map(function(a) { return a.fields.name; }),
+		function(params, subjects) {
 			for (var name in params) {
 				if (params[name][0]) {
 					callback(params[name][0]); // there was an error
@@ -1101,7 +1089,8 @@ Streams.fetch = function (asUserId, publisherId, streamName, callback, fields, o
  * @param streamName {String}
  *	The name of the stream
  * @param callback=null {function}
- *	Callback receives the error (if any) and stream as parameters
+ *	Callback receives the (err, stream) as parameters
+ *  You can skip this argument if you want.
  * @param {String} [fields='*']
  *  Comma delimited list of fields to retrieve in the stream.
  *  Must include at least "publisherId" and "name".
@@ -1115,6 +1104,10 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
 	if (!publisherId || !streamName) callback(new Error("Wrong arguments"));
 	if (streamName.charAt(streamName.length-1) === '/') {
 		streamName = new Db.Range(streamName, true, false, streamName.slice(0, -1)+'0');
+	}
+	if (Q.isPlainObject(fields)) {
+		options = fields;
+		fields = '*';
 	}
 	Streams.Stream.SELECT('*')
 	.where({publisherId: publisherId, name: streamName})
@@ -1131,55 +1124,6 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
 		});
 	});
 };
-
-/**
- * Retrieve the user's stream needed to post invite messages
- * If stream does not exist - create it
- * @method getInvitedStream
- * @static
- * @param asUserId {string}
- *	The user id of inviting user
- * @param forUserId {string}
- *	User id for which stream is created
- * @param callback=null {function}
- *	Callback receives the error (if any) and stream as parameters
- */
-function getInvitedStream (asUserId, forUserId, callback) {
-	if (!callback) return;
-	Streams.fetch(asUserId, forUserId, 'Streams/invited', function (err, streams) {
-		if (err) return callback(err);
-		if (streams['Streams/invited']) {
-			return callback(null, streams['Streams/invited']);
-		}
-		// stream does not exist yet
-		(new Streams.Stream({
-			publisherId: forUserId,
-			name: 'Streams/invited',
-			type: 'Streams/invited',
-			title: 'Streams/invited',
-			content: 'Post message here when user is invited to some stream',
-			readLevel: Streams.READ_LEVEL['none'],
-			writeLevel: Streams.WRITE_LEVEL['post'], // anyone can post messages
-			adminLevel: Streams.ADMIN_LEVEL['none']
-		})).save(function (err) {
-			if (err) return callback(err);
-			this.calculateAccess(asUserId, _afterCalculateAccess.bind(this));
-		});
-		function _afterCalculateAccess(err) {
-			var stream = this;
-			if (err) return callback(err);
-			stream.subscribe({
-				userId: forUserId, 
-				rule: {
-					deliver: {"to": "invited"}
-				}
-			}, function (err) {
-				if (err) return callback(err);
-				callback(null, stream);
-			});
-		}
-	});
-}
 
 /**
  * Register a message handler

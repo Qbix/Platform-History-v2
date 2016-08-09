@@ -7,6 +7,21 @@
 		"writeLevel": "0",
 		"adminLevel": "0"
 	},
+	"Streams/invited": {
+		"type": "Streams/invited",
+		"title": "Invited",
+		"icon": "",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0",
+		"subscribe": {
+			"rule": {
+				"deliver": {
+					"to": "invited"
+				}
+			}
+		}
+	},
 	"Streams/user/icon": {
 		"type": "Streams/image",
 		"title": "Icon",

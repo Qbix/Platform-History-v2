@@ -3359,6 +3359,9 @@ abstract class Streams extends Base_Streams
 		}
 
 		// let node handle the rest, and get the result
+		$displayName = isset($options['displayName'])
+			? $options['displayName']
+			: Streams::displayName($asUser);
 		$params = array(
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,
@@ -3371,9 +3374,7 @@ abstract class Streams extends Base_Streams
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
 			"adminLevel" => $adminLevel,
-			"displayName" => isset($options['displayName'])
-				? $options['displayName']
-				: Streams::displayName($asUser),
+			"displayName" => $displayName,
 			"expiry" => $expiry
 		);
 		if (!empty($template)) {
@@ -3479,44 +3480,6 @@ abstract class Streams extends Base_Streams
 			throw $e;
 		}
 		return $result;
-	}
-
-	/**
-	 * Retrieve the user's stream needed to post invite messages
-	 * If stream does not exist - create it. May return null if save failed.
-	 * @method getInvitedStream
-	 * @static
-	 * @param $asUserId {string}
-	 *	The user id of inviting user
-	 * @param $forUserId {string}
-	 *	User id for which stream is created
-	 * @return {Streams_Stream|null}
-	 */
-	static function getInvitedStream ($asUserId, $forUserId) {
-		$invited = Streams::fetch($asUserId, $forUserId, 'Streams/invited');
-		if (!empty($invited)) {
-			return $invited['Streams/invited'];
-		}
-		$invited = new Streams_Stream();
-		$invited->publisherId = $forUserId;
-		$invited->name = 'Streams/invited';
-		$invited->type = 'Streams/invited';
-		$invited->title = 'Streams/invited';
-		$invited->content = 'Post message here when user is invited to some stream';
-		$invited->readLevel = Streams::$READ_LEVEL['none'];
-		$invited->writeLevel = Streams::$WRITE_LEVEL['post']; // anyone can post messages
-		$invited->adminLevel = Streams::$ADMIN_LEVEL['none'];
-		$result = $invited->save(true);
-		if (!$result) {
-			return null;
-		}
-		$streams = array('Streams/invited' => $invited);
-		Streams::calculateAccess($asUserId, $forUserId, $streams, false);
-		$invited->subscribe(array(
-			"userId": $forUserId, 
-			"rule"=> array('deliver' => array('to' => 'invited'))
-		));
-		return $invited;
 	}
 
 	/**
@@ -3699,6 +3662,11 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		return $fieldNames;
+	}
+	
+	static function invitedUrl ($token) {
+		$baseUrl = Q_Config::get(array('Streams', 'invites', 'baseUrl'), "i");
+		return Q_Html::themedUrl("$baseUrl/$token");
 	}
 	
 	static function invitationsPath($invitingUserId)

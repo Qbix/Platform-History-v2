@@ -302,6 +302,7 @@
 		"onInsert": {
 			"Users_User": [
 				"Streams/participating",
+				"Streams/invited",
 				"Streams/user/username",
 				"Streams/user/icon",
 				"Streams/user/firstName",

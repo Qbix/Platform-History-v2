@@ -161,6 +161,7 @@ function Row(fields, retrieved /* false */) {
 	 * @param {boolean} [commit=false] If this is TRUE, then the current transaction is committed right after the save.
 	 *  Use this only if you started a transaction before.
 	 * @param {function} [callback=null] This function is called when the queries have all completed.
+	 *  Its this object is the same as the one the save method is called on.
 	 *  It is passed the one optional argument:
 	 *  errors: an Object. If there were any errors, it will be passed error object as returned from query.execute. If successful, it will be passed nothing.
 	 */
