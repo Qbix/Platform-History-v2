@@ -376,6 +376,9 @@ Sp.splitId = function(lengths, delimiter) {
 	return segments.join(delimiter);
 };
 
+var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
+	|| location.href.queryField('Q.cordova');
+
 /**
  * @class Function
  * @description Q extended methods for Functions
@@ -9055,7 +9058,6 @@ Q.Browser = {
 		} else if (ua.indexOf('presto') != -1) {
 			engine = 'presto';
 		}
-		var isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent);
 		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
 			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
 		var isStandalone = navigator.standalone
@@ -9088,7 +9090,7 @@ Q.Browser = {
 			device: OSdata.device,
 			isWebView: isWebView,
 			isStandalone: isStandalone,
-			isCordova: isCordova
+			isCordova: _isCordova
 		};
 	},
 	
