@@ -202,6 +202,9 @@ body.Q_preventScroll {
 	height:35px;
 	width:35px;
 }
+.Q_mobile .Q_overlay .Q_close {
+	right:-10px;
+}
 .Q_overlay.Q_overlay_apply .Q_close,
 .Q_fullscreen_dialog.Q_overlay_apply .Q_close { 
 	background-image:url(../img/apply.png);
