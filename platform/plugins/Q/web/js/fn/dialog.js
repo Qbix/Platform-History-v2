@@ -49,21 +49,22 @@ function _Q_overlay(o) {
 			$this.css({ 'left': o.left + 'px' });
 		}
 
+		var oap = o.alignParent, body = document.body;
+		var parentHeight = (oap && oap !== body && oap[0] !== body)
+			? $(o.alignParent).height()
+			: Q.Pointer.windowHeight();
 		if (o.top == 'middle') {
-			var parentHeight = o.alignParent
-				? $(o.alignParent).height()
-				: Q.Pointer.windowHeight();
 			$this.css({ 'top': ((parentHeight - height) / 2) + 'px' });
 		} else if (typeof(o.top) == 'string' && o.top.indexOf('%') != -1) {
 			percentage = parseInt(o.top) / 100;
 			$this.css({ 'top': (o.alignParent ? $(o.alignParent).height() * percentage : Q.Pointer.scrollTop() + Q.Pointer.windowHeight() * percentage) + 'px' });
 		} else {
-			$this.css({ 'top': Q.Pointer.scrollTop() + o.top + 'px' });
+			$this.css({ 'top': Q.Pointer.scrollTop() + o.top - $('body').offset().top + 'px' });
 		}
 		if (!o.fullscreen) {
 			var topMargin = Q.Dialogs.options.topMargin;
 			var parentHeight = (!o.alignByParent || parent[0] == document.body)
-				? Q.Pointer.windowWidth()
+				? Q.Pointer.windowHeight()
 				: parent.height();
 			if (typeof(topMargin) == 'string') // percentage
 				topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
