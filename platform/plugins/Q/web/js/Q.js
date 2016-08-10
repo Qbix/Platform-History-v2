@@ -5101,8 +5101,7 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
 	var checks = ["ready"];
-	if (Q.info.isCordova
-	&& root.cordova && Q.typeOf(cordova).substr(0, 4) !== 'HTML') {
+	if (_isCordova && root.cordova && Q.typeOf(cordova).substr(0, 4) !== 'HTML') {
 		checks.push("device");
 	}
 	var p = Q.pipe(checks, 1, function _Q_init_pipe_callback() {
@@ -9267,63 +9266,6 @@ Q.Browser = {
 	
 };
 
-var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
-	|| location.href.queryField('Q.cordova');
-
-var detected = Q.Browser.detect();
-var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
-var isTablet = navigator.userAgent.match(/tablet|ipad/i)
-	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
-/**
- * Useful info about the page and environment
- * @property {Object} info
- */
-Q.info = {
-	isTouchscreen: isTouchscreen, // works on ie10
-	isTablet: isTablet,
-	isWebView: detected.isWebView,
-	isStandalone: detected.isStandalone,
-	platform: detected.OS,
-	browser: detected,
-	isIE: function (minVersion, maxVersion) {
-		return Q.info.browser.name === 'explorer'
-			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
-			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
-	},
-	isAndroid: function (maxWidth, maxHeight, minVersion, maxVersion) {
-		return Q.info.platform === 'android'
-			&& (maxWidth == undefined || maxWidth >= Q.Pointer.windowWidth())
-			&& (maxHeight == undefined || maxHeight >= Q.Pointer.windowHeight())	
-			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
-			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
-	}
-};
-Q.info.isAndroidStock = !!(Q.info.platform === 'android'
-	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
-Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
-Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
-Q.info.useFullscreen = Q.info.isMobile && Q.info.isAndroid(1000)
-	&& Q.info.isAndroidStock && Q.info.browserMainVersion < 11;
-var de = document.documentElement;
-de.addClass('Q_js');
-de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
-de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
-de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
-de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
-de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
-if (Q.info.isAndroidStock) {
-	de.addClass('Q_androidStock');
-}
-
-Q.Page.onLoad('').set(function () {
-	de.addClass(Q.info.uri.module + '_' + Q.info.uri.action)
-		.addClass(Q.info.uri.module);
-}, 'Q');
-Q.Page.beforeUnload('').set(function () {
-	de.removeClass(Q.info.uri.module + '_' + Q.info.uri.action)
-		.removeClass(Q.info.uri.module);
-}, 'Q');
-
 function _touchScrollingHandler(event) {
     var p = event.target;
 	var pos;
@@ -11133,6 +11075,63 @@ function _Q_loadUrl_fillSlots (res, url, options) {
 	}
 	return elements;
 }
+
+var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
+	|| location.href.queryField('Q.cordova');
+
+var detected = Q.Browser.detect();
+var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
+var isTablet = navigator.userAgent.match(/tablet|ipad/i)
+	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
+/**
+ * Useful info about the page and environment
+ * @property {Object} info
+ */
+Q.info = {
+	isTouchscreen: isTouchscreen, // works on ie10
+	isTablet: isTablet,
+	isWebView: detected.isWebView,
+	isStandalone: detected.isStandalone,
+	platform: detected.OS,
+	browser: detected,
+	isIE: function (minVersion, maxVersion) {
+		return Q.info.browser.name === 'explorer'
+			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
+			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
+	},
+	isAndroid: function (maxWidth, maxHeight, minVersion, maxVersion) {
+		return Q.info.platform === 'android'
+			&& (maxWidth == undefined || maxWidth >= Q.Pointer.windowWidth())
+			&& (maxHeight == undefined || maxHeight >= Q.Pointer.windowHeight())	
+			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
+			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
+	}
+};
+Q.info.isAndroidStock = !!(Q.info.platform === 'android'
+	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
+Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
+Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
+Q.info.useFullscreen = Q.info.isMobile && Q.info.isAndroid(1000)
+	&& Q.info.isAndroidStock && Q.info.browserMainVersion < 11;
+var de = document.documentElement;
+de.addClass('Q_js');
+de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
+de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
+de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
+de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
+de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
+if (Q.info.isAndroidStock) {
+	de.addClass('Q_androidStock');
+}
+
+Q.Page.onLoad('').set(function () {
+	de.addClass(Q.info.uri.module + '_' + Q.info.uri.action)
+		.addClass(Q.info.uri.module);
+}, 'Q');
+Q.Page.beforeUnload('').set(function () {
+	de.removeClass(Q.info.uri.module + '_' + Q.info.uri.action)
+		.removeClass(Q.info.uri.module);
+}, 'Q');
 
 Q.loadUrl.options = {
 	quiet: false,
