@@ -3036,20 +3036,20 @@ Q.Contextual = {
 		if (info.size && info.size.width)
 		{
 			var arrowWidth = parseInt(arrow.css('width'));
-			arrow.css({ 'margin-left': ((info.size.width - arrowWidth) / 2 - 5) + 'px' });
+			arrow.css({ 'left': ((info.size.width - arrowWidth) / 2 - 5) + 'px' });
 		}
 		if (info.relativeToElement)
 		{
-			var leftOffset = parseInt(arrow.css('margin-left'));
+			var leftOffset = parseInt(arrow.css('left'));
 			if (info.coords.x < 5)
 			{
 				x = 5;
-				arrow.css({ 'margin-left': (leftOffset + info.coords.x - 5) + 'px' });
+				arrow.css({ 'left': (leftOffset + info.coords.x - 5) + 'px' });
 			}
 			else if (info.coords.x + contextual.outerWidth() + 5 > $body.width())
 			{
 				x = $body.width() - contextual.outerWidth() - 5;
-				arrow.css({ 'margin-left': (leftOffset + info.coords.x + contextual.outerWidth() - $body.width() + 5) + 'px' });
+				arrow.css({ 'left': (leftOffset + info.coords.x + contextual.outerWidth() - $body.width() + 5) + 'px' });
 			}
 		}
 		

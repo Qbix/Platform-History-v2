@@ -109,8 +109,8 @@
 
 .Q_contextual .Q_contextual_top_arrow
 {
-  margin-top: -22px;
-  margin-left: 105px;
+  top: -15px;
+  left: 105px;
   background: url('../img/ui/contextual_top_arrow.png') no-repeat;
 }
 
