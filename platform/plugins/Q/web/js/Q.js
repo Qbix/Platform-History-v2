@@ -5094,8 +5094,6 @@ Q.init = function _Q_init(options) {
 		Q.url('plugins/Q/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
-	Q.handle(Q.beforeInit);
-	Q.handle(Q.onInit); // Call all the onInit handlers
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
@@ -5175,7 +5173,8 @@ Q.init = function _Q_init(options) {
 		Q.onJQuery.handle(jQuery, [jQuery]);
 		jQuery(document).ready(_domReady);
 	} else {
-		var _timer = setInterval(function(){
+		document.addEventListener("DOMContentLoaded", _domReady);
+		var _timer = setInterval(function() { // for old browsers
 			if(/loaded|complete/.test(document.readyState)) {
 				clearInterval(_timer);
 				_domReady();
@@ -5184,6 +5183,8 @@ Q.init = function _Q_init(options) {
 	}
 	
 	_waitForDeviceReady();
+	Q.handle(Q.beforeInit);
+	Q.handle(Q.onInit); // Call all the onInit handlers
 };
 
 /**
