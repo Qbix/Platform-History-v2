@@ -499,7 +499,7 @@ Users.login = function(options) {
 	
 	Users.login.occurring = true;
 	
-	if (!o.using.indexOf('native') >= 0) {
+	if (o.using.indexOf('native') < 0) {
 		_doLogin();
 	} else {
 		$.fn.plugin.load('Q/dialog', _doLogin);
@@ -1486,6 +1486,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
 	var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
 	dialogSlot.append(step1_div).append(step2_div);
+	login_setupDialog.dialog = dialog;
 	dialog.append(titleSlot)
 	.append(dialogSlot)
 	.prependTo(dialogContainer)
@@ -1517,8 +1518,6 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 			login_setupDialog.dialog = null;
 		}
 	});
-	
-	login_setupDialog.dialog = dialog;
 
 	function hideForm2() {
 		if (_submitting) {
