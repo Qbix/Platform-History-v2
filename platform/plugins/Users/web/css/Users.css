@@ -354,3 +354,6 @@
 
 .Q_notMobile .Q_overlay.Users_login_dialog,
 .Q_notMobile .Q_overlay.Users_setIdentifier_dialog { width: 350px; }
+
+.Users_login_dialog { display: none; }
+.Users_login_dialog.Q_overlay { display: block; }

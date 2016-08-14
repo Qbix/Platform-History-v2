@@ -1486,8 +1486,10 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
 	var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
 	dialogSlot.append(step1_div).append(step2_div);
-	dialog.append(titleSlot).append(dialogSlot).prependTo(dialogContainer);
-	dialog.plugin('Q/dialog', {
+	dialog.append(titleSlot)
+	.append(dialogSlot)
+	.prependTo(dialogContainer)
+	.plugin('Q/dialog', {
 		alignByParent: true,
 		fullscreen: false,
 		beforeLoad: function()
@@ -1830,26 +1832,11 @@ Q.beforeInit.add(function _Users_beforeInit() {
 		throttle: 'Users.get'
 	});
 
-}, 'Users');
-
-Q.onInit.add(function () {
-	if (Q.Users.loggedInUser
-	&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
-	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
-		Q.nonce = Q.cookie('Q_nonce');
-	}
-	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
-    
-	if (Q.plugins.Users.facebookApps[Q.info.app]
-	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
-		Users.initFacebook();
-	}
-	
 	Users.lastSeenNonce = Q.cookie('Q_nonce');
 	
 	Q.Users.login.options = Q.extend({
 		onCancel: new Q.Event(),
-		onSuccess: new Q.Event(function (user, options) {
+		onSuccess: new Q.Event(function Users_login_onSuccess(user, options) {
 			// default implementation
 			if (user) {
 				// the user changed, redirect to their home page
@@ -1894,6 +1881,21 @@ Q.onInit.add(function () {
 	Q.Users.prompt.options = Q.extend({
 		dialogContainer: 'body'
 	}, Q.Users.prompt.options, Q.Users.prompt.serverOptions);
+
+}, 'Users');
+
+Q.onInit.add(function () {
+	if (Q.Users.loggedInUser
+	&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
+	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
+		Q.nonce = Q.cookie('Q_nonce');
+	}
+	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
+    
+	if (Q.plugins.Users.facebookApps[Q.info.app]
+	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
+		Users.initFacebook();
+	}
 }, 'Users');
 
 Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler () {

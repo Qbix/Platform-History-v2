@@ -300,7 +300,7 @@ button.basic16 { background-color: #eee; color: black; }
 
 .Q_actions_action { cursor: pointer !important; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; -moz-border-radius: 1px; -webkit-border-radius: 1px; box-shadow: black 3px 3px 10px; -webkit-box-shadow: black 3px 3px 10px; -moz-box-shadow: black 3px 3px 10px; }
-.Q_gallery_caption { z-index: 201; }
+.Q_gallery_caption { z-index: 201; position: absolute; }
 .Q_contextual { display: none; }
 .Q_rating_tool { display: inline-block; }
 .Q_rating_tool img { width: 14px; height: 14px; }
