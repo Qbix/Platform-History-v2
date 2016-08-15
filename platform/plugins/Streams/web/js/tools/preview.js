@@ -209,6 +209,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		} else {
 			_proceed();
 		}
+		Q.Pointer.cancelClick(event);
+		event.stopPropagation();
 	},
 	composer: function _composer () {
 		var tool = this;

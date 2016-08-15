@@ -181,7 +181,7 @@ function _Q_actions(options) {
 
 
 function _position($this, position, container) {
-	if (!$this.is(':visible')) {
+	if (!$this.is(':visible') && container.is(':visible')) {
 		return container.hide();
 	}
 	container.show();

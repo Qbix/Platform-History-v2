@@ -3340,7 +3340,7 @@ Q.Tool = function _Q_Tool(element, options) {
 	}
 
 	// options cascade -- process option keys that start with '.' or '#'
-	var partial, i, k, l;
+	var partial, i, k, l, a, n;
 	options = options || {};
 	this.options = this.options || {};
 	
@@ -3351,10 +3351,16 @@ Q.Tool = function _Q_Tool(element, options) {
 	
 	for (i = len-1; i >= 0; --i) {
 		var pid = pids[i];
-		if (Q.isEmpty(Q.getObject([pid, this.name, 'state'], Q.Tool.active))) {
+		if (!(a = Q.Tool.active[pid])) {
 			continue;
 		}
-		o = Q.extend(o, Q.Tool.options.levels, Q.Tool.active[pid][this.name].state);
+		for (n in a) {
+			for (k in a[n].state) {
+				if (k[0] === '.' || k[0] === '#') {
+					o[k] = Q.extend(o[k], Q.Tool.options.levels, a[n].state[k]);
+				}
+			}
+		}
 	}
 	
 	// .Q_something
@@ -9947,6 +9953,9 @@ Q.Pointer = {
 	/**
 	 * Cancels a click that may be in progress,
 	 * setting Q.Pointer.canceledClick to true.
+	 * This is to tell other handlers in the document, which know about Q,
+	 * not to react to the click in a standard way.
+	 * To really stop propagation of this event, also call stopPropagation.
 	 * However, this canceling itself can be canceled by a handler
 	 * returning false.
 	 * @static

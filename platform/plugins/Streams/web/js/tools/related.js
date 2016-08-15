@@ -102,6 +102,7 @@ function _Streams_related_tool (options)
 				var rc = tool.state.refreshCount;
 				var preview = Q.Tool.from(element, 'Streams/preview');
 				var ps = preview.state;
+				tool.integrateWithTabs([element]);
 				preview.state.beforeCreate.set(function () {
 					// workaround for now
 					if (tool.state.refreshCount > rc) {

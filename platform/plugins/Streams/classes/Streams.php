@@ -3520,7 +3520,10 @@ abstract class Streams extends Base_Streams
 	 * @method register
 	 * @static
 	 * @param {string} $fullName The full name of the user in the format 'First Last' or 'Last, First'
-	 * @param {string} $identifier User identifier
+	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
+	 * @param {string} [$identifier.identifier] an email address or phone number
+	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$icon=array()] User icon
 	 * @param {string} [$provider=null] Provider
 	 * @param {array} [$options=array()] An array of options that could include:
@@ -3531,7 +3534,12 @@ abstract class Streams extends Base_Streams
 	 * @throws {Users_Exception_AlreadyVerified} If user was already verified
 	 * @throws {Users_Exception_UsernameExists} If username exists
 	 */
-	static function register($fullName, $identifier, $icon = array(), $provider = null, $options = array())
+	static function register(
+		$fullName, 
+		$identifier, 
+		$icon = array(), 
+		$provider = null, 
+		$options = array())
 	{
 		if (is_array($provider)) {
 			$options = $provider;
@@ -3539,13 +3547,15 @@ abstract class Streams extends Base_Streams
 		}
 		
 		/**
-		 * @event Users/register {before}
+		 * @event Streams/register {before}
 		 * @param {string} username
-		 * @param {string} identifier
+		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Streams/register', compact('name', 'fullName', 'identifier', 'icon', 'provider', 'options'), 'before');
+		$return = Q::event('Streams/register', compact(
+			'name', 'fullName', 'identifier', 'icon', 'provider', 'options'), 'before'
+		);
 		if (isset($return)) {
 			return $return;
 		}
@@ -3561,14 +3571,15 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Please enter your name properly", 'name');
 		}
 
+		// this will be used in Streams_after_Users_User_saveExecute
 		Streams::$cache['register'] = $name;
 
 		$user = Users::register("", $identifier, $icon, $provider, $options);
 
 		/**
-		 * @event Users/register {after}
+		 * @event Streams/register {after}
 		 * @param {string} username
-		 * @param {string} identifier
+		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @param {Users_User} 'user'
 		 * @return {Users_User}
