@@ -92,7 +92,7 @@ function _Q_overlay(o) {
 		{
 			$this.data('Q/overlay').documentScrollTop = Q.Pointer.scrollTop();
 			var $overlay = $this.data('Q/overlay');
-			if ($this.css('display') == 'block') {
+			if ($this.hasClass('Q_overlay_open')) {
 				return;
 			}
 			var topZ = 0;
@@ -159,7 +159,7 @@ function _Q_overlay(o) {
 				}
 				Q.handle($overlay.options.onLoad, $this, [$this]);
 			}
-			calculatePosition($this);
+			$this.addClass('Q_overlay_open');
 		},
 		close: function(e)
 		{
@@ -169,6 +169,7 @@ function _Q_overlay(o) {
 			if (!$overlay.options.noClose) {
 				$(document).off('keydown', closeThisOverlayOnEsc);
 			}
+			$this.removeClass('Q_overlay_open');
 			$this.find('input, select, textarea').trigger('blur');
 			Q.handle($overlay.options.beforeClose, $this, [$this]);
 			if ($overlay.options.fadeInOut)
@@ -352,7 +353,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		var dialogData = {
 			load: function() {
 				dialogData.documentScrollTop = Q.Pointer.scrollTop();
-				if ($this.css('display') == 'block') {
+				if ($this.hasClass('Q_overlay_open')) {
 					return;
 				}
 				$this.css({
