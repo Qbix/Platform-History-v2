@@ -2479,6 +2479,7 @@ Q.onLayout = function (element) {
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
+				_layoutEvents.splice(i, 1);
 				break;
 			}
 		}
@@ -5376,6 +5377,17 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 	if (removeTools) {
 		Q.Tool.clear(element);
 	}
+	for (var i=0, l=_layoutElements.length; i<l; ++i) {
+		var p = _layoutElements[i];
+		do {
+			if (p === element) {
+				_layoutElements.splice(i, 1);
+				_layoutEvents.splice(i, 1);
+				--i; --l;
+				break;
+			}
+		} while (p = p.parentNode);
+	}
 	if (root.jQuery) {
 		// give jQuery a chance to do its own cleanup
 		return jQuery(element).remove();
@@ -5388,12 +5400,6 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 		}
 	} catch (e) {
 		// Old IE doesn't like this
-	}
-	for (var i=0, l=_layoutElements.length; i<l; ++i) {
-		if (_layoutElements[i] === element) {
-			_layoutElements.splice(i, 1);
-			_layoutEvents.splice(i, 1);
-		}
 	}
 };
 
@@ -5580,17 +5586,22 @@ Q.trigger = function _Q_trigger(eventName, element, args) {
 /**
  * Call this function to trigger layout changes,
  * or assign it as an event listener to some events.
+ * @param {Element} element
+ *  For any elements inside this container that Q.onLayout() was called on,
+ *  handle the corresponding Q.Events, and trigger "Q.layout" methods, if any,
+ *  on container elements.
  */
-Q.layout = function _Q_layout(elementOrEvent) {
-	var element = Q.instanceOf(elementOrEvent, Element) ? elementOrEvent : null;
+Q.layout = function _Q_layout(element) {
+	if (!element) {
+		return;
+	}
 	Q.each(_layoutElements, function (i, e) {
-		if (element && !element.contains(e)) {
+		if (!element.contains(e)) {
 			return;
 		}
-		var event = _layoutEvents[i];;
-		event.handle.call(event, e, elementOrEvent);
+		var event = _layoutEvents[i];
+		event.handle.call(event, e, element);
 	});
-	Q.trigger('Q.layout', elementOrEvent);
 };
 
 /**
@@ -7080,9 +7091,8 @@ Q.activate = function _Q_activate(elem, options, callback) {
  */
 Q.replace = function _Q_replace(container, source, options) {
 	if (!source) {
-		Q.Tool.clear(container); // Remove all the tools remaining in the container, with their events etc.
 		var c; while (c = container.lastChild) {
-			container.removeChild(c);
+			Q.removeElement(c, true);
 		} // Clear the container
 		return container;
 	}
@@ -7131,9 +7141,8 @@ Q.replace = function _Q_replace(container, source, options) {
 	
 	Q.beforeReplace.handle(container, source, options, newOptions, retainedTools);
 	
-	Q.Tool.clear(container); // Remove all the tools remaining in the container, with their events etc.
 	var c; while (c = container.lastChild) {
-		container.removeChild(c);
+		Q.removeElement(c, true);
 	} // Clear the container
 	
 	// Move the actual nodes from the source to existing container
@@ -10077,7 +10086,7 @@ function _Q_restoreScrolling() {
 	setInterval(function _Q_saveScrollPositions() {
 		var ae = document.activeElement;
 		var b = _Q_restoreScrolling.options.prevent;
-		if (b.indexOf(ae.tagName.toUpperCase()) >= 0) {
+		if (ae && b.indexOf(ae.tagName.toUpperCase()) >= 0) {
 			focused = true;
 		}
 		if (focused) return false;
