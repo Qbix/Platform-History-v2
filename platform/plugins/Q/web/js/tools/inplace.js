@@ -178,8 +178,14 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			'margin-top': static_span.outerHeight() + 'px',
 			'line-height': '1px'
 		});
+		fieldinput.plugin('Q/placeholders', function () {
+			fieldinput.plugin('Q/autogrow', {
+				maxWidth: state.maxWidth || maxWidth,
+				minWidth: state.minWidth || 0
+			}, _adjustButtonLayout);
+		});
+		_sizing();
 	}
-	_waitUntilVisible();
 	var edit_button = tool.$edit = tool.$('button.Q_inplace_tool_edit');
 	var save_button = tool.$save = tool.$('button.Q_inplace_tool_save');
 	var cancel_button = tool.$cancel = tool.$('button.Q_inplace_tool_cancel');
@@ -191,6 +197,8 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	if (container_span.hasClass('Q_nocancel')) {
 		noCancel = true;
 	}
+	Q.onLayout($te[0]).set(_waitUntilVisible, tool);
+	_waitUntilVisible();
 	if (state.type === 'select') {
 		fieldinput.val(staticHtml.decodeHTML());
 	}
@@ -233,13 +241,6 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			fieldinput.add(static_span).css('min-height', height);
 		}
 	}
-	fieldinput.plugin('Q/placeholders', function () {
-		fieldinput.plugin('Q/autogrow', {
-			maxWidth: state.maxWidth || maxWidth,
-			minWidth: state.minWidth || 0
-		}, _adjustButtonLayout);
-	});
-	_sizing();
 	this.handleClick = function(event) {
 		_sizing();
 		var field_width = static_span.outerWidth();

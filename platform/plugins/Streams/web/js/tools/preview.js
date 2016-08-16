@@ -460,14 +460,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				state.onClose.handle.call(tool);
 			});
 		});
-	},
-	Q: {
-		onLayout: new Q.Event(function () {
-			var iconWidth = this.$('.Streams_preview_icon').outerWidth(true);
-			this.$('.Streams_preview_title').width(
-				$(this.element).innerWidth() - iconWidth
-			);
-		}, 'Streams/preview')
 	}
 }
 
