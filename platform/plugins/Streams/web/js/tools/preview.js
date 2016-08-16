@@ -402,6 +402,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	actions: function _actions () {
 		var tool = this;
 		var state = tool.state;
+		var $te = $(tool.element);
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			var stream = this;
 			// check if we should add this behavior
@@ -443,7 +444,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				};
 			}
 			var ao = Q.extend({}, state.actions, 10, { actions: actions });
-			tool.$().plugin('Q/actions', ao);	
+			$te.tool('Q/actions', ao).activate();
 		});
 		return this;
 	},

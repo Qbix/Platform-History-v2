@@ -512,7 +512,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			.find('.Q_placeholder');
 		var $element = fieldinput.is(":visible")
 			? fieldinput
-			: ($placeholder.length ? $placeholder : static_span);
+			: ($placeholder.is(":visible") ? $placeholder : static_span);
 		var margin = $element.outerHeight() + parseInt($element.css('margin-top'));
 		tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
 	}

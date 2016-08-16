@@ -136,6 +136,9 @@ function _Q_actions(options) {
 		
 		_position($this, state.position, container);
 		interval = setInterval(function () {
+			if (!$this.closest('html').length) {
+				clearInterval(interval);
+			}
 			_position($this, state.position, container);
 		}, state.repositionMs);
 		state.onShow.handle.apply($this, [state, container]);
@@ -181,7 +184,7 @@ function _Q_actions(options) {
 
 
 function _position($this, position, container) {
-	if (!$this.is(':visible') && container.is(':visible')) {
+	if (!$this.is(':visible')) {
 		return container.hide();
 	}
 	container.show();
