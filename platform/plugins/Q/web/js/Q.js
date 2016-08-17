@@ -5586,21 +5586,22 @@ Q.trigger = function _Q_trigger(eventName, element, args) {
 /**
  * Call this function to trigger layout changes,
  * or assign it as an event listener to some events.
- * @param {Element} element
+ * @param {Element} [element=document.documentElement]
  *  For any elements inside this container that Q.onLayout() was called on,
  *  handle the corresponding Q.Events, and trigger "Q.layout" methods, if any,
  *  on container elements.
+ *  If a non-element is passed here (such as null, or a DOMEvent)
+ *  then this defaults to the document element.
  */
 Q.layout = function _Q_layout(element) {
-	if (!element) {
-		return;
+	if (!(element instanceof Element)) {
+		element = null;
 	}
 	Q.each(_layoutElements, function (i, e) {
-		if (!element.contains(e)) {
-			return;
+		if (!element || element.contains(e)) {
+			var event = _layoutEvents[i];
+			event.handle.call(event, e, element);
 		}
-		var event = _layoutEvents[i];
-		event.handle.call(event, e, element);
 	});
 };
 
