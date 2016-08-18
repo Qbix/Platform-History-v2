@@ -102,7 +102,7 @@ function _Streams_related_tool (options)
 				var rc = tool.state.refreshCount;
 				var preview = Q.Tool.from(element, 'Streams/preview');
 				var ps = preview.state;
-				tool.integrateWithTabs([element]);
+				tool.integrateWithTabs([element], true);
 				preview.state.beforeCreate.set(function () {
 					// workaround for now
 					if (tool.state.refreshCount > rc) {
@@ -202,11 +202,12 @@ function _Streams_related_tool (options)
 		setTimeout(function _activatePreview() {
 			var element = elements[i++];
 			if (!element) {
+				tool.tabs.refresh();
 				tool.state.onRefresh.handle.call(tool);
 				return;
 			}
 			Q.activate(element, null, function () {
-				tool.integrateWithTabs([element]);
+				tool.integrateWithTabs([element], true);
 				setTimeout(_activatePreview, 0);
 			});
 		}, 0);
@@ -346,7 +347,7 @@ function _Streams_related_tool (options)
 	 * @param elements
 	 *  The elements of the tools representing the related streams
 	 */
-	integrateWithTabs: function (elements) {
+	integrateWithTabs: function (elements, skipRefresh) {
 		var id, tabs, i;
 		var tool = this;
 		var state = tool.state;
@@ -357,36 +358,42 @@ function _Streams_related_tool (options)
 			}
 		}
 		var t = tool;
-		do {
-			tabs = tool.tabs = t.sibling('Q/tabs');
-			if (tabs) {
-				break;
-			}
-		} while (t = t.parent());
-		if (tabs) {
-			var $composer = tool.$('.Streams_related_composer');
-			$composer.addClass('Q_tabs_tab');
-			Q.each(elements, function (i) {
-				var element = elements[i];
-				var preview = Q.Tool.from(element, 'Streams/preview');
-				var key = preview.state.onRefresh.add(function () {
-					var value = state.tabs.call(tool, preview, tabs);
-					var attr = value.isUrl() ? 'href' : 'data-name';
-					elements[i].addClass("Q_tabs_tab")
-						.setAttribute(attr, value);
-					if (!tabs.$tabs.is(element)) {
-						tabs.$tabs = tabs.$tabs.add(element);
-					}
-					var onLoad = preview.state.onLoad;
-					if (onLoad) {
-						onLoad.add(function () {
-							// all the related tabs have loaded, process them
-							tabs.refresh();
-						});
-					}
-					preview.state.onRefresh.remove(key);
-				});
+		if (!tool.tabs) {
+			do {
+				tool.tabs = t.sibling('Q/tabs');
+				if (tool.tabs) {
+					break;
+				}
+			} while (t = t.parent());
+		}
+		if (!tool.tabs) {
+			return;
+		}
+		var tabs = tool.tabs;
+		var $composer = tool.$('.Streams_related_composer');
+		$composer.addClass('Q_tabs_tab');
+		Q.each(elements, function (i) {
+			var element = elements[i];
+			var preview = Q.Tool.from(element, 'Streams/preview');
+			var key = preview.state.onRefresh.add(function () {
+				var value = state.tabs.call(tool, preview, tabs);
+				var attr = value.isUrl() ? 'href' : 'data-name';
+				elements[i].addClass("Q_tabs_tab")
+					.setAttribute(attr, value);
+				if (!tabs.$tabs.is(element)) {
+					tabs.$tabs = tabs.$tabs.add(element);
+				}
+				var onLoad = preview.state.onLoad;
+				if (onLoad) {
+					onLoad.add(function () {
+						// all the related tabs have loaded, process them
+						tabs.refresh();
+					});
+				}
+				preview.state.onRefresh.remove(key);
 			});
+		});
+		if (!skipRefresh) {
 			tabs.refresh();
 		}
 	},

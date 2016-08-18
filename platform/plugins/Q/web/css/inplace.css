@@ -1,4 +1,5 @@
-.Q_inplace_tool, .Q_inplace_tool_container { display: inline-block; position: relative; max-width: 100%; }
+.Q_inplace_tool.Q_tool { display: inline-block; }
+.Q_inplace_tool, .Q_inplace_tool_container { position: relative; max-width: 100%; }
 .Q_inplace_tool .Q_inplace_tool_container.Q_inplace_textarea { display: block; }
 
 .Q_inplace_textarea .Q_placeholders_container { overflow: hidden; }
