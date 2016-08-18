@@ -316,7 +316,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_notTouchscreen .Q_clickable_container.Q_hover .Q_clickable_shadow,
 .Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
  { display: block; max-width: none !important; }
-.Q_inplace_tool { display: none; }
+.Q_inplace_tool { display: none; visibility: hidden; }
 
 #dialogs_slot { display: none; }
 
