@@ -202,7 +202,9 @@ function _Streams_related_tool (options)
 		setTimeout(function _activatePreview() {
 			var element = elements[i++];
 			if (!element) {
-				tool.tabs.refresh();
+				if (tool.tabs) {
+					tool.tabs.refresh();
+				}
 				tool.state.onRefresh.handle.call(tool);
 				return;
 			}
