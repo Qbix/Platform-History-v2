@@ -293,6 +293,12 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	loop: true,
 	onLoad: null,
 	onTransition: null
+},
+
+{
+	remove: function () {
+		$(this).data('gallery').pause();
+	}
 }
 
 );

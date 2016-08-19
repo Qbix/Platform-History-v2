@@ -5376,7 +5376,7 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
  */
 Q.removeElement = function _Q_removeElement(element, removeTools) {
 	if (removeTools) {
-		Q.Tool.clear(element);
+		Q.Tool.remove(element);
 	}
 	for (var i=0, l=_layoutElements.length; i<l; ++i) {
 		var p = _layoutElements[i];
