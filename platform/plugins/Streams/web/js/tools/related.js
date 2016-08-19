@@ -373,13 +373,13 @@ function _Streams_related_tool (options)
 		var $composer = tool.$('.Streams_related_composer');
 		$composer.addClass('Q_tabs_tab');
 		Q.each(elements, function (i) {
-			var element = elements[i];
+			var element = this;
+			element.addClass("Q_tabs_tab");
 			var preview = Q.Tool.from(element, 'Streams/preview');
 			var key = preview.state.onRefresh.add(function () {
 				var value = state.tabs.call(tool, preview, tabs);
 				var attr = value.isUrl() ? 'href' : 'data-name';
-				elements[i].addClass("Q_tabs_tab")
-					.setAttribute(attr, value);
+				element.setAttribute(attr, value);
 				if (!tabs.$tabs.is(element)) {
 					tabs.$tabs = tabs.$tabs.add(element);
 				}

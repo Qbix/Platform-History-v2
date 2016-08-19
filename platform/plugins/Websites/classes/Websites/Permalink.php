@@ -32,7 +32,7 @@ class Websites_Permalink extends Base_Websites_Permalink
 	function beforeSave($modifiedFields)
 	{
 		$stream = null;
-		$uri = Q_uri::from($this->uri);
+		$uri = Q_Uri::from($this->uri);
 		if ($uri->module === 'Streams' and $uri->action === 'stream') {
 			$publisherId = Streams::requestedPublisherId(false, $uri);
 			$streamName = Streams::requestedName(false, 'original', $uri);

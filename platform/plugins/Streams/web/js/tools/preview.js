@@ -475,10 +475,14 @@ Q.Template.set('Streams/preview/create',
 
 function _setWidthHeight(tool, $img) {
 	var state = tool.state;
-	var parts = state.imagepicker.showSize.split('x');
-	var w = parts[0] || parts[1] || state.creatable.addIconSize;
-	var h = parts[0] || parts[1] || state.creatable.addIconSize;
-	w = h = Math.min(w, h);
+	var w = $img.width();
+	var h = $img.height();
+	if (!w || !h) {
+		var parts = state.imagepicker.showSize.split('x');
+		w = parts[0] || parts[1] || state.creatable.addIconSize;
+		h = parts[0] || parts[1] || state.creatable.addIconSize;
+		w = h = Math.min(w, h);
+	}
 	if (w && h) {
 		$img.width(w).height(h);
 	}

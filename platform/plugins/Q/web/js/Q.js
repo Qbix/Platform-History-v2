@@ -4387,12 +4387,13 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 			Q.setObject([parentId, toolId], true, _toolsWaitingForInit);
 		}
 		if (shared) {
-			var uniqueToolId = "tool " + (shared.waitingForTools.length+1)
-				+ ": " + normalizedId;
+			var uniqueToolId = toolId + " " + toolName;
 			if (!shared.firstToolId) {
 				shared.firstToolId = uniqueToolId;
 			}
-			shared.waitingForTools.push(uniqueToolId);
+			if (shared.waitingForTools.indexOf(uniqueToolId) < 0) {
+				shared.waitingForTools.push(uniqueToolId);
+			}
 		}
 		if (typeof toolFunc === 'function') {
 			return p.fill(toolName)(toolElement, toolFunc, toolName, uniqueToolId);
@@ -7990,7 +7991,7 @@ function _initTools(toolElement) {
 	var parentId = _waitingParentStack[_waitingParentStack.length-1];
 	
 	_loadToolScript(toolElement,
-	function _initTools_doInit(toolElement, toolFunc, toolName, uniqueToolId) {
+	function _initTools_doInit(toolElement, toolFunc, toolName) {
 		currentEvent.add(_doInit, currentId);
 	}, null, parentId);
 	
