@@ -3525,10 +3525,11 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 	Q.find(elem, true, null,
 	function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
-		if (tn) {
-			for (var i=tn.length-1; i>=0; --i) {
-				toolElement.Q.tools[tn[i]].remove(removeCached);
-			}
+		if (!tn) { // this edge case happens very rarely, usually if a slot element
+			return; // being replaced is inside another slot element being replaced
+		}
+		for (var i=tn.length-1; i>=0; --i) {
+			toolElement.Q.tools[tn[i]].remove(removeCached);
 		}
 	});
 };
@@ -3550,16 +3551,7 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
 		if (!tool) return false;
 		elem = tool.element;
 	}
-	Q.find(elem.children || elem.childNodes, true, null,
-	function _Q_Tool_remove_found(toolElement) {
-		var tn = toolElement.Q.toolNames;
-		if (!tn) { // this edge case happens very rarely, usually if a slot element
-			return; // being replaced is inside another slot element being replaced
-		}
-		for (var i=tn.length-1; i>=0; --i) {
-			toolElement.Q.tools[tn[i]].remove(removeCached);
-		}
-	});
+	Q.Tool.remove(elem.children || elem.childNodes);
 };
 
 /**

@@ -546,8 +546,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			});
 			var $pinnedElement = state.$pinnedElement;
 			if (!$pinnedElement) return;
-			Q.Tool.clear($pinnedElement[0]);
-			Q.removeElement($pinnedElement[0]);
+			Q.removeElement($pinnedElement[0], true);
 			var $scrolling = state.fullscreen ? $(window) : $(state.container);
 			$scrolling.off(state.scrollEventName)
 				.off('touchstart.Q_drawers')
