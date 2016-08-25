@@ -1101,7 +1101,8 @@ Sp.notify = function(participant, event, userId, message, callback) {
 			}
 		}
 		// 2) if user has socket connected - emit socket message and quit
-		if (Users.Socket.emitToUser(userId, event, message.getFields())) {
+		if (online) {
+			Users.Socket.emitToUser(userId, event, message.getFields());
 			return callback && callback();
 		}
 		// 3) if user has no socket connected, send offline notifications
