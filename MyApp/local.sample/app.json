@@ -90,5 +90,13 @@
 				"testing": false
 			} */
 		}
+	},
+	"MyApp": {
+		"cordova": {
+			"platforms": [] /* ["ios", "android"] */,
+			"ios": {
+				"sandbox": true
+			}
+		}
 	}
 }

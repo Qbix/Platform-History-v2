@@ -1,0 +1,6 @@
+ALTER TABLE {$prefix}participating
+MODIFY COLUMN `fresh` int(10) NULL DEFAULT NULL;
+
+UPDATE {$prefix}participating
+SET fresh = NULL
+WHERE fresh = 0;

@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.9.3",
+				"version": "0.9.4",
 				"compatible": "0.9",
 				"requires": {"Users": "0.9"},
 				"permissions": ["Streams/icons"],
@@ -296,9 +296,6 @@
 			"40": "manage the stream",
 			"50": "own it and appoint managers"
 		},
-		"socket": {
-			"disconnectTimeout": 1500
-		},
 		"onInsert": {
 			"Users_User": [
 				"Streams/participating",
@@ -338,6 +335,9 @@
 				"default": ["mobile", "email"],
 				"invited": ["mobile+pending", "email+pending"]
 			}
+		},
+		"notifications": {
+			"onlyIfAllClientsOffline": true
 		}
 	}
 }

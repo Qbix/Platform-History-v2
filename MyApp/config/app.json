@@ -126,10 +126,5 @@
 				"sms": "MyApp/sms/startedSubscription.php"
 			}
 		}
-	},
-	"MyApp": {
-		"cordova": {
-			"platforms": [] /* ["iOS", "Android"] */
-		}
 	}
 }

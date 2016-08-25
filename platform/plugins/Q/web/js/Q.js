@@ -8353,9 +8353,9 @@ Q.Socket.get = function _Q_Socket_get(ns, url) {
 	return _qsockets[ns] && _qsockets[ns][url];
 };
 
-function _connectSocketNS(ns, url, callback, force) {
+function _connectSocketNS(ns, url, callback, callback2, force) {
 	// load socket.io script and connect socket
-	function _connectNS(ns, url, callback) {
+	function _connectNS(ns, url, callback, callback2) {
 		// connect to (ns, url)
 		if (!root.io) return;
 		var qs = _qsockets[ns][url];
@@ -8388,7 +8388,7 @@ function _connectSocketNS(ns, url, callback, force) {
 				console.log('Error on connection '+url);
 			});
 		}
-		callback && callback(_qsockets[ns][url]);
+		callback2 && callback2(_qsockets[ns][url], ns, url);
 		
 		function _Q_Socket_register(socket) {
 			Q.each(_socketRegister, function (i, item) {
@@ -8403,6 +8403,7 @@ function _connectSocketNS(ns, url, callback, force) {
 			Q.Socket.onConnect().handle(this, [ns, url]);
 			Q.Socket.onConnect(ns).handle(this, [ns, url]);
 			Q.Socket.onConnect(ns, url).handle(this, [ns, url]);
+			callback && callback(_qsockets[ns][url], ns, url);
 			console.log('Socket connected to '+url);
 		}
 	}
@@ -8412,10 +8413,10 @@ function _connectSocketNS(ns, url, callback, force) {
 	}
 	
 	if (root.io && root.io.Socket) {
-		_connectNS(ns, url, callback);
+		_connectNS(ns, url, callback, callback2);
 	} else {
 		Q.addScript(url+'/socket.io/socket.io.js', function () {
-			_connectNS(ns, url, callback);
+			_connectNS(ns, url, callback, callback2);
 		});
 	}
 }
@@ -8424,11 +8425,12 @@ function _connectSocketNS(ns, url, callback, force) {
  * Connects a socket, and stores it in the list of connected sockets
  * @static
  * @method connect
- * @param ns {String} A socket.io namespace to use
- * @param url {String} The url of the socket.io node to connect to
- * @param callback {Function} When a connection is made, receives the socket object
+ * @param {String} ns A socket.io namespace to use
+ * @param {String} url The url of the socket.io node to connect to
+ * @param {Function} [callback] Called after socket connects successfully. Receives Q.Socket
+ * @param {Function} [callback2] Receives Q.Socket as soon as it's constructed
  */
-Q.Socket.connect = function _Q_Socket_prototype_connect(ns, url, callback) {
+Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 	if (!url) {
 		return false;
 	}
@@ -8444,7 +8446,8 @@ Q.Socket.connect = function _Q_Socket_prototype_connect(ns, url, callback) {
 	if (!_qsockets[ns][url]) {
 		_qsockets[ns][url] = null; // pending
 	}
-	_connectSocketNS(ns, url, callback); // check if socket already connected and try to restore it
+	// check if socket already connected, or reconnect
+	_connectSocketNS(ns, url, callback, callback2);
 };
 
 /**
@@ -8503,7 +8506,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 };
 
 /**
- * Completely remove all sockets, de-register events and forget socket.io
+ * Completely remove all sockets, and de-register events
  * @static
  * @method destroyAll
  */
@@ -8515,7 +8518,6 @@ Q.Socket.destroyAll = function _Q_Socket_destroyAll() {
 		}
 		_ioCleanup = [];
 		_qsockets = {};
-		root.io = undefined;
 	}, 1000);
 };
 

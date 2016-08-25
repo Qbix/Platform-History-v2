@@ -44,6 +44,9 @@
 		},
 		"web": {
 			"requireValidNonce": ["Users"]
+		},
+		"socket": {
+			"disconnectTimeout": 1500
 		}
 	},
 	"Users": {

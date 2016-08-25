@@ -8,7 +8,7 @@ var Db = Q.require('Db');
 
 /**
  * Class representing 'Participating' rows in the 'Streams' database
- * <br/>stored primarily on the participating user's fm server
+ * stored primarily on the participating user's Qbix server
  * @namespace Streams
  * @class Participating
  * @extends Base.Streams.Participating
@@ -27,18 +27,20 @@ var Streams = Q.require('Streams');
 var _freshEvents = {};
 
 function _freshHandler (event) {
-	return function (stream, uid) {
+	return function (stream, userId) {
 		var s = _freshEvents[event];
-		if (!uid || s.validate && !s.validate(stream, uid)) return;
+		if (!userId || s.validate && !s.validate(stream, userId)) return;
 		var params = { publisherId: stream.publisherId, streamName: stream.name };
 		if (s.action) {
-			if (s.user) params.userId = uid; // increase only for one user
-			else if (s.user === false) params["userId !="] = uid; // increase for all but current
+			if (s.user) params.userId = userId; // increase only for one user
+			else if (s.user === false) params["userId !="] = userId; // increase for all but current
 			// is user param is undefined increase for all users
 		} else {
-			if (s.user) params.userId = uid;
+			if (s.user) params.userId = userId;
 		}
-		Streams_Participating.UPDATE().where(params).set({fresh: s.action ? 1 : 0}).execute(function (err) {
+		Streams_Participating.UPDATE().where(params)
+		.set({fresh: s.action ? 1 : 0})
+		.execute(function (err) {
 			if (err) {
 				Q.log("ERROR: Could not update 'fresh' on event '"+event+"'");
 				Q.log(err);
@@ -56,29 +58,30 @@ function _freshHandler (event) {
  * @param type {string|undefined} should be set to message type for 'post' event
  * @return {boolean}
  */
-Streams_Participating.freshEvent = function (online, event, stream, uid) {
+Streams_Participating.freshEvent = function (online, event, stream, userId) {
 	var e = (event === 'post') ? event+'/'+stream.type : event;
-	return e in _freshEvents && (!_freshEvents[e].validate || _freshEvents[e].validate(stream, uid));
+	return e in _freshEvents && (!_freshEvents[e].validate || _freshEvents[e].validate(stream, userId));
 };
 
 /**
  * Register event which should influence fresh field
  * @method registerFreshEvent
- * @param event {string}
- * @param set {?boolean} Wheather set fresh = 1 or 0
- * @param user {?boolean|null|undeafined} If set is true -
- *	if true increase only for this user, if false - for all but this user, if undefined or null - for all users.
- * @param validate {?function} Optional function to with arguments [stream, userId] (or [message, userId] for 'post')
+ * @param {String} event The type of Streams event, such as "post" or "remove"
+ * @param {boolean} [value=0] Wheather set fresh = 1 or 0
+ * @param {boolean|null|undefined} If value is true increase only for this user,
+ *   if false - for all but this user,
+ *   if undefined or null - for all users.
+ * @param {Function} [validate] Optional function to with arguments (stream, userId) (or [message, userId] for 'post')
  *	to validate if fresh should be changed. Returns boolean
  */
-Streams_Participating.registerFreshEvent = function (event, set, user, validate) {
+Streams_Participating.registerFreshEvent = function (event, value, user, validate) {
 	if (!(event in _freshEvents)) {
 		var listener = _freshHandler(event);
 		_freshEvents[event] = {listener: listener};
 		Streams.Stream.on(event, listener);
 	}
 	var s = _freshEvents[event];
-	s.action = !!set;
+	s.action = !!value;
 	s.user = user;
 	if (typeof validate === "function") s.validate = validate;
 };

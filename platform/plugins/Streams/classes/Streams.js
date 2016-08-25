@@ -32,15 +32,12 @@ if (!Q.plugins.Users) {
 	throw new Q.Exception("Streams: Users plugin is required");
 }
 
-Q.makeEventEmitter(Streams);
-
 var util = require('util');
-var path = require('path');
-var apnagent = require('apnagent');
 var Db = Q.require('Db');
-var Users = Q.require('Users');
+var Users = Q.plugins.Users;
+var socket = null;
 
-var socketServer = null;
+Q.makeEventEmitter(Streams);
 
 /**
  * Read levels
@@ -323,175 +320,161 @@ Streams.define = function (type, ctor, methods) {
  * "Streams/Stream/invite"
  * @method listen
  * @static
- * @param {object} options={}
- *  So far no options are implemented.
+ * @param {Object} options={} So far no options are implemented.
  */
 Streams.listen = function (options) {
 
 	// Start internal server
 	var server = Q.listen();
+	server.attached.express.post('/Q/node', Streams_request_handler);
 
-	var base_url = Q.Config.get(['Q', 'web', 'appRootUrl'], false);
-	if (!base_url) throw new Error("Config path 'Q/web/appRootUrl' requires a value");
-	base_url = base_url + Q.Config.get(['Q', 'web', 'controllerSuffix'], '');
+	// Start external socket server
+	var pubHost = Q.Config.get(['Streams', 'node', 'host'], Q.Config.get(['Q', 'node', 'host'], null));
+	var pubPort = Q.Config.get(['Streams', 'node', 'port'], Q.Config.get(['Q', 'node', 'port'], null));
 
-	// set up ios push notification agent
-	var appName = Q.Config.get(["Q", "app"], "Q");
-	if (Q.Config.get([appName, "cordova", "platform"], []).indexOf("ios") >= 0) {
-		var agent = new apnagent.Agent(), feedback = new apnagent.Feedback();
-		var mode = Q.Config.get([appName, "cordova", "ios", "mode"], "development");
-		agent.set('pfx file', path.join(Q.app.CONFIG_DIR, "ios", mode, 'apn-cert.p12'));
-		feedback.set('pfx file', path.join(Q.app.CONFIG_DIR, "ios", mode, 'apn-cert.p12'));
-		if (mode === "development") { agent.enable('sandbox'); feedback.enable('sandbox'); }
-		agent.connect(function (err) {
-			if (err) throw new Q.Exception("Streams.listen: APN error '"+err.message+"'");
-			Q.log('APN agent is running in %s mode', mode);
-			server.attached.apn = agent;
-		});
-		agent.on('message:error', function(err) {
-			Q.log('APN message error: '+err.message);
-		});
-		agent.on('gateway:error', function(err) {
-			Q.log('APN gateway error: '+err.message);
-		});
-		feedback.connect(function (err) {
-			if (err) throw new Q.Exception("Streams.listen: APN Feedback error '"+err.message+"'");
-			Q.log('APN feedback is running in %s mode', mode);
-			server.attached.feedback = feedback;
-		});
-		feedback.use(function (device, ts, next) {
-			if (!device || !ts) return setTimeout(next, 300);
-			new Users.Device({ platform: 'ios', deviceId: device.toString() }).retrieve(function (err, dev) {
-				setTimeout(next, 300);
-				if (err) return Q.log("Error retrieving device '"+device+"'");
-				if (!dev.length) return;
-				var i, t, d;
-				for (i=0; i<dev.length; i++) {
-					d = dev[i];
-					t = new Date(d.fields.updatedTime);
-					if (ts.getTime() < t.getTime()) return; // both should be Date objects
-					this.remove(function(err) {
-						Streams.Participant.subscribe(d.fields.userId, d.fields.userId, 'Streams/invited');
-						if (err) return Q.log("Error removing device '"+device+"'");
-						Q.log('APN feedback: device %s has been removed', device.toString());
-					});
-				}
-			});
-		});
+	if (pubHost === null) {
+		throw new Q.Exception("Streams: Missing config field: Streams/node/host");
+	}
+	if (pubPort === null) {
+		throw new Q.Exception("Streams: Missing config field: Streams/node/port");
 	}
 
-	function _updateBadge (badge, deviceId) {
-		var server = Q.listen(), apn = server.attached.apn;
-		if (!apn) return;
-		apn.createMessage().device(deviceId).badge(badge).send(function (err) {
-			if (err) {
-			    Q.log("Error sending push notification: "+err.message);
-		    }
-		});
-		// TODO: process android!!!
-	}
-
-	// Handle internal requests if Q.listen() was ever called
-	server.attached.express.post('/Q/node', function Streams_request_handler (req, res, next) {
-		var parsed = req.body;
-		if (!parsed || !parsed['Q/method']) {
-			return next();
+	// Handle messages being posted to streams
+	Streams.Stream.on('post', function (stream, byUserId, msg, clientId) {
+		if (_messageHandlers[msg.fields.type]) {
+			_messageHandlers[msg.fields.type].call(this, msg);
 		}
-		var participant, stream, msg, posted, streams, deviceId, title, k;
-		var clientId = parsed["Q.clientId"];
-		var stream = parsed.stream
-			&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
-		switch (parsed['Q/method']) {
-			case 'Users/device':
-				if (!(deviceId = parsed.deviceId)) break;
-				Streams.Participant.unsubscribe(parsed.userId, parsed.userId, 'Streams/invited');
-				var badge = Streams.pushNotification.badge ? Streams.pushNotification.badge(parsed.userId, 'login', null, function(b) { _updateBadge(b, deviceId); }) : 0;
-				if (badge !== undefined) _updateBadge(badge, deviceId);
-				break;
-			case 'Users/logout':
-				var userId = parsed.userId;
-				var sessionId = parsed.sessionId;
-				if (userId && sessionId) {
-					var clients = Streams.clients[userId];
-					for (var cid in clients) {
-						if (clients[cid].sessionId === sessionId) {
-							clients[cid].disconnect();
-						}
+		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg);
+		stream.notifyParticipants('Streams/post', byUserId, msg);
+	});
+
+	/**
+	 * @property socketServer
+	 * @type {SocketNamespace}
+	 * @private
+	 */
+	socket = Users.Socket.listen({
+		host: pubHost,
+		port: pubPort
+	});
+
+};
+
+function Streams_request_handler (req, res, next) {
+	var parsed = req.body;
+	if (!parsed || !parsed['Q/method']) {
+		return next();
+	}
+	var participant, stream, msg, posted, streams, deviceId, title, k;
+	var clientId = parsed["Q.clientId"];
+	var stream = parsed.stream
+		&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
+	switch (parsed['Q/method']) {
+		case 'Users/device':
+			break;
+		case 'Users/logout':
+			var userId = parsed.userId;
+			var sessionId = parsed.sessionId;
+			if (userId && sessionId) {
+				var clients = Users.clients[userId];
+				for (var cid in clients) {
+					if (clients[cid].sessionId === sessionId) {
+						clients[cid].disconnect();
 					}
 				}
-				if (deviceId = parsed.deviceId) {
-					_updateBadge(0, deviceId);
-					Streams.Participant.subscribe(userId, userId, 'Streams/invited');
-				}
-				break;
-			case 'Streams/Stream/join':
-				participant = new Streams.Participant(JSON.parse(parsed.participant));
-				participant.fillMagicFields();
-				userId = participant.userId;
-				if (Q.Config.get(['Streams', 'logging'], false)) {
-					Q.log('Streams.listen: Streams/Stream/join {'
-						+ '"publisherId": "' + stream.fields.publisherId
-						+ '", "name": "' + stream.fields.name
-						+ '"}'
-					);
-				}
-				// invalidate cache for this stream
+			}
+			Users.pushNotifications(userId, sessionId, {
+				badge: 0
+			});
+			break;
+		case 'Streams/Stream/join':
+			participant = new Streams.Participant(JSON.parse(parsed.participant));
+			participant.fillMagicFields();
+			userId = participant.fields.userId;
+			if (Q.Config.get(['Streams', 'logging'], false)) {
+				Q.log('Streams.listen: Streams/Stream/join {'
+					+ '"publisherId": "' + stream.fields.publisherId
+					+ '", "name": "' + stream.fields.name
+					+ '"}'
+				);
+			}
+			// invalidate cache for this stream
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
-				// inform user's clients about change
-				Streams.emitToUser(userId, 'join', participant);
-				Streams.Stream.emit('join', stream, userId, clientId);
-				break;
-			case 'Streams/Stream/visit':
-				participant = JSON.parse(parsed.participant);
-				userId = participant.userId;
-				Streams.Stream.emit('visit', stream, userId, clientId);
-				break;
-			case 'Streams/Stream/leave':
-				participant = new Streams.Participant(JSON.parse(parsed.participant));
-				participant.fillMagicFields();
-				userId = participant.userId;
-				if (Q.Config.get(['Streams', 'logging'], false)) {
-					Q.log('Streams.listen: Streams/Stream/leave {'
-						+ '"publisherId": "' + stream.fields.publisherId
-						+ '", "name": "' + stream.fields.name
-						+ '"}'
-					);
-				}
-				// invalidate cache for this stream
+			// inform user's clients about change
+			Users.Socket.emitToUser(userId, 'Streams/join', participant);
+			Streams.Stream.emit('join', stream, userId, clientId);
+			break;
+		case 'Streams/Stream/visit':
+			participant = JSON.parse(parsed.participant);
+			userId = participant.fields.userId;
+			Streams.Stream.emit('visit', stream, userId, clientId);
+			break;
+		case 'Streams/Stream/leave':
+			participant = new Streams.Participant(JSON.parse(parsed.participant));
+			participant.fillMagicFields();
+			userId = participant.fields.userId;
+			if (Q.Config.get(['Streams', 'logging'], false)) {
+				Q.log('Streams.listen: Streams/Stream/leave {'
+					+ '"publisherId": "' + stream.fields.publisherId
+					+ '", "name": "' + stream.fields.name
+					+ '"}'
+				);
+			}
+			// invalidate cache for this stream
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
-				// inform user's clients about change
-				Streams.emitToUser(userId, 'leave', participant);
-				Streams.Stream.emit('leave', stream, userId, clientId);
-				break;
-			case 'Streams/Stream/remove':
-				if (Q.Config.get(['Streams', 'logging'], false)) {
-					Q.log('Streams.listen: Streams/Stream/remove {'
-						+ '"publisherId": "' + stream.fields.publisherId
-						+ '", "name": "' + stream.fields.name
-						+ '"}'
-					);
-				}
-				// invalidate cache
-				stream.messageParticipants('remove', null, {
-					publisherId: stream.fields.publisherId, 
-					name: stream.fields.name
-				});
-				Streams.Stream.emit('remove', stream, clientId);
-				break;
-			case 'Streams/Stream/create':
-				if (Q.Config.get(['Streams', 'logging'], false)) {
-					Q.log('Streams.listen: Streams/Stream/create {'
-						+ '"publisherId": "' + stream.fields.publisherId
-						+ '", "name": "' + stream.fields.name
-						+ '"}'
-					);
-				}
-				Streams.Stream.emit('create', stream, clientId);
-				// no need to notify anyone
-				break;
-			case 'Streams/Message/post':
-				msg = Streams.Message.construct(JSON.parse(parsed.message), true);
+			// inform user's clients about change
+			Users.Socket.emitToUser(userId, 'Streams/leave', participant);
+			Streams.Stream.emit('leave', stream, userId, clientId);
+			break;
+		case 'Streams/Stream/remove':
+			if (Q.Config.get(['Streams', 'logging'], false)) {
+				Q.log('Streams.listen: Streams/Stream/remove {'
+					+ '"publisherId": "' + stream.fields.publisherId
+					+ '", "name": "' + stream.fields.name
+					+ '"}'
+				);
+			}
+			// invalidate cache
+			stream.notifyParticipants('Streams/remove', null, {
+				publisherId: stream.fields.publisherId, 
+				name: stream.fields.name
+			});
+			Streams.Stream.emit('remove', stream, clientId);
+			break;
+		case 'Streams/Stream/create':
+			if (Q.Config.get(['Streams', 'logging'], false)) {
+				Q.log('Streams.listen: Streams/Stream/create {'
+					+ '"publisherId": "' + stream.fields.publisherId
+					+ '", "name": "' + stream.fields.name
+					+ '"}'
+				);
+			}
+			Streams.Stream.emit('create', stream, clientId);
+			// no need to notify anyone
+			break;
+		case 'Streams/Message/post':
+			msg = Streams.Message.construct(JSON.parse(parsed.message), true);
+			msg.fillMagicFields();
+			if (Q.Config.get(['Streams', 'logging'], false)) {
+				Q.log('Streams.listen: Streams/Message/post {'
+					+ '"publisherId": "' + stream.fields.publisherId
+					+ '", "name": "' + stream.fields.name
+					+ '", "msg.type": "' + msg.fields.type
+					+ '"}'
+				);
+			}
+			Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
+			break;
+		case 'Streams/Message/postMessages':
+			posted = JSON.parse(parsed.posted);
+			streams = parsed.streams && JSON.parse(parsed.streams);
+			if (!streams) break;
+			for (k in posted) {
+				msg = Streams.Message.construct(posted[k], true);
 				msg.fillMagicFields();
+				stream = Streams.Stream.construct(
+					streams[msg.fields.publisherId][msg.fields.streamName], true
+				);
 				if (Q.Config.get(['Streams', 'logging'], false)) {
 					Q.log('Streams.listen: Streams/Message/post {'
 						+ '"publisherId": "' + stream.fields.publisherId
@@ -501,503 +484,234 @@ Streams.listen = function (options) {
 					);
 				}
 				Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
-				break;
-			case 'Streams/Message/postMessages':
-				posted = JSON.parse(parsed.posted);
-				streams = parsed.streams && JSON.parse(parsed.streams);
-				if (!streams) break;
-				for (k in posted) {
-					msg = Streams.Message.construct(posted[k], true);
-					msg.fillMagicFields();
-					stream = Streams.Stream.construct(
-						streams[msg.fields.publisherId][msg.fields.streamName], true
-					);
-					if (Q.Config.get(['Streams', 'logging'], false)) {
-						Q.log('Streams.listen: Streams/Message/post {'
-							+ '"publisherId": "' + stream.fields.publisherId
-							+ '", "name": "' + stream.fields.name
-							+ '", "msg.type": "' + msg.fields.type
-							+ '"}'
-						);
-					}
-					Streams.Stream.emit('post', stream, msg.fields.byUserId, msg, clientId);
-				}
-				break;
-			case 'Streams/Stream/invite':
-				var userIds, invitingUserId, username, appUrl, parts, rest, label, myLabel,
-				    readLevel, writeLevel, adminLevel, displayName, expiry, logKey;
-				try {
-					userIds = JSON.parse(parsed.userIds);
-					invitingUserId = parsed.invitingUserId;
-					username = parsed.username;
-					appUrl = parsed.appUrl;
-					readLevel = parsed.readLevel || null;
-					writeLevel = parsed.writeLevel || null;
-					adminLevel = parsed.adminLevel || null;
-					displayName = parsed.displayName || '';
-					expiry = parsed.expiry ? new Date(parsed.expiry*1000) : null;
-				} catch (e) {
-					return res.send({data: false});
-				}
-				res.send({data: true});
-				if (logKey = Q.Config.get(['Streams', 'logging'], false)) {
-					Q.log(
-					    'Streams.listen: Streams/Stream/invite {'
-						+ '"publisherId": "' + stream.fields.publisherId
-						+ '", "name": "' + stream.fields.name
-						+ '", "userIds": ' + parsed.userIds
-						+ '}',
-						logKey
-					);
-				}
+			}
+			break;
+		case 'Streams/Stream/invite':
+			var userIds, invitingUserId, username, appUrl, parts, rest, label, myLabel,
+			    readLevel, writeLevel, adminLevel, displayName, expiry, logKey;
+			try {
+				userIds = JSON.parse(parsed.userIds);
+				invitingUserId = parsed.invitingUserId;
+				username = parsed.username;
+				appUrl = parsed.appUrl;
+				readLevel = parsed.readLevel || null;
+				writeLevel = parsed.writeLevel || null;
+				adminLevel = parsed.adminLevel || null;
+				displayName = parsed.displayName || '';
+				expiry = parsed.expiry ? new Date(parsed.expiry*1000) : null;
+			} catch (e) {
+				return res.send({data: false});
+			}
+			res.send({data: true});
+			if (logKey = Q.Config.get(['Streams', 'logging'], false)) {
+				Q.log(
+				    'Streams.listen: Streams/Stream/invite {'
+					+ '"publisherId": "' + stream.fields.publisherId
+					+ '", "name": "' + stream.fields.name
+					+ '", "userIds": ' + parsed.userIds
+					+ '}',
+					logKey
+				);
+			}
 
-				if (expiry && expiry <= new Date()) {
-				    break;
+			if (expiry && expiry <= new Date()) {
+			    break;
+			}
+			
+			persist();
+			
+			return;
+		default:
+			break;
+	}
+	return next();
+	
+	function persist () {
+	
+		Q.each(userIds, function (i, userId) {
+			var token = null;
+							
+		    // TODO: Change this to a getter, so that we can do throttling in case there are too many userIds
+			(new Streams.Participant({
+				"publisherId": stream.fields.publisherId,
+				"streamName": stream.fields.name,
+				"userId": userId,
+				"state": "participating"
+			})).retrieve(_participant);
+			
+			function _participant(err, rows) {
+				if (rows && rows.length) {
+					// User is already a participant in the stream.
+					return;
 				}
-				
-				persist();
-				
-				return;
-			default:
-				break;
-		}
-		return next();
-		
-		function persist () {
-		
-			Q.each(userIds, function (i, userId) {
-				var token = null;
-								
-			    // TODO: Change this to a getter, so that we can do throttling in case there are too many userIds
+				(new Streams.Invite({
+					"userId": userId,
+					"state": "pending",
+					"publisherId": stream.fields.publisherId,
+					"streamName": stream.fields.name,
+					"invitingUserId": invitingUserId,
+					"displayName": displayName,
+					"appUrl": appUrl,
+					"readLevel": readLevel,
+					"writeLevel": writeLevel,
+					"adminLevel": adminLevel,
+					"expireTime": expiry
+				})).save(_inviteSaved);
+			}
+
+			function _inviteSaved(err) {
+				if (err) {
+					Q.log("ERROR: Failed to save Streams.Invite for user '"+userId+"' during invite");
+					Q.log(err);
+					return;
+				}
+				token = this.fields.token;
+				// now ready to save Streams.Invited row
+				(new Streams.Invited({
+					"token": token,
+					"userId": userId,
+					"state": "pending",
+					"expireTime": expiry
+				})).save(_invitedSaved);
+			}
+
+			function _invitedSaved(err) {
+				if (err) {
+					Q.log("ERROR: Failed to save Streams.Invited for user '"+userId+"' during invite");
+					Q.log(err);
+					return;
+				}
+				var invite = this;
 				(new Streams.Participant({
 					"publisherId": stream.fields.publisherId,
 					"streamName": stream.fields.name,
+					"streamType": stream.fields.type,
 					"userId": userId,
-					"state": "participating"
-				})).retrieve(_participant);
+					"state": "invited",
+					"reason": ""
+				})).save(true, _participantSaved);
 				
-				function _participant(err, rows) {
-					if (rows && rows.length) {
-						// User is already a participant in the stream.
-						return;
-					}
-					(new Streams.Invite({
-						"userId": userId,
-						"state": "pending",
-						"publisherId": stream.fields.publisherId,
-						"streamName": stream.fields.name,
-						"invitingUserId": invitingUserId,
-						"displayName": displayName,
-						"appUrl": appUrl,
-						"readLevel": readLevel,
-						"writeLevel": writeLevel,
-						"adminLevel": adminLevel,
-						"expireTime": expiry
-					})).save(_inviteSaved);
-				}
-
-				function _inviteSaved(err) {
-					if (err) {
-						Q.log("ERROR: Failed to save Streams.Invite for user '"+userId+"' during invite");
-						Q.log(err);
-						return;
-					}
-					token = this.fields.token;
-					// now ready to save Streams.Invited row
-					(new Streams.Invited({
-						"token": token,
-						"userId": userId,
-						"state": "pending",
-						"expireTime": expiry
-					})).save(_invitedSaved);
-				}
-
-				function _invitedSaved(err) {
-					if (err) {
-						Q.log("ERROR: Failed to save Streams.Invited for user '"+userId+"' during invite");
-						Q.log(err);
-						return;
-					}
-					var invite = this;
-					(new Streams.Participant({
-						"publisherId": stream.fields.publisherId,
-						"streamName": stream.fields.name,
-						"streamType": stream.fields.type,
-						"userId": userId,
-						"state": "invited",
-						"reason": ""
-					})).save(true, _participantSaved);
-					
-					// Write some files, if requested
-					// SECURITY: Here we trust the input, which should only be sent internally
-					if (parsed.template) {
-						new Users.User({id: userId})
-						.retrieve(function () {
-							var fields = Q.extend({}, parsed, {
-								stream: stream,
-								user: this,
-								invite: invite,
-								link: invite.url(),
-								app: Q.app,
-								communityId: Users.communityId(),
-								communityName: Users.communityName(),
-								appRootUrl: Q.Config.expect(['Q', 'web', 'appRootUrl'])
-							});
-							var html = Q.Handlebars.render(parsed.template, fields);
-							var path = Streams.invitationsPath(invitingUserId)
-								+'/'+parsed.batchName;
-							var filename = path + '/'
-								+ Q.normalize(stream.fields.publisherId) + '-'
-								+ Q.normalize(stream.fields.name) + '-'
-								+ this.fields.id + '.html';
-							fs.writeFile(filename, html, function (err) {
-								if (err) {
-									Q.log(err);
-								}
-							});
+				// Write some files, if requested
+				// SECURITY: Here we trust the input, which should only be sent internally
+				if (parsed.template) {
+					new Users.User({id: userId})
+					.retrieve(function () {
+						var fields = Q.extend({}, parsed, {
+							stream: stream,
+							user: this,
+							invite: invite,
+							link: invite.url(),
+							app: Q.app,
+							communityId: Users.communityId(),
+							communityName: Users.communityName(),
+							appRootUrl: Q.Config.expect(['Q', 'web', 'appRootUrl'])
 						});
-					}
-				}
-
-				function _participantSaved(err) {
-					if (err) {
-						Q.log("ERROR: Failed to save Streams.Participant for user '"+userId+"' during invite");
-						Q.log(err);
-						return;
-					}
-
-					// Now post a message to Streams/invited stream
-					Streams.fetchOne(invitingUserId, userId, 'Streams/invited', _stream);
-				}
-
-				function _stream(err, invited) {
-					if (err) {
-						Q.log("ERROR: Failed to get invited stream for user '"+userId+"' during invite");
-						Q.log(err);
-						return;
-					}
-					Streams.Stream.emit('invite', invited.getFields(), userId, stream);
-					if (!invited.testWriteLevel('post')) {
-						Q.log("ERROR: Not authorized to post to invited stream for user '"+userId+"' during invite");
-						return;
-					}
-					var invitedUrl = Streams.invitedUrl(token);
-					displayName = displayName || "Someone";
-					var msg = {
-						publisherId: invited.fields.publisherId,
-						streamName: invited.fields.name,
-						byUserId: invitingUserId,
-						type: 'Streams/invite',
-						sentTime: new Db.Expression("CURRENT_TIMESTAMP"),
-						state: 'posted',
-						content: displayName + " invited you to " + invitedUrl,
-						instructions: JSON.stringify({
-							token: token,
-							displayName: displayName,
-							appUrl: appUrl,
-							invitedUrl: invitedUrl,
-							type: stream.fields.type,
-							title: stream.fields.title,
-							content: stream.fields.content
-						})
-					};
-					invited.post(msg, function (err) {
-						if (err) {
-							Q.log("ERROR: Failed to save message for user '"+userId+"' during invite");
-							Q.log(err);
-						}
+						var html = Q.Handlebars.render(parsed.template, fields);
+						var path = Streams.invitationsPath(invitingUserId)
+							+'/'+parsed.batchName;
+						var filename = path + '/'
+							+ Q.normalize(stream.fields.publisherId) + '-'
+							+ Q.normalize(stream.fields.name) + '-'
+							+ this.fields.id + '.html';
+						fs.writeFile(filename, html, function (err) {
+							if (err) {
+								Q.log(err);
+							}
+						});
 					});
 				}
-			});
-
-	    }
-	});
-
-	Streams.Stream.on('post', function (stream, byUserId, msg, clientId) {
-		if (_messageHandlers[msg.fields.type]) {
-			_messageHandlers[msg.fields.type].call(this, msg);
-		}
-		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg);
-		stream.messageParticipants('post', byUserId, msg);
-	});
-
-	// Start external socket server
-	var pubHost = Q.Config.get(['Streams', 'node', 'host'], Q.Config.get(['Q', 'node', 'host'], null));
-	var pubPort = Q.Config.get(['Streams', 'node', 'port'], Q.Config.get(['Q', 'node', 'port'], null));
-
-	if (pubHost === null)
-		throw new Q.Exception("Streams: Missing config field: Streams/node/host");
-	if (pubPort === null)
-		throw new Q.Exception("Streams: Missing config field: Streams/node/port");
-
-	/**
-	 * @property socketServer
-	 * @type {SocketNamespace}
-	 * @private
-	 */
-	socketServer = Q.Socket.listen({host: pubHost, port: pubPort}).of('/Streams');
-
-	socketServer.on('connection', function(client) {
-		Q.log("Socket.IO client connected " + client.id);
-		/**
-		 * Socket connection
-		 * @event connection
-		 * @param client {Socket}
-		 *	The connecting client
-		 */
-		Streams.emit('connection', client);
-	});
-
-};
-
-var timeout = {};
-// Connection from socket.io
-Streams.on('connection', function(client) {
-	if (client.alreadyListening) {
-		return;
-	}
-	client.alreadyListening = true;
-	client.on('Streams.session', function (sessionId, clientId) {
-		
-		Users.userFromSession(sessionId, function (user) {
-			if (!user) {
-				// force disconnect
-				client.disconnect();
-				return;
-			}
-		
-			var userId = user.id;
-
-			if (!Streams.clients[userId]) {
-				Streams.clients[userId] = {};
 			}
 
-			var connected = Object.keys(Streams.clients[userId]).length;
-
-			client.userId = userId;
-			client.sessionId = sessionId;
-			client.clientId = clientId;
-			Streams.clients[userId][client.id] = client;
-			if (!connected) {
-				if (timeout[userId]) {
-					clearTimeout(timeout[userId]);
-				} else {
-					// post "connected" message to Streams/participating stream
-					new Streams.Stream({
-						publisherId: userId,
-						name: 'Streams/participating'
-					}).post(userId, {
-						type: 'Streams/connected'
-					}, function(err) {
-						if (err) console.error(err);
-						Q.log('User connected: ' + userId);
-					});
-				}
-				delete timeout[userId];
-			} else {
-			    Q.log('New client connected: ' + userId + '('+clientId+')');
-			}
-		});
-	});
-	client.on('disconnect', function(){
-		var userId = client.userId;
-		var i;
-		if (!userId || !Streams.clients[userId]) {
-			return;
-		}
-		Q.log('Client disconnected: ' + userId);
-		var clients = Streams.clients[userId];
-		delete clients[this.id];
-		if (Q.isEmpty(clients)) {
-			// All the clients have been disconnected.
-			// Let's wait a bit and if none of them reconnect within the timeout period,
-			// we'll post a message saying the user disconnected.
-			var timeout = setTimeout(function () {
-				if (!Q.isEmpty(clients)) {
+			function _participantSaved(err) {
+				if (err) {
+					Q.log("ERROR: Failed to save Streams.Participant for user '"+userId+"' during invite");
+					Q.log(err);
 					return;
 				}
-				// post "disconnected" message to Streams/participating stream
-				new Streams.Stream({
-					publisherId: userId,
-					name: 'Streams/participating'
-				}).post({
-					byUserId: userId,
-					type: 'Streams/disconnected'
-				}, function(err) {
-					if (err) console.error(err);
-					Q.log('User disconnected: ' + userId);
+
+				// Now post a message to Streams/invited stream
+				Streams.fetchOne(invitingUserId, userId, 'Streams/invited', _stream);
+			}
+
+			function _stream(err, invited) {
+				if (err) {
+					Q.log("ERROR: Failed to get invited stream for user '"+userId+"' during invite");
+					Q.log(err);
+					return;
+				}
+				Streams.Stream.emit('invite', invited.getFields(), userId, stream);
+				if (!invited.testWriteLevel('post')) {
+					Q.log("ERROR: Not authorized to post to invited stream for user '"+userId+"' during invite");
+					return;
+				}
+				var invitedUrl = Streams.invitedUrl(token);
+				displayName = displayName || "Someone";
+				var msg = {
+					publisherId: invited.fields.publisherId,
+					streamName: invited.fields.name,
+					byUserId: invitingUserId,
+					type: 'Streams/invite',
+					sentTime: new Db.Expression("CURRENT_TIMESTAMP"),
+					state: 'posted',
+					content: displayName + " invited you to " + invitedUrl,
+					instructions: JSON.stringify({
+						token: token,
+						displayName: displayName,
+						appUrl: appUrl,
+						invitedUrl: invitedUrl,
+						type: stream.fields.type,
+						title: stream.fields.title,
+						content: stream.fields.content
+					})
+				};
+				invited.post(msg, function (err) {
+					if (err) {
+						Q.log("ERROR: Failed to save message for user '"+userId+"' during invite");
+						Q.log(err);
+					}
 				});
-			}, Q.Config.get(["Streams", "socket", "disconnectTimeout"], 1000));
-		}
-	});
+			}
+		});
+
+    }
+}
+
+// Connection from socket.io
+Users.on('connected', function(client, wasOnline) {
+	if (!wasOnline) {
+		// post "connected" message to Streams/participating stream
+		new Streams.Stream({
+			publisherId: client.userId,
+			name: 'Streams/participating'
+		}).post(client.userId, {
+			type: 'Streams/connected'
+		}, function(err) {
+			if (err) console.error(err);
+		});
+	}
 });
 
-Streams.clients = {};
-
-/**
- * Check if device is online
- * @method isDeviceOnline
- * @static
- * @param userId {string}
- *	The id of the user
- * @param sessionId {?string}
- *	The id of the session associated to some device. Should be taken from Users.Device table
- * @return {boolean}
- */
-Streams.isDeviceOnline = function(userId, sessionId) {
-	var clients = Streams.clients[userId];
-	if (!sessionId) {
-	    return !Q.isEmpty(clients);
-	}
-	return !!(clients && clients[sessionId]);
-};
-
-/**
- * Emits an event to user's socket.io clients that are currently connected
- * @method emitToUser
- * @static
- * @param userId {string}
- *	The id of the user
- * @param event {string}
- *	The event name
- * @param data {object}
- *  The data accompanying the event
- * @param {object} excludeSessionIds={}
- *	Optional object whose keys are session ids of clients to skip when emitting event
- * @return {boolean} Whether any socket clients were connected at all
- */
-Streams.emitToUser = function(userId, event, data, excludeSessionIds) {
-	var clients = Streams.clients[userId];
-	// check if user has at least one client or device active
-	if (!clients || !Object.keys(clients).length) return false;
-	var k;
-	for (k in clients) {
-		if (excludeSessionIds && excludeSessionIds[k]) {
-			continue;
-		}
-		clients[k].emit(event, data);
-	}
-	return true;
-};
-
-/**
- * Emits push notification to native client
- * @method pushNotification
- * @static
- * @param userId {string}
- *	The id of the user
- * @param tokens {object}
- *	Arrays of device tokens per platform
- * @param event {string}
- *	The event name
- * @param data {object}
- *  The data accompanying the event
- */
-Streams.pushNotification = function (userId, deviceIds, event, data) {
-	var server = Q.listen(), apn = server.attached.apn;
-	var ios = deviceIds.ios, i;
-	if (!apn || !ios) return; // nothing works!!!
-	function _onError (err) {
-		if (!err) return;
-		Q.log("Error sending push notification: "+err.message);
-	}
-	for (i=0; i<ios.length; i++) {
-		(function (deviceId) {
-			var p = new Q.Pipe(['badge', 'alert', 'sound', 'data'], function (params) {
-				if (!params.badge.length && !params.alert.length && !params.sound.length && !params.data.length) return;
-				var message = apn.createMessage().device(deviceId);
-				if (params.badge[0] !== undefined) message.badge(params.badge[0]);
-				if (params.alert[0]) message.alert('body', params.alert[0]);
-				if (params.sound[0]) message.sound(params.sound[0]);
-				if (params.data[0]) message.set({ data: params.data[0] });
-				message.send(_onError);
-				return true;
-			});
-			var badge = Streams.pushNotification.badge ? Streams.pushNotification.badge(userId, event, data, p.fill('badge')) : 0;
-			var alert = Streams.pushNotification.alert ? Streams.pushNotification.alert(userId, event, data, p.fill('alert')) : undefined;
-			var sound = Streams.pushNotification.sound ? Streams.pushNotification.sound(userId, event, data, p.fill('sound')) : undefined;
-			var edata = Streams.pushNotification.data ? Streams.pushNotification.data(userId, event, data, p.fill('data')) : undefined;
-
-			if (badge !== undefined) p.fill('badge')(badge);
-			if (alert !== undefined) p.fill('alert')(alert);
-			if (sound !== undefined) p.fill('sound')(sound);
-			if (edata !== undefined) p.fill('data')(edata);
-		})(ios[i]);
-	}
-	// TODO: process android!!!
-};
-
-/**
- * Default badge handler which counts fresh events in all streams where user participates
- * Method may return some value or, if return `undefined` callback must be called
- * To change functionality override it in application script
- * @method pushNotification.badge
- * @static
- * @param userId {string}
- * @param event {string}
- * @param data {object}
- * @param callback {?function}
- */
-Streams.pushNotification.badge = function (userId, event, data, callback) {
-	var q = Streams.Participating.SELECT('SUM(fresh) fresh').where({userId: userId});
-	if (typeof Streams.pushNotification.badge.criteria === "function") q = Streams.pushNotification.badge.criteria(q);
-	q.execute(function (err, res) {
-		if (err || !res.length) Q.log("Error counting fresh fields");
-		var fresh = parseInt(res[0].fresh, 10);
-		callback(isNaN(fresh) ? 0 : fresh);
-	}, {plain: true});
-};
-
-/**
- * Sound handler must define some sound to play with native notification.
- * By default not defined so no sound will be played.
- * Define this method in application script
- * Method may return some value or, if return `undefined` callback must be called.
- * Use "default" to play default system sound
- * @method pushNotification.sound
- * @static
- * @param userId {string}
- * @param event {string}
- * @param data {object}
- * @param callback {?function}
- */
-
-/**
- * Alert handler must define some alert text to show in native notification.
- * By default not defined so no alert will be issued.
- * Define this method in application script
- * Method may return some value or, if return `undefined` callback must be called
- * @method pushNotification.alert
- * @static
- * @param userId {string}
- * @param event {string}
- * @param data {object}
- * @param callback {?function}
- */
-
-/**
- * Data handler must define some data to send with native notification.
- * By default not defined so no data will be sent.
- * Define this method in application script
- * Method may return some value or, if return `undefined` callback must be called
- * @method pushNotification.data
- * @static
- * @param userId {string}
- * @param event {string}
- * @param data {object}
- * @param callback {?function}
- */
+Users.on('disconnected', function (userId) {
+	// post "disconnected" message to Streams/participating stream
+	new Streams.Stream({
+		publisherId: userId,
+		name: 'Streams/participating'
+	}).post({
+		byUserId: userId,
+		type: 'Streams/disconnected'
+	}, function(err) {
+		if (err) console.error(err);
+		Q.log('User disconnected: ' + userId);
+	});	
+});
 
 /**
  * Retrieve stream participants
  * @method getParticipants
  * @static
- * @param publisherId {string}
- *	The publisher Id
- * @param streamName {string}
- *	The name of the stream
- * @param callback=null {function}
- *	Callback receives a map of {userId: participant} pairs
+ * @param {String} publisherId The publisher Id
+ * @param {String} streamName The name of the stream
+ * @param {Function} [callback=null] Callback receives a map of {userId: participant} pairs
  */
 Streams.getParticipants = function(publisherId, streamName, callback) {
 	var args = arguments;
@@ -1024,11 +738,11 @@ Streams.getParticipants = function(publisherId, streamName, callback) {
  * Retrieve stream with calculated access rights
  * @method fetch
  * @static
- * @param asUserId {String}
+ * @param {String}  asUserId
  *	The user id to calculate access rights
- * @param publisherId {String}
+ * @param {String} publisherId
  *	The publisher Id
- * @param streamName {String|Array|Db.Range}
+ * @param {String|Array|Db.Range} streamName
  *	The name of the stream, or an array of names, or a Db.Range
  * @param callback=null {function}
  *	Callback receives the (err, stream) as parameters
@@ -1082,13 +796,13 @@ Streams.fetch = function (asUserId, publisherId, streamName, callback, fields, o
  * Retrieve stream with calculated access rights
  * @method fetchOne
  * @static
- * @param asUserId {String}
+ * @param {String} asUserId
  *	The user id to calculate access rights
- * @param publisherId {String}
+ * @param {String} publisherId
  *	The publisher Id
- * @param streamName {String}
+ * @param {String} streamName
  *	The name of the stream
- * @param callback=null {function}
+ * @param {Function} [callback=null]
  *	Callback receives the (err, stream) as parameters
  * @param {String} [fields='*']
  *  Comma delimited list of fields to retrieve in the stream.
@@ -1129,9 +843,9 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
  * Register a message handler
  * @method messageHandler
  * @static
- * @param msgType {string}
+ * @param {String} msgType
  *	Type of stream
- * @param callback {function}
+ * @param {Function} callback
  *	The handler for stream messages
  */
 Streams.messageHandler = function(msgType, callback) {

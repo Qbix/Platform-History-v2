@@ -1977,4 +1977,52 @@ Users.onLoginLost = new Q.Event(function () {
 Users.onConnected = new Q.Event();
 Users.onConnectionLost = new Q.Event();
 
+/**
+ * Some replacements for Q.Socket methods, use these instead.
+ * They implement logic involving sockets, users, sessions, devices, and more.
+ * Everything goes through the "Users" namespace in socket.io
+ * @class Users.Socket
+ */
+Users.Socket = {
+	/**
+	 * Connects a socket, and stores it in the list of connected sockets.
+	 * But it also sends a "Users.session" message upon socket connection,
+	 * to tell connect the session id to the socket on the back end.
+	 * @static
+	 * @method connect
+	 * @param {String} url The url of the socket.io node to connect to
+	 * @param {Function} callback When a connection is made, receives the socket object
+	 */
+	connect: function _Users_Socket_connect(url, callback) {
+		Q.Socket.connect('Users', url, function (socket) {
+			Q.loadNonce(function () {
+				socket.socket.emit('Users/session', Q.sessionId(), Q.clientId());
+			});
+		});
+	},
+	
+	/**
+	 * Returns a socket, if it was already connected, or returns undefined
+	 * @static
+	 * @method get
+	 * @param url {String} The url where socket.io is listening. If it's empty, then returns all matching sockets.
+	 * @return {Q.Socket}
+	 */
+	get: function _Users_Socket_get(url) {
+		return Q.Socket.get('Users', url);
+	},
+	
+	/**
+	 * Returns Q.Event that occurs on some socket event coming from socket.io
+	 * through the Users namespace
+	 * @event onEvent
+	 * @param {String} name the name of the event
+	 * @return {Q.Event}
+	 */
+	onEvent: function (name) {
+		return Q.Socket.onEvent('Users', null, name);
+	}
+
+};
+
 })(Q, jQuery);

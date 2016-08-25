@@ -2101,8 +2101,8 @@ Q.listen = function _Q_listen(options, callback) {
 /**
  * This should be called from Q.inc.js
  * @method init
- * @param {object} app An object that MUST contain one key:
- * * DIR: the directory of the app
+ * @param {Object} app An object that MUST contain one key:
+ * @param {Object} app.DIR the directory of the app
  * @param {boolean} [notListen=false] Indicate wheather start http server. Useful for forking parallel processes.
  * @throws {Q.Exception} if app is not provided or does not contain DIR field
  */
@@ -2131,11 +2131,11 @@ Q.init = function _Q_init(app, notListen) {
 		Q.PS = ';';
 	}
 	/**
-	 * Application data
+	 * App data for your scripts
 	 * @property app
 	 * @type object
 	 */
-	Q.app = app;
+	Q.app = Q.copy(app);
 	
 	//
 	// constants
@@ -2201,8 +2201,8 @@ Q.init = function _Q_init(app, notListen) {
 		Q[k] = Q_dir  + '/' + dirs[k];
 	}
 	for (k in dirs) {
-		if (!(k in app)) {
-			app[k] = app.DIR  + '/' + dirs[k];
+		if (!(k in Q.app)) {
+			Q.app[k] = Q.app.DIR  + '/' + dirs[k];
 		}
 	}
 	
@@ -2275,7 +2275,11 @@ Q.init = function _Q_init(app, notListen) {
 	 */
 	Q.Utils = require('./Q/Utils');
 	Q.Bootstrap.configure(function (err) {
-		if (err) process.exit(2); // if run as child Q.Bootstrap.configure returns errors in callback
+		if (err) {
+			// if run as child Q.Bootstrap.configure returns errors in callback
+			process.exit(2);
+		}
+		Q.app.name = Q.Config.expect(["Q", "app"]);
 		Q.Bootstrap.loadPlugins(function () {
 			Q.Bootstrap.loadHandlers(function () {
 				console.log(typeof notListen === "string" ? notListen : 'Q platform initialized!');

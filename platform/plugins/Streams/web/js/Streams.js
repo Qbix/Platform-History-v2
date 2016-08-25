@@ -197,26 +197,26 @@ Streams.iconUrl = function(icon, size) {
 	return src.isUrl() ? src : Q.url('plugins/Streams/img/icons/'+src);
 };
 
-var _socket = null,
-	_messageHandlers = {},
-	_constructHandlers = {},
-	_refreshHandlers = {},
-	_streamMessageHandlers = {},
-	_streamFieldChangedHandlers = {},
-	_streamUpdatedHandlers = {},
-	_streamClosedHandlers = {},
-	_streamRelatedFromHandlers = {},
-	_streamRelatedToHandlers = {},
-	_streamUnrelatedFromHandlers = {},
-	_streamUnrelatedToHandlers = {},
-	_streamUpdatedRelateFromHandlers = {},
-	_streamUpdatedRelateToHandlers = {},
-	_streamConstructHandlers = {},
-	_streamRefreshHandlers = {},
-	_retain = undefined,
-	_retainedByKey = {},
-	_retainedByStream = {},
-	_retainedStreams = {};
+var _socket = null;
+var _messageHandlers = {};
+var _constructHandlers = {};
+var _refreshHandlers = {};
+var _streamMessageHandlers = {};
+var _streamFieldChangedHandlers = {};
+var _streamUpdatedHandlers = {};
+var _streamClosedHandlers = {};
+var _streamRelatedFromHandlers = {};
+var _streamRelatedToHandlers = {};
+var _streamUnrelatedFromHandlers = {};
+var _streamUnrelatedToHandlers = {};
+var _streamUpdatedRelateFromHandlers = {};
+var _streamUpdatedRelateToHandlers = {};
+var _streamConstructHandlers = {};
+var _streamRefreshHandlers = {};
+var _retain = undefined;
+var _retainedByKey = {};
+var _retainedByStream = {};
+var _retainedStreams = {};
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
@@ -283,17 +283,6 @@ Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
 
 /**
- * Returns Q.Event that occurs on some socket event coming from socket.io
- * that is meant to be processed by the Streams API.
- * @event onEvent
- * @param {String} name
- * @return {Q.Event}
- */
-Streams.onEvent = function (name) {
-	return Q.Socket.onEvent('Streams', null, name);
-};
-
-/**
  * Event occurs if native app is activated from background by click on native notification
  * @event onActivate
  */
@@ -318,7 +307,7 @@ function _connectSockets(refresh) {
 	}
 	Streams.getParticipating(function (err, participating) {
 		Q.each(participating, function (i, p) {
-			Q.Socket.connect('Streams', Q.nodeUrl({
+			Users.Socket.connect(Q.nodeUrl({
 				publisherId: p.publisherId,
 				streamName: p.streamName
 			}));
@@ -345,23 +334,6 @@ function _disconnectSockets() {
 }
 
 /**
- * Get the current client's socket session id on the node hosting the socket,
- * a node which is found based on the publisherId and streamName.
- * @static
- * @method socketSessionId
- * @param {String} publisherId
- * @param {String} streamName
- * @return {String}
- */
-Streams.socketSessionId = function (publisherId, streamName) {
-	var s = Q.Socket.get('Streams', Q.nodeUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	}));
-	return s ? s.namespace.socket.sessionid : null;
-};
-
-/**
  * A convenience method to get the URL of the streams-related action
  * @static
  * @method actionUrl
@@ -370,8 +342,7 @@ Streams.socketSessionId = function (publisherId, streamName) {
  * @param {String} [what='stream'] Can be one of 'stream', 'message', 'relation', etc.
  * @return {String} The corresponding URL
  */
-Streams.actionUrl = function(publisherId, streamName, what)
-{
+Streams.actionUrl = function(publisherId, streamName, what) {
 	if (!what) {
 		what = 'stream';
 	}
@@ -1227,7 +1198,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		}
 	}, { fields: fields, baseUrl: baseUrl });
 	_retain = undefined;
-	var socket = Q.Socket.get('Streams', Q.nodeUrl({
+	var socket = Users.Socket.get(Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
 	}));
@@ -1371,7 +1342,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Q.Socket.get('Streams', node);
+	var socket = Users.Socket.get(node);
 	if (result === false) {
 		if (socket && options && options.unlessSocket) {
    			// We didn't even try to wait for messages
@@ -2041,7 +2012,7 @@ Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPub
 
 /**
  * Returns Q.Event which occurs on a message post event coming from socket.io
- * Generic callbacks can be assigend by setting messageType to ""
+ * Generic callbacks can be assigned by setting messageType to ""
  * @event onMessage
  * @static
  * @param publisherId {String} id of publisher which is publishing the stream
@@ -2832,7 +2803,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Q.Socket.get('Streams', node);
+	var socket = Users.Socket.get(node);
 	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
 		if (o.unlessSocket) {
 			var participant;
@@ -2895,7 +2866,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 				if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
 					return; // it was already processed
 				}
-				Streams.onEvent('post').handle(message, messages);
+				Users.Socket.onEvent('Streams/post').handle(message, messages);
 			}, 0), {ascending: true, numeric: true});
 			
 			// if any new messages were encountered, updateMessageCache removed all the cached
@@ -3788,7 +3759,7 @@ Q.onInit.add(function _Streams_onInit() {
 			// {"type":"7","pushBadge":"1","pushSound":"1","enabled":"1","deviceToken":"blablahblah","pushAlert":"1"}
 			Q.req('Users/device', 'data', function (res) {
 				if (res.errors) return console.log(res.errors[0].message);
-				Streams.pushNotification = {
+				 Users.pushNotification = {
 					engine: pushNotification,
 					status: status
 				};
@@ -3815,9 +3786,9 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 		});
 	}
-	if (Q.info.isCordova && pushNotification && !Streams.pushNotification) {
-		Users.login.options.onSuccess.set(_registerPushNotifications, 'Streams.PushNotifications');
-		Users.logout.options.onSuccess.set(function() { pushNotification.setApplicationIconBadgeparseInt(0); }, 'Streams.PushNotifications');
+	if (Q.info.isCordova && pushNotification && ! Users.pushNotification) {
+		Users.login.options.onSuccess.set(_registerPushNotifications, ' Users.pushNotifications');
+		Users.logout.options.onSuccess.set(function() { pushNotification.setApplicationIconBadgeparseInt(0); }, ' Users.pushNotifications');
 		if (Users.loggedInUser) _registerPushNotifications();
 	}
 	
@@ -3961,12 +3932,12 @@ Q.onInit.add(function _Streams_onInit() {
 		}, true);
 	}, "Streams");
 
-	Streams.onEvent('debug').set(function _Streams_debug_handler (msg) {
+	Users.Socket.onEvent('Streams/debug').set(function _Streams_debug_handler (msg) {
 		console.log('DEBUG:', msg);
 	}, 'Streams');
 
 	// if stream was edited or removed - invalidate cache
-	Streams.onEvent('remove').set(function _Streams_remove_handler (stream) {
+	Users.Socket.onEvent('Streams/remove').set(function _Streams_remove_handler (stream) {
 		Streams.get.cache.each([msg.publisherId, msg.streamName], 
 		function (k, v) {
 			this.remove(k);
@@ -3974,9 +3945,9 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}, 'Streams');
 
-	Streams.onEvent('join').set(function _Streams_join_handler (p) {
+	Users.Socket.onEvent('Streams/join').set(function _Streams_join_handler (p) {
 		// 'join' event contains new participant.
-		console.log('Streams.onEvent("join")', p);
+		console.log('Users.Socket.onEvent("join")', p);
 		var _cache = Participant.get.cache;
 		if (_cache) {
 			var key = JSON.stringify([p.publisherId, p.streamName, p.userId]);
@@ -3984,18 +3955,18 @@ Q.onInit.add(function _Streams_onInit() {
 		}
 	}, 'Streams');
 
-	Streams.onEvent('leave').set(function (p) {
+	Users.Socket.onEvent('Streams/leave').set(function (p) {
 		// 'leave' event contains removed participant.
-		console.log('Streams.onEvent("leave")', p);
+		console.log('Users.Socket.onEvent("leave")', p);
 		Participant.get.cache.set(
 			[p.publisherId, p.streamName, p.userId],
 			0, p, [null, p]
 		);
 	});
 
-	Streams.onEvent('post').set(function _Streams_post_handler (msg, messages) {
+	Users.Socket.onEvent('Streams/post').set(function _Streams_post_handler (msg, messages) {
 		if (!msg) {
-			throw new Q.Error("Q.Streams.onEvent msg is empty");
+			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
 		}
 		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName, false);
 		if (parseInt(msg.ordinal) <= latest) {
@@ -4014,7 +3985,7 @@ Q.onInit.add(function _Streams_onInit() {
 				return; // it was already processed
 			}
 			// New message posted - update cache
-			console.log('Streams.onEvent("post")', msg);
+			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (Q.typeOf(msg) === 'Q.Streams.Message')
 				? msg
 				: Message.construct(msg, true);
@@ -4083,7 +4054,7 @@ Q.onInit.add(function _Streams_onInit() {
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
-						Q.Socket.connect('Streams', Q.nodeUrl({
+						Users.Socket.connect(Q.nodeUrl({
 							publisherId: fields.publisherId,
 							streamName: fields.streamName
 						}, function () {
@@ -4099,7 +4070,7 @@ Q.onInit.add(function _Streams_onInit() {
 							publisherId: fields.publisherId,
 							streamName: fields.streamName
 						});
-						var socket = Q.Socket.get('Streams', node);
+						var socket = Users.Socket.get(node);
 						if (socket) {
 							// TODO: only disconnect when you've left
 							// all the streams on this node
@@ -4312,12 +4283,6 @@ function _refreshUnlessSocket(publisherId, streamName, callback, options) {
 		unlessSocket: true
 	}, options));
 }
-
-Q.Socket.onConnect('Streams').set(function (socket) {
-	Q.loadNonce(function () {
-		socket.emit('Streams.session', Q.sessionId(), Q.clientId());	
-	});
-}, 'Streams');
 
 Q.Template.set('Streams/followup/mobile/alert', "The invite was sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 
