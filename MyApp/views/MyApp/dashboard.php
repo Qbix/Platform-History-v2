@@ -1,5 +1,5 @@
 <div id='dashboard'>
-	<h1>MyApp</h1>
+	<h1><?php echo Users::communityName() ?></h1>
 
 	<div id="dashboard_user">
 		<?php if ($user): ?>

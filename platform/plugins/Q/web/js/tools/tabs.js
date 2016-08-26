@@ -388,8 +388,7 @@ Q.Tool.define("Q/tabs", function(options) {
 					Q.handle(state.onRefresh, this);
 					callback && callback.call(tool);
 				},
-				onShow: function () {
-					Q.layout(this.state('Q/contextual').contextual[0]);
+				onShow: function (cs) {
 					Q.handle(state.onContextual, this, arguments);
 				}
 			});

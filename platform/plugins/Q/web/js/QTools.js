@@ -2581,7 +2581,7 @@ Q.Contextual = {
 							}
 							var cs = trigger.state('Q/contextual');
 							if (cs) {
-								Q.layout(cs[0]);
+								Q.layout(cs.contextual[0]);
 								Q.handle(cs.onShow, trigger, [cs]);
 							}
 							Q.Contextual.justShown = true;
