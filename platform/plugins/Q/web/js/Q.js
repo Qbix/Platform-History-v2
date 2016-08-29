@@ -7221,10 +7221,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 
 	var parts = url.split('#');
-	var hashUrl = parts[1] ? parts[1].queryField('url') : undefined;
-	if (parts[1]) {
-		url = hashUrl;
-	}
+	url = (parts[1] && parts[1].queryField('url')) || url;
 
 	var loader = Q.request;
 	var onActivate, onError;
