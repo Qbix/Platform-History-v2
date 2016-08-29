@@ -969,7 +969,8 @@ class Q_Session
 		$id = str_replace('-', '', Q_Utils::uuid());
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		if (isset($secret)) {
-			$id .= hash_hmac('sha1', $id, "$secret");
+			$hmac = Q_Utils::hmac('sha1', $id, "$secret");
+			$id .= substr($hmac, 0, 32);
 		}
 		$id = base64_encode(pack('H*', $id));
 		return str_replace(array('z', '+', '/', '='), array('zz', 'za', 'zb', 'zc'), $id);
@@ -1010,7 +1011,7 @@ class Q_Session
 		$b = substr($result, 32, 32);
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		$c = isset($secret)
-			? ($b === Q_Utils::hmac('sha1', $a, $secret))
+			? ($b === substr(Q_Utils::hmac('sha1', $a, $secret), 0, 32))
 			: true;
 		return array($c, $a, $b);
 	}

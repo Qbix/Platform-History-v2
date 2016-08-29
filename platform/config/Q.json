@@ -48,6 +48,7 @@
 				"logs": "files/Db/logs",
 				"iterations": 2
 			},
+			"sigField": "sig",
 			"configServer": {
 				"url": null,
 				"internal": false,

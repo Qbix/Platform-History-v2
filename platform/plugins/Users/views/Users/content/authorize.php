@@ -98,9 +98,7 @@
 			});
 			fields.scope = Q.Users.authorize.scope.join(' ');
 			Q.req(Q.info.url, 'url', function (err, response) {
-				// setTimeout(function () {
-				// 	Q.handle(fields.redirect_uri);
-				// }, 1000);
+
 			}, {
 				method: 'post',
 				fields: fields

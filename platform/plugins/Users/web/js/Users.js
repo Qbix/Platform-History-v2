@@ -1978,6 +1978,22 @@ Users.onLoginLost = new Q.Event(function () {
 Users.onConnected = new Q.Event();
 Users.onConnectionLost = new Q.Event();
 
+Q.page('', function () {
+	if (!location.hash.queryField('Q.Users.oAuth')) {
+		return;
+	}
+	var fieldNames = [
+		'response_type', 'token_type', 'access_token',
+		'expires_in', 'scope', 'state', 'Q.Users.oAuth'
+	];
+	Q.req('Users/oAuth', function () {
+		debugger;
+	}, {
+		method: 'post',
+		fields: location.href.queryField(fieldNames)
+	});
+}, 'Users');
+
 /**
  * Some replacements for Q.Socket methods, use these instead.
  * They implement logic involving sockets, users, sessions, devices, and more.

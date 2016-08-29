@@ -296,24 +296,54 @@ class Q_Valid
 	 * @method signature
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
+	 * @param {array} [$data=$_REQUEST] The data to check the signature of
+	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
 	 * @return {boolean} Whether the phone number seems like it could be valid
 	 * @throws {Q_Exception_FailedValidation}
 	 */
-	static function signature ($throwIfInvalid = false)
+	static function signature ($throwIfInvalid = false, $data = null, $fieldKeys = null)
 	{
+		if (!isset($data)) {
+			$data = $_REQUEST;
+		}
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (!isset($secret)) {
 			return true;
 		}
 		$sgf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-		$invalid = false;
-		if (!Q_Request::special($sgf, null)) {
-			$invalid = true;
+		
+		$invalid = true;
+		if (is_array($fieldKeys)) {
+			$ref = $data;
+			foreach ($fieldKeys as $k) {
+				if (!isset($k)) {
+					break;
+				}
+				$ref2 = $ref;
+				$ref = $ref[$k];
+			}
+			if ($ref and $signature) {
+				unset($ref2[$k]);
+				$calculated = Q_Utils::signature($data, $secret);
+				if ($ref === $signature) {
+					$invalid = false;
+				} else { // try with null
+					$ref2[$k] = null;
+					$calculated = Q_Utils::signature($data, $secret);
+					if ($ref === $signature) {
+						$invalid = false;
+					}
+				}
+			}
 		} else {
-			$req = $_REQUEST;
+			$signature = Q_Request::special($sgf, null, $data);
+		}
+		if ($signature) {
+			$invalid = false;
+			$req = $data;
 			unset($req["Q.$sgf"]);
 			unset($req["Q_$sgf"]);
-			if (Q_Utils::signature($req, $secret) !== Q_Request::special($sgf, null)) {
+			if (Q_Utils::signature($data, $secret) !== $signature) {
 				$invalid = true;
 			}
 		}
