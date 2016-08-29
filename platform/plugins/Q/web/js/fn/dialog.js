@@ -76,7 +76,7 @@ function _Q_overlay(o) {
 	}
 
 	var $this = this;
-	$this.addClass('Q_overlay');
+	$this.hide().css('visibility', 'hidden').addClass('Q_overlay');
 	$this.css('position', Q.info.platform === 'ios' ? 'absolute' : 'fixed');
 
 	function closeThisOverlayOnEsc(e)
@@ -105,6 +105,7 @@ function _Q_overlay(o) {
 			$this.css('z-index', topZ);
 			Q.handle($overlay.options.beforeLoad, $this, [$this]);
 			calculatePosition($this);
+			$this.show();
 			var $body = $('body');
 			$overlay.bodyStyle = {
 				left: $body.css('left'),
@@ -547,7 +548,10 @@ function _handlePosAndScroll(o)
 
 	Q.addScript("plugins/Q/js/QTools.js", function () {
 
-	interval = setInterval(function() {
+	interval = setInterval(_adjustPosition, 100);
+	_adjustPosition();
+	
+	function _adjustPosition() {
 		var maxContentsHeight;
 		if ($this.css('display') == 'block')
 		{
@@ -560,7 +564,7 @@ function _handlePosAndScroll(o)
 			bottomMargin = Q.Dialogs.options.bottomMargin;
 			if (typeof(bottomMargin) == 'string') // percentage
 				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
-			
+		
 			var outerWidth = $this.outerWidth();
 			var winInnerWidth = Q.Pointer.windowWidth();
 			var winInnerHeight = Q.Pointer.windowHeight();
@@ -576,10 +580,10 @@ function _handlePosAndScroll(o)
 						iScrollBar.css({ 'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px' });
 					}
 				}
-				
+			
 				// for mobile devices any height and y-pos corrections are done only if keyboard is not visible on the screen
 				if (Q.Layout && Q.Layout.keyboardVisible) return;
-				
+			
 				// correcting height
 				if ($this.outerHeight() > winInnerHeight && o.applyIScroll)
 				{
@@ -622,7 +626,7 @@ function _handlePosAndScroll(o)
 						iScrollBar.css({ 'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px' });
 					}
 				}
-				
+			
 				// for touchscreen devices any height and y-pos corrections are done only if keyboard is not visible on the screen
 				if (Q.info.isTouchscreen && Q.Layout && Q.Layout.keyboardVisible) return;
 
@@ -666,7 +670,7 @@ function _handlePosAndScroll(o)
 					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 			}
-			
+		
 			// also considering orientation
 			if (Q.info.isTouchscreen)
 			{
@@ -684,7 +688,7 @@ function _handlePosAndScroll(o)
 						$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 			}
-			
+		
 			if (contentsWrapper && contentsLength != ods.html().length)
 			{
 				contentsLength = ods.html().length;
@@ -693,7 +697,8 @@ function _handlePosAndScroll(o)
 		} else {
 			clearInterval(interval);
 		}
-	}, 100);
+		$this.css('visibility', 'visible');
+	}
 	
 	});
 };
