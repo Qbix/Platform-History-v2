@@ -1990,7 +1990,7 @@ Q.page('', function () {
 		debugger;
 	}, {
 		method: 'post',
-		fields: location.href.queryField(fieldNames)
+		fields: location.hash.queryField(fieldNames)
 	});
 }, 'Users');
 

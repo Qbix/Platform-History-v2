@@ -9292,7 +9292,7 @@ Q.Browser = {
 };
 
 var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
-	|| location.href.queryField('Q.cordova');
+	|| location.search.queryField('Q.cordova');
 
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
