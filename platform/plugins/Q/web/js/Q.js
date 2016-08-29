@@ -229,11 +229,11 @@ Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 };
 
 /**
- * Gets a param from a string, which is usually the location.search or location.hash
+ * Get or set querystring fields from a string, usually from location.search or location.hash
  * @method queryField
- * @param {String} name The name of the field
- * @param value {String} Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
- * @return {String} the value of the field in the string, or if value was not undefined, the resulting querystring
+ * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned.
+ * @param {String} [value] Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
+ * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring. Finally, if 
  */
 Sp.queryField = function Q_queryField(name, value) {
 	var what = this;
@@ -250,9 +250,18 @@ Sp.queryField = function Q_queryField(name, value) {
 			break;
 		}
 	}
-	if (typeof name === 'object') {
+	if (Q.isArrayLike(name)) {
+		var ret = {}, keys = [];
+		var parsed = Q.parseQueryString(what, keys);
+		for (i=0, l=name.length; i<l; ++i) {
+			if (name[i] in parsed) {
+				ret[name[i]] = parsed[name[i]];
+			}
+		}
+		return ret;
+	} else if (Q.isPlainObject(name)) {
 		var result = what;
-		Q.each(value, function (key, value) {
+		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
 	} else if (value === undefined) {
