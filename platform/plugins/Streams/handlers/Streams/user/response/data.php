@@ -3,7 +3,7 @@
 function Streams_user_response_data($params)
 {
 	$identifier = Users::requestedIdentifier($type);
-	$hash = md5(strtolower(trim($identifier)));
+	$hash = sha1(strtolower(trim($identifier)));
 
 	$icon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)
 		? $url = "plugins/Users/img/icons/default/80.png"

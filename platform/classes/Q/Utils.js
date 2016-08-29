@@ -32,7 +32,7 @@ Utils.signature = function (data, secret) {
 	if (typeof(data) !== 'string') {
 		data = http_build_query(ksort(data));
 	}
-	return Q.Crypto.md5(data, secret);
+	return Q.Crypto.sha1(data, secret);
 };
 
 /**

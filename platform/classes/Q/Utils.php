@@ -31,7 +31,7 @@ class Q_Utils
 			ksort($data);
 			$data = http_build_query($data);
 		}
-		return self::hmac('md5', $data, $secret);
+		return self::hmac('sha1', $data, $secret);
 	}
 
 	/**
@@ -206,7 +206,7 @@ class Q_Utils
 	 */
 	static function hash($text)
 	{
-		return md5(Db::normalize($text));
+		return sha1(Db::normalize($text));
 	}
 
 	/**
