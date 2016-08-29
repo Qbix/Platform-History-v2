@@ -65,7 +65,7 @@
 			Q.plugins.Users.login({
 				noClose: true,
 				onSuccess: { 'Users.login': function (user, options, result, used) {
-					Q.loadUrl(window.location.href, {
+					Q.handle(window.location.href, {
 						onActivate: function () {
 							if (typeof result === 'string'
 							&& Q.Users.authorize.noTerms) {

@@ -7431,6 +7431,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			if (!o.ignorePage) {
 				// Remove various elements belonging to the slots that are being reloaded
 				Q.each(['link', 'style', 'script'], function (i, tag) {
+					if (tag !== 'style' && !o.loadExtras) {
+						return;
+					}
 					Q.each(document.getElementsByTagName(tag), function (k, e) {
 						if (tag === 'link' && e.getAttribute('rel').toLowerCase() != 'stylesheet') {
 							return;
