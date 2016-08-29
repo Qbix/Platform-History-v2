@@ -845,24 +845,25 @@ Users.batchFunction.functions = {};
 Q.onActivate.set(function (elem) {
 	$(elem || document).off('click.Users').on('click.Users', 'a', function (e) {
 		var href = $(this).attr('href');
-		if (Users.requireLogin && Users.requireLogin[href]) {
-			if (Users.requireLogin[href] === 'facebook') {
-				if (!Users.connected.facebook) {
-					// note: the following may automatically log you in
-					// if you authorized this app with facebook
-					// and you are already logged in with facebook.
-					Users.login({
-						'using': 'facebook',
-						onSuccess: href
-					});
-					e.preventDefault();
-				}
-			} else if (Users.requireLogin[href] === true) {
+		if (!Users.requireLogin || !Users.requireLogin[href]) {
+			return;
+		}
+		if (Users.requireLogin[href] === 'facebook') {
+			if (!Users.connected.facebook) {
+				// note: the following may automatically log you in
+				// if you authorized this app with facebook
+				// and you are already logged in with facebook.
 				Users.login({
+					'using': 'facebook',
 					onSuccess: href
 				});
 				e.preventDefault();
 			}
+		} else if (Users.requireLogin[href] === true) {
+			Users.login({
+				onSuccess: href
+			});
+			e.preventDefault();
 		}
 	});
 }, 'Users');

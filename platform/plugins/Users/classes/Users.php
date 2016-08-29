@@ -59,7 +59,7 @@ abstract class Users extends Base_Users
 	}
 	
 	/**
-	 * Get the suffix of the main community from the config, such as "Incorporated" or "LLC"
+	 * Get the suffix of the main community from the config, such as "Inc." or "LLC"
 	 * @return {string|null} The suffix of the main community for the installed app.
 	 */
 	static function communitySuffix()

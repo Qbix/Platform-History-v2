@@ -171,15 +171,19 @@ class Q_Response
 	}
 
 	/**
-	 * Adds an error
+	 * Adds an error to the response
 	 * @method addError
 	 * @static
-	 * @param {Q_Exception} $exception A Q exception representing the error
+	 * @param {Q_Exception|array} $exception Either a Q_Exception or an array of them
 	 */
 	static function addError(
-	 Exception $exception)
+	 $exception)
 	{
-		self::$errors[] = $exception;
+		if (is_array($exception)) {
+			self::$errors = array_merge(self::$errors, $exception);
+		} else {
+			self::$errors[] = $exception;
+		}
 	}
 
 	/**
@@ -619,13 +623,12 @@ class Q_Response
 					: 0;
 				if (!empty($extend['Q'])) {
 					$json = Q::json_encode($extend['Q'], $options);
-					$scriptDataLines = array("Q.extend(Q, 100, $json);");
+					$scriptDataLines[] = "Q.extend(Q, 100, $json);";
 					unset($extend['Q']);
 				}
 				if (!empty($extend)) {
 					$json = Q::json_encode($extend, $options);
-					$scriptDataLines = array("Q.extend(window, 100, $json);");
-					unset($extend['Q']);
+					$scriptDataLines[] = "Q.extend(window, 100, $json);";
 				}
 			}
 		}

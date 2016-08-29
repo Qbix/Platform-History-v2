@@ -76,6 +76,11 @@
 				"token": "YOUR TOKEN HERE"
 			}, */
 			"from": "+1234567890"
+		},
+		"authorize": {
+			"redirectUris": {
+				"MyApp": ["MyApp/welcome", "MyApp/home"]
+			}
 		}
 	},
 	"Assets": {

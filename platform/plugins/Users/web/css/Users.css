@@ -314,7 +314,14 @@
 
 .Users_app_icon { vertical-align: middle; }
 
-#Users_authorize_welcome * { font-size: 36px; line-height: 80px; text-align: center; }
+.Users_authorize_scope_granted { font-style: italic; opacity: 0.5;  }
+.Users_authorize_scope_granted:before {
+	content: '✔';
+}
+#Users_authorize_what { padding: 10px; background: rgba(255, 255, 0, 0.2); }
+#Users_authorize_welcome { padding: 10px; }
+#Users_authorize_welcome * { font-size: 14px; line-height: 14px; text-align: center; }
+#Users_authorize_welcome h2 { margin: 10px; font-size: 36px; line-height: 36px; }
 #Users_authorize_act { text-align: center; }
 #Users_authorize_terms,
 #Users_authorize_terms * { font-size: 14px; }

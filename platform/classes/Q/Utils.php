@@ -38,8 +38,8 @@ class Q_Utils
 	 * Sign the data
 	 * @method sign
 	 * @static
-	 * @param {array} $data
-	 * @param {array} $field_keys
+	 * @param {array} $data The array of data
+	 * @param {array|string} [$field_keys] Path of the key under which to save signature
 	 * @return {array}
 	 */
 	static function sign($data, $field_keys = null) {
@@ -48,6 +48,9 @@ class Q_Utils
 			if (!$field_keys) {
 				$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
 				$field_keys = array("Q.$sf");
+			}
+			if (is_string($field_keys)) {
+				$field_keys = array($field_keys);
 			}
 			$ref = &$data;
 			for ($i=0, $c = count($field_keys); $i<$c-1; ++$i) {

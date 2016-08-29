@@ -10,26 +10,23 @@ function Users_authorize_response()
 		Q_Dispatcher::showErrors();
 	}
 
+	$response_type = 'token';
+	$token_type = 'bearer';
 	$client_id = $_REQUEST['client_id'];
-	$redirect_url = $_REQUEST['redirect_uri'];
 	$state = $_REQUEST['state'];
-
-	$client = Users_User::fetch($client_id);
+	$skip = Q::ifset($_REQUEST, 'skip', false);
+	$scope = Users_OAuth::requestedScope(true, $scopes);
+	$client = Users_User::fetch($client_id, true);
 	if (!$client) {
 		throw new Q_Exception_MissingRow(array(
-			'table' => 'user',
+			'table' => 'client user',
 			'criteria' => "id = '$client_id'"
 		), 'client_id');
 	}
 	if (empty($client->url)) {
 		throw new Q_Exception("Client app needs to register url", 'client_id');
 	}
-	if (substr($redirect_url, 0, strlen($client->url)) !== $client->url) {
-		throw new Q_Exception_WrongValue(array(
-			'field' => 'redirect_uri',
-			'range' => "a url prefixed by client user's url"
-		));
-	}
+	$redirect_uri = Q::ifset($_REQUEST, 'redirect_uri', $client->url);
 
 	$user = Users::loggedInUser();
 
@@ -41,29 +38,44 @@ function Users_authorize_response()
 		$oa->client_id = $client_id;
 		$oa->userId = $user->id;
 		$oa->state = $state;
-		$oa->retrieve();
+		$oa = $oa->retrieve();
 	}
 
+	$remaining = $scope;
 	if ($oa and $oa->wasRetrieved()) {
 		// User is logged in and already has a token for this client_id and state
-		$separator = (strpos($redirect_url, '?') === false) ? '?' : '&';
-		$url = $redirect_url . $separator . http_build_query(array(
+		$paths = Q_Config::get('Users', 'authorize', 'clients', Q::app(), 'redirectPaths', false);
+		$path = substr($redirect_uri, strlen($client->url)+1);
+		$p = array(
+			'response_type' => $response_type,
+			'token_type' => $token_type,
 			'access_token' => $oa->access_token,
-			'token_type' => 'bearer',
 			'expires_in' => $oa->token_expires_seconds,
-			'scope' => 'user',
+			'scope' => implode(' ', $scope),
 			'state' => $oa->state
-		));
-		Q_Response::redirect(Q_Uri::from($url, false));
+		);
+		$p = Q_Utils::sign($p, 'Q.Users.oAuth');
+		// the redirect uri could be a native app url scheme
+		$s = (strpos($redirect_uri, '#') === false) ? '#' : '&';
+		$redirect_uri = Q_Uri::from($redirect_uri.$s.http_build_query($p), false)->toUrl();
+		if (!Q::startsWith($redirect_uri, $client->url)
+		or (is_array($paths) and !in_array($path, $paths))) {
+			throw new Users_Exception_Redirect(array('uri' => $redirect_uri));
+		}
+		Q_Response::redirect($redirect_uri);
 		return false;
 	}
 
 	$terms_label = Users::termsLabel('authorize');
-
-	$content = Q::view(
-		'Users/content/authorize.php',
-		compact('client', 'redirect_url', 'user', 'state', 'terms_label')
-	);
+	
+	Q_Response::setScriptData('Q.Users.authorize', compact(
+		'client_id', 'redirect_uri', 'scope', 'scopes', 'remaining',
+		'state', 'response_type', 'skip'
+	));
+	$content = Q::view('Users/content/authorize.php', compact(
+		'client', 'user', 'redirect_uri',  'scope', 'scopes', 'remaining',
+		'state', 'terms_label', 'response_type', 'skip'
+	));
 	Q_Response::setSlot('content', $content);
 	Q_Response::setSlot('column0', $content);
 	return true;

@@ -126,8 +126,8 @@ class Q_Exception extends Exception
 	 * @param {string} $className The name of the exception class.
 	 * @param {string} $message The description of the error. Will be eval()-ed before rendering,
 	 *  so it can include references to parameters, such as $my_param.
-	 * @param {string} [$baseClassName=null] Here you can pass the name of different base class than Q_Exception
 	 * @param {array} [$rethrowDestClasses=array()] The name of the class that should handle this exception,
+	 * @param {string} [$baseClassName=null] Here you can pass the name of different base class than Q_Exception
 	 *  should it be thrown. Almost all catch() blocks in your code should use
 	 *  `Q_Exception::rethrow($e, __CLASS__)` as the first statement, 
 	 *  if the exception might have to be re-thrown further down the stack.
@@ -135,9 +135,13 @@ class Q_Exception extends Exception
 	static function add(
 	 $className,
 	 $message,
-	 $baseClassName = null,
-	 $rethrowDestClasses = array())
+	 $rethrowDestClasses = array(),
+	 $baseClassName = null)
 	{
+		if (is_string($rethrowDestClasses)) {
+			$baseClassName = $rethrowDestClasses;
+			$rethrowDestClasses = array();
+		}
 		static $exception_code = 10000;
 		++$exception_code; // TODO: improve this somehow
 		self::$codes[$className] = $exception_code;

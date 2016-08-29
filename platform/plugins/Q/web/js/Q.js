@@ -7222,7 +7222,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 
 	var parts = url.split('#');
 	var hashUrl = parts[1] ? parts[1].queryField('url') : undefined;
-	url = (hashUrl !== undefined) ? hashUrl : parts[0];
+	if (parts[1]) {
+		url = hashUrl;
+	}
 
 	var loader = Q.request;
 	var onActivate, onError;

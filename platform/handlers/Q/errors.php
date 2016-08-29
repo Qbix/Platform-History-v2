@@ -94,8 +94,12 @@ EOT;
 	}
 	if ($errors) {
 		// Try rendering the app's errors response, if any.
-		$app = Q_Config::expect('Q', 'app');
-		Q_Dispatcher::forward("$app/errors");
+		$app = Q::app();
+		if (Q::canHandle("$app/errors/response/content")) {
+			Q_Dispatcher::forward("$app/errors");
+		} else {
+			echo Q::view("Q/errors.php", compact('errors'));
+		}
 	}
 	if (!empty($e)) {
 		return Q::event('Q/exception', array('exception' => $e));

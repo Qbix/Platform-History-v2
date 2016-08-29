@@ -30,7 +30,8 @@
 			"e/:emailAddress": { "module": "Users", "action": "activate" },
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
 			"plugins/Users/:action": {"module": "Users"},
-			"uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"}
+			"uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
+			"Users/authorize": {"module": "Users", "action": "authorize"}
 		},
 		"session": {
 			"db": {
@@ -116,7 +117,10 @@
 				"label": "I have read and agree<br>to the {{link}}",
 				"title": "Terms"
 			},
-			"stateMinLength": 10
+			"stateMinLength": 10,
+			"clients": {
+
+			}
 		},
 		"register": {
 			"terms": {
