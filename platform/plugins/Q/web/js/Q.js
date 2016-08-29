@@ -5758,11 +5758,12 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 	var ajax = options.iframe ? 'iframe'
 		: (options.loadExtras ? 'loadExtras' : 'json');
 	if (typeof what == 'string') {
-		var what2 = what;
+		var p = what.split('#');
+		var what2 = p[0];
 		if (Q.info && Q.info.baseUrl === what2) {
 			what2 += '/'; // otherwise we will have 301 redirect with trailing slash on most servers
 		}
-		what2 += (what.indexOf('?') < 0) ? '?' : '&';
+		what2 += (what2.indexOf('?') < 0) ? '?' : '&';
 		what2 += encodeURI('Q.ajax='+ajax);
 		if (options.timestamp) {
 			what2 += encodeURI('&Q.timestamp=')+encodeURIComponent(timestamp);
@@ -5787,6 +5788,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 		if (Q.nonce !== undefined) {
 			what2 += encodeURI('&Q.nonce=') + encodeURIComponent(Q.nonce);
 		}
+		what2 = (p[1] ? what2 + '#' + p[1] : what2);
 	} else {
 		// assume it's an object
 		var what2 = {};
@@ -7221,7 +7223,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 
 	var parts = url.split('#');
-	url = (parts[1] && parts[1].queryField('url')) || url;
+	var urlToLoad = (parts[1] && parts[1].queryField('url')) || parts[0];
 
 	var loader = Q.request;
 	var onActivate, onError;
@@ -7236,7 +7238,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	var _loadUrlObject = {};
 	_latestLoadUrlObjects[o.key] = _loadUrlObject;
-	loader(url, slotNames, loadResponse, o);
+	loader(urlToLoad, slotNames, loadResponse, o);
 
 	function loadResponse(err, response, redirected) {
 		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
