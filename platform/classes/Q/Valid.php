@@ -365,7 +365,7 @@ class Q_Valid
 	/**
 	 * Convenience method to require certain fields to be present in an array,
 	 * and generate errors otherwise.
-	 * @param {array} $fields Array of strings or arrays naming fields that are required
+	 * @param {array} $fields Array of strings or nested arrays of strings, naming fields that are required
 	 * @param {array} [$source=$_REQUEST] Where to look for the fields
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception
 	 *    on the first violation, or add them to a list.
@@ -377,13 +377,6 @@ class Q_Valid
 	{
 		if (!isset($source)) {
 			$source = $_REQUEST;
-		}
-		if (is_string($fields)) {
-			$fields = func_get_args();
-			if (end($fields) === true) {
-				$throwIfMissing = true;
-				array_pop($fields);
-			}
 		}
 		$result = array();
 		foreach ($fields as $fieldname) {

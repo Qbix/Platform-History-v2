@@ -835,7 +835,7 @@ abstract class Users extends Base_Users
 	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array|string} [$icon=array()] Array of filename => url pairs
-	 * @param {string} [$provider=null] Provider
+	 * @param {string} [$provider=null] Provider such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -1050,10 +1050,8 @@ abstract class Users extends Base_Users
 		}
 		
 		if (!empty($device)) {
-			$device['sessionId'] = Q_Session::id();
 			$device['userId'] = $user->id;
-			$device = new Users_Device($device);
-			$device->save();
+			Users_Device::add($device);
 		}
 
 		/**

@@ -2,6 +2,20 @@
 
 /**
  * Registers a user in the system
+ *
+ * @param {array} $_REQUEST 
+ * @param {string} $_REQUEST.username The name of the user
+ * @param {string|array} $_REQUEST.identifier Can be an email address or mobile number. Or it could be an array of $type => $info
+ * @param {string} [$_REQUEST.identifier.identifier] an email address or phone number
+ * @param {array} [$_REQUEST.identifier.device] an array with keys "deviceId", "platform", "version"
+ *   to store in the Users_Device table for sending notifications
+ * @param {array|string} [$_REQUEST.icon=array()] Array of filename => url pairs
+ * @param {string} [$_REQUEST.provider=null] Provider such as "facebook"
+ * @return {void}
+ * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
+ * @throws {Q_Exception} If user was already verified for someone else
+ * @throws {Users_Exception_AlreadyVerified} If user was already verified
+ * @throws {Users_Exception_UsernameExists} If username exists
  */
 function Users_register_post()
 {

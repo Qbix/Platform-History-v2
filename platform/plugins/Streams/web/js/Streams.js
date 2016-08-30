@@ -3751,46 +3751,6 @@ Q.onInit.add(function _Streams_onInit() {
 	if (Users.loggedInUser) {
 		_connectSockets(true); // refresh streams
 	}
-
-	var pushNotification = window.plugins && window.plugins.pushNotification;
-	function _registerPushNotifications () {
-		pushNotification.registerDevice({alert:true, badge:true, sound:true}, function(status) {
-			// if successful status is an object that looks like this:
-			// {"type":"7","pushBadge":"1","pushSound":"1","enabled":"1","deviceToken":"blablahblah","pushAlert":"1"}
-			Q.req('Users/device', 'data', function (res) {
-				if (res.errors) return console.log(res.errors[0].message);
-				 Users.pushNotification = {
-					engine: pushNotification,
-					status: status
-				};
-				document.addEventListener('push-notification', function(e) {
-					if (e.notification && e.notification.aps && e.notification.aps.badge !== undefined) {
-						pushNotification.setApplicationIconBadgeparseInt(e.notification.aps.badge);
-					}
-				});
-				function _onActivate() {
-					pushNotification.getPendingNotifications(function(e) {
-						if (e.notifications.length) {
-							var n = e.notifications[0];
-							// trigger activation event only if application was inactive
-							if (n.applicationStateActive === "0") Q.handle(Streams.onActivate, Streams, [n.data]);
-						}
-					});
-				}
-				document.addEventListener('active', _onActivate);
-				_onActivate();
-			}, {
-				method: "post",
-				fields: {token: status.deviceToken},
-				quiet: true
-			});
-		});
-	}
-	if (Q.info.isCordova && pushNotification && ! Users.pushNotification) {
-		Users.login.options.onSuccess.set(_registerPushNotifications, ' Users.pushNotifications');
-		Users.logout.options.onSuccess.set(function() { pushNotification.setApplicationIconBadgeparseInt(0); }, ' Users.pushNotifications');
-		if (Users.loggedInUser) _registerPushNotifications();
-	}
 	
 	// handle resign/resume application in Cordova
 	if (Q.info.isCordova) {

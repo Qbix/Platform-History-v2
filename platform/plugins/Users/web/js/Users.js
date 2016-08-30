@@ -1978,6 +1978,65 @@ Users.onLoginLost = new Q.Event(function () {
 Users.onConnected = new Q.Event();
 Users.onConnectionLost = new Q.Event();
 
+/**
+ * Some methods related to Users.Device
+ * @class Users.Device
+ */
+Users.Device = {
+	senderId: null,
+	onNotification: new Q.Event()
+};
+
+Q.onReady.add(function () {
+	if (!Q.info.isCordova || !PushNotification) {
+	  return;
+	}
+	var push = PushNotification.init({
+	    android: {
+			senderID: Q.Users.Device.senderId
+		},
+		browser: {
+			pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+		},
+		ios: {
+			alert: true,
+			badge: true,
+			sound: true
+		},
+		windows: {}
+	});
+	push.on('registration', function(data) {
+		var deviceId = data.registrationId;
+		localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
+		if (Q.Users.loggedInUser) {
+			_registerDevice();
+		}
+	});
+	push.on('notification', function(data) {
+		Users.onNotification.handle(data);
+	});
+	push.on('error', function(e) {
+		console.log("ERROR", e);
+	});
+	Users.login.options.onSuccess.set(function () {
+		_registerDevice();
+	}, 'Users.PushNotification');
+	Users.logout.options.onSuccess.set(function() {
+		PushNotification.setApplicationBadgeNumber(0);
+	}, 'Users.PushNotifications');
+	function _registerDevice() {
+		var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+		Q.req('Users/device', function () {
+			debugger;
+		}, {
+			method: 'post',
+			fields: {
+				deviceId: deviceId
+			}
+		});
+	}
+});
+
 Q.page('', function () {
 	if (!location.hash.queryField('Q.Users.oAuth')) {
 		return;
@@ -1986,11 +2045,16 @@ Q.page('', function () {
 		'response_type', 'token_type', 'access_token',
 		'expires_in', 'scope', 'state', 'Q.Users.oAuth'
 	];
+	var fields = location.hash.queryField(fieldNames);
+	var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+	if (deviceId) {
+		fields.deviceId = deviceId;
+	}
 	Q.req('Users/oAuth', function () {
 		debugger;
 	}, {
 		method: 'post',
-		fields: location.hash.queryField(fieldNames)
+		fields: fields
 	});
 }, 'Users');
 
