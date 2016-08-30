@@ -59,7 +59,9 @@ class Q_Utils
 				}
 				$ref = &$ref[ $fieldKeys[$i] ];
 			}
-			$ref[ end($fieldKeys) ] = Q_Utils::signature($data, $secret);
+			$ef = end($fieldKeys);
+			unset($ref[$ef]);
+			$ref[$ef] = Q_Utils::signature($data, $secret);
 		}
 		return $data;
 	}
@@ -198,7 +200,8 @@ class Q_Utils
 	}
 	
 	/**
-	 * Hashes text in a standard way.
+	 * Hashes text in a standard way. It uses md5, which is fast and irreversible,
+	 * so it's good for things like indexes, but not for obscuring information.
 	 * @method hash
 	 * @static
 	 * @param {string} $test
@@ -206,7 +209,7 @@ class Q_Utils
 	 */
 	static function hash($text)
 	{
-		return sha1(Db::normalize($text));
+		return md5(Db::normalize($text));
 	}
 
 	/**

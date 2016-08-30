@@ -65,15 +65,7 @@
 			Q.plugins.Users.login({
 				noClose: true,
 				onSuccess: { 'Users.login': function (user, options, result, used) {
-					Q.handle(window.location.href, {
-						onActivate: function () {
-							if (typeof result === 'string'
-							&& Q.Users.authorize.noTerms) {
-								// We can auto-authorize in this case.
-								$('#Users_authorize').click();
-							}
-						}
-					});
+					Q.handle(window.location.href);
 				}}
 			});
 		}

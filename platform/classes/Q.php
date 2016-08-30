@@ -927,7 +927,7 @@ class Q
 	 *  Otherwise an empty array is used.
 	 * @return {array|object} The $dest array or object, otherwise an array that has been filled with values.
 	 */
-	static function take($source, $fields, &$dest = null, $keys = array())
+	static function take($source, $fields, &$dest = null)
 	{
 		if (!is_array($fields)) {
 			$fields = array($fields);

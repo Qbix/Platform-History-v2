@@ -310,41 +310,45 @@ class Q_Valid
 		if (!isset($secret)) {
 			return true;
 		}
-		$sgf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-		
 		$invalid = true;
 		if (is_array($fieldKeys)) {
-			$ref = $data;
+			$ref = &$data;
 			foreach ($fieldKeys as $k) {
 				if (!isset($k)) {
 					break;
 				}
-				$ref2 = $ref;
-				$ref = $ref[$k];
+				$ref2 = &$ref;
+				$ref = &$ref[$k];
 			}
-			if ($ref and $signature) {
+			if ($ref) {
+				$signature = $ref;
 				unset($ref2[$k]);
 				$calculated = Q_Utils::signature($data, $secret);
-				if ($ref === $signature) {
+				if ($calculated === $signature) {
 					$invalid = false;
 				} else { // try with null
 					$ref2[$k] = null;
 					$calculated = Q_Utils::signature($data, $secret);
-					if ($ref === $signature) {
+					if ($calculated === $signature) {
 						$invalid = false;
 					}
 				}
 			}
 		} else {
-			$signature = Q_Request::special($sgf, null, $data);
-		}
-		if ($signature) {
-			$invalid = false;
-			$req = $data;
-			unset($req["Q.$sgf"]);
-			unset($req["Q_$sgf"]);
-			if (Q_Utils::signature($data, $secret) !== $signature) {
-				$invalid = true;
+			if (is_string($fieldKeys)) {
+				$signature = $fieldKeys;
+			} else {
+				$sgf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
+				$signature = Q_Request::special($sgf, null, $data);
+			}
+			if ($signature) {
+				$invalid = false;
+				$req = $data;
+				unset($req["Q.$sgf"]);
+				unset($req["Q_$sgf"]);
+				if (Q_Utils::signature($req, $secret) !== $signature) {
+					$invalid = true;
+				}
 			}
 		}
 		if (!$invalid) {
