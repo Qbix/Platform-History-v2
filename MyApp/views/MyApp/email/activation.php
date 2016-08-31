@@ -1,5 +1,5 @@
 <p>
-	Thanks for signing up with <?php echo Q_Html::text($publisher->displayName()) ?>.
+	Thanks for signing up with <?php echo Q_Html::text($communityName) ?>.
 </p>
 
 <p>
