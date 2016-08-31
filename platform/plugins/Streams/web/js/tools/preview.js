@@ -356,7 +356,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					var ipo = Q.extend({}, si, 10, {
 						preprocess: function (callback) {
 							var subpath;
-							Q.Streams.get(tool.publisherId, tool.streamName, function () {
+							Q.Streams.get(state.publisherId, state.streamName, function () {
 								var parts = this.iconUrl(40).split('/');
 								var iconUrl = parts.slice(0, parts.length-1).join('/')
 									.substr(Q.info.baseUrl.length+1);

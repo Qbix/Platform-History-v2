@@ -38,7 +38,7 @@ function _Streams_related_tool (options)
 	var state = this.state;
 	if ((!state.publisherId || !state.streamName)
 	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
-		throw new Q.Error("Streams/related tool: missing publisherId and streamName");
+		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
 	}
 
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
