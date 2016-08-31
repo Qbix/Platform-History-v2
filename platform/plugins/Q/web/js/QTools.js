@@ -2975,7 +2975,7 @@ Q.Contextual = {
 		if (trigger.length != 0)
 		{
 			var triggerLeft = trigger.offset().left;
-			if (triggerLeft < 0 || triggerLeft + trigger.outerWidth() > $body.width())
+			if (triggerLeft + trigger.outerWidth() < 0|| triggerLeft > $body.width())
 				return;
 		}
 		

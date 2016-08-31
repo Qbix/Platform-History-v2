@@ -1075,7 +1075,7 @@ Sp.unsubscribe = function(options, callback) {
  * @param {String} event The type of Streams event, such as "post" or "remove"
  * @param {String} userId The user who initiated the message
  * @param {Streams_Message} message  Message on 'post' event or stream on other events
- * @param callback=noop {function}
+ * @param {Function} [callback] This would be called after all the notifying was done
  */
 Sp.notify = function(participant, event, userId, message, callback) {
 	var userId = participant.fields.userId, stream = this;
