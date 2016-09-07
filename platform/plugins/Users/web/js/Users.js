@@ -1988,7 +1988,7 @@ Users.Device = {
 };
 
 Q.onReady.add(function () {
-	if (!Q.info.isCordova || !PushNotification) {
+	if (!Q.info.isCordova || !window.PushNotification) {
 	  return;
 	}
 	var push = PushNotification.init({

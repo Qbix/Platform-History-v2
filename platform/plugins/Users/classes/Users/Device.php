@@ -57,7 +57,7 @@ class Users_Device extends Base_Users_Device
 			}
 			$s = empty($device['sandbox']) ? 'production' : 'sandbox';
 			$cert = APP_LOCAL_DIR.DS.'Users'.DS.'certs'.DS.$app.DS.$s.DS.'cert.pem';
-			$authority = USERS_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
+			$authority = USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
 			$push = new ApnsPHP_Push($env, $cert);
 			$push->setRootCertificationAuthority($authority);
 			if (isset($device['passphrase'])) {
