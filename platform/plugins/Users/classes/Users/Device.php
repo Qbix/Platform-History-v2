@@ -40,7 +40,7 @@ class Users_Device extends Base_Users_Device
 	static function add($device, $skipNotification=false)
 	{
 		Q_Valid::requireFields(array('userId', 'deviceId'), $device, true);
-		$userId = $deviceId['userId'];
+		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
 		if (!$skipNotification) {
 			$app = Q::app();
