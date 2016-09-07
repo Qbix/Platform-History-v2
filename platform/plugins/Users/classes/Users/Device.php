@@ -84,8 +84,11 @@ class Users_Device extends Base_Users_Device
 			'sessionId' => Q_Session::id(),
 			'formFactor' => Q_Request::formFactor(),
 			'platform' => Q_Request::platform(),
-			'version' => Q_Request::OSVersion()
+			'version' => Q_Request::OSVersion(),
+			'userId' => null,
+			'deviceId' => null
 		));
+		var_dump($device2);exit;
 		$d = new Users_Device($device2);
 		$d->save();
 		$_SESSION['Users']['deviceId'] = $token;
