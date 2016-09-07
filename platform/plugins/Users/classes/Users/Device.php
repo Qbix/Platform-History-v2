@@ -91,7 +91,7 @@ class Users_Device extends Base_Users_Device
 			'deviceId' => null
 		));
 		$d = new Users_Device($device2);
-		$d->save();
+		$d->save(true);
 		$_SESSION['Users']['deviceId'] = $token;
 		$device2['Q/method'] = 'Users/device';
 		Q_Utils::sendToNode($device2);
