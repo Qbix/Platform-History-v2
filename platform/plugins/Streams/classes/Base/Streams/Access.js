@@ -592,7 +592,7 @@ Base.prototype.beforeSet_permissions = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".permissions");
-		if (typeof value === "string" && value.length > 1023)
+		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
 		return value;
 };
@@ -603,7 +603,7 @@ Base.prototype.beforeSet_permissions = function (value) {
 	 */
 Base.prototype.maxSize_permissions = function () {
 
-		return 1023;
+		return 255;
 };
 
 	/**
@@ -612,15 +612,16 @@ Base.prototype.maxSize_permissions = function () {
 	 */
 Base.column_permissions = function () {
 
-return [["varchar","1023","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
  * Check if mandatory fields are set and updates 'magic fields' with appropriate values
  * @method beforeSave
- * @param {array} value The array of fields
- * @return {array}
- * @throws {Error} If mandatory field is not set
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
 	var fields = ['publisherId','streamName'], i;

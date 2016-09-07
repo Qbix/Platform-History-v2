@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Websites": {
-				"version": "0.9",
+				"version": "0.9.1",
 				"compatible": "0.8",
 				"requires": {"Streams": "0.9"},
 				"connections": ["Users", "Streams", "Websites"]
@@ -39,6 +39,31 @@
 					"adminLevel": 10
 				},
 				"extend": ["Websites_Article"]
+			},
+			"Websites/slide": {
+				"description": "A slide in a presentation, can include HTML, audio etc.",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Untitled Slide",
+					"icon": "{{baseUrl}}/plugins/Websites/img/icons/Websites/slide",
+					"readLevel": 10,
+					"writeLevel": 0,
+					"adminLevel": 10
+				},
+				"extend": ["Websites_Slide"]
+			},
+			"Websites/presentation": {
+				"description": "A presentation consisting of various slides",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Presentation",
+					"icon": "{{baseUrl}}/plugins/Websites/img/icons/Websites/presentation",
+					"readLevel": 10,
+					"writeLevel": 0,
+					"adminLevel": 10
+				}
 			}
 		}
 	},

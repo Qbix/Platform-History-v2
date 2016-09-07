@@ -176,6 +176,7 @@ class Streams_Message extends Base_Streams_Message
 						'table' => 'stream',
 						'criteria' => "publisherId $publisherId and name $streamName"
 					));
+					$updates[$publisherId]['missingRow'][] = $streamName;
 					continue;
 				}
 				$p = &$posted[$publisherId][$streamName];

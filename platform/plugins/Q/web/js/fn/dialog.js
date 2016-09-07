@@ -322,7 +322,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			beforeClose: o.beforeClose,
 			onClose: { "Q/dialog": function () {
 				if (o.removeOnClose) {
-					$this.remove();
+					Q.removeElement($this[0], true);
 				}
 				Q.handle(o.onClose, $this, [$this]);
 			}},
@@ -386,7 +386,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				}
 				
 				if (o.removeOnClose) {
-					$this.remove();
+					Q.removeElement($this[0], true);
 				} else {
 					$this.hide();
 				}

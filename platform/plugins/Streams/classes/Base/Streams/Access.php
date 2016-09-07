@@ -765,7 +765,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
-		if (strlen($value) > 1023)
+		if (strlen($value) > 255)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
 		return array('permissions', $value);			
 	}
@@ -777,7 +777,7 @@ return array (
 	function maxSize_permissions()
 	{
 
-		return 1023;			
+		return 255;			
 	}
 
 	/**
@@ -791,7 +791,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '1023',
+    1 => '255',
     2 => '',
     3 => false,
   ),

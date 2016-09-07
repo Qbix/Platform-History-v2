@@ -297,7 +297,7 @@ function Row(fields, retrieved /* false */) {
 	};
 	
 	/**
-	 * Saves the row in the database.
+	 * Retrieves a row from the database.
 	 * If object has methods beforeRetrieve, beforeRetrieveExecute or afterRetrieveExecute,
 	 * they may be triggered during this operation.
 	 * @method retrieve

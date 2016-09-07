@@ -374,25 +374,23 @@ Q.Tool.define({
 	"Streams/related"      : "plugins/Streams/js/tools/related.js",
 	"Streams/inplace"      : "plugins/Streams/js/tools/inplace.js",
 	"Streams/html"         : "plugins/Streams/js/tools/html.js",
-	"Streams/player"       : "plugins/Streams/js/tools/player.js",
 	"Streams/preview"  	   : "plugins/Streams/js/tools/preview.js",
 	"Streams/image/preview": "plugins/Streams/js/tools/image/preview.js",
 	"Streams/file/preview" : "plugins/Streams/js/tools/file/preview.js",
 	"Streams/category/preview" : "plugins/Streams/js/tools/category/preview.js",
 	"Streams/category"     : "plugins/Streams/js/tools/category.js",
 	"Streams/form"         : "plugins/Streams/js/tools/form.js",
-	"Streams/activity"     : "plugins/Streams/js/tools/activity.js"
+	"Streams/activity"     : "plugins/Streams/js/tools/activity.js",
+	"Streams/default/preview": "plugins/Streams/js/tools/default/preview.js"
 });
 
 /**
  * Streams batch getter.
  * @static
  * @method get
- * @param publisherId {string}
- *  Publisher's user id
- * @param name {string}
- *	Name of the stream published by this publisher
- * @param callback {function}
+ * @param {String} publisherId Publisher's user id
+ * @param {String} name Name of the stream published by this publisher
+ * @param {Function} callback
  *	If there were errors, first parameter is an array of errors.
  *  Otherwise, first parameter is null and second parameter is a Streams.Stream object
  * @param {object} [extra] Optional object which can include the following keys:
@@ -400,11 +398,14 @@ Q.Tool.define({
  *   @param {Mixed} [extra.messages]
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
- *   @param {Mixed} [extra."$Module/$fieldname"] , any other fields you would like can be added, to be passed to your hooks on the back end
+ *   @param {Array} [extra.fields] the stream is obtained again from the server
+ *    if any fields named in this array are == null
+ *   @param {Mixed} [extra."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  */
 Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	var args = arguments;
-	var url = Q.action('Streams/stream?')+
+	var f;
+	var url = Q.action('Streams/stream?') +
 		Q.queryString({"publisherId": publisherId, "name": streamName});
 	var slotNames = ['stream'];
 	if (!publisherId) {
@@ -421,6 +422,15 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 		if (extra.messages) {
 			url += '&'+$.param({messages: extra.messages});
 			slotNames.push('messages');
+		}
+		if (f = extra.fields) {
+			for (var i=0, l=f.length; i<l; ++i) {
+				var cached = Streams.get.cache.get([publisherId, streamName]);
+				if (cached && cached.subject.fields[f[i]] == null) {
+					Streams.get.forget(publisherId, streamName, null, extra);
+					break;
+				}
+			}
 		}
 	}
 	var func = Streams.batchFunction(Q.baseUrl({
@@ -778,9 +788,9 @@ Streams.Dialogs = {
 	 * Show a dialog to manage "subscription" related stuff in a stream.
 	 * @static
 	 * @method subscription
-	 * @param publisherId {String} id of publisher which is publishing the stream
-	 * @param streamName {String} the stream's name
-	 * @param callback {Function} The function to call after dialog is activated
+	 * @param {String} publisherId id of publisher which is publishing the stream
+	 * @param {String} streamName the stream's name
+	 * @param {Function} callback The function to call after dialog is activated
 	 */
 	subscription: function(publisherId, streamName, callback) {
 		_toolInDialog('Streams/subscription', {
@@ -793,9 +803,9 @@ Streams.Dialogs = {
 	 * Show a dialog to manage "access" related stuff in a stream.
 	 * @static
 	 * @method access
-	 * @param publisherId {String} id of publisher which is publishing the stream
-	 * @param streamName {String} the stream's name
-	 * @param callback {Function} The function to call after dialog is activated
+	 * @param {String} publisherId id of publisher which is publishing the stream
+	 * @param {String} streamName the stream's name
+	 * @param {Function} [callback] The function to call after dialog is activated
 	 */
 	access: function(publisherId, streamName, callback) {
 		_toolInDialog('Streams/access', {
@@ -1021,9 +1031,9 @@ Streams.invite.options = {
  * Get streams related to a given stream.
  * @static
  * @method related
- * @param publisherId {string}
+ * @param {String} publisherId
  *  Publisher's user id
- * @param name {string}
+ * @param {String} name
  *	Name of the stream to/from which the others are related
  * @param relationType {String|null} the type of the relation
  * @param isCategory {boolean} defaults to false. If true, then gets streams related TO this stream.
@@ -1572,10 +1582,10 @@ Sp.removePermission = function (permission) {
  *   See Q.Streams.Stream.refresh
  */
 Sp.save = function _Stream_prototype_save (callback, options) {
-	var that = this;
+	var stream = this;
 	var slotName = "stream";
-	var f = this.fields;
-	var pf = this.pendingFields; 
+	var f = stream.fields;
+	var pf = stream.pendingFields; 
 	pf.publisherId = f.publisherId;
 	pf.name = f.name;
 	pf["Q.clientId"] = Q.clientId();
@@ -1592,12 +1602,12 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		}
 		// the rest will occur in the handler for the stream.onUpdated event
 		// coming from the socket
-		var stream = data.slots.stream || null;
-		if (stream) {
+		var s = data.slots.stream || null;
+		if (s) {
 			// process the Streams/changed message, if stream was retained
-			_refreshUnlessSocket(stream.publisherId, stream.name, callback, options);
+			_refreshUnlessSocket(s.publisherId, s.name, callback, options);
 		} else {
-			return Q.handle(callback, that, [null, stream]);
+			return Q.handle(callback, stream, [null, s]);
 		}
 	}, { method: 'put', fields: pf, baseUrl: baseUrl });
 };
@@ -1947,8 +1957,9 @@ Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, 
  *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
  *   @default false
  *   @param {String} [options.prefix] optional prefix to filter the streams by
- * @param callback {Function} callback to call with the results
- *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
+ * @param {Function} callback callback to call with the results
+ *  First parameter is the error, the second one is an object of
+ *  Streams.RelatedTo objects you can iterate over with Q.each
  */
 Sp.relatedTo = function _Stream_prototype_relatedTo (relationType, options, callback) {
 	return Streams.related(this.fields.publisherId, this.fields.name, relationType, true, options, callback);
@@ -1958,10 +1969,10 @@ Sp.relatedTo = function _Stream_prototype_relatedTo (relationType, options, call
  * Relates this stream to another stream
  * 
  * @method relateTo
- * @param type {String} the type of the relation
- * @param toPublisherId {String} id of publisher of the stream
- * @param toStreamName {String} name of stream to which this stream is being related
- * @param callback {Function} callback to call with the results
+ * @param {String} type the type of the relation
+ * @param {String} toPublisherId d of publisher of the stream
+ * @param {String} toStreamName name of stream to which this stream is being related
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
 Sp.relateTo = function _Stream_prototype_relateTo (type, toPublisherId, toStreamName, callback) {
@@ -1972,10 +1983,10 @@ Sp.relateTo = function _Stream_prototype_relateTo (type, toPublisherId, toStream
  * Relates another stream to this stream
  * 
  * @method relate
- * @param type {String} the type of the relation
- * @param fromPublisherId {String} id of publisher of the stream
- * @param fromStreamName {String} name of stream which is being related to this stream
- * @param callback {Function} callback to call with the results
+ * @param {String} type the type of the relation
+ * @param {String} fromPublisherId id of publisher of the stream
+ * @param {String} fromStreamName name of stream which is being related to this stream
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
 Sp.relate = Sp.relateFrom = function _Stream_prototype_relate (type, fromPublisherId, fromStreamName, callback) {
@@ -1986,10 +1997,10 @@ Sp.relate = Sp.relateFrom = function _Stream_prototype_relate (type, fromPublish
  * Removes a relation from this stream to another stream
  * 
  * @method unrelateTo
- * @param toPublisherId {String} id of publisher which is publishing the stream
- * @param toStreamName {String} name of stream which the being unrelated
- * @param relationType {String} the type of the relation, such as "parent" or "photo"
- * @param callback {Function} callback to call with the results
+ * @param {String} toPublisherId id of publisher which is publishing the stream
+ * @param {String} toStreamName name of stream which the being unrelated
+ * @param {String} relationType the type of the relation, such as "parent" or "photo"
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
 Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamName, relationType, callback) {
@@ -2000,10 +2011,10 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
  * Removes a relation from another stream to this stream
  * 
  * @method unrelateFrom
- * @param fromPublisherId {String} id of publisher which is publishing the stream
- * @param fromStreamName {String} name of stream which is being unrelated
- * @param relationType {String} the type of the relation, such as "parent" or "photo"
- * @param callback {Function} callback to call with the results
+ * @param {String} fromPublisherId id of publisher which is publishing the stream
+ * @param {String} fromStreamName name of stream which is being unrelated
+ * @param {String} relationType the type of the relation, such as "parent" or "photo"
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedTo objects you can iterate over with Q.each
  */
 Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, relationType, callback) {
@@ -2015,9 +2026,9 @@ Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPub
  * Generic callbacks can be assigned by setting messageType to ""
  * @event onMessage
  * @static
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param streamName {String} name of stream which the message is posted to
- * @param messageType {String} type of the message, or its ordinal
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [messageType] type of the message, or its ordinal
  */
 Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
 
@@ -2025,9 +2036,9 @@ Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
  * Returns Q.Event which occurs when fields of the stream officially changed
  * @event onFieldChanged
  * @static
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param streamName {String} optional name of stream which the message is posted to
- * @param fieldName {String} optional name of the field to listen for
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [fieldName]  name of the field to listen for
  */
 Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""]);
 
@@ -2035,9 +2046,9 @@ Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""
  * Returns Q.Event which occurs when attributes of the stream officially updated
  * @event onUpdated
  * @static
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param streamName {String} optional name of stream which the message is posted to
- * @param attributeName {String} optional name of the attribute to listen for
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [attributeName] name of the attribute to listen for
  */
 Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
 
@@ -2045,9 +2056,9 @@ Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
  * Returns Q.Event which occurs when attributes of the stream officially updated
  * @event onUpdated
  * @static
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param streamName {String} optional name of stream which the message is posted to
- * @param attributeName {String} optional name of the attribute to listen for
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [attributeName] name of the attribute to listen for
  */
 Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
 
@@ -2056,8 +2067,8 @@ Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
  * (and perhaps has been marked for removal)
  * @event onClosed
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
 
@@ -2065,8 +2076,8 @@ Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
  * Returns Q.Event which occurs when another stream has been related to this stream
  * @event onRelatedTo
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
 
@@ -2074,8 +2085,8 @@ Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
  * Returns Q.Event which occurs when this stream was related to a category stream
  * @event onRelatedFrom
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
 
@@ -2083,8 +2094,8 @@ Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
  * Returns Q.Event which occurs when another stream has been unrelated to this stream
  * @event onUnrelatedTo
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
 
@@ -2092,8 +2103,8 @@ Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
  * Returns Q.Event which occurs when this stream was unrelated to a category stream
  * @event onUnrelatedFrom
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onUnrelatedFrom = Q.Event.factory(_streamUnrelatedFromHandlers, ["", ""]);
 
@@ -2101,8 +2112,8 @@ Stream.onUnrelatedFrom = Q.Event.factory(_streamUnrelatedFromHandlers, ["", ""])
  * Returns Q.Event which occurs when another stream has been related to this stream
  * @event onUpdatedRelateTo
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onUpdatedRelateTo = Q.Event.factory(_streamUpdatedRelateToHandlers, ["", ""]);
 
@@ -2110,8 +2121,8 @@ Stream.onUpdatedRelateTo = Q.Event.factory(_streamUpdatedRelateToHandlers, ["", 
  * Returns Q.Event which occurs when this stream was related to a category stream
  * @event onUpdatedRelateFrom
  * @static
- * @param publisherId {String} id of publisher which is publishing this stream
- * @param streamName {String} optional name of this stream
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
  */
 Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, ["", ""]);
 
@@ -2119,16 +2130,16 @@ Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, [
  * Returns Q.Event which occurs after a stream is constructed on the client side
  * Generic callbacks can be assigend by setting type or mtype or both to ""
  * @event onConstruct
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param name {String} name of stream which is being constructed on the client side
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being constructed on the client side
  */
 Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that should be used to update any representaitons of this stream
  * @event onConstruct
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param name {String} name of stream which is being refreshed
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being refreshed
  * @return {Q.Event}
  */
 Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
@@ -2139,9 +2150,9 @@ Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
  * 
  * @static
  * @method join
- * @param publisherId {String} id of publisher which is publishing the stream
- * @param streamName {String} name of stream to join
- * @param {Function} callback receives (err, participant) as parameters
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} streamName name of stream to join
+ * @param {Function} [callback] receives (err, participant) as parameters
  */
 Stream.join = function _Stream_join (publisherId, streamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
@@ -2259,12 +2270,12 @@ Stream.close.onError = new Q.Event();
 /**
  * Relates streams to one another
  * @method relate
- * @param publisherId {String} the publisher id of the stream to relate to
- * @param streamName {String} the name of the stream to relate to
- * @param relationType {String} the type of the relation, such as "parent" or "photo"
- * @param fromPublisherId {String} the publisher id of the stream to relate from
- * @param fromStreamName {String} the name of the stream to relate from
- * @param callback {Function} callback to call with the results
+ * @param {String} publisherId the publisher id of the stream to relate to
+ * @param {String} streamName the name of the stream to relate to
+ * @param {String} relationType the type of the relation, such as "parent" or "photo"
+ * @param {String} fromPublisherId the publisher id of the stream to relate from
+ * @param {String} fromStreamName the name of the stream to relate from
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second will be relations data
  */
 Streams.relate = function _Streams_relate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {
@@ -2300,12 +2311,12 @@ Streams.relate = function _Streams_relate (publisherId, streamName, relationType
  * Removes relations from streams to one another
  * @static
  * @method unrelate
- * @param publisherId {String} the publisher id of the stream to relate to
- * @param streamName {String} the name of the stream to relate to
- * @param relationType {String} the type of the relation, such as "parent" or "photo"
- * @param fromPublisherId {String} the publisher id of the stream to relate from
- * @param fromStreamName {String} the name of the stream to relate from
- * @param callback {Function} callback to call with the results
+ * @param {String} publisherId the publisher id of the stream to relate to
+ * @param {String} streamName the name of the stream to relate to
+ * @param {String} relationType the type of the relation, such as "parent" or "photo"
+ * @param {String} fromPublisherId the publisher id of the stream to relate from
+ * @param {String} fromStreamName the name of the stream to relate from
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second will be relations data
  */
 Streams.unrelate = function _Stream_prototype_unrelate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {
@@ -2388,12 +2399,12 @@ Streams.updateRelation = function(
  * @class Streams.Message
  * Relates streams to one another
  * @method relate
- * @param publisherId {String} the publisher id of the stream to relate to
- * @param streamName {String} the name of the stream to relate to
- * @param relationType {String} the type of the relation, such as "parent" or "photo"
- * @param fromPublisherId {String} the publisher id of the stream to relate from
- * @param fromStreamName {String} the name of the stream to relate from
- * @param callback {Function} callback to call with the results
+ * @param {String} publisherId the publisher id of the stream to relate to
+ * @param {String} streamName the name of the stream to relate to
+ * @param {String} relationType the type of the relation, such as "parent" or "photo"
+ * @param {String} fromPublisherId the publisher id of the stream to relate from
+ * @param {String} fromStreamName the name of the stream to relate from
+ * @param {Fucntion} callback [callback] to call with the results
  *  First parameter is the error, the second will be relations data
  */
 Streams.relate = function _Streams_relate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {
@@ -2430,12 +2441,12 @@ Streams.relate = function _Streams_relate (publisherId, streamName, relationType
  * Removes relations from streams to one another
  * @static
  * @method unrelate
- * @param publisherId {String} the publisher id of the stream to relate to
- * @param streamName {String} the name of the stream to relate to
- * @param relationType {String} the type of the relation, such as "parent" or "photo"
- * @param fromPublisherId {String} the publisher id of the stream to relate from
- * @param fromStreamName {String} the name of the stream to relate from
- * @param callback {Function} callback to call with the results
+ * @param {String} publisherId the publisher id of the stream to relate to
+ * @param {String} streamName the name of the stream to relate to
+ * @param {String} relationType the type of the relation, such as "parent" or "photo"
+ * @param {String} fromPublisherId the publisher id of the stream to relate from
+ * @param {String} fromStreamName the name of the stream to relate from
+ * @param {Function} [callback] callback to call with the results
  *  First parameter is the error, the second will be relations data
  */
 Streams.unrelate = function _Stream_prototype_unrelate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {

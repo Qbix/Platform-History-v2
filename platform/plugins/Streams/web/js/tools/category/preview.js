@@ -11,7 +11,7 @@
  * @constructor
  * @param {Object} [options] this object contains function parameters
  *   @param {Object} [options.dialog] Any additional options to pass to Q.Dialogs.push
- *   @param {Object} [options.subcategory] Any options to pass to Streams/player tool in the dialogs
+ *   @param {Object} [options.subcategory] Any options to pass to Streams/category tool in the dialogs
  *   @uses Q inplace
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
  *   @uses Q inplace

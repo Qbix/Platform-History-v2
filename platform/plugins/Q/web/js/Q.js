@@ -3076,7 +3076,7 @@ Q.getter = function _Q_getter(original, options) {
 		}
 		if (!gw.throttleSize) {
 			gw.throttle.throttleSize = function _throttleSize(newSize) {
-				if (typeof newSize === 'undefined') {
+				if (newSize === undefined) {
 					return p.size;
 				}
 				p.size = newSize;
@@ -3592,6 +3592,11 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	for (name in ctors) {
 		ctor = ctors[name];
 		var n = Q.normalize(name);
+		if (ctor == null) {
+			ctor = function _Q_Tool_default_constructor() {
+				// this constructor is just a stub and does nothing
+			};
+		}
 		Q.Tool.names[n] = name;
 		if (typeof ctor === 'string') {
 			if (typeof Q.Tool.constructors[n] !== 'function') {
@@ -3600,6 +3605,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			}
 			continue;
 		}
+		Q.Tool.constructors[n] = ctor;
 		ctor.toolName = n;
 		if (typeof stateKeys === 'object') {
 			methods = stateKeys;
@@ -3613,7 +3619,6 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			throw new Q.Error("Q.Tool.define requires ctor to be a string or a function");
 		}
 		Q.extend(ctor.prototype, 10, methods);
-		Q.Tool.constructors[n] = ctor;
 		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
 		Q.Tool.onLoadedConstructor("").handle(n, ctor);
 		Q.Tool.latestName = n;
@@ -4374,7 +4379,7 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 			p.fill(toolName)(toolElement, toolFunc, toolName, uniqueToolId);
 		}
 		var toolFunc = _qtc[toolName];
-		if (typeof toolFunc === 'undefined') {
+		if (toolFunc === undefined) {
 			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
 			toolFunc = _qtc[toolName];
 			if (typeof toolFunc !== 'function' && typeof toolFunc !== 'string') {
@@ -4403,7 +4408,7 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 			return;
 		}
 		if (typeof toolFunc !== 'string') {
-			throw new Q.Error("Q.Tool.loadScript: toolFunc cannot be " + typeof(toolFunc));
+			throw new Q.Error("Q.Tool.loadScript: toolFunc cannot be " + Q.typeOf(toolFunc));
 		}
 		if (Q.Tool.latestNames[toolFunc]) {
 			Q.Tool.latestName = Q.Tool.latestNames[toolFunc];
@@ -9516,17 +9521,39 @@ Q.Pointer = {
 	 */
 	cancel: (Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'), // mousecancel can be a custom event
 	/**
-	 * The 'focusin' event name, depending on environment
+	 * Intelligent focusin event that fires only once per focusin
 	 * @static
-	 * @property {String} focusin
+	 * @method focusin
 	 */
-	focusin: (Q.info.browser.engine === 'gecko' ? 'focus' : 'focusin'),
+	focusin: function (params) {
+		params.eventName = (Q.info.browser.engine === 'gecko' ? 'focus' : 'focusin');
+		var justHandled = false;
+		return function _Q_focusin_on_wrapper (e) {
+			if (justHandled) return;
+			justHandled = true;
+			setTimeout(function () {
+				justHandled = false;
+			}, 300);
+			return params.original.apply(this, arguments);
+		};
+	},
 	/**
-	 * The 'focusout' event name, depending on environment
+	 * Intelligent focusout event that fires only once per focusout
 	 * @static
-	 * @property {String} focusout
+	 * @method focusout
 	 */
-	focusout: (Q.info.browser.engine === 'gecko' ? 'blur' : 'focusout'),
+	focusout: function (params) {
+		params.eventName = (Q.info.browser.engine === 'gecko' ? 'blur' : 'focusout');
+		var justHandled = false;
+		return function _Q_focusout_on_wrapper (e) {
+			if (justHandled) return;
+			justHandled = true;
+			setTimeout(function () {
+				justHandled = false;
+			}, 300);
+			return params.original.apply(this, arguments);
+		};
+	},
 	/**
 	 * Intelligent click event that also works on touchscreens, and respects Q.Pointer.canceledClick
 	 * @static
@@ -10284,8 +10311,9 @@ Q.Dialogs = {
 	 *   Thus the default content provided by 'title' and 'content' options
 	 *   given below will be replaced after the response comes back.
 	 *	@param {String|Element} [options.title='Dialog'] initial dialog title.
-	 *	@param {String|Element} [options.content] initial dialog content, defaults to 
-	 *   loading and displaying a throbber immage.
+	 *	@param {String|Element} [options.content] initial dialog content.
+	 *   If the url is not supplied, then this remains the HTML content of the dialog.
+	 *   By default displays an image of a throbber while the url is loading.
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.

@@ -18,15 +18,22 @@
  *   @param {Object} [options.ckeditor]  The config, if any, to pass to ckeditor
  *   @param {Object} [options.froala]  The config, if any, to pass to froala
  *   @param {Function} [options.preprocess]  Optional function which takes [callback, tool] and calls callback(objectToExtendAnyStreamFields)
+ *  @param {Q.Event} [options.beforeSave] This event triggers before save
+ *  @param {Q.Event} [options.onSave] This event triggers after save
+ *  @param {Q.Event} [options.onCancel] This event triggers after canceling
+ *  @param {Q.Event} [options.onFroalaEditor] This event triggers when the froala editor is loaded
  */
 Q.Tool.define("Streams/html", function (options) {
 	var tool = this;
 	var state = tool.state;
 
-	if (!tool.state.publisherId) {
+	if (!state.publisherId) {
 		throw new Q.Error("Streams/html tool: missing options.publisherId");
 	}
-	if (!tool.state.field) {
+	if (!('streamName' in state)) {
+		throw new Q.Error("Streams/html tool: missing options.streamName");
+	}
+	if (!state.field) {
 		throw new Q.Error("Streams/html tool: missing options.field");
 	}
 	
@@ -36,22 +43,21 @@ Q.Tool.define("Streams/html", function (options) {
 	f.toolbarButtonsMD = f.toolbarButtonsMD || f.toolbarButtons;
 
 	if (state.streamName) {
-		Q.Streams.get(state.publisherId, state.streamName, function (err) {
+		Q.Streams.retainWith(tool)
+		.get(state.publisherId, state.streamName, function (err) {
 			if (Q.firstErrorMessage(err)) return false;
-			state.stream = this;
 			tool.element.innerHTML = this.fields[state.field] || state.placeholder;
-			Q.loadNonce(_proceed);
-		});
+			_editor(this);
+			Q.loadNonce(_editor);
+		}, {fields: [state.field]});
 	} else if (state.placeholder) {
-		if (!state.stream) {
-			throw new Q.Error("Streams/html tool: missing streamName and stream is not set");
-		}
 		tool.element.innerHTML = state.placeholder;
-		Q.loadNonce(_proceed);
+		Q.loadNonce(_editor);
 	}
 
-	function _proceed() {
-		if (state.editable === false || !state.stream.testWriteLevel('suggest')) {
+	function _editor(stream) {
+		if (state.editable === false
+		|| !stream || !stream.testWriteLevel('suggest')) {
 			return;
 		}
 		if (state.editor === 'auto') {
@@ -70,6 +76,7 @@ Q.Tool.define("Streams/html", function (options) {
 				'Q.Streams.related.type': 'images',
 				'Q.nonce': Q.nonce
 			});
+			state.froala.key = state.froala.key || Q.Streams.froala.key;
 		}
 		switch (state.editor && state.editor.toLowerCase()) {
 		case 'basic':
@@ -85,6 +92,16 @@ Q.Tool.define("Streams/html", function (options) {
 			break;
 		case 'froala':
 		default:
+			Q.addStylesheet([
+				"plugins/Q/font-awesome/css/font-awesome.min.css",
+				"plugins/Q/js/froala/css/froala_editor.min.css",
+				"plugins/Q/js/froala/css/froala_style.min.css",
+				"plugins/Q/js/froala/css/plugins/fullscreen.min.css",
+				"plugins/Q/js/froala/css/plugins/colors.min.css",
+				"plugins/Q/js/froala/css/plugins/image.min.css",
+				"plugins/Q/js/froala/css/plugins/table.min.css",
+				"plugins/Q/js/froala/css/plugins/code_view.min.css"
+			]);
 			var scripts = [
 				"plugins/Q/js/froala/js/froala_editor.min.js",
 				"plugins/Q/js/froala/js/plugins/fullscreen.min.js",
@@ -106,18 +123,9 @@ Q.Tool.define("Streams/html", function (options) {
 			if (Q.info.isIE(0, 8)) {
  				scripts.push("plugins/Q/js/froala/froala_editor_ie8.min.js");
 			}
-            Q.addScript(scripts, function(){
-				Q.addStylesheet([
-					"plugins/Q/font-awesome/css/font-awesome.min.css",
-					"plugins/Q/js/froala/css/froala_editor.min.css",
-					"plugins/Q/js/froala/css/froala_style.min.css",
-					"plugins/Q/js/froala/css/plugins/fullscreen.min.css",
-					"plugins/Q/js/froala/css/plugins/colors.min.css",
-					"plugins/Q/js/froala/css/plugins/image.min.css",
-					"plugins/Q/js/froala/css/plugins/table.min.css",
-					"plugins/Q/js/froala/css/plugins/code_view.min.css"
-				]);
-                $(tool.element).froalaEditor(state.froala)
+            Q.addScript(scripts, function() {
+				var $te = $(tool.element);
+                $te.froalaEditor(state.froala)
 				.on('froalaEditor.image.removed', function (e, editor, $img) {
 					var src = $img.attr('src');
 					if (src.substr(0, 5) === 'data:'
@@ -129,7 +137,8 @@ Q.Tool.define("Streams/html", function (options) {
 					var streamName = parts.slice(-6, -3).join('/');
 					Q.Streams.Stream.close(publisherId, streamName);
 				});
-				state.froalaEditor = true;
+				state.froalaEditor = $te.data('froala.editor');
+				Q.handle(state.onFroalaEditor, tool, state.froalaEditor);
             });
 		}
 		function _blur() {
@@ -145,16 +154,23 @@ Q.Tool.define("Streams/html", function (options) {
 			state.editing = false;
             if (state.startingContent === content) return;
             state.startingContent = null;
-            if (!state.stream) return;
-            state.stream.pendingFields[state.field] = content;
-            state.stream.save(function (err) {
-                if (Q.firstErrorMessage(err)) {
-                    return state.onCancel.handle(err);
-                }
-                state.stream.refresh(function () {
-                    state.onSave.handle.call(this);
-                }, {messages: true});
-            });
+            if (!stream) return;
+			if (state && state.beforeSave) {
+				if (false === Q.handle(state.beforeSave, tool, [state.froalaEditor])) {
+					return;
+				}
+			}
+			Q.Streams.retainWith(tool)
+			.get(state.publisherId, state.streamName, function (err) {
+				var stream = this;
+	            stream.pendingFields[state.field] = content;
+	            stream.save(function (err) {
+	                if (Q.firstErrorMessage(err)) {
+	                    return state.onCancel.handle(err);
+	                }
+					state.onSave.handle.call(this);
+	            });
+			}, {fields: [state.field]});
 		}
 		function _focus() {
 			if (!_blurred) return;
@@ -177,29 +193,36 @@ Q.Tool.define("Streams/html", function (options) {
 				e.target.blur();
                 document.body.focus();
 	        });
-		if (state.stream) {
-			state.stream.onFieldChanged(state.field).set(function (fields, field) {
-				function _updateHTML(html) {
-					switch (state.editor && state.editor.toLowerCase()) {
-					case 'ckeditor':
-						if (tool.element.innerHTML !== html) {
-							tool.element.innerHTML = html;
-						}
-						break;
-					case 'froala':
-					default:
-						$(tool.element).froalaEditor('html.set', html);
-						break;
-					}
-				}
+		Q.Streams.retainWith(tool)
+		.get(state.publisherId, state.streamName, function (err) {
+			var stream = this;
+			_updateHTML(stream.fields[state.field]);
+			stream.onFieldChanged(state.field).set(function (fields, field) {
 				if (fields[field] !== null) {
 					_updateHTML(fields[field]);
 				} else {
-					state.stream.refresh(function () {
+					stream.refresh(function () {
 						_updateHTML(this.fields[field]);
 					});
 				}
 			}, tool);
+		}, {fields: [state.field]});
+		function _updateHTML(html) {
+			switch (state.editor && state.editor.toLowerCase()) {
+			case 'ckeditor':
+				if (tool.element.innerHTML !== html) {
+					tool.element.innerHTML = html;
+				}
+				break;
+			case 'froala':
+			default:
+				state.onFroalaEditor.add(function () {
+					if (html != undefined) {
+						$(tool.element).froalaEditor('html.set', html);
+					}
+				});
+				break;
+			}
 		}
 	}
 	
@@ -225,9 +248,9 @@ Q.Tool.define("Streams/html", function (options) {
 	
 	function onSave() {
 		if (state.creatable && state.creatable.preprocess) {
-			Q.handle(state.creatable.preprocess, this, [_proceed, tool, evt]);
+			Q.handle(state.creatable.preprocess, this, [_editor, tool, evt]);
 		} else {
-			_proceed();
+			_editor();
 		}
 		return false;
 	}
@@ -275,8 +298,10 @@ Q.Tool.define("Streams/html", function (options) {
 	streamName: "",
 	placeholder: "Enter content here",
 	preprocess: null,
+	beforeSave: new Q.Event(),
 	onSave: new Q.Event(),
-	onCancel: new Q.Event()
+	onCancel: new Q.Event(),
+	onFroalaEditor: new Q.Event()
 },
 
 {
@@ -286,6 +311,9 @@ Q.Tool.define("Streams/html", function (options) {
 				$(this.element).froalaEditor('destroy');
 			}
 		}
+	},
+	focus: function () {
+		$(this.element).data('froala.editor').$el.plugin('Q/clickfocus');
 	}
 }
 

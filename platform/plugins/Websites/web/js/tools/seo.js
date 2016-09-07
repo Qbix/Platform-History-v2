@@ -6,7 +6,7 @@
 
 /**
  * Tool for admins to edit the meta tags on a page, for SEO purposes.
- * @method Websites/seo
+ * @method Websites seo
  * @param {Object} [options]
  *   @param {Object} [options.template] Optional fields to override info for seo tool template
  *   @param {String} [options.template.name="Websites/seo"] name of template

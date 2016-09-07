@@ -139,14 +139,14 @@ Q.Tool.define("Q/inplace", function (options) {
 
 );
 
-function _setSelRange(inputEl, selStart, selend) {
+function _setSelRange(inputEl, selStart, selEnd) {
 	if ('setSelectionRange' in inputEl) {
 		inputEl.focus();
-		inputEl.setSelectionRange(selStart, selend);
+		inputEl.setSelectionRange(selStart, selEnd);
 	} else if (inputEl.createTextRange) {
 		var range = inputEl.createTextRange();
 		range.collapse(true);
-		range.moveEnd('character', selend);
+		range.moveEnd('character', selEnd);
 		range.moveStart('character', selStart);
 		range.select();
 	}
