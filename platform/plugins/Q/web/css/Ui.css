@@ -383,7 +383,7 @@ div.Q_placeholder { pointer-events: none; }
 	height: 100%;
 }
 
-.Q_load_data_mask, .Q_image_picker_mask
+.Q_load_mask, .Q_image_picker_mask
 {
 	background: #000 url('../img/throbbers/spinner_sticky_black.gif') no-repeat center;
 	text-align: center;
@@ -407,7 +407,7 @@ div.Q_placeholder { pointer-events: none; }
 	pointer-events: none;
 }
 
-.Q_ios .Q_screen_mask, .Q_ios .Q_load_data_mask
+.Q_ios .Q_screen_mask, .Q_ios .Q_load_mask
 {
 	position: absolute;
 }

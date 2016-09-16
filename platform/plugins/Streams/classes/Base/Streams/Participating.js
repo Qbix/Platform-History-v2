@@ -372,11 +372,12 @@ return [["enum","'invited','participating','left'","",false],false,"",null];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_fresh = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
 			throw new Error('Non-integer value being assigned to '+this.table()+".fresh");
-		if (value < 0 || value > 4294967295)
+		if (value < -2147483648 || value > 2147483647)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".fresh");
 		return value;
 };
@@ -387,7 +388,7 @@ Base.prototype.beforeSet_fresh = function (value) {
  */
 Base.prototype.maxSize_fresh = function () {
 
-		return 4294967295;
+		return 2147483647;
 };
 
 	/**
@@ -396,7 +397,7 @@ Base.prototype.maxSize_fresh = function () {
 	 */
 Base.column_fresh = function () {
 
-return [["int","10"," unsigned",true],false,"","0"];
+return [["int","10","",false],true,"",null];
 };
 
 /**
@@ -482,9 +483,10 @@ return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 /**
  * Check if mandatory fields are set and updates 'magic fields' with appropriate values
  * @method beforeSave
- * @param {array} value The array of fields
- * @return {array}
- * @throws {Error} If mandatory field is not set
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
 	var fields = ['userId','publisherId','streamName','state'], i;

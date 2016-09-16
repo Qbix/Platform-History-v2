@@ -463,8 +463,7 @@ class Q_Request
 		if (preg_match('/tablet|ipad/i', $useragent)) {
 			return true;
 		}
-		if ((preg_match('/android/i', $useragent) || preg_match('/silk/i', $useragent))
-		&& !preg_match('/mobi/i', $useragent)) {
+		if (!preg_match('/mobi/i', $useragent)) {
 			return true;
 		}
 		return false;
@@ -785,9 +784,7 @@ class Q_Request
 		$args = func_get_args();
 		array_splice($args, 1, 0, array(null));
 		$exceptions = call_user_func_array(array('Q_Valid', 'requireFields'), $args);
-		foreach ($exceptions as $e) {
-			Q_Response::addError($e);
-		}
+		Q_Response::addError($exceptions);
 	}
 	
 	/**

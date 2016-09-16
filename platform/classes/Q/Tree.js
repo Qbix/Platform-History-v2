@@ -127,7 +127,7 @@ module.exports = function (linked) {
 	 * Gets the value of a field in the tree
 	 * @method get
 	 * @param [keys=[]] {string|array} A key or an array of keys for traversing the tree.
-	 * @param [def=null] {mixed} The value to return if the field is not found. Defaults to undefined.
+	 * @param [def=undefined] {mixed} The value to return if the field is not found. Defaults to undefined.
 	 * @return {mixed} The field if it is found, otherwise def or undefined.
 	 * @throws {Q.Exception} if subtree is not an object
 	 */
@@ -151,7 +151,7 @@ module.exports = function (linked) {
 					{keys: keys, key: key}
 				);
 			}
-			if (!result || !(key in result)) {
+			if (!result || key == null || !(key in result)) {
 				return def;
 			}
 			result = result[key];

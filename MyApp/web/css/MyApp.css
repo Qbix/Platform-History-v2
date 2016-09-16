@@ -138,6 +138,8 @@ h2 { margin: 0; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
 .Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }
+.Q_mobile #dashboard h1,
+.Q_mobile #dashboard>h2 { display: none; }
 
 /* inputs */
 

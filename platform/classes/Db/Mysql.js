@@ -324,8 +324,8 @@ function Db_Mysql(connName, dsn) {
 				}
 			}
 			where[field] = id;
-			var q = that.SELECT(field, table).where(where);
-			q.limit(1).execute(function (err, rows) {
+			that.SELECT(field, table).where(where).limit(1)
+			.execute(function (err, rows) {
 				if (err) {
 					Q.handle(options.onError, that, [err]);
 				} else if (!rows.length) {

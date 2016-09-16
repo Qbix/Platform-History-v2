@@ -66,6 +66,7 @@ function _Q_actions(options) {
 				});
 				Q.Pointer.cancelClick(event);
 				event.stopPropagation();
+				Q.handle(state.onClick, $this, [this]);
 			}).on(Q.Pointer.start, function () {
 				$(this).addClass('Q_discouragePointerEvents');
 				$(window).on([Q.Pointer.end, '.Q_actions'], function () {
@@ -136,6 +137,9 @@ function _Q_actions(options) {
 		
 		_position($this, state.position, container);
 		interval = setInterval(function () {
+			if (!$this.closest('html').length) {
+				clearInterval(interval);
+			}
 			_position($this, state.position, container);
 		}, state.repositionMs);
 		state.onShow.handle.apply($this, [state, container]);

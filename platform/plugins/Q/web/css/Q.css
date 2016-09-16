@@ -113,12 +113,13 @@ table { border-spacing:0; border-collapse:collapse; }
 	-webkit-transform: translateZ(0);
 }
 
-.Q_mask { display: none; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
+.Q_mask { display: none; opacity: 0; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
 .Q_cancel_mask { z-index: 2000; text-align: center; }
 .Q_load_cancel_button { vertical-align: middle; margin-top: 80px; }
 .Q_notice_mask,
 .Q_screen_mask,
-.Q_dialog_mask { background-color: black; opacity: 0.2; filter:	alpha(opacity=30); }
+.Q_dialog_mask { background-color: black; opacity: 0.2; filter:	alpha(opacity=20); }
+.Q_load_mask { background-color: #777; opacity: 0.1; filter: alpha(opacity=10); }
 
 /* Clear fix */
 
@@ -143,7 +144,7 @@ html[xmlns] .Q_clearfix { display: block; }
 .Q_overlay { background: url(../img/bg/overlay.png); display:none; text-align:left; padding: 0; border: 2px solid #444; z-index: 9000;
  opacity: 1; border-radius: 7px; -moz-border-radius: 7px; -webkit-border-radius: 7px; -moz-box-shadow: 0 0 20px #333; -webkit-box-shadow: 0 0 50px #333; }
 
-.Q_notMobile .Q_overlay { max-width: 60%; }
+.Q_notMobile .Q_overlay { max-width: 500px; }
 .Q_mobile .Q_overlay { max-width: 95%; }
 
 body.Q_preventScroll {
@@ -152,7 +153,7 @@ body.Q_preventScroll {
 	width: 100%;
 }
 .Q_dialog_title {
-	padding: 10px; box-sizing: content-box; margin:0px; border-bottom: 1px solid #333; font-size: 20px; height: 20px; font-weight: bold; color: white; cursor: default;
+	padding: 10px; box-sizing: content-box; margin:0px; border-bottom: 1px solid #333; font-size: 20px; height: 20px; min-width: 200px; font-weight: bold; color: white; cursor: default;
 	background: #444; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111)); /* for webkit browsers */
@@ -201,11 +202,13 @@ body.Q_preventScroll {
 	height:35px;
 	width:35px;
 }
+.Q_mobile .Q_overlay .Q_close {
+	right:-10px;
+}
 .Q_overlay.Q_overlay_apply .Q_close,
 .Q_fullscreen_dialog.Q_overlay_apply .Q_close { 
 	background-image:url(../img/apply.png);
 }
-
 
 /* buttons */
 
@@ -297,14 +300,14 @@ button.basic16 { background-color: #eee; color: black; }
 
 .Q_actions_action { cursor: pointer !important; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; -moz-border-radius: 1px; -webkit-border-radius: 1px; box-shadow: black 3px 3px 10px; -webkit-box-shadow: black 3px 3px 10px; -moz-box-shadow: black 3px 3px 10px; }
-.Q_gallery_caption { z-index: 201; }
+.Q_gallery_caption { z-index: 201; position: absolute; }
 .Q_contextual { display: none; }
 .Q_rating_tool { display: inline-block; }
 .Q_rating_tool img { width: 14px; height: 14px; }
 .Q_placeholders_container,
 .Q_placeholder { display: inline-block; color: #999; font-style: italic; zoom: 1; *display: inline; }
 .Q_placeholders_container input,
-.Q_placeholders_container textarea { width: 100% !important; height: 100% !important; }
+.Q_placeholders_container textarea { width: 100%; height: 100%; }
 .Q_focus .Q_placeholder { color: #aaa; }
 div.Q_placeholder { pointer-events: none; }
 .Q_clickable_container { cursor: pointer !important;  }
@@ -313,6 +316,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_notTouchscreen .Q_clickable_container.Q_hover .Q_clickable_shadow,
 .Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
  { display: block; max-width: none !important; }
+.Q_inplace_tool { display: none; visibility: hidden; }
 
 #dialogs_slot { display: none; }
 

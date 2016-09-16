@@ -4,8 +4,8 @@
  * Used to create a new stream
  *
  * @param {array} $_REQUEST 
- * @param {String} [$_REQUEST.title] Required. The title of the interest.
- * @param {String} [$_REQUEST.publisherId] Optional. Defaults to the app name.
+ * @param {string} [$_REQUEST.title] Required. The title of the interest.
+ * @param {string} [$_REQUEST.publisherId] Optional. Defaults to the app name.
  * @return {void}
  */
 function Streams_interest_delete()

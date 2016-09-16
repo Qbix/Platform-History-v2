@@ -1577,6 +1577,7 @@ EOT;
 			$field_names[] = $field_name;
 			$field_null = $table_col['Null'] == 'YES' ? true : false;
 			$field_default = $table_col['Default'];
+			$field_name_safe = preg_replace('/[^0-9a-zA-Z\_]/', '_', $field_name);
 			$auto_inc = (strpos($table_col['Extra'], 'auto_increment') !== false);
 			$type = $table_col['Type'];
 			$pieces = explode('(', $type);
@@ -1635,17 +1636,18 @@ EOT;
 					$type_display_range = 4294967295;
 					break;
 			}
+			$field_name_exported = var_export($field_name, true);
 			
-			$null_check = $field_null ? "if (!isset(\$value)) {\n\t\t\treturn array('$field_name', \$value);\n\t\t}\n\t\t" : '';
+			$null_check = $field_null ? "if (!isset(\$value)) {\n\t\t\treturn array($field_name_exported, \$value);\n\t\t}\n\t\t" : '';
 			$null_fix = $field_null ? '' : "if (!isset(\$value)) {\n\t\t\t\$value='';\n\t\t}\n\t\t";
-			$dbe_check = "if (\$value instanceof Db_Expression) {\n\t\t\treturn array('$field_name', \$value);\n\t\t}\n\t\t";
+			$dbe_check = "if (\$value instanceof Db_Expression) {\n\t\t\treturn array($field_name_exported, \$value);\n\t\t}\n\t\t";
 			$js_null_check = $field_null ? "if (value == undefined) return value;\n\t\t" : '';
 			$js_null_fix = $field_null ? '' : "if (value == null) {\n\t\t\tvalue='';\n\t\t}\n\t\t";
 			$js_dbe_check = "if (value instanceof Db.Expression) return value;\n\t\t";
-			if (! isset($functions["beforeSet_$field_name"]))
-				$functions["beforeSet_$field_name"] = array();
-			if (! isset($js_functions["beforeSet_$field_name"]))
-				$js_functions["beforeSet_$field_name"] = array();
+			if (! isset($functions["beforeSet_$field_name_safe"]))
+				$functions["beforeSet_$field_name_safe"] = array();
+			if (! isset($js_functions["beforeSet_$field_name_safe"]))
+				$js_functions["beforeSet_$field_name_safe"] = array();
 			switch (strtolower($type_name)) {
 				case 'tinyint':
 				case 'smallint':
@@ -1655,18 +1657,18 @@ EOT;
 					$isNumberLike = true;
 					$properties[]="{integer} $field_name";
 					$js_properties[] = "{integer} $field_name";
-					$functions["maxSize_$field_name"]['comment'] = <<<EOT
+					$functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 	$dc
-	 * @method maxSize_$field_name
+	 * @method maxSize_$field_name_safe
 	 * Returns the maximum integer that can be assigned to the $field_name field
 	 * @return {integer}
 	 */
 EOT;
-					$functions["maxSize_$field_name"]['args'] = '';
-					$functions["maxSize_$field_name"]['return_statement'] = <<<EOT
+					$functions["maxSize_$field_name_safe"]['args'] = '';
+					$functions["maxSize_$field_name_safe"]['return_statement'] = <<<EOT
 		return $type_range_max;
 EOT;
-					$functions["beforeSet_$field_name"][] = <<<EOT
+					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}if (!is_numeric(\$value) or floor(\$value) != \$value)
 			throw new Exception('Non-integer value being assigned to '.\$this->getTable().".$field_name");
 		\$value = intval(\$value);
@@ -1675,36 +1677,36 @@ EOT;
 			throw new Exception("Out-of-range value \$json being assigned to ".\$this->getTable().".$field_name");
 		}
 EOT;
-					$functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_$field_name
+	 * @method beforeSet_$field_name_safe
 	 * @param {integer} \$value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if \$value is not integer or does not fit in allowed range
 	 */
 EOT;
-					$js_functions["maxSize_$field_name"]['comment'] = <<<EOT
+					$js_functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Returns the maximum integer that can be assigned to the $field_name field
  * @return {integer}
  */
 EOT;
-					$js_functions["maxSize_$field_name"]['args'] = '';
-					$js_functions["maxSize_$field_name"]['return_statement'] = <<<EOT
+					$js_functions["maxSize_$field_name_safe"]['args'] = '';
+					$js_functions["maxSize_$field_name_safe"]['return_statement'] = <<<EOT
 		return $type_range_max;
 EOT;
-					$js_functions["beforeSet_$field_name"][] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$js_null_check}{$js_dbe_check}value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
 			throw new Error('Non-integer value being assigned to '+this.table()+".$field_name");
 		if (value < $type_range_min || value > $type_range_max)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".$field_name");
 EOT;
-					$js_functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_$field_name
+ * @method beforeSet_$field_name_safe
  * @param {integer} value
  * @return {integer} The value
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
@@ -1715,27 +1717,27 @@ EOT;
 				case 'enum':
 					$properties[]="{string} $field_name";
 					$js_properties[] = "{String} $field_name";
-					$functions["beforeSet_$field_name"][] = <<<EOT
+					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}if (!in_array(\$value, array($type_display_range)))
 			throw new Exception("Out-of-range value '\$value' being assigned to ".\$this->getTable().".$field_name");
 EOT;
-					$functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Method is called before setting the field and verifies if value belongs to enum values list
-	 * @method beforeSet_$field_name
+	 * @method beforeSet_$field_name_safe
 	 * @param {string} \$value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if \$value does not belong to enum values list
 	 */
 EOT;
-					$js_functions["beforeSet_$field_name"][] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$js_null_check}{$js_dbe_check}if ([$type_display_range].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".$field_name");
 EOT;
-					$js_functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Method is called before setting the field and verifies if value belongs to enum values list
- * @method beforeSet_$field_name
+ * @method beforeSet_$field_name_safe
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
@@ -1752,23 +1754,23 @@ EOT;
 					$isTextLike = true;
 					$properties[]="{string} $field_name";
 					$js_properties[] = "{String} $field_name";
-					$functions["maxSize_$field_name"]['comment'] = <<<EOT
+					$functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Returns the maximum string length that can be assigned to the $field_name field
 	 * @return {integer}
 	 */
 EOT;
-					$functions["maxSize_$field_name"]['args'] = '';
-					$functions["maxSize_$field_name"]['return_statement'] = <<<EOT
+					$functions["maxSize_$field_name_safe"]['args'] = '';
+					$functions["maxSize_$field_name_safe"]['return_statement'] = <<<EOT
 		return $type_display_range;
 EOT;
-					$functions["beforeSet_$field_name"][] = <<<EOT
+					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$null_fix}{$dbe_check}if (!is_string(\$value) and !is_numeric(\$value))
 			throw new Exception('Must pass a string to '.\$this->getTable().".$field_name");
 		if (strlen(\$value) > $type_display_range)
 			throw new Exception('Exceedingly long value being assigned to '.\$this->getTable().".$field_name");
 EOT;
-					$functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -1778,27 +1780,27 @@ EOT;
 	 * @throws {Exception} An exception is thrown if \$value is not string or is exceedingly long
 	 */
 EOT;
-					$js_functions["maxSize_$field_name"]['comment'] = <<<EOT
+					$js_functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Returns the maximum string length that can be assigned to the $field_name field
 	 * @return {integer}
 	 */
 EOT;
-					$js_functions["maxSize_$field_name"]['args'] = '';
-					$js_functions["maxSize_$field_name"]['return_statement'] = <<<EOT
+					$js_functions["maxSize_$field_name_safe"]['args'] = '';
+					$js_functions["maxSize_$field_name_safe"]['return_statement'] = <<<EOT
 		return $type_display_range;
 EOT;
-					$js_functions["beforeSet_$field_name"][] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$js_null_check}{$js_null_fix}{$js_dbe_check}if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a string to '+this.table()+".$field_name");
 		if (typeof value === "string" && value.length > $type_display_range)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".$field_name");
 EOT;
-					$js_functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_$field_name
+ * @method beforeSet_$field_name_safe
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
@@ -1810,7 +1812,7 @@ EOT;
 					$isTimeLike = true;
 					$properties[]="{string|Db_Expression} $field_name";
 					$js_properties[] = "{String|Db.Expression} $field_name";
-					$functions["beforeSet_$field_name"][] = <<<EOT
+					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}\$date = date_parse(\$value);
 		if (!empty(\$date['errors'])) {
 			\$json = json_encode(\$value);
@@ -1823,22 +1825,22 @@ EOT;
 		}
 		\$value = sprintf("%04d-%02d-%02d", \$year, \$month, \$day);
 EOT;
-					$functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Method is called before setting the field and normalize the date string
-	 * @method beforeSet_$field_name
+	 * @method beforeSet_$field_name_safe
 	 * @param {string} \$value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if \$value does not represent valid date
 	 */
 EOT;
-					$js_functions["beforeSet_$field_name"][] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$js_null_check}{$js_dbe_check}value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 EOT;
-					$js_functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Method is called before setting the field
- * @method beforeSet_$field_name
+ * @method beforeSet_$field_name_safe
  * @param {String} value
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
@@ -1858,7 +1860,7 @@ EOT;
 							$is_magic_field = true;
 						}
 					}
-					$functions["beforeSet_$field_name"][] = <<<EOT
+					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}\$date = date_parse(\$value);
 		if (!empty(\$date['errors'])) {
 			\$json = json_encode(\$value);
@@ -1869,22 +1871,22 @@ EOT;
 			\$date['hour'], \$date['minute'], \$date['second']
 		);
 EOT;
-					$functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_$field_name
+	 * @method beforeSet_$field_name_safe
 	 * @param {string} \$value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if \$value does not represent valid DateTime
 	 */
 EOT;
-					$js_functions["beforeSet_$field_name"][] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$js_null_check}{$js_dbe_check}value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 EOT;
-					$js_functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Method is called before setting the field
- * @method beforeSet_$field_name
+ * @method beforeSet_$field_name_safe
  * @param {String} value
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
@@ -1898,20 +1900,20 @@ EOT;
 					$isNumberLike = true;
 					$properties[]="{float} $field_name";
 					$js_properties[] = "{number} $field_name";
-					$functions["beforeSet_$field_name"][] = <<<EOT
+					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}if (!is_numeric(\$value))
 			throw new Exception('Non-numeric value being assigned to '.\$this->getTable().".$field_name");
 		\$value = floatval(\$value);
 EOT;
-					$js_functions["beforeSet_$field_name"][] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$js_null_check}{$js_dbe_check}value = Number(value);
 		if (isNaN(value))
 			throw new Error('Non-number value being assigned to '+this.table()+".$field_name");
 EOT;
-					$js_functions["beforeSet_$field_name"]['comment'] = <<<EOT
+					$js_functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 $dc
  * Method is called before setting the field to verify if value is a number
- * @method beforeSet_$field_name
+ * @method beforeSet_$field_name_safe
  * @param {integer} value
  * @return {integer} The value
  * @throws {Error} If 'value' is not number
@@ -1924,20 +1926,20 @@ EOT;
 					$js_properties[] = "{mixed} $field_name";
 					break;
 			}
-			if (! empty($functions["beforeSet_$field_name"])) {
-				$functions["beforeSet_$field_name"]['return_statement'] = <<<EOT
+			if (! empty($functions["beforeSet_$field_name_safe"])) {
+				$functions["beforeSet_$field_name_safe"]['return_statement'] = <<<EOT
 		return array('$field_name', \$value);
 EOT;
 			}
-			if (! empty($js_functions["beforeSet_$field_name"])) {
-				$js_functions["beforeSet_$field_name"]['return_statement'] = <<<EOT
+			if (! empty($js_functions["beforeSet_$field_name_safe"])) {
+				$js_functions["beforeSet_$field_name_safe"]['return_statement'] = <<<EOT
 		return value;
 EOT;
 			}
 			if (! $field_null and ! $is_magic_field
 			and ((!$isNumberLike and !$isTextLike) or in_array($field_name, $pk))
 			and ! $auto_inc and !isset($field_default)) {
-				$required_field_names[] = "'$field_name'";
+				$required_field_names[] = $field_name_exported;
 			}
 			
 			$columnInfo = array(
@@ -1948,26 +1950,26 @@ EOT;
 			);
 			$columnInfo_php = var_export($columnInfo, true);
 			$columnInfo_js = json_encode($columnInfo);
-			$functions["column_$field_name"]['comment'] = <<<EOT
+			$functions["column_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Returns schema information for $field_name column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 EOT;
-			$functions["column_$field_name"]['static'] = true;
-			$functions["column_$field_name"]['args'] = '';
-			$functions["column_$field_name"]['return_statement'] = <<<EOT
+			$functions["column_$field_name_safe"]['static'] = true;
+			$functions["column_$field_name_safe"]['args'] = '';
+			$functions["column_$field_name_safe"]['return_statement'] = <<<EOT
 return $columnInfo_php;
 EOT;
-			$js_functions["column_$field_name"]['static'] = true;
-			$js_functions["column_$field_name"]['comment'] = <<<EOT
+			$js_functions["column_$field_name_safe"]['static'] = true;
+			$js_functions["column_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Returns schema information for $field_name column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 EOT;
-			$js_functions["column_$field_name"]['args'] = '';
-			$js_functions["column_$field_name"]['return_statement'] = <<<EOT
+			$js_functions["column_$field_name_safe"]['args'] = '';
+			$js_functions["column_$field_name_safe"]['return_statement'] = <<<EOT
 return $columnInfo_js;
 EOT;
 		
@@ -2031,9 +2033,10 @@ EOT;
 $dc
  * Check if mandatory fields are set and updates 'magic fields' with appropriate values
  * @method beforeSave
- * @param {array} value The array of fields
- * @return {array}
- * @throws {Error} If mandatory field is not set
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 EOT;
 		}

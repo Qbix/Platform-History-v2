@@ -49,8 +49,9 @@ function Streams_stream_put($params) {
 	}
 	
 	// check if editing directly from client is allowed
-	if (!Q_Config::get("Streams", "types", $stream->type, 'edit', false)) {
-		throw new Q_Exception("This app doesn't support directly editing streams of type '{$stream->type}'");
+	$edit = Streams_Stream::getConfigField($stream->type, 'edit', false);
+	if (!$edit) {
+		throw new Q_Exception("This app doesn't let clients directly edit streams of type '{$stream->type}'");
 	}
 	
 	$suggest = false;
@@ -87,6 +88,19 @@ function Streams_stream_put($params) {
 	
 	// Get all the extended field names for this stream type
 	$fieldNames = Streams::getExtendFieldNames($stream->type);
+	
+	// Prevent editing restricted fields
+	if (is_array($edit)) {
+		$restrictedFields = array_diff($fieldNames, $edit);
+		foreach ($restrictedFields as $fieldName) {
+			if (in_array($fieldName, array('publisherId', 'name', 'streamName'))) {
+				continue;
+			}
+			if (isset($req[$fieldName])) {
+				throw new Users_Exception_NotAuthorized();
+			}
+		}
+	}
 
 	// Process any icon that was posted
 	$icon = Q::ifset($fieldNames, 'icon', null);

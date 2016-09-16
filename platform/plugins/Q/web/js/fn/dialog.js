@@ -49,21 +49,22 @@ function _Q_overlay(o) {
 			$this.css({ 'left': o.left + 'px' });
 		}
 
+		var oap = o.alignParent, body = document.body;
+		var parentHeight = (oap && oap !== body && oap[0] !== body)
+			? $(o.alignParent).height()
+			: Q.Pointer.windowHeight();
 		if (o.top == 'middle') {
-			var parentHeight = o.alignParent
-				? $(o.alignParent).height()
-				: Q.Pointer.windowHeight();
 			$this.css({ 'top': ((parentHeight - height) / 2) + 'px' });
 		} else if (typeof(o.top) == 'string' && o.top.indexOf('%') != -1) {
 			percentage = parseInt(o.top) / 100;
 			$this.css({ 'top': (o.alignParent ? $(o.alignParent).height() * percentage : Q.Pointer.scrollTop() + Q.Pointer.windowHeight() * percentage) + 'px' });
 		} else {
-			$this.css({ 'top': Q.Pointer.scrollTop() + o.top + 'px' });
+			$this.css({ 'top': Q.Pointer.scrollTop() + o.top - $('body').offset().top + 'px' });
 		}
 		if (!o.fullscreen) {
 			var topMargin = Q.Dialogs.options.topMargin;
 			var parentHeight = (!o.alignByParent || parent[0] == document.body)
-				? Q.Pointer.windowWidth()
+				? Q.Pointer.windowHeight()
 				: parent.height();
 			if (typeof(topMargin) == 'string') // percentage
 				topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
@@ -75,7 +76,7 @@ function _Q_overlay(o) {
 	}
 
 	var $this = this;
-	$this.addClass('Q_overlay');
+	$this.hide().css('visibility', 'hidden').addClass('Q_overlay');
 	$this.css('position', Q.info.platform === 'ios' ? 'absolute' : 'fixed');
 
 	function closeThisOverlayOnEsc(e)
@@ -91,7 +92,7 @@ function _Q_overlay(o) {
 		{
 			$this.data('Q/overlay').documentScrollTop = Q.Pointer.scrollTop();
 			var $overlay = $this.data('Q/overlay');
-			if ($this.css('display') == 'block') {
+			if ($this.hasClass('Q_overlay_open')) {
 				return;
 			}
 			var topZ = 0;
@@ -104,6 +105,7 @@ function _Q_overlay(o) {
 			$this.css('z-index', topZ);
 			Q.handle($overlay.options.beforeLoad, $this, [$this]);
 			calculatePosition($this);
+			$this.show();
 			var $body = $('body');
 			$overlay.bodyStyle = {
 				left: $body.css('left'),
@@ -158,7 +160,7 @@ function _Q_overlay(o) {
 				}
 				Q.handle($overlay.options.onLoad, $this, [$this]);
 			}
-			calculatePosition($this);
+			$this.addClass('Q_overlay_open');
 		},
 		close: function(e)
 		{
@@ -168,6 +170,7 @@ function _Q_overlay(o) {
 			if (!$overlay.options.noClose) {
 				$(document).off('keydown', closeThisOverlayOnEsc);
 			}
+			$this.removeClass('Q_overlay_open');
 			$this.find('input, select, textarea').trigger('blur');
 			Q.handle($overlay.options.beforeClose, $this, [$this]);
 			if ($overlay.options.fadeInOut)
@@ -252,8 +255,8 @@ function _Q_overlay(o) {
  *   @optional
  *   @param {Boolean} [options.alignByParent=false] If true, the dialog will be aligned to the center of not the entire window, but to the center of containing element instead.
  *   @param {Boolean} [options.mask=true] If true, adds a mask to cover the screen behind the dialog.
- *   @param {Boolean} [options.fullscreen=true]
- *   Only on Android and false on all other platforms. If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon.
+ *   @param {Boolean} [options.fullscreen]
+ *   If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon. Defaults to true on Android stock browser, false everywhere else.
  *   @param {Boolean} [options.asyncLoad=true]
  *   For desktop and false for touch devices. If true, dialog will load asynchronously with fade animation and 'onLoad' will be called when fade animation is completed. If false, dialog will appear immediately and 'onLoad' will be called at the same time.
  *   @param {Boolean} [options.noClose=false]
@@ -319,7 +322,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			beforeClose: o.beforeClose,
 			onClose: { "Q/dialog": function () {
 				if (o.removeOnClose) {
-					$this.remove();
+					Q.removeElement($this[0], true);
 				}
 				Q.handle(o.onClose, $this, [$this]);
 			}},
@@ -351,7 +354,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		var dialogData = {
 			load: function() {
 				dialogData.documentScrollTop = Q.Pointer.scrollTop();
-				if ($this.css('display') == 'block') {
+				if ($this.hasClass('Q_overlay_open')) {
 					return;
 				}
 				$this.css({
@@ -383,7 +386,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				}
 				
 				if (o.removeOnClose) {
-					$this.remove();
+					Q.removeElement($this[0], true);
 				} else {
 					$this.hide();
 				}
@@ -435,7 +438,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 {
 	alignByParent: false,
 	mask: true,
-	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(1000),
+	fullscreen: Q.info.useFullscreen,
 	asyncLoad: !Q.info.isTouchscreen,
 	noClose: false,
 	closeOnEsc: true,
@@ -545,7 +548,10 @@ function _handlePosAndScroll(o)
 
 	Q.addScript("plugins/Q/js/QTools.js", function () {
 
-	interval = setInterval(function() {
+	interval = setInterval(_adjustPosition, 100);
+	_adjustPosition();
+	
+	function _adjustPosition() {
 		var maxContentsHeight;
 		if ($this.css('display') == 'block')
 		{
@@ -558,7 +564,7 @@ function _handlePosAndScroll(o)
 			bottomMargin = Q.Dialogs.options.bottomMargin;
 			if (typeof(bottomMargin) == 'string') // percentage
 				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
-			
+		
 			var outerWidth = $this.outerWidth();
 			var winInnerWidth = Q.Pointer.windowWidth();
 			var winInnerHeight = Q.Pointer.windowHeight();
@@ -574,10 +580,10 @@ function _handlePosAndScroll(o)
 						iScrollBar.css({ 'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px' });
 					}
 				}
-				
+			
 				// for mobile devices any height and y-pos corrections are done only if keyboard is not visible on the screen
 				if (Q.Layout && Q.Layout.keyboardVisible) return;
-				
+			
 				// correcting height
 				if ($this.outerHeight() > winInnerHeight && o.applyIScroll)
 				{
@@ -620,7 +626,7 @@ function _handlePosAndScroll(o)
 						iScrollBar.css({ 'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px' });
 					}
 				}
-				
+			
 				// for touchscreen devices any height and y-pos corrections are done only if keyboard is not visible on the screen
 				if (Q.info.isTouchscreen && Q.Layout && Q.Layout.keyboardVisible) return;
 
@@ -664,7 +670,7 @@ function _handlePosAndScroll(o)
 					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 			}
-			
+		
 			// also considering orientation
 			if (Q.info.isTouchscreen)
 			{
@@ -682,7 +688,7 @@ function _handlePosAndScroll(o)
 						$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 			}
-			
+		
 			if (contentsWrapper && contentsLength != ods.html().length)
 			{
 				contentsLength = ods.html().length;
@@ -691,7 +697,8 @@ function _handlePosAndScroll(o)
 		} else {
 			clearInterval(interval);
 		}
-	}, 100);
+		$this.css('visibility', 'visible');
+	}
 	
 	});
 };

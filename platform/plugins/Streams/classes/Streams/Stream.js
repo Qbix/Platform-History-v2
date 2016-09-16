@@ -329,13 +329,22 @@ function _sortTemplateTypes(templates, field, returnAll, nameField) {
 	return null;
 }
 
-Sp.getSubscriptionTemplate = function(className, userId, callback, returnAll) {
+/**
+ * @method getSubscriptionTemplate
+ * @param {String} className The class extending Db_Row to fetch from the database
+ * @param {String} ofUserId The id of the possible subscriber
+ * @param {&integer} [templateType=null] Gets filled with the template type 0-4. 
+ *   Set to true to return all templates.
+ * @return {Streams.Subscription|Array} Returns the template subscription, 
+ *   or an array if $templateType is true
+ */
+Sp.getSubscriptionTemplate = function(className, ofUserId, callback, returnAll) {
 	// fetch template for subscription's PK - publisher, name & user
 	var stream = this;
 	Streams[className].SELECT('*').where({
 		publisherId: stream.fields.publisherId,
-		streamName: [stream.fields.name, stream.fields.type+'/'],
-		ofUserId: ['', userId]
+		streamName: stream.fields.type+'/',
+		ofUserId: ['', ofUserId]
 	}).execute(function(err, res) {
 		if (err) {
 			return callback.call(stream, err);
@@ -364,20 +373,20 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 
 /**
  * Sends a message to all participants of a stream
- * @method messageParticipants
- * @param event {string}
- * @param uid {string} User who initiated the event
- * @param message {string} The message
+ * @method notifyParticipants
+ * @param {string} event The type of Streams event, such as "post" or "remove"
+ * @param {string} userId User who initiated the event
+ * @param {Streams_Message} message 
  */
-Sp.messageParticipants = function (event, uid, msg) {
+Sp.notifyParticipants = function (event, userId, message) {
 	var fields = this.fields;
 	var stream = this;
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		var debug, userId;
-		msg.fields.streamType = fields.type;
+		message.fields.streamType = fields.type;
 		for (userId in participants) {
 			var participant = participants[userId];
-			stream.notify(participant, event, uid, msg, function(err) {
+			stream.notify(participant, event, userId, message, function(err) {
 				if (err) {
 					Q.log("Failed to notify user '"+participant.fields.userId+"': ");
 					Q.log(err);
@@ -832,7 +841,7 @@ Sp.join = function(options, callback) {
 			}
 			function _afterSaveParticipant(err) {
 				if (err) return callback.call(stream, err);
-				Streams.emitToUser(userId, 'join', sp.fillMagicFields().getFields());
+				Users.Socket.emitToUser(userId, 'Streams/join', sp.fillMagicFields().getFields());
 				stream.updateParticipantCounts(
 					'participating', sp.fields.state, _afterUpdateParticipantCounts
 				);
@@ -1057,130 +1066,140 @@ Sp.unsubscribe = function(options, callback) {
 };
 
 /**
- * Notify participants of the stream depending on user status
+ * Notify participants of the stream depending on user status.
+ * Set the "Streams/notifications/onlyIfAllClientsOffline" config field to false
+ * to send offline notifications whenever all clients related to device sessions
+ * are offline, even if other clients are online.
  * @method notify
- * @param participant {object} Participant to notify
- * @param event {string} The type of event
- * @param uid {string} The user who initiated the message
- * @param message {object} Message on 'post' event or stream on other events
- * @param callback=noop {function}
+ * @param {Streams_Participant} participant The stream participant to notify
+ * @param {String} event The type of Streams event, such as "post" or "remove"
+ * @param {String} userId The user who initiated the message
+ * @param {Streams_Message} message  Message on 'post' event or stream on other events
+ * @param {Function} [callback] This would be called after all the notifying was done
  */
-Sp.notify = function(participant, event, uid, message, callback) {
+Sp.notify = function(participant, event, userId, message, callback) {
 	var userId = participant.fields.userId, stream = this;
-	function _notify(tokens, sessions) {
-		// 1) if session is associated to device and no socket is connected for device
-		//		we update 'fresh' field, update badge, issue alert to device
-		//		User can cancel all subscriptions to receive only push notifications   
-		//      managed via device settings
-		var i, online = false;
-		for (i=0; i<sessions.length; i++) {
-			if ((online = Streams.isDeviceOnline(userId, sessions[i]))) {
-			    break;
+	function _notify(devices) {
+		// 1) check for socket clients which are online
+		var n = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
+		var online, clients;
+		if (n) {
+			// check if any socket clients are online
+			clients = Users.User.clientsOnline(userId);
+			online = !Q.isEmpty(clients);
+		} else {
+			// check if any socket clients associated to any device sessions are online
+			for (var platform in devices) {
+				for (var i=0; i<devices[platform].length; i++) {
+					var d = devices[platform][i];
+					var clients = Users.User.clientsOnline(userId, d[i].sessionId);
+					online = !Q.isEmpty(clients);
+					if (online) {
+					    break;
+					}
+				}
 			}
 		}
-		// check if the message generated some significant event,
-		// otherwise send offline notification only if no socket clients are online
-		if (Streams.Participating.freshEvent(online, event, message, uid)) {
-			Streams.pushNotification(userId, tokens, event, message);
-		}
 		// 2) if user has socket connected - emit socket message and quit
-		if (Streams.emitToUser(userId, event, message.getFields())) {
+		if (online) {
+			Users.Socket.emitToUser(userId, event, message.getFields());
 			return callback && callback();
 		}
-		// 3) if user has no socket connected notify subscribed users
+		// 3) if user has no socket connected, send offline notifications
+		//      to users who subscribed and filters match
 		if (userId === message.fields.byUserId) {
 			return; // no need to notify the user of their own actions
 		}
-		if (participant.fields.subscribed === 'yes') {
-			Streams.Subscription.test(userId, stream, message.fields.type,
-			function(err, deliveries) {
-				if (err || !deliveries.length) {
-					return callback && callback(err);
-				}
-				var waitingFor = deliveries.map(function(d) { return JSON.stringify(d); });
-				var p = new Q.Pipe(waitingFor, function(params) {
-					for (var d in params) {
-						if (params[d][0]) return callback && callback(params[d][0]);
+		if (participant.fields.subscribed !== 'yes') {
+			callback && callback(null, []);
+		}
+		Streams.Subscription.test(userId, stream, message.fields.type,
+		function(err, deliveries) {
+			if (err || !deliveries.length) {
+				return callback && callback(err);
+			}
+			var waitingFor = deliveries.map(function(d) { return JSON.stringify(d); });
+			var p = new Q.Pipe(waitingFor, function(params) {
+				for (var d in params) {
+					if (params[d][0]) {
+						return callback && callback(params[d][0]);
 					}
-					new Streams.Notification({
-						userId: userId,
-						publisherId: participant.fields.publisherId,
-						streamName: participant.fields.streamName,
-						messageOrdinal: message.fields.ordinal,
-						type: message.fields.type
-					}).save(function(err) {
-						callback && callback(err, deliveries);
-					});
+				}
+				new Streams.Notification({
+					userId: userId,
+					publisherId: participant.fields.publisherId,
+					streamName: participant.fields.streamName,
+					messageOrdinal: message.fields.ordinal,
+					type: message.fields.type
+				}).save(function(err) {
+					callback && callback(err, deliveries);
 				});
-				// actually notify according to the deliveriy rules
-				var byUserId = message.fields.byUserId;
-				Streams.Avatar.fetch(userId, byUserId, function (err, avatar) {
-					if (message.fields.type !== "Streams/invite") {
+			});
+			// actually notify according to the deliveriy rules
+			var byUserId = message.fields.byUserId;
+			Streams.Avatar.fetch(userId, byUserId, function (err, avatar) {
+				if (message.fields.type !== "Streams/invite") {
+					return deliveries.forEach(function(delivery) {
+						message.deliver(stream, userId, delivery, avatar,
+							p.fill(JSON.stringify(delivery))
+						);
+					});
+				}
+				var instructions = JSON.parse(message.fields.instructions);
+				new Streams.Invite({
+					token: instructions.token
+				}).retrieve(function(err, rows) {
+					if (err || !rows.length) {
 						return deliveries.forEach(function(delivery) {
-							message.deliver(stream, userId, delivery, avatar,
-								p.fill(JSON.stringify(delivery))
-							);
+							p.fill(JSON.stringify(delivery))(err); 
 						});
 					}
-					var instructions = JSON.parse(message.fields.instructions);
-					new Streams.Invite({
-						token: instructions.token
-					}).retrieve(function(err, rows) {
-						if (err || !rows.length) {
+					var invite = this;
+					new Streams.Stream({
+						publisherId: invite.fields.publisherId,
+						name: invite.fields.streamName
+					}).retrieve(function(err, rows2) {
+						if (err || !rows2.length) {
 							return deliveries.forEach(function(delivery) {
 								p.fill(JSON.stringify(delivery))(err); 
 							});
 						}
-						var invite = this;
-						new Streams.Stream({
-							publisherId: invite.fields.publisherId,
-							name: invite.fields.streamName
-						}).retrieve(function(err, rows2) {
-							if (err || !rows2.length) {
-								return deliveries.forEach(function(delivery) {
-									p.fill(JSON.stringify(delivery))(err); 
-								});
-							}
-							var stream = this;
-							try { 
-								var instructions = JSON.parse(message.fields.instructions); 
-							} catch (e) {}
-							var invited = invite.getFields();
-							invited.url = invite.url();
-							if (instructions && instructions.type) {
-								invited[instructions.type] = true;
-							}
-							stream.invited = invited;
-							deliveries.forEach(function(delivery) {
-								message.deliver(stream, userId, delivery, avatar,
-									p.fill(JSON.stringify(delivery))
-								);
-							});
+						var stream = this;
+						try { 
+							var instructions = JSON.parse(message.fields.instructions); 
+						} catch (e) {}
+						var invited = invite.getFields();
+						invited.url = invite.url();
+						if (instructions && instructions.type) {
+							invited[instructions.type] = true;
+						}
+						stream.invited = invited;
+						deliveries.forEach(function(delivery) {
+							message.deliver(stream, userId, delivery, avatar,
+								p.fill(JSON.stringify(delivery))
+							);
 						});
 					});
 				});
 			});
-		} else {
-			callback && callback(null, []);
-		}
-	}
-	function _tokens(err, access) {
-		var userId = participant.fields.userId;
-		if (err) {
-		    return callback && callback(err);
-		}
-		if (access) {
-		    Q.plugins.Users.tokensForUser(userId, _notify);
-		}
+		});
 	}
 	// check access
 	if (this.get('asUserId') !== userId) {
 		this.calculateAccess(userId, function (err) {
 			if (err) return callback && callback(err);
-			this.testReadLevel(Streams.READ_LEVEL['messages'], _tokens);
+			this.testReadLevel(Streams.READ_LEVEL['messages'], _devices);
 		});
 	} else {
-		this.testReadLevel(Streams.READ_LEVEL['messages'], _tokens);
+		this.testReadLevel(Streams.READ_LEVEL['messages'], _devices);
+	}
+	function _devices(err, access) {
+		if (err) {
+		    return callback && callback(err);
+		}
+		if (access) {
+		    Users.User.devices(participant.fields.userId, _notify);
+		}
 	}
 };
 
@@ -1228,5 +1247,29 @@ Sp.url = function ()
 	});
 	return Q.Uri && Q.Uri.from(uriString).toUrl();
 }
+
+/**
+ * Find out whether a certain field is restricted from being
+ * edited by clients via the regular Streams REST API.
+ * @method restrictedFromClient
+ * @static
+ * @param {String} streamType
+ * @param {String} fieldName
+ * @param {String} [whenCreating=false]
+ * @return {Boolean}
+ */
+Streams_Stream.restrictedFromClient = function Streams_Stream_restrictedFromClient(
+	streamType, fieldName, whenCreating
+) {
+	var during = whenCreating ? 'create' : 'edit';
+	var info = Streams_Stream.getConfigField(streamType, during, false);
+	if (!info) {
+		return true;
+	}
+	if (Q.isArrayLike(info) && info.indexOf(fieldName) < 0) {
+		return true;
+	}
+	return false;
+};
 
 module.exports = Streams_Stream;

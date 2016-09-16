@@ -554,16 +554,20 @@ class Q
 	 *  following parameter, $options, is skipped.
 	 * @param {array} $options=array()
 	 *  The options passed to the tool (or array of options arrays passed to the tools).
-	 * @param {array} $extra=array()
-	 *  Options used by Qbix when rendering the tool. Can include:<br/>
-	 *  "id" =>
-	 *    an additional ID to distinguish tools instantiated
-	 *    side-by-side from each other. Usually numeric.<br/>
-	 *  "cache" =>
-	 *    if true, then the Qbix front end will not replace existing tools with same id
+	 * @param {array} [$extra=array()] Options used by Qbix when rendering the tool.
+	 * @param {string} [$extra.id]
+	 *    An additional ID to distinguish tools instantiated
+	 *    side-by-side from each other, within the same parent HTMLElement.
+	 * @param {boolean} [$extra.cache=false]
+	 *    If true, then the Qbix front end will not replace existing tools with same id
 	 *    during Q.loadUrl when this tool appears in the rendered HTML
-	 * @return {string}
-	 *  The rendered content of the tool
+	 * @param {boolean} [$extra.merge=false]
+	 *    If true, the element for this tool is merged with the element of the tool
+	 *    already being rendered (if any), producing one element with markup
+	 *    for both tools and their options. This can be used more than once, merging
+	 *    multiple tools in one element.
+	 *    As part of the mege, the content this tool (if any) is prepended
+	 *    to the content of the tool which is already being rendered.
 	 * @throws {Q_Exception_WrongType}
 	 * @throws {Q_Exception_MissingFile}
 	 */
@@ -918,12 +922,12 @@ class Q
 	/**
 	 * @method take
 	 * @param {array|object} $source An array or object from which to take things.
-	 * @param {array} $fields An array of fields to take or an object of fieldname => default pairs
+	 * @param {array} $fields An array of fields to take or an associative array of fieldname => default pairs
 	 * @param {array|object} &$dest Optional reference to an array or object in which we will set values.
 	 *  Otherwise an empty array is used.
 	 * @return {array|object} The $dest array or object, otherwise an array that has been filled with values.
 	 */
-	static function take($source, $fields, &$dest = null, $keys = array())
+	static function take($source, $fields, &$dest = null)
 	{
 		if (!is_array($fields)) {
 			$fields = array($fields);

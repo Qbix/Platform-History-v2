@@ -14,7 +14,7 @@
  *   before the username. Or pass true to render the default size.
  * @param {array} [options.iconAttributes]
  *   Optional. Array of attributes to render for the icon.
- * @param {boolean} [options.editable=false]
+ * @param {boolean|array} [options.editable=false]
  *   Optional. Whether to provide an interface for editing the user's info. Can be array containing one or more of "icon", "name".
  * @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
  * @param {boolean} [options.cacheBust=null]
@@ -38,9 +38,12 @@ function Users_avatar_tool($options)
 		$options['userId'] = $loggedInUserId;
 	}
 	unset($options['iconAttributes']);
-	if (!empty($options['editable'])
-	and is_string($options['editable'])) {
+	if (empty($options['editable'])) {
+		$options['editable'] = array();
+	} else if (is_string($options['editable'])) {
 		$options['editable'] = array($options['editable']);
+	} else if ($options['editable'] === true) {
+		$options['editable'] = array('icon', 'name');
 	}
 	Q_Response::setToolOptions($options);
 	if (!empty($options['renderOnClient'])) {
@@ -72,19 +75,17 @@ function Users_avatar_tool($options)
 	}
 	$o = $options['short'] ? array('short' => true) : array();
 	$o['html'] = true;
-	if (!empty($options['show'])) {
-		$o['show'] = $options['show'];
-	} else if ($options['editable'] === true) {
+	if (in_array('name', $options['editable'])) {
 		$o['show'] = 'fl';
-	}
-	if (!empty($options['editable'])
-	and in_array('name', $options['editable'])) {
 		$streams = Streams::fetch(null, $options['userId'], array(
 			'Streams/user/firstName', 'Streams/user/lastName', 'Streams/user/username'
 		));
 		foreach ($streams as $s) {
 			$s->addPreloaded();
 		}
+	}
+	if (!empty($options['show'])) {
+		$o['show'] = $options['show'];
 	}
 	$displayName = $avatar->displayName($o, 'Someone');
 	$result .= "<span class='Users_avatar_name'>$displayName</span>";

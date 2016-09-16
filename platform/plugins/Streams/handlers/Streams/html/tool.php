@@ -34,5 +34,11 @@ function Streams_html_tool($options)
 	foreach ($stylesheets as $stylesheet) {
 		Q_Response::addStylesheet($stylesheet);
 	}
+	if ($froalaKey = Q_Config::get('Streams', 'froala', 'key', null)) {
+		if (!empty($options['froala'])) {
+			$options['froala'] = array();
+		}
+		$options['froala']['key'] = $froalaKey;
+	}
 	Q_Response::setToolOptions($options);
 }

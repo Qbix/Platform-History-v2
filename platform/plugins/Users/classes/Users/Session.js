@@ -5,6 +5,7 @@
  */
 var Q = require('Q');
 var Db = Q.require('Db');
+var Users = require('Users');
 
 /**
  * Class representing 'Session' rows in the 'Users' database
@@ -29,6 +30,39 @@ function Users_Session (fields) {
 
 	/* * * */
 }
+
+/**
+ * Pushes notifications to the device corresponding the session ids.
+ * @method pushNotifications
+ * @static
+ * @param {String|Array} userIds A user id, or an array of them, 
+ *   in which case sessionIds would be an object of { userId: sessionId }
+ *   in which case notifications would be an object of { userId: notification }
+ * @param {String|Object} sessionIds A session id, or an object of them
+ * @param {Object} notifications Please see Users.Device.pushNotification for the spec
+ * @param {Function} [callback] A function to call after the push has been completed
+ */
+Users_Session.pushNotifications = function (userIds, sessionIds, notifications, callback) {
+	var isArrayLike = Q.isArrayLike(userIds);
+	Users.Device.SELECT('*').where({
+		userId: userIds
+	}).execute(function (err, devices) {
+		if (err) {
+			return callback(err);
+		}
+		var d = [];
+		Q.each(devices, function (i) {
+			var u = this.fields.userId;
+			var n = isArrayLike ? notifications[u] : notifications;
+			var s = isArrayLike ? sessionIds[u] : sessionIds;
+			if (this.fields.sessionId === s) {
+				this.pushNotification(n);
+				d.push(this);
+			}
+		});
+		callback(null, d, n);
+	});
+};
 
 Q.mixin(Users_Session, Q.require('Base/Users/Session'));
 

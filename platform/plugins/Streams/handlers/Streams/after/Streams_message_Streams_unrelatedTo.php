@@ -25,7 +25,9 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 	if (!isset($fromPublisherId) or !isset($fromStreamName)) {
 		return;
 	}
-	$relatedTo = $c->retrieve(null, null, array('ignoreCache' => true))
+	
+	// Begin database transaction
+	$relatedTo = $c->retrieve(null, array('ignoreCache' => true, 'begin' => true))
 		? json_decode($c->relatedTo, true)
 		: array();
 	if (isset($relatedTo[$type])) {
@@ -52,4 +54,5 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 	}
 	$c->relatedTo = Q::json_encode($relatedTo);
 	$c->save();
+	// End database transaction
 }

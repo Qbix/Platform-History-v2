@@ -426,7 +426,7 @@ class Users_User extends Base_Users_User
 		$email->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
-		$email->authCode = md5(microtime() + mt_rand());
+		$email->authCode = sha1(microtime() + mt_rand());
 		$link = 'Users/activate?code='.urlencode($email->activationCode) . ' emailAddress='.urlencode($email->address);
 		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $email->authCode, 
@@ -503,7 +503,7 @@ class Users_User extends Base_Users_User
 			$email->activationCode = '';
 			$email->activationCodeExpires = '0000-00-00 00:00:00';
 		}
-		$email->authCode = md5(microtime() + mt_rand());
+		$email->authCode = sha1(microtime() + mt_rand());
 		if ($verified) {
 			$email->userId = $this->id;
 		} else {
@@ -623,7 +623,7 @@ class Users_User extends Base_Users_User
 		if (substr($number, 0, 2) == '+1') {
 			$number = substr($number, 2);
 		}
-		$mobile->authCode = md5(microtime() + mt_rand());
+		$mobile->authCode = sha1(microtime() + mt_rand());
 		$link = 'Users/activate?code='.urlencode($mobile->activationCode)
 			. ' mobileNumber='.urlencode($number);
 		$communityName = Users::communityName();
@@ -692,7 +692,7 @@ class Users_User extends Base_Users_User
 			$mobile->activationCode = '';
 			$mobile->activationCodeExpires = '0000-00-00 00:00:00';
 		}
-		$mobile->authCode = md5(microtime() + mt_rand());
+		$mobile->authCode = sha1(microtime() + mt_rand());
 		if ($verified) {
 			$mobile->userId = $this->id;
 		} else {

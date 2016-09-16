@@ -296,25 +296,59 @@ class Q_Valid
 	 * @method signature
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
+	 * @param {array} [$data=$_REQUEST] The data to check the signature of
+	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
 	 * @return {boolean} Whether the phone number seems like it could be valid
 	 * @throws {Q_Exception_FailedValidation}
 	 */
-	static function signature ($throwIfInvalid = false)
+	static function signature ($throwIfInvalid = false, $data = null, $fieldKeys = null)
 	{
+		if (!isset($data)) {
+			$data = $_REQUEST;
+		}
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (!isset($secret)) {
 			return true;
 		}
-		$sgf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-		$invalid = false;
-		if (!Q_Request::special($sgf, null)) {
-			$invalid = true;
+		$invalid = true;
+		if (is_array($fieldKeys)) {
+			$ref = &$data;
+			foreach ($fieldKeys as $k) {
+				if (!isset($k)) {
+					break;
+				}
+				$ref2 = &$ref;
+				$ref = &$ref[$k];
+			}
+			if ($ref) {
+				$signature = $ref;
+				unset($ref2[$k]);
+				$calculated = Q_Utils::signature($data, $secret);
+				if ($calculated === $signature) {
+					$invalid = false;
+				} else { // try with null
+					$ref2[$k] = null;
+					$calculated = Q_Utils::signature($data, $secret);
+					if ($calculated === $signature) {
+						$invalid = false;
+					}
+				}
+			}
 		} else {
-			$req = $_REQUEST;
-			unset($req["Q.$sgf"]);
-			unset($req["Q_$sgf"]);
-			if (Q_Utils::signature($req, $secret) !== Q_Request::special($sgf, null)) {
-				$invalid = true;
+			if (is_string($fieldKeys)) {
+				$signature = $fieldKeys;
+			} else {
+				$sgf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
+				$signature = Q_Request::special($sgf, null, $data);
+			}
+			if ($signature) {
+				$invalid = false;
+				$req = $data;
+				unset($req["Q.$sgf"]);
+				unset($req["Q_$sgf"]);
+				if (Q_Utils::signature($req, $secret) !== $signature) {
+					$invalid = true;
+				}
 			}
 		}
 		if (!$invalid) {
@@ -331,7 +365,7 @@ class Q_Valid
 	/**
 	 * Convenience method to require certain fields to be present in an array,
 	 * and generate errors otherwise.
-	 * @param {array} $fields Array of strings or arrays naming fields that are required
+	 * @param {array} $fields Array of strings or nested arrays of strings, naming fields that are required
 	 * @param {array} [$source=$_REQUEST] Where to look for the fields
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception
 	 *    on the first violation, or add them to a list.
@@ -343,13 +377,6 @@ class Q_Valid
 	{
 		if (!isset($source)) {
 			$source = $_REQUEST;
-		}
-		if (is_string($fields)) {
-			$fields = func_get_args();
-			if (end($fields) === true) {
-				$throwIfMissing = true;
-				array_pop($fields);
-			}
 		}
 		$result = array();
 		foreach ($fields as $fieldname) {

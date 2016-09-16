@@ -30,7 +30,7 @@ class Q_Uri
 	 $source,
 	 $routePattern = null)
 	{
-		
+
 		if (empty($source)) {
 			return null;
 		}

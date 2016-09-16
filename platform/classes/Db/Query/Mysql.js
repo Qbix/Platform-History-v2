@@ -59,26 +59,24 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * Connects to one or more shard(s) as necessary.
 	 * @param callback {function} This function is called when the queries have all completed.
 	 *  It is passed the following arguments:
-	 *
 	 * * errors: an Object. If there were any errors, it will contain shardName: error pairs
 	 * * results: an array of results merged from all the shards (for SELECT queries)
 	 *    for INSERT queries results contains the value of LAST_INSERT_ID()
 	 * * fields: an array of fields merged from all the shards (for SELECT queries)
-	 *
 	 *  It is passed an object whose keys are the shard names and the values
 	 *  are arrays of [err, results, fields] as returned from the mysql module.
 	 * @method execute
-	 * @param {object} [options={}]
-	 *  You can override the following options:
-	 *
-	 * * "plain": defaults to false
-	 *    If true, returns array of plain object instead of instances
-	 * * "raw": defaults to false.
-	 *    If true, or if the query type is Db.Query.TYPE_RAW, the callback will be passed an object
- pairs representing the results returned
-	 *    from the mysql query on each shard. Note that the results array will contain raw objects
-	 *    of the form "{fieldName: fieldValue};", and not objects which have Db.Row mixed in.
-	 * * "queries": Manually specify the queries, to bypass the sharding.
+	 * @param {Object} [options={}] You can override the following options:
+	 * @param {boolean} [options.plain=false]
+	 *    If true, returns array of plain object instead of Db.Row instances
+	 * @param {boolean} [options.raw=false]
+	 *    If true, or if the query type is Db.Query.TYPE_RAW, the callback
+	 *    will be passed an object of pairs representing the results returned
+	 *    from the mysql query on each shard. Note that the results array will
+	 *    contain raw objects of the form "{fieldName: fieldValue};",
+	 *    and not objects which have Db.Row mixed in.
+	 * @param {Object} [options.queries=false]
+	 *    Manually specify the queries as {shardName: query}, to bypass the sharding.
 	 */
 	mq.execute = function(callback, options) {
 		options = options || {};
@@ -1224,7 +1222,7 @@ function applyHash(value, hash, len)
 			hashed = Q.normalize(value).substr(0, len);
 			break;
 		case 'md5':
-			hashed = Q.Crypto.md5(value).substr(0, len);
+			hashed = Q.Crypto.MD5(value).substr(0, len).toString();
 			break;
 		default:
 			throw new Q.Exception("Db.Query.Mysql: The hash " + hash + " is not supported");
@@ -1318,7 +1316,9 @@ function criteria_internal (query, criteria) {
 		criteria_list = [];
 		for (expr in criteria) {
 			value = criteria[expr];
-			if (value == null) {
+			if (value === undefined) {
+				// do not add this value to criteria
+			} else if (value == null) {
 				criteria_list.push( "ISNULL(" + expr + ")");
 			} else if (value && value.typename === "Db.Expression") {
 				Q.extend(query.parameters, value.parameters);
@@ -1327,41 +1327,39 @@ function criteria_internal (query, criteria) {
 				} else {
 					criteria_list.push( "" + expr + " = (" + value + ")");
 				}
-			} else {
-				if (/\W/.test(expr.substr(-1))) {
-					criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
-					query.parameters["_criteria_" + _valueCounter] = value;
-					++ _valueCounter;
-				} else if (Q.typeOf(value) === 'array') {
-					if (value.length) {
-						values = [];
-						for (i=0; i<value.length; ++i) {
-							values.push(":_criteria_" + _valueCounter);
-							query.parameters["_criteria_" + _valueCounter] = value[i];
-							++ _valueCounter;
-						}
-						criteria_list.push( "" + expr + " IN (" + values.join(',') + ")" );
-					} else {
-						criteria_list.push("FALSE"); // since value array is empty
-					}
-				} else if (value && value.typename === 'Db.Range') {
-					if (value.min != null) {
-						var c_min = value.includeMin ? ' >= ' : ' > ';
-						criteria_list.push( "" + expr + c_min + ":_criteria_" + _valueCounter );
-						query.parameters["_criteria_" + _valueCounter] = value.min;
+			} else if (/\W/.test(expr.substr(-1))) {
+				criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
+				query.parameters["_criteria_" + _valueCounter] = value;
+				++ _valueCounter;
+			} else if (Q.typeOf(value) === 'array') {
+				if (value.length) {
+					values = [];
+					for (i=0; i<value.length; ++i) {
+						values.push(":_criteria_" + _valueCounter);
+						query.parameters["_criteria_" + _valueCounter] = value[i];
 						++ _valueCounter;
 					}
-					if (value.max != null) {
-						var c_max = value.includeMax ? ' <= ' : ' < ';
-						criteria_list.push( "" + expr + c_max + ":_criteria_" + _valueCounter );
-						query.parameters["_criteria_" + _valueCounter] = value.max;
-						++ _valueCounter;
-					}
+					criteria_list.push( "" + expr + " IN (" + values.join(',') + ")" );
 				} else {
-					criteria_list.push(expr + " = :_criteria_" + _valueCounter);
-					query.parameters["_criteria_" + _valueCounter] = value;
+					criteria_list.push("FALSE"); // since value array is empty
+				}
+			} else if (value && value.typename === 'Db.Range') {
+				if (value.min != null) {
+					var c_min = value.includeMin ? ' >= ' : ' > ';
+					criteria_list.push( "" + expr + c_min + ":_criteria_" + _valueCounter );
+					query.parameters["_criteria_" + _valueCounter] = value.min;
 					++ _valueCounter;
 				}
+				if (value.max != null) {
+					var c_max = value.includeMax ? ' <= ' : ' < ';
+					criteria_list.push( "" + expr + c_max + ":_criteria_" + _valueCounter );
+					query.parameters["_criteria_" + _valueCounter] = value.max;
+					++ _valueCounter;
+				}
+			} else {
+				criteria_list.push(expr + " = :_criteria_" + _valueCounter);
+				query.parameters["_criteria_" + _valueCounter] = value;
+				++ _valueCounter;
 			}
 		}
 		criteria = criteria_list.join(" AND ");

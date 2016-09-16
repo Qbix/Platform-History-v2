@@ -12,6 +12,40 @@ var Websites = Q.Websites = Q.plugins.Websites = {
 
 };
 
+Websites.Presentation = {
+	handlers: {
+		invoke: function (preview) {
+			var ps = preview.state;
+			Q.Streams.get(ps.publisherId, ps.streamName, function () {
+				var className = 'Websites_slide_dialog';
+				var editable = this.testWriteLevel('edit');
+				if (editable) {
+					className += ' Websites_slide_editable'
+				}
+				var element = Q.Tool.setUpElement('div', 'Websites/slide', {
+					publisherId: ps.publisherId,
+					streamName: ps.streamName
+				});
+				var $dialog = Q.Dialogs.push({
+					title: this.fields.title,
+					content: element,
+					className: className,
+					apply: editable,
+					onActivate: function () {
+						if (editable) {
+							element.Q.tool.forEachChild('Streams/html', function () {
+								this.state.onFroalaEditor.add(function () {
+									this.focus();
+								}, this)
+							});
+						}
+					}
+				});
+			});
+		}
+	}
+};
+
 /**
  * Websites Tools
  * @module Websites-tools
@@ -56,7 +90,9 @@ Q.onInit.set(function () {
  * @constructor
  */
 Q.Tool.define({
-	"Websites/seo": "plugins/Websites/js/tools/seo.js"
+	"Websites/seo": "plugins/Websites/js/tools/seo.js",
+	"Websites/presentation": "plugins/Websites/js/tools/presentation.js",
+	"Websites/slide": "plugins/Websites/js/tools/slide.js"
 });
 
 Q.page('', function () {

@@ -75,10 +75,16 @@ function Streams_after_Users_User_saveExecute($params)
 				$stream->content = $values[$name];
 			}
 			$stream->save(); // this also inserts avatars
-			$stream->join(array(
+			$o = array(
 				'userId' => $user->id, 
 				'skipAccess' => true
-			));
+			);
+			$so = $p->get($name, "subscribe", array());
+			if ($so === false) {
+				$stream->join($o);
+			} else {
+				$stream->subscribe(array_merge($o, $so));
+			}
 		}
 		
 		// Save a greeting stream, to be edited

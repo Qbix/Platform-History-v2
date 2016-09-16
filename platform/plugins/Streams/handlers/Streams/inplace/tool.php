@@ -62,7 +62,7 @@ function Streams_inplace_tool($options)
 	switch ($inplaceType) {
 		case 'text':
 			$inplace['fieldInput'] = Q_Html::input($field, $content, array(
-				'placeholder' => Q::ifset($input, 'placeholder', null),
+				'placeholder' => Q::ifset($inplace, 'placeholder', null),
 				'maxlength' => $maxlength
 			));
 			$inplace['staticHtml'] = Q_Html::text($content);
@@ -99,5 +99,8 @@ function Streams_inplace_tool($options)
 	}
 	$toolOptions['inplace'] = $inplace;
 	$toolOptions['inplaceType'] = $options['inplaceType'];
+	Q_Response::addScript('plugins/Streams/js/tools/inplace.js');
+	Q_Response::addScript('plugins/Q/js/tools/inplace.js');
+	Q_Response::addStylesheet('plugins/Q/css/inplace.css');
 	return Q::tool("Q/inplace", $inplace);
 }

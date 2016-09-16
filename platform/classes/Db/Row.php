@@ -94,6 +94,7 @@ class Db_Row implements Iterator
 	 *  <li>
 	 *     <b>beforeSet_$name($value)</b>
 	 *     Called before the field named $name is set.
+	 *     (Any illegal characters for function names are replaced with underscores)
 	 *     Return <i>array($internal_name, $value)</i> of the field.
 	 *     Handy when changing the name of the field inside the database layer,
 	 *     as well as validating the value, etc.
@@ -101,6 +102,7 @@ class Db_Row implements Iterator
 	 *  <li>
 	 *     <b>afterSet_$name($value)</b>
 	 *     Called after the field named $name has been set.
+	 *     (Any illegal characters for function names are replaced with underscores)
 	 *  </li>
 	 *  <li>
 	 *     <b>afterSet($name, $value)</b>
@@ -931,18 +933,19 @@ class Db_Row implements Iterator
 	function __set ($name, $value)
 	{
 		$name_internal = $name;
-	
-		$callback = array($this, "beforeSet_$name");
+		$name_safe = preg_replace('/[^0-9a-zA-Z\_]/', '_', $name);
+		
+		$callback = array($this, "beforeSet_$name_safe");
 		if (is_callable($callback))
 			list ($name_internal, $value) = call_user_func($callback, $value);
 
 		if (!array_key_exists($name_internal, $this->fields)) {
-			$this->fieldsOriginal[$name_internal] = $value;
+			$this->fieldsOriginal[$name_internal] = null;
 		}
 		$this->fields[$name_internal] = $value;
 		$this->fieldsModified[$name_internal] = true;
 		
-		$callback = array($this, "afterSet_$name");
+		$callback = array($this, "afterSet_$name_safe");
 		if (is_callable($callback)) {
 			$value = call_user_func($callback, $value);
 		}
@@ -1951,7 +1954,7 @@ class Db_Row implements Iterator
 	 * @method retrieve
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
-	 *  Pass true here to throw an exception if the row is missing.
+	 *  Pass true here to fetch all fields or throw an exception if the row is missing.
 	 * @param {boolean} [$useIndex=false] If true, the primary key is used in searching. 
 	 *  An exception is thrown when some fields of the primary key are not specified
 	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query.
@@ -1963,12 +1966,11 @@ class Db_Row implements Iterator
 	 *   the same effect as array("query" => true)
 	 * @param {boolean|string} [$modifyQuery.begin] this will cause the query 
 	 *   to have .begin() a transaction which locks the row for update. 
-	 *   You should call .save(..., true) to unlock the row, otherwise other 
-	 *   database connections trying to access the row will be blocked.
-	 * @param {boolean} [$modifyQuery.rollbackIfMissing]
-	 *   If begin is true, this option determines whether to
+	 *   You should call .save(..., true) to commit the transaction, or else
+	 *   other database connections trying to access the row will be blocked.
+	 * @param {boolean} [$modifyQuery.rollbackIfMissing=false]
+	 *   If begin is true, this option determines whether to immediately
 	 *   rollback the transaction if the row we're trying to retrieve is missing.
-	 *   Defaults to false.
 	 * @param {boolean} [$modifyQuery.ignoreCache]
 	 *   If true, then call ignoreCache on the query
 	 * @param {boolean} [$modifyQuery.caching]

@@ -735,10 +735,11 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 			if (!class_exists('Q_Exception_DbQuery')) {
 				throw new Exception($e->getMessage() . " [query was: $sql]", -1);
 			}
+			// See http://php.net/manual/en/class.pdoexception.php#95812
 			throw new Q_Exception_DbQuery(array(
 				'sql' => $sql,
 				'msg' => $exception->getMessage()
-			));
+			), 'PDOException');
 		}
 		/**
 		 * @event Db/query/execute {after}

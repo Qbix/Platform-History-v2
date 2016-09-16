@@ -415,13 +415,16 @@ return array (
 	 */
 	function beforeSet_fresh($value)
 	{
+		if (!isset($value)) {
+			return array('fresh', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('fresh', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
 			throw new Exception('Non-integer value being assigned to '.$this->getTable().".fresh");
 		$value = intval($value);
-		if ($value < 0 or $value > 4294967295) {
+		if ($value < -2147483648 or $value > 2147483647) {
 			$json = json_encode($value);
 			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".fresh");
 		}
@@ -436,7 +439,7 @@ return array (
 	function maxSize_fresh()
 	{
 
-		return 4294967295;			
+		return 2147483647;			
 	}
 
 	/**
@@ -451,12 +454,12 @@ return array (
   array (
     0 => 'int',
     1 => '10',
-    2 => ' unsigned',
-    3 => true,
+    2 => '',
+    3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '0',
+  3 => NULL,
 );			
 	}
 

@@ -59,7 +59,7 @@ abstract class Users extends Base_Users
 	}
 	
 	/**
-	 * Get the suffix of the main community from the config, such as "Incorporated" or "LLC"
+	 * Get the suffix of the main community from the config, such as "Inc." or "LLC"
 	 * @return {string|null} The suffix of the main community for the installed app.
 	 */
 	static function communitySuffix()
@@ -830,9 +830,12 @@ abstract class Users extends Base_Users
 	 * @method register
 	 * @static
 	 * @param {string} $username The name of the user
-	 * @param {string} $identifier User identifier
+	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
+	 * @param {string} [$identifier.identifier] an email address or phone number
+	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 *   to store in the Users_Device table for sending notifications
 	 * @param {array|string} [$icon=array()] Array of filename => url pairs
-	 * @param {string} [$provider=null] Provider
+	 * @param {string} [$provider=null] Provider such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -856,7 +859,7 @@ abstract class Users extends Base_Users
 		/**
 		 * @event Users/register {before}
 		 * @param {string} username
-		 * @param {string} identifier
+		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @param {string} provider
 		 * @return {Users_User}
@@ -868,6 +871,24 @@ abstract class Users extends Base_Users
 
 		$during = 'register';
 
+		if (is_array($identifier)) {
+			reset($identifier);
+			switch (key($identifier)) {
+				case 'device':
+					$fields = array('deviceId', 'platform', 'version');
+					Q_Valid::requireFields($fields, $identifier, true);
+					$device = $identifier;
+					if (isset($identifier['identifier'])) {
+						$identifier = $identifier['identifier'];
+					}
+					break;
+				default:
+					throw new Q_Exception_WrongType(array(
+						'field' => 'identifier', 
+						'type' => 'an array with entry named "device"'
+					));
+			}
+		}
 		if (Q_Valid::email($identifier, $emailAddress)) {
 			$ui_identifier = $emailAddress;
 			$key = 'email address';
@@ -886,7 +907,10 @@ abstract class Users extends Base_Users
 		$user = false;
 		if ($provider) {
 			if ($provider != 'facebook') {
-				throw new Q_Exception_WrongType(array('field' => 'provider', 'type' => '"facebook"'));
+				throw new Q_Exception_WrongType(array(
+					'field' => 'provider', 
+					'type' => '"facebook"'
+				));
 			}
 			$facebook = Users::facebook();
 			if ($facebook) {
@@ -1024,18 +1048,23 @@ abstract class Users extends Base_Users
 				throw $e;
 			}
 		}
+		
+		if (!empty($device)) {
+			$device['userId'] = $user->id;
+			Users_Device::add($device);
+		}
 
 		/**
 		 * @event Users/register {after}
 		 * @param {string} username
-		 * @param {string} identifier
+		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @param {Users_User} user
 		 * @param {string} provider
 		 * @return {Users_User}
 		 */
 		$return = Q::event('Users/register', compact(
-			'username', 'identifier', 'icon', 'user', 'provider', 'options'
+			'username', 'identifier', 'icon', 'user', 'provider', 'options', 'device'
 		), 'after');
 
 		return $user;

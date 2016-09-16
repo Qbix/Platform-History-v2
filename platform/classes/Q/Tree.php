@@ -62,7 +62,7 @@ class Q_Tree
 				$keys = '["' . implode('"]["', $key_array) . '"]';
 				throw new Q_Exception_NotArray(compact('keys', 'key'));
 			}
-			if (!array_key_exists($key, $result)) {
+			if (!isset($key) or !array_key_exists($key, $result)) {
 				return $default;
 			}
 			if ($i == $args_count - 2) {

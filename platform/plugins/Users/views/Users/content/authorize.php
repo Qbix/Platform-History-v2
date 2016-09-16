@@ -1,13 +1,22 @@
 <div id="content">
 	<div id="Users_authorize_welcome">
 		<div>
-			Welcome to
-		</div>
-		<div>
-			<?php echo Q_Html::img($client->iconUrl('80.png'),  'user icon', 
+			<?php echo Q_Html::img($client->iconUrl('180.png'),  'user icon', 
 				array('class' => 'Users_app_icon')
 			); ?>
-			<span class="Users_app_name"><?php echo $client->username ?></span>
+			<h2 class="Users_app_name"><?php echo $client->displayName() ?></h2>
+			<div id="Users_authorize_what">
+				<div class="Users_authorize_community">
+					In the
+					<?php echo Q_Html::text(Users::communityName()) ?> 
+					community,
+				</div>
+				<?php foreach ($scope as $s): ?> 
+					<div class="Users_authorize_scope"> 
+						<?php echo Q_Html::text($scopes[$s]) ?> 
+					</div>
+				<?php endforeach ?>
+			</div>
 		</div>
 	</div>
 	<div id="Users_authorize_act" class="Q_big_prompt">
@@ -38,24 +47,30 @@
 <?php Q_Response::addScriptLine(<<<EOT
 
 	Q.page('Users/authorize', function () {
-		$('#Users_login').click(function () {
+		$('.Q_button').plugin('Q/clickable');
+		$('#Users_login').on(Q.Pointer.click, _login);
+		$('#Users_authorize').on(Q.Pointer.click, _authorize);
+		if (!Q.Users.loggedInUser) {
+			_login();
+		} else if (Q.Users.authorize.skip === 'authorize') {
+			_authorize();
+		}
+		
+		return function () {
+			$('#Users_authorize').off(Q.Pointer.click);
+			$('#Users_login').off(Q.Pointer.click);
+		};
+		
+		function _login() {
 			Q.plugins.Users.login({
+				noClose: true,
 				onSuccess: { 'Users.login': function (user, options, result, used) {
-					Q.loadUrl(window.location.href, {
-						onActivate: function () {
-							if (typeof result === 'string'
-							&& Q.Users.authorize.noTerms) {
-								// We can auto-authorize in this case.
-								$('#Users_authorize').click();
-							}
-						}
-					});
+					Q.handle(window.location.href);
 				}}
 			});
-			return false;
-		});
+		}
 		
-		$('#Users_authorize').click(function () {
+		function _authorize() {
 			var fields = {
 				authorize: 1
 			};
@@ -66,27 +81,22 @@
 				}
 				fields.agree = 'yes';
 			}
+			$('#Users_authorize').addClass('Q_working');
 			Q.each([
-				'client_id', 'redirect_uri', 'scope',
+				'client_id', 'redirect_uri',
 				'state', 'response_type'
 			], function (i, field) {
-				fields[field] = location.search.queryField(field);
+				fields[field] = Q.Users.authorize[field];
 			});
+			fields.scope = Q.Users.authorize.scope.join(' ');
 			Q.req(Q.info.url, 'url', function (err, response) {
-				setTimeout(function () {
-					location = Q.info.baseUrl;
-				}, 1000);
+
 			}, {
 				method: 'post',
 				fields: fields
 			});
 			return false;
-		});
-		
-		return function () {
-			$('#Users_authorize').unbind('click');
-			$('#Users_login').unbind('click');
-		};
+		}
 	}, 'Users/authorize');
 
 EOT

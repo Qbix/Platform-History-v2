@@ -46,7 +46,7 @@ Config.getAll = function () {
  * Gets the value of a configuration field
  * @method get
  * @param [keys=[]] {string|array} A key or an array of keys for traversing the configuration tree.
- * @param [def=null] {mixed} The value to return if the field is not found. Defaults to undefined.
+ * @param [def=undefined] {mixed} The value to return if the field is not found. Defaults to undefined.
  * @return {mixed} The configuration field if it is found, otherwise def or undefined.
  */
 Config.get = function (keys, def) {

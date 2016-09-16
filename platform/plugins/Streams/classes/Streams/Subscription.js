@@ -63,7 +63,7 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 							"^(?!(Users/)|(Streams/)).*/", 
 							"Streams/relatedTo", 
 							"Streams/chat/message"
-						], 
+						],
 						notifications: 0
 					}
 				);
@@ -83,7 +83,6 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 		if (!matched) {
 			return callback(null, []); // not subscribed to this message type
 		}
-		var match = true;
 		Streams.Rule.SELECT('*').where({
 			ofUserId: userId,
 			publisherId: stream.fields.publisherId,
@@ -107,7 +106,7 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 			p.run();
 			rules.forEach(function (rule) {
 				var o = rule.fields.ordinal;
-				var readyTime = new Date(rule.fields.readyTime);
+				var readyTime = rule.fields.readyTime;
 				try {
 					filter = rule.fields.filter ? JSON.parse(rule.fields.filter) : {};
 				} catch (e) {
@@ -115,49 +114,47 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 				}
 				var types = filter.types;
 				function _checkNotifications() {
-					if (notifications) {
-						// get last disconnection time
-						Streams.Message.SELECT('publisherId, streamName, type, sentTime')
-						.where({
-							publisherId: userId,
-							streamName: 'Streams/participating',
-							type: 'Streams/disconnected'
-						}).orderBy('sentTime', false)
-						.limit(1)
-						.execute(function(err, res) {
-							if (err) {
-								return p.fill(o)(err);
-							}
-							// NOTE: all Streams/participating for a given stream must be on the same shard
-							var timeOnline = res.length
-								? res.reduce(function(pv, cv) {
-									var cvd = new Date(cv.sentTime);
-									return pv > cvd ? pv : cvd;
-								}, new Date(res[0].sentTime))
-								: (readyTime ? readyTime : new Date(0));
-							// now check notifications since timeOnline
-							Streams.Notification.SELECT('COUNT(1) as count').where({
-								userId: userId,
-								"insertedTime >": Db.Mysql.toDateTime(timeOnline.getTime()),
-								publisherId: stream.fields.publisherId,
-								streamName: stream.fields.streamName,
-								type: msgType
-							}).execute(function (err, res) {
-								if (err) return p.fill(o)(err);
-								// to support counting in shards
-								var count = res.reduce(function(pv, cv) { 
-									return pv + Number(cv.count); 
-								}, 0);
-								if (count < notifications) {
-									_checkDelivery();
-								} else {
-									p.fill(o)();
-								}
-							}, {plain: true});
-						}, { plain: true });
-					} else {
-						_checkDelivery();
+					if (!notifications) {
+						return _checkDelivery();
 					}
+					// get last disconnection time
+					Streams.Message.SELECT('publisherId, streamName, type, sentTime')
+					.where({
+						publisherId: userId,
+						streamName: 'Streams/participating',
+						type: 'Streams/disconnected'
+					}).orderBy('sentTime', false)
+					.limit(1)
+					.execute(function(err, res) {
+						if (err) {
+							return p.fill(o)(err);
+						}
+						// NOTE: all Streams/participating for a given stream must be on the same shard
+						var timeOnline = res.length
+							? res.reduce(function(pv, cv) {
+								return pv > cv ? pv : cv;
+							}, res[0].sentTime)
+							: (readyTime ? readyTime : 0);
+						// now check notifications since timeOnline
+						Streams.Notification.SELECT('COUNT(1) as count').where({
+							userId: userId,
+							"insertedTime >": timeOnline,
+							publisherId: stream.fields.publisherId,
+							streamName: stream.fields.streamName,
+							type: msgType
+						}).execute(function (err, res) {
+							if (err) return p.fill(o)(err);
+							// to support counting in shards
+							var count = res.reduce(function(pv, cv) { 
+								return pv + Number(cv.count); 
+							}, 0);
+							if (count < notifications) {
+								_checkDelivery();
+							} else {
+								p.fill(o)();
+							}
+						}, {plain: true});
+					}, { plain: true });
 				}
 				function _checkDelivery() {
 					var deliver;
@@ -168,22 +165,31 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 					}
 					p.fill(o)(null, deliver);
 				}
-				if ((!types || !types.length || types.indexOf(msgType) >= 0)
-				&& readyTime < new Date()) {
-					// type and readyTime filters passed
-					var labels = filter.labels;
-					if (labels && Q.typeOf(labels) === "array" && labels.length) {
-						Users.Contact.SELECT('*').where({
-							userId: userId,
-							contactUserId: publisherId,
-							label: labels
-						}).execute(function (err, contacts) {
-							if (err) return p.fill(o)(err);
-							if (contacts.length) _checkNotifications();
-							else p.fill(o)();
-						});
-					} else _checkNotifications();
-				} else p.fill(o)();
+				var notFound = (
+					types && Q.typeOf(types) === 'array'
+					&& types.length && types.indexOf(msgType) < 0
+				);
+				if (notFound || (new Date(readyTime) > new Date())) {
+					// type and readyTime filters not passed
+					return p.fill(o)();
+				}					
+				var labels = filter.labels;
+				if (!labels || Q.typeOf(labels) !== "array" || !labels.length) {
+					return _checkNotifications();
+				}
+				Users.Contact.SELECT('*').where({
+					userId: userId,
+					contactUserId: publisherId,
+					label: labels
+				}).execute(function (err, contacts) {
+					if (err) {
+						return p.fill(o)(err);
+					}
+					if (!contacts.length) {
+						return p.fill(o)();
+					}
+					_checkNotifications();
+				});
 			});
 		});
 	});

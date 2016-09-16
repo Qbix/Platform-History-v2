@@ -31,32 +31,37 @@ class Q_Utils
 			ksort($data);
 			$data = http_build_query($data);
 		}
-		return self::hmac('md5', $data, $secret);
+		return self::hmac('sha1', $data, $secret);
 	}
 
 	/**
 	 * Sign the data
 	 * @method sign
 	 * @static
-	 * @param {array} $data
-	 * @param {array} $field_keys
+	 * @param {array} $data The array of data
+	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
 	 * @return {array}
 	 */
-	static function sign($data, $field_keys = null) {
+	static function sign($data, $fieldKeys = null) {
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (isset($secret)) {
-			if (!$field_keys) {
+			if (!$fieldKeys) {
 				$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-				$field_keys = array("Q.$sf");
+				$fieldKeys = array("Q.$sf");
+			}
+			if (is_string($fieldKeys)) {
+				$fieldKeys = array($fieldKeys);
 			}
 			$ref = &$data;
-			for ($i=0, $c = count($field_keys); $i<$c-1; ++$i) {
-				if (!array_key_exists($field_keys[$i], $ref)) {
-					$ref[ $field_keys[$i] ] = array();
+			for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
+				if (!array_key_exists($fieldKeys[$i], $ref)) {
+					$ref[ $fieldKeys[$i] ] = array();
 				}
-				$ref = &$ref[ $field_keys[$i] ];
+				$ref = &$ref[ $fieldKeys[$i] ];
 			}
-			$ref[ end($field_keys) ] = Q_Utils::signature($data, $secret);
+			$ef = end($fieldKeys);
+			unset($ref[$ef]);
+			$ref[$ef] = Q_Utils::signature($data, $secret);
 		}
 		return $data;
 	}
@@ -195,7 +200,8 @@ class Q_Utils
 	}
 	
 	/**
-	 * Hashes text in a standard way.
+	 * Hashes text in a standard way. It uses md5, which is fast and irreversible,
+	 * so it's good for things like indexes, but not for obscuring information.
 	 * @method hash
 	 * @static
 	 * @param {string} $test

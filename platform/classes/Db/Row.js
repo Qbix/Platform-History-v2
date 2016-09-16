@@ -92,12 +92,13 @@ function Row(fields, retrieved /* false */) {
 		return function Db_Row_setter(x) {
 			var row = this._row;
 			// we shall skip beforeSet_xxx during shards split process to get exact copy of the data
-			if (!_split && row["beforeSet_" + k]
-			&& (typeof row["beforeSet_" + k] === "function")) {
+			var safe = k.replace(/[^0-9a-zA-Z\_]/, '_');
+			if (!_split && row["beforeSet_" + safe]
+			&& (typeof row["beforeSet_" + safe] === "function")) {
 				// NOTE: this is synchronous, we wouldn't be able to do any async,
 				// and since Node is a single thread, we shouldn't do I/O at all in them!
 				// This should be documented.
-				var result = row["beforeSet_" + k].call(row, x, row._fields);
+				var result = row["beforeSet_" + safe].call(row, x, row._fields);
 				if (result !== undefined) {
 					x = result;
 				}
@@ -160,6 +161,7 @@ function Row(fields, retrieved /* false */) {
 	 * @param {boolean} [commit=false] If this is TRUE, then the current transaction is committed right after the save.
 	 *  Use this only if you started a transaction before.
 	 * @param {function} [callback=null] This function is called when the queries have all completed.
+	 *  Its this object is the same as the one the save method is called on.
 	 *  It is passed the one optional argument:
 	 *  errors: an Object. If there were any errors, it will be passed error object as returned from query.execute. If successful, it will be passed nothing.
 	 */
@@ -295,7 +297,7 @@ function Row(fields, retrieved /* false */) {
 	};
 	
 	/**
-	 * Saves the row in the database.
+	 * Retrieves a row from the database.
 	 * If object has methods beforeRetrieve, beforeRetrieveExecute or afterRetrieveExecute,
 	 * they may be triggered during this operation.
 	 * @method retrieve

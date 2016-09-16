@@ -21,14 +21,14 @@ function Users_authorize_post()
 	$client_id = $_REQUEST['client_id'];
 	$redirect_url = $_REQUEST['redirect_uri'];
 	$state = $_REQUEST['state'];
-	// for now we ignore the scope requested and always authorize "user"
-
+	$scope = implode(' ', Users_OAuth::requestedScope(true));
+	
 	$oa = new Users_OAuth();
 	$oa->client_id = $client_id;
 	$oa->userId = $user->id;
 	$oa->state = $state;
 	if ($oa->retrieve()) {
-		if ($oa->scope !== 'user' || $oa->redirect_uri !== $redirect_url) {
+		if ($oa->scope !== $scope || $oa->redirect_uri !== $redirect_url) {
 			throw new Q_Exception("Different parameters were requested with the same state string before", 'state');
 		}
 		Users::$cache['oAuth'] = $oa;
@@ -37,7 +37,7 @@ function Users_authorize_post()
 	$duration_name = Q_Config::expect('Users', 'authorize', 'duration');
 	$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
 	$access_token = Users::copyToNewSession($duration);
-	$oa->scope = 'user'; // for now the scope of authorization is always "user"
+	$oa->scope = $scope;
 	$oa->redirect_uri = $redirect_url; // just saving it
 	$oa->access_token = $access_token; // the session token
 	$oa->token_expires_seconds = $duration; // session actually expires after $duration seconds of inactivity

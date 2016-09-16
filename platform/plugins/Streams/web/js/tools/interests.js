@@ -109,7 +109,8 @@ Q.Tool.define("Streams/interests", function (options) {
 					var parts = interestTitle.split(': ');
 					var category = parts[0];
 					var title = parts[1];
-					var $expandable = $('#Q_expandable_'+Q.normalize(category));
+					var id = 'Q_expandable_'+Q.normalize(category);
+					var $expandable = $('#' + tool.prefix + id);
 					var $content = $expandable.find('.Q_expandable_content');
 					if (!$expandable.length) {
 						continue;
@@ -189,18 +190,21 @@ Q.Tool.define("Streams/interests", function (options) {
 					revealingNewInterest = true;
 					var parentElement = tool.element.parentNode;
 					var toolId = tool.id;
-					tool.remove();
+					Q.Tool.remove(tool.element);
 					$(Q.Tool.setUpElement('div', 'Streams/interests', toolId))
 					.appendTo(parentElement)
 					.activate(function () {
-						var tool = Q.Tool.byId('Q_expandable_' + Q.normalize(category));
-						tool.expand({
-							scrollToElement: tool.$('.Streams_interests_other')
+						var id = 'Q_expandable_' + Q.normalize(category);
+						this.child(id).expand({
+							scrollToElement: tool.$('.Streams_interests_other')[0]
 						}, function () {
 							revealingNewInterest = false;
 						});
 					});
-				}, {subscribe: true});
+				}, {
+					subscribe: true,
+					quiet: false
+				});
 			});
 		var $unlisted = $('<div />')
 			.addClass("Streams_interests_unlisted")
@@ -284,47 +288,70 @@ Q.Tool.define("Streams/interests", function (options) {
 			var image = val ? 'clear' : 'filter';
 			if (image != lastImage) {
 				var src = Q.url('plugins/Q/img/white/'+image+'.png');
-				$this.css('background-image', 'url('+src+')')
+				$this.css({
+					'background-image': 'url('+src+')',
+					'background-position': '100% 50%',
+					'background-repeat': 'no-repeat'
+				});
 				lastImage = image;
 			}
 			if (val) {
-				tool.$('.Q_expandable_tool').hide();
-				tool.$('.Q_expandable_tool h3').hide();
+				var showElements = [];
 				tool.$('.Streams_interest_sep').html(' ');
 				Q.each(allInterests, function (interest, ids) {
 					for (var id in ids) {
 						var $span = $('#'+id);
 						if (!$span.length) continue;
 						var matched = false;
-						var parts = interest.split(' ');
-						var category = parts[0];
-						var pl = parts.length;
-						for (var i=0; i<pl; ++i) {
-							if (val === parts[i].substr(0, len).toLowerCase()) {
-								matched = true;
+						var parts1 = val.split(' ');
+						var parts2 = interest.split(' ');
+						var pl1 = parts1.length;
+						var pl2 = parts2.length;
+						for (var i1=0; i1<pl1; ++i1) {
+							matched = false;
+							for (var i2=0; i2<pl2; ++i2) {
+								var p1 = parts1[i1];
+								var p2 = parts2[i2].substr(0, p1.length).toLowerCase();
+								if (p1 === p2) {
+									matched = true;
+									break;
+								}
+							}
+							if (matched === false) {
 								break;
 							}
 						}
 						if (matched) {
 							$span.show();
-							$span.prevAll('h3').eq(0).show();
 							var $expandable = $span.closest('.Q_expandable_tool');
-							$expandable.show();
+							var $h3 = $span.prevAll('h3');
+							showElements.push($expandable[0]);
+							showElements.push($h3[0]);
+							!$expandable.is(":visible") && $expandable.show();
+							!$h3.is("visible") && $h3.show();
 							$expandable[0].Q("Q/expandable").expand({
 								autoCollapseSiblings: false,
 								scrollContainer: false
 							});
-							existing[$span.data('category')] = true;
+							existing[$span.data('category')] = interest;
 						} else {
 							$span.hide();
 						}
+					}
+				});
+				tool.$('.Q_expandable_tool')
+				.add(tool.$('.Q_expandable_tool h3'))
+				.each(function () {
+					if (showElements.indexOf(this) < 0) {
+						$(this).is(":visible") && $(this).hide();
 					}
 				});
 				
 				var count = 0;
 				$select.empty();
 				Q.each(Interests.all[state.communityId], function (category) {
-					if (existing[category]) {
+					if (existing[category]
+					&& Q.normalize(existing[category]) === Q.normalize(val)) {
 						return;
 					}
 					$('<option />', { value: category })

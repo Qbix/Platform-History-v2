@@ -17,7 +17,8 @@
 		"nodemailer-sendmail-transport": "1.x",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
-		"apnagent": "1.x.x"
+		"apn": "1.x.x",
+		"crypto-js": "3.x.x"
 	},
 	"repository": {
 	  "type": "git",

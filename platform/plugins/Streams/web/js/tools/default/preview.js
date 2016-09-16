@@ -26,11 +26,16 @@
  *         @param {String} [options.templates.edit.fields.alt]
  *         @param {String} [options.templates.edit.fields.titleClass]
  *         @param {String} [options.templates.edit.fields.titleTag]
+ *   @param {Q.Event} [options.onInvoke] onInvoke is an event to execute during Q.Pointer.fastclick
  */
 Q.Tool.define("Streams/default/preview", "Streams/preview",
 function _Streams_default_preview(options, preview) {
-	this.preview = preview;
-	preview.state.onRefresh.add(this.refresh.bind(this));
+	var tool = this;
+	tool.preview = preview;
+	preview.state.onRefresh.add(tool.refresh.bind(this));
+	$(tool.element).on(Q.Pointer.fastclick, function () {
+		Q.handle(tool.state.onInvoke, tool, [preview]);
+	});
 },
 
 {
@@ -44,7 +49,8 @@ function _Streams_default_preview(options, preview) {
 			name: 'Streams/default/preview/edit',
 			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
 		}
-	}
+	},
+	onInvoke: new Q.Event()
 },
 
 {

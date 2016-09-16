@@ -1195,7 +1195,7 @@ Q.handle = function _Q_handle(callables, context, args) {
 		}
 		return count;
 	 case 'object':
-		for (k in callables) {
+		for (var k in callables) {
 			result = Q.handle(callables[k], context, args);
 			if (result === false) return false;
 			count += result;
@@ -1570,7 +1570,12 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Q.typeOf(x) === 'array') {
-		return Array.prototype.slice.call(x, 0);
+		var result = Array.prototype.slice.call(x, 0);
+		var keys = Object.keys(x);
+		for (var i=0, l=keys.length; i<l; ++i) {
+			result[keys[i]] = x[keys[i]];
+		}
+		return result;
 	}
 	if (x && typeof x.copy === 'function') {
 		return x.copy();
@@ -2096,8 +2101,8 @@ Q.listen = function _Q_listen(options, callback) {
 /**
  * This should be called from Q.inc.js
  * @method init
- * @param {object} app An object that MUST contain one key:
- * * DIR: the directory of the app
+ * @param {Object} app An object that MUST contain one key:
+ * @param {Object} app.DIR the directory of the app
  * @param {boolean} [notListen=false] Indicate wheather start http server. Useful for forking parallel processes.
  * @throws {Q.Exception} if app is not provided or does not contain DIR field
  */
@@ -2126,11 +2131,11 @@ Q.init = function _Q_init(app, notListen) {
 		Q.PS = ';';
 	}
 	/**
-	 * Application data
+	 * App data for your scripts
 	 * @property app
 	 * @type object
 	 */
-	Q.app = app;
+	Q.app = Q.copy(app);
 	
 	//
 	// constants
@@ -2196,8 +2201,8 @@ Q.init = function _Q_init(app, notListen) {
 		Q[k] = Q_dir  + '/' + dirs[k];
 	}
 	for (k in dirs) {
-		if (!(k in app)) {
-			app[k] = app.DIR  + '/' + dirs[k];
+		if (!(k in Q.app)) {
+			Q.app[k] = Q.app.DIR  + '/' + dirs[k];
 		}
 	}
 	
@@ -2257,7 +2262,7 @@ Q.init = function _Q_init(app, notListen) {
     * @property Crypto
     * @type {object}
     */
-   Q.Crypto = require('./Q/Crypto');
+	Q.Crypto = require('./Q/Crypto');
 	//
 	// set things up
 	//
@@ -2270,7 +2275,11 @@ Q.init = function _Q_init(app, notListen) {
 	 */
 	Q.Utils = require('./Q/Utils');
 	Q.Bootstrap.configure(function (err) {
-		if (err) process.exit(2); // if run as child Q.Bootstrap.configure returns errors in callback
+		if (err) {
+			// if run as child Q.Bootstrap.configure returns errors in callback
+			process.exit(2);
+		}
+		Q.app.name = Q.Config.expect(["Q", "app"]);
 		Q.Bootstrap.loadPlugins(function () {
 			Q.Bootstrap.loadHandlers(function () {
 				console.log(typeof notListen === "string" ? notListen : 'Q platform initialized!');
@@ -2746,7 +2755,9 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 	}
 
 	if (typeof message !== "string") {
-		if (message instanceof Error
+		if (!message) {
+			message = JSON.stringify(message);
+		} else if (message instanceof Error
 		|| (message.fileName && message.stack)) {
 			var error = message;
 			message = error.name + ": " + error.message
@@ -2937,16 +2948,19 @@ Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 };
 
 /**
- * Gets a param from a string, which is usually the location.search or location.hash
+ * Get or set querystring fields from a string, usually from location.search or location.hash
  * @method queryField
- * @param {String} name The name of the field
- * @param {String} value Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
- * @return {String} the value of the field in the source, or if value was not undefined, the resulting querystring
+ * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned.
+ * @param {String} [value] Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
+ * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring. Finally, if 
  */
 Sp.queryField = function Q_queryField(name, value) {
 	var what = this;
-	var prefixes = ['#!', '#', '?', '!'], count = prefixes.length, prefix = '', i, l, p, keys, parsed;
-	for (var i=0; i<count; ++i) {
+	var prefixes = ['#!', '#', '?', '!'];
+	var count = prefixes.length;
+	var prefix = '';
+	var i, l, p, keys, parsed;
+	for (i=0; i<count; ++i) {
 		l = prefixes[i].length;
 		p = this.substring(0, l);
 		if (p == prefixes[i]) {
@@ -2955,9 +2969,18 @@ Sp.queryField = function Q_queryField(name, value) {
 			break;
 		}
 	}
-	if (typeof name === 'object') {
+	if (Q.isArrayLike(name)) {
+		var ret = {}, keys = [];
+		var parsed = Q.parseQueryString(what, keys);
+		for (i=0, l=name.length; i<l; ++i) {
+			if (name[i] in parsed) {
+				ret[name[i]] = parsed[name[i]];
+			}
+		}
+		return ret;
+	} else if (Q.isPlainObject(name)) {
 		var result = what;
-		Q.each(value, function (key, value) {
+		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
 	} else if (value === undefined) {

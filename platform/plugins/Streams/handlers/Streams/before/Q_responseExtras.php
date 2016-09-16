@@ -29,6 +29,9 @@ function Streams_before_Q_responseExtras()
 			'adminLevel' => Streams::$ADMIN_LEVEL['invite']
 		);
 		Q_Response::setScriptData('Q.plugins.Streams.defaults', $defaults);
+		if ($froalaKey = Q_Config::get('Streams', 'froala', 'key', null)) {
+			Q_Response::setScriptData('Q.plugins.Streams.froala.key', $froalaKey);
+		}
 	}
 	Q_Response::addStylesheet("plugins/Streams/css/Streams.css");
 }

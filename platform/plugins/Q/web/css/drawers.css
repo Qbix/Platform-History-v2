@@ -10,3 +10,7 @@
 	z-index: 99999;
 	cursor: pointer;
 }
+
+.Q_drawers_drawer {
+	box-sizing: border-box;
+}

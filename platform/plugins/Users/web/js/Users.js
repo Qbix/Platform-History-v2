@@ -499,7 +499,7 @@ Users.login = function(options) {
 	
 	Users.login.occurring = true;
 	
-	if (!o.using.indexOf('native') >= 0) {
+	if (o.using.indexOf('native') < 0) {
 		_doLogin();
 	} else {
 		$.fn.plugin.load('Q/dialog', _doLogin);
@@ -845,24 +845,25 @@ Users.batchFunction.functions = {};
 Q.onActivate.set(function (elem) {
 	$(elem || document).off('click.Users').on('click.Users', 'a', function (e) {
 		var href = $(this).attr('href');
-		if (Users.requireLogin && Users.requireLogin[href]) {
-			if (Users.requireLogin[href] === 'facebook') {
-				if (!Users.connected.facebook) {
-					// note: the following may automatically log you in
-					// if you authorized this app with facebook
-					// and you are already logged in with facebook.
-					Users.login({
-						'using': 'facebook',
-						onSuccess: href
-					});
-					e.preventDefault();
-				}
-			} else if (Users.requireLogin[href] === true) {
+		if (!Users.requireLogin || !Users.requireLogin[href]) {
+			return;
+		}
+		if (Users.requireLogin[href] === 'facebook') {
+			if (!Users.connected.facebook) {
+				// note: the following may automatically log you in
+				// if you authorized this app with facebook
+				// and you are already logged in with facebook.
 				Users.login({
+					'using': 'facebook',
 					onSuccess: href
 				});
 				e.preventDefault();
 			}
+		} else if (Users.requireLogin[href] === true) {
+			Users.login({
+				onSuccess: href
+			});
+			e.preventDefault();
 		}
 	});
 }, 'Users');
@@ -1486,9 +1487,13 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
 	var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
 	dialogSlot.append(step1_div).append(step2_div);
-	dialog.append(titleSlot).append(dialogSlot).prependTo(dialogContainer);
-	dialog.plugin('Q/dialog', {
+	login_setupDialog.dialog = dialog;
+	dialog.append(titleSlot)
+	.append(dialogSlot)
+	.prependTo(dialogContainer)
+	.plugin('Q/dialog', {
 		alignByParent: true,
+		fullscreen: false,
 		beforeLoad: function()
 		{
 			$('#Users_login_step1').css('opacity', 1).nextAll().hide();
@@ -1514,8 +1519,6 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 			login_setupDialog.dialog = null;
 		}
 	});
-	
-	login_setupDialog.dialog = dialog;
 
 	function hideForm2() {
 		if (_submitting) {
@@ -1627,6 +1630,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 	dialog.append(titleSlot).append(dialogSlot).prependTo(options.dialogContainer);
 	dialog.plugin('Q/dialog', {
 		alignByParent: true,
+		fullscreen: false,
 		beforeLoad: function()
 		{
 			$('input[type!=hidden]', dialog).val('');
@@ -1828,26 +1832,11 @@ Q.beforeInit.add(function _Users_beforeInit() {
 		throttle: 'Users.get'
 	});
 
-}, 'Users');
-
-Q.onInit.add(function () {
-	if (Q.Users.loggedInUser
-	&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
-	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
-		Q.nonce = Q.cookie('Q_nonce');
-	}
-	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
-    
-	if (Q.plugins.Users.facebookApps[Q.info.app]
-	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
-		Users.initFacebook();
-	}
-	
 	Users.lastSeenNonce = Q.cookie('Q_nonce');
 	
 	Q.Users.login.options = Q.extend({
 		onCancel: new Q.Event(),
-		onSuccess: new Q.Event(function (user, options) {
+		onSuccess: new Q.Event(function Users_login_onSuccess(user, options) {
 			// default implementation
 			if (user) {
 				// the user changed, redirect to their home page
@@ -1892,6 +1881,21 @@ Q.onInit.add(function () {
 	Q.Users.prompt.options = Q.extend({
 		dialogContainer: 'body'
 	}, Q.Users.prompt.options, Q.Users.prompt.serverOptions);
+
+}, 'Users');
+
+Q.onInit.add(function () {
+	if (Q.Users.loggedInUser
+	&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
+	    Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
+		Q.nonce = Q.cookie('Q_nonce');
+	}
+	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
+    
+	if (Q.plugins.Users.facebookApps[Q.info.app]
+	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
+		Users.initFacebook();
+	}
 }, 'Users');
 
 Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler () {
@@ -1973,5 +1977,133 @@ Users.onLoginLost = new Q.Event(function () {
 });
 Users.onConnected = new Q.Event();
 Users.onConnectionLost = new Q.Event();
+
+/**
+ * Some methods related to Users.Device
+ * @class Users.Device
+ */
+Users.Device = {
+	senderId: null,
+	onNotification: new Q.Event()
+};
+
+Q.onReady.add(function () {
+	if (!Q.info.isCordova || !window.PushNotification) {
+	  return;
+	}
+	var push = PushNotification.init({
+	    android: {
+			senderID: Q.Users.Device.senderId
+		},
+		browser: {
+			pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+		},
+		ios: {
+			alert: true,
+			badge: true,
+			sound: true
+		},
+		windows: {}
+	});
+	push.on('registration', function(data) {
+		var deviceId = data.registrationId;
+		localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
+		if (Q.Users.loggedInUser) {
+			_registerDevice();
+		}
+	});
+	push.on('notification', function(data) {
+		Users.onNotification.handle(data);
+	});
+	push.on('error', function(e) {
+		console.log("ERROR", e);
+	});
+	Users.login.options.onSuccess.set(function () {
+		_registerDevice();
+	}, 'Users.PushNotification');
+	Users.logout.options.onSuccess.set(function() {
+		PushNotification.setApplicationBadgeNumber(0);
+	}, 'Users.PushNotifications');
+	function _registerDevice() {
+		var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+		Q.req('Users/device', function () {
+			debugger;
+		}, {
+			method: 'post',
+			fields: {
+				deviceId: deviceId
+			}
+		});
+	}
+});
+
+Q.page('', function () {
+	if (!location.hash.queryField('Q.Users.oAuth')) {
+		return;
+	}
+	var fieldNames = [
+		'response_type', 'token_type', 'access_token',
+		'expires_in', 'scope', 'state', 'Q.Users.oAuth'
+	];
+	var fields = location.hash.queryField(fieldNames);
+	var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+	if (deviceId) {
+		fields.deviceId = deviceId;
+	}
+	Q.req('Users/oAuth', function () {
+		debugger;
+	}, {
+		method: 'post',
+		fields: fields
+	});
+}, 'Users');
+
+/**
+ * Some replacements for Q.Socket methods, use these instead.
+ * They implement logic involving sockets, users, sessions, devices, and more.
+ * Everything goes through the "Users" namespace in socket.io
+ * @class Users.Socket
+ */
+Users.Socket = {
+	/**
+	 * Connects a socket, and stores it in the list of connected sockets.
+	 * But it also sends a "Users.session" message upon socket connection,
+	 * to tell connect the session id to the socket on the back end.
+	 * @static
+	 * @method connect
+	 * @param {String} url The url of the socket.io node to connect to
+	 * @param {Function} callback When a connection is made, receives the socket object
+	 */
+	connect: function _Users_Socket_connect(url, callback) {
+		Q.Socket.connect('Users', url, function (socket) {
+			Q.loadNonce(function () {
+				socket.socket.emit('Users/session', Q.sessionId(), Q.clientId());
+			});
+		});
+	},
+	
+	/**
+	 * Returns a socket, if it was already connected, or returns undefined
+	 * @static
+	 * @method get
+	 * @param url {String} The url where socket.io is listening. If it's empty, then returns all matching sockets.
+	 * @return {Q.Socket}
+	 */
+	get: function _Users_Socket_get(url) {
+		return Q.Socket.get('Users', url);
+	},
+	
+	/**
+	 * Returns Q.Event that occurs on some socket event coming from socket.io
+	 * through the Users namespace
+	 * @event onEvent
+	 * @param {String} name the name of the event
+	 * @return {Q.Event}
+	 */
+	onEvent: function (name) {
+		return Q.Socket.onEvent('Users', null, name);
+	}
+
+};
 
 })(Q, jQuery);

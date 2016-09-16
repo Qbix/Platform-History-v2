@@ -15,7 +15,7 @@
  *   @param {String} [options.streamName] Either this or "stream" is required. Name of the stream to which the others are related
  *   @param {String} [options.tag="div"] The type of element to contain the preview tool for each related stream.
  *   @param {Q.Streams.Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
- *   @param {string} [options.relationType=null] The type of the relation.
+ *   @param {String} options.relationType=null The type of the relation.
  *   @param {Boolean} [options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
@@ -38,7 +38,10 @@ function _Streams_related_tool (options)
 	var state = this.state;
 	if ((!state.publisherId || !state.streamName)
 	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
-		throw new Q.Error("Streams/related tool: missing options.stream");
+		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
+	}
+	if (!state.relationType) {
+		throw new Q.Error("Streams/related tool: missing relationType");
 	}
 
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
@@ -102,6 +105,7 @@ function _Streams_related_tool (options)
 				var rc = tool.state.refreshCount;
 				var preview = Q.Tool.from(element, 'Streams/preview');
 				var ps = preview.state;
+				tool.integrateWithTabs([element], true);
 				preview.state.beforeCreate.set(function () {
 					// workaround for now
 					if (tool.state.refreshCount > rc) {
@@ -181,6 +185,7 @@ function _Streams_related_tool (options)
 			}
 		}
 		
+		tool.previewElements = {};
 		var elements = [];
 		Q.each(result.relations, function (i) {
 			if (!this.from) return;
@@ -191,14 +196,26 @@ function _Streams_related_tool (options)
 				tff.type, 
 				this.weight
 			);
-			$(element).addClass('Streams_related_stream');
 			elements.push(element);
+			$(element).addClass('Streams_related_stream');
+			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 			$container.append(element);
 		});
-		Q.activate(tool.element, function () {
-			tool.integrateWithTabs(elements);
-			tool.state.onRefresh.handle.call(tool);
-		});
+		var i=0;
+		setTimeout(function _activatePreview() {
+			var element = elements[i++];
+			if (!element) {
+				if (tool.tabs) {
+					tool.tabs.refresh();
+				}
+				tool.state.onRefresh.handle.call(tool);
+				return;
+			}
+			Q.activate(element, null, function () {
+				tool.integrateWithTabs([element], true);
+				setTimeout(_activatePreview, 0);
+			});
+		}, 0);
 		// The elements should animate to their respective positions, like in D3.
 
 	}, "Streams/related"),
@@ -335,7 +352,7 @@ function _Streams_related_tool (options)
 	 * @param elements
 	 *  The elements of the tools representing the related streams
 	 */
-	integrateWithTabs: function (elements) {
+	integrateWithTabs: function (elements, skipRefresh) {
 		var id, tabs, i;
 		var tool = this;
 		var state = tool.state;
@@ -346,38 +363,50 @@ function _Streams_related_tool (options)
 			}
 		}
 		var t = tool;
-		do {
-			tabs = tool.tabs = t.sibling('Q/tabs');
-			if (tabs) {
-				break;
-			}
-		} while (t = t.parent());
-		if (tabs) {
-			var $composer = tool.$('.Streams_related_composer');
-			$composer.addClass('Q_tabs_tab');
-			Q.each(elements, function (i) {
-				var element = elements[i];
-				var preview = Q.Tool.from(element, 'Streams/preview');
-				var key = preview.state.onRefresh.add(function () {
-					var value = state.tabs.call(tool, preview, tabs);
-					var attr = value.isUrl() ? 'href' : 'data-name';
-					elements[i].addClass("Q_tabs_tab")
-						.setAttribute(attr, value);
-					if (!tabs.$tabs.is(element)) {
-						tabs.$tabs = tabs.$tabs.add(element);
-					}
-					var onLoad = preview.state.onLoad;
-					if (onLoad) {
-						onLoad.add(function () {
-							// all the related tabs have loaded, process them
-							tabs.refresh();
-						});
-					}
-					preview.state.onRefresh.remove(key);
-				});
+		if (!tool.tabs) {
+			do {
+				tool.tabs = t.sibling('Q/tabs');
+				if (tool.tabs) {
+					break;
+				}
+			} while (t = t.parent());
+		}
+		if (!tool.tabs) {
+			return;
+		}
+		var tabs = tool.tabs;
+		var $composer = tool.$('.Streams_related_composer');
+		$composer.addClass('Q_tabs_tab');
+		Q.each(elements, function (i) {
+			var element = this;
+			element.addClass("Q_tabs_tab");
+			var preview = Q.Tool.from(element, 'Streams/preview');
+			var key = preview.state.onRefresh.add(function () {
+				var value = state.tabs.call(tool, preview, tabs);
+				var attr = value.isUrl() ? 'href' : 'data-name';
+				element.setAttribute(attr, value);
+				if (!tabs.$tabs.is(element)) {
+					tabs.$tabs = tabs.$tabs.add(element);
+				}
+				var onLoad = preview.state.onLoad;
+				if (onLoad) {
+					onLoad.add(function () {
+						// all the related tabs have loaded, process them
+						tabs.refresh();
+					});
+				}
+				preview.state.onRefresh.remove(key);
 			});
+		});
+		if (!skipRefresh) {
 			tabs.refresh();
 		}
+	},
+	previewElement: function (publisherId, streamName) {
+		return Q.getObject([publisherId, streamName], this.previewElements);
+	},
+	previewTool: function (publisherId, streamName) {
+		return Q.getObject([publisherId, streamName, 'Q', 'tool'], this.previewElements);
 	},
 	Q: {
 		beforeRemove: function () {

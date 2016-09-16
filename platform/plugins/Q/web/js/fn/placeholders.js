@@ -77,6 +77,10 @@ function () {
 				display: display
 			}).addClass('Q_placeholders_container');
 			var props = {};
+			$this.css({
+				width: '100%',
+				height: '100%'
+			});
 			$this.hide(); // to get percentage values, if any, for margins & padding
 			Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
 				props['padding-'+pos] = $this.css('padding-'+pos);

@@ -819,7 +819,7 @@ Q.Layout = {
 						if (Q.info.platform == 'android')
 						{
 							var participants = $('.Streams_participant_tool_wrapper');
-							var participantsWidth = Q.Pointer.windowWidth(), participantsLeft = 0;
+							var participantsWidth = Q.Pointer.windowWidth, participantsLeft = 0;
 							if (Q.info.isMobile)
 							{
 								if (Q.Layout.orientation == 'landscape')
@@ -997,7 +997,7 @@ Q.Layout = {
 	 */
 	checkOrientation: function()
 	{
-		if (Q.Layout.lastWindowWidth() === undefined)
+		if (Q.Layout.lastWindowWidth === undefined)
 			Q.Layout.lastWindowWidth = 0;
 		if (Q.Layout.lastOrientation === undefined)
 			Q.Layout.lastOrientation = -1;
@@ -1005,20 +1005,20 @@ Q.Layout = {
 		var windowWidth = Q.Pointer.windowWidth();
 		var windowHeight = Q.Pointer.windowHeight();
 		var orientation = window.orientation;
-		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth() !== Q.Layout.lastWindowWidth()) ||
-				(orientation === undefined && windowWidth() !== Q.Layout.lastWindowWidth()))
+		if ((orientation !== undefined && orientation !== Q.Layout.lastOrientation && windowWidth !== Q.Layout.lastWindowWidth) ||
+				(orientation === undefined && windowWidth !== Q.Layout.lastWindowWidth))
 		{
 			var previousOrientation = Q.Layout.orientation;
 			if (orientation !== undefined)
 			{
-				Q.Layout.lastWindowWidth = windowWidth();
+				Q.Layout.lastWindowWidth = windowWidth;
 				Q.Layout.lastOrientation = orientation;
 				Q.Layout.orientation = ((orientation === 0 || orientation === 180) ? 'portrait' : 'landscape');
 			}
 			else
 			{
-				Q.Layout.lastWindowWidth = windowWidth();
-				Q.Layout.orientation = (windowWidth() > windowHeight() ? 'landscape' : 'portrait');
+				Q.Layout.lastWindowWidth = windowWidth;
+				Q.Layout.orientation = (windowWidth > windowHeight ? 'landscape' : 'portrait');
 			}
 			if (!Q.Layout.orientationOnLoad)
 			{
@@ -1043,9 +1043,9 @@ Q.Layout = {
 				);
 			}
 			orientationMask.css({
-				'width': windowWidth() + 'px',
-				'height': windowHeight() + 'px',
-				'line-height': windowHeight() + 'px',
+				'width': windowWidth + 'px',
+				'height': windowHeight + 'px',
+				'line-height': windowHeight + 'px',
 				'opacity': '1'
 			});
 			orientationMask.show();
@@ -1054,16 +1054,16 @@ Q.Layout = {
 			{
 				if (Q.Layout.fullScreenHeight != 0 && Q.Layout.addressBarHeight != 0)
 				{
-					Q.Layout.fullScreenHeight = windowHeight();
+					Q.Layout.fullScreenHeight = windowHeight;
 					Q.Layout.heightWithAddressBar = Q.Layout.fullScreenHeight - Q.Layout.addressBarHeight;
 				}
 				Q.Layout.orientationChange(previousOrientation != Q.Layout.orientation);
 			}, 0);
 		}
-		if (Q.Layout.fullScreenHeight && windowHeight() < Q.Layout.fullScreenHeight &&
-				((Q.info.isMobile && (windowHeight() != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
+		if (Q.Layout.fullScreenHeight && windowHeight < Q.Layout.fullScreenHeight &&
+				((Q.info.isMobile && (windowHeight != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
 		{
-			Q.Layout.heightWithKeyboard = windowHeight();
+			Q.Layout.heightWithKeyboard = windowHeight;
 			Q.Layout.keyboardVisible = true;
 		}
 		else if (!Q.Layout.focusEventOccured)
@@ -1071,12 +1071,12 @@ Q.Layout = {
 			Q.Layout.keyboardVisible = false;
 		}
 		var main = $('#main');
-		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight())
+		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight)
 		{
 			// if it's 'height-only' orientation change and if keyboard appeared
 			// we shouldn't run orientationChange() in such case
 			// also there's no need to adjust height if it's address bar appeared
-			if (!Q.Layout.keyboardVisible && windowHeight() != Q.Layout.heightWithAddressBar)
+			if (!Q.Layout.keyboardVisible && windowHeight != Q.Layout.heightWithAddressBar)
 				Q.Layout.orientationChange(false, true, true);
 		}
 		if (Q.Layout.handleAddressBarAppearing && Q.Layout.heightWithAddressBar < Q.Layout.fullScreenHeight &&
@@ -2581,6 +2581,7 @@ Q.Contextual = {
 							}
 							var cs = trigger.state('Q/contextual');
 							if (cs) {
+								Q.layout(cs.contextual[0]);
 								Q.handle(cs.onShow, trigger, [cs]);
 							}
 							Q.Contextual.justShown = true;
@@ -2974,7 +2975,7 @@ Q.Contextual = {
 		if (trigger.length != 0)
 		{
 			var triggerLeft = trigger.offset().left;
-			if (triggerLeft < 0 || triggerLeft + trigger.outerWidth() > $body.width())
+			if (triggerLeft + trigger.outerWidth() < 0|| triggerLeft > $body.width())
 				return;
 		}
 		
@@ -3033,23 +3034,20 @@ Q.Contextual = {
 		Q.Contextual.calcRelativeCoords(trigger, contextual, info);
 		
 		var x = info.coords.x, y = info.coords.y;
-		if (info.size && info.size.width)
-		{
-			var arrowWidth = parseInt(arrow.css('width'));
-			arrow.css({ 'margin-left': ((info.size.width - arrowWidth) / 2 - 5) + 'px' });
-		}
+		var w = (info.size && info.size.width) || contextual.outerWidth();
+		var leftOffset = ((w - arrow.outerWidth()) / 2);
+		arrow.css('left', leftOffset + 'px');
 		if (info.relativeToElement)
 		{
-			var leftOffset = parseInt(arrow.css('margin-left'));
 			if (info.coords.x < 5)
 			{
 				x = 5;
-				arrow.css({ 'margin-left': (leftOffset + info.coords.x - 5) + 'px' });
+				arrow.css({ 'left': (leftOffset + info.coords.x - 5) + 'px' });
 			}
 			else if (info.coords.x + contextual.outerWidth() + 5 > $body.width())
 			{
 				x = $body.width() - contextual.outerWidth() - 5;
-				arrow.css({ 'margin-left': (leftOffset + info.coords.x + contextual.outerWidth() - $body.width() + 5) + 'px' });
+				arrow.css({ 'left': (leftOffset + info.coords.x - x) + 'px' });
 			}
 		}
 		

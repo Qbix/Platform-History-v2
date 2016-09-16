@@ -12,7 +12,7 @@ var util = require('util');
  * @namespace Q
  * @constructor
  * @param server {http.Server}
- * @param {object} [options={}]
+ * @param {Object} [options={}]
  */
 function Socket (server, options) {
 	var io = require('socket.io');
@@ -22,8 +22,10 @@ function Socket (server, options) {
 /**
  * Start http server if needed and start listening to socket
  * @method listen
- * @param {object} [options={}] Can include 'host', 'port' and 'ns' fields
- * @return {socket.io}
+ * @param {Object} options 
+ * @param {Object} options.host Set the hostname to listen on
+ * @param {Object} options.port Set the port to listen on
+ * @return {Q.Socket}
  */
 Socket.listen = function (options) {
 	options = options || {};
@@ -34,7 +36,7 @@ Socket.listen = function (options) {
 	if (!server.attached.socket) {
 		console.log("Starting socket server on http://"+server.host+":"+server.port);
 		try {
-			server.attached.socket = require('socket.io').listen(server);
+			server.attached.socket = new Q.Socket(server);
 		} catch (e) {
 			console.log("Socket was not attached.", e);
 		}

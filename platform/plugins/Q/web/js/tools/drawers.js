@@ -20,8 +20,8 @@
  *  @param {Function}   [options.transition.ease=Q.Animation.linear] The easing function of the transition animation
  *  @param {Function}   [options.width] Override the function that computes the width of the drawers
  *  @param {Function}   [options.height] Override the function that computes the height drawers tool
- *  @param {Array}   [options.heights=[100,100]] Array of [height0, height1] for drawers that are pinned
- *  @param {Array}   [options.placeholders=['','']] Array of [html0, html1] for drawers that are pinned
+ *  @param {Array}   [options.heights=[100,100]] Array of [height0, height1] for drawers that are pinned. Can contain numbers or functions returning numbers, or names of functions.
+ *  @param {Array}   [options.placeholders=['','']] Array of [html0, html1] for drawers that are pinned.
  *  @param {Array}   [options.behind=[true,false]] Array of [boolean0, boolean1] to indicate which drawer is behind the others
  *  @param {Array}   [options.bottom=[false,false]] Array of [boolean0, boolean1] to indicate whether to scroll to the bottom of a drawer after switching to it
  *  @param {Array}   [options.triggers=['plugins/Q/img/drawers/up.png', 'plugins/Q/img/drawers/down.png']] Array of [src0, src1] for img elements that act as triggers to swap drawers. Set array elements to false to avoid rendering a trigger.
@@ -38,8 +38,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	var tool = this;
 	var state = tool.state;
 	var $te = $(tool.element);
-	var $scrolling = state.$scrolling = 
-		$(state.container && !state.fullscreen ? state.container : window);
+	state.containerOriginal = state.container;
 	state.swapCount = 0;
 	
 	Q.addStylesheet('plugins/Q/css/drawers.css');
@@ -47,6 +46,9 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	if (state.fullscreen || !state.container) {
 		state.container = $(tool.element).parents().eq(-3)[0];
 	}
+	
+	var $scrolling = state.$scrolling = 
+		$(state.container && !state.fullscreen ? state.container : window);
 	
 	if ($te.css('position') == 'static') {
 		$te.css('position', 'relative');
@@ -64,10 +66,27 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	state.canceledSwap = null;
 	var lastScrollingHeight;
 	setTimeout(function () {
-		state.lastScrollingHeight = $scrolling[0].clientHeight || $scrolling.height();
+		_initialize();
+		var $column = $(tool.element).closest('.Q_columns_column');
+		if (!$column.length || $column.hasClass('Q_columns_opened')) {
+			return;
+		}
+		var columns = $column.closest('.Q_tool')[0].Q("Q/columns");
+		var key = columns.state.onOpen.set(function () {
+			if (state.fullscreen) {
+				_initialize();
+			} else {
+				_layout();
+			}
+			columns.state.onOpen.remove(key);
+		}, tool);
+	}, state.initial.delay || 0);
+	
+	function _initialize() {
+		state.lastScrollingHeight = _h($scrolling[0].clientHeight || $scrolling.height(), tool);
 		tool.swap(_layout);
 		Q.onLayout(tool).set(_layout, tool);
-	}, state.initial.delay);
+	}
 	
 	$te.parents().each(function () {
 		var $this = $(this);
@@ -82,13 +101,22 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	
 	// Accomodate mobile keyboard
 	if (Q.info.isMobile) {
+		var scrollTop = null;
 		state.$drawers.eq(0).on(Q.Pointer.focusin, tool, function () {
-			state.$drawers.eq(1).hide();
-			state.$trigger.hide();
+			scrollTop = $scrolling.scrollTop();
+			setTimeout(function () {
+				state.$drawers.eq(1).hide();
+				state.$placeholder.hide();
+				state.$trigger.hide();
+			}, 100);
 		});
 		state.$drawers.eq(0).on(Q.Pointer.focusout, tool, function () {
 			state.$drawers.eq(1).show();
+			state.$placeholder.show();
 			state.$trigger.show();
+			setTimeout(function () {
+				$scrolling.scrollTop(scrollTop);
+			}, 0);
 		});
 	}
 
@@ -103,7 +131,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			});
 			state.$drawers.height();
 		}
-		var sh = $scrolling[0].clientHeight || $scrolling.height();
+		var sh = _h($scrolling[0].clientHeight || $scrolling.height(), tool);
 		var sHeights = (state.heights instanceof Array)
 			? state.heights : Q.getObject(state.heights).apply(tool);
 		var $d0 = state.$drawers.eq(0);
@@ -118,7 +146,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 				top: offset.top + heightDiff
 			});
 		}
-		state.lastScrollingHeight = $scrolling[0].clientHeight || $scrolling.height();
+		state.lastScrollingHeight = _h($scrolling[0].clientHeight || $scrolling.height(), tool);
 	}
 },
 
@@ -138,7 +166,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	height: function () {
 		var sp = this.element.scrollingParent();
 		if (sp === document.documentElement) {
-			return Q.Pointer.windowHeight() - $(this.element).offset().top;
+			return _h(Q.Pointer.windowHeight(), this);
 		}
 		return sp.clientHeight;
 	},
@@ -149,7 +177,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	bottom: [false, false],
 	triggers: ['plugins/Q/img/drawers/up.png', 'plugins/Q/img/drawers/down.png'],
 	trigger: { rightMargin: 10, transition: 300 },
-	fullscreen: Q.info.isAndroidStock && Q.info.isAndroid(1000),
+	fullscreen: Q.info.useFullscreen,
 	foregroundZIndex: 50,
 	beforeSwap: new Q.Event(),
 	onSwap: new Q.Event()
@@ -194,11 +222,16 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			var scrollTop;
 			var sHeights = (state.heights instanceof Array)
 				? state.heights : Q.getObject(state.heights).apply(tool);
-			state.lastScrollingHeight = scrollingHeight =  $scrolling[0].clientHeight || $scrolling.height();
-			scrollTop = state.bottom[otherIndex]
-				? -scrollingHeight + sHeights + $otherDrawer.height()
-				: 0;
-			$scrolling.scrollTop(scrollTop);
+			state.lastScrollingHeight = scrollingHeight = _h(
+				$scrolling[0].clientHeight || $scrolling.height(),
+				tool
+			);
+			if (state.$pinnedElement) {
+				scrollTop = state.bottom[otherIndex]
+					? scrollingHeight - sHeights[otherIndex] - $otherDrawer.height()
+					: 0;
+				$scrolling.scrollTop(scrollTop);
+			}
 		
 			$scrolling.off(scrollEventName);
 		
@@ -248,6 +281,8 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			state.drawerOffset = $otherDrawer.offset();
 			
 			var $pe;
+			var sHeights = (state.heights instanceof Array)
+				? state.heights : Q.getObject(state.heights).apply(tool);
 			if ($pe = state.$pinnedElement) {
 				state.$placeholder.before($pe).remove();
 				$pe.css({
@@ -256,8 +291,6 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 					top: 0
 				});
 			} else if (!index) {
-				var sHeights = (state.heights instanceof Array)
-					? state.heights : Q.getObject(state.heights).apply(tool);
 				state.drawerOffset = $scrolling.offset()
 					|| {left: 0, top: 0};
 				state.drawerOffset.top += state.bottom[1]
@@ -265,15 +298,16 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 					: scrollingHeight - sHeights[1];
 			}
 			
+			var scrollHeight = ($scrolling[0] === window)
+				? document.documentElement.scrollHeight
+				: $scrolling[0].scrollHeight;
 			$scrolling.scrollTop(
-				state.bottom[index] ? $scrolling[0].scrollHeight : 0
+				state.bottom[index] ? _h(scrollHeight, tool) : 0
 			);
 			if ($pe && index) {
 				state.drawerOffset = $otherDrawer.offset();
 			}
 			
-			var sHeights = (state.heights instanceof Array)
-				? state.heights : Q.getObject(state.heights).apply(tool);
 			state.$placeholder = $('<div class="Q_drawers_placeholder" />')
 				.html(state.placeholders[otherIndex])
 				.css({
@@ -512,8 +546,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			});
 			var $pinnedElement = state.$pinnedElement;
 			if (!$pinnedElement) return;
-			Q.Tool.clear($pinnedElement[0]);
-			Q.removeElement($pinnedElement[0]);
+			Q.removeElement($pinnedElement[0], true);
 			var $scrolling = state.fullscreen ? $(window) : $(state.container);
 			$scrolling.off(state.scrollEventName)
 				.off('touchstart.Q_drawers')
@@ -562,5 +595,12 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 }
 
 );
+
+function _h(scrollingHeight, tool) {
+	if (!tool.state.fullscreen) {
+		return scrollingHeight;
+	}
+	return scrollingHeight - $(tool.element).position().top;
+}
 
 })(Q, jQuery);

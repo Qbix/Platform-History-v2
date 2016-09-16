@@ -41,9 +41,10 @@ function Streams_stream_post($params = array())
     if (!array_key_exists($type, $types)) {
         throw new Q_Exception("This app doesn't support streams of type $type", 'type');
     }
-    if (empty($types[$type]['create'])) {
-        throw new Q_Exception("This app doesn't support directly creating streams of type $type", 'type');
-    }
+	$create = Streams_Stream::getConfigField($type, 'create', false);
+	if (!$create) {
+        throw new Q_Exception("This app doesn't let clients directly create streams of type $type", 'type');
+	}
 
 	// Should this stream be related to another stream?
 	$relate = array();
@@ -71,20 +72,45 @@ function Streams_stream_post($params = array())
 		unset($req['file']);
 	}
 	
+	// Check if the user owns the stream
+	if ($user->id === $publisherId) {
+		$asOwner = true;
+	} else {
+		$streamTemplate = Streams_Stream::getStreamTemplate(
+			$publisherId, $type, 'Streams_Stream'
+		);
+		$asOwner = $streamTemplate ? $streamTemplate->testAdminLevel('own') : false;
+	}
+	
 	// Check if client can set the name of this stream
-	if (!empty($req['name'])) {
-		if ($user->id !== $publisherId
-		or !Q_Config::get('Streams', 'possibleUserStreams', $req['name'], false)) {
+	if (isset($req['name'])) {
+		$possible = Q_Config::get('Streams', 'possibleUserStreams', $req['name'], false);
+		if (!$asOwner or !$possible) {
 			throw new Users_Exception_NotAuthorized();
 		}
 	}
 	
-	// Create the stream
+	// Get allowed fields
 	$allowedFields = array_merge(
-		array('publisherId', 'type', 'icon', 'file'),
-		Streams::getExtendFieldNames($type, ($user->id === $publisherId))
+		array('publisherId', 'name', 'type', 'icon', 'file'),
+		Streams::getExtendFieldNames($type, $asOwner)
 	);
 	$fields = Q::take($req, $allowedFields);
+
+	// Prevent setting restricted fields
+	if (is_array($create)) {
+		$restrictedFields = array_diff($allowedFields, $create);
+		foreach ($restrictedFields as $fieldName) {
+			if (in_array($fieldName, array('publisherId', 'type'))) {
+				continue;
+			}
+			if (isset($req[$fieldName])) {
+				throw new Users_Exception_NotAuthorized();
+			}
+		}
+	}
+
+	// Create the stream
 	$stream = Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
 	$messageTo = false;
 	if (isset($result['messagesTo'])) {

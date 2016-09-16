@@ -15,7 +15,7 @@ function Streams_related_response()
 	$streams_requested = in_array('relatedStreams', $slotNames);
 	$options = Q::take($_REQUEST, array('limit', 'offset', 'min', 'max', 'type', 'prefix'));
 	$options['relationsOnly'] = !$streams_requested;
-	$options['orderBy'] = empty($_REQUEST['ascending']);
+	$options['orderBy'] = !empty($_REQUEST['ascending']);
 	$options['fetchOptions'] = array('withParticipant' => true);
 	$result = Streams::related(
 		$asUserId,

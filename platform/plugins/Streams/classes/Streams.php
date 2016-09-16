@@ -1891,6 +1891,9 @@ abstract class Streams extends Base_Streams
 			$fromTitle = $stream->title;
 			$fromType = $stream->type;
 			$fromDisplayType = Streams_Stream::displayType($fromType);
+			if (!$category) {
+				continue;
+			}
 			$toUrl = $category->url();
 			$toIcon = $category->icon;
 			$toTitle = $category->title;
@@ -3356,6 +3359,9 @@ abstract class Streams extends Base_Streams
 		}
 
 		// let node handle the rest, and get the result
+		$displayName = isset($options['displayName'])
+			? $options['displayName']
+			: Streams::displayName($asUser);
 		$params = array(
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,
@@ -3368,9 +3374,7 @@ abstract class Streams extends Base_Streams
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
 			"adminLevel" => $adminLevel,
-			"displayName" => isset($options['displayName'])
-				? $options['displayName']
-				: Streams::displayName($asUser),
+			"displayName" => $displayName,
 			"expiry" => $expiry
 		);
 		if (!empty($template)) {
@@ -3479,34 +3483,6 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Retrieve the user's stream needed to post invite messages
-	 * If stream does not exists - create it. May return null if save failed.
-	 * @method getInvitedStream
-	 * @static
-	 * @param $asUserId {string}
-	 *	The user id of inviting user
-	 * @param $forUserId {string}
-	 *	User id for which stream is created
-	 * @return {Streams_Stream|null}
-	 */
-	static function getInvitedStream ($asUserId, $forUserId) {
-		$invited = Streams::fetch($asUserId, $forUserId, 'Streams/invited');
-		if (!empty($invited)) return $invited['Streams/invited'];
-		$invited = new Streams_Stream();
-		$invited->publisherId = $forUserId;
-		$invited->name = 'Streams/invited';
-		$invited->type = 'Streams/invited';
-		$invited->title = 'Streams/invited';
-		$invited->content = 'Post message here when user is invited to some stream';
-		$invited->readLevel = Streams::$READ_LEVEL['none'];
-		$invited->writeLevel = Streams::$WRITE_LEVEL['post']; // anyone can post messages
-		$invited->adminLevel = Streams::$ADMIN_LEVEL['none'];
-		$result = $invited->save(true);
-		//Streams::calculateAccess($asUserId, $forUserId, array('Streams/invited' => $invited), false);
-		return $result ? $invited : null;
-	}
-
-	/**
 	 * Get first and last name out of full name
 	 * @method splitFullName
 	 * @static
@@ -3544,9 +3520,12 @@ abstract class Streams extends Base_Streams
 	 * @method register
 	 * @static
 	 * @param {string} $fullName The full name of the user in the format 'First Last' or 'Last, First'
-	 * @param {string} $identifier User identifier
-	 * @param {array} [$icon=array()] User icon
-	 * @param {string} [$provider=null] Provider
+	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
+	 * @param {string} [$identifier.identifier] an email address or phone number
+	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 *   to store in the Users_Device table for sending notifications
+	 * @param {array} [$icon=array()] Array of filename => url pairs
+	 * @param {string} [$provider=null] Provider such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -3555,7 +3534,12 @@ abstract class Streams extends Base_Streams
 	 * @throws {Users_Exception_AlreadyVerified} If user was already verified
 	 * @throws {Users_Exception_UsernameExists} If username exists
 	 */
-	static function register($fullName, $identifier, $icon = array(), $provider = null, $options = array())
+	static function register(
+		$fullName, 
+		$identifier, 
+		$icon = array(), 
+		$provider = null, 
+		$options = array())
 	{
 		if (is_array($provider)) {
 			$options = $provider;
@@ -3563,13 +3547,15 @@ abstract class Streams extends Base_Streams
 		}
 		
 		/**
-		 * @event Users/register {before}
+		 * @event Streams/register {before}
 		 * @param {string} username
-		 * @param {string} identifier
+		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Streams/register', compact('name', 'fullName', 'identifier', 'icon', 'provider', 'options'), 'before');
+		$return = Q::event('Streams/register', compact(
+			'name', 'fullName', 'identifier', 'icon', 'provider', 'options'), 'before'
+		);
 		if (isset($return)) {
 			return $return;
 		}
@@ -3585,14 +3571,15 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Please enter your name properly", 'name');
 		}
 
+		// this will be used in Streams_after_Users_User_saveExecute
 		Streams::$cache['register'] = $name;
 
 		$user = Users::register("", $identifier, $icon, $provider, $options);
 
 		/**
-		 * @event Users/register {after}
+		 * @event Streams/register {after}
 		 * @param {string} username
-		 * @param {string} identifier
+		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @param {Users_User} 'user'
 		 * @return {Users_User}
@@ -3686,6 +3673,11 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		return $fieldNames;
+	}
+	
+	static function invitedUrl ($token) {
+		$baseUrl = Q_Config::get(array('Streams', 'invites', 'baseUrl'), "i");
+		return Q_Html::themedUrl("$baseUrl/$token");
 	}
 	
 	static function invitationsPath($invitingUserId)

@@ -15,8 +15,8 @@
  *   @param {String} [options.publisherId] Required if stream option is empty. The publisher's user id.
  *   @param {String} [options.streamName] Required if stream option is empty. The stream's name.
  *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
- *   @param {String} [options.field] Optional, name of an field to change instead of the content of the stream
- *   @param {String} [options.attribute] Optional, name of an attribute to change instead of any field.
+ *   @param {String} [options.field] Optional, name of a field to change instead of the content of the stream
+ *   @param {String} [options.attribute] Optional, name of an attribute to change instead of a field.
  *   @param {Object} [options.inplace] Additional fields to pass to the child Q/inplace tool, if any
  *   @param {Function} [options.create] Optional. You can pass a function here, which takes the tool as "this"
  *     and a callback as the first parameter, is supposed to create a stream and
@@ -41,7 +41,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 		if (err) {
 			return tool.state.onError.handle(err);
 		}
-		var stream = state.stream = this;
+		var stream = this;
 		state.publisherId = stream.fields.publisherId;
 		state.streamName = stream.fields.name;
 		
@@ -49,14 +49,13 @@ Q.Tool.define("Streams/inplace", function (options) {
 		var currentHtml = null;
 
 		function _setContent(content) {
-			if (tool.inplace = tool.sibling('Q/inplace')) {
+			if (tool.inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace')) {
 				tool.$static = tool.inplace.$static;
 				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
 			} else if (!tool.$static) {
 				tool.$static = tool.$('.Q_inplace_tool_static, .Q_inplace_tool_blockstatic');
 			}
 			Q.Streams.get(state.publisherId, state.streamName, function () {
-				state.stream = this;
 				var placeholder = tool.inplace && tool.inplace.state.placeholder
 					&& String(tool.inplace.state.placeholder).encodeHTML();
 				var $e, html = String(content || '').encodeHTML()
@@ -100,7 +99,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				if (attributes[k] !== null) {
 					_setContent(attributes[k]);
 				} else {
-					state.stream.refresh(function () {
+					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
 						_setContent(this.get(k));
 					});
 				}
@@ -111,7 +110,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				if (fields[k] !== null) {
 					_setContent(fields[k]);
 				} else {
-					state.stream.refresh(function () {
+					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
 						_setContent(this.fields[k]);
 					});
 				}
@@ -126,9 +125,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				field: state.field,
 				type: state.inplaceType,
 				onSave: { 'Streams/inplace': function () {
-					state.stream.refresh(function () {
-						state.onUpdate.handle.call(tool);
-					}, {messages: true});
+					Q.Streams.Message.wait(state.publisherId, state.streamName, -1, null);
 				}}
 			});
 			var value = (state.attribute ? stream.get(state.attribute) : stream.fields[state.field]) || "";
@@ -190,8 +187,9 @@ Q.Tool.define("Streams/inplace", function (options) {
 	}
 	
 	if (state.stream) {
-		state.publisherId = state.stream.publisherId;
-		state.streamName = state.stream.name;
+		state.publisherId = state.stream.fields.publisherId;
+		state.streamName = state.stream.fields.name;
+		delete state.stream;
 	}
 	if (!state.publisherId || !state.streamName) {
 		throw new Q.Error("Streams/inplace tool: stream is undefined");
@@ -217,16 +215,16 @@ Q.Tool.define("Streams/inplace", function (options) {
 {
 	Q: {
 		onInit: {"Streams/inplace": function () {
-			var tool = this, state = tool.state;
-			var inplace = tool.sibling('Q/inplace');
-			if (!inplace) {
-				return;
+			var tool = this
+			var state = tool.state;
+			this.forEachChild('Q/inplace', 1, true, _setup);
+			function _setup() {
+				this.state.onSave.set(function () {
+					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
+						state.onUpdate.handle.call(tool);
+					}, {messages: true});
+				}, 'Streams/inplace');
 			}
-			inplace.state.onSave.set(function () {
-				state.stream.refresh(function () {
-					state.onUpdate.handle.call(tool);
-				}, {messages: true});
-			}, 'Streams/inplace');
 		}}
 	}
 }
