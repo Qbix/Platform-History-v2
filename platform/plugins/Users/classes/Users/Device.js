@@ -51,20 +51,29 @@ function Users_Device (fields) {
  * @param {String} [notification.priority]
  * @param {String} [notification.newsstandAvailable]
  * @param {String} [notification.contentAvailable]
- * @param {String} [notification.mutableConten]
+ * @param {String} [notification.mutableContent]
  * @param {String} [notification.mdm]
  * @param {Boolean} [notification.truncateAtWordEnd]
  * @param {String} [notification.urlArgs]
  * @param {String} [notification.category]
+ * @param {Object} [options]
+ * @param {String} [options.view] Optionally set a view to render for the alert body
+ * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
  */
-Users_Device.prototype.pushNotification = function (notification) {
+Users_Device.prototype.pushNotification = function (notification, options) {
+	if (options && options.view) {
+		var body = options.isSource
+			? Q.Handlebars.renderSource(options.view, options.fields)
+			: Q.Handlebars.render(options.view, options.fields);
+		Q.setObject(['alert', 'body'], body, notification);
+	}
 	if (this.fields.platform === 'ios') {
 		if (!Users.apn.connection) {
 			return;
 		}
-		var notification = new apn.Notification();
-		notification.badge = value;
-		Users.apn.connection.pushNotification(notification);
+		var d = new apn.Device(this.fields.deviceId);
+		var n = new apn.Notification(notification);
+		Users.apn.connection.pushNotification(n, d);
 	}
 	// TODO: process android!!!
 };

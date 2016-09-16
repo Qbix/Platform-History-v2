@@ -221,16 +221,23 @@ Streams_Message.post = function (fields, callback)
 /**
  * Delivers the message posted to stream according to particular
  * delivery method (see: Streams_Rule.deliver). Message template is taken from views/{message.type} folder -
- * 'email.handlebars' or 'mobile.handlebars' depending on delivery
+ * 'email.handlebars' or 'mobile.handlebars' or 'device.handlebars' depending on delivery
  * @method deliver
  * @param {Streams.Stream} stream
  * @param {function} toUserId the id of the user to whom to deliver
- * @param {Object} delivery can contain "email" or "mobile" for now
- * @param {Streams.Avatar} the avatar for getting the displayName
+ * @param {String|Object} deliver can be any key under "Streams"/"rules"/"deliver" config,
+ *   such as "default" or "invited". The value in the config should be an array of entries,
+ *   each of which can be a string or an array itself.
+ *   Entries can contain one or more of "email", "mobile" and "devices".
+ *   They are tried, in order, and delivery stops as soon as at least one destination
+ *   is found to deliver to.
+ *   Or, it can be an object with "to" property
+ *   as this key, or "emailAddress", "mobileNumber" or "deviceId" specified directly.
+ * @param {Streams.Avatar} avatar the avatar for getting the displayName
  * @param {function} callback
- *	Callback reports errors and response from mail delivery system
+ *	Callback reports errors and response from delivery systems
  */
-Streams_Message.prototype.deliver = function(stream, toUserId, delivery, avatar, callback) {
+Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
 	var fields = {
 		app: Q.app,
 		communityName: Users.communityName(),
@@ -251,49 +258,145 @@ Streams_Message.prototype.deliver = function(stream, toUserId, delivery, avatar,
 			)
 		)
 	);
+	if (typeof deliver === 'string') {
+		deliver = {to: deliver};
+	}
 	Users.fetch(toUserId, function (err) {
-		var to = delivery.to
-			? Q.Config.get(['Streams', 'rules', 'deliver', delivery.to], ['email', 'mobile'])
-			: ['email', 'mobile'];
-		var emailAddress = delivery.email
-			|| (to.indexOf('email') >= 0 && this.fields.emailAddress)
-			|| (to.indexOf('email+pending') >= 0 && this.fields.emailAddressPending);
-		var mobileNumber = delivery.mobile
-			|| (to.indexOf('mobile') >= 0 && this.fields.mobileNumber)
-			|| (to.indexOf('mobile+pending') >= 0 && this.fields.mobileNumberPending);
-		
-		// Give the app an opportunity to modify the fields or anything else
+		var to = Q.Config.get(
+			['Streams', 'rules', 'deliver', deliver.to],
+			['devices', 'email', 'mobile']
+		);
+		var uf = this.fields;
+		var p1 = new Q.Pipe();
 		var o = {
 			fields: fields,
 			subject: subject,
-			delivery: delivery,
+			deliver: deliver,
 			stream: stream,
 			avatar: avatar,
-			callback: callback,
-			emailAddress: emailAddress,
-			mobileNumber: mobileNumber
+			callback: callback
 		};
-		Streams_Message.emit('deliver/before', o);
-		var viewPath;
+		var w1 = [];
+		var e, m, d;
+		if (e = deliver.emailAddress || deliver.email) {
+			_email(emailAddress, p1.fill('email'));
+			w1.push('email');
+		}
+		if (m = deliver.mobileNumber || deliver.mobile) {
+			_mobile(m, p1.fill('mobile'));
+			w1.push('mobile');
+		}
+		if (d = deliver.deviceId || deliver.device) {
+			_device(d, p1.fill('device'));
+			w1.push('device');
+		}
 		var result = [];
-		if (mobileNumber) {
-			viewPath = messageType+'/mobile.handlebars';
-			if (!Q.Handlebars.template(viewPath)) {
-				viewPath = 'Streams/message/mobile.handlebars';
+		p1.add(w1, function () {
+			_next(0);
+		}).run();
+		function _next(i) {
+			var destinations = to[i];
+			if (!destinations) {
+				return callback(new Error("Streams.Message.prototype.deliver: no destinations"));
 			}
-			Q.Utils.sendSMS(mobileNumber, viewPath, o.fields, {}, callback);
-			result.push('mobile');
-		} else if (emailAddress) {
-			viewPath = messageType+'/email.handlebars';
+			if (typeof destinations === 'string') {
+				destinations = [destinations];
+			}
+			var p2 = new Q.Pipe();
+			var waitFor = [];
+			Q.each(destinations, function (i, d) {
+				var emailAddress = (d === 'email' >= 0 && uf.emailAddress)
+					|| (d === 'email+pending' && uf.emailAddressPending);
+				var mobileNumber = (d === 'mobile' >= 0 && uf.mobileNumber)
+					|| (d === 'mobile+pending' && uf.mobileNumberPending);
+				// Give the app an opportunity to modify the fields or anything else
+				Streams_Message.emit('deliver/before', o);
+				if (emailAddress) {
+					_email(emailAddress, p2.fill('email'));
+					waitFor.push('email');
+				}
+				if (mobileNumber) {
+					_mobile(mobileNumber, p2.fill('mobile'));
+					waitFor.push('mobile');
+				}
+				if (d === 'devices') {
+					_device(null, p2.fill('devices'));
+					waitFor.push('devices');
+				}
+			});
+			p2.add(waitFor, function (params) {
+				var success = false;
+				for (var k in params) {
+					if (params[k][0]) {
+						continue;
+					}
+					if (k === 'email' && params[k][1] === 'log') {
+						// email was not sent
+						continue;
+					}
+					if (k === 'mobile' && params[k][1] === 'log') {
+						// mobile sms was not sent
+						continue;
+					}
+					if (k === 'devices' && params[k][1].length === 0) {
+						// no devices were reached
+						continue;
+					}
+					success = true;
+				}
+				if (success) {
+					callback(null, result, params);
+				} else {
+					_next(i+1);
+				}
+			}).run();
+		}
+		function _email(emailAddress, callback) {
+			o.destination = 'email';
+			o.emailAddress = emailAddress;
+			Streams_Message.emit('deliver/before', o);  // app may modify some fields
+			var viewPath = messageType+'/email.handlebars';
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
-			Q.Utils.sendEmail(
+			Users.Email.sendMessage(
 				emailAddress, o.subject, viewPath, o.fields, {html: true}, callback
 			);
-			result.push('email');
+			result.push({'email': emailAddress});
 		}
-		return result;
+		function _mobile(mobileNumber, callback) {
+			o.destination = 'mobile';
+			o.mobileNumber = mobileNumber;
+			Streams_Message.emit('deliver/before', o); // app may modify some fields
+			var viewPath = messageType+'/mobile.handlebars';
+			if (!Q.Handlebars.template(viewPath)) {
+				viewPath = 'Streams/message/mobile.handlebars';
+			}
+			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {}, callback);
+			result.push({'mobile': mobileNumber});
+		}
+		function _device(deviceId, callback) {
+			o.destination = 'devices';
+			o.deviceId = deviceId;
+			Streams_Message.emit('deliver/before', o); // app may modify some fields
+			var viewPath = messageType+'/device.handlebars';
+			if (!Q.Handlebars.template(viewPath)) {
+				viewPath = 'Streams/message/device.handlebars';
+			}
+			Users.pushNotifications(toUserId, {
+				alert: {
+					title: o.subject
+				}
+			}, callback, {
+				view: viewPath,
+				fields: o.fields
+			}, function (device) {
+				if (deviceId && device.deviceId !== deviceId) {
+					return false;
+				}
+			});
+			result.push({'devices': deviceId || true});
+		}
 	});
 };
 

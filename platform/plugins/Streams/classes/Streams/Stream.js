@@ -1121,7 +1121,9 @@ Sp.notify = function(participant, event, userId, message, callback) {
 			var waitingFor = deliveries.map(function(d) { return JSON.stringify(d); });
 			var p = new Q.Pipe(waitingFor, function(params) {
 				for (var d in params) {
-					if (params[d][0]) return callback && callback(params[d][0]);
+					if (params[d][0]) {
+						return callback && callback(params[d][0]);
+					}
 				}
 				new Streams.Notification({
 					userId: userId,

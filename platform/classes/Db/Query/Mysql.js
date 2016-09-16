@@ -1222,7 +1222,7 @@ function applyHash(value, hash, len)
 			hashed = Q.normalize(value).substr(0, len);
 			break;
 		case 'md5':
-			hashed = Q.Crypto.md5(value).substr(0, len);
+			hashed = Q.Crypto.MD5(value).substr(0, len).toString();
 			break;
 		default:
 			throw new Q.Exception("Db.Query.Mysql: The hash " + hash + " is not supported");

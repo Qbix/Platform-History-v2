@@ -1195,7 +1195,7 @@ Q.handle = function _Q_handle(callables, context, args) {
 		}
 		return count;
 	 case 'object':
-		for (k in callables) {
+		for (var k in callables) {
 			result = Q.handle(callables[k], context, args);
 			if (result === false) return false;
 			count += result;
@@ -2262,7 +2262,7 @@ Q.init = function _Q_init(app, notListen) {
     * @property Crypto
     * @type {object}
     */
-   Q.Crypto = require('./Q/Crypto');
+	Q.Crypto = require('./Q/Crypto');
 	//
 	// set things up
 	//

@@ -165,7 +165,7 @@ function _Users_listen_ios (options, server) {
 	Users.apn.connection = new apn.Connection(Q.extend(
 		{}, o, options && options.ios && options.ios.connection
 	));
-	Q.log("APN connection enabled");
+	Q.log("APN connection enabled (" + s +  ")");
 	var feedback = Users.apn.feedback = new apn.Feedback(Q.extend(
 		{}, o, options && options.ios && options.ios.feedback
 	));
@@ -198,10 +198,12 @@ Users.fetch = function (id, callback) {
  * @static
  * @param {String|Array} userIds A user id, or an array of them, 
  *   in which case notifications would be an object of { userId: notification }
- * @param {Object} notifications Please see Users.Device.pushNotification for the spec
+ * @param {Object} notifications If userIds is an array, this is a hash of {userId: notification} objects, otherwise it is just a single notification object. Please see Users.Device.prototype.pushNotification for the schema of this object.
  * @param {Function} [callback] A function to call after the push has been completed
+ * @param {Function} [options] Any additional options to pass to device.pushNotification method
+ * @param {Function} [filter] Receives the Users.Device object. Return false to skip the device.
  */
-Users.pushNotifications = function (userIds, notifications, callback) {
+Users.pushNotifications = function (userIds, notifications, callback, options, filter) {
 	var isArrayLike = Q.isArrayLike(userIds);
 	Users.Device.SELECT('*').where({
 		userId: userIds
@@ -210,8 +212,12 @@ Users.pushNotifications = function (userIds, notifications, callback) {
 			return callback(err);
 		}
 		Q.each(devices, function (i) {
+			if (filter && filter(this) === false) {
+				return;
+			}
 			this.pushNotification(
-				isArrayLike ? notifications[this.fields.userId] : notifications
+				isArrayLike ? notifications[this.fields.userId] : notifications,
+				options
 			);
 		});
 		callback(null, devices, notifications);

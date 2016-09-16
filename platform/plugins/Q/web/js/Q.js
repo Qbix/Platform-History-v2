@@ -3663,13 +3663,14 @@ var _qtdo = {};
  * @param {Object} methods An optional hash of method functions to assign to the prototype
  */
 Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
+	var n;
 	if (typeof name === 'object') {
-		for (var n in name) {
+		for (n in name) {
 			Q.Tool.jQuery(n, name[n]);
 		}
 		return;
 	}
-	var n = Q.normalize(name);
+	n = Q.normalize(name);
 	Q.Tool.names[n] = name;
 	if (typeof ctor === 'string') {
 		if (root.jQuery
@@ -3748,7 +3749,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
  * that may not have been loaded yet.
  * @static
  * @method jQuery.options
- * @param {String} toolName the name of the tool
+ * @param {String} pluginName the name of the tool
  * @param {Object} setOptions the options to set
  * @return {Object} the resulting pending options for the tool
  */
@@ -3808,15 +3809,16 @@ Tp.stateChanged = function Q_Tool_prototype_stateChanged(names) {
  */
 Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
 	var tool = this;
+	var i, l;
 	if (typeof fields === 'string') {
 		fields = fields.split(',');
-		for (var i=0,l=fields.length; i<l; ++i) {
+		for (i=0,l=fields.length; i<l; ++i) {
 			fields[i] = fields[i].trim();
 		}
 	}
 	if (!fields.length) return false;
 	var event;
-	for (var i=0, l=fields.length; i<l; ++i) {
+	for (i=0, l=fields.length; i<l; ++i) {
 		this.Q.onStateChanged(fields[i]).set(_handleChange, key);
 	}
 	var previous = (Q.Tool.beingActivated === this)
@@ -3966,7 +3968,7 @@ Tp.ancestor = function Q_Tool_prototype_parent(name) {
 	name = Q.normalize(name);
 	var parents = this.parents();
 	for (var id in parents) {
-		for (n in parents[id]) {
+		for (var n in parents[id]) {
 			if (n === name) {
 				return parents[id][n];
 			}

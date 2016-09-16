@@ -48,15 +48,11 @@ class Users_Device extends Base_Users_Device
 			if (!isset($sandbox)) {
 				$sandbox = Q_Config::get($app, "cordova", "ios", "sandbox", false);
 			}
-			if ($sandbox) {
-				$env = ApnsPHP_Abstract::ENVIRONMENT_SANDBOX;
-				$s = 'sandbox';
-			} else {
-				$env = ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
-				$s = 'production';
-			}
-			$s = empty($device['sandbox']) ? 'production' : 'sandbox';
-			$cert = APP_LOCAL_DIR.DS.'Users'.DS.'certs'.DS.$app.DS.$s.DS.'cert.pem';
+			$env = $sandbox
+				? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
+				: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
+			$s = $sandbox ? 'sandbox' : 'production';
+			$cert = APP_LOCAL_DIR.DS.'Users'.DS.'certs'.DS.$app.DS.$s.DS.'bundle.pem';
 			$authority = USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
 			$logger = new Users_ApnsPHP_Logger();
 			$push = new ApnsPHP_Push($env, $cert);
@@ -79,7 +75,8 @@ class Users_Device extends Base_Users_Device
 			$push->disconnect();
 			$errors = $push->getErrors();
 			if (!empty($errors)) {
-				throw new Q_Exception(reset($errors));
+				$result = reset($errors);
+				throw new Users_Exception_DeviceNotification($result['ERRORS'][0]);
 			}
 		}
 		$device2 = Q::take($device, array(
@@ -92,7 +89,7 @@ class Users_Device extends Base_Users_Device
 		));
 		$d = new Users_Device($device2);
 		$d->save(true);
-		$_SESSION['Users']['deviceId'] = $token;
+		$_SESSION['Users']['deviceId'] = $deviceId;
 		$device2['Q/method'] = 'Users/device';
 		Q_Utils::sendToNode($device2);
 		return $d;

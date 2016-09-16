@@ -166,7 +166,7 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 					p.fill(o)(null, deliver);
 				}
 				var notFound = (
-					types && typeOf(types) === 'array'
+					types && Q.typeOf(types) === 'array'
 					&& types.length && types.indexOf(msgType) < 0
 				);
 				if (notFound || (new Date(readyTime) > new Date())) {

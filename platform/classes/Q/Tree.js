@@ -151,7 +151,7 @@ module.exports = function (linked) {
 					{keys: keys, key: key}
 				);
 			}
-			if (!result || !(key in result)) {
+			if (!result || key == null || !(key in result)) {
 				return def;
 			}
 			result = result[key];
