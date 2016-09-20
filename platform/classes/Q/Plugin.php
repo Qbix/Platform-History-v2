@@ -239,8 +239,13 @@ class Q_Plugin
 					// Update plugin db version
 					if ($dbms === 'mysql') {
 						list($newver) = preg_split('/(-|__)/', $script, 2);
-						$db->insert("{$prefix}Q_{$type}", array($type=>$name, 'version'=>$newver))
-							->onDuplicateKeyUpdate(array('version'=>$newver))
+						$fields = array(
+							$type => $name, 
+							'version' => $newver, 
+							'versionPHP' => 0
+						);
+						$db->insert("{$prefix}Q_{$type}", $fields)
+							->onDuplicateKeyUpdate(array('version' => $newver))
 							->execute();
 						$current_version = $newver;
 					}
