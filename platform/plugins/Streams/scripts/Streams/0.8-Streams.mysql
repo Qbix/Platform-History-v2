@@ -201,9 +201,9 @@ CREATE TABLE `{$prefix}request` (
   `streamName` varchar(255) NOT NULL COMMENT 'local to Q server of publisherId',
   `byUserId` varchar(31) NOT NULL DEFAULT '' COMMENT 'id of user who is requesting access to the stream',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
-  `readLevel` int(11) NOT NULL COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
-  `writeLevel` int(11) NOT NULL COMMENT '0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
-  `adminLevel` int(11) NOT NULL DEFAULT '0' COMMENT '10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
+  `readLevel` int(11) NOT NULL DEFAULT 0 COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
+  `writeLevel` int(11) NOT NULL DEFAULT 0 COMMENT '0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
+  `adminLevel` int(11) NOT NULL DEFAULT 0 COMMENT '10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
   PRIMARY KEY (`publisherId`,`streamName`,`byUserId`),
   KEY `subscriber` (`byUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
@@ -222,7 +222,7 @@ CREATE TABLE `{$prefix}rule` (
   `readyTime` timestamp NULL DEFAULT NULL COMMENT 'time from which user is ready to receive notifications again',
   `filter` varchar(255) NOT NULL COMMENT '{"types": [ array of message types ], "labels": [ ]}',
   `deliver` varchar(255) NOT NULL COMMENT '{"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}',
-  `relevance` decimal(10,4) NOT NULL COMMENT 'used to prioritize messages for display and processing',
+  `relevance` decimal(10,4) NOT NULL DEFAULT 1 COMMENT 'used to prioritize messages for display and processing',
   PRIMARY KEY (`ofUserId`,`publisherId`,`streamName`,`ordinal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='rules applied on the user''s side for notifications coming in';
 

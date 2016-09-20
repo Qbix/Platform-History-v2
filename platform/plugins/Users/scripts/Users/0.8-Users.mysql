@@ -184,8 +184,8 @@ CREATE TABLE `{$prefix}session` (
   `content` varchar(4095)  NOT NULL COMMENT 'json format',
   `php` varchar(4095)  NOT NULL COMMENT 'php serialized session data',
   `deviceId` varchar(255)  NOT NULL COMMENT 'the id of the device in {$prefix}devices',
-  `timeout` int(11) NOT NULL COMMENT 'how long until the pincode needs to be entered',
-  `duration` int(11) NOT NULL DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
+  `timeout` int(11) NOT NULL DEFAULT 0 COMMENT 'how long until the pincode needs to be entered',
+  `duration` int(11) NOT NULL DEFAULT 0 DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'PHP timestamp of last time this row was saved',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';

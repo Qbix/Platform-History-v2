@@ -5,4 +5,4 @@ ALTER TABLE `{$prefix}related_to`
 MODIFY `weight` decimal(14,4) NOT NULL DEFAULT '1.0000' COMMENT 'used for sorting';
 
 ALTER TABLE `{$prefix}rule`
-MODIFY `relevance` decimal(14,4) NOT NULL COMMENT 'used to prioritize messages for display and processing';
+MODIFY `relevance` decimal(14,4) NOT NULL DEFAULT 1 COMMENT 'used to prioritize messages for display and processing';
