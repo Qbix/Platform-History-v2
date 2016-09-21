@@ -2976,6 +2976,7 @@ abstract class Streams extends Base_Streams
 						$row = $rule;
 						$row['streamName'] = $sn;
 						$row['ordinal'] = 1;
+						$row['filter'] = '';
 						$rules[$sn] = $ruleRows[] = $row;
 						$messages[$publisherId][$sn]['instructions'] = Q::json_encode(array(
 							'rule' => $row
