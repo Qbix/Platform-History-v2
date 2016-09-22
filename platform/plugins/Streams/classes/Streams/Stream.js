@@ -572,12 +572,12 @@ Sp.inheritAccess = function (callback) {
 		callback.call(subj, null, false);
 	}
 
-	if (Q.typeOf(names) !== "array") {
-		names = (function (obj) {
-			var res = [];
-			for(var i in obj) res.push(obj[i]);
-			return res;
-		})(names);
+	if (!Q.isArrayLike(names)) {
+		var temp = names;
+		names = [];
+		for (var k in names) {
+			names.push(JSON.stringify(temp[k]));
+		}
 	}
 
 	var public_source = Streams.ACCESS_SOURCES['public'];
@@ -618,7 +618,8 @@ Sp.inheritAccess = function (callback) {
 	Q.each(names, function (i, name) {
 		var asUserId = subj.get('asUserId', '');
 		var publisherId;
-		if (typeof names === 'array') {
+		var key = JSON.stringify(name);
+		if (Q.isArrayLike(name)) {
 			publisherId = name[0];
 			name = name[1];
 		} else {
@@ -660,7 +661,7 @@ Sp.inheritAccess = function (callback) {
 				? s_adminLevel_source 
 				: s_adminLevel_source + inherited_public_source;
 			}
-			p.fill(name)(null, true);
+			p.fill(key)(null, true);
 		});
 	});
 };
