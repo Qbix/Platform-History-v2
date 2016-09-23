@@ -917,7 +917,7 @@ class Q_Utils
 		}
 		
 		if(!file_exists($link)) {
-			throw new Q_Exception("Link $link to target $target' was not created");
+			throw new Q_Exception("Link $link to target $target was not created");
 		}
 	}
 	
