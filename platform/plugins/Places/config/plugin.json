@@ -112,7 +112,8 @@
 		},
 		"geolocation": {
 			"requireLogin": false,
-			"allowClientQueries": false
+			"allowClientQueries": false,
+			"timeLimit": 100000
 		},
 		"google": {
 			"keys": {
