@@ -8,7 +8,13 @@
 		"node" : {
 			"host": "MyApp.loc",
 			"port": "10500",
-			"url": "{{baseUrl}}/node.js"
+			"url": null, /* "{{baseUrl}}/node.js", */
+			"https": false /* {
+				"key": "location of key file here",
+				"cert": "location of cert file here",
+				"ca": "location of the ca file, optional",
+				"dhparam": "location of the dhparam file, optional"
+			} */
 		},
 		"nodeInternal": {
 			"host": "127.0.0.1",

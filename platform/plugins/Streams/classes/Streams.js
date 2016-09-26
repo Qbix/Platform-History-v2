@@ -355,7 +355,8 @@ Streams.listen = function (options) {
 	 */
 	socket = Users.Socket.listen({
 		host: pubHost,
-		port: pubPort
+		port: pubPort,
+		https: Q.Config.get(['Q', 'node', 'https'], false) || {}
 	});
 
 };

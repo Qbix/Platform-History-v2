@@ -32,11 +32,13 @@
 		},
 		"node" : {
 			"host": "localhost",
-			"port": "10500"
+			"port": "10500",
+			"https": false
 		},
 		"nodeInternal": {
 			"host": "127.0.0.1",
-			"port": "10501"
+			"port": "10501",
+			"https": false
 		},
 		"internal": {
 			"umask": "0000",
