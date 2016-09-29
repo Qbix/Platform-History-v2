@@ -355,7 +355,8 @@ Streams.listen = function (options) {
 	 */
 	socket = Users.Socket.listen({
 		host: pubHost,
-		port: pubPort
+		port: pubPort,
+		https: Q.Config.get(['Q', 'node', 'https'], false) || {}
 	});
 
 };
@@ -406,7 +407,7 @@ function Streams_request_handler (req, res, next) {
 			break;
 		case 'Streams/Stream/visit':
 			participant = JSON.parse(parsed.participant);
-			userId = participant.fields.userId;
+			userId = participant.userId;
 			Streams.Stream.emit('visit', stream, userId, clientId);
 			break;
 		case 'Streams/Stream/leave':

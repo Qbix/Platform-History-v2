@@ -708,8 +708,12 @@ class Q_Utils
 		}
 		$host = Q_Config::get('Q', 'node', 'host', null);
 		$port = Q_Config::get('Q', 'node', 'port', null);
-		if (!isset($port) || !isset($host)) return null;
-		return "http://$host:$port";
+		if (!isset($port) || !isset($host)) {
+			return null;
+		}
+		$https = Q_Config::get('Q', 'node', 'https', false);
+		$s = $https ? 's' : '';
+		return "http$s://$host:$port";
 	}
 
 	/**
@@ -917,7 +921,7 @@ class Q_Utils
 		}
 		
 		if(!file_exists($link)) {
-			throw new Q_Exception("Link $link to target $target' was not created");
+			throw new Q_Exception("Link $link to target $target was not created");
 		}
 	}
 	

@@ -61,7 +61,7 @@ CREATE TABLE `{$prefix}email` (
   `userId` varchar(31)  NOT NULL DEFAULT '',
   `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL,
   `activationCode` varchar(255)  NOT NULL,
-  `activationCodeExpires` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `activationCodeExpires` timestamp NULL DEFAULT NULL,
   `authCode` varchar(255)  NOT NULL COMMENT 'Used in all links sent by email, to authenticate the source',
   PRIMARY KEY (`address`),
   UNIQUE KEY `address` (`address`),
@@ -149,7 +149,7 @@ CREATE TABLE `{$prefix}mobile` (
   `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL DEFAULT 'unverified',
   `capabilities` enum('unverified','sms','wap','internet','sms_and_wap','sms_and_internet')  NOT NULL DEFAULT 'unverified',
   `activationCode` varchar(255)  NOT NULL,
-  `activationCodeExpires` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `activationCodeExpires` timestamp NULL DEFAULT NULL,
   `authCode` varchar(255)  NOT NULL COMMENT 'Used in all links sent by sms, to authenticate the source',
   PRIMARY KEY (`number`),
   UNIQUE KEY `number` (`number`),
@@ -184,8 +184,8 @@ CREATE TABLE `{$prefix}session` (
   `content` varchar(4095)  NOT NULL COMMENT 'json format',
   `php` varchar(4095)  NOT NULL COMMENT 'php serialized session data',
   `deviceId` varchar(255)  NOT NULL COMMENT 'the id of the device in {$prefix}devices',
-  `timeout` int(11) NOT NULL COMMENT 'how long until the pincode needs to be entered',
-  `duration` int(11) NOT NULL DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
+  `timeout` int(11) NOT NULL DEFAULT 0 COMMENT 'how long until the pincode needs to be entered',
+  `duration` int(11) NOT NULL DEFAULT 0 DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'PHP timestamp of last time this row was saved',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';

@@ -1312,7 +1312,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
-	 *  Otherwise returns array with keys "messageFrom" and "messageTo" and values of type Streams_Message
+	 *  Otherwise returns array with keys "messagesFrom" and "messagesTo" and values of type Streams_Message
 	 */
 	function relateTo($toStream, $type, $asUserId = null, $options = array())
 	{
@@ -1336,7 +1336,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
-	 *  Otherwise returns array with keys "messageFrom" and "messageTo" and values of type Streams_Message
+	 *  Otherwise returns array with keys "messagesFrom" and "messagesTo" and values of type Streams_Message
 	 */
 	function relateFrom($fromStream, $type, $asUserId = null, $options = array()) {
 		return Streams::relate(

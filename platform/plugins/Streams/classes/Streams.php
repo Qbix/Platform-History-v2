@@ -1757,7 +1757,7 @@ abstract class Streams extends Base_Streams
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
-	 *  Otherwise returns array with keys "messageFrom" and "messageTo" and values of type Streams_Message
+	 *  Otherwise returns array with keys "messagesFrom" and "messageTo" and values of type Streams_Message
 	 */
 	static function relate(
 		$asUserId,
@@ -2976,6 +2976,7 @@ abstract class Streams extends Base_Streams
 						$row = $rule;
 						$row['streamName'] = $sn;
 						$row['ordinal'] = 1;
+						$row['filter'] = '';
 						$rules[$sn] = $ruleRows[] = $row;
 						$messages[$publisherId][$sn]['instructions'] = Q::json_encode(array(
 							'rule' => $row

@@ -7,7 +7,7 @@ CREATE TABLE `{$prefix}notification` (
   `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the user to notify',
   `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
   `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream causing the notification',
-  `messageOrdinal` int(11) NOT NULL COMMENT 'the ordinal of the message being notified about',
+  `messageOrdinal` int(11) NOT NULL DEFAULT 0 COMMENT 'the ordinal of the message being notified about',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'the type of message',
   `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',

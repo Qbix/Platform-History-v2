@@ -8,6 +8,7 @@
  */
 var express = require('express');
 var http = require('http');
+var https = require('https');
 var util = require('util');
 var events = require('events');
 var path = require('path');
@@ -1973,7 +1974,11 @@ Q.servers = {};
  * @param {String} [options.port] the port to listen on
  * @param {String} [options.host] the hostname to listen on
  * @param {Array} [options.attach] an array of additional listeners to attach. Each member is a name of a class (e.g. "Q.Socket", "Q.Dispatcher" and "Db") which has the listen(options) method.
- * @param {Object} [options.https] https options. Not supported for now.
+ * @param {Object} [options.https] To start an https server, pass options to https.createServer here, to override the ones in the "Q"/"node"/"https" config options, if any.
+ * @param {String|Buffer} [options.https.key] Content of the private key file
+ * @param {String|Buffer} [options.https.cert] Content of the certificate file
+ * @param {String|Buffer} [options.https.ca] Content of the certificate authority file
+ * @param {String|Buffer} [options.https.dhparam] Contains the DH parameters for Perfect Forward Secrecy
  * @param {Function} [callback=null] fired when the server actually starts listening.
  *	The callback receives server address as argument
  * @throws {Q.Exception} if config field Q/nodeInternal/port or Q/nodeInternal/host are missing
@@ -2004,7 +2009,21 @@ Q.listen = function _Q_listen(options, callback) {
 	if (express.version === undefined
 	|| parseInt(express.version) >= 3) {
 		_express = express();
-		server = http.createServer(_express);
+		if (options.https) {
+			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
+			var keys = ['key', 'cert', 'ca', 'dhparam'];
+			keys.forEach(function (k) {
+				if (h[k]) {
+					h[k] = fs.readFileSync(h[k]).toString();
+				}
+			});
+			if (Q.isPlainObject(options.https)) {
+				Q.extend(h, options.https);
+			}
+			server = https.createServer(h, _express);
+		} else {
+			server = http.createServer(_express);
+		}
 	} else {
 		server = express.createServer();
 		_express = server;
