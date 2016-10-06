@@ -106,8 +106,19 @@ function Places_geolocation_post()
 	and abs($miles - $oldMiles) < 0.001) {
 		$noChange = true;
 	}
+	
+	$attributes['stream'] = $stream;
+	Q_Response::setSlot('attributes', $attributes);
 
 	if (!$noChange) {
+		// Send the response and keep going.
+		// WARN: this potentially ties up the PHP thread for a long time
+		$timeLimit = Q_Config::get('Places', 'geolocation', 'timeLimit', 100000);
+		ignore_user_abort(true);
+		set_time_limit($timeLimit);
+		Q_Dispatcher::response(true);
+		session_write_close();
+		
 		if ($shouldUnsubscribe or $shouldSubscribe) {
 			$myInterests = Streams_Category::getRelatedTo(
 				$user->id, 'Streams/user/interests', 'Streams/interests'
@@ -167,9 +178,5 @@ function Places_geolocation_post()
 			);
 		}	
 	}
-	
-	$attributes['stream'] = $stream;
-	
-	Q_Response::setSlot('attributes', $attributes);
 	Q::event("Places/geolocation", $attributes, 'after');
 }

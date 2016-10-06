@@ -1,7 +1,7 @@
 The Qbix Platform
 ===
 
-###[Platform Portal](http://qbix.com/platform) - tutorials, docs, platform reference, and more.
+###[Platform Portal](https://qbix.com/platform) - tutorials, docs, platform reference, and more.
 
 ===
 
@@ -19,7 +19,7 @@ Apps built with Qbix can go viral as they work on practically every device and i
 * emails + address books
 * mobile phones + contacts
 * facebook accounts + friend lists
-* Working in the Qbix platform encourages best practices, e.g. when it comes to [modern web standards](http://platform.qbix.com/welcome/developers), [security](https://www.owasp.org/index.php/Main_Page), [privacy](http://platform.qbix.com/guide/access) and [achieving business objectives](http://platform.qbix.com/welcome/business).
+* Working in the Qbix platform encourages best practices, e.g. when it comes to [modern web standards](https://qbix.com/platform/welcome/developer), [security](https://www.owasp.org/index.php/Main_Page), [privacy](https://qbix.com/platform/features/access) and [achieving business objectives](https://qbix.com/platform/welcome/business).
 
 ###Back End Technology Stack
 * PHP: Qbix runs on pretty much any environment with PHP 5 or above.

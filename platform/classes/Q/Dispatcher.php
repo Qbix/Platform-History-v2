@@ -125,6 +125,7 @@ class Q_Dispatcher
 		$check = array('accessible'))
 	{
 		self::$startedDispatch = true;
+		self::$servedResponse = false;
 		
 		if (!is_array($check)) {
 			$check = array('accessible');
@@ -180,18 +181,19 @@ class Q_Dispatcher
 		for ($try = 0; $try < $max_forwards; ++$try) {
 
 			// Make an array from the routed URI
-			$routed_uri_array = array();
+			self::$routed = array();
 			if (self::$uri instanceof Q_Uri) {
-				$routed_uri_array = self::$uri->toArray();
+				self::$routed = self::$uri->toArray();
 			}
 
 			// If no module was found, then respond with noModule and return
 			if (!isset(self::$uri->module)) {
 				/**
+				 * Occurs when no module was found during routing.
+				 * The parameters are the routed array
 				 * @event Q/noModule
-				 * @param {array} $routed_uri_array
 				 */
-				Q::event("Q/noModule", $routed_uri_array); // should echo things
+				Q::event("Q/noModule", self::$routed); // should echo things
 				self::result("No module");
 				return false;
 			}
@@ -204,16 +206,18 @@ class Q_Dispatcher
 				if (isset($routed_modules)) {
 					if (!in_array($module, $routed_modules)) {
 						/**
+						 * Occurs when no defined action was found during routing.
+						 * The parameters are the routed array
 						 * @event Q/notFound
-						 * @param {array} $routed_uri_array
+						 * @param {array} $routed
 						 */
-						Q::event('Q/notFound', $routed_uri_array); // should echo things
+						Q::event('Q/notFound', self::$routed); // should echo things
 						self::result("Unknown module");
 						return false;
 					}
 				} else {
 					if (!Q::realPath("handlers/$module")) {
-						Q::event('Q/notFound', $routed_uri_array); // should echo things
+						Q::event('Q/notFound', self::$routed); // should echo things
 						self::result("Unknown module");
 						return false;
 					}
@@ -221,7 +225,7 @@ class Q_Dispatcher
 				
 				// Implement notFound if action was not found
 				if (empty(self::$uri->action)) {
-					Q::event('Q/notFound', $routed_uri_array); // should echo things
+					Q::event('Q/notFound', self::$routed); // should echo things
 					self::result("Unknown action");
 					return false;
 				}
@@ -229,19 +233,24 @@ class Q_Dispatcher
 				// Fire a pure event, for aggregation etc
 				if (!isset(self::$skip['Q/prepare'])) {
 					/**
+					 * Gives the app a chance to prepare for handling a request
+					 * The parameters are the routed array
 					 * @event Q/prepare
-					 * @param {array} $routed_uri_array
+					 * @param {array} $routed
 					 */
-					Q::event('Q/prepare', $routed_uri_array, true);
+					Q::event('Q/prepare', self::$routed, true);
 				}
 	
 				// Perform validation
 				if (!isset(self::$skip['Q/validate'])) {
 					/**
+					 * Gives the app a chance to validate the request and call
+					 * Q_Response::addError() zero or more times.
+					 * The parameters are the routed array
 					 * @event Q/validate
-					 * @param {array} $routed_uri_array
+					 * @param {array} $routed
 					 */
-					Q::event('Q/validate', $routed_uri_array);
+					Q::event('Q/validate', self::$routed);
 				
 					if (!isset(self::$skip['Q/errors'])) {
 						// Check if any errors accumulated
@@ -257,20 +266,23 @@ class Q_Dispatcher
 				// Time to instantiate some app objects from the request
 				if (!isset(self::$skip['Q/objects'])) {
 					/**
+					 * Gives the app a chance to fetch objects needed for handling
+					 * the request.
 					 * @event Q/objects
-					 * @param {array} $routed_uri_array
+					 * @param {array} $routed
 					 */
-					Q::event('Q/objects', $routed_uri_array, true);
+					Q::event('Q/objects', self::$routed, true);
 				}
 				
 				// We might want to reroute the request
 				if (!isset(self::$skip['Q/reroute'])) {
 					/**
+					 * Gives the app a chance to reroute the request
 					 * @event Q/reroute
-					 * @param {array} $routed_uri_array
+					 * @param {array} $routed
 					 * @return {boolean} whether to stop the dispatch
 					 */
-					$stop_dispatch = Q::event('Q/reroute', $routed_uri_array, true);
+					$stop_dispatch = Q::event('Q/reroute', self::$routed, true);
 					if ($stop_dispatch) {
 						self::result("Stopped dispatch");
 						return false;
@@ -295,10 +307,11 @@ class Q_Dispatcher
 				// You can calculate some analytics here, and store them somewhere
 				if (!isset(self::$skip['Q/analytics'])) {
 					/**
+					 * Gives the app a chance to gather analytics from the request.
 					 * @event Q/analytics
-					 * @param {array} $routed_uri_array
+					 * @param {array} $routed
 					 */
-					Q::event('Q/analytics', $routed_uri_array, true);
+					Q::event('Q/analytics', self::$routed, true);
 				}
 				
 				if (!isset(self::$skip['Q/errors'])) {
@@ -316,32 +329,8 @@ class Q_Dispatcher
 				// That is because GET in HTTP is not supposed to have side effects
 				// for which the client is responsible.
 
-				// Start buffering the response, unless otherwise requested
-				$handler = Q_Response::isBuffered();
-				if ($handler !== false) {
-					$ob = new Q_OutputBuffer($handler);
-				}
+				self::response();
 				
-				if (!empty($_GET['Q_ct'])) {
-					Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
-				}
-				if (!empty($_GET['Q_cordova'])) {
-					Q_Response::setCookie('Q_cordova', $_GET['Q_cordova']);
-				}
-				Q_Response::sendCookieHeaders();
-
-				// Generate and render a response
-				/**
-				 * @event Q/response
-				 * @param {array} $routed_uri_array
-				 */
-				self::$startedResponse = true;
-				Q::event("Q/response", $routed_uri_array);
-				if (!empty($ob)) {
-					$ob->endFlush();
-				}
-
-				self::result("Served response");
 				return true;
 			} catch (Q_Exception_DispatcherForward $e) {
 				if (!empty($ob)) {
@@ -399,6 +388,57 @@ class Q_Dispatcher
 		throw new Q_Exception_Recursion(array(
 			'function_name' => 'Dispatcher::forward()'
 		));
+	}
+	
+	/**
+	 * Returns a response to the client.
+	 * @param {boolean} [$closeConnection=false] Whether to send headers to close the connection
+	 * @method response
+	 * @static
+	 */
+	static function response($closeConnection = false)
+	{
+		if (self::$servedResponse) {
+			return; // response was served, and no new dispatch started
+		}
+		
+		// Start buffering the response, unless otherwise requested
+		$handler = Q_Response::isBuffered();
+		if ($handler !== false) {
+			$ob = new Q_OutputBuffer($handler);
+		}
+		
+		if (!empty($_GET['Q_ct'])) {
+			Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
+		}
+		if (!empty($_GET['Q_cordova'])) {
+			Q_Response::setCookie('Q_cordova', $_GET['Q_cordova']);
+		}
+		Q_Response::sendCookieHeaders();
+
+		// Generate and render a response
+		/**
+		 * Gives the app a chance to generate a response.
+		 * You should not change the server state when handling this event.
+		 * @event Q/response
+		 * @param {array} $routed
+		 */
+		self::$startedResponse = true;
+		Q::event("Q/response", self::$routed);
+		if ($closeConnection) {
+			header("Connection: close");
+			header("Content-Length: ".$ob->getLength());
+		}
+		if (!empty($ob)) {
+			$ob->endFlush();
+		}
+		if ($closeConnection) {
+			ob_end_flush();
+			flush();
+		}
+		self::$servedResponse = true;
+		self::result("Served response");
+		return true;
 	}
 	
 	/**
@@ -512,17 +552,34 @@ class Q_Dispatcher
 	 */
 	protected static $errorsOccurred = false;
 	/**
-	 * @property $startedResponse
+	 * Whether the dispatch method was called since the beginning of the request
+	 * @property @startedDispatch
 	 * @type boolean
 	 * @static
 	 * @public
 	 */
 	public static $startedDispatch = false;
 	/**
+	 * Whether a response was started, since the beginning of the request
 	 * @property $startedResponse
 	 * @type boolean
 	 * @static
 	 * @public
 	 */
 	public static $startedResponse = false;
+	/**
+	 * Whether a response was served since the last time dispatch started
+	 * @property $servedResponse
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $servedResponse = false;
+	/**
+	 * @property $routed
+	 * @type array
+	 * @static
+	 * @public
+	 */
+	public static $routed = null;
 }

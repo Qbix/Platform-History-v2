@@ -6,7 +6,7 @@
 
 /**
  * Makes an infomation block for adding a bookmarklet on the browser's bookmarks bar
- * the way similar to how facebook does: http://www.facebook.com/share_options.php .
+ * the way similar to how facebook does: https://www.facebook.com/share_options.php .
  * Main purpose of the tool is to present in cross-browser way how bookmarklet button will look, how bookmarklet will
  * look on browser panel and instructions how to add bookmarklet to that panel.
  * @param {array} $options An associative array of parameters, which can include:

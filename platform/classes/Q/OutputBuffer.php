@@ -40,6 +40,7 @@ class Q_OutputBuffer
 	}
 	
 	/**
+	 * Calls ob_get_clean().
 	 * The getClean() method calls ob_end_flush() repeatedly to flush buffers
 	 * which have been started but not flushed yet, after this one.
 	 * @method getClean
@@ -52,13 +53,27 @@ class Q_OutputBuffer
 	}
 	
 	/**
-	 * The getClean() method calls ob_end_flush() repeatedly to flush buffers
+	 * Calls ob_end_flush().
+	 * The endFlush() method calls ob_end_flush() repeatedly to flush buffers
 	 * which have been started but not flushed yet, after this one.
 	 * @method endFlush
 	 */
 	function endFlush()
 	{
-		@ob_end_flush();
+		$this->flushHigherBuffers();
+		return @ob_end_flush();
+	}
+	
+	/**
+	 * Calls ob_get_length().
+	 * The getLength() method calls ob_end_flush() repeatedly to flush buffers
+	 * which have been started but not flushed yet, after this one.
+	 * @method getLength
+	 */
+	function getLength()
+	{
+		$this->flushHigherBuffers();
+		return ob_get_length();
 	}
 	
 	/**
