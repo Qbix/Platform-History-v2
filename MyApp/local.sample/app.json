@@ -2,7 +2,7 @@
 	"Q": {
 		"localNotYetConfigured": "REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
 		"web": {
-			"appRootUrl": "http://MyApp.loc",
+			"appRootUrl": "https://MyApp.loc",
 			"controllerSuffix": "CAN BE BLANK OR index.php"
 		},
 		"node" : {

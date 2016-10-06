@@ -10822,7 +10822,7 @@ Q.Masks = {
 	 * Hides the mask by given key. If mask with given key doesn't exist, fails silently.
 	 * @static
 	 * @method hide
-	 * @param {String} key A key of the mask to hide.
+	 * @param {String} key A key of the mask to hide
 	 */
 	hide: function(key)
 	{
@@ -10938,7 +10938,6 @@ if (!root.console) {
  * because that library removes the <link> elements and puts <style> instead of them.
  * We don't know if prefixfree will be included but we have to save some information
  * about the stylesheets before it arrives on the scene.
- * @method processStylesheets
  */
 function processStylesheets() {
 	// Complain about some other libraries if necessary
@@ -11259,6 +11258,9 @@ Q.onReady.set(function _Q_masks() {
 	Q.layout();
 }, 'Q.Masks');
 
+/**
+ * @module Q
+ */
 if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	// Assume we are in a Node.js environment, e.g. running tests
 	module.exports = Q;

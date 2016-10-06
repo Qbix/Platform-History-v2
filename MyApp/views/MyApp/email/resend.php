@@ -15,7 +15,7 @@
 
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
+  "@context": "https://schema.org",
   "@type": "EmailMessage",
   "action": {
     "@type": "ViewAction",

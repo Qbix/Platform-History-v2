@@ -3,6 +3,7 @@
 include("Q.inc.php");
 $ms = ceil(Q::milliseconds());
 $htmlAttributes = Q_Response::htmlAttributes();
+$baseUrl = Q_Request::baseUrl();
 echo <<<EOT
 
 
@@ -11,7 +12,7 @@ echo <<<EOT
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Fast loading page</title>
-		<link rel="shortcut icon" href="http://gmba.local/First/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="$baseUrl/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 
