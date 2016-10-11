@@ -288,11 +288,11 @@ class Db_Mysql implements iDb
 	/**
 	 * Creates a query to select fields from a table. Needs to be used with Db_Query::from().
 	 * @method select
-	 * @param {string|array} $fields The fields as strings, or array of alias=>field
-	 * @param {string|array} $tables The tables as strings, or array of alias=>table
+	 * @param {string|array} [$fields='*'] The fields as strings, or "*", or array of alias=>field
+	 * @param {string|array} [$tables=''] The tables as strings, or array of alias=>table
 	 * @return {Db_Query_Mysql} The resulting Db_Query object
 	 */
-	function select ($fields, $tables = '')
+	function select ($fields = '*', $tables = '')
 	{
 		if (empty($fields))
 			throw new Exception("fields not specified in call to 'select'.");
@@ -2303,9 +2303,8 @@ $field_hints
 	 * Create SELECT query to the class table
 	 * @method select
 	 * @static
-	 * @param {array} \$fields The field values to use in WHERE clauseas as 
-	 * an associative array of `column => value` pairs
-	 * @param {string} [\$alias=null] Table alias
+	 * @param {string|array} [\$fields='*'] The fields as strings, or array of alias=>field
+	 * @param {string|array} [\$alias=null] The tables as strings, or array of alias=>table
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select(\$fields, \$alias = null)
@@ -2469,11 +2468,12 @@ Base.connectionName = function() {
 $dc
  * Create SELECT query to the class table
  * @method SELECT
- * @param {object|string} fields The field values to use in WHERE clauseas as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {String|Object} [fields='*'] The fields as strings, or object of {alias:field} pairs
+ * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs
  * @return {Db.Query.Mysql} The generated query
  */
 Base.SELECT = function(fields, alias) {
+	fields = fields || '*';
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
 	q.className = '$class_name';
 	return q;

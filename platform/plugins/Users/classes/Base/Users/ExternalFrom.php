@@ -107,9 +107,8 @@ abstract class Base_Users_ExternalFrom extends Db_Row
 	 * Create SELECT query to the class table
 	 * @method select
 	 * @static
-	 * @param {array} $fields The field values to use in WHERE clauseas as 
-	 * an associative array of `column => value` pairs
-	 * @param {string} [$alias=null] Table alias
+	 * @param {string|array} [$fields='*'] The fields as strings, or array of alias=>field
+	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields, $alias = null)
