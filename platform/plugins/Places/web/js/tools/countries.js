@@ -15,6 +15,7 @@ var Places = Q.Places;
  * @param {String} [options.flags="plugins/Places/img/squareflags"] the path for the flags, or set to false to omit the flag
  * @param {String} [options.countryCode='US'] the initial country to select in the list
  * @param {Array} [options.firstCountryCodes='US','GB'] array of country codes to place first in the list
+ * @param {Boolean} [options.sort] if true, sorts the countries alphabetically
  * @param {Q.Tool} [options.globe] a reference to a "Places/globe" tool to synchronize
  * @param {Q.Event} [options.onReady] this event occurs when the countries selector is ready
  * @param {Q.Event} [options.onChange=new Q.Event()] Occurs when the value has changed
@@ -84,6 +85,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 	countryCode: 'US',
 	firstCountryCodes: ['US','GB'],
 	globe: null,
+	sort: false,
 	onChange: new Q.Event(),
 	onReady: new Q.Event()
 },
@@ -133,6 +135,13 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 				tool.$options[countryCode] = $option;
 				codes[countryCode] = true;
 			});
+			if (state.sort) {
+				state.countries.sort(function (a, b) {
+					var a1 = Places.countriesByCode[a][0];
+					var b1 = Places.countriesByCode[b][0];
+					return a1 > b1 ? 1 : (a == b ? 0 : -1);
+				});
+			}
 			Q.each(state.countries, function (i, countryCode) {
 				var countryCode = countryCode;
 				if (codes[countryCode]) return;

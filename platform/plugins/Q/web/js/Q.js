@@ -2027,6 +2027,29 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
 };
 
 /**
+ * Like "add" method, but removes the handler right after it has executed.
+ * @method addOnce
+ * @param {mixed} handler Any kind of callable which Q.handle can invoke
+ * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
+ *  Used to replace handlers previously added under the same key.
+ *  Also used for removing handlers with .remove(key).
+ *  If the key is not provided, a unique one is computed.
+ *  Pass a Q.Tool object here to associate the handler to the tool,
+ *  and it will be automatically removed when the tool is removed.
+ * @param {boolean} prepend If true, then prepends the handler to the chain
+ * @return {String} The key under which the handler was set
+ */
+Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+	var event = this;
+	key = event.add(function _addOnce() {
+		handler.apply(this, arguments);
+		setTimeout(function () {
+			event.remove(key);
+		}, 0);
+	}, key, prepend);
+};
+
+/**
  * Removes an event handler
  * @method remove
  * @param {String} key
@@ -5351,9 +5374,11 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
  * @param {Function} callback This function is called when the library is loaded
  */
 Q.loadHandlebars = function _Q_loadHandlebars(callback) {
-	Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
-		_addHandlebarsHelpers();
-		callback();
+	Q.onInit.addOnce(function () {
+		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
+			_addHandlebarsHelpers();
+			callback();
+		});
 	});
 };
 
@@ -11268,7 +11293,7 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	// We are in a browser environment
 	/**
 	 * This method restores the old window.Q and returns an instance of itself.
-     * @method Q.noConflict
+     * @method noConflict
 	 * @param {boolean} extend
 	 *  If true, extends the old Q with methods and properties from the Q Platform.
 	 *  Otherwise, the old Q is untouched.
