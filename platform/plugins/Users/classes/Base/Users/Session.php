@@ -17,6 +17,7 @@
  * @property {string} $id
  * @property {string} $content
  * @property {string} $php
+ * @property {string} $userId
  * @property {string} $deviceId
  * @property {integer} $timeout
  * @property {integer} $duration
@@ -34,6 +35,10 @@ abstract class Base_Users_Session extends Db_Row
 	 */
 	/**
 	 * @property $php
+	 * @type {string}
+	 */
+	/**
+	 * @property $userId
 	 * @type {string}
 	 */
 	/**
@@ -363,6 +368,60 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_userId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_userId($value)
+	{
+		if (!isset($value)) {
+			return array('userId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('userId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
+		return array('userId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+	function maxSize_userId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_deviceId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -599,7 +658,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'content', 'php', 'deviceId', 'timeout', 'duration', 'updatedTime');
+		$field_names = array('id', 'content', 'php', 'userId', 'deviceId', 'timeout', 'duration', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

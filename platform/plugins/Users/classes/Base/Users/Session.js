@@ -42,6 +42,10 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
+ * @type userId
+ */
+/**
+ * @property {String}
  * @type deviceId
  */
 /**
@@ -214,6 +218,7 @@ Base.prototype.fieldNames = function () {
 		"id",
 		"content",
 		"php",
+		"userId",
 		"deviceId",
 		"timeout",
 		"duration",
@@ -333,6 +338,42 @@ Base.prototype.maxSize_php = function () {
 Base.column_php = function () {
 
 return [["varchar","4095","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_userId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_userId = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a string to '+this.table()+".userId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_userId = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_userId = function () {
+
+return [["varchar","31","",false],true,"MUL",null];
 };
 
 /**

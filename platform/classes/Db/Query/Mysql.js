@@ -662,6 +662,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * @chainable
 	 */
 	mq.limit = function(limit, offset) {
+		if (limit == null) {
+			return this;
+		}
 		if (isNaN(limit) || limit < 0 || Math.floor(limit) !== limit) {
 			throw new Q.Exception("the limit must be a non-negative integer");
 		}
