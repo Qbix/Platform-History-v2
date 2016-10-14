@@ -152,7 +152,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 				.data('photo', this)
 				.appendTo(tool.$photosContainer)
 				.on(Q.Pointer.fastclick, function () {
-					Q.handle(state.onSelect, tool, [this, photo, photo.images]);
+					Q.handle(state.onSelect, tool, [photo, photo.images]);
 				});
 				w.push(src);
 			});
@@ -161,9 +161,9 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 			}
 		}
 		
-		Q.handle(state.onPhotos, this, [album]);
+		Q.handle(state.onPhotos, tool, [album]);
 		p.add(w, function () {
-			Q.handle(state.onPhotosLoaded, this, [album]);
+			Q.handle(state.onPhotosLoaded, tool, [album]);
 		}).run();
 		
 	}
