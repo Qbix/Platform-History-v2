@@ -341,6 +341,11 @@ class Q_Session
 				Q_Response::setNotice($k, $v);
 			}
 		}
+		if (!empty($_SESSION['Q']['terminated'])) {
+			throw new Q_Exception_SessionTerminated(array(
+				'id' => Q_Session::id()
+			));
+		}
 		/**
 		 * @event Q/session/start {after}
 		 */

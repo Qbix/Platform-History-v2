@@ -2027,6 +2027,29 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
 };
 
 /**
+ * Like "add" method, but removes the handler right after it has executed.
+ * @method addOnce
+ * @param {mixed} handler Any kind of callable which Q.handle can invoke
+ * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
+ *  Used to replace handlers previously added under the same key.
+ *  Also used for removing handlers with .remove(key).
+ *  If the key is not provided, a unique one is computed.
+ *  Pass a Q.Tool object here to associate the handler to the tool,
+ *  and it will be automatically removed when the tool is removed.
+ * @param {boolean} prepend If true, then prepends the handler to the chain
+ * @return {String} The key under which the handler was set
+ */
+Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+	var event = this;
+	key = event.add(function _addOnce() {
+		handler.apply(this, arguments);
+		setTimeout(function () {
+			event.remove(key);
+		}, 0);
+	}, key, prepend);
+};
+
+/**
  * Removes an event handler
  * @method remove
  * @param {String} key
@@ -5351,9 +5374,11 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
  * @param {Function} callback This function is called when the library is loaded
  */
 Q.loadHandlebars = function _Q_loadHandlebars(callback) {
-	Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
-		_addHandlebarsHelpers();
-		callback();
+	Q.onInit.addOnce(function () {
+		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
+			_addHandlebarsHelpers();
+			callback();
+		});
 	});
 };
 
@@ -10459,7 +10484,7 @@ Q.Dialogs.push.options = {
  * @static
  * @method alert
  * @param {String} message The only required parameter, this specifies text of the alert.
- * @param {Object} [options] An optiopnal hash of options which can include:
+ * @param {Object} [options] An optional hash of options which can include:
  *   @param {String} [options.title] Optional parameter to override alert dialog title. Defaults to 'Alert'.
  *   @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
@@ -10488,7 +10513,7 @@ Q.alert = function(message, options) {
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing true | false depending on whether user clicked (tapped) 'Ok' or 'Cancel' button, respectively
  *   or null if the user closed the dialog.
- * @param {Object} [options] An optiopnal hash of options which can include:
+ * @param {Object} [options] An optional hash of options which can include:
  * @param {String} [options.title='Confirm'] to override confirm dialog title.
  * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
  * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
@@ -10545,7 +10570,7 @@ Q.confirm.options = {
  *   user to enter something (e.g. 'Enter your name').
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing the entered value as a string, or null if the dialog was dismissed with the close button
- * @param {Object} [options] An optiopnal hash of options which can include:
+ * @param {Object} [options] An optional hash of options which can include:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
@@ -11268,7 +11293,7 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 	// We are in a browser environment
 	/**
 	 * This method restores the old window.Q and returns an instance of itself.
-     * @method Q.noConflict
+     * @method noConflict
 	 * @param {boolean} extend
 	 *  If true, extends the old Q with methods and properties from the Q Platform.
 	 *  Otherwise, the old Q is untouched.

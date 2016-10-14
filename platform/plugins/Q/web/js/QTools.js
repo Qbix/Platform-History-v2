@@ -2755,6 +2755,15 @@ Q.Contextual = {
 			};
 			$(document.body).on(Q.Pointer.move, Q.Contextual.moveEventHandler);
 			
+			Q.Contextual.enterEventHandler = function (e) {
+				var c = Q.Contextual.collection[Q.Contextual.current];
+				if (e.target.tagName.toLowerCase() === 'iframe'
+				&& c && c.contextual && !c.contextual[0].contains(e.target)) {
+					Q.Contextual.hide();
+				}
+			};
+			$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);
+			
 			Q.Contextual.endEventHandler = function(e)
 			{
 				if ($(e.target).hasClass('Q_contextual_inactive')) {

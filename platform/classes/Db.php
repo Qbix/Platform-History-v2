@@ -84,11 +84,11 @@ interface iDb
 	/**
 	 * Creates a query to select fields from a table. Needs to be used with Db_Query::from().
 	 * @method select
-	 * @param {string|array} $fields The fields as strings, or array of alias=>field
-	 * @param {string|array} $tablesThe tables as strings, or array of alias=>table
+	 * @param {string|array} [$fields='*'] The fields as strings, or array of alias=>field
+	 * @param {string|array} [$tables=''] The tables as strings, or array of alias=>table
 	 * @return {Db_Query_Mysql} The resulting Db_Query object
 	 */
-	function select ($fields, $tables = '');
+	function select ($fields = '*', $tables = '');
 
 	/**
 	 * Creates a query to insert a row into a table

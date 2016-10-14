@@ -1,0 +1,3 @@
+ALTER TABLE users_session
+ADD COLUMN userId varchar(31) NULL DEFAULT NULL AFTER php,
+ADD INDEX userId (userId);

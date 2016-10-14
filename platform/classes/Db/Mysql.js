@@ -200,8 +200,8 @@ function Db_Mysql(connName, dsn) {
 	/**
 	 * Creates a query to select fields from a table. Needs to be used with Db.Query.from().
 	 * @method SELECT
-	 * @param {String|Object} fields The fields as strings, or associative array of `{alias: field}`
-	 * @param {String|Object} tables The tables as strings, or associative array of `{alias: table}`
+	 * @param {String|Object} fields The fields as strings, or associative array of `{alias: field}` pairs
+	 * @param {String|Object} tables The tables as strings, or associative array of `{alias: table}` pairs
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 */
 	dbm.SELECT = function(fields, tables) {

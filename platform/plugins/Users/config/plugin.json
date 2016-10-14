@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "0.9.1",
+				"version": "0.9.2",
 				"compatible": "0.9",
 				"requires": {"Q": "0.9"},
 				"permissions": ["Users/icons"],

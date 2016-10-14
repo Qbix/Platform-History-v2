@@ -2267,7 +2267,7 @@ abstract class Streams extends Base_Streams
 		$limit = !empty($options['limit'])
 			? $options['limit']
 			: $max_limit;
-		if ($limit > $max_limit) {
+		if (!is_numeric($limit) or $limit > $max_limit) {
 			throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
 		}
 

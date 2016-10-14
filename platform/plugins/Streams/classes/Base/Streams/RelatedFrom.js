@@ -98,11 +98,12 @@ Base.connectionName = function() {
 /**
  * Create SELECT query to the class table
  * @method SELECT
- * @param {object|string} fields The field values to use in WHERE clauseas as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {String|Object} [fields='*'] The fields as strings, or object of {alias:field} pairs
+ * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs
  * @return {Db.Query.Mysql} The generated query
  */
 Base.SELECT = function(fields, alias) {
+	fields = fields || '*';
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
 	q.className = 'Streams_RelatedFrom';
 	return q;
