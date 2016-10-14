@@ -13,6 +13,7 @@
  *   @param {Q.Event} [options.onSelect] Triggered when the user selects a photo.
  *   @param {Q.Event} [options.beforePhotos] Triggered when photos are about to be rendered.
  *   @param {Q.Event} [options.onPhotos] Triggered when photos have been rendered.
+ *   @param {Q.Event} [options.onPhotosLoaded] Triggered when the photos have all been loaded.
  *   @param {String} [options.uid='me'] Optional. The uid of the user on the provider whose photos are shown. Facebook only allows 'me' or a page id as a value.
  *   @param {String} [$options.fetchBy='album'] The tool supports different algoriths for fetching photos. Can be either by 'album' or 'tags'. Maybe more will be added later.
  *   @param {String} [$options.preprocessAlbums] Optional function to process the albums array before presenting it in the select. Receives a reference to the albums array as the first parameter, and a callback to call when it's done as the second.
@@ -138,18 +139,22 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 				.appendTo($te);
 		}
 		
+		var p = new Q.Pipe();
+		var w = [];
 		if (Q.isEmpty(photos)) {
 			tool.$photosContainer.append('<div class="Streams_photoSelector_noPhotos">No photos found for these criteria.</div>');
 		} else {
 			Q.each(photos, function () {
 				var photo = this;
-				var $img = $('<img />').attr({
-					src: photo.picture
-				}).data('photo', this)
+				var $img = $('<img />')
+				.on('load', p.fill(src))
+				.attr({src: photo.picture})
+				.data('photo', this)
 				.appendTo(tool.$photosContainer)
 				.on(Q.Pointer.fastclick, function () {
 					Q.handle(state.onSelect, tool, [this, photo, photo.images]);
 				});
+				w.push(src);
 			});
 			if (state.oneLine) {
 				tool.$photosContainer.addClass('Streams_photoSelector_oneLine');
@@ -157,6 +162,9 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 		}
 		
 		Q.handle(state.onPhotos, this, [album]);
+		p.add(w, function () {
+			Q.handle(state.onPhotosLoaded, this, [album]);
+		}).run();
 		
 	}
 	
@@ -308,6 +316,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 	onSelect: new Q.Event(),
 	beforePhotos: new Q.Event(),
 	onPhotos: new Q.Event(),
+	onPhotosLoaded: new Q.Event(),
 	preprocessAlbums: function (albums, callback) {
 		Q.each(albums, function (i) {
 			if (this.type === 'profile') {
