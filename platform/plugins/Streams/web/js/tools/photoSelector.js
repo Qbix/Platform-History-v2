@@ -152,7 +152,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 				.data('photo', this)
 				.appendTo(tool.$photosContainer)
 				.on(Q.Pointer.fastclick, function () {
-					Q.handle(state.onSelect, tool, [photo, photo.images]);
+					Q.handle(state.onSelect, tool, [this, photo, photo.images]);
 				});
 				w.push(src);
 			});
