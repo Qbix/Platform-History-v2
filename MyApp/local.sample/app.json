@@ -3,7 +3,7 @@
 		"localNotYetConfigured": "REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
 		"web": {
 			"appRootUrl": "https://MyApp.loc",
-			"controllerSuffix": "CAN BE BLANK OR index.php"
+			"controllerSuffix": "" /* "or index.php if no URL rewriting on webserver" */
 		},
 		"node" : {
 			"host": "MyApp.loc",
