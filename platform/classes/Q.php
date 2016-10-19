@@ -1223,9 +1223,14 @@ class Q
 	{
 		$result = call_user_func_array('json_encode', func_get_args());
 		if ($result === false) {
+			if (is_callable('json_last_error')) {
+				throw new Q_Exception_JsonEncode(array(
+					'message' => json_last_error_msg()
+				), null, json_last_error());
+			}
 			throw new Q_Exception_JsonEncode(array(
-				'message' => json_last_error_msg()
-			), null, json_last_error());
+				'message' => 'Invalid JSON'
+			), null, -1);
 		}
 		return str_replace("\\/", '/', $result);
 	}
@@ -1236,11 +1241,18 @@ class Q
 	 */
 	static function json_decode()
 	{
-		$result = call_user_func_array('json_decode', func_get_args());
-		if ($code = json_last_error()) {
-			throw new Q_Exception_JsonDecode(array(
-				'message' => json_last_error_msg()
-			), null, $code);
+		$args = func_get_args();
+		$result = call_user_func_array('json_decode', $args);
+		if (is_callable('json_last_error')) {
+			if ($code = json_last_error()) {
+				throw new Q_Exception_JsonDecode(array(
+					'message' => json_last_error_msg()
+				), null, $code);
+			}
+		} else if (!isset($result) and strtolower(trim($args[0])) !== 'null') {
+			throw new Q_Exception_JsonEncode(array(
+				'message' => 'Invalid JSON'
+			), null, -1);
 		}
 		return $result;
 	}
