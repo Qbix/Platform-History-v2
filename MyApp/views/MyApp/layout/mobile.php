@@ -8,7 +8,7 @@
 	<meta name="mobile-web-app-capable" content="yes" />
 	<link rel="manifest" href="<?php echo Q_Html::themedUrl('manifest.json') ?>">
 	<meta name="theme-color" content="#f8f8f8">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="translucent" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="<?php Q_Html::text(Users::communityName()) ?>">
 	<?php if (Q_Request::platform() !== 'android'): ?>
