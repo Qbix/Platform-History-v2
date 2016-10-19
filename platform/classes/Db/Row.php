@@ -2103,9 +2103,17 @@ class Db_Row implements Iterator
 				$this->rollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
+				try {
+					$criteria = http_build_query($use_search_criteria, '', ', ');
+				} catch (Exception $e) {
+					
+				}
+				if (!$criteria) {
+					$criteria = "given " . implode(", ", array_keys($use_search_criteria));
+				}
 				throw new Q_Exception_MissingRow(array(
 					'table' => $this->getTable(),
-					'criteria' => $use_search_criteria
+					'criteria' => $criteria
 				));
 			}
 			return false;
