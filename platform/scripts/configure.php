@@ -72,14 +72,6 @@ if ($desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	}
 }
 
-$uploads_dir = APP_FILES_DIR.DS.$desired.DS.'uploads';
-if (is_dir($uploads_dir)) {
-	if (file_exists(APP_WEB_DIR.DS.'uploads')) {
-		unlink(APP_WEB_DIR.DS.'uploads');
-	}
-	Q_Utils::symlink($uploads_dir, APP_WEB_DIR.DS.'uploads');
-}
-
 echo "Application configured. The next steps are:
 1) edit the config in $basename/local/app.json
 2) run $basename/scripts/Q/install.php --all

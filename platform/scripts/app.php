@@ -190,6 +190,14 @@ $options['sql'] = $sql_array;
 
 echo 'Q Platform app installer'.PHP_EOL;
 
+$uploads_dir = APP_FILES_DIR.DS.$desired.DS.'uploads';
+if (is_dir($uploads_dir)) {
+	if (file_exists(APP_WEB_DIR.DS.'uploads')) {
+		unlink(APP_WEB_DIR.DS.'uploads');
+	}
+	Q_Utils::symlink($uploads_dir, APP_WEB_DIR.DS.'uploads');
+}
+
 if ($auto_plugins) {
 	$plugins = Q_Config::get('Q', 'plugins', array());
 	if (!in_array("Q", $plugins)) {
