@@ -17,7 +17,7 @@ function Users_sessions_tool($options)
 		'editable' => true,
 		'devices' => true
 	), $options);
-	Q_Response::addStylesheet('plugins/Users/css/UsersSessions.css');
+	Q_Response::addStylesheet('plugins/Users/css/tools/sessions.css');
 	if (empty($options['userId'])) {
 		$options['userId'] = Users::loggedInUser(true)->id;
 	}
