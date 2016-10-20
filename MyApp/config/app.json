@@ -6,12 +6,12 @@
 			"compatible": "0.1",
 			"requires": {
 				"Q": "0.9",
-				"Users": "0.9",
+				"Users": "0.9.3",
 				"Streams": "0.9"
 			},
 			"recognizes": {
 				"Q": "0.8",
-				"Users": "0.9",
+				"Users": "0.9.3",
 				"Streams": "0.9"
 			},
 			"connections": []
