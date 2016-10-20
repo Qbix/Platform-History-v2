@@ -4,7 +4,7 @@
 			"Streams": {
 				"version": "0.9.4",
 				"compatible": "0.9",
-				"requires": {"Users": "0.9"},
+				"requires": {"Users": "0.9.3"},
 				"permissions": ["Streams/icons"],
 				"connections": ["Streams"]
 			}

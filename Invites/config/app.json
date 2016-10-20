@@ -5,8 +5,8 @@
 			"version" : "0.1",
 			"compatible": "0.1",
 			"requires": {
-				"Users": "0.8.2",
-				"Streams": "0.8.2"
+				"Users": "0.9.3",
+				"Streams": "0.9"
 			}
 		},
 		"plugins": ["Users", "Streams"],
