@@ -90,11 +90,12 @@ Base.connectionName = function() {
 /**
  * Create SELECT query to the class table
  * @method SELECT
- * @param {object|string} fields The field values to use in WHERE clauseas as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {String|Object} [fields='*'] The fields as strings, or object of {alias:field} pairs
+ * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs
  * @return {Db.Query.Mysql} The generated query
  */
 Base.SELECT = function(fields, alias) {
+	fields = fields || '*';
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
 	q.className = 'Assets_Leader';
 	return q;
@@ -342,9 +343,10 @@ return [["smallint","4","",false],false,"","0"];
 /**
  * Check if mandatory fields are set and updates 'magic fields' with appropriate values
  * @method beforeSave
- * @param {array} value The array of fields
- * @return {array}
- * @throws {Error} If mandatory field is not set
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
 	var fields = ['app','day','userId'], i;

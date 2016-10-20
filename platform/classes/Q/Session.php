@@ -285,7 +285,8 @@ class Q_Session
 								'id_field' => $id_field,
 								'data_field' => $data_field,
 								'updated_field' => $updated_field,
-								'duration_field' => $duration_field
+								'duration_field' => $duration_field,
+								'inserting' => true
 							),
 							'before'
 						)) {
@@ -345,6 +346,10 @@ class Q_Session
 			throw new Q_Exception_SessionTerminated(array(
 				'id' => Q_Session::id()
 			));
+		}
+		if (Q_Config::get('Q', 'session', 'userAgentInfo', null)) {
+			$arr = isset($_SESSION['Q']) ? $_SESSION['Q'] : array();
+			$_SESSION['Q'] = array_merge($arr, Q_Request::userAgentInfo());
 		}
 		/**
 		 * @event Q/session/start {after}

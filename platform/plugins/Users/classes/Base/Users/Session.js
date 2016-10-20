@@ -58,6 +58,10 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String|Db.Expression}
+ * @type insertedTime
+ */
+/**
+ * @property {String|Db.Expression}
  * @type updatedTime
  */
 
@@ -222,6 +226,7 @@ Base.prototype.fieldNames = function () {
 		"deviceId",
 		"timeout",
 		"duration",
+		"insertedTime",
 		"updatedTime"
 	];
 };
@@ -486,6 +491,28 @@ return [["int","11","",false],false,"","0"];
 
 /**
  * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_insertedTime = function () {
+
+return [["timestamp","11","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field
  * @method beforeSet_updatedTime
  * @param {String} value
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
@@ -522,6 +549,9 @@ Base.prototype.beforeSave = function (value) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}
+	}
+	if (!this._retrieved && !value['insertedTime']) {
+		this['insertedTime'] = value['insertedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	}
 	// convention: we'll have updatedTime = insertedTime if just created.
 	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');

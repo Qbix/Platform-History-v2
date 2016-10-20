@@ -135,8 +135,8 @@ abstract class Base_Places_Zipcode extends Db_Row
 	 * Create SELECT query to the class table
 	 * @method select
 	 * @static
-	 * @param {array} [$fields='*'] The fields as strings, or array of alias=>field
-	 * @param {string} [$alias=null] The tables as strings, or array of alias=>table
+	 * @param {string|array} [$fields='*'] The fields as strings, or array of alias=>field
+	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields, $alias = null)

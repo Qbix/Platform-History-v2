@@ -21,6 +21,7 @@
  * @property {string} $deviceId
  * @property {integer} $timeout
  * @property {integer} $duration
+ * @property {string|Db_Expression} $insertedTime
  * @property {string|Db_Expression} $updatedTime
  */
 abstract class Base_Users_Session extends Db_Row
@@ -52,6 +53,10 @@ abstract class Base_Users_Session extends Db_Row
 	/**
 	 * @property $duration
 	 * @type {integer}
+	 */
+	/**
+	 * @property $insertedTime
+	 * @type {string|Db_Expression}
 	 */
 	/**
 	 * @property $updatedTime
@@ -583,6 +588,54 @@ return array (
 
 	/**
 	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_insertedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_insertedTime($value)
+	{
+		if (!isset($value)) {
+			return array('insertedTime', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('insertedTime', $value);
+		}
+		$date = date_parse($value);
+		if (!empty($date['errors'])) {
+			$json = json_encode($value);
+			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".insertedTime");
+		}
+		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
+			$date['year'], $date['month'], $date['day'], 
+			$date['hour'], $date['minute'], $date['second']
+		);
+		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_updatedTime
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -642,7 +695,11 @@ return array (
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
 			}
-		}						
+		}
+		if (!$this->retrieved and !isset($value['insertedTime'])) {
+			$this->insertedTime = $value['insertedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
+		}
+						
 		// convention: we'll have updatedTime = insertedTime if just created.
 		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			
@@ -658,7 +715,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'content', 'php', 'userId', 'deviceId', 'timeout', 'duration', 'updatedTime');
+		$field_names = array('id', 'content', 'php', 'userId', 'deviceId', 'timeout', 'duration', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

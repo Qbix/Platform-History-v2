@@ -1,0 +1,25 @@
+.Users_sessions_tool table { width: 100%; }
+.Users_sessions_tool table.Users_sessions_noDevices .Users_sessions_devicesData {
+	display: none;
+}
+.Users_sessions_tool table th {
+	background-color: rgba(37, 141, 234, 0.2);
+}
+.Users_sessions_tool table th, .Users_sessions_tool table td {
+	border-bottom: 1px solid #a7abb2;
+	line-height: 35px;
+	min-height: 36px;
+	white-space: nowrap;
+	border-right: 1px dotted;
+	padding: 0 10px;
+}
+.Users_sessions_tool table th:last-child, .Users_sessions_tool table td:last-child {
+	border-right: none;
+}
+.Users_sessions_tool table tr:nth-child(2n+1) {
+	background-color: #f4f4f4;
+}
+.Users_sessions_tool table .Users_sessions_actions > * {
+	position: relative;
+	top: 6px;
+}

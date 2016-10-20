@@ -11,13 +11,13 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="translucent" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-title" content="<?php Q_Html::text(Users::communityName()) ?>">
-	<?php if (Q_Request::platform() !== 'android'): ?>
+	<?php if (Q_Request::platform() !== 'android'): ?> 
 	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo Q_Html::themedUrl('img/icon/76.png') ?>" />
 	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php echo Q_Html::themedUrl('img/icon/120.png') ?>" />
 	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php echo Q_Html::themedUrl('img/icon/152.png') ?>" />
 	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php echo Q_Html::themedUrl('img/icon/180.png') ?>" />
 	<link rel="apple-touch-startup-image" href="<?php echo Q_Html::themedUrl('img/startup/320x460.png') ?>">
-	<?php endif; ?>
+	<?php endif; ?> 
 	<link rel="shortcut icon" sizes="196x196" href="<?php echo Q_Html::themedUrl('img/icon/196.png') ?>" />
 	<?php if (Q_Request::platform() === 'android'): ?>
 		<?php foreach (array(36, 48, 72, 96, 144, 192) as $size): ?>

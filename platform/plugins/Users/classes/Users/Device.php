@@ -79,16 +79,23 @@ class Users_Device extends Base_Users_Device
 				throw new Users_Exception_DeviceNotification($result['ERRORS'][0]);
 			}
 		}
-		$device2 = Q::take($device, array(
-			'sessionId' => Q_Session::id(),
-			'formFactor' => Q_Request::formFactor(),
-			'platform' => Q_Request::platform(),
-			'version' => Q_Request::OSVersion(),
-			'userId' => null,
+		$sessionId = Q_Session::id();
+		$user = Users::loggedInUser();
+		$info = array_merge(Q_Request::userAgentInfo(), array(
+			'sessionId' => $sessionId,
+			'userId' => $user ? $user->id : null,
 			'deviceId' => null
 		));
+		$device2 = Q::take($device, $info);
 		$d = new Users_Device($device2);
 		$d->save(true);
+		if ($sessionId) {
+			$s = new Users_Session();
+			$s->id = $sessionId;
+			if (!$s->retrieve()) {
+				$s->deviceId = $deviceId;
+			}
+		}
 		$_SESSION['Users']['deviceId'] = $deviceId;
 		$device2['Q/method'] = 'Users/device';
 		Q_Utils::sendToNode($device2);
