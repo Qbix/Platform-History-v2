@@ -9,7 +9,7 @@ function Users_sessions_delete()
 	$session->id = $_REQUEST['sessionId'];
 	$session->retrieve(true);
 	$content = Q::json_decode($session->content);
-	$userId = Q::ifset($content, 'Users', 'loggedInUser', 'id');
+	$userId = Q::ifset($content, 'Users', 'loggedInUser', 'id', null);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	if ($userId === $loggedInUserId) {
 		$authorized = true;
