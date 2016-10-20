@@ -1822,7 +1822,8 @@ Q.Tool.define({
     "Users/avatar": "plugins/Users/js/tools/avatar.js",
 	"Users/status": "plugins/Users/js/tools/status.js",
 	"Users/friendSelector": "plugins/Users/js/tools/friendSelector.js",
-	"Users/getintouch": "plugins/Users/js/tools/getintouch.js"
+	"Users/getintouch": "plugins/Users/js/tools/getintouch.js",
+	"Users/sessions": "plugins/Users/js/tools/sessions.js"
 });
 
 Q.beforeInit.add(function _Users_beforeInit() {
