@@ -812,6 +812,21 @@ class Q_Request
 	}
 	
 	/**
+	 * Some standard info to be stored in sessions, devices, etc.
+	 * @return {array}
+	 */
+	static function userAgentInfo()
+	{
+		$info = array(
+			'formFactor' => Q_Request::formFactor(),
+			'platform' => Q_Request::platform(),
+			'version' => Q_Request::OSVersion()
+		);
+		$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
+		return Q::take($info, $fields);
+	}
+	
+	/**
 	 * Infers the base URL, with possible controller
 	 * @method inferControllerUrl
 	 * @static

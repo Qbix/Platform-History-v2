@@ -11,9 +11,8 @@ function Users_device_post ()
 	Q_Request::requireFields(array('deviceId'));
 	$deviceId = $_REQUEST['deviceId'];
 	$user = Users::loggedInUser(true);
-	$device = Users_Device::add(array(
-		'userId' => $user->id,
-		'deviceId' => $deviceId
-	));
+	$device = Users_Device::add(array_merge($_REQUEST, array(
+		'userId' => $user->id
+	)));
 	Q_Response::setSlot('data', $device);
 }

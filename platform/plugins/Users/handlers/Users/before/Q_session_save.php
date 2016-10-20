@@ -6,9 +6,17 @@ function Users_before_Q_session_save($params)
 		return;
 	}
 	$row = $params['row'];
-	$row->deviceId = "";
-	$row->timeout = 0;
+	$user = Users::loggedInUser(false, false);
+	$userId = $user ? $user->id : null;
+	if (Q::ifset($row, 'userId', null) !== $userId) {
+		$row->userId = $userId;
+	}
 	$row->content = isset($_SESSION)
 		? Q::json_encode($_SESSION, JSON_FORCE_OBJECT)
 		: "{}";
+	if (empty($params['inserting'])) {
+		return;
+	}
+	$row->deviceId = "";
+	$row->timeout = 0;
 }
