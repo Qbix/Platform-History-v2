@@ -463,7 +463,7 @@ class Q_Request
 		if (preg_match('/tablet|ipad/i', $useragent)) {
 			return true;
 		}
-		if (!preg_match('/mobi/i', $useragent)) {
+		if (self::isTouchscreen() and !preg_match('/mobi/i', $useragent)) {
 			return true;
 		}
 		return false;
@@ -642,8 +642,11 @@ class Q_Request
 		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 			return null;
 		}
-		$useragent = $_SERVER['HTTP_USER_AGENT'];
 		$platform = self::platform();
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		$useragent = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.0.7) Gecko/2009030423 Ubuntu/8.10 (intrepid) Firefox/3.0.7';
+		$platform = 'linux';
+		$len = strlen($useragent);
 		switch ($platform) {
 			case 'ios':
 				$index = strpos($useragent, 'OS ');
@@ -656,6 +659,24 @@ class Q_Request
 				if ($index === false) return null;
 				return substr($useragent, $index + 8, 3);
 				break;
+			case 'mac':
+			case 'windows':
+			case 'linux':
+				$find = array(
+					'mac' => 'Macintosh',
+					'windows' => 'Windows',
+					'linux' => 'Linux'
+				);
+				$index = strpos($useragent, $find[$platform]);
+				if ($index === false) return null;
+				$paren = strpos($useragent, ')', $index + 1);
+				$ur = strrev($useragent);
+			    $space = $len - strpos($ur, ' ', $len - $paren);
+			    $colon = $len - strpos($ur, ':', $len - $paren);
+				$max = ($space !== false and $space > $colon) ? $space : $colon;
+				if ($max === false) return null;
+				$ver = substr($useragent, $max, $paren - $max);
+				return str_replace('_', '.', $ver);
 			default:
 				return null;
 				break;

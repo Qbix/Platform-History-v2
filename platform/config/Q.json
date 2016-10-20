@@ -83,7 +83,7 @@
 				"sameDomain": "Session expired. Refresh the page and try again.",
 				"otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
 			},
-			"useAgentInfo": ["formFactor", "platform", "version"]
+			"userAgentInfo": ["formFactor", "platform", "version"]
 		},
 		"javascript": {
 			"responseExtras": {

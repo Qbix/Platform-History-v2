@@ -2,8 +2,8 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "0.9.2",
-				"compatible": "0.9",
+				"version": "0.9.3",
+				"compatible": "0.9.3",
 				"requires": {"Q": "0.9"},
 				"permissions": ["Users/icons"],
 				"connections": ["Users"]
