@@ -218,7 +218,7 @@ class Q_Bootstrap
 				continue;
 			}
 			$plugin = is_numeric($k) ? $v : $k;
-			$plugin_path = Q::realPath('plugins'.DS.$v);
+			$plugin_path = Q::realPath('plugins'.DS.$plugin);
 			if (!$plugin_path) {
 				throw new Q_Exception_MissingPlugin(compact('plugin'));
 			}
