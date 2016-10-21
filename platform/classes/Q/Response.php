@@ -1314,8 +1314,24 @@ class Q_Response
 	}
 	
 	/**
+	 * Used to get or set the language (two-letter lowercase ISO code)
+	 * of the output page. Defaults to "en". It is used in htmlAttributes method.
+	 * @method language
+	 * @static
+	 * @param {string} [$newLanguage] Set a new code here to change the language
+	 * @return {string}
+	 */
+	static function language($newLanguage = null)
+	{
+		if (isset($newLanguage)) {
+			self::$language = $newLanguage;
+		}
+		return self::$language;
+	}
+	
+	/**
 	 * Returns the string containing all the html attributes
-	 * @method addHtmlCssClass
+	 * @method htmlAttributes
 	 * @static
 	 * @return {string}
 	 */
@@ -1332,7 +1348,9 @@ class Q_Response
 		foreach (self::$htmlCssClasses as $k => $v) {
 			$classes .= Q_Html::text(" $k");
 		}
-		$result = 'lang="en" prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
+		$language = self::language();
+		$result .= 'lang="' . $language . '" '
+			. 'prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
 			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
 		return $result;
 	}
@@ -1749,4 +1767,10 @@ class Q_Response
 	 * @type array
 	 */
 	public static $htmlCssClasses = array();
+	/**
+	 * @property $language
+	 * @static
+	 * @type string
+	 */
+	public static $language = "en";
 }
