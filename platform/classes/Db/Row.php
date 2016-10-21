@@ -1388,52 +1388,6 @@ class Db_Row implements Iterator
 	}
 
 	/**
-	 * Set the cache value.
-	 * @method setCache
-	 * @param {mixed} $value The value to set in cache
-	 * @param {string} [$branch='default'] The cache branch e.g. 'stream', 'access', etc.
-	 * @param {string} [$class=null] The class name of the streams.
-	 * @return {mixed} Returns the value of the cache
-	 */
-	static function setCache($value, $branch = 'default', $class = null)
-	{
-		if (empty($class))
-			$class = get_called_class();
-		if (!isset(self::$_cache[$class]))
-			self::$_cache[$class] = array();
-		self::$_cache[$class][$branch] = $value;
-		return $value;
-	}
-
-	/**
-	 * Get the cache value.
-	 * @method getCache
-	 * @param {string} [$branch='default'] The cache branch e.g. 'stream', 'access', etc.
-	 * @param {string} [$class=null] The class name of the streams.
-	 * @return {mixed} Returns the value of the cache or null
-	 */
-	static function getCache($branch = 'default', $class = null)
-	{
-		if (empty($class))
-			$class = get_called_class();
-		return isset(self::$_cache[$class]) && isset(self::$_cache[$class][$branch])
-			? self::$_cache[$class][$branch]
-			: null;
-	}
-
-	/**
-	 * Clears cache
-	 * @method clearCache
-	 * @param {string} [$branch='default'] The cache branch e.g. 'stream', 'access', etc.
-	 * @param {string} [$class=null] The class name of the streams.
-	 */
-	static function clearCache($branch = 'default', $class = null) {
-		if (empty($class))
-			$class = get_called_class();
-		if (isset(self::$_cache[$class])) unset(self::$_cache[$class][$branch]);
-	}
-
-	/**
 	 * Extra shortcuts when calling methods
 	 * @method __call
 	 * @param {string} $name
@@ -2463,10 +2417,4 @@ class Db_Row implements Iterator
 	 * @protected
 	 */
 	protected $beyondLastField = false;
-	/**
-	 * Internal cache
-	 * @property $_cache
-	 * @type array
-	 */
-	static $_cache = array();
 }

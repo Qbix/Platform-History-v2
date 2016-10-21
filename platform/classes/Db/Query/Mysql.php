@@ -208,7 +208,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @param {boolean} [$mode=null] Pass false to suppress all caching. Pass true to cache everything. The default is null, which caches everything except empty results.
 	 * @return {Db_Query_Mysql}
 	 */
-	function caching($mode = false)
+	function caching($mode = null)
 	{
 		$this->caching = $mode;
 		return $this;

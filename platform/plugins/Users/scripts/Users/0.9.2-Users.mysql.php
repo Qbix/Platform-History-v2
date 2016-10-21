@@ -9,6 +9,7 @@ function Users_0_9_2_Users_mysql()
 	$sessions = Users_Session::select('*')
 		->orderBy('id')
 		->limit($limit, $offset)
+		->caching(false)
 		->fetchDbRows();
 	echo "Adding userId to sessions";
 	while ($sessions) {
@@ -25,6 +26,7 @@ function Users_0_9_2_Users_mysql()
 		$sessions = Users_Session::select('*')
 			->orderBy('id')
 			->limit($limit, $offset)
+			->caching(false)
 			->fetchDbRows();
 	}
 	echo "\n";
