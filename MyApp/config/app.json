@@ -45,6 +45,9 @@
 				"Access-Control-Allow-Origin": "*"
 			}
 		},
+		"web": {
+			"languages": {"en": 1}
+		},
 		"environments": {
 			"live": {
 				"files": {
