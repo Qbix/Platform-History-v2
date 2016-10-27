@@ -113,7 +113,12 @@ function Streams_stream_put($params) {
 	$file = Q::ifset($fieldNames, 'file', null);
 	if (is_array($file)) {
 		unset($fieldNames['file']);
-		Q_Response::setSlot('file', Q::event("Q/file/post", $icon));
+		$data = Q::event("Q/file/post", $file);
+		Q_Response::setSlot('file', $data);
+		$stream->setAttribute('Q/file', array(
+			'url' => $data['tailUrl'],
+			'size' => $data['size']
+		));
 	}
 	
 	if (!empty($fieldNames)) {
