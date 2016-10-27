@@ -135,13 +135,14 @@ function Streams_stream_post($params = array())
 			$icon['subpath'] = "$splitId/{$stream->name}/icon/".time();
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
+		// the Streams/after/Q_image_save hook saves some attributes
 	}
 	
 	// Process any file that was posted
 	if ($file === true) {
 		$file = array();
 	}
-	if ($file) {
+	if (is_array($file)) {
 		if (empty($file['path'])) {
 			$file['path'] = 'uploads/Streams';
 		}
@@ -149,11 +150,7 @@ function Streams_stream_post($params = array())
 			$file['subpath'] = "$splitId/{$stream->name}/file/".time();
 		}
 		Q_Response::setSlot('file', Q::event("Q/file/post", $file));
-	}
-	$file = Q::ifset($fieldNames, 'file', null);
-	if (is_array($file)) {
-		unset($fieldNames['file']);
-		Q_Response::setSlot('file', Q::event("Q/file/post", $icon));
+		// the Streams/after/Q_file_save hook saves some attributes
 	}
 
 	// Re-fetch the stream object from the Streams::fetch cache,

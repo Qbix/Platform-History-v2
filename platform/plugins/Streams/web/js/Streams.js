@@ -1405,13 +1405,44 @@ Sp.retainWith = Streams.retainWith;
 
 /**
  * Calculate the url of a stream's icon
- * @static
  * @method iconUrl
  * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
  * @return {String} the url
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
 	return Streams.iconUrl(this.fields.icon, size)
+};
+
+/**
+ * Calculate the url of a stream's file
+ * @method fileUrl
+ * @return {String} the url
+ */
+Sp.fileUrl = function() {
+	var url = this.get('Q.file.url') || this.get('file.url');
+	return url.interpolate({
+		"baseUrl": Q.info.baseUrl
+	});
+};
+
+/**
+ * Calculate the url of a stream's audio file
+ * @method suffix
+ * @return {String} the url
+ */
+Sp.audioUrl = function(suffix) {
+	var url = this.get('Q.audio.url')
+		|| this.get('audio.url'); // audio.url for backward compatibility only
+	if (!suffix && suffix != '') {
+		suffix = 'audio.mp3';
+	}
+	var l = url.length;
+	if (url[l-2] !== '.' && url[l-3] !== '.' && url[l-4] !== '.') {
+		url += ('/' + suffix);
+	}
+	return url.interpolate({
+		"baseUrl": Q.info.baseUrl
+	});
 };
 
 /**
