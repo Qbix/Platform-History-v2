@@ -1900,6 +1900,24 @@ Q.onInit.add(function () {
 }, 'Users');
 
 Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler () {
+	if (!location.hash.queryField('Q.Users.oAuth')) {
+		return;
+	}
+	var fieldNames = [
+		'response_type', 'token_type', 'access_token',
+		'expires_in', 'scope', 'state', 'Q.Users.oAuth'
+	];
+	var fields = location.hash.queryField(fieldNames);
+	var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+	if (deviceId) {
+		fields.deviceId = deviceId;
+	}
+	Q.req('Users/oAuth', function () {
+		
+	}, {
+		method: 'post',
+		fields: fields
+	});
 	$.fn.plugin.load('Q/dialog');
 	$.fn.plugin.load('Q/placeholders');
 	$('#notices_set_email, #notices_set_mobile')
@@ -2037,27 +2055,6 @@ Q.onReady.add(function () {
 		});
 	}
 });
-
-Q.page('', function () {
-	if (!location.hash.queryField('Q.Users.oAuth')) {
-		return;
-	}
-	var fieldNames = [
-		'response_type', 'token_type', 'access_token',
-		'expires_in', 'scope', 'state', 'Q.Users.oAuth'
-	];
-	var fields = location.hash.queryField(fieldNames);
-	var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-	if (deviceId) {
-		fields.deviceId = deviceId;
-	}
-	Q.req('Users/oAuth', function () {
-		debugger;
-	}, {
-		method: 'post',
-		fields: fields
-	});
-}, 'Users');
 
 /**
  * Some replacements for Q.Socket methods, use these instead.
