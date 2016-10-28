@@ -1431,9 +1431,8 @@ Sp.fileUrl = function() {
  * @return {String} the url
  */
 Sp.audioUrl = function(suffix) {
-	var url = this.get('Q.audio.url')
-		|| this.get('audio.url'); // audio.url for backward compatibility only
-	if (!suffix && suffix != '') {
+	var url = this.get('Q.audio.url') || this.get('audio.url');
+	if (!suffix && suffix !== '') {
 		suffix = 'audio.mp3';
 	}
 	var l = url.length;
