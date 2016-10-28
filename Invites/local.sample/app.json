@@ -8,7 +8,7 @@
 	"Db": {
 		"connections": {
 			"Users": {
-				"prefix": "PREFIX HERE",
+				"prefix": "users_",
 				"dsn": "mysql:host=localhost;dbname=DBNAME",
 				"username": "USERNAME",
 				"password": "PASSWORD",
@@ -18,7 +18,7 @@
 				"shards": {}
 			},
 			"Streams": {
-				"prefix": "PREFIX HERE",
+				"prefix": "streams_",
 				"dsn": "mysql:host=localhost;dbname=DBNAME",
 				"username": "USERNAME",
 				"password": "PASSWORD",
@@ -31,7 +31,7 @@
 	},
 	"Users": {
 		"facebookApps": {
-			"APP NAME HERE": {
+			"MyApp": {
 				"appId": "FACEBOOK APP ID HERE",
 				"name": "FACEBOOK APP NAME HERE",
 				"url": "http:\/\/apps.facebook.com\/YOURAPP",

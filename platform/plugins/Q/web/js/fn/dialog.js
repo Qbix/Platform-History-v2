@@ -15,7 +15,7 @@
  * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
  * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
- * @param {Boolean} [options.fadeInOut=true] fadeInOut Indicates whether to use fadeIn() / fadeOut() animations when loading dialog.
+ * @param {Boolean} [options.fadeInOut=true] Indicates whether to use fadeIn() / fadeOut() animations when loading dialog.
  * Note: if set to false, 'onLoad' callback will be called synchronously with dialog load,
  * otherwise it will be called on fadeIn() animation completion.
  * @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
@@ -257,8 +257,9 @@ function _Q_overlay(o) {
  *   @param {Boolean} [options.mask=true] If true, adds a mask to cover the screen behind the dialog.
  *   @param {Boolean} [options.fullscreen]
  *   If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon. Defaults to true on Android stock browser, false everywhere else.
- *   @param {Boolean} [options.asyncLoad=true]
+ *   @param {Boolean} [options.fadeInOut=!Q.info.isTouchscreen]
  *   For desktop and false for touch devices. If true, dialog will load asynchronously with fade animation and 'onLoad' will be called when fade animation is completed. If false, dialog will appear immediately and 'onLoad' will be called at the same time.
+ * @param {Boolean} [options.waitForBackgroundImage=!Q.info.isTouchscreen] Whether to wait for the background image to load before showing the dialog
  *   @param {Boolean} [options.noClose=false]
  *   If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  *   @param {Boolean} [options.closeOnEsc=true]
@@ -328,7 +329,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			}},
 			noCalculatePosition: o.noCalculatePosition,
 			alignParent: (o.alignByParent && !Q.info.isMobile ? $this.parent() : null),
-			fadeInOut: o.asyncLoad
+			fadeInOut: o.fadeInOut
 		});
 		$this.data('Q/dialog', $this.data('Q/overlay'));
 	} else {
@@ -418,7 +419,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	var matches = $div.css('background-image').match(/url\(\"?(.*?)\"?\)/);
 	var src = matches && matches[1] ? matches[1] : '';
 	$div.remove();
-	if (src.isUrl() && !bgLoaded) {
+	if (src.isUrl() && o.waitForBackgroundImage && !bgLoaded) {
 		var $img = $('<img />').on('load', function () {
 			bgLoaded = true;
 			$(this).remove();
@@ -439,7 +440,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	alignByParent: false,
 	mask: true,
 	fullscreen: Q.info.useFullscreen,
-	asyncLoad: !Q.info.isTouchscreen,
+	fadeInOut: !Q.info.isTouchscreen,
+	waitForBackgroundImage: !Q.info.isTouchscreen,
 	noClose: false,
 	closeOnEsc: true,
 	removeOnClose: false,

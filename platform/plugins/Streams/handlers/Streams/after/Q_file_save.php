@@ -2,7 +2,7 @@
 
 function Streams_after_Q_file_save($params)
 {
-	$path = $subpath = $name = $writePath = $data = $tailUrl = null;
+	$path = $subpath = $name = $writePath = $data = $tailUrl = $size = null;
 	extract($params, EXTR_OVERWRITE);
 	if (!empty(Streams::$cache['canWriteToStream'])) {
 		// some stream's associated file was being changed
@@ -11,12 +11,9 @@ function Streams_after_Q_file_save($params)
 	if (empty($stream)) {
 		return;
 	}
-	$filesize = filesize($writePath.DS.$name);
-	$url = $tailUrl;
-	$url = Q_Valid::url($url) ? $url : Q_Request::baseUrl().'/'.$url;
-	$prevUrl = $stream->getAttribute('file.url');
-	$stream->setAttribute('file.url', $url);
-	$stream->setAttribute('file.size', $filesize);
+	$url = Q_Valid::url($tailUrl) ? $tailUrl : '{{baseUrl}}/'.$tailUrl;
+	$stream->setAttribute('Q.file.url', $url);
+	$stream->setAttribute('Q.file.size', $size);
 	// set the title and icon every time a new file is uploaded
 	$stream->title = $name;
 	$parts = explode('.', $name);

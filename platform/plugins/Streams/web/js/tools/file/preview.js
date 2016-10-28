@@ -97,11 +97,12 @@ function _Streams_file_preview(options, preview) {
 		}
 		// render a template
 		var f = state.template && state.template.fields;
+		var size = stream.get('Q.file.size') || stream.get('file.size');
 		var fields = Q.extend({}, state.templates.edit.fields, f, {
 			alt: stream.fields.title,
 			title: stream.fields.title,
 			inplace: inplace,
-			size: _formatSize(stream.get('file.size'))
+			size: _formatSize(size)
 		});
 		var tpl = (ps.editable !== false && stream.testWriteLevel('suggest'))
 			? 'edit' 
@@ -131,7 +132,7 @@ function _Streams_file_preview(options, preview) {
 					});
 				});
 				$(tool.element).on(Q.Pointer.click, function () {
-					var url = stream.get('file.url');
+					var url = stream.fileUrl();
 					if (!url) return;
 					if (state.windowName) {
 						window.open(url, state.windowName);
