@@ -4,7 +4,7 @@ function Users_0_9_2_Users_mysql()
 {
 	$app = Q_Config::expect('Q', 'app');
 	$communityId = Users::communityId();
-	$limit = 20;
+	$limit = 100;
 	$offset = 0;
 	$sessions = Users_Session::select('*')
 		->orderBy('id')
@@ -20,8 +20,12 @@ function Users_0_9_2_Users_mysql()
 				continue;
 			}
 			$s->userId = $parsed['Users']['loggedInUser']['id'];
-			$s->save();
 		}
+		Users_Session::insertManyAndExecute($sessions, array(
+			'onDuplicateKeyUpdate' => array(
+				'userId' => new Db_Expression("VALUES(userId)")
+			)
+		));
 		$offset += $limit;
 		$sessions = Users_Session::select('*')
 			->orderBy('id')

@@ -190,7 +190,8 @@ $options['sql'] = $sql_array;
 
 echo 'Q Platform app installer'.PHP_EOL;
 
-$uploads_dir = APP_FILES_DIR.DS.$desired.DS.'uploads';
+$app = Q_Config::expect('Q', 'app');
+$uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
 	if (file_exists(APP_WEB_DIR.DS.'uploads')) {
 		unlink(APP_WEB_DIR.DS.'uploads');
