@@ -11184,7 +11184,7 @@ function _Q_trigger_recursive(tool, eventName, args) {
 	}
 }
 
-function _Q_loadUrl_fillSlots (res, url, options) {
+Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 	var elements = {}, name, elem, pos;
 	var osc = options.slotContainer;
 	if (Q.isPlainObject(osc)) {
@@ -11227,7 +11227,7 @@ Q.loadUrl.options = {
 	slotContainer: function (slotName) {
 		return document.getElementById(slotName+"_slot");
 	},
-	handler: _Q_loadUrl_fillSlots,
+	handler: Q.loadUrl.fillSlots,
 	key: 'Q'
 };
 
