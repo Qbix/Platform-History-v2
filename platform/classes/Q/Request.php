@@ -815,7 +815,7 @@ class Q_Request
 			$result[] = array($language, $country, $quality);
 		}
 		if (empty($result)) {
-			return array("en", "US", 1);
+			return array(array("en", "US", 1));
 		}
 		return $result;
 	}
