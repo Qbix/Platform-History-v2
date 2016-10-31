@@ -215,7 +215,6 @@ function _Q_overlay(o) {
 	'left': 'center',
 	'top': 'middle',
 	'alignParent': null,
-	'applyIScroll': false,
 	'mask': false,
 	'noClose': false,
 	'closeOnEsc': true,
@@ -300,7 +299,6 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			}
 		}
 
-		$.fn.plugin.load('Q/iScroll');
 		$this.plugin('Q/overlay', {
 			top: topPos,
 			mask: o.mask,
@@ -501,54 +499,13 @@ function _handlePosAndScroll(o)
 	var ods = $('.Q_dialog_slot', $this);
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
-	var lastOrientation = null; // for touch devices
+	var wasVertical = null; // for touch devices
 		
 	var contentsWrapper = null, contentsLength = 0;
-	var iScrollBar = null;
-	
-	function applyIScroll(maxContentsHeight)
-	{
-		contentsWrapper = ods.parent('.Q_iscroll_dialog_wrapper');
-		if (contentsWrapper.length != 0)
-		{
-			contentsWrapper.css({ 'max-height': maxContentsHeight + 'px' });
-			var topOffset = contentsWrapper.offset().top;
-			iScrollBar.css({
-				'top': topOffset + 'px',
-				'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px',
-				'height': maxContentsHeight + 'px'
-			});
-			contentsWrapper.plugin('Q/iScroll', 'refresh');
-		}
-		else
-		{
-			ods.wrap('<div class="Q_iscroll_dialog_wrapper" />');
-			contentsWrapper = ods.parent();
-			contentsWrapper.css({ 'max-height': maxContentsHeight + 'px' });
-			contentsWrapper.plugin('Q/iScroll', function () {
-				contentsLength = ods.html().length;
-				iScrollBar = contentsWrapper.children('div:last');
-				iScrollBar.detach().prependTo(document.body);
-				var topOffset = contentsWrapper.offset().top;
-				iScrollBar.css({
-					'top': topOffset + 'px',
-					'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px',
-					'height': maxContentsHeight + 'px',
-					'z-index': '20100'
-				});
-				contentsWrapper.plugin('Q/iScroll', 'refresh');
-			});
-		}
-	}
 	
 	if (interval) {
 		clearInterval(interval);
 	}
-
-	// TODO: LET'S PLEASE GET RID OF ALL DEPENDENCIES ON QTools.js
-	// AND REMOVE IT FROM THE PLATFORM
-
-	Q.addScript("plugins/Q/js/QTools.js", function () {
 
 	interval = setInterval(_adjustPosition, 100);
 	_adjustPosition();
@@ -570,38 +527,18 @@ function _handlePosAndScroll(o)
 			var outerWidth = $this.outerWidth();
 			var winInnerWidth = Q.Pointer.windowWidth();
 			var winInnerHeight = Q.Pointer.windowHeight();
-			if (Q.info.isMobile && !o.noCalculatePosition)
-			{
+			if (Q.info.isMobile && !o.noCalculatePosition) {
 				// correcting x-pos
 				var left = Math.ceil((winInnerWidth - outerWidth) / 2);
-				if (parseInt($this.css('left')) != left)
-				{
+				if (parseInt($this.css('left')) != left) {
 					$this.css({ 'left': left + 'px' });
-					if (iScrollBar)
-					{
-						iScrollBar.css({ 'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px' });
-					}
 				}
 			
 				// for mobile devices any height and y-pos corrections are done only if keyboard is not visible on the screen
-				if (Q.Layout && Q.Layout.keyboardVisible) return;
-			
-				// correcting height
-				if ($this.outerHeight() > winInnerHeight && o.applyIScroll)
-				{
-					$this.data('Q_dialog_default_height', $this.outerHeight());
-					$this.css({ 'top': Q.Pointer.scrollTop() + 'px' });
-					maxContentsHeight = winInnerHeight - ots.outerHeight()
-																- parseInt($this.css('border-top-width')) * 2;
-					applyIScroll(maxContentsHeight);
-				}
-				// in case if screen height got to value where dialog may fit we're removing iScroll and height restriction
-				else if ($this.data('Q_dialog_default_height') !== undefined &&
+				if ($this.data('Q_dialog_default_height') !== undefined &&
 				         $this.data('Q_dialog_default_height') <= winInnerHeight)
 				{
 					$this.removeData('Q_dialog_default_height');
-					contentsWrapper.plugin('Q/iScroll', 'remove');
-					ods.unwrap();
 					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 				// correcting top position
@@ -623,14 +560,7 @@ function _handlePosAndScroll(o)
 				if (parseInt($this.css('left')) != Math.ceil((winInnerWidth - outerWidth) / 2))
 				{
 					$this.css({ 'left': Math.ceil((winInnerWidth - outerWidth) / 2) + 'px' });
-					if (iScrollBar)
-					{
-						iScrollBar.css({ 'left': (contentsWrapper.offset().left + contentsWrapper.width() - iScrollBar.width()) + 'px' });
-					}
 				}
-			
-				// for touchscreen devices any height and y-pos corrections are done only if keyboard is not visible on the screen
-				if (Q.info.isTouchscreen && Q.Layout && Q.Layout.keyboardVisible) return;
 
 				// correcting height
 				if ($this.outerHeight() + topMargin + bottomMargin > parentHeight)
@@ -640,29 +570,13 @@ function _handlePosAndScroll(o)
 					maxContentsHeight = parentHeight - topMargin - bottomMargin - ots.outerHeight()
 						- parseInt($this.css('border-top-width')) * 2;
 					if (maxContentsHeight < 0) maxContentsHeight = 0;
-					if (Q.info.isTouchscreen && $.fn.iScroll && o.applyIScroll)
-					{
-						applyIScroll(maxContentsHeight);
-					}
-					else
-					{
-						ods.css({ 'max-height': maxContentsHeight + 'px', 'overflow': 'auto' });
-					}
+					ods.css({ 'max-height': maxContentsHeight + 'px', 'overflow': 'auto' });
 				}
-				// in case if screen height got to value where dialog may fit we're height restriction (and iScroll for touchscreen)
 				else if ($this.data('Q_dialog_default_height') !== undefined &&
 				         $this.data('Q_dialog_default_height') + topMargin + bottomMargin <= parentHeight)
 				{
 					$this.removeData('Q_dialog_default_height');
-					if (Q.info.isTouchscreen && $.fn.iScroll)
-					{
-						contentsWrapper.plugin('Q/iScroll', 'remove');
-						ods.unwrap();
-					}
-					else
-					{
-						ods.css({ 'max-height': '', 'overflow': '' });
-					}
+					ods.css({ 'max-height': '', 'overflow': '' });
 					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 				// if case if dialog may fit on screen with topMargin we're setting it
@@ -676,11 +590,11 @@ function _handlePosAndScroll(o)
 			// also considering orientation
 			if (Q.info.isTouchscreen)
 			{
-				if (!lastOrientation)
-					lastOrientation = Q.Layout.orientation;
-				if (Q.Layout.orientation != lastOrientation)
+				if (!wasVertical)
+					wasVertical = Q.info.isVertical;
+				if (Q.info.isVertical != wasVertical)
 				{
-					lastOrientation = Q.Layout.orientation;
+					wasVertical = Q.info.isVertical;
 					parentHeight = (parent[0] == document.body) ? winInnerHeight : parent.height();
 					topMargin = Q.Dialogs.options.topMargin;
 					if (typeof(topMargin) == 'string') // percentage
@@ -690,19 +604,11 @@ function _handlePosAndScroll(o)
 						$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
 				}
 			}
-		
-			if (contentsWrapper && contentsLength != ods.html().length)
-			{
-				contentsLength = ods.html().length;
-				contentsWrapper.plugin('Q/iScroll', 'refresh');
-			}
 		} else {
 			clearInterval(interval);
 		}
 		$this.css('visibility', 'visible');
 	}
-	
-	});
 };
 
 var interval;
