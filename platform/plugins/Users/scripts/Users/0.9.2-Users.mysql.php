@@ -29,14 +29,18 @@ function Users_0_9_2_Users_mysql()
 				'userId' => new Db_Expression("VALUES(userId)")
 			)
 		));
+		$min = min($offset + $limit, $count);
+		echo "\033[100D";
+		echo "Updated $min of $count sessions";
 		$offset += $limit;
+		if ($offset > $count) {
+			break;
+		}
 		$sessions = Users_Session::select('*')
 			->orderBy('id')
 			->limit($limit, $offset)
 			->caching(false)
 			->fetchDbRows();
-		echo "\033[100D";
-		echo "Updated $offset of $count sessions";
 	}
 	echo "\n";
 }
