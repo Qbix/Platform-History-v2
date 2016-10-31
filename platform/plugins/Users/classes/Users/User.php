@@ -225,11 +225,10 @@ class Users_User extends Base_Users_User
 				if (isset($this->id)) {
 					$criteria['id != '] = $this->id;
 				}
-				$rows = Users_User::select('COUNT(1)')
-					->where($criteria)->limit(1)
-					->fetchAll(PDO::FETCH_NUM);
-				$row = $rows[0];
-				if ($row[0] > 0) {
+				$count = Users_User::select('COUNT(1)')
+					->where($criteria)
+					->fetch(PDO::FETCH_COLUMN);
+				if ($count > 0) {
 					throw new Users_Exception_UsernameExists($criteria, 'username');
 				}
 			}
