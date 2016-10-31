@@ -600,14 +600,11 @@ Users.login = function(options) {
 			return;
 		}
 		Q.request(o.accountStatusUrl, 'accountStatus', function(err, response2) {
-			// DEBUGGING: For debugging purposes
-			if (!response2.slots) {
-				if (response2.errors && response2.errors[0].message) {
-					alert(response2.errors[0].message);
-				}
-				return;
+			var fem = Q.firstErrorMessage(err, response2.errors);
+			if (fem) {
+				return alert(fem);
 			}
-
+			// DEBUGGING: For debugging purposes
 			Users.login.occurring = false;
 			if (!o.onRequireComplete 
 			|| response2.slots.accountStatus === 'complete') {

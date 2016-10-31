@@ -1349,10 +1349,9 @@ class Q_Response
 			$classes .= Q_Html::text(" $k");
 		}
 		$language = self::language();
-		$result .= 'lang="' . $language . '" '
+		return 'lang="' . $language . '" '
 			. 'prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
 			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
-		return $result;
 	}
 
 	/**
