@@ -27,7 +27,7 @@ function Q () {
 // external libraries, which you can override
 Q.libraries = {
 	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
-	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js',
+	handlebars: 'plugins/Q/js/handlebars-v4.0.5.js',
 	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
 };
 

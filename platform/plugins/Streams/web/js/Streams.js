@@ -371,6 +371,8 @@ Q.Tool.define({
 	"Streams/access"       : "plugins/Streams/js/tools/access.js",
 	"Streams/subscription" : "plugins/Streams/js/tools/subscription.js",
 	"Streams/interests"    : "plugins/Streams/js/tools/interests.js",
+	"Streams/lookup"       : "plugins/Streams/js/tools/lookup.js",
+	"Streams/relate"       : "plugins/Streams/js/tools/relate.js",
 	"Streams/related"      : "plugins/Streams/js/tools/related.js",
 	"Streams/inplace"      : "plugins/Streams/js/tools/inplace.js",
 	"Streams/html"         : "plugins/Streams/js/tools/html.js",

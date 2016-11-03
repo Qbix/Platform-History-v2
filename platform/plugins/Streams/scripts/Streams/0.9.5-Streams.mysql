@@ -1,0 +1,2 @@
+ALTER TABLE {$prefix}stream
+ADD INDEX typeAndTitle (publisherId, type, title);
