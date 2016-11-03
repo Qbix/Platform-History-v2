@@ -27,7 +27,6 @@ function Q () {
 // external libraries, which you can override
 Q.libraries = {
 	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
-	promise: 'plugins/Q/js/Promise.js',
 	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js',
 	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
 };
@@ -67,6 +66,15 @@ Q.assert = function (condition, complaint) {
 		throw new Q.Error(complaint);
 	}
 };
+
+/**
+ * By default this is set to the root Promise object, which may be undefined
+ * in browsers such as Internet Explorer.
+ * You can load a Promises library and set Q.Promise to the Promise constructor
+ * before including Q.js, to ensure Promises are used by Q.getter and other functions.
+ * @property {Function} Promise
+ */
+Q.Promise = root.Promise;
 
 /*
  * Extend some built-in prototypes
@@ -2979,7 +2987,7 @@ Q.getter = function _Q_getter(original, options) {
 			callbacks.push(noop);
 		}
 		
-		var ret = { dontCache: false };
+		var ret = {dontCache: false};
 		gw.onCalled.handle.call(this, arguments2, ret);
 
 		var cached, cbpos, cbi;
@@ -3172,6 +3180,37 @@ Q.getter.CACHED = 0;
 Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
+
+Q.promisify = function (getter) {
+	return function _promisifier() {
+		if (!Q.Promise) {
+			return getter.apply(this, args);
+		}
+		var args = [], resolve, reject;
+		for (var i=0, l=arguments.length; i<l; ++i) {
+			var ai = arguments[i];
+			args.push(typeof ai !== 'function' ? ai : function _promisified(err) {
+				if (err) {
+					return reject(err);
+				}
+				try {
+					ai.apply(this, arguments);
+				} catch (e) {
+					err = e;
+				}
+				if (err) {
+					return reject(err);
+				}
+				resolve(this);
+			});
+		}
+		var promise = new Q.Promise(function (r1, r2) {
+			resolve = r1;
+			reject = r2;
+		});
+		return Q.extend(promise, getter.apply(this, args));
+	}
+};
 
 /**
  * Wraps a function and returns a wrapper that will call the function at most once.
