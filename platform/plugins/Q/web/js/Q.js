@@ -3181,7 +3181,15 @@ Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
 
-Q.promisify = function (getter) {
+/**
+ * Takes a function and returns a version that returns a promise
+ * @method promisify
+ * @static
+ * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with this
+ * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
+ */
+Q.promisify = function (getter, useSecondArgument) {
 	return function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
@@ -3189,7 +3197,7 @@ Q.promisify = function (getter) {
 		var args = [], resolve, reject;
 		for (var i=0, l=arguments.length; i<l; ++i) {
 			var ai = arguments[i];
-			args.push(typeof ai !== 'function' ? ai : function _promisified(err) {
+			args.push(typeof ai !== 'function' ? ai : function _promisified(err, second) {
 				if (err) {
 					return reject(err);
 				}
@@ -3201,7 +3209,7 @@ Q.promisify = function (getter) {
 				if (err) {
 					return reject(err);
 				}
-				resolve(this);
+				resolve(useSecondArgument ? second : this);
 			});
 		}
 		var promise = new Q.Promise(function (r1, r2) {
