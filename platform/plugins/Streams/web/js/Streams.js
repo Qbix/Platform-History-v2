@@ -1428,25 +1428,6 @@ Sp.fileUrl = function() {
 };
 
 /**
- * Calculate the url of a stream's audio file
- * @method suffix
- * @return {String} the url
- */
-Sp.audioUrl = function(suffix) {
-	var url = this.get('Q.audio.url') || this.get('audio.url');
-	if (!suffix && suffix !== '') {
-		suffix = 'audio.mp3';
-	}
-	var l = url.length;
-	if (url[l-2] !== '.' && url[l-3] !== '.' && url[l-4] !== '.') {
-		url += ('/' + suffix);
-	}
-	return url.interpolate({
-		"baseUrl": Q.info.baseUrl
-	});
-};
-
-/**
  * Get all stream attributes
  * 
  * @method getAll
