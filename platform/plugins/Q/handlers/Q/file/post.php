@@ -13,12 +13,13 @@
  *   @param {string} [$params.path="uploads"] parent path under web dir (see subpath)
  *   @param {string} [$params.subpath=""] subpath that should follow the path, to save the image under
  *   @param {string} [$params.name] override the name of the file, after the subpath
+ *   @param {boolean} [$params.audio] set this to true if the file is an audio file
  */
 function Q_file_post($params = null)
 {
 	$p = $params
 		? $params
-		: Q::take($_REQUEST, array('data', 'path', 'subpath'));
+		: Q::take($_REQUEST, array('data', 'path', 'subpath', 'audio'));
 	if (!empty($_FILES)) {
 		$file = reset($_FILES);
 		if ($tmp = $file['tmp_name']) {

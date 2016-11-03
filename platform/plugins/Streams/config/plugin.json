@@ -183,6 +183,16 @@
 					"title": "Untitled Gallery"
 				}
 			},
+			"Streams/audio": {
+				"description": "audio clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/audio",
+					"title": "Untitled Audio Clip"
+				},
+				"updateTitle": true
+			},
 			"Streams/file": {
 				"description": "uploaded file",
 				"create": true,
@@ -190,7 +200,9 @@
 				"defaults": {
 					"icon": "files/_blank",
 					"title": "Untitled File"
-				}
+				},
+				"updateTitle": true,
+				"updateIcon": true
 			},
 			"Streams/category": {
 				"description": "category to which other things can be related",

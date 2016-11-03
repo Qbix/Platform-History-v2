@@ -20,6 +20,7 @@ class Q_File
 	 * @param {string} [$params.subpath=""] subpath that should follow the path, to save the image under
 	 * @param {string} [$params.name] override the name of the file, after the subpath
 	 * @param {string} [$params.skipAccess=false] if true, skips the check for authorization to write files there
+	 * @param {boolean} [$params.audio] set this to true if the file is an audio file
 	 * @return {array} Returns array containing ($name => $tailUrl) pair
 	 */
 	static function save($params)
@@ -58,19 +59,20 @@ class Q_File
 
 		/**
 		 * @event Q/file/save {after}
-		 * @param {string} user
-		 * @param {string} path
-		 * @param {string} subpath
-		 * @param {string} name
-		 * @param {string} writePath
-		 * @param {string} data
-		 * @param {string} tailUrl
-		 * @param {integer} size
-		 * @param {boolean} skipAccess
+		 * @param {string} user the user
+		 * @param {string} path the path in the url
+		 * @param {string} subpath the subpath in the url
+		 * @param {string} name the actual name of the file
+		 * @param {string} writePath the actual folder where the path is written
+		 * @param {string} data the data written to the file
+		 * @param {string} tailUrl consists of $path/[$subpath/]$name
+		 * @param {integer} size the size of the file that was written
+		 * @param {boolean} skipAccess whether we are skipping access checks
+		 * @param {boolean} audio whether the file is audio
 		 */
 		Q::event(
 			'Q/file/save', 
-			compact('path', 'subpath', 'name', 'writePath', 'data', 'tailUrl', 'size', 'skipAccess'),
+			compact('path', 'subpath', 'name', 'writePath', 'data', 'tailUrl', 'size', 'skipAccess', 'audio'),
 			'after'
 		);
 		return array($name => $tailUrl);
