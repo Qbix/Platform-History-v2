@@ -705,3 +705,9 @@
 .Streams_participants_loading .Streams_participants_summary {
 	visibility: hidden;
 }
+
+.Streams_noResults { font-weight: 100; font-style: italic; color: #777; }
+
+.Streams_lookup_tool .Q_filter_tool input {
+	min-width: 200px;
+}

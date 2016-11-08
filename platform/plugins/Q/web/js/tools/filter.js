@@ -181,9 +181,10 @@ Q.Tool.define('Q/filter', function (options) {
 	},
 	/**
 	 * Hide the filtered results
+	 * @param [chosenText] the text of the chosen option, if any, to display in the input
 	 * @method end
 	 */
-	end: function () {
+	end: function (chosenText) {
 		var tool = this;
 		var state = tool.state;
 		if (!state.begun || tool.suspended) return;
@@ -203,7 +204,18 @@ Q.Tool.define('Q/filter', function (options) {
 			$('body').css('overflow', state.oldBodyOverflow)
 			.removeClass('Q_overflow');
 		}
+		if (chosenText) {
+			tool.setText(chosenText);
+		}
 		return false;
+	},
+	/**
+	 * Set text in the input
+	 * @param [chosenText] the text of the chosen option, if any, to display in the input
+	 * @method setText
+	 */
+	setText: function (chosenText) {
+		tool.$input.val(chosenText).trigger('Q_filter');
 	}
 });
 

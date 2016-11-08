@@ -265,6 +265,9 @@
 			"relationTypes": ["Streams/interests"],
 			"streamTypes": ["Streams/category"]
 		},
+		"lookup": {
+			"limit": 10
+		},
 		"relate": {
 			"types": ["Streams/community"]
 		},

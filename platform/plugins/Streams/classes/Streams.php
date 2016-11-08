@@ -3594,7 +3594,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * A convenience method to get the URL of the streams-related action
-	 * @method register
+	 * @method actionUrl
 	 * @static
 	 * @param {string} $publisherId
 	 *	The name of the publisher
@@ -3614,6 +3614,27 @@ abstract class Streams extends Base_Streams
 				return Q_Uri::url("Streams/$what?publisherId=".urlencode($publisherId)."&name=".urlencode($streamName));
 		}
 		return null;
+	}
+	
+	/**
+	 * Look up stream by types and title filter
+	 * @method lookup
+	 * @static
+	 * @param {string} $publisherId
+	 *	The name of the publisher
+	 * @param {string|array} $types
+	 *	The possible stream type, or an array of types
+	 * @param {string} $filter
+	 *	A string to filter the titles by, currently filtered as a prefix
+	 */
+	static function lookup($publisherId, $types, $filter)
+	{
+		$limit = Q_Config::get('Streams', 'lookup', 'limit', 10);
+		return Streams_Stream::select('*')->where(array(
+			'publisherId' => $publisherId,
+			'type' => $types,
+			'title LIKE ' => "$filter%"
+		))->limit($limit)->fetchDbRows();
 	}
 	
 	static function getExtendClasses($type)

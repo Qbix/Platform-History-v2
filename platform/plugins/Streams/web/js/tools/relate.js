@@ -14,17 +14,14 @@
  * @param {string} [communityId=Users::communityId()] id of the user publishing the streams to relate to
  * @param {array} [types=Q_Config::expect('Streams','relate','types')] the types of streams the user can select
  * @param {Object} [typeNames] pairs of {type: typeName} to override names of the types, which would otherwise be taken from the types
+ * @param {Boolean} [multiple=true] whether the user can select multiple types for the lookup
  * @param {boolean} [relateFrom=false] if true, will relate FROM the user-selected stream TO the streamName instead
  * @param {string} [types] the types of streams the user can select
  */
-Q.Tool.define("Streams/relate",
-
-function _Streams_relate_tool (options)
-{
+Q.Tool.define("Streams/relate", function _Streams_relate_tool (options) {
 	// check for required options
 	var state = this.state;
-	if ((!state.publisherId || !state.streamName)
-	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
+	if (!state.publisherId || !state.streamName) {
 		throw new Q.Error("Streams/relate tool: missing publisherId or streamName");
 	}
 	if (Q.isEmpty(state.types)) {
@@ -32,19 +29,15 @@ function _Streams_relate_tool (options)
 	}
 	// render the tool
 	this.refresh();
-},
-
-{
-	publisherId: Q.info.app,
+}, {
+	publisherId: null,
 	streamName: null,
 	communityId: Q.Users.communityId,
 	relateFrom: false,
 	types: [],
-	typeNames: [],
+	typeNames: {},
 	onRefresh: new Q.Event()
-},
-
-{
+}, {
 	/**
 	 * Call this method to refresh the contents of the tool, requesting only
 	 * what's needed and redrawing only what's needed.
@@ -71,6 +64,7 @@ function _Streams_relate_tool (options)
 			Q.activate(tool.element, {
 				'.Streams_lookup_tool': state
 			});
+			Q.handle(callback, tool);
 		});
 	},
 	Q: {
@@ -78,9 +72,7 @@ function _Streams_relate_tool (options)
 
 		}
 	}
-}
-
-);
+});
 
 Q.Template.set('Streams/relate/tool',
 	'{{&tool "Streams/lookup"}}'

@@ -24,9 +24,6 @@
 	},
 	"Streams": {
 		"types": {
-			"Places/community": {
-				"edit": true
-			},
 			"Places/location": {
 				"create": true,
 				"edit": true,
@@ -101,6 +98,12 @@
 					}
 				}
 			}
+		},
+		"relate": {
+			"types": [
+				"Places/location", "Places/floor", "Places/column", "Places/area",
+				"Places/interest", "Places/nearby", "Places/timeslot"
+			]
 		}
 	},
 	"Places": {
