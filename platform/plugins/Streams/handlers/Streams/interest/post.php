@@ -1,12 +1,18 @@
 <?php
 
 /**
- * Used to add an interest
+ * @module Streams
+ */
+
+/**
+ * Used by HTTP clients to create a new interest in the system.
+ * @class HTTP Streams interest
+ * @method post
  *
  * @param {array} $_REQUEST 
- * @param {String} [$_REQUEST.title] Required. The title of the interest.
- * @param {String} [$_REQUEST.publisherId] Optional. Defaults to the app name.
- * @param {String} [$_REQUEST.subscribe] Optional. Defauls to false. Whether to subscribe rather than just join the interest stream.
+ * @param {string} [$_REQUEST.title] Required. The title of the interest.
+ * @param {string} [$_REQUEST.publisherId] Optional. Defaults to the app name.
+ * @param {string} [$_REQUEST.subscribe] Optional. Defauls to false. Whether to subscribe rather than just join the interest stream.
  * @return {void}
  */
 function Streams_interest_post()

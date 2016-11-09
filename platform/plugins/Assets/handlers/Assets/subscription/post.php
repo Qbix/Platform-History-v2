@@ -1,7 +1,13 @@
 <?php
 
 /**
- * HTTP method for starting a subscription
+ * @module Assets
+ */
+
+/**
+ * Used by HTTP clients to start a subscription
+ * @class HTTP Assets subscription
+ * @method post
  * @param {array} $_REQUEST
  * @param {string} $_REQUEST.payments Required. Should be either "authnet" or "stripe"
  *  @param {String} $_REQUEST.planStreamName the name of the subscription plan's stream

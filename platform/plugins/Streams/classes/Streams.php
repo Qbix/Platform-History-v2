@@ -2184,6 +2184,7 @@ abstract class Streams extends Base_Streams
 	 * @param {double} [$options.max] the maximum orderBy value (inclusive) to filter by, if any
 	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
 	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
+	 * @param {string} [$options.title] if specified, this filters the titles of the streams with a LIKE condition
 	 * @param {array} [$options.where] you can also specify any extra conditions here
 	 * @param {array} [$options.fetchOptions] An array of any options to pass to Streams::fetch when fetching streams
 	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
@@ -2259,6 +2260,17 @@ abstract class Streams extends Base_Streams
 			$other_field = $isCategory ? 'fromStreamName' : 'toStreamName';
 			$query = $query->where(array(
 				$other_field => new Db_Range($options['prefix'], true, false, true)
+			));
+		}
+		if (!empty($options['title'])) {
+			if (!is_string($options['title'])) {
+				throw new Q_Exception_WrongType(array(
+					'field' => 'filter',
+					'type' => 'string'
+				));
+			}
+			$query = $query->where(array(
+				'title LIKE ' => $options['title']
 			));
 		}
 
@@ -3624,16 +3636,24 @@ abstract class Streams extends Base_Streams
 	 *	The name of the publisher
 	 * @param {string|array} $types
 	 *	The possible stream type, or an array of types
-	 * @param {string} $filter
-	 *	A string to filter the titles by, currently filtered as a prefix
+	 * @param {string} $title
+	 *	A string to compare titles by using SQL's "LIKE" statement
 	 */
-	static function lookup($publisherId, $types, $filter)
+	static function lookup($publisherId, $types, $title)
 	{
+		$fc = $title[0];
+		if ($fc === '%' and strlen($title) > 1
+		and Q_Config::get('Streams', 'lookup', 'requireTitleIndex', true)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'title',
+				'range' => "something that doesn't start with %"
+			));
+		}
 		$limit = Q_Config::get('Streams', 'lookup', 'limit', 10);
 		return Streams_Stream::select('*')->where(array(
 			'publisherId' => $publisherId,
 			'type' => $types,
-			'title LIKE ' => "$filter%"
+			'title LIKE ' => $title
 		))->limit($limit)->fetchDbRows();
 	}
 	

@@ -11,7 +11,7 @@
  * @class Streams userChooser
  * @constructor
  * @param {Object} [options] this object contains function parameters
- *   @param {Function} [options.onChoose] callback function with (userId, current)  parameters
+ *   @param {Function} [options.onChoose] callback function with (userId, avatar)  parameters
  *   @param {Number} [options.delay]
  *   @default 500
  *   @param {Object} [options.exclude]
@@ -144,13 +144,13 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					.attr('src', Q.plugins.Users.iconUrl(avatars[k].icon, 40))
 				).append(
 					$('<span />').html(avatars[k].displayName())
-				).mouseenter(function () {
+				).on(Q.Pointer.enter, function () {
 					$('*', $results).removeClass('Q_selected');
 					$(this).addClass('Q_selected');
-				}).mouseleave(function () {
+				}).on(Q.Pointer.leave, function () {
 					$('*', $results).removeClass('Q_selected');
 					$(this).addClass('Q_selected');
-				}).mouseup(function () {
+				}).on(Q.Pointer.fastclick, function () {
 					onChoose($(this));
 				}).data('userId', k)
 				.data('avatar', avatars[k])
@@ -177,7 +177,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 },
 
 {
-	onChoose: function (userId, current) {
+	onChoose: function (userId, avatar) {
 		alert("Chose userId "+userId+".\nPlease pass onChoose to userChooser tool");
 	},
 	delay: 500,

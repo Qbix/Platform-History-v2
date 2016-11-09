@@ -266,10 +266,11 @@
 			"streamTypes": ["Streams/category"]
 		},
 		"lookup": {
-			"limit": 10
+			"limit": 10,
+			"requireTitleIndex": true
 		},
 		"relate": {
-			"types": ["Streams/community"]
+			"types": ["Streams/community", "Streams/interest"]
 		},
 		"invites": {
 			"tokens": {

@@ -30,7 +30,10 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 	filter: {
 		placeholder: "Start typing..."
 	},
-	onRefresh: new Q.Event()
+	onRefresh: new Q.Event(),
+	onChoose: new Q.Event(function (streamName) {
+		alert(streamName);
+	})
 }, {
 	/**
 	 * Call this method to refresh the contents of the tool, requesting only
@@ -66,18 +69,23 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 				var filter = tool.child('Q_filter');
 				filter.state.onFilter.set(function (query, element) {
 					var latest = Q.latest(filter);
-					getResults(query, tool.$select.val(), state.publisherId,
+					getResults(query+'%', tool.$select.val(), state.publisherId,
 					function ($content) {
 						if (Q.latest(filter, latest)) {
 							$(element).empty().append($content);
 						}
 					});
 				}, tool);
+				filter.state.onChoose.set(function (element) {
+					var streamName = $(element).data('streamName');
+					Q.handle(state.onChoose, tool, [streamName, element]);
+				}, tool);
 				tool.$select.on('change', function () {
 					Q.handle(filter.state.onFilter, filter, ['', filter.$results[0]]);
 				});
 			});
 			Q.handle(callback, tool);
+			Q.handle(state.onRefresh, tool);
 		});
 	},
 	Q: {
@@ -87,7 +95,7 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 	}
 });
 
-var getResults = Q.getter(function (filter, types, publisherId, callback) {
+var getResults = Q.getter(function (title, types, publisherId, callback) {
 	Q.req('Streams/lookup', 'results', function (err, data) {
 		var results, msg;
 		if (msg = Q.firstErrorMessage(err, data && data.errors)) {
@@ -98,7 +106,8 @@ var getResults = Q.getter(function (filter, types, publisherId, callback) {
 		}
 		var $table = $('<table />');
 		Q.each(data.slots.results, function (i, result) {
-			var $tr = $('<tr class="Streams_lookup_result" />')
+			var $tr = $('<tr class="Q_filter_result Streams_lookup_result" />')
+			.data('streamName', result.name)
 			.appendTo($table);
 			var $td = $('<td class="Streams_lookup_result_icon" />')
 			.append($('<img />', {'src': result.icon+'/80.png'}))
@@ -110,7 +119,7 @@ var getResults = Q.getter(function (filter, types, publisherId, callback) {
 		callback($table);
 	}, { fields: { 
 		publisherId: publisherId,
-		filter: filter,
+		title: title,
 		types: types
 	}})
 });

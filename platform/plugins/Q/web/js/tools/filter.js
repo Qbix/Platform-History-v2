@@ -98,6 +98,45 @@ Q.Tool.define('Q/filter', function (options) {
 	this.Q.onStateChanged('results').set(function () {
 		this.$results.empty().append(state.results);
 	});
+	this.$results.on(Q.Pointer.fastclick, function (event) {
+		var $cur = $(event.target);
+		$cur = $cur.is('tr') ? $cur : $cur.closest('tr');
+		tool.choose($cur[0]);
+	});
+	this.$input.on('keydown', _selection);
+	function _selection(event) {
+		var $cur = $('.Q_selected', tool.$results);
+		var $results = tool.$results.find('.Q_filter_result');
+		switch (event.keyCode) {
+			case 38: // up arrow
+				var $prev = $cur.prev();
+				if (!$prev.length) {
+					$prev = $results.last();
+				}
+				$results.removeClass('Q_selected');
+				$prev.addClass('Q_selected');
+				$se = $($prev[0].scrollingParent());
+				$se.scrollTop($prev.offset().top - $results.first().offset().top);
+				return false;
+			case 40: // down arrow
+				var $next = $cur.next();
+				if (!$next.length) {
+					$next = $results.first();
+				}
+				$results.removeClass('Q_selected');
+				$next.addClass('Q_selected');
+				$se = $($next[0].scrollingParent());
+				$se.scrollTop($next.offset().top - $results.first().offset().top);
+				return false;
+			case 13: // enter
+				if ($cur) {
+					tool.choose($cur[0]);
+				}
+				return false;
+			default:
+				break;
+		}
+	}
 
 }, {
 	name: 'filter',
@@ -108,7 +147,8 @@ Q.Tool.define('Q/filter', function (options) {
 	begun: false,
 	delayTouchscreen: 500,
 	fullscreen: Q.info.isMobile,
-	onFilter: new Q.Event()
+	onFilter: new Q.Event(),
+	onChoose: new Q.Event()
 }, {
 	/**
 	 * Show the filtered results
@@ -211,11 +251,22 @@ Q.Tool.define('Q/filter', function (options) {
 	},
 	/**
 	 * Set text in the input
-	 * @param [chosenText] the text of the chosen option, if any, to display in the input
+	 * @param {String} [chosenText] the text of the chosen option, if any, to display in the input
 	 * @method setText
 	 */
 	setText: function (chosenText) {
 		tool.$input.val(chosenText).trigger('Q_filter');
+	},
+	/**
+	 * Choose an item in the results
+	 * @param {HTMLElement} [element] the element to choose
+	 * @method choose
+	 */
+	choose: function (element) {
+		var streamName = $(element).data('streamName');
+		this.end('');
+		this.$input.blur().val('');
+		Q.handle(this.state.onChoose, this, [element]);
 	}
 });
 

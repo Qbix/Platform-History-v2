@@ -101,8 +101,7 @@
 		},
 		"relate": {
 			"types": [
-				"Places/location", "Places/floor", "Places/column", "Places/area",
-				"Places/interest", "Places/nearby", "Places/timeslot"
+				"Places/location", "Places/area", "Places/floor", "Places/column"
 			]
 		}
 	},

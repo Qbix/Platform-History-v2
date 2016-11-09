@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Used to get a stream
+ *
+ * @param {array} $_REQUEST 
+ * @param {string} $_REQUEST.publisherId Required
+ * @param {string} $_REQUEST.streamName Required streamName or name
+ * @param {integer} [$_REQUEST.messages] optionally pass a number here to fetch latest messages
+ * @param {integer} [$_REQUEST.participants] optionally pass a number here to fetch participants
+ * @return {void}
+ */
 function Streams_stream_response()
 {
 	// this handler is only for GET requests

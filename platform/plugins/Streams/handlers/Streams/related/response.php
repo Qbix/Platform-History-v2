@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * @module Streams
+ */
+
+/**
+ * Used by HTTP clients to fetch relations and related streams
+ * @class HTTP Streams related
+ * @method get
+ * @param {array} [$_REQUEST] Parameters that can come from the request
+ *   @param {string} $_REQUEST.publisherId  Required. The user id of the publisher of the stream.
+ *   @param {string} $_REQUEST.streamName  Required streamName or name. The name of the stream
+ *   @param {boolean} [$_REQUEST.isCategory=false] Whether to fetch streams related TO the stream with this publisherId and streamName.
+ *   @param {boolean} [$_REQUEST.relationsOnly=false] Return only the relations, not the streams
+ *   @param {boolean} [$_REQUEST.ascending=false] Whether to sort by ascending instead of descending weight
+ *   @param {boolean} [$_REQUEST.omitRedundantInfo=false] Whether to omit redundant publisherId and streamName fields in the output
+ *   @param {integer} [$_REQUEST.messages=0] Whether to also return this many latest messages per stream
+ *   @param {integer} [$_REQUEST.participants=0] Whether to also return this many participants per stream
+ */
 function Streams_related_response()
 {
 	if (!Q_Request::slotName('relations') and !Q_Request::slotName('streams')) {
@@ -13,7 +31,9 @@ function Streams_related_response()
 	$isCategory = !(empty($_REQUEST['isCategory']) or strtolower($_REQUEST['isCategory']) === 'false');
 	$slotNames = Q_Request::slotNames();
 	$streams_requested = in_array('relatedStreams', $slotNames);
-	$options = Q::take($_REQUEST, array('limit', 'offset', 'min', 'max', 'type', 'prefix'));
+	$options = Q::take($_REQUEST, array(
+		'limit', 'offset', 'min', 'max', 'type', 'prefix', 'filter'
+	));
 	$options['relationsOnly'] = !$streams_requested;
 	$options['orderBy'] = !empty($_REQUEST['ascending']);
 	$options['fetchOptions'] = array('withParticipant' => true);
