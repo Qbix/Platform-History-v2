@@ -77,7 +77,7 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 					});
 				}, tool);
 				filter.state.onChoose.set(function (element) {
-					var streamName = $(element).data('streamName');
+					var streamName = $(element).attr('data-streamName');
 					Q.handle(state.onChoose, tool, [streamName, element]);
 				}, tool);
 				tool.$select.on('change', function () {
@@ -107,7 +107,7 @@ var getResults = Q.getter(function (title, types, publisherId, callback) {
 		var $table = $('<table />');
 		Q.each(data.slots.results, function (i, result) {
 			var $tr = $('<tr class="Q_filter_result Streams_lookup_result" />')
-			.data('streamName', result.name)
+			.attr('data-streamName', result.name)
 			.appendTo($table);
 			var $td = $('<td class="Streams_lookup_result_icon" />')
 			.append($('<img />', {'src': result.icon+'/80.png'}))
