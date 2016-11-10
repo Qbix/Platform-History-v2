@@ -14,6 +14,7 @@
  *  @param {Object} [options.placeholders={}] Options for Q/placeholders, or null to omit it
  *  @param {String} [options.results=''] HTML to display in the results initially. If setting them later, remember to call stateChanged('results')
  *  @param {Q.Event} [options.onFilter] This event handler is meant to fetch and update results by editing the contents of the element pointed to by the second argument. The first argument is the content of the text input.
+ *  @param {Q.Event} [options.onChoose] This event handler occurs when one of the elements with class "Q_filter_results" is chosen. It is passed (element, obj) where you can modify obj.text to set the text which will be displayed in the text input to represent the chosen item.
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/filter', function (options) {
@@ -47,10 +48,13 @@ Q.Tool.define('Q/filter', function (options) {
 	
 	var events = 'focus ' + Q.Pointer.start;
 	var wasAlreadyFocused = false;
-	tool.$input.on(events, function () {
+	tool.$input.on(events, function (event) {
 		if (wasAlreadyFocused) return;
+		var that = this;
 		wasAlreadyFocused = true;
-		tool.begin();
+		setTimeout(function () {
+			_changed.call(that, event);
+		}, 0);
 	}).on('blur', function () {
 		wasAlreadyFocused = false;
 		setTimeout(function () {
@@ -88,9 +92,18 @@ Q.Tool.define('Q/filter', function (options) {
 			$this.val('');
 			tool.end();
 		}
+		tool.$input.removeClass('Q_filter_chose');
+		if (event.type !== 'blur') {
+			tool.begin();
+		}
 		var val = $this.val();
 		if (val != lastVal) {
 			state.onFilter.handle.call(tool, val, tool.$results[0]);
+		}
+		if (val) {
+			tool.$input.addClass('Q_nonempty');
+		} else {
+			tool.$input.removeClass('Q_nonempty');
 		}
 		lastVal = val;
 	};
@@ -255,7 +268,7 @@ Q.Tool.define('Q/filter', function (options) {
 	 * @method setText
 	 */
 	setText: function (chosenText) {
-		tool.$input.val(chosenText).trigger('Q_filter');
+		this.$input.val(chosenText).trigger('Q_filter');
 	},
 	/**
 	 * Choose an item in the results
@@ -264,9 +277,13 @@ Q.Tool.define('Q/filter', function (options) {
 	 */
 	choose: function (element) {
 		var streamName = $(element).data('streamName');
-		this.end('');
-		this.$input.blur().val('');
-		Q.handle(this.state.onChoose, this, [element]);
+		var obj = {
+			text: $(element).text()
+		};
+		Q.handle(this.state.onChoose, this, [element, obj]);
+		this.end(obj.text);
+		this.$input.blur();
+		this.$input.addClass('Q_filter_chose');
 	}
 });
 

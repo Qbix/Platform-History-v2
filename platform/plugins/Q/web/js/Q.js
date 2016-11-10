@@ -599,6 +599,9 @@ Elp.copyComputedStyle = function(src) {
 				if ( i == "font" ) {
 					this.style.fontSize = s.fontSize;
 				}
+				if ( i == "backgroundRepeatX" || i == "backgroundRepeatY" ) {
+					this.style.backgroundRepeat = s.backgroundRepeat;
+				}
 			} catch (e) {}
 		}
 	}
