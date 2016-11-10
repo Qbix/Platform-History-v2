@@ -108,7 +108,7 @@
 			"sort": {
 				"areas": ["Places", "sortAreaFilenames"]
 			}
-		},
+		}
 	},
 	"Places": {
 		"nearby": {
