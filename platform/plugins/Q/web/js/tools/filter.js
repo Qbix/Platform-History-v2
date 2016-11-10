@@ -113,7 +113,7 @@ Q.Tool.define('Q/filter', function (options) {
 	});
 	this.$results.on(Q.Pointer.fastclick, function (event) {
 		var $cur = $(event.target);
-		$cur = $cur.is('tr') ? $cur : $cur.closest('tr');
+		$cur = $cur.is('.Q_filter_result') ? $cur : $cur.closest('.Q_filter_result');
 		tool.choose($cur[0]);
 	});
 	this.$input.on('keydown', _selection);
