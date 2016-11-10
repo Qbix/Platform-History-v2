@@ -8089,7 +8089,9 @@ function _initTools(toolElement) {
 	var currentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	_pendingParentStack.pop(); // it was pushed during tool activate
 	var currentId = _waitingParentStack.pop();
-	var parentId = _waitingParentStack[_waitingParentStack.length-1];
+	var ba = Q.Tool.beingActivated;
+	var parentId = _waitingParentStack[_waitingParentStack.length-1]
+		|| (ba && ba.id); // if we activated child tools while activating parent
 	
 	_loadToolScript(toolElement,
 	function _initTools_doInit(toolElement, toolFunc, toolName) {
@@ -8121,8 +8123,13 @@ function _initTools(toolElement) {
 			var allInitialized = true;
 			var childIds = _toolsWaitingForInit[parentId];
 			for (var childId in childIds) {
-				for (var childName in Q.Tool.active[childId]) {
-					var c = Q.Tool.active[childId][childName];
+				var a = !Q.Tool.active[childId];
+				if (!a) {
+					allInitialized = false;
+					break;
+				}
+				for (var childName in a) {
+					var c = a[childName];
 					if (!c || !c.initialized) {
 						allInitialized = false;
 						break;
