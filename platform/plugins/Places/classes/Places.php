@@ -181,4 +181,31 @@ abstract class Places extends Base_Places
 		$longQuantized = floor($longitude / $longGrid) * $longGrid;
 		return array($latQuantized, $longQuantized, $latGrid, $longGrid);
 	}
+	
+	/**
+	 * A callback function used to sort the area filenames
+	 * when displaying invitations for the "areas" batch
+	 * @param $filename1
+	 * @param $filename2
+	 */
+	static function sortAreaFilenames($filename1, $filename2)
+	{
+		$parts = explode('-', $filename1);
+		$parts = explode('_', $parts[count($parts)-2]);
+		$l1 = $parts[count($parts)-2];
+		$a1 = end($parts);
+		$f1 = intval($a1);
+		$c1 = substr($a1, strlen("$f1"));
+
+		$parts = explode('-', $filename2);
+		$parts = explode('_', $parts[count($parts)-2]);
+		$l2 = $parts[count($parts)-2];
+		$a2 = end($parts);
+		$f2 = intval($a2);
+		$c2 = substr($a2, strlen("$f2"));
+		
+		return ($l1 != $l2)
+			? ($l1 > $l2 ? 1 : -1)
+			: (($f1 != $f2) ? ($f1 > $f2 ? 1 : -1) : ($c1 != $c2 ? ($c1 > $c2 ? 1 : -1) : 0));
+	}
 };
