@@ -3193,22 +3193,35 @@ Q.getter.THROTTLING = 3;
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
 Q.promisify = function (getter, useSecondArgument) {
-	return function _promisifier() {
+	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
 		}
-		var args = [], resolve, reject;
+		var args = [], resolve, reject, found = false;
 		for (var i=0, l=arguments.length; i<l; ++i) {
 			var ai = arguments[i];
-			args.push(typeof ai !== 'function' ? ai : function _promisified(err, second) {
-				if (err) {
-					return reject(err);
+			if (typeof ai === 'function') {
+				found = true;
+				ai = function _promisified(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					try {
+						ai.apply(this, arguments);
+					} catch (e) {
+						err = e;
+					}
+					if (err) {
+						return reject(err);
+					}
+					resolve(useSecondArgument ? second : this);
 				}
-				try {
-					ai.apply(this, arguments);
-				} catch (e) {
-					err = e;
-				}
+			}
+			args.push(ai);
+			break; // only one callback, expect err as first argument
+		}
+		if (!found) {
+			args.push(function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
@@ -3221,6 +3234,7 @@ Q.promisify = function (getter, useSecondArgument) {
 		});
 		return Q.extend(promise, getter.apply(this, args));
 	}
+	return Q.extend(_promisifier, getter);
 };
 
 /**
