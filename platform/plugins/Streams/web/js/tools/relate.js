@@ -8,15 +8,17 @@
  * Lets the user search for streams they can relate a given stream to, and relate it
  * @class Streams relate
  * @constructor
- * @param {array} [options] Override various options for this tool
- * @param {string} publisherId publisher id of the stream to relate
- * @param {string} streamName name of stream to relate
- * @param {string} [communityId=Users::communityId()] id of the user publishing the streams to relate to
- * @param {array} [types=Q_Config::expect('Streams','relate','types')] the types of streams the user can select
- * @param {Object} [typeNames] pairs of {type: typeName} to override names of the types, which would otherwise be taken from the types
- * @param {Boolean} [multiple=true] whether the user can select multiple types for the lookup
- * @param {boolean} [relateFrom=false] if true, will relate FROM the user-selected stream TO the streamName instead
- * @param {string} [types] the types of streams the user can select
+ * @param {Object} options Override various options for this tool
+ * @param {String} options.publisherId publisher id of the stream to relate
+ * @param {String} options.streamName name of stream to relate
+ * @param {Array} options.types the types of streams the user can select
+ * @param {String} options.relationType the type of the relation to create
+ * @param {String} [options.communityId=Q.Users.communityId] id of the user publishing the streams to relate to
+ * @param {Object} [options.typeNames] pairs of {type: typeName} to override names of the types, which would otherwise be taken from the types
+ * @param {Boolean} [options.multiple=true] whether the user can select multiple types for the lookup
+ * @param {Boolean} [options.relateFrom=false] if true, will relate FROM the user-selected stream TO the streamName instead
+ * @param {String} [options.types] the types of streams the user can select
+ * @param {Q.Event} [options.onRelate] This event handler occurs when a stream is successfully related
  */
 Q.Tool.define("Streams/relate", function _Streams_relate_tool (options) {
 	// check for required options
@@ -27,16 +29,21 @@ Q.Tool.define("Streams/relate", function _Streams_relate_tool (options) {
 	if (Q.isEmpty(state.types)) {
 		throw new Q.Error("Streams/relate tool: missing types");
 	}
+	if (Q.isEmpty(state.relationType)) {
+		throw new Q.Error("Streams/relate tool: missing relationType");
+	}
 	// render the tool
 	this.refresh();
 }, {
 	publisherId: null,
 	streamName: null,
 	communityId: Q.Users.communityId,
+	relationType: 'announcements',
 	relateFrom: false,
 	types: [],
 	typeNames: {},
-	onRefresh: new Q.Event()
+	onRefresh: new Q.Event(),
+	onRelate: new Q.Event()
 }, {
 	/**
 	 * Call this method to refresh the contents of the tool, requesting only
@@ -63,8 +70,34 @@ Q.Tool.define("Streams/relate", function _Streams_relate_tool (options) {
 			tool.element.innerHTML = html;
 			Q.activate(tool.element, {
 				'.Streams_lookup_tool': state
+			}, function () {
+				var lookup = tool.lookup = tool.child('Streams_lookup');
+				lookup.state.onChoose.set(function (streamName) {
+					tool.chosenStreamName = streamName;
+				});
+				tool.$button = tool.$('.Streams_relate_button').click(function (event) {
+					if (!tool.chosenStreamName) {
+						return;
+					}
+					Q.Streams.get(state.publisherId, state.streamName, function () {
+						var stateStream = this;
+						stateStream.relateTo(state.relationType, state.communityId, streamName,
+						function (err) {
+							if (err) return lookup.filter.end('');
+							Q.Streams.get(state.communityId, tool.chosenStreamName,
+							function () {
+								if (!err) {
+									Q.handle(state.onRelate, tool, [stateStream, this]);
+								}
+								lookup.filter.end('');
+							});
+						});
+					});
+					event.preventDefault();
+				});
+				Q.handle(callback, tool);
+				Q.handle(state.onRefresh, tool);
 			});
-			Q.handle(callback, tool);
 		});
 	},
 	Q: {
@@ -75,7 +108,7 @@ Q.Tool.define("Streams/relate", function _Streams_relate_tool (options) {
 });
 
 Q.Template.set('Streams/relate/tool',
-	'{{&tool "Streams/lookup"}}'
+	'{{&tool "Streams/lookup" ""}} <button class="Streams_relate_button Q_button">Post it</button>'
 );
 
 })(Q, jQuery);

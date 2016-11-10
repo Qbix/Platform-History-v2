@@ -9,11 +9,12 @@
  * @class Streams lookup
  * @constructor
  * @param {Array} [options] Override various options for this tool
- * @param {String} [publisherId=Q.Users.communityId] id of the user publishing the streams
- * @param {Array} types the types of streams the user can select
- * @param {Object} [typeNames] pairs of {type: typeName} to override names of the types, which would otherwise be taken from the types
- * @param {Boolean} [multiple=false] whether the user can select multiple types
- * @param {Object} [filter] any options for the Q/filter tool
+ * @param {String} [options.publisherId=Q.Users.communityId] id of the user publishing the streams
+ * @param {Array} options.types the types of streams the user can select
+ * @param {Object} [options.typeNames] pairs of {type: typeName} to override names of the types, which would otherwise be taken from the types
+ * @param {Boolean} [options.multiple=false] whether the user can select multiple types
+ * @param {Q.Event} [options.onChoose] This event handler occurs when one of the elements with class "Q_filter_results" is chosen. It is passed (streamName, element, obj) where you can modify obj.text to set the text which will be displayed in the text input to represent the chosen item.
+ * @param {Object} [options.filter] any options for the Q/filter tool
  */
 Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 	var state = this.state;
@@ -31,9 +32,7 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 		placeholder: "Start typing..."
 	},
 	onRefresh: new Q.Event(),
-	onChoose: new Q.Event(function (streamName) {
-		alert(streamName);
-	})
+	onChoose: new Q.Event()
 }, {
 	/**
 	 * Call this method to refresh the contents of the tool, requesting only
@@ -66,7 +65,7 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 			Q.activate(tool.element, {
 				'.Q_filter_tool': state.filter
 			}, function () {
-				var filter = tool.child('Q_filter');
+				var filter = tool.filter = tool.child('Q_filter');
 				filter.state.onFilter.set(function (query, element) {
 					var latest = Q.latest(filter);
 					getResults(query+'%', tool.$select.val(), state.publisherId,
@@ -76,9 +75,9 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 						}
 					});
 				}, tool);
-				filter.state.onChoose.set(function (element) {
+				filter.state.onChoose.set(function (element, obj) {
 					var streamName = $(element).attr('data-streamName');
-					Q.handle(state.onChoose, tool, [streamName, element]);
+					Q.handle(state.onChoose, tool, [streamName, element, obj]);
 				}, tool);
 				tool.$select.on('change', function () {
 					Q.handle(filter.state.onFilter, filter, ['', filter.$results[0]]);
