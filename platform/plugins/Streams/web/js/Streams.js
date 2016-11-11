@@ -3608,7 +3608,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			if (params[0]) {
 				return callback(this, params);
 			}
-			params[1] = new Avatar(subject);
+			params[1] = subject && new Avatar(subject);
 			callback(params[1], params);
 		}
 	});

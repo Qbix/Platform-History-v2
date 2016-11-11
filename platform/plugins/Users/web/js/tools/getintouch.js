@@ -3,7 +3,6 @@
 /**
  * Users Tools
  * @module Users-tools
- * @main
  */
 
 /**

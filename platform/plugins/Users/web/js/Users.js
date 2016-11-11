@@ -1817,6 +1817,7 @@ Users.facebookDialog = function(options)
 
 Q.Tool.define({
     "Users/avatar": "plugins/Users/js/tools/avatar.js",
+	"Users/list": "plugins/Users/js/tools/list.js",
 	"Users/status": "plugins/Users/js/tools/status.js",
 	"Users/friendSelector": "plugins/Users/js/tools/friendSelector.js",
 	"Users/getintouch": "plugins/Users/js/tools/getintouch.js",
