@@ -29,6 +29,15 @@ table { border-spacing:0; border-collapse:collapse; }
 	to { opacity: 0.25; }
 }
 
+@keyframes Q_loading {
+	from { opacity: 0.75; }
+	to { opacity: 0.25; }
+}
+@-webkit-keyframes Q_loading {
+	from { opacity: 0.75; }
+	to { opacity: 0.25; }
+}
+
 @keyframes Q_uploading {
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }

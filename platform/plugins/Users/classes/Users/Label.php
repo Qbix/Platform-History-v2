@@ -151,7 +151,7 @@ class Users_Label extends Base_Users_Label
 	 * @param {string} [$userId=null] The id of the user whose contact labels should be fetched
 	 * @param {string|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some db expression, to get only a particular subset of labels.
 	 * @param {boolean} [$checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
-	 * @return {array} An array of array(label => title) pairs
+	 * @return {array} An array of array(label => Users_Contact) pairs
 	 */
 	static function fetch($userId = null, $filter = '', $checkContacts = false)
 	{

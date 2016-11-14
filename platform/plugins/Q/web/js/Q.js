@@ -5468,10 +5468,15 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
  * Remove an element from the DOM and try to clean up memory as much as possible
  * @static
  * @method removeElement
- * @param {HTMLElement} element
- * @param {boolean} removeTools
+ * @param {HTMLElement|Array} element, or array of elements, or object of elements
+ * @param {boolean} removeTools whether to properly remove the tools before removing the element
  */
 Q.removeElement = function _Q_removeElement(element, removeTools) {
+	if (Q.isArrayLike(element)) {
+		Q.each(element, function () {
+			Q.removeElement(this, removeTools);
+		});
+	}
 	if (removeTools) {
 		Q.Tool.remove(element);
 	}

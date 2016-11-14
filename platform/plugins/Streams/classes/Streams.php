@@ -3633,7 +3633,7 @@ abstract class Streams extends Base_Streams
 	 * @method lookup
 	 * @static
 	 * @param {string} $publisherId
-	 *	The name of the publisher
+	 *	The id of the publisher whose streams to look through
 	 * @param {string|array} $types
 	 *	The possible stream type, or an array of types
 	 * @param {string} $title
@@ -3655,6 +3655,33 @@ abstract class Streams extends Base_Streams
 			'type' => $types,
 			'title LIKE ' => $title
 		))->limit($limit)->fetchDbRows();
+	}
+	
+	/**
+	 * Get a structured, sorted array with all the interests in a community
+	 * @method interests
+	 * @static
+	 * @param {string} [$communityId=Users::communityId()] the id of the community
+	 * @return {array} an array of $category => ($subcategory =>) $interest
+	 */
+	static function interests($communityId = null)
+	{
+		if (!isset($communityId)) {
+			$communityId = Users::communityId();
+		}
+		$tree = new Q_Tree();
+		$tree->load("files/Streams/interests/$communityId.json");
+		$interests = $tree->getAll();
+		foreach ($interests as $category => &$v1) {
+			foreach ($v1 as $k2 => &$v2) {
+				if (!Q::isAssociative($v2)) {
+					ksort($v1);
+					break;
+				}
+				ksort($v2);
+			}
+		}
+		return $interests;
 	}
 	
 	static function getExtendClasses($type)

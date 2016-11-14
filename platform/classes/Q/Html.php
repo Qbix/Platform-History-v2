@@ -322,21 +322,42 @@ class Q_Html
 		$i = 0;
 		$html_parts = array();
 		foreach ($list as $key => $value) {
-			if (is_string($ids)) {
-				$id = $ids . '_' . $i;
-			} else if (is_array($ids)) {
-				$id = isset($ids[$key]) ? $ids[$key] : reset($ids) . '_' . $i;
+			if (is_array($value)) {
+				$html_parts[] = self::tag('optgroup', array('label' => $key), $key);
+				foreach ($value as $k => $v) {
+					if (is_string($ids)) {
+						$id = $ids . '_' . $i;
+					} else if (is_array($ids)) {
+						$id = isset($ids[$k]) ? $ids[$k] : reset($ids) . '_' . $i;
+					}
+					$attributes2 = self::copyAttributes($attributes, $k);
+					$attributes2['value'] = $k;
+					$attributes2['id'] = $id;
+					if (is_array($selected) and array_key_exists($k, $selected)) {
+						$attributes2['selected'] = 'selected';
+					} else if ("$k" === "$selected") {
+						$attributes2['selected'] = 'selected';
+					}
+					$html_parts[] = self::tag('option', $attributes2, $v);
+					++ $i;
+				}
+			} else {
+				if (is_string($ids)) {
+					$id = $ids . '_' . $i;
+				} else if (is_array($ids)) {
+					$id = isset($ids[$key]) ? $ids[$key] : reset($ids) . '_' . $i;
+				}
+				$attributes2 = self::copyAttributes($attributes, $key);
+				$attributes2['value'] = $key;
+				$attributes2['id'] = $id;
+				if (is_array($selected) and array_key_exists($key, $selected)) {
+					$attributes2['selected'] = 'selected';
+				} else if ("$key" === "$selected") {
+					$attributes2['selected'] = 'selected';
+				}
+				$html_parts[] = self::tag('option', $attributes2, $value);
+				++ $i;
 			}
-			$attributes2 = self::copyAttributes($attributes, $key);
-			$attributes2['value'] = $key;
-			$attributes2['id'] = $id;
-			if (is_array($selected) and array_key_exists($key, $selected)) {
-				$attributes2['selected'] = 'selected';
-			} else if ("$key" === "$selected") {
-				$attributes2['selected'] = 'selected';
-			}
-			$html_parts[] = self::tag('option', $attributes2, $value);
-			++ $i;
 		}
 		
 		$blank_option_html = '';
