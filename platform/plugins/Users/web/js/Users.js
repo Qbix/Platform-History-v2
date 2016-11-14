@@ -102,7 +102,7 @@ Users.onError = new Q.Event(function (err, err2) {
  * Ensures that this is done only once
  * @method initFacebook
  * @param {Function} callback , This function called after Facebook init completed
- * @param options {Object} for overriding the options passed to FB.init
+ * @param {Object} options for overriding the options passed to FB.init
  */
 Users.initFacebook = function(callback, options) {
 	
@@ -210,11 +210,10 @@ Users.initFacebook.ready = function (app, callback) {
  *  It is passed the user information if the user changed.
  * @param {Function} onCancel Called if the authentication was canceled.
  * @param {Object} [options] object of parameters for authentication function
- *   @param {Function|Boolean} [options.prompt] which shows the usual prompt unless it was already rejected once.
+ *   @param {Function|Boolean} [options.prompt=null] which shows the usual prompt unless it was already rejected once.
  *     Can be false, in which case the user is never prompted and the authentication just happens.
  *     Can be true, in which case the usual prompt is shown even if it was rejected before.
  *     Can be a function with an onSuccess and onCancel callback, in which case it's used as a prompt.
- *   @default null
  *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
  */
 Users.authenticate = function(provider, onSuccess, onCancel, options) {
@@ -346,8 +345,7 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
  * @param {Function} authCallback , this function will be called after user authentication
  * @param {Function} cancelCallback , this function will be called if user closed social provider login window
  * @param {object} options
- *	 @param {DOMElement} [options.dialogContainer] param with jQuery identifier of dialog container,
- *	 @default document.body
+ *	 @param {DOMElement} [options.dialogContainer=document.body] param with jQuery identifier of dialog container
  */
 Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 	if (provider !== 'facebook') {
@@ -443,7 +441,6 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
  * Currently only facebook supported.
  * @method scope
  * @param {String} provider For now, only "facebook" is supported
- * @required
  * @param {Function} callback , this function will be called after getting permissions from social provider
  * Callback parameter could be null or response object from social provider
  */
@@ -737,16 +734,15 @@ Users.loggedInUserId = function () {
 /**
  * Users batch getter.
  * @method get
- * @param userId {string}
- *  The user's id
- * @param callback {function}
+ * @param {String} userId The user's id
+ * @param {Function} callback
  *	if there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and second parameter is a Users.User object
  */
 Users.get = function (userId, callback) {
 	var func = Users.batchFunction(Q.baseUrl({
 		userIds: userId
-	}), 'user');
+	}), 'user', ['userIds']);
 	func.call(this, userId, function Users_get_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (!msg && !data.user) {
@@ -822,17 +818,20 @@ function _constructUser (fields) {
 	}
 }
 
-Users.batchFunction = function Users_batchFunction(baseUrl, action) {
+Users.batchFunction = function Users_batchFunction(baseUrl, action, fields) {
     return Q.batcher.factory(
 		Users.batchFunction.functions, baseUrl, 
 		"/action.php/Users/"+action, "batch", "batch",
 		{
 			preprocess: function (args) {
-				var userIds = [], i;
+				var i, j, obj, field;
 				for (i=0; i<args.length; ++i) {
-					userIds.push(args[i][0]);
+					for (j=0; j<fields.length; ++j) {
+						field = fields[j];
+						obj[field].push(args[i][j]);
+					}
 				}
-				return {userIds: userIds};
+				return obj;
 			}
 		}
 	);
@@ -1815,6 +1814,55 @@ Users.facebookDialog = function(options)
 	};
 };
 
+Users.getContacts = function (labels, callback) {
+	Q.req('Users/contacts', function () {
+		
+	})
+};
+
+/**
+ * Constructs a contact from fields, which are typically returned from the server.
+ * @class Users.Contact
+ * @constructor
+ * @param {Object} fields
+ */
+var Contact = Users.Contact = function Users_Contact(fields) {
+	Q.extend(this, fields);
+	this.typename = 'Q.Users.Contact';
+};
+var Cp = Contact.prototype;
+
+/**
+ * Contacts batch getter.
+ * @method get
+ * @param {String} userId The user's id
+ * @param {String} label The contact's label
+ * @param {String} contactUserId The contact user's id
+ * @param callback {function}
+ *	if there were errors, first parameter is an array of errors
+ *  otherwise, first parameter is null and second parameter is a Users.Contact object
+ */
+Contact.get = function (userId, label, contactUserId, callback) {
+	var func = Users.batchFunction(Q.baseUrl({
+		userIds: userId,
+		label: label,
+		contactUserId: contactUserId
+	}), 'contact', ['userIds', 'labels', 'contactUserIds']);
+	func.call(this, userId, function Users_Contact_get_response_handler (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (!msg && !data.contact) {
+			msg = "Users.Contact.get: no such contact";
+		}
+		if (msg) {
+			Users.onError.handle.call(this, msg, err, data.contact);
+			Users.get.onError.handle.call(this, msg, err, data.contact);
+			return callback && callback.call(this, msg);
+		}
+		var contact = new Users.Contact(data.contact);
+		callback.call(contact, err, contact);
+	});
+};
+
 Q.Tool.define({
     "Users/avatar": "plugins/Users/js/tools/avatar.js",
 	"Users/list": "plugins/Users/js/tools/list.js",
@@ -1829,6 +1877,11 @@ Q.beforeInit.add(function _Users_beforeInit() {
 	Users.get = Q.getter(Users.get, {
 		cache: Q.Cache.document("Users.get", 100), 
 		throttle: 'Users.get'
+	});
+
+	Users.getContacts = Q.getter(Users.getContacts, {
+		cache: Q.Cache.document("Users.getContacts", 100), 
+		throttle: 'Users.getContacts'
 	});
 
 	Users.lastSeenNonce = Q.cookie('Q_nonce');

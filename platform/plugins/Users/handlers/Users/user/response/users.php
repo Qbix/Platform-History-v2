@@ -12,8 +12,5 @@ function Users_user_response_users($params = array())
 	$users = Users_User::select($fields)
 		->where(array('id' => $userIds))
 		->fetchDbRows(null, null, 'id');
-	$users = Db::exportArray($users, array('asAvatar' => true));
-	Q_Response::setSlot('users', $users);
-	Q::log($users);
-	return $users;
+	return Q_Response::setSlot('users', Db::exportArray($users, array('asAvatar' => true)));
 }

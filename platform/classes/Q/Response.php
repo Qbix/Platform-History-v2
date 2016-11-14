@@ -15,12 +15,14 @@ class Q_Response
 	 * @static
 	 * @param {string} $slotName The name of the slot.
 	 * @param {string} $content The content to set
+	 * @return {string} returns the content again
 	 */
 	static function setSlot(
 	 $slotName,
 	 $content)
 	{
 		self::$slots[$slotName] = $content;
+		return $content;
 	}
 	
 	/**
