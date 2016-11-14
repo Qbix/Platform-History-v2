@@ -20,10 +20,23 @@ var Users = Q.Users;
  * @param {Number} [options.preload=0] how many pages (multiples of limit) to preload
  */
 Q.Tool.define('Users/list', function () {
-	var state = this.state;
+	var tool = this;
+	var state = tool.state;
 	if (!state.userIds) {
 		throw new Q.Error("Users/list tool: userIds is required")
 	}
+	var lastScrollTop = 0;
+	var $te = $(tool.element);
+	$te.on('scroll', function () {
+		var scrollTop = $te.scrollTop();
+		if (scrollTop === lastScrollTop) {
+			return;
+		}
+		if (scrollTop >= $te[0].scrollHeight - $te[0].clientHeight) {
+			tool.loadMore();
+		}
+		lastScrollTop = scrollTop;
+	});
 	this.refresh();
 }, {
 	userIds: null,
@@ -51,7 +64,7 @@ Q.Tool.define('Users/list', function () {
 	loadMore: function () {
 		var tool = this;
 		var state = tool.state;
-		var $te = $(tool.element);
+		tool.loading = true;
 		var l = Math.min(this.loaded + state.limit, state.userIds.length);
 		for (var i=this.loaded; i<l; ++i) {
 			tool.element.appendChild(
@@ -60,8 +73,10 @@ Q.Tool.define('Users/list', function () {
 				}))
 			);
 		}
+		var count = l - this.loaded;
 		this.loaded = l;
 		Q.activate(tool.element.children || tool.element.childNodes, function () {
+			tool.loading = false;
 			if (state.clickable) {
 				if (state.clickable === true) {
 					state.clickable = {};
@@ -76,12 +91,7 @@ Q.Tool.define('Users/list', function () {
 				});
 			}
 		});
-		$te.on('scroll', function () {
-			if ($te.scrollTop() >= $te[0].scrollHeight - $te[0].clientHeight) {
-				tool.loadMore();
-			}
-		});
-		return 
+		return count;
 	},
 	Q: {
 		onInit: function () {

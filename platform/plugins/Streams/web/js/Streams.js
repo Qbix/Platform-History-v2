@@ -396,8 +396,8 @@ Q.Tool.define({
  *	If there were errors, first parameter is an array of errors.
  *  Otherwise, first parameter is null and second parameter is a Streams.Stream object
  * @param {object} [extra] Optional object which can include the following keys:
- *   @param {Mixed} [extra.participants]
- *   @param {Mixed} [extra.messages]
+ *   @param {Mixed} [extra.participants=0] Optionally fetch that many participants
+ *   @param {Mixed} [extra.messages=0] Optionally fetch that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
