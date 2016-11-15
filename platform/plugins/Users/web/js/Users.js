@@ -1110,9 +1110,6 @@ function login_callback(err, response) {
 		).append(
 			$('<div class="Q_buttons"></div>').append($b)
 		).append($('<input type="hidden" name="isHashed" id="Users_login_isHashed" value="0" />'));
-		setTimeout(function () {
-			$('#Users_login_passphrase_div').width(passphrase_input.outerWidth());
-		}, 10);
 		return login_form;
 	}
 	
