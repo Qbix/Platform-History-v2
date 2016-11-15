@@ -824,10 +824,11 @@ Users.batchFunction = function Users_batchFunction(baseUrl, action, fields) {
 		"/action.php/Users/"+action, "batch", "batch",
 		{
 			preprocess: function (args) {
-				var i, j, obj, field;
+				var i, j, obj = {}, field;
 				for (i=0; i<args.length; ++i) {
 					for (j=0; j<fields.length; ++j) {
 						field = fields[j];
+						obj[field] = obj[field] || [];
 						obj[field].push(args[i][j]);
 					}
 				}
@@ -1814,10 +1815,37 @@ Users.facebookDialog = function(options)
 	};
 };
 
-Users.getContacts = function (labels, callback) {
-	Q.req('Users/contacts', function () {
-		
-	})
+/**
+ * Get a user's contacts
+ * @method getContacts
+ * @static
+ * @param {String} userId
+ * @param {Array|String} labels
+ * @param {Function} callback
+ */
+Users.getContacts = function (userId, labels, callback) {
+	if (typeof labels === 'function') {
+		callback = labels;
+		labels = undefined;
+	}
+	Q.req('Users/contact', 'contacts', function (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			Users.onError.handle.call(this, msg, err, data.contacts);
+			Users.get.onError.handle.call(this, msg, err, data.contacts);
+			return callback && callback.call(this, msg);
+		}
+		Q.each(data.slots.contacts, function (i) {
+			data.slots.contacts[i] = new Users.Contact(data.slots.contacts[i]);
+		});
+		Q.handle(callback, data, [err, data.slots.contacts]);
+	}, {
+		fields: {
+			userId: userId,
+			labels: labels
+		},
+		method: 'post'
+	});
 };
 
 /**
@@ -1848,7 +1876,8 @@ Contact.get = function (userId, label, contactUserId, callback) {
 		label: label,
 		contactUserId: contactUserId
 	}), 'contact', ['userIds', 'labels', 'contactUserIds']);
-	func.call(this, userId, function Users_Contact_get_response_handler (err, data) {
+	func.call(this, userId, label, contactUserId,
+	function Users_Contact_get_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (!msg && !data.contact) {
 			msg = "Users.Contact.get: no such contact";

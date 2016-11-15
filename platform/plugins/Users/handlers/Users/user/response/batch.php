@@ -3,7 +3,7 @@
 function Users_user_response_batch($params = array())
 {
 	$req = array_merge($_REQUEST, $params);
-	Q_Request::requireFields(array('batch'));
+	Q_Valid::requireFields(array('batch'), $req, true);
 	$batch = $req['batch'];
 	$batch = json_decode($batch, true);
 	if (!isset($batch)) {

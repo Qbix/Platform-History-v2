@@ -3,7 +3,7 @@
 function Users_contact_response_batch($params = array())
 {
 	$req = array_merge($_REQUEST, $params);
-	Q_Request::requireFields(array('batch'));
+	Q_Valid::requireFields(array('batch'), $req, true);
 	$batch = $req['batch'];
 	$batch = json_decode($batch, true);
 	if (!isset($batch)) {
@@ -16,14 +16,12 @@ function Users_contact_response_batch($params = array())
 	$userIds = $batch['userIds'];
 	$labels = $batch['labels'];
 	$contactUserIds = $batch['contactUserIds'];
-	$users = Q::event('Users/contact/response/contacts', compact(
+	$contacts = Q::event('Users/contact/response/contacts', compact(
 		'userIds', 'labels', 'contactUserIds'
 	));
 	$result = array();
-	foreach ($userIds as $userId) {
-		$result[] = array('slots' => 
-			array('contact' => isset($users[$userId]) ? $users[$userId] : null)
-		);
+	foreach ($contacts as $contact) {
+		$result[] = array('slots' => array('contact' => $contact));
 	}
 	Q_Response::setSlot('batch', $result);
 }

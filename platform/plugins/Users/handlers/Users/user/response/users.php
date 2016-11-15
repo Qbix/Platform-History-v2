@@ -3,7 +3,7 @@
 function Users_user_response_users($params = array())
 {
 	$req = array_merge($_REQUEST, $params);
-	Q_Request::requireFields(array('userIds'));
+	Q_Valid::requireFields(array('userIds'), $req, true);
 	$userIds = $req['userIds'];
 	if (is_string($userIds)) {
 		$userIds = explode(",", $userIds);

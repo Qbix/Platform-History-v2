@@ -148,7 +148,7 @@ class Users_Contact extends Base_Users_Contact
 				throw new Q_Exception_RequiredField(compact($field));
 			}
 		}
-		Users::canManageContacts($asUserId, $userId, $label, $contactId, true);
+		Users::canManageContacts($asUserId, $userId, $label, true);
 		$contact = new Users_Contact();
 		$contact->userId = $userId;
 		$contact->label = $label;
@@ -161,16 +161,24 @@ class Users_Contact extends Base_Users_Contact
 	 * @method fetch
 	 * @static
 	 * @param {string} $userId
-	 * @param {string|Db_Range|Db_Expression} $label
+	 * @param {string|array|Db_Range|Db_Expression} $label
 	 * @param {array} [$options=array()] Query options including:
 	 * @param {integer} [$options.limit=false]
 	 * @param {integer} [$options.offset]
+	 * @param {boolean} [$options.skipAccess]
+	 * @param {boolean} [$options.asUserId]
 	 * @return {array}
 	 */
 	static function fetch($userId, $label = null, /* string|Db_Range, */ $options = array())
 	{
 		if (empty($userId)) {
 			throw new Q_Exception_RequiredField(array('field' => $userId));
+		}
+		if (empty($options['skipAccess'])) {
+			$asUserId = isset($options['asUserId'])
+				? $options['asUserId']
+				: Users::loggedInUser(true)->id;
+			Users::canManageContacts($asUserId, $userId, $label, true);
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : false;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;

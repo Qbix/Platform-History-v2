@@ -5974,7 +5974,6 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
  *  A hash of options, including:
- * @param {boolean} [options.post] if set, adds a &Q.method=post to the querystring
  * @param {String} [options.method] if set, adds a &Q.method= that value to the querystring, default "get"
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
@@ -6356,6 +6355,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	}
 	var parts = [];
 	function _params(prefix, obj) {
+		if (obj == undefined) {
+			return;
+		}
 		if (Q.typeOf(obj) === "array") {
 			// Serialize array item.
 			Q.each(obj, function _Q_param_each(i, value) {

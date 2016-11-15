@@ -19,6 +19,8 @@ function Streams_before_Users_canManageContacts($params, &$result)
 					return;
 				}
 			}
+		} else {
+			$result = true;
 		}
 	}
 }

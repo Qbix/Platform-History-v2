@@ -10,8 +10,11 @@
  */
 function Users_contact_post($params = array())
 {
+	if (Q_Request::slotName('batch') or Q_Request::slotName('contacts')) {
+		return;
+	}
 	$req = array_merge($_REQUEST, $params);
-	Q_Request::requireFields(array('label', 'contactUserId'), $req, true);
+	Q_Valid::requireFields(array('label', 'contactUserId'), $req, true);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, 'userId', $loggedInUserId);
 	$contactUserId = $req['contactUserId'];
