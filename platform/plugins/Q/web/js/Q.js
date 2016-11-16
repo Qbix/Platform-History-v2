@@ -643,6 +643,22 @@ Elp.scrollingParent = function() {
 };
 
 /**
+ * Call this to make sure scrolling is adjusted properly after contents have changed.
+ * Some browsers, such as Safari on iOS, don't act properly unless this is called.
+ * @method adjustScrolling
+ * @param {Element} element
+ */
+Elp.adjustScrolling = function() {
+	var scrolling = this.style['-webkit-overflow-scrolling'];
+	var element = this;
+	element.style['-webkit-overflow-scrolling'] = (scrolling === 'auto' ? 'touch' : 'auto');
+	setTimeout(function () {
+		element.style['-webkit-overflow-scrolling'] = scrolling;
+	}, 0);
+	return this;
+};
+
+/**
  * Switch places with another element
  * @method swap
  * @param {Element} element
