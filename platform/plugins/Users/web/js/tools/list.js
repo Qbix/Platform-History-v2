@@ -13,7 +13,7 @@ var Users = Q.Users;
  * @constructor
  * @param {Object} options options for the tool
  * @param {Array} options.userIds the user ids to render
- * @param {Number} [options.limit=12] positive integer for how many avatars to show at a time
+ * @param {Number} [options.limit=100] positive integer for how many avatars to show at a time
  * @param {Number} [options.preload=0] how many pages (multiples of limit) to preload
  * @param {Object} [options.avatar={icon:80}] options for the child Users/avatar tools
  * @param {Object} [options.clickable=false] options for Q/clickable, if not false
@@ -40,7 +40,7 @@ Q.Tool.define('Users/list', function () {
 	this.refresh();
 }, {
 	userIds: null,
-	limit: 3 * 4,
+	limit: 100,
 	preload: 1,
 	avatar: {
 		short: true,
@@ -52,16 +52,16 @@ Q.Tool.define('Users/list', function () {
 	/**
 	 * Refresh the contents
 	 */
-	refresh: function () {
+	refresh: function (callback) {
 		Q.removeElement(this.element.children || this.element.childNodes);
 		this.loaded = 0;
-		this.loadMore();
+		this.loadMore(callback);
 	},
 	/**
 	 * Load more user avatars.
 	 * @return {Number} the number new of avatars loaded
 	 */
-	loadMore: function () {
+	loadMore: function (callback) {
 		var tool = this;
 		var state = tool.state;
 		tool.loading = true;
@@ -70,7 +70,7 @@ Q.Tool.define('Users/list', function () {
 			tool.element.appendChild(
 				Q.Tool.setUpElement('div', 'Users/avatar', Q.extend({}, state.avatar, {
 					userId: state.userIds[i]
-				}))
+				}), null, tool.prefix)
 			);
 		}
 		var count = l - this.loaded;
@@ -84,11 +84,15 @@ Q.Tool.define('Users/list', function () {
 				tool.forEachChild('Users/avatar', function () {
 					var $te = $(this.element);
 					this.state.onRefresh.add(function () {
+						if ($te.closest('html').length) {
+							return;
+						}
 						$te.find('img').on('load', function () {
 							$te.plugin('Q/clickable', state.clickable);
 						});
 					}, tool);
 				});
+				Q.handle(callback);
 			}
 		});
 		return count;

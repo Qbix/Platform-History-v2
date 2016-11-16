@@ -26,6 +26,7 @@ var Users = Q.Users;
  *       @param {String} [options.templates.contents.name='Users/avatar/contents']
  *       @param {Object} [options.templates.contents.fields]
  *         @param {String} [options.templates.contents.fields.tag="span"]
+ *   @param {Q.Event} [options.onRefresh]  An event that occurs when the avatar is refreshed
  *   @param {Q.Event} [options.onMissing]  An event that occurs if the avatar info turns out to be missing
  */
 Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
@@ -60,7 +61,8 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	},
 	onMissing: new Q.Event(function () {
 		this.element.style.display = 'none';
-	}, 'Users/avatar')
+	}, 'Users/avatar'),
+	onRefresh: new Q.Event()
 },
 
 {
@@ -109,7 +111,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 				});
 				Q.Template.render('Users/avatar/icon', fields, function (err, html) {
 					p.fill('icon')(html);
-				}, Q.extend({size: state.icon}, state.templates.icon);
+				}, Q.extend({size: state.icon}, state.templates.icon));
 			} else {
 				p.fill('icon')('');
 			}
@@ -119,6 +121,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			});
 			Q.Template.render('Users/avatar/contents', fields, function (err, html) {
 				p.fill('contents')(html);
+				Q.handle(state.onRefresh, tool, []);
 			}, state.templates.contents);
 		});
 	}

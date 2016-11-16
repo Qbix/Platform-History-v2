@@ -1723,6 +1723,9 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	if(!parts.length) return context;
 	while(context && (p = parts[i++]) !== undefined){
 		try {
+			if (p === '*') {
+				p = Q.firstKey(context);
+			}
 			context = (p in context) ? context[p] : (create ? context[p] = {} : undefined);
 		} catch (e) {
 			if (create) {

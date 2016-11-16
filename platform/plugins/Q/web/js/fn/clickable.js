@@ -444,7 +444,7 @@ function _Q_clickable(o) {
 
 {
 	remove: function () {
-		var $container = this.parent().parent();
+		var $container = this.parent().parent('.Q_clickable_container');
 		var state = this.state('Q/clickable');
 		this.attr('style', state.oldStyle || "").insertAfter($container);
 		this[0].restoreSelections();
