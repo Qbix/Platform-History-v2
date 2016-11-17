@@ -13,8 +13,9 @@
  *  @param {String} [options.placeholder] Any placeholder text
  *  @param {Object} [options.placeholders={}] Options for Q/placeholders, or null to omit it
  *  @param {String} [options.results=''] HTML to display in the results initially. If setting them later, remember to call stateChanged('results')
- *  @param {Q.Event} [options.onFilter] This event handler is meant to fetch and update results by editing the contents of the element pointed to by the second argument. The first argument is the content of the text input.
- *  @param {Q.Event} [options.onChoose] This event handler occurs when one of the elements with class "Q_filter_results" is chosen. It is passed (element, obj) where you can modify obj.text to set the text which will be displayed in the text input to represent the chosen item.
+ *  @param {Q.Event} [options.onFilter] You are meant to attach an event handler to fetch and update results by editing the contents of the element pointed to by the second argument. The first argument is the content of the text input.
+ *  @param {Q.Event} [options.onChoose] This event occurs when one of the elements with class "Q_filter_results" is chosen. It is passed (element, obj) where you can modify obj.text to set the text which will be displayed in the text input to represent the chosen item.
+ *  @param {Q.Event} [options.onClear] This event occurs when the filter input is cleared
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/filter', function (options) {
@@ -74,6 +75,7 @@ Q.Tool.define('Q/filter', function (options) {
 		var x = Q.Pointer.getX(evt);
 		if (xMin < x && x < xMax) {
 			$this.val('').trigger('Q_refresh');
+			state.onClear.handle.call(tool);
 			return tool.end();
 		}
 	});
@@ -161,7 +163,8 @@ Q.Tool.define('Q/filter', function (options) {
 	delayTouchscreen: 500,
 	fullscreen: Q.info.isMobile,
 	onFilter: new Q.Event(),
-	onChoose: new Q.Event()
+	onChoose: new Q.Event(),
+	onClear: new Q.Event()
 }, {
 	/**
 	 * Show the filtered results
