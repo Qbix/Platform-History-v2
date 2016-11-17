@@ -260,7 +260,7 @@ Q.Tool.define('Q/filter', function (options) {
 			$('body').css('overflow', state.oldBodyOverflow)
 			.removeClass('Q_overflow');
 		}
-		if (chosenText) {
+		if (chosenText !== undefined) {
 			tool.setText(chosenText);
 		}
 		return false;
@@ -271,7 +271,7 @@ Q.Tool.define('Q/filter', function (options) {
 	 * @method setText
 	 */
 	setText: function (chosenText) {
-		this.$input.val(chosenText).trigger('Q_filter');
+		this.$input.val(chosenText).trigger('Q_refresh');
 	},
 	/**
 	 * Choose an item in the results
