@@ -28,7 +28,7 @@ function () {
 		
 		function manage(event) {
 			var $this = $(this);
-			var $placeholder = $this.state('Q/placeholders').$placeholder;
+			var $placeholder = $this.data('Q-placeholder');
 			if (!$placeholder) {
 				return;
 			}
@@ -138,7 +138,7 @@ function () {
 				$placeholder.parent().removeClass('Q_focus');
 				if (interval) clearInterval(interval);
 			});
-			$this.state('Q/placeholders').$placeholder = $placeholder;
+			$this.data('Q-placeholder', $placeholder);
 		}).on('keypress keyup change input focus paste blur'
 		    + ' Q_refresh Q_refresh_placeholders',
 			manage
