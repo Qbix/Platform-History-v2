@@ -416,6 +416,7 @@
 }
 
 /* User Chooser tool  */
+.Streams_userChooser_tool input { width: 100%; }
 .Streams_userChooser_results a { cursor: pointer; }
 
 /* Streams subcription tool */

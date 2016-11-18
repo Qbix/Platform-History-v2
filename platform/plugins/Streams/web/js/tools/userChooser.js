@@ -11,33 +11,35 @@
  * @class Streams userChooser
  * @constructor
  * @param {Object} [options] this object contains function parameters
- *   @param {Function} [options.onChoose] callback function with (userId, avatar)  parameters
- *   @param {Number} [options.delay]
- *   @default 500
- *   @param {Object} [options.exclude]
- *   @default {}
+ *   @param {Q.Event} [options.onChoose] is triggered with (userId, avatar)
+ *       parameters when a user is chosen
+ *   @param {Number} [options.delay=500] how long to delay before sending a request
+ *    to allow more characters to be entered
+ *   @param {Object} [options.exclude] hash of {userId: true}, 
+ *    where userId are the ids of the users to exclude from the results.
+ *    Defaults to id of logged-in user, if logged in.
  */
 Q.Tool.define("Streams/userChooser", function(o) {
 	Q.plugins.Streams.cache = Q.plugins.Streams.cache || {};
     Q.plugins.Streams.cache.userChooser = Q.plugins.Streams.cache.userChooser || {};
 
-	var me = this;
+	var tool = this;
 
-	me.onChoose = o.onChoose;
-	me.delay = o.delay;
-	me.exclude = o.exclude;
+	tool.onChoose = o.onChoose;
+	tool.delay = o.delay;
+	tool.exclude = o.exclude;
 
 	var element = $(this.element);
-	var input = $('input', element);
+	this.$input = $('input', element);
 	var cached = {};
 	var focusedResults = false;
-	var $results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
+	tool.$results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
 		.css({
 			display: 'none',
 			position: 'absolute',
-			left: input.offset().left + 'px',
-			top: input.offset().top + input.outerHeight() + 'px',
-			width: input.outerWidth(),
+			left: tool.$input.offset().left + 'px',
+			top: tool.$input.offset().top + tool.$input.outerHeight() + 'px',
+			width: tool.$input.outerWidth(),
 			'z-index': 80000,
 			background: 'white',
 			border: 'solid 1px #99a',
@@ -47,17 +49,13 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		}).appendTo('body');
 
 	var t = null;
-	element.on('Q-closingOverlay', function() {
-		input.blur();
-		$results.remove();
-	});
-	input.on('blur', function (event) {
+	tool.$input.on('blur', function (event) {
 		setTimeout(function () {
 			if (!focusedResults) {
-				$results.remove();
+				tool.$results.remove();
 			} else {
 				$(document).one('mouseup', function () {
-					$results.remove();
+					tool.$results.remove();
 				});
 			}
 			focusedResults = false;
@@ -67,9 +65,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	function doQuery(event) {
 
-		var query = input.val();
+		var query = tool.$input.val();
 
-		var cur = $('.Q_selected', $results);
+		var cur = $('.Q_selected', tool.$results);
 
 		switch (event.keyCode) {
 			case 38: // up arrow
@@ -78,9 +76,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				var prev = cur.prev();
 				if (!prev.length) {
-					prev = $results.children().last();
+					prev = tool.$results.children().last();
 				}
-				$results.children().removeClass('Q_selected');
+				tool.$results.children().removeClass('Q_selected');
 				prev.addClass('Q_selected');
 				return false;
 			case 40: // down arrow
@@ -89,9 +87,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				var next = cur.next();
 				if (!next.length) {
-					next = $results.children().first();
+					next = tool.$results.children().first();
 				}
-				$results.children().removeClass('Q_selected');
+				tool.$results.children().removeClass('Q_selected');
 				next.addClass('Q_selected');
 				return false;
 			case 13: // enter
@@ -107,35 +105,36 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					return;
 				}
 				if (!query) {
-					$results.remove();
+					tool.$results.remove();
 					return;
 				}
-				input.css({
+				tool.$input.css({
 					'background-image': 'url(' +Q.url('/plugins/Q/img/throbbers/loading.gif') + ')',
 					'background-repeat': 'no-repeat'
 				});
-				Q.Streams.Avatar.byPrefix(input.val().toLowerCase(), onResponse, {'public': true});
+				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, {'public': true});
 		}
 
 		function onChoose (cur) {
 			var userId = cur.data('userId');
 			var avatar = cur.data('avatar');
-			input.blur().val('');
-			Q.handle(me.onChoose, this, [userId, avatar]);
+			tool.$input.blur().val('');
+			Q.handle(tool.onChoose, this, [userId, avatar]);
+			tool.end();
 		}
 
 		function onResponse (err, avatars) {
-			input.css('background-image', 'none');
+			tool.$input.css('background-image', 'none');
 			if (err) {
 				return; // silently return
 			}
 			if (Q.isEmpty(avatars)) {
-				return $results.remove();
+				return tool.$results.remove();
 			}
-			$results.empty();
+			tool.$results.empty();
 			var show = 0;
 			for (var k in avatars) {
-				if (k in me.exclude && me.exclude[k]) {
+				if (k in tool.exclude && tool.exclude[k]) {
 					continue;
 				}
 
@@ -145,10 +144,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				).append(
 					$('<span />').html(avatars[k].displayName())
 				).on(Q.Pointer.enter, function () {
-					$('*', $results).removeClass('Q_selected');
+					$('*', tool.$results).removeClass('Q_selected');
 					$(this).addClass('Q_selected');
 				}).on(Q.Pointer.leave, function () {
-					$('*', $results).removeClass('Q_selected');
+					$('*', tool.$results).removeClass('Q_selected');
 					$(this).addClass('Q_selected');
 				}).on(Q.Pointer.fastclick, function () {
 					onChoose($(this));
@@ -156,20 +155,20 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				.data('avatar', avatars[k])
 				.on('mousedown focusin', function () {
 					focusedResults = true;
-				}).appendTo($results);
+				}).appendTo(tool.$results);
 				if (!show) {
 					result.addClass('Q_selected');
 				}
 				++show;
 			}
 			if (show) {
-				$results.css({
-					left: input.offset().left + 'px',
-					top: input.offset().top + input.outerHeight() + 'px',
-					width: input.outerWidth()
+				tool.$results.css({
+					left: tool.$input.offset().left + 'px',
+					top: tool.$input.offset().top + tool.$input.outerHeight() + 'px',
+					width: tool.$input.outerWidth()
 				}).appendTo('body').show();
 			} else {
-				$results.remove();
+				tool.$results.remove();
 			}
 		}
 	}
@@ -177,11 +176,16 @@ Q.Tool.define("Streams/userChooser", function(o) {
 },
 
 {
-	onChoose: function (userId, avatar) {
-		alert("Chose userId "+userId+".\nPlease pass onChoose to userChooser tool");
-	},
+	onChoose: new Q.Event(),
 	delay: 500,
 	exclude: {}
+},
+
+{
+	end: function () {
+		this.$input.blur().trigger('Q_refresh');
+		this.$results.remove();
+	}
 }
 
 );

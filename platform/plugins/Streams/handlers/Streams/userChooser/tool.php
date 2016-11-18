@@ -1,13 +1,23 @@
 <?php
 
 /**
- * userChooser tool
- * @param array $options
- *  "maxResults" => the maximum number of results to show, defaults to 3
- *  "onSuccess" => the name of the function for what to do
- *  "placeholder" => override the default placeholder text,
- *  "exclude" => associative array of userId => true, where userId are the ids of the users
- *    to exclude from the results. Defaults to id of logged-in user, if logged in.
+ * Streams Tools
+ * @module Streams-tools
+ * @main
+ */
+
+/**
+ * Interface for selecting an app user
+ * @class Streams userChooser
+ * @constructor
+ * @param {array} [$options] this object contains function parameters
+ *   @param {string} [$options.onChoose] is triggered with (userId, avatar)
+ *       parameters when a user is chosen
+ *   @param {integer} [$options.delay=500] how long to delay before sending a request
+ *    to allow more characters to be entered
+ *   @param {array} [$options.exclude] hash of {userId: true}, 
+ *    where userId are the ids of the users to exclude from the results.
+ *    Defaults to id of logged-in user, if logged in.
  */
 function Streams_userChooser_tool($options)
 {
@@ -20,10 +30,9 @@ function Streams_userChooser_tool($options)
 	}
 	
 	Q_Response::addScript('plugins/Streams/js/Streams.js');
-	Q_Response::setToolOptions(compact('onSuccess', 'maxResults', 'exclude'));
+	Q_Response::setToolOptions($options);
 	return Q_Html::input('query', '', array(
-		'class' => 'text', 
+		'class' => 'text Streams_userChooser_input', 
 		'placeholder' => $placeholder,
-		'autocomplete' => 'off'
 	));
 }
