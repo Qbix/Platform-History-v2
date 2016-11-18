@@ -28,7 +28,7 @@ function () {
 		
 		function manage(event) {
 			var $this = $(this);
-			var $placeholder = $this.data('Q-placeholder');
+			var $placeholder = $this.state('Q/placeholders').$placeholder;
 			if (!$placeholder) {
 				return;
 			}
@@ -57,7 +57,6 @@ function () {
 			var $this = $(this);
 		
 			var plch = $this.attr('placeholder');
-			$this.removeAttr('placeholder');
 			if(!(plch)) {
 				return;
 			}
@@ -65,6 +64,7 @@ function () {
 			if (!$this.is(':visible')) {
 				return;
 			}
+			$this.removeAttr('placeholder');
 			var dim = $this[0].cssDimensions();
 			var display = $this.css('display');
 			if (display === 'inline') {
@@ -138,7 +138,7 @@ function () {
 				$placeholder.parent().removeClass('Q_focus');
 				if (interval) clearInterval(interval);
 			});
-			$this.data('Q-placeholder', $placeholder);
+			$this.state('Q/placeholders').$placeholder = $placeholder;
 		}).on('keypress keyup change input focus paste blur'
 		    + ' Q_refresh Q_refresh_placeholders',
 			manage
