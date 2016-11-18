@@ -3330,7 +3330,7 @@ function updateAvatarCache(stream) {
 		var field = sf.name.split('/').pop();
 		var userId = sf.publisherId;
 		cache = Avatar.get.cache;
-		if (item = cache.get([userId])) {
+		if (item = cache.get([userId]) && item.subject) {
 			item.subject[field] = sf.content;
 			cache.set([userId], 0, item.subject, [null, item.subject]);
 		}

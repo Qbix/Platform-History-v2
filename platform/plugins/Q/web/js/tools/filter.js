@@ -95,7 +95,7 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.end();
 		}
 		tool.$input.removeClass('Q_filter_chose');
-		if (event.type !== 'blur') {
+		if (event.type != 'blur' && event.type != 'Q_refresh') {
 			tool.begin();
 		}
 		var val = $this.val();
@@ -173,6 +173,9 @@ Q.Tool.define('Q/filter', function (options) {
 	begin: function () {
 		var tool = this;
 		tool.canceledBlur = true;
+		setTimeout(function () {
+			tool.canceledBlur = false;
+		}, 300);
 		var state = tool.state;
 		if (state.begun) return;
 		state.begun = true;
@@ -243,6 +246,9 @@ Q.Tool.define('Q/filter', function (options) {
 	end: function (chosenText) {
 		var tool = this;
 		var state = tool.state;
+		if (chosenText !== undefined) {
+			tool.setText(chosenText);
+		}
 		if (!state.begun || tool.suspended) return;
 		state.begun = false;
 		var $te = $(tool.element);
@@ -260,18 +266,19 @@ Q.Tool.define('Q/filter', function (options) {
 			$('body').css('overflow', state.oldBodyOverflow)
 			.removeClass('Q_overflow');
 		}
-		if (chosenText !== undefined) {
-			tool.setText(chosenText);
-		}
 		return false;
 	},
 	/**
 	 * Set text in the input
 	 * @param {String} [chosenText] the text of the chosen option, if any, to display in the input
+	 *   Pass the empty string here to clear the filter and trigger the onClear method
 	 * @method setText
 	 */
 	setText: function (chosenText) {
 		this.$input.val(chosenText).trigger('Q_refresh');
+		if (chosenText === '') {
+			this.state.onClear.handle.call(this);
+		}
 	},
 	/**
 	 * Choose an item in the results
