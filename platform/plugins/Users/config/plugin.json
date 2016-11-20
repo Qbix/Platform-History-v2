@@ -100,7 +100,11 @@
 				"at&t": "txt.att.net",
 				"sprint": "messaging.sprintpcs.com",
 				"verizon": "vtext.com",
-				"t-mobile": "tmomail.net"
+				"t-mobile": "tmomail.net",
+				"boost": "myboostmobile.com",
+				"uscellular": "email.uscc.net",
+				"verizon": "vtext.com",
+				"virginmobile": "vmobl.com"
 			}
 		},
 		"exportFields": [
