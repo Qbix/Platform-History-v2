@@ -5,7 +5,7 @@ function Streams_0_8_8_Streams_mysql()
 	$communityId = Users::communityId();
 	$user = Users_User::fetch($communityId, true);
 	
-	Streams::create($app, $app, 'Streams/resource', array(
+	Streams::create($communityId, $communityId, 'Streams/resource', array(
 		'name' => 'Streams/invitations',
 		'readLevel' => 0,
 		'writeLevel' => 0,
