@@ -3205,14 +3205,13 @@ abstract class Streams extends Base_Streams
 		}
 
 		// Fetch the stream as the logged-in user
-		$stream = Streams::fetch($asUserId, $publisherId, $streamName);
+		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
 		if (!$stream) {
 			throw new Q_Exception_MissingRow(array(
 				'table' => 'stream',
 				'criteria' => 'with that name'
 			), 'streamName');		
 		}
-		$stream = reset($stream);
 
 		// Do we have enough admin rights to invite others to this stream?
 		if (!$stream->testAdminLevel('invite') || !$stream->testWriteLevel('join')) {
