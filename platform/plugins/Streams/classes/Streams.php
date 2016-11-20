@@ -1925,7 +1925,7 @@ abstract class Streams extends Base_Streams
 			$description = Q_Handlebars::renderSource(
 				Streams_Stream::getConfigField($category->type, array('relatedTo', $type, 'description'),
 					Streams_Stream::getConfigField($category->type, array('relatedTo', '*', 'description'),
-						"New $displayType added"
+						"New $fromDisplayType added"
 					)),
 				$params
 			);

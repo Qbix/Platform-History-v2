@@ -5,7 +5,7 @@
 	<h2>{{stream.fields.title}}</h2>
 {{/if}}
 <div>
-has a new {{call 'message.get' 'displayType'}}:
+has a new {{call 'message.get' 'fromDisplayType'}}:
 </div>
 {{#if (call 'message.get' 'fromUrl')}}
 	<h2><a href="{{call 'message.get' 'fromUrl'}}">{{call 'message.get' 'fromTitle'}}</a></h2>
