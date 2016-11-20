@@ -36,6 +36,7 @@ var Streams = Q.Streams;
  *   @param {Q.Event} [options.onRefresh]  An event that occurs when the avatar is refreshed
  *   @param {Q.Event} [options.onUpdate]  An event that occurs when the icon is updated via this tool
  *   @param {Q.Event} [options.onImagepicker]  An event that occurs when the imagepicker is activated
+ *   @param {Q.Event} [options.onMissing]  An event that occurs if the avatar info turns out to be missing
  */
 Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	var tool = this;
@@ -101,7 +102,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	cacheBustOnUpdate: 1000,
 	onRefresh: new Q.Event(),
 	onUpdate: new Q.Event(),
-	onImagepicker: new Q.Event()
+	onImagepicker: new Q.Event(),
+	onMissing: new Q.Event(function () {
+		this.element.style.display = 'none';
+	}, 'Users/avatar')
 },
 
 {
@@ -135,7 +139,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			_present();
 		});
 		
-		if (state.userId === '') {
+		if (state.userId == '') {
 			var fields = Q.extend({}, state.templates.contents.fields, {
 				name: ''
 			});
@@ -147,14 +151,25 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			});
 			return;
 		}
+
+		var fields = Q.extend({}, state.templates.icon.fields, {
+			src: Q.url(Users.iconUrl('loading'), null)
+		});
+		Q.Template.render('Users/avatar/loading', fields, function (err, html) {
+			tool.element.innerHTML = html;
+		});
+		tool.element.addClass('Q_loading');
 		
 		Streams.Avatar.get(state.userId, function (err, avatar) {
 			var fields;
-			if (!avatar) return;
+			tool.element.removeClass('Q_loading');
+			if (!avatar) {
+				return Q.handle(state.onMissing, tool, [err]);
+			}
 			state.avatar = avatar;
 			if (state.icon) {
 				fields = Q.extend({}, state.templates.icon.fields, {
-					src: Q.url(this.iconUrl(state.icon), null)
+					src: Q.url(avatar.iconUrl(state.icon), null)
 				});
 				Q.Template.render('Users/avatar/icon', fields, 
 				function (err, html) {
@@ -257,6 +272,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 
 );
 
+Q.Template.set('Users/avatar/loading', '<img src="{{& src}}" alt="{{alt}}" class="Users_avatar_loading Users_avatar_icon Users_avatar_icon_{{size}}">');
 Q.Template.set('Users/avatar/icon', '<img src="{{& src}}" alt="{{alt}}" class="Users_avatar_icon Users_avatar_icon_{{size}}">');
 Q.Template.set('Users/avatar/contents', '<{{tag}} class="Users_avatar_name">{{& name}}</{{tag}}>');
 Q.Template.set('Users/avatar/icon/blank', '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>');

@@ -607,7 +607,7 @@ abstract class Db
 	 * @static
 	 * @param {mixed} $what Could be a (multidimensional) array of Db_Row objects or a Db_Row object
 	 * @param {array} $options Currently supports one option:
-	 * @param {array} [$options.numeric]: Makes a plain numerically indexed array, even if $what has keys
+	 * @param {boolean} [$options.numeric]: Makes a plain numerically indexed array, even if $what has keys
 	 * @return {string}
 	 */
 	static function exportArray($what, $options = array())

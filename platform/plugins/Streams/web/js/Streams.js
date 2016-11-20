@@ -371,6 +371,8 @@ Q.Tool.define({
 	"Streams/access"       : "plugins/Streams/js/tools/access.js",
 	"Streams/subscription" : "plugins/Streams/js/tools/subscription.js",
 	"Streams/interests"    : "plugins/Streams/js/tools/interests.js",
+	"Streams/lookup"       : "plugins/Streams/js/tools/lookup.js",
+	"Streams/relate"       : "plugins/Streams/js/tools/relate.js",
 	"Streams/related"      : "plugins/Streams/js/tools/related.js",
 	"Streams/inplace"      : "plugins/Streams/js/tools/inplace.js",
 	"Streams/html"         : "plugins/Streams/js/tools/html.js",
@@ -394,8 +396,8 @@ Q.Tool.define({
  *	If there were errors, first parameter is an array of errors.
  *  Otherwise, first parameter is null and second parameter is a Streams.Stream object
  * @param {object} [extra] Optional object which can include the following keys:
- *   @param {Mixed} [extra.participants]
- *   @param {Mixed} [extra.messages]
+ *   @param {Mixed} [extra.participants=0] Optionally fetch that many participants
+ *   @param {Mixed} [extra.messages=0] Optionally fetch that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
@@ -1420,25 +1422,6 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  */
 Sp.fileUrl = function() {
 	var url = this.get('Q.file.url') || this.get('file.url');
-	return url.interpolate({
-		"baseUrl": Q.info.baseUrl
-	});
-};
-
-/**
- * Calculate the url of a stream's audio file
- * @method suffix
- * @return {String} the url
- */
-Sp.audioUrl = function(suffix) {
-	var url = this.get('Q.audio.url') || this.get('audio.url');
-	if (!suffix && suffix !== '') {
-		suffix = 'audio.mp3';
-	}
-	var l = url.length;
-	if (url[l-2] !== '.' && url[l-3] !== '.' && url[l-4] !== '.') {
-		url += ('/' + suffix);
-	}
 	return url.interpolate({
 		"baseUrl": Q.info.baseUrl
 	});
@@ -3347,7 +3330,7 @@ function updateAvatarCache(stream) {
 		var field = sf.name.split('/').pop();
 		var userId = sf.publisherId;
 		cache = Avatar.get.cache;
-		if (item = cache.get([userId])) {
+		if ((item = cache.get([userId])) && item.subject) {
 			item.subject[field] = sf.content;
 			cache.set([userId], 0, item.subject, [null, item.subject]);
 		}
@@ -3625,7 +3608,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			if (params[0]) {
 				return callback(this, params);
 			}
-			params[1] = new Avatar(subject);
+			params[1] = subject && new Avatar(subject);
 			callback(params[1], params);
 		}
 	});

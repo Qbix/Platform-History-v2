@@ -57,7 +57,6 @@ function () {
 			var $this = $(this);
 		
 			var plch = $this.attr('placeholder');
-			$this.removeAttr('placeholder');
 			if(!(plch)) {
 				return;
 			}
@@ -65,6 +64,7 @@ function () {
 			if (!$this.is(':visible')) {
 				return;
 			}
+			$this.removeAttr('placeholder');
 			var dim = $this[0].cssDimensions();
 			var display = $this.css('display');
 			if (display === 'inline') {

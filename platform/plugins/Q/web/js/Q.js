@@ -27,8 +27,7 @@ function Q () {
 // external libraries, which you can override
 Q.libraries = {
 	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
-	promise: 'plugins/Q/js/Promise.js',
-	handlebars: 'plugins/Q/js/handlebars-v1.3.0.min.js',
+	handlebars: 'plugins/Q/js/handlebars-v4.0.5.js',
 	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
 };
 
@@ -67,6 +66,15 @@ Q.assert = function (condition, complaint) {
 		throw new Q.Error(complaint);
 	}
 };
+
+/**
+ * By default this is set to the root Promise object, which may be undefined
+ * in browsers such as Internet Explorer.
+ * You can load a Promises library and set Q.Promise to the Promise constructor
+ * before including Q.js, to ensure Promises are used by Q.getter and other functions.
+ * @property {Function} Promise
+ */
+Q.Promise = root.Promise;
 
 /*
  * Extend some built-in prototypes
@@ -591,6 +599,9 @@ Elp.copyComputedStyle = function(src) {
 				if ( i == "font" ) {
 					this.style.fontSize = s.fontSize;
 				}
+				if ( i == "backgroundRepeatX" || i == "backgroundRepeatY" ) {
+					this.style.backgroundRepeat = s.backgroundRepeat;
+				}
 			} catch (e) {}
 		}
 	}
@@ -629,6 +640,22 @@ Elp.scrollingParent = function() {
 		}
 	}
 	return document.documentElement;
+};
+
+/**
+ * Call this to make sure scrolling is adjusted properly after contents have changed.
+ * Some browsers, such as Safari on iOS, don't act properly unless this is called.
+ * @method adjustScrolling
+ * @param {Element} element
+ */
+Elp.adjustScrolling = function() {
+	var scrolling = this.style['-webkit-overflow-scrolling'];
+	var element = this;
+	element.style['-webkit-overflow-scrolling'] = (scrolling === 'auto' ? 'touch' : 'auto');
+	setTimeout(function () {
+		element.style['-webkit-overflow-scrolling'] = scrolling;
+	}, 0);
+	return this;
 };
 
 /**
@@ -1712,6 +1739,9 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	if(!parts.length) return context;
 	while(context && (p = parts[i++]) !== undefined){
 		try {
+			if (p === '*') {
+				p = Q.firstKey(context);
+			}
 			context = (p in context) ? context[p] : (create ? context[p] = {} : undefined);
 		} catch (e) {
 			if (create) {
@@ -2979,7 +3009,7 @@ Q.getter = function _Q_getter(original, options) {
 			callbacks.push(noop);
 		}
 		
-		var ret = { dontCache: false };
+		var ret = {dontCache: false};
 		gw.onCalled.handle.call(this, arguments2, ret);
 
 		var cached, cbpos, cbi;
@@ -3172,6 +3202,59 @@ Q.getter.CACHED = 0;
 Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
+
+/**
+ * Takes a function and returns a version that returns a promise
+ * @method promisify
+ * @static
+ * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with this
+ * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
+ */
+Q.promisify = function (getter, useSecondArgument) {
+	function _promisifier() {
+		if (!Q.Promise) {
+			return getter.apply(this, args);
+		}
+		var args = [], resolve, reject, found = false;
+		for (var i=0, l=arguments.length; i<l; ++i) {
+			var ai = arguments[i];
+			if (typeof ai === 'function') {
+				found = true;
+				ai = function _promisified(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					try {
+						ai.apply(this, arguments);
+					} catch (e) {
+						err = e;
+					}
+					if (err) {
+						return reject(err);
+					}
+					resolve(useSecondArgument ? second : this);
+				}
+			}
+			args.push(ai);
+			break; // only one callback, expect err as first argument
+		}
+		if (!found) {
+			args.push(function _defaultCallback(err, second) {
+				if (err) {
+					return reject(err);
+				}
+				resolve(useSecondArgument ? second : this);
+			});
+		}
+		var promise = new Q.Promise(function (r1, r2) {
+			resolve = r1;
+			reject = r2;
+		});
+		return Q.extend(promise, getter.apply(this, args));
+	}
+	return Q.extend(_promisifier, getter);
+};
 
 /**
  * Wraps a function and returns a wrapper that will call the function at most once.
@@ -5404,10 +5487,15 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
  * Remove an element from the DOM and try to clean up memory as much as possible
  * @static
  * @method removeElement
- * @param {HTMLElement} element
- * @param {boolean} removeTools
+ * @param {HTMLElement|Array} element, or array of elements, or object of elements
+ * @param {boolean} removeTools whether to properly remove the tools before removing the element
  */
 Q.removeElement = function _Q_removeElement(element, removeTools) {
+	if (Q.isArrayLike(element)) {
+		Q.each(element, function () {
+			Q.removeElement(this, removeTools);
+		});
+	}
 	if (removeTools) {
 		Q.Tool.remove(element);
 	}
@@ -5905,7 +5993,6 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
  *  A hash of options, including:
- * @param {boolean} [options.post] if set, adds a &Q.method=post to the querystring
  * @param {String} [options.method] if set, adds a &Q.method= that value to the querystring, default "get"
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
@@ -6287,6 +6374,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	}
 	var parts = [];
 	function _params(prefix, obj) {
+		if (obj == undefined) {
+			return;
+		}
 		if (Q.typeOf(obj) === "array") {
 			// Serialize array item.
 			Q.each(obj, function _Q_param_each(i, value) {
@@ -8025,7 +8115,9 @@ function _initTools(toolElement) {
 	var currentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	_pendingParentStack.pop(); // it was pushed during tool activate
 	var currentId = _waitingParentStack.pop();
-	var parentId = _waitingParentStack[_waitingParentStack.length-1];
+	var ba = Q.Tool.beingActivated;
+	var parentId = _waitingParentStack[_waitingParentStack.length-1]
+		|| (ba && ba.id); // if we activated child tools while activating parent
 	
 	_loadToolScript(toolElement,
 	function _initTools_doInit(toolElement, toolFunc, toolName) {
@@ -8057,8 +8149,13 @@ function _initTools(toolElement) {
 			var allInitialized = true;
 			var childIds = _toolsWaitingForInit[parentId];
 			for (var childId in childIds) {
-				for (var childName in Q.Tool.active[childId]) {
-					var c = Q.Tool.active[childId][childName];
+				var a = !Q.Tool.active[childId];
+				if (!a) {
+					allInitialized = false;
+					break;
+				}
+				for (var childName in a) {
+					var c = a[childName];
 					if (!c || !c.initialized) {
 						allInitialized = false;
 						break;
@@ -11184,7 +11281,7 @@ function _Q_trigger_recursive(tool, eventName, args) {
 	}
 }
 
-function _Q_loadUrl_fillSlots (res, url, options) {
+Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 	var elements = {}, name, elem, pos;
 	var osc = options.slotContainer;
 	if (Q.isPlainObject(osc)) {
@@ -11227,7 +11324,7 @@ Q.loadUrl.options = {
 	slotContainer: function (slotName) {
 		return document.getElementById(slotName+"_slot");
 	},
-	handler: _Q_loadUrl_fillSlots,
+	handler: Q.loadUrl.fillSlots,
 	key: 'Q'
 };
 

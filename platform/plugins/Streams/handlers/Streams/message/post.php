@@ -1,12 +1,20 @@
 <?php
 
 /**
- * Used to post messages to EXISTING stream
- * $_REQUEST shall contain the content of the message. Also may include 'streamNames' 
- * field which is an array of additional names of the streams to post message to.
- *
- * @param string $params 
- *   publisher id and stream name of existing stream shall be supplied
+ * @module Streams
+ */
+
+/**
+ * Used to post a message to an existing stream.
+ * @class HTTP Streams message
+ * @method post
+ * @param {array} [$_REQUEST] Parameters that can come from the request
+ *   @param {string} $_REQUEST.publisherId  Required. The id of the user to publish the stream.
+ *   @param {string} $_REQUEST.streamName Required streamName or name. The name of the stream.
+ *   @param {string} $_REQUEST.type Required. The type of the message.
+ *   @param {string} [$_REQUEST.content=''] Optional human-readable content of the message
+ *   @param {string} [$_REQUEST.instructions=''] Optional JSON instructions of the message
+ *   @param {string} [$_REQUEST.weight=1] Optional weight of the message
  * @return {void}
  */
 

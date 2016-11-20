@@ -2379,6 +2379,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	}
 	var parts = [];
 	function _params(prefix, obj) {
+		if (obj == undefined) {
+			return;
+		}
 		if (Q.typeOf(obj) === "array") {
 			// Serialize array item.
 			Q.each(obj, function _Q_param_each(i, value) {

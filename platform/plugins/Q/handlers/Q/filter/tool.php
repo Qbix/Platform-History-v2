@@ -9,7 +9,7 @@
  * @class Q filter
  * @constructor
  * @param {array} [$options] Override various options for this tool
- *  @param {String} [$options.name=filter] The name of the text input
+ *  @param {String} [$options.name='filter'] The name of the text input
  *  @param {String} [$options.value=''] The initial value of the text input
  *  @param {String} [$options.placeholder] Any placeholder text
  *  @param {array} [$options.placeholders={}] Options for Q/placeholders, or null to omit it

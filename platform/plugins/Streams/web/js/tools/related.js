@@ -30,10 +30,7 @@
  *   @param {Q.Event} [options.onUpdate] Event that receives parameters "data", "entering", "exiting", "updating"
  *   @param {Q.Event} [options.onRefresh] Event that occurs when the tool is completely refreshed, the "this" is the tool
  */
-Q.Tool.define("Streams/related",
-
-function _Streams_related_tool (options)
-{
+Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	// check for required options
 	var state = this.state;
 	if ((!state.publisherId || !state.streamName)

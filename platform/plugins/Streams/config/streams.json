@@ -17,7 +17,8 @@
 		"subscribe": {
 			"rule": {
 				"deliver": {
-					"to": "invited"
+					"to": "invited",
+					"filter": "{\"types\":[\"Streams/invite\"],\"notifications\":0}"
 				}
 			}
 		}

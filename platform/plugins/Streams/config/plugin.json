@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.9.4",
+				"version": "0.9.5",
 				"compatible": "0.9",
 				"requires": {"Users": "0.9.3"},
 				"permissions": ["Streams/icons"],
@@ -183,6 +183,16 @@
 					"title": "Untitled Gallery"
 				}
 			},
+			"Streams/audio": {
+				"description": "audio clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/audio",
+					"title": "Untitled Audio Clip"
+				},
+				"updateTitle": true
+			},
 			"Streams/file": {
 				"description": "uploaded file",
 				"create": true,
@@ -190,7 +200,9 @@
 				"defaults": {
 					"icon": "files/_blank",
 					"title": "Untitled File"
-				}
+				},
+				"updateTitle": true,
+				"updateIcon": true
 			},
 			"Streams/category": {
 				"description": "category to which other things can be related",
@@ -252,6 +264,13 @@
 		"categorize": {
 			"relationTypes": ["Streams/interests"],
 			"streamTypes": ["Streams/category"]
+		},
+		"lookup": {
+			"limit": 10,
+			"requireTitleIndex": true
+		},
+		"relate": {
+			"types": ["Streams/community", "Streams/interest"]
 		},
 		"invites": {
 			"tokens": {

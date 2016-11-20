@@ -76,7 +76,7 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 	
 	if (twilioClient
 	&& (from = options.from || Q.Config.get(['Users', 'mobile', 'from'], null))) {
-		twilioClient.sendSms(from, '+'+number, content, {}, function (res) {
+		twilioClient.sendSms(from, number, content, {}, function (res) {
 			if (key) {
 				Q.log('sent mobile message (via twilio) to '+number+":\n"+content, key);
 			}
@@ -105,6 +105,9 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 	});
 
 	for (provider in gateways) {
+		if (number.substr(0, 2) !== '+1') {
+			continue;
+		}
 		address.push(number.substr(2)+'@'+gateways[provider]);
 	}
 	options.html = false;

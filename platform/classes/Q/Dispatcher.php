@@ -291,7 +291,9 @@ class Q_Dispatcher
 				// Make some changes to server state, possibly
 				$method = Q_Request::method();
 				if ($method != 'GET') {
-					$methods = Q_Config::get('Q', 'methods', array('POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'));
+					$methods = Q_Config::get('Q', 'methods', array(
+						'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'
+					));
 					if (!in_array($method, $methods)) {
 						throw new Q_Exception_MethodNotSupported(compact('method'));
 					}

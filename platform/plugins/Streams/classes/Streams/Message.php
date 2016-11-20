@@ -50,8 +50,7 @@ class Streams_Message extends Base_Streams_Message
 	 * @param {string|array} $streamName
 	 *  The name of the stream. You can also pass an array of stream names here.
 	 * @param {array} $message
-	 *  The fields of the message.
-	 *  names of the streams to post message to.
+	 *  The fields of the message that you want posted.
 	 * @param {booleam} $skipAccess=false
 	 *  If true, skips the access checks and just posts the message.
 	 * @return {Streams_Message|array}

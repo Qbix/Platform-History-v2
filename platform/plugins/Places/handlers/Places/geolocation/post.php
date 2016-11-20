@@ -1,7 +1,13 @@
 <?php
 
 /**
+ * @module Places
+ */
+
+/**
  * Used to set the user's location from geolocation data.
+ * @class HTTP Places geolocation
+ * @method post
  * @param $_REQUEST
  * @param [$_REQUEST.latitude] The new latitude. If set, must also specify longitude.
  * @param [$_REQUEST.longitude] The new longitude. If set, must also specify latitude.

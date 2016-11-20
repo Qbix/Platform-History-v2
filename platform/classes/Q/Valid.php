@@ -277,13 +277,14 @@ class Q_Valid
 			}
 			$sameDomain = true;
 			$baseUrl = Q_Request::baseUrl();
+			$message = Q_Config::get('Q', 'session', 'nonceMessages', 'sameDomain', null);
 			if (!empty($_SERVER['HTTP_REFERER'])) {
 				$host1 = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
 				$host2 = parse_url($baseUrl, PHP_URL_HOST);
 				if ($host1 !== $host2) {
 					$message = Q_Config::get('Q', 'session', 'nonceMessages', 'otherDomain', null);
 				}
-			};
+			}
 			$message = Q::interpolate($message, compact('baseUrl'));
 			$field = 'nonce';
 			throw new Q_Exception_FailedValidation(compact('message', 'field'), 'Q.nonce');

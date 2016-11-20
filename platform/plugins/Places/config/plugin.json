@@ -24,9 +24,6 @@
 	},
 	"Streams": {
 		"types": {
-			"Places/community": {
-				"edit": true
-			},
 			"Places/location": {
 				"create": true,
 				"edit": true,
@@ -100,6 +97,16 @@
 						"description": "Posted to entire column"
 					}
 				}
+			}
+		},
+		"relate": {
+			"types": [
+				"Places/location", "Places/area", "Places/floor", "Places/column"
+			]
+		},
+		"invites": {
+			"sort": {
+				"areas": ["Places", "sortAreaFilenames"]
 			}
 		}
 	},
