@@ -305,9 +305,9 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			var p2 = new Q.Pipe();
 			var waitFor = [];
 			Q.each(destinations, function (i, d) {
-				var emailAddress = (d === 'email' >= 0 && uf.emailAddress)
+				var emailAddress = (d === 'email' && uf.emailAddress)
 					|| (d === 'email+pending' && uf.emailAddressPending);
-				var mobileNumber = (d === 'mobile' >= 0 && uf.mobileNumber)
+				var mobileNumber = (d === 'mobile' && uf.mobileNumber)
 					|| (d === 'mobile+pending' && uf.mobileNumberPending);
 				// Give the app an opportunity to modify the fields or anything else
 				Streams_Message.emit('deliver/before', o);
