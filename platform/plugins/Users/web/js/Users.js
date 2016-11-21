@@ -1462,7 +1462,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 				step1_usingProviders_div.append(Q.text.Users.login.usingOther).append(facebookLogin);
 				// Load the facebook script now, so clicking on the facebook button
 				// can trigger a popup directly, otherwise popup blockers may complain:
-				Q.addScript('http://connect.facebook.net/en_US/sdk.js');
+				Q.addScript('https://connect.facebook.net/en_US/sdk.js');
 				break;
 		}
 	}

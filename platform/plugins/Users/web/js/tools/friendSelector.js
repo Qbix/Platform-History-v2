@@ -133,7 +133,7 @@ Q.Tool.define('Users/friendSelector', function(o) {
 			var friendItem = $(
 				'<li data-uid="'+ friends[i].id + '">' +
 					'<div class="Users_friendSelector_tool_user_picture">' +
-						'<img src="http://graph.facebook.com/' + friends[i].id + '/picture" alt="User picture" />' +
+						'<img src="https://graph.facebook.com/' + friends[i].id + '/picture" alt="User picture" />' +
 					 '</div>' +
 					 '<div class="Users_friendSelector_tool_user_name">' + friends[i].name + '</div>' +
 				 '</li>'

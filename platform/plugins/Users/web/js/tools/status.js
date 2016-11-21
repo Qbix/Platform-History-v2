@@ -104,7 +104,7 @@ Q.Tool.define("Users/status", function(options) {
 		{
 			var iconUrl = null;
 			if (user.fb_uid && user.fb_uid.length > 1) {
-				iconUrl = 'http://graph.facebook.com/' + user.fb_uid + '/picture';
+				iconUrl = 'https://graph.facebook.com/' + user.fb_uid + '/picture';
 			} else {
 				iconUrl = Users.iconUrl(user.icon, '40.png');
 			}
