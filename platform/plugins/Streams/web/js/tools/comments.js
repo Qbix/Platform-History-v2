@@ -75,7 +75,7 @@ Q.Tool.define("Streams/comments", function(o) {
     {
         var postBlock = $('<div class="Streams_comments_tool_feed_post" />');
         postBlock.append('<div class="Streams_comments_tool_user_picture">' +
-                                                '<img src="http://graph.facebook.com/' + comment.from.id + '/picture" alt="User picture" />' +
+                                                '<img src="https://graph.facebook.com/' + comment.from.id + '/picture" alt="User picture" />' +
                                             '</div>');
         var date = parseFacebookDate(comment.insertedTime), curDate = new Date();
         var postComment = $('<div class="Streams_comments_tool_feed_post_comment">' +
@@ -125,7 +125,7 @@ Q.Tool.define("Streams/comments", function(o) {
                     onSuccess: function()
                     {
                         var pictureBlock = $('.Streams_comments_tool_content > .Streams_comments_tool_user_picture');
-                        pictureBlock.prepend('<div><img src="http://graph.facebook.com/' +
+                        pictureBlock.prepend('<div><img src="https://graph.facebook.com/' +
                                                                  Q.Users.loggedInUser.fb_uid + '/picture" alt="User picture" /></div>');
                         var loggedAsBlock = $('.Streams_comments_tool_logged_as');
                         loggedAsBlock.append('<fb:name uid="' + Q.Users.loggedInUser.fb_uid + '" capitalize="true" useyou="false"></fb:name>');
