@@ -30,7 +30,7 @@ function Streams_interest_post()
 			'name' => $name,
 			'title' => $title
 		));
-		if (!is_dir("plugins/Streams/img/icons/$name")) {
+		if (!is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$name)) {
 			$parts = explode(': ', $title, 2);
 			$keywords = implode(' ', $parts);
 			$tries = array($keywords, $parts[1]);
