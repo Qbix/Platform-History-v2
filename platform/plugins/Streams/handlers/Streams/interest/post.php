@@ -30,7 +30,9 @@ function Streams_interest_post()
 			'name' => $name,
 			'title' => $title
 		));
-		if (!is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$name)) {
+		if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$name)) {
+			$stream->icon = $name;
+		} else {
 			$parts = explode(': ', $title, 2);
 			$keywords = implode(' ', $parts);
 			$tries = array($keywords, $parts[1]);
@@ -62,10 +64,10 @@ function Streams_interest_post()
 					'skipAccess' => true
 				);
 				Q_Image::save($params);
+				$stream->icon = $name;
 			}
-			$stream->save();
 		}
-		$stream->icon = $name;
+		$stream->save();
 	}
 	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
 	if ($subscribe) {
