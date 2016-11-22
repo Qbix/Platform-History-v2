@@ -30,40 +30,42 @@ function Streams_interest_post()
 			'name' => $name,
 			'title' => $title
 		));
-		$parts = explode(': ', $title, 2);
-		$keywords = implode(' ', $parts);
-		$tries = array($keywords, $parts[1]);
-		$data = null;
-		foreach ($tries as $t) {
-			try {
-				$data = Q_Image::pixabay($t, array(
-					'orientation' => 'horizontal',
-					'min_width' => '500',
-					'safesearch' => 'true',
-					'image_type' => 'photo'
-				), true);
-			} catch (Exception $e) {
-				Q::log("Exception during Streams/interest post: " . $e->getMessage());
-				$data = null;
+		if (!is_dir("plugins/Streams/img/icons/$name")) {
+			$parts = explode(': ', $title, 2);
+			$keywords = implode(' ', $parts);
+			$tries = array($keywords, $parts[1]);
+			$data = null;
+			foreach ($tries as $t) {
+				try {
+					$data = Q_Image::pixabay($t, array(
+						'orientation' => 'horizontal',
+						'min_width' => '500',
+						'safesearch' => 'true',
+						'image_type' => 'photo'
+					), true);
+				} catch (Exception $e) {
+					Q::log("Exception during Streams/interest post: " . $e->getMessage());
+					$data = null;
+				}
+				if ($data) {
+					break;
+				}
 			}
 			if ($data) {
-				break;
+				$sizes = Q_Config::expect('Streams', 'icons', 'sizes');
+				ksort($sizes);
+				$params = array(
+					'data' => $data,
+					'path' => "plugins/Streams/img/icons",
+					'subpath' => $name,
+					'save' => $sizes,
+					'skipAccess' => true
+				);
+				Q_Image::save($params);
+				$stream->icon = $name;
 			}
+			$stream->save();
 		}
-		if ($data) {
-			$sizes = Q_Config::expect('Streams', 'icons', 'sizes');
-			ksort($sizes);
-			$params = array(
-				'data' => $data,
-				'path' => "plugins/Streams/img/icons",
-				'subpath' => $name,
-				'save' => $sizes,
-				'skipAccess' => true
-			);
-			Q_Image::save($params);
-			$stream->icon = $name;
-		}
-		$stream->save();
 	}
 	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
 	if ($subscribe) {
