@@ -62,10 +62,10 @@ function Streams_interest_post()
 					'skipAccess' => true
 				);
 				Q_Image::save($params);
-				$stream->icon = $name;
 			}
 			$stream->save();
 		}
+		$stream->icon = $name;
 	}
 	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
 	if ($subscribe) {
