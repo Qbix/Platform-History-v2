@@ -44,6 +44,14 @@ Q.mixin(Base, Row);
  * @property {String}
  * @type title
  */
+/**
+ * @property {String|Db.Expression}
+ * @type insertedTime
+ */
+/**
+ * @property {String|Db.Expression}
+ * @type updatedTime
+ */
 
 /**
  * This method calls Db.connect() using information stored in the configuration.
@@ -203,7 +211,9 @@ Base.prototype.fieldNames = function () {
 		"userId",
 		"label",
 		"icon",
-		"title"
+		"title",
+		"insertedTime",
+		"updatedTime"
 	];
 };
 
@@ -360,6 +370,49 @@ return [["varchar","255","",false],false,"",null];
 };
 
 /**
+ * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_insertedTime = function () {
+
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_updatedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_updatedTime = function () {
+
+return [["timestamp","255","",false],true,"",null];
+};
+
+/**
  * Check if mandatory fields are set and updates 'magic fields' with appropriate values
  * @method beforeSave
  * @param {Object} value The object of fields
@@ -377,6 +430,8 @@ Base.prototype.beforeSave = function (value) {
 			}
 		}
 	}
+	// convention: we'll have updatedTime = insertedTime if just created.
+	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	return value;
 };
 

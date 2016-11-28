@@ -81,7 +81,9 @@ function _Q_overlay(o) {
 
 	function closeThisOverlayOnEsc(e)
 	{
-		if (e.keyCode == 27 && !o.noClose && o.closeOnEsc && $this.is(":visible")) {
+		var topDialog = dialogs[dialogs.length - 1];
+		if (e.keyCode == 27 && !o.noClose && o.closeOnEsc
+		&& $this.is(":visible") && (!topDialog || $this[0] === topDialog)) {
 			$this.data('Q/overlay').close(e);
 		}
 	}
@@ -106,6 +108,7 @@ function _Q_overlay(o) {
 			Q.handle($overlay.options.beforeLoad, $this, [$this]);
 			calculatePosition($this);
 			$this.show();
+			dialogs.push($this[0]);
 			var $body = $('body');
 			$overlay.bodyStyle = {
 				left: $body.css('left'),
@@ -164,6 +167,7 @@ function _Q_overlay(o) {
 		},
 		close: function(e)
 		{
+			dialogs.pop();
 			var $overlay = $this.data('Q/overlay');
 			$('body').removeClass('Q_preventScroll').css($overlay.bodyStyle);
 			$('html,body').scrollTop($this.data('Q/overlay').documentScrollTop);
@@ -613,5 +617,6 @@ function _handlePosAndScroll(o)
 
 var interval;
 var bgLoaded;
+var dialogs = [];
 
 })(Q, jQuery, window, document);

@@ -219,7 +219,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var fields = Q.extend({
 			alt: "New Item",
 			title: "New Item",
-			src: Q.url('plugins/Streams/img/actions/add.png'),
+			src: Q.url('plugins/Q/img/actions/add.png'),
 			prefix: tool.prefix
 		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
 		tool.element.addClass('Streams_preview_create');

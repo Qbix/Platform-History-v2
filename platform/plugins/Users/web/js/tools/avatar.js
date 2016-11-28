@@ -45,7 +45,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 },
 
 {
-	user: null,
+	userId: null,
 	icon: Users.icon.defaultSize,
 	templates: {
 		icon: {

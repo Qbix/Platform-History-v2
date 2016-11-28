@@ -27,11 +27,11 @@ class Users_Label extends Base_Users_Label
 	 * Add a contact label
 	 * @method {boolean} addLabel
 	 * @static
-	 * @param {string|array} $label A label or array of labels
-	 * @param {string} [$userId=null] user current user if not provided
+	 * @param {string|array} $label A label or array of ($label => array($title, $icon))
+	 * @param {string} [$userId=null] The logged-in user if not provided
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
 	 * @param {string} [$icon='default']
-	 * @param {string} [$asUserId=null] The user to do this operation as.
+	 * @param {string|false} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
 	 * @param boolean [$unlessExists=false] If true, skips adding label if it already exists
 	 *   in the database.
@@ -46,8 +46,14 @@ class Users_Label extends Base_Users_Label
 		$unlessExists = false)
 	{
 		if (is_array($label)) {
-			foreach ($label as $l) {
-				self::addLabel($l, $userId, $title, $icon, $asUserId, $unlessExists);
+			foreach ($label as $l => $title) {
+				if (is_array($title)) {
+					$icon = $title[1];
+					$title = $title[0];
+				} else {
+					$icon = 'default';
+				}
+				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $unlessExists);
 			}
 			return;
 		}
@@ -60,6 +66,10 @@ class Users_Label extends Base_Users_Label
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(true);
 			$userId = $user->id;
+		}
+		if (!isset($asUserId)) {
+			$user = Users::loggedInUser(true);
+			$asUserId = $user->id;
 		}
 		Users::canManageLabels($asUserId, $userId, $label, true);
 		if (empty($title)) {
@@ -149,7 +159,7 @@ class Users_Label extends Base_Users_Label
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
 	 * @param {string} [$userId=null] The id of the user whose contact labels should be fetched
-	 * @param {string|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some db expression, to get only a particular subset of labels.
+	 * @param {string|array|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some array or db expression, to get only a particular subset of labels.
 	 * @param {boolean} [$checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
 	 * @return {array} An array of array(label => Users_Contact) pairs
 	 */
@@ -162,7 +172,7 @@ class Users_Label extends Base_Users_Label
 		$criteria = array('userId' => $userId);
 		if ($filter) {
 			$criteria['label'] = is_string($filter)
-				? new Db_Range($filter, true, false, null)
+				? new Db_Range($filter, true, false, true)
 				: $filter;
 		}
 		if ($checkContacts) {
