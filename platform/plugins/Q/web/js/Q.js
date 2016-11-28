@@ -10670,6 +10670,7 @@ Q.confirm.options = {
  * @param {Object} [options] An optional hash of options which can include:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
+ * @param {Number} [options.maxlength=1000] the maximum length of the input
  * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
  * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
@@ -10690,7 +10691,10 @@ Q.prompt = function(message, callback, options) {
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
 			$('<div class="Q_buttons" />').append(
-				$('<input type="text" />').attr('placeholder', o.placeholder), ' ',
+				$('<input type="text" />').attr({
+					'placeholder': o.placeholder,
+					'maxlength': o.maxLength
+				}), ' ',
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
@@ -10723,6 +10727,7 @@ Q.prompt.options = {
 	title: 'Prompt',
 	ok: 'OK',
 	placeholder: '',
+	maxlength: 100,
 	noClose: true
 };
 

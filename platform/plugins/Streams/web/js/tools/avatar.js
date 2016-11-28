@@ -54,8 +54,6 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	if (!state.userId || !state.reflectChanges) {
 		return;
 	}
-	Streams.Stream.retain(state.userId, 'Streams/user/firstName', tool);
-	Streams.Stream.retain(state.userId, 'Streams/user/lastName', tool);
 	Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
 	.set(function (fields, field) {
 		var $img = tool.$('.Users_avatar_icon');

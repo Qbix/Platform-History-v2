@@ -1874,10 +1874,12 @@ class Db_Row implements Iterator
 				}
 			}
 		}
+		
+		$inserted = ($query->type === Db_Query::TYPE_INSERT);
 
 		$callback = array($this, "afterSaveExecute");
 		if (is_callable($callback)) {
-			call_user_func($callback, $result, $query, $fieldsToSave, $where);
+			call_user_func($callback, $result, $query, $fieldsToSave, $where, $inserted);
 		}
 	
 		if (class_exists('Q')) {
@@ -1891,7 +1893,7 @@ class Db_Row implements Iterator
 			Q::event("Db/Row/$this_class/saveExecute", array(
 				'row' => $this,
 				'query' => $query,
-				'inserted' => ($query->type === Db_Query::TYPE_INSERT),
+				'inserted' => $inserted,
 				'modifiedFields' => $fieldsToSave,
 				'result' => $result
 			), 'after');

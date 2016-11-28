@@ -57,6 +57,14 @@ class Users_Contact extends Base_Users_Contact
 				throw new Q_Exception_RequiredField($field);
 			}
 		}
+		if (!isset($userId)) {
+			$user = Users::loggedInUser(true);
+			$userId = $user->id;
+		}
+		if (!isset($asUserId)) {
+			$user = Users::loggedInUser(true);
+			$asUserId = $user->id;
+		}
 		Users::canManageContacts($asUserId, $userId, $label, true);
 		Users_User::fetch($userId, true);
 		Users_User::fetch($contactUserId, true);
@@ -135,24 +143,26 @@ class Users_Contact extends Base_Users_Contact
 	 * @static
 	 * @param {string} $userId
 	 * @param {string} $label
-	 * @param {string} $contactId
+	 * @param {string} $contactUserId
 	 * @param {string} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
 	 * @throws {Users_Exception_NotAuthorized}
 	 * @return {Db_Query_Mysql}
 	 */
-	static function removeContact($userId, $label, $contactId, $asUserId = null)
+	static function removeContact($userId, $label, $contactUserId, $asUserId = null)
 	{
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
-				throw new Q_Exception_RequiredField(compact($field));
+				throw new Q_Exception_RequiredField(array(
+					'field' => $field
+				));
 			}
 		}
 		Users::canManageContacts($asUserId, $userId, $label, true);
 		$contact = new Users_Contact();
 		$contact->userId = $userId;
 		$contact->label = $label;
-		$contact->contactUserId = $contactId;
+		$contact->contactUserId = $contactUserId;
 		return $contact->remove();
 	}
 
@@ -167,12 +177,13 @@ class Users_Contact extends Base_Users_Contact
 	 * @param {integer} [$options.offset]
 	 * @param {boolean} [$options.skipAccess]
 	 * @param {boolean} [$options.asUserId]
+	 * @param {string|array} [$options.contactUserId=null]
 	 * @return {array}
 	 */
 	static function fetch($userId, $label = null, /* string|Db_Range, */ $options = array())
 	{
 		if (empty($userId)) {
-			throw new Q_Exception_RequiredField(array('field' => $userId));
+			throw new Q_Exception_RequiredField(array('field' => 'userId'));
 		}
 		if (empty($options['skipAccess'])) {
 			$asUserId = isset($options['asUserId'])
@@ -183,7 +194,11 @@ class Users_Contact extends Base_Users_Contact
 		$limit = isset($options['limit']) ? $options['limit'] : false;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
 		
-		$criteria = compact('userId');
+		if (isset($options['contactUserId'])) {
+			$contactUserId = $options['contactUserId'];
+		}
+		
+		$criteria = compact('userId', 'contactUserId');
 		
 		if ($label) {
 			if (is_string($label) and substr($label, -1) === '/') {

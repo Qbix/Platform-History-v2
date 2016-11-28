@@ -1817,13 +1817,17 @@ Users.facebookDialog = function(options)
  * @method getContacts
  * @static
  * @param {String} userId
- * @param {Array|String} labels
+ * @param {Array|String} [labels]
+ * @param {String|Array} [contactUserIds]
  * @param {Function} callback
  */
-Users.getContacts = function (userId, labels, callback) {
+Users.getContacts = function (userId, labels, contactUserIds, callback) {
 	if (typeof labels === 'function') {
 		callback = labels;
-		labels = undefined;
+		labels = contactUserId = undefined;
+	} else if (typeof contactUserId === 'function') {
+		callback = contactUserId;
+		contactUserId = undefined;
 	}
 	Q.req('Users/contact', 'contacts', function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
@@ -1839,7 +1843,41 @@ Users.getContacts = function (userId, labels, callback) {
 	}, {
 		fields: {
 			userId: userId,
-			labels: labels
+			labels: labels,
+			contactUserIds: contactUserIds
+		},
+		method: 'post'
+	});
+};
+
+/**
+ * Get a user's contact labels
+ * @method getLabels
+ * @static
+ * @param {String} userId
+ * @param {String} [prefix] Pass any prefix here, to filter labels by this prefix
+ * @param {Function} callback
+ */
+Users.getLabels = function (userId, prefix, callback) {
+	if (typeof prefix === 'function') {
+		callback = prefix;
+		prefix = undefined;
+	}
+	Q.req('Users/label', 'labels', function (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			Users.onError.handle.call(this, msg, err, data.labels);
+			Users.get.onError.handle.call(this, msg, err, data.labels);
+			return callback && callback.call(this, msg);
+		}
+		Q.each(data.slots.labels, function (i) {
+			data.slots.labels[i] = new Users.Label(data.slots.labels[i]);
+		});
+		Q.handle(callback, data, [err, data.slots.labels]);
+	}, {
+		fields: {
+			userId: userId,
+			labels: prefix
 		},
 		method: 'post'
 	});
@@ -1863,7 +1901,7 @@ var Cp = Contact.prototype;
  * @param {String} userId The user's id
  * @param {String} label The contact's label
  * @param {String} contactUserId The contact user's id
- * @param callback {function}
+ * @param {Function} callback
  *	if there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and second parameter is a Users.Contact object
  */
@@ -1889,9 +1927,151 @@ Contact.get = function (userId, label, contactUserId, callback) {
 	});
 };
 
+function _Users_manage(action, method, fields, field, Constructor, getter, callback) {
+	Q.req(action, field, function _Users_manage_response_handler (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			Users.onError.handle.call(this, msg, err, data);
+			Users.get.onError.handle.call(this, msg, err, data);
+			return callback && callback.call(this, msg);
+		}
+		if (getter) {
+			getter.cache.clear();
+		}
+		var obj = field && data.slots[field] ? new Constructor(data.slots[field]) : null;
+		Q.handle(callback, obj, [err, obj]);
+	}, {
+		method: method,
+		fields: fields
+	});
+}
+
+/**
+ * Adds a contact.
+ * @method add
+ * @param {String} userId The user's id
+ * @param {String} label The contact's label
+ * @param {String} contactUserId The contact user's id
+ * @param {Function} callback
+ *	if there were errors, first parameter is an array of errors
+ *  otherwise, first parameter is null and second parameter is a Users.Contact object
+ */
+Contact.add = function (userId, label, contactUserId, callback) {
+	return _Users_manage('Users/contact', 'post', {
+		userId: userId,
+		label: label,
+		contactUserId: contactUserId
+	}, 'contact', Contact, Users.getContacts, callback);
+};
+
+/**
+ * Remove a contact.
+ * @method remove
+ * @param {String} userId The user's id
+ * @param {String} label The contact's label
+ * @param {String} contactUserId The contact user's id
+ * @param {Function} callback
+ *	if there were errors, first parameter is an array of errors
+ *  otherwise, first parameter is null and second parameter is a Users.Contact object
+ */
+Contact.remove = function (userId, label, contactUserId, callback) {
+	return _Users_manage('Users/contact', 'delete', {
+		userId: userId,
+		label: label,
+		contactUserId: contactUserId
+	}, null, Contact, Users.getContacts, callback);
+};
+
+/**
+ * Constructs a label from fields, which are typically returned from the server.
+ * @class Users.Label
+ * @constructor
+ * @param {Object} fields
+ */
+var Label = Users.Label = function Users_Label(fields) {
+	Q.extend(this, fields);
+	this.typename = 'Q.Users.Label';
+};
+var Lp = Label.prototype;
+
+/**
+ * Labels batch getter.
+ * @method get
+ * @param {String} userId The user's id
+ * @param {String} label The label's internal name
+ * @param {Function} callback
+ *	if there were errors, first parameter is an array of errors
+ *  otherwise, first parameter is null and second parameter is a Users.Label object
+ */
+Label.get = function (userId, label, callback) {
+	var func = Users.batchFunction(Q.baseUrl({
+		userIds: userId,
+		label: label
+	}), 'label', ['userIds', 'labels']);
+	func.call(this, userId, label,
+	function Users_Label_get_response_handler (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (!msg && !data.label) {
+			msg = "Users.Label.get: no such label";
+		}
+		if (msg) {
+			Users.onError.handle.call(this, msg, err, data.label);
+			Users.get.onError.handle.call(this, msg, err, data.label);
+			return callback && callback.call(this, msg);
+		}
+		var label = new Users.Label(data.label);
+		callback.call(label, err, label);
+	});
+};
+
+/**
+ * Adds a label.
+ * @method add
+ * @param {String} userId The user's id
+ * @param {String} title The contact label's title
+ * @param {Function} callback
+ *	if there were errors, first parameter is an array of errors
+ *  otherwise, first parameter is null and second parameter is a Users.Contact object
+ */
+Label.add = function (userId, title, callback) {
+	return _Users_manage('Users/label', 'post', {
+		userId: userId,
+		title: title
+	}, 'label', Label, Users.getLabels, callback);
+};
+
+/**
+ * Remove a label.
+ * @method remove
+ * @param {String} userId The user's id
+ * @param {String} label The contact label's label
+ * @param {Function} callback
+ *	if there were errors, first parameter is an array of errors
+ *  otherwise, first parameter is null and second parameter is a Users.Contact object
+ */
+Label.remove = function (userId, label, callback) {
+	return _Users_manage('Users/label', 'delete', {
+		userId: userId,
+		label: label
+	}, null, Label, Users.getLabels, callback);
+};
+
+/**
+ * Calculate the url of a label's icon
+ * @method 
+ * @param {Number} [size=40] the size of the icon to render.
+ * @return {String} the url
+ */
+Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
+	return Users.iconUrl(this.icon.interpolate({
+		userId: this.userId.splitId()
+	}), size);
+};
+
 Q.Tool.define({
     "Users/avatar": "plugins/Users/js/tools/avatar.js",
 	"Users/list": "plugins/Users/js/tools/list.js",
+	"Users/labels": "plugins/Users/js/tools/labels.js",
 	"Users/status": "plugins/Users/js/tools/status.js",
 	"Users/friendSelector": "plugins/Users/js/tools/friendSelector.js",
 	"Users/getintouch": "plugins/Users/js/tools/getintouch.js",
@@ -1908,6 +2088,11 @@ Q.beforeInit.add(function _Users_beforeInit() {
 	Users.getContacts = Q.getter(Users.getContacts, {
 		cache: Q.Cache.document("Users.getContacts", 100), 
 		throttle: 'Users.getContacts'
+	});
+	
+	Users.getLabels = Q.getter(Users.getLabels, {
+		cache: Q.Cache.document("Users.getLabels", 100), 
+		throttle: 'Users.getLabels'
 	});
 
 	Users.lastSeenNonce = Q.cookie('Q_nonce');
