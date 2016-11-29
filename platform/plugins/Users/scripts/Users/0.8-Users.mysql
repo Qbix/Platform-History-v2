@@ -115,7 +115,7 @@ DROP TABLE IF EXISTS `{$prefix}label`;
 
 CREATE TABLE `{$prefix}label` (
   `userId` varchar(31) NOT NULL,
-  `label` varchar(255) NOT NULL,
+  `label` varchar(63) NOT NULL,
   `icon` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`,`label`)

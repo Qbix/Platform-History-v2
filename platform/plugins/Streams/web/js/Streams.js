@@ -3073,7 +3073,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
  */
 Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
 	return Users.iconUrl(this.icon.interpolate({
-		'userId': this.publisherId.splitId()
+		userId: this.publisherId.splitId()
 	}), size);
 };
 

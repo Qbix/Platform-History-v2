@@ -17,7 +17,7 @@ function Users_contact_response_batch($params = array())
 	$labels = $batch['labels'];
 	$contactUserIds = $batch['contactUserIds'];
 	$contacts = Q::event('Users/contact/response/contacts', compact(
-		'userIds', 'labels', 'contactUserIds'
+		'userIds', 'labels', 'contactUserIds', 'batch'
 	));
 	$result = array();
 	foreach ($contacts as $contact) {

@@ -74,7 +74,10 @@ table { border-spacing:0; border-collapse:collapse; }
 .Q_notice a { font-weight: bold; }
 .Q_required { border: solid 2px #AAC !important; }
 .Q_success { background: #e2ffee !important; }
-.Q_selected { background: #98bede; }
+.Q_selectable { border: 1px solid transparent; }
+.Q_notTouchscreen .Q_selectable:hover { background: #aeaeae; background: rgba(175,175,175,0.5); }
+.Q_selected { background: #98bede; border: 1px solid #5ca3df; }
+.Q_selectable.Q_selected:hover { background: #98bede; }
 .Q_throb,
 .Q_throb input { background-image: url(../img/throbbers/loading.gif); background-repeat: no-repeat; background-position: center center; }
 .Q_loading { 

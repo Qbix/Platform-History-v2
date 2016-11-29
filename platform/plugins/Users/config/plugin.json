@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "0.9.3",
+				"version": "0.9.4",
 				"compatible": "0.9.3",
 				"requires": {"Q": "0.9"},
 				"permissions": ["Users/icons"],
@@ -147,11 +147,20 @@
 		},
 		"icon": {
 			"sizes": ["40", "50", "80", "200", "x200", "200x"],
-			"defaultSize": "40"
+			"defaultSize": "40",
+			"labels": "labels/default"
 		},
 		"vote": {
 			"Users/hinted": {
 				"value": 1
+			}
+		},
+		"onInsert": {
+			"labels": {
+				"Users/friends": ["Friends", "labels/Users/friends"],
+				"Users/family": ["Family", "labels/Users/family"],
+				"Users/business": ["Business", "labels/Users/business"],
+				"Users/dating": ["Dating", "labels/Users/dating"]
 			}
 		}
 	}

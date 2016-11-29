@@ -31,8 +31,8 @@ function Users_contact_response_contacts($params = array())
 		}
 	}
 	$contacts = array();
-	if (isset($req['contactUserIds'])) {
-		// expects batch format, i.e. $contacts, $labels and $contactUserIds
+	if (isset($req['batch'])) {
+		// expects batch format, i.e. $userIds, $labels and $contactUserIds
 		foreach ($userIds as $i => $userId) {
 			$contact = new Users_Contact();
 			$contact->userId = $userId;
@@ -41,9 +41,12 @@ function Users_contact_response_contacts($params = array())
 			$contacts[] = $contact->retrieve() ? $contact : null;
 		}
 	} else {
-		$contacts = array();
+		$opt = array();
+		if (isset($contactUserIds)) {
+			$opt['contactUserId'] = $contactUserIds;
+		}
 		foreach ($userIds as $i => $userId) {
-			$contacts = array_merge($contacts, Users_Contact::fetch($userId, $labels));
+			$contacts = array_merge($contacts, Users_Contact::fetch($userId, $labels, $opt));
 		}
 	}
 	return Q_Response::setSlot('contacts', Db::exportArray($contacts));

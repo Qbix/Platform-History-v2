@@ -383,3 +383,10 @@
 }
 
 .Users_avatar_tool { vertical-align: top; }
+
+.Users_labels_tool ul { list-style-type: none; padding: 0; }
+.Users_labels_tool li { list-style-type: none; padding: 0px 10px 0px 10px; margin: 5px; border-radius: 5px; }
+.Users_labels_icon { width: 40px; height: 40px; }
+.Users_labels_active .Users_labels_label,
+.Users_labels_action { cursor: pointer; }
+.Users_labels_tool .Users_labels_title { display: inline-block; vertical-align: middle; padding: 10px; font-weight: bold; }
