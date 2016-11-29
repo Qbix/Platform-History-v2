@@ -1928,15 +1928,15 @@ Contact.get = function (userId, label, contactUserId, callback) {
 };
 
 function _Users_manage(action, method, fields, field, Constructor, getter, callback) {
+	if (getter) {
+		getter.cache.clear();
+	}
 	Q.req(action, field, function _Users_manage_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			Users.onError.handle.call(this, msg, err, data);
 			Users.get.onError.handle.call(this, msg, err, data);
 			return callback && callback.call(this, msg);
-		}
-		if (getter) {
-			getter.cache.clear();
 		}
 		var obj = field && data.slots[field] ? new Constructor(data.slots[field]) : null;
 		Q.handle(callback, obj, [err, obj]);

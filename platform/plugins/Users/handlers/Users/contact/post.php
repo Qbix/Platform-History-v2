@@ -22,5 +22,7 @@ function Users_contact_post($params = array())
 	$contacts = Users_Contact::addContact(
 		$userId, $req['label'], $contactUserId, $nickname
 	);
+	$contact = reset($contacts);
 	Q_Response::setSlot('contacts', Db::exportArray($contacts));
+	Q_Response::setSlot('contact', Db::exportArray($contact));
 }
