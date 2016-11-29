@@ -554,8 +554,9 @@ class Q_Html
 			}
 			$attributes = array();
 		}
-		if (!is_string($alt))
+		if (!is_string($alt)) {
 			$alt = 'not a string';
+		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
 		return self::tag('img', $tag_params);
 	}
