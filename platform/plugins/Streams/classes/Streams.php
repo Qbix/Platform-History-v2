@@ -3181,8 +3181,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {array} [$options=array()]
-	 *  @param {string|array} [$options.addLabel] label or an array of labels for adding publisher's contacts
-	 *  @param {string|array} [$options.addMyLabel] label or an array of labels for adding asUserId's contacts
+	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
+	 *  @param {string|array} [$options.addMyLabel] label or an array of ($label => array($title, $icon)) for adding asUserId's contacts
 	 *  @param {integer} [$options.readLevel] => the read level to grant those who are invited
 	 *  @param {integer} [$options.writeLevel] => the write level to grant those who are invited
 	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited

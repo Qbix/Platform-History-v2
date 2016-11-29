@@ -242,9 +242,13 @@ class Users_User extends Base_Users_User
 		return parent::beforeSave($updatedFields);
 	}
 	
-	function afterSaveExecute($result, $query, $modifiedFields, $where)
+	function afterSaveExecute($result, $query, $modifiedFields, $where, $inserted)
 	{
 		$user = $this;
+		if ($inserted) {
+			$labels = Q_Config::get('Users', 'onInsert', 'labels', array());
+			Users_Label::addLabel($labels, $this->id, null, null, $this->id, true);
+		}
 		Q::event(
 			'Users/User/save', 
 			compact('user', 'result', 'query', 'modifiedFields', 'where'),
@@ -256,7 +260,7 @@ class Users_User extends Base_Users_User
 	/**
 	 * Add a contact label
 	 * @method {boolean} addLabel
-	 * @param {string} $label
+	 * @param {string|array} $label the label or array of ($label => array($title, $icon))
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
 	 * @param {string} [$icon='default']
 	 * @param {string} [$asUserId=null] The user to do this operation as.

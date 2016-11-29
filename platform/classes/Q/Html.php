@@ -323,7 +323,7 @@ class Q_Html
 		$html_parts = array();
 		foreach ($list as $key => $value) {
 			if (is_array($value)) {
-				$html_parts[] = self::tag('optgroup', array('label' => $key), $key);
+				$html_parts[] = self::tag('optgroup', array('label' => $key), null);
 				foreach ($value as $k => $v) {
 					if (is_string($ids)) {
 						$id = $ids . '_' . $i;
@@ -341,6 +341,7 @@ class Q_Html
 					$html_parts[] = self::tag('option', $attributes2, $v);
 					++ $i;
 				}
+				$html_parts[] = "</optgroup>";
 			} else {
 				if (is_string($ids)) {
 					$id = $ids . '_' . $i;
@@ -553,8 +554,9 @@ class Q_Html
 			}
 			$attributes = array();
 		}
-		if (!is_string($alt))
+		if (!is_string($alt)) {
 			$alt = 'not a string';
+		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
 		return self::tag('img', $tag_params);
 	}
