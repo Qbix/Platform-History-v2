@@ -61,7 +61,9 @@ function Streams_access_tool($options)
 			'streamName' => $stream->name,
 		))->andWhere("{$tab}Level != -1")->fetchDbRows();
 		
-	$labelRows = Users_Label::fetch($stream->publisherId, '', true);
+	$labelRows = Users_Label::fetch($stream->publisherId, '', array(
+		'checkContacts' => true
+	));
 	$labels = array();
 	$icons = array();
 	foreach ($labelRows as $label => $row) {

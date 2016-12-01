@@ -1992,6 +1992,8 @@ abstract class Users extends Base_Users
 	 * @param {string} $asUserId The user who would be doing the managing
 	 * @param {string} $userId The user whose contacts they are
 	 * @param {string} $label The label of the contacts that will be managed
+	 * @param {boolean} $throwIfNotAuthorized Throw an exception if not authorized
+	 * @param {boolean} $readOnly Whether we just want to know if the user can view the labels
 	 * @return {boolean} Whether a contact with this label is allowed to be managed
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
@@ -1999,7 +2001,8 @@ abstract class Users extends Base_Users
 		$asUserId, 
 		$userId, 
 		$label, 
-		$throwIfNotAuthorized = false
+		$throwIfNotAuthorized = false,
+		$readOnly = false
 	) {
 		if ($asUserId === false) {
 			return true;
@@ -2011,7 +2014,7 @@ abstract class Users extends Base_Users
 		$authorized = false;
 		$result = Q::event(
 			"Users/canManageContacts",
-			compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized'),
+			compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
 			'before'
 		);
 		if ($result) {
@@ -2032,6 +2035,8 @@ abstract class Users extends Base_Users
 	 * @param {string} $asUserId The user who would be doing the managing
 	 * @param {string} $userId The user whose contact labels they are
 	 * @param {string} $label The label that will be managed
+	 * @param {boolean} $throwIfNotAuthorized Throw an exception if not authorized
+	 * @param {boolean} $readOnly Whether we just want to know if the user can view the labels
 	 * @return {boolean} Whether this label is allowed to be managed
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
@@ -2039,7 +2044,8 @@ abstract class Users extends Base_Users
 		$asUserId, 
 		$userId, 
 		$label, 
-		$throwIfNotAuthorized = false
+		$throwIfNotAuthorized = false,
+		$readOnly = false
 	) {
 		if ($asUserId === false) {
 			return true;
@@ -2047,7 +2053,7 @@ abstract class Users extends Base_Users
 		$authorized = false;
 		$result = Q::event(
 			"Users/canManageLabels",
-			compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized'),
+			compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
 			'before'
 		);
 		if ($result) {
