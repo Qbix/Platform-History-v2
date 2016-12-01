@@ -172,11 +172,11 @@ class Users_Contact extends Base_Users_Contact
 	 * @static
 	 * @param {string} $userId
 	 * @param {string|array|Db_Range|Db_Expression} $label
-	 * @param {array} [$options=array()] Query options including:
+	 * @param {array} [$options=array()]
 	 * @param {integer} [$options.limit=false]
-	 * @param {integer} [$options.offset]
-	 * @param {boolean} [$options.skipAccess]
-	 * @param {boolean} [$options.asUserId]
+	 * @param {integer} [$options.offset=0] 
+	 * @param {boolean} [$options.skipAccess] whether to skip access checks
+	 * @param {string} [$options.asUserId] the user to do access checks as
 	 * @param {string|array} [$options.contactUserId=null]
 	 * @return {array}
 	 */
@@ -189,7 +189,7 @@ class Users_Contact extends Base_Users_Contact
 			$asUserId = isset($options['asUserId'])
 				? $options['asUserId']
 				: Users::loggedInUser(true)->id;
-			Users::canManageContacts($asUserId, $userId, $label, true);
+			Users::canManageContacts($asUserId, $userId, $label, true, true);
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : false;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;

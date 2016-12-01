@@ -4,7 +4,7 @@ var Users = Q.Users;
 
 Q.setObject({
 	'Q.text.Users.labels.addLabel': 'New Label',
-	'Q.text.Users.labels.prompt': 'Type your new label'
+	'Q.text.Users.labels.prompt': 'Give it a name'
 });
 
 /**

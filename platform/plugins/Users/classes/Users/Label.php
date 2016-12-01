@@ -160,14 +160,23 @@ class Users_Label extends Base_Users_Label
 	 * @method fetch
 	 * @param {string} [$userId=null] The id of the user whose contact labels should be fetched
 	 * @param {string|array|Db_Expression} [$filter=''] Pass a string prefix such as "Users/", or some array or db expression, to get only a particular subset of labels.
-	 * @param {boolean} [$checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.skipAccess] whether to skip access checks
+	 * @param {string} [$options.asUserId] the user to do access checks as
+	 * @param {boolean} [$options.checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
 	 * @return {array} An array of array(label => Users_Contact) pairs
 	 */
-	static function fetch($userId = null, $filter = '', $checkContacts = false)
+	static function fetch($userId = null, $filter = '', $options = array())
 	{
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(true);
 			$userId = $user->id;
+		}
+		if (empty($options['skipAccess'])) {
+			$asUserId = isset($options['asUserId'])
+				? $options['asUserId']
+				: Users::loggedInUser(true)->id;
+			Users::canManageLabels($asUserId, $userId, null, true, true);
 		}
 		$criteria = array('userId' => $userId);
 		if ($filter) {
