@@ -11,16 +11,24 @@ function Streams_before_Users_canManageContacts($params, &$result)
 		return;
 	}
 	$stream = Streams::fetchOne($asUserId, $userId, 'Streams/contacts');
-	if ($stream and $stream->testWriteLevel('edit')) {
-		if ($prefixes = $stream->getAttribute('prefixes', null)) {
-			foreach ($prefixes as $prefix) {
-				if (Q::startsWith($label, $prefix)) {
-					$result = true;
-					return;
-				}
-			}
-		} else {
+	if (!$stream or !$stream->testReadLevel('content')) {
+		return;
+	}
+	if ($readOnly) {
+		$result = true;
+		return;
+	}
+	if ($label and $stream->testWriteLevel('edit')) {
+		$prefixes = $stream->getAttribute('prefixes', null);
+		if (!isset($prefixes)) {
 			$result = true;
+			return;
+		}
+		foreach ($prefixes as $prefix) {
+			if (Q::startsWith($label, $prefix)) {
+				$result = true;
+				return;
+			}
 		}
 	}
 }
