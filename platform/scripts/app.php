@@ -196,7 +196,7 @@ if (is_dir($uploads_dir)) {
 	if (file_exists(APP_WEB_DIR.DS.'uploads')) {
 		unlink(APP_WEB_DIR.DS.'uploads');
 	}
-	Q_Utils::symlink($uploads_dir, APP_WEB_DIR.DS.'uploads');
+	Q_Utils::symlink($uploads_dir, "../files/$app/uploads");
 }
 
 if ($auto_plugins) {
