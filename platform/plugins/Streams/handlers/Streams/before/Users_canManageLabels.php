@@ -7,9 +7,11 @@ function Streams_before_Users_canManageLabels($params, &$result)
 	$label = $params['label'];
 	$readOnly = $params['readOnly'];
 	$throwIfNotAuthorized = $params['throwIfNotAuthorized'];
-	if ($asUserId === $userId and substr($label, 0, 6) === 'Users/') {
-		$result = true;
-		return;
+	if ($asUserId === $userId) {
+		if ($readOnly or substr($label, 0, 6) === 'Users/') {
+			$result = true;
+			return;
+		}
 	}
 	$stream = Streams::fetchOne($asUserId, $userId, 'Streams/labels');
 	if (!$stream or !$stream->testReadLevel('content')) {

@@ -6,9 +6,11 @@ function Streams_before_Users_canManageContacts($params, &$result)
 	$userId = $params['userId'];
 	$label = $params['label'];
 	$throwIfNotAuthorized = $params['throwIfNotAuthorized'];
-	if ($asUserId === $userId and substr($label, 0, 6) === 'Users/') {
-		$result = true;
-		return;
+	if ($asUserId === $userId) {
+		if ($readOnly or substr($label, 0, 6) === 'Users/') {
+			$result = true;
+			return;
+		}
 	}
 	$stream = Streams::fetchOne($asUserId, $userId, 'Streams/contacts');
 	if (!$stream or !$stream->testReadLevel('content')) {
