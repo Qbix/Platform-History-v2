@@ -378,8 +378,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			var element = this;
 			element.addClass("Q_tabs_tab");
 			var preview = Q.Tool.from(element, 'Streams/preview');
-			var event = preview.state.onRefresh.or(preview.state.onComposer, tool);
-			var key = event.add(function () {
+			var key = preview.state.onRefresh.add(function () {
 				var value = state.tabs.call(tool, preview, tabs);
 				var attr = value.isUrl() ? 'href' : 'data-name';
 				element.setAttribute(attr, value);
@@ -393,8 +392,11 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						tabs.refresh();
 					});
 				}
-				event.remove(key);
-			}, tool);
+				preview.state.onRefresh.remove(key);
+			});
+			var key2 = preview.state.onComposer.add(function () {
+				tabs.refresh();
+			});
 		});
 		if (!skipRefresh) {
 			tabs.refresh();
