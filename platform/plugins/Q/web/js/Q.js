@@ -2172,7 +2172,7 @@ Evp.copy = function _Q_Event_prototype_copy() {
  * @method or
  * @param {Q.Event} anotherEvent
  *  The other event to check
- * @param {String|Boolean|Q.Tool} [key] Optional key to pass to anotherEvent.add (see docs for that method).
+ * @param {String|Boolean|Q.Tool} [key] Optional key to pass to this event.add (see docs for that method).
  * @param {String|Boolean|Q.Tool} [anotherKey] Optional key to pass to anotherEvent.add (see docs for that method).
  * @return {Q.Event}
  */
