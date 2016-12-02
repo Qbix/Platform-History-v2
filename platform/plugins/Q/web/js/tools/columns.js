@@ -180,8 +180,8 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		
 		var div = this.column(index);
-		var titleSlot, columnSlot;
-		var $div, $mask, $close, $title;
+		var titleSlot, columnSlot, controlsSlot;
+		var $div, $mask, $close, $title, $controls;
 		if (!div) {
 			div = document.createElement('div').addClass('Q_columns_column');
 			div.style.display = 'none';
@@ -190,11 +190,13 @@ Q.Tool.define("Q/columns", function(options) {
 			this.state.columns[index] = div;
 			var $ts = $('<h2 class="Q_title_slot"></h2>');
 			titleSlot = $ts[0];
-			$title = $('<div class="Q_columns_title"></div>')
-				.append($ts);
+			$title = $('<div class="Q_columns_title"></div>').append($ts);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
+			var $controls = $('<h2 class="Q_controls_slot"></h2>');
+			controlsSlot = $cts[0];
+			$cc = $('<div class="Q_columns_controls"></div>').append($cts);
 			state.container = tool.$('.Q_columns_container')[0];
-			$div.append($title, columnSlot)
+			$div.append($title, columnSlot, controlsSlot)
 				.data(dataKey_index, index)
 				.data(dataKey_scrollTop, Q.Pointer.scrollTop())
 				.appendTo(state.container);
@@ -209,8 +211,10 @@ Q.Tool.define("Q/columns", function(options) {
 			$div = $(div);
 			$close = $('.Q_close', div);
 			$title = $('.Q_columns_title', div);
+			$controls = $('.Q_columns_controls', div);
 			titleSlot = $('.Q_title_slot', div)[0];
 			columnSlot = $('.Q_column_slot', div)[0];
+			controlsSlot = $('.Q_column_controls', div)[0];
 		}
 		if (options && options.columnClass) {
 			$div.addClass(options.columnClass);
@@ -270,7 +274,7 @@ Q.Tool.define("Q/columns", function(options) {
 				waitFor.push('activated');
 				var url = options.url;
 				var params = Q.extend({
-					slotNames: ["title", "column"], 
+					slotNames: ["title", "column", "controls"], 
 					slotContainer: {
 						title: titleSlot,
 						column: columnSlot
@@ -287,6 +291,10 @@ Q.Tool.define("Q/columns", function(options) {
 					if ('title' in response.slots) {
 						$(titleSlot).html(response.slots.title);
 						elementsToActivate['title'] = titleSlot;
+					}
+					if ('controls' in response.slots) {
+						$(controlsSlot).html(response.slots.controls);
+						elementsToActivate['controls'] = controlsSlot;
 					}
 					columnSlot.innerHTML = response.slots.column;
 					elementsToActivate['column'] = columnSlot;
@@ -308,9 +316,15 @@ Q.Tool.define("Q/columns", function(options) {
 					Q.instanceOf(o.column, Element) ? $(o.column) : o.column
 				);
 			}
-			waitFor.push('activated1', 'activated2');
+			if (o.controls != undefined) {
+				$(controlsSlot).empty().append(
+					Q.instanceOf(o.controls, Element) ? $(o.controls) : o.controls
+				);
+			}
+			waitFor.push('activated1', 'activated2', 'activated3');
 			$(titleSlot).activate(o.activateOptions, p.fill('activated1'));
 			$(columnSlot).activate(o.activateOptions, p.fill('activated2'));
+			$(controlsSlot).activate(o.activateOptions, p.fill('activated3'));
 			p.add(waitFor, function () {
 				var data = tool.data(index);
 				if ($(div).closest('html').length) {
@@ -379,6 +393,7 @@ Q.Tool.define("Q/columns", function(options) {
 				var $sc = $(state.container);
 				var $cs = $('.Q_column_slot', $div);
 				var $ct = $('.Q_columns_title', $div);
+				var $cc = $('.Q_columns_controls', $div);
 				
 				var $prev = $div.prev();
 				$div.css('z-index', $prev.css('z-index')+1 || 1);
