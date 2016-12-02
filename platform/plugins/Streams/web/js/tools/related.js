@@ -393,7 +393,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						tabs.refresh();
 					});
 				}
-				preview.state.onRefresh.remove(key);
+				event.remove(key);
 			}, tool);
 		});
 		if (!skipRefresh) {
