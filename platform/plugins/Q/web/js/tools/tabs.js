@@ -161,8 +161,15 @@ Q.Tool.define("Q/tabs", function(options) {
 			ignoreHistory: tool.isInDialog(),
 			loader: state.loader,
 			slotContainer: function (slotName) {
-				return $(state.selectors[slotName])[0]
-					|| document.getElementById(slotName+"_slot");
+				var container = null;
+				var selector = state.selectors[slotName];
+				$(tool.element).parents().each(function () {
+					var $jq = $(this).find(selector);
+					if (container = $jq[0]) {
+						return false;
+					}
+				});
+				return container || document.getElementById(slotName+"_slot");
 			}
 		}, 10, state.loaderOptions, 10, loaderOptions);
 

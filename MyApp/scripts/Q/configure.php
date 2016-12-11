@@ -1,8 +1,6 @@
 #!/usr/bin/env php
 <?php
-//
-// Constants -- you might have to change these
-//
+
 define ('APP_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
 $paths_filename = realpath(APP_DIR . '/local/paths.php');
 if (!file_exists($paths_filename)) {

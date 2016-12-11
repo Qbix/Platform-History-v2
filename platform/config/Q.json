@@ -123,6 +123,13 @@
 				"width": 5000,
 				"height": 5000
 			}
+		},
+		"bundle": {
+			"exclude": {
+				"Q": [
+					"js/ckeditor", "js/froala", "img/bookmarklet"
+				]
+			}
 		}
 	},
 	"Db": {

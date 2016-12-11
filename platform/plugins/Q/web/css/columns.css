@@ -78,6 +78,8 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	overflow-x: hidden;
 	overflow-y: auto;
 	position: relative;
+	box-sizing: border-box;
+	height: 100%;
 }
 
 .Q_columns_tool.Q_fullscreen {
@@ -116,3 +118,22 @@ html.Q_ios.Q_standalone .Q_columns_title {
 .Q_column_slot {
 	z-index: 10;
 }
+
+.Q_columns_column .Q_controls_slot {
+	background: #f8f8f8;
+	margin-top: -49px;
+	height:50px;
+	position: relative;
+	z-index: 11;
+	display: none;
+}
+
+.Q_columns_column.Q_columns_hasControls .Q_controls_slot {
+	display: block;
+}
+
+.Q_columns_column.Q_columns_hasControls .Q_column_slot {
+	padding-bottom: 50px;
+}
+
+.Q_columns_loading .Q_controls_slot { display: none; }

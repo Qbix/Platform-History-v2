@@ -43,6 +43,11 @@
 		},
 		"web": {
 			"requireValidNonce": ["Streams"]
+		},
+		"bundle": {
+			"exclude": {
+				"Streams": ["img/icons/Streams/interest"]
+			}
 		}
 	},
 	"Users": {
