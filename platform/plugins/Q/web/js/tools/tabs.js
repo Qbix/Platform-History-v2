@@ -124,6 +124,8 @@ Q.Tool.define("Q/tabs", function(options) {
 				return false;
 			}
 		}
+		
+		$(tab).addClass('Q_tabs_switchingTo');
 
 		state.slots = typeof state.slot === "string" 
 			? state.slot.split(',')
@@ -150,6 +152,7 @@ Q.Tool.define("Q/tabs", function(options) {
 			slotNames: slots,
 			onError: new Q.Event(function (msg) {
 				alert(msg);
+				tool.$tabs.removeClass('Q_tabs_switchingTo');
 			}, "Q/tabs"),
 			onActivate: new Q.Event(function () {
 				tool.indicateCurrent(tool.getName(tab));
@@ -221,7 +224,7 @@ Q.Tool.define("Q/tabs", function(options) {
 
 		tab = tool.getCurrentTab.call(tool, tab);
 		
-		tool.$tabs.removeClass('Q_current');
+		tool.$tabs.removeClass('Q_current Q_tabs_switchingTo');
 		$(tab).addClass('Q_current');
 		state.tab = tab;
 		state.tabName = name || tool.getName(tab);
