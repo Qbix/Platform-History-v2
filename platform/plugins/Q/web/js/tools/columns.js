@@ -222,6 +222,7 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 			setTimeout(function () {
 				// give the browser a chance to calculate dimensions of elements
+				div.setClass('Q_columns_hasControls', controlsSlot.innerHTML)
 				presentColumn(tool, $div, o.fullscreen);
 			});
 		} else {
@@ -361,7 +362,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$mask.remove();
 					$div.removeClass('Q_columns_loading');
 				}
-				div.setClass('Q_columns_hasControls', !!$columnSlot[0].innerHTML);
+				div.setClass('Q_columns_hasControls', !!$controlsSlot[0].innerHTML);
 			}).run();
 			
 			Q.each(['on', 'before'], function (k, prefix) {
