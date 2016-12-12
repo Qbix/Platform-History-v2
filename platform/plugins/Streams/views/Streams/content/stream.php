@@ -8,7 +8,7 @@
 		.Streams_stream_player { clear: both; }
 		.Streams_stream_activity_pane { border-top: 1px solid #aaa; }
 	</style>
-	<div class='Streams_stream_info_pane'>
+	<div class='Streams_stream_main_pane'>
 		<?php if ($stream->icon): ?>
 			<div class='Streams_stream_icon'>
 				<?php echo Q_Html::img($stream->iconUrl('80.png')); ?> 
