@@ -80,5 +80,5 @@ $asUserId = $app;
 $skipAccess = true;
 $appUrl = Q_Uri::url('Communities/onboarding');
 
-Streams::invite($communityId, 'Streams/community/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl'));
+Streams::invite($communityId, 'Streams/experience/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl'));
 echo "Successfully invited $identifier\n";

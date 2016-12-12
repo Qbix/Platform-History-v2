@@ -37,7 +37,9 @@ function Q_tabs_tool($options)
 {
 	$field = 'tab';
 	$slot = 'content,title';
-	$selectors = array('content' => '#content_slot');
+	$selectors = array(
+		'content' => '#content_slot'
+	);
 	$urls = array();
 	extract($options);
 	if (!isset($tabs)) {

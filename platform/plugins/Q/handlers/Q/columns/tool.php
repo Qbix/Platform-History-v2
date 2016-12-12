@@ -21,10 +21,11 @@
  *  @param {string}  [options.close.src] The src of the image to use for the close button
  *  @param {string}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
  *  @param {string}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
+ *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
  *  @param {array}  [options.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
  *  @param {array}  [options.scrollbarsAutoHide] If not null, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android, false everywhere else.
- *  @param {array}   [options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true)
+ *  @param {array}   [options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true, 'controls' => $html) with "controls" and "close" being optional
  * @return {string}
  */
 function Q_columns_tool($options)
@@ -62,7 +63,11 @@ EOT;
 		} else {
 			$titleHtml = Q::ifset($column, 'title', '[title]');
 			$columnHtml = Q::ifset($column, 'column', '[column]');
+			$controlsHtml = Q::ifset($column, 'controls', '');
 			$classes = $columnClass . ' ' . Q::ifset($column, 'class', '');
+			if ($controlsHtml) {
+				$classes .= ' Q_columns_hasControls';
+			}
 			$attrs = '';
 			if (isset($column['data'])) {
 				$json = Q::json_encode($column['data']);
@@ -79,6 +84,7 @@ EOT;
 			<h2 class="Q_title_slot">$titleHtml</h2>
 		</div>
 		<div class="Q_column_slot">$columnHtml</div>
+		<div class="Q_controls_slot">$controlsHtml</div>
 	</div>
 EOT;
 		}

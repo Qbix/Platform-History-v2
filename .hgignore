@@ -6,6 +6,7 @@ syntax: regexp
 ^\.gitignore$
 ^\.idea/
 ^\.bin/
+^bundle.php
 ^platform/\.idea/
 ^platform/local/
 ^platform/files/Q/sessions/

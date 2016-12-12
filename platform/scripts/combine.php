@@ -1,5 +1,5 @@
 <?php
-$FROM_APP = defined('RUNNING_FROM_APP'); //Are we running from app or framework?
+$FROM_APP = defined('RUNNING_FROM_APP'); // Are we running from app or framework?
 
 #Arguments
 $argv = $_SERVER['argv'];

@@ -810,6 +810,23 @@ Elp.addClass = function (className) {
 };
 
 /**
+ * Adds or removes an element according to whether a condition is truthy
+ * @method setClass
+ * @chainable
+ * @param {String} className
+ * @param {Boolean} condition
+ * @return {Element} returns this, for chaining
+ */
+Elp.setClass = function (className, condition) {
+	if (condition) {
+		this.addClass(className);
+	} else {
+		this.removeClass(className);
+	}
+	return this;
+};
+
+/**
  * Get the text content of an element (as opposed to its inner HTML)
  * @method innerText
  * @return {String}
@@ -4189,7 +4206,7 @@ Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(cla
  * @method forEachChild
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {number} [levels] Optionally pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
- * @param {boolean} [withSiblings=false] Optionally pass true here to also get the siblings
+ * @param {boolean} [withSiblings=false] Optionally pass true here to also get the sibling tools activated on the same element
  * @param {Function} callback The callback to execute at the right time
  */
 Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSiblings, callback) {
@@ -9063,6 +9080,9 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 *  activated as "this".
 	 */
 	$.fn.activate = function _jQuery_fn_activate(options, callback) {
+		if (!this.length) {
+			return Q.handle(callback, null, options, []);
+		}
 		return this.each(function _jQuery_fn_activate_each(index, element) {
 			if (!$(element).closest('html').length) {
 				console.log("Q.activate: element " + element.id + " is not in the DOM");

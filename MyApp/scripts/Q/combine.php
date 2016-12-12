@@ -1,8 +1,5 @@
 #!/usr/bin/env php
 <?php
-//
-// Constants -- you might have to change these
-//
 
 include dirname(__FILE__).'/../Q.inc.php';
 

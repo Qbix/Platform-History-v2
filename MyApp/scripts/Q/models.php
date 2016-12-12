@@ -1,11 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-/*
- * Use this script to generate application models. You shall change 'DB CONNECTION NAME'
- * to actual connection name defined in local/app.json
- *
- * NOTE: You don't need to generate models for plugins
+/**
+ * Use this script to generate application models.
  */
 
 include dirname(__FILE__).'/../Q.inc.php';
