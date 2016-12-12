@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.9.5",
+				"version": "0.9.6",
 				"compatible": "0.9",
 				"requires": {"Users": "0.9.3"},
 				"permissions": ["Streams/icons"],
@@ -255,8 +255,8 @@
 					}
 				}
 			},
-			"Streams/community": {
-				"description": "common stream to reach an entire community"
+			"Streams/experience": {
+				"description": "a common experience for members of a community"
 			},
 			"Streams/greeting": {
 				"description": "greeting with which a user can introduce themselves",
@@ -275,7 +275,7 @@
 			"requireTitleIndex": true
 		},
 		"relate": {
-			"types": ["Streams/community", "Streams/interest"]
+			"types": ["Streams/experience", "Streams/interest"]
 		},
 		"invites": {
 			"tokens": {

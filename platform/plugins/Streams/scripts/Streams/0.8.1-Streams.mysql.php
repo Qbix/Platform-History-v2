@@ -5,22 +5,22 @@ function Streams_0_8_1_Streams_mysql()
 	$app = Q_Config::expect('Q', 'app');
 	$commmunityId = Users::communityId();
 	
-	// template for community stream
+	// template for community experience stream
 	$stream = new Streams_Stream();
 	$stream->publisherId = '';
-	$stream->name = 'Streams/community/';
+	$stream->name = 'Streams/experience/';
 	$stream->type = 'Streams/template';
-	$stream->title = "Community";
+	$stream->title = "Community Experience";
 	$stream->content = '';
 	$stream->readLevel = Streams::$READ_LEVEL['content'];
 	$stream->writeLevel = Streams::$WRITE_LEVEL['join'];
 	$stream->adminLevel = Streams::$ADMIN_LEVEL['invite'];
 	$stream->save();
 	
-	// app community stream, for announcements
-	Streams::create($commmunityId, $commmunityId, 'Streams/community', array(
+	// main community experience stream, for community-wide announcements etc.
+	Streams::create($commmunityId, $commmunityId, 'Streams/experience', array(
 		'skipAccess' => true,
-		'name' => 'Streams/community/main',
+		'name' => 'Streams/experience/main',
 		'title' => Users::communityName()
 	));
 	

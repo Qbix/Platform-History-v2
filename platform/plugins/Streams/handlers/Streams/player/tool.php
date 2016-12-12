@@ -33,7 +33,7 @@ function Streams_player_tool($options)
 			return $strem->content;
 		case 'Streams/category': // TODO: implement
 		case 'Streams/chat': // TODO: implement
-		case 'Streams/community': // TODO: implement
+		case 'Streams/experience': // TODO: implement
 		default:
 			$event = $stream->type."/tool";
 			if (Q::canHandle($event)) {
