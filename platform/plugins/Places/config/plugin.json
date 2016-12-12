@@ -2,10 +2,10 @@
 	"Q": {
 		"pluginInfo": {
 			"Places": {
-				"version": "0.9",
-				"compatible": "0.4",
-				"connections": ["Places"],
-				"requires": {"Streams": "0.9"}
+				"version": "0.9.1",
+				"compatible": "0.5",
+				"connections": ["Streams", "Places"],
+				"requires": {"Streams": "0.9.6"}
 			}
 		},
 		"routes": {
