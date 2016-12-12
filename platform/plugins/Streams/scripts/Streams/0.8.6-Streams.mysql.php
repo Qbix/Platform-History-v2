@@ -5,10 +5,10 @@ function Streams_0_8_6_Streams_mysql()
 	$app = Q_Config::expect('Q', 'app');
 	$communityId = Users::communityId();
 	
-	// access for managing communities
+	// access for managing community experiences
 	$access = new Streams_Access();
 	$access->publisherId = $communityId;
-	$access->streamName = 'Streams/community*';
+	$access->streamName = 'Streams/experience*';
 	$access->ofUserId = '';
 	$access->ofContactLabel = "$app/admins";
 	$access->readLevel = Streams::$READ_LEVEL['messages'];

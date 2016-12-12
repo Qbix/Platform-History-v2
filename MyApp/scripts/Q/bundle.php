@@ -3,7 +3,7 @@
 
 include dirname(__FILE__).'/../Q.inc.php';
 
-$script = Q_DIR . '/scripts/urls.php';
+$script = Q_DIR . '/scripts/bundle.php';
 $realpath = realpath($script);
 if (!file_exists($realpath)) {
 	$basename = basename(APP_DIR);

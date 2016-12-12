@@ -20,6 +20,11 @@
 		},
 		"web": {
 			"requireValidNonce": ["Places"]
+		},
+		"bundle": {
+			"exclude": {
+				"Places": ["img/squareflags"]
+			}
 		}
 	},
 	"Streams": {
