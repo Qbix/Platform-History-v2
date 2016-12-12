@@ -10,7 +10,7 @@ function Streams_after_Users_setLoggedInUser($params)
 	
 	// subscribe to main community announcements
 	$communityId = Users::communityId();
-	$stream = Streams::fetchOne($user->id, $communityId, 'Streams/community/main');
+	$stream = Streams::fetchOne($user->id, $communityId, 'Streams/experience/main');
 	if ($stream and !$stream->subscription($user->id)) {
 		$stream->subscribe();
 	}

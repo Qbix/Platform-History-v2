@@ -5,10 +5,10 @@ function Websites_0_8_3_Streams_mysql()
 	$app = Q_Config::expect('Q', 'app');
 	$communityId = Users::communityId();
 	
-	// access for managing communities
+	// access for managing community experiences
 	$access = new Streams_Access();
 	$access->publisherId = $communityId;
-	$access->streamName = 'Streams/community*';
+	$access->streamName = 'Streams/experience*';
 	$access->ofUserId = '';
 	$access->ofContactLabel = "Websites/admins";
 	$access->readLevel = Streams::$READ_LEVEL['messages'];

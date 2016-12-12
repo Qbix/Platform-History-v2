@@ -13,7 +13,7 @@ function Streams_after_Streams_Stream_save_Streams_greeting($params)
 	$communityId = $parts[2];
 	$p = new Streams_Participant();
 	$p->publisherId = $communityId;
-	$p->streamName = "Streams/community/main";
+	$p->streamName = "Streams/experience/main";
 	$p->userId = $s->publisherId;
 	if ($p->retrieve()) {
 		$p->setExtra('Streams/greeting', $s->content);
