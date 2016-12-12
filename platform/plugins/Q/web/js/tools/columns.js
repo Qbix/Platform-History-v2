@@ -484,8 +484,6 @@ Q.Tool.define("Q/columns", function(options) {
 				
 				$div.removeClass('Q_columns_opening')
 				.addClass('Q_columns_opened');
-				
-				presentColumn(tool, $div, o.fullscreen);
 
 				if (!Q.info.isMobile) {
 					$cs.height(
@@ -495,6 +493,7 @@ Q.Tool.define("Q/columns", function(options) {
 						- parseInt($cs.css('padding-bottom'))
 					);
 				}
+				presentColumn(tool, $div, o.fullscreen);
 
 				if (Q.info.isTouchscreen) {
 					if (o.fullscreen) {
@@ -656,8 +655,8 @@ Q.Tool.define("Q/columns", function(options) {
 					.add($columns)
 					.height(Q.Pointer.windowHeight()-$te.offset().top);
 			}
-			presentColumn(tool);
 		}
+		presentColumn(tool);
 
 		if (state.fullscreen) {
 			$te.addClass('Q_fullscreen');

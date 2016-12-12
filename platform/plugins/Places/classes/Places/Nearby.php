@@ -117,7 +117,8 @@ class Places_Nearby
 	 *  Should be one of the array values in the Places/nearby/miles config.
 	 * @param {string} $publisherId The id of the publisher publishing these streams.
 	 *  Defaults to the app name in Q/app config.
-	 * @param {array} $options The options to pass to the subscribe function
+	 * @param {array} [$options=array()]
+	 *  The options to pass to the streams() and subscribe() functions
 	 * @return {Array} Returns an array of up to four arrays of ($publisherId, $streamName)
 	 *  of streams that were subscribed to.
 	 */
@@ -149,7 +150,8 @@ class Places_Nearby
 	 *  Should be one of the array values in the Places/nearby/miles config.
 	 * @param {string} $publisherId The id of the publisher publishing these streams.
 	 *  Defaults to the app name in Q/app config.
-	 * @param {array} $options The options to pass to the unsubscribe function
+	 * @param {array} [$options=array()]
+	 *  The options to pass to the streams() and unsubscribe() function
 	 * @return {Array} Returns an array of up to four arrays of ($publisherId, $streamName)
 	 *  of streams that were subscribed to.
 	 */
@@ -199,6 +201,7 @@ class Places_Nearby
 	 * @param {double} $longitude The longitude of the coordinates near which to relate
 	 * @param {array} $options The options to pass to the Streams::relate and Streams::create functions. Also can contain the following options:
 	 * @param {boolean} [$options.forSubscribers] Set to true to return the streams that are relevant to subscribers instead of publishers, i.e. users who want to know when something relevant happens, rather than users who want to relate the streams they publish to categories.
+	 * @param {array|double} [$options.experience='main'] Override the name of the experience, the part of the stream name that's after "Streams/experience/"
 	 * @param {array|double} [$options.miles] Override the default array of distances found in the config under Places/nearby/miles. If options.forSubscribers is true, however, this should be one of the entries from the array in Places/nearby/miles config.
 	 * @param {callable} [$options.create] If set, this callback will be used to create streams when they don't already exist. It receives the $options array and should return a Streams_Stream object. If this option is set to null, new streams won't be created.
 	 * @param {callable} [$options.transform="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forPublishers, and this $options array, and returns the array of ($originalStreamName => $newStreamName) pairs.
@@ -220,8 +223,8 @@ class Places_Nearby
 			$fromPublisherId = Users::communityId();
 		}
 		if ($transform = Q::ifset($options, 'transform', null)) {
-			$create = Q::ifset($options, 'create', null);
 			$transformed = call_user_func($transform, $nearby, $options);
+			$create = Q::ifset($options, 'create', null);
 		} else {
 			$transformed = array_keys($nearby);
 			$create = Q::ifset($options, 'create', array('Places_Nearby', '_create'));

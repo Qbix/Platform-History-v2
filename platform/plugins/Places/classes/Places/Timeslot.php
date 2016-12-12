@@ -45,9 +45,10 @@ class Places_Timeslot
 	{
 		$timestamp = $options['timestamp'];
 		$timestamp = $timestamp - $timestamp % 3600;
+		$experience = Q::ifset($options, 'experience', 'main');
 		$result = array();
 		foreach ($nearby as $k => $info) {
-			$result[$k] = "Places/timeslot/$info[geohash]/$info[miles]/h/$timestamp";
+			$result[$k] = "Places/timeslot/$experience/$info[geohash]/$info[miles]/h/$timestamp";
 		}
 		return $result;
 	}
@@ -57,7 +58,8 @@ class Places_Timeslot
 		$timestamp = $options['timestamp'];
 		$timestamp = $timestamp - $timestamp % 3600;
 		$info = $params['info'];
-		$options['name'] = "Places/timeslot/$info[geohash]/$info[miles]/h/$timestamp";
+		$experience = Q::ifset($options, 'experience', 'main');
+		$options['name'] = "Places/timeslot/$experience/$info[geohash]/$info[miles]/h/$timestamp";
 		return Streams::create(null, $params['publisherId'], 'Places/timeslot', $options);
 	}
 }
