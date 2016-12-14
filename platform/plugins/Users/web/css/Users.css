@@ -389,4 +389,9 @@
 .Users_labels_icon { width: 40px; height: 40px; }
 .Users_labels_active .Users_labels_label,
 .Users_labels_action { cursor: pointer; }
-.Users_labels_tool .Users_labels_title { display: inline-block; vertical-align: middle; padding: 10px; font-weight: bold; }
+.Users_labels_tool .Users_labels_title {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 10px;
+	font-weight: bold;
+}

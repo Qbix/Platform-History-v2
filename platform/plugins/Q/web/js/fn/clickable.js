@@ -104,6 +104,8 @@ function _Q_clickable(o) {
 			'overflow': 'hidden',
 			'width': csw,
 			'height': csh,
+			'max-width': $this.css('max-width'),
+			'max-height': $this.css('max-height'),
 			'text-align': 'left',
 			'overflow': 'visible',
 			'line-height': $this.css('line-height'),
