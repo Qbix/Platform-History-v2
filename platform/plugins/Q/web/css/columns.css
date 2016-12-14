@@ -120,12 +120,19 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_columns_column .Q_controls_slot {
-	background: #f8f8f8;
+	background: #fafafa;
 	margin-top: -49px;
-	height:50px;
+	height: 50px;
+	line-height: 50px;
 	position: relative;
 	z-index: 11;
 	display: none;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.Q_columns_column .Q_controls_slot>* {
+	line-height: normal;
 }
 
 .Q_columns_column.Q_columns_hasControls .Q_controls_slot {
