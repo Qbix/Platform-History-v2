@@ -126,6 +126,8 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	position: relative;
 	z-index: 11;
 	display: none;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .Q_columns_column.Q_columns_hasControls .Q_controls_slot {
