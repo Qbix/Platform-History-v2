@@ -207,7 +207,7 @@ function _Q_clickable(o) {
 				triggers[0].preventSelections(true);
 			}
 			zindex = $this.css('z-index');
-			$container.css('z-index', 1000000);
+			$container.css('z-index', 1000000).addClass('Q_pressed');
 			Q.handle(o.onPress, $this, [evt, triggers]);
 			state.animation = Q.Animation.play(function(x, y) {
 				scale(1 + y * (o.press.size-1));
@@ -232,7 +232,8 @@ function _Q_clickable(o) {
 					extraInfo.toY
 				));
 				var scrolled = false;
-				$container.parents().each(function () {
+				$container.removeClass('Q_pressed')
+				.parents().each(function () {
 					var $t = $(this);
 					if ($t.data('Q/clickable scrollLeft') != $t.scrollLeft()
 					|| $t.data('Q/clickable scrollTop') != $t.scrollTop()
@@ -266,7 +267,8 @@ function _Q_clickable(o) {
 				setTimeout(function () { 
 					_released = false;
 				}, 0);
-				$container.parents().each(function () {
+				$container.removeClass('Q_pressed')
+				.parents().each(function () {
 					$(this).removeData(
 						['Q/clickable scrollTop',
 						 'Q/clickable scrollTop', 
