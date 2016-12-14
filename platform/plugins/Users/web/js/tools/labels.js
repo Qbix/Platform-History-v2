@@ -22,6 +22,9 @@ Q.setObject({
  *   @param {String} [options.prefix="Users/"] Pass any prefix here, to filter labels by this prefix
  *   @param {String} [options.contactUserId] Pass a user id here to let the tool add/remove contacts with the various labels, between userId and contactUserId
  *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
+ *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
+ *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
+ *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Handlers may return false to cancel the default behavior of toggling the label.
  */
 Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	var tool = this
@@ -34,9 +37,13 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	}
 	tool.refresh();
 	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
-		var $this = $(this);
+		var $this = $(this), ret;
 		var label = $this.attr('data-label');
-		if ($this.hasClass('Q_selected')) {
+		var wasSelected = $this.hasClass('Q_selected');
+		if (false === Q.handle(state.onClick, tool, [this, label, wasSelected])) {
+			return;
+		};
+		if (wasSelected) {
 			$this.removeClass('Q_selected');
 			if (state.contactUserId) {
 				Users.Contact.remove(state.userId, label, state.contactUserId);
@@ -54,7 +61,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	userId: null,
 	prefix: 'Users/',
 	contactUserId: null,
-	onRefresh: new Q.Event()
+	onRefresh: new Q.Event(),
+	onClick: new Q.Event()
 },
 
 {
@@ -66,9 +74,17 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 		var tool = this;
 		var state = this.state;
 		tool.element.addClass('Q_loading');
+		var all = state.all;
+		if (typeof all === 'string') {
+			all = {
+				title: all,
+				icon: "plugins/Users/img/icons/labels/all/40.png"
+			};
+		}
 		Q.Users.getLabels(state.userId, state.prefix, function (err, labels) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
+				all: all,
 				canAdd: state.canAdd,
 				canAddIcon: Q.url('plugins/Q/img/actions/add.png')
 			}, function (err, html) {
@@ -120,6 +136,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
 Q.Template.set('Users/labels', ''
 + '<ul>'
++ '{{#if all}}'
++ '<li class="Users_labels_label" data-label="*">'
++   '<img class="Users_labels_icon" src="{{all.icon}}" alt="all">'
++   '<div class="Users_labels_title">{{all.title}}</div>'
++ '</li>'
++ '{{/if}}'
 + '{{#each labels}}'
 + '<li class="Users_labels_label" data-label="{{this.label}}">'
 +   '<img class="Users_labels_icon" src="{{call "iconUrl"}}" alt="label icon">'

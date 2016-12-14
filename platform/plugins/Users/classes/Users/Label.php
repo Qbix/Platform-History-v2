@@ -178,23 +178,46 @@ class Users_Label extends Base_Users_Label
 				: Users::loggedInUser(true)->id;
 			Users::canManageLabels($asUserId, $userId, null, true, true);
 		}
-		$criteria = array('userId' => $userId);
+		$prefixes = $labelNames = array();
 		if ($filter) {
-			$criteria['label'] = is_string($filter)
-				? new Db_Range($filter, true, false, true)
-				: $filter;
+			if (is_string($filter)) {
+				$filter = explode(",", $filter);
+			}
+			foreach ($filter as &$f) {
+				$f = trim($f);
+				if (is_string($f) and substr($f, -1) === '/') {
+					$prefixes[] = new Db_Range($f, true, false, true);
+				} else {
+					$labelNames[] = $f;
+				}
+			}
+			$criteria['label'] = $labelNames;
 		}
-		if ($checkContacts) {
+		if (!empty($options['checkContacts'])) {
 			$contact_array = Users_Contact::select('*')
 				->where($criteria)
 				->groupBy('userId, label')
 				->fetchDbRows();
+			foreach ($prefixes as $p) {
+				$contact_array = array_merge($contact_array, Users_Contact::select('*')
+					->where(array_merge($criteria, array('label' => $p)))
+					->groupBy('userId, label')
+					->fetchDbRows()
+				);
+			}
 		}
-		$labels = Users_Label::select('*')
-			->where($criteria)
-			->fetchDbRows(null, null, 'label');
-		$icons = array();
-		if (!$checkContacts) {
+		$labels = $labelNames
+			? Users_Label::select('*')
+				->where(array('userId' => $userId, 'label' => $labelNames))
+				->fetchDbRows(null, null, 'label')
+			: array();
+		foreach ($prefixes as $p) {
+			$labels = array_merge($labels, Users_Label::select('*')
+				->where(array('userId' => $userId, 'label' => $p))
+				->fetchDbRows()
+			);
+		}
+		if (!empty($options['checkContacts'])) {
 			return $labels;
 		}
 		$contacts = array();

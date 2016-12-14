@@ -19,7 +19,8 @@ var Interests = Streams.Interests;
  *  @param {Array} [options.ordering={}] To override what interest categories to show and in what order
  *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cachebust=1000*60*60*24] How often to reload the list of major community interests
- *  @param {Q.Event} [options.onReady] this event occurs when the tool interface is ready
+ *  @param {Q.Event} [options.onReady] occurs when the tool interface is ready
+ *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps an interest. Handlers may return false to cancel the default behavior of toggling the interest.
  */
 Q.Tool.define("Streams/interests", function (options) {
 	var tool = this;
@@ -219,9 +220,6 @@ Q.Tool.define("Streams/interests", function (options) {
 		
 		$(tool.element)
 		.on(Q.Pointer.fastclick, 'span.Streams_interest_title', function () {
-			if (!Users.loggedInUser) {
-				return;
-			};
 			// TODO: ignore spurious clicks that might happen
 			// when something is expanding
 			var $this = $(this);
@@ -236,7 +234,11 @@ Q.Tool.define("Streams/interests", function (options) {
 			};
 			var normalized = Q.normalize(title);
 			var change;
-			if ($this.hasClass('Q_selected')) {
+			var wasSelected = $this.hasClass('Q_selected');
+			if (false === Q.handle(state.onClick, tool, [this, title, normalized, wasSelected])) {
+				return;
+			};
+			if (wasSelected) {
 				change = -1;
 				$this.removeClass('Q_selected');
 				delete Interests.my[normalized];
@@ -420,7 +422,8 @@ Q.Tool.define("Streams/interests", function (options) {
 	expandable: {},
 	cacheBust: 1000*60*60*24,
 	ordering: null,
-	onReady: new Q.Event()
+	onReady: new Q.Event(),
+	onClick: new Q.Event()
 }
 
 );
