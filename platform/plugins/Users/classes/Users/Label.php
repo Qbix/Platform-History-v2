@@ -179,6 +179,7 @@ class Users_Label extends Base_Users_Label
 			Users::canManageLabels($asUserId, $userId, null, true, true);
 		}
 		$prefixes = $labelNames = array();
+		$criteria = compact('userId');
 		if ($filter) {
 			if (is_string($filter)) {
 				$filter = explode(",", $filter);
@@ -206,18 +207,16 @@ class Users_Label extends Base_Users_Label
 				);
 			}
 		}
-		$labels = $labelNames
-			? Users_Label::select('*')
-				->where(array('userId' => $userId, 'label' => $labelNames))
-				->fetchDbRows(null, null, 'label')
-			: array();
+		$labels = Users_Label::select('*')
+			->where($criteria)
+			->fetchDbRows(null, null, 'label');
 		foreach ($prefixes as $p) {
 			$labels = array_merge($labels, Users_Label::select('*')
-				->where(array('userId' => $userId, 'label' => $p))
+				->where(array_merge($criteria, array('label' => $p)))
 				->fetchDbRows()
 			);
 		}
-		if (!empty($options['checkContacts'])) {
+		if (empty($options['checkContacts'])) {
 			return $labels;
 		}
 		$contacts = array();
