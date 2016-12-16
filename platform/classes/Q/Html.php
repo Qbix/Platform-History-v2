@@ -548,11 +548,9 @@ class Q_Html
 		$alt = 'image',
 		$attributes = array())
 	{
-		if (!is_array($attributes)) {
-			if (isset($attributes)) {
-				$contents = $attributes;
-			}
-			$attributes = array();
+		if (is_array($alt)) {
+			$attributes = $alt;
+			$alt = "image";
 		}
 		if (!is_string($alt)) {
 			$alt = 'not a string';

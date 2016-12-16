@@ -10502,10 +10502,14 @@ Q.Dialogs = {
 				.append($('<h2 class="Q_dialog_title" />')
 				.append(o.title))
 			).append(
-				$('<div class="Q_dialog_slot Q_dialog_content" />').append(o.content)
+				$('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />').append(o.content)
 			);
-			if (o.className) $dialog.addClass(o.className);
-			if (o.apply) $dialog.addClass('Q_overlay_apply');
+			if (o.className) {
+				$dialog.addClass(o.className);
+			}
+			if (o.apply) {
+				$dialog.addClass('Q_overlay_apply');
+			}
 			if (o.removeOnClose !== false) {
 				o.removeOnClose = true;
 			}
