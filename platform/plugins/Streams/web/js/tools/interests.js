@@ -8,6 +8,8 @@ var Interests = Streams.Interests;
  * Streams Tools
  * @module Streams-tools
  */
+
+Q.setObject('Q.text.Streams.interests.filter', 'What do you enjoy?')
 	
 /**
  * Tool for user to manage their interests in a community
@@ -17,6 +19,7 @@ var Interests = Streams.Interests;
  *  @param {String} [options.communityId=Q.info.app] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
  *  @param {Array} [options.ordering={}] To override what interest categories to show and in what order
+ *  @param {String} [options.filter="What do you enjoy?"] The placeholder text to show in the filter, or null to skip the filter
  *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cachebust=1000*60*60*24] How often to reload the list of major community interests
  *  @param {Q.Event} [options.onReady] occurs when the tool interface is ready
@@ -36,12 +39,15 @@ Q.Tool.define("Streams/interests", function (options) {
 	}
 	
 	if (!$te.children().length) {
-		$te.html(
-			'<div class="Streams_interests_filter">' +
-			'<input class="Streams_interests_filter_input" placeholder="What do you enjoy?"></input>' +
-			'</div>'
-		);
+		Q.Template.render('Streams/interests', {
+			filter: (state.filter !== null),
+			placeholder: state.filter || ''
+		}, function (err, html) {
+			$te.html(html);
+		});
 	}
+	
+	tool.container = $(tool.element).find('.Streams_interests_all');
 
 	state.communityId = state.communityId || Q.info.app;
 	
@@ -66,7 +72,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			'div', 'Q/expandable', expandableOptions, 
 			tool.prefix + 'Q_expandable_' + Q.normalize(category))
 		);
-		$expandable.appendTo(tool.element).activate(p.fill(category));
+		$expandable.appendTo(tool.container).activate(p.fill(category));
 	}
 
 	var src = 'action.php/Streams/interests';
@@ -189,6 +195,9 @@ Q.Tool.define("Streams/interests", function (options) {
 						return alert(msg);
 					}
 					revealingNewInterest = true;
+					// WARN: This is a roundabout way of doing it, but
+					// we remove this tool and activate another one with the same ID.
+					// We should probably design a refresh method instead.
 					var parentElement = tool.element.parentNode;
 					var toolId = tool.id;
 					Q.Tool.remove(tool.element);
@@ -215,10 +224,10 @@ Q.Tool.define("Streams/interests", function (options) {
 					$unlistedTitle.attr('data-category', 'Unlisted')
 				)
 			).append($select)
-			.appendTo(tool.element)
+			.appendTo(tool.container)
 			.hide();
 		
-		$(tool.element)
+		$(tool.container)
 		.on(Q.Pointer.fastclick, 'span.Streams_interest_title', function () {
 			// TODO: ignore spurious clicks that might happen
 			// when something is expanding
@@ -422,6 +431,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	expandable: {},
 	cacheBust: 1000*60*60*24,
 	ordering: null,
+	filter: Q.setObject('Q.text.Streams.interests.filter'),
 	onReady: new Q.Event(),
 	onClick: new Q.Event()
 }
@@ -447,11 +457,11 @@ function _listInterests(category, interests) {
 }
 
 Q.Template.set('Streams/interests', 
-'{{#if filter}}'
+  '{{#if filter}}'
 + '<div class="Streams_interests_filter">'
-	+ '<input class="Streams_interests_filter_input" placeholder="What do you enjoy?"></input>'
+	+ '<input class="Streams_interests_filter_input" placeholder="{{placeholder}}"></input>'
 + '</div>'
-+ '{{/filter}}'
++ '{{/if}}'
 + '<div class="Streams_interests_all"></div>'
 );
 
