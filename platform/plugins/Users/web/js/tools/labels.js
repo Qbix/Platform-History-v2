@@ -40,7 +40,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 		var $this = $(this), ret;
 		var label = $this.attr('data-label');
 		var wasSelected = $this.hasClass('Q_selected');
-		if (false === Q.handle(state.onClick, tool, [this, label, wasSelected])) {
+		var title = $this.text();
+		if (false === Q.handle(state.onClick, tool, [this, label, title, wasSelected])) {
 			return;
 		};
 		if (wasSelected) {
