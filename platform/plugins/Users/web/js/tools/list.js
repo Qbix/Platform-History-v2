@@ -27,7 +27,7 @@ Q.Tool.define('Users/list', function () {
 	}
 	var lastScrollTop = 0;
 	var $te = $(tool.element);
-	$te.on('scroll', function () {
+	$te.addClass('Q_overflow').on('scroll', function () {
 		var scrollTop = $te.scrollTop();
 		if (scrollTop === lastScrollTop) {
 			return;
