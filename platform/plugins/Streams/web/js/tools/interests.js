@@ -235,7 +235,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			var normalized = Q.normalize(title);
 			var change;
 			var wasSelected = $this.hasClass('Q_selected');
-			if (false === Q.handle(state.onClick, tool, [this, title, normalized, wasSelected])) {
+			if (false === Q.handle(state.onClick, tool, [this, normalized, title, wasSelected])) {
 				return;
 			};
 			if (wasSelected) {

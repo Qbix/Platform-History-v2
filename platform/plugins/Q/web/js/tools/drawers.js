@@ -90,8 +90,8 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	
 	$te.parents().each(function () {
 		var $this = $(this);
-		$this.data('Q/drawers originalBackground', $this.css('background'));
-		$this.css('background', 'transparent');
+		$this.data('Q/drawers originalBackground', this.style.background);
+		this.style.background = 'transparent';
 		if ($this.is(state.container)) return false;
 	});
 	
@@ -538,9 +538,9 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			$(this.element).parents().each(function () {
 				var $this = $(this);
 				var b = $this.data('Q/drawers originalBackground');
-				if (b) {
-					$this.css('background', b)
-						.removeData('Q/drawers originalBackground');
+				if (b != null) {
+					this.style.background = b;
+					$this.removeData('Q/drawers originalBackground');
 				}
 				if ($this.is(state.container)) return false;
 			});
