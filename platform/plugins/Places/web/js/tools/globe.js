@@ -149,6 +149,10 @@ Q.Tool.define("Places/globe", function _Places_location(options) {
 			}
 		}
 		
+		$te.on('touchmove', function (e) {
+			e.preventDefault();
+		});
+		
 		tool.refresh();
 	});
 	
