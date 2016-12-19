@@ -719,3 +719,14 @@
 .Streams_lookup_tool .Q_filter_tool input {
 	min-width: 200px;
 }
+
+.Streams_interests_all .Streams_interests_icon {
+	width: 25px; height: 25px;
+	vertical-align: middle;
+}
+
+.Streams_interests_all .Streams_interests_title {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 20px;
+}
