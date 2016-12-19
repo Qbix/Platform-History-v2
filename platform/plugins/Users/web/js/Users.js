@@ -1824,10 +1824,10 @@ Users.facebookDialog = function(options)
 Users.getContacts = function (userId, labels, contactUserIds, callback) {
 	if (typeof labels === 'function') {
 		callback = labels;
-		labels = contactUserId = undefined;
+		labels = contactUserIds = undefined;
 	} else if (typeof contactUserId === 'function') {
-		callback = contactUserId;
-		contactUserId = undefined;
+		callback = contactUserIds;
+		contactUserIds = undefined;
 	}
 	Q.req('Users/contact', 'contacts', function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
