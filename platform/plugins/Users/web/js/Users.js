@@ -1825,7 +1825,7 @@ Users.getContacts = function (userId, labels, contactUserIds, callback) {
 	if (typeof labels === 'function') {
 		callback = labels;
 		labels = contactUserIds = undefined;
-	} else if (typeof contactUserId === 'function') {
+	} else if (typeof contactUserIds === 'function') {
 		callback = contactUserIds;
 		contactUserIds = undefined;
 	}
