@@ -24,7 +24,7 @@ Q.setObject({
  *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
  *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
- *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Handlers may return false to cancel the default behavior of toggling the label.
+ *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Is passed (element, label, title, wasSelected). Handlers may return false to cancel the default behavior of toggling the label.
  */
 Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	var tool = this
@@ -62,6 +62,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	userId: null,
 	prefix: 'Users/',
 	contactUserId: null,
+	canAdd: false,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
 },
