@@ -234,6 +234,9 @@ body.Q_preventScroll {
 .Q_fullscreen_dialog.Q_overlay_apply .Q_close { 
 	background-image:url(../img/apply.png);
 }
+.Q_messagebox .Q_big_prompt p {
+	font-weight: bold;
+}
 
 /* buttons */
 
