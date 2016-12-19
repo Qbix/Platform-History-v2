@@ -263,7 +263,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			var normalized = Q.normalize(title);
 			var change;
 			var wasSelected = $this.hasClass('Q_selected');
-			var category = title.split(':')[0].trim();
+			var category = Q.normalize(title.split(':')[0].trim());
 			var title2 = title.split(':')[1].trim();
 			if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])) {
 				return;
