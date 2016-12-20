@@ -623,10 +623,6 @@ class Q_Session
 				// So we will retrieve the latest session data again,
 				// merge our changes over it, and save.
 				$params = array(
-					'id_field' => $id_field,
-					'data_field' => $data_field,
-					'updated_field' => $updated_field,
-					'duration_field' => $duration_field,
 					'changed' => $changed,
 					'sess_data' => $sess_data,
 					'old_data' => $old_data
@@ -634,7 +630,13 @@ class Q_Session
 				if (!empty(self::$session_db_connection)) {
 					$row->retrieve();
 					$existing_data = Q::ifset($row, $data_field, "");
-					$params['row'] = $row;
+					$params = array_merge($params, array(
+						'id_field' => $id_field,
+						'data_field' => $data_field,
+						'duration_field' => $duration_field,
+						'updated_field' => $updated_field,
+						'row' => $row
+					));
 				} else {
 					if (!is_dir($dir)) {
 						mkdir($dir, fileperms($ssp), true);
@@ -648,7 +650,6 @@ class Q_Session
 					if (!$file) {
 						return false;
 					}
-					$params['row'] = $row;
 					$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
 					$existing_data = fread($file, $maxlength);
 				}
