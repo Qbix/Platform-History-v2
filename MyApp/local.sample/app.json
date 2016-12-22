@@ -103,10 +103,14 @@
 		}
 	},
 	"MyApp": {
-		"cordova": {
+		"native": {
 			"platforms": [] /* ["ios", "android"] */,
 			"ios": {
-				"sandbox": true
+				"sandbox": true,
+				"device": {
+					"adding": "Notifications have been enabled"
+				},
+				"url": "https://itunes.apple.com/us/app/groups/id407855546?mt=8"
 			}
 		}
 	}

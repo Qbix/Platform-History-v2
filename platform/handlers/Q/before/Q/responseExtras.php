@@ -9,7 +9,7 @@
  */
 function Q_before_Q_responseExtras()
 {
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$uri = Q_Dispatcher::uri();
 	$url = Q_Request::url(true);
 	$base_url = Q_Request::baseUrl();
@@ -69,4 +69,9 @@ function Q_before_Q_responseExtras()
 		}
 		Q_Response::addStylesheet($src, null, $media);
 	}
+	$native = array();
+	foreach (Q_Config::get($app, 'native', 'platforms', array()) as $platform) {
+		$native[$app][$platform]['url'] = Q_Config::expect($app, 'native', $platform, 'url');
+	}
+	Q_Response::setScriptData('Q.native', $native);
 }
