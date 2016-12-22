@@ -20,7 +20,7 @@ Q.text.Streams.interests = {
  * @class Streams interests
  * @constructor
  * @param {Object} [options] This is an object of parameters for this function
- *  @param {String} [options.communityId=Q.info.app] The id of the user representing the community publishing the interests
+ *  @param {String} [options.communityId=Q.Users.communityId] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
  *  @param {Array} [options.ordering={}] To override what interest categories to show and in what order
  *  @param {String} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
@@ -67,7 +67,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	}
 	
 	tool.container = $(tool.element).find('.Streams_interests_container');
-	state.communityId = state.communityId || Q.info.app;
+	state.communityId = state.communityId || Q.Users.communityId;
 	
 	function addExpandable(category, interests) {
 		var cn = Q.normalize(category);
@@ -263,7 +263,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			var normalized = Q.normalize(title);
 			var change;
 			var wasSelected = $this.hasClass('Q_selected');
-			var category = Q.normalize(title.split(':')[0].trim());
+			var category = title.split(':')[0].trim();
 			var title2 = title.split(':')[1].trim();
 			if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])) {
 				return;
