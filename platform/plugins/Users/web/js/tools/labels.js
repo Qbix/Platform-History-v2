@@ -87,7 +87,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
-				canAdd: state.canAdd,
+				canAdd: state.canAdd && Q.Users.loggedInUser,
 				canAddIcon: Q.url('plugins/Q/img/actions/add.png')
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
