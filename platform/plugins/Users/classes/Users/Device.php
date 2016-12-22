@@ -42,11 +42,12 @@ class Users_Device extends Base_Users_Device
 		Q_Valid::requireFields(array('userId', 'deviceId'), $device, true);
 		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
+		$platform = $device['platform'];
 		if (!$skipNotification) {
 			$app = Q::app();
 			$sandbox = Q::ifset($device, 'sandbox', null);
 			if (!isset($sandbox)) {
-				$sandbox = Q_Config::get($app, "cordova", "ios", "sandbox", false);
+				$sandbox = Q_Config::get($app, "native", $platform, "sandbox", false);
 			}
 			$env = $sandbox
 				? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
@@ -66,7 +67,7 @@ class Users_Device extends Base_Users_Device
 			$message->setCustomIdentifier('Users_Device-adding');
 			$message->setBadge(0);
 			$message->setText(Q_Config::get(
-				$app, "cordova", "ios", "device", "text", "Notifications have been enabled"
+				$app, "native", $platform, "device", "added", "Notifications have been enabled"
 			));
 			$message->setCustomProperty('userId', $userId);
 			$message->setExpiry(5);
@@ -100,6 +101,30 @@ class Users_Device extends Base_Users_Device
 		$device2['Q/method'] = 'Users/device';
 		Q_Utils::sendToNode($device2);
 		return $d;
+	}
+	
+	/**
+	 * Retrieve the latest device, if any, from a user id and platform
+	 * @param {string} [$userId] Defaults to logged-in user
+	 * @param {string} [$platform] Defaults to Q_Request::platform()
+	 * @return {Users_Device|null}
+	 */
+	static function byPlatform($userId = null, $platform = null)
+	{
+		if (!isset($userId)) {
+			$userId = Users::loggedInUser();
+			if (!$userId) {
+				return null;
+			}
+		}
+		if (!isset($platform)) {
+			$platform = Q_Request::platform();
+		}
+		$devices = Users_Device::select('*')
+			->where(compact('userId', 'platform'))
+			->orderBy('insertedTime', false)
+			->fetchDbRows();
+		return $devices ? reset($devices) : null;
 	}
 
 	/**
