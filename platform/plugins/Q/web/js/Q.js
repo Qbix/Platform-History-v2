@@ -6030,7 +6030,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {boolean} [options.duplicate=true] you can set it to false in order not to fetch the same url again
  * @param {boolean} [options.quiet=true] this option is just passed to your onLoadStart/onLoadEnd handlers in case they want to respect it.
  * @param {boolean} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
- * @param {Function} [options.handleRedirects=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
+ * @param {Function} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
  * @param {boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
@@ -6095,7 +6095,7 @@ Q.request = function (url, slotNames, callback, options) {
 			}
 			var redirected = false;
 			if (data && data.redirect && data.redirect.url) {
-				Q.handle(o.handleRedirects, Q, [data.redirect.url]);
+				Q.handle(o.onRedirect, Q, [data.redirect.url]);
 				redirected = true;
 			}
 			callback && callback.call(this, err, data, redirected);
@@ -11361,12 +11361,12 @@ Q.request.options = {
 	duplicate: true,
 	quiet: true,
 	parse: 'json',
-	handleRedirects: function (url) {
+	onRedirect: new Q.Event(function (url) {
 		Q.handle(url, {
 			target: '_self',
 			quiet: true
 		});
-	},
+	}, "Q"),
 	resultFunction: "result",
 	onLoadStart: new Q.Event(),
 	onShowCancel: new Q.Event(),
