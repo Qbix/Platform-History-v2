@@ -298,7 +298,7 @@ Q.Tool.define("Q/columns", function(options) {
 					_suddenlyClosing = true;
 					$mask.remove();
 					$div.removeClass('Q_columns_loading');
-					tool.close(index, null, );
+					tool.close(index);
 				}
 				var url = options.url;
 				var params = Q.extend({

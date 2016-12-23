@@ -44,7 +44,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			background: 'white',
 			border: 'solid 1px #99a',
 			'tab-index': 9000
-		}).on('mousedown focusin', function () {
+		}).on(Q.Pointer.start + ' focusin', function () {
 			focusedResults = true;
 		}).appendTo('body');
 
@@ -54,20 +54,27 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			if (!focusedResults) {
 				tool.$results.remove();
 			} else {
-				$(document).one('mouseup', function () {
+				function _handlePointerEnd() {
 					tool.$results.remove();
-				});
+					$(document).off(Q.Pointer.end, _handlePointerEnd);
+				}
+				$(document).on(Q.Pointer.end, tool, _handlePointerEnd);
 			}
 			focusedResults = false;
 		}, 10);
 	}).on('focus change', doQuery);
 	element.on('keyup keydown', doQuery);
+	
+	var lastQuery = null;
 
 	function doQuery(event) {
 
-		var query = tool.$input.val();
-
 		var cur = $('.Q_selected', tool.$results);
+		var query = tool.$input.val();
+		if (query === lastQuery) {
+			return;
+		}
+		lastQuery = query;
 
 		switch (event.keyCode) {
 			case 38: // up arrow
@@ -153,7 +160,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					onChoose($(this));
 				}).data('userId', k)
 				.data('avatar', avatars[k])
-				.on('mousedown focusin', function () {
+				.on(Q.Pointer.start + ' focusin', function () {
 					focusedResults = true;
 				}).appendTo(tool.$results);
 				if (!show) {

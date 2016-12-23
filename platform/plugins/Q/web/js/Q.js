@@ -9713,7 +9713,8 @@ Q.Pointer = {
 		};
 	},
 	/**
-	 * Like click event but fires much sooner on touchscreens, and respects Q.Pointer.canceledClick
+	 * Like click event but fires much sooner on touchscreens,
+	 * and respects Q.Pointer.canceledClick
 	 * @static
 	 * @method fastclick
 	 */

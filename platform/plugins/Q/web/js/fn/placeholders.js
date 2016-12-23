@@ -44,8 +44,15 @@ function () {
 			}
 		}
 		
+		var events = 'keypress keyup change input focus paste blur'
+			+ ' Q_refresh Q_refresh_placeholders';
+		var namespacedEvents = '';
+		Q.each(events.split(' '), function (i, e) {
+			namespacedEvents += e + '.Q_placeholders ';
+		});
+		
 		$('input', this)
-		.add($(this))
+		.add(this).filter('input')
 		.not('input.Q_leave_alone')
 		.not('input[type=file]')
 		.not('input[type=hidden]')
@@ -139,10 +146,8 @@ function () {
 				if (interval) clearInterval(interval);
 			});
 			$this.data('Q-placeholder', $placeholder);
-		}).on('keypress keyup change input focus paste blur'
-		    + ' Q_refresh Q_refresh_placeholders',
-			manage
-		);
+		}).off('.Q_placeholders')
+		.on(namespacedEvents, manage);
 	}
 }
 
