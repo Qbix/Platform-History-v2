@@ -36,7 +36,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	var tool = this;
 	var state = tool.state;
 	if (state.canAdd === true) {
-		state.canAdd = Q.text.Users.labels.addLabel;
+		state.canAdd = Q.text.Streams.interests.canAdd;
 	}
 	
 	var p = new Q.Pipe();
