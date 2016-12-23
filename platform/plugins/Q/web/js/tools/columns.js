@@ -290,13 +290,15 @@ Q.Tool.define("Q/columns", function(options) {
 			var $columnSlot = $(columnSlot);
 			var $controlsSlot = $(controlsSlot);
 			var p = Q.pipe();
+			var _suddenlyClosing = false;
 			var waitFor = ['animation'];
 			if (options.url) {
 				waitFor.push('activated');
 				function _suddenClose() {
+					_suddenlyClosing = true;
 					$mask.remove();
 					$div.removeClass('Q_columns_loading');
-					tool.close(index);
+					tool.close(index, null, );
 				}
 				var url = options.url;
 				var params = Q.extend({
@@ -308,9 +310,7 @@ Q.Tool.define("Q/columns", function(options) {
 					quiet: true,
 					ignoreHistory: true,
 					ignorePage: true,
-					onError: {"Q/columns": function () {
-						_suddenClose();
-					}},
+					onError: {"Q/columns": _suddenClose},
 					onRedirect: {"Q": _suddenClose}
 				}, options);
 				params.handler = function _handler(response) {
@@ -478,7 +478,7 @@ Q.Tool.define("Q/columns", function(options) {
 			function afterAnimation($cs, $sc, $ct){
 				
 				if (Q.info.isMobile) {
-					if (o.hideBackgroundColumns) {
+					if (!_suddenlyClosing && o.hideBackgroundColumns) {
 						$div.prev().hide();
 					}
 				} else {
