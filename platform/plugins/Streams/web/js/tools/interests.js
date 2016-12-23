@@ -386,17 +386,19 @@ Q.Tool.define("Streams/interests", function (options) {
 				});
 				
 				var count = 0;
-				$select.empty();
-				Q.each(Interests.all[state.communityId], function (category) {
-					if (existing[category]
-					&& Q.normalize(existing[category]) === Q.normalize(val)) {
-						return;
-					}
-					$('<option />', { value: category })
-					.html(category)
-					.appendTo($select);
-					++count;
-				});
+				if ($select) {
+					$select.empty();
+					Q.each(Interests.all[state.communityId], function (category) {
+						if (existing[category]
+						&& Q.normalize(existing[category]) === Q.normalize(val)) {
+							return;
+						}
+						$('<option />', { value: category })
+						.html(category)
+						.appendTo($select);
+						++count;
+					});
+				}
 				if (count) {
 					$unlistedTitle.text(val.toCapitalized());
 					$('<option value="" selected="selected" disabled="disabled" />')
