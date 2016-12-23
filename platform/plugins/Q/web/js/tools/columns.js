@@ -293,6 +293,10 @@ Q.Tool.define("Q/columns", function(options) {
 			var waitFor = ['animation'];
 			if (options.url) {
 				waitFor.push('activated');
+				function _clearUp() {
+					$mask.remove();
+					$div.removeClass('Q_columns_loading');
+				}
 				var url = options.url;
 				var params = Q.extend({
 					slotNames: ["title", "column", "controls"], 
@@ -303,10 +307,8 @@ Q.Tool.define("Q/columns", function(options) {
 					quiet: true,
 					ignoreHistory: true,
 					ignorePage: true,
-					onError: {"Q/columns": function () {
-						$mask.remove();
-						$div.removeClass('Q_columns_loading');
-					}}
+					onError: {"Q/columns": _clearUp},
+					onRedirect: {"Q": _clearUp}
 				}, options);
 				params.handler = function _handler(response) {
 					var elementsToActivate = {};
