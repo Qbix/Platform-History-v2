@@ -27,7 +27,7 @@ function Streams_after_Streams_message_Streams_updateRelateTo($params)
 	}
 	
 	// Begin database transaction
-	$relatedTo = $c->retrieve(null, array('ignoreCache' => true, 'begin' => true))
+	$relatedTo = $c->retrieve(null, array('begin' => true))
 		? json_decode($c->relatedTo, true)
 		: array();
 	$weight = (double)$message->getInstruction('weight', null);

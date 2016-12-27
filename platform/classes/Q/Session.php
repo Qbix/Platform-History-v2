@@ -628,7 +628,7 @@ class Q_Session
 					'old_data' => $old_data
 				);
 				if (!empty(self::$session_db_connection)) {
-					$row->retrieve();
+					$row->retrieve('*', false, array('begin' => true));
 					$existing_data = Q::ifset($row, $data_field, "");
 					$params = array_merge($params, array(
 						'id_field' => $id_field,
@@ -646,12 +646,15 @@ class Q_Session
 						Q::log("$sess_file is not writable", 'fatal');
 						die("$sess_file is not writable");
 					}
-					$file = fopen($sess_file, "w");
-					if (!$file) {
-						return false;
+					if ($file = fopen($sess_file, "r+")) {
+						flock($file, LOCK_EX);
+						$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
+						$existing_data = fread($file, $maxlength);
+					} else {
+						fopen($sess_file, "w");
+						flock($file, LOCK_EX);
+						$existing_data = '';
 					}
-					$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
-					$existing_data = fread($file, $maxlength);
 				}
 				$_SESSION = session_decode($existing_data);
 				if (!$_SESSION) {
@@ -672,19 +675,20 @@ class Q_Session
 				 * @param {Db_Row} row
 				 * @return {boolean}
 				 */
-				if (false === Q::event('Q/session/save', $params, 'before')) {
-					return false;
-				}
+				Q::event('Q/session/save', $params, 'before');
 				if (! empty(self::$session_db_connection)) {
 					$row->$data_field = $merged_data;
 					$row->$duration_field = Q_Config::get(
 						'Q', 'session', 'durations', Q_Request::formFactor(),
 						Q_Config::expect('Q', 'session', 'durations', 'session')
 					);
-					$row->save();
+					$row->save(false, true);
 					$result = true;
 				} else {
+					ftruncate($file, 0);
+					rewind($file);
 					$result = fwrite($file, $merged_data);
+					flock($file, LOCK_UN);
 					fclose($file);
 				}
 			}
