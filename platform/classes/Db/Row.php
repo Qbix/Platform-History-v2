@@ -1933,7 +1933,6 @@ class Db_Row implements Iterator
 	 *   If provided, then call caching() on the query, passing this value
 	 * @param {boolean} [$modifyQuery.query]
 	 *   If true, it will return a Db_Query that can be modified, rather than the result. 
-	 * @param {array} [options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @param {array} [$options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @return {array|Db_Row|false} Returns the row fetched from the Db_Result (or returned by beforeRetrieve)
 	 *  If retrieve() is called with no arguments, may return false if nothing retrieved.
@@ -1945,8 +1944,8 @@ class Db_Row implements Iterator
 		$options = array())
 	{
 		if (is_array($useIndex)) {
-			$options = $useIndex;
-			$useIndex = $modifyQuery = null;
+			$modifyQuery = $useIndex;
+			$useIndex = $options = null;
 		}
 		if ($fields === true) {
 			$throwIfMissing = true;
