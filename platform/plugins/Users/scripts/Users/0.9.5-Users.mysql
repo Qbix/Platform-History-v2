@@ -1,0 +1,7 @@
+ALTER TABLE `{$prefix}total`
+MODIFY `value` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT 'average of all vote values',
+MODIFY `weightTotal` decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT 'total weight of all votes';
+
+ALTER TABLE `{$prefix}vote`
+MODIFY `value` decimal(14,4) NOT NULL DEFAULT 0 COMMENT 'these values can be averaged',
+MODIFY `weight` decimal(14,4) NOT NULL DEFAULT '1.0000' COMMENT 'multiplied by value for weighted average';

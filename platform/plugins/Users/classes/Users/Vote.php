@@ -52,7 +52,10 @@ class Users_Vote extends Base_Users_Vote
 			}
 			$total->weightTotal += ($modifiedFields['weight'] - $vote->weight);
 			if (!$total->weightTotal) {
-				throw new Q_Exception_BadValue(array('internal' => 'Users_Vote_Total table', 'problem' => 'weight is 0'));
+				throw new Q_Exception_BadValue(array(
+					'internal' => 'Users_Vote_Total table', 
+					'problem' => 'weight is 0'
+				));
 			}
 			$total->value = 
 				($total->value * $weightTotal 
