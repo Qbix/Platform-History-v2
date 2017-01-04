@@ -61,7 +61,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 		state.bottom[1] = false;
 	}
 
-	state.$drawers = $(this.element).children();
+	state.$drawers = $(this.element).children('.Q_drawers_drawer');
 	state.currentIndex = 1 - state.initial.index;
 	state.canceledSwap = null;
 	var lastScrollingHeight;
@@ -414,7 +414,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			if (src) {
 				state.$trigger = $('<img />').attr({
 					'src': Q.url(src),
-					'class': 'Q_drawers_trigger',
+					'class': 'Q_drawers_trigger ' + 'Q_drawers_trigger_' + state.currentIndex,
 					'alt': state.currentIndex ? 'reveal bottom drawer' : 'reveal top drawer'
 				}).insertAfter(state.$drawers[1])
 				.css({'opacity': 0})
