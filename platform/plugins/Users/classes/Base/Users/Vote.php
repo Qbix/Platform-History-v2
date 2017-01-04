@@ -379,13 +379,13 @@ return array (
   0 => 
   array (
     0 => 'decimal',
-    1 => '10,4',
+    1 => '14,4',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => '',
-  3 => NULL,
+  3 => '0.0000',
 );			
 	}
 
@@ -411,7 +411,7 @@ return array (
   0 => 
   array (
     0 => 'decimal',
-    1 => '10,4',
+    1 => '14,4',
     2 => '',
     3 => false,
   ),
@@ -459,7 +459,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '10,4',
+    1 => '14,4',
     2 => '',
     3 => false,
   ),
