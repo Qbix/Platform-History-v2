@@ -58,7 +58,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					tool.$results.remove();
 					$(document).off(Q.Pointer.end, _handlePointerEnd);
 				}
-				$(document).on(Q.Pointer.end, tool, _handlePointerEnd);
+				$(document).on(Q.Pointer.end, tool, function () {
+					setTimeout(_handlePointerEnd, 0);
+				});
 			}
 			focusedResults = false;
 		}, 10);
