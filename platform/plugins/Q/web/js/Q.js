@@ -8166,7 +8166,7 @@ function _initTools(toolElement) {
 			var allInitialized = true;
 			var childIds = _toolsWaitingForInit[parentId];
 			for (var childId in childIds) {
-				var a = !Q.Tool.active[childId];
+				var a = Q.Tool.active[childId];
 				if (!a) {
 					allInitialized = false;
 					break;
