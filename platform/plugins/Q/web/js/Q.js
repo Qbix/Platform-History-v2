@@ -11237,6 +11237,11 @@ function _addHandlebarsHelpers() {
 			var ba = Q.Tool.beingActivated;
 			return (ba ? ba.prefix : '');
 		});
+		Handlebars.registerHelper('join', function(array, sep, options) {
+		    return array.map(function(item) {
+		        return options.fn(item);
+		    }).join(sep);
+		});
 		Handlebars.registerHelper('tool', function (name, id, tag, options) {
 			if (!name) {
 				return "{{tool missing name}}";

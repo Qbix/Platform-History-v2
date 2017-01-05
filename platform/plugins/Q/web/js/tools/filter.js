@@ -75,8 +75,11 @@ Q.Tool.define('Q/filter', function (options) {
 		var x = Q.Pointer.getX(evt);
 		if (xMin < x && x < xMax) {
 			$this.val('').trigger('Q_refresh');
-			state.onClear.handle.call(tool);
-			return tool.end();
+			setTimeout(function () {
+				state.onClear.handle.call(tool);
+				tool.end();	
+			}, 0);
+			return false;
 		}
 	});
 	$te.addClass(state.fullscreen ? 'Q_filter_fullscreen' : 'Q_filter_notFullscreen');
@@ -250,22 +253,24 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.setText(chosenText);
 		}
 		if (!state.begun || tool.suspended) return;
-		state.begun = false;
-		var $te = $(tool.element);
-		$te.removeClass('Q_filter_begun');
-		tool.$results.hide();
-		if (state.fullscreen) {
-			$te.nextAll().each(function () {
-				var $this = $(this);
-				$this.css('display', $this.data('Q/filter display'))
-					.removeData('Q/filter display');
-			});
-			$te.insertAfter(tool.$placeholder);
-			tool.$placeholder.remove();
-			tool.$input.blur();
-			$('body').css('overflow', state.oldBodyOverflow)
-			.removeClass('Q_overflow');
-		}
+		setTimeout(function () {
+			state.begun = false;
+			var $te = $(tool.element);
+			$te.removeClass('Q_filter_begun');
+			tool.$results.hide();
+			if (state.fullscreen) {
+				$te.nextAll().each(function () {
+					var $this = $(this);
+					$this.css('display', $this.data('Q/filter display'))
+						.removeData('Q/filter display');
+				});
+				$te.insertAfter(tool.$placeholder);
+				tool.$placeholder.remove();
+				tool.$input.blur();
+				$('body').css('overflow', state.oldBodyOverflow)
+				.removeClass('Q_overflow');
+			}
+		}, 0);
 		return false;
 	},
 	/**
