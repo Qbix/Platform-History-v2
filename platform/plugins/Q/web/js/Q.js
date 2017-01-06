@@ -10084,6 +10084,7 @@ Q.Pointer = {
 		if (a.src) {
 			Q.audio(a.src, function () {
 				img1.audio = this;
+				this.hint = [targets, options];
 				this.play(a.from || 0, a.until, a.removeAfterPlaying);
 				audioEvent.handle();
 			});
@@ -10781,10 +10782,12 @@ Q.Audio = function (url) {
 	audio.setAttribute('src', url);
 	audio.setAttribute('preload', 'auto');
 	function _handler(e) {
-		var event = (e.type === 'canplay' ? Aup.onCanPlay : (
+		Q.handle(e.type === 'canplay' ? Aup.onCanPlay : (
 			(e.type === 'canplaythrough' ? Aup.onCanPlayThrough : Aup.onEnded)
-		));
-		event.handle.call(t, [e]);
+		), t, [e]);
+		Q.handle(e.type === 'canplay' ? Q.Audio.onCanPlay : (
+			(e.type === 'canplaythrough' ? Q.Audio.onCanPlayThrough : Q.Audio.onEnded)
+		), t, [e]);
 	}
 	Q.addEventListener(audio, {
 		'canplay': _handler,
@@ -10796,6 +10799,12 @@ Q.Audio = function (url) {
 	Q.Audio.collection[url] = this;
 };
 Q.Audio.collection = {};
+
+Q.Audio.onPlay = new Q.Event();
+Q.Audio.onPause = new Q.Event();
+Q.Audio.onCanPlay = new Q.Event();
+Q.Audio.onCanPlayThrough = new Q.Event();
+Q.Audio.onEnded = new Q.Event();
 
 var Aup = Q.Audio.prototype;
 Aup.onCanPlay = new Q.Event();
@@ -10837,6 +10846,7 @@ Aup.play = function (from, until, removeAfterPlaying) {
 		}, (until-from)*1000);
 	}
 	a.play();
+	Q.handle(Q.Audio.onPlay, this);
 	return t;
 };
 
@@ -10851,6 +10861,7 @@ Aup.pause = function () {
 		t.playing = false;
 		t.paused = true;
 	}
+	Q.handle(Q.Audio.onPause, this);
 	return t;
 };
 
