@@ -24,7 +24,7 @@ Q.setObject({
  *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
  *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
- *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Handlers may return false to cancel the default behavior of toggling the label.
+ *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Is passed (element, label, title, wasSelected). Handlers may return false to cancel the default behavior of toggling the label.
  */
 Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	var tool = this
@@ -62,6 +62,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	userId: null,
 	prefix: 'Users/',
 	contactUserId: null,
+	canAdd: false,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
 },
@@ -86,7 +87,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
-				canAdd: state.canAdd,
+				canAdd: Q.Users.loggedInUser && state.canAdd,
 				canAddIcon: Q.url('plugins/Q/img/actions/add.png')
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
@@ -97,22 +98,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				$(tool.element)
 				.addClass('Users_labels_active')
 				.find('.Users_labels_label')
-					.addClass('Q_selectable')
-				.end()
-				.find('.Users_labels_action')
-					.plugin('Q/clickable')
-					.on(Q.Pointer.fastclick, function () {
-						Q.prompt(Q.text.Users.labels.prompt, function (title) {
-							if (!title) return;
-							Users.Label.add(state.userId, title, function () {
-								tool.refresh();
-							});
-						}, { 
-							title: state.canAdd, 
-							hidePrevious: true,
-							maxLength: 63
-						});
-					});
+				.addClass('Q_selectable');
 				Users.getContacts(state.userId, null, state.contactUserId,
 				function (err, contacts) {
 					Q.each(contacts, function () {
@@ -126,6 +112,22 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 								return false;
 							}
 						});
+					});
+				});
+			}
+			if (state.canAdd) {
+				$('.Users_labels_add', tool.element)
+				.plugin('Q/clickable')
+				.on(Q.Pointer.fastclick, function () {
+					Q.prompt(Q.text.Users.labels.prompt, function (title) {
+						if (!title) return;
+						Users.Label.add(state.userId, title, function () {
+							tool.refresh();
+						});
+					}, { 
+						title: state.canAdd, 
+						hidePrevious: true,
+						maxLength: 63
 					});
 				});
 			}
@@ -150,7 +152,7 @@ Q.Template.set('Users/labels', ''
 + '</li>'
 + '{{/each}}'
 + '{{#if canAdd}}'
-+ '<li class="Users_labels_action">'
++ '<li class="Users_labels_action Users_labels_add">'
 +   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
 +   '<div class="Users_labels_title">{{canAdd}}</div>'
 + '</li>'

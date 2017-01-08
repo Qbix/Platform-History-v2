@@ -27,7 +27,7 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 	}
 	
 	// Begin database transaction
-	$relatedTo = $c->retrieve(null, array('ignoreCache' => true, 'begin' => true))
+	$relatedTo = $c->retrieve(null, array('begin' => true))
 		? json_decode($c->relatedTo, true)
 		: array();
 	if (isset($relatedTo[$type])) {

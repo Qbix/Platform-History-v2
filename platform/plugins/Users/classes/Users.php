@@ -2019,9 +2019,10 @@ abstract class Users extends Base_Users
 		);
 		if ($result) {
 			$authorized = $result;
-		}
-		if ($asUserId === $userId and substr($label, 0, 6) === 'Users/') {
-			$authorized = true;
+		} else if ($asUserId === $userId) {
+			if ($readOnly or substr($label, 0, 6) === 'Users/') {
+				$authorized = true;
+			}
 		}
 		if (!$authorized and $throwIfNotAuthorized) {
 			throw new Users_Exception_NotAuthorized();
@@ -2058,9 +2059,10 @@ abstract class Users extends Base_Users
 		);
 		if ($result) {
 			$authorized = $result;
-		}
-		if ($asUserId === $userId and substr($label, 0, 6) === 'Users/') {
-			return true;
+		} else if ($asUserId === $userId) {
+			if ($readOnly or substr($label, 0, 6) === 'Users/') {
+				$authorized = true;
+			}
 		}
 		if (!$authorized and $throwIfNotAuthorized) {
 			throw new Users_Exception_NotAuthorized();

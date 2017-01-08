@@ -635,7 +635,14 @@
 
 .Streams_related_tool .Q_tabs_overflow .Q_inplace_tool_editbuttons { display: none !important; list-style-type: none; padding: 0; }
 
-.Streams_interests_filter_input { width: 100%; box-sizing: border-box; }
+.Streams_interests_filter_input {
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 16px;
+	padding: 5px 15% 5px 5%;
+	border-radius: 16px; -moz-border-radius: 16px; -webkit-border-radius: 16px;
+	background: transparent;
+}
 
 .Users_avatar_tool .Users_avatar_name>*{ position: relative; }
 
@@ -711,4 +718,15 @@
 
 .Streams_lookup_tool .Q_filter_tool input {
 	min-width: 200px;
+}
+
+.Streams_interests_all .Streams_interests_icon {
+	width: 25px; height: 25px;
+	vertical-align: middle;
+}
+
+.Streams_interests_all .Streams_interests_title {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 20px;
 }

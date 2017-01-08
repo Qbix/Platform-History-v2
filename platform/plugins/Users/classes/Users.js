@@ -126,7 +126,7 @@ Users.listen = function (options) {
 
 	// Set up ios push notification agent
 	var appName = Q.Config.expect(["Q", "app"]);
-	if (Q.Config.get([appName, "cordova", "platforms"], []).indexOf("ios") >= 0) {
+	if (Q.Config.get([appName, "native", "platforms"], []).indexOf("ios") >= 0) {
 		_Users_listen_ios(o, server);
 	}
 
@@ -150,7 +150,7 @@ function _Users_listen_ios (options, server) {
 	var apn = require('apn');
 	var path = require('path');
 	var appName = Q.app.name;
-	var sandbox = Q.Config.get([appName, "cordova", "ios", "sandbox"], false);
+	var sandbox = Q.Config.get([appName, "native", "ios", "sandbox"], false);
 	var s = sandbox ? "sandbox" : "production";
 	var o = {
 		ca: path.join(Q.pluginInfo.Users.FILES_DIR, 'Users', 'certs', 'EntrustRootCA.pem'),
@@ -158,7 +158,7 @@ function _Users_listen_ios (options, server) {
 		key: path.join(Q.app.LOCAL_DIR, 'Users', 'certs', appName, s, 'key.pem'),
 		production: !sandbox
 	};
-	var passphrase = Q.Config.get([appName, "cordova", "ios", "passphrase"], null);
+	var passphrase = Q.Config.get([appName, "native", "ios", "passphrase"], null);
 	if (passphrase) {
 		o.passphase = passphase;
 	}

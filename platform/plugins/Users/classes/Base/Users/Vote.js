@@ -353,7 +353,7 @@ Base.prototype.beforeSet_value = function (value) {
 	 */
 Base.column_value = function () {
 
-return [["decimal","10,4","",false],false,"",null];
+return [["decimal","14,4","",false],false,"","0.0000"];
 };
 
 /**
@@ -377,7 +377,7 @@ Base.prototype.beforeSet_weight = function (value) {
 	 */
 Base.column_weight = function () {
 
-return [["decimal","10,4","",false],false,"","1.0000"];
+return [["decimal","14,4","",false],false,"","1.0000"];
 };
 
 /**
@@ -399,7 +399,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","10,4","",false],true,"","CURRENT_TIMESTAMP"];
+return [["timestamp","14,4","",false],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**
