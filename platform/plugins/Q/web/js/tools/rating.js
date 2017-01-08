@@ -4,7 +4,7 @@
  */
 	
 /**
- * Implements an input that ratings an associated list (like an autocomplete)
+ * Implements a way to display a rating
  * @class Q rating
  * @constructor
  * @param {Object} [options] Override various options for this tool
