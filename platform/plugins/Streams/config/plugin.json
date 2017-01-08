@@ -46,7 +46,7 @@
 		},
 		"bundle": {
 			"exclude": {
-				"Streams": ["img/icons/Streams/interest"]
+				"Streams": ["img/icons/Streams/interest", "img/icons/files"]
 			}
 		}
 	},

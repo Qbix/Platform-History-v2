@@ -6030,7 +6030,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {boolean} [options.duplicate=true] you can set it to false in order not to fetch the same url again
  * @param {boolean} [options.quiet=true] this option is just passed to your onLoadStart/onLoadEnd handlers in case they want to respect it.
  * @param {boolean} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
- * @param {Function} [options.handleRedirects=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
+ * @param {Function} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
  * @param {boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
@@ -6095,7 +6095,7 @@ Q.request = function (url, slotNames, callback, options) {
 			}
 			var redirected = false;
 			if (data && data.redirect && data.redirect.url) {
-				Q.handle(o.handleRedirects, Q, [data.redirect.url]);
+				Q.handle(o.onRedirect, Q, [data.redirect.url]);
 				redirected = true;
 			}
 			callback && callback.call(this, err, data, redirected);
@@ -6418,9 +6418,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	var result = {};
 	
 	function _add(key, value) {
-		if (value == undefined) return;
 		// If value is a function, invoke it and return its value
 		value = Q.typeOf(value) === "function" ? value() : value;
+		if (value == undefined) return;
 		if (returnAsObject) {
 			result[key] = value;
 		} else {
@@ -8166,7 +8166,7 @@ function _initTools(toolElement) {
 			var allInitialized = true;
 			var childIds = _toolsWaitingForInit[parentId];
 			for (var childId in childIds) {
-				var a = !Q.Tool.active[childId];
+				var a = Q.Tool.active[childId];
 				if (!a) {
 					allInitialized = false;
 					break;
@@ -9713,7 +9713,8 @@ Q.Pointer = {
 		};
 	},
 	/**
-	 * Like click event but fires much sooner on touchscreens, and respects Q.Pointer.canceledClick
+	 * Like click event but fires much sooner on touchscreens,
+	 * and respects Q.Pointer.canceledClick
 	 * @static
 	 * @method fastclick
 	 */
@@ -10083,6 +10084,7 @@ Q.Pointer = {
 		if (a.src) {
 			Q.audio(a.src, function () {
 				img1.audio = this;
+				this.hint = [targets, options];
 				this.play(a.from || 0, a.until, a.removeAfterPlaying);
 				audioEvent.handle();
 			});
@@ -10502,10 +10504,14 @@ Q.Dialogs = {
 				.append($('<h2 class="Q_dialog_title" />')
 				.append(o.title))
 			).append(
-				$('<div class="Q_dialog_slot Q_dialog_content" />').append(o.content)
+				$('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />').append(o.content)
 			);
-			if (o.className) $dialog.addClass(o.className);
-			if (o.apply) $dialog.addClass('Q_overlay_apply');
+			if (o.className) {
+				$dialog.addClass(o.className);
+			}
+			if (o.apply) {
+				$dialog.addClass('Q_overlay_apply');
+			}
 			if (o.removeOnClose !== false) {
 				o.removeOnClose = true;
 			}
@@ -10776,10 +10782,12 @@ Q.Audio = function (url) {
 	audio.setAttribute('src', url);
 	audio.setAttribute('preload', 'auto');
 	function _handler(e) {
-		var event = (e.type === 'canplay' ? Aup.onCanPlay : (
+		Q.handle(e.type === 'canplay' ? Aup.onCanPlay : (
 			(e.type === 'canplaythrough' ? Aup.onCanPlayThrough : Aup.onEnded)
-		));
-		event.handle.call(t, [e]);
+		), t, [e]);
+		Q.handle(e.type === 'canplay' ? Q.Audio.onCanPlay : (
+			(e.type === 'canplaythrough' ? Q.Audio.onCanPlayThrough : Q.Audio.onEnded)
+		), t, [e]);
 	}
 	Q.addEventListener(audio, {
 		'canplay': _handler,
@@ -10791,6 +10799,12 @@ Q.Audio = function (url) {
 	Q.Audio.collection[url] = this;
 };
 Q.Audio.collection = {};
+
+Q.Audio.onPlay = new Q.Event();
+Q.Audio.onPause = new Q.Event();
+Q.Audio.onCanPlay = new Q.Event();
+Q.Audio.onCanPlayThrough = new Q.Event();
+Q.Audio.onEnded = new Q.Event();
 
 var Aup = Q.Audio.prototype;
 Aup.onCanPlay = new Q.Event();
@@ -10832,6 +10846,7 @@ Aup.play = function (from, until, removeAfterPlaying) {
 		}, (until-from)*1000);
 	}
 	a.play();
+	Q.handle(Q.Audio.onPlay, this);
 	return t;
 };
 
@@ -10846,6 +10861,7 @@ Aup.pause = function () {
 		t.playing = false;
 		t.paused = true;
 	}
+	Q.handle(Q.Audio.onPause, this);
 	return t;
 };
 
@@ -11232,6 +11248,11 @@ function _addHandlebarsHelpers() {
 			var ba = Q.Tool.beingActivated;
 			return (ba ? ba.prefix : '');
 		});
+		Handlebars.registerHelper('join', function(array, sep, options) {
+		    return array.map(function(item) {
+		        return options.fn(item);
+		    }).join(sep);
+		});
 		Handlebars.registerHelper('tool', function (name, id, tag, options) {
 			if (!name) {
 				return "{{tool missing name}}";
@@ -11357,12 +11378,12 @@ Q.request.options = {
 	duplicate: true,
 	quiet: true,
 	parse: 'json',
-	handleRedirects: function (url) {
+	onRedirect: new Q.Event(function (url) {
 		Q.handle(url, {
 			target: '_self',
 			quiet: true
 		});
-	},
+	}, "Q"),
 	resultFunction: "result",
 	onLoadStart: new Q.Event(),
 	onShowCancel: new Q.Event(),

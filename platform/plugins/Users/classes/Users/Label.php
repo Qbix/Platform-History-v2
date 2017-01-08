@@ -164,7 +164,7 @@ class Users_Label extends Base_Users_Label
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
 	 * @param {string} [$options.asUserId] the user to do access checks as
 	 * @param {boolean} [$options.checkContacts=false] Whether to also look in the Users_Contact table and only return labels that have at least one contact.
-	 * @return {array} An array of array(label => Users_Contact) pairs
+	 * @return {array} An array of array(label => Users_Label) pairs
 	 */
 	static function fetch($userId = null, $filter = '', $options = array())
 	{
@@ -211,10 +211,10 @@ class Users_Label extends Base_Users_Label
 			->where($criteria)
 			->fetchDbRows(null, null, 'label');
 		foreach ($prefixes as $p) {
-			$labels = array_merge($labels, Users_Label::select('*')
+			$labelsPrefixed = Users_Label::select('*')
 				->where(array_merge($criteria, array('label' => $p)))
-				->fetchDbRows()
-			);
+				->fetchDbRows(null, null, 'label');
+			$labels = array_merge($labels, $labelsPrefixed);
 		}
 		if (empty($options['checkContacts'])) {
 			return $labels;

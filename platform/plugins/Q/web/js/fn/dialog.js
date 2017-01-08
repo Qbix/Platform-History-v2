@@ -11,7 +11,7 @@
  * @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
  * @param {DOMElement} [options.alignParent]  Can be DOM element, jQuery object or jQuery selector.
  * If provided overlay will be positioned relatively to that element. If null, overlay will be positioned considering window dimensions. Optional.
- * @param {Boolean} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
+ * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
  * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
  * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
@@ -257,7 +257,7 @@ function _Q_overlay(o) {
  *   @param {String} [options.url]  If provided, this url will be used to fetch the "title" and "dialog" slots, to display in the dialog.
  *   @optional
  *   @param {Boolean} [options.alignByParent=false] If true, the dialog will be aligned to the center of not the entire window, but to the center of containing element instead.
- *   @param {Boolean} [options.mask=true] If true, adds a mask to cover the screen behind the dialog.
+ *   @param {Boolean|String} [options.mask=true] If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
  *   @param {Boolean} [options.fullscreen]
  *   If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon. Defaults to true on Android stock browser, false everywhere else.
  *   @param {Boolean} [options.fadeInOut=!Q.info.isTouchscreen]

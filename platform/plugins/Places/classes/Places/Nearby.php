@@ -297,11 +297,13 @@ class Places_Nearby
 				$attributes[$attr] = $zipcode->$attr;
 			}
 		}
+		$lat = sprintf("%0.1f", $latitude);
+		$lng = sprintf("%0.1f", $longitude);
 		$stream = Streams::create($publisherId, $publisherId, 'Places/nearby', array(
 			'name' => $streamName,
 			'title' => $zipcode
-				? "Nearby ($latitude, $longitude): {$zipcode->placeName}, zipcode {$zipcode->zipcode}"
-				: "Nearby ($latitude, $longitude)",
+				? "Nearby {$zipcode->placeName} ({$zipcode->zipcode})"
+				: "Nearby (lat$lat, lng$lng)",
 			'attributes' => Q::json_encode($attributes)
 		));
 		return $stream;

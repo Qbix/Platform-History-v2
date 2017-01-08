@@ -25,17 +25,22 @@ class Streams_Participant extends Base_Streams_Participant
 	/**
 	 * Get an array of users participating in the stream
 	 * @method getUsers
-	 * @param $publisherId {string}
-	 * @param $streamName {string}
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {array} [$options=array()] Options to pass to the Db_Query->options method
 	 * @return {array}
 	 *	An array of user ids 
 	 */
-	static function getUsers($publisherId, $streamName) {
-		return Streams_Participant::select('userId')
+	static function getUserIds($publisherId, $streamName, $options = array()) {
+		$q = Streams_Participant::select('userId')
 			->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $streamName
-			))->fetchAll(PDO::FETCH_COLUMN);
+			));
+		if ($options) {
+			$q->options($options);
+		}
+		return $q->fetchAll(PDO::FETCH_COLUMN, 0);
 	}
 
 	/**

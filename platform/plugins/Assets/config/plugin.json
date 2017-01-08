@@ -21,6 +21,11 @@
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
+		},
+		"bundle": {
+			"exclude": {
+				"Assets": ["img"]
+			}
 		}
 	},
 	"Streams": {

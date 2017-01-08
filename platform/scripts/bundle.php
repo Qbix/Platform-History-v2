@@ -12,7 +12,7 @@ $argv = $_SERVER['argv'];
 $count = count($argv);
 
 #Usage strings
-$usage = "Usage: php {$argv[0]} <pathToBundleDir>";
+$usage = "Usage: php {$argv[0]} <pathToBundleDir>\n";
 
 $help = <<<EOT
 Script to bundle the app code in a native application bundle.
@@ -30,8 +30,11 @@ if ($count < 1 or !$FROM_APP)
 	die($usage);
 
 $dir = $argv[1];
+if (empty($dir)) {
+	die($usage);
+}
 if (!is_dir($dir)) {
-	die("Destination directory not found: $dir");
+	die("Destination directory not found: $dir\n");
 }
 
 #First do the platform rsync
@@ -43,15 +46,20 @@ foreach ($pluginNames as $src) {
 	if (!$dest or !file_exists($dest)) {
 		mkdir($dir.DS.$pluginsDir);
 	}
-	echo "Syncing $pluginName...";
+	$dest = $pluginsDir.DS.$pluginName;
+	if (!is_dir($dest)) {
+		die ("Could not create $dest\n");
+	}
+	$dest = realpath($dest);
+	echo "Syncing $pluginName...\n";
 	$exclude = Q_Config::get("Q", "bundle", "exclude", $pluginName, array());
 	$options = '';
 	foreach ($exclude as $e) {
-		$excludePath = realpath("$src/$e");
-		if (!$excludePath) {
+		$excludePath = "$src/$e";
+		if (!realpath($excludePath)) {
 			echo "\n  (Warning: missing $excludePath)\n";
 		}
-		$options .= " --exclude=$excludePath";
+		$options .= " --exclude=" . escapeshellarg($e);
 	}
-	exec ("rsync -avz $src/* $dest $options\n");
+	exec ("rsync -az --copy-links $options $src/* $dest\n");
 }

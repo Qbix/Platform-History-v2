@@ -3805,11 +3805,10 @@ Q.onInit.add(function _Streams_onInit() {
 	Users.Socket.onEvent('Streams/join').set(function _Streams_join_handler (p) {
 		// 'join' event contains new participant.
 		console.log('Users.Socket.onEvent("join")', p);
-		var _cache = Participant.get.cache;
-		if (_cache) {
-			var key = JSON.stringify([p.publisherId, p.streamName, p.userId]);
-			_cache.set(key, p);
-		}
+		Participant.get.cache.set(
+			[p.publisherId, p.streamName, p.userId],
+			0, p, [null, p]
+		);
 	}, 'Streams');
 
 	Users.Socket.onEvent('Streams/leave').set(function (p) {

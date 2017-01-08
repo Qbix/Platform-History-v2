@@ -8,25 +8,38 @@ var Interests = Streams.Interests;
  * Streams Tools
  * @module Streams-tools
  */
+
+Q.text.Streams.interests = {
+	filter: 'What do you enjoy?',
+	canAdd: "If you still can't find what you're looking for, you can add a new interest below:",
+	trySynonyms: "Don't see it? Try some synonyms."
+};
 	
 /**
  * Tool for user to manage their interests in a community
  * @class Streams interests
  * @constructor
  * @param {Object} [options] This is an object of parameters for this function
- *  @param {String} [options.communityId=Q.info.app] The id of the user representing the community publishing the interests
+ *  @param {String} [options.communityId=Q.Users.communityId] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
  *  @param {Array} [options.ordering={}] To override what interest categories to show and in what order
+ *  @param {String} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
+ *  @param {String} [options.trySynonyms] You can override the "try synonyms" text using this option
+ *  @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new interest, or a string to override the title of the command.
+ *  @param {String|Object} [options.all] To show "all interests" option, pass here its title or object with "title" and "icon" properties.
  *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
  *  @param {String} [options.cachebust=1000*60*60*24] How often to reload the list of major community interests
  *  @param {Q.Event} [options.onReady] occurs when the tool interface is ready
- *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps an interest. Handlers may return false to cancel the default behavior of toggling the interest.
+ *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps an interest. Is passed (element, normalizedTitle, category, interest, wasSelected). Handlers may return false to cancel the default behavior of toggling the interest. If the "All Interests" option was clicked, '*' is passed as the second parameter.
  */
 Q.Tool.define("Streams/interests", function (options) {
 	var tool = this;
 	var state = tool.state;
+	if (state.canAdd === true) {
+		state.canAdd = Q.text.Streams.interests.canAdd;
+	}
+	
 	var p = new Q.Pipe();
-	var $unlistedTitle;
 	var lastVal, lastImage;
 	var revealingNewInterest = false;
 	var $te = $(tool.element);
@@ -35,19 +48,30 @@ Q.Tool.define("Streams/interests", function (options) {
 		$te.addClass('Streams_interests_anotherUser');
 	}
 	
-	if (!$te.children().length) {
-		$te.html(
-			'<div class="Streams_interests_filter">' +
-			'<input class="Streams_interests_filter_input" placeholder="What do you enjoy?"></input>' +
-			'</div>'
-		);
+	var all = state.all;
+	if (typeof all === 'string') {
+		all = {
+			title: all,
+			icon: Q.url("plugins/Streams/img/icons/interests/categories/all.png")
+		};
 	}
-
-	state.communityId = state.communityId || Q.info.app;
+	
+	if (!$te.children().length) {
+		Q.Template.render('Streams/interests', {
+			filter: (state.filter !== null),
+			placeholder: state.filter || '',
+			all: all
+		}, function (err, html) {
+			$te.html(html);
+		});
+	}
+	
+	tool.container = $(tool.element).find('.Streams_interests_container');
+	state.communityId = state.communityId || Q.Users.communityId;
 	
 	function addExpandable(category, interests) {
 		var cn = Q.normalize(category);
-		var url = Q.url('img/interests/categories/'+cn+'.png');
+		var url = Q.url('plugins/Streams/img/icons/interests/categories/'+cn+'.png');
 		var img = "<img src='"+url+"'>";
 		var content = '';
 		var count = 0;
@@ -66,7 +90,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			'div', 'Q/expandable', expandableOptions, 
 			tool.prefix + 'Q_expandable_' + Q.normalize(category))
 		);
-		$expandable.appendTo(tool.element).activate(p.fill(category));
+		$expandable.appendTo(tool.container).activate(p.fill(category));
 	}
 
 	var src = 'action.php/Streams/interests';
@@ -165,16 +189,21 @@ Q.Tool.define("Streams/interests", function (options) {
 			Q.handle(state.onReady, tool);
 		});
 		
-		var $unlisted1 = $("<div />").html("Don't see it? Try some synonyms.");
-		var $unlisted2 = $("<div class='Streams_interest_unlisted1' />")
-		.text("If you still can't find what you're looking for, you can add a new interest below:");
-		$unlistedTitle = $('<span id="Streams_new_interest_title" />')
+		var $unlistedTitle;
+		var $unlisted1 = $("<div />").html(state.trySynonyms);
+		var $unlisted = $('<div />').addClass("Streams_interests_unlisted")
+		.append($unlisted1)
+		.appendTo(tool.container)
+		.hide();
+		if (state.canAdd) {
+			$unlistedTitle = $('<span id="Streams_new_interest_title" />')
 			.addClass('Streams_new_interest_title');
-		var $select = $('<select class="Streams_new_interest_categories" />')
+			var $select = $('<select class="Streams_new_interest_categories" />')
 			.on('change', function () {
 				if (!Users.loggedInUser) {
 					return;
 				}
+				$select.addClass('Q_loading');
 				var $this = $(this);
 				var category = $this.val();
 				var interestTitle = category + ': ' + $unlistedTitle.text();
@@ -189,36 +218,38 @@ Q.Tool.define("Streams/interests", function (options) {
 						return alert(msg);
 					}
 					revealingNewInterest = true;
+					// WARN: This is a roundabout way of doing it, but
+					// we remove this tool and activate another one with the same ID.
+					// We should probably design a refresh method instead.
 					var parentElement = tool.element.parentNode;
 					var toolId = tool.id;
 					Q.Tool.remove(tool.element);
 					$(Q.Tool.setUpElement('div', 'Streams/interests', toolId))
 					.appendTo(parentElement)
-					.activate(function () {
+					.activate(state, function () {
 						var id = 'Q_expandable_' + Q.normalize(category);
 						this.child(id).expand({
 							scrollToElement: tool.$('.Streams_interests_other')[0]
 						}, function () {
 							revealingNewInterest = false;
 						});
+						$select.removeClass('Q_loading');
 					});
 				}, {
 					subscribe: true,
 					quiet: false
 				});
 			});
-		var $unlisted = $('<div />')
-			.addClass("Streams_interests_unlisted")
-			.append($unlisted1, $unlisted2)
-			.append(
-				$('<div />').append(
-					$unlistedTitle.attr('data-category', 'Unlisted')
-				)
-			).append($select)
-			.appendTo(tool.element)
-			.hide();
+			var $unlisted2 = $("<div class='Streams_interest_unlisted2' />")
+			.text(state.canAdd);
+			$unlisted.append(
+				$unlisted2, 
+				$('<div />').append($unlistedTitle.attr('data-category', 'Unlisted')),
+				$select
+			);
+		}
 		
-		$(tool.element)
+		$(tool.container)
 		.on(Q.Pointer.fastclick, 'span.Streams_interest_title', function () {
 			// TODO: ignore spurious clicks that might happen
 			// when something is expanding
@@ -229,13 +260,12 @@ Q.Tool.define("Streams/interests", function (options) {
 				tool = $jq[0].Q('Q/expandable');
 			}
 			var title = $this.attr('data-category') + ': ' + $this.text();
-			var fields = {
-				title: title
-			};
 			var normalized = Q.normalize(title);
 			var change;
 			var wasSelected = $this.hasClass('Q_selected');
-			if (false === Q.handle(state.onClick, tool, [this, normalized, title, wasSelected])) {
+			var category = title.split(':')[0].trim();
+			var title2 = title.split(':')[1].trim();
+			if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])) {
 				return;
 			};
 			if (wasSelected) {
@@ -270,6 +300,12 @@ Q.Tool.define("Streams/interests", function (options) {
 				}
 				tool.stateChanged(['count']);
 			}
+		});
+		
+		$('.Streams_interests_all', tool.element)
+		.on(Q.Pointer.fastclick, function () {
+			var title = all.title;
+			Q.handle(state.onClick, tool, [this, '*', 'all', all.title, false]);
 		});
 		
 		var possibleEvents = 'keyup.Streams'
@@ -350,17 +386,19 @@ Q.Tool.define("Streams/interests", function (options) {
 				});
 				
 				var count = 0;
-				$select.empty();
-				Q.each(Interests.all[state.communityId], function (category) {
-					if (existing[category]
-					&& Q.normalize(existing[category]) === Q.normalize(val)) {
-						return;
-					}
-					$('<option />', { value: category })
-					.html(category)
-					.appendTo($select);
-					++count;
-				});
+				if ($select) {
+					$select.empty();
+					Q.each(Interests.all[state.communityId], function (category) {
+						if (existing[category]
+						&& Q.normalize(existing[category]) === Q.normalize(val)) {
+							return;
+						}
+						$('<option />', { value: category })
+						.html(category)
+						.appendTo($select);
+						++count;
+					});
+				}
 				if (count) {
 					$unlistedTitle.text(val.toCapitalized());
 					$('<option value="" selected="selected" disabled="disabled" />')
@@ -422,6 +460,10 @@ Q.Tool.define("Streams/interests", function (options) {
 	expandable: {},
 	cacheBust: 1000*60*60*24,
 	ordering: null,
+	all: false,
+	canAdd: false,
+	filter: Q.text.Streams.interests.filter,
+	trySynonyms: Q.text.Streams.interests.trySynonyms,
 	onReady: new Q.Event(),
 	onClick: new Q.Event()
 }
@@ -447,12 +489,20 @@ function _listInterests(category, interests) {
 }
 
 Q.Template.set('Streams/interests', 
-'{{#if filter}}'
+  '{{#if filter}}'
 + '<div class="Streams_interests_filter">'
-	+ '<input class="Streams_interests_filter_input" placeholder="What do you enjoy?"></input>'
+	+ '<input class="Streams_interests_filter_input" placeholder="{{placeholder}}">'
 + '</div>'
-+ '{{/filter}}'
-+ '<div class="Streams_interests_all"></div>'
++ '{{/if}}'
++ '{{#if all}}'
++ '<div class="Streams_interests_all Q_expandable_tool">'
++   '<h2>'
++     '<img class="Streams_interests_icon" src="{{all.icon}}" alt="all">'
++ 	  '<span class="Streams_interests_category_title">{{all.title}}</span>'
++	'</h2>'
++ '</div>'
++ '{{/if}}'
++ '<div class="Streams_interests_container"></div>'
 );
 
 })(window, Q, jQuery);
