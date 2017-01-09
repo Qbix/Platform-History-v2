@@ -3439,6 +3439,9 @@ Q.Tool = function _Q_Tool(element, options) {
 				}
 			} while (e = e.parentNode);
 		}
+		if (!Q.Tool.names[this.name]) {
+			throw new Q.Error("No tool defined with name " + this.name);
+		}
 		this.element.id = prefix + Q.Tool.names[this.name].split('/').join('_')
 			+ '-' + (Q.Tool.nextDefaultId++) + "_tool";
 		Q.Tool.nextDefaultId %= 1000000;
