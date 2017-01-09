@@ -336,6 +336,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_rating_tool div.Q_rating_star { display: inline-block; position: relative; }
 .Q_rating_tool div.Q_rating_star * { position: absolute; top: 0; right: 0; }
 .Q_rating_tool div.Q_rating_star_occlusion { width: 0; overflow: hidden; }
+.Q_paging_tool { text-align: center; }
 .Q_placeholders_container,
 .Q_placeholder { display: inline-block; color: #999; font-style: italic; zoom: 1; *display: inline; }
 .Q_placeholders_container input,
