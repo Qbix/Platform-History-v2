@@ -3917,7 +3917,7 @@ Tp.stateChanged = function Q_Tool_prototype_stateChanged(names) {
 	var l = names.length;
 	for (var i=0; i<l; ++i) {
 		var name = names[i];
-		this.Q.onStateChanged(name).handle.call(this, name);
+		this.Q.onStateChanged(name).handle.call(this, name, this.state[name]);
 	}
 	this.Q.onStateChanged('').handle.call(this, names);
 };
@@ -11174,7 +11174,8 @@ Q.onJQuery.add(function ($) {
 		"Q/drawers": "plugins/Q/js/tools/drawers.js",
 		"Q/expandable": "plugins/Q/js/tools/expandable.js",
 		"Q/filter": "plugins/Q/js/tools/filter.js",
-		"Q/rating": "plugins/Q/js/tools/rating.js"
+		"Q/rating": "plugins/Q/js/tools/rating.js",
+		"Q/paging": "plugins/Q/js/tools/paging.js"
 	});
 	
 	Q.Tool.jQuery({
