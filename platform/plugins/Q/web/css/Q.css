@@ -55,6 +55,16 @@ table { border-spacing:0; border-collapse:collapse; }
 	from { opacity: 0.5; }
 	to { opacity: 0.25; }
 }
+@keyframes Q_pop {
+	0% { transform: scale(1); -webkit-transform: scale(1); opacity: 1; }
+	50% { transform: scale(2); -webkit-transform: scale(2); opacity: 0.5; }
+	100% { transform: scale(1); -webkit-transform: scale(1); opacity: 1; }
+}
+@-webkit-keyframes Q_pop {
+	0% { -webkit-transform: scale(1); opacity: 1; }
+	50% { -webkit-transform: scale(2); opacity: 0.5; }
+	100% { -webkit-transform: scale(1); opacity: 1; }
+}
 
 /* Common Q classes */
 .Q_pagebreak { page-break-after: always; }
@@ -102,6 +112,9 @@ table { border-spacing:0; border-collapse:collapse; }
 	background: white;
 	animation: Q_removing 1s ease-in-out infinite alternate;
 	-webkit-animation: Q_removing 1s ease-in-out infinite alternate;
+}
+.Q_pop {
+	animation: Q_pop 1s ease-in-out 0s 0.7;
 }
 
 .Q_clear{ clear: both; }

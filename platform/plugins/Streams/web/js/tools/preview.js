@@ -21,11 +21,11 @@
  *   it stops the process from continuing. However, if you want to go ahead and continue
  *   to call Q.Streams.create, you can pass here any extra fields for the stream, such
  *   as "title", "content", "attributes" (as JSON string), etc.
- *   @param {Object} [options.related] , Optional information to add a relation from the newly created stream to another one. Can include:
+ *   @param {Object} [options.related] , Optional information to add a relation from the newly created stream to another one. Usually set by a "Streams/related" tool. Can include:
  *   @param {String} [options.related.publisherId] the id of whoever is publishing the related stream
  *   @param {String} [options.related.streamName] the name of the related stream
  *   @param {Mixed} [options.related.type] the type of the relation
- *   @param {Object} [options.related] A hash with properties "publisherId" and "streamName", and usually "type" and "weight". Usually set by a "Streams/related" tool.
+ *   @param {Number} [options.related.weight] to override the weight of the relation
  *   @param {Boolean|Array} [options.editable=true] Set to false to avoid showing even authorized users an interface to replace the image or text. Or set to an array naming only certain fields, which the rendering method would hopefully recognize.
  *   @param {Boolean} [options.closeable=true] Set to false to avoid showing even authorized users an option to closeable (or close) this stream
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
