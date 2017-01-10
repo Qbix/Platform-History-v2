@@ -18,6 +18,8 @@ var Users = Q.Users;
  * @param {Object} [options.avatar={icon:80}] options for the child Users/avatar tools
  * @param {Object} [options.clickable=false] options for Q/clickable, if not false
  * @param {Number} [options.preload=0] how many pages (multiples of limit) to preload
+ * @param {Q.Event} [options.onRefresh] happens after the refresh method is called
+ * @param {Q.Event} [options.onLoadMore] happens when more users are loaded (including first time)
  */
 Q.Tool.define('Users/list', function () {
 	var tool = this;
@@ -47,6 +49,7 @@ Q.Tool.define('Users/list', function () {
 		icon: 80
 	},
 	onRefresh: new Q.Event(),
+	onLoadMore: new Q.Event(),
 	clickable: false
 }, {
 	/**
@@ -56,6 +59,7 @@ Q.Tool.define('Users/list', function () {
 		Q.removeElement(this.element.children || this.element.childNodes);
 		this.loaded = 0;
 		this.loadMore(callback);
+		Q.handle(this.state.onRefresh, this);
 	},
 	/**
 	 * Load more user avatars.
@@ -66,12 +70,14 @@ Q.Tool.define('Users/list', function () {
 		var state = tool.state;
 		tool.loading = true;
 		var l = Math.min(this.loaded + state.limit, state.userIds.length);
+		var avatars = [], elements = [];
 		for (var i=this.loaded; i<l; ++i) {
-			tool.element.appendChild(
-				Q.Tool.setUpElement('div', 'Users/avatar', Q.extend({}, state.avatar, {
-					userId: state.userIds[i]
-				}), null, tool.prefix)
-			);
+			var element = Q.Tool.setUpElement('div', 'Users/avatar', 
+			Q.extend({}, state.avatar, {
+				userId: state.userIds[i]
+			}), null, tool.prefix);
+			tool.element.appendChild(element);
+			elements.push(element);
 		}
 		var count = l - this.loaded;
 		this.loaded = l;
@@ -81,9 +87,11 @@ Q.Tool.define('Users/list', function () {
 				if (state.clickable === true) {
 					state.clickable = {};
 				}
-				tool.forEachChild('Users/avatar', function () {
-					var $te = $(this.element);
-					this.state.onRefresh.add(function () {
+				Q.each(elements, function () {
+					var $te = $(this);
+					var avatar = this.Q.tool;
+					avatars.push(avatar)
+					avatar.state.onRefresh.add(function () {
 						if ($te.closest('html').length) {
 							return;
 						}
@@ -92,7 +100,8 @@ Q.Tool.define('Users/list', function () {
 						});
 					}, tool);
 				});
-				Q.handle(callback);
+				Q.handle(callback, tool);
+				Q.handle(state.onLoadMore, tool, [avatars, elements]);
 			}
 		});
 		return count;
