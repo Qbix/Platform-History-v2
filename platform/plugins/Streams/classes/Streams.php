@@ -2696,6 +2696,7 @@ abstract class Streams extends Base_Streams
 			'userId' => $asUserId
 		))->ignoreCache()->fetchDbRows(null, null, 'streamName');
 		$streamNamesUpdate = array();
+		$streamNamesMissing = array();
 		$updateCounts = array();
 		$state = 'left';
 		foreach ($streamNames as $sn) {
