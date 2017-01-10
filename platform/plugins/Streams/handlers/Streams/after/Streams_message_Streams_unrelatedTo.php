@@ -53,6 +53,6 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 		}
 	}
 	$c->relatedTo = Q::json_encode($relatedTo);
-	$c->save();
+	$c->save(false, true);
 	// End database transaction
 }

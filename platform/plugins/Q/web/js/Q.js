@@ -1644,7 +1644,7 @@ Q.take = function _Q_take(source, fields) {
  * @static
  * @method shuffle
  * @param {Array} arr
- *  The array taht gets passed here is shuffled in place
+ *  The array that gets passed here is shuffled in place
  */
 Q.shuffle = function _Q_shuffle( arr ) {
 	var i = arr.length;
