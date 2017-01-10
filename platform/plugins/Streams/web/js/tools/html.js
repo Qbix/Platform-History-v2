@@ -245,15 +245,6 @@ Q.Tool.define("Streams/html", function (options) {
 			}, {messages: true});
 		}, state.related);
 	}
-	
-	function onSave() {
-		if (state.creatable && state.creatable.preprocess) {
-			Q.handle(state.creatable.preprocess, this, [_editor, tool, evt]);
-		} else {
-			_editor();
-		}
-		return false;
-	}
 },
 
 {
