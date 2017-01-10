@@ -51,6 +51,6 @@ function Streams_after_Streams_message_Streams_updateRelateTo($params)
 		$relatedTo[$type] = $rt;
 	}
 	$c->relatedTo = Q::json_encode($relatedTo);
-	$c->save();
+	$c->save(false, true);
 	// End database transaction
 }
