@@ -105,11 +105,6 @@ Q.Tool.define('Users/list', function () {
 			}
 		});
 		return count;
-	},
-	Q: {
-		onInit: function () {
-
-		}
 	}
 });
 
