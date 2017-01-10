@@ -14,6 +14,7 @@
  *   @param {Boolean} [options.showTitle=true] Whether to display the title of the image stream
  *   @param {Boolean} [options.updateTitle=false] Whether to update the title to reflect the file name
  *   of an image
+ *   @param {Boolean} [options.dontSetSize=false] If true, shows the image in its natural size instead of using preview.state.imagepicker.showSize
  *   @param {Object} [options.templates] Under the keys "views", "edit" and "create" you can override options for Q.Template.render .
  *     @param {Object} [options.templates.view]
  *       @param {String} [options.templates.view.name='Streams/image/preview/view']
