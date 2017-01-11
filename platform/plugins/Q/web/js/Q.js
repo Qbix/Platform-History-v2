@@ -11155,6 +11155,20 @@ Q.onInit.add(function () {
 		validatorConf.messageClass = 'Q_error_message';
 		validatorConf.position = 'bottom left';
 		validatorConf.offset = [0, 0];
+		validatorConf.onFail = function (event, errors) {
+			setTimeout(function () {
+				Q.each(errors, function () {
+					var $message = this.input.data('msg.el');
+					if ($message) {
+						this.input.parents().each(function () {
+							if ($(this).siblings().filter($message).length) {
+								$message.css('z-index', $(this).css('z-index') + 1);
+							}
+						});
+					}
+				});
+			}, 0);
+		}
 	}
 	// end of jQuery Tools configuration
 	
