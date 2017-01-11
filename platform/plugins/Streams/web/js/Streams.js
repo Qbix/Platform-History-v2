@@ -1430,52 +1430,35 @@ Sp.fileUrl = function() {
 /**
  * Get all stream attributes
  * 
- * @method getAll
+ * @method getAllAttributes
  * @param {Boolean} usePending
  * @return {Object}
  */
-Sp.getAll = function _Stream_prototype_getAll (usePending) {
+Sp.getAllAttributes = function _Stream_prototype_getAllAttributes (usePending) {
 	return usePending ? this.pendingAttributes : this.attributes;
 };
 
 /**
- * Alias of Streams.Stream.prototype.getAll, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAllAttributes
- */
-Sp.getAllAttributes = Sp.getAll;
-
-/**
  * Get the value of an attribute
  * 
- * @method get
+ * @method getAttribute
  * @param {String} attributeName the name of the attribute to get
  * @param {Boolean} usePending if true, and there is a value pending to be saved, get that instead
  * @return {Mixed}
  */
-Sp.get = function _Stream_prototype_get (attributeName, usePending) {
-	var attr = this.getAll(usePending);
+Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePending) {
+	var attr = this.getAllAttributes(usePending);
 	return attr[attributeName];
 };
 
 /**
- * Alias of Streams.Stream.prototype.get, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAttribute
- * @param {String} attributeName
- */
-Sp.getAttribute = Sp.get;
-
-/**
  * Set the value of an attribute, pending to be saved to the server with the stream
  * 
- * @method set
+ * @method setAttribute
  * @param {String} attributeName
  * @param {Mixed} value
  */
-Sp.set = function _Stream_prototype_set (attributeName, value) {
+Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value) {
 	if (this.pendingAttributes === this.attributes) {
 		this.pendingAttributes = Q.copy(this.attributes); // copy on write
 	}
@@ -1490,22 +1473,12 @@ Sp.set = function _Stream_prototype_set (attributeName, value) {
 };
 
 /**
- * Alias of Streams.Stream.prototype.set, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method setAttribute
- * @param {String} attributeName
- * @param {Mixed} value
- */
-Sp.setAttribute = Sp.set;
-
-/**
  * Remove an attribute from the stream, pending to be saved to the server
  * 
- * @method clear
+ * @method clearAttribute
  * @param {String} attributeName
  */
-Sp.clear = function _Stream_prototype_clear (attributeName) {
+Sp.clearAttribute = function _Stream_prototype_clearAttribute (attributeName) {
 	if (this.pendingAttributes === this.attributes) {
 		this.pendingAttributes = Q.copy(this.attributes); // copy on write
 	}
@@ -1518,16 +1491,6 @@ Sp.clear = function _Stream_prototype_clear (attributeName) {
 	}
 	this.pendingFields.attributes = JSON.stringify(this.pendingAttributes);
 };
-
-/**
- * Alias of Streams.Stream.prototype.clear, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method setAttribute
- * @param {String} attributeName
- * @param {Mixed} value
- */
-Sp.clearAttribute = Sp.clear;
 
 /**
  * @method getAllPermissions
@@ -2498,10 +2461,10 @@ var Mp = Message.prototype;
 /**
  * Get all the instructions from a message.
  * 
- * @method getAll
+ * @method getAllInstructions
  * @return {Object}
  */
-Mp.getAll = function _Message_prototype_getAll () {
+Mp.getAllInstructions = function _Message_prototype_getAllInstructions () {
 	try {
 		return JSON.parse(this.instructions);
 	} catch (e) {
@@ -2510,33 +2473,15 @@ Mp.getAll = function _Message_prototype_getAll () {
 };
 
 /**
- * Alias of Streams.Message.prototype.getAll, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAllInstructions
- * @return {Object}
- */
-Mp.getAllInstructions = Mp.getAll;
-
-/**
  * Get the value of an instruction in the message
- * 
- * @method get
- * @param {String} instructionName
- */
-Mp.get = function _Message_prototype_get (instructionName) {
-	var instr = this.getAll();
-	return instr[instructionName];
-};
-
-/**
- * Alias of Streams.Message.prototype.get, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
  * 
  * @method getInstruction
  * @param {String} instructionName
  */
-Mp.getInstruction = Mp.get;
+Mp.getInstruction = function _Message_prototype_getInstruction (instructionName) {
+	var instr = this.getAllInstructions();
+	return instr[instructionName];
+};
 
 /**
  * Get one or more messages, which may result in batch requests to the server.
@@ -2882,10 +2827,10 @@ var Pp = Participant.prototype;
 /**
  * Get all extra attributes
  * 
- * @method getAll
+ * @method getAllExtras
  * @return {Object}
  */
-Pp.getAll = function _Participant_prototype_getAll () {
+Pp.getAllExtras = function _Participant_prototype_getAllExtras () {
 	try {
 		return JSON.parse(this.extra);
 	} catch (e) {
@@ -2894,34 +2839,16 @@ Pp.getAll = function _Participant_prototype_getAll () {
 };
 
 /**
- * Alias of Streams.Participant.prototype.getAll, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAllExtras
- * @return {Object}
- */
-Pp.getAllExtras = Pp.getAll;
-
-/**
  * Get the value of an extra
  * 
- * @method get
+ * @method getExtra
  * @param {String} extraName the name of the extra to get
  * @return {Mixed}
  */
-Pp.get = function _Participant_prototype_get (extraName) {
-	var attr = this.getAll();
+Pp.getExtra = function _Participant_prototype_get (extraName) {
+	var attr = this.getAllExtras();
 	return attr[extraName];
 };
-
-/**
- * Alias of Streams.Participant.prototype.get, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getExtra
- * @param {String} extraName
- */
-Pp.getExtra = Pp.get;
 
 /**
  * Constructs an avatar from fields, which are typically returned from the server.
@@ -3411,7 +3338,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		updated = {}, cleared = [];
 		
 		// events about cleared attributes
-		var streamAttributes = stream.getAll();
+		var streamAttributes = stream.getAllAttributes();
 		for (k in streamAttributes) {
 			if (k in attributes) {
 				continue;
