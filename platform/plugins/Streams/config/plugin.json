@@ -33,7 +33,8 @@
 			"Users/setLoggedInUser": ["Streams/after/Users_setLoggedInUser"],
 			"Streams/message/Streams/relatedTo": ["Streams/after/Streams_message_Streams_relatedTo"],
 			"Streams/message/Streams/unrelatedTo": ["Streams/after/Streams_message_Streams_unrelatedTo"],
-			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"]
+			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
+			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_stream_save_Streams_greeting"]
 		},
 		"routes": {
 			"plugins/Streams/:action": {"module": "Streams"},
