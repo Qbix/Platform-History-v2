@@ -50,7 +50,11 @@ Q.text = {
 			"500": "Internal server error",
 			"404": "Not found: {{url}}",
 			"0": "Request interrupted"
-		}
+		},
+		"months": [
+			'January', 'February', 'March', 'April', 'May', 'June',
+			'July', 'August', 'September', 'October', 'November', 'December'
+		]
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
 
