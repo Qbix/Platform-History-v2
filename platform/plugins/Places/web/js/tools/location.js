@@ -313,7 +313,7 @@ Q.Tool.define("Places/location", function (options) {
 
 Q.Template.set('Places/location', 
 	'<div class="Places_location_container Places_location_checking">'
-		+ 'I\'m interested in things taking place within'
+		+ 'I\'m interested in things taking place within '
 		+ '<select name="miles" class="Places_location_miles">'
 			+ '{{#each miles}}'
 				+ '{{option @key this ../defaultMiles}}'
