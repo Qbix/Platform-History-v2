@@ -1351,7 +1351,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	if (options && options.messages) {
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
-		result = Message.wait(publisherId, streamName, -1, function (err1, ordinals) {
+		result = Message.wait(publisherId, streamName, -1, function (ordinals) {
 			Q.Streams.get(publisherId, streamName, function (err2) {
 				callback && callback.apply(this, [err1 || err2, ordinals]);
 			});
