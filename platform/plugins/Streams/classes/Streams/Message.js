@@ -123,11 +123,11 @@ Mp.getAll = function _Message_prototype_getAll () {
 /**
  * Get the value of an instruction in the message
  * 
- * @method get
+ * @method getInstruction
  * @param {String} instructionName
  */
-Mp.get = function _Message_prototype_get (instructionName) {
-	var instr = this.getAll();
+Mp.getInstruction = function _Message_prototype_get (instructionName) {
+	var instr = this.getAllInstructions();
 	return instr[instructionName];
 };
 
@@ -243,7 +243,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		communityName: Users.communityName(),
 		stream: stream,
 		message: this,
-		instructions: this.getAll(),
+		instructions: this.getAllInstructions(),
 		avatar: avatar,
 		config: Q.Config.getAll()
 	};

@@ -50,7 +50,11 @@ Q.text = {
 			"500": "Internal server error",
 			"404": "Not found: {{url}}",
 			"0": "Request interrupted"
-		}
+		},
+		"months": [
+			'January', 'February', 'March', 'April', 'May', 'June',
+			'July', 'August', 'September', 'October', 'November', 'December'
+		]
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
 
@@ -11155,6 +11159,20 @@ Q.onInit.add(function () {
 		validatorConf.messageClass = 'Q_error_message';
 		validatorConf.position = 'bottom left';
 		validatorConf.offset = [0, 0];
+		validatorConf.onFail = function (event, errors) {
+			setTimeout(function () {
+				Q.each(errors, function () {
+					var $message = this.input.data('msg.el');
+					if ($message) {
+						this.input.parents().each(function () {
+							if ($(this).siblings().filter($message).length) {
+								$message.css('z-index', $(this).css('z-index') + 1);
+							}
+						});
+					}
+				});
+			}, 0);
+		}
 	}
 	// end of jQuery Tools configuration
 	

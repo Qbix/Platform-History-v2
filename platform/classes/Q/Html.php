@@ -317,7 +317,7 @@ class Q_Html
 		if (!isset($attributes))
 			$attributes = array();	
 		if (empty($ids))
-			$ids = 'options'.mt_rand(100, 1000000);
+			$ids = null;
 
 		$i = 0;
 		$html_parts = array();
@@ -329,10 +329,14 @@ class Q_Html
 						$id = $ids . '_' . $i;
 					} else if (is_array($ids)) {
 						$id = isset($ids[$k]) ? $ids[$k] : reset($ids) . '_' . $i;
+					} else {
+						$id = null;
 					}
 					$attributes2 = self::copyAttributes($attributes, $k);
 					$attributes2['value'] = $k;
-					$attributes2['id'] = $id;
+					if (isset($id)) {
+						$attributes2['id'] = $id;
+					}
 					if (is_array($selected) and array_key_exists($k, $selected)) {
 						$attributes2['selected'] = 'selected';
 					} else if ("$k" === "$selected") {
@@ -347,10 +351,14 @@ class Q_Html
 					$id = $ids . '_' . $i;
 				} else if (is_array($ids)) {
 					$id = isset($ids[$key]) ? $ids[$key] : reset($ids) . '_' . $i;
+				} else {
+					$id = null;
 				}
 				$attributes2 = self::copyAttributes($attributes, $key);
 				$attributes2['value'] = $key;
-				$attributes2['id'] = $id;
+				if (isset($id)) {
+					$attributes2['id'] = $id;
+				}
 				if (is_array($selected) and array_key_exists($key, $selected)) {
 					$attributes2['selected'] = 'selected';
 				} else if ("$key" === "$selected") {
