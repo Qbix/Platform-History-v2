@@ -97,7 +97,7 @@ function _Streams_file_preview(options, preview) {
 		}
 		// render a template
 		var f = state.template && state.template.fields;
-		var size = stream.get('Q.file.size') || stream.get('file.size');
+		var size = stream.getAttribute('Q.file.size') || stream.getAttribute('file.size');
 		var fields = Q.extend({}, state.templates.edit.fields, f, {
 			alt: stream.fields.title,
 			title: stream.fields.title,
