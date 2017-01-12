@@ -1465,22 +1465,16 @@ Sp.get = function _Stream_prototype_get (fieldName, usePending) {
  * @throws {Q.Error}
  */
 Sp.set = function _Stream_prototype_set (fieldName, value) {
-	var p = this.fields.publisherId;
-	var n = this.fields.name;
+	var t = this.fields.type;
 	Q.handle(
-		Q.getObject([p, n], _beforeSetHandlers),
+		Q.getObject([t, fieldName], _beforeSetHandlers),
 		this,
-		[fieldName, value]
+		[value]
 	);
 	Q.handle(
-		Q.getObject([p, ''], _beforeSetHandlers),
+		Q.getObject([t, ''], _beforeSetHandlers),
 		this,
-		[fieldName, value]
-	);
-	Q.handle(
-		Q.getObject(['', n], _beforeSetHandlers),
-		this,
-		[fieldName, value]
+		[value]
 	);
 	if (this.pendingFields === this.fields) {
 		this.pendingFields = Q.copy(this.fields); // copy on write
@@ -1527,22 +1521,16 @@ Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePen
  * @param {Mixed} value
  */
 Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value) {
-	var p = this.fields.publisherId;
-	var n = this.fields.name;
+	var t = this.fields.type;
 	Q.handle(
-		Q.getObject([p, n], _beforeSetAttributeHandlers),
+		Q.getObject([t, attributeName], _beforeSetAttributeHandlers),
 		this,
-		[attributeName, value]
+		[value]
 	);
 	Q.handle(
-		Q.getObject([p, ''], _beforeSetAttributeHandlers),
+		Q.getObject([t, ''], _beforeSetAttributeHandlers),
 		this,
-		[attributeName, value]
-	);
-	Q.handle(
-		Q.getObject(['', n], _beforeSetAttributeHandlers),
-		this,
-		[attributes, value]
+		[value]
 	);
 	if (this.pendingAttributes === this.attributes) {
 		this.pendingAttributes = Q.copy(this.attributes); // copy on write
@@ -1777,8 +1765,8 @@ Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""
  * Have the hooks throw a Q.Error on validation errors.
  * @event beforeSet
  * @static
- * @param {String} [publisherId] id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream whose field is being set
+ * @param {String} streamType type of the stream
+ * @param {String} [attributeName] name of the field being set
  */
 Stream.beforeSet = Q.Event.factory(_beforeSetHandlers, ["", ""]);
 
@@ -1787,8 +1775,8 @@ Stream.beforeSet = Q.Event.factory(_beforeSetHandlers, ["", ""]);
  * Have the hooks throw a Q.Error on validation errors.
  * @event beforeSet
  * @static
- * @param {String} [publisherId] id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream whose field is being set
+ * @param {String} streamType type of the stream
+ * @param {String} [attributeName] name of the attribute being set
  */
 Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""]);
 
