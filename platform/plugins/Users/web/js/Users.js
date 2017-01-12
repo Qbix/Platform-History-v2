@@ -1093,6 +1093,11 @@ function login_callback(err, response) {
 									$('<button class="Q_button Q_main_button" />')
 										.html(Q.text.Users.login.resendClose)
 										.click(function () {
+											$('form', login_setupDialog.dialog)
+											.each(function() {
+												var v = $(this).data('validator');
+												if (v) v.reset();
+											});
 											login_setupDialog.dialog.data('Q/dialog').close();		
 										})
 								)
