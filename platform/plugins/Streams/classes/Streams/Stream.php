@@ -1498,16 +1498,17 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Fetch messages of the stream.
 	 * @method getMessages
-	 * @param {array} [options=array()] An array of options determining how messages will be fetched, which can include:
-	 *   "min" => Minimum ordinal of the message to select from (inclusive). Defaults to minimum ordinal of existing messages (if any).
-	 *   "max" => Maximum ordinal of the message to select to (inclusive). Defaults to maximum ordinal of existing messages (if any).
+	 * @param {array} [$options=array()] An array of options determining how messages will be fetched, which can include:
+	 * @param {integer} [options.min] Minimum ordinal of the message to select from (inclusive). Defaults to minimum ordinal of existing messages (if any).
+	 * @param {integer} [options.max] Maximum ordinal of the message to select to (inclusive). Defaults to maximum ordinal of existing messages (if any).
 	 *   Can also be negative, then the value will be substracted from maximum number of existing messages and +1 will be added
 	 *   to guarantee that $max = -1 means highest message ordinal.
-	 *   "limit" => Number of the messages to be selected. Defaults to 1000.
-	 *   "ascending" => Sorting of fetched messages by ordinal. If true, sorting is ascending, if false - descending.
+	 * @param {integer} [options.limit=100] Number of the messages to be selected.
+	 * @param {integer} [options.ascending] Sorting of fetched messages by ordinal. If true, sorting is ascending, if false - descending.
 	 *   Defaults to true, but in case if 'min' option not given and only 'max' and 'limit' are given, we assuming
 	 *   fetching in reverse order, so 'ascending' will default to false.
-	 *   "type" => Optional string specifying the particular type of messages to get
+	 * @param {integer} [options.type] Optional string specifying the particular type of messages to get
+	 * @param {boolean} [$options.skipLimiting=false] Pass true here to not cut the limit off by the getMessagesLimit from config. It's here to protect against excessively large queries.
 	 */
 	function getMessages($options)
 	{
@@ -1542,8 +1543,9 @@ class Streams_Stream extends Base_Streams_Stream
 			// if 'max' is negative, substract value from existing maximum
 			$options['max'] = $max + $options['max'] + 1;
 		}
-		if (empty($options['limit'])) {
-			$options['limit'] = self::getConfigField($this->type, 'getMessagesLimit', 100);
+		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
+		if (empty($options['skipLimiting'])) {
+			$limit = max($limit, self::getConfigField($this->type, 'getMessagesLimit', 100));
 		}
 		
 		if ($options['min'] > $options['max']) {
@@ -1554,7 +1556,7 @@ class Streams_Stream extends Base_Streams_Stream
 			'ordinal >=' => $options['min'],
 			'ordinal <=' => $options['max']
 		));
-		$q->limit($options['limit']);
+		$q->limit($limit);
 		$q->orderBy('ordinal', isset($options['ascending']) ? $options['ascending'] : $ascending);
 		return $q->fetchDbRows(null, '', 'ordinal');
 	}
@@ -1564,10 +1566,11 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @method getParticipants
 	 * @param {array} [$options=array()] An array of options determining how messages will be fetched, which can include:
 	 * @param {string} [$options.state] One of "invited", "participating", "left"
-	 * @param {string} [$options.limit] Number of the participants to be selected. Defaults to 1000.
-	 * @param {string} [$options.offset] Number of the messages to be selected. Defaults to 1000.
+	 * @param {string} [$options.limit=1000] Number of the participants to be selected.
+	 * @param {string} [$options.offset=0] Number of the messages to be selected.
 	 * @param {string} [$options.ascending] Sorting of fetched participants by insertedTime. If true, sorting is ascending, if false - descending. Defaults to false.
 	 * @param {string} [$options.type] Optional string specifying the particular type of messages to get
+	 * @param {boolean} [$options.skipLimiting=false] Pass true here to not cut the limit off by the getParticipantsLimit from config. It's here to protect against excessively large queries.
 	 */
 	function getParticipants($options)
 	{
@@ -1587,11 +1590,11 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$q = Streams_Participant::select('*')->where($criteria);
 		$ascending = false;
-		if (empty($options['limit'])) {
-			$options['limit'] = 1000;
-		}
-		$limit = isset($options['limit']) ? $options['limit'] : null;
+		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
+		if (empty($options['skipLimiting'])) {
+			$limit = max($limit, self::getConfigField($this->type, 'getParticipantsLimit', 100));
+		}
 		if (isset($limit)) {
 			$q->limit($options['limit'], $offset);
 		}
