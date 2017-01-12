@@ -201,6 +201,8 @@ var _socket = null;
 var _messageHandlers = {};
 var _constructHandlers = {};
 var _refreshHandlers = {};
+var _beforeSetHandlers = {};
+var _beforeSetAttributeHandlers = {};
 var _streamMessageHandlers = {};
 var _streamFieldChangedHandlers = {};
 var _streamUpdatedHandlers = {};
@@ -1341,6 +1343,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
 	if (!Q.isOnline()
 	|| (notRetained && !(options && options.evenIfNotRetained))) {
+		callback && callback.call(this, false);
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
 	}
@@ -1348,9 +1351,9 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	if (options && options.messages) {
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
-		result = Message.wait(publisherId, streamName, -1, function (err1, ordinals) {
-			Q.Streams.get(publisherId, streamName, function (err2) {
-				callback && callback.apply(this, [err1 || err2, ordinals]);
+		result = Message.wait(publisherId, streamName, -1, function (ordinals) {
+			Q.Streams.get(publisherId, streamName, function (err) {
+				callback && callback.apply(this, [err, ordinals]);
 			});
 		}, options);
 	}
@@ -1428,54 +1431,107 @@ Sp.fileUrl = function() {
 };
 
 /**
- * Get all stream attributes
+ * Get all stream fields
  * 
  * @method getAll
  * @param {Boolean} usePending
  * @return {Object}
  */
 Sp.getAll = function _Stream_prototype_getAll (usePending) {
+	return Q.copy(usePending ? this.pendingFields : this.fields);
+};
+
+/**
+ * Get the value of a field
+ * 
+ * @method get
+ * @param {String} fieldName the name of the field to get
+ * @param {Boolean} usePending if true, and there is a value pending to be saved, get that instead
+ * @return {Mixed}
+ */
+Sp.get = function _Stream_prototype_get (fieldName, usePending) {
+	return (fieldName in this.pendingFields)
+		? this.pendingFields[fieldName]
+		: this.fields[fieldName];
+};
+
+/**
+ * Set the value of a field, pending to be saved to the server with the stream
+ * May cause some validators to run and throw a validation exception on the value.
+ * 
+ * @method set
+ * @param {String} fieldName
+ * @param {Mixed} value
+ * @throws {Q.Error}
+ */
+Sp.set = function _Stream_prototype_set (fieldName, value) {
+	var t = this.fields.type;
+	Q.handle(
+		Q.getObject([t, fieldName], _beforeSetHandlers),
+		this,
+		[value]
+	);
+	Q.handle(
+		Q.getObject([t, ''], _beforeSetHandlers),
+		this,
+		[value]
+	);
+	if (this.pendingFields === this.fields) {
+		this.pendingFields = Q.copy(this.fields); // copy on write
+	}
+	if (typeof fieldName === 'string') {
+		this.pendingFields[fieldName] = value;
+	} else {
+		for (var k in fieldName) {
+			this.pendingFields[k] = fieldName[k];
+		}
+	}
+};
+
+/**
+ * Get all stream attributes
+ * 
+ * @method getAllAttributes
+ * @param {Boolean} usePending
+ * @return {Object}
+ */
+Sp.getAllAttributes = function _Stream_prototype_getAllAttributes (usePending) {
 	return usePending ? this.pendingAttributes : this.attributes;
 };
 
 /**
- * Alias of Streams.Stream.prototype.getAll, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAllAttributes
- */
-Sp.getAllAttributes = Sp.getAll;
-
-/**
  * Get the value of an attribute
  * 
- * @method get
+ * @method getAttribute
  * @param {String} attributeName the name of the attribute to get
  * @param {Boolean} usePending if true, and there is a value pending to be saved, get that instead
  * @return {Mixed}
  */
-Sp.get = function _Stream_prototype_get (attributeName, usePending) {
-	var attr = this.getAll(usePending);
-	return attr[attributeName];
+Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePending) {
+	return (attributeName in this.pendingAttributes)
+		? this.pendingAttributes[attributeName]
+		: this.attributes[attributeName];
 };
-
-/**
- * Alias of Streams.Stream.prototype.get, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAttribute
- * @param {String} attributeName
- */
-Sp.getAttribute = Sp.get;
 
 /**
  * Set the value of an attribute, pending to be saved to the server with the stream
  * 
- * @method set
+ * @method setAttribute
  * @param {String} attributeName
  * @param {Mixed} value
  */
-Sp.set = function _Stream_prototype_set (attributeName, value) {
+Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value) {
+	var t = this.fields.type;
+	Q.handle(
+		Q.getObject([t, attributeName], _beforeSetAttributeHandlers),
+		this,
+		[value]
+	);
+	Q.handle(
+		Q.getObject([t, ''], _beforeSetAttributeHandlers),
+		this,
+		[value]
+	);
 	if (this.pendingAttributes === this.attributes) {
 		this.pendingAttributes = Q.copy(this.attributes); // copy on write
 	}
@@ -1490,22 +1546,12 @@ Sp.set = function _Stream_prototype_set (attributeName, value) {
 };
 
 /**
- * Alias of Streams.Stream.prototype.set, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method setAttribute
- * @param {String} attributeName
- * @param {Mixed} value
- */
-Sp.setAttribute = Sp.set;
-
-/**
  * Remove an attribute from the stream, pending to be saved to the server
  * 
- * @method clear
+ * @method clearAttribute
  * @param {String} attributeName
  */
-Sp.clear = function _Stream_prototype_clear (attributeName) {
+Sp.clearAttribute = function _Stream_prototype_clearAttribute (attributeName) {
 	if (this.pendingAttributes === this.attributes) {
 		this.pendingAttributes = Q.copy(this.attributes); // copy on write
 	}
@@ -1518,16 +1564,6 @@ Sp.clear = function _Stream_prototype_clear (attributeName) {
 	}
 	this.pendingFields.attributes = JSON.stringify(this.pendingAttributes);
 };
-
-/**
- * Alias of Streams.Stream.prototype.clear, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method setAttribute
- * @param {String} attributeName
- * @param {Mixed} value
- */
-Sp.clearAttribute = Sp.clear;
 
 /**
  * @method getAllPermissions
@@ -1704,6 +1740,149 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
 };
 
 /**
+ * Returns Q.Event which occurs on a message post event coming from socket.io
+ * Generic callbacks can be assigned by setting messageType to ""
+ * @event onMessage
+ * @static
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [messageType] type of the message, or its ordinal
+ */
+Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
+
+/**
+ * Returns Q.Event which occurs when fields of the stream officially changed
+ * @event onFieldChanged
+ * @static
+ * @param {String} [publisherId] id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [fieldName]  name of the field to listen for
+ */
+Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""]);
+
+/**
+ * Event factory for validation hooks that run when setting stream fields.
+ * Have the hooks throw a Q.Error on validation errors.
+ * @event beforeSet
+ * @static
+ * @param {String} streamType type of the stream
+ * @param {String} [attributeName] name of the field being set
+ */
+Stream.beforeSet = Q.Event.factory(_beforeSetHandlers, ["", ""]);
+
+/**
+ * Event factory for validation hooks that run when setting stream attributes.
+ * Have the hooks throw a Q.Error on validation errors.
+ * @event beforeSet
+ * @static
+ * @param {String} streamType type of the stream
+ * @param {String} [attributeName] name of the attribute being set
+ */
+Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when attributes of the stream officially updated
+ * @event onUpdated
+ * @static
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [attributeName] name of the attribute to listen for
+ */
+Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
+
+/**
+ * Returns Q.Event which occurs when attributes of the stream officially updated
+ * @event onUpdated
+ * @static
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [attributeName] name of the attribute to listen for
+ */
+Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
+
+/**
+ * Returns Q.Event which occurs when a stream has been closed
+ * (and perhaps has been marked for removal)
+ * @event onClosed
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when another stream has been related to this stream
+ * @event onRelatedTo
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when this stream was related to a category stream
+ * @event onRelatedFrom
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when another stream has been unrelated to this stream
+ * @event onUnrelatedTo
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when this stream was unrelated to a category stream
+ * @event onUnrelatedFrom
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onUnrelatedFrom = Q.Event.factory(_streamUnrelatedFromHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when another stream has been related to this stream
+ * @event onUpdatedRelateTo
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onUpdatedRelateTo = Q.Event.factory(_streamUpdatedRelateToHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs when this stream was related to a category stream
+ * @event onUpdatedRelateFrom
+ * @static
+ * @param {String} publisherId id of publisher which is publishing this stream
+ * @param {String} [streamName] name of this stream
+ */
+Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event which occurs after a stream is constructed on the client side
+ * Generic callbacks can be assigend by setting type or mtype or both to ""
+ * @event onConstruct
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being constructed on the client side
+ */
+Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event that should be used to update any representaitons of this stream
+ * @event onConstruct
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being refreshed
+ * @return {Q.Event}
+ */
+Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
+
+/**
  * Event factory for listening to messages based on type.
  * 
  * @event onMessage
@@ -1717,7 +1896,7 @@ Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
  * Event factory for listening to attributes based on name.
  * 
  * @event onUpdated
- * @param {String} attribute can be "" for all attributes
+ * @param {String} attribute can be "" to get triggered for all attributes
  */
 Sp.onUpdated = function _Stream_prototype_onUpdated (attribute) {
 	return Stream.onUpdated(this.fields.publisherId, this.fields.name, attribute);
@@ -1727,7 +1906,7 @@ Sp.onUpdated = function _Stream_prototype_onUpdated (attribute) {
  * Event factory for listening for changed stream fields based on name.
  * 
  * @event onFieldChanged
- * @param {String} field can be "" for all fields
+ * @param {String} field can be "" to get triggered for on all fields
  */
 Sp.onFieldChanged = function _Stream_prototype_onFieldChanged (field) {
 	return Stream.onFieldChanged(this.fields.publisherId, this.fields.name, field);
@@ -1740,6 +1919,26 @@ Sp.onFieldChanged = function _Stream_prototype_onFieldChanged (field) {
  */
 Sp.onClosed = function _Stream_prototype_onClosed () {
 	return Stream.onClosed(this.fields.publisherId, this.fields.name, field);
+};
+
+/**
+ * Event factory for validation hooks that run when setting stream fields.
+ * Have the hooks throw a Q.Error on validation errors.
+ * 
+ * @event beforeSet
+ */
+Sp.beforeSet = function _Stream_prototype_onSet () {
+	return Stream.beforeSet(this.fields.publisherId, this.fields.name);
+};
+
+/**
+ * Event factory for validation hooks that run when setting stream attributes
+ * Have the hooks throw a Q.Error on validation errors.
+ * 
+ * @event beforeSetAttribute
+ */
+Sp.beforeSetAttribute = function _Stream_prototype_onSetAttribute () {
+	return Stream.beforeSetAttribute(this.fields.publisherId, this.fields.name);
 };
 
 /**
@@ -2037,129 +2236,6 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
 Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPublisherId, fromStreamName, relationType, callback) {
 	return Streams.unrelate(fromPublisherId, fromStreamName, relationType, this.fields.publisherId, this.fields.name, callback);
 };
-
-/**
- * Returns Q.Event which occurs on a message post event coming from socket.io
- * Generic callbacks can be assigned by setting messageType to ""
- * @event onMessage
- * @static
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [messageType] type of the message, or its ordinal
- */
-Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
-
-/**
- * Returns Q.Event which occurs when fields of the stream officially changed
- * @event onFieldChanged
- * @static
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [fieldName]  name of the field to listen for
- */
-Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""]);
-
-/**
- * Returns Q.Event which occurs when attributes of the stream officially updated
- * @event onUpdated
- * @static
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [attributeName] name of the attribute to listen for
- */
-Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
-
-/**
- * Returns Q.Event which occurs when attributes of the stream officially updated
- * @event onUpdated
- * @static
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [attributeName] name of the attribute to listen for
- */
-Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
-
-/**
- * Returns Q.Event which occurs when a stream has been closed
- * (and perhaps has been marked for removal)
- * @event onClosed
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs when another stream has been related to this stream
- * @event onRelatedTo
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs when this stream was related to a category stream
- * @event onRelatedFrom
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs when another stream has been unrelated to this stream
- * @event onUnrelatedTo
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs when this stream was unrelated to a category stream
- * @event onUnrelatedFrom
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onUnrelatedFrom = Q.Event.factory(_streamUnrelatedFromHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs when another stream has been related to this stream
- * @event onUpdatedRelateTo
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onUpdatedRelateTo = Q.Event.factory(_streamUpdatedRelateToHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs when this stream was related to a category stream
- * @event onUpdatedRelateFrom
- * @static
- * @param {String} publisherId id of publisher which is publishing this stream
- * @param {String} [streamName] name of this stream
- */
-Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, ["", ""]);
-
-/**
- * Returns Q.Event which occurs after a stream is constructed on the client side
- * Generic callbacks can be assigend by setting type or mtype or both to ""
- * @event onConstruct
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which is being constructed on the client side
- */
-Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
-
-/**
- * Returns Q.Event that should be used to update any representaitons of this stream
- * @event onConstruct
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which is being refreshed
- * @return {Q.Event}
- */
-Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
 
 /**
  * Join a stream as a participant, so messages start arriving in real time via sockets.
@@ -2498,10 +2574,10 @@ var Mp = Message.prototype;
 /**
  * Get all the instructions from a message.
  * 
- * @method getAll
+ * @method getAllInstructions
  * @return {Object}
  */
-Mp.getAll = function _Message_prototype_getAll () {
+Mp.getAllInstructions = function _Message_prototype_getAllInstructions () {
 	try {
 		return JSON.parse(this.instructions);
 	} catch (e) {
@@ -2510,33 +2586,15 @@ Mp.getAll = function _Message_prototype_getAll () {
 };
 
 /**
- * Alias of Streams.Message.prototype.getAll, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAllInstructions
- * @return {Object}
- */
-Mp.getAllInstructions = Mp.getAll;
-
-/**
  * Get the value of an instruction in the message
- * 
- * @method get
- * @param {String} instructionName
- */
-Mp.get = function _Message_prototype_get (instructionName) {
-	var instr = this.getAll();
-	return instr[instructionName];
-};
-
-/**
- * Alias of Streams.Message.prototype.get, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
  * 
  * @method getInstruction
  * @param {String} instructionName
  */
-Mp.getInstruction = Mp.get;
+Mp.getInstruction = function _Message_prototype_getInstruction (instructionName) {
+	var instr = this.getAllInstructions();
+	return instr[instructionName];
+};
 
 /**
  * Get one or more messages, which may result in batch requests to the server.
@@ -2882,10 +2940,10 @@ var Pp = Participant.prototype;
 /**
  * Get all extra attributes
  * 
- * @method getAll
+ * @method getAllExtras
  * @return {Object}
  */
-Pp.getAll = function _Participant_prototype_getAll () {
+Pp.getAllExtras = function _Participant_prototype_getAllExtras () {
 	try {
 		return JSON.parse(this.extra);
 	} catch (e) {
@@ -2894,34 +2952,16 @@ Pp.getAll = function _Participant_prototype_getAll () {
 };
 
 /**
- * Alias of Streams.Participant.prototype.getAll, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getAllExtras
- * @return {Object}
- */
-Pp.getAllExtras = Pp.getAll;
-
-/**
  * Get the value of an extra
  * 
- * @method get
+ * @method getExtra
  * @param {String} extraName the name of the extra to get
  * @return {Mixed}
  */
-Pp.get = function _Participant_prototype_get (extraName) {
-	var attr = this.getAll();
+Pp.getExtra = function _Participant_prototype_get (extraName) {
+	var attr = this.getAllExtras();
 	return attr[extraName];
 };
-
-/**
- * Alias of Streams.Participant.prototype.get, mostly for templates shared between
- * PHP and JS contexts to be able to call the same function.
- * 
- * @method getExtra
- * @param {String} extraName
- */
-Pp.getExtra = Pp.get;
 
 /**
  * Constructs an avatar from fields, which are typically returned from the server.
@@ -3411,7 +3451,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		updated = {}, cleared = [];
 		
 		// events about cleared attributes
-		var streamAttributes = stream.getAll();
+		var streamAttributes = stream.getAllAttributes();
 		for (k in streamAttributes) {
 			if (k in attributes) {
 				continue;

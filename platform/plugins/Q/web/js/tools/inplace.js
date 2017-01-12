@@ -15,6 +15,7 @@
  *  @param {String} [options.method='put'] The HTTP verb to use.
  *  @param {String} [options.type='textarea'] The type of the input field. Can be "textarea", "text", or "select"
  *  @param {String} [options.options={}] If the type is "select", then this would be an object of {value: optionTitle} pairs
+ *  @param {Boolean=true} [options.editing] Whether to start out in editing mode
  *  @param {Boolean=true} [options.editOnClick] Whether to enter editing mode when clicking on the text.
  *  @param {Boolean} [options.selectOnEdit=true] Whether to select everything in the input field when entering edit mode.
  *  @param {Boolean=true} [options.showEditButtons=false] Set to true to force showing the edit buttons on touchscreens

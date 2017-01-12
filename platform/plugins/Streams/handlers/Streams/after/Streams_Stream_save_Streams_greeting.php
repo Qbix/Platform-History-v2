@@ -16,7 +16,7 @@ function Streams_after_Streams_Stream_save_Streams_greeting($params)
 	$p->streamName = "Streams/experience/main";
 	$p->userId = $s->publisherId;
 	if ($p->retrieve()) {
-		$p->setExtra('Streams/greeting', $s->content);
+		$p->setExtra('Streams/greeting', substr($s->content, 0, 500));
 		$p->save();
 	}
 }
