@@ -1545,7 +1545,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
 		if (empty($options['skipLimiting'])) {
-			$limit = max($limit, self::getConfigField($this->type, 'getMessagesLimit', 100));
+			$limit = min($limit, self::getConfigField($this->type, 'getMessagesLimit', 100));
 		}
 		
 		if ($options['min'] > $options['max']) {
@@ -1593,7 +1593,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
 		if (empty($options['skipLimiting'])) {
-			$limit = max($limit, self::getConfigField($this->type, 'getParticipantsLimit', 100));
+			$limit = min($limit, self::getConfigField($this->type, 'getParticipantsLimit', 100));
 		}
 		if (isset($limit)) {
 			$q->limit($options['limit'], $offset);
