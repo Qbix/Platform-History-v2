@@ -100,7 +100,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 					_setContent(attributes[k]);
 				} else {
 					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
-						_setContent(this.get(k));
+						_setContent(this.getAttribute(k));
 					});
 				}
 			}, tool);
@@ -128,7 +128,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 					Q.Streams.Message.wait(state.publisherId, state.streamName, -1, null);
 				}}
 			});
-			var value = (state.attribute ? stream.get(state.attribute) : stream.fields[state.field]) || "";
+			var value = (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field]) || "";
 			switch (state.inplaceType) {
 				case 'text':
 					ipo.staticHtml = String(value).encodeHTML();
