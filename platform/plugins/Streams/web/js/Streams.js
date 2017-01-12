@@ -3943,10 +3943,10 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					updateParticipantCache('participating', message.get('prevState'), usingCached);
+					updateParticipantCache('participating', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/leave':
-					updateParticipantCache('left', message.get('prevState'), usingCached);
+					updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
