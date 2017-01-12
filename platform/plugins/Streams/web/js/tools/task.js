@@ -42,7 +42,7 @@ Q.Tool.define("Streams/task", function(options) {
 		var state = tool.state;
 		var stream = tool.stream;
 		if (!stream) return;
-		var progress = (attributes && attributes.progress) || stream.get('progress');
+		var progress = (attributes && attributes.progress) || stream.getAttribute('progress');
 		tool.$('.Streams_task_progress_bar').css('width', (progress*100)+'%');
 	}
 });

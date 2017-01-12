@@ -625,7 +625,7 @@ Streams.create = function (fields, callback, related, options) {
 					publisherId: related.publisherId,
 					streamName: related.streamName,
 					type: related.type,
-					weight: m.get('weight')
+					weight: m.getInstruction('weight')
 				};
 			}
 			callback && callback.call(stream, null, stream, extra, data.slots);
@@ -1424,7 +1424,7 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * @return {String} the url
  */
 Sp.fileUrl = function() {
-	var url = this.get('Q.file.url') || this.get('file.url');
+	var url = this.getAttribute('Q.file.url') || this.getAttribute('file.url');
 	return url.interpolate({
 		"baseUrl": Q.info.baseUrl
 	});
@@ -3469,7 +3469,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		
 		// events about updated attributes
 		for (k in attributes) {
-			if (JSON.stringify(attributes[k]) == JSON.stringify(stream.get(k))) {
+			if (JSON.stringify(attributes[k]) == JSON.stringify(stream.getAttribute(k))) {
 				continue;
 			}
 			obj = {};
@@ -3943,10 +3943,10 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					updateParticipantCache('participating', message.get('prevState'), usingCached);
+					updateParticipantCache('participating', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/leave':
-					updateParticipantCache('left', message.get('prevState'), usingCached);
+					updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/joined':
 					if (stream.fields.name==="Streams/participating") {
