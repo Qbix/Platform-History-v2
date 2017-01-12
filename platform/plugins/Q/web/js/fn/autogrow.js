@@ -66,7 +66,7 @@ function _Q_autogrow(o) {
 		var visible = $t.is(":visible");
 		if (visible) {
 			$t.hide();
-			$c.width($t.outerWidth());
+			$c.width($t[0].style.width);
 			$t.show();
 		}
 
@@ -230,10 +230,7 @@ function _surroundPlaceholders() {
 	if (!$container.length || !$(this).is('textarea')) {
 		return;
 	}
-	$container.css({
-		width: 'auto',
-		height: 'auto'
-	});
+	$container.css('height', 'auto');
 	var $placeholder = $container.find('.Q_placeholder');
 	var h = $placeholder[0].style.height;
 	$placeholder[0].style.height = 'auto';
