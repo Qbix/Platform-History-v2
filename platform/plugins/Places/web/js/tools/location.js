@@ -61,9 +61,9 @@ Q.Tool.define("Places/location", function (options) {
 		Streams.Stream
 		.onRefresh(publisherId, streamName)
 		.set(function () {
-			var miles = this.get('miles');
-			var latitude = this.get('latitude');
-			var longitude = this.get('longitude');
+			var miles = this.getAttribute('miles');
+			var latitude = this.getAttribute('latitude');
+			var longitude = this.getAttribute('longitude');
 			if (miles) {
 				tool.$('.Places_location_miles').val(miles);
 			};
@@ -75,9 +75,9 @@ Q.Tool.define("Places/location", function (options) {
 		.get(publisherId, streamName, function (err) {
 			if (!err) {
 				var stream = state.stream = this;
-				var miles = stream.get('miles');
-				var latitude = stream.get('latitude');
-				var longitude = stream.get('longitude');
+				var miles = stream.getAttribute('miles');
+				var latitude = stream.getAttribute('latitude');
+				var longitude = stream.getAttribute('longitude');
 				if (miles) {
 					tool.$('.Places_location_miles').val(miles);
 				}
@@ -203,9 +203,9 @@ Q.Tool.define("Places/location", function (options) {
 				return alert(msg);
 			}
 			Streams.Stream.refresh(publisherId, streamName, function () {
-				var miles = this.get('miles');
-				var latitude = this.get('latitude');
-				var longitude = this.get('longitude');
+				var miles = this.getAttribute('miles');
+				var latitude = this.getAttribute('latitude');
+				var longitude = this.getAttribute('longitude');
 				if (miles) {
 					tool.$('.Places_location_miles').val(miles);
 				};

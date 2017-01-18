@@ -98,6 +98,7 @@
 					}
 				},
 				"getMessagesLimit": 100,
+				"getParticipantsLimit": 100,
 				"messages": {
 					"": {
 						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""

@@ -46,6 +46,7 @@ function _Streams_participants(options) {
 
 {
 	maxShow: 10,
+	maxLoad: 100,
 	max: null,
 	filter: function () { },
 	showSummary: true,
@@ -225,7 +226,7 @@ function _Streams_participants(options) {
 				Q.handle(state.onRefresh, tool, []);
 			}
 			
-		}, {participants: 100});
+		}, {participants: state.maxLoad});
 		
 		function adjustInterval() {
 			if (state.showSummary) {
