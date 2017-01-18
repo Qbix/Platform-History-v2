@@ -141,7 +141,7 @@ var Assets = Q.Assets = Q.plugins.Assets = {
 					var params = Q.extend({
 						name: o.name,
 						description: plan.fields.title,
-						amount: plan.get('amount')
+						amount: plan.getAttribute('amount')
 					}, o);
 					params.amount *= 100;
 					StripeCheckout.configure(Q.extend({
