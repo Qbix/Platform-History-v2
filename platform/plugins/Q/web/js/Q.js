@@ -4406,11 +4406,12 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
  * @static
  * @method byId
  * @param {String} id
- * @param {String} name optional name of the tool, useful if more than one tool was activated on the same element
+ * @param {String} name optionally specify the name of the tool, useful if more than one tool was activated on the same element. It will be run through Q.normalize().
  * @return {Q.Tool|null|undefined}
  */
 Q.Tool.byId = function _Q_Tool_byId(id, name) {
 	if (name) {
+		name = Q.normalized(name);
 		return Q.Tool.active[id] ? Q.Tool.active[id][name] : null;
 	}
 	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
