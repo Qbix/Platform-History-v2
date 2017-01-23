@@ -159,12 +159,14 @@ function _Users_listen_ios (options, server) {
 		key: path.join(Q.app.LOCAL_DIR, 'Users', 'certs', appName, s, 'key.pem'),
 		production: !sandbox
 	};
-	Q.each(['cert', 'key', 'ca'], function (i, k) {
+	var files = ['cert', 'key', 'ca'];
+	for (var i=0; i<files.length; ++i) {
+		var k = files[i];
 		if (!fs.existsSync(o[k])) {
-			Q.log("WARNING: APN connection not enabled due to missing " + k + " at " + o[k]);
+			console.log("WARNING: APN connection not enabled due to missing " + k + " at " + o[k] + "\n");
 			return;
 		}
-	});
+	}
 	var passphrase = Q.Config.get([appName, "native", "ios", "passphrase"], null);
 	if (passphrase) {
 		o.passphase = passphase;
