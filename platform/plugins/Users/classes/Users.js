@@ -147,6 +147,7 @@ Users.apn = {
 };
 
 function _Users_listen_ios (options, server) {
+	var fs = require('fs');
 	var apn = require('apn');
 	var path = require('path');
 	var appName = Q.app.name;
@@ -158,6 +159,12 @@ function _Users_listen_ios (options, server) {
 		key: path.join(Q.app.LOCAL_DIR, 'Users', 'certs', appName, s, 'key.pem'),
 		production: !sandbox
 	};
+	Q.each(['cert', 'key', 'ca'], function (i, k) {
+		if (!fs.existsSync(o[k])) {
+			Q.log("WARNING: APN connection not enabled due to missing " + k + " at " + o[k]);
+			return;
+		}
+	});
 	var passphrase = Q.Config.get([appName, "native", "ios", "passphrase"], null);
 	if (passphrase) {
 		o.passphase = passphase;
