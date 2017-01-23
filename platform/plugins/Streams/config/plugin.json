@@ -172,14 +172,6 @@
 			"Streams/text/mobileNumber": {"create": true, "edit": true},
 			"Streams/date": {"create": true, "edit": true},
 			"Streams/number": {"create": true, "edit": true},
-			"Streams/html": {
-				"description": "HTML fragment",
-				"create": true, 
-				"edit": true,
-				"defaults": {
-					"title": "Untitled HTML"
-				}
-			},
 			"Streams/image": {
 				"description": "visual image",
 				"create": true,
