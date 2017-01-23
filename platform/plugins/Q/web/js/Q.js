@@ -4411,7 +4411,7 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
  */
 Q.Tool.byId = function _Q_Tool_byId(id, name) {
 	if (name) {
-		name = Q.normalized(name);
+		name = Q.normalize(name);
 		return Q.Tool.active[id] ? Q.Tool.active[id][name] : null;
 	}
 	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
