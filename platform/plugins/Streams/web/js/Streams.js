@@ -2817,12 +2817,12 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			// which may cause confusion in some visual representations
 			// until things settle down on the screen
 			ordinal = parseInt(ordinal);
-			Q.each(messages, Q.queue(function (ordinal, message) {
+			Q.each(messages, function (ordinal, message) {
 				if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
 					return; // it was already processed
 				}
 				Users.Socket.onEvent('Streams/post').handle(message, messages);
-			}, 0), {ascending: true, numeric: true});
+			}, {ascending: true, numeric: true});
 			
 			// if any new messages were encountered, updateMessageCache removed all the cached
 			// results where max < 0, so future calls to Streams.Message.get with max < 0 will
