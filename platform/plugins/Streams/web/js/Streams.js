@@ -1041,7 +1041,7 @@ Streams.invite.options = {
  * @method related
  * @param {String} publisherId
  *  Publisher's user id
- * @param {String} name
+ * @param {String} streamName
  *	Name of the stream to/from which the others are related
  * @param relationType {String|null} the type of the relation
  * @param isCategory {boolean} defaults to false. If true, then gets streams related TO this stream.
@@ -1054,9 +1054,10 @@ Streams.invite.options = {
  *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
  *   @param {String} [options.prefix] optional prefix to filter the streams by
  *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
- *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream (ignores cache)
- *   @param {Mixed} [options.participants]  optional. Pass a limit here to fetch that many participants (ignores cache). Only honored if streamName is a string.
- *   @param {Boolean} [options.messages]
+ *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream and ignore the cache.
+ *   @param {Mixed} [options.participants]  Pass a limit here to fetch that many participants and ignore cache.
+ *   @param {Boolean} [options.messages] Pass a limit here to fetch that many recent messages and ignore cache.
+ *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
  *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
  *   @param {Object} [options."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  * @param callback {function}
@@ -1080,7 +1081,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		callback = options;
 		options = {};
 	}
-	options = options || {};
+	options = Q.extend({
+		withParticipant: true
+	}, options);
 	var near = isCategory ? 'to' : 'from',
 		far = isCategory ? 'from' : 'to',
 		farPublisherId = far+'PublisherId',
@@ -1092,6 +1095,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	}
 	if (options.participants) {
 		slotNames.push('participants');
+	}
+	if (options.withParticipant) {
+		fields.withParticipant = true;
 	}
 	if (relationType) {
 		fields.type = relationType;
@@ -1221,7 +1227,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		streamName: streamName
 	}));
 	if (!socket) {
-		return false; // do not cache relations to/from this stream
+		// do not cache relations to/from this stream
+		// since they may come to be out of date
+		return false;
 	}
 };
 Streams.related.onError = new Q.Event();
@@ -4098,7 +4106,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.toPublisherId, instructions.toStreamName, 
-							null, { messages: true }
+							null, { messages: true, unlessSocket: true }
 						);
 					} else if (instructions.fromPublisherId) {
 						Streams.related.cache.removeEach(
@@ -4106,7 +4114,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.fromPublisherId, instructions.fromStreamName,
-							null, { messages: true }
+							null, { messages: true, unlessSocket: true }
 						);
 					}
 				}
