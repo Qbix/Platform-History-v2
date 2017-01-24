@@ -1356,7 +1356,8 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		return false;
 	}
 	var result = false;
-	if (options && options.messages) {
+	var o = options || {};
+	if (o.messages) {
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
 		result = Message.wait(publisherId, streamName, -1, function (ordinals) {
@@ -1371,7 +1372,17 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	});
 	var socket = Users.Socket.get(node);
 	if (result === false) {
-		if (socket && options && options.unlessSocket) {
+		var participant;
+		if (o.unlessSocket) {
+			Streams.get.cache.each([publisherId, streamName], function (key, info) {
+				var p = info.subject.participant;
+				if (p && p.state === 'participating') {
+					participant = p;
+					return false;
+				}
+			});
+		}
+		if (socket && participant) {
    			// We didn't even try to wait for messages
    			return false;
 		}
@@ -1381,13 +1392,13 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		Streams.get.force(publisherId, streamName, function (err, stream) {
 			if (!err) {
 				var ps = Streams.key(publisherId, streamName);
-				var changed = (options && options.changed) || {};
+				var changed = (o.changed) || {};
 				Stream.update(_retainedStreams[ps], this.fields, changed || {});
 				_retainedStreams[ps] = this;
 			}
 			if (callback) {
 				var params = [err, stream];
-				if (options && options.extra) {
+				if (o.extra) {
 					params.concat(extra);
 				}
 				callback.apply(this, params);
@@ -2768,8 +2779,8 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	});
 	var socket = Users.Socket.get(node);
 	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
+		var participant;
 		if (o.unlessSocket) {
-			var participant;
 			Streams.get.cache.each([publisherId, streamName], function (key, info) {
 				var p = info.subject.participant;
 				if (p && p.state === 'participating') {
@@ -3073,14 +3084,15 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var ln = this.lastName;
 	var u = this.username;
 	var fn2, ln2, u2, f2;
+	var o = options || {};
 	fallback = fallback || 'Someone';
-	if (options && (options.escape || options.html)) {
+	if (o.escape || o.html) {
 		fn = fn.encodeHTML();
 		ln = ln.encodeHTML();
 		u = u.encodeHTML();
 		fallback = fallback.encodeHTML();
 	}
-	if (options && options.html) {
+	if (o.html) {
 		fn2 = '<span class="Streams_firstName">'+fn+'</span>';
 		ln2 = '<span class="Streams_lastName">'+ln+'</span>';
 		u2 = '<span class="Streams_username">'+u+'</span>';
@@ -3091,8 +3103,8 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		u2 = u;
 		f2 = fallback;
 	}
-	if (options && options.show) {
-		var show = options.show.split('');
+	if (o.show) {
+		var show = o.show.split('');
 		var parts = [];
 		for (var i=0, l=show.length; i<l; ++i) {
 			var s = show[i];
@@ -3100,7 +3112,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		}
 		return parts.join(' ');
 	}
-	if (options && options.short) {
+	if (o.short) {
 		return fn ? fn2 : (u ? u2 : f2);
 	} else if (fn && ln) {
 		return fn2 + ' ' + ln2;

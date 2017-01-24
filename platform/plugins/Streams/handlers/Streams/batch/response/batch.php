@@ -39,7 +39,9 @@ function Streams_batch_response_batch()
 		}
 		$streams[$publisherId] = array_merge(
 			$streams[$publisherId],
-			Streams::fetch($userId, $publisherId, $names, '*')
+			Streams::fetch($userId, $publisherId, $names, '*', array(
+				'withParticipant' => true
+			))
 		);
 	}
 	
