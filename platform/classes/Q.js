@@ -2813,10 +2813,9 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
  * @param {Object} fields
  *  Optional fields to append to the querystring.
  *  NOTE: only handles scalar values in the object.
- * @param {Object} options
- *  A hash of options, including:
- *  'baseUrl': A string to replace the default base url
- *  'cacheBust': Number of milliseconds before a new cachebuster is appended
+ * @param {Object} [options] A hash of options, including:
+ * @param {String} [options.baseUrl] A string to replace the default base url
+ * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what;

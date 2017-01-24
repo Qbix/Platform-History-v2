@@ -5804,10 +5804,9 @@ Q.load = function _Q_load(plugins, callback, options) {
  *  Optional fields to append to the querystring.
  *  Fields containing null and undefined are skipped.
  *  NOTE: only handles scalar values in the object.
- * @param {Object} options
- *  A hash of options, including:
- *  'baseUrl': A string to replace the default base url
- *  'cacheBust': Number of milliseconds before a new cachebuster is appended
+ * @param {Object} [options] A hash of options, including:
+ * @param {String} [options.baseUrl] A string to replace the default base url
+ * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
@@ -5858,9 +5857,9 @@ Q.url.options = {
  * @param {Object} fields
  *  Optional fields to append to the querystring.
  *  NOTE: only handles scalar values in the object.
- * @param {Object} options
- *  A hash of options, including:
- *  'baseUrl': A string to replace the default base url
+ * @param {Object} [options] A hash of options, including:
+ * @param {String} [options.baseUrl] A string to replace the default base url
+ * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
  */
 Q.action = function _Q_action(uri, fields, options) {
 	if (uri.isUrl()) {
@@ -5989,14 +5988,14 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
  *  (unless parse is false, in which case the raw content is passed as a String),
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
- *  A hash of options, to be passed to Q.request
+ *  A hash of options, to be passed to Q.request and Q.action (see their options).
  */
 Q.req = function _Q_req(uri, slotNames, callback, options) {
 	if (typeof options === 'string') {
 		options = {'method': options};
 	}
 	var args = arguments, index = (typeof arguments[0] === 'string') ? 0 : 1;
-	args[index] = Q.action(args[index]);
+	args[index] = Q.action(args[index], null, options);
 	Q.request.apply(this, args);
 };
 
