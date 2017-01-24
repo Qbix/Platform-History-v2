@@ -4106,7 +4106,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.fromPublisherId, instructions.fromStreamName,
-							null, { messages: true }
+							null, { messages: true, unlessSocket: true }
 						);
 					}
 				}
