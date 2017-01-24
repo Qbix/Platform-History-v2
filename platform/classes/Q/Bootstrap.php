@@ -277,6 +277,10 @@ class Q_Bootstrap
 		}
 		set_time_limit(Q_Config::get('Q', 'internal', 'phpTimeout', 30));
 		self::setDefaultTimezone();
+		
+		Q::event('Q/configure', compact(
+			'app_tree', 'config_files', 'script_files'
+		), 'after');
 	}
 	
 	static function alertAboutLocalConfiguration()
