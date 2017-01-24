@@ -872,7 +872,7 @@ Streams.refresh = function (callback, options) {
 	}
 	Streams.refresh.lastTime = now;
 	var p = new Q.Pipe(Object.keys(_retainedByStream), callback);
-	Streams.refresh.beforeRequest.handle(callback, options);
+	Streams.refresh.beforeRequest.handle(callback, Streams, options);
 	Q.each(_retainedByStream, function (ps) {
 		var parts = ps.split("\t");
 		Stream.refresh(parts[0], parts[1], p.fill(ps), options);
@@ -4098,7 +4098,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.toPublisherId, instructions.toStreamName, 
-							null, { messages: true, unlessSocket: true }
+							null, { messages: true }
 						);
 					} else if (instructions.fromPublisherId) {
 						Streams.related.cache.removeEach(
@@ -4106,7 +4106,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.fromPublisherId, instructions.fromStreamName,
-							null, { messages: true, unlessSocket: true }
+							null, { messages: true }
 						);
 					}
 				}
