@@ -297,8 +297,9 @@ class Streams_Message extends Base_Streams_Message
 				$suffix = is_numeric($count) ? " + $count" : '';
 				Streams_Stream::update()
 					->set(array(
-						'messageCount' => new Db_Expression('messageCount'.$suffix))
-					)->where(array(
+						'messageCount' => new Db_Expression('messageCount'.$suffix),
+						'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP")
+					))->where(array(
 						'publisherId' => $publisherId,
 						'name' => $streamNames
 					))->commit()
