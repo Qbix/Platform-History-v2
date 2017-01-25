@@ -181,26 +181,6 @@ class Q_Config
 		$cs = Q_Config::get('Q', 'internal', 'configServer', false);
 		if ($cs && isset($cs['url'])) {
 			$url = $cs['url'];
-			/*
-			// !!! REMOVE IN PRODUCTION
-			// if this code is commented and Q/internal/configServer on config server is set
-			// script will run into infinite loop querying itself for config
-			// this code is used for testing if config server is the same as querying server
-			if (is_array($url)) {
-				// ['URL', (Optional) 'IP', bool]
-				$host = $url[1];
-				$port = parse_url($url[0], PHP_URL_PORT);
-			} else {
-				// $url is a string
-				$host = parse_url($url, PHP_URL_HOST);
-				$port = parse_url($url, PHP_URL_PORT);
-			}
-			if (isset($_SERVER['SERVER_ADDR']) && ($host === $_SERVER['SERVER_NAME'] || $host === $_SERVER['SERVER_ADDR'])) {
-				//if ($port == $_SERVER['SERVER_PORT']) TODO: why $_SERVER['SERVER_PORT'] is always 80???
-					$cs = false;
-			}
-			// !!! END REMOVE IN PRODUCTION
-			*/
 		} else $cs = false;
 		return $cs;
 	}
@@ -226,23 +206,24 @@ class Q_Config
 			}
 
 			// request config server
-			if (!empty($cs['url'])) {
-				if (!empty($cs['internal'])) {
-					// query "internal" Qbix server
-					$return = Q_Utils::queryInternal(
-						'Q/Config',
-						array('Q/method' => 'get', 'filename' => $filename),
-						$cs['url']);
-				} else {
-					// query "external" Qbix server
-					$return = Q_Utils::queryExternal(
-						'Q/Config',
-						array('Q/method' => 'get', 'filename' => $filename),
-						$cs['url']);
-				}
-				Q_Cache::set("Q_Config\t$filename", $return);
-				return $return;
+			if (empty($cs['url'])) {
+				return;
 			}
+			if (!empty($cs['internal'])) {
+				// query "internal" Qbix server
+				$return = Q_Utils::queryInternal(
+					'Q/Config',
+					array('Q/method' => 'get', 'filename' => $filename),
+					$cs['url']);
+			} else {
+				// query "external" Qbix server
+				$return = Q_Utils::queryExternal(
+					'Q/Config',
+					array('Q/method' => 'get', 'filename' => $filename),
+					$cs['url']);
+			}
+			Q_Cache::set("Q_Config\t$filename", $return);
+			return $return;
 		}
 		// take local file, return empty tree if file does not exists
 		$tree = new Q_Tree();

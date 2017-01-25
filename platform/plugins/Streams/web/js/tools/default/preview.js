@@ -43,11 +43,11 @@ function _Streams_default_preview(options, preview) {
 	templates: {
 		view: {
 			name: 'Streams/default/preview/view',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		},
 		edit: {
 			name: 'Streams/default/preview/edit',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
 	},
 	onInvoke: new Q.Event()

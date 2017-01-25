@@ -41,11 +41,11 @@ function _Streams_category_preview(options, preview) {
 	templates: {
 		view: {
 			name: 'Streams/category/preview/view',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		},
 		edit: {
 			name: 'Streams/category/preview/edit',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
 	},
 	dialog: {},

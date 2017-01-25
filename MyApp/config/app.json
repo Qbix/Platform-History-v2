@@ -21,7 +21,7 @@
 			"Q/responseExtras": ["MyApp/before/Q_responseExtras"]
 		},
 		"handlersAfterEvent": {
-			
+			"Q/configure": ["MyApp/after/Q_configure"]
 		},
 		"routes": {
 			"": {"module": "MyApp", "action": "welcome"},

@@ -375,11 +375,13 @@
 
 .Streams_inplace_tool { display: inline-block; position: relative; }
 
-/* streams basic tool */
+/* Streams basic tool */
 
 .streams_basic_overlay { font-size: 14px; width: 500px; }
 .streams_basic_overlay td { vertical-align: middle; }
 .streams_basic_overlay .q_field_title { width: 150px; text-align: right; padding-right: 10px; }
+
+/* Streams preview tool */
 
 .Streams_preview { height: auto; }
 .Streams_preview_create { cursor: pointer; }
@@ -389,10 +391,14 @@
 .Streams_preview_contents * { max-width: 100%; }
 .Streams_preview_contents .Q_inplace_tool_static,
 .Streams_preview_contents .Q_inplace_tool_static_container
-.Streams_preview_contents>.Streams_preview_title { 
-	overflow: hidden; text-overflow: ellipsis; white-space: nowrap; 
+.Streams_preview_contents>.Streams_preview_title {
+	padding: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; 
 }
-.Streams_preview h3 { margin: 0; padding: 0 0 0 10px; line-height: 50px; font-size: 30px; }
+.Streams_preview .Streams_preview_title { margin: 0; padding: 0px; line-height: 24px; font-size: 18px; font-weight: normal; }
+.Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
+.Streams_image_preview_tool { text-align: center; display: inline-block; }
+.Streams_preview_tool .Streams_preview_icon,
+.Streams_preview_tool .Streams_preview_add { margin-right: 3px; }
 
 .Streams_preview_icon,
 .Streams_preview_add { width: 50px; height: 50px; }
@@ -627,11 +633,6 @@
 }
 
 .Streams_interests_unlisted { font-size: 11px; padding: 5px; }
-
-.Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
-.Streams_image_preview_tool { text-align: center; display: inline-block; }
-.Streams_preview_tool .Streams_preview_icon,
-.Streams_preview_tool .Streams_preview_add { margin-right: 10px; }
 
 .Streams_related_tool .Q_tabs_overflow .Q_inplace_tool_editbuttons { display: none !important; list-style-type: none; padding: 0; }
 

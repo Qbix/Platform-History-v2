@@ -158,7 +158,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	templates: {
 		create: {
 			name: 'Streams/preview/create',
-			fields: { alt: 'new', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'new', titleClass: '', titleTag: 'h3' }
 		}
 	}
 },

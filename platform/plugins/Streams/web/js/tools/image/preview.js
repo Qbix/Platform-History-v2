@@ -67,15 +67,15 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 	templates: {
 		view: {
 			name: 'Streams/image/preview/view',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		},
 		edit: {
 			name: 'Streams/image/preview/edit',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		},
 		create: {
 			name: 'Streams/image/preview/edit',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
 	}
 },

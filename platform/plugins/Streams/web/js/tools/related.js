@@ -136,9 +136,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		Q.Tool.remove($container.find('.Streams_related_composer'));
 		Q.Tool.remove($container.find('.Streams_related_stream'));
 		++state.refreshCount;
-		Q.Streams.refresh.beforeRequest.set(function () {
-			result.stream.refresh(null, {messages: true});
-		}, 'Streams/related');
 		
 		if (result.stream.testWriteLevel('relate')) {
 			Q.each(state.creatable, addComposer);
