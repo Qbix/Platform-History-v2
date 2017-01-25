@@ -219,6 +219,7 @@ var _retain = undefined;
 var _retainedByKey = {};
 var _retainedByStream = {};
 var _retainedStreams = {};
+var _retainedNodes = {};
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
@@ -307,17 +308,19 @@ function _connectSockets(refresh) {
 	if (!Users.loggedInUser) {
 		return false;
 	}
-	Streams.getParticipating(function (err, participating) {
-		Q.each(participating, function (i, p) {
-			Users.Socket.connect(Q.nodeUrl({
-				publisherId: p.publisherId,
-				streamName: p.streamName
-			}));
+	Streams.retainWith('Streams')
+	.get(Users.loggedInUser.id, 'Streams/participating', function () {
+		Q.each(_retainedByStream, function _connectRetainedNodes(ps) {
+			var stream = _retainedStreams[ps];
+			if (stream && stream.participant) {
+				var parts = ps.split("\t");
+				Users.Socket.connect(Q.nodeUrl({
+					publisherId: parts[0],
+					streamName: parts[1]
+				}));
+			}
 		});
 	});
-	Streams.retainWith('Streams').get(
-		Users.loggedInUser.id, 'Streams/participating'
-	);
 	if (refresh) {
 		Streams.refresh();
 	}
@@ -832,14 +835,19 @@ Streams.Dialogs = {
  * Returns streams that the current user is participating in
  * @static
  * @param {Function} callback
+ * @param {Object} [options] Options you can override
+ * @param {Number} [options.limit=1000] 
  * @method getParticipating
  */
-Streams.getParticipating = function(callback) {
+Streams.getParticipating = function(callback, options) {
 	if(!callback) return;
+	var options = Q.extend({
+		limit: 1000
+	}, options);
 	Q.req('Streams/participating', 'participating',
 	function (err, data) {
 		callback && callback(err, data && data.slots && data.slots.participating);
-	});
+	}, options);
 	_retain = undefined;
 };
 
@@ -872,7 +880,7 @@ Streams.refresh = function (callback, options) {
 	}
 	Streams.refresh.lastTime = now;
 	var p = new Q.Pipe(Object.keys(_retainedByStream), callback);
-	Streams.refresh.beforeRequest.handle(callback, options);
+	Streams.refresh.beforeRequest.handle(callback, Streams, options);
 	Q.each(_retainedByStream, function (ps) {
 		var parts = ps.split("\t");
 		Stream.refresh(parts[0], parts[1], p.fill(ps), options);
@@ -905,21 +913,38 @@ Streams.retainWith = function (key) {
 
 /**
  * Releases all retained streams under a given key. See Streams.retain()
+ * It also closes sockets corresponding to all the released streams,
+ * if they were the last streams to be retained on their respective nodes.
  * @static
  * @method release
  * @param {String} key
  */
 Streams.release = function (key) {
 	key = Q.calculateKey(key);
-	Q.each(_retainedByKey[key], function (ps, v) {
-		if (_retainedByStream[ps]) {
+	if (_retainedByKey[key]) {
+		for (var ps in _retainedByKey) {
+			if (!_retainedByStream[ps]) {
+				continue;
+			}
 			delete _retainedByStream[ps][key];
 			if (Q.isEmpty(_retainedByStream[ps])) {
 				delete(_retainedByStream[ps]);
 				delete(_retainedStreams[ps]);
 			}
+			var parts = ps.split("\t");
+			var nodeUrl = Q.nodeUrl({
+				publisherId: parts[0],
+				streamName: parts[1]
+			});
+			var hasNode = !Q.isEmpty(_retainedNodes[nodeUrl]);
+			delete _retainedNodes[nodeUrl][ps];
+			if (hasNode && Q.isEmpty(_retainedNodes[nodeUrl])) {
+				delete(_retainedNodes[nodeUrl]);
+				var socket = Q.Socket.get('Streams', nodeUrl);
+				socket && socket.disconnect();
+			}
 		}
-	});
+	}
 	delete _retainedByKey[key];
 };
 
@@ -929,7 +954,7 @@ Streams.release = function (key) {
  * @method invite
  * @param {String} publisherId The user id of the publisher of the stream 
  * @param {String} streamName The name of the stream you are inviting to
- * @param {String} options] More options that are passed to the API, which can include:
+ * @param {Object} [options] More options that are passed to the API, which can include:
  *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
@@ -1005,7 +1030,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						alert: 'Streams/followup/mobile/alert'
 					}, fields,
 					function (params) {
-						url = Q.Links.sms(params.text[1], o.identifier);
+						var url = Q.Links.sms(params.text[1], o.identifier);
 						if (params.alert[1]) {
 							alert(params.alert[1]);
 						}
@@ -1041,7 +1066,7 @@ Streams.invite.options = {
  * @method related
  * @param {String} publisherId
  *  Publisher's user id
- * @param {String} name
+ * @param {String} streamName
  *	Name of the stream to/from which the others are related
  * @param relationType {String|null} the type of the relation
  * @param isCategory {boolean} defaults to false. If true, then gets streams related TO this stream.
@@ -1054,9 +1079,10 @@ Streams.invite.options = {
  *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
  *   @param {String} [options.prefix] optional prefix to filter the streams by
  *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
- *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream (ignores cache)
- *   @param {Mixed} [options.participants]  optional. Pass a limit here to fetch that many participants (ignores cache). Only honored if streamName is a string.
- *   @param {Boolean} [options.messages]
+ *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream and ignore the cache.
+ *   @param {Mixed} [options.participants]  Pass a limit here to fetch that many participants and ignore cache.
+ *   @param {Boolean} [options.messages] Pass a limit here to fetch that many recent messages and ignore cache.
+ *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
  *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
  *   @param {Object} [options."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  * @param callback {function}
@@ -1080,7 +1106,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		callback = options;
 		options = {};
 	}
-	options = options || {};
+	options = Q.extend({
+		withParticipant: true
+	}, options);
 	var near = isCategory ? 'to' : 'from',
 		far = isCategory ? 'from' : 'to',
 		farPublisherId = far+'PublisherId',
@@ -1092,6 +1120,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	}
 	if (options.participants) {
 		slotNames.push('participants');
+	}
+	if (options.withParticipant) {
+		fields.withParticipant = true;
 	}
 	if (relationType) {
 		fields.type = relationType;
@@ -1216,12 +1247,15 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		}
 	}, { fields: fields, baseUrl: baseUrl });
 	_retain = undefined;
-	var socket = Users.Socket.get(Q.nodeUrl({
+	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
-	}));
+	})
+	var socket = Users.Socket.get('Streams', nodeUrl);
 	if (!socket) {
-		return false; // do not cache relations to/from this stream
+		// do not cache relations to/from this stream
+		// since they may come to be out of date
+		return false;
 	}
 };
 Streams.related.onError = new Q.Event();
@@ -1276,7 +1310,8 @@ Stream.define = Streams.define;
 /**
  * Call this function to retain a particular stream.
  * When a stream is retained, it is refreshed when Streams.refresh() or
- * stream.refresh() are called. You can release it with stream.release().
+ * stream.refresh() are called. You can release the stream with stream.release().
+ * This method also opens a socket to the stream's node, if one isn't already open.
  * 
  * @static
  * @method retain
@@ -1288,21 +1323,20 @@ Stream.define = Streams.define;
  */
 Stream.retain = function _Stream_retain (publisherId, streamName, key, callback) {
 	var ps = Streams.key(publisherId, streamName);
-	key = Q.calculateKey(key);
 	Streams.get(publisherId, streamName, function (err) {
 		if (err) {
 			_retainedStreams[ps] = null;
 		} else {
-			_retainedStreams[ps] = this;
-			Q.setObject([ps, key], true, _retainedByStream);
-			Q.setObject([key, ps], true, _retainedByKey);
+			this.retain(key);
 		}
 		Q.handle(callback, this, [err, this]);
 	});
 };
 
 /**
- * Releases a stream from being retained. See Streams.retain()
+ * Releases a stream from being retained. See Streams.Stream.retain()
+ * This method also closes a socket to the stream's node,
+ * if it was the last stream released on that node.
  * 
  * @static
  * @method release
@@ -1311,14 +1345,27 @@ Stream.retain = function _Stream_retain (publisherId, streamName, key, callback)
  */
 Stream.release = function _Stream_release (publisherId, streamName) {
 	var ps = Streams.key(publisherId, streamName);
-	Q.each(_retainedByStream[ps], function (key, v) {
-		if (_retainedByKey[key]) {
-			delete _retainedByKey[key][ps];
+	if (_retainedByStream[ps]) {
+		for (var key in _retainedByStream[ps]) {
+			if (_retainedByKey[key]) {
+				delete _retainedByKey[key][ps];
+			}
+			if (Q.isEmpty(_retainedByKey[key])) {
+				delete _retainedByKey[key];
+			}
+			var nodeUrl = Q.nodeUrl({
+				publisherId: publisherId,
+				streamName: streamName
+			});
+			var hasNode = !Q.isEmpty(_retainedNodes[nodeUrl]);
+			delete _retainedNodes[nodeUrl][ps];
+			if (hasNode && Q.isEmpty(_retainedNodes[nodeUrl])) {
+				delete(_retainedNodes[nodeUrl]);
+				var socket = Q.Socket.get('Streams', nodeUrl);
+				socket && socket.disconnect();
+			}
 		}
-		if (Q.isEmpty(_retainedByKey[key])) {
-			delete _retainedByKey[key];
-		}
-	});
+	}
 	delete _retainedByStream[ps];
 	delete _retainedStreams[ps];
 };
@@ -1348,7 +1395,8 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		return false;
 	}
 	var result = false;
-	if (options && options.messages) {
+	var o = options || {};
+	if (o.messages) {
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
 		result = Message.wait(publisherId, streamName, -1, function (ordinals) {
@@ -1357,13 +1405,23 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			});
 		}, options);
 	}
-	var node = Q.nodeUrl({
+	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Users.Socket.get(node);
+	var socket = Users.Socket.get('Streams', nodeUrl);
 	if (result === false) {
-		if (socket && options && options.unlessSocket) {
+		var participant;
+		if (o.unlessSocket) {
+			Streams.get.cache.each([publisherId, streamName], function (key, info) {
+				var p = info.subject.participant;
+				if (p && p.state === 'participating') {
+					participant = p;
+					return false;
+				}
+			});
+		}
+		if (socket && participant) {
    			// We didn't even try to wait for messages
    			return false;
 		}
@@ -1373,13 +1431,15 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		Streams.get.force(publisherId, streamName, function (err, stream) {
 			if (!err) {
 				var ps = Streams.key(publisherId, streamName);
-				var changed = (options && options.changed) || {};
-				Stream.update(_retainedStreams[ps], this.fields, changed || {});
-				_retainedStreams[ps] = this;
+				if (_retainedStreams[ps]) {
+					var changed = (o.changed) || {};
+					Stream.update(_retainedStreams[ps], this.fields, changed || {});
+					_retainedStreams[ps] = this;
+				}
 			}
 			if (callback) {
 				var params = [err, stream];
-				if (options && options.extra) {
+				if (o.extra) {
 					params.concat(extra);
 				}
 				callback.apply(this, params);
@@ -1696,9 +1756,21 @@ Sp.reopen = function _Stream_remove (callback) {
  * @return {Q.Streams.Stream}
  */
 Sp.retain = function _Stream_prototype_retain (key) {
-	var ps = Streams.key(this.fields.publisherId, this.fields.name);
+	var publisherId = this.fields.publisherId;
+	var streamName = this.fields.name;
+	var ps = Streams.key(publisherId, streamName);
 	key = Q.calculateKey(key);
 	_retainedStreams[ps] = this;
+	var nodeUrl = Q.nodeUrl({
+		publisherId: publisherId,
+		streamName: streamName
+	});
+	var stream = _retainedStreams[ps];
+	if (stream && stream.participant) {
+		Users.Socket.connect(nodeUrl, function () {
+			Q.setObject([nodeUrl, ps], true, _retainedNodes);	
+		});
+	}
 	Q.setObject([ps, key], true, _retainedByStream);
 	Q.setObject([key, ps], true, _retainedByKey);
 	return this;
@@ -1708,6 +1780,8 @@ Sp.retain = function _Stream_prototype_retain (key) {
  * Release the stream in the client retained under a certain key.
  * When the stream is released under all the keys it was retained under,
  * it is no longer refreshed during Streams.refresh()
+ * This method also closes a socket to the stream's node,
+ * if it was the last stream released on that node.
  * 
  * @method release
  * @return {Q.Streams.Stream}
@@ -2112,7 +2186,7 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *   @param {String} [fields.identifier] Required for now. An email address or mobile number to invite. Might not belong to an existing user yet.
  *   @required
  *   @param {String} [fields.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
- * @param {String} options] More options that are passed to the API, which can include:
+ * @param {Object} [options] More options that are passed to the API, which can include:
  *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
@@ -2754,14 +2828,14 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	}
 	var o = Q.extend({}, Message.wait.options, options);
 	var waiting = {};
-	var node = Q.nodeUrl({
+	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Users.Socket.get(node);
+	var socket = Users.Socket.get('Streams', nodeUrl);
 	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
+		var participant;
 		if (o.unlessSocket) {
-			var participant;
 			Streams.get.cache.each([publisherId, streamName], function (key, info) {
 				var p = info.subject.participant;
 				if (p && p.state === 'participating') {
@@ -2817,12 +2891,12 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			// which may cause confusion in some visual representations
 			// until things settle down on the screen
 			ordinal = parseInt(ordinal);
-			Q.each(messages, Q.queue(function (ordinal, message) {
+			Q.each(messages, function (ordinal, message) {
 				if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
 					return; // it was already processed
 				}
 				Users.Socket.onEvent('Streams/post').handle(message, messages);
-			}, 0), {ascending: true, numeric: true});
+			}, {ascending: true, numeric: true});
 			
 			// if any new messages were encountered, updateMessageCache removed all the cached
 			// results where max < 0, so future calls to Streams.Message.get with max < 0 will
@@ -3065,14 +3139,15 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var ln = this.lastName;
 	var u = this.username;
 	var fn2, ln2, u2, f2;
+	var o = options || {};
 	fallback = fallback || 'Someone';
-	if (options && (options.escape || options.html)) {
+	if (o.escape || o.html) {
 		fn = fn.encodeHTML();
 		ln = ln.encodeHTML();
 		u = u.encodeHTML();
 		fallback = fallback.encodeHTML();
 	}
-	if (options && options.html) {
+	if (o.html) {
 		fn2 = '<span class="Streams_firstName">'+fn+'</span>';
 		ln2 = '<span class="Streams_lastName">'+ln+'</span>';
 		u2 = '<span class="Streams_username">'+u+'</span>';
@@ -3083,8 +3158,8 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		u2 = u;
 		f2 = fallback;
 	}
-	if (options && options.show) {
-		var show = options.show.split('');
+	if (o.show) {
+		var show = o.show.split('');
 		var parts = [];
 		for (var i=0, l=show.length; i<l; ++i) {
 			var s = show[i];
@@ -3092,7 +3167,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		}
 		return parts.join(' ');
 	}
-	if (options && options.short) {
+	if (o.short) {
 		return fn ? fn2 : (u ? u2 : f2);
 	} else if (fn && ln) {
 		return fn2 + ' ' + ln2;
@@ -3949,30 +4024,10 @@ Q.onInit.add(function _Streams_onInit() {
 					updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/joined':
-					if (stream.fields.name==="Streams/participating") {
-						Users.Socket.connect(Q.nodeUrl({
-							publisherId: fields.publisherId,
-							streamName: fields.streamName
-						}, function () {
-							console.log('Listening to stream '
-								+fields.publisherId+", "+fields.streamName
-							);
-						}));
-					}
+					// Leave it to the user to retain this stream if they want
 					break;
 				case 'Streams/left':
-					if (stream.fields.name==="Streams/participating") {
-						node = Q.nodeUrl({
-							publisherId: fields.publisherId,
-							streamName: fields.streamName
-						});
-						var socket = Users.Socket.get(node);
-						if (socket) {
-							// TODO: only disconnect when you've left
-							// all the streams on this node
-							// socket.disconnect();
-						}
-					}
+					// Leave it to the user to release this stream if they want
 					break;
 				case 'Streams/changed':
 					Stream.update(stream, fields.changes, null);
@@ -4098,7 +4153,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.toPublisherId, instructions.toStreamName, 
-							null, { messages: true }
+							null, { messages: true, unlessSocket: true }
 						);
 					} else if (instructions.fromPublisherId) {
 						Streams.related.cache.removeEach(
@@ -4106,7 +4161,7 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 						Streams.Stream.refresh(
 							instructions.fromPublisherId, instructions.fromStreamName,
-							null, { messages: true }
+							null, { messages: true, unlessSocket: true }
 						);
 					}
 				}
@@ -4150,6 +4205,7 @@ function _clearCaches() {
 	_retainedByKey = {};
 	_retainedByStream = {};
 	_retainedStreams = {};
+	_retainedNodes = {};
 }
 
 function _scheduleUpdate() {

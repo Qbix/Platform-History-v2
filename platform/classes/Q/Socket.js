@@ -32,7 +32,7 @@ Socket.listen = function (options) {
 	options = options || {};
 	var server = Q.listen(options);
 	if (!server.attached.socket) {
-		var s = options.https ? 's' : '';
+		var s = !Q.isEmpty(options.https) ? 's' : '';
 		console.log("Starting socket server on http"+s+"://"+server.host+":"+server.port);
 		try {
 			server.attached.socket = new Q.Socket(server);

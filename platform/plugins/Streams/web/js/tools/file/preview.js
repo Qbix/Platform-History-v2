@@ -58,11 +58,11 @@ function _Streams_file_preview(options, preview) {
 	templates: {
 		view: {
 			name: 'Streams/file/preview/view',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		},
 		edit: {
 			name: 'Streams/file/preview/edit',
-			fields: { alt: 'icon', titleClass: '', titleTag: 'h2' }
+			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
 	}
 },

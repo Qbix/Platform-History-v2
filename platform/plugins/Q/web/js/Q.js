@@ -630,9 +630,9 @@ Elp.cssDimensions = function () {
 /**
  * Returns the first element in the chain of parent elements which supports scrolling
  * @method scrollingParent
- * @param {Element} element
+ * @param {Boolean} skipIfNotOverflowed
  */
-Elp.scrollingParent = function() {
+Elp.scrollingParent = function(skipIfNotOverflowed) {
 	var p = this;
 	while (p = p.parentNode) {
 		if (typeof p.computedStyle !== 'function') {
@@ -640,7 +640,9 @@ Elp.scrollingParent = function() {
 		}
 		var overflow = p.computedStyle().overflow || p.style.overflow;
 		if (overflow && ['hidden', 'visible'].indexOf(overflow) < 0) {
-			return p;
+			if (!skipIfNotOverflowed || p.clientHeight < p.scrollHeight) {
+				return p;
+			}
 		}
 	}
 	return document.documentElement;
@@ -4404,11 +4406,12 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
  * @static
  * @method byId
  * @param {String} id
- * @param {String} name optional name of the tool, useful if more than one tool was activated on the same element
+ * @param {String} name optionally specify the name of the tool, useful if more than one tool was activated on the same element. It will be run through Q.normalize().
  * @return {Q.Tool|null|undefined}
  */
 Q.Tool.byId = function _Q_Tool_byId(id, name) {
 	if (name) {
+		name = Q.normalize(name);
 		return Q.Tool.active[id] ? Q.Tool.active[id][name] : null;
 	}
 	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
@@ -5801,10 +5804,9 @@ Q.load = function _Q_load(plugins, callback, options) {
  *  Optional fields to append to the querystring.
  *  Fields containing null and undefined are skipped.
  *  NOTE: only handles scalar values in the object.
- * @param {Object} options
- *  A hash of options, including:
- *  'baseUrl': A string to replace the default base url
- *  'cacheBust': Number of milliseconds before a new cachebuster is appended
+ * @param {Object} [options] A hash of options, including:
+ * @param {String} [options.baseUrl] A string to replace the default base url
+ * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
@@ -5855,9 +5857,9 @@ Q.url.options = {
  * @param {Object} fields
  *  Optional fields to append to the querystring.
  *  NOTE: only handles scalar values in the object.
- * @param {Object} options
- *  A hash of options, including:
- *  'baseUrl': A string to replace the default base url
+ * @param {Object} [options] A hash of options, including:
+ * @param {String} [options.baseUrl] A string to replace the default base url
+ * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
  */
 Q.action = function _Q_action(uri, fields, options) {
 	if (uri.isUrl()) {
@@ -5986,14 +5988,14 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
  *  (unless parse is false, in which case the raw content is passed as a String),
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
- *  A hash of options, to be passed to Q.request
+ *  A hash of options, to be passed to Q.request and Q.action (see their options).
  */
 Q.req = function _Q_req(uri, slotNames, callback, options) {
 	if (typeof options === 'string') {
 		options = {'method': options};
 	}
 	var args = arguments, index = (typeof arguments[0] === 'string') ? 0 : 1;
-	args[index] = Q.action(args[index]);
+	args[index] = Q.action(args[index], null, options);
 	Q.request.apply(this, args);
 };
 
@@ -8395,7 +8397,9 @@ Q.Template.onError = new Q.Event(function (err) {
  * Render template taken from DOM or from file on server with partials
  * @static
  * @method render
- * @param {String} name The name of template. See Q.Template.load
+ * @param {String|Object} name The name of template (see Q.Template.load).
+ *   You can also pass an object of {key: name}, and then the callback receives
+ *   {key: arguments} of what the callback would get.
  * @param {Object} fields The fields to pass to the template when rendering it
  * @param {Array} [partials] Names of partials to load and use for rendering the template
  * @param {Function} [callback] a callback - receives (error) or (error, html)
@@ -8515,6 +8519,17 @@ Q.Socket.get = function _Q_Socket_get(ns, url) {
 		return _qsockets[ns];
 	}
 	return _qsockets[ns] && _qsockets[ns][url];
+};
+
+/**
+ * Returns all the sockets, whether connected or not.
+ * Note that a socket really disconnects when all the namespaces disconnect.
+ * @static
+ * @method getAll
+ * @return {Object} indexed by socket.io namespace, url
+ */
+Q.Socket.getAll = function _Q_Socket_all() {
+	return _qsockets;
 };
 
 function _connectSocketNS(ns, url, callback, callback2, force) {
@@ -10158,13 +10173,17 @@ Q.Pointer = {
 	 * @method cancelClick
 	 * @param {Q.Event} event Some mouse or touch event from the DOM
 	 * @param {Object} extraInfo Extra info to pass to onCancelClick
+	 * @param {boolean} [skipMask=false] Pass true here to skip showing
+	 *   the Q.click.mask for 300 milliseconds, which blocks any
+	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
 	 * @return {boolean}
 	 */
-	cancelClick: function (event, extraInfo) {
+	cancelClick: function (event, extraInfo, skipMask) {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
 		Q.Pointer.canceledClick = true;	
+		Q.Masks.show('Q.click.mask');
 	},
 	/**
 	 * Consistently obtains the element under pageX and pageY relative to document
@@ -10303,6 +10322,7 @@ function _Q_PointerStartHandler(e) {
 	Q.addEventListener(window, Q.Pointer.move, _onPointerMoveHandler, false, true);
 	Q.addEventListener(window, Q.Pointer.end, _onPointerEndHandler, false, true);
 	Q.addEventListener(window, Q.Pointer.cancel, _onPointerEndHandler, false, true);
+	Q.addEventListener(window, Q.Pointer.click, _onPointerClickHandler, false, true);
 	Q.handle(Q.Pointer.onStarted, this, arguments);
 	var screenX = Q.Pointer.getX(e) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(e) - Q.Pointer.scrollTop();
@@ -10340,7 +10360,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			toX: screenX,
 			toY: screenY,
 			comingFromPointerMovement: true
-		})) {
+		}, true)) {
 			_pos = false;
 		}
 	}
@@ -10420,11 +10440,19 @@ var _onPointerEndHandler = Q.Pointer.ended = function _onPointerEndHandler() {
 	Q.removeEventListener(window, Q.Pointer.move, _onPointerMoveHandler);
 	Q.removeEventListener(window, Q.Pointer.end, _onPointerEndHandler);
 	Q.removeEventListener(window, Q.Pointer.cancel, _onPointerEndHandler);
+	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
 	Q.handle(Q.Pointer.onEnded, this, arguments);
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
 };
+
+function _onPointerClickHandler(e) {
+	if (Q.Pointer.canceledClick) {
+		e.preventDefault();
+	}
+	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
+}
 
 function _onPointerBlurHandler() {
 	Q.Pointer.blurring = true;
@@ -10924,6 +10952,7 @@ Q.Masks = {
 	 * @param {String} [options.className=''] CSS class name for the mask to style it properly.
 	 * @param {number} [options.fadeIn=0] Milliseconds it should take to fade in the mask
 	 * @param {number} [options.fadeOut=0] Milliseconds it should take to fade out the mask.
+	 * @param {number} [options.duration] If set, hide the mask after this many milliseconds.
 	 * @param {number} [options.zIndex] You can override the mask's default z-index here
 	 * @param {String} [options.html=''] Any HTML to insert into the mask.
 	 * @param {HTMLElement} [options.shouldCover=null] Optional element in the DOM to cover.
@@ -10985,6 +11014,11 @@ Q.Masks = {
 		}
 		++mask.counter;
 		Q.Masks.update(key);
+		if (mask.duration) {
+			setTimeout(function () {
+				Q.Masks.hide(key);
+			}, mask.duration);
+		}
 	},
 	/**
 	 * Hides the mask by given key. If mask with given key doesn't exist, fails silently.
@@ -11075,6 +11109,7 @@ Q.Masks = {
 };
 
 Q.Masks.options = {
+	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 300 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
 	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }

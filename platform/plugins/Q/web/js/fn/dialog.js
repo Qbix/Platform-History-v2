@@ -144,7 +144,7 @@ function _Q_overlay(o) {
 					Q.Masks.show('Q.screen.mask', { 
 						fadeTime: o.fadeTime,
 						className: 'Q_dialog_mask' + mcn,
-						zIndex: $this.css('z-index') - 1
+						zIndex: topZ - 1
 					});
 				}
 			}
@@ -203,6 +203,7 @@ function _Q_overlay(o) {
 			}
 			if (e) $.Event(e).preventDefault();
 			Q.Pointer.stopHints($this[0]);
+			Q.Pointer.cancelClick();
 		}
 	});
 

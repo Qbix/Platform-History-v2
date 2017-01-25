@@ -356,7 +356,7 @@ abstract class Streams extends Base_Streams
 				->fetchDbRows(null, '', 'name')
 			: array();
 		
-		if (!empty($options['withParticipant'])) {
+		if (!empty($options['withParticipant']) and $asUserId) {
 			$prows = Streams_Participant::select('*')->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $namesToFetch,
@@ -1264,7 +1264,7 @@ abstract class Streams extends Base_Streams
 		if (empty($_REQUEST['fields'])) {
 			return '*';
 		}
-		$fields = explode(',', $_REQUEST['fields']);
+		$fields = is_array($fields) ? $fields : explode(',', $_REQUEST['fields']);
 		$fieldNames = Streams_Stream::fieldNames();
 		foreach ($fields as $f) {
 			if (!in_array($f, $fieldNames)){
