@@ -210,7 +210,7 @@ Q.Tool.define('Q/filter', function (options) {
 				.insertAfter($te);
 			$te.addClass('Q_filter_begun')
 				.prependTo('body');
-			$te.nextAll().each(function () {
+			$te.nextAll().not('.Q_mask').each(function () {
 				var $this = $(this);
 				$this.data('Q/filter display', $this.css('display'));
 				$this.css('display', 'none');
@@ -259,7 +259,7 @@ Q.Tool.define('Q/filter', function (options) {
 			$te.removeClass('Q_filter_begun');
 			tool.$results.hide();
 			if (state.fullscreen) {
-				$te.nextAll().each(function () {
+				$te.nextAll().not('.Q_mask').each(function () {
 					var $this = $(this);
 					$this.css('display', $this.data('Q/filter display'))
 						.removeData('Q/filter display');
