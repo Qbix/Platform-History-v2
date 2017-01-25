@@ -203,6 +203,7 @@ function _Q_overlay(o) {
 			}
 			if (e) $.Event(e).preventDefault();
 			Q.Pointer.stopHints($this[0]);
+			Q.Pointer.cancelClick();
 		}
 	});
 
