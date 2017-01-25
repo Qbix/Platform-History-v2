@@ -10173,13 +10173,17 @@ Q.Pointer = {
 	 * @method cancelClick
 	 * @param {Q.Event} event Some mouse or touch event from the DOM
 	 * @param {Object} extraInfo Extra info to pass to onCancelClick
+	 * @param {boolean} [skipMask=false] Pass true here to skip showing
+	 *   the Q.click.mask for 300 milliseconds, which blocks any
+	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
 	 * @return {boolean}
 	 */
-	cancelClick: function (event, extraInfo) {
+	cancelClick: function (event, extraInfo, skipMask) {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
 		Q.Pointer.canceledClick = true;	
+		Q.Masks.show('Q.click.mask');
 	},
 	/**
 	 * Consistently obtains the element under pageX and pageY relative to document
@@ -10318,6 +10322,7 @@ function _Q_PointerStartHandler(e) {
 	Q.addEventListener(window, Q.Pointer.move, _onPointerMoveHandler, false, true);
 	Q.addEventListener(window, Q.Pointer.end, _onPointerEndHandler, false, true);
 	Q.addEventListener(window, Q.Pointer.cancel, _onPointerEndHandler, false, true);
+	Q.addEventListener(window, Q.Pointer.click, _onPointerClickHandler, false, true);
 	Q.handle(Q.Pointer.onStarted, this, arguments);
 	var screenX = Q.Pointer.getX(e) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(e) - Q.Pointer.scrollTop();
@@ -10355,7 +10360,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			toX: screenX,
 			toY: screenY,
 			comingFromPointerMovement: true
-		})) {
+		}, true)) {
 			_pos = false;
 		}
 	}
@@ -10435,11 +10440,19 @@ var _onPointerEndHandler = Q.Pointer.ended = function _onPointerEndHandler() {
 	Q.removeEventListener(window, Q.Pointer.move, _onPointerMoveHandler);
 	Q.removeEventListener(window, Q.Pointer.end, _onPointerEndHandler);
 	Q.removeEventListener(window, Q.Pointer.cancel, _onPointerEndHandler);
+	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
 	Q.handle(Q.Pointer.onEnded, this, arguments);
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
 };
+
+function _onPointerClickHandler(e) {
+	if (Q.Pointer.canceledClick) {
+		e.preventDefault();
+	}
+	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
+}
 
 function _onPointerBlurHandler() {
 	Q.Pointer.blurring = true;
@@ -10939,6 +10952,7 @@ Q.Masks = {
 	 * @param {String} [options.className=''] CSS class name for the mask to style it properly.
 	 * @param {number} [options.fadeIn=0] Milliseconds it should take to fade in the mask
 	 * @param {number} [options.fadeOut=0] Milliseconds it should take to fade out the mask.
+	 * @param {number} [options.duration] If set, hide the mask after this many milliseconds.
 	 * @param {number} [options.zIndex] You can override the mask's default z-index here
 	 * @param {String} [options.html=''] Any HTML to insert into the mask.
 	 * @param {HTMLElement} [options.shouldCover=null] Optional element in the DOM to cover.
@@ -11000,6 +11014,11 @@ Q.Masks = {
 		}
 		++mask.counter;
 		Q.Masks.update(key);
+		if (mask.duration) {
+			setTimeout(function () {
+				Q.Masks.hide(key);
+			}, mask.duration);
+		}
 	},
 	/**
 	 * Hides the mask by given key. If mask with given key doesn't exist, fails silently.
@@ -11090,6 +11109,7 @@ Q.Masks = {
 };
 
 Q.Masks.options = {
+	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 300 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
 	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
