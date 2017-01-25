@@ -2337,11 +2337,11 @@ Users.Socket = {
 	 * to tell connect the session id to the socket on the back end.
 	 * @static
 	 * @method connect
-	 * @param {String} url The url of the socket.io node to connect to
+	 * @param {String} nodeUrl The url of the socket.io node to connect to
 	 * @param {Function} callback When a connection is made, receives the socket object
 	 */
-	connect: function _Users_Socket_connect(url, callback) {
-		Q.Socket.connect('Users', url, function (socket) {
+	connect: function _Users_Socket_connect(nodeUrl, callback) {
+		Q.Socket.connect('Users', nodeUrl, function (socket) {
 			Q.loadNonce(function () {
 				socket.socket.emit('Users/session', Q.sessionId(), Q.clientId());
 			});
