@@ -8397,7 +8397,9 @@ Q.Template.onError = new Q.Event(function (err) {
  * Render template taken from DOM or from file on server with partials
  * @static
  * @method render
- * @param {String} name The name of template. See Q.Template.load
+ * @param {String|Object} name The name of template (see Q.Template.load).
+ *   You can also pass an object of {key: name}, and then the callback receives
+ *   {key: arguments} of what the callback would get.
  * @param {Object} fields The fields to pass to the template when rendering it
  * @param {Array} [partials] Names of partials to load and use for rendering the template
  * @param {Function} [callback] a callback - receives (error) or (error, html)
@@ -8517,6 +8519,17 @@ Q.Socket.get = function _Q_Socket_get(ns, url) {
 		return _qsockets[ns];
 	}
 	return _qsockets[ns] && _qsockets[ns][url];
+};
+
+/**
+ * Returns all the sockets, whether connected or not.
+ * Note that a socket really disconnects when all the namespaces disconnect.
+ * @static
+ * @method getAll
+ * @return {Object} indexed by socket.io namespace, url
+ */
+Q.Socket.getAll = function _Q_Socket_all() {
+	return _qsockets;
 };
 
 function _connectSocketNS(ns, url, callback, callback2, force) {
