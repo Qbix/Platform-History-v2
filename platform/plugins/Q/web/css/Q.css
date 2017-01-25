@@ -145,6 +145,7 @@ table { border-spacing:0; border-collapse:collapse; }
 .Q_screen_mask,
 .Q_dialog_mask { background-color: black; opacity: 0.2; filter:	alpha(opacity=20); }
 .Q_load_mask { background-color: #777; opacity: 0.1; filter: alpha(opacity=10); }
+.Q_click_mask { background: transparent; z-index: 2147483647; }
 
 /* Clear fix */
 
