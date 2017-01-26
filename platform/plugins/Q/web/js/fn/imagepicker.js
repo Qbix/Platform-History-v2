@@ -115,7 +115,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				});
 			}, "", state.cameraCommands.join(','));
 			e.preventDefault();
-			Q.Pointer.cancelClick(e);
 			e.stopPropagation();
 			Q.Pointer.ended();
 		});
@@ -125,7 +124,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			state.input.click();
 			e.preventDefault();
 			e.stopPropagation();
-			Q.Pointer.cancelClick(e);
 		});
 		state.input.click(function (e) {
 			var state = $this.state('Q/imagepicker');
