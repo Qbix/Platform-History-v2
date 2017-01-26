@@ -102,7 +102,7 @@ function _Streams_default_preview(options, preview) {
 					Q.onLayout(tool.element).set(function () {
 						var $pc = tool.$('.Streams_preview_contents');
 						if ($pc.parent().is(':visible')) {
-							$pc.width($pc[0].remainingWidth());	
+							$pc.width(0).width($pc[0].remainingWidth());	
 						}
 					}, tool);
 					var inplace = tool.child('Streams_inplace');
