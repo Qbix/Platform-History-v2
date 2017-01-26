@@ -136,8 +136,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (isTabs) {
 			$container = $te.find('.Q_tabs_tabs');
 		}
-		Q.Tool.remove($container.find('.Streams_related_composer'));
-		Q.Tool.remove($container.find('.Streams_related_stream'));
+		Q.removeElement($container.find('.Streams_preview_tool'), true);
 		++state.refreshCount;
 		
 		if (result.stream.testWriteLevel('relate')) {
