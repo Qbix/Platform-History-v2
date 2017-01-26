@@ -132,7 +132,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			}
 			Q.Pointer.stopHints();
 			e.stopPropagation();
-			Q.Pointer.cancelClick(e);
 		});
 		state.input.change(function () {
 			if (!this.value) {
