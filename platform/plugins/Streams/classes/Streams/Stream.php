@@ -773,7 +773,8 @@ class Streams_Stream extends Base_Streams_Stream
 		$participants = Streams::leave(
 			$userId, $this->publisherId, array($this->name), $options
 		);
-		return $participants ? reset($participants) : null;
+		$participant = reset($participants);
+		return $participants ? $participant : null;
 	}
 
 	/**
