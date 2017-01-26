@@ -40,6 +40,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	if (!state.relationType) {
 		throw new Q.Error("Streams/related tool: missing relationType");
 	}
+	if (state.sortable && typeof state.sortable !== 'object') {
+		throw new Q.Error("Streams/related tool: sortable must be an object or false");
+	}
 
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
 	state.streamName = state.streamName || state.stream.fields.streamName;
