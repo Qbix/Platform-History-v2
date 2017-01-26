@@ -5517,7 +5517,7 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
  */
 Q.removeElement = function _Q_removeElement(element, removeTools) {
 	if (Q.isArrayLike(element)) {
-		Q.each(element, function () {
+		return Q.each(element, function () {
 			Q.removeElement(this, removeTools);
 		});
 	}
