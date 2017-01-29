@@ -71,7 +71,13 @@ function Q_before_Q_responseExtras()
 	}
 	$native = array();
 	foreach (Q_Config::get($app, 'native', 'platforms', array()) as $platform) {
-		$native[$app][$platform]['url'] = Q_Config::expect($app, 'native', $platform, 'url');
+		if ($platform != Q_Request::platform()) {
+			continue;
+		}
+		$native[$app][$platform] = Q::take(
+			Q_Config::expect($app, 'native', $platform),
+			array('client', 'url')
+		);
 	}
 	Q_Response::setScriptData('Q.native', $native);
 }
