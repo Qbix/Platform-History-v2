@@ -24,8 +24,9 @@ function Assets_after_Assets_startSubscription($params)
 	$communitySuffix = Users::communitySuffix();
 	$amount = $stream->getAttribute('amount');
 	$months = $stream->getAttribute('months');
-	$link = Q_Request::baseUrl('action.php')
-		. "/Assets/subscription?publisherId=$publisherId&userId=".$user->id;
+	$link = Q_Request::baseUrl('action.php') . "/Assets/payment"
+			. "?publisherId=" . urlencode($publisherId)
+			. "&userId=" . urlencode($user->id);
 
 	$fields = compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
