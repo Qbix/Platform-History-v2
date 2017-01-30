@@ -41,8 +41,9 @@ function Assets_after_Assets_charge($params)
 	$communityId = Users::communityId();
 	$communityName = Users::communityName();
 	$communitySuffix = Users::communitySuffix();
-	$link = Q_Request::baseUrl('action.php')
-		. "/Assets/payment?publisherId=$publisherId&userId=".$user->id;
+	$link = Q_Request::baseUrl('action.php') . "/Assets/payment"
+			. "?publisherId=" . urlencode($publisherId)
+			. "&userId=" . urlencode($user->id);
 	
 	$fields = compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
