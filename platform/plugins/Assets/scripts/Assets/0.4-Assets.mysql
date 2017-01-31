@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `{$prefix}charge` (
-  `userId` varbinary(31) COLLATE utf8_bin NOT NULL,
+  `userId` varbinary(31) NOT NULL,
   `id` varchar(255) COLLATE utf8_bin NOT NULL,
   `subscriptionId` varchar(255) COLLATE utf8_bin NOT NULL,
   `description` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'human-readable description of the charge',
