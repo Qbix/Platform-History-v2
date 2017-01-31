@@ -120,8 +120,8 @@ class Users_User extends Base_Users_User
 	
 	/**
 	 * Use this function to compute the hash of a passphrase
-	 * @param {array} $options to pass to any hooks
-	 * @param {boolean} $isHashed Whether the first passphrase hash iteration occurred, e.g. on the client
+	 * @param {array} $passphrase The value to be checked depends on value of isHashed.
+	 * @param {integer} $isHashed You can pass 0 if this is actually the passphrase, 1 if it has been hashed using sha1("$realPassphrase\t$userId")
 	 */
 	function computePassphraseHash($passphrase, $isHashed)
 	{

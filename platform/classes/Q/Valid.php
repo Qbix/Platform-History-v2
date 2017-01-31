@@ -24,22 +24,25 @@ class Q_Valid
 	 $check_domain = false,
 	 &$fixed_url = null)
 	{
-		if (!is_string($url))
+		if (!is_string($url)) {
 			return false;
+		}
 		$url_parts = parse_url($url);
 		if (empty($url_parts['scheme'])
 		and substr($url, 0, 2) !== '//') {
 			return false;
 		}
 		if ($check_domain) {
-			if (! self::domain($url_parts['host']))
+			if (!self::domain($url_parts['host'])) {
 				return false;
+			}
 		}
 		// If we are here, it's a URL
 		$pieces = explode('?', $url);
 		$fixed_url = $pieces[0];
-		if (isset($pieces[1]))
+		if (isset($pieces[1])) {
 			$fixed_url .= '?' . implode('&', array_slice($pieces, 1));
+		}
 		return true;
 	}
 	

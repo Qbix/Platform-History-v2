@@ -20,8 +20,8 @@
 		</div>
 	</div>
 	<div id="Users_authorize_act" class="Q_big_prompt">
-		<?php if ($user): ?>
-			<form action="" method="post">
+		<form action="" method="post">
+			<?php if ($user): ?>
 				<?php if ($terms_label): ?>
 				<div id="Users_authorize_terms">
 					<input type="checkbox" name="agree" id="Users_agree" value="yes">
@@ -33,14 +33,13 @@
 				<div id="Users_authorize_buttons">
 					<a class="Q_button" name="authorize" id="Users_authorize">Authorize</a>
 				</div>
-			</form>
-		<?php else: ?>
-			<form action="">
+			<?php else: ?>
 				<div id="Users_authorize_buttons">
 					<a class="Q_button" id="Users_login">Get Started</a>
 				</div>
-			</form>
-		<?php endif; ?>
+			<?php endif; ?>
+			<?php echo Q_Html::hidden(compact('deviceId')) ?>
+		</form>
 	</div>
 </div>
 
@@ -52,7 +51,7 @@
 		$('#Users_authorize').on(Q.Pointer.click, _authorize);
 		if (!Q.Users.loggedInUser) {
 			_login();
-		} else if (Q.Users.authorize.skip === 'authorize') {
+		} else if (Q.Users.authorize.automatic) {
 			_authorize();
 		}
 		

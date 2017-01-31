@@ -105,7 +105,9 @@ function Streams_access_tool($options)
 		}
 	}
 	
-	$accessActionUrl = Q_Uri::url("Streams/access?publisherId=$publisherId&streamName=$streamName");
+	$accessActionUrl = Q_Uri::url("Streams/access"
+			. "?publisherId=" . urlencode($publisherId)
+			. "&streamName=" . urlencode($streamName));
 	
 	$dir = Q_Config::get('Users', 'paths', 'icons', 'files/Users/icons');
 	

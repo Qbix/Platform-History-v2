@@ -6,13 +6,13 @@ function Streams_leave_post()
 	$publisherId = Streams::requestedPublisherId();
 	$streamName = Streams::requestedName(true);
 	$streams = Streams::fetch($user->id, $publisherId, $streamName);
-	if (empty($streams)) {
+	$stream = reset($streams);
+	if (empty($streams) or !$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'stream',
 			'criteria' => "{publisherId: '$publisherId', name: '$streamName'}"
 		));
 	}
-	$stream = reset($streams);
 	$stream->leave(array(), $participant);
 	Q_Response::setSlot('participant', $participant->exportArray());
 }
