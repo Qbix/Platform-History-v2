@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS `{$prefix}app_user`;
 
 CREATE TABLE `{$prefix}app_user` (
-  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31)  NOT NULL DEFAULT '',
   `provider` enum('native','facebook','twitter','google','yahoo')  NOT NULL,
   `appId` varchar(200)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -24,9 +24,9 @@ CREATE TABLE `{$prefix}app_user` (
 DROP TABLE IF EXISTS `{$prefix}contact`;
 
 CREATE TABLE `{$prefix}contact` (
-  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31)  NOT NULL DEFAULT '',
   `label` varchar(63)  NOT NULL,
-  `contactUserId` varchar(31)  NOT NULL DEFAULT '',
+  `contactUserId` varbinary(31)  NOT NULL DEFAULT '',
   `nickname` varchar(255)  NOT NULL DEFAULT '',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`userId`,`label`,`contactUserId`)
@@ -38,7 +38,7 @@ CREATE TABLE `{$prefix}contact` (
 DROP TABLE IF EXISTS `{$prefix}device`;
 
 CREATE TABLE `{$prefix}device` (
-  `userId` varchar(31)  NOT NULL,
+  `userId` varbinary(31)  NOT NULL,
   `deviceId` varchar(255)  NOT NULL,
   `platform` enum('ios','android')  NOT NULL,
   `version` varchar(45)  DEFAULT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `{$prefix}email` (
   `address` varchar(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31)  NOT NULL DEFAULT '',
   `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL,
   `activationCode` varchar(255)  NOT NULL,
   `activationCodeExpires` timestamp NULL DEFAULT NULL,
@@ -75,9 +75,9 @@ CREATE TABLE `{$prefix}email` (
 DROP TABLE IF EXISTS `{$prefix}external_from`;
 
 CREATE TABLE `{$prefix}external_from` (
-  `publisherId` varchar(31)  NOT NULL,
-  `xid` varchar(31)  NOT NULL COMMENT 'The external user id',
-  `userId` varchar(31)  NOT NULL,
+  `publisherId` varbinary(31)  NOT NULL,
+  `xid` varbinary(31)  NOT NULL COMMENT 'The external user id',
+  `userId` varbinary(31)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `nickname` varchar(255)  NOT NULL,
   PRIMARY KEY (`publisherId`,`xid`)
@@ -89,9 +89,9 @@ CREATE TABLE `{$prefix}external_from` (
 DROP TABLE IF EXISTS `{$prefix}external_to`;
 
 CREATE TABLE `{$prefix}external_to` (
-  `publisherId` varchar(31)  NOT NULL,
-  `userId` varchar(31)  NOT NULL,
-  `xid` varchar(31)  NOT NULL COMMENT 'The external user id',
+  `publisherId` varbinary(31)  NOT NULL,
+  `userId` varbinary(31)  NOT NULL,
+  `xid` varbinary(31)  NOT NULL COMMENT 'The external user id',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`publisherId`,`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Stores external ids for users';
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `{$prefix}identify`;
 CREATE TABLE `{$prefix}identify` (
   `identifier` varchar(255)  NOT NULL,
   `state` enum('verified','future')  NOT NULL COMMENT '"future" is a mapping to a user which may later be adopted by someone',
-  `userId` varchar(31)  NOT NULL,
+  `userId` varbinary(31)  NOT NULL,
   PRIMARY KEY (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Mapping table for finding users based on various info';
 
@@ -114,7 +114,7 @@ CREATE TABLE `{$prefix}identify` (
 DROP TABLE IF EXISTS `{$prefix}label`;
 
 CREATE TABLE `{$prefix}label` (
-  `userId` varchar(31) NOT NULL,
+  `userId` varbinary(31) NOT NULL,
   `label` varchar(63) NOT NULL,
   `icon` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `{$prefix}link`;
 
 CREATE TABLE `{$prefix}link` (
   `identifier` varchar(255)  NOT NULL,
-  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31)  NOT NULL DEFAULT '',
   `extraInfo` varchar(255)  NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`identifier`, `userId`)
@@ -143,7 +143,7 @@ CREATE TABLE `{$prefix}mobile` (
   `number` varchar(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `userId` varchar(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31)  NOT NULL DEFAULT '',
   `extension` varchar(7)  NOT NULL DEFAULT '',
   `carrier` enum('unverified','att','cingular','sprint','tmobile','verizon')  NOT NULL DEFAULT 'unverified',
   `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL DEFAULT 'unverified',
@@ -163,8 +163,8 @@ CREATE TABLE `{$prefix}mobile` (
 DROP TABLE IF EXISTS `{$prefix}oAuth`;
 
 CREATE TABLE `{$prefix}oAuth` (
-  `userId` varchar(31) NOT NULL COMMENT 'The user id of the logged in user',
-  `client_id` varchar(31) NOT NULL COMMENT 'The user id of the app',
+  `userId` varbinary(31) NOT NULL COMMENT 'The user id of the logged in user',
+  `client_id` varbinary(31) NOT NULL COMMENT 'The user id of the app',
   `state` varchar(255) NOT NULL COMMENT 'For client to protect against CSRF attacks',
   `scope` varchar(255) NOT NULL DEFAULT 'user' COMMENT 'Space delimited set of names of resources you can access',
   `redirect_uri` varchar(255) NOT NULL COMMENT 'Where the client requested to redirect after creating this access token originally',
@@ -196,7 +196,7 @@ CREATE TABLE `{$prefix}session` (
 DROP TABLE IF EXISTS `{$prefix}total`;
 
 CREATE TABLE `{$prefix}total` (
-  `forType` varchar(31)  NOT NULL,
+  `forType` varbinary(31)  NOT NULL,
   `forId` varchar(255)  NOT NULL,
   `voteCount` bigint(20) NOT NULL DEFAULT '0',
   `weightTotal` decimal(10,4) NOT NULL DEFAULT '0.0000',
@@ -211,7 +211,7 @@ CREATE TABLE `{$prefix}total` (
 DROP TABLE IF EXISTS `{$prefix}user`;
 
 CREATE TABLE `{$prefix}user` (
-  `id` varchar(31)  NOT NULL DEFAULT '0',
+  `id` varbinary(31)  NOT NULL DEFAULT '0',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `sessionId` varchar(255)  DEFAULT NULL COMMENT 'The session id from the most recent authenticated request from this user.',
@@ -239,8 +239,8 @@ CREATE TABLE `{$prefix}user` (
 DROP TABLE IF EXISTS `{$prefix}vote`;
 
 CREATE TABLE `{$prefix}vote` (
-  `userId` varchar(31)  NOT NULL,
-  `forType` varchar(31)  NOT NULL,
+  `userId` varbinary(31)  NOT NULL,
+  `forType` varbinary(31)  NOT NULL,
   `forId` varchar(255)  NOT NULL,
   `value` decimal(10,4) NOT NULL,
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000',
