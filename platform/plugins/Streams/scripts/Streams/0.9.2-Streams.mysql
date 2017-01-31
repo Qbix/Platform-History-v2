@@ -4,8 +4,8 @@
 DROP TABLE IF EXISTS `{$prefix}notification`;
 
 CREATE TABLE `{$prefix}notification` (
-  `userId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the user to notify',
-  `publisherId` varchar(31) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
+  `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the user to notify',
+  `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
   `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream causing the notification',
   `messageOrdinal` int(11) NOT NULL DEFAULT 0 COMMENT 'the ordinal of the message being notified about',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
