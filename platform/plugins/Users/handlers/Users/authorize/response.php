@@ -21,6 +21,8 @@ function Users_authorize_response()
 		throw new Q_Exception("Client app needs to register url", 'client_id');
 	}
 	$redirect_uri = Q::ifset($_REQUEST, 'redirect_uri', $client->url);
+	$paths = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'paths', false);
+	$path = substr($redirect_uri, strlen($client->url)+1);
 	if (!Q::startsWith($redirect_uri, $client->url)
 	or (is_array($paths) and !in_array($path, $paths))) {
 		throw new Users_Exception_Redirect(array('uri' => $redirect_uri));
@@ -49,8 +51,6 @@ function Users_authorize_response()
 
 	if ($oa and $oa->wasRetrieved()) {
 		// User is logged in and already has a token for this client_id and state
-		$paths = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'paths', false);
-		$path = substr($redirect_uri, strlen($client->url)+1);
 		$p = array(
 			'response_type' => $response_type,
 			'token_type' => $token_type,

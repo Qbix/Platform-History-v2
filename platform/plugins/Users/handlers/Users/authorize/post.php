@@ -22,7 +22,7 @@ function Users_authorize_post($params = array())
 	$client_id = $params['client_id'];
 	$redirect_uri = $params['redirect_uri'];
 	$state = $params['state'];
-	$scope = implode(' ', Users_OAuth::requestedScope(true));
+	$scope = implode(' ', Users_OAuth::requestedScope($client_id, true));
 	
 	$client = Users_User::fetch($client_id, true);
 	$paths = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'paths', false);
