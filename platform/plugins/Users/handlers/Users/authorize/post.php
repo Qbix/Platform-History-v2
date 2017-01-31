@@ -1,8 +1,9 @@
 <?php
 
-function Users_authorize_post()
+function Users_authorize_post($params = array())
 {
-	if (empty($_REQUEST['authorize'])) {
+	$params = array_merge($_REQUEST, $params);
+	if (empty($params['authorize'])) {
 		return null;
 	}
 
@@ -11,24 +12,31 @@ function Users_authorize_post()
 	$terms_label = Q_Config::get('Users', 'authorize', 'terms', 'label', null);
 	$terms_title = Q_Config::get('Users', 'authorize', 'terms', 'title', null);
 	if ($terms_uri and $terms_title and $terms_label) {
-		if (empty($_REQUEST['agree'])) {
+		if (empty($params['agree'])) {
 			throw new Q_Exception("First you must agree to the $terms_title", 'agree');
 		}
 	}
 	
 	$user = Users::loggedInUser(true);
 
-	$client_id = $_REQUEST['client_id'];
-	$redirect_url = $_REQUEST['redirect_uri'];
-	$state = $_REQUEST['state'];
+	$client_id = $params['client_id'];
+	$redirect_uri = $params['redirect_uri'];
+	$state = $params['state'];
 	$scope = implode(' ', Users_OAuth::requestedScope(true));
+	
+	$client = Users_User::fetch($client_id, true);
+	$paths = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'paths', false);
+	$path = substr($redirect_uri, strlen($client->url)+1);
+	if (!Q::startsWith($redirect_uri, $client->url)
+	or (is_array($paths) and !in_array($path, $paths))) {
+		throw new Users_Exception_Redirect(array('uri' => $redirect_uri));
+	}
 	
 	$oa = new Users_OAuth();
 	$oa->client_id = $client_id;
 	$oa->userId = $user->id;
-	$oa->state = $state;
 	if ($oa->retrieve()) {
-		if ($oa->scope !== $scope || $oa->redirect_uri !== $redirect_url) {
+		if ($oa->scope !== $scope || $oa->redirect_uri !== $redirect_uri) {
 			throw new Q_Exception("Different parameters were requested with the same state string before", 'state');
 		}
 		Users::$cache['oAuth'] = $oa;
@@ -38,7 +46,7 @@ function Users_authorize_post()
 	$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
 	$access_token = Users::copyToNewSession($duration);
 	$oa->scope = $scope;
-	$oa->redirect_uri = $redirect_url; // just saving it
+	$oa->redirect_uri = $redirect_uri; // just saving it
 	$oa->access_token = $access_token; // the session token
 	$oa->token_expires_seconds = $duration; // session actually expires after $duration seconds of inactivity
 	$oa->save();

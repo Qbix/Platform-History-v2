@@ -28,17 +28,18 @@ class Users_OAuth extends Base_Users_OAuth
 	 * defaulting to the "all" scope.
 	 * @method requestedScope
 	 * @static
+	 * @param {string} $client_id The id of the client app
 	 * @param {boolean} [$throwIfMissing=false]
 	 * @param {reference} [$scopes] this is filled with an array
 	 * @return {array}
 	 */
-	static function requestedScope($throwIfMissing = false, &$scopes = null)
+	static function requestedScope($client_id, $throwIfMissing = false, &$scopes = null)
 	{
 		$rs = Q::ifset($_REQUEST, 'scope', 'all');
 		if (is_string($rs)) {
 			$rs = preg_split("/(,|\s+|,+\s*)+/", $rs);
 		}
-		$scopes = Q_Config::get('Users', 'authorize', 'clients', Q::app(), 'scopes', array(
+		$scopes = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'scopes', array(
 			'all' => 'give this app full access'
 		));
 		if ($throwIfMissing) {

@@ -98,6 +98,15 @@ Users.onError = new Q.Event(function (err, err2) {
 }, 'Users.onError');
 
 /**
+ * This event is fired when a device has been registered for a logged-in user.
+ * @event onDevice
+ * @param {Object} device See Users_Device
+ */
+Users.onDevice = new Q.Event(function (response) {
+	console.log("Device registered for user with id " + Users.loggedInUserId());
+}, 'Users.onError');
+
+/**
  * Initialize facebook by adding FB script and running FB.init().
  * Ensures that this is done only once
  * @method initFacebook
@@ -2180,15 +2189,13 @@ Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler () {
 	}
 	var fieldNames = [
 		'response_type', 'token_type', 'access_token',
-		'expires_in', 'scope', 'state', 'Q.Users.oAuth'
+		'expires_in', 'scope', 'state', 'Q.deviceId', 'Q.Users.oAuth'
 	];
 	var fields = location.hash.queryField(fieldNames);
-	var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-	if (deviceId) {
-		fields.deviceId = deviceId;
-	}
+	var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+	fields.deviceId = storedDeviceId || fields.deviceId;
 	Q.req('Users/oAuth', function () {
-		
+		// user was redirected from Users/authorize or some similar flow
 	}, {
 		method: 'post',
 		fields: fields
@@ -2311,10 +2318,16 @@ Q.onReady.add(function () {
 	Users.logout.options.onSuccess.set(function() {
 		PushNotification.setApplicationBadgeNumber(0);
 	}, 'Users.PushNotifications');
-	function _registerDevice() {
-		var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-		Q.req('Users/device', function () {
-			debugger;
+	function _registerDevice(deviceId) {
+		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+		deviceId = storedDeviceId || deviceId;
+		if (!deviceId) {
+			return;
+		}
+		Q.req('Users/device', function (err, response) {
+			if (!err) {
+				Q.handle(Users.onDevice, [response.data]);
+			}
 		}, {
 			method: 'post',
 			fields: {
