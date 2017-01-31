@@ -1,0 +1,5 @@
+CREATE TABLE {$prefix}temp AS SELECT * FROM {$prefix}oAuth GROUP BY userId, client_id;
+ALTER TABLE {$prefix}temp
+ADD PRIMARY KEY (userId, client_id);
+DROP TABLE {$prefix}oAuth;
+RENAME TABLE {$prefix}temp TO {$prefix}oAuth;

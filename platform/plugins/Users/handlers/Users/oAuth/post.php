@@ -8,6 +8,7 @@ function Users_oAuth_post()
 		'expires_in', 'scope', 'state', 'Q_Users_oAuth'
 	);
 	Q_Request::requireFields($fields, true);
+	$fields[] = 'Q_deviceId';
 	$params = Q::take($_REQUEST, $fields);
 	$params['Q.Users.oAuth'] = $params['Q_Users_oAuth'];
 	unset($params['Q_Users_oAuth']);

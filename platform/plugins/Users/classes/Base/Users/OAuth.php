@@ -70,7 +70,6 @@ abstract class Base_Users_OAuth extends Db_Row
 			array (
 			  0 => 'client_id',
 			  1 => 'userId',
-			  2 => 'state',
 			)
 		);
 	}
@@ -362,7 +361,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -642,7 +641,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('client_id','userId','state') as $name) {
+			foreach (array('client_id','userId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

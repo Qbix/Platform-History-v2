@@ -97,6 +97,24 @@
 		},
 		"login": {
 			"identifierType": "email,mobile"
+		},
+		"authorize": {
+			"clients": {
+				"MyApp-ios": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
+				},
+				"MyApp-android": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
+				}
+			}
 		}
 	},
 	"Streams": {
@@ -127,6 +145,20 @@
 				"subject": "You have been subscribed to {{plan.title}}",
 				"body": "MyApp/email/startedSubscription.php",
 				"sms": "MyApp/sms/startedSubscription.php"
+			}
+		}
+	},
+	"MyApp": {
+		"native": {
+			"platforms": ["ios"] /* ["ios", "android"] */,
+			"ios": {
+				"sandbox": true,
+				"device": {
+					"adding": "Notifications have been enabled"
+				},
+				"client": "MyApp-ios",
+				"url": "https://itunes.apple.com/us/app/groups/id407855546?mt=8",
+				"id": "407855546"
 			}
 		}
 	}

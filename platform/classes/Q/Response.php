@@ -1418,9 +1418,9 @@ class Q_Response
 	 * @static
 	 * @param {string} $uri The URL or internal URI to redirect to
 	 * @param {array} $options An array of options that can include:
-	 *  "loop" => Defaults to false. If true, sets the redirect header even if the current URL is the same.
-	 *  "noProxy" => Defaults to false. If true, doesn't use the proxy mapping to determine URL
-	 *  "permanently" => If true, sets response code as 304 instead of 302
+	 * @param {boolean} [$options.loop=false] If false, and current URL is the same as the new one, skips setting the redirect header and just returns false.
+	 * @param {boolean} [$options.permanently=false] If true, sets response code as 304 instead of 302
+	 * @param {boolean} [$options.noProxy=false] If true, doesn't use the proxy mapping to determine URL
 	 * @param {boolean} [$noProxy=false]
 	 * @return {boolean}
  	 *  Return whether the redirect header was set.

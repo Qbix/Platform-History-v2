@@ -1,3 +1,3 @@
 ALTER TABLE {$prefix}session
-ADD COLUMN userId varchar(31) NULL DEFAULT NULL AFTER php,
+ADD COLUMN userId varbinary(31) NULL DEFAULT NULL AFTER php,
 ADD INDEX userId (userId);

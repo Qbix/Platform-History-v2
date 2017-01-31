@@ -20,7 +20,7 @@ class Q_Uri
 	 * @method from
 	 * @static
 	 * @param {string} $source An absolute URL, or an array, or a URI in string form.
-	 * @param {string} [$routePattern=null] The pattern of the route in the routes config
+	 * @param {string} [$routePattern=null] The pattern of the route in the routes config.
 	 *  If not specified, then Qbix searches all the route patterns in order, until it finds one that fits.
 	 *  If you set this to false, then $source is treated as an absolute URL, regardless of its format.
 	 * @return {Q_Uri|false} Returns false if no route patterns match.
@@ -140,7 +140,7 @@ class Q_Uri
 		}
 		
 		static $cache = array();
-		$cache_key = $noProxy ? $source . ' noproxy=1' : $source;
+		$cache_key = $noProxy ? $source . "\tnoProxy" : $source;
 		if (is_string($source) and isset($cache[$cache_key])) {
 			return $cache[$cache_key];
 		}
@@ -152,7 +152,7 @@ class Q_Uri
 		
 		if (Q_Valid::url($source)) {
 			// $source is already a URL
-			$result = self::proxySource($source);
+			$result = $noProxy ? $source : self::proxySource($source);
 			if (is_string($source)) {
 				$cache[$source] = $result;
 			}
@@ -807,18 +807,24 @@ class Q_Uri
 	}
 	
 	/**
-	 * Fixes a URL to have only one question mark
+	 * Fixes a URL to have only one question mark and hash mark
 	 * @method fixUrl
 	 * @static
 	 * @param {string} $url The url to fix
-	 * @return {string} The URL with all subsequent ? replaced by &
+	 * @return {string} The URL with all subsequent ? and # replaced by &
 	 */
 	static function fixUrl($url)
 	{
 		$pieces = explode('?', $url);
 		$url = $pieces[0];
-		if (isset($pieces[1]))
+		if (isset($pieces[1])) {
 			$url .= '?' . implode('&', array_slice($pieces, 1));
+		}
+		$pieces = explode('#', $url);
+		$url = $pieces[0];
+		if (isset($pieces[1])) {
+			$url .= '#' . implode('&', array_slice($pieces, 1));
+		}
 		return $url;
 	}
 	
