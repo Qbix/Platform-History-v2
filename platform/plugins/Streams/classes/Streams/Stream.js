@@ -1233,9 +1233,10 @@ Sp.post = function (asUserId, fields, callback) {
 
 /**
  * Returns the canonical url of the stream, if any
- * @return {string|null|false}
+ * @param {Integer} [messageOrdinal=null] pass this to link to a message in the stream
+ * @return {String|null|false}
  */
-Sp.url = function ()
+Sp.url = function (messageOrdinal)
 {
 	var uri = Streams_Stream.getConfigField(this.fields.type, 'uri', null);
 	if (!uri) {
@@ -1246,7 +1247,9 @@ Sp.url = function ()
 		streamName: this.fields.name.split('/'),
 		name: this.fields.name
 	});
-	return Q.Uri && Q.Uri.from(uriString).toUrl();
+	var qs = messageOrdinal ? "?"+messageOrdinal : "";
+	// TODO: IMPLEMENT Q.Uri class
+	return Q.Uri && Q.Uri.url(Q.Uri.from(uriString).toUrl() + qs);
 }
 
 /**

@@ -1726,9 +1726,10 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Returns the canonical url of the stream, if any
+	 * @param {integer} [$messageOrdinal=null] pass this to link to the message in the stream
 	 * @return {string|null|false}
 	 */
-	function url()
+	function url($messageOrdinal = null)
 	{
 		$uri = self::getConfigField($this->type, 'uri', null);
 		if (!$uri) {
@@ -1739,7 +1740,8 @@ class Streams_Stream extends Base_Streams_Stream
 			'streamName' => explode('/', $this->name),
 			'name' => $this->name
 		));
-		return Q_Uri::from($uriString)->toUrl();
+		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
+		return Q_Uri::url(Q_Uri::from($uriString)->toUrl() . $qs);
 	}
 
 	/**
