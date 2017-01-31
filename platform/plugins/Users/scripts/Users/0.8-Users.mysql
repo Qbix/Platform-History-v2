@@ -163,10 +163,10 @@ CREATE TABLE `{$prefix}mobile` (
 DROP TABLE IF EXISTS `{$prefix}oAuth`;
 
 CREATE TABLE `{$prefix}oAuth` (
-  `userId` varchar(255) NOT NULL COMMENT 'The user id of the logged in user',
-  `client_id` varchar(255) NOT NULL COMMENT 'The user id of the app',
+  `userId` varchar(31) NOT NULL COMMENT 'The user id of the logged in user',
+  `client_id` varchar(31) NOT NULL COMMENT 'The user id of the app',
   `state` varchar(255) NOT NULL COMMENT 'For client to protect against CSRF attacks',
-  `scope` varchar(255) NOT NULL DEFAULT 'user' COMMENT 'Space delimited set of names of things you can access',
+  `scope` varchar(255) NOT NULL DEFAULT 'user' COMMENT 'Space delimited set of names of resources you can access',
   `redirect_uri` varchar(255) NOT NULL COMMENT 'Where the client requested to redirect after creating this access token originally',
   `access_token` varchar(255) NOT NULL COMMENT 'Bearer token given to the client to access resources',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'When this row was created',

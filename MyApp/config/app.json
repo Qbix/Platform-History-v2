@@ -100,11 +100,19 @@
 		},
 		"authorize": {
 			"clients": {
-				"MyApp": {
+				"MyApp-ios": {
 					"paths": null,
 					"scopes": {
 						"all": "give this app full access"
-					}
+					},
+					"automatic": true
+				},
+				"MyApp-android": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
 				}
 			}
 		}
@@ -148,7 +156,7 @@
 				"device": {
 					"adding": "Notifications have been enabled"
 				},
-				"client": "Groups-ios",
+				"client": "MyApp-ios",
 				"url": "https://itunes.apple.com/us/app/groups/id407855546?mt=8",
 				"id": "407855546"
 			}

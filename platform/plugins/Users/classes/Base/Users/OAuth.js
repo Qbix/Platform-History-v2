@@ -205,8 +205,7 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"client_id",
-		"userId",
-		"state"
+		"userId"
 	];
 };
 
@@ -339,7 +338,7 @@ Base.prototype.maxSize_state = function () {
 	 */
 Base.column_state = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -522,7 +521,7 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['client_id','userId','state'], i;
+	var fields = ['client_id','userId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
