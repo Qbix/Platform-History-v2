@@ -97,6 +97,16 @@
 		},
 		"login": {
 			"identifierType": "email,mobile"
+		},
+		"authorize": {
+			"clients": {
+				"MyApp": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					}
+				}
+			}
 		}
 	},
 	"Streams": {
