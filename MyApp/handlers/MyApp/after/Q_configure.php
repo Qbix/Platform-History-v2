@@ -1,6 +1,6 @@
 <?php
 
-function Q_after_configure()
+function MyApp_after_Q_configure()
 {
 	if (Q_Config::get('Db', 'logging', true)) {
 		// logging database queries
