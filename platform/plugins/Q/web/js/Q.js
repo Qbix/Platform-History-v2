@@ -10484,7 +10484,8 @@ Q.Dialogs = {
 	 * @param {Element|jQuery} [options.dialog] If provided, may be Element or 
 	 *   jQuery object containing already prepared dialog html
 	 *	 structure with 'Q_title_slot', 'Q_dialog_slot' and appropriate content in them. 
-	 *   If it's provided, then 'title' and 'content' options given below are ignored.
+	 *   If the 'title', 'content' or 'template' options are provided, they will be used to
+	 *   replace the content in this element.
 	 *	@param {String} [options.url] Optional. If provided, this url will be used 
 	 *   to fetch the "title" and "dialog" slots, to display in the dialog. 
 	 *   Thus the default content provided by 'title' and 'content' options
@@ -10493,6 +10494,9 @@ Q.Dialogs = {
 	 *	@param {String|Element} [options.content] initial dialog content.
 	 *   If the url is not supplied, then this remains the HTML content of the dialog.
 	 *   By default displays an image of a throbber while the url is loading.
+	 *  @param {Object} [options.template] can be used instead of content option.
+	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
+	 *  @param {String} [options.template.fields] fields to pass to the template, if any
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
@@ -10530,51 +10534,71 @@ Q.Dialogs = {
 		var o = Q.extend({mask: maskDefault}, Q.Dialogs.push.options, options);
 		if (o.fullscreen) o.mask = false;
 		var $dialog = $(o.dialog);
-		if (!$dialog.length) {
-			// create this dialog element
-			$dialog = $('<div />').append(
-				$('<div class="Q_title_slot" />')
-				.append($('<h2 class="Q_dialog_title" />')
-				.append(o.title))
-			).append(
-				$('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />').append(o.content)
-			);
-			if (o.className) {
-				$dialog.addClass(o.className);
-			}
-			if (o.apply) {
-				$dialog.addClass('Q_overlay_apply');
-			}
-			if (o.removeOnClose !== false) {
-				o.removeOnClose = true;
-			}
-		}
-		$dialog.hide();
-		//if ($dialog.parent().length == 0) {
-			$(o.appendTo || $('body')[0]).append($dialog);
-		//}
-		var _onClose = o.onClose;
-		o.onClose = new Q.Event(function() {
-			if (!Q.Dialogs.dontPopOnClose) {
-				Q.Dialogs.pop(true);
-			}
-			Q.Dialogs.dontPopOnClose = false;
-			Q.handle(o.onClose.original, $dialog, [$dialog]);
-		}, 'Q.Dialogs');
-		o.onClose.original = _onClose;
-		$dialog.plugin('Q/dialog', o);
-		var topDialog = null;
-		$dialog.isFullscreen = o.fullscreen;
-		if (this.dialogs.length) {
-			topDialog = this.dialogs[this.dialogs.length - 1];
-		}
-		if (!topDialog || topDialog[0] !== $dialog[0]) {
-			this.dialogs.push($dialog);
-			if (o.hidePrevious && topDialog) {
-				topDialog.hide();
-			}
+		if (o.template) {
+			Q.Template.render(o.template.name, function (err, html) {
+				if (!err) {
+					_proceed(html);
+				}
+			}, o.template.fields);
+		} else {
+			_proceed(o.content);
 		}
 		return $dialog;
+		function _proceed(content) {
+			var $h2, $title, $content;
+			if (!$dialog.length) {
+				// create this dialog element
+				$h2 = $('<h2 class="Q_dialog_title" />');
+				$title = $('<div class="Q_title_slot" />').append($h2);
+				$content = $('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />');
+				$dialog = $('<div />').append($title).append($content);
+				if (o.className) {
+					$dialog.addClass(o.className);
+				}
+				if (o.apply) {
+					$dialog.addClass('Q_overlay_apply');
+				}
+				if (o.removeOnClose !== false) {
+					o.removeOnClose = true;
+				}
+			} else {
+				$h2 = $('.Q_dialog_title', $dialog);
+				$title = $('.Q_title_slot', $dialog)
+				$content = $('.Q_dialog_slot', $dialog);
+			}
+			if (o.title) {
+				$h2.empty().append(o.title);
+			}
+			if (content) {
+				$content.empty().append(content);
+			}
+			$dialog.hide();
+			//if ($dialog.parent().length == 0) {
+				$(o.appendTo || $('body')[0]).append($dialog);
+			//}
+			var _onClose = o.onClose;
+			o.onClose = new Q.Event(function() {
+				if (!Q.Dialogs.dontPopOnClose) {
+					Q.Dialogs.pop(true);
+				}
+				Q.Dialogs.dontPopOnClose = false;
+				Q.handle(o.onClose.original, $dialog, [$dialog]);
+			}, 'Q.Dialogs');
+			o.onClose.original = _onClose;
+			$dialog.plugin('Q/dialog', o);
+			var topDialog = null;
+			var dialogs = Q.Dialogs.dialogs;
+			$dialog.isFullscreen = o.fullscreen;
+			if (dialogs.length) {
+				topDialog = dialogs[dialogs.length - 1];
+			}
+			if (!topDialog || topDialog[0] !== $dialog[0]) {
+				dialogs.push($dialog);
+				if (o.hidePrevious && topDialog) {
+					topDialog.hide();
+				}
+			}
+		}
 	},
 	
 	/**
