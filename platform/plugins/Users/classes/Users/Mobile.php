@@ -109,6 +109,10 @@ class Users_Mobile extends Base_Users_Mobile
 			} else {
 				if(!Q_Config::get('Users', 'email', 'smtp', null)){
 					Q_Response::setNotice("Q/mobile", "Please set up transport in Users/mobile/twilio as in docs", false);
+					if ($key = Q_Config::get('Users', 'mobile', 'log', 'key', 'mobile')) {
+						$logMessage = "Would have sent message to $number:\n$body";
+						Q::log($logMessage, $key);
+					}
 					return true;
 				}
 
