@@ -149,7 +149,7 @@ class Places_Location
 			$area = Streams::create($asUserId, $publisherId, 'Places/area',
 				compact('name', 'title', 'skipAccess', 'attributes')
 			);
-			$area->relateTo($location, 'location', $asUserId, $options);
+			$area->relateTo($location, 'Places/location', $asUserId, $options);
 			if ($floorName) {
 				$name = $floorName;
 				$title = $location->title." floor $floor";
@@ -158,7 +158,7 @@ class Places_Location
 						compact('name', 'title', 'skipAccess')
 					);
 				}
-				$area->relateTo($floor, 'floor', $asUserId, $options);
+				$area->relateTo($floor, 'Places/floor', $asUserId, $options);
 			}
 			if ($columnName) {
 				$name = $columnName;
@@ -168,7 +168,7 @@ class Places_Location
 						compact('name', 'title', 'skipAccess')
 					);
 				}
-				$area->relateTo($column, 'column', $asUserId, $options);
+				$area->relateTo($column, 'Places/column', $asUserId, $options);
 			}
 		} else {
 			$column = $columnName

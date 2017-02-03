@@ -76,6 +76,8 @@ Users_Device.prototype.pushNotification = function (notification, options) {
 		Users.apn.connection.pushNotification(n, d);
 	}
 	// TODO: process android!!!
+	// TODO: add batching support
+	// can send to at most 1000 registration tokens at a time
 };
 
 Q.mixin(Users_Device, Q.require('Base/Users/Device'));

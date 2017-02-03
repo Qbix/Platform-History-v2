@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "0.9.6",
+				"version": "0.9.7",
 				"compatible": "0.9",
 				"requires": {"Users": "0.9.3"},
 				"permissions": ["Streams/icons"],
@@ -133,7 +133,7 @@
 					"participatingCount": 0,
 					"leftCount": 0
 				},
-				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}"
+				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}"
 			},
 			"Streams/invited": {
 				"subscriptions": {

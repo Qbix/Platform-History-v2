@@ -9,6 +9,15 @@ var Q = require('../Q');
 var Request = {};
 
 /**
+ * Method for getting the app's canonical baseUrl from the config.
+ * Note that this may not match the baseUrl for all PHP requests.
+ */
+Request.baseUrl = function () {
+	return Q.Config.expect(['Q', 'web', 'appRootUrl'])
+	+ Q.Config.get(['Q', 'web', 'controllerSuffix'], '');
+};
+
+/**
  * Use this to determine what method to treat the request as.
  * @method method
  * @param req {http.Request}

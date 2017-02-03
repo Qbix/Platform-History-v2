@@ -1726,22 +1726,24 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Returns the canonical url of the stream, if any
-	 * @param {integer} [$messageOrdinal=null] pass this to link to the message in the stream
+	 * @param {integer} [$messageOrdinal] pass this to link to the message in the stream, e.g. to highlight it
+	 * @param {string} [$baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
 	 * @return {string|null|false}
 	 */
-	function url($messageOrdinal = null)
+	function url($messageOrdinal = null, $baseUrl = null)
 	{
-		$uri = self::getConfigField($this->type, 'uri', null);
-		if (!$uri) {
+		$url = self::getConfigField($this->type, 'url', null);
+		if (!$url) {
 			return null;
 		}
-		$uriString = Q_Handlebars::renderSource($uri, array(
+		$urlString = Q_Handlebars::renderSource($url, array(
 			'publisherId' => $this->publisherId,
 			'streamName' => explode('/', $this->name),
-			'name' => $this->name
+			'name' => $this->name,
+			'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
 		));
 		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
-		return Q_Uri::url(Q_Uri::from($uriString)->toUrl() . $qs);
+		return Q_Uri::url($urlString . $qs);
 	}
 
 	/**

@@ -14,3 +14,29 @@
 .Websites_presentation_tool .Streams_preview_tool.Streams_related_stream { cursor: pointer; }
 .Websites_presentation_tool .Streams_preview_tool.Streams_related_stream:hover { background: rgba(200, 200, 200, 0.2); }
 .Websites_slide_dialog .Q_dialog_content { padding: 10px; }
+
+.Websites_article_preview_tool {
+	cursor: pointer;
+}
+
+.Websites_article .Websites_article_tool .Streams_html_tool {
+	width: 70%;
+	font-size: 20px;
+}
+
+.Websites_article .Websites_article_tool { overflow: hidden; padding: 20px; }
+.Websites_article .Websites_article_tool p:first-child { margin-top: 0px; }
+.Websites_article .Websites_article_tool .Websites_side_column {
+	position: fixed; 
+    left: 75%;
+    width: 20%;
+}
+
+.Q_mobile #Websites_article_tool .Websites_side_column {
+	top: 80px;
+}
+
+.Websites_article_preview_tool,
+.Websites_announcement_preview_tool {
+	cursor: pointer;
+}
