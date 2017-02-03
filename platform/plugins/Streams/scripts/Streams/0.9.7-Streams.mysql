@@ -1,0 +1,31 @@
+UPDATE {$prefix}related_to
+SET type = "Streams/shared"
+WHERE type = "shared";
+
+UPDATE {$prefix}related_from
+SET type = "Streams/shared"
+WHERE type = "shared";
+
+UPDATE {$prefix}related_to
+SET type = "Streams/subcategories"
+WHERE type = "subcategories";
+
+UPDATE {$prefix}related_from
+SET type = "Streams/subcategories"
+WHERE type = "subcategories";
+
+UPDATE {$prefix}related_to
+SET type = "Streams/images"
+WHERE type = "images";
+
+UPDATE {$prefix}related_from
+SET type = "Streams/images"
+WHERE type = "images";
+
+UPDATE {$prefix}related_to
+SET type = "Streams/interests"
+WHERE type = "interests";
+
+UPDATE {$prefix}related_from
+SET type = "Streams/interests"
+WHERE type = "interests";

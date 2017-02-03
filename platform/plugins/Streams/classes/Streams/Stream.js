@@ -1249,9 +1249,9 @@ Sp.url = function (messageOrdinal, baseUrl)
 		name: this.fields.name,
 		baseUrl: baseUrl || Q.Request.baseUrl()
 	});
-	var sep = url.indexOf('?') >= 0 ? '&' : '?';
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
-	return Q.Uri.url(urlString + qs);
+	return Q.url(urlString + sep + qs);
 }
 
 /**

@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type toUserId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type publisherId
  */
 /**
@@ -53,7 +53,7 @@ Q.mixin(Base, Row);
  * @type lastName
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type icon
  */
 
@@ -235,8 +235,8 @@ Base.prototype.beforeSet_toUserId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".toUserId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".toUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".toUserId");
 		return value;
@@ -257,7 +257,7 @@ Base.prototype.maxSize_toUserId = function () {
 	 */
 Base.column_toUserId = function () {
 
-return [["varchar","31","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -273,8 +273,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -295,7 +295,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",""];
 };
 
 /**
@@ -334,7 +334,7 @@ Base.prototype.beforeSet_username = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".username");
+			throw new Error('Must pass a String to '+this.table()+".username");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".username");
 		return value;
@@ -372,7 +372,7 @@ Base.prototype.beforeSet_firstName = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".firstName");
+			throw new Error('Must pass a String to '+this.table()+".firstName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".firstName");
 		return value;
@@ -410,7 +410,7 @@ Base.prototype.beforeSet_lastName = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".lastName");
+			throw new Error('Must pass a String to '+this.table()+".lastName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".lastName");
 		return value;
@@ -447,8 +447,8 @@ Base.prototype.beforeSet_icon = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".icon");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".icon");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".icon");
 		return value;
@@ -469,7 +469,7 @@ Base.prototype.maxSize_icon = function () {
 	 */
 Base.column_icon = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -485,7 +485,7 @@ Base.prototype.beforeSave = function (value) {
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}
