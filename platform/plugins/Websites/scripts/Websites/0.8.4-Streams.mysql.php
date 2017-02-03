@@ -9,7 +9,7 @@ function Websites_0_8_4_Streams_mysql()
 	$r = new Streams_RelatedTo();
 	$r->toPublisherId = $communityId;
 	$r->toStreamName = 'Websites/article/';
-	$r->type = 'images';
+	$r->type = 'Streams/images';
 	$r->fromPublisherId = $communityId;
 	$r->fromStreamName = 'Streams/image/';
 	$r->save();

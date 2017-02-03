@@ -45,7 +45,7 @@ function Streams_0_8_6_Streams_mysql()
 	Streams_RelatedTo::insert(array(
 		'toPublisherId' => '',
 		'toStreamName' => 'Streams/category/',
-		'type' => 'subcategories',
+		'type' => 'Streams/subcategories',
 		'fromPublisherId' => '',
 		'fromStreamName' => 'Streams/category/'
 	))->execute();

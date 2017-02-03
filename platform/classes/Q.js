@@ -2980,7 +2980,7 @@ Sp.queryField = function Q_queryField(name, value) {
 	var prefixes = ['#!', '#', '?', '!'];
 	var count = prefixes.length;
 	var prefix = '';
-	var i, l, p, keys, parsed;
+	var i, k, l, p, keys, parsed, ret, result;
 	for (i=0; i<count; ++i) {
 		l = prefixes[i].length;
 		p = this.substring(0, l);
@@ -2990,9 +2990,18 @@ Sp.queryField = function Q_queryField(name, value) {
 			break;
 		}
 	}
-	if (Q.isArrayLike(name)) {
-		var ret = {}, keys = [];
-		var parsed = Q.parseQueryString(what, keys);
+	if (!name) {
+		ret = [];
+		parsed = Q.parseQueryString(what, keys);
+		for (k in parsed) {
+			if (parsed[k] == null || parsed[k] === '') {
+				ret.push(k);
+			}
+		}
+		return ret;
+	} else if (Q.isArrayLike(name)) {
+		ret = {}, keys = [];
+		parsed = Q.parseQueryString(what, keys);
 		for (i=0, l=name.length; i<l; ++i) {
 			if (name[i] in parsed) {
 				ret[name[i]] = parsed[name[i]];
@@ -3000,7 +3009,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		}
 		return ret;
 	} else if (Q.isPlainObject(name)) {
-		var result = what;
+		result = what;
 		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
@@ -3010,7 +3019,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		keys = [];
 		parsed = Q.parseQueryString(what, keys);
 		var reg = new RegExp(name);
-		for (var k in parsed) {
+		for (k in parsed) {
 			if (reg.test(k)) {
 				delete parsed[k];
 			}

@@ -112,7 +112,7 @@ var Mp = Streams_Message.prototype;
  * 
  * @method getAll
  */
-Mp.getAll = function _Message_prototype_getAll () {
+Mp.getAllInstructions = function _Message_prototype_getAllInstructions () {
 	try {
 		return JSON.parse(this.fields.instructions);
 	} catch (e) {
@@ -387,7 +387,10 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			Users.pushNotifications(toUserId, {
 				alert: {
 					title: o.subject
-				}
+				}//,
+				// payload: {
+				// 	url: ...
+				// }
 			}, callback, {
 				view: viewPath,
 				fields: o.fields
