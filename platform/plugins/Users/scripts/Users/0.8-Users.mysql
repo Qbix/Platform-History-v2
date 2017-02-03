@@ -11,7 +11,7 @@ CREATE TABLE `{$prefix}app_user` (
   `updatedTime` timestamp NULL DEFAULT NULL,
   `access_token` varchar(1023)  DEFAULT NULL COMMENT 'The OAuth access token',
   `session_secret` varchar(1023) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `session_expires` varchar(255)  DEFAULT NULL,
+  `session_expires` varbinary(255)  DEFAULT NULL,
   `state` enum('visited','added','removed')  NOT NULL DEFAULT 'visited',
   `provider_uid` varchar(200)  NOT NULL,
   PRIMARY KEY (`userId`,`provider`,`appId`),
@@ -39,10 +39,10 @@ DROP TABLE IF EXISTS `{$prefix}device`;
 
 CREATE TABLE `{$prefix}device` (
   `userId` varbinary(31)  NOT NULL,
-  `deviceId` varchar(255)  NOT NULL,
+  `deviceId` varbinary(255)  NOT NULL,
   `platform` enum('ios','android')  NOT NULL,
   `version` varchar(45)  DEFAULT NULL,
-  `sessionId` varchar(255)  NOT NULL,
+  `sessionId` varbinary(255)  NOT NULL,
   `formFactor` enum('mobile','tablet')  DEFAULT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
@@ -60,9 +60,9 @@ CREATE TABLE `{$prefix}email` (
   `updatedTime` timestamp NULL DEFAULT NULL,
   `userId` varbinary(31)  NOT NULL DEFAULT '',
   `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL,
-  `activationCode` varchar(255)  NOT NULL,
+  `activationCode` varbinary(255)  NOT NULL,
   `activationCodeExpires` timestamp NULL DEFAULT NULL,
-  `authCode` varchar(255)  NOT NULL COMMENT 'Used in all links sent by email, to authenticate the source',
+  `authCode` varbinary(255)  NOT NULL COMMENT 'Used in all links sent by email, to authenticate the source',
   PRIMARY KEY (`address`),
   UNIQUE KEY `address` (`address`),
   KEY `updatedTime` (`updatedTime`),
@@ -102,7 +102,7 @@ CREATE TABLE `{$prefix}external_to` (
 DROP TABLE IF EXISTS `{$prefix}identify`;
 
 CREATE TABLE `{$prefix}identify` (
-  `identifier` varchar(255)  NOT NULL,
+  `identifier` varbinary(255)  NOT NULL,
   `state` enum('verified','future')  NOT NULL COMMENT '"future" is a mapping to a user which may later be adopted by someone',
   `userId` varbinary(31)  NOT NULL,
   PRIMARY KEY (`identifier`)
@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS `{$prefix}label`;
 CREATE TABLE `{$prefix}label` (
   `userId` varbinary(31) NOT NULL,
   `label` varchar(63) NOT NULL,
-  `icon` varchar(255) NOT NULL,
+  `icon` varbinary(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`,`label`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Enables display and renaming of labels and their icons';
@@ -127,7 +127,7 @@ CREATE TABLE `{$prefix}label` (
 DROP TABLE IF EXISTS `{$prefix}link`;
 
 CREATE TABLE `{$prefix}link` (
-  `identifier` varchar(255)  NOT NULL,
+  `identifier` varbinary(255)  NOT NULL,
   `userId` varbinary(31)  NOT NULL DEFAULT '',
   `extraInfo` varchar(255)  NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -148,9 +148,9 @@ CREATE TABLE `{$prefix}mobile` (
   `carrier` enum('unverified','att','cingular','sprint','tmobile','verizon')  NOT NULL DEFAULT 'unverified',
   `state` enum('unverified','active','suspended','unsubscribed')  NOT NULL DEFAULT 'unverified',
   `capabilities` enum('unverified','sms','wap','internet','sms_and_wap','sms_and_internet')  NOT NULL DEFAULT 'unverified',
-  `activationCode` varchar(255)  NOT NULL,
+  `activationCode` varbinary(255)  NOT NULL,
   `activationCodeExpires` timestamp NULL DEFAULT NULL,
-  `authCode` varchar(255)  NOT NULL COMMENT 'Used in all links sent by sms, to authenticate the source',
+  `authCode` varbinary(255)  NOT NULL COMMENT 'Used in all links sent by sms, to authenticate the source',
   PRIMARY KEY (`number`),
   UNIQUE KEY `number` (`number`),
   KEY `updatedTime` (`updatedTime`),
@@ -165,10 +165,10 @@ DROP TABLE IF EXISTS `{$prefix}oAuth`;
 CREATE TABLE `{$prefix}oAuth` (
   `userId` varbinary(31) NOT NULL COMMENT 'The user id of the logged in user',
   `client_id` varbinary(31) NOT NULL COMMENT 'The user id of the app',
-  `state` varchar(255) NOT NULL COMMENT 'For client to protect against CSRF attacks',
+  `state` varbinary(255) NOT NULL COMMENT 'For client to protect against CSRF attacks',
   `scope` varchar(255) NOT NULL DEFAULT 'user' COMMENT 'Space delimited set of names of resources you can access',
-  `redirect_uri` varchar(255) NOT NULL COMMENT 'Where the client requested to redirect after creating this access token originally',
-  `access_token` varchar(255) NOT NULL COMMENT 'Bearer token given to the client to access resources',
+  `redirect_uri` varbinary(255) NOT NULL COMMENT 'Where the client requested to redirect after creating this access token originally',
+  `access_token` varbinary(255) NOT NULL COMMENT 'Bearer token given to the client to access resources',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'When this row was created',
   `token_expires_seconds` int(11) DEFAULT NULL COMMENT 'How many seconds until token expires',
   PRIMARY KEY (`userId`,`client_id`,`state`)
@@ -180,10 +180,10 @@ CREATE TABLE `{$prefix}oAuth` (
 DROP TABLE IF EXISTS `{$prefix}session`;
 
 CREATE TABLE `{$prefix}session` (
-  `id` varchar(255)  NOT NULL COMMENT 'the session id',
+  `id` varbinary(255)  NOT NULL COMMENT 'the session id',
   `content` varchar(4095)  NOT NULL COMMENT 'json format',
   `php` varchar(4095)  NOT NULL COMMENT 'php serialized session data',
-  `deviceId` varchar(255)  NOT NULL COMMENT 'the id of the device in {$prefix}devices',
+  `deviceId` varbinary(255)  NOT NULL COMMENT 'the id of the device in {$prefix}devices',
   `timeout` int(11) NOT NULL DEFAULT 0 COMMENT 'how long until the pincode needs to be entered',
   `duration` int(11) NOT NULL DEFAULT 0 DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'PHP timestamp of last time this row was saved',
@@ -197,7 +197,7 @@ DROP TABLE IF EXISTS `{$prefix}total`;
 
 CREATE TABLE `{$prefix}total` (
   `forType` varbinary(31)  NOT NULL,
-  `forId` varchar(255)  NOT NULL,
+  `forId` varbinary(255)  NOT NULL,
   `voteCount` bigint(20) NOT NULL DEFAULT '0',
   `weightTotal` decimal(10,4) NOT NULL DEFAULT '0.0000',
   `value` decimal(10,4) NOT NULL DEFAULT '0.0000',
@@ -214,22 +214,22 @@ CREATE TABLE `{$prefix}user` (
   `id` varbinary(31)  NOT NULL DEFAULT '0',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  `sessionId` varchar(255)  DEFAULT NULL COMMENT 'The session id from the most recent authenticated request from this user.',
-  `mobileToken` varchar(255)  DEFAULT NULL COMMENT 'access token stored on the user''s mobile phone, until they deactivate it',
+  `sessionId` varbinary(255)  DEFAULT NULL COMMENT 'The session id from the most recent authenticated request from this user.',
+  `mobileToken` varbinary(255)  DEFAULT NULL COMMENT 'access token stored on the user''s mobile phone, until they deactivate it',
   `fb_uid` bigint(20) NOT NULL DEFAULT '0' COMMENT 'The facebook id of the user',
   `tw_uid` bigint(20) NOT NULL DEFAULT '0' COMMENT 'The twitter id of the user',
-  `g_uid` varchar(255)  DEFAULT NULL,
-  `y_uid` varchar(255)  DEFAULT NULL,
+  `g_uid` varbinary(255)  DEFAULT NULL,
+  `y_uid` varbinary(255)  DEFAULT NULL,
   `passphraseHash` varchar(64) DEFAULT NULL,
-  `emailAddress` varchar(255)  DEFAULT NULL,
-  `mobileNumber` varchar(255)  DEFAULT NULL,
-  `emailAddressPending` varchar(255)  NOT NULL DEFAULT '',
-  `mobileNumberPending` varchar(255)  NOT NULL DEFAULT '',
+  `emailAddress` varbinary(255)  DEFAULT NULL,
+  `mobileNumber` varbinary(255)  DEFAULT NULL,
+  `emailAddressPending` varbinary(255)  NOT NULL DEFAULT '',
+  `mobileNumberPending` varbinary(255)  NOT NULL DEFAULT '',
   `signedUpWith` enum('none','email','mobile','facebook','twitter','remote')  NOT NULL DEFAULT 'none',
   `username` varchar(63)  NOT NULL,
-  `icon` varchar(255)  NOT NULL COMMENT 'relative path to user''s icon folder, containing 48.png, 32.png and 16.png',
-  `url` varchar(255)  DEFAULT NULL COMMENT 'the url of this user''s fm server',
-  `pincodeHash` varchar(255)  DEFAULT NULL COMMENT 'a smaller security code for when user is already logged in',
+  `icon` varbinary(255)  NOT NULL COMMENT 'relative path to user''s icon folder, containing 48.png, 32.png and 16.png',
+  `url` varbinary(255)  DEFAULT NULL COMMENT 'the url of this user''s fm server',
+  `pincodeHash` varbinary(255)  DEFAULT NULL COMMENT 'a smaller security code for when user is already logged in',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a user in the system';
 
@@ -241,7 +241,7 @@ DROP TABLE IF EXISTS `{$prefix}vote`;
 CREATE TABLE `{$prefix}vote` (
   `userId` varbinary(31)  NOT NULL,
   `forType` varbinary(31)  NOT NULL,
-  `forId` varchar(255)  NOT NULL,
+  `forId` varbinary(255)  NOT NULL,
   `value` decimal(10,4) NOT NULL,
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000',
   `updatedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

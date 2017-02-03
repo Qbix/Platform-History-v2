@@ -29,15 +29,15 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
- * @type client_id
- */
-/**
- * @property {String}
+ * @property {String|Buffer}
  * @type userId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
+ * @type client_id
+ */
+/**
+ * @property {String|Buffer}
  * @type state
  */
 /**
@@ -45,11 +45,11 @@ Q.mixin(Base, Row);
  * @type scope
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type redirect_uri
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type access_token
  */
 /**
@@ -204,8 +204,8 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"client_id",
-		"userId"
+		"userId",
+		"client_id"
 	];
 };
 
@@ -216,8 +216,8 @@ Base.prototype.primaryKey = function () {
  */
 Base.prototype.fieldNames = function () {
 	return [
-		"client_id",
 		"userId",
+		"client_id",
 		"state",
 		"scope",
 		"redirect_uri",
@@ -225,44 +225,6 @@ Base.prototype.fieldNames = function () {
 		"insertedTime",
 		"token_expires_seconds"
 	];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_client_id
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_client_id = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".client_id");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".client_id");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the client_id field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_client_id = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for client_id column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_client_id = function () {
-
-return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -278,9 +240,9 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".userId");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
 };
@@ -291,7 +253,7 @@ Base.prototype.beforeSet_userId = function (value) {
 	 */
 Base.prototype.maxSize_userId = function () {
 
-		return 255;
+		return 31;
 };
 
 	/**
@@ -300,7 +262,45 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_client_id
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_client_id = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".client_id");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".client_id");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the client_id field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_client_id = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for client_id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_client_id = function () {
+
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -316,8 +316,8 @@ Base.prototype.beforeSet_state = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".state");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".state");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".state");
 		return value;
@@ -338,7 +338,7 @@ Base.prototype.maxSize_state = function () {
 	 */
 Base.column_state = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -355,7 +355,7 @@ Base.prototype.beforeSet_scope = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".scope");
+			throw new Error('Must pass a String to '+this.table()+".scope");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".scope");
 		return value;
@@ -392,8 +392,8 @@ Base.prototype.beforeSet_redirect_uri = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".redirect_uri");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".redirect_uri");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".redirect_uri");
 		return value;
@@ -414,7 +414,7 @@ Base.prototype.maxSize_redirect_uri = function () {
 	 */
 Base.column_redirect_uri = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -430,8 +430,8 @@ Base.prototype.beforeSet_access_token = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".access_token");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".access_token");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".access_token");
 		return value;
@@ -452,7 +452,7 @@ Base.prototype.maxSize_access_token = function () {
 	 */
 Base.column_access_token = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -521,11 +521,11 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['client_id','userId'], i;
+	var fields = ['userId','client_id'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}

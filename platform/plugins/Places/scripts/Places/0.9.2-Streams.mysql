@@ -1,0 +1,23 @@
+UPDATE {$prefix}related_to
+SET type = "Places/column"
+WHERE type = "column";
+
+UPDATE {$prefix}related_from
+SET type = "Places/column"
+WHERE type = "column";
+
+UPDATE {$prefix}related_to
+SET type = "Places/floor"
+WHERE type = "floor";
+
+UPDATE {$prefix}related_from
+SET type = "Places/floor"
+WHERE type = "floor";
+
+UPDATE {$prefix}related_to
+SET type = "Places/location"
+WHERE type = "location";
+
+UPDATE {$prefix}related_from
+SET type = "Places/location"
+WHERE type = "location";

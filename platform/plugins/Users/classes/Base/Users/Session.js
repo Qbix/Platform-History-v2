@@ -29,7 +29,7 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type id
  */
 /**
@@ -41,11 +41,11 @@ Q.mixin(Base, Row);
  * @type php
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type userId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type deviceId
  */
 /**
@@ -244,8 +244,8 @@ Base.prototype.beforeSet_id = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".id");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".id");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".id");
 		return value;
@@ -266,7 +266,7 @@ Base.prototype.maxSize_id = function () {
 	 */
 Base.column_id = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
@@ -283,7 +283,7 @@ Base.prototype.beforeSet_content = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".content");
+			throw new Error('Must pass a String to '+this.table()+".content");
 		if (typeof value === "string" && value.length > 4095)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".content");
 		return value;
@@ -321,7 +321,7 @@ Base.prototype.beforeSet_php = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".php");
+			throw new Error('Must pass a String to '+this.table()+".php");
 		if (typeof value === "string" && value.length > 4095)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".php");
 		return value;
@@ -356,8 +356,8 @@ return [["varchar","4095","",false],false,"",null];
 Base.prototype.beforeSet_userId = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -378,7 +378,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","31","",false],true,"MUL",null];
+return [["varbinary","31","",false],true,"MUL",null];
 };
 
 /**
@@ -394,8 +394,8 @@ Base.prototype.beforeSet_deviceId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".deviceId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".deviceId");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".deviceId");
 		return value;
@@ -416,7 +416,7 @@ Base.prototype.maxSize_deviceId = function () {
 	 */
 Base.column_deviceId = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -451,7 +451,7 @@ Base.prototype.maxSize_timeout = function () {
 	 */
 Base.column_timeout = function () {
 
-return [["int","11","",false],false,"",null];
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -496,7 +496,6 @@ return [["int","11","",false],false,"","0"];
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
-		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
@@ -508,7 +507,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","11","",false],true,"",null];
+return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -529,7 +528,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","11","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**
@@ -545,13 +544,10 @@ Base.prototype.beforeSave = function (value) {
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}
-	}
-	if (!this._retrieved && !value['insertedTime']) {
-		this['insertedTime'] = value['insertedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	}
 	// convention: we'll have updatedTime = insertedTime if just created.
 	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');

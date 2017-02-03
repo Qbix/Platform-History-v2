@@ -1,0 +1,23 @@
+UPDATE {$prefix}related_to
+SET type = "Websites/announcements"
+WHERE type = "announcements";
+
+UPDATE {$prefix}related_from
+SET type = "Websites/announcements"
+WHERE type = "announcements";
+
+UPDATE {$prefix}related_to
+SET type = "Websites/articles"
+WHERE type = "articles";
+
+UPDATE {$prefix}related_from
+SET type = "Websites/articles"
+WHERE type = "articles";
+
+UPDATE {$prefix}related_to
+SET type = "Websites/slides"
+WHERE type = "slides";
+
+UPDATE {$prefix}related_from
+SET type = "Websites/slides"
+WHERE type = "slides";
