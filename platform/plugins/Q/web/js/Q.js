@@ -2094,7 +2094,6 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @param {mixed} handler Any kind of callable which Q.handle can invoke
  * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
  *  Used to replace handlers previously added under the same key.
- *  Also used for removing handlers with .remove(key).
  *  If the key is not provided, a unique one is computed.
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
@@ -2103,7 +2102,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
 	var event = this;
-	key = event.add(function _addOnce() {
+	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
 		setTimeout(function () {
 			event.remove(key);
