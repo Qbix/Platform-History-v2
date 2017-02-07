@@ -85,6 +85,10 @@ function _Streams_participants(options) {
 		var $elements = {};
 		state.avatarsWidth = 0;
 		
+		tool.forEachChild('Users/avatar', function () {
+			$elements[this.state.userId] = $(this.element);
+		});
+		
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
@@ -298,7 +302,6 @@ function _Streams_participants(options) {
 			}, userId || null));
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [$element])) {
-				$elements[userId] = $element;
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}
 			if (userId) {
