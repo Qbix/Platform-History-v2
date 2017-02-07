@@ -85,6 +85,10 @@ function _Streams_participants(options) {
 		var $elements = {};
 		state.avatarsWidth = 0;
 		
+		tool.forEachChild('Users/avatar', function () {
+			$elements[this.state.userId] = $(this.element);
+		});
+		
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
@@ -134,8 +138,8 @@ function _Streams_participants(options) {
 			var stream = tool.stream = this;
 			var i = 0, c = 0;
 			$te.removeClass('Streams_participants_loading');
-			Q.Tool.clear($avatars[0]);
-			Q.Tool.clear($blanks[0]);
+			Q.Tool.clear(tool.$avatars[0]);
+			Q.Tool.clear(tool.$blanks[0]);
 			tool.$avatars.empty();
 			tool.$blanks.empty();
 			Q.each(extra.participants, function (userId, participant) {
@@ -298,7 +302,6 @@ function _Streams_participants(options) {
 			}, userId || null));
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [$element])) {
-				$elements[userId] = $element;
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}
 			if (userId) {
@@ -313,7 +316,7 @@ function _Streams_participants(options) {
 				state.avatarsWidth -= $element.outerWidth(true);
 			}
 			if ($element) {
-				$element.remove();
+				Q.removeElement($element[0], true);
 			}
 		}
 	}

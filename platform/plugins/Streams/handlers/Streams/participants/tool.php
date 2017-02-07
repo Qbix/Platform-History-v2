@@ -98,7 +98,7 @@ function Streams_participants_tool($options)
 				'userId' => '',
 				'icon' => true,
 				'short' => true
-			));
+			), "blank_$i");
 		}
 	}
 	$spans = "<span class='Streams_participants_avatars'>$avatars</span>"
