@@ -73,6 +73,11 @@ function _Streams_participants(options) {
 		}
 	},
 	
+	/**
+	 * Refresh the participants tool
+	 * @method refresh
+	 * @param {Function} callback pass a callback to be called after the refresh is done
+	 */
 	refresh: function (callback) {
 		var tool = this;
 		var state = tool.state;
@@ -90,6 +95,7 @@ function _Streams_participants(options) {
 			tool.$pc = $('.Streams_participants_container', $te);
 			tool.$avatars = $('.Streams_participants_avatars', $te);
 			tool.$blanks = $('.Streams_participants_blanks', $te);
+			_continue();
 			return false;
 		}
 		
@@ -126,7 +132,6 @@ function _Streams_participants(options) {
 				return;
 			}
 			var stream = tool.stream = this;
-			var keys = Object.keys(extra.participants);
 			var i = 0, c = 0;
 			$te.removeClass('Streams_participants_loading');
 			Q.Tool.clear($avatars[0]);
@@ -139,43 +144,49 @@ function _Streams_participants(options) {
 				}
 				++c;
 				if (!state.maxShow || ++i <= state.maxShow) {
-					addAvatar(userId);
+					_addAvatar(userId);
 				}
 			}, { sort: 'insertedTime', ascending: false });
-			
+			state.count = c;
 			if (state.showBlanks) {
 				Q.each(c, state.maxShow-1, 1, function () {
-					addAvatar('');
+					_addAvatar('');
 				});
 			}
-			
-			state.count = c;
+			_continue();
+		}, {participants: state.maxLoad});
+		return true;
+		
+		function _continue() {
 			tool.stateChanged('count');
 			
-			tool.adjustInterval = setInterval(adjustInterval, 500);
-			adjustInterval();
+			tool.adjustInterval = setInterval(_adjustInterval, 500);
+			_adjustInterval();
 			
 			if (state.max) {
 				tool.$max.text('/' + state.max);
 			}
 			
-			stream.retain(tool);
-			stream.onMessage("Streams/join")
-			.set(function (stream, message, messages) {
-				addAvatar(message.byUserId, true);
-				++tool.state.count;
-				tool.stateChanged('count');
-			}, tool);
-	
-			stream.onMessage("Streams/leave")
-			.set(function (stream, message, messages) {
-				removeAvatar(message.byUserId);
-				--tool.state.count;
-				tool.stateChanged('count');
-			}, tool);
-			
-			var si = state.invite;
-			if (si && stream.testAdminLevel('invite')) {
+			Q.Streams.retainWith(tool)
+			.get(state.publisherId, state.streamName, function () {
+				var stream = this;
+				stream.onMessage("Streams/join")
+				.set(function (stream, message, messages) {
+					_addAvatar(message.byUserId, true);
+					++tool.state.count;
+					tool.stateChanged('count');
+				}, tool);
+				stream.onMessage("Streams/leave")
+				.set(function (stream, message, messages) {
+					_removeAvatar(message.byUserId);
+					--tool.state.count;
+					tool.stateChanged('count');
+				}, tool);
+				var si = state.invite;
+				if (!si || !stream.testAdminLevel('invite')) {
+					Q.handle(callback, tool, []);
+					return Q.handle(state.onRefresh, tool, []);
+				}
 				Q.Template.render(
 					'Streams/participants/invite',
 					state.templates.invite.fields,
@@ -219,18 +230,15 @@ function _Streams_participants(options) {
 								}, si.clickable)
 							);
 						}
+						Q.handle(callback, tool, []);
 						Q.handle(state.onRefresh, tool, []);
 					},
 					state.templates.invite
 				);
-				++i;
-			} else {
-				Q.handle(state.onRefresh, tool, []);
-			}
-			
-		}, {participants: state.maxLoad});
+			});
+		}
 		
-		function adjustInterval() {
+		function _adjustInterval() {
 			if (state.showSummary) {
 				var w = $te.width() - tool.$summary.outerWidth(true);
 				var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
@@ -282,7 +290,7 @@ function _Streams_participants(options) {
 			}
 		}
 		
-		function addAvatar(userId, prepend) {
+		function _addAvatar(userId, prepend) {
 			var $element = $(Q.Tool.setUpElement('div', 'Users/avatar', {
 				userId: userId,
 				"short": true,
@@ -296,16 +304,16 @@ function _Streams_participants(options) {
 			if (userId) {
 				state.avatarsWidth += $element.outerWidth(true);
 			}
-			adjustInterval();
+			_adjustInterval();
 		}
 		
-		function removeAvatar(userId) {
+		function _removeAvatar(userId) {
 			var $element = $elements[userId];
-			if ($element) {
-				$element.remove();
-			}
 			if (userId) {
 				state.avatarsWidth -= $element.outerWidth(true);
+			}
+			if ($element) {
+				$element.remove();
 			}
 		}
 	}
