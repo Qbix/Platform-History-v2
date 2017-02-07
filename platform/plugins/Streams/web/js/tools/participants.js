@@ -175,7 +175,7 @@ function _Streams_participants(options) {
 			}, tool);
 			
 			var si = state.invite;
-			if (si) {
+			if (si && stream.testAdminLevel('invite')) {
 				Q.Template.render(
 					'Streams/participants/invite',
 					state.templates.invite.fields,
