@@ -40,6 +40,10 @@ function _Streams_participants(options) {
 		}
 	}, tool);
 	
+	tool.forEachChild('Users/avatar', function () {
+		tool.$elements[this.state.userId] = $(this.element);
+	});
+	
 	tool.refresh();
 	
 },
@@ -82,12 +86,8 @@ function _Streams_participants(options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
-		var $elements = {};
+		tool.$elements = {};
 		state.avatarsWidth = 0;
-		
-		tool.forEachChild('Users/avatar', function () {
-			$elements[this.state.userId] = $(this.element);
-		});
 		
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
@@ -299,7 +299,7 @@ function _Streams_participants(options) {
 				userId: userId,
 				"short": true,
 				icon: (window.devicePixelRatio > 1 ? '80' : '40')
-			}, userId || null));
+			}, userId || null, tool.prefix));
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [$element])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();
@@ -311,7 +311,7 @@ function _Streams_participants(options) {
 		}
 		
 		function _removeAvatar(userId) {
-			var $element = $elements[userId];
+			var $element = tool.$elements[userId];
 			if (userId) {
 				state.avatarsWidth -= $element.outerWidth(true);
 			}
