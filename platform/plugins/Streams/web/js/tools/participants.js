@@ -313,7 +313,7 @@ function _Streams_participants(options) {
 				state.avatarsWidth -= $element.outerWidth(true);
 			}
 			if ($element) {
-				$element.remove();
+				Q.removeElement($element[0], true);
 			}
 		}
 	}
