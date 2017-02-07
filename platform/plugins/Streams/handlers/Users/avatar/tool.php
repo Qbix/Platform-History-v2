@@ -24,6 +24,8 @@
  */
 function Users_avatar_tool($options)
 {
+	Q_Response::addStylesheet('plugins/Users/css/Users.css');
+	Q_Response::addScript('plugins/Streams/js/tools/avatar.js');
 	$defaults = array(
 		'icon' => false,
 		'short' => false,
@@ -31,16 +33,8 @@ function Users_avatar_tool($options)
 		'editable' => false
 	);
 	$options = array_merge($defaults, $options);
-	Q_Response::addStylesheet('plugins/Users/css/Users.css');
 	$loggedInUser = Users::loggedInUser();
 	$loggedInUserId = $loggedInUser ? $loggedInUser->id : "";
-	if (!isset($options['userId'])) {
-		$options['userId'] = $loggedInUserId;
-	}
-	if ($options['userId'] === '') {
-		return '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>'
-			.'<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>';
-	}
 	unset($options['iconAttributes']);
 	if (empty($options['editable'])) {
 		$options['editable'] = array();
@@ -52,6 +46,13 @@ function Users_avatar_tool($options)
 	Q_Response::setToolOptions($options);
 	if (!empty($options['renderOnClient'])) {
 		return '';
+	}
+	if (!isset($options['userId'])) {
+		$options['userId'] = $loggedInUserId;
+	}
+	if ($options['userId'] === '') {
+		return '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>'
+			.'<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>';
 	}
 	$avatar = Streams_Avatar::fetch($loggedInUserId, $options['userId']);
 	if (!$avatar) {

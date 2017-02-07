@@ -19,30 +19,32 @@
  */
 function Users_avatar_tool($options)
 {
+	Q_Response::addStylesheet('plugins/Users/css/Users.css');
+	Q_Response::addScript('plugins/Users/js/tools/avatar.js');
+	Q_Response::setToolOptions($options);
 	$defaults = array(
 		'icon' => false,
 		'editable' => false
 	);
 	$options = array_merge($defaults, $options);
-	if (empty($options['userId'])) {
-		$user = Users::loggedInUser();
-		$options['userId'] = $user->id;
-	} else {
-		$user = Users_User::fetch($options['userId']);
-	}
-	Q_Response::addStylesheet('plugins/Q/css/Q.css');
-	Q_Response::setToolOptions($options);
 	if (!empty($options['renderOnClient'])) {
 		return '';
 	}
-	
+	if (!isset($options['userId'])) {
+		$user = Users::loggedInUser();
+		$options['userId'] = $user->id;
+	} else if ($options['userId'] === '') {
+		return '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>'
+			.'<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>';
+	} else {
+		$user = Users_User::fetch($options['userId']);
+	}
 	if (!$user) {
 		return '';
 	}
 	$user->addPreloaded();
 	$p = $options;
 	$p['userId'] = $user->id;
-	Q_Response::setToolOptions($p);
 	$result = '';
 	$icon = $options['icon'];
 	if ($icon) {
@@ -58,6 +60,6 @@ function Users_avatar_tool($options)
 			: $class;
 		$result .= Q_Html::img($user->iconUrl($icon), 'user icon', $attributes);
 	}
-	$result .= '<span class="Users_avatar_name">' . $user->username . '</span>';
+	$result .= '<span class="Users_avatar_name">' . $user->displayName() . '</span>';
 	return $result;
 }
