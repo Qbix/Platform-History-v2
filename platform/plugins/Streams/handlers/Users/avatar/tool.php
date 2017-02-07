@@ -25,7 +25,6 @@
 function Users_avatar_tool($options)
 {
 	Q_Response::addStylesheet('plugins/Users/css/Users.css');
-	Q_Response::addScript('plugins/Streams/js/tools/avatar.js');
 	$defaults = array(
 		'icon' => false,
 		'short' => false,
