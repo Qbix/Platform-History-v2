@@ -1,11 +1,11 @@
 CREATE TABLE `{$prefix}customer` (
   `userId` varbinary(31) NOT NULL DEFAULT '',
   `payments` enum('stripe','authnet') NOT NULL DEFAULT 'stripe' COMMENT 'the payment processor for the customer',
-  `customerId` varchar(255) NOT NULL DEFAULT '' COMMENT 'the customer id in the payments processor',
+  `customerId` varbinary(255) NOT NULL DEFAULT '' COMMENT 'the customer id in the payments processor',
   PRIMARY KEY (`userId`,`payments`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `{$prefix}charge`
-ADD COLUMN `subscriptionPublisherId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `userId`,
-CHANGE `subscriptionId` `subscriptionStreamName` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+ADD COLUMN `subscriptionPublisherId` varbinary(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `userId`,
+CHANGE `subscriptionId` `subscriptionStreamName` varbinary(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
 ADD PRIMARY KEY (id, userId);

@@ -1233,23 +1233,25 @@ Sp.post = function (asUserId, fields, callback) {
 
 /**
  * Returns the canonical url of the stream, if any
- * @param {Integer} [messageOrdinal=null] pass this to link to a message in the stream
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
-Sp.url = function (messageOrdinal)
+Sp.url = function (messageOrdinal, baseUrl)
 {
-	var uri = Streams_Stream.getConfigField(this.fields.type, 'uri', null);
-	if (!uri) {
+	var url = Streams_Stream.getConfigField(this.fields.type, 'url', null);
+	if (!url) {
 		return null;
 	}
-	var uriString = Q.Handlebars.renderSource(uri, {
+	var urlString = Q.Handlebars.renderSource(url, {
 		publisherId: this.fields.publisherId,
 		streamName: this.fields.name.split('/'),
-		name: this.fields.name
+		name: this.fields.name,
+		baseUrl: baseUrl || Q.Request.baseUrl()
 	});
-	var qs = messageOrdinal ? "?"+messageOrdinal : "";
-	// TODO: IMPLEMENT Q.Uri class
-	return Q.Uri && Q.Uri.url(Q.Uri.from(uriString).toUrl() + qs);
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
+	var qs = messageOrdinal ? sep+messageOrdinal : "";
+	return Q.url(urlString + sep + qs);
 }
 
 /**

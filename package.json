@@ -17,7 +17,7 @@
 		"nodemailer-sendmail-transport": "1.x",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
-		"apn": "1.x.x",
+		"node-pushnotifications": "1.0.x",
 		"crypto-js": "3.x.x"
 	},
 	"repository": {

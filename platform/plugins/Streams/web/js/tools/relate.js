@@ -38,7 +38,7 @@ Q.Tool.define("Streams/relate", function _Streams_relate_tool (options) {
 	publisherId: null,
 	streamName: null,
 	communityId: Q.Users.communityId,
-	relationType: 'announcements',
+	relationType: null,
 	relateFrom: false,
 	types: [],
 	typeNames: {},

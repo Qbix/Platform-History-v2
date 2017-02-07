@@ -25,9 +25,9 @@ Q.Tool.define("Websites/presentation", function () {
 			}
 		},
 		'.Websites_slide_preview_tool': {
-			onInvoke: 'Q.Websites.Presentation.handlers.invoke'
+			onInvoke: 'Q.Websites.presentation.invoke'
 		},
-		relationType: 'slides'
+		relationType: 'Websites/slides'
 	}).appendTo(tool.element).activate();
 },
 

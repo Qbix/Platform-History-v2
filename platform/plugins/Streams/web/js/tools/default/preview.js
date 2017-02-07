@@ -13,7 +13,8 @@
  * @param {Object} [options] this object contains function parameters
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
  *   @uses Q inplace
- *   @param {Object} [options.templates] Under the keys "views", "edit" and "create" you can override options for Q.Template.render .
+ *   @param {Object} [options.templates] Under the keys "views", "edit" and "create"
+ *    you can override options for Q.Template.render .
  *     @param {Object} [options.templates.view]
  *       @param {String} [options.templates.view.name='Streams/image/preview/view']
  *       @param {Object} [options.templates.view.fields]
@@ -26,7 +27,9 @@
  *         @param {String} [options.templates.edit.fields.alt]
  *         @param {String} [options.templates.edit.fields.titleClass]
  *         @param {String} [options.templates.edit.fields.titleTag]
- *   @param {Q.Event} [options.onInvoke] onInvoke is an event to execute during Q.Pointer.fastclick
+ *   @param {Q.Event} [options.onInvoke] onInvoke fires during Q.Pointer.fastclick
+ *    and your handlers should open the corresponding full stream tool in a dialog or page.
+ *    The first parameter is the preview tool.
  */
 Q.Tool.define("Streams/default/preview", "Streams/preview",
 function _Streams_default_preview(options, preview) {

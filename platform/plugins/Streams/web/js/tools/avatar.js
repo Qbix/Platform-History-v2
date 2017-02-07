@@ -50,7 +50,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	if (state.editable === true) {
 		state.editable = ['icon', 'name'];
 	}
-	this.refresh();
+	this.refresh(true);
 	if (!state.userId || !state.reflectChanges) {
 		return;
 	}
@@ -110,33 +110,28 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	/**
 	 * Refresh the avatar's display
 	 * @method refresh
+	 * @param {boolean} [unlessContent=false] only used by constructor to pass true
 	 */
-	refresh: function () {
+	refresh: function (unlessContent) {
 		
 		var tool = this;
 		var state = this.state;
-		if (tool.element.childNodes.length) {
-			return _present();
-		}
-		
-		// TODO: implement analogous functionality
-		// to when Users/avatar is rendered server-side,
-		// with "editable" and the same <span> elements
-		// for firstName and lastName.
-		
 		if (state.userId === undefined) {
 			console.warn("Users/avatar: no userId provided");
 			return; // empty
 		}
+		if (unlessContent && tool.element.childNodes.length) {
+			return _present();
+		}
+		Q.Tool.clear(tool.element);
 		if (state.icon === true) {
 			state.icon = Users.icon.defaultSize;
 		}
-	
+		
 		var p = new Q.Pipe(['icon', 'contents'], function (params) {
 			tool.element.innerHTML = params.icon[0] + params.contents[0];
 			_present();
 		});
-		
 		if (state.userId == '') {
 			var fields = Q.extend({}, state.templates.contents.fields, {
 				name: ''
@@ -195,6 +190,15 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 				});
 			}
 		});
+		
+		// Retain the streams, so they can be refreshed while this tool is active,
+		// triggering the Streams plugin to update the avatar.
+		Streams.Stream.retain(state.userId, [
+			'Streams/user/firstName', 
+			'Streams/user/lastName', 
+			'Streams/user/username',
+			'Streams/user/icon'
+		], tool);
 	
 		function _present() {
 			Q.handle(state.onRefresh, tool, []);
@@ -264,6 +268,9 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 					}
 				)
 			}
+			Streams.onAvatar(state.userId).set(function () {
+				tool.refresh();
+			}, tool);
 		}
 	}
 }

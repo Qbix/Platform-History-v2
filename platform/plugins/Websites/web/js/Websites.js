@@ -9,11 +9,23 @@
 (function(Q, $) {
 
 var Websites = Q.Websites = Q.plugins.Websites = {
-
-};
-
-Websites.Presentation = {
-	handlers: {
+	announcement: {
+		url: function (articleId) {
+			return Q.url('announcement/'+articleId);
+		},
+		onRelate: function (stateStream, chosenStream) {
+			alert('Announcement posted');
+			var announced = stateStream.getAttribute('announced') || {};
+			var timestamp = Math.floor(Date.now()/1000);
+			announced[timestamp] = {
+				name: chosenStream.fields.name, 
+				title: chosenStream.fields.title
+			};
+			stateStream.setAttribute('announced', announced);
+			stateStream.save();
+		}
+	},
+	presentation: {
 		invoke: function (preview) {
 			var ps = preview.state;
 			Q.Streams.get(ps.publisherId, ps.streamName, function () {
@@ -44,6 +56,7 @@ Websites.Presentation = {
 			});
 		}
 	}
+	
 };
 
 /**
