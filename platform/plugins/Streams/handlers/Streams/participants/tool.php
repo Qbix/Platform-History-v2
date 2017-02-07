@@ -8,24 +8,19 @@
  * This tool renders the participants in a stream
  * @class Streams participants
  * @constructor
- * @param {array} [options] Provide options for this tool
- *   @param {string} [options.publisherId] The id of the publisher
- *   @required
- *   @param {string} [options.streamName] The name of the stream
- *   @required
- *   @param {string} [options.stream] You can pass this instead of publisherId and streamName
- *   @param {integer} [options.max]
+ * @param {array} [$options] Provide options for this tool
+ *   @param {string} $options.publisherId The id of the publisher
+ *   @param {string} $options.streamName The name of the stream
+ *   @param {Streams_Stream} [$options.stream] You can pass this instead of publisherId and streamName
+ *   @param {integer} [$options.max]
  *    The number, if any, to show in the denominator of the summary
- *   @optional
- *   @param {integer} [options.maxShow]
+ *   @param {integer} [$options.maxShow=10]
  *    The maximum number of participants to fetch for display
- *   @optional
- *   @default 10
- *   @param {Q.Event} [options.onRefresh] An event that occurs when the tool is refreshed
- *   @optional
- *   @param {boolean} [options.renderOnClient]
+ *   @param {Q.Event} [$options.onRefresh] An event that occurs when the tool is refreshed
+ *   @param {boolean} [$options.showSummary] Whether to show a summary
+ *   @param {boolean} [$options.showBlanks] Whether to show blank avatars in place of remaining spots
+ *   @param {boolean} [$options.renderOnClient=false]
  *    If true, only the html container is rendered, so the client will do the rest.
- *   @optional
  */
 function Streams_participants_tool($options)
 {
@@ -51,8 +46,11 @@ function Streams_participants_tool($options)
 	$options['streamName'] = $streamName;
 	$max = Q_Config::get(
 		'Streams', 'participants', 'max', 
-		Q::ifset($options, 'max', 10)
+		Q::ifset($options, 'max', null)
 	);
+	$maxShow = Q::ifset($options, 'maxShow', 10);
+	$showBlanks = Q::ifset($options, 'showBlanks', false);
+	$showSummary = Q::ifset($options, 'showSummary', false);
 	
 	if (empty($stream)) {
 		$stream = Streams::fetchOne(null, $publisherId, $streamName);
@@ -83,8 +81,7 @@ function Streams_participants_tool($options)
 				continue;
 			}
 			++$c;
-			if (empty($options['maxShow'])
-			or ++$i <= $options['maxShow']) {
+			if (!$maxShow or ++$i <= $maxShow) {
 				$avatars .= Q::tool("Users/avatar", array(
 					'userId' => $p->userId,
 					'icon' => true,
@@ -93,8 +90,18 @@ function Streams_participants_tool($options)
 			}
 		}
 	}
+	$blanks = '';
+	if ($showBlanks) {
+		for ($i = $c; $i < $maxShow - 1; ++$i) {
+			$blanks .= Q::tool("Users/avatar", array(
+				'userId' => '',
+				'icon' => true,
+				'short' => true
+			));
+		}
+	}
 	$spans = "<span class='Streams_participants_avatars'>$avatars</span>"
-		. "<span class='Streams_participants_blanks'></span>";
+		. "<span class='Streams_participants_blanks'>$blanks</span>";
 	$container = "<div class='Streams_participants_container'>$spans</div>";
 	$count = "<span class='Streams_participants_count'>$c</span>";
 	$m = isset($options['max']) ? '/'.$options['max'] : '';
