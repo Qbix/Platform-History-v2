@@ -90,6 +90,7 @@ function Streams_participants_tool($options)
 			}
 		}
 	}
+	Q_Response::setToolOptions('count', $c);
 	$blanks = '';
 	if ($showBlanks) {
 		for ($i = $c; $i < $maxShow - 1; ++$i) {
