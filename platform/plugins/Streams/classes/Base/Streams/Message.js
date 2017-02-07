@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type publisherId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type streamName
  */
 /**
@@ -45,15 +45,15 @@ Q.mixin(Base, Row);
  * @type sentTime
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type byUserId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type byClientId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type type
  */
 /**
@@ -256,8 +256,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -278,7 +278,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",""];
 };
 
 /**
@@ -294,8 +294,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -316,7 +316,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
@@ -375,8 +375,8 @@ Base.prototype.beforeSet_byUserId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".byUserId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".byUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".byUserId");
 		return value;
@@ -397,7 +397,7 @@ Base.prototype.maxSize_byUserId = function () {
 	 */
 Base.column_byUserId = function () {
 
-return [["varchar","31","",false],false,"",""];
+return [["varbinary","31","",false],false,"",""];
 };
 
 /**
@@ -413,8 +413,8 @@ Base.prototype.beforeSet_byClientId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".byClientId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".byClientId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".byClientId");
 		return value;
@@ -435,7 +435,7 @@ Base.prototype.maxSize_byClientId = function () {
 	 */
 Base.column_byClientId = function () {
 
-return [["varchar","31","",false],false,"",""];
+return [["varbinary","31","",false],false,"",""];
 };
 
 /**
@@ -451,8 +451,8 @@ Base.prototype.beforeSet_type = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".type");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".type");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".type");
 		return value;
@@ -473,7 +473,7 @@ Base.prototype.maxSize_type = function () {
 	 */
 Base.column_type = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -490,7 +490,7 @@ Base.prototype.beforeSet_content = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".content");
+			throw new Error('Must pass a String to '+this.table()+".content");
 		if (typeof value === "string" && value.length > 1023)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".content");
 		return value;
@@ -528,7 +528,7 @@ Base.prototype.beforeSet_instructions = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".instructions");
+			throw new Error('Must pass a String to '+this.table()+".instructions");
 		if (typeof value === "string" && value.length > 4092)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".instructions");
 		return value;
@@ -624,7 +624,7 @@ Base.prototype.beforeSave = function (value) {
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}

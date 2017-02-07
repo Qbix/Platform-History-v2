@@ -1648,7 +1648,8 @@ EOT;
 				$functions["beforeSet_$field_name_safe"] = array();
 			if (! isset($js_functions["beforeSet_$field_name_safe"]))
 				$js_functions["beforeSet_$field_name_safe"] = array();
-			switch (strtolower($type_name)) {
+			$type_name_lower = strtolower($type_name);
+			switch ($type_name_lower) {
 				case 'tinyint':
 				case 'smallint':
 				case 'int':
@@ -1745,15 +1746,26 @@ $dc
 EOT;
 					break;
 				
+				case 'char':
 				case 'varchar':
+				case 'binary':
 				case 'varbinary':
 				case 'tinytext':
 				case 'text':
 				case 'mediumtext':
 				case 'longtext':
+				case 'tinyblob':
+				case 'blob':
+				case 'mediumblob':
+				case 'longblob':
 					$isTextLike = true;
+					$isBinary = in_array($type_name_lower, array(
+						'binary', 'varbinary',
+						'tinyblob', 'blob', 'mediumblob', 'longblob'
+					));
+					$orBuffer1 = $isBinary ? "|Buffer" : "";
 					$properties[]="{string} $field_name";
-					$js_properties[] = "{String} $field_name";
+					$js_properties[] = "{String$orBuffer1} $field_name";
 					$functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Returns the maximum string length that can be assigned to the $field_name field
@@ -1790,9 +1802,11 @@ EOT;
 					$js_functions["maxSize_$field_name_safe"]['return_statement'] = <<<EOT
 		return $type_display_range;
 EOT;
+					$bufferCheck = $isBinary ? " && !(value instanceof Buffer)" : "";
+					$orBuffer2 = $isBinary ? " or Buffer" : "";
 					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
-		{$js_null_check}{$js_null_fix}{$js_dbe_check}if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".$field_name");
+		{$js_null_check}{$js_null_fix}{$js_dbe_check}if (typeof value !== "string" && typeof value !== "number"$bufferCheck)
+			throw new Error('Must pass a String$orBuffer2 to '+this.table()+".$field_name");
 		if (typeof value === "string" && value.length > $type_display_range)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".$field_name");
 EOT;
@@ -2004,7 +2018,7 @@ EOT;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}

@@ -5,16 +5,16 @@ DROP TABLE IF EXISTS `{$prefix}access`;
 
 CREATE TABLE `{$prefix}access` (
   `publisherId` varbinary(31) NOT NULL COMMENT 'id of user who owns the stream',
-  `streamName` varchar(255) NOT NULL COMMENT 'local to Q server of publisherId',
+  `streamName` varbinary(255) NOT NULL COMMENT 'local to Q server of publisherId',
   `ofUserId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user whose subscription access being recorded',
-  `ofContactLabel` varchar(255) NOT NULL DEFAULT '' COMMENT 'to grant access to all contacts under a certain label, set byUserId = 0',
+  `ofContactLabel` varbinary(255) NOT NULL DEFAULT '' COMMENT 'to grant access to all contacts under a certain label, set byUserId = 0',
   `grantedByUserId` varbinary(31) DEFAULT NULL COMMENT 'id of the user who granted the access. This is publisherId unless user has adminLevel >= invite',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
   `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of publisherId',
   `readLevel` int(11) NOT NULL DEFAULT '0' COMMENT '<0=ignored, 0=''none'', 10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
   `writeLevel` int(11) NOT NULL DEFAULT '0' COMMENT '<0=ignored, 0=''none'', 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close',
-  `permissions` varchar(255) DEFAULT NULL COMMENT 'JSON array of permission names',
   `adminLevel` int(11) NOT NULL DEFAULT '0' COMMENT '<0=ignored, 0=''none'', 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
+  `permissions` varchar(255) DEFAULT NULL COMMENT 'JSON array of permission names',
   PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`,`ofContactLabel`),
   KEY `subscriber` (`ofUserId`),
   KEY `contacts` (`ofContactLabel`)
@@ -32,7 +32,7 @@ CREATE TABLE `{$prefix}avatar` (
   `username` varchar(255) NOT NULL COMMENT 'just a cache of the username',
   `firstName` varchar(255) NOT NULL DEFAULT '' COMMENT 'if not empty, the user can see this first name',
   `lastName` varchar(255) NOT NULL DEFAULT '' COMMENT 'if not empty, the user can see this last name',
-  `icon` varchar(255) NOT NULL COMMENT 'the icon to display',
+  `icon` varbinary(255) NOT NULL COMMENT 'the icon to display',
 PRIMARY KEY (`toUserId`,`publisherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s Q server';
 
@@ -42,13 +42,13 @@ PRIMARY KEY (`toUserId`,`publisherId`)
 DROP TABLE IF EXISTS `{$prefix}invite`;
 
 CREATE TABLE `{$prefix}invite` (
-  `token` varchar(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
+  `token` varbinary(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
   `userId` varbinary(31) NOT NULL COMMENT 'id of user who is being invited to the stream',
   `publisherId` varbinary(31) NOT NULL COMMENT 'id of user who owns the stream',
-  `streamName` varchar(255) NOT NULL COMMENT 'local to Q server of publisherId',
+  `streamName` varbinary(255) NOT NULL COMMENT 'local to Q server of publisherId',
   `invitingUserId` varbinary(31) NOT NULL COMMENT 'id of the user who invited the person to the stream. This is publisherId unless user has adminLevel >= invite',
   `displayName` varchar(255) NOT NULL COMMENT 'display name, computed at invite time',
-  `appUrl` varchar(255) NOT NULL COMMENT 'the application url where user is invited.',
+  `appUrl` varbinary(255) NOT NULL COMMENT 'the application url where user is invited.',
   `readLevel` int(11) DEFAULT NULL COMMENT '0=none, 10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
   `writeLevel` int(11) DEFAULT NULL COMMENT '0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
   `adminLevel` int(11) DEFAULT NULL COMMENT '0=none, 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
@@ -68,7 +68,7 @@ DROP TABLE IF EXISTS `{$prefix}invited`;
 
 CREATE TABLE `{$prefix}invited` (
   `userId` varbinary(31) NOT NULL COMMENT 'id of user who is being invited to the stream',
-  `token` varchar(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
+  `token` varbinary(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
   `state` enum('pending','accepted','declined','forwarded','expired','claimed') NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -83,12 +83,12 @@ DROP TABLE IF EXISTS `{$prefix}message`;
 
 CREATE TABLE `{$prefix}message` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream to place the message on',
-  `streamName` varchar(255) NOT NULL COMMENT 'the stream to place the message on',
+  `streamName` varbinary(255) NOT NULL COMMENT 'the stream to place the message on',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
   `sentTime` timestamp NULL DEFAULT NULL COMMENT 'time on Q server of byUserId',
   `byUserId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of the user sending message.',
   `byClientId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of the Streams client sending message.',
-  `type` varchar(255) NOT NULL COMMENT 'the type of the message, such as text or video',
+  `type` varbinary(255) NOT NULL COMMENT 'the type of the message, such as text or video',
   `content` varchar(1023) NOT NULL COMMENT 'short human-readable content, like twitter and its 140 characters',
   `instructions` varchar(4092) NOT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding',
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000' COMMENT 'this may depend on the reputation of user_by relative to the stream',
@@ -105,11 +105,11 @@ CREATE TABLE `{$prefix}notification` (
   `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the user to notify',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
-  `streamName` varchar(255) NOT NULL COMMENT 'the stream causing the notification',
-  `type` varchar(255) DEFAULT NULL COMMENT 'the type of message',
+  `streamName` varbinary(255) NOT NULL COMMENT 'the stream causing the notification',
+  `type` varbinary(255) DEFAULT NULL COMMENT 'the type of message',
   `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
   `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
-  `comment` varchar(255) DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
+  `comment` varbinary(255) DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
   PRIMARY KEY (`userId`,`insertedTime`),
   KEY `viewedTime` (`viewedTime`),
   KEY `stream` (`publisherId`,`streamName`),
@@ -124,7 +124,7 @@ DROP TABLE IF EXISTS `{$prefix}participant`;
 
 CREATE TABLE `{$prefix}participant` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'The id of the user publishing the stream',
-  `streamName` varchar(255) NOT NULL COMMENT 'The name of the stream where people can chat about this message',
+  `streamName` varbinary(255) NOT NULL COMMENT 'The name of the stream where people can chat about this message',
   `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'The id of the user participating in the stream',
   `streamType` varchar(63) DEFAULT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -150,7 +150,7 @@ DROP TABLE IF EXISTS `{$prefix}participating`;
 CREATE TABLE `{$prefix}participating` (
   `userId` varbinary(31) NOT NULL,
   `publisherId` varbinary(31) NOT NULL,
-  `streamName` varchar(255) NOT NULL,
+  `streamName` varbinary(255) NOT NULL,
   `state` enum('invited','participating','left') NOT NULL,
   `fresh` int(10) unsigned NOT NULL DEFAULT '0',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -165,10 +165,10 @@ DROP TABLE IF EXISTS `{$prefix}related_from`;
 
 CREATE TABLE `{$prefix}related_from` (
   `fromPublisherId` varbinary(31) NOT NULL COMMENT 'publisherId of member',
-  `fromStreamName` varchar(255) NOT NULL COMMENT 'name of member',
-  `type` varchar(255) NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
+  `fromStreamName` varbinary(255) NOT NULL COMMENT 'name of member',
+  `type` varbinary(255) NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
   `toPublisherId` varbinary(31) NOT NULL COMMENT 'publisherId of category',
-  `toStreamName` varchar(255) NOT NULL COMMENT 'name of category',
+  `toStreamName` varbinary(255) NOT NULL COMMENT 'name of category',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`fromPublisherId`,`fromStreamName`,`type`,`toPublisherId`,`toStreamName`),
   KEY `sorting` (`fromPublisherId`,`fromStreamName`,`type`)
@@ -181,10 +181,10 @@ DROP TABLE IF EXISTS `{$prefix}related_to`;
 
 CREATE TABLE `{$prefix}related_to` (
   `toPublisherId` varbinary(31) NOT NULL COMMENT 'publisherId of category',
-  `toStreamName` varchar(255) NOT NULL COMMENT 'name of category',
-  `type` varchar(255) NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
+  `toStreamName` varbinary(255) NOT NULL COMMENT 'name of category',
+  `type` varbinary(255) NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
   `fromPublisherId` varbinary(31) NOT NULL COMMENT 'publisherId of member',
-  `fromStreamName` varchar(255) NOT NULL COMMENT 'name of member',
+  `fromStreamName` varbinary(255) NOT NULL COMMENT 'name of member',
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000' COMMENT 'used for sorting',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`toPublisherId`,`toStreamName`,`type`,`fromPublisherId`,`fromStreamName`),
@@ -198,7 +198,7 @@ DROP TABLE IF EXISTS `{$prefix}request`;
 
 CREATE TABLE `{$prefix}request` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user who owns the stream',
-  `streamName` varchar(255) NOT NULL COMMENT 'local to Q server of publisherId',
+  `streamName` varbinary(255) NOT NULL COMMENT 'local to Q server of publisherId',
   `byUserId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user who is requesting access to the stream',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
   `readLevel` int(11) NOT NULL DEFAULT 0 COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
@@ -216,7 +216,7 @@ DROP TABLE IF EXISTS `{$prefix}rule`;
 CREATE TABLE `{$prefix}rule` (
   `ofUserId` varbinary(31) NOT NULL DEFAULT '',
   `publisherId` varbinary(31) NOT NULL DEFAULT '',
-  `streamName` varchar(255) NOT NULL,
+  `streamName` varbinary(255) NOT NULL,
   `ordinal` int(11) NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `readyTime` timestamp NULL DEFAULT NULL COMMENT 'time from which user is ready to receive notifications again',
@@ -233,14 +233,14 @@ DROP TABLE IF EXISTS `{$prefix}sent`;
 
 CREATE TABLE `{$prefix}sent` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream to place the message on',
-  `streamName` varchar(255) NOT NULL COMMENT 'the stream to place the message on',
+  `streamName` varbinary(255) NOT NULL COMMENT 'the stream to place the message on',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
   `sentTime` timestamp NULL DEFAULT NULL COMMENT 'time on Q server of byUserId',
   `byUserId` varbinary(31) NOT NULL COMMENT 'id of the user sending the message.',
   `comment` varchar(255) NOT NULL COMMENT 'short human-readable content, like twitter and its 140 characters',
   `instructions` varchar(4092) DEFAULT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding',
   `chatPublisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'If not 0, id of user that publishes the chat stream',
-  `chatStreamName` varchar(255) DEFAULT NULL COMMENT 'The name of the stream where people can chat about this message',
+  `chatStreamName` varbinary(255) DEFAULT NULL COMMENT 'The name of the stream where people can chat about this message',
   KEY `stream` (`publisherId`,`streamName`),
   KEY `author` (`byUserId`),
   KEY `insertedTime` (`insertedTime`),
@@ -254,19 +254,19 @@ DROP TABLE IF EXISTS `{$prefix}stream`;
 
 CREATE TABLE `{$prefix}stream` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream',
-  `name` varchar(255) NOT NULL COMMENT 'the name of the stream',
+  `name` varbinary(255) NOT NULL COMMENT 'the name of the stream',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
   `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'the time that this stream row has last changed for whatever reason',
   `type` varchar(63) NOT NULL COMMENT 'mimetypes plus more types of the form a/b and a/b/c . Can also be "group" or "chat"',
   `title` varchar(255) NOT NULL COMMENT 'human-readable title of the stream',
-  `icon` varchar(255) NOT NULL DEFAULT 'default' COMMENT 'relative path to stream''s icon folder, containing 48.png, 32.png and 16.png',
+  `icon` varbinary(255) NOT NULL DEFAULT 'default' COMMENT 'relative path to stream''s icon folder, containing 48.png, 32.png and 16.png',
   `content` varchar(1023) NOT NULL COMMENT 'This content can be indexable',
   `attributes` varchar(1023) DEFAULT NULL COMMENT 'attributes are stored as JSON',
   `readLevel` int(11) NOT NULL DEFAULT '40' COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
   `writeLevel` int(11) NOT NULL DEFAULT '10' COMMENT '0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close',
   `adminLevel` int(11) NOT NULL DEFAULT '20' COMMENT '10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
   `permissions` varchar(255) DEFAULT NULL COMMENT 'JSON array of permission names',
-  `inheritAccess` varchar(255) DEFAULT NULL COMMENT 'JSON array of [[publisherId, streamName],...] to inherit access from',
+  `inheritAccess` varbinary(255) DEFAULT NULL COMMENT 'JSON array of [[publisherId, streamName],...] to inherit access from',
   `messageCount` int(11) NOT NULL DEFAULT '0',
   `participantCount` int(11) NOT NULL DEFAULT '0',
   `closedTime` TIMESTAMP NULL DEFAULT NULL COMMENT 'this records the time, if any, that the stream was last closed for updates',
@@ -280,7 +280,7 @@ DROP TABLE IF EXISTS `{$prefix}subscription`;
 
 CREATE TABLE `{$prefix}subscription` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user who owns the stream',
-  `streamName` varchar(255) NOT NULL DEFAULT '' COMMENT 'id of user who would be publishing the stream',
+  `streamName` varbinary(255) NOT NULL DEFAULT '' COMMENT 'id of user who would be publishing the stream',
   `ofUserId` varbinary(31) NOT NULL COMMENT 'local to Q server of publisherId',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Q server of publisherId',
   `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of publisherId',
@@ -298,8 +298,8 @@ DROP TABLE IF EXISTS `{$prefix}total`;
 
 CREATE TABLE `{$prefix}total` (
   `publisherId` varbinary(31) NOT NULL,
-  `streamName` varchar(255) NOT NULL,
-  `messageType` varchar(255) NOT NULL,
+  `streamName` varbinary(255) NOT NULL,
+  `messageType` varbinary(255) NOT NULL,
   `messageCount` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`publisherId`,`streamName`,`messageType`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Used to count the number of messages of a certain type';

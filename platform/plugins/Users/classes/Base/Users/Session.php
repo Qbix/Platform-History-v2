@@ -251,7 +251,7 @@ abstract class Base_Users_Session extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -413,7 +413,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -467,7 +467,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -528,7 +528,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => NULL,
+  3 => '0',
 );			
 	}
 
@@ -595,9 +595,6 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if (!isset($value)) {
-			return array('insertedTime', $value);
-		}
 		if ($value instanceof Db_Expression) {
 			return array('insertedTime', $value);
 		}
@@ -628,9 +625,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => true,
+  1 => false,
   2 => '',
-  3 => NULL,
+  3 => 'CURRENT_TIMESTAMP',
 );			
 	}
 
@@ -675,7 +672,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => 'CURRENT_TIMESTAMP',
+  3 => '0000-00-00 00:00:00',
 );			
 	}
 
@@ -695,11 +692,7 @@ return array (
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
 			}
-		}
-		if (!$this->retrieved and !isset($value['insertedTime'])) {
-			$this->insertedTime = $value['insertedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
-		}
-						
+		}						
 		// convention: we'll have updatedTime = insertedTime if just created.
 		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			

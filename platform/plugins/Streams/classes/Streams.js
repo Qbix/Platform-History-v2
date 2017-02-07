@@ -287,7 +287,8 @@ Streams.defined = {};
  * @method define
  * @param {String} type The type of the message, e.g. "Streams/chat/message"
  * @param {String|Function} ctor Your message's constructor, or path to a javascript file which will define it
- * @param {Object} methods An optional hash of methods
+ * @param {Object} methods An optional hash of methods. You can also override methods of the
+ *  Stream object, such as "url".
  */
 Streams.define = function (type, ctor, methods) {
 	if (typeof type === 'object') {

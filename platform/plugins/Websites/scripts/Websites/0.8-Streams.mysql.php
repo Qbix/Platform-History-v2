@@ -65,7 +65,7 @@ function Websites_0_8_Streams_mysql()
 	Streams_RelatedTo::insert(array(
 		'toPublisherId' => '',
 		'toStreamName' => 'Streams/images/',
-		'type' => 'images',
+		'type' => 'Streams/images',
 		'fromPublisherId' => '',
 		'fromStreamName' => 'Streams/image/'
 	))->execute();
@@ -73,7 +73,7 @@ function Websites_0_8_Streams_mysql()
 	Streams_RelatedTo::insert(array(
 		'toPublisherId' => '',
 		'toStreamName' => 'Streams/category/',
-		'type' => 'articles',
+		'type' => 'Websites/articles',
 		'fromPublisherId' => '',
 		'fromStreamName' => 'Websites/article/'
 	))->execute();
@@ -81,7 +81,7 @@ function Websites_0_8_Streams_mysql()
 	Streams_RelatedTo::insert(array(
 		'toPublisherId' => '',
 		'toStreamName' => 'Streams/category/',
-		'type' => 'announcements',
+		'type' => 'Websites/announcements',
 		'fromPublisherId' => '',
 		'fromStreamName' => 'Websites/article/'
 	))->execute();

@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `{$prefix}charge` (
   `userId` varbinary(31) NOT NULL,
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `subscriptionId` varchar(255) COLLATE utf8_bin NOT NULL,
+  `id` varbinary(255) COLLATE utf8_bin NOT NULL,
+  `subscriptionId` varbinary(255) COLLATE utf8_bin NOT NULL,
   `description` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'human-readable description of the charge',
   `attributes` varchar(1023) COLLATE utf8_bin NOT NULL COMMENT 'additional information for the charge in JSON format',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

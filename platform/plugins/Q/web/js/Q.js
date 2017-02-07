@@ -243,7 +243,7 @@ Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 /**
  * Get or set querystring fields from a string, usually from location.search or location.hash
  * @method queryField
- * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned.
+ * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns [123,456]
  * @param {String} [value] Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
  * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring. Finally, if 
  */
@@ -252,7 +252,7 @@ Sp.queryField = function Q_queryField(name, value) {
 	var prefixes = ['#!', '#', '?', '!'];
 	var count = prefixes.length;
 	var prefix = '';
-	var i, l, p, keys, parsed;
+	var i, k, l, p, keys, parsed, ret, result;
 	for (i=0; i<count; ++i) {
 		l = prefixes[i].length;
 		p = this.substring(0, l);
@@ -262,9 +262,18 @@ Sp.queryField = function Q_queryField(name, value) {
 			break;
 		}
 	}
-	if (Q.isArrayLike(name)) {
-		var ret = {}, keys = [];
-		var parsed = Q.parseQueryString(what, keys);
+	if (!name) {
+		ret = [];
+		parsed = Q.parseQueryString(what, keys);
+		for (k in parsed) {
+			if (parsed[k] == null || parsed[k] === '') {
+				ret.push(k);
+			}
+		}
+		return ret;
+	} if (Q.isArrayLike(name)) {
+		ret = {}, keys = [];
+		parsed = Q.parseQueryString(what, keys);
 		for (i=0, l=name.length; i<l; ++i) {
 			if (name[i] in parsed) {
 				ret[name[i]] = parsed[name[i]];
@@ -272,7 +281,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		}
 		return ret;
 	} else if (Q.isPlainObject(name)) {
-		var result = what;
+		result = what;
 		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
@@ -282,7 +291,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		keys = [];
 		parsed = Q.parseQueryString(what, keys);
 		var reg = new RegExp(name);
-		for (var k in parsed) {
+		for (k in parsed) {
 			if (reg.test(k)) {
 				delete parsed[k];
 			}
@@ -2085,7 +2094,6 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @param {mixed} handler Any kind of callable which Q.handle can invoke
  * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
  *  Used to replace handlers previously added under the same key.
- *  Also used for removing handlers with .remove(key).
  *  If the key is not provided, a unique one is computed.
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
@@ -2094,7 +2102,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
 	var event = this;
-	key = event.add(function _addOnce() {
+	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
 		setTimeout(function () {
 			event.remove(key);

@@ -50,7 +50,7 @@ function Websites_0_9_1_Streams_mysql()
 	Streams_RelatedTo::insert(array(
 		'toPublisherId' => '',
 		'toStreamName' => 'Websites/presentation/',
-		'type' => 'slides',
+		'type' => 'Websites/slides',
 		'fromPublisherId' => '',
 		'fromStreamName' => 'Websites/slide/'
 	))->execute();

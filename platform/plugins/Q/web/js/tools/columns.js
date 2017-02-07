@@ -624,14 +624,25 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 	},
 
+	/**
+	 * Get the column element by column index
+	 * @param {Number} index
+	 */
 	column: function (index) {
 		return this.state.columns[index] || null;
 	},
 	
+	/**
+	 * Get the data object associated to a certain column, by its index
+	 * @param {Number} index
+	 */
 	data: function (index) {
 		return this.state.data[index] || null;
 	},
 	
+	/**
+	 * Refresh the tool and make it render its columns
+	 */
 	refresh: function () {
 		var tool = this;
 		var state = tool.state;

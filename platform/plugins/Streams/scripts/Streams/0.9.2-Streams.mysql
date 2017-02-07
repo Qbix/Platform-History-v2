@@ -6,10 +6,10 @@ DROP TABLE IF EXISTS `{$prefix}notification`;
 CREATE TABLE `{$prefix}notification` (
   `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the user to notify',
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
-  `streamName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'the stream causing the notification',
+  `streamName` varbinary(255) NOT NULL COMMENT 'the stream causing the notification',
   `messageOrdinal` int(11) NOT NULL DEFAULT 0 COMMENT 'the ordinal of the message being notified about',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'the type of message',
+  `type` varbinary(255) DEFAULT NULL COMMENT 'the type of message',
   `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
   `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
   `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
