@@ -34,8 +34,12 @@ function Users_avatar_tool($options)
 	Q_Response::addStylesheet('plugins/Users/css/Users.css');
 	$loggedInUser = Users::loggedInUser();
 	$loggedInUserId = $loggedInUser ? $loggedInUser->id : "";
-	if (empty($options['userId'])) {
+	if (!isset($options['userId'])) {
 		$options['userId'] = $loggedInUserId;
+	}
+	if ($options['userId'] === '') {
+		return '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>'
+			.'<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>';
 	}
 	unset($options['iconAttributes']);
 	if (empty($options['editable'])) {

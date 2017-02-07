@@ -2278,6 +2278,14 @@ Users.onConnectionLost = new Q.Event();
  */
 Users.Device = {
 	senderId: null,
+	/**
+	 * Event occurs when a notification comes in to be processed by the app.
+	 * The handlers you add are supposed to process it.
+	 * The notification might have brought the app back from the background,
+	 * or not. Please see the documentation here:
+	 * https://github.com/katzer/cordova-plugin-local-notifications
+	 * @event onNotification
+	 */
 	onNotification: new Q.Event()
 };
 
@@ -2307,7 +2315,7 @@ Q.onReady.add(function () {
 		}
 	});
 	push.on('notification', function(data) {
-		Users.onNotification.handle(data);
+		Users.Device.onNotification.handle(data);
 	});
 	push.on('error', function(e) {
 		console.log("ERROR", e);

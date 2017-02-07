@@ -199,6 +199,7 @@ Streams.iconUrl = function(icon, size) {
 
 var _socket = null;
 var _messageHandlers = {};
+var _avatarHandlers = {};
 var _constructHandlers = {};
 var _refreshHandlers = {};
 var _beforeSetHandlers = {};
@@ -263,8 +264,8 @@ Streams.onInvitedUserAction = new Q.Event();
 /**
  * Returns Q.Event that occurs on message post event coming from socket.io
  * @event onMessage
- * @param type {String} type of the stream to which a message is posted
- * @param messageType {String} type of the message
+ * @param {String} type type of the stream to which a message is posted
+ * @param {String} messageType  type of the message
  * @return {Q.Event}
  */
 Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
@@ -272,24 +273,40 @@ Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
 /**
  * Returns Q.Event that occurs after a stream is constructed on the client side
  * @event onConstruct
- * @param type {String} type of the stream being constructed on the client side
+ * @param {String} type type of the stream being constructed on the client side
  * @return {Q.Event}
  */
 Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 
 /**
- * Returns Q.Event that should be used to update any stream representations
- * @event onConstruct
- * @param type {String} type of the stream being refreshed on the client side
+ * Returns Q.Event that should be used to update any stream representations.
+ * If you are already handling the Streams.Stream.onFieldChanged
+ * and Streams.Stream.onUpdated events, however, then you don't need to
+ * also add a handler to this event, because they are called during the refresh anyway.
+ * @event onRefresh
+ * @param {String} type type of the stream being refreshed on the client side
  * @return {Q.Event}
  */
 Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
 
 /**
- * Event occurs if native app is activated from background by click on native notification
- * @event onActivate
+ * Returns Q.Event that occurs when an avatar has been returned, possibly
+ * because it was refreshed. Any tools displaying an avatar should
+ * add a handler to this event, and refresh their avatar displays.
+ * @event onAvatar
+ * @param {String} userId the id of the user whose avatar it is
+ * @return {Q.Event}
  */
-Streams.onActivate = new Q.Event();
+Streams.onAvatar = Q.Event.factory(_avatarHandlers, [""]);
+
+/**
+ * Returns Q.Event that occurs on message post event coming from socket.io
+ * @event onMessage
+ * @param {String} type type of the stream to which a message is posted
+ * @param {String} messageType type of the message
+ * @return {Q.Event}
+ */
+Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
 
 /**
  * Event occurs when the user enters their full name after following an invite, completing their registration
@@ -904,11 +921,12 @@ Streams.refresh.beforeRequest = new Q.Event();
  * @static
  * @method retainWith
  * @param {String} key
- * @return {Object} returns Streams for chaining with .get(), .related() or .getParticipating()
+ * @return {Object} returns Streams object
+ *   for chaining with .get(), .related() or .getParticipating()
  */
 Streams.retainWith = function (key) {
 	_retain = Q.calculateKey(key, _retainedByKey);
-	return this;
+	return Streams;
 };
 
 /**
@@ -1315,13 +1333,25 @@ Stream.define = Streams.define;
  * 
  * @static
  * @method retain
- * @param {String} publisherId
- * @param {String} streamName
- * @param {String} key
- * @param {Function} callback optional callback for when stream is retained
- * @return {Object} returns Streams for chaining with .get(), .related() or .getParticipating()
+ * @param {String} publisherId the publisher of the stream(s)
+ * @param {String|Array} streamName can be a string or array of strings
+ * @param {String} key the key under which to retain
+ * @param {Function} callback optional callback for when stream(s) are retained
+ * @return {Object} returns Streams object for chaining with .get(), .related() or .getParticipating()
  */
 Stream.retain = function _Stream_retain (publisherId, streamName, key, callback) {
+	if (Q.isArrayLike(streamName)) {
+		var p = Q.pipe();
+		var waitFor = [];
+		Q.each(streamName, function (i, v) {
+			Stream.retain(publisherId, v, key, p.fill(i));
+			waitFor.push(i);
+		});
+		p.add(waitFor, function (params, subjects) {
+			Q.handle(callback, Stream, [params, subjects]);
+		}).run();
+		return Streams;
+	}
 	var ps = Streams.key(publisherId, streamName);
 	Streams.get(publisherId, streamName, function (err) {
 		if (err) {
@@ -1331,6 +1361,7 @@ Stream.retain = function _Stream_retain (publisherId, streamName, key, callback)
 		}
 		Q.handle(callback, this, [err, this]);
 	});
+	return Streams;
 };
 
 /**
@@ -1464,7 +1495,8 @@ var Sp = Stream.prototype;
  * 
  * @method retainWith
  * @param {String} key
- * @return {Object} returns Streams for chaining with .get(), .related() or .getParticipating()
+ * @return {Object} returns Streams object
+ *  for chaining with .get(), .related() or .getParticipating()
  */
 Sp.retainWith = Streams.retainWith;
 
@@ -3071,10 +3103,9 @@ Avatar.get = function _Avatar_get (userId, callback) {
 		}
 		var avatar = data.avatar ? new Avatar(data.avatar) : null;
 		callback && callback.call(avatar, null, avatar);
-		Avatar.get.onAvatar.handle.call(avatar);
+		Q.handle(Q.getObject([userId], _avatarHandlers), avatar, [null, avatar]);
 	});
 };
-Avatar.get.onAvatar = new Q.Event();
 Avatar.get.onError = new Q.Event();
 
 /**
