@@ -134,8 +134,8 @@ function _Streams_participants(options) {
 			var stream = tool.stream = this;
 			var i = 0, c = 0;
 			$te.removeClass('Streams_participants_loading');
-			Q.Tool.clear($avatars[0]);
-			Q.Tool.clear($blanks[0]);
+			Q.Tool.clear(tool.$avatars[0]);
+			Q.Tool.clear(tool.$blanks[0]);
 			tool.$avatars.empty();
 			tool.$blanks.empty();
 			Q.each(extra.participants, function (userId, participant) {
