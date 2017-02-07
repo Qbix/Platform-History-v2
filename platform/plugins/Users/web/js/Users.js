@@ -11,7 +11,10 @@
 var Users = Q.Users = Q.plugins.Users = {
 	info: {}, // this gets filled when a user logs in
 	facebookApps: {}, // this info gets added by the server, on the page
-	connected: {} // check this to see if you are connected to a provider
+	connected: {}, // check this to see if you are connected to a provider
+	icon: {
+		defaultSize: 40 // might be overridden, but is required by some tools
+	}
 };
 
 var dc = Q.extend.dontCopy;

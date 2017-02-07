@@ -4281,7 +4281,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  *  The type of the tool, such as "Q/tabs"
  * @param {Object} [toolOptions]
  *  The options for the tool
- * @param {String} [id]
+ * @param {String|Function} [id]
  *  Optional id of the tool, such as "Q_tabs_2"
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
@@ -4301,17 +4301,19 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 	for (var i=0, l=toolName.length; i<l; ++i) {
 		var tn = toolName[i];
 		var ntt = tn.replace(/\//g, '_');
+		var ba = Q.Tool.beingActivated;
+		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
 		if (!element.getAttribute('id')) {
 			if (!id) {
-				var p1, p2;
-				p1 = prefix || (Q.Tool.beingActivated 
-					? Q.Tool.beingActivated.prefix : '');
+				var p2;
 				do {
 					p2 = p1 + ntt + '-' + (Q.Tool.nextDefaultId++) + '_';
 					Q.Tool.nextDefaultId %= 1000000;
 				} while (Q.Tool.active[p2]);
 				id = p2 + 'tool';
+			} else if (p1) {
+				id = p1 + id;
 			}
 			element.setAttribute('id', id);
 		}
@@ -4333,7 +4335,7 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
  *  The type of the tool, such as "Q/tabs"
  * @param {Object} toolOptions
  *  The options for the tool
- * @param {String} id
+ * @param {String|Function} [id]
  *  Optional id of the tool, such as "Q_tabs_2"
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id

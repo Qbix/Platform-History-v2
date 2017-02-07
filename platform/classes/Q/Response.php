@@ -701,26 +701,28 @@ class Q_Response
 	}
 
 	/**
+	 * Set the options for a tool to be rendered, on top of those possibly already added.
 	 * @method setToolOptions
 	 * @static
-	 * @param {string} $key
-	 * @param {mixed} [$value=null]
+	 * @param {string|array} $name The name of the option. Can also pass an array
+	 *  of ($name => $value) pairs here here -- in this case leave $value blank.
+	 * @param {mixed} [$value=null] The value of the option
 	 */
-	static function setToolOptions($key, $value = null)
+	static function setToolOptions($name, $value = null)
 	{
 		$tool_name = Q::$toolName;
 		$idPrefix = Q_Html::getIdPrefix($tool_name);
-		$to_set = is_array($key) ? $key : array($key => $value);
+		$to_set = is_array($name) ? $name : array($name => $value);
 		foreach ($to_set as $k => $v) {
 			if (substr($k, 0, 2) == 'Q_') {
 				continue;
 			}
 			self::$toolOptions[$idPrefix][$tool_name][$k] = $v;
 		}
-		
 	}
 
 	/**
+	 * Get all the options set for a tool so far
 	 * @method getToolOptions
 	 * @static
 	 * @param {string} toolName Optional name of the tool that is being rendered
