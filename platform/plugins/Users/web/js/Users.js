@@ -85,6 +85,10 @@ Q.text.Users = {
 
 };
 
+Users.icon = {
+	defaultSize: 40 // might be overridden, but is required by some tools
+};
+
 var priv = {};
 
 /**
