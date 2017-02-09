@@ -10488,7 +10488,7 @@ Q.Dialogs = {
 	 * Shows the dialog and pushes it on top of internal dialog stack.
 	 * @static
      * @method push
-	 * @param {Object} options A hash of options, that can include:
+	 * @param {Object} options A hash of options. For more options see Q/dialog tool.
      * @param {boolean} [options.apply] Optional. Set to true if the dialog 
 	 *  should show the "apply" style button to close dialog
 	 * @param {Element|jQuery} [options.dialog] If provided, may be Element or 
@@ -10530,7 +10530,7 @@ Q.Dialogs = {
 	 *  @param {boolean} [options.removeOnClose] Defaults to false if "dialog" is provided, and true otherwise. If true, dialog DOM element will be removed from the document on close.
 	 *  @param {Q.Event} [options.beforeLoad]  Q.Event or function which is called before dialog is loaded.
 	 *  @param {Q.Event} [options.onActivate] Q.Event or function which is called when dialog is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
-	 *  @param {Q.Event} [options.beforeClose] Optional. Q.Event or function which is called when dialog closing initiated but it's still visible and exists in DOM.
+	 *  @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when overlay closing was initiated and it's still visible. Can return false to cancel closing.
 	 *  @param {Q.Event} [options.onClose] Optional. Q.Event or function which is 
 	 *   called when dialog is closed and hidden and probably 
 	 *   removed from DOM (if 'removeOnClose' is 'true').
