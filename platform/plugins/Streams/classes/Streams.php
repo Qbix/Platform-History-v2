@@ -3801,6 +3801,7 @@ abstract class Streams extends Base_Streams
 				$stream->set($className, $row);
 			}
 		}
+		$stream->wasModified(false);
 	}
 
 	/**

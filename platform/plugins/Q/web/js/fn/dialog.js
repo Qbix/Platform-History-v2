@@ -19,9 +19,9 @@
  * Note: if set to false, 'onLoad' callback will be called synchronously with dialog load,
  * otherwise it will be called on fadeIn() animation completion.
  * @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
- * @param {Q.Event} [options.beforeLoad] beforeLoad Q.Event or function which is called before overlay is loaded (shown). Optional.
- * @param {Q.Event} [options.onLoad] onLoad  Q.Event or function which is called when overlay is loaded (shown). Optiona.
- * @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when overlay closing initiated and it's still visible. Optional.
+ * @param {Q.Event} [options.beforeLoad] beforeLoad Q.Event or function which is called before overlay is loaded (shown).
+ * @param {Q.Event} [options.onLoad] onLoad  Q.Event or function which is called when overlay is loaded (shown).
+ * @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when overlay closing initiated and it's still visible. Can return false to cancel closing.
  * @param {Q.Event} [options.onClose] onClose Q.Event or function which is called when overlay is closed and hidden. Optional.
  */
 Q.Tool.jQuery('Q/overlay',
@@ -176,7 +176,9 @@ function _Q_overlay(o) {
 			}
 			$this.removeClass('Q_overlay_open');
 			$this.find('input, select, textarea').trigger('blur');
-			Q.handle($overlay.options.beforeClose, $this, [$this]);
+			if (false === Q.handle($overlay.options.beforeClose, $this, [$this])) {
+				return false;
+			}
 			if ($overlay.options.fadeInOut)
 			{
 				Q.Animation.play(function (x, y) {
@@ -384,7 +386,9 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				}
 			},
 			close: function(e) {
-				Q.handle(o.beforeClose, $this, [$this]);
+				if (false === Q.handle(o.beforeClose, $this, [$this])) {
+					return false;
+				}
 				for (var i = 0; i < hiddenChildren.length; i++) {
 					hiddenChildren[i].show();
 				}
