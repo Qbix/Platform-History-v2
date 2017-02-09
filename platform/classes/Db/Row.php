@@ -936,8 +936,9 @@ class Db_Row implements Iterator
 		$name_safe = preg_replace('/[^0-9a-zA-Z\_]/', '_', $name);
 		
 		$callback = array($this, "beforeSet_$name_safe");
-		if (is_callable($callback))
+		if (is_callable($callback)) {
 			list ($name_internal, $value) = call_user_func($callback, $value);
+		}
 
 		if (!array_key_exists($name_internal, $this->fields)) {
 			$this->fieldsOriginal[$name_internal] = null;
