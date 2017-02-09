@@ -3,6 +3,8 @@
 .hg/
 .idea/
 local/*
+files/*
+!files/MyApp
 files/MyApp/uploads/*/*
 !files/MyApp/uploads/Users/.dir
 !files/MyApp/uploads/Streams/.dir
