@@ -138,8 +138,7 @@ Users.initFacebook = function(callback, options) {
 				status: true,
 				cookie: true,
 				oauth: true,
-				xfbml: true,
-				channelUrl: Q.action('Users/facebookChannel')
+				xfbml: true
 			}, Users.initFacebook.options, options));
 			Users.onInitFacebook.handle(Users, window.FB, [Q.info.app]);
 		}
@@ -319,9 +318,7 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 					_doCancel();
 					return;
 				}
-				fields['Users'] = {
-					'facebook_authResponse': response.authResponse
-				};
+				fields['Q.Users.facebook.authResponse'] = response.authResponse;
 				$.post(
 					Q.ajaxExtend(Q.action("Users/authenticate"), 'data', {method: "post"}),
 					$.param(fields),
@@ -1218,18 +1215,15 @@ function login_callback(err, response) {
 			);
 		}
 		
-		var authResponse, fields = {};
+		var authResponse;
 		if ($('#Users_login_step1_form').data('used') === 'facebook') {
 			Users.initFacebook(function() {
 				var k;
 				if ((authResponse = FB.getAuthResponse())) {
-					fields['Users'] = {
-						'facebook_authResponse': authResponse
-					};
 					for (k in authResponse) {
 						register_form.append(
 							$('<input type="hidden" />')
-							.attr('name', 'Users[facebook_authResponse][' + k + ']')
+							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
 							.attr('value', authResponse[k])
 						);
 					}

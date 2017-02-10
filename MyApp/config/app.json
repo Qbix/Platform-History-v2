@@ -25,7 +25,8 @@
 		},
 		"routes": {
 			"": {"module": "MyApp", "action": "welcome"},
-			":action": {"module": "MyApp"}
+			":action": {"module": "MyApp"},
+			"facebook/:action": {"module": "MyApp", "facebook": 1}
 		},
 		"response": {
 			"slotNames": ["dashboard", "content", "dialogs", "title", "notices"],

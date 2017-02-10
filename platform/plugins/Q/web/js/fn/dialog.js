@@ -164,6 +164,7 @@ function _Q_overlay(o) {
 				Q.handle($overlay.options.onLoad, $this, [$this]);
 			}
 			$this.addClass('Q_overlay_open');
+			Q.Pointer.cancelClick();
 		},
 		close: function(e)
 		{
