@@ -1496,11 +1496,9 @@ abstract class Users extends Base_Users
 			$fb_info = Q_Config::get('Users', 'facebookApps', $key, null);
 			if (isset($fb_info['appId']) && isset($fb_info['secret'])) {
 				try {
-					$facebook = new Facebook(array(
-						'appId' => $fb_info['appId'],
-						'secret' => $fb_info['secret'],
-						'cookie' => true,
-						'fileUpload' => true
+					$facebook = new Facebook\Facebook(array(
+						'app_id' => $fb_info['appId'],
+						'app_secret' => $fb_info['secret']
 					));
 					Users::$facebooks[$key] = $facebook;
 					return $facebook;
@@ -1515,11 +1513,9 @@ abstract class Users extends Base_Users
 		foreach ($fb_apps as $key => $fb_info) {
 			if (isset($_COOKIE['fbsr_'.$fb_info['appId']])) {
 				try {
-					$facebook = new Facebook(array(
-						'appId' => $fb_info['appId'],
-						'secret' => $fb_info['secret'],
-						'cookie' => true,
-						'fileUpload' => true
+					$facebook = new Facebook\Facebook(array(
+						'app_id' => $fb_info['appId'],
+						'secret' => $fb_info['secret']
 					)); // will set user and session from the cookie
 					Users::$facebooks[$fb_info['appId']] = $facebook;
 					Users::$facebooks[$key] = $facebook;
