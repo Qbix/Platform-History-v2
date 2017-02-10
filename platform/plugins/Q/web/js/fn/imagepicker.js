@@ -1,4 +1,8 @@
 (function (Q, $, window, document, undefined) {
+	
+Q.setObject('Q.text.Q.imagepicker', {
+	errorReadingFile: "Error reading file"
+});
 
 /**
  * Q Tools
@@ -84,7 +88,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		};
 		reader.onerror = function () { 
 			setTimeout(function() { 
-				callback("Error reading file", res);
+				Q.alert(Q.text.Q.imagepicker.errorReadingFile);
 			}, 0);
 		};
 		state.file = this.files[0];
@@ -144,9 +148,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			e.preventDefault();
 		}
 		$this.on({
-			 dragover: _cancel,
-			 dragenter: _cancel,
-			 drop: function (e) {
+			 "dragover.Q_imagepicker": _cancel,
+			 "dragenter.Q_imagepicker": _cancel,
+			 "drop.Q_imagepicker": function _Q_imagepicker_drop(e) {
 				 _process.call(e.originalEvent.dataTransfer);
 				 e.preventDefault();
 			 }
@@ -610,7 +614,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	remove: function () {
 		return this.each(function() {
 			var $this = $(this);
-			$this.off([Q.Pointer.click, '.Q_imagepicker']);
+			$this.off('.Q_imagepicker');
 			if ($this.next().hasClass('Q_imagepicker_file')) {
 				$this.next().remove();
 			}
