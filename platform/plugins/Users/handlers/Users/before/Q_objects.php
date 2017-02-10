@@ -1,18 +1,19 @@
 <?php
 
-function Users_before_Q_objects()
+function Users_before_Q_objects(&$params)
 {
 	$app = Q_Config::expect('Q', 'app');
 	$fb_info = Q_Config::get('Users', 'facebookApps', $app, null);
 
 	// We sometimes pass this in the request, for browsers like Safari
 	// that don't allow setting of cookies using javascript inside 3rd party iframes
-	if (!empty($fb_info['appId']) and !empty($_REQUEST['Users']['facebook_authResponse'])) {
+	
+	$authResponse = Q_Request::special('Users.facebook.authResponse', null);
+	if (!empty($fb_info['appId']) and $authResponse) {
 		$appId = $fb_info['appId'];
-		$auth_response = $_REQUEST['Users']['facebook_authResponse'];
-		if (is_array($auth_response)) {
-			if ($auth_response) {
-				$cookie = $auth_response['signedRequest'];
+		if (is_array($authResponse)) {
+			if ($authResponse) {
+				$cookie = $authResponse['signedRequest'];
 				$expires = 0;
 			} else {
 				$cookie = "";
@@ -42,4 +43,8 @@ function Users_before_Q_objects()
 	
 	// Fire an event for hooking into, if necessary
 	Q::event('Users/objects', array(), 'after');
+	
+	if (Q_Dispatcher::uri()->facebook) {
+		Q_Dispatcher::skip('Q/post');
+	}
 }

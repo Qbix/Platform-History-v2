@@ -603,6 +603,8 @@ Q.Tool.define("Q/columns", function(options) {
 			--state.max;
 		}
 		
+		Q.Pointer.cancelClick();
+		
 		if (duration) {
 			$div.animate($div.data(dataKey_hide), duration, _close);
 		} else {

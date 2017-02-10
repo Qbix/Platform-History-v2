@@ -24,6 +24,16 @@ class Q_Dispatcher
 		}
 		return Q_Request::uri();
 	}
+	
+	/**
+	 * Call this to tell the dispatcher to skip firing a certain event coming up
+	 * @method skip
+	 * @static
+	 */
+	static function skip($eventName)
+	{
+		self::$skip[$eventName] = true;
+	}
 
 	/**
 	 * Forwards internally to a new URL, starting the dispatcher loop again
