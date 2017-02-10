@@ -838,7 +838,8 @@ class Q
 	 *  The name of the handler. The handler can be overridden
 	 *  via the include path, but an exception is thrown if it is missing.
 	 * @param {array} $params=array()
-	 *  Parameters to pass to the handler
+	 *  Parameters to pass to the handler.
+	 *  They may be altered by the handler, if it accepts $params as a reference.
 	 * @param {boolean} $skip_include=false
 	 *  Defaults to false. If true, no file is loaded;
 	 *  the handler is executed only if the function is already defined;
@@ -851,7 +852,7 @@ class Q
 	 */
 	protected static function handle(
 	 $handler_name,
-	 $params = array(),
+	 &$params = array(),
 	 $skip_include = false,
 	 &$result = null)
 	{
@@ -878,7 +879,7 @@ class Q
 		}
 		// The following avoids the bug in PHP where
 		// call_user_func doesn't work with references being passed
-		$args = array($params, &$result);
+		$args = array(&$params, &$result);
 		return call_user_func_array($function_name, $args);
 	}
 

@@ -271,6 +271,7 @@ Q.Tool.define('Q/filter', function (options) {
 				.removeClass('Q_overflow');
 			}
 		}, 0);
+		Q.Pointer.cancelClick();
 		return false;
 	},
 	/**

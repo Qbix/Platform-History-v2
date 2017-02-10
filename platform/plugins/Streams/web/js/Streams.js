@@ -3428,17 +3428,14 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		);
 	}
 
-	var authResponse, fields = {};
+	var authResponse;
 	if (Q.plugins.Users.facebookApps && Q.plugins.Users.facebookApps[Q.info.app]) {
 		Q.plugins.Users.initFacebook(function() {
 			if ((authResponse = FB.getAuthResponse())) {
-				fields['Users'] = {
-					'facebook_authResponse': authResponse
-				};
 				for (var k in authResponse) {
 					register_form.append(
 						$('<input type="hidden" />')
-						.attr('name', 'Users[facebook_authResponse][' + k + ']')
+						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
 						.attr('value', authResponse[k])
 					);
 				}

@@ -3,25 +3,25 @@
 /**
  * This plugin Makes an overlay to show some content above the page.
  * Suitable for showing dialogs, for example.
- * This is replacement for jQuery Tools overlay, it has similar behavoir and API.
+ * It does not automatically activate its contents, like Q/dialog does.
  * @method overlay
  * @param {Object} [options]
  * @param {Boolean} [options.apply] Set to true if the dialog should show the "apply" style button to close dialog
+ * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
+ * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
+ * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
+ * @param {Boolean} [options.fadeInOut=true] Indicates whether to use fadeIn() / fadeOut() animations when loading dialog.
+ * Note: if set to false, 'onLoad' callback will be called synchronously with dialog load,
+ * otherwise it will be called on fadeIn() animation completion.
+ * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
  * @param {String} [options.left='center'] left is a Horizontal position of the overlay, May have 'center' value to be centered horizontally or have a percentage or absolute (pixels) value of offset from the left border of 'alignParent'.
  * @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
  * @param {DOMElement} [options.alignParent]  Can be DOM element, jQuery object or jQuery selector.
  * If provided overlay will be positioned relatively to that element. If null, overlay will be positioned considering window dimensions. Optional.
- * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
- * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
- * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
- * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
- * @param {Boolean} [options.fadeInOut=true] Indicates whether to use fadeIn() / fadeOut() animations when loading dialog.
- * Note: if set to false, 'onLoad' callback will be called synchronously with dialog load,
- * otherwise it will be called on fadeIn() animation completion.
  * @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
  * @param {Q.Event} [options.beforeLoad] beforeLoad Q.Event or function which is called before overlay is loaded (shown).
- * @param {Q.Event} [options.onLoad] onLoad  Q.Event or function which is called when overlay is loaded (shown).
- * @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when overlay closing initiated and it's still visible. Can return false to cancel closing.
+ * @param {Q.Event} [options.onLoad] onLoad occurs when overlay has been loaded (shown).
+ * @param {Q.Event} [options.beforeClose] beforeClose occurs when .close() was called on the dialog and it's still visible. Can return false to cancel closing.
  * @param {Q.Event} [options.onClose] onClose Q.Event or function which is called when overlay is closed and hidden. Optional.
  */
 Q.Tool.jQuery('Q/overlay',
@@ -164,6 +164,7 @@ function _Q_overlay(o) {
 				Q.handle($overlay.options.onLoad, $this, [$this]);
 			}
 			$this.addClass('Q_overlay_open');
+			Q.Pointer.cancelClick();
 		},
 		close: function(e)
 		{
@@ -258,7 +259,8 @@ function _Q_overlay(o) {
  * @method Q/dialog
  * @param {Object} [options] A hash of options, that can include:
  *   @param {String} [options.url]  If provided, this url will be used to fetch the "title" and "dialog" slots, to display in the dialog.
- *   @optional
+ *   @param {String} [options.left='center'] left is a Horizontal position of the overlay, May have 'center' value to be centered horizontally or have a percentage or absolute (pixels) value of offset from the left border of 'alignParent'.
+ *   @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
  *   @param {Boolean} [options.alignByParent=false] If true, the dialog will be aligned to the center of not the entire window, but to the center of containing element instead.
  *   @param {Boolean|String} [options.mask=true] If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
  *   @param {Boolean} [options.fullscreen]
@@ -271,14 +273,13 @@ function _Q_overlay(o) {
  *   @param {Boolean} [options.closeOnEsc=true]
  *   Indicates whether to close dialog on 'Esc' key press. Has sense only if 'noClose' is false.
  *   @param {Boolean} [options.removeOnClose=false] If true, dialog DOM element will be removed from the document on close.
- * @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
- *   @param {Q.Event} [options.beforeLoad]  Q.Event or function which is called before dialog is loaded.
+ *   @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
+ *   @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
+ *   @param {Q.Event} [options.beforeLoad] beforeLoad Q.Event or function which is called before overlay is loaded (shown).
+ *   @param {Q.Event} [options.onLoad] onLoad occurs when overlay has been loaded (shown).
+ *   @param {Q.Event} [options.beforeClose] beforeClose occurs when .close() was called on the dialog and it's still visible. Can return false to cancel closing.
  *   @param {Q.Event} [options.onActivate]  Q.Event or function which is called when dialog is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
- *   @optional
- *   @param {Q.Event} [options.beforeClose]  Q.Event or function which is called when dialog closing initiated but it's still visible and exists in DOM.
- *   @optional
- *   @param {Q.Event} [options.onClose]  Q.Event or function which is called when dialog is closed and hidden and probably removed from DOM (if 'removeOnClose' is 'true').
- *   @optional
+ *   @param {Q.Event} [options.onClose]  Q.Event or function which is called when dialog is closed and hidden and probably removed from DOM (if 'removeOnClose' is 'true'). * @param {Boolean} [options.apply] Set to true if the dialog should show the "apply" style button to close dialog
  */
 Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	
