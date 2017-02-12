@@ -375,6 +375,7 @@ class Users_User extends Base_Users_User
 	 * @param {string} [$options.from] An array of (emailAddress, human_readable_name)
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
+	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @return {boolean}
 	 *  Returns true on success.
 	 *  Returns false if this email address is already verified for this user.
@@ -389,7 +390,8 @@ class Users_User extends Base_Users_User
 		$activationEmailSubject = null,
 		$activationEmailView = null,
 		array $fields = array(),
-		array $options = array())
+		array $options = array(),
+		&$email = null)
 	{
 		if (!isset($options['html'])) {
 			$options['html'] = true;
@@ -489,6 +491,8 @@ class Users_User extends Base_Users_User
 	 * @method setEmailAddress
 	 * @param {string} $emailAddress
 	 * @param {boolean} [$verified=false]
+	 *  Whether to force the email address to be marked verified for this user
+	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If e-mail address is missing
 	 * @throws {Users_Exception_AlreadyVerified}
@@ -496,7 +500,7 @@ class Users_User extends Base_Users_User
 	 * @throws {Users_Exception_WrongState}
 	 *	If verification state is wrong
 	 */
-	function setEmailAddress($emailAddress, $verified = false)
+	function setEmailAddress($emailAddress, $verified = false, &$email = null)
 	{
 		$email = new Users_Email();
 		Q_Valid::email($emailAddress, $normalized);
@@ -572,6 +576,7 @@ class Users_User extends Base_Users_User
 	 * @param {array} [$options=array()] Array of options. Can include:
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
+	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @return {boolean}
 	 *  Returns true on success.
 	 *  Returns false if this mobile number is already verified for this user.
@@ -585,7 +590,8 @@ class Users_User extends Base_Users_User
 		$mobileNumber,
 		$activationMessageView = null,
 		array $fields = array(),
-		array $options = array())
+		array $options = array(),
+		&$mobile = null)
 	{
 		if (!Q_Valid::phone($mobileNumber, $normalized)) {
 			throw new Q_Exception_WrongValue(array(
@@ -678,6 +684,8 @@ class Users_User extends Base_Users_User
 	 * @method setMobileNumber
 	 * @param {string} $mobileNumber
 	 * @param {boolean} [$verified=false]
+	 *  Whether to force the mobile number to be marked verified for this user
+	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If mobile number is missing
 	 * @throws {Users_Exception_AlreadyVerified}
@@ -685,7 +693,7 @@ class Users_User extends Base_Users_User
 	 * @throws {Users_Exception_WrongState}
 	 *	If verification state is wrong
 	 */
-	function setMobileNumber($mobileNumber, $verified = false)
+	function setMobileNumber($mobileNumber, $verified = false, &$mobile = null)
 	{
 		Q_Valid::phone($mobileNumber, $normalized);
 		$mobile = new Users_Mobile();
@@ -793,6 +801,36 @@ class Users_User extends Base_Users_User
 			Users::importIcon($this, $icon);
 		}
 		return true;
+	}
+
+	/**
+	 * Get the Users_Email object corresponding to this user's email address, if any
+	 * @method email
+	 * @return Users_Email
+	 */
+	function email()
+	{
+		if ($this->emailAddress) {
+			return null;
+		}
+		$email = new Users_Email();
+		$email->address = $this->emailAddress;
+		return $email->retrieve();
+	}
+
+	/**
+	 * Get the Users_Mobile object corresponding to this user's email address, if any
+	 * @method mobile
+	 * @return Users_Mobile
+	 */
+	function mobile()
+	{
+		if ($this->mobileNumber) {
+			return null;
+		}
+		$mobile = new Users_Mobile();
+		$mobile->number = $this->mobileNumber;
+		return $mobile->retrieve();
 	}
 	
 	/**

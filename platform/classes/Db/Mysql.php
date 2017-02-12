@@ -1875,15 +1875,15 @@ EOT;
 						}
 					}
 					$functions["beforeSet_$field_name_safe"][] = <<<EOT
-		{$null_check}{$dbe_check}\$date = date_parse(\$value);
-		if (!empty(\$date['errors'])) {
-			\$json = json_encode(\$value);
-			throw new Exception("DateTime \$json in incorrect format being assigned to ".\$this->getTable().".$field_name");
+		{$null_check}{$dbe_check}if (\$value instanceof DateTime) {
+			\$value = \$value->getTimestamp();
 		}
-		\$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			\$date['year'], \$date['month'], \$date['day'], 
-			\$date['hour'], \$date['minute'], \$date['second']
-		);
+		if (is_numeric(\$value)) {
+			\$value = (new DateTime())->setTimestamp(\$value)->format("Y-m-d H:i:s");
+		} else {
+			\$value = (new DateTime(\$value));
+		}
+		\$value = \$value->format("Y-m-d h:i:s");
 EOT;
 					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc

@@ -57,7 +57,7 @@ Q.mixin(Base, Row);
  * @type session_secret
  */
 /**
- * @property {String|Buffer}
+ * @property {String|Db.Expression}
  * @type session_expires
  */
 /**
@@ -453,30 +453,16 @@ return [["varchar","1023","",false],true,"",null];
 };
 
 /**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
+ * Method is called before setting the field
  * @method beforeSet_session_expires
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_session_expires = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".session_expires");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".session_expires");
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the session_expires field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_session_expires = function () {
-
-		return 255;
 };
 
 	/**
@@ -485,7 +471,7 @@ Base.prototype.maxSize_session_expires = function () {
 	 */
 Base.column_session_expires = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["timestamp","1023","",false],true,"",null];
 };
 
 /**
