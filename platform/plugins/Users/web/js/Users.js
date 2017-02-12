@@ -318,7 +318,9 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 					_doCancel();
 					return;
 				}
-				fields['Q.Users.facebook.authResponse'] = response.authResponse;
+				var ar = response.authResponse;
+				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
+				fields['Q.Users.facebook.authResponse'] = ar;
 				$.post(
 					Q.ajaxExtend(Q.action("Users/authenticate"), 'data', {method: "post"}),
 					$.param(fields),

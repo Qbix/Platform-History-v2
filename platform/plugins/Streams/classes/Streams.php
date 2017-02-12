@@ -3796,12 +3796,12 @@ abstract class Streams extends Base_Streams
 					if (!isset($rows[$className][$streamName])) continue;
 					$stream->$f = $rows[$className][$streamName]->$f;
 				}
+				$stream->wasModified(false);
 				$row = $stream->rows[$className] = $rows[$className][$streamName];
 				$row->set('Streams_Stream', $stream);
 				$stream->set($className, $row);
 			}
 		}
-		$stream->wasModified(false);
 	}
 
 	/**
