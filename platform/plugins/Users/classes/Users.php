@@ -214,8 +214,9 @@ abstract class Users extends Base_Users
 	 *  'connected' if a logged-in user just connected the provider account for the first time,
 	 *  'authorized' if a logged-in user was connected to provider but just authorized this app for the first time
 	 *  or true otherwise.
-	 * @param {array} [$import=false] Array of things to import from provider if they are not already set.
-	 *  Can include "emailAddress", "firstName" and "lastName'.
+	 * @param {array} [$import=Q_Config::get('Users', 'import', $provider)]
+	 *  Array of things to import from provider if they are not already set.
+	 *  Can include "emailAddress", "firstName", "lastName" and "username".
 	 *  If the email address is imported, it is set without requiring verification, and
 	 *  any email under Users/transactional/authenticated is set
 	 *  If true, and the user's email address is not set yet,
@@ -227,8 +228,13 @@ abstract class Users extends Base_Users
 		$provider,
 		$appId = null,
 		&$authenticated = null,
-		$import = array('emailAddress', 'firstName', 'lastName'))
+		$import = null)
 	{
+		if (!isset($import)) {
+			$import = Q_Config::get('Users', 'import', $provider, array(
+				'emailAddress', 'firstName', 'lastName'
+			));
+		}
 		if (!isset($appId)) {
 			$app = Q_Config::expect('Q', 'app');
 			$appId = Q_Config::expect('Users', 'facebookApps', $app, 'appId');
@@ -283,11 +289,21 @@ abstract class Users extends Base_Users
 				return $userWasLoggedIn ? $user : false;
 			}
 			$dn = isset($user->id) && $user->displayName();
-			if ((in_array('emailAddress', $import) and !$user->emailAddress) or !$dn) {
-				$response = $facebook->get('/me?fields=first_name,last_name,email');
+			if ((in_array('emailAddress', $import) and empty($user->emailAddress)) or !$dn) {
+				$map = array(
+					'firstName' => 'first_name',
+					'lastName' => 'last_name'
+				);
+				$fields = array('email');
+				foreach ($map as $k => $v) {
+					if (in_array($k, $import)) {
+						$fields[] = $v;
+					}
+				}
+				$response = $facebook->get('/me?fields='.implode(',', $fields));
 				$userNode = $response->getGraphUser();
 				$emailAddress = $userNode->getField('email');
-				if ($dn) {
+				if (!$dn) {
 					Users::$cache['facebookUserData'] = $userNode->uncastItems();
 				}
 			}

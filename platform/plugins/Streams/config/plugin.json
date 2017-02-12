@@ -322,7 +322,7 @@
 			"40": "manage the stream",
 			"50": "own it and appoint managers"
 		},
-		"onInsert": {
+		"onInsert": { /* streams to insert when a row is inserted */
 			"Users_User": [
 				"Streams/participating",
 				"Streams/invited",
@@ -337,14 +337,14 @@
 				"Streams/labels"
 			]
 		},
-		"onUpdate": {
+		"onUpdate": { /* streams to update when a row is updated */
 			"Users_User": {
 				"username": "Streams/user/username",
 				"icon": "Streams/user/icon",
 				"emailAddress": "Streams/user/emailAddress",
 				"mobileNumber": "Streams/user/mobileNumber"
 			}
-		},
+		}, 
 		"icons": {
 			"sizes": {
 				"40": "40.png",
