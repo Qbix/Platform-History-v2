@@ -435,15 +435,13 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('updatedTime', $value);
 		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".updatedTime");
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
 		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
+		$datetime = is_numeric($value)
+			? (new DateTime())->setTimestamp($value)
+			: new DateTime($value);
+		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
 	}
 
