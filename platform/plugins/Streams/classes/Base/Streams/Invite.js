@@ -633,6 +633,7 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
  */
 Base.prototype.beforeSet_state = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (['pending','accepted','declined','forwarded','expired','claimed'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
@@ -645,7 +646,7 @@ Base.prototype.beforeSet_state = function (value) {
 	 */
 Base.column_state = function () {
 
-return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
+return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"","pending"];
 };
 
 /**
@@ -656,6 +657,10 @@ return [["enum","'pending','accepted','declined','forwarded','expired','claimed'
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -678,6 +683,10 @@ return [["timestamp","'pending','accepted','declined','forwarded','expired','cla
 Base.prototype.beforeSet_expireTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };

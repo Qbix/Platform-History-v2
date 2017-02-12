@@ -54,6 +54,9 @@
 		"facebookApps": {
 
 		},
+		"import": {
+			"facebook": ["emailAddress", "firstName", "lastName"]
+		},
 		"login": {
 			"identifierType": "email,mobile",
 			"using": "native,facebook",

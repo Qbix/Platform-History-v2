@@ -22,6 +22,27 @@ class Users_AppUser extends Base_Users_AppUser
 	{
 		parent::setUp();
 	}
+	
+	/**
+	 * If a user is logged in the provider, and the provider sent us
+	 * some sort of signed request (which we may have saved in a cookie)
+	 * this function returns the user's uid on that provider.
+	 * @param $provider
+	 * Instance of provider SDK object
+	 * Right now it can only be \Facebook\Facebook,
+	 * which you can obtain from Users::facebook()
+	 */
+	static function loggedInUid($provider)
+	{
+		if ($provider instanceof Facebook\Facebook
+		and $app = $provider->getApp()) {
+			if ($fbsr = Q::ifset($_COOKIE, 'fbsr_'.$app->getId(), null)) {
+				$sr = new Facebook\SignedRequest($provider->getApp(), $fbsr);
+				return $sr->getUserId();
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Implements the __set_state method, so it can work with

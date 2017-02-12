@@ -3579,14 +3579,14 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Please enter your name", 'name');
 		}
 
-		$name = self::splitFullName($fullName);
-		if (empty($name['first']) && empty($name['last'])) {
+		$register = self::splitFullName($fullName);
+		if (empty($register['first']) && empty($register['last'])) {
 			// this is unlikely to happen
 			throw new Q_Exception("Please enter your name properly", 'name');
 		}
 
 		// this will be used in Streams_after_Users_User_saveExecute
-		Streams::$cache['register'] = $name;
+		Streams::$cache['register'] = $register;
 
 		$user = Users::register("", $identifier, $icon, $provider, $options);
 
@@ -3599,7 +3599,7 @@ abstract class Streams extends Base_Streams
 		 * @return {Users_User}
 		 */
 		Q::event('Streams/register', compact(
-			'name', 'identifier', 'icon', 'user', 'provider', 'options'
+			'register', 'identifier', 'icon', 'user', 'provider', 'options'
 		), 'after');
 
 		return $user;
@@ -3796,12 +3796,12 @@ abstract class Streams extends Base_Streams
 					if (!isset($rows[$className][$streamName])) continue;
 					$stream->$f = $rows[$className][$streamName]->$f;
 				}
+				$stream->wasModified(false);
 				$row = $stream->rows[$className] = $rows[$className][$streamName];
 				$row->set('Streams_Stream', $stream);
 				$stream->set($className, $row);
 			}
 		}
-		$stream->wasModified(false);
 	}
 
 	/**
