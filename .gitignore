@@ -1,3 +1,7 @@
+# Ignore everything:
+*
+!platform/
+
 #Common ignores
 *.DS_Store
 .hg/
@@ -42,8 +46,3 @@ node_modules/
 # Custom plugins
 platform/plugins/Communities
 
-# projects
-Mosaica
-remoteGroups
-*.zip
-*.rar
