@@ -1091,7 +1091,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
-	if (o.identifier || o.token) {
+	if (o.identifier || o.token || o.fb_uids || o.userIds || o.label) {
 		return _request();
 	}
 	Q.prompt(

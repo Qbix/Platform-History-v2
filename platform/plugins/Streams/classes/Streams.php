@@ -3252,6 +3252,7 @@ abstract class Streams extends Base_Streams
 
 		// merge identifiers if any
 		$raw_userIds = array();
+		$identifiers = array();
 		$identifierTypes = array();
 		$statuses = array();
 		// get user ids if any to array, throw if user not found
