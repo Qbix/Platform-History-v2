@@ -3200,8 +3200,8 @@ abstract class Streams extends Base_Streams
 	 * @see Users::addLink()
 	 * @return {array} Returns array with keys 
 	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from identifiers first, then fb_uid, then label,
-	 *  then newFutureUsers. The statuses is an array of the same size and in the same order.
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "fb_uid", "label",
+	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"
 	 *  key pointing to a Streams_Invite object that was saved in the database
@@ -3250,31 +3250,34 @@ abstract class Streams extends Base_Streams
 			Q_Utils::canWriteToPath($path, true, true);
 		}
 
-		// get user ids if any to array, throw if user not found
-		$raw_userIds = isset($who['userId']) 
-			? Users_User::verifyUserIds($who['userId'], true)
-			: array();
 		// merge identifiers if any
+		$raw_userIds = array();
 		$identifierTypes = array();
 		$statuses = array();
+		// get user ids if any to array, throw if user not found
+		if (isset($who['userId'])) {
+			$userIds = $who['userId'];
+			if (!is_array($userIds)) {
+				$userIds = array($userIds);
+			}
+			$users = Users::fetch($userIds, true);
+			$raw_userIds = array_keys($users);
+			foreach ($users as $uid => $user) {
+				$identifierTypes[] = 'userId';
+				$statuses[] = $user->sessionCount ? 'verified' : 'future';
+			}
+		}
 		if (isset($who['identifier'])) {
 			$identifiers = $who['identifier'];
 			if (is_string($identifiers)) {
-				$identifiers = array_map('trim', explode("\t", $identifier)) ;
-			}
-			foreach ($identifiers as $identifier) {
-				if (Q_Valid::email($identifier)) {
-					$identifierType[] = 'email';
-				} else if (Q_Valid::phone($identifier)) {
-					$identifierType[] = 'mobile';
-				}
+				$identifiers = array_map('trim', explode("\t", $identifiers)) ;
 			}
 			$identifier_ids = Users_User::idsFromIdentifiers(
 				$identifiers, $statuses1, $identifierTypes1
 			);
 			$raw_userIds = array_merge($raw_userIds, $identifier_ids);
-			$statuses = $statuses1;
-			$identifierTypes = $identifierTypes1;
+			$statuses = array_merge($statuses, $statuses1);
+			$identifierTypes = array_merge($identifierTypes, $identifierTypes1);
 		}
 		// merge fb uids if any
 		if (isset($who['fb_uid'])) {
@@ -3315,10 +3318,11 @@ abstract class Streams extends Base_Streams
 		// ensure that each userId is included only once
 		// and remove already participating users
 		$raw_userIds = array_unique($raw_userIds);
-		$total = count($raw_userIds);
 
-		$userIds = Streams_Participant::filter($raw_userIds, $stream);
-		$to_invite = count($userIds);
+		$alreadyParticipating = Streams_Participant::filter(
+			$raw_userIds, $stream->publisherId, $stream->name, null
+		);
+		$userIds = array_diff($raw_userIds, $alreadyParticipating);
 
 		$appUrl = !empty($options['appUrl'])
 			? $options['appUrl']
@@ -3398,7 +3402,7 @@ abstract class Streams extends Base_Streams
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,
 			"username" => $asUser->username,
-			"userIds" => Q::json_encode($userIds),
+			"userIds" => Q::json_encode($raw_userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
 			"label" => $label, 
@@ -3417,11 +3421,11 @@ abstract class Streams extends Base_Streams
 
 		$return = array(
 			'success' => $result,
-			'userIds' => $userIds,
+			'userIds' => $raw_userIds,
 			'statuses' => $statuses,
 			'identifiers' => $identifiers,
 			'identifierTypes' => $identifierTypes,
-			'alreadyParticipating' => $total - $to_invite,
+			'alreadyParticipating' => $alreadyParticipating
 		);
 		
 		if (!empty($who['token'])) {
