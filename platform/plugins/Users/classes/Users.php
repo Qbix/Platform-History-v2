@@ -214,7 +214,12 @@ abstract class Users extends Base_Users
 	 *  'connected' if a logged-in user just connected the provider account for the first time,
 	 *  'authorized' if a logged-in user was connected to provider but just authorized this app for the first time
 	 *  or true otherwise.
-	 * @param {boolean} [$import_emailAddress=false] If true, and the user's email address is not set yet,
+	 * @param {array} [$import=Q_Config::get('Users', 'import', $provider)]
+	 *  Array of things to import from provider if they are not already set.
+	 *  Can include "emailAddress", "firstName", "lastName" and "username".
+	 *  If the email address is imported, it is set without requiring verification, and
+	 *  any email under Users/transactional/authenticated is set
+	 *  If true, and the user's email address is not set yet,
 	 *  imports the email address from the provider if it is available,
 	 *  and sets it as the user's email address without requiring verification.
 	 * @return {Users_User}
@@ -223,8 +228,13 @@ abstract class Users extends Base_Users
 		$provider,
 		$appId = null,
 		&$authenticated = null,
-		$import_emailAddress = false)
+		$import = null)
 	{
+		if (!isset($import)) {
+			$import = Q_Config::get('Users', 'import', $provider, array(
+				'emailAddress', 'firstName', 'lastName'
+			));
+		}
 		if (!isset($appId)) {
 			$app = Q_Config::expect('Q', 'app');
 			$appId = Q_Config::expect('Users', 'facebookApps', $app, 'appId');
@@ -258,11 +268,11 @@ abstract class Users extends Base_Users
 		// First, see if we've already logged in somehow
 		if ($user = self::loggedInUser()) {
 			// Get logged in user from session
-			$user_was_logged_in = true;
+			$userWasLoggedIn = true;
 			$retrieved = true;
 		} else {
 			// Get an existing user or create a new one
-			$user_was_logged_in = false;
+			$userWasLoggedIn = false;
 			$retrieved = false;
 			$user = new Users_User();
 		}
@@ -273,28 +283,32 @@ abstract class Users extends Base_Users
 		switch ($provider) {
 		case 'facebook':
 			$facebook = Users::facebook($appId);
-			if (!$facebook or !$facebook->getUser()) {
+			$fb_uid = Users_AppUser::loggedInUid($facebook);
+			if (!$facebook or !$fb_uid) {
 				// no facebook authentication is happening
-				return $user_was_logged_in ? $user : false;
+				return $userWasLoggedIn ? $user : false;
 			}
-			if (empty($user->emailAddress)) {
-				$queries = array(
-					array('method' => 'GET', 'relative_url' => '/me/permissions'),
-					array('method' => 'GET', 'relative_url' => '/me')
+			$dn = isset($user->id) && $user->displayName();
+			if ((in_array('emailAddress', $import) and empty($user->emailAddress)) or !$dn) {
+				$map = array(
+					'firstName' => 'first_name',
+					'lastName' => 'last_name'
 				);
-				$batchResponse = $facebook->api('?batch='.Q::json_encode($queries), 'POST');
-				$permissions = json_decode($batchResponse[0]['body'], true);
-				if (Q::ifset($permissions, 'data', 0, 'email', false)) {
-					$userData = json_decode($batchResponse[1]['body'], true);
-					if (!empty($userData['email'])) {
-						$emailAddress = $userData['email'];
+				$fields = array('email');
+				foreach ($map as $k => $v) {
+					if (in_array($k, $import)) {
+						$fields[] = $v;
 					}
+				}
+				$response = $facebook->get('/me?fields='.implode(',', $fields));
+				$userNode = $response->getGraphUser();
+				$emailAddress = $userNode->getField('email');
+				if (!$dn) {
+					Users::$cache['facebookUserData'] = $userNode->uncastItems();
 				}
 			}
 
 			$authenticated = true;
-			$fb_uid = $facebook->getUser();
-			$re_save_user = false;
 			if ($retrieved) {
 				if (empty($user->fb_uid)) {
 					// this is a logged-in user who was never authenticated with facebook.
@@ -327,7 +341,7 @@ abstract class Users extends Base_Users
 					// for the logged-in user, simply log out and essentially run this function
 					// from the beginning again.
 					Users::logout();
-					$user_was_logged_in = false;
+					$userWasLoggedIn = false;
 					$user = new Users_User();
 					$retrieved = false;
 				}
@@ -379,19 +393,6 @@ abstract class Users extends Base_Users
 					// user is logged out and no user corresponding to $fb_uid yet
 
 					$authenticated = 'registered';
-
-					// If we can import email address from facebook,
-					// try retrieving it quietly
-					if ($import_emailAddress) {
-						// DELAY: The following call may take some time,
-						// but once the user is saved, it will not happen again
-						// for this facebook user, because it would be identified by fb_uid
-						$userData = $facebook->api('/me');
-						if (!empty($userData['email'])) {
-							$emailAddress = $userData['email'];
-						}
-						Users::$cache['facebookUserData'] = $userData;
-					}
 
 					if (!empty($emailAddress)) {
 						$ui = Users::identify('email', $emailAddress, 'verified');
@@ -452,28 +453,24 @@ abstract class Users extends Base_Users
 			}
 			Users::$cache['user'] = $user;
 			Users::$cache['authenticated'] = $authenticated;
-
-			// Checking if user email is not set, and we have facebook "email" permission,
-			// try retrieving it from facebook and verifying the email for the user
-			if (!empty($emailAddress)) {
-				$emailSubject = Q_Config::get('Users', 'transactional', 'authenticated', 'subject', false);
-				$emailView = Q_Config::get('Users', 'transactional', 'authenticated', 'body', false);
-				if ($emailSubject !== false and $emailView) {
-					$user->addEmail($emailAddress, $emailSubject, $emailView);
-				}
-
-				// After this, we automatically verify their email,
-				// even if they never clicked the confirmation link,
-				// because we trust the authentication provider.
-				$user->setEmailAddress($emailAddress, true);
-			}
-
 			break;
 		default:
 			// not sure how to log this user in
-			return $user_was_logged_in ? $user : false;
+			return $userWasLoggedIn ? $user : false;
 		}
-		if (!$user_was_logged_in) {
+		// Check we should import an email address from the provider
+		if (in_array('emailAddress', $import) and !empty($emailAddress) and !$user->emailAddress) {
+			// We automatically set their email as verified, without a confirmation message,
+			// because we trust the authentication provider.
+			$user->setEmailAddress($emailAddress, true, $email);
+			// But might send a welcome email to the users who just authenticated
+			$emailSubject = Q_Config::get('Users', 'transactional', 'authenticated', 'subject', false);
+			$emailView = Q_Config::get('Users', 'transactional', 'authenticated', 'body', false);
+			if ($emailSubject !== false and $emailView) {
+				$email->sendMessage($emailAddress, $emailSubject, $emailView);
+			}
+		}
+		if (!$userWasLoggedIn) {
 			self::setLoggedInUser($user);
 		}
 
@@ -496,7 +493,8 @@ abstract class Users extends Base_Users
 		// Now make sure our master session contains the
 		// session info for the provider app.
 		if ($provider == 'facebook') {
-			$access_token = $facebook->getAccessToken();
+			$accessToken = $facebook->getDefaultAccessToken();
+			$at = $accessToken->getValue();
 			if (isset($_SESSION['Users']['appUsers']['facebook_'.$appId])) {
 				// Facebook app user exists. Do we need to update it? (Probably not!)
 				$pk = $_SESSION['Users']['appUsers']['facebook_'.$appId];
@@ -512,14 +510,14 @@ abstract class Users extends Base_Users
 					$app_user->state = 'added';
 				}
 
-				if (!isset($app_user->access_token)
-				 or $access_token != $app_user->access_token) {
+				if (!isset($app_user->access_token) or ($at and $at != $app_user->access_token)) {
 					/**
 					 * @event Users/authenticate/updateAppUser {before}
 					 * @param {Users_User} user
 					 */
 					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-					$app_user->access_token = $access_token;
+					$app_user->access_token = $at;
+					$app_user->session_expires = $accessToken->getExpiresAt()->getTimestamp();
 					$app_user->save(); // update access_token in app_user
 					/**
 					 * @event Users/authenticate/updateAppUser {after}
@@ -535,14 +533,13 @@ abstract class Users extends Base_Users
 				$app_user->appId = $appId;
 				if ($app_user->retrieve()) {
 					// App user exists in database. Do we need to update it?
-					if (!isset($app_user->access_token)
-					 or $app_user->access_token != $access_token) {
+					if (!isset($app_user->access_token) or $app_user->access_token != $at) {
 						/**
 						 * @event Users/authenticate/updateAppUser {before}
 						 * @param {Users_User} user
 						 */
 						Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-						$app_user->access_token = $access_token;
+						$app_user->access_token = $at;
 						$app_user->save(); // update access_token in app_user
 						/**
 						 * @event Users/authenticate/updateAppUser {after}
@@ -554,7 +551,8 @@ abstract class Users extends Base_Users
 					if (empty($app_user->state) or $app_user->state !== 'added') {
 						$app_user->state = 'added';
 					}
-					$app_user->access_token = $access_token;
+					$app_user->access_token = $at;
+					$app_user->session_expires = $accessToken->getExpiresAt()->getTimestamp();
 					$app_user->provider_uid = $user->fb_uid;
 					/**
 					 * @event Users/insertAppUser {before}
@@ -683,12 +681,11 @@ abstract class Users extends Base_Users
 	{
 		// Access the session, if we haven't already.
 		$user = self::loggedInUser();
-
 		$sessionId = Q_Session::id();
 
-		// One last chance to do something.
-		// Hooks shouldn't be able to cancel the logout.
 		/**
+		 * One last chance to do something.
+		 * Hooks shouldn't be able to cancel the logout, though.
 		 * @event Users/logout {before}
 		 * @param {Users_User} user
 		 */
@@ -701,7 +698,7 @@ abstract class Users extends Base_Users
 		if ($user) {
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Users/logout",
-				"sessionId" => Q_Session::id(),
+				"sessionId" => $sesionId,
 				"userId" => $user->id,
 				"deviceId" => $deviceId
 			));
@@ -715,6 +712,13 @@ abstract class Users extends Base_Users
 
 		// Destroy the current session, which clears the $_SESSION and all notices, etc.
 		Q_Session::destroy();
+		
+		/**
+		 * After the logout has taken place
+		 * @event Users/logout {after}
+		 * @param {Users_User} user
+		 */
+		Q::event('Users/logout', compact('user'), 'after');
 	}
 
 	/**
@@ -760,26 +764,45 @@ abstract class Users extends Base_Users
 	 * @method setLoggedInUser
 	 * @static
 	 * @param {Users_User|string} $user The user object or user id
+	 * @param {array} [$options] Some options for the method
+	 * @param {string} [$options.notice=Q_Config::expect('Users','login','notice')]
+	 *  A notice to show to the newly logged-in user that they have been
+	 *  logged in. This notice only appears if another user was logged in
+	 *  before this method was called, to draw their attention to the sudden
+	 *  switch. To turn off this notice, pass null here.
 	 */
-	static function setLoggedInUser($user = null)
+	static function setLoggedInUser($user = null, $options = array())
 	{
+		if ($user and is_string($user)) {
+			$user = Users_User::fetch($user, true);
+		}
+		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
+		if (!$user and $user->id === $loggedInUserId) {
+			// This user is already the logged-in user. Do nothing.
+			return;
+		}
+		
+		/**
+		 * @event Users/setLoggedInUser {before}
+		 * @param {Users_User} user
+		 * @param {string} loggedInUserId
+		 */
+		Q::event('Users/setLoggedInUser', compact('user', 'loggedInUserId'), 'before');
+		
+		if ($loggedInUserId) {
+			// always log out existing user, so their session data isn't carried over
+			Users::logout();
+		} else {
+			// Otherwise the session data of the logged-out user is merged
+			// into the logged-in user's session, so it can be used!
+		}
 		if (!$user) {
-			return Users::logout();
-		}
-		if (is_string($user)) {
-			$user = Users_User::fetch($user);
-		}
-		if (isset($_SESSION['Users']['loggedInUser']['id'])) {
-			if ($user->id == $_SESSION['Users']['loggedInUser']['id']) {
-				// This user is already the logged-in user.
-				return;
-			}
+			// nothing more to do, this is essentially a call to log out
+			return;
 		}
 
-		if ($sessionId = Q_Session::id()) {
-			// Change the session id to prevent session fixation attacks
-			$sessionId = Q_Session::regenerateId(true);
-		}
+		// Change the session id to prevent session fixation attacks
+		$sessionId = Q_Session::regenerateId(true);
 
 		// Store the new information in the session
 		$snf = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
@@ -790,21 +813,20 @@ abstract class Users extends Base_Users
 			? $user->sessionCount + 1
 			: 1;
 
-		// Do we need to update it?
-		if (Q_Config::get('Users', 'setLoggedInUser', 'updateSessionKey', true)) {
-			/**
-			 * @event Users/setLoggedInUser/updateSessionKey {before}
-			 * @param {Users_User} user
-			 */
-			Q::event('Users/setLoggedInUser/updateSessionKey', compact('user'), 'before');
-			$user->sessionId = $sessionId;
-			$user->save(); // update sessionId in user
-			/**
-			 * @event Users/setLoggedInUser/updateSessionKey {after}
-			 * @param {Users_User} user
-			 */
-			Q::event('Users/setLoggedInUser/updateSessionKey', compact('user'), 'after');
-		}
+		/**
+		 * @event Users/setLoggedInUser/updateSessionId {before}
+		 * @param {Users_User} user
+		 */
+		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'before');
+		
+		$user->sessionId = $sessionId;
+		$user->save(); // update sessionId in user
+		
+		/**
+		 * @event Users/setLoggedInUser/updateSessionId {after}
+		 * @param {Users_User} user
+		 */
+		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'after');
 		
 		$votes = Users_Vote::select('*')
 			->where(array(
@@ -816,6 +838,16 @@ abstract class Users extends Base_Users
 		// The consistency of this mechanism across sessions is not perfect, i.e.
 		// the same hint may repeat in multiple concurrent sessions, but it's ok.
 		$_SESSION['Users']['hinted'] = array_keys($votes);
+		
+		if ($loggedInUserId) {
+			// Set a notice for the user to alert them that the account has changed
+			$template = Q_Config::expect('Users', 'login', 'notice');
+			$displayName = $user->displayName();
+			$html = Q_Handlebars::renderSource($template, compact(
+				'user', 'displayName'
+			));
+			Q_Response::setNotice('Users::setLoggedInUser', $html, true);
+		}
 
 		/**
 		 * @event Users/setLoggedInUser {after}
@@ -912,9 +944,8 @@ abstract class Users extends Base_Users
 					'type' => '"facebook"'
 				));
 			}
-			$facebook = Users::facebook();
-			if ($facebook) {
-				$uid = $facebook->getUser();
+			if ($facebook = Users::facebook()) {
+				$uid = Users_AppUser::loggedInUid($facebook);
 				try {
 					// authenticate (and possibly adopt) an existing provider user
 					// or insert a new user during this authentication
@@ -1263,7 +1294,7 @@ abstract class Users extends Base_Users
 				$status = 'future';
 			}
 		} else {
-			// Save hashed version
+			// Find existing identifier or save a new one
 			$ui = new Users_Identify();
 			$hashed = Q_Utils::hash($value);
 			$ui->identifier = $type."_hashed:$hashed";
@@ -1397,31 +1428,6 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * If the user is using an app with a provider, this returns the row
-	 * @method providerAppUser
-	 * @static
-	 * @param {string} $provider The name of the provider
-	 * @param {string} $appId The id of the app on the provider
-	 * @return {Users_AppUser} Returns the row corresponding to the currently logged-in user.
-	 * @throws {Q_Exception_WrongType} If argument is wrong
-	 */
-	static function providerAppUser($provider, $appId)
-	{
-		if (!isset($provider)) {
-			throw new Q_Exception_WrongType(array('field' => 'provider', 'type' => 'one of the supported providers'));
-		}
-
-		if (!isset($appId)) {
-			throw new Q_Exception_WrongType(array('field' => 'appId', 'type' => 'integer'));
-		}
-
-		if (!isset($_SESSION['Users']['appUsers'][$provider.'_'.$appId])) {
-			return null;
-		}
-		return $_SESSION['Users']['appUsers'][$provider.'_'.$appId];
-	}
-
-	/**
 	 * Hashes a passphrase
 	 * @method hashPassphrase
 	 * @static
@@ -1479,10 +1485,12 @@ abstract class Users extends Base_Users
 	 * Gets the facebook object constructed from request and/or cookies
 	 * @method facebook
 	 * @static
-	 * @param {string} $key Defaults to the name of the app
+	 * @param {string} [$key=Q::app()] Can either be a Qbix app key or a Facebook app id.
+	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
+	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
 	 * @return {Facebook|null} Facebook object
 	 */
-	static function facebook($key = null)
+	static function facebook($key = null, $longLived = true, $setCookie = true)
 	{
 		if (!isset($key)) {
 			$key = Q_Config::expect('Q', 'app');
@@ -1490,44 +1498,90 @@ abstract class Users extends Base_Users
 		if (isset(self::$facebooks[$key])) {
 			return self::$facebooks[$key];
 		}
+		$apps = Q_Config::get('Users', 'facebookApps', array());
+		if (isset($apps[$key])) {
+			$fb_info = $apps[$key];
+		} else {
+			foreach ($apps as $k => $v) {
+				if ($v['appId'] === $key) {
+					$fb_info = $v;
+					$key = $k;
+					break;
+				}
+			}
+		}
+		$appId = (isset($fb_info['appId']) && isset($fb_info['secret']))
+			? $fb_info['appId']
+			: '';
+		if (!$appId) {
+			return null;
+		}
 
-		// Get the facebook object from POST, if any
+		try {
+			$params = array_merge(array(
+				'app_id' => $appId,
+				'app_secret' => $fb_info['secret']
+			));
+			$facebook = new Facebook\Facebook($params);
+			Users::$facebooks[$appId] = $facebook;
+			Users::$facebooks[$key] = $facebook;
+		} catch (Exception $e) {
+			return null;
+		}
+
+		$defaultAccessToken = null;
 		if (isset($_POST['signed_request'])) {
-			$fb_info = Q_Config::get('Users', 'facebookApps', $key, null);
-			if (isset($fb_info['appId']) && isset($fb_info['secret'])) {
-				try {
-					$facebook = new Facebook\Facebook(array(
-						'app_id' => $fb_info['appId'],
-						'app_secret' => $fb_info['secret']
-					));
-					Users::$facebooks[$key] = $facebook;
-					return $facebook;
-				} catch (Exception $e) {
-					// do nothing
+			// This means that this is being requested from canvas page or page tab
+			$fbsr = $_POST['signed_request'];
+		} else {
+			// Check the cookies for the signed request
+			$fbsr = Q::ifset($_COOKIE, "fbsr_$appId", null);
+		}
+		if ($fbsr) {
+			$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
+			$result = array(
+				'signedRequest' => $fbsr,
+				'expires' => $sr->get('expires'),
+				'accessToken' => $sr->get('oauth_token'),
+				'userID' => $sr->get('user_id')
+			);
+		}
+		if ($authResponse = Q_Request::special('Users.facebook.authResponse', null)) {
+			// Users.js sent along Users.facebook.authResponse in the request
+			$result = Q::take($authResponse, array(
+				'signedRequest', 'accessToken', 'expires', 'expiresIn', 'userID'
+			));
+			if (!isset($result['expires']) and isset($result['expiresIn'])) {
+				$result['expires'] = time() + $result['expiresIn']; // approximately
+			}
+			if (isset($result['signedRequest'])) {
+				$fbsr = $result['signedRequest'];
+			}
+		}
+		if (isset($result['accessToken'])) {
+			$defaultAccessToken = $result['accessToken'];
+			if ($longLived and isset($result['expires'])) {
+				$accessToken = new Facebook\Authentication\AccessToken(
+					$defaultAccessToken, $result['expires']
+				);
+				if (!$accessToken->isLongLived()) {
+					$oa = $facebook->getOAuth2Client();
+					$defaultAccessToken = $oa->getLongLivedAccessToken($defaultAccessToken);
 				}
 			}
 		}
-
-		// And now, the new facebook js can set fbsr_$appId
-		$fb_apps = Q_Config::get('Users', 'facebookApps', array());
-		foreach ($fb_apps as $key => $fb_info) {
-			if (isset($_COOKIE['fbsr_'.$fb_info['appId']])) {
-				try {
-					$facebook = new Facebook\Facebook(array(
-						'app_id' => $fb_info['appId'],
-						'secret' => $fb_info['secret']
-					)); // will set user and session from the cookie
-					Users::$facebooks[$fb_info['appId']] = $facebook;
-					Users::$facebooks[$key] = $facebook;
-					return $facebook;
-				} catch (Exception $e) {
-					// do nothing
-				}
-			}
+		if ($defaultAccessToken) {
+			$facebook->setDefaultAccessToken($defaultAccessToken);
 		}
-
-		// Otherwise, this facebook object isn't there
-		return null;
+		if ($fbsr and $setCookie) {
+			Q_Response::setCookie("fbsr_$appId", $fbsr);
+		}
+		// If $defaultAccessToken was not, set, then
+		// we will return a Facebook\Facebook object but
+		// it will not have a default access token set, so
+		// Facebook API requests will return an error unless
+		// you provide your own access token at request time.
+		return $facebook;
 	}
 
 	/**
@@ -2036,3 +2090,5 @@ abstract class Users extends Base_Users
 
 	/* * * */
 };
+
+include_once(__DIR__.DS."Facebook".DS."polyfills.php");

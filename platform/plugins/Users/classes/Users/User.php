@@ -29,11 +29,28 @@ class Users_User extends Base_Users_User
 	 * @static
 	 * @param {string} $userId
 	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
-	 * @return {Users_User|null}
+	 * @return {Users_User|null|array} If $userId is an array, returns an array of ($userId => $user) pairs.
+	 *   Otherwise returns a Users_User object, or null.
 	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
 	 */
 	static function fetch ($userId, $throwIfMissing = false)
 	{
+		if (is_array($userId)) {
+			$users = Users_User::select('*')
+				->where(array('id' => $userId))
+				->fetchDbRows('id');
+			if ($throwIfMissing) {
+				foreach ($userId as $uid) {
+					if (!isset($users[$uid])) {
+						$missing[] = $uid;
+					}
+				}
+				if ($missing) {
+					throw new Q_Exception("Missing users with ids " . implode(', ', $missing));
+				}
+			}
+			return $users;
+		}
 		if (empty($userId)) {
 			$result = null;
 		} else if (!empty(self::$cache['getUser'][$userId])) {
@@ -375,6 +392,7 @@ class Users_User extends Base_Users_User
 	 * @param {string} [$options.from] An array of (emailAddress, human_readable_name)
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
+	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @return {boolean}
 	 *  Returns true on success.
 	 *  Returns false if this email address is already verified for this user.
@@ -389,7 +407,8 @@ class Users_User extends Base_Users_User
 		$activationEmailSubject = null,
 		$activationEmailView = null,
 		array $fields = array(),
-		array $options = array())
+		array $options = array(),
+		&$email = null)
 	{
 		if (!isset($options['html'])) {
 			$options['html'] = true;
@@ -489,6 +508,8 @@ class Users_User extends Base_Users_User
 	 * @method setEmailAddress
 	 * @param {string} $emailAddress
 	 * @param {boolean} [$verified=false]
+	 *  Whether to force the email address to be marked verified for this user
+	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If e-mail address is missing
 	 * @throws {Users_Exception_AlreadyVerified}
@@ -496,7 +517,7 @@ class Users_User extends Base_Users_User
 	 * @throws {Users_Exception_WrongState}
 	 *	If verification state is wrong
 	 */
-	function setEmailAddress($emailAddress, $verified = false)
+	function setEmailAddress($emailAddress, $verified = false, &$email = null)
 	{
 		$email = new Users_Email();
 		Q_Valid::email($emailAddress, $normalized);
@@ -572,6 +593,7 @@ class Users_User extends Base_Users_User
 	 * @param {array} [$options=array()] Array of options. Can include:
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
+	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @return {boolean}
 	 *  Returns true on success.
 	 *  Returns false if this mobile number is already verified for this user.
@@ -585,7 +607,8 @@ class Users_User extends Base_Users_User
 		$mobileNumber,
 		$activationMessageView = null,
 		array $fields = array(),
-		array $options = array())
+		array $options = array(),
+		&$mobile = null)
 	{
 		if (!Q_Valid::phone($mobileNumber, $normalized)) {
 			throw new Q_Exception_WrongValue(array(
@@ -678,6 +701,8 @@ class Users_User extends Base_Users_User
 	 * @method setMobileNumber
 	 * @param {string} $mobileNumber
 	 * @param {boolean} [$verified=false]
+	 *  Whether to force the mobile number to be marked verified for this user
+	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If mobile number is missing
 	 * @throws {Users_Exception_AlreadyVerified}
@@ -685,7 +710,7 @@ class Users_User extends Base_Users_User
 	 * @throws {Users_Exception_WrongState}
 	 *	If verification state is wrong
 	 */
-	function setMobileNumber($mobileNumber, $verified = false)
+	function setMobileNumber($mobileNumber, $verified = false, &$mobile = null)
 	{
 		Q_Valid::phone($mobileNumber, $normalized);
 		$mobile = new Users_Mobile();
@@ -794,6 +819,36 @@ class Users_User extends Base_Users_User
 		}
 		return true;
 	}
+
+	/**
+	 * Get the Users_Email object corresponding to this user's email address, if any
+	 * @method email
+	 * @return Users_Email
+	 */
+	function email()
+	{
+		if ($this->emailAddress) {
+			return null;
+		}
+		$email = new Users_Email();
+		$email->address = $this->emailAddress;
+		return $email->retrieve();
+	}
+
+	/**
+	 * Get the Users_Mobile object corresponding to this user's email address, if any
+	 * @method mobile
+	 * @return Users_Mobile
+	 */
+	function mobile()
+	{
+		if ($this->mobileNumber) {
+			return null;
+		}
+		$mobile = new Users_Mobile();
+		$mobile->number = $this->mobileNumber;
+		return $mobile->retrieve();
+	}
 	
 	/**
 	 * get user id
@@ -837,54 +892,65 @@ class Users_User extends Base_Users_User
 	 * @method idsFromIdentifiers
 	 * @static
 	 * @param $asUserId {string} The user id of inviting user
-	 * @param $identifiers {string|array}
-	 * @param $statuses {array} Optional reference to an array to populate with $userId => $status pairs.
-	 * @return {array} The array of user ids
+	 * @param {string|array} $identifiers Can be email addresses or mobile numbers,
+	 *  passed either as an array or separated by "\t"
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
+	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers
+	 * @return {array} The array of user ids, in the same order as the $identifiers.
 	 */
-	static function idsFromIdentifiers ($identifiers, &$statuses = array())
+	static function idsFromIdentifiers (
+		$identifiers, 
+		&$statuses = array(), 
+		&$identifierTypes = array())
 	{
-		if (empty($identifiers)) return array();
+		if (empty($identifiers)) {
+			return array();
+		}
 		if (!is_array($identifiers)) {
-			$identifiers = array_map('trim', explode(',', $identifiers));
+			$identifiers = array_map('trim', explode("\t", $identifiers));
 		}
 		$users = array();
 		foreach ($identifiers as $identifier) {
 			if (Q_Valid::email($identifier, $emailAddress)) {
 				$ui_identifier = $emailAddress; 
-				$type = 'email';
+				$identifierType = 'email';
 			} else if (Q_Valid::phone($identifier, $mobileNumber)) {
 				$ui_identifier = $mobileNumber; 
-				$type = 'mobile';
+				$identifierType = 'mobile';
 			} else {
 				throw new Q_Exception_WrongType(array(
-					'field' => 'identifier',
+					'field' => "identifier '$identifier",
 					'type' => 'email address or mobile number'
 				), array('identifier', 'emailAddress', 'mobileNumber'));
 			}
 			$status = null;
-			$users[] = $user = Users::futureUser($type, $ui_identifier, $status);
-			$statuses[$user->id] = $status;
+			$users[] = $user = Users::futureUser($identifierType, $ui_identifier, $status);
+			$statuses[] = $status;
+			$identifierTypes[] = $identifierType;
 		}
 		return array_map(array('Users_User', '_getId'), $users);
 	}
 	
 	/**
-	 * Check fb identifier or array of identifiers and return users - existing or future
+	 * Check fb uids or array of uids and return users - existing or future
 	 * @method idsFromFacebook
 	 * @static
-	 * @param $asUserId {string} The user id of inviting user
-	 * @param $identifiers {string|array}
+	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
-	static function idsFromFacebook ($identifiers)
+	static function idsFromFacebook ($uids, &$statuses = array())
 	{
-		if (empty($identifiers)) return array();
-		if (!is_array($identifiers)) {
-			$identifiers = array_map('trim', explode(',', $identifiers));
+		if (empty($uids)) {
+			return array();
+		}
+		if (!is_array($uids)) {
+			$uids = array_map('trim', explode(',', $uids));
 		}
 		$users = array();
-		foreach ($identifiers as $identifier) {
-			$users[] = Users::futureUser('facebook', $identifier);
+		foreach ($uids as $uid) {
+			$users[] = Users::futureUser('facebook', $uid, $status);
+			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);
 	}
@@ -899,17 +965,19 @@ class Users_User extends Base_Users_User
 	 */
 	static function verifyUserIds($userIds, $throw = false)
 	{
-		if (empty($userIds)) return array();
+		if (empty($userIds)) {
+			return array();
+		}
 
-		if (!is_array($userIds)) {
+		if (is_string($userIds)) {
 			$userIds = array_map('trim', explode(',', $userIds));
 		}
-		
+
 		$users = Users_User::select('id')
 			->where(array('id' => $userIds))
 			->fetchAll(PDO::FETCH_COLUMN);
 
-		if ($throw && count($users) < count($userIds)) {	
+		if ($throw && count($users) < count($userIds)) {
 			$diff = array_diff($userIds, $users);
 			if (count($diff)) {
 				$ids = join(', ', $diff);

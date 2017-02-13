@@ -350,6 +350,10 @@ return [["varbinary","31","",false],false,"PRI",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -372,6 +376,10 @@ return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -394,6 +402,10 @@ return [["timestamp","31","",false],true,"",null];
 Base.prototype.beforeSet_untilTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };

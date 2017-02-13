@@ -997,6 +997,8 @@ class Q
 						}
 					}
 				}
+			} else {
+				return $source;
 			}
 		}
 		return $dest;

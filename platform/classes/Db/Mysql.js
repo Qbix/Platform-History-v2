@@ -373,8 +373,8 @@ function Db_Mysql(connName, dsn) {
 	/**
 	 * Returns a Date string to store in the database
 	 * @method toDate
-	 * @param {string} $timestamp The UNIX timestamp, e.g. from a strtotime function
-	 * @return {string}
+	 * @param {Date|String|integer} timestamp The UNIX timestamp, e.g. from a strtotime function
+	 * @return {String} in "yyyy-mm-dd hh:mm:ss" format
 	 */
 	dbm.toDate = function(timestamp) {
 		if (!(timestamp instanceof Date)) {
@@ -393,8 +393,8 @@ function Db_Mysql(connName, dsn) {
 	/**
 	 * Returns a DateTime string to store in the database
 	 * @method toDateTime
-	 * @param {Date|string} timestamp a standard UNIX timestamp
-	 * @return {string}
+	 * @param {Date|string|integer} timestamp a standard UNIX timestamp
+	 * @return {String} in "yyyy-mm-dd hh:mm:ss" format
 	 */
 	dbm.toDateTime = function(timestamp) {
 		if (!(timestamp instanceof Date)) {
