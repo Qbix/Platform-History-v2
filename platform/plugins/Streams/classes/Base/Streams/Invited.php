@@ -58,8 +58,6 @@ abstract class Base_Streams_Invited extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
-			  1 => 'token',
 			)
 		);
 	}
@@ -243,7 +241,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => 'MUL',
   3 => NULL,
 );			
 	}
@@ -297,7 +295,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -352,15 +350,13 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('insertedTime', $value);
 		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".insertedTime");
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
 		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
+		$datetime = is_numeric($value)
+			? (new DateTime())->setTimestamp($value)
+			: new DateTime($value);
+		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
 	}
 
@@ -397,15 +393,13 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('updatedTime', $value);
 		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".updatedTime");
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
 		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
+		$datetime = is_numeric($value)
+			? (new DateTime())->setTimestamp($value)
+			: new DateTime($value);
+		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
 	}
 
@@ -445,15 +439,13 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('expireTime', $value);
 		}
-		$date = date_parse($value);
-		if (!empty($date['errors'])) {
-			$json = json_encode($value);
-			throw new Exception("DateTime $json in incorrect format being assigned to ".$this->getTable().".expireTime");
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
 		}
-		$value = sprintf("%04d-%02d-%02d %02d:%02d:%02d", 
-			$date['year'], $date['month'], $date['day'], 
-			$date['hour'], $date['minute'], $date['second']
-		);
+		$datetime = is_numeric($value)
+			? (new DateTime())->setTimestamp($value)
+			: new DateTime($value);
+		$value = $datetime->format("Y-m-d h:i:s");
 		return array('expireTime', $value);			
 	}
 
@@ -478,23 +470,9 @@ return array (
 );			
 	}
 
-	/**
-	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
-	 * @method beforeSave
-	 * @param {array} $value The array of fields
-	 * @return {array}
-	 * @throws {Exception} If mandatory field is not set
-	 */
 	function beforeSave($value)
 	{
-		if (!$this->retrieved) {
-			$table = $this->getTable();
-			foreach (array('userId','token') as $name) {
-				if (!isset($value[$name])) {
-					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-				}
-			}
-		}						
+						
 		// convention: we'll have updatedTime = insertedTime if just created.
 		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			

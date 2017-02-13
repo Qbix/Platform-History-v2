@@ -44,22 +44,28 @@ class Streams_Participant extends Base_Streams_Participant
 	}
 
 	/**
-	 * Filter out users which are or are not participants
+	 * Filter to just the ids of users which are, or are not, participating in a stream
 	 * @method filter
 	 * @static
-	 * @param {array} $userIds
-	 * @param {Streams_Stream} $stream
-	 * @param {boolean} $participate=false
+	 * @param {array} $userIds An array of user ids to filter
+	 * @param {string} $publisherId The id of the publisher of the stream
+	 * @param {string} $streamName The name of the stream
+	 * @param {string|array|null} $state can be "invited", "participating", "left", or an array, or null.
+	 *  If null, then it will return any
 	 * @return {array}
 	 */
-	static function filter($userIds, $stream, $participate=false) {
-		$p = array_keys(Streams_Participant::select('*')->where(array(
-			'publisherId' => $stream->publisherId,
-			'streamName' => $stream->name,
-			'userId' => $userIds,
-			'state' => 'participating'
-		))->fetchDbRows(null, '', 'userId'));
-		return $participate ? $p : array_diff($userIds, $p);
+	static function filter($userIds, $publisherId, $streamName, $state = null) {
+		$criteria = array(
+			'publisherId' => $publisherId,
+			'streamName' => $streamName,
+			'userId' => $userIds
+		);
+		if (isset($state)) {
+			$criteria['state'] = $state;
+		}
+		return Streams_Participant::select('userId')
+			->where($criteria)
+			->fetchAll(PDO::FETCH_COLUMN, 0);
 	}
 
 	/**

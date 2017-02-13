@@ -13,24 +13,17 @@ function Users_before_Q_objects(&$params)
 		$appId = $fb_info['appId'];
 		if (is_array($authResponse)) {
 			if ($authResponse) {
+				$accessToken = $authResponse['accessToken'];
 				$cookie = $authResponse['signedRequest'];
 				$expires = 0;
 			} else {
+				$accessToken = null;
 				$cookie = "";
 				$expires = 1;
 			}
-			try {
-				$facebook = new Facebook(array(
-					'appId' => $fb_info['appId'], 
-					'secret' => $fb_info['secret'],
-					'fileUpload' => true
-				));
-				$cookie_name = 'fbsr_'.$facebook->getAppId();
-				if (!empty($_SERVER['HTTP_HOST'])) {
-					Q_Response::setCookie($cookie_name, $cookie, $expires);
-				}
-			} catch (Exception $e) {
-				// do nothing
+			$cookie_name = 'fbsr_'.$fb_info['appId'];
+			if (!empty($_SERVER['HTTP_HOST'])) {
+				Q_Response::setCookie($cookie_name, $cookie, $expires);
 			}
 		}
 	}

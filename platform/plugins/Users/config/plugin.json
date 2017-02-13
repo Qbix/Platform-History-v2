@@ -54,13 +54,17 @@
 		"facebookApps": {
 
 		},
+		"import": {
+			"facebook": ["emailAddress", "firstName", "lastName"]
+		},
 		"login": {
 			"identifierType": "email,mobile",
 			"using": "native,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
 			"gravatar": false,
-			"noRegister": false
+			"noRegister": false,
+			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
 		},
 		"paths": {
 			"icons": "files/Users/icons",

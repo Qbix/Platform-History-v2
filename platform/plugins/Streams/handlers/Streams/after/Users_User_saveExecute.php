@@ -13,79 +13,84 @@ function Streams_after_Users_User_saveExecute($params)
 	if (isset($modifiedFields['icon'])) {
 		$updates['icon'] = $modifiedFields['icon'];
 	}
+
+	// some standard values
 	if ($user->id === Users::communityId()) {
 		$firstName = Users::communityName();
 		$lastName = Users::communitySuffix();
 		$firstName = $firstName ? $firstName : "";
 		$lastName = $lastName ? $lastName : "";
+	} else if (!empty(Streams::$cache['register'])) {
+		$register = Streams::$cache['register'];
+		$firstName = Q::ifset($register, 'first', '');
+		$lastName = Q::ifset($register, 'last', '');
 	} else {
-		$firstName = Q::ifset(Streams::$cache, 'register', 'first', '');
-		$lastName = Q::ifset(Streams::$cache, 'register', 'last', '');
+		$firstName = null;
+		$lastName = null;
 	}
-	if ($params['inserted']) {
-		
-		// create some standard streams for them
-		$onInsert = Q_Config::get('Streams', 'onInsert', 'Users_User', array());
-		if (!$onInsert) {
-			return;
-		}
+	$values = array(
+		'Streams/user/firstName' => $firstName,
+		'Streams/user/lastName' => $lastName
+	);
+	$toInsert = $params['inserted']
+		? Q_Config::get('Streams', 'onInsert', 'Users_User', array())
+		: array();
+	if ($toInsert or !empty(Users::$cache['facebookUserData'])) {
+		// load standard streams info
 		$p = new Q_Tree();
 		$p->load(STREAMS_PLUGIN_CONFIG_DIR.DS.'streams.json');
 		$p->load(APP_CONFIG_DIR.DS.'streams.json');
-	
-		$values = array(
-			'Streams/user/firstName' => $firstName,
-			'Streams/user/lastName' => $lastName,
-		);
-	
-		// Check for user data from facebook
-		if (!empty(Users::$cache['facebookUserData'])) {
-			$userData = Users::$cache['facebookUserData'];
-			foreach ($userData as $name_fb => $value) {
-				foreach ($p->getAll() as $name => $info) {
-					if (isset($info['name_fb'])
-					and $info['name_fb'] === $name_fb) {
-						$onInsert[] = $name;
-						$values[$name] = $value;
-					}
+	}
+	if (!empty(Users::$cache['facebookUserData'])) {
+		// check for user data from facebook
+		$userData = Users::$cache['facebookUserData'];
+		foreach ($userData as $name_fb => $value) {
+			foreach ($p->getAll() as $name => $info) {
+				if (isset($info['name_fb'])
+				and $info['name_fb'] === $name_fb) {
+					$toInsert[] = $name;
+					$values[$name] = $value;
 				}
 			}
 		}
+	}
 	
-		foreach ($onInsert as $name) {
-			$stream = Streams::fetchOne($user->id, $user->id, $name);
-			if (!$stream) { // it shouldn't really be in the db yet
-				$stream = new Streams_Stream();
-				$stream->publisherId = $user->id;
-				$stream->name = $name;
-			}
-			$stream->type = $p->expect($name, "type");
-			$stream->title = $p->expect($name, "title");
-			$stream->content = $p->get($name, "content", ''); // usually empty
-			$stream->readLevel = $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']);
-			$stream->writeLevel = $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']);
-			$stream->adminLevel = $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel']);
-			if ($name === "Streams/user/icon") {
-				$sizes = Q_Config::expect('Users', 'icon', 'sizes');
-				sort($sizes);
-				$stream->setAttribute('sizes', $sizes);
-				$stream->icon = $user->iconUrl();
-			}
-			if (isset($values[$name])) {
-				$stream->content = $values[$name];
-			}
-			$stream->save(); // this also inserts avatars
-			$o = array(
-				'userId' => $user->id, 
-				'skipAccess' => true
-			);
-			$so = $p->get($name, "subscribe", array());
-			if ($so === false) {
-				$stream->join($o);
-			} else {
-				$stream->subscribe(array_merge($o, $so));
-			}
+	foreach ($toInsert as $name) {
+		$stream = Streams::fetchOne($user->id, $user->id, $name);
+		if (!$stream) {
+			$stream = new Streams_Stream();
+			$stream->publisherId = $user->id;
+			$stream->name = $name;
 		}
+		$stream->type = $p->expect($name, "type");
+		$stream->title = $p->expect($name, "title");
+		$stream->content = $p->get($name, "content", ''); // usually empty
+		$stream->readLevel = $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']);
+		$stream->writeLevel = $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']);
+		$stream->adminLevel = $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel']);
+		if ($name === "Streams/user/icon") {
+			$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+			sort($sizes);
+			$stream->setAttribute('sizes', $sizes);
+			$stream->icon = $user->iconUrl();
+		}
+		if (isset($values[$name])) {
+			$stream->content = $values[$name];
+		}
+		$stream->save(); // this also inserts avatars
+		$o = array(
+			'userId' => $user->id, 
+			'skipAccess' => true
+		);
+		$so = $p->get($name, "subscribe", array());
+		if ($so === false) {
+			$stream->join($o);
+		} else {
+			$stream->subscribe(array_merge($o, $so));
+		}
+	}
+	
+	if ($params['inserted']) {
 		
 		// Save a greeting stream, to be edited
 		$communityId = Users::communityId();
@@ -131,8 +136,9 @@ function Streams_after_Users_User_saveExecute($params)
 		$access->adminLevel = -1;
 		$access->save();
 		
-		// NOTE: the above saving of access caused Streams::updateAvatar to run,
-		// insert a Streams_Avatar row for the new user, and properly configure it.
+		// NOTE: the above saving of access caused Streams::updateAvatar
+		// to run, to insert a Streams_Avatar row for the new user, and
+		// to properly configure it.
 		
 	} else if ($modifiedFields) {
 		if ($updates) {
@@ -155,7 +161,6 @@ function Streams_after_Users_User_saveExecute($params)
 			if ($name === "Streams/user/icon") {
                 $sizes = Q_Config::expect('Users', 'icon', 'sizes');
 				sort($sizes);
-				$attributes = $stream->attributes;
                 $stream->setAttribute('sizes', $sizes);
 				$stream->icon = $changes['icon'] = $user->iconUrl();
 			}
