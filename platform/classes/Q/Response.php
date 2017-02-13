@@ -211,7 +211,7 @@ class Q_Response
 	{
 		self::$notices[$key] = $notice;
 		if (!$transient and Q_Session::id()) {
-			$_SESSION['Q']['notices'][$key] = $notice;
+			$_SESSION['Q']['notices'][$key] = Q::t($notice);
 		}
 		unset(self::$removedNotices[$key]);
 	}
