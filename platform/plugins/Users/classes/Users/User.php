@@ -29,11 +29,28 @@ class Users_User extends Base_Users_User
 	 * @static
 	 * @param {string} $userId
 	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
-	 * @return {Users_User|null}
+	 * @return {Users_User|null|array} If $userId is an array, returns an array of ($userId => $user) pairs.
+	 *   Otherwise returns a Users_User object, or null.
 	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
 	 */
 	static function fetch ($userId, $throwIfMissing = false)
 	{
+		if (is_array($userId)) {
+			$users = Users_User::select('*')
+				->where(array('id' => $userId))
+				->fetchDbRows('id');
+			if ($throwIfMissing) {
+				foreach ($userId as $uid) {
+					if (!isset($users[$uid])) {
+						$missing[] = $uid;
+					}
+				}
+				if ($missing) {
+					throw new Q_Exception("Missing users with ids " . implode(', ', $missing));
+				}
+			}
+			return $users;
+		}
 		if (empty($userId)) {
 			$result = null;
 		} else if (!empty(self::$cache['getUser'][$userId])) {
@@ -902,7 +919,7 @@ class Users_User extends Base_Users_User
 				$identifierType = 'mobile';
 			} else {
 				throw new Q_Exception_WrongType(array(
-					'field' => 'identifier',
+					'field' => "identifier '$identifier",
 					'type' => 'email address or mobile number'
 				), array('identifier', 'emailAddress', 'mobileNumber'));
 			}
@@ -948,17 +965,19 @@ class Users_User extends Base_Users_User
 	 */
 	static function verifyUserIds($userIds, $throw = false)
 	{
-		if (empty($userIds)) return array();
+		if (empty($userIds)) {
+			return array();
+		}
 
-		if (!is_array($userIds)) {
+		if (is_string($userIds)) {
 			$userIds = array_map('trim', explode(',', $userIds));
 		}
-		
+
 		$users = Users_User::select('id')
 			->where(array('id' => $userIds))
 			->fetchAll(PDO::FETCH_COLUMN);
 
-		if ($throw && count($users) < count($userIds)) {	
+		if ($throw && count($users) < count($userIds)) {
 			$diff = array_diff($userIds, $users);
 			if (count($diff)) {
 				$ids = join(', ', $diff);

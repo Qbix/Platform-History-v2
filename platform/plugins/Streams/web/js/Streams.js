@@ -1026,29 +1026,34 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Participant.get.cache.removeEach([publisherId, streamName]);
 			Streams.get.cache.removeEach([publisherId, streamName]);
 			var rsd = response.slots.data;
-			Q.handle(o && o.callback, null, [err, response, msg]);
-			Q.handle(callback, null, [err, response, msg]);
+			Q.handle(o && o.callback, null, [err, rsd]);
+			Q.handle(callback, null, [err, rsd]);
 			var emailAddresses = [];
 			var mobileNumbers = [];
 			var fb_uids = [];
-			Q.each(rsd.invited, function (i, userId) {
+			Q.each(rsd.userIds, function (i, userId) {
+				if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
+					return;
+				}
 				var status = rsd.statuses[i];
 				var shouldFollowup = (o.followup === true)
 				|| (o.followup !== false && status === 'future');
 				if (!shouldFollowup) {
 					return; // next one
 				}
+				var identifier = rsd.identifiers[i];
 				var identifierType = rsd.identifierTypes[i];
 				switch (identifierType) {
-					case email: emailAddresses.push(identifier[i]); break;
-					case mobile: mobileNumbers.push(identifier[i]); break;
-					case facebook: 
+					case 'userId': break;
+					case 'email': emailAddresses.push(identifier); break;
+					case 'mobile': mobileNumbers.push(identifier); break;
+					case 'facebook': 
 						if (shouldFollowup === true) {
 							fb_uids.push(identifier[i]); 
 						}
 						break;
-					case label:
-					case newFutureUsers:
+					case 'label':
+					case 'newFutureUsers':
 					default:
 						break;
 				}
@@ -1058,11 +1063,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					subject: 'Streams/followup/email/subject',
 					body: 'Streams/followup/email/body',
 					alert: 'Streams/followup/email/alert'
-				},
-				fields,
-				function (params) {
+				}, Q.info, function (params) {
 					var url = Q.Links.email(
-						params.subject[1], params.body[1], o.identifier
+						params.subject[1], params.body[1], emailAddresses
 					);
 					if (params.alert[1]) {
 						alert(params.alert[1]);
@@ -1074,9 +1077,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				Q.Template.render({
 					text: 'Streams/followup/mobile',
 					alert: 'Streams/followup/mobile/alert'
-				}, fields,
-				function (params) {
-					var url = Q.Links.sms(params.text[1], o.identifier);
+				}, Q.info, function (params) {
+					var url = Q.Links.sms(params.text[1], mobileNumbers);
 					if (params.alert[1]) {
 						alert(params.alert[1]);
 					}
