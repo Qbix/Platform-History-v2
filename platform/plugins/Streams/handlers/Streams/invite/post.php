@@ -22,10 +22,12 @@ function Streams_invite_post()
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
 
-	Streams::$cache['invited'] = Streams::invite(
+	Streams::$cache['invite'] = Streams::invite(
 		$publisherId, 
 		$streamName, 
 		$_REQUEST, 
 		$_REQUEST
 	);
+	
+	Q_Response::setSlot('data', Streams::$cache['invite']);
 }

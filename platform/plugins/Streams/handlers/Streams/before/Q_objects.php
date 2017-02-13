@@ -11,13 +11,7 @@ function Streams_before_Q_objects()
 	}
 	$alreadyExecuted = true;
 
-	$invite = Streams_Invite::fromToken($token);
-	if (!$invite) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'invite',
-			'criteria' => "token = '$token"
-		), 'token');
-	}
+	$invite = Streams_Invite::fromToken($token, true);
 	
 	// did invite expire?
 	$ts = Streams_Invite::db()->select("CURRENT_TIMESTAMP")->fetchAll(PDO::FETCH_NUM);
@@ -26,6 +20,9 @@ function Streams_before_Q_objects()
 		$invite->state = 'expired';
 		$invite->save();
 	}
+	
+	// retain the invite object for further processing
+	Streams::$followedInvite = $invite;
 	
 	// is invite still pending?
 	if ($invite->state !== 'pending') {
@@ -56,53 +53,9 @@ function Streams_before_Q_objects()
 		}
 	}
 	
-	// now process the invite
-	$invitedUser = Users_User::fetch($invite->userId, true);
-	$stream = Streams::fetchOne($invitedUser->id, $invite->publisherId, $invite->streamName);
-	if (!$stream) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'stream',
-			'criteria' => "publisherId = '{$invite->publisherId}', name = '{$invite->streamName}'"
-		));
-	}
-	
-	$byUser = Users_User::fetch($invite->invitingUserId, true);
-	$byStream = Streams::fetchOne($byUser->id, $invite->publisherId, $invite->streamName);
-	if (!$byStream) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'stream',
-			'criteria' => "publisherId = '{$invite->publisherId}', name = '{$invite->streamName}'"
-		));
-	}
-	
-	$access = new Streams_Access();
-	$access->publisherId = $byStream->publisherId;
-	$access->streamName = $byStream->name;
-	$access->ofUserId = $invite->userId;
-
-	$specified_access = false;
-	foreach (array('readLevel', 'writeLevel', 'adminLevel') as $level_type) {
-		$access->$level_type = -1;
-		if (empty($invite->$level_type)) {
-			continue;
-		}
-		// Give access level from the invite.
-		// However, if inviting user has a lower access level now,
-		// then give that level instead, unless it is lower than
-		// what the invited user would have had otherwise.
-		$min = min($invite->$level_type, $byStream->get($level_type, 0));
-		if ($min > $stream->get($level_type, 0)) {
-			$access->$level_type = $min;
-			$specified_access = true;
-		}
-	}
-	if ($specified_access) {
-		$access->save(true);
-	}
-	
-	// now log invited user in
-	$user = Users::loggedInUser();
-	if (empty($user) or $user->id !== $invite->userId) {
+	$liu = Users::loggedInUser();	
+	if ($invite->userId and (!$liu or $liu->id !== $invite->userId)) {
+		// log the invited user in, suddenly
 		$user = new Users_User();
 		$user->id = $invite->userId;
 		if (!$user->retrieve()) {
@@ -114,11 +67,15 @@ function Streams_before_Q_objects()
 		Users::setLoggedInUser($user);
 	}
 	
-	// accept invite and autosubscribe if first time
-	if ($invite->accept() and !$stream->subscription($user->id)) {
-		$stream->subscribe();
+	if (!$liu and !$invite->userId) {
+		// schedule the invite to be accepted after the user logs in
+		$_SESSION['Streams']['invite']['token'] = $token;
+		return;
 	}
 	
-	// retain the invite object for further processing
-	Streams::$followedInvite = $invite;
+	// accept invite and autosubscribe if first time and possible
+	if ($invite->accept(array(
+		'access' => true,
+		'subscribe' => true
+	)));
 }

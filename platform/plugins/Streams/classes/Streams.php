@@ -1291,11 +1291,11 @@ abstract class Streams extends Base_Streams
 	 *  An array of streams fetched for this user.
 	 *  If it is null, we fetch them as the logged-in user.
 	 * @param {array} $options=array()
-	 *  Associative array of options, which can include:<br/>
-	 *  "fullAccess" => Ignore the access restrictions for the name<br/> 
-	 *  "short" => Only display the first name<br/>
-	 *  "html" => If true, encloses the first and last name in span tags<br/>
-	 *  "escape" => If true, does HTML escaping of the retrieved fields
+	 *   @param {boolean} [$options.short] Show one part of the name only
+	 *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
+	 *   @param {boolean} [$options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
+	 *   @param {boolean} [$options.escape] If true, does HTML escaping of the retrieved fields
+	 * @param {string} [$fallback='Someone'] HTML to return if there is no info to get displayName from.
 	 * @param {string|null} $default
 	 *  What to return if there is no info to get displayName from.
 	 * @return {string|null}
@@ -3182,6 +3182,10 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
+	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
+	 *  with empty userId, which is used whenever someone shows up with the token
+	 *  and presents it via "Q.Streams.token" querystring parameter.
+	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
 	 *  @param {string|array} [$options.addMyLabel] label or an array of ($label => array($title, $icon)) for adding asUserId's contacts
@@ -3194,7 +3198,14 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
 	 * @see Users::addLink()
-	 * @return {array} returns array with keys "success", "invited", "statuses", "identifierTypes", "alreadyParticipating"
+	 * @return {array} Returns array with keys 
+	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  The userIds array contains userIds from identifiers first, then fb_uid, then label,
+	 *  then newFutureUsers. The statuses is an array of the same size and in the same order.
+	 *  The identifierTypes array is in the same order as well.
+	 *  If the "token" option was set to true, the array also contains the "invite"
+	 *  key pointing to a Streams_Invite object that was saved in the database
+	 *  (whose userId field is empty because anyone with the token may accept this invite).
 	 */
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
@@ -3207,13 +3218,7 @@ abstract class Streams extends Base_Streams
 		}
 
 		// Fetch the stream as the logged-in user
-		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
-		if (!$stream) {
-			throw new Q_Exception_MissingRow(array(
-				'table' => 'stream',
-				'criteria' => 'with that name'
-			), 'streamName');		
-		}
+		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName, true);
 
 		// Do we have enough admin rights to invite others to this stream?
 		if (!$stream->testAdminLevel('invite') || !$stream->testWriteLevel('join')) {
@@ -3249,33 +3254,27 @@ abstract class Streams extends Base_Streams
 		$raw_userIds = isset($who['userId']) 
 			? Users_User::verifyUserIds($who['userId'], true)
 			: array();
-		// merge labels if any
-		if (isset($who['label'])) {
-			$label = $who['label'];
-			if (is_string($label)) {
-				$label = array_map('trim', explode("\t", $label)) ;
-			}
-			$raw_userIds = array_merge(
-				$raw_userIds, 
-				Users_User::labelsToIds($asUserId, $label)
-			);
-		}
 		// merge identifiers if any
-		$identifierType = null;
-		$statuses = null;
+		$identifierTypes = array();
+		$statuses = array();
 		if (isset($who['identifier'])) {
-			$identifier = $who['identifier'];
-			if (is_string($identifier)) {
-				if (Q_Valid::email($who['identifier'])) {
-					$identifierType = 'email';
-				} else if (Q_Valid::phone($who['identifier'])) {
-					$identifierType = 'mobile';
-				}
-				$identifier = array_map('trim', explode("\t", $identifier)) ;
+			$identifiers = $who['identifier'];
+			if (is_string($identifiers)) {
+				$identifiers = array_map('trim', explode("\t", $identifier)) ;
 			}
-			$statuses = array();
-			$identifier_ids = Users_User::idsFromIdentifiers($identifier, $statuses);
+			foreach ($identifiers as $identifier) {
+				if (Q_Valid::email($identifier)) {
+					$identifierType[] = 'email';
+				} else if (Q_Valid::phone($identifier)) {
+					$identifierType[] = 'mobile';
+				}
+			}
+			$identifier_ids = Users_User::idsFromIdentifiers(
+				$identifiers, $statuses1, $identifierTypes1
+			);
 			$raw_userIds = array_merge($raw_userIds, $identifier_ids);
+			$statuses = $statuses1;
+			$identifierTypes = $identifierTypes1;
 		}
 		// merge fb uids if any
 		if (isset($who['fb_uid'])) {
@@ -3285,13 +3284,32 @@ abstract class Streams extends Base_Streams
 			}
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromFacebook($fb_uids)
+				Users_User::idsFromFacebook($fb_uids, $statuses2)
 			);
+			$statuses = array_merge($statuses, $statuses2);
+			$identifiers = array_merge($identifiers, $fb_uids);
+			$identifierTypes2 = array_fill(0, count($statuses2), 'facebook');
+			$identifierTypes = array_merge($identifierTypes, $identifierTypes2);
+		}
+		// merge labels if any
+		if (isset($who['label'])) {
+			$label = $who['label'];
+			if (is_string($label)) {
+				$label = array_map('trim', explode("\t", $label)) ;
+			}
+			$userIdsFromLabels = Users_User::labelsToIds($asUserId, $label);
+			$raw_userIds = array_merge($raw_userIds, $userIdsFromLabels);
+			foreach ($userIdsFromLabels as $userId) {
+				$statuses[] = 'verified'; // NOTE: this may occasionally be inaccurate
+				$identifierTypes[] = 'label';
+			}
 		}
 		if (!empty($who['newFutureUsers'])) {
 			$nfu = $who['newFutureUsers'];
 			for ($i=0; $i<$nfu; ++$i) {
 				$raw_userIds[] = Users::futureUser('none', null)->id;
+				$statuses[] = 'future';
+				$identifierTypes[] = 'newFutureUsers';
 			}
 		}
 		// ensure that each userId is included only once
@@ -3397,13 +3415,32 @@ abstract class Streams extends Base_Streams
 		}
 		$result = Q_Utils::queryInternal('Q/node', $params);
 
-		return array(
+		$return = array(
 			'success' => $result,
-			'invited' => $userIds,
+			'userIds' => $userIds,
 			'statuses' => $statuses,
-			'identifierType' => $identifierType,
-			'alreadyParticipating' => $total - $to_invite
+			'identifiers' => $identifiers,
+			'identifierTypes' => $identifierTypes,
+			'alreadyParticipating' => $total - $to_invite,
 		);
+		
+		if (!empty($who['token'])) {
+			$invite = new Streams_Invite();
+			$invite->userId = '';
+			$invite->publisherId = $publisherId;
+			$invite->streamName = $streamName;
+			$invite->invitingUserId = $asUserId;
+			$invite->displayName = $displayName;
+			$invite->appUrl = $appUrl;
+			$invite->readLevel = $readLevel;
+			$invite->writeLevel = $writeLevel;
+			$invite->adminLevel = $adminLevel;
+			$invite->state = 'pending';
+			$invite->save();
+			$return['invite'] = $invite;
+		}
+
+		return $return;
 	}
 	
 	/**
