@@ -136,18 +136,18 @@ class Q_Uri
 		}
 
 		if (($source instanceof Q_Uri) and $source->Q_url) {
-			return $source->Q_url;
+			return Q_Uri::fixUrl($source->Q_url);
 		}
 		
 		static $cache = array();
 		$cache_key = $noProxy ? $source . "\tnoProxy" : $source;
 		if (is_string($source) and isset($cache[$cache_key])) {
-			return $cache[$cache_key];
+			return Q_Uri::fixUrl($cache[$cache_key]);
 		}
 		
 		if (is_string($source) and isset($source[0]) and $source[0] == '#') {
 			// $source is a fragment reference
-			return $source;
+			return Q_Uri::fixUrl($source);
 		}
 		
 		if (Q_Valid::url($source)) {
@@ -156,7 +156,7 @@ class Q_Uri
 			if (is_string($source)) {
 				$cache[$source] = $result;
 			}
-			return $result;
+			return Q_Uri::fixUrl($result);
 		}
 		
 		/**
@@ -204,7 +204,7 @@ class Q_Uri
 		if (is_string($source)) {
 			$cache[$source] = $result;
 		}
-		return $result;
+		return Q_Uri::fixUrl($result);
 	}
 
 	static function unreachableUri()

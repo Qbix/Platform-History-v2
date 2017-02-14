@@ -1657,7 +1657,7 @@ class Db_Row implements Iterator
 
 		if (class_exists('Q')) {
 			/**
-			 * @event {after} Db/Row/$class_name/removeExecute
+			 * @event Db/Row/$class_name/removeExecute {after} 
 			 * @param {Db_Row} row
 			 * @param {Db_Query} query
 			 * @param {array} search_criteria
@@ -1885,7 +1885,7 @@ class Db_Row implements Iterator
 	
 		if (class_exists('Q')) {
 			/**
-			 * @event {after} Db/Row/$class_name/saveExecute
+			 * @event Db/Row/$class_name/saveExecute {after}
 			 * @param {Db_Row} row
 			 * @param {Db_Query} query
 			 * @param {array} modifiedFields

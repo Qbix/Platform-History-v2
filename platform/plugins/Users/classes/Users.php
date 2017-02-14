@@ -681,12 +681,11 @@ abstract class Users extends Base_Users
 	{
 		// Access the session, if we haven't already.
 		$user = self::loggedInUser();
-
 		$sessionId = Q_Session::id();
 
-		// One last chance to do something.
-		// Hooks shouldn't be able to cancel the logout.
 		/**
+		 * One last chance to do something.
+		 * Hooks shouldn't be able to cancel the logout, though.
 		 * @event Users/logout {before}
 		 * @param {Users_User} user
 		 */
@@ -699,7 +698,7 @@ abstract class Users extends Base_Users
 		if ($user) {
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Users/logout",
-				"sessionId" => Q_Session::id(),
+				"sessionId" => $sesionId,
 				"userId" => $user->id,
 				"deviceId" => $deviceId
 			));
@@ -713,6 +712,13 @@ abstract class Users extends Base_Users
 
 		// Destroy the current session, which clears the $_SESSION and all notices, etc.
 		Q_Session::destroy();
+		
+		/**
+		 * After the logout has taken place
+		 * @event Users/logout {after}
+		 * @param {Users_User} user
+		 */
+		Q::event('Users/logout', compact('user'), 'after');
 	}
 
 	/**
@@ -758,26 +764,45 @@ abstract class Users extends Base_Users
 	 * @method setLoggedInUser
 	 * @static
 	 * @param {Users_User|string} $user The user object or user id
+	 * @param {array} [$options] Some options for the method
+	 * @param {string} [$options.notice=Q_Config::expect('Users','login','notice')]
+	 *  A notice to show to the newly logged-in user that they have been
+	 *  logged in. This notice only appears if another user was logged in
+	 *  before this method was called, to draw their attention to the sudden
+	 *  switch. To turn off this notice, pass null here.
 	 */
-	static function setLoggedInUser($user = null)
+	static function setLoggedInUser($user = null, $options = array())
 	{
+		if ($user and is_string($user)) {
+			$user = Users_User::fetch($user, true);
+		}
+		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
+		if (!$user and $user->id === $loggedInUserId) {
+			// This user is already the logged-in user. Do nothing.
+			return;
+		}
+		
+		/**
+		 * @event Users/setLoggedInUser {before}
+		 * @param {Users_User} user
+		 * @param {string} loggedInUserId
+		 */
+		Q::event('Users/setLoggedInUser', compact('user', 'loggedInUserId'), 'before');
+		
+		if ($loggedInUserId) {
+			// always log out existing user, so their session data isn't carried over
+			Users::logout();
+		} else {
+			// Otherwise the session data of the logged-out user is merged
+			// into the logged-in user's session, so it can be used!
+		}
 		if (!$user) {
-			return Users::logout();
-		}
-		if (is_string($user)) {
-			$user = Users_User::fetch($user);
-		}
-		if (isset($_SESSION['Users']['loggedInUser']['id'])) {
-			if ($user->id == $_SESSION['Users']['loggedInUser']['id']) {
-				// This user is already the logged-in user.
-				return;
-			}
+			// nothing more to do, this is essentially a call to log out
+			return;
 		}
 
-		if ($sessionId = Q_Session::id()) {
-			// Change the session id to prevent session fixation attacks
-			$sessionId = Q_Session::regenerateId(true);
-		}
+		// Change the session id to prevent session fixation attacks
+		$sessionId = Q_Session::regenerateId(true);
 
 		// Store the new information in the session
 		$snf = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
@@ -788,21 +813,20 @@ abstract class Users extends Base_Users
 			? $user->sessionCount + 1
 			: 1;
 
-		// Do we need to update it?
-		if (Q_Config::get('Users', 'setLoggedInUser', 'updateSessionKey', true)) {
-			/**
-			 * @event Users/setLoggedInUser/updateSessionKey {before}
-			 * @param {Users_User} user
-			 */
-			Q::event('Users/setLoggedInUser/updateSessionKey', compact('user'), 'before');
-			$user->sessionId = $sessionId;
-			$user->save(); // update sessionId in user
-			/**
-			 * @event Users/setLoggedInUser/updateSessionKey {after}
-			 * @param {Users_User} user
-			 */
-			Q::event('Users/setLoggedInUser/updateSessionKey', compact('user'), 'after');
-		}
+		/**
+		 * @event Users/setLoggedInUser/updateSessionId {before}
+		 * @param {Users_User} user
+		 */
+		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'before');
+		
+		$user->sessionId = $sessionId;
+		$user->save(); // update sessionId in user
+		
+		/**
+		 * @event Users/setLoggedInUser/updateSessionId {after}
+		 * @param {Users_User} user
+		 */
+		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'after');
 		
 		$votes = Users_Vote::select('*')
 			->where(array(
@@ -814,6 +838,16 @@ abstract class Users extends Base_Users
 		// The consistency of this mechanism across sessions is not perfect, i.e.
 		// the same hint may repeat in multiple concurrent sessions, but it's ok.
 		$_SESSION['Users']['hinted'] = array_keys($votes);
+		
+		if ($loggedInUserId) {
+			// Set a notice for the user to alert them that the account has changed
+			$template = Q_Config::expect('Users', 'login', 'notice');
+			$displayName = $user->displayName();
+			$html = Q_Handlebars::renderSource($template, compact(
+				'user', 'displayName'
+			));
+			Q_Response::setNotice('Users::setLoggedInUser', $html, true);
+		}
 
 		/**
 		 * @event Users/setLoggedInUser {after}
@@ -1260,7 +1294,7 @@ abstract class Users extends Base_Users
 				$status = 'future';
 			}
 		} else {
-			// Save hashed version
+			// Find existing identifier or save a new one
 			$ui = new Users_Identify();
 			$hashed = Q_Utils::hash($value);
 			$ui->identifier = $type."_hashed:$hashed";

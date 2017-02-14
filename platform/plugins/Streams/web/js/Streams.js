@@ -973,12 +973,17 @@ Streams.release = function (key) {
  * @param {String} publisherId The user id of the publisher of the stream 
  * @param {String} streamName The name of the stream you are inviting to
  * @param {Object} [options] More options that are passed to the API, which can include:
- *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
+ *   @param {String|Array} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet. Can also be an array of identifiers.
+ *   @param {boolean} [options.token=false] Pass true here to generate an invite
+ *    which you can then send to anyone however you like. When they show up with the token
+ *    and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
+ *    will accept this invite either right away, or as soon as they log in.
+ *    They will then be added to the list of Streams_Invited for this stream, thus
+ *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
  *   @param {String} [options.fb_uid] fb user id or array of fb user ids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
- *   @param {String} [options.identifier] identifier or an array of identifiers
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
  *   @param {String} [options.readLevel] the read level to grant those who are invited
@@ -986,13 +991,16 @@ Streams.release = function (key) {
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
  *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
  *   @param {String} [options.callback] Also can be used to provide callbacks.
- *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only when the invited user hasn't registered yet.
+ *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
  *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
- * @param {Function} callback Called with (err, result)
+ * @param {Function} callback Called with (err, result) .
+ *   See Streams::invite in PHP side.
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
 Streams.invite = function (publisherId, streamName, options, callback) {
-	// TODO: expand this implementation to be complete
+	// TODO: start integrating this with Cordova methods to invite people
+	// from your contacts or facebook flow.
+	// Follow up with the Groups app, maybe! :)
 	if (!Users.loggedInUser) {
 		Q.handle(callback, null, ["Streams.invite: not logged in"]);
 		return false; // not logged in
@@ -1018,48 +1026,72 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Participant.get.cache.removeEach([publisherId, streamName]);
 			Streams.get.cache.removeEach([publisherId, streamName]);
 			var rsd = response.slots.data;
-			Q.handle(o && o.callback, null, [err, response, msg]);
-			Q.handle(callback, null, [err, response, msg]);
-			var shouldFollowup = (o.followup !== 'future'
-				|| rsd.statuses[rsd.invited[0]] === 'future');
-			if (o.followup && rsd.identifierType && shouldFollowup) {
-				var fields = Q.info;
-				switch (rsd.identifierType) {
-				case 'email':
-					Q.Template.render({
-						subject: 'Streams/followup/email/subject',
-						body: 'Streams/followup/email/body',
-						alert: 'Streams/followup/email/alert'
-					},
-					fields,
-					function (params) {
-						var url = Q.Links.email(
-							params.subject[1], params.body[1], o.identifier
-						);
-						if (params.alert[1]) {
-							alert(params.alert[1]);
-						}
-						window.location = url;
-					});
-					break;
-				case 'mobile':
-					Q.Template.render({
-						text: 'Streams/followup/mobile',
-						alert: 'Streams/followup/mobile/alert'
-					}, fields,
-					function (params) {
-						var url = Q.Links.sms(params.text[1], o.identifier);
-						if (params.alert[1]) {
-							alert(params.alert[1]);
-						}
-						window.location = url;
-					});
-					break;
+			Q.handle(o && o.callback, null, [err, rsd]);
+			Q.handle(callback, null, [err, rsd]);
+			var emailAddresses = [];
+			var mobileNumbers = [];
+			var fb_uids = [];
+			Q.each(rsd.userIds, function (i, userId) {
+				if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
+					return;
 				}
+				var status = rsd.statuses[i];
+				var shouldFollowup = (o.followup === true)
+				|| (o.followup !== false && status === 'future');
+				if (!shouldFollowup) {
+					return; // next one
+				}
+				var identifier = rsd.identifiers[i];
+				var identifierType = rsd.identifierTypes[i];
+				switch (identifierType) {
+					case 'userId': break;
+					case 'email': emailAddresses.push(identifier); break;
+					case 'mobile': mobileNumbers.push(identifier); break;
+					case 'facebook': 
+						if (shouldFollowup === true) {
+							fb_uids.push(identifier[i]); 
+						}
+						break;
+					case 'label':
+					case 'newFutureUsers':
+					default:
+						break;
+				}
+			});
+			if (emailAddresses.length) {
+				Q.Template.render({
+					subject: 'Streams/followup/email/subject',
+					body: 'Streams/followup/email/body',
+					alert: 'Streams/followup/email/alert'
+				}, Q.info, function (params) {
+					var url = Q.Links.email(
+						params.subject[1], params.body[1], emailAddresses
+					);
+					if (params.alert[1]) {
+						alert(params.alert[1]);
+					}
+					window.location = url;
+				});
+			}
+			if (mobileNumbers.length) {
+				Q.Template.render({
+					text: 'Streams/followup/mobile',
+					alert: 'Streams/followup/mobile/alert'
+				}, Q.info, function (params) {
+					var url = Q.Links.sms(params.text[1], mobileNumbers);
+					if (params.alert[1]) {
+						alert(params.alert[1]);
+					}
+					window.location = url;
+				});
+			}
+			if (fb_uids.length) {
+				// maybe invite some facebook people somehow,
+				// such as via facebook messenger mass message
 			}
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
-	if (o.identifier) {
+	if (o.identifier || o.token || o.fb_uids || o.userIds || o.label) {
 		return _request();
 	}
 	Q.prompt(
@@ -1286,7 +1318,7 @@ Streams.related.onError = new Q.Event();
  * Constructs a stream from fields, which are typically returned from the server.
  * @class Streams.Stream
  * @constructor
- * @param {String} fields
+ * @param {Object} fields
  */
 var Stream = Streams.Stream = function (fields) {
 	if (this.constructed) {
@@ -2214,21 +2246,32 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  * Invite other users to this stream. Must be logged in first.
  * 
  * @method invite
- * @param {Object} [fields] More fields that are passed to the API, which can include:
- *   @param {String} [fields.identifier] Required for now. An email address or mobile number to invite. Might not belong to an existing user yet.
- *   @required
- *   @param {String} [fields.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  * @param {Object} [options] More options that are passed to the API, which can include:
  *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
+ *   @param {boolean} [options.token=false] Pass true here to generate an invite
+ *    which you can then send to anyone however you like. When they show up with the token
+ *    and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
+ *    will accept this invite either right away, or as soon as they log in.
+ *    They will then be added to the list of Streams_Invited for this stream, thus
+ *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+ *   @param {String} [options.userId] user id or an array of user ids to invite
+ *   @param {String} [options.fb_uid] fb user id or array of fb user ids to invite
+ *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
+ *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
+ *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ *   @param {String} [options.readLevel] the read level to grant those who are invited
+ *   @param {String} [options.writeLevel] the write level to grant those who are invited
+ *   @param {String} [options.adminLevel] the admin level to grant those who are invited
  *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
  *   @param {String} [options.callback] Also can be used to provide callbacks.
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only when the invited user hasn't registered yet.
+ *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result)
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
 Sp.invite = function (fields, options, callback) {
-	Streams.invite(this.fields.publisherId, this.fields.name, fields, options, callback);
+	Streams.invite(this.fields.publisherId, this.fields.name, options, callback);
 };
 
 /**

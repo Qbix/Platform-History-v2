@@ -29,11 +29,28 @@ class Users_User extends Base_Users_User
 	 * @static
 	 * @param {string} $userId
 	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
-	 * @return {Users_User|null}
+	 * @return {Users_User|null|array} If $userId is an array, returns an array of ($userId => $user) pairs.
+	 *   Otherwise returns a Users_User object, or null.
 	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
 	 */
 	static function fetch ($userId, $throwIfMissing = false)
 	{
+		if (is_array($userId)) {
+			$users = Users_User::select('*')
+				->where(array('id' => $userId))
+				->fetchDbRows('id');
+			if ($throwIfMissing) {
+				foreach ($userId as $uid) {
+					if (!isset($users[$uid])) {
+						$missing[] = $uid;
+					}
+				}
+				if ($missing) {
+					throw new Q_Exception("Missing users with ids " . implode(', ', $missing));
+				}
+			}
+			return $users;
+		}
 		if (empty($userId)) {
 			$result = null;
 		} else if (!empty(self::$cache['getUser'][$userId])) {
@@ -875,54 +892,65 @@ class Users_User extends Base_Users_User
 	 * @method idsFromIdentifiers
 	 * @static
 	 * @param $asUserId {string} The user id of inviting user
-	 * @param $identifiers {string|array}
-	 * @param $statuses {array} Optional reference to an array to populate with $userId => $status pairs.
-	 * @return {array} The array of user ids
+	 * @param {string|array} $identifiers Can be email addresses or mobile numbers,
+	 *  passed either as an array or separated by "\t"
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
+	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers
+	 * @return {array} The array of user ids, in the same order as the $identifiers.
 	 */
-	static function idsFromIdentifiers ($identifiers, &$statuses = array())
+	static function idsFromIdentifiers (
+		$identifiers, 
+		&$statuses = array(), 
+		&$identifierTypes = array())
 	{
-		if (empty($identifiers)) return array();
+		if (empty($identifiers)) {
+			return array();
+		}
 		if (!is_array($identifiers)) {
-			$identifiers = array_map('trim', explode(',', $identifiers));
+			$identifiers = array_map('trim', explode("\t", $identifiers));
 		}
 		$users = array();
 		foreach ($identifiers as $identifier) {
 			if (Q_Valid::email($identifier, $emailAddress)) {
 				$ui_identifier = $emailAddress; 
-				$type = 'email';
+				$identifierType = 'email';
 			} else if (Q_Valid::phone($identifier, $mobileNumber)) {
 				$ui_identifier = $mobileNumber; 
-				$type = 'mobile';
+				$identifierType = 'mobile';
 			} else {
 				throw new Q_Exception_WrongType(array(
-					'field' => 'identifier',
+					'field' => "identifier '$identifier",
 					'type' => 'email address or mobile number'
 				), array('identifier', 'emailAddress', 'mobileNumber'));
 			}
 			$status = null;
-			$users[] = $user = Users::futureUser($type, $ui_identifier, $status);
-			$statuses[$user->id] = $status;
+			$users[] = $user = Users::futureUser($identifierType, $ui_identifier, $status);
+			$statuses[] = $status;
+			$identifierTypes[] = $identifierType;
 		}
 		return array_map(array('Users_User', '_getId'), $users);
 	}
 	
 	/**
-	 * Check fb identifier or array of identifiers and return users - existing or future
+	 * Check fb uids or array of uids and return users - existing or future
 	 * @method idsFromFacebook
 	 * @static
-	 * @param $asUserId {string} The user id of inviting user
-	 * @param $identifiers {string|array}
+	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
-	static function idsFromFacebook ($identifiers)
+	static function idsFromFacebook ($uids, &$statuses = array())
 	{
-		if (empty($identifiers)) return array();
-		if (!is_array($identifiers)) {
-			$identifiers = array_map('trim', explode(',', $identifiers));
+		if (empty($uids)) {
+			return array();
+		}
+		if (!is_array($uids)) {
+			$uids = array_map('trim', explode(',', $uids));
 		}
 		$users = array();
-		foreach ($identifiers as $identifier) {
-			$users[] = Users::futureUser('facebook', $identifier);
+		foreach ($uids as $uid) {
+			$users[] = Users::futureUser('facebook', $uid, $status);
+			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);
 	}
@@ -937,17 +965,19 @@ class Users_User extends Base_Users_User
 	 */
 	static function verifyUserIds($userIds, $throw = false)
 	{
-		if (empty($userIds)) return array();
+		if (empty($userIds)) {
+			return array();
+		}
 
-		if (!is_array($userIds)) {
+		if (is_string($userIds)) {
 			$userIds = array_map('trim', explode(',', $userIds));
 		}
-		
+
 		$users = Users_User::select('id')
 			->where(array('id' => $userIds))
 			->fetchAll(PDO::FETCH_COLUMN);
 
-		if ($throw && count($users) < count($userIds)) {	
+		if ($throw && count($users) < count($userIds)) {
 			$diff = array_diff($userIds, $users);
 			if (count($diff)) {
 				$ids = join(', ', $diff);

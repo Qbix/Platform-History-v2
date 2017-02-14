@@ -1,0 +1,12 @@
+ALTER TABLE {$prefix}invited
+DROP PRIMARY KEY;
+
+ALTER TABLE {$prefix}invited
+ADD INDEX token (userId, token),
+ADD INDEX state (userId, state),
+ADD INDEX insertedTime (userId, token),
+ADD INDEX expireTime (userId, token);
+
+ALTER TABLE {$prefix}participant
+DROP INDEX subscribed,
+DROP INDEX posted;
