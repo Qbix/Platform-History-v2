@@ -33,8 +33,9 @@
 			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING INTERNAL MESSAGES"
 		},
 		"environment": "",
+		/* "scriptFiles": ["config/Q/urls.php"], */
 		"response": {
-			"cacheBaseUrl": "MyApp:"
+			"cacheBaseUrl": "https://MyApp-cache"
 		}
 	},
 	"Db": {

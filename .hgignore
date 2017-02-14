@@ -6,6 +6,7 @@ syntax: regexp
 ^\.gitignore$
 ^\.idea/
 ^\.bin/
+^(?!platform)
 ^bundle.php
 ^platform/\.idea/
 ^platform/local/
