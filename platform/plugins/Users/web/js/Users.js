@@ -134,7 +134,7 @@ Users.initFacebook = function(callback, options) {
 		&& Q.plugins.Users.facebookApps[Q.info.app]) {
 			FB.init(Q.extend({
 				appId: Q.plugins.Users.facebookApps[Q.info.app].appId,
-				version: 'v2.3',
+				version: 'v2.8',
 				status: true,
 				cookie: true,
 				oauth: true,

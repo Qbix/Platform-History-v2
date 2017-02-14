@@ -24,6 +24,9 @@ function Streams_after_Users_User_saveExecute($params)
 		$register = Streams::$cache['register'];
 		$firstName = Q::ifset($register, 'first', '');
 		$lastName = Q::ifset($register, 'last', '');
+	} else {
+		$firstName = null;
+		$lastName = null;
 	}
 	$values = array(
 		'Streams/user/firstName' => $firstName,

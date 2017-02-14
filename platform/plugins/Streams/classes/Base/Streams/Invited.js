@@ -196,8 +196,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"userId",
-		"token"
+		
 	];
 };
 
@@ -252,7 +251,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"MUL",null];
 };
 
 /**
@@ -290,7 +289,7 @@ Base.prototype.maxSize_token = function () {
 	 */
 Base.column_token = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -392,24 +391,8 @@ Base.column_expireTime = function () {
 return [["timestamp","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"",null];
 };
 
-/**
- * Check if mandatory fields are set and updates 'magic fields' with appropriate values
- * @method beforeSave
- * @param {Object} value The object of fields
- * @param {Function} callback Call this callback if you return null
- * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
- * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
- */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['userId','token'], i;
-	if (!this._retrieved) {
-		var table = this.table();
-		for (i=0; i<fields.length; i++) {
-			if (this.fields[fields[i]] === undefined) {
-				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-			}
-		}
-	}
+
 	// convention: we'll have updatedTime = insertedTime if just created.
 	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	return value;

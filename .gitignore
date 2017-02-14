@@ -5,6 +5,8 @@
 .idea/
 .bin/
 docs/
+/*
+!platform
 platform/.idea/
 platform/local/*
 platform/files/Q/sessions/*
