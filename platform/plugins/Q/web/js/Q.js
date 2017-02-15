@@ -5598,11 +5598,13 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		var params = {
 			original: eventHandler
 		};
-		eventHandler = eventName ( params );
+		var wrapper = eventName ( params );
 		if (!('eventName' in params)) {
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
-		eventName = eventHandler.eventName = params.eventName;
+		eventHandler.Q_wrapper = wrapper;
+		eventName = wrapper.eventName = params.eventName;
+		eventHandler = wrapper;
 	}
 	if (!eventName) {
 		return;
