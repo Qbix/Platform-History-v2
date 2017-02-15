@@ -459,7 +459,7 @@ abstract class Users extends Base_Users
 			return $userWasLoggedIn ? $user : false;
 		}
 		// Check we should import an email address from the provider
-		if (in_array('emailAddress', $import) and !empty($emailAddress) and !$user->emailAddress) {
+		if (in_array('emailAddress', $import) and !empty($emailAddress) and empty($user->emailAddress)) {
 			// We automatically set their email as verified, without a confirmation message,
 			// because we trust the authentication provider.
 			$user->setEmailAddress($emailAddress, true, $email);
