@@ -3318,10 +3318,9 @@ abstract class Streams extends Base_Streams
 		}
 		// ensure that each userId is included only once
 		// and remove already participating users
-		$raw_userIds = array_unique($raw_userIds);
-
+		$userIds = array_unique($raw_userIds);
 		$alreadyParticipating = Streams_Participant::filter(
-			$raw_userIds, $stream->publisherId, $stream->name, null
+			$userIds, $stream->publisherId, $stream->name, null
 		);
 		$userIds = array_diff($raw_userIds, $alreadyParticipating);
 
@@ -3403,7 +3402,7 @@ abstract class Streams extends Base_Streams
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,
 			"username" => $asUser->username,
-			"userIds" => Q::json_encode($raw_userIds),
+			"userIds" => Q::json_encode($userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
 			"label" => $label, 
