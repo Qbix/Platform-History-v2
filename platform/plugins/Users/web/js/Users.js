@@ -1467,7 +1467,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 						        "type": "normal",
 						        "width": "200"
 						    }, p.fill('picture'));
-							FB.api('/me', p.fill('me'));
+							FB.api('/me?fields=first_name,last_name,gender,birthday,timezone,locale,verified,email', p.fill('me'));
 						}, scope ? {scope: scope} : undefined);
 					});
 					return false;
