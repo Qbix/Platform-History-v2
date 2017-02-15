@@ -5602,7 +5602,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		if (!('eventName' in params)) {
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
-		eventName = params.eventName;
+		eventName = eventHandler.eventName = params.eventName;
 	}
 
 	if (Q.isArrayLike(eventName)) {
@@ -5695,6 +5695,9 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 			Q.removeEventListener(element, eventName[i], eventHandler, useCapture);
 		}
 		return;
+	}
+	if (typeof eventName === 'function') {
+		eventName = eventHandler.eventName;
 	}
 	if (element === root
 	&& detected.name === 'explorer'
@@ -9155,6 +9158,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				if (!('eventName' in params)) {
 					throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 				}
+				args[0].eventName = params.eventName;
 				args[0] = params.eventName;
 			}
 			if (namespace) {
