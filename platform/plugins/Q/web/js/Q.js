@@ -5604,6 +5604,9 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		eventName = eventHandler.eventName = params.eventName;
 	}
+	if (!eventName) {
+		return;
+	}
 
 	if (Q.isArrayLike(eventName)) {
 		for (var i=0, l=eventName.length; i<l; ++i) {
@@ -5678,6 +5681,7 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * @param {String} eventName
  * @param {Function} eventHandler
  * @param {boolean} useCapture
+ * return {boolean} Should normally return true, unless listener could not be found or removed
  */
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
 	useCapture = useCapture || false;
@@ -5696,8 +5700,14 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		}
 		return;
 	}
+	if (!eventHandler) {
+		return false;
+	}
 	if (typeof eventName === 'function') {
 		eventName = eventHandler.eventName;
+		if (!eventName) {
+			return false;
+		}
 	}
 	if (element === root
 	&& detected.name === 'explorer'
@@ -5723,6 +5733,7 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 			break;
 		}
 	}
+	return true;
 };
 
 /**
