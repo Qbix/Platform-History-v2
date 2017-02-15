@@ -354,7 +354,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_placeholders_container,
 .Q_placeholder { display: inline-block; color: #999; font-style: italic; zoom: 1; *display: inline; }
 .Q_placeholders_container input,
-.Q_placeholders_container textarea { width: 100%; height: 100%; }
+.Q_placeholders_container textarea { box-sizing: border-box; width: 100%; height: 100%; }
 .Q_focus .Q_placeholder { color: #aaa; }
 div.Q_placeholder { pointer-events: none; }
 .Q_clickable_container { cursor: pointer !important;  }
