@@ -5706,7 +5706,7 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		return false;
 	}
 	if (typeof eventName === 'function') {
-		eventName = eventHandler.eventName;
+		eventName = eventHandler.Q_wrapper && eventHandler.Q_wrapper.eventName;
 		if (!eventName) {
 			return false;
 		}
@@ -11160,7 +11160,7 @@ Q.Masks = {
 };
 
 Q.Masks.options = {
-	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 300 },
+	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 500 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
 	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
