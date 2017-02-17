@@ -514,8 +514,9 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
+		$newDateTime = new DateTime();
 		$datetime = is_numeric($value)
-			? (new DateTime())->setTimestamp($value)
+			? $newDateTime->setTimestamp($value)
 			: new DateTime($value);
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
@@ -560,8 +561,9 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
+		$newDateTime = new DateTime();
 		$datetime = is_numeric($value)
-			? (new DateTime())->setTimestamp($value)
+			? $newDateTime->setTimestamp($value)
 			: new DateTime($value);
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
