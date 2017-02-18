@@ -5598,11 +5598,16 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		var params = {
 			original: eventHandler
 		};
-		eventHandler = eventName ( params );
+		var wrapper = eventName ( params );
 		if (!('eventName' in params)) {
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
-		eventName = params.eventName;
+		eventHandler.Q_wrapper = wrapper;
+		eventName = wrapper.eventName = params.eventName;
+		eventHandler = wrapper;
+	}
+	if (!eventName) {
+		return;
 	}
 
 	if (Q.isArrayLike(eventName)) {
@@ -5678,6 +5683,7 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * @param {String} eventName
  * @param {Function} eventHandler
  * @param {boolean} useCapture
+ * return {boolean} Should normally return true, unless listener could not be found or removed
  */
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
 	useCapture = useCapture || false;
@@ -5695,6 +5701,15 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 			Q.removeEventListener(element, eventName[i], eventHandler, useCapture);
 		}
 		return;
+	}
+	if (!eventHandler) {
+		return false;
+	}
+	if (typeof eventName === 'function') {
+		eventName = eventHandler.Q_wrapper && eventHandler.Q_wrapper.eventName;
+		if (!eventName) {
+			return false;
+		}
 	}
 	if (element === root
 	&& detected.name === 'explorer'
@@ -5720,6 +5735,7 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 			break;
 		}
 	}
+	return true;
 };
 
 /**
@@ -9155,6 +9171,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				if (!('eventName' in params)) {
 					throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 				}
+				args[0].eventName = params.eventName;
 				args[0] = params.eventName;
 			}
 			if (namespace) {
@@ -11143,7 +11160,7 @@ Q.Masks = {
 };
 
 Q.Masks.options = {
-	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 300 },
+	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 500 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
 	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
