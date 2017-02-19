@@ -264,7 +264,7 @@ abstract class Base_Streams_Access extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -318,7 +318,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,
@@ -372,7 +372,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -426,7 +426,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,
@@ -480,7 +480,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -506,10 +506,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
 	}
@@ -553,10 +555,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
 	}
@@ -762,7 +766,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
-		if (strlen($value) > 255)
+		if (strlen($value) > 1023)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
 		return array('permissions', $value);			
 	}
@@ -774,7 +778,7 @@ return array (
 	function maxSize_permissions()
 	{
 
-		return 255;			
+		return 1023;			
 	}
 
 	/**
@@ -788,7 +792,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '255',
+    1 => '1023',
     2 => '',
     3 => false,
   ),

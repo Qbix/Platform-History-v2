@@ -8,7 +8,7 @@ var Db = Q.require('Db');
 
 /**
  * Class representing 'Access' rows in the 'Streams' database
- * <br/>stored primarily on publisherId's Q server
+ * <br/>stored primarily on publisherId's shard
  * @namespace Streams
  * @class Access
  * @extends Base.Streams.Access

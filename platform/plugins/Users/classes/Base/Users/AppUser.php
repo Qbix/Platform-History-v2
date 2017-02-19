@@ -21,7 +21,7 @@
  * @property {string|Db_Expression} $updatedTime
  * @property {string} $access_token
  * @property {string} $session_secret
- * @property {string|Db_Expression} $session_expires
+ * @property {string} $session_expires
  * @property {string} $state
  * @property {string} $provider_uid
  */
@@ -57,7 +57,7 @@ abstract class Base_Users_AppUser extends Db_Row
 	 */
 	/**
 	 * @property $session_expires
-	 * @type {string|Db_Expression}
+	 * @type {string}
 	 */
 	/**
 	 * @property $state
@@ -258,7 +258,7 @@ abstract class Base_Users_AppUser extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -376,10 +376,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
 	}
@@ -423,10 +425,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
 	}
@@ -561,11 +565,12 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and normalize the DateTime string
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_session_expires
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_session_expires($value)
 	{
@@ -575,15 +580,21 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('session_expires', $value);
 		}
-		if ($value instanceof DateTime) {
-			$value = $value->getTimestamp();
-		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
-		$value = $datetime->format("Y-m-d h:i:s");
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".session_expires");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".session_expires");
 		return array('session_expires', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the session_expires field
+	 * @return {integer}
+	 */
+	function maxSize_session_expires()
+	{
+
+		return 255;			
 	}
 
 	/**
@@ -596,8 +607,8 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'timestamp',
-    1 => '1023',
+    0 => 'varchar',
+    1 => '255',
     2 => '',
     3 => false,
   ),

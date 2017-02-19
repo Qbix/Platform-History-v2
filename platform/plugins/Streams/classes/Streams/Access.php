@@ -77,7 +77,7 @@ class Streams_Access extends Base_Streams_Access
 	
 	/**
 	 * @method addPermission
-	 * @param {string} $permissions
+	 * @param {string} $permission
 	 */
 	function addPermission($permission)
 	{
@@ -135,6 +135,17 @@ class Streams_Access extends Base_Streams_Access
 			$this->set('removed', false);
 		}
 		Streams::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
+		if (!empty($this->publisherId) and !empty($this->streamName)
+		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
+			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
+			Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(
+				'type' => 'Streams/access',
+				'instructions' => Q::take($this->fields, array(
+					'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+					'ofUserId', 'ofContactLabel'
+				))
+			), true);
+		}
 		return $query;
 	}
 

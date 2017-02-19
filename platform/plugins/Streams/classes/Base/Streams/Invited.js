@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type userId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type token
  */
 /**
@@ -229,8 +229,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -251,7 +251,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"MUL",null];
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -267,8 +267,8 @@ Base.prototype.beforeSet_token = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".token");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".token");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".token");
 		return value;
@@ -289,7 +289,7 @@ Base.prototype.maxSize_token = function () {
 	 */
 Base.column_token = function () {
 
-return [["varbinary","255","",false],false,"",null];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**

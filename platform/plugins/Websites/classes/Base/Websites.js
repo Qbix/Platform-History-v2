@@ -28,8 +28,7 @@ module.exports = Base;
  */
 Base.tableClasses = [
 	"Websites_Article",
-	"Websites_Permalink",
-	"Websites_Slide"
+	"Websites_Permalink"
 ];
 
 /**
@@ -64,10 +63,3 @@ Base.Article = Q.require('Websites/Article');
  * @type Websites.Permalink
  */
 Base.Permalink = Q.require('Websites/Permalink');
-
-/**
- * Link to Websites.Slide model
- * @property Slide
- * @type Websites.Slide
- */
-Base.Slide = Q.require('Websites/Slide');

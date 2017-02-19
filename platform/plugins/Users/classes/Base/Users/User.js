@@ -41,7 +41,7 @@ Q.mixin(Base, Row);
  * @type updatedTime
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type sessionId
  */
 /**
@@ -57,11 +57,11 @@ Q.mixin(Base, Row);
  * @type tw_uid
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type g_uid
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type y_uid
  */
 /**
@@ -69,19 +69,19 @@ Q.mixin(Base, Row);
  * @type passphraseHash
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type emailAddress
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type mobileNumber
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type emailAddressPending
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type mobileNumberPending
  */
 /**
@@ -93,15 +93,15 @@ Q.mixin(Base, Row);
  * @type username
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type icon
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type url
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type pincodeHash
  */
 
@@ -381,8 +381,8 @@ return [["timestamp","31","",false],true,"",null];
 Base.prototype.beforeSet_sessionId = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".sessionId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".sessionId");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".sessionId");
 		return value;
@@ -403,7 +403,7 @@ Base.prototype.maxSize_sessionId = function () {
 	 */
 Base.column_sessionId = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -522,8 +522,8 @@ return [["bigint","20","",false],false,"","0"];
 Base.prototype.beforeSet_g_uid = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".g_uid");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".g_uid");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".g_uid");
 		return value;
@@ -544,7 +544,7 @@ Base.prototype.maxSize_g_uid = function () {
 	 */
 Base.column_g_uid = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -558,8 +558,8 @@ return [["varbinary","255","",false],true,"",null];
 Base.prototype.beforeSet_y_uid = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".y_uid");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".y_uid");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".y_uid");
 		return value;
@@ -580,7 +580,7 @@ Base.prototype.maxSize_y_uid = function () {
 	 */
 Base.column_y_uid = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -630,8 +630,8 @@ return [["varchar","64","",false],true,"",null];
 Base.prototype.beforeSet_emailAddress = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".emailAddress");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".emailAddress");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".emailAddress");
 		return value;
@@ -652,7 +652,7 @@ Base.prototype.maxSize_emailAddress = function () {
 	 */
 Base.column_emailAddress = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -666,8 +666,8 @@ return [["varbinary","255","",false],true,"",null];
 Base.prototype.beforeSet_mobileNumber = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".mobileNumber");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".mobileNumber");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".mobileNumber");
 		return value;
@@ -688,7 +688,7 @@ Base.prototype.maxSize_mobileNumber = function () {
 	 */
 Base.column_mobileNumber = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -704,8 +704,8 @@ Base.prototype.beforeSet_emailAddressPending = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".emailAddressPending");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".emailAddressPending");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".emailAddressPending");
 		return value;
@@ -726,7 +726,7 @@ Base.prototype.maxSize_emailAddressPending = function () {
 	 */
 Base.column_emailAddressPending = function () {
 
-return [["varbinary","255","",false],false,"",""];
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -742,8 +742,8 @@ Base.prototype.beforeSet_mobileNumberPending = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".mobileNumberPending");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".mobileNumberPending");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".mobileNumberPending");
 		return value;
@@ -764,7 +764,7 @@ Base.prototype.maxSize_mobileNumberPending = function () {
 	 */
 Base.column_mobileNumberPending = function () {
 
-return [["varbinary","255","",false],false,"",""];
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -841,8 +841,8 @@ Base.prototype.beforeSet_icon = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".icon");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".icon");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".icon");
 		return value;
@@ -863,7 +863,7 @@ Base.prototype.maxSize_icon = function () {
 	 */
 Base.column_icon = function () {
 
-return [["varbinary","255","",false],false,"",null];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -877,8 +877,8 @@ return [["varbinary","255","",false],false,"",null];
 Base.prototype.beforeSet_url = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".url");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".url");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".url");
 		return value;
@@ -899,7 +899,7 @@ Base.prototype.maxSize_url = function () {
 	 */
 Base.column_url = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -913,8 +913,8 @@ return [["varbinary","255","",false],true,"",null];
 Base.prototype.beforeSet_pincodeHash = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".pincodeHash");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".pincodeHash");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".pincodeHash");
 		return value;
@@ -935,7 +935,7 @@ Base.prototype.maxSize_pincodeHash = function () {
 	 */
 Base.column_pincodeHash = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {

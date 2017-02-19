@@ -29,7 +29,7 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type userId
  */
 /**
@@ -37,7 +37,7 @@ Q.mixin(Base, Row);
  * @type label
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type icon
  */
 /**
@@ -230,8 +230,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -252,7 +252,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -270,7 +270,7 @@ Base.prototype.beforeSet_label = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".label");
-		if (typeof value === "string" && value.length > 63)
+		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".label");
 		return value;
 };
@@ -281,7 +281,7 @@ Base.prototype.beforeSet_label = function (value) {
 	 */
 Base.prototype.maxSize_label = function () {
 
-		return 63;
+		return 255;
 };
 
 	/**
@@ -290,7 +290,7 @@ Base.prototype.maxSize_label = function () {
 	 */
 Base.column_label = function () {
 
-return [["varchar","63","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -306,8 +306,8 @@ Base.prototype.beforeSet_icon = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".icon");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".icon");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".icon");
 		return value;
@@ -328,7 +328,7 @@ Base.prototype.maxSize_icon = function () {
 	 */
 Base.column_icon = function () {
 
-return [["varbinary","255","",false],false,"","default"];
+return [["varchar","255","",false],false,"","default"];
 };
 
 /**

@@ -29,23 +29,23 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type publisherId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type streamName
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type ofUserId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type ofContactLabel
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type grantedByUserId
  */
 /**
@@ -257,8 +257,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -279,7 +279,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -295,8 +295,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -317,7 +317,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -333,8 +333,8 @@ Base.prototype.beforeSet_ofUserId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".ofUserId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".ofUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".ofUserId");
 		return value;
@@ -355,7 +355,7 @@ Base.prototype.maxSize_ofUserId = function () {
 	 */
 Base.column_ofUserId = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -371,8 +371,8 @@ Base.prototype.beforeSet_ofContactLabel = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".ofContactLabel");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".ofContactLabel");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".ofContactLabel");
 		return value;
@@ -393,7 +393,7 @@ Base.prototype.maxSize_ofContactLabel = function () {
 	 */
 Base.column_ofContactLabel = function () {
 
-return [["varbinary","255","",false],false,"PRI",""];
+return [["varchar","255","",false],false,"PRI",""];
 };
 
 /**
@@ -407,8 +407,8 @@ return [["varbinary","255","",false],false,"PRI",""];
 Base.prototype.beforeSet_grantedByUserId = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".grantedByUserId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".grantedByUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".grantedByUserId");
 		return value;
@@ -429,7 +429,7 @@ Base.prototype.maxSize_grantedByUserId = function () {
 	 */
 Base.column_grantedByUserId = function () {
 
-return [["varbinary","31","",false],true,"",null];
+return [["varchar","31","",false],true,"",null];
 };
 
 /**
@@ -601,7 +601,7 @@ Base.prototype.beforeSet_permissions = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".permissions");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 1023)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
 		return value;
 };
@@ -612,7 +612,7 @@ Base.prototype.beforeSet_permissions = function (value) {
 	 */
 Base.prototype.maxSize_permissions = function () {
 
-		return 255;
+		return 1023;
 };
 
 	/**
@@ -621,7 +621,7 @@ Base.prototype.maxSize_permissions = function () {
 	 */
 Base.column_permissions = function () {
 
-return [["varchar","255","",false],true,"",null];
+return [["varchar","1023","",false],true,"",null];
 };
 
 /**

@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type publisherId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type streamName
  */
 /**
@@ -45,7 +45,7 @@ Q.mixin(Base, Row);
  * @type sentTime
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type byUserId
  */
 /**
@@ -57,11 +57,11 @@ Q.mixin(Base, Row);
  * @type instructions
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type chatPublisherId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type chatStreamName
  */
 
@@ -244,8 +244,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -266,7 +266,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varbinary","31","",false],false,"MUL",""];
+return [["varchar","31","",false],false,"MUL",""];
 };
 
 /**
@@ -282,8 +282,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -304,7 +304,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varbinary","255","",false],false,"",null];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -371,8 +371,8 @@ Base.prototype.beforeSet_byUserId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".byUserId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".byUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".byUserId");
 		return value;
@@ -393,7 +393,7 @@ Base.prototype.maxSize_byUserId = function () {
 	 */
 Base.column_byUserId = function () {
 
-return [["varbinary","31","",false],false,"MUL",null];
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -483,8 +483,8 @@ Base.prototype.beforeSet_chatPublisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".chatPublisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".chatPublisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".chatPublisherId");
 		return value;
@@ -505,7 +505,7 @@ Base.prototype.maxSize_chatPublisherId = function () {
 	 */
 Base.column_chatPublisherId = function () {
 
-return [["varbinary","31","",false],false,"",""];
+return [["varchar","31","",false],false,"",""];
 };
 
 /**
@@ -519,8 +519,8 @@ return [["varbinary","31","",false],false,"",""];
 Base.prototype.beforeSet_chatStreamName = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".chatStreamName");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".chatStreamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".chatStreamName");
 		return value;
@@ -541,7 +541,7 @@ Base.prototype.maxSize_chatStreamName = function () {
 	 */
 Base.column_chatStreamName = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 module.exports = Base;

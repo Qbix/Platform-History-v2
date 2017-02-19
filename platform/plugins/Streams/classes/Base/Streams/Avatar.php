@@ -242,7 +242,7 @@ abstract class Base_Streams_Avatar extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -296,7 +296,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -325,10 +325,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
 	}
@@ -559,7 +561,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,

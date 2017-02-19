@@ -216,7 +216,7 @@ Base.prototype.beforeSet_userId = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".userId");
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -277,7 +277,7 @@ Base.prototype.beforeSet_customerId = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".customerId");
+			throw new Error('Must pass a String to '+this.table()+".customerId");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".customerId");
 		return value;

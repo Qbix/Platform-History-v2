@@ -272,10 +272,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
 	}
@@ -319,10 +321,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('updatedTime', $value);			
 	}
@@ -391,7 +395,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -483,7 +487,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,
@@ -503,19 +507,18 @@ return array (
 	 */
 	function beforeSet_activationCodeExpires($value)
 	{
-		if (!isset($value)) {
-			return array('activationCodeExpires', $value);
-		}
 		if ($value instanceof Db_Expression) {
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('activationCodeExpires', $value);			
 	}
@@ -535,9 +538,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => true,
+  1 => false,
   2 => '',
-  3 => NULL,
+  3 => '0000-00-00 00:00:00',
 );			
 	}
 
@@ -584,7 +587,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,

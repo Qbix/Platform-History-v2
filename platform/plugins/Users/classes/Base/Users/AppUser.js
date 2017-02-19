@@ -29,7 +29,7 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type userId
  */
 /**
@@ -57,7 +57,7 @@ Q.mixin(Base, Row);
  * @type session_secret
  */
 /**
- * @property {String|Db.Expression}
+ * @property {String}
  * @type session_expires
  */
 /**
@@ -251,8 +251,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -273,7 +273,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -461,20 +461,30 @@ return [["varchar","1023","",false],true,"",null];
 };
 
 /**
- * Method is called before setting the field
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_session_expires
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_session_expires = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
-			value = parseInt(value);
-			value = new Date(value < 10000000000 ? value * 1000 : value);
-		}
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".session_expires");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".session_expires");
 		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the session_expires field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_session_expires = function () {
+
+		return 255;
 };
 
 	/**
@@ -483,7 +493,7 @@ Base.prototype.beforeSet_session_expires = function (value) {
 	 */
 Base.column_session_expires = function () {
 
-return [["timestamp","1023","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**

@@ -8,7 +8,7 @@ var Db = Q.require('Db');
 
 /**
  * Class representing 'Notification' rows in the 'Streams' database
- * <br/>stored primarily on userId's Q server
+ * <br/>stored primarily on userId's shard
  * @namespace Streams
  * @class Notification
  * @extends Base.Streams.Notification
