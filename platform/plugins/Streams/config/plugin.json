@@ -117,6 +117,9 @@
 					},
 					"Streams/relatedFrom": {
 						"subject": "{{&call 'message.get' 'description'}}"
+					},
+					"Streams/access": {
+						"subject": "{{&call 'avatar.displayName'}} changed stream access"
 					}
 				},
 				"defaults": {

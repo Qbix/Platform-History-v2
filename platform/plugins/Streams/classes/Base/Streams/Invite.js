@@ -29,23 +29,23 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type token
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type userId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type publisherId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type streamName
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type invitingUserId
  */
 /**
@@ -53,7 +53,7 @@ Q.mixin(Base, Row);
  * @type displayName
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type appUrl
  */
 /**
@@ -67,6 +67,10 @@ Q.mixin(Base, Row);
 /**
  * @property {integer}
  * @type adminLevel
+ */
+/**
+ * @property {String}
+ * @type permissions
  */
 /**
  * @property {String}
@@ -245,6 +249,7 @@ Base.prototype.fieldNames = function () {
 		"readLevel",
 		"writeLevel",
 		"adminLevel",
+		"permissions",
 		"state",
 		"insertedTime",
 		"expireTime"
@@ -264,8 +269,8 @@ Base.prototype.beforeSet_token = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".token");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".token");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".token");
 		return value;
@@ -286,7 +291,7 @@ Base.prototype.maxSize_token = function () {
 	 */
 Base.column_token = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -302,8 +307,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -324,7 +329,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"MUL",null];
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -340,8 +345,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -362,7 +367,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varbinary","31","",false],false,"MUL",null];
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -378,8 +383,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -400,7 +405,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varbinary","255","",false],false,"",null];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -416,8 +421,8 @@ Base.prototype.beforeSet_invitingUserId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".invitingUserId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".invitingUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".invitingUserId");
 		return value;
@@ -438,7 +443,7 @@ Base.prototype.maxSize_invitingUserId = function () {
 	 */
 Base.column_invitingUserId = function () {
 
-return [["varbinary","31","",false],false,"MUL",null];
+return [["varchar","31","",false],false,"MUL",null];
 };
 
 /**
@@ -492,8 +497,8 @@ Base.prototype.beforeSet_appUrl = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".appUrl");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".appUrl");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".appUrl");
 		return value;
@@ -514,7 +519,7 @@ Base.prototype.maxSize_appUrl = function () {
 	 */
 Base.column_appUrl = function () {
 
-return [["varbinary","255","",false],false,"",null];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -626,6 +631,42 @@ return [["int","11","",false],true,"",null];
 };
 
 /**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_permissions
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_permissions = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".permissions");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_permissions = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_permissions = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
  * @param {string} value
@@ -633,7 +674,6 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
  */
 Base.prototype.beforeSet_state = function (value) {
-		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (['pending','accepted','declined','forwarded','expired','claimed'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
@@ -646,7 +686,7 @@ Base.prototype.beforeSet_state = function (value) {
 	 */
 Base.column_state = function () {
 
-return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"","pending"];
+return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
 };
 
 /**

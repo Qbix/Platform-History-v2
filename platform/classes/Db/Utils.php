@@ -563,7 +563,7 @@ class Db_Utils
 
 		// 'local/Q/bootstrap.json' should be loaded already but we'll better check
 		if (!in_array('Q/config/bootstrap.json', $configFiles)) {
-			echo "Config file 'Q/config/bootstrap.json' shall be loaded via 'Q/configFiles key'\non every Q server - check 'platform/config/Q.json'\n";
+			echo "Config file 'Q/config/bootstrap.json' shall be loaded via 'Q/configFiles key'\non every shard - check 'platform/config/Q.json'\n";
 			return false;
 		}
 

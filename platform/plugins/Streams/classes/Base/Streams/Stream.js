@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type publisherId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type name
  */
 /**
@@ -53,7 +53,7 @@ Q.mixin(Base, Row);
  * @type title
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type icon
  */
 /**
@@ -81,7 +81,7 @@ Q.mixin(Base, Row);
  * @type permissions
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type inheritAccess
  */
 /**
@@ -295,8 +295,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -317,7 +317,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -333,8 +333,8 @@ Base.prototype.beforeSet_name = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".name");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".name");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".name");
 		return value;
@@ -355,7 +355,7 @@ Base.prototype.maxSize_name = function () {
 	 */
 Base.column_name = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -498,8 +498,8 @@ Base.prototype.beforeSet_icon = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".icon");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".icon");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".icon");
 		return value;
@@ -520,7 +520,7 @@ Base.prototype.maxSize_icon = function () {
 	 */
 Base.column_icon = function () {
 
-return [["varbinary","255","",false],false,"","default"];
+return [["varchar","255","",false],false,"","default"];
 };
 
 /**
@@ -715,7 +715,7 @@ Base.prototype.beforeSet_permissions = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".permissions");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 1023)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
 		return value;
 };
@@ -726,7 +726,7 @@ Base.prototype.beforeSet_permissions = function (value) {
 	 */
 Base.prototype.maxSize_permissions = function () {
 
-		return 255;
+		return 1023;
 };
 
 	/**
@@ -735,7 +735,7 @@ Base.prototype.maxSize_permissions = function () {
 	 */
 Base.column_permissions = function () {
 
-return [["varchar","255","",false],true,"",null];
+return [["varchar","1023","",false],true,"",null];
 };
 
 /**
@@ -749,8 +749,8 @@ return [["varchar","255","",false],true,"",null];
 Base.prototype.beforeSet_inheritAccess = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".inheritAccess");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".inheritAccess");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".inheritAccess");
 		return value;
@@ -771,7 +771,7 @@ Base.prototype.maxSize_inheritAccess = function () {
 	 */
 Base.column_inheritAccess = function () {
 
-return [["varbinary","255","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**

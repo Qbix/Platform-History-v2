@@ -184,13 +184,14 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Able to create invitations for others, granting access
+	 * and permissions up to what they themselves have
 	 * @config $ADMIN_LEVEL['invite']
 	 * @type integer
 	 * @default 20
 	 * @final
 	 */
 	/**
-	 * Can approve posts and give people any adminLevel < 'manage'
+	 * Can approve posts, and give people any adminLevel < 'manage'
 	 * @config $ADMIN_LEVEL['manage']
 	 * @type integer
 	 * @default 30

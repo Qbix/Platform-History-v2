@@ -220,7 +220,7 @@ Base.prototype.beforeSet_uri = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".uri");
+			throw new Error('Must pass a String to '+this.table()+".uri");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".uri");
 		return value;
@@ -258,7 +258,7 @@ Base.prototype.beforeSet_url = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".url");
+			throw new Error('Must pass a String to '+this.table()+".url");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".url");
 		return value;
@@ -291,6 +291,10 @@ return [["varchar","255","",false],false,"MUL",""];
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -313,6 +317,10 @@ return [["timestamp","255","",false],true,"","CURRENT_TIMESTAMP"];
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };

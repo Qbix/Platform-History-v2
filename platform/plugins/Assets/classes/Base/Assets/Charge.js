@@ -241,7 +241,7 @@ Base.prototype.beforeSet_id = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".id");
+			throw new Error('Must pass a String to '+this.table()+".id");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".id");
 		return value;
@@ -279,7 +279,7 @@ Base.prototype.beforeSet_userId = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".userId");
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -317,7 +317,7 @@ Base.prototype.beforeSet_publisherId = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".publisherId");
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -355,7 +355,7 @@ Base.prototype.beforeSet_streamName = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".streamName");
+			throw new Error('Must pass a String to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -393,7 +393,7 @@ Base.prototype.beforeSet_description = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".description");
+			throw new Error('Must pass a String to '+this.table()+".description");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".description");
 		return value;
@@ -431,7 +431,7 @@ Base.prototype.beforeSet_attributes = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".attributes");
+			throw new Error('Must pass a String to '+this.table()+".attributes");
 		if (typeof value === "string" && value.length > 1023)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".attributes");
 		return value;
@@ -463,6 +463,10 @@ return [["varchar","1023","",false],false,"",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -484,6 +488,10 @@ return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -510,7 +518,7 @@ Base.prototype.beforeSave = function (value) {
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}

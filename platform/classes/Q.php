@@ -944,18 +944,18 @@ class Q
 					}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->k = array_key_exists($k, $source) ? $source[$k] : $v;
+						$dest->$k = array_key_exists($k, $source) ? $source[$k] : $v;
 					}
 				}
 			} else if (is_object($source)) {
 				if (is_array($dest)) {
 					foreach ($fields as $k => $v) {
-						$dest[$k] = property_exists($source, $k) ? $source->$k : $v;
+						$dest[$k] = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
 				 	}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->$k = property_exists($source, $k) ? $source->$k : $v;
-				 	}	
+						$dest->$k = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
+				 	}
 				}
 			} else {
 				if (is_array($dest)) {
@@ -964,7 +964,7 @@ class Q
 					}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->k = $v;
+						$dest->$k = $v;
 					}
 				}
 			}
@@ -986,14 +986,14 @@ class Q
 			} else if (is_object($source)) {
 				if (is_array($dest)) {
 					foreach ($fields as $k) {
-						if (property_exists($source, $k)) {
-							$dest->$k = $source->k;
+						if (property_exists($source, $k) or isset($source->$k)) {
+							$dest[$k] = $source->$k;
 						}
 					}
 				} else {
 					foreach ($fields as $k) {
-						if (property_exists($source, $k)) {
-							$dest->$k = $source->k;
+						if (property_exists($source, $k) or isset($source->$k)) {
+							$dest->$k = $source->$k;
 						}
 					}
 				}

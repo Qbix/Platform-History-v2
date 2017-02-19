@@ -254,7 +254,7 @@ abstract class Base_Streams_Notification extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -308,7 +308,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '31',
     2 => '',
     3 => false,
@@ -362,7 +362,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,
@@ -423,7 +423,7 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
-  3 => '0',
+  3 => NULL,
 );			
 	}
 
@@ -442,10 +442,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
 	}
@@ -514,7 +516,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,
@@ -543,10 +545,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('viewedTime', $value);			
 	}
@@ -590,10 +594,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('readTime', $value);			
 	}
@@ -684,7 +690,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('streamName') as $name) {
+			foreach (array('streamName','messageOrdinal') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

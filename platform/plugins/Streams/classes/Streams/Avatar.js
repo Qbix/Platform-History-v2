@@ -9,7 +9,7 @@ var Db = Q.require('Db');
 
 /**
  * Class representing 'Avatar' rows in the 'Streams' database
- * <br/>stored primarily on publisherId's Q server
+ * <br/>stored primarily on publisherId's shard
  * @namespace Streams
  * @class Avatar
  * @extends Base.Streams.Avatar

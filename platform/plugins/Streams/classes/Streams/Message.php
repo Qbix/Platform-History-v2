@@ -42,8 +42,6 @@ class Streams_Message extends Base_Streams_Message
  	 * @method post
 	 * @static
 	 * @param {string} $asUserId
-	 *  The user to post as
-	 * @param {string} $asUserId
 	 *  The user to post the message as
 	 * @param {string} $publisherId
 	 *  The publisher of the stream
@@ -191,6 +189,7 @@ class Streams_Message extends Base_Streams_Message
 					continue;
 				}
 				$messages3 = is_array($m) && !Q::isAssociative($m) ? $m : array($m);
+				$counts = array();
 				$count = count($messages3);
 				$updates[$publisherId][$count][] = $streamName;
 				$i = 0;
@@ -273,14 +272,18 @@ class Streams_Message extends Base_Streams_Message
 					$p[] = $message;
 				
 					// build the arrays of rows to insert
-					$messages2[] = $mf = $message->fields;
+					$messages2[] = $message->fields;
+
+					$counts[$type] = isset($counts[$type]) ? $counts[$type] + 1 : 1;
 				}
-				$totals2[$count][] = array(
-					'publisherId' => $mf['publisherId'],
-					'streamName' => $mf['streamName'],
-					'messageType' => $mf['type'],
-					'messageCount' => $count
-				);
+				foreach ($counts as $type => $count) {
+					$totals2[$count][$type] = array(
+						'publisherId' => $publisherId,
+						'streamName' => $streamName,
+						'messageType' => $type,
+						'messageCount' => $count
+					);
+				}
 			}
 		}
 

@@ -30,6 +30,10 @@ Q.mixin(Base, Row);
 
 /**
  * @property {String|Buffer}
+ * @type userId
+ */
+/**
+ * @property {String|Buffer}
  * @type publisherId
  */
 /**
@@ -37,12 +41,8 @@ Q.mixin(Base, Row);
  * @type streamName
  */
 /**
- * @property {String|Buffer}
- * @type byUserId
- */
-/**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property {String}
+ * @type displayName
  */
 /**
  * @property {integer}
@@ -55,6 +55,18 @@ Q.mixin(Base, Row);
 /**
  * @property {integer}
  * @type adminLevel
+ */
+/**
+ * @property {String}
+ * @type state
+ */
+/**
+ * @property {String|Db.Expression}
+ * @type insertedTime
+ */
+/**
+ * @property {String|Db.Expression}
+ * @type expireTime
  */
 
 /**
@@ -200,9 +212,9 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
+		"userId",
 		"publisherId",
-		"streamName",
-		"byUserId"
+		"streamName"
 	];
 };
 
@@ -213,14 +225,55 @@ Base.prototype.primaryKey = function () {
  */
 Base.prototype.fieldNames = function () {
 	return [
+		"userId",
 		"publisherId",
 		"streamName",
-		"byUserId",
-		"insertedTime",
+		"displayName",
 		"readLevel",
 		"writeLevel",
-		"adminLevel"
+		"adminLevel",
+		"state",
+		"insertedTime",
+		"expireTime"
 	];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_userId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_userId = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_userId = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_userId = function () {
+
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -258,7 +311,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -302,64 +355,39 @@ return [["varbinary","255","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_byUserId
+ * @method beforeSet_displayName
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_byUserId = function (value) {
+Base.prototype.beforeSet_displayName = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".byUserId");
-		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".byUserId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".displayName");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".displayName");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the byUserId field
+	 * Returns the maximum string length that can be assigned to the displayName field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_byUserId = function () {
+Base.prototype.maxSize_displayName = function () {
 
-		return 31;
+		return 255;
 };
 
 	/**
-	 * Returns schema information for byUserId column
+	 * Returns schema information for displayName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_byUserId = function () {
+Base.column_displayName = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
-};
-
-/**
- * Method is called before setting the field
- * @method beforeSet_insertedTime
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
- */
-Base.prototype.beforeSet_insertedTime = function (value) {
-		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
-			value = parseInt(value);
-			value = new Date(value < 10000000000 ? value * 1000 : value);
-		}
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
-		return value;
-};
-
-	/**
-	 * Returns schema information for insertedTime column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_insertedTime = function () {
-
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -370,6 +398,7 @@ return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_readLevel = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
@@ -394,7 +423,7 @@ Base.prototype.maxSize_readLevel = function () {
 	 */
 Base.column_readLevel = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int","11","",false],true,"",null];
 };
 
 /**
@@ -405,6 +434,7 @@ return [["int","11","",false],false,"","0"];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_writeLevel = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
@@ -429,7 +459,7 @@ Base.prototype.maxSize_writeLevel = function () {
 	 */
 Base.column_writeLevel = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int","11","",false],true,"",null];
 };
 
 /**
@@ -440,6 +470,7 @@ return [["int","11","",false],false,"","0"];
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 Base.prototype.beforeSet_adminLevel = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value) || Math.floor(value) != value) 
@@ -464,7 +495,81 @@ Base.prototype.maxSize_adminLevel = function () {
 	 */
 Base.column_adminLevel = function () {
 
-return [["int","11","",false],false,"","0"];
+return [["int","11","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value belongs to enum values list
+ * @method beforeSet_state
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ */
+Base.prototype.beforeSet_state = function (value) {
+		if (value instanceof Db.Expression) return value;
+		if (['pending','granted','rejected','forwarded','expired'].indexOf(value) < 0)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
+		return value;
+};
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_state = function () {
+
+return [["enum","'pending','granted','rejected','forwarded','expired'","",false],false,"","pending"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_insertedTime = function () {
+
+return [["timestamp","'pending','granted','rejected','forwarded','expired'","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_expireTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_expireTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for expireTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_expireTime = function () {
+
+return [["timestamp","'pending','granted','rejected','forwarded','expired'","",false],true,"",null];
 };
 
 /**
@@ -476,7 +581,7 @@ return [["int","11","",false],false,"","0"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['streamName'], i;
+	var fields = ['userId','publisherId','streamName'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

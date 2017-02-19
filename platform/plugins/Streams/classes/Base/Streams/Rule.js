@@ -29,15 +29,15 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type ofUserId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type publisherId
  */
 /**
- * @property {String|Buffer}
+ * @property {String}
  * @type streamName
  */
 /**
@@ -247,8 +247,8 @@ Base.prototype.beforeSet_ofUserId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".ofUserId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".ofUserId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".ofUserId");
 		return value;
@@ -269,7 +269,7 @@ Base.prototype.maxSize_ofUserId = function () {
 	 */
 Base.column_ofUserId = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -285,8 +285,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -307,7 +307,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varbinary","31","",false],false,"PRI",""];
+return [["varchar","31","",false],false,"PRI",""];
 };
 
 /**
@@ -323,8 +323,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -345,7 +345,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -469,7 +469,7 @@ Base.prototype.maxSize_filter = function () {
 	 */
 Base.column_filter = function () {
 
-return [["varchar","255","",false],false,"",""];
+return [["varchar","255","",false],false,"",null];
 };
 
 /**
@@ -531,7 +531,7 @@ Base.prototype.beforeSet_relevance = function (value) {
 	 */
 Base.column_relevance = function () {
 
-return [["decimal","14,4","",false],false,"","1.0000"];
+return [["decimal","14,4","",false],false,"",null];
 };
 
 /**
