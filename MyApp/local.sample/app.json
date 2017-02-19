@@ -62,7 +62,7 @@
 				"name": "FACEBOOK APP NAME HERE",
 				"appId": "FACEBOOK APP ID HERE",
 				"secret": "PUT SECRET HERE",
-				"url": "http:\/\/apps.facebook.com\/YOURAPP",
+				"url": "http://apps.facebook.com/YOURAPP",
 				"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
 			}
 		},
