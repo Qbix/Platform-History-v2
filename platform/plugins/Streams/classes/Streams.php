@@ -816,7 +816,10 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $asUserId The user who is attempting to create the stream.
 	 * @param {string} $publisherId The id of the user to publish the stream.
-	 * @param {string} $type The type of the stream to create.
+	 * @param {string|array} $type The type of the stream to create.
+	 *  You can also pass here an array of ($name => $fields) streams, where
+	 *  the fields are the same format as the $fields option.
+	 *  In this case, you can skip the $fields parameter when passing any later ones.
 	 * @param {array} $fields Use this to set additional fields for the stream:
 	 * @param {string} [$fields.title=null] You can set the stream's title
 	 * @param {string} [$fields.icon=null] You can set the stream's icon

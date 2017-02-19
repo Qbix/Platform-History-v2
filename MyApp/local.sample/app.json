@@ -85,8 +85,24 @@
 			"from": "+1234567890"
 		},
 		"authorize": {
-			"redirectUris": {
-				"MyApp": ["MyApp/welcome", "MyApp/home"]
+			"terms": {
+				"uri": null
+			},
+			"clients": {
+				"Groups-ios": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
+				},
+				"Groups-android": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
+				}
 			}
 		}
 	},
