@@ -3571,7 +3571,7 @@ abstract class Streams extends Base_Streams
 			'type' => 'Streams/request',
 			'instructions' => Q::take($request->fields, array(
 				'readLevel', 'writeLevel', 'adminLevel', 'expireTime', 'state'
-			)
+			))
 		), true);
 			
 		/**
