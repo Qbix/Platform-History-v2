@@ -41,10 +41,6 @@ Q.mixin(Base, Row);
  * @type streamName
  */
 /**
- * @property {String}
- * @type displayName
- */
-/**
  * @property {integer}
  * @type readLevel
  */
@@ -58,7 +54,15 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
+ * @type permissions
+ */
+/**
+ * @property {String}
  * @type state
+ */
+/**
+ * @property {String}
+ * @type actions
  */
 /**
  * @property {String|Db.Expression}
@@ -228,11 +232,12 @@ Base.prototype.fieldNames = function () {
 		"userId",
 		"publisherId",
 		"streamName",
-		"displayName",
 		"readLevel",
 		"writeLevel",
 		"adminLevel",
+		"permissions",
 		"state",
+		"actions",
 		"insertedTime",
 		"expireTime"
 	];
@@ -353,44 +358,6 @@ return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_displayName
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_displayName = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".displayName");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".displayName");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the displayName field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_displayName = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for displayName column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_displayName = function () {
-
-return [["varchar","255","",false],false,"",null];
-};
-
-/**
  * Method is called before setting the field and verifies if integer value falls within allowed limits
  * @method beforeSet_readLevel
  * @param {integer} value
@@ -499,6 +466,42 @@ return [["int","11","",false],true,"",null];
 };
 
 /**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_permissions
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_permissions = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".permissions");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_permissions = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_permissions = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
  * @param {string} value
@@ -519,6 +522,42 @@ Base.prototype.beforeSet_state = function (value) {
 Base.column_state = function () {
 
 return [["enum","'pending','granted','rejected','forwarded','expired'","",false],false,"","pending"];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_actions
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_actions = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".actions");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".actions");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the actions field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_actions = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for actions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_actions = function () {
+
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -543,7 +582,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'pending','granted','rejected','forwarded','expired'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -569,7 +608,7 @@ Base.prototype.beforeSet_expireTime = function (value) {
 	 */
 Base.column_expireTime = function () {
 
-return [["timestamp","'pending','granted','rejected','forwarded','expired'","",false],true,"",null];
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**

@@ -25,14 +25,14 @@ class Streams_Access extends Base_Streams_Access
 	
 	/**
 	 * Check if user "owns" a stream template for a publisher
-	 * @method isOwner
+	 * @method isTemplateOwner
 	 * @static
 	 * @param {string} $publisherId
 	 * @param {string} $type
 	 * @param {string|Users_User} [$user=null]
 	 * @return {boolean}
 	 */
-	static function isOwner($publisherId, $type, $user = null) {
+	static function isTemplateOwner($publisherId, $type, $user = null) {
 		if (!isset($user)) {
 			$user = Users::loggedInUser();
 		} else if (is_string($user)) {
@@ -51,6 +51,205 @@ class Streams_Access extends Base_Streams_Access
 		}
 		$stream->calculateAccess($user->id);
 		return $stream->testAdminLevel('own');
+	}
+	
+	/**
+	 * Closes a stream, which prevents anyone from posting messages to it
+	 * unless they have WRITE_LEVEL >= "close", as well as attempting to remove
+	 * all relations to other streams. A "cron job" can later go and delete
+	 * closed streams. The reason you should avoid deleting streams right away
+	 * is that other subscribers may still want to receive the last messages
+	 * posted to the stream.
+	 * @method close
+	 * @param {string} $asUserId The id of the user who would be closing the stream
+	 * @param {string} $publisherId The id of the user publishing the stream
+	 * @param {string} $streamName The name of the stream
+	 * @param {array} [$options=array()] Can include "skipAccess"
+	 * @static
+	 */
+	static function close($asUserId, $publisherId, $streamName, $options = array())
+	{
+		$stream = new Streams_Stream();
+		$stream->publisherId = $publisherId;
+		$stream->name = $streamName;
+		if (!$stream->retrieve()) {
+			throw new Q_Exception_MissingRow(array(
+				'table' => 'stream', 
+				'criteria' => "{publisherId: '$publisherId', name: '$streamName'}"
+			));
+		}
+		
+		// Authorization check
+		if (empty($options['skipAccess'])) {
+			if ($asUserId !== $publisherId) {
+				$stream->calculateAccess($asUserId);
+				if (!$stream->testWriteLevel('close')) {
+					throw new Users_Exception_NotAuthorized();
+				}
+			}
+		}
+
+		// Clean up relations from other streams to this category
+		list($relations, $related) = Streams::related($asUserId, $stream->publisherId, $stream->name, true);
+		foreach ($relations as $r) {
+			try {
+				Streams::unrelate(
+					$asUserId, 
+					$r->fromPublisherId, 
+					$r->fromStreamName, 
+					$r->type, 
+					$stream->publisherId, 
+					$stream->name
+				);
+			} catch (Exception $e) {}
+		}
+
+		// Clean up relations from this stream to categories
+		list($relations, $related) = Streams::related(
+			$asUserId,
+			$stream->publisherId,
+			$stream->name,
+			false
+		);
+		foreach ($relations as $r) {
+			try {
+				Streams::unrelate(
+					$asUserId, 
+					$r->toPublisherId,
+					$r->toStreamName,
+					$r->type,
+					$stream->publisherId,
+					$stream->name
+				);
+			} catch (Exception $e) {}
+		}
+
+		$result = false;
+		try {
+			$db = $stream->db();
+			$stream->closedTime = $closedTime = 
+				$db->toDateTime($db->getCurrentTimestamp());
+			if ($stream->save()) {
+				$stream->post($asUserId, array(
+					'type' => 'Streams/closed',
+					'content' => '',
+					'instructions' => compact('closedTime')
+				), true);
+				$result = true;
+			}
+		} catch (Exception$e) {
+			throw $e;
+		}
+		return $result;
+	}
+
+	/**
+	 * Get first and last name out of full name
+	 * @method splitFullName
+	 * @static
+	 * @param {string} $fullName The string representing full name
+	 * @return {array} array containing 'first' and 'last' properties
+	 */
+	static function splitFullName ($fullName) {
+		$capitalize = Q_Config::get('Streams', 'inputs', 'fullName', 'capitalize', true);
+		$last = null;
+		if (strpos($fullName, ',') !== false) {
+			list($last, $first) = explode(',', $fullName);
+		} else if (strpos($fullName, ' ') !== false) {
+			$parts = explode(' ', $fullName);
+			if ($capitalize) {
+				foreach ($parts as $k => $v) {
+					$parts[$k] = ucfirst($v);
+				}
+			}
+			$last = join(' ', array_slice($parts, 1));
+			$first = $parts[0];
+		} else {
+			$first = $fullName;
+		}
+		$first = trim($first);
+		$last = trim($last);
+
+		return compact('first', 'last');
+	}
+
+	/**
+	 * Registers a user. Can be hooked to 'Users/register' before event
+	 * so it can override standard functionality.
+	 * Method ensures user registration based on full name and also handles registration of
+	 * invited user
+	 * @method register
+	 * @static
+	 * @param {string} $fullName The full name of the user in the format 'First Last' or 'Last, First'
+	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
+	 * @param {string} [$identifier.identifier] an email address or phone number
+	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 *   to store in the Users_Device table for sending notifications
+	 * @param {array} [$icon=array()] Array of filename => url pairs
+	 * @param {string} [$provider=null] Provider such as "facebook"
+	 * @param {array} [$options=array()] An array of options that could include:
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @return {Users_User}
+	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
+	 * @throws {Q_Exception} If user was already verified for someone else
+	 * @throws {Users_Exception_AlreadyVerified} If user was already verified
+	 * @throws {Users_Exception_UsernameExists} If username exists
+	 */
+	static function register(
+		$fullName, 
+		$identifier, 
+		$icon = array(), 
+		$provider = null, 
+		$options = array())
+	{
+		if (is_array($provider)) {
+			$options = $provider;
+			$provider = null;
+		}
+		
+		/**
+		 * @event Streams/register {before}
+		 * @param {string} username
+		 * @param {string|array} identifier
+		 * @param {string} icon
+		 * @return {Users_User}
+		 */
+		$return = Q::event('Streams/register', compact(
+			'name', 'fullName', 'identifier', 'icon', 'provider', 'options'), 'before'
+		);
+		if (isset($return)) {
+			return $return;
+		}
+
+		// calculate first and last name out of name
+		if (empty($fullName)) {
+			throw new Q_Exception("Please enter your name", 'name');
+		}
+
+		$register = self::splitFullName($fullName);
+		if (empty($register['first']) && empty($register['last'])) {
+			// this is unlikely to happen
+			throw new Q_Exception("Please enter your name properly", 'name');
+		}
+
+		// this will be used in Streams_after_Users_User_saveExecute
+		Streams::$cache['register'] = $register;
+
+		$user = Users::register("", $identifier, $icon, $provider, $options);
+
+		/**
+		 * @event Streams/register {after}
+		 * @param {string} username
+		 * @param {string|array} identifier
+		 * @param {string} icon
+		 * @param {Users_User} 'user'
+		 * @return {Users_User}
+		 */
+		Q::event('Streams/register', compact(
+			'register', 'identifier', 'icon', 'user', 'provider', 'options'
+		), 'after');
+
+		return $user;
 	}
 	
 	/**
@@ -139,7 +338,7 @@ class Streams_Access extends Base_Streams_Access
 		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
 			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
 			Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(
-				'type' => 'Streams/access',
+				'type' => 'Streams/access/save',
 				'instructions' => Q::take($this->fields, array(
 					'readLevel', 'writeLevel', 'adminLevel', 'permissions',
 					'ofUserId', 'ofContactLabel'
@@ -189,6 +388,17 @@ class Streams_Access extends Base_Streams_Access
 			$tainted_access[] = $this;
 		}
 		Streams::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
+		if (!empty($this->publisherId) and !empty($this->streamName)
+		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
+			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
+			Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(
+				'type' => 'Streams/access/remove',
+				'instructions' => Q::take($this->fields, array(
+					'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+					'ofUserId', 'ofContactLabel'
+				))
+			), true);
+		}
 		return $result;
 	}
 

@@ -89,7 +89,11 @@
 						"prompt": "Let friends recognize you:",
 						"button": "Get Started",
 						"templateName": "Streams/invite/complete"
-					}
+					},
+					"duration": 2592000
+				},
+				"request": {
+					"duration": 2592000
 				},
 				"subscriptions": {
 					"filter": {

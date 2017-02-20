@@ -17,11 +17,12 @@
  * @property {string} $userId
  * @property {string} $publisherId
  * @property {string} $streamName
- * @property {string} $displayName
  * @property {integer} $readLevel
  * @property {integer} $writeLevel
  * @property {integer} $adminLevel
+ * @property {string} $permissions
  * @property {string} $state
+ * @property {string} $actions
  * @property {string|Db_Expression} $insertedTime
  * @property {string|Db_Expression} $expireTime
  */
@@ -40,10 +41,6 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $displayName
-	 * @type {string}
-	 */
-	/**
 	 * @property $readLevel
 	 * @type {integer}
 	 */
@@ -56,7 +53,15 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @type {integer}
 	 */
 	/**
+	 * @property $permissions
+	 * @type {string}
+	 */
+	/**
 	 * @property $state
+	 * @type {string}
+	 */
+	/**
+	 * @property $actions
 	 * @type {string}
 	 */
 	/**
@@ -378,60 +383,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_displayName
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_displayName($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('displayName', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".displayName");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".displayName");
-		return array('displayName', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the displayName field
-	 * @return {integer}
-	 */
-	function maxSize_displayName()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for displayName column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_displayName()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_readLevel
 	 * @param {integer} $value
@@ -603,6 +554,60 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (!isset($value)) {
+			return array('permissions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('permissions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
+		return array('permissions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+	function maxSize_permissions()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_permissions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_state
 	 * @param {string} $value
@@ -637,6 +642,60 @@ return array (
   1 => false,
   2 => '',
   3 => 'pending',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_actions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_actions($value)
+	{
+		if (!isset($value)) {
+			return array('actions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('actions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".actions");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".actions");
+		return array('actions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the actions field
+	 * @return {integer}
+	 */
+	function maxSize_actions()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for actions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_actions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -676,7 +735,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'pending\',\'granted\',\'rejected\',\'forwarded\',\'expired\'',
+    1 => '255',
     2 => '',
     3 => false,
   ),
@@ -725,7 +784,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'pending\',\'granted\',\'rejected\',\'forwarded\',\'expired\'',
+    1 => '255',
     2 => '',
     3 => false,
   ),
@@ -765,7 +824,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'publisherId', 'streamName', 'displayName', 'readLevel', 'writeLevel', 'adminLevel', 'state', 'insertedTime', 'expireTime');
+		$field_names = array('userId', 'publisherId', 'streamName', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'actions', 'insertedTime', 'expireTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
