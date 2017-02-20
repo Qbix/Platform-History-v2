@@ -10666,7 +10666,7 @@ Q.info.useFullscreen = Q.info.isMobile && Q.info.isAndroid(1000)
 Q.Dialogs.push.options = {
 	dialog: null,
 	url: null,
-	title: 'Dialog',
+	title: null,
 	content: '',
 	className: null,
 	fullscreen: Q.info.useFullscreen,

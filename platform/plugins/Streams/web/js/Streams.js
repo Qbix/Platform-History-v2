@@ -405,7 +405,10 @@ Q.Tool.define({
 	"Streams/category"     : "plugins/Streams/js/tools/category.js",
 	"Streams/form"         : "plugins/Streams/js/tools/form.js",
 	"Streams/activity"     : "plugins/Streams/js/tools/activity.js",
-	"Streams/default/preview": "plugins/Streams/js/tools/default/preview.js"
+	"Streams/default/preview": "plugins/Streams/js/tools/default/preview.js",
+	"Streams/player": function () {
+		// does nothing
+	}
 });
 
 /**
