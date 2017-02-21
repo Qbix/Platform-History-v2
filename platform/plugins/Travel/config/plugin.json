@@ -1,0 +1,22 @@
+{
+	"Q": {
+		"pluginInfo": {
+			"Travel": {
+				"version": "0.1",
+				"compatible": "0.1",
+				"requires": {"Places": "1.0"},
+				"permissions": ["Travel/icons"],
+				"connections": ["Streams"]
+			}
+		},
+		"handlersBeforeEvent": {
+
+		},
+		"handlersAfterEvent": {
+
+		},
+		"web": {
+			"requireValidNonce": ["Travel"]
+		}
+	}
+}
