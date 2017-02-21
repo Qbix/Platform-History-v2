@@ -11561,8 +11561,29 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 }
 
 Q.globalNames = Object.keys(root); // to find stray globals
+
+/**
+ * This function is useful to make sure your code is not polluting the global namespace
+ * @method globalNamesAdded
+ * @static
+ */
 Q.globalNamesAdded = function () {
 	return Q.diff(Object.keys(window), Q.globalNames);
+};
+
+/**
+ * This function is useful for debugging, e.g. calling it in breakpoint conditions
+ * @method stackTrack
+ * @static
+ */
+Q.stackTrace = function() {
+	var obj = {};
+	if (Error.captureStackTrace) {
+		Error.captureStackTrace(obj, Q.stackTrace);
+	} else {
+		obj = new Error();
+	}
+	return obj.stack;
 };
 
 return Q;

@@ -65,8 +65,11 @@ Q.Tool.define('Q/filter', function (options) {
 			}
 			tool.end();
 		}, 100);
-	})
-	.on('keydown keyup change input focus paste blur Q_refresh Q_refresh_filter', _changed)
+		tool.cancelBegin = true;
+		setTimeout(function () {
+			tool.cancelBegin = false;
+		}, 300);
+	}).on('keydown keyup change input focus paste blur Q_refresh Q_refresh_filter', _changed)
 	.on(Q.Pointer.fastclick, function (evt) {
 		var $this = $(this);
 		var xMax = $this.offset().left + $this.outerWidth(true) -
@@ -97,7 +100,9 @@ Q.Tool.define('Q/filter', function (options) {
 			$this.val('');
 			tool.end();
 		}
-		tool.$input.removeClass('Q_filter_chose');
+		if (!tool.cancelRemoveClass) {
+			tool.$input.removeClass('Q_filter_chose');
+		}
 		if (event.type != 'blur' && event.type != 'Q_refresh') {
 			tool.begin();
 		}
@@ -172,6 +177,7 @@ Q.Tool.define('Q/filter', function (options) {
 	/**
 	 * Show the filtered results
 	 * @method begin
+	 * @return {Boolean} May return false if the tool is suspended, etc.
 	 */
 	begin: function () {
 		var tool = this;
@@ -180,8 +186,13 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.canceledBlur = false;
 		}, 300);
 		var state = tool.state;
-		if (state.begun) return;
+		if (state.begun) {
+			return true;
+		}
 		state.begun = true;
+		if (tool.suspended || tool.cancelBegin) {
+			return false;
+		}
 		
 		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
 		
@@ -240,6 +251,7 @@ Q.Tool.define('Q/filter', function (options) {
 				? 0
 				: $container.offset().top - $te.offset().top + topH
 		}).show();
+		return true;
 	},
 	/**
 	 * Hide the filtered results
@@ -250,6 +262,10 @@ Q.Tool.define('Q/filter', function (options) {
 		var tool = this;
 		var state = tool.state;
 		if (chosenText !== undefined) {
+			tool.cancelBegin = true;
+			setTimeout(function () {
+				tool.cancelBegin = false;
+			}, 300)
 			tool.setText(chosenText);
 		}
 		if (!state.begun || tool.suspended) return;
@@ -296,10 +312,15 @@ Q.Tool.define('Q/filter', function (options) {
 		var obj = {
 			text: $(element).text()
 		};
-		Q.handle(this.state.onChoose, this, [element, obj]);
-		this.end(obj.text);
-		this.$input.blur();
-		this.$input.addClass('Q_filter_chose');
+		var tool = this;
+		Q.handle(tool.state.onChoose, tool, [element, obj]);
+		tool.end(obj.text);
+		tool.$input.blur();
+		tool.$input.addClass('Q_filter_chose');
+		tool.cancelRemoveClass = true;
+		setTimeout(function () {
+			tool.cancelRemoveClass = false;
+		}, 300);
 	}
 });
 
