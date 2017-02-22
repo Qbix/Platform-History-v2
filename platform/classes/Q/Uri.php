@@ -468,7 +468,7 @@ class Q_Uri
 		
 		$routes = Q_Config::get('Q', 'routes', array());
 		if (empty($routes)) {
-			return Q_Request::baseUrl($controller, true);
+			return Q_Request::baseUrl($controller);
 		}
 
 		if ($routePattern) {
@@ -849,7 +849,7 @@ class Q_Uri
 		if (empty($timestamp)) {
 			return $url;
 		}
-		$urlRelativeToBase = substr($url, strlen(Q_Request::baseUrl(false, true)));
+		$urlRelativeToBase = substr($url, strlen(Q_Request::baseUrl(false)));
 		$parts = explode('/', $urlRelativeToBase);
 		$parts[] = null;
 		$tree = new Q_Tree(Q_Uri::$urls);
