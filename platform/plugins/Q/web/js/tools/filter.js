@@ -181,18 +181,18 @@ Q.Tool.define('Q/filter', function (options) {
 	 */
 	begin: function () {
 		var tool = this;
-		tool.canceledBlur = true;
-		setTimeout(function () {
-			tool.canceledBlur = false;
-		}, 300);
 		var state = tool.state;
+		if (tool.suspended || tool.cancelBegin) {
+			return false;
+		}
 		if (state.begun) {
 			return true;
 		}
 		state.begun = true;
-		if (tool.suspended || tool.cancelBegin) {
-			return false;
-		}
+		tool.canceledBlur = true;
+		setTimeout(function () {
+			tool.canceledBlur = false;
+		}, 300);
 		
 		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
 		
@@ -227,7 +227,7 @@ Q.Tool.define('Q/filter', function (options) {
 				$this.css('display', 'none');
 			});
 			Q.Masks.show(tool);
-			tool.$input.focus();
+			tool.$input.val('').trigger('Q_refresh').plugin('Q/clickfocus');
 			setTimeout(function () {
 				tool.suspended = false;
 			}, 10);
