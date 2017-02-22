@@ -699,7 +699,7 @@ class Q_Uri
 			}
 		}
 
-		$url = Q_Request::baseUrl($controller, true).'/'.implode('/', $segments);
+		$url = Q_Request::baseUrl($controller).'/'.implode('/', $segments);
 		return $url;
 	}
 	
