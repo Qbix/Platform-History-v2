@@ -132,7 +132,7 @@ class Q_Uri
 			return $source;
 		}
 		if ($source === true) {
-			$source = Q_Request::baseUrl($controller, true);
+			$source = Q_Request::baseUrl($controller);
 		}
 
 		if (($source instanceof Q_Uri) and $source->Q_url) {
