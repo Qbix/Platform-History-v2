@@ -878,16 +878,17 @@ Elp.isVisible = function () {
  */
 Elp.remainingWidth = function (subpixelAccuracy) {
 	var element = this;
-	if (!this.parentNode) {
+	var pn = this.parentNode;
+	if (!pn) {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
-	var rect2 = this.parentNode.getBoundingClientRect();
+	var rect2 = pn.getBoundingClientRect();
 	var w = (rect2.right - rect2.left); // could be fractional
-	var cs = this.parentNode.computedStyle();
+	var cs = pn.computedStyle();
 	w -= _parseFloat(cs.paddingLeft) + _parseFloat(cs.paddingRight)
 		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
-	Q.each(this.parentNode.children, function () {
+	Q.each(pn.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
 		var rect3 = this.getBoundingClientRect();
