@@ -313,6 +313,7 @@ Q.Tool.define('Q/filter', function (options) {
 			text: $(element).text()
 		};
 		var tool = this;
+		tool.setText(obj.text);
 		Q.handle(tool.state.onChoose, tool, [element, obj]);
 		tool.end(obj.text);
 		tool.$input.blur();
