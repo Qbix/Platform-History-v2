@@ -62,35 +62,35 @@
 .Places_countries_flags .Places_countries_select { text-indent: 24px; }
 .Places_globe_shadow { pointer-events: none; }
 
-.Places_address_tool .Q_filter_results .Places_autocomplete_result {
+.Q_filter_tool .Q_filter_results .Places_autocomplete_result {
 	padding: 5px; 
 }
 
-.Places_address_tool .Q_filter_results table {
+.Q_filter_tool .Q_filter_results table {
 	width: 100%; background: #fff;
 }
 
-.Places_address_tool .Q_filter_results table td {
+.Q_filter_tool .Q_filter_results table td {
 	vertical-align: middle;
 }
 
-.Places_address_tool .Q_filter_results tr:hover {
+.Q_filter_tool .Q_filter_results tr:hover {
 	background: #ccc; cursor: pointer;
 }
 
-.Places_address_tool .Places_placeInfo {
+.Q_filter_tool .Places_placeInfo {
 	width: 80; overflow: hidden; font-size: 12;
 }
 
-.Places_address_tool .Places_description {
+.Q_filter_tool .Places_description {
 	overflow: hidden; font-size: 9px;
 }
 
-.Places_address_tool .Places_distance {
+.Q_filter_tool .Places_distance {
 	overflow: hidden; text-align: center;
 }
 
-.Places_address_tool .Places_distance div {
+.Q_filter_tool .Places_distance div {
 	margin: auto;
 	display: inline-block;
 	text-align: center; background-color: #778; color: white;
