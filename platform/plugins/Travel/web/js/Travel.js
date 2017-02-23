@@ -17,7 +17,7 @@ Q.text.Travel = {
 };
 
 Q.Tool.define({
-	"Travel/car": "plugins/Travel/js/tools/car.js",
+	"Travel/trip": "plugins/Travel/js/tools/trip.js",
 });
 
 })(Q, jQuery, window);

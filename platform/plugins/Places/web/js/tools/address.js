@@ -100,6 +100,10 @@ Q.Tool.define("Places/location", function (options) {
 		var filter = tool.filter;
 		filter.setText('');
 		var $results = tool.filter.$results;
+		if (!searchQuery) {
+			$results.empty();
+			return;
+		}
 		$results.empty().append(
 			$('<img class="Places_address_results_loading" />').attr({
 				src: 'plugins/Q/img/throbbers/loading.gif'

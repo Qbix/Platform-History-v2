@@ -74,6 +74,10 @@ var Places = Q.Places = Q.plugins.Places = {
 
 };
 
+/**
+ * Methods for working with location streams
+ * @class Places.Location
+ */
 Places.Location = {
 	/**
 	 * @method getUserStream

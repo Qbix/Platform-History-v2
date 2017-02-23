@@ -871,7 +871,8 @@ Elp.isVisible = function () {
 };
 
 /**
- * Gets the width remaining after subtracting all the siblings on the same line
+ * Gets the width remaining after subtracting all the siblings (except text nodes)
+ * on the same line.
  * @method remainingWidth
  * @param {boolean} subpixelAccuracy
  * @return {number|null} Returns the remaining width, or null if element has no parent
