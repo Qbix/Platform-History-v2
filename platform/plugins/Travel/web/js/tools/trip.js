@@ -18,8 +18,8 @@ var Travel = Q.Travel;
  * @param {Object} [options]
  *   @param {String} options.publisherId
  *   @param {String} options.streamName
- *   @param {Places.loc|String} options.fromloc Provide a loc, a "latitude,longitude" pair, or an address for reverse geocoding
- *   @param {Places.loc|String} options.toloc Provide a loc, a "latitude,longitude" pair, or an address for reverse geocoding
+ *   @param {Streams.Stream|String} options.fromLocation Provide a Places/location stream, a google placeId, a "latitude,longitude" pair, or an address for reverse geocoding
+ *   @param {Streams.Stream|String} options.toLocation Provide a Places/location stream, a google placeId, a "latitude,longitude" pair, or an address for reverse geocoding
  *   @param {HTMLElement} [options.mapElement] You can supply an existing element if you want
  */
 Q.Tool.define("Travel/trip", function Users_avatar_tool(options) {
@@ -60,11 +60,22 @@ Q.Tool.define("Travel/trip", function Users_avatar_tool(options) {
 		var tool = this;
 		var state = tool.state;
 		Q.Places.loadGoogleMaps(function () {
-			var loc = state.toLocation ? state.toLocation : state.fromLocation;
-			if (loc) {
+			var properties = ['fromLocation', 'toLocation'];
+			var p = Q.pipe(FT, function (params, subjects) {
+				if (!state.streamName) {
+					_composer(tool, place.fromLocation[0], place.fromLocation[0]);
+				} else {
+					_player(tool, fromPlace, toPlace);
+				}
+			});
+			Q.each(properties, function (property) {
+				var loc = state[property];
+				if (!loc) {
+					p.fill(property)(null);
+				}
+				var param = {};
 				if (typeof loc === 'string') {
 					var parts = loc.split(',');
-					var param = {};
 					var geocoder = new google.maps.Geocoder;
 					if (parts.length == 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
 						param.latlng = {
@@ -76,25 +87,32 @@ Q.Tool.define("Travel/trip", function Users_avatar_tool(options) {
 					} else {
 						param.placeId = loc;
 					}
-					geocoder.geocode(param, function (results, status) {
-						if (status !== 'OK') {
-							return console.warn("Travel/trip: Can't geocode " + loc);
-						}
-						if (!state.streamName) {
-							_composer(tool, results);
-						} else {
-							_player(tool, results);
-						}
-					});
+				} else if (Q.typeOf(loc) === 'Q.Streams.Stream') {
+					if (loc.fields.type !== 'Places/location') {
+						throw new Q.Error();
+					}
+					param.latlng = {
+						lat: loc.getAttribute('latitude'),
+						lng: loc.getAttribute('longitude')
+					};
 				}
-			}
+				geocoder.geocode(param, function (results, status) {
+					if (status !== 'OK') {
+						throw new Q.Error("Travel/trip: Can't geocode " + loc);
+					}
+					if (!results[0]) {
+						throw new Q.Error("Travel/trip: No place matched " + loc);
+					}
+					p.fill(property)(results[0]);
+				});
+			});
 		});
 	}
 }
 
 );
 
-function _composer(tool, results) {
+function _composer(tool, fromPlace, toPlace) {
 	var state = tool.state;
 	if (!Users.loggedInUser) {
 		return console.warn("Travel/trip: user is not logged in");
@@ -105,17 +123,18 @@ function _composer(tool, results) {
 	});
 	var fieldName;
 	var fromAddress, toAddress, suffix;
-	if (state.toLocation) {
+	if (toPlace && fromPlace) {
+		toAddress = toPlace.formatted_address;
+		fromAddress = fromPlace.formatted_address;
+	} else if (!fromPlace) {
 		fieldName = 'fromLocation';
 		suffix = 'from';
 		fromAddress = Q.Tool.setUpElementHTML('div', 'Places/address', {}, tool.prefix+suffix);
-		toAddress = results[0].formatted_address;
-		toLocation = results[0];
+		toAddress = place.formatted_address;
 	} else {
 		fieldName = 'toLocation';
 		suffix = 'to';
-		fromLocation = results[0];
-		fromAddress = results[0].formatted_address;
+		fromAddress = place.formatted_address;
 		toAddress = Q.Tool.setUpElementHTML('div', 'Places/address', {}, tool.prefix+suffix);
 	}
 	Users.getLabels(Q.Users.loggedInUser.id, 'Users/', function (err, labels) {
@@ -155,6 +174,9 @@ function _composer(tool, results) {
 						debugger;
 					});
 				});
+				if (!suffix) {
+					return;
+				}
 				var addressTool = tool.child(suffix);
 				addressTool.state.onChoose.set(function (place) {
 					$div.css('pointer-events', 'auto').animate({
@@ -170,7 +192,7 @@ function _composer(tool, results) {
 
 }
 
-function _player(tool) {
+function _player(tool, fromPlace, toPlace) {
 	var state = tool.state;
 	Streams.get(state.publisherId, state.streamName, function (err) {
 		if (err) {
