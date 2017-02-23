@@ -10,13 +10,26 @@
 			}
 		},
 		"handlersBeforeEvent": {
-
+			"Q/responseExtras": ["Travel/before/Q_responseExtras"]
 		},
 		"handlersAfterEvent": {
 
 		},
 		"web": {
 			"requireValidNonce": ["Travel"]
+		}
+	},
+	"Streams": {
+		"types": {
+			"Travel/trip": {
+				"decription": "Represents a trip that people take, alone or together",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Travel/trip",
+					"title": "Trip"
+				}
+			}
 		}
 	}
 }

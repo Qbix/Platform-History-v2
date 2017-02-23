@@ -574,7 +574,8 @@ var _Streams_batchFunction_options = {
  * @static
  * @method create
  * @param {Object} fields
- *  Should contain at least the publisherId and type of the stream
+ *  Should contain at least the publisherId and type of the stream.
+ *  The attributes field can be an object.
  * @param {Function} callback 
  *	if there were errors, first parameter is the error message
  *  otherwise, first parameter is null and second parameter is a Streams.Stream object
@@ -599,6 +600,9 @@ Streams.create = function (fields, callback, related, options) {
 	fields = Q.copy(fields);
 	if (fields.icon) {
 		slotNames.push('icon');
+	}
+	if (fields.attributes && typeof fields.attributes === 'object') {
+		fields.attributes = JSON.stringify(fields.attributes);
 	}
 	if (related) {
 		if (!related.publisherId || !related.streamName) {
