@@ -93,7 +93,7 @@
 					"*": {
 						"description": "New {{fromDisplayType}} scheduled in timeslot"
 					}
-				},
+				}
 			},
 			"Places/interest": {
 				"description": "Category for things within a certain distance of a geohash, matching an interest",
