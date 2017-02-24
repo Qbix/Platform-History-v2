@@ -12,7 +12,7 @@ var Users = Q.Users;
  * Avatar representing a user
  * @class Users avatar
  * @constructor
- * @param {Object} [options] this object contains function parameters
+ * @param {Object} [options]
  *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
  *   @param {String} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon.
  *   @param {Object} [options.templates] Object for avatar template parameters
@@ -98,7 +98,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		});
 		tool.element.addClass('Q_loading');
 	
-		Q.Users.get(state.userId, function (err, user) {
+		Users.get(state.userId, function (err, user) {
 			var fields;
 			tool.element.removeClass('Q_loading');
 			if (!user) {

@@ -12,6 +12,8 @@
  *   @param {string} $options.publisherId The id of the publisher
  *   @param {string} $options.streamName The name of the stream
  *   @param {Streams_Stream} [$options.stream] You can pass this instead of publisherId and streamName
+ *   @param {array} [$options.invite] Pass an array here to pass as fields to 
+ *     Streams/participants/invite template, otherwise the invite button doesn't appear.
  *   @param {integer} [$options.max]
  *    The number, if any, to show in the denominator of the summary
  *   @param {integer} [$options.maxShow=10]

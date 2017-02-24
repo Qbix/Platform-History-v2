@@ -14,16 +14,24 @@
  * @class Base_Streams_Request
  * @extends Db_Row
  *
+ * @property {string} $userId
  * @property {string} $publisherId
  * @property {string} $streamName
- * @property {string} $byUserId
- * @property {string|Db_Expression} $insertedTime
  * @property {integer} $readLevel
  * @property {integer} $writeLevel
  * @property {integer} $adminLevel
+ * @property {string} $permissions
+ * @property {string} $state
+ * @property {string} $actions
+ * @property {string|Db_Expression} $insertedTime
+ * @property {string|Db_Expression} $expireTime
  */
 abstract class Base_Streams_Request extends Db_Row
 {
+	/**
+	 * @property $userId
+	 * @type {string}
+	 */
 	/**
 	 * @property $publisherId
 	 * @type {string}
@@ -31,14 +39,6 @@ abstract class Base_Streams_Request extends Db_Row
 	/**
 	 * @property $streamName
 	 * @type {string}
-	 */
-	/**
-	 * @property $byUserId
-	 * @type {string}
-	 */
-	/**
-	 * @property $insertedTime
-	 * @type {string|Db_Expression}
 	 */
 	/**
 	 * @property $readLevel
@@ -53,6 +53,26 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @type {integer}
 	 */
 	/**
+	 * @property $permissions
+	 * @type {string}
+	 */
+	/**
+	 * @property $state
+	 * @type {string}
+	 */
+	/**
+	 * @property $actions
+	 * @type {string}
+	 */
+	/**
+	 * @property $insertedTime
+	 * @type {string|Db_Expression}
+	 */
+	/**
+	 * @property $expireTime
+	 * @type {string|Db_Expression}
+	 */
+	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
 	 * @method setUp
@@ -63,9 +83,9 @@ abstract class Base_Streams_Request extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'publisherId',
-			  1 => 'streamName',
-			  2 => 'byUserId',
+			  0 => 'userId',
+			  1 => 'publisherId',
+			  2 => 'streamName',
 			)
 		);
 	}
@@ -203,6 +223,60 @@ abstract class Base_Streams_Request extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_userId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_userId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('userId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
+		return array('userId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+	function maxSize_userId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_publisherId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -250,7 +324,7 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
-  3 => '',
+  3 => NULL,
 );			
 	}
 
@@ -309,104 +383,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_byUserId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_byUserId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('byUserId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".byUserId");
-		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".byUserId");
-		return array('byUserId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the byUserId field
-	 * @return {integer}
-	 */
-	function maxSize_byUserId()
-	{
-
-		return 31;			
-	}
-
-	/**
-	 * Returns schema information for byUserId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_byUserId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_insertedTime
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
-	 */
-	function beforeSet_insertedTime($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('insertedTime', $value);
-		}
-		if ($value instanceof DateTime) {
-			$value = $value->getTimestamp();
-		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
-		$value = $datetime->format("Y-m-d h:i:s");
-		return array('insertedTime', $value);			
-	}
-
-	/**
-	 * Returns schema information for insertedTime column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_insertedTime()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and verifies if integer value falls within allowed limits
 	 * @method beforeSet_readLevel
 	 * @param {integer} $value
@@ -415,6 +391,9 @@ return array (
 	 */
 	function beforeSet_readLevel($value)
 	{
+		if (!isset($value)) {
+			return array('readLevel', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('readLevel', $value);
 		}
@@ -454,9 +433,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '0',
+  3 => NULL,
 );			
 	}
 
@@ -469,6 +448,9 @@ return array (
 	 */
 	function beforeSet_writeLevel($value)
 	{
+		if (!isset($value)) {
+			return array('writeLevel', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('writeLevel', $value);
 		}
@@ -508,9 +490,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '0',
+  3 => NULL,
 );			
 	}
 
@@ -523,6 +505,9 @@ return array (
 	 */
 	function beforeSet_adminLevel($value)
 	{
+		if (!isset($value)) {
+			return array('adminLevel', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('adminLevel', $value);
 		}
@@ -562,9 +547,250 @@ return array (
     2 => '',
     3 => false,
   ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (!isset($value)) {
+			return array('permissions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('permissions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
+		return array('permissions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+	function maxSize_permissions()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_permissions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * @method beforeSet_state
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 */
+	function beforeSet_state($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('state', $value);
+		}
+		if (!in_array($value, array('pending','granted','rejected','forwarded','expired')))
+			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".state");
+		return array('state', $value);			
+	}
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_state()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'pending\',\'granted\',\'rejected\',\'forwarded\',\'expired\'',
+    2 => '',
+    3 => false,
+  ),
   1 => false,
   2 => '',
-  3 => '0',
+  3 => 'pending',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_actions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_actions($value)
+	{
+		if (!isset($value)) {
+			return array('actions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('actions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".actions");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".actions");
+		return array('actions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the actions field
+	 * @return {integer}
+	 */
+	function maxSize_actions()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for actions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_actions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_insertedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_insertedTime($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('insertedTime', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d h:i:s");
+		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_expireTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_expireTime($value)
+	{
+		if (!isset($value)) {
+			return array('expireTime', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('expireTime', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d h:i:s");
+		return array('expireTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for expireTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_expireTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -579,7 +805,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('streamName') as $name) {
+			foreach (array('userId','publisherId','streamName') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -598,7 +824,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'streamName', 'byUserId', 'insertedTime', 'readLevel', 'writeLevel', 'adminLevel');
+		$field_names = array('userId', 'publisherId', 'streamName', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'actions', 'insertedTime', 'expireTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

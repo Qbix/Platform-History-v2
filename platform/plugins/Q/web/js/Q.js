@@ -871,23 +871,25 @@ Elp.isVisible = function () {
 };
 
 /**
- * Gets the width remaining after subtracting all the siblings on the same line
+ * Gets the width remaining after subtracting all the siblings (except text nodes)
+ * on the same line.
  * @method remainingWidth
  * @param {boolean} subpixelAccuracy
  * @return {number|null} Returns the remaining width, or null if element has no parent
  */
 Elp.remainingWidth = function (subpixelAccuracy) {
 	var element = this;
-	if (!this.parentNode) {
+	var pn = this.parentNode;
+	if (!pn) {
 		return null;
 	}
 	var rect1 = this.getBoundingClientRect();
-	var rect2 = this.parentNode.getBoundingClientRect();
+	var rect2 = pn.getBoundingClientRect();
 	var w = (rect2.right - rect2.left); // could be fractional
-	var cs = this.parentNode.computedStyle();
+	var cs = pn.computedStyle();
 	w -= _parseFloat(cs.paddingLeft) + _parseFloat(cs.paddingRight)
 		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
-	Q.each(this.parentNode.children, function () {
+	Q.each(pn.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var style = this.computedStyle();
 		var rect3 = this.getBoundingClientRect();
@@ -10666,7 +10668,7 @@ Q.info.useFullscreen = Q.info.isMobile && Q.info.isAndroid(1000)
 Q.Dialogs.push.options = {
 	dialog: null,
 	url: null,
-	title: 'Dialog',
+	title: null,
 	content: '',
 	className: null,
 	fullscreen: Q.info.useFullscreen,
@@ -11561,8 +11563,29 @@ if (typeof module !== 'undefined' && typeof process !== 'undefined') {
 }
 
 Q.globalNames = Object.keys(root); // to find stray globals
+
+/**
+ * This function is useful to make sure your code is not polluting the global namespace
+ * @method globalNamesAdded
+ * @static
+ */
 Q.globalNamesAdded = function () {
 	return Q.diff(Object.keys(window), Q.globalNames);
+};
+
+/**
+ * This function is useful for debugging, e.g. calling it in breakpoint conditions
+ * @method stackTrack
+ * @static
+ */
+Q.stackTrace = function() {
+	var obj = {};
+	if (Error.captureStackTrace) {
+		Error.captureStackTrace(obj, Q.stackTrace);
+	} else {
+		obj = new Error();
+	}
+	return obj.stack;
 };
 
 return Q;

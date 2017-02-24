@@ -38,7 +38,7 @@ class Streams_Invite extends Base_Streams_Invite
 	 */
 	function accept($options = array())
 	{
-		if (!in_array('access')) {
+		if (!isset($options['access'])) {
 			$options['access'] = true;
 		}
 		
@@ -112,6 +112,17 @@ class Streams_Invite extends Base_Streams_Invite
 					$shouldUpdateAccess = true;
 				}
 			}
+			if (!empty($access->permissions)) {
+				// Grant permissions originally offered in the invite,
+				// up to and including what the inviting user currently has.
+				$permissions = Q::json_decode($access->permissions);
+				$byPermissions = $byStream->get('permissions', array());
+				foreach ($permissions as $permission) {
+					if (in_array($permission, $byPermissions)) {
+						$access->addPermission($permission);
+					}
+				}
+			}
 			if ($shouldUpdateAccess) {
 				$access->save(true);
 			}
@@ -132,6 +143,15 @@ class Streams_Invite extends Base_Streams_Invite
 		 * @param {Users_User} user
 		 */
 		Q::event("Streams/invite/accept", compact('invite', 'participant'), 'after');
+
+		Streams_Message::post($userId, $this->publisherId, $this->streamName, array(
+			'type' => 'Streams/invite/accept',
+			'instructions' => Q::take($this->fields, array(
+				'token', 'userId', 'invitingUserId', 'appUrl',
+				'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+				'ofUserId', 'ofContactLabel'
+			))
+		), true);
 
 		return true;
 	}

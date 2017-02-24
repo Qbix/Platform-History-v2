@@ -944,18 +944,18 @@ class Q
 					}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->k = array_key_exists($k, $source) ? $source[$k] : $v;
+						$dest->$k = array_key_exists($k, $source) ? $source[$k] : $v;
 					}
 				}
 			} else if (is_object($source)) {
 				if (is_array($dest)) {
 					foreach ($fields as $k => $v) {
-						$dest[$k] = property_exists($source, $k) ? $source->$k : $v;
+						$dest[$k] = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
 				 	}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->$k = property_exists($source, $k) ? $source->$k : $v;
-				 	}	
+						$dest->$k = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
+				 	}
 				}
 			} else {
 				if (is_array($dest)) {
@@ -964,7 +964,7 @@ class Q
 					}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->k = $v;
+						$dest->$k = $v;
 					}
 				}
 			}
@@ -986,14 +986,14 @@ class Q
 			} else if (is_object($source)) {
 				if (is_array($dest)) {
 					foreach ($fields as $k) {
-						if (property_exists($source, $k)) {
-							$dest->$k = $source->k;
+						if (property_exists($source, $k) or isset($source->$k)) {
+							$dest[$k] = $source->$k;
 						}
 					}
 				} else {
 					foreach ($fields as $k) {
-						if (property_exists($source, $k)) {
-							$dest->$k = $source->k;
+						if (property_exists($source, $k) or isset($source->$k)) {
+							$dest->$k = $source->$k;
 						}
 					}
 				}
@@ -1219,12 +1219,27 @@ class Q
 		return null;
 	}
 	
+	private static function toArrays($value)
+	{
+		$result = (is_object($value) and method_exists($value, 'toArray'))
+			? $value->toArray()
+			: $value;
+		if (is_array($result)) {
+			foreach ($result as $k => &$v) {
+				$v = self::toArrays($v);
+			}
+		}
+		return $result;
+	}
+	
 	/**
 	 * A wrapper for json_encode
 	 */
-	static function json_encode()
+	static function json_encode($value, $options = 0, $depth = 512)
 	{
-		$result = call_user_func_array('json_encode', func_get_args());
+		$args = func_get_args();
+		$args[0] = self::toArrays($value);
+		$result = call_user_func_array('json_encode', $args);
 		if ($result === false) {
 			if (is_callable('json_last_error')) {
 				throw new Q_Exception_JsonEncode(array(

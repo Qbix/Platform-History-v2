@@ -2,6 +2,7 @@
 
 function Streams_0_8_8_Streams_mysql()
 {
+	$app = Q::app();
 	$communityId = Users::communityId();
 	$user = Users_User::fetch($communityId, true);
 	

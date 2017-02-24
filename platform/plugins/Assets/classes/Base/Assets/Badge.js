@@ -231,7 +231,7 @@ Base.prototype.beforeSet_app = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".app");
+			throw new Error('Must pass a String to '+this.table()+".app");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".app");
 		return value;
@@ -269,7 +269,7 @@ Base.prototype.beforeSet_name = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".name");
+			throw new Error('Must pass a String to '+this.table()+".name");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".name");
 		return value;
@@ -307,7 +307,7 @@ Base.prototype.beforeSet_title = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".title");
+			throw new Error('Must pass a String to '+this.table()+".title");
 		if (typeof value === "string" && value.length > 65535)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".title");
 		return value;
@@ -345,7 +345,7 @@ Base.prototype.beforeSet_pic_small = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".pic_small");
+			throw new Error('Must pass a String to '+this.table()+".pic_small");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".pic_small");
 		return value;
@@ -383,7 +383,7 @@ Base.prototype.beforeSet_pic_big = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".pic_big");
+			throw new Error('Must pass a String to '+this.table()+".pic_big");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".pic_big");
 		return value;
@@ -455,7 +455,7 @@ Base.prototype.beforeSave = function (value) {
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}

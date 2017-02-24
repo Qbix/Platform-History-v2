@@ -24,6 +24,7 @@
  * @property {integer} $readLevel
  * @property {integer} $writeLevel
  * @property {integer} $adminLevel
+ * @property {string} $permissions
  * @property {string} $state
  * @property {string|Db_Expression} $insertedTime
  * @property {string|Db_Expression} $expireTime
@@ -69,6 +70,10 @@ abstract class Base_Streams_Invite extends Db_Row
 	/**
 	 * @property $adminLevel
 	 * @type {integer}
+	 */
+	/**
+	 * @property $permissions
+	 * @type {string}
 	 */
 	/**
 	 * @property $state
@@ -778,6 +783,60 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_permissions
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_permissions($value)
+	{
+		if (!isset($value)) {
+			return array('permissions', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('permissions', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".permissions");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".permissions");
+		return array('permissions', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+	function maxSize_permissions()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_permissions()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_state
 	 * @param {string} $value
@@ -786,9 +845,6 @@ return array (
 	 */
 	function beforeSet_state($value)
 	{
-		if (!isset($value)) {
-			return array('state', $value);
-		}
 		if ($value instanceof Db_Expression) {
 			return array('state', $value);
 		}
@@ -812,7 +868,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => true,
+  1 => false,
   2 => '',
   3 => 'pending',
 );			
@@ -833,10 +889,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('insertedTime', $value);			
 	}
@@ -880,10 +938,12 @@ return array (
 		if ($value instanceof DateTime) {
 			$value = $value->getTimestamp();
 		}
-		$newDateTime = new DateTime();
-		$datetime = is_numeric($value)
-			? $newDateTime->setTimestamp($value)
-			: new DateTime($value);
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
 		$value = $datetime->format("Y-m-d h:i:s");
 		return array('expireTime', $value);			
 	}
@@ -939,7 +999,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('token', 'userId', 'publisherId', 'streamName', 'invitingUserId', 'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'state', 'insertedTime', 'expireTime');
+		$field_names = array('token', 'userId', 'publisherId', 'streamName', 'invitingUserId', 'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'insertedTime', 'expireTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
