@@ -254,7 +254,7 @@ abstract class Base_Streams_Notification extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -308,7 +308,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -362,7 +362,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -423,7 +423,7 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
-  3 => NULL,
+  3 => '0',
 );			
 	}
 
@@ -516,7 +516,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -690,7 +690,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('streamName','messageOrdinal') as $name) {
+			foreach (array('streamName') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

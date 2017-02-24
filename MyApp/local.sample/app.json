@@ -54,7 +54,8 @@
 				"prefix": "streams_",
 				"shards": {}
 			}
-		}
+		},
+		"logging": true
 	},
 	"Users": {
 		"facebookApps": {

@@ -108,6 +108,7 @@ class Q_Plugin
 				// Do we already have $name installed?
 				// Checking SCHEMA plugin version in the DB.
 				$tableName = "{$prefix}Q_{$type}";
+				$cols = false;
 				try {
 					$cols = $db->rawQuery("SHOW COLUMNS FROM $tableName")
 						->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -220,7 +221,13 @@ class Q_Plugin
 				try {
 					if (substr($script, -4) === '.php') {
 						echo "Processing PHP file: $script " . PHP_EOL;
+						list($newver) = preg_split('/(-|__)/', $script, 2);
 						Q::includeFile($scriptsdir.DS.$script);
+						$db->update("{$prefix}Q_{$type}")->set(array(
+							'versionPHP' => $newver
+						))->where(array(
+							$type => $name
+						))->execute();
 						continue;
 					}
 

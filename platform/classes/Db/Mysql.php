@@ -1896,7 +1896,7 @@ EOT;
 	 */
 EOT;
 					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
-		{$js_null_check}{$js_dbe_check}if (!isNaN(value)) {
+		{$js_null_check}{$js_dbe_check}if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}

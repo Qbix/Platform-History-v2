@@ -191,23 +191,6 @@ CREATE TABLE `{$prefix}related_to` (
   KEY `sorting` (`toPublisherId`,`toStreamName`,`type`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table is owned by publisher of the aggregator stream';
 
-# Dump of table {$prefix}request
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `{$prefix}request`;
-
-CREATE TABLE `{$prefix}request` (
-  `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user who publishes the stream',
-  `streamName` varbinary(255) NOT NULL COMMENT 'local to shard of publisherId',
-  `byUserId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user who is requesting access to the stream',
-  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on shard of publisherId',
-  `readLevel` int(11) NOT NULL DEFAULT 0 COMMENT '10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
-  `writeLevel` int(11) NOT NULL DEFAULT 0 COMMENT '0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
-  `adminLevel` int(11) NOT NULL DEFAULT 0 COMMENT '10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
-  PRIMARY KEY (`publisherId`,`streamName`,`byUserId`),
-  KEY `subscriber` (`byUserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
-
 # Dump of table {$prefix}rule
 # ------------------------------------------------------------
 

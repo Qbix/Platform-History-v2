@@ -16,6 +16,7 @@
  *
  * @property {string} $userId
  * @property {string} $client_id
+ * @property {string} $state
  * @property {string} $scope
  * @property {string} $redirect_uri
  * @property {string} $access_token
@@ -30,6 +31,10 @@ abstract class Base_Users_OAuth extends Db_Row
 	 */
 	/**
 	 * @property $client_id
+	 * @type {string}
+	 */
+	/**
+	 * @property $state
 	 * @type {string}
 	 */
 	/**
@@ -242,14 +247,14 @@ abstract class Base_Users_OAuth extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => 'PRI',
-  3 => '',
+  3 => NULL,
 );			
 	}
 
@@ -296,14 +301,68 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => 'PRI',
-  3 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_state
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_state($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('state', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".state");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".state");
+		return array('state', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the state field
+	 * @return {integer}
+	 */
+	function maxSize_state()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_state()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -404,7 +463,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -458,7 +517,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -573,6 +632,26 @@ return array (
 	}
 
 	/**
+	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+	 * @method beforeSave
+	 * @param {array} $value The array of fields
+	 * @return {array}
+	 * @throws {Exception} If mandatory field is not set
+	 */
+	function beforeSave($value)
+	{
+		if (!$this->retrieved) {
+			$table = $this->getTable();
+			foreach (array('userId','client_id') as $name) {
+				if (!isset($value[$name])) {
+					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+				}
+			}
+		}
+		return $value;			
+	}
+
+	/**
 	 * Retrieves field names for class table
 	 * @method fieldNames
 	 * @static
@@ -582,7 +661,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'client_id', 'scope', 'redirect_uri', 'access_token', 'insertedTime', 'token_expires_seconds');
+		$field_names = array('userId', 'client_id', 'state', 'scope', 'redirect_uri', 'access_token', 'insertedTime', 'token_expires_seconds');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

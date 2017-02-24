@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type publisherId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type streamName
  */
 /**
@@ -225,8 +225,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -247,7 +247,7 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",""];
 };
 
 /**
@@ -263,8 +263,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -285,7 +285,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
@@ -296,7 +296,7 @@ return [["varchar","255","",false],false,"PRI",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -322,7 +322,7 @@ return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}

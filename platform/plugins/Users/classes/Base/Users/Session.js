@@ -29,7 +29,7 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type id
  */
 /**
@@ -41,11 +41,11 @@ Q.mixin(Base, Row);
  * @type php
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type userId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type deviceId
  */
 /**
@@ -244,8 +244,8 @@ Base.prototype.beforeSet_id = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".id");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".id");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".id");
 		return value;
@@ -266,7 +266,7 @@ Base.prototype.maxSize_id = function () {
 	 */
 Base.column_id = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
@@ -356,8 +356,8 @@ return [["varchar","4095","",false],false,"",null];
 Base.prototype.beforeSet_userId = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -378,7 +378,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","31","",false],true,"MUL",null];
+return [["varbinary","31","",false],true,"MUL",null];
 };
 
 /**
@@ -394,8 +394,8 @@ Base.prototype.beforeSet_deviceId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".deviceId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".deviceId");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".deviceId");
 		return value;
@@ -416,7 +416,7 @@ Base.prototype.maxSize_deviceId = function () {
 	 */
 Base.column_deviceId = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -451,7 +451,7 @@ Base.prototype.maxSize_timeout = function () {
 	 */
 Base.column_timeout = function () {
 
-return [["int","11","",false],false,"",null];
+return [["int","11","",false],false,"","0"];
 };
 
 /**
@@ -497,7 +497,7 @@ return [["int","11","",false],false,"","0"];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -522,7 +522,7 @@ return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}

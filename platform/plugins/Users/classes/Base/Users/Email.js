@@ -41,7 +41,7 @@ Q.mixin(Base, Row);
  * @type updatedTime
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type userId
  */
 /**
@@ -49,7 +49,7 @@ Q.mixin(Base, Row);
  * @type state
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type activationCode
  */
 /**
@@ -57,7 +57,7 @@ Q.mixin(Base, Row);
  * @type activationCodeExpires
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type authCode
  */
 
@@ -272,7 +272,7 @@ return [["varchar","255","",false],false,"PRI",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -298,7 +298,7 @@ return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -328,8 +328,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -350,7 +350,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","31","",false],false,"MUL",""];
+return [["varbinary","31","",false],false,"MUL",""];
 };
 
 /**
@@ -389,8 +389,8 @@ Base.prototype.beforeSet_activationCode = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".activationCode");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".activationCode");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".activationCode");
 		return value;
@@ -411,7 +411,7 @@ Base.prototype.maxSize_activationCode = function () {
 	 */
 Base.column_activationCode = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -421,8 +421,9 @@ return [["varchar","255","",false],false,"",null];
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_activationCodeExpires = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -436,7 +437,7 @@ Base.prototype.beforeSet_activationCodeExpires = function (value) {
 	 */
 Base.column_activationCodeExpires = function () {
 
-return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","255","",false],true,"",null];
 };
 
 /**
@@ -452,8 +453,8 @@ Base.prototype.beforeSet_authCode = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".authCode");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".authCode");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".authCode");
 		return value;
@@ -474,7 +475,7 @@ Base.prototype.maxSize_authCode = function () {
 	 */
 Base.column_authCode = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**

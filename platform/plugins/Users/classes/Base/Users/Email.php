@@ -395,7 +395,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -487,7 +487,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -507,6 +507,9 @@ return array (
 	 */
 	function beforeSet_activationCodeExpires($value)
 	{
+		if (!isset($value)) {
+			return array('activationCodeExpires', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('activationCodeExpires', $value);
 		}
@@ -538,9 +541,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '0000-00-00 00:00:00',
+  3 => NULL,
 );			
 	}
 
@@ -587,7 +590,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
