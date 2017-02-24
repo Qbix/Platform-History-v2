@@ -55,6 +55,10 @@ function Streams_after_Users_User_saveExecute($params)
 		}
 	}
 	
+	$jo = array();
+	$so = array();
+	$streamsToJoin = array();
+	$streamsToSubscribe = array();
 	foreach ($toInsert as $name) {
 		$stream = Streams::fetchOne($user->id, $user->id, $name);
 		if (!$stream) {
@@ -78,16 +82,19 @@ function Streams_after_Users_User_saveExecute($params)
 			$stream->content = $values[$name];
 		}
 		$stream->save(); // this also inserts avatars
-		$o = array(
-			'userId' => $user->id, 
-			'skipAccess' => true
-		);
-		$so = $p->get($name, "subscribe", array());
-		if ($so === false) {
-			$stream->join($o);
+		$streams[$name] = $stream;
+		if ($so[$name] = $p->get($name, "subscribe", array())) {
+			$streamsToSubscribe[$name] = $stream;
 		} else {
-			$stream->subscribe(array_merge($o, $so));
+			$streamsToJoin[$name] = $stream;
 		}
+	}
+	Streams::join($user->id, $user->id, $streamsToJoin, array('skipAccess' => true));
+	foreach ($streamsToSubscribe as $name => $stream) {
+		$stream->subscribe(array_merge($so[$name], array(
+			'userId' => $user->id, 
+			'skipAccess' => true)
+		));
 	}
 	
 	if ($params['inserted']) {

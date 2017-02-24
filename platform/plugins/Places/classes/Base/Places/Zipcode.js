@@ -255,7 +255,7 @@ Base.prototype.beforeSet_countryCode = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".countryCode");
+			throw new Error('Must pass a String to '+this.table()+".countryCode");
 		if (typeof value === "string" && value.length > 2)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".countryCode");
 		return value;
@@ -293,7 +293,7 @@ Base.prototype.beforeSet_zipcode = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".zipcode");
+			throw new Error('Must pass a String to '+this.table()+".zipcode");
 		if (typeof value === "string" && value.length > 10)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".zipcode");
 		return value;
@@ -331,7 +331,7 @@ Base.prototype.beforeSet_placeName = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".placeName");
+			throw new Error('Must pass a String to '+this.table()+".placeName");
 		if (typeof value === "string" && value.length > 180)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".placeName");
 		return value;
@@ -369,7 +369,7 @@ Base.prototype.beforeSet_stateName = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".stateName");
+			throw new Error('Must pass a String to '+this.table()+".stateName");
 		if (typeof value === "string" && value.length > 100)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".stateName");
 		return value;
@@ -407,7 +407,7 @@ Base.prototype.beforeSet_state = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".state");
+			throw new Error('Must pass a String to '+this.table()+".state");
 		if (typeof value === "string" && value.length > 20)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".state");
 		return value;
@@ -445,7 +445,7 @@ Base.prototype.beforeSet_regionName = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".regionName");
+			throw new Error('Must pass a String to '+this.table()+".regionName");
 		if (typeof value === "string" && value.length > 100)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".regionName");
 		return value;
@@ -483,7 +483,7 @@ Base.prototype.beforeSet_region = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".region");
+			throw new Error('Must pass a String to '+this.table()+".region");
 		if (typeof value === "string" && value.length > 20)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".region");
 		return value;
@@ -521,7 +521,7 @@ Base.prototype.beforeSet_community = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".community");
+			throw new Error('Must pass a String to '+this.table()+".community");
 		if (typeof value === "string" && value.length > 100)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".community");
 		return value;

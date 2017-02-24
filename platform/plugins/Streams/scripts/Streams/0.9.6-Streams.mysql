@@ -50,10 +50,6 @@ UPDATE {$prefix}related_to
 SET toStreamName = REPLACE(toStreamName, "Streams/community/", "Streams/experience/")
 WHERE toStreamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}request
-SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
-WHERE streamName LIKE "Streams/community/%";
-
 UPDATE {$prefix}rule
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";

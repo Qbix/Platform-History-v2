@@ -1597,7 +1597,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$limit = min($limit, self::getConfigField($this->type, 'getParticipantsLimit', 100));
 		}
 		if (isset($limit)) {
-			$q->limit($options['limit'], $offset);
+			$q->limit($limit, $offset);
 		}
 		$q->orderBy('insertedTime', isset($options['ascending']) ? $options['ascending'] : $ascending);
 		return $q->fetchDbRows(null, '', 'userId');

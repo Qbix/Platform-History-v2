@@ -286,6 +286,14 @@ class Q_Utils
 	{
 		return implode($separator, array_slice(explode($separator, $source), $offset, $length));
 	}
+
+	static function socket($ip, $port, &$errno, &$errstr, $timeout = null)
+	{
+		if (isset(self::$sockets[$ip][$port])) {
+			return self::$sockets[$ip][$port];
+		}
+		return self::$sockets[$ip][$port] = @fsockopen($ip, $port, $errno, $errstr, $timeout);
+	}
 	
 	/**
  	 * Sends a post and returns right away.
@@ -300,6 +308,7 @@ class Q_Utils
 	 *  If false, not sent.
 	 * @param {integer} [$timeout=Q_UTILS_CONNECTION_TIMEOUT]
 	 * @param {boolean} [$throwIfRefused=false] Pass true here to throw an exception whenever Node process is not running or refuses the request
+	 * @param {boolean} [$closeSocket=false] Pass true to close the socket after sending. The default is to do HTTP pipelining.
 	 * @return {boolean} Returns whether the post succeeded.
 	 */
 	static function postAsync(
@@ -307,7 +316,8 @@ class Q_Utils
 		$params,
 		$user_agent = null,
 		$timeout = Q_UTILS_CONNECTION_TIMEOUT,
-		$throwIfRefused = false)
+		$throwIfRefused = false,
+		$closeSocket = false)
 	{
 		if (!is_array($params)) {
 			throw new Exception("\$params must be an array");
@@ -344,11 +354,13 @@ class Q_Utils
 			$headers[] ="User-Agent: $user_agent";
 		}
 		$out = implode("\r\n", $headers);
-		$out .= "\r\nConnection: Close\r\n\r\n";
+		$out .= "\r\nConnection: " . ($closeSocket ? 'Close' : 'Keep-Alive');
+		$out .= "\r\n\r\n";
 		if (isset($post_string))
 			$out .= $post_string;
 
-		$fp = @fsockopen($ip, isset($parts['port']) ? $parts['port'] : 80, $errno, $errstr, $timeout);
+		$port = isset($parts['port']) ? $parts['port'] : 80;
+		$fp = self::socket($ip, $port, $errno, $errstr, $timeout);
 		if (!$fp) {
 			if ($throwIfRefused) {
 				$app = Q_Config::expect('Q', 'app');
@@ -359,6 +371,7 @@ class Q_Utils
 		$result = (fwrite($fp, $out) !== false);
 		$result = $result && fflush($fp);
 		$result = $result && fclose($fp);
+		self::$sockets[$ip][$port] = null;
 		return $result;
 	}
 
@@ -950,4 +963,5 @@ class Q_Utils
 	}
 	
 	protected static $urand;
+	protected static $sockets = array();
 }

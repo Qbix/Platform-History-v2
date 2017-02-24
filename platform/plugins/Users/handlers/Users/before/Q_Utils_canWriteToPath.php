@@ -16,7 +16,9 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 		return false;
 	}
 	$app = Q_Config::expect('Q', 'app');
-	$subpaths = Q_Config::get('Users', 'paths', 'uploads', array('files/{{app}}/uploads/Users/{{userId}}' => true));
+	$subpaths = Q_Config::get('Users', 'paths', 'uploads', array(
+		'files/{{app}}/uploads/Users/{{userId}}' => true
+	));
 	$paths = array();
 	foreach ($subpaths as $subpath => $can_write) {
 		if (!$can_write) continue;

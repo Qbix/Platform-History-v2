@@ -61,3 +61,58 @@
 .Places_countries_flags .Places_countries_flag { position: absolute; top: 50%; margin-top: -12px; margin-left: 5px; }
 .Places_countries_flags .Places_countries_select { text-indent: 24px; }
 .Places_globe_shadow { pointer-events: none; }
+
+.Q_filter_tool .Q_filter_results .Places_autocomplete_result {
+	padding: 5px; 
+}
+
+.Q_filter_tool .Q_filter_results table {
+	width: 100%; background: #fff;
+}
+
+.Q_filter_tool .Q_filter_results table td {
+	vertical-align: middle;
+}
+
+.Q_filter_tool .Q_filter_results tr:hover {
+	background: #ccc; cursor: pointer;
+}
+
+.Q_filter_tool .Places_placeInfo {
+	width: 80; overflow: hidden; font-size: 12;
+}
+
+.Q_filter_tool .Places_description {
+	overflow: hidden; font-size: 9px;
+}
+
+.Q_filter_tool .Places_distance {
+	overflow: hidden; text-align: center;
+}
+
+.Q_filter_tool .Places_distance div {
+	margin: auto;
+	display: inline-block;
+	text-align: center; background-color: #778; color: white;
+	-webkit-border-radius: 5px; -moz-border-radius: 5px;
+	font-size: 12px; white-space: nowrap;
+	padding: 2px;
+}
+
+.Places_address_text {
+	display: none;
+	font-size: 12px;
+    text-indent: 2px;
+    overflow: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.Places_address_tool input {
+    font-size: 16px;
+    max-width: 200px;
+    overflow: hidden;
+    background: white;
+    padding: 8px;
+    box-sizing: border-box;
+}

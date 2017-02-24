@@ -30,6 +30,7 @@
 	"Streams": {
 		"types": {
 			"Places/location": {
+				"description": "Represents a building, venue, ship, park, etc.",
 				"create": true,
 				"edit": true,
 				"messages": {
@@ -37,33 +38,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
-					"title": "Location"
-				}
-			},
-			"Places/nearby": {},
-			"Places/timeslot": {
-				"defaults": {
-					"title": "Nearby Timeslot"
-				},
-				"relatedTo": {
-					"*": {
-						"description": "New {{fromDisplayType}} scheduled in timeslot"
-					}
-				}
-			},
-			"Places/interest": {
-				"defaults": {
-					"title": "Nearby Interest"
-				}
-			},
-			"Places/location": {
-				"create": true,
-				"edit": true,
-				"messages": {
-					"Places/location/visit": { "post": true },
-					"Places/location/stay": { "post": true }
-				},
-				"defaults": {
+					"icon": "{{baseUrl}}/plugins/Places/icons/location",
 					"title": "Location"
 				},
 				"relatedFrom": {
@@ -73,6 +48,7 @@
 				}
 			},
 			"Places/area": {
+				"description": "Represents an area within a location, such as a room or suite",
 				"edit": true,
 				"messages": {
 					"Places/location/visit": { "post": true },
@@ -88,6 +64,7 @@
 				}
 			},
 			"Places/floor": {
+				"description": "Represents a floor in a building or ship",
 				"edit": true,
 				"relatedFrom": {
 					"*": {
@@ -96,11 +73,32 @@
 				}
 			},
 			"Places/column": {
+				"description": "Represents a column in a building or ship",
 				"edit": true,
 				"relatedFrom": {
 					"*": {
 						"description": "Posted to entire column"
 					}
+				}
+			},
+			"Places/nearby": {
+				"description": "Category for things within a certain distance of a geohash"
+			},
+			"Places/timeslot": {
+				"description": "Category for things matching a certain experience, within a certain hour and distance of a geohash",
+				"defaults": {
+					"title": "Nearby Timeslot"
+				},
+				"relatedTo": {
+					"*": {
+						"description": "New {{fromDisplayType}} scheduled in timeslot"
+					}
+				}
+			},
+			"Places/interest": {
+				"description": "Category for things within a certain distance of a geohash, matching an interest",
+				"defaults": {
+					"title": "Nearby Interest"
 				}
 			}
 		},

@@ -54,7 +54,8 @@
 				"prefix": "streams_",
 				"shards": {}
 			}
-		}
+		},
+		"logging": true
 	},
 	"Users": {
 		"facebookApps": {
@@ -62,7 +63,7 @@
 				"name": "FACEBOOK APP NAME HERE",
 				"appId": "FACEBOOK APP ID HERE",
 				"secret": "PUT SECRET HERE",
-				"url": "http:\/\/apps.facebook.com\/YOURAPP",
+				"url": "http://apps.facebook.com/YOURAPP",
 				"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
 			}
 		},
@@ -85,8 +86,24 @@
 			"from": "+1234567890"
 		},
 		"authorize": {
-			"redirectUris": {
-				"MyApp": ["MyApp/welcome", "MyApp/home"]
+			"terms": {
+				"uri": null
+			},
+			"clients": {
+				"Groups-ios": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
+				},
+				"Groups-android": {
+					"paths": null,
+					"scopes": {
+						"all": "give this app full access"
+					},
+					"automatic": true
+				}
 			}
 		}
 	},

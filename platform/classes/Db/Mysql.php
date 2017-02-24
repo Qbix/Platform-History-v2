@@ -1878,10 +1878,12 @@ EOT;
 		{$null_check}{$dbe_check}if (\$value instanceof DateTime) {
 			\$value = \$value->getTimestamp();
 		}
-		\$newDateTime = new DateTime();
-		\$datetime = is_numeric(\$value)
-			? \$newDateTime->setTimestamp(\$value)
-			: new DateTime(\$value);
+		if (is_numeric(\$value)) {
+			\$newDatetime = new DateTime();
+			\$datetime = \$newDateTime->setTimestamp(\$value);
+		} else {
+			\$datetime = new DateTime(\$value);
+		}
 		\$value = \$datetime->format("Y-m-d h:i:s");
 EOT;
 					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
@@ -1894,7 +1896,7 @@ EOT;
 	 */
 EOT;
 					$js_functions["beforeSet_$field_name_safe"][] = <<<EOT
-		{$js_null_check}{$js_dbe_check}if (!isNaN(value)) {
+		{$js_null_check}{$js_dbe_check}if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
