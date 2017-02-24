@@ -1237,8 +1237,9 @@ class Q
 	 */
 	static function json_encode($value, $options = 0, $depth = 512)
 	{
-		$value = self::toArrays($value);
-		$result = call_user_func('json_encode', $value, $options, $depth);
+		$args = func_get_args();
+		$args[0] = self::toArrays($value);
+		$result = call_user_func_array('json_encode', $args);
 		if ($result === false) {
 			if (is_callable('json_last_error')) {
 				throw new Q_Exception_JsonEncode(array(
