@@ -30,7 +30,7 @@ abstract class Places extends Base_Places
 	 * @param {double} [$latitude=userLocation] Override the latitude of the coordinates to search around
 	 * @param {double} [$longitude=userLocation] Override the longitude of the coordinates to search around
  	 * @param {double} [$miles=25] Override the radius, in miles, to search around
-	 * @return {Streams_Stream|null}
+	 * @return {array} An array of prediction objects from Google Places predictions API
 	 * @throws {Q_Exception} if a bad value is encountered and $throwIfBadValue is true
 	 */
 	static function autocomplete(

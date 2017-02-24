@@ -10,8 +10,8 @@ CREATE TABLE `{$prefix}notification` (
   `messageOrdinal` int(11) NOT NULL DEFAULT 0 COMMENT 'the ordinal of the message being notified about',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `type` varbinary(255) DEFAULT NULL COMMENT 'the type of message',
-  `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
-  `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on Q server of userId',
+  `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on shard of userId',
+  `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on shard of userId',
   `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
   PRIMARY KEY (userId, publisherId, streamName, messageOrdinal)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on userId''s Q server';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on userId''s shard';

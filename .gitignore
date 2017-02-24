@@ -44,5 +44,9 @@ node_modules/
 
 # Custom plugins
 platform/plugins/Communities
+<<<<<<< HEAD
 
 platform/plugins/Streams/web/img/icons.lnk
+=======
+platform/plugins/Travel
+>>>>>>> 141f2c3f1ea21c6339ac24d62ddb6ba084995568

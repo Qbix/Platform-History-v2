@@ -2009,7 +2009,7 @@ Q.listen = function _Q_listen(options, callback) {
 	if (express.version === undefined
 	|| parseInt(express.version) >= 3) {
 		_express = express();
-		if (options.https) {
+		if (!Q.isEmpty(options.https)) {
 			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
 			var keys = ['key', 'cert', 'ca', 'dhparam'];
 			keys.forEach(function (k) {
@@ -2073,7 +2073,7 @@ Q.listen = function _Q_listen(options, callback) {
 				+ w + " :", h);
 			f.apply(this, Array.prototype.slice.call(arguments));
 		};
-	})
+	});
 	app.use(function Q_request_handler (req, res, next) {
 		// WARNING: the following per-request log may be a bottleneck in high-traffic sites:
 		var a = server.address();

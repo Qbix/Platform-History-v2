@@ -12,6 +12,8 @@
  * @param {Object} options Provide options for this tool
  *   @param {String} options.publisherId The id of the publisher
  *   @param {String} options.streamName The name of the stream
+ *   @param {Object} [options.invite] Pass an object here to pass as fields to 
+ *     Streams/participants/invite template, otherwise the invite button doesn't appear.
  *   @param {Boolean} [options.showSummary] Whether to show a summary
  *   @param {Boolean} [options.showBlanks] Whether to show blank avatars in place of remaining spots
  *   @param {Number} [options.max]
@@ -49,6 +51,7 @@ function _Streams_participants(options) {
 },
 
 {
+	invite: false,
 	maxShow: 10,
 	maxLoad: 100,
 	max: null,

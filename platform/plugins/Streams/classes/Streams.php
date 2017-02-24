@@ -184,13 +184,14 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Able to create invitations for others, granting access
+	 * and permissions up to what they themselves have
 	 * @config $ADMIN_LEVEL['invite']
 	 * @type integer
 	 * @default 20
 	 * @final
 	 */
 	/**
-	 * Can approve posts and give people any adminLevel < 'manage'
+	 * Can approve posts, and give people any adminLevel < 'manage'
 	 * @config $ADMIN_LEVEL['manage']
 	 * @type integer
 	 * @default 30
@@ -816,7 +817,10 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $asUserId The user who is attempting to create the stream.
 	 * @param {string} $publisherId The id of the user to publish the stream.
-	 * @param {string} $type The type of the stream to create.
+	 * @param {string|array} $type The type of the stream to create.
+	 *  You can also pass here an array of ($name => $fields) streams, where
+	 *  the fields are the same format as the $fields option.
+	 *  In this case, you can skip the $fields parameter when passing any later ones.
 	 * @param {array} $fields Use this to set additional fields for the stream:
 	 * @param {string} [$fields.title=null] You can set the stream's title
 	 * @param {string} [$fields.icon=null] You can set the stream's icon
@@ -3002,18 +3006,13 @@ abstract class Streams extends Base_Streams
 			Streams_Rule::insertManyAndExecute($ruleRows);
 		}
 
-		foreach ($streamNames as $sn) {
-			$subscription = $subscriptions[$sn];
-			$stream = $streams2[$sn];
-			// skip error testing for rule save BUT inform node.
-			// Node can notify user to check the rules
-			Q_Utils::sendToNode(array(
-				"Q/method" => "Streams/Stream/subscribe",
-				"subscription" => Q::json_encode($subscription),
-				"stream" => Q::json_encode($stream->toArray()),
-				"rule" => isset($rules[$sn]) ? Q::json_encode($rules[$sn]) : null
-			));
-		}
+		$streams5 = Q::take($streams, $streamNames);
+		Q_Utils::sendToNode(array(
+			"Q/method" => "Streams/Stream/subscribe",
+			"subscriptions" => Q::json_encode($subscriptions),
+			"streams" => Q::json_encode($streams5),
+			"rules" => Q::json_encode($rules)
+		));
 		Streams_Message::postMessages($asUserId, $messages, true);
 		Streams_Message::postMessages($asUserId, array(
 			$asUserId => array('Streams/participating' => $pMessages)
@@ -3189,12 +3188,13 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
 	 *  @param {string|array} [$options.addMyLabel] label or an array of ($label => array($title, $icon)) for adding asUserId's contacts
-	 *  @param {integer} [$options.readLevel] => the read level to grant those who are invited
-	 *  @param {integer} [$options.writeLevel] => the write level to grant those who are invited
-	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited
-	 *	@param {string} [$options.displayName] => the display name to use to represent the inviting user
-	 *  @param {string} [$options.appUrl] => Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
-	 *	@param {array} [$options.html] => an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
+	 *  @param {string|integer} [$options.readLevel] the read level to grant those who are invited
+	 *  @param {string|integer} [$options.writeLevel] the write level to grant those who are invited
+	 *  @param {string|integer} [$options.adminLevel] the admin level to grant those who are invited
+	 *  @param {array} [$options.permissions] array of additional permissions to grant
+	 *	@param {string} [$options.displayName] the display name to use to represent the inviting user
+	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
 	 * @see Users::addLink()
@@ -3361,10 +3361,20 @@ abstract class Streams extends Base_Streams
 				throw new Users_Exception_NotAuthorized();
 			}
 		}
+		$permissions = isset($options['permissions']) ? $options['permissions'] : null;
+		if (isset($permissions)) {
+			foreach ($permissions as $permission) {
+				$byPermissions = $stream->get('permissions', array());
+				if (!in_array($permission, $byPermissions)) {
+					// We can't assign permissions we don't have ourselves
+					throw new Users_Exception_NotAuthorized();
+				}
+			}
+		}
 
-		// calculate expiry time
+		// calculate expireTime
 		$duration = Q_Config::get("Streams", "types", $stream->type, "invite", "duration", false);
-		$expiry = $duration ? strtotime($duration) : null;
+		$expireTime = $duration ? strtotime("+$duration seconds") : null;
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
 		
@@ -3410,8 +3420,9 @@ abstract class Streams extends Base_Streams
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
 			"adminLevel" => $adminLevel,
+			"permissions" => $permissions,
 			"displayName" => $displayName,
-			"expiry" => $expiry
+			"expireTime" => $expireTime
 		);
 		if (!empty($template)) {
 			$params['template'] = $template;
@@ -3443,8 +3454,128 @@ abstract class Streams extends Base_Streams
 			$invite->save();
 			$return['invite'] = $invite;
 		}
+		
+		$instructions = array_merge($who, $options, compact(
+			'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions'
+		));
+		Streams_Message::post($asUserId, $publisherId, $streamName, array(
+			'type' => 'Streams/invite',
+			'instructions' => $instructions
+		), true);
+		
+		/**
+		 * @event Streams/invite {after}
+		 * @param {string} success
+		 * @param {array} userIds
+		 * @param {array} identifiers
+		 * @param {array} identifierTypes
+		 * @param {array} alreadyParticipating
+		 * @param {Streams_Invite} invite
+		 */
+		Q::event('Streams/invite', $return, 'after');
 
 		return $return;
+	}
+	
+	/**
+	 * Each user is allowed at most one request per stream.
+	 * If a request already exists, then this function returns it, even if it has
+	 * different parameters.
+	 * Otherwise, it inserts a request for upgrading access to a stream,
+	 * and schedules actions to be taken automatically if the request is granted.
+	 * It also posts a "Streams/request" message to the stream, so that someone
+	 * with the adminLevel >= invite and adequate readLevel, writeLevel and permissions
+	 * can grant the request.
+	 * @method request
+	 * @static
+	 * @param {string} $publisherId The id of the stream publisher
+	 * @param {string} $streamName The name of the stream the request is about
+	 * @param {array} [$options=array()] All of these are optional
+	 *  @param {string} [$options.userId=Users::loggedInUser()->id]
+	 *    The id of the user requesting the upgraded access.
+	 *  @param {string|integer} [$options.readLevel] upgrade to read level being requested
+	 *  @param {string|integer} [$options.writeLevel] upgrade to write level being requested
+	 *  @param {string|integer} [$options.adminLevel] upgrade to admin level being requested
+	 *  @param {array} [$options.permissions] array of additional permissions to request
+	 *  @param {array} [$options.actions] array of actions to take automatically
+	 *    right after a request is granted, e.g. "Streams/join" or "Streams/subscribe".
+	 *    These can be interpreted in the "after" hook for "Streams/request" event.
+	 * @return {Streams_Request} The request row that has been inserted into the database
+	 */
+	static function request($publisherId, $streamName, $options = array())
+	{
+		// get the user id
+		if (isset($options['userId'])) {
+			$userId = $options['userId'];
+			$user = Users_User::fetch($userId);
+		} else {
+			$user = Users::loggedInUser(true);
+			$userId = $user->id;
+		}
+		
+		// see if such a request already exists
+		$request = new Streams_Request();
+		$request->publisherId = $publisherId;
+		$request->streamName = $streamName;
+		$request->userId = $userId;
+		if ($request->retrieve()) {
+			return $request;
+		}
+		
+		// fetch the stream as the logged-in user
+		$stream = Streams::fetchOne($userId, $publisherId, $streamName, true);
+
+		// process any requested levels
+		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
+		if (isset($readLevel)) {
+			$request->readLevel = Streams_Stream::numericReadLevel($readLevel);
+		}
+		$writeLevel = isset($options['writeLevel']) ? $options['writeLevel'] : null;
+		if (isset($writeLevel)) {
+			$request->writeLevel = Streams_Stream::numericWriteLevel($writeLevel);
+		}
+		$adminLevel = isset($options['adminLevel']) ? $options['adminLevel'] : null;
+		if (isset($adminLevel)) {
+			$request->adminLevel = Streams_Stream::numericAdminLevel($adminLevel);
+		}
+		$permissions = isset($options['permissions']) ? $options['permissions'] : null;
+		if (!is_array($permissions)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'permissions', 
+				'range' => 'array'
+			));
+		}
+		$request->permissions = Q::json_encode($permissions);
+
+		// calculate expireTime
+		$duration = Q_Config::get("Streams", "types", $stream->type, "request", "duration", false);
+		$request->expireTime = $duration ? strtotime("+$duration seconds") : null;
+		
+		// fill out the rest of the fields
+		$request->state = 'pending';
+		
+		/**
+		 * @event Streams/request {before}
+		 * @param {Streams_Request} request
+		 */
+		Q::event('Streams/request', compact('userId'), 'before');
+		$request->save();
+		
+		// Send Streams/request message to the stream
+		Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
+			'type' => 'Streams/request',
+			'instructions' => Q::take($request->fields, array(
+				'readLevel', 'writeLevel', 'adminLevel', 'expireTime', 'state'
+			))
+		), true);
+			
+		/**
+		 * @event Streams/request {after}
+		 * @param {Streams_Request} request
+		 */
+		Q::event('Streams/request', compact('request'), 'after');
+
+		return $request;
 	}
 	
 	/**

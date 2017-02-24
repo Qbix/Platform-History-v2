@@ -1,3 +1,7 @@
+.Q_filter_fullscreen {
+	overflow: auto;
+}
+
 .Q_filter_results {
 	display: none;
 	position: relative;
@@ -56,4 +60,16 @@
 	background-repeat: no-repeat !important;
 	background-position: right center !important;
 	font-weight: bold !important;
+}
+
+.Q_filter_tool .Q_filter_results table {
+	width: 100%; background: #fff;
+}
+
+.Q_filter_tool .Q_filter_results table td {
+	vertical-align: middle;
+}
+
+.Q_filter_tool .Q_filter_results tr:hover {
+	background: #ccc; cursor: pointer;
 }
