@@ -74,6 +74,10 @@ var Places = Q.Places = Q.plugins.Places = {
 
 };
 
+/**
+ * Methods for working with location streams
+ * @class Places.Location
+ */
 Places.Location = {
 	/**
 	 * @method getUserStream
@@ -123,8 +127,9 @@ Q.text.Places = {
 
 Q.Tool.define({
 	"Places/location": "plugins/Places/js/tools/location.js",
+	"Places/address": "plugins/Places/js/tools/address.js",
 	"Places/globe": "plugins/Places/js/tools/globe.js",
-	"Places/countries": "plugins/Places/js/tools/countries.js"
+	"Places/countries": "plugins/Places/js/tools/countries.js",
 });
 
 })(Q, jQuery, window);

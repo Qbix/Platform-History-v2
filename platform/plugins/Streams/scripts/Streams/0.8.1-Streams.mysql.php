@@ -1,9 +1,8 @@
 <?php
 
 function Streams_0_8_1_Streams_mysql()
-{	
-	$app = Q_Config::expect('Q', 'app');
-	$commmunityId = Users::communityId();
+{
+	$communityId = Users::communityId();
 	
 	// template for community experience stream
 	$stream = new Streams_Stream();
@@ -18,10 +17,12 @@ function Streams_0_8_1_Streams_mysql()
 	$stream->save();
 	
 	// main community experience stream, for community-wide announcements etc.
-	Streams::create($commmunityId, $commmunityId, 'Streams/experience', array(
+	$user = Users_User::fetch($communityId);
+	Streams::create($communityId, $communityId, 'Streams/experience', array(
 		'skipAccess' => true,
 		'name' => 'Streams/experience/main',
-		'title' => Users::communityName()
+		'title' => Users::communityName(),
+		'icon' => $user ? $user->iconUrl() : null
 	));
 	
 	// symlink the labels folder

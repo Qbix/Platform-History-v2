@@ -129,23 +129,30 @@ function _Q_overlay(o) {
 			var mcn = (typeof oom === 'string') ? ' ' + oom : '';
 			if ($overlay.options.fadeInOut)
 			{
-				$this.css('opacity', 0).show();
-				Q.Animation.play(function (x, y) {
-					$this.css('opacity', y);
-					if (x === 1) {
-						if (!$overlay.options.noClose && $overlay.options.closeOnEsc) {
-							$(document).on('keydown', closeThisOverlayOnEsc);
+				if (typeof $overlay.options.fadeInOut === 'function') {
+					$overlay.options.fadeInOut(_doFade);
+				} else {
+					_doFade();
+				}
+				function _doFade() {
+					$this.css('opacity', 0).show();
+					Q.Animation.play(function (x, y) {
+						$this.css('opacity', y);
+						if (x === 1) {
+							if (!$overlay.options.noClose && $overlay.options.closeOnEsc) {
+								$(document).on('keydown', closeThisOverlayOnEsc);
+							}
+							Q.handle($overlay.options.onLoad, $this, [$this]);
 						}
-						Q.handle($overlay.options.onLoad, $this, [$this]);
+					}, o.fadeTime);
+					if ($overlay.options.mask)
+					{
+						Q.Masks.show('Q.screen.mask', { 
+							fadeTime: o.fadeTime,
+							className: 'Q_dialog_mask' + mcn,
+							zIndex: topZ - 1
+						});
 					}
-				}, o.fadeTime);
-				if ($overlay.options.mask)
-				{
-					Q.Masks.show('Q.screen.mask', { 
-						fadeTime: o.fadeTime,
-						className: 'Q_dialog_mask' + mcn,
-						zIndex: topZ - 1
-					});
 				}
 			}
 			else
@@ -311,19 +318,23 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			top: topPos,
 			mask: o.mask,
 			noClose: o.noClose,
-			beforeLoad: o.beforeLoad,
-			onLoad: { "Q/dialog": function() {
-				function _onLoadUrl() {
+			beforeLoad: {"Q/dialog": function () {
+				$this.css('opacity', 0).show();
+				Q.handle(o.beforeLoad, this, arguments);
+				function _onContent() {
 					Q.activate([ots, ods], {}, function() {
 						_handlePosAndScroll.call($this, o);
 						Q.handle(o.onActivate, $this, [$this]);
+						$this.css('opacity', 1);
 					});
 				}
 				if (o.url) {
-					_loadUrl.call($this, o, _onLoadUrl);
+					_loadUrl.call($this, o, _onContent);
 				} else {
-					_onLoadUrl();
+					_onContent();
 				}
+			}},
+			onLoad: { "Q/dialog": function() {
 				Q.handle(o.onLoad);
 			}},
 			beforeClose: o.beforeClose,
@@ -335,7 +346,9 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			}},
 			noCalculatePosition: o.noCalculatePosition,
 			alignParent: (o.alignByParent && !Q.info.isMobile ? $this.parent() : null),
-			fadeInOut: o.fadeInOut
+			fadeInOut: o.fadeInOut && function (callback) {
+				o.onActivate.add(callback, "Q/overlay");
+			}
 		});
 		$this.data('Q/dialog', $this.data('Q/overlay'));
 	} else {
@@ -371,17 +384,19 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				for (var i = 0; i < hiddenChildren.length; i++) {
 					hiddenChildren[i].hide();
 				}
-				$this.show();
+				$this.show().css('opacity', 0);
 				ods.css('padding-top', ots.outerHeight());
 				
 				if (o.url) {
 					_loadUrl.call($this, o, function() {
 						Q.activate(this, {}, function () {
+							$this.css('opacity', 1);
 							Q.handle(o.onActivate, $this, [$this]);
 						});
 					});
 				} else {
 					Q.activate($this[0], {}, function () {
+						$this.css('opacity', 1);
 						Q.handle(o.onActivate, $this, [$this]);
 					});
 				}

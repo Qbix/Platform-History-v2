@@ -70,6 +70,10 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
+ * @type permissions
+ */
+/**
+ * @property {String}
  * @type state
  */
 /**
@@ -245,6 +249,7 @@ Base.prototype.fieldNames = function () {
 		"readLevel",
 		"writeLevel",
 		"adminLevel",
+		"permissions",
 		"state",
 		"insertedTime",
 		"expireTime"
@@ -626,6 +631,42 @@ return [["int","11","",false],true,"",null];
 };
 
 /**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_permissions
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_permissions = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".permissions");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".permissions");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the permissions field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_permissions = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for permissions column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_permissions = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
+/**
  * Method is called before setting the field and verifies if value belongs to enum values list
  * @method beforeSet_state
  * @param {string} value
@@ -633,7 +674,6 @@ return [["int","11","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
  */
 Base.prototype.beforeSet_state = function (value) {
-		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (['pending','accepted','declined','forwarded','expired','claimed'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
@@ -646,7 +686,7 @@ Base.prototype.beforeSet_state = function (value) {
 	 */
 Base.column_state = function () {
 
-return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],true,"","pending"];
+return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
 };
 
 /**
@@ -657,7 +697,7 @@ return [["enum","'pending','accepted','declined','forwarded','expired','claimed'
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -683,7 +723,7 @@ return [["timestamp","'pending','accepted','declined','forwarded','expired','cla
 Base.prototype.beforeSet_expireTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}

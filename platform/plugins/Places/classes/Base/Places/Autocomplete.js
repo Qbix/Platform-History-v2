@@ -244,7 +244,7 @@ Base.prototype.beforeSet_query = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".query");
+			throw new Error('Must pass a String to '+this.table()+".query");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".query");
 		return value;
@@ -282,7 +282,7 @@ Base.prototype.beforeSet_types = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".types");
+			throw new Error('Must pass a String to '+this.table()+".types");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".types");
 		return value;
@@ -386,6 +386,10 @@ return [["double","255","",false],false,"PRI",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -408,6 +412,10 @@ return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 Base.prototype.beforeSet_updatedTime = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -435,7 +443,7 @@ Base.prototype.beforeSet_results = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".results");
+			throw new Error('Must pass a String to '+this.table()+".results");
 		if (typeof value === "string" && value.length > 65535)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".results");
 		return value;
@@ -472,7 +480,7 @@ Base.prototype.beforeSave = function (value) {
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
-			if (typeof this.fields[fields[i]] === "undefined") {
+			if (this.fields[fields[i]] === undefined) {
 				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 			}
 		}

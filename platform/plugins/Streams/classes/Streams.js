@@ -369,7 +369,7 @@ function Streams_request_handler (req, res, next) {
 	}
 	var participant, stream, msg, posted, streams, deviceId, title, k;
 	var userIds, invitingUserId, username, appUrl, parts, rest, label, myLabel;
-	var readLevel, writeLevel, adminLevel, displayName, expiry, logKey;
+	var readLevel, writeLevel, adminLevel, displayName, expireTime, logKey;
 	var clientId = parsed["Q.clientId"];
 	var stream = parsed.stream
 		&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
@@ -499,8 +499,9 @@ function Streams_request_handler (req, res, next) {
 				readLevel = parsed.readLevel || null;
 				writeLevel = parsed.writeLevel || null;
 				adminLevel = parsed.adminLevel || null;
+				permissions = parsed.permissions || null;
 				displayName = parsed.displayName || '';
-				expiry = parsed.expiry ? new Date(parsed.expiry*1000) : null;
+				expireTime = parsed.expireTime ? new Date(parsed.expireTime*1000) : null;
 			} catch (e) {
 				return res.send({data: false});
 			}
@@ -516,7 +517,7 @@ function Streams_request_handler (req, res, next) {
 				);
 			}
 
-			if (expiry && expiry <= new Date()) {
+			if (expireTime && expireTime <= new Date()) {
 			    break;
 			}
 			
@@ -557,7 +558,7 @@ function Streams_request_handler (req, res, next) {
 					"readLevel": readLevel,
 					"writeLevel": writeLevel,
 					"adminLevel": adminLevel,
-					"expireTime": expiry
+					"expireTime": expireTime
 				})).save(_inviteSaved);
 			}
 
@@ -573,7 +574,7 @@ function Streams_request_handler (req, res, next) {
 					"token": token,
 					"userId": userId,
 					"state": "pending",
-					"expireTime": expiry
+					"expireTime": expireTime
 				})).save(_invitedSaved);
 			}
 

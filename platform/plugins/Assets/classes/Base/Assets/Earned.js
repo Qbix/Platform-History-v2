@@ -225,7 +225,7 @@ Base.prototype.beforeSet_userId = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".userId");
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -263,7 +263,7 @@ Base.prototype.beforeSet_app = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".app");
+			throw new Error('Must pass a String to '+this.table()+".app");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".app");
 		return value;
@@ -301,7 +301,7 @@ Base.prototype.beforeSet_badge_name = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".badge_name");
+			throw new Error('Must pass a String to '+this.table()+".badge_name");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".badge_name");
 		return value;
@@ -333,6 +333,10 @@ return [["varchar","255","",false],false,"",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
+		if (!isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
 		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
 		return value;
 };
@@ -360,7 +364,7 @@ Base.prototype.beforeSet_associated_id = function (value) {
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a string to '+this.table()+".associated_id");
+			throw new Error('Must pass a String to '+this.table()+".associated_id");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".associated_id");
 		return value;
