@@ -21,7 +21,7 @@
  * @property {string|Db_Expression} $updatedTime
  * @property {string} $access_token
  * @property {string} $session_secret
- * @property {string} $session_expires
+ * @property {string|Db_Expression} $session_expires
  * @property {string} $state
  * @property {string} $provider_uid
  */
@@ -57,7 +57,7 @@ abstract class Base_Users_AppUser extends Db_Row
 	 */
 	/**
 	 * @property $session_expires
-	 * @type {string}
+	 * @type {string|Db_Expression}
 	 */
 	/**
 	 * @property $state
@@ -258,7 +258,7 @@ abstract class Base_Users_AppUser extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -565,12 +565,11 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
+	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_session_expires
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
 	 */
 	function beforeSet_session_expires($value)
 	{
@@ -580,21 +579,17 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('session_expires', $value);
 		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".session_expires");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".session_expires");
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDatetime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d h:i:s");
 		return array('session_expires', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the session_expires field
-	 * @return {integer}
-	 */
-	function maxSize_session_expires()
-	{
-
-		return 255;			
 	}
 
 	/**
@@ -607,8 +602,8 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
-    1 => '255',
+    0 => 'timestamp',
+    1 => '1023',
     2 => '',
     3 => false,
   ),

@@ -3006,18 +3006,13 @@ abstract class Streams extends Base_Streams
 			Streams_Rule::insertManyAndExecute($ruleRows);
 		}
 
-		foreach ($streamNames as $sn) {
-			$subscription = $subscriptions[$sn];
-			$stream = $streams2[$sn];
-			// skip error testing for rule save BUT inform node.
-			// Node can notify user to check the rules
-			Q_Utils::sendToNode(array(
-				"Q/method" => "Streams/Stream/subscribe",
-				"subscription" => Q::json_encode($subscription),
-				"stream" => Q::json_encode($stream->toArray()),
-				"rule" => isset($rules[$sn]) ? Q::json_encode($rules[$sn]) : null
-			));
-		}
+		$streams5 = Q::take($streams, $streamNames);
+		Q_Utils::sendToNode(array(
+			"Q/method" => "Streams/Stream/subscribe",
+			"subscriptions" => Q::json_encode($subscriptions),
+			"streams" => Q::json_encode($streams5),
+			"rules" => Q::json_encode($rules)
+		));
 		Streams_Message::postMessages($asUserId, $messages, true);
 		Streams_Message::postMessages($asUserId, array(
 			$asUserId => array('Streams/participating' => $pMessages)

@@ -29,23 +29,27 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type userId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type client_id
+ */
+/**
+ * @property {String|Buffer}
+ * @type state
  */
 /**
  * @property {String}
  * @type scope
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type redirect_uri
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type access_token
  */
 /**
@@ -214,6 +218,7 @@ Base.prototype.fieldNames = function () {
 	return [
 		"userId",
 		"client_id",
+		"state",
 		"scope",
 		"redirect_uri",
 		"access_token",
@@ -235,8 +240,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -257,7 +262,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -273,8 +278,8 @@ Base.prototype.beforeSet_client_id = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".client_id");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".client_id");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".client_id");
 		return value;
@@ -295,7 +300,45 @@ Base.prototype.maxSize_client_id = function () {
 	 */
 Base.column_client_id = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_state
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_state = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".state");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".state");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the state field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_state = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for state column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_state = function () {
+
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -349,8 +392,8 @@ Base.prototype.beforeSet_redirect_uri = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".redirect_uri");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".redirect_uri");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".redirect_uri");
 		return value;
@@ -371,7 +414,7 @@ Base.prototype.maxSize_redirect_uri = function () {
 	 */
 Base.column_redirect_uri = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -387,8 +430,8 @@ Base.prototype.beforeSet_access_token = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".access_token");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".access_token");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".access_token");
 		return value;
@@ -409,7 +452,7 @@ Base.prototype.maxSize_access_token = function () {
 	 */
 Base.column_access_token = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -420,7 +463,7 @@ return [["varchar","255","",false],false,"",null];
  */
 Base.prototype.beforeSet_insertedTime = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (!isNaN(value)) {
+		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
 			value = new Date(value < 10000000000 ? value * 1000 : value);
 		}
@@ -471,6 +514,27 @@ Base.prototype.maxSize_token_expires_seconds = function () {
 Base.column_token_expires_seconds = function () {
 
 return [["int","11","",false],true,"",null];
+};
+
+/**
+ * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+ * @method beforeSave
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
+ */
+Base.prototype.beforeSave = function (value) {
+	var fields = ['userId','client_id'], i;
+	if (!this._retrieved) {
+		var table = this.table();
+		for (i=0; i<fields.length; i++) {
+			if (this.fields[fields[i]] === undefined) {
+				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+			}
+		}
+	}
+	return value;
 };
 
 module.exports = Base;

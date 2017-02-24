@@ -1219,12 +1219,26 @@ class Q
 		return null;
 	}
 	
+	private static function toArrays($value)
+	{
+		$result = (is_object($value) and method_exists($value, 'toArray'))
+			? $value->toArray()
+			: $value;
+		if (is_array($result)) {
+			foreach ($result as $k => &$v) {
+				$v = self::toArrays($v);
+			}
+		}
+		return $result;
+	}
+	
 	/**
 	 * A wrapper for json_encode
 	 */
-	static function json_encode()
+	static function json_encode($value, $options = 0, $depth = 512)
 	{
-		$result = call_user_func_array('json_encode', func_get_args());
+		$value = self::toArrays($value);
+		$result = call_user_func('json_encode', $value, $options, $depth);
 		if ($result === false) {
 			if (is_callable('json_last_error')) {
 				throw new Q_Exception_JsonEncode(array(

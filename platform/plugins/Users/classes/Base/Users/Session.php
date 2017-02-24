@@ -251,7 +251,7 @@ abstract class Base_Users_Session extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -413,7 +413,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -467,7 +467,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -528,7 +528,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => NULL,
+  3 => '0',
 );			
 	}
 

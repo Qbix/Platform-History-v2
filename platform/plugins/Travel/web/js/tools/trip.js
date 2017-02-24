@@ -61,9 +61,9 @@ Q.Tool.define("Travel/trip", function Users_avatar_tool(options) {
 		var state = tool.state;
 		Q.Places.loadGoogleMaps(function () {
 			var properties = ['fromLocation', 'toLocation'];
-			var p = Q.pipe(FT, function (params, subjects) {
+			var p = Q.pipe(properties, function (params, subjects) {
 				if (!state.streamName) {
-					_composer(tool, place.fromLocation[0], place.fromLocation[0]);
+					_composer(tool, params.fromLocation[0], params.fromLocation[0]);
 				} else {
 					_player(tool, fromPlace, toPlace);
 				}
@@ -71,12 +71,11 @@ Q.Tool.define("Travel/trip", function Users_avatar_tool(options) {
 			Q.each(properties, function (property) {
 				var loc = state[property];
 				if (!loc) {
-					p.fill(property)(null);
+					return p.fill(property)(null);
 				}
 				var param = {};
 				if (typeof loc === 'string') {
 					var parts = loc.split(',');
-					var geocoder = new google.maps.Geocoder;
 					if (parts.length == 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
 						param.latlng = {
 							lat: parts[0],
@@ -96,6 +95,7 @@ Q.Tool.define("Travel/trip", function Users_avatar_tool(options) {
 						lng: loc.getAttribute('longitude')
 					};
 				}
+				var geocoder = new google.maps.Geocoder;
 				geocoder.geocode(param, function (results, status) {
 					if (status !== 'OK') {
 						throw new Q.Error("Travel/trip: Can't geocode " + loc);
