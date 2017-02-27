@@ -10205,6 +10205,7 @@ Q.Pointer = {
 	 * @param {boolean} [skipMask=false] Pass true here to skip showing
 	 *   the Q.click.mask for 300 milliseconds, which blocks any
 	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
+	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @return {boolean}
 	 */
 	cancelClick: function (event, extraInfo, skipMask) {
@@ -10212,7 +10213,9 @@ Q.Pointer = {
 			return false;
 		}
 		Q.Pointer.canceledClick = true;	
-		Q.Masks.show('Q.click.mask');
+		if (!skipMask) {
+			Q.Masks.show('Q.click.mask');
+		}
 	},
 	/**
 	 * Consistently obtains the element under pageX and pageY relative to document
