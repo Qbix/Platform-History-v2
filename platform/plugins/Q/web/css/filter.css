@@ -18,6 +18,7 @@
 	max-height: 100px;
 	overflow: auto;
 	position: absolute;
+	z-index: 9999; /* to overlap possible sibling elements */
 }
 
 .Q_filter_fullscreen .Q_placeholder {
