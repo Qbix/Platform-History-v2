@@ -34,8 +34,14 @@ Q.Tool.define("Places/location", function (options) {
 	var state = this.state;
 	state.mapElement = state.mapElement || $('<div />').appendTo(this.element)[0];
 	var p = Q.pipe(['google', 'filter'], function (params, subjects) {
-		var filter = tool.filter = subjects.filter;
-		var service = tool.service = new google.maps.places.PlacesService(state.mapElement);
+		tool.service = new google.maps.places.PlacesService(state.mapElement);
+		tool.refresh();
+	});
+	Q.Places.loadGoogleMaps(p.fill('google'));
+	$('<div />').tool('Q/filter', state.filter)
+	.appendTo(tool.element)
+	.activate(function () {
+		var filter = tool.filter = this;
 		filter.state.onFilter.set(function (query, element) {
 			var latest = Q.latest(filter);
 			_getResults(query, function ($content) {
@@ -59,12 +65,8 @@ Q.Tool.define("Places/location", function (options) {
 		filter.state.onClear.set(function () {
 			tool.$('.Places_address_text').empty().hide();
 		}, tool);
-		tool.refresh();
+		p.fill('filter')(this);
 	});
-	Q.Places.loadGoogleMaps(p.fill('google'));
-	$('<div />').tool('Q/filter', state.filter)
-	.appendTo(tool.element)
-	.activate(p.fill('filter'));
 	$('<div class="Places_address_text "/>').appendTo(tool.element);
 },
 
@@ -168,7 +170,7 @@ function _getResults(query, callback) {
 		return callback(_results[query]);
 	}
 	if (!query) {
-		return callback('Loading...');
+		return callback('');
 	}
 	Q.req('Places/autocomplete', 'results',
 	function (err, data) {
