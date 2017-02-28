@@ -10558,7 +10558,7 @@ Q.Dialogs = {
 	 *  @param {Q.Event} [options.onClose] Optional. Q.Event or function which is 
 	 *   called when dialog is closed and hidden and probably 
 	 *   removed from DOM (if 'removeOnClose' is 'true').
-	 * @return {Object} jQuery object representing DOM element of the dialog that was just pushed.
+	 * @return {HTMLElement} The HTML element of the dialog that was just pushed.
 	 */
 	push: function(options) {
 		var maskDefault = true;
@@ -10577,7 +10577,7 @@ Q.Dialogs = {
 		} else {
 			_proceed1(o.content);
 		}
-		return $dialog;
+		return $dialog[0];
 		function _proceed1(content) {
 			if (o.stylesheet) {
 				Q.addStylesheet(o.stylesheet, function () { _proceed2(content); })
@@ -10647,7 +10647,7 @@ Q.Dialogs = {
 	 * @static
      * @method pop
 	 * @param {boolean} dontTriggerClose is for internal use only
-	 * @return {Object}  jQuery object representing DOM element of the dialog that was just popped.
+	 * @return {HTMLElement} The HTML element of the dialog that was just popped.
 	 */
 	pop: function(dontTriggerClose) {
 		if (dontTriggerClose === undefined) {
@@ -10669,7 +10669,7 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
-		return $dialog;
+		return $dialog[0];
 	}
 
 };
