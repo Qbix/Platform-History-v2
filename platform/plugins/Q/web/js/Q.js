@@ -11402,7 +11402,7 @@ function _addHandlebarsHelpers() {
 				Q.extend(o, this['id:'+id]);
 			}
 			if (typeof id === 'string' || typeof id === 'number') {
-				id = prefix + name.split('/').join('_') + (id !== '' ? '-'+id : '');
+				id = name.split('/').join('_') + (id !== '' ? '-'+id : '');
 			}
 			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
 		});

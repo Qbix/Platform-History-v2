@@ -65,6 +65,7 @@ Q.Tool.define("Places/location", function (options) {
 		filter.state.onClear.set(function () {
 			tool.$('.Places_address_text').empty().hide();
 			tool.place = null;
+			Q.handle(state.onChoose, tool, [null]);
 		}, tool);
 		p.fill('filter')(this);
 	});
