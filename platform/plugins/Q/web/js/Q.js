@@ -10532,6 +10532,8 @@ Q.Dialogs = {
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
+     * @param {String|Array} [options.stylesheet] Any stylesheets to load before dialog, to prevent Flash of Unstyled Content.
+	 *  should show the "apply" style button to close dialog
 	 *	@param {boolean} [options.fullscreen] Defaults to true only on Android
 	 *   and false on all other platforms. 
 	 *   If true, dialog will be shown not as overlay but instead will be 
@@ -10569,14 +10571,21 @@ Q.Dialogs = {
 		if (o.template) {
 			Q.Template.render(o.template.name, function (err, html) {
 				if (!err) {
-					_proceed(html);
+					_proceed1(html);
 				}
 			}, o.template.fields);
 		} else {
-			_proceed(o.content);
+			_proceed1(o.content);
 		}
 		return $dialog;
-		function _proceed(content) {
+		function _proceed1(content) {
+			if (o.stylesheet) {
+				Q.addStylesheet(o.stylesheet, function () { _proceed2(content); })
+			} else {
+				_proceed2(content);
+			}
+		}
+		function _proceed2(content) {
 			var $h2, $title, $content;
 			if (!$dialog.length) {
 				// create this dialog element
