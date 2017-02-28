@@ -49,6 +49,14 @@
 		"web": {
 			"languages": {"en": 1}
 		},
+		"bundle": {
+			"exclude": {
+				"MyApp": [
+					"action.php", "batch.php", "index.php", "fast.php", "Q.inc.php",
+					".htaccess", "uploads"
+				]
+			}
+		},
 		"environments": {
 			"live": {
 				"files": {
