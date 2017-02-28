@@ -64,6 +64,7 @@ Q.Tool.define("Places/location", function (options) {
 		}, tool);
 		filter.state.onClear.set(function () {
 			tool.$('.Places_address_text').empty().hide();
+			tool.place = null;
 		}, tool);
 		p.fill('filter')(this);
 	});
