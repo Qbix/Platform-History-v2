@@ -3403,10 +3403,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			src40 = src50 = src = src80 = priv.registerInfo.pic;
 		}
 	}
-	var img = $('<img />').attr('src', src).attr('title', Q.text.Streams.login.picTooltip);
-	if (img.tooltip) {
-		img.tooltip();
-	}
+	var $img = $('<img />').attr('src', src)
+		.attr('title', Q.text.Streams.login.picTooltip);
 	var $td = $('<td class="Streams_login_username_block" />');
 	if (Q.text.Streams.login.prompt) {
 		$td.append(
@@ -3422,7 +3420,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	)
 	var table = $('<table />').append(
 		$('<tr />').append(
-			$('<td class="Streams_login_picture" />').append(img)
+			$('<td class="Streams_login_picture" />').append($img)
 		).append($td)
 	);
 	var register_form = $('<form method="post" class="Users_register_form" />')
@@ -3925,7 +3923,7 @@ Q.onInit.add(function _Streams_onInit() {
 							}, 100);
 						}
 						var $complete_form = dialog.find('form')
-						.validator()
+						.plugin('Q/validator')
 						.submit(function(e) {
 							e.preventDefault();
 							var baseUrl = Q.baseUrl({
@@ -3936,7 +3934,7 @@ Q.onInit.add(function _Streams_onInit() {
 							Q.req(url, ['data'], function _Streams_basic(err, data) {
 								var msg = Q.firstErrorMessage(err, data);
 								if (data && data.errors) {
-									$complete_form.data('validator').invalidate(
+									$complete_form.plugin('validator', 'invalidate',
 										Q.ajaxErrors(data.errors, ['fullName'])
 									);
 									$('input', $complete_form).eq(0)
@@ -3945,7 +3943,7 @@ Q.onInit.add(function _Streams_onInit() {
 								} else if (msg) {
 									return alert(msg);
 								}
-								$complete_form.data('validator').reset();
+								$complete_form.plugin('Q/validator', 'reset');
 								dialog.data('Q/dialog').close();
 								var params = {
 									evenIfNotRetained: true,

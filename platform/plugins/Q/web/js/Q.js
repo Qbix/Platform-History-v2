@@ -3832,19 +3832,25 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 	function _onJQuery() {
 		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
+			var key = n + ' state', args;
 			if (typeof options === 'string') {
 				var method = options;
-				if (jQueryPluginConstructor.methods[method]) {
-					// invoke method on this with arguments
-					return jQueryPluginConstructor.methods[method].apply(
-						this, Array.prototype.slice.call(arguments, 1)
-					);
+				if (!jQueryPluginConstructor.methods[method]) {
+					return this;
 				}
+				args = Array.prototype.slice.call(arguments, 1);
+				$(this).each(function () {
+					var $this = $(this);
+					if ($this.data(key)) {
+						// This jQuery plugin was already applied, so now we can
+						// invoke a method on this with arguments
+						return jQueryPluginConstructor.methods[method].apply($this, args);
+					}
+				});
 			} else {
-				var args = Array.prototype.slice.call(arguments, 0);
+				args = Array.prototype.slice.call(arguments, 0);
 				args[0] = Q.extend({}, 10, jQueryPluginConstructor.options, 10, options);
 				$(this).each(function () {
-					var key = n + ' state';
 					var $this = $(this);
 					if ($this.data(key)) {
 						// This jQuery plugin was already applied here,
@@ -6339,7 +6345,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
  *  Optional. An array of field names to restrict ourselves to.
  *  For each error, if none of the fields apply, then the error
  *  is assigned to the field named first in this array.
- * @return {Object}
+ * @return {Object} Contains {fieldName: errorMessage} pairs.
  */
 Q.ajaxErrors = function _Q_ajaxErrors(errors, fields) {
 	var result = {};
@@ -11243,39 +11249,7 @@ Q.onInit.add(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
 	}, 'Q.Socket');
-	
-	//jQuery Tools tooltip and validator plugins configuration
-	var tooltipConf = Q.getObject("jQuery.tools.tooltip.conf", root);
-	if (tooltipConf) {
-		tooltipConf.tipClass = 'Q_tooltip';
-		tooltipConf.effect = 'fade';
-		tooltipConf.opacity = 1;
-		tooltipConf.position = 'bottom center';
-		tooltipConf.offset = [0, 0];
-	}
-	var validatorConf = Q.getObject("jQuery.tools.validator.conf", root);
-	if (validatorConf) {
-		validatorConf.errorClass = 'Q_errors';
-		validatorConf.messageClass = 'Q_error_message';
-		validatorConf.position = 'bottom left';
-		validatorConf.offset = [0, 0];
-		validatorConf.onFail = function (event, errors) {
-			setTimeout(function () {
-				Q.each(errors, function () {
-					var $message = this.input.data('msg.el');
-					if ($message) {
-						this.input.parents().each(function () {
-							if ($(this).siblings().filter($message).length) {
-								$message.css('z-index', $(this).css('z-index') + 1);
-							}
-						});
-					}
-				});
-			}, 0);
-		}
-	}
-	// end of jQuery Tools configuration
-	
+
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -11318,7 +11292,8 @@ Q.onJQuery.add(function ($) {
 		"Q/scroller": "plugins/Q/js/fn/scroller.js",
 		"Q/touchscroll": "plugins/Q/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "plugins/Q/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "plugins/Q/js/fn/sortable.js"
+		"Q/sortable": "plugins/Q/js/fn/sortable.js",
+		"Q/validator": "plugins/Q/js/fn/validator.js"
 	});
 	
 	Q.onLoad.add(function () {
