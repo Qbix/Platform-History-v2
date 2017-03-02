@@ -10750,7 +10750,7 @@ Q.alert = function(message, options) {
 Q.confirm = function(message, callback, options) {
 	var o = Q.extend({}, Q.confirm.options, options);
 	var buttonClicked = false;
-	var $dialog = Q.Dialogs.push(Q.extend({
+	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
@@ -10767,6 +10767,7 @@ Q.confirm = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
+	var $dialog = $(dialog);
 	$dialog.find('.Q_buttons button:first').on(Q.Pointer.end, function() {
 		buttonClicked = true;
 		Q.Dialogs.pop();
@@ -10816,7 +10817,7 @@ Q.prompt = function(message, callback, options) {
 	if (options === undefined) options = {};
 	var o = Q.extend({}, Q.prompt.options, options);
 	var buttonClicked = false;
-	var $dialog = Q.Dialogs.push(Q.extend({
+	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
@@ -10850,6 +10851,7 @@ Q.prompt = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': false
 	}, options));
+	var $dialog = $(dialog);
 	$dialog.find('button').on(Q.Pointer.click, _done);
 	return $dialog;
 };
