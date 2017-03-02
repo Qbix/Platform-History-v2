@@ -58,11 +58,7 @@ Q.Tool.define("Streams/basic", function(options) {
 		});
 	}
 
-	$('form', tool).validator({
-		onFail: function(a, b) {
-
-		}
-	}).submit(function() {
+	$('form', tool).plugin('Q/validator').submit(function() {
 		var $this = $(this);
 		$('input', $this).css({
 			'background-image': 'url(' +Q.url('/plugins/Q/img/throbbers/loading.gif') + ')',
@@ -73,7 +69,7 @@ Q.Tool.define("Streams/basic", function(options) {
 			$('input', $this).css('background-image', 'none');
 			if (response.errors) {
 				// there were errors
-				$this.data("validator").reset().invalidate(Q.ajaxErrors(
+				$this.plugin('Q/validator', 'invalidate', Q.ajaxErrors(
 					response.errors,
 					['firstName', 'lastName', 'gender', 'birthday_year', 'birthday_month', 'birthday_day']
 				));
@@ -82,12 +78,12 @@ Q.Tool.define("Streams/basic", function(options) {
 				.add('textarea.Q_errors', $this)
 				.add('button', $this)
 				.on('input change', function () {
-					$this.data("validator").reset($(this));
+					$this.plugin("Q/validator", "reset", $(this));
 				}).eq(0).focus();
 				return;
 			}
 			// success!
-			$this.data('validator').reset();
+			$this.plugin('Q/validator', 'reset');
 			if (options.onSuccess) {
 				Q.handle(options.onSuccess);
 			} else {

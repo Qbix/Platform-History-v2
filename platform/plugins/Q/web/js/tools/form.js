@@ -134,8 +134,8 @@ Q.Tool.define('Q/form', function(options) {
 			tool.state.loader(action, method, form.serialize(), tool.state.slotsToRequest, onResponse);
 		});
 		$('input', form).add('select', form).on('input', function () {
-			if (form.data('validator')) {
-				form.data('validator').reset($(this));
+			if (form.state('Q/validator')) {
+				form.plugin('Q/validator', 'reset', $(this));
 			}
 		});
 		form.data('Q/form tool', tool);
