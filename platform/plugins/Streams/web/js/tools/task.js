@@ -19,7 +19,7 @@ Q.Tool.define("Streams/task", function(options) {
 	var state = tool.state;
 	Q.Streams.get(state.publisherId, state.streamName, function (err) {
 		if (err) return;
-		this.onUpdated('progress').set(function (attributes, k) {
+		this.onAttribute('progress').set(function (attributes, k) {
 			tool.refresh(attributes);
 		}, tool);
 		tool.stream = this
