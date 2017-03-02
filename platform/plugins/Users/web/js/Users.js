@@ -60,7 +60,8 @@ Q.text.Users = {
 			passphrase: 100
 		},
 		confirmTerms: "Accept the Terms of Service?",
-		facebookNoEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way."
+		facebookNoEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+		picTooltip: "You can change this picture later"
 	},
 	
 	setIdentifier: {
@@ -931,13 +932,15 @@ function login_callback(err, response) {
 
 	if (response.errors) {
 		// There were errors
-		form.data('validator').invalidate(Q.ajaxErrors(response.errors, ['identifier']));
+		form.plugin('Q/validator', 'invalidate', 
+			Q.ajaxErrors(response.errors, ['identifier'])
+		);
 		identifier_input.plugin('Q/clickfocus');
 		return;
 	}
 
 	// Remove any errors we may have displayed
-	form.data('validator').reset();
+	form.plugin('Q/validator', 'reset');
 	identifier_input.blur();
 
 	var json = response.slots.data;
@@ -1024,7 +1027,7 @@ function login_callback(err, response) {
 			if (err || (response && response.errors)) {
 				// there were errors
 				if (response && response.errors) {
-					$this.data('validator').invalidate(
+					$this.plugin('Q/validator', 'invalidate',
 						Q.ajaxErrors(response.errors, [first_input.attr('name')]
 					));
 				}
@@ -1106,8 +1109,7 @@ function login_callback(err, response) {
 										.click(function () {
 											$('form', login_setupDialog.dialog)
 											.each(function() {
-												var v = $(this).data('validator');
-												if (v) v.reset();
+												$(this).plugin('Q/validator', 'reset');
 											});
 											login_setupDialog.dialog.data('Q/dialog').close();		
 										})
@@ -1158,13 +1160,11 @@ function login_callback(err, response) {
 				src40 = src50 = src = src80 = priv.registerInfo.pic;
 			}
 		}
-		var img = $('<img />').attr('src', src).attr('title', 'You can change this picture later');
-		if (img.tooltip) {
-			img.tooltip();
-		}
+		var $img = $('<img />').attr('src', src)
+			.attr('title', Q.text.Streams.login.picTooltip);
 		var td, table = $('<table />').append(
 			$('<tr />').append(
-				$('<td class="Users_login_picture" />').append(img)
+				$('<td class="Users_login_picture" />').append($img)
 			).append(
 				td = $('<td class="Users_login_username_block" />').append(
 					$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
@@ -1283,13 +1283,11 @@ function login_callback(err, response) {
 	$('#Users_login_step1').animate({"opacity": 0.5}, 'fast');
 	$('#Users_login_step1 .Q_button').attr('disabled', 'disabled');
 	if (!autologin) {
-		step2_form.validator().submit(function (e) {
+		step2_form.plugin('Q/validator').submit(function (e) {
 			e.preventDefault();
 		}).submit(Q.throttle(onFormSubmit, 300));
 		$('input', step2_form).add('select', step2_form).on('input', function () {
-			if (step2_form.data('validator')) {
-				step2_form.data('validator').reset($(this));
-			}
+			step2_form.plugin('Q/validator', 'reset', this);
 		});
 	}
 	if (priv.linkToken) {
@@ -1410,7 +1408,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 		});
 	}
 
-	step1_form.validator();
+	step1_form.plugin('Q/validator');
 	var step1_usingProviders_div = $('<div id="Users_login_usingProviders" />');
 	var providerCount = 0;
 	for (var i = 0; i < usingProviders.length; ++i) {
@@ -1484,9 +1482,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	}
 
 	$('input', step1_form).add('select', step1_form).on('input', function () {
-		if (step1_form.data('validator')) {
-			step1_form.data('validator').reset($(this));
-		}
+		step1_form.plugin('Q/validator', 'reset', this);
 	});
 	
 	var dialog = $('<div id="Users_login_dialog" class="Users_login_dialog" />');
@@ -1515,8 +1511,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 		{
 			$('#Users_login_step1 .Q_button').removeAttr('disabled');
 			$('form', dialog).each(function() {
-				var v = $(this).data('validator');
-				if (v) v.reset();
+				$(this).plugin('Q/validator', 'reset');
 			});
 			$('#Users_login_step1').nextAll().hide();
 			if (!priv.login_connected && priv.login_onCancel) {
@@ -1539,10 +1534,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 		var $nextAll = $('#Users_login_step1').nextAll();
 		if ($nextAll.is(':visible')) {
 			$nextAll.slideUp('fast').each(function() {
-				var v = $('form', $(this)).data('validator');
-				if (v) {
-					v.reset();
-				}
+				$('form', $(this)).plugin('Q/validator', 'reset');
 			});
 		}
 		if ($('#Users_login_usingProviders').css('display') === 'none') {
@@ -1561,7 +1553,7 @@ function setIdentifier_callback(err, response) {
 	if (msg) {
 		// There were errors
 		Q.handle(priv.setIdentifier_onCancel, this, [err, response]);
-		form.data('validator').invalidate(
+		form.plugin('Q/validator', 'invalidate',
 			Q.ajaxErrors(response.errors, 'identifier')
 		);
 		identifier_input.plugin('Q/clickfocus');
@@ -1569,7 +1561,7 @@ function setIdentifier_callback(err, response) {
 	}
 
 	// Remove any errors we may have displayed
-	form.data('validator').reset();
+	form.plugin('Q/validator', 'reset');
 	
 	Q.handle(priv.setIdentifier_onSuccess);
 
@@ -1626,7 +1618,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 			value: options.userId
 		}));
 	}
-	step1_form.validator();
+	step1_form.plugin('Q/validator');
 	
 	var dialog = $('<div id="Users_setIdentifier_dialog" class="Users_setIdentifier_dialog" />');
 	var titleSlot = $('<div class="Q_title_slot">').append(
@@ -1650,10 +1642,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 		onClose: function()
 		{
 			$('form', dialog).each(function() {
-				var v = $(this).data('validator');
-				if (v) {
-					v.reset();
-				}
+				$(this).plugin('Q/validator', 'reset');
 			});
 			if (priv.setIdentifier_onCancel) {
 				priv.setIdentifier_onCancel();

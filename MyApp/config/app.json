@@ -49,6 +49,14 @@
 		"web": {
 			"languages": {"en": 1}
 		},
+		"bundle": {
+			"exclude": {
+				"MyApp": [
+					"action.php", "batch.php", "index.php", "fast.php", "Q.inc.php",
+					".htaccess", "uploads"
+				]
+			}
+		},
 		"environments": {
 			"live": {
 				"files": {
@@ -57,7 +65,6 @@
 					"plugins/Streams/css/Streams.css": "all.css",
 					"css/MyApp.css": "all.css",
 					"plugins/Q/js/jquery-1.11.1.min.js": "all.js",
-					"plugins/Q/js/jquery.tools.min.js": "all.js",
 					"plugins/Q/js/handlebars-v4.0.5.js": "all.js",
 					"plugins/Q/js/Q.js": "all.js",
 					"plugins/Users/js/Users.js": "all.js",
