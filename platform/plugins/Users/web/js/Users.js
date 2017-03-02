@@ -1315,7 +1315,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	var step2_div = $('<div id="Users_login_step2" class="Q_big_prompt" />');
 	// step1_form request identifier
 	var placeholder = Q.text.Users.login.placeholders.identifier;
-	var type = 'email';
+	var type = Q.info.isTouchscreen ? 'email' : 'text';
 	var parts = identifierType ? identifierType.split(',') : [];
 	if (parts.length === 1) {
 		if (parts[0] == 'email') {
