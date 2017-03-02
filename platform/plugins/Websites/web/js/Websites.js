@@ -111,12 +111,12 @@ Q.Tool.define({
 Q.page('', function () {
 	var streamName = Websites.seoStreamName;
 	var publisherId = Q.plugins.Websites.userId;
-	Q.Streams.Stream.onUpdated(publisherId, streamName, "title")
+	Q.Streams.Stream.onAttribute(publisherId, streamName, "title")
 	.set(function (attributes, k) {
 		document.title = attributes[k];
 	}, "Websites");
 	if (Websites.seoReload) {
-		Q.Streams.Stream.onUpdated(publisherId, streamName, "url")
+		Q.Streams.Stream.onAttribute(publisherId, streamName, "url")
 		.set(function (attributes, k) {
 			var tail = attributes[k];
 			if (tail && location !== Q.url(tail)) {
@@ -127,7 +127,7 @@ Q.page('', function () {
 		}, "Websites");
 	}
 	return function () {
-		Q.Streams.Stream.onUpdated(
+		Q.Streams.Stream.onAttribute(
 			Q.plugins.Websites.userId, Websites.seoStreamName, "title"
 		).remove("Websites");
 	}

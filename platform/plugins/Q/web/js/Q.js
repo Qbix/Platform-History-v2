@@ -3832,19 +3832,25 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 	function _onJQuery() {
 		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
+			var key = n + ' state', args;
 			if (typeof options === 'string') {
 				var method = options;
-				if (jQueryPluginConstructor.methods[method]) {
-					// invoke method on this with arguments
-					return jQueryPluginConstructor.methods[method].apply(
-						this, Array.prototype.slice.call(arguments, 1)
-					);
+				if (!jQueryPluginConstructor.methods[method]) {
+					return this;
 				}
+				args = Array.prototype.slice.call(arguments, 1);
+				$(this).each(function () {
+					var $this = $(this);
+					if ($this.data(key)) {
+						// This jQuery plugin was already applied, so now we can
+						// invoke a method on this with arguments
+						return jQueryPluginConstructor.methods[method].apply($this, args);
+					}
+				});
 			} else {
-				var args = Array.prototype.slice.call(arguments, 0);
+				args = Array.prototype.slice.call(arguments, 0);
 				args[0] = Q.extend({}, 10, jQueryPluginConstructor.options, 10, options);
 				$(this).each(function () {
-					var key = n + ' state';
 					var $this = $(this);
 					if ($this.data(key)) {
 						// This jQuery plugin was already applied here,
@@ -6339,7 +6345,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
  *  Optional. An array of field names to restrict ourselves to.
  *  For each error, if none of the fields apply, then the error
  *  is assigned to the field named first in this array.
- * @return {Object}
+ * @return {Object} Contains {fieldName: errorMessage} pairs.
  */
 Q.ajaxErrors = function _Q_ajaxErrors(errors, fields) {
 	var result = {};
@@ -10532,6 +10538,8 @@ Q.Dialogs = {
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
+     * @param {String|Array} [options.stylesheet] Any stylesheets to load before dialog, to prevent Flash of Unstyled Content.
+	 *  should show the "apply" style button to close dialog
 	 *	@param {boolean} [options.fullscreen] Defaults to true only on Android
 	 *   and false on all other platforms. 
 	 *   If true, dialog will be shown not as overlay but instead will be 
@@ -10556,7 +10564,7 @@ Q.Dialogs = {
 	 *  @param {Q.Event} [options.onClose] Optional. Q.Event or function which is 
 	 *   called when dialog is closed and hidden and probably 
 	 *   removed from DOM (if 'removeOnClose' is 'true').
-	 * @return {Object} jQuery object representing DOM element of the dialog that was just pushed.
+	 * @return {HTMLElement} The HTML element of the dialog that was just pushed.
 	 */
 	push: function(options) {
 		var maskDefault = true;
@@ -10569,14 +10577,21 @@ Q.Dialogs = {
 		if (o.template) {
 			Q.Template.render(o.template.name, function (err, html) {
 				if (!err) {
-					_proceed(html);
+					_proceed1(html);
 				}
 			}, o.template.fields);
 		} else {
-			_proceed(o.content);
+			_proceed1(o.content);
 		}
-		return $dialog;
-		function _proceed(content) {
+		return $dialog[0];
+		function _proceed1(content) {
+			if (o.stylesheet) {
+				Q.addStylesheet(o.stylesheet, function () { _proceed2(content); })
+			} else {
+				_proceed2(content);
+			}
+		}
+		function _proceed2(content) {
 			var $h2, $title, $content;
 			if (!$dialog.length) {
 				// create this dialog element
@@ -10638,7 +10653,7 @@ Q.Dialogs = {
 	 * @static
      * @method pop
 	 * @param {boolean} dontTriggerClose is for internal use only
-	 * @return {Object}  jQuery object representing DOM element of the dialog that was just popped.
+	 * @return {HTMLElement} The HTML element of the dialog that was just popped.
 	 */
 	pop: function(dontTriggerClose) {
 		if (dontTriggerClose === undefined) {
@@ -10660,7 +10675,7 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
-		return $dialog;
+		return $dialog[0];
 	}
 
 };
@@ -11234,39 +11249,7 @@ Q.onInit.add(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
 	}, 'Q.Socket');
-	
-	//jQuery Tools tooltip and validator plugins configuration
-	var tooltipConf = Q.getObject("jQuery.tools.tooltip.conf", root);
-	if (tooltipConf) {
-		tooltipConf.tipClass = 'Q_tooltip';
-		tooltipConf.effect = 'fade';
-		tooltipConf.opacity = 1;
-		tooltipConf.position = 'bottom center';
-		tooltipConf.offset = [0, 0];
-	}
-	var validatorConf = Q.getObject("jQuery.tools.validator.conf", root);
-	if (validatorConf) {
-		validatorConf.errorClass = 'Q_errors';
-		validatorConf.messageClass = 'Q_error_message';
-		validatorConf.position = 'bottom left';
-		validatorConf.offset = [0, 0];
-		validatorConf.onFail = function (event, errors) {
-			setTimeout(function () {
-				Q.each(errors, function () {
-					var $message = this.input.data('msg.el');
-					if ($message) {
-						this.input.parents().each(function () {
-							if ($(this).siblings().filter($message).length) {
-								$message.css('z-index', $(this).css('z-index') + 1);
-							}
-						});
-					}
-				});
-			}, 0);
-		}
-	}
-	// end of jQuery Tools configuration
-	
+
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -11309,7 +11292,8 @@ Q.onJQuery.add(function ($) {
 		"Q/scroller": "plugins/Q/js/fn/scroller.js",
 		"Q/touchscroll": "plugins/Q/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "plugins/Q/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "plugins/Q/js/fn/sortable.js"
+		"Q/sortable": "plugins/Q/js/fn/sortable.js",
+		"Q/validator": "plugins/Q/js/fn/validator.js"
 	});
 	
 	Q.onLoad.add(function () {
@@ -11393,7 +11377,7 @@ function _addHandlebarsHelpers() {
 				Q.extend(o, this['id:'+id]);
 			}
 			if (typeof id === 'string' || typeof id === 'number') {
-				id = prefix + name.split('/').join('_') + (id !== '' ? '-'+id : '');
+				id = name.split('/').join('_') + (id !== '' ? '-'+id : '');
 			}
 			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
 		});

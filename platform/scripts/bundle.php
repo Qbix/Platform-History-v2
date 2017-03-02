@@ -21,6 +21,8 @@ $usage
 
 EOT;
 
+$app = Q::app();
+
 #Is it a call for help?
 if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h')))
 	die($help);
@@ -48,7 +50,10 @@ foreach ($pluginNames as $src) {
 	}
 	$dest = $pluginsDir.DS.$pluginName;
 	if (!is_dir($dest)) {
-		die ("Could not create $dest\n");
+		mkdir($dest);
+		if (!is_dir($dest)) {
+			die ("Could not create $dest\n");
+		}
 	}
 	$dest = realpath($dest);
 	echo "Syncing $pluginName...\n";
@@ -63,3 +68,17 @@ foreach ($pluginNames as $src) {
 	}
 	exec ("rsync -az --copy-links $options $src/* $dest\n");
 }
+
+echo "Syncing $app...\n";
+$src = APP_WEB_DIR;
+$dest = $dir;
+$exclude = Q_Config::get("Q", "bundle", "exclude", $app, array());
+$exclude[] = 'plugins';
+foreach ($exclude as $e) {
+	$excludePath = "$e";
+	if (!realpath($src.DS.$excludePath)) {
+		echo "\n  (Warning: missing $excludePath)\n";
+	}
+	$options .= " --exclude=" . escapeshellarg($e);
+}
+exec ("rsync -az --copy-links $options $src/* $dest\n");
