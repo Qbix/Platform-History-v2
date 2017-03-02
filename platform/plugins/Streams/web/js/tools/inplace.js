@@ -95,7 +95,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 
 		if (state.attribute) {
 			state.field = 'attributes['+encodeURIComponent(state.attribute)+']';
-			stream.onUpdated(state.attribute).set(function (attributes, k) {
+			stream.onAttribute(state.attribute).set(function (attributes, k) {
 				if (attributes[k] !== null) {
 					_setContent(attributes[k]);
 				} else {
