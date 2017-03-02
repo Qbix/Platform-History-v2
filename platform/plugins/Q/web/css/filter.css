@@ -74,3 +74,7 @@
 .Q_filter_tool .Q_filter_results tr:hover {
 	background: #ccc; cursor: pointer;
 }
+
+.Q_filter_hide {
+	display: none !important;
+}

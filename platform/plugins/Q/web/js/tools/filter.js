@@ -53,9 +53,7 @@ Q.Tool.define('Q/filter', function (options) {
 		if (wasAlreadyFocused) return;
 		var that = this;
 		wasAlreadyFocused = true;
-		setTimeout(function () {
-			_changed.call(that, event);
-		}, 0);
+		_changed.call(that, event);
 	}).on('blur', function () {
 		wasAlreadyFocused = false;
 		setTimeout(function () {
@@ -221,13 +219,9 @@ Q.Tool.define('Q/filter', function (options) {
 				.insertAfter($te);
 			$te.addClass('Q_filter_begun')
 				.prependTo('body');
-			$te.nextAll().not('.Q_mask').each(function () {
-				var $this = $(this);
-				$this.data('Q/filter display', $this.css('display'));
-				$this.css('display', 'none');
-			});
+			$te.nextAll().addClass('Q_filter_hide');
 			Q.Masks.show(tool);
-			tool.$input.val('').trigger('Q_refresh').plugin('Q/clickfocus');
+			tool.$input.trigger('Q_refresh').plugin('Q/clickfocus');
 			setTimeout(function () {
 				tool.suspended = false;
 			}, 10);
@@ -275,11 +269,7 @@ Q.Tool.define('Q/filter', function (options) {
 			$te.removeClass('Q_filter_begun');
 			tool.$results.hide();
 			if (state.fullscreen) {
-				$te.nextAll().not('.Q_mask').each(function () {
-					var $this = $(this);
-					$this.css('display', $this.data('Q/filter display'))
-						.removeData('Q/filter display');
-				});
+				$te.nextAll().removeClass('Q_filter_hide');
 				$te.insertAfter(tool.$placeholder);
 				tool.$placeholder.remove();
 				tool.$input.blur();
