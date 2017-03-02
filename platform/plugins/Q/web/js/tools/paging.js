@@ -4,7 +4,7 @@
  */
 	
 /**
- * Implements a way to display a paging
+ * Implements a way to display a paging indicator, especially on a mobile phone
  * @class Q paging
  * @constructor
  * @param {Object} [options] Override various options for this tool

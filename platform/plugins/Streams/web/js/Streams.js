@@ -206,7 +206,7 @@ var _beforeSetHandlers = {};
 var _beforeSetAttributeHandlers = {};
 var _streamMessageHandlers = {};
 var _streamFieldChangedHandlers = {};
-var _streamUpdatedHandlers = {};
+var _streamAttributeHandlers = {};
 var _streamClosedHandlers = {};
 var _streamRelatedFromHandlers = {};
 var _streamRelatedToHandlers = {};
@@ -281,7 +281,7 @@ Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 /**
  * Returns Q.Event that should be used to update any stream representations.
  * If you are already handling the Streams.Stream.onFieldChanged
- * and Streams.Stream.onUpdated events, however, then you don't need to
+ * and Streams.Stream.onAttribute events, however, then you don't need to
  * also add a handler to this event, because they are called during the refresh anyway.
  * @event onRefresh
  * @param {String} type type of the stream being refreshed on the client side
@@ -1784,7 +1784,7 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 			Streams.onError.handle.call(this, msg, args);
 			return Q.handle(callback, this, [msg, args]);
 		}
-		// the rest will occur in the handler for the stream.onUpdated event
+		// the rest will occur in the handler for the stream.onAttribute event
 		// coming from the socket
 		var s = data.slots.stream || null;
 		if (s) {
@@ -1927,23 +1927,20 @@ Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""
 
 /**
  * Returns Q.Event which occurs when attributes of the stream officially updated
- * @event onUpdated
+ * @event onAttribute
  * @static
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
  * @param {String} [attributeName] name of the attribute to listen for
  */
-Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
+Stream.onAttribute = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
 
 /**
- * Returns Q.Event which occurs when attributes of the stream officially updated
+ * Alias for onAttribute for backward compatibility
  * @event onUpdated
  * @static
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [attributeName] name of the attribute to listen for
  */
-Stream.onUpdated = Q.Event.factory(_streamUpdatedHandlers, ["", "", ""]);
+Stream.onUpdated = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
 
 /**
  * Returns Q.Event which occurs when a stream has been closed
@@ -2040,12 +2037,18 @@ Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
 /**
  * Event factory for listening to attributes based on name.
  * 
- * @event onUpdated
+ * @event onAttribute
  * @param {String} attribute can be "" to get triggered for all attributes
  */
-Sp.onUpdated = function _Stream_prototype_onUpdated (attribute) {
-	return Stream.onUpdated(this.fields.publisherId, this.fields.name, attribute);
+Sp.onAttribute = function _Stream_prototype_onAttribute (attribute) {
+	return Stream.onAttribute(this.fields.publisherId, this.fields.name, attribute);
 };
+
+/**
+ * Alias for onAttribute for backward compatibility
+ * @event onUpdated
+ */
+Sp.onUpdated = Sp.onAttribute;
 
 /**
  * Event factory for listening for changed stream fields based on name.
@@ -3403,10 +3406,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			src40 = src50 = src = src80 = priv.registerInfo.pic;
 		}
 	}
-	var img = $('<img />').attr('src', src).attr('title', Q.text.Streams.login.picTooltip);
-	if (img.tooltip) {
-		img.tooltip();
-	}
+	var $img = $('<img />').attr('src', src)
+		.attr('title', Q.text.Streams.login.picTooltip);
 	var $td = $('<td class="Streams_login_username_block" />');
 	if (Q.text.Streams.login.prompt) {
 		$td.append(
@@ -3422,7 +3423,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	)
 	var table = $('<table />').append(
 		$('<tr />').append(
-			$('<td class="Streams_login_picture" />').append(img)
+			$('<td class="Streams_login_picture" />').append($img)
 		).append($td)
 	);
 	var register_form = $('<form method="post" class="Users_register_form" />')
@@ -3612,7 +3613,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			obj = {};
 			obj[k] = undefined;
 			Q.handle(
-				Q.getObject([publisherId, streamName, k], _streamUpdatedHandlers),
+				Q.getObject([publisherId, streamName, k], _streamAttributeHandlers),
 				stream,
 				[fields, obj, [k], onlyChangedFields]
 			);
@@ -3628,19 +3629,19 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			obj = {};
 			obj[k] = attributes[k];
 			Q.handle(
-				Q.getObject([publisherId, streamName, k], _streamUpdatedHandlers),
+				Q.getObject([publisherId, streamName, k], _streamAttributeHandlers),
 				stream,
 				[attributes, k, onlyChangedFields]
 			);
 			updated[k] = attributes[k];
 		}
 		Q.handle(
-			Q.getObject([publisherId, streamName, ''], _streamUpdatedHandlers),
+			Q.getObject([publisherId, streamName, ''], _streamAttributeHandlers),
 			stream,
 			[attributes, updated, cleared, onlyChangedFields]
 		);
 		Q.handle(
-			Q.getObject([publisherId, '', ''], _streamUpdatedHandlers),
+			Q.getObject([publisherId, '', ''], _streamAttributeHandlers),
 			stream,
 			[attributes, updated, cleared, onlyChangedFields]
 		);
@@ -3925,7 +3926,7 @@ Q.onInit.add(function _Streams_onInit() {
 							}, 100);
 						}
 						var $complete_form = dialog.find('form')
-						.validator()
+						.plugin('Q/validator')
 						.submit(function(e) {
 							e.preventDefault();
 							var baseUrl = Q.baseUrl({
@@ -3936,7 +3937,7 @@ Q.onInit.add(function _Streams_onInit() {
 							Q.req(url, ['data'], function _Streams_basic(err, data) {
 								var msg = Q.firstErrorMessage(err, data);
 								if (data && data.errors) {
-									$complete_form.data('validator').invalidate(
+									$complete_form.plugin('validator', 'invalidate',
 										Q.ajaxErrors(data.errors, ['fullName'])
 									);
 									$('input', $complete_form).eq(0)
@@ -3945,7 +3946,7 @@ Q.onInit.add(function _Streams_onInit() {
 								} else if (msg) {
 									return alert(msg);
 								}
-								$complete_form.data('validator').reset();
+								$complete_form.plugin('Q/validator', 'reset');
 								dialog.data('Q/dialog').close();
 								var params = {
 									evenIfNotRetained: true,

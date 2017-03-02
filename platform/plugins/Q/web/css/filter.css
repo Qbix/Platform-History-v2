@@ -18,6 +18,7 @@
 	max-height: 100px;
 	overflow: auto;
 	position: absolute;
+	z-index: 9999; /* to overlap possible sibling elements */
 }
 
 .Q_filter_fullscreen .Q_placeholder {
@@ -72,4 +73,8 @@
 
 .Q_filter_tool .Q_filter_results tr:hover {
 	background: #ccc; cursor: pointer;
+}
+
+.Q_filter_hide {
+	display: none !important;
 }
