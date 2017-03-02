@@ -8815,9 +8815,9 @@ Q.Socket.prototype.onEvent = function(name) {
  * @constructor
  * @param {Function} callback
  *  The function to call. It is passed the following parameters:
- *  x = the position in the animation, between 0 and 1
- *  y = the output of the ease function after plugging in x
- *  params = the fourth parameter passed to the run function
+ *  * x = the position in the animation, between 0 and 1
+ *  * y = the output of the ease function after plugging in x
+ *  * params = the fourth parameter passed to the run function
  * @param {number} duration
  *  The number of milliseconds the animation should run
  * @param {String|Function} ease
@@ -8836,15 +8836,17 @@ Q.Animation = function _Q_Animation(callback, duration, ease, params) {
 		ease = Q.Animation.ease.smooth;
 	}
 	var anim = this;
-	anim.position = 0;
-	anim.milliseconds = 0;
-	anim.sinceLastFrame = 0;
+	this.position = 0;
+	this.milliseconds = 0;
+	this.sinceLastFrame = 0;
 	this.id = ++_Q_Animation_index;
 	this.duration = duration;
 	this.ease = ease;
+	this.until = 1;
 	this.callback = callback;
 	this.params = params;
 	this.onRewind = new Q.Event();
+	this.onJump = new Q.Event();
 	this.onPause = new Q.Event();
 	this.onRender = new Q.Event();
 	this.onComplete = new Q.Event();
@@ -8864,21 +8866,39 @@ Ap.pause = function _Q_Animation_prototype_pause() {
 };
 
 /**
- * Rewind the animation
+ * Jump to a certain position in the animation.
+ * When the animation plays, the next render will use this position.
+ * Additionally, you might want to follow jump() with calls to render() and/or pause().
+ * @method jump
+ */
+Ap.jump = function _Q_Animation_prototype_jump(position) {
+	var lastPosition = this.position;
+	this.position = position;
+	this.milliseconds = this.duration * position;
+	this.sinceLastFrame = 0;
+	this.jumped = position;
+	this.started = Q.milliseconds();
+	this.onJump.handle.call(this, position, lastPosition);
+	return this;
+};
+
+/**
+ * Rewind the animation by pausing and jumping to position 0
  * @method rewind
  */
 Ap.rewind = function _Q_Animation_prototype_rewind() {
 	this.pause();
-	this.position = this.milliseconds = this.sinceLastFrame = 0;
+	this.jump(0);
 	this.onRewind.handle.call(this);
 	return this;
 };
 
 /**
- * Render the current frame of the animation
- * @method render
+ * Render the next frame of the animation, and potentially continue playing
+ * @method nextFrame
+ * @param {Number} [position] optionally render a specific position in the animation
  */
-Ap.render = function _Q_Animation_prototype_render() {
+Ap.nextFrame = function _Q_Animation_prototype_render(position) {
 	var anim = this;
 	var ms = Q.milliseconds();
 	requestAnimationFrame(function () {
@@ -8890,34 +8910,48 @@ Ap.render = function _Q_Animation_prototype_render() {
 		if (!anim.playing) { // it may have been paused by now
 			return;
 		}
-		var x = anim.position = anim.elapsed / anim.duration;
-		if (x >= 1) {
+		var x = anim.position = (anim.jumped == null)
+			? (anim.elapsed / anim.duration)
+			: (anim.elapsed / anim.duration) + anim.jumped;
+		if (x >= anim.until) {
 			Q.handle(anim.callback, anim, [1, anim.ease(1), anim.params]);
 			anim.onRender.stop();
 			anim.onComplete.handle.call(anim);
 			anim.rewind();
 			return;
 		}
-		var y = anim.ease(x);
-		Q.handle(anim.callback, anim, [x, y, anim.params]);
-		anim.onRender.handle.call(anim, x, y, anim.params);
+		anim.render(x);
 		if (anim.playing) {
-			anim.render();
+			anim.nextFrame();
 		}
 	});
 };
 
 /**
+ * Render a given frame of the animation
+ * @method render
+ * @param {Number} [position] defaults to current position
+ */
+Ap.render = function _Q_Animation_prototype_render(position) {
+	var x = (position === undefined) ? this.position : position;
+	var y = this.ease(x);
+	Q.handle(this.callback, this, [x, y, this.params]);
+	this.onRender.handle.call(this, x, y, this.params);
+};
+
+/**
  * Play the animation (resume after a pause)
  * @method play
+ * @param {Number} [until=1] optionally specify the position at which to pause the animation
  */
-Ap.play = function _Q_Animation_instance_play() {
+Ap.play = function _Q_Animation_instance_play(until) {
 	Q.Animation.playing[this.id] = this;
 	if (!this.playing) {
 		this.started = Q.milliseconds();
 	}
 	this.playing = true;
-	this.render();
+	this.until = until || 1;
+	this.nextFrame();
 	return this;
 };
 
@@ -8927,17 +8961,19 @@ Ap.play = function _Q_Animation_instance_play() {
  * @method play
  * @param {Function} callback
  *  The function to call. It is passed the following parameters:
- *  x = the position in the animation, between 0 and 1
- *  y = the output of the ease function after plugging in x
- *  params = the fourth parameter passed to the run function
+ *  * x = the position in the animation, between 0 and 1
+ *  * y = the output of the ease function after plugging in x
+ *  * params = the fourth parameter passed to the run function
  * @param {number} duration
  *  The number of milliseconds the animation should run
  * @param {String|Function} ease
  *  The key of the ease function in Q.Animation.ease object, or another ease function
+ * @param {Number} [until=1] 
+ *  Optionally specify the position at which to pause the animation
  * @param {Object} params
  *  Optional parameters to pass to the callback
  */
-Q.Animation.play = function _Q_Animation_play(callback, duration, ease, params) {
+Q.Animation.play = function _Q_Animation_play(callback, duration, ease, until, params) {
 	var result = new Q.Animation(callback, duration, ease, params);
 	return result.play();
 };
@@ -8978,6 +9014,7 @@ Q.Animation.ease = {
 		return 6 * tc * ts + -15 * ts * ts + 10 * tc;
 	}
 };
+Q.Animation.ease.swing = Q.Animation.ease.inOutQuintic;
 
 function _listenForVisibilityChange() {
 	var hidden, visibilityChange;
