@@ -5358,10 +5358,8 @@ Q.init = function _Q_init(options) {
  * @method ready
  */
 Q.ready = function _Q_ready() {
-	function readyWithNonce() {
-
+	Q.loadNonce(function readyWithNonce() {
 		_isReady = true;
-
 		if (Q.info.isLocalFile) {
 			// This is an HTML file loaded from the local filesystem
 			var url = location.hash.queryField('url');
@@ -5441,10 +5439,8 @@ Q.ready = function _Q_ready() {
 				throw e;
 			}
 		}
-		Q.Page.beingLoaded = false;
-		
-	}
-	Q.loadNonce(readyWithNonce);
+		Q.Page.beingLoaded = false;	
+	});
 };
 
 /**
@@ -5461,9 +5457,9 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 		Q.handle(callback, context, args);
 		return;
 	}
-	var p1 = Q.info.baseUrl.parseUrl();
+	var p1 = Q.info.baseUrl && Q.info.baseUrl.parseUrl();
 	var p2 = location.href.parseUrl();
-	if (p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
+	if (!p1 || p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
 		Q.handle(callback, context, args); // nonce won't load cross-origin anyway
 		return;
 	}
@@ -8822,12 +8818,18 @@ Q.Socket.prototype.onEvent = function(name) {
  *  The number of milliseconds the animation should run
  * @param {String|Function} ease
  *  The key of the ease function in Q.Animation.ease object, or another ease function
+ * @param {Number} [until=1] 
+ *  Optionally specify the position at which to pause the animation
  * @param {Object} params
  *  Optional parameters to pass to the callback
  */
-Q.Animation = function _Q_Animation(callback, duration, ease, params) {
+Q.Animation = function _Q_Animation(callback, duration, ease, until, params) {
 	if (duration == undefined) {
 		duration = 1000;
+	}
+	if (typeof until === "object") {
+		params = until;
+		until = 1;
 	}
 	if (typeof ease == "string") {
 		ease = Q.Animation.ease[ease];
@@ -8974,7 +8976,7 @@ Ap.play = function _Q_Animation_instance_play(until) {
  *  Optional parameters to pass to the callback
  */
 Q.Animation.play = function _Q_Animation_play(callback, duration, ease, until, params) {
-	var result = new Q.Animation(callback, duration, ease, params);
+	var result = new Q.Animation(callback, duration, ease, until, params);
 	return result.play();
 };
 
@@ -10620,7 +10622,7 @@ Q.Dialogs = {
 		} else {
 			_proceed1(o.content);
 		}
-		return $dialog[0];
+		return $dialog && $dialog[0];
 		function _proceed1(content) {
 			if (o.stylesheet) {
 				Q.addStylesheet(o.stylesheet, function () { _proceed2(content); })
@@ -10712,7 +10714,7 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
-		return $dialog[0];
+		return $dialog && $dialog[0];
 	}
 
 };
