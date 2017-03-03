@@ -8822,12 +8822,18 @@ Q.Socket.prototype.onEvent = function(name) {
  *  The number of milliseconds the animation should run
  * @param {String|Function} ease
  *  The key of the ease function in Q.Animation.ease object, or another ease function
+ * @param {Number} [until=1] 
+ *  Optionally specify the position at which to pause the animation
  * @param {Object} params
  *  Optional parameters to pass to the callback
  */
-Q.Animation = function _Q_Animation(callback, duration, ease, params) {
+Q.Animation = function _Q_Animation(callback, duration, ease, until, params) {
 	if (duration == undefined) {
 		duration = 1000;
+	}
+	if (typeof until === "object") {
+		params = until;
+		until = 1;
 	}
 	if (typeof ease == "string") {
 		ease = Q.Animation.ease[ease];
