@@ -1,0 +1,5 @@
+ALTER TABLE {$prefix}autocomplete
+CHANGE miles meters double NOT NULL;
+
+UPDATE {$prefix}autocomplete
+SET meters = ROUND(meters * 1609.34);

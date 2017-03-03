@@ -1,9 +1,9 @@
 <div class="Places_location_container Places_location_checking">
 	I'm interested in things taking place within
-	<?php echo Q_Html::select('miles', array(
-		'class' => 'Places_location_miles'
+	<?php echo Q_Html::select('meters', array(
+		'class' => 'Places_location_meters'
 	)) ?> 
-		<?php echo Q_Html::options($miles, 'miles', $defaultMiles) ?> 
+		<?php echo Q_Html::options($meters, 'meters', $defaultMeters) ?> 
 	</select>
 	of
 	<div class="Places_location_whileObtaining">

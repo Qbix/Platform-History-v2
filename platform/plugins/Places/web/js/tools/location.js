@@ -14,8 +14,8 @@ var Places = Q.Places;
  * @class Places location
  * @constructor
  * @param {Object} [options] used to pass options
- * @param {array} [options.miles] array of { miles: title } pairs, by default is generated from Places/nearby/miles config
- * @param {array} [options.defaultMiles] override the key in the miles array to select by default. Defaults to "Places/nearby/defaultMiles" config
+ * @param {array} [options.meters] array of { meters: title } pairs, by default is generated from Places/nearby/meters config
+ * @param {array} [options.defaultMeters] override the key in the meters array to select by default. Defaults to "Places/nearby/defaultMeters" config
  * @param {String} [options.updateButton="Update my location"] the title of the update button
  * @param {Object} [options.map] options for the map
  * @param {Number} [options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
@@ -37,16 +37,17 @@ Q.Tool.define("Places/location", function (options) {
 	var publisherId = Users.loggedInUser.id;
 	var streamName = "Places/user/location";
 	
-	if (!state.miles) {
-		state.miles = {};
-		var pnm = Places.nearby.miles;
+	if (!state.meters) {
+		state.meters = {};
+		var pnm = Places.nearby.meters;
 		for (var i=0, l=pnm.length; i<l; ++i) {
 			var m = pnm[i];
-			state.miles[m] = m + (m === 1 ? ' mile' : ' miles');
+			$options['meters'][m] = Places.distanceLabel(m);
+			state.meters[m] = m + (m === 1 ? ' meter' : ' meters');
 		}
 	}
-	if (state.defaultMiles === undefined) {
-		state.defaultMiles = Places.nearby.defaultMiles;
+	if (state.defaultMeters === undefined) {
+		state.defaultMeters = Places.nearby.defaultMeters;
 	}
 	
 	Q.Template.render('Places/location', state, function (err, html) {
@@ -61,13 +62,13 @@ Q.Tool.define("Places/location", function (options) {
 		Streams.Stream
 		.onRefresh(publisherId, streamName)
 		.set(function () {
-			var miles = this.getAttribute('miles');
+			var meters = this.getAttribute('meters');
 			var latitude = this.getAttribute('latitude');
 			var longitude = this.getAttribute('longitude');
-			if (miles) {
-				tool.$('.Places_location_miles').val(miles);
+			if (meters) {
+				tool.$('.Places_location_meters').val(meters);
 			};
-			pipe.fill('info')(latitude, longitude, miles, state.onSet.handle);
+			pipe.fill('info')(latitude, longitude, meters, state.onSet.handle);
 			state.stream = this; // in case it was missing before
 		});
 	
@@ -75,14 +76,14 @@ Q.Tool.define("Places/location", function (options) {
 		.get(publisherId, streamName, function (err) {
 			if (!err) {
 				var stream = state.stream = this;
-				var miles = stream.getAttribute('miles');
+				var meters = stream.getAttribute('meters');
 				var latitude = stream.getAttribute('latitude');
 				var longitude = stream.getAttribute('longitude');
-				if (miles) {
-					tool.$('.Places_location_miles').val(miles);
+				if (meters) {
+					tool.$('.Places_location_meters').val(meters);
 				}
 			}
-			if (!latitude || !longitude || !miles) {
+			if (!latitude || !longitude || !meters) {
 				$te.removeClass('Places_location_obtained')
 					.addClass('Places_location_obtaining');
 				$te.find('.Places_location_container')
@@ -101,7 +102,7 @@ Q.Tool.define("Places/location", function (options) {
 			}
 		});
 	
-		tool.$('.Places_location_miles').on('change', function () {
+		tool.$('.Places_location_meters').on('change', function () {
 			_submit();
 		});
 	
@@ -190,9 +191,9 @@ Q.Tool.define("Places/location", function (options) {
 		fields = Q.extend({}, fields, {
 			subscribe: true,
 			unsubscribe: true,
-			miles: tool.$('.Places_location_miles').val(),
+			meters: tool.$('.Places_location_meters').val(),
 			timezone: (new Date()).getTimezoneOffset() / 60,
-			defaultMiles: state.defaultMiles
+			defaultMeters: state.defaultMeters
 		});
 		if (zipcode) {
 			fields.zipcode = zipcode;
@@ -203,14 +204,14 @@ Q.Tool.define("Places/location", function (options) {
 				return alert(msg);
 			}
 			Streams.Stream.refresh(publisherId, streamName, function () {
-				var miles = this.getAttribute('miles');
+				var meters = this.getAttribute('meters');
 				var latitude = this.getAttribute('latitude');
 				var longitude = this.getAttribute('longitude');
-				if (miles) {
-					tool.$('.Places_location_miles').val(miles);
+				if (meters) {
+					tool.$('.Places_location_meters').val(meters);
 				};
 				if (latitude && longitude) {
-					Q.handle(state.onUpdate, tool, [latitude, longitude, miles]);
+					Q.handle(state.onUpdate, tool, [latitude, longitude, meters]);
 				}
 			}, { 
 				messages: 1,
@@ -223,22 +224,22 @@ Q.Tool.define("Places/location", function (options) {
 	}
 	
 	var previous = {};
-	function _showMap(latitude, longitude, miles, callback) {
+	function _showMap(latitude, longitude, meters, callback) {
 
 		if (latitude == undefined
 		|| longitude == undefined
-		|| !miles) {
+		|| !meters) {
 			return;
 		}
 		if (latitude == previous.latitude
 		&& longitude == previous.longitude
-		&& miles == previous.miles) {
+		&& meters == previous.meters) {
 			return;
 		}
 		previous = {
 			latitude: latitude,
 			longitude: longitude,
-			miles: miles
+			meters: meters
 		};
 
 		Places.loadGoogleMaps(function () {
@@ -262,7 +263,7 @@ Q.Tool.define("Places/location", function (options) {
 			var element = tool.$('.Places_location_map')[0];
 			var map = state.map = new google.maps.Map(element, {
 				center: new google.maps.LatLng(latitude, longitude),
-				zoom: 12 - Math.floor(Math.log(miles) / Math.log(2)),
+				zoom: 12 - Math.floor(Math.log(meters) / Math.log(2)),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				draggable: false,
 				panControl: false,
@@ -284,12 +285,12 @@ Q.Tool.define("Places/location", function (options) {
 			// Add circle overlay and bind to marker
 			var circle = new google.maps.Circle({
 			  map: map,
-			  radius: miles*1609.34,
+			  radius: meters*1609.34,
 			  fillColor: '#0000AA'
 			});
 			circle.bindTo('center', marker, 'position');
 			
-			Q.handle(callback, tool, [latitude, longitude, miles, map]);
+			Q.handle(callback, tool, [latitude, longitude, meters, map]);
 		}
 	}
 },
@@ -314,9 +315,9 @@ Q.Tool.define("Places/location", function (options) {
 Q.Template.set('Places/location', 
 	'<div class="Places_location_container Places_location_checking">'
 		+ 'I\'m interested in things taking place within '
-		+ '<select name="miles" class="Places_location_miles">'
-			+ '{{#each miles}}'
-				+ '{{option @key this ../defaultMiles}}'
+		+ '<select name="meters" class="Places_location_meters">'
+			+ '{{#each meters}}'
+				+ '{{option @key this ../defaultMeters}}'
 			+ '{{/each}}'
 		+ '</select>'
 		+ ' of '

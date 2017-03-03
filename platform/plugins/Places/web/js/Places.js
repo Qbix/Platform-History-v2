@@ -54,7 +54,7 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @return {double} The result of applying the haversine formula
 	 */
 	distance: function(lat1, long1, lat2, long2) {
-		var earthRadius = 3963.1676; // in miles
+		var earthRadius = 3963.1676; // in meters
 
 		var sin_lat   = Math.sin(_deg2rad(lat2  - lat1)  / 2.0);
 		var sin2_lat  = sin_lat * sin_lat;
@@ -69,8 +69,20 @@ var Places = Q.Places = Q.plugins.Places = {
 		var distance  = 2.0 * earthRadius * Math.asin(sqrt);
 
 		return distance;
-	}
+	},
 
+	/**
+	 * Use this method to generate a label for a radius based on a distance in meters
+	 * @method distanceLabel
+	 * @static
+	 * @param {double} meters
+	 * @return {string} Returns a label that looks like "x.y km", "x miles" or "x meters"
+	 */
+	distanceLabel: function(meters) {
+		return Math.abs(meters - Math.round(meters/1609.34)) < 0.01
+			? Math.floor(meters/1609.34)+" miles"
+			: (meters % 100 == 0 ? (meters/1000)+" km" : Math.ceil(meters)+" meters");
+	}
 
 };
 

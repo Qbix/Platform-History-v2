@@ -16,15 +16,15 @@ function Places_geolocation_response_data()
 		$stream = Places_Location::userStream();
 		$latitude = $stream->getAttribute('latitude');
 		$longitude = $stream->getAttribute('longitude');
-		$miles = $stream->getAttribute('miles');
+		$meters = $stream->getAttribute('meters');
 	}
-	$miles = Q::ifset($_REQUEST, 'miles', 
-		Q_Config::expect('Places', 'nearby', 'defaultMiles')
+	$meters = Q::ifset($_REQUEST, 'meters', 
+		Q_Config::expect('Places', 'nearby', 'defaultMeters')
 	);
 	$zipcodes = Places_Zipcode::nearby(
 		$latitude,
 		$longitude,
-		$miles,
+		$meters,
 		1
 	);
 	$zipcode = $zipcodes ? reset($zipcodes) : null;
