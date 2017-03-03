@@ -6,12 +6,12 @@ function Places_after_Streams_interest_add($params)
 	if ($params['subscribe'] and $location) {
 		$latitude = $location->getAttribute('latitude');
 		$longitude = $location->getAttribute('longitude');
-		$meterss = $location->getAttribute(metersrs');
-		if ($latitude and $longitude andmetersers) {
+		$meters = $location->getAttribute('meters');
+		if ($latitude and $longitude and $meters) {
 			Places_Nearby::subscribe(
 				$latitude,
 				$longitude,
-		metersters,
+				$meters,
 				$params['publisherId'],
 				array(
 					'transform' => array('Places_Interest', '_transform'),
