@@ -18,7 +18,7 @@
  * @property {string} $types
  * @property {float} $latitude
  * @property {float} $longitude
- * @property {float} $miles
+ * @property {float} $meters
  * @property {string|Db_Expression} $insertedTime
  * @property {string|Db_Expression} $updatedTime
  * @property {string} $results
@@ -42,7 +42,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 * @type {float}
 	 */
 	/**
-	 * @property $miles
+	 * @property $meters
 	 * @type {float}
 	 */
 	/**
@@ -72,7 +72,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 			  1 => 'types',
 			  2 => 'latitude',
 			  3 => 'longitude',
-			  4 => 'miles',
+			  4 => 'meters',
 			)
 		);
 	}
@@ -379,22 +379,22 @@ return array (
 );			
 	}
 
-	function beforeSet_miles($value)
+	function beforeSet_meters($value)
 	{
 		if ($value instanceof Db_Expression) {
-			return array('miles', $value);
+			return array('meters', $value);
 		}
 		if (!is_numeric($value))
-			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".miles");
+			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".meters");
 		$value = floatval($value);
-		return array('miles', $value);			
+		return array('meters', $value);			
 	}
 
 	/**
-	 * Returns schema information for miles column
+	 * Returns schema information for meters column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_miles()
+	static function column_meters()
 	{
 
 return array (
@@ -571,7 +571,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('query','types','latitude','longitude','miles') as $name) {
+			foreach (array('query','types','latitude','longitude','meters') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -592,7 +592,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('query', 'types', 'latitude', 'longitude', 'miles', 'insertedTime', 'updatedTime', 'results');
+		$field_names = array('query', 'types', 'latitude', 'longitude', 'meters', 'insertedTime', 'updatedTime', 'results');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

@@ -46,7 +46,7 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {number}
- * @type miles
+ * @type meters
  */
 /**
  * @property {String|Db.Expression}
@@ -208,7 +208,7 @@ Base.prototype.primaryKey = function () {
 		"types",
 		"latitude",
 		"longitude",
-		"miles"
+		"meters"
 	];
 };
 
@@ -223,7 +223,7 @@ Base.prototype.fieldNames = function () {
 		"types",
 		"latitude",
 		"longitude",
-		"miles",
+		"meters",
 		"insertedTime",
 		"updatedTime",
 		"results"
@@ -356,24 +356,24 @@ return [["double","255","",false],false,"PRI",null];
 
 /**
  * Method is called before setting the field to verify if value is a number
- * @method beforeSet_miles
+ * @method beforeSet_meters
  * @param {integer} value
  * @return {integer} The value
  * @throws {Error} If 'value' is not number
  */
-Base.prototype.beforeSet_miles = function (value) {
+Base.prototype.beforeSet_meters = function (value) {
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value))
-			throw new Error('Non-number value being assigned to '+this.table()+".miles");
+			throw new Error('Non-number value being assigned to '+this.table()+".meters");
 		return value;
 };
 
 	/**
-	 * Returns schema information for miles column
+	 * Returns schema information for meters column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_miles = function () {
+Base.column_meters = function () {
 
 return [["double","255","",false],false,"PRI",null];
 };
@@ -476,7 +476,7 @@ return [["text",65535,"",false],false,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['query','types','latitude','longitude','miles'], i;
+	var fields = ['query','types','latitude','longitude','meters'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

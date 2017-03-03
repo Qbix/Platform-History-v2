@@ -9,22 +9,23 @@ function Places_geolocation_response_data()
 		if (!Q_Config::get('Places', 'geolocation', 'allowClientQueries', false)) {
 			throw new Q_Exception("Client queries are restricted, as per Places/geolocation/allowClientQueries");
 		}
-		$latitude = $_REQUEST['latitude'];
-		$longitude = $_REQUEST['longitude'];
+		$latitude = floatval($_REQUEST['latitude']);
+		$longitude = floatval($_REQUEST['longitude']);
+		$meters = null;
 	} else {
 		$user = Users::loggedInUser(true);
 		$stream = Places_Location::userStream();
-		$latitude = $stream->getAttribute('latitude');
-		$longitude = $stream->getAttribute('longitude');
-		$miles = $stream->getAttribute('miles');
+		$latitude = floatval($stream->getAttribute('latitude'));
+		$longitude = floatval($stream->getAttribute('longitude'));
+		$meters = floatval($stream->getAttribute('meters'));
 	}
-	$miles = Q::ifset($_REQUEST, 'miles', 
-		Q_Config::expect('Places', 'nearby', 'defaultMiles')
-	);
+	$meters = floatval(Q::ifset($_REQUEST, 'meters', 
+		isset($meters) ? $meters : Q_Config::expect('Places', 'nearby', 'defaultMeters')
+	));
 	$zipcodes = Places_Zipcode::nearby(
 		$latitude,
 		$longitude,
-		$miles,
+		$meters,
 		1
 	);
 	$zipcode = $zipcodes ? reset($zipcodes) : null;
