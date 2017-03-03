@@ -337,7 +337,7 @@ Sp.trim = String.prototype.trim || function _String_prototype_trim() {
  * Analogous to PHP's parse_url function
  * @method parseUrl
  * @param {String} component Optional name of component to return
- * @return {String}
+ * @return {Object}
  */
 Sp.parseUrl = function _String_prototype_parseUrl (component) {
 	// http://kevin.vanzonneveld.net
