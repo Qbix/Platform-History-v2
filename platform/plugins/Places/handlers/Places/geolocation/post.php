@@ -48,6 +48,9 @@ function Places_geolocation_post()
 		'country'
 	);
 	$attributes = Q::take($_REQUEST, $fields);
+	if (isset($attributes['timezone'])) {
+		$attributes['timezone'] = floatval($attributes['timezone']);
+	}
 	if (isset($attributes['latitude'])
 	xor isset($attributes['longitude'])) {
 		throw new Q_Exception(
@@ -70,17 +73,17 @@ function Places_geolocation_post()
 			), 'zipcode');
 		}
 	}
-	$attributes['meters'] = Q::ifset($attributes, 'meters', 
+	$attributes['meters'] = floatval(Q::ifset($attributes, 'meters', 
 		$stream->getAttribute(
 			'meters',
 			Q_Config::expect('Places', 'nearby', 'defaultMeters')
 		)
-	);
+	));
 	if (empty($attributes['zipcode']) and isset($attributes['latitude'])) {
 		$zipcodes = Places_Zipcode::nearby(
-			$attributes['latitude'],
-			$attributes['longitude'],
-			$attributes['meters'],
+			floatval($attributes['latitude']),
+			floatval($attributes['longitude']),
+			floatval($attributes['meters']),
 			1
 		);
 		if ($zipcode = $zipcodes ? reset($zipcodes) : null) {

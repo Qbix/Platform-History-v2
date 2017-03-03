@@ -9,5 +9,5 @@ CREATE TABLE IF NOT EXISTS `{$prefix}autocomplete` (
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `results` text NOT NULL,
-  PRIMARY KEY (`query`,`types`,`latitude`,`longitude`,`meters`)
+  PRIMARY KEY (`query`,`types`,`latitude`,`longitude`,`miles`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
