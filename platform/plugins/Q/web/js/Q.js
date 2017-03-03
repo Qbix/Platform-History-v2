@@ -5358,10 +5358,8 @@ Q.init = function _Q_init(options) {
  * @method ready
  */
 Q.ready = function _Q_ready() {
-	function readyWithNonce() {
-
+	Q.loadNonce(function readyWithNonce() {
 		_isReady = true;
-
 		if (Q.info.isLocalFile) {
 			// This is an HTML file loaded from the local filesystem
 			var url = location.hash.queryField('url');
@@ -5441,10 +5439,8 @@ Q.ready = function _Q_ready() {
 				throw e;
 			}
 		}
-		Q.Page.beingLoaded = false;
-		
-	}
-	Q.loadNonce(readyWithNonce);
+		Q.Page.beingLoaded = false;	
+	});
 };
 
 /**
@@ -5461,9 +5457,9 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 		Q.handle(callback, context, args);
 		return;
 	}
-	var p1 = Q.info.baseUrl.parseUrl();
+	var p1 = Q.info.baseUrl && Q.info.baseUrl.parseUrl();
 	var p2 = location.href.parseUrl();
-	if (p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
+	if (!p1 || p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
 		Q.handle(callback, context, args); // nonce won't load cross-origin anyway
 		return;
 	}
