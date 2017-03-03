@@ -73,7 +73,6 @@ function _Q_actions(options) {
 					$(this).removeClass('Q_discouragePointerEvents');
 					$(window).off([Q.Pointer.end, '.Q_actions']);
 				});
-				event.stopPropagation();
 			}).click(function (event) {
 				Q.Pointer.cancelClick(event);
 				event.stopPropagation();
