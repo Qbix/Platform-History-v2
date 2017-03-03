@@ -29,7 +29,7 @@ Q.text.Places.address = {
  * @param {Q.Event} [options.onError] When there was some kind of error
  */
 
-Q.Tool.define("Places/location", function (options) {
+Q.Tool.define("Places/address", function (options) {
 	var tool = this;
 	var state = this.state;
 	state.mapElement = state.mapElement || $('<div />').appendTo(this.element)[0];
