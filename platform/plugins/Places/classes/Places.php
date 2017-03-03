@@ -29,7 +29,7 @@ abstract class Places extends Base_Places
 	 * @param {array} [$types=array("establishment")] Can include "establishment", "locality", "sublocality", "postal_code", "country", "administrative_area_level_1", "administrative_area_level_2". Set to true to include all types.
 	 * @param {double} [$latitude=userLocation] Override the latitude of the coordinates to search around
 	 * @param {double} [$longitude=userLocation] Override the longitude of the coordinates to search around
- 	 * @param {double} [$miles=25] Override the radius, in miles, to search around
+ 	 * @param {double} [$meters=40234] Override the radius, in meters, to search around
 	 * @return {array} An array of prediction objects from Google Places predictions API
 	 * @throws {Q_Exception} if a bad value is encountered and $throwIfBadValue is true
 	 */
@@ -39,7 +39,7 @@ abstract class Places extends Base_Places
 		$types = null, 
 		$latitude = null, 
 		$longitude = null,
-		$miles = 25)
+		$meters = 40234)
 	{
 		$supportedTypes = array("establishment", "locality", "sublocality", "postal_code", "country", "administrative_area_level_1", "administrative_area_level_2");
 		$input = strtolower($input);
@@ -69,14 +69,14 @@ abstract class Places extends Base_Places
 			if ($uls = Places_Location::userStream()) {
 				$latitude = $uls->getAttribute('latitude', null);
 				$longitude = $uls->getAttribute('longitude', null);
-				if (!isset($miles)) {
-					$miles = $uls->getAttribute('miles', 25);
+				if (!isset($meters)) {
+					$meters = $uls->getAttribute('meters', 40234);
 				}
 			} else {
 				// put some defaults
 				$latitude = 40.5806032;
 				$longitude = -73.9755244;
-				$miles = 25;
+				$meters = 40234;
 			}
 		}
 
@@ -87,7 +87,7 @@ abstract class Places extends Base_Places
 			$pa->types = $types ? implode(',', $types) : '';
 			$pa->latitude = $latitude;
 			$pa->longitude = $longitude;
-			$pa->miles = $miles;
+			$pa->meters = $meters;
 			if ($pa->retrieve()) {
 				$ut = $pa->updatedTime;
 				if (isset($ut)) {
@@ -105,7 +105,7 @@ abstract class Places extends Base_Places
 
 		$key = Q_Config::expect('Places', 'google', 'keys', 'server');
 		$location = "$latitude,$longitude";
-		$radius = ceil(1609.34 * $miles);
+		$radius = $meters;
 		if ($types === null) {
 			unset($types);
 		}
@@ -139,11 +139,11 @@ abstract class Places extends Base_Places
 	 * @param {double} $long_1
 	 * @param {double} $lat_2
 	 * @param {double} $long_2
-	 * @return {double} The result, in miles, of applying the haversine formula
+	 * @return {double} The result, in meters, of applying the haversine formula
 	 */
 	static function distance($lat_1,$long_1,$lat_2,$long_2)
 	{
-		$earth_radius = 3963.1676; // in miles
+		$earth_radius = 6378084.1454; // in meters
 
 		$sin_lat   = sin(deg2rad($lat_2  - $lat_1)  / 2.0);
 		$sin2_lat  = $sin_lat * $sin_lat;
@@ -161,21 +161,35 @@ abstract class Places extends Base_Places
 	}
 	
 	/**
+	 * Use this method to generate a label for a radius based on a distance in meters
+	 * @method distanceLabel
+	 * @static
+	 * @param {double} $meters
+	 * @return {string} Returns a label that looks like "x.y km", "x miles" or "x meters"
+	 */
+	static function distanceLabel($meters)
+	{
+		return abs($meters - round($meters/1609.34)) < 0.01
+			? floor($meters/1609.34)." miles"
+			: ($meters % 100 == 0 ? ($meters/1000)." km" : ceil($meters)." meters");
+	}
+	
+	/**
 	 * Call this function to quantize a (latitude, longitude) pair to grid of quantized
-	 * (latitude, longitude) pairs which are spaced at most $miles apart.
+	 * (latitude, longitude) pairs which are spaced at most $meters apart.
 	 * @param {double} $latitude The latitude of the coordinates to search around
 	 * @param {double} $longitude The longitude of the coordinates to search around
-	 * @param {double} $miles The radius, in miles, around this location.
-	 *  Should be one of the array values in the Places/nearby/miles config.
+	 * @param {double} $meters The radius, in meters, around this location.
+	 *  Should be one of the array values in the Places/nearby/meters config.
 	 * @return {Array} Returns an array of latitude and longitude quantized,
 	 *  followed by the latitude and longitude grid spacing.
 	 */
 	static function quantize(
 		$latitude, 
 		$longitude, 
-		$miles)
+		$meters)
 	{
-		$latGrid = $miles / 69.1703234283616;
+		$latGrid = $meters / (1609.34 * 69.1703234283616);
 		$latQuantized = floor($latitude / $latGrid) * $latGrid;
 		$longGrid = abs($latGrid / cos(deg2rad($latQuantized)));
 		$longQuantized = floor($longitude / $longGrid) * $longGrid;

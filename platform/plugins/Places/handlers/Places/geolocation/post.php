@@ -12,7 +12,7 @@
  * @param [$_REQUEST.latitude] The new latitude. If set, must also specify longitude.
  * @param [$_REQUEST.longitude] The new longitude. If set, must also specify latitude.
  * @param [$_REQUEST.zipcode] The new zip code. Can be set instead of latitude, longitude.
- * @param [$_REQUEST.miles] The distance around their location around that the user is interested in
+ * @param [$_REQUEST.meters] The distance around their location around that the user is interested in
  * @param [$_REQUEST.subscribe] Whether to subscribe to all the local interests at the new location.
  * @param [$_REQUEST.unsubscribe] Whether to unsubscribe from all the local interests at the old location.
  * @param [$_REQUEST.accuracy]
@@ -31,7 +31,7 @@ function Places_geolocation_post()
 	$stream = Places_Location::userStream();
 	$oldLatitude = $stream->getAttribute('latitude');
 	$oldLongitude = $stream->getAttribute('longitude');
-	$oldMiles = $stream->getAttribute('miles');
+	$oldMeters = $stream->getAttribute('meters');
 	$fields = array(
 		'accuracy',
 		'altitude',
@@ -40,7 +40,7 @@ function Places_geolocation_post()
 		'latitude',
 		'longitude',
 		'speed',
-		'miles',
+		'meters',
 		'zipcode',
 		'timezone',
 		'placeName',
@@ -70,17 +70,17 @@ function Places_geolocation_post()
 			), 'zipcode');
 		}
 	}
-	$attributes['miles'] = Q::ifset($attributes, 'miles', 
+	$attributes['meters'] = Q::ifset($attributes, 'meters', 
 		$stream->getAttribute(
-			'miles',
-			Q_Config::expect('Places', 'nearby', 'defaultMiles')
+			'meters',
+			Q_Config::expect('Places', 'nearby', 'defaultMeters')
 		)
 	);
 	if (empty($attributes['zipcode']) and isset($attributes['latitude'])) {
 		$zipcodes = Places_Zipcode::nearby(
 			$attributes['latitude'],
 			$attributes['longitude'],
-			$attributes['miles'],
+			$attributes['meters'],
 			1
 		);
 		if ($zipcode = $zipcodes ? reset($zipcodes) : null) {
@@ -98,18 +98,18 @@ function Places_geolocation_post()
 		'instructions' => $stream->getAllAttributes()
 	), true);
 	
-	$shouldUnsubscribe = !empty($_REQUEST['unsubscribe']) && isset($oldMiles);
+	$shouldUnsubscribe = !empty($_REQUEST['unsubscribe']) && isset($oldMeters);
 	$shouldSubscribe = !empty($_REQUEST['subscribe']);
 	$noChange = false;
 
 	$latitude = $stream->getAttribute('latitude');
 	$longitude = $stream->getAttribute('longitude');
-	$miles = $stream->getAttribute('miles');
+	$meters = $stream->getAttribute('meters');
 
 	if ($shouldUnsubscribe and $shouldSubscribe
 	and abs($latitude - $oldLatitude) < 0.0001
 	and abs($longitude - $oldLongitude) < 0.0001
-	and abs($miles - $oldMiles) < 0.001) {
+	and abs($meters - $oldMeters) < 0.001) {
 		$noChange = true;
 	}
 	
@@ -134,7 +134,7 @@ function Places_geolocation_post()
 			}
 		}
 
-		if ($shouldUnsubscribe and $oldLatitude and $oldLongitude and $oldMiles) {
+		if ($shouldUnsubscribe and $oldLatitude and $oldLongitude and $oldMeters) {
 			$results = array();
 			foreach ($myInterests as $weight => $info) {
 				$publisherId = $info[0];
@@ -144,7 +144,7 @@ function Places_geolocation_post()
 				$results[$publisherId] = array_merge(
 					$results[$publisherId], Places_Interest::streams(
 						$publisherId, $oldLatitude, $oldLongitude, $info[2], array(
-							'miles' => $oldMiles,
+							'meters' => $oldMeters,
 							'skipAccess' => true,
 							'forSubscribers' => true
 						)
@@ -155,7 +155,7 @@ function Places_geolocation_post()
 				Streams::unsubscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
 			}
 			$attributes['unsubscribed'] = Places_Nearby::unsubscribe(
-				$oldLatitude, $oldLongitude, $oldMiles
+				$oldLatitude, $oldLongitude, $oldMeters
 			);
 		}
 	
@@ -169,7 +169,7 @@ function Places_geolocation_post()
 				$results[$publisherId] = array_merge(
 					$results[$publisherId], Places_Interest::streams(
 						$publisherId, $latitude, $longitude, $info[2], array(
-							'miles' => $miles,
+							'meters' => $meters,
 							'skipAccess' => true,
 							'forSubscribers' => true
 						)
@@ -180,7 +180,7 @@ function Places_geolocation_post()
 				Streams::subscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
 			}
 			$attributes['subscribed'] = Places_Nearby::subscribe(
-				$latitude, $longitude, $miles
+				$latitude, $longitude, $meters
 			);
 		}	
 	}
