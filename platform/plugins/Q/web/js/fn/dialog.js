@@ -52,7 +52,7 @@ function _Q_overlay(o) {
 		var oap = o.alignParent, body = document.body;
 		var parentHeight = (oap && oap !== body && oap[0] !== body)
 			? $(o.alignParent).height()
-			: Q.Pointer.windowHeight();
+			: Math.max(Q.Pointer.windowHeight(), body.clientHeight);
 		if (o.top == 'middle') {
 			$this.css({ 'top': ((parentHeight - height) / 2) + 'px' });
 		} else if (typeof(o.top) == 'string' && o.top.indexOf('%') != -1) {
