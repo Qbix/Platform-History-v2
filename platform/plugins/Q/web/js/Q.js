@@ -8980,7 +8980,7 @@ Ap.play = function _Q_Animation_instance_play(until) {
  *  Optional parameters to pass to the callback
  */
 Q.Animation.play = function _Q_Animation_play(callback, duration, ease, until, params) {
-	var result = new Q.Animation(callback, duration, ease, params);
+	var result = new Q.Animation(callback, duration, ease, until, params);
 	return result.play();
 };
 
