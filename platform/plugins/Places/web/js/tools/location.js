@@ -42,8 +42,7 @@ Q.Tool.define("Places/location", function (options) {
 		var pnm = Places.nearby.meters;
 		for (var i=0, l=pnm.length; i<l; ++i) {
 			var m = pnm[i];
-			$options['meters'][m] = Places.distanceLabel(m);
-			state.meters[m] = m + (m === 1 ? ' meter' : ' meters');
+			state.meters[m] = Places.distanceLabel(m);
 		}
 	}
 	if (state.defaultMeters === undefined) {
@@ -62,9 +61,9 @@ Q.Tool.define("Places/location", function (options) {
 		Streams.Stream
 		.onRefresh(publisherId, streamName)
 		.set(function () {
-			var meters = this.getAttribute('meters');
-			var latitude = this.getAttribute('latitude');
-			var longitude = this.getAttribute('longitude');
+			var meters = parseFloat(this.getAttribute('meters'));
+			var latitude = parseFloat(this.getAttribute('latitude'));
+			var longitude = parseFloat(this.getAttribute('longitude'));
 			if (meters) {
 				tool.$('.Places_location_meters').val(meters);
 			};
@@ -263,7 +262,7 @@ Q.Tool.define("Places/location", function (options) {
 			var element = tool.$('.Places_location_map')[0];
 			var map = state.map = new google.maps.Map(element, {
 				center: new google.maps.LatLng(latitude, longitude),
-				zoom: 12 - Math.floor(Math.log(meters) / Math.log(2)),
+				zoom: 12 - Math.floor(Math.log(meters/1609.34) / Math.log(2)),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				draggable: false,
 				panControl: false,
@@ -285,7 +284,7 @@ Q.Tool.define("Places/location", function (options) {
 			// Add circle overlay and bind to marker
 			var circle = new google.maps.Circle({
 			  map: map,
-			  radius: meters*1609.34,
+			  radius: meters,
 			  fillColor: '#0000AA'
 			});
 			circle.bindTo('center', marker, 'position');
