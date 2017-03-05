@@ -1186,9 +1186,15 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 				}
 			}
 			var i = 0;
-			repres = repres.replace( /\?/g, function(){
-				return values3[i++];
-			});
+			if (!Q.isEmpty(values3)) {
+				repres = repres.replace( /\?/g, function() {
+					var v = values3[i++];
+					if (v === undefined) {
+						console.log(repres, i);
+					}
+					return v !== undefined ? v : '?';
+				});
+			}
 			if (callback)
 				Q.extend(mq.replacements, {'{\\$prefix}': mq.db.prefix(), '{\\$dbname}': mq.db.dbname()});
 			for (k in mq.replacements) {
