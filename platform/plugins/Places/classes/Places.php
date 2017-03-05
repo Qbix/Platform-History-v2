@@ -165,13 +165,24 @@ abstract class Places extends Base_Places
 	 * @method distanceLabel
 	 * @static
 	 * @param {double} $meters
+	 * @param {string} [$units] optionally specify 'km', 'kilometers' or 'miles', or null for auto
 	 * @return {string} Returns a label that looks like "x.y km", "x miles" or "x meters"
 	 */
-	static function distanceLabel($meters)
+	static function distanceLabel($meters, $units = 'km')
 	{
-		return abs($meters - round($meters/1609.34)) < 0.01
-			? floor($meters/1609.34)." miles"
-			: ($meters % 100 == 0 ? ($meters/1000)." km" : ceil($meters)." meters");
+		if (empty($units)) {
+			$milesr = abs($meters/1609.34 - round($meters/1609.34));
+			$kmr = abs($meters/1000 - round($meters/1000));
+			$units = $miles < $kmr ? 'miles' : 'km';
+		}
+		switch ($units) {
+		case 'miles':
+			return (round($meters/1609.34*10)/10)." miles";
+		case 'km':
+		case 'kilometers':
+		default:
+			return  $meters % 100 == 0 ? ($meters/1000).' '.$units : ceil($meters)." meters";
+		}
 	}
 	
 	/**
