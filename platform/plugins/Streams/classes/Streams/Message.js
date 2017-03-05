@@ -204,8 +204,6 @@ Streams_Message.post = function (fields, callback)
 		f.publisherId, f.streamName,
 		f.publisherId, f.streamName
 	];
-	console.log(query);
-	console.log(values);
 	Streams.Stream.db()
 	.rawQuery(query, values)
 	.execute(function (params) {
