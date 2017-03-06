@@ -1571,7 +1571,7 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Buffer && (x instanceof Buffer)) {
-		return Buffer.from(x);
+		return new Buffer(x);
 	}
 	if (Q.typeOf(x) === 'array') {
 		var result = Array.prototype.slice.call(x, 0);
