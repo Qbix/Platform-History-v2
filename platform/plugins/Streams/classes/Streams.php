@@ -1269,7 +1269,8 @@ abstract class Streams extends Base_Streams
 		if (empty($_REQUEST['fields'])) {
 			return '*';
 		}
-		$fields = is_array($fields) ? $fields : explode(',', $_REQUEST['fields']);
+		$fields = $_REQUEST['fields'];
+		$fields = is_array($fields) ? $fields : explode(',', $fields);
 		$fieldNames = Streams_Stream::fieldNames();
 		foreach ($fields as $f) {
 			if (!in_array($f, $fieldNames)){
@@ -1298,7 +1299,9 @@ abstract class Streams extends Base_Streams
 	 *   @param {boolean} [$options.short] Show one part of the name only
 	 *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
 	 *   @param {boolean} [$options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
-	 *   @param {boolean} [$options.escape] If true, does HTML escaping of the retrieved fields
+	 *   @param {boolean} [$options.escape] If true, does HTML escaping of the retrieved field
+	 *   @param {string} [$options.asUserId=Users::loggedInUser()] Optionally override which user to get the display name as
+	 *   @param {string} [$options.fullAccess=false] if true, sets the $asUserId = $userId
 	 * @param {string} [$fallback='Someone'] HTML to return if there is no info to get displayName from.
 	 * @param {string|null} $default
 	 *  What to return if there is no info to get displayName from.
@@ -1309,7 +1312,9 @@ abstract class Streams extends Base_Streams
 		if ($userId instanceof Users_User) {
 			$userId = $userId->id;
 		}
-		if (!empty($options['fullAccess'])) {
+		if (!empty($options['asUserId'])) {
+			$asUserId = $options['asUserId'];
+		} else if (!empty($options['fullAccess'])) {
 			$asUserId = $userId;
 		} else {
 			$asUser = Users::loggedInUser();
@@ -3562,7 +3567,7 @@ abstract class Streams extends Base_Streams
 		$request->save();
 		
 		// Send Streams/request message to the stream
-		Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
+		Streams_Message::post($userId, $publisherId, $streamName, array(
 			'type' => 'Streams/request',
 			'instructions' => Q::take($request->fields, array(
 				'readLevel', 'writeLevel', 'adminLevel', 'expireTime', 'state'

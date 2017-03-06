@@ -135,17 +135,31 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
+	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
+	 *  with empty userId, which is used whenever someone shows up with the token
+	 *  and presents it via "Q.Streams.token" querystring parameter.
+	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
-	 *  @param {string|array} [$options.addLabel] label or an array of labels for adding publisher's contacts
-	 *  @param {string|array} [$options.addMyLabel] label or an array of labels for adding logged-in user's contacts
-	 *  @param {integer} [$options.readLevel] => the read level to grant those who are invited
-	 *  @param {integer} [$options.writeLevel] => the write level to grant those who are invited
-	 *  @param {integer} [$options.adminLevel] => the admin level to grant those who are invited
-	 *	@param {string} [$options.displayName] => the display name to use to represent the inviting user
-	 *  @param {string} [$options.appUrl] => Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
-	 *	@param {array} [$options.html] => an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName
+	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
+	 *  @param {string|array} [$options.addMyLabel] label or an array of ($label => array($title, $icon)) for adding asUserId's contacts
+	 *  @param {string|integer} [$options.readLevel] the read level to grant those who are invited
+	 *  @param {string|integer} [$options.writeLevel] the write level to grant those who are invited
+	 *  @param {string|integer} [$options.adminLevel] the admin level to grant those who are invited
+	 *  @param {array} [$options.permissions] array of additional permissions to grant
+	 *	@param {string} [$options.displayName] the display name to use to represent the inviting user
+	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
+	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
+	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
 	 * @see Users::addLink()
-	 * @return {array} returns array with keys "success", "invited", "statuses", "identifierTypes", "alreadyParticipating"
+	 * @return {array} Returns array with keys 
+	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "fb_uid", "label",
+	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
+	 *  The identifierTypes array is in the same order as well.
+	 *  If the "token" option was set to true, the array also contains the "invite"
+	 *  key pointing to a Streams_Invite object that was saved in the database
+	 *  (whose userId field is empty because anyone with the token may accept this invite).
 	 */
 	function invite($who, $options = array())
 	{

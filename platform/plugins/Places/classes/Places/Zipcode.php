@@ -43,14 +43,14 @@ class Places_Zipcode extends Base_Places_Zipcode
 	 * Call this function to find zipcodes near a certain location
 	 * @param {double} $latitude The latitude of the coordinates to search around
 	 * @param {double} $longitude The longitude of the coordinates to search around
-	 * @param {double} $miles The radius, in miles, around the central point of the zipcode
+	 * @param {double} $meters The radius, in meters, around the central point of the zipcode
 	 * @param {double} $limit Limit on how many to return. Defaults to 100.
 	 * @return {array} Returns an array of Places_Zipcode objects, if any are found.
 	 */
-	public static function nearby($latitude, $longitude, $miles, $limit = 100)
+	public static function nearby($latitude, $longitude, $meters, $limit = 100)
 	{
 		// First, get a bounding box that's big enough to avoid false negatives
-		$latGrid = $miles / 69.1703234283616;
+		$latGrid = $meters / 69.1703234283616;
 		$longGrid = abs($latGrid / cos(deg2rad($latitude)));
 		
 		// Now, select zipcodes in a bounding box using one of the indexes

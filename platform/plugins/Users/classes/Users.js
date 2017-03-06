@@ -229,7 +229,7 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
 				options
 			);
 		});
-		callback(null, devices, notifications);
+		Q.handle(callback, Users, [null, devices, notifications]);
 	});
 };
 

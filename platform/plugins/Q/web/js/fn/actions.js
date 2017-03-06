@@ -67,7 +67,7 @@ function _Q_actions(options) {
 				Q.Pointer.cancelClick(event);
 				event.stopPropagation();
 				Q.handle(state.onClick, $this, [this]);
-			}).on(Q.Pointer.start, function () {
+			}).on(Q.Pointer.start, function (event) {
 				$(this).addClass('Q_discouragePointerEvents');
 				$(window).on([Q.Pointer.end, '.Q_actions'], function () {
 					$(this).removeClass('Q_discouragePointerEvents');
