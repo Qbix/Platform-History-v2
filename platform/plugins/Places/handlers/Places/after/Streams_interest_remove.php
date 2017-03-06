@@ -6,12 +6,12 @@ function Places_after_Streams_interest_remove($params)
 	if ($location) {
 		$latitude = $location->getAttribute('latitude');
 		$longitude = $location->getAttribute('longitude');
-		$miles = $location->getAttribute('miles');
-		if ($latitude and $longitude and $miles) {
+		$meters = $location->getAttribute('meters');
+		if ($latitude and $longitude and $meters) {
 			Places_Nearby::unsubscribe(
 				$latitude,
 				$longitude,
-				$miles,
+				$meters,
 				$params['publisherId'],
 				array(
 					'transform' => array('Places_Interest', '_transform'),

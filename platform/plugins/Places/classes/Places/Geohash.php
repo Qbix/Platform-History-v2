@@ -32,7 +32,7 @@ class Places_Geohash
      * Call this function to calculate a hash from latitude, longitude
 	 * @param {float} $latitude
 	 * @param {float} $longitude
-	 * @param {integer} $length Optional length of the resulting geohash
+	 * @param {integer} [$length] Optional length of the resulting geohash
 	 * @return {string}
      */
     static public function encode($latitude, $longtitude, $length = null){

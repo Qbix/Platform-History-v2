@@ -7,7 +7,7 @@ function Places_autocomplete_response_results()
 		'types' => null, 
 		'latitude' => null, 
 		'longitude' => null,
-		'miles' => 25
+		'meters' => 25
 	));
 	return Places::autocomplete(
 		$r['input'], 
@@ -15,6 +15,6 @@ function Places_autocomplete_response_results()
 		$r['types'], 
 		$r['latitude'], 
 		$r['longitude'],
-		$r['miles']
+		$r['meters']
 	);
 }

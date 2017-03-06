@@ -1570,6 +1570,9 @@ Q.instanceOf = function (testing, Constructor) {
  *  Returns the shallow copy where some properties may have deepened the copy
  */
 Q.copy = function _Q_copy(x, fields, levels) {
+	if (Buffer && (x instanceof Buffer)) {
+		return new Buffer(x);
+	}
 	if (Q.typeOf(x) === 'array') {
 		var result = Array.prototype.slice.call(x, 0);
 		var keys = Object.keys(x);
@@ -1586,28 +1589,19 @@ Q.copy = function _Q_copy(x, fields, levels) {
 	}
 	var result = Q.objectWithPrototype(Object.getPrototypeOf(x)), i, k, l;
 	if (fields) {
-		l = fields.length;
-		for (i=0; i<l; ++i) {
+		for (i=0, l = fields.length; i<l; ++i) {
 			k = fields[i];
-			if (!(k in x)) continue;
-			if (x[k] && typeof(x[k].copy) === 'function') {
-				result[k] = x[k].copy();
-			} else {
-				result[k] = x[k];
+			if (!(k in x)) {
+				continue;
 			}
+			result[k] = levels ? Q.copy(x[k], null, levels-1) : x[k];
 		}
 	} else {
 		for (k in x) {
 			if (!Q.has(x, k)) {
 				continue;
 			}
-			if (x[k] && typeof(x[k].copy) === 'function') {
-				result[k] = x[k].copy();
-			} else if (levels) {
-				result[k] = Q.copy(x[k], null, levels-1);
-			} else {
-				result[k] = x[k];
-			}
+			result[k] = levels ? Q.copy(x[k], null, levels-1) : x[k];
 		}
 	}
 	return result;

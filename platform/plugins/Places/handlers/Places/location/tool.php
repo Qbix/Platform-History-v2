@@ -9,8 +9,9 @@
  * @class Places location
  * @constructor
  * @param {array} [$options] used to pass options
- * @param {array} [$options.miles] array of { miles: title } pairs, by default is generated from Places/nearby/miles config
- * @param {array} [$options.defaultMiles] override the key in the miles array to select by default. Defaults to "Places/nearby/defaultMiles" config
+ * @param {array} [$options.meters] array of { meters: title } pairs, by default is generated from Places/nearby/meters config
+ * @param {array} [$options.defaultMeters] override the key in the meters array to select by default. Defaults to "Places/nearby/defaultMeters" config
+ * @param {string} [$options.units] second parameter to pass to Places::distanceLabel()
  * @param {array} [$options.map] options for the map
  * @param {integer} [$options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
  * @param {string} [$options.map.prompt="img/map.png"] The src of the map graphical prompt when no location has been selected yet
@@ -20,17 +21,18 @@
  */
 function Places_location_tool($options)
 {
-	if (empty($options['miles'])) {
-		$options['miles'] = array();
-		foreach (Q_Config::expect('Places', 'nearby', 'miles') as $m) {
-			$options['miles'][$m] = $m === 1 ? "$m mile" : "$m miles";
+	if (empty($options['meters'])) {
+		$options['meters'] = array();
+		$units = Q::ifset($options, 'units', null);
+		foreach (Q_Config::expect('Places', 'nearby', 'meters') as $m) {
+			$options['meters'][$m] = Places::distanceLabel($m, $units);
 		}
 	}
 	if (empty($options['map']['prompt'])) {
 		$options['map']['prompt'] = Q_Html::themedUrl('plugins/Places/img/map.png');
 	}
-	if (!isset($options['defaultMiles'])) {
-		$options['defaultMiles'] = Q_Config::expect('Places', 'nearby', 'defaultMiles');
+	if (!isset($options['defaultMeters'])) {
+		$options['defaultMeters'] = Q_Config::expect('Places', 'nearby', 'defaultMeters');
 	}
 	
 	Q_Response::setToolOptions($options);

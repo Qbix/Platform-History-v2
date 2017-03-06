@@ -1938,8 +1938,8 @@ abstract class Users extends Base_Users
 	 * @param {string} $asUserId The user who would be doing the managing
 	 * @param {string} $userId The user whose contacts they are
 	 * @param {string} $label The label of the contacts that will be managed
-	 * @param {boolean} $throwIfNotAuthorized Throw an exception if not authorized
-	 * @param {boolean} $readOnly Whether we just want to know if the user can view the labels
+	 * @param {boolean} [$throwIfNotAuthorized=false] Throw an exception if not authorized
+	 * @param {boolean} [$readOnly=false] Whether we just want to know if the user can view the labels
 	 * @return {boolean} Whether a contact with this label is allowed to be managed
 	 * @throws {Users_Exception_NotAuthorized}
 	 */

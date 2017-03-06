@@ -20,7 +20,7 @@ Q.text.Places.address = {
  * @param {Object} [options] used to pass options
  * @param {Number} [options.latitude] latitude of bias point
  * @param {Number} [options.longitude] longitude of bias point
- * @param {Number} [options.miles] try to find things within this radius
+ * @param {Number} [options.meters] try to find things within this radius
  * @param {String} [options.searchQuery] use this to fill the initial results, if any
  * @param {Number} [options.types] the type to pass to google's nearbySearch
  * @param {Object} [options.filter] Options for the child Q/filter tool
@@ -29,7 +29,7 @@ Q.text.Places.address = {
  * @param {Q.Event} [options.onError] When there was some kind of error
  */
 
-Q.Tool.define("Places/location", function (options) {
+Q.Tool.define("Places/address", function (options) {
 	var tool = this;
 	var state = this.state;
 	state.mapElement = state.mapElement || $('<div />').appendTo(this.element)[0];
@@ -73,7 +73,7 @@ Q.Tool.define("Places/location", function (options) {
 },
 
 { // default options here
-	miles: 1000,
+	meters: 1000,
 	searchQuery: null,
 	filter: {
 		placeholder: Q.text.Places.address.filter
@@ -97,7 +97,7 @@ Q.Tool.define("Places/location", function (options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
-		var miles = state.miles;
+		var meters = state.meters;
 		var latitude = state.latitude;
 		var longitude = state.longitude;
 		var searchQuery = state.searchQuery && state.searchQuery.trim();
@@ -134,7 +134,7 @@ Q.Tool.define("Places/location", function (options) {
 					distance = Q.Places.distance(
 						latitude, longitude, l.lat(), l.lng()
 					);
-					if (distance > miles) {
+					if (distance > meters) {
 						return false;
 					}
 					d = Math.round(distance)+1;

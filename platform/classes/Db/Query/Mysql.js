@@ -1166,7 +1166,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 		var keys = Object.keys(mq.parameters);
 		keys.sort(replaceKeysCompare);
 		function makeSQL(connection) {
-			var k, key, value, value2;
+			var k, key, value, value2, values3 = {};
 			for (k in keys) {
 				key = keys[k];
 				value = mq.parameters[key];
@@ -1180,10 +1180,20 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 					value2 = connection.escape(value);
 				}
 				if (Q.isInteger(key)) {
-					repres = repres.replace('?', value2);
+					values3[key] = value2;
 				} else {
 					repres = repres.replace(":"+key, value2);
 				}
+			}
+			var i = 0;
+			if (!Q.isEmpty(values3)) {
+				repres = repres.replace( /\?/g, function() {
+					var v = values3[i++];
+					if (v === undefined) {
+						console.log(repres, i);
+					}
+					return v !== undefined ? v : '?';
+				});
 			}
 			if (callback)
 				Q.extend(mq.replacements, {'{\\$prefix}': mq.db.prefix(), '{\\$dbname}': mq.db.dbname()});
