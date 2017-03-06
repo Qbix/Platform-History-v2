@@ -369,7 +369,7 @@ function Streams_request_handler (req, res, next) {
 	}
 	var participant, stream, msg, posted, streams, deviceId, title, k;
 	var userIds, invitingUserId, username, appUrl, parts, rest, label, myLabel;
-	var readLevel, writeLevel, adminLevel, displayName, expireTime, logKey;
+	var readLevel, writeLevel, adminLevel, permissions, displayName, expireTime, logKey;
 	var clientId = parsed["Q.clientId"];
 	var stream = parsed.stream
 		&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
@@ -558,6 +558,7 @@ function Streams_request_handler (req, res, next) {
 					"readLevel": readLevel,
 					"writeLevel": writeLevel,
 					"adminLevel": adminLevel,
+					"permissions": permissions,
 					"expireTime": expireTime
 				})).save(_inviteSaved);
 			}

@@ -14,8 +14,9 @@ var Places = Q.Places;
  * @class Places location
  * @constructor
  * @param {Object} [options] used to pass options
- * @param {array} [options.meters] array of { meters: title } pairs, by default is generated from Places/nearby/meters config
+ * @param {Object} [options.meters] object of { meters: title } pairs, by default is generated from Places/nearby/meters config
  * @param {array} [options.defaultMeters] override the key in the meters array to select by default. Defaults to "Places/nearby/defaultMeters" config
+ * @param {String} [options.units] second parameter to pass to Places.distanceLabel
  * @param {String} [options.updateButton="Update my location"] the title of the update button
  * @param {Object} [options.map] options for the map
  * @param {Number} [options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
@@ -42,7 +43,7 @@ Q.Tool.define("Places/location", function (options) {
 		var pnm = Places.nearby.meters;
 		for (var i=0, l=pnm.length; i<l; ++i) {
 			var m = pnm[i];
-			state.meters[m] = Places.distanceLabel(m);
+			state.meters[m] = Places.distanceLabel(m, state.units);
 		}
 	}
 	if (state.defaultMeters === undefined) {
@@ -301,6 +302,7 @@ Q.Tool.define("Places/location", function (options) {
 		prompt: Q.url('plugins/Places/img/map.png')
 	},
 	timeout: 10000,
+	units: 'km',
 	onReady: new Q.Event(),
 	onSet: new Q.Event(),
 	onUnset: new Q.Event(),

@@ -76,12 +76,23 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @method distanceLabel
 	 * @static
 	 * @param {double} meters
+	 * @param {string} [units] optionally specify 'km', 'kilometers' or 'miles'
 	 * @return {string} Returns a label that looks like "x.y km", "x miles" or "x meters"
 	 */
-	distanceLabel: function(meters) {
-		return Math.abs(meters - Math.round(meters/1609.34)) < 0.01
-			? Math.floor(meters/1609.34)+" miles"
-			: (meters % 100 == 0 ? (meters/1000)+" km" : Math.ceil(meters)+" meters");
+	distanceLabel: function(meters, units) {
+		if (!units) {
+			var milesr = Math.abs(meters/1609.34 - Math.round(meters/1609.34));
+			var kmr = Math.abs(meters/1000 - Math.round(meters/1000));
+			units = miles < kmr ? 'miles' : 'km';
+		}
+		switch (units) {
+		case 'miles':
+			return Math.round(meters/1609.34*10)/10+" miles";
+		case 'km':
+		case 'kilometers':
+		default:
+			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
+		}
 	}
 
 };
