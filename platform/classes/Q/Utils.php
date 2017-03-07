@@ -191,7 +191,7 @@ class Q_Utils
 				$replacement = Q_Config::get('Db', 'normalize', 'replacement', $replacement);
 			}
 		}
-		$result = preg_replace($characters, $replacement, strtolower($text));
+		$result = preg_replace($characters, $replacement, mb_strtolower($text, 'UTF-8'));
 		if (strlen($text) > $numChars) {
 			$result = substr($result, 0, $numChars - 11) . '_' 
 					  . self::hashCode(substr($result, $numChars - 11));

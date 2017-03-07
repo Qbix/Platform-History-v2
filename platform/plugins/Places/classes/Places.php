@@ -42,7 +42,7 @@ abstract class Places extends Base_Places
 		$meters = 40234)
 	{
 		$supportedTypes = array("establishment", "locality", "sublocality", "postal_code", "country", "administrative_area_level_1", "administrative_area_level_2");
-		$input = strtolower($input);
+		$input = mb_strtolower($input, 'UTF-8');
 		if (is_string($types)) {
 			$types = explode(',', $types);
 		} else if ($types === true) {
@@ -117,11 +117,11 @@ abstract class Places extends Base_Places
 		$json = curl_exec($ch);
 		curl_close($ch);
 		$response = json_decode($json, true);
-		if (empty($response['predictions'])) {
-			throw new Q_Exception("Places::autocomplete: Couldn't obtain predictions for $input");
-		}
 		if (!empty($response['error_message'])) {
 			throw new Q_Exception("Places::autocomplete: ".$response['error_message']);
+		}
+		if (empty($response['predictions'])) {
+			throw new Q_Exception("Places::autocomplete: Couldn't obtain predictions for $input");
 		}
 		$results = $response['predictions'];
 		if ($pa) {
