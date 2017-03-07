@@ -599,6 +599,10 @@ class Db_Mysql implements iDb
         if (!isset($order_by_clause))
             $order_by_clause = "ORDER BY $pts_field DESC";
             
+		if (!isset($where)) {
+			$where = '1';
+		}
+			
         if (empty($rank_level2)) {
             $this->update($table)
                 ->set(array($rank_field => 0))
@@ -624,8 +628,7 @@ class Db_Mysql implements iDb
         }
         
         // Count all the rows
-    	$rows = $this->rawQuery("SELECT COUNT(1) _count FROM $table")
-			->where($where)
+    	$rows = $this->rawQuery("SELECT COUNT(1) _count FROM $table WHERE $where")
 			->fetchAll(PDO::FETCH_ASSOC);
 		$count = $rows[0]['_count'];
     	
