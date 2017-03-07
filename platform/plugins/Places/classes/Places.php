@@ -42,7 +42,7 @@ abstract class Places extends Base_Places
 		$meters = 40234)
 	{
 		$supportedTypes = array("establishment", "locality", "sublocality", "postal_code", "country", "administrative_area_level_1", "administrative_area_level_2");
-		$input = strtolower($input);
+		$input = mb_strtolower($input, 'UTF-8');
 		if (is_string($types)) {
 			$types = explode(',', $types);
 		} else if ($types === true) {

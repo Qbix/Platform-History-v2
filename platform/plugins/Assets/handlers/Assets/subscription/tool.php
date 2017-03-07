@@ -18,7 +18,7 @@ function Assets_subscription_tool($options)
 		throw new Q_Exception_RequiredField(array('field' => 'payments'), 'payments');
 	}
 	$payments = ucfirst($options['payments']);
-	$lcpayments = strtolower($payments);
+	$lcpayments = mb_strtolower($payments, 'UTF-8');
 	$currency = strtolower(Q::ifset($options, 'currency', 'usd'));
 	if ($payments === 'Authnet' and $currency !== 'usd') {
 		throw new Q_Exception("Authnet doesn't support currencies other than USD", 'currency');
