@@ -564,6 +564,7 @@ class Db_Mysql implements iDb
      * @param {string} $table The name of the table in the database
      * @param {string} $pts_field The name of the field to rank by.
      * @param {string} $rank_field The rank field to update in all the rows
+     * @param {integer} [$start=1] The value of the first rank
      * @param {integer} [$chunk_size=1000] The number of rows to process at a time. Default is 1000.
      * This is so the queries don't tie up the database server for very long,
      * letting it service website requests and other things.
@@ -574,20 +575,26 @@ class Db_Mysql implements iDb
      *  (That might be a time consuming operation.)
      *  Otherwise, if $rank is a nonzero integer, then the function alternates
      *  between the ranges
-     *  0 to $rank_level2, and $rank_level2 to $rank_level2 * 2.
+     *  $start to $rank_level2, and $rank_level2 + $start to $rank_level2 * 2.
      *  That is, after it is finished, all the ratings will be in one of these
      *  two ranges.
      *  If not empty, this should be a very large number, like a billion.
      * @param {string} [$order_by_clause=null] The order clause to use when calculating ranks.
-     *  Default is "ORDER BY `$pts_field` DESC"
+     *  Default is "ORDER BY $pts_field DESC"
+     * @param {string} [$where=null] Any additional criteria to filter the table by.
+	 *  Please provide a string here, not an array.
+	 *  You should use $db->quote($value) to escape the values yourself.
+	 *  The ranking algorithm will do its work within the results that match this criteria.
      */
     function rank(
         $table,
         $pts_field, 
         $rank_field, 
+		$start = 1,
         $chunk_size = 1000, 
         $rank_level2 = 0,
-        $order_by_clause = null)
+        $order_by_clause = null,
+		$where = null)
     {	
         if (!isset($order_by_clause))
             $order_by_clause = "ORDER BY $pts_field DESC";
@@ -595,12 +602,14 @@ class Db_Mysql implements iDb
         if (empty($rank_level2)) {
             $this->update($table)
                 ->set(array($rank_field => 0))
+				->where($where)
                 ->execute();
             $rank_base = 0;
             $condition = "$rank_field = 0 OR $rank_field IS NULL";
         } else {
             $rows = $this->select($pts_field, $table)
                 ->where("$rank_field < $rank_level2")
+				->andWhere($where)
                 ->limit(1)
                 ->fetchAll();
             if (!empty($rows)) {
@@ -616,17 +625,19 @@ class Db_Mysql implements iDb
         
         // Count all the rows
     	$rows = $this->rawQuery("SELECT COUNT(1) _count FROM $table")
+			->where($where)
 			->fetchAll(PDO::FETCH_ASSOC);
 		$count = $rows[0]['_count'];
     	
         // Here comes the magic:
-        $offset = 0;
+		$condition2 = isset($where) ? '1' : $where;
 		$this->rawQuery("set @rank = $offset")->execute();
         do {
     		$this->rawQuery("
     			UPDATE $table 
     			SET $rank_field = $rank_base + (@rank := @rank + 1)
     			WHERE $condition
+				AND $condition2
     			$order_by_clause
     			LIMIT $chunk_size
     		")->execute();
