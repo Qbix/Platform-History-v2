@@ -920,16 +920,14 @@ abstract class Streams extends Base_Streams
 				$relate['publisherId'],
 				$relate['streamName']
 			);
-			if ($rs and $rs->inheritAccess) {
-				// inherit from the same stream $rs does
-				$inheritAccess = $rs->inheritAccess;
-			} else {
-				// inherit from $rs
-				$inheritAccess = Q::json_encode(array(array(
-					$relate['publisherId'], $relate['streamName']
-				)));
+			$inheritAccess = ($rs and $rs->inheritAccess)
+				? Q::json_decode($rs->inheritAccess)
+				: array();
+			$newInheritAccess = $relate['publisherId'], $relate['streamName'];
+			if ($inheritAccess and !in_array($newInheritAccess, $inheritAccess)) {
+				$inheritAccess[] = $newInheritAccess;
 			}
-			$stream->inheritAccess = $inheritAccess;
+			$stream->inheritAccess = Q::json_encode($inheritAccess);
 		}
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
