@@ -4012,11 +4012,11 @@ abstract class Streams extends Base_Streams
 	static $beingSaved = null;
 	static $beingSavedQuery = null;
 	/**
-	 * You can set this to false to prevent caching for a while,
-	 * e.g. during installer scripts, but make sure to set it back to true when done.
+	 * You can set this to true to prevent caching for a while,
+	 * e.g. during installer scripts, but make sure to set it back to false when done.
 	 * @property $dontCache
 	 * @static
 	 * @type string
 	 */
-	static $dontCache = true;
+	static $dontCache = false;
 };
