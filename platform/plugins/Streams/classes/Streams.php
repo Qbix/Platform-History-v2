@@ -923,7 +923,7 @@ abstract class Streams extends Base_Streams
 			$inheritAccess = ($rs and $rs->inheritAccess)
 				? Q::json_decode($rs->inheritAccess)
 				: array();
-			$newInheritAccess = $relate['publisherId'], $relate['streamName'];
+			$newInheritAccess = array($relate['publisherId'], $relate['streamName']);
 			if ($inheritAccess and !in_array($newInheritAccess, $inheritAccess)) {
 				$inheritAccess[] = $newInheritAccess;
 			}
