@@ -6,7 +6,7 @@ The Qbix Platform
 ===
 
 ###Getting Started
-[![ScreenShot](https://i.vimeocdn.com/video/483865734_960.jpg)](https://vimeo.com/101967404)
+[![ScreenShot](https://i.vimeocdn.com/video/616450434.webp?mw=900&mh=600)](https://vimeo.com/202332912)
 
 ###About Qbix
 There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps.

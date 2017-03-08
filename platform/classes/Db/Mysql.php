@@ -633,7 +633,7 @@ class Db_Mysql implements iDb
 		$count = $rows[0]['_count'];
     	
         // Here comes the magic:
-		$condition2 = isset($where) ? '1' : $where;
+		$condition2 = isset($where) ? $where : '1';
 		$offset = 0;
 		$rank_base += $start;
 		$this->rawQuery("set @rank = $offset")->execute();
@@ -641,7 +641,7 @@ class Db_Mysql implements iDb
     		$this->rawQuery("
     			UPDATE $table 
     			SET $rank_field = $rank_base + (@rank := @rank + 1)
-    			WHERE $condition
+    			WHERE ($condition)
 				AND $condition2
     			$order_by_clause
     			LIMIT $chunk_size
