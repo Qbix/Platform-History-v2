@@ -1449,7 +1449,7 @@ Q.instanceOf = function (testing, Constructor) {
  *  Returns the shallow copy where some properties may have deepened the copy
  */
 Q.copy = function _Q_copy(x, fields, levels) {
-	if (ArrayBuffer && (x instanceof ArrayBuffer)) {
+	if (root.ArrayBuffer && (x instanceof ArrayBuffer)) {
 		var result = ArrayBuffer.prototype.slice.call(x, 0);
 	}
 	if (Q.typeOf(x) === 'array') {
