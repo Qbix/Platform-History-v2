@@ -189,10 +189,6 @@ class Streams_Avatar extends Base_Streams_Avatar
 			$f2 = $fallback;
 		}
 
-		if (!empty($options['short'])) {
-			return $fn ? $fn2 : ($u ? $u2 : $f2);
-		}
-
 		// $u = $u ? "\"$username\"" : '';
 
 		if (!empty($options['show'])) {
@@ -204,7 +200,9 @@ class Streams_Avatar extends Base_Streams_Avatar
 			return implode(' ', $parts);
 		}
 
-		if ($fn and $ln) {
+		if (!empty($options['short'])) {
+			return $fn ? $fn2 : ($u ? $u2 : $f2);
+		} else if ($fn and $ln) {
 			return "$fn2 $ln2";
 		} else if ($fn and !$ln) {
 			return $u ? "$fn2 $u2" : $fn2;
