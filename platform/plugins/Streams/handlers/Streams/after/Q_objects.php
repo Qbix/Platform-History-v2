@@ -5,7 +5,7 @@ function Streams_after_Q_objects () {
 	if (!$user) return;
 	$invite = Streams::$followedInvite;
 	if (!$invite) return;
-	$displayName = $user->displayName();
+	$displayName = $user->displayName(array('show' => 'f l'));
 	$showDialog = !$displayName;
 	
 	$p = compact('user', 'invite', 'displayName');
