@@ -34,7 +34,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 * @return {Streams_Avatar|array}
 	 */
 	static function fetch($toUserId, $publisherId, $indexField = null) {
-		if (!isset($toUserIs)) {
+		if (!isset($toUserId)) {
 			$toUserId = Users::loggedInUser();
 			if (!$toUserId) $toUserId = "";
 		}
@@ -147,7 +147,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 * @param {array} $options=array()
 	 *  Associative array of options, which can include:<br/>
 	 *   @param {boolean} [$options.short] Show one part of the name only
-	 *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
+	 *   @param {boolean} [$options.show] The parts of the name to show. Can have "f", "fu", "l", "lu", "flu" and "u" separated by spaces. The "fu" and "lu" represent firstname or lastname with fallback to username, while "flu" is "firstname lastname" with a fallback to username.
 	 *   @param {boolean} [$options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
 	 *   @param {boolean} [$options.escape] If true, does HTML escaping of the retrieved fields
 	 * @param {string} [$fallback='Someone'] HTML to return if there is no info to get displayName from.
@@ -192,12 +192,25 @@ class Streams_Avatar extends Base_Streams_Avatar
 		// $u = $u ? "\"$username\"" : '';
 
 		if (!empty($options['show'])) {
-			$show = str_split($options['show']);
+			$show = array_map('trim', explode(' ', $options['show']));
 			$parts = array();
 			foreach ($show as $s) {
-				$parts[] = ($s == 'f' ? $fn2 : ($s == 'l' ? $ln2 : $u2));
+				switch ($s) {
+				case 'f': $parts[] = $fn2; break;
+				case 'l': $parts[] = $ln2; break;
+				case 'u': $parts[] = $u2; break;
+				case 'fu': $parts[] = $fn2 ? $fn2 : $u2; break;
+				case 'lu': $parts[] = $ln2 ? $ln2 : $u2; break;
+				case 'flu':
+				default:
+					$parts[] = ($fn2 || $ln2)
+						? implode(' ', array($fn2, $ln2))
+						: $u2;
+					break;
+				}
 			}
-			return implode(' ', $parts);
+			$result = trim(implode(' ', $parts));
+			return $result ? $result : $fallback;
 		}
 
 		if (!empty($options['short'])) {

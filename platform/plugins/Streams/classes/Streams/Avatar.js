@@ -39,7 +39,7 @@ Q.mixin(Streams_Avatar, Q.require('Base/Streams/Avatar'));
  * @method displayName
  * @param {Object} [options] A bunch of options which can include:
  *   @param {Boolean} [options.short] Show one part of the name only
- *   @param {boolean} [options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
+ *   @param {boolean} [options.show] The parts of the name to show. Can have "f", "fu", "l", "lu", "flu" and "u" separated by spaces. The "fu" and "lu" represent firstname or lastname with fallback to username, while "flu" is "firstname lastname" with a fallback to username.
  *   @param {Boolean} [options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
  *   @param {Boolean} [options.escape] If true, does HTML escaping of the retrieved fields
  * @param {String} [fallback='Someone'] What to return if there is no info to get displayName from.
@@ -69,13 +69,25 @@ Streams_Avatar.prototype.displayName = function _Avatar_prototype_displayName (o
 		f2 = fallback;
 	}
 	if (options && options.show) {
-		var show = options.show.split('');
+		var show = options.show.split(' ').map(function (x) {
+			return x.trim();
+		});
 		var parts = [];
 		for (var i=0, l=show.length; i<l; ++i) {
 			var s = show[i];
-			parts.push(s == 'f' ? fn2 : (s == 'l' ? ln2 : u2));
+			switch (s) {
+			case 'f': parts.push(fn2); break;
+			case 'l': parts.push(ln2); break;
+			case 'u': parts.push(u2); break;
+			case 'fu': parts.push(fn2 ? fn2 : u2); break;
+			case 'lu': parts.push(ln2 ? ln2 : u2); break;
+			case 'flu':
+			default:
+				parts.push(fn2 || ln2 ? [fn2, ln2].join(' ') : u2);
+				break;
+			}
 		}
-		return parts.join(' ');
+		return parts.join(' ').trim() || f2;
 	}
 	if (options && options.short) {
 		return fn ? fn2 : (u ? u2 : f2);

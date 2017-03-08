@@ -5,7 +5,7 @@ function Streams_after_Q_objects () {
 	if (!$user) return;
 	$invite = Streams::$followedInvite;
 	if (!$invite) return;
-	$displayName = $user->displayName(array('show' => 'f l'));
+	$displayName = $user->displayName(array('show' => 'flu'));
 	$showDialog = !$displayName;
 	
 	$p = compact('user', 'invite', 'displayName');
@@ -46,7 +46,8 @@ function Streams_after_Q_objects () {
 		'user' => array(
 			'icon' => $invitingUser->iconUrl(),
 			'displayName' => $invitingUser->displayName(array(
-				'fullAccess' => true
+				'fullAccess' => true,
+				'show' => 'flu'
 			))
 		),
 		'templateName' => $templateName,
