@@ -636,7 +636,7 @@ class Db_Mysql implements iDb
 		$condition2 = isset($where) ? $where : '1';
 		$offset = 0;
 		$rank_base += $start;
-		$this->rawQuery("set @rank = $offset")->execute();
+		$this->rawQuery("set @rank = $offset - 1")->execute();
         do {
     		$this->rawQuery("
     			UPDATE $table 
