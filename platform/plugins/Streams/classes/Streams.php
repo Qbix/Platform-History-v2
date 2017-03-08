@@ -1301,11 +1301,11 @@ abstract class Streams extends Base_Streams
 	 *   @param {string} [$options.asUserId=Users::loggedInUser()] Optionally override which user to get the display name as
 	 *   @param {string} [$options.fullAccess=false] if true, sets the $asUserId = $userId
 	 * @param {string} [$fallback='Someone'] HTML to return if there is no info to get displayName from.
-	 * @param {string|null} $default
+	 * @param {string|null} [$fallback='Someone']
 	 *  What to return if there is no info to get displayName from.
 	 * @return {string|null}
 	 */
-	static function displayName($userId, $options = array(), $default = null)
+	static function displayName($userId, $options = array(), $fallback = 'Someone')
 	{
 		if ($userId instanceof Users_User) {
 			$userId = $userId->id;
@@ -1319,7 +1319,7 @@ abstract class Streams extends Base_Streams
 			$asUserId = $asUser ? $asUser->id : "";
 		}
 		$avatar = Streams_Avatar::fetch($asUserId, $userId);
-		return $avatar ? $avatar->displayName($options, $default) : $default;
+		return $avatar ? $avatar->displayName($options, $fallback) : $default;
 	}
 
 	/**
