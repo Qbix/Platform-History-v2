@@ -93,6 +93,89 @@ var Places = Q.Places = Q.plugins.Places = {
 		default:
 			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
 		}
+	},
+
+	/**
+	 * Calculate google position object from different arguments
+	 * @method getGooglePosition
+	 * @param {object|string} loc (Places/location stream, google placeId, a "latitude,longitude" pair, address, {userId: ...}, {latitude: ..., longitude})
+	 * @param {function} callback
+	 */
+	getGooglePosition: function (loc, callback) {
+		if (!loc) return;
+
+		// loc already is a geocoder.geocode object
+		if(loc.lat && loc.lng){
+			callback(loc);
+			return;
+		}
+
+		var tool = this;
+		var param = {};
+
+		if (typeof loc === 'string') {
+			var parts = loc.split(',');
+			if (parts.length == 2 && !isNaN(parts[0]) && !isNaN(parts[1])) { // loc is lng,ltd pair
+				param.location = {
+					lat: parseFloat(parts[0]),
+					lng: parseFloat(parts[1])
+				};
+			} else if (loc.indexOf(' ') >= 0) { // loc is address
+				param.address = loc;
+			}else{ // loc is google place_id
+				param.placeId = loc;
+			}
+		} else if (Q.typeOf(loc) === 'Q.Streams.Stream') {// loc is Places/location stream
+			if (loc.fields.type !== 'Places/location') {
+				throw new Q.Error();
+			}
+			param.location = {
+				lat: parseFloat(loc.getAttribute('latitude')),
+				lng: parseFloat(loc.getAttribute('longitude'))
+			};
+		} else if(Q.typeOf(loc) === 'object'){
+			if(loc.placeId){ // loc is object {placeId: ...}
+				param.placeId = loc.placeId;
+			}else if(loc.latitude && loc.longitude){ // loc is object {latitude: ..., longitude: ...}
+				param.location = {
+					lat: parseFloat(loc.latitude),
+					lng: parseFloat(loc.longitude)
+				};
+			}else if(loc.userId){ // loc is user id
+				Q.Streams.get(loc.userId, "Places/user/location", function (err) {
+					if (err) {
+						return;
+					}
+
+					tool.getGooglePosition(this, callback);
+				});
+
+				return;
+			}else{
+				throw new Q.Error("Travel/map: unknown loc param: " + loc);
+			}
+		}else{
+			throw new Q.Error("Travel/map: unknown loc param: " + loc);
+		}
+
+		// localy calculate if known lat and lng, to avoid OVER_QUERY_LIMIT
+		if(param.location){
+			callback(new google.maps.LatLng(param.location.lat, param.location.lng));
+			return;
+		}
+
+		// calculate location only for placeId and address
+		var geocoder = new google.maps.Geocoder;
+		geocoder.geocode(param, function (results, status) {
+			if (status !== 'OK') {
+				throw new Q.Error("Travel/map: Can't geocode " + status);
+			}
+			if (!results[0]) {
+				throw new Q.Error("Travel/map: No place matched " + results);
+			}
+
+			callback(results[0].geometry.location);
+		});
 	}
 
 };
