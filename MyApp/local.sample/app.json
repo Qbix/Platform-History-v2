@@ -41,7 +41,7 @@
 	"Db": {
 		"connections": {
 			"*": {
-				"dsn": "mysql:host=localhost;dbname=DBNAME",
+				"dsn": "mysql:host=localhost;dbname=DBNAME;charset=utf8",
 				"username": "USERNAME",
 				"password": "PASSWORD",
 				"driver_options": { "3": 2 }	
@@ -125,6 +125,7 @@
 			"platforms": [] /* ["ios", "android"] */,
 			"ios": {
 				"sandbox": true,
+				"logging": "ios",
 				"device": {
 					"adding": "Notifications have been enabled"
 				},

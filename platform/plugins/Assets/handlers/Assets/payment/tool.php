@@ -33,7 +33,7 @@ function Assets_payment_tool($options)
 	if (!empty($options['image'])) {
 		$options['image'] = Q_Html::themedUrl($options['image']);
 	}
-	$options['payments'] = strtolower($options['payments']);
+	$options['payments'] = mb_strtolower($options['payments'], 'UTF-8');
 	if (empty($options['email'])) {
 		$options['email'] = Users::loggedInUser(true)->emailAddress;
 	}

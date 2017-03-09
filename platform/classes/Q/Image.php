@@ -93,7 +93,7 @@ class Q_Image
 		$defaults = array();
 		$options = array_merge($defaults, $options);
 		$optionString = http_build_query($options, '', '&');
-		$keywords = urlencode(strtolower($keywords));
+		$keywords = urlencode(mb_strtolower($keywords, 'UTF-8'));
 		$url = "https://pixabay.com/api/?key=$key&q=$keywords&$optionString";
 		$json = @file_get_contents($url);
 		$data = Q::json_decode($json, true);
@@ -219,7 +219,7 @@ class Q_Image
 		$data = array();
 		$merge = null;
 		$m = isset($params['merge']) ? $params['merge'] : null;
-		if (isset($m) && strtolower(substr($m, -4)) === '.png') {
+		if (isset($m) && mb_strtolower(substr($m, -4), 'UTF-8') === '.png') {
 			$mergePath = Q::realPath(APP_WEB_DIR.DS.implode(DS, explode('/', $m)));
 			if ($mergePath) {
 				$merge = imagecreatefrompng($mergePath);
@@ -406,7 +406,7 @@ class Q_Image
 		if (!imagecopyresampled($out, $image , 0, 0, $x, $y, $w2, $h2, $w, $h)) {
 			return false;
 		}
-		switch (strtolower($pi['extension'])) {
+		switch (mb_strtolower($pi['extension'], 'UTF-8')) {
 			case 'jpg':
 			case 'jpeg':
 				return !!imagejpeg($out, $out_filename);
