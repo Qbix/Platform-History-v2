@@ -103,9 +103,9 @@ var Places = Q.Places = Q.plugins.Places = {
  */
 Places.Location = {
 	/**
+	 * Get the user's "Places/user/location" stream
 	 * @method getUserStream
 	 * @static
-	 * Get the user's "Places/user/location" stream
 	 * @param {Function} callback receives (err, stream)
 	 */
 	getUserStream: function (callback) {
@@ -120,6 +120,61 @@ Places.Location = {
 				return callback(err);
 			}
 			callback.call(this, err, this);
+		});
+	},
+	
+	/**
+	 * Obtain geocoding definition from a geocoding service
+	 * @method geocode
+	 * @static
+	 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
+	 * @param {Function} callback gets (array of results of the geolocation, and status code)
+	 * @param {Object} [options]
+	 * @param {Object} [options.provider='google']
+	 */
+	geocode: function (loc, callback, options) {
+		var o = options || {};
+		o.provider = o.provider || 'google';
+		if (o.provider !== 'google') {
+			return;
+		}
+		Places.loadGoogleMaps(function () {
+			var param = {};
+			var p = "Places.Location.geocode: ";
+			if (Q.typeOf(loc) === 'Q.Streams.Stream') {
+				if (loc.fields.type !== 'Places/location') {
+					throw new Q.Error(p + "stream must have type Places/location");
+				}
+				loc = loc.getAllAttributes();
+			}
+			if (loc.placeId) {
+				param.placeId = loc.placeId;
+			} else if (loc.latitude || loc.longitude) {
+				if (!loc.latitude) {
+					throw new Q.Error(p + "missing latitude");
+				}
+				if (!loc.latitude) {
+					throw new Q.Error(p + "missing longitude");
+				}
+				param.location = {
+					lat: loc.latitude,
+					lng: loc.longitude
+				};
+			} else if (loc.address) {
+				param.address = loc.address;
+			} else {
+				throw new Q.Error(p + "wrong location format");
+			}
+			var geocoder = new google.maps.Geocoder;
+			geocoder.geocode(param, function (results, status) {
+				if (status !== 'OK') {
+					throw new Q.Error(p + "can't geocode " + loc);
+				}
+				if (!results[0]) {
+					throw new Q.Error(p + "no place matched " + loc);
+				}
+				Q.handle(callback, Places.Location, [results[0], status, results]);
+			});
 		});
 	}
 };

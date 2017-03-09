@@ -50,7 +50,7 @@ class Places_Zipcode extends Base_Places_Zipcode
 	public static function nearby($latitude, $longitude, $meters, $limit = 100)
 	{
 		// First, get a bounding box that's big enough to avoid false negatives
-		$latGrid = $meters / 69.1703234283616;
+		$latGrid = $meters / (1609.34 * 69.1703234283616);
 		$longGrid = abs($latGrid / cos(deg2rad($latitude)));
 		
 		// Now, select zipcodes in a bounding box using one of the indexes
