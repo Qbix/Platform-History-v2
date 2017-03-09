@@ -114,7 +114,8 @@ abstract class Places extends Base_Places
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$json = curl_exec($ch);
+		//$json = curl_exec($ch);
+		$json = file_get_contents($url);
 		curl_close($ch);
 		$response = json_decode($json, true);
 		if (!empty($response['error_message'])) {
