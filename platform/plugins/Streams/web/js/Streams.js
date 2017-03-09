@@ -3212,7 +3212,7 @@ var Ap = Avatar.prototype;
  * @method displayName
  * @param {Object} [options] A bunch of options which can include:
  *   @param {Boolean} [options.short] Show one part of the name only
- *   @param {boolean} [options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
+ *   @param {boolean} [options.show] The parts of the name to show. Can have "f", "fu", "l", "lu", "flu" and "u" separated by spaces. The "fu" and "lu" represent firstname or lastname with fallback to username, while "flu" is "firstname lastname" with a fallback to username.
  *   @param {Boolean} [options.html] If true, encloses the first name, last name, username in span tags. If an array, then it will be used as the attributes of the html.
  *   @param {Boolean} [options.escape] If true, does HTML escaping of the retrieved fields
  * @param {String} [fallback='Someone'] What to return if there is no info to get displayName from.
@@ -3223,15 +3223,14 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var ln = this.lastName;
 	var u = this.username;
 	var fn2, ln2, u2, f2;
-	var o = options || {};
 	fallback = fallback || 'Someone';
-	if (o.escape || o.html) {
+	if (options && (options.escape || options.html)) {
 		fn = fn.encodeHTML();
 		ln = ln.encodeHTML();
 		u = u.encodeHTML();
 		fallback = fallback.encodeHTML();
 	}
-	if (o.html) {
+	if (options && options.html) {
 		fn2 = '<span class="Streams_firstName">'+fn+'</span>';
 		ln2 = '<span class="Streams_lastName">'+ln+'</span>';
 		u2 = '<span class="Streams_username">'+u+'</span>';
@@ -3242,16 +3241,28 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		u2 = u;
 		f2 = fallback;
 	}
-	if (o.show) {
-		var show = o.show.split('');
+	if (options && options.show) {
+		var show = options.show.split(' ').map(function (x) {
+			return x.trim();
+		});
 		var parts = [];
 		for (var i=0, l=show.length; i<l; ++i) {
 			var s = show[i];
-			parts.push(s == 'f' ? fn2 : (s == 'l' ? ln2 : u2));
+			switch (s) {
+			case 'f': parts.push(fn2); break;
+			case 'l': parts.push(ln2); break;
+			case 'u': parts.push(u2); break;
+			case 'fu': parts.push(fn2 ? fn2 : u2); break;
+			case 'lu': parts.push(ln2 ? ln2 : u2); break;
+			case 'flu':
+			default:
+				parts.push(fn2 || ln2 ? [fn2, ln2].join(' ') : u2);
+				break;
+			}
 		}
-		return parts.join(' ');
+		return parts.join(' ').trim() || f2;
 	}
-	if (o.short) {
+	if (options && options.short) {
 		return fn ? fn2 : (u ? u2 : f2);
 	} else if (fn && ln) {
 		return fn2 + ' ' + ln2;

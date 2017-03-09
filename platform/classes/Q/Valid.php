@@ -174,7 +174,7 @@ class Q_Valid
 			return false;
 		}
 		// Split it into sections to make life easier
-		$normalized_address = strtolower($address);
+		$normalized_address = mb_strtolower($address, 'UTF-8');
 			// NOTE: strictly speaking, two emails with different case are different,
 			// but in practice, users are much more likely to mess up the case of an email
 			// than an ISP is to create two different accounts that differ only by the case.

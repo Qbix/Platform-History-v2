@@ -920,16 +920,14 @@ abstract class Streams extends Base_Streams
 				$relate['publisherId'],
 				$relate['streamName']
 			);
-			if ($rs and $rs->inheritAccess) {
-				// inherit from the same stream $rs does
-				$inheritAccess = $rs->inheritAccess;
-			} else {
-				// inherit from $rs
-				$inheritAccess = Q::json_encode(array(array(
-					$relate['publisherId'], $relate['streamName']
-				)));
+			$inheritAccess = ($rs and $rs->inheritAccess)
+				? Q::json_decode($rs->inheritAccess)
+				: array();
+			$newInheritAccess = array($relate['publisherId'], $relate['streamName']);
+			if ($inheritAccess and !in_array($newInheritAccess, $inheritAccess)) {
+				$inheritAccess[] = $newInheritAccess;
 			}
-			$stream->inheritAccess = $inheritAccess;
+			$stream->inheritAccess = Q::json_encode($inheritAccess);
 		}
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
@@ -1303,11 +1301,11 @@ abstract class Streams extends Base_Streams
 	 *   @param {string} [$options.asUserId=Users::loggedInUser()] Optionally override which user to get the display name as
 	 *   @param {string} [$options.fullAccess=false] if true, sets the $asUserId = $userId
 	 * @param {string} [$fallback='Someone'] HTML to return if there is no info to get displayName from.
-	 * @param {string|null} $default
+	 * @param {string|null} [$fallback='Someone']
 	 *  What to return if there is no info to get displayName from.
 	 * @return {string|null}
 	 */
-	static function displayName($userId, $options = array(), $default = null)
+	static function displayName($userId, $options = array(), $fallback = 'Someone')
 	{
 		if ($userId instanceof Users_User) {
 			$userId = $userId->id;
@@ -1321,7 +1319,7 @@ abstract class Streams extends Base_Streams
 			$asUserId = $asUser ? $asUser->id : "";
 		}
 		$avatar = Streams_Avatar::fetch($asUserId, $userId);
-		return $avatar ? $avatar->displayName($options, $default) : $default;
+		return $avatar ? $avatar->displayName($options, $fallback) : $default;
 	}
 
 	/**
@@ -4014,11 +4012,11 @@ abstract class Streams extends Base_Streams
 	static $beingSaved = null;
 	static $beingSavedQuery = null;
 	/**
-	 * You can set this to false to prevent caching for a while,
-	 * e.g. during installer scripts, but make sure to set it back to true when done.
+	 * You can set this to true to prevent caching for a while,
+	 * e.g. during installer scripts, but make sure to set it back to false when done.
 	 * @property $dontCache
 	 * @static
 	 * @type string
 	 */
-	static $dontCache = true;
+	static $dontCache = false;
 };

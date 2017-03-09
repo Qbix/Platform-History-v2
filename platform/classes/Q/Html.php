@@ -1139,7 +1139,7 @@ class Q_Html
 			}
 
 			$isUrl = false;
-			switch (strtolower($name2)) {
+			switch (mb_strtolower($name2, 'UTF-8')) {
 				case 'href': // Automatic unrouting of this attribute
 					$href = true;
 				case 'action': // Automatic unrouting of this attribute
