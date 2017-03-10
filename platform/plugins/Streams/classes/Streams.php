@@ -703,7 +703,7 @@ abstract class Streams extends Base_Streams
 				}
 				$inheritAccess = json_decode($s->inheritAccess, true);
 				if (!$inheritAccess or !is_array($inheritAccess)) {
-					return false;
+					continue;
 				}
 				$streams4[] = $s;
 				foreach ($inheritAccess as $ia) {
