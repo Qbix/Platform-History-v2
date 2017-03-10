@@ -703,7 +703,7 @@ abstract class Streams extends Base_Streams
 				}
 				$inheritAccess = json_decode($s->inheritAccess, true);
 				if (!$inheritAccess or !is_array($inheritAccess)) {
-					return false;
+					continue;
 				}
 				$streams4[] = $s;
 				foreach ($inheritAccess as $ia) {
@@ -924,7 +924,7 @@ abstract class Streams extends Base_Streams
 				? Q::json_decode($rs->inheritAccess)
 				: array();
 			$newInheritAccess = array($relate['publisherId'], $relate['streamName']);
-			if ($inheritAccess and !in_array($newInheritAccess, $inheritAccess)) {
+			if (!in_array($newInheritAccess, $inheritAccess)) {
 				$inheritAccess[] = $newInheritAccess;
 			}
 			$stream->inheritAccess = Q::json_encode($inheritAccess);
