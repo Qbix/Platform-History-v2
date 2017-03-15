@@ -3,7 +3,7 @@ The Qbix Platform
 
 ### [Platform Portal](https://qbix.com/platform) - tutorials docs, platform reference, and more.
 
-## Get started with the [video tutorials](https://qbix.com/platform/tutorials
+## Get started with the [video tutorials](https://qbix.com/platform/tutorials)
 
 ===
 
