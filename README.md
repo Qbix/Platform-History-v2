@@ -1,15 +1,20 @@
 The Qbix Platform
 ===
 
-###[Platform Portal](https://qbix.com/platform) - tutorials, docs, platform reference, and more.
+### [Platform Portal](https://qbix.com/platform) - tutorials docs, platform reference, and more.
 
+### [Video tutorials](https://qbix.com/platform/tutorials) help you get started.
+
+For Developers
 ===
 
-###Getting Started
-[![ScreenShot](https://i.vimeocdn.com/video/616450434.webp?mw=900&mh=600)](https://vimeo.com/202332912)
+### 3 Minute Showcase
+See what's possible to build with Qbix Platform:
 
-###About Qbix
-There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps.
+[![Qbix](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
+
+### About Qbix
+There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps for communities to install.
 
 A social app is an app that enables spontaneous communication and collaboration between users.
 Out of the box, Qbix helps any app support user accounts, real-time collaboration and offline notifications, automatically scaling up to millions of users if necessary.
@@ -21,18 +26,18 @@ Apps built with Qbix can go viral as they work on practically every device and i
 * facebook accounts + friend lists
 * Working in the Qbix platform encourages best practices, e.g. when it comes to [modern web standards](https://qbix.com/platform/welcome/developer), [security](https://www.owasp.org/index.php/Main_Page), [privacy](https://qbix.com/platform/features/access) and [achieving business objectives](https://qbix.com/platform/welcome/business).
 
-###Back End Technology Stack
+### Back End Technology Stack
 * PHP: Qbix runs on pretty much any environment with PHP 5 or above.
 * MySQL: Currently, Qbix needs MySQL to store data, but other adapters are coming soon.
 * Node.js: Optional but highly recommended, enables real time updates, notifications and more.
 
-###Front End Technology Stack
+### Front End Technology Stack
 * Browsers: Qbix comes with libraries to quickly build extremely efficient web apps for desktop or mobile browsers.
 * PhoneGap: Also known as Cordova, it can be used to build native mobile apps with Q, which integrate with the phone's contact list and more.
 * jQuery: Some of Q's plugins make use of jQuery on the front end.
 * socket.io: Connects with Node.js on the back end to enable real time updates in the user interface.
 
-Businesses and Startups
+For Businesses and Startups
 ===
 
 Use Qbix to build a social app, or even turn your existing applications into social apps. If you have an app that people use to do X, Qbix will let you:
@@ -43,7 +48,7 @@ Use Qbix to build a social app, or even turn your existing applications into soc
 * Reward your users: Balance incentives and monetize your app using Q's Assets plugin, which powers badges, credits and more. Integrate with any payment processor, such as Stripe.
 * Measure and optimize: Rather having to guess how your app is doing, use Q's Metrics plugin built specifically to measure virality and engagement. Use up-to-date reports in your meetings to plan your strategy. Of course, you can still integrate Google Analytics or anything else.
 
-###How Qbix, Inc. can help you
+### How Qbix, Inc. can help you
 * Consulting and Support: We can help you design and build your app to make the maximum impact on your bottom line, brand experience and user satisfaction.
 * Our user base: Our platform currently has over 250,000 monthly active users. If your app turns out to be very useful, we can discuss giving it a head start by making it available to everyone on our platform.
 
