@@ -5,6 +5,7 @@ The Qbix Platform
 
 ## Get started with the [video tutorials](https://qbix.com/platform/tutorials)
 
+For Developers
 ===
 
 ### 3 Minute Showcase
@@ -36,7 +37,7 @@ Apps built with Qbix can go viral as they work on practically every device and i
 * jQuery: Some of Q's plugins make use of jQuery on the front end.
 * socket.io: Connects with Node.js on the back end to enable real time updates in the user interface.
 
-Businesses and Startups
+For Businesses and Startups
 ===
 
 Use Qbix to build a social app, or even turn your existing applications into social apps. If you have an app that people use to do X, Qbix will let you:
