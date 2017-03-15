@@ -1,12 +1,13 @@
 The Qbix Platform
 ===
 
-###[Platform Portal](https://qbix.com/platform) - tutorials, docs, platform reference, and more.
+### [Platform Portal](https://qbix.com/platform) - [video tutorials](https://qbix.com/platform/tutorials), docs, platform reference, and more.
 
 ===
 
-###Getting Started
-[![ScreenShot](https://i.vimeocdn.com/video/616450434.webp?mw=900&mh=600)](https://vimeo.com/202332912)
+### Getting Started
+See what's possible to build with Qbix Platform by clicking below:
+[![Qbix](https://qbix.com/img/logo.png)](https://vimeo.com/202332912)
 
 ###About Qbix
 There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps.
