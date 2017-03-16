@@ -726,12 +726,12 @@ Q.Template.set('Streams/chat/message/notification',
 		'{{#if visit}}'+
 			'<b>{{displayName}}</b> visited'+
 		'{{/if}}'+
-		'{{#if join}}'+
+		'{{#if}}'+
 			'<b>{{displayName}}</b> joined'+
-		'{{/if join}}'+
+		'{{/if}}'+
 		'{{#if leave}}'+
 			'<b>{{displayName}}</b> left'+
-		'{{/if leave}}'+
+		'{{/if}}'+
 	'</div>'
 );
 
