@@ -723,15 +723,15 @@ Q.Template.set('Streams/chat/message/bubble',
 Q.Template.set('Streams/chat/message/notification', 
 	'<div class="Streams_chat_notification>'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
-		'{{#visit}}'+
+		'{{#if visit}}'+
 			'<b>{{displayName}}</b> visited'+
-		'{{/visit}}'+
-		'{{#join}}'+
+		'{{/if}}'+
+		'{{#if join}}'+
 			'<b>{{displayName}}</b> joined'+
-		'{{/join}}'+
-		'{{#leave}}'+
+		'{{/if join}}'+
+		'{{#if leave}}'+
 			'<b>{{displayName}}</b> left'+
-		'{{/leave}}'+
+		'{{/if leave}}'+
 	'</div>'
 );
 
