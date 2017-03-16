@@ -1463,6 +1463,9 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->get('participant')) {
 			$result['participant'] = $this->get('participant')->exportArray();
 		}
+		if ($totals = $this->get('totals')) {
+			$result['totals'] = $totals;
+		}
 		return $result;
 	}
 

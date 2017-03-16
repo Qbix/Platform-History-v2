@@ -65,6 +65,9 @@ function Streams_batch_response_batch()
 					$_REQUEST['ordinal'] = $extra;
 				}
 				break;
+			case 'total':
+				$_REQUEST['messageType'] = $extra;
+				break;
 			case 'participant':
 				if (!is_array($extra)) {
 					$_REQUEST['userId'] = $extra;

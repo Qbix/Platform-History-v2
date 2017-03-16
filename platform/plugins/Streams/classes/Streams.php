@@ -294,8 +294,12 @@ abstract class Streams extends Base_Streams
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
 	 *   fetching the streams
-	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
-	 *   on the stream objects, with the participant object corresponding to $asUserId, if any.
+	 *  @param {boolean} [$options.withParticipant=false]
+	 *   Additionally call ->set('participant', $p) on the stream objects,
+	 *   with the participant object corresponding to $asUserId, if any.
+	 *  @param {array} [$options.withTotals] Pass here
+	 *   Pass an array of message types here to additionally call ->set('totals', $t)
+	 *   on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -337,9 +341,6 @@ abstract class Streams extends Base_Streams
 					$namesToFetch[] = $n;
 				}
 			}
-			if (!is_array($name)) {
-				$namesToFetch = $namesToFetch ? $namesToFetch[0] : null;
-			}
 		} else {
 			$namesToFetch = $name;
 		}
@@ -371,6 +372,26 @@ abstract class Streams extends Base_Streams
 		$streams = $allCached ? array_merge($allCached, $allRetrieved) : $allRetrieved;
 
 		Streams::calculateAccess($asUserId, $publisherId, $streams, false);
+		
+		if (!empty($options['withTotals'])) {
+			$trows = Streams_Total::select('*')->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $name,
+				'messageType' => $options['withTotals']
+			))->fetchDbRows();
+			foreach ($streams as &$s) {
+				if (!$s->testReadLevel('messages')) {
+					return;
+				}
+				$totals = array();
+				foreach ($trows as $row) {
+					if ($row->streamName === $s->name) {
+						$totals[$row->messageType] = $row->messageCount;
+					}
+				}
+				$s->set('totals', $totals);
+			}
+		}
 
 		if (is_array($name) and count($name) > 1) {
 			// put the streams back in the same internal PHP array order
@@ -468,6 +489,9 @@ abstract class Streams extends Base_Streams
 	 *   fetching the streams
 	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
 	 *   on the stream object, with the participant object corresponding to $asUserId, if any.
+	 *  @param {array} [$options.withTotals] Pass here
+	 *   Pass an array of message types here to additionally call ->set('totals', $t)
+	 *   on the stream objects.
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -1190,7 +1214,7 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Get the message type from the request, if it can be deduced
-	 * @method requestedType
+	 * @method requestedMessageType
 	 * @static
 	 * @param {boolean} $throwIfMissing=false
 	 *  Optional. If true, throws an exception if the message type cannot be deduced
@@ -1202,7 +1226,9 @@ abstract class Streams extends Base_Streams
 	static function requestedMessageType($throwIfMissing = false)
 	{
 		$uri = Q_Dispatcher::uri();
-		if (isset($_REQUEST['type'])) {
+		if (isset($_REQUEST['messageType'])) {
+			return $_REQUEST['messageType'];
+		} if (isset($_REQUEST['type'])) {
 			return $_REQUEST['type'];
 		} else if (isset($uri->type)) {
 			return $uri->type;
