@@ -726,7 +726,7 @@ Q.Template.set('Streams/chat/message/notification',
 		'{{#if visit}}'+
 			'<b>{{displayName}}</b> visited'+
 		'{{/if}}'+
-		'{{#if}}'+
+		'{{#if join}}'+
 			'<b>{{displayName}}</b> joined'+
 		'{{/if}}'+
 		'{{#if leave}}'+
