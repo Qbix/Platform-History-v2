@@ -424,6 +424,7 @@ Q.Tool.define({
  *   @param {Mixed} [extra.participants=0] Optionally fetch that many participants
  *   @param {Mixed} [extra.messages=0] Optionally fetch that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
+ *   @param {Array} [extra.totals] an array of message types to get totals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
  *    if any fields named in this array are == null
@@ -3022,6 +3023,47 @@ Message.shouldRefreshStream = function (type, should) {
 };
 
 /**
+ * Methods related to working with totals of different message types in a stream
+ * @class Streams.Total
+ */
+var Total = Streams.Total = {
+	/**
+	 * Get one or more messages, which may result in batch requests to the server.
+	 * May call Message.get.onError if an error occurs.
+	 * 
+	 * @static
+	 * @method get
+	 * @param {String} publisherId
+	 * @param {String} streamName
+	 * @param {String|Array} messageType can be the message type, or an array of them
+	 * @param {Function} callback This receives two parameters. The first is the error.
+	 *   If messageType was a String, then the second parameter is the total.
+	 *   If messageType was an Array, then the second parameter is a hash of {messageType: total} pairs
+	 */
+	get: function _Total_get (publisherId, streamName, messageType, callback) {
+		var func = Streams.batchFunction(Q.baseUrl({
+			publisherId: publisherId,
+			streamName: streamName
+		}));
+		func.call(this, 'total', 'totals', publisherId, streamName, messageType,
+		function (err, data) {
+			var msg = Q.firstErrorMessage(err, data);
+			if (msg) {
+				var args = [err, data];
+				Streams.onError.handle.call(this, msg, args);
+				Total.get.onError.handle.call(this, msg, args);
+				return callback && callback.call(this, msg, args);
+			}
+			var totals = Q.isArrayLike(messageType)
+				? Q.first(data.totals)
+				: Q.copy(data.totals);
+			callback && callback.call(totals, err, totals || null);
+		});
+	}
+};
+Total.get.onError = new Q.Event();
+
+/**
  * Constructs a participant from fields, which are typically returned from the server.
  * @class Streams.Participant
  * @constructor
@@ -3181,9 +3223,6 @@ Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 	var userId = Q.plugins.Users.loggedInUser ? Users.loggedInUser.id : "";
 	// Query avatar as userId would see it, by requesting it from the right server.
 	// If userId is empty, then we query avatars on one of the public servers.
-	var func = Streams.batchFunction(Q.baseUrl({
-		userId: userId
-	}), 'avatar');
 	var fields = Q.take(options, ['limit', 'offset', 'public']);
 	Q.extend(fields, {prefix: prefix});
 	Q.req('Streams/avatar', ['avatars'], function (err, data) {
@@ -3550,6 +3589,15 @@ function updateAvatarCache(stream) {
 	}
 }
 
+function updateTotalsCache(stream) {
+	Streams.Total.get.cache.each(
+		[stream.fields.publisherId, stream.fields.name], 
+		function (k) {
+			this.set(k, 0, stream, [null, stream]);
+		}
+	);
+}
+
 function updateStreamCache(stream) {
 	Streams.get.cache.each(
 		[stream.fields.publisherId, stream.fields.name], 
@@ -3660,8 +3708,9 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// Now time to replace the fields in the stream with the incoming fields
 	Q.extend(stream.fields, fields);
 	prepareStream(stream);
-	updateAvatarCache(stream);
+	updateTotalsCache(stream);
 	updateStreamCache(stream);
+	updateAvatarCache(stream);
 }
 
 function prepareStream(stream) {
@@ -3675,6 +3724,10 @@ function prepareStream(stream) {
 	if (stream.fields.participant) {
 		stream.participant = Q.copy(stream.fields.participant);
 		delete stream.fields.participant;
+	}
+	if (stream.fields.totals) {
+		stream.totals = stream.fields.totals;
+		delete stream.fields.totals;
 	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
@@ -3784,6 +3837,11 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			}
 			callback(params[1], params);
 		}
+	});
+	
+	Total.get = Q.getter(Total.get, {
+		cache: Q.Cache[where]("Streams.Total.get", 1000),
+		throttle: 'Streams.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
