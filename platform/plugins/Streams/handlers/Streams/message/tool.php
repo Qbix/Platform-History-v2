@@ -2,11 +2,7 @@
 
 function Streams_message_tool($options) {
 	extract($options);
-
-	$user = Users::loggedInUser();
-	if (!$user) {
-		throw new Users_Exception_NotLoggedIn();
-	}
+	$user = Users::loggedInUser(true);
 	if (empty($publisherId)) $publisherId = Streams::requestedPublisherId();
 	if (empty($publisherId)) $publisherId = $_REQUEST['publisherId'] = $user->id;
 	if (empty($name)) $name = Streams::requestedName(true);
