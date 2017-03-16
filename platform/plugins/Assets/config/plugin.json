@@ -30,12 +30,24 @@
 	},
 	"Streams": {
 		"types": {
+			"Assets/credits": {
+				"description": "Keeps track of credits and payments",
+				"defaults": {
+					"title": "Subscription plan",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
+				}
+			},
 			"Assets/plan": {
 				"description": "Subscription plan",
 				"create": true, 
 				"edit": true,
 				"defaults": {
-					"title": "Subscription plan"
+					"title": "Subscription plan",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				}
 			},
 			"Assets/subscription": {
@@ -43,7 +55,10 @@
 				"create": false, 
 				"edit": false,
 				"defaults": {
-					"title": "Subscription"
+					"title": "Subscription",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				}
 			},
 			"Assets/product": {
@@ -51,7 +66,10 @@
 				"create": false, 
 				"edit": false,
 				"defaults": {
-					"title": "Product"
+					"title": "Product",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				}
 			},
 			"Assets/service": {
@@ -59,7 +77,10 @@
 				"create": false, 
 				"edit": false,
 				"defaults": {
-					"title": "Service"
+					"title": "Service",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				}
 			}
 		}	
