@@ -262,13 +262,26 @@ Streams.onInvitedDialog = new Q.Event();
 Streams.onInvitedUserAction = new Q.Event();
 
 /**
- * Returns Q.Event that occurs on message post event coming from socket.io
+ * Occurs on message post event coming from socket.io, if none of the
+ * message handlers have called .seen() on the message. You can add a handler
+ * to this event to show or update a badge for "unseen" messages.
  * @event onMessage
  * @param {String} type type of the stream to which a message is posted
  * @param {String} messageType  type of the message
  * @return {Q.Event}
  */
 Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event that occurs on message post event coming from socket.io
+ * You can call .seen() on the message to mark it as seen, otherwise if no
+ * handlers mark it seen, some other code might show a badge for "unseen" messages.
+ * @event onMessageUnseen
+ * @param {Streams.Stream} stream
+ * @param {Streams.Message} message
+ * @return {Q.Event}
+ */
+Streams.onMessageUnseen = new Q.Event();
 
 /**
  * Returns Q.Event that occurs after a stream is constructed on the client side
@@ -424,6 +437,7 @@ Q.Tool.define({
  *   @param {Mixed} [extra.participants=0] Optionally fetch that many participants
  *   @param {Mixed} [extra.messages=0] Optionally fetch that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
+ *   @param {Array} [extra.totals] an array of message types to get totals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
  *    if any fields named in this array are == null
@@ -700,6 +714,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 		fields = Q.extend({}, fields.fields, {
 			access: fields.access,
 			participant: fields.participant,
+			totals: fields.totals,
 			isRequired: fields.isRequired
 		});
 	}
@@ -771,6 +786,8 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 		}
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
+		
+		updateTotalsCache(stream);
 		
 		if (extra && extra.messages) {
 			Q.each(extra.messages, function (ordinal, message) {
@@ -1352,6 +1369,7 @@ var Stream = Streams.Stream = function (fields) {
 		'inheritAccess',
 		'closedTime',
 		'access',
+		'totals',
 		'isRequired',
 		'participant'
 	]);
@@ -2756,6 +2774,40 @@ Mp.getInstruction = function _Message_prototype_getInstruction (instructionName)
 };
 
 /**
+ * Mark the message as seen, updating the totals
+ * 
+ * @method seen
+ * @param {Integer} [total] Optionally set the total number of messages seen, 
+ *   otherwise it's taken from the cache, if any has been set (or nothing happens).
+ * @return {Object}
+ */
+Mp.seen = function _Message_seen (total) {
+	Total.seen(this.publisherId, this.streamName, this.messageType, total);
+};
+
+/**
+ * Mark the message as seen, updating the totals
+ * 
+ * @method seen
+ * @static
+ * @param {String} publisherId
+ * @param {String} streamName
+ * @param {String} messageType
+ * @param {Integer} [total] Optionally set the total number of messages seen, 
+ *   otherwise it's taken from the cache, if any has been set (or nothing happens).
+ * @return {Object}
+ */
+Message.seen = function _Message_seen (publisherId, streamName, messageType, total) {
+	if (total == null) {
+		total = Total.latest(publisherId, streamName, messageType);
+	}
+	if (!Q.isInteger(total)) {
+		return;
+	}
+	Total.seen[messageType] = total;
+};
+
+/**
  * Get one or more messages, which may result in batch requests to the server.
  * May call Message.get.onError if an error occurs.
  * 
@@ -3022,6 +3074,85 @@ Message.shouldRefreshStream = function (type, should) {
 };
 
 /**
+ * Methods related to working with totals of different message types in a stream
+ * @class Streams.Total
+ */
+var Total = Streams.Total = {
+	/**
+	 * Get one or more messages, which may result in batch requests to the server.
+	 * May call Message.get.onError if an error occurs.
+	 * 
+	 * @static
+	 * @method get
+	 * @param {String} publisherId
+	 * @param {String} streamName
+	 * @param {String|Array} messageType can be the message type, or an array of them
+	 * @param {Function} callback This receives two parameters. The first is the error.
+	 *   If messageType was a String, then the second parameter is the total.
+	 *   If messageType was an Array, then the second parameter is a hash of {messageType: total} pairs
+	 */
+	get: function _Total_get (publisherId, streamName, messageType, callback) {
+		var func = Streams.batchFunction(Q.baseUrl({
+			publisherId: publisherId,
+			streamName: streamName
+		}));
+		func.call(this, 'total', 'totals', publisherId, streamName, messageType,
+		function (err, data) {
+			var msg = Q.firstErrorMessage(err, data);
+			if (msg) {
+				var args = [err, data];
+				Streams.onError.handle.call(this, msg, args);
+				Total.get.onError.handle.call(this, msg, args);
+				return callback && callback.call(this, msg, args);
+			}
+			var totals = Q.isArrayLike(messageType)
+				? Q.copy(data.totals)
+				: Q.first(data.totals);
+			callback && callback.call(Total, err, totals || null);
+		});
+	},
+	/**
+	 * Returns the latest total number of messages posted to the stream
+	 * @method latest
+	 * @static
+	 * @param {String} publisherId
+	 * @param {String} streamName
+	 * @param {String} messageType
+	 * @return {Integer|null}
+	 */
+	latest: function (publisherId, streamName, messageType) {
+		var item = Total.get.cache.get([publisherId, streamName, messageType]);
+		var value = item && item.params[1];
+		if (value == null) {
+			return null;
+		}
+		return Q.isInteger(value) ? value : (value[messageType] || null);
+	},
+	/**
+	 * Returns the latest number of unseen messages posted to the stream
+	 * @method unseen
+	 * @static
+	 * @param {String} publisherId
+	 * @param {String} streamName
+	 * @param {String} messageType
+	 * @return {Integer|null}
+	 *   Returns the number of unseen messages if there is a latest total, otherwise null.
+	 */
+	unseen: function (publisherId, streamName, messageType) {
+		var latest = Total.latest(publisherId, streamName, messageType);
+		var seen = (messageType in Total.seen) && Total.seen[messageType];
+		return latest && (latest - (seen || 0));
+	},
+	/**
+	 * Hash of {messageType: total} pairs to show the total number of messages
+	 * posted to the stream the last time Message.seen() was called
+	 * @property {Object} seen
+	 */
+	seen: {}
+};
+Total.get.onError = new Q.Event();
+
+/**
  * Constructs a participant from fields, which are typically returned from the server.
  * @class Streams.Participant
  * @constructor
@@ -3181,9 +3312,6 @@ Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 	var userId = Q.plugins.Users.loggedInUser ? Users.loggedInUser.id : "";
 	// Query avatar as userId would see it, by requesting it from the right server.
 	// If userId is empty, then we query avatars on one of the public servers.
-	var func = Streams.batchFunction(Q.baseUrl({
-		userId: userId
-	}), 'avatar');
 	var fields = Q.take(options, ['limit', 'offset', 'public']);
 	Q.extend(fields, {prefix: prefix});
 	Q.req('Streams/avatar', ['avatars'], function (err, data) {
@@ -3550,6 +3678,27 @@ function updateAvatarCache(stream) {
 	}
 }
 
+function updateTotalsCache(stream) {
+	if (!stream.totals) {
+		return;
+	}
+	for (var type in stream.totals) {
+		Total.get.cache.each([stream.fields.publisherId, stream.fields.name, type],
+		function (k, v) {
+			var args = JSON.parse(k);
+			var result = v.params[1];
+			if (Q.isInteger(result)) {
+				v.params[1] = stream.totals[type];
+			} else if (Q.isPlainObject[result] && (type in result)) {
+				result[type] = stream.totals[type];
+			}
+		});
+		Total.get.cache.set([stream.fields.publisherId, stream.fields.name, type],
+			0, Total, [null, stream.totals[type]]
+		);
+	}
+}
+
 function updateStreamCache(stream) {
 	Streams.get.cache.each(
 		[stream.fields.publisherId, stream.fields.name], 
@@ -3660,8 +3809,9 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// Now time to replace the fields in the stream with the incoming fields
 	Q.extend(stream.fields, fields);
 	prepareStream(stream);
-	updateAvatarCache(stream);
+	updateTotalsCache(stream);
 	updateStreamCache(stream);
+	updateAvatarCache(stream);
 }
 
 function prepareStream(stream) {
@@ -3675,6 +3825,10 @@ function prepareStream(stream) {
 	if (stream.fields.participant) {
 		stream.participant = Q.copy(stream.fields.participant);
 		delete stream.fields.participant;
+	}
+	if (stream.fields.totals) {
+		stream.totals = stream.fields.totals;
+		delete stream.fields.totals;
 	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
@@ -3725,6 +3879,9 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.get", 100), 
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
+			if (Q.typeOf(subject) === 'Q.Streams.Stream') {
+				return callback(subject, params);
+			}
 			if (params[0]) {
 				return callback(this, params);
 			}
@@ -3784,6 +3941,11 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			}
 			callback(params[1], params);
 		}
+	});
+	
+	Total.get = Q.getter(Total.get, {
+		cache: Q.Cache[where]("Streams.Total.get", 1000),
+		throttle: 'Streams.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
@@ -4063,55 +4225,70 @@ Q.onInit.add(function _Streams_onInit() {
 				}
 
 				var stream = this;
-				var params = [this, message, messages];
 				var usingCached = Q.getter.usingCached;
-				
+
+				// update the stream
 				stream.fields.messageCount = msg.ordinal;
+				// update the Total.get.cache first
+				_updateTotalsCache();
+				// now update the message cache
+				_updateMessageCache();
+				
+				var latest = Total.latest(msg.publisherId, msg.streamName, msg.type);
+				var params = [stream, message, messages, latest];
+				
+				// Handlers for below events might call message.seen() to update latest totals.
+				// Otherwise, if no one updated them, synchronously, fire an event.
+				var unseen = Total.unseen(msg.publisherId, msg.streamName, msg.type);
+				if (unseen) {
+					setTimeout(function () {
+						params.push(unseen);
+						Q.handle(Streams.onMessageUnseen, Streams, params);
+					}, 0);
+				}
 
 				_messageHandlers[msg.streamType] &&
 				_messageHandlers[msg.streamType][msg.type] &&
-				Q.handle(_messageHandlers[msg.streamType][msg.type], Q.plugins.Streams, params);
+				Q.handle(_messageHandlers[msg.streamType][msg.type], Streams, params);
 
 				_messageHandlers[''] &&
 				_messageHandlers[''][msg.type] &&
-				Q.handle(_messageHandlers[''][msg.type], Q.plugins.Streams, params);
+				Q.handle(_messageHandlers[''][msg.type], Streams, params);
 
 				_messageHandlers[msg.streamType] &&
 				_messageHandlers[msg.streamType][''] &&
-				Q.handle(_messageHandlers[msg.streamType][''], Q.plugins.Streams, params);
+				Q.handle(_messageHandlers[msg.streamType][''], Streams, params);
 
 				_messageHandlers[''] &&
 				_messageHandlers[''][''] &&
-				Q.handle(_messageHandlers[''][''], Q.plugins.Streams, params);
+				Q.handle(_messageHandlers[''][''], Streams, params);
 
 				Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
 					Q.each([msg.streamName, ''], function (ordinal, streamName) {
 						Q.handle(
 							Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
-							Q.plugins.Streams,
+							Streams,
 							params
 						);
 						Q.each([msg.type, ''], function (ordinal, type) {
 							Q.handle(
 								Q.getObject([publisherId, streamName, type], _streamMessageHandlers),
-								Q.plugins.Streams,
+								Streams,
 								params
 							);
 						});
 					});
 				});
 
-				updateMessageCache();
-
 				var fields = msg.instructions && JSON.parse(msg.instructions);
 				var node;
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					updateParticipantCache('participating', message.getInstruction('prevState'), usingCached);
+					_updateParticipantCache('participating', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/leave':
-					updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
+					_updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/joined':
 					// Leave it to the user to retain this stream if they want
@@ -4126,27 +4303,27 @@ Q.onInit.add(function _Streams_onInit() {
 					Stream.update(stream, fields, null);
 					break;
 				case 'Streams/relatedFrom':
-					updateRelatedCache(fields);
+					_updateRelatedCache(fields);
 					_relationHandlers(_streamRelatedFromHandlers, msg, stream, fields);
 					break;
 				case 'Streams/relatedTo':
-					updateRelatedCache(fields);
+					_updateRelatedCache(fields);
 					_relationHandlers(_streamRelatedToHandlers, msg, stream, fields);
 					break;
 				case 'Streams/unrelatedFrom':
-					updateRelatedCache(fields);
+					_updateRelatedCache(fields);
 					_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, fields);
 					break;
 				case 'Streams/unrelatedTo':
-					updateRelatedCache(fields);
+					_updateRelatedCache(fields);
 					_relationHandlers(_streamUnrelatedToHandlers, msg, stream, fields);
 					break;
 				case 'Streams/updatedRelateFrom':
-					updateRelatedCache(fields);
+					_updateRelatedCache(fields);
 					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, fields);
 					break;
 				case 'Streams/updatedRelateTo':
-					updateRelatedCache(fields);
+					_updateRelatedCache(fields);
 					_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, fields);
 					break;
 				case 'Streams/closed':
@@ -4186,7 +4363,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				}
 
-				function updateMessageCache() {
+				function _updateMessageCache() {
 					Streams.get.cache.each([msg.publisherId, msg.streamName],
 					function (k, v) {
 						var stream = (v && !v.params[0]) ? v.subject : null;
@@ -4206,8 +4383,31 @@ Q.onInit.add(function _Streams_onInit() {
 						}
 					});
 				}
+				
+				function _updateTotalsCache() {
+					Streams.get.cache.each([msg.publisherId, msg.streamName],
+					function (k, v) {
+						var stream = (v && !v.params[0]) ? v.subject : null;
+						if (!stream) {
+							return;
+						}
+						if (stream.totals && stream.totals[msg.type]) {
+							++stream.totals[msg.type];
+						}
+					});
+					Total.get.cache.each([msg.publisherId, msg.streamName, msg.type],
+					function (k, v) {
+						var args = JSON.parse(k);
+						var result = v.params[1];
+						if (Q.isInteger(result)) {
+							++v.params[1];
+						} else if (Q.isPlainObject[result] && (type in result)) {
+							++result[type];
+						}
+					});
+				}
 
-				function updateParticipantCache(newState, prevState, usingCached) {
+				function _updateParticipantCache(newState, prevState, usingCached) {
 					Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
 					if (!usingCached) {
 						return;
@@ -4235,7 +4435,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				}
 
-				function updateRelatedCache(instructions) {
+				function _updateRelatedCache(instructions) {
 					Streams.related.cache.removeEach([msg.publisherId, msg.streamName]);
 					if (instructions.toPublisherId) {
 						Streams.related.cache.removeEach(

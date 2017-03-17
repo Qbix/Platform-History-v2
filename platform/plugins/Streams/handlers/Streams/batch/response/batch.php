@@ -9,7 +9,7 @@ function Streams_batch_response_batch()
 	try {
 		$batch = json_decode($_REQUEST['batch'], true);
 	} catch (Exception $e) {
-		
+
 	}
 	if (empty($batch)) {
 		throw new Q_Exception_WrongValue(array('field' => 'batch', 'range' => 'valid JSON'));
@@ -21,12 +21,16 @@ function Streams_batch_response_batch()
 
 	// Gather the publisher ids and stream names to fetch
 	$toFetch = array();
+	$withTotals = array();
 	foreach ($batch['args'] as $args) {
 		if (count($args) < 4) {
 			continue;
 		}
 		list($action, $slots, $publisherId, $name) = $args;
 		$toFetch[$publisherId][] = $name;
+		if (isset($args[4]['totals'])) {
+			$withTotals[$publisherId][$name] = $args[4]['totals'];
+		}
 	}
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
@@ -37,11 +41,13 @@ function Streams_batch_response_batch()
 		if (empty($streams[$publisherId])) {
 			$streams[$publisherId] = array();
 		}
+		$options = array('withParticipant' => true);
+		if (!empty($withTotals[$publisherId])) {
+			$options['withTotals'] = $withTotals[$publisherId];
+		}
 		$streams[$publisherId] = array_merge(
 			$streams[$publisherId],
-			Streams::fetch($userId, $publisherId, $names, '*', array(
-				'withParticipant' => true
-			))
+			Streams::fetch($userId, $publisherId, $names, '*', $options)
 		);
 	}
 	
@@ -64,6 +70,9 @@ function Streams_batch_response_batch()
 				if (!is_array($extra)) {
 					$_REQUEST['ordinal'] = $extra;
 				}
+				break;
+			case 'total':
+				$_REQUEST['messageType'] = $extra;
 				break;
 			case 'participant':
 				if (!is_array($extra)) {
