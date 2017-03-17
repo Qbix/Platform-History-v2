@@ -388,10 +388,10 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 		usort($keys, array(__CLASS__, 'replaceKeysCompare'));
 		foreach ($keys as $key) {
 			$value = $this->parameters[$key];
-			if ($value instanceof Db_Expression) {
-				$value2 = $value;
-			} else if (!isset($value)) {
+			if (!isset($value)) {
 				$value2 = "NULL";
+			} else if ($value instanceof Db_Expression) {
+				$value2 = $value;
 			} else {
 				$value2 = $this->reallyConnect()->quote($value);
 			}
