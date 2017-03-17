@@ -91,14 +91,14 @@ function Streams_inplace_tool($options)
 			'publisherId' => $stream->publisherId,
 			'streamName' => $stream->name
 		));
-		$staticClass = ($options['inplaceType'] === 'textarea')
+		$staticClass = ($inplaceType === 'textarea')
 			? 'Q_inplace_tool_blockstatic'
 			: 'Q_inplace_tool_static';
 		return "<span class='Q_inplace_tool_container $options[classes]' style='position: relative;'>"
 			. "<div class='$staticClass'>$inplace[staticHtml]</div></span>";
 	}
 	$toolOptions['inplace'] = $inplace;
-	$toolOptions['inplaceType'] = $options['inplaceType'];
+	$toolOptions['inplaceType'] = $inplaceType;
 	Q_Response::addScript('plugins/Streams/js/tools/inplace.js');
 	Q_Response::addScript('plugins/Q/js/tools/inplace.js');
 	Q_Response::addStylesheet('plugins/Q/css/inplace.css');

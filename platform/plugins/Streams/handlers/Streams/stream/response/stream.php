@@ -12,10 +12,13 @@ function Streams_stream_response_stream()
 	$fields = Streams::requestedFields();
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
+	$options = array('withParticipant' => true);
+	if (!empty($_REQUEST['totals'])) {
+		$options['withTotals'][$name] = $_REQUEST['totals'];
+	}
 
 	Streams::$cache['stream'] = $stream = Streams::fetchOne(
-		$userId, $publisherId, $name, $fields,
-		array('withParticipant' => true)
+		$userId, $publisherId, $name, $fields, $options
 	);
 	return $stream ? $stream->exportArray() : null;
 }
