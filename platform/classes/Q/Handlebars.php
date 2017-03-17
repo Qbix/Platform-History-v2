@@ -119,6 +119,7 @@ class Q_Handlebars {
 			return "{{tool missing name}}";
 		}
 		$name = $args[0];
+		$id = null;
 		if (isset($args[1]) && (is_string($args[1]) || is_numeric($args[1]))) {
 			$id = $args[1];
 		}
