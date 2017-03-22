@@ -877,7 +877,12 @@ Streams.Dialogs = {
  * @static
  * @param {Function} callback
  * @param {Object} [options] Options you can override
+ * @param {string} [options.type] Actually used as a prefix for the streamName, if specified
+ * @param {string|array} [options.state] Pass 'invited', 'participating', 'left' to filter by state.
+ * @param {string|array} [options.subscribed] Pass 'yes' or 'no' to filter by whether user subscribed
+ * @param {integer} [options.fresh] Pass 0 or 1 to filter by freshness.
  * @param {Number} [options.limit=1000] 
+ * @param {Number} [options.offset=0] 
  * @method getParticipating
  */
 Streams.getParticipating = function(callback, options) {

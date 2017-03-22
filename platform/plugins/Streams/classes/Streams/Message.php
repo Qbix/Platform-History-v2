@@ -270,10 +270,9 @@ class Streams_Message extends Base_Streams_Message
 					// if we are still here, mark the message as "in the database"
 					$message->wasRetrieved(true);
 					$p[] = $message;
-				
+
 					// build the arrays of rows to insert
 					$messages2[] = $message->fields;
-
 					$counts[$type] = isset($counts[$type]) ? $counts[$type] + 1 : 1;
 				}
 				foreach ($counts as $type => $count) {
