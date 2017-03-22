@@ -165,9 +165,11 @@ class Streams_Message extends Base_Streams_Message
 		$totals2 = array();
 		$updates = array();
 		$clientId = Q_Request::special('clientId', '');
+		$freshStreamNames = array();
 		$sendToNode = true;
 		foreach ($messages as $publisherId => $arr) {
 			$streamNames = array_keys($messages[$publisherId]);
+			$freshStreamNames[$publisherId] = array();
 			$streams[$publisherId] = $fetched = Streams::fetch(
 				$asUserId, $publisherId, $streamNames, '*', 
 				array('refetch' => true, 'begin' => true) // lock for updates
@@ -270,9 +272,16 @@ class Streams_Message extends Base_Streams_Message
 					// if we are still here, mark the message as "in the database"
 					$message->wasRetrieved(true);
 					$p[] = $message;
-				
+
 					// build the arrays of rows to insert
 					$messages2[] = $message->fields;
+					
+					$fresh = Streams_Stream::getConfigField(
+						$stream->type, array('messages', $type, 'fresh'), null
+					);
+					if ($fresh and !in_array($streamName, $freshStreamNames[$publisherId])) {
+						$freshStreamNames[$publisherId][] = $streamName;
+					}
 
 					$counts[$type] = isset($counts[$type]) ? $counts[$type] + 1 : 1;
 				}
@@ -302,6 +311,14 @@ class Streams_Message extends Base_Streams_Message
 		// time to update the stream rows and commit the transaction
 		// on all the shards where the streams were fetched.
 		foreach ($updates as $publisherId => $arr) {
+			Streams_Participant::update()
+				->set(array(
+					'fresh' => new Db_Expression('fresh + 1')
+				))->where(array(
+					'publisherId' => $publisherId,
+					'name' => $freshStreamNames,
+					'userId !=' => $userId
+				))->execute();
 			foreach ($arr as $count => $streamNames) {
 				$suffix = is_numeric($count) ? " + $count" : '';
 				Streams_Stream::update()
