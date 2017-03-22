@@ -925,8 +925,13 @@ abstract class Streams extends Base_Streams
 		$stream->publisherId = $publisherId;
 		if (!empty($fields['name'])) {
 			$p = new Q_Tree();
-			$p->load(STREAMS_PLUGIN_CONFIG_DIR.DS.'streams.json');
-			$p->load(APP_CONFIG_DIR.DS.'streams.json');
+			$arr = Q_Config::get('Streams', 'userStreams', array());
+			$app = Q::app();
+			foreach ($arr as $k => $v) {
+				$PREFIX = ($k === $app ? 'APP' : strtoupper($k).'_PLUGIN');
+				$path = constant( $PREFIX . '_CONFIG_DIR' );
+				$p->load($path.DS.$v);
+			}
 			if ($info = $p->get($fields['name'], array())) {
 				foreach (Base_Streams_Stream::fieldNames() as $f) {
 					if (isset($info[$f])) {
@@ -2334,10 +2339,14 @@ abstract class Streams extends Base_Streams
 		}
 
 		$offset = !empty($options['offset']) ? $options['offset'] : 0;
-		$max_limit = Q_Config::expect('Streams', 'db', 'limits', 'stream');
 		$limit = !empty($options['limit'])
 			? $options['limit']
 			: $max_limit;
+		$max_limit = Q_Config::expect('Streams', 'db', 'limits', 'stream');
+		$max_offset = (Q_Config::expect('Streams', 'db', 'pages') - 1) * $max_limit - 1;
+		if (!is_numeric($offset) or $offset > $max_offset) {
+			throw new Q_Exception("Streams::related offset is too large, must be <= $max_offset");
+		}
 		if (!is_numeric($limit) or $limit > $max_limit) {
 			throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
 		}
