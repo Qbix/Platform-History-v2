@@ -1452,7 +1452,7 @@ Q.copy = function _Q_copy(x, fields, levels) {
 	if (root.ArrayBuffer && (x instanceof ArrayBuffer)) {
 		var result = ArrayBuffer.prototype.slice.call(x, 0);
 	}
-	if (Q.typeOf(x) === 'array') {
+	if (Q.isArrayLike(x)) {
 		var result = Array.prototype.slice.call(x, 0);
 		var keys = Object.keys(x);
 		for (var i=0, l=keys.length; i<l; ++i) {
@@ -5370,8 +5370,7 @@ Q.ready = function _Q_ready() {
 		
 		Q.onDOM.handle.call(root, root.jQuery);
 
-		var body = document.getElementsByTagName('body')[0];
-		Q.activate(body, undefined, function _onReadyActivate() {
+		Q.activate(document.body, undefined, function _onReadyActivate() {
 			// Hash changes -- will work only in browsers that support it natively
 			// see http://caniuse.com/hashchange
 			Q.addEventListener(root, 'hashchange', Q.onHashChange.handle);
@@ -9596,7 +9595,7 @@ function _touchScrollingHandler(event) {
 			p.offsetWidth, Q.Pointer.windowWidth()
 		);
 		var q = (p.tagName === 'HTML')
-			? document.getElementsByTagName('body')[0]
+			? document.body
 			: p;
 		var hiddenHeight = q.scrollHeight - Math.min(
 			p.offsetHeight, Q.Pointer.windowHeight()
@@ -9931,6 +9930,60 @@ Q.Pointer = {
 		return root.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	},
 	/**
+	 * Get the rectangle enclosing all the children of the container element
+	 * and – for their children with overflow: visible – their overflowed contents.
+	 * @static
+	 * @method boundingRect
+	 * @param {HTMLElement} [container=document.body] The container element
+	 * @param {Array} [omitClasses] Put CSS classes of any elements to omit from calculations
+	 * @param {boolean} [omitOverflow=false] If true, doesn't use overflowed content in calculations
+	 * @return {Object} with properties left, right, top, bottom, width, height
+	 */
+	boundingRect: function (container, omitClasses, omitOverflow) {
+		var rect = {left: 0, top: 0};
+		rect.right = Q.Pointer.windowWidth();
+		rect.bottom = Q.Pointer.windowHeight();
+		container = container || document.body;
+		var sl = Q.Pointer.scrollLeft();
+		var st = Q.Pointer.scrollTop();
+		Q.each(container.children || container.childNodes, function () {
+			if (this.hasClass && omitClasses) {
+				for (var i=0, l=omitClasses.length; i<l; ++i) {
+					if (this.hasClass(omitClasses[i])) return;
+				}
+			}
+			var bcr = this.getBoundingClientRect();
+			var r = {
+				left: bcr.left,
+				top: bcr.top,
+				right: bcr.right,
+				bottom: bcr.bottom
+			};
+			if (!r) return;
+			r.left += sl; r.right += sl;
+			r.top += st; r.bottom += st;
+			var cs = this.computedStyle();
+			if (!omitOverflow && cs.overflow === 'visible') {
+				if (this.scrollWidth > r.right - r.left) {
+					r.right += this.scrollWidth - (r.right - r.left);
+					r.left -= this.scrollLeft;
+				}
+				if (this.scrollHeight > r.bottom - r.top) {
+					r.bottom += this.scrollHeight - (r.bottom - r.top);
+					r.top -= this.scrollTop;
+				}
+			}
+			if (r.right - r.left == 0 || r.bottom - r.top == 0) return;
+			rect.left = Math.min(rect.left, r.left);
+			rect.top = Math.min(rect.top, r.top);
+			rect.right = Math.max(rect.right, r.right);
+			rect.bottom = Math.max(rect.bottom, r.bottom);
+		});
+		rect.width = rect.right - rect.left;
+		rect.height = rect.bottom - rect.top;
+		return rect;
+	},
+	/**
 	 * Returns the x coordinate of an event relative to the document
 	 * @static
 	 * @method getX
@@ -10064,7 +10117,6 @@ Q.Pointer = {
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
 		var o = Q.extend({}, Q.Pointer.hint.options, 10, options);
-		var body = document.getElementsByTagName('body')[0];
 		if (!options.dontRemove && !options.waitForEvents) {
 			for (i=0, l=qphi.length; i<l; ++i) {
 				img = qphi[i];
@@ -10086,7 +10138,7 @@ Q.Pointer = {
 		img1.hide = o.hide;
 		img1.dontStopBeforeShown = o.dontStopBeforeShown;
 		qphi.push(img1);
-		body.appendChild(img1);
+		document.body.appendChild(img1);
 		hintEvent.add(Q.once(function _hintReady() {
 			img1.timeout = setTimeout(function () {
 				var i, l;
@@ -10107,7 +10159,7 @@ Q.Pointer = {
 						img2.timeout = false;
 						imgs.push(img2);
 						Q.Pointer.hint.imgs.push(img2);
-						body.appendChild(img2);
+						document.body.appendChild(img2);
 					}
 				} else {
 					img1.target = targets;
@@ -10358,7 +10410,6 @@ Q.Pointer.hint.imgs = [];
 
 function _Q_restoreScrolling() {
 	if (!Q.info || !Q.info.isTouchscreen) return false;
-	var body = document.getElementsByTagName('body')[0];
 	var lastScrollLeft, lastScrollTop;
 	var focused = false;
 	setInterval(function _Q_saveScrollPositions() {
@@ -10371,10 +10422,10 @@ function _Q_restoreScrolling() {
 		lastScrollTop = Q.Pointer.scrollTop();
 		lastScrollLeft = Q.Pointer.scrollLeft();
 	}, 300);
-	Q.addEventListener(body, Q.Pointer.focusin, function _Q_body_focusin() {
+	Q.addEventListener(document.body, Q.Pointer.focusin, function _Q_body_focusin() {
 		focused = true;
 	});
-	Q.addEventListener(body, Q.Pointer.focusout, function _Q_body_focusout() {
+	Q.addEventListener(document.body, Q.Pointer.focusout, function _Q_body_focusout() {
 		focused = false;
 		if (lastScrollTop !== undefined) {
 			window.scrollTo(lastScrollLeft, lastScrollTop);
@@ -10655,7 +10706,7 @@ Q.Dialogs = {
 			}
 			$dialog.hide();
 			//if ($dialog.parent().length == 0) {
-				$(o.appendTo || $('body')[0]).append($dialog);
+				$(o.appendTo || document.body).append($dialog);
 			//}
 			var _onClose = o.onClose;
 			o.onClose = new Q.Event(function() {
@@ -11183,18 +11234,7 @@ Q.Masks = {
 				'bottom': rect.bottom
 			};
 			if (!mask.shouldCover) {
-				mask.rect.right = Math.max(mask.rect.right, Q.Pointer.windowWidth());
-				mask.rect.bottom = Math.max(mask.rect.bottom, Q.Pointer.windowHeight());
-				var body = document.getElementsByTagName('body')[0];
-				Q.each(body.children || body.childNodes, function () {
-					if (!this.hasClass || this.hasClass('Q_mask')) return;
-					var rect = this.getBoundingClientRect();
-					if (!rect || rect.right - rect.left == 0) return;
-					mask.rect.left = Math.min(mask.rect.left, rect.left);
-					mask.rect.top = Math.min(mask.rect.top, rect.top);
-					mask.rect.right = Math.max(mask.rect.right, rect.right);
-					mask.rect.bottom = Math.max(mask.rect.bottom, rect.bottom);
-				});
+				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			}
 			ms.left = scrollLeft + mask.rect.left + 'px';
 			ms.top = scrollTop + mask.rect.top + 'px';

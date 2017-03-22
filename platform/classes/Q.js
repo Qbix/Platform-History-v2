@@ -1573,7 +1573,7 @@ Q.copy = function _Q_copy(x, fields, levels) {
 	if (Buffer && (x instanceof Buffer)) {
 		return new Buffer(x);
 	}
-	if (Q.typeOf(x) === 'array') {
+	if (Q.isArrayLike(x)) {
 		var result = Array.prototype.slice.call(x, 0);
 		var keys = Object.keys(x);
 		for (var i=0, l=keys.length; i<l; ++i) {

@@ -62,6 +62,9 @@
 		}
 	},
 	"Streams": {
+		"userStreams": {
+			"Streams": "streams.json"
+		},
 		"requiredUserStreams": {
 			"Streams/user/firstName": true,
 			"Streams/user/lastName": true,
@@ -108,22 +111,38 @@
 						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""
 					},
 					"Streams/changed": {
+						"fresh": true,
 						"subject": "Changes in {{stream.fields.title}}"
 					},
 					"Streams/invite": {
+						"fresh": true,
 						"subject": "You were invited to {{& stream.fields.title}}"
 					},
 					"Streams/chat/message": {
+						"fresh": true,
 						"subject": "Chat in {{stream.fields.title}}"
 					},
 					"Streams/relatedTo": {
+						"fresh": true,
 						"subject": "{{&call 'message.get' 'description'}}"
 					},
 					"Streams/relatedFrom": {
+						"fresh": true,
 						"subject": "{{&call 'message.get' 'description'}}"
 					},
 					"Streams/access": {
+						"fresh": true,
 						"subject": "{{&call 'avatar.displayName'}} changed stream access"
+					},
+					"Streams/chat/message": {
+						"fresh": true,
+						"subject": "Chat in {{stream.fields.title}}"
+					},
+					"Streams/chat/edit": {
+						"title": "Chat message edited"
+					},
+					"Streams/chat/remove": {
+						"title": "Chat message removed"
 					}
 				},
 				"defaults": {
@@ -250,18 +269,9 @@
 				"description": "chatroom",
 				"create": true,
 				"messages": {
-					"Streams/chat/message": {
-						"post": true,
-						"title": "Chat message"
-					},
-					"Streams/chat/edit": {
-						"post": true,
-						"title": "Chat message edited"
-					},
-					"Streams/chat/remove": {
-						"post": true,
-						"subject": "Chat in {{stream.fields.title}}"
-					}
+					"Streams/chat/message": { "post": true },
+					"Streams/chat/edit": { "post": true },
+					"Streams/chat/remove": { "post": true }
 				}
 			},
 			"Streams/experience": {
@@ -307,7 +317,8 @@
 			"limits": {
 				"stream": 100,
 				"participating": 1000
-			}
+			},
+			"pages": 5
 		},
 		"readLevelOptions": {
 			"0": "nothing about it",
