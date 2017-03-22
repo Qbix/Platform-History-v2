@@ -9809,7 +9809,8 @@ Q.Pointer = {
 	fastclick: function _Q_fastclick (params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
 		return function _Q_fastclick_on_wrapper (e) {
-			var elem = Q.Pointer.elementFromPoint(Q.Pointer.getX(e), Q.Pointer.getY(e));
+			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
+			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
 			if (Q.Pointer.canceledClick
 			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {

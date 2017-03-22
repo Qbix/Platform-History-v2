@@ -152,6 +152,7 @@ class Streams_Participant extends Base_Streams_Participant
 			$this->extra = '{}';
 		}
 		$modifiedState = isset($modifiedFields['state']);
+		$modifiedSubscribed = isset($modifiedFields['subscribed']);
 		$modifiedExtra = isset($modifiedFields['extra']);
 
 		foreach ($this->fields as $name => $value) {
@@ -160,7 +161,7 @@ class Streams_Participant extends Base_Streams_Participant
 			}
 		}
 
-		if ($modifiedState or $modifiedExtra) {
+		if ($modifiedState or $modifiedSubscribed or $modifiedExtra) {
 			$p = new Streams_Participating();
 			$p->userId = $this->userId; // shouldn't change
 			$p->publisherId = $this->publisherId; // shouldn't change
@@ -169,6 +170,11 @@ class Streams_Participant extends Base_Streams_Participant
 				$p->state = $modifiedFields['state'];
 			} else if (isset($this->state)) {
 				$p->state = $this->state;
+			}
+			if ($modifiedSubscribed) {
+				$p->subscribed = $modifiedFields['subscribed'];
+			} else if (isset($this->subscribed)) {
+				$p->subscribed = $this->subscribed;
 			}
 			if ($modifiedExtra) {
 				$p->extra = $modifiedFields['extra'];
