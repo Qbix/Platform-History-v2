@@ -1,7 +1,7 @@
 {
 	"Places/user/location": {
 		"type": "Places/location",
-		"title": "User location",
+		"title": "User Location",
 		"readLevel": "0",
 		"writeLevel": "0",
 		"adminLevel": "0"
