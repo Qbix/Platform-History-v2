@@ -24,82 +24,8 @@ function Streams_Participating (fields) {
 }
 
 var Streams = Q.require('Streams');
-var _freshEvents = {};
-
-function _freshHandler (event) {
-	return function (stream, userId) {
-		var s = _freshEvents[event];
-		if (!userId || s.validate && !s.validate(stream, userId)) return;
-		var params = { publisherId: stream.publisherId, streamName: stream.name };
-		if (s.action) {
-			if (s.user) params.userId = userId; // increase only for one user
-			else if (s.user === false) params["userId !="] = userId; // increase for all but current
-			// is user param is undefined increase for all users
-		} else {
-			if (s.user) params.userId = userId;
-		}
-		Streams_Participating.UPDATE().where(params)
-		.set({fresh: s.action ? 1 : 0})
-		.execute(function (err) {
-			if (err) {
-				Q.log("ERROR: Could not update 'fresh' on event '"+event+"'");
-				Q.log(err);
-			}
-		});
-	};
-}
-
-/**
- * Check if event should refresh device status and update badge
- * This method can be overriden in application script to enable badges
- * @method freshEvent
- * @param online {boolean}
- * @param event {string}
- * @param type {string|undefined} should be set to message type for 'post' event
- * @return {boolean}
- */
-Streams_Participating.freshEvent = function (online, event, stream, userId) {
-	var e = (event === 'post') ? event+'/'+stream.type : event;
-	return e in _freshEvents && (!_freshEvents[e].validate || _freshEvents[e].validate(stream, userId));
-};
-
-/**
- * Register event which should influence fresh field
- * @method registerFreshEvent
- * @param {String} event The type of Streams event, such as "post" or "remove"
- * @param {boolean} [value=0] Wheather set fresh = 1 or 0
- * @param {boolean|null|undefined} If value is true increase only for this user,
- *   if false - for all but this user,
- *   if undefined or null - for all users.
- * @param {Function} [validate] Optional function to with arguments (stream, userId) (or [message, userId] for 'post')
- *	to validate if fresh should be changed. Returns boolean
- */
-Streams_Participating.registerFreshEvent = function (event, value, user, validate) {
-	if (!(event in _freshEvents)) {
-		var listener = _freshHandler(event);
-		_freshEvents[event] = {listener: listener};
-		Streams.Stream.on(event, listener);
-	}
-	var s = _freshEvents[event];
-	s.action = !!value;
-	s.user = user;
-	if (typeof validate === "function") s.validate = validate;
-};
-
-/**
- * Unregister fresh event
- * @method unregisterFreshEvent
- * @param event {string}
- */
-Streams_Participating.unregisterFreshEvent = function (event) {
-	if (_freshEvents[event]) {
-		Streams.Stream.removeListener(event, _freshEvents[event].listener);
-		delete _freshEvents[event];
-		return true;
-	}
-};
-
-Q.mixin(Streams_Participating, Q.require('Base/Streams/Participating'));
+var Base = Q.require('Base/Streams/Participating');
+Q.mixin(Streams_Participating, Base);
 
 
 /**

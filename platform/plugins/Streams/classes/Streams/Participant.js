@@ -24,6 +24,8 @@ function Streams_Participant (fields) {
 }
 
 var Streams = Q.require('Streams');
+var Base = Q.require('Base/Streams/Participant');
+Q.mixin(Streams_Participant, Base);
 
 function _subscribe(what, userId, publisherId, streamName, callback) {
 	Streams.Participant.UPDATE().where({
@@ -34,10 +36,6 @@ function _subscribe(what, userId, publisherId, streamName, callback) {
 		subscribed: what ? 'yes' : 'no'
 	}).execute(callback);
 }
-
-var Base = Q.require('Base/Streams/Participant');
-Q.mixin(Streams_Participant, Base);
-
 
 Streams_Participant.subscribe = function (userId, publisherId, streamName, callback) {
 	_subscribe(true, userId, publisherId, streamName, callback);

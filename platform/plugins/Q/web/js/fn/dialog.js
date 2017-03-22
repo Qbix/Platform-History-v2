@@ -37,27 +37,28 @@ function _Q_overlay(o) {
 		if (!height && $this.css('height'))
 			height = parseInt($this.css('height'));
 
-		if (o.left == 'center') {
-			var parentWidth = o.alignParent
-				? $(o.alignParent).width()
-				: Q.Pointer.windowWidth();
-			$this.css({ 'left': ((parentWidth - width) / 2) + 'px' });
-		} else if (typeof(o.left) == 'string' && o.left.indexOf('%') != -1) {
-			var percentage = parseInt(o.left) / 100;
-			$this.css({ 'left': (o.alignParent ? $(o.alignParent).width() * percentage : Q.Pointer.windowWidth() * percentage) + 'px' });
-		} else {
-			$this.css({ 'left': o.left + 'px' });
-		}
+		var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+		var ap = o.alignParent && (o.alignParent[0] || o.alignParent);
+		var sl = ap ? ap.scrollLeft : Q.Pointer.scrollLeft() - rect.left;
+		var st = ap ? ap.scrollTop : Q.Pointer.scrollTop() - rect.top;
+		var sw = ap ? ap.clientWidth : Q.Pointer.windowWidth();
+		var sh = ap ? ap.clientHeight : Q.Pointer.windowHeight();
+		var w = ap ? sw : rect.width;
+		var h = ap ? sh : rect.height;
 
-		var oap = o.alignParent, body = document.body;
-		var parentHeight = (oap && oap !== body && oap[0] !== body)
-			? $(o.alignParent).height()
-			: Math.max(Q.Pointer.windowHeight(), body.clientHeight);
+		if (o.left == 'center') {
+			$this.css({ 'left': (sl + (sw - width) / 2) + 'px' });
+		} else if (typeof(o.left) == 'string' && o.left.indexOf('%') != -1) {
+			var left = sl + w * parseInt(o.left) / 100;
+			$this.css({ 'left': left + 'px' });
+		} else {
+			$this.css({ 'left': Q.Pointer.scrollLeft() + o.top - $('body').offset().left + 'px' });
+		}
 		if (o.top == 'middle') {
-			$this.css({ 'top': ((parentHeight - height) / 2) + 'px' });
+			$this.css({ 'top': (st + (sh - height) / 2) + 'px' });
 		} else if (typeof(o.top) == 'string' && o.top.indexOf('%') != -1) {
-			percentage = parseInt(o.top) / 100;
-			$this.css({ 'top': (o.alignParent ? $(o.alignParent).height() * percentage : Q.Pointer.scrollTop() + Q.Pointer.windowHeight() * percentage) + 'px' });
+			var top = st + h * parseInt(o.top) / 100;
+			$this.css({ 'top': top + 'px' });
 		} else {
 			$this.css({ 'top': Q.Pointer.scrollTop() + o.top - $('body').offset().top + 'px' });
 		}
@@ -92,8 +93,9 @@ function _Q_overlay(o) {
 		options: o,
 		load: function()
 		{
-			$this.data('Q/overlay').documentScrollTop = Q.Pointer.scrollTop();
-			var $overlay = $this.data('Q/overlay');
+			var data = $this.data('Q/overlay');
+			data.documentScrollTop = Q.Pointer.scrollTop();
+			data.documentScrollLeft = Q.Pointer.scrollLeft();
 			if ($this.hasClass('Q_overlay_open')) {
 				return;
 			}
@@ -105,12 +107,12 @@ function _Q_overlay(o) {
 				}
 			});
 			$this.css('z-index', topZ);
-			Q.handle($overlay.options.beforeLoad, $this, [$this]);
+			Q.handle(data.options.beforeLoad, $this, [$this]);
 			calculatePosition($this);
 			$this.show();
 			dialogs.push($this[0]);
 			var $body = $('body');
-			$overlay.bodyStyle = {
+			data.bodyStyle = {
 				left: $body.css('left'),
 				top: $body.css('top')
 			};
@@ -125,12 +127,12 @@ function _Q_overlay(o) {
 				left: -sl + 'px',
 				top: -st + 'px'
 			}).addClass('Q_preventScroll');
-			var oom = $overlay.options.mask;
+			var oom = data.options.mask;
 			var mcn = (typeof oom === 'string') ? ' ' + oom : '';
-			if ($overlay.options.fadeInOut)
+			if (data.options.fadeInOut)
 			{
-				if (typeof $overlay.options.fadeInOut === 'function') {
-					$overlay.options.fadeInOut(_doFade);
+				if (typeof data.options.fadeInOut === 'function') {
+					data.options.fadeInOut(_doFade);
 				} else {
 					_doFade();
 				}
@@ -139,13 +141,13 @@ function _Q_overlay(o) {
 					Q.Animation.play(function (x, y) {
 						$this.css('opacity', y);
 						if (x === 1) {
-							if (!$overlay.options.noClose && $overlay.options.closeOnEsc) {
+							if (!data.options.noClose && data.options.closeOnEsc) {
 								$(document).on('keydown', closeThisOverlayOnEsc);
 							}
-							Q.handle($overlay.options.onLoad, $this, [$this]);
+							Q.handle(data.options.onLoad, $this, [$this]);
 						}
 					}, o.fadeTime);
-					if ($overlay.options.mask)
+					if (data.options.mask)
 					{
 						Q.Masks.show('Q.screen.mask', { 
 							fadeTime: o.fadeTime,
@@ -158,17 +160,17 @@ function _Q_overlay(o) {
 			else
 			{
 				$this.show();
-				if ($overlay.options.mask)
+				if (data.options.mask)
 				{
 					Q.Masks.show('Q.screen.mask', {
 						className: 'Q_screen_mask' + mcn,
 						zIndex: $this.css('z-index') - 1
 					});
 				}
-				if (!$overlay.options.noClose && $overlay.options.closeOnEsc) {
+				if (!data.options.noClose && data.options.closeOnEsc) {
 					$(document).on('keydown', closeThisOverlayOnEsc);
 				}
-				Q.handle($overlay.options.onLoad, $this, [$this]);
+				Q.handle(data.options.onLoad, $this, [$this]);
 			}
 			$this.addClass('Q_overlay_open');
 			Q.Pointer.cancelClick();
@@ -176,28 +178,29 @@ function _Q_overlay(o) {
 		close: function(e)
 		{
 			dialogs.pop();
-			var $overlay = $this.data('Q/overlay');
-			$('body').removeClass('Q_preventScroll').css($overlay.bodyStyle);
-			$('html,body').scrollTop($this.data('Q/overlay').documentScrollTop);
-			if (!$overlay.options.noClose) {
+			var data = $this.data('Q/overlay');
+			$('body').removeClass('Q_preventScroll').css(data.bodyStyle);
+			$('html,body').scrollTop(data.documentScrollTop)
+				.scrollLeft(data.documentScrollLeft);
+			if (!data.options.noClose) {
 				$(document).off('keydown', closeThisOverlayOnEsc);
 			}
 			$this.removeClass('Q_overlay_open');
 			$this.find('input, select, textarea').trigger('blur');
-			if (false === Q.handle($overlay.options.beforeClose, $this, [$this])) {
+			if (false === Q.handle(data.options.beforeClose, $this, [$this])) {
 				return false;
 			}
-			if ($overlay.options.fadeInOut)
+			if (data.options.fadeInOut)
 			{
 				Q.Animation.play(function (x, y) {
 					if (x === 1) {
 						$this.hide();
-						Q.handle($overlay.options.onClose, $this, []);
+						Q.handle(data.options.onClose, $this, []);
 					} else {
 						$this.css('opacity', 1-y);
 					}
 				}, o.fadeTime);
-				if ($overlay.options.mask)
+				if (data.options.mask)
 				{
 					Q.Masks.hide('Q.screen.mask');
 				}
@@ -205,15 +208,18 @@ function _Q_overlay(o) {
 			else
 			{
 				$this.hide();
-				if ($overlay.options.mask)
+				if (data.options.mask)
 				{
 					Q.Masks.hide('Q.screen.mask');
 				}
-				Q.handle($overlay.options.onClose, $this, [$this]);
+				Q.handle(data.options.onClose, $this, [$this]);
 			}
 			if (e) $.Event(e).preventDefault();
 			Q.Pointer.stopHints($this[0]);
 			Q.Pointer.cancelClick();
+		},
+		calculatePosition: function () {
+			calculatePosition($this);
 		}
 	});
 
@@ -549,67 +555,10 @@ function _handlePosAndScroll(o)
 			if (typeof(bottomMargin) == 'string') // percentage
 				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
 		
+			var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			var outerWidth = $this.outerWidth();
-			var winInnerWidth = Q.Pointer.windowWidth();
-			var winInnerHeight = Q.Pointer.windowHeight();
-			if (Q.info.isMobile && !o.noCalculatePosition) {
-				// correcting x-pos
-				var left = Math.ceil((winInnerWidth - outerWidth) / 2);
-				if (parseInt($this.css('left')) != left) {
-					$this.css({ 'left': left + 'px' });
-				}
-			
-				// for mobile devices any height and y-pos corrections are done only if keyboard is not visible on the screen
-				if ($this.data('Q_dialog_default_height') !== undefined &&
-				         $this.data('Q_dialog_default_height') <= winInnerHeight)
-				{
-					$this.removeData('Q_dialog_default_height');
-					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
-				}
-				// correcting top position
-				else if ($this.offset().top + $this.outerHeight() > window.scrollY + winInnerHeight)
-				{
-					$this.data('Q_dialog_top_corrected', true);
-					$this.css({ 'top': Q.Pointer.scrollTop() + 'px' });
-				}
-				// if case if dialog may fit on screen with topMargin we're setting it
-				else if ((topMargin + $this.outerHeight() < window.scrollY + winInnerHeight) && $this.data('Q_dialog_top_corrected'))
-				{
-					$this.removeData('Q_dialog_top_corrected');
-					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
-				}
-			}
-			else if (!o.noCalculatePosition)
-			{
-				// correcting x-pos
-				if (parseInt($this.css('left')) != Math.ceil((winInnerWidth - outerWidth) / 2))
-				{
-					$this.css({ 'left': Math.ceil((winInnerWidth - outerWidth) / 2) + 'px' });
-				}
-
-				// correcting height
-				if ($this.outerHeight() + topMargin + bottomMargin > parentHeight)
-				{
-					$this.data('Q_dialog_default_height', $this.outerHeight());
-					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
-					maxContentsHeight = parentHeight - topMargin - bottomMargin - ots.outerHeight()
-						- parseInt($this.css('border-top-width')) * 2;
-					if (maxContentsHeight < 0) maxContentsHeight = 0;
-					ods.css({ 'max-height': maxContentsHeight + 'px', 'overflow': 'auto' });
-				}
-				else if ($this.data('Q_dialog_default_height') !== undefined &&
-				         $this.data('Q_dialog_default_height') + topMargin + bottomMargin <= parentHeight)
-				{
-					$this.removeData('Q_dialog_default_height');
-					ods.css({ 'max-height': '', 'overflow': '' });
-					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
-				}
-				// if case if dialog may fit on screen with topMargin we're setting it
-				else if ($this.data('Q_dialog_default_height') === undefined &&
-				         $this.offset().top + parent.offset().top != topMargin)
-				{
-					$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
-				}
+			if (!o.noCalculatePosition) {
+				$this.data('Q/overlay').calculatePosition();
 			}
 		
 			// also considering orientation
@@ -620,7 +569,7 @@ function _handlePosAndScroll(o)
 				if (Q.info.isVertical != wasVertical)
 				{
 					wasVertical = Q.info.isVertical;
-					parentHeight = (parent[0] == document.body) ? winInnerHeight : parent.height();
+					parentHeight = (parent[0] == document.body) ? rect.height : parent.height();
 					topMargin = Q.Dialogs.options.topMargin;
 					if (typeof(topMargin) == 'string') // percentage
 						topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
