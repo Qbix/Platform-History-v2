@@ -962,7 +962,7 @@ abstract class Streams extends Base_Streams
 		foreach ($fieldNames as $f) {
 			if (isset($fields[$f])) {
 				$stream->$f = $fields[$f];
-			} else if (array_key_exists($f, $defaults)) {
+			} else if (!isset($stream->$f) && array_key_exists($f, $defaults)) {
 				$stream->$f = $defaults[$f];
 			}
 		}
@@ -2338,12 +2338,10 @@ abstract class Streams extends Base_Streams
 			));
 		}
 
-		$offset = !empty($options['offset']) ? $options['offset'] : 0;
-		$limit = !empty($options['limit'])
-			? $options['limit']
-			: $max_limit;
 		$max_limit = Q_Config::expect('Streams', 'db', 'limits', 'stream');
 		$max_offset = (Q_Config::expect('Streams', 'db', 'pages') - 1) * $max_limit - 1;
+		$offset = !empty($options['offset']) ? $options['offset'] : 0;
+		$limit = !empty($options['limit']) ? $options['limit'] : $max_limit;
 		if (!is_numeric($offset) or $offset > $max_offset) {
 			throw new Q_Exception("Streams::related offset is too large, must be <= $max_offset");
 		}
