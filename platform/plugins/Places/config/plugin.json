@@ -28,6 +28,9 @@
 		}
 	},
 	"Streams": {
+		"userStreams": {
+			"Places": "streams.json"
+		},
 		"types": {
 			"Places/location": {
 				"description": "Represents a building, venue, ship, park, etc.",
