@@ -387,7 +387,7 @@ function Streams_request_handler (req, res, next) {
 					}
 				}
 			}
-			Users.pushNotifications(userId, sessionId, {
+			Users.pushNotifications(userId, {
 				badge: 0
 			});
 			break;
