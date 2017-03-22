@@ -962,7 +962,7 @@ abstract class Streams extends Base_Streams
 		foreach ($fieldNames as $f) {
 			if (isset($fields[$f])) {
 				$stream->$f = $fields[$f];
-			} else if (array_key_exists($f, $defaults)) {
+			} else if (!isset($stream->$f) && array_key_exists($f, $defaults)) {
 				$stream->$f = $defaults[$f];
 			}
 		}

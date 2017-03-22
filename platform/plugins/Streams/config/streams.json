@@ -86,6 +86,16 @@
 		"title": "Presence",
 		"icon": ""
 	},
+	"Streams/contacts": {
+		"type": "Streams/resource",
+		"title": "Contacts",
+		"icon": ""
+	},
+	"Streams/labels": {
+		"type": "Streams/resource",
+		"title": "Labels",
+		"icon": ""
+	},
 	"Streams/user/interests": {
 		"type": "Streams/category",
 		"title": "Interests",
@@ -118,11 +128,6 @@
 		"title": "Age",
 		"icon": ""
 	},
-	"Places/user/hometown_location": {
-		"type": "Places/location",
-		"title": "Hometown Location",
-		"icon": ""
-	},
 	"Streams/user/fb_uid": {
 		"type": "Streams/uid/fb_uid",
 		"title": "My facebook uid",
@@ -131,11 +136,6 @@
 	"Streams/user/political": {
 		"type": "Streams/text/small",
 		"title": "Political views",
-		"icon": ""
-	},	
-	"Places/user/current_location": {
-		"type": "Places/location",
-		"title": "Current location",
 		"icon": ""
 	},	
 	"Streams/user/hs_info": {
@@ -191,16 +191,6 @@
 	"Streams/user/quotes": {
 		"type": "Streams/category",
 		"title": "Quotes",
-		"icon": ""
-	},
-	"Streams/contacts": {
-		"type": "Streams/resource",
-		"title": "Contacts",
-		"icon": ""
-	},
-	"Streams/labels": {
-		"type": "Streams/resource",
-		"title": "Labels",
 		"icon": ""
 	}
 }
