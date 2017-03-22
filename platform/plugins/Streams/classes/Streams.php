@@ -2338,12 +2338,10 @@ abstract class Streams extends Base_Streams
 			));
 		}
 
-		$offset = !empty($options['offset']) ? $options['offset'] : 0;
-		$limit = !empty($options['limit'])
-			? $options['limit']
-			: $max_limit;
 		$max_limit = Q_Config::expect('Streams', 'db', 'limits', 'stream');
 		$max_offset = (Q_Config::expect('Streams', 'db', 'pages') - 1) * $max_limit - 1;
+		$offset = !empty($options['offset']) ? $options['offset'] : 0;
+		$limit = !empty($options['limit']) ? $options['limit'] : $max_limit;
 		if (!is_numeric($offset) or $offset > $max_offset) {
 			throw new Q_Exception("Streams::related offset is too large, must be <= $max_offset");
 		}
