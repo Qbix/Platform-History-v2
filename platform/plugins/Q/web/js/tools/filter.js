@@ -14,7 +14,7 @@
  *  @param {Object} [options.placeholders={}] Options for Q/placeholders, or null to omit it
  *  @param {String} [options.results=''] HTML to display in the results initially. If setting them later, remember to call stateChanged('results')
  *  @param {Q.Event} [options.onFilter] You are meant to attach an event handler to fetch and update results by editing the contents of the element pointed to by the second argument. The first argument is the content of the text input.
- *  @param {Q.Event} [options.onChoose] This event occurs when one of the elements with class "Q_filter_results" is chosen. It is passed (element, obj) where you can modify obj.text to set the text which will be displayed in the text input to represent the chosen item.
+ *  @param {Q.Event} [options.onChoose] This event occurs when one of the elements with class "Q_filter_result" is chosen. It is passed (element, details) where you can modify details.text to set the text which will be displayed in the text input to represent the chosen item.
  *  @param {Q.Event} [options.onClear] This event occurs when the filter input is cleared
  * @return {Q.Tool}
  */
@@ -293,19 +293,19 @@ Q.Tool.define('Q/filter', function (options) {
 		}
 	},
 	/**
-	 * Choose an item in the results
+	 * Choose an item in the results.
 	 * @param {HTMLElement} [element] the element to choose
 	 * @method choose
 	 */
 	choose: function (element) {
 		var streamName = $(element).data('streamName');
-		var obj = {
+		var details = {
 			text: $(element).text()
 		};
 		var tool = this;
-		tool.setText(obj.text);
-		Q.handle(tool.state.onChoose, tool, [element, obj]);
-		tool.end(obj.text);
+		tool.setText(details.text);
+		Q.handle(tool.state.onChoose, tool, [element, details]);
+		tool.end(details.text);
 		tool.$input.blur();
 		tool.$input.addClass('Q_filter_chose');
 		tool.cancelRemoveClass = true;

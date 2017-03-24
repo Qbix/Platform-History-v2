@@ -133,8 +133,7 @@ Places.Location = {
 	 * @param {Object} [options.provider='google']
 	 */
 	geocode: function (loc, callback, options) {
-		var o = options || {};
-		o.provider = o.provider || 'google';
+		var o = Q.extend({}, Places.Location.geocode.options, options);
 		if (o.provider !== 'google') {
 			return;
 		}
@@ -177,6 +176,10 @@ Places.Location = {
 			});
 		});
 	}
+};
+
+Places.Location.geocode.options = {
+	provider: 'google'
 };
 
 function _deg2rad(angle) {
