@@ -204,10 +204,10 @@ Q.text.Places = {
 };
 
 Q.Tool.define({
-	"Places/location": "plugins/Places/js/tools/location.js",
 	"Places/address": "plugins/Places/js/tools/address.js",
 	"Places/globe": "plugins/Places/js/tools/globe.js",
 	"Places/countries": "plugins/Places/js/tools/countries.js",
+	"Places/user/location": "plugins/Places/js/tools/user/location.js"
 });
 
 })(Q, jQuery, window);
