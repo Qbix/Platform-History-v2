@@ -6,7 +6,7 @@
 
 /**
  * Inplace text editor tool to edit the content or attribute of a stream
- * @class Places location
+ * @class Places user location
  * @constructor
  * @param {array} [$options] used to pass options
  * @param {array} [$options.meters] array of { meters: title } pairs, by default is generated from Places/nearby/meters config
