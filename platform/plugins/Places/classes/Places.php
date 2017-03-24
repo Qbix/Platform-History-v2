@@ -171,9 +171,9 @@ abstract class Places extends Base_Places
 	static function distanceLabel($meters, $units = 'km')
 	{
 		if (empty($units)) {
-			$miles = abs($meters/1609.34 - round($meters/1609.34));
+			$milesr = abs($meters/1609.34 - round($meters/1609.34));
 			$kmr = abs($meters/1000 - round($meters/1000));
-			$units = $miles < $kmr ? 'miles' : 'km';
+			$units = $milesr < $kmr ? 'miles' : 'km';
 		}
 		switch ($units) {
 		case 'miles':
