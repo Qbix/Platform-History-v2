@@ -83,7 +83,7 @@ var Places = Q.Places = Q.plugins.Places = {
 		if (!units) {
 			var milesr = Math.abs(meters/1609.34 - Math.round(meters/1609.34));
 			var kmr = Math.abs(meters/1000 - Math.round(meters/1000));
-			units = miles < kmr ? 'miles' : 'km';
+			units = milesr < kmr ? 'miles' : 'km';
 		}
 		switch (units) {
 		case 'miles':
