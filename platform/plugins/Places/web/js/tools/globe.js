@@ -36,7 +36,7 @@ var Places = Q.Places;
  * @param {Q.Event} [options.beforeRotate] this event occurs right before the globe is about to rotate to some location
  * @param {Q.Event} [options.beforeRotateToCountry] this event occurs right before the globe is about to rotate to some country
  */
-Q.Tool.define("Places/globe", function _Places_location(options) {
+Q.Tool.define("Places/globe", function _Places_globe(options) {
 	var tool = this;
 	var state = tool.state;
 	var $te = $(tool.element);
