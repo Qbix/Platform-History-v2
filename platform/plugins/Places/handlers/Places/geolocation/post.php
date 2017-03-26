@@ -127,6 +127,9 @@ function Places_geolocation_post()
 		set_time_limit($timeLimit);
 		Q_Dispatcher::response(true);
 		session_write_close();
+		@ob_end_flush();
+		@ob_end_flush();
+		flush();
 		
 		if ($shouldUnsubscribe or $shouldSubscribe) {
 			$myInterests = Streams_Category::getRelatedTo(
