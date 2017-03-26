@@ -136,7 +136,9 @@ Q.Tool.define("Places/user/location", function (options) {
 							placeName: placeName,
 							state: state,
 							country: country
-						}, true, geo.coords));
+						}, function () {
+							$this.removeClass('Places_obtaining').hide(300);
+						}));
 					});
 				}, function () {
 					clearTimeout(timeout);
@@ -187,7 +189,7 @@ Q.Tool.define("Places/user/location", function (options) {
 		});
 	});
 	
-	function _submit(zipcode, fields) {
+	function _submit(zipcode, fields, callback) {
 		fields = Q.extend({}, fields, {
 			subscribe: true,
 			unsubscribe: true,
@@ -212,6 +214,7 @@ Q.Tool.define("Places/user/location", function (options) {
 				};
 				if (latitude && longitude) {
 					Q.handle(state.onUpdate, tool, [latitude, longitude, meters]);
+					Q.handle(callback, tool, [latitude, longitude, meters]);
 				}
 			}, { 
 				messages: 1,
