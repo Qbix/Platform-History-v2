@@ -51,7 +51,7 @@ function _Q_overlay(o) {
 			var left = sl + sw * parseInt(o.left) / 100;
 			$this.css({ 'left': left + 'px' });
 		} else {
-			$this.css({ 'left': sl + sw + o.left + 'px' });
+			$this.css({ 'left': sl + o.left + 'px' });
 		}
 		if (o.top == 'middle') {
 			$this.css({ 'top': (st + (sh - height) / 2) + 'px' });
@@ -59,7 +59,7 @@ function _Q_overlay(o) {
 			var top = st + sh * parseInt(o.top) / 100;
 			$this.css({ 'top': top + 'px' });
 		} else {
-			$this.css({ 'top': st + sh + o.top + 'px' });
+			$this.css({ 'top': st + o.top + 'px' });
 		}
 		if (!o.fullscreen) {
 			var topMargin = Q.Dialogs.options.topMargin;
