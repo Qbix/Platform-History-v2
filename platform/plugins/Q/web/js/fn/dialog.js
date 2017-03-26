@@ -530,6 +530,7 @@ function _handlePosAndScroll(o)
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
 	var wasVertical = null; // for touch devices
+	var inputWasFocused = false;
 		
 	var contentsWrapper = null, contentsLength = 0;
 	
@@ -542,6 +543,13 @@ function _handlePosAndScroll(o)
 	
 	function _adjustPosition() {
 		var maxContentsHeight;
+		var isInput = $(document.activeElement).is(":input");
+		if (isInput) {
+			inputWasFocused = true;
+			setTimeout(function () {
+				inputWasFocused = false;
+			}, 400);
+		}
 		if ($this.css('display') == 'block')
 		{
 			topMargin = Q.Dialogs.options.topMargin;
@@ -556,7 +564,8 @@ function _handlePosAndScroll(o)
 		
 			var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			var outerWidth = $this.outerWidth();
-			if (!o.noCalculatePosition) {
+			if (!o.noCalculatePosition
+			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
 				$this.data('Q/overlay').calculatePosition();
 			}
 		
