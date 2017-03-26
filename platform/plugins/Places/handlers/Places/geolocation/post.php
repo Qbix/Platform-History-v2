@@ -94,7 +94,7 @@ function Places_geolocation_post()
 		}
 	}
 	$stream->setAttribute($attributes);
-	$stream->save();
+	$stream->changed();
 	$stream->post($user->id, array(
 		'type' => 'Places/location/updated',
 		'content' => '',
