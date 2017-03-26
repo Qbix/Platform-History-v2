@@ -136,9 +136,9 @@ Q.Tool.define("Places/user/location", function (options) {
 							placeName: placeName,
 							state: state,
 							country: country
-						}, function () {
+						}), function () {
 							$this.removeClass('Places_obtaining').hide(300);
-						}));
+						});
 					});
 				}, function () {
 					clearTimeout(timeout);
