@@ -6,7 +6,7 @@
 
 /**
  * Inplace text editor tool to edit the content or attribute of a stream
- * @class Places location
+ * @class Places user location
  * @constructor
  * @param {array} [$options] used to pass options
  * @param {array} [$options.meters] array of { meters: title } pairs, by default is generated from Places/nearby/meters config
@@ -19,7 +19,7 @@
  * @param {string} [$options.onUpdate] name an event handler for when the location is updated
  * @param {string} [$options.onUnset] name an event handler for when the location is unset
  */
-function Places_location_tool($options)
+function Places_user_location_tool($options)
 {
 	if (empty($options['meters'])) {
 		$options['meters'] = array();

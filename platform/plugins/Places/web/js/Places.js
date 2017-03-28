@@ -83,7 +83,7 @@ var Places = Q.Places = Q.plugins.Places = {
 		if (!units) {
 			var milesr = Math.abs(meters/1609.34 - Math.round(meters/1609.34));
 			var kmr = Math.abs(meters/1000 - Math.round(meters/1000));
-			units = miles < kmr ? 'miles' : 'km';
+			units = milesr < kmr ? 'miles' : 'km';
 		}
 		switch (units) {
 		case 'miles':
@@ -129,7 +129,11 @@ Places.Location = {
 	 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
 	 * @param {Function} callback gets (array of results of the geolocation, and status code)
 	 */
-	geocode: function (loc, callback) {
+	geocode: function (loc, callback, options) {
+		var o = Q.extend({}, Places.Location.geocode.options, options);
+		if (o.provider !== 'google') {
+			return;
+		}
 		Places.loadGoogleMaps(function () {
 			var param = {};
 			var p = "Places.Location.geocode: ";
@@ -176,6 +180,10 @@ Places.Location = {
 	}
 };
 
+Places.Location.geocode.options = {
+	provider: 'google'
+};
+
 function _deg2rad(angle) {
 	return angle * 0.017453292519943295; // (angle / 180) * Math.PI;
 }
@@ -201,10 +209,10 @@ Q.text.Places = {
 };
 
 Q.Tool.define({
-	"Places/location": "plugins/Places/js/tools/location.js",
 	"Places/address": "plugins/Places/js/tools/address.js",
 	"Places/globe": "plugins/Places/js/tools/globe.js",
 	"Places/countries": "plugins/Places/js/tools/countries.js",
+	"Places/user/location": "plugins/Places/js/tools/user/location.js"
 });
 
 })(Q, jQuery, window);

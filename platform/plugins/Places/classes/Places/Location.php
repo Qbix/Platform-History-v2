@@ -21,8 +21,7 @@ class Places_Location
 		$stream = Streams::fetchOne($user->id, $user->id, $streamName);
 		if (!$stream) {
 			$stream = Streams::create($user->id, $user->id, 'Places/location', array(
-				'name' => $streamName,
-				'title' => "User Location",
+				'name' => $streamName
 			));
 			$stream->join();
 		}

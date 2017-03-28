@@ -276,7 +276,8 @@ class Streams_Message extends Base_Streams_Message
 					$counts[$type] = isset($counts[$type]) ? $counts[$type] + 1 : 1;
 				}
 				foreach ($counts as $type => $count) {
-					$totals2[$count][$type] = array(
+					$key = implode("\t", array($publisherId, $streamName, $type));
+					$totals2[$count][$key] = array(
 						'publisherId' => $publisherId,
 						'streamName' => $streamName,
 						'messageType' => $type,

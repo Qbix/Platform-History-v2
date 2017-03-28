@@ -94,7 +94,7 @@ function Places_geolocation_post()
 		}
 	}
 	$stream->setAttribute($attributes);
-	$stream->save();
+	$stream->changed();
 	$stream->post($user->id, array(
 		'type' => 'Places/location/updated',
 		'content' => '',
@@ -127,6 +127,11 @@ function Places_geolocation_post()
 		set_time_limit($timeLimit);
 		Q_Dispatcher::response(true);
 		session_write_close();
+		$ob = new Q_OutputBuffer();
+		for ($i=0, $l=$ob->level; $i<=$l; ++$i) {
+			@ob_end_flush();
+		}
+		flush();
 		
 		if ($shouldUnsubscribe or $shouldSubscribe) {
 			$myInterests = Streams_Category::getRelatedTo(

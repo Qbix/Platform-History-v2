@@ -21,6 +21,10 @@ Q.text.Places.address = {
  * @param {Number} [options.latitude] latitude of bias point
  * @param {Number} [options.longitude] longitude of bias point
  * @param {Number} [options.meters] try to find things within this radius
+ * @param {Object} [options.place] use this to set initial place, if any
+ * @param {Object} [options.place.id] the id of the place
+ * @param {Object} [options.place.name] the name of the place
+ * @param {Object} [options.place.description] the address or vicinity to display
  * @param {String} [options.searchQuery] use this to fill the initial results, if any
  * @param {Number} [options.types] the type to pass to google's nearbySearch
  * @param {Object} [options.filter] Options for the child Q/filter tool
@@ -29,7 +33,7 @@ Q.text.Places.address = {
  * @param {Q.Event} [options.onError] When there was some kind of error
  */
 
-Q.Tool.define("Places/address", function (options) {
+Q.Tool.define("Places/address", function _Places_address(options) {
 	var tool = this;
 	var state = this.state;
 	state.mapElement = state.mapElement || $('<div />').appendTo(this.element)[0];
@@ -50,26 +54,36 @@ Q.Tool.define("Places/address", function (options) {
 				}
 			});
 		}, tool);
-		filter.state.onChoose.set(function (element, obj) {
+		filter.state.onChoose.set(function (element, details) {
 			var placeId = $(element).attr('placeid');
 			var place = tool.place = _places[placeId];
 			if (!place) {
 				return;
 			}
-			obj.text = place.name;
-			tool.$('.Places_address_text')
-			.html(place.description)
-			.show();
-			Q.handle(state.onChoose, tool, [place, obj]);
+			_choose(place, details);
 		}, tool);
 		filter.state.onClear.set(function () {
 			tool.$('.Places_address_text').empty().hide();
 			tool.place = null;
 			Q.handle(state.onChoose, tool, [null]);
 		}, tool);
+		if (state.place) {
+			_choose(state.place);
+		}
 		p.fill('filter')(this);
 	});
 	$('<div class="Places_address_text "/>').appendTo(tool.element);
+	function _choose(place, details, skipSetText) {
+		details = details || {};
+		details.text = place.name;
+		tool.$('.Places_address_text')
+		.html(place.description)
+		.show();
+		Q.handle(state.onChoose, tool, [place, details]);
+		if (!skipSetText) {
+			tool.filter.setText(details.text);
+		}
+	}
 },
 
 { // default options here
@@ -78,6 +92,7 @@ Q.Tool.define("Places/address", function (options) {
 	filter: {
 		placeholder: Q.text.Places.address.filter
 	},
+	place: null,
 	mapElement: null,
 	onChoose: new Q.Event(),
 	onError: new Q.Event()

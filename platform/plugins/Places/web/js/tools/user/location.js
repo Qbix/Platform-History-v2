@@ -11,7 +11,7 @@ var Places = Q.Places;
 
 /**
  * Allows the logged-in user to indicate their location
- * @class Places location
+ * @class Places user location
  * @constructor
  * @param {Object} [options] used to pass options
  * @param {Object} [options.meters] object of { meters: title } pairs, by default is generated from Places/nearby/meters config
@@ -26,13 +26,13 @@ var Places = Q.Places;
  * @param {Q.Event} [options.onUpdate] this event occurs when the location is updated via the tool
  */
 
-Q.Tool.define("Places/location", function (options) {
+Q.Tool.define("Places/user/location", function (options) {
 	var tool = this;
 	var state = tool.state;
 	var $te = $(tool.element);
 	if (!Users.loggedInUser) {
 		tool.element.style.display = 'none';
-		console.warn("Don't render Places/location when user is not logged in");
+		console.warn("Don't render Places/user/location when user is not logged in");
 		return;
 	}
 	var publisherId = Users.loggedInUser.id;
@@ -50,10 +50,10 @@ Q.Tool.define("Places/location", function (options) {
 		state.defaultMeters = Places.nearby.defaultMeters;
 	}
 	
-	Q.Template.render('Places/location', state, function (err, html) {
+	Q.Template.render('Places/user/location', state, function (err, html) {
 		tool.element.innerHTML = html;
-		$te.find('.Places_location_container')
-		.addClass('Places_location_checking');
+		$te.find('.Places_user_location_container')
+		.addClass('Places_user_location_checking');
 	
 		var pipe = Q.pipe(['info', 'show'], function (params) {
 			_showMap.apply(this, params.info);
@@ -66,7 +66,7 @@ Q.Tool.define("Places/location", function (options) {
 			var latitude = parseFloat(this.getAttribute('latitude'));
 			var longitude = parseFloat(this.getAttribute('longitude'));
 			if (meters) {
-				tool.$('.Places_location_meters').val(meters);
+				tool.$('.Places_user_location_meters').val(meters);
 			};
 			pipe.fill('info')(latitude, longitude, meters, state.onSet.handle);
 			state.stream = this; // in case it was missing before
@@ -80,14 +80,14 @@ Q.Tool.define("Places/location", function (options) {
 				var latitude = stream.getAttribute('latitude');
 				var longitude = stream.getAttribute('longitude');
 				if (meters) {
-					tool.$('.Places_location_meters').val(meters);
+					tool.$('.Places_user_location_meters').val(meters);
 				}
 			}
 			if (!latitude || !longitude || !meters) {
-				$te.removeClass('Places_location_obtained')
-					.addClass('Places_location_obtaining');
-				$te.find('.Places_location_container')
-					.removeClass('Places_location_checking');
+				$te.removeClass('Places_user_location_obtained')
+					.addClass('Places_user_location_obtaining');
+				$te.find('.Places_user_location_container')
+					.removeClass('Places_user_location_checking');
 				Q.handle(state.onUnset, tool, [err, stream]);
 				if (!state.onReady.occurred) {
 					Q.handle(state.onReady, tool, [err, stream]);
@@ -102,11 +102,11 @@ Q.Tool.define("Places/location", function (options) {
 			}
 		});
 	
-		tool.$('.Places_location_meters').on('change', function () {
+		tool.$('.Places_user_location_meters').on('change', function () {
 			_submit();
 		});
 	
-		tool.$('.Places_location_set, .Places_location_update_button')
+		tool.$('.Places_user_location_set, .Places_user_location_update_button')
 		.on(Q.Pointer.click, function () {
 			var $this = $(this);
 			$this.addClass('Places_obtaining');
@@ -136,7 +136,9 @@ Q.Tool.define("Places/location", function (options) {
 							placeName: placeName,
 							state: state,
 							country: country
-						}, true, geo.coords));
+						}), function () {
+							$this.removeClass('Places_obtaining').hide(300);
+						});
 					});
 				}, function () {
 					clearTimeout(timeout);
@@ -187,11 +189,11 @@ Q.Tool.define("Places/location", function (options) {
 		});
 	});
 	
-	function _submit(zipcode, fields) {
+	function _submit(zipcode, fields, callback) {
 		fields = Q.extend({}, fields, {
 			subscribe: true,
 			unsubscribe: true,
-			meters: tool.$('.Places_location_meters').val(),
+			meters: tool.$('.Places_user_location_meters').val(),
 			timezone: (new Date()).getTimezoneOffset() / 60,
 			defaultMeters: state.defaultMeters
 		});
@@ -208,10 +210,11 @@ Q.Tool.define("Places/location", function (options) {
 				var latitude = this.getAttribute('latitude');
 				var longitude = this.getAttribute('longitude');
 				if (meters) {
-					tool.$('.Places_location_meters').val(meters);
+					tool.$('.Places_user_location_meters').val(meters);
 				};
 				if (latitude && longitude) {
 					Q.handle(state.onUpdate, tool, [latitude, longitude, meters]);
+					Q.handle(callback, tool, [latitude, longitude, meters]);
 				}
 			}, { 
 				messages: 1,
@@ -243,13 +246,13 @@ Q.Tool.define("Places/location", function (options) {
 		};
 
 		Places.loadGoogleMaps(function () {
-			$te.removeClass('Places_location_obtaining')
-				.addClass('Places_location_obtained');
-			$te.find('.Places_location_container')
-				.removeClass('Places_location_checking');
+			$te.removeClass('Places_user_location_obtaining')
+				.addClass('Places_user_location_obtained');
+			$te.find('.Places_user_location_container')
+				.removeClass('Places_user_location_checking');
 			setTimeout(function () {
-				tool.$('.Places_location_map_container').show();
-				tool.$('.Places_location_update').slideDown(800);
+				tool.$('.Places_user_location_map_container').show();
+				tool.$('.Places_user_location_update').slideDown(800);
 				setTimeout(function () {
 					_showLocationAndCircle();
 				}, 300);
@@ -260,7 +263,7 @@ Q.Tool.define("Places/location", function (options) {
 		});
 
 		function _showLocationAndCircle() {
-			var element = tool.$('.Places_location_map')[0];
+			var element = tool.$('.Places_user_location_map')[0];
 			var map = state.map = new google.maps.Map(element, {
 				center: new google.maps.LatLng(latitude, longitude),
 				zoom: 12 - Math.floor(Math.log(meters/1609.34) / Math.log(2)),
@@ -313,24 +316,24 @@ Q.Tool.define("Places/location", function (options) {
 	
 });
 
-Q.Template.set('Places/location', 
-	'<div class="Places_location_container Places_location_checking">'
+Q.Template.set('Places/user/location', 
+	'<div class="Places_user_location_container Places_user_location_checking">'
 		+ 'I\'m interested in things taking place within '
-		+ '<select name="meters" class="Places_location_meters">'
+		+ '<select name="meters" class="Places_user_location_meters">'
 			+ '{{#each meters}}'
 				+ '{{option @key this ../defaultMeters}}'
 			+ '{{/each}}'
 		+ '</select>'
 		+ ' of '
-		+ '<div class="Places_location_whileObtaining">'
-			+ '<img src="{{map.prompt}}" title="map" class="Places_location_set">'
+		+ '<div class="Places_user_location_whileObtaining">'
+			+ '<img src="{{map.prompt}}" title="map" class="Places_user_location_set">'
 		+ '</div>'
-		+ '<div class="Places_location_whileObtained">'
-			+ '<div class="Places_location_map_container">'
-				+ '<div class="Places_location_map"></div>'
+		+ '<div class="Places_user_location_whileObtained">'
+			+ '<div class="Places_user_location_map_container">'
+				+ '<div class="Places_user_location_map"></div>'
 			+ '</div>'
-			+ '<div class="Places_location_update Places_location_whileObtained">'
-				+ '<button class="Places_location_update_button Q_button">'
+			+ '<div class="Places_user_location_update Places_user_location_whileObtained">'
+				+ '<button class="Places_user_location_update_button Q_button">'
 					+ '{{updateButton}}'
 				+ '</button>'
 			+ '</div>'
