@@ -128,6 +128,8 @@ Places.Location = {
 	 * @static
 	 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
 	 * @param {Function} callback gets (array of results of the geolocation, and status code)
+	 * @param {Object} [options]
+	 * @param {Object} [options.provider='google']
 	 */
 	geocode: function (loc, callback, options) {
 		var o = Q.extend({}, Places.Location.geocode.options, options);
