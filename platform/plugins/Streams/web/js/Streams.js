@@ -1023,7 +1023,8 @@ Streams.release = function (key) {
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
  *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result) .
- *   See Streams::invite in PHP side.
+ *   In this way you can obtain the invite token, email addresses, etc.
+ *   See Streams::invite on the PHP side for the possible return values.
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
 Streams.invite = function (publisherId, streamName, options, callback) {
