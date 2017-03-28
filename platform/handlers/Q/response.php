@@ -8,11 +8,8 @@
  */
 function Q_response($params)
 {
-	extract($params);
-	/**
-	 * @var Exception $exception
-	 * @var array $errors
-	 */
+	$exception = isset($params['exception']) ? $params['exception'] : null;
+	$errors = isset($params['errors']) ? $params['errors'] : null;
 	if (empty($errors)) {
 		$errors = Q_Response::getErrors();
 	}
@@ -61,7 +58,7 @@ function Q_response($params)
 
 	$action = $uri->action;
 	if (Q::canHandle("$module/$action/response")) {
-		if (false === Q::event("$module/$action/response") and !$isAjax) {
+		if (false === Q::event("$module/$action/response", $_REQUEST) and !$isAjax) {
 			return;
 		}
 	}
