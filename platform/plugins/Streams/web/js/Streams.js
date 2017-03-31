@@ -4253,7 +4253,7 @@ Q.onInit.add(function _Streams_onInit() {
 					}, 0);
 				}
 				
-				var streamType = streams.fields.type;
+				var streamType = stream.fields.type;
 
 				_messageHandlers[streamType] &&
 				_messageHandlers[streamType][msg.type] &&
