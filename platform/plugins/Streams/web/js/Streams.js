@@ -1913,7 +1913,7 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
  * Generic callbacks can be assigned by setting messageType to ""
  * @event onMessage
  * @static
- * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
  * @param {String} [messageType] type of the message, or its ordinal
  */
@@ -4252,18 +4252,20 @@ Q.onInit.add(function _Streams_onInit() {
 						Q.handle(Streams.onMessageUnseen, Streams, params);
 					}, 0);
 				}
+				
+				var streamType = stream.fields.type;
 
-				_messageHandlers[msg.streamType] &&
-				_messageHandlers[msg.streamType][msg.type] &&
-				Q.handle(_messageHandlers[msg.streamType][msg.type], Streams, params);
+				_messageHandlers[streamType] &&
+				_messageHandlers[streamType][msg.type] &&
+				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
 
 				_messageHandlers[''] &&
 				_messageHandlers[''][msg.type] &&
 				Q.handle(_messageHandlers[''][msg.type], Streams, params);
 
-				_messageHandlers[msg.streamType] &&
-				_messageHandlers[msg.streamType][''] &&
-				Q.handle(_messageHandlers[msg.streamType][''], Streams, params);
+				_messageHandlers[streamType] &&
+				_messageHandlers[streamType][''] &&
+				Q.handle(_messageHandlers[streamType][''], Streams, params);
 
 				_messageHandlers[''] &&
 				_messageHandlers[''][''] &&
@@ -4276,13 +4278,16 @@ Q.onInit.add(function _Streams_onInit() {
 							Streams,
 							params
 						);
-						Q.each([msg.type, ''], function (ordinal, type) {
-							Q.handle(
-								Q.getObject([publisherId, streamName, type], _streamMessageHandlers),
-								Streams,
-								params
-							);
-						});
+						Q.handle(
+							Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
+							Streams,
+							params
+						);
+						Q.handle(
+							Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
+							Streams,
+							params
+						);
 					});
 				});
 

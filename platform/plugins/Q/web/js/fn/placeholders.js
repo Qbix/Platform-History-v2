@@ -52,7 +52,7 @@ function () {
 		});
 		
 		$('input', this)
-		.add(this).filter('input')
+		.add(this).filter('input,textarea')
 		.not('input.Q_leave_alone')
 		.not('input[type=file]')
 		.not('input[type=hidden]')

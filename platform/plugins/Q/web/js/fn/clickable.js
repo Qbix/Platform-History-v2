@@ -12,6 +12,7 @@
  * @class Q clickable
  * @constructor
  * @param {Object} [options] options for function configuration
+ * @param {String} [options.className] any CSS classes to add to the container element
  * @param {Object|null} [options.shadow] shadow effect configuration, or false for no shadow
  * @param {String} [options.shadow.src="plugins/Q/img/shadow3d.png"] url of the shadow image
  * @param {Number} [options.shadow.stretch=1.5] stretch
@@ -111,7 +112,10 @@ function _Q_clickable(o) {
 			'line-height': $this.css('line-height'),
 			'vertical-align': $this.css('vertical-align'),
 			'text-align': $this.css('text-align')
-		}).addClass('Q_clickable_container')
+		});
+		if (state.className) {
+			$container.addClass(state.className);
+		}
 		$this.hide(); // to get percentage values, if any, for margins & padding
 		Q.each(['left', 'right', 'top', 'bottom'], function (i, pos) {
 			$container.css('margin-'+pos, $this.css('margin-'+pos));
