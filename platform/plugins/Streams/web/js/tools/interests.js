@@ -315,6 +315,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			+ ' filter'
 			+ ' Q_refresh';
 		tool.$('.Streams_interests_filter_input')
+		.plugin('Q/placeholders')
 		.on(possibleEvents, Q.debounce(function (evt) {
 			var $this = $(this);
 			if (evt.keyCode === 27) {
