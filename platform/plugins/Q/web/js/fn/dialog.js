@@ -502,6 +502,7 @@ function _loadUrl(o, cb) {
 	Q.loadUrl(o.url, Q.extend({ 
 		ignoreHistory: true,
 		ignorePage: true,
+		ignoreDialogs: true,
 		quiet: true,
 		onActivate: cb,
 		slotNames: 'title,dialog',
