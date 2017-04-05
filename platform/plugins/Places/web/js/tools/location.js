@@ -208,7 +208,7 @@
 															// check conditions for submit
 															_validate();
 														}
-													}, tool.prefix + 'relatedLocations');
+													}, tool.prefix + 'relatedLocations').activate();
 
 													button.plugin('Q/clickable').on(Q.Pointer.click, function () {
 														var loc = Q.getObject(['location', 'place'], $this);
@@ -242,7 +242,7 @@
 										}
 									}
 								}
-							}, tool.prefix + 'relatedLocations');
+							}, tool.prefix + 'relatedLocations').activate();
 						}
 					});
 				}, {tool: tool});
