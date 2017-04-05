@@ -224,6 +224,8 @@
 															return false;
 														}
 
+														if(loc.geometry && loc.geometry.location){ loc = loc.geometry.location; }
+														
 														callback({
 															title: titleVal,
 															attributes: {
