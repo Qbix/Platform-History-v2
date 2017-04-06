@@ -3709,7 +3709,8 @@ function updateStreamCache(stream) {
 	Streams.get.cache.each(
 		[stream.fields.publisherId, stream.fields.name], 
 		function (k) {
-			this.set(k, 0, stream, [null, stream]);
+			var params = Streams.get.cache.get(k).params;
+			this.set(k, 0, stream, [null, stream].concat(params.slice(2)));
 		}
 	);
 }
