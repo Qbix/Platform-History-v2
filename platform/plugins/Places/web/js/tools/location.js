@@ -75,6 +75,7 @@
 							latitude: crd.latitude,
 							longitude: crd.longitude
 						}, function (geocode) {
+							if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
 							Q.handle(state.onChoose, tool, [geocode]);
 						});
 					}, function (err) {
@@ -94,6 +95,7 @@
 				Streams.get(locationPreviewTool.state.publisherId, locationPreviewTool.state.streamName, function(){
 					// get valid google object and fire onChoose event
 					Places.Location.geocode(this, function (geocode) {
+						if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
 						Q.handle(state.onChoose, tool, [geocode]);
 					});
 				});
@@ -144,6 +146,7 @@
 								if (place && place.id) {
 									// get valid google object and fire onChoose event
 									Places.Location.geocode({placeId: place.id}, function (geocode) {
+										if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
 										Q.handle(state.onChoose, tool, [geocode]);
 									});
 
@@ -225,7 +228,7 @@
 														}
 
 														if(loc.geometry && loc.geometry.location){ loc = loc.geometry.location; }
-														
+
 														callback({
 															title: titleVal,
 															attributes: {
