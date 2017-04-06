@@ -11449,11 +11449,14 @@ function _addHandlebarsHelpers() {
 			if (this && this[name]) {
 				Q.extend(o, this[name]);
 			}
-			if (id && this && this['id:'+id]) {
-				Q.extend(o, this['id:'+id]);
-			}
-			if (typeof id === 'string' || typeof id === 'number') {
-				id = name.split('/').join('_') + (id !== '' ? '-'+id : '');
+			if (id) {
+				var id2 = id;
+				if (typeof id2 === 'string' || typeof id2 === 'number') {
+					id2 = name.split('/').join('_') + (id2 !== '' ? '-'+id2 : '');
+				}
+				if (this && this['id:'+id2]) {
+					Q.extend(o, this['id:'+id2]);
+				}
 			}
 			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
 		});
