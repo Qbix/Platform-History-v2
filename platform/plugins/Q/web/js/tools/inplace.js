@@ -449,7 +449,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		_finishedEditing(container_span);
 		_hideEditButtons();
 		Q.handle(state.onCancel, tool);
-		Q.Pointer.cancelClick();
+		Q.Pointer.cancelClick(null, null, true);
 	};
 	function onBlur() {
 		if (noCancel && fieldinput.val() !== previousValue) {
@@ -525,13 +525,13 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	container_span.on([Q.Pointer.fastclick, '.Q_inplace'], function (event) {
 		if ((state.editOnClick && event.target === static_span[0])
 		|| $(event.target).is('button')) {
-			Q.Pointer.cancelClick(event);
+			Q.Pointer.cancelClick(event, null, true);
 			Q.Pointer.ended();
 			event.stopPropagation();
 		}
 	});
 	edit_button.on(Q.Pointer.start, function (event) {
-		Q.Pointer.cancelClick(event);
+		Q.Pointer.cancelClick(event, null, true);
 	});
 	if (this.state.editOnClick) {
 		// happens despite canceled click
@@ -602,7 +602,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		onSave();
 	});
 	fieldinput.on(Q.Pointer.end, function (event) {
-		Q.Pointer.cancelClick(event);
+		Q.Pointer.cancelClick(eventnull, true);
 		Q.Pointer.ended();
 		event.stopPropagation();
 	});
