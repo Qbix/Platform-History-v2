@@ -71,11 +71,10 @@
 						}
 
 						// get valid google object and fire onChoose event
-						Places.Location.geocode({
+						tool.geocode({
 							latitude: crd.latitude,
 							longitude: crd.longitude
 						}, function (geocode) {
-							if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
 							Q.handle(state.onChoose, tool, [geocode]);
 						});
 					}, function (err) {
@@ -92,10 +91,9 @@
 
 				// related location selected
 				var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
-				Streams.get(locationPreviewTool.state.publisherId, locationPreviewTool.state.streamName, function(){
+				Streams.get(locationPreviewTool.state.publisherId, locationPreviewTool.state.streamName, function () {
 					// get valid google object and fire onChoose event
-					Places.Location.geocode(this, function (geocode) {
-						if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
+					tool.geocode(this, function (geocode) {
 						Q.handle(state.onChoose, tool, [geocode]);
 					});
 				});
@@ -145,8 +143,7 @@
 							onChoose: function (place) {
 								if (place && place.id) {
 									// get valid google object and fire onChoose event
-									Places.Location.geocode({placeId: place.id}, function (geocode) {
-										if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
+									tool.geocode({placeId: place.id}, function (geocode) {
 										Q.handle(state.onChoose, tool, [geocode]);
 									});
 
@@ -181,18 +178,22 @@
 													var $this = $(this);
 													var button = $this.find('.Q_button[name=submit]');
 													var title = $this.find("input[name=title]");
-													var _validate = function(){
+													var _validate = function () {
 														var result = true;
 														var buttonParent = button.closest(".Places_location_new_actions");
 														// title requred
-														if(!title.val()){ result = false; }
+														if (!title.val()) {
+															result = false;
+														}
 
 														// location required
-														if (!Q.getObject(['location', 'place'], $this)){ result = false; }
+														if (!Q.getObject(['location', 'place'], $this)) {
+															result = false;
+														}
 
-														if(result){
+														if (result) {
 															buttonParent.css('pointer-events', 'auto').animate({opacity: 1});
-														}else{
+														} else {
 															buttonParent.css('pointer-events', 'none').animate({opacity: 0.2});
 														}
 													};
@@ -205,7 +206,7 @@
 													// create Places/location tool
 													$this.find(".Places_location_new_select").tool('Places/location', {
 														useRelatedLocations: false,
-														onChoose: function(geocode){
+														onChoose: function (geocode) {
 															Q.setObject(['location', 'place'], geocode, $this);
 
 															// check conditions for submit
@@ -217,17 +218,15 @@
 														var loc = Q.getObject(['location', 'place'], $this);
 														var titleVal = title.val();
 
-														if(!titleVal){
+														if (!titleVal) {
 															Q.alert("Places/location/add: Please set title.");
 															return false;
 														}
 
-														if(!loc){
+														if (!loc) {
 															Q.alert("Places/location/add: Please set location.");
 															return false;
 														}
-
-														if(loc.geometry && loc.geometry.location){ loc = loc.geometry.location; }
 
 														callback({
 															title: titleVal,
@@ -270,6 +269,41 @@
 					enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 					timeout: 5000,
 					maximumAge: 0
+				});
+			},
+			/**
+			 * Obtain geocoding definition from a geocoding service
+			 * @method geocode
+			 * @static
+			 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
+			 * @param {Function} callback gets (array of results of the geolocation, and status code)
+			 */
+			geocode: function (loc, callback) {
+				var tool = this;
+
+				if (loc.latitude || loc.longitude) { // if known latitude, longitude - calculate google location local
+					if (!loc.latitude) {
+						throw new Q.Error(p + "missing latitude");
+					}
+					if (!loc.longitude) {
+						throw new Q.Error(p + "missing longitude");
+					}
+
+					// localy calculate if known lat and lng, to avoid requests to google api (danger of OVER_QUERY_LIMIT !!!)
+					Q.handle(callback, Places.Location, [new google.maps.LatLng(parseFloat(loc.latitude), parseFloat(loc.longitude)), 'OK']);
+					return;
+				} else if (typeof loc.lat == 'function' && typeof loc.lng == 'function') { // loc - already google location object
+					Q.handle(callback, Places.Location, [loc, 'OK']);
+					return;
+				}else if(loc.geometry && loc.geometry.location){ // we have standard google location object - return just location
+					Q.handle(callback, Places.Location, [loc.geometry.location, 'OK']);
+					return;
+				}
+
+				// for other loc - call Places plugin
+				Places.Location.geocode(loc, function(geocode){
+					if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
+					Q.handle(callback, tool, [geocode]);
 				});
 			}
 		}

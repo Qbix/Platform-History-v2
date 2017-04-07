@@ -151,22 +151,18 @@ Places.Location = {
 				if (!loc.latitude) {
 					throw new Q.Error(p + "missing latitude");
 				}
-				if (!loc.longitude) {
+				if (!loc.latitude) {
 					throw new Q.Error(p + "missing longitude");
 				}
-
-				// localy calculate if known lat and lng, to avoid requests to google api (danger of OVER_QUERY_LIMIT !!!)
-				Q.handle(callback, Places.Location, [new google.maps.LatLng(parseFloat(loc.latitude), parseFloat(loc.longitude)), 'OK']);
-				return;
+				param.location = {
+					lat: loc.latitude,
+					lng: loc.longitude
+				};
 			} else if (loc.address) {
 				param.address = loc.address;
-			} else if (typeof loc.lat == 'function' && typeof loc.lng == 'function') { // loc - already google object
-				Q.handle(callback, Places.Location, [loc, 'OK']);
-				return;
 			} else {
 				throw new Q.Error(p + "wrong location format");
 			}
-
 			var geocoder = new google.maps.Geocoder;
 			geocoder.geocode(param, function (results, status) {
 				if (status !== 'OK') {
@@ -175,8 +171,7 @@ Places.Location = {
 				if (!results[0]) {
 					throw new Q.Error(p + "no place matched " + loc);
 				}
-
-				Q.handle(callback, Places.Location, [results[0].geometry.location, status, results]);
+				Q.handle(callback, Places.Location, [results[0], status, results]);
 			});
 		});
 	}
