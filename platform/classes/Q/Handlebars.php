@@ -134,6 +134,7 @@ class Q_Handlebars {
 			$o = array_merge($args, $fields[$name]);
 		}
 		if ($id) {
+			$id2 = $id;
 			if (is_string($id2) or is_numeric($id2)) {
 				$id2 = implode('_', explode('/', $name)) . ($id2 !== '' ? '-'.$id2 : '');
 			}
