@@ -133,8 +133,14 @@ class Q_Handlebars {
 		if (isset($fields[$name])) {
 			$o = array_merge($args, $fields[$name]);
 		}
-		if ($id && isset($fields["id:$id"])) {
-			$o = array_merge($o, $fields["id:$id"]);
+		if ($id) {
+			$id2 = $id;
+			if (is_string($id2) or is_numeric($id2)) {
+				$id2 = implode('_', explode('/', $name)) . ($id2 !== '' ? '-'.$id2 : '');
+			}
+			if (isset($fields["id:$id2"])) {
+				$o = array_merge($o, $fields["id:$id2"]);
+			}
 		}
 		return Q::tool($name, $o, compact('id'));
 	}
