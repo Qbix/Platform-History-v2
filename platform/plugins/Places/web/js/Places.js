@@ -155,8 +155,8 @@ Places.Location = {
 					throw new Q.Error(p + "missing longitude");
 				}
 				param.location = {
-					lat: loc.latitude,
-					lng: loc.longitude
+					lat: parseFloat(loc.latitude),
+					lng: parseFloat(loc.longitude)
 				};
 			} else if (loc.address) {
 				param.address = loc.address;
