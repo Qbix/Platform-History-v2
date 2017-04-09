@@ -37,7 +37,7 @@ function _Q_autogrow(o) {
 		var $t = $(this), t = this;
 		var val = '';
 		
-		_surroundPlaceholders.call($t);
+		var $p = _surroundPlaceholders.call($t);
 
 		t.style.resize = 'none';
 		t.style.overflow = 'hidden';
@@ -53,11 +53,11 @@ function _Q_autogrow(o) {
 		tVal = null;
 
 		++p.count;
-		var $c = $t.parent();
-		if (!$c.hasClass('Q_autogrow_container')) {
-			$c = $('<div id="Q_autogrow_container_'+p.count+'" class="Q_autogrow_container"></div>');
-			$t.before($c);
-			$t.appendTo($c);
+		var $c = $t.closest('.Q_autogrow_container');
+		if (!$c.length) {
+			$c = $('<div id="Q_autogrow_container_'+p.count+'" class="Q_autogrow_container"></div>')
+			.insertBefore($p)
+			.append($p);
 		}
 		var c = $c[0];
 		c.style.padding = '0px';
@@ -228,7 +228,7 @@ var p = {
 function _surroundPlaceholders() {
 	var $container = this.closest('.Q_placeholders_container');
 	if (!$container.length || !$(this).is('textarea')) {
-		return;
+		return this;
 	}
 	$container.css('height', 'auto');
 	var $placeholder = $container.find('.Q_placeholder');
@@ -240,6 +240,7 @@ function _surroundPlaceholders() {
 		$placeholder[0].style.height = h;
 		$t.removeClass('Q_autogrow_resizing');
 	}, 0);
+	return $container;
 }
 
 })(Q, jQuery, window, document);
