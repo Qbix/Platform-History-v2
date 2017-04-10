@@ -217,8 +217,8 @@ Streams.WRITE_LEVEL = {
  * @final
  */
 Streams.ADMIN_LEVEL = {
-	'none':			0,		// cannot do anything related to admin / users
-	'tell':		10,		// can post on your stream about participating
+	'none':	 		0,		// cannot do anything related to admin / users
+	'tell':	 		10,		// can post on your stream about participating
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':			40		// can give people any adminLevel <= 40
