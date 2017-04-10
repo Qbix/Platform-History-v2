@@ -747,8 +747,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
 	 * Otherwise updates the participant record's timestamp and other things.
-	 * Also a posts "Streams/joined" or "Streams/visited" message on the user's
-	 * "Streams/participating" stream.
+	 * Also relates every stream joined to streams named under the config field
+	 * "Streams"/"types"/$streamType/"participating"
 	 * @method join
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
@@ -771,7 +771,8 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * If the user is participating in the stream, sets state of participant row
 	 * as "left" and posts a "Streams/leave" type message to the stream.
-	 * Also posts "Streams/left" message on user's "Streams/participating" stream
+	 * Also unrelates every stream left to streams named under the config field
+	 * "Streams"/"types"/$streamType/"participating"
 	 * @method leave
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {string} [$options.userId] The user who is leaving the stream. Defaults to the logged-in user.
