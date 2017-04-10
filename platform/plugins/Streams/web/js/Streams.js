@@ -110,7 +110,7 @@ Streams.READ_LEVEL = {
 	'content':		20, // can see the stream's content
 	'relations':	25,	// can see relations to other streams
 	'participants':	30, // can see participants in the stream
-	'messages':		40  // can play stream in a player
+	'messages':		40, // can play stream in a player
 	'max':      	40  // max read level
 };
 
@@ -215,8 +215,9 @@ Streams.WRITE_LEVEL = {
 	'suggest':      28,		// can suggest edits of stream
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
-	'close':		40		// don't delete, just prevent any new changes to stream
+	'close':		40,		// don't delete, just prevent any new changes to stream
 							// however, joining and leaving is still ok
+	'max':      	40  	// max write level
 };
 
 /**
@@ -272,7 +273,8 @@ Streams.ADMIN_LEVEL = {
 	'tell':	 		10,		// can prove things about the stream's content or participants
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
-	'own':	 		40		// can give people any adminLevel <= 40
+	'own':	 		40,		// can give people any adminLevel <= 40
+	'max':          40  	// max admin level
 };
 
 Streams.defined = {};
