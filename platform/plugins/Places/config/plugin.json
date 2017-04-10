@@ -48,7 +48,8 @@
 					"*": {
 						"description": "Posted to an entire location"
 					}
-				}
+				},
+				"participating": ["Places/participating"]
 			},
 			"Places/area": {
 				"description": "Represents an area within a location, such as a room or suite",
@@ -64,7 +65,8 @@
 					"*": {
 						"description": "Posted to a specific area"
 					}
-				}
+				},
+				"participating": ["Places/participating"]
 			},
 			"Places/floor": {
 				"description": "Represents a floor in a building or ship",
@@ -73,7 +75,8 @@
 					"*": {
 						"description": "Posted to entire floor"
 					}
-				}
+				},
+				"participating": ["Places/participating"]
 			},
 			"Places/column": {
 				"description": "Represents a column in a building or ship",
@@ -82,7 +85,8 @@
 					"*": {
 						"description": "Posted to entire column"
 					}
-				}
+				},
+				"participating": ["Places/participating"]
 			},
 			"Places/nearby": {
 				"description": "Category for things within a certain distance of a geohash"
@@ -114,6 +118,11 @@
 			"sort": {
 				"areas": ["Places", "sortAreaFilenames"]
 			}
+		},
+		"onInsert": {
+			"Users_User": [
+				"Places/participating"
+			]
 		}
 	},
 	"Places": {
