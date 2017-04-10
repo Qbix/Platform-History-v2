@@ -866,11 +866,11 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $asUserId The user who is attempting to create the stream.
 	 * @param {string} $publisherId The id of the user to publish the stream.
-	 * @param {string|array} $type The type of the stream to create.
-	 *  You can also pass here an array of ($name => $fields) streams, where
-	 *  the fields are the same format as the $fields option.
-	 *  In this case, you can skip the $fields parameter when passing any later ones.
-	 * @param {array} $fields Use this to set additional fields for the stream:
+	 * @param {string|array} [$type=null] The type of the stream to create.
+	 *   Required unless you specify the name of the stream in the options,
+	 *   and you've specified its type in a config file listed under a config named
+	 *   "Streams/userStreams/$module".
+	 * @param {array} [$fields=array()] Use this to set additional fields for the stream:
 	 * @param {string} [$fields.title=null] You can set the stream's title
 	 * @param {string} [$fields.icon=null] You can set the stream's icon
 	 * @param {string} [$fields.title=null] You can set the stream's content
@@ -899,7 +899,7 @@ abstract class Streams extends Base_Streams
 	static function create(
 		$asUserId, 
 		$publisherId, 
-		$type,
+		$type = null,
 		$fields = array(), 
 		$relate = null,
 		&$result = null)
@@ -1964,7 +1964,10 @@ abstract class Streams extends Base_Streams
 			$toType = $category->type;
 			$toDisplayType = Streams_Stream::displayType($toType);
 			$parts = explode('/', $type);
-			$displayType = substr(end($parts), 0, -1);
+			$displayType = end($parts);
+			if (substr(end($parts), -1) === 's') {
+				$displayType = substr($displayType, 0, -1);
+			}
 			$categoryName = explode('/', $category->name);
 			$streamName = explode('/', $stream->name);
 
@@ -2259,7 +2262,7 @@ abstract class Streams extends Base_Streams
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
-	 *  then these third parameter is an array of streams.
+	 *  then the third parameter is an array of streams.
 	 */
 	static function related(
 		$asUserId,
@@ -2575,8 +2578,8 @@ abstract class Streams extends Base_Streams
 	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
 	 * Otherwise updates the participant record's timestamp and other things.
-	 * Also posts "Streams/joined" or "Streams/visited" messages on the user's
-	 * "Streams/participating" stream for every stream that was joined or visited, respectively.
+	 * Also relates every stream joined to streams named under the config field
+	 * "Streams"/"types"/$streamType/"participating"
 	 * @method join
 	 * @static
 	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
@@ -2614,7 +2617,6 @@ abstract class Streams extends Base_Streams
 		$streamNamesMissing = array();
 		$streamNamesUpdate = array();
 		$messages = array();
-		$pMessages = array();
 		$results = array();
 		$state = 'participating';
 		$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
@@ -2653,14 +2655,6 @@ abstract class Streams extends Base_Streams
 					'instructions' => array(
 						'prevState' => $prevState,
 						'extra' => isset($participant->extra) ? $participant->extra : array()
-					)
-				);
-				$pMessages[] = array(
-					'type' => "Streams/{$type}ed",
-					'instructions' => array(
-						'publisherId' => $publisherId,
-						'streamName' => $sn,
-						'prevState' => $prevState
 					)
 				);
 			}
@@ -2710,28 +2704,37 @@ abstract class Streams extends Base_Streams
 						'extra' => isset($participant->extra) ? $participant->extra : array()
 					)
 				);
-				$pMessages[] = array(
-					'type' => "Streams/joined",
-					'instructions' => Q::json_encode(array(
-						'publisherId' => $publisherId,
-						'streamName' => $sn,
-						'prevState' => null
-					))
-				);
 			}
 		}
 		Streams_Message::postMessages($asUserId, $messages, true);
-		Streams_Message::postMessages($asUserId, array(
-			$asUserId => array('Streams/participating' => $pMessages)
-		), true);
+		// Relate to participating streams
+		$relateStreams = array();
+		foreach ($results as $sn => $p) {
+			$participatingNames = Streams_Stream::getConfigField(
+				$p->streamType, array('participating'), array()
+			);
+			foreach ($participatingNames as $pn) {
+				$relateStreams[$pn][] = $sn;
+			}
+		}
+		foreach ($relateStreams as $pn => $streamNames) {
+			if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+				Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+			}
+			Streams::relate(
+				$asUserId, $asUserId, $pn,
+				'Streams/participating', $publisherId, $streamNames,
+				array('skipAccess' => true)
+			);
+		}
 		return $results;
 	}
 	
 	/**
 	 * If the user is participating in (soe of) the streams, sets state of participant row
 	 * as "left" and posts a "Streams/leave" type message to the streams.
-	 * Also posts "Streams/left" message on user's "Streams/participating" stream
-	 * for each stream that was left.
+	 * Also unrelates every stream left to streams named under the config field
+	 * "Streams"/"types"/$streamType/"participating"
 	 * @method leave
 	 * @static
 	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
@@ -2830,19 +2833,28 @@ abstract class Streams extends Base_Streams
 					'extra' => isset($participant->extra) ? $participant->extra : array()
 				)
 			);
-			$pMessages[] = array(
-				'type' => "Streams/left",
-				'instructions' => array(
-					'publisherId' => $publisherId,
-					'streamName' => $sn,
-					'prevState' => $prevState
-				)
-			);
 		}
 		Streams_Message::postMessages($asUserId, $messages, true);
-		Streams_Message::postMessages($asUserId, array(
-			$asUserId => array('Streams/participating' => $pMessages)
-		), true);
+		// Unrelate to participating streams
+		$unrelateStreams = array();
+		foreach ($participants as $sn => $p) {
+			$participatingNames = Streams_Stream::getConfigField(
+				$p->streamType, array('participating'), array()
+			);
+			foreach ($participatingNames as $pn) {
+				$unrelateStreams[$pn][] = $sn;
+			}
+		}
+		foreach ($unrelateStreams as $pn => $streamNames) {
+			if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+				Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+			}
+			Streams::unrelate(
+				$asUserId, $asUserId, $pn,
+				'Streams/participating', $publisherId, $streamNames,
+				array('skipAccess' => true)
+			);
+		}
 		return $participants;
 	}
 
@@ -2919,18 +2931,10 @@ abstract class Streams extends Base_Streams
 			$subscriptions[$sn] = $row;
 		}
 		$messages = array();
-		$pMessages = array();
 		$streamNamesMissing = array();
 		$streamNamesUpdate = array();
 		foreach ($streamNames as $sn) {
 			$messages[$publisherId][$sn] = array('type' => 'Streams/subscribe');
-			$pMessages[] = array(
-				'type' => 'Streams/subscribed',
-				'instructions' => array(
-					'publisherId' => $publisherId,
-					'streamName' => $sn
-				)
-			);
 			if (empty($subscriptions[$sn])) {
 				$streamNamesMissing[] = $sn;
 				continue;
@@ -3075,9 +3079,6 @@ abstract class Streams extends Base_Streams
 			"rules" => Q::json_encode($rules)
 		));
 		Streams_Message::postMessages($asUserId, $messages, true);
-		Streams_Message::postMessages($asUserId, array(
-			$asUserId => array('Streams/participating' => $pMessages)
-		), true);
 		
 		return $participants;
 	}
@@ -3131,7 +3132,6 @@ abstract class Streams extends Base_Streams
 			);
 		}
 		$messages = array();
-		$pMessages = array();
 		foreach ($streamNames as $sn) {
 			$stream = $streams2[$sn];
 			if ($participant = Q::ifset($participants, $sn, null)) {
@@ -3147,18 +3147,8 @@ abstract class Streams extends Base_Streams
 			));
 			// Stream messages to post
 			$messages[$publisherId][$sn] = array('type' => 'Streams/unsubscribe');
-			$pMessages[] = array(
-				'type' => 'Streams/unsubscribed',
-				'instructions' => array(
-					'publisherId' => $publisherId,
-					'streamName' => $sn
-				)
-			);
 		}
 		Streams_Message::postMessages($asUserId, $messages, true);
-		Streams_Message::postMessages($asUserId, array(
-			$asUserId => array('Streams/participating' => $pMessages)
-		), true);
 		return $participants;
 	}
 
@@ -3192,6 +3182,36 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		return $result;
+	}
+	
+	
+	/**
+	 * Gets the streams related by relation of type "Streams/participating"
+	 * to the given category stream. Typically, these relations are added and removed
+	 * when the user joins or leaves the related streams, which is done automatically
+	 * by the Streams plugin with the streams named in under the config field
+	 * "Streams"/"types"/$streamType/"participating", which is an array of stream names.
+	 * @method participating
+	 * @static
+	 * @param {string} [$streamName='Streams/participating'] the name of a stream of type Streams/participating
+	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
+	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the publisher of the category stream
+	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
+	 */
+	static function participating(
+		$streamName = 'Streams/participating',
+		$options = array())
+	{
+		$publisherId = isset($options['publisherId'])
+			? $options['publisherId']
+			: Users::loggedInUser(true)->id;
+		$userId = isset($options['userId'])
+			? $options['userId']
+			: $publisherId;
+		$o = array_merge($options, array(
+			'Streams/participating'
+		));
+		return Streams::related($asUserId, $publisherId, $streamName, true, $o);
 	}
 
 	private static function _accessExceptions($streams2, $streamNames, $writeLevel)

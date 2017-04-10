@@ -873,31 +873,6 @@ Streams.Dialogs = {
  */
 
 /**
- * Returns streams that the current user is participating in
- * @static
- * @param {Function} callback
- * @param {Object} [options] Options you can override
- * @param {string} [options.type] Actually used as a prefix for the streamName, if specified
- * @param {string|array} [options.state] Pass 'invited', 'participating', 'left' to filter by state.
- * @param {string|array} [options.subscribed] Pass 'yes' or 'no' to filter by whether user subscribed
- * @param {integer} [options.fresh] Pass 0 or 1 to filter by freshness.
- * @param {Number} [options.limit=1000] 
- * @param {Number} [options.offset=0] 
- * @method getParticipating
- */
-Streams.getParticipating = function(callback, options) {
-	if(!callback) return;
-	var options = Q.extend({
-		limit: 1000
-	}, options);
-	Q.req('Streams/participating', 'participating',
-	function (err, data) {
-		callback && callback(err, data && data.slots && data.slots.participating);
-	}, options);
-	_retain = undefined;
-};
-
-/**
  * Refreshes all the streams the logged-in user is participating in
  * If your app is using socket.io, then calling this manually is largely unnecessary.
  * @static
@@ -950,8 +925,7 @@ Streams.refresh.beforeRequest = new Q.Event();
  * @static
  * @method retainWith
  * @param {String} key
- * @return {Object} returns Streams object
- *   for chaining with .get(), .related() or .getParticipating()
+ * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Streams.retainWith = function (key) {
 	_retain = Q.calculateKey(key, _retainedByKey);
@@ -1400,7 +1374,7 @@ Stream.define = Streams.define;
  * @param {String|Array} streamName can be a string or array of strings
  * @param {String} key the key under which to retain
  * @param {Function} callback optional callback for when stream(s) are retained
- * @return {Object} returns Streams object for chaining with .get(), .related() or .getParticipating()
+ * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Stream.retain = function _Stream_retain (publisherId, streamName, key, callback) {
 	if (Q.isArrayLike(streamName)) {
@@ -1558,8 +1532,7 @@ var Sp = Stream.prototype;
  * 
  * @method retainWith
  * @param {String} key
- * @return {Object} returns Streams object
- *  for chaining with .get(), .related() or .getParticipating()
+ * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Sp.retainWith = Streams.retainWith;
 
@@ -1977,7 +1950,8 @@ Stream.onUpdated = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
 Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
 
 /**
- * Returns Q.Event which occurs when another stream has been related to this stream
+ * Returns Q.Event which occurs when another stream has been related to this stream.
+ * You may want to retain this stream on the client.
  * @event onRelatedTo
  * @static
  * @param {String} publisherId id of publisher which is publishing this stream
@@ -1986,7 +1960,8 @@ Stream.onClosed = Q.Event.factory(_streamClosedHandlers, ["", ""]);
 Stream.onRelatedTo = Q.Event.factory(_streamRelatedToHandlers, ["", ""]);
 
 /**
- * Returns Q.Event which occurs when this stream was related to a category stream
+ * Returns Q.Event which occurs when this stream was related to a category stream.
+ * You may want to retain that category stream on the client.
  * @event onRelatedFrom
  * @static
  * @param {String} publisherId id of publisher which is publishing this stream
@@ -1996,6 +1971,7 @@ Stream.onRelatedFrom = Q.Event.factory(_streamRelatedFromHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when another stream has been unrelated to this stream
+ * You may want to release this stream on the client.
  * @event onUnrelatedTo
  * @static
  * @param {String} publisherId id of publisher which is publishing this stream
@@ -2005,6 +1981,7 @@ Stream.onUnrelatedTo = Q.Event.factory(_streamUnrelatedToHandlers, ["", ""]);
 
 /**
  * Returns Q.Event which occurs when this stream was unrelated to a category stream
+ * You may want to release that category stream on the client.
  * @event onUnrelatedFrom
  * @static
  * @param {String} publisherId id of publisher which is publishing this stream
@@ -3899,10 +3876,6 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		}
 	});
 
-	Streams.getParticipating = Q.getter(Streams.getParticipating, {
-		cache: Q.Cache[where]("Streams.getParticipating", 10)
-	});
-
 	Streams.related = Q.getter(Streams.related, {
 		cache: Q.Cache[where]("Streams.related", 100), 
 		throttle: 'Streams.related',
@@ -3992,8 +3965,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		throttle: 'Streams.Avatar.byPrefix'
 	});
 	
-	Q.each([Streams.get, Streams.getParticipating, Streams.related],
-	function () {
+	Q.each([Streams.get, Streams.related], function () {
 		this.onCalled.set(_onCalledHandler, 'Streams');
 		this.onResult.set(_onResultHandler, 'Streams');
 	});
@@ -4302,12 +4274,6 @@ Q.onInit.add(function _Streams_onInit() {
 				case 'Streams/leave':
 					_updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
 					break;
-				case 'Streams/joined':
-					// Leave it to the user to retain this stream if they want
-					break;
-				case 'Streams/left':
-					// Leave it to the user to release this stream if they want
-					break;
 				case 'Streams/changed':
 					Stream.update(stream, fields.changes, null);
 					break;
@@ -4500,7 +4466,6 @@ function _clearCaches() {
 	// Clear caches so permissions can be recalculated as various objects are fetched
 	Streams.get.cache.clear();
 	Streams.related.cache.clear();
-	Streams.getParticipating.cache.clear();
 	Message.get.cache.clear();
 	Participant.get.cache.clear();
 	Avatar.get.cache.clear();

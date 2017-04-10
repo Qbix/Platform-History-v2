@@ -140,7 +140,6 @@ class Streams_Participant extends Base_Streams_Participant
 	}
 	
 	/**
-	 * Also saves counterpart row in Streams_Participating table
 	 * @method beforeSave
 	 * @param {array} $modifiedFields
 	 *	The fields that were modified
@@ -154,53 +153,12 @@ class Streams_Participant extends Base_Streams_Participant
 		$modifiedState = isset($modifiedFields['state']);
 		$modifiedSubscribed = isset($modifiedFields['subscribed']);
 		$modifiedExtra = isset($modifiedFields['extra']);
-
 		foreach ($this->fields as $name => $value) {
 			if (!empty($this->fieldsModified[$name])) {
 				$modifiedFields[$name] = $value;
 			}
 		}
-
-		if ($modifiedState or $modifiedSubscribed or $modifiedExtra) {
-			$p = new Streams_Participating();
-			$p->userId = $this->userId; // shouldn't change
-			$p->publisherId = $this->publisherId; // shouldn't change
-			$p->streamName = $this->streamName; // shouldn't change
-			if ($modifiedState) {
-				$p->state = $modifiedFields['state'];
-			} else if (isset($this->state)) {
-				$p->state = $this->state;
-			}
-			if ($modifiedSubscribed) {
-				$p->subscribed = $modifiedFields['subscribed'];
-			} else if (isset($this->subscribed)) {
-				$p->subscribed = $this->subscribed;
-			}
-			if ($modifiedExtra) {
-				$p->extra = $modifiedFields['extra'];
-			} else if (isset($this->extra)) {
-				$p->extra = $this->extra;
-			}
-			$p->save(true);
-		}
 		return parent::beforeSave($modifiedFields);
-	}
-	
-	/**
-	 * Also removes counterpart row in Streams_Participating table
-	 * @method beforeSave
-	 * @param {array} $pk
-	 *	The primary key fields
-	 * @return {boolean}
-	 */
-	function beforeRemove($pk)
-	{
-		$p = new Streams_Participating();
-		$p->userId = $this->userId;
-		$p->publisherId = $this->publisherId;
-		$p->streamName = $this->streamName;
-		$p->remove();
-		return true;
 	}
 	
 	/**
