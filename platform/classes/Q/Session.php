@@ -652,7 +652,7 @@ class Q_Session
 						$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
 						$existing_data = fread($file, $maxlength);
 					} else {
-						fopen($sess_file, "w");
+						$file = fopen($sess_file, "w");
 						flock($file, LOCK_EX);
 						$existing_data = '';
 					}
