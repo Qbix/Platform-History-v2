@@ -42,39 +42,53 @@ Q.makeEventEmitter(Streams);
 /**
  * Read levels
  * @property READ_LEVEL
- * @type object
+ * @type Object
  */
 /**
  * Can't see the stream
- * @config READ_LEVEL['none']
+ * @property READ_LEVEL.none
  * @type integer
  * @default 0
  * @final
  */
 /**
  * Can see icon and title
- * @config READ_LEVEL['see']
+ * @property READ_LEVEL.see
  * @type integer
  * @default 10
  * @final
  */
 /**
- * Can preview stream and its content
- * @config READ_LEVEL['content']
+ * Can see the stream's content
+ * @property READ_LEVEL.content
  * @type integer
  * @default 20
  * @final
  */
 /**
+ * Can see relations to other streams
+ * @property READ_LEVEL.relations
+ * @type integer
+ * @default 25
+ * @final
+ */
+/**
  * Can see participants in the stream
- * @config READ_LEVEL['participants']
+ * @property READ_LEVEL.participants
  * @type integer
  * @default 30
  * @final
  */
 /**
  * Can play stream in a player
- * @config READ_LEVEL['messages']
+ * @property READ_LEVEL.messages
+ * @type integer
+ * @default 40
+ * @final
+ */
+/**
+ * Max read level
+ * @property READ_LEVEL.max
  * @type integer
  * @default 40
  * @final
@@ -83,73 +97,81 @@ Streams.READ_LEVEL = {
 	'none':			0,		// can't see the stream
 	'see':			10,		// can see icon and title
 	'content':		20,		// can preview stream and its content
+	'relations':	25,		// can see relations to other streams
 	'participants':	30,		// can see participants in the stream
 	'messages':		40		// can play stream in a player
 };
 /**
  * Write levels
  * @property WRITE_LEVEL
- * @type object
+ * @type Object
  */
 /**
  * Cannot affect stream or participants list
- * @config WRITE_LEVEL['none']
+ * @property WRITE_LEVEL.none
  * @type integer
  * @default 0
  * @final
  */
 /**
  * Can become a participant, chat, and leave
- * @config WRITE_LEVEL['join']
+ * @property WRITE_LEVEL.join
  * @type integer
  * @default 10
  * @final
  */
 /**
- * Can vote for a relation message posted to the stream
- * @config WRITE_LEVEL['vote']
+ * Can vote for a relation message posted to the stream.
+ * @property WRITE_LEVEL.vote
  * @type integer
  * @default 13
  * @final
  */
 /**
  * Can post messages, but manager must approve
- * @config WRITE_LEVEL['postPending']
+ * @property WRITE_LEVEL.postPending
  * @type integer
  * @default 15
  * @final
  */
 /**
  * Can post messages which appear immediately
- * @config WRITE_LEVEL['post']
+ * @property WRITE_LEVEL.messages
  * @type integer
  * @default 20
  * @final
  */
 /**
  * Can post messages relating other streams to this one
- * @config WRITE_LEVEL['relate']
+ * @property WRITE_LEVEL.relate
  * @type integer
  * @default 23
  * @final
  */
 /**
- * Can post messages requesting edits of stream
- * @config WRITE_LEVEL['suggest']
+ * Can update properties of relations directly
+ * @property WRITE_LEVEL.relations
  * @type integer
  * @default 25
  * @final
  */
 /**
+ * Can post messages requesting edits of stream
+ * @property WRITE_LEVEL.suggest
+ * @type integer
+ * @default 28
+ * @final
+ */
+/**
  * Can post messages to edit stream content immediately
- * @config WRITE_LEVEL['edit']
+ * @property WRITE_LEVEL.edit
  * @type integer
  * @default 30
  * @final
  */
 /**
  * Can post a message requesting to close the stream
- * @config WRITE_LEVEL['closePending']
+ * @property WRITE_LEVEL.closePending
  * @type integer
  * @default 35
  * @final
@@ -157,7 +179,14 @@ Streams.READ_LEVEL = {
 /**
  * Don't delete, just prevent any new changes to stream
  * however, joining and leaving is still ok
- * @config WRITE_LEVEL['close']
+ * @property WRITE_LEVEL.close
+ * @type integer
+ * @default 40
+ * @final
+ */
+/**
+ * Max write level
+ * @property WRITE_LEVEL.max
  * @type integer
  * @default 40
  * @final
@@ -179,46 +208,54 @@ Streams.WRITE_LEVEL = {
 /**
  * Admin levels
  * @property ADMIN_LEVEL
- * @type object
+ * @type Object
  */
 /**
  * Cannot do anything related to admin / users
- * @config ADMIN_LEVEL['none']
+ * @property ADMIN_LEVEL.none
  * @type integer
  * @default 0
  * @final
  */
 /**
- * Can post on your stream about participating
- * @config ADMIN_LEVEL['tell']
+ * Can prove things about the stream's content or participants
+ * @property ADMIN_LEVEL.tell
  * @type integer
  * @default 10
  * @final
  */
 /**
  * Able to create invitations for others, granting access
- * @config ADMIN_LEVEL['invite']
+ * and permissions up to what they themselves have
+ * @property ADMIN_LEVEL.invite
  * @type integer
  * @default 20
  * @final
  */
 /**
- * Can approve posts and give people any adminLevel < 'manage'
- * @config ADMIN_LEVEL['manage']
+ * Can approve posts, and give people any adminLevel < 'manage'
+ * @property ADMIN_LEVEL.manage
  * @type integer
  * @default 30
  * @final
  */
 /**
  * Can give people any adminLevel <= 'own'
- * @config ADMIN_LEVEL['own']
+ * @property ADMIN_LEVEL.own
+ * @type integer
+ * @default 40
+ * @final
+ */
+/**
+ * Max admin level
+ * @property ADMIN_LEVEL.max
  * @type integer
  * @default 40
  * @final
  */
 Streams.ADMIN_LEVEL = {
 	'none':	 		0,		// cannot do anything related to admin / users
-	'tell':	 		10,		// can post on your stream about participating
+	'tell':	 		10,		// can prove things about the stream's content or participants
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':			40		// can give people any adminLevel <= 40
