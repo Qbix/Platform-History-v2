@@ -53,52 +53,156 @@ Q.text.Streams = {
 /**
  * Read levels
  * @property READ_LEVEL
- * @type {Object}
- * @param {Number} none , Can't see the stream
+ * @type Object
+ */
+/**
+ * Can't see the stream
+ * @property READ_LEVEL.none
+ * @type integer
  * @default 0
- * @param {Number} see , can see icon and title
+ * @final
+ */
+/**
+ * Can see icon and title
+ * @property READ_LEVEL.see
+ * @type integer
  * @default 10
- * @param {Number} content ,  can preview stream and its content
+ * @final
+ */
+/**
+ * Can see the stream's content
+ * @property READ_LEVEL.content
+ * @type integer
  * @default 20
- * @param {Number} participants , can see participants in the stream
+ * @final
+ */
+/**
+ * Can see relations to other streams
+ * @property READ_LEVEL.relations
+ * @type integer
+ * @default 25
+ * @final
+ */
+/**
+ * Can see participants in the stream
+ * @property READ_LEVEL.participants
+ * @type integer
  * @default 30
- * @param {Number} messages , can play stream in a player
+ * @final
+ */
+/**
+ * Can play stream in a player
+ * @property READ_LEVEL.messages
+ * @type integer
+ * @default 40
+ * @final
+ */
+/**
+ * Max read level
+ * @property READ_LEVEL.max
+ * @type integer
+ * @default 40
+ * @final
  */
 Streams.READ_LEVEL = {
-	'none':			0, //Can't see the stream
-	'see':			10, //can see icon and title
-	'content':		20, //can preview stream and its content
+	'none':			0,  // can't see the stream
+	'see':			10, // can see icon and title
+	'content':		20, // can see the stream's content
+	'relations':	25,	// can see relations to other streams
 	'participants':	30, // can see participants in the stream
-	'messages':		40 //can play stream in a player
+	'messages':		40  // can play stream in a player
+	'max':      	40  // max read level
 };
 
 /**
  * Write levels
  * @property WRITE_LEVEL
- * @type {Object}
- * @param {Number} none , cannot affect stream or participants list
+ * @type Object
+ */
+/**
+ * Cannot affect stream or participants list
+ * @property WRITE_LEVEL.none
+ * @type integer
  * @default 0
- * @param {Number} join , can become a participant, chat, and leave
+ * @final
+ */
+/**
+ * Can become a participant, chat, and leave
+ * @property WRITE_LEVEL.join
+ * @type integer
  * @default 10
- * @param {Number} vote , can vote for a relation message posted to the stream
+ * @final
+ */
+/**
+ * Can vote for a relation message posted to the stream.
+ * @property WRITE_LEVEL.vote
+ * @type integer
  * @default 13
- * @param {Number} postPending , can post messages which require manager's approval
- * @default 18
- * @param {Number} post , can post messages which take effect immediately
+ * @final
+ */
+/**
+ * Can post messages, but manager must approve
+ * @property WRITE_LEVEL.postPending
+ * @type integer
+ * @default 15
+ * @final
+ */
+/**
+ * Can post messages which appear immediately
+ * @property WRITE_LEVEL.messages
+ * @type integer
  * @default 20
- * @param {Number} relate , can relate other streams to this one
+ * @final
+ */
+/**
+ * Can post messages relating other streams to this one
+ * @property WRITE_LEVEL.relate
+ * @type integer
  * @default 23
- * @param {Number} relations , can update properties of relations directly
+ * @final
+ */
+/**
+ * Can update properties of relations directly
+ * @property WRITE_LEVEL.relations
+ * @type integer
  * @default 25
- * @param {Number} suggest , can suggest edits of stream
+ * @final
+ */
+/**
+ * Can post messages requesting edits of stream
+ * @property WRITE_LEVEL.suggest
+ * @type integer
  * @default 28
- * @param {Number} edit , can edit stream content immediately
+ * @final
+ */
+/**
+ * Can post messages to edit stream content immediately
+ * @property WRITE_LEVEL.edit
+ * @type integer
  * @default 30
- * @param {Number} closePending , can post a message requesting to close the stream
+ * @final
+ */
+/**
+ * Can post a message requesting to close the stream
+ * @property WRITE_LEVEL.closePending
+ * @type integer
  * @default 35
- * @param {Number} close , don't delete, just prevent any new changes to stream , however, joining and leaving is still ok
+ * @final
+ */
+/**
+ * Don't delete, just prevent any new changes to stream
+ * however, joining and leaving is still ok
+ * @property WRITE_LEVEL.close
+ * @type integer
  * @default 40
-
+ * @final
+ */
+/**
+ * Max write level
+ * @property WRITE_LEVEL.max
+ * @type integer
+ * @default 40
+ * @final
  */
 Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
@@ -118,21 +222,54 @@ Streams.WRITE_LEVEL = {
 /**
  * Admin levels
  * @property ADMIN_LEVEL
- * @type {Object}
- * @param {Number} none , cannot do anything related to admin / users
+ * @type Object
+ */
+/**
+ * Cannot do anything related to admin / users
+ * @property ADMIN_LEVEL.none
+ * @type integer
  * @default 0
- * @param {Number} tell , can post on your stream about participating
+ * @final
+ */
+/**
+ * Can prove things about the stream's content or participants
+ * @property ADMIN_LEVEL.tell
+ * @type integer
  * @default 10
- * @param {Number} invite , able to create invitations for others, granting access
+ * @final
+ */
+/**
+ * Able to create invitations for others, granting access
+ * and permissions up to what they themselves have
+ * @property ADMIN_LEVEL.invite
+ * @type integer
  * @default 20
- * @param {Number} manage , can approve posts and give people any adminLevel < 30
+ * @final
+ */
+/**
+ * Can approve posts, and give people any adminLevel < 'manage'
+ * @property ADMIN_LEVEL.manage
+ * @type integer
  * @default 30
- * @param {Number} own , can give people any adminLevel <= 40
+ * @final
+ */
+/**
+ * Can give people any adminLevel <= 'own'
+ * @property ADMIN_LEVEL.own
+ * @type integer
  * @default 40
+ * @final
+ */
+/**
+ * Max admin level
+ * @property ADMIN_LEVEL.max
+ * @type integer
+ * @default 40
+ * @final
  */
 Streams.ADMIN_LEVEL = {
 	'none':	 		0,		// cannot do anything related to admin / users
-	'tell':	 		10,		// can post on your stream about participating
+	'tell':	 		10,		// can prove things about the stream's content or participants
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':	 		40		// can give people any adminLevel <= 40
