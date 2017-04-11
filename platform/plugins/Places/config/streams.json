@@ -10,5 +10,12 @@
 		"type": "Places/location",
 		"title": "Hometown Location",
 		"icon": ""
+	},
+	"Places/participating": {
+		"type": "Streams/participating",
+		"title": "Places-defined streams the user has joined",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
 	}
 }
