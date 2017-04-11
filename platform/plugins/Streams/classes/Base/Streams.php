@@ -28,15 +28,14 @@ abstract class Base_Streams
   5 => 'Streams_Message',
   6 => 'Streams_Notification',
   7 => 'Streams_Participant',
-  8 => 'Streams_Participating',
-  9 => 'Streams_RelatedFrom',
-  10 => 'Streams_RelatedTo',
-  11 => 'Streams_Request',
-  12 => 'Streams_Rule',
-  13 => 'Streams_Sent',
-  14 => 'Streams_Stream',
-  15 => 'Streams_Subscription',
-  16 => 'Streams_Total',
+  8 => 'Streams_RelatedFrom',
+  9 => 'Streams_RelatedTo',
+  10 => 'Streams_Request',
+  11 => 'Streams_Rule',
+  12 => 'Streams_Sent',
+  13 => 'Streams_Stream',
+  14 => 'Streams_Subscription',
+  15 => 'Streams_Total',
 );
 
 	/**
