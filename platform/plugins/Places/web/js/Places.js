@@ -94,7 +94,6 @@ var Places = Q.Places = Q.plugins.Places = {
 			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
 		}
 	}
-
 };
 
 /**

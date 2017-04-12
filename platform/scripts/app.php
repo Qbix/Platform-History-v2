@@ -187,6 +187,7 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 }
 
 $options['sql'] = $sql_array;
+$is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
 echo 'Q Platform app installer'.PHP_EOL;
 
@@ -196,7 +197,10 @@ if (is_dir($uploads_dir)) {
 	if (file_exists(APP_WEB_DIR.DS.'uploads')) {
 		unlink(APP_WEB_DIR.DS.'uploads');
 	}
-	Q_Utils::symlink("../files/$app/uploads", APP_WEB_DIR.DS.'uploads');
+
+	// related path only for non Win OS. Win os don't support links with related path
+	if(!$is_win) $uploads_dir =  "../files/$app/uploads";
+	Q_Utils::symlink($uploads_dir, APP_WEB_DIR.DS.'uploads');
 }
 
 if ($auto_plugins) {
