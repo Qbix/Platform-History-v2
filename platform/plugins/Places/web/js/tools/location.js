@@ -9,6 +9,17 @@
 	var Streams = Q.Streams;
 	var Places = Q.Places;
 
+	Q.setObject("Q.text.Places.Location", {
+		myCurrentLocation: "My current location",
+		enterAddress: "Enter an address",
+		create: {
+			action: "Add Location",
+			title: "New Location",
+			nameYourLocation: "Name your location"
+		}
+	});
+	Q.setObject("Q.text_en.Places.Location", Q.text.Places.Location);
+
 	/**
 	 * Allows the logged-in user to add his own locations and select among these locations
 	 * @class Places location
@@ -25,24 +36,7 @@
 			var state = this.state;
 			var $te = $(tool.element);
 
-			if (!Users.loggedInUser) {
-				Users.login({
-					onSuccess: function () {
-						document.location.reload();
-					}
-				});
-				return;
-			}
-
-			// set texts
-			Q.text.Places.Location = Q.extend(Q.text.Places.Location, {
-				create: {
-					action: "Add Location",
-					title: "New Location"
-				}
-			});
-
-			Q.addStylesheet('plugins/Places/css/PlacesLocation.css');
+			Q.addStylesheet('plugins/Places/css/location.css');
 
 			// change location event
 			$te.on(Q.Pointer.click, "[data-location], .Places_location_preview_tool", function () {
@@ -135,11 +129,13 @@
 					return;
 				}
 
-				Q.Template.render('Places/location/select', {}, function (err, html) {
+				Q.Template.render('Places/location/select', {
+					text: Q.text.Places.Location
+				}, function (err, html) {
 					$te.html(html).activate(function () {
 
 						// set otherLocation address tool
-						tool.$(".otherLocation").tool('Places/address', {
+						tool.$(".Places_location_otherLocation").tool('Places/address', {
 							onChoose: function (place) {
 								if (place && place.id) {
 									// get valid google object and fire onChoose event
@@ -157,7 +153,7 @@
 						});
 
 						// set related locations if state.
-						if (state.useRelatedLocations) {
+						if (state.useRelatedLocations && userId) {
 							tool.$(".Places_location_related").tool('Streams/related', {
 								publisherId: userId,
 								streamName: 'Places/user/location',
@@ -170,9 +166,12 @@
 											// please see Streams/preview documentation for preprocess option
 											Q.Dialogs.push({
 												title: Q.text.Places.Location.create.title,
-												className: 'user_locations_new',
+												className: 'Places_location_userLocationsNew',
 												template: {
-													name: "Places/location/new"
+													name: "Places/location/new",
+													fields: {
+														text: Q.text.Places.Location.create
+													}
 												},
 												onActivate: function () {
 													var $this = $(this);
@@ -264,7 +263,7 @@
 					Q.handle(success, tool, [pos]);
 				}, function (err) {
 					Q.handle(fail, tool, [err]);
-					console.warn("ERROR(" + err.code + "): " + err.message);
+					console.warn("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
 				}, {
 					enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 					timeout: 5000,
@@ -310,16 +309,16 @@
 	);
 
 	Q.Template.set('Places/location/select',
-		'<div data-location="current">My current location</div>' +
+		'<div data-location="current">{{text.myCurrentLocation}}</div>' +
 		'<div class="Places_location_related"></div>' +
-		'<div data-location="other" class="Q_selected"><label>Other Location</label><div class="otherLocation"></div></div>'
+		'<div data-location="other" class="Q_selected"><label>{{text.enterAddress}}</label><div class="Places_location_otherLocation"></div></div>'
 	);
 
 	Q.Template.set("Places/location/new",
 		'<div class="Places_location_new">' +
-		'	<div class="Places_location_new_title"><input placeholder="Name your location" name="title"></div>' +
+		'	<div class="Places_location_new_title"><input placeholder="{{text.nameYourLocation}}" name="title"></div>' +
 		'	<div class="Places_location_new_select"></div>' +
-		'	<div class="Places_location_new_actions"><button class="Q_button" name="submit">Add Location</button></div>' +
+		'	<div class="Places_location_new_actions"><button class="Q_button" name="submit">{{text.action}}</button></div>' +
 		'</div>'
 	);
 

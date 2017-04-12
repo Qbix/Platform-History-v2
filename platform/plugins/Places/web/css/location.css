@@ -24,16 +24,16 @@
 .Places_location_tool div[data-location=other].Q_selected > .Places_address_tool {
 	display: block;
 }
-.user_locations_new .Places_location_new {
+.Places_location_userLocationsNew .Places_location_new {
 	margin: 10px;
 }
-.user_locations_new .Places_location_new > div:not(:first-child) {
+.Places_location_userLocationsNew .Places_location_new > div:not(:first-child) {
 	margin-top: 10px;
 }
-.user_locations_new .Places_location_new .Places_location_new_title {
+.Places_location_userLocationsNew .Places_location_new .Places_location_new_title {
 	text-align: center;
 }
-.user_locations_new .Places_location_new input[name=title] {
+.Places_location_userLocationsNew .Places_location_new input[name=title] {
 	font-size: 16px;
 	max-width: 200px;
 	overflow: hidden;
@@ -41,6 +41,6 @@
 	padding: 2px;
 	box-sizing: border-box;
 }
-.user_locations_new .Places_location_new .Places_location_new_actions {
+.Places_location_userLocationsNew .Places_location_new .Places_location_new_actions {
 	text-align: center;
 }
