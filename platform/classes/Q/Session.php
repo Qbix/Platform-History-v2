@@ -646,12 +646,13 @@ class Q_Session
 						Q::log("$sess_file is not writable", 'fatal');
 						die("$sess_file is not writable");
 					}
-					if ($file = fopen($sess_file, "r+")) {
+					if (file_exists($sess_file)) {
+						$file = fopen($sess_file, "r+");
 						flock($file, LOCK_EX);
 						$maxlength = Q_Config::get('Q', 'session', 'maxlength', 4095);
 						$existing_data = fread($file, $maxlength);
 					} else {
-						fopen($sess_file, "w");
+						$file = fopen($sess_file, "w");
 						flock($file, LOCK_EX);
 						$existing_data = '';
 					}
@@ -685,6 +686,9 @@ class Q_Session
 					$row->save(false, true);
 					$result = true;
 				} else {
+					if (!$file) {
+						throw new Q_Exception_MissingFile(array('filename' => $sess_file));
+					}
 					ftruncate($file, 0);
 					rewind($file);
 					$result = fwrite($file, $merged_data);

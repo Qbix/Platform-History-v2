@@ -35,7 +35,6 @@ Base.tableClasses = [
 	"Streams_Message",
 	"Streams_Notification",
 	"Streams_Participant",
-	"Streams_Participating",
 	"Streams_RelatedFrom",
 	"Streams_RelatedTo",
 	"Streams_Request",
@@ -120,13 +119,6 @@ Base.Notification = Q.require('Streams/Notification');
  * @type Streams.Participant
  */
 Base.Participant = Q.require('Streams/Participant');
-
-/**
- * Link to Streams.Participating model
- * @property Participating
- * @type Streams.Participating
- */
-Base.Participating = Q.require('Streams/Participating');
 
 /**
  * Link to Streams.RelatedFrom model
