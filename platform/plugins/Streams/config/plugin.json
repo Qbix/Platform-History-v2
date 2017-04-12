@@ -159,7 +159,8 @@
 					"participatingCount": 0,
 					"leftCount": 0
 				},
-				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}"
+				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
+				"participating": ["Streams/participating"]
 			},
 			"Streams/invited": {
 				"subscriptions": {
@@ -245,8 +246,16 @@
 					"title": "Untitled Category",
 					"icon": "Streams/category"
 				},
-				"fields": ["relatedTo"],
 				"see": ["relatedTo"]
+			},
+			"Streams/participating": {
+				"description": "streams are related/unrelated to this when a user joins/leaves",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Participating List",
+					"icon": "Streams/category"
+				}
 			},
 			"Streams/interest": {
 				"description": "represents a user's interest in a certain topic",

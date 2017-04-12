@@ -123,12 +123,16 @@ class Q_Handlebars {
 		if (isset($args[1]) && (is_string($args[1]) || is_numeric($args[1]))) {
 			$id = $args[1];
 		}
-		$o = array();
+		$t = new Q_Tree();
 		foreach ($args as $k => $v) {
-			if (!is_numeric($k)) {
-				$o[$k] = $v;
+			if (is_numeric($k)) {
+				continue;
 			}
+			$arr = explode('-', $k);
+			$arr[] = $v;
+			call_user_func_array(array($t, 'set'), $arr);
 		}
+		$o = $t->getAll();
 		$fields = $context->fields();
 		if (isset($fields[$name])) {
 			$o = array_merge($args, $fields[$name]);
