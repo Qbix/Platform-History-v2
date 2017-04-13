@@ -25,12 +25,6 @@ class Assets_Customer extends Base_Assets_Customer
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
 
-	/* 
-	 * Add any Assets_Customer methods here, whether public or not
-	 * If file 'Customer.php.inc' exists, its content is included
-	 * * * */
-
-	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.

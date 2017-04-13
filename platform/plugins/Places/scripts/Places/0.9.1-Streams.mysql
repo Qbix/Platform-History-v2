@@ -22,10 +22,6 @@ UPDATE {$prefix}participant
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}participating
-SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
-WHERE streamName LIKE "Places/timeslot/%";
-
 UPDATE {$prefix}related_from
 SET fromStreamName = REPLACE(fromStreamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE fromStreamName LIKE "Places/timeslot/%";
