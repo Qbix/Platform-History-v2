@@ -25,12 +25,6 @@ class Places_Autocomplete extends Base_Places_Autocomplete
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
 
-	/* 
-	 * Add any Places_Autocomplete methods here, whether public or not
-	 * If file 'Autocomplete.php.inc' exists, its content is included
-	 * * * */
-
-	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.
