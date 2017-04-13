@@ -77,13 +77,17 @@ abstract class Users extends Base_Users
 	 * @return {array} An associative array of $roleName => $contactRow pairs
 	 * @throws {Users_Exception_NotLoggedIn}
 	 */
-	static function roles($publisherId = null, $filter = null, $options = array(), $userId = null)
+	static function roles(
+		$publisherId = null,
+		$filter = null,
+		$options = array(),
+		$userId = null)
 	{
 		if (empty($publisherId)) {
 			$publisherId = Users::communityId();
 		}
 		if (!isset($userId)) {
-			$user = Users::loggedInUser();
+			$user = Users::loggedInUser(false, false);
 			if (!$user) {
 				return array();
 			}
