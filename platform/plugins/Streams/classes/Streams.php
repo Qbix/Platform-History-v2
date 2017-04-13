@@ -1839,9 +1839,9 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
-	 *  The user who has published the member stream
+	 *  The user who has published the related stream
 	 * @param {string} $fromStreamName
-	 *  The name of the member stream. Pass an array of strings to relate multiple streams
+	 *  The name of the related stream. Pass an array of strings to relate multiple streams
 	 *  to a single category, but in that case make sure toStreamName is a string.
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
@@ -2112,9 +2112,9 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
-	 *  The user who has published the member stream
+	 *  The user who has publishes the related stream
 	 * @param {string} $fromStreamName
-	 *  The name of the member stream
+	 *  The name of the related stream
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
@@ -3725,7 +3725,12 @@ abstract class Streams extends Base_Streams
 		}
 
 		// Clean up relations from other streams to this category
-		list($relations, $related) = Streams::related($asUserId, $stream->publisherId, $stream->name, true);
+		list($relations, $related) = Streams::related(
+			$asUserId, 
+			$stream->publisherId, 
+			$stream->name, 
+			true
+		);
 		foreach ($relations as $r) {
 			try {
 				Streams::unrelate(

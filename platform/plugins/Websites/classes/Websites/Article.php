@@ -25,12 +25,6 @@ class Websites_Article extends Base_Websites_Article
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
 
-	/* 
-	 * Add any Websites_Article methods here, whether public or not
-	 * If file 'Article.php.inc' exists, its content is included
-	 * * * */
-
-	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.
