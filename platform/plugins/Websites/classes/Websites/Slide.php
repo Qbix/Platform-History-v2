@@ -25,12 +25,6 @@ class Websites_Slide extends Base_Websites_Slide
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
 
-	/* 
-	 * Add any Websites_Slide methods here, whether public or not
-	 * If file 'Slide.php.inc' exists, its content is included
-	 * * * */
-
-	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.

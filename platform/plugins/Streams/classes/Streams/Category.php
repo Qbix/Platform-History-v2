@@ -49,12 +49,6 @@ class Streams_Category extends Base_Streams_Category
 		return $relatedTo[$relationType];
 	}
 
-	/* 
-	 * Add any Streams_Category methods here, whether public or not
-	 * If file 'Category.php.inc' exists, its content is included
-	 * * * */
-
-	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.

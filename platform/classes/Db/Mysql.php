@@ -1174,6 +1174,29 @@ class Db_Mysql implements iDb
 
 			$class_extras = is_readable($class_filename.'.inc') ? file_get_contents($class_filename.'.inc') : '';
 			$js_class_extras = is_readable($js_class_filename.'.inc') ? file_get_contents($js_class_filename.'.inc') : '';
+			
+			if ($class_extras) {
+				$class_extras = <<<EOT
+					
+	/* * * *
+	 * Including content of '$class_name_base.php.inc' below
+	 * * * */
+$class_extras
+	/* * * */
+	
+EOT;
+			}
+			if ($js_class_extras) {
+				$js_class_extras = <<<EOT
+					
+	/* * * *
+	 * Including content of '$class_name_base.js.inc' below
+	 * * * */
+$class_extras
+	/* * * */
+	
+EOT;
+			}
 
 			$class_string = <<<EOT
 <?php
@@ -1203,12 +1226,10 @@ class $class_name extends Base_$class_name
 		// e.g. \$this->hasMany(...) and stuff like that.
 	}
 
-	/* 
+	/*
 	 * Add any $class_name methods here, whether public or not
-	 * If file '$class_name_base.php.inc' exists, its content is included
-	 * * * */
-$class_extras
-	/* * * */
+	 */
+	 
 	$dc
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.
@@ -1251,14 +1272,11 @@ function $class_name (fields) {
 
 	// Run mixed-in constructors
 	$class_name.constructors.apply(this, arguments);
-
+	
 	/*
-	 * Add any privileged methods to the model class here.
+ 	 * Add any privileged methods to the model class here.
 	 * Public methods should probably be added further below.
-	 * If file '$class_name_base.js.inc' exists, its content is included
-	 * * * */
-$js_class_extras
-	/* * * */
+	 */
 }
 
 Q.mixin($class_name, $class_name_base);
@@ -1363,7 +1381,7 @@ abstract class Base_$class_name
 	 * @type array
 	 */
 	static \$table_classnames = $table_classnames_exported;
-
+$class_extras
 	$dc
      * This method calls Db.connect() using information stored in the configuration.
      * If this has already been called, then the same db object is returned.
@@ -1398,7 +1416,7 @@ $dc
  */
 var Q = require('Q');
 var Db = Q.require('Db');
-
+$js_class_extras
 $dc
  * Base class for the $class_name model
  * @namespace Base
