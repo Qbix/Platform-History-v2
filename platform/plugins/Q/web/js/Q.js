@@ -10660,11 +10660,11 @@ Q.Dialogs = {
 		if (o.fullscreen) o.mask = false;
 		var $dialog = $(o.dialog);
 		if (o.template) {
-			Q.Template.render(o.template.name, function (err, html) {
+			Q.Template.render(o.template.name, o.template.fields, function (err, html) {
 				if (!err) {
 					_proceed1(html);
 				}
-			}, o.template.fields);
+			});
 		} else {
 			_proceed1(o.content);
 		}
