@@ -2,7 +2,7 @@
 	"name": "Q",
 	"description": "Qbix Platform",
 	"author": "Qbix",
-	"version": "0.0.8",
+	"version": "1.0.0",
 	"engines": {
 		"node": ">= 0.6.0"
 	},
@@ -17,8 +17,11 @@
 		"nodemailer-sendmail-transport": "1.x",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
-		"node-pushnotifications": "1.0.x",
-		"crypto-js": "3.x.x"
+		"crypto-js": "3.x.x",
+	    "apn": "^2.1.1",
+	    "node-adm": "^0.9.1",
+	    "node-gcm": "^0.14.4",
+	    "wns": "^0.5.3"
 	},
 	"repository": {
 	  "type": "git",

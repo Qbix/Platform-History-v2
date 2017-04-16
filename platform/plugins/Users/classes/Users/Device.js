@@ -59,25 +59,48 @@ function Users_Device (fields) {
  * @param {Object} [options]
  * @param {String} [options.view] Optionally set a view to render for the alert body
  * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
+ * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
-Users_Device.prototype.pushNotification = function (notification, options) {
+Users_Device.prototype.pushNotification = function (notification, options, callback) {
+	if (typeof options === 'function') {
+		callback = options;
+		options = {};
+	}
 	if (options && options.view) {
 		var body = options.isSource
 			? Q.Handlebars.renderSource(options.view, options.fields)
 			: Q.Handlebars.render(options.view, options.fields);
 		Q.setObject(['alert', 'body'], body, notification);
 	}
-	if (this.fields.platform === 'ios') {
-		if (!Users.apn.connection) {
+	var device = this;
+	if (device.fields.platform === 'ios') {
+		if (!Users.push.apn.provider) {
+			console.warn("Users.Device.prototype.pushNotification: Users.apn.provider missing, call Users.listen() first");
 			return;
 		}
-		var d = new apn.Device(this.fields.deviceId);
+		var app = Q.Config.expect(['Q', 'app']);
+		notification.topic = Q.Config.expect([app, 'native', 'ios', 'bundleId']);
+		var apn = require('apn');
 		var n = new apn.Notification(notification);
-		Users.apn.connection.pushNotification(n, d);
+		Users.push.apn.provider.send(n, device.fields.deviceId)
+		.then(function (responses) {
+			var errors = null;
+			responses.failed.forEach(function (result) {
+				if (result.status == '401') {
+					setTimeout(function () {
+						device.remove();
+					}, 0);
+				}
+				errors = errors || [];
+				errors.push(result);
+			});
+			callback.call(device, errors, notification, n);
+		});
 	}
-	// TODO: process android!!!
-	// TODO: add batching support
-	// can send to at most 1000 registration tokens at a time
+	// TODO: process gcm for android
+	// can send to at most 1000 registration tokens per request in gcm
+	
+	// TODO: add support for web push in chrome and safari
 };
 
 Q.mixin(Users_Device, Q.require('Base/Users/Device'));

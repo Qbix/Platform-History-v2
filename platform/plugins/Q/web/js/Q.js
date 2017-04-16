@@ -2827,7 +2827,7 @@ Q.pipe = function _Q_pipe(a, b, c, d) {
  * @method batcher
  * @param batch {Function}
  *  This is the function you must write to implement the actual batching functionality.
- *  It is passed the arguments, subjects and callbacks that were collected by Q.batcher
+ *  It is passed the subjects, arguments, and callbacks that were collected by Q.batcher
  *  from the individual calls that triggered your batch function to be run.
  *  Your batch function is supposed to cycle through the callbacks array -- where each
  *  entry is the array of (one or more) callbacks the client passed during a particular
@@ -2875,11 +2875,11 @@ Q.batcher = function _Q_batch(batch, options) {
 			// collect various arrays for convenience of writing batch functions,
 			// at the expense of extra work and memory
 			if (!batch.subjects) batch.subjects = [];
-			if (!batch.args) batch.args = [];
+			if (!batch.params) batch.params = [];
 			if (!batch.callbacks) batch.callbacks = [];
 
 			batch.subjects.push(this);
-			batch.args.push(args);
+			batch.params.push(args);
 			batch.callbacks.push(callbacks);
 
 			if (batch.timeout) {
@@ -2887,8 +2887,8 @@ Q.batcher = function _Q_batch(batch, options) {
 			}
 			function runBatch() {
 				try {
-					batch.call(this, batch.subjects, batch.args, batch.callbacks);
-					batch.subjects = batch.args = batch.callbacks = null;
+					batch.call(this, batch.subjects, batch.params, batch.callbacks);
+					batch.subjects = batch.params = batch.callbacks = null;
 					batch.count = 0;
 					batch.argmax = 0;
 					batch.cbmax = 0;
