@@ -1340,11 +1340,7 @@ function criteria_internal (query, criteria) {
 				} else {
 					criteria_list.push( "" + expr + " = (" + value + ")");
 				}
-			} else if (/\W/.test(expr.substr(-1))) {
-				criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
-				query.parameters["_criteria_" + _valueCounter] = value;
-				++ _valueCounter;
-			} else if (Q.typeOf(value) === 'array') {
+			} else if (Q.isArrayLike(value)) {
 				if (value.length) {
 					values = [];
 					for (i=0; i<value.length; ++i) {
@@ -1353,9 +1349,18 @@ function criteria_internal (query, criteria) {
 						++ _valueCounter;
 					}
 					criteria_list.push( "" + expr + " IN (" + values.join(',') + ")" );
-				} else {
-					criteria_list.push("FALSE"); // since value array is empty
 				}
+				if (/\W/.test(expr.substr(-1))) {
+					criteria_list.push( "" + expr + "(" + value + ")" );
+				} else if (value.length === 0) {
+					criteria_list.push("FALSE"); // since value array is empty
+				} else {
+					criteria_list.push( "" + expr + " IN (" + value + ")");
+				}
+			} else if (/\W/.test(expr.substr(-1))) {
+				criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
+				query.parameters["_criteria_" + _valueCounter] = value;
+				++ _valueCounter;
 			} else if (value && value.typename === 'Db.Range') {
 				if (value.min != null) {
 					var c_min = value.includeMin ? ' >= ' : ' > ';
