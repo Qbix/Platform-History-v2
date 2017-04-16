@@ -2287,6 +2287,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
+	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
@@ -2308,6 +2309,7 @@ abstract class Streams extends Base_Streams
 			$options = $isCategory;
 			$isCategory = true;
 		}
+		$skipTypes = Q::ifset($options, 'skipTypes', array());
 
 		// Check access to stream
 		$fetchOptions = isset($options['fetchOptions']) ? $options['fetchOptions'] : null;
@@ -2317,6 +2319,9 @@ abstract class Streams extends Base_Streams
 			if (!$row) continue;
 			if (!$row->testReadLevel('relations')) {
 				throw new Users_Exception_NotAuthorized();
+			}
+			if (!$row->testReadLevel('participants')) {
+				$skipTypes[$n][] = 'Streams/participating';
 			}
 			$streams[$n] = $row;
 		}
@@ -2403,13 +2408,16 @@ abstract class Streams extends Base_Streams
 				"SUBSTRING($col, -1, 1) != '/'"
 			));
 		}
+		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
 
 		$relations = $query->fetchDbRows(null, '', $FT.'StreamName');
-		if (empty($options['includeTemplates'])) {
-			foreach ($relations as $k => $v) {
-				if (substr($k, -1) === '/') {
-					unset($relations[$k]);
-				}
+		foreach ($relations as $k => $v) {
+			if (!empty($options['includeTemplates'])
+			and substr($k, -1) === '/') {
+				unset($relations[$k]);
+			} else if (!empty($skipTypes[$v->$col2])
+			and in_array($v->type, $skipTypes[$v->$col2])) {
+				unset($relations[$k]);
 			}
 		}
 
@@ -3237,9 +3245,6 @@ abstract class Streams extends Base_Streams
 		$userId = isset($options['userId'])
 			? $options['userId']
 			: $publisherId;
-		$o = array_merge($options, array(
-			'Streams/participating'
-		));
 		return Streams::related($asUserId, $publisherId, $streamName, true, $o);
 	}
 
