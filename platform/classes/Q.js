@@ -501,7 +501,7 @@ Q.pipe = function _Q_pipe(a, b, c, d) {
  * @method batcher
  * @param {Function} batch
  *  This is the function you must write to implement the actual batching functionality.
- *  It is passed the arguments, subjects and callbacks that were collected by Q.batcher
+ *  It is passed the subjects, params and callbacks that were collected by Q.batcher
  *  from the individual calls that triggered your batch function to be run.
  *  Your batch function is supposed to cycle through the callbacks array -- where each
  *  entry is the array of (one or more) callbacks the client passed during a particular
@@ -512,12 +512,12 @@ Q.pipe = function _Q_pipe(a, b, c, d) {
  *  Typically you would serialize the array of arguments e.g. into JSON when sending 
  *  the request down to the server, and the server should also return an array of results
  *  that is in the same order.
- * @param {Object} options
+ * @param options {Object}
  *  An optional hash of possible options, which can include:
- *  "max": Defaults to 10. When the number of individual calls in the queue reaches this,
- *         the batch function is run.
- *  "ms": Defaults to 50. When this many milliseconds elapse without another call to the
- *         same batcher function, the batch function is run.
+ * @param {boolean} [options.max=10] When the number of individual calls 
+ *  in the queue reaches this number, the batch function is run.
+ * @param {boolean} [options.ms=50] When this many milliseconds elapse 
+ *  without another call to the same batcher function, the batch function is run.
  * @return {Function} It returns a function that the client can use as usual, but which,
  * behind the scenes, queues up the calls and then runs a batch function that you write.
  */
@@ -548,11 +548,11 @@ Q.batcher = function _Q_batch(batch, options) {
 			// collect various arrays for convenience of writing batch functions,
 			// at the expense of extra work and memory
 			if (!batch.subjects) batch.subjects = [];
-			if (!batch.args) batch.args = [];
+			if (!batch.params) batch.params = [];
 			if (!batch.callbacks) batch.callbacks = [];
 
 			batch.subjects.push(this);
-			batch.args.push(args);
+			batch.params.push(args);
 			batch.callbacks.push(callbacks);
 
 			if (batch.timeout) {
@@ -560,8 +560,8 @@ Q.batcher = function _Q_batch(batch, options) {
 			}
 			function runBatch() {
 				try {
-					batch.call(this, batch.subjects, batch.args, batch.callbacks);
-					batch.subjects = batch.args = batch.callbacks = null;
+					batch.call(this, batch.subjects, batch.params, batch.callbacks);
+					batch.subjects = batch.params = batch.callbacks = null;
 					batch.count = 0;
 					batch.argmax = 0;
 					batch.cbmax = 0;

@@ -112,9 +112,7 @@ Users.userFromSession = function (sessionId, callback) {
  * Accepts "Users/session" message
  * @method listen
  * @param {Object} [options={}]
- * @param {Object} [options.ios={}] Any options for node-apn Connection
- * @param {Object} [options.ios.connection={}] Additional options for node-apn Connection
- * @param {Object} [options.ios.feedback={}] Additional options for node-apn Feedback
+ * @param {Object} [options.apn.provider={}] Additional options for node-apn Provider
  */
 Users.listen = function (options) {
 
@@ -142,8 +140,10 @@ Users.listen.options = {
 	}
 };
 
-Users.apn = {
-	connection: null
+Users.push = {
+	apn: {
+		provider: null
+	}
 };
 
 function _Users_listen_ios (options, server) {
@@ -153,42 +153,33 @@ function _Users_listen_ios (options, server) {
 	var appName = Q.app.name;
 	var sandbox = Q.Config.get([appName, "native", "ios", "sandbox"], false);
 	var s = sandbox ? "sandbox" : "production";
-	var o = {
-		ca: path.join(Q.pluginInfo.Users.FILES_DIR, 'Users', 'certs', 'EntrustRootCA.pem'),
-		cert: path.join(Q.app.LOCAL_DIR, 'Users', 'certs', appName, s, 'cert.pem'),
-		key: path.join(Q.app.LOCAL_DIR, 'Users', 'certs', appName, s, 'key.pem'),
-		production: !sandbox
-	};
-	var files = ['cert', 'key', 'ca'];
-	for (var i=0; i<files.length; ++i) {
-		var k = files[i];
-		if (!fs.existsSync(o[k])) {
-			console.log("WARNING: APN connection not enabled due to missing " + k + " at " + o[k] + "\n");
+	var o = Q.Config.expect(['Groups', 'native', 'ios']);
+	if (o.token) {
+		o.token.key = path.join(Q.app.DIR, o.token.key);
+		if (!fs.existsSync(o.token.key)) {
+			console.log("WARNING: APN provider not enabled due to missing token.key at " + o.token.key + "\n");
 			return;
 		}
+	} else {
+		var files = ['cert', 'key', 'ca'];
+		for (var i=0; i<files.length; ++i) {
+			var k = files[i];
+			if (!o[k] || !fs.existsSync(o[k])) {
+				console.log("WARNING: APN provider not enabled due to missing " + k + " at " + o[k] + "\n");
+				return;
+			}
+		}
+	}
+	if (o.production == undefined) {
+		o.production = !sandbox;
 	}
 	var passphrase = Q.Config.get([appName, "native", "ios", "passphrase"], null);
 	if (passphrase) {
 		o.passphase = passphase;
 	}
-	Users.apn.connection = new apn.Connection(Q.extend(
-		{}, o, options && options.ios && options.ios.connection
+	var provider = Users.push.apn.provider = new apn.Provider(Q.extend(
+		{}, o, options && options.apn && options.apn.provider
 	));
-	Q.log("APN connection enabled (" + s +  ")");
-	var feedback = Users.apn.feedback = new apn.Feedback(Q.extend(
-		{}, o, options && options.ios && options.ios.feedback
-	));
-	Q.log("APN feedback enabled");
-	feedback.on('feedback', function (devices) {
-		var deviceIds = [];
-		devices.forEach(function (item) {
-			deviceIds.push(item.device.token.toString('hex'));
-		});
-		Users.Device.DELETE().where({
-			platform: 'ios',
-			deviceId: deviceIds
-		}).execute();
-	});
 };
 
 /**
