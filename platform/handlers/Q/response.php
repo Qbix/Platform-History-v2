@@ -166,7 +166,7 @@ EOT;
 			if (!Q_Response::$batch) {
 				header("Content-type: " . ($callback ? "application/javascript" : "application/json"));
 			}
-			echo $callback ? "$callback($json)" : $json;
+			echo $callback ? "/**/$callback($json)" : $json;
 		}
 		return;
 	}
