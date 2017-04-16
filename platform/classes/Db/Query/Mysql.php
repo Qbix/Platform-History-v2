@@ -1651,43 +1651,45 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 					$criteria_list[] = preg_match('/\W/', substr($expr, -1))
 						? "$expr ($value)"
 						: self::column($expr)." = ($value)";
-				} else {
+				} else if (is_array($value)) {
+					if (!empty($value)) {
+						$value = array_unique($value);
+						$values = array();
+						foreach ($value as $v) {
+							$values[] = ":_where_$i";
+							$this->parameters["_where_$i"] = $v;
+							++ $i;
+						}
+						$value_list = implode(',', $values);
+					}
 					if (preg_match('/\W/', substr($expr, -1))) {
-						$criteria_list[] = "$expr :_where_$i";
-						$this->parameters["_where_$i"] = $value;
-						++ $i;
-					} else if (is_array($value)) {
-						if (!empty($value)) {
-							$value = array_unique($value);
-							$values = array();
-							foreach ($value as $v) {
-								$values[] = ":_where_$i";
-								$this->parameters["_where_$i"] = $v;
-								++ $i;
-							}
-							$value_list = implode(',', $values);
-							$criteria_list[] = "$expr IN ($value_list)";
-						} else {
-							$criteria_list[] = "FALSE"; // since $value list is empty
-						}
-					} else if ($value instanceof Db_Range) {
-						if (isset($value->min)) {
-							$c_min = $value->includeMin ? '>=' : '>';
-							$criteria_list[] = self::column($expr) . " $c_min :_where_$i";
-							$this->parameters["_where_$i"] = $value->min;
-							++ $i;
-						}
-						if (isset($value->max)) {
-							$c_max = $value->includeMax ? '<=' : '<';
-							$criteria_list[] = self::column($expr) . " $c_max :_where_$i";
-							$this->parameters["_where_$i"] = $value->max;
-							++ $i;
-						}
+						$criteria_list[] = "$expr ($value_list)";
+					} else if (empty($value)) {
+						$criteria_list[] = "FALSE"; // since $value list is empty
 					} else {
-						$criteria_list[] = self::column($expr) . " = :_where_$i";
-						$this->parameters["_where_$i"] = $value;
+						$criteria_list[] = self::column($expr) . " IN ($value_list)";
+					}
+				} else if (preg_match('/\W/', substr($expr, -1))) {
+					$criteria_list[] = "$expr :_where_$i";
+					$this->parameters["_where_$i"] = $value;
+					++ $i;
+				} else if ($value instanceof Db_Range) {
+					if (isset($value->min)) {
+						$c_min = $value->includeMin ? '>=' : '>';
+						$criteria_list[] = self::column($expr) . " $c_min :_where_$i";
+						$this->parameters["_where_$i"] = $value->min;
 						++ $i;
 					}
+					if (isset($value->max)) {
+						$c_max = $value->includeMax ? '<=' : '<';
+						$criteria_list[] = self::column($expr) . " $c_max :_where_$i";
+						$this->parameters["_where_$i"] = $value->max;
+						++ $i;
+					}
+				} else {
+					$criteria_list[] = self::column($expr) . " = :_where_$i";
+					$this->parameters["_where_$i"] = $value;
+					++ $i;
 				}
 			}
 			$criteria = implode(' AND ', $criteria_list);
