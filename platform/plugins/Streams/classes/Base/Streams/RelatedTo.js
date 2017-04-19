@@ -56,6 +56,10 @@ Q.mixin(Base, Row);
  * @property {String|Db.Expression}
  * @type insertedTime
  */
+/**
+ * @property {String}
+ * @type extra
+ */
 
 /**
  * This method calls Db.connect() using information stored in the configuration.
@@ -221,7 +225,8 @@ Base.prototype.fieldNames = function () {
 		"fromPublisherId",
 		"fromStreamName",
 		"weight",
-		"insertedTime"
+		"insertedTime",
+		"extra"
 	];
 };
 
@@ -462,6 +467,44 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 Base.column_insertedTime = function () {
 
 return [["timestamp","14,4","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_extra
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_extra = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".extra");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".extra");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the extra field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_extra = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for extra column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_extra = function () {
+
+return [["varchar","1023","",false],false,"","{}"];
 };
 
 /**

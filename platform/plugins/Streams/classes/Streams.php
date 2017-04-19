@@ -3232,8 +3232,12 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} [$streamName='Streams/participating'] the name of a stream of type Streams/participating
 	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
-	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the publisher of the category stream
+	 * @param {string} [$options.publisherId=Users::loggedInUser(true)->id] the publisher of the category stream
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
+	 * @return {array}
+	 *  Returns array($relations, $relatedStreams, $stream).
+	 *  However, if $streamName wasn't a string or ended in "/"
+	 *  then the third parameter is an array of streams.
 	 */
 	static function participating(
 		$streamName = 'Streams/participating',
@@ -3242,10 +3246,10 @@ abstract class Streams extends Base_Streams
 		$publisherId = isset($options['publisherId'])
 			? $options['publisherId']
 			: Users::loggedInUser(true)->id;
-		$userId = isset($options['userId'])
-			? $options['userId']
+		$asUserId = isset($options['asUserId'])
+			? $options['asUserId']
 			: $publisherId;
-		return Streams::related($asUserId, $publisherId, $streamName, true, $o);
+		return Streams::related($asUserId, $publisherId, $streamName, true, $options);
 	}
 
 	private static function _accessExceptions($streams2, $streamNames, $writeLevel)
