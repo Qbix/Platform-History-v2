@@ -162,6 +162,34 @@ class Streams_Participant extends Base_Streams_Participant
 	}
 	
 	/**
+	 * @method afterSaveExecute
+	 * @param {Db_Result} $result
+	 * @param {Db_Query} $query
+	 * @return {Db_Result}
+	 */
+	function afterSaveExecute($result, $query, $modifiedFields, $where)
+	{
+		if ($this->state !== 'participating') {
+			return $result;;
+		}
+		// Relate to participating streams
+		$participatingNames = Streams_Stream::getConfigField(
+			$this->streamType, array('participating'), array()
+		);
+		if ($participatingNames) {
+			Streams_RelatedTo::update()->set(array(
+				'extra' => $this->extra
+			))->where(array(
+				'toPublisherId' => $this->userId,
+				'toStreamName' => $participatingNames,
+				'fromPublisherId' => $this->publisherId,
+				'fromStreamName' => $this->streamName
+			))->execute();
+		}
+		return $result;
+	}
+	
+	/**
 	 * Get the names of the possible states
 	 * @method states
 	 * @static
