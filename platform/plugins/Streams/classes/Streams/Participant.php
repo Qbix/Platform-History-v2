@@ -181,7 +181,9 @@ class Streams_Participant extends Base_Streams_Participant
 				'extra' => $this->extra
 			))->where(array(
 				'toPublisherId' => $this->userId,
-				'toStreamName' => $participatingNames
+				'toStreamName' => $participatingNames,
+				'fromPublisherId' => $this->publisherId,
+				'fromStreamName' => $this->streamName
 			))->execute();
 		}
 		return $result;
