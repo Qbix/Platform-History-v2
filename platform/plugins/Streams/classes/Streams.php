@@ -933,6 +933,9 @@ abstract class Streams extends Base_Streams
 		$relate = null,
 		&$result = null)
 	{
+		if (!isset($fields)) {
+			$fields = array();
+		}
 		$skipAccess = Q::ifset($fields, 'skipAccess', false);
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser(true)->id;
@@ -942,25 +945,12 @@ abstract class Streams extends Base_Streams
 		if ($publisherId instanceof Users_User) {
 			$publisherId = $publisherId->id;
 		}
-		$authorized = self::isAuthorizedToCreate(
-			$asUserId, $publisherId, $type, $relate
-		);
-		if (!$authorized and !$skipAccess) {
-			throw new Users_Exception_NotAuthorized();
-		}
 		
 		// OK we are good to go!
 		$stream = new Streams_Stream;
 		$stream->publisherId = $publisherId;
 		if (!empty($fields['name'])) {
-			$p = new Q_Tree();
-			$arr = Q_Config::get('Streams', 'userStreams', array());
-			$app = Q::app();
-			foreach ($arr as $k => $v) {
-				$PREFIX = ($k === $app ? 'APP' : strtoupper($k).'_PLUGIN');
-				$path = constant( $PREFIX . '_CONFIG_DIR' );
-				$p->load($path.DS.$v);
-			}
+			$p = Streams::userStreams();
 			if ($info = $p->get($fields['name'], array())) {
 				foreach (Base_Streams_Stream::fieldNames() as $f) {
 					if (isset($info[$f])) {
@@ -971,6 +961,12 @@ abstract class Streams extends Base_Streams
 		}
 		if (!isset($stream->type)) {
 			$stream->type = $type;
+		}
+		$authorized = self::isAuthorizedToCreate(
+			$asUserId, $publisherId, $stream->type, $relate
+		);
+		if (!$authorized and !$skipAccess) {
+			throw new Users_Exception_NotAuthorized();
 		}
 		
 		// prepare attributes field
@@ -4056,6 +4052,19 @@ abstract class Streams extends Base_Streams
 		return APP_FILES_DIR
 			.DS.Q::interpolate($subpath, compact('app'))
 			.DS.Q_Utils::splitId($invitingUserId);
+	}
+	
+	static function userStreams()
+	{
+		$p = new Q_Tree();
+		$arr = Q_Config::get('Streams', 'userStreams', array());
+		$app = Q::app();
+		foreach ($arr as $k => $v) {
+			$PREFIX = ($k === $app ? 'APP' : strtoupper($k).'_PLUGIN');
+			$path = constant( $PREFIX . '_CONFIG_DIR' );
+			$p->load($path.DS.$v);
+		}
+		return $p;
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)

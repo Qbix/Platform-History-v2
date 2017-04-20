@@ -37,9 +37,7 @@ function Streams_after_Users_User_saveExecute($params)
 		: array();
 	if ($toInsert or !empty(Users::$cache['facebookUserData'])) {
 		// load standard streams info
-		$p = new Q_Tree();
-		$p->load(STREAMS_PLUGIN_CONFIG_DIR.DS.'streams.json');
-		$p->load(APP_CONFIG_DIR.DS.'streams.json');
+		$p = Streams::userStreams();
 	}
 	if (!empty(Users::$cache['facebookUserData'])) {
 		// check for user data from facebook
