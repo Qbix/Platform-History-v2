@@ -4314,8 +4314,11 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 					Q.Tool.nextDefaultId %= 1000000;
 				} while (Q.Tool.active[p2]);
 				id = p2 + 'tool';
-			} else if (p1) {
-				id = p1 + id;
+			} else {
+				id += '_tool';
+				if (p1) {
+					id = p1 + id + '_tool';
+				}
 			}
 			element.setAttribute('id', id);
 		}
@@ -11451,7 +11454,7 @@ function _addHandlebarsHelpers() {
 			}
 			if (id) {
 				if (typeof id === 'string' || typeof id === 'number') {
-					id = name.split('/').join('_') + (id !== '' ? '-'+id+'_tool' : '');
+					id = name.split('/').join('_') + (id !== '' ? '-'+id : '');
 				}
 				if (this && this['id:'+id]) {
 					Q.extend(o, this['id:'+id]);
