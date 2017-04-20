@@ -27,7 +27,8 @@ class Users_Label extends Base_Users_Label
 	 * Add a contact label
 	 * @method {boolean} addLabel
 	 * @static
-	 * @param {string|array} $label A label or array of ($label => array($title, $icon))
+	 * @param {string|array} $label A label or array of ($label => $title)
+	 *   or ($label => array($title, $icon)) pairs.
 	 * @param {string} [$userId=null] The logged-in user if not provided
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
 	 * @param {string} [$icon='default']
@@ -40,12 +41,18 @@ class Users_Label extends Base_Users_Label
 	static function addLabel(
 		$label, 
 		$userId = null, 
-		$title = '', 
+		$title = null, 
 		$icon = 'default',
 		$asUserId = null,
 		$unlessExists = false)
 	{
 		if (is_array($label)) {
+			if (!Q::isAssociative($label)) {
+				foreach ($label as $l) {
+					Users_Label::addLabel($l, $userId, null, null, $asUserId, $unlessExists);
+				}
+				return;
+			}
 			foreach ($label as $l => $title) {
 				if (is_array($title)) {
 					$icon = $title[1];
@@ -57,11 +64,12 @@ class Users_Label extends Base_Users_Label
 			}
 			return;
 		}
-		if (!isset($title)) {
-			$title = '';
+		if (empty($title)) {
+			$parts = explode('/', $label);
+			$title = ucfirst(end($parts));
 		}
 		if (!isset($icon)) {
-			$icon = 'default';
+			$icon = 'labels/default';
 		}
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(true);
