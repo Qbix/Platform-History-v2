@@ -11451,7 +11451,7 @@ function _addHandlebarsHelpers() {
 			}
 			if (id) {
 				if (typeof id === 'string' || typeof id === 'number') {
-					id = name.split('/').join('_') + (id !== '' ? '-'+id : '');
+					id = name.split('/').join('_') + (id !== '' ? '-'+id+'_tool' : '');
 				}
 				if (this && this['id:'+id]) {
 					Q.extend(o, this['id:'+id]);
