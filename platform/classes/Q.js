@@ -1938,6 +1938,9 @@ Q.dir = function _Q_dir(start, callback) {
 Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
+	if (text instanceof Buffer) {
+		text = text.toString();
+	}
 	characters = characters || /[^A-Za-z0-9]+/g;
 	if (text === undefined) {
 		debugger; // pause here if debugging

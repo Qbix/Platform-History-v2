@@ -186,6 +186,9 @@ Streams_Stream.construct = function Streams_Stream_construct(fields, retrieved) 
 			if (!fields) return;
 			for (var k in fields) {
 				this.fields[k] = Q.copy(fields[k]);
+				if (this.fields[k] instanceof Buffer) {
+					this.fields[k] = this.fields[k].toString();
+				}
 			}
 		};
 		Q.mixin(SC, Streams_Stream);
