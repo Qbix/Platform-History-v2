@@ -602,7 +602,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		onSave();
 	});
 	fieldinput.on(Q.Pointer.end, function (event) {
-		Q.Pointer.cancelClick(eventnull, true);
+		Q.Pointer.cancelClick(event, null, true);
 		Q.Pointer.ended();
 		event.stopPropagation();
 	});
