@@ -1,6 +1,6 @@
 CREATE TABLE `{$prefix}permalink` (
-  `uri` varbinary(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `url` varbinary(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `uri` varbinary(255) NOT NULL DEFAULT '',
+  `url` varbinary(255) NOT NULL DEFAULT '',
   `insertedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` datetime DEFAULT NULL,
   PRIMARY KEY `URI` (`uri`),
