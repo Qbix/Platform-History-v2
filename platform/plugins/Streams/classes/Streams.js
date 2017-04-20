@@ -602,6 +602,8 @@ function Streams_request_handler (req, res, next) {
 					"expireTime": expireTime
 				})).save(_inviteSaved);
 			}
+			
+			var invite;
 
 			function _inviteSaved(err) {
 				if (err) {
@@ -610,6 +612,7 @@ function Streams_request_handler (req, res, next) {
 					return;
 				}
 				token = this.fields.token;
+				invite = this;
 				// now ready to save Streams.Invited row
 				(new Streams.Invited({
 					"token": token,
@@ -625,7 +628,6 @@ function Streams_request_handler (req, res, next) {
 					Q.log(err);
 					return;
 				}
-				var invite = this;
 				(new Streams.Participant({
 					"publisherId": stream.fields.publisherId,
 					"streamName": stream.fields.name,

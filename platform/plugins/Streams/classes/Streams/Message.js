@@ -55,6 +55,9 @@ Streams_Message.construct = function Streams_Message_construct(fields, retrieved
 			if (!fields) return;
 			for (var k in fields) {
 				this.fields[k] = Q.copy(fields[k]);
+				if (this.fields[k] instanceof Buffer) {
+					this.fields[k] = this.fields[k].toString();
+				}
 			}
 		};
 		Q.mixin(MC, Streams_Message);

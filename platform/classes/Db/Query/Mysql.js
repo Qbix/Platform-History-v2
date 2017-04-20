@@ -261,8 +261,12 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 		function _queryConnection (query, sql, connection, cb) {
 			if (!sql) return cb(null);
 			Db.emit('query', query, sql, connection);
+			if (sql.indexOf('(,') >= 0) {
+				debugger;
+			}
 			connection.query(sql, function(err, rows, fields) {
 				if (err) {
+					err.message += "\nQuery was:\n"+mq;
 					mq.db.emit('error', err, mq);
 				}
 				cb(err, rows, fields, sql, connection);
@@ -1170,6 +1174,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 			for (k in keys) {
 				key = keys[k];
 				value = mq.parameters[key];
+				if (value instanceof Buffer) {
+					value = value.toString();
+				}
 				if (value === null || value === undefined) {
 					value2 = "NULL";
 				} else if (value && value.typename === "Db.Expression") {
@@ -1324,11 +1331,14 @@ function replaceKeysCompare(a, b) {
 }
 
 function criteria_internal (query, criteria) {
-	var criteria_list, expr, value, values, i, k;
+	var criteria_list, expr, value, values, v, i, k;
 	if (typeof criteria === 'object') {
 		criteria_list = [];
 		for (expr in criteria) {
 			value = criteria[expr];
+			if (value instanceof Buffer) {
+				value = value.toString();
+			}
 			if (value === undefined) {
 				// do not add this value to criteria
 			} else if (value == null) {
@@ -1341,21 +1351,22 @@ function criteria_internal (query, criteria) {
 					criteria_list.push( "" + expr + " = (" + value + ")");
 				}
 			} else if (Q.isArrayLike(value)) {
+				var valueList = '';
 				if (value.length) {
 					values = [];
 					for (i=0; i<value.length; ++i) {
 						values.push(":_criteria_" + _valueCounter);
 						query.parameters["_criteria_" + _valueCounter] = value[i];
-						++ _valueCounter;
+						_valueCounter = (_valueCounter + 1) % 1000000;
 					}
-					criteria_list.push( "" + expr + " IN (" + values.join(',') + ")" );
+					valueList = values.join(',');
 				}
 				if (/\W/.test(expr.substr(-1))) {
-					criteria_list.push( "" + expr + "(" + value + ")" );
+					criteria_list.push( "" + expr + "(" + valueList + ")" );
 				} else if (value.length === 0) {
 					criteria_list.push("FALSE"); // since value array is empty
 				} else {
-					criteria_list.push( "" + expr + " IN (" + value + ")");
+					criteria_list.push( "" + expr + " IN (" + valueList + ")");
 				}
 			} else if (/\W/.test(expr.substr(-1))) {
 				criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
@@ -1366,18 +1377,18 @@ function criteria_internal (query, criteria) {
 					var c_min = value.includeMin ? ' >= ' : ' > ';
 					criteria_list.push( "" + expr + c_min + ":_criteria_" + _valueCounter );
 					query.parameters["_criteria_" + _valueCounter] = value.min;
-					++ _valueCounter;
+					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
 				if (value.max != null) {
 					var c_max = value.includeMax ? ' <= ' : ' < ';
 					criteria_list.push( "" + expr + c_max + ":_criteria_" + _valueCounter );
 					query.parameters["_criteria_" + _valueCounter] = value.max;
-					++ _valueCounter;
+					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
 			} else {
 				criteria_list.push(expr + " = :_criteria_" + _valueCounter);
 				query.parameters["_criteria_" + _valueCounter] = value;
-				++ _valueCounter;
+				_valueCounter = (_valueCounter + 1) % 1000000;
 			}
 		}
 		criteria = criteria_list.join(" AND ");
@@ -1406,7 +1417,7 @@ function set_internal (query, updates) {
 			} else {
 				updates_list.push(field + " = :_set_"+_valueCounter);
 				query.parameters["_set_"+_valueCounter] = value;
-				++ _valueCounter;
+				_valueCounter = (_valueCounter + 1) % 1000000;
 			}
 		}
 		updates = (updates_list.length) ? updates_list.join(", \n") : "";
