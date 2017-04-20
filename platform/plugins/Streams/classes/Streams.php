@@ -3512,10 +3512,12 @@ abstract class Streams extends Base_Streams
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false, true);
 			if ($label) {
-				Users_Contact::addContact($publisherId, $label, $userId, null, $asUserId2, true);
+				$label2 = Q::isAssociative($label) ? array_keys($label) : $label;
+				Users_Contact::addContact($publisherId, $label2, $userId, null, $asUserId2, true);
 			}
 			if ($myLabel) {
-				Users_Contact::addContact($asUserId, $label, $userId, null, $asUserId2, true);
+				$myLabel2 = Q::isAssociative($myLabel) ? array_keys($myLabel) : $myLabel;
+				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
 			}
 		}
 
