@@ -122,7 +122,9 @@ function Row(fields, retrieved /* false */) {
 			'value': this
 		})
 		if (fields && (k in fields)) {
-			this.fields[k] = fields[k];
+			this.fields[k] = (fields[k] instanceof Buffer)
+				? fields[k].toString()
+				: fields[k];
 		}
 	}
 	if ((this.retrieved = !!retrieved)) {
