@@ -241,6 +241,10 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 	}
 
 	function complete(revert, pointerDidntEnd) {
+		
+		if (!pressed && !lifted) {
+			return;
+		}
 
 		_restoreActions();
 		_restoreStyles();
