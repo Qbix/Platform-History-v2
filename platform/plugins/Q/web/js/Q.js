@@ -3701,12 +3701,13 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * Call this function to define a tool
  * @static
  * @method define
- * @param {String|Object} name The name of the tool, e.g. "Q/foo". Also you can pass an object of name: filename here here.
+ * @param {String|Object} name The name of the tool, e.g. "Q/foo". Also you can pass an object containing {name: filename} pairs instead.
  * @param {Function} ctor Your tool's constructor. You can also pass a filename here, in which case the other parameters are ignored.
  * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
  * @param {Object} defaultOptions An optional hash of default options for the tool
  * @param {Array} stateKeys An optional array of key names to copy from options to state
  * @param{Object} methods An optional hash of method functions to assign to the prototype
+ * @return {Function} The tool's constructor function
  */
 Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods) {
 	var ctors = {};
@@ -3733,13 +3734,13 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		}
 		Q.Tool.names[n] = name;
 		if (typeof ctor === 'string') {
-			if (typeof Q.Tool.constructors[n] !== 'function') {
+			if (typeof _qtc[n] !== 'function') {
 				_qtdo[n] = _qtdo[n] || {};
-				Q.Tool.constructors[n] = ctor;
+				_qtc[n] = ctor;
 			}
 			continue;
 		}
-		Q.Tool.constructors[n] = ctor;
+		_qtc[n] = ctor;
 		ctor.toolName = n;
 		if (typeof stateKeys === 'object') {
 			methods = stateKeys;
@@ -3774,8 +3775,8 @@ Q.Tool.beingActivated = undefined;
 Q.Tool.define.options = function (toolName, setOptions) {
 	var options;
 	toolName = Q.normalize(toolName);
-	if (typeof Q.Tool.constructors[toolName] === 'function') {
-		options = Q.Tool.constructors[toolName].options;
+	if (typeof _qtc[toolName] === 'function') {
+		options = _qtc[toolName].options;
 	} else {
 		options = _qtdo[toolName] = _qtdo[toolName] || {};
 	}
@@ -3810,7 +3811,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		if (root.jQuery
 		&& typeof jQuery.fn.plugin[n] !== 'function') {
 			_qtjo[n] = _qtjo[n] || {};
-			jQuery.fn.plugin[n] = Q.Tool.constructors[n] = ctor;
+			jQuery.fn.plugin[n] = _qtc[n] = ctor;
 		}
 		return ctor;
 	}
@@ -3872,9 +3873,8 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 				$(this.element).plugin(n, 'remove', this);
 			}, 'Q');
 		});
-		ToolConstructor.prototype.$ = {};
 		Q.each(methods, function (method) {
-			ToolConstructor.prototype.$[method] = function _Q_Tool_jQuery_method() {
+			ToolConstructor.prototype['$'+method] = function _Q_Tool_jQuery_method() {
 				var args = Array.prototype.slice.call(arguments, 0);
 				args.unshift(n, method);
 				var $te = $(this.element);
@@ -3896,7 +3896,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 Q.Tool.jQuery.options = function (pluginName, setOptions) {
 	var options;
 	var pluginName = Q.normalize(pluginName);
-	if (typeof Q.Tool.constructors[name] === 'function') {
+	if (typeof _qtc[name] === 'function') {
 		options = root.jQuery.fn[pluginName].options;
 	} else {
 		options = _qtjo[pluginName] = _qtjo[pluginName] || {};
@@ -4510,28 +4510,28 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 		}
 	});
 	Q.each(toolNames, function (i, toolName) {
+		var toolConstructor = _qtc[toolName];
 		function _loadToolScript_loaded() {
-			// in this function, toolFunc starts as a string
+			// in this function, toolConstructor starts as a string
 			if (Q.Tool.latestName) {
 				_qtc[toolName] = _qtc[Q.Tool.latestName];
-				Q.Tool.latestNames[toolFunc] = Q.Tool.latestName;
+				Q.Tool.latestNames[toolConstructor] = Q.Tool.latestName;
 			}
-			toolFunc = _qtc[toolName];
-			if (typeof toolFunc !== 'function') {
+			toolConstructor = _qtc[toolName];
+			if (typeof toolConstructor !== 'function') {
 				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
-				toolFunc = _qtc[toolName];
-				if (typeof toolFunc !== 'function') {
-					toolFunc = function () { console.log("Missing tool constructor for " + toolName); }; 
+				toolConstructor = _qtc[toolName];
+				if (typeof toolConstructor !== 'function') {
+					toolConstructor = function () { console.log("Missing tool constructor for " + toolName); }; 
 				}
 			}
-			p.fill(toolName)(toolElement, toolFunc, toolName, uniqueToolId);
+			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
 		}
-		var toolFunc = _qtc[toolName];
-		if (toolFunc === undefined) {
+		if (toolConstructor === undefined) {
 			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
-			toolFunc = _qtc[toolName];
-			if (typeof toolFunc !== 'function' && typeof toolFunc !== 'string') {
-				toolFunc = function () {
+			toolConstructor = _qtc[toolName];
+			if (typeof toolConstructor !== 'function' && typeof toolConstructor !== 'string') {
+				toolConstructor = function () {
 					console.log("Missing tool constructor for " + toolName);
 				}; 
 			}
@@ -4549,21 +4549,21 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 				shared.waitingForTools.push(uniqueToolId);
 			}
 		}
-		if (typeof toolFunc === 'function') {
-			return p.fill(toolName)(toolElement, toolFunc, toolName, uniqueToolId);
+		if (typeof toolConstructor === 'function') {
+			return p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
 		}
-		if (toolFunc === undefined) {
+		if (toolConstructor === undefined) {
 			return;
 		}
-		if (typeof toolFunc !== 'string') {
-			throw new Q.Error("Q.Tool.loadScript: toolFunc cannot be " + Q.typeOf(toolFunc));
+		if (typeof toolConstructor !== 'string') {
+			throw new Q.Error("Q.Tool.loadScript: toolConstructor cannot be " + Q.typeOf(toolConstructor));
 		}
-		if (Q.Tool.latestNames[toolFunc]) {
-			Q.Tool.latestName = Q.Tool.latestNames[toolFunc];
+		if (Q.Tool.latestNames[toolConstructor]) {
+			Q.Tool.latestName = Q.Tool.latestNames[toolConstructor];
 			_loadToolScript_loaded();
 		} else {
 			Q.Tool.latestName = null;
-			Q.addScript(toolFunc, _loadToolScript_loaded);
+			Q.addScript(toolConstructor, _loadToolScript_loaded);
 		}
 	});
 }
@@ -8035,10 +8035,6 @@ var _constructors = {};
  * corresponding JS tool object. Used internally.
  * This basically calls the tool's constructor, passing it
  * the correct prefix.
- * Note: to communicate with the constructor, you can use
- * attributes and hidden fields.
- * Note: don't forget to add the entry to Q.Tool.constructors
- * when you define your tool's constructor.
  * @private
  * @static
  * @method _activateTools
@@ -8057,7 +8053,7 @@ function _activateTools(toolElement, options, shared) {
 	var toolId = Q.Tool.calculateId(toolElement.id);
 	_waitingParentStack.push(toolId); // wait for init of child tools
 	_loadToolScript(toolElement,
-	function _activateTools_doConstruct(toolElement, toolFunc, toolName, uniqueToolId) {
+	function _activateTools_doConstruct(toolElement, toolConstructor, toolName, uniqueToolId) {
 		if (!_constructors[toolName]) {
 			_constructors[toolName] = function Q_Tool(element, options) {
 				// support re-entrancy of Q.activate
@@ -8069,7 +8065,7 @@ function _activateTools(toolElement, options, shared) {
 				this.activated = false;
 				this.initialized = false;
 				try {
-					this.options = Q.extend({}, Q.Tool.options.levels, toolFunc.options);
+					this.options = Q.extend({}, Q.Tool.options.levels, toolConstructor.options);
 					if (options) {
 						var o2 = {}, k;
 						for (k in options) {
@@ -8081,7 +8077,7 @@ function _activateTools(toolElement, options, shared) {
 					}
 					this.name = toolName;
 					Q.Tool.call(this, element, options);
-					this.state = Q.copy(this.options, toolFunc.stateKeys);
+					this.state = Q.copy(this.options, toolConstructor.stateKeys);
 					var prevTool = Q.Tool.beingActivated;
 					Q.Tool.beingActivated = this;
 					// Trigger events in some global event factories
@@ -8094,15 +8090,15 @@ function _activateTools(toolElement, options, shared) {
 					_constructToolHandlers["id:"+normalizedId] &&
 					_constructToolHandlers["id:"+normalizedId].handle.call(this, this.options);
 					var args = [this.options];
-					Q.each(toolFunc.require, function (i, n) {
+					Q.each(toolConstructor.require, function (i, n) {
 						var req = Q.Tool.from(element, n);
 						if (!req) {
-							throw new Q.Exception("Q.Tool.define: " + toolFunc.toolName
+							throw new Q.Exception("Q.Tool.define: " + toolConstructor.toolName
 							+ " requires " + n + " to have been activated on the same element.");
 						}
 						args.push(req);
 					});
-					toolFunc.apply(this, args);
+					toolConstructor.apply(this, args);
 					if (normalizedName === 'q_inplace') 
 					_activateToolHandlers[""] &&
 					_activateToolHandlers[""].handle.call(this, this.options);
@@ -8118,8 +8114,8 @@ function _activateTools(toolElement, options, shared) {
 				}
 				this.activated = true;
 			};
-			Q.mixin(toolFunc, Q.Tool);
-			Q.mixin(_constructors[toolName], toolFunc);
+			Q.mixin(toolConstructor, Q.Tool);
+			Q.mixin(_constructors[toolName], toolConstructor);
 		}
 		var key;
 		if (pendingParentEvent) {
@@ -8170,7 +8166,7 @@ function _initTools(toolElement) {
 		|| (ba && ba.id); // if we activated child tools while activating parent
 	
 	_loadToolScript(toolElement,
-	function _initTools_doInit(toolElement, toolFunc, toolName) {
+	function _initTools_doInit(toolElement, toolConstructor, toolName) {
 		currentEvent.add(_doInit, currentId);
 	}, null, parentId);
 	
@@ -9073,6 +9069,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				break;
 			case 'string': // calling the method of a plugin
 				args = Array.prototype.slice.call(arguments, 1);
+				callback = null;
 				break;
 			default:
 				args = [options]; // assume there is one option and we will pass it as the first parameter
