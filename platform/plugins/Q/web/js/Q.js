@@ -5572,8 +5572,9 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
  *  the next parameter would be useCapture.
  * @param {Function} eventHandler
  *  A function to call when the event fires
- * @param {boolean} useCapture
+ * @param {boolean|Object} useCapture
  *  Whether to use the capture instead of bubble phase. Ignored in IE8 and below.
+ *  You can also pass {passive: true} and other such things here.
  * @param {boolean} hookStopPropagation
  *  Whether to override Event.prototype.stopPropagation in order to capture the event when a descendant of the element tries to prevent
  */
@@ -5593,6 +5594,21 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		if (split.length > 1) {
 			eventName = split;
 		}
+	}
+	if (Q.isPlainObject(useCapture)) {
+		// Test via a getter in the options object to see if the passive property is accessed
+		var supportsPassive = false;
+		if (Object.defineProperty) {
+			try {
+				var opts = Object.defineProperty({}, 'passive', {
+					get: function() {
+						supportsPassive = true;
+					}
+				});
+				window.addEventListener("Qtest", null, opts);
+			} catch (e) {}
+		}
+		useCapture = supportsPassive ? useCapture : useCapture.capture;
 	}
 	if (typeof eventName === 'function') {
 		var params = {
@@ -10332,7 +10348,9 @@ Q.Pointer = {
 	preventRubberBand: function (options) {
 		if (Q.info.platform === 'ios') {
 			Q.extend(_touchScrollingHandler.options, options);
-			Q.addEventListener(window, 'touchmove', _touchScrollingHandler, false, true);
+			Q.addEventListener(window, 'touchmove', _touchScrollingHandler, {
+				passive: false
+			}, true);
 		}
 	},
 	/**
@@ -10340,7 +10358,9 @@ Q.Pointer = {
 	 * @method restoreRubberBand
 	 */
 	restoreRubberBand: function () {
-		Q.removeEventListener(window, 'touchmove', _touchScrollingHandler, false, true);
+		Q.removeEventListener(window, 'touchmove', _touchScrollingHandler, {
+			passive: false
+		}, true);
 	},
 	/**
 	 * Call this function to begin blurring active elements when touching outside them
