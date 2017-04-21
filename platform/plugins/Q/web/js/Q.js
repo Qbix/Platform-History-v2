@@ -3873,9 +3873,8 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 				$(this.element).plugin(n, 'remove', this);
 			}, 'Q');
 		});
-		ToolConstructor.prototype.$ = {};
 		Q.each(methods, function (method) {
-			ToolConstructor.prototype.$[method] = function _Q_Tool_jQuery_method() {
+			ToolConstructor.prototype['$'+method] = function _Q_Tool_jQuery_method() {
 				var args = Array.prototype.slice.call(arguments, 0);
 				args.unshift(n, method);
 				var $te = $(this.element);
@@ -9070,6 +9069,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				break;
 			case 'string': // calling the method of a plugin
 				args = Array.prototype.slice.call(arguments, 1);
+				callback = null;
 				break;
 			default:
 				args = [options]; // assume there is one option and we will pass it as the first parameter
