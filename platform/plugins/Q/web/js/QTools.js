@@ -2546,7 +2546,7 @@ Q.Contextual = {
 				}
 				var col = Q.Contextual.collection;
 				var trigger = null, contextual = null, triggerTarget = null;
-				var event = (Q.info.isTouchscreen ? e.originalEvent.touches[0] : e);
+				var event = (Q.info.isTouchscreen ? e.touches[0] : e);
 				var px = Q.Pointer.getX(e), py = Q.Pointer.getY(e), offset = null;
 				for (var i = 0; i < col.length; i++)
 				{
@@ -2601,7 +2601,9 @@ Q.Contextual = {
 					}
 				}
 			};
-			$(document.body).on(Q.Pointer.start, Q.Contextual.showHandler);
+			Q.addEventListener(document.body, Q.Pointer.start, Q.Contextual.showHandler, {
+				passive: false
+			});
 		}
 		
 		// if 'triggerOnHover' is on then we should create separate handler for latest added contextual
