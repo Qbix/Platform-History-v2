@@ -4283,8 +4283,9 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  *  The type of the tool, such as "Q/tabs"
  * @param {Object} [toolOptions]
  *  The options for the tool
- * @param {String|Function} [id]
- *  Optional id of the tool, such as "Q_tabs_2"
+ * @param {String|Function} [id=null]
+ *  Optional id of the tool, such as "Q_tabs_2", used if element doesn't have an "id" attribute.
+ *  If null, calculates an automatically unique id beginning with the tool's name
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
  * @return {HTMLElement}
@@ -4298,16 +4299,23 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 	if (typeof element === 'string') {
 		element = document.createElement(element);
 	}
-	if (typeof toolName === 'string') toolName = [toolName];
-	if (Q.isPlainObject(toolOptions)) toolOptions = [toolOptions];
+	if (typeof toolName === 'string') {
+		toolName = [toolName];
+	}
+	if (Q.isPlainObject(toolOptions)) {
+		toolOptions = [toolOptions];
+	}
 	for (var i=0, l=toolName.length; i<l; ++i) {
 		var tn = toolName[i];
-		var ntt = tn.replace(/\//g, '_');
+		var ntt = tn.split('/').join('_');
 		var ba = Q.Tool.beingActivated;
 		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
 		if (!element.getAttribute('id')) {
-			if (!id) {
+			if (typeof id === 'function') {
+				id = id();
+			}
+			if (id == undefined) {
 				var p2;
 				do {
 					p2 = p1 + ntt + '-' + (Q.Tool.nextDefaultId++) + '_';
@@ -4317,7 +4325,7 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 			} else {
 				id += '_tool';
 				if (p1) {
-					id = p1 + id + '_tool';
+					id = p1 + id;
 				}
 			}
 			element.setAttribute('id', id);
