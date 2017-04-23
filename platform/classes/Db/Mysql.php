@@ -1125,7 +1125,7 @@ class Db_Mysql implements iDb
 		}
 		
 		$rows = $this->rawQuery('SHOW TABLES')->fetchAll();
-			
+		
 		if (class_exists('Q_Config')) {
 			$ext = Q_Config::get('Q', 'extensions', 'class', 'php');
 		} else {
