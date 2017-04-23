@@ -14,4 +14,4 @@ class Users_Exception_DeviceNotification extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Users_Exception_DeviceNotification', 'Sending notification failed: $statusMessage');
+Q_Exception::add('Users_Exception_DeviceNotification', 'Sending notification failed: {{statusMessage}}');

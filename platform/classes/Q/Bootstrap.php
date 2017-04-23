@@ -310,10 +310,6 @@ class Q_Bootstrap
 		}
 		$infos = Q_Config::get('Q', 'pluginInfo', array());
 		$local = Q_Config::get('Q', 'pluginLocal', array());
-		$local['Q'] = array(
-			'version' => Q_VERSION,
-			'compatible' => Q_VERSION
-		);
 
 		foreach ($infos as $plugin => $info) {
 			if (!in_array($plugin, $plugins)) {
@@ -370,10 +366,6 @@ class Q_Bootstrap
 		$title = Q_Config::expect('Q','app');
 		$required = Q_Config::get('Q', 'appInfo', 'requires', array());
 		$local = Q_Config::get('Q', 'pluginLocal', array());
-		$local['Q'] = array(
-			'version' => Q_VERSION,
-			'compatible' => Q_VERSION
-		);
 
 		foreach($required as $required_plugin => $required_version) {
 			if(!isset($local[$required_plugin])) {
