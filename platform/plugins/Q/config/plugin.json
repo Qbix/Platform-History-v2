@@ -2,8 +2,8 @@
 	"Q": {
 		"pluginInfo": {
 			"Q": {
-				"version": 1.0,
-				"compatible": 0.8
+				"version": "1.0",
+				"compatible": "0.8"
 			}
 		}
 	}
