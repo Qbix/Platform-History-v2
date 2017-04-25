@@ -4,6 +4,31 @@
  * @module Q-tools
  */
 
+Q.text.Q.timestamp = {
+	lastNight: 'last night',
+	lastEvening: 'last eve',
+	yesterday: 'yesterday',
+	thisMorning: 'this morn',
+	today: 'today',
+	tonight: 'tonight',
+	tomorrowMorning: 'tom morn',
+	tomorrow: 'tomorrow',
+	minuteAgo: '{{m}} minute ago',
+	minutesAgo: '{{m}} minutes ago',
+	secondAgo: '{{s}} second ago',
+	secondsAgo: '{{s}} seconds ago',
+	fewSecondsAgo: 'seconds ago',
+	rightNow: 'right now',
+	inSecond: 'in {{s}} second',
+	inSeconds: 'in {{s}} seconds',
+	inMinute: 'in {{m}} second',
+	inMinutes: 'in {{m}} seconds',
+	inHour: 'in {{h}} hour',
+	inHours: 'in {{h}} hours',
+	inUnderMinute: 'in under 1 minute'
+	
+};
+
 /**
  * This tool makes a timestamp which is periodically updated.
  * Initially shows time offsets in '<some_time> ago' manner.
@@ -73,22 +98,23 @@ Q.Tool.define('Q/timestamp', function () {
 		var dayLength = 3600 * 24;
 		var day = strftime('%a', time);
 		var longday = strftime('%A', time);
+		var t = Q.text.Q.timestamp;
 		if (diffToday < 0 && diffToday > -dayLength / 8) {
-			day = longday = 'last night';
+			day = longday = t.lastNight;
 		} if (diffToday < 0 && diffToday > -dayLength / 4) {
-			day = longday = 'last eve';
+			day = longday = t.lastEvening;
 		} else if (diffToday < 0 && diffToday > -dayLength) {
-			day = longday = 'yesterday';
+			day = longday = t.yesterday;
 		} else if (diffToday < dayLength * 0.4) {
-			day = longday = 'this morn';
+			day = longday = t.thisMorning;
 		} else if (diffToday < dayLength * 3 / 4) {
-			day = longday = 'today';
+			day = longday = t.today;
 		} else if (diffToday < dayLength) {
-			day = longday = 'tonight';
+			day = longday = t.tonight;
 		} else if (diffToday < dayLength * 1.4) {
-			day = longday = 'tom morn'
+			day = longday = t.tomorrowMorning
 		} else if (diffToday < dayLength * 2) {
-			day = longday = 'tomorrow'
+			day = longday = t.tomorrow
 		}
 		if (state.capitalized) {
 			day = day.toCapitalized();
@@ -108,45 +134,45 @@ Q.Tool.define('Q/timestamp', function () {
 			result = strftime(format, time);
 		} else if (diff < -3600 * 2) {
 			if (format.indexOf('{day') < 0 || diffToday >= 0) {
-				result = Math.floor((diff) / 3600) + ' hours ago';
+				result = Math.floor((diff) / 3600) + t.hoursAgo;
 			} else {
 				result = strftime(format, time);
 			}
 		} else if (diff < -3600) {
 			result = '1 hour ago';
 		} else if (diff < -60 * 2) {
-			result = Math.floor(-diff / 60) + ' minutes ago';
+			result = t.minutesAgo.interpolate({
+				m: Math.floor(-diff / 60)
+			});
 			refreshAfterSeconds = 60 - (-diff%60);
 		} else if (diff < -60) {
-			result = '1 minute ago';
+			result = t.minuteAgo.interpolate({ m: 1 });
 			refreshAfterSeconds = (diff + 60 || 60);
 		} else if (diff < -10) {
-			s = Math.floor(-diff);
-			result = s + ' second' + (s == 1 ? '' : 's') + ' ago';
-			refreshAfterSeconds = (diff + 60 || 60);
+			result = t.secondsAgo.interpolate({ s: Math.floor(-diff) });
 			refreshAfterSeconds = (diff + 60 || 60);
 		} else if (diff < 0) {
-			result = 'seconds ago';
+			result = t.fewSecondsAgo;
 			refreshAfterSeconds = (diff + 60 || 60);
 		} else if (diff == 0) {
-			result = 'right now';
+			result = t.rightNow;
 			refreshAfterSeconds = 1;
 		} else if (diff <= 60) {
 			if (state.countdown) {
 				s = Math.floor(diff);
-				result = 'in ' + s + ' second' + (s == 1 ? '' : 's');
+				result = (s == 1 ? t.inSecond : t.inSeconds).interpolate({s : s});
 				refreshAfterSeconds = 1;
 			} else {
-				result = 'in under 1 minute';
+				result = t.inUnderMinute;
 			}
 		} else if (diff < 3600) {
 			m = Math.floor(diff / 60);
-			result = 'in ' + m + ' minute' + (m == 1 ? '' : 's');
+			result = (m == 1 ? t.inMinute : t.inMinutes).interpolate({m : m});
 			refreshAfterSeconds = (diff%60) || 60;
 		} else if (diff < dayLength) {
 			h = Math.floor(diff / 3600);
 			if (format.indexOf('{day') < 0) {
-				result = 'in ' + h + ' hour' + (h == 1 ? '' : 's');
+				result = (s == 1 ? t.inHour : t.inHours).interpolate({h : h});
 			} else {
 				result = strftime(format, time);
 			}
