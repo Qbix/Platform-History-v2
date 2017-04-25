@@ -13,7 +13,8 @@
  * @class Q timestamp
  * @constructor
  * @param {Object} [options] This is an object of parameters for this tool
- *    @param {Boolean} [options.capitalized=false] Whether to capitalize the displayed text
+ *    @param {Boolean} [options.capitalized=false] Whether to capitalize the displayed day name
+ *    @param {Boolean} [options.countdown=true] Pass false to avoid displaying a countdown in seconds
  *    @param {Number} [options.time=new Date().getTime()/1000] Unix timestamp (in seconds).
  *    @param {String} [options.format='{day-week} {date+week} {year+year} %l:%M %P'] formatting string which makes specific timestamp representation. Can contain placeholders supported by strftime() and also few special placeholders with specific functionality.
  *    Placeholders can include:
@@ -43,6 +44,7 @@ Q.Tool.define('Q/timestamp', function () {
 	});
 }, {
 	time: null,
+	countdown: true,
 	format: '{day-week} {date+week} {year+year} %l:%M %P',
 	beforeRefresh: new Q.Event()
 }, {
@@ -122,6 +124,7 @@ Q.Tool.define('Q/timestamp', function () {
 			s = Math.floor(-diff);
 			result = s + ' second' + (s == 1 ? '' : 's') + ' ago';
 			refreshAfterSeconds = (diff + 60 || 60);
+			refreshAfterSeconds = (diff + 60 || 60);
 		} else if (diff < 0) {
 			result = 'seconds ago';
 			refreshAfterSeconds = (diff + 60 || 60);
@@ -129,9 +132,13 @@ Q.Tool.define('Q/timestamp', function () {
 			result = 'right now';
 			refreshAfterSeconds = 1;
 		} else if (diff <= 60) {
-			s = Math.floor(diff);
-			result = 'in ' + s + ' second' + (s == 1 ? '' : 's');
-			refreshAfterSeconds = 1;
+			if (state.countdown) {
+				s = Math.floor(diff);
+				result = 'in ' + s + ' second' + (s == 1 ? '' : 's');
+				refreshAfterSeconds = 1;
+			} else {
+				result = 'in under 1 minute';
+			}
 		} else if (diff < 3600) {
 			m = Math.floor(diff / 60);
 			result = 'in ' + m + ' minute' + (m == 1 ? '' : 's');
