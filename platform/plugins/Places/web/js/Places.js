@@ -94,7 +94,6 @@ var Places = Q.Places = Q.plugins.Places = {
 			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
 		}
 	}
-
 };
 
 /**
@@ -210,7 +209,8 @@ Q.Tool.define({
 	"Places/address": "plugins/Places/js/tools/address.js",
 	"Places/globe": "plugins/Places/js/tools/globe.js",
 	"Places/countries": "plugins/Places/js/tools/countries.js",
-	"Places/user/location": "plugins/Places/js/tools/user/location.js"
+	"Places/user/location": "plugins/Places/js/tools/user/location.js",
+	"Places/location": "plugins/Places/js/tools/location.js"
 });
 
 })(Q, jQuery, window);
