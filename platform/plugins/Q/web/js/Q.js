@@ -10949,7 +10949,7 @@ Q.prompt = function(message, callback, options) {
 		),
 		'className': 'Q_prompt',
 		'onActivate': function(dialog) {
-			var field = dialog.find('input');
+			var field = $(dialog).find('input');
 			var fieldWidth = field.parent().width()
 				- field.next().outerWidth(true) - 5;
 			field.css({ 
