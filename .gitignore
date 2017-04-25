@@ -18,9 +18,11 @@ platform/plugins/Users/files/Users/icons/*
 !platform/plugins/Users/files/Users/icons/default
 !platform/plugins/Users/files/Users/icons/future
 platform/plugins/Streams/files/Streams/icons/*
+platform/plugins/Streams/web/img/icons/*
 !platform/plugins/Streams/files/Streams/icons/default
 !platform/plugins/Streams/files/Streams/icons/labels
 platform/plugins/Awards/classes/Composer/vendor
+platform/plugins/Communities/
 platform/node_modules
 MyApp/local/*
 MyApp/files/MyApp/uploads/*/*
@@ -43,4 +45,5 @@ node_modules/
 
 # Custom plugins
 platform/plugins/Communities
+platform/plugins/Streams/web/img/icons.lnk
 platform/plugins/Travel
