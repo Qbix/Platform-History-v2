@@ -1,0 +1,46 @@
+.Places_location_tool.Q_selected,
+.Places_location_tool .Q_selected {
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+.Places_location_tool div[data-location] label {
+	cursor: pointer;
+}
+.Places_location_tool div[data-location],
+.Places_location_tool .Places_location_preview_tool {
+	padding: 5px 10px;
+	cursor: pointer;
+	max-width: 210px;
+}
+.Places_location_tool .Places_address_tool input {
+	padding: 2px;
+}
+.Places_location_tool .Places_location_preview_tool .Streams_preview_icon,
+.Places_location_tool div[data-location=other].Q_selected > label,
+.Places_location_tool div[data-location=other] > .Places_address_tool {
+	display: none;
+}
+
+.Places_location_tool div[data-location=other].Q_selected > .Places_address_tool {
+	display: block;
+}
+.Places_location_userLocationsNew .Places_location_new {
+	margin: 10px;
+}
+.Places_location_userLocationsNew .Places_location_new > div:not(:first-child) {
+	margin-top: 10px;
+}
+.Places_location_userLocationsNew .Places_location_new .Places_location_new_title {
+	text-align: center;
+}
+.Places_location_userLocationsNew .Places_location_new input[name=title] {
+	font-size: 16px;
+	max-width: 200px;
+	overflow: hidden;
+	background: white;
+	padding: 2px;
+	box-sizing: border-box;
+}
+.Places_location_userLocationsNew .Places_location_new .Places_location_new_actions {
+	text-align: center;
+}

@@ -74,11 +74,7 @@ class Places_Location
 		$key = Q_Config::expect('Places', 'google', 'keys', 'server');
 		$query = http_build_query(array('key' => $key, 'placeid' => $placeId));
 		$url = "https://maps.googleapis.com/maps/api/place/details/json?$query";
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$json = curl_exec($ch);
-		curl_close($ch);
+		$json = file_get_contents($url);
 		$response = json_decode($json, true);
 		if (empty($response['result'])) {
 			throw new Q_Exception("Places_Location::stream: Couldn't obtain place information for $placeId");
