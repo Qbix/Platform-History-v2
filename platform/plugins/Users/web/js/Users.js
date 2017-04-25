@@ -2381,4 +2381,12 @@ Users.Socket = {
 
 };
 
+Q.Dialogs.push.options.onActivate.set(function (dialog) {
+	var $dialog = $(dialog);
+	Users.hint("Users/dialogCloseHint", $dialog.find('.Q_close')[0], {
+		show: { delay: 5000 },
+		dontStopBeforeShown: true
+	});
+}, 'Users.dialogCloseHint');
+
 })(Q, jQuery);
