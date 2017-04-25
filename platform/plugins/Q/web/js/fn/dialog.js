@@ -10,6 +10,7 @@
  * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
  * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
+ * @param {Boolean} [options.closeOnMask=false] If true, closes the dialog if the user clicks anywhere on the mask behind the dialog
  * @param {Boolean} [options.fadeInOut=true] Indicates whether to use fadeIn() / fadeOut() animations when loading dialog.
  * Note: if set to false, 'onLoad' callback will be called synchronously with dialog load,
  * otherwise it will be called on fadeIn() animation completion.
@@ -28,6 +29,8 @@ Q.Tool.jQuery('Q/overlay',
 
 function _Q_overlay(o) {
 	function calculatePosition($this) {
+		var data = $this.data('Q/overlay');
+		o = (data && data.options) || o;
 		if (o.noCalculatePosition) {
 			return;
 		}
@@ -60,18 +63,6 @@ function _Q_overlay(o) {
 			$this.css({ 'top': top + 'px' });
 		} else {
 			$this.css({ 'top': st + o.top + 'px' });
-		}
-		if (!o.fullscreen) {
-			var topMargin = o.topMargin;
-			var parentHeight = (!o.alignByParent || parent[0] == document.body)
-				? Q.Pointer.windowHeight()
-				: parent.height();
-			if (typeof(topMargin) == 'string') // percentage
-				topMargin = Math.round(parseInt(o.topMargin) / 100 * parentHeight);
-			var bottomMargin = o.bottomMargin;
-			if (typeof(bottomMargin) == 'string') // percentage
-				bottomMargin = Math.round(parseInt(o.bottomMargin) / 100 * parentHeight);
-			$this.find('.Q_dialog_slot').css('max-height', Q.Pointer.windowHeight() - topMargin - bottomMargin - $this.find('.Q_title_slot').height() + 'px');
 		}
 	}
 
@@ -148,23 +139,32 @@ function _Q_overlay(o) {
 					}, o.fadeTime);
 					if (data.options.mask)
 					{
-						Q.Masks.show('Q.screen.mask', { 
+						var mask = Q.Masks.show('Q.screen.mask', { 
 							fadeTime: o.fadeTime,
 							className: 'Q_dialog_mask' + mcn,
 							zIndex: topZ - 1
 						});
+						if (data.options.closeOnMask) {
+							$(mask.element).on(Q.Pointer.click, function () {
+								$this.data('Q/overlay').close();
+							});
+						}
 					}
 				}
 			}
 			else
 			{
 				$this.show();
-				if (data.options.mask)
-				{
-					Q.Masks.show('Q.screen.mask', {
+				if (data.options.mask) {
+					var mask = Q.Masks.show('Q.screen.mask', {
 						className: 'Q_screen_mask' + mcn,
 						zIndex: $this.css('z-index') - 1
 					});
+					if (data.options.closeOnMask) {
+						$(mask.element).on(Q.Pointer.click, function () {
+							$this.data('Q/overlay').close();
+						});
+					}
 				}
 				if (!data.options.noClose && data.options.closeOnEsc) {
 					$(document).on('keydown', closeThisOverlayOnEsc);
@@ -232,19 +232,20 @@ function _Q_overlay(o) {
 
 
 {
-	'left': 'center',
-	'top': 'middle',
-	'alignParent': null,
-	'mask': false,
-	'noClose': false,
-	'closeOnEsc': true,
-	'fadeInOut': true,
-	'fadeTime': 300,
-	'apply': false,
-	'beforeLoad': new Q.Event(),
-	'onLoad': new Q.Event(),
-	'beforeClose': new Q.Event(),
-	'onClose': new Q.Event()
+	left: 'center',
+	top: 'middle',
+	alignParent: null,
+	mask: false,
+	noClose: false,
+	closeOnEsc: true,
+	closeOnMask: false,
+	fadeInOut: true,
+	fadeTime: 300,
+	apply: false,
+	beforeLoad: new Q.Event(),
+	onLoad: new Q.Event(),
+	beforeClose: new Q.Event(),
+	onClose: new Q.Event()
 },
 
 {
@@ -284,6 +285,7 @@ function _Q_overlay(o) {
  *   If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  *   @param {Boolean} [options.closeOnEsc=true]
  *   Indicates whether to close dialog on 'Esc' key press. Has sense only if 'noClose' is false.
+ *   @param {Boolean} [options.closeOnMask=false] If true, closes the dialog if the user clicks anywhere on the mask behind the dialog
  *   @param {Boolean} [options.removeOnClose=false] If true, dialog DOM element will be removed from the document on close.
  *   @param {Boolean} [options.noCalculatePosition=false] Set to true to prevent calculating position automatically
  *   @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
@@ -322,6 +324,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 		$this.plugin('Q/overlay', {
 			top: topPos,
 			mask: o.mask,
+			closeOnMask: o.closeOnMask,
+			closeOnEsc: o.closeOnEsc,
 			noClose: o.noClose,
 			beforeLoad: {"Q/dialog": function () {
 				$this.css('opacity', 0).show();
@@ -472,8 +476,11 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	waitForBackgroundImage: !Q.info.isTouchscreen,
 	noClose: false,
 	closeOnEsc: true,
+	closeOnMask: false,
 	removeOnClose: false,
 	loadUrl: {},
+	topMargin: '10%',
+	bottomMargin: '10%',
 	beforeLoad: new Q.Event(),
 	onLoad: new Q.Event(),
 	onActivate: new Q.Event(),
@@ -553,21 +560,30 @@ function _handlePosAndScroll(o)
 		}
 		if ($this.css('display') == 'block')
 		{
-			topMargin = o.topMargin;
+			topMargin = o.topMargin || 0;
 			parentHeight = (!o.alignByParent || parent[0] == document.body)
-				? Q.Pointer.windowWidth()
+				? Q.Pointer.windowHeight()
 				: parent.height();
 			if (typeof(topMargin) == 'string') // percentage
-				topMargin = Math.round(parseInt(o.topMargin) / 100 * parentHeight);
-			bottomMargin = o.bottomMargin;
+				topMargin = Math.round(parseInt(topMargin) / 100 * parentHeight);
+			bottomMargin = o.bottomMargin || 0;
 			if (typeof(bottomMargin) == 'string') // percentage
-				bottomMargin = Math.round(parseInt(o.bottomMargin) / 100 * parentHeight);
+				bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
 		
 			var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			var outerWidth = $this.outerWidth();
 			if (!o.noCalculatePosition
 			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
 				$this.data('Q/overlay').calculatePosition();
+			}
+			
+			if (!o.fullscreen && o.topMargin !== undefined) {
+				var maxHeight = parentHeight - topMargin - bottomMargin;
+				var $ts = $this.find('.Q_title_slot');
+				if ($ts.is(":visible")) {
+					maxHeight -= $ts.height();
+				}
+				$this.find('.Q_dialog_slot').css('max-height', maxHeight + 'px');
 			}
 		
 			// also considering orientation
