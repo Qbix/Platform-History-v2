@@ -11182,6 +11182,7 @@ Q.Masks = {
 	 * @method show
 	 * @param {String} key The key of the mask to show.
 	 * @param {Object} [options={}] Used to provide any mask options to Q.Masks.mask
+	 * @return {Object} the mask info
 	 */
 	show: function(key, options)
 	{
@@ -11210,6 +11211,7 @@ Q.Masks = {
 				Q.Masks.hide(key);
 			}, mask.duration);
 		}
+		return mask;
 	},
 	/**
 	 * Hides the mask by given key. If mask with given key doesn't exist, fails silently.
