@@ -10684,7 +10684,12 @@ Q.Dialogs = {
 		for (var i = 0; i < this.dialogs.length; i++) {
 			if (!this.dialogs[i].isFullscreen) maskDefault = false;
 		}
-		var o = Q.extend({mask: maskDefault}, Q.Dialogs.push.options, options);
+		var o = Q.extend(
+			{mask: maskDefault}, 
+			Q.Dialogs.options, 
+			Q.Dialogs.push.options, 
+			options
+		);
 		if (o.fullscreen) o.mask = false;
 		var $dialog = $(o.dialog);
 		if (o.template) {

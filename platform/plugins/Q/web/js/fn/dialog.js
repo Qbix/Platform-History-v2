@@ -62,15 +62,15 @@ function _Q_overlay(o) {
 			$this.css({ 'top': st + o.top + 'px' });
 		}
 		if (!o.fullscreen) {
-			var topMargin = Q.Dialogs.options.topMargin;
+			var topMargin = o.topMargin;
 			var parentHeight = (!o.alignByParent || parent[0] == document.body)
 				? Q.Pointer.windowHeight()
 				: parent.height();
 			if (typeof(topMargin) == 'string') // percentage
-				topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
-			var bottomMargin = Q.Dialogs.options.bottomMargin;
+				topMargin = Math.round(parseInt(o.topMargin) / 100 * parentHeight);
+			var bottomMargin = o.bottomMargin;
 			if (typeof(bottomMargin) == 'string') // percentage
-				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
+				bottomMargin = Math.round(parseInt(o.bottomMargin) / 100 * parentHeight);
 			$this.find('.Q_dialog_slot').css('max-height', Q.Pointer.windowHeight() - topMargin - bottomMargin - $this.find('.Q_title_slot').height() + 'px');
 		}
 	}
@@ -308,7 +308,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 	}
 	
 	if (!o.fullscreen) {
-		var topPos = Q.Dialogs.options.topMargin;
+		var topPos = o.topMargin;
 		if (Q.info.isMobile) {
 			if (topPos.indexOf('%') != -1) {
 				topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
@@ -553,15 +553,15 @@ function _handlePosAndScroll(o)
 		}
 		if ($this.css('display') == 'block')
 		{
-			topMargin = Q.Dialogs.options.topMargin;
+			topMargin = o.topMargin;
 			parentHeight = (!o.alignByParent || parent[0] == document.body)
 				? Q.Pointer.windowWidth()
 				: parent.height();
 			if (typeof(topMargin) == 'string') // percentage
-				topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
-			bottomMargin = Q.Dialogs.options.bottomMargin;
+				topMargin = Math.round(parseInt(o.topMargin) / 100 * parentHeight);
+			bottomMargin = o.bottomMargin;
 			if (typeof(bottomMargin) == 'string') // percentage
-				bottomMargin = Math.round(parseInt(Q.Dialogs.options.bottomMargin) / 100 * parentHeight);
+				bottomMargin = Math.round(parseInt(o.bottomMargin) / 100 * parentHeight);
 		
 			var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			var outerWidth = $this.outerWidth();
@@ -579,9 +579,9 @@ function _handlePosAndScroll(o)
 				{
 					wasVertical = Q.info.isVertical;
 					parentHeight = (parent[0] == document.body) ? rect.height : parent.height();
-					topMargin = Q.Dialogs.options.topMargin;
+					topMargin = o.topMargin;
 					if (typeof(topMargin) == 'string') // percentage
-						topMargin = Math.round(parseInt(Q.Dialogs.options.topMargin) / 100 * parentHeight);
+						topMargin = Math.round(parseInt(o.topMargin) / 100 * parentHeight);
 					var curTop = parseInt($this.css('top'));
 					if (curTop != 0)
 						$this.css({ 'top': Q.Pointer.scrollTop() + topMargin + 'px' });
