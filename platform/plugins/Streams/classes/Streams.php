@@ -327,7 +327,7 @@ abstract class Streams extends Base_Streams
 	 *   Additionally call ->set('participant', $p) on the stream objects,
 	 *   with the participant object corresponding to $asUserId, if any.
 	 *  @param {array} [$options.withTotals]
-	 *   Pass an array of arrays ($streamName => $messageTypes) here
+	 *   Pass an array of ($streamName => $messageTypes) here
 	 *   to additionally call ->set('totals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
@@ -1285,7 +1285,7 @@ abstract class Streams extends Base_Streams
 			return $_REQUEST['messageType'];
 		} if (isset($_REQUEST['type'])) {
 			return $_REQUEST['type'];
-		} else if (isset($uri->type)) {
+		}   else if (isset($uri->type)) {
 			return $uri->type;
 		}
 		if ($throwIfMissing) {

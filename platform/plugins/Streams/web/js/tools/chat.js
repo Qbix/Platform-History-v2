@@ -319,7 +319,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		var params = {
 			max  : state.earliest ? state.earliest - 1 : -1,
 			limit: state.messagesToLoad,
-			type: "Streams/chat/message"
+			type: "Streams/chat/message",
+			withTotals: ["Streams/chat/message"]
 		};
 
 		Q.Streams.Message.get(state.publisherId, state.streamName, params,
