@@ -4897,7 +4897,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	var value = {
 		cbpos: cbpos,
 		subject: subject,
-		params: (params instanceof Array) ? params : Array.prototype.slice.call(params),
+		params: (params instanceof Array) ? params : Array.prototype.slice.call(params||[]),
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest()),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};
