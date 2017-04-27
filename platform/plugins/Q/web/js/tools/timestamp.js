@@ -21,12 +21,11 @@ Q.text.Q.timestamp = {
 	rightNow: 'right now',
 	inSecond: 'in {{s}} second',
 	inSeconds: 'in {{s}} seconds',
-	inMinute: 'in {{m}} second',
-	inMinutes: 'in {{m}} seconds',
+	inMinute: 'in {{m}} minute',
+	inMinutes: 'in {{m}} minutes',
 	inHour: 'in {{h}} hour',
 	inHours: 'in {{h}} hours',
 	inUnderMinute: 'in under 1 minute'
-	
 };
 
 /**
@@ -38,11 +37,12 @@ Q.text.Q.timestamp = {
  * @class Q timestamp
  * @constructor
  * @param {Object} [options] This is an object of parameters for this tool
- *    @param {Boolean} [options.capitalized=false] Whether to capitalize the displayed day name
- *    @param {Boolean} [options.countdown=true] Pass false to avoid displaying a countdown in seconds
  *    @param {Number} [options.time=new Date().getTime()/1000] Unix timestamp (in seconds).
  *    @param {String} [options.format='{day-week} {date+week} {year+year} %l:%M %P'] formatting string which makes specific timestamp representation. Can contain placeholders supported by strftime() and also few special placeholders with specific functionality.
  *    Placeholders can include:
+ *    @param {Boolean} [options.relative=true] Whether to show times relative to the current time when they are close to it
+ *    @param {Boolean} [options.countdown=true] Pass false to avoid displaying a countdown of seconds in the relative times
+ *    @param {Boolean} [options.capitalized=false] Whether to capitalize the displayed day name
  *    * time: the time of the day, based on the locale
  *    * time-day: same as time, but doesn't show on a different day
  *    * time-week: same as time, but doesn't after 7 days in the future or before 1 day in the past
@@ -69,6 +69,7 @@ Q.Tool.define('Q/timestamp', function () {
 	});
 }, {
 	time: null,
+	relative: true,
 	countdown: true,
 	format: '{day-week} {date+week} {year+year} %l:%M %P',
 	beforeRefresh: new Q.Event()
@@ -99,22 +100,24 @@ Q.Tool.define('Q/timestamp', function () {
 		var day = strftime('%a', time);
 		var longday = strftime('%A', time);
 		var t = Q.text.Q.timestamp;
-		if (diffToday < 0 && diffToday > -dayLength / 8) {
-			day = longday = t.lastNight;
-		} if (diffToday < 0 && diffToday > -dayLength / 4) {
-			day = longday = t.lastEvening;
-		} else if (diffToday < 0 && diffToday > -dayLength) {
-			day = longday = t.yesterday;
-		} else if (diffToday < dayLength * 0.4) {
-			day = longday = t.thisMorning;
-		} else if (diffToday < dayLength * 3 / 4) {
-			day = longday = t.today;
-		} else if (diffToday < dayLength) {
-			day = longday = t.tonight;
-		} else if (diffToday < dayLength * 1.4) {
-			day = longday = t.tomorrowMorning
-		} else if (diffToday < dayLength * 2) {
-			day = longday = t.tomorrow
+		if (state.relative) {
+			if (diffToday < 0 && diffToday > -dayLength / 8) {
+				day = longday = t.lastNight;
+			} if (diffToday < 0 && diffToday > -dayLength / 4) {
+				day = longday = t.lastEvening;
+			} else if (diffToday < 0 && diffToday > -dayLength) {
+				day = longday = t.yesterday;
+			} else if (diffToday < dayLength * 0.4) {
+				day = longday = t.thisMorning;
+			} else if (diffToday < dayLength * 3 / 4) {
+				day = longday = t.today;
+			} else if (diffToday < dayLength) {
+				day = longday = t.tonight;
+			} else if (diffToday < dayLength * 1.4) {
+				day = longday = t.tomorrowMorning
+			} else if (diffToday < dayLength * 2) {
+				day = longday = t.tomorrow
+			}
 		}
 		if (state.capitalized) {
 			day = day.toCapitalized();
