@@ -13,6 +13,8 @@ Q.text.Q.timestamp = {
 	tonight: 'tonight',
 	tomorrowMorning: 'tom morn',
 	tomorrow: 'tomorrow',
+	hoursAgo: '{{h}} hours ago',
+	hourAgo: '{{h}} hour ago',
 	minuteAgo: '{{m}} minute ago',
 	minutesAgo: '{{m}} minutes ago',
 	secondAgo: '{{s}} second ago',
@@ -133,11 +135,13 @@ Q.Tool.define('Q/timestamp', function () {
 		var result = '';
 		var refreshAfterSeconds = 3600;
 		var s, m, h;
-		if (diff < -dayLength) {
+		if (diff < -dayLength || !state.relative) {
 			result = strftime(format, time);
 		} else if (diff < -3600 * 2) {
 			if (format.indexOf('{day') < 0 || diffToday >= 0) {
-				result = Math.floor((diff) / 3600) + t.hoursAgo;
+				result = t.hoursAgo.interpolate({
+					h: Math.floor(-diff / 3600)
+				});
 			} else {
 				result = strftime(format, time);
 			}

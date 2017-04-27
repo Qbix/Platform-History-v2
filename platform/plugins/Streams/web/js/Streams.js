@@ -926,7 +926,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
 		
-		updateTotalsCache(stream);
+		updateTotalsCache(fields.publisherId, fields.name, stream.totals);
 		
 		if (extra && extra.messages) {
 			Q.each(extra.messages, function (ordinal, message) {
@@ -2837,7 +2837,9 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 		Q.mixin(messageFunc, Streams.Message);
 		Q.mixin(messageFunc.messageConstructor, messageFunc);
 	}
-	return new messageFunc.messageConstructor(fields);
+	var msg = new messageFunc.messageConstructor(fields);
+	_updateMessageCache(msg);
+	return msg;
 };
 
 Message.latest = {};
@@ -2899,34 +2901,15 @@ Mp.getInstruction = function _Message_prototype_getInstruction (instructionName)
  * Mark the message as seen, updating the totals
  * 
  * @method seen
- * @param {Integer} [total] Optionally set the total number of messages seen, 
- *   otherwise it's taken from the cache, if any has been set (or nothing happens).
- * @return {Object}
+ * @param {Number|Boolean} [total] Pass the total messages seen of this type.
+ *  Or, pass true to set the latest total if any was cached, otherwise do nothing.
+ * @return {Number|false}
  */
 Mp.seen = function _Message_seen (total) {
-	Total.seen(this.publisherId, this.streamName, this.messageType, total);
-};
-
-/**
- * Mark the message as seen, updating the totals
- * 
- * @method seen
- * @static
- * @param {String} publisherId
- * @param {String} streamName
- * @param {String} messageType
- * @param {Integer} [total] Optionally set the total number of messages seen, 
- *   otherwise it's taken from the cache, if any has been set (or nothing happens).
- * @return {Object}
- */
-Message.seen = function _Message_seen (publisherId, streamName, messageType, total) {
 	if (total == null) {
-		total = Total.latest(publisherId, streamName, messageType);
+		total = true;
 	}
-	if (!Q.isInteger(total)) {
-		return;
-	}
-	Total.seen[messageType] = total;
+	return Total.seen(this.publisherId, this.streamName, this.messageType, total);
 };
 
 /**
@@ -2938,9 +2921,10 @@ Message.seen = function _Message_seen (publisherId, streamName, messageType, tot
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Number|Object} ordinal Can be the ordinal, or an object containing one or more of:
- *   "min": The minimum ordinal in the range.
- *   "max": The maximum ordinal in the range. If omitted, gets the latest messages.
- *   "limit": Change the max number of messages to retrieve. If only max and limit are specified, messages are sorted by decreasing ordinal.
+ * @param {Array} [ordinal.withTotals] Highly encouraged if ordinal is an object. All the possible message types to automatically update totals for.
+ * @param {Number} [ordinal.min] The minimum ordinal in the range. If omitted, uses limit.
+ * @param {Number} [ordinal.max] The maximum ordinal in the range. If omitted, gets the latest messages.
+ * @param {Number} [ordinal.limit] Change the max number of messages to retrieve. If only max and limit are specified, messages are sorted by decreasing ordinal.
  * @param {Function} callback This receives two parameters. The first is the error.
  *   If ordinal was a Number, then the second parameter is the Streams.Message, as well as the "this" object.
  *   If ordinal was an Object, then the second parameter is a hash of { ordinal: Streams.Message } pairs
@@ -2948,10 +2932,16 @@ Message.seen = function _Message_seen (publisherId, streamName, messageType, tot
 Message.get = function _Message_get (publisherId, streamName, ordinal, callback) {
 	var slotName, criteria = {};
 	if (Q.typeOf(ordinal) === 'object') {
-		slotName = ['messages'];
-		criteria.min = parseInt(ordinal.min);
+		slotName = ordinal.withTotals ? ['messages', 'totals'] : ['messages'];
+		if (ordinal.min) {
+			criteria.min = parseInt(ordinal.min);
+		}
 		criteria.max = parseInt(ordinal.max);
 		criteria.limit = parseInt(ordinal.limit);
+		if (ordinal.withTotals) {
+			criteria.withTotals = {};
+			criteria.withTotals[streamName] = ordinal.withTotals;
+		}
 		if ('type' in ordinal) criteria.type = ordinal.type;
 		if ('ascending' in ordinal) criteria.ascending = ordinal.ascending;
 	} else {
@@ -2975,6 +2965,9 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 		var messages = {};
 		if ('messages' in data) {
 			messages = data.messages;
+			if (data.totals) {
+				updateTotalsCache(publisherId, streamName, data.totals);
+			}
 		} else if ('message' in data) {
 			messages[ordinal] = data.message;
 		}
@@ -3201,8 +3194,8 @@ Message.shouldRefreshStream = function (type, should) {
  */
 var Total = Streams.Total = {
 	/**
-	 * Get one or more messages, which may result in batch requests to the server.
-	 * May call Message.get.onError if an error occurs.
+	 * Get one or more totals, which may result in batch requests to the server.
+	 * May call Total.get.onError if an error occurs.
 	 * 
 	 * @static
 	 * @method get
@@ -3229,7 +3222,7 @@ var Total = Streams.Total = {
 			}
 			var totals = Q.isArrayLike(messageType)
 				? Q.copy(data.totals)
-				: Q.first(data.totals);
+				: data.totals[messageType];
 			callback && callback.call(Total, err, totals || null);
 		});
 	},
@@ -3254,25 +3247,60 @@ var Total = Streams.Total = {
 	 * Returns the latest number of unseen messages posted to the stream
 	 * @method unseen
 	 * @static
-	 * @param {String} publisherId
-	 * @param {String} streamName
-	 * @param {String} messageType
+	 * @param {String} publisherId id of the user publishing the straem
+	 * @param {String} streamName the name of the stream
+	 * @param {String} messageType the type of the messages
 	 * @return {Integer|null}
 	 *   Returns the number of unseen messages if there is a latest total, otherwise null.
 	 */
 	unseen: function (publisherId, streamName, messageType) {
 		var latest = Total.latest(publisherId, streamName, messageType);
-		var seen = (messageType in Total.seen) && Total.seen[messageType];
-		return latest && (latest - (seen || 0));
+		var seen = Total.seen(publisherId, streamName, messageType);
+		return latest && (latest - seen);
 	},
 	/**
-	 * Hash of {messageType: total} pairs to show the total number of messages
-	 * posted to the stream the last time Message.seen() was called
-	 * @property {Object} seen
+	 * Use this function to get or store the total number of messages
+	 * of a particular type seen on a particular stream.
+	 * @param {String} publisherId id of the user publishing the stream
+	 * @param {String} streamName the name of the stream
+	 * @param {String} messageType the type of messages
+	 * @param {Number|Boolean} [total] Pass the total messages seen of this type.
+	 *  Or, pass true to set the latest total if any was cached, otherwise do nothing.
+	 * @param {Function} [callback] This is only in the case where total is passed
+	 * @return {Number|false} Returns the total number of messages seen of this type.
+	 *  If total === true, however, returns false if nothing was actually done.
 	 */
-	seen: {}
+	seen: function _Total_seen (publisherId, streamName, messageType, total, callback) {
+		var tsc = Total.seen.cache;
+		if (total === true) {
+			var cached = Total.get.cache.get([publisherId, streamName, messageType]);
+			if (!cached) {
+				return false;
+			}
+			total = cached.params[1];
+		}
+		if (total !== undefined) {
+			Q.setObject([publisherId, streamName, messageType], total, _seen);
+			tsc.set([publisherId, streamName, messageType], 0, total);
+			// TODO: use websockets to do Streams.seen, then call callback
+			Q.handle(callback, Total, [null, total]);
+			return total;
+		}
+		var t = Q.getObject([publisherId, streamName, messageType], _seen);
+		if (t === undefined) {
+			var c = tsc.get([publisherId, streamName, messageType]);
+			if (!c) {
+				return 0;
+			}
+			t = c.subject;
+			Q.setObject([publisherId, streamName, messageType], t, _seen);
+		}
+		return t;
+	}
 };
+var _seen = {};
 Total.get.onError = new Q.Event();
+Total.seen.cache = Q.Cache.local("Streams.Total.seen", 1000);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -3800,23 +3828,23 @@ function updateAvatarCache(stream) {
 	}
 }
 
-function updateTotalsCache(stream) {
-	if (!stream.totals) {
+function updateTotalsCache(publisherId, streamName, totals) {
+	if (!totals) {
 		return;
 	}
-	for (var type in stream.totals) {
-		Total.get.cache.each([stream.fields.publisherId, stream.fields.name, type],
+	for (var type in totals) {
+		Total.get.cache.each([publisherId, streamName, type],
 		function (k, v) {
 			var args = JSON.parse(k);
 			var result = v.params[1];
 			if (Q.isInteger(result)) {
-				v.params[1] = stream.totals[type];
+				v.params[1] = totals[type];
 			} else if (Q.isPlainObject[result] && (type in result)) {
-				result[type] = stream.totals[type];
+				result[type] = totals[type];
 			}
 		});
-		Total.get.cache.set([stream.fields.publisherId, stream.fields.name, type],
-			0, Total, [null, stream.totals[type]]
+		Total.get.cache.set([publisherId, streamName, type],
+			0, Total, [null, totals[type]]
 		);
 	}
 }
@@ -3932,7 +3960,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// Now time to replace the fields in the stream with the incoming fields
 	Q.extend(stream.fields, fields);
 	prepareStream(stream);
-	updateTotalsCache(stream);
+	updateTotalsCache(publisherId, streamName, stream.totals);
 	updateStreamCache(stream);
 	updateAvatarCache(stream);
 }
@@ -4043,9 +4071,6 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.Message.get", 1000), 
 		throttle: 'Streams.Message.get',
 		prepare: function (subject, params, callback, args) {
-			if (params[0]) {
-				return callback(this, params);
-			}
 			if (params[0]) {
 				return callback(this, params);
 			}
@@ -4348,9 +4373,9 @@ Q.onInit.add(function _Streams_onInit() {
 				// update the stream
 				stream.fields.messageCount = msg.ordinal;
 				// update the Total.get.cache first
-				_updateTotalsCache();
+				_updateTotalsCache(msg);
 				// now update the message cache
-				_updateMessageCache();
+				_updateMessageCache(msg);
 				
 				var latest = Total.latest(msg.publisherId, msg.streamName, msg.type);
 				var params = [stream, message, messages, latest];
@@ -4408,10 +4433,10 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				switch (msg.type) {
 				case 'Streams/join':
-					_updateParticipantCache('participating', message.getInstruction('prevState'), usingCached);
+					_updateParticipantCache(msg, 'participating', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/leave':
-					_updateParticipantCache('left', message.getInstruction('prevState'), usingCached);
+					_updateParticipantCache(msg, 'left', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/changed':
 					Stream.update(stream, fields.changes, null);
@@ -4420,27 +4445,27 @@ Q.onInit.add(function _Streams_onInit() {
 					Stream.update(stream, fields, null);
 					break;
 				case 'Streams/relatedFrom':
-					_updateRelatedCache(fields);
+					_updateRelatedCache(msg, fields);
 					_relationHandlers(_streamRelatedFromHandlers, msg, stream, fields);
 					break;
 				case 'Streams/relatedTo':
-					_updateRelatedCache(fields);
+					_updateRelatedCache(msg, fields);
 					_relationHandlers(_streamRelatedToHandlers, msg, stream, fields);
 					break;
 				case 'Streams/unrelatedFrom':
-					_updateRelatedCache(fields);
+					_updateRelatedCache(msg, fields);
 					_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, fields);
 					break;
 				case 'Streams/unrelatedTo':
-					_updateRelatedCache(fields);
+					_updateRelatedCache(msg, fields);
 					_relationHandlers(_streamUnrelatedToHandlers, msg, stream, fields);
 					break;
 				case 'Streams/updatedRelateFrom':
-					_updateRelatedCache(fields);
+					_updateRelatedCache(msg, fields);
 					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, fields);
 					break;
 				case 'Streams/updatedRelateTo':
-					_updateRelatedCache(fields);
+					_updateRelatedCache(msg, fields);
 					_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, fields);
 					break;
 				case 'Streams/closed':
@@ -4479,111 +4504,9 @@ Q.onInit.add(function _Streams_onInit() {
 						});
 					});
 				}
-
-				function _updateMessageCache() {
-					Streams.get.cache.each([msg.publisherId, msg.streamName],
-					function (k, v) {
-						var stream = (v && !v.params[0]) ? v.subject : null;
-						if (!stream) {
-							return;
-						}
-						var args = JSON.parse(k), extra = args[2];
-						if (extra && extra.messages) {
-							this.remove(k);
-						}
-					});
-					Message.get.cache.each([msg.publisherId, msg.streamName],
-					function (k, v) {
-						var args = JSON.parse(k), ordinal = args[2];
-						if (ordinal && ordinal.max && ordinal.max < 0) {
-							this.remove(k); 
-						}
-					});
-				}
-				
-				function _updateTotalsCache() {
-					Streams.get.cache.each([msg.publisherId, msg.streamName],
-					function (k, v) {
-						var stream = (v && !v.params[0]) ? v.subject : null;
-						if (!stream) {
-							return;
-						}
-						if (stream.totals && stream.totals[msg.type]) {
-							++stream.totals[msg.type];
-						}
-					});
-					Total.get.cache.each([msg.publisherId, msg.streamName, msg.type],
-					function (k, v) {
-						var args = JSON.parse(k);
-						var result = v.params[1];
-						if (Q.isInteger(result)) {
-							++v.params[1];
-						} else if (Q.isPlainObject[result] && (type in result)) {
-							++result[type];
-						}
-					});
-				}
-
-				function _updateParticipantCache(newState, prevState, usingCached) {
-					Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
-					if (!usingCached) {
-						return;
-					}
-					var sawStreams = [];
-					Streams.get.cache.each([msg.publisherId, msg.streamName],
-					function (k, v) {
-						var stream = (v && !v.params[0]) ? v.subject : null;
-						if (!stream) {
-							return;
-						}
-						var args = JSON.parse(k);
-						var extra = args[2];
-						if (extra && extra.participants) {
-							this.remove(k);
-						}
-						if (sawStreams.indexOf(stream) >= 0) {
-							return;
-						}
-						sawStreams.push(stream);
-						if (prevState) {
-							--stream.fields[prevState+'Count'];
-						}
-						++stream.fields[newState+'Count'];
-					});
-				}
-
-				function _updateRelatedCache(instructions) {
-					Streams.related.cache.removeEach([msg.publisherId, msg.streamName]);
-					if (instructions.toPublisherId) {
-						Streams.related.cache.removeEach(
-							[instructions.toPublisherId, instructions.toStreamName]
-						);
-						Streams.Stream.refresh(
-							instructions.toPublisherId, instructions.toStreamName, 
-							null, { messages: true, unlessSocket: true }
-						);
-					} else if (instructions.fromPublisherId) {
-						Streams.related.cache.removeEach(
-							[instructions.fromPublisherId, instructions.fromStreamName]
-						);
-						Streams.Stream.refresh(
-							instructions.fromPublisherId, instructions.fromStreamName,
-							null, { messages: true, unlessSocket: true }
-						);
-					}
-				}
 			});
 		}
 	}, 'Streams');
-	
-	function _preloadedStreams(elem) {
-		// Every time before anything is activated,
-		// process any preloaded streams data we find
-		Q.each(Stream.preloaded, function (i, fields) {
-			Streams.construct(fields, {}, null);
-		});
-		Stream.preloaded = null;
-	}
 		
 	Q.beforeActivate.add(_preloadedStreams, 'Streams');
 	Q.loadUrl.options.onResponse.add(_preloadedStreams, 'Streams');
@@ -4601,6 +4524,108 @@ Q.Page.beforeUnload("").set(function () {
 	Streams.release(true);
 }, 'Stream');
 
+function _preloadedStreams(elem) {
+	// Every time before anything is activated,
+	// process any preloaded streams data we find
+	Q.each(Stream.preloaded, function (i, fields) {
+		Streams.construct(fields, {}, null);
+	});
+	Stream.preloaded = null;
+}
+
+function _updateMessageCache(msg) {
+	Streams.get.cache.each([msg.publisherId, msg.streamName],
+	function (k, v) {
+		var stream = (v && !v.params[0]) ? v.subject : null;
+		if (!stream) {
+			return;
+		}
+		var args = JSON.parse(k), extra = args[2];
+		if (extra && extra.messages) {
+			this.remove(k);
+		}
+	});
+	Message.get.cache.each([msg.publisherId, msg.streamName],
+	function (k, v) {
+		var args = JSON.parse(k), ordinal = args[2];
+		if (ordinal && ordinal.max && ordinal.max < 0) {
+			this.remove(k); 
+		}
+	});
+}
+
+function _updateTotalsCache(msg) {
+	Streams.get.cache.each([msg.publisherId, msg.streamName],
+	function (k, v) {
+		var stream = (v && !v.params[0]) ? v.subject : null;
+		if (!stream) {
+			return;
+		}
+		if (stream.totals && stream.totals[msg.type]) {
+			++stream.totals[msg.type];
+		}
+	});
+	Total.get.cache.each([msg.publisherId, msg.streamName, msg.type],
+	function (k, v) {
+		var args = JSON.parse(k);
+		var result = v.params[1];
+		if (Q.isInteger(result)) {
+			++v.params[1];
+		} else if (Q.isPlainObject[result] && (type in result)) {
+			++result[type];
+		}
+	});
+}
+
+function _updateParticipantCache(msg, newState, prevState, usingCached) {
+	Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
+	if (!usingCached) {
+		return;
+	}
+	var sawStreams = [];
+	Streams.get.cache.each([msg.publisherId, msg.streamName],
+	function (k, v) {
+		var stream = (v && !v.params[0]) ? v.subject : null;
+		if (!stream) {
+			return;
+		}
+		var args = JSON.parse(k);
+		var extra = args[2];
+		if (extra && extra.participants) {
+			this.remove(k);
+		}
+		if (sawStreams.indexOf(stream) >= 0) {
+			return;
+		}
+		sawStreams.push(stream);
+		if (prevState) {
+			--stream.fields[prevState+'Count'];
+		}
+		++stream.fields[newState+'Count'];
+	});
+}
+
+function _updateRelatedCache(msg, instructions) {
+	Streams.related.cache.removeEach([msg.publisherId, msg.streamName]);
+	if (instructions.toPublisherId) {
+		Streams.related.cache.removeEach(
+			[instructions.toPublisherId, instructions.toStreamName]
+		);
+		Streams.Stream.refresh(
+			instructions.toPublisherId, instructions.toStreamName, 
+			null, { messages: true, unlessSocket: true }
+		);
+	} else if (instructions.fromPublisherId) {
+		Streams.related.cache.removeEach(
+			[instructions.fromPublisherId, instructions.fromStreamName]
+		);
+		Streams.Stream.refresh(
+			instructions.fromPublisherId, instructions.fromStreamName,
+			null, { messages: true, unlessSocket: true }
+		);
+	}
+}
+
 function _clearCaches() {
 	// Clear caches so permissions can be recalculated as various objects are fetched
 	Streams.get.cache.clear();
@@ -4608,6 +4633,7 @@ function _clearCaches() {
 	Message.get.cache.clear();
 	Participant.get.cache.clear();
 	Avatar.get.cache.clear();
+	Total.seen.cache.clear();
 	_retainedByKey = {};
 	_retainedByStream = {};
 	_retainedStreams = {};
