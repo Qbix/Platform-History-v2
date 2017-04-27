@@ -8,6 +8,8 @@
 (function(Q, $, w) {
 
 var Places = Q.Places = Q.plugins.Places = {
+	
+	metric: true, // whether to display things using the metric system units
 
 	/**
 	 * @method loadGoogleMaps
@@ -51,10 +53,10 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @param {double} $long1
 	 * @param {double} $lat2
 	 * @param {double} $long2
-	 * @return {double} The result of applying the haversine formula
+	 * @return {double} The result, in meters, of applying the haversine formula
 	 */
 	distance: function(lat1, long1, lat2, long2) {
-		var earthRadius = 3963.1676; // in meters
+		var earthRadius = 6378137; // equatorial radius in meters
 
 		var sin_lat   = Math.sin(_deg2rad(lat2  - lat1)  / 2.0);
 		var sin2_lat  = sin_lat * sin_lat;

@@ -21,6 +21,7 @@ Q.text.Places.address = {
  * @param {Number} [options.latitude] latitude of bias point
  * @param {Number} [options.longitude] longitude of bias point
  * @param {Number} [options.meters] try to find things within this radius
+ * @param {Boolean} [options.metric=Places.metric] whether to use the metric system
  * @param {Object} [options.place] use this to set initial place, if any
  * @param {Object} [options.place.id] the id of the place
  * @param {Object} [options.place.name] the name of the place
@@ -36,6 +37,9 @@ Q.text.Places.address = {
 Q.Tool.define("Places/address", function _Places_address(options) {
 	var tool = this;
 	var state = this.state;
+	if (state.metric == null) {
+		state.metric = Places.metric;
+	}
 	state.mapElement = state.mapElement || $('<div />').appendTo(this.element)[0];
 	var p = Q.pipe(['google', 'filter'], function (params, subjects) {
 		tool.service = new google.maps.places.PlacesService(state.mapElement);
@@ -88,6 +92,7 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 
 { // default options here
 	meters: 1000,
+	metric: null,
 	searchQuery: null,
 	filter: {
 		placeholder: Q.text.Places.address.filter
@@ -152,8 +157,16 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 					if (distance > meters) {
 						return false;
 					}
-					d = Math.round(distance)+1;
-					m = (d === 1 ? ' mi' : ' mi');
+					d = distance;
+					if (state.metric) {
+						d = (d < 2000 ? Math.round(d / 100)/10 : Math.round(d/1000))
+							|| '<0.1';
+						m = (d === 1 ? ' km' : ' km');
+					} else {
+						d = (d < 2000 ? Math.round(d / 160.934)/10 : Math.round(d/1609.34))
+							|| '<0.1';
+						m = (d === 1 ? ' mi' : ' mi');
+					}
 					$distance = $('<td class="Places_distance" />')
 					.append($('<div />').text(d+m));
 				}
