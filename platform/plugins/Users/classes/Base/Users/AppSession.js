@@ -347,7 +347,7 @@ Base.prototype.beforeSet_sessionId = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".sessionId");
-		if (typeof value === "string" && value.length > 31)
+		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".sessionId");
 		return value;
 };
@@ -358,7 +358,7 @@ Base.prototype.beforeSet_sessionId = function (value) {
 	 */
 Base.prototype.maxSize_sessionId = function () {
 
-		return 31;
+		return 255;
 };
 
 	/**
@@ -367,7 +367,7 @@ Base.prototype.maxSize_sessionId = function () {
 	 */
 Base.column_sessionId = function () {
 
-return [["varbinary","31","",false],false,"",""];
+return [["varbinary","255","",false],false,"",""];
 };
 
 /**
@@ -392,7 +392,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -418,7 +418,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","31","",false],true,"",null];
+return [["timestamp","255","",false],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {
