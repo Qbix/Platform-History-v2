@@ -69,7 +69,7 @@
 			"custom": true,
 			"db": null,
 			"durations": {
-				"session": 86400,
+				"session": 0,
 				"mobile": 315360000,
 				"tablet": 315360000,
 				"day": 86400,

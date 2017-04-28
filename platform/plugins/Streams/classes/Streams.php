@@ -3832,7 +3832,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$identifier.identifier] an email address or phone number
 	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
 	 *   to store in the Users_Device table for sending notifications
-	 * @param {array} [$icon=array()] Array of filename => url pairs
+	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
 	 * @param {string} [$provider=null] Provider such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.

@@ -763,7 +763,7 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * Use with caution! This bypasses authentication.
+	 * Use with caution! This bypasses the usual methods of authentication.
 	 * This functionality should not be exposed externally.
 	 * @method setLoggedInUser
 	 * @static
@@ -774,6 +774,11 @@ abstract class Users extends Base_Users
 	 *  logged in. This notice only appears if another user was logged in
 	 *  before this method was called, to draw their attention to the sudden
 	 *  switch. To turn off this notice, pass null here.
+	 * @param {boolean} [$options.keepSessionId=false]
+	 *  Set to true to skip regenerating the session id, perhaps because you just
+	 *  generated your own session id and you are sure that 
+	 *  there cannot be any session fixation attacks.
+	 * @return {boolean} Whether logged in user id was changed.
 	 */
 	static function setLoggedInUser($user = null, $options = array())
 	{
@@ -783,7 +788,7 @@ abstract class Users extends Base_Users
 		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
 		if (!$user and $user->id === $loggedInUserId) {
 			// This user is already the logged-in user. Do nothing.
-			return;
+			return false;
 		}
 		
 		/**
@@ -806,7 +811,15 @@ abstract class Users extends Base_Users
 		}
 
 		// Change the session id to prevent session fixation attacks
-		$sessionId = Q_Session::regenerateId(true);
+		if (empty($options['keepSessionId'])) {
+			$duration = null;
+			$session = Users_Session();
+			$session->id = Users_Session::id();
+			if ($session->id and $session->retrieve()) {
+				$duration = $session->duration;
+			}
+			$sessionId = Q_Session::regenerateId(true, $duration);
+		}
 
 		// Store the new information in the session
 		$snf = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
@@ -859,6 +872,8 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/setLoggedInUser', compact('user'), 'after');
 		self::$loggedOut = false;
+		
+		return true;
 	}
 
 	/**
@@ -870,7 +885,7 @@ abstract class Users extends Base_Users
 	 * @param {string} [$identifier.identifier] an email address or phone number
 	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
 	 *   to store in the Users_Device table for sending notifications
-	 * @param {array|string} [$icon=array()] Array of filename => url pairs
+	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
 	 * @param {string} [$provider=null] Provider such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
@@ -1055,7 +1070,8 @@ abstract class Users extends Base_Users
 			$user->save();
 		}
 
-		if (empty($user->emailAddress) and empty($user->mobileNumber)){
+		if (empty($user->emailAddress) and empty($user->mobileNumber)
+		and ($type === 'email' or $type === 'mobile')) {
 			// Add an email address or mobile number to the user, that they'll have to verify
 			try {
 				$activation = Q::ifset($options, 'activation', 'activation');
@@ -1855,47 +1871,6 @@ abstract class Users extends Base_Users
 			$type = 'mobile';
 		}
 		return isset($normalized) ? $normalized : $identifier;
-	}
-
-	/**
-	 * Saves a new Users_Session row with a copy of all the content from the current session.
-	 * @param {string|integer} $duration The key in the Q / session / durations config field or number of seconds
-	 * @return {string} the id of the new session
-	 */
-	static function copyToNewSession($duration = 'year')
-	{
-		$id = Q_Session::id();
-		if (!$id) {
-			return null;
-		}
-		$seconds = is_string($duration)
-			? Q_Config::expect('Q', 'session', 'durations', $duration)
-			: $duration;
-		session_write_close(); // close current session
-		$us = new Users_Session();
-		$us->id = $id;
-		$us->retrieve(null, null, array('lock' => 'FOR UPDATE'));
-		$us2 = new Users_Session();
-		if ($us->wasRetrieved()) {
-			$us2->copyFromRow($us, null, false, true);
-			$us2->wasRetrieved(false);
-		} else {
-			$us2->content = "{}";
-			$us2->php = "";
-			$us2->deviceId = "";
-			$us2->timeout = 0;
-		}
-		$us2->id = Q_Session::generateId();
-		$us2->duration = $seconds;
-		$us2->save(false, true);
-		$new_id = $us2->id;
-		session_start(); // reopen current session
-		Q::event("Users/copyToNewSession", array(
-			'duration' => $duration,
-			'from_sessionId' => $id,
-			'to_sessionId' => $us2->id
-		), 'after');
-		return $us2->id;
 	}
 
 	static function termsLabel($for = 'register')

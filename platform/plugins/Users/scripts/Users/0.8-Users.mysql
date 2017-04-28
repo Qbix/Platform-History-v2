@@ -4,9 +4,9 @@
 DROP TABLE IF EXISTS `{$prefix}app_user`;
 
 CREATE TABLE `{$prefix}app_user` (
-  `userId` varbinary(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31) NOT NULL DEFAULT '',
   `provider` enum('native','facebook','twitter','google','yahoo')  NOT NULL,
-  `appId` varchar(200)  NOT NULL,
+  `appId` varchar(200) NOT NULL COMMENT 'An external app id, such as 109237819232278349',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `access_token` varchar(1023)  DEFAULT NULL COMMENT 'The OAuth access token',

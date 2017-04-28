@@ -388,9 +388,12 @@ class Q_Session
 	 * @static
 	 * @param {boolean} [$destroy_old_session=false] Set to true if you want to get rid
 	 *  of the old session (to save space or for security purposes).
+	 * @param {integer|string} [$duration=null] Set the duration of the regenerated session,
+	 *  otherwise it will use the default duration for Q_Session::durationName().
+	 *  See Q/session/durations config field. Pass 0 to expire at the end of browser session.
 	 * @return {string} The new session id.
 	 */
-	static function regenerateId($destroy_old_session = false, $duration = 0)
+	static function regenerateId($destroy_old_session = false, $duration = null)
 	{
 		$old_SESSION = $_SESSION;
 		if ($destroy_old_session) {
@@ -412,8 +415,12 @@ class Q_Session
 		session_start(); // start a new session
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			// set the new cookie
-			$durationName = self::durationName();
-			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			if (!isset($duration)) {
+				$duration = self::durationName();
+			}
+			if (is_string($duration)) {
+				$duration = Q_Config::get('Q', 'session', 'durations', $duration, 0);
+			};
 			Q_Response::setCookie(self::name(), $sid, $duration ? time()+$duration : 0);
 		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
@@ -628,7 +635,10 @@ class Q_Session
 					'old_data' => $old_data
 				);
 				if (!empty(self::$session_db_connection)) {
-					$row->retrieve('*', false, array('begin' => true));
+					$row->retrieve('*', false, array(
+						'begin' => true,
+						'ignoreCache' => true
+					));
 					$existing_data = Q::ifset($row, $data_field, "");
 					$params = array_merge($params, array(
 						'id_field' => $id_field,
