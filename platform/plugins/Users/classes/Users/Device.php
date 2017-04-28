@@ -91,11 +91,10 @@ class Users_Device extends Base_Users_Device
 		$d = new Users_Device($device2);
 		$d->save(true);
 		if ($sessionId) {
-			$s = new Users_Session();
-			$s->id = $sessionId;
-			if (!$s->retrieve()) {
-				$s->deviceId = $deviceId;
-			}
+			Users_Session::update()
+				->set(compact('deviceId'))
+				->where(array('id' => $sessionId))
+				->execute();
 		}
 		$_SESSION['Users']['deviceId'] = $deviceId;
 		$device2['Q/method'] = 'Users/device';

@@ -161,12 +161,14 @@
 			"platforms": ["ios"] /* ["ios", "android"] */,
 			"ios": {
 				"sandbox": true,
+				"logging": "ios",
 				"device": {
-					"adding": "Notifications have been enabled"
+					"added": "Notifications have been enabled"
 				},
 				"client": "MyApp-ios",
-				"url": "https://itunes.apple.com/us/app/groups/id407855546?mt=8",
-				"id": "407855546"
+				"bundleId": "com.mycompany.myapp",
+				"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+				"id": "361285480"
 			}
 		}
 	}
