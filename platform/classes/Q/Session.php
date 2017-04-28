@@ -111,8 +111,8 @@ class Q_Session
 	/**
 	 * @method id
 	 * @static
-	 * @param {string} [$id=null]
-	 * @return {string}
+	 * @param {string} [$id=null] Pass a new session id, if you want to change it
+	 * @return {string} The current session id
 	 */
 	static function id ($id = null)
 	{
