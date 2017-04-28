@@ -813,7 +813,7 @@ abstract class Users extends Base_Users
 		// Change the session id to prevent session fixation attacks
 		if (empty($options['keepSessionId'])) {
 			$duration = null;
-			$session = Users_Session();
+			$session = new Users_Session();
 			$session->id = Users_Session::id();
 			if ($session->id and $session->retrieve()) {
 				$duration = $session->duration;
