@@ -926,9 +926,9 @@ abstract class Users extends Base_Users
 			reset($identifier);
 			switch (key($identifier)) {
 				case 'device':
+					$device = $identifier['device'];
 					$fields = array('deviceId', 'platform', 'version');
-					Q_Valid::requireFields($fields, $identifier, true);
-					$device = $identifier;
+					Q_Valid::requireFields($fields, $device, true);
 					if (isset($identifier['identifier'])) {
 						$identifier = $identifier['identifier'];
 					}
