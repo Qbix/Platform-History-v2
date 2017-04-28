@@ -26,7 +26,8 @@ class Users_Session extends Base_Users_Session
 	/**
 	 * Saves a new Users_Session row with a copy of all the content from the current session.
 	 * Does not change the current session id.
-	 * @param {string|integer} [$duration='year'] The key in the Q / session / durations config field or number of seconds
+	 * @param {string|integer} [$duration='year'] The key in the Q/session/durations config field
+	 *   or number of seconds. Pass 0 to expire at the end of browser session.
 	 * @return {string} the id of the new session
 	 */
 	static function copyToNewSession($duration = 'year')

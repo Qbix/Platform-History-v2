@@ -390,7 +390,7 @@ class Q_Session
 	 *  of the old session (to save space or for security purposes).
 	 * @param {integer|string} [$duration=null] Set the duration of the regenerated session,
 	 *  otherwise it will use the default duration for Q_Session::durationName().
-	 *  See Q/session/durations config field. Pass 0 here for perpetual duration.
+	 *  See Q/session/durations config field. Pass 0 to expire at the end of browser session.
 	 * @return {string} The new session id.
 	 */
 	static function regenerateId($destroy_old_session = false, $duration = null)
