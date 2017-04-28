@@ -277,17 +277,32 @@ return [["varbinary","31","",false],false,"PRI",""];
 };
 
 /**
- * Method is called before setting the field and verifies if value belongs to enum values list
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_provider
  * @param {string} value
  * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_provider = function (value) {
+		if (value == null) {
+			value='';
+		}
 		if (value instanceof Db.Expression) return value;
-		if (['native','facebook','twitter','google','yahoo'].indexOf(value) < 0)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".provider");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".provider");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".provider");
 		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the provider field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_provider = function () {
+
+		return 31;
 };
 
 	/**
@@ -296,7 +311,7 @@ Base.prototype.beforeSet_provider = function (value) {
 	 */
 Base.column_provider = function () {
 
-return [["enum","'native','facebook','twitter','google','yahoo'","",false],false,"PRI",null];
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**

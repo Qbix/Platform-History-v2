@@ -27,6 +27,7 @@ module.exports = Base;
  * @type array
  */
 Base.tableClasses = [
+	"Users_AppSession",
 	"Users_AppUser",
 	"Users_Contact",
 	"Users_Device",
@@ -62,6 +63,13 @@ Base.db = function () {
 Base.connectionName = function() {
 	return 'Users';
 };
+
+/**
+ * Link to Users.AppSession model
+ * @property AppSession
+ * @type Users.AppSession
+ */
+Base.AppSession = Q.require('Users/AppSession');
 
 /**
  * Link to Users.AppUser model

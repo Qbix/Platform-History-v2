@@ -75,7 +75,8 @@
 				"day": 86400,
 				"month": 2678400, 
 				"year": 31536000,
-				"decade": 315360000
+				"decade": 315360000,
+				"perpetual": 0
 			},
 			"gc": false,
 			"maxlength": 4095,

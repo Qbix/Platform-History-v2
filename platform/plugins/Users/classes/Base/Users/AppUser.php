@@ -270,20 +270,36 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_provider
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_provider($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression) {
 			return array('provider', $value);
 		}
-		if (!in_array($value, array('native','facebook','twitter','google','yahoo')))
-			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".provider");
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".provider");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".provider");
 		return array('provider', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the provider field
+	 * @return {integer}
+	 */
+	function maxSize_provider()
+	{
+
+		return 31;			
 	}
 
 	/**
@@ -296,8 +312,8 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'enum',
-    1 => '\'native\',\'facebook\',\'twitter\',\'google\',\'yahoo\'',
+    0 => 'varchar',
+    1 => '31',
     2 => '',
     3 => false,
   ),
