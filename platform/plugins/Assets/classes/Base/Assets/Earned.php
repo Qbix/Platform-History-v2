@@ -284,7 +284,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,

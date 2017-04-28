@@ -29,19 +29,19 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
- * @type id
- */
-/**
- * @property {String}
+ * @property {String|Buffer}
  * @type userId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type publisherId
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
+ * @type id
+ */
+/**
+ * @property {String|Buffer}
  * @type streamName
  */
 /**
@@ -204,8 +204,8 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"id",
-		"userId"
+		"userId",
+		"id"
 	];
 };
 
@@ -216,53 +216,15 @@ Base.prototype.primaryKey = function () {
  */
 Base.prototype.fieldNames = function () {
 	return [
-		"id",
 		"userId",
 		"publisherId",
+		"id",
 		"streamName",
 		"description",
 		"attributes",
 		"insertedTime",
 		"updatedTime"
 	];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_id
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_id = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".id");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".id");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the id field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_id = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for id column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_id = function () {
-
-return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**
@@ -278,8 +240,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -300,7 +262,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","31","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -316,8 +278,8 @@ Base.prototype.beforeSet_publisherId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
@@ -338,7 +300,45 @@ Base.prototype.maxSize_publisherId = function () {
 	 */
 Base.column_publisherId = function () {
 
-return [["varchar","255","",false],false,"",""];
+return [["varbinary","255","",false],false,"",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_id
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_id = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".id");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".id");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the id field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_id = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_id = function () {
+
+return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
@@ -354,8 +354,8 @@ Base.prototype.beforeSet_streamName = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".streamName");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
 		return value;
@@ -376,7 +376,7 @@ Base.prototype.maxSize_streamName = function () {
 	 */
 Base.column_streamName = function () {
 
-return [["varchar","255","",false],false,"",""];
+return [["varbinary","255","",false],false,"",""];
 };
 
 /**
@@ -514,7 +514,7 @@ return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['id','userId'], i;
+	var fields = ['userId','id'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

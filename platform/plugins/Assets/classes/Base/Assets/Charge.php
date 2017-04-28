@@ -14,9 +14,9 @@
  * @class Base_Assets_Charge
  * @extends Db_Row
  *
- * @property {string} $id
  * @property {string} $userId
  * @property {string} $publisherId
+ * @property {string} $id
  * @property {string} $streamName
  * @property {string} $description
  * @property {string} $attributes
@@ -26,15 +26,15 @@
 abstract class Base_Assets_Charge extends Db_Row
 {
 	/**
-	 * @property $id
-	 * @type {string}
-	 */
-	/**
 	 * @property $userId
 	 * @type {string}
 	 */
 	/**
 	 * @property $publisherId
+	 * @type {string}
+	 */
+	/**
+	 * @property $id
 	 * @type {string}
 	 */
 	/**
@@ -68,8 +68,8 @@ abstract class Base_Assets_Charge extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'id',
-			  1 => 'userId',
+			  0 => 'userId',
+			  1 => 'id',
 			)
 		);
 	}
@@ -207,60 +207,6 @@ abstract class Base_Assets_Charge extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_id
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_id($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('id', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".id");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".id");
-		return array('id', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the id field
-	 * @return {integer}
-	 */
-	function maxSize_id()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for id column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_id()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_userId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -301,7 +247,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '31',
     2 => '',
     3 => false,
@@ -355,7 +301,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -363,6 +309,60 @@ return array (
   1 => false,
   2 => '',
   3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_id
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_id($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('id', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".id");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".id");
+		return array('id', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the id field
+	 * @return {integer}
+	 */
+	function maxSize_id()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for id column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_id()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
 );			
 	}
 
@@ -409,7 +409,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -631,7 +631,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('id','userId') as $name) {
+			foreach (array('userId','id') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -652,7 +652,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'userId', 'publisherId', 'streamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'publisherId', 'id', 'streamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

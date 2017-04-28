@@ -29,11 +29,11 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type uri
  */
 /**
- * @property {String}
+ * @property {String|Buffer}
  * @type url
  */
 /**
@@ -219,8 +219,8 @@ Base.prototype.beforeSet_uri = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".uri");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".uri");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".uri");
 		return value;
@@ -241,7 +241,7 @@ Base.prototype.maxSize_uri = function () {
 	 */
 Base.column_uri = function () {
 
-return [["varchar","255","",false],false,"PRI",""];
+return [["varbinary","255","",false],false,"PRI",""];
 };
 
 /**
@@ -257,8 +257,8 @@ Base.prototype.beforeSet_url = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".url");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".url");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".url");
 		return value;
@@ -279,7 +279,7 @@ Base.prototype.maxSize_url = function () {
 	 */
 Base.column_url = function () {
 
-return [["varchar","255","",false],false,"MUL",""];
+return [["varbinary","255","",false],false,"MUL",""];
 };
 
 /**
