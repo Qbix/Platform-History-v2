@@ -814,11 +814,11 @@ abstract class Users extends Base_Users
 		if (empty($options['keepSessionId'])) {
 			$duration = null;
 			$session = new Users_Session();
-			$session->id = Users_Session::id();
+			$session->id = Q_Session::id();
 			if ($session->id and $session->retrieve()) {
 				$duration = $session->duration;
 			}
-			$sessionId = Q_Session::regenerateId(true, $duration);
+			$sessionId = Users_Session::regenerateId(true, $duration);
 		}
 
 		// Store the new information in the session
