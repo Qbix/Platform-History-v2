@@ -69,14 +69,13 @@
 			"custom": true,
 			"db": null,
 			"durations": {
-				"session": 86400,
+				"session": 0,
 				"mobile": 315360000,
 				"tablet": 315360000,
 				"day": 86400,
 				"month": 2678400, 
 				"year": 31536000,
-				"decade": 315360000,
-				"perpetual": 0
+				"decade": 315360000
 			},
 			"gc": false,
 			"maxlength": 4095,

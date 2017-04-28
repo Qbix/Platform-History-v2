@@ -119,7 +119,7 @@
 			"id", "username", "icon", "url"
 		],
 		"authorize": {
-			"duration": "perpetual",
+			"duration": "decade",
 			"terms": {
 				"uri": null,
 				"label": "I have read and agree<br>to the {{link}}",
