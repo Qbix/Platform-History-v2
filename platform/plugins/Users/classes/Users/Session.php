@@ -47,6 +47,7 @@ class Users_Session extends Base_Users_Session
 		if ($us->wasRetrieved()) {
 			$us2->copyFromRow($us, null, false, true);
 			$us2->wasRetrieved(false);
+			$us2->insertedTime = new Db_Expression('CURRENT_TIMESTAMP');
 		} else {
 			$us2->content = "{}";
 			$us2->php = "";
