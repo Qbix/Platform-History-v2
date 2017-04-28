@@ -929,9 +929,7 @@ abstract class Users extends Base_Users
 					$device = $identifier['device'];
 					$fields = array('deviceId', 'platform', 'version');
 					Q_Valid::requireFields($fields, $device, true);
-					if (isset($identifier['identifier'])) {
-						$identifier = $identifier['identifier'];
-					}
+					$identifier = Q::ifset($identifier, 'identifier', null);
 					break;
 				default:
 					throw new Q_Exception_WrongType(array(
@@ -939,20 +937,25 @@ abstract class Users extends Base_Users
 						'type' => 'an array with entry named "device"'
 					));
 			}
+		} else if (!$identifier) {
+			throw new Q_Exception_RequiredField(array('field' => 'identifier'));
 		}
-		if (Q_Valid::email($identifier, $emailAddress)) {
-			$ui_identifier = $emailAddress;
-			$key = 'email address';
-			$type = 'email';
-		} else if (Q_Valid::phone($identifier, $mobileNumber)) {
-			$key = 'mobile number';
-			$ui_identifier = $mobileNumber;
-			$type = 'mobile';
-		} else {
-			throw new Q_Exception_WrongType(array(
-				'field' => 'identifier',
-				'type' => 'email address or mobile number'
-			), array('emailAddress', 'mobileNumber'));
+		$ui_identifier = null;
+		if ($identifier) {
+			if (Q_Valid::email($identifier, $emailAddress)) {
+				$ui_identifier = $emailAddress;
+				$key = 'email address';
+				$type = 'email';
+			} else if (Q_Valid::phone($identifier, $mobileNumber)) {
+				$ui_identifier = $mobileNumber;
+				$key = 'mobile number';
+				$type = 'mobile';
+			} else {
+				throw new Q_Exception_WrongType(array(
+					'field' => 'identifier',
+					'type' => 'email address or mobile number'
+				), array('emailAddress', 'mobileNumber'));
+			}
 		}
 
 		$user = false;
@@ -993,7 +996,7 @@ abstract class Users extends Base_Users
 		if (!$user) {
 			$user = new Users_User(); // the user we will save in the database
 		}
-		if (empty($adopted)) {
+		if (empty($adopted) and $ui_identifier) {
 			// We will be inserting a new user into the database, so check if
 			// this identifier was already verified for someone else.
 			$ui = Users::identify($type, $ui_identifier);

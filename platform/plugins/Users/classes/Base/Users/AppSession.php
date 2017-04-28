@@ -375,7 +375,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".sessionId");
-		if (strlen($value) > 31)
+		if (strlen($value) > 255)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".sessionId");
 		return array('sessionId', $value);			
 	}
@@ -387,7 +387,7 @@ return array (
 	function maxSize_sessionId()
 	{
 
-		return 31;			
+		return 255;			
 	}
 
 	/**
@@ -401,7 +401,7 @@ return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '31',
+    1 => '255',
     2 => '',
     3 => false,
   ),
@@ -447,7 +447,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
+    1 => '255',
     2 => '',
     3 => false,
   ),
@@ -496,7 +496,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
+    1 => '255',
     2 => '',
     3 => false,
   ),
