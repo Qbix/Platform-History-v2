@@ -30,44 +30,53 @@ class Users_Device extends Base_Users_Device
 	 * @param {string} $device.deviceId
 	 * @param {string} [$device.formFactor]
 	 * @param {string} [$device.platform]
+	 * @param {string} [$device.appId] external app id registered with the platform
 	 * @param {string} [$device.version]
 	 * @param {string} [$device.sessionId]
-	 * @param {boolean} [$device.sandbox]
-	 * @param {string} [$device.passphrase]
 	 * @param {boolean} [$skipNotification=false] if true, skips sending notification
 	 * @return {Users_Device}
 	 */
 	static function add($device, $skipNotification=false)
 	{
-		Q_Valid::requireFields(array('userId', 'deviceId'), $device, true);
+		Q_Valid::requireFields(array('userId', 'deviceId', 'platform', 'appId'), $device, true);
 		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
 		$platform = $device['platform'];
-		if (!$skipNotification) {
-			$app = Q::app();
-			$sandbox = Q::ifset($device, 'sandbox', null);
-			if (!isset($sandbox)) {
-				$sandbox = Q_Config::get($app, "native", $platform, "sandbox", false);
+		$platformAppId = $device['appId'];
+		$apps = Q_Config::expect('Users', 'apps', $platform);
+		$info = null;
+		foreach ($apps as $k => $v) {
+			if ($v['appId'] === $appId) {
+				$info = $v;
 			}
+			$appId = $k;
+			break;
+		}
+		if (!$info) {
+			throw new Q_Exception_MissingConfig("Users/apps/$platform/.../appId=$appId");
+		}
+		if (!$skipNotification) {
+			$sandbox = Q::ifset($device, 'sandbox', false);
 			$env = $sandbox
 				? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
 				: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
 			$s = $sandbox ? 'sandbox' : 'production';
-			$cert = APP_LOCAL_DIR.DS.'Users'.DS.'certs'.DS.$app.DS.$s.DS.'bundle.pem';
+			$cert = APP_LOCAL_DIR.DS.'Users'.DS.'certs'.DS.$appId.DS.$s.DS.'bundle.pem';
 			$authority = USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
 			$logger = new Users_ApnsPHP_Logger();
 			$push = new ApnsPHP_Push($env, $cert);
 			$push->setLogger($logger);
 			$push->setRootCertificationAuthority($authority);
-			if (isset($device['passphrase'])) {
-				$push->setProviderCertificatePassphrase($device['passphrase']);
+			if (isset($info['token']['passphrase'])) {
+				$push->setProviderCertificatePassphrase($info['token']['passphrase']);
 			}
 			$push->connect();
 			$message = new ApnsPHP_Message($deviceId);
 			$message->setCustomIdentifier('Users_Device-adding');
 			$message->setBadge(0);
 			$message->setText(Q_Config::get(
-				$app, "native", $platform, "device", "added", "Notifications have been enabled"
+				"Users", "apps", $platform, $appId, "device", "added",
+				"Notifications have been enabled"
 			));
 			$message->setCustomProperty('userId', $userId);
 			$message->setExpiry(5);
@@ -85,7 +94,8 @@ class Users_Device extends Base_Users_Device
 		$info = array_merge(Q_Request::userAgentInfo(), array(
 			'sessionId' => $sessionId,
 			'userId' => $user ? $user->id : null,
-			'deviceId' => null
+			'deviceId' => null,
+			'appId' => $platformAppId
 		));
 		$device2 = Q::take($device, $info);
 		$d = new Users_Device($device2);

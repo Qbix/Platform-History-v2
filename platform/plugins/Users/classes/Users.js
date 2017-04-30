@@ -113,6 +113,7 @@ Users.userFromSession = function (sessionId, callback) {
  * @method listen
  * @param {Object} [options={}]
  * @param {Object} [options.apn.provider={}] Additional options for node-apn Provider
+ * @param {String} [options.appId=Q.app.name] Only needed if you have multiple apps on provider
  */
 Users.listen = function (options) {
 
@@ -123,8 +124,8 @@ Users.listen = function (options) {
     server.attached.express.post('/Q/node', Users_request_handler);
 
 	// Set up ios push notification agent
-	var appName = Q.Config.expect(["Q", "app"]);
-	if (Q.Config.get([appName, "native", "platforms"], []).indexOf("ios") >= 0) {
+	var appId = o.appId || Q.app.name;
+	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") >= 0) {
 		_Users_listen_ios(o, server);
 	}
 
@@ -151,9 +152,11 @@ function _Users_listen_ios (options, server) {
 	var apn = require('apn');
 	var path = require('path');
 	var appName = Q.app.name;
-	var sandbox = Q.Config.get([appName, "native", "ios", "sandbox"], false);
+	var appId = options.appId || app;
+	var sandbox = Q.Config.get(["Users", "ios", appId, "sandbox"], false);
 	var s = sandbox ? "sandbox" : "production";
-	var o = Q.Config.expect(['Groups', 'native', 'ios']);
+	var appId = (options && options.appId) || Q.app.name;
+	var o = Q.Config.expect(['Users', 'ios', appId]);
 	if (o.token) {
 		o.token.key = path.join(Q.app.DIR, o.token.key);
 		if (!fs.existsSync(o.token.key)) {
@@ -173,7 +176,8 @@ function _Users_listen_ios (options, server) {
 	if (o.production == undefined) {
 		o.production = !sandbox;
 	}
-	var passphrase = Q.Config.get([appName, "native", "ios", "passphrase"], null);
+	var appId = o.appId || Q.app.name;
+	var passphrase = Q.Config.get(["Users", "apps", "ios", appId, "passphrase"], null);
 	if (passphrase) {
 		o.passphase = passphase;
 	}

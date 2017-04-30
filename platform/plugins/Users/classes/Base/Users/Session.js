@@ -396,7 +396,7 @@ Base.prototype.beforeSet_deviceId = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".deviceId");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 700)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".deviceId");
 		return value;
 };
@@ -407,7 +407,7 @@ Base.prototype.beforeSet_deviceId = function (value) {
 	 */
 Base.prototype.maxSize_deviceId = function () {
 
-		return 255;
+		return 700;
 };
 
 	/**
@@ -416,7 +416,7 @@ Base.prototype.maxSize_deviceId = function () {
 	 */
 Base.column_deviceId = function () {
 
-return [["varbinary","255","",false],false,"",null];
+return [["varbinary","700","",false],false,"",null];
 };
 
 /**

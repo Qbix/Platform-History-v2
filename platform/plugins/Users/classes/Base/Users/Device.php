@@ -18,6 +18,7 @@
  * @property {string} $deviceId
  * @property {string} $platform
  * @property {string} $version
+ * @property {string} $appId
  * @property {string} $sessionId
  * @property {string} $formFactor
  * @property {string|Db_Expression} $insertedTime
@@ -39,6 +40,10 @@ abstract class Base_Users_Device extends Db_Row
 	 */
 	/**
 	 * @property $version
+	 * @type {string}
+	 */
+	/**
+	 * @property $appId
 	 * @type {string}
 	 */
 	/**
@@ -276,7 +281,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".deviceId");
-		if (strlen($value) > 255)
+		if (strlen($value) > 700)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".deviceId");
 		return array('deviceId', $value);			
 	}
@@ -288,7 +293,7 @@ return array (
 	function maxSize_deviceId()
 	{
 
-		return 255;			
+		return 700;			
 	}
 
 	/**
@@ -302,7 +307,7 @@ return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '700',
     2 => '',
     3 => false,
   ),
@@ -313,20 +318,36 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_platform
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_platform($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression) {
 			return array('platform', $value);
 		}
-		if (!in_array($value, array('ios','android')))
-			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".platform");
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".platform");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".platform");
 		return array('platform', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the platform field
+	 * @return {integer}
+	 */
+	function maxSize_platform()
+	{
+
+		return 31;			
 	}
 
 	/**
@@ -339,8 +360,8 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'enum',
-    1 => '\'ios\',\'android\'',
+    0 => 'varchar',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -395,6 +416,60 @@ return array (
   array (
     0 => 'varchar',
     1 => '45',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_appId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_appId($value)
+	{
+		if (!isset($value)) {
+			return array('appId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('appId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".appId");
+		if (strlen($value) > 200)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".appId");
+		return array('appId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+	function maxSize_appId()
+	{
+
+		return 200;			
+	}
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_appId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
     2 => '',
     3 => false,
   ),
@@ -605,7 +680,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('userId','deviceId','platform') as $name) {
+			foreach (array('userId','deviceId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -626,7 +701,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'deviceId', 'platform', 'version', 'sessionId', 'formFactor', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'deviceId', 'platform', 'version', 'appId', 'sessionId', 'formFactor', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
