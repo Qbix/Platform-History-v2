@@ -69,15 +69,4 @@ function Q_before_Q_responseExtras()
 		}
 		Q_Response::addStylesheet($src, null, $media);
 	}
-	$native = array();
-	foreach (Q_Config::get($app, 'native', 'platforms', array()) as $platform) {
-		if ($platform != Q_Request::platform()) {
-			continue;
-		}
-		$native[$app][$platform] = Q::take(
-			Q_Config::expect($app, 'native', $platform),
-			array('client', 'url')
-		);
-	}
-	Q_Response::setScriptData('Q.native', $native);
 }

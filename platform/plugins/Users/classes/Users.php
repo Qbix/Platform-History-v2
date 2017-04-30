@@ -120,26 +120,31 @@ abstract class Users extends Base_Users
 	/**
 	 * @method oAuth
 	 * @static
-	 * @param {string} $provider Currently only supports the value "facebook".
+	 * @param {string} $provider The name of the oAuth provider, under Users/apps config
+	 * @param {string} [$appId=Q::app()] Only needed if you have multiple apps on provider
 	 * @return {Zend_Oauth_Client}
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function oAuth($provider)
+	static function oAuth($provider, $appId = null)
 	{
 		$nativeuser = self::loggedInUser();
 
 		if(!$nativeuser)
 			throw new Users_Exception_NotLoggedIn();
 
+		if (!isset($appId)) {
+			$appId = Q::app();
+		}
+
 		#Set up oauth options
-		$oauthOptions = Q_Config::expect('Users', 'oAuthProviders', $provider, 'oAuth');
-		$customOptions = Q_Config::get('Users', 'oAuthProviders', $provider, 'custom', null);
+		$oauthOptions = Q_Config::expect('Users', 'apps', $provider, $appId, 'oauth');
+		$customOptions = Q_Config::get('Users', 'apps', $provider, $appId, 'options', null);
 
 		#If the user already has a token in our DB:
 		$appuser = new Users_AppUser();
 		$appuser->userId = $nativeuser->id;
 		$appuser->provider = $provider;
-		$appuser->appId = Q_Config::expect('Users', 'oAuthProviders', $provider, 'appId');
+		$appuser->appId = $appId;
 
 		if($appuser->retrieve('*', true))
 		{
@@ -183,20 +188,26 @@ abstract class Users extends Base_Users
 	/**
 	 * @method oAuthClear
 	 * @static
-	 * @param {string} $provider Currently only supports the value "facebook".
+	 * @param {string} $provider The name of the oAuth provider, under Users/apps config
+	 * @param {string} [$appId=Q::app()] Only needed if you have multiple apps on provider
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function oAuthClear($provider)
+	static function oAuthClear($provider, $appId = null)
 	{
 		$nativeuser = self::loggedInUser();
 
 		if(!$nativeuser)
 			throw new Users_Exception_NotLoggedIn();
+		
+		if (!isset($appId)) {
+			$app = Q::app();
+			$appId = Q_Config::expect('Users', 'apps', $provider, $app, 'appId');
+		}
 
 		$appuser = new Users_AppUser();
 		$appuser->userId = $nativeuser->id;
 		$appuser->provider = $provider;
-		$appuser->appId = Q_Config::expect('Users', 'oAuthProviders', $provider, 'appId');
+		$appuser->appId = $appId;
 		$appuser->remove();
 	}
 
@@ -209,14 +220,13 @@ abstract class Users extends Base_Users
 	 * @method authenticate
 	 * @static
 	 * @param {string} $provider Currently only supports the value "facebook".
-	 * @param {integer} [$appId=null] The id of the app within the specified provider.
-	 *  Used for storing app-specific session information.
+	 * @param {string} [$appId=null] The id of the app within the specified provider.
 	 * @param {&boolean} [$authenticated=null] If authentication fails, puts false here.
 	 *  Otherwise, puts one of the following:
-	 *  'registered' if user just registered,
-	 *  'adopted' if a futureUser was just adopted,
-	 *  'connected' if a logged-in user just connected the provider account for the first time,
-	 *  'authorized' if a logged-in user was connected to provider but just authorized this app for the first time
+	 *  * 'registered' if user just registered,
+	 *  * 'adopted' if a futureUser was just adopted,
+	 *  * 'connected' if a logged-in user just connected the provider account for the first time,
+	 *  * 'authorized' if a logged-in user was connected to provider but just authorized this app for the first time
 	 *  or true otherwise.
 	 * @param {array} [$import=Q_Config::get('Users', 'import', $provider)]
 	 *  Array of things to import from provider if they are not already set.
@@ -240,8 +250,7 @@ abstract class Users extends Base_Users
 			));
 		}
 		if (!isset($appId)) {
-			$app = Q_Config::expect('Q', 'app');
-			$appId = Q_Config::expect('Users', 'facebookApps', $app, 'appId');
+			$appId = Q_Config::expect('Users', 'apps', 'facebook', Q::app(), 'appId');
 		}
 		$authenticated = null;
 
@@ -293,7 +302,8 @@ abstract class Users extends Base_Users
 				return $userWasLoggedIn ? $user : false;
 			}
 			$dn = isset($user->id) && $user->displayName();
-			if ((in_array('emailAddress', $import) and empty($user->emailAddress)) or !$dn) {
+			$importEmail = in_array('emailAddress', $import) && empty($user->emailAddress);
+			if (!$dn or $importEmail) {
 				$map = array(
 					'firstName' => 'first_name',
 					'lastName' => 'last_name'
@@ -1508,33 +1518,33 @@ abstract class Users extends Base_Users
 	 * Gets the facebook object constructed from request and/or cookies
 	 * @method facebook
 	 * @static
-	 * @param {string} [$key=Q::app()] Can either be a Qbix app key or a Facebook app id.
+	 * @param {string} [$appId=Q::app()] Can either be an interal appId or a Facebook appId.
 	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
 	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
 	 * @return {Facebook|null} Facebook object
 	 */
-	static function facebook($key = null, $longLived = true, $setCookie = true)
+	static function facebook($appId = null, $longLived = true, $setCookie = true)
 	{
-		if (!isset($key)) {
-			$key = Q_Config::expect('Q', 'app');
+		if (!isset($appId)) {
+			$appId = Q::app();
 		}
-		if (isset(self::$facebooks[$key])) {
-			return self::$facebooks[$key];
+		if (isset(self::$facebooks[$appId])) {
+			return self::$facebooks[$appId];
 		}
-		$apps = Q_Config::get('Users', 'facebookApps', array());
-		if (isset($apps[$key])) {
-			$fb_info = $apps[$key];
+		$apps = Q_Config::get('Users', 'apps', 'facebook', array());
+		if (isset($apps[$appId])) {
+			$fbInfo = $apps[$appId];
 		} else {
 			foreach ($apps as $k => $v) {
-				if ($v['appId'] === $key) {
-					$fb_info = $v;
-					$key = $k;
+				if ($v['appId'] === $appId) {
+					$fbInfo = $v;
+					$appId = $k;
 					break;
 				}
 			}
 		}
-		$appId = (isset($fb_info['appId']) && isset($fb_info['secret']))
-			? $fb_info['appId']
+		$fbAppId = (isset($fbInfo['appId']) && isset($fbInfo['secret']))
+			? $fbInfo['appId']
 			: '';
 		if (!$appId) {
 			return null;
@@ -1542,12 +1552,12 @@ abstract class Users extends Base_Users
 
 		try {
 			$params = array_merge(array(
-				'app_id' => $appId,
-				'app_secret' => $fb_info['secret']
+				'app_id' => $fbAppId,
+				'app_secret' => $fbInfo['secret']
 			));
 			$facebook = new Facebook\Facebook($params);
+			Users::$facebooks[$fbAppId] = $facebook;
 			Users::$facebooks[$appId] = $facebook;
-			Users::$facebooks[$key] = $facebook;
 		} catch (Exception $e) {
 			return null;
 		}

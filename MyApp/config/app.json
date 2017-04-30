@@ -155,21 +155,5 @@
 				"sms": "MyApp/sms/startedSubscription.php"
 			}
 		}
-	},
-	"MyApp": {
-		"native": {
-			"platforms": ["ios"] /* ["ios", "android"] */,
-			"ios": {
-				"sandbox": true,
-				"logging": "ios",
-				"device": {
-					"added": "Notifications have been enabled"
-				},
-				"client": "MyApp-ios",
-				"bundleId": "com.mycompany.myapp",
-				"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
-				"id": "361285480"
-			}
-		}
 	}
 }

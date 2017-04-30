@@ -35,7 +35,8 @@ class ApnsPHP_Log_Embedded implements ApnsPHP_Log_Interface
 	 */
 	public function log($sMessage)
 	{
-		if ($key = Q_Config::get(Q::app(), "native", "ios", "logging", false)) {
+		$app = Q::app();
+		if ($key = Q_Config::get("Users", "apps", "ios", $app, "logging", false)) {
 			Q::log(sprintf("%s ApnsPHP[%d]: %s\n",
 				date('r'), getmypid(), trim($sMessage)
 			), $key);

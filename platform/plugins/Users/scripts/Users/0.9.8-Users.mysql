@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `{$prefix}app_session`;
 CREATE TABLE {$prefix}app_session (
   udid varbinary(255) NOT NULL DEFAULT '',
   provider varchar(255) NOT NULL DEFAULT '' COMMENT 'A platform like ios or android',
-  appId varbinary(200) NOT NULL DEFAULT '' COMMENT 'An internal app id, like MyApp-ios',
+  appId varbinary(200) NOT NULL DEFAULT '' COMMENT 'An external app registered with the provider',
   sessionId varbinary(255) NOT NULL DEFAULT '' COMMENT 'The id of a users_session row, which may have a userId and deviceId',
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updatedTime timestamp NULL DEFAULT NULL,

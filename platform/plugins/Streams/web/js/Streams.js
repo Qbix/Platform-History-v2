@@ -3769,8 +3769,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 
 	var authResponse;
-	if (Q.plugins.Users.facebookApps && Q.plugins.Users.facebookApps[Q.info.app]) {
-		Q.plugins.Users.initFacebook(function() {
+	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
+		Users.initFacebook(function() {
 			if ((authResponse = FB.getAuthResponse())) {
 				for (var k in authResponse) {
 					register_form.append(
@@ -3783,7 +3783,30 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		});
 	}
 
-	if ($('#Streams_login_step1_form').data('used') === 'facebook') {
+	var $form = $('#Streams_login_step1_form');
+	if ($form.data('used') === 'facebook') {
+		var providers = $form.data('providers');
+		var appId = providers.facebook || Q.info.app;
+		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		if (!fbAppId) {
+			console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
+		}
+		Users.initFacebook(function() {
+			var k;
+			if ((authResponse = FB.getAuthResponse())) {
+				authResponse.appId = appId;
+				authResponse.fbAppId = fbAppId;
+				for (k in authResponse) {
+					register_form.append(
+						$('<input type="hidden" />')
+						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+						.attr('value', authResponse[k])
+					);
+				}
+			}
+		}, {
+			appId: appId
+		});
 		register_form.append($('<input type="hidden" name="provider" value="facebook" />'));
 	}
 	if (json.emailExists || json.mobileExists) {
@@ -4138,7 +4161,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 
 Q.onInit.add(function _Streams_onInit() {
 	var Users = Q.plugins.Users;
-	Users.login.options.setupRegisterForm=  Streams.setupRegisterForm;
+	Users.login.options.setupRegisterForm = Streams.setupRegisterForm;
 	Q.text.Users.login.placeholders.fullName = 'Enter your full name';
 	Q.text.Users.login.maxlengths.fullName = 50;
 

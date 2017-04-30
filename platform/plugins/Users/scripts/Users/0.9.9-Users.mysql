@@ -1,0 +1,8 @@
+ALTER TABLE {$prefix}device
+MODIFY deviceId varbinary(700) NOT NULL COMMENT 'The actual push registration id on the platform',
+MODIFY platform varchar(31) NOT NULL COMMENT 'A platform like ios or android',
+ADD COLUMN appId varchar(200) NULL COMMENT 'An external app id registered with the platform' AFTER version,
+ADD INDEX app (userId, platform, appId);
+
+ALTER TABLE {$prefix}session
+MODIFY deviceId varbinary(700) NOT NULL COMMENT 'If a push notification device is attached';

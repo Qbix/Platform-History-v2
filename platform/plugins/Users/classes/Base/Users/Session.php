@@ -442,7 +442,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".deviceId");
-		if (strlen($value) > 255)
+		if (strlen($value) > 700)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".deviceId");
 		return array('deviceId', $value);			
 	}
@@ -454,7 +454,7 @@ return array (
 	function maxSize_deviceId()
 	{
 
-		return 255;			
+		return 700;			
 	}
 
 	/**
@@ -468,7 +468,7 @@ return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '700',
     2 => '',
     3 => false,
   ),
