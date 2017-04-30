@@ -58,14 +58,15 @@ Users_User.clientsOnline = function(userId, sessionId) {
  * @method devices
  * @static
  * @param {String} userId The id of a user
+ * @param {String} platform The name of a platform in "Users"/"apps"/"platforms" array
+ * @param {String} appId The external app id registered with the platform
  * @param {Function} callback The first parameter contains {platformName: devicesArray}
  */
-Users_User.devices = function (userId, callback) {
-	var app = Q.app.name;
-	var platforms = Q.Config.get([app, "cordova", "platforms"], []);
+Users_User.devices = function (userId, platform, appId, callback) {
 	Users.Device.SELECT('*').where({
 		userId: userId,
-		platform: platforms
+		platform: platform,
+		appId: appId
 	}).execute(function(err, res) {
 		if (err) return;
 		var devices = {};

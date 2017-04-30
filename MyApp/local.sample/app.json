@@ -58,15 +58,6 @@
 		"logging": true
 	},
 	"Users": {
-		"facebookApps": {
-			"APP NAME HERE": {
-				"name": "FACEBOOK APP NAME HERE",
-				"appId": "FACEBOOK APP ID HERE",
-				"secret": "PUT SECRET HERE",
-				"url": "http://apps.facebook.com/YOURAPP",
-				"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
-			}
-		},
 		"email": {
 			"smtp": null, /* {
 				"auth": "login",
@@ -90,19 +81,74 @@
 				"uri": null
 			},
 			"clients": {
-				"Groups-ios": {
+				"MyApp-ios": {
 					"paths": null,
 					"scopes": {
 						"all": "give this app full access"
 					},
 					"automatic": true
 				},
-				"Groups-android": {
+				"MyApp-android": {
 					"paths": null,
 					"scopes": {
 						"all": "give this app full access"
 					},
 					"automatic": true
+				}
+			}
+		},
+		"apps": {
+			"platforms": {
+				"MyApp": ["facebook", "ios", "android"]
+			},
+			"facebook": {
+				"MyApp": {
+					"name": "FACEBOOK APP NAME HERE",
+					"appId": "FACEBOOK APP ID HERE",
+					"secret": "PUT SECRET HERE",
+					"url": "http://apps.facebook.com/YOURAPP",
+					"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
+				}
+			},
+			"ios": {
+				"MyApp": {
+					"bundleId": "com.mycompany.myapp",
+					"appId": "361285480",
+					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+					"sandbox": true,
+					"logging": "ios",
+					"device": {
+						"added": "Notifications have been enabled"
+					},
+					"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
+						"key": "local/Users/certs/MyApp/token/cert.p8",
+						"keyId": "Find it at https://developer.apple.com/account/ios/certificate/",
+						"passphrase": null,
+						"teamId": "Find it at https://developer.apple.com/account/#/membership"
+					}
+				}
+			},
+			"android": {
+				"MyApp": {
+					"appId": "com.mycompany.myapp",
+					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
+					"key": "AUTHORIZATION KEY HERE"
+				}
+			},
+			"amazon": {
+				"MyApp": {
+					"appId": "B01MQTS32B",
+					"url": "http://www.amazon.com/gp/mas/dl/android?asin=B01MQTS32B",
+					"clientId": "ADM CLIENT ID HERE",
+					"secret": "SECRET HERE"
+				}
+			},
+			"windows": {
+				"MyApp": {
+					"appId": "9nblggh2s4gt",
+					"url": "https://www.microsoft.com/en-us/store/p/monster-go/9nblggh2s4gt",
+					"clientId": "PACKAGE SECURITY IDENTIFIER",
+					"secret": "SECRET HERE"
 				}
 			}
 		}
@@ -118,25 +164,6 @@
 				"transactionKey": "XXXXX",
 				"testing": false
 			} */
-		}
-	},
-	"MyApp": {
-		"native": {
-			"platforms": [] /* ["ios", "android"] */,
-			"ios": {
-				"sandbox": true,
-				"logging": "ios",
-				"device": {
-					"adding": "Notifications have been enabled"
-				},
-				"url": "https://itunes.apple.com/us/app/groups/id407855546?mt=8",
-				"bundleId": "com.mycompany.myapp",
-				"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
-					"key": "local/Users/certs/MyApp/token/cert.p8",
-					"keyId": "Find it at https://developer.apple.com/account/ios/certificate/",
-					"teamId": "Find it at https://developer.apple.com/account/#/membership"
-				}
-			}
 		}
 	}
 }

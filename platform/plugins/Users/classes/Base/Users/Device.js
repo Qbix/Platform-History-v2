@@ -45,6 +45,10 @@ Q.mixin(Base, Row);
  * @type version
  */
 /**
+ * @property {String}
+ * @type appId
+ */
+/**
  * @property {String|Buffer}
  * @type sessionId
  */
@@ -220,6 +224,7 @@ Base.prototype.fieldNames = function () {
 		"deviceId",
 		"platform",
 		"version",
+		"appId",
 		"sessionId",
 		"formFactor",
 		"insertedTime",
@@ -280,7 +285,7 @@ Base.prototype.beforeSet_deviceId = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".deviceId");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 700)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".deviceId");
 		return value;
 };
@@ -291,7 +296,7 @@ Base.prototype.beforeSet_deviceId = function (value) {
 	 */
 Base.prototype.maxSize_deviceId = function () {
 
-		return 255;
+		return 700;
 };
 
 	/**
@@ -300,21 +305,36 @@ Base.prototype.maxSize_deviceId = function () {
 	 */
 Base.column_deviceId = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","700","",false],false,"PRI",null];
 };
 
 /**
- * Method is called before setting the field and verifies if value belongs to enum values list
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_platform
  * @param {string} value
  * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_platform = function (value) {
+		if (value == null) {
+			value='';
+		}
 		if (value instanceof Db.Expression) return value;
-		if (['ios','android'].indexOf(value) < 0)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".platform");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".platform");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform");
 		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the platform field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_platform = function () {
+
+		return 31;
 };
 
 	/**
@@ -323,7 +343,7 @@ Base.prototype.beforeSet_platform = function (value) {
 	 */
 Base.column_platform = function () {
 
-return [["enum","'ios','android'","",false],false,"",null];
+return [["varchar","31","",false],false,"",null];
 };
 
 /**
@@ -360,6 +380,42 @@ Base.prototype.maxSize_version = function () {
 Base.column_version = function () {
 
 return [["varchar","45","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_appId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_appId = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".appId");
+		if (typeof value === "string" && value.length > 200)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".appId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_appId = function () {
+
+		return 200;
+};
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_appId = function () {
+
+return [["varchar","200","",false],true,"",null];
 };
 
 /**
@@ -484,7 +540,7 @@ return [["timestamp","'mobile','tablet'","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['userId','deviceId','platform'], i;
+	var fields = ['userId','deviceId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

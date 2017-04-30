@@ -10,7 +10,7 @@
 
 var Users = Q.Users = Q.plugins.Users = {
 	info: {}, // this gets filled when a user logs in
-	facebookApps: {}, // this info gets added by the server, on the page
+	apps: {}, // this info gets added by the server, on the page
 	connected: {}, // check this to see if you are connected to a provider
 	icon: {
 		defaultSize: 40 // might be overridden, but is required by some tools
@@ -115,13 +115,15 @@ Users.onDevice = new Q.Event(function (response) {
  * Ensures that this is done only once
  * @method initFacebook
  * @param {Function} callback , This function called after Facebook init completed
- * @param {Object} options for overriding the options passed to FB.init
+ * @param {Object} options for overriding the options passed to FB.init , and also
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
  */
 Users.initFacebook = function(callback, options) {
 	
-	if (!Q.plugins.Users.facebookApps[Q.info.app]
-	|| !Q.plugins.Users.facebookApps[Q.info.app].appId) {
-		throw new Q.Error("Users.initFacebook: missing facebook app info for '" + Q.info.app + "'");
+	var appId = (options && options.appId) || Q.info.app;
+	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+	if (!fbAppId) {
+		throw new Q.Error("Users.initFacebook: missing facebook app info for '" + appId + "'");
 	}
 	
 	// should be only called once per app
@@ -131,19 +133,18 @@ Users.initFacebook = function(callback, options) {
 	}
 
 	function _init () {
-		if (!Users.initFacebook.completed[Q.info.app]
-		&& Q.plugins.Users.facebookApps[Q.info.app]) {
+		if (!Users.initFacebook.completed[appId] && fbAppId) {
 			FB.init(Q.extend({
-				appId: Q.plugins.Users.facebookApps[Q.info.app].appId,
+				appId: fbAppId,
 				version: 'v2.8',
 				status: true,
 				cookie: true,
 				oauth: true,
 				xfbml: true
 			}, Users.initFacebook.options, options));
-			Users.onInitFacebook.handle(Users, window.FB, [Q.info.app]);
+			Users.onInitFacebook.handle(Users, window.FB, [appId]);
 		}
-		Users.initFacebook.completed[Q.info.app] = true;
+		Users.initFacebook.completed[appId] = true;
 		callback && callback();
 	}
 
@@ -187,17 +188,16 @@ function FB_getLoginStatus(cb, force) {
 
 /**
  * You can wrap all uses of FB object with this
- * @method  initFacebook.ready
- * @param {Object} app , an object of completed FB application
- * @optional
- * @param {Function} callback , this function called after Facebook application access token or user status response
+ * @method initFacebook.ready
+ * @param {String} [appId=Q.info.app] only specify this if you have multiple facebook apps
+ * @param {Function} callback this function called after Facebook application access token or user status response
  */
-Users.initFacebook.ready = function (app, callback) {
-	if (typeof app === 'function') {
-		callback = app;
-		app = Q.info.app;
+Users.initFacebook.ready = function (appId, callback) {
+	if (typeof appId === 'function') {
+		callback = appId;
+		appId = Q.info.app;
 	}
-	if (Users.initFacebook.completed[app]) {
+	if (Users.initFacebook.completed[appId]) {
 		_proceed();
 	} else {
 		Users.onInitFacebook.set(_proceed, "Users.initFacebook.ready");
@@ -227,6 +227,7 @@ Users.initFacebook.ready = function (app, callback) {
  *     Can be true, in which case the usual prompt is shown even if it was rejected before.
  *     Can be a function with an onSuccess and onCancel callback, in which case it's used as a prompt.
  *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
  */
 Users.authenticate = function(provider, onSuccess, onCancel, options) {
 	if (provider !== 'facebook') {
@@ -236,6 +237,13 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 	var fields = {};
 	
 	Users.authenticate.occurring = true;
+
+	var appId = options.appId || Q.info.app;
+	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+	if (!fbAppId) {
+		console.warn("Users.logout: missing Users.apps.facebook."+appId+".appId");
+		return;
+	}
 
 	// make sure facebook is initialized
 	Users.initFacebook(function() {
@@ -275,11 +283,11 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 					Users.authenticate.occurring = false;
 					throw new Q.Error("Users.authenticate: options.prompt is the wrong type");
 				}
-			} else if (Q.plugins.Users.facebookApps[Q.info.app]) {
+			} else if (fbAppId) {
 				// let's delete any stale facebook cookies there might be
 				// otherwise they might confuse our server-side authentication.
-				Q.cookie('fbs_' + Q.plugins.Users.facebookApps[Q.info.app].appId, null, {path: '/'});
-				Q.cookie('fbsr_' + Q.plugins.Users.facebookApps[Q.info.app].appId, null, {path: '/'});
+				Q.cookie('fbs_' + fbAppId, null, {path: '/'});
+				Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
 				_doCancel();
 			}
 
@@ -321,6 +329,8 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 				}
 				var ar = response.authResponse;
 				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
+				ar.fbAppId = fbAppId;
+				ar.appId = appId;
 				fields['Q.Users.facebook.authResponse'] = ar;
 				$.post(
 					Q.ajaxExtend(Q.action("Users/authenticate"), 'data', {method: "post"}),
@@ -344,6 +354,8 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 					}, 'json');
 			}
 		}, options.force ? true : false);
+	}, {
+		appId: appId
 	});
 };
 
@@ -358,11 +370,16 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
  * @param {Function} cancelCallback , this function will be called if user closed social provider login window
  * @param {object} options
  *	 @param {DOMElement} [options.dialogContainer=document.body] param with jQuery identifier of dialog container
+ * @param {Object} options
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
  */
 Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 	if (provider !== 'facebook') {
 		throw new Q.Error("Users.authenticate prompt: The only supported provider for now is facebook");
 	}
+	
+	var appId = (options && options.appId) || Q.info.app;
+	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 	if (!Users.prompt.overlay) {
 		var o = Q.extend({}, Users.prompt.options, options);
@@ -409,6 +426,8 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 		onActivate: function () {
 			Users.initFacebook(function () {
 				FB.XFBML.parse(content_div.get(0));
+			}, {
+				appId: appId
 			});
 		},
 		onClose: function () {
@@ -455,11 +474,15 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
  * @param {String} provider For now, only "facebook" is supported
  * @param {Function} callback , this function will be called after getting permissions from social provider
  * Callback parameter could be null or response object from social provider
+ * @param {Object} options
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
  */
-Users.scope = function (provider, callback) {
+Users.scope = function (provider, callback, options) {
 	if (provider !== 'facebook') {
 		throw new Q.Error("Users.scope: The only supported provider for now is facebook");
 	}
+	var appId = (options && options.appId) || Q.info.app;
+	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 	Users.initFacebook(function () {
 		if (!FB.getAuthResponse()) {
 			callback(null);
@@ -471,6 +494,8 @@ Users.scope = function (provider, callback) {
 				callback(null);
 			}
 		});
+	}, {
+		appId: appId
 	});
 };
 
@@ -491,6 +516,7 @@ and 'used' is "native", or the name of the provider used, such as "facebook".
  *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with provider = "using" option
  *  @param {String} [options.scope="email,publish_stream"] permissions to request from the authentication provider
  *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
+ *  @param {Object} [options.appIds={}] Can be used to set custom {provider: appId} pairs
  */
 Users.login = function(options) {
 
@@ -538,7 +564,10 @@ Users.login = function(options) {
 
 		// perform actual login
 		if (o.using.indexOf('native') >= 0) {
-			var usingProviders = o.using.indexOf('facebook') >= 0 ? ['facebook'] : [];
+			var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
+			var usingProviders = (o.using.indexOf('facebook') >= 0)
+				? { facebook: appId }
+				: {};
 			// set up dialog
 			login_setupDialog(usingProviders, o.scope, o.dialogContainer, o.identifierType);
 			priv.login_onConnect = _onConnect;
@@ -590,6 +619,8 @@ Users.login = function(options) {
 						}
 					});
 				}, opts);
+			}, {
+				appId: appId
 			});
 		}
 
@@ -688,10 +719,14 @@ Users.logout = function(options) {
 		}, 0);
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 		Users.roles = {};
-		if (Users.facebookApps[Q.info.app]
-		&& (o.using.indexOf('facebook') >= 0)) {
-			Q.cookie('fbs_' + Q.plugins.Users.facebookApps[Q.info.app].appId, null, {path: '/'});
-			Q.cookie('fbsr_' + Q.plugins.Users.facebookApps[Q.info.app].appId, null, {path: '/'});
+		var appId = o.appId || Q.info.app;
+		if (fbAppId && o.using.indexOf('facebook') >= 0) {
+			var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+			if (!fbAppId) {
+				console.warn("Users.logout: missing Users.apps.facebook."+appId+".appId");
+			}
+			Q.cookie('fbs_' + fbAppId, null, {path: '/'});
+			Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
 			if ((o.using[0] === 'native' || o.using[1] === 'native')) {
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce'); // null
@@ -709,6 +744,8 @@ Users.logout = function(options) {
 						Q.handle(o.onSuccess, this, [o]);
 					}
 				}, true);
+			}, {
+				appId: appId
 			});
 		} else {
 			// if we log out without logging out of facebook,
@@ -1218,10 +1255,19 @@ function login_callback(err, response) {
 		}
 		
 		var authResponse;
-		if ($('#Users_login_step1_form').data('used') === 'facebook') {
+		var $form = $('#Users_login_step1_form');
+		if ($form.data('used') === 'facebook') {
+			var providers = $form.data('providers');
+			var appId = providers.facebook || Q.info.app;
+			var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+			if (!fbAppId) {
+				console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
+			}
 			Users.initFacebook(function() {
 				var k;
 				if ((authResponse = FB.getAuthResponse())) {
+					authResponse.appId = appId;
+					authResponse.fbAppId = fbAppId;
 					for (k in authResponse) {
 						register_form.append(
 							$('<input type="hidden" />')
@@ -1230,10 +1276,9 @@ function login_callback(err, response) {
 						);
 					}
 				}
+			}, {
+				appId: appId
 			});
-		}
-		
-		if ($('#Users_login_step1_form').data('used') === 'facebook') {
 			register_form.append($('<input type="hidden" name="provider" value="facebook" />'));
 		}
 		if (json.emailExists || json.mobileExists) {
@@ -1411,11 +1456,13 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	step1_form.plugin('Q/validator');
 	var step1_usingProviders_div = $('<div id="Users_login_usingProviders" />');
 	var providerCount = 0;
-	for (var i = 0; i < usingProviders.length; ++i) {
-		switch (usingProviders[i]) {
+	for (var provider in usingProviders) {
+		var appId = usingProviders[provider];
+		switch (provider) {
 			case 'facebook':
-				if (!Q.plugins.Users.facebookApps[Q.info.app]
-				|| !Q.plugins.Users.facebookApps[Q.info.app].appId) {
+				var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+				if (!fbAppId) {
+					console.warn("Users.login: missing Users.apps.facebook."+appId+".appId");
 					break;
 				}
 				++providerCount;
@@ -1431,6 +1478,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 								return;
 							}
 							step1_form.data('used', 'facebook');
+							step1_form.data('providers', usingProviders);
 							var p = Q.pipe(['me', 'picture'], function(params) {
 								var me = params.me[0];
 								var picture = params.picture[0].data;
@@ -1467,6 +1515,8 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 						    }, p.fill('picture'));
 							FB.api('/me?fields=first_name,last_name,gender,birthday,timezone,locale,verified,email', p.fill('me'));
 						}, scope ? {scope: scope} : undefined);
+					}, {
+						appId: appId
 					});
 					return false;
 				});
@@ -2158,8 +2208,9 @@ Q.onInit.add(function () {
 	}
 	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
     
-	if (Q.plugins.Users.facebookApps[Q.info.app]
-	&& Q.plugins.Users.facebookApps[Q.info.app].appId) {
+	var appId = Q.info.app;
+	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+	if (fbAppId) {
 		Users.initFacebook();
 	}
 }, 'Users');

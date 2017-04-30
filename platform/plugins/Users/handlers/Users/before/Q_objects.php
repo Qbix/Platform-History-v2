@@ -3,14 +3,16 @@
 function Users_before_Q_objects(&$params)
 {
 	$app = Q_Config::expect('Q', 'app');
-	$fb_info = Q_Config::get('Users', 'facebookApps', $app, null);
+	$fb_infos = Q_Config::get('Users', 'apps', 'facebook', array());
 
 	// We sometimes pass this in the request, for browsers like Safari
 	// that don't allow setting of cookies using javascript inside 3rd party iframes
 	
 	$authResponse = Q_Request::special('Users.facebook.authResponse', null);
-	if (!empty($fb_info['appId']) and $authResponse) {
-		$appId = $fb_info['appId'];
+	$appId = Q::ifset($authResponse, 'appId', $app);
+	$fbAppId = Q::ifset($authResponse, 'fbAppId', null);
+	if ($fbAppId) {
+		$fbAppId = $fb_info['appId'];
 		if (is_array($authResponse)) {
 			if ($authResponse) {
 				$accessToken = $authResponse['accessToken'];

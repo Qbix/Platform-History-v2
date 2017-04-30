@@ -51,8 +51,15 @@
 		}
 	},
 	"Users": {
-		"facebookApps": {
-
+		"apps": {
+			
+		},
+		"apps-private": {
+			"facebook": ["secret"],
+			"ios": ["token", "device", "logging"],
+			"android": ["key"],
+			"amazon": ["key", "secret"],
+			"windows": ["key", "secret"]
 		},
 		"import": {
 			"facebook": ["emailAddress", "firstName", "lastName"]

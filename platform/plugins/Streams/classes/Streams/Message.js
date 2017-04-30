@@ -389,18 +389,13 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
 			}
-			Users.pushNotifications(toUserId, {
-				alert: {
-					title: o.subject
-				}//,
-				// payload: {
-				// 	url: ...
-				// }
-			}, callback, {
-				view: viewPath,
-				fields: o.fields
-			}, function (device) {
-				if (deviceId && device.deviceId !== deviceId) {
+			Users.pushNotifications(toUserId, 
+				{ alert: { title: o.subject } },
+				{ payload: message.getAllInstructions() },
+				callback, 
+				{ view: viewPath, fields: o.fields },
+				function (device) {
+					if (deviceId && device.deviceId !== deviceId) {
 					return false;
 				}
 			});
