@@ -1,5 +1,7 @@
 (function (Q, $) {
 
+var Users = Q.Users;
+
 /**
  * Streams Tools
  * @module Streams-tools
@@ -16,9 +18,9 @@
 Q.Tool.define("Streams/basic", function(options) {
 	var me = this;
 	var tool = this.element;
-
-	if (Q.plugins.Users.facebookApps[Q.info.app]) {
-		Q.plugins.Users.login({
+	var af = Users.apps.facebook;
+	if (af && af[Q.info.app]) {
+		Users.login({
 			tryQuietly: true,
 			using: 'facebook',
 			onSuccess: function (user) {

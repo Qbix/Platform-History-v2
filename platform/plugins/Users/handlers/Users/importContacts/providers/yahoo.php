@@ -17,21 +17,23 @@ function Users_importContacts_providers_yahoo($params) {
 	#Find out user's Yahoo GUID
 
 	#Do we have the GUID saved?
-	$cu = Users::loggedInUser();
-	$user = new Users_AppUser();
-	$user->userId = $cu->id;
-	$user->provider = 'yahoo';
-	$user->appId = Q_Config::expect('Users', 'oAuthProviders', 'yahoo', 'appId');
-	$user->retrieve('*', true);
+	if ($cu = Users::loggedInUser()) {
+		$appId = Q::ifset($params, 'appId', Q::app());
+		$au = new Users_AppUser();
+		$au->userId = $cu->id;
+		$au->provider = 'yahoo';
+		$au->appId = Q_Config::expect('Users', 'apps', $provider, $appId, 'appId');
+		$au->retrieve('*', true);
+	}
 
-	if(!empty($user->provider_uid)) #We have user's Yahoo GUID saved
-		$guid = $user->provider_uid;
+	if(!empty($au->provider_uid)) #We have user's Yahoo GUID saved
+		$guid = $au->provider_uid;
 	else #Request user's GUID from Yahoo and save it
 	{
 		$guidjson = json_decode($fetch('http://social.yahooapis.com/v1/me/guid'));
 		$guid = $guidjson->guid->value;
-		$user->provider_uid = $guid;
-		$user->save(true);
+		$au->provider_uid = $guid;
+		$au->save(true);
 	}
 
 	#Request contacts

@@ -25,11 +25,6 @@ function Users_before_Q_responseExtras()
 		$setIdentifierOptions = Q::take($loginOptions, array('identifierType'));
 		Q_Response::setScriptData('Q.plugins.Users.setIdentifier.serverOptions', $setIdentifierOptions);
 	}
-	$fb_app_info = Q_Config::get('Users', 'facebookApps', $app, array());
-	if ($fb_app_info) {
-		unset($fb_app_info['secret']);
-		Q_Response::setScriptData("Q.plugins.Users.facebookApps.$app", $fb_app_info);
-	}
 	if ($node_server_url = Q_Config::get('Users', 'nodeServer', 'url', null)) {
 		Q_Response::setScriptData("Q.plugins.Users.nodeServer", parse_url($node_server_url));
 	}
@@ -56,4 +51,13 @@ function Users_before_Q_responseExtras()
 	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
 	Q_Response::addStylesheet("plugins/Users/css/Users.css");
+	$apps = array();
+	foreach (Q_Config::get('Users', 'apps', 'platforms', $app, array()) as $platform) {
+		$apps[$platform][$app] = Q_Config::expect('Users', 'apps', $platform, $app);
+		$private = Q_Config::get('Users', 'apps-private', $platform, array());
+		foreach ($private as $p) {
+			unset($apps[$platform][$app][$p]);
+		}
+	}
+	Q_Response::setScriptData('Q.plugins.Users.apps', $apps);
 }
