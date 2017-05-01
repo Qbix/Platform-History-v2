@@ -34,7 +34,7 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
- * @type provider
+ * @type platform
  */
 /**
  * @property {String}
@@ -66,7 +66,7 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
- * @type provider_uid
+ * @type platform_uid
  */
 
 /**
@@ -213,7 +213,7 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"userId",
-		"provider",
+		"platform",
 		"appId"
 	];
 };
@@ -226,7 +226,7 @@ Base.prototype.primaryKey = function () {
 Base.prototype.fieldNames = function () {
 	return [
 		"userId",
-		"provider",
+		"platform",
 		"appId",
 		"insertedTime",
 		"updatedTime",
@@ -234,7 +234,7 @@ Base.prototype.fieldNames = function () {
 		"session_secret",
 		"session_expires",
 		"state",
-		"provider_uid"
+		"platform_uid"
 	];
 };
 
@@ -279,37 +279,37 @@ return [["varbinary","31","",false],false,"PRI",""];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_provider
+ * @method beforeSet_platform
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_provider = function (value) {
+Base.prototype.beforeSet_platform = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".provider");
+			throw new Error('Must pass a String to '+this.table()+".platform");
 		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".provider");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the provider field
+	 * Returns the maximum string length that can be assigned to the platform field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_provider = function () {
+Base.prototype.maxSize_platform = function () {
 
 		return 31;
 };
 
 	/**
-	 * Returns schema information for provider column
+	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_provider = function () {
+Base.column_platform = function () {
 
 return [["varchar","31","",false],false,"PRI",null];
 };
@@ -527,37 +527,37 @@ return [["enum","'visited','added','removed'","",false],false,"","visited"];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_provider_uid
+ * @method beforeSet_platform_uid
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_provider_uid = function (value) {
+Base.prototype.beforeSet_platform_uid = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".provider_uid");
+			throw new Error('Must pass a String to '+this.table()+".platform_uid");
 		if (typeof value === "string" && value.length > 200)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".provider_uid");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform_uid");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the provider_uid field
+	 * Returns the maximum string length that can be assigned to the platform_uid field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_provider_uid = function () {
+Base.prototype.maxSize_platform_uid = function () {
 
 		return 200;
 };
 
 	/**
-	 * Returns schema information for provider_uid column
+	 * Returns schema information for platform_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_provider_uid = function () {
+Base.column_platform_uid = function () {
 
 return [["varchar","200","",false],false,"",null];
 };
@@ -571,7 +571,7 @@ return [["varchar","200","",false],false,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['provider','appId'], i;
+	var fields = ['platform','appId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

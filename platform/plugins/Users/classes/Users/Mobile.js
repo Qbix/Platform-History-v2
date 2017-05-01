@@ -47,7 +47,7 @@ Q.mixin(Users_Mobile, Q.require('Base/Users/Mobile'));
 var twilioClient = null;
 Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 	// some mobile number normalization
-	var number, provider, address = [];
+	var number, platform, address = [];
 	var key = Q.Config.get(['Users', 'mobile', 'log', 'key'], 'mobile');
 	if (to.slice(0, 2) === "00") {
 		// convert 00 to + in international numbers
@@ -104,11 +104,11 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 		't-mobile': 'tmomail.net'
 	});
 
-	for (provider in gateways) {
+	for (platform in gateways) {
 		if (number.substr(0, 2) !== '+1') {
 			continue;
 		}
-		address.push(number.substr(2)+'@'+gateways[provider]);
+		address.push(number.substr(2)+'@'+gateways[platform]);
 	}
 	options.html = false;
 	Users.Email.sendMessage(address.join(','), null, view, fields, options, function(err, res) {

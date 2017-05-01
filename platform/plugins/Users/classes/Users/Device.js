@@ -59,7 +59,6 @@ function Users_Device (fields) {
  * @param {Object} [options]
  * @param {String} [options.view] Optionally set a view to render for the alert body
  * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
- * @param {String} [options.appId=Q.app.name] Only needed if you have multiple apps on provider
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
 Users_Device.prototype.pushNotification = function (notification, options, callback) {

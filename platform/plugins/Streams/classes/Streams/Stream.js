@@ -1201,15 +1201,27 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		if (err) {
 		    return callback && callback(err);
 		}
-		if (access) {
-			var appId = Q.app.name; // TODO: allow multiple app ids
+		if (!access) {
+			return;
+		}
+		var appIds = Q.Config.get(['Streams', 'notifications', 'appIds'], null);
+		if (appIds === null) {
+			appIds = {};
 			var platforms = Q.Config.expect(['Users', 'apps', 'platforms']);
 			platforms.forEach(function (platform) {
 				var platformAppId = Q.Config.expect([
 					'Users', 'apps', platform, appId, 'appId'
 				]);
-			    Users.User.devices(participant.fields.userId, platform, platformAppId, _notify);
+				appIds[platform] = [platformAppId];
 			});
+		}
+		for (var platform in appIds) {
+			Users.User.devices(
+				participant.fields.userId,
+				platform,
+				appIds[platform],
+				_notify
+			);
 		}
 	}
 };
