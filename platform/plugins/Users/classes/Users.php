@@ -1513,6 +1513,33 @@ abstract class Users extends Base_Users
 
 		return $result;
 	}
+	
+	/**
+	 * Get the internal app id and info
+	 * @method appId
+	 * @static
+	 * @param {string} $platform The platform or provider for the app
+	 * @param {string} $appId Can be either an internal or external app id
+	 * @return {array} Returns array($appId, $appInfo)
+	 */
+	static function appInfo($platform, $appId)
+	{
+		$apps = Q_Config::get('Users', 'apps', $platform, array());
+		if (isset($apps[$id])) {
+			$appInfo = $apps[$id];
+		} else {
+			$id = $appInfo = null;
+			foreach ($apps as $k => $v) {
+				if ($v['appId'] === $appId) {
+					$appInfo = $v;
+					$id = $k;
+					break;
+				}
+			}
+			$appId = $id;
+		}
+		return array($appId, $appInfo);
+	}
 
 	/**
 	 * Gets the facebook object constructed from request and/or cookies
@@ -1531,24 +1558,13 @@ abstract class Users extends Base_Users
 		if (isset(self::$facebooks[$appId])) {
 			return self::$facebooks[$appId];
 		}
-		$apps = Q_Config::get('Users', 'apps', 'facebook', array());
-		if (isset($apps[$appId])) {
-			$fbInfo = $apps[$appId];
-		} else {
-			foreach ($apps as $k => $v) {
-				if ($v['appId'] === $appId) {
-					$fbInfo = $v;
-					$appId = $k;
-					break;
-				}
-			}
+		list($appId, $fbInfo) = Users::appInfo('facebook', $appId);
+		if (!$appId) {
+			return null;
 		}
 		$fbAppId = (isset($fbInfo['appId']) && isset($fbInfo['secret']))
 			? $fbInfo['appId']
 			: '';
-		if (!$appId) {
-			return null;
-		}
 
 		try {
 			$params = array_merge(array(
