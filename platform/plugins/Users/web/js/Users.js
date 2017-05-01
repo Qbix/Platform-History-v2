@@ -11,7 +11,7 @@
 var Users = Q.Users = Q.plugins.Users = {
 	info: {}, // this gets filled when a user logs in
 	apps: {}, // this info gets added by the server, on the page
-	connected: {}, // check this to see if you are connected to a provider
+	connected: {}, // check this to see if you are connected to a platform
 	icon: {
 		defaultSize: 40 // might be overridden, but is required by some tools
 	}
@@ -76,9 +76,9 @@ Q.text.Users = {
 	},
 	
 	prompt: {
-		title: "{$Provider} Account",
-		areUsing: "You are using {$provider} as",
-		noLongerUsing: "You are no longer connected to {$provider} as",
+		title: "{$Platform} Account",
+		areUsing: "You are using {$platform} as",
+		noLongerUsing: "You are no longer connected to {$platform} as",
 		doAuth: "Log in with this account",
 		doSwitch: "Switch to this account"
 	},
@@ -116,7 +116,7 @@ Users.onDevice = new Q.Event(function (response) {
  * @method initFacebook
  * @param {Function} callback , This function called after Facebook init completed
  * @param {Object} options for overriding the options passed to FB.init , and also
- *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
  */
 Users.initFacebook = function(callback, options) {
 	
@@ -214,11 +214,11 @@ Users.initFacebook.ready = function (appId, callback) {
 };
 
 /**
- * Authenticates this session with a given provider
+ * Authenticates this session with a given platform
  * @method authenticate
- * @param {String} provider For now, only "facebook" is supported
+ * @param {String} platform For now, only "facebook" is supported
  * @required
- * @param {Function} onSuccess Called if the user successfully authenticates with the provider, or was already authenticated.
+ * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
  *  It is passed the user information if the user changed.
  * @param {Function} onCancel Called if the authentication was canceled.
  * @param {Object} [options] object of parameters for authentication function
@@ -227,11 +227,11 @@ Users.initFacebook.ready = function (appId, callback) {
  *     Can be true, in which case the usual prompt is shown even if it was rejected before.
  *     Can be a function with an onSuccess and onCancel callback, in which case it's used as a prompt.
  *   @param {Boolean} [options.force] forces the getLoginStatus to refresh its status
- *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
  */
-Users.authenticate = function(provider, onSuccess, onCancel, options) {
-	if (provider !== 'facebook') {
-		throw new Q.Error("Users.authenticate: The only supported provider for now is facebook");
+Users.authenticate = function(platform, onSuccess, onCancel, options) {
+	if (platform !== 'facebook') {
+		throw new Q.Error("Users.authenticate: The only supported platform for now is facebook");
 	}
 	options = options || {};
 	var fields = {};
@@ -294,7 +294,7 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 			function _doSuccess(user) {
 				// if the user hasn't changed then user is null here
 				Users.connected.facebook = true;
-				Users.onConnected.handle.call(Users, provider, user, options);
+				Users.onConnected.handle.call(Users, platform, user, options);
 				Q.handle(onSuccess, this, [user, options]);
 				Users.authenticate.occurring = false;
 			}
@@ -312,7 +312,7 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 					Q.cookie('Users_ignoreFacebookUid', ignoreUid);
 				}
 				delete Users.connected.facebook;
-				Users.onConnectionLost.handle.call(Users, provider, options);
+				Users.onConnectionLost.handle.call(Users, platform, options);
 				Q.handle(onCancel, Users, [options]);
 				Users.authenticate.occurring = false;
 			}
@@ -360,22 +360,22 @@ Users.authenticate = function(provider, onSuccess, onCancel, options) {
 };
 
 /**
- * Used when provider user is logged in to provider but not to app.
- * Shows prompt asking if user wants to log in to the app as provider user.
+ * Used when platform user is logged in to platform but not to app.
+ * Shows prompt asking if user wants to log in to the app as platform user.
  * @method prompt
- * @param {String} provider For now, only "facebook" is supported
+ * @param {String} platform For now, only "facebook" is supported
  * @required
- * @param {String} uid , provider user id
+ * @param {String} uid , platform user id
  * @param {Function} authCallback , this function will be called after user authentication
- * @param {Function} cancelCallback , this function will be called if user closed social provider login window
+ * @param {Function} cancelCallback , this function will be called if user closed social platform login window
  * @param {object} options
  *	 @param {DOMElement} [options.dialogContainer=document.body] param with jQuery identifier of dialog container
  * @param {Object} options
- *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
  */
-Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
-	if (provider !== 'facebook') {
-		throw new Q.Error("Users.authenticate prompt: The only supported provider for now is facebook");
+Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
+	if (platform !== 'facebook') {
+		throw new Q.Error("Users.authenticate prompt: The only supported platform for now is facebook");
 	}
 	
 	var appId = (options && options.appId) || Q.info.app;
@@ -387,14 +387,14 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 		Q.addStylesheet(Q.url('plugins/Users/css/Users.css'));
 	
 		var title = Q.text.Users.prompt.title
-			.replace(/{\$provider}/g, provider)
-			.replace(/{\$Provider}/g, provider.toCapitalized());
+			.replace(/{\$platform}/g, platform)
+			.replace(/{\$Platform}/g, platform.toCapitalized());
 		var areUsing = Q.text.Users.prompt.areUsing
-			.replace(/{\$provider}/g, provider)
-			.replace(/{\$Provider}/g, provider.toCapitalized());
+			.replace(/{\$platform}/g, platform)
+			.replace(/{\$Platform}/g, platform.toCapitalized());
 		var noLongerUsing = Q.text.Users.prompt.noLongerUsing
-			.replace(/{\$provider}/g, provider)
-			.replace(/{\$Provider}/g, provider.toCapitalized());
+			.replace(/{\$platform}/g, platform)
+			.replace(/{\$Platform}/g, platform.toCapitalized());
 		var caption;
 		var tookAction = false;
 
@@ -402,12 +402,12 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 		if (Users.loggedInUser && parseInt(Users.loggedInUser.fb_uid)) {
 			content_div.append(_usingInformation(Users.loggedInUser.fb_uid, noLongerUsing));
 			caption = Q.text.Users.prompt.doSwitch
-				.replace(/{\$provider}/, provider)
-				.replace(/{\$Provider}/, provider.toCapitalized());
+				.replace(/{\$platform}/, platform)
+				.replace(/{\$Platform}/, platform.toCapitalized());
 		} else {
 			caption = Q.text.Users.prompt.doAuth
-				.replace(/{\$provider}/, provider)
-				.replace(/{\$Provider}/, provider.toCapitalized());
+				.replace(/{\$platform}/, platform)
+				.replace(/{\$Platform}/, platform.toCapitalized());
 		}
 		content_div.append(_usingInformation(uid, areUsing)).append(_authenticateActions(caption));
 
@@ -468,18 +468,18 @@ Users.prompt = function(provider, uid, authCallback, cancelCallback, options) {
 
 
 /**
- * Check permissions granted by provider.
+ * Check permissions granted by platform.
  * Currently only facebook supported.
  * @method scope
- * @param {String} provider For now, only "facebook" is supported
- * @param {Function} callback , this function will be called after getting permissions from social provider
- * Callback parameter could be null or response object from social provider
+ * @param {String} platform For now, only "facebook" is supported
+ * @param {Function} callback , this function will be called after getting permissions from social platform
+ * Callback parameter could be null or response object from social platform
  * @param {Object} options
- *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on provider
+ *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
  */
-Users.scope = function (provider, callback, options) {
-	if (provider !== 'facebook') {
-		throw new Q.Error("Users.scope: The only supported provider for now is facebook");
+Users.scope = function (platform, callback, options) {
+	if (platform !== 'facebook') {
+		throw new Q.Error("Users.scope: The only supported platform for now is facebook");
 	}
 	var appId = (options && options.appId) || Q.info.app;
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
@@ -503,20 +503,20 @@ Users.scope = function (provider, callback, options) {
  * Log the user in
  * @method login
  * @param {Object} [options] You can pass several options here
- *  @param {Q.Event} [options.onSuccess] event that occurs when login or authentication "using" a provider is successful. It is passed (user, options, result, used) where user is the Users.User object (null if it was unchanged),
+ *  @param {Q.Event} [options.onSuccess] event that occurs when login or authentication "using" a platform is successful. It is passed (user, options, result, used) where user is the Users.User object (null if it was unchanged),
 options were the options used in the call to Users.login, result is one of "registered", "adopted", "connected" or "authorized" (see Users::authenticate)
-and 'used' is "native", or the name of the provider used, such as "facebook".
- *  @param {Function} [options.onCancel] event that occurs when login or authentication "using" a provider was canceled.
+and 'used' is "native", or the name of the platform used, such as "facebook".
+ *  @param {Function} [options.onCancel] event that occurs when login or authentication "using" a platform was canceled.
  *  @param {Function} [options.onResult] event that occurs before either onSuccess, onCancel, or onRequireComplete
  *  @param {String} [options.successUrl] If the default onSuccess implementation is used, the browser is redirected here. Defaults to Q.uris[Q.info.app+'/home']
  *  @param  {String} [options.accountStatusUrl] if passed, this URL is hit to determine if the account is complete
  *  @param {Function} [options.onRequireComplete] function to call if the user logged in but account is incomplete.
  *  It is passed the user information as well as the response from hitting accountStatusUrl
  *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
- *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with provider = "using" option
- *  @param {String} [options.scope="email,publish_stream"] permissions to request from the authentication provider
+ *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
+ *  @param {String} [options.scope="email,publish_stream"] permissions to request from the authentication platform
  *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
- *  @param {Object} [options.appIds={}] Can be used to set custom {provider: appId} pairs
+ *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
  */
 Users.login = function(options) {
 
@@ -565,11 +565,11 @@ Users.login = function(options) {
 		// perform actual login
 		if (o.using.indexOf('native') >= 0) {
 			var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
-			var usingProviders = (o.using.indexOf('facebook') >= 0)
+			var usingPlatforms = (o.using.indexOf('facebook') >= 0)
 				? { facebook: appId }
 				: {};
 			// set up dialog
-			login_setupDialog(usingProviders, o.scope, o.dialogContainer, o.identifierType);
+			login_setupDialog(usingPlatforms, o.scope, o.dialogContainer, o.identifierType);
 			priv.login_onConnect = _onConnect;
 			priv.login_onCancel = _onCancel;
 			priv.linkToken = null;
@@ -580,7 +580,7 @@ Users.login = function(options) {
 				d.data('Q/dialog').load();
 			}
 			$('#Users_login_step1').show();
-			$('#Users_login_usingProviders').show();
+			$('#Users_login_usingPlatforms').show();
 			$('#Users_login_step1_form *').removeAttr('disabled');
 			$('#Users_login_identifierType').val(o.identifierType);
 		} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
@@ -914,9 +914,9 @@ Q.onActivate.set(function (elem) {
 	});
 }, 'Users');
 
-Users.importContacts = function(provider)
+Users.importContacts = function(platform)
 {
-	window.open(Q.action("Users/importContacts?provider=" + provider), "import_contacts", "scrollbars,resizable,width=700,height=500");
+	window.open(Q.action("Users/importContacts?platform=" + platform), "import_contacts", "scrollbars,resizable,width=700,height=500");
 };
 
 /**
@@ -1257,8 +1257,8 @@ function login_callback(err, response) {
 		var authResponse;
 		var $form = $('#Users_login_step1_form');
 		if ($form.data('used') === 'facebook') {
-			var providers = $form.data('providers');
-			var appId = providers.facebook || Q.info.app;
+			var platforms = $form.data('platforms');
+			var appId = platforms.facebook || Q.info.app;
 			var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 			if (!fbAppId) {
 				console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
@@ -1279,7 +1279,7 @@ function login_callback(err, response) {
 			}, {
 				appId: appId
 			});
-			register_form.append($('<input type="hidden" name="provider" value="facebook" />'));
+			register_form.append($('<input type="hidden" name="platform" value="facebook" />'));
 		}
 		if (json.emailExists || json.mobileExists) {
 			var p = $('<p id="Users_login_identifierExists" />')
@@ -1299,7 +1299,7 @@ function login_callback(err, response) {
 		return register_form;
 	}
 
-	$('#Users_login_usingProviders').hide();
+	$('#Users_login_usingPlatforms').hide();
 	if (form.data('used')) {
 		$('*', form).attr('disabled', 'disabled');
 	}
@@ -1349,7 +1349,7 @@ function login_callback(err, response) {
  * Set up login dialog.
  * login_setupDialog.dialog will contain the dialog
  */
-function login_setupDialog(usingProviders, scope, dialogContainer, identifierType)
+function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierType)
 {
 	$('#Users_login_step1_form').data('used', null);
 	if (login_setupDialog.dialog) {
@@ -1454,18 +1454,18 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 	}
 
 	step1_form.plugin('Q/validator');
-	var step1_usingProviders_div = $('<div id="Users_login_usingProviders" />');
-	var providerCount = 0;
-	for (var provider in usingProviders) {
-		var appId = usingProviders[provider];
-		switch (provider) {
+	var step1_usingPlatforms_div = $('<div id="Users_login_usingPlatforms" />');
+	var platformCount = 0;
+	for (var platform in usingPlatforms) {
+		var appId = usingPlatforms[platform];
+		switch (platform) {
 			case 'facebook':
 				var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 				if (!fbAppId) {
 					console.warn("Users.login: missing Users.apps.facebook."+appId+".appId");
 					break;
 				}
-				++providerCount;
+				++platformCount;
 				var facebookLogin = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 					$('<img alt="login with facebook" />')
 					.attr('src', Q.text.Users.login.facebookSrc || Q.url('plugins/Users/img/facebook-login.png'))
@@ -1478,7 +1478,7 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 								return;
 							}
 							step1_form.data('used', 'facebook');
-							step1_form.data('providers', usingProviders);
+							step1_form.data('platforms', usingPlatforms);
 							var p = Q.pipe(['me', 'picture'], function(params) {
 								var me = params.me[0];
 								var picture = params.picture[0].data;
@@ -1520,15 +1520,15 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 					});
 					return false;
 				});
-				step1_usingProviders_div.append(Q.text.Users.login.usingOther).append(facebookLogin);
+				step1_usingPlatforms_div.append(Q.text.Users.login.usingOther).append(facebookLogin);
 				// Load the facebook script now, so clicking on the facebook button
 				// can trigger a popup directly, otherwise popup blockers may complain:
 				Q.addScript('https://connect.facebook.net/en_US/sdk.js');
 				break;
 		}
 	}
-	if (providerCount) {
-		step1_div.append(step1_usingProviders_div);
+	if (platformCount) {
+		step1_div.append(step1_usingPlatforms_div);
 	}
 
 	$('input', step1_form).add('select', step1_form).on('input', function () {
@@ -1587,8 +1587,8 @@ function login_setupDialog(usingProviders, scope, dialogContainer, identifierTyp
 				$('form', $(this)).plugin('Q/validator', 'reset');
 			});
 		}
-		if ($('#Users_login_usingProviders').css('display') === 'none') {
-			$('#Users_login_usingProviders').css({opacity: 0}).show()
+		if ($('#Users_login_usingPlatforms').css('display') === 'none') {
+			$('#Users_login_usingPlatforms').css({opacity: 0}).show()
 				.animate({opacity: 1}, 'fast');
 		}
 	}

@@ -13,14 +13,14 @@
  * @param {Object} [options] this object contains function parameters
  *   @param {String} [options.objectId] A Graph object id which is used to load comments from it and post comments to it.
  *   @required
- *   @param {String} [options.provider]  Has to be "facebook" for now.
+ *   @param {String} [options.platform]  Has to be "facebook" for now.
  *   @default "facebook"
  *   @param {Boolean} [options.canDelete] Identifies if deletion of comments is possible.
  *   @default false
  */
 Q.Tool.define("Streams/comments", function(o) {
-    if (o.provider !== 'facebook') {
-        alert("Only facebook is supported as a provider for now");
+    if (o.platform !== 'facebook') {
+        alert("Only facebook is supported as a platform for now");
         return false;
     }
 
@@ -116,7 +116,7 @@ Q.Tool.define("Streams/comments", function(o) {
     }
 
         $element = $(this.element);
-        switch (o.provider)
+        switch (o.platform)
         {
             case 'facebook':
                 Q.plugins.Users.login({
@@ -262,7 +262,7 @@ Q.Tool.define("Streams/comments", function(o) {
 },
 
 {
-    provider: 'facebook',
+    platform: 'facebook',
     canDelete: false
 }
 

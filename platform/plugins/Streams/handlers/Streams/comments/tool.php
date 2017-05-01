@@ -5,7 +5,7 @@
 * @param $options
 *   An associative array of parameters, which can include:
 *   "objectId" => Required. A Graph object id which is used to load comments from it and post comments to it.
-*   "provider" => Optional. Has to be "facebook" for now.
+*   "platform" => Optional. Has to be "facebook" for now.
 * @return {string}
 */
 function Streams_comments_tool($options)

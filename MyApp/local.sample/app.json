@@ -153,6 +153,14 @@
 			}
 		}
 	},
+	"Streams": {
+		"notifications": {
+			"appIds": { /*
+				"facebook": ["FACEBOOK APP ID HERE"],
+				"ios": ["361285480"]
+			*/ }
+		}
+	},
 	"Assets": {
 		"payments":  {
 			"stripe": null, /* {

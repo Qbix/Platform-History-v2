@@ -1,6 +1,6 @@
 <?php
 
-function Users_importContacts_providers_google($params) {
+function Users_importContacts_platforms_google($params) {
 	#Url fetching function
 	$fetch = function($url) use ($params) {
 		/** @var $client Zend_Oauth_Client */

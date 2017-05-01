@@ -120,12 +120,12 @@ abstract class Users extends Base_Users
 	/**
 	 * @method oAuth
 	 * @static
-	 * @param {string} $provider The name of the oAuth provider, under Users/apps config
-	 * @param {string} [$appId=Q::app()] Only needed if you have multiple apps on provider
+	 * @param {string} $platform The name of the oAuth platform, under Users/apps config
+	 * @param {string} [$appId=Q::app()] Only needed if you have multiple apps on platform
 	 * @return {Zend_Oauth_Client}
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function oAuth($provider, $appId = null)
+	static function oAuth($platform, $appId = null)
 	{
 		$nativeuser = self::loggedInUser();
 
@@ -137,13 +137,13 @@ abstract class Users extends Base_Users
 		}
 
 		#Set up oauth options
-		$oauthOptions = Q_Config::expect('Users', 'apps', $provider, $appId, 'oauth');
-		$customOptions = Q_Config::get('Users', 'apps', $provider, $appId, 'options', null);
+		$oauthOptions = Q_Config::expect('Users', 'apps', $platform, $appId, 'oauth');
+		$customOptions = Q_Config::get('Users', 'apps', $platform, $appId, 'options', null);
 
 		#If the user already has a token in our DB:
 		$appuser = new Users_AppUser();
 		$appuser->userId = $nativeuser->id;
-		$appuser->provider = $provider;
+		$appuser->platform = $platform;
 		$appuser->appId = $appId;
 
 		if($appuser->retrieve('*', true))
@@ -155,15 +155,15 @@ abstract class Users extends Base_Users
 				return $zt->getHttpClient($oauthOptions);
 		}
 
-		#Otherwise, obtain a token from provider:
+		#Otherwise, obtain a token from platform:
 		$consumer = new Zend_Oauth_Consumer($oauthOptions);
 
-		if(isset($_GET['oauth_token']) && isset($_SESSION[$provider.'_request_token'])) //it's a redirect back from google
+		if(isset($_GET['oauth_token']) && isset($_SESSION[$platform.'_request_token'])) //it's a redirect back from google
 		{
-			$token = $consumer->getAccessToken($_GET, unserialize($_SESSION[$provider.'_request_token']));
+			$token = $consumer->getAccessToken($_GET, unserialize($_SESSION[$platform.'_request_token']));
 
-			$_SESSION[$provider.'_access_token'] = serialize($token);
-			$_SESSION[$provider.'_request_token'] = null;
+			$_SESSION[$platform.'_access_token'] = serialize($token);
+			$_SESSION[$platform.'_request_token'] = null;
 
 			#Save tokens to database
 			$appuser->access_token = $token->getToken();
@@ -176,7 +176,7 @@ abstract class Users extends Base_Users
 		{
 			$token = $consumer->getRequestToken($customOptions);
 
-			$_SESSION[$provider.'_request_token'] = serialize($token);
+			$_SESSION[$platform.'_request_token'] = serialize($token);
 
 			$consumer->redirect();
 
@@ -188,11 +188,11 @@ abstract class Users extends Base_Users
 	/**
 	 * @method oAuthClear
 	 * @static
-	 * @param {string} $provider The name of the oAuth provider, under Users/apps config
-	 * @param {string} [$appId=Q::app()] Only needed if you have multiple apps on provider
+	 * @param {string} $platform The name of the oAuth platform, under Users/apps config
+	 * @param {string} [$appId=Q::app()] Only needed if you have multiple apps on platform
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function oAuthClear($provider, $appId = null)
+	static function oAuthClear($platform, $appId = null)
 	{
 		$nativeuser = self::loggedInUser();
 
@@ -201,12 +201,12 @@ abstract class Users extends Base_Users
 		
 		if (!isset($appId)) {
 			$app = Q::app();
-			$appId = Q_Config::expect('Users', 'apps', $provider, $app, 'appId');
+			$appId = Q_Config::expect('Users', 'apps', $platform, $app, 'appId');
 		}
 
 		$appuser = new Users_AppUser();
 		$appuser->userId = $nativeuser->id;
-		$appuser->provider = $provider;
+		$appuser->platform = $platform;
 		$appuser->appId = $appId;
 		$appuser->remove();
 	}
@@ -219,33 +219,33 @@ abstract class Users extends Base_Users
 	 * users.
 	 * @method authenticate
 	 * @static
-	 * @param {string} $provider Currently only supports the value "facebook".
-	 * @param {string} [$appId=null] The id of the app within the specified provider.
+	 * @param {string} $platform Currently only supports the value "facebook".
+	 * @param {string} [$appId=null] The id of the app within the specified platform.
 	 * @param {&boolean} [$authenticated=null] If authentication fails, puts false here.
 	 *  Otherwise, puts one of the following:
 	 *  * 'registered' if user just registered,
 	 *  * 'adopted' if a futureUser was just adopted,
-	 *  * 'connected' if a logged-in user just connected the provider account for the first time,
-	 *  * 'authorized' if a logged-in user was connected to provider but just authorized this app for the first time
+	 *  * 'connected' if a logged-in user just connected the platform account for the first time,
+	 *  * 'authorized' if a logged-in user was connected to platform but just authorized this app for the first time
 	 *  or true otherwise.
-	 * @param {array} [$import=Q_Config::get('Users', 'import', $provider)]
-	 *  Array of things to import from provider if they are not already set.
+	 * @param {array} [$import=Q_Config::get('Users', 'import', $platform)]
+	 *  Array of things to import from platform if they are not already set.
 	 *  Can include "emailAddress", "firstName", "lastName" and "username".
 	 *  If the email address is imported, it is set without requiring verification, and
 	 *  any email under Users/transactional/authenticated is set
 	 *  If true, and the user's email address is not set yet,
-	 *  imports the email address from the provider if it is available,
+	 *  imports the email address from the platform if it is available,
 	 *  and sets it as the user's email address without requiring verification.
 	 * @return {Users_User}
 	 */
 	static function authenticate(
-		$provider,
+		$platform,
 		$appId = null,
 		&$authenticated = null,
 		$import = null)
 	{
 		if (!isset($import)) {
-			$import = Q_Config::get('Users', 'import', $provider, array(
+			$import = Q_Config::get('Users', 'import', $platform, array(
 				'emailAddress', 'firstName', 'lastName'
 			));
 		}
@@ -259,17 +259,17 @@ abstract class Users extends Base_Users
 		$return = null;
 		/**
 		 * @event Users/authenticate {before}
-		 * @param {string} provider
+		 * @param {string} platform
 		 * @param {string} appId
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Users/authenticate', compact('provider', 'appId'), 'before');
+		$return = Q::event('Users/authenticate', compact('platform', 'appId'), 'before');
 		if (isset($return)) {
 			return $return;
 		}
 
-		if (!isset($provider) or $provider != 'facebook') {
-			throw new Q_Exception_WrongType(array('field' => 'provider', 'type' => '"facebook"'));
+		if (!isset($platform) or $platform != 'facebook') {
+			throw new Q_Exception_WrongType(array('field' => 'platform', 'type' => '"facebook"'));
 		}
 
 		if (!isset($appId)) {
@@ -292,8 +292,8 @@ abstract class Users extends Base_Users
 		$authenticated = false;
 		$emailAddress = null;
 
-		// Try authenticating the user with the specified provider
-		switch ($provider) {
+		// Try authenticating the user with the specified platform
+		switch ($platform) {
 		case 'facebook':
 			$facebook = Users::facebook($appId);
 			$fb_uid = Users_AppUser::loggedInUid($facebook);
@@ -472,10 +472,10 @@ abstract class Users extends Base_Users
 			// not sure how to log this user in
 			return $userWasLoggedIn ? $user : false;
 		}
-		// Check we should import an email address from the provider
+		// Check we should import an email address from the platform
 		if (in_array('emailAddress', $import) and !empty($emailAddress) and empty($user->emailAddress)) {
 			// We automatically set their email as verified, without a confirmation message,
-			// because we trust the authentication provider.
+			// because we trust the authentication platform.
 			$user->setEmailAddress($emailAddress, true, $email);
 			// But might send a welcome email to the users who just authenticated
 			$emailSubject = Q_Config::get('Users', 'transactional', 'authenticated', 'subject', false);
@@ -505,8 +505,8 @@ abstract class Users extends Base_Users
 		}
 
 		// Now make sure our master session contains the
-		// session info for the provider app.
-		if ($provider == 'facebook') {
+		// session info for the platform app.
+		if ($platform == 'facebook') {
 			$accessToken = $facebook->getDefaultAccessToken();
 			$at = $accessToken->getValue();
 			if (isset($_SESSION['Users']['appUsers']['facebook_'.$appId])) {
@@ -543,7 +543,7 @@ abstract class Users extends Base_Users
 				// We have to put the session info in
 				$app_user = new Users_AppUser();
 				$app_user->userId = $user->id;
-				$app_user->provider = 'facebook';
+				$app_user->platform = 'facebook';
 				$app_user->appId = $appId;
 				if ($app_user->retrieve()) {
 					// App user exists in database. Do we need to update it?
@@ -567,7 +567,7 @@ abstract class Users extends Base_Users
 					}
 					$app_user->access_token = $at;
 					$app_user->session_expires = $accessToken->getExpiresAt()->getTimestamp();
-					$app_user->provider_uid = $user->fb_uid;
+					$app_user->platform_uid = $user->fb_uid;
 					/**
 					 * @event Users/insertAppUser {before}
 					 * @param {Users_User} user
@@ -576,8 +576,8 @@ abstract class Users extends Base_Users
 					Q::event('Users/insertAppUser', compact('user', 'during'), 'before');
 					// The following may update an existing app_user row
 					// in the rare event that someone tries to tie the same
-					// provider account to two different accounts.
-					// A provider account can only reference one account, so the
+					// platform account to two different accounts.
+					// A platform account can only reference one account, so the
 					// old connection will be dropped, and the new connection saved.
 					$app_user->save(true);
 					/**
@@ -596,10 +596,10 @@ abstract class Users extends Base_Users
 
 		/**
 		 * @event Users/authenticate {after}
-		 * @param {string} provider
+		 * @param {string} platform
 		 * @param {string} appId
 		 */
-		Q::event('Users/authenticate', compact('provider', 'appId'), 'after');
+		Q::event('Users/authenticate', compact('platform', 'appId'), 'after');
 
 		// At this point, $user is set.
 		return $user;
@@ -896,7 +896,7 @@ abstract class Users extends Base_Users
 	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
-	 * @param {string} [$provider=null] Provider such as "facebook"
+	 * @param {string} [$platform=null] Platform such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -909,12 +909,12 @@ abstract class Users extends Base_Users
 		$username, 
 		$identifier, 
 		$icon = array(), 
-		$provider = null, 
+		$platform = null, 
 		$options = array())
 	{
-		if (is_array($provider)) {
-			$options = $provider;
-			$provider = null;
+		if (is_array($platform)) {
+			$options = $platform;
+			$platform = null;
 		}
 
 		/**
@@ -922,10 +922,10 @@ abstract class Users extends Base_Users
 		 * @param {string} username
 		 * @param {string|array} identifier
 		 * @param {string} icon
-		 * @param {string} provider
+		 * @param {string} platform
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Users/register', compact('username', 'identifier', 'icon', 'provider', 'options'), 'before');
+		$return = Q::event('Users/register', compact('username', 'identifier', 'icon', 'platform', 'options'), 'before');
 		if (isset($return)) {
 			return $return;
 		}
@@ -969,19 +969,19 @@ abstract class Users extends Base_Users
 		}
 
 		$user = false;
-		if ($provider) {
-			if ($provider != 'facebook') {
+		if ($platform) {
+			if ($platform != 'facebook') {
 				throw new Q_Exception_WrongType(array(
-					'field' => 'provider', 
+					'field' => 'platform', 
 					'type' => '"facebook"'
 				));
 			}
 			if ($facebook = Users::facebook()) {
 				$uid = Users_AppUser::loggedInUid($facebook);
 				try {
-					// authenticate (and possibly adopt) an existing provider user
+					// authenticate (and possibly adopt) an existing platform user
 					// or insert a new user during this authentication
-					$user = Users::authenticate($provider, null, $authenticated, true);
+					$user = Users::authenticate($platform, null, $authenticated, true);
 				} catch (Exception $e) {
 
 				}
@@ -989,7 +989,7 @@ abstract class Users extends Base_Users
 					// the user is also logged in
 					$adopted = true;
 
-					// Adopt this provider user
+					// Adopt this platform user
 					/**
 					 * @event Users/adoptFutureUser {before}
 					 * @param {Users_User} user
@@ -1048,7 +1048,7 @@ abstract class Users extends Base_Users
 		sort($sizes);
 
 		if (empty($icon)) {
-			switch ($provider) {
+			switch ($platform) {
 			case 'facebook':
 				// let's get this user's icon on facebook
 				if (empty($uid)) {
@@ -1124,11 +1124,11 @@ abstract class Users extends Base_Users
 		 * @param {string|array} identifier
 		 * @param {string} icon
 		 * @param {Users_User} user
-		 * @param {string} provider
+		 * @param {string} platform
 		 * @return {Users_User}
 		 */
 		$return = Q::event('Users/register', compact(
-			'username', 'identifier', 'icon', 'user', 'provider', 'options', 'device'
+			'username', 'identifier', 'icon', 'user', 'platform', 'options', 'device'
 		), 'after');
 
 		return $user;
@@ -1252,7 +1252,7 @@ abstract class Users extends Base_Users
 	 * With every type except "none", the user will be 
 	 *
 	 * NOTE: If the person we are representing here comes and registers the regular way,
-	 * and then later adds an email, mobile, or authenticates with a provider,
+	 * and then later adds an email, mobile, or authenticates with a platform,
 	 * which happens to match the "future" mapping we inserted in users_identify table, 
 	 * then this futureUser will not be converted, since they already registered
 	 * a different user. Later on, we may have some sort function to merge users together. 
@@ -1513,6 +1513,33 @@ abstract class Users extends Base_Users
 
 		return $result;
 	}
+	
+	/**
+	 * Get the internal app id and info
+	 * @method appId
+	 * @static
+	 * @param {string} $platform The platform or platform for the app
+	 * @param {string} $appId Can be either an internal or external app id
+	 * @return {array} Returns array($appId, $appInfo)
+	 */
+	static function appInfo($platform, $appId)
+	{
+		$apps = Q_Config::get('Users', 'apps', $platform, array());
+		if (isset($apps[$id])) {
+			$appInfo = $apps[$id];
+		} else {
+			$id = $appInfo = null;
+			foreach ($apps as $k => $v) {
+				if ($v['appId'] === $appId) {
+					$appInfo = $v;
+					$id = $k;
+					break;
+				}
+			}
+			$appId = $id;
+		}
+		return array($appId, $appInfo);
+	}
 
 	/**
 	 * Gets the facebook object constructed from request and/or cookies
@@ -1531,24 +1558,13 @@ abstract class Users extends Base_Users
 		if (isset(self::$facebooks[$appId])) {
 			return self::$facebooks[$appId];
 		}
-		$apps = Q_Config::get('Users', 'apps', 'facebook', array());
-		if (isset($apps[$appId])) {
-			$fbInfo = $apps[$appId];
-		} else {
-			foreach ($apps as $k => $v) {
-				if ($v['appId'] === $appId) {
-					$fbInfo = $v;
-					$appId = $k;
-					break;
-				}
-			}
+		list($appId, $fbInfo) = Users::appInfo('facebook', $appId);
+		if (!$appId) {
+			return null;
 		}
 		$fbAppId = (isset($fbInfo['appId']) && isset($fbInfo['secret']))
 			? $fbInfo['appId']
 			: '';
-		if (!$appId) {
-			return null;
-		}
 
 		try {
 			$params = array_merge(array(

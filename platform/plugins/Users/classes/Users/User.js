@@ -59,14 +59,14 @@ Users_User.clientsOnline = function(userId, sessionId) {
  * @static
  * @param {String} userId The id of a user
  * @param {String} platform The name of a platform in "Users"/"apps"/"platforms" array
- * @param {String} appId The external app id registered with the platform
+ * @param {String|Array} appIds The external app id registered with the platform
  * @param {Function} callback The first parameter contains {platformName: devicesArray}
  */
-Users_User.devices = function (userId, platform, appId, callback) {
+Users_User.devices = function (userId, platform, appIds, callback) {
 	Users.Device.SELECT('*').where({
 		userId: userId,
 		platform: platform,
-		appId: appId
+		appId: appIds
 	}).execute(function(err, res) {
 		if (err) return;
 		var devices = {};

@@ -15,7 +15,7 @@
  * @extends Db_Row
  *
  * @property {string} $userId
- * @property {string} $provider
+ * @property {string} $platform
  * @property {string} $appId
  * @property {string|Db_Expression} $insertedTime
  * @property {string|Db_Expression} $updatedTime
@@ -23,7 +23,7 @@
  * @property {string} $session_secret
  * @property {string|Db_Expression} $session_expires
  * @property {string} $state
- * @property {string} $provider_uid
+ * @property {string} $platform_uid
  */
 abstract class Base_Users_AppUser extends Db_Row
 {
@@ -32,7 +32,7 @@ abstract class Base_Users_AppUser extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $provider
+	 * @property $platform
 	 * @type {string}
 	 */
 	/**
@@ -64,7 +64,7 @@ abstract class Base_Users_AppUser extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $provider_uid
+	 * @property $platform_uid
 	 * @type {string}
 	 */
 	/**
@@ -79,7 +79,7 @@ abstract class Base_Users_AppUser extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'userId',
-			  1 => 'provider',
+			  1 => 'platform',
 			  2 => 'appId',
 			)
 		);
@@ -272,41 +272,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_provider
+	 * @method beforeSet_platform
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_provider($value)
+	function beforeSet_platform($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('provider', $value);
+			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".provider");
+			throw new Exception('Must pass a string to '.$this->getTable().".platform");
 		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".provider");
-		return array('provider', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".platform");
+		return array('platform', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the provider field
+	 * Returns the maximum string length that can be assigned to the platform field
 	 * @return {integer}
 	 */
-	function maxSize_provider()
+	function maxSize_platform()
 	{
 
 		return 31;			
 	}
 
 	/**
-	 * Returns schema information for provider column
+	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_provider()
+	static function column_platform()
 	{
 
 return array (
@@ -670,41 +670,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_provider_uid
+	 * @method beforeSet_platform_uid
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_provider_uid($value)
+	function beforeSet_platform_uid($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('provider_uid', $value);
+			return array('platform_uid', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".provider_uid");
+			throw new Exception('Must pass a string to '.$this->getTable().".platform_uid");
 		if (strlen($value) > 200)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".provider_uid");
-		return array('provider_uid', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".platform_uid");
+		return array('platform_uid', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the provider_uid field
+	 * Returns the maximum string length that can be assigned to the platform_uid field
 	 * @return {integer}
 	 */
-	function maxSize_provider_uid()
+	function maxSize_platform_uid()
 	{
 
 		return 200;			
 	}
 
 	/**
-	 * Returns schema information for provider_uid column
+	 * Returns schema information for platform_uid column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_provider_uid()
+	static function column_platform_uid()
 	{
 
 return array (
@@ -732,7 +732,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('provider','appId') as $name) {
+			foreach (array('platform','appId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -753,7 +753,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'provider', 'appId', 'insertedTime', 'updatedTime', 'access_token', 'session_secret', 'session_expires', 'state', 'provider_uid');
+		$field_names = array('userId', 'platform', 'appId', 'insertedTime', 'updatedTime', 'access_token', 'session_secret', 'session_expires', 'state', 'platform_uid');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

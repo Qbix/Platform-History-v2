@@ -186,7 +186,7 @@ class Streams_Access extends Base_Streams_Access
 	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$icon=array()] Array of filename => url pairs
-	 * @param {string} [$provider=null] Provider such as "facebook"
+	 * @param {string} [$platform=null] Platform such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -199,12 +199,12 @@ class Streams_Access extends Base_Streams_Access
 		$fullName, 
 		$identifier, 
 		$icon = array(), 
-		$provider = null, 
+		$platform = null, 
 		$options = array())
 	{
-		if (is_array($provider)) {
-			$options = $provider;
-			$provider = null;
+		if (is_array($platform)) {
+			$options = $platform;
+			$platform = null;
 		}
 		
 		/**
@@ -215,7 +215,7 @@ class Streams_Access extends Base_Streams_Access
 		 * @return {Users_User}
 		 */
 		$return = Q::event('Streams/register', compact(
-			'name', 'fullName', 'identifier', 'icon', 'provider', 'options'), 'before'
+			'name', 'fullName', 'identifier', 'icon', 'platform', 'options'), 'before'
 		);
 		if (isset($return)) {
 			return $return;
@@ -235,7 +235,7 @@ class Streams_Access extends Base_Streams_Access
 		// this will be used in Streams_after_Users_User_saveExecute
 		Streams::$cache['register'] = $register;
 
-		$user = Users::register("", $identifier, $icon, $provider, $options);
+		$user = Users::register("", $identifier, $icon, $platform, $options);
 
 		/**
 		 * @event Streams/register {after}
@@ -246,7 +246,7 @@ class Streams_Access extends Base_Streams_Access
 		 * @return {Users_User}
 		 */
 		Q::event('Streams/register', compact(
-			'register', 'identifier', 'icon', 'user', 'provider', 'options'
+			'register', 'identifier', 'icon', 'user', 'platform', 'options'
 		), 'after');
 
 		return $user;
