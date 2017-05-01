@@ -131,11 +131,11 @@ Places.Location = {
 	 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
 	 * @param {Function} callback gets (array of results of the geolocation, and status code)
 	 * @param {Object} [options]
-	 * @param {Object} [options.provider='google']
+	 * @param {Object} [options.platform='google']
 	 */
 	geocode: function (loc, callback, options) {
 		var o = Q.extend({}, Places.Location.geocode.options, options);
-		if (o.provider !== 'google') {
+		if (o.platform !== 'google') {
 			return;
 		}
 		Places.loadGoogleMaps(function () {
@@ -180,7 +180,7 @@ Places.Location = {
 };
 
 Places.Location.geocode.options = {
-	provider: 'google'
+	platform: 'google'
 };
 
 function _deg2rad(angle) {

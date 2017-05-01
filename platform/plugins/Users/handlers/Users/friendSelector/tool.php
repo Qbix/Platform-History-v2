@@ -10,7 +10,7 @@
  *                   Callback may be a function or string name of the function.
  *                   Array should contain objects like { id: 'id', name: 'name' }. 'includeMe' option is ignored if 'customList' provided.
  *   "includeMe" => Optional. Whether or not to include user himself. Can be just boolean true or a string, which is used instead of user real name.
- *   "provider" => Optional. Has to be "facebook" for now.
+ *   "platform" => Optional. Has to be "facebook" for now.
  *   "prompt" => Prompt that appears if the tool is shown but user hasn't granted sufficient permissions yet.
  *   "filter" => Custom function to filter out the friends list.
  *   "ordering" => Custom function to order the friends list. By default friends are ordered by name.

@@ -10,7 +10,7 @@
  * @param {array} [$_REQUEST.identifier.device] an array with keys "deviceId", "platform", "version"
  *   to store in the Users_Device table for sending notifications
  * @param {array|string} [$_REQUEST.icon=array()] Array of filename => url pairs
- * @param {string} [$_REQUEST.provider=null] Provider such as "facebook"
+ * @param {string} [$_REQUEST.platform=null] Platform such as "facebook"
  * @return {void}
  * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
  * @throws {Q_Exception} If user was already verified for someone else
@@ -19,7 +19,7 @@
  */
 function Users_register_post()
 {
-	$provider = null;
+	$platform = null;
 	$icon = null;
 	$username = null;
 	$activation = null;
@@ -37,7 +37,7 @@ function Users_register_post()
 		$username, 
 		Users::requestedIdentifier(), 
 		$icon,
-		$provider,
+		$platform,
 		compact('activation')
 	);
 	Users::setLoggedInUser($user);

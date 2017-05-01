@@ -23,7 +23,7 @@
  *   Whether or not to include user himself. Can be just boolean true or a string,
  *    which is used instead of user real name.
  *    <b>Ignored if 'customList' option is provided.</b>
- *    @param {String} [options.provider]
+ *    @param {String} [options.platform]
  *    Has to be "facebook" for now.
  *    @default 'facebook'
  *    @param {String|Boolean} [options.prompt]
@@ -49,9 +49,9 @@ Q.Tool.define('Users/friendSelector', function(o) {
 		alert("Please provide the onSelect option for the friendSelector");
 		return false;
 	}
-	if (o.provider !== 'facebook')
+	if (o.platform !== 'facebook')
 	{
-		alert("Only facebook is supported as a provider for now");
+		alert("Only facebook is supported as a platform for now");
 		return false;
 	}
 	o.onSelect = new Q.Event(o.onSelect);
@@ -146,7 +146,7 @@ Q.Tool.define('Users/friendSelector', function(o) {
 		$('.Users_friendSelector_tool').append(friendsList);
 	}
 	
-	switch (o.provider) {
+	switch (o.platform) {
 		case 'facebook':
 			toolDiv.empty().append('<div class="Users_tools_throbber"><img src="' + Q.url('/plugins/Q/img/throbbers/loading.gif') + '" alt="" /></div>');
 			
@@ -237,7 +237,7 @@ Q.Tool.define('Users/friendSelector', function(o) {
 	onSelect: null,
 	customList: null,
 	includeMe: false,
-	provider: 'facebook',
+	platform: 'facebook',
 	prompt: false,
 	promptTitle: 'Login required',
 	promptText: 'Please log into Facebook to to view your friends.',

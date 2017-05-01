@@ -4,25 +4,25 @@
  * Renders an import tool
  * @param $options
  *   An associative array of parameters, which can include:
- *   "provider" => Required. The provider from which we are importing.
+ *   "platform" => Required. The platform from which we are importing.
  * @return {string}
  */
 function Users_importContacts_tool($options)
 {
-	$provider = $options['provider'];
+	$platform = $options['platform'];
 
 	ob_start();
 
 	try{
-		if(!($client=Users::oAuth($provider)))
+		if(!($client=Users::oAuth($platform)))
 			throw new Users_Exception_NotAuthorized();
 
-		Q::event('Users/importContacts/providers/'.$provider, array('client'=>$client));
+		Q::event('Users/importContacts/platforms/'.$platform, array('client'=>$client));
 	}
 	catch(Users_Exception_OAuthTokenInvalid $ex) //Expired token
 	{
 		#TODO: Log something to error log?
-		Users::oAuthClear($provider);
+		Users::oAuthClear($platform);
 		Q_Response::redirect(Q_Uri::url(Q_Request::url(true)));
 		return false;
 	}

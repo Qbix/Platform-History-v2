@@ -3785,8 +3785,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 
 	var $form = $('#Streams_login_step1_form');
 	if ($form.data('used') === 'facebook') {
-		var providers = $form.data('providers');
-		var appId = providers.facebook || Q.info.app;
+		var platforms = $form.data('platforms');
+		var appId = platforms.facebook || Q.info.app;
 		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 		if (!fbAppId) {
 			console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
@@ -3807,7 +3807,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		}, {
 			appId: appId
 		});
-		register_form.append($('<input type="hidden" name="provider" value="facebook" />'));
+		register_form.append($('<input type="hidden" name="platform" value="facebook" />'));
 	}
 	if (json.emailExists || json.mobileExists) {
 		var p = $('<p id="Streams_login_identifierExists" />')

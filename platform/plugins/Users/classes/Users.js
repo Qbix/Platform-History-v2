@@ -113,8 +113,7 @@ Users.userFromSession = function (sessionId, callback) {
  * @method listen
  * @param {Object} [options={}]
  * @param {Object} [options.apn.provider={}] Additional options for node-apn Provider
- * @param {String} [options.appId=Q.app.name] Only needed if you have multiple apps on provider
- */
+ * @param {String} [options.apn.appId=Q.app.name] Only needed if you have multiple ios platform
 Users.listen = function (options) {
 
 	var o = Q.extend({}, Users.listen.options, options);
@@ -124,7 +123,7 @@ Users.listen = function (options) {
     server.attached.express.post('/Q/node', Users_request_handler);
 
 	// Set up ios push notification agent
-	var appId = o.appId || Q.app.name;
+	var appId = o.apn && o.apn.appId || Q.app.name;
 	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") >= 0) {
 		_Users_listen_ios(o, server);
 	}
