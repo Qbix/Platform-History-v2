@@ -44,16 +44,9 @@ class Users_Device extends Base_Users_Device
 		$platform = $device['platform'];
 		$platformAppId = $device['appId'];
 		$apps = Q_Config::expect('Users', 'apps', $platform);
-		$info = null;
-		foreach ($apps as $k => $v) {
-			if ($v['appId'] === $appId) {
-				$info = $v;
-			}
-			$appId = $k;
-			break;
-		}
+		list($appId, $info) = Users::appInfo($platform, $platformAppId);
 		if (!$info) {
-			throw new Q_Exception_MissingConfig("Users/apps/$platform/.../appId=$appId");
+			throw new Q_Exception_MissingConfig("Users/apps/$platform/.../appId=$platformAppId");
 		}
 		if (!$skipNotification) {
 			$sandbox = Q::ifset($device, 'sandbox', false);
