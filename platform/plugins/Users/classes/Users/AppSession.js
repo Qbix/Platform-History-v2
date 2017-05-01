@@ -11,7 +11,7 @@ var AppSession = Q.require('Base/Users/AppSession');
 
 /**
  * Class representing 'AppSession' rows in the 'Users' database
- * <br/>Represents a session in our 3rd party app with a provider like ios
+ * <br/>Represents a session in our 3rd party app with a platform like ios
  * @namespace Users
  * @class AppSession
  * @extends Base.Users.AppSession

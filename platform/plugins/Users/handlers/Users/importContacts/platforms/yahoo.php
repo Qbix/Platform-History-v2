@@ -1,6 +1,6 @@
 <?php
 
-function Users_importContacts_providers_yahoo($params) {
+function Users_importContacts_platforms_yahoo($params) {
 	#Url fetching function
 	$fetch = function($url) use ($params) {
 		/** @var $client Zend_Oauth_Client */
@@ -21,18 +21,18 @@ function Users_importContacts_providers_yahoo($params) {
 		$appId = Q::ifset($params, 'appId', Q::app());
 		$au = new Users_AppUser();
 		$au->userId = $cu->id;
-		$au->provider = 'yahoo';
-		$au->appId = Q_Config::expect('Users', 'apps', $provider, $appId, 'appId');
+		$au->platform = 'yahoo';
+		$au->appId = Q_Config::expect('Users', 'apps', $platform, $appId, 'appId');
 		$au->retrieve('*', true);
 	}
 
-	if(!empty($au->provider_uid)) #We have user's Yahoo GUID saved
-		$guid = $au->provider_uid;
+	if(!empty($au->platform_uid)) #We have user's Yahoo GUID saved
+		$guid = $au->platform_uid;
 	else #Request user's GUID from Yahoo and save it
 	{
 		$guidjson = json_decode($fetch('http://social.yahooapis.com/v1/me/guid'));
 		$guid = $guidjson->guid->value;
-		$au->provider_uid = $guid;
+		$au->platform_uid = $guid;
 		$au->save(true);
 	}
 

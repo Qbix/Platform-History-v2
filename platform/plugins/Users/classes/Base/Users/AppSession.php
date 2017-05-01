@@ -15,7 +15,7 @@
  * @extends Db_Row
  *
  * @property {string} $udid
- * @property {string} $provider
+ * @property {string} $platform
  * @property {string} $appId
  * @property {string} $sessionId
  * @property {string|Db_Expression} $insertedTime
@@ -28,7 +28,7 @@ abstract class Base_Users_AppSession extends Db_Row
 	 * @type {string}
 	 */
 	/**
-	 * @property $provider
+	 * @property $platform
 	 * @type {string}
 	 */
 	/**
@@ -59,7 +59,7 @@ abstract class Base_Users_AppSession extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'udid',
-			  1 => 'provider',
+			  1 => 'platform',
 			  2 => 'appId',
 			)
 		);
@@ -252,41 +252,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_provider
+	 * @method beforeSet_platform
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_provider($value)
+	function beforeSet_platform($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('provider', $value);
+			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".provider");
+			throw new Exception('Must pass a string to '.$this->getTable().".platform");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".provider");
-		return array('provider', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".platform");
+		return array('platform', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the provider field
+	 * Returns the maximum string length that can be assigned to the platform field
 	 * @return {integer}
 	 */
-	function maxSize_provider()
+	function maxSize_platform()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for provider column
+	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_provider()
+	static function column_platform()
 	{
 
 return array (
@@ -524,7 +524,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('udid', 'provider', 'appId', 'sessionId', 'insertedTime', 'updatedTime');
+		$field_names = array('udid', 'platform', 'appId', 'sessionId', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

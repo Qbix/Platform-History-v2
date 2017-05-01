@@ -14,13 +14,13 @@
  *   @param {Q.Event} [options.beforePhotos] Triggered when photos are about to be rendered.
  *   @param {Q.Event} [options.onPhotos] Triggered when photos have been rendered.
  *   @param {Q.Event} [options.onPhotosLoaded] Triggered when the photos have all been loaded.
- *   @param {String} [options.uid='me'] Optional. The uid of the user on the provider whose photos are shown. Facebook only allows 'me' or a page id as a value.
+ *   @param {String} [options.uid='me'] Optional. The uid of the user on the platform whose photos are shown. Facebook only allows 'me' or a page id as a value.
  *   @param {String} [$options.fetchBy='album'] The tool supports different algoriths for fetching photos. Can be either by 'album' or 'tags'. Maybe more will be added later.
  *   @param {String} [$options.preprocessAlbums] Optional function to process the albums array before presenting it in the select. Receives a reference to the albums array as the first parameter, and a callback to call when it's done as the second.
  *   @param {String} [$options.preprocessPhotos] Optional function to process the photos array before presenting it in the select. Receives a reference to the albums array as the first parameter, and a callback to call when it's done as the second.
  *   @param {Q.Event} [options.onLoad] Q.Event, callback or callback string name which is called when bunch of photos has been loaded.
  *   @param {Q.Event} [options.onError] Q.Event, callback or callback string which will be called for each image that is unable to load. Image DOM element will be passed as first argument.
- *   @param {String} [options.provider='facebook]  Has to be "facebook" for now. 
+ *   @param {String} [options.platform='facebook]  Has to be "facebook" for now. 
  *   @param {String} [options.prompt=false]
  *   Specifies type of prompt if user is not logged in or didn't give required permission for the tool.
  *  Can be either 'button', 'dialog' or null|false.
@@ -43,8 +43,8 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 	if (!state.onSelect) {
 		console.warn("Streams/photoSelector: please provide the onSelect option");
 	}
-	if (state.provider !== 'facebook') {
-		console.warn("Only facebook is supported as a provider for now");
+	if (state.platform !== 'facebook') {
+		console.warn("Only facebook is supported as a platform for now");
 	}
 	
 	var fields = 'id,album,created_time,from,icon,images,link,name,name_tags,updated_time,width,event,place,picture';
@@ -232,7 +232,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 		});
 	}
 
-	switch (state.provider) {
+	switch (state.platform) {
 	case 'facebook':
 		$te.find('*').remove();
 		$te.removeClass('Streams_photoSelector_by_album Streams_photoSelector_by_tags')
@@ -330,7 +330,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 	fetchBy: 'album',
 	onLoad: new Q.Event(function() {}),
 	onError: new Q.Event(function() {}),
-	provider: 'facebook',
+	platform: 'facebook',
 	prompt: false,
 	promptTitle: 'Login required',
 	promptText: 'Please log into Facebook to to view photos.',

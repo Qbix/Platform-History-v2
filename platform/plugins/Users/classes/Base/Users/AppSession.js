@@ -34,7 +34,7 @@ Q.mixin(Base, Row);
  */
 /**
  * @property {String}
- * @type provider
+ * @type platform
  */
 /**
  * @property {String|Buffer}
@@ -197,7 +197,7 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"udid",
-		"provider",
+		"platform",
 		"appId"
 	];
 };
@@ -210,7 +210,7 @@ Base.prototype.primaryKey = function () {
 Base.prototype.fieldNames = function () {
 	return [
 		"udid",
-		"provider",
+		"platform",
 		"appId",
 		"sessionId",
 		"insertedTime",
@@ -259,37 +259,37 @@ return [["varbinary","255","",false],false,"PRI",""];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_provider
+ * @method beforeSet_platform
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_provider = function (value) {
+Base.prototype.beforeSet_platform = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".provider");
+			throw new Error('Must pass a String to '+this.table()+".platform");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".provider");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the provider field
+	 * Returns the maximum string length that can be assigned to the platform field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_provider = function () {
+Base.prototype.maxSize_platform = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for provider column
+	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_provider = function () {
+Base.column_platform = function () {
 
 return [["varchar","255","",false],false,"PRI",""];
 };
