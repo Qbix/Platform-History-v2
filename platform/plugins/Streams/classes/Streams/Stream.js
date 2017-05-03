@@ -1204,13 +1204,14 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		if (!access) {
 			return;
 		}
+		var app = Q.app.name;
 		var appIds = Q.Config.get(['Streams', 'notifications', 'appIds'], null);
 		if (appIds === null) {
 			appIds = {};
 			var platforms = Q.Config.expect(['Users', 'apps', 'platforms']);
 			platforms.forEach(function (platform) {
 				var platformAppId = Q.Config.expect([
-					'Users', 'apps', platform, appId, 'appId'
+					'Users', 'apps', platform, app, 'appId'
 				]);
 				appIds[platform] = [platformAppId];
 			});
