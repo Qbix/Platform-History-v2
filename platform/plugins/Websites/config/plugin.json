@@ -9,8 +9,8 @@
 			}
 		},
 		"handlersBeforeEvent": {
-			"Q/url": ["Websites/before/Q_url"],
-			"Q/uriFromUrl": ["Websites/before/Q_uriFromUrl"],
+			"Q/Uri/toUrl": ["Websites/before/Q_Uri_toUrl"],
+			"Q/Uri/fromUrl": ["Websites/before/Q_Uri_fromUrl"],
 			"Q/responseExtras": ["Websites/before/Q_responseExtras"],
 			"Streams/Stream/save/Websites/article": ["Websites/before/Streams_Stream_save_Websites_article"],
 			"Streams/Stream/save/Websites/seo": ["Websites/before/Streams_Stream_save_Websites_seo"]
@@ -83,6 +83,10 @@
 		}
 	},
 	"Websites": {
-		"seoReload": true
+		"seoReload": true,
+		"permalinks": {
+			"routes": {},
+			"actions": {}
+		}
 	}
 }

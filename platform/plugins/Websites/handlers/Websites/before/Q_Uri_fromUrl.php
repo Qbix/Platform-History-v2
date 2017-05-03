@@ -1,6 +1,6 @@
 <?php
 
-function Websites_before_Q_uriFromUrl($params, &$result)
+function Websites_before_Q_Uri_fromUrl($params, &$result)
 {
 	if (!Q::$bootstrapped) {
 		return; // we probably haven't even loaded the database configuration yet.
