@@ -86,9 +86,7 @@ Q.Tool.define('Q/filter', function (options) {
 	$te.addClass(state.fullscreen ? 'Q_filter_fullscreen' : 'Q_filter_notFullscreen');
 	
 	tool.$results.on(Q.Pointer.start+' '+Q.Pointer.end, function () {
-		if (Q.info.isTouchscreen) {
-			tool.canceledBlur = true;
-		}
+		tool.canceledBlur = true;
 	});
 	
 	var lastVal = null;
