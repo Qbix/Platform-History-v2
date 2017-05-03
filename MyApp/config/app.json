@@ -130,6 +130,9 @@
 			"Streams/user/birthday": true,
 			"Streams/user/gender": true,
 			"Streams/user/height": true
+		},
+		"notifications": {
+			"onlyIfAllClientsOffline": true
 		}
 	},
 	"Assets": {
