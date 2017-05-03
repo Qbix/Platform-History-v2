@@ -499,13 +499,13 @@ class Q_Uri
 		 * @param {Q_Uri} uri This is the uri being turned into a URL
 		 * @param {string|null} route The route that is going to be used (from config)
 		 * @param {string|null} controller The controller that is being used for the baseUrl
-		 * @param {string|null} url The computed url, will be returned unless you return something else
+		 * @param {string|null} url The computed url, that will be returned. You can modify it.
 		 * @return {string}
 		 */
 		$uri = $this;
-		$url = Q::event('Q/Uri/toUrl', compact(
-			'uri', 'route', 'pattern', 'controller', 'url'
-		), 'before');
+		$params = compact('uri', 'route', 'pattern', 'controller', 'url');
+		$params['url'] = &$url;
+		Q::event('Q/Uri/toUrl', $params, 'before', false, $url);
 		
 		if ($url) {
 			return self::fixUrl($url);
