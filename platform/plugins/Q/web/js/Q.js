@@ -5316,19 +5316,17 @@ Q.init = function _Q_init(options) {
 		function _Q_init_deviceready_handler() {
 			if (!Q.info) Q.info = {};
 			Q.info.isCordova = true;
-			if ((Q.info.isCordova = !!root.device && device.cordova)) {
-				// avoid opening external urls in app window
-				Q.addEventListener(document, "click", function (e) {
-					var t = e.target, s;
-					do {
-						if (t && t.nodeName === "A" && t.href && !t.outerHTML.match(/\Whref=[',"]#[',"]\W/) && t.href.match(/^https?:\/\//)) {
-							e.preventDefault();
-							s = (t.target === "_blank") ? "_system" : "_blank";
-							root.open(t.href, s, "location=no");
-						}
-					} while ((t = t.parentNode));
-				});
-			}
+			// avoid opening external urls in app window
+			Q.addEventListener(document, "click", function (e) {
+				var t = e.target, s;
+				do {
+					if (t && t.nodeName === "A" && t.href && !t.outerHTML.match(/\Whref=[',"]#[',"]\W/) && t.href.match(/^https?:\/\//)) {
+						e.preventDefault();
+						s = (t.target === "_blank") ? "_system" : "_blank";
+						root.open(t.href, s, "location=no");
+					}
+				} while ((t = t.parentNode));
+			});
 			p.fill("device")();
 		}
 		if (root.device) {
