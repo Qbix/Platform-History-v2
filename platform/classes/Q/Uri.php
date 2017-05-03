@@ -20,7 +20,7 @@ class Q_Uri
 	 * @method from
 	 * @static
 	 * @param {string} $source An absolute URL, or an array, or a URI in string form.
-	 * @param {string} [$routePattern=null] The pattern of the route in the routes config.
+	 * @param {string} [$route=null] The pattern of the route in the routes config.
 	 *  If not specified, then Qbix searches all the route patterns in order, until it finds one that fits.
 	 *  If you set this to false, then $source is treated as an absolute URL, regardless of its format.
 	 * @return {Q_Uri|false} Returns false if no route patterns match.
@@ -28,14 +28,14 @@ class Q_Uri
 	 */
 	static function from(
 	 $source,
-	 $routePattern = null)
+	 $route = null)
 	{
 
 		if (empty($source)) {
 			return null;
 		}
 		
-		if ($routePattern === false) {
+		if ($route === false) {
 			$u = new Q_Uri();
 			$u->Q_url = $source;
 			return $u;
@@ -47,7 +47,7 @@ class Q_Uri
 		
 		if (is_string($source)) {
 			if (Q_Valid::url($source)) {
-				return self::fromUrl($source, $routePattern);
+				return self::fromUrl($source, $route);
 			} else {
 				return self::fromString($source);
 			}
@@ -117,14 +117,14 @@ class Q_Uri
 	 * @static
 	 * @param {string|boolean|array|Q_Uri} $source This can be a Q_Uri, an array or string representing a uri,
 	 *  an absolute url, or "true". If you pass "true", then the Q_Request::baseUrl(true) is used as input.
-	 * @param {string|null} [$routePattern=null] If you know which route pattern to use, then specify it here. Otherwise, leave it null.
+	 * @param {string|null} [$route=null] If you know which route pattern to use, then specify it here. Otherwise, leave it null.
 	 * @param {boolean} [$noProxy=false] If set to true, Q_Uri::proxySource($url) is not called before returning the result.
 	 * @param {string} [$controller=true] The controller to pass to `Q_Request::baseUrl($controller)` when forming the URL.
 	 * @return {string}
 	 */
 	static function url(
 	 $source,
-	 $routePattern = null,
+	 $route = null,
 	 $noProxy = false,
 	 $controller = true)
 	{
@@ -159,29 +159,18 @@ class Q_Uri
 			return Q_Uri::fixUrl($result);
 		}
 		
-		/**
-		 * @event Q/url {before}
-		 * @param {string|boolean|array|Q_Uri} source This can be a Q_Uri, an array or string representing a uri,
-		 *  an absolute url, or "true". If you pass "true", then the Q_Request::baseUrl(true) is used as input.
-		 * @param {string|null} routePattern If you know which route pattern to use, then specify it here. Otherwise, leave it null.
-		 * @param {boolean} noProxy If set to true, Q_Uri::proxySource($url) is not called before returning the result.
-		 * @return {string}
-		 */
-		$url = Q::event('Q/url', compact('source', 'routePattern', 'noProxy'), 'before');
-		if (!isset($url)) {
-			$uri = self::from($source);
-			if (!$uri) {
-				$url = null;
-			} else { 
-				if ($controller === true) {
-					// If developer set a custom controller, calculate it.
-					$cs = Q_Config::get('Q', 'web', 'controllerSuffix', null);
-					if (isset($cs)) {
-						$controller = $cs;
-					}
+		$uri = self::from($source);
+		if (!$uri) {
+			$url = null;
+		} else { 
+			if ($controller === true) {
+				// If developer set a custom controller, calculate it.
+				$cs = Q_Config::get('Q', 'web', 'controllerSuffix', null);
+				if (isset($cs)) {
+					$controller = $cs;
 				}
-				$url = $uri->toUrl($routePattern, $controller);
 			}
+			$url = $uri->toUrl($route, $controller);
 		}
 		if (!isset($url)) {
 			$hash = Q_Uri::unreachableUri();
@@ -313,14 +302,14 @@ class Q_Uri
 	 * @static
 	 * @protected
 	 * @param {string} $url
-	 * @param {string} [$routePattern=null]
+	 * @param {string} [$route=null]
 	 * @return {Q_Uri}
 	 * @throws {Q_Exception_BadUrl}
 	 * @throws {Q_Exception_MissingRoute}
 	 */
 	protected static function fromUrl(
 	 $url,
-	 $routePattern = null)
+	 $route = null)
 	{
 		if (empty($url)) {
 			return null;
@@ -333,11 +322,11 @@ class Q_Uri
 
 		/**
 		 * Hook for custom logic modifying routing from URLs to internal URIs
-		 * @event Q/uriFromUrl {before}
+		 * @event Q/Uri/fromUrl {before}
 		 * @param {string} url
 		 * @return {Q_Uri}
 		 */
-		$uri = Q::event('Q/uriFromUrl', compact('url'), 'before');
+		$uri = Q::event('Q/Uri/fromUrl', compact('url'), 'before');
 		if (isset($uri)) {
 			$routed_cache[$url] = $uri;
 			return $uri;
@@ -361,7 +350,7 @@ class Q_Uri
 				// even the proxy destination doesn't match.
 				throw new Q_Exception_BadUrl(compact('base_url', 'url'));
 			}
-			$result = self::fromUrl($dest_url, $routePattern);
+			$result = self::fromUrl($dest_url, $route);
 			if (!empty($result)) {
 				return $result;
 			} else {
@@ -379,10 +368,10 @@ class Q_Uri
 		$segments = $path ? explode('/', $path) : array();
 		$uri_fields = null;
 
-		if ($routePattern) {
-			if (! array_key_exists($routePattern, $routes))
-				throw new Q_Exception_MissingRoute(compact('routePattern'));
-			$uri_fields = self::matchSegments($routePattern, $segments);
+		if ($route) {
+			if (! array_key_exists($route, $routes))
+				throw new Q_Exception_MissingRoute(compact('route'));
+			$uri_fields = self::matchSegments($route, $segments);
 		} else {
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
@@ -411,7 +400,7 @@ class Q_Uri
 					}
 					if ($matched) {
 						// If we are here, then the route has matched!
-						$routePattern = $pattern;
+						$route = $pattern;
 						break;
 					}
 				}
@@ -424,13 +413,13 @@ class Q_Uri
 		}
 		
 		// Now, fill in any extra fields, if present
-		if (is_array($routes[$routePattern])) {
-			$uri_fields = array_merge($routes[$routePattern], $uri_fields);
+		if (is_array($routes[$route])) {
+			$uri_fields = array_merge($routes[$route], $uri_fields);
 		}
 
 		$uri = self::fromArray($uri_fields);
-		if (isset($routePattern)) {
-			$uri->routePattern = $routePattern;
+		if (isset($route)) {
+			$uri->route = $route;
 		}
 		$routed_cache[$url] = $uri;
 		return $uri;
@@ -439,13 +428,13 @@ class Q_Uri
 	/**
 	 * Maps this URI into an external URL.
 	 * @method toUrl
-	 * @param {string} [$routePattern=null] If you name the route to use for unrouting,
+	 * @param {string} [$route=null] If you name the route to use for unrouting,
 	 *  it will be used as much as possible.
 	 *  Otherwise, Qbix will go through the routes one by one in order,
 	 *  until it finds one that can route a URL to the full URI
 	 *  contained in this object.
 	 * @param {string} [$controller=true] You can supply a different controller name, like 'tool.php'
-	 * @return {string} If a $routePattern is specified, the router uses this route 
+	 * @return {string} If a $route is specified, the router uses this route 
 	 *  and replaces as many variables as it can to match the $internal_destination. 
 	 *  If not, the router tries to find a route and use it to 
 	 *  make an external URL that maps to the internal destination
@@ -455,7 +444,7 @@ class Q_Uri
 	 *  the proxy url corresponding to it.
 	 */
 	function toUrl(
-	 $routePattern = null,
+	 $route = null,
 	 $controller = true)
 	{
 		if (!empty($this->Q_url)) {
@@ -468,52 +457,71 @@ class Q_Uri
 		
 		$routes = Q_Config::get('Q', 'routes', array());
 		if (empty($routes)) {
-			return Q_Request::baseUrl($controller);
-		}
-
-		if ($routePattern) {
-			if (!isset($routes[$routePattern])) {
-				return null;
+			$url = Q_Request::baseUrl($controller);
+		} else if ($route) {
+			if (!isset($routes[$route])) {
+				$url = null;
+			} else {
+				return self::matchRoute($route, $routes[$route], $controller);
 			}
-			return self::matchRoute($routePattern, $routes[$routePattern], $controller);
-		}
-		foreach ($routes as $pattern => $fields) {
-			if (!isset($fields))
-				continue;
-			$url = $this->matchRoute($pattern, $fields, $controller);
-			if ($url) {
-				if ($this->querystring) {
-					$url .= '?'.$this->querystring;
-				}
-				if ($this->anchorstring) {
-					$url .= '#'.$this->anchorstring;
-				}
-				$suffix = self::suffix();
-				if (is_string($suffix)) {
-					$url .= self::suffix();
-				} else {
-					// aggregate suffixes
-					foreach ($suffix as $k => $v) {
-						$k_len = strlen($k);
-						if (substr($url, 0, $k_len) === $k) {
-							$url .= $v;
+		} else {
+			foreach ($routes as $pattern => $fields) {
+				if (!isset($fields))
+					continue;
+				$url = $this->matchRoute($pattern, $fields, $controller);
+				if ($url) {
+					if ($this->querystring) {
+						$url .= '?'.$this->querystring;
+					}
+					if ($this->anchorstring) {
+						$url .= '#'.$this->anchorstring;
+					}
+					$suffix = self::suffix();
+					if (is_string($suffix)) {
+						$url .= self::suffix();
+					} else {
+						// aggregate suffixes
+						foreach ($suffix as $k => $v) {
+							$k_len = strlen($k);
+							if (substr($url, 0, $k_len) === $k) {
+								$url .= $v;
+							}
 						}
 					}
+					$route = $pattern;
+					break;
 				}
-				return self::fixUrl($url);
 			}
+		}
+		
+		/**
+		 * @event Q/Uri/toUrl {before}
+		 * @param {Q_Uri} uri This is the uri being turned into a URL
+		 * @param {string|null} route The route that is going to be used (from config)
+		 * @param {string|null} controller The controller that is being used for the baseUrl
+		 * @param {string|null} url The computed url, will be returned unless you return something else
+		 * @return {string}
+		 */
+		$uri = $this;
+		$url = Q::event('Q/Uri/toUrl', compact(
+			'uri', 'route', 'pattern', 'controller', 'url'
+		), 'before');
+		
+		if ($url) {
+			return self::fixUrl($url);
 		}
 				
 		return null;
 	}
 	
 	/**
-	 * @method routePattern
+	 * Get the route that was used to obtain this URI from a URL
+	 * @method route
 	 * @return {string}
 	 */
-	function routePattern()
+	function route()
 	{
-		return $this->routePattern;
+		return $this->route;
 	}
 	
 	/**
@@ -988,11 +996,11 @@ class Q_Uri
 	 */
 	protected $fields = array();
 	/**
-	 * @property $routePattern
+	 * @property $route
 	 * @protected
 	 * @type string
 	 */
-	protected $routePattern = null;
+	protected $route = null;
 	/**
 	 * @property $querystring
 	 * @protected
