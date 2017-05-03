@@ -2393,13 +2393,13 @@ Evp.onStop = function () {
  * Make an event factory
  * @static
  * @method factory
- * @param {Object} collection
+ * @param {Object} [collection]
  *  The object that will store all the events. Pass null here to auto-create one.
- * @param {Array} defaults
+ * @param {Array} [defaults]
  *  You can pass an array of defaults for the fields in the returned function
  *  The last element of this array can be a function that further processes the arguments,
  *  returning an array of the resulting arguments
- * @param {Function} callback
+ * @param {Function} [callback]
  *  An optional callback that gets called when a new event is created.
  *  The "this" object is the Q.Event, and the parameters are the processed parameters
  *  passed to the returned factory function.
@@ -5315,6 +5315,7 @@ Q.init = function _Q_init(options) {
 		}
 		function _Q_init_deviceready_handler() {
 			if (!Q.info) Q.info = {};
+			Q.info.isCordova = true;
 			if ((Q.info.isCordova = !!root.device && device.cordova)) {
 				// avoid opening external urls in app window
 				Q.addEventListener(document, "click", function (e) {
@@ -10650,6 +10651,7 @@ Q.Dialogs = {
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
+	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
 	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
      * @param {String|Array} [options.stylesheet] Any stylesheets to load before dialog, to prevent Flash of Unstyled Content.
 	 *  should show the "apply" style button to close dialog
