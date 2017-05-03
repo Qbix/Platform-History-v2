@@ -1507,7 +1507,8 @@ class Db_Row implements Iterator
 
 		$class_name = get_class($this);
 		$class_event = implode('/', explode('_', $class_name));
-		$result = Q::event("$class_event/method/$name", $args, 'before');
+		$args2 = array_merge(array($this), $args);
+		$result = Q::event("$class_event/method/$name", $args2, 'before');
 		if (!$result) {
 			throw new Exception("calling method {$class_name}->{$name}, which doesn't exist");
 		}

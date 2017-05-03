@@ -7,6 +7,7 @@
  * @method overlay
  * @param {Object} [options]
  * @param {Boolean} [options.apply] Set to true if the dialog should show the "apply" style button to close dialog
+ * @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
  * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
  * @param {Boolean} [options.noClose=false] If true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
  * @param {Boolean} [options.closeOnEsc=true] closeOnEsc Indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
@@ -172,12 +173,24 @@ function _Q_overlay(o) {
 				Q.handle(data.options.onLoad, $this, [$this]);
 			}
 			$this.addClass('Q_overlay_open');
+			if (data.options.htmlClass) {
+				var $html = $('html');
+				if ($html.hasClass(data.options.htmlClass)) {
+					data.htmlHadClass = true;
+				} else {
+					$('html').addClass(data.options.htmlClass);
+				}
+			}
 			Q.Pointer.cancelClick();
 		},
 		close: function(e)
 		{
 			dialogs.pop();
 			var data = $this.data('Q/overlay');
+			var $html = $('html');
+			if (data.options.htmlClass && !data.htmlHadClass) {
+				$html.removeClass(data.options.htmlClass);
+			}
 			$('body').removeClass('Q_preventScroll').css(data.bodyStyle);
 			$('html,body').scrollTop(data.documentScrollTop)
 				.scrollLeft(data.documentScrollLeft);
@@ -235,6 +248,7 @@ function _Q_overlay(o) {
 	left: 'center',
 	top: 'middle',
 	alignParent: null,
+	htmlClass: null,
 	mask: false,
 	noClose: false,
 	closeOnEsc: true,
@@ -272,12 +286,13 @@ function _Q_overlay(o) {
  * @method Q/dialog
  * @param {Object} [options] A hash of options, that can include:
  *   @param {String} [options.url]  If provided, this url will be used to fetch the "title" and "dialog" slots, to display in the dialog.
- *   @param {String} [options.left='center'] left is a Horizontal position of the overlay, May have 'center' value to be centered horizontally or have a percentage or absolute (pixels) value of offset from the left border of 'alignParent'.
- *   @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
- *   @param {Boolean} [options.alignByParent=false] If true, the dialog will be aligned to the center of not the entire window, but to the center of containing element instead.
+ *   @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
  *   @param {Boolean|String} [options.mask=true] If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
  *   @param {Boolean} [options.fullscreen]
  *   If true, dialog will be shown not as overlay but instead will be prepended to document.body and all other child elements of the body will be hidden. Thus dialog will occupy all window space, but still will behave like regular dialog, i.e. it can be closed by clicking / tapping close icon. Defaults to true on Android stock browser, false everywhere else.
+ *   @param {String} [options.left='center'] left is a Horizontal position of the overlay, May have 'center' value to be centered horizontally or have a percentage or absolute (pixels) value of offset from the left border of 'alignParent'.
+ *   @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
+ *   @param {Boolean} [options.alignByParent=false] If true, the dialog will be aligned to the center of not the entire window, but to the center of containing element instead.
  *   @param {Boolean} [options.fadeInOut=!Q.info.isTouchscreen]
  *   For desktop and false for touch devices. If true, dialog will load asynchronously with fade animation and 'onLoad' will be called when fade animation is completed. If false, dialog will appear immediately and 'onLoad' will be called at the same time.
  * @param {Boolean} [options.waitForBackgroundImage=!Q.info.isTouchscreen] Whether to wait for the background image to load before showing the dialog
@@ -323,6 +338,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 
 		$this.plugin('Q/overlay', {
 			top: topPos,
+			htmlClass: o.htmlClass,
 			mask: o.mask,
 			closeOnMask: o.closeOnMask,
 			closeOnEsc: o.closeOnEsc,
@@ -344,7 +360,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				}
 			}},
 			onLoad: { "Q/dialog": function() {
-				Q.handle(o.onLoad);
+				Q.handle(o.onLoad, this);
 			}},
 			beforeClose: o.beforeClose,
 			onClose: { "Q/dialog": function () {
@@ -469,10 +485,11 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 },
 
 {
-	alignByParent: false,
+	htmlClass: null,
 	mask: true,
 	fullscreen: Q.info.useFullscreen,
 	fadeInOut: !Q.info.isTouchscreen,
+	alignByParent: false,
 	waitForBackgroundImage: !Q.info.isTouchscreen,
 	noClose: false,
 	closeOnEsc: true,
