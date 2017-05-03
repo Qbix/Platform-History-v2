@@ -114,10 +114,11 @@ class Users_Device extends Base_Users_Device
 	static function byPlatform($userId = null, $platform = null)
 	{
 		if (!isset($userId)) {
-			$userId = Users::loggedInUser();
-			if (!$userId) {
+			$user = Users::loggedInUser();
+			if (!$user) {
 				return null;
 			}
+			$userId = $user->id;
 		}
 		if (!isset($platform)) {
 			$platform = Q_Request::platform();
