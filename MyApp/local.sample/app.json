@@ -98,9 +98,7 @@
 			}
 		},
 		"apps": {
-			"platforms": {
-				"MyApp": ["facebook", "ios", "android"]
-			},
+			"platforms": ["facebook", "ios", "android"],
 			"facebook": {
 				"MyApp": {
 					"name": "FACEBOOK APP NAME HERE",

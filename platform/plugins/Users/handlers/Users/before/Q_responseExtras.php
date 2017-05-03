@@ -52,7 +52,7 @@ function Users_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
 	Q_Response::addStylesheet("plugins/Users/css/Users.css");
 	$apps = array();
-	foreach (Q_Config::get('Users', 'apps', 'platforms', $app, array()) as $platform) {
+	foreach (Q_Config::get('Users', 'apps', 'platforms', array()) as $platform) {
 		$apps[$platform][$app] = Q_Config::expect('Users', 'apps', $platform, $app);
 		$private = Q_Config::get('Users', 'apps-private', $platform, array());
 		foreach ($private as $p) {
