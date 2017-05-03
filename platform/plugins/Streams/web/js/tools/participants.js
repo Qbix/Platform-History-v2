@@ -60,7 +60,7 @@ function _Streams_participants(options) {
 		"short": true,
 		icon: (window.devicePixelRatio > 1 ? '80' : '40'),
 		reflectChanges: false
-	}
+	},
 	showSummary: true,
 	showControls: false,
 	showBlanks: false,
