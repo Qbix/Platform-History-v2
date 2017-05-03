@@ -19,7 +19,8 @@ var Streams = Q.Streams;
  *   @param {Number} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon.
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
  *   @param {Boolean|Array} [options.editable=false] If true, and userId is the logged-in user's id, the tool presents an interface for the logged-in user to edit their name and icon. This can also be an array containing one or more of 'icon', 'name'.
- *   @param {Boolean} [options.reflectChanges=true] Whether the tool should update its contents on changes
+ *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
+ *   @param {Boolean} [options.reflectChanges=true] Whether the tool should update its contents on changes to user streams like firstName, lastName, username and icon. Set to false if you are showing many avatars in a list such as "Users/list" or "Streams/participating" tools. Otherwise it can result many database queries – one per avatar!
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Object} [options.templates]
  *     @param {Object} [options.templates.icon]
@@ -51,7 +52,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		state.editable = ['icon', 'name'];
 	}
 	this.refresh(true);
-	if (!state.userId || !state.reflectChanges) {
+	if (!state.userId) {
 		return;
 	}
 	Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
@@ -191,14 +192,16 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}
 		});
 		
-		// Retain the streams, so they can be refreshed while this tool is active,
-		// triggering the Streams plugin to update the avatar.
-		Streams.Stream.retain(state.userId, [
-			'Streams/user/firstName', 
-			'Streams/user/lastName', 
-			'Streams/user/username',
-			'Streams/user/icon'
-		], tool);
+		if (state.reflectChanges) {
+			// Retain the streams, so they can be refreshed while this tool is active,
+			// triggering the Streams plugin to update the avatar.
+			Streams.Stream.retain(state.userId, [
+				'Streams/user/firstName', 
+				'Streams/user/lastName', 
+				'Streams/user/username',
+				'Streams/user/icon'
+			], tool);
+		}
 	
 		function _present() {
 			Q.handle(state.onRefresh, tool, []);

@@ -56,6 +56,11 @@ function _Streams_participants(options) {
 	maxLoad: 100,
 	max: null,
 	filter: function () { },
+	avatar: {
+		"short": true,
+		icon: (window.devicePixelRatio > 1 ? '80' : '40'),
+		reflectChanges: false
+	}
 	showSummary: true,
 	showControls: false,
 	showBlanks: false,
@@ -298,11 +303,15 @@ function _Streams_participants(options) {
 		}
 		
 		function _addAvatar(userId, prepend) {
-			var $element = $(Q.Tool.setUpElement('div', 'Users/avatar', {
-				userId: userId,
-				"short": true,
-				icon: (window.devicePixelRatio > 1 ? '80' : '40')
-			}, userId || null, tool.prefix));
+			var $element = $(Q.Tool.setUpElement(
+				'div', 
+				'Users/avatar',
+				Q.extend({}, state.avatar, {
+					userId: userId,
+				}),
+				userId || null, 
+				tool.prefix)
+			);
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [$element])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();

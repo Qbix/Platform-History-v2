@@ -45,8 +45,9 @@ Q.Tool.define('Users/list', function () {
 	limit: 100,
 	preload: 1,
 	avatar: {
-		short: true,
-		icon: 80
+		"short": true,
+		icon: (window.devicePixelRatio > 1 ? '200' : '80'),
+		reflectChanges: false
 	},
 	onRefresh: new Q.Event(),
 	onLoadMore: new Q.Event(),
