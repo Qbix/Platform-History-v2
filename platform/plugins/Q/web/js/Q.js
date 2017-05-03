@@ -5274,7 +5274,7 @@ Q.init = function _Q_init(options) {
 	}
 	var p = Q.pipe(checks, 1, function _Q_init_pipe_callback() {
 		if (!Q.info) Q.info = {};
-		Q.info.isCordova = !!root.device && device.cordova;
+		Q.info.isCordova = !!Q.info.isCordova;
 		if (options && options.isLocalFile) {
 			Q.info.isLocalFile = true;
 			Q.handle.options.loadUsingAjax = true;
