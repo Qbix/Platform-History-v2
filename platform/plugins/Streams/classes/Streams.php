@@ -1842,6 +1842,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just relates the stream to the category
+	 * @param {boolean} [$options.skipMessage=false] If true, skips posting the Streams/relatedFrom message to the "from" streams
 	 * @param {double|string} [$options.weight] Pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
@@ -2089,7 +2090,9 @@ abstract class Streams extends Base_Streams
 		}
 
 		list($messagesTo, $s) = Streams_Message::postMessages($asUserId, $relatedTo_messages, true);
-		list($messagesFrom, $s) = Streams_Message::postMessages($asUserId, $relatedFrom_messages, true);
+		if (empty($options['skipMessage'])) {
+			list($messagesFrom, $s) = Streams_Message::postMessages($asUserId, $relatedFrom_messages, true);
+		}
 
 		return compact('messagesTo', 'messagesFrom');
 	}
@@ -2114,6 +2117,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
+	 * @param {boolean} [$options.skipMessage=false] If true, skips posting the Streams/unrelatedFrom message to the "from" streams
 	 * @param {boolean} [$options.adjustWeights=false] If true, also decrements all following relations' weights by one.
 	 * @return {boolean}
 	 *  Whether the relation was removed
@@ -2217,14 +2221,16 @@ abstract class Streams extends Base_Streams
 		}
 
 		if ($relatedFrom && $relatedFrom->remove()) {
-			// Send Streams/unrelatedFrom message to a stream
-			// node server will be notified by Streams_Message::post
-			Streams_Message::post($asUserId, $fromPublisherId, $stream->name, array(
-				'type' => 'Streams/unrelatedFrom',
-				'instructions' => compact(
-					'toPublisherId', 'toStreamName', 'type', 'options'
-				)
-			), true);
+			if (empty($options['skipMessage'])) {
+				// Send Streams/unrelatedFrom message to a stream
+				// node server will be notified by Streams_Message::post
+				Streams_Message::post($asUserId, $fromPublisherId, $stream->name, array(
+					'type' => 'Streams/unrelatedFrom',
+					'instructions' => compact(
+						'toPublisherId', 'toStreamName', 'type', 'options'
+					)
+				), true);
+			}
 		}
 
 		/**
@@ -2624,6 +2630,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.extra] Any extra information for the message
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
+	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being related to the joining asUserId's Streams/participating streams.
 	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs.
 	 *  The newly inserted rows will have wasInserted() return true.
 	 */
@@ -2757,7 +2764,11 @@ abstract class Streams extends Base_Streams
 			Streams::relate(
 				$asUserId, $asUserId, $pn,
 				'Streams/participating', $publisherId, $streamNames,
-				array('skipAccess' => true, 'weight' => time())
+				array(
+					'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
+					'skipAccess' => true, 
+					'weight' => time()
+				)
 			);
 		}
 		return $results;
@@ -2775,6 +2786,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
 	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
+	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being unrelated to the joining asUserId's Streams/participating streams.
 	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs
 	 */
 	static function leave(
@@ -2885,7 +2897,11 @@ abstract class Streams extends Base_Streams
 			Streams::unrelate(
 				$asUserId, $asUserId, $pn,
 				'Streams/participating', $publisherId, $streamNames,
-				array('skipAccess' => true, 'weight' => time())
+				array(
+					'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
+					'skipAccess' => true, 
+					'weight' => time()
+				)
 			);
 		}
 		return $participants;
@@ -2919,8 +2935,9 @@ abstract class Streams extends Base_Streams
 	 *   which can include "email", "mobile", "email+pending", "mobile+pending"
 	 * @param {datetime} [$options.rule.readyTime] time from which user is ready to receive notifications again
 	 * @param {array} [$options.rule.filter] optionally set a filter for the rules to add
-	 * @param {boolean} [$options.skipRules] if true, do not attempt to create rules for new subscriptions
-	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
+	 * @param {boolean} [$options.skipRules=false] if true, do not attempt to create rules for new subscriptions
+	 * @param {boolean} [$options.skipAccess=false] if true, skip access check for whether user can join and subscribe
+	 * @param {boolean} [$options.skipMessage=false] if true, skip posting the "Streams/subscribe" message to the stream
 	 * @return {array} An array of Streams_Participant rows from the database.
 	 */
 	static function subscribe(
@@ -3111,7 +3128,9 @@ abstract class Streams extends Base_Streams
 			"streams" => Q::json_encode($streams5),
 			"rules" => Q::json_encode($rules)
 		));
-		Streams_Message::postMessages($asUserId, $messages, true);
+		if (empty($options['skipMessage'])) {
+			Streams_Message::postMessages($asUserId, $messages, true);
+		}
 		
 		return $participants;
 	}
@@ -3128,8 +3147,9 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
 	 * @param {array} [$options=array()]
-	 * @param {boolean} [$options.leave] set to true to also leave the streams
-	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
+	 * @param {boolean} [$options.leave=false] set to true to also leave the streams
+	 * @param {boolean} [$options.skipAccess=false] if true, skip access check for whether user can join and subscribe
+	 * @param {boolean} [$options.skipMessage=false] if true, skip posting the "Streams/unsubscribe" message to the stream
 	 * @return {array} Returns an array of Streams_Participant rows, if any were in the database.
 	 */
 	static function unsubscribe(
@@ -3181,7 +3201,9 @@ abstract class Streams extends Base_Streams
 			// Stream messages to post
 			$messages[$publisherId][$sn] = array('type' => 'Streams/unsubscribe');
 		}
-		Streams_Message::postMessages($asUserId, $messages, true);
+		if (empty($options['skipMessage'])) {
+			Streams_Message::postMessages($asUserId, $messages, true);
+		}
 		return $participants;
 	}
 
