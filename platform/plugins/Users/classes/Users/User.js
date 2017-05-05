@@ -58,29 +58,39 @@ Users_User.clientsOnline = function(userId, sessionId) {
  * @method devices
  * @static
  * @param {String} userId The id of a user
- * @param {String} platform The name of a platform in "Users"/"apps"/"platforms" array
- * @param {String|Array} appIds The external app id registered with the platform
+ * @param {Object} appIds An object of {platform: appIds} pairs, where
+ *   keys are the names of a platform in "Users"/"apps"/"platforms" array,
+ *   and values are a string or array with the external app id registered with the platform.
  * @param {Function} callback The first parameter contains {platformName: devicesArray}
  */
-Users_User.devices = function (userId, platform, appIds, callback) {
-	Users.Device.SELECT('*').where({
-		userId: userId,
-		platform: platform,
-		appId: appIds
-	}).execute(function(err, res) {
-		if (err) return;
+Users_User.devices = function (userId, appIds, callback) {
+	var p = new Q.Pipe();
+	var waitFor = [];
+	for (var platform in appIds) {
+		waitFor.push(platform);
+		Users.Device.SELECT('*').where({
+			userId: userId,
+			platform: platform,
+			appId: appIds[platform]
+		}).execute(p.fill(platform));
+	}
+	p.add(waitFor, 1, function(params, subjects) {
 		var devices = {};
-		var sessions = [];
-		var i, platform;
-		for(i=0; i<res.length; i++) {
-			platform = res[i].fields.platform;
+		for (platform in params) {
+			var p = params[platform];
+			var err = p[0], rows = p[1];
+			if (err) {
+				return;
+			}
 			if (!devices[platform]) {
 			    devices[platform] = [];
 			}
-			devices[platform].push(res[i].fields.deviceId);
+			for (var i=0; i<rows.length; i++) {
+				devices[platform].push(rows[i].fields.deviceId);
+			}
 		}
 		callback.call(Users, devices);
-	});
+	})
 };
 
 Q.mixin(Users_User, Q.require('Base/Users/User'));

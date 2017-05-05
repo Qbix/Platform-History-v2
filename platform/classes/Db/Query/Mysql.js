@@ -117,7 +117,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 			}
 			
 			var err={}, results=[], results2=[], rowClass;
-			var i, pk, f;
+			var i, pk, pk2, f;
 			for (k in params) {
 				pk = params[k];
 				if (pk[0]) {
@@ -128,9 +128,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 						results.push(pk[1][i]);
 					}
 				}
-				if (pk[2]) {
-					for (f in pk[2]) {
-						temp[f] = 1;
+				if (pk2 = pk[2]) {
+					for (f in pk2) {
+						temp[pk2[f].name] = 1;
 					}
 				}
 			}
