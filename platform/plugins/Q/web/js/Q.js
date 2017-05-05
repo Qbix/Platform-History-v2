@@ -5570,6 +5570,8 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 	}
 };
 
+var _supportsPassive = null;
+
 /**
  * Add an event listener to an element
  * @static
@@ -5607,18 +5609,22 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 	}
 	if (Q.isPlainObject(useCapture)) {
 		// Test via a getter in the options object to see if the passive property is accessed
-		var supportsPassive = false;
-		if (Object.defineProperty) {
-			try {
-				var opts = Object.defineProperty({}, 'passive', {
-					get: function() {
-						supportsPassive = true;
-					}
-				});
-				window.addEventListener("Qtest", null, opts);
-			} catch (e) {}
+		if (_supportsPassive === undefined) {
+			_supportsPassive = false;
+			if (Object.defineProperty) {
+				try {
+					var opts = Object.defineProperty({}, 'passive', {
+						get: function() {
+							_supportsPassive = true;
+						}
+					});
+					window.addEventListener("Qtest", _f, opts);
+					window.removeEventListener("Qtest", _f);
+					function _f() { }
+				} catch (e) {}
+			}
 		}
-		useCapture = supportsPassive ? useCapture : useCapture.capture;
+		useCapture = _supportsPassive ? useCapture : useCapture.capture;
 	}
 	if (typeof eventName === 'function') {
 		var params = {
@@ -6149,7 +6155,7 @@ Q.request = function (url, slotNames, callback, options) {
 					console.warn('Q.request(' + url + ',['+slotNames+']):' + e);
 					err = {"errors": [e]};
 					callback(e, content);
-					Q.handle(o.onProcessed, this, [e, content]);
+					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}
 			var redirected = false;
@@ -11350,7 +11356,7 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
 	if (!Q.info.baseUrl) {
-		throw new Q.Error("Please define Q.info.baseUrl before calling Q.init()");
+		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
 	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.info.baseUrl.length + 1);
