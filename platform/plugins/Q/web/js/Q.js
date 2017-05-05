@@ -6155,7 +6155,7 @@ Q.request = function (url, slotNames, callback, options) {
 					console.warn('Q.request(' + url + ',['+slotNames+']):' + e);
 					err = {"errors": [e]};
 					callback(e, content);
-					Q.handle(o.onProcessed, this, [e, content]);
+					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}
 			var redirected = false;
