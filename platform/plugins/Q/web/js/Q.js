@@ -11356,7 +11356,7 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
 	if (!Q.info.baseUrl) {
-		throw new Q.Error("Please define Q.info.baseUrl before calling Q.init()");
+		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
 	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.info.baseUrl.length + 1);

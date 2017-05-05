@@ -476,7 +476,7 @@ class Q_Response
 	
 	/**
 	 * Returns text describing all the metas inline which have been added with setMeta()
-	 * @method metasInline
+	 * @method metas
 	 * @static
 	 * @param {string} [$slotName=null] If provided, returns only the metas set while filling this slot.
 	 * @param {string} [$between=''] Optional text to insert between the &lt;meta&gt; tags or blocks of text.
