@@ -3248,7 +3248,7 @@ abstract class Streams extends Base_Streams
 	 * "Streams"/"types"/$streamType/"participating", which is an array of stream names.
 	 * @method participating
 	 * @static
-	 * @param {string} [$streamName='Streams/participating'] the name of a stream of type Streams/participating
+	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of onr or more streams of type Streams/participating
 	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
 	 * @param {string} [$options.publisherId=Users::loggedInUser(true)->id] the publisher of the category stream
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
