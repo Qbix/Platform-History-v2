@@ -1083,42 +1083,42 @@ Sp.unsubscribe = function(options, callback) {
  */
 Sp.notify = function(participant, event, userId, message, callback) {
 	var userId = participant.fields.userId, stream = this;
-	function _notify(devices) {
+	function _notify(err, access) {
+		if (err) {
+		    return callback && callback(err);
+		}
+		if (!access) {
+			return;
+		}
+		
 		// 1) check for socket clients which are online
-		var n = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
-		var online, clients;
-		if (n) {
+		var only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
+		var clients;
+		if (only) {
 			// check if any socket clients are online
 			clients = Users.User.clientsOnline(userId);
-			online = !Q.isEmpty(clients);
+			_continue(!Q.isEmpty(clients));
 		} else {
 			// check if any socket clients associated to any device sessions are online
-			for (var platform in devices) {
-				for (var i=0; i<devices[platform].length; i++) {
-					var d = devices[platform][i];
-					var clients = Users.User.clientsOnline(userId, d[i].sessionId);
-					online = !Q.isEmpty(clients);
-					if (online) {
-					    break;
-					}
-				}
+			_devices(_continue);
+		}
+		function _continue(online) {
+			// 2) if user has socket connected - emit socket message and quit
+			if (online) {
+				Users.Socket.emitToUser(userId, event, message.getFields());
+				return callback && callback();
 			}
+			// 3) if user has no socket connected, send offline notifications
+			//      to users who subscribed and filters match
+			if (userId === message.fields.byUserId) {
+				return; // no need to notify the user of their own actions
+			}
+			if (participant.fields.subscribed !== 'yes') {
+				callback && callback(null, []);
+			}
+			Streams.Subscription.test(userId, stream, message.fields.type, _continue2);
 		}
-		// 2) if user has socket connected - emit socket message and quit
-		if (online) {
-			Users.Socket.emitToUser(userId, event, message.getFields());
-			return callback && callback();
-		}
-		// 3) if user has no socket connected, send offline notifications
-		//      to users who subscribed and filters match
-		if (userId === message.fields.byUserId) {
-			return; // no need to notify the user of their own actions
-		}
-		if (participant.fields.subscribed !== 'yes') {
-			callback && callback(null, []);
-		}
-		Streams.Subscription.test(userId, stream, message.fields.type,
-		function(err, deliveries) {
+		function _continue2(err, deliveries) {
 			if (err || !deliveries.length) {
 				return callback && callback(err);
 			}
@@ -1186,44 +1186,43 @@ Sp.notify = function(participant, event, userId, message, callback) {
 					});
 				});
 			});
-		});
+		}
+		
+		function _devices() {
+			var app = Q.app.name;
+			var appIds = Q.Config.get(['Streams', 'notifications', 'appIds'], null);
+			if (appIds === null) {
+				appIds = {};
+				var platforms = Q.Config.expect(['Users', 'apps', 'platforms']);
+				platforms.forEach(function (platform) {
+					var platformAppId = Q.Config.expect([
+						'Users', 'apps', platform, app, 'appId'
+					]);
+					appIds[platform] = [platformAppId];
+				});
+			}
+			Users.User.devices(participant.fields.userId, appIds, function (devices) {
+				for (var platform in devices) {
+					for (var i=0; i<devices[platform].length; i++) {
+						var d = devices[platform][i];
+						var clients = Users.User.clientsOnline(userId, d[i].sessionId);
+						if (!Q.isEmpty(clients)) {
+							return _continue(true);
+						}
+					}
+				}
+				_continue(false);
+			});
+		}
 	}
 	// check access
 	if (this.get('asUserId') !== userId) {
 		this.calculateAccess(userId, function (err) {
 			if (err) return callback && callback(err);
-			this.testReadLevel(Streams.READ_LEVEL['messages'], _devices);
+			this.testReadLevel(Streams.READ_LEVEL['messages'], _notify);
 		});
 	} else {
-		this.testReadLevel(Streams.READ_LEVEL['messages'], _devices);
-	}
-	function _devices(err, access) {
-		if (err) {
-		    return callback && callback(err);
-		}
-		if (!access) {
-			return;
-		}
-		var app = Q.app.name;
-		var appIds = Q.Config.get(['Streams', 'notifications', 'appIds'], null);
-		if (appIds === null) {
-			appIds = {};
-			var platforms = Q.Config.expect(['Users', 'apps', 'platforms']);
-			platforms.forEach(function (platform) {
-				var platformAppId = Q.Config.expect([
-					'Users', 'apps', platform, app, 'appId'
-				]);
-				appIds[platform] = [platformAppId];
-			});
-		}
-		for (var platform in appIds) {
-			Users.User.devices(
-				participant.fields.userId,
-				platform,
-				appIds[platform],
-				_notify
-			);
-		}
+		this.testReadLevel(Streams.READ_LEVEL['messages'], _notify);
 	}
 };
 
