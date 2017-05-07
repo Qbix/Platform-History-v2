@@ -994,7 +994,7 @@ class Q_Session
 	 * @static
 	 * @return {Db_Row|null}
 	 */
-	static row()
+	static function row()
 	{
 		return self::$session_db_row;
 	}

@@ -16,27 +16,31 @@ class Users_Device_Ios extends Users_Device
 			? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
 			: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
 
-		$logger = new Users_ApnsPHP_Logger();
-		$push = self::$push = new ApnsPHP_Push($env, $cert);
-		$push->setLogger($logger);
-		$push->setRootCertificationAuthority($authority);
-		if (isset($ssl['passphrase'])) { 			$push->setProviderCertificatePassphrase($ssl['passphrase']);
+		if (isset(self::$push)) {
+			$push = self::$push;
+		} else {
+			$logger = new Users_ApnsPHP_Logger();
+			$push = self::$push = new ApnsPHP_Push($env, $cert);
+			$push->setLogger($logger);
+			$push->setRootCertificationAuthority($authority);
+			if (isset($ssl['passphrase'])) { 				$push->setProviderCertificatePassphrase($ssl['passphrase']);
+			}
+			$push->connect();
 		}
-		$push->connect();
 		if (isset($notification['alert'])) {
 			$alert = $notification['alert'];
 			if (is_string($alert)) {
-				$message = new ApnsPHP_Message($deviceId);
+				$message = new ApnsPHP_Message($this->deviceId);
 				$message->setText($alert);
 			} else if (is_array($alert)) {
-				$message = new ApnsPHP_Message_Custom($deviceId);
+				$message = new ApnsPHP_Message_Custom($this->deviceId);
 				foreach ($alert as $k => $v) {
 					$methodName = 'set'.ucfirst($k);
 					$message->$methodName($v);
 				}
 			}
 		} else {
-			$message = new ApnsPHP_Message($deviceId);
+			$message = new ApnsPHP_Message($this->deviceId);
 		}
 		if (!empty($notification['priority'])) {
 			$p = $notification['priority'];
@@ -62,12 +66,7 @@ class Users_Device_Ios extends Users_Device
 		}
 		$push->add($message);
 		if (empty($options['scheduled'])) {
-			$push->send();
-		}
-		// no need to disconnect since socket is persistent
-		$errors = $push->getErrors();
-		if (!empty($errors)) {
-			throw new Q_Exception(reset($errors));
+			self::sendPushNotifications();
 		}
 	}
 	
@@ -78,12 +77,18 @@ class Users_Device_Ios extends Users_Device
 	 */
 	static function sendPushNotifications()
 	{
-		if (self::$push) {
-			self::$push->send();
+		if (!self::$push) {
+			return;
 		}
-		throw new Q_Exception_MethodNotSupported(array(
-			'method' => 'sendPushNotifications'
-		));
+		$push = self::$push;
+		$push->send();
+		// no need to disconnect since socket is persistent
+		$errors = $push->getErrors();
+		if (!empty($errors)) {
+			throw new Users_Exception_DeviceNotification(array(
+				'statusMessage' => json_encode($errors)
+			));
+		}
 	}
 	
 	static protected $push = null;
