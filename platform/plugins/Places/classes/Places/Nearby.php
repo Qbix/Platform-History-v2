@@ -331,7 +331,7 @@ class Places_Nearby
 	{
 		$info = $params['info'];
 		return Places_Nearby::stream(
-			$info['latitude'], $info['longitude'], $info['meters'],
+			$params['latitude'], $params['longitude'], $info['meters'],
 			Q::ifset($info, 'publisherId', null),
 			Q::ifset($info, 'name', null)
 		);
