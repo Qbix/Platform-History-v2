@@ -11,49 +11,49 @@ class Q_Session
 {
 	/**
 	 * @property $session_save_path
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_save_path;
 	/**
 	 * @property $session_db_connection
-	 * @type boolean
+	 * @type Db
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_connection;
 	/**
 	 * @property $session_db_table
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_table;
 	/**
 	 * @property $session_db_data_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_data_field;
 	/**
 	 * @property $session_db_id_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_id_field;
 	/**
 	 * @property $session_db_updated_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_updated_field;
 	/**
 	 * @property $session_db_duration_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
@@ -67,14 +67,14 @@ class Q_Session
 	static protected $session_db;
 	/**
 	 * @property $session_db_row
-	 * @type boolean
+	 * @type Db_Row
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_row;
 	/**
 	 * @property $session_db_row_class
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
@@ -986,6 +986,17 @@ class Q_Session
 		self::$session_db = Db::connect(self::$session_db_connection);
 		
 		return $db_info;
+	}
+	
+	/**
+	 * Get the session Db_Row, if it has been retrieved, otherwise null
+	 * @method row
+	 * @static
+	 * @return {Db_Row|null}
+	 */
+	static row()
+	{
+		return self::$session_db_row;
 	}
 
 	/**

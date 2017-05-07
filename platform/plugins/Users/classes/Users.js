@@ -153,10 +153,10 @@ function _Users_listen_ios (options, server) {
 	var path = require('path');
 	var appName = Q.app.name;
 	var appId = options.appId || app;
-	var sandbox = Q.Config.get(["Users", "ios", appId, "sandbox"], false);
+	var sandbox = Q.Config.get(["Users", "apps", "ios", appId, "sandbox"], false);
 	var s = sandbox ? "sandbox" : "production";
 	var appId = (options && options.appId) || Q.app.name;
-	var o = Q.Config.expect(['Users', 'ios', appId]);
+	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
 	if (o.token) {
 		o.token.key = path.join(Q.app.DIR, o.token.key);
 		if (!fs.existsSync(o.token.key)) {
