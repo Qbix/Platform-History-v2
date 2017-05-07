@@ -2,118 +2,89 @@
 	
 class Users_Device_Ios extends Users_Device
 {
-	function deliverPushNotification($notification, $options = array())
+	function handlePushNotification($notification, $options = array())
 	{	
+		$authority = USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
+		$ssl = Q_Config::expect(array('Users', 'apps', 'ios', $this->appId, 'ssl'));
+		if (empty($ssl['cert'])) {
+			throw Q_Exception_MissingConfig("Users/apps/ios/{$this->appId}/ssl/cert");
+		}
 		$sandbox = Q::ifset($device, 'sandbox', false);
 		$s = $sandbox ? 'sandbox' : 'production';
-		
+		$cert = $ssl['cert'];
+		$env = $sandbox
+			? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
+			: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
+
+		$logger = new Users_ApnsPHP_Logger();
+		$push = self::$push = new ApnsPHP_Push($env, $cert);
+		$push->setLogger($logger);
+		$push->setRootCertificationAuthority($authority);
+		if (isset($ssl['passphrase'])) { 			$push->setProviderCertificatePassphrase($ssl['passphrase']);
+		}
+		$push->connect();
+		if (isset($notification['alert'])) {
+			$alert = $notification['alert'];
+			if (is_string($alert)) {
+				$message = new ApnsPHP_Message($deviceId);
+				$message->setText($alert);
+			} else if (is_array($alert)) {
+				$message = new ApnsPHP_Message_Custom($deviceId);
+				foreach ($alert as $k => $v) {
+					$methodName = 'set'.ucfirst($k);
+					$message->$methodName($v);
+				}
+			}
+		} else {
+			$message = new ApnsPHP_Message($deviceId);
+		}
+		if (!empty($notification['priority'])) {
+			$p = $notification['priority'];
+			if (!is_numeric($p)) {
+				$p = ($p === 'high') ? 10 : 5;
+			}
+			$message->setCustomProperty('apns-priority', $notification['priority']);
+		}
+		foreach (array('badge', 'sound', 'category', 'expiry') as $k) {
+			if (isset($notification[$k])) {
+				$methodName = 'set'.ucfirst($k);
+				$message->$messageName($notification[$k]);
+			}
+		}
+		if (!empty($options['silent'])) {
+			$message->setContentAvailable(true);
+		}
 		if (isset($notification['payload'])) {
-			$notification = array_merge($notification, $notification['payload']);
+			foreach ($notification['payload'] as $k => $v) {
+				$message->setCustomProperty($k, $v);
+			}
 			unset($notification['payload']);
 		}
-		
-		$o = Q_Config::expect(array('Users', 'apps', 'ios', $this->appId));
-		if (empty($o['token']['key'])) {
-			throw Q_Exception_MissingConfig("Users/apps/ios/{$this->appId}/token/key");
+		$push->add($message);
+		if (empty($options['scheduled'])) {
+			$push->send();
 		}
-
-		use Jose\Factory\JWKFactory;
-		use Jose\Factory\JWSFactory;
-		$token = $o['token'];
-		$key = $token['key'];
-		$secret = null; // If the key is encrypted, the secret must be set in this variable
-		$private_key = JWKFactory::createFromKeyFile($key_file, $secret, [
-		    'kid' => $token['keyId'], // The Key ID obtained from your developer account
-		    'alg' => 'ES256',         // Not mandatory but recommended
-		    'use' => 'sig',           // Not mandatory but recommended
-		]);
-		$payload = array(
-		    'iss' => $token['teamId'],
-		    'iat' => time(),
-		);
-		$header = array(
-		    'alg' => 'ES256',
-		    'kid' => $private_key->get('kid'),
-		);
-		$jws = JWSFactory::createJWSToCompactJSON(
-		    $payload,
-		    $private_key,
-		    $header
-		);
-		// this is only needed with php prior to 5.5.24
-		if (!defined('CURL_HTTP_VERSION_2_0')) {
-		    define('CURL_HTTP_VERSION_2_0', 3);
-		}
-
-		// use curl
-		$http2ch = curl_init();
-		curl_setopt($http2ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
-		$message = Q::json_encode(array(
-			"aps" => $notification
-		));
-		$token = $this->deviceId;
-		$app_bundle_id = $o['bundleId'];
-		$http2_server = $sandbox
-			? 'https://api.development.push.apple.com';
-			: 'https://api.push.apple.com';
-		array($result, $info) = $this->sendHTTP2Push(
-			$http2ch, $http2_server, $app_bundle_id, $message, $token, $jws, $options
-		);
-		curl_close($http2ch);
-		if ($info[CURLINFO_HTTP_CODE] !== 200) {
-			throw new Users_Exception_DeviceNotification(array(
-				'code' => $info[CURLINFO_HTTP_CODE],
-				'statusMessage' => $result
-			));
+		// no need to disconnect since socket is persistent
+		$errors = $push->getErrors();
+		if (!empty($errors)) {
+			throw new Q_Exception(reset($errors));
 		}
 	}
 	
-	function sendHTTP2Push(
-		$http2ch, 
-		$http2_server, 
-		$app_bundle_id, 
-		$message, 
-		$token, 
-		$jws,
-		$options
-	) {
-	    $url = "{$http2_server}/3/device/{$token}";
-	    $headers = array(
-	        "apns-topic: {$app_bundle_id}",
-	        'Authorization: bearer ' . $jws
-	    );
-		if (!empty($options['expiration'])) {
-			$headers[] = "apns-expiration" = $options['expiration'];
+	/**
+	 * Sends all scheduled push notifications
+	 * @method sendPushNotifications
+	 * Default implementation
+	 */
+	static function sendPushNotifications()
+	{
+		if (self::$push) {
+			self::$push->send();
 		}
-		if (!empty($options['priority'])) {
-			$headers[] = "apns-priority" = $options['priority'];
-		}
-		if (!empty($options['collapseId'])) {
-			$headers[] = "apns-collapse-id" = $options['collapse-id'];
-		}
-		if (!empty($options['id'])) {
-			$headers[] = "apns-id" = $options['id'];
-		}
-		if (!empty($options['silent'])) {
-			unset($notification['alert']);
-			$notification['content-available'] = 1;
-		}
-	    curl_setopt_array($http2ch, array(
-	        CURLOPT_URL => $url,
-	        CURLOPT_PORT => 443,
-	        CURLOPT_HTTPHEADER => $headers,
-	        CURLOPT_POST => TRUE,
-	        CURLOPT_POSTFIELDS => $message,
-	        CURLOPT_RETURNTRANSFER => TRUE,
-	        CURLOPT_TIMEOUT => 30,
-	        CURLOPT_SSL_VERIFYPEER => false,
-	        CURLOPT_HEADER => 1
-	    ));
-	    $result = curl_exec($http2ch);
-	    if ($result === FALSE) {
-	        throw new Q_Exception("Curl failed: " .  curl_error($http2ch));
-	    }
-		$info = curl_getinfo($http2ch);
-	    return array($result, $info);
+		throw new Q_Exception_MethodNotSupported(array(
+			'method' => 'sendPushNotifications'
+		));
 	}
+	
+	static protected $push = null;
 }

@@ -109,43 +109,63 @@ class Users_Device extends Base_Users_Device
 	}
 	
 	/**
+	 * You can use this method to send push notifications.
+	 * It is far better, however, to use the Qbix Platform's offline notification
+	 * mechanisms using Node.js instead of PHP. That way, you can be sure of re-using
+	 * the same persistent connection.
 	 * @method pushNotification
 	 * @param {array} $notification
 	 * @param {string|array} [$notification.alert] Either the text of an alert to show,
 	 *  or an object with the following fields:
-	 * @param {string} [$notification.alert.title]
-	 * @param {string} [$notification.alert.body]
-	 * @param {string} [$notification.alert.title-loc-key]
-	 * @param {string} [$notification.alert.title-loc-args]
-	 * @param {string} [$notification.alert.action-loc-key]
-	 * @param {string} [$notification.alert.loc-key]
-	 * @param {string} [$notification.alert.loc-args]
-	 * @param {string} [$notification.alert.launch-image]
+	 * @param {string} [$notification.alert.title] The title of the notification
+	 * @param {string} [$notification.alert.body] The body of the notification
+	 * @param {string} [$notification.alert.titleLocKey] Apple-only
+	 * @param {string} [$notification.alert.titleLocArgs] Apple-only
+	 * @param {string} [$notification.alert.actionLocKey] Apple-only
+	 * @param {string} [$notification.alert.locKey] Apple-only
+	 * @param {string} [$notification.alert.locArgs] Apple-only
+	 * @param {string} [$notification.alert.launchImage] Apple-only
 	 * @param {string} [$notification.badge] The badge
 	 * @param {string} [$notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
-	 * @param {Object} [$notification.payload] Put all your other data here
+	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action' and 'title'.
+	 * @param {string} [$notification.category] Apple-only. The name of the category for actions registered on the client side.
+	 * @param {Object} [$notification.payload] Put all your custom notification fields here
 	 * @param {Object} [$options]
+	 * @param {boolean} [$options.scheduled=false] if true, doesn't send immediately. You should call Users_Device::sendPushNotifications() to send all scheduled notifications in a batch.
 	 * @param {string} [$options.view] Optionally set a view to render for the alert body
 	 * @param {Boolean} [$options.isSource] If true, uses Q.Handlebars.renderSource instead of render
 	 * @param {timestamp} [$options.expiration] A UNIX timestamp for when the notification expires
-	 * @param {integer} [$options.priority=10] Can be set to 5 to make it lower priority
+	 * @param {string} [$options.priority="high"] Can be set to "normal" to make it lower priority
 	 * @param {string} [$options.collapseId] A string under 64 bytes for collapsing notifications
 	 * @param {string} [$options.id] You can provide your own uuid for the notification
 	 * @param {boolean} [$options.silent=false] Deliver a silent notification, may throw an exception
 	 */
 	function pushNotification($notification, $options = array())
 	{
-		$this->deliverPushNotification($notification, $options);
+		$this->schedulePushNotification($notification, $options);
 	}
 	
 	/**
-	 * @method deliverPushNotification
+	 * Schedules a push notification
+	 * @method schedulePushNotifications
 	 * Default implementation
 	 */
-	protected function deliverPushNotification()
+	protected function handlePushNotification($notifications, $options = array())
 	{
 		throw new Q_Exception_MethodNotSupported(array(
-			'method' => 'deliverPushNotifications'
+			'method' => 'schedulePushNotification'
+		));
+	}
+	
+	/**
+	 * Sends all scheduled push notifications
+	 * @method sendPushNotifications
+	 * Default implementation
+	 */
+	static function sendPushNotifications()
+	{
+		throw new Q_Exception_MethodNotSupported(array(
+			'method' => 'sendPushNotifications'
 		));
 	}
 

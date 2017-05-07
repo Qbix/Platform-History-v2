@@ -390,7 +390,7 @@ abstract class ApnsPHP_Abstract
 		}
 
 		$this->_hSocket = @stream_socket_client($sURL, $nError, $sError,
-			$this->_nConnectTimeout, STREAM_CLIENT_CONNECT, $streamContext);
+			$this->_nConnectTimeout, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $streamContext);
 
 		if (!$this->_hSocket) {
 			throw new ApnsPHP_Exception(
