@@ -2,6 +2,7 @@
 /**
  * @module Users
  */
+
 /**
  * Class representing 'Device' rows in the 'Users' database
  * You can create an object of this class either to
@@ -28,17 +29,18 @@ class Users_Device extends Base_Users_Device
 	 * @param {array} $device
 	 * @param {string} $device.userId
 	 * @param {string} $device.deviceId
+	 * @param {string} $device.platform
+	 * @param {string} $device.appId external app id registered with the platform
 	 * @param {string} [$device.formFactor]
-	 * @param {string} [$device.platform]
-	 * @param {string} [$device.appId] external app id registered with the platform
-	 * @param {string} [$device.version]
-	 * @param {string} [$device.sessionId]
+	 * @param {string} [$device.version] the version of the platform
+	 * @param {string} [$device.sessionId=Q_Session::id()] the session id to associate to the device.
 	 * @param {boolean} [$skipNotification=false] if true, skips sending notification
 	 * @return {Users_Device}
 	 */
 	static function add($device, $skipNotification=false)
 	{
-		Q_Valid::requireFields(array('userId', 'deviceId', 'platform', 'appId'), $device, true);
+		$fields = array('userId', 'deviceId', 'platform', 'appId');
+		Q_Valid::requireFields($fields, $device, true);
 		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
 		$platform = $device['platform'];
@@ -48,59 +50,35 @@ class Users_Device extends Base_Users_Device
 		if (!$info) {
 			throw new Q_Exception_MissingConfig("Users/apps/$platform/.../appId=$platformAppId");
 		}
-		if (!$skipNotification) {
-			$sandbox = Q::ifset($device, 'sandbox', false);
-			$env = $sandbox
-				? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
-				: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
-			$s = $sandbox ? 'sandbox' : 'production';
-			$cert = APP_LOCAL_DIR.DS.'Users'.DS.'certs'.DS.$appId.DS.$s.DS.'bundle.pem';
-			$authority = USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
-			$logger = new Users_ApnsPHP_Logger();
-			$push = new ApnsPHP_Push($env, $cert);
-			$push->setLogger($logger);
-			$push->setRootCertificationAuthority($authority);
-			if (isset($info['token']['passphrase'])) {
-				$push->setProviderCertificatePassphrase($info['token']['passphrase']);
-			}
-			$push->connect();
-			$message = new ApnsPHP_Message($deviceId);
-			$message->setCustomIdentifier('Users_Device-adding');
-			$message->setBadge(0);
-			$message->setText(Q_Config::get(
-				"Users", "apps", $platform, $appId, "device", "added",
-				"Notifications have been enabled"
-			));
-			$message->setCustomProperty('userId', $userId);
-			$message->setExpiry(5);
-			$push->add($message);
-			$push->send();
-			$push->disconnect();
-			$errors = $push->getErrors();
-			if (!empty($errors)) {
-				$result = reset($errors);
-				throw new Users_Exception_DeviceNotification($result['ERRORS'][0]);
-			}
-		}
-		$sessionId = Q_Session::id();
+		$sessionId = isset($device['sessionId']) ? $device['sessionId'] : Q_Session::id();
 		$user = Users::loggedInUser();
 		$info = array_merge(Q_Request::userAgentInfo(), array(
 			'sessionId' => $sessionId,
-			'userId' => $user ? $user->id : null,
+			'userId' => $userId,
 			'deviceId' => null,
 			'appId' => $platformAppId
 		));
-		$device2 = Q::take($device, $info);
-		$d = new Users_Device($device2);
-		$d->save(true);
+		$deviceArray = Q::take($device, $info);
+		$className = "Users_Device_" . ucfirst($platform);
+		$deviceRow = new $className($deviceArray);
+		if (!$skipNotification) {
+			// The following call may throw an exception if deviceId is invalid.
+			// This may cancel Users::register() registration and remove user.
+			$alert = Q_Config::get(
+				"Users", "apps", $platform, $appId, "device", "added",
+				"Notifications have been enabled"
+			);
+			$payload = compact('userId');
+			$deviceRow->pushNotification(compact('alert', 'payload'));
+		}
+		$deviceRow->save(true);
 		if ($sessionId) {
 			Users_Session::update()
 				->set(compact('deviceId'))
 				->where(array('id' => $sessionId))
 				->execute();
 		}
-		$_SESSION['Users']['deviceId'] = $deviceId;
-		$device2['Q/method'] = 'Users/device';
+		$deviceArray['Q/method'] = 'Users/device';
 		Q_Utils::sendToNode($device2);
 		return $d;
 	}
@@ -128,6 +106,47 @@ class Users_Device extends Base_Users_Device
 			->orderBy('insertedTime', false)
 			->fetchDbRows();
 		return $devices ? reset($devices) : null;
+	}
+	
+	/**
+	 * @method pushNotification
+	 * @param {array} $notification
+	 * @param {string|array} [$notification.alert] Either the text of an alert to show,
+	 *  or an object with the following fields:
+	 * @param {string} [$notification.alert.title]
+	 * @param {string} [$notification.alert.body]
+	 * @param {string} [$notification.alert.title-loc-key]
+	 * @param {string} [$notification.alert.title-loc-args]
+	 * @param {string} [$notification.alert.action-loc-key]
+	 * @param {string} [$notification.alert.loc-key]
+	 * @param {string} [$notification.alert.loc-args]
+	 * @param {string} [$notification.alert.launch-image]
+	 * @param {string} [$notification.badge] The badge
+	 * @param {string} [$notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+	 * @param {Object} [$notification.payload] Put all your other data here
+	 * @param {Object} [$options]
+	 * @param {string} [$options.view] Optionally set a view to render for the alert body
+	 * @param {Boolean} [$options.isSource] If true, uses Q.Handlebars.renderSource instead of render
+	 * @param {timestamp} [$options.expiration] A UNIX timestamp for when the notification expires
+	 * @param {integer} [$options.priority=10] Can be set to 5 to make it lower priority
+	 * @param {string} [$options.collapseId] A string under 64 bytes for collapsing notifications
+	 * @param {string} [$options.id] You can provide your own uuid for the notification
+	 * @param {boolean} [$options.silent=false] Deliver a silent notification, may throw an exception
+	 */
+	function pushNotification($notification, $options = array())
+	{
+		$this->deliverPushNotification($notification, $options);
+	}
+	
+	/**
+	 * @method deliverPushNotification
+	 * Default implementation
+	 */
+	protected function deliverPushNotification()
+	{
+		throw new Q_Exception_MethodNotSupported(array(
+			'method' => 'deliverPushNotifications'
+		));
 	}
 
 	/**

@@ -33,8 +33,6 @@ function Users_Device (fields) {
 /**
  * @method pushNotification
  * @param {Object} notification
- * @param {String} [notification.badge] The badge
- * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
  * @param {String|Object} [notification.alert] Either the text of an alert to show,
  *  or an object with the following fields:
  * @param {String} [notification.alert.title]
@@ -45,26 +43,29 @@ function Users_Device (fields) {
  * @param {String} [notification.alert.loc-key]
  * @param {String} [notification.alert.loc-args]
  * @param {String} [notification.alert.launch-image]
- * @param {String} [notification.encoding]
- * @param {Object} [notification.payload]
- * @param {String} [notification.expiry]
- * @param {String} [notification.priority]
- * @param {String} [notification.newsstandAvailable]
- * @param {String} [notification.contentAvailable]
- * @param {String} [notification.mutableContent]
- * @param {String} [notification.mdm]
- * @param {Boolean} [notification.truncateAtWordEnd]
- * @param {String} [notification.urlArgs]
- * @param {String} [notification.category]
+ * @param {String} [notification.badge] The badge
+ * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+ * @param {Object} [notification.payload] Put all your other data here
  * @param {Object} [options]
  * @param {String} [options.view] Optionally set a view to render for the alert body
  * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
+ * @param {timestamp} [options.expiration] A UNIX timestamp for when the notification expires
+ * @param {integer} [options.priority=10] Can be set to 5 to make it lower priority
+ * @param {string} [options.collapseId] A string under 64 bytes for collapsing notifications
+ * @param {string} [options.id] You can provide your own uuid for the notification
+ * @param {boolean} [options.silent=false] Deliver a silent notification, may throw an exception
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
 Users_Device.prototype.pushNotification = function (notification, options, callback) {
 	if (typeof options === 'function') {
 		callback = options;
 		options = {};
+	}
+	if (options.expiration) {
+		options.expiry = options.expiration;
+	}
+	if (options.collapseId) {
+		notification.collapseId = options.collapseId;
 	}
 	if (options && options.view) {
 		var body = options.isSource
@@ -79,7 +80,7 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 			return;
 		}
 		var appId = options.appId || Q.Config.expect(['Q', 'app']);
-		notification.topic = Q.Config.expect(['Users', 'ios', appId, 'bundleId']);
+		notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'bundleId']);
 		var apn = require('apn');
 		var n = new apn.Notification(notification);
 		Users.push.apn.provider.send(n, device.fields.deviceId)

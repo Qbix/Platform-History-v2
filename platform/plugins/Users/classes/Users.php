@@ -705,14 +705,15 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/logout', compact('user'), 'before');
 
-		$deviceId = isset($_SESSION['Users']['deviceId'])
-			? $_SESSION['Users']['deviceId']
-			: null;
+		$deviceId = null;
+		if ($session = Q_Session::row()) {
+			$deviceId = $session->deviceId;
+		}
 		
 		if ($user) {
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Users/logout",
-				"sessionId" => $sesionId,
+				"sessionId" => $sessionId,
 				"userId" => $user->id,
 				"deviceId" => $deviceId
 			));
@@ -1083,10 +1084,10 @@ abstract class Users extends Base_Users
 			$user->save();
 		}
 
-		if (empty($user->emailAddress) and empty($user->mobileNumber)
-		and ($type === 'email' or $type === 'mobile')) {
-			// Add an email address or mobile number to the user, that they'll have to verify
-			try {
+		try {
+			if (empty($user->emailAddress) and empty($user->mobileNumber)
+			and ($type === 'email' or $type === 'mobile')) {
+				// Add an email address or mobile number to the user, that they'll have to verify
 				$activation = Q::ifset($options, 'activation', 'activation');
 				if ($activation) {
 					$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
@@ -1104,18 +1105,17 @@ abstract class Users extends Base_Users
 					$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
 					$user->addMobile($mobileNumber, $sms, array(), $p);
 				}
-			} catch (Exception $e) {
-				// The activation message could not be sent, so remove this user
-				// from the database. This way, this username will be
-				// back on the market.
-				$user->remove();
-				throw $e;
 			}
-		}
-		
-		if (!empty($device)) {
-			$device['userId'] = $user->id;
-			Users_Device::add($device);
+			if (!empty($device)) {
+				$device['userId'] = $user->id;
+				Users_Device::add($device);	
+			}
+		} catch (Exception $e) {
+			// The activation message could not be sent, so remove this user
+			// from the database. This way, we won't needlessly take up resources.
+			// The username, if uniqueness is enforced, will be back on the market, too.
+			$user->remove();
+			throw $e;
 		}
 
 		/**
