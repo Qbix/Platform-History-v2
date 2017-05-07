@@ -40,8 +40,8 @@ var _reloadConfig;
 /**
  * Load platform configuration
  * @method configure
- * @param callback {function} Callback is fired when config is ready. Errors are thrown if "reload" is false and passed to
- *	"callback" if "reload" is true
+ * @param callback {function} Callback is fired when config is ready. 
+ *  Errors are thrown if "reload" is false and passed to "callback" if "reload" is true
  * @param [reload=false] {boolean} Wheather config is loaded on process start or reloaded by active process
  * @throws {Error} if reload is `false` throws any errors appearing during config load process, otherwise
  * 	passes them to callback
@@ -85,8 +85,8 @@ Bootstrap.configure = function (callback, reload) {
 					VIEWS_DIR: 'views'
 				};
 				pluginInfo[plugin] = {};
-				for (k in dirs) {
-					pluginInfo[plugin][k] = Q.PLUGINS_DIR+'/'+plugin+'/'+dirs[k];
+				for (var dir in dirs) {
+					pluginInfo[plugin][dir] = Q.PLUGINS_DIR+'/'+plugin+'/'+dirs[dir];
 				}
 				Bootstrap.setIncludePath(Q.PLUGINS_DIR+'/'+plugin+'/classes');
 			}
@@ -202,8 +202,8 @@ Bootstrap.loadPlugins = function (callback) {
 		if (plugins[i] === 'Q') {
 			continue;
 		}
-		var path = plugins[i];
-		Q.plugins[ plugins[i] ] = Q.require(path);
+		var pluginName = plugins[i];
+		Q.plugins[pluginName] = Q.require(pluginName);
 	}
 	callback();
 };
