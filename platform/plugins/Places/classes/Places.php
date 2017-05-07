@@ -202,9 +202,9 @@ abstract class Places extends Base_Places
 		$meters)
 	{
 		$latGrid = $meters / (1609.34 * 69.1703234283616);
-		$latQuantized = floor($latitude / $latGrid) * $latGrid;
+		$latQuantized = floor($latitude / $latGrid + 0.00000001) * $latGrid;
 		$longGrid = abs($latGrid / cos(deg2rad($latQuantized)));
-		$longQuantized = floor($longitude / $longGrid) * $longGrid;
+		$longQuantized = floor($longitude / $longGrid + 0.00000001) * $longGrid;
 		return array($latQuantized, $longQuantized, $latGrid, $longGrid);
 	}
 	
