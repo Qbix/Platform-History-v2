@@ -3852,7 +3852,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $fullName The full name of the user in the format 'First Last' or 'Last, First'
 	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
 	 * @param {string} [$identifier.identifier] an email address or phone number
-	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 * @param {array} [$identifier.device] an array with keys
+	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
 	 * @param {string} [$platform=null] Platform such as "facebook"
