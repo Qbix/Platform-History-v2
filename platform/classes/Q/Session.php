@@ -348,14 +348,14 @@ class Q_Session
 			));
 		}
 		$original = null;
-		$changed = null;
+		$changed = array();
 		if (Q_Config::get('Q', 'session', 'userAgentInfo', null)) {
 			$arr = isset($_SESSION['Q']) ? $_SESSION['Q'] : array();
 			$userAgentInfo = Q_Request::userAgentInfo();
 			foreach ($userAgentInfo as $k => $v) {
 				if (isset($arr[$k])) {
 					$original[$k] = $arr[$k];
-					if (isset($arr[$k]) and $arr[$k] !== $v) {
+					if ($arr[$k] !== $v) {
 						$changed[$k] = $v;
 					}
 				}

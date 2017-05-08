@@ -453,7 +453,15 @@ class Q
 			}
 			$filename = 'classes'.DS.implode(DS, $parts).'.php';
 			
-			$filename = self::event('Q/autoload', compact('className'), 'before', false, $filename);
+			/**
+			 * @event Q/autoload {before}
+			 * @param {string} $className
+			 * @return {string} the filename of the file to load
+			 */
+			$filename = self::event(
+				'Q/autoload', compact('className'), 
+				'before', false, $filename
+			);
 
 			// Now we can include the file
 			try {

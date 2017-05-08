@@ -26,6 +26,8 @@ class Users_Session extends Base_Users_Session
 	/**
 	 * Saves a new Users_Session row with a copy of all the content from the current session.
 	 * Does not change the current session id.
+	 * @method copyToNewSesion
+	 * @static
 	 * @param {array} $sessionFields Pass an array with keys such as
 	 *   "platform", "appId", "version", "deviceId", "formFactor"
 	 * @param {string|integer} [$duration='year'] The key in the Q/session/durations config field

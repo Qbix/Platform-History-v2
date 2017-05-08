@@ -4,15 +4,36 @@ function Streams_0_8_7_Streams_mysql()
 {
 	$app = Q_Config::expect('Q', 'app');
 	$communityId = Users::communityId();
-	$user = Users_User::fetch($communityId, true);
+	$user = Users_User::fetch($communityId, true); // make sure it is there
 	
-	$simulated = array(
-		'row' => $user,
-		'inserted' => true,
-		'modifiedFields' => $user->fields,
-		'query' => null
-	);
-	Q::event('Db/Row/Users_User/saveExecute', $simulated, 'after');
+	$result = Users_User::select('COUNT(1)')
+		->fetchAll(PDO::FETCH_NUM);
+	$c = $result[0][0];
+	echo "Inserting streams for users...";
+	$offset = 0;
+	$batch = 1000;
+	for ($i=1; true; ++$i) {
+		$users = Users_User::select('*')
+			->orderBy('id')
+			->limit($batch, $offset)
+			->fetchDbRows();
+		if (!$users) {
+			break;
+		}
+		$offset += $batch;
+		foreach ($users as $user) {
+			$simulated = array(
+				'row' => $user,
+				'inserted' => true,
+				'modifiedFields' => $user->fields,
+				'query' => null
+			);
+			Q::event('Db/Row/Users_User/saveExecute', $simulated, 'after');
+			echo "\033[100D";
+			echo "Inserted streams for $i of $c users";
+		}
+	}
+	echo PHP_EOL;
 	
 	$stream = array(
 		'publisherId' => '', 
