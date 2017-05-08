@@ -466,7 +466,7 @@ return [["varbinary","255","",false],false,"",null];
 Base.prototype.beforeSet_formFactor = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (['mobile','tablet'].indexOf(value) < 0)
+		if (['mobile','tablet','desktop'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".formFactor");
 		return value;
 };
@@ -477,7 +477,7 @@ Base.prototype.beforeSet_formFactor = function (value) {
 	 */
 Base.column_formFactor = function () {
 
-return [["enum","'mobile','tablet'","",false],true,"",null];
+return [["enum","'mobile','tablet','desktop'","",false],true,"",null];
 };
 
 /**
@@ -502,7 +502,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'mobile','tablet'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -528,7 +528,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'mobile','tablet'","",false],true,"",null];
+return [["timestamp","'mobile','tablet','desktop'","",false],true,"",null];
 };
 
 /**

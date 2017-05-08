@@ -347,14 +347,32 @@ class Q_Session
 				'id' => Q_Session::id()
 			));
 		}
+		$original = null;
+		$changed = null;
 		if (Q_Config::get('Q', 'session', 'userAgentInfo', null)) {
 			$arr = isset($_SESSION['Q']) ? $_SESSION['Q'] : array();
-			$_SESSION['Q'] = array_merge($arr, Q_Request::userAgentInfo());
+			$userAgentInfo = Q_Request::userAgentInfo();
+			foreach ($userAgentInfo as $k => $v) {
+				if (isset($arr[$k])) {
+					$original[$k] = $arr[$k];
+					if (isset($arr[$k]) and $arr[$k] !== $v) {
+						$changed[$k] = $v;
+					}
+				}
+			}
+			$_SESSION['Q'] = array_merge($arr, $userAgentInfo);
+		}
+		if ($changed and !Q_Config::get('Q', 'session', 'allowHijack', false)) {
+			throw new Q_Exception_SessionHijacked();
 		}
 		/**
+		 * This is a hook for after the session starts.
+		 * You may want to do extra security checks here.
 		 * @event Q/session/start {after}
+		 * @param {array} $original The userAgentInfo values that were in the session originally
+		 * @param {array} $changed Whether any of the userAgentInfo values changed.
 		 */
-		Q::event('Q/session/start', array(), 'after');
+		Q::event('Q/session/start', array('original', 'changed'), 'after');
 		return true;
 	}
 	
@@ -572,6 +590,10 @@ class Q_Session
 
 			// don't save sessions when running from command-line (cli)
 			if(php_sapi_name() == 'cli') {
+				return false;
+			}
+
+			if (self::$preventWrite) {
 				return false;
 			}
 			
@@ -1083,4 +1105,13 @@ class Q_Session
 	 * @public
 	 */
 	public static $nonceWasSet = false;
+
+	/**
+	 * Set this to true to prevent writing the session to disk
+	 * @property $preventWrite
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $preventWrite = false;
 }

@@ -41,7 +41,7 @@ CREATE TABLE `{$prefix}device` (
   `userId` varbinary(31)  NOT NULL,
   `deviceId` varbinary(255)  NOT NULL,
   `platform` enum('ios','android')  NOT NULL,
-  `version` varchar(45)  DEFAULT NULL,
+  `version` varchar(45)  DEFAULT NULL COMMENT 'The version of the platform',
   `sessionId` varbinary(255)  NOT NULL,
   `formFactor` enum('mobile','tablet')  DEFAULT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

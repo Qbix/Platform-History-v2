@@ -548,7 +548,7 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('formFactor', $value);
 		}
-		if (!in_array($value, array('mobile','tablet')))
+		if (!in_array($value, array('mobile','tablet','desktop')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".formFactor");
 		return array('formFactor', $value);			
 	}
@@ -564,7 +564,7 @@ return array (
   0 => 
   array (
     0 => 'enum',
-    1 => '\'mobile\',\'tablet\'',
+    1 => '\'mobile\',\'tablet\',\'desktop\'',
     2 => '',
     3 => false,
   ),
@@ -610,7 +610,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'mobile\',\'tablet\'',
+    1 => '\'mobile\',\'tablet\',\'desktop\'',
     2 => '',
     3 => false,
   ),
@@ -659,7 +659,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'mobile\',\'tablet\'',
+    1 => '\'mobile\',\'tablet\',\'desktop\'',
     2 => '',
     3 => false,
   ),

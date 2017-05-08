@@ -3806,7 +3806,7 @@ abstract class Streams extends Base_Streams
 				), true);
 				$result = true;
 			}
-		} catch (Exception$e) {
+		} catch (Exception $e) {
 			throw $e;
 		}
 		return $result;
@@ -3855,8 +3855,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$identifier.device] an array with keys
 	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
+	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
 	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
-	 * @param {string} [$platform=null] Platform such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -3868,15 +3868,9 @@ abstract class Streams extends Base_Streams
 	static function register(
 		$fullName, 
 		$identifier, 
-		$icon = array(), 
-		$platform = null, 
+		$icon = array(),  
 		$options = array())
-	{
-		if (is_array($platform)) {
-			$options = $platform;
-			$platform = null;
-		}
-		
+	{	
 		/**
 		 * @event Streams/register {before}
 		 * @param {string} username
@@ -3885,7 +3879,7 @@ abstract class Streams extends Base_Streams
 		 * @return {Users_User}
 		 */
 		$return = Q::event('Streams/register', compact(
-			'name', 'fullName', 'identifier', 'icon', 'platform', 'options'), 'before'
+			'name', 'fullName', 'identifier', 'icon', 'options'), 'before'
 		);
 		if (isset($return)) {
 			return $return;
@@ -3905,7 +3899,7 @@ abstract class Streams extends Base_Streams
 		// this will be used in Streams_after_Users_User_saveExecute
 		Streams::$cache['register'] = $register;
 
-		$user = Users::register("", $identifier, $icon, $platform, $options);
+		$user = Users::register("", $identifier, $icon, $options);
 
 		/**
 		 * @event Streams/register {after}
@@ -3916,7 +3910,7 @@ abstract class Streams extends Base_Streams
 		 * @return {Users_User}
 		 */
 		Q::event('Streams/register', compact(
-			'register', 'identifier', 'icon', 'user', 'platform', 'options'
+			'register', 'identifier', 'icon', 'user', 'options'
 		), 'after');
 
 		return $user;
