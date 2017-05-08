@@ -75,10 +75,18 @@ class Users_Session extends Base_Users_Session
 		if (isset($arr)) {
 			$_SESSION['Q'] = $arr;
 		}
-		Q::event("Users/copyToNewSession", array(
-			'duration' => $duration,
-			'from_sessionId' => $id,
-			'to_sessionId' => $us2->id
+		/**
+		 * This is a hook for after the session has been copied to a new session.
+		 * You may want to do extra security checks here.
+		 * You may also want to notify the user that there has been a new session
+		 * started from a new platform + appId.
+		 * @event Users/Session/copyToNewSession {after}
+		 * @param {Users_Session} $from The session that was copied from
+		 * @param {Users_Session} $to The session that was copied to
+		 */
+		Q::event("Users/Session/copyToNewSession", array(
+			'from' => $us,
+			'to' => $us2
 		), 'after');
 		return $us2->id;
 	}
