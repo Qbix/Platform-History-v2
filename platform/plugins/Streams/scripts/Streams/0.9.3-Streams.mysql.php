@@ -21,7 +21,7 @@ function Streams_0_9_3_Streams()
 		echo "\033[100D";
 		echo "Updated $i of $c streams";
 	}
-	echo "\n";
+	echo PHP_EOL;
 }
 
 Streams_0_9_3_Streams();
