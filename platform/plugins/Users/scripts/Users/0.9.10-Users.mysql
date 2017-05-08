@@ -1,0 +1,13 @@
+ALTER TABLE {$prefix}session
+ADD COLUMN platform varchar(31) NOT NULL COMMENT 'A platform like ios or android' AFTER duration,
+ADD COLUMN appId varchar(200) NULL COMMENT 'An external app id registered with the platform' AFTER platform,
+ADD COLUMN version varchar(34) NOT NULL COMMENT 'The version of the platform' AFTER appId,
+ADD COLUMN formFactor enum('mobile','tablet','desktop') DEFAULT NULL after version,
+DROP INDEX userId,
+ADD INDEX user (userId, platform, appId);
+
+ALTER TABLE {$prefix}device
+MODIFY formFactor enum('mobile','tablet','desktop') DEFAULT NULL;
+
+ALTER TABLE {$prefix}user
+MODIFY signedUpWith varchar(31) NOT NULL COMMENT 'A platform like ios or android, or "none", "mobile", "email"';

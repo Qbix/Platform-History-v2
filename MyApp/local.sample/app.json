@@ -113,6 +113,7 @@
 					"bundleId": "com.mycompany.myapp",
 					"appId": "361285480",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+					"baseUrl": "groups://",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
@@ -123,6 +124,10 @@
 						"keyId": "Find it at https://developer.apple.com/account/ios/certificate/",
 						"passphrase": null,
 						"teamId": "Find it at https://developer.apple.com/account/#/membership"
+					},
+					"ssl": { /* see https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11 */
+						"cert": "local/Users/certs/MyApp/sandbox/bundle.pem",
+						"passphrase": null
 					}
 				}
 			},

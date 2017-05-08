@@ -251,6 +251,8 @@ abstract class Users extends Base_Users
 		}
 		if (!isset($appId)) {
 			$appId = Q_Config::expect('Users', 'apps', 'facebook', Q::app(), 'appId');
+		} else {
+			list($appId, $appInfo) = Users::appInfo($platform, $appId);
 		}
 		$authenticated = null;
 
@@ -705,14 +707,15 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/logout', compact('user'), 'before');
 
-		$deviceId = isset($_SESSION['Users']['deviceId'])
-			? $_SESSION['Users']['deviceId']
-			: null;
+		$deviceId = null;
+		if ($session = Q_Session::row()) {
+			$deviceId = $session->deviceId;
+		}
 		
 		if ($user) {
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Users/logout",
-				"sessionId" => $sesionId,
+				"sessionId" => $sessionId,
 				"userId" => $user->id,
 				"deviceId" => $deviceId
 			));
@@ -893,10 +896,11 @@ abstract class Users extends Base_Users
 	 * @param {string} $username The name of the user
 	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
 	 * @param {string} [$identifier.identifier] an email address or phone number
-	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 * @param {array} [$identifier.device] an array with keys
+	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
+	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
 	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
-	 * @param {string} [$platform=null] Platform such as "facebook"
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -909,14 +913,8 @@ abstract class Users extends Base_Users
 		$username, 
 		$identifier, 
 		$icon = array(), 
-		$platform = null, 
 		$options = array())
 	{
-		if (is_array($platform)) {
-			$options = $platform;
-			$platform = null;
-		}
-
 		/**
 		 * @event Users/register {before}
 		 * @param {string} username
@@ -931,15 +929,27 @@ abstract class Users extends Base_Users
 		}
 
 		$during = 'register';
+		$platform = null;
+		$appId = null;
 
 		if (is_array($identifier)) {
 			reset($identifier);
 			switch (key($identifier)) {
+				case 'app':
+					$app = $identifier['app'];
+					$fields = array('platform');
+					Q_Valid::requireFields($fields, $app, true);
+					$platform = $identifier['app']['platform'];
+					$appId = Q::ifset($app, 'appId', null);
 				case 'device':
 					$device = $identifier['device'];
-					$fields = array('deviceId', 'platform', 'version');
+					$fields = array('deviceId', 'platform', 'appId', 'version', 'formFactor');
 					Q_Valid::requireFields($fields, $device, true);
 					$identifier = Q::ifset($identifier, 'identifier', null);
+					if (empty($device['platform'])) {
+						throw new Q_Exception_RequiredField(array('field' => 'identifier.device.platform'));
+					}
+					$signedUpWith = $device['platform'];
 					break;
 				default:
 					throw new Q_Exception_WrongType(array(
@@ -955,11 +965,11 @@ abstract class Users extends Base_Users
 			if (Q_Valid::email($identifier, $emailAddress)) {
 				$ui_identifier = $emailAddress;
 				$key = 'email address';
-				$type = 'email';
+				$signedUpWith = 'email';
 			} else if (Q_Valid::phone($identifier, $mobileNumber)) {
 				$ui_identifier = $mobileNumber;
 				$key = 'mobile number';
-				$type = 'mobile';
+				$signedUpWith = 'mobile';
 			} else {
 				throw new Q_Exception_WrongType(array(
 					'field' => 'identifier',
@@ -981,7 +991,7 @@ abstract class Users extends Base_Users
 				try {
 					// authenticate (and possibly adopt) an existing platform user
 					// or insert a new user during this authentication
-					$user = Users::authenticate($platform, null, $authenticated, true);
+					$user = Users::authenticate($platform, $appId, $authenticated, true);
 				} catch (Exception $e) {
 
 				}
@@ -1009,7 +1019,7 @@ abstract class Users extends Base_Users
 		if (empty($adopted) and $ui_identifier) {
 			// We will be inserting a new user into the database, so check if
 			// this identifier was already verified for someone else.
-			$ui = Users::identify($type, $ui_identifier);
+			$ui = Users::identify($signedUpWith, $ui_identifier);
 			if ($ui) {
 				throw new Users_Exception_AlreadyVerified(compact('key'), array(
 					'emailAddress', 'mobileNumber', 'identifier'
@@ -1020,7 +1030,7 @@ abstract class Users extends Base_Users
 		// Insert a new user into the database, or simply modify an existing (adopted) user
 		$user->username = $username;
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
-			$user->signedUpWith = $type;
+			$user->signedUpWith = $signedUpWith;
 		}
 		$user->icon = 'default';
 		$user->passphraseHash = '';
@@ -1036,6 +1046,40 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'before');
 		$user->save(); // sets the user's id
+
+		try {
+			if (empty($user->emailAddress) and empty($user->mobileNumber)
+				and ($signedUpWith === 'email' or $signedUpWith === 'mobile')) {
+				// Add an email address or mobile number to the user, that they'll have to verify
+				$activation = Q::ifset($options, 'activation', 'activation');
+				if ($activation) {
+					$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
+					$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
+				} else {
+					$subject = $body = null;
+				}
+				if ($signedUpWith === 'email') {
+					$user->addEmail($identifier, $subject, $body, array(), $options);
+				} else if ($signedUpWith === 'mobile') {
+					$p = $options;
+					if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
+						$p['delay'] = $delay;
+					}
+					$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
+					$user->addMobile($mobileNumber, $sms, array(), $p);
+				}
+			}
+			if (!empty($device)) {
+				$device['userId'] = $user->id;
+				Users_Device::add($device);
+			}
+		} catch (Exception $e) {
+			// The activation message could not be sent, so remove this user
+			// from the database. This way, we won't needlessly take up resources.
+			// The username, if uniqueness is enforced, will be back on the market, too.
+			$user->remove();
+			throw $e;
+		}
 
 		/**
 		 * @event Users/insertUser {after}
@@ -1083,41 +1127,6 @@ abstract class Users extends Base_Users
 			$user->save();
 		}
 
-		if (empty($user->emailAddress) and empty($user->mobileNumber)
-		and ($type === 'email' or $type === 'mobile')) {
-			// Add an email address or mobile number to the user, that they'll have to verify
-			try {
-				$activation = Q::ifset($options, 'activation', 'activation');
-				if ($activation) {
-					$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
-					$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
-				} else {
-					$subject = $body = null;
-				}
-				if ($type === 'email') {
-					$user->addEmail($identifier, $subject, $body, array(), $options);
-				} else if ($type === 'mobile') {
-					$p = $options;
-					if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
-						$p['delay'] = $delay;
-					}
-					$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
-					$user->addMobile($mobileNumber, $sms, array(), $p);
-				}
-			} catch (Exception $e) {
-				// The activation message could not be sent, so remove this user
-				// from the database. This way, this username will be
-				// back on the market.
-				$user->remove();
-				throw $e;
-			}
-		}
-		
-		if (!empty($device)) {
-			$device['userId'] = $user->id;
-			Users_Device::add($device);
-		}
-
 		/**
 		 * @event Users/register {after}
 		 * @param {string} username
@@ -1147,7 +1156,6 @@ abstract class Users extends Base_Users
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
 	 * * "facebook" - this is the user's id on facebook
 	 * * "twitter": - this is the user's id on twitter
-	 * * "token": - this is the invitation token
 	 *
 	 * @return {Users_User|null}
 	 */
@@ -1525,8 +1533,8 @@ abstract class Users extends Base_Users
 	static function appInfo($platform, $appId)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
-		if (isset($apps[$id])) {
-			$appInfo = $apps[$id];
+		if (isset($apps[$appId])) {
+			$appInfo = $apps[$appId];
 		} else {
 			$id = $appInfo = null;
 			foreach ($apps as $k => $v) {
@@ -1868,7 +1876,7 @@ abstract class Users extends Base_Users
 	 * Note: it should still be tested for validity.
 	 * @method requestedIdentifier
 	 * @static
-	 * @param {&string} [$type=null] The identifier's type will be filled here. Might be "email", "mobile" or "token".
+	 * @param {&string} [$type=null] The identifier's type will be filled here. Might be "email", "mobile", "facebook" etc.
 	 * @return {string|null} The identifier, or null if one wasn't requested
 	 */
 	static function requestedIdentifier(&$type = null)
@@ -1877,13 +1885,10 @@ abstract class Users extends Base_Users
 		$type = null;
 		if (!empty($_REQUEST['identifier'])) {
 			$identifier = $_REQUEST['identifier'];
-			if (strpos($identifier, ':') !== false) {
-				list($type, $token) = explode(':', $identifier);
-				if ($type === 'token') {
-					return $token;
-				}
-			}
-			if (Q_Valid::email($identifier, $normalized)) {
+			if (isset($identifier['app']['platform'])) {
+				$type = $identifier['app']['platform'];
+				$identifier = Q::ifset($identifier, 'identifier', null);
+			} else if (Q_Valid::email($identifier, $normalized)) {
 				$type = 'email';
 			} else if (Q_Valid::phone($identifier, $normalized)) {
 				$type = 'mobile';

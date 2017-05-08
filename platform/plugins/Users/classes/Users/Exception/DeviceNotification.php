@@ -6,7 +6,7 @@
 class Users_Exception_DeviceNotification extends Q_Exception
 {
 	/**
-	 * An exception is raised if device notification can't be sent
+	 * An exception is raised if push notification can't be sent
 	 * @class Users_Exception_DeviceNotification
 	 * @constructor
 	 * @extends Q_Exception
