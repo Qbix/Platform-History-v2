@@ -941,6 +941,7 @@ abstract class Users extends Base_Users
 					Q_Valid::requireFields($fields, $app, true);
 					$platform = $identifier['app']['platform'];
 					$appId = Q::ifset($app, 'appId', null);
+					break;
 				case 'device':
 					$device = $identifier['device'];
 					$fields = array('deviceId', 'platform', 'appId', 'version', 'formFactor');
@@ -1045,41 +1046,39 @@ abstract class Users extends Base_Users
 		 * @param {Users_User} user
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'before');
-		$user->save(); // sets the user's id
 
-		try {
-			if (empty($user->emailAddress) and empty($user->mobileNumber)
-				and ($signedUpWith === 'email' or $signedUpWith === 'mobile')) {
-				// Add an email address or mobile number to the user, that they'll have to verify
-				$activation = Q::ifset($options, 'activation', 'activation');
-				if ($activation) {
-					$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
-					$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
-				} else {
-					$subject = $body = null;
-				}
-				if ($signedUpWith === 'email') {
-					$user->addEmail($identifier, $subject, $body, array(), $options);
-				} else if ($signedUpWith === 'mobile') {
-					$p = $options;
-					if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
-						$p['delay'] = $delay;
-					}
-					$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
-					$user->addMobile($mobileNumber, $sms, array(), $p);
-				}
+		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
+			'filter' => array('Users_User', 'idFilter')
+		));
+
+		// the following code could throw exceptions
+		if (empty($user->emailAddress) and empty($user->mobileNumber)
+			and ($signedUpWith === 'email' or $signedUpWith === 'mobile')) {
+			// Add an email address or mobile number to the user, that they'll have to verify
+			$activation = Q::ifset($options, 'activation', 'activation');
+			if ($activation) {
+				$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
+				$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
+			} else {
+				$subject = $body = null;
 			}
-			if (!empty($device)) {
-				$device['userId'] = $user->id;
-				Users_Device::add($device);
+			if ($signedUpWith === 'email') {
+				$user->addEmail($identifier, $subject, $body, array(), $options);
+			} else if ($signedUpWith === 'mobile') {
+				$p = $options;
+				if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
+					$p['delay'] = $delay;
+				}
+				$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
+				$user->addMobile($mobileNumber, $sms, array(), $p);
 			}
-		} catch (Exception $e) {
-			// The activation message could not be sent, so remove this user
-			// from the database. This way, we won't needlessly take up resources.
-			// The username, if uniqueness is enforced, will be back on the market, too.
-			$user->remove();
-			throw $e;
 		}
+		if (!empty($device)) {
+			$device['userId'] = $user->id;
+			Users_Device::add($device);
+		}
+
+		$user->save(); // saves the user with the id
 
 		/**
 		 * @event Users/insertUser {after}
