@@ -894,7 +894,8 @@ abstract class Users extends Base_Users
 	 * @param {string} $username The name of the user
 	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
 	 * @param {string} [$identifier.identifier] an email address or phone number
-	 * @param {array} [$identifier.device] an array with keys "deviceId", "platform", "version"
+	 * @param {array} [$identifier.device] an array with keys
+	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
 	 * @param {string} [$platform=null] Platform such as "facebook"
@@ -938,7 +939,7 @@ abstract class Users extends Base_Users
 			switch (key($identifier)) {
 				case 'device':
 					$device = $identifier['device'];
-					$fields = array('deviceId', 'platform', 'version');
+					$fields = array('deviceId', 'platform', 'appId', 'version', 'formFactor');
 					Q_Valid::requireFields($fields, $device, true);
 					$identifier = Q::ifset($identifier, 'identifier', null);
 					break;
@@ -1525,8 +1526,8 @@ abstract class Users extends Base_Users
 	static function appInfo($platform, $appId)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
-		if (isset($apps[$id])) {
-			$appInfo = $apps[$id];
+		if (isset($apps[$appId])) {
+			$appInfo = $apps[$appId];
 		} else {
 			$id = $appInfo = null;
 			foreach ($apps as $k => $v) {

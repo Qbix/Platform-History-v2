@@ -655,6 +655,30 @@ class Q_Request
 		
 		return $default;
 	}
+	
+	/**
+	 * Returns a string identifying user browser's platform.
+	 * @method platform
+	 * @static
+	 * @return {string}
+	 */
+	static function platform()
+	{
+		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+			return null;
+		}
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		if (preg_match('/ip(hone|od|ad)/i', $useragent))
+			return 'ios';
+		else if (preg_match('/android/i', $useragent))
+			return 'android';
+		else if (preg_match('/mac/i', $useragent))
+			return 'mac';
+		else if (preg_match('/linux/i', $useragent))
+			return 'linux';
+		else if (preg_match('/windows/i', $useragent))
+			return 'windows';
+	}
 
 	/**
 	 * Returns a string identifying user platform version.
@@ -668,8 +692,6 @@ class Q_Request
 		}
 		$platform = self::platform();
 		$useragent = $_SERVER['HTTP_USER_AGENT'];
-		$useragent = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.0.7) Gecko/2009030423 Ubuntu/8.10 (intrepid) Firefox/3.0.7';
-		$platform = 'linux';
 		$len = strlen($useragent);
 		switch ($platform) {
 			case 'ios':
@@ -695,8 +717,10 @@ class Q_Request
 				if ($index === false) return null;
 				$paren = strpos($useragent, ')', $index + 1);
 				$ur = strrev($useragent);
-			    $space = $len - strpos($ur, ' ', $len - $paren);
-			    $colon = $len - strpos($ur, ':', $len - $paren);
+				$pos = strpos($ur, ' ', $len - $paren);
+				$space = ($pos === false) ? false : $len - $pos;
+				$pos = strpos($ur, ':', $len - $paren);
+				$colon = ($pos === false) ? false : $len - $pos;
 				$max = ($space !== false and $space > $colon) ? $space : $colon;
 				if ($max === false) return null;
 				$ver = substr($useragent, $max, $paren - $max);
@@ -705,30 +729,6 @@ class Q_Request
 				return null;
 				break;
 		}
-	}
-	
-	/**
-	 * Returns a string identifying user browser's platform.
-	 * @method platform
-	 * @static
-	 * @return {string}
-	 */
-	static function platform()
-	{
-		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
-			return null;
-		}
-		$useragent = $_SERVER['HTTP_USER_AGENT'];
-		if (preg_match('/ip(hone|od|ad)/i', $useragent))
-			return 'ios';
-		else if (preg_match('/android/i', $useragent))
-			return 'android';
-		else if (preg_match('/mac/i', $useragent))
-			return 'mac';
-		else if (preg_match('/linux/i', $useragent))
-			return 'linux';
-		else if (preg_match('/windows/i', $useragent))
-			return 'windows';
 	}
 	
 	/**

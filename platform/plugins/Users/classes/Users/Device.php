@@ -27,19 +27,19 @@ class Users_Device extends Base_Users_Device
 	/**
 	 * Adds a device to the system, after sending a test notification to it
 	 * @param {array} $device
-	 * @param {string} $device.userId
-	 * @param {string} $device.deviceId
-	 * @param {string} $device.platform
+	 * @param {string} $device.userId the id of a user in the system
+	 * @param {string} $device.deviceId the id of the device on the external platform
+	 * @param {string} $device.platform an external platform, such as "ios" or "facebook"
 	 * @param {string} $device.appId external app id registered with the platform
-	 * @param {string} [$device.formFactor]
-	 * @param {string} [$device.version] the version of the platform
+	 * @param {string} $device.formFactor the form factor of the device
+	 * @param {string} $device.version the version of the platform
 	 * @param {string} [$device.sessionId=Q_Session::id()] the session id to associate to the device.
 	 * @param {boolean} [$skipNotification=false] if true, skips sending notification
 	 * @return {Users_Device}
 	 */
 	static function add($device, $skipNotification=false)
 	{
-		$fields = array('userId', 'deviceId', 'platform', 'appId');
+		$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version');
 		Q_Valid::requireFields($fields, $device, true);
 		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
