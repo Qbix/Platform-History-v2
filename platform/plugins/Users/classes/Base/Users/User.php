@@ -1002,20 +1002,36 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_signedUpWith
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_signedUpWith($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression) {
 			return array('signedUpWith', $value);
 		}
-		if (!in_array($value, array('none','email','mobile','facebook','twitter','remote')))
-			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".signedUpWith");
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".signedUpWith");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".signedUpWith");
 		return array('signedUpWith', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the signedUpWith field
+	 * @return {integer}
+	 */
+	function maxSize_signedUpWith()
+	{
+
+		return 31;			
 	}
 
 	/**
@@ -1028,14 +1044,14 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'enum',
-    1 => '\'none\',\'email\',\'mobile\',\'facebook\',\'twitter\',\'remote\'',
+    0 => 'varchar',
+    1 => '31',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => '',
-  3 => 'none',
+  3 => NULL,
 );			
 	}
 

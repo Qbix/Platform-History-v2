@@ -11,7 +11,6 @@
  *   to store in the Users_Device table for sending notifications
  * @param {array|string} [$_REQUEST.icon=array()] Array of filename => url pairs
  * @param {string} [$_REQUEST.platform=null] Platform such as "facebook"
- * @return {void}
  * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
  * @throws {Q_Exception} If user was already verified for someone else
  * @throws {Users_Exception_AlreadyVerified} If user was already verified
@@ -37,7 +36,6 @@ function Users_register_post()
 		$username, 
 		Users::requestedIdentifier(), 
 		$icon,
-		$platform,
 		compact('activation')
 	);
 	Users::setLoggedInUser($user);

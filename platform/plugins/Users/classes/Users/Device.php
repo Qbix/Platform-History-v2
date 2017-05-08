@@ -72,40 +72,51 @@ class Users_Device extends Base_Users_Device
 			$deviceRow->pushNotification(compact('alert', 'payload'));
 		}
 		$deviceRow->save(true);
+		$deviceArray['deviceId'] = $deviceRow->deviceId;
 		if ($sessionId) {
+			$fields = array('deviceId', 'appId', 'platform', 'version', 'formFactor');
 			Users_Session::update()
-				->set(compact('deviceId'))
+				->set(Q::take($deviceArray, $fields))
 				->where(array('id' => $sessionId))
 				->execute();
 		}
 		$deviceArray['Q/method'] = 'Users/device';
-		Q_Utils::sendToNode($device2);
-		return $d;
+		Q_Utils::sendToNode($deviceArray);
+		return $deviceRow;
 	}
 	
 	/**
-	 * Retrieve the latest device, if any, from a user id and platform
-	 * @param {string} [$userId] Defaults to logged-in user
-	 * @param {string} [$platform] Defaults to Q_Request::platform()
-	 * @return {Users_Device|null}
+	 * Given a userId and optional platform and appId,
+	 * retrieve an array of the latest devices, ordered by time inserted.
+	 * @method byApp
+	 * @static
+	 * @param {string} [$userId=Users::loggedInUser()] The id of the user
+	 * @param {string} [$platform=Q_Request::platform()] The external platform
+	 * @param {string} [$appId=Q::app()] External or internal platform app id
+	 * @return {array}
 	 */
-	static function byPlatform($userId = null, $platform = null)
+	static function byApp($userId = null, $platform = null, $appId = null)
 	{
 		if (!isset($userId)) {
 			$user = Users::loggedInUser();
 			if (!$user) {
-				return null;
+				return array();
 			}
 			$userId = $user->id;
 		}
 		if (!isset($platform)) {
 			$platform = Q_Request::platform();
 		}
-		$devices = Users_Device::select('*')
-			->where(compact('userId', 'platform'))
+		if (!isset($appId)) {
+			$appId = Q::app();
+		} else {
+			list($appId, $appInfo) = Users::appInfo($appId);
+			$appId = $appInfo['appId'];
+		}
+		return Users_Device::select('*')
+			->where(compact('userId', 'platform', 'appId'))
 			->orderBy('insertedTime', false)
 			->fetchDbRows();
-		return $devices ? reset($devices) : null;
 	}
 	
 	/**
@@ -142,7 +153,7 @@ class Users_Device extends Base_Users_Device
 	 */
 	function pushNotification($notification, $options = array())
 	{
-		$this->schedulePushNotification($notification, $options);
+		$this->handlePushNotification($notification, $options);
 	}
 	
 	/**

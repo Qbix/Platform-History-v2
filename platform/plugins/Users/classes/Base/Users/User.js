@@ -768,17 +768,32 @@ return [["varbinary","255","",false],false,"",""];
 };
 
 /**
- * Method is called before setting the field and verifies if value belongs to enum values list
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_signedUpWith
  * @param {string} value
  * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_signedUpWith = function (value) {
+		if (value == null) {
+			value='';
+		}
 		if (value instanceof Db.Expression) return value;
-		if (['none','email','mobile','facebook','twitter','remote'].indexOf(value) < 0)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".signedUpWith");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".signedUpWith");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".signedUpWith");
 		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the signedUpWith field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_signedUpWith = function () {
+
+		return 31;
 };
 
 	/**
@@ -787,7 +802,7 @@ Base.prototype.beforeSet_signedUpWith = function (value) {
 	 */
 Base.column_signedUpWith = function () {
 
-return [["enum","'none','email','mobile','facebook','twitter','remote'","",false],false,"","none"];
+return [["varchar","31","",false],false,"",null];
 };
 
 /**

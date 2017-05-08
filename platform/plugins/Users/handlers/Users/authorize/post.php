@@ -44,7 +44,14 @@ function Users_authorize_post($params = array())
 	}
 	$duration_name = Q_Config::expect('Users', 'authorize', 'duration');
 	$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
-	$access_token = Users_Session::copyToNewSession($duration);
+	$sessionFields = Q_Request::userAgentInfo();
+	$platform = Q_Request::platform();
+	list($appId, $appInfo) = Users::appInfo($platform, $client_id);
+	$sessionFields['appId'] = $appInfo['appId'];
+	if (isset($_REQUEST['deviceId'])) {
+		$sessionFields['deviceId'] = $_REQUEST['deviceId'];
+	}
+	$access_token = Users_Session::copyToNewSession($sessionFields, $duration);
 	$oa->scope = $scope;
 	$oa->redirect_uri = $redirect_uri; // just saving it
 	$oa->access_token = $access_token; // the session token

@@ -3,15 +3,16 @@
 class Users_Device_Ios extends Users_Device
 {
 	function handlePushNotification($notification, $options = array())
-	{	
+	{
+		list($appId, $appInfo) = Users::appInfo($this->platform, $this->appId);
 		$authority = USERS_PLUGIN_FILES_DIR.DS.'Users'.DS.'certs'.DS.'EntrustRootCA.pem';
-		$ssl = Q_Config::expect(array('Users', 'apps', 'ios', $this->appId, 'ssl'));
+		$ssl = Q_Config::expect('Users', 'apps', 'ios', $appId, 'ssl');
 		if (empty($ssl['cert'])) {
-			throw Q_Exception_MissingConfig("Users/apps/ios/{$this->appId}/ssl/cert");
+			throw Q_Exception_MissingConfig("Users/apps/ios/$appId/ssl/cert");
 		}
 		$sandbox = Q::ifset($device, 'sandbox', false);
 		$s = $sandbox ? 'sandbox' : 'production';
-		$cert = $ssl['cert'];
+		$cert = Q::realPath($ssl['cert']);
 		$env = $sandbox
 			? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
 			: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
@@ -23,7 +24,8 @@ class Users_Device_Ios extends Users_Device
 			$push = self::$push = new ApnsPHP_Push($env, $cert);
 			$push->setLogger($logger);
 			$push->setRootCertificationAuthority($authority);
-			if (isset($ssl['passphrase'])) { 				$push->setProviderCertificatePassphrase($ssl['passphrase']);
+			if (isset($ssl['passphrase'])) {
+				$push->setProviderCertificatePassphrase($ssl['passphrase']);
 			}
 			$push->connect();
 		}
@@ -52,7 +54,7 @@ class Users_Device_Ios extends Users_Device
 		foreach (array('badge', 'sound', 'category', 'expiry') as $k) {
 			if (isset($notification[$k])) {
 				$methodName = 'set'.ucfirst($k);
-				$message->$messageName($notification[$k]);
+				$message->$methodName($notification[$k]);
 			}
 		}
 		if (!empty($options['silent'])) {

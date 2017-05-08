@@ -113,6 +113,7 @@
 					"bundleId": "com.mycompany.myapp",
 					"appId": "361285480",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+					"baseUrl": "groups://",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {

@@ -21,6 +21,10 @@
  * @property {string} $deviceId
  * @property {integer} $timeout
  * @property {integer} $duration
+ * @property {string} $platform
+ * @property {string} $appId
+ * @property {string} $version
+ * @property {string} $formFactor
  * @property {string|Db_Expression} $insertedTime
  * @property {string|Db_Expression} $updatedTime
  */
@@ -53,6 +57,22 @@ abstract class Base_Users_Session extends Db_Row
 	/**
 	 * @property $duration
 	 * @type {integer}
+	 */
+	/**
+	 * @property $platform
+	 * @type {string}
+	 */
+	/**
+	 * @property $appId
+	 * @type {string}
+	 */
+	/**
+	 * @property $version
+	 * @type {string}
+	 */
+	/**
+	 * @property $formFactor
+	 * @type {string}
 	 */
 	/**
 	 * @property $insertedTime
@@ -587,6 +607,209 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_platform
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_platform($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('platform', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".platform");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".platform");
+		return array('platform', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the platform field
+	 * @return {integer}
+	 */
+	function maxSize_platform()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for platform column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_platform()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_appId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_appId($value)
+	{
+		if (!isset($value)) {
+			return array('appId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('appId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".appId");
+		if (strlen($value) > 200)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".appId");
+		return array('appId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+	function maxSize_appId()
+	{
+
+		return 200;			
+	}
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_appId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_version
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_version($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('version', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".version");
+		if (strlen($value) > 34)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".version");
+		return array('version', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the version field
+	 * @return {integer}
+	 */
+	function maxSize_version()
+	{
+
+		return 34;			
+	}
+
+	/**
+	 * Returns schema information for version column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_version()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '34',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * @method beforeSet_formFactor
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 */
+	function beforeSet_formFactor($value)
+	{
+		if (!isset($value)) {
+			return array('formFactor', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('formFactor', $value);
+		}
+		if (!in_array($value, array('mobile','tablet','desktop')))
+			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".formFactor");
+		return array('formFactor', $value);			
+	}
+
+	/**
+	 * Returns schema information for formFactor column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_formFactor()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'mobile\',\'tablet\',\'desktop\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -622,7 +845,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '11',
+    1 => '\'mobile\',\'tablet\',\'desktop\'',
     2 => '',
     3 => false,
   ),
@@ -668,7 +891,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '11',
+    1 => '\'mobile\',\'tablet\',\'desktop\'',
     2 => '',
     3 => false,
   ),
@@ -710,7 +933,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'content', 'php', 'userId', 'deviceId', 'timeout', 'duration', 'insertedTime', 'updatedTime');
+		$field_names = array('id', 'content', 'php', 'userId', 'deviceId', 'timeout', 'duration', 'platform', 'appId', 'version', 'formFactor', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
