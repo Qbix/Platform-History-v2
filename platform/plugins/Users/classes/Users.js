@@ -170,7 +170,7 @@ function _Users_listen_ios (options, server) {
 		var keys = ['cert', 'key', 'ca'];
 		for (var i=0, l=keys.length; i<l; ++i) {
 			var k = files[i];
-			if (!ssl[k] || !fs.existsSync(o[k])) {
+			if (!ssl[k] || !fs.existsSync(ssl[k])) {
 				console.log("WARNING: APN provider not enabled due to missing " + k + " at " + ssl[k] + "\n");
 				return;
 			}
