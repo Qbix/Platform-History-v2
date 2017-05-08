@@ -13,8 +13,7 @@
  * @param {array} [$_REQUEST.identifier.device] an array with keys "deviceId", "platform", "version"
  *   to store in the Users_Device table for sending notifications
  * @param {array} [$_REQUEST.icon=array()] User icon
- * @param {string} [$_REQUEST.platform=null] Platform
- * @return {Users_User}
+ * @param {string} [$_REQUEST.platform=null] Platform such as "facebook"
  * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
  * @throws {Q_Exception} If user was already verified for someone else
  * @throws {Users_Exception_AlreadyVerified} If user was already verified
@@ -22,7 +21,6 @@
  */
 function Streams_register_post()
 {
-	$platform = null;
 	$fullName = null;
 	$activation = null;
 	extract($_REQUEST, EXTR_IF_EXISTS);
@@ -36,7 +34,6 @@ function Streams_register_post()
 		$fullName, 
 		Users::requestedIdentifier(), 
 		true,
-		$platform,
 		compact('activation')
 	);
 	Users::setLoggedInUser($user);

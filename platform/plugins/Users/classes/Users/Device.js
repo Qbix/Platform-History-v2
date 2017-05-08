@@ -33,32 +33,31 @@ function Users_Device (fields) {
 /**
  * @method pushNotification
  * @param {Object} notification
- * @param {String} [notification.badge] The badge
- * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
  * @param {String|Object} [notification.alert] Either the text of an alert to show,
  *  or an object with the following fields:
- * @param {String} [notification.alert.title]
- * @param {String} [notification.alert.body]
- * @param {String} [notification.alert.title-loc-key]
- * @param {String} [notification.alert.title-loc-args]
- * @param {String} [notification.alert.action-loc-key]
- * @param {String} [notification.alert.loc-key]
- * @param {String} [notification.alert.loc-args]
- * @param {String} [notification.alert.launch-image]
- * @param {String} [notification.encoding]
- * @param {Object} [notification.payload]
- * @param {String} [notification.expiry]
- * @param {String} [notification.priority]
- * @param {String} [notification.newsstandAvailable]
- * @param {String} [notification.contentAvailable]
- * @param {String} [notification.mutableContent]
- * @param {String} [notification.mdm]
- * @param {Boolean} [notification.truncateAtWordEnd]
- * @param {String} [notification.urlArgs]
- * @param {String} [notification.category]
+ * @param {string|array} [notification.alert] Either the text of an alert to show,
+ *  or an object with the following fields:
+ * @param {String} [notification.alert.title] The title of the notification
+ * @param {String} [notification.alert.body] The body of the notification
+ * @param {String} [notification.alert.titleLocKey] Apple-only
+ * @param {String} [notification.alert.titleLocArgs] Apple-only
+ * @param {String} [notification.alert.actionLocKey] Apple-only
+ * @param {String} [notification.alert.locKey] Apple-only
+ * @param {String} [notification.alert.locArgs] Apple-only
+ * @param {String} [notification.alert.launchImage] Apple-only
+ * @param {String} [notification.badge] The badge
+ * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+ * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
+ * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
+ * @param {Object} [notification.payload] Put all your custom notification fields here
  * @param {Object} [options]
  * @param {String} [options.view] Optionally set a view to render for the alert body
  * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
+ * @param {timestamp} [options.expiry] A UNIX timestamp for when the notification expires
+ * @param {String} [options.priority="high"] Can be set to "normal" to make it lower priority
+ * @param {String} [options.collapseId] A string under 64 bytes for collapsing notifications
+ * @param {String} [options.id] You can provide your own uuid for the notification
+ * @param {boolean} [options.silent=false] Deliver a silent notification, may throw an exception
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
 Users_Device.prototype.pushNotification = function (notification, options, callback) {
@@ -66,10 +65,23 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 		callback = options;
 		options = {};
 	}
-	if (options && options.view) {
-		var body = options.isSource
-			? Q.Handlebars.renderSource(options.view, options.fields)
-			: Q.Handlebars.render(options.view, options.fields);
+	var o = Q.extend({}, options);
+	if (!Q.isInteger(o.priority)) {
+		o.priority = (o.priority === 'high') ? 10 : 5;
+	}
+	if (o.priority) {
+		notification.priority = o.priority;
+	}
+	if (o.expiry) {
+		o.expiry = o.expiry;
+	}
+	if (o.collapseId) {
+		notification.collapseId = o.collapseId;
+	}
+	if (o && o.view) {
+		var body = o.isSource
+			? Q.Handlebars.renderSource(o.view, o.fields)
+			: Q.Handlebars.render(o.view, o.fields);
 		Q.setObject(['alert', 'body'], body, notification);
 	}
 	var device = this;
@@ -78,8 +90,8 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 			console.warn("Users.Device.prototype.pushNotification: Users.apn.provider missing, call Users.listen() first");
 			return;
 		}
-		var appId = options.appId || Q.Config.expect(['Q', 'app']);
-		notification.topic = Q.Config.expect(['Users', 'ios', appId, 'bundleId']);
+		var appId = o.appId || Q.Config.expect(['Q', 'app']);
+		notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'bundleId']);
 		var apn = require('apn');
 		var n = new apn.Notification(notification);
 		Users.push.apn.provider.send(n, device.fields.deviceId)

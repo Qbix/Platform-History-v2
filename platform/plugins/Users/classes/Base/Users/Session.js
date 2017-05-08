@@ -57,6 +57,22 @@ Q.mixin(Base, Row);
  * @type duration
  */
 /**
+ * @property {String}
+ * @type platform
+ */
+/**
+ * @property {String}
+ * @type appId
+ */
+/**
+ * @property {String}
+ * @type version
+ */
+/**
+ * @property {String}
+ * @type formFactor
+ */
+/**
  * @property {String|Db.Expression}
  * @type insertedTime
  */
@@ -226,6 +242,10 @@ Base.prototype.fieldNames = function () {
 		"deviceId",
 		"timeout",
 		"duration",
+		"platform",
+		"appId",
+		"version",
+		"formFactor",
 		"insertedTime",
 		"updatedTime"
 	];
@@ -490,6 +510,142 @@ return [["int","11","",false],false,"","0"];
 };
 
 /**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_platform
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_platform = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".platform");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the platform field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_platform = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for platform column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_platform = function () {
+
+return [["varchar","31","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_appId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_appId = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".appId");
+		if (typeof value === "string" && value.length > 200)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".appId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_appId = function () {
+
+		return 200;
+};
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_appId = function () {
+
+return [["varchar","200","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_version
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_version = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".version");
+		if (typeof value === "string" && value.length > 34)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".version");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the version field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_version = function () {
+
+		return 34;
+};
+
+	/**
+	 * Returns schema information for version column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_version = function () {
+
+return [["varchar","34","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value belongs to enum values list
+ * @method beforeSet_formFactor
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ */
+Base.prototype.beforeSet_formFactor = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (['mobile','tablet','desktop'].indexOf(value) < 0)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".formFactor");
+		return value;
+};
+
+	/**
+	 * Returns schema information for formFactor column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_formFactor = function () {
+
+return [["enum","'mobile','tablet','desktop'","",false],true,"",null];
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -511,7 +667,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -536,7 +692,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","11","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","'mobile','tablet','desktop'","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**

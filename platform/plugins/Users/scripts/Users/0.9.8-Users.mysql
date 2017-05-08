@@ -8,10 +8,10 @@ CREATE TABLE {$prefix}app_session (
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updatedTime timestamp NULL DEFAULT NULL,
   PRIMARY KEY (udid, platform, appId),
-  UNIQUE KEY platform (udid, platform,appId)
+  UNIQUE KEY platform (udid, platform, appId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a session in our 3rd party app with a platform like ios';
 
 ALTER TABLE {$prefix}app_user
 CHANGE provider platform varchar(31) NOT NULL COMMENT 'A platform like facebook or github',
-CHANGE provider_uid platform_uid varchar(31) NOT NULL COMMENT "The user's id on that platform",
+CHANGE provider_uid platform_uid varchar(200) NOT NULL COMMENT "The user's id on that platform",
 MODIFY appId varchar(200) NOT NULL COMMENT 'An external app id registered with the platform';

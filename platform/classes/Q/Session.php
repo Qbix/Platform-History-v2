@@ -11,49 +11,49 @@ class Q_Session
 {
 	/**
 	 * @property $session_save_path
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_save_path;
 	/**
 	 * @property $session_db_connection
-	 * @type boolean
+	 * @type Db
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_connection;
 	/**
 	 * @property $session_db_table
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_table;
 	/**
 	 * @property $session_db_data_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_data_field;
 	/**
 	 * @property $session_db_id_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_id_field;
 	/**
 	 * @property $session_db_updated_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_updated_field;
 	/**
 	 * @property $session_db_duration_field
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
@@ -67,14 +67,14 @@ class Q_Session
 	static protected $session_db;
 	/**
 	 * @property $session_db_row
-	 * @type boolean
+	 * @type Db_Row
 	 * @static
 	 * @protected
 	 */
 	static protected $session_db_row;
 	/**
 	 * @property $session_db_row_class
-	 * @type boolean
+	 * @type string
 	 * @static
 	 * @protected
 	 */
@@ -347,14 +347,32 @@ class Q_Session
 				'id' => Q_Session::id()
 			));
 		}
+		$original = null;
+		$changed = null;
 		if (Q_Config::get('Q', 'session', 'userAgentInfo', null)) {
 			$arr = isset($_SESSION['Q']) ? $_SESSION['Q'] : array();
-			$_SESSION['Q'] = array_merge($arr, Q_Request::userAgentInfo());
+			$userAgentInfo = Q_Request::userAgentInfo();
+			foreach ($userAgentInfo as $k => $v) {
+				if (isset($arr[$k])) {
+					$original[$k] = $arr[$k];
+					if (isset($arr[$k]) and $arr[$k] !== $v) {
+						$changed[$k] = $v;
+					}
+				}
+			}
+			$_SESSION['Q'] = array_merge($arr, $userAgentInfo);
+		}
+		if ($changed and !Q_Config::get('Q', 'session', 'allowHijack', false)) {
+			throw new Q_Exception_SessionHijacked();
 		}
 		/**
+		 * This is a hook for after the session starts.
+		 * You may want to do extra security checks here.
 		 * @event Q/session/start {after}
+		 * @param {array} $original The userAgentInfo values that were in the session originally
+		 * @param {array} $changed Whether any of the userAgentInfo values changed.
 		 */
-		Q::event('Q/session/start', array(), 'after');
+		Q::event('Q/session/start', array('original', 'changed'), 'after');
 		return true;
 	}
 	
@@ -572,6 +590,10 @@ class Q_Session
 
 			// don't save sessions when running from command-line (cli)
 			if(php_sapi_name() == 'cli') {
+				return false;
+			}
+
+			if (self::$preventWrite) {
 				return false;
 			}
 			
@@ -987,6 +1009,17 @@ class Q_Session
 		
 		return $db_info;
 	}
+	
+	/**
+	 * Get the session Db_Row, if it has been retrieved, otherwise null
+	 * @method row
+	 * @static
+	 * @return {Db_Row|null}
+	 */
+	static function row()
+	{
+		return self::$session_db_row;
+	}
 
 	/**
 	 * Generates a session id, signed with "Q"/"external"/"secret"
@@ -1072,4 +1105,13 @@ class Q_Session
 	 * @public
 	 */
 	public static $nonceWasSet = false;
+
+	/**
+	 * Set this to true to prevent writing the session to disk
+	 * @property $preventWrite
+	 * @type boolean
+	 * @static
+	 * @public
+	 */
+	public static $preventWrite = false;
 }

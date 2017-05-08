@@ -26,11 +26,13 @@ class Users_Session extends Base_Users_Session
 	/**
 	 * Saves a new Users_Session row with a copy of all the content from the current session.
 	 * Does not change the current session id.
+	 * @param {array} $sessionFields Pass an array with keys such as
+	 *   "platform", "appId", "version", "deviceId", "formFactor"
 	 * @param {string|integer} [$duration='year'] The key in the Q/session/durations config field
 	 *   or number of seconds. Pass 0 to expire at the end of browser session.
-	 * @return {string} the id of the new session
+	 * @return {string} the id of the newly saved Users_Session row
 	 */
-	static function copyToNewSession($duration = 'year')
+	static function copyToNewSession($sessionFields, $duration = 'year')
 	{
 		$id = Q_Session::id();
 		if (!$id) {
@@ -39,7 +41,14 @@ class Users_Session extends Base_Users_Session
 		$seconds = is_string($duration)
 			? Q_Config::expect('Q', 'session', 'durations', $duration)
 			: $duration;
-		session_write_close(); // close current session
+
+		$arr = isset($_SESSION['Q']) ? $_SESSION['Q'] : null;
+		if (isset($arr)) {
+			$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
+			$_SESSION['Q'] = Q::take($sessionFields, $fields, $arr);
+			$_SESSION['Q']['nonce'] = sha1(mt_rand().microtime());
+		}
+
 		$us = new Users_Session();
 		$us->id = $id;
 		$us->retrieve(null, null, array('lock' => 'FOR UPDATE'));
@@ -49,16 +58,21 @@ class Users_Session extends Base_Users_Session
 			$us2->wasRetrieved(false);
 			$us2->insertedTime = new Db_Expression('CURRENT_TIMESTAMP');
 		} else {
-			$us2->content = "{}";
-			$us2->php = "";
-			$us2->deviceId = "";
 			$us2->timeout = 0;
 		}
+		$us2->content = Q::json_encode($_SESSION, JSON_FORCE_OBJECT);
+		$us2->php = session_encode();
 		$us2->id = Q_Session::generateId();
 		$us2->duration = $seconds;
+		$us2->timeout = 0;
+		foreach ($sessionFields as $k => $v) {
+			$us2->$k = $v;
+		}
 		$us2->save(false, true);
-		$new_id = $us2->id;
-		session_start(); // reopen current session
+
+		if (isset($arr)) {
+			$_SESSION['Q'] = $arr;
+		}
 		Q::event("Users/copyToNewSession", array(
 			'duration' => $duration,
 			'from_sessionId' => $id,

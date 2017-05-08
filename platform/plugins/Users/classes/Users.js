@@ -153,25 +153,31 @@ function _Users_listen_ios (options, server) {
 	var path = require('path');
 	var appName = Q.app.name;
 	var appId = options.appId || app;
-	var sandbox = Q.Config.get(["Users", "ios", appId, "sandbox"], false);
+	var sandbox = Q.Config.get(["Users", "apps", "ios", appId, "sandbox"], false);
 	var s = sandbox ? "sandbox" : "production";
 	var appId = (options && options.appId) || Q.app.name;
-	var o = Q.Config.expect(['Users', 'ios', appId]);
-	if (o.token) {
-		o.token.key = path.join(Q.app.DIR, o.token.key);
-		if (!fs.existsSync(o.token.key)) {
-			console.log("WARNING: APN provider not enabled due to missing token.key at " + o.token.key + "\n");
+	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
+	var token = o.token;
+	var ssl = o.ssl;
+	if (token) {
+		token.key = path.join(Q.app.DIR, token.key);
+		if (!fs.existsSync(token.key)) {
+			console.log("WARNING: APN provider not enabled due to missing token.key at " + token.key + "\n");
 			return;
 		}
-	} else {
-		var files = ['cert', 'key', 'ca'];
-		for (var i=0; i<files.length; ++i) {
+	} else if (ssl) {
+		ssl.ca = Q.pluginInfo.Users.FILES_DIR + '/Users/certs/EntrustRootCA.pem';
+		var keys = ['cert', 'key', 'ca'];
+		for (var i=0, l=keys.length; i<l; ++i) {
 			var k = files[i];
-			if (!o[k] || !fs.existsSync(o[k])) {
-				console.log("WARNING: APN provider not enabled due to missing " + k + " at " + o[k] + "\n");
+			if (!ssl[k] || !fs.existsSync(o[k])) {
+				console.log("WARNING: APN provider not enabled due to missing " + k + " at " + ssl[k] + "\n");
 				return;
 			}
 		}
+	} else {
+		console.log("WARNING: APN provider not enabled due to missing token and ssl config");
+		return;
 	}
 	if (o.production == undefined) {
 		o.production = !sandbox;
@@ -219,7 +225,7 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
 			if (filter && filter(this) === false) {
 				return;
 			}
-			this.pushNotification(
+			this.pushNotifications(
 				isArrayLike ? notifications[this.fields.userId] : notifications,
 				options
 			);
