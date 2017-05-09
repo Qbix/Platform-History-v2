@@ -294,7 +294,7 @@ class Places_Nearby
 		$publisherId = null,
 		$streamName = null)
 	{
-		list($latitude, $longGrid)
+		list($latQuantized, $longQuantized)
 			= Places::quantize($latitude, $longitude, $meters);
 		$zipcodes = Places_Zipcode::nearby(
 			$latitude, $longitude, $meters, 1
@@ -303,7 +303,7 @@ class Places_Nearby
 			$publisherId = Users::communityId();
 		}
 		if (!isset($streamName)) {
-			$streamName = self::streamName($latitude, $longitude, $meters);
+			$streamName = self::streamName($latQuantized, $longQuantized, $meters);
 		}
 		if ($stream = Streams::fetchOne(null, $publisherId, $streamName)) {
 			return $stream;
@@ -331,7 +331,7 @@ class Places_Nearby
 	{
 		$info = $params['info'];
 		return Places_Nearby::stream(
-			$params['latitude'], $params['longitude'], $info['meters'],
+			$info['latitude'], $info['longitude'], $info['meters'],
 			Q::ifset($info, 'publisherId', null),
 			Q::ifset($info, 'name', null)
 		);
