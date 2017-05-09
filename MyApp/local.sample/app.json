@@ -36,6 +36,9 @@
 		/* "scriptFiles": ["config/Q/urls.php"], */
 		"response": {
 			"cacheBaseUrl": "https://MyApp-cache"
+		},
+		"session": {
+			"allowHijack": true /* set to false in production */
 		}
 	},
 	"Db": {

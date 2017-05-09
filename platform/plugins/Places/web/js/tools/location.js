@@ -16,6 +16,17 @@
 			action: "Add Location",
 			title: "New Location",
 			nameYourLocation: "Name your location"
+		},
+		confirm: {
+			title: "Save this location?",
+			message: "Do you plan to use this location again in the future?",
+			ok: 'Yes',
+			cancel: 'No'
+		},
+		add: {
+			title: "Name this location",
+			placeholder: "Home, Work etc.",
+			ok: "Save"
 		}
 	});
 	Q.setObject("Q.text_en.Places.Location", Q.text.Places.Location);
@@ -25,9 +36,9 @@
 	 * @class Places location
 	 * @constructor
 	 * @param {Object} [options] used to pass options
-	 * @param {object} [options.geocode] Ready google location object
-	 * @param {bool} [options.useRelatedLocations] Whether to show related locations
-	 * @param {object} [options.location] Currently selected location
+	 * @param {Object} [options.geocode] Default google location object, if available
+	 * @param {Boolean} [options.useRelatedLocations] Whether to show related locations
+	 * @param {Object} [options.location] Currently selected location
 	 * @param {Q.Event} [options.onChoose] this event occurs when user selected some valid location
 	 */
 
@@ -51,7 +62,15 @@
 
 				// toggle Q_selected class
 				$te.find(".Q_selected").removeClass("Q_selected");
-				$this.addClass("Q_selected");
+				$this.addClass('Q_selected');
+				
+				var $olt = $this.find(tool.otherLocationTool.element);
+				if ($olt.length) {
+					$olt.plugin('Q/placeholders', function () {
+						tool.otherLocationTool.filter.setText('');
+						tool.otherLocationTool.filter.$input.plugin('Q/clickfocus');
+					});
+				}
 
 				var selector = $this.attr("data-location");
 				if (selector == 'current') {
@@ -60,7 +79,7 @@
 
 						// something wrong
 						if (!crd) {
-							Q.alert("Places/location tool: wrong coords", pos);
+							Q.alert("Places/location tool: could not obtain location", pos);
 							return false;
 						}
 
@@ -79,13 +98,18 @@
 					return;
 				} else if (selector == 'other') {
 					// if "other location" selected just repeat onChoose event of places/address tool
-					Q.handle(state.otherLocationTool.state.onChoose, state.otherLocationTool, [state.otherLocationTool.place]);
+					Q.handle(
+						tool.otherLocationTool.state.onChoose, 
+						tool.otherLocationTool, 
+						[tool.otherLocationTool.place]
+					);
 					return;
 				}
 
 				// related location selected
 				var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
-				Streams.get(locationPreviewTool.state.publisherId, locationPreviewTool.state.streamName, function () {
+				var ls = locationPreviewTool.state;
+				Streams.get(ls.publisherId, ls.streamName, function () {
 					// get valid google object and fire onChoose event
 					tool.geocode(this, function (geocode) {
 						Q.handle(state.onChoose, tool, [geocode]);
@@ -135,117 +159,75 @@
 					$te.html(html).activate(function () {
 
 						// set otherLocation address tool
-						tool.$(".Places_location_otherLocation").tool('Places/address', {
-							onChoose: function (place) {
-								if (place && place.id) {
-									// get valid google object and fire onChoose event
-									tool.geocode({placeId: place.id}, function (geocode) {
-										Q.handle(state.onChoose, tool, [geocode]);
-									});
-
-									return;
-								}
-
-								Q.handle(state.onChoose, tool, [null]);
-							}
-						}, tool.prefix + 'otherLocation').activate(function () {
-							state.otherLocationTool = this;
+						tool.$(".Places_location_otherLocation")
+						.tool('Places/address', {
+							onChoose: _onChoose
+						}, 'otherLocation', tool.prefix)
+						.activate(function () {
+							tool.otherLocationTool = this;
 						});
 
 						// set related locations if state.
 						if (state.useRelatedLocations && userId) {
-							tool.$(".Places_location_related").tool('Streams/related', {
+							tool.$(".Places_location_related")
+							.tool('Streams/related', {
 								publisherId: userId,
-								streamName: 'Places/user/location',
-								relationType: 'Places/location',
-								isCategory: true,
-								creatable: {
-									"Places/location": {
-										"title": Q.text.Places.Location.create.action,
-										"preprocess": function (callback, tool, event) {
-											// please see Streams/preview documentation for preprocess option
-											Q.Dialogs.push({
-												title: Q.text.Places.Location.create.title,
-												className: 'Places_location_userLocationsNew',
-												template: {
-													name: "Places/location/new",
-													fields: {
-														text: Q.text.Places.Location.create
-													}
-												},
-												onActivate: function () {
-													var $this = $(this);
-													var button = $this.find('.Q_button[name=submit]');
-													var title = $this.find("input[name=title]");
-													var _validate = function () {
-														var result = true;
-														var buttonParent = button.closest(".Places_location_new_actions");
-														// title requred
-														if (!title.val()) {
-															result = false;
-														}
-
-														// location required
-														if (!Q.getObject(['location', 'place'], $this)) {
-															result = false;
-														}
-
-														if (result) {
-															buttonParent.css('pointer-events', 'auto').animate({opacity: 1});
-														} else {
-															buttonParent.css('pointer-events', 'none').animate({opacity: 0.2});
-														}
-													};
-
-													_validate();
-
-													// validate on title change
-													title.on("keyup blur change click", _validate);
-
-													// create Places/location tool
-													$this.find(".Places_location_new_select").tool('Places/location', {
-														useRelatedLocations: false,
-														onChoose: function (geocode) {
-															Q.setObject(['location', 'place'], geocode, $this);
-
-															// check conditions for submit
-															_validate();
-														}
-													}, tool.prefix + 'relatedLocations').activate();
-
-													button.plugin('Q/clickable').on(Q.Pointer.click, function () {
-														var loc = Q.getObject(['location', 'place'], $this);
-														var titleVal = title.val();
-
-														if (!titleVal) {
-															Q.alert("Places/location/add: Please set title.");
-															return false;
-														}
-
-														if (!loc) {
-															Q.alert("Places/location/add: Please set location.");
-															return false;
-														}
-
-														callback({
-															title: titleVal,
-															attributes: {
-																latitude: loc.lat(),
-																longitude: loc.lng()
-															}
-														});
-
-														Q.Dialogs.pop();
-													})
-												},
-												onClose: function () {
-													callback(false);
-												}
-											});
-										}
+								streamName: 'Places/user/locations',
+								relationType: 'Places/locations',
+								isCategory: true
+							}, tool.prefix + 'relatedLocations')
+							.activate(function () {
+								tool.relatedTool = this;
+							});
+						}
+						
+						function _onChoose(place) {
+							if (!place || !place.id) {
+								return Q.handle(state.onChoose, tool, [null]);
+							}
+							// get valid google object and fire onChoose event
+							tool.geocode({placeId: place.id}, function (l) {
+								var c = Q.text.Places.Location.confirm;
+								Q.confirm(c.message, function (shouldSave) {
+									if (!shouldSave) {
+										return;
 									}
-								}
-							}, tool.prefix + 'relatedLocations').activate();
+									var a = Q.text.Places.Location.add;
+									Q.prompt(a.prompt, function (title) {
+										if (!title) {
+											return;
+										}
+										Streams.create({
+											type: 'Places/location',
+											title: title,
+											attributes: {
+												latitude: l.lat(),
+												longitude: l.lng()
+											},
+											readLevel: 0,
+											writeLevel: 0,
+											adminLevel: 0
+										}, function (err) {
+											if (!err) {
+												tool.relatedTool.refresh();
+											}
+										}, {
+											publisherId: userId,
+											streamName: 'Places/user/locations',
+											type: 'Places/locations'
+										});
+									}, {
+										title: a.title,
+										placeholder: a.placeholder,
+										ok: a.ok
+									});
+								}, {
+									title: c.title,
+									ok: c.ok,
+									cancel: c.cancel
+								});
+								Q.handle(state.onChoose, tool, [l]);
+							});
 						}
 					});
 				}, {tool: tool});
@@ -289,7 +271,11 @@
 					}
 
 					// localy calculate if known lat and lng, to avoid requests to google api (danger of OVER_QUERY_LIMIT !!!)
-					Q.handle(callback, Places.Location, [new google.maps.LatLng(parseFloat(loc.latitude), parseFloat(loc.longitude)), 'OK']);
+					var latlng = new google.maps.LatLng(
+						parseFloat(loc.latitude),
+						parseFloat(loc.longitude)
+					);
+					Q.handle(callback, Places.Location, [latlng, 'OK']);
 					return;
 				} else if (typeof loc.lat == 'function' && typeof loc.lng == 'function') { // loc - already google location object
 					Q.handle(callback, Places.Location, [loc, 'OK']);
@@ -311,7 +297,7 @@
 	Q.Template.set('Places/location/select',
 		'<div data-location="current">{{text.myCurrentLocation}}</div>' +
 		'<div class="Places_location_related"></div>' +
-		'<div data-location="other" class="Q_selected"><label>{{text.enterAddress}}</label><div class="Places_location_otherLocation"></div></div>'
+		'<div data-location="other"><label>{{text.enterAddress}}</label><div class="Places_location_otherLocation"></div></div>'
 	);
 
 	Q.Template.set("Places/location/new",

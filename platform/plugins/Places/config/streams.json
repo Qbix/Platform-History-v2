@@ -6,10 +6,12 @@
 		"writeLevel": "0",
 		"adminLevel": "0"
 	},
-	"Places/user/hometown": {
-		"type": "Places/location",
-		"title": "Hometown Location",
-		"icon": ""
+	"Places/user/locations": {
+		"type": "Streams/category",
+		"title": "Saved Locations",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
 	},
 	"Places/participating": {
 		"type": "Streams/participating",
