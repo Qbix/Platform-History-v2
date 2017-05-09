@@ -17,7 +17,7 @@ Q.setObject('Q.text.Q.imagepicker', {
  * @class Q imagepicker
  * @constructor
  * @param {Object} [options] options is an Object that contains parameters for function
- * @param {Object} options.saveSizeName] Required hash where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
+ * @param {Object} options.saveSizeName Required hash where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
 *   Key may be just one number, e.g. '100' which means square image 100x100 or in format '<width>x<height>', e.g. '80x120' to make non-square image.
  *  You can have one of <width> or <height> be empty, and then it will automatically keep the proportions.
  *  Or you can pass 'x' and then it will keep the original width and height of the image.
