@@ -159,7 +159,7 @@ function _Q_viewport(options) {
 			};
 			fixPosition(newPos);
 			stretcher.css(newPos);
-			Q.Pointer.cancelClick(); // on even the slightest move
+			Q.Pointer.cancelClick(e, null, true); // even on the slightest move
 			Q.handle(state.onMove, $this, [state.selection, state.scale]);
 			Q.handle(state.onUpdate, $this, [state.selection, state.scale]);
 			e.preventDefault();

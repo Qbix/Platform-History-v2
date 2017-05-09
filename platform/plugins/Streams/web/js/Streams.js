@@ -1583,6 +1583,10 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  * @static
  * @method refresh
  * @param {Function} callback This is called when the stream has been refreshed.
+ *   If the first argument is not false, then "this" is the stream.
+ *   The arguments are different depending on the options.
+ *   If options.messages is true, then it receives [err, ordinals].
+ *   If no attempt was made to get the messages, then callback is same as for Streams.get .
  * @param {Object} [options] A hash of options, including:
  *   @param {Boolean} [options.messages] If set to true, then besides just reloading the fields, attempt to catch up on the latest messages
  *   @param {Number} [options.max] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
@@ -4451,7 +4455,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				});
 
-				var fields = msg.instructions && JSON.parse(msg.instructions);
+				var instructions = msg.instructions && JSON.parse(msg.instructions);
 				var node;
 				var updatedParticipants = true;
 				switch (msg.type) {
@@ -4462,34 +4466,34 @@ Q.onInit.add(function _Streams_onInit() {
 					_updateParticipantCache(msg, 'left', message.getInstruction('prevState'), usingCached);
 					break;
 				case 'Streams/changed':
-					Stream.update(stream, fields.changes, null);
+					Stream.update(stream, instructions.changes, null);
 					break;
 				case 'Streams/progress':
-					Stream.update(stream, fields, null);
+					Stream.update(stream, instructions, null);
 					break;
 				case 'Streams/relatedFrom':
-					_updateRelatedCache(msg, fields);
-					_relationHandlers(_streamRelatedFromHandlers, msg, stream, fields);
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamRelatedFromHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/relatedTo':
-					_updateRelatedCache(msg, fields);
-					_relationHandlers(_streamRelatedToHandlers, msg, stream, fields);
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamRelatedToHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/unrelatedFrom':
-					_updateRelatedCache(msg, fields);
-					_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, fields);
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/unrelatedTo':
-					_updateRelatedCache(msg, fields);
-					_relationHandlers(_streamUnrelatedToHandlers, msg, stream, fields);
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamUnrelatedToHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/updatedRelateFrom':
-					_updateRelatedCache(msg, fields);
-					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, fields);
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/updatedRelateTo':
-					_updateRelatedCache(msg, fields);
-					_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, fields);
+					_updateRelatedCache(msg, instructions);
+					_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/closed':
 					Stream.update(stream, fields, null);
