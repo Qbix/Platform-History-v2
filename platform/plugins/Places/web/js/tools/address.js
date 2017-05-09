@@ -150,6 +150,11 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 			$('.Places_address_results_loading', $results).hide();
 			Q.each(places, function (i, place) {
 				var l, d, m, distance, $distance = null;
+				_places[place.place_id] = {
+					id: place.place_id,
+					name: place.name,
+					description: place.vicinity
+				};
 				if (l = Q.getObject('geometry.location', place)) {
 					distance = Q.Places.distance(
 						latitude, longitude, l.lat(), l.lng()
@@ -169,6 +174,8 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 					}
 					$distance = $('<td class="Places_distance" />')
 					.append($('<div />').text(d+m));
+					_places.latitude = l.lat();
+					_places.longitude = l.lng();
 				}
 				var $name = $('<div class="Places_placeName" />')
 				.text(place.name);
@@ -180,11 +187,6 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 				.append($placeInfo, $distance)
 				.attr('placeid', place.place_id)
 				.appendTo($table);
-				_places[place.place_id] = {
-					id: place.place_id,
-					name: place.name,
-					description: place.vicinity
-				};
 			});
 			Q.handle(callback);
 			_results[''] = $results.html();
