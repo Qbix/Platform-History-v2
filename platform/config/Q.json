@@ -84,7 +84,7 @@
 				"otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
 			},
 			"userAgentInfo": ["formFactor", "platform", "version"],
-			"allowHijack": false
+			"allowHijack": true
 		},
 		"javascript": {
 			"responseExtras": {

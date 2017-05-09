@@ -32,6 +32,15 @@
 			"Places": "streams.json"
 		},
 		"types": {
+			"Places/locations": {
+				"description": "a collection of locations",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Locations",
+					"icon": "{{baseUrl}}/plugins/Places/icons/locations"
+				}
+			},
 			"Places/location": {
 				"description": "Represents a building, venue, ship, park, etc.",
 				"create": true,
@@ -121,7 +130,9 @@
 		},
 		"onInsert": {
 			"Users_User": [
-				"Places/participating"
+				"Places/participating",
+				"Places/user/location",
+				"Places/user/locations"
 			]
 		}
 	},
