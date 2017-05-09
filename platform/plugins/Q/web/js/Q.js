@@ -10838,7 +10838,7 @@ Q.Dialogs.push.options = {
  * @static
  * @method alert
  * @param {String} message The only required parameter, this specifies text of the alert.
- * @param {Object} [options] An optional hash of options which can include:
+ * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
  *   @param {String} [options.title] Optional parameter to override alert dialog title. Defaults to 'Alert'.
  *   @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
@@ -10851,7 +10851,7 @@ Q.alert = function(message, options) {
 		'className': 'Q_alert',
 		'onClose': options.onClose || undefined,
 		'fullscreen': false,
-		'hidePrevious': false
+		'hidePrevious': true
 	}, options));
 };
 
@@ -10867,7 +10867,7 @@ Q.alert = function(message, options) {
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing true | false depending on whether user clicked (tapped) 'Ok' or 'Cancel' button, respectively
  *   or null if the user closed the dialog.
- * @param {Object} [options] An optional hash of options which can include:
+ * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
  * @param {String} [options.title='Confirm'] to override confirm dialog title.
  * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
  * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
@@ -10892,7 +10892,7 @@ Q.confirm = function(message, callback, options) {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
 		}},
 		'fullscreen': false,
-		'hidePrevious': false
+		'hidePrevious': true
 	}, options));
 	var $dialog = $(dialog);
 	$dialog.find('.Q_buttons button:first').on(Q.Pointer.end, function() {
@@ -10925,7 +10925,7 @@ Q.confirm.options = {
  *   user to enter something (e.g. 'Enter your name').
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing the entered value as a string, or null if the dialog was dismissed with the close button
- * @param {Object} [options] An optional hash of options which can include:
+ * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {Number} [options.maxlength=1000] the maximum length of the input
@@ -10976,7 +10976,7 @@ Q.prompt = function(message, callback, options) {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
 		}},
 		'fullscreen': false,
-		'hidePrevious': false
+		'hidePrevious': true
 	}, options));
 	var $dialog = $(dialog);
 	$dialog.find('button').on(Q.Pointer.click, _done);
