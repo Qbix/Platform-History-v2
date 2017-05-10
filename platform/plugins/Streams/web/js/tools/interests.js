@@ -134,7 +134,7 @@ Q.Tool.define("Streams/interests", function (options) {
 					var parts = interestTitle.split(': ');
 					var category = parts[0];
 					var title = parts[1];
-					var id = 'Q_expandable_'+Q.normalize(category);
+					var id = 'Q_expandable_'+Q.normalize(category) + '_tool';
 					var $expandable = $('#' + tool.prefix + id);
 					var $content = $expandable.find('.Q_expandable_content');
 					if (!$expandable.length) {
