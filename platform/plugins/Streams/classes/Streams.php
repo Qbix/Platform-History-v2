@@ -2295,6 +2295,8 @@ abstract class Streams extends Base_Streams
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
 	 *  then the third parameter is an array of streams.
+	 *  Also, if you passed "relationsOnly" or "streamsOnly", then it returns
+	 *  the $relations or $relatedStreams array by itself, respectively.
 	 */
 	static function related(
 		$asUserId,
@@ -2431,6 +2433,7 @@ abstract class Streams extends Base_Streams
 				? array($relations, array(), $returnMultiple ? $streams : $stream)
 				: array();
 		}
+		
 		$fields = '*';
 		if (isset($options['skipFields'])) {
 			$skip_fields = is_array($options['skipFields'])

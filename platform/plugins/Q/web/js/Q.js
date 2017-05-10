@@ -4449,6 +4449,35 @@ Q.Tool.byId = function _Q_Tool_byId(id, name) {
 };
 
 /**
+ * Find all the activated tools with a certain name
+ * @static
+ * @method byName
+ * @param {String|Array} name This is run through Q.normalize()
+ * @return {Object}
+ */
+Q.Tool.byName = function _Q_Tool_byName(name) {
+	var result = {};
+	var isString = (typeof name === 'string');
+	if (isString) {
+		name = Q.normalize(name);
+	} else {
+		for (var i=0, l=name.length; i<l; ++i) {
+			name[i] = Q.normalize(name[i]);
+		}
+	}
+	for (var id in Q.Tool.active) {
+		var tools = Q.Tool.active[id];
+		for (var n in tools) {
+			if ((isString && name === n)
+			|| (!isString && name.indexOf(n) >= 0)) {
+				result[id] = tools[n];
+			}
+		}
+	}
+	return result;
+};
+
+/**
  * Computes and returns a tool's prefix
  * @static
  * @method calculatePrefix

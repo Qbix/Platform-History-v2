@@ -39,6 +39,9 @@
 		},
 		"session": {
 			"allowHijack": true /* set to false in production */
+		},
+		"javascript": {
+			"prettyPrintData": true
 		}
 	},
 	"Db": {
