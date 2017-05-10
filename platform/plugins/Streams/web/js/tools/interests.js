@@ -169,7 +169,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				});
 			}
 			if (anotherUser) {
-				$te.find('.Q_expandable_tool').each(function () {
+				$te.find('.Q_expandable_tool.Q_tool').each(function () {
 					var $this = $(this);
 					if (!$this.find('.Streams_interests_anotherUser').length) {
 						$(this).addClass('Streams_interests_anotherUserNone');
@@ -411,7 +411,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				}
 			} else if (lastVal) {
 				if (!revealingNewInterest) {
-					tool.$('.Q_expandable_tool').show().each(function () {
+					tool.$('.Q_expandable_tool.Q_tool').show().each(function () {
 						this.Q("Q/expandable").collapse();
 					});
 				}
