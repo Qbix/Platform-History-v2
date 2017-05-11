@@ -5649,7 +5649,6 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 					});
 					window.addEventListener("Qtest", _f, opts);
 					window.removeEventListener("Qtest", _f);
-					function _f() { }
 				} catch (e) {}
 			}
 		}
@@ -5711,6 +5710,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		hooks.push(args);
 	}
+	function _f() { }
 };
 Q.addEventListener.hooks = [];
 function _Q_Event_stopPropagation() {
