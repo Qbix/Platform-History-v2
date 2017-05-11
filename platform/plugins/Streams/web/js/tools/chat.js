@@ -262,6 +262,13 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			callback(snippets, messages);
 		}).run();
+		
+		Q.Streams.Total.seen(
+			state.publisherId, 
+			state.streamName, 
+			'Streams/chat/message',
+			true
+		);
 	},
 
 	renderNotification: function(message){
@@ -513,6 +520,11 @@ Q.Tool.define('Streams/chat', function(options) {
 						$this.blur();
 					}
 					state.hadFocus = false;
+					Q.Streams.Total.seen(
+						state.publisherId, 
+						state.streamName, 
+						'Streams/chat/message', 
+						true);
 				});
 			}
 

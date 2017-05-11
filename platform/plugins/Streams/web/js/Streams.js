@@ -2943,8 +2943,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 		criteria.max = parseInt(ordinal.max);
 		criteria.limit = parseInt(ordinal.limit);
 		if (ordinal.withTotals) {
-			criteria.withTotals = {};
-			criteria.withTotals[streamName] = ordinal.withTotals;
+			criteria.withTotals = ordinal.withTotals;
 		}
 		if ('type' in ordinal) criteria.type = ordinal.type;
 		if ('ascending' in ordinal) criteria.ascending = ordinal.ascending;
