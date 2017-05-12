@@ -149,7 +149,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		} else if (!state.prevented && message !== false) {
 			state.lastPlaceholder = $ie.attr('placeholder')
 				|| $ie.data('Q-placeholder').text();
-			$ie.val('').attr('placeholder', message)
+			$ie.val('')
+			.attr('placeholder', message)
 			.trigger('Q_refresh')
 			.attr('disabled', 'disabled')
 			.css('cursor', 'not-allowed');
@@ -423,21 +424,21 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.processDOM();
 			});
 			tool.scrollToBottom();
-		}, 'Streams/chat');
+		}, tool);
 
 		// new user joined
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/join')
 		.set(function(stream, message) {
 			var messages = tool.prepareMessages(message, 'join');
 			tool.renderNotification(Q.first(messages));
-		}, 'Streams/chat');
+		}, tool);
 
 		// new user left
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/leave')
 		.set(function(stream, message) {
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
-		}, 'Streams/chat');
+		}, tool);
 
 		/*
 		 * activate the composer
@@ -512,7 +513,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						messages: true, 
 						unlessSocket: true
 					});
-					$this.val('');
+					$this.val('').trigger('Q_refresh');
 					if (!Q.info.isTouchscreen && state.hadFocus) {
 						$this.plugin('Q/clickfocus');
 					}
