@@ -628,16 +628,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.$scrolling = $scm;
 		}
 		if (!state.$scrolling) {
-			var $element = $('body');
-			$scm.parents().each(function () {
-				var $this = $(this);
-				var overflow = $this.css('overflow-y');
-				if (['scroll', 'auto'].indexOf(overflow) >= 0) {
-					$element = $this;
-					return false;
-				}
-			});
-			state.$scrolling = $element;
+			state.$scrolling = $scm[0].scrollingParent();
 		}
 		var top = $scm.offset().top - state.$scrolling.offset().top;
 		state.$scrolling.animate({ 
