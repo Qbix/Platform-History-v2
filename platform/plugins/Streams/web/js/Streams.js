@@ -338,6 +338,7 @@ Streams.iconUrl = function(icon, size) {
 
 var _socket = null;
 var _messageHandlers = {};
+var _seenHandlers = {};
 var _avatarHandlers = {};
 var _constructHandlers = {};
 var _refreshHandlers = {};
@@ -3256,7 +3257,7 @@ var Total = Streams.Total = {
 	 * @return {Integer|null}
 	 *   Returns the number of unseen messages if there is a latest total, otherwise null.
 	 */
-	unseen: function (publisherId, streamName, messageType) {
+	unseen: function _Total_unseen (publisherId, streamName, messageType) {
 		var latest = Total.latest(publisherId, streamName, messageType);
 		var seen = Total.seen(publisherId, streamName, messageType);
 		return latest && (latest - seen);
@@ -3287,6 +3288,10 @@ var Total = Streams.Total = {
 			tsc.set([publisherId, streamName, messageType], 0, total);
 			// TODO: use websockets to do Streams.seen, then call callback
 			Q.handle(callback, Total, [null, total]);
+			_seenHandlers[publisherId] &&
+			_seenHandlers[publisherId][streamName] &&
+			_seenHandlers[publisherId][streamName][messageType] &&
+			Q.handle(_seenHandlers[publisherId][streamName][messageType], Total, [t]);
 			return total;
 		}
 		var t = Q.getObject([publisherId, streamName, messageType], _seen);
@@ -3299,7 +3304,18 @@ var Total = Streams.Total = {
 			Q.setObject([publisherId, streamName, messageType], t, _seen);
 		}
 		return t;
-	}
+	},
+	
+	/**
+	 * Occurs when Total.seen is called to update the number of seen messages.
+	 * The first parameter passed is the new total.
+	 * @event onSeen
+	 * @param {String} publisherId
+	 * @param {String} streamName
+	 * @param {String} messageType
+	 * @return {Q.Event}
+	 */
+	onSeen: Q.Event.factory(_seenHandlers, ["", "", ""])
 };
 var _seen = {};
 Total.get.onError = new Q.Event();
