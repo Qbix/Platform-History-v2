@@ -8,6 +8,11 @@
  * @class Q columns
  * @constructor
  * @param {Object}   [options] Override various options for this tool
+ *  @param {String}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
+ *  @param {String}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
+ *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
+ *  @param {Object}  [options.data] Any data you want to associate with the column, to be retrieved later by the tool.data() method
+ *  @param {Object}  [options.attributes] Any attributes you want to add to the column element
  *  @param {Object}  [options.animation] For customizing animated transitions
  *  @param {Number}  [options.animation.duration] The duration of the transition in milliseconds, defaults to 500
  *  @param {Object}  [options.animation.hide] The css properties in "hide" state of animation
@@ -18,9 +23,6 @@
  *  @param {Object}  [options.close] For customizing the back button on desktop and tablet
  *  @param {String}  [options.close.src] The src of the image to use for the close button
  *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
- *  @param {String}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
- *  @param {String}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
- *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
  *  @param {Object}  [options.scrollbarsAutoHide] If an object, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
@@ -239,9 +241,12 @@ Q.Tool.define("Q/columns", function(options) {
 		var dataMore = div.getAttribute('data-more');
 		tool.state.data[index] = Q.extend(
 			{},
-			options && options.data,
-			dataMore ? JSON.parse(dataMore) : null
+			dataMore && JSON.parse(dataMore),
+			options && options.data
 		);
+		if (o.attributes) {
+			$div.attr(attributes);
+		}
 		if (!$close || !$close.length) {
 			$close = !index ? $() : $('<div class="Q_close"></div>');
 			if (Q.info.isMobile) {
@@ -637,7 +642,7 @@ Q.Tool.define("Q/columns", function(options) {
 	},
 	
 	/**
-	 * Get the data object associated to a certain column, by its index
+	 * Get the data object associated to a certain column, by its index.
 	 * @param {Number} index
 	 */
 	data: function (index) {
