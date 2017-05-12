@@ -364,10 +364,6 @@ class Q_Session
 					}
 				}
 			}
-			if ($changed and !Q_Config::get('Q', 'session', 'allowHijack', false)) {
-				self::$preventWrite = true;
-				throw new Q_Exception_SessionHijacked();
-			}
 			$_SESSION['Q'] = array_merge($arr, $userAgentInfo);
 		}
 		/**
