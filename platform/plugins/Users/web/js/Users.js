@@ -705,7 +705,7 @@ Users.logout = function(options) {
 	
 	Users.logout.occurring = true;
 
-	function callback(response) {
+	function callback(err, response) {
 		if (response && response.slots && response.slots.script) {
 			// This script is coming from our server - it's safe.
 			try {

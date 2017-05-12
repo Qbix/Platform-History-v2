@@ -3307,6 +3307,35 @@ var Total = Streams.Total = {
 	},
 	
 	/**
+	 * @method setUpElement
+	 * @static
+	 * @param {Element} element The element to set up
+	 * @param {String} publisherId The id of the publisher
+	 * @param {String} streamName The stream name
+	 * @param {String} messageType The type of the message
+	 * @param {String|Q.Tool|true} key Key for attaching the events
+	 * @param {Object} [options]
+	 * @param {String} [options.unseenClass] Added if there is at least one unseen message
+	 */
+	setUpElement: function _Total_setUpElement(
+		element, publisherId, streamName, messageType, key, options
+	) {
+		var p = publisherId;
+		var n = streamName;
+		var m = messageType;
+		Q.Streams.Total.get(p, n, m, _unseen);
+		Q.Streams.Stream.onMessage(p, n, m).add(_unseen);
+		Q.Streams.Total.onSeen(p, n, m).set(_unseen);
+		function _unseen() {
+			var c = Q.Streams.Total.unseen(p, n, m);
+			element.innerHTML = c;
+			if (options && options.unseenClass) {
+				element.setClass(options.unseenClass, c);
+			}
+		}
+	},
+	
+	/**
 	 * Occurs when Total.seen is called to update the number of seen messages.
 	 * The first parameter passed is the new total.
 	 * @event onSeen
