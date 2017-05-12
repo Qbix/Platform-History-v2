@@ -28,8 +28,13 @@ function Streams_batch_response_batch()
 		}
 		list($action, $slots, $publisherId, $name) = $args;
 		$toFetch[$publisherId][] = $name;
-		if (isset($args[4]['totals'])) {
-			$withTotals[$publisherId][$name] = $args[4]['totals'];
+		if ($args[0] === 'message' and isset($args[4]['withTotals'])) {
+			$wt = $args[4]['withTotals'];
+		} else if ($args[0] === 'totals' and isset($args[4])) {
+			$wt = $args[4];
+		}
+		if (isset($wt)) {
+			$withTotals[$publisherId][$name] = $wt;
 		}
 	}
 	$user = Users::loggedInUser();
