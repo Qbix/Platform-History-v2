@@ -709,7 +709,7 @@ abstract class Users extends Base_Users
 
 		$deviceId = null;
 		if ($session = Q_Session::row()) {
-			$deviceId = $session->deviceId;
+			$deviceId = isset($session->deviceId) ? $session->deviceId : null;
 		}
 		
 		if ($user) {
