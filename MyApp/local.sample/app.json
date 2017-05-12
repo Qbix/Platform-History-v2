@@ -8,7 +8,7 @@
 		"node" : {
 			"host": "MyApp.loc",
 			"port": "10500",
-			"url": null, /* "{{baseUrl}}/node.js", */
+			"url": "https://MyApp.loc:10500", /* "{{baseUrl}}/node.js", */
 			"https": false /* {
 				"key": "location of key file here",
 				"cert": "location of cert file here",
