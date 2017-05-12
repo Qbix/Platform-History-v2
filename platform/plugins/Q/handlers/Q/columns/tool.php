@@ -9,6 +9,11 @@
  * @class Q columns
  * @constructor
  * @param {array}   [options] Provide options for this tool
+ *  @param {string}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
+ *  @param {string}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
+ *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
+ *  @param {array}  [options.data] Any data you want to associate with the column, to be retrieved later by the tool.data() method
+ *  @param {array}  [options.attributes] Any attributes you want to add to the column element
  *  @param {array}  [options.animation] For customizing animated transitions
  *  @param {integer}  [options.animation.duration] The duration of the transition in milliseconds, defaults to 500
  *  @param {array}  [options.animation.hide] The css properties in "hide" state of animation
@@ -19,10 +24,7 @@
  *  @param {boolean} [options.back.hide] Whether to hide the back button. Defaults to false, but you can pass true on android, for example.
  *  @param {array}  [options.close] For customizing the back button on desktop and tablet
  *  @param {string}  [options.close.src] The src of the image to use for the close button
- *  @param {string}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
- *  @param {string}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
- *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
- *  @param {array}  [options.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
+ *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
  *  @param {array}  [options.scrollbarsAutoHide] If not null, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android, false everywhere else.
  *  @param {array}   [options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true, 'controls' => $html) with "controls" and "close" being optional
@@ -72,9 +74,9 @@ EOT;
 			if (isset($column['data'])) {
 				$json = Q::json_encode($column['data']);
 				$attrs = 'data-more="' . Q_Html::text($json) . '"';
-				foreach ($column['data'] as $k => $v) {
-					$attrs .= 'data-'.Q_Html::text($k).'="'.Q_Html::text($v).'" ';
-				}
+			}
+			if (isset($column['attributes'])) {
+				$attributes .= ' ' . Q_Html::attributes($column['attributes']);
 			}
 			$data = Q::ifset($column, 'data', '');
 			$columns[] = <<<EOT
