@@ -116,8 +116,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				});
 			}
 			if (state.canAdd) {
-				$('.Users_labels_add', tool.element)
-				.plugin('Q/clickable')
+				var $add = tool.$('.Users_labels_add')
 				.on(Q.Pointer.fastclick, function () {
 					Q.prompt(Q.text.Users.labels.prompt, function (title) {
 						if (!title) return;
@@ -130,6 +129,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 						maxLength: 63
 					});
 				});
+				setTimeout(function () {
+					// add clickable after the sizing has been done
+					$add.plugin('Q/clickable');
+				}, 0);
 			}
 		});
 	}
