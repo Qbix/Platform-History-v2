@@ -6,9 +6,9 @@ function Streams_interests_response()
 	$communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
 	$interests = Streams::interests($communityId);
 	header('Content-Type: text/javascript');
-	header("Pragma: ", true); // 1 day
-	header("Cache-Control: public, max-age=86400"); // 1 day
-	$expires = date("D, d M Y H:i:s T", time() + 86400);
+	header("Pragma: cache"); // 1 day
+	header("Cache-Control: public, max-age=60"); // cache for 1 minute
+	$expires = date("D, d M Y H:i:s T", time() + 60); // cache for 1 minute
 	header("Expires: $expires"); // 1 day
 	$json = Q::json_encode($interests, true);
  	echo "Q.setObject(['Q', 'Streams', 'Interests', 'all', '$communityId'], $json);";
