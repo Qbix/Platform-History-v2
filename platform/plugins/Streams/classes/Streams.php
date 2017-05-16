@@ -2288,6 +2288,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
+	 * @param {callable} [$options.filter] Optional function to call to filter the relations. It should return a filtered array of relations.
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
@@ -2414,7 +2415,7 @@ abstract class Streams extends Base_Streams
 		}
 		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
 
-		$relations = $query->fetchDbRows(null, '', $FT.'StreamName');
+		$relations = $query->fetchDbRows();
 		foreach ($relations as $k => $v) {
 			if (!empty($options['includeTemplates'])
 			and substr($k, -1) === '/') {
@@ -2425,13 +2426,18 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
-		if (!empty($options['relationsOnly'])) {
-			return $relations;
-		}
 		if (empty($relations)) {
 			return empty($options['streamsOnly'])
-				? array($relations, array(), $returnMultiple ? $streams : $stream)
+				? array(array(), array(), $returnMultiple ? $streams : $stream)
 				: array();
+		}
+		
+		if (!empty($options['filter'])) {
+			$relations = call_user_func($options['filter'], $relations);
+		}
+		
+		if (!empty($options['relationsOnly'])) {
+			return $relations;
 		}
 		
 		$fields = '*';
@@ -2447,17 +2453,21 @@ abstract class Streams extends Base_Streams
 		}
 		$names = array();
 		$FTP = $FT.'PublisherId';
+		$FSN = $FT.'StreamName';
 		foreach ($relations as $name => $r) {
 			if ($r->$FTP === $publisherId) {
-				$names[] = $name;
+				$names[] = $r->FSN;
 			}
 		}
-		$relatedStreams = Streams::fetch($asUserId, $publisherId, $names, $fields, $fetchOptions);
+		$relatedStreams = Streams::fetch(
+			$asUserId, $publisherId, $names, $fields, $fetchOptions
+		);
 		foreach ($relatedStreams as $name => $s) {
 			if (!$s) continue;
-			$s->weight = isset($relations[$name]->weight)
+			$weight = isset($relations[$name]->weight)
 				? $relations[$name]->weight
 				: null;
+			$s->set('weight', $weight);
 		}
 		if (!empty($options['streamsOnly'])) {
 			return $relatedStreams;
@@ -3259,6 +3269,8 @@ abstract class Streams extends Base_Streams
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
 	 *  then the third parameter is an array of streams.
+	 *  Also, if $options['streamsOnly'] or $options['relationsOnly'] is set,
+	 *  then returns only $relatedStreams or $relations.
 	 */
 	static function participating(
 		$streamName = 'Streams/participating',
