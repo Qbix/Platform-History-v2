@@ -282,18 +282,22 @@ Q.Tool.define('Q/filter', function (options) {
 	 * Set text in the input
 	 * @param {String} [chosenText] the text of the chosen option, if any, to display in the input
 	 *   Pass the empty string here to clear the filter and trigger the onClear method
+	 * @param {Boolean} [dontRefresh] pass true here to not refresh the filter
 	 * @method setText
 	 */
-	setText: function (chosenText) {
-		this.$input.val(chosenText).trigger('Q_refresh');
+	setText: function (chosenText, dontRefresh) {
+		this.$input.val(chosenText);
+		if (!dontRefresh) {
+			this.$input.trigger('Q_refresh');
+		}
 		if (chosenText === '') {
 			this.state.onClear.handle.call(this);
 		}
 	},
 	/**
 	 * Choose an item in the results.
-	 * @param {HTMLElement} [element] the element to choose
 	 * @method choose
+	 * @param {HTMLElement} [element] the element to choose
 	 */
 	choose: function (element) {
 		var streamName = $(element).data('streamName');
@@ -301,7 +305,7 @@ Q.Tool.define('Q/filter', function (options) {
 			text: $(element).text()
 		};
 		var tool = this;
-		tool.setText(details.text);
+		tool.setText(details.text, true);
 		Q.handle(tool.state.onChoose, tool, [element, details]);
 		tool.end(details.text);
 		tool.$input.blur();
