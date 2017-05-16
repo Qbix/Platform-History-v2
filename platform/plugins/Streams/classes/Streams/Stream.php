@@ -285,7 +285,8 @@ class Streams_Stream extends Base_Streams_Stream
 		if (empty($this->permissions)) {
 			$this->permissions = null;
 		}
-		if (!is_string($this->attributes)) {
+		if (isset($this->attributes)
+		and !is_string($this->attributes)) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'attributes',
 				'type' => 'string'
