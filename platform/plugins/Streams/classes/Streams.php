@@ -2456,7 +2456,7 @@ abstract class Streams extends Base_Streams
 		$FSN = $FT.'StreamName';
 		foreach ($relations as $name => $r) {
 			if ($r->$FTP === $publisherId) {
-				$names[] = $r->FSN;
+				$names[] = $r->$FSN;
 			}
 		}
 		$relatedStreams = Streams::fetch(
