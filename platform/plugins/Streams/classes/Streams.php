@@ -393,7 +393,7 @@ abstract class Streams extends Base_Streams
 				'streamName' => $namesToFetch,
 				'userId' => $asUserId
 			))->fetchDbRows(null, '', 'streamName');
-			foreach ($allRetrieved as &$s) {
+			foreach ($allRetrieved as $s) {
 				$s->set('participant', Q::ifset($prows, $s->name, null));
 			}
 		}
