@@ -395,6 +395,10 @@
 	padding: 10px;
 	font-weight: bold;
 }
+.Users_labels_tool .Users_labels_label, 
+.Users_labels_tool .Users_labels_add {
+	white-space: nowrap;
+}
 
 .Users_pile_tool {
     width: 40px;
