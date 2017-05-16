@@ -2,6 +2,15 @@
 	
 class Users_Device_Ios extends Users_Device
 {
+	/**
+	 * You can use this method to send push notifications.
+	 * It is far better, however, to use the Qbix Platform's offline notification
+	 * mechanisms using Node.js instead of PHP. That way, you can be sure of re-using
+	 * the same persistent connection.
+	 * @method pushNotification
+	 * @param {array} $notification See Users_Device->handlePushNotification parameters
+	 * @param {array} [$options] See Users_Device->handlePushNotification parameters
+	 */
 	function handlePushNotification($notification, $options = array())
 	{
 		list($appId, $appInfo) = Users::appInfo($this->platform, $this->appId);
@@ -75,7 +84,8 @@ class Users_Device_Ios extends Users_Device
 	/**
 	 * Sends all scheduled push notifications
 	 * @method sendPushNotifications
-	 * Default implementation
+	 * @static
+	 * @throws Users_Exception_DeviceNotification
 	 */
 	static function sendPushNotifications()
 	{
