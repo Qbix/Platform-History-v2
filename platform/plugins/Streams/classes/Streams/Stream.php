@@ -285,6 +285,12 @@ class Streams_Stream extends Base_Streams_Stream
 		if (empty($this->permissions)) {
 			$this->permissions = null;
 		}
+		if (!is_string($this->attributes)) {
+			throw new Q_Exception_WrongType(array(
+				'field' => 'attributes',
+				'type' => 'string'
+			));
+		}
 
 		if (!$this->retrieved) {
 			// Generate a unique name for the stream
@@ -1260,6 +1266,56 @@ class Streams_Stream extends Base_Streams_Stream
 		$this->set('writeLevel_source', $writeLevel_source);
 		$this->set('adminLevel_source', $adminLevel_source);
 		
+		return true;
+	}
+	
+	/**
+	 * Inherit access from a specific stream. Pushes it onto the stack.
+	 * @method inheritAccessAdd
+	 * @param {string} [$publisherId] Publisher id of the stream from which to inherit access
+	 * @param {string} [$streamName] Name of the stream from which to inherit access
+	 * @return {boolean} Whether it was already there before
+	 */
+	static function inheritAccessAdd($publisherId, $streamName)
+	{
+		$item = array($publisherId, $streamName);
+		$inheritAccess = json_decode($this->inheritAccess, true);
+		if ($inheritAccess and is_array($inheritAccess)) {
+			$found = array_search($item, $inheritAccess);
+			if ($found !== false) {
+				return true;
+			}
+			$inheritAccess[] = $item;
+		} else {
+			$inheritAccess = array($item);
+		}
+		$this->inheritAccess = Q::json_encode($inheritAccess);
+		$this->changed();
+		return false;
+	}
+
+	/**
+	 * Stop inheriting access from a specific stream. Splices it from the stack.
+	 * @method inheritAccessRemove
+	 * @param {string} [$publisherId] Publisher id of the stream from which to stop inheriting access
+	 * @param {string} [$streamName] Name of the stream from which to stop inheriting access
+	 * @return {boolean} Whether it was already there before
+	 */
+	static function inheritAccessRemove($publisherId, $streamName)
+	{
+		$item = array($publisherId, $streamName);
+		$inheritAccess = json_decode($this->inheritAccess, true);
+		if ($inheritAccess and is_array($inheritAccess)) {
+			$found = array_search($item, $inheritAccess);
+			if ($found === false) {
+				return false;
+			}
+			array_splice($inheritAccess, $found, 1);
+		} else {
+			return false;
+		}
+		$this->inheritAccess = Q::json_encode($inheritAccess);
+		$this->changed();
 		return true;
 	}
 	
