@@ -140,11 +140,11 @@ class Users_Device extends Base_Users_Device
 	 * @param {string} [$notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
 	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action' and 'title'.
 	 * @param {string} [$notification.category] Apple-only. The name of the category for actions registered on the client side.
-	 * @param {Object} [$notification.payload] Put all your custom notification fields here
-	 * @param {Object} [$options]
+	 * @param {array} [$notification.payload] Put all your custom notification fields here
+	 * @param {array} [$options]
 	 * @param {boolean} [$options.scheduled=false] if true, doesn't send immediately. You should call Users_Device::sendPushNotifications() to send all scheduled notifications in a batch.
 	 * @param {string} [$options.view] Optionally set a view to render for the alert body
-	 * @param {Boolean} [$options.isSource] If true, uses Q.Handlebars.renderSource instead of render
+	 * @param {boolean} [$options.isSource] If true, uses Q.Handlebars.renderSource instead of render
 	 * @param {timestamp} [$options.expiration] A UNIX timestamp for when the notification expires
 	 * @param {string} [$options.priority="high"] Can be set to "normal" to make it lower priority
 	 * @param {string} [$options.collapseId] A string under 64 bytes for collapsing notifications
