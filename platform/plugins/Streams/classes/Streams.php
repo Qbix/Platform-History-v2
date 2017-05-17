@@ -1753,8 +1753,17 @@ abstract class Streams extends Base_Streams
 		// Check access to category stream, the stream to which other streams are related
 		$categories = Streams::fetch($asUserId, $toPublisherId, $toStreamName);
 		if (empty($options['skipAccess'])) {
-			foreach ($categories as $c) {
-				if (!$c->testWriteLevel('relate')) {
+			foreach ($toStreamName as $sn) {
+				if (empty($categories[$sn])) {
+					throw new Q_Exception_MissingRow(array(
+						'table' => 'Stream',
+						'criteria' => Q::json_encode(array(
+							'publisherId' => $toPublisherId,
+							'streamName' => $toStreamName
+						))
+					));
+				}
+				if (!$categories[$sn]->testWriteLevel('relate')) {
 					throw new Users_Exception_NotAuthorized();
 				}
 			}
@@ -1966,7 +1975,9 @@ abstract class Streams extends Base_Streams
 		// Save all the relatedTo
 		Streams_RelatedTo::insertManyAndExecute($newRT);
 		Streams_RelatedFrom::insertManyAndExecute($newRF);
-		
+
+		$relatedFrom_messages = array();
+		$relatedTo_messages = array();
 		foreach ($$arrayField as $sn) {
 			
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
