@@ -253,14 +253,12 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	};
 	var message = this;
 	var messageType = this.fields.type;
-	var subject = Q.Config.get(
-		['Streams', 'types', stream.fields.type, 'messages', this.fields.type, 'subject'], 
+	var subject = Q.Streams.Stream.getConfigField(
+		stream.fields.type,
+		['messages', this.fields.type, 'subject'],
 		Q.Config.get(
-			['Streams', 'types', '*', 'messages', this.fields.type, 'subject'],
-			Q.Config.get(
-				['Streams', 'types', '*', 'messages', '', 'subject'],
-				'Please set config "Streams"/"types"/"*"/"messages"/""/"subject"'
-			)
+			['Streams', 'types', '*', 'messages', '', 'subject'],
+			'Please set config "Streams"/"types"/"*"/"messages"/""/"subject"'
 		)
 	);
 	if (typeof deliver === 'string') {
