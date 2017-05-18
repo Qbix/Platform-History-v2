@@ -1277,7 +1277,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} [$streamName] Name of the stream from which to inherit access
 	 * @return {boolean} Whether it was already there before
 	 */
-	static function inheritAccessAdd($publisherId, $streamName)
+	function inheritAccessAdd($publisherId, $streamName)
 	{
 		$item = array($publisherId, $streamName);
 		$inheritAccess = json_decode($this->inheritAccess, true);
@@ -1302,7 +1302,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} [$streamName] Name of the stream from which to stop inheriting access
 	 * @return {boolean} Whether it was already there before
 	 */
-	static function inheritAccessRemove($publisherId, $streamName)
+	function inheritAccessRemove($publisherId, $streamName)
 	{
 		$item = array($publisherId, $streamName);
 		$inheritAccess = json_decode($this->inheritAccess, true);
@@ -1412,7 +1412,16 @@ class Streams_Stream extends Base_Streams_Stream
 			$options
 		);
 	}
-	
+
+	/**
+	 * Unrelate this stream to another stream
+	 * @param {Streams_Stream} $fromStream The stream to unrelate this stream to
+	 * @param {string} $type The type of relation
+	 * @param {string} [$asUserId=null] Override the user id to perform this action as
+	 * @param {array} [$options=array()] Any options to pass to Streams:unrelate
+	 * @return {boolean}
+	 *  Whether the relation was removed
+	 */
 	function unrelateTo($toStream, $type, $asUserId = null, $options = array())
 	{
 		return Streams::unrelate(
@@ -1425,7 +1434,16 @@ class Streams_Stream extends Base_Streams_Stream
 			$options
 		);
 	}
-	
+
+	/**
+	 * Unrelate another stream, published by the same publisher, from this stream
+	 * @param {Streams_Stream} $fromStream The stream to unrelate from this stream
+	 * @param {string} $type The type of relation
+	 * @param {string} [$asUserId=null] Override the user id to perform this action as
+	 * @param {array} [$options=array()] Any options to pass to Streams::unrelate
+	 * @return {boolean}
+	 *  Whether the relation was removed
+	 */
 	function unrelateFrom($fromStream, $type, $asUserId = null, $options = array()) {
 		return Streams::unrelate(
 			$asUserId,
