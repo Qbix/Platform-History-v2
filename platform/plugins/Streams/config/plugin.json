@@ -111,37 +111,38 @@
 						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""
 					},
 					"Streams/changed": {
-						"fresh": true,
+						"description": "Fields or attributes of the stream have changed",
 						"subject": "Changes in {{stream.fields.title}}"
 					},
 					"Streams/invite": {
-						"fresh": true,
+						"description": "You were invited",
 						"subject": "You were invited to {{& stream.fields.title}}"
 					},
 					"Streams/chat/message": {
-						"fresh": true,
 						"subject": "Chat in {{stream.fields.title}}"
 					},
 					"Streams/relatedTo": {
-						"fresh": true,
+						"description": "Some other stream has been related to this one",
 						"subject": "{{&call 'message.get' 'description'}}"
 					},
 					"Streams/relatedFrom": {
-						"fresh": true,
+						"desription": "This stream has been related to some other one",
 						"subject": "{{&call 'message.get' 'description'}}"
 					},
 					"Streams/access": {
-						"fresh": true,
+						"description": "Access to stream has changed",
 						"subject": "{{&call 'avatar.displayName'}} changed stream access"
 					},
 					"Streams/chat/message": {
-						"fresh": true,
+						"description": "A chat message was posted",
 						"subject": "Chat in {{stream.fields.title}}"
 					},
 					"Streams/chat/edit": {
+						"description": "A chat message was edited",
 						"title": "Chat message edited"
 					},
 					"Streams/chat/remove": {
+						"description": "A chat message was removed",
 						"title": "Chat message removed"
 					}
 				},
