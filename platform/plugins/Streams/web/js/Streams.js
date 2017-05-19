@@ -4385,7 +4385,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 	Users.Socket.onEvent('Streams/join').set(function _Streams_join_handler (p) {
 		// 'join' event contains new participant.
-		console.log('Users.Socket.onEvent("join")', p);
+		console.log('Users.Socket.onEvent("Streams/join")', p);
 		Participant.get.cache.set(
 			[p.publisherId, p.streamName, p.userId],
 			0, p, [null, p]
@@ -4394,7 +4394,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 	Users.Socket.onEvent('Streams/leave').set(function (p) {
 		// 'leave' event contains removed participant.
-		console.log('Users.Socket.onEvent("leave")', p);
+		console.log('Users.Socket.onEvent("Streams/leave")', p);
 		Participant.get.cache.set(
 			[p.publisherId, p.streamName, p.userId],
 			0, p, [null, p]
