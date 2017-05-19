@@ -402,10 +402,10 @@ Streams.listen = function (options) {
 
 	socket.io.of('/Users').on('connection', function(client) {
 		Q.log("Socket.IO client connected " + client.id);
-		if (client.alreadyListening) {
+		if (client.alreadyListeningStreams) {
 			return;
 		}
-		client.alreadyListening = true;
+		client.alreadyListeningStreams = true;
 		client.on('Streams/join', function (sessionId, clientId, publisherId, streamName) {
 			if (!_validateSessionId(sessionId)) {
 				return;
