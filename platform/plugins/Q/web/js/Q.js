@@ -8589,8 +8589,8 @@ Q.Socket = function (params) {
  * Returns a socket, if it was already connected, or returns undefined
  * @static
  * @method get
- * @param ns {String} The socket.io namespace
- * @param url {String} The url where socket.io is listening. If it's empty, then returns all matching sockets.
+ * @param {String} ns The socket.io namespace
+ * @param {String} url The url where socket.io is listening. If it's empty, then returns all matching sockets.
  * @return {Q.Socket}
  */
 Q.Socket.get = function _Q_Socket_get(ns, url) {

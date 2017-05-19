@@ -156,7 +156,7 @@ Q.setObject = function _Q_setObject(name, value, context, delimiter) {
 		name = name.split(delimiter);
 	}
 	var p = name.pop(),
-		obj = _getProp(name, true, context);
+	obj = _getProp(name, true, context);
 	return obj && (p !== undefined) ? (obj[p] = value) : undefined;
 };
 
@@ -1571,7 +1571,7 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Buffer && (x instanceof Buffer)) {
-		return new Buffer(x);
+		return Buffer.from(x);
 	}
 	if (Q.isArrayLike(x)) {
 		var result = Array.prototype.slice.call(x, 0);
@@ -3146,6 +3146,23 @@ if (!Array.prototype.indexOf) {
 	};
 }
 
+Q.globalNames = Object.keys(root); // to find stray globals
+
+/**
+ * This function is useful to make sure your code is not polluting the global namespace
+ * @method globalNamesAdded
+ * @static
+ */
+Q.globalNamesAdded = function () {
+	return Q.diff(Object.keys(window), Q.globalNames);
+};
+
 // Backward compatibility with older versions of Node.js
 fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
 fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
+Buffer.from = Buffer.from || function (x, y, z) {
+    if (typeof x === 'number') {
+		throw new TypeError('Buffer.from: first argument must not be a number');
+    }
+	return new Buffer(x, y, z);
+};

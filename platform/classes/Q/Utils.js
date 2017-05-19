@@ -20,8 +20,8 @@ var Utils = {};
 /**
  * Generate signature for an object
  * @method signature
- * @param data {object|string} The data to sign
- * @param secret {string} A secret to use for signature
+ * @param {Object|String} data The data to sign
+ * @param {String} secret A secret to use for signature
  * @return {string}
  * @throws {Q.Exception} if secret is not defined
  */
