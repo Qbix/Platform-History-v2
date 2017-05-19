@@ -2412,7 +2412,7 @@ Users.Socket = {
 	 * Returns a socket, if it was already connected, or returns undefined
 	 * @static
 	 * @method get
-	 * @param url {String} The url where socket.io is listening. If it's empty, then returns all matching sockets.
+	 * @param {String} url The url where socket.io is listening. If it's empty, then returns all matching sockets.
 	 * @return {Q.Socket}
 	 */
 	get: function _Users_Socket_get(url) {

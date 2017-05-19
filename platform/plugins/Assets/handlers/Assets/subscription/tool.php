@@ -7,7 +7,7 @@
  * @param {array} $options Override various options for this tool
  *  @param {string} $options.payments can be "authnet" or "stripe"
  *  @param {string} $options.planStreamName the name of the subscription plan's stream
- *  @param {string} [$options.publisherId=Q.Users.communityId] the publisher of the subscription plan's stream
+ *  @param {string} [$options.publisherId=Users::communityId()] the publisher of the subscription plan's stream
  *  @param {string} [$options.subscribeButton] Can override the title of the subscribe button
  *  @param {array} [$options=array()] Any additional options
  *  @param {string} [$options.token=null] required unless the user is an existing customer

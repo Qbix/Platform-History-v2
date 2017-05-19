@@ -213,11 +213,10 @@ class Q_Utils
 	}
 
 	/**
-	 * @brief Generates a Universally Unique IDentifier, version 4.
-	 *
-	 * This function generates a truly random UUID. The built in CakePHP String::uuid() function
-	 * is not cryptographically secure. You should uses this function instead.
-	 *
+	 * Generates a Universally Unique IDentifier, version 4.
+	 * This function generates a truly random UUID.
+	 * @method uuid
+	 * @static
 	 * @see http://tools.ietf.org/html/rfc4122#section-4.4
 	 * @see http://en.wikipedia.org/wiki/UUID
 	 * @return {string} A UUID, made up of 32 hex digits and 4 hyphens.
