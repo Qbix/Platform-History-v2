@@ -183,7 +183,7 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 	}
 	var result = _getProp(name, false, context);
 	if (create !== undefined) {
-		Q.setObject(name, create, context, delimiter);
+		result = Q.setObject(name, create, context, delimiter);
 	}
 	return result;
 };

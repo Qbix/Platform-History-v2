@@ -1101,7 +1101,7 @@ Streams.release = function (key) {
 			delete _retainedNodes[nodeUrl][ps];
 			if (hasNode && Q.isEmpty(_retainedNodes[nodeUrl])) {
 				delete(_retainedNodes[nodeUrl]);
-				var socket = Q.Socket.get('Streams', nodeUrl);
+				var socket = Users.Socket.get(nodeUrl);
 				socket && socket.disconnect();
 			}
 		}
@@ -1445,7 +1445,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		publisherId: publisherId,
 		streamName: streamName
 	})
-	var socket = Users.Socket.get('Streams', nodeUrl);
+	var socket = Users.Socket.get(nodeUrl);
 	if (!socket) {
 		// do not cache relations to/from this stream
 		// since they may come to be out of date
@@ -1569,7 +1569,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
 			delete _retainedNodes[nodeUrl][ps];
 			if (hasNode && Q.isEmpty(_retainedNodes[nodeUrl])) {
 				delete(_retainedNodes[nodeUrl]);
-				var socket = Q.Socket.get('Streams', nodeUrl);
+				var socket = Users.Socket.get(nodeUrl);
 				socket && socket.disconnect();
 			}
 		}
@@ -1621,7 +1621,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Users.Socket.get('Streams', nodeUrl);
+	var socket = Users.Socket.get(nodeUrl);
 	if (result === false) {
 		var participant;
 		if (o.unlessSocket) {
@@ -2326,6 +2326,29 @@ Sp.leave = function _Stream_prototype_leave (callback) {
 };
 
 /**
+ * Start observing a stream as an anonymous observer,
+ * so you get realtime messages through socket events
+ * but you don't join as a participant.
+ * 
+ * @method observe
+ * @param {Function} callback receives (err, participant) as parameters
+ */
+Sp.observe = function _Stream_prototype_join (callback) {
+	return Stream.observe(this.fields.publisherId, this.fields.name, callback);
+};
+
+/**
+ * Stop observing a stream which you previously started observing,
+ * so that you don't get realtime messages anymore.
+ * 
+ * @method neglect
+ * @param {Function} callback Receives (err, participant) as parameters
+ */
+Sp.neglect = function _Stream_prototype_leave (callback) {
+	return Stream.neglect(this.fields.publisherId, this.fields.name, callback);
+};
+
+/**
  * Test whether the user has enough access rights when it comes to reading from the stream
  * 
  * @method testReadLevel
@@ -2626,6 +2649,35 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 Stream.leave.onError = new Q.Event();
 
 /**
+ * Start observing a stream as an anonymous observer,
+ * so you get realtime messages through socket events
+ * but you don't join as a participant.
+ * 
+ * @static
+ * @method observe
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} streamName name of stream to observe
+ * @param {Function} [callback] receives (err, result) as parameters
+ */
+Stream.observe = function _Stream_observe (publisherId, streamName, callback) {
+	Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
+};
+
+/**
+ * Stop observing a stream which you previously started observing,
+ * so that you don't get realtime messages anymore.
+ * 
+ * @static
+ * @method neglect
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} streamName name of stream to stop observing
+ * @param {Function} [callback] receives (err, result) as parameters
+ */
+Stream.neglect = function _Stream_neglect (publisherId, streamName, callback) {
+	Streams.socketRequest('Streams/neglect', publisherId, streamName, callback);
+};
+
+/**
  * Closes a stream in the database, and marks it for removal unless it is required.
  * 
  * @static
@@ -2663,6 +2715,35 @@ Stream.close.onError = new Q.Event();
 /**
  * @class Streams
  */
+
+/**
+ * Issues a request via a socket, if one is open.
+ * The request is sent to the node responsible for the stream,
+ * whose url is calculated by calling Q.nodeUrl().
+ * The first three parameters are documented, but you can pass more,
+ * and they will be sent to the node.
+ * @param {String} event the name of the socket.io event, such as "Streams/observe"
+ * @param {String} publisherId the id of the stream's publisher
+ * @param {String} streamName the name of the stream
+ * @param {Function} [callback] Any socket.io acknowledgement callback
+ * @return {Q.Socket} returns null if request wasn't sent, otherwise returns the socket
+ */
+Streams.socketRequest = function (event, publisherId, streamName) {
+	if (!Q.sessionId()) {
+		throw new Error("Stream.observe: a valid session id is required");
+	}
+	var nodeUrl = Q.nodeUrl({
+		publisherId: publisherId,
+		streamName: streamName
+	});
+	var socket = Users.Socket.get(nodeUrl);
+	if (!socket) {
+		return false;
+	}
+	var args = Array.prototype.slice.call(arguments, 0);
+	args.splice(1, 0, Q.sessionId(), Q.clientId());
+	socket.socket.emit.apply(socket.socket, args);
+};
 
 /**
  * Relates streams to one another
@@ -3005,7 +3086,7 @@ Message.post = function _Message_post (msg, callback) {
 		streamName: msg.streamName
 	});
 	msg["Q.clientId"] = Q.clientId();
-	Q.req('Streams/message', [], function (err, data) {
+	Q.req('Streams/message', ['message'], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
@@ -3013,7 +3094,10 @@ Message.post = function _Message_post (msg, callback) {
 			Message.post.onError.handle.call(this, msg, args);
 			return callback && callback.call(this, msg, args);
 		}
-		callback && callback.call(Message, err);
+		var message = (data.slots && data.slots.message)
+			? Message.construct(data.slots.message, false)
+			: null;
+		callback && callback.call(Message, err, message);
 	}, { method: 'post', fields: msg, baseUrl: baseUrl });
 };
 Message.post.onError = new Q.Event();
@@ -3088,7 +3172,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Users.Socket.get('Streams', nodeUrl);
+	var socket = Users.Socket.get(nodeUrl);
 	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
 		var participant;
 		if (o.unlessSocket) {
