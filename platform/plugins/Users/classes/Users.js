@@ -354,6 +354,7 @@ Users.Socket = {
 							 */
 							Users.emit('disconnected', userId);
 						}
+						delete timeouts[userId];
 					}, Q.Config.get(["Users", "socket", "disconnectTimeout"], 1000));
 				}
 			});
