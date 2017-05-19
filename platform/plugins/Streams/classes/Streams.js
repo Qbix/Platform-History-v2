@@ -402,65 +402,115 @@ Streams.listen = function (options) {
 
 	socket.io.of('/Users').on('connection', function(client) {
 		Q.log("Socket.IO client connected " + client.id);
-		if (client.alreadyListening) {
+		if (client.alreadyListeningStreams) {
 			return;
 		}
-		client.alreadyListening = true;
-		client.on('Streams/join', function (sessionId, clientId, publisherId, streamName) {
-			if (!_validateSessionId(sessionId)) {
+		client.alreadyListeningStreams = true;
+		client.on('Streams/observe',
+		function (sessionId, clientId, publisherId, streamName, fn) {
+			if (!_validateSessionId(sessionId, fn)) {
 				return;
 			}
-			Streams.fetch('', publisherId, streamName, function (err, streams) {
-				var stream = streams && streams[streamName];
+			if (typeof publisherId !== 'string'
+			|| typeof streamName !== 'string') {
+				return fn && fn({
+					type: 'Streams.Exception.BadArguments',
+					message: 'Bad arguments'
+				});
+			}
+			var observer = Q.getObject(
+				[publisherId, streamName, client.id], Streams.observers
+			);
+			if (observer) {
+				return fn && fn(null, true);
+			}
+			Streams.fetchOne('', publisherId, streamName, function (err, stream) {
 				if (err || !stream) {
-					return client.emit('Streams/exception', {
-						message: 'Not authorized'
+					return fn && fn({
+						type: 'Users.Exception.NotAuthorized',
+						message: 'not authorized'
 					});
 				}
 				stream.testReadLevel('messages', function (err, allowed) {
 					if (err || !allowed) {
-						return client.emit('Streams/exception', {
-							message: 'Not authorized'
+						return fn && fn({
+							type: 'Users.Exception.NotAuthorized',
+							message: 'not authorized'
 						});
 					}
-					var clients = Q.getObject([publisherId, streamName], Streams.clients, null, {});
+					var clients = Q.getObject(
+						[publisherId, streamName], Streams.observers, null, {}
+					);
 					var max = Streams.Stream.getConfigField(
 						stream.fields.type,
 						'observersMax'
 					);
-					if (max && Object.keys(clients).length < max) {
-						return client.emit('Streams/exception', {
-							message: 'Too many observers already'
+					if (max && Object.keys(clients).length >= max - 1) {
+						return fn && fn({
+							type: 'Streams.Exception.TooManyObservers',
+							message: 'too many observers already'
 						});
 					}
 					clients[client.id] = client;
+					Q.setObject(
+						[client.id, publisherId, streamName], true, Streams.observing
+					);
+					return fn && fn(null, true);
 				});
 			});
 		});
-		client.on('Streams/leave', function (sessionId, clientId, publisherId, streamName) {
-			if (!_validateSessionId(sessionId)) {
+		client.on('Streams/neglect',
+		function (sessionId, clientId, publisherId, streamName, fn) {
+			if (!_validateSessionId(sessionId, fn)) {
 				return;
 			}
-			Q.setObject([publisherId, streamName, client.id], client, Streams.clients);
+			var o = Streams.observers;
+			if (!Q.getObject([publisherId, streamName, client.id], o)) {
+				return fn && fn(null, false);
+			}
+			delete o[publisherId][streamName][client.id];
+			delete Streams.observing[client.id][publisherId][streamName];
+			return fn && fn(null, true);
+		});
+		client.on('disconnect', function () {
+			var observing = Streams.observing[client.id];
+			if (!observing) {
+				return;
+			}
+			for (var publisherId in observing) {
+				var p = observing[publisherId];
+				for (var streamName in p) {
+					delete Streams.observers[publisherId][streamName][client.id];
+				}
+			}
+			delete Streams.observing[client.id];
 		});
 	});
 };
 
 /**
- * Store clients
+ * Stores socket.io clients observing streams
  * @property clients
  * @type {Object}
  */ 
-Streams.clients = {};
+Streams.observers = {};
 
-function _validateSessionId(sessionId) {
+/**
+ * Stores streams that socket.io clients are observing
+ * @property clients
+ * @type {Object}
+ */ 
+Streams.observing = {};
+
+function _validateSessionId(sessionId, fn) {
 	// Validate sessionId to make sure we generated it
 	var result = Users.Session.decodeId(sessionId);
 	if (result[0]) {
 		return true;
 	}
-	client.emit('Streams/exception', {
-		message: "sessionId is invalid"
+	fn && fn({
+		type: 'Users.Exception.BadSessionId',
+		message: 'bad session id'
 	});
 	return false;
 }
@@ -853,7 +903,7 @@ Streams.getParticipants = function(publisherId, streamName, callback) {
  * @param {Function} [callback=null] Callback receives a map of {clientId: socketClient} pairs
  */
 Streams.getObservers = function(publisherId, streamName, callback) {
-	var observers = Q.getObject([publisherId, streamName], Streams.clients);
+	var observers = Q.getObject([publisherId, streamName], Streams.observers);
 	callback && callback(observers || {});
 };
 
@@ -880,8 +930,11 @@ Streams.getObservers = function(publisherId, streamName, callback) {
  */
 Streams.fetch = function (asUserId, publisherId, streamName, callback, fields, options) {
 	if (!callback) return;
-	if (!publisherId || !streamName) callback(new Error("Wrong arguments"));
-	if (streamName.charAt(streamName.length-1) === '/') {
+	if (!publisherId || !streamName) {
+		return callback(new Error("Wrong arguments"));
+	}
+	if (typeof streamName.charAt === 'function'
+	&& streamName.charAt(streamName.length-1) === '/') {
 		streamName = new Db.Range(streamName, true, false, streamName.slice(0, -1)+'0');
 	}
 	if (Q.isPlainObject(fields)) {
@@ -938,9 +991,10 @@ Streams.fetch = function (asUserId, publisherId, streamName, callback, fields, o
  */
 Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields, options) {
 	if (!callback) return;
-	if (!publisherId || !streamName) callback(new Error("Wrong arguments"));
-	if (streamName.charAt(streamName.length-1) === '/') {
-		streamName = new Db.Range(streamName, true, false, streamName.slice(0, -1)+'0');
+	if (!publisherId || !streamName
+	|| typeof publisherId !== 'string'
+	|| typeof streamName !== 'string') {
+		return callback(new Error("Wrong arguments"));
 	}
 	if (Q.isPlainObject(fields)) {
 		options = fields;

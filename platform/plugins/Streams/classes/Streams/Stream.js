@@ -375,13 +375,15 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 };
 
 /**
- * Sends a message to all participants of a stream
+ * Sends a message to all participants of a stream.
+ * Also sends it to observers unless dontNotifyObservers is true.
  * @method notifyParticipants
- * @param {string} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {string} userId User who initiated the event
+ * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
+ * @param {String} userId User who initiated the event
  * @param {Streams_Message} message 
+ * @param {Boolean} dontNotifyObservers 
  */
-Sp.notifyParticipants = function (event, userId, message) {
+Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 	var fields = this.fields;
 	var stream = this;
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
@@ -396,6 +398,9 @@ Sp.notifyParticipants = function (event, userId, message) {
 					Q.log(err);
 				}
 			});
+		}
+		if (!dontNotifyObservers) {
+			stream.notifyObservers(event, userId, message);
 		}
 	});
 };
