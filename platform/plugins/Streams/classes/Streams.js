@@ -339,7 +339,7 @@ Streams.define = function (type, ctor, methods) {
 	};
 	type = Q.normalize(type);
 	if (typeof ctor !== 'function') {
-		throw new Q.Error("Q.Streams.Stream.define requires ctor to be a function");
+		throw new Q.Error("Streams.Stream.define requires ctor to be a function");
 	}
 	function CustomStreamConstructor() {
 		CustomStreamConstructor.constructors.apply(this, arguments);
@@ -400,7 +400,70 @@ Streams.listen = function (options) {
 		https: Q.Config.get(['Q', 'node', 'https'], false) || {}
 	});
 
+	socket.io.of('/Users').on('connection', function(client) {
+		Q.log("Socket.IO client connected " + client.id);
+		if (client.alreadyListening) {
+			return;
+		}
+		client.alreadyListening = true;
+		client.on('Streams/join', function (sessionId, clientId, publisherId, streamName) {
+			if (!_validateSessionId(sessionId)) {
+				return;
+			}
+			Streams.fetch('', publisherId, streamName, function (err, streams) {
+				var stream = streams && streams[streamName];
+				if (err || !stream) {
+					return client.emit('Streams/exception', {
+						message: 'Not authorized'
+					});
+				}
+				stream.testReadLevel('messages', function (err, allowed) {
+					if (err || !allowed) {
+						return client.emit('Streams/exception', {
+							message: 'Not authorized'
+						});
+					}
+					var clients = Q.getObject([publisherId, streamName], Streams.clients, null, {});
+					var max = Streams.Stream.getConfigField(
+						stream.fields.type,
+						'observersMax'
+					);
+					if (max && Object.keys(clients).length < max) {
+						return client.emit('Streams/exception', {
+							message: 'Too many observers already'
+						});
+					}
+					clients[client.id] = client;
+				});
+			});
+		});
+		client.on('Streams/leave', function (sessionId, clientId, publisherId, streamName) {
+			if (!_validateSessionId(sessionId)) {
+				return;
+			}
+			Q.setObject([publisherId, streamName, client.id], client, Streams.clients);
+		});
+	});
 };
+
+/**
+ * Store clients
+ * @property clients
+ * @type {Object}
+ */ 
+Streams.clients = {};
+
+function _validateSessionId(sessionId) {
+	// Validate sessionId to make sure we generated it
+	var result = Users.Session.decodeId(sessionId);
+	if (result[0]) {
+		return true;
+	}
+	client.emit('Streams/exception', {
+		message: "sessionId is invalid"
+	});
+	return false;
+}
 
 function Streams_request_handler (req, res, next) {
 	var parsed = req.body;
@@ -781,6 +844,20 @@ Streams.getParticipants = function(publisherId, streamName, callback) {
 };
 
 /**
+ * Retrieve socket.io clients registered to observe the stream
+ * by sending "Streams/join" events through the socket.
+ * @method getObservers
+ * @static
+ * @param {String} publisherId The publisher Id
+ * @param {String} streamName The name of the stream
+ * @param {Function} [callback=null] Callback receives a map of {clientId: socketClient} pairs
+ */
+Streams.getObservers = function(publisherId, streamName, callback) {
+	var observers = Q.getObject([publisherId, streamName], Streams.clients);
+	callback && callback(observers || {});
+};
+
+/**
  * Retrieve stream with calculated access rights
  * @method fetch
  * @static
@@ -791,7 +868,7 @@ Streams.getParticipants = function(publisherId, streamName, callback) {
  * @param {String|Array|Db.Range} streamName
  *	The name of the stream, or an array of names, or a Db.Range
  * @param callback=null {function}
- *	Callback receives the (err, stream) as parameters
+ *	Callback receives (err, streams) as parameters
  * @param {String} [fields='*']
  *  Comma delimited list of fields to retrieve in the stream.
  *  Must include at least "publisherId" and "name".

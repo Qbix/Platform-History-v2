@@ -35,14 +35,14 @@ Q.makeEventEmitter(Users);
 /**
  * Store user sessions
  * @property sessions
- * @type {object}
+ * @type {Object}
  */
 Users.sessions = {};
 
 /**
  * Store clients
  * @property clients
- * @type {object}
+ * @type {Object}
  */ 
 Users.clients = {};
 
@@ -278,7 +278,7 @@ var timeouts = {};
 Users.Socket = {
 	/**
 	 * Start http server if needed, and start listening to socket.
-	 * Use this instead of Q.Users.socket
+	 * Use this instead of Users.socket
 	 * This also attaches a few event handlers for Users events.
 	 * @method listen
 	 * @param {Object} options 

@@ -104,6 +104,7 @@
 						"notifications": 0
 					}
 				},
+				"observersMax": 100,
 				"getMessagesLimit": 100,
 				"getParticipantsLimit": 100,
 				"messages": {
@@ -391,7 +392,8 @@
 			}
 		},
 		"notifications": {
-			"onlyIfAllClientsOffline": true
+			"onlyIfAllClientsOffline": true,
+			"debug": true
 		}
 	}
 }

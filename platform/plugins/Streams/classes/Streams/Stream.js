@@ -377,7 +377,7 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 /**
  * Sends a message to all participants of a stream
  * @method notifyParticipants
- * @param {string} event The type of Streams event, such as "post" or "remove"
+ * @param {string} event The type of Streams event, such as "Streams/post" or "Streams/remove"
  * @param {string} userId User who initiated the event
  * @param {Streams_Message} message 
  */
@@ -385,16 +385,37 @@ Sp.notifyParticipants = function (event, userId, message) {
 	var fields = this.fields;
 	var stream = this;
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
-		var debug, userId;
 		message.fields.streamType = fields.type;
-		for (userId in participants) {
+		for (var userId in participants) {
 			var participant = participants[userId];
 			stream.notify(participant, event, userId, message, function(err) {
-				if (err) {
+				if (!err) return;
+				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
+				if (debug) {
 					Q.log("Failed to notify user '"+participant.fields.userId+"': ");
 					Q.log(err);
 				}
 			});
+		}
+	});
+};
+
+/**
+ * Sends a message to all observers of a stream,
+ * i.e. socket clients besides the ones which are associated to participants.
+ * This can include socket clients that are not associated to any user.
+ * @method notifyObservers
+ * @param {string} event The type of Streams event, such as "Streams/post" or "Streams/remove"
+ * @param {string} userId User who initiated the event
+ * @param {Streams_Message} message 
+ */
+Sp.notifyObservers = function (event, userId, message) {
+	var fields = this.fields;
+	var stream = this;
+	Streams.getObservers(fields.publisherId, fields.name, function (observers) {
+		message.fields.streamType = fields.type;
+		for (var clientId in observers) {
+			observers[clientId].emit(event, message.getFields());
 		}
 	});
 };
@@ -759,20 +780,26 @@ Sp.testPermission = function(permission, callback)
 
 Sp._fetchAsUser = function (options, callback) {
 	var stream = this;
+	var pfx = 'Streams.prototype.fetchAsUser: ';
 	if (!options.userId) {
-		return callback.call(stream, new Error("No user id provided"));
+		return callback.call(stream, new Error(pfx+"No user id provided"));
 	}
 	var user = new Users.User({ id: options.userId });
 	user.retrieve(function (err, users) {
 		if (err) return callback.call(stream, err);
-		if (!users.length) return callback.call(stream, new Error("User not found"));
+		if (!users.length) return callback.call(stream, new Error(pfx+"User not found"));
 		var user = users[0];
 		if (user.fields.id === stream.get(['asUserId'], null)) {
 			return callback.call(stream, null, stream, user.fields.id, user);
 		}
-		Streams.fetch(user.fields.id, stream.fields.publisherId, stream.fields.name, function(err, streams) {
-			if (err) return callback.call(stream, err);
-			if (!streams[stream.fields.name]) return callback.call(stream, new Error("Stream not found"));
+		Streams.fetch(user.fields.id, stream.fields.publisherId, stream.fields.name,
+		function(err, streams) {
+			if (err) {
+				return callback.call(stream, err);
+			}
+			if (!streams[stream.fields.name]) {
+				return callback.call(stream, new Error(pfx+"Stream not found"));
+			}
 			callback.call(stream, null, streams[stream.fields.name], user.fields.id, user);
 		});
 	});
