@@ -2738,11 +2738,12 @@ Streams.socketRequest = function (event, publisherId, streamName) {
 	});
 	var socket = Users.Socket.get(nodeUrl);
 	if (!socket) {
-		return false;
+		return null;
 	}
 	var args = Array.prototype.slice.call(arguments, 0);
 	args.splice(1, 0, Q.sessionId(), Q.clientId());
 	socket.socket.emit.apply(socket.socket, args);
+	return socket;
 };
 
 /**
