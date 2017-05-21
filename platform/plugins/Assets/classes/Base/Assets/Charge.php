@@ -262,7 +262,7 @@ abstract class Base_Assets_Charge extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Assets_Charge';
 		return $q;
 	}

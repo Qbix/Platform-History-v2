@@ -248,7 +248,7 @@ abstract class Base_Users_Total extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Users_Total';
 		return $q;
 	}

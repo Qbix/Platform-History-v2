@@ -338,7 +338,7 @@ abstract class Base_Users_User extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Users_User';
 		return $q;
 	}

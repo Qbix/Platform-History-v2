@@ -262,7 +262,7 @@ abstract class Base_Users_OAuth extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Users_OAuth';
 		return $q;
 	}

@@ -277,7 +277,7 @@ abstract class Base_Streams_Participant extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Streams_Participant';
 		return $q;
 	}
