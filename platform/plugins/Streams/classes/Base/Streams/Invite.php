@@ -303,7 +303,7 @@ abstract class Base_Streams_Invite extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Streams_Invite';
 		return $q;
 	}

@@ -234,7 +234,7 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Users_ExternalTo';
 		return $q;
 	}

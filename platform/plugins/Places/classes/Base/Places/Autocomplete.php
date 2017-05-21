@@ -265,7 +265,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Places_Autocomplete';
 		return $q;
 	}

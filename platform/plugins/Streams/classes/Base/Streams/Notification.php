@@ -271,7 +271,7 @@ abstract class Base_Streams_Notification extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Streams_Notification';
 		return $q;
 	}

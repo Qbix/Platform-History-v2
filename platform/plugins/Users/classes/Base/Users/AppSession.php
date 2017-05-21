@@ -249,7 +249,7 @@ abstract class Base_Users_AppSession extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Users_AppSession';
 		return $q;
 	}

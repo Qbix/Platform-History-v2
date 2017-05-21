@@ -233,7 +233,7 @@ abstract class Base_Websites_Permalink extends Db_Row
 	 */
 	static function rollback()
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->rollback();
 		$q->className = 'Websites_Permalink';
 		return $q;
 	}
