@@ -36,66 +36,79 @@ abstract class Base_Users_Session extends Db_Row
 	 * @property $id
 	 * @type string
 	 * @default ""
+	 * the session id
 	 */
 	/**
 	 * @property $content
 	 * @type string
 	 * @default ""
+	 * json format
 	 */
 	/**
 	 * @property $php
 	 * @type string
 	 * @default ""
+	 * php serialized session data
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $deviceId
 	 * @type string
 	 * @default ""
+	 * If a push notification device is attached
 	 */
 	/**
 	 * @property $timeout
 	 * @type integer
 	 * @default 0
+	 * how long until the pincode needs to be entered
 	 */
 	/**
 	 * @property $duration
 	 * @type integer
 	 * @default 0
+	 * the number of seconds until the session is considered expired
 	 */
 	/**
 	 * @property $platform
 	 * @type string
 	 * @default ""
+	 * A platform like ios or android
 	 */
 	/**
 	 * @property $appId
 	 * @type string
 	 * @default null
+	 * An external app id registered with the platform
 	 */
 	/**
 	 * @property $version
 	 * @type string
 	 * @default ""
+	 * The version of the platform
 	 */
 	/**
 	 * @property $formFactor
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default "0000-00-00 00:00:00"
+	 * PHP timestamp of last time this row was saved
 	 */
 	/**
 	 * The setUp() method is called the first time

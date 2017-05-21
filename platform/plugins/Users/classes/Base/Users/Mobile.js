@@ -43,56 +43,67 @@ Q.mixin(Base, Row);
  * @property number
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property extension
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property carrier
  * @type String
  * @default "unverified"
+ * 
  */
 /**
  * @property state
  * @type String
  * @default "unverified"
+ * 
  */
 /**
  * @property capabilities
  * @type String
  * @default "unverified"
+ * 
  */
 /**
  * @property activationCode
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property activationCodeExpires
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property authCode
  * @type String|Buffer
  * @default ""
+ * Used in all links sent by sms, to authenticate the source
  */
 
 /**

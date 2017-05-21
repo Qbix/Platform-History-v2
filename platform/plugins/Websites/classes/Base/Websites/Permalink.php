@@ -27,21 +27,25 @@ abstract class Base_Websites_Permalink extends Db_Row
 	 * @property $uri
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $url
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

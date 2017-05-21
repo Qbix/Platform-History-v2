@@ -43,56 +43,67 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user who publishes the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * the name of the stream whose access is specified
  */
 /**
  * @property ofUserId
  * @type String|Buffer
  * @default ""
+ * id of user whose subscription access being recorded
  */
 /**
  * @property ofContactLabel
  * @type String|Buffer
  * @default ""
+ * to grant access to all contacts under a certain label, set byUserId = 0
  */
 /**
  * @property grantedByUserId
  * @type String|Buffer
  * @default null
+ * id of the user who granted the access. This is publisherId unless user has adminLevel >= invite
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * saved on shard of publisherId
  */
 /**
  * @property readLevel
  * @type Integer
  * @default 0
+ * <0=ignored, 0='none', 10='see', 20='content', 30='participants', 40='messages'
  */
 /**
  * @property writeLevel
  * @type Integer
  * @default 0
+ * <0=ignored, 0='none', 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
  */
 /**
  * @property adminLevel
  * @type Integer
  * @default 0
+ * <0=ignored, 0='none', 10='publish', 20='invite', 30='manage', 40='own'
  */
 /**
  * @property permissions
  * @type String
  * @default null
+ * JSON array of permission names
  */
 
 /**

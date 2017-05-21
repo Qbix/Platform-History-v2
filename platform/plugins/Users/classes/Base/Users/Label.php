@@ -29,31 +29,37 @@ abstract class Base_Users_Label extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $label
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $icon
 	 * @type string
 	 * @default "default"
+	 * 
 	 */
 	/**
 	 * @property $title
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

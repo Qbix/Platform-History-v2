@@ -37,26 +37,31 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property resourceId
  * @type String|Buffer
  * @default ""
+ * empty string means global resource quota
  */
 /**
  * @property name
  * @type String|Buffer
  * @default ""
+ * the name of the quota
  */
 /**
  * @property units
  * @type Integer
  * @default 1
+ * how many units of the quota were used
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 
 /**

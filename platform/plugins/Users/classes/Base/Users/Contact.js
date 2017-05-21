@@ -37,26 +37,31 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property label
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property contactUserId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property nickname
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 
 /**

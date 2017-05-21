@@ -28,26 +28,31 @@ abstract class Base_Streams_Category extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user that owns the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on Qbix server of publisherId
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * the time that this stream row has last changed for whatever reason
 	 */
 	/**
 	 * @property $relatedTo
 	 * @type string
 	 * @default ""
+	 * serialized JSON array of related stream types, icons and titles
 	 */
 	/**
 	 * The setUp() method is called the first time

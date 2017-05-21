@@ -31,41 +31,49 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 * @property $query
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $types
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $latitude
 	 * @type float
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $longitude
 	 * @type float
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $meters
 	 * @type float
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $results
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

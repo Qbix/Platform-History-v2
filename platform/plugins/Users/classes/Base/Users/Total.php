@@ -29,31 +29,37 @@ abstract class Base_Users_Total extends Db_Row
 	 * @property $forType
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $forId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $voteCount
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $weightTotal
 	 * @type float
 	 * @default 0
+	 * total weight of all votes
 	 */
 	/**
 	 * @property $value
 	 * @type float
 	 * @default 0
+	 * average of all vote values
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

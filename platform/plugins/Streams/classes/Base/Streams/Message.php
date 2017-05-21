@@ -34,56 +34,67 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user that publishes the stream to place the message on
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the stream to place the message on
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $sentTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * time on shard of byUserId
 	 */
 	/**
 	 * @property $byUserId
 	 * @type string
 	 * @default ""
+	 * id of the user sending message.
 	 */
 	/**
 	 * @property $byClientId
 	 * @type string
 	 * @default ""
+	 * id of the Streams client sending message.
 	 */
 	/**
 	 * @property $type
 	 * @type string
 	 * @default ""
+	 * the type of the message, such as text or video
 	 */
 	/**
 	 * @property $content
 	 * @type string
 	 * @default ""
+	 * short human-readable content, like twitter and its 140 characters
 	 */
 	/**
 	 * @property $instructions
 	 * @type string
 	 * @default ""
+	 * instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding
 	 */
 	/**
 	 * @property $weight
 	 * @type float
 	 * @default 1
+	 * this may depend on the reputation of user_by relative to the stream
 	 */
 	/**
 	 * @property $ordinal
 	 * @type integer
 	 * @default 0
+	 * Count messages posted to the stream
 	 */
 	/**
 	 * The setUp() method is called the first time

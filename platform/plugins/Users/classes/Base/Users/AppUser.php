@@ -33,51 +33,61 @@ abstract class Base_Users_AppUser extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $platform
 	 * @type string
 	 * @default ""
+	 * A platform like facebook or github
 	 */
 	/**
 	 * @property $appId
 	 * @type string
 	 * @default ""
+	 * An external app id registered with the platform
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $access_token
 	 * @type string
 	 * @default null
+	 * The OAuth access token
 	 */
 	/**
 	 * @property $session_secret
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $session_expires
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default "visited"
+	 * 
 	 */
 	/**
 	 * @property $platform_uid
 	 * @type string
 	 * @default ""
+	 * The user's id on that platform
 	 */
 	/**
 	 * The setUp() method is called the first time

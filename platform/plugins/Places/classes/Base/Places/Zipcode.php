@@ -34,56 +34,67 @@ abstract class Base_Places_Zipcode extends Db_Row
 	 * @property $countryCode
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $zipcode
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $placeName
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $stateName
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $regionName
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $region
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $community
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $latitude
 	 * @type float
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $longitude
 	 * @type float
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $accuracy
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -31,41 +31,49 @@ abstract class Base_Streams_Subscription extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who publishes the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the name of the stream being subscribed to
 	 */
 	/**
 	 * @property $ofUserId
 	 * @type string
 	 * @default ""
+	 * local to shard of publisherId
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $untilTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * this is the time after which subscription won't match
 	 */
 	/**
 	 * @property $filter
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $duration
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

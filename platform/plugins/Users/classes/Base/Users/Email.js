@@ -40,41 +40,49 @@ Q.mixin(Base, Row);
  * @property address
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property state
  * @type String
  * @default null
+ * 
  */
 /**
  * @property activationCode
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property activationCodeExpires
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property authCode
  * @type String|Buffer
  * @default ""
+ * Used in all links sent by email, to authenticate the source
  */
 
 /**

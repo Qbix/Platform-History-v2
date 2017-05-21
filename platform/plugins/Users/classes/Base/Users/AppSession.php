@@ -29,31 +29,37 @@ abstract class Base_Users_AppSession extends Db_Row
 	 * @property $udid
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $platform
 	 * @type string
 	 * @default ""
+	 * A platform like ios or android
 	 */
 	/**
 	 * @property $appId
 	 * @type string
 	 * @default ""
+	 * An external app registered with the platform
 	 */
 	/**
 	 * @property $sessionId
 	 * @type string
 	 * @default ""
+	 * The id of a users_session row, which may have a userId and deviceId
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

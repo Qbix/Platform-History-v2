@@ -41,46 +41,55 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property deviceId
  * @type String|Buffer
  * @default ""
+ * The actual push registration id on the platform
  */
 /**
  * @property platform
  * @type String
  * @default ""
+ * A platform like ios or android
  */
 /**
  * @property version
  * @type String
  * @default null
+ * The version of the platform
  */
 /**
  * @property appId
  * @type String
  * @default null
+ * An external app id registered with the platform
  */
 /**
  * @property sessionId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property formFactor
  * @type String
  * @default null
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 
 /**

@@ -38,31 +38,37 @@ Q.mixin(Base, Row);
  * @property forType
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property forId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property voteCount
  * @type Integer
  * @default 0
+ * 
  */
 /**
  * @property weightTotal
  * @type Number
  * @default 0
+ * total weight of all votes
  */
 /**
  * @property value
  * @type Number
  * @default 0
+ * average of all vote values
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 
 /**

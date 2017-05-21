@@ -51,96 +51,115 @@ Q.mixin(Base, Row);
  * @property id
  * @type String|Buffer
  * @default "0"
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property sessionId
  * @type String|Buffer
  * @default null
+ * The session id from the most recent authenticated request from this user.
  */
 /**
  * @property sessionCount
  * @type Integer
  * @default 0
+ * 
  */
 /**
  * @property fb_uid
  * @type Integer
  * @default 0
+ * The facebook id of the user
  */
 /**
  * @property tw_uid
  * @type Integer
  * @default 0
+ * The twitter id of the user
  */
 /**
  * @property g_uid
  * @type String|Buffer
  * @default null
+ * 
  */
 /**
  * @property y_uid
  * @type String|Buffer
  * @default null
+ * 
  */
 /**
  * @property passphraseHash
  * @type String
  * @default null
+ * 
  */
 /**
  * @property emailAddress
  * @type String|Buffer
  * @default null
+ * 
  */
 /**
  * @property mobileNumber
  * @type String|Buffer
  * @default null
+ * 
  */
 /**
  * @property emailAddressPending
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property mobileNumberPending
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property signedUpWith
  * @type String
  * @default ""
+ * A platform like ios or android, or "none", "mobile", "email"
  */
 /**
  * @property username
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property icon
  * @type String|Buffer
  * @default ""
+ * relative path to user's icon folder, containing 48.png, 32.png and 16.png
  */
 /**
  * @property url
  * @type String|Buffer
  * @default null
+ * the url of this user's fm server
  */
 /**
  * @property pincodeHash
  * @type String|Buffer
  * @default null
+ * a smaller security code for when user is already logged in
  */
 
 /**

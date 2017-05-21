@@ -37,26 +37,31 @@ Q.mixin(Base, Row);
  * @property identifier
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property state
  * @type String
  * @default null
+ * "future" is a mapping to a user which may later be adopted by someone
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 
 /**

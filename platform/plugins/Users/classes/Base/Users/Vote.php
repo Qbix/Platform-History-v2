@@ -29,31 +29,37 @@ abstract class Base_Users_Vote extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $forType
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $forId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $value
 	 * @type float
 	 * @default 0
+	 * these values can be averaged
 	 */
 	/**
 	 * @property $weight
 	 * @type float
 	 * @default 1
+	 * multiplied by value for weighted average
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

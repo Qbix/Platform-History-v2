@@ -39,36 +39,43 @@ Q.mixin(Base, Row);
  * @property toUserId
  * @type String|Buffer
  * @default ""
+ * the user the avatar is being displayed to
  */
 /**
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * the user whose avatar is being displayed
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * the time this record was last updated
  */
 /**
  * @property username
  * @type String
  * @default ""
+ * just a cache of the username
  */
 /**
  * @property firstName
  * @type String
  * @default ""
+ * if not empty, the user can see this first name
  */
 /**
  * @property lastName
  * @type String
  * @default ""
+ * if not empty, the user can see this last name
  */
 /**
  * @property icon
  * @type String|Buffer
  * @default ""
+ * the icon to display
  */
 
 /**

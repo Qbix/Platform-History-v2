@@ -31,41 +31,49 @@ abstract class Base_Users_Email extends Db_Row
 	 * @property $address
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $activationCode
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $activationCodeExpires
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $authCode
 	 * @type string
 	 * @default ""
+	 * Used in all links sent by email, to authenticate the source
 	 */
 	/**
 	 * The setUp() method is called the first time

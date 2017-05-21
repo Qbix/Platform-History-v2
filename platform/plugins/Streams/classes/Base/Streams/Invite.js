@@ -46,71 +46,85 @@ Q.mixin(Base, Row);
  * @property token
  * @type String|Buffer
  * @default ""
+ * unique random token for the link, to embed in invitation URLs
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * id of user who is being invited to the stream
  */
 /**
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user who publishes the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * the name of the stream to which the user is being invited
  */
 /**
  * @property invitingUserId
  * @type String|Buffer
  * @default ""
+ * id of the user who invited the person to the stream. This is publisherId unless user has adminLevel >= invite
  */
 /**
  * @property displayName
  * @type String
  * @default ""
+ * display name, computed at invite time
  */
 /**
  * @property appUrl
  * @type String|Buffer
  * @default ""
+ * the application url where user is invited.
  */
 /**
  * @property readLevel
  * @type Integer
  * @default 0
+ * 0=none, 10='see', 20='content', 30='participants', 40='messages'
  */
 /**
  * @property writeLevel
  * @type Integer
  * @default 0
+ * 0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate
  */
 /**
  * @property adminLevel
  * @type Integer
  * @default 0
+ * 0=none, 10='publish', 20='invite', 30='manage', 40='own'
  */
 /**
  * @property permissions
  * @type String
  * @default null
+ * JSON array of permission names
  */
 /**
  * @property state
  * @type String
  * @default "pending"
+ * the state of the invite
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property expireTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 
 /**

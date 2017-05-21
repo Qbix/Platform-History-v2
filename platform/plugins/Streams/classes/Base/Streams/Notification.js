@@ -41,46 +41,55 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * the user to notify
  */
 /**
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * the owner of the stream causing the notification
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * the stream causing the notification
  */
 /**
  * @property messageOrdinal
  * @type Integer
  * @default 0
+ * the ordinal of the message being notified about
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property type
  * @type String|Buffer
  * @default null
+ * the type of message
  */
 /**
  * @property viewedTime
  * @type String|Db.Expression
  * @default null
+ * saved on shard of userId
  */
 /**
  * @property readTime
  * @type String|Db.Expression
  * @default null
+ * saved on shard of userId
  */
 /**
  * @property comment
  * @type String
  * @default null
+ * optional human-readable comment to display along with notification
  */
 
 /**

@@ -36,21 +36,25 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property xid
  * @type String|Buffer
  * @default ""
+ * The external user id
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 
 /**

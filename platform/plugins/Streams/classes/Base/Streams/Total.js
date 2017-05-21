@@ -36,21 +36,25 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property messageType
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property messageCount
  * @type Integer
  * @default 0
+ * 
  */
 
 /**

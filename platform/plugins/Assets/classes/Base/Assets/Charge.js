@@ -40,41 +40,49 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * publisherId of the stream regarding which the charge was made
  */
 /**
  * @property id
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * name of the stream regarding which the charge was made
  */
 /**
  * @property description
  * @type String
  * @default ""
+ * human-readable description of the charge
  */
 /**
  * @property attributes
  * @type String
  * @default ""
+ * additional information for the charge in JSON format
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default "0000-00-00 00:00:00"
+ * 
  */
 
 /**

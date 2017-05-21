@@ -33,51 +33,61 @@ abstract class Base_Streams_Participant extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * The id of the user publishing the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * The name of the stream where people can chat about this message
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * The id of the user participating in the stream
 	 */
 	/**
 	 * @property $streamType
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default null
+	 * the state of the participant in the stream
 	 */
 	/**
 	 * @property $subscribed
 	 * @type string
 	 * @default "no"
+	 * whether the participant is currently subscribed
 	 */
 	/**
 	 * @property $posted
 	 * @type string
 	 * @default "no"
+	 * whether the participant has posted a message to this stream
 	 */
 	/**
 	 * @property $extra
 	 * @type string
 	 * @default "{}"
+	 * JSON containing extra information about this participant
 	 */
 	/**
 	 * The setUp() method is called the first time

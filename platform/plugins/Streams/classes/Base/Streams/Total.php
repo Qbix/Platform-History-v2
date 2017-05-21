@@ -27,21 +27,25 @@ abstract class Base_Streams_Total extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $messageType
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $messageCount
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -32,46 +32,55 @@ abstract class Base_Users_Device extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $deviceId
 	 * @type string
 	 * @default ""
+	 * The actual push registration id on the platform
 	 */
 	/**
 	 * @property $platform
 	 * @type string
 	 * @default ""
+	 * A platform like ios or android
 	 */
 	/**
 	 * @property $version
 	 * @type string
 	 * @default null
+	 * The version of the platform
 	 */
 	/**
 	 * @property $appId
 	 * @type string
 	 * @default null
+	 * An external app id registered with the platform
 	 */
 	/**
 	 * @property $sessionId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $formFactor
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -32,46 +32,55 @@ abstract class Base_Streams_Rule extends Db_Row
 	 * @property $ofUserId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $ordinal
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $readyTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * time from which user is ready to receive notifications again
 	 */
 	/**
 	 * @property $filter
 	 * @type string
 	 * @default ""
+	 * {"types": [ array of message types ], "labels": [ ]}
 	 */
 	/**
 	 * @property $deliver
 	 * @type string
 	 * @default ""
+	 * {"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}
 	 */
 	/**
 	 * @property $relevance
 	 * @type float
 	 * @default 1
+	 * used to prioritize messages for display and processing
 	 */
 	/**
 	 * The setUp() method is called the first time
