@@ -222,7 +222,9 @@ Bootstrap.loadHandlers = function (callback) {
 	// first load Q handlers
 	loadHandlers(Q.HANDLERS_DIR, function() {
 		// now load plugins handlers one by one
-		loadHandlers(plugins.map(function (a) { return Q.PLUGINS_DIR+'/'+a+'/handlers'; }), function () {
+		loadHandlers(plugins.map(function (a) { 
+			return Q.PLUGINS_DIR+'/'+a+'/handlers';
+		}), function () {
 			// finally load application handlers
 			loadHandlers(Q.app.HANDLERS_DIR, callback);
 		});

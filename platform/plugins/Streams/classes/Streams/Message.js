@@ -280,24 +280,33 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			avatar: avatar,
 			callback: callback
 		};
-		var w1 = [];
-		var e, m, d;
-		if (e = deliver.emailAddress || deliver.email) {
-			_email(emailAddress, p1.fill('email'));
-			w1.push('email');
+		var name = 'Streams/deliver/'+this.fields.type;
+		var handler = Q.getObject(name, Q.handlers, '/');
+		if (!Q.isEmpty(handler)) {
+			Q.handle(handler, this, [o, _afterTransform]);
+		} else {
+			_afterTransform();
 		}
-		if (m = deliver.mobileNumber || deliver.mobile) {
-			_mobile(m, p1.fill('mobile'));
-			w1.push('mobile');
+		function _afterTransform() {
+			var w1 = [];
+			var e, m, d;
+			if (e = deliver.emailAddress || deliver.email) {
+				_email(e, p1.fill('email'));
+				w1.push('email');
+			}
+			if (m = deliver.mobileNumber || deliver.mobile) {
+				_mobile(m, p1.fill('mobile'));
+				w1.push('mobile');
+			}
+			if (d = deliver.deviceId || deliver.device) {
+				_device(d, p1.fill('device'));
+				w1.push('device');
+			}
+			var result = [];
+			p1.add(w1, function () {
+				_next(0);
+			}).run();
 		}
-		if (d = deliver.deviceId || deliver.device) {
-			_device(d, p1.fill('device'));
-			w1.push('device');
-		}
-		var result = [];
-		p1.add(w1, function () {
-			_next(0);
-		}).run();
 		function _next(i) {
 			var destinations = to[i];
 			if (!destinations) {

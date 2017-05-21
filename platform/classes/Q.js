@@ -1879,10 +1879,10 @@ Q.dir = function _Q_dir(start, callback) {
 			callback && callback(err);
 			return;
 		}
-		var found = {dirs: [], files: []},
-			total = 0,
-			processed = 0;
-		function isDir(abspath) {
+		var found = {dirs: [], files: []};
+		var total = 0;
+		var processed = 0;
+		function _loadPath(abspath) {
 			fs.stat(abspath, function(err, stat) {
 				if(stat.isDirectory()) {
 					found.dirs.push(abspath);
@@ -1908,7 +1908,7 @@ Q.dir = function _Q_dir(start, callback) {
 				if (files.length) {
 					total = files.length;
 					for(var x=0, l=files.length; x<l; x++) {
-						isDir(path.join(start, files[x]));
+						_loadPath(path.join(start, files[x]));
 					}					
 				} else {
 					callback && callback(null, {dirs: [], files: []});
