@@ -2548,7 +2548,7 @@ $field_hints
 	 */
 	static function rollback()
 	{
-		\$q = self::db()->rawQuery('')->commit();
+		\$q = self::db()->rawQuery('')->rollback();
 		\$q->className = $class_name_var;
 		return \$q;
 	}

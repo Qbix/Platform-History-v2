@@ -60,7 +60,7 @@ class Users_Quota extends Base_Users_Quota
 				'problem' => "must be an array"
 			));
 		}
-		$title = isset($q['title']) ? $q['title'] : $n;
+		$title = isset($q['title']) ? $q['title'] : $name;
 		foreach ($q as $duration => $info) {
 			if (!is_numeric($duration)) {
 				continue;
