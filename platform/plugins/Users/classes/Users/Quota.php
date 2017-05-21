@@ -74,17 +74,20 @@ class Users_Quota extends Base_Users_Quota
 		}
 		$condition = '';
 		rsort($durations);
-		$condition = $largest = end($durations);
+		$condition = $largest = reset($durations);
 		$time = Users_Quota::db()->getCurrentTimestamp();
-		foreach ($durations as $duration) {
-			$startTime = date("Y-m-d h:i:s", $time - $duration);
-			$condition = "IF (insertedTime >= '$startTime', $duration, $condition)";
+		for ($i=1, $c=count($durations); $i < $c; ++$i) {
+			$duration = $durations[$i];
+			$startTime = $time - $duration;
+			$condition = "IF (insertedTime >= FROM_UNIXTIME($startTime), $duration, $condition)";
 		}
-		$query = Users_Quota::select("$condition c, SUM(1) si")->where(array(
+		$startTime = $time - $largest;
+		$expr = new Db_Expression("FROM_UNIXTIME($startTime)");
+		$query = Users_Quota::select("$condition c, SUM(units) si")->where(array(
 			'userId' => $userId,
 			'resourceId' => $resourceId,
-			'insertedTime' => new Db_Range($time - $largest, true, false, null)
-		));
+			'insertedTime' => new Db_Range($expr, true, false, null)
+		))->groupBy('c');
 		$queries = $query->shard();
 		if ($begin) {
 			$query = $query->begin();
