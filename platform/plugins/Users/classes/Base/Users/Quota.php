@@ -28,7 +28,7 @@ abstract class Base_Users_Quota extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
-	 * 
+	 * this can be a person, app or organization
 	 */
 	/**
 	 * @property $resourceId
@@ -65,9 +65,6 @@ abstract class Base_Users_Quota extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
-			  1 => 'resourceId',
-			  2 => 'name',
 			)
 		);
 	}
@@ -251,7 +248,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => 'MUL',
   3 => NULL,
 );			
 	}
@@ -305,7 +302,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => '',
 );			
 	}
@@ -359,7 +356,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -462,26 +459,6 @@ return array (
   2 => '',
   3 => 'CURRENT_TIMESTAMP',
 );			
-	}
-
-	/**
-	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
-	 * @method beforeSave
-	 * @param {array} $value The array of fields
-	 * @return {array}
-	 * @throws {Exception} If mandatory field is not set
-	 */
-	function beforeSave($value)
-	{
-		if (!$this->retrieved) {
-			$table = $this->getTable();
-			foreach (array('userId','name') as $name) {
-				if (!isset($value[$name])) {
-					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-				}
-			}
-		}
-		return $value;			
 	}
 
 	/**

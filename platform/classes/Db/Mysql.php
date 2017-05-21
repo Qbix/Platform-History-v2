@@ -413,10 +413,10 @@ class Db_Mysql implements iDb
 			if (isset($className)) {
 				$query->className = $className;
 				$sharded = $query->shard(null, $record);
-				$shard = key($sharded);
 				if (count($sharded) > 1 or $shard === '*') { // should be only one shard
 					throw new Exception("Db_Mysql::insertManyAndExecute row should be stored on exactly one shard: " . Q::json_encode($record));
 				}
+				$shard = key($sharded);
 			}
 			
 			// start filling out the query data
@@ -455,7 +455,7 @@ class Db_Mysql implements iDb
 					// re-use the prepared statement, save round-trips to the db
 					$query->reuseStatement($last_queries[$shard]);
 				}
-				$query->execute(true);
+				$query->execute(true, $shard);
 				$last_q[$shard] = $q;
 				$last_queries[$shard] = $query; // save for re-use
 				$bindings[$shard] = $queries[$shard] = array();
@@ -477,7 +477,7 @@ class Db_Mysql implements iDb
 				// re-use the prepared statement, save round-trips to the db
 				$query->reuseStatement($last_queries[$shard]);
 			}
-			$query->execute(true);
+			$query->execute(true, $shard);
 		}
 		
 		foreach ($rows as $row) {
@@ -579,12 +579,11 @@ class Db_Mysql implements iDb
      *  That is, after it is finished, all the ratings will be in one of these
      *  two ranges.
      *  If not empty, this should be a very large number, like a billion.
-     * @param {string} [$order_by_clause=null] The order clause to use when calculating ranks.
-     *  Default is "ORDER BY $pts_field DESC"
-     * @param {string} [$where=null] Any additional criteria to filter the table by.
-	 *  Please provide a string here, not an array.
-	 *  You should use $db->quote($value) to escape the values yourself.
+     * @param {array} [$order_by] The order clause to use when calculating ranks.
+     *  Default is array($pts_field, false)
+     * @param {array} [$where=null] Any additional criteria to filter the table by.
 	 *  The ranking algorithm will do its work within the results that match this criteria.
+	 *  If your table is sharded, then all the work must be done within one shard.
      */
     function rank(
         $table,
@@ -593,16 +592,26 @@ class Db_Mysql implements iDb
 		$start = 1,
         $chunk_size = 1000, 
         $rank_level2 = 0,
-        $order_by_clause = null,
-		$where = null)
+        $order_by = null,
+		$where = array())
     {	
-        if (!isset($order_by_clause))
-            $order_by_clause = "ORDER BY $pts_field DESC";
-            
+		if (!isset($order_by)) {
+			$order_by = array($pts_field, false);
+		}		
 		if (!isset($where)) {
 			$where = '1';
 		}
-			
+        
+        // Count all the rows
+        $query = $this->select('COUNT (1) _count', $table)->where($where);
+        $sharded = $query->shard();
+        if (count($sharded) > 1 or $shard === '*') { // should be only one shard
+        	throw new Exception("Db_Mysql::rank can work within at most one shard");
+        }
+        $shard = key($sharded);
+        $row = $query->execute()->fetch(PDO::FETCH_ASSOC);
+        $count = $row['_count'];
+		
         if (empty($rank_level2)) {
             $this->update($table)
                 ->set(array($rank_field => 0))
@@ -626,26 +635,22 @@ class Db_Mysql implements iDb
         		$condition = "$rank_field >= $rank_level2";
         	}
         }
-        
-        // Count all the rows
-    	$rows = $this->rawQuery("SELECT COUNT(1) _count FROM $table WHERE $where")
-			->fetchAll(PDO::FETCH_ASSOC);
-		$count = $rows[0]['_count'];
     	
         // Here comes the magic:
-		$condition2 = isset($where) ? $where : '1';
 		$offset = 0;
 		$rank_base += $start;
-		$this->rawQuery("set @rank = $offset - 1")->execute();
+		$this->rawQuery("set @rank = $offset - 1")->execute(false, $shard);
         do {
-    		$this->rawQuery("
-    			UPDATE $table 
-    			SET $rank_field = $rank_base + (@rank := @rank + 1)
-    			WHERE ($condition)
-				AND $condition2
-    			$order_by_clause
-    			LIMIT $chunk_size
-    		")->execute();
+			$query = $this->update($table)->set(array(
+				$rank_field => new Db_Expression("$rank_base + (@rank := @rank + 1)")
+			))->where($condition);
+			if ($where) {
+				$query = $query->andWhere($where);
+			}
+			if ($order_by) {
+				$query = call_user_func_array(array($query, 'orderBy'), $order_by);
+			}
+			$query->limit($chunk_size)->execute();
 			$offset += $chunk_size;
         } while ($count-$offset > 0);
     }
@@ -1266,7 +1271,7 @@ $table_comment * @namespace $class_name_prefix
  * @extends Base.$js_class_name
  * @constructor
  * @param {Object} fields The fields values to initialize table row as
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
  */
 function $class_name (fields) {
 
@@ -2225,7 +2230,7 @@ EOT;
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [\$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [\$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [\$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 EOT;
@@ -2468,7 +2473,7 @@ $field_hints
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [\$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [\$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [\$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -2479,6 +2484,7 @@ $field_hints
 		\$q->className = $class_name_var;
 		return \$q;
 	}
+	
 	$dc
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -2501,6 +2507,35 @@ $field_hints
 			self::table(), \$rows,
 			array_merge(\$options, array('className' => $class_name_var))
 		);
+	}
+	
+	$dc
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [\$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin(\$lockType = null)
+	{
+		\$q = self::db()->rawQuery('')->begin(\$lockType);
+		\$q->className = $class_name_var;
+		return \$q;
+	}
+	
+	$dc
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		\$q = self::db()->rawQuery('')->commit();
+		\$q->className = $class_name_var;
+		return \$q;
 	}
 	
 $functions_string
@@ -2578,7 +2613,7 @@ Base.table = function (withoutDbName) {
 $dc
  * The connection name for the class
  * @method connectionName
- * @return {string} The name of the connection
+ * @return {String} The name of the connection
  */
 Base.connectionName = function() {
 	return '$connectionName';
@@ -2601,7 +2636,7 @@ Base.SELECT = function(fields, alias) {
 $dc
  * Create UPDATE query to the class table. Use Db.Query.Mysql.set() method to define SET clause
  * @method UPDATE
- * @param {string} [alias=null] Table alias
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.UPDATE = function(alias) {
@@ -2613,8 +2648,8 @@ Base.UPDATE = function(alias) {
 $dc
  * Create DELETE query to the class table
  * @method DELETE
- * @param {object}[table_using=null] If set, adds a USING clause with this table
- * @param {string} [alias=null] Table alias
+ * @param {Object}[table_using=null] If set, adds a USING clause with this table
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.DELETE = function(table_using, alias) {
@@ -2626,12 +2661,37 @@ Base.DELETE = function(table_using, alias) {
 $dc
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {Object} [fields={}] The fields as an associative array of {column: value} pairs
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.INSERT = function(fields, alias) {
 	var q = Base.db().INSERT(Base.table()+(alias ? ' '+alias : ''), fields || {});
+	q.className = '$class_name';
+	return q;
+};
+
+$dc
+ * Create raw query with BEGIN clause.
+ * You'll have to specify shards yourself when calling execute().
+ * @method BEGIN
+ * @param {string} [\$lockType] First parameter to pass to query.begin() function
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.BEGIN = function(\$lockType) {
+	var q = Base.db().rawQuery('').begin(\$lockType);
+	q.className = '$class_name';
+	return q;
+};
+
+$dc
+ * Create raw query with COMMIT clause
+ * You'll have to specify shards yourself when calling execute().
+ * @method COMMIT
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.COMMIT = function(fields, alias) {
+	var q = Base.db().rawQuery('').commit();
 	q.className = '$class_name';
 	return q;
 };
@@ -2648,7 +2708,7 @@ Base.prototype.className = "$class_name";
 $dc
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
@@ -2659,7 +2719,7 @@ Base.prototype.setUp = function() {
 $dc
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
