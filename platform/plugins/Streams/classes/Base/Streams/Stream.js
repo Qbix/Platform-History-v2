@@ -275,8 +275,21 @@ Base.BEGIN = function($lockType) {
  * @method COMMIT
  * @return {Db.Query.Mysql} The generated query
  */
-Base.COMMIT = function(fields, alias) {
+Base.COMMIT = function() {
 	var q = Base.db().rawQuery('').commit();
+	q.className = 'Streams_Stream';
+	return q;
+};
+
+/**
+ * Create raw query with ROLLBACK clause
+ * @method ROLLBACK
+ * @param {Object} criteria can be used to target the query to some shards.
+ *   Otherwise you'll have to specify shards yourself when calling execute().
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.ROLLBACK = function(criteria) {
+	var q = Base.db().rawQuery('').rollback(crieria);
 	q.className = 'Streams_Stream';
 	return q;
 };
