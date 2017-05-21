@@ -14,38 +14,46 @@
  * @class Base_Users_Total
  * @extends Db_Row
  *
- * @property {string} $forType
- * @property {string} $forId
- * @property {integer} $voteCount
- * @property {float} $weightTotal
- * @property {float} $value
- * @property {string|Db_Expression} $updatedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.forType] defaults to ""
+ * @param {string} [$fields.forId] defaults to ""
+ * @param {integer} [$fields.voteCount] defaults to 0
+ * @param {float} [$fields.weightTotal] defaults to 0
+ * @param {float} [$fields.value] defaults to 0
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 abstract class Base_Users_Total extends Db_Row
 {
 	/**
 	 * @property $forType
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $forId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $voteCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $weightTotal
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $value
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -20,7 +20,26 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.name] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.type] defaults to ""
+ * @param {string} [$fields.title] defaults to ""
+ * @param {string} [$fields.icon] defaults to "default"
+ * @param {string} [$fields.content] defaults to ""
+ * @param {string} [$fields.attributes] defaults to null
+ * @param {integer} [$fields.readLevel] defaults to 40
+ * @param {integer} [$fields.writeLevel] defaults to 10
+ * @param {integer} [$fields.adminLevel] defaults to 20
+ * @param {string} [$fields.permissions] defaults to null
+ * @param {string} [$fields.inheritAccess] defaults to null
+ * @param {integer} [$fields.messageCount] defaults to 0
+ * @param {integer} [$fields.invitedCount] defaults to 0
+ * @param {integer} [$fields.participatingCount] defaults to 0
+ * @param {integer} [$fields.leftCount] defaults to 0
+ * @param {string|Db_Expression} [$fields.closedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,80 +48,99 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type publisherId
+ * @property publisherId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type name
+ * @property name
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String|Db.Expression}
- * @type updatedTime
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String}
- * @type type
+ * @property type
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type title
+ * @property title
+ * @type String
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type icon
+ * @property icon
+ * @type String|Buffer
+ * @default "default"
  */
 /**
- * @property {String}
- * @type content
+ * @property content
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type attributes
+ * @property attributes
+ * @type String
+ * @default null
  */
 /**
- * @property {integer}
- * @type readLevel
+ * @property readLevel
+ * @type Integer
+ * @default 40
  */
 /**
- * @property {integer}
- * @type writeLevel
+ * @property writeLevel
+ * @type Integer
+ * @default 10
  */
 /**
- * @property {integer}
- * @type adminLevel
+ * @property adminLevel
+ * @type Integer
+ * @default 20
  */
 /**
- * @property {String}
- * @type permissions
+ * @property permissions
+ * @type String
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type inheritAccess
+ * @property inheritAccess
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {integer}
- * @type messageCount
+ * @property messageCount
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {integer}
- * @type invitedCount
+ * @property invitedCount
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {integer}
- * @type participatingCount
+ * @property participatingCount
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {integer}
- * @type leftCount
+ * @property leftCount
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {String|Db.Expression}
- * @type closedTime
+ * @property closedTime
+ * @type String|Db.Expression
+ * @default null
  */
 
 /**

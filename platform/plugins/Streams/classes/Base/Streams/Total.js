@@ -20,7 +20,11 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.messageType] defaults to ""
+ * @param {integer} [$fields.messageCount] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,20 +33,24 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type publisherId
+ * @property publisherId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type streamName
+ * @property streamName
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type messageType
+ * @property messageType
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {integer}
- * @type messageCount
+ * @property messageCount
+ * @type Integer
+ * @default 0
  */
 
 /**

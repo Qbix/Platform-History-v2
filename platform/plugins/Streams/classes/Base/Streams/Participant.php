@@ -14,58 +14,70 @@
  * @class Base_Streams_Participant
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {string} $userId
- * @property {string} $streamType
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $state
- * @property {string} $subscribed
- * @property {string} $posted
- * @property {string} $extra
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.streamType] defaults to null
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.state] defaults to null
+ * @param {string} [$fields.subscribed] defaults to "no"
+ * @param {string} [$fields.posted] defaults to "no"
+ * @param {string} [$fields.extra] defaults to "{}"
  */
 abstract class Base_Streams_Participant extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamType
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $subscribed
-	 * @type {string}
+	 * @type string
+	 * @default "no"
 	 */
 	/**
 	 * @property $posted
-	 * @type {string}
+	 * @type string
+	 * @default "no"
 	 */
 	/**
 	 * @property $extra
-	 * @type {string}
+	 * @type string
+	 * @default "{}"
 	 */
 	/**
 	 * The setUp() method is called the first time

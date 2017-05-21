@@ -14,58 +14,70 @@
  * @class Base_Users_AppUser
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $platform
- * @property {string} $appId
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $access_token
- * @property {string} $session_secret
- * @property {string|Db_Expression} $session_expires
- * @property {string} $state
- * @property {string} $platform_uid
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.appId] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.access_token] defaults to null
+ * @param {string} [$fields.session_secret] defaults to null
+ * @param {string|Db_Expression} [$fields.session_expires] defaults to null
+ * @param {string} [$fields.state] defaults to "visited"
+ * @param {string} [$fields.platform_uid] defaults to ""
  */
 abstract class Base_Users_AppUser extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $platform
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $appId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $access_token
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $session_secret
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $session_expires
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default "visited"
 	 */
 	/**
 	 * @property $platform_uid
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

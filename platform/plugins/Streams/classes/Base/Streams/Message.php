@@ -14,63 +14,76 @@
  * @class Base_Streams_Message
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $sentTime
- * @property {string} $byUserId
- * @property {string} $byClientId
- * @property {string} $type
- * @property {string} $content
- * @property {string} $instructions
- * @property {float} $weight
- * @property {integer} $ordinal
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.sentTime] defaults to null
+ * @param {string} [$fields.byUserId] defaults to ""
+ * @param {string} [$fields.byClientId] defaults to ""
+ * @param {string} [$fields.type] defaults to ""
+ * @param {string} [$fields.content] defaults to ""
+ * @param {string} [$fields.instructions] defaults to ""
+ * @param {float} [$fields.weight] defaults to 1
+ * @param {integer} [$fields.ordinal] defaults to 0
  */
 abstract class Base_Streams_Message extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $sentTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $byUserId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $byClientId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $type
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $content
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $instructions
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $weight
-	 * @type {float}
+	 * @type float
+	 * @default 1
 	 */
 	/**
 	 * @property $ordinal
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -32,10 +32,11 @@ abstract class Base_Users
   9 => 'Users_Link',
   10 => 'Users_Mobile',
   11 => 'Users_OAuth',
-  12 => 'Users_Session',
-  13 => 'Users_Total',
-  14 => 'Users_User',
-  15 => 'Users_Vote',
+  12 => 'Users_Quota',
+  13 => 'Users_Session',
+  14 => 'Users_Total',
+  15 => 'Users_User',
+  16 => 'Users_Vote',
 );
 
 	/**

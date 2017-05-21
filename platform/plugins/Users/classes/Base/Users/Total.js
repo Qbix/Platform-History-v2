@@ -20,7 +20,13 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.forType] defaults to ""
+ * @param {string} [$fields.forId] defaults to ""
+ * @param {integer} [$fields.voteCount] defaults to 0
+ * @param {float} [$fields.weightTotal] defaults to 0
+ * @param {float} [$fields.value] defaults to 0
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,28 +35,34 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type forType
+ * @property forType
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type forId
+ * @property forId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {integer}
- * @type voteCount
+ * @property voteCount
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {number}
- * @type weightTotal
+ * @property weightTotal
+ * @type Number
+ * @default 0
  */
 /**
- * @property {number}
- * @type value
+ * @property value
+ * @type Number
+ * @default 0
  */
 /**
- * @property {String|Db.Expression}
- * @type updatedTime
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 
 /**

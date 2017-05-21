@@ -14,73 +14,88 @@
  * @class Base_Users_Session
  * @extends Db_Row
  *
- * @property {string} $id
- * @property {string} $content
- * @property {string} $php
- * @property {string} $userId
- * @property {string} $deviceId
- * @property {integer} $timeout
- * @property {integer} $duration
- * @property {string} $platform
- * @property {string} $appId
- * @property {string} $version
- * @property {string} $formFactor
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.id] defaults to ""
+ * @param {string} [$fields.content] defaults to ""
+ * @param {string} [$fields.php] defaults to ""
+ * @param {string} [$fields.userId] defaults to null
+ * @param {string} [$fields.deviceId] defaults to ""
+ * @param {integer} [$fields.timeout] defaults to 0
+ * @param {integer} [$fields.duration] defaults to 0
+ * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.appId] defaults to null
+ * @param {string} [$fields.version] defaults to ""
+ * @param {string} [$fields.formFactor] defaults to null
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
  */
 abstract class Base_Users_Session extends Db_Row
 {
 	/**
 	 * @property $id
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $content
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $php
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $deviceId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $timeout
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $duration
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $platform
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $appId
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $version
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $formFactor
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default "0000-00-00 00:00:00"
 	 */
 	/**
 	 * The setUp() method is called the first time
