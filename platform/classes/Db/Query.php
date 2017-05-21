@@ -92,11 +92,14 @@ interface iDb_Query
 	 *  Do this only if the statement will be executed many times with
 	 *  different parameters. Basically you would use "->bind(...)" between 
 	 *  invocations of "->execute()".
+	 * @param {array|string} [$shards] You can pass a shard name here, or an array
+	 *  where the keys are shard names and the values are the query to execute.
+	 *  This will bypass the usual sharding algorithm.
 	 * @return {Db_Result}
 	 *  The Db_Result object containing the PDO statement that resulted
 	 *  from the query.
 	 */
-	function execute ($prepare_statement = false);
+	function execute ($prepare_statement = false, $shards = null);
 	
 	/**
 	 * Begins a transaction right before executing this query.
@@ -105,8 +108,9 @@ interface iDb_Query
 	 * if sharding is being used.
 	 * @method begin
 	 * @chainable
+	 * @param {string} [$lock_type] The type of lock in the transaction
 	 */
-	function begin();
+	function begin($lock_type = null);
 	
 	/**
 	 * Rolls back a transaction right before executing this query.
@@ -458,7 +462,7 @@ abstract class Db_Query extends Db_Expression
 	 *
 	 * @method shard
 	 * @param {array} [$upcoming=null] Temporary config to use in sharding. Used during shard split process only
-	 * @param {array} [$criteria=null] Rarely used unless testing what shards the query would be executed on. Overrides the sharding criteria for the query.
+	 * @param {array} [$criteria=null] Overrides the sharding criteria for the query. Rarely used unless testing what shards the query would be executed on. 
 	 * @return {array} Returns an array of ($shardName => $query) pairs, where $shardName
 	 *  can be the name of a shard, '' for just the main shard, or "*" to have the query run on all the shards.
 	 */

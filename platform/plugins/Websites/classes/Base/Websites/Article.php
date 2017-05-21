@@ -28,26 +28,31 @@ abstract class Base_Websites_Article extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who owns the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * local to fm server of publisherId
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * article author or the user to get in touch with about it
 	 */
 	/**
 	 * @property $article
 	 * @type string
 	 * @default ""
+	 * the html of the article
 	 */
 	/**
 	 * @property $getintouch
 	 * @type string
 	 * @default "{}"
+	 * JSON that can include emailSubject and classes
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -161,7 +166,7 @@ abstract class Base_Websites_Article extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -172,6 +177,7 @@ abstract class Base_Websites_Article extends Db_Row
 		$q->className = 'Websites_Article';
 		return $q;
 	}
+	
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -194,6 +200,35 @@ abstract class Base_Websites_Article extends Db_Row
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Websites_Article'))
 		);
+	}
+	
+	/**
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin($lockType = null)
+	{
+		$q = self::db()->rawQuery('')->begin($lockType);
+		$q->className = 'Websites_Article';
+		return $q;
+	}
+	
+	/**
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Websites_Article';
+		return $q;
 	}
 	
 	/**
@@ -491,7 +526,7 @@ return array (
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)

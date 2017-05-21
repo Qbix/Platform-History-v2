@@ -37,71 +37,85 @@ abstract class Base_Streams_Invite extends Db_Row
 	 * @property $token
 	 * @type string
 	 * @default ""
+	 * unique random token for the link, to embed in invitation URLs
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * id of user who is being invited to the stream
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who publishes the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the name of the stream to which the user is being invited
 	 */
 	/**
 	 * @property $invitingUserId
 	 * @type string
 	 * @default ""
+	 * id of the user who invited the person to the stream. This is publisherId unless user has adminLevel >= invite
 	 */
 	/**
 	 * @property $displayName
 	 * @type string
 	 * @default ""
+	 * display name, computed at invite time
 	 */
 	/**
 	 * @property $appUrl
 	 * @type string
 	 * @default ""
+	 * the application url where user is invited.
 	 */
 	/**
 	 * @property $readLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10='see', 20='content', 30='participants', 40='messages'
 	 */
 	/**
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate
 	 */
 	/**
 	 * @property $adminLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10='publish', 20='invite', 30='manage', 40='own'
 	 */
 	/**
 	 * @property $permissions
 	 * @type string
 	 * @default null
+	 * JSON array of permission names
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default "pending"
+	 * the state of the invite
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $expireTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -214,7 +228,7 @@ abstract class Base_Streams_Invite extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -225,6 +239,7 @@ abstract class Base_Streams_Invite extends Db_Row
 		$q->className = 'Streams_Invite';
 		return $q;
 	}
+	
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -247,6 +262,35 @@ abstract class Base_Streams_Invite extends Db_Row
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Invite'))
 		);
+	}
+	
+	/**
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin($lockType = null)
+	{
+		$q = self::db()->rawQuery('')->begin($lockType);
+		$q->className = 'Streams_Invite';
+		return $q;
+	}
+	
+	/**
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Streams_Invite';
+		return $q;
 	}
 	
 	/**
@@ -1010,7 +1054,7 @@ return array (
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)

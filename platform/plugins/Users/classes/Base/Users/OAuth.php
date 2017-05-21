@@ -31,41 +31,49 @@ abstract class Base_Users_OAuth extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * The user id of the logged in user
 	 */
 	/**
 	 * @property $client_id
 	 * @type string
 	 * @default ""
+	 * The user id of the app
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default ""
+	 * For client to protect against CSRF attacks
 	 */
 	/**
 	 * @property $scope
 	 * @type string
 	 * @default "user"
+	 * Space delimited set of names of resources you can access
 	 */
 	/**
 	 * @property $redirect_uri
 	 * @type string
 	 * @default ""
+	 * Where the client requested to redirect after creating this access token originally
 	 */
 	/**
 	 * @property $access_token
 	 * @type string
 	 * @default ""
+	 * Bearer token given to the client to access resources
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * When this row was created
 	 */
 	/**
 	 * @property $token_expires_seconds
 	 * @type integer
 	 * @default 0
+	 * How many seconds until token expires
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -179,7 +187,7 @@ abstract class Base_Users_OAuth extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -190,6 +198,7 @@ abstract class Base_Users_OAuth extends Db_Row
 		$q->className = 'Users_OAuth';
 		return $q;
 	}
+	
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -212,6 +221,35 @@ abstract class Base_Users_OAuth extends Db_Row
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_OAuth'))
 		);
+	}
+	
+	/**
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin($lockType = null)
+	{
+		$q = self::db()->rawQuery('')->begin($lockType);
+		$q->className = 'Users_OAuth';
+		return $q;
+	}
+	
+	/**
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Users_OAuth';
+		return $q;
 	}
 	
 	/**
@@ -666,7 +704,7 @@ return array (
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)

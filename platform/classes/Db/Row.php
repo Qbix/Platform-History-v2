@@ -2188,7 +2188,7 @@ class Db_Row implements Iterator
 	 *  whether the class of the Db_Row matches. It leaves things up to you.
 	 * @param {string} [$stripPrefix=null] If not empty, only copies the elements with the prefix, stripping it out.
 	 *  Useful for assigning parts of Db_Rows that came from joins, to individual table classes.
-	 * @param {boolean} [$markModified=null] If set, the "modified" status of all copied fields is set to this boolean.
+	 * @param {boolean|null} [$markModified=null] If set, the "modified" status of all copied fields is set to this boolean.
 	 * @param {boolean} [$suppressHooks=false] If true, assigns everything but does not fire the beforeSet and afterSet events.
 	 * @return {Db_Row} returns this object, for chaining
 	 */
