@@ -14,63 +14,76 @@
  * @class Base_Places_Zipcode
  * @extends Db_Row
  *
- * @property {string} $countryCode
- * @property {string} $zipcode
- * @property {string} $placeName
- * @property {string} $stateName
- * @property {string} $state
- * @property {string} $regionName
- * @property {string} $region
- * @property {string} $community
- * @property {float} $latitude
- * @property {float} $longitude
- * @property {integer} $accuracy
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.countryCode] defaults to ""
+ * @param {string} [$fields.zipcode] defaults to ""
+ * @param {string} [$fields.placeName] defaults to ""
+ * @param {string} [$fields.stateName] defaults to ""
+ * @param {string} [$fields.state] defaults to ""
+ * @param {string} [$fields.regionName] defaults to ""
+ * @param {string} [$fields.region] defaults to ""
+ * @param {string} [$fields.community] defaults to ""
+ * @param {float} [$fields.latitude] defaults to 0
+ * @param {float} [$fields.longitude] defaults to 0
+ * @param {integer} [$fields.accuracy] defaults to 0
  */
 abstract class Base_Places_Zipcode extends Db_Row
 {
 	/**
 	 * @property $countryCode
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $zipcode
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $placeName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $stateName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $regionName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $region
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $community
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $latitude
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $longitude
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $accuracy
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * The setUp() method is called the first time

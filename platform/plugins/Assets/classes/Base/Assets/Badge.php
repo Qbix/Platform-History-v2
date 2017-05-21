@@ -14,38 +14,46 @@
  * @class Base_Assets_Badge
  * @extends Db_Row
  *
- * @property {string} $app
- * @property {string} $name
- * @property {string} $title
- * @property {string} $pic_small
- * @property {string} $pic_big
- * @property {integer} $points
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.app] defaults to ""
+ * @param {string} [$fields.name] defaults to ""
+ * @param {string} [$fields.title] defaults to ""
+ * @param {string} [$fields.pic_small] defaults to ""
+ * @param {string} [$fields.pic_big] defaults to ""
+ * @param {integer} [$fields.points] defaults to 0
  */
 abstract class Base_Assets_Badge extends Db_Row
 {
 	/**
 	 * @property $app
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $name
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $title
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $pic_small
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $pic_big
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $points
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * The setUp() method is called the first time

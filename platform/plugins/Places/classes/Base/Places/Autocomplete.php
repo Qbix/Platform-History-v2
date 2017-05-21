@@ -14,48 +14,58 @@
  * @class Base_Places_Autocomplete
  * @extends Db_Row
  *
- * @property {string} $query
- * @property {string} $types
- * @property {float} $latitude
- * @property {float} $longitude
- * @property {float} $meters
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $results
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.query] defaults to ""
+ * @param {string} [$fields.types] defaults to ""
+ * @param {float} [$fields.latitude] defaults to 0
+ * @param {float} [$fields.longitude] defaults to 0
+ * @param {float} [$fields.meters] defaults to 0
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.results] defaults to ""
  */
 abstract class Base_Places_Autocomplete extends Db_Row
 {
 	/**
 	 * @property $query
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $types
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $latitude
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $longitude
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $meters
-	 * @type {float}
+	 * @type float
+	 * @default 0
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $results
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

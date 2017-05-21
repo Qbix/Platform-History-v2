@@ -20,7 +20,13 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.app] defaults to ""
+ * @param {string} [$fields.name] defaults to ""
+ * @param {string} [$fields.title] defaults to ""
+ * @param {string} [$fields.pic_small] defaults to ""
+ * @param {string} [$fields.pic_big] defaults to ""
+ * @param {integer} [$fields.points] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,28 +35,34 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type app
+ * @property app
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type name
+ * @property name
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type title
+ * @property title
+ * @type String
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type pic_small
+ * @property pic_small
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type pic_big
+ * @property pic_big
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {integer}
- * @type points
+ * @property points
+ * @type Integer
+ * @default 0
  */
 
 /**

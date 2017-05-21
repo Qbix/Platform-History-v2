@@ -20,7 +20,10 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.payments] defaults to "stripe"
+ * @param {string} [$fields.customerId] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,16 +32,19 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type userId
+ * @property userId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type payments
+ * @property payments
+ * @type String
+ * @default "stripe"
  */
 /**
- * @property {String|Buffer}
- * @type customerId
+ * @property customerId
+ * @type String|Buffer
+ * @default ""
  */
 
 /**
