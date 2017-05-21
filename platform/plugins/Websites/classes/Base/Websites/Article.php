@@ -14,33 +14,40 @@
  * @class Base_Websites_Article
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {string} $userId
- * @property {string} $article
- * @property {string} $getintouch
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.article] defaults to ""
+ * @param {string} [$fields.getintouch] defaults to "{}"
  */
 abstract class Base_Websites_Article extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $article
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $getintouch
-	 * @type {string}
+	 * @type string
+	 * @default "{}"
 	 */
 	/**
 	 * The setUp() method is called the first time
