@@ -30,12 +30,12 @@ class Users_Quota extends Base_Users_Quota
 	 * For APIs, you might call this once for an app user, and once for a person user.
 	 * @param {string} $userId the user that will be using the quota
 	 * @param {string} $resourceId pass an empty string for global resource check, or for example a string beginning with Users::communityId()
-	 * @param {string|array} $name the name of the quota, or you can pass the names of several quotas to check
-	 * @param {boolean} [$throwIfQuota=false] pass true to throw an exception if one or more of the quotas have been reached
+	 * @param {string} $name the name of the quota to check
+	 * @param {boolean} [$throwIfQuota=false] pass true to throw an exception if one or more of the quotas have been exceeded
 	 * @param {integer} [$units=1] how many units of the quota you expect the user will use
 	 * @param {array} [$privileges=array()] any strings naming privileges the user has with respect to the resourceId that might increase the max of the quota
 	 * @param {boolean} [$begin=true] whether to begin a database transaction, in which case you must call $quota->used($used) to commit the transaction.
-	 * @return {Users_Quota} this object contains information on which quotas, if any were reached. If $throwIfQuota is true, then none were reached, but you will probably want to call ->used($units) on this object.
+	 * @return {Users_Quota|array} if no quotas were exceeded, this object is returned and you can call ->used($units) on it later. But if some quotas were exceeded, the function returns the array of corresponding durations, sorted by smallest first.
 	 */
 	static function check(
 		$userId, 
@@ -46,27 +46,27 @@ class Users_Quota extends Base_Users_Quota
 		$privileges = array(),
 		$begin = true)
 	{
-		if (is_string($name)) {
-			$name = array($name);
-		}
+		$quota = new Users_Quota(compact('userId', 'resourceId', 'name'));
 		$durations = array();
 		$quotas = Q_Config::get('Users', 'quotas', array());
-		foreach ($name as $n) {
-			if (!isset($quotas[$n])) {
+		if (!isset($quotas[$name])) {
+			$quota->set('begun', false);
+			return $quota;
+		}
+		$q = $quotas[$name];
+		if (!is_array($q)) {
+			throw new Q_Exception_BadValue(array(
+				'internal' => "Users/quotas/$name",
+				'problem' => "must be an array"
+			));
+		}
+		$title = isset($q['title']) ? $q['title'] : $n;
+		foreach ($q as $duration => $info) {
+			if (!is_numeric($duration)) {
 				continue;
 			}
-			$q = $quotas[$n];
-			if (!is_array($q)) {
-				throw new Q_Exception_BadValue(array(
-					'internal' => "Users/quotas/$n",
-					'problem' => "must be an array"
-				));
-			}
-			$title = isset($q['title']) ? $q['title'] : $n;
-			foreach ($q as $duration => $max) {
-				if (!in_array($duration, $durations)) {
-					$durations[] = (int)$duration;
-				}
+			if (!in_array($duration, $durations)) {
+				$durations[] = (int)$duration;
 			}
 		}
 		if (empty($durations)) {
@@ -78,9 +78,9 @@ class Users_Quota extends Base_Users_Quota
 		$time = Users_Quota::db()->getCurrentTimestamp();
 		foreach ($durations as $duration) {
 			$startTime = date("Y-m-d h:i:s", $time - $duration);
-			$condition .= "IF (insertedTime >= $startTime, $duration, $condition)";
+			$condition = "IF (insertedTime >= '$startTime', $duration, $condition)";
 		}
-		$query = Users_Quota::select('SUM(1) si')->where(array(
+		$query = Users_Quota::select("$condition c, SUM(1) si")->where(array(
 			'userId' => $userId,
 			'resourceId' => $resourceId,
 			'insertedTime' => new Db_Range($time - $largest, true, false, null)
@@ -89,15 +89,63 @@ class Users_Quota extends Base_Users_Quota
 		if ($begin) {
 			$query = $query->begin();
 		}
-		$results = $query->fetchAll(PDO::FETCH_ASSOC);
-		$quota = new Users_Quota(compact('userId', 'resourceId', 'name'));
+		$shards = array_keys($queries);
 		$quota->set(array(
 			'begun' => $begin,
-			'queries' => $queries
+			'shards' => $shards
 		));
-		// todo: check the quotas
-		// if any quotas were reached, then rollback and possibly throw exception
-		// otherwise, return the Users_Quota object.
+		$results = $query->fetchAll(PDO::FETCH_ASSOC);
+		if (!isset($privileges)) {
+			$privileges = array();
+		}
+		$exceeded = array();
+		sort($durations);
+		foreach ($durations as $d) {
+			if (is_array($q[$d])) {
+				if (!isset($q[$d][''])) {
+					throw new Q_Exception_MissingConfig(array(
+						'fieldpath' => "Users/quotas/$name/$d/" . '""'
+					));
+				}
+				$max = $q[$d][''];
+				foreach ($q[$d] as $k => $v) {
+					if (!is_numeric($v)) {
+						throw new Q_Exception_BadValue(array(
+							'internal' => "Users/quotas/$name/$d/$k",
+							'problem' => "must be an integer"
+						));
+					}
+					if (in_array($k, $privileges)) {
+						$max = max($max, $v);
+					}
+				}
+			} else {
+				$max = $q[$d];
+				if (!is_numeric($max)) {
+					throw new Q_Exception_BadValue(array(
+						'internal' => "Users/quotas/$name/$d",
+						'problem' => "must be an integer"
+					));
+				}
+			}
+			$si = 0;
+			foreach ($results as $r) {
+				if ($r['c'] <= $duration) {
+					$si += $r['si'];
+				}
+			}
+			if ($si + $units > $max) {
+				$exceeded[] = $d;
+			}
+		}
+		if ($exceeded) {
+			Users_Quota::rollback()->execute(false, $shards);
+			if ($throwIfQuota) {
+				throw new Users_Exception_Quota(compact('title'));
+			}
+			return $exceeded;
+		}
+		return $quota;
 	}
 	
 	/**
@@ -112,15 +160,11 @@ class Users_Quota extends Base_Users_Quota
 	 */
 	function used($units = 1)
 	{
-		// commit transaction here
-		// todo: actually save the row
-		// todo: implement static ::commit() on Db_Mysql
-		// and also on all autogenerated classes
 		$this->units = $units;
 		$this->save();
 		if ($this->get('begun')) {
-			$shards = array_keys($this->get('queries'));
-			Users_Quota::commit($shards);
+			$shards = array_keys($this->get('shards'));
+			Users_Quota::commit()->execute(false, $shards);
 		}
 	}
 

@@ -592,7 +592,6 @@ abstract class Db_Query extends Db_Expression
 	{
 		// $index['partition'] shall contain strings "XXXXXX.YYYYYY.ZZZZZZ" where each point has full length of the hash
 		$partition = array();
-		$keys = array_keys($index['fields']);
 		$last_point = null;
 		foreach (array_keys(self::$mapping) as $i => $point) {
 			$partition[$i] = explode('.', $point);
@@ -601,10 +600,11 @@ abstract class Db_Query extends Db_Expression
 			}
 			$last_point = $point;
 		}
-		return array_fill_keys(array_map(
+		$keys = array_map(
 			array($this, "map_shard"), 
 			self::slice_partitions($partition, 0, $hashed)
-		), $this);
+		);
+		return array_fill_keys($keys, $this);
 	}
 
 	/**
@@ -708,7 +708,7 @@ abstract class Db_Query extends Db_Expression
 	 * @return {string}
 	 */
 	static private function map_shard($a) {
-		return self::$mapping[join('.', $a)];
+		return self::$mapping[implode('.', $a)];
 	}
 
 	/**
