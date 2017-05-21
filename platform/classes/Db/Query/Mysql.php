@@ -695,7 +695,11 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 						(!empty($this->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
 
 					$utable = $upcoming['table'];
-					$sharded = $query->shard($upcoming['indexes'][$utable]);
+					if (isset($shards)) {
+						$queries = is_string($shards) ? array($shards => $this) : $shards;
+					} else {
+						$sharded = $query->shard($upcoming['indexes'][$utable]);
+					}
 					$upcoming_shards = array_keys($sharded);
 
 					$logServer = Q_Config::get('Db', 'internal', 'sharding', 'logServer', null);
