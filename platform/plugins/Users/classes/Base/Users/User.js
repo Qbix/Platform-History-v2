@@ -20,7 +20,26 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.id] defaults to "0"
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.sessionId] defaults to null
+ * @param {integer} [$fields.sessionCount] defaults to 0
+ * @param {integer} [$fields.fb_uid] defaults to 0
+ * @param {integer} [$fields.tw_uid] defaults to 0
+ * @param {string} [$fields.g_uid] defaults to null
+ * @param {string} [$fields.y_uid] defaults to null
+ * @param {string} [$fields.passphraseHash] defaults to null
+ * @param {string} [$fields.emailAddress] defaults to null
+ * @param {string} [$fields.mobileNumber] defaults to null
+ * @param {string} [$fields.emailAddressPending] defaults to ""
+ * @param {string} [$fields.mobileNumberPending] defaults to ""
+ * @param {string} [$fields.signedUpWith] defaults to ""
+ * @param {string} [$fields.username] defaults to ""
+ * @param {string} [$fields.icon] defaults to ""
+ * @param {string} [$fields.url] defaults to null
+ * @param {string} [$fields.pincodeHash] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,80 +48,99 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type id
+ * @property id
+ * @type String|Buffer
+ * @default "0"
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String|Db.Expression}
- * @type updatedTime
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type sessionId
+ * @property sessionId
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {integer}
- * @type sessionCount
+ * @property sessionCount
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {integer}
- * @type fb_uid
+ * @property fb_uid
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {integer}
- * @type tw_uid
+ * @property tw_uid
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {String|Buffer}
- * @type g_uid
+ * @property g_uid
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type y_uid
+ * @property y_uid
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {String}
- * @type passphraseHash
+ * @property passphraseHash
+ * @type String
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type emailAddress
+ * @property emailAddress
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type mobileNumber
+ * @property mobileNumber
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type emailAddressPending
+ * @property emailAddressPending
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type mobileNumberPending
+ * @property mobileNumberPending
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type signedUpWith
+ * @property signedUpWith
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type username
+ * @property username
+ * @type String
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type icon
+ * @property icon
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type url
+ * @property url
+ * @type String|Buffer
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type pincodeHash
+ * @property pincodeHash
+ * @type String|Buffer
+ * @default null
  */
 
 /**

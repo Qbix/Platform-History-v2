@@ -14,63 +14,76 @@
  * @class Base_Streams_Request
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {integer} $readLevel
- * @property {integer} $writeLevel
- * @property {integer} $adminLevel
- * @property {string} $permissions
- * @property {string} $state
- * @property {string} $actions
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $expireTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {integer} [$fields.readLevel] defaults to 0
+ * @param {integer} [$fields.writeLevel] defaults to 0
+ * @param {integer} [$fields.adminLevel] defaults to 0
+ * @param {string} [$fields.permissions] defaults to null
+ * @param {string} [$fields.state] defaults to "pending"
+ * @param {string} [$fields.actions] defaults to null
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.expireTime] defaults to null
  */
 abstract class Base_Streams_Request extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $readLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $writeLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $adminLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $permissions
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default "pending"
 	 */
 	/**
 	 * @property $actions
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $expireTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time

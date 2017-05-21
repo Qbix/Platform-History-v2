@@ -14,53 +14,64 @@
  * @class Base_Streams_Rule
  * @extends Db_Row
  *
- * @property {string} $ofUserId
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {integer} $ordinal
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $readyTime
- * @property {string} $filter
- * @property {string} $deliver
- * @property {float} $relevance
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.ofUserId] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {integer} [$fields.ordinal] defaults to 0
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.readyTime] defaults to null
+ * @param {string} [$fields.filter] defaults to ""
+ * @param {string} [$fields.deliver] defaults to ""
+ * @param {float} [$fields.relevance] defaults to 1
  */
 abstract class Base_Streams_Rule extends Db_Row
 {
 	/**
 	 * @property $ofUserId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $ordinal
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $readyTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $filter
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $deliver
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $relevance
-	 * @type {float}
+	 * @type float
+	 * @default 1
 	 */
 	/**
 	 * The setUp() method is called the first time

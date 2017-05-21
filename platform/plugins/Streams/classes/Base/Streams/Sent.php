@@ -14,53 +14,64 @@
  * @class Base_Streams_Sent
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $sentTime
- * @property {string} $byUserId
- * @property {string} $comment
- * @property {string} $instructions
- * @property {string} $chatPublisherId
- * @property {string} $chatStreamName
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.sentTime] defaults to null
+ * @param {string} [$fields.byUserId] defaults to ""
+ * @param {string} [$fields.comment] defaults to ""
+ * @param {string} [$fields.instructions] defaults to null
+ * @param {string} [$fields.chatPublisherId] defaults to ""
+ * @param {string} [$fields.chatStreamName] defaults to null
  */
 abstract class Base_Streams_Sent extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $sentTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $byUserId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $comment
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $instructions
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $chatPublisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $chatStreamName
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time

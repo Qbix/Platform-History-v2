@@ -14,28 +14,34 @@
  * @class Base_Streams_Total
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {string} $messageType
- * @property {integer} $messageCount
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.messageType] defaults to ""
+ * @param {integer} [$fields.messageCount] defaults to 0
  */
 abstract class Base_Streams_Total extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $messageType
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $messageCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * The setUp() method is called the first time

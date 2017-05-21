@@ -14,38 +14,46 @@
  * @class Base_Streams_Invited
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $token
- * @property {string} $state
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string|Db_Expression} $expireTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.token] defaults to ""
+ * @param {string} [$fields.state] defaults to "pending"
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {string|Db_Expression} [$fields.expireTime] defaults to null
  */
 abstract class Base_Streams_Invited extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $token
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default "pending"
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default "0000-00-00 00:00:00"
 	 */
 	/**
 	 * @property $expireTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time

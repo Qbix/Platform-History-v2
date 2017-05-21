@@ -20,7 +20,15 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.toPublisherId] defaults to ""
+ * @param {string} [$fields.toStreamName] defaults to ""
+ * @param {string} [$fields.type] defaults to ""
+ * @param {string} [$fields.fromPublisherId] defaults to ""
+ * @param {string} [$fields.fromStreamName] defaults to ""
+ * @param {float} [$fields.weight] defaults to 1
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string} [$fields.extra] defaults to "{}"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,36 +37,44 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type toPublisherId
+ * @property toPublisherId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type toStreamName
+ * @property toStreamName
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type type
+ * @property type
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type fromPublisherId
+ * @property fromPublisherId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type fromStreamName
+ * @property fromStreamName
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {number}
- * @type weight
+ * @property weight
+ * @type Number
+ * @default 1
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String}
- * @type extra
+ * @property extra
+ * @type String
+ * @default "{}"
  */
 
 /**

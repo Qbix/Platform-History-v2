@@ -14,48 +14,58 @@
  * @class Base_Users_OAuth
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $client_id
- * @property {string} $state
- * @property {string} $scope
- * @property {string} $redirect_uri
- * @property {string} $access_token
- * @property {string|Db_Expression} $insertedTime
- * @property {integer} $token_expires_seconds
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.client_id] defaults to ""
+ * @param {string} [$fields.state] defaults to ""
+ * @param {string} [$fields.scope] defaults to "user"
+ * @param {string} [$fields.redirect_uri] defaults to ""
+ * @param {string} [$fields.access_token] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {integer} [$fields.token_expires_seconds] defaults to 0
  */
 abstract class Base_Users_OAuth extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $client_id
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $scope
-	 * @type {string}
+	 * @type string
+	 * @default "user"
 	 */
 	/**
 	 * @property $redirect_uri
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $access_token
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $token_expires_seconds
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -20,7 +20,16 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.ofUserId] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {integer} [$fields.ordinal] defaults to 0
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.readyTime] defaults to null
+ * @param {string} [$fields.filter] defaults to ""
+ * @param {string} [$fields.deliver] defaults to ""
+ * @param {float} [$fields.relevance] defaults to 1
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,40 +38,49 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type ofUserId
+ * @property ofUserId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type publisherId
+ * @property publisherId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type streamName
+ * @property streamName
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {integer}
- * @type ordinal
+ * @property ordinal
+ * @type Integer
+ * @default 0
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String|Db.Expression}
- * @type readyTime
+ * @property readyTime
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String}
- * @type filter
+ * @property filter
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type deliver
+ * @property deliver
+ * @type String
+ * @default ""
  */
 /**
- * @property {number}
- * @type relevance
+ * @property relevance
+ * @type Number
+ * @default 1
  */
 
 /**

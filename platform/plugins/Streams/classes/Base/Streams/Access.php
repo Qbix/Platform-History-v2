@@ -14,63 +14,76 @@
  * @class Base_Streams_Access
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {string} $ofUserId
- * @property {string} $ofContactLabel
- * @property {string} $grantedByUserId
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {integer} $readLevel
- * @property {integer} $writeLevel
- * @property {integer} $adminLevel
- * @property {string} $permissions
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.ofUserId] defaults to ""
+ * @param {string} [$fields.ofContactLabel] defaults to ""
+ * @param {string} [$fields.grantedByUserId] defaults to null
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {integer} [$fields.readLevel] defaults to 0
+ * @param {integer} [$fields.writeLevel] defaults to 0
+ * @param {integer} [$fields.adminLevel] defaults to 0
+ * @param {string} [$fields.permissions] defaults to null
  */
 abstract class Base_Streams_Access extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $ofUserId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $ofContactLabel
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $grantedByUserId
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $readLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $writeLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $adminLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $permissions
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time
