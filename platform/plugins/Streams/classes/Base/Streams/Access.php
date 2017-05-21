@@ -276,6 +276,21 @@ abstract class Base_Streams_Access extends Db_Row
 	}
 	
 	/**
+	 * Create raw query with rollback clause
+	 * @method rollback
+	 * @static
+	 * @param {array} $criteria Can be used to target the rollback to some shards.
+	 *  Otherwise you'll have to specify shards yourself when calling execute().
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function rollback()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Streams_Access';
+		return $q;
+	}
+	
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_publisherId
