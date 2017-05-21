@@ -37,7 +37,7 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
- * 
+ * this can be a person, app or organization
  */
 /**
  * @property resourceId
@@ -207,9 +207,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"userId",
-		"resourceId",
-		"name"
+		
 	];
 };
 
@@ -263,7 +261,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"MUL",null];
 };
 
 /**
@@ -301,7 +299,7 @@ Base.prototype.maxSize_resourceId = function () {
 	 */
 Base.column_resourceId = function () {
 
-return [["varbinary","255","",false],false,"PRI",""];
+return [["varbinary","255","",false],false,"",""];
 };
 
 /**
@@ -339,7 +337,7 @@ Base.prototype.maxSize_name = function () {
 	 */
 Base.column_name = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -400,27 +398,6 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 Base.column_insertedTime = function () {
 
 return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
-};
-
-/**
- * Check if mandatory fields are set and updates 'magic fields' with appropriate values
- * @method beforeSave
- * @param {Object} value The object of fields
- * @param {Function} callback Call this callback if you return null
- * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
- * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
- */
-Base.prototype.beforeSave = function (value) {
-	var fields = ['userId','name'], i;
-	if (!this._retrieved) {
-		var table = this.table();
-		for (i=0; i<fields.length; i++) {
-			if (this.fields[fields[i]] === undefined) {
-				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-			}
-		}
-	}
-	return value;
 };
 
 module.exports = Base;
