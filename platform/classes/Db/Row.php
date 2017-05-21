@@ -2057,7 +2057,7 @@ class Db_Row implements Iterator
 		} else {
 			if (!empty($modifyQuery['begin'])
 			and !empty($modifyQuery['rollbackIfMissing'])) {
-				$this->rollback();
+				$this->doRollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
 				try {
@@ -2134,7 +2134,7 @@ class Db_Row implements Iterator
 			return $this;
 		} else {
 			if (!empty($modifyQuery['begin']) and !empty($modifyQuery['rollbackIfMissing'])) {
-				$this->rollback();
+				$this->doRollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
 				throw new Q_Exception_MissingRow(array(
@@ -2167,9 +2167,11 @@ class Db_Row implements Iterator
 	}
 	
 	/**
-	 * @method rollback
+	 * Rolls back the latest transaction that was started with
+	 * code that looks like $query->begin()->execute().
+	 * @method doRollback
 	 */
-	function rollback()
+	function doRollback()
 	{
 		$class_name = get_class($this);
 		$db = $this->getDb();
