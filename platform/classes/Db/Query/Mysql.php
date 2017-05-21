@@ -503,7 +503,8 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * Do this only if the statement will be executed many times with
 	 * different parameters. Basically you would use ->bind(...) between
 	 * invocations of ->execute().
-	 * @param {array|string} [$shards] You can pass a shard name here, or an array
+	 * @param {array|string} [$shards] You can pass a shard name here, or a
+	 *  numerically indexed array of shard names, or an associative array
 	 *  where the keys are shard names and the values are the query to execute.
 	 *  This will bypass the usual sharding algorithm.
 	 * @return {Db_Result} The Db_Result object containing the PDO statement that resulted from the query.
@@ -562,7 +563,10 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 		$sql_template = $this->getSQL(null, true);
 
 		if (isset($shards)) {
-			$queries = is_string($shards) ? array($shards => $this) : $shards;
+			if (is_string($shards)) {
+				$shards = array($shards);
+			}
+			$queries = array_fill_keys($shards, $this);
 		} else {
 			$queries = $this->shard();
 		}
@@ -695,7 +699,11 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 						(!empty($this->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
 
 					$utable = $upcoming['table'];
-					$sharded = $query->shard($upcoming['indexes'][$utable]);
+					if (isset($shards)) {
+						$queries = is_string($shards) ? array($shards => $this) : $shards;
+					} else {
+						$sharded = $query->shard($upcoming['indexes'][$utable]);
+					}
 					$upcoming_shards = array_keys($sharded);
 
 					$logServer = Q_Config::get('Db', 'internal', 'sharding', 'logServer', null);
