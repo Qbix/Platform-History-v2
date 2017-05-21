@@ -1584,7 +1584,7 @@ EOT;
 			$class_name_base = Db::generateTableClassName($table_name_base);
 		}
 		$class_name = ucfirst($classname_prefix) . $class_name_base;
-		$table_cols = $this->rawQuery("SHOW COLUMNS FROM $table_name")->execute()->fetchAll(PDO::FETCH_ASSOC);
+		$table_cols = $this->rawQuery("SHOW FULL COLUMNS FROM $table_name")->execute()->fetchAll(PDO::FETCH_ASSOC);
 		$table_status = $this->rawQuery("SHOW TABLE STATUS WHERE Name = '$table_name'")->execute()->fetchAll(PDO::FETCH_COLUMN, 17);
 		$table_comment = (!empty($table_status[0])) ? " * <br/>{$table_status[0]}\n" : '';
 		// Calculate primary key
@@ -1605,6 +1605,8 @@ EOT;
 		$js_properties = array();
 		$required_field_names = array();
 		$magic_field_names = array();
+		$defaults = array();
+		$comments = array();
 		foreach ($table_cols as $table_col) {
 			$is_magic_field = null;
 			$field_name = $table_col['Field'];
@@ -1612,6 +1614,7 @@ EOT;
 			$field_null = $table_col['Null'] == 'YES' ? true : false;
 			$field_nulls[] = $field_null;
 			$field_default = $table_col['Default'];
+			$comments[] = $table_col['Comment'];
 			$field_name_safe = preg_replace('/[^0-9a-zA-Z\_]/', '_', $field_name);
 			$auto_inc = (strpos($table_col['Extra'], 'auto_increment') !== false);
 			$type = $table_col['Type'];
@@ -2295,11 +2298,13 @@ EOT;
 		foreach ($properties as $k => $v) {
 			$tmp = explode(' ', $v);
 			$default = $defaults[$k];
+			$comment = str_replace('*/', '**', $comments[$k]);
 			$properties[$k] = <<<EOT
 	$dc
 	 * @property \${$tmp[1]}
 	 * @type $tmp[0]
 	 * @default $default
+	 * $comment
 	 */
 EOT;
 			$required = !$field_nulls[$k] && $default == '"null"';
@@ -2310,11 +2315,13 @@ EOT;
 		foreach ($js_properties as $k => $v) {
 			$tmp = explode(' ', $v);
 			$default = $defaults[$k];
+			$comment = str_replace('*/', '**', $comments[$k]);
 			$js_properties[$k] = <<<EOT
 $dc
  * @property $tmp[1]
  * @type $tmp[0]
  * @default $default
+ * $comment
  */
 EOT;
 			$required = !$field_nulls[$k] && $default == '"null"';

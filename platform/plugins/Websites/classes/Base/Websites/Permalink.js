@@ -36,21 +36,25 @@ Q.mixin(Base, Row);
  * @property uri
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property url
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 
 /**

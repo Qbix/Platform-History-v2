@@ -37,71 +37,85 @@ abstract class Base_Streams_Invite extends Db_Row
 	 * @property $token
 	 * @type string
 	 * @default ""
+	 * unique random token for the link, to embed in invitation URLs
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * id of user who is being invited to the stream
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who publishes the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the name of the stream to which the user is being invited
 	 */
 	/**
 	 * @property $invitingUserId
 	 * @type string
 	 * @default ""
+	 * id of the user who invited the person to the stream. This is publisherId unless user has adminLevel >= invite
 	 */
 	/**
 	 * @property $displayName
 	 * @type string
 	 * @default ""
+	 * display name, computed at invite time
 	 */
 	/**
 	 * @property $appUrl
 	 * @type string
 	 * @default ""
+	 * the application url where user is invited.
 	 */
 	/**
 	 * @property $readLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10='see', 20='content', 30='participants', 40='messages'
 	 */
 	/**
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate
 	 */
 	/**
 	 * @property $adminLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10='publish', 20='invite', 30='manage', 40='own'
 	 */
 	/**
 	 * @property $permissions
 	 * @type string
 	 * @default null
+	 * JSON array of permission names
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default "pending"
+	 * the state of the invite
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $expireTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

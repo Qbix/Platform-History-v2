@@ -27,21 +27,25 @@ abstract class Base_Assets_Leader extends Db_Row
 	 * @property $app
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $day
 	 * @type string|Db_Expression
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $points
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

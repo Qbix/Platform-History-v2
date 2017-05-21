@@ -32,46 +32,55 @@ abstract class Base_Streams_Notification extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * the user to notify
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * the owner of the stream causing the notification
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the stream causing the notification
 	 */
 	/**
 	 * @property $messageOrdinal
 	 * @type integer
 	 * @default 0
+	 * the ordinal of the message being notified about
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $type
 	 * @type string
 	 * @default null
+	 * the type of message
 	 */
 	/**
 	 * @property $viewedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * saved on shard of userId
 	 */
 	/**
 	 * @property $readTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * saved on shard of userId
 	 */
 	/**
 	 * @property $comment
 	 * @type string
 	 * @default null
+	 * optional human-readable comment to display along with notification
 	 */
 	/**
 	 * The setUp() method is called the first time

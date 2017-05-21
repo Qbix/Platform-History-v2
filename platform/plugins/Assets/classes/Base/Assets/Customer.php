@@ -26,16 +26,19 @@ abstract class Base_Assets_Customer extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $payments
 	 * @type string
 	 * @default "stripe"
+	 * the payment processor for the customer
 	 */
 	/**
 	 * @property $customerId
 	 * @type string
 	 * @default ""
+	 * the customer id in the payments processor
 	 */
 	/**
 	 * The setUp() method is called the first time

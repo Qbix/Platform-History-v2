@@ -38,31 +38,37 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property forType
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property forId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property value
  * @type Number
  * @default 0
+ * these values can be averaged
  */
 /**
  * @property weight
  * @type Number
  * @default 1
+ * multiplied by value for weighted average
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 
 /**

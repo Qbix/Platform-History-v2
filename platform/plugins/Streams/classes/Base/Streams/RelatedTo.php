@@ -31,41 +31,49 @@ abstract class Base_Streams_RelatedTo extends Db_Row
 	 * @property $toPublisherId
 	 * @type string
 	 * @default ""
+	 * publisherId of category
 	 */
 	/**
 	 * @property $toStreamName
 	 * @type string
 	 * @default ""
+	 * name of category
 	 */
 	/**
 	 * @property $type
 	 * @type string
 	 * @default ""
+	 * The type of the relation. Can be empty.
 	 */
 	/**
 	 * @property $fromPublisherId
 	 * @type string
 	 * @default ""
+	 * publisherId of member
 	 */
 	/**
 	 * @property $fromStreamName
 	 * @type string
 	 * @default ""
+	 * name of member
 	 */
 	/**
 	 * @property $weight
 	 * @type float
 	 * @default 1
+	 * used for sorting
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $extra
 	 * @type string
 	 * @default "{}"
+	 * JSON containing extra information
 	 */
 	/**
 	 * The setUp() method is called the first time

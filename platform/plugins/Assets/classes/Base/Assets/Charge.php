@@ -31,41 +31,49 @@ abstract class Base_Assets_Charge extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * publisherId of the stream regarding which the charge was made
 	 */
 	/**
 	 * @property $id
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * name of the stream regarding which the charge was made
 	 */
 	/**
 	 * @property $description
 	 * @type string
 	 * @default ""
+	 * human-readable description of the charge
 	 */
 	/**
 	 * @property $attributes
 	 * @type string
 	 * @default ""
+	 * additional information for the charge in JSON format
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default "0000-00-00 00:00:00"
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

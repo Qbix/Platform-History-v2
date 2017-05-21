@@ -37,26 +37,31 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user who owns the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * local to fm server of publisherId
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * article author or the user to get in touch with about it
  */
 /**
  * @property article
  * @type String
  * @default ""
+ * the html of the article
  */
 /**
  * @property getintouch
  * @type String
  * @default "{}"
+ * JSON that can include emailSubject and classes
  */
 
 /**

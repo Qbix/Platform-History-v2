@@ -24,6 +24,20 @@ class Users_Quota extends Base_Users_Quota
 		// INSERT YOUR CODE HERE
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
+	
+	/**
+	 * Check whether the given user can use some more units of the quota
+	 */
+	static function check(
+		$userId, 
+		$resourceId, 
+		$name, 
+		$throwIfQuota, 
+		$used = 1, 
+		$privileges = array())
+	{
+		
+	}
 
 	/*
 	 * Add any Users_Quota methods here, whether public or not

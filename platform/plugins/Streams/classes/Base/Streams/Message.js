@@ -43,56 +43,67 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user that publishes the stream to place the message on
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * the stream to place the message on
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property sentTime
  * @type String|Db.Expression
  * @default null
+ * time on shard of byUserId
  */
 /**
  * @property byUserId
  * @type String|Buffer
  * @default ""
+ * id of the user sending message.
  */
 /**
  * @property byClientId
  * @type String|Buffer
  * @default ""
+ * id of the Streams client sending message.
  */
 /**
  * @property type
  * @type String|Buffer
  * @default ""
+ * the type of the message, such as text or video
  */
 /**
  * @property content
  * @type String
  * @default ""
+ * short human-readable content, like twitter and its 140 characters
  */
 /**
  * @property instructions
  * @type String
  * @default ""
+ * instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding
  */
 /**
  * @property weight
  * @type Number
  * @default 1
+ * this may depend on the reputation of user_by relative to the stream
  */
 /**
  * @property ordinal
  * @type Integer
  * @default 0
+ * Count messages posted to the stream
  */
 
 /**

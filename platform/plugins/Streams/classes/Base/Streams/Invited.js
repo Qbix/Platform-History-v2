@@ -38,31 +38,37 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * id of user who is being invited to the stream
  */
 /**
  * @property token
  * @type String|Buffer
  * @default ""
+ * unique random token for the link, to embed in invitation URLs
  */
 /**
  * @property state
  * @type String
  * @default "pending"
+ * the state of the invite
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default "0000-00-00 00:00:00"
+ * 
  */
 /**
  * @property expireTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 
 /**

@@ -27,21 +27,25 @@ abstract class Base_Users_Link extends Db_Row
 	 * @property $identifier
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $extraInfo
 	 * @type string
 	 * @default ""
+	 * json possibly including "labels" array, "firstName", "lastName"
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

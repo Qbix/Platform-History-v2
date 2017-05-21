@@ -29,31 +29,37 @@ abstract class Base_Streams_Invited extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * id of user who is being invited to the stream
 	 */
 	/**
 	 * @property $token
 	 * @type string
 	 * @default ""
+	 * unique random token for the link, to embed in invitation URLs
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default "pending"
+	 * the state of the invite
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default "0000-00-00 00:00:00"
+	 * 
 	 */
 	/**
 	 * @property $expireTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

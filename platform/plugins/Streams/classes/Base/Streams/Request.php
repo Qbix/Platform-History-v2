@@ -34,56 +34,67 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * id of user who is requesting access to the stream
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who publishes the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * local to shard of publisherId
 	 */
 	/**
 	 * @property $readLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10='see', 20='content', 30='participants', 40='messages'
 	 */
 	/**
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate
 	 */
 	/**
 	 * @property $adminLevel
 	 * @type integer
 	 * @default 0
+	 * 0=none, 10='publish', 20='invite', 30='manage', 40='own'
 	 */
 	/**
 	 * @property $permissions
 	 * @type string
 	 * @default null
+	 * JSON array of permission names
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default "pending"
+	 * the state of the request
 	 */
 	/**
 	 * @property $actions
 	 * @type string
 	 * @default null
+	 * JSON array of strings naming actions to take after request is granted, e.g. "Streams/subscribe"
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $expireTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

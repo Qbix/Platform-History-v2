@@ -42,96 +42,115 @@ abstract class Base_Users_User extends Db_Row
 	 * @property $id
 	 * @type string
 	 * @default "0"
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $sessionId
 	 * @type string
 	 * @default null
+	 * The session id from the most recent authenticated request from this user.
 	 */
 	/**
 	 * @property $sessionCount
 	 * @type integer
 	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $fb_uid
 	 * @type integer
 	 * @default 0
+	 * The facebook id of the user
 	 */
 	/**
 	 * @property $tw_uid
 	 * @type integer
 	 * @default 0
+	 * The twitter id of the user
 	 */
 	/**
 	 * @property $g_uid
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $y_uid
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $passphraseHash
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $emailAddress
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $mobileNumber
 	 * @type string
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $emailAddressPending
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $mobileNumberPending
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $signedUpWith
 	 * @type string
 	 * @default ""
+	 * A platform like ios or android, or "none", "mobile", "email"
 	 */
 	/**
 	 * @property $username
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $icon
 	 * @type string
 	 * @default ""
+	 * relative path to user's icon folder, containing 48.png, 32.png and 16.png
 	 */
 	/**
 	 * @property $url
 	 * @type string
 	 * @default null
+	 * the url of this user's fm server
 	 */
 	/**
 	 * @property $pincodeHash
 	 * @type string
 	 * @default null
+	 * a smaller security code for when user is already logged in
 	 */
 	/**
 	 * The setUp() method is called the first time

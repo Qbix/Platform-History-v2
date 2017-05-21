@@ -42,51 +42,61 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * The id of the user publishing the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * The name of the stream where people can chat about this message
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default ""
+ * The id of the user participating in the stream
  */
 /**
  * @property streamType
  * @type String
  * @default null
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property state
  * @type String
  * @default null
+ * the state of the participant in the stream
  */
 /**
  * @property subscribed
  * @type String
  * @default "no"
+ * whether the participant is currently subscribed
  */
 /**
  * @property posted
  * @type String
  * @default "no"
+ * whether the participant has posted a message to this stream
  */
 /**
  * @property extra
  * @type String
  * @default "{}"
+ * JSON containing extra information about this participant
  */
 
 /**

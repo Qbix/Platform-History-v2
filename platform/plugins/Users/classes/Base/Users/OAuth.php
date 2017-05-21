@@ -31,41 +31,49 @@ abstract class Base_Users_OAuth extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * The user id of the logged in user
 	 */
 	/**
 	 * @property $client_id
 	 * @type string
 	 * @default ""
+	 * The user id of the app
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default ""
+	 * For client to protect against CSRF attacks
 	 */
 	/**
 	 * @property $scope
 	 * @type string
 	 * @default "user"
+	 * Space delimited set of names of resources you can access
 	 */
 	/**
 	 * @property $redirect_uri
 	 * @type string
 	 * @default ""
+	 * Where the client requested to redirect after creating this access token originally
 	 */
 	/**
 	 * @property $access_token
 	 * @type string
 	 * @default ""
+	 * Bearer token given to the client to access resources
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * When this row was created
 	 */
 	/**
 	 * @property $token_expires_seconds
 	 * @type integer
 	 * @default 0
+	 * How many seconds until token expires
 	 */
 	/**
 	 * The setUp() method is called the first time

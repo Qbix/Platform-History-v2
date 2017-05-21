@@ -45,66 +45,79 @@ Q.mixin(Base, Row);
  * @property id
  * @type String|Buffer
  * @default ""
+ * the session id
  */
 /**
  * @property content
  * @type String
  * @default ""
+ * json format
  */
 /**
  * @property php
  * @type String
  * @default ""
+ * php serialized session data
  */
 /**
  * @property userId
  * @type String|Buffer
  * @default null
+ * 
  */
 /**
  * @property deviceId
  * @type String|Buffer
  * @default ""
+ * If a push notification device is attached
  */
 /**
  * @property timeout
  * @type Integer
  * @default 0
+ * how long until the pincode needs to be entered
  */
 /**
  * @property duration
  * @type Integer
  * @default 0
+ * the number of seconds until the session is considered expired
  */
 /**
  * @property platform
  * @type String
  * @default ""
+ * A platform like ios or android
  */
 /**
  * @property appId
  * @type String
  * @default null
+ * An external app id registered with the platform
  */
 /**
  * @property version
  * @type String
  * @default ""
+ * The version of the platform
  */
 /**
  * @property formFactor
  * @type String
  * @default null
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default "0000-00-00 00:00:00"
+ * PHP timestamp of last time this row was saved
  */
 
 /**

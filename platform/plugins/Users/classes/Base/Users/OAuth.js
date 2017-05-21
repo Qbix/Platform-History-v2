@@ -40,41 +40,49 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * The user id of the logged in user
  */
 /**
  * @property client_id
  * @type String|Buffer
  * @default ""
+ * The user id of the app
  */
 /**
  * @property state
  * @type String|Buffer
  * @default ""
+ * For client to protect against CSRF attacks
  */
 /**
  * @property scope
  * @type String
  * @default "user"
+ * Space delimited set of names of resources you can access
  */
 /**
  * @property redirect_uri
  * @type String|Buffer
  * @default ""
+ * Where the client requested to redirect after creating this access token originally
  */
 /**
  * @property access_token
  * @type String|Buffer
  * @default ""
+ * Bearer token given to the client to access resources
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * When this row was created
  */
 /**
  * @property token_expires_seconds
  * @type Integer
  * @default 0
+ * How many seconds until token expires
  */
 
 /**

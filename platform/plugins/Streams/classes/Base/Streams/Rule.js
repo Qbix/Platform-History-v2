@@ -41,46 +41,55 @@ Q.mixin(Base, Row);
  * @property ofUserId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property ordinal
  * @type Integer
  * @default 0
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property readyTime
  * @type String|Db.Expression
  * @default null
+ * time from which user is ready to receive notifications again
  */
 /**
  * @property filter
  * @type String
  * @default ""
+ * {"types": [ array of message types ], "labels": [ ]}
  */
 /**
  * @property deliver
  * @type String
  * @default ""
+ * {"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}
  */
 /**
  * @property relevance
  * @type Number
  * @default 1
+ * used to prioritize messages for display and processing
  */
 
 /**

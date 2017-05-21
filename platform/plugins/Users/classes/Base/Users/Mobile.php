@@ -34,56 +34,67 @@ abstract class Base_Users_Mobile extends Db_Row
 	 * @property $number
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $extension
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $carrier
 	 * @type string
 	 * @default "unverified"
+	 * 
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default "unverified"
+	 * 
 	 */
 	/**
 	 * @property $capabilities
 	 * @type string
 	 * @default "unverified"
+	 * 
 	 */
 	/**
 	 * @property $activationCode
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $activationCodeExpires
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $authCode
 	 * @type string
 	 * @default ""
+	 * Used in all links sent by sms, to authenticate the source
 	 */
 	/**
 	 * The setUp() method is called the first time

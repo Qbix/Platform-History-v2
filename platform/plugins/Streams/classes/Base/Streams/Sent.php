@@ -32,46 +32,55 @@ abstract class Base_Streams_Sent extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user that publishes the stream to place the message on
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the stream to place the message on
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $sentTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * time on shard of byUserId
 	 */
 	/**
 	 * @property $byUserId
 	 * @type string
 	 * @default ""
+	 * id of the user sending the message.
 	 */
 	/**
 	 * @property $comment
 	 * @type string
 	 * @default ""
+	 * short human-readable content, like twitter and its 140 characters
 	 */
 	/**
 	 * @property $instructions
 	 * @type string
 	 * @default null
+	 * instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding
 	 */
 	/**
 	 * @property $chatPublisherId
 	 * @type string
 	 * @default ""
+	 * If not 0, id of user that publishes the chat stream
 	 */
 	/**
 	 * @property $chatStreamName
 	 * @type string
 	 * @default null
+	 * The name of the stream where people can chat about this message
 	 */
 	/**
 	 * The setUp() method is called the first time

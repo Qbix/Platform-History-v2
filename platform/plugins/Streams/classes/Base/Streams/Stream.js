@@ -51,96 +51,115 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user that publishes the stream
  */
 /**
  * @property name
  * @type String|Buffer
  * @default ""
+ * the name of the stream
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * the time that this stream row has last changed for whatever reason
  */
 /**
  * @property type
  * @type String
  * @default ""
+ * mimetypes plus more types of the form a/b and a/b/c . Can also be "group" or "chat"
  */
 /**
  * @property title
  * @type String
  * @default ""
+ * human-readable title of the stream
  */
 /**
  * @property icon
  * @type String|Buffer
  * @default "default"
+ * relative path to stream's icon folder, containing 48.png, 32.png and 16.png
  */
 /**
  * @property content
  * @type String
  * @default ""
+ * This content can be indexable
  */
 /**
  * @property attributes
  * @type String
  * @default null
+ * attributes are stored as JSON
  */
 /**
  * @property readLevel
  * @type Integer
  * @default 40
+ * 10='see', 20='content', 30='participants', 40='messages'
  */
 /**
  * @property writeLevel
  * @type Integer
  * @default 10
+ * 0=self, 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
  */
 /**
  * @property adminLevel
  * @type Integer
  * @default 20
+ * 10='publish', 20='invite', 30='manage', 40='own'
  */
 /**
  * @property permissions
  * @type String
  * @default null
+ * JSON array of permission names
  */
 /**
  * @property inheritAccess
  * @type String|Buffer
  * @default null
+ * JSON array of [[publisherId, streamName],...] to inherit access from
  */
 /**
  * @property messageCount
  * @type Integer
  * @default 0
+ * 
  */
 /**
  * @property invitedCount
  * @type Integer
  * @default 0
+ * number of users invited
  */
 /**
  * @property participatingCount
  * @type Integer
  * @default 0
+ * number of users participating
  */
 /**
  * @property leftCount
  * @type Integer
  * @default 0
+ * number of users who left after participating
  */
 /**
  * @property closedTime
  * @type String|Db.Expression
  * @default null
+ * this records the time, if any, that the stream was last closed for updates
  */
 
 /**

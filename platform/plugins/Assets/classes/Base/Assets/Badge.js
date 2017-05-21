@@ -38,31 +38,37 @@ Q.mixin(Base, Row);
  * @property app
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property name
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property title
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property pic_small
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property pic_big
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property points
  * @type Integer
  * @default 0
+ * 
  */
 
 /**

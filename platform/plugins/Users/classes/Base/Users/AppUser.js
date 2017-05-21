@@ -42,51 +42,61 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property platform
  * @type String
  * @default ""
+ * A platform like facebook or github
  */
 /**
  * @property appId
  * @type String
  * @default ""
+ * An external app id registered with the platform
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property access_token
  * @type String
  * @default null
+ * The OAuth access token
  */
 /**
  * @property session_secret
  * @type String
  * @default null
+ * 
  */
 /**
  * @property session_expires
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property state
  * @type String
  * @default "visited"
+ * 
  */
 /**
  * @property platform_uid
  * @type String
  * @default ""
+ * The user's id on that platform
  */
 
 /**

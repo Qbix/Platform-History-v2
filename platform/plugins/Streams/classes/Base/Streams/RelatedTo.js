@@ -40,41 +40,49 @@ Q.mixin(Base, Row);
  * @property toPublisherId
  * @type String|Buffer
  * @default ""
+ * publisherId of category
  */
 /**
  * @property toStreamName
  * @type String|Buffer
  * @default ""
+ * name of category
  */
 /**
  * @property type
  * @type String|Buffer
  * @default ""
+ * The type of the relation. Can be empty.
  */
 /**
  * @property fromPublisherId
  * @type String|Buffer
  * @default ""
+ * publisherId of member
  */
 /**
  * @property fromStreamName
  * @type String|Buffer
  * @default ""
+ * name of member
  */
 /**
  * @property weight
  * @type Number
  * @default 1
+ * used for sorting
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property extra
  * @type String
  * @default "{}"
+ * JSON containing extra information
  */
 
 /**

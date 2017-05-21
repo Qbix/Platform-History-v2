@@ -29,31 +29,37 @@ abstract class Base_Streams_RelatedFrom extends Db_Row
 	 * @property $fromPublisherId
 	 * @type string
 	 * @default ""
+	 * publisherId of member
 	 */
 	/**
 	 * @property $fromStreamName
 	 * @type string
 	 * @default ""
+	 * name of member
 	 */
 	/**
 	 * @property $type
 	 * @type string
 	 * @default ""
+	 * The type of the relation. Can be empty.
 	 */
 	/**
 	 * @property $toPublisherId
 	 * @type string
 	 * @default ""
+	 * publisherId of category
 	 */
 	/**
 	 * @property $toStreamName
 	 * @type string
 	 * @default ""
+	 * name of category
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

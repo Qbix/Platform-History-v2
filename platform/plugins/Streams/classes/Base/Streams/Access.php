@@ -34,56 +34,67 @@ abstract class Base_Streams_Access extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who publishes the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the name of the stream whose access is specified
 	 */
 	/**
 	 * @property $ofUserId
 	 * @type string
 	 * @default ""
+	 * id of user whose subscription access being recorded
 	 */
 	/**
 	 * @property $ofContactLabel
 	 * @type string
 	 * @default ""
+	 * to grant access to all contacts under a certain label, set byUserId = 0
 	 */
 	/**
 	 * @property $grantedByUserId
 	 * @type string
 	 * @default null
+	 * id of the user who granted the access. This is publisherId unless user has adminLevel >= invite
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $readLevel
 	 * @type integer
 	 * @default 0
+	 * <0=ignored, 0='none', 10='see', 20='content', 30='participants', 40='messages'
 	 */
 	/**
 	 * @property $writeLevel
 	 * @type integer
 	 * @default 0
+	 * <0=ignored, 0='none', 10=join, 13=vote, 15=postPending, 20=post, 23=relate, 25=suggest, 30=edit, 40=close
 	 */
 	/**
 	 * @property $adminLevel
 	 * @type integer
 	 * @default 0
+	 * <0=ignored, 0='none', 10='publish', 20='invite', 30='manage', 40='own'
 	 */
 	/**
 	 * @property $permissions
 	 * @type string
 	 * @default null
+	 * JSON array of permission names
 	 */
 	/**
 	 * The setUp() method is called the first time

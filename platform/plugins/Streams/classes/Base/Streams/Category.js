@@ -37,26 +37,31 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user that owns the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on Qbix server of publisherId
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * the time that this stream row has last changed for whatever reason
  */
 /**
  * @property relatedTo
  * @type String
  * @default ""
+ * serialized JSON array of related stream types, icons and titles
  */
 
 /**

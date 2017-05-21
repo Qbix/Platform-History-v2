@@ -28,26 +28,31 @@ abstract class Base_Websites_Article extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user who owns the stream
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * local to fm server of publisherId
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * article author or the user to get in touch with about it
 	 */
 	/**
 	 * @property $article
 	 * @type string
 	 * @default ""
+	 * the html of the article
 	 */
 	/**
 	 * @property $getintouch
 	 * @type string
 	 * @default "{}"
+	 * JSON that can include emailSubject and classes
 	 */
 	/**
 	 * The setUp() method is called the first time

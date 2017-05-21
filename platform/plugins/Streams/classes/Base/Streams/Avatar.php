@@ -30,36 +30,43 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 * @property $toUserId
 	 * @type string
 	 * @default ""
+	 * the user the avatar is being displayed to
 	 */
 	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * the user whose avatar is being displayed
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * the time this record was last updated
 	 */
 	/**
 	 * @property $username
 	 * @type string
 	 * @default ""
+	 * just a cache of the username
 	 */
 	/**
 	 * @property $firstName
 	 * @type string
 	 * @default ""
+	 * if not empty, the user can see this first name
 	 */
 	/**
 	 * @property $lastName
 	 * @type string
 	 * @default ""
+	 * if not empty, the user can see this last name
 	 */
 	/**
 	 * @property $icon
 	 * @type string
 	 * @default ""
+	 * the icon to display
 	 */
 	/**
 	 * The setUp() method is called the first time

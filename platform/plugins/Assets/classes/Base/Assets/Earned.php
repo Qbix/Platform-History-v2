@@ -28,26 +28,31 @@ abstract class Base_Assets_Earned extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $app
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $badge_name
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $associated_id
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

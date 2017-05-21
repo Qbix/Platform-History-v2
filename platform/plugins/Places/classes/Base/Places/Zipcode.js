@@ -43,56 +43,67 @@ Q.mixin(Base, Row);
  * @property countryCode
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property zipcode
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property placeName
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property stateName
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property state
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property regionName
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property region
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property community
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property latitude
  * @type Number
  * @default 0
+ * 
  */
 /**
  * @property longitude
  * @type Number
  * @default 0
+ * 
  */
 /**
  * @property accuracy
  * @type Integer
  * @default 0
+ * 
  */
 
 /**

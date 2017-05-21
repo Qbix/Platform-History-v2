@@ -40,41 +40,49 @@ Q.mixin(Base, Row);
  * @property query
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property types
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property latitude
  * @type Number
  * @default 0
+ * 
  */
 /**
  * @property longitude
  * @type Number
  * @default 0
+ * 
  */
 /**
  * @property meters
  * @type Number
  * @default 0
+ * 
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 /**
  * @property results
  * @type String
  * @default ""
+ * 
  */
 
 /**

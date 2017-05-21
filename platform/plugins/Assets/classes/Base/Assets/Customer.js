@@ -35,16 +35,19 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property payments
  * @type String
  * @default "stripe"
+ * the payment processor for the customer
  */
 /**
  * @property customerId
  * @type String|Buffer
  * @default ""
+ * the customer id in the payments processor
  */
 
 /**

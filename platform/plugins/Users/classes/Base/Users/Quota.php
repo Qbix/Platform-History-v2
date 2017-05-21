@@ -28,26 +28,31 @@ abstract class Base_Users_Quota extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $resourceId
 	 * @type string
 	 * @default ""
+	 * empty string means global resource quota
 	 */
 	/**
 	 * @property $name
 	 * @type string
 	 * @default ""
+	 * the name of the quota
 	 */
 	/**
 	 * @property $units
 	 * @type integer
 	 * @default 1
+	 * how many units of the quota were used
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

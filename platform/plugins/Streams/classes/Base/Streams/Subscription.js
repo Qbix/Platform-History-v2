@@ -40,41 +40,49 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user who publishes the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * the name of the stream being subscribed to
  */
 /**
  * @property ofUserId
  * @type String|Buffer
  * @default ""
+ * local to shard of publisherId
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * saved on shard of publisherId
  */
 /**
  * @property untilTime
  * @type String|Db.Expression
  * @default null
+ * this is the time after which subscription won't match
  */
 /**
  * @property filter
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property duration
  * @type Integer
  * @default 0
+ * 
  */
 
 /**

@@ -36,21 +36,25 @@ Q.mixin(Base, Row);
  * @property app
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property day
  * @type String|Db.Expression
  * @default ""
+ * 
  */
 /**
  * @property userId
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property points
  * @type Integer
  * @default 0
+ * 
  */
 
 /**

@@ -28,26 +28,31 @@ abstract class Base_Users_Identify extends Db_Row
 	 * @property $identifier
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $state
 	 * @type string
 	 * @default null
+	 * "future" is a mapping to a user which may later be adopted by someone
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

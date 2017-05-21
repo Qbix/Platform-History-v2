@@ -43,56 +43,67 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * id of user who is requesting access to the stream
  */
 /**
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user who publishes the stream
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * local to shard of publisherId
  */
 /**
  * @property readLevel
  * @type Integer
  * @default 0
+ * 0=none, 10='see', 20='content', 30='participants', 40='messages'
  */
 /**
  * @property writeLevel
  * @type Integer
  * @default 0
+ * 0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate
  */
 /**
  * @property adminLevel
  * @type Integer
  * @default 0
+ * 0=none, 10='publish', 20='invite', 30='manage', 40='own'
  */
 /**
  * @property permissions
  * @type String
  * @default null
+ * JSON array of permission names
  */
 /**
  * @property state
  * @type String
  * @default "pending"
+ * the state of the request
  */
 /**
  * @property actions
  * @type String
  * @default null
+ * JSON array of strings naming actions to take after request is granted, e.g. "Streams/subscribe"
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property expireTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 
 /**

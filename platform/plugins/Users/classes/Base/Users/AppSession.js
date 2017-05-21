@@ -38,31 +38,37 @@ Q.mixin(Base, Row);
  * @property udid
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property platform
  * @type String
  * @default ""
+ * A platform like ios or android
  */
 /**
  * @property appId
  * @type String|Buffer
  * @default ""
+ * An external app registered with the platform
  */
 /**
  * @property sessionId
  * @type String|Buffer
  * @default ""
+ * The id of a users_session row, which may have a userId and deviceId
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 /**
  * @property updatedTime
  * @type String|Db.Expression
  * @default null
+ * 
  */
 
 /**

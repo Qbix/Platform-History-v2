@@ -27,21 +27,25 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $xid
 	 * @type string
 	 * @default ""
+	 * The external user id
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time

@@ -28,26 +28,31 @@ abstract class Base_Users_Contact extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $label
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $contactUserId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $nickname
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
