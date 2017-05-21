@@ -20,7 +20,15 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.query] defaults to ""
+ * @param {string} [$fields.types] defaults to ""
+ * @param {float} [$fields.latitude] defaults to 0
+ * @param {float} [$fields.longitude] defaults to 0
+ * @param {float} [$fields.meters] defaults to 0
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.results] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,36 +37,44 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
- * @type query
+ * @property query
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type types
+ * @property types
+ * @type String
+ * @default ""
  */
 /**
- * @property {number}
- * @type latitude
+ * @property latitude
+ * @type Number
+ * @default 0
  */
 /**
- * @property {number}
- * @type longitude
+ * @property longitude
+ * @type Number
+ * @default 0
  */
 /**
- * @property {number}
- * @type meters
+ * @property meters
+ * @type Number
+ * @default 0
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String|Db.Expression}
- * @type updatedTime
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String}
- * @type results
+ * @property results
+ * @type String
+ * @default ""
  */
 
 /**

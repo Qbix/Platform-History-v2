@@ -20,7 +20,12 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.app] defaults to ""
+ * @param {string} [$fields.badge_name] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string} [$fields.associated_id] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,24 +34,29 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
- * @type userId
+ * @property userId
+ * @type String
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type app
+ * @property app
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type badge_name
+ * @property badge_name
+ * @type String
+ * @default ""
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String}
- * @type associated_id
+ * @property associated_id
+ * @type String
+ * @default ""
  */
 
 /**

@@ -20,7 +20,18 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.countryCode] defaults to ""
+ * @param {string} [$fields.zipcode] defaults to ""
+ * @param {string} [$fields.placeName] defaults to ""
+ * @param {string} [$fields.stateName] defaults to ""
+ * @param {string} [$fields.state] defaults to ""
+ * @param {string} [$fields.regionName] defaults to ""
+ * @param {string} [$fields.region] defaults to ""
+ * @param {string} [$fields.community] defaults to ""
+ * @param {float} [$fields.latitude] defaults to 0
+ * @param {float} [$fields.longitude] defaults to 0
+ * @param {integer} [$fields.accuracy] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,48 +40,59 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
- * @type countryCode
+ * @property countryCode
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type zipcode
+ * @property zipcode
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type placeName
+ * @property placeName
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type stateName
+ * @property stateName
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type state
+ * @property state
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type regionName
+ * @property regionName
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type region
+ * @property region
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type community
+ * @property community
+ * @type String
+ * @default ""
  */
 /**
- * @property {number}
- * @type latitude
+ * @property latitude
+ * @type Number
+ * @default 0
  */
 /**
- * @property {number}
- * @type longitude
+ * @property longitude
+ * @type Number
+ * @default 0
  */
 /**
- * @property {integer}
- * @type accuracy
+ * @property accuracy
+ * @type Integer
+ * @default 0
  */
 
 /**

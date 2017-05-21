@@ -14,23 +14,28 @@
  * @class Base_Assets_Customer
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $payments
- * @property {string} $customerId
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.payments] defaults to "stripe"
+ * @param {string} [$fields.customerId] defaults to ""
  */
 abstract class Base_Assets_Customer extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $payments
-	 * @type {string}
+	 * @type string
+	 * @default "stripe"
 	 */
 	/**
 	 * @property $customerId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

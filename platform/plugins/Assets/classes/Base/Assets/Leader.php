@@ -14,28 +14,34 @@
  * @class Base_Assets_Leader
  * @extends Db_Row
  *
- * @property {string} $app
- * @property {string|Db_Expression} $day
- * @property {string} $userId
- * @property {integer} $points
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.app] defaults to ""
+ * @param {string|Db_Expression} [$fields.day] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {integer} [$fields.points] defaults to 0
  */
 abstract class Base_Assets_Leader extends Db_Row
 {
 	/**
 	 * @property $app
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $day
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default ""
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $points
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * The setUp() method is called the first time
