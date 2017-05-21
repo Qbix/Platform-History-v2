@@ -14,63 +14,76 @@
  * @class Base_Users_Mobile
  * @extends Db_Row
  *
- * @property {string} $number
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $userId
- * @property {string} $extension
- * @property {string} $carrier
- * @property {string} $state
- * @property {string} $capabilities
- * @property {string} $activationCode
- * @property {string|Db_Expression} $activationCodeExpires
- * @property {string} $authCode
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.number] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.extension] defaults to ""
+ * @param {string} [$fields.carrier] defaults to "unverified"
+ * @param {string} [$fields.state] defaults to "unverified"
+ * @param {string} [$fields.capabilities] defaults to "unverified"
+ * @param {string} [$fields.activationCode] defaults to ""
+ * @param {string|Db_Expression} [$fields.activationCodeExpires] defaults to null
+ * @param {string} [$fields.authCode] defaults to ""
  */
 abstract class Base_Users_Mobile extends Db_Row
 {
 	/**
 	 * @property $number
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $extension
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $carrier
-	 * @type {string}
+	 * @type string
+	 * @default "unverified"
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default "unverified"
 	 */
 	/**
 	 * @property $capabilities
-	 * @type {string}
+	 * @type string
+	 * @default "unverified"
 	 */
 	/**
 	 * @property $activationCode
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $activationCodeExpires
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $authCode
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

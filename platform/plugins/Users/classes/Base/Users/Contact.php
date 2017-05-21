@@ -14,33 +14,40 @@
  * @class Base_Users_Contact
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $label
- * @property {string} $contactUserId
- * @property {string} $nickname
- * @property {string|Db_Expression} $insertedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.label] defaults to ""
+ * @param {string} [$fields.contactUserId] defaults to ""
+ * @param {string} [$fields.nickname] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 abstract class Base_Users_Contact extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $label
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $contactUserId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $nickname
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * The setUp() method is called the first time

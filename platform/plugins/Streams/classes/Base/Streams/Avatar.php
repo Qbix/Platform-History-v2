@@ -14,43 +14,52 @@
  * @class Base_Streams_Avatar
  * @extends Db_Row
  *
- * @property {string} $toUserId
- * @property {string} $publisherId
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $username
- * @property {string} $firstName
- * @property {string} $lastName
- * @property {string} $icon
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.toUserId] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.username] defaults to ""
+ * @param {string} [$fields.firstName] defaults to ""
+ * @param {string} [$fields.lastName] defaults to ""
+ * @param {string} [$fields.icon] defaults to ""
  */
 abstract class Base_Streams_Avatar extends Db_Row
 {
 	/**
 	 * @property $toUserId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $username
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $firstName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $lastName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $icon
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

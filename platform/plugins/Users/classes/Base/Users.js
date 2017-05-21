@@ -39,6 +39,7 @@ Base.tableClasses = [
 	"Users_Link",
 	"Users_Mobile",
 	"Users_OAuth",
+	"Users_Quota",
 	"Users_Session",
 	"Users_Total",
 	"Users_User",
@@ -147,6 +148,13 @@ Base.Mobile = Q.require('Users/Mobile');
  * @type Users.OAuth
  */
 Base.OAuth = Q.require('Users/OAuth');
+
+/**
+ * Link to Users.Quota model
+ * @property Quota
+ * @type Users.Quota
+ */
+Base.Quota = Q.require('Users/Quota');
 
 /**
  * Link to Users.Session model

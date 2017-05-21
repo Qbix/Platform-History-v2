@@ -14,103 +14,124 @@
  * @class Base_Streams_Stream
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $name
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $type
- * @property {string} $title
- * @property {string} $icon
- * @property {string} $content
- * @property {string} $attributes
- * @property {integer} $readLevel
- * @property {integer} $writeLevel
- * @property {integer} $adminLevel
- * @property {string} $permissions
- * @property {string} $inheritAccess
- * @property {integer} $messageCount
- * @property {integer} $invitedCount
- * @property {integer} $participatingCount
- * @property {integer} $leftCount
- * @property {string|Db_Expression} $closedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.name] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.type] defaults to ""
+ * @param {string} [$fields.title] defaults to ""
+ * @param {string} [$fields.icon] defaults to "default"
+ * @param {string} [$fields.content] defaults to ""
+ * @param {string} [$fields.attributes] defaults to null
+ * @param {integer} [$fields.readLevel] defaults to 40
+ * @param {integer} [$fields.writeLevel] defaults to 10
+ * @param {integer} [$fields.adminLevel] defaults to 20
+ * @param {string} [$fields.permissions] defaults to null
+ * @param {string} [$fields.inheritAccess] defaults to null
+ * @param {integer} [$fields.messageCount] defaults to 0
+ * @param {integer} [$fields.invitedCount] defaults to 0
+ * @param {integer} [$fields.participatingCount] defaults to 0
+ * @param {integer} [$fields.leftCount] defaults to 0
+ * @param {string|Db_Expression} [$fields.closedTime] defaults to null
  */
 abstract class Base_Streams_Stream extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $name
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $type
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $title
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $icon
-	 * @type {string}
+	 * @type string
+	 * @default "default"
 	 */
 	/**
 	 * @property $content
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $attributes
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $readLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 40
 	 */
 	/**
 	 * @property $writeLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 10
 	 */
 	/**
 	 * @property $adminLevel
-	 * @type {integer}
+	 * @type integer
+	 * @default 20
 	 */
 	/**
 	 * @property $permissions
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $inheritAccess
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $messageCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $invitedCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $participatingCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $leftCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $closedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time

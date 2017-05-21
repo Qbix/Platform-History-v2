@@ -14,53 +14,64 @@
  * @class Base_Streams_Notification
  * @extends Db_Row
  *
- * @property {string} $userId
- * @property {string} $publisherId
- * @property {string} $streamName
- * @property {integer} $messageOrdinal
- * @property {string|Db_Expression} $insertedTime
- * @property {string} $type
- * @property {string|Db_Expression} $viewedTime
- * @property {string|Db_Expression} $readTime
- * @property {string} $comment
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {integer} [$fields.messageOrdinal] defaults to 0
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string} [$fields.type] defaults to null
+ * @param {string|Db_Expression} [$fields.viewedTime] defaults to null
+ * @param {string|Db_Expression} [$fields.readTime] defaults to null
+ * @param {string} [$fields.comment] defaults to null
  */
 abstract class Base_Streams_Notification extends Db_Row
 {
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $streamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $messageOrdinal
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $type
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $viewedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $readTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $comment
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time

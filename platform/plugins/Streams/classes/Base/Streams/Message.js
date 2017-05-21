@@ -20,7 +20,18 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.streamName] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.sentTime] defaults to null
+ * @param {string} [$fields.byUserId] defaults to ""
+ * @param {string} [$fields.byClientId] defaults to ""
+ * @param {string} [$fields.type] defaults to ""
+ * @param {string} [$fields.content] defaults to ""
+ * @param {string} [$fields.instructions] defaults to ""
+ * @param {float} [$fields.weight] defaults to 1
+ * @param {integer} [$fields.ordinal] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,48 +40,59 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type publisherId
+ * @property publisherId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type streamName
+ * @property streamName
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String|Db.Expression}
- * @type sentTime
+ * @property sentTime
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type byUserId
+ * @property byUserId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type byClientId
+ * @property byClientId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type type
+ * @property type
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type content
+ * @property content
+ * @type String
+ * @default ""
  */
 /**
- * @property {String}
- * @type instructions
+ * @property instructions
+ * @type String
+ * @default ""
  */
 /**
- * @property {number}
- * @type weight
+ * @property weight
+ * @type Number
+ * @default 1
  */
 /**
- * @property {integer}
- * @type ordinal
+ * @property ordinal
+ * @type Integer
+ * @default 0
  */
 
 /**

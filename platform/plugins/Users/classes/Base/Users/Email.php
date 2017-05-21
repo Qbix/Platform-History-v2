@@ -14,48 +14,58 @@
  * @class Base_Users_Email
  * @extends Db_Row
  *
- * @property {string} $address
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $userId
- * @property {string} $state
- * @property {string} $activationCode
- * @property {string|Db_Expression} $activationCodeExpires
- * @property {string} $authCode
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.address] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.state] defaults to null
+ * @param {string} [$fields.activationCode] defaults to ""
+ * @param {string|Db_Expression} [$fields.activationCodeExpires] defaults to null
+ * @param {string} [$fields.authCode] defaults to ""
  */
 abstract class Base_Users_Email extends Db_Row
 {
 	/**
 	 * @property $address
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $state
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $activationCode
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $activationCodeExpires
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $authCode
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

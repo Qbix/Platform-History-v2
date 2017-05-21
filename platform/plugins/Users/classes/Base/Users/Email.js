@@ -20,7 +20,15 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.address] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.state] defaults to null
+ * @param {string} [$fields.activationCode] defaults to ""
+ * @param {string|Db_Expression} [$fields.activationCodeExpires] defaults to null
+ * @param {string} [$fields.authCode] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,36 +37,44 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String}
- * @type address
+ * @property address
+ * @type String
+ * @default ""
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {String|Db.Expression}
- * @type updatedTime
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type userId
+ * @property userId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type state
+ * @property state
+ * @type String
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type activationCode
+ * @property activationCode
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Db.Expression}
- * @type activationCodeExpires
+ * @property activationCodeExpires
+ * @type String|Db.Expression
+ * @default null
  */
 /**
- * @property {String|Buffer}
- * @type authCode
+ * @property authCode
+ * @type String|Buffer
+ * @default ""
  */
 
 /**

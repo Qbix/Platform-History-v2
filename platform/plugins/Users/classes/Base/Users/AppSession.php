@@ -14,38 +14,46 @@
  * @class Base_Users_AppSession
  * @extends Db_Row
  *
- * @property {string} $udid
- * @property {string} $platform
- * @property {string} $appId
- * @property {string} $sessionId
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.udid] defaults to ""
+ * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.appId] defaults to ""
+ * @param {string} [$fields.sessionId] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 abstract class Base_Users_AppSession extends Db_Row
 {
 	/**
 	 * @property $udid
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $platform
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $appId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $sessionId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time
