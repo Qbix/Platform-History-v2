@@ -37,26 +37,31 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
+ * this can be a person, app or organization
  */
 /**
  * @property resourceId
  * @type String|Buffer
  * @default ""
+ * empty string means global resource quota
  */
 /**
  * @property name
  * @type String|Buffer
  * @default ""
+ * the name of the quota
  */
 /**
  * @property units
  * @type Integer
  * @default 1
+ * how many units of the quota were used
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * 
  */
 
 /**
@@ -95,7 +100,7 @@ Base.table = function (withoutDbName) {
 /**
  * The connection name for the class
  * @method connectionName
- * @return {string} The name of the connection
+ * @return {String} The name of the connection
  */
 Base.connectionName = function() {
 	return 'Users';
@@ -118,7 +123,7 @@ Base.SELECT = function(fields, alias) {
 /**
  * Create UPDATE query to the class table. Use Db.Query.Mysql.set() method to define SET clause
  * @method UPDATE
- * @param {string} [alias=null] Table alias
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.UPDATE = function(alias) {
@@ -130,8 +135,8 @@ Base.UPDATE = function(alias) {
 /**
  * Create DELETE query to the class table
  * @method DELETE
- * @param {object}[table_using=null] If set, adds a USING clause with this table
- * @param {string} [alias=null] Table alias
+ * @param {Object}[table_using=null] If set, adds a USING clause with this table
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.DELETE = function(table_using, alias) {
@@ -143,12 +148,37 @@ Base.DELETE = function(table_using, alias) {
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {Object} [fields={}] The fields as an associative array of {column: value} pairs
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.INSERT = function(fields, alias) {
 	var q = Base.db().INSERT(Base.table()+(alias ? ' '+alias : ''), fields || {});
+	q.className = 'Users_Quota';
+	return q;
+};
+
+/**
+ * Create raw query with BEGIN clause.
+ * You'll have to specify shards yourself when calling execute().
+ * @method BEGIN
+ * @param {string} [$lockType] First parameter to pass to query.begin() function
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.BEGIN = function($lockType) {
+	var q = Base.db().rawQuery('').begin($lockType);
+	q.className = 'Users_Quota';
+	return q;
+};
+
+/**
+ * Create raw query with COMMIT clause
+ * You'll have to specify shards yourself when calling execute().
+ * @method COMMIT
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.COMMIT = function(fields, alias) {
+	var q = Base.db().rawQuery('').commit();
 	q.className = 'Users_Quota';
 	return q;
 };
@@ -165,7 +195,7 @@ Base.prototype.className = "Users_Quota";
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
@@ -176,7 +206,7 @@ Base.prototype.setUp = function() {
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
@@ -202,9 +232,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"userId",
-		"resourceId",
-		"name"
+		
 	];
 };
 
@@ -258,7 +286,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"MUL",null];
 };
 
 /**
@@ -296,7 +324,7 @@ Base.prototype.maxSize_resourceId = function () {
 	 */
 Base.column_resourceId = function () {
 
-return [["varbinary","255","",false],false,"PRI",""];
+return [["varbinary","255","",false],false,"",""];
 };
 
 /**
@@ -334,7 +362,7 @@ Base.prototype.maxSize_name = function () {
 	 */
 Base.column_name = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"",null];
 };
 
 /**
@@ -395,27 +423,6 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 Base.column_insertedTime = function () {
 
 return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
-};
-
-/**
- * Check if mandatory fields are set and updates 'magic fields' with appropriate values
- * @method beforeSave
- * @param {Object} value The object of fields
- * @param {Function} callback Call this callback if you return null
- * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
- * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
- */
-Base.prototype.beforeSave = function (value) {
-	var fields = ['userId','name'], i;
-	if (!this._retrieved) {
-		var table = this.table();
-		for (i=0; i<fields.length; i++) {
-			if (this.fields[fields[i]] === undefined) {
-				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-			}
-		}
-	}
-	return value;
 };
 
 module.exports = Base;

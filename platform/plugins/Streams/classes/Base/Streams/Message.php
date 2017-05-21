@@ -34,56 +34,67 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
+	 * id of user that publishes the stream to place the message on
 	 */
 	/**
 	 * @property $streamName
 	 * @type string
 	 * @default ""
+	 * the stream to place the message on
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * saved on shard of publisherId
 	 */
 	/**
 	 * @property $sentTime
 	 * @type string|Db_Expression
 	 * @default null
+	 * time on shard of byUserId
 	 */
 	/**
 	 * @property $byUserId
 	 * @type string
 	 * @default ""
+	 * id of the user sending message.
 	 */
 	/**
 	 * @property $byClientId
 	 * @type string
 	 * @default ""
+	 * id of the Streams client sending message.
 	 */
 	/**
 	 * @property $type
 	 * @type string
 	 * @default ""
+	 * the type of the message, such as text or video
 	 */
 	/**
 	 * @property $content
 	 * @type string
 	 * @default ""
+	 * short human-readable content, like twitter and its 140 characters
 	 */
 	/**
 	 * @property $instructions
 	 * @type string
 	 * @default ""
+	 * instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding
 	 */
 	/**
 	 * @property $weight
 	 * @type float
 	 * @default 1
+	 * this may depend on the reputation of user_by relative to the stream
 	 */
 	/**
 	 * @property $ordinal
 	 * @type integer
 	 * @default 0
+	 * Count messages posted to the stream
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -198,7 +209,7 @@ abstract class Base_Streams_Message extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -209,6 +220,7 @@ abstract class Base_Streams_Message extends Db_Row
 		$q->className = 'Streams_Message';
 		return $q;
 	}
+	
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -231,6 +243,35 @@ abstract class Base_Streams_Message extends Db_Row
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Message'))
 		);
+	}
+	
+	/**
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin($lockType = null)
+	{
+		$q = self::db()->rawQuery('')->begin($lockType);
+		$q->className = 'Streams_Message';
+		return $q;
+	}
+	
+	/**
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Streams_Message';
+		return $q;
 	}
 	
 	/**
@@ -817,7 +858,7 @@ return array (
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)

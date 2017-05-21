@@ -28,26 +28,31 @@ abstract class Base_Users_Quota extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * this can be a person, app or organization
 	 */
 	/**
 	 * @property $resourceId
 	 * @type string
 	 * @default ""
+	 * empty string means global resource quota
 	 */
 	/**
 	 * @property $name
 	 * @type string
 	 * @default ""
+	 * the name of the quota
 	 */
 	/**
 	 * @property $units
 	 * @type integer
 	 * @default 1
+	 * how many units of the quota were used
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -60,9 +65,6 @@ abstract class Base_Users_Quota extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
-			  1 => 'resourceId',
-			  2 => 'name',
 			)
 		);
 	}
@@ -162,7 +164,7 @@ abstract class Base_Users_Quota extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -173,6 +175,7 @@ abstract class Base_Users_Quota extends Db_Row
 		$q->className = 'Users_Quota';
 		return $q;
 	}
+	
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -195,6 +198,35 @@ abstract class Base_Users_Quota extends Db_Row
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Quota'))
 		);
+	}
+	
+	/**
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin($lockType = null)
+	{
+		$q = self::db()->rawQuery('')->begin($lockType);
+		$q->className = 'Users_Quota';
+		return $q;
+	}
+	
+	/**
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Users_Quota';
+		return $q;
 	}
 	
 	/**
@@ -246,7 +278,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => 'MUL',
   3 => NULL,
 );			
 	}
@@ -300,7 +332,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => '',
 );			
 	}
@@ -354,7 +386,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -460,31 +492,11 @@ return array (
 	}
 
 	/**
-	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
-	 * @method beforeSave
-	 * @param {array} $value The array of fields
-	 * @return {array}
-	 * @throws {Exception} If mandatory field is not set
-	 */
-	function beforeSave($value)
-	{
-		if (!$this->retrieved) {
-			$table = $this->getTable();
-			foreach (array('userId','name') as $name) {
-				if (!isset($value[$name])) {
-					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-				}
-			}
-		}
-		return $value;			
-	}
-
-	/**
 	 * Retrieves field names for class table
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)

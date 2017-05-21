@@ -26,16 +26,19 @@ abstract class Base_Assets_Customer extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $payments
 	 * @type string
 	 * @default "stripe"
+	 * the payment processor for the customer
 	 */
 	/**
 	 * @property $customerId
 	 * @type string
 	 * @default ""
+	 * the customer id in the payments processor
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -149,7 +152,7 @@ abstract class Base_Assets_Customer extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of `column => value` pairs
+	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -160,6 +163,7 @@ abstract class Base_Assets_Customer extends Db_Row
 		$q->className = 'Assets_Customer';
 		return $q;
 	}
+	
 	/**
 	 * Inserts multiple rows into a single table, preparing the statement only once,
 	 * and executes all the queries.
@@ -182,6 +186,35 @@ abstract class Base_Assets_Customer extends Db_Row
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Assets_Customer'))
 		);
+	}
+	
+	/**
+	 * Create raw query with begin clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method begin
+	 * @static
+	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function begin($lockType = null)
+	{
+		$q = self::db()->rawQuery('')->begin($lockType);
+		$q->className = 'Assets_Customer';
+		return $q;
+	}
+	
+	/**
+	 * Create raw query with commit clause
+	 * You'll have to specify shards yourself when calling execute().
+	 * @method commit
+	 * @static
+	 * @return {Db_Query_Mysql} The generated query
+	 */
+	static function commit()
+	{
+		$q = self::db()->rawQuery('')->commit();
+		$q->className = 'Assets_Customer';
+		return $q;
 	}
 	
 	/**
@@ -335,7 +368,7 @@ return array (
 	 * @method fieldNames
 	 * @static
 	 * @param {string} [$table_alias=null] If set, the alieas is added to each field
-	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of `'prefixed field' => 'field'` pairs
+	 * @param {string} [$field_alias_prefix=null] If set, the method returns associative array of ('prefixed field' => 'field') pairs
 	 * @return {array} An array of field names
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)

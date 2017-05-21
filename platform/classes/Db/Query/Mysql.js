@@ -75,13 +75,21 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 *    from the mysql query on each shard. Note that the results array will
 	 *    contain raw objects of the form "{fieldName: fieldValue};",
 	 *    and not objects which have Db.Row mixed in.
-	 * @param {Object} [options.queries=false]
+	 * @param {Object|String} [options.shards]
 	 *    Manually specify the queries as {shardName: query}, to bypass the sharding.
+	 *    You can also pass a string here, which will be used to run the query
+	 *    on this shard.
 	 */
 	mq.execute = function(callback, options) {
-		options = options || {};
-		var queries = options.queries || this.shard(options.indexes), self = this;
 		var shardName, connection = this.db.connName;
+		options = options || {};
+		if (typeof options.shards === 'string') {
+			shardName = options.shards;
+			options.shards = {};
+			options.shards[shardName] = mq;
+		}
+		var queries = options.shards || this.shard(options.indexes);
+		var self = this;
 		if (queries["*"]) {
 			var shardNames = Q.Config.get(['Db', 'connections', connection, 'shards'], {'': ''});
 			var q = queries["*"];

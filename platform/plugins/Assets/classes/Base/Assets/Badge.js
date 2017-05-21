@@ -38,31 +38,37 @@ Q.mixin(Base, Row);
  * @property app
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property name
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property title
  * @type String
  * @default ""
+ * 
  */
 /**
  * @property pic_small
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property pic_big
  * @type String|Buffer
  * @default ""
+ * 
  */
 /**
  * @property points
  * @type Integer
  * @default 0
+ * 
  */
 
 /**
@@ -101,7 +107,7 @@ Base.table = function (withoutDbName) {
 /**
  * The connection name for the class
  * @method connectionName
- * @return {string} The name of the connection
+ * @return {String} The name of the connection
  */
 Base.connectionName = function() {
 	return 'Assets';
@@ -124,7 +130,7 @@ Base.SELECT = function(fields, alias) {
 /**
  * Create UPDATE query to the class table. Use Db.Query.Mysql.set() method to define SET clause
  * @method UPDATE
- * @param {string} [alias=null] Table alias
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.UPDATE = function(alias) {
@@ -136,8 +142,8 @@ Base.UPDATE = function(alias) {
 /**
  * Create DELETE query to the class table
  * @method DELETE
- * @param {object}[table_using=null] If set, adds a USING clause with this table
- * @param {string} [alias=null] Table alias
+ * @param {Object}[table_using=null] If set, adds a USING clause with this table
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.DELETE = function(table_using, alias) {
@@ -149,12 +155,37 @@ Base.DELETE = function(table_using, alias) {
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {Object} [fields={}] The fields as an associative array of {column: value} pairs
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.INSERT = function(fields, alias) {
 	var q = Base.db().INSERT(Base.table()+(alias ? ' '+alias : ''), fields || {});
+	q.className = 'Assets_Badge';
+	return q;
+};
+
+/**
+ * Create raw query with BEGIN clause.
+ * You'll have to specify shards yourself when calling execute().
+ * @method BEGIN
+ * @param {string} [$lockType] First parameter to pass to query.begin() function
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.BEGIN = function($lockType) {
+	var q = Base.db().rawQuery('').begin($lockType);
+	q.className = 'Assets_Badge';
+	return q;
+};
+
+/**
+ * Create raw query with COMMIT clause
+ * You'll have to specify shards yourself when calling execute().
+ * @method COMMIT
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.COMMIT = function(fields, alias) {
+	var q = Base.db().rawQuery('').commit();
 	q.className = 'Assets_Badge';
 	return q;
 };
@@ -171,7 +202,7 @@ Base.prototype.className = "Assets_Badge";
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
@@ -182,7 +213,7 @@ Base.prototype.setUp = function() {
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */

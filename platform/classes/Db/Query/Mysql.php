@@ -503,9 +503,12 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * Do this only if the statement will be executed many times with
 	 * different parameters. Basically you would use ->bind(...) between
 	 * invocations of ->execute().
+	 * @param {array|string} [$shards] You can pass a shard name here, or an array
+	 *  where the keys are shard names and the values are the query to execute.
+	 *  This will bypass the usual sharding algorithm.
 	 * @return {Db_Result} The Db_Result object containing the PDO statement that resulted from the query.
 	 */
-	function execute ($prepareStatement = false)
+	function execute ($prepareStatement = false, $shards = null)
 	{
 		if (class_exists('Q')) {
 			/**
@@ -558,7 +561,11 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 
 		$sql_template = $this->getSQL(null, true);
 
-		$queries = $this->shard();
+		if (isset($shards)) {
+			$queries = is_string($shards) ? array($shards => $this) : $shards;
+		} else {
+			$queries = $this->shard();
+		}
 		$connection = $this->db->connectionName();
 
 		if (!empty($queries["*"])) {
@@ -661,10 +668,6 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 				switch ($this->type) {
 				case Db_Query::TYPE_SELECT:
 					// SELECT queries don't need to be logged
-				case Db_Query::TYPE_RAW:
-					// Raw queries are run on shard '' - i.e. main db only
-					// actually, raw query may get here only on initial sharding
-					// when sharding has started raw queries are never run on shard
 					break;
 				default:
 					if (!$upcoming or $shard_name !== $upcoming['shard']) {
@@ -691,7 +694,9 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 						(!empty($this->clauses['BEGIN']) ? 'START TRANSACTION' :
 						(!empty($this->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
 
-					$upcoming_shards = array_keys($query->shard($upcoming['indexes'][$upcoming['table']]));
+					$utable = $upcoming['table'];
+					$sharded = $query->shard($upcoming['indexes'][$utable]);
+					$upcoming_shards = array_keys($sharded);
 
 					$logServer = Q_Config::get('Db', 'internal', 'sharding', 'logServer', null);
 					if (!empty($transaction) && $transaction !== 'COMMIT') {
@@ -781,12 +786,12 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * or set it to null to avoid adding a "LOCK" clause
 	 * @chainable
 	 */
-	function begin($lock_type = 'FOR UPDATE')
+	function begin($lock_type = null)
 	{
-		$this->ignoreCache();
-		if ($lock_type === true) {
+		if (!isset($lock_type) or $lock_type === true) {
 			$lock_type = 'FOR UPDATE';
 		}
+		$this->ignoreCache();
 		if ($lock_type) {
 			$this->lock($lock_type);
 		}

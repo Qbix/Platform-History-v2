@@ -43,56 +43,67 @@ Q.mixin(Base, Row);
  * @property publisherId
  * @type String|Buffer
  * @default ""
+ * id of user that publishes the stream to place the message on
  */
 /**
  * @property streamName
  * @type String|Buffer
  * @default ""
+ * the stream to place the message on
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
  * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * saved on shard of publisherId
  */
 /**
  * @property sentTime
  * @type String|Db.Expression
  * @default null
+ * time on shard of byUserId
  */
 /**
  * @property byUserId
  * @type String|Buffer
  * @default ""
+ * id of the user sending message.
  */
 /**
  * @property byClientId
  * @type String|Buffer
  * @default ""
+ * id of the Streams client sending message.
  */
 /**
  * @property type
  * @type String|Buffer
  * @default ""
+ * the type of the message, such as text or video
  */
 /**
  * @property content
  * @type String
  * @default ""
+ * short human-readable content, like twitter and its 140 characters
  */
 /**
  * @property instructions
  * @type String
  * @default ""
+ * instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding
  */
 /**
  * @property weight
  * @type Number
  * @default 1
+ * this may depend on the reputation of user_by relative to the stream
  */
 /**
  * @property ordinal
  * @type Integer
  * @default 0
+ * Count messages posted to the stream
  */
 
 /**
@@ -131,7 +142,7 @@ Base.table = function (withoutDbName) {
 /**
  * The connection name for the class
  * @method connectionName
- * @return {string} The name of the connection
+ * @return {String} The name of the connection
  */
 Base.connectionName = function() {
 	return 'Streams';
@@ -154,7 +165,7 @@ Base.SELECT = function(fields, alias) {
 /**
  * Create UPDATE query to the class table. Use Db.Query.Mysql.set() method to define SET clause
  * @method UPDATE
- * @param {string} [alias=null] Table alias
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.UPDATE = function(alias) {
@@ -166,8 +177,8 @@ Base.UPDATE = function(alias) {
 /**
  * Create DELETE query to the class table
  * @method DELETE
- * @param {object}[table_using=null] If set, adds a USING clause with this table
- * @param {string} [alias=null] Table alias
+ * @param {Object}[table_using=null] If set, adds a USING clause with this table
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.DELETE = function(table_using, alias) {
@@ -179,12 +190,37 @@ Base.DELETE = function(table_using, alias) {
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
- * @param {string} [alias=null] Table alias
+ * @param {Object} [fields={}] The fields as an associative array of {column: value} pairs
+ * @param {String} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
 Base.INSERT = function(fields, alias) {
 	var q = Base.db().INSERT(Base.table()+(alias ? ' '+alias : ''), fields || {});
+	q.className = 'Streams_Message';
+	return q;
+};
+
+/**
+ * Create raw query with BEGIN clause.
+ * You'll have to specify shards yourself when calling execute().
+ * @method BEGIN
+ * @param {string} [$lockType] First parameter to pass to query.begin() function
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.BEGIN = function($lockType) {
+	var q = Base.db().rawQuery('').begin($lockType);
+	q.className = 'Streams_Message';
+	return q;
+};
+
+/**
+ * Create raw query with COMMIT clause
+ * You'll have to specify shards yourself when calling execute().
+ * @method COMMIT
+ * @return {Db.Query.Mysql} The generated query
+ */
+Base.COMMIT = function(fields, alias) {
+	var q = Base.db().rawQuery('').commit();
 	q.className = 'Streams_Message';
 	return q;
 };
@@ -201,7 +237,7 @@ Base.prototype.className = "Streams_Message";
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
@@ -212,7 +248,7 @@ Base.prototype.setUp = function() {
 /**
  * Create INSERT query to the class table
  * @method INSERT
- * @param {object} [fields={}] The fields as an associative array of `{column: value}` pairs
+ * @param {object} [fields={}] The fields as an associative array of {column: value} pairs
  * @param {string} [alias=null] Table alias
  * @return {Db.Query.Mysql} The generated query
  */
