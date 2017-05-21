@@ -14,33 +14,40 @@
  * @class Base_Users_ExternalFrom
  * @extends Db_Row
  *
- * @property {string} $publisherId
- * @property {string} $xid
- * @property {string} $userId
- * @property {string|Db_Expression} $insertedTime
- * @property {string} $nickname
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.xid] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string} [$fields.nickname] defaults to ""
  */
 abstract class Base_Users_ExternalFrom extends Db_Row
 {
 	/**
 	 * @property $publisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $xid
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $nickname
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * The setUp() method is called the first time

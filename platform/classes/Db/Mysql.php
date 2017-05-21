@@ -1610,6 +1610,7 @@ EOT;
 			$field_name = $table_col['Field'];
 			$field_names[] = $field_name;
 			$field_null = $table_col['Null'] == 'YES' ? true : false;
+			$field_nulls[] = $field_null;
 			$field_default = $table_col['Default'];
 			$field_name_safe = preg_replace('/[^0-9a-zA-Z\_]/', '_', $field_name);
 			$auto_inc = (strpos($table_col['Extra'], 'auto_increment') !== false);
@@ -1690,8 +1691,8 @@ EOT;
 				case 'mediumint':
 				case 'bigint':
 					$isNumberLike = true;
-					$properties[]="{integer} $field_name";
-					$js_properties[] = "{integer} $field_name";
+					$properties[]="integer $field_name";
+					$js_properties[] = "Integer $field_name";
 					$functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * @method maxSize_$field_name_safe
@@ -1747,11 +1748,15 @@ $dc
  * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
  */
 EOT;
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: ($field_null ? null : 0);
+					$defaults[] = json_encode((int)$default);
 					break;
 
 				case 'enum':
-					$properties[]="{string} $field_name";
-					$js_properties[] = "{String} $field_name";
+					$properties[]="string $field_name";
+					$js_properties[] = "String $field_name";
 					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}if (!in_array(\$value, array($type_display_range)))
 			throw new Exception("Out-of-range value '\$value' being assigned to ".\$this->getTable().".$field_name");
@@ -1778,6 +1783,10 @@ $dc
  * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
  */
 EOT;
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: null;
+					$defaults[] = json_encode($default);
 					break;
 				
 				case 'char':
@@ -1798,8 +1807,8 @@ EOT;
 						'tinyblob', 'blob', 'mediumblob', 'longblob'
 					));
 					$orBuffer1 = $isBinary ? "|Buffer" : "";
-					$properties[]="{string} $field_name";
-					$js_properties[] = "{String$orBuffer1} $field_name";
+					$properties[]="string $field_name";
+					$js_properties[] = "String$orBuffer1 $field_name";
 					$functions["maxSize_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Returns the maximum string length that can be assigned to the $field_name field
@@ -1854,12 +1863,16 @@ $dc
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 EOT;
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: ($field_null ? null : '');
+					$defaults[] = json_encode($default);
 					break;
 				
 				case 'date':
 					$isTimeLike = true;
-					$properties[]="{string|Db_Expression} $field_name";
-					$js_properties[] = "{String|Db.Expression} $field_name";
+					$properties[]="string|Db_Expression $field_name";
+					$js_properties[] = "String|Db.Expression $field_name";
 					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}\$date = date_parse(\$value);
 		if (!empty(\$date['errors'])) {
@@ -1893,12 +1906,26 @@ $dc
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 EOT;
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: ($field_null ? null : '');
+					if ($default === 'CURRENT_TIMESTAMP'
+					or strpos($default, '(') !== false) {
+						$default = "new Db_Expression($default)";
+					}
+					$isExpression = (
+						$default === 'CURRENT_TIMESTAMP'
+						or strpos($default, '(') !== false
+					);
+					$defaults[] = $isExpression
+						? 'new Db_Expression(' . json_encode($default) . ')'
+						: json_encode($default);
 					break;
 				case 'datetime':
 				case 'timestamp':
 					$isTimeLike = true;
-					$properties[]="{string|Db_Expression} $field_name";
-					$js_properties[] = "{String|Db.Expression} $field_name";
+					$properties[]="string|Db_Expression $field_name";
+					$js_properties[] = "String|Db.Expression $field_name";
 					$possibleMagicFields = array('insertedTime', 'updatedTime', 'created_time', 'updated_time');
 					$possibleMagicInsertFields = array('insertedTime', 'created_time');
 					if (in_array($field_name, $possibleMagicFields)) {
@@ -1944,6 +1971,16 @@ $dc
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 EOT;
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: ($field_null ? null : '');
+					$isExpression = (
+						$default === 'CURRENT_TIMESTAMP'
+						or strpos($default, '(') !== false
+					);
+					$defaults[] = $isExpression
+						? 'new Db_Expression(' . json_encode($default) . ')'
+						: json_encode($default);
 					break;
 
 				case 'numeric':
@@ -1951,8 +1988,8 @@ EOT;
 				case 'float':
 				case 'double':
 					$isNumberLike = true;
-					$properties[]="{float} $field_name";
-					$js_properties[] = "{number} $field_name";
+					$properties[]="float $field_name";
+					$js_properties[] = "Number $field_name";
 					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$dbe_check}if (!is_numeric(\$value))
 			throw new Exception('Non-numeric value being assigned to '.\$this->getTable().".$field_name");
@@ -1972,11 +2009,19 @@ $dc
  * @throws {Error} If 'value' is not number
  */
 EOT;
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: ($field_null ? null : 0);
+					$defaults[] = json_encode((double)$default);
 					break;
 
 				default:
-					$properties[]="{mixed} $field_name";
-					$js_properties[] = "{mixed} $field_name";
+					$properties[]="mixed $field_name";
+					$js_properties[] = "mixed $field_name";
+					$default = isset($table_col['Default'])
+						? $table_col['Default']
+						: ($field_null ? null : '');
+					$defaults[] = json_encode($default);
 					break;
 			}
 			if (! empty($functions["beforeSet_$field_name_safe"])) {
@@ -2246,30 +2291,41 @@ EOT;
 		$class_name_prefix = rtrim(ucfirst($classname_prefix), "._");
 
 		$properties2 = array();
+		$js_properties2 = array();
 		foreach ($properties as $k => $v) {
 			$tmp = explode(' ', $v);
+			$default = $defaults[$k];
 			$properties[$k] = <<<EOT
 	$dc
 	 * @property \${$tmp[1]}
 	 * @type $tmp[0]
+	 * @default $default
 	 */
 EOT;
-			$properties2[$k] = <<<EOT
- * @property {$tmp[0]} \${$tmp[1]}
-EOT;
+			$required = !$field_nulls[$k] && $default == '"null"';
+			$properties2[$k] = $required
+				? " * @param {".$tmp[0]."} \$fields.".$tmp[1]
+				: " * @param {".$tmp[0]."} [\$fields.".$tmp[1]."] defaults to $default";
 		}
 		foreach ($js_properties as $k => $v) {
 			$tmp = explode(' ', $v);
+			$default = $defaults[$k];
 			$js_properties[$k] = <<<EOT
 $dc
- * @property $tmp[0]
- * @type $tmp[1]
+ * @property $tmp[1]
+ * @type $tmp[0]
+ * @default $default
  */
 EOT;
+			$required = !$field_nulls[$k] && $default == '"null"';
+			$js_properties2[$k] = $required_fields_string
+				? " * @param {".$tmp[0]."} \$fields.".$tmp[1]
+				: " * @param {".$tmp[0]."} [\$fields.".$tmp[1]."] defaults to $default";
 		}
 		$field_hints = implode("\n", $properties);
 		$field_hints2 = implode("\n", $properties2);
 		$js_field_hints = implode("\n", $js_properties);
+		$js_field_hints2 = implode("\n", $properties2);
 		
 		// Here is the base class:
 		$base_class_string = <<<EOT
@@ -2289,6 +2345,8 @@ $dc
  * @class Base_$class_name
  * @extends Db_Row
  *
+ * @param {array} [\$fields=array()] The fields values to initialize table row as 
+ * an associative array of \$column => \$value pairs
 $field_hints2
  */
 abstract class Base_$class_name extends Db_Row
@@ -2466,7 +2524,8 @@ $dc
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+$field_hints2
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

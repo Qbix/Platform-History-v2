@@ -14,28 +14,34 @@
  * @class Base_Users_Link
  * @extends Db_Row
  *
- * @property {string} $identifier
- * @property {string} $userId
- * @property {string} $extraInfo
- * @property {string|Db_Expression} $insertedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.identifier] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.extraInfo] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 abstract class Base_Users_Link extends Db_Row
 {
 	/**
 	 * @property $identifier
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $userId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $extraInfo
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * The setUp() method is called the first time

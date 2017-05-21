@@ -20,7 +20,15 @@ var Row = Q.require('Db/Row');
  * @extends Db.Row
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
- * an associative array of `{column: value}` pairs
+ * an associative array of {column: value} pairs
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.client_id] defaults to ""
+ * @param {string} [$fields.state] defaults to ""
+ * @param {string} [$fields.scope] defaults to "user"
+ * @param {string} [$fields.redirect_uri] defaults to ""
+ * @param {string} [$fields.access_token] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {integer} [$fields.token_expires_seconds] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -29,36 +37,44 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property {String|Buffer}
- * @type userId
+ * @property userId
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type client_id
+ * @property client_id
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type state
+ * @property state
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String}
- * @type scope
+ * @property scope
+ * @type String
+ * @default "user"
  */
 /**
- * @property {String|Buffer}
- * @type redirect_uri
+ * @property redirect_uri
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Buffer}
- * @type access_token
+ * @property access_token
+ * @type String|Buffer
+ * @default ""
  */
 /**
- * @property {String|Db.Expression}
- * @type insertedTime
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db_Expression("CURRENT_TIMESTAMP")
  */
 /**
- * @property {integer}
- * @type token_expires_seconds
+ * @property token_expires_seconds
+ * @type Integer
+ * @default 0
  */
 
 /**

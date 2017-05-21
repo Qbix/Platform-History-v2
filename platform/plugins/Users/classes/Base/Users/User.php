@@ -14,103 +14,124 @@
  * @class Base_Users_User
  * @extends Db_Row
  *
- * @property {string} $id
- * @property {string|Db_Expression} $insertedTime
- * @property {string|Db_Expression} $updatedTime
- * @property {string} $sessionId
- * @property {integer} $sessionCount
- * @property {integer} $fb_uid
- * @property {integer} $tw_uid
- * @property {string} $g_uid
- * @property {string} $y_uid
- * @property {string} $passphraseHash
- * @property {string} $emailAddress
- * @property {string} $mobileNumber
- * @property {string} $emailAddressPending
- * @property {string} $mobileNumberPending
- * @property {string} $signedUpWith
- * @property {string} $username
- * @property {string} $icon
- * @property {string} $url
- * @property {string} $pincodeHash
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.id] defaults to "0"
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.sessionId] defaults to null
+ * @param {integer} [$fields.sessionCount] defaults to 0
+ * @param {integer} [$fields.fb_uid] defaults to 0
+ * @param {integer} [$fields.tw_uid] defaults to 0
+ * @param {string} [$fields.g_uid] defaults to null
+ * @param {string} [$fields.y_uid] defaults to null
+ * @param {string} [$fields.passphraseHash] defaults to null
+ * @param {string} [$fields.emailAddress] defaults to null
+ * @param {string} [$fields.mobileNumber] defaults to null
+ * @param {string} [$fields.emailAddressPending] defaults to ""
+ * @param {string} [$fields.mobileNumberPending] defaults to ""
+ * @param {string} [$fields.signedUpWith] defaults to ""
+ * @param {string} [$fields.username] defaults to ""
+ * @param {string} [$fields.icon] defaults to ""
+ * @param {string} [$fields.url] defaults to null
+ * @param {string} [$fields.pincodeHash] defaults to null
  */
 abstract class Base_Users_User extends Db_Row
 {
 	/**
 	 * @property $id
-	 * @type {string}
+	 * @type string
+	 * @default "0"
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * @property $updatedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default null
 	 */
 	/**
 	 * @property $sessionId
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $sessionCount
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $fb_uid
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $tw_uid
-	 * @type {integer}
+	 * @type integer
+	 * @default 0
 	 */
 	/**
 	 * @property $g_uid
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $y_uid
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $passphraseHash
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $emailAddress
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $mobileNumber
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $emailAddressPending
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $mobileNumberPending
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $signedUpWith
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $username
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $icon
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $url
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * @property $pincodeHash
-	 * @type {string}
+	 * @type string
+	 * @default null
 	 */
 	/**
 	 * The setUp() method is called the first time

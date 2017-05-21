@@ -14,38 +14,46 @@
  * @class Base_Streams_RelatedFrom
  * @extends Db_Row
  *
- * @property {string} $fromPublisherId
- * @property {string} $fromStreamName
- * @property {string} $type
- * @property {string} $toPublisherId
- * @property {string} $toStreamName
- * @property {string|Db_Expression} $insertedTime
+ * @param {array} [$fields=array()] The fields values to initialize table row as 
+ * an associative array of $column => $value pairs
+ * @param {string} [$fields.fromPublisherId] defaults to ""
+ * @param {string} [$fields.fromStreamName] defaults to ""
+ * @param {string} [$fields.type] defaults to ""
+ * @param {string} [$fields.toPublisherId] defaults to ""
+ * @param {string} [$fields.toStreamName] defaults to ""
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 abstract class Base_Streams_RelatedFrom extends Db_Row
 {
 	/**
 	 * @property $fromPublisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $fromStreamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $type
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $toPublisherId
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $toStreamName
-	 * @type {string}
+	 * @type string
+	 * @default ""
 	 */
 	/**
 	 * @property $insertedTime
-	 * @type {string|Db_Expression}
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 */
 	/**
 	 * The setUp() method is called the first time
