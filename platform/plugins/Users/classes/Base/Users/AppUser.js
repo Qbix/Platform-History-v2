@@ -26,7 +26,9 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.appId] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.grant_type] defaults to null
  * @param {string} [$fields.access_token] defaults to null
+ * @param {string} [$fields.refresh_token] defaults to null
  * @param {string} [$fields.session_secret] defaults to null
  * @param {string|Db_Expression} [$fields.session_expires] defaults to null
  * @param {string} [$fields.state] defaults to "visited"
@@ -69,10 +71,22 @@ Q.mixin(Base, Row);
  * 
  */
 /**
+ * @property grant_type
+ * @type String
+ * @default null
+ * The OAuth token grant type
+ */
+/**
  * @property access_token
  * @type String
  * @default null
  * The OAuth access token
+ */
+/**
+ * @property refresh_token
+ * @type String
+ * @default null
+ * The OAuth refresh token
  */
 /**
  * @property session_secret
@@ -298,7 +312,9 @@ Base.prototype.fieldNames = function () {
 		"appId",
 		"insertedTime",
 		"updatedTime",
+		"grant_type",
 		"access_token",
+		"refresh_token",
 		"session_secret",
 		"session_expires",
 		"state",
@@ -474,6 +490,42 @@ return [["timestamp","200","",false],true,"",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
+ * @method beforeSet_grant_type
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_grant_type = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".grant_type");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".grant_type");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the grant_type field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_grant_type = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for grant_type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_grant_type = function () {
+
+return [["varchar","255","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_access_token
  * @param {string} value
  * @return {string} The value
@@ -503,6 +555,42 @@ Base.prototype.maxSize_access_token = function () {
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 Base.column_access_token = function () {
+
+return [["varchar","1023","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_refresh_token
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_refresh_token = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".refresh_token");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".refresh_token");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the refresh_token field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_refresh_token = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for refresh_token column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_refresh_token = function () {
 
 return [["varchar","1023","",false],true,"",null];
 };
