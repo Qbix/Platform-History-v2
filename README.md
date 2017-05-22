@@ -66,7 +66,7 @@ Qbix was built from the ground up to help development teams be more productive.
 * Flexible: We know that many frameworks make it hard to achieve exactly what you need. That's why you can override almost anything in Q. You can also easily import classes from other frameworks such as Zend and our autoloader won't get jealous — it's designed to play nice with others.
 * Built for teams: Qbix is designed for teams of developers, designers, testers and sysadmins to work together. Each team member can configure their local environment, with their own database credentials, facebook api keys, paths and so forth, while Q's installer keeps track of versions and migrations for each app and plugin. Designers can focus on themes, and testers can focus on tests.
 
-##How Qbix, Inc. can help you
+### How Qbix, Inc. can help you
 * Support and Certification: We are available to provide training and guidance on how to get the most out of Q. We also plan to offer classes and certification to those developers who want to make money working on Qbix projects.
 
 Designers
@@ -80,8 +80,8 @@ Build beautiful interfaces through which people will interact with one another.
 * Building blocks: Take advantage of reusable, self-contained tools that anyone can place on pages, or help build your own.
 * Front end scripting: If you have some JavaScript experience, you can let your interfaces update in real-time by listening for messages coming from streams via socket.io.
 
-###How Qbix, Inc. can help you
+### How Qbix, Inc. can help you
 * Theme marketplace: After designing and polishing your themes, you can package and sell them on our marketplace. Or give them away for free. Either way, when an app developer uses your theme, your work and your brand will get a lot of exposure.
 
-##Developer Community
+## Developer Community
 We are currently in the process of growing our developer community. If you feel you can contribute, by all means join us!

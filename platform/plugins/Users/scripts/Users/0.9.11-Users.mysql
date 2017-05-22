@@ -6,3 +6,7 @@ CREATE TABLE {$prefix}quota (
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY byTime (userId, resourceId, name, insertedTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Used for keeping track of quotas';
+
+ALTER TABLE {$prefix}app_user
+ADD COLUMN refresh_token varchar(1023) DEFAULT NULL COMMENT 'The OAuth refresh token' AFTER access_token,
+ADD COLUMN grant_type varchar(255) DEFAULT NULL COMMENT 'The OAuth token grant type' AFTER updatedTime;
