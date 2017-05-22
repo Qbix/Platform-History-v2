@@ -21,7 +21,9 @@
  * @param {string} [$fields.appId] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.grant_type] defaults to null
  * @param {string} [$fields.access_token] defaults to null
+ * @param {string} [$fields.refresh_token] defaults to null
  * @param {string} [$fields.session_secret] defaults to null
  * @param {string|Db_Expression} [$fields.session_expires] defaults to null
  * @param {string} [$fields.state] defaults to "visited"
@@ -60,10 +62,22 @@ abstract class Base_Users_AppUser extends Db_Row
 	 * 
 	 */
 	/**
+	 * @property $grant_type
+	 * @type string
+	 * @default null
+	 * The OAuth token grant type
+	 */
+	/**
 	 * @property $access_token
 	 * @type string
 	 * @default null
 	 * The OAuth access token
+	 */
+	/**
+	 * @property $refresh_token
+	 * @type string
+	 * @default null
+	 * The OAuth refresh token
 	 */
 	/**
 	 * @property $session_secret
@@ -542,6 +556,60 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_grant_type
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_grant_type($value)
+	{
+		if (!isset($value)) {
+			return array('grant_type', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('grant_type', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".grant_type");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".grant_type");
+		return array('grant_type', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the grant_type field
+	 * @return {integer}
+	 */
+	function maxSize_grant_type()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for grant_type column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_grant_type()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_access_token
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -577,6 +645,60 @@ return array (
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 	static function column_access_token()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_refresh_token
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_refresh_token($value)
+	{
+		if (!isset($value)) {
+			return array('refresh_token', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('refresh_token', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".refresh_token");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".refresh_token");
+		return array('refresh_token', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the refresh_token field
+	 * @return {integer}
+	 */
+	function maxSize_refresh_token()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for refresh_token column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_refresh_token()
 	{
 
 return array (
@@ -820,7 +942,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'platform', 'appId', 'insertedTime', 'updatedTime', 'access_token', 'session_secret', 'session_expires', 'state', 'platform_uid');
+		$field_names = array('userId', 'platform', 'appId', 'insertedTime', 'updatedTime', 'grant_type', 'access_token', 'refresh_token', 'session_secret', 'session_expires', 'state', 'platform_uid');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
