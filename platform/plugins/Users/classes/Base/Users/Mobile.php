@@ -357,7 +357,7 @@ return array (
 			$value = $value->getTimestamp();
 		}
 		if (is_numeric($value)) {
-			$newDatetime = new DateTime();
+			$newDateTime = new DateTime();
 			$datetime = $newDateTime->setTimestamp($value);
 		} else {
 			$datetime = new DateTime($value);
@@ -406,7 +406,7 @@ return array (
 			$value = $value->getTimestamp();
 		}
 		if (is_numeric($value)) {
-			$newDatetime = new DateTime();
+			$newDateTime = new DateTime();
 			$datetime = $newDateTime->setTimestamp($value);
 		} else {
 			$datetime = new DateTime($value);
@@ -731,7 +731,7 @@ return array (
 			$value = $value->getTimestamp();
 		}
 		if (is_numeric($value)) {
-			$newDatetime = new DateTime();
+			$newDateTime = new DateTime();
 			$datetime = $newDateTime->setTimestamp($value);
 		} else {
 			$datetime = new DateTime($value);
