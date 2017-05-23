@@ -82,8 +82,8 @@ class Q_Tree
 	 *  You can actually pass as many keys as you need,
 	 *  delving deeper and deeper into the configuration structure.
 	 *  All but the second-to-last parameter are interpreted as keys.
-	 * @param {mixed} [$value=null] The last parameter should not be omitted,
-	 *  and contains the value to set the field to.
+	 * @param {mixed} [$value=null] The value to set the field to.
+	 *  The last parameter should not be omitted unless the first parameter is an array.
 	 */
 	function set(
 	 $key1,
