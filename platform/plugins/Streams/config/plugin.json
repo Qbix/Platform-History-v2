@@ -127,7 +127,7 @@
 						"subject": "{{&call 'message.get' 'description'}}"
 					},
 					"Streams/relatedFrom": {
-						"desription": "This stream has been related to some other one",
+						"description": "This stream has been related to some other one",
 						"subject": "{{&call 'message.get' 'description'}}"
 					},
 					"Streams/access": {
