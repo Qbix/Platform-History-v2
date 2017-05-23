@@ -648,6 +648,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	mq.orderBy = function (expression, ascending) {
 		switch (this.type) {
 			case Db.Query.TYPE_SELECT:
+			case Db.Query.TYPE_UPDATE:
 				break;
 			default:
 				throw new Q.Exception("The ORDER BY clause does not belong in this context.");
