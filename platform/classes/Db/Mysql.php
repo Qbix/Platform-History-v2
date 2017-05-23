@@ -603,7 +603,7 @@ class Db_Mysql implements iDb
 		}
         
         // Count all the rows
-        $query = $this->select('COUNT (1) _count', $table)->where($where);
+        $query = $this->select('COUNT(1) _count', $table)->where($where);
         $sharded = $query->shard();
         if (count($sharded) > 1 or $shard === '*') { // should be only one shard
         	throw new Exception("Db_Mysql::rank can work within at most one shard");
