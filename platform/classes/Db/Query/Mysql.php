@@ -1273,6 +1273,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	{
 		switch ($this->type) {
 			case Db_Query::TYPE_SELECT:
+			case Db_Query::TYPE_UPDATE:
 				break;
 			default:
 				throw new Exception("The ORDER BY clause does not belong in this context.",-1);
