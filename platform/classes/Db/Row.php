@@ -1340,12 +1340,12 @@ class Db_Row implements Iterator
 	 *  You can actually pass as many keys as you need,
 	 *  delving deeper and deeper into the configuration structure.
 	 *  All but the second-to-last parameter are interpreted as keys.
-	 * @param {mixed} $value The last parameter should not be omitted,
+	 * @param {mixed} [$value=null] The last parameter should not be omitted,
 	 *  and contains the value to set the field to.
 	 */
 	function set(
 	 $key1,
-	 $value)
+	 $value = null)
 	{
 		$args = func_get_args();
 		if (!isset($this->p)) {
