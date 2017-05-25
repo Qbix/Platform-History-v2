@@ -103,8 +103,8 @@ function _Q_clickable(o) {
 			'float': $this.css('float'),
 			// 'z-index': $this.css('z-index') + 1, //10000,
 			'overflow': 'hidden',
-			'width': csw,
-			'height': csh,
+			'width': csw+'px',
+			'height': csh+'px',
 			'max-width': $this.css('max-width'),
 			'max-height': $this.css('max-height'),
 			'text-align': 'left',
@@ -124,9 +124,9 @@ function _Q_clickable(o) {
 		$this.css('margin', 0);
 		$container.insertAfter($this);
 		// $this.css('height', h);
-		if (display === 'inline') {
-			$container.html('&nbsp;');
-		}
+		// if (display === 'inline') {
+		// 	$container.html('&nbsp;');
+		// }
 		if (!o.allowCallout) {
 			$this.css('-webkit-touch-callout', 'none');
 		}
@@ -163,7 +163,8 @@ function _Q_clickable(o) {
 			'overflow': 'visible',
 			'padding': '0px',
 			'margin': '0px'
-		}).appendTo($container);
+		}).addClass('Q_clickable_sized')
+		.appendTo($container);
 		var triggers = $stretcher;
 		var width = csw;
 		var height = csh;
@@ -381,6 +382,7 @@ function _Q_clickable(o) {
 				if (state.animation || Date.now() - originalTime >= timing.renderingPeriod) {
 					return;
 				}
+				$stretcher.removeClass('Q_clickable_sized');
 				var rect = $this[0].getBoundingClientRect();
 				var csw = Math.ceil(rect.width);
 				var csh = Math.ceil(rect.height);
@@ -397,8 +399,9 @@ function _Q_clickable(o) {
 						'height': csh+'px'
 					});
 				}
-				csw = csw2;
-				csh = csh2;
+				csw2 = csw;
+				csh2 = csh;
+				$stretcher.addClass('Q_clickable_sized');
 				setTimeout(_update, timing.renderingInterval);
 			}, timing.renderingInterval);
 		}
@@ -434,7 +437,7 @@ function _Q_clickable(o) {
 		y: 0.5
 	},
 	timing: {
-		renderingPeriod: 1000,
+		renderingPeriod: 0,
 		renderingInterval: 100,
 		waitingPeriod: 0,
 		waitingInterval: 100,
