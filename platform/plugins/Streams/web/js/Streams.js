@@ -2329,6 +2329,26 @@ Sp.leave = function _Stream_prototype_leave (callback) {
 };
 
 /**
+ * Subscribe to a stream, so you get realtime messages and offline notifications.
+ * 
+ * @method subscribe
+ * @param {Function} callback receives (err, participant) as parameters
+ */
+Sp.subscribe = function _Stream_prototype_subscribe (callback) {
+	return Stream.subscribe(this.fields.publisherId, this.fields.name, callback);
+};
+
+/**
+ * Unsubscribe from a stream that you previously subscribed to
+ * 
+ * @method unsubscribe
+ * @param {Function} callback Receives (err, participant) as parameters
+ */
+Sp.unsubscribe = function _Stream_prototype_unsubscribe (callback) {
+	return Stream.unsubscribe(this.fields.publisherId, this.fields.name, callback);
+};
+
+/**
  * Start observing a stream as an anonymous observer,
  * so you get realtime messages through socket events
  * but you don't join as a participant.
@@ -2336,7 +2356,7 @@ Sp.leave = function _Stream_prototype_leave (callback) {
  * @method observe
  * @param {Function} callback receives (err, participant) as parameters
  */
-Sp.observe = function _Stream_prototype_join (callback) {
+Sp.observe = function _Stream_prototype_observe (callback) {
 	return Stream.observe(this.fields.publisherId, this.fields.name, callback);
 };
 
@@ -2347,7 +2367,7 @@ Sp.observe = function _Stream_prototype_join (callback) {
  * @method neglect
  * @param {Function} callback Receives (err, participant) as parameters
  */
-Sp.neglect = function _Stream_prototype_leave (callback) {
+Sp.neglect = function _Stream_prototype_neglect (callback) {
 	return Stream.neglect(this.fields.publisherId, this.fields.name, callback);
 };
 
@@ -2620,7 +2640,7 @@ Stream.join.onError = new Q.Event();
  */
 Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 	if (!Q.plugins.Users.loggedInUser) {
-		throw new Error("Streams.Stream.join: Not logged in.");
+		throw new Error("Streams.Stream.leave: Not logged in.");
 	}
 	var slotName = "participant";
 	var fields = {
@@ -2650,6 +2670,89 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
 Stream.leave.onError = new Q.Event();
+
+/**
+ * Subscribe to a stream, to start getting offline notifications
+ * May call Streams.subscribe.onError if an error occurs.
+ * 
+ * @static
+ * @method subscribe
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} streamName name of stream to join
+ * @param {Function} [callback] receives (err, participant) as parameters
+ */
+Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback) {
+	if (!Q.plugins.Users.loggedInUser) {
+		throw new Error("Streams.Stream.subscribe: Not logged in.");
+	}
+	var slotName = "participant";
+	var fields = {"publisherId": publisherId, "name": streamName};
+	var baseUrl = Q.baseUrl({
+		"publisherId": publisherId,
+		"streamName": streamName,
+		"Q.clientId": Q.clientId()
+	});
+	Q.req('Streams/subscribe', [slotName], function (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			var args = [err, data];
+			Streams.onError.handle.call(this, msg, args);
+			Stream.subscribe.onError.handle.call(this, msg, args);
+			return callback && callback.call(this, msg, args);
+		}
+		var participant = new Participant(data.slots.participant);
+		Participant.get.cache.set(
+			[participant.publisherId, participant.name, participant.userId],
+			0, participant, [err, participant]
+		);
+		callback && callback.call(participant, err, participant || null);
+		_refreshUnlessSocket(publisherId, streamName);
+	}, { method: 'post', fields: fields, baseUrl: baseUrl });
+};
+Stream.subscribe.onError = new Q.Event();
+
+/**
+ * Unsubscribe from a stream you previously subscribed to
+ * May call Stream.unsubscribe.onError if an error occurs.
+ * 
+ * @static
+ * @method unsubscribe
+ * @param {String} publisherId
+ * @param {String} streamName
+ * @param {Function} callback Receives (err, participant) as parameters
+ */
+Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, callback) {
+	if (!Q.plugins.Users.loggedInUser) {
+		throw new Error("Streams.Stream.unsubscribe: Not logged in.");
+	}
+	var slotName = "participant";
+	var fields = {
+		"publisherId": publisherId, 
+		"name": streamName,
+		"Q.clientId": Q.clientId()
+	};
+	var baseUrl = Q.baseUrl({
+		publisherId: publisherId,
+		streamName: streamName
+	});
+	Q.req('Streams/unsubscribe', [slotName], function (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			var args = [err, data];
+			Streams.onError.handle.call(this, msg, args);
+			Stream.unsubscribe.onError.handle.call(this, msg, args);
+			return callback && callback.call(this, msg, args);
+		}
+		var participant = new Participant(data.slots.participant);
+		Participant.get.cache.set(
+			[participant.publisherId, participant.name, participant.userId],
+			0, participant, [err, participant]
+		);
+		callback && callback.call(this, err, participant || null);
+		_refreshUnlessSocket(publisherId, streamName);
+	}, { method: 'post', fields: fields, baseUrl: baseUrl });
+};
+Stream.unsubscribe.onError = new Q.Event();
 
 /**
  * Start observing a stream as an anonymous observer,
