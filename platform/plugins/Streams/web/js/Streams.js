@@ -1930,7 +1930,10 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		var s = data.slots.stream || null;
 		if (s) {
 			// process the Streams/changed message, if stream was retained
-			_refreshUnlessSocket(s.publisherId, s.name, callback, options);
+			var o = Q.extend({
+				evenIfNotRetained: true
+			}, options);
+			_refreshUnlessSocket(s.publisherId, s.name, callback, o);
 		} else {
 			return Q.handle(callback, stream, [null, s]);
 		}
