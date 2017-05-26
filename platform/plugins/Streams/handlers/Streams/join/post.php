@@ -5,15 +5,10 @@ function Streams_join_post()
 	$user = Users::loggedInUser(true);
 	$publisherId = Streams::requestedPublisherId();
 	$streamName = Streams::requestedName(true);
-	$streams = Streams::fetch($user->id, $publisherId, $streamName);
-	if (empty($streams)) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'stream',
-			'criteria' => "{publisherId: '$publisherId', name: '$streamName'}"
-		));
-	}
-	$stream = reset($streams);
-	if ($participant = $stream->join($options)) {
+	$stream = Streams::fetchOne($user->id, $publisherId, $streamName, true);
+	// SECURITY: Do not allow client to set options here
+	// because then they can set participant extra.
+	if ($participant = $stream->join()) {
 		Q_Response::setSlot('participant', $participant->exportArray());
 	}
 }
