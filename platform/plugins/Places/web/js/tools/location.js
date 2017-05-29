@@ -37,8 +37,10 @@
 	 * @constructor
 	 * @param {Object} [options] used to pass options
 	 * @param {Object} [options.geocode] Default google location object, if available
-	 * @param {Boolean} [options.useRelatedLocations] Whether to show related locations
-	 * @param {Object} [options.location] Currently selected location
+	 * @param {Boolean} [options.showCurrent=true] Whether to allow user to select current location
+	 * @param {Boolean} [options.showLocations=true] Whether to allow user to select their saved locations
+	 * @param {Boolean} [options.showAddress=true] Whether to allow user to enter a custom address
+	 * @param {Object} [options.location] Optional selected location to start off with
 	 * @param {Q.Event} [options.onChoose] this event occurs when user selected some valid location
 	 */
 
@@ -64,11 +66,11 @@
 				$te.find(".Q_selected").removeClass("Q_selected");
 				$this.addClass('Q_selected');
 				
-				var $olt = $this.find(tool.otherLocationTool.element);
+				var $olt = $this.find(tool.addressTool.element);
 				if ($olt.length) {
 					$olt.plugin('Q/placeholders', function () {
-						tool.otherLocationTool.filter.setText('');
-						tool.otherLocationTool.filter.$input.plugin('Q/clickfocus');
+						tool.addressTool.filter.setText('');
+						tool.addressTool.filter.$input.plugin('Q/clickfocus');
 					});
 				}
 
@@ -96,12 +98,12 @@
 					});
 
 					return;
-				} else if (selector == 'other') {
-					// if "other location" selected just repeat onChoose event of places/address tool
+				} else if (selector == 'address') {
+					// if address selected just repeat onChoose event of places/address tool
 					Q.handle(
-						tool.otherLocationTool.state.onChoose, 
-						tool.otherLocationTool, 
-						[tool.otherLocationTool.place]
+						tool.addressTool.state.onChoose, 
+						tool.addressTool, 
+						[tool.addressTool.place]
 					);
 					return;
 				}
@@ -126,7 +128,9 @@
 				this.state.location = geocode;
 			}, 'Places/location'),
 			location: null, // currently selected location
-			useRelatedLocations: true
+			showCurrent: true,
+			showLocations: true,
+			showAddress: true
 		},
 
 		{ // methods go here
@@ -153,22 +157,22 @@
 					return;
 				}
 
-				Q.Template.render('Places/location/select', {
+				Q.Template.render('Places/location/select', Q.extend({
 					text: Q.text.Places.Location
-				}, function (err, html) {
+				}, state), function (err, html) {
 					$te.html(html).activate(function () {
 
-						// set otherLocation address tool
-						tool.$(".Places_location_otherLocation")
+						// set address tool
+						tool.$(".Places_location_address")
 						.tool('Places/address', {
 							onChoose: _onChoose
-						}, 'otherLocation', tool.prefix)
+						}, 'Places_address', tool.prefix)
 						.activate(function () {
-							tool.otherLocationTool = this;
+							tool.addressTool = this;
 						});
 
-						// set related locations if state.
-						if (state.useRelatedLocations && userId) {
+						// set showLocationsf state.
+						if (state.showLocations && userId) {
 							tool.$(".Places_location_related")
 							.tool('Streams/related', {
 								publisherId: userId,
@@ -285,7 +289,7 @@
 					return;
 				}
 
-				// for other loc - call Places plugin
+				// for address - call Places plugin
 				Places.Location.geocode(loc, function(geocode){
 					if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
 					Q.handle(callback, tool, [geocode]);
@@ -295,9 +299,18 @@
 	);
 
 	Q.Template.set('Places/location/select',
-		'<div data-location="current">{{text.myCurrentLocation}}</div>' +
-		'<div class="Places_location_related"></div>' +
-		'<div data-location="other"><label>{{text.enterAddress}}</label><div class="Places_location_otherLocation"></div></div>'
+		'{{#if showCurrent}}' +
+			'<div data-location="current">{{text.myCurrentLocation}}</div>' +
+		'{{/if}}' +
+		'{{#if showLocations}}' +
+			'<div class="Places_location_related"></div>' +
+		'{{/if}}' +
+		'{{#if showAddress}}' +
+			'<div data-location="address">' +
+				'<label>{{text.enterAddress}}</label>' +
+				'<div class="Places_location_address"></div>' +
+			'</div>' +
+		'{{/if}}'
 	);
 
 	Q.Template.set("Places/location/new",
