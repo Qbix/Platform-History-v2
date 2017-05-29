@@ -2970,7 +2970,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
 			? options.preprocess(args)
 			: {args: args};
 		o.fields[fieldName] = JSON.stringify(result);
-		Q.req(baseUrl+tail, slotName, function (err, response) {
+		return Q.req(baseUrl+tail, slotName, function (err, response) {
 			var error = err || response.errors;
 			if (error) {
 				Q.each(callbacks, function (k, cb) {
@@ -6083,7 +6083,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
 	}
 	var args = arguments, index = (typeof arguments[0] === 'string') ? 0 : 1;
 	args[index] = Q.action(args[index], null, options);
-	Q.request.apply(this, args);
+	return Q.request.apply(this, args);
 };
 
 /**
@@ -6131,6 +6131,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
  * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated
  * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed
+ * @return {String} the url that was requested
  */
 Q.request = function (url, slotNames, callback, options) {
 	
@@ -6278,6 +6279,7 @@ Q.request = function (url, slotNames, callback, options) {
 				//xmlhttp.setRequestHeader("Connection", "close");
 				xmlhttp.send(content);
 			}
+			return url;
 		}
 		
 		var method = o.method || 'GET';
@@ -6340,12 +6342,10 @@ Q.request = function (url, slotNames, callback, options) {
 			delim = (url.indexOf('?') < 0) ? '?' : '&';
 			url2 += delim + Q.queryString(options.fields);
 		}
-		if (o.query) {
-			return url2;
-		} else {
-			_onStart();
+		if (!o.query) {
 			var script = Q.addScript(url2, null, {'duplicate': o.duplicate});
 		}
+		return url2;
 	}
 };
 

@@ -766,13 +766,14 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @return {Streams_Participant|null}
 	 */
-	function join($options = array(), &$participant = null)
+	function join($options = array())
 	{
 		$userId = $this->_verifyUser($options);
 		$participants = Streams::join(
 			$userId, $this->publisherId, array($this->name), $options
 		);
-		return $participants ? reset($participants) : null;
+		$participant = reset($participants);
+		return $participant ? $participant : null;
 	} 
 	
 	/**
@@ -789,14 +790,14 @@ class Streams_Stream extends Base_Streams_Stream
 	 *  to point to the participant object, if any.
 	 * @return {Streams_Participant|null}
 	 */
-	function leave($options = array(), &$participant = null)
+	function leave($options = array())
 	{
 		$userId = $this->_verifyUser($options);
 		$participants = Streams::leave(
 			$userId, $this->publisherId, array($this->name), $options
 		);
 		$participant = reset($participants);
-		return $participants ? $participant : null;
+		return $participant ? $participant : null;
 	}
 
 	/**
@@ -833,7 +834,8 @@ class Streams_Stream extends Base_Streams_Stream
 		$participants = Streams::subscribe(
 			$userId, $this->publisherId, array($this->name), $options
 		);
-		return $participants ? reset($participants) : null;
+		$participant = reset($participants);
+		return $participant ? $participant : null;
 	}
 
 	/**
@@ -855,7 +857,8 @@ class Streams_Stream extends Base_Streams_Stream
 		$participants = Streams::unsubscribe(
 			$userId, $this->publisherId, array($this->name), $options
 		);
-		return $participants ? reset($participants) : null;
+		$participant = reset($participants);
+		return $participant ? $participant : null;
 	}
 	
 	/**

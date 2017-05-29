@@ -125,7 +125,11 @@ Q.Tool.define("Streams/inplace", function (options) {
 				field: state.field,
 				type: state.inplaceType,
 				onSave: { 'Streams/inplace': function () {
-					Q.Streams.Message.wait(state.publisherId, state.streamName, -1, null);
+					// just load all latest messages
+					Q.Streams.Stream.refresh({
+						messages: true,
+						unlessSocket: true
+					});
 				}}
 			});
 			var value = (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field]) || "";

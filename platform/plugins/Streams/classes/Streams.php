@@ -2651,7 +2651,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
 	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
-	 * @param {array} [$options.extra] Any extra information for the message
+	 * @param {array} [$options.extra] Any extra information for the participant
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being related to the joining asUserId's Streams/participating streams.
@@ -2699,6 +2699,12 @@ abstract class Streams extends Base_Streams
 			}
 			if (isset($options['posted'])) {
 				$participant->posted = $posted;
+			}
+			if (isset($options['extra'])) {
+				$extra = Q::json_decode($participant->extra, true);
+				$tree = new Q_Tree($extra);
+				$tree->merge($options['extra']);
+				$participant->extra = Q::json_encode($tree->getAll(), true);
 			}
 			$streamNamesUpdate[] = $sn;
 			$type = ($participant->state === 'participating') ? 'visit' : 'join';
@@ -2948,7 +2954,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
-	 * @param {array} [$options=array()]
+	 * @param {array} [$options=array()] Options for the subscribe() and join() methods
 	 * @param {array} [$options.filter] optional array with two keys
 	 * @param {array} [$options.filter.types] array of message types, if this is empty then subscribes to all types
 	 * @param {array} [$options.filter.notifications=0] limit number of notifications, 0 means no limit
@@ -2978,11 +2984,11 @@ abstract class Streams extends Base_Streams
 		if (empty($options['skipAccess'])) {
 			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
-		$participants = Streams::join($asUserId, $publisherId, $streams2, array(
+		$o = array_merge($options, array(
 			'subscribed' => true,
-			'noVisit' => true,
-			'skipAccess' => Q::ifset($options, 'skipAccess', false)
+			'noVisit' => true
 		));
+		$participants = Streams::join($asUserId, $publisherId, $streams2, $o);
 		$shouldUpdate = false;
 		if (isset($options['filter'])) {
 			$filter = Q::json_encode($options['filter']);
