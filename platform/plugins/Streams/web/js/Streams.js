@@ -1584,10 +1584,9 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  * @static
  * @method refresh
  * @param {Function} callback This is called when the stream has been refreshed.
- *   If the first argument is not false, then "this" is the stream.
+ *   If the first argument is not false or null, then "this" is the stream.
  *   The arguments are different depending on the options.
  *   If options.messages is true, then it receives [err, ordinals].
- *   If no attempt was made to get the messages, then callback is same as for Streams.get .
  * @param {Object} [options] A hash of options, including:
  *   @param {Boolean} [options.messages] If set to true, then besides just reloading the fields, attempt to catch up on the latest messages
  *   @param {Number} [options.max] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
@@ -1611,7 +1610,8 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 	if (o.messages) {
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
-		result = Message.wait(publisherId, streamName, -1, function (ordinals) {
+		result = Message.wait(publisherId, streamName, -1,
+		function (shouldContinue, ordinals) {
 			Q.Streams.get(publisherId, streamName, function (err) {
 				callback && callback.apply(this, [err, ordinals]);
 			});
@@ -1635,6 +1635,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		}
 		if (socket && participant) {
    			// We didn't even try to wait for messages
+			callback && callback.call(this, null);
    			return false;
 		}
 		// We sent a request to get the latest messages.
@@ -3176,6 +3177,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 			callback && callback.call(message, err, message || null);
 		}
 	});
+	return true;
 };
 Message.get.onError = new Q.Event();
 
@@ -3250,28 +3252,31 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Number} ordinal The ordinal of the message to wait for, or -1 to load latest messages
- * @param {Function} callback Receives ([arrayOfOrdinals]) as parameters
+ * @param {Function} callback The first parameter is true if message should be processed, false if message was already processed, or null if the message shouldn't be processed now (if the stream wasn't cached or if we expect a socket to deliver it). The second parameter is [arrayOfOrdinals] that were loaded where latest <= ordinals <= ordinal.
  * @param {Object} [options] A hash of options which can include:
  *   @param {Number} [options.max=5] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
  *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
  *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached and user is a participant in the stream
  *   @param {Boolean} [options.evenIfNotRetained] Set this to true to fetch all messages posted to the stream, in the event that it wasn't cached or retained.
- * @return {Boolean|Number|Q.Pipe}
- *   Returns false if no attempt was made because stream wasn't cached,
- *   true if the cached stream already got this message,
- *   a Q.Pipe if we decided to wait for messages to arrive via socket
- *   or return value of Q.Message.get, if we decided to send a request for the messages.
+ * @return {null|Boolean|Number|Q.Pipe}
+ *   Returns null if no attempt was made because stream wasn't cached
+ *   or because we expect a socket to deliver the message shortly.
+ *   Returns false if the cached stream already got this message.
+ *   Returns Q.Pipe if we decided to wait for messages to arrive via socket.
+ *   Or true, if we decided to send a request for the messages.
  */
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
 	var latest = Message.latestOrdinal(publisherId, streamName);
 	if (!latest && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
-		return false;
+		callback(null);
+		return null;
 	}
 	if (ordinal >= 0 && ordinal <= latest) {
 		// The cached stream already got this message
-		return true;
+		callback(false);
+		return false;
 	}
 	var o = Q.extend({}, Message.wait.options, options);
 	var waiting = {};
@@ -3291,7 +3296,11 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 				}
 			});
 		}
-		return (o.unlessSocket && socket && participant) ? false : _tryLoading();
+		if ((o.unlessSocket && socket && participant)) {
+			callback(null, []);
+		} else {
+			_tryLoading();
+		}
 	}
 	// ok, wait a little while
 	var t = setTimeout(_tryLoading, o.timeout);
@@ -3309,7 +3318,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	});
 	p.add(ordinals, 1, function () {
 		if (!alreadyCalled) {
-			Q.handle(callback, this, [ordinals]);
+			Q.handle(callback, this, [true, ordinals]);
 		}
 		alreadyCalled = true;
 		return true;
@@ -3330,7 +3339,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
 		function (err, messages) {
 			if (err) {
-				return Q.handle(callback, this, [err]);
+				return Q.handle(callback, this, [false, [], err]);
 			}
 			// Go through the messages and simulate the posting
 			// NOTE: the messages will arrive a lot quicker than they were posted,
@@ -3356,7 +3365,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 					w[0].remove(w[1]);
 				});
 				if (!alreadyCalled) {
-					Q.handle(callback, this, [Object.keys(messages)]);
+					Q.handle(callback, this, [true, Object.keys(messages)]);
 				}
 				alreadyCalled = true;
 			}
