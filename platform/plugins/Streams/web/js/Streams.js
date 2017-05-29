@@ -3252,7 +3252,12 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Number} ordinal The ordinal of the message to wait for, or -1 to load latest messages
- * @param {Function} callback The first parameter is true if message should be processed, false if message was already processed, or null if the message shouldn't be processed now (if the stream wasn't cached or if we expect a socket to deliver it). The second parameter is [arrayOfOrdinals] that were loaded where latest <= ordinals <= ordinal.
+ * @param {Function} callback The first parameter is true if message should be processed,
+ *   false if message was already processed, 
+ *   or null if the message shouldn't be processed now
+ *   (if the stream wasn't cached or if we expect a socket to deliver it). 
+ *   The second parameter is [arrayOfOrdinals] that were loaded,
+ *   where latest < ordinals <= ordinal.
  * @param {Object} [options] A hash of options which can include:
  *   @param {Number} [options.max=5] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
  *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
