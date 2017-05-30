@@ -3303,6 +3303,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		}
 		if ((o.unlessSocket && socket && participant)) {
 			callback(null, []);
+			return null;
 		} else {
 			_tryLoading();
 		}
