@@ -123,14 +123,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 				action: stream.actionUrl(),
 				method: 'put',
 				field: state.field,
-				type: state.inplaceType,
-				onSave: { 'Streams/inplace': function () {
-					// just load all latest messages
-					Q.Streams.Stream.refresh({
-						messages: true,
-						unlessSocket: true
-					});
-				}}
+				type: state.inplaceType
 			});
 			var value = (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field]) || "";
 			switch (state.inplaceType) {
@@ -219,14 +212,19 @@ Q.Tool.define("Streams/inplace", function (options) {
 {
 	Q: {
 		onInit: {"Streams/inplace": function () {
-			var tool = this
+			var tool = this;
 			var state = tool.state;
 			this.forEachChild('Q/inplace', 1, true, _setup);
 			function _setup() {
 				this.state.onSave.set(function () {
-					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
-						state.onUpdate.handle.call(tool);
-					}, {messages: true});
+					Q.Streams.Stream.refresh(
+						state.publisherId, state.streamName,
+						state.onUpdate.handle.bind(tool),
+						{
+							messages: true,
+							unlessSocket: true
+						}
+					);
 				}, 'Streams/inplace');
 			}
 		}}

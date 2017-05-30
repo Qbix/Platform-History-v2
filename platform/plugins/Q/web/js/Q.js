@@ -2034,9 +2034,10 @@ Evp.occurring = false;
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  * @param {boolean} prepend If true, then prepends the handler to the chain
- * @return {String} The key under which the event was set
+ * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
+	if (!handler) return null;
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	if (key === true || (key === undefined && Q.Page.beingActivated)) {
 		Q.Event.forPage.push(this);
@@ -2076,9 +2077,10 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  * @param {boolean} prepend If true, then prepends the handler to the chain
- * @return {String} The key under which the handler was set
+ * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
+	if (!handler) return null;
 	var event = this;
 	var ret = this.set(handler, key, prepend);
 	if (this.occurred || this.occurring) {
@@ -2100,6 +2102,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @return {String} The key under which the handler was set
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+	if (!handler) return null;
 	var event = this;
 	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
@@ -3491,11 +3494,11 @@ Q.Tool = function _Q_Tool(element, options) {
 	options = options || {};
 	this.options = this.options || {};
 	
+	// collect options from parent ids, inner overrides outer
 	var normalizedName = Q.normalize(this.name);
 	var pids = this.parentIds();
 	var len = pids.length;
 	var o = len ? Q.extend({}, Q.Tool.options.levels, options) : options;
-	
 	for (i = len-1; i >= 0; --i) {
 		var pid = pids[i];
 		if (!(a = Q.Tool.active[pid])) {
@@ -4126,7 +4129,19 @@ Tp.ancestor = function Q_Tool_prototype_parent(name) {
  * @return {Q.Tool|null}
  */
 Tp.sibling = function Q_Tool_prototype_sibling(name) {
-	return this.element.Q(name);
+	return (this.element && this.element.Q && this.element.Q(name)) || null;
+};
+
+/**
+ * Gets sibling tools activated on the same element
+ * @method children
+ * @return {Object} pairs of {normalizedName: tool}
+ */
+Tp.siblings = function Q_Tool_prototype_siblings() {
+	var tools = (this.element && this.element.Q && this.element.Q.tools);
+	tools = tools ? Q.copy(tools) : {};
+	delete tools[this.name];
+	return tools;
 };
 
 /**
@@ -4244,14 +4259,21 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSibl
 		withSiblings = false;
 	}
 	name = name && Q.normalize(name);
+	var id, n;
 	var tool = this;
 	var children = tool.children(name, levels);
-	for (var id in children) {
-		for (var n in children[id]) {
+	for (id in children) {
+		for (n in children[id]) {
 			Q.handle(callback, children[id][n]);
 		}
 	}
 	var onActivate = Q.Tool.onActivate(name);
+	if (withSiblings) {
+		var siblings = tool.siblings();
+		for (n in siblings) {
+			Q.handle(callback, siblings[n]);
+		}
+	}
 	var key = onActivate.set(function () {
 		if (this.prefix.startsWith(tool.prefix)) {
 			if (withSiblings || this.prefix.length > tool.prefix.length) {
@@ -4578,7 +4600,9 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 		}
 		if (parentId) {
 			Q.setObject([toolId, parentId], true, _toolsToInit);
-			Q.setObject([parentId, toolId], true, _toolsWaitingForInit);
+			if (parentId !== toolId) {
+				Q.setObject([parentId, toolId], true, _toolsWaitingForInit);
+			}
 		}
 		if (shared) {
 			var uniqueToolId = toolId + " " + toolName;
