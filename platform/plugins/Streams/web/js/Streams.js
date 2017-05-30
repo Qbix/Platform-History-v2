@@ -432,7 +432,7 @@ Streams.onMessageUnseen = new Q.Event();
 Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 
 /**
- * Returns Q.Event that should be used to update any stream representations.
+ * Returns Q.Event that you can use to update any of your stream representations.
  * If you are already handling the Streams.Stream.onFieldChanged
  * and Streams.Stream.onAttribute events, however, then you don't need to
  * also add a handler to this event, because they are called during the refresh anyway.
@@ -687,7 +687,16 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	}, extra);
 	_retain = undefined;
 };
+
+/**
+ * Occurs when Streams.get encounters an error loading a stream from the server
+ * @event get.onError
+ */
 Streams.get.onError = new Q.Event();
+/**
+ * Occurs when Streams.get constructs a stream loaded from the server
+ * @event get.onStream
+ */
 Streams.get.onStream = new Q.Event();
 
 /**
@@ -697,7 +706,6 @@ Streams.get.onStream = new Q.Event();
  * @param {String} action
  * @return {Function}
  */
-
 Streams.batchFunction = function Streams_batchFunction(baseUrl, action) {
 	action = action || 'batch';
 	return Q.batcher.factory(Streams.batchFunction.functions, baseUrl,
@@ -827,6 +835,10 @@ Streams.create = function (fields, callback, related, options) {
 	});
 	_retain = undefined;
 };
+/**
+ * Occurs when Streams.create encounters an error trying to create a stream on the server
+ * @event create.onError
+ */
 Streams.create.onError = new Q.Event();
 
 /**
@@ -1452,6 +1464,10 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		return false;
 	}
 };
+/**
+ * Occurs when Streams.related encounters an error loading the response from the server
+ * @event related.onError
+ */
 Streams.related.onError = new Q.Event();
 
 /**
@@ -1586,7 +1602,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  * @param {Function} callback This is called when the stream has been refreshed.
  *   If the first argument is not false or null, then "this" is the stream.
  *   The arguments are different depending on the options.
- *   If options.messages is true, then it receives [err, ordinals].
+ *   If options.messages is true, then it receives (err, ordinals).
  * @param {Object} [options] A hash of options, including:
  *   @param {Boolean} [options.messages] If set to true, then besides just reloading the fields, attempt to catch up on the latest messages
  *   @param {Number} [options.max] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
@@ -1605,61 +1621,47 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
 	}
-	var result = false;
 	var o = options || {};
 	if (o.messages) {
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
-		result = Message.wait(publisherId, streamName, -1,
-		function (shouldContinue, ordinals) {
+		var result = Message.wait(publisherId, streamName, -1,
+		function (ordinals) {
 			Q.Streams.get(publisherId, streamName, function (err) {
 				callback && callback.apply(this, [err, ordinals]);
 			});
 		}, options);
+		if (result == null || result instanceof Q.Pipe) {
+			// We didn't even try to wait for messages,
+			// The socket will deliver them.
+			callback && callback.call(this, null);
+		}
+		return result;
 	}
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Users.Socket.get(nodeUrl);
-	if (result === false) {
-		var participant;
-		if (o.unlessSocket) {
-			Streams.get.cache.each([publisherId, streamName], function (key, info) {
-				var p = info.subject.participant;
-				if (p && p.state === 'participating') {
-					participant = p;
-					return false;
-				}
-			});
-		}
-		if (socket && participant) {
-   			// We didn't even try to wait for messages
-			callback && callback.call(this, null);
-   			return false;
-		}
-		// We sent a request to get the latest messages.
-		// But we will also force-get the stream, to trigger any handlers
-		// set for the stream's onRefresh event
-		Streams.get.force(publisherId, streamName, function (err, stream) {
-			if (!err) {
-				var ps = Streams.key(publisherId, streamName);
-				if (_retainedStreams[ps]) {
-					var changed = (o.changed) || {};
-					Stream.update(_retainedStreams[ps], this.fields, changed || {});
-					_retainedStreams[ps] = this;
-				}
+	// We sent a request to get the latest messages.
+	// But we will also force-get the stream, to trigger any handlers
+	// set for the stream's onRefresh event
+	Streams.get.force(publisherId, streamName, function (err, stream) {
+		if (!err) {
+			var ps = Streams.key(publisherId, streamName);
+			if (_retainedStreams[ps]) {
+				var changed = (o.changed) || {};
+				Stream.update(_retainedStreams[ps], this.fields, changed || {});
+				_retainedStreams[ps] = this;
 			}
-			if (callback) {
-				var params = [err, stream];
-				if (o.extra) {
-					params.concat(extra);
-				}
-				callback.apply(this, params);
+		}
+		if (callback) {
+			var params = [err, stream];
+			if (o.extra) {
+				params.concat(extra);
 			}
-		});
-		result = true;
-	}
+			callback.apply(this, params);
+		}
+	});
 	_retain = undefined;
 	return true;
 };
@@ -1903,11 +1905,13 @@ Sp.removePermission = function (permission) {
  * Save a stream to the server
  * 
  * @method save
- * @param {Function} callback
  * @param {Object} [options] A hash of options for the subsequent refresh.
  *   See Q.Streams.Stream.refresh
+ * @param {Q.Event} [options.onResult] When the result of the server request comes back.
+ *   Note: the steam may not be refreshed yet by that point.
+ *   You can return false from the handler to prevent the refresh, for whatever reason.
  */
-Sp.save = function _Stream_prototype_save (callback, options) {
+Sp.save = function _Stream_prototype_save (options) {
 	var stream = this;
 	var slotName = "stream";
 	var f = stream.fields;
@@ -1923,21 +1927,20 @@ Sp.save = function _Stream_prototype_save (callback, options) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			return Q.handle(callback, this, [msg, args]);
+			return Streams.onError.handle.call(this, msg, args);
 		}
-		// the rest will occur in the handler for the stream.onAttribute event
-		// coming from the socket
 		var s = data.slots.stream || null;
-		if (s) {
-			// process the Streams/changed message, if stream was retained
-			var o = Q.extend({
-				evenIfNotRetained: true
-			}, options);
-			_refreshUnlessSocket(s.publisherId, s.name, callback, o);
-		} else {
-			return Q.handle(callback, stream, [null, s]);
+		if (options && options.onResult) {
+			if (false === Q.handle(options.onResult, stream, [err, data])) {
+				return;
+			}
 		}
+		// process the Streams/changed message and any other
+		// messages that may have been posted in the meantime.
+		var o = Q.extend({
+			evenIfNotRetained: true
+		}, options);
+		_refreshUnlessSocket(s.publisherId, s.name, o);
 	}, { method: 'put', fields: pf, baseUrl: baseUrl });
 };
 
@@ -1956,11 +1959,10 @@ Sp.close = function _Stream_prototype_remove (callback) {
  * 
  * @static
  * @method reopen
- * @param {Function} callback Receives (err, result) as parameters
  */
-Sp.reopen = function _Stream_remove (callback) {
+Sp.reopen = function _Stream_remove () {
 	this.pendingFields.closedTime = false;
-	this.save(callback);
+	this.save();
 };
 
 /**
@@ -2084,6 +2086,9 @@ Stream.onAttribute = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
  * Alias for onAttribute for backward compatibility
  * @event onUpdated
  * @static
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [attributeName] name of the attribute to listen for
  */
 Stream.onUpdated = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
 
@@ -2165,7 +2170,10 @@ Stream.onUpdatedRelateFrom = Q.Event.factory(_streamUpdatedRelateFromHandlers, [
 Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
 
 /**
- * Returns Q.Event that should be used to update any representaitons of this stream
+ * Returns Q.Event that you can use update any of your stream representations.
+ * If you are already handling the Streams.Stream.onFieldChanged
+ * and Streams.Stream.onAttribute events, however, then you don't need to
+ * also add a handler to this event, because they are called during the refresh anyway.
  * @event onConstruct
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which is being refreshed
@@ -2626,6 +2634,10 @@ Stream.join = function _Stream_join (publisherId, streamName, callback) {
 		_refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
+/**
+ * Occurs when Stream.join encounters an error trying to join the stream
+ * @event join.onError
+ */
 Stream.join.onError = new Q.Event();
 
 /**
@@ -2670,6 +2682,10 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 		_refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
+/**
+ * Occurs when Stream.leave encounters an error leave a stream
+ * @event leave.onError
+ */
 Stream.leave.onError = new Q.Event();
 
 /**
@@ -2710,6 +2726,10 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		_refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
+/**
+ * Occurs when Stream.subscribe encounters an error trying to subscribe to a stream
+ * @event subscribe.onError
+ */
 Stream.subscribe.onError = new Q.Event();
 
 /**
@@ -2753,6 +2773,10 @@ Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, call
 		_refreshUnlessSocket(publisherId, streamName);
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
+/**
+ * Occurs when Stream.unsubscribe encounters an error trying to unsubscribe from a stream
+ * @event unsubscribe.onError
+ */
 Stream.unsubscribe.onError = new Q.Event();
 
 /**
@@ -2817,6 +2841,10 @@ Stream.close = function _Stream_remove (publisherId, streamName, callback) {
 		callback && callback.call(this, err, data.slots.result || null);
 	}, { method: 'delete', fields: fields, baseUrl: baseUrl });
 };
+/**
+ * Occurs when Stream.close encounters an error trying to close a stream
+ * @event close.onError
+ */
 Stream.close.onError = new Q.Event();
 
 /**
@@ -3179,6 +3207,10 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 	});
 	return true;
 };
+/**
+ * Occurs when Message.get encounters an error loading a message from the server
+ * @event get.onError
+ */
 Message.get.onError = new Q.Event();
 
 /**
@@ -3209,6 +3241,10 @@ Message.post = function _Message_post (msg, callback) {
 		callback && callback.call(Message, err, message);
 	}, { method: 'post', fields: msg, baseUrl: baseUrl });
 };
+/**
+ * Occurs when Message.post encounters an error posting a message to the server
+ * @event post.onError
+ */
 Message.post.onError = new Q.Event();
 
 /**
@@ -3252,35 +3288,31 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Number} ordinal The ordinal of the message to wait for, or -1 to load latest messages
- * @param {Function} callback The first parameter is true if message should be processed,
- *   false if message was already processed, 
- *   or null if the message shouldn't be processed now
- *   (if the stream wasn't cached or if we expect a socket to deliver it). 
- *   The second parameter is [arrayOfOrdinals] that were loaded,
+ * @param {Function} callback Called whenever all the previous messages have been processed.
+ *   The first parameter is [arrayOfOrdinals] that were processed,
  *   where latest < ordinals <= ordinal.
  * @param {Object} [options] A hash of options which can include:
  *   @param {Number} [options.max=5] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
  *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
  *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached and user is a participant in the stream
  *   @param {Boolean} [options.evenIfNotRetained] Set this to true to fetch all messages posted to the stream, in the event that it wasn't cached or retained.
- * @return {null|Boolean|Number|Q.Pipe}
- *   Returns null if no attempt was made because stream wasn't cached
- *   or because we expect a socket to deliver the message shortly.
+ * @return {Boolean|null|Q.Pipe}
  *   Returns false if the cached stream already got this message.
- *   Returns Q.Pipe if we decided to wait for messages to arrive via socket.
- *   Or true, if we decided to send a request for the messages.
+ *   Returns true if we decided to send a request for the messages.
+ *   Returns new Q.Pipe if we decided to wait for messages to arrive via socket.
+ *   Returns null if no attempt was made because stream wasn't cached.
+ *   In this last case, the callback is not called.
  */
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
 	var latest = Message.latestOrdinal(publisherId, streamName);
 	if (!latest && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
-		callback(null);
 		return null;
 	}
 	if (ordinal >= 0 && ordinal <= latest) {
 		// The cached stream already got this message
-		callback(false);
+		Q.handle(callback, this, [[]]);
 		return false;
 	}
 	var o = Q.extend({}, Message.wait.options, options);
@@ -3290,7 +3322,12 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		streamName: streamName
 	});
 	var socket = Users.Socket.get(nodeUrl);
-	if (!socket || ordinal < 0 || ordinal - o.max > latest) {
+	if (!socket || ordinal - o.max > latest) {
+		return _tryLoading();
+	}
+	// If we are here, then socket is available
+	if (ordinal < 0) {
+		// Requested to wait for the latest messages
 		var participant;
 		if (o.unlessSocket) {
 			Streams.get.cache.each([publisherId, streamName], function (key, info) {
@@ -3301,14 +3338,12 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 				}
 			});
 		}
-		if ((o.unlessSocket && socket && participant)) {
-			callback(null, []);
-			return null;
-		} else {
-			_tryLoading();
+		if (!participant) {
+			return _tryLoading();
 		}
 	}
-	// ok, wait a little while
+	// Wait for messages to arrive via the socket,
+	// and if they don't all arrive, try loading them via an http request.
 	var t = setTimeout(_tryLoading, o.timeout);
 	var ordinals = [];
 	var p = new Q.Pipe();
@@ -3326,6 +3361,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		if (!alreadyCalled) {
 			Q.handle(callback, this, [true, ordinals]);
 		}
+		clearTimeout(t);
 		alreadyCalled = true;
 		return true;
 	}).run();
@@ -3345,7 +3381,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
 		function (err, messages) {
 			if (err) {
-				return Q.handle(callback, this, [false, [], err]);
+				return Q.handle(callback, this, [null, err]);
 			}
 			// Go through the messages and simulate the posting
 			// NOTE: the messages will arrive a lot quicker than they were posted,
@@ -3371,7 +3407,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 					w[0].remove(w[1]);
 				});
 				if (!alreadyCalled) {
-					Q.handle(callback, this, [true, Object.keys(messages)]);
+					Q.handle(callback, this, [Object.keys(messages)]);
 				}
 				alreadyCalled = true;
 			}
@@ -3553,6 +3589,10 @@ var Total = Streams.Total = {
 	onSeen: Q.Event.factory(_seenHandlers, ["", "", ""])
 };
 var _seen = {};
+/**
+ * Occurs when Total.get encounters an error loading a total from the server
+ * @event get.onError
+ */
 Total.get.onError = new Q.Event();
 Total.seen.cache = Q.Cache.local("Streams.Total.seen", 1000);
 
@@ -3627,6 +3667,10 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 		}
 	});
 };
+/**
+ * Occurs when Participant.get encounters an error loading a participant from the server
+ * @event get.onError
+ */
 Participant.get.onError = new Q.Event();
 
 var Pp = Participant.prototype;
@@ -3694,6 +3738,10 @@ Avatar.get = function _Avatar_get (userId, callback) {
 		Q.handle(Q.getObject([userId], _avatarHandlers), avatar, [null, avatar]);
 	});
 };
+/**
+ * Occurs when Avatar.get encounters an error loading an avatar from the server
+ * @event avatar.onError
+ */
 Avatar.get.onError = new Q.Event();
 
 /**
@@ -3734,6 +3782,10 @@ Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 		callback && callback.call(this, null, avatars);
 	}, { fields: fields });
 };
+/**
+ * Occurs when Avatar.byPrefix encounters an error loading avatar from the server
+ * @event byPrefix.onError
+ */
 Avatar.byPrefix.onError = new Q.Event();
 
 var Ap = Avatar.prototype;
@@ -4938,8 +4990,8 @@ function _scheduleUpdate() {
 	}, ms);
 }
 
-function _refreshUnlessSocket(publisherId, streamName, callback, options) {
-	Stream.refresh(publisherId, streamName, callback || null, Q.extend({
+function _refreshUnlessSocket(publisherId, streamName, options) {
+	return Stream.refresh(publisherId, streamName, Q.extend({
 		messages: true,
 		unlessSocket: true
 	}, options));

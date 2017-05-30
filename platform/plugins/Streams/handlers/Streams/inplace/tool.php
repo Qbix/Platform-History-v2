@@ -16,8 +16,6 @@
  * @param {string} [$options.field] Optional, name of an field to change instead of the content of the stream
  * @param {string} [$options.attribute] Optional, name of an attribute to change instead of any field.
  * @param {string} [$options.beforeSave] Reference to a callback to call after a successful save. This callback can cancel the save by returning false.
- * @param {string} [$options.onSave] Reference to a callback or event to run after a successful save.
- * @param {string} [$options.onCancel] Reference to a callback or event to run after cancel.
  * @param {array} [$options.inplace=array()] Additional fields to pass to the child Q/inplace tool, if any
  * @uses Q inplace
  */
