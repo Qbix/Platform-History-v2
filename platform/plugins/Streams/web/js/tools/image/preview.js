@@ -130,8 +130,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 						"Streams/image/preview": function (data, key, file) {
 							if (state.updateTitle && file && file.name) {
 								ps.stream.fields.title = file.name;
-								ps.stream.save(null, {
-									messages: true,
+								ps.stream.save({
 									changed: { icon: true }
 								});
 							}
