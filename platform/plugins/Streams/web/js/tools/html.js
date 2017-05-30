@@ -19,8 +19,6 @@
  *   @param {Object} [options.froala]  The config, if any, to pass to froala
  *   @param {Function} [options.preprocess]  Optional function which takes [callback, tool] and calls callback(objectToExtendAnyStreamFields)
  *  @param {Q.Event} [options.beforeSave] This event triggers before save
- *  @param {Q.Event} [options.onSave] This event triggers after save
- *  @param {Q.Event} [options.onCancel] This event triggers after canceling
  *  @param {Q.Event} [options.onFroalaEditor] This event triggers when the froala editor is loaded
  */
 Q.Tool.define("Streams/html", function (options) {
@@ -164,12 +162,7 @@ Q.Tool.define("Streams/html", function (options) {
 			.get(state.publisherId, state.streamName, function (err) {
 				var stream = this;
 	            stream.pendingFields[state.field] = content;
-	            stream.save(function (err) {
-	                if (Q.firstErrorMessage(err)) {
-	                    return state.onCancel.handle(err);
-	                }
-					state.onSave.handle.call(this);
-	            });
+	            stream.save();
 			}, {fields: [state.field]});
 		}
 		function _focus() {
