@@ -49,11 +49,11 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @method distance
 	 * @static
 	 * Use this to calculate the haversine distance between two sets of lat/long coordinates on the Earth
-	 * @param {double} $lat1
-	 * @param {double} $long1
-	 * @param {double} $lat2
-	 * @param {double} $long2
-	 * @return {double} The result, in meters, of applying the haversine formula
+	 * @param {Number} lat1 latitude in degrees
+	 * @param {Number} long1 longitude in degrees
+	 * @param {Number} lat2 latitude in degrees
+	 * @param {Number} long2 longitude in degrees
+	 * @return {Number} The result, in meters, of applying the haversine formula
 	 */
 	distance: function(lat1, long1, lat2, long2) {
 		var earthRadius = 6378137; // equatorial radius in meters
@@ -77,9 +77,9 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * Use this method to generate a label for a radius based on a distance in meters
 	 * @method distanceLabel
 	 * @static
-	 * @param {double} meters
-	 * @param {string} [units] optionally specify 'km', 'kilometers' or 'miles'
-	 * @return {string} Returns a label that looks like "x.y km", "x miles" or "x meters"
+	 * @param {Number} meters
+	 * @param {String} [units] optionally specify 'km', 'kilometers' or 'miles'
+	 * @return {String} Returns a label that looks like "x.y km", "x miles" or "x meters"
 	 */
 	distanceLabel: function(meters, units) {
 		if (!units) {
@@ -95,7 +95,69 @@ var Places = Q.Places = Q.plugins.Places = {
 		default:
 			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
 		}
+	},
+
+	/**
+	 * Use this method to calculate the heading from pairs of coordinates
+	 * @method heading
+	 * @static
+	 * @param {Number} lat1 latitude in degrees
+	 * @param {Number} long1 longitude in degrees
+	 * @param {Number} lat2 latitude in degrees
+	 * @param {Number} long2 longitude in degrees
+	 * @return {Number} The heading, in degrees
+	 */
+	heading: function(lat1, long1, lat2, long2) {
+		lat1 = lat1 * Math.PI / 180;
+		lat2 = lat2 * Math.PI / 180;
+		var dLong = (long2 - long1) * Math.PI / 180;
+		var y = Math.sin(dLong) * Math.cos(lat2);
+		var x = Math.cos(lat1) * Math.sin(lat2) -
+		        Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLong);
+		var brng = Math.atan2(y, x);
+		return (((brng * 180 / Math.PI) + 360) % 360);
+	},
+	
+	/**
+	 * Use this method to calculate the closest point on a polyline
+	 * @method closest
+	 * @static
+	 * @param {Object} point
+	 * @param {Number} point.x
+	 * @param {Number} point.y 
+	 * @param {Array} polyline an array of objects that contain "x" and "y" properties
+	 * @return {Object} contains properties "index", "x", "y", "distance", "fraction"
+	 */
+	closest: function(point, polyline) {
+		var x = point.x;
+		var y = point.y;
+		var closest = null;
+		var distance = null;
+        for (var i=1, l=polyline.length; i<l; i++) {
+			var a = polyline[i-1].x;
+			var b = polyline[i-1].y;
+			var c = polyline[i].x;
+			var d = polyline[i].y;
+			var n = (c-a)*(c-a) + (d-b)*(d-b);
+			var frac = n ? ((x-a)*(c-a) + (y-b)+(d-b)) / n : 0;
+			frac = Math.max(0, Math.min(1, frac));
+			var e = a + (c-a)*frac;
+			var f = b + (d-b)*frac;
+			var dist = Math.sqrt((x-e)*(x-e) + (y-f)(y-f));
+			if (distance === null || distance > dist) {
+				distance = dist;
+				closest = {
+					index: i,
+					x: e,
+					y: f,
+					distance: dist,
+					fraction: frac
+				};
+			}
+        }
+	    return closest;
 	}
+	
 };
 
 /**
@@ -181,6 +243,58 @@ Places.Location = {
 
 Places.Location.geocode.options = {
 	platform: 'google'
+};
+
+Places.Route = function (platform, map, polyline) {
+	if (platform !== 'google') {
+		throw new Q.Error('Only supports google maps for now');
+	}
+    this.routePoints = [];
+    this._map = map;
+    this._polyline = polyline;
+    var proj = this._map.getProjection();
+    for (var i = 0; i < this._polyline.getPath().getLength(); i++) {
+		var p = this._polyline.getPath().getAt(i);
+        var point = proj.fromLatLngToPoint(p);
+        this.routePoints.push(point);
+    }
+};
+
+/**
+ * Methods for working with location streams
+ * @class Places.Route
+ */
+var Rp = Places.Route.prototype;
+
+/**
+ * Get closest point on route to test point
+ * @param {GLatLng} latlng the test point
+ * @return {GLatLng}
+ */
+Rp.closest = function (latlng) {
+    var tm = this._map;
+    var proj = this._map.getProjection();
+    var point = proj.fromLatLngToPoint(latlng);
+    var closest = Places.closest(point, this.routePoints);
+    var proj = this._map.getProjection();
+	var point = new google.maps.Point(closest.x, closest.y);
+    return proj.fromPointToLatLng(point);
+};
+
+/**
+ * internal use only, find distance along route to point nearest test point
+ **/
+Rp.length = function (index, fTo) {
+    var routeOverlay = this._polyline;
+    var d = 0;
+	var p;
+    for (var n=1; n<index; n++) {
+		p = routeOverlay.getPath().getAt(n);
+        d += routeOverlay.getPath().getAt(n-1).distanceFrom(p);
+    }
+	p = routeOverlay.getPath().getAt(index);
+    d += routeOverlay.getPath().getAt(index-1).distanceFrom(p) * fTo;
+    return d;
 };
 
 function _deg2rad(angle) {
