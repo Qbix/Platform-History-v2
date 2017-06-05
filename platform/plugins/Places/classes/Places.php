@@ -231,7 +231,7 @@ abstract class Places extends Base_Places
 			$frac = max(0, $frac, min(1, $frac));
 			$e = $a + ($c-$a)*$frac;
 			$f = $b + ($d-$b)*$frac;
-			$dist = sqrt(($x-$e)*($x-$e) + ($y-$f)($y-$f));
+			$dist = sqrt(($x-$e)*($x-$e) + ($y-$f)*($y-$f));
 			if ($distance === null || $distance > $dist) {
 				$distance = $dist;
 				$closest = array(
