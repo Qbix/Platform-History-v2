@@ -187,6 +187,66 @@ abstract class Places extends Base_Places
 	}
 	
 	/**
+	 * Use this method to calculate the heading from pairs of coordinates
+	 * @method heading
+	 * @static
+	 * @param {double} $lat1 latitude in degrees
+	 * @param {double} $long1 longitude in degrees
+	 * @param {double} $lat2 latitude in degrees
+	 * @param {double} $long2 longitude in degrees
+	 * @return {double} The heading, in degrees
+	 */
+	function heading($lat1, $long1, $lat2, $long2) {
+		$lat1 = $lat1 * M_PI / 180;
+		$lat2 = $lat2 * M_PI / 180;
+		$dLong = ($long2 - $long1) * M_PI / 180;
+		$y = sin($dLong) * cos($lat2);
+		$x = cos($lat1) * sin($lat2) - sin($lat1) * cos($lat2) * cos($dLong);
+		$brng = atan2($y, $x);
+		return ((($brng * 180 / M_PI) + 360) % 360);
+	}
+	
+	/**
+	 * Use this method to calculate the closest point on a polyline
+	 * @method closest
+	 * @static
+	 * @param {array} point
+	 * @param {double} point.x
+	 * @param {double} point.y 
+	 * @param {array} polyline an array of associative arrays with "x" and "y" keys
+	 * @return {array} contains properties "index", "x", "y", "distance", "fraction"
+	 */
+	function closest($point, $polyline) {
+		$x = $point['x'];
+		$y = $point['y'];
+		$closest = null;
+		$distance = null;
+        for ($i=1, $l=count($polyline); $i<$l; $i++) {
+			$a = $polyline[$i-1]['x'];
+			$b = $polyline[$i-1]['y'];
+			$c = $polyline[$i]['x'];
+			$d = $polyline[$i]['y'];
+			$n = ($c-$a)*($c-$a) + ($d-$b)*($d-$b);
+			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)+($d-$b)) / $n : 0;
+			$frac = max(0, $frac, min(1, $frac);
+			$e = $a + ($c-$a)*$frac;
+			$f = $b + ($d-$b)*$frac;
+			$dist = sqrt(($x-$e)*($x-$e) + ($y-$f)($y-$f));
+			if ($distance === null || $distance > $dist) {
+				$distance = $dist;
+				$closest = array(
+					'index' => $i,
+					'x' => $e,
+					'y' => $f,
+					'distance' => $dist,
+					'fraction' => $frac
+				);
+			}
+        }
+		return $closest;
+	}
+	
+	/**
 	 * Call this function to quantize a (latitude, longitude) pair to grid of quantized
 	 * (latitude, longitude) pairs which are spaced at most $meters apart.
 	 * @param {double} $latitude The latitude of the coordinates to search around

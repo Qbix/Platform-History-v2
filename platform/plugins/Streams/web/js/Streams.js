@@ -1659,7 +1659,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			if (o.extra) {
 				params.concat(extra);
 			}
-			callback.apply(this, params);
+			callback && callback.apply(this, params);
 		}
 	});
 	_retain = undefined;
@@ -4798,14 +4798,14 @@ Q.onInit.add(function _Streams_onInit() {
 					_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/closed':
-					Stream.update(stream, fields, null);
+					Stream.update(stream, instructions, null);
 					var sf = stream.fields;
 					var Qh = Q.handle;
 					var Qgo = Q.getObject;
-					Qh(Qgo([sf.publisherId, sf.name], _streamClosedHandlers), stream, [fields]);
-					Qh(Qgo([sf.publisherId, ''], _streamClosedHandlers), stream, [fields]);
-					Qh(Qgo(['', sf.name], _streamClosedHandlers), stream, [fields]);
-					Qh(Qgo(['', ''], _streamClosedHandlers), stream, [fields]);
+					Qh(Qgo([sf.publisherId, sf.name], _streamClosedHandlers), stream, [instructions]);
+					Qh(Qgo([sf.publisherId, ''], _streamClosedHandlers), stream, [instructions]);
+					Qh(Qgo(['', sf.name], _streamClosedHandlers), stream, [instructions]);
+					Qh(Qgo(['', ''], _streamClosedHandlers), stream, [instructions]);
 					break;
 				default:
 					break;
