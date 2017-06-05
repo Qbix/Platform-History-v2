@@ -4991,7 +4991,7 @@ function _scheduleUpdate() {
 }
 
 function _refreshUnlessSocket(publisherId, streamName, options) {
-	return Stream.refresh(publisherId, streamName, Q.extend({
+	return Stream.refresh(publisherId, streamName, null, Q.extend({
 		messages: true,
 		unlessSocket: true
 	}, options));
