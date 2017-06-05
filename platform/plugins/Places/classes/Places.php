@@ -228,7 +228,7 @@ abstract class Places extends Base_Places
 			$d = $polyline[$i]['y'];
 			$n = ($c-$a)*($c-$a) + ($d-$b)*($d-$b);
 			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)+($d-$b)) / $n : 0;
-			$frac = max(0, $frac, min(1, $frac);
+			$frac = max(0, $frac, min(1, $frac));
 			$e = $a + ($c-$a)*$frac;
 			$f = $b + ($d-$b)*$frac;
 			$dist = sqrt(($x-$e)*($x-$e) + ($y-$f)($y-$f));
