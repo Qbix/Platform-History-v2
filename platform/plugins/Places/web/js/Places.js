@@ -10,6 +10,10 @@
 var Places = Q.Places = Q.plugins.Places = {
 	
 	metric: true, // whether to display things using the metric system units
+	
+	options: {
+		platform: 'google'
+	},
 
 	/**
 	 * @method loadGoogleMaps
@@ -143,7 +147,7 @@ var Places = Q.Places = Q.plugins.Places = {
 			frac = Math.max(0, Math.min(1, frac));
 			var e = a + (c-a)*frac;
 			var f = b + (d-b)*frac;
-			var dist = Math.sqrt((x-e)*(x-e) + (y-f)(y-f));
+			var dist = Math.sqrt((x-e)*(x-e) + (y-f)*(y-f));
 			if (distance === null || distance > dist) {
 				distance = dist;
 				closest = {
@@ -161,140 +165,156 @@ var Places = Q.Places = Q.plugins.Places = {
 };
 
 /**
- * Methods for working with location streams
- * @class Places.Location
+ * Represents geospacial coordinates with latitude, longitude, heading.
+ * Similar to HTML5 Coordinates object.
+ * It has an onReady event that occurs when the coordinates have been geocoded.
+ * It also has an onUpdated event which you handle and trigger.
+ * Use Places.Coordinates.from() to create it
+ * @class Places.Coordinates
+ * @constructor
  */
-Places.Location = {
-	/**
-	 * Get the user's "Places/user/location" stream
-	 * @method getUserStream
-	 * @static
-	 * @param {Function} callback receives (err, stream)
-	 */
-	getUserStream: function (callback) {
-		var userId = Q.getObject('Users.loggedInUser.id', Q);
-		if (!userId) {
-			var err = new Q.Error("Places.Location.getUserStream: not logged in");
-			return callback(err);
+Places.Coordinates = function (_internal) {
+	if (_internal !== true) {
+		throw new Q.Error("You should use Places.Coordinates.from(data, callback)");
+	}
+};
+
+/**
+ * Create a Places.Coordinates object from some data
+ * @class Places.Coordinates
+ * @method from
+ * @static
+ * @param {Object|Streams.Stream} data Can be a stream with attributes,
+ *  or object with properties, which can include either
+ *  ("latitude" and "longitude") together,
+ *  or ("address") or ("userId" with optional "streamName").
+ *  It can additionally specify "heading" and "speed".
+ * @param {String} data.updatedKey If data is a stream, then set this to a string or Q.Tool
+ *  to subscribe to the "Places/location/updated" message for location updates.
+ * @param {Number} data.latitude Used together with latitude
+ * @param {Number} data.longitude Used together with longitude
+ * @param {Number} data.heading Used to set heading, in clockwise degrees from true north
+ * @param {Number} data.speed Horizontal component of the velocity in meters-per-second
+ * @param {String} [data.platform=Places.options.platform]
+ * @param {String} [data.address] This would be geocoded by the platform
+ * @param {String} [data.placeId] A google placeId, if the platform is 'google'
+ * @param {String} [data.userId] Can be used to indicate a specific user
+ * @param {String} [data.streamName="Places/user/location"] Name of a stream published by the user
+ * @param {Function} [callback] Called after latitude and longitude are available
+ *  (may do geocoding with the platform to obtain them if they're not available yet).
+ *  The first parameter is an error string, if any.
+ *  Next is an array of platform-specific Result objects. 
+ *  The "this" object is the Coordinates object itself,
+ *  containing the latitude and longitude from the main result.
+ */
+Places.Coordinates.from = function (data, callback) {
+	var c = new Places.Coordinates(true);
+	c.onUpdated = new Q.Event();
+	c.onReady = new Q.Event();
+	if (!data) {
+		throw new Q.Error("Places.Coordinates.from: data is required");
+	}
+	if (typeof data === 'Q.Streams.Stream') {
+		_stream.call(data);
+	} else if (data.userId) {
+		var streamName = data.streamName || 'Places/user/location';
+		Q.Streams.get(data.userId, streamName, _stream);
+	} else {
+		for (var k in data) {
+			c[k] = data[k];
 		}
-		Q.Streams.get(userId, "Places/user/location", function (err) {
-			var msg = Q.firstErrorMessage(err);
-			if (msg) {
-				return callback(err);
-			}
-			callback.call(this, err, this);
-		});
-	},
+		_geocode(callback);
+	}
+	function _stream() {
+		c.stream = this;
+		Q.extend(c, this.getAllAttributes());
+		if (data.updatedKey) {
+			this.onMessage('Places/location/updated')
+			.set(function () {
+				Q.handle(c.onUpdated, c, arguments);
+			}, data.updatedKey);
+		}
+		_geocode(callback);
+	}
+	function _geocode(callback) {
+		c.geocode(callback, Q.extend({
+			basic: true
+		}, data));
+	}
+};
+
+var Cp = Places.Coordinates.prototype;
 	
-	/**
-	 * Obtain geocoding definition from a geocoding service
-	 * @method geocode
-	 * @static
-	 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
-	 * @param {Function} callback gets (array of results of the geolocation, and status code)
-	 * @param {Object} [options]
-	 * @param {Object} [options.platform='google']
-	 */
-	geocode: function (loc, callback, options) {
-		var o = Q.extend({}, Places.Location.geocode.options, options);
-		if (o.platform !== 'google') {
-			return;
+/**
+ * Obtain geocoding definition from a geocoding service
+ * @method geocode
+ * @static
+ * @param {Function} callback
+ *  The first parameter is an error string, if any.
+ *  Next is an array of platform-specific Result objects. 
+ *  The "this" object is the Coordinates object itself,
+ *  containing the latitude and longitude from the main result.
+ * @param {Object} [options]
+ * @param {String} [options.platform=Places.options.platform]
+ * @param {Boolean} [options.basic=false] If true, skips requests to platform if latitude & longitude are available
+ */
+Cp.geocode = function (callback, options) {
+	var o = Q.extend({}, Cp.geocode.options, options);
+	if (o.platform !== 'google') {
+		return;
+	}
+	var c = this;
+	Places.loadGoogleMaps(function () {
+		var param = {};
+		var p = "Places.Location.geocode: ";
+		if (options && options.basic
+		&& c.latitude && c.longitude) {
+			return callback && callback.call(c, null, []);
 		}
-		Places.loadGoogleMaps(function () {
-			var param = {};
-			var p = "Places.Location.geocode: ";
-			if (Q.typeOf(loc) === 'Q.Streams.Stream') {
-				if (loc.fields.type !== 'Places/location') {
-					throw new Q.Error(p + "stream must have type Places/location");
-				}
-				loc = loc.getAllAttributes();
+		if (c.placeId) {
+			param.placeId = c.placeId;
+		} else if (c.latitude || c.longitude) {
+			if (!c.latitude) {
+				throw new Q.Error(p + "missing latitude");
 			}
-			if (loc.placeId) {
-				param.placeId = loc.placeId;
-			} else if (loc.latitude || loc.longitude) {
-				if (!loc.latitude) {
-					throw new Q.Error(p + "missing latitude");
-				}
-				if (!loc.latitude) {
-					throw new Q.Error(p + "missing longitude");
-				}
-				param.location = {
-					lat: parseFloat(loc.latitude),
-					lng: parseFloat(loc.longitude)
-				};
-			} else if (loc.address) {
-				param.address = loc.address;
-			} else {
-				throw new Q.Error(p + "wrong location format");
+			if (!c.latitude) {
+				throw new Q.Error(p + "missing longitude");
 			}
+			param.location = {
+				lat: parseFloat(c.latitude),
+				lng: parseFloat(c.longitude)
+			};
+		} else if (c.address) {
+			param.address = c.address;
+		} else {
+			throw new Q.Error(p + "wrong location format");
+		}
+		if (param) {
 			var geocoder = new google.maps.Geocoder;
 			geocoder.geocode(param, function (results, status) {
+				var json;
 				if (status !== 'OK') {
-					throw new Q.Error(p + "can't geocode " + loc);
+					json = JSON.stringify(c);
+					err = p + "can't geocode " + json;
 				}
 				if (!results[0]) {
-					throw new Q.Error(p + "no place matched " + loc);
+					json = JSON.stringify(c);
+					err = p + "no place matched " + json;
 				}
-				Q.handle(callback, Places.Location, [results[0], status, results]);
+				var result = results[0];
+				if (result.geometry && result.geometry.location) {
+					var loc = result.geometry.location;
+					c.latitude = loc.lat();
+					c.longitude = loc.lng();
+				}
+				Q.handle(callback, c, [err, results]);
 			});
-		});
-	}
+		}
+	});
 };
 
-Places.Location.geocode.options = {
-	platform: 'google'
-};
-
-Places.Route = function (platform, map, polyline) {
-	if (platform !== 'google') {
-		throw new Q.Error('Only supports google maps for now');
-	}
-    this.routePoints = [];
-    this._map = map;
-    this._polyline = polyline;
-    var proj = this._map.getProjection();
-    for (var i = 0; i < this._polyline.getPath().getLength(); i++) {
-		var p = this._polyline.getPath().getAt(i);
-        var point = proj.fromLatLngToPoint(p);
-        this.routePoints.push(point);
-    }
-};
-
-/**
- * Methods for working with location streams
- * @class Places.Route
- */
-var Rp = Places.Route.prototype;
-
-/**
- * Get closest point on route to test point
- * @param {GLatLng} latlng the test point
- * @return {GLatLng}
- */
-Rp.closest = function (latlng) {
-    var tm = this._map;
-    var proj = this._map.getProjection();
-    var point = proj.fromLatLngToPoint(latlng);
-    var closest = Places.closest(point, this.routePoints);
-    var proj = this._map.getProjection();
-	var point = new google.maps.Point(closest.x, closest.y);
-    return proj.fromPointToLatLng(point);
-};
-
-/**
- * internal use only, find distance along route to point nearest test point
- **/
-Rp.length = function (index, fTo) {
-    var routeOverlay = this._polyline;
-    var d = 0;
-	var p;
-    for (var n=1; n<index; n++) {
-		p = routeOverlay.getPath().getAt(n);
-        d += routeOverlay.getPath().getAt(n-1).distanceFrom(p);
-    }
-	p = routeOverlay.getPath().getAt(index);
-    d += routeOverlay.getPath().getAt(index-1).distanceFrom(p) * fTo;
-    return d;
+Cp.geocode.options = {
+	platform: Places.options.platform
 };
 
 function _deg2rad(angle) {
