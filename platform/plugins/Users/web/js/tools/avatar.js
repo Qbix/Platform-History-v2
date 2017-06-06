@@ -14,7 +14,8 @@ var Users = Q.Users;
  * @constructor
  * @param {Object} [options]
  *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
- *   @param {String} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon.
+ *   @param {Number|String} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. Or pass a string to specify the url of the icon.
+ *   @param {Boolean} [options.contents] Set to false to not show the name
  *   @param {Object} [options.templates] Object for avatar template parameters
  *     @param {Object} [options.templates.icon]
  *       @param {String} [options.templates.icon.dir='plugins/Users/views']
@@ -47,6 +48,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 {
 	userId: null,
 	icon: Users.icon.defaultSize,
+	contents: true,
 	templates: {
 		icon: {
 			dir: 'plugins/Users/views',
@@ -74,7 +76,9 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		var tool = this;
 		var state = this.state;
 		var p = new Q.Pipe(['icon', 'contents'], function (params) {
-			tool.element.innerHTML = params.icon[0] + params.contents[0];
+			var icon = state.icon ? params.icon[0] : '';
+			var contents = state.contents ? params.contents[0] : '';
+			tool.element.innerHTML = icon + contents;
 		});
 	
 		if (state.userId === '') {
@@ -106,9 +110,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}
 			state.user = user;
 			if (state.icon) {
-				fields = Q.extend({}, state.templates.icon.fields, {
-					src: this.iconUrl(state.icon)
-				});
+				var src = isNaN(state.icon)
+					? state.icon
+					: Q.url(avatar.iconUrl(state.icon), null)
+				fields = Q.extend({}, state.templates.icon.fields, {src: src});
 				Q.Template.render('Users/avatar/icon', fields, function (err, html) {
 					p.fill('icon')(html);
 				}, Q.extend({size: state.icon}, state.templates.icon));
