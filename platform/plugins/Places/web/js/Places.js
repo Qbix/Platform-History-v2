@@ -14,6 +14,8 @@ var Places = Q.Places = Q.plugins.Places = {
 	options: {
 		platform: 'google'
 	},
+	
+	Google: {},
 
 	/**
 	 * @method loadGoogleMaps
@@ -160,9 +162,51 @@ var Places = Q.Places = Q.plugins.Places = {
 			}
         }
 	    return closest;
+	},
+	
+	/**
+	 * Calculate a route.
+	 * @param {String|Object} from an address, a string with properties "latitude", "longitude", or placeId 
+	 * @param {String|Object} to an address, a string with properties "latitude", "longitude", or placeId
+	 * @param {Array} waypoints array of items, each of which is an an address, a string with properties "latitude", "longitude", or placeId
+	 * @param {Function} callback
+	 * @param {Object} options Can include the following
+	 *   @param {Number} [options.departTime] Time to depart. Standard Unix time (seconds from 1970).
+	 *   @param {Number} [options.arriveTime] Time to arrive. Standard Unix time (seconds from 1970).
+	 */
+	route: function (from, to, waypoints, optimize, callback, options) {
+		var params = {
+			origin: from,
+			destination: to,
+			waypoints: waypoints,
+			optimizeWaypoints: optimize,
+			travelMode: google.maps.TravelMode.DRIVING
+		};
+		if (options.arriveTime || options.departTime) {
+			params.transitOptions = {
+				departureTime: new Date(options.departTime*1000),
+				arrivalTime: new Date(options.arriveTime*1000)
+			};
+		}
+		var d = Places.Google.directionsService;
+		if (!d) {
+			d = Places.Google.directionsService = new google.maps.DirectionsService();
+		}
+		d.route(params, function (directions, status) {
+			if (status !== google.maps.DirectionsStatus.OK) {
+				return Q.handle(Places.route.onError, Places, directions, status, d, params);
+			}
+			Q.handle(Places.route.onResult, Places, [directions, status, d, params]);
+			Q.handle(callback, Places, [directions, status, d, params]);
+		});
 	}
 	
 };
+
+Places.route.onResult = new Q.Event();
+Places.route.onError = new Q.Event(function (directions, status) {
+	console.warn('Places.route: request failed due to ' + status);
+});
 
 /**
  * Represents geospacial coordinates with latitude, longitude, heading.
@@ -184,7 +228,8 @@ Places.Coordinates = function (_internal) {
  * @class Places.Coordinates
  * @method from
  * @static
- * @param {Object|Streams.Stream} data Can be a stream with attributes,
+ * @param {Object|Streams.Stream\Places.Coordinates} data
+ *  Can be a stream with attributes,
  *  or object with properties, which can include either
  *  ("latitude" and "longitude") together,
  *  or ("address") or ("userId" with optional "streamName").
@@ -206,9 +251,12 @@ Places.Coordinates = function (_internal) {
  *  Next is an array of platform-specific Result objects. 
  *  The "this" object is the Coordinates object itself,
  *  containing the latitude and longitude from the main result.
+ * @return {Places.Coordinates}
  */
 Places.Coordinates.from = function (data, callback) {
-	var c = new Places.Coordinates(true);
+	var c = (data instanceof Places.Coordinates)
+		? Q.copy(data)
+		: new Places.Coordinates(true);
 	c.onUpdated = new Q.Event();
 	c.onReady = new Q.Event();
 	if (!data) {
@@ -225,12 +273,15 @@ Places.Coordinates.from = function (data, callback) {
 		}
 		_geocode(callback);
 	}
+	return c;
 	function _stream() {
 		c.stream = this;
 		Q.extend(c, this.getAllAttributes());
 		if (data.updatedKey) {
 			this.onMessage('Places/location/updated')
-			.set(function () {
+			.set(function (stream, message) {
+				var instructions = message.getAllInstructions();
+				Q.extend(c, instructions);
 				Q.handle(c.onUpdated, c, arguments);
 			}, data.updatedKey);
 		}
@@ -261,24 +312,24 @@ var Cp = Places.Coordinates.prototype;
 Cp.geocode = function (callback, options) {
 	var o = Q.extend({}, Cp.geocode.options, options);
 	if (o.platform !== 'google') {
-		return;
+		throw new Q.Error("Places.Coordinates.prototype.geocode: only works with platform=google for now");
 	}
 	var c = this;
+	if (options && options.basic
+	&& c.latitude && c.longitude) {
+		return callback && callback.call(c, null, []);
+	}
 	Places.loadGoogleMaps(function () {
 		var param = {};
 		var p = "Places.Location.geocode: ";
-		if (options && options.basic
-		&& c.latitude && c.longitude) {
-			return callback && callback.call(c, null, []);
-		}
 		if (c.placeId) {
 			param.placeId = c.placeId;
 		} else if (c.latitude || c.longitude) {
 			if (!c.latitude) {
-				throw new Q.Error(p + "missing latitude");
+				callback && callback.call(c, p + "missing latitude");
 			}
 			if (!c.latitude) {
-				throw new Q.Error(p + "missing longitude");
+				callback && callback.call(c, p + "missing longitude");
 			}
 			param.location = {
 				lat: parseFloat(c.latitude),
@@ -287,12 +338,12 @@ Cp.geocode = function (callback, options) {
 		} else if (c.address) {
 			param.address = c.address;
 		} else {
-			throw new Q.Error(p + "wrong location format");
+			callback && callback.call(c, p + "wrong location format");
 		}
 		if (param) {
 			var geocoder = new google.maps.Geocoder;
 			geocoder.geocode(param, function (results, status) {
-				var json;
+				var json, err;
 				if (status !== 'OK') {
 					json = JSON.stringify(c);
 					err = p + "can't geocode " + json;
