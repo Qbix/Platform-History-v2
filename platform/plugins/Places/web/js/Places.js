@@ -139,7 +139,7 @@ var Places = Q.Places = Q.plugins.Places = {
 		var y = point.y;
 		var closest = null;
 		var distance = null;
-        for (var i=1, l=polyline.length; i<l; i++) {
+		for (var i=1, l=polyline.length; i<l; i++) {
 			var a = polyline[i-1].x;
 			var b = polyline[i-1].y;
 			var c = polyline[i].x;
@@ -160,7 +160,7 @@ var Places = Q.Places = Q.plugins.Places = {
 					fraction: frac
 				};
 			}
-        }
+		}
 	    return closest;
 	},
 	
