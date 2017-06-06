@@ -16,7 +16,8 @@ var Streams = Q.Streams;
  * @param {String} prefix Prefix of the tool to be constructed.
  * @param {Object} [options] A hash of options, containing:
  *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
- *   @param {Number} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon.
+ *   @param {Number|String} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. Or pass a string to specify the url of the icon.
+ *   @param {Boolean} [options.contents=true] Set to false to not show the name
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
  *   @param {Boolean|Array} [options.editable=false] If true, and userId is the logged-in user's id, the tool presents an interface for the logged-in user to edit their name and icon. This can also be an array containing one or more of 'icon', 'name'.
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
@@ -80,6 +81,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 {
 	userId: undefined,
 	icon: Users.icon.defaultSize,
+	contents: true,
 	"short": false,
 	reflectChanges: true,
 	templates: {
@@ -130,7 +132,9 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 		
 		var p = new Q.Pipe(['icon', 'contents'], function (params) {
-			tool.element.innerHTML = params.icon[0] + params.contents[0];
+			var icon = state.icon ? params.icon[0] : '';
+			var contents = state.contents ? params.contents[0] : '';
+			tool.element.innerHTML = icon + contents;
 			_present();
 		});
 		if (state.userId == '') {
@@ -162,9 +166,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}
 			state.avatar = avatar;
 			if (state.icon) {
-				fields = Q.extend({}, state.templates.icon.fields, {
-					src: Q.url(avatar.iconUrl(state.icon), null)
-				});
+				var src = isNaN(state.icon)
+					? state.icon
+					: Q.url(avatar.iconUrl(state.icon), null);
+				fields = Q.extend({}, state.templates.icon.fields, {src: src});
 				Q.Template.render('Users/avatar/icon', fields, 
 				function (err, html) {
 					p.fill('icon')(html);

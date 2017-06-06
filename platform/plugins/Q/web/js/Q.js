@@ -3691,8 +3691,8 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
  * @param {HTMLElement} elem 
  *  The container to traverse
  * @param {boolean} removeCached 
- *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
- *  should be removed...
+ *  Defaults to false. Whether the tools whose containing elements
+ *  have the "data-Q-retain" attribute should be removed...
  */
 Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
 	if (typeof elem === 'string') {
@@ -4162,7 +4162,9 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
 	var i;
 	var shouldRemove = removeCached
 		|| !this.element.getAttribute('data-Q-retain') !== null;
-	if (!shouldRemove) return false;
+	if (!shouldRemove || !Q.Tool.active[this.id]) {
+		return false;
+	}
 
 	// give the tool a chance to clean up after itself
 	var normalizedName = Q.normalize(this.name);
