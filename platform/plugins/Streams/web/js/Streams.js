@@ -432,10 +432,11 @@ Streams.onMessageUnseen = new Q.Event();
 Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 
 /**
- * Returns Q.Event that you can use to update any of your stream representations.
- * If you are already handling the Streams.Stream.onFieldChanged
- * and Streams.Stream.onAttribute events, however, then you don't need to
- * also add a handler to this event, because they are called during the refresh anyway.
+ * Returns Q.Event that occurs when a stream is obtained via Streams.get()
+ * and gets pulled from the server again (whether it changed or not).
+ * If you just want to take some action whenever any field in the stream changes
+ * (via Stream.update() method, which is called for most standard Streams/ messages)
+ * then use the Streams.Stream.onFieldChanged event factory instead.
  * @event onRefresh
  * @param {String} type type of the stream being refreshed on the client side
  * @return {Q.Event}
@@ -453,7 +454,12 @@ Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
 Streams.onAvatar = Q.Event.factory(_avatarHandlers, [""]);
 
 /**
- * Returns Q.Event that occurs on message post event coming from socket.io
+ * Returns Q.Event that occurs after the system learns of a new message that was posted.
+ * The platform makes sure the ordinals come in the right order, for each stream.
+ * So you just have to handle the messages to update your tools, pages, etc.
+ * By the time this event happens, the platform has already taken any default actions
+ * for standard events such as "Streams/join", etc. so the stream and all caches
+ * are up-to-date, e.g. the participants includes the newly joined participant, etc.
  * @event onMessage
  * @param {String} type type of the stream to which a message is posted
  * @param {String} messageType type of the message
@@ -2044,11 +2050,20 @@ Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
 
 /**
  * Returns Q.Event which occurs when fields of the stream officially changed
+ * on the server, or was simulated by the client. Either way, you can use this
+ * opportunity to update your tools and other visual representations of the stream.
+ * Note that this event occurs before the stream object is finally updated, so
+ * you can compare the old values of the fields to the new ones.
+ * If you need to use the updated stream object, use setTimeout(callback, 0).
+ * Finally, if the field which changed is an "extend" field for that stream type,
+ * then its value will be null even if the real value is probably something else.
+ * You will need to call stream.refresh(callback) to load the stream from the server
+ * and in the callback you'll finally have the stream object you've been looking for.
  * @event onFieldChanged
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [fieldName]  name of the field to listen for
+ * @param {String} [fieldName]  name of the field to listen for, or "" for all fields
  */
 Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""]);
 
@@ -2078,7 +2093,7 @@ Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""
  * @static
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [attributeName] name of the attribute to listen for
+ * @param {String} [attributeName] name of the attribute to listen for, or "" for all
  */
 Stream.onAttribute = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
 
@@ -4720,43 +4735,6 @@ Q.onInit.add(function _Streams_onInit() {
 				}
 				
 				var streamType = stream.fields.type;
-
-				_messageHandlers[streamType] &&
-				_messageHandlers[streamType][msg.type] &&
-				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
-
-				_messageHandlers[''] &&
-				_messageHandlers[''][msg.type] &&
-				Q.handle(_messageHandlers[''][msg.type], Streams, params);
-
-				_messageHandlers[streamType] &&
-				_messageHandlers[streamType][''] &&
-				Q.handle(_messageHandlers[streamType][''], Streams, params);
-
-				_messageHandlers[''] &&
-				_messageHandlers[''][''] &&
-				Q.handle(_messageHandlers[''][''], Streams, params);
-
-				Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
-					Q.each([msg.streamName, ''], function (ordinal, streamName) {
-						Q.handle(
-							Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
-							Streams,
-							params
-						);
-						Q.handle(
-							Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
-							Streams,
-							params
-						);
-						Q.handle(
-							Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
-							Streams,
-							params
-						);
-					});
-				});
-
 				var instructions = msg.instructions && JSON.parse(msg.instructions);
 				var node;
 				var updatedParticipants = true;
@@ -4810,6 +4788,42 @@ Q.onInit.add(function _Streams_onInit() {
 				default:
 					break;
 				}
+				
+				_messageHandlers[streamType] &&
+				_messageHandlers[streamType][msg.type] &&
+				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
+
+				_messageHandlers[''] &&
+				_messageHandlers[''][msg.type] &&
+				Q.handle(_messageHandlers[''][msg.type], Streams, params);
+
+				_messageHandlers[streamType] &&
+				_messageHandlers[streamType][''] &&
+				Q.handle(_messageHandlers[streamType][''], Streams, params);
+
+				_messageHandlers[''] &&
+				_messageHandlers[''][''] &&
+				Q.handle(_messageHandlers[''][''], Streams, params);
+
+				Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
+					Q.each([msg.streamName, ''], function (ordinal, streamName) {
+						Q.handle(
+							Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
+							Streams,
+							params
+						);
+						Q.handle(
+							Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
+							Streams,
+							params
+						);
+						Q.handle(
+							Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
+							Streams,
+							params
+						);
+					});
+				});
 				
 				if (usingCached && _messageShouldRefreshStream[msg.type]) {
 					_debouncedRefresh(
