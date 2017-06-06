@@ -2151,14 +2151,16 @@ class Db_Row implements Iterator
 	 * @method retrieveOrSave
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
+	 * @param {array|boolean} [$modifyQuery=false] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @param {array} [$options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
 	 * @return {boolean} returns whether the record was saved (i.e. false means retrieved)
 	 */
 	function retrieveOrSave (
 		$fields = '*', 
+		$modifyQuery = false,
 		$options = array())
 	{
-		if ($this->retrieve($fields, true, false, $options)) {
+		if ($this->retrieve($fields, true, $modifyQuery, $options)) {
 			return false;
 		}
 
