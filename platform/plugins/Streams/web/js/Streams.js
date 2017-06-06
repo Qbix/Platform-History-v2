@@ -389,31 +389,21 @@ Streams.onError = new Q.Event(function (err, data) {
 }, 'Streams.onError');
 
 /**
- * This event is fired when a dialog is presented to a newly invited user.
- * @event onInvitedDialog
- */
-Streams.onInvitedDialog = new Q.Event();
-
-/**
- * This event is fired when the invited user takes the first action after
- * entering their name. It is a good time to start playing any audio, etc.
- * @event onInvitedUserAction
- */
-Streams.onInvitedUserAction = new Q.Event();
-
-/**
- * Occurs on message post event coming from socket.io, if none of the
- * message handlers have called .seen() on the message. You can add a handler
- * to this event to show or update a badge for "unseen" messages.
+ * Returns Q.Event that occurs after the system learns of a new message that was posted.
+ * The platform makes sure the ordinals come in the right order, for each stream.
+ * So you just have to handle the messages to update your tools, pages, etc.
+ * By the time this event happens, the platform has already taken any default actions
+ * for standard events such as "Streams/join", etc. so the stream and all caches
+ * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
- * @param {String} type type of the stream to which a message is posted
- * @param {String} messageType  type of the message
+ * @param {String} type type of the stream to which a message is posted, pass "" for all types
+ * @param {String} messageType type of the message, pass "" for all types
  * @return {Q.Event}
  */
 Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
 
 /**
- * Returns Q.Event that occurs on message post event coming from socket.io
+ * Returns Q.Event that occurs on a message coming in that hasn't been seen yet.
  * You can call .seen() on the message to mark it as seen, otherwise if no
  * handlers mark it seen, some other code might show a badge for "unseen" messages.
  * @event onMessageUnseen
@@ -432,10 +422,11 @@ Streams.onMessageUnseen = new Q.Event();
 Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 
 /**
- * Returns Q.Event that you can use to update any of your stream representations.
- * If you are already handling the Streams.Stream.onFieldChanged
- * and Streams.Stream.onAttribute events, however, then you don't need to
- * also add a handler to this event, because they are called during the refresh anyway.
+ * Returns Q.Event that occurs when a stream is obtained via Streams.get()
+ * and gets pulled from the server again (whether it changed or not).
+ * If you just want to take some action whenever any field in the stream changes
+ * (via Stream.update() method, which is called for most standard Streams/ messages)
+ * then use the Streams.Stream.onFieldChanged event factory instead.
  * @event onRefresh
  * @param {String} type type of the stream being refreshed on the client side
  * @return {Q.Event}
@@ -453,16 +444,21 @@ Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
 Streams.onAvatar = Q.Event.factory(_avatarHandlers, [""]);
 
 /**
- * Returns Q.Event that occurs on message post event coming from socket.io
- * @event onMessage
- * @param {String} type type of the stream to which a message is posted
- * @param {String} messageType type of the message
- * @return {Q.Event}
+ * This event is fired when a dialog is presented to a newly invited user.
+ * @event onInvitedDialog
  */
-Streams.onMessage = Q.Event.factory(_messageHandlers, ["", ""]);
+Streams.onInvitedDialog = new Q.Event();
 
 /**
- * Event occurs when the user enters their full name after following an invite, completing their registration
+ * This event is fired when the invited user takes the first action after
+ * entering their name. It is a good time to start playing any audio, etc.
+ * @event onInvitedUserAction
+ */
+Streams.onInvitedUserAction = new Q.Event();
+
+/**
+ * Event occurs when the user enters their full name after following an invite,
+ * completing their registration
  * @event onInviteComplete
  */
 Streams.onInviteComplete = new Q.Event();
@@ -497,9 +493,9 @@ function _connectSockets(refresh) {
 }
 
 /**
- * Disconnects all Streams sockets which have been connected
- * note that this also affects other plugins that might be listening on the sockets
- * maybe we should have another thing, I don't know, but for now it's ok
+ * Disconnects all Streams sockets which have been connected.
+ * Note that this also affects other plugins that might be listening on the sockets
+ * (maybe we should have another thing, I don't know, but for now it's ok).
  * @private
  * @static
  * @method _disconnectSockets
@@ -2032,23 +2028,36 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
 };
 
 /**
- * Returns Q.Event which occurs on a message post event coming from socket.io
- * Generic callbacks can be assigned by setting messageType to ""
+ * Returns Q.Event that occurs after the system learns of a new message that was posted.
+ * The platform makes sure the ordinals come in the right order, for each stream.
+ * So you just have to handle the messages to update your tools, pages, etc.
+ * By the time this event happens, the platform has already taken any default actions
+ * for standard events such as "Streams/join", etc. so the stream and all caches
+ * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [messageType] type of the message, or its ordinal
+ * @param {String} [messageType] type of the message, or its ordinal, pass "" for all types
  */
 Stream.onMessage = Q.Event.factory(_streamMessageHandlers, ["", "", ""]);
 
 /**
  * Returns Q.Event which occurs when fields of the stream officially changed
+ * on the server, or was simulated by the client. Either way, you can use this
+ * opportunity to update your tools and other visual representations of the stream.
+ * Note that this event occurs before the stream object is finally updated, so
+ * you can compare the old values of the fields to the new ones.
+ * If you need to use the updated stream object, use setTimeout(callback, 0).
+ * Finally, if the field which changed is an "extend" field for that stream type,
+ * then its value will be null even if the real value is probably something else.
+ * You will need to call stream.refresh(callback) to load the stream from the server
+ * and in the callback you'll finally have the stream object you've been looking for.
  * @event onFieldChanged
  * @static
  * @param {String} [publisherId] id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [fieldName]  name of the field to listen for
+ * @param {String} [fieldName]  name of the field to listen for, or "" for all fields
  */
 Stream.onFieldChanged = Q.Event.factory(_streamFieldChangedHandlers, ["", "", ""]);
 
@@ -2076,9 +2085,9 @@ Stream.beforeSetAttribute = Q.Event.factory(_beforeSetAttributeHandlers, ["", ""
  * Returns Q.Event which occurs when attributes of the stream officially updated
  * @event onAttribute
  * @static
- * @param {String} publisherId id of publisher which is publishing the stream
- * @param {String} [streamName] name of stream which the message is posted to
- * @param {String} [attributeName] name of the attribute to listen for
+ * @param {String} [publisherId] id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to, "" for all
+ * @param {String} [attributeName] name of the attribute to listen for, or "" for all
  */
 Stream.onAttribute = Q.Event.factory(_streamAttributeHandlers, ["", "", ""]);
 
@@ -2182,20 +2191,23 @@ Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
 Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
 
 /**
- * Event factory for listening to messages based on type.
- * 
+ * Returns Q.Event that occurs after the system learns of a new message that was posted.
+ * The platform makes sure the ordinals come in the right order, for each stream.
+ * So you just have to handle the messages to update your tools, pages, etc.
+ * By the time this event happens, the platform has already taken any default actions
+ * for standard events such as "Streams/join", etc. so the stream and all caches
+ * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
- * @param {String} messageType can be "" for all message types
+ * @param {String} [messageType] type of the message, or its ordinal, pass "" for all types
  */
 Sp.onMessage = function _Stream_prototype_onMessage (messageType) {
 	return Stream.onMessage(this.fields.publisherId, this.fields.name, messageType);
 };
 
 /**
- * Event factory for listening to attributes based on name.
- * 
+ * Returns Q.Event which occurs when attributes of the stream officially updated
  * @event onAttribute
- * @param {String} attribute can be "" to get triggered for all attributes
+ * @param {String} [attributeName] name of the attribute to listen for, or "" for all
  */
 Sp.onAttribute = function _Stream_prototype_onAttribute (attribute) {
 	return Stream.onAttribute(this.fields.publisherId, this.fields.name, attribute);
@@ -4720,43 +4732,6 @@ Q.onInit.add(function _Streams_onInit() {
 				}
 				
 				var streamType = stream.fields.type;
-
-				_messageHandlers[streamType] &&
-				_messageHandlers[streamType][msg.type] &&
-				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
-
-				_messageHandlers[''] &&
-				_messageHandlers[''][msg.type] &&
-				Q.handle(_messageHandlers[''][msg.type], Streams, params);
-
-				_messageHandlers[streamType] &&
-				_messageHandlers[streamType][''] &&
-				Q.handle(_messageHandlers[streamType][''], Streams, params);
-
-				_messageHandlers[''] &&
-				_messageHandlers[''][''] &&
-				Q.handle(_messageHandlers[''][''], Streams, params);
-
-				Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
-					Q.each([msg.streamName, ''], function (ordinal, streamName) {
-						Q.handle(
-							Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
-							Streams,
-							params
-						);
-						Q.handle(
-							Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
-							Streams,
-							params
-						);
-						Q.handle(
-							Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
-							Streams,
-							params
-						);
-					});
-				});
-
 				var instructions = msg.instructions && JSON.parse(msg.instructions);
 				var node;
 				var updatedParticipants = true;
@@ -4810,6 +4785,42 @@ Q.onInit.add(function _Streams_onInit() {
 				default:
 					break;
 				}
+				
+				_messageHandlers[streamType] &&
+				_messageHandlers[streamType][msg.type] &&
+				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
+
+				_messageHandlers[''] &&
+				_messageHandlers[''][msg.type] &&
+				Q.handle(_messageHandlers[''][msg.type], Streams, params);
+
+				_messageHandlers[streamType] &&
+				_messageHandlers[streamType][''] &&
+				Q.handle(_messageHandlers[streamType][''], Streams, params);
+
+				_messageHandlers[''] &&
+				_messageHandlers[''][''] &&
+				Q.handle(_messageHandlers[''][''], Streams, params);
+
+				Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
+					Q.each([msg.streamName, ''], function (ordinal, streamName) {
+						Q.handle(
+							Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
+							Streams,
+							params
+						);
+						Q.handle(
+							Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
+							Streams,
+							params
+						);
+						Q.handle(
+							Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
+							Streams,
+							params
+						);
+					});
+				});
 				
 				if (usingCached && _messageShouldRefreshStream[msg.type]) {
 					_debouncedRefresh(
