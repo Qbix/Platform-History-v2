@@ -92,9 +92,13 @@ function _Q_overlay(o) {
 			}
 			var topZ = 0;
 			$('body').children().each(function () {
-				var z = parseInt($(this).css('z-index'));
+				var $this = $(this);
+				if ($this.hasClass('Q_click_mask')) {
+					return;
+				}
+				var z = parseInt($this.css('z-index'));
 				if (!isNaN(z)) {
-					topZ = Math.max(topZ, $(this).css('z-index'))
+					topZ = Math.max(topZ, z)
 				}
 			});
 			$this.css('z-index', topZ);
