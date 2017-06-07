@@ -3073,7 +3073,7 @@ Q.Contextual = {
 		
 		if (Q.info.isTouchscreen)
 		{
-			Q.Masks.show('Q.screen.mask', { 'fadeTime': Q.Contextual.fadeTime });
+			Q.Masks.show('Q.screen.mask', { 'fadeIn': Q.Contextual.fadeTime });
 		}
 		
 		if (!info.ellipsissed)
