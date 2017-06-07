@@ -11251,8 +11251,9 @@ Q.Masks = {
 			return Q.Masks.collection[key];
 		}
 		var mask = Q.Masks.collection[key] = Q.extend({
-			'fadeTime': 0,
-			'shouldCover': null
+			fadeIn: 0,
+			fadeOut: 0,
+			shouldCover: null
 		}, Q.Masks.options[key], options);
 		var me = mask.element = document.createElement('div');
 		me.addClass('Q_mask ' + (mask.className || ''));

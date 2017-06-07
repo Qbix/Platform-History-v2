@@ -406,6 +406,7 @@ Q.Tool.define("Q/tabs", function(options) {
 			tool.$overflowed = $(elements);
 			if (Q.Contextual.current != -1) {
 				// it was open, show it again
+				Q.Masks.hide('Q.screen.mask');
 				Q.Contextual.show(Q.Contextual.current);
 			}
 		});
