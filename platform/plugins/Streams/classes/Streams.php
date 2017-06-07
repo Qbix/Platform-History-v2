@@ -1986,7 +1986,9 @@ abstract class Streams extends Base_Streams
 				? $options['weight']
 				: null;
 			$weight = Q::ifset($weights2, $category->name, $weight);
-			
+			if (!$stream) {
+				continue;
+			}
 			$fromUrl = $stream->url();
 			$fromIcon = $stream->icon;
 			$fromTitle = $stream->title;
