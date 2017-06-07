@@ -1350,12 +1350,6 @@ abstract class Streams extends Base_Streams
 		}
 		$fields = $_REQUEST['fields'];
 		$fields = is_array($fields) ? $fields : explode(',', $fields);
-		$fieldNames = Streams_Stream::fieldNames();
-		foreach ($fields as $f) {
-			if (!in_array($f, $fieldNames)){
-				throw new Q_Exception("Invalid field name $f", 'fields');
-			}
-		}
 		if (!in_array('publisherId', $fields)) {
 			$fields[] = 'publisherId';
 		}
