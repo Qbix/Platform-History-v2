@@ -5625,7 +5625,7 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 	}
 };
 
-var _supportsPassive = null;
+var _supportsPassive;
 
 /**
  * Add an event listener to an element
