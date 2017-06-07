@@ -101,7 +101,9 @@ function _Streams_default_preview(options, preview) {
 					var jq = tool.$('img.Streams_preview_icon');
 					tool.preview.icon(jq[0], p.fill('icon'));
 					var $pc = tool.$('.Streams_preview_contents');
-					$pc.width(0).width($pc[0].remainingWidth());
+					if ($pc.parent().is(":visible")) {
+						$pc.width(0).width($pc[0].remainingWidth());
+					}
 					Q.onLayout(tool.element).set(function () {
 						var $pc = tool.$('.Streams_preview_contents');
 						if ($pc.parent().is(':visible')) {
