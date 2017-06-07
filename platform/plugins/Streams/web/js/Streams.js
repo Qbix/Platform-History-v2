@@ -379,13 +379,16 @@ Streams.key = function (publisherId, streamName) {
  * @event onError
  */
 Streams.onError = new Q.Event(function (err, data) {
+	
 	var code = Q.getObject([0, 'errors', 0, 'code'], data)
 		|| Q.getObject([1, 'errors', 0, 'code'], data);
-	if (!code) return;
+	if (!code && !err) {
+		return;
+	}
 	var errors = data && data.errors
 		&& (data[0] && data[0].errors)
 		&& (data[1] && data[1].errors);
-	console.warn(Q.firstErrorMessage(err, data));
+	console.warn(err, data);
 }, 'Streams.onError');
 
 /**
@@ -636,16 +639,14 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 					Streams.get.forget.apply(this, args);
 				}, 0);
 			}
-			var params = [err, data];
-			Streams.onError.handle.call(this, msg, params);
-			Streams.get.onError.handle.call(this, msg, params);
-			return callback && callback.call(this, msg, params);
+			Streams.onError.handle.call(this, err, data);
+			Streams.get.onError.handle.call(this, err, data);
+			return callback && callback.call(this, err, data);
 		}
 		if (Q.isEmpty(data.stream)) {
 			var msg = "Stream " + publisherId + " " + streamName + " is not available";
 			var err = msg;
-			var params = [err, data, null];
-			Streams.onError.handle(msg, params);
+			Streams.onError.handle(err, [err, data, null]);
 			return callback && callback.call(null, err, null, extra);
 		}
 		Streams.construct(
@@ -657,8 +658,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 			function Streams_get_construct_handler(err, stream, extra) {
 				var msg;
 				if (msg = Q.firstErrorMessage(err)) {
-					var params = [err, data, stream];
-					Streams.onError.handle(msg, params);
+					Streams.onError.handle(msg, [err, data, stream]);
 				}
 				var ret = callback && callback.call(stream, err, stream, extra);
 				if (ret === false) {
