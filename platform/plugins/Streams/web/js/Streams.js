@@ -2492,7 +2492,7 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  * @param {Function} callback Called with (err, result)
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
-Sp.invite = function (fields, options, callback) {
+Sp.invite = function (options, callback) {
 	Streams.invite(this.fields.publisherId, this.fields.name, options, callback);
 };
 
