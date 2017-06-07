@@ -212,13 +212,13 @@ function _Streams_participants(options) {
 						var filter = '.Streams_inviteTrigger';
 						$(tool.element)
 						.on(Q.Pointer.fastclick, filter, function () {
-							var fields = Q.extend({
+							var options = Q.extend({
 								identifier: si.identifier
 							}, si);
 							Q.Streams.invite(
 								state.publisherId, 
 								state.streamName, 
-								fields,
+								options,
 								function (err, data) {
 									state.onInvited.handle.call(tool, err, data);
 								}
