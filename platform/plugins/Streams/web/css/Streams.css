@@ -390,7 +390,7 @@
 .Streams_preview_contents { display: inline-block; vertical-align: middle; max-width: 100%; }
 .Streams_preview_contents * { max-width: 100%; }
 .Streams_preview_contents .Q_inplace_tool_static,
-.Streams_preview_contents .Q_inplace_tool_static_container
+.Streams_preview_contents .Q_inplace_tool_static_container,
 .Streams_preview_contents>.Streams_preview_title {
 	padding: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; 
 }
