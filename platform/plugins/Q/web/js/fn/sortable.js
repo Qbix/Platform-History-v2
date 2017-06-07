@@ -365,7 +365,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		}
 	}
 
-	function move($item, x, y) {
+	var move = Q.throttle(function ($item, x, y) {
 		var data = $item.data('Q/sortable');
 		data.$dragged.css({
 			left: x - gx,
@@ -373,7 +373,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		});
 		removeTextSelections();
 		indicate($item, x, y);
-	}
+	}, 25);
 	
 	var removeTextSelections = Q.throttle(function () {
 		var sel = window.getSelection ? window.getSelection() : document.selection;
