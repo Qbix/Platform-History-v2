@@ -862,18 +862,33 @@ Q.once = function (original, defaultValue) {
 /**
  * Wraps a function and returns a wrapper that will call the function
  * at most once every given milliseconds.
- * 
  * @static
  * @method throttle
  * @param {Function} original The function to wrap
- * @param {number} milliseconds The number of milliseconds
+ * @param {Number} milliseconds The number of milliseconds
+ * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
+ *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
  * @param {Mixed} defaultValue Value to return whenever original function isn't called
  * @return {Function} The wrapper function
  */
-Q.throttle = function (original, milliseconds, defaultValue) {
+Q.throttle = function (original, milliseconds, delayedFinal, defaultValue) {
 	var _lastCalled;
-	return function _Q_throttle_wrapper() {
-		if (Date.now() - _lastCalled < milliseconds) return defaultValue;
+	var _timeout = null;
+	return function _Q_throttle_wrapper(e) {
+		var t = this, a = arguments;
+		var ms = Date.now() - _lastCalled;
+		if (ms < milliseconds) {
+			if (delayedFinal) {
+				if (_timeout) {
+					clearTimeout(_timeout);
+				}
+				_timeout = setTimeout(function () {
+					_lastCalled = Date.now();
+					original.apply(t, a);
+				}, milliseconds - ms);
+			}
+			return defaultValue;
+		}
 		_lastCalled = Date.now();
 		return original.apply(this, arguments);
 	};
