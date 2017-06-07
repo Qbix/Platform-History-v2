@@ -115,7 +115,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						.addClass('Streams_related_loading')
 						.removeClass('Streams_related_composer');
 					addComposer(streamType, params, null, element);
-					tool.integrateWithTabs([element]);
 					ps.beforeCreate.remove(tool);
 				}, tool);
 				preview.state.onCreate.set(function () {
