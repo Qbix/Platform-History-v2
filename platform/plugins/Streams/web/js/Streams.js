@@ -4525,7 +4525,7 @@ Q.onInit.add(function _Streams_onInit() {
 			Users.loggedInUser.id, "Streams/user/lastName", "content"), key, key
 		).or(Q.Streams.Stream.onFieldChanged(
 			Users.loggedInUser.id, "Streams/user/username", "content"), key, key
-		).debounce(50, key).set(_updateDisplayName, 'Streams');
+		).debounce(50, false, key).set(_updateDisplayName, 'Streams');
 	}
 	
 	// handle going online after being offline
