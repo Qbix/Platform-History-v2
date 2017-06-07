@@ -371,7 +371,11 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			left: x - gx,
 			top: y - gy
 		});
-		// remove text selection while dragging
+		removeTextSelections();
+		indicate($item, x, y);
+	}
+	
+	var removeTextSelections = Q.throttle(function () {
 		var sel = window.getSelection ? window.getSelection() : document.selection;
 		if (sel) {
 			if (sel.removeAllRanges) {
@@ -380,8 +384,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				sel.empty();
 			}
 		}
-		indicate($item, x, y);
-	}
+	}, 300);
 
 	function scrolling($item, x, y) {
 		if (tScroll) clearTimeout(tScroll);
