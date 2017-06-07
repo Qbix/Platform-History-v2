@@ -176,8 +176,9 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		gy = y - offset.top;
 
 		var $dragged = $(this.cloned);
+		state.prevStyleTransition = this.cloned.style.transition;
+		this.cloned.style.transition = 'none';
 		delete this.cloned;
-
 
 		$('*', $dragged).each(function () {
 			$(this).css('pointerEvents', 'none');
@@ -236,6 +237,11 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		var x = Q.Pointer.getX(event);
 		var y = Q.Pointer.getY(event);
 		var $target = getTarget(x, y);
+		var $item = $body.data(dataLifted);
+		var data = $item.data('Q/sortable');
+		if (data) {
+			data.$dragged[0].style.transition = state.prevStyleTransition;
+		}
 		moveHandler.xStart = moveHandler.yStart = null;
 		complete(!$target && state.requireDropTarget);
 	}
@@ -365,6 +371,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		}
 	}
 
+	i = 0;
 	var move = Q.throttle(function ($item, x, y) {
 		var data = $item.data('Q/sortable');
 		data.$dragged.css({
@@ -373,7 +380,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		});
 		removeTextSelections();
 		indicate($item, x, y);
-	}, 25);
+	}, 25, true);
 	
 	var removeTextSelections = Q.throttle(function () {
 		var sel = window.getSelection ? window.getSelection() : document.selection;
@@ -484,7 +491,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 
 	function indicate($item, x, y) {
 		var $target = getTarget(x, y);
-		var data = $item.data('Q/sortable')
+		var data = $item.data('Q/sortable');
 
 		data.$dragged.css('pointerEvents', 'none');
 		var element = Q.Pointer.elementFromPoint(x, y);

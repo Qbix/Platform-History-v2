@@ -2320,13 +2320,15 @@ Evp.debounce = function _Q_Event_prototype_debounce(milliseconds, immediate, key
  * Return a new Q.Event object that will call handle() when this event's handle()
  * is called, but only at most every given milliseconds.
  * @method throttle
- * @param {number} milliseconds The number of milliseconds
+ * @param {Number} milliseconds The number of milliseconds
+ * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
+ *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
  * @param {String|Boolean|Q.Tool} [key] Optional key to pass to event.add (see docs for that method).
  * @return {Q.Event} A new Q.Event object
  */
-Evp.throttle = function _Q_Event_prototype_throttle(milliseconds, key) {
+Evp.throttle = function _Q_Event_prototype_throttle(milliseconds, delayedFinal, key) {
 	var newEvent = new Q.Event();
-	this.add(Q.throttle(newEvent.handle, milliseconds, 0), key);
+	this.add(Q.throttle(newEvent.handle, milliseconds, delayedFinal, 0), key);
 	return newEvent;
 };
 
@@ -3245,7 +3247,7 @@ Q.getter.THROTTLING = 3;
  * @method promisify
  * @static
  * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
- * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with this
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
 Q.promisify = function (getter, useSecondArgument) {
@@ -3316,14 +3318,30 @@ Q.once = function (original, defaultValue) {
  * @static
  * @method throttle
  * @param {Function} original The function to wrap
- * @param {number} milliseconds The number of milliseconds
+ * @param {Number} milliseconds The number of milliseconds
+ * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
+ *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
  * @param {Mixed} defaultValue Value to return whenever original function isn't called
  * @return {Function} The wrapper function
  */
-Q.throttle = function (original, milliseconds, defaultValue) {
+Q.throttle = function (original, milliseconds, delayedFinal, defaultValue) {
 	var _lastCalled;
-	return function _Q_throttle_wrapper() {
-		if (Date.now() - _lastCalled < milliseconds) return defaultValue;
+	var _timeout = null;
+	return function _Q_throttle_wrapper(e) {
+		var t = this, a = arguments;
+		var ms = Date.now() - _lastCalled;
+		if (ms < milliseconds) {
+			if (delayedFinal) {
+				if (_timeout) {
+					clearTimeout(_timeout);
+				}
+				_timeout = setTimeout(function () {
+					_lastCalled = Date.now();
+					original.apply(t, a);
+				}, milliseconds - ms);
+			}
+			return defaultValue;
+		}
 		_lastCalled = Date.now();
 		return original.apply(this, arguments);
 	};
