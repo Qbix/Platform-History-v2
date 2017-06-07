@@ -78,19 +78,16 @@
 				if (selector == 'current') {
 					tool.getCurrentPosition(function (pos) {
 						var crd = pos.coords;
-
-						// something wrong
 						if (!crd) {
 							Q.alert("Places/location tool: could not obtain location", pos);
 							return false;
 						}
-
-						// get valid google object and fire onChoose event
-						tool.geocode({
+						Places.Coordinates.from({
 							latitude: crd.latitude,
 							longitude: crd.longitude
-						}, function (geocode) {
-							Q.handle(state.onChoose, tool, [geocode]);
+						}, function (err, results) {
+							var loc = Q.getObject([0, 'geometry', 'location'], results);
+							Q.handle(state.onChoose, tool, [loc]);
 						});
 					}, function (err) {
 						Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
@@ -112,9 +109,9 @@
 				var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
 				var ls = locationPreviewTool.state;
 				Streams.get(ls.publisherId, ls.streamName, function () {
-					// get valid google object and fire onChoose event
-					tool.geocode(this, function (geocode) {
-						Q.handle(state.onChoose, tool, [geocode]);
+					Places.Coordinates.from(this, function (err, results) {
+						var loc = Q.getObject([0, 'geometry', 'location'], results);
+						Q.handle(state.onChoose, tool, [loc]);
 					});
 				});
 			});
@@ -189,8 +186,10 @@
 							if (!place || !place.id) {
 								return Q.handle(state.onChoose, tool, [null]);
 							}
-							// get valid google object and fire onChoose event
-							tool.geocode({placeId: place.id}, function (l) {
+							Places.Coordinates.from({
+								placeId: place.id
+							}, function (err, results) {
+								var loc = Q.getObject([0, 'geometry', 'location'], results);
 								var c = Q.text.Places.Location.confirm;
 								Q.confirm(c.message, function (shouldSave) {
 									if (!shouldSave) {
@@ -205,8 +204,8 @@
 											type: 'Places/location',
 											title: title,
 											attributes: {
-												latitude: l.lat(),
-												longitude: l.lng()
+												latitude: loc.lat(),
+												longitude: loc.lng()
 											},
 											readLevel: 0,
 											writeLevel: 0,
@@ -230,7 +229,7 @@
 									ok: c.ok,
 									cancel: c.cancel
 								});
-								Q.handle(state.onChoose, tool, [l]);
+								Q.handle(state.onChoose, tool, [loc]);
 							});
 						}
 					});
@@ -254,45 +253,6 @@
 					enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 					timeout: 5000,
 					maximumAge: 0
-				});
-			},
-			/**
-			 * Obtain geocoding definition from a geocoding service
-			 * @method geocode
-			 * @static
-			 * @param {Object} loc Provide a Places/location stream, or an object with either a "placeId" property, a pair of "latitude","longitude" properties, an "address" property for reverse geocoding, or a pair of "userId" and optional "streamName" (which otherwise defaults to "Places/user/location")
-			 * @param {Function} callback gets (array of results of the geolocation, and status code)
-			 */
-			geocode: function (loc, callback) {
-				var tool = this;
-
-				if (loc.latitude || loc.longitude) { // if known latitude, longitude - calculate google location local
-					if (!loc.latitude) {
-						throw new Q.Error(p + "missing latitude");
-					}
-					if (!loc.longitude) {
-						throw new Q.Error(p + "missing longitude");
-					}
-
-					// localy calculate if known lat and lng, to avoid requests to google api (danger of OVER_QUERY_LIMIT !!!)
-					var latlng = new google.maps.LatLng(
-						parseFloat(loc.latitude),
-						parseFloat(loc.longitude)
-					);
-					Q.handle(callback, Places.Location, [latlng, 'OK']);
-					return;
-				} else if (typeof loc.lat == 'function' && typeof loc.lng == 'function') { // loc - already google location object
-					Q.handle(callback, Places.Location, [loc, 'OK']);
-					return;
-				}else if(loc.geometry && loc.geometry.location){ // we have standard google location object - return just location
-					Q.handle(callback, Places.Location, [loc.geometry.location, 'OK']);
-					return;
-				}
-
-				// for address - call Places plugin
-				Places.Location.geocode(loc, function(geocode){
-					if(geocode.geometry && geocode.geometry.location){ geocode = geocode.geometry.location; }
-					Q.handle(callback, tool, [geocode]);
 				});
 			}
 		}

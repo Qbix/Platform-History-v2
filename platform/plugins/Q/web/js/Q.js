@@ -2301,14 +2301,18 @@ Evp.then = function _Q_Event_prototype_then(key) {
 /**
  * Return a new Q.Event object that waits until after this event's handle() stops
  * being called for a given number of milliseconds, before processing the last call.
+ * If the immediate param is true, the wrapper lets the function be called
+ * without waiting if it hasn't been called for the given number of milliseconds.
  * @method debounce
  * @param {number} milliseconds The number of milliseconds
+ * @param {Boolean} [immediate=false] if true, the wrapper lets the function be called
+ *   without waiting if it hasn't been called for the given number of milliseconds.
  * @param {String|Boolean|Q.Tool} [key] Optional key to pass to event.add (see docs for that method).
  * @return {Q.Event} A new Q.Event object
  */
-Evp.debounce = function _Q_Event_prototype_debounce(milliseconds, key) {
+Evp.debounce = function _Q_Event_prototype_debounce(milliseconds, immediate, key) {
 	var newEvent = new Q.Event();
-	this.add(Q.debounce(newEvent.handle, milliseconds, 0), key);
+	this.add(Q.debounce(newEvent.handle, milliseconds, immediate, 0), key);
 	return newEvent;
 };
 
@@ -3364,23 +3368,32 @@ Q.queue = function (original, milliseconds) {
 
 /**
  * Wraps a function and returns a wrapper that will call the function
- * after calls stopped coming in for a given number of milliseconds
+ * after calls stopped coming in for a given number of milliseconds.
+ * If the immediate param is true, the wrapper lets the function be called
+ * without waiting if it hasn't been called for the given number of milliseconds.
  * @static
  * @method debounce
  * @param {Function} original The function to wrap
  * @param {number} milliseconds The number of milliseconds
+ * @param {Boolean} [immediate=false] if true, the wrapper also lets the function be called
+ *   without waiting if it hasn't been called for the given number of milliseconds.
  * @param {Mixed} defaultValue Value to return whenever original function isn't called
  * @return {Function} The wrapper function
  */
-Q.debounce = function (original, milliseconds, defaultValue) {
+Q.debounce = function (original, milliseconds, immediate, defaultValue) {
 	var _timeout = null;
 	return function _Q_debounce_wrapper() {
+		var t = this, a = arguments;
 		if (_timeout) {
 			clearTimeout(_timeout);
-		}
-		var t = this, a = arguments;
-		_timeout = setTimeout(function _Q_debounce_handler() {
+		} else if (immediate) {
 			original.apply(t, a);
+		}
+		_timeout = setTimeout(function _Q_debounce_handler() {
+			if (!immediate) {
+				original.apply(t, a);
+			}
+			_timeout = null;
 		}, milliseconds);
 		return defaultValue;
 	};
@@ -5625,7 +5638,7 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 	}
 };
 
-var _supportsPassive = null;
+var _supportsPassive;
 
 /**
  * Add an event listener to an element

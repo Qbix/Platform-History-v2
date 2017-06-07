@@ -60,9 +60,6 @@ Q.Tool.define("Q/tabs", function(options) {
 	});
 	
 	tool.$tabs = $('.Q_tabs_tab', tool.element).css('visibility', 'hidden');
-	state.onRefresh.set(function () {
-		tool.$tabs.css('visibility', 'visible');
-	}, 'Q/tabs');
 	Q.onLayout(tool).set(function () {
 		tool.refresh();
 	}, tool);
@@ -308,7 +305,7 @@ Q.Tool.define("Q/tabs", function(options) {
 	 * Render the tabs element again and indicate the selected tab
 	 * @method refresh
 	 */
-	refresh: Q.preventRecursion('refresh', function (callback) {
+	refresh: Q.preventRecursion('Q/tabs refresh', function (callback) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
@@ -321,6 +318,7 @@ Q.Tool.define("Q/tabs", function(options) {
 			var cs = $o.state('Q/contextual');
 			if (cs) {
 				if (cs.contextual) {
+					tool.$tabs.css('visibility', 'hidden');
 					$('.Q_tabs_tab', cs.contextual).insertAfter($o);
 				}
 				$o.plugin("Q/contextual", "remove");
@@ -330,7 +328,8 @@ Q.Tool.define("Q/tabs", function(options) {
 		var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
 		var $overflow, $lastVisibleTab;
 		if (state.vertical) {
-			Q.handle(state.onRefresh, this)
+			tool.$tabs.css('visibility', 'visible');
+			Q.handle(state.onRefresh, this);
 			return callback && callback.call(this);
 		}
 		if (state.compact) {
@@ -378,6 +377,7 @@ Q.Tool.define("Q/tabs", function(options) {
 		}
 		if (!$overflow) {
 			tool.$overflow = null;
+			tool.$tabs.css('visibility', 'visible');
 			Q.handle(state.onRefresh, this);
 			return callback && callback.call(tool);
 		}
@@ -395,6 +395,7 @@ Q.Tool.define("Q/tabs", function(options) {
 				},
 				className: "Q_tabs_contextual",
 				onConstruct: function ($contextual) {
+					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					callback && callback.call(tool);
 				},
@@ -403,6 +404,10 @@ Q.Tool.define("Q/tabs", function(options) {
 				}
 			});
 			tool.$overflowed = $(elements);
+			if (Q.Contextual.current != -1) {
+				// it was open, show it again
+				Q.Contextual.show(Q.Contextual.current);
+			}
 		});
 	})
 }
