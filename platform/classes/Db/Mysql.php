@@ -1346,20 +1346,14 @@ EOT;
 			$js_base_class_filename = $directory.DS.'Base'.DS.implode(DS, $class_name_parts).'.js';
 			$js_base_class_require = 'Base'.DS.implode(DS, $class_name_parts);
 			// because table name can be {$prefix}_Q_plugin or {$prefix}_Q_app we need to know correct table name
-			$tables = $this->rawQuery("SHOW TABLES LIKE '{$prefix}Q_%'")
-				->execute()
-				->fetchAll(PDO::FETCH_NUM);
-			if ($tables) {
-				$tablename = $tables[0][0];
-				$model_comment = $this->rawQuery("SELECT * FROM $tablename")
-					->execute()
-					->fetchAll(PDO::FETCH_NUM);
-				$model_comment = (isset($model_comment[0]) && !empty($model_comment[0][2]))
-					? " * <br/>{$model_comment[0][2]}\n" 
-					: '';
-			} else {
-				$model_comment = '';
-			}
+			$tables = $this->rawQuery(
+				"SELECT table_comment"
+				." FROM INFORMATION_SCHEMA.TABLES"
+				." WHERE table_schema = '$dbname' and table_name LIKE '{$prefix}Q_%'"
+			)->execute()->fetchAll(PDO::FETCH_NUM);
+			$model_comment = (!empty($tables[0]['table_comment']))
+				 ? " * <br>{".$tables[0]['table_comment']."}\n"
+				 : '';
 			$model_extras = is_readable($class_filename.'.inc') ? file_get_contents($class_filename.'.inc') : '';
 			$js_model_extras = is_readable($js_class_filename.'.inc') ? file_get_contents($js_class_filename.'.inc') : '';
 
@@ -1591,7 +1585,7 @@ EOT;
 		$class_name = ucfirst($classname_prefix) . $class_name_base;
 		$table_cols = $this->rawQuery("SHOW FULL COLUMNS FROM $table_name")->execute()->fetchAll(PDO::FETCH_ASSOC);
 		$table_status = $this->rawQuery("SHOW TABLE STATUS WHERE Name = '$table_name'")->execute()->fetchAll(PDO::FETCH_COLUMN, 17);
-		$table_comment = (!empty($table_status[0])) ? " * <br/>{$table_status[0]}\n" : '';
+		$table_comment = (!empty($table_status[0])) ? " * <br>{$table_status[0]}\n" : '';
 		// Calculate primary key
 		$pk = array();
 		foreach ($table_cols as $table_col) {
@@ -2496,7 +2490,7 @@ $field_hints
 	 * @param {array} [\$options=array()]
 	 *   An associative array of options, including:
 	 *
-	 * * "chunkSize" {integer} The number of rows to insert at a time. defaults to 20.<br/>
+	 * * "chunkSize" {integer} The number of rows to insert at a time. defaults to 20.<br>
 	 * * "onDuplicateKeyUpdate" {array} You can put an array of fieldname => value pairs here,
 	 * 		which will add an ON DUPLICATE KEY UPDATE clause to the query.
 	 *

@@ -196,7 +196,7 @@ abstract class Base_Users_Total extends Db_Row
 	 * @param {array} [$options=array()]
 	 *   An associative array of options, including:
 	 *
-	 * * "chunkSize" {integer} The number of rows to insert at a time. defaults to 20.<br/>
+	 * * "chunkSize" {integer} The number of rows to insert at a time. defaults to 20.<br>
 	 * * "onDuplicateKeyUpdate" {array} You can put an array of fieldname => value pairs here,
 	 * 		which will add an ON DUPLICATE KEY UPDATE clause to the query.
 	 *
