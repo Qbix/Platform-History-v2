@@ -3137,6 +3137,19 @@ Function.prototype.bind = function _Function_prototype_bind(obj, options) {
 	};
 };
 
+// Backward compatibility with older versions of Node.js
+fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
+fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
+var v = process.version.split('.').map(function (x) { return parseInt(x) });
+if (v < [5, 10]) {
+	Buffer.from = function (x, y, z) {
+	    if (typeof x === 'number') {
+			throw new TypeError('Buffer.from: first argument must not be a number');
+	    }
+		return new Buffer(x, y, z);
+	};
+}
+
 if (!Array.prototype.indexOf) {
 	Array.prototype.indexOf = function _Array_prototype_indexOf(searchElement /*, fromIndex */ ) {
 		if (this === 0 || this === null) {
@@ -3179,15 +3192,3 @@ Q.globalNames = Object.keys(root); // to find stray globals
 Q.globalNamesAdded = function () {
 	return Q.diff(Object.keys(window), Q.globalNames);
 };
-
-// Backward compatibility with older versions of Node.js
-fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
-fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
-if (process.version < "6.0") {
-	Buffer.from = function (x, y, z) {
-	    if (typeof x === 'number') {
-			throw new TypeError('Buffer.from: first argument must not be a number');
-	    }
-		return new Buffer(x, y, z);
-	};
-}
