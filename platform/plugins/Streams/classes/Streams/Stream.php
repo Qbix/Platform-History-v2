@@ -760,7 +760,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
 	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
-	 * @param {array} [$options.extra] Any extra information for the message
+	 * @param {array} [$options.extra] Any extra information to tree-merge for the participant
 	 * @param {string} [$options.userId] The user who is joining the stream. Defaults to the logged-in user.
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
@@ -784,6 +784,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @method leave
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {string} [$options.userId] The user who is leaving the stream. Defaults to the logged-in user.
+	 * @param {array} [$options.extra] Any extra information to tree-merge for the participant
 	 * @param {string} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @param $participant=null {reference}
 	 *  Optional reference to a participant object that will be filled
