@@ -3183,7 +3183,7 @@ Q.globalNamesAdded = function () {
 // Backward compatibility with older versions of Node.js
 fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
 fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
-if (!Buffer.from) {
+if (process.version < "6.0") {
 	Buffer.from = function (x, y, z) {
 	    if (typeof x === 'number') {
 			throw new TypeError('Buffer.from: first argument must not be a number');
