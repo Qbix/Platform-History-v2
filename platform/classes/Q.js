@@ -3140,7 +3140,7 @@ Function.prototype.bind = function _Function_prototype_bind(obj, options) {
 // Backward compatibility with older versions of Node.js
 fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
 fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
-var v = process.version.split('.').map(function (x) { return parseInt(x) });
+var v = process.version.substr(1).split('.').map(function (x) { return parseInt(x) });
 if (v < [5, 10]) {
 	Buffer.from = function (x, y, z) {
 	    if (typeof x === 'number') {
