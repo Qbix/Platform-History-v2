@@ -363,17 +363,33 @@ class Streams_Message extends Base_Streams_Message
 		return array($posted, $streams);
 	}
 	
+	/**
+	 * @method getAllinstructions
+	 * @return {array} The array of all instructions set in the message
+	 */
 	function getAllInstructions()
 	{
 		return empty($this->instructions) ? array() : json_decode($this->instructions, true);
 	}
 	
+	/**
+	 * @method getInstruction
+	 * @param {string} $instructionName The name of the instruction to get
+	 * @param {mixed} $default The value to return if the instruction is missing
+	 * @return {mixed} The value of the instruction, or the default value, or null
+	 */
 	function getInstruction($instructionName)
 	{
 		$instr = $this->getAllInstructions();
 		return isset($instr[$instructionName]) ? $instr[$instructionName] : null;
 	}
 	
+	/**
+	 * @method setInstruction
+	 * @param {string|array} $instructionName The name of the instruction to set,
+	 *  or an array of $instructionName => $value pairs
+	 * @param {mixed} $value The value to set the instruction to
+	 */
 	function setInstruction($instructionName, $value)
 	{
 		$instr = $this->getAllInstructions();
@@ -381,6 +397,10 @@ class Streams_Message extends Base_Streams_Message
 		$this->instructions = Q::json_encode($instr);
 	}
 	
+	/**
+	 * @method clearInstruction
+	 * @param {string} $instructionName The name of the instruction to remove
+	 */
 	function clearInstruction($instructionName)
 	{
 		$instr = $this->getAllInstructions();
