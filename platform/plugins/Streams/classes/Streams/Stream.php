@@ -649,7 +649,7 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * @method setAttribute
-	 * @param {string} $attributeName The name of the attribute to set,
+	 * @param {string|array} $attributeName The name of the attribute to set,
 	 *  or an array of $attributeName => $attributeValue pairs
 	 * @param {mixed} $value The value to set the attribute to
 	 */
