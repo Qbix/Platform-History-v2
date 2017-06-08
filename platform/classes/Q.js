@@ -3184,7 +3184,7 @@ Q.globalNamesAdded = function () {
 fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
 fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
 if (!Buffer.from) {
-	Buffer.from || function (x, y, z) {
+	Buffer.from = function (x, y, z) {
 	    if (typeof x === 'number') {
 			throw new TypeError('Buffer.from: first argument must not be a number');
 	    }
