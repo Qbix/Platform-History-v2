@@ -770,7 +770,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		$userId = $this->_verifyUser($options);
 		$participants = Streams::join(
-			$userId, $this->publisherId, array($this->name), $options
+			$userId, $this->publisherId, array($this), $options
 		);
 		$participant = reset($participants);
 		return $participant ? $participant : null;
@@ -795,7 +795,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		$userId = $this->_verifyUser($options);
 		$participants = Streams::leave(
-			$userId, $this->publisherId, array($this->name), $options
+			$userId, $this->publisherId, array($this), $options
 		);
 		$participant = reset($participants);
 		return $participant ? $participant : null;
@@ -833,7 +833,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		$userId = $this->_verifyUser($options);
 		$participants = Streams::subscribe(
-			$userId, $this->publisherId, array($this->name), $options
+			$userId, $this->publisherId, array($this), $options
 		);
 		$participant = reset($participants);
 		return $participant ? $participant : null;
@@ -856,7 +856,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		$userId = $this->_verifyUser($options);
 		$participants = Streams::unsubscribe(
-			$userId, $this->publisherId, array($this->name), $options
+			$userId, $this->publisherId, array($this), $options
 		);
 		$participant = reset($participants);
 		return $participant ? $participant : null;
