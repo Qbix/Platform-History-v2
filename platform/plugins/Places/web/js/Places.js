@@ -173,7 +173,7 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @param {Object} options Can include the following:
 	 *   @param {Number} [options.departTime] Time to depart. Standard Unix time (seconds from 1970). If specified, do not also set arriveTime.
 	 *   @param {Number} [options.arriveTime] Time to arrive. Standard Unix time (seconds from 1970). If specified, do not also set departTime.
-	 *   @param {Number} [options.travelMode='driving'] Can be 'driving', 'walking'
+	 *   @param {Number} [options.travelMode='driving'] Can be "driving", "bicycling", "transit", "walking"
 	 *   @param {String} [options.platform=Places.options.platform]
 	 */
 	route: function (from, to, waypoints, optimize, callback, options) {
