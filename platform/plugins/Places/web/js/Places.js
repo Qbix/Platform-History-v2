@@ -171,8 +171,8 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @param {Array} waypoints array of objects with properties "location" and "stopover", wher "location" is an object that can be passed to Places.Coordinates constructor
 	 * @param {Function} callback
 	 * @param {Object} options Can include the following:
-	 *   @param {Number} [options.departTime] Time to depart. Standard Unix time (seconds from 1970). If specified, do not also set arriveTime.
-	 *   @param {Number} [options.arriveTime] Time to arrive. Standard Unix time (seconds from 1970). If specified, do not also set departTime.
+	 *   @param {Number} [options.startTime] Time to start trip. Standard Unix time (seconds from 1970). If specified, do not also set endTime.
+	 *   @param {Number} [options.endTime] Time to end trip. Standard Unix time (seconds from 1970). If specified, do not also set startTime.
 	 *   @param {Number} [options.travelMode='driving'] Can be "driving", "bicycling", "transit", "walking"
 	 *   @param {String} [options.platform=Places.options.platform]
 	 */
@@ -192,13 +192,13 @@ var Places = Q.Places = Q.plugins.Places = {
 			walking: google.maps.TravelMode.WALKING
 		};
 		params.travelMode = googleTravelModes[options.travelMode || 'driving'];
-		if (options.arriveTime) {
+		if (options.startTime) {
 			params.transitOptions = {
-				arrivalTime: new Date(options.arriveTime*1000)
+				arrivalTime: new Date(options.endTime*1000)
 			};
-		} else if (options.departTime) {
+		} else if (options.startTime) {
 			params.transitOptions = {
-				departureTime: new Date(options.departTime*1000)
+				departureTime: new Date(options.startTime*1000)
 			};
 		}
 		var d = Places.Google.directionsService;
