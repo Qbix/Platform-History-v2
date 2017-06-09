@@ -149,7 +149,7 @@
 					"Streams/closed": {
 						"description": "The stream has been closed",
 						"subject": "{{stream.fields.title}} has been closed"
-					},
+					}
 				},
 				"defaults": {
 					"type": "Streams/text",

@@ -3768,6 +3768,14 @@ abstract class Streams extends Base_Streams
 	 */
 	static function close($asUserId, $publisherId, $streamName, $options = array())
 	{
+		if (!isset($asUserId)) {
+			$asUserId = Users::loggedInUser();
+			if (!$asUserId) $asUserId = "";
+		}
+		if ($asUserId instanceof Users_User) {
+			$asUserId = $asUserId->id;
+		}
+		
 		$stream = new Streams_Stream();
 		$stream->publisherId = $publisherId;
 		$stream->name = $streamName;
