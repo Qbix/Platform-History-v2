@@ -2647,7 +2647,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()] An associative array of options.
 	 * @param {boolean} [$options.subscribed] If true, the user is set as subscribed
 	 * @param {boolean} [$options.posted] If true, the user is set as subscribed
-	 * @param {array} [$options.extra] Any extra information for the participant
+	 * @param {array} [$options.extra] Any extra information to tree-merge for the participants
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being related to the joining asUserId's Streams/participating streams.
@@ -2811,6 +2811,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
 	 * @param {array} [$options=array()] An associative array of options.
+	 * @param {array} [$options.extra] Any extra information to tree-merge for the participants
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
 	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being unrelated to the joining asUserId's Streams/participating streams.
 	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs
@@ -2852,6 +2853,12 @@ abstract class Streams extends Base_Streams
 			if (!isset($participants[$sn])) {
 				$streamNamesMissing[] = $sn;
 				continue;
+			}
+			if (isset($options['extra'])) {
+				$extra = Q::json_decode($p->extra, true);
+				$tree = new Q_Tree($extra);
+				$tree->merge($options['extra']);
+				$p->extra = Q::json_encode($tree->getAll(), true);
 			}
 			$streamNamesUpdate[] = $sn;
 			$updateCounts[$p->state][] = $sn;
@@ -3761,6 +3768,14 @@ abstract class Streams extends Base_Streams
 	 */
 	static function close($asUserId, $publisherId, $streamName, $options = array())
 	{
+		if (!isset($asUserId)) {
+			$asUserId = Users::loggedInUser();
+			if (!$asUserId) $asUserId = "";
+		}
+		if ($asUserId instanceof Users_User) {
+			$asUserId = $asUserId->id;
+		}
+		
 		$stream = new Streams_Stream();
 		$stream->publisherId = $publisherId;
 		$stream->name = $streamName;
