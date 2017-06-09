@@ -30,15 +30,21 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @method forStream
 	 * @static
 	 * @param {string} $publisherId
-	 * @param {string|array} $streamName
-	 * @param {string|array} $userId
-	 * @return {array} an array of Streams_Invite objects
+	 * @param {string|array|Db_Expression} $streamName
+	 * @param {string|array|Db_Expression} $userId
+	 * @return {array|Streams_Invite|null} an array of Streams_Invite objects,
+	 *  or if $streamName and $userId are strings, just returns Streams_Invite or null.
 	 */
 	static function forStream($publisherId, $streamName, $userId)
 	{
-		return Streams_Invite::select('*')->where(
+		$rows = Streams_Invite::select('*')->where(
 			compact('publisherId', 'streamName', 'userId')
 		)->fetchDbRows();
+		if (!is_string($streamName) || !is_string($userId)) {
+			return $rows;
+		}
+		$row = reset($rows);
+		return $row ? $row : null;
 	}
 	
 	/**
