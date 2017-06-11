@@ -351,7 +351,7 @@ Cp.geocode = function (callback, options) {
 		} else if (c.address) {
 			param.address = c.address;
 		} else {
-			callback && callback.call(c, p + "wrong location format");
+			return callback && callback.call(c, p + "wrong location format");
 		}
 		if (param) {
 			var geocoder = new google.maps.Geocoder;

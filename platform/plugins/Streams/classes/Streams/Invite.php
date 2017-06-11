@@ -22,6 +22,31 @@ class Streams_Invite extends Base_Streams_Invite
 	{
 		parent::setUp();
 	}
+	
+	/**
+	 * Get the invites that have been left for one or more users in some stream.
+	 * This is useful for auto-accepting them or presenting the user with a
+	 * button to accept the invite when the stream is rendered on their client.
+	 * @method forStream
+	 * @static
+	 * @param {string} $publisherId
+	 * @param {string|array|Db_Expression} $streamName
+	 * @param {string|array|Db_Expression} $userId
+	 * @return {array|Streams_Invite|null} an array of Streams_Invite objects,
+	 *  or if $streamName and $userId are strings, just returns Streams_Invite or null.
+	 */
+	static function forStream($publisherId, $streamName, $userId)
+	{
+		$rows = Streams_Invite::select('*')->where(
+			compact('publisherId', 'streamName', 'userId')
+		)->fetchDbRows();
+		if (!is_string($streamName) || !is_string($userId)) {
+			return $rows;
+		}
+		$row = reset($rows);
+		return $row ? $row : null;
+	}
+	
 	/**
 	 * Accept the invite and set up user's access levels
 	 * If invite was already accepted, this function simply returns null
