@@ -9,5 +9,6 @@ function Streams_invited_response()
 	}
 	$invite = Streams_Invite::fromToken($token, true);
 	Users_User::fetch($invite->userId, true)->setVerified();
-	Q_Response::redirect($invite->appUrl."?".http_build_query(array('Q.Streams.token' => $token), null, '&'));
+	$querystring = http_build_query(array('Q.Streams.token' => $token), null, '&');
+	Q_Response::redirect($invite->appUrl.'?'.$querystring);
 }
