@@ -19,12 +19,12 @@
 				{{#unless displayName}}
 					<tr class="Users_register_form">
 						<td class="Streams_login_picture"><img src="{{user.icon}}/50.png"></td>
-						<td class="Streams_login_username_block">
+						<td class="Streams_login_fullname_block">
 							{{#if prompt}}
-								<label for="Streams_login_username">{{prompt}}</label>
+								<label for="Streams_login_fullname">{{prompt}}</label>
 								<br>
 							{{/if}}
-							<input id="Streams_login_username" name="fullName" type="text" class="text" />
+							<input id="Streams_login_fullname" name="fullName" type="text" class="text" />
 						</td>
 					</tr>
 				{{/unless}}

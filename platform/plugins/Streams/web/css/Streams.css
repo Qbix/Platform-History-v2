@@ -312,8 +312,13 @@
 	user-select: none;
 }
 
-#Streams_login_username {
+#Streams_login_fullname {
 	width: 96%; padding: 2%;
+}
+
+#Users_login_username, #Streams_login_fullname
+{
+  width: 188px;
 }
 
 #Streams_login_password {
@@ -347,11 +352,11 @@
 	width: 100%;
 }
 
-.Streams_login_username_block {
+.Streams_login_fullname_block {
 	width: 100%;
 }
 
-.Streams_login_username_block label {
+.Streams_login_fullname_block label {
 	font-size: 17px;
 }
 
