@@ -31,7 +31,7 @@ class Users_User extends Base_Users_User
 	 * @param {boolean} [$throwIfMissing=false] If true, throws an exception if the user can't be fetched
 	 * @return {Users_User|null|array} If $userId is an array, returns an array of ($userId => $user) pairs.
 	 *   Otherwise returns a Users_User object, or null.
-	 * @throws {Users_Exception_NoSuchUser} If the URI contains an invalid "username"
+	 * @throws {Users_Exception_NoSuchUser} if the user wasn't found in the database
 	 */
 	static function fetch ($userId, $throwIfMissing = false)
 	{
@@ -851,6 +851,67 @@ class Users_User extends Base_Users_User
 	}
 	
 	/**
+	 * @method getAllUids
+	 * @return {array} An array of ($platform => $uid) pairs
+	 */
+	function getAllUids()
+	{
+		return empty($this->uids) 
+			? array()
+			: json_decode($this->uids, true);
+	}
+	
+	/**
+	 * @method getUid
+	 * @param {string} $platform The name of the platform
+	 * @param {string|null} $default The value to return if the uid is missing
+	 * @return {string|null} The value of the uid, or the default value, or null
+	 */
+	function getUid($platform, $default = null)
+	{
+		$uids = $this->getAllUids();
+		return isset($uids[$platform]) ? $uids[$platform] : $default;
+	}
+	
+	/**
+	 * @method setUid
+	 * @param {string|array} $platform The name of the platform,
+	 *  or an array of $platform => $uid pairs
+	 * @param {string} $uid The value to set the uid to
+	 */
+	function setUid($platform, $uid = null)
+	{
+		$uids = $this->getAllUids();
+		if (is_array($platform)) {
+			foreach ($platform as $k => $v) {
+				$uids[$k] = $v;
+			}
+		} else {
+			$uids[$platform] = $uid;
+		}
+		$this->uids = Q::json_encode($uids);
+	}
+	
+	/**
+	 * @method clearUid
+	 * @param {string} $platform The name of the platform
+	 */
+	function clearUid($platform)
+	{
+		$uids = $this->getAllUids();
+		unset($uids[$platform]);
+		$this->uids = Q::json_encode($uids);
+	}
+	
+	/**
+	 * @method clearAllUids
+	 */
+	function clearAllUids()
+	{
+		$this->uids = '{}';
+	}
+	
+	/**
 	 * get user id
 	 * @method _getId
 	 * @static
@@ -858,7 +919,9 @@ class Users_User extends Base_Users_User
 	 * @param {Users_User} $u
 	 * @return {string}
 	 */
-	private static function _getId ($u) { return $u->id; }
+	private static function _getId ($u) {
+		return $u->id;
+	}
 	
 	/**
 	 * Check label or array of labels and return existing users
@@ -932,15 +995,18 @@ class Users_User extends Base_Users_User
 	}
 	
 	/**
-	 * Check fb uids or array of uids and return users - existing or future
-	 * @method idsFromFacebook
+	 * Check platform uids or array of uids and return users - existing or future
+	 * @method idsFromPlatformUids
 	 * @static
 	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
-	static function idsFromFacebook ($uids, &$statuses = array())
-	{
+	static function idsFromPlatformUids (
+		$platform, 
+		$uids, 
+		&$statuses = array()
+	) {
 		if (empty($uids)) {
 			return array();
 		}

@@ -7,8 +7,7 @@ CREATE TABLE {$prefix}app_session (
   sessionId varbinary(255) NOT NULL DEFAULT '' COMMENT 'The id of a users_session row, which may have a userId and deviceId',
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updatedTime timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (udid, platform, appId),
-  UNIQUE KEY platform (udid, platform, appId)
+  PRIMARY KEY (udid, platform, appId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a session in our 3rd party app with a platform like ios';
 
 ALTER TABLE {$prefix}app_user

@@ -4,21 +4,21 @@
  * @module Db
  */
 
-class Db_Query_Mysql extends Db_Query implements iDb_Query
+class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 {
 	/**
 	 * This class lets you create and use Db queries
 	 * @class Db_Query_Mysql
 	 * @extends Db_Query
 	 * @constructor
-	 * @param {iDb} $db An instance of a Db adapter
+	 * @param {Db_Interface} $db An instance of a Db adapter
 	 * @param {integer} $type The type of the query. See class constants beginning with TYPE_ .
 	 * @param {array} [$clauses=array()] The clauses to add to the query right away
 	 * @param {array} [$parameters=array()] The parameters to add to the query right away (to be bound when executing). Values corresponding to numeric keys replace question marks, while values corresponding to string keys replace ":key" placeholders, in the SQL.
 	 * @param {array} [$tables=null] The tables operated with query
 	 */
 	function __construct (
-		iDb $db,
+		Db_Interface $db,
 		$type,
 		array $clauses = array(),
 		array $parameters = array(),
@@ -87,7 +87,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	}
 
 	/**
-	 * The object implementing iDb that this query uses
+	 * The object implementing Db_Interface that this query uses
 	 * @property $db
 	 * @type Db_Mysql
 	 */
@@ -475,7 +475,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * where :name is a placeholder for the parameter under the key "name".
 	 * The parameters will be properly escaped. You can also have the query contain question marks (the binding is
 	 * done using PDO), but then the order of the parameters matters.
-	 * @return {Db_Query_Mysql}  The resulting object implementing iDb_Query.
+	 * @return {Db_Query_Mysql}  The resulting object implementing Db_Query_Interface.
 	 * @chainable
 	 */
 	function bind(array $parameters = array())
@@ -862,7 +862,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * this table is not appended to the tables list if
 	 * $repeat is false. Otherwise it is.
 	 * This is really just for using in your hooks.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query.
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface.
 	 * You can use it to chain the calls together.
 	 * @throws {Exception} If $tables is specified incorrectly
 	 * @chainable
@@ -937,7 +937,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @param {string} $table The name of the table. May also be "name alias".
 	 * @param {Db_Expression|array|string} $condition The condition to join on. Thus, JOIN table ON ($condition)
 	 * @param {string} [$join_type='INNER'] The string to prepend to JOIN, such as 'INNER' (default), 'LEFT OUTER', etc.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If JOIN clause does not belong to context or condition specified incorrectly
 	 * @chainable
 	 */
@@ -1003,7 +1003,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * The values are automatically escaped using the database server, or turned into PDO placeholders for prepared statements
 	 * They can also be arrays, in which case they are placed into an expression of the form key IN ('val1', 'val2')
 	 * Or, this could be a Db_Expression object.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If WHERE clause does not belong to context
 	 * @chainable
 	 */
@@ -1055,7 +1055,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * They can also be arrays, in which case they are placed into an expression of the form "key IN ('val1', 'val2')"
 	 * Or, this could be a Db_Expression object.
 	 * @param {Db_Expression|string} [$or_criteria=null]
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If WHERE clause does not belong to context
 	 * @chainable
 	 */
@@ -1122,7 +1122,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * They can also be arrays, in which case they are placed into an expression of the form key IN ('val1', 'val2')
 	 * Or, this could be a Db_Expression object.
 	 * @param {Db_Expression|string} [$and_criteria=null]
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If WHERE clause does not belong to context
 	 * @chainable
 	 */
@@ -1189,7 +1189,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * Adds a GROUP BY clause to a query
 	 * @method groupBy
 	 * @param {Db_Expression|string} $expression
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If GROUP clause does not belong to context
 	 * @chainable
 	 */
@@ -1228,7 +1228,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @method having
 	 * @param {Db_Expression|array} $criteria An associative array of expression => value pairs.
 	 * The values are automatically escaped using PDO placeholders. Or, this could be a Db_Expression object.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If groupBy as not called or criteria is specified incorrectly
 	 * @chainable
 	 */
@@ -1265,7 +1265,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @method orderBy
 	 * @param {Db_Expression|string} $expression A string or Db_Expression with the expression to order the results by.
 	 * @param {boolean} $ascending=true If false, sorts results as descending, otherwise ascending.
-	 * @return {Db_Query_Mysql}  The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql}  The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If ORDER BY clause does not belong to context
 	 * @chainable
 	 */
@@ -1314,7 +1314,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @method limit
 	 * @param {integer} $limit A non-negative integer showing how many rows to return
 	 * @param {integer} [$offset=null] A non-negative integer showing what row to start the result set with.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If limit/offset are negative, OFFSET is not alowed in context, LIMIT clause was
 	 * specified or clause does not belong to context
 	 * @chainable
@@ -1360,7 +1360,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @method set
 	 * @param {array} $updates An associative array of column => value pairs.
 	 * The values are automatically escaped using PDO placeholders.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @chainable
 	 */
 	function set (array $updates)
@@ -1568,7 +1568,7 @@ class Db_Query_Mysql extends Db_Query implements iDb_Query
 	 * @method onDuplicateKeyUpdate
 	 * @param {array} $updates An associative array of column => value pairs.
 	 * The values are automatically escaped using PDO placeholders.
-	 * @return {Db_Query_Mysql} The resulting object implementing iDb_Query
+	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * $chainable
 	 */
 	function onDuplicateKeyUpdate ($updates)

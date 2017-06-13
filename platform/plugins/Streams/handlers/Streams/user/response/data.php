@@ -22,7 +22,7 @@ function Streams_user_response_data($params)
 			'displayName' => $displayname,
 			'icon' => $verified ? $icon : $user->icon,
 			'passphrase_set' => !empty($user->passphraseHash),
-			'fb_uid' => $user->fb_uid ? $user->fb_uid : null
+			'uids' => $user->getAllUids()
 		);
 	}
 	if ($type === 'email') {

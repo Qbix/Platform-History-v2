@@ -1,0 +1,10 @@
+ALTER TABLE {$prefix}app_session
+ADD COLUMN secret varchar(255) NOT NULL DEFAULT '' COMMENT 'used for signing things together with app secret';
+
+ALTER TABLE {$prefix}user
+DROP COLUMN fb_uid,
+DROP COLUMN tw_uid,
+DROP COLUMN g_uid,
+DROP COLUMN y_uid,
+ADD COLUMN uids varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'user ids on external platforms'
+AFTER mobileNumber;

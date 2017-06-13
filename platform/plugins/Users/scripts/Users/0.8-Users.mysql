@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `{$prefix}link`;
 
 CREATE TABLE `{$prefix}link` (
   `identifier` varbinary(255)  NOT NULL,
-  `userId` varbinary(31)  NOT NULL DEFAULT '',
+  `userId` varbinary(31)  NOT NULL DEFAULT '' COMMENT 'user who imported the contact link',
   `extraInfo` varchar(255)  NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`identifier`, `userId`)
@@ -163,7 +163,7 @@ CREATE TABLE `{$prefix}mobile` (
 DROP TABLE IF EXISTS `{$prefix}oAuth`;
 
 CREATE TABLE `{$prefix}oAuth` (
-  `userId` varbinary(31) NOT NULL COMMENT 'The user id of the logged in user',
+  `userId` varbinary(31) NOT NULL COMMENT 'The id of the user who granted access',
   `client_id` varbinary(31) NOT NULL COMMENT 'The user id of the app',
   `state` varbinary(255) NOT NULL COMMENT 'For client to protect against CSRF attacks',
   `scope` varchar(255) NOT NULL DEFAULT 'user' COMMENT 'Space delimited set of names of resources you can access',

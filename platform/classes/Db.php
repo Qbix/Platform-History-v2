@@ -10,17 +10,17 @@
 /**
  * Interface that an adapter must support
  * to implement the Db class.
- * @class iDb
+ * @class Db_Interface
  * @static
  */
 
-interface iDb
+interface Db_Interface
 {
 	/**
 	 * Interface class for database connection.
 	 * An adapter must support it
 	 * to implement the Db class.
-	 * @class iDb
+	 * @class Db_Interface
 	 * @constructor
 	 * @param {string} $conn_name
 	 *  The name of the connection
@@ -495,14 +495,14 @@ abstract class Db
 	 * @static
 	 * @param {string} $conn_name 
 	 *  The name of the connection out of the connections added with Db::setConnection
-	 * @return {iDb}
+	 * @return {Db_Interface}
 	 */
 	static function connect ($conn_name)
 	{
 		$conn_info = self::getConnection($conn_name);
 		if (empty($conn_info))
 			throw new Exception("Database connection \"$conn_name\" wasn't registered with Db.", -1);
-		if (isset(self::$dbs[$conn_name]) and self::$dbs[$conn_name] instanceof iDb) {
+		if (isset(self::$dbs[$conn_name]) and self::$dbs[$conn_name] instanceof Db_Interface) {
 			return self::$dbs[$conn_name];
 		}
 		$dsn_array = Db::parseDsnString($conn_info['dsn']);

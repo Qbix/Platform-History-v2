@@ -13,9 +13,9 @@ class Db_Result
 	 * @param {PDOStatement|array} $stmt The PDO statement object that this result uses
 	 *  Can also be an array of PDO statements, in which case
 	 *  this was the result of an aggregated query.
-	 * @param {iDb_Query} $query The query that was run to produce this result 
+	 * @param {Db_Query_Interface} $query The query that was run to produce this result 
 	 */
-	function __construct ($stmt, iDb_Query $query)
+	function __construct ($stmt, Db_Query_Interface $query)
 	{
 		if (is_array($stmt)) {
 			$this->stmts = $stmt;
