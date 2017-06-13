@@ -17,26 +17,6 @@ abstract class Users extends Base_Users
 	 * the ones that don't strongly pertain to a particular row or table.
 
 	 * * * */
-
-	/**
-	 * The facebook object that would be instantiated
-	 * during the "Q/objects" event, if the request
-	 * warrants it.
-	 * @property $facebook
-	 * @type Facebook
-	 * @static
-	 */
-	static $facebook = null;
-
-	/**
-	 * Facebook objects that would be instantiated
-	 * from cookies during the "Q/objects" event,
-	 * if there are cookies for them.
-	 * @property $facebooks
-	 * @type array
-	 * @static
-	 */
-	static $facebooks = array();
 	
 	/**
 	 * Get the id of the main community from the config. Defaults to the app name.
@@ -250,7 +230,7 @@ abstract class Users extends Base_Users
 			));
 		}
 		if (!isset($appId)) {
-			$appId = Q_Config::expect('Users', 'apps', 'facebook', Q::app(), 'appId');
+			$appId = Q_Config::expect('Users', 'apps', $platform, Q::app(), 'appId');
 		} else {
 			list($appId, $appInfo) = Users::appInfo($platform, $appId);
 		}
@@ -271,11 +251,17 @@ abstract class Users extends Base_Users
 		}
 
 		if (!isset($platform) or $platform != 'facebook') {
-			throw new Q_Exception_WrongType(array('field' => 'platform', 'type' => '"facebook"'));
+			throw new Q_Exception_WrongType(array(
+				'field' => 'platform', 
+				'type' => '"facebook"'
+			));
 		}
 
 		if (!isset($appId)) {
-			throw new Q_Exception_WrongType(array('field' => 'appId', 'type' => 'a valid facebook app id'));
+			throw new Q_Exception_WrongType(array(
+				'field' => 'appId', 
+				'type' => "a valid $platform app id"
+			));
 		}
 
 		Q_Session::start();
@@ -295,11 +281,12 @@ abstract class Users extends Base_Users
 		$emailAddress = null;
 
 		// Try authenticating the user with the specified platform
+		$p = Users::platform($platform, $appId);
+		$uid = $p->loggedInUid();
 		switch ($platform) {
 		case 'facebook':
-			$facebook = Users::facebook($appId);
-			$fb_uid = Users_AppUser::loggedInUid($facebook);
-			if (!$facebook or !$fb_uid) {
+			$facebook = $p->facebook;
+			if (!$facebook or !$uid) {
 				// no facebook authentication is happening
 				return $userWasLoggedIn ? $user : false;
 			}
@@ -320,40 +307,46 @@ abstract class Users extends Base_Users
 				$userNode = $response->getGraphUser();
 				$emailAddress = $userNode->getField('email');
 				if (!$dn) {
-					Users::$cache['facebookUserData'] = $userNode->uncastItems();
+					Users::$cache['platformUserData'] = array(
+						$platform => $userNode->uncastItems()
+					);
 				}
 			}
 
 			$authenticated = true;
 			if ($retrieved) {
-				if (empty($user->fb_uid)) {
-					// this is a logged-in user who was never authenticated with facebook.
-					// First, let's find any other user who has authenticated with this facebook uid,
-					// and set their fb_uid to NULL.
+				$user_uid = $user->getUid($platform);
+				if (!$user_uid) {
+					// this is a logged-in user who was never authenticated with this platform.
+					// First, let's find any other user who has authenticated with this platform uid,
+					// and set their $field to 0.
 					$authenticated = 'connected';
-					$ui = Users::identify('facebook', $fb_uid);
+					$ui = Users::identify($platform, $uid);
 					if ($ui) {
-						Users_User::update()->set(array(
-							'fb_uid' => 0
-						))->where(array('id' => $ui->userId))->execute();
+						$u = new Users_User();
+						$u->id = $ui->userId;
+						if ($u->retrieve()) {
+							$u->clearUid($platform);
+							$u->save();
+						};
 						$ui->remove();
 					}
 
-					// Now, let's associate their account with this facebook uid.
-					$user->fb_uid = $fb_uid;
+					// Now, let's associate their account with this platform uid.
+					$user->setUid($platform, $uid);
 					$user->save();
 
 					// Save the identifier in the quick lookup table
 					$ui = new Users_Identify();
-					$ui->identifier = "facebook:$fb_uid";
+					$ui->identifier = "$platform:$uid";
 					$ui->state = 'verified';
 					$ui->userId = $user->id;
 					$ui->save(true);
-				} else if ($user->fb_uid !== $fb_uid) {
-					// The logged-in user was authenticated with facebook already,
-					// and associated with a different facebook id.
-					// Most likely, a completely different person has logged into facebook
-					// at this computer. So rather than changing the associated facebook uid
+				} else if ($user_uid !== $uid) {
+					// The logged-in user was authenticated with the platform already,
+					// and associated with a different platform uid.
+					// Most likely, a completely different person has logged into the platform
+					// at this computer. So rather than changing the associated plaform uid
 					// for the logged-in user, simply log out and essentially run this function
 					// from the beginning again.
 					Users::logout();
@@ -363,20 +356,19 @@ abstract class Users extends Base_Users
 				}
 			}
 			if (!$retrieved) {
-				$ui = Users::identify('facebook', $fb_uid, null);
+				$ui = Users::identify($platform, $uid, null);
 				if ($ui) {
 					$user = new Users_User();
 					$user->id = $ui->userId;
 					$exists = $user->retrieve();
 					if (!$exists) {
-						throw new Q_Exception("Users_Identify for fb_uid $fb_uid exists but not user with id {$ui->userId}");
+						throw new Q_Exception("Users_Identify for $platform uid $uid exists but not user with id {$ui->userId}");
 					}
 					$retrieved = true;
 					if ($ui->state === 'future') {
 						$authenticated = 'adopted';
-
-						$user->fb_uid = $fb_uid;
-						$user->signedUpWith = 'facebook'; // should have been "none" before this
+						$user->setUid($platform, $uid);
+						$user->signedUpWith = $platform; // should have been "none" before this
 						/**
 						 * @event Users/adoptFutureUser {before}
 						 * @param {Users_User} user
@@ -401,12 +393,12 @@ abstract class Users extends Base_Users
 						Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
 					} else {
 						// If we are here, that simply means that we already verified the
-						// $fb_uid => $userId mapping for some existing user who signed up
+						// $uid => $userId mapping for some existing user who signed up
 						// and has been using the system. So there is nothing more to do besides
 						// setting this user as the logged-in user below.
 					}
 				} else {
-					// user is logged out and no user corresponding to $fb_uid yet
+					// user is logged out and no user corresponding to $uid yet
 
 					$authenticated = 'registered';
 
@@ -423,7 +415,7 @@ abstract class Users extends Base_Users
 						}
 					}
 
-					$user->fb_uid = $fb_uid;
+					$user->setUid($platform, $uid);
 					/**
 					 * @event Users/insertUser {before}
 					 * @param {Users_User} user
@@ -438,28 +430,20 @@ abstract class Users extends Base_Users
 						// Register a new user basically and give them an empty username for now
 						$user->username = "";
 						$user->icon = 'default';
-						$user->signedUpWith = 'facebook';
+						$user->signedUpWith = $platform;
 						$user->save();
 
 						// Save the identifier in the quick lookup table
 						$ui = new Users_Identify();
-						$ui->identifier = "facebook:$fb_uid";
+						$ui->identifier = "$platform:$uid";
 						$ui->state = 'verified';
 						$ui->userId = $user->id;
 						$ui->save(true);
 
-						// Download and save facebook icon for the user
+						// Download and save platform icon for the user
 						$sizes = Q_Config::expect('Users', 'icon', 'sizes');
 						sort($sizes);
-						$icon = array();
-						foreach ($sizes as $size) {
-							$parts = explode('x', $size);
-							$width = Q::ifset($parts, 0, '');
-							$height = Q::ifset($parts, 1, '');
-							$width = $width ? $width : $height;
-							$height = $height ? $height : $width;
-							$icon["$size.png"] = "https://graph.facebook.com/$fb_uid/picture?width=$width&height=$height";
-						}
+						$icon = Users::platform($platform)->loggedInUserIcon($sizes, '.png');
 						if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 							self::importIcon($user, $icon);
 							$user->save();
@@ -508,12 +492,11 @@ abstract class Users extends Base_Users
 
 		// Now make sure our master session contains the
 		// session info for the platform app.
-		if ($platform == 'facebook') {
-			$accessToken = $facebook->getDefaultAccessToken();
-			$at = $accessToken->getValue();
-			if (isset($_SESSION['Users']['appUsers']['facebook_'.$appId])) {
-				// Facebook app user exists. Do we need to update it? (Probably not!)
-				$pk = $_SESSION['Users']['appUsers']['facebook_'.$appId];
+		if ($p) {
+			list($accessToken, $sessionExpires) = $p->accessInfo();
+			if (isset($_SESSION['Users']['appUsers'][$platform.'_'.$appId])) {
+				// Platform app user exists. Do we need to update it? (Probably not!)
+				$pk = $_SESSION['Users']['appUsers'][$platform.'_'.$appId];
 				$app_user = Users_AppUser::select('*')->where($pk)->fetchDbRow();
 				if (empty($app_user)) {
 					// somehow this app_user disappeared from the database
@@ -526,14 +509,15 @@ abstract class Users extends Base_Users
 					$app_user->state = 'added';
 				}
 
-				if (!isset($app_user->access_token) or ($at and $at != $app_user->access_token)) {
+				if (!isset($app_user->access_token)
+				or ($accessToken and $accessToken != $app_user->access_token)) {
 					/**
 					 * @event Users/authenticate/updateAppUser {before}
 					 * @param {Users_User} user
 					 */
 					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-					$app_user->access_token = $at;
-					$app_user->session_expires = $accessToken->getExpiresAt()->getTimestamp();
+					$app_user->access_token = $accessToken;
+					$app_user->session_expires = $sessionExpires;
 					$app_user->save(); // update access_token in app_user
 					/**
 					 * @event Users/authenticate/updateAppUser {after}
@@ -545,17 +529,18 @@ abstract class Users extends Base_Users
 				// We have to put the session info in
 				$app_user = new Users_AppUser();
 				$app_user->userId = $user->id;
-				$app_user->platform = 'facebook';
+				$app_user->platform = $platform;
 				$app_user->appId = $appId;
 				if ($app_user->retrieve()) {
 					// App user exists in database. Do we need to update it?
-					if (!isset($app_user->access_token) or $app_user->access_token != $at) {
+					if (!isset($app_user->access_token)
+					or $app_user->access_token != $accessToken) {
 						/**
 						 * @event Users/authenticate/updateAppUser {before}
 						 * @param {Users_User} user
 						 */
 						Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-						$app_user->access_token = $at;
+						$app_user->access_token = $accessToken;
 						$app_user->save(); // update access_token in app_user
 						/**
 						 * @event Users/authenticate/updateAppUser {after}
@@ -567,9 +552,9 @@ abstract class Users extends Base_Users
 					if (empty($app_user->state) or $app_user->state !== 'added') {
 						$app_user->state = 'added';
 					}
-					$app_user->access_token = $at;
-					$app_user->session_expires = $accessToken->getExpiresAt()->getTimestamp();
-					$app_user->platform_uid = $user->fb_uid;
+					$app_user->access_token = $accessToken;
+					$app_user->session_expires = $sessionExpires;
+					$app_user->platform_uid = $user->getUid($platform);
 					/**
 					 * @event Users/insertAppUser {before}
 					 * @param {Users_User} user
@@ -591,7 +576,7 @@ abstract class Users extends Base_Users
 				}
 			}
 
-			$_SESSION['Users']['appUsers']['facebook_'.$appId] = $app_user->getPkValue();
+			$_SESSION['Users']['appUsers'][$platform.'_'.$appId] = $app_user->getPkValue();
 		}
 
 		Users::$cache['authenticated'] = $authenticated;
@@ -939,7 +924,7 @@ abstract class Users extends Base_Users
 					$app = $identifier['app'];
 					$fields = array('platform');
 					Q_Valid::requireFields($fields, $app, true);
-					$platform = $identifier['app']['platform'];
+					$platform = $app['platform'];
 					$appId = Q::ifset($app, 'appId', null);
 					break;
 				case 'device':
@@ -987,8 +972,8 @@ abstract class Users extends Base_Users
 					'type' => '"facebook"'
 				));
 			}
-			if ($facebook = Users::facebook()) {
-				$uid = Users_AppUser::loggedInUid($facebook);
+			if ($p = Users::platform($platform, $appId)) {
+				$uid = $p->loggedInUid();
 				try {
 					// authenticate (and possibly adopt) an existing platform user
 					// or insert a new user during this authentication
@@ -1089,19 +1074,9 @@ abstract class Users extends Base_Users
 
 		$sizes = Q_Config::expect('Users', 'icon', 'sizes');
 		sort($sizes);
-
 		if (empty($icon)) {
-			switch ($platform) {
-			case 'facebook':
-				// let's get this user's icon on facebook
-				if (empty($uid)) {
-					break;
-				}
-				$icon = array();
-				foreach ($sizes as $size) {
-					$icon["$size.png"] = "https://graph.facebook.com/$uid/picture?width=$size&height=$size";
-				}
-				break;
+			if ($platform) {
+				$icon = Users::platform($platform)->loggedInUserIcon($sizes, '.png');
 			}
 		} else {
 			// Import the user's icon and save it
@@ -1146,16 +1121,16 @@ abstract class Users extends Base_Users
 	 * Returns a user in the database that corresponds to the contact info, if any.
 	 * @method userFromContactInfo
 	 * @static
-	 * @param {string} $type Could be one of "email", "mobile", "email_hashed", "mobile_hashed", "facebook", "twitter" or "token"
-	 * @param {string} $value The value corresponding to the type. If $type is:
+	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 *  or any of the above with optional "_hashed" suffix to indicate
+	 *  that the value has already been hashed.
+	 * @param {string} $value The value corresponding to the type. If $type is
 	 *
 	 * * "email" - this is one of the user's email addresses
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * "facebook" - this is the user's id on facebook
-	 * * "twitter": - this is the user's id on twitter
-	 *
+	 * * $platform - this is the user's id on that platform
 	 * @return {Users_User|null}
 	 */
 	static function userFromContactInfo($type, $value)
@@ -1177,16 +1152,17 @@ abstract class Users extends Base_Users
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type Could be one of "email", "mobile", "email_hashed", "mobile_hashed", "facebook" or "twitter"
-	 *    It could also be an array of ($type => $value) pairs. Then $state should be null.
+	 * @param {string|array} $type can be "email", "mobile",the name of a platform,
+	 *  or any of the above with optional "_hashed" suffix to indicate
+	 *  that the value has already been hashed.
+	 *   It could also be an array of ($type => $value) pairs. Then $state should be null.
 	 * @param {string} $value The value corresponding to the type. If $type is
 	 *
 	 * * "email" - this is one of the user's email addresses
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * "facebook" - this is the user's id on facebook
-	 * * "twitter": - this is the user's id on twitter
+	 * * $platform - this is the user's id on that platform
 	 *
 	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
 	 *  Could also be 'future' to find identifiers attached to a "future user",
@@ -1201,33 +1177,8 @@ abstract class Users extends Base_Users
 		$expected_array = is_array($type);
 		$types = is_array($type) ? $type : array($type => $value);
 		foreach ($types as $type => $value) {
-			switch ($type) {
-			case 'email':
-				// for efficiency, we check only the hashed version, and expect it to be there
-				Q_Valid::email($value, $normalized);
-				$ui_type = 'email_hashed';
-				$ui_value = Q_Utils::hash($normalized);
-				break;
-			case 'mobile':
-				// for efficiency, we check only the hashed version, and expect it to be there
-				Q_Valid::phone($value, $normalized);
-				$ui_type = 'mobile_hashed';
-				$ui_value = Q_Utils::hash($normalized);
-				break;
-			default:
-				$ui_type = $type;
-				$ui_value = $value;
-			}
-			$supported = array(
-				'email_hashed' => true,
-				'mobile_hashed' => true,
-				'facebook' => true,
-				'twitter' => true
-			);
-			if (empty($supported[$ui_type])) {
-				throw new Q_Exception_WrongValue(array('field' => 'type', 'range' => 'a supported type'));
-			}
-			$identifiers[] = "$ui_type:$ui_value";
+			list($hashed, $ui_type) = self::hashing($value, $type);
+			$identifiers = "$ui_type:$hashed";
 		}
 		$uis = Users_Identify::select('*')->where(array(
 			'identifier' => $identifiers,
@@ -1245,19 +1196,16 @@ abstract class Users extends Base_Users
 	 * Inserts a new user if one doesn't already exist.
 	 *
 	 * @method futureUser
-	 * @param {string} $type Could be one of "email", "mobile", "email_hashed", "mobile_hashed", "facebook", "twitter" or "none".
-	 * @param {string} $value The value corresponding to the type. If $type is:
-	 *
-	 * * "email" - this is one of the user's email addresses
-	 * * "mobile" - this is one of the user's mobile numbers
-	 * * "email_hashed" - this is the email, already hashed with Q_Utils::hash()
-	 * * "mobile_hashed" - this is the email, already hashed with Q_Utils::hash()
-	 * * "facebook" - this is the user's id on facebook
-	 * * "twitter" - this is the user's id on twitter
-	 * * "none" - the type is ignored, no "identify" rows are inserted into the db, etc.
-	 * 
-	 * With every type except "none", the user will be 
-	 *
+	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 *  or any of the above with optional "_hashed" suffix to indicate
+	 *  that the value has already been hashed.
+	 * @param {string} $value The value corresponding to the type. The type
+	 *  can be "email", "mobile", the name of a platform, or any of the above
+	 *  with optional "_hashed" suffix to indicate that the value has already been hashed.
+	 *  It can also be "none", in which case the type is ignored, no "identify" rows are
+	 *  inserted into the database at this time. Later, as the user adds an email address
+	 *  or platform uids, they will be inserted.
+	 * <br><br>
 	 * NOTE: If the person we are representing here comes and registers the regular way,
 	 * and then later adds an email, mobile, or authenticates with a platform,
 	 * which happens to match the "future" mapping we inserted in users_identify table, 
@@ -1271,13 +1219,6 @@ abstract class Users extends Base_Users
 	 */
 	static function futureUser($type, $value, &$status = null)
 	{
-		if (!array_key_exists($type, self::$types)) {
-			throw new Q_Exception_WrongType(array(
-				'field' => 'type', 
-				'type' => 'one of the supported types'
-			));
-		}
-
 		if ($type !== 'none') {
 			$ui = Users::identify($type, $value, null);
 			if ($ui && !empty($ui->userId)) {
@@ -1298,8 +1239,12 @@ abstract class Users extends Base_Users
 
 		// Make a user row to represent a "future" user and give them an empty username
 		$user = new Users_User();
-		if ($field = self::$types[$type]) {
-			$user->$field = $value;
+		if ($type === 'email') {
+			$user->setEmailAddress($value);
+		} else if ($type === 'mobile') {
+			$user->setMobileNumber($value);
+		} else if (substr($type, -7) !== '_hashed') {
+			$user->setUid($type, $value);
 		}
 		$user->signedUpWith = 'none'; // this marks it as a future user for now
 		$user->username = "";
@@ -1547,97 +1492,37 @@ abstract class Users extends Base_Users
 		}
 		return array($appId, $appInfo);
 	}
-
+	
 	/**
-	 * Gets the facebook object constructed from request and/or cookies
-	 * @method facebook
-	 * @static
-	 * @param {string} [$appId=Q::app()] Can either be an interal appId or a Facebook appId.
-	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
-	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
-	 * @return {Facebook|null} Facebook object
+	 * Obtain an instance of the class named Users_Platform_Foo
+	 * where Foo = ucfirst(strtolower($platform)).
+	 * @param {string} $platform
+	 * @param {string} [$appId=Q::app()] optionally indicate the appId on the platform
+	 * @return {Users_Platform_Interface|null}
+	 *   May return null if no such appId matches.
+	 * @throws Q_Exception_MissingClass
 	 */
-	static function facebook($appId = null, $longLived = true, $setCookie = true)
+	static function platform($platform, $appId)
 	{
+		static $result = array();
 		if (!isset($appId)) {
 			$appId = Q::app();
 		}
-		if (isset(self::$facebooks[$appId])) {
-			return self::$facebooks[$appId];
+		if (!isset($appId)) {
+			$appId = Q::app();
 		}
-		list($appId, $fbInfo) = Users::appInfo('facebook', $appId);
+		list($appId, $appInfo) = Users::appInfo($platform, $appId);
 		if (!$appId) {
 			return null;
 		}
-		$fbAppId = (isset($fbInfo['appId']) && isset($fbInfo['secret']))
-			? $fbInfo['appId']
-			: '';
-
-		try {
-			$params = array_merge(array(
-				'app_id' => $fbAppId,
-				'app_secret' => $fbInfo['secret']
-			));
-			$facebook = new Facebook\Facebook($params);
-			Users::$facebooks[$fbAppId] = $facebook;
-			Users::$facebooks[$appId] = $facebook;
-		} catch (Exception $e) {
-			return null;
+		if (isset($result[$platform][$appId])) {
+			return $result[$platform][$appId];
 		}
-
-		$defaultAccessToken = null;
-		if (isset($_POST['signed_request'])) {
-			// This means that this is being requested from canvas page or page tab
-			$fbsr = $_POST['signed_request'];
-		} else {
-			// Check the cookies for the signed request
-			$fbsr = Q::ifset($_COOKIE, "fbsr_$appId", null);
+		$className = "Users_Platform_".ucfirst(strtolower($platform));
+		if (!class_exists($className, true)) {
+			throw new Q_Exception_MissingClass(compact('className'));
 		}
-		if ($fbsr) {
-			$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
-			$result = array(
-				'signedRequest' => $fbsr,
-				'expires' => $sr->get('expires'),
-				'accessToken' => $sr->get('oauth_token'),
-				'userID' => $sr->get('user_id')
-			);
-		}
-		if ($authResponse = Q_Request::special('Users.facebook.authResponse', null)) {
-			// Users.js sent along Users.facebook.authResponse in the request
-			$result = Q::take($authResponse, array(
-				'signedRequest', 'accessToken', 'expires', 'expiresIn', 'userID'
-			));
-			if (!isset($result['expires']) and isset($result['expiresIn'])) {
-				$result['expires'] = time() + $result['expiresIn']; // approximately
-			}
-			if (isset($result['signedRequest'])) {
-				$fbsr = $result['signedRequest'];
-			}
-		}
-		if (isset($result['accessToken'])) {
-			$defaultAccessToken = $result['accessToken'];
-			if ($longLived and isset($result['expires'])) {
-				$accessToken = new Facebook\Authentication\AccessToken(
-					$defaultAccessToken, $result['expires']
-				);
-				if (!$accessToken->isLongLived()) {
-					$oa = $facebook->getOAuth2Client();
-					$defaultAccessToken = $oa->getLongLivedAccessToken($defaultAccessToken);
-				}
-			}
-		}
-		if ($defaultAccessToken) {
-			$facebook->setDefaultAccessToken($defaultAccessToken);
-		}
-		if ($fbsr and $setCookie) {
-			Q_Response::setCookie("fbsr_$appId", $fbsr);
-		}
-		// If $defaultAccessToken was not, set, then
-		// we will return a Facebook\Facebook object but
-		// it will not have a default access token set, so
-		// Facebook API requests will return an error unless
-		// you provide your own access token at request time.
-		return $facebook;
+		return $result[$platform][$appId] = new $className($appId);
 	}
 
 	/**
@@ -1645,8 +1530,10 @@ abstract class Users extends Base_Users
 	 * @method addLink
 	 * @static
 	 * @param {string} $address Could be email address, mobile number, etc.
-	 * @param {string} [$type=null] One of 'email', 'mobile', 'email_hashed', 'mobile_hashed', 'facebook', or 'twitter' for now.
-	 * If not indicated, the function tries to guess by using Q_Valid functions.
+	 * @param {string} [$type=null] can be "email", "mobile",the name of a platform,
+	 *  or any of the above with optional "_hashed" suffix to indicate
+	 *  that the value has already been hashed.
+	 *  If null, the function tries to guess the $type by using Q_Valid functions.
 	 * @param {array} [$extraInfo=array()] Associative array of information you have imported
 	 * from the address book. Should contain at least the keys:
 	 *
@@ -1664,75 +1551,12 @@ abstract class Users extends Base_Users
 		$type = null,
 		$extraInfo = array())
 	{
-		// process the address first
-		$address = trim($address);
-		$ui_type = $type;
-		switch ($type) {
-			case 'email':
-				if (!Q_Valid::email($address, $normalized)) {
-					throw new Q_Exception_WrongValue(
-						array('field' => 'address', 'range' => 'email address')
-					);
-				}
-				$ui_type = 'email_hashed';
-				$ui_value = 'email_hashed:'.Q_Utils::hash($normalized);
-				break;
-			case 'email_hashed':
-				// Assume that the $address was already hashed in the standard way
-				// see Q_Utils::hash
-				$ui_value = "email_hashed:$address";
-				break;
-			case 'mobile':
-				if (!isset($options['hashed']) and !Q_Valid::phone($address, $normalized)) {
-					throw new Q_Exception_WrongValue(
-						array('field' => 'address', 'range' => 'phone number')
-					);
-				}
-				$ui_type = 'mobile_hashed';
-				$ui_value = 'mobile_hashed:'.Q_Utils::hash($normalized);
-				break;
-			case 'mobile_hashed':
-				// Assume that the $address was already hashed in the standard way
-				// see Q_Utils::hash
-				$ui_value = "mobile_hashed:$address";
-				break;
-			case 'facebook':
-				if (!isset($options['hashed']) and !is_numeric($address)) {
-					throw new Q_Exception_WrongValue(
-						array('field' => 'address', 'range' => 'facebook uid')
-					);
-				}
-				$ui_value = "facebook:$address";
-				$normalized = $address;
-				break;
-			case 'twitter':
-				if (!isset($options['hashed']) and !is_numeric($address)) {
-					throw new Q_Exception_WrongValue(
-						array('field' => 'address', 'range' => 'twitter uid')
-					);
-				}
-				$ui_value = "twitter:$address";
-				$normalized = $address;
-				break;
-			default:
-				if (Q_Valid::email($address, $normalized)) {
-					$ui_type = 'email_hashed';
-					$ui_value = 'email_hashed:'.Q_Utils::hash($normalized);
-				} else if (Q_Valid::phone($address, $normalized)) {
-					$ui_type = 'mobile_hashed';
-					$ui_value = 'mobile_hashed:'.Q_Utils::hash($normalized);
-				} else {
-					throw new Q_Exception_WrongValue(
-						array('field' => 'type', 'range' => 'one of email, mobile, email_hashed, mobile_hashed, facebook, twitter')
-					);
-				}
-				break;
-		}
+		list($hashed, $ui_type) = self::hashing($address, $type);
 
 		$user = Users::loggedInUser(true);
 
 		// Check if the contact user already exists, and if so, add a contact instead of a link
-		$ui = Users::identify($ui_type, $ui_value);
+		$ui = Users::identify($ui_type, $address);
 		if ($ui) {
 			// Add a contact instead of a link
 			$user->addContact($ui->userId, Q::ifset($extraInfo, 'labels', null));
@@ -1754,41 +1578,19 @@ abstract class Users extends Base_Users
 	/**
 	 * @method links
 	 * @static
-	 * @param {array} $contact_info An array of key => value pairs, where keys can be:
-	 *
-	 * * "email" => the user's email address
-	 * * "mobile" => the user's mobile number
-	 * * "email_hashed" => the standard hash of the user's email address
-	 * * "mobile_hashed" => the standard hash of the user's mobile number
-	 * * "facebook" => the user's facebook uid
-	 * * "twitter" => the user's twitter uid
-	 *
+	 * @param {array} $contactInfo An array of key => value pairs, where keys
+	 *  can be "email", "mobile", the name of a platform, or any of the above
+	 *  with optional "_hashed" suffix to indicate that the value has already been hashed.
 	 * @return {array}
 	 *  Returns an array of all links to this user's contact info
 	 */
-	static function links($contact_info)
+	static function links($contactInfo, $userId)
 	{
 		$links = array();
 		$identifiers = array();
-		if (!empty($contact_info['email'])) {
-			Q_Valid::email($contact_info['email'], $emailAddress);
-			$identifiers[] = "email_hashed:".Q_Utils::hash($emailAddress);
-		}
-		if (!empty($contact_info['mobile'])) {
-			Q_Valid::phone($contact_info['mobile'], $mobileNumber);
-			$identifiers[] = "mobile_hashed:".Q_Utils::hash($mobileNumber);
-		}
-		if (!empty($contact_info['email_hashed'])) {
-			$identifiers[] = "email_hashed".$contact_info['email_hashed'];
-		}
-		if (!empty($contact_info['mobile_hashed'])) {
-			$identifiers[] = "mobile_hashed:".$contact_info['mobile_hashed'];
-		}
-		if (!empty($contact_info['facebook'])) {
-			$identifiers[] = "facebook:".$contact_info['facebook'];
-		}
-		if (!empty($contact_info['twitter'])) {
-			$identifiers[] = "twitter:".$contact_info['twitter'];
+		foreach ($contactInfo as $k => $v) {
+			list($hashed, $ui_type) = self::hashing($v, $k);
+			$identifiers[] = "$ui_type:$hashed";
 		}
 		return Users_Link::select('*')->where(array(
 			'identifier' => $identifiers
@@ -1801,39 +1603,27 @@ abstract class Users extends Base_Users
 	 * Removes the links after successfully adding the Users_Contact rows.
 	 * @method saveContactsFromLinks
 	 * @static
-	 * @param {array} $contact_info An array of key => value pairs, where keys can be:
-	 *
-	 * * "email" => the user's email address
-	 * * "mobile" => the user's mobile number
-	 * * "email_hashed" => the standard hash of the user's email address
-	 * * "mobile_hashed" => the standard hash of the user's mobile number
-	 * * "facebook" => the user's facebook uid
-	 * * "twitter" => the user's twitter uid
-	 *
+	 * @param {array} $contactInfo An array of key => value pairs, where keys
+	 *  can be "email", "mobile", the name of a platform, or any of the above
+	 *  with optional "_hashed" suffix to indicate that the value has already been hashed.
 	 * @param {string} $userId The id of the user who has verified these identifiers
+	 * @throws {Users_Exception_NoSuchUser} if the user wasn't found in the database
 	 */
-	static function saveContactsFromLinks()
+	static function saveContactsFromLinks($contactInfo, $userId)
 	{
 		/**
 		 * @event Users/saveContactsFromLinks {before}
 		 */
 		Q::event('Users/saveContactsFromLinks', array(), 'before');
 
-		$user = self::loggedInUser();
-
-		$contact_info = array();
-		foreach (self::$types as $type => $field) {
-			if (!empty($user->$field)) {
-				$contact_info[$type] = $user->$field;
-			}
-		}
-		$links = $contact_info
-			? Users::links($contact_info)
+		$user = Users_User::fetch($userId, true);
+		$links = $contactInfo
+			? Users::links($contactInfo)
 			: array();
 
 		$contacts = array();
 		foreach ($links as $link) {
-			$extraInfo = json_decode($link->extraInfo, true);
+			$extraInfo = Q::json_decode($link->extraInfo, true);
 			$firstName = Q::ifset($extraInfo, 'firstName', '');
 			$lastName = Q::ifset($extraInfo, 'lastName', '');
 			$fullName = $firstName
@@ -2027,66 +1817,47 @@ abstract class Users extends Base_Users
 		}
 		return $authorized;
 	}
-
-	/**
-	 * @property $fql_results
-	 * @type array
-	 * @protected
-	 * @default array()
-	 */
-	protected static $fql_results = array();
-	/**
-	 * @property $users
-	 * @type array
-	 * @protected
-	 * @default array()
-	 */
-	protected static $users = array();
-	/**
-	 * @property $email
-	 * @type string
-	 * @protected
-	 * @default null
-	 */
-	protected static $email = null; // cached
-	/**
-	 * @property $types
-	 * @type array
-	 * @protected
-	 */
-	/**
-	 * Type e-mail
-	 * @config $types['email']
-	 * @protected
-	 * @default 'emailAddressPending'
-	 */
-	/**
-	 * Type mobile
-	 * @config $types['mobile']
-	 * @protected
-	 * @default 'mobileNumberPending'
-	 */
-	/**
-	 * Type facebook
-	 * @config $types['facebook']
-	 * @protected
-	 * @default 'fb_uid'
-	 */
-	/**
-	 * Type twitter
-	 * @config $types['twitter']
-	 * @protected
-	 * @default 'tw_uid'
-	 */
-	protected static $types = array(
-		'none' => null,
-		'email_hashed' => null,
-		'mobile_hashed' => null,
-		'email' => 'emailAddressPending',
-		'mobile' => 'mobileNumberPending',
-		'facebook' => 'fb_uid',
-		'twitter' => 'tw_uid'
-	);
+	
+	protected static function hashing($address, $type = null)
+	{
+		// process the address first
+		$address = trim($address);
+		if (substr($type, -7) === '_hashed') {
+			$hashed = $address;
+			$ui_type = $type;
+		} else {
+			switch ($type) {
+				case 'email':
+					if (!Q_Valid::email($address, $normalized)) {
+						throw new Q_Exception_WrongValue(
+							array('field' => 'address', 'range' => 'email address')
+						);
+					}
+					break;
+				case 'mobile':
+					if (!Q_Valid::phone($address, $normalized)) {
+						throw new Q_Exception_WrongValue(
+							array('field' => 'address', 'range' => 'phone number')
+						);
+					}
+					break;
+				case 'facebook':
+				case 'twitter':
+					if (!is_numeric($address)) {
+						throw new Q_Exception_WrongValue(
+							array('field' => 'address', 'range' => 'numeric uid')
+						);
+					}
+					$normalized = $address;
+					break;
+				default:
+					break;
+			}
+			$hashed = Q_Utils::hash($normalized);
+			$ui_type = $type.'_hashed';
+		}
+		return array($hashed, $ui_type, substr($ui_type, 0, -7));
+	}
 
 	/**
 	 * @property $loggedOut

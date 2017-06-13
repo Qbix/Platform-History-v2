@@ -1279,7 +1279,7 @@ function login_callback(err, response) {
 			}, {
 				appId: appId
 			});
-			register_form.append($('<input type="hidden" name="platform" value="facebook" />'));
+			register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
 		}
 		if (json.emailExists || json.mobileExists) {
 			var p = $('<p id="Users_login_identifierExists" />')

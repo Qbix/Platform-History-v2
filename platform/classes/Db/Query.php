@@ -4,20 +4,20 @@
  * @module Db
  */
 
-interface iDb_Query
+interface Db_Query_Interface
 {
 	/**
 	 * Interface that an adapter must support
 	 * to implement the Db class.
-	 * @class iDb_Query
+	 * @class Db_Query_Interface
 	 * @constructor
-	 * @param {iDb} $db The database connection
+	 * @param {Db_Interface} $db The database connection
 	 * @param {integer} $type The type of the query. See class constants beginning with TYPE_ .
 	 * @param {array} $clauses The clauses to add to the query right away
 	 * @param {array} $parameters The parameters to add to the query right away (to be bound when executing)
 	 */
 	//function __construct (
-	//	iDb $db, 
+	//	Db_Interface $db, 
 	//	$type, 
 	//	array $clauses = array(), 
 	//	array $parameters = array())

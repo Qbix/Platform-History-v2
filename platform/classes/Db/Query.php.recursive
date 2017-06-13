@@ -6,7 +6,7 @@
  * @package Db
  */
 
-interface iDb_Query
+interface Db_Query_Interface
 {
 	/**
 	 * Constructor
@@ -80,8 +80,8 @@ interface iDb_Query
 	 *  The parameters will be properly escaped.
 	 *  You can also have the query contain question marks (the binding is
 	 *  done using PDO), but then the order of the parameters matters.
-	 * @return {iDb_Query}
-	 *  The resulting object implementing iDb_Query
+	 * @return {Db_Query_Interface}
+	 *  The resulting object implementing Db_Query_Interface
 	 *  You can use it to chain the calls together.
 	 */
 	function bind(array $parameters = array());
@@ -179,7 +179,7 @@ interface iDb_Query
 	 * @param Db_Expression|string $criteria
 	 * @param Db_Expression|string $or_criteria
 	 * @return {Db_Query}
-	 *  The resulting object implementing iDb_Query
+	 *  The resulting object implementing Db_Query_Interface
 	 *  You can use it to chain the calls together.
 	 */
 	function andWhere ($criteria, $or_criteria = null);
@@ -191,7 +191,7 @@ interface iDb_Query
 	 * @param Db_Expression|string $criteria
 	 * @param Db_Expression|string $and_criteria
 	 * @return {Db_Query}
-	 *  The resulting object implementing iDb_Query
+	 *  The resulting object implementing Db_Query_Interface
 	 *  You can use it to chain the calls together.
 	 */
 	function orWhere ($criteria, $and_criteria = null);
@@ -213,7 +213,7 @@ interface iDb_Query
 	 *  The values are automatically escaped using PDO placeholders.
 	 *  Or, this could be a Db_Expression object.
 	 * @return {Db_Query}
-	 *  The resulting object implementing iDb_Query
+	 *  The resulting object implementing Db_Query_Interface
 	 *  You can use it to chain the calls together.
 	 */
 	function having ($criteria);

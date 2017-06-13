@@ -12,8 +12,9 @@ function Users_after_Q_reroute($params, &$stop_dispatch)
 	$user = Users::loggedInUser();
 	if ($requireLogin[$ma] === true and !$user) {
 		// require login
-	} else if ($requireLogin[$ma] === 'facebook' and !Users::facebook($app)) {
-		// require facebook
+	} else if (isset($requireLogin[$ma])
+	and !Users::platform($requireLogin)->loggedInUid()) {
+		// require login
 	} else {
 		return; // We don't have to require login here
 	}

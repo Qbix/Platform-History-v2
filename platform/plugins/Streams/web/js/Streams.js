@@ -4125,7 +4125,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		}, {
 			appId: appId
 		});
-		register_form.append($('<input type="hidden" name="platform" value="facebook" />'));
+		register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
 	}
 	if (json.emailExists || json.mobileExists) {
 		var p = $('<p id="Streams_login_identifierExists" />')

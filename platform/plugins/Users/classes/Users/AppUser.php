@@ -22,27 +22,6 @@ class Users_AppUser extends Base_Users_AppUser
 	{
 		parent::setUp();
 	}
-	
-	/**
-	 * If a user is logged in the platform, and the platform sent us
-	 * some sort of signed request (which we may have saved in a cookie)
-	 * this function returns the user's uid on that platform.
-	 * @param $platform
-	 * Instance of platform SDK object
-	 * Right now it can only be \Facebook\Facebook,
-	 * which you can obtain from Users::facebook()
-	 */
-	static function loggedInUid($platform)
-	{
-		if ($platform instanceof Facebook\Facebook
-		and $app = $platform->getApp()) {
-			if ($fbsr = Q::ifset($_COOKIE, 'fbsr_'.$app->getId(), null)) {
-				$sr = new Facebook\SignedRequest($platform->getApp(), $fbsr);
-				return $sr->getUserId();
-			}
-		}
-		return null;
-	}
 
 	/**
 	 * Implements the __set_state method, so it can work with

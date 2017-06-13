@@ -26,15 +26,12 @@ var Row = Q.require('Db/Row');
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.sessionId] defaults to null
  * @param {integer} [$fields.sessionCount] defaults to 0
- * @param {integer} [$fields.fb_uid] defaults to 0
- * @param {integer} [$fields.tw_uid] defaults to 0
- * @param {string} [$fields.g_uid] defaults to null
- * @param {string} [$fields.y_uid] defaults to null
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
+ * @param {string} [$fields.uids] defaults to "{}"
  * @param {string} [$fields.signedUpWith] defaults to ""
  * @param {string} [$fields.username] defaults to ""
  * @param {string} [$fields.icon] defaults to ""
@@ -78,30 +75,6 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property fb_uid
- * @type Integer
- * @default 0
- * The facebook id of the user
- */
-/**
- * @property tw_uid
- * @type Integer
- * @default 0
- * The twitter id of the user
- */
-/**
- * @property g_uid
- * @type String|Buffer
- * @default null
- * 
- */
-/**
- * @property y_uid
- * @type String|Buffer
- * @default null
- * 
- */
-/**
  * @property passphraseHash
  * @type String
  * @default null
@@ -130,6 +103,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * 
+ */
+/**
+ * @property uids
+ * @type String
+ * @default "{}"
+ * user ids on external platforms
  */
 /**
  * @property signedUpWith
@@ -359,15 +338,12 @@ Base.prototype.fieldNames = function () {
 		"updatedTime",
 		"sessionId",
 		"sessionCount",
-		"fb_uid",
-		"tw_uid",
-		"g_uid",
-		"y_uid",
 		"passphraseHash",
 		"emailAddress",
 		"mobileNumber",
 		"emailAddressPending",
 		"mobileNumberPending",
+		"uids",
 		"signedUpWith",
 		"username",
 		"icon",
@@ -534,148 +510,6 @@ Base.prototype.maxSize_sessionCount = function () {
 Base.column_sessionCount = function () {
 
 return [["int","11","",false],false,"","0"];
-};
-
-/**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_fb_uid
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
- */
-Base.prototype.beforeSet_fb_uid = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".fb_uid");
-		if (value < -9.2233720368548E+18 || value > 9223372036854775807)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".fb_uid");
-		return value;
-};
-
-/**
- * Returns the maximum integer that can be assigned to the fb_uid field
- * @return {integer}
- */
-Base.prototype.maxSize_fb_uid = function () {
-
-		return 9223372036854775807;
-};
-
-	/**
-	 * Returns schema information for fb_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_fb_uid = function () {
-
-return [["bigint","20","",false],false,"","0"];
-};
-
-/**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_tw_uid
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
- */
-Base.prototype.beforeSet_tw_uid = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".tw_uid");
-		if (value < -9.2233720368548E+18 || value > 9223372036854775807)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".tw_uid");
-		return value;
-};
-
-/**
- * Returns the maximum integer that can be assigned to the tw_uid field
- * @return {integer}
- */
-Base.prototype.maxSize_tw_uid = function () {
-
-		return 9223372036854775807;
-};
-
-	/**
-	 * Returns schema information for tw_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_tw_uid = function () {
-
-return [["bigint","20","",false],false,"","0"];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_g_uid
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_g_uid = function (value) {
-		if (value == undefined) return value;
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".g_uid");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".g_uid");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the g_uid field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_g_uid = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for g_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_g_uid = function () {
-
-return [["varbinary","255","",false],true,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_y_uid
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_y_uid = function (value) {
-		if (value == undefined) return value;
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".y_uid");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".y_uid");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the y_uid field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_y_uid = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for y_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_y_uid = function () {
-
-return [["varbinary","255","",false],true,"",null];
 };
 
 /**
@@ -860,6 +694,44 @@ Base.prototype.maxSize_mobileNumberPending = function () {
 Base.column_mobileNumberPending = function () {
 
 return [["varbinary","255","",false],false,"",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_uids
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_uids = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".uids");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".uids");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the uids field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_uids = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for uids column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_uids = function () {
+
+return [["varchar","1023","",false],false,"","{}"];
 };
 
 /**
