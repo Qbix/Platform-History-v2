@@ -1281,8 +1281,9 @@ abstract class Users extends Base_Users
 		} else {
 			// Find existing identifier or save a new one
 			$ui = new Users_Identify();
+			list($hashed, $ui_type) = self::hashing($value, $type);
 			$hashed = Q_Utils::hash($value);
-			$ui->identifier = $type."_hashed:$hashed";
+			$ui->identifier = "$ui_type:$hashed";
 			$ui->state = 'future';
 			if (!$ui->retrieve()) {
 				$ui->userId = $user->id;
@@ -1565,7 +1566,7 @@ abstract class Users extends Base_Users
 
 		// Add a link if one isn't already there
 		$link = new Users_Link();
-		$link->identifier = $ui_value;
+		$link->identifier = "$ui_type:$hashed";
 		$link->userId = $user->id;
 		if ($link->retrieve()) {
 			return false;
