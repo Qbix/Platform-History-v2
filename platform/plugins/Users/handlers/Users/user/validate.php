@@ -45,7 +45,7 @@ function Users_user_validate()
 			'username' => $user->username,
 			'icon' => $user->icon,
 			'passphrase_set' => !empty($user->passphraseHash),
-			'fb_uid' => $user->fb_uid ? $user->fb_uid : null
+			'uids' => $user->getAllUids()
 		);
 	}
 	if ($type === 'email') {

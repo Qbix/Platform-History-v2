@@ -42,7 +42,7 @@ abstract class Base_Streams
      * This method calls Db.connect() using information stored in the configuration.
      * If this has already been called, then the same db object is returned.
 	 * @method db
-	 * @return {iDb} The database object
+	 * @return {Db_Interface} The database object
 	 */
 	static function db()
 	{

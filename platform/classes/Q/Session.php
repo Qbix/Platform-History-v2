@@ -469,7 +469,7 @@ class Q_Session
 		 * @event Q/session/open {before}
 		 * @param {string} save_path
 		 * @param {string} session_name
-		 * @param {iDb} session_db_connection
+		 * @param {Db_Interface} session_db_connection
 		 */
 		Q::event('Q/session/open', 
 			compact('save_path', 'session_name', 'db_info'), 
@@ -481,7 +481,7 @@ class Q_Session
 		 * @event Q/session/open {after}
 		 * @param {string} save_path
 		 * @param {string} session_name
-		 * @param {iDb} session_db_connection
+		 * @param {Db_Interface} session_db_connection
 		 */
 		Q::event('Q/session/open', 
 			compact('save_path', 'session_name', 'session_db_connection'), 
@@ -516,7 +516,7 @@ class Q_Session
 		/**
 		 * @event Q/session/read {before}
 		 * @param 'save_path' {string}
-		 * @param 'session_db_connection' {iDb}
+		 * @param 'session_db_connection' {Db_Interface}
 		 * @return {string}
 		 */
 		$result = Q::event('Q/session/read', 
@@ -560,7 +560,7 @@ class Q_Session
 		/**
 		 * @event Q/session/read {after}
 		 * @param 'save_path' {string}
-		 * @param 'session_db_connection' {iDb}
+		 * @param 'session_db_connection' {Db_Interface}
 		 * @return {string}
 		 */
 		$result = Q::event('Q/session/read', 

@@ -119,12 +119,13 @@
 					"bundleId": "com.mycompany.myapp",
 					"appId": "361285480",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
-					"baseUrl": "groups://",
+					"baseUrl": "myapp://",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
 						"added": "Notifications have been enabled"
 					},
+					"secret": "SHARED SECRET HERE",
 					"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
 						"key": "local/Users/certs/MyApp/token/cert.p8",
 						"keyId": "Find it at https://developer.apple.com/account/ios/certificate/",
@@ -141,7 +142,8 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
-					"key": "AUTHORIZATION KEY HERE"
+					"key": "AUTHORIZATION KEY HERE",
+					"secret": "SHARED SECRET HERE"
 				}
 			},
 			"amazon": {
@@ -149,7 +151,7 @@
 					"appId": "B01MQTS32B",
 					"url": "http://www.amazon.com/gp/mas/dl/android?asin=B01MQTS32B",
 					"clientId": "ADM CLIENT ID HERE",
-					"secret": "SECRET HERE"
+					"secret": "SHARED SECRET HERE"
 				}
 			},
 			"windows": {
@@ -157,7 +159,7 @@
 					"appId": "9nblggh2s4gt",
 					"url": "https://www.microsoft.com/en-us/store/p/monster-go/9nblggh2s4gt",
 					"clientId": "PACKAGE SECURITY IDENTIFIER",
-					"secret": "SECRET HERE"
+					"secret": "SHARED SECRET HERE"
 				}
 			}
 		}

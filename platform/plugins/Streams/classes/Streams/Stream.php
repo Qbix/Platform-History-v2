@@ -131,7 +131,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @static
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
-	 * @param {string|array} [$who.fb_uid]  fb user id or array of fb user ids
+	 * @param {string} [$who.platform] platform for which uids are passed
+	 * @param {string|array} [$who.uid]  platform uid or array of uids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
@@ -154,7 +155,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @see Users::addLink()
 	 * @return {array} Returns array with keys 
 	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from "userId" first, then "identifiers", "fb_uid", "label",
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"

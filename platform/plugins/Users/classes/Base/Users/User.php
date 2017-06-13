@@ -21,15 +21,12 @@
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.sessionId] defaults to null
  * @param {integer} [$fields.sessionCount] defaults to 0
- * @param {integer} [$fields.fb_uid] defaults to 0
- * @param {integer} [$fields.tw_uid] defaults to 0
- * @param {string} [$fields.g_uid] defaults to null
- * @param {string} [$fields.y_uid] defaults to null
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
+ * @param {string} [$fields.uids] defaults to "{}"
  * @param {string} [$fields.signedUpWith] defaults to ""
  * @param {string} [$fields.username] defaults to ""
  * @param {string} [$fields.icon] defaults to ""
@@ -69,30 +66,6 @@ abstract class Base_Users_User extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $fb_uid
-	 * @type integer
-	 * @default 0
-	 * The facebook id of the user
-	 */
-	/**
-	 * @property $tw_uid
-	 * @type integer
-	 * @default 0
-	 * The twitter id of the user
-	 */
-	/**
-	 * @property $g_uid
-	 * @type string
-	 * @default null
-	 * 
-	 */
-	/**
-	 * @property $y_uid
-	 * @type string
-	 * @default null
-	 * 
-	 */
-	/**
 	 * @property $passphraseHash
 	 * @type string
 	 * @default null
@@ -121,6 +94,12 @@ abstract class Base_Users_User extends Db_Row
 	 * @type string
 	 * @default ""
 	 * 
+	 */
+	/**
+	 * @property $uids
+	 * @type string
+	 * @default "{}"
+	 * user ids on external platforms
 	 */
 	/**
 	 * @property $signedUpWith
@@ -172,7 +151,7 @@ abstract class Base_Users_User extends Db_Row
 	 * Connects to database
 	 * @method db
 	 * @static
-	 * @return {iDb} The database object
+	 * @return {Db_Interface} The database object
 	 */
 	static function db()
 	{
@@ -601,222 +580,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_fb_uid
-	 * @param {integer} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
-	 */
-	function beforeSet_fb_uid($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('fb_uid', $value);
-		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".fb_uid");
-		$value = intval($value);
-		if ($value < -9.2233720368548E+18 or $value > 9223372036854775807) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".fb_uid");
-		}
-		return array('fb_uid', $value);			
-	}
-
-	/**
-	 * @method maxSize_fb_uid
-	 * Returns the maximum integer that can be assigned to the fb_uid field
-	 * @return {integer}
-	 */
-	function maxSize_fb_uid()
-	{
-
-		return 9223372036854775807;			
-	}
-
-	/**
-	 * Returns schema information for fb_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_fb_uid()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'bigint',
-    1 => '20',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_tw_uid
-	 * @param {integer} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
-	 */
-	function beforeSet_tw_uid($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('tw_uid', $value);
-		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".tw_uid");
-		$value = intval($value);
-		if ($value < -9.2233720368548E+18 or $value > 9223372036854775807) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".tw_uid");
-		}
-		return array('tw_uid', $value);			
-	}
-
-	/**
-	 * @method maxSize_tw_uid
-	 * Returns the maximum integer that can be assigned to the tw_uid field
-	 * @return {integer}
-	 */
-	function maxSize_tw_uid()
-	{
-
-		return 9223372036854775807;			
-	}
-
-	/**
-	 * Returns schema information for tw_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_tw_uid()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'bigint',
-    1 => '20',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '0',
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_g_uid
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_g_uid($value)
-	{
-		if (!isset($value)) {
-			return array('g_uid', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('g_uid', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".g_uid");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".g_uid");
-		return array('g_uid', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the g_uid field
-	 * @return {integer}
-	 */
-	function maxSize_g_uid()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for g_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_g_uid()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_y_uid
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_y_uid($value)
-	{
-		if (!isset($value)) {
-			return array('y_uid', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('y_uid', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".y_uid");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".y_uid");
-		return array('y_uid', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the y_uid field
-	 * @return {integer}
-	 */
-	function maxSize_y_uid()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for y_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_y_uid()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_passphraseHash
@@ -1083,6 +846,60 @@ return array (
   1 => false,
   2 => '',
   3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_uids
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_uids($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('uids', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".uids");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".uids");
+		return array('uids', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the uids field
+	 * @return {integer}
+	 */
+	function maxSize_uids()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for uids column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_uids()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '{}',
 );			
 	}
 
@@ -1374,7 +1191,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'fb_uid', 'tw_uid', 'g_uid', 'y_uid', 'passphraseHash', 'emailAddress', 'mobileNumber', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash');
+		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'emailAddressPending', 'mobileNumberPending', 'uids', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

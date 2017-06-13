@@ -27,31 +27,31 @@
 		"type": "Streams/image",
 		"title": "Icon",
 		"icon": "Streams/image",
-		"name_fb": "pic"
+		"platforms": {"facebook": "pic"}
 	},
 	"Streams/user/username": {
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
-		"name_fb": "username"
+		"platforms": {"facebook": "username"}
 	},
 	"Streams/user/firstName": {
 		"type": "Streams/text/name",
 		"title": "First name",
 		"icon": "",
-		"name_fb": "first_name"
+		"platforms": {"facebook": "first_name"}
 	},
 	"Streams/user/middleName": {
 		"type": "Streams/text/name",
 		"title": "Middle name",
 		"icon": "",
-		"name_fb": "middle_name"
+		"platforms": {"facebook": "middle_name"}
 	},	
 	"Streams/user/lastName": {
 		"type": "Streams/text/name",
 		"title": "Last name",
 		"icon": "",
-		"name_fb": "last_name"
+		"platforms": {"facebook": "last_name"}
 	},
 	"Streams/user/emailAddress": {
 		"type": "Streams/text/emailAddress",
@@ -60,7 +60,7 @@
 		"readLevel": "0",
 		"writeLevel": "0",
 		"adminLevel": "0",
-		"name_fb": "email"
+		"platforms": {"facebook": "email"}
 	},
 	"Streams/user/mobileNumber": {
 		"type": "Streams/text/mobileNumber",
@@ -79,7 +79,7 @@
 		"type": "Streams/text/small",
 		"title": "Description",
 		"icon": "",
-		"name_fb": "profile_blurb"
+		"platforms": {"facebook": "profile_blurb"}
 	},
 	"Streams/user/presence": {
 		"type": "Streams/enum/presence",
@@ -110,7 +110,7 @@
 		"type": "Streams/enum/gender",
 		"title": "Gender",
 		"icon": "",
-		"name_fb": "gender"
+		"platforms": {"facebook": "gender"}
 	},
 	"Streams/user/height": {
 		"type": "Streams/date/height",
@@ -121,7 +121,7 @@
 		"type": "Streams/date/birthday",
 		"title": "Birthday",
 		"icon": "",
-		"name_fb": "birthday_date"
+		"platforms": {"facebook": "birthday"}
 	},
 	"Streams/user/age": {
 		"type": "Streams/number/age",
