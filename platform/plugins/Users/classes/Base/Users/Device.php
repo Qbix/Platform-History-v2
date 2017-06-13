@@ -103,7 +103,7 @@ abstract class Base_Users_Device extends Db_Row
 	 * Connects to database
 	 * @method db
 	 * @static
-	 * @return {iDb} The database object
+	 * @return {Db_Interface} The database object
 	 */
 	static function db()
 	{

@@ -4,12 +4,12 @@
  * @module Db
  */
 
-class Db_Mysql implements iDb
+class Db_Mysql implements Db_Interface
 {
 	/**
 	 * This class lets you create and use PDO database connections.
 	 * @class Db_Mysql
-	 * @extends iDb
+	 * @extends Db_Interface
 	 * @constructor
 	 *
 	 * @param {string} $connectionName The name of the connection out of the connections added with Db::setConnection()
@@ -1385,7 +1385,7 @@ $class_extras
      * This method calls Db.connect() using information stored in the configuration.
      * If this has already been called, then the same db object is returned.
 	 * @method db
-	 * @return {iDb} The database object
+	 * @return {Db_Interface} The database object
 	 */
 	static function db()
 	{
@@ -2376,7 +2376,7 @@ $field_hints
 	 * Connects to database
 	 * @method db
 	 * @static
-	 * @return {iDb} The database object
+	 * @return {Db_Interface} The database object
 	 */
 	static function db()
 	{

@@ -3349,7 +3349,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $streamName The name of the stream the user will be invited to
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
-	 * @param {string|array} [$who.fb_uid]  fb user id or array of fb user ids
+	 * @param {string} [$who.platform] platform for which uids are passed
+	 * @param {string|array} [$who.uid]  platform uid or array of uids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
@@ -3372,7 +3373,7 @@ abstract class Streams extends Base_Streams
 	 * @see Users::addLink()
 	 * @return {array} Returns array with keys 
 	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from "userId" first, then "identifiers", "fb_uid", "label",
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"
@@ -3452,19 +3453,20 @@ abstract class Streams extends Base_Streams
 			$statuses = array_merge($statuses, $statuses1);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes1);
 		}
-		// merge fb uids if any
-		if (isset($who['fb_uid'])) {
-			$fb_uids = $who['fb_uid'];
-			if (is_string($fb_uids)) {
-				$fb_uids = array_map('trim', explode("\t", $fb_uids)) ;
+		if (!empty($who['platform']) and !empty($who['uid'])) {
+			// merge users from platform uids
+			$platform = $who['platform'];
+			$uids = $who['uid'];
+			if (is_string($uids)) {
+				$uids = array_map('trim', explode("\t", $uids)) ;
 			}
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromFacebook($fb_uids, $statuses2)
+				Users::idsFromPlatformUids($platform, $uids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
-			$identifiers = array_merge($identifiers, $fb_uids);
-			$identifierTypes2 = array_fill(0, count($statuses2), 'facebook');
+			$identifiers = array_merge($identifiers, $uids);
+			$identifierTypes2 = array_fill(0, count($statuses2), $platform);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes2);
 		}
 		// merge labels if any

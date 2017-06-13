@@ -35,19 +35,20 @@ function Streams_after_Users_User_saveExecute($params)
 	$toInsert = $params['inserted']
 		? Q_Config::get('Streams', 'onInsert', 'Users_User', array())
 		: array();
-	if ($toInsert or !empty(Users::$cache['facebookUserData'])) {
+	if ($toInsert) {
 		// load standard streams info
 		$p = Streams::userStreams();
-	}
-	if (!empty(Users::$cache['facebookUserData'])) {
-		// check for user data from facebook
-		$userData = Users::$cache['facebookUserData'];
-		foreach ($userData as $name_fb => $value) {
-			foreach ($p->getAll() as $name => $info) {
-				if (isset($info['name_fb'])
-				and $info['name_fb'] === $name_fb) {
-					$toInsert[] = $name;
-					$values[$name] = $value;
+		if (!empty(Users::$cache['platformUserData'])) {
+			// check for user data from various platforms
+			foreach (Users::$cache['platformUserData'] as $platform => $values) {
+				foreach ($values as $k => $v) {
+					foreach ($p->getAll() as $name => $info) {
+						if (isset($info['platforms'][$platform])
+							and $info['platforms'][$platform] === $k) {
+							$toInsert[] = $name;
+							$values[$name] = $v;
+						}
+					}
 				}
 			}
 		}

@@ -14,7 +14,7 @@ function Streams_invite_response_accountStatus() {
 	if (!$user->retrieve()) {
 		throw new Users_Exception_NoSuchUser();
 	}
-	if (!empty($user->passphraseHash) || !empty($user->fb_uid)) {
+	if ($user->passphraseHash or $user->getUids()) {
 		return "complete";
 	}
 }

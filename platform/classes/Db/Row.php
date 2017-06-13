@@ -787,9 +787,9 @@ class Db_Row implements Iterator
 	/**
 	 * Sets the database to operate on
 	 * @method setDb
-	 * @param {iDb} $db
+	 * @param {Db_Interface} $db
 	 */
-	public function setDb (iDb $db)
+	public function setDb (Db_Interface $db)
 	{
 		$mySetUp = & $this->getSetUp();
 		$mySetUp['db'] = $db;
@@ -1646,7 +1646,7 @@ class Db_Row implements Iterator
 
 		/* @var $result Db_Result */
 		// Now, execute the query!
-		if (! empty($query) and $query instanceof iDb_Query) {
+		if (! empty($query) and $query instanceof Db_Query_Interface) {
 			/* @var $query Db_Query_Mysql */
 			$result = $query->execute();
 		}
@@ -1848,7 +1848,7 @@ class Db_Row implements Iterator
 		}
 
 		// Now, execute the query!
-		if (! empty($query) and $query instanceof iDb_Query) {
+		if (! empty($query) and $query instanceof Db_Query_Interface) {
 			if ($commit) {
 				$query->commit();
 			}
