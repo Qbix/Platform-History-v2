@@ -301,6 +301,9 @@ Places.Coordinates.from = function (data, callback) {
 		_geocode(callback);
 	}
 	function _geocode(callback) {
+		if (!callback) {
+			return;
+		}
 		c.geocode(callback, Q.extend({
 			basic: true
 		}, data));
@@ -326,7 +329,7 @@ Cp.geocode = function (callback, options) {
 	var o = Q.extend({}, Cp.geocode.options, options);
 	if (o.platform !== 'google') {
 		throw new Q.Error("Places.Coordinates.prototype.geocode: only works with platform=google for now");
-	}
+	}	
 	var c = this;
 	if (options && options.basic
 	&& c.latitude && c.longitude) {
@@ -335,8 +338,10 @@ Cp.geocode = function (callback, options) {
 	Places.loadGoogleMaps(function () {
 		var param = {};
 		var p = "Places.Location.geocode: ";
+		var key, cached;
 		if (c.placeId) {
 			param.placeId = c.placeId;
+			key = JSON.stringify({placeId: c.placeId});
 		} else if (c.latitude || c.longitude) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing latitude");
@@ -344,14 +349,19 @@ Cp.geocode = function (callback, options) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing longitude");
 			}
+			key = JSON.stringify({latitude: c.latitude, longitude: c.longitude});
 			param.location = {
 				lat: parseFloat(c.latitude),
 				lng: parseFloat(c.longitude)
 			};
 		} else if (c.address) {
 			param.address = c.address;
+			key = JSON.stringify({address: c.address});
 		} else {
 			return callback && callback.call(c, p + "wrong location format");
+		}
+		if (cached = _geocodeCache.get(key)) {
+			return Q.handle(callback, cached.subject, cached.params);
 		}
 		if (param) {
 			var geocoder = new google.maps.Geocoder;
@@ -371,6 +381,7 @@ Cp.geocode = function (callback, options) {
 					c.latitude = loc.lat();
 					c.longitude = loc.lng();
 				}
+				_geocodeCache.set(key, 0, c, [err, results]);
 				Q.handle(callback, c, [err, results]);
 			});
 		}
@@ -381,6 +392,8 @@ Cp.geocode.options = {
 	platform: Places.options.platform,
 	basic: false
 };
+
+var _geocodeCache = new Q.Cache({max: 100});
 
 function _deg2rad(angle) {
 	return angle * 0.017453292519943295; // (angle / 180) * Math.PI;
