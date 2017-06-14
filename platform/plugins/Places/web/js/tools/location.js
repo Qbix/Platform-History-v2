@@ -85,9 +85,8 @@
 						Places.Coordinates.from({
 							latitude: crd.latitude,
 							longitude: crd.longitude
-						}.geocode(function (err, results) {
-							var loc = Q.getObject([0, 'geometry', 'location'], results);
-							Q.handle(state.onChoose, tool, [loc]);
+						}).geocode(function (err, results) {
+							Q.handle(state.onChoose, tool, [this]);
 						});
 					}, function (err) {
 						Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
@@ -110,8 +109,7 @@
 				var ls = locationPreviewTool.state;
 				Streams.get(ls.publisherId, ls.streamName, function () {
 					Places.Coordinates.from(this).geocode(function (err, results) {
-						var loc = Q.getObject([0, 'geometry', 'location'], results);
-						Q.handle(state.onChoose, tool, [loc]);
+						Q.handle(state.onChoose, tool, [this]);
 					});
 				});
 			});
@@ -151,7 +149,7 @@
 					}
 
 					$te.html(state.geocode.address).addClass("Q_selected");
-					Q.handle(state.onChoose, tool, [state.geocode.geometry.location]);
+					Q.handle(state.onChoose, tool, [state.geocode]);
 
 					return;
 				}
@@ -190,7 +188,7 @@
 							}
 							Places.Coordinates.from({
 								placeId: place.id
-							}.geocode(function (err, results) {
+							}).geocode(function (err, results) {
 								var loc = Q.getObject([0, 'geometry', 'location'], results);
 								var c = Q.text.Places.Location.confirm;
 								Q.confirm(c.message, function (shouldSave) {
@@ -202,12 +200,14 @@
 										if (!title) {
 											return;
 										}
+
 										Streams.create({
 											type: 'Places/location',
 											title: title,
 											attributes: {
 												latitude: loc.lat(),
-												longitude: loc.lng()
+												longitude: loc.lng(),
+												formatted_address: results[0].formatted_address
 											},
 											readLevel: 0,
 											writeLevel: 0,
@@ -231,7 +231,7 @@
 									ok: c.ok,
 									cancel: c.cancel
 								});
-								Q.handle(state.onChoose, tool, [this, loc]);
+								Q.handle(state.onChoose, tool, [this]);
 							});
 						}
 					});
