@@ -91,8 +91,10 @@ class Places_Location
 			// 'icon' => $result['icon'],
 			'phoneNumber' => Q::ifset($result, 'international_phone_number', null),
 			'phoneFormatted' => Q::ifset($result, 'formatted_phone_number', null),
+			'types' => $result['types'],
 			'rating' => Q::ifset($result, 'rating', null),
-			'address' => Q::ifset($result, 'formatted_address', null)
+			'address' => Q::ifset($result, 'formatted_address', null),
+			'website' => $result['website']
 		);
 		$location->title = $result['name'];
 		$location->setAttribute($attributes);

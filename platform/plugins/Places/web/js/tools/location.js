@@ -37,10 +37,11 @@
 	 * @constructor
 	 * @param {Object} [options] used to pass options
 	 * @param {Object} [options.geocode] Default google location object, if available
+	 * @param {Places.Coordinates} [options.location] Provide a location to start off with.
+	 *  Can be anything that is accepted by Places.Coordinates constructor.
 	 * @param {Boolean} [options.showCurrent=true] Whether to allow user to select current location
 	 * @param {Boolean} [options.showLocations=true] Whether to allow user to select their saved locations
 	 * @param {Boolean} [options.showAddress=true] Whether to allow user to enter a custom address
-	 * @param {Object} [options.location] Optional selected location to start off with
 	 * @param {Q.Event} [options.onChoose] this event occurs when user selected some valid location
 	 */
 
@@ -142,17 +143,18 @@
 				var userId = Users.loggedInUser.id;
 
 				// location already set in state - just type it
-				if (state.geocode) {
-					var address = state.geocode.formatted_address
-						|| state.geocode.address;
-					if (!address) {
-						Q.alert("Places/location tool: wrong geocode", state.geocode);
-						return false;
-					}
-
-					$te.html(state.geocode.address).addClass("Q_selected");
-					Q.handle(state.onChoose, tool, [state.geocode.geometry.location]);
-
+				if (state.location) {
+					Places.Coordinates.from(state.location)
+					.geocode(function (err, results) {
+						var fem = Q.firstErrorMessage(err, results);
+						if (fem) {
+							return console.warn(fem);
+						}
+						var result = results[0];
+						var address = result.formatted_address || result.address;
+						$te.html(result).addClass("Q_selected");
+						Q.handle(state.onChoose, tool, [result.geometry.location]);
+					});
 					return;
 				}
 
