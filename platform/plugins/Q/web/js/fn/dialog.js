@@ -604,7 +604,12 @@ function _handlePosAndScroll(o)
 				if ($ts.is(":visible")) {
 					maxHeight -= $ts.height();
 				}
-				$this.find('.Q_dialog_slot').css('max-height', maxHeight + 'px');
+				var $ds = $this.find('.Q_dialog_slot');
+				var atBottom = ($ds.scrollTop() >= $ds[0].scrollHeight - $ds[0].clientHeight);
+				$ds.css('max-height', maxHeight + 'px');
+				if ($ds.hasClass('Q_scrollToBottom') && atBottom) {
+					$ds.scrollTop($ds[0].scrollHeight - $ds[0].clientHeight);
+				}
 			}
 		
 			// also considering orientation
