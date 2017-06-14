@@ -17,8 +17,7 @@ var Users = Q.Users;
  *   @param {String} [options.platform="facebook"]
  */
 Q.Tool.define("Streams/basic", function(options) {
-	var me = this;
-	var tool = this.element;
+	var tool = this;
 	var af = Users.apps.facebook;
 	if (af && af[Q.info.app]) {
 		Users.login({
@@ -26,7 +25,7 @@ Q.Tool.define("Streams/basic", function(options) {
 			using: options.platform,
 			onSuccess: function (user) {
 				Users.scope(options.platform, function (perms, checked) {
-					var also_birthday = checked[0] ? ',user_birthday' : '';
+					var also_birthday = checked[0] ? ',birthday' : '';
 					FB.api('/me?fields=first_name,last_name,gender'+also_birthday,
 					function (response) {
 						if (!response) {
@@ -38,22 +37,22 @@ Q.Tool.define("Streams/basic", function(options) {
 							'gender': 'gender'
 						};
 						for (var k in map) {
-							var tag = $('#'+this.prefix+map[k]);
+							var tag = $('#'+tool.prefix+map[k]);
 							if (!tag.val()) {
 								tag.val(response[k]);
 							}
 						}
 						if (response.birthday) {
-							var parts = response[0].birthday_date.split('/');
-							$('#'+this.prefix+'birthday_day').val(parts[1]);
+							var parts = response.birthday.split('/');
+							$('#'+tool.prefix+'birthday_day').val(parts[1]);
 							if (parts[2]) {
-								$('#'+this.prefix+'birthday_year').val(parts[2]);
+								$('#'+tool.prefix+'birthday_year').val(parts[2]);
 							} else {
-								$('#'+this.prefix+'birthday_year').focus();
+								$('#'+tool.prefix+'birthday_year').focus();
 							}
-							$('#'+this.prefix+'birthday_month').val(parts[0]);
+							$('#'+tool.prefix+'birthday_month').val(parts[0]);
 						} else {
-							$('#'+this.prefix+'birthday_month').focus();
+							$('#'+tool.prefix+'birthday_month').focus();
 						}
 					});
 				}, {check: ['user_birthday']});

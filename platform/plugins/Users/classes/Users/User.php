@@ -103,6 +103,9 @@ class Users_User extends Base_Users_User
 				$u[$field] = $this->$field;
 			}
 		}
+		if (isset($u['uids'])) {
+			$u['uids'] = $this->getAllUids();
+		}
 		return $u;
 	}
 	

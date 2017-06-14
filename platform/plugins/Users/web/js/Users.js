@@ -257,7 +257,7 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 				// multiple times on the same page, or because the page is reloaded
 				Q.cookie('Users_ignoreFacebookUid', fb_uid);
 				
-				if (Users.loggedInUser && Users.loggedInUser.fb_uid == fb_uid) {
+				if (Users.loggedInUser && Users.loggedInUser.uids.facebook == fb_uid) {
 					// The correct user is already logged in.
 					// Call onSuccess but do not pass a user object -- the user didn't change.
 					_doSuccess(null);
@@ -366,8 +366,7 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
  * Shows prompt asking if user wants to log in to the app as platform user.
  * @method prompt
  * @param {String} platform For now, only "facebook" is supported
- * @required
- * @param {String} uid , platform user id
+ * @param {String} uid The platform uid
  * @param {Function} authCallback , this function will be called after user authentication
  * @param {Function} cancelCallback , this function will be called if user closed social platform login window
  * @param {object} options
@@ -384,10 +383,8 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 	if (!Users.prompt.overlay) {
-		var o = Q.extend({}, Users.prompt.options, options);
-
 		Q.addStylesheet(Q.url('plugins/Users/css/Users.css'));
-	
+		var o = Q.extend({}, Users.prompt.options, options);
 		var title = Q.text.Users.prompt.title
 			.replace(/{\$platform}/g, platform)
 			.replace(/{\$Platform}/g, platform.toCapitalized());
@@ -401,8 +398,9 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 		var tookAction = false;
 
 		var content_div = $('<div />');
-		if (Users.loggedInUser && parseInt(Users.loggedInUser.fb_uid)) {
-			content_div.append(_usingInformation(Users.loggedInUser.fb_uid, noLongerUsing));
+		var fb_uid;
+		if (fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
+			content_div.append(_usingInformation(fb_uid, noLongerUsing));
 			caption = Q.text.Users.prompt.doSwitch
 				.replace(/{\$platform}/, platform)
 				.replace(/{\$Platform}/, platform.toCapitalized());
@@ -411,7 +409,8 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 				.replace(/{\$platform}/, platform)
 				.replace(/{\$Platform}/, platform.toCapitalized());
 		}
-		content_div.append(_usingInformation(uid, areUsing)).append(_authenticateActions(caption));
+		content_div.append(_usingInformation(uid, areUsing))
+		.append(_authenticateActions(caption));
 
 		Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
 		var titleSlot = $('<div class="Q_title_slot" />');
@@ -768,8 +767,10 @@ Users.logout = function(options) {
 			// if we log out without logging out of facebook,
 			// then we should ignore the logged-in user's fb_uid
 			// when authenticating, until it is forced
-			if (Users.loggedInUser && parseInt(Users.loggedInUser.fb_uid))
-			Q.cookie('Users_ignoreFacebookUid', Users.loggedInUser.fb_uid);
+			var fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
+			if (fb_uid) {
+				Q.cookie('Users_ignoreFacebookUid', fb_uid);
+			}
 			Users.loggedInUser = null;
 			Q.nonce = Q.cookie('Q_nonce');
 			Users.onLogout.handle.call(this, o);

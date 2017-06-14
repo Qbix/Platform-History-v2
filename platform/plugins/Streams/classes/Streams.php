@@ -1084,11 +1084,12 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Get all the streams starting with "Streams/user/" for a particular user
+	 * Get all the streams starting with "Streams/user/" for a particular user.
+	 * This is cached via Streams:;fetch, so you can call it repeatedly.
 	 * @method forUser
 	 * @static
-	 * @param {string} $publisherId
-	 *  The id of the user who is publishing the streams.
+	 * @param {string} $asUserId The id of the user who's supposed to be accessing the stream.
+	 * @param {string} $publisherId The id of the user who is publishing the streams.
 	 * @return {array}
 	 */
 	static function forUser($asUserId, $publisherId)
@@ -1096,11 +1097,13 @@ abstract class Streams extends Base_Streams
 		if (!isset($asUserId) or !isset($publisherId)) {
 			return null;
 		}
-		return Streams::fetch($asUserId, $publisherId, 'Streams/user/', '*');
+		return Streams::fetch($asUserId, $publisherId, new Db_Range(
+			'Streams/user/', true, false, null
+		), '*');
 	}
 
 	/**
-	 * A shorthand to get fields from a stream, etc.
+	 * A shorthand to get a stream whose name starts with "Streams/user/".
 	 * @method my
 	 * @static
 	 * @param {string|array} $field='content'
@@ -1118,7 +1121,7 @@ abstract class Streams extends Base_Streams
 		if (!$user) {
 			return null;
 		}
-		$streams = Streams::forUser($user->id, $user->id);
+		$streams = Streams::forUser($user->id, $user->id); // cached
 		// Since it's our stream, the testReadLevel will always succeed
 		return Streams::take($streams, $name, 0, $field, $escape);
 	}
