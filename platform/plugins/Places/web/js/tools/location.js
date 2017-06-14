@@ -191,7 +191,10 @@
 							Places.Coordinates.from({
 								placeId: place.id
 							}).geocode(function (err, results) {
-								var loc = Q.getObject([0, 'geometry', 'location'], results);
+								var result = results[0];
+								if (!result) {
+									return;
+								}
 								var c = Q.text.Places.Location.confirm;
 								Q.confirm(c.message, function (shouldSave) {
 									if (!shouldSave) {
@@ -206,8 +209,10 @@
 											type: 'Places/location',
 											title: title,
 											attributes: {
-												latitude: loc.lat(),
-												longitude: loc.lng()
+												types: result.types,
+												latitude: result.geometry.location.lat(),
+												longitude: result.geometry.location.lng(),
+												locationType: result.geometry.type
 											},
 											readLevel: 0,
 											writeLevel: 0,
