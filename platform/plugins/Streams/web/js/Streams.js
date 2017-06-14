@@ -4015,15 +4015,15 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 	var $img = $('<img />').attr('src', src)
 		.attr('title', Q.text.Streams.login.picTooltip);
-	var $td = $('<td class="Streams_login_username_block" />');
+	var $td = $('<td class="Streams_login_fullname_block" />');
 	if (Q.text.Streams.login.prompt) {
 		$td.append(
-			$('<label for="Streams_login_username" />').html(Q.text.Streams.login.prompt),
+			$('<label for="Streams_login_fullname" />').html(Q.text.Streams.login.prompt),
 			'<br>'
 		)
 	}
 	$td.append(
-		$('<input id="Streams_login_username" name="fullName" type="text" class="text" />')
+		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
 		.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
 		.attr('placeholder', Q.text.Users.login.placeholders.fullName)
 		.val(firstName+(lastName ? ' ' : '')+lastName)
@@ -4568,7 +4568,7 @@ Q.onInit.add(function _Streams_onInit() {
 					onActivate: {'Streams.completeInvited': function _Streams_completeInvited() {
 						Streams.onInvitedDialog.handle.call(Streams, [dialog]);
 						var l = Q.text.Users.login;
-						dialog.find('#Streams_login_username')
+						dialog.find('#Streams_login_fullname')
 							.attr('maxlength', l.maxlengths.fullName)
 							.attr('placeholder', l.placeholders.fullName)
 							.plugin('Q/placeholders');
@@ -4626,7 +4626,7 @@ Q.onInit.add(function _Streams_onInit() {
 							&& (e.keyCode || e.which) !== 13) {
 								return;
 							}
-							var val = dialog.find('#Streams_login_username').val();
+							var val = dialog.find('#Streams_login_fullname').val();
 							Streams.onInvitedUserAction.handle.call(
 								[val, dialog]
 							);

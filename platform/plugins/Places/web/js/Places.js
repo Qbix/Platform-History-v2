@@ -275,7 +275,7 @@ Places.Coordinates.from = function (data, callback) {
 	if (!data) {
 		throw new Q.Error("Places.Coordinates.from: data is required");
 	}
-	if (typeof data === 'Q.Streams.Stream') {
+	if (Q.typeOf (data) === 'Q.Streams.Stream') {
 		_stream.call(data);
 	} else if (data.userId) {
 		var streamName = data.streamName || 'Places/user/location';
@@ -378,7 +378,8 @@ Cp.geocode = function (callback, options) {
 };
 
 Cp.geocode.options = {
-	platform: Places.options.platform
+	platform: Places.options.platform,
+	basic: false
 };
 
 function _deg2rad(angle) {
