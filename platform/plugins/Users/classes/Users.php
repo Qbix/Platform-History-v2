@@ -208,14 +208,13 @@ abstract class Users extends Base_Users
 	 *  * 'connected' if a logged-in user just connected the platform account for the first time,
 	 *  * 'authorized' if a logged-in user was connected to platform but just authorized this app for the first time
 	 *  or true otherwise.
-	 * @param {array} [$import=Q_Config::get('Users', 'import', $platform)]
+	 * @param {array|false} [$import=Q_Config::get('Users','import',$platform)]
+	 *  Pass false here to skip the call to import.
 	 *  Array of things to import from platform if they are not already set.
-	 *  Can include "emailAddress", "firstName", "lastName" and "username".
+	 *  Can include various fields of the user on the external platform, such as
+	 *  "email", "first_name", "last_name", "gender" etc.
 	 *  If the email address is imported, it is set without requiring verification, and
-	 *  any email under Users/transactional/authenticated is set
-	 *  If true, and the user's email address is not set yet,
-	 *  imports the email address from the platform if it is available,
-	 *  and sets it as the user's email address without requiring verification.
+	 *  any email under Users/transactional/authenticated is sent.
 	 * @return {Users_User}
 	 */
 	static function authenticate(
@@ -225,9 +224,7 @@ abstract class Users extends Base_Users
 		$import = null)
 	{
 		if (!isset($import)) {
-			$import = Q_Config::get('Users', 'import', $platform, array(
-				'emailAddress', 'firstName', 'lastName'
-			));
+			$import = Q_Config::get('Users', 'import', $platform, null);
 		}
 		if (!isset($appId)) {
 			$appId = Q_Config::expect('Users', 'apps', $platform, Q::app(), 'appId');
@@ -290,27 +287,13 @@ abstract class Users extends Base_Users
 				// no facebook authentication is happening
 				return $userWasLoggedIn ? $user : false;
 			}
-			$dn = isset($user->id) && $user->displayName();
-			$importEmail = in_array('emailAddress', $import) && empty($user->emailAddress);
-			if (!$dn or $importEmail) {
-				$map = array(
-					'firstName' => 'first_name',
-					'lastName' => 'last_name'
-				);
-				$fields = array('email');
-				foreach ($map as $k => $v) {
-					if (in_array($k, $import)) {
-						$fields[] = $v;
-					}
-				}
-				$response = $facebook->get('/me?fields='.implode(',', $fields));
+			if ($import) {
+				$response = $facebook->get('/me?fields='.implode(',', $import));
 				$userNode = $response->getGraphUser();
 				$emailAddress = $userNode->getField('email');
-				if (!$dn) {
-					Users::$cache['platformUserData'] = array(
-						$platform => $userNode->uncastItems()
-					);
-				}
+				Users::$cache['platformUserData'] = array(
+					$platform => $userNode->uncastItems()
+				);
 			}
 
 			$authenticated = true;
@@ -335,6 +318,9 @@ abstract class Users extends Base_Users
 					// Now, let's associate their account with this platform uid.
 					$user->setUid($platform, $uid);
 					$user->save();
+					
+					// Set platformUserData to null in case some other user is saved later
+					Users::$cache['platformUserData'] = null;
 
 					// Save the identifier in the quick lookup table
 					$ui = new Users_Identify();
@@ -459,7 +445,9 @@ abstract class Users extends Base_Users
 			return $userWasLoggedIn ? $user : false;
 		}
 		// Check we should import an email address from the platform
-		if (in_array('emailAddress', $import) and !empty($emailAddress) and empty($user->emailAddress)) {
+		if (in_array('emailAddress', $import)
+		and !empty($emailAddress)
+		and empty($user->emailAddress)) {
 			// We automatically set their email as verified, without a confirmation message,
 			// because we trust the authentication platform.
 			$user->setEmailAddress($emailAddress, true, $email);
@@ -977,7 +965,7 @@ abstract class Users extends Base_Users
 				try {
 					// authenticate (and possibly adopt) an existing platform user
 					// or insert a new user during this authentication
-					$user = Users::authenticate($platform, $appId, $authenticated, true);
+					$user = Users::authenticate($platform, $appId, $authenticated, null);
 				} catch (Exception $e) {
 
 				}

@@ -124,12 +124,15 @@ Q.Tool.define("Streams/comments", function(o) {
                     using: 'facebook',
                     onSuccess: function()
                     {
-                        var pictureBlock = $('.Streams_comments_tool_content > .Streams_comments_tool_user_picture');
-                        pictureBlock.prepend('<div><img src="https://graph.facebook.com/' +
-                                                                 Q.Users.loggedInUser.fb_uid + '/picture" alt="User picture" /></div>');
-                        var loggedAsBlock = $('.Streams_comments_tool_logged_as');
-                        loggedAsBlock.append('<fb:name uid="' + Q.Users.loggedInUser.fb_uid + '" capitalize="true" useyou="false"></fb:name>');
-                        FB.XFBML.parse(loggedAsBlock[0]);
+						var uid = Q.Users.loggedInUser.uids.facebook;
+                        var $pictureBlock = $('.Streams_comments_tool_content > .Streams_comments_tool_user_picture');
+                        $pictureBlock.prepend(
+							'<div><img src="https://graph.facebook.com/' + uid
+							+ '/picture" alt="User picture" /></div>'
+						);
+                        var $loggedAsBlock = $('.Streams_comments_tool_logged_as');
+                        $loggedAsBlock.append('<fb:name uid="' + uid + '" capitalize="true" useyou="false"></fb:name>');
+                        FB.XFBML.parse($loggedAsBlock[0]);
 
                         FB.api(o.objectId + '/comments', function(response)
                         {
