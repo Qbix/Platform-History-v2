@@ -87,7 +87,7 @@
 							longitude: crd.longitude
 						}.geocode(function (err, results) {
 							var loc = Q.getObject([0, 'geometry', 'location'], results);
-							Q.handle(state.onChoose, tool, [loc]);
+							Q.handle(state.onChoose, tool, [loc, this]);
 						});
 					}, function (err) {
 						Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
@@ -111,7 +111,7 @@
 				Streams.get(ls.publisherId, ls.streamName, function () {
 					Places.Coordinates.from(this).geocode(function (err, results) {
 						var loc = Q.getObject([0, 'geometry', 'location'], results);
-						Q.handle(state.onChoose, tool, [loc]);
+						Q.handle(state.onChoose, tool, [loc, this]);
 					});
 				});
 			});
@@ -236,7 +236,7 @@
 									ok: c.ok,
 									cancel: c.cancel
 								});
-								Q.handle(state.onChoose, tool, [this, loc]);
+								Q.handle(state.onChoose, tool, [loc, this]);
 							});
 						}
 					});
