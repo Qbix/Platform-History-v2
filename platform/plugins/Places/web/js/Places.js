@@ -338,10 +338,8 @@ Cp.geocode = function (callback, options) {
 	Places.loadGoogleMaps(function () {
 		var param = {};
 		var p = "Places.Location.geocode: ";
-		var key, cached;
 		if (c.placeId) {
 			param.placeId = c.placeId;
-			key = JSON.stringify({placeId: c.placeId});
 		} else if (c.latitude || c.longitude) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing latitude");
@@ -349,18 +347,17 @@ Cp.geocode = function (callback, options) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing longitude");
 			}
-			key = JSON.stringify({latitude: c.latitude, longitude: c.longitude});
 			param.location = {
 				lat: parseFloat(c.latitude),
 				lng: parseFloat(c.longitude)
 			};
 		} else if (c.address) {
 			param.address = c.address;
-			key = JSON.stringify({address: c.address});
 		} else {
 			return callback && callback.call(c, p + "wrong location format");
 		}
-		if (cached = _geocodeCache.get(key)) {
+		var key, cached;
+		if (cached = _geocodeCache.get(param)) {
 			return Q.handle(callback, cached.subject, cached.params);
 		}
 		if (param) {
@@ -381,7 +378,7 @@ Cp.geocode = function (callback, options) {
 					c.latitude = loc.lat();
 					c.longitude = loc.lng();
 				}
-				_geocodeCache.set(key, 0, c, [err, results]);
+				_geocodeCache.set(param, 0, c, [err, results]);
 				Q.handle(callback, c, [err, results]);
 			});
 		}
