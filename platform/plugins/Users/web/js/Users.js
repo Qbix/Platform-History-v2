@@ -1325,6 +1325,8 @@ function login_callback(err, response) {
 		var step2 = $('#Users_login_step2').html(step2_form);
 		if (Q.info && Q.info.isTouchscreen) {
 			step2.show();
+			var $content = step2.closest('.Q_dialog_content');
+			$content.scrollTop($content[0].scrollHeight);
 			if (!Q.info.isAndroid()) {
 				step2_form.plugin('Q/placeholders');
 			}
