@@ -1332,6 +1332,8 @@ function login_callback(err, response) {
 			_centerIt();
 		} else {
 			step2.slideDown('fast', function () {
+				var $content = step2.closest('Q_dialog_content');
+				$content.scrollTop($content[0].scrollHeight);
 				_centerIt();
 				step2_form.plugin('Q/placeholders');
 				if (step2_form.data('form-type') === 'resend') {
