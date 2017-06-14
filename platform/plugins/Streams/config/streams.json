@@ -105,12 +105,18 @@
 		"type": "Streams/text/url",
 		"title": "Website",
 		"icon": ""
-	},	
+	},
 	"Streams/user/facebook": {
 		"type": "Streams/text/url",
 		"title": "Facebook Profile",
 		"icon": "",
 		"platforms": {"facebook": "link"}
+	},
+	"Streams/user/facebook/uid": {
+		"type": "Streams/uid",
+		"title": "My facebook uid",
+		"icon": "",
+		"platforms": {"facebook": "id", "twitter": "id"}
 	},
 	"Streams/user/timezone": {
 		"type": "Streams/number/timezone",
@@ -140,11 +146,6 @@
 		"title": "Age",
 		"icon": ""
 	},
-	"Streams/user/fb_uid": {
-		"type": "Streams/uid/fb_uid",
-		"title": "My facebook uid",
-		"icon": ""
-	},	
 	"Streams/user/political": {
 		"type": "Streams/text/small",
 		"title": "Political views",

@@ -123,8 +123,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url",
-			"fb_uid", "tw_uid", "g_uid", "y_uid"
+			"id", "username", "signedUpWith", "icon", "url", "uids"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"

@@ -1133,7 +1133,8 @@ Streams.release = function (key) {
  *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {String} [options.fb_uid] fb user id or array of fb user ids to invite
+ *   @param {string} [options.platform] platform for which uids are passed
+ *   @param {String} [options.uid] uid or arary of uids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
@@ -1243,7 +1244,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
-	if (o.identifier || o.token || o.fb_uids || o.userIds || o.label) {
+	if (o.identifier || o.token || o.uids || o.userIds || o.label) {
 		return _request();
 	}
 	Q.prompt(
@@ -2478,7 +2479,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {String} [options.fb_uid] fb user id or array of fb user ids to invite
+ *   @param {string} [options.platform] platform for which uids are passed
+ *   @param {String} [options.uid] uid or arary of uids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
