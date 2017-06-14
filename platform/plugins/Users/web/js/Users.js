@@ -1323,10 +1323,10 @@ function login_callback(err, response) {
 	}
 	if (!autologin) {
 		var step2 = $('#Users_login_step2').html(step2_form);
+		var $dc = step2.closest('.Q_dialog_content');
 		if (Q.info && Q.info.isTouchscreen) {
 			step2.show();
-			var $content = step2.closest('.Q_dialog_content');
-			$content.scrollTop($content[0].scrollHeight);
+			$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
 			if (!Q.info.isAndroid()) {
 				step2_form.plugin('Q/placeholders');
 			}
@@ -1334,8 +1334,7 @@ function login_callback(err, response) {
 			_centerIt();
 		} else {
 			step2.slideDown('fast', function () {
-				var $content = step2.closest('.Q_dialog_content');
-				$content.scrollTop($content[0].scrollHeight);
+				$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
 				_centerIt();
 				step2_form.plugin('Q/placeholders');
 				if (step2_form.data('form-type') === 'resend') {
@@ -1561,7 +1560,8 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 	var titleSlot = $('<div class="Q_title_slot" />');
 	titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
 	var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
-	dialogSlot.append(step1_div).append(step2_div);
+	dialogSlot.addClass('Q_scrollToBottom')
+		.append(step1_div, step2_div);
 	login_setupDialog.dialog = dialog;
 	dialog.append(titleSlot)
 	.append(dialogSlot)
