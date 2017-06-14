@@ -190,7 +190,7 @@
 							}
 							Places.Coordinates.from({
 								placeId: place.id
-							}.geocode(function (err, results) {
+							}).geocode(function (err, results) {
 								var loc = Q.getObject([0, 'geometry', 'location'], results);
 								var c = Q.text.Places.Location.confirm;
 								Q.confirm(c.message, function (shouldSave) {
