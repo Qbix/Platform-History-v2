@@ -85,7 +85,7 @@
 						Places.Coordinates.from({
 							latitude: crd.latitude,
 							longitude: crd.longitude
-						}, function (err, results) {
+						}.geocode(function (err, results) {
 							var loc = Q.getObject([0, 'geometry', 'location'], results);
 							Q.handle(state.onChoose, tool, [loc]);
 						});
@@ -109,7 +109,7 @@
 				var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
 				var ls = locationPreviewTool.state;
 				Streams.get(ls.publisherId, ls.streamName, function () {
-					Places.Coordinates.from(this, function (err, results) {
+					Places.Coordinates.from(this).geocode(function (err, results) {
 						var loc = Q.getObject([0, 'geometry', 'location'], results);
 						Q.handle(state.onChoose, tool, [loc]);
 					});
@@ -143,12 +143,14 @@
 
 				// location already set in state - just type it
 				if (state.geocode) {
-					if (!state.geocode.formatted_address) {
+					var address = state.geocode.formatted_address
+						|| state.geocode.address;
+					if (!address) {
 						Q.alert("Places/location tool: wrong geocode", state.geocode);
 						return false;
 					}
 
-					$te.html(state.geocode.formatted_address).addClass("Q_selected");
+					$te.html(state.geocode.address).addClass("Q_selected");
 					Q.handle(state.onChoose, tool, [state.geocode.geometry.location]);
 
 					return;
@@ -188,7 +190,7 @@
 							}
 							Places.Coordinates.from({
 								placeId: place.id
-							}, function (err, results) {
+							}.geocode(function (err, results) {
 								var loc = Q.getObject([0, 'geometry', 'location'], results);
 								var c = Q.text.Places.Location.confirm;
 								Q.confirm(c.message, function (shouldSave) {
@@ -229,7 +231,7 @@
 									ok: c.ok,
 									cancel: c.cancel
 								});
-								Q.handle(state.onChoose, tool, [loc]);
+								Q.handle(state.onChoose, tool, [this, loc]);
 							});
 						}
 					});
