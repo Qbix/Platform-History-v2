@@ -62,7 +62,11 @@
 			"windows": ["key", "secret"]
 		},
 		"import": {
-			"facebook": ["emailAddress", "firstName", "lastName"]
+			"facebook": [
+				"email", "first_name", "last_name",
+				"gender", "age_range", "verified",
+				"link", "picture", "cover"
+			]
 		},
 		"login": {
 			"identifierType": "email,mobile",
@@ -119,8 +123,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url",
-			"fb_uid", "tw_uid", "g_uid", "y_uid"
+			"id", "username", "signedUpWith", "icon", "url", "uids"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"

@@ -14,48 +14,48 @@ var Users = Q.Users;
  * @method basic
  * @param {Object} [options] this object contains function parameters
  *   @param {Q.Event} [options.onSuccess]
+ *   @param {String} [options.platform="facebook"]
  */
 Q.Tool.define("Streams/basic", function(options) {
-	var me = this;
-	var tool = this.element;
+	var tool = this;
 	var af = Users.apps.facebook;
 	if (af && af[Q.info.app]) {
 		Users.login({
 			tryQuietly: true,
-			using: 'facebook',
+			using: options.platform,
 			onSuccess: function (user) {
-
-				FB.api({
-					method: 'fql.query',
-					query:'SELECT user_birthday FROM permissions WHERE uid=me()'
-				}, function (response) {
-					var also_birthday = '';
-					if (response && response[0] && response[0].user_birthday) {
-						also_birthday = ', birthday_date';
-					}
-					FB.api({
-						method: 'fql.query',
-						query:'SELECT firstName, lastName, gender'+also_birthday+' FROM user WHERE uid=me()'
-					}, function (response) {
-						if (!response || !response[0]) return;
-						for (var k in {firstName:1,lastName:1,gender:1}) {
-							var tag = $('#'+this.prefix+k);
+				Users.scope(options.platform, function (perms, checked) {
+					var also_birthday = checked[0] ? ',birthday' : '';
+					FB.api('/me?fields=first_name,last_name,gender'+also_birthday,
+					function (response) {
+						if (!response) {
+							return;
+						}
+						var map = {
+							'first_name': 'firstName',
+							'last_name': 'lastName',
+							'gender': 'gender'
+						};
+						for (var k in map) {
+							var tag = $('#'+tool.prefix+map[k]);
 							if (!tag.val()) {
-								tag.val(response[0][k]);
+								tag.val(response[k]);
 							}
 						}
-						if (response[0].birthday_date) {
-							var parts = response[0].birthday_date.split('/');
-							$('#'+this.prefix+'birthday_day').val(parts[1]);
+						if (response.birthday) {
+							var parts = response.birthday.split('/');
+							$('#'+tool.prefix+'birthday_day').val(parts[1]);
 							if (parts[2]) {
-								$('#'+this.prefix+'birthday_year').val(parts[2]);
+								$('#'+tool.prefix+'birthday_year').val(parts[2]);
+							} else {
+								$('#'+tool.prefix+'birthday_year').focus();
 							}
-							$('#'+this.prefix+'birthday_month').val(parts[0]);
+							$('#'+tool.prefix+'birthday_month').val(parts[0]);
 						} else {
-							$('#'+this.prefix+'birthday_month').focus();
+							$('#'+tool.prefix+'birthday_month').focus();
 						}
 					});
-				});
+				}, {check: ['user_birthday']});
 			}
 		});
 	}
@@ -94,6 +94,10 @@ Q.Tool.define("Streams/basic", function(options) {
 		}, 'json');
 		return false;
 	});
+},
+
+{
+	platform: 'facebook'
 }
 );
 
