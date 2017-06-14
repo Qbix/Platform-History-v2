@@ -85,7 +85,7 @@
 						Places.Coordinates.from({
 							latitude: crd.latitude,
 							longitude: crd.longitude
-						}.geocode(function (err, results) {
+						}).geocode(function (err, results) {
 							var loc = Q.getObject([0, 'geometry', 'location'], results);
 							Q.handle(state.onChoose, tool, [loc, this]);
 						});
