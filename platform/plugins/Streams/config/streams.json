@@ -3,17 +3,17 @@
 		"type": "Streams/participating",
 		"title": "Messages about joining/leaving streams",
 		"icon": "",
-		"readLevel": "0",
-		"writeLevel": "0",
-		"adminLevel": "0"
+		"readLevel": 0,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/invited": {
 		"type": "Streams/invited",
 		"title": "Invited",
 		"icon": "",
-		"readLevel": "0",
-		"writeLevel": "20",
-		"adminLevel": "0",
+		"readLevel": 0,
+		"writeLevel": 20,
+		"adminLevel": 0,
 		"subscribe": {
 			"rule": {
 				"deliver": {
@@ -57,18 +57,18 @@
 		"type": "Streams/text/emailAddress",
 		"title": "Email Address",
 		"icon": "",
-		"readLevel": "0",
-		"writeLevel": "0",
-		"adminLevel": "0",
+		"readLevel": 0,
+		"writeLevel": 0,
+		"adminLevel": 0,
 		"platforms": {"facebook": "email"}
 	},
 	"Streams/user/mobileNumber": {
 		"type": "Streams/text/mobileNumber",
 		"title": "Mobile Number",
 		"icon": "",
-		"readLevel": "0",
-		"writeLevel": "0",
-		"adminLevel": "0"
+		"readLevel": 0,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/user/status": {
 		"type": "Streams/text/small",
@@ -106,6 +106,18 @@
 		"title": "Website",
 		"icon": ""
 	},	
+	"Streams/user/facebook": {
+		"type": "Streams/text/url",
+		"title": "Facebook Profile",
+		"icon": "",
+		"platforms": {"facebook": "link"}
+	},
+	"Streams/user/timezone": {
+		"type": "Streams/number/timezone",
+		"title": "Time zone",
+		"icon": "",
+		"platforms": {"facebook": "timezone"}
+	},
 	"Streams/user/gender": {
 		"type": "Streams/enum/gender",
 		"title": "Gender",

@@ -332,26 +332,28 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 				ar.fbAppId = fbAppId;
 				ar.appId = appId;
 				fields['Q.Users.facebook.authResponse'] = ar;
-				$.post(
-					Q.ajaxExtend(Q.action("Users/authenticate"), 'data', {method: "post"}),
-					$.param(fields),
-					function (response) {
-						if (response.errors) {
-							alert(response.errors[0].message);
-							_doCancel();
-						} else {
-							var user = response.slots.data;
-							if (user.authenticated !== true) {
-								priv.result = user.authenticated;
-							}
-							priv.used = 'facebook';
-							user.result = user.authenticated;
-							user.used = 'facebook';
-							Users.loggedInUser = new Users.User(user);
-							Q.nonce = Q.cookie('Q_nonce');
-							_doSuccess(user);
-						}
-					}, 'json');
+				fields.platform = 'facebook';
+				fields.skipImport = true;
+				Q.req('Users/authenticate', 'data', function (err, response) {
+					var fem = Q.firstErrorMessage(err, response);
+					if (fem) {
+						alert(fem);
+						return _doCancel();
+					}
+					var user = response.slots.data;
+					if (user.authenticated !== true) {
+						priv.result = user.authenticated;
+					}
+					priv.used = 'facebook';
+					user.result = user.authenticated;
+					user.used = 'facebook';
+					Users.loggedInUser = new Users.User(user);
+					Q.nonce = Q.cookie('Q_nonce');
+					_doSuccess(user);
+				}, {
+					method: "post",
+					fields: fields
+				});
 			}
 		}, options.force ? true : false);
 	}, {
@@ -469,13 +471,17 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 
 /**
  * Check permissions granted by platform.
- * Currently only facebook supported.
+ * Currently only facebook is supported.
  * @method scope
  * @param {String} platform For now, only "facebook" is supported
- * @param {Function} callback , this function will be called after getting permissions from social platform
+ * @param {Function} callback this function will be called after getting permissions
+ *   from the external platform. The first parameter is the raw data returned.
+ *   The second parameter is an array of Boolean corresponding to the scope names in
+ *   options.check, indicating whether they were granted.
  * Callback parameter could be null or response object from social platform
  * @param {Object} options
  *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
+ *   @param {Array} [options.check=[]] Scopes to check. 
  */
 Users.scope = function (platform, callback, options) {
 	if (platform !== 'facebook') {
@@ -488,8 +494,19 @@ Users.scope = function (platform, callback, options) {
 			callback(null);
 		}
 		FB.api('/me/permissions', function(response) {
-			if (response && response.data && response.data[0] !== undefined) {
-				callback(response.data[0]);
+			if (response && response.data) {
+				var checked = [];
+				Q.each(options && options.check, function (i, s) {
+					var granted = false;
+					for (var i=0, l=response.data.length; i<l; ++i) {
+						if (response.data[i].permission === s
+						&& response.data[i].status) {
+							granted = true;
+						}
+					}
+					checked.push(granted);
+				});
+				callback(response.data, checked);
 			} else {
 				callback(null);
 			}
@@ -514,7 +531,7 @@ and 'used' is "native", or the name of the platform used, such as "facebook".
  *  It is passed the user information as well as the response from hitting accountStatusUrl
  *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
  *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
- *  @param {String} [options.scope="email,publish_stream"] permissions to request from the authentication platform
+ *  @param {Array} [options.scope=['email','public_profile','user_friends'] permissions to request from the authentication platform
  *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
  *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
  */
@@ -591,25 +608,23 @@ Users.login = function(options) {
 						_onCancel();
 						return;
 					}
-					if (!o.scope) {
+					if (Q.isEmpty(o.scope)) {
 						_success();
 						return;
 					}
 					// some permissions were requested
-					Users.scope('facebook', function(scope) {
+					Users.scope('facebook', function(scope, checked) {
 						if (!scope) {
 							_onCancel(null);
 							return;
 						}
-						var scopeRequested = o.scope.split(',');
-						for (var i=0; i < scopeRequested.length; ++i) {
-							if (!scopeRequested[i]) {
+						for (var i=0; i<checked.length; ++i) {
+							if (!checked[i]) {
 								_onCancel(scope); // at least some permission was not granted
 								return;
 							}
 						}
 						_success();
-
 						function _success() {
 							Users.authenticate('facebook', function (user) {
 								_onConnect(user);
@@ -617,6 +632,8 @@ Users.login = function(options) {
 								_onCancel();
 							}, { "prompt": false });
 						}
+					}, {
+						check: o.scope
 					});
 				}, opts);
 			}, {
@@ -640,7 +657,7 @@ Users.login = function(options) {
 			return;
 		}
 		Q.request(o.accountStatusUrl, 'accountStatus', function(err, response2) {
-			var fem = Q.firstErrorMessage(err, response2.errors);
+			var fem = Q.firstErrorMessage(err, response2);
 			if (fem) {
 				return alert(fem);
 			}
@@ -1599,7 +1616,7 @@ function setIdentifier_callback(err, response) {
 	var form = $('#Users_setIdentifier_step1_form');
 	identifier_input.css('background-image', 'none');
 
-	var msg = Q.firstErrorMessage(err, response && response.errors);
+	var msg = Q.firstErrorMessage(err, response);
 	if (msg) {
 		// There were errors
 		Q.handle(priv.setIdentifier_onCancel, this, [err, response]);
@@ -2167,8 +2184,8 @@ Q.beforeInit.add(function _Users_beforeInit() {
 		onRequireComplete: new Q.Event(),
 		accountStatusUrl: null,
 		tryQuietly: false,
-		using: 'native', // can also be 'facebook'
-		scope: 'email,public_profile,user_friends', // the permissions to ask for on facebook
+		using: 'native', // can also be a platform name like 'facebook'
+		scope: ['email','public_profile','user_friends'], // the permissions to ask for
 		linkToken: null,
 		dialogContainer: 'body',
 		setupRegisterForm: null,
