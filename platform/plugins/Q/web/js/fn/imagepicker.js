@@ -1,8 +1,14 @@
 (function (Q, $, window, document, undefined) {
 	
 Q.setObject('Q.text.Q.imagepicker', {
-	errorReadingFile: "Error reading file"
+	errorReadingFile: "Error reading file",
+	cameraCommands: {
+		prompt: "What would you like to do?",
+		photo: "Take new photo",
+		library: "Select from library"
+	}
 });
+Q.setObject("Q.text_en.Places.Location", Q.text.Places.Location);
 
 /**
  * Q Tools
@@ -38,7 +44,10 @@ Q.setObject('Q.text.Q.imagepicker', {
  * Its "this" object will be a jQuery of the imagepicker element
  * The first parameter is a callback, which should be called with an optional
  * hash of overrides, which can include "data", "path", "subpath", "save", "url", "loader" and "crop"
- * @param {Array} [options.cameraCommands] cameraCommands is an Array of titles for the commands that pop up to take a photo
+ * @param {Array} [options.cameraCommands] cameraCommands the commands that pop up to take a photo
+ * @param {Array} [options.cameraCommands.photo]
+ * @param {Array} [options.cameraCommands.library]
+ * @param {Array} [options.cameraCommands.cancel]
  * @param {Q.Event} [options.onClick] onClick is an event to execute during the click, which may cancel the click
  * @param {Q.Event} [options.onSuccess] onSuccess is Q.Event which is called on successful upload. First parameter will be the server response with
  * an object in a format similar to the 'saveSizeName' field.
@@ -106,9 +115,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			if (false === Q.handle(state.onClick, $this, [])) {
 				return false;
 			}
-			navigator.notification.confirm("", function(index) {
-				if (index === 3) return;
-				var source = Camera.PictureSourceType[index === 1 ? "CAMERA" : "PHOTOLIBRARY"];
+			Q.confirm(state.cameraCommands.prompt, function(result) {
+				if (result == null) return;
+				var source = Camera.PictureSourceType[result ? "CAMERA" : "PHOTOLIBRARY"];
 				navigator.camera.getPicture(function(data){
 					$this.plugin('Q/imagepicker', 'pick', "data:image/jpeg;base64," + data);
 				}, function(msg){
@@ -117,7 +126,10 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					sourceType: source,
 					destinationType: Camera.DestinationType.DATA_URL
 				});
-			}, "", state.cameraCommands.join(','));
+			}, {
+				ok: state.cameraCommands.photo,
+				cancel: state.cameraCommands.library
+			});
 			e.preventDefault();
 			e.stopPropagation();
 			Q.Pointer.ended();
@@ -176,7 +188,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	cacheBust: 1000,
 	throbber: null,
 	preprocess: null,
-	cameraCommands: ["Take new photo","Select from library","Cancel"],
+	cameraCommands: Q.text.Q.imagepicker.cameraCommands,
 	onClick: new Q.Event(),
 	onSuccess: new Q.Event(function() {}, 'Q/imagepicker'),
 	onError: new Q.Event(function(message) {
