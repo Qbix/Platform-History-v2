@@ -238,8 +238,7 @@
 									ok: c.ok,
 									cancel: c.cancel
 								});
-								var loc = Q.getObject([0, 'geometry', 'location'], results);
-								Q.handle(state.onChoose, tool, [loc, this]);
+								Q.handle(state.onChoose, tool, [result.geometry.location, this]);
 							});
 						}
 					});
