@@ -146,13 +146,13 @@
 				if (state.location) {
 					Places.Coordinates.from(state.location)
 					.geocode(function (err, results) {
-						var fem = Q.firstErrorMessage(err, results);
+						var fem = Q.firstErrorMessage(err);
 						if (fem) {
 							return console.warn(fem);
 						}
 						var result = results[0];
 						var address = result.formatted_address || result.address;
-						$te.html(result).addClass("Q_selected");
+						$te.html(address).addClass("Q_selected");
 						Q.handle(state.onChoose, tool, [result.geometry.location]);
 					});
 					return;
@@ -238,6 +238,7 @@
 									ok: c.ok,
 									cancel: c.cancel
 								});
+								var loc = Q.getObject([0, 'geometry', 'location'], results);
 								Q.handle(state.onChoose, tool, [loc, this]);
 							});
 						}
