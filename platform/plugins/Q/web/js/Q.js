@@ -4947,7 +4947,7 @@ function Q_Cache_pluck(cache, existing) {
  */
 Q.Cache.key = function _Cache_key(args, functions) {
 	var i, keys = [];
-	if (!Q.isArrayLike(args)) {
+	if (Q.isArrayLike(args)) {
 		for (i=0; i<args.length; ++i) {
 			if (typeof args[i] !== 'function') {
 				keys.push(args[i]);
