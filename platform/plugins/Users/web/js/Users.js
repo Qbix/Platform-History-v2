@@ -333,7 +333,6 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 				ar.appId = appId;
 				fields['Q.Users.facebook.authResponse'] = ar;
 				fields.platform = 'facebook';
-				fields.skipImport = true;
 				Q.req('Users/authenticate', 'data', function (err, response) {
 					var fem = Q.firstErrorMessage(err, response);
 					if (fem) {
@@ -1025,7 +1024,9 @@ function login_callback(err, response) {
 			}
 		}, function () {
 			alert("Could not authenticate with facebook. Try again.");
-			// why would this be canceled?
+			if (login_setupDialog.dialog) {
+				login_setupDialog.dialog.data('Q/dialog').close();
+			}
 		}, { "prompt": false });
 	} else if (!json.exists) {
 		// no username available. This user has no password set yet and will activate later
