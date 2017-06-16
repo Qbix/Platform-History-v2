@@ -94,7 +94,10 @@ function Users_activate_response_content()
 						$count = count($parts);
 						if ($count > $words) {
 							$rand = rand() % ($count - $words);
-							$suggestions2[] = implode(' ', array_slice($parts, $rand, $words));
+							$suggestion = implode(' ', array_slice($parts, $rand, $words));
+							if (strlen($suggestion) > 10) {
+								$suggestions2[] = $suggestion;
+							}
 						}
 					}
 				}
