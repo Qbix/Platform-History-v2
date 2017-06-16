@@ -141,11 +141,13 @@ class Users_Device extends Base_Users_Device
 	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action' and 'title'.
 	 * @param {string} [$notification.category] Apple-only. The name of the category for actions registered on the client side.
 	 * @param {array} [$notification.payload] Put all your custom notification fields here
+	 * @param {integer} [$notification.expiry=null] Number of seconds until notification expires
+	 *    and does not need to be stored anymore on the device.
+	 *    Pass -1 to ask the device not to store it at all.
 	 * @param {array} [$options]
-	 * @param {boolean} [$options.scheduled=false] if true, doesn't send immediately. You should call Users_Device::sendPushNotifications() to send all scheduled notifications in a batch.
-	 * @param {string} [$options.view] Optionally set a view to render for the alert body
-	 * @param {boolean} [$options.isSource] If true, uses Q.Handlebars.renderSource instead of render
-	 * @param {timestamp} [$options.expiration] A UNIX timestamp for when the notification expires
+	 * @param {boolean} [$options.scheduled=false] if true, doesn't send immediately.
+	 *  You should call Users_Device_{YourPlatform}::sendPushNotifications()
+	 *  to send all scheduled notifications in a batch.
 	 * @param {string} [$options.priority="high"] Can be set to "normal" to make it lower priority
 	 * @param {string} [$options.collapseId] A string under 64 bytes for collapsing notifications
 	 * @param {string} [$options.id] You can provide your own uuid for the notification
@@ -157,9 +159,9 @@ class Users_Device extends Base_Users_Device
 	}
 	
 	/**
-	 * Schedules a push notification
+	 * Schedules a push notification.
+	 * This default implementation, just throws an error.
 	 * @method schedulePushNotifications
-	 * Default implementation
 	 */
 	protected function handlePushNotification($notifications, $options = array())
 	{
