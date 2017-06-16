@@ -600,7 +600,7 @@ Users.login = function(options) {
 			$('#Users_login_identifierType').val(o.identifierType);
 		} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
 			Users.initFacebook(function () {
-				var opts = o.scope ? {scope: o.scope} : undefined;
+				var opts = o.scope ? {scope: o.scope.join(',')} : undefined;
 				FB.login(function(response) {
 					if (!response.authResponse) {
 						_onCancel();
@@ -1536,7 +1536,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 						        "width": "200"
 						    }, p.fill('picture'));
 							FB.api('/me?fields=first_name,last_name,gender,birthday,timezone,locale,verified,email', p.fill('me'));
-						}, scope ? {scope: scope} : undefined);
+						}, scope ? {scope: scope.join(',')} : undefined);
 					}, {
 						appId: appId
 					});
