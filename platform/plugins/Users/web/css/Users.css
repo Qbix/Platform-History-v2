@@ -226,7 +226,7 @@
 
 .Q_admin_pane #Q_activation_form
 {
-	width: 50%;
+	text-align: center;
 }
 
 .Q_extra_pane #suggestions

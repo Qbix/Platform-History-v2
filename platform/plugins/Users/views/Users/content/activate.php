@@ -45,7 +45,7 @@
 					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
 						<?php echo Q_Html::formInfo(null) ?>
 						<input type="password" id='activate_passphrase' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
-						<button type="submit" class="Q_button" style="width: 250px;">Activate My Account</button>
+						<button type="submit" class="Q_button">Activate My Account</button>
 						<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
 							value="<?php echo Q_Html::text($identifier) ?>">
 						<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
