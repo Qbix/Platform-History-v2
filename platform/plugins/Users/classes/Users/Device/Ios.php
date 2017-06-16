@@ -8,8 +8,8 @@ class Users_Device_Ios extends Users_Device
 	 * mechanisms using Node.js instead of PHP. That way, you can be sure of re-using
 	 * the same persistent connection.
 	 * @method pushNotification
-	 * @param {array} $notification See Users_Device->handlePushNotification parameters
-	 * @param {array} [$options] See Users_Device->handlePushNotification parameters
+	 * @param {array} $notification See Users_Device->pushNotification parameters
+	 * @param {array} [$options] See Users_Device->pushNotification parameters
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
@@ -22,6 +22,11 @@ class Users_Device_Ios extends Users_Device
 		$sandbox = Q::ifset($device, 'sandbox', false);
 		$s = $sandbox ? 'sandbox' : 'production';
 		$cert = Q::realPath($ssl['cert']);
+		if (!$cert) {
+			throw new Q_Exception_MissingFile(array(
+				'filename' => $cert
+			));
+		}
 		$env = $sandbox
 			? ApnsPHP_Abstract::ENVIRONMENT_SANDBOX
 			: ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
@@ -59,6 +64,9 @@ class Users_Device_Ios extends Users_Device
 				$p = ($p === 'high') ? 10 : 5;
 			}
 			$message->setCustomProperty('apns-priority', $notification['priority']);
+		}
+		if (!empty($notification['id'])) {
+			$message->setCustomIdentifier($notification['id']);
 		}
 		foreach (array('badge', 'sound', 'category', 'expiry') as $k) {
 			if (isset($notification[$k])) {
