@@ -323,8 +323,9 @@ abstract class Users extends Base_Users
 					Users::$cache['platformUserData'] = null;
 
 					// Save the identifier in the quick lookup table
+					list($hashed, $ui_type) = self::hashing($uid, $platform);
 					$ui = new Users_Identify();
-					$ui->identifier = "$platform:$uid";
+					$ui->identifier = "$ui_type:$hashed";
 					$ui->state = 'verified';
 					$ui->userId = $user->id;
 					$ui->save(true);
@@ -420,8 +421,9 @@ abstract class Users extends Base_Users
 						$user->save();
 
 						// Save the identifier in the quick lookup table
+						list($hashed, $ui_type) = self::hashing($uid, $platform);
 						$ui = new Users_Identify();
-						$ui->identifier = "$platform:$uid";
+						$ui->identifier = "$ui_type:$hashed";
 						$ui->state = 'verified';
 						$ui->userId = $user->id;
 						$ui->save(true);
