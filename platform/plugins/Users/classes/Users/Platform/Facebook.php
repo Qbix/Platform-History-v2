@@ -142,6 +142,7 @@ $icon[$size.$suffix] = "https://graph.facebook.com/$uid/picture?width=$size&heig
 	}
 	
 	/**
+	 * Get info about access token
 	 * @method accessInfo
 	 * @return {array} An array of ($accessToken, $sessionExpires)
 	 *  where $sessionExpires may be null
@@ -153,5 +154,24 @@ $icon[$size.$suffix] = "https://graph.facebook.com/$uid/picture?width=$size&heig
 		$sessionExpires = $expiresAt ? $expiresAt->getTimestamp() : null;
 		$accessToken = $at->getValue();
 		return array($accessToken, $sessionExpires);
+	}
+
+	/**
+	 * Import some fields from facebook. Also fills Users::$cache['platformUserData'].
+	 * @param {array} $fields
+	 * @return {array}
+	 */
+	function import($fields)
+	{
+		if (!is_array($fields)) {
+			$fields = Q_Config::get('Users', 'import', 'facebook', null);
+		}
+		$toImport = is_array($fields) ? $fields : Q_Config::get('Users', 'import', 'facebook', null);
+		$response = $this->facebook->get('/me?fields='.implode(',', $toImport));
+		$userNode = $response->getGraphUser();
+		Users::$cache['platformUserData'] = array(
+			'facebook' => $userNode->uncastItems()
+		);
+		return $userNode->uncastItems();
 	}
 }

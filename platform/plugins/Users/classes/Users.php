@@ -208,9 +208,8 @@ abstract class Users extends Base_Users
 	 *  * 'connected' if a logged-in user just connected the platform account for the first time,
 	 *  * 'authorized' if a logged-in user was connected to platform but just authorized this app for the first time
 	 *  or true otherwise.
-	 * @param {array|false} [$import=Q_Config::get('Users','import',$platform)]
-	 *  Pass false here to skip the call to import.
-	 *  Array of things to import from platform if they are not already set.
+	 * @param {array} [$import=Q_Config::get('Users','import',$platform)]
+	 *  Array of things to import from platform if a new user is being inserted or displayName was not set.
 	 *  Can include various fields of the user on the external platform, such as
 	 *  "email", "first_name", "last_name", "gender" etc.
 	 *  If the email address is imported, it is set without requiring verification, and
@@ -223,9 +222,6 @@ abstract class Users extends Base_Users
 		&$authenticated = null,
 		$import = null)
 	{
-		if (!isset($import)) {
-			$import = Q_Config::get('Users', 'import', $platform, null);
-		}
 		if (!isset($appId)) {
 			$appId = Q_Config::expect('Users', 'apps', $platform, Q::app(), 'appId');
 		} else {
@@ -287,14 +283,6 @@ abstract class Users extends Base_Users
 				// no facebook authentication is happening
 				return $userWasLoggedIn ? $user : false;
 			}
-			if ($import) {
-				$response = $facebook->get('/me?fields='.implode(',', $import));
-				$userNode = $response->getGraphUser();
-				$emailAddress = $userNode->getField('email');
-				Users::$cache['platformUserData'] = array(
-					$platform => $userNode->uncastItems()
-				);
-			}
 
 			$authenticated = true;
 			if ($retrieved) {
@@ -316,11 +304,11 @@ abstract class Users extends Base_Users
 					}
 
 					// Now, let's associate their account with this platform uid.
+					if (!$user->displayName()) {
+						$imported = $p->import($import);
+					}
 					$user->setUid($platform, $uid);
 					$user->save();
-					
-					// Set platformUserData to null in case some other user is saved later
-					Users::$cache['platformUserData'] = null;
 
 					// Save the identifier in the quick lookup table
 					list($hashed, $ui_type) = self::hashing($uid, $platform);
@@ -366,6 +354,7 @@ abstract class Users extends Base_Users
 						if ($ret) {
 							$user = $ret;
 						}
+						$imported = $p->import($import);
 						$user->save();
 
 						$ui->state = 'verified';
@@ -434,11 +423,13 @@ abstract class Users extends Base_Users
 						$icon = Users::platform($platform)->loggedInUserIcon($sizes, '.png');
 						if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 							self::importIcon($user, $icon);
+							$imported = $p->import($import);
 							$user->save();
 						}
 					}
 			 	}
 			}
+			Users::$cache['platformUserData'] = null; // in case some other user is saved later
 			Users::$cache['user'] = $user;
 			Users::$cache['authenticated'] = $authenticated;
 			break;
@@ -446,10 +437,10 @@ abstract class Users extends Base_Users
 			// not sure how to log this user in
 			return $userWasLoggedIn ? $user : false;
 		}
-		// Check we should import an email address from the platform
-		if (in_array('emailAddress', $import)
+		if (!empty($imported['email'])
 		and !empty($emailAddress)
 		and empty($user->emailAddress)) {
+			$emailAddress = $imported['email'];
 			// We automatically set their email as verified, without a confirmation message,
 			// because we trust the authentication platform.
 			$user->setEmailAddress($emailAddress, true, $email);
