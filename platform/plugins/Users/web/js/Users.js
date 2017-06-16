@@ -241,7 +241,7 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 	var appId = options.appId || Q.info.app;
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 	if (!fbAppId) {
-		console.warn("Users.logout: missing Users.apps.facebook."+appId+".appId");
+		console.warn("Users.authenticate: missing Users.apps.facebook."+appId+".appId");
 		return;
 	}
 
