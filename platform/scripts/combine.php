@@ -75,14 +75,14 @@ function Q_scripts_combine()
 	foreach ($files as $src => $dest) {
 		$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, true));
 		if (!file_exists($f)) {
-			return "Aborting: File corresponding to $src doesn't exist";
+			return "Aborting: File $f corresponding to $src doesn't exist";
 		}
 		$content = file_get_contents($f);
 		$combined[$dest][$src] = $content;
 	}
 	foreach ($combined as $dest => $parts) {
 		$df = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest));
-		$ext = pathinfo($df, PATHINFO_EXTENSION);
+		$ext = strtolower(pathinfo($df, PATHINFO_EXTENSION));
 		echo "Writing $df\n";
 		if (!empty($filters)) {
 			foreach ($filters as $e => $filter) {
@@ -92,9 +92,12 @@ function Q_scripts_combine()
 				foreach ($parts as $src => $part) {
 					echo "\t\t$src\n";
 				}
-				$params = compact('dest', 'parts');
+				$params = compact('dest', 'parts', 'ext');
 				if (!empty($filter['params'])) {
 					$params = array_merge($params, $filter['params']);
+				}
+				if ($ext === 'css') {
+					Q_scripts_preprocessCss($params);
 				}
 				$content = Q::event($filter['handler'], $params);
 			}
@@ -102,4 +105,35 @@ function Q_scripts_combine()
 		file_put_contents($df, $content);
 	}
 	echo "Success.";
+}
+
+function Q_scripts_preprocessCss(&$params)
+{
+	$dest = $params['dest'];
+	$parts = $params['parts'];
+	$processed = array();
+	foreach ($parts as $src => $content) {
+		$dest_parts = explode('/', $dest);
+		$src_parts = explode('/', $src);
+		$j = 0;
+		foreach ($dest_parts as $i => $p) {
+			if (!isset($src_parts[$i]) or $src_parts[$i] !== $dest_parts[$i]) {
+				break;
+			}
+			$j = $i+1;
+		}
+		$dc = count($dest_parts);
+		$sc = count($src_parts);
+		$relative = str_repeat("../", $dc-$j-1)
+			. implode('/', array_slice($src_parts, $j, $sc-$j-1));
+		if ($relative) {
+			$relative .= '/';
+		}
+		$processed[$src] = preg_replace(
+			"/url\((\'){0,1}/",
+			'url($1'.$relative,
+			$content
+		);
+	}
+	$params['processed'] = $processed;
 }

@@ -108,8 +108,9 @@ class Q_Request
 				));
 			}
 			$cs = Q_Config::get('Q', 'web', 'controllerSuffix', '');
+			$tail = (!$cs || substr($cs, 0, 1) === '/' ? $cs : "/$cs");
 			self::$app_root_url = $ar;
-			self::$controller_url = $ar . (substr($cs, 0, 1) === '/' ? $cs : "/$cs");
+			self::$controller_url = $ar . $tail;
 			self::$controller_present = false;
 			self::$base_url = self::$controller_url;
 		}
