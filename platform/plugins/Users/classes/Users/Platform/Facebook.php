@@ -165,8 +165,10 @@ $icon[$size.$suffix] = "https://graph.facebook.com/$uid/picture?width=$size&heig
 		if (!is_array($fields)) {
 			$fields = Q_Config::get('Users', 'import', 'facebook', null);
 		}
-		$toImport = is_array($fields) ? $fields : Q_Config::get('Users', 'import', 'facebook', null);
-		$response = $this->facebook->get('/me?fields='.implode(',', $toImport));
+		if (!$fields) {
+			return array();
+		}
+		$response = $this->facebook->get('/me?fields='.implode(',', $fields));
 		$userNode = $response->getGraphUser();
 		Users::$cache['platformUserData'] = array(
 			'facebook' => $userNode->uncastItems()
