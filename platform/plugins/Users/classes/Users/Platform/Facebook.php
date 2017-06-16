@@ -142,7 +142,6 @@ $icon[$size.$suffix] = "https://graph.facebook.com/$uid/picture?width=$size&heig
 	}
 	
 	/**
-	 * Get info about access token
 	 * @method accessInfo
 	 * @return {array} An array of ($accessToken, $sessionExpires)
 	 *  where $sessionExpires may be null

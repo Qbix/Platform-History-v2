@@ -377,11 +377,12 @@ abstract class Users extends Base_Users
 					// user is logged out and no user corresponding to $uid yet
 
 					$authenticated = 'registered';
-
-					if (!empty($emailAddress)) {
-						$ui = Users::identify('email', $emailAddress, 'verified');
+					
+					$imported = $p->import($import);
+					if (!empty($imported['email'])) {
+						$ui = Users::identify('email', $imported['email'], 'verified');
 						if ($ui) {
-							// existing user  identified from verified email address
+							// existing user identified from verified email address
 							// load it into $user
 							$user = new Users_User();
 							$user->id = $ui->userId;
@@ -423,7 +424,6 @@ abstract class Users extends Base_Users
 						$icon = Users::platform($platform)->loggedInUserIcon($sizes, '.png');
 						if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 							self::importIcon($user, $icon);
-							$imported = $p->import($import);
 							$user->save();
 						}
 					}
@@ -437,9 +437,7 @@ abstract class Users extends Base_Users
 			// not sure how to log this user in
 			return $userWasLoggedIn ? $user : false;
 		}
-		if (!empty($imported['email'])
-		and !empty($emailAddress)
-		and empty($user->emailAddress)) {
+		if (!empty($imported['email']) and empty($user->emailAddress)) {
 			$emailAddress = $imported['email'];
 			// We automatically set their email as verified, without a confirmation message,
 			// because we trust the authentication platform.
