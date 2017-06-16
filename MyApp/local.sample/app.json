@@ -162,6 +162,9 @@
 					"secret": "SHARED SECRET HERE"
 				}
 			}
+		},
+		"newsapi": {
+			"key": "GET A KEY FOR Users/activate suggestions"
 		}
 	},
 	"Streams": {

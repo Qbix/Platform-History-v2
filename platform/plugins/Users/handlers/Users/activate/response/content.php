@@ -49,6 +49,64 @@ function Users_activate_response_content()
 	$verb_ue = urlencode($arr['verbs'][mt_rand()%count($arr['verbs'])]);
 	$noun_ue = urlencode($arr['nouns'][mt_rand()%count($arr['nouns'])]);
 	$code = Q::ifset($_REQUEST['code']);
+	
+	if ($key = Q_Config::get('Users', 'newsapi', 'key', null)) {
+		$words = 3;
+		try {
+			$languages = array();
+			foreach (Q_Request::languages() as $entry) {
+				$languages[reset($entry)] = true;
+			}
+			$json = file_get_contents("https://newsapi.org/v1/sources");
+			$result = Q::json_decode($json, true);
+			$sources = array();
+			$fallback = array();
+			if (isset($result['sources'])) {
+				foreach ($result['sources'] as $source) {
+					if (isset($languages[$source['language']])) {
+						$sources[] = $source['id'];
+					}
+					if ($source['language'] === 'en') {
+						$fallback[] = $source['id'];
+					}
+				}
+			}
+			if (!$sources) {
+				$sources = $fallback;
+			}
+			$suggestions2 = array();
+			if ($sources) {
+				$rand = rand() % count($sources);
+				$url = "https://newsapi.org/v1/articles?" . http_build_query(array(
+					'source' => $sources[$rand],
+					'sortBy' => 'latest',
+					'apiKey' => $key
+				));
+				$json = file_get_contents($url);
+				$result = Q::json_decode($json, true);
+				if (isset($result['articles'])) {
+					foreach ($result['articles'] as $article) {
+						$characters = "/([^A-Za-z0-9-']|\\s{2,})+/";
+						$text = strtolower(
+							preg_replace($characters, ' ', $article['description'])
+						);
+						$parts = explode(' ', $text);
+						$count = count($parts);
+						if ($count > $words) {
+							$rand = rand() % ($count - $words);
+							$suggestions2[] = implode(' ', array_slice($parts, $rand, $words));
+						}
+					}
+				}
+			}
+			if ($suggestions2) {
+				$suggestions = $suggestions2;
+			}
+		} catch (Exception $e) {
+			// ignore it
+		}
+		
+	}
 
 	Q_Response::addScriptLine("Q.onReady.set(function () {
 		if (Q.Notice) {
