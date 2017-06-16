@@ -75,7 +75,7 @@ function Q_scripts_combine()
 	foreach ($files as $src => $dest) {
 		$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, true));
 		if (!file_exists($f)) {
-			return "Aborting: File corresponding to $src doesn't exist";
+			return "Aborting: File $f corresponding to $src doesn't exist";
 		}
 		$content = file_get_contents($f);
 		$combined[$dest][$src] = $content;
