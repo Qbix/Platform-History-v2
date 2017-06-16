@@ -144,11 +144,13 @@ $icon[$size.$suffix] = "https://graph.facebook.com/$uid/picture?width=$size&heig
 	/**
 	 * @method accessInfo
 	 * @return {array} An array of ($accessToken, $sessionExpires)
+	 *  where $sessionExpires may be null
 	 */
 	function accessInfo()
 	{
 		$at = $this->facebook->getDefaultAccessToken();
-		$sessionExpires = $at->getExpiresAt()->getTimestamp();
+		$expiresAt = $at->getExpiresAt();
+		$sessionExpires = $expiresAt ? $expiresAt->getTimestamp() : null;
 		$accessToken = $at->getValue();
 		return array($accessToken, $sessionExpires);
 	}
