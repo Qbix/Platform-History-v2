@@ -144,13 +144,13 @@ class Users_Device extends Base_Users_Device
 	 * @param {integer} [$notification.expiry=null] Number of seconds until notification expires
 	 *    and does not need to be stored anymore on the device.
 	 *    Pass -1 to ask the device not to store it at all.
+	 * @param {string} [$notification.priority="high"] Can be set to "normal" to make it lower priority
+	 * @param {string} [$notification.collapseId] A string under 64 bytes for collapsing notifications
+	 * @param {string} [$notification.id] You can provide your own uuid for the notification
 	 * @param {array} [$options]
 	 * @param {boolean} [$options.scheduled=false] if true, doesn't send immediately.
 	 *  You should call Users_Device_{YourPlatform}::sendPushNotifications()
 	 *  to send all scheduled notifications in a batch.
-	 * @param {string} [$options.priority="high"] Can be set to "normal" to make it lower priority
-	 * @param {string} [$options.collapseId] A string under 64 bytes for collapsing notifications
-	 * @param {string} [$options.id] You can provide your own uuid for the notification
 	 * @param {boolean} [$options.silent=false] Deliver a silent notification, may throw an exception
 	 */
 	function pushNotification($notification, $options = array())

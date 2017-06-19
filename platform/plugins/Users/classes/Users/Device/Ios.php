@@ -19,7 +19,7 @@ class Users_Device_Ios extends Users_Device
 		if (empty($ssl['cert'])) {
 			throw Q_Exception_MissingConfig("Users/apps/ios/$appId/ssl/cert");
 		}
-		$sandbox = Q::ifset($device, 'sandbox', false);
+		$sandbox = Q::ifset($appInfo, 'sandbox', false);
 		$s = $sandbox ? 'sandbox' : 'production';
 		$cert = Q::realPath($ssl['cert']);
 		if (!$cert) {
@@ -65,6 +65,9 @@ class Users_Device_Ios extends Users_Device
 			}
 			$message->setCustomProperty('apns-priority', $notification['priority']);
 		}
+		if (!empty($notification['collapseId'])) {
+			$message->setCustomProperty('apns-collapse-id', $notification['collapseId']);
+		}
 		if (!empty($notification['id'])) {
 			$message->setCustomIdentifier($notification['id']);
 		}
@@ -76,7 +79,7 @@ class Users_Device_Ios extends Users_Device
 		}
 		if (!empty($options['silent'])) {
 			$message->setContentAvailable(true);
-		}
+		}``
 		if (isset($notification['payload'])) {
 			foreach ($notification['payload'] as $k => $v) {
 				$message->setCustomProperty($k, $v);
