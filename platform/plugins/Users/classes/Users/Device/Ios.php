@@ -79,7 +79,7 @@ class Users_Device_Ios extends Users_Device
 		}
 		if (!empty($options['silent'])) {
 			$message->setContentAvailable(true);
-		}``
+		}
 		if (isset($notification['payload'])) {
 			foreach ($notification['payload'] as $k => $v) {
 				$message->setCustomProperty($k, $v);
