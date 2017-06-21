@@ -50,7 +50,7 @@
 			"languages": {"en": 1}
 		},
 		"response": {
-			"cacheBaseUrl": "https://myapp-cache"
+			"cacheBaseUrl": "https://myapp.intercept"
 		},
 		"bundle": {
 			"exclude": {
