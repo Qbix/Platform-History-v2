@@ -7,13 +7,13 @@ CREATE TABLE `{$prefix}app_user` (
   `userId` varbinary(31) NOT NULL DEFAULT '',
   `provider` enum('native','facebook','twitter','google','yahoo')  NOT NULL,
   `appId` varchar(200) NOT NULL COMMENT 'An external app id registered with the provider',
+  `provider_uid` varchar(200)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `access_token` varchar(1023)  DEFAULT NULL COMMENT 'The OAuth access token',
   `session_secret` varchar(1023) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `session_expires` timestamp NULL DEFAULT NULL,
   `state` enum('visited','added','removed')  NOT NULL DEFAULT 'visited',
-  `provider_uid` varchar(200)  NOT NULL,
   PRIMARY KEY (`userId`,`provider`,`appId`),
   UNIQUE KEY `provider` (`provider`,`appId`,`provider_uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a user in our 3rd party app with a provider like facebook';
