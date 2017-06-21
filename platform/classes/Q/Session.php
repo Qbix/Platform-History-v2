@@ -692,8 +692,7 @@ class Q_Session
 						$existing_data = '';
 					}
 				}
-				$_SESSION = session_decode($existing_data);
-				if (!$_SESSION) {
+				if (!session_decode($existing_data)) {
 					$_SESSION = array();
 				}
 				$t = new Q_Tree($_SESSION);
