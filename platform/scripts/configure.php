@@ -27,7 +27,12 @@ if ($count < 2)
 #Read primary arguments
 $LOCAL_DIR = APP_DIR;
 
-$desired = $argv[1];
+$AppName = CONFIGURE_ORIGINAL_APP_NAME;
+$APPNAME = strtoupper($AppName);
+$appname = strtolower($AppName);
+$Desired = $argv[1];
+$DESIRED = strtoupper($Desired);
+$desired = strtolower($Desired);
 $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
 do {
@@ -42,11 +47,12 @@ do {
 		) as $filename => $splFileInfo
 	) {
 		$pi = pathinfo($filename);
-		if ($pi['filename'] === CONFIGURE_ORIGINAL_APP_NAME) {
-			$pi['filename'] = $desired;
+		$pif = $pi['filename'];
+		if (strtolower($pif) === $AppName) {
+			$pif = $Desired;
 		}
 		// fixed / to DIRECTORY_SEPARATOR
-		$filename2 = $pi['dirname'] . DIRECTORY_SEPARATOR . $pi['filename']
+		$filename2 = $pi['dirname'] . DIRECTORY_SEPARATOR . $pif
 			. (empty($pi['extension']) ? '' : '.' . $pi['extension']);
 		if ($filename != $filename2) {
 			if (file_exists($filename2)) {
@@ -63,12 +69,11 @@ if ($desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	$it = new RecursiveDirectoryIterator(APP_DIR);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)) continue;
-		$file = file_get_contents($filename);
-		file_put_contents($filename, preg_replace(
-			"/".CONFIGURE_ORIGINAL_APP_NAME."/",
-			$desired,
-			$file
-		));
+		$contents = file_get_contents($filename);
+		$contents = preg_replace("/$APPNAME/", $DESIRED, $contents);
+		$contents = preg_replace("/$AppName/", $Desired, $contents);
+		$contents = preg_replace("/$appname/", $desired, $contents);
+		file_put_contents($filename, $contents);
 	}
 }
 
