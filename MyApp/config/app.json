@@ -49,6 +49,9 @@
 		"web": {
 			"languages": {"en": 1}
 		},
+		"response": {
+			"cacheBaseUrl": "https://myapp-cache"
+		},
 		"bundle": {
 			"exclude": {
 				"MyApp": [
