@@ -13,11 +13,11 @@
  * @class Q bookmarklet
  * @constructor
  * @param {Object} options This is an object with properties for this function
+ *	 @param {String} options.title Title for the button which will be added to user's browser bar.
+ *	 @param {String} options.usage Text which is appended to instructions, identifying purpose and usage of this bookmarklet.
  *   @param {Array} [options.scripts] Array of one or more script urls (will be run through Q.url()) to load and execute in order
  *   @param {Array} [options.skip] Array of "path.to.object" strings corresponding to options.scripts array, to avoid loading the corresponding script if path.to.object is already defined. Typically names an object which has been defined by the loaded script. Pass nulls in the array for urls you shouldn't skip.
  *	 @param {String} [options.code] Literal Javascript code to execute, typically a function call. If scripts option is provided, this code is executed after the scripts have been loaded.
- *	 @param {String} options.title Title for the button which will be added to user's browser bar.
- *	 @param {String} options.usage Text which is appended to instructions, identifying purpose and usage of this bookmarklet.
  *	 @param {String} [options.icon] Icon for the button which will be added to user's browser bar.
  */
 Q.Tool.define('Q/bookmarklet', function () {
