@@ -59,6 +59,13 @@ class Q_Session
 	 */
 	static protected $session_db_duration_field;
 	/**
+	 * @property $session_db_platform_field
+	 * @type string
+	 * @static
+	 * @protected
+	 */
+	static protected $session_db_platform_field;
+	/**
 	 * @property $session_db
 	 * @type boolean
 	 * @static
@@ -268,6 +275,7 @@ class Q_Session
 					$data_field = self::$session_db_data_field;
 					$updated_field = self::$session_db_updated_field;
 					$duration_field = self::$session_db_duration_field;
+					$platform_field = self::$session_db_platform_field;
 					$class = self::$session_db_row_class;
 					$row = new $class();
 					$row->$id_field = $id;
@@ -282,6 +290,10 @@ class Q_Session
 							'Q', 'session', 'durations', Q_Request::formFactor(),
 							Q_Config::expect('Q', 'session', 'durations', 'session')
 						);
+						if ($platform_field) {
+							$platform = Q_Request::platform();
+							$row->$platform_field = $platform ? $platform : null;
+						}
 						if (false !== Q::event(
 							'Q/session/save',
 							array(
@@ -290,6 +302,7 @@ class Q_Session
 								'data_field' => $data_field,
 								'updated_field' => $updated_field,
 								'duration_field' => $duration_field,
+								'platform_field' => $platform_field,
 								'inserting' => true
 							),
 							'before'
@@ -637,6 +650,7 @@ class Q_Session
 				$data_field = self::$session_db_data_field;
 				$updated_field = self::$session_db_updated_field;
 				$duration_field = self::$session_db_duration_field;
+				$platform_field = self::$session_db_platform_field;
 				$row = self::$session_db_row;
 				$row->$id_field = $id;
 			} else {
@@ -669,6 +683,7 @@ class Q_Session
 						'id_field' => $id_field,
 						'data_field' => $data_field,
 						'duration_field' => $duration_field,
+						'platform_field' => $platform_field
 						'updated_field' => $updated_field,
 						'row' => $row
 					));
@@ -717,6 +732,10 @@ class Q_Session
 						'Q', 'session', 'durations', Q_Request::formFactor(),
 						Q_Config::expect('Q', 'session', 'durations', 'session')
 					);
+					if ($platform_field) {
+						$platform = Q_Request::platform();
+						$row->$platform_field = $platform ? $platform : null;
+					}
 					$row->save(false, true);
 					$result = true;
 				} else {
@@ -741,6 +760,7 @@ class Q_Session
 			 * @param {string} data_field
 			 * @param {string} updated_field
 			 * @param {string} duration_field
+			 * @param {string} platform_field
 			 * @param {string} sess_file
 			 * @param {integer} row
 			 * @return {mixed}
@@ -748,7 +768,7 @@ class Q_Session
 			$result = Q::event(
 				'Q/session/write', 
 				compact(
-					'id', 'data_field', 'updated_field', 'duration_field', 
+					'id', 'data_field', 'updated_field', 'duration_field', 'platform_field',
 					'sess_file', 'row',
 					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
 				), 
@@ -980,6 +1000,7 @@ class Q_Session
 				'type' => 'string'
 			));
 		}
+		$session_db_platform_field = isset($db_info['platformField']) ? $db_info['platformField'] : null;
 		$session_db_row_class = isset($db_info['rowClass']) ? $db_info['rowClass'] : null;
 		if (empty($session_db_row_class)
 		or ! class_exists($session_db_row_class)) {
@@ -1006,6 +1027,7 @@ class Q_Session
 		self::$session_db_id_field = $session_db_id_field;
 		self::$session_db_updated_field = $session_db_updated_field;
 		self::$session_db_duration_field = $session_db_duration_field;
+		self::$session_db_platform_field = $session_db_platform_field;
 		self::$session_db_row_class = $session_db_row_class;
 		self::$session_db = Db::connect(self::$session_db_connection);
 		
