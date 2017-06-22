@@ -1493,7 +1493,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		$asUserId = isset($options['asUserId']) ? $options['asUserId'] : null;
 		if (!isset($asUserId)) {
-			$user = Users::loggedInUser();
+			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
 		$this->calculateAccess($asUserId);
