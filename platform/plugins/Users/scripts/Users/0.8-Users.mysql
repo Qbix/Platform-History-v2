@@ -171,7 +171,7 @@ CREATE TABLE `{$prefix}oAuth` (
   `access_token` varbinary(255) NOT NULL COMMENT 'Bearer token given to the client to access resources',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'When this row was created',
   `token_expires_seconds` int(11) DEFAULT NULL COMMENT 'How many seconds until token expires',
-  PRIMARY KEY (`userId`,`client_id`,`state`)
+  PRIMARY KEY (`userId`,`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='For implementing three-legged oAuth 2.0';
 
 # Dump of table {$prefix}session
