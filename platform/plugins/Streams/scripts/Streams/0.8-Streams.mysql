@@ -71,7 +71,7 @@ CREATE TABLE `{$prefix}invited` (
   `token` varbinary(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
   `state` enum('pending','accepted','declined','forwarded','expired','claimed') NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updatedTime` timestamp NULL DEFAULT NULL,
   `expireTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userId`,`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores tokens where user is invited on userId server';
