@@ -164,9 +164,17 @@ class Db_Result
 		$rows = array();
 		$arrs = $this->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($arrs as $arr) {
-			$row = new $class_name(array(), false);
-			$row->copyFrom($arr, $fields_prefix, false, false);
-			$row->init($this);
+			if (is_callable($class_name, 'newRow')) {
+				$row = call_user_func(
+					array($class_name, 'newRow'),
+					$arr, $fields_prefix
+				);
+				$row->retrieved = true;
+			} else {
+				$row = new $class_name(array(), false);
+				$row->copyFrom($arr, $fields_prefix, false, false);
+				$row->init($this);
+			}
 			if ($by_field and isset($row->$by_field)) {
 				$rows[$row->$by_field] = $row;
 			} else {
@@ -216,9 +224,17 @@ class Db_Result
 		if (!$arr) {
 			return false;
 		}
-		$row = new $class_name(false);
-		$row->copyFrom($arr, $fields_prefix, true, false);
-		$row->init($this);
+		if (is_callable($class_name, 'newRow')) {
+			$row = call_user_func(
+				array($class_name, 'newRow'),
+				$arr, $fields_prefix
+			);
+			$row->retrieved = true;
+		} else {
+			$row = new $class_name(array(), false);
+			$row->copyFrom($arr, $fields_prefix, false, false);
+			$row->init($this);
+		}
 		return $row;
 	}
 

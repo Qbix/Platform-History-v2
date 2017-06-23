@@ -183,6 +183,21 @@ class Users_Device extends Base_Users_Device
 	}
 
 	/**
+	 * Called by various Db methods to get a custom row object
+	 * @param {array} $fields Any fields to set in the row
+	 * @param {string} [$stripPrefix=null] Any prefix to strip from the fields
+	 * @return Users_Device
+	 */
+	static function newRow($fields, $stripPrefix = null)
+	{
+		Q_Valid::requireFields(array('platform'), $fields, true);
+		$platform = ucfirst(strtolower($fields['platform']));
+		$className = "Users_Device_$platform";
+		$row = new $className();
+		return $row->copyFrom($fields, $stripPrefix, false, false);
+	}
+
+	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.
 	 * @method __set_state
