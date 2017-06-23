@@ -683,7 +683,7 @@ class Q_Session
 						'id_field' => $id_field,
 						'data_field' => $data_field,
 						'duration_field' => $duration_field,
-						'platform_field' => $platform_field
+						'platform_field' => $platform_field,
 						'updated_field' => $updated_field,
 						'row' => $row
 					));
