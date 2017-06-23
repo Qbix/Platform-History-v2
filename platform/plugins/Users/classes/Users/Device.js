@@ -66,6 +66,7 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 		options = {};
 	}
 	var o = Q.extend({}, options);
+	var n = Q.copy(notification);
 	if (!Q.isInteger(o.priority)) {
 		o.priority = (o.priority === 'high') ? 10 : 5;
 	}
@@ -76,43 +77,39 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 		o.expiry = o.expiry;
 	}
 	if (o.collapseId) {
-		notification.collapseId = o.collapseId;
+		n.collapseId = o.collapseId;
 	}
 	if (o && o.view) {
 		var body = o.isSource
 			? Q.Handlebars.renderSource(o.view, o.fields)
 			: Q.Handlebars.render(o.view, o.fields);
-		Q.setObject(['alert', 'body'], body, notification);
+		Q.setObject(['alert', 'body'], body, n);
 	}
-	var device = this;
-	if (device.fields.platform === 'ios') {
-		if (!Users.push.apn.provider) {
-			console.warn("Users.Device.prototype.pushNotification: Users.apn.provider missing, call Users.listen() first");
-			return;
-		}
-		var appId = o.appId || Q.Config.expect(['Q', 'app']);
-		notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'bundleId']);
-		var apn = require('apn');
-		var n = new apn.Notification(notification);
-		Users.push.apn.provider.send(n, device.fields.deviceId)
-		.then(function (responses) {
-			var errors = null;
-			responses.failed.forEach(function (result) {
-				if (result.status == '401') {
-					setTimeout(function () {
-						device.remove();
-					}, 0);
-				}
-				errors = errors || [];
-				errors.push(result);
-			});
-			callback.call(device, errors, notification, n);
-		});
+	return this.handlePushNotification(n, o, callback);
+};
+
+/**
+ * Schedules a push notification.
+ * This default implementation, just throws an error.
+ * @method handlePushNotification
+ */
+Users_Device.prototype.handlePushNotification = function () {
+	throw new Q.Error("Users.Device.prototype.handlePushNotification: not implemented");	
+};
+
+/**
+ * Called by various Db methods to get a custom row object
+ * @param {Object} fields Any fields to set in the row
+ * @param {Boolean} retrieved whether the row is retrieved
+ * @return {Users.Device}
+ */
+Users_Device.newRow = function (fields, retrieved) {
+	if (!fields.platform) {
+		throw new Q.Error("Users.Device.newRow: missing fields.platform");
 	}
-	// TODO: process gcm for android
-	// can send to at most 1000 registration tokens per request in gcm
-	
-	// TODO: add support for web push in chrome and safari
+	var platform = fields.platform.toLowerCase().toCapitalized();
+	var PlatformDevice = Users_Device[platform];
+	return new PlatformDevice(fields, retrieved);
 };
 
 Q.mixin(Users_Device, Q.require('Base/Users/Device'));
@@ -121,14 +118,19 @@ Q.mixin(Users_Device, Q.require('Base/Users/Device'));
  * Add any public methods here by assigning them to Users_Device.prototype
  */
 
- /**
-  * The setUp() method is called the first time
-  * an object of this class is constructed.
-  * @method setUp
-  */
- Users_Device.prototype.setUp = function () {
- 	// put any code here
- 	// overrides the Base class
- };
+/**
+ * The setUp() method is called the first time
+ * an object of this class is constructed.
+ * @method setUp
+ */
+Users_Device.prototype.setUp = function () {
+	// put any code here
+	// overrides the Base class
+};
 
-module.exports = Users_Device;
+module.exports = Users.Device = Users_Device;
+
+Q.require('Users/Device/Ios');
+Q.require('Users/Device/Android');
+Q.require('Users/Device/Chrome');
+Q.require('Users/Device/Safari');
