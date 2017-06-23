@@ -161,7 +161,7 @@ class Users_Device extends Base_Users_Device
 	/**
 	 * Schedules a push notification.
 	 * This default implementation, just throws an error.
-	 * @method schedulePushNotifications
+	 * @method handlePushNotification
 	 */
 	protected function handlePushNotification($notifications, $options = array())
 	{
