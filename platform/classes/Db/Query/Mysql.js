@@ -157,7 +157,10 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 					if (options.plain) {
 						results2.push(results[i]);
 					} else {
-						results2.push(new rowClass(results[i], true));
+						var row = rowClass.newRow
+							? rowClass.newRow(results[i], true)
+							: new rowClass(results[i], true)
+						results2.push(row);
 					}
 				}
 			} else {
