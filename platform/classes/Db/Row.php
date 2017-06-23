@@ -1126,9 +1126,9 @@ class Db_Row implements Iterator
 		//$root_table_fields_prefix = null;
 		if (! isset($fields[$alias2])) {
 			if (class_exists($class_name)) {
-				$o = new $class_name();
-				if (method_exists($o, 'fieldNames')) {
-					$table_fields = $o->fieldNames($alias2, $alias2 . '_');
+				if (method_exists($class_name, 'fieldNames')) {
+					$callable = array($class_name, 'fieldNames');
+					$table_fields = call_user_func($callable, $alias2, $alias2 . '_');
 					$fields[$alias2] = $table_fields;
 					$root_table_fields_prefix = $alias2 . '_';
 				} else {
@@ -1171,9 +1171,11 @@ class Db_Row implements Iterator
 				if (isset($fields[$alias3])) {
 					if ($fields[$alias3] === true) {
 						if (class_exists($table_class_name)) {
-							$o = new $table_class_name();
-							if (method_exists($o, 'fieldNames')) {
-								$table_fields = $o->fieldNames($alias3, $alias3 . '_');
+							if (method_exists($table_class_name, 'fieldNames')) {
+								$callable = array($table_class_name, 'fieldNames');
+								$table_fields = call_user_func(
+									$callable, $alias3, $alias3 . '_'
+								);
 								$query->select($table_fields, null);
 							} else {
 								$query->select("$alias3.*", null);
@@ -1280,9 +1282,16 @@ class Db_Row implements Iterator
 			$rows_array = $query->fetchAll(PDO::FETCH_ASSOC);
 			$rows = array();
 			foreach ($rows_array as $row_array) {
-				$row = new $class_name();
+				if (is_callable($class_name, 'newRow')) {
+					$row = call_user_func(
+						array($class_name, 'newRow'),
+						$row_array, $root_table_fields_prefix
+					);
+				} else {
+					$row = new $class_name();
+					$row->copyFrom($row_array, $root_table_fields_prefix, false, false);
+				}
 				$row->retrieved = true;
-				$row->copyFrom($row_array, $root_table_fields_prefix);
 				foreach ($row->fieldsModified as $key => $value) {
 					$row->fieldsModified[$key] = false;
 				}
@@ -2192,8 +2201,8 @@ class Db_Row implements Iterator
 	 *  whether the class of the Db_Row matches. It leaves things up to you.
 	 * @param {string} [$stripPrefix=null] If not empty, only copies the elements with the prefix, stripping it out.
 	 *  Useful for assigning parts of Db_Rows that came from joins, to individual table classes.
-	 * @param {boolean|null} [$markModified=null] If set, the "modified" status of all copied fields is set to this boolean.
 	 * @param {boolean} [$suppressHooks=false] If true, assigns everything but does not fire the beforeSet and afterSet events.
+	 * @param {boolean|null} [$markModified=null] If set, the "modified" status of all copied fields is set to this boolean.
 	 * @return {Db_Row} returns this object, for chaining
 	 */
 	function copyFromRow (

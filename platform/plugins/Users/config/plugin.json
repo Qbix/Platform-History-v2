@@ -40,7 +40,8 @@
 				"idField": "id",
 				"dataField": "php",
 				"updatedField": "updatedTime",
-				"durationField": "duration"
+				"durationField": "duration",
+				"platformField": "platform"
 			}
 		},
 		"web": {

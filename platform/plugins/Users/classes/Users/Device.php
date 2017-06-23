@@ -161,7 +161,7 @@ class Users_Device extends Base_Users_Device
 	/**
 	 * Schedules a push notification.
 	 * This default implementation, just throws an error.
-	 * @method schedulePushNotifications
+	 * @method handlePushNotification
 	 */
 	protected function handlePushNotification($notifications, $options = array())
 	{
@@ -180,6 +180,21 @@ class Users_Device extends Base_Users_Device
 		throw new Q_Exception_MethodNotSupported(array(
 			'method' => 'sendPushNotifications'
 		));
+	}
+
+	/**
+	 * Called by various Db methods to get a custom row object
+	 * @param {array} $fields Any fields to set in the row
+	 * @param {string} [$stripPrefix=null] Any prefix to strip from the fields
+	 * @return Users_Device
+	 */
+	static function newRow($fields, $stripPrefix = null)
+	{
+		Q_Valid::requireFields(array('platform'), $fields, true);
+		$platform = ucfirst(strtolower($fields['platform']));
+		$className = "Users_Device_$platform";
+		$row = new $className();
+		return $row->copyFrom($fields, $stripPrefix, false, false);
 	}
 
 	/**
