@@ -1282,11 +1282,9 @@ class Db_Row implements Iterator
 			$rows_array = $query->fetchAll(PDO::FETCH_ASSOC);
 			$rows = array();
 			foreach ($rows_array as $row_array) {
-				if (is_callable($class_name, 'newRow')) {
-					$row = call_user_func(
-						array($class_name, 'newRow'),
-						$row_array, $root_table_fields_prefix
-					);
+				$method = array($class_name, 'newRow');
+				if (is_callable($method)) {
+					$row = call_user_func($method, $row_array, $root_table_fields_prefix);
 				} else {
 					$row = new $class_name();
 					$row->copyFrom($row_array, $root_table_fields_prefix, false, false);
