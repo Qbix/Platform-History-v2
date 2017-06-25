@@ -31,7 +31,7 @@ class Users_Label extends Base_Users_Label
 	 *   or ($label => array($title, $icon)) pairs.
 	 * @param {string} [$userId=null] The logged-in user if not provided
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
-	 * @param {string} [$icon='default']
+	 * @param {string} [$icon='labels/default']
 	 * @param {string|false} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks.
 	 * @param boolean [$unlessExists=false] If true, skips adding label if it already exists
@@ -42,7 +42,7 @@ class Users_Label extends Base_Users_Label
 		$label, 
 		$userId = null, 
 		$title = null, 
-		$icon = 'default',
+		$icon = 'labels/default',
 		$asUserId = null,
 		$unlessExists = false)
 	{
