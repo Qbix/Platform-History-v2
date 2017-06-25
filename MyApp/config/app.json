@@ -35,7 +35,8 @@
 				"desktop": "MyApp/layout/desktop.php",
 				"tablet": "MyApp/layout/tablet.php",
 				"mobile": "MyApp/layout/mobile.php"
-			}
+			},
+			"cacheBaseUrl": "https://myapp.intercept"
 		},
 		"exception": {
 			"showTrace": true,
@@ -48,9 +49,6 @@
 		},
 		"web": {
 			"languages": {"en": 1}
-		},
-		"response": {
-			"cacheBaseUrl": "https://myapp.intercept"
 		},
 		"bundle": {
 			"exclude": {
