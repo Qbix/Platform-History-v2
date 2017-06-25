@@ -48,7 +48,7 @@ do {
 	) {
 		$pi = pathinfo($filename);
 		$pif = $pi['filename'];
-		if (strtolower($pif) === $AppName) {
+		if ($pif === $AppName) {
 			$pif = $Desired;
 		}
 		// fixed / to DIRECTORY_SEPARATOR
