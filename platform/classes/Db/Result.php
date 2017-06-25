@@ -164,11 +164,9 @@ class Db_Result
 		$rows = array();
 		$arrs = $this->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($arrs as $arr) {
-			if (is_callable($class_name, 'newRow')) {
-				$row = call_user_func(
-					array($class_name, 'newRow'),
-					$arr, $fields_prefix
-				);
+			$method = array($class_name, 'newRow');
+			if (is_callable($method)) {
+				$row = call_user_func($method, $arr, $fields_prefix);
 				$row->retrieved = true;
 			} else {
 				$row = new $class_name(array(), false);
@@ -224,11 +222,9 @@ class Db_Result
 		if (!$arr) {
 			return false;
 		}
-		if (is_callable($class_name, 'newRow')) {
-			$row = call_user_func(
-				array($class_name, 'newRow'),
-				$arr, $fields_prefix
-			);
+		$method = array($class_name, 'newRow');
+		if (is_callable($method)) {
+			$row = call_user_func($method, $arr, $fields_prefix);
 			$row->retrieved = true;
 		} else {
 			$row = new $class_name(array(), false);
