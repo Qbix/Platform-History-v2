@@ -87,7 +87,7 @@ class Users_AppUser extends Base_Users_AppUser
 		if (isset($result[$platform][$appId])) {
 			return $result[$platform][$appId];
 		}
-		$className = "Users_Platform_".ucfirst(strtolower($platform));
+		$className = "Users_AppUser_".ucfirst(strtolower($platform));
 		if (!class_exists($className, true)) {
 			throw new Q_Exception_MissingClass(compact('className'));
 		}
@@ -104,7 +104,7 @@ class Users_AppUser extends Base_Users_AppUser
 	{
 		Q_Valid::requireFields(array('platform', 'appId'), $fields, true);
 		$platform = ucfirst(strtolower($fields['platform']));
-		$className = "Users_Device_$platform";
+		$className = "Users_AppUser_$platform";
 		$row = new $className();
 		return $row->copyFrom($fields, $stripPrefix, false, false);
 	}

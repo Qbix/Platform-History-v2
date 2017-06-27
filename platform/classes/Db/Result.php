@@ -167,12 +167,11 @@ class Db_Result
 			$method = array($class_name, 'newRow');
 			if (is_callable($method)) {
 				$row = call_user_func($method, $arr, $fields_prefix);
-				$row->retrieved = true;
 			} else {
 				$row = new $class_name(array(), false);
 				$row->copyFrom($arr, $fields_prefix, false, false);
-				$row->init($this);
 			}
+			$row->init($this);
 			if ($by_field and isset($row->$by_field)) {
 				$rows[$row->$by_field] = $row;
 			} else {
@@ -225,12 +224,11 @@ class Db_Result
 		$method = array($class_name, 'newRow');
 		if (is_callable($method)) {
 			$row = call_user_func($method, $arr, $fields_prefix);
-			$row->retrieved = true;
 		} else {
 			$row = new $class_name(array(), false);
 			$row->copyFrom($arr, $fields_prefix, false, false);
-			$row->init($this);
 		}
+		$row->init($this);
 		return $row;
 	}
 

@@ -222,16 +222,30 @@ abstract class Users extends Base_Users
 		&$authenticated = null,
 		$import = null)
 	{
+		$platforms = Q_Config::get('Users', 'apps', 'platforms', array());
+		if (!in_array($platform, $platforms)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'platform',
+				'fieldpath' => 'One of the platforms named in Users/apps/platforms config'
+			));
+		}
+		
 		if (!isset($appId)) {
 			$appId = Q::app();
 		}
 		list($appId, $appInfo) = Users::appInfo($platform, $appId);
 		$appId = $appInfo['appId'];
+		if (!isset($appId)) {
+			throw new Q_Exception_WrongType(array(
+				'field' => 'appId', 
+				'type' => "a valid $platform app id"
+			));
+		}
+		
 		$authenticated = null;
-
 		$during = 'authenticate';
-
 		$return = null;
+		
 		/**
 		 * @event Users/authenticate {before}
 		 * @param {string} platform
@@ -241,20 +255,6 @@ abstract class Users extends Base_Users
 		$return = Q::event('Users/authenticate', compact('platform', 'appId'), 'before');
 		if (isset($return)) {
 			return $return;
-		}
-
-		if (!isset($platform) or $platform != 'facebook') {
-			throw new Q_Exception_WrongType(array(
-				'field' => 'platform', 
-				'type' => '"facebook"'
-			));
-		}
-
-		if (!isset($appId)) {
-			throw new Q_Exception_WrongType(array(
-				'field' => 'appId', 
-				'type' => "a valid $platform app id"
-			));
 		}
 
 		Q_Session::start();
@@ -276,36 +276,135 @@ abstract class Users extends Base_Users
 		// Try authenticating the user with the specified platform
 		$app_user = Users_AppUser::authenticate($platform, $appId);
 		if (!$app_user) {
-			// no facebook authentication is happening
+			// no authentication happened
 			return $userWasLoggedIn ? $user : false;
 		}
 		$uid = $app_user->platform_uid;
-		switch ($platform) {
-		case 'facebook':
-			$authenticated = true;
-			if ($retrieved) {
-				$user_uid = $user->getUid($platform);
-				if (!$user_uid) {
-					// this is a logged-in user who was never authenticated with this platform.
-					// First, let's find any other user who has authenticated with this platform uid,
-					// and set their $field to 0.
-					$authenticated = 'connected';
-					$ui = Users::identify($platform, $uid);
-					if ($ui) {
-						$u = new Users_User();
-						$u->id = $ui->userId;
-						if ($u->retrieve()) {
-							$u->clearUid($platform);
-							$u->save();
-						};
-						$ui->remove();
-					}
+		$authenticated = true;
+		if ($retrieved) {
+			$user_uid = $user->getUid($platform);
+			if (!$user_uid) {
+				// this is a logged-in user who was never authenticated with this platform.
+				// First, let's find any other user who has authenticated with the
+				// authenticated uid, and set their $field to 0.
+				$authenticated = 'connected';
+				$ui = Users::identify($platform, $uid);
+				if ($ui) {
+					$u = new Users_User();
+					$u->id = $ui->userId;
+					if ($u->retrieve()) {
+						$u->clearUid($platform);
+						$u->save();
+					};
+					$ui->remove();
+				}
 
-					// Now, let's associate their account with this platform uid.
-					if (!$user->displayName()) {
-						$imported = $app_user->import($import);
-					}
+				// Now, let's associate the current user's account with this platform uid.
+				if (!$user->displayName()) {
+					// import some fields automatically from the platform
+					$imported = $app_user->import($import);
+				}
+				$user->setUid($platform, $uid);
+				$user->save();
+
+				// Save the identifier in the quick lookup table
+				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$ui = new Users_Identify();
+				$ui->identifier = "$ui_type:$hashed";
+				$ui->state = 'verified';
+				$ui->userId = $user->id;
+				$ui->save(true);
+			} else if ($user_uid !== $uid) {
+				// The logged-in user was authenticated with the platform already,
+				// and associated with a different platform uid.
+				// Most likely, a completely different person has logged into the platform
+				// at this computer. So rather than changing the associated plaform uid
+				// for the logged-in user, simply log out and essentially run this function
+				// from the beginning again.
+				Users::logout();
+				$userWasLoggedIn = false;
+				$user = new Users_User();
+				$retrieved = false;
+			}
+		}
+		if (!$retrieved) {
+			$ui = Users::identify($platform, $uid, null);
+			if ($ui) {
+				$user = new Users_User();
+				$user->id = $ui->userId;
+				$exists = $user->retrieve();
+				if (!$exists) {
+					throw new Q_Exception("Users_Identify for $platform uid $uid exists but not user with id {$ui->userId}");
+				}
+				$retrieved = true;
+				if ($ui->state === 'future') {
+					$authenticated = 'adopted';
 					$user->setUid($platform, $uid);
+					$user->signedUpWith = $platform; // should have been "none" before this
+					/**
+					 * @event Users/adoptFutureUser {before}
+					 * @param {Users_User} user
+					 * @param {string} during
+					 * @return {Users_User}
+					 */
+					$ret = Q::event('Users/adoptFutureUser', compact('user', 'during'), 'before');
+					if ($ret) {
+						$user = $ret;
+					}
+					$imported = $app_user->import($import);
+					$user->save();
+
+					$ui->state = 'verified';
+					$ui->save();
+					/**
+					 * @event Users/adoptFutureUser {after}
+					 * @param {Users_User} user
+					 * @param {array} links
+					 * @param {string} during
+					 * @return {Users_User}
+					 */
+					Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
+				} else {
+					// If we are here, that simply means that we already verified the
+					// $uid => $userId mapping for some existing user who signed up
+					// and has been using the system. So there is nothing more to do besides
+					// setting this user as the logged-in user below.
+				}
+			} else {
+				// user is logged out and no user corresponding to $uid yet
+
+				$authenticated = 'registered';
+				
+				$imported = $app_user->import($import);
+				if (!empty($imported['email'])) {
+					$ui = Users::identify('email', $imported['email'], 'verified');
+					if ($ui) {
+						// existing user identified from verified email address
+						// load it into $user
+						$user = new Users_User();
+						$user->id = $ui->userId;
+						$user->retrieve(null, null, true)
+						->caching()
+						->resume();
+					}
+				}
+
+				$user->setUid($platform, $uid);
+				/**
+				 * @event Users/insertUser {before}
+				 * @param {Users_User} user
+				 * @param {string} during
+				 * @return {Users_User}
+				 */
+				$ret = Q::event('Users/insertUser', compact('user', 'during'), 'before');
+				if (isset($ret)) {
+					$user = $ret;
+				}
+				if (!$user->wasRetrieved()) {
+					// Register a new user basically and give them an empty username for now
+					$user->username = "";
+					$user->icon = 'default';
+					$user->signedUpWith = $platform;
 					$user->save();
 
 					// Save the identifier in the quick lookup table
@@ -315,126 +414,22 @@ abstract class Users extends Base_Users
 					$ui->state = 'verified';
 					$ui->userId = $user->id;
 					$ui->save(true);
-				} else if ($user_uid !== $uid) {
-					// The logged-in user was authenticated with the platform already,
-					// and associated with a different platform uid.
-					// Most likely, a completely different person has logged into the platform
-					// at this computer. So rather than changing the associated plaform uid
-					// for the logged-in user, simply log out and essentially run this function
-					// from the beginning again.
-					Users::logout();
-					$userWasLoggedIn = false;
-					$user = new Users_User();
-					$retrieved = false;
+
+					// Download and save platform icon for the user
+					$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+					sort($sizes);
+					$icon = $app_user->icon($sizes, '.png');
+					if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
+						self::importIcon($user, $icon);
+						$user->save();
+					}
 				}
-			}
-			if (!$retrieved) {
-				$ui = Users::identify($platform, $uid, null);
-				if ($ui) {
-					$user = new Users_User();
-					$user->id = $ui->userId;
-					$exists = $user->retrieve();
-					if (!$exists) {
-						throw new Q_Exception("Users_Identify for $platform uid $uid exists but not user with id {$ui->userId}");
-					}
-					$retrieved = true;
-					if ($ui->state === 'future') {
-						$authenticated = 'adopted';
-						$user->setUid($platform, $uid);
-						$user->signedUpWith = $platform; // should have been "none" before this
-						/**
-						 * @event Users/adoptFutureUser {before}
-						 * @param {Users_User} user
-						 * @param {string} during
-						 * @return {Users_User}
-						 */
-						$ret = Q::event('Users/adoptFutureUser', compact('user', 'during'), 'before');
-						if ($ret) {
-							$user = $ret;
-						}
-						$imported = $app_user->import($import);
-						$user->save();
-
-						$ui->state = 'verified';
-						$ui->save();
-						/**
-						 * @event Users/adoptFutureUser {after}
-						 * @param {Users_User} user
-						 * @param {array} links
-						 * @param {string} during
-						 * @return {Users_User}
-						 */
-						Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
-					} else {
-						// If we are here, that simply means that we already verified the
-						// $uid => $userId mapping for some existing user who signed up
-						// and has been using the system. So there is nothing more to do besides
-						// setting this user as the logged-in user below.
-					}
-				} else {
-					// user is logged out and no user corresponding to $uid yet
-
-					$authenticated = 'registered';
-					
-					$imported = $app_user->import($import);
-					if (!empty($imported['email'])) {
-						$ui = Users::identify('email', $imported['email'], 'verified');
-						if ($ui) {
-							// existing user identified from verified email address
-							// load it into $user
-							$user = new Users_User();
-							$user->id = $ui->userId;
-							$user->retrieve(null, null, true)
-							->caching()
-							->resume();
-						}
-					}
-
-					$user->setUid($platform, $uid);
-					/**
-					 * @event Users/insertUser {before}
-					 * @param {Users_User} user
-					 * @param {string} during
-					 * @return {Users_User}
-					 */
-					$ret = Q::event('Users/insertUser', compact('user', 'during'), 'before');
-					if (isset($ret)) {
-						$user = $ret;
-					}
-					if (!$user->wasRetrieved()) {
-						// Register a new user basically and give them an empty username for now
-						$user->username = "";
-						$user->icon = 'default';
-						$user->signedUpWith = $platform;
-						$user->save();
-
-						// Save the identifier in the quick lookup table
-						list($hashed, $ui_type) = self::hashing($uid, $platform);
-						$ui = new Users_Identify();
-						$ui->identifier = "$ui_type:$hashed";
-						$ui->state = 'verified';
-						$ui->userId = $user->id;
-						$ui->save(true);
-
-						// Download and save platform icon for the user
-						$sizes = Q_Config::expect('Users', 'icon', 'sizes');
-						sort($sizes);
-						$icon = $app_user->icon($sizes, '.png');
-						if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
-							self::importIcon($user, $icon);
-							$user->save();
-						}
-					}
-			 	}
-			}
-			Users::$cache['platformUserData'] = null; // in case some other user is saved later
-			Users::$cache['user'] = $user;
-			Users::$cache['authenticated'] = $authenticated;
-			break;
-		default:
-			// not sure how to log this user in
-			return $userWasLoggedIn ? $user : false;
+		 	}
 		}
+		Users::$cache['platformUserData'] = null; // in case some other user is saved later
+		Users::$cache['user'] = $user;
+		Users::$cache['authenticated'] = $authenticated;
+
 		if (!empty($imported['email']) and empty($user->emailAddress)) {
 			$emailAddress = $imported['email'];
 			// We automatically set their email as verified, without a confirmation message,
@@ -508,7 +503,7 @@ abstract class Users extends Base_Users
 		} else {
 			// We have to put the session info in
 			$app_user->userId = $user->id;
-			if ($app_user->retrieve()) {
+			if ($app_user->retrieve('*', true)) {
 				// App user exists in database. Do we need to update it?
 				if (!isset($app_user->access_token)
 				or $app_user->access_token != $accessToken) {
@@ -945,10 +940,11 @@ abstract class Users extends Base_Users
 		$user = false;
 		$inserting = true;
 		if ($platform) {
-			if ($platform != 'facebook') {
-				throw new Q_Exception_WrongType(array(
-					'field' => 'platform', 
-					'type' => '"facebook"'
+			$platforms = Q_Config::get('Users', 'apps', 'platforms', array());
+			if (!in_array($platform, $platforms)) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'platform',
+					'fieldpath' => 'One of the platforms named in Users/apps/platforms config'
 				));
 			}
 			try {
