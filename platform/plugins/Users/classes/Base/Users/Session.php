@@ -28,7 +28,7 @@
  * @param {string} [$fields.version] defaults to ""
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 abstract class Base_Users_Session extends Db_Row
 {
@@ -107,7 +107,7 @@ abstract class Base_Users_Session extends Db_Row
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
-	 * @default "0000-00-00 00:00:00"
+	 * @default null
 	 * PHP timestamp of last time this row was saved
 	 */
 	/**
@@ -937,6 +937,9 @@ return array (
 	 */
 	function beforeSet_updatedTime($value)
 	{
+		if (!isset($value)) {
+			return array('updatedTime', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('updatedTime', $value);
 		}
@@ -968,9 +971,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '0000-00-00 00:00:00',
+  3 => NULL,
 );			
 	}
 

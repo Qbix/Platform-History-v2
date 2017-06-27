@@ -31,7 +31,7 @@ abstract class Base_Users_OAuth extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
-	 * The user id of the logged in user
+	 * The id of the user who granted access
 	 */
 	/**
 	 * @property $client_id

@@ -33,7 +33,7 @@ abstract class Base_Users_Link extends Db_Row
 	 * @property $userId
 	 * @type string
 	 * @default ""
-	 * 
+	 * user who imported the contact link
 	 */
 	/**
 	 * @property $extraInfo

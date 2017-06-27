@@ -40,7 +40,7 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
- * The user id of the logged in user
+ * The id of the user who granted access
  */
 /**
  * @property client_id
