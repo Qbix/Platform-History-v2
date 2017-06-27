@@ -1,6 +1,3 @@
-ALTER TABLE {$prefix}app_session
-ADD COLUMN secret varchar(255) NOT NULL DEFAULT '' COMMENT 'used for signing things together with app secret';
-
 ALTER TABLE {$prefix}user
 DROP COLUMN fb_uid,
 DROP COLUMN tw_uid,
