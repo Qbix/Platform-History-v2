@@ -8,8 +8,7 @@
  */
 
 /**
- * Interface that an adapter must support
- * to implement the Db class.
+ * Interface that an adapter must support to extend the Db class.
  * @class Db_Interface
  * @static
  */

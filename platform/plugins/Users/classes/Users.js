@@ -225,7 +225,7 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
 			if (filter && filter(this) === false) {
 				return;
 			}
-			this.pushNotifications(
+			this.pushNotification(
 				isArrayLike ? notifications[this.fields.userId] : notifications,
 				options
 			);
@@ -387,7 +387,41 @@ Users.Socket = {
 			client.emit(event, data);
 		}
 		return true;
+	},
+	
+	/**
+	 * Get the internal app id and info
+	 * @method appId
+	 * @static
+	 * @param {String} platform The platform or platform for the app
+	 * @param {String} appId Can be either an internal or external app id
+	 * @return {Object} Has keys "appId" and "appInfo"
+	 */
+	appInfo: function (platform, appId)
+	{
+		var apps = Q_Config.get(['Users', 'apps', platform], []);
+		var appInfo, id;
+		if (apps[appId]) {
+			appInfo = apps[appId];
+		} else {
+			id = null;
+			for (var k in apps) {
+				var v = apps[k];
+				if (v.appId === appId) {
+					appInfo = v;
+					id = k;
+					break;
+				}
+			}
+			appId = id;
+		}
+		return {
+			appId: appId,
+			appInfo: appInfo
+		};
 	}
 };
 
 /* * * */
+
+Q.require('Users/AppUser/Facebook');
