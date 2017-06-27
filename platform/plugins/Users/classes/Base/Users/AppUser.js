@@ -24,6 +24,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.platform] defaults to ""
  * @param {string} [$fields.appId] defaults to ""
+ * @param {string} [$fields.platform_uid] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.grant_type] defaults to null
@@ -32,7 +33,6 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.session_secret] defaults to null
  * @param {string|Db_Expression} [$fields.session_expires] defaults to null
  * @param {string} [$fields.state] defaults to "visited"
- * @param {string} [$fields.platform_uid] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -57,6 +57,12 @@ Q.mixin(Base, Row);
  * @type String
  * @default ""
  * An external app id registered with the platform
+ */
+/**
+ * @property platform_uid
+ * @type String
+ * @default ""
+ * The user's id on that platform
  */
 /**
  * @property insertedTime
@@ -105,12 +111,6 @@ Q.mixin(Base, Row);
  * @type String
  * @default "visited"
  * 
- */
-/**
- * @property platform_uid
- * @type String
- * @default ""
- * The user's id on that platform
  */
 
 /**
@@ -310,6 +310,7 @@ Base.prototype.fieldNames = function () {
 		"userId",
 		"platform",
 		"appId",
+		"platform_uid",
 		"insertedTime",
 		"updatedTime",
 		"grant_type",
@@ -317,8 +318,7 @@ Base.prototype.fieldNames = function () {
 		"refresh_token",
 		"session_secret",
 		"session_expires",
-		"state",
-		"platform_uid"
+		"state"
 	];
 };
 
@@ -434,6 +434,44 @@ Base.prototype.maxSize_appId = function () {
 Base.column_appId = function () {
 
 return [["varchar","200","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_platform_uid
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_platform_uid = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".platform_uid");
+		if (typeof value === "string" && value.length > 200)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform_uid");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the platform_uid field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_platform_uid = function () {
+
+		return 200;
+};
+
+	/**
+	 * Returns schema information for platform_uid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_platform_uid = function () {
+
+return [["varchar","200","",false],false,"",null];
 };
 
 /**
@@ -678,44 +716,6 @@ Base.prototype.beforeSet_state = function (value) {
 Base.column_state = function () {
 
 return [["enum","'visited','added','removed'","",false],false,"","visited"];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_platform_uid
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_platform_uid = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".platform_uid");
-		if (typeof value === "string" && value.length > 200)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform_uid");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the platform_uid field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_platform_uid = function () {
-
-		return 200;
-};
-
-	/**
-	 * Returns schema information for platform_uid column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_platform_uid = function () {
-
-return [["varchar","200","",false],false,"",null];
 };
 
 /**

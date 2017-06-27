@@ -42,7 +42,7 @@ Q.mixin(Base, Row);
  * @property userId
  * @type String|Buffer
  * @default ""
- * 
+ * user who imported the contact link
  */
 /**
  * @property extraInfo

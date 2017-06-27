@@ -83,7 +83,7 @@ Q.mixin(Base, Row);
  * @property deliver
  * @type String
  * @default ""
- * {"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}
+ * JSON object with possible keys "email", "mobile", "device", "platforms", "to", "filter", and "mode"
  */
 /**
  * @property relevance

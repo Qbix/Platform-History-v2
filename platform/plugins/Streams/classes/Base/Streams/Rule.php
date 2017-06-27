@@ -74,7 +74,7 @@ abstract class Base_Streams_Rule extends Db_Row
 	 * @property $deliver
 	 * @type string
 	 * @default ""
-	 * {"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}
+	 * JSON object with possible keys "email", "mobile", "device", "platforms", "to", "filter", and "mode"
 	 */
 	/**
 	 * @property $relevance

@@ -33,7 +33,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.version] defaults to ""
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -116,7 +116,7 @@ Q.mixin(Base, Row);
 /**
  * @property updatedTime
  * @type String|Db.Expression
- * @default "0000-00-00 00:00:00"
+ * @default null
  * PHP timestamp of last time this row was saved
  */
 
@@ -754,6 +754,7 @@ return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_T
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
 Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
@@ -769,7 +770,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","'mobile','tablet','desktop'","",false],true,"",null];
 };
 
 /**
