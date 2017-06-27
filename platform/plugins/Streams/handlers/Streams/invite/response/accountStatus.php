@@ -14,7 +14,7 @@ function Streams_invite_response_accountStatus() {
 	if (!$user->retrieve()) {
 		throw new Users_Exception_NoSuchUser();
 	}
-	if ($user->passphraseHash or $user->getUids()) {
+	if ($user->passphraseHash or $user->getAllUids()) {
 		return "complete";
 	}
 }
