@@ -232,9 +232,7 @@ class Db_Row implements Iterator
 		$mySetUp = & $this->getSetUp();
 		
 		// Store whether this Db_Row was retrieved or not
-		if (!isset($this->retrieved)) {
-			$this->retrieved = ! empty($result);
-		}
+		$this->retrieved = ! empty($result);
 		
 		// Set the default DB name, if needed and there
 		if (empty($mySetUp['db'])) {
