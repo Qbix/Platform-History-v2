@@ -315,6 +315,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (typeof destinations === 'string') {
 				destinations = [destinations];
 			}
+			var platforms = Q.Config.get('Users', 'apps', 'platforms', []);
 			var p2 = new Q.Pipe();
 			var waitFor = [];
 			Q.each(destinations, function (i, d) {
@@ -333,8 +334,12 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 					waitFor.push('mobile');
 				}
 				if (d === 'devices') {
-					_device(null, p2.fill('devices'));
-					waitFor.push('devices');
+					_device(null, p2.fill(d));
+					waitFor.push(d);
+				}
+				if (platforms.indexOf(d) >= 0) {
+					_platform(p2.fill(d));
+					waitFor.push(d);
 				}
 			});
 			p2.add(waitFor, function (params) {
@@ -396,9 +401,12 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
 			}
-			Users.pushNotifications(toUserId, 
-				{ alert: { title: o.subject } },
-				{ payload: message.getAllInstructions() },
+			Users.pushNotifications(
+				toUserId, 
+				{
+					alert: { title: o.subject },
+					payload: message.getAllInstructions()
+				},
 				callback, 
 				{ view: viewPath, fields: o.fields },
 				function (device) {
@@ -407,6 +415,28 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				}
 			});
 			result.push({'devices': deviceId || true});
+		}
+		function _platform(platform, callback) {
+			var appId = Users.appInfo(platform).appId;
+			Users.AppUser.SELECT('*').WHERE({
+				userId: toUserId,
+				platform: platform,
+				appId: appId
+			}).execute(function (err, appusers) {
+				if (err) {
+					return callback(err);
+				}
+				var appuser = appusers[0];
+				var notification = {
+					alert: o.subject,
+					href: o.url,
+					ref: this.fields.type
+				};
+				if (appuser) {
+					appuser.pushNotification(notification);
+				}
+				Q.handle(callback, Users, [null, appuser, notification]);
+			});
 		}
 	});
 };

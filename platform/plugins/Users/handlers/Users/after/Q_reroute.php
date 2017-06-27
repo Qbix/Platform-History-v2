@@ -12,9 +12,10 @@ function Users_after_Q_reroute($params, &$stop_dispatch)
 	$user = Users::loggedInUser();
 	if ($requireLogin[$ma] === true and !$user) {
 		// require login
-	} else if (isset($requireLogin[$ma])
-	and !Users::platform($requireLogin)->loggedInUid()) {
-		// require login
+	} else if (isset($requireLogin[$ma])) {
+		if ($appUser = Users_AppUser::authenticate($requireLogin)) {
+			return; // We don't have to require login here
+		}
 	} else {
 		return; // We don't have to require login here
 	}

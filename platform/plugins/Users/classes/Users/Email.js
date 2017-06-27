@@ -66,12 +66,12 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 
 	var from = options.from || Q.Config.get(['Users', 'email', 'from'], null);
 	if (!from) {
-		var app = Q.Config.get(['Q', 'app'], null);
+		var app = Q.Config.expect(['Q', 'app']);
 		var appUrl = Q.Config.get(["Q", "web", "appRootUrl"], null);
 		if (!app || !appUrl) return false;
 		from = [app+'@'+appUrl.parseUrl('host'), app];
 	}
-	if (typeof from === "string") from = [from, Q.Config.get(['Q', 'app'], ' Qbix ')];
+	if (typeof from === "string") from = [from, Q.Config.expect(['Q', 'app'])];
 
 	var mailOptions = {
 		from: from[1]+' <'+from[0]+'>',
