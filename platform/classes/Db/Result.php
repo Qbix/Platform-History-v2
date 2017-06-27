@@ -167,7 +167,7 @@ class Db_Result
 			$method = array($class_name, 'newRow');
 			if (is_callable($method)) {
 				$row = call_user_func($method, $arr, $fields_prefix);
-				$row->retrieved = true;
+				$row->wasRetrieved(true);
 			} else {
 				$row = new $class_name(array(), false);
 				$row->copyFrom($arr, $fields_prefix, false, false);
@@ -225,7 +225,7 @@ class Db_Result
 		$method = array($class_name, 'newRow');
 		if (is_callable($method)) {
 			$row = call_user_func($method, $arr, $fields_prefix);
-			$row->retrieved = true;
+			$row->wasRetrieved(true);
 		} else {
 			$row = new $class_name(array(), false);
 			$row->copyFrom($arr, $fields_prefix, false, false);
