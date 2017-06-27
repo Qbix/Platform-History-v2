@@ -5,7 +5,7 @@
  */
 
 $FROM_APP = defined('RUNNING_FROM_APP'); //Are we running from app or framework?
-include dirname(__FILE__).DS.'..'.DS.'Q.inc.php';
+include dirname(__FILE__).DS.'Q.inc.php';
 
 #Arguments
 $argv = $_SERVER['argv'];
@@ -46,7 +46,7 @@ foreach ($pluginNames as $src) {
 	$pluginsDir = $dir.DS.'plugins';
 	$dest = realpath($pluginsDir.DS.$pluginName);
 	if (!$dest or !file_exists($dest)) {
-		mkdir($dir.DS.$pluginsDir);
+		mkdir($pluginsDir);
 	}
 	$dest = $pluginsDir.DS.$pluginName;
 	if (!is_dir($dest)) {
