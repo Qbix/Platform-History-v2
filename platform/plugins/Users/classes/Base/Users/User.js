@@ -29,9 +29,9 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
+ * @param {string} [$fields.uids] defaults to "{}"
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
- * @param {string} [$fields.uids] defaults to "{}"
  * @param {string} [$fields.signedUpWith] defaults to ""
  * @param {string} [$fields.username] defaults to ""
  * @param {string} [$fields.icon] defaults to ""
@@ -93,6 +93,12 @@ Q.mixin(Base, Row);
  * 
  */
 /**
+ * @property uids
+ * @type String
+ * @default "{}"
+ * user ids on external platforms
+ */
+/**
  * @property emailAddressPending
  * @type String|Buffer
  * @default ""
@@ -103,12 +109,6 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * 
- */
-/**
- * @property uids
- * @type String
- * @default "{}"
- * user ids on external platforms
  */
 /**
  * @property signedUpWith
@@ -341,9 +341,9 @@ Base.prototype.fieldNames = function () {
 		"passphraseHash",
 		"emailAddress",
 		"mobileNumber",
+		"uids",
 		"emailAddressPending",
 		"mobileNumberPending",
-		"uids",
 		"signedUpWith",
 		"username",
 		"icon",
@@ -623,6 +623,44 @@ return [["varbinary","255","",false],true,"",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
+ * @method beforeSet_uids
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_uids = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".uids");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".uids");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the uids field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_uids = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for uids column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_uids = function () {
+
+return [["varchar","1023","",false],false,"","{}"];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_emailAddressPending
  * @param {string} value
  * @return {string} The value
@@ -694,44 +732,6 @@ Base.prototype.maxSize_mobileNumberPending = function () {
 Base.column_mobileNumberPending = function () {
 
 return [["varbinary","255","",false],false,"",""];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_uids
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_uids = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".uids");
-		if (typeof value === "string" && value.length > 1023)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".uids");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the uids field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_uids = function () {
-
-		return 1023;
-};
-
-	/**
-	 * Returns schema information for uids column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_uids = function () {
-
-return [["varchar","1023","",false],false,"","{}"];
 };
 
 /**
