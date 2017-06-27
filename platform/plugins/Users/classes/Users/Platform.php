@@ -23,14 +23,6 @@ interface Users_Platform_Interface
 	 * @return {Users_Platform_Facebook|null} Facebook object
 	 */
 	function __construct($appId = null, $setCookie = true, $longLived = true);
-	
-	/**
-	 * If a user is logged into the platform, and the platform sent us
-	 * some sort of signed request (which we may have saved in a cookie)
-	 * this function returns the user's uid on that platform.
-	 * @return {string} The platform uid of user logged into the platform, if any
-	 */
-	function loggedInUid();
 		
 	/**
 	 * Gets the logged-in user icon urls
@@ -39,7 +31,7 @@ interface Users_Platform_Interface
 	 * @return {array|null} Keys are the size strings with optional $suffix
 	 *  and values are the urls
 	 */
-	function loggedInUserIcon($sizes = null, $suffix = '');
+	function icon($sizes = null, $suffix = '');
 
 	/**
 	 * Get info about access token

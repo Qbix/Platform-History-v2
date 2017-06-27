@@ -31,11 +31,10 @@ function Users_register_post()
 	if (empty($username)) {
 		throw new Q_Exception("Please enter a username", 'username');
 	}
-	
 	$user = Users::register(
 		$username, 
 		Users::requestedIdentifier(), 
-		$icon,
+		true,
 		compact('activation')
 	);
 	Users::setLoggedInUser($user);

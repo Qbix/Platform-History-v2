@@ -188,7 +188,7 @@ CREATE TABLE `{$prefix}rule` (
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `readyTime` timestamp NULL DEFAULT NULL COMMENT 'time from which user is ready to receive notifications again',
   `filter` varchar(255) NOT NULL DEFAULT '' COMMENT '{"types": [ array of message types ], "labels": [ ]}',
-  `deliver` varchar(255) NOT NULL COMMENT '{"email": "a@b", "mode": "digest"} or {"mobile": "1823289412"}',
+  `deliver` varchar(255) NOT NULL COMMENT 'JSON object with possible keys "email", "mobile", "device", "platforms", "to", "filter", and "mode"',
   `relevance` decimal(10,4) NOT NULL DEFAULT 1 COMMENT 'used to prioritize messages for display and processing',
   PRIMARY KEY (`ofUserId`,`publisherId`,`streamName`,`ordinal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='rules applied on the user''s side for notifications coming in';

@@ -3904,7 +3904,12 @@ abstract class Streams extends Base_Streams
 	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
-	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
+	 * @param {array|string|true} [$icon=true] By default, the user icon is "default".
+	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
+	 *  download the various sizes from gravatar. Finally, you can pass true to
+	 *  generate an icon instead of using the default icon.
+	 *  If $identifier['app']['platform'] is specified, and $icon==true, then
+	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}

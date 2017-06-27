@@ -121,16 +121,16 @@ abstract class Users extends Base_Users
 		$customOptions = Q_Config::get('Users', 'apps', $platform, $appId, 'options', null);
 
 		#If the user already has a token in our DB:
-		$appuser = new Users_AppUser();
-		$appuser->userId = $nativeuser->id;
-		$appuser->platform = $platform;
-		$appuser->appId = $appId;
+		$app_user = new Users_AppUser();
+		$app_user->userId = $nativeuser->id;
+		$app_user->platform = $platform;
+		$app_user->appId = $appId;
 
-		if($appuser->retrieve('*', true))
+		if($app_user->retrieve('*', true))
 		{
 				$zt = new Zend_Oauth_Token_Access();
-				$zt->setToken($appuser->access_token);
-				$zt->setTokenSecret($appuser->session_secret);
+				$zt->setToken($app_user->access_token);
+				$zt->setTokenSecret($app_user->session_secret);
 
 				return $zt->getHttpClient($oauthOptions);
 		}
@@ -146,9 +146,9 @@ abstract class Users extends Base_Users
 			$_SESSION[$platform.'_request_token'] = null;
 
 			#Save tokens to database
-			$appuser->access_token = $token->getToken();
-			$appuser->session_secret = $token->getTokenSecret();
-			$appuser->save();
+			$app_user->access_token = $token->getToken();
+			$app_user->session_secret = $token->getTokenSecret();
+			$app_user->save();
 
 			return $token->getHttpClient($oauthOptions);
 		}
@@ -184,11 +184,11 @@ abstract class Users extends Base_Users
 			$appId = Q_Config::expect('Users', 'apps', $platform, $app, 'appId');
 		}
 
-		$appuser = new Users_AppUser();
-		$appuser->userId = $nativeuser->id;
-		$appuser->platform = $platform;
-		$appuser->appId = $appId;
-		$appuser->remove();
+		$app_user = new Users_AppUser();
+		$app_user->userId = $nativeuser->id;
+		$app_user->platform = $platform;
+		$app_user->appId = $appId;
+		$app_user->remove();
 	}
 
 	/**
@@ -223,10 +223,10 @@ abstract class Users extends Base_Users
 		$import = null)
 	{
 		if (!isset($appId)) {
-			$appId = Q_Config::expect('Users', 'apps', $platform, Q::app(), 'appId');
-		} else {
-			list($appId, $appInfo) = Users::appInfo($platform, $appId);
+			$appId = Q::app();
 		}
+		list($appId, $appInfo) = Users::appInfo($platform, $appId);
+		$appId = $appInfo['appId'];
 		$authenticated = null;
 
 		$during = 'authenticate';
@@ -274,16 +274,14 @@ abstract class Users extends Base_Users
 		$emailAddress = null;
 
 		// Try authenticating the user with the specified platform
-		$p = Users::platform($platform, $appId);
-		$uid = $p->loggedInUid();
+		$app_user = Users_AppUser::authenticate($platform, $appId);
+		if (!$app_user) {
+			// no facebook authentication is happening
+			return $userWasLoggedIn ? $user : false;
+		}
+		$uid = $app_user->platform_uid;
 		switch ($platform) {
 		case 'facebook':
-			$facebook = $p->facebook;
-			if (!$facebook or !$uid) {
-				// no facebook authentication is happening
-				return $userWasLoggedIn ? $user : false;
-			}
-
 			$authenticated = true;
 			if ($retrieved) {
 				$user_uid = $user->getUid($platform);
@@ -305,7 +303,7 @@ abstract class Users extends Base_Users
 
 					// Now, let's associate their account with this platform uid.
 					if (!$user->displayName()) {
-						$imported = $p->import($import);
+						$imported = $app_user->import($import);
 					}
 					$user->setUid($platform, $uid);
 					$user->save();
@@ -354,7 +352,7 @@ abstract class Users extends Base_Users
 						if ($ret) {
 							$user = $ret;
 						}
-						$imported = $p->import($import);
+						$imported = $app_user->import($import);
 						$user->save();
 
 						$ui->state = 'verified';
@@ -378,7 +376,7 @@ abstract class Users extends Base_Users
 
 					$authenticated = 'registered';
 					
-					$imported = $p->import($import);
+					$imported = $app_user->import($import);
 					if (!empty($imported['email'])) {
 						$ui = Users::identify('email', $imported['email'], 'verified');
 						if ($ui) {
@@ -421,7 +419,7 @@ abstract class Users extends Base_Users
 						// Download and save platform icon for the user
 						$sizes = Q_Config::expect('Users', 'icon', 'sizes');
 						sort($sizes);
-						$icon = Users::platform($platform)->loggedInUserIcon($sizes, '.png');
+						$icon = $app_user->icon($sizes, '.png');
 						if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 							self::importIcon($user, $icon);
 							$user->save();
@@ -457,46 +455,69 @@ abstract class Users extends Base_Users
 			/**
 			 * @event Users/updateUser {after}
 			 * @param {Users_User} user
+			 * @param {Users_AppUser} 'app_user'
 			 * @param {string} during
 			 */
-			Q::event('Users/updateUser', compact('user', 'during'), 'after');
+			Q::event('Users/updateUser', compact('user', 'app_user', 'during'), 'after');
 		} else {
 			/**
 			 * @event Users/insertUser {after}
-			 * @param {string} during
 			 * @param {Users_User} 'user'
+			 * @param {Users_AppUser} 'app_user'
+			 * @param {string} during
 			 */
-			Q::event('Users/insertUser', compact('user', 'during'), 'after');
+			Q::event('Users/insertUser', compact('user', 'app_user', 'during'), 'after');
 		}
 
 		// Now make sure our master session contains the
 		// session info for the platform app.
-		if ($p) {
-			list($accessToken, $sessionExpires) = $p->accessInfo();
-			if (isset($_SESSION['Users']['appUsers'][$platform.'_'.$appId])) {
-				// Platform app user exists. Do we need to update it? (Probably not!)
-				$pk = $_SESSION['Users']['appUsers'][$platform.'_'.$appId];
-				$app_user = Users_AppUser::select('*')->where($pk)->fetchDbRow();
-				if (empty($app_user)) {
-					// somehow this app_user disappeared from the database
-					throw new Q_Exception_MissingRow(array(
-						'table' => 'AppUser',
-						'criteria' => http_build_query($pk, null, ' & ')
-					));
-				}
-				if (empty($app_user->state) or $app_user->state !== 'added') {
-					$app_user->state = 'added';
-				}
+		$accessToken = $app_user->access_token;
+		$sessionExpires = $app_user->session_expires;
+		$key = $platform.'_'.$appId;
+		if (isset($_SESSION['Users']['appUsers'][$key])) {
+			// Platform app user exists. Do we need to update it? (Probably not!)
+			$pk = $_SESSION['Users']['appUsers'][$key];
+			$au = Users_AppUser::select('*')->where($pk)->fetchDbRow();
+			if (empty($au)) {
+				// somehow this app_user disappeared from the database
+				throw new Q_Exception_MissingRow(array(
+					'table' => 'AppUser',
+					'criteria' => http_build_query($pk, null, ' & ')
+				));
+			}
+			if (empty($au->state) or $au->state !== 'added') {
+				$au->state = 'added';
+			}
 
+			if (!isset($au->access_token)
+			or ($au->access_token != $app_user->access_token)) {
+				/**
+				 * @event Users/authenticate/updateAppUser {before}
+				 * @param {Users_User} user
+				 */
+				Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
+				$au->access_token = $accessToken;
+				$au->session_expires = $sessionExpires;
+				$au->save(); // update access_token in app_user
+				/**
+				 * @event Users/authenticate/updateAppUser {after}
+				 * @param {Users_User} user
+				 */
+				Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
+			}
+		} else {
+			// We have to put the session info in
+			$app_user->userId = $user->id;
+			if ($app_user->retrieve()) {
+				// App user exists in database. Do we need to update it?
 				if (!isset($app_user->access_token)
-				or ($accessToken and $accessToken != $app_user->access_token)) {
+				or $app_user->access_token != $accessToken) {
 					/**
 					 * @event Users/authenticate/updateAppUser {before}
 					 * @param {Users_User} user
 					 */
 					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
 					$app_user->access_token = $accessToken;
-					$app_user->session_expires = $sessionExpires;
 					$app_user->save(); // update access_token in app_user
 					/**
 					 * @event Users/authenticate/updateAppUser {after}
@@ -505,58 +526,31 @@ abstract class Users extends Base_Users
 					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
 				}
 			} else {
-				// We have to put the session info in
-				$app_user = new Users_AppUser();
-				$app_user->userId = $user->id;
-				$app_user->platform = $platform;
-				$app_user->appId = $appId;
-				if ($app_user->retrieve()) {
-					// App user exists in database. Do we need to update it?
-					if (!isset($app_user->access_token)
-					or $app_user->access_token != $accessToken) {
-						/**
-						 * @event Users/authenticate/updateAppUser {before}
-						 * @param {Users_User} user
-						 */
-						Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-						$app_user->access_token = $accessToken;
-						$app_user->save(); // update access_token in app_user
-						/**
-						 * @event Users/authenticate/updateAppUser {after}
-						 * @param {Users_User} user
-						 */
-						Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
-					}
-				} else {
-					if (empty($app_user->state) or $app_user->state !== 'added') {
-						$app_user->state = 'added';
-					}
-					$app_user->access_token = $accessToken;
-					$app_user->session_expires = $sessionExpires;
-					$app_user->platform_uid = $user->getUid($platform);
-					/**
-					 * @event Users/insertAppUser {before}
-					 * @param {Users_User} user
-					 * @param {string} 'during'
-					 */
-					Q::event('Users/insertAppUser', compact('user', 'during'), 'before');
-					// The following may update an existing app_user row
-					// in the rare event that someone tries to tie the same
-					// platform account to two different accounts.
-					// A platform account can only reference one account, so the
-					// old connection will be dropped, and the new connection saved.
-					$app_user->save(true);
-					/**
-					 * @event Users/authenticate/insertAppUser {after}
-					 * @param {Users_User} user
-					 */
-					Q::event('Users/authenticate/insertAppUser', compact('user'), 'after');
-					$authenticated = 'authorized';
+				if (empty($app_user->state) or $app_user->state !== 'added') {
+					$app_user->state = 'added';
 				}
+				/**
+				 * @event Users/insertAppUser {before}
+				 * @param {Users_User} user
+				 * @param {string} 'during'
+				 */
+				Q::event('Users/insertAppUser', compact('user', 'during'), 'before');
+				// The following may update an existing app_user row
+				// in the rare event that someone tries to tie the same
+				// platform account to two different accounts.
+				// A platform app user can only be tied to one native user, so the
+				// old connection will be dropped, and the new connection saved.
+				$app_user->save(true);
+				/**
+				 * @event Users/authenticate/insertAppUser {after}
+				 * @param {Users_User} user
+				 */
+				Q::event('Users/authenticate/insertAppUser', compact('user'), 'after');
+				$authenticated = 'authorized';
 			}
-
-			$_SESSION['Users']['appUsers'][$platform.'_'.$appId] = $app_user->getPkValue();
 		}
+
+		$_SESSION['Users']['appUsers'][$key] = $app_user->getPkValue();
 
 		Users::$cache['authenticated'] = $authenticated;
 
@@ -864,7 +858,12 @@ abstract class Users extends Base_Users
 	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
-	 * @param {array|string|true} [$icon=true] Array of filename => url pairs, or true to generate an icon
+	 * @param {array|string|true} [$icon=true] By default, the user icon is "default".
+	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
+	 *  download the various sizes from gravatar. Finally, you can pass true to
+	 *  generate an icon instead of using the default icon.
+	 *  If $identifier['app']['platform'] is specified, and $icon==true, then
+	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
@@ -944,6 +943,7 @@ abstract class Users extends Base_Users
 		}
 
 		$user = false;
+		$inserting = true;
 		if ($platform) {
 			if ($platform != 'facebook') {
 				throw new Q_Exception_WrongType(array(
@@ -951,37 +951,33 @@ abstract class Users extends Base_Users
 					'type' => '"facebook"'
 				));
 			}
-			if ($p = Users::platform($platform, $appId)) {
-				$uid = $p->loggedInUid();
-				try {
-					// authenticate (and possibly adopt) an existing platform user
-					// or insert a new user during this authentication
-					$user = Users::authenticate($platform, $appId, $authenticated, null);
-				} catch (Exception $e) {
+			try {
+				// authenticate (and possibly adopt) an existing platform user
+				// or insert a new user during this authentication
+				$user = Users::authenticate($platform, $appId, $authenticated, null);
+			} catch (Exception $e) {
 
-				}
-				if ($user) {
-					// the user is also logged in
-					$adopted = true;
-
-					// Adopt this platform user
-					/**
-					 * @event Users/adoptFutureUser {before}
-					 * @param {Users_User} user
-					 * @param {string} during
-					 * @return {Users_User}
-					 */
-					$ret = Q::event('Users/adoptFutureUser', compact('user', 'during'), 'before');
-					if ($ret) {
-						$user = $ret;
-					}
+			}
+			if ($user) {
+				$inserting = false;
+			}
+			if ($user and $authenticated === 'adopted') {
+				/**
+				 * @event Users/adoptFutureUser {before}
+				 * @param {Users_User} user
+				 * @param {string} during
+				 * @return {Users_User}
+				 */
+				$ret = Q::event('Users/adoptFutureUser', compact('user', 'during'), 'before');
+				if ($ret) {
+					$user = $ret;
 				}
 			}
 		}
 		if (!$user) {
 			$user = new Users_User(); // the user we will save in the database
 		}
-		if (empty($adopted) and $ui_identifier) {
+		if ($inserting and $ui_identifier) {
 			// We will be inserting a new user into the database, so check if
 			// this identifier was already verified for someone else.
 			$ui = Users::identify($signedUpWith, $ui_identifier);
@@ -1053,9 +1049,9 @@ abstract class Users extends Base_Users
 
 		$sizes = Q_Config::expect('Users', 'icon', 'sizes');
 		sort($sizes);
-		if (empty($icon)) {
-			if ($platform) {
-				$icon = Users::platform($platform)->loggedInUserIcon($sizes, '.png');
+		if (!isset($icon)) {
+			if ($app_user = Users_AppUser::authenticate($platform, $appId)) {
+				$icon = $app_user->icon($sizes, '.png');
 			}
 		} else {
 			// Import the user's icon and save it
@@ -1066,7 +1062,7 @@ abstract class Users extends Base_Users
 				foreach ($sizes as $size) {
 					$icon["$size.png"] = "$iconString&s=$size";
 				}
-			} else {
+			} else if ($icon === true) {
 				// locally generated icons
 				$hash = md5(strtolower(trim($identifier)));
 				$icon = array();
@@ -1471,38 +1467,6 @@ abstract class Users extends Base_Users
 			$appId = $id;
 		}
 		return array($appId, $appInfo);
-	}
-	
-	/**
-	 * Obtain an instance of the class named Users_Platform_Foo
-	 * where Foo = ucfirst(strtolower($platform)).
-	 * @param {string} $platform
-	 * @param {string} [$appId=Q::app()] optionally indicate the appId on the platform
-	 * @return {Users_Platform_Interface|null}
-	 *   May return null if no such appId matches.
-	 * @throws Q_Exception_MissingClass
-	 */
-	static function platform($platform, $appId)
-	{
-		static $result = array();
-		if (!isset($appId)) {
-			$appId = Q::app();
-		}
-		if (!isset($appId)) {
-			$appId = Q::app();
-		}
-		list($appId, $appInfo) = Users::appInfo($platform, $appId);
-		if (!$appId) {
-			return null;
-		}
-		if (isset($result[$platform][$appId])) {
-			return $result[$platform][$appId];
-		}
-		$className = "Users_Platform_".ucfirst(strtolower($platform));
-		if (!class_exists($className, true)) {
-			throw new Q_Exception_MissingClass(compact('className'));
-		}
-		return $result[$platform][$appId] = new $className($appId);
 	}
 
 	/**

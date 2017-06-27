@@ -89,7 +89,7 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 };
 
 /**
- * Schedules a push notification.
+ * Sends a push notification.
  * This default implementation, just throws an error.
  * @method handlePushNotification
  */

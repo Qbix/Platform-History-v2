@@ -37,7 +37,7 @@ Q.mixin(Streams_Subscription, Q.require('Base/Streams/Subscription'));
  * @param {String} userId
  * @param {String} publisherId
  * @param {Q.Streams.Stream} stream
- * @param {Function} callback Callback have error and array of delivery methods as arguments
+ * @param {Function} callback First argument is any possible error, second is array of delivery methods
  */
 Streams_Subscription.test = function _Subscription_test(userId, stream, msgType, callback) {
 	if (!callback) return;
