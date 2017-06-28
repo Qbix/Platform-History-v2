@@ -399,7 +399,7 @@ function _deg2rad(angle) {
 Q.beforeInit.set(function () {
 	var plk = Places.loadGoogleMaps.key;
 	Places.loadGoogleMaps.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp'
-		+ '&libraries=places'
+		+ '&libraries=geometry,places'
 		+ (plk ? '&key='+encodeURIComponent(plk) : '')
 		+ '&callback=Q.Places.loadGoogleMaps.loaded';
 }, 'Places');
