@@ -96,7 +96,7 @@ Q.mixin(Base, Row);
  * @property uids
  * @type String
  * @default "{}"
- * user ids on external platforms
+ * JSON of {platformName: [uid1, ...]}
  */
 /**
  * @property emailAddressPending

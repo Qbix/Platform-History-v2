@@ -1,4 +1,6 @@
 ALTER TABLE {$prefix}app_user
 CHANGE provider platform varchar(31) NOT NULL COMMENT 'A platform like facebook or github',
 CHANGE provider_uid platform_uid varchar(200) NOT NULL COMMENT "The user's id on that platform",
-MODIFY appId varchar(200) NOT NULL COMMENT 'An external app id registered with the platform';
+MODIFY appId varchar(200) NOT NULL COMMENT 'An external app id registered with the platform',
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (userId,platform,appId,platform_uid);

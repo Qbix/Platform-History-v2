@@ -3,5 +3,5 @@ DROP COLUMN fb_uid,
 DROP COLUMN tw_uid,
 DROP COLUMN g_uid,
 DROP COLUMN y_uid,
-ADD COLUMN uids varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'user ids on external platforms'
+ADD COLUMN uids varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'JSON of {platformName: [uid1, ...]}'
 AFTER mobileNumber;

@@ -19,11 +19,12 @@ function Users_importContacts_platforms_yahoo($params) {
 	#Do we have the GUID saved?
 	if ($cu = Users::loggedInUser()) {
 		$appId = Q::ifset($params, 'appId', Q::app());
+		list($appId, $appInfo) = Users::appInfo('yahoo', $appId);
 		$au = new Users_AppUser();
 		$au->userId = $cu->id;
 		$au->platform = 'yahoo';
 		$au->appId = Q_Config::expect('Users', 'apps', $platform, $appId, 'appId');
-		$au->retrieve('*', true);
+		$au->retrieve();
 	}
 
 	if(!empty($au->platform_uid)) #We have user's Yahoo GUID saved

@@ -126,7 +126,7 @@ abstract class Users extends Base_Users
 		$app_user->platform = $platform;
 		$app_user->appId = $appId;
 
-		if($app_user->retrieve('*', true))
+		if($app_user->retrieve())
 		{
 				$zt = new Zend_Oauth_Token_Access();
 				$zt->setToken($app_user->access_token);
@@ -181,6 +181,7 @@ abstract class Users extends Base_Users
 		
 		if (!isset($appId)) {
 			$app = Q::app();
+			list($appId, $appInfo) = Users::appInfo($platform, $appId);
 			$appId = Q_Config::expect('Users', 'apps', $platform, $app, 'appId');
 		}
 
@@ -188,6 +189,7 @@ abstract class Users extends Base_Users
 		$app_user->userId = $nativeuser->id;
 		$app_user->platform = $platform;
 		$app_user->appId = $appId;
+		$app_user->retrieve();
 		$app_user->remove();
 	}
 
