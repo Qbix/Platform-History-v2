@@ -296,7 +296,8 @@ Base.prototype.primaryKey = function () {
 	return [
 		"userId",
 		"platform",
-		"appId"
+		"appId",
+		"platform_uid"
 	];
 };
 
@@ -471,7 +472,7 @@ Base.prototype.maxSize_platform_uid = function () {
 	 */
 Base.column_platform_uid = function () {
 
-return [["varchar","200","",false],false,"",null];
+return [["varchar","200","",false],false,"PRI",null];
 };
 
 /**
@@ -727,7 +728,7 @@ return [["enum","'visited','added','removed'","",false],false,"","visited"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['platform','appId'], i;
+	var fields = ['platform','appId','platform_uid'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
