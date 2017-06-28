@@ -360,6 +360,10 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 						// no devices were reached
 						continue;
 					}
+					if (platforms.indexOf(d) >= 0 && !params[k][1]) {
+						// no platform apps were reached
+						continue;
+					}
 					success = true;
 				}
 				if (success) {
