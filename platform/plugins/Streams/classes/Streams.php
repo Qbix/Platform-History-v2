@@ -2743,6 +2743,12 @@ abstract class Streams extends Base_Streams
 			$rows = array();
 			foreach ($streamNamesMissing as $sn) {
 				$stream = $streams2[$sn];
+				$extra = isset($options['extra'])
+					? $options['extra']
+					: '';
+				if (is_array($extra)) {
+					$extra = Q::json_encode($extra);
+				}
 				$results[$sn] = $rows[$sn] = new Streams_Participant(array(
 					'publisherId' => $publisherId,
 					'streamName' => $sn,
@@ -2751,7 +2757,7 @@ abstract class Streams extends Base_Streams
 					'state' => 'participating',
 					'subscribed' => !empty($options['subscribed']) ? 'yes' : 'no',
 					'posted' => !empty($options['posted']) ? 'yes' : 'no',
-					'extra' => !empty($options['extra']) ? $options['extra'] : ''
+					'extra' => $extra
 				));
 			}
 			Streams_Participant::insertManyAndExecute($rows);

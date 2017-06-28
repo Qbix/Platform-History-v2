@@ -117,6 +117,7 @@ abstract class Base_Users_AppUser extends Db_Row
 			  0 => 'userId',
 			  1 => 'platform',
 			  2 => 'appId',
+			  3 => 'platform_uid',
 			)
 		);
 	}
@@ -507,7 +508,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -921,7 +922,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('platform','appId') as $name) {
+			foreach (array('platform','appId','platform_uid') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

@@ -87,7 +87,7 @@ abstract class Base_Users_User extends Db_Row
 	 * @property $uids
 	 * @type string
 	 * @default "{}"
-	 * user ids on external platforms
+	 * JSON of {platformName: [uid1, ...]}
 	 */
 	/**
 	 * @property $emailAddressPending
