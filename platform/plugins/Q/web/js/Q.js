@@ -5362,7 +5362,7 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
 	var checks = ["ready"];
-	if (_isCordova && root.cordova && Q.typeOf(cordova).substr(0, 4) !== 'HTML') {
+	if (_isCordova) {
 		checks.push("device");
 	}
 	var p = Q.pipe(checks, 1, function _Q_init_pipe_callback() {
