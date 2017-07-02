@@ -12,7 +12,43 @@
  * @extends Base_Assets_Earned
  */
 class Assets_Earned extends Base_Assets_Earned
-{
+{	
+	/**
+	 * Saves a row in the database indicating that the user earned a badge
+	 * @method badge
+	 * @static
+	 * @param {string} $userId The user who earned the badge
+	 * @param {string} $badgeName The name of the badge
+	 * @param {array} [$options=array()]
+	 * @param {integer} [$options.earnedTime=time()] Timestamp when it was earned
+	 * @param {boolean} [$options.duplicate=true] Whether to save it if it was already earned
+	 * @param {string} [$options.communityId=Users::communityId()]
+	 * @param {string} [$options.appId=Q::app()]
+	 * @return {Awards_Earned}
+	 */
+	static function badge($userId, $badgeName, $options = array())
+	{
+		$earnedTime = Q::ifset($options, 'earnedTime', time());
+		$duplicate = Q::ifset($options, 'duplicate', true);
+		$communityId = Q::ifset($options, 'communityId', Users::communityId());
+		$appId = Q::ifset($options, 'appId', Q::app());
+		$options['userId'] = $userId;
+		$options['badgeName'] = $badgeName;
+		if (!$duplicate) {
+			$bt = Assets_Badge::badgesAndTotals(null, null, $options);
+			if ($existing = Q::ifset($bt, $userId, 'badges', array())) {
+				return;
+			}
+		}
+		if (!issset($earnedTime)) {
+			$earnedTime = time();
+		}
+		$earnedBadge = (new Assets_Earned(compact(
+			'appId', 'communityId', 'userId', 'earnedTime',
+			'badgeName', 'publisherId', 'streamName'
+		)))->save();
+	}
+	
 	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
