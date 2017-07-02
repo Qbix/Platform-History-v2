@@ -10,9 +10,6 @@ function Users_before_Q_responseExtras()
 		$rl_array[Q_Uri::url($rl)] = $value;
 	}
 	if (!Q_Request::isAjax()) {
-		if ($senderId = Q_Config::get('Users', 'apps', 'android', $app, 'senderId', null)) {
-			Q_Response::setScriptData('Q.Users.Device.senderId', $senderId);
-		};
 		Q_Response::setScriptData('Q.plugins.Users.requireLogin', $rl_array);
 		$successUrl = Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home");
 		$afterActivate = Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl);
@@ -54,13 +51,16 @@ function Users_before_Q_responseExtras()
 	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
 	Q_Response::addStylesheet("plugins/Users/css/Users.css");
-	$apps = array();
-	foreach (Q_Config::get('Users', 'apps', 'platforms', array()) as $platform) {
-		$apps[$platform][$app] = Q_Config::expect('Users', 'apps', $platform, $app);
-		$private = Q_Config::get('Users', 'apps-private', $platform, array());
-		foreach ($private as $p) {
-			unset($apps[$platform][$app][$p]);
+	$platform = Q_Request::platform();
+	if ($appInfos = Q_Config::get('Users', 'apps', $platform, array())) {
+		$apps = array();
+		foreach ($appInfos as $appName => $appInfo) {
+			$apps[$platform][$appName] = $appInfo;
+			$private = Q_Config::get('Users', 'apps-private', $platform, array());
+			foreach ($private as $p) {
+				unset($apps[$platform][$appName][$p]);
+			}
+			Q_Response::setScriptData('Q.plugins.Users.apps', $apps);
 		}
 	}
-	Q_Response::setScriptData('Q.plugins.Users.apps', $apps);
 }
