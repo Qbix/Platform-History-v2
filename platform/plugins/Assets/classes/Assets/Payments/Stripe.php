@@ -9,7 +9,7 @@
  * @implements Assets_Payments
  */
 
-class Assets_Payments_Stripe extends Assets_Payments implements iAssets_Payments
+class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_Interface
 {
 	/**
 	 * @constructor
@@ -28,26 +28,6 @@ class Assets_Payments_Stripe extends Assets_Payments implements iAssets_Payments
 			'secret' => Q_Config::expect('Assets', 'payments', 'stripe', 'secret'),
 			'publishableKey' => Q_Config::expect('Assets', 'payments', 'stripe', 'publishableKey'),
 		), $options);
-	}
-	
-	/**
-	 * Executes some API calls and obtains a customer id
-	 * @method customerId
-	 * @return {string} The customer id
-	 */
-	function customerId()
-	{
-		$options = $this->options;
-	}
-	
-	/**
-	 * Executes some API calls and obtains a payment profile id
-	 * @method paymentProfileId
-	 * @return {string} The payment profile id
-	 */
-	function paymentProfileId($customerId)
-	{
-		$options = $this->options;
 	}
 	
 	/**
@@ -91,48 +71,6 @@ class Assets_Payments_Stripe extends Assets_Payments implements iAssets_Payments
 		Q::take($options, array('description', 'metadata'), $params);
 		\Stripe\Charge::create($params); // can throw some exception
 		return $customer->customerId;
-	}
-	
-	function authToken($customerId = null)
-	{
-		if (!isset($customerId)) {
-			$customerId = $this->customerId();
-		}
-		
-		$options = $this->options;
-
-		// Common Set Up for API Credentials
-		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-		$merchantAuthentication->setName($options['authname']);
-		$merchantAuthentication->setTransactionKey($options['authkey']);
-		$refId = 'ref' . time();
-
-		$setting = new AnetAPI\SettingType();
-
-		// 2do: fix domain name and path for iframe popup
-
-		$setting->setSettingName("hostedProfileIFrameCommunicatorUrl");
-		$setting->setSettingValue(Q_Html::themedUrl('plugins/Assets/authnet_iframe_communicator.html'));
-
-		$setting->setSettingName("hostedProfilePageBorderVisible");
-		$setting->setSettingValue("false");
-
-		$frequest = new AnetAPI\GetHostedProfilePageRequest();
-		$frequest->setMerchantAuthentication($merchantAuthentication);
-		$frequest->setCustomerProfileId($customerId);
-		$frequest->addToHostedProfileSettings($setting);
-
-		$controller = new AnetController\GetHostedProfilePageController($frequest);
-		$fresponse = $controller->executeWithApiResponse($options['server']);
-
-		if (!isset($fresponse) or ($fresponse->getMessages()->getResultCode() != "Ok")) {
-			$messages = $fresponse->getMessages()->getMessage();
-			$message = reset($messages);
-			throw new Assets_Exception_InvalidResponse(array(
-				'response' => $message->getCode() . ' ' . $message->getText()
-			));
-		}
-		return $fresponse->getToken();
 	}
 	
 	public $options = array();

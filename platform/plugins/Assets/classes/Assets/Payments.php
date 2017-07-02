@@ -5,7 +5,7 @@ abstract class Assets_Payments
 	// common functionality could go here
 }
 
-interface iAssets_Payments
+interface Assets_Payments_Interface
 {
 	/**
 	* Interface class for Assets_Payments adapters
@@ -34,18 +34,4 @@ interface iAssets_Payments
 	 * @return {Assets_Charge} the saved database row corresponding to the charge
 	 */
 	function charge($amount, $currency = 'USD', $options = array());
-
-	/**
-	* Executes some API calls and obtains a customer id that unifies payment profile ids
-	* @method customerId
-	* @return {string} The customer id
-	*/
-	function customerId();
-
-	/**
-	* Executes some API calls and obtains a payment profile id
-	* @method paymentProfileId
-	* @return {string} The payment profile id
-	*/
-	function paymentProfileId($customerId);
 }

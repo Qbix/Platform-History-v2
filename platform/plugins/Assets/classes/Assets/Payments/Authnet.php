@@ -13,7 +13,7 @@ use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller as AnetController;
 use net\authorize\util\LogFactory as LogFactory;
 
-class Assets_Payments_Authnet extends Assets_Payments implements iAssets_Payments
+class Assets_Payments_Authnet extends Assets_Payments implements Assets_Payments_Interface
 {
 	/**
 	 * @constructor
