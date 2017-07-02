@@ -16,14 +16,34 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
+ * @param {string} [$fields.appId] defaults to ""
+ * @param {string} [$fields.communityId] defaults to null
+ * @param {string|Db_Expression} [$fields.earnedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.app] defaults to ""
- * @param {string} [$fields.badge_name] defaults to ""
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string} [$fields.associated_id] defaults to ""
+ * @param {string} [$fields.badgeName] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to null
+ * @param {string} [$fields.streamName] defaults to null
  */
 abstract class Base_Assets_Earned extends Db_Row
 {
+	/**
+	 * @property $appId
+	 * @type string
+	 * @default ""
+	 * 
+	 */
+	/**
+	 * @property $communityId
+	 * @type string
+	 * @default null
+	 * 
+	 */
+	/**
+	 * @property $earnedTime
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
+	 */
 	/**
 	 * @property $userId
 	 * @type string
@@ -31,27 +51,21 @@ abstract class Base_Assets_Earned extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $app
+	 * @property $badgeName
 	 * @type string
 	 * @default ""
 	 * 
 	 */
 	/**
-	 * @property $badge_name
+	 * @property $publisherId
 	 * @type string
-	 * @default ""
+	 * @default null
 	 * 
 	 */
 	/**
-	 * @property $insertedTime
-	 * @type string|Db_Expression
-	 * @default new Db_Expression("CURRENT_TIMESTAMP")
-	 * 
-	 */
-	/**
-	 * @property $associated_id
+	 * @property $streamName
 	 * @type string
-	 * @default ""
+	 * @default null
 	 * 
 	 */
 	/**
@@ -247,6 +261,160 @@ abstract class Base_Assets_Earned extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_appId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_appId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('appId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".appId");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".appId");
+		return array('appId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+	function maxSize_appId()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_appId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_communityId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_communityId($value)
+	{
+		if (!isset($value)) {
+			return array('communityId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('communityId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".communityId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".communityId");
+		return array('communityId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the communityId field
+	 * @return {integer}
+	 */
+	function maxSize_communityId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for communityId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_communityId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_earnedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_earnedTime($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('earnedTime', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDateTime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d h:i:s");
+		return array('earnedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for earnedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_earnedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_userId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -301,41 +469,149 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_app
+	 * @method beforeSet_badgeName
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_app($value)
+	function beforeSet_badgeName($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('app', $value);
+			return array('badgeName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".app");
+			throw new Exception('Must pass a string to '.$this->getTable().".badgeName");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".app");
-		return array('app', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".badgeName");
+		return array('badgeName', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the app field
+	 * Returns the maximum string length that can be assigned to the badgeName field
 	 * @return {integer}
 	 */
-	function maxSize_app()
+	function maxSize_badgeName()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for app column
+	 * Returns schema information for badgeName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_app()
+	static function column_badgeName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_publisherId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_publisherId($value)
+	{
+		if (!isset($value)) {
+			return array('publisherId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('publisherId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
+		return array('publisherId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * @return {integer}
+	 */
+	function maxSize_publisherId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_streamName
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_streamName($value)
+	{
+		if (!isset($value)) {
+			return array('streamName', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('streamName', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".streamName");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".streamName");
+		return array('streamName', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the streamName field
+	 * @return {integer}
+	 */
+	function maxSize_streamName()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for streamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_streamName()
 	{
 
 return array (
@@ -346,161 +622,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_badge_name
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_badge_name($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('badge_name', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".badge_name");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".badge_name");
-		return array('badge_name', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the badge_name field
-	 * @return {integer}
-	 */
-	function maxSize_badge_name()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for badge_name column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_badge_name()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_insertedTime
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
-	 */
-	function beforeSet_insertedTime($value)
-	{
-		if ($value instanceof Db_Expression) {
-			return array('insertedTime', $value);
-		}
-		if ($value instanceof DateTime) {
-			$value = $value->getTimestamp();
-		}
-		if (is_numeric($value)) {
-			$newDateTime = new DateTime();
-			$datetime = $newDateTime->setTimestamp($value);
-		} else {
-			$datetime = new DateTime($value);
-		}
-		$value = $datetime->format("Y-m-d h:i:s");
-		return array('insertedTime', $value);			
-	}
-
-	/**
-	 * Returns schema information for insertedTime column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_insertedTime()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'timestamp',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_associated_id
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_associated_id($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('associated_id', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".associated_id");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".associated_id");
-		return array('associated_id', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the associated_id field
-	 * @return {integer}
-	 */
-	function maxSize_associated_id()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for associated_id column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_associated_id()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
+  1 => true,
   2 => '',
   3 => NULL,
 );			
@@ -516,7 +638,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'app', 'badge_name', 'insertedTime', 'associated_id');
+		$field_names = array('appId', 'communityId', 'earnedTime', 'userId', 'badgeName', 'publisherId', 'streamName');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
