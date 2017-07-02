@@ -253,7 +253,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	};
 	var message = this;
 	var messageType = this.fields.type;
-	var subject = Q.Streams.Stream.getConfigField(
+	var subject = Streams.Stream.getConfigField(
 		stream.fields.type,
 		['messages', this.fields.type, 'subject'],
 		Q.Config.get(
