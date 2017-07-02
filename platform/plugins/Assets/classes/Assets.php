@@ -15,21 +15,21 @@ require __DIR__ . '/Composer/vendor/autoload.php';
 abstract class Assets extends Base_Assets
 {
 	/**
-	 * @method giveAward
+	 * @method giveBadge
 	 * @static
-	 * @param  {string}  $awardName
+	 * @param  {string}  $badgeName
 	 * @param  {string}  $userId
 	 * @param  {string}  [$associated_id='']
 	 * @param  {boolean} [$duplicate=true]
 	 */
-	static function giveAward($awardName, $userId, $associated_id='', $duplicate=true)
+	static function giveBadge($badgeName, $userId, $associated_id='', $duplicate=true)
 	{
-		if (!$duplicate and self::hasAward($awardName, $userId)) {
+		if (!$duplicate and self::hasBadge($badgeName, $userId)) {
 			return;
 		}
 		$earnedBadge = new Assets_Earned();
 		$earnedBadge->app = Q_Config::expect('Q', 'app');
-		$earnedBadge->badge_name = $awardName;
+		$earnedBadge->badge_name = $badgeName;
 		$earnedBadge->userId = $userId;
 		$earnedBadge->associated_id = $associated_id;
 		$earnedBadge->save();
@@ -37,45 +37,45 @@ abstract class Assets extends Base_Assets
 	}
 
 	/**
-	 * @method hasAward
+	 * @method hasBadge
 	 * @static
-	 * @param  {string}  $awardName
+	 * @param  {string}  $badgeName
 	 * @param  {string}  $userId
 	 * @return {boolean}
 	 */
-	static function hasAward($awardName, $userId)
+	static function hasBadge($badgeName, $userId)
 	{
 		$exists = new Assets_Earned();
 		$exists->app = Q_Config::expect('Q', 'app');
 		$exists->userId = $userId;
-		$exists->badge_name = $awardName;
+		$exists->badge_name = $badgeName;
 		return $exists->retrieve()? true : false;
 	}
 
 	/**
-	 * @method getAssets
+	 * @method getBadges
 	 * @static
 	 * @param $userId {string} User ID
 	 * @param  {string|boolean} [$app=false] Application name
 	 * @return {array}
 	 */
-	static function getAssets($userId, $app=false)
+	static function getBadges($userId, $app=false)
 	{
 		$whereArray = array('ern.userId'=>$userId);
 		if($app !== false){
 			$whereArray['ern.app'] = $app;
 		}
 
-		$awardsEarned = Assets_Earned::select('ern.*,  bdg.pic_small, bdg.pic_big, bdg.title, bdg.points', 'ern')
+		$badgesEarned = Assets_Earned::select('ern.*,  bdg.pic_small, bdg.pic_big, bdg.title, bdg.points', 'ern')
 				->join(Assets_Badge::table().' AS bdg', array('ern.badge_name'=>'bdg.name', 'ern.app'=>'bdg.app'))
 				->where($whereArray)
 				->fetchDbRows();
 
-		return $awardsEarned;
+		return $badgesEarned;
 	}
 
 	/**
-	 * Calculates award leaders and update table
+	 * Calculates badge leaders and update table
 	 * @method calculateLeaders
 	 * @static
 	 * @param {string} $app
@@ -91,18 +91,18 @@ abstract class Assets extends Base_Assets
 
 		if(!empty($leaders)){
 			foreach($leaders as $leader){
-				$awardsLeader = new Assets_Leader();
-				$awardsLeader->app = $leader->app;
-				$awardsLeader->day = $leader->day_calculated;
+				$badgesLeader = new Assets_Leader();
+				$badgesLeader->app = $leader->app;
+				$badgesLeader->day = $leader->day_calculated;
 
-				$result = $awardsLeader->retrieve();
+				$result = $badgesLeader->retrieve();
 				if(!empty($result)) return false;
 
-				$awardsLeader->userId = $leader->userId;
-				$awardsLeader->points = $leader->points;
-				$awardsLeader->save();
+				$badgesLeader->userId = $leader->userId;
+				$badgesLeader->points = $leader->points;
+				$badgesLeader->save();
 			}
-			$awardsLeader = null;
+			$badgesLeader = null;
 			return true;
 		}else{
 			return false;
