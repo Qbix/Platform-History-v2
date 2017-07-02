@@ -2339,7 +2339,6 @@ Users.onConnectionLost = new Q.Event();
  * @class Users.Device
  */
 Users.Device = {
-	senderId: null,
 	/**
 	 * Event occurs when a notification comes in to be processed by the app.
 	 * The handlers you add are supposed to process it.
@@ -2357,7 +2356,7 @@ Q.onReady.add(function () {
 	}
 	var push = PushNotification.init({
 	    android: {
-			senderID: Q.Users.Device.senderId
+			senderID: Q.getObject('Q.Users.apps.android.' + Q.info.app)
 		},
 		browser: {
 			pushServiceURL: 'http://push.api.phonegap.com/v1/push'
