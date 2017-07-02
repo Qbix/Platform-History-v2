@@ -53,10 +53,10 @@ function Users_before_Q_responseExtras()
 	Q_Response::addStylesheet("plugins/Users/css/Users.css");
 	$platform = Q_Request::platform();
 	if ($appInfos = Q_Config::get('Users', 'apps', $platform, array())) {
+		$private = Q_Config::get('Users', 'apps-private', $platform, array());
 		$apps = array();
 		foreach ($appInfos as $appName => $appInfo) {
 			$apps[$platform][$appName] = $appInfo;
-			$private = Q_Config::get('Users', 'apps-private', $platform, array());
 			foreach ($private as $p) {
 				unset($apps[$platform][$appName][$p]);
 			}
