@@ -16,9 +16,12 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.app] defaults to ""
+ * @param {string} [$fields.appId] defaults to ""
+ * @param {string} [$fields.communityId] defaults to null
  * @param {string} [$fields.name] defaults to ""
+ * @param {string} [$fields.icon] defaults to null
  * @param {string} [$fields.title] defaults to ""
+ * @param {string} [$fields.description] defaults to ""
  * @param {string} [$fields.pic_small] defaults to ""
  * @param {string} [$fields.pic_big] defaults to ""
  * @param {integer} [$fields.points] defaults to 0
@@ -26,9 +29,15 @@
 abstract class Base_Assets_Badge extends Db_Row
 {
 	/**
-	 * @property $app
+	 * @property $appId
 	 * @type string
 	 * @default ""
+	 * 
+	 */
+	/**
+	 * @property $communityId
+	 * @type string
+	 * @default null
 	 * 
 	 */
 	/**
@@ -38,7 +47,19 @@ abstract class Base_Assets_Badge extends Db_Row
 	 * 
 	 */
 	/**
+	 * @property $icon
+	 * @type string
+	 * @default null
+	 * 
+	 */
+	/**
 	 * @property $title
+	 * @type string
+	 * @default ""
+	 * 
+	 */
+	/**
+	 * @property $description
 	 * @type string
 	 * @default ""
 	 * 
@@ -72,7 +93,7 @@ abstract class Base_Assets_Badge extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'app',
+			  0 => 'appId',
 			  1 => 'name',
 			)
 		);
@@ -256,53 +277,107 @@ abstract class Base_Assets_Badge extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_app
+	 * @method beforeSet_appId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_app($value)
+	function beforeSet_appId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('app', $value);
+			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".app");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".app");
-		return array('app', $value);			
+			throw new Exception('Must pass a string to '.$this->getTable().".appId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".appId");
+		return array('appId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the app field
+	 * Returns the maximum string length that can be assigned to the appId field
 	 * @return {integer}
 	 */
-	function maxSize_app()
+	function maxSize_appId()
 	{
 
-		return 255;			
+		return 31;			
 	}
 
 	/**
-	 * Returns schema information for app column
+	 * Returns schema information for appId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_app()
+	static function column_appId()
 	{
 
 return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_communityId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_communityId($value)
+	{
+		if (!isset($value)) {
+			return array('communityId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('communityId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".communityId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".communityId");
+		return array('communityId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the communityId field
+	 * @return {integer}
+	 */
+	function maxSize_communityId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for communityId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_communityId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -364,6 +439,60 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_icon
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_icon($value)
+	{
+		if (!isset($value)) {
+			return array('icon', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('icon', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".icon");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".icon");
+		return array('icon', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the icon field
+	 * @return {integer}
+	 */
+	function maxSize_icon()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_icon()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_title
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -379,7 +508,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".title");
-		if (strlen($value) > 65535)
+		if (strlen($value) > 255)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".title");
 		return array('title', $value);			
 	}
@@ -391,7 +520,7 @@ return array (
 	function maxSize_title()
 	{
 
-		return 65535;			
+		return 255;			
 	}
 
 	/**
@@ -399,6 +528,60 @@ return array (
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 	static function column_title()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_description
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_description($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('description', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".description");
+		if (strlen($value) > 65535)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".description");
+		return array('description', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the description field
+	 * @return {integer}
+	 */
+	function maxSize_description()
+	{
+
+		return 65535;			
+	}
+
+	/**
+	 * Returns schema information for description column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_description()
 	{
 
 return array (
@@ -588,7 +771,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('app','name') as $name) {
+			foreach (array('appId','name') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -607,7 +790,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('app', 'name', 'title', 'pic_small', 'pic_big', 'points');
+		$field_names = array('appId', 'communityId', 'name', 'icon', 'title', 'description', 'pic_small', 'pic_big', 'points');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

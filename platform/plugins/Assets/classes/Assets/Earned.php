@@ -24,6 +24,8 @@ class Assets_Earned extends Base_Assets_Earned
 	 * @param {boolean} [$options.duplicate=true] Whether to save it if it was already earned
 	 * @param {string} [$options.communityId=Users::communityId()]
 	 * @param {string} [$options.appId=Q::app()]
+	 * @param {string} [$options.publisherId=null] The associated stream, if any
+	 * @param {string} [$options.streamName=null] The associated stream, if any
 	 * @return {Awards_Earned}
 	 */
 	static function badge($userId, $badgeName, $options = array())
@@ -32,6 +34,8 @@ class Assets_Earned extends Base_Assets_Earned
 		$duplicate = Q::ifset($options, 'duplicate', true);
 		$communityId = Q::ifset($options, 'communityId', Users::communityId());
 		$appId = Q::ifset($options, 'appId', Q::app());
+		$publisherId = Q::ifset($options, 'publisherId', null);
+		$streamName = Q::ifset($options, 'streamName', null);
 		$options['userId'] = $userId;
 		$options['badgeName'] = $badgeName;
 		if (!$duplicate) {
@@ -40,7 +44,7 @@ class Assets_Earned extends Base_Assets_Earned
 				return;
 			}
 		}
-		if (!issset($earnedTime)) {
+		if (!isset($earnedTime)) {
 			$earnedTime = time();
 		}
 		$earnedBadge = (new Assets_Earned(compact(

@@ -21,9 +21,12 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.app] defaults to ""
+ * @param {string} [$fields.appId] defaults to ""
+ * @param {string} [$fields.communityId] defaults to null
  * @param {string} [$fields.name] defaults to ""
+ * @param {string} [$fields.icon] defaults to null
  * @param {string} [$fields.title] defaults to ""
+ * @param {string} [$fields.description] defaults to ""
  * @param {string} [$fields.pic_small] defaults to ""
  * @param {string} [$fields.pic_big] defaults to ""
  * @param {integer} [$fields.points] defaults to 0
@@ -35,9 +38,15 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property app
+ * @property appId
  * @type String|Buffer
  * @default ""
+ * 
+ */
+/**
+ * @property communityId
+ * @type String|Buffer
+ * @default null
  * 
  */
 /**
@@ -47,7 +56,19 @@ Q.mixin(Base, Row);
  * 
  */
 /**
+ * @property icon
+ * @type String|Buffer
+ * @default null
+ * 
+ */
+/**
  * @property title
+ * @type String
+ * @default ""
+ * 
+ */
+/**
+ * @property description
  * @type String
  * @default ""
  * 
@@ -252,7 +273,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"app",
+		"appId",
 		"name"
 	];
 };
@@ -264,9 +285,12 @@ Base.prototype.primaryKey = function () {
  */
 Base.prototype.fieldNames = function () {
 	return [
-		"app",
+		"appId",
+		"communityId",
 		"name",
+		"icon",
 		"title",
+		"description",
 		"pic_small",
 		"pic_big",
 		"points"
@@ -276,39 +300,75 @@ Base.prototype.fieldNames = function () {
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_app
+ * @method beforeSet_appId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_app = function (value) {
+Base.prototype.beforeSet_appId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".app");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".app");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".appId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".appId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the app field
+	 * Returns the maximum string length that can be assigned to the appId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_app = function () {
+Base.prototype.maxSize_appId = function () {
 
-		return 255;
+		return 31;
 };
 
 	/**
-	 * Returns schema information for app column
+	 * Returns schema information for appId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_app = function () {
+Base.column_appId = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_communityId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_communityId = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".communityId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".communityId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the communityId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_communityId = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for communityId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_communityId = function () {
+
+return [["varbinary","31","",false],true,"",null];
 };
 
 /**
@@ -352,6 +412,42 @@ return [["varchar","255","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
+ * @method beforeSet_icon
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_icon = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".icon");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".icon");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the icon field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_icon = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for icon column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_icon = function () {
+
+return [["varbinary","255","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_title
  * @param {string} value
  * @return {string} The value
@@ -364,7 +460,7 @@ Base.prototype.beforeSet_title = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".title");
-		if (typeof value === "string" && value.length > 65535)
+		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".title");
 		return value;
 };
@@ -375,7 +471,7 @@ Base.prototype.beforeSet_title = function (value) {
 	 */
 Base.prototype.maxSize_title = function () {
 
-		return 65535;
+		return 255;
 };
 
 	/**
@@ -383,6 +479,44 @@ Base.prototype.maxSize_title = function () {
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 Base.column_title = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_description
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_description = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".description");
+		if (typeof value === "string" && value.length > 65535)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".description");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the description field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_description = function () {
+
+		return 65535;
+};
+
+	/**
+	 * Returns schema information for description column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_description = function () {
 
 return [["text",65535,"",false],false,"",null];
 };
@@ -507,7 +641,7 @@ return [["smallint","4","",false],false,"","0"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['app','name'], i;
+	var fields = ['appId','name'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
