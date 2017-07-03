@@ -228,7 +228,7 @@ class Users_Mobile extends Base_Users_Mobile
 		$this->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
-		$this->authCode = sha1(microtime() + mt_rand());
+		$this->authCode = sha1(microtime() . mt_rand());
 		$number = $this->number;
 		if (substr($number, 0, 2) == '+1') {
 			$number = substr($number, 2);
