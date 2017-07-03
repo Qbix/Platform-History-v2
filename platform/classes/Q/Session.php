@@ -510,10 +510,9 @@ class Q_Session
 	{
 		/**
 		 * @event Q/session/close {before}
-		 * @return {true}
 		 */
 		if (false === Q::event('Q/session/close', array(), 'before')) {
-			return true;
+			return false;
 		}
 		return true;
 	}
