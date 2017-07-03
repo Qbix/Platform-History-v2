@@ -14,9 +14,8 @@ function Users_before_Q_session_save($params)
 	$row->content = isset($_SESSION)
 		? Q::json_encode($_SESSION, JSON_FORCE_OBJECT)
 		: "{}";
-	if (empty($params['inserting'])) {
-		return;
+	if (!$row->wasRetrieved()) {
+		$row->deviceId = "";
+		$row->timeout = 0;
 	}
-	$row->deviceId = "";
-	$row->timeout = 0;
 }

@@ -556,14 +556,14 @@ class Q_Session
 				self::$session_db_row = $row;
 			}
 			$result = isset(self::$session_db_row->$data_field)
-				? self::$session_db_row->$data_field : null;
+				? self::$session_db_row->$data_field : '';
 		} else {
 			$duration_name = self::durationName();
 			$id1 = substr($id, 0, 4);
 			$id2 = substr($id, 4);
 			$sess_file = self::$session_save_path . DS . "$duration_name/$id1/$id2";
 			if (!file_exists($sess_file)) {
-				$result = null;
+				$result = '';
 			} else {
 				$result = (string) file_get_contents($sess_file);
 			}
