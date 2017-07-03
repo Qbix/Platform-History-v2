@@ -771,7 +771,8 @@ class Q_Session
 					'sess_file', 'row',
 					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
 				), 
-				'after'
+				'after',
+				$result
 			);
 			return $result;
 		} catch (Exception $e) {
