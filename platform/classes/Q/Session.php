@@ -308,7 +308,6 @@ class Q_Session
 							'before'
 						)) {
 							$row->save();
-							self::id($row->$id_field); // this sets the session cookie as well
 							self::$session_db_row = $row;
 						}
 					}
@@ -511,11 +510,12 @@ class Q_Session
 	{
 		/**
 		 * @event Q/session/close {before}
-		 * @return {false}
+		 * @return {true}
 		 */
 		if (false === Q::event('Q/session/close', array(), 'before')) {
 			return true;
 		}
+		return true;
 	}
 
 	/**
