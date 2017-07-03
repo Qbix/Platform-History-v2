@@ -13,9 +13,9 @@ function Q_post($params)
 		foreach (array('upload_max_filesize', 'post_max_size') as $name) {
 			$value = ini_get($name);
 			switch (substr($value, -1)) {
-				case 'K': $value *= 1024; break;
-				case 'M': $value *= 1024*1024; break;
-				case 'B': $value *= 1024*1024*1024; break;
+				case 'K': $value = intval($value) * 1024; break;
+				case 'M': $value = intval($value) * 1024*1024; break;
+				case 'B': $value = intval($value) * 1024*1024*1024; break;
 			}
 			if ($contentLength > $value) {
 				throw new Q_Exception_ContentLength(array('contentLength' => $contentLength, 'exceeds' => $name));
