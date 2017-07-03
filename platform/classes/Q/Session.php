@@ -772,6 +772,7 @@ class Q_Session
 					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
 				), 
 				'after',
+				false,
 				$result
 			);
 			return $result;
