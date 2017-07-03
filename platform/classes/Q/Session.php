@@ -747,6 +747,8 @@ class Q_Session
 					flock($file, LOCK_UN);
 					fclose($file);
 				}
+			} else {
+				$result = true;
 			}
 			/**
 			 * @event Q/session/write {after}
