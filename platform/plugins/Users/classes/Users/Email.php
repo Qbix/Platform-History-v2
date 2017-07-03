@@ -217,7 +217,7 @@ class Users_Email extends Base_Users_Email
 		$this->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
-		$this->authCode = sha1(microtime() + mt_rand());
+		$this->authCode = sha1(microtime() . mt_rand());
 		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
 			. ' emailAddress='.urlencode($this->address);
 		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
