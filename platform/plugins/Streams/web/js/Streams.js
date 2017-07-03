@@ -4061,7 +4061,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		var $this = $(this);
 		$this.removeData('cancelSubmit');
 		document.activeElement.blur();
-		if (!$('#Users_agree').attr('checked')) {
+		if (!$('#Users_agree').is(':checked')) {
 			$this.data('cancelSubmit', true);
 			setTimeout(function () {
 				if (confirm(Q.text.Users.login.confirmTerms)) {
