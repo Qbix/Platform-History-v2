@@ -19,7 +19,7 @@ function Users_device_post ()
 	$device = Users_Device::add(array_merge(
 		array(
 			'platform' => Q_Request::platform(),
-			'version' => Q_Request::version(),
+			'version' => Q_Request::OSVersion(),
 			'formFactor' => Q_Request::formFactor()
 		),
 		$_REQUEST,
