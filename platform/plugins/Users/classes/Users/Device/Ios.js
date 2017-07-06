@@ -59,8 +59,8 @@ Users_Device.prototype.handlePushNotification = function (notification, options,
 		console.warn("Users.Device.prototype.pushNotification: Users.apn.provider missing, call Users.listen() first");
 		return;
 	}
-	var appId = options.appId || Q.Config.expect(['Q', 'app']);
-	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'bundleId']);
+	var appId = this.fields.appId || Q.Config.expect(['Q', 'app']);
+	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'appId']);
 	var apn = require('apn');
 	var n = new apn.Notification(notification);
 	Users.push.apn.provider.send(n, device.fields.deviceId)
