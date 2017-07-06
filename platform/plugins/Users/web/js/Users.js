@@ -2423,6 +2423,20 @@ Q.onReady.add(function() {
 			.catch(function(err) {
 				console.log('Unable to get permission to notify.', err);
 			});
+		// Get Instance ID token. Initially this makes a network call, once retrieved
+		// subsequent calls to getToken will return from cache.
+		messaging.getToken()
+			.then(function(currentToken) {
+				if (currentToken) {
+					//sendTokenToServer(currentToken);
+					//updateUIForPushEnabled(currentToken);
+				} else {
+					console.log('No Instance ID token available. Request permission to generate one.');
+				}
+			})
+			.catch(function(err) {
+				console.log('An error occurred while retrieving token. ', err);
+			});
 	});
 });
 
