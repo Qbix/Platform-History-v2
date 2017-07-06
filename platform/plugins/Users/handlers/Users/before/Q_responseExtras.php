@@ -63,4 +63,7 @@ function Users_before_Q_responseExtras()
 			Q_Response::setScriptData('Q.plugins.Users.apps', $apps);
 		}
 	}
+	Q_Response::setScriptData('Q.plugins.Users.apps.web.externalScripts', Q_Config::get('Users', 'apps', 'web', $app, 'externalScripts', array()));
+	Q_Response::setScriptData('Q.plugins.Users.apps.web.client', Q_Config::get('Users', 'apps', 'web', $app, 'client', null));
+
 }

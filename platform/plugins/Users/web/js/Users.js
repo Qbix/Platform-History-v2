@@ -2406,6 +2406,26 @@ Q.onReady.add(function () {
 	}
 });
 
+Q.onReady.add(function() {
+	if (Q.info.isCordova) {
+		return;
+	}
+	Q.addScript(Q.plugins.Users.apps.web.externalScripts, function(){
+		// Initialize Firebase
+		firebase.initializeApp(Q.plugins.Users.apps.web.client);
+		const messaging = firebase.messaging();
+		messaging.requestPermission()
+			.then(function() {
+				console.log('Notification permission granted.');
+				// TODO(developer): Retrieve an Instance ID token for use with FCM.
+				// ...
+			})
+			.catch(function(err) {
+				console.log('Unable to get permission to notify.', err);
+			});
+	});
+});
+
 /**
  * Some replacements for Q.Socket methods, use these instead.
  * They implement logic involving sockets, users, sessions, devices, and more.
