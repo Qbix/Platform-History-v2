@@ -113,8 +113,7 @@
 			},
 			"ios": {
 				"MyApp": {
-					"bundleId": "com.mycompany.myapp",
-					"appId": "361285480",
+					"appId": "com.mycompany.myapp",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
 					"baseUrl": "myapp://",
 					"sandbox": true,
