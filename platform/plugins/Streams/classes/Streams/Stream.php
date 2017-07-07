@@ -1524,14 +1524,10 @@ class Streams_Stream extends Base_Streams_Stream
 		$result['icon'] = $this->iconUrl();
 		$result['url'] = $this->url();
 		$classes = Streams::getExtendClasses($this->type);
-		$fieldNames = array();
 		foreach ($classes as $k => $v) {
 			foreach ($v as $f) {
-				if (isset($options['fields'])
-				and !in_array($f, $options['fields'])) {
-					continue;
-				}
-				foreach ($fieldNames as $key) {
+				if (!isset($options['fields'])
+				or in_array($f, $options['fields'])) {
 					$result[$f] = isset($this->$f) ? $this->$f : null;
 				}
 			}
