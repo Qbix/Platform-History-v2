@@ -207,14 +207,14 @@ abstract class Places extends Base_Places
 	}
 	
 	/**
-	 * Use this method to calculate the closest point on a polyline
+	 * Use this method to calculate the closest point on a polyline.
 	 * @method closest
 	 * @static
 	 * @param {array} point
 	 * @param {double} point.x
 	 * @param {double} point.y 
 	 * @param {array} polyline an array of associative arrays with "x" and "y" keys
-	 * @return {array} contains properties "index", "x", "y", "distance", "fraction"
+	 * @return {array} contains properties "index", "x", "y", "fraction", "distance" (in same units as x, y)
 	 */
 	static function closest($point, $polyline) {
 		$x = $point['x'];
@@ -227,7 +227,7 @@ abstract class Places extends Base_Places
 			$c = $polyline[$i]['x'];
 			$d = $polyline[$i]['y'];
 			$n = ($c-$a)*($c-$a) + ($d-$b)*($d-$b);
-			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)+($d-$b)) / $n : 0;
+			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)*($d-$b)) / $n : 0;
 			$frac = max(0, $frac, min(1, $frac));
 			$e = $a + ($c-$a)*$frac;
 			$f = $b + ($d-$b)*$frac;
@@ -241,6 +241,9 @@ abstract class Places extends Base_Places
 					'distance' => $dist,
 					'fraction' => $frac
 				);
+				if ($dist == 0) {
+					break;
+				}
 			}
         }
 		return $closest;
