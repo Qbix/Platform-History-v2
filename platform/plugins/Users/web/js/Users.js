@@ -2412,15 +2412,19 @@ Q.onReady.add(function() {
 	}
 	Q.addScript(Q.plugins.Users.apps.chrome.scripts, function(){
 		// Initialize Firebase
-		firebase.initializeApp(Q.plugins.Users.apps.chrome.client);
+		var config = Q.plugins.Users.apps.chrome.client;
+		firebase.initializeApp(config);
 		const messaging = firebase.messaging();
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker.register(Q.url('plugins/Users/js/sw.js')).then(function(registration) {
 				messaging.useServiceWorker(registration);
 				messaging.requestPermission().then(function() {
+					// post config to SW
+					//registration.active.postMessage(JSON.stringify({config: config}));
 					console.log('Notification permission granted.');
 					messaging.getToken().then(function(currentToken) {
 						if (currentToken) {
+							registration.active.postMessage(JSON.stringify({config: config}));
 							console.log(currentToken);
 							//sendTokenToServer(currentToken);
 							//updateUIForPushEnabled(currentToken);
@@ -2435,6 +2439,10 @@ Q.onReady.add(function() {
 				});
 			});
 		}
+
+		messaging.onMessage(function(payload){
+			console.log('onMessage: ', payload);
+		})
 	});
 });
 
