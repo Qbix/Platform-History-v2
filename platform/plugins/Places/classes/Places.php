@@ -196,7 +196,7 @@ abstract class Places extends Base_Places
 	 * @param {double} $long2 longitude in degrees
 	 * @return {double} The heading, in degrees
 	 */
-	function heading($lat1, $long1, $lat2, $long2) {
+	static function heading($lat1, $long1, $lat2, $long2) {
 		$lat1 = $lat1 * M_PI / 180;
 		$lat2 = $lat2 * M_PI / 180;
 		$dLong = ($long2 - $long1) * M_PI / 180;
@@ -216,7 +216,7 @@ abstract class Places extends Base_Places
 	 * @param {array} polyline an array of associative arrays with "x" and "y" keys
 	 * @return {array} contains properties "index", "x", "y", "distance", "fraction"
 	 */
-	function closest($point, $polyline) {
+	static function closest($point, $polyline) {
 		$x = $point['x'];
 		$y = $point['y'];
 		$closest = null;
