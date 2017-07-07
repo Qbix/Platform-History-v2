@@ -21,6 +21,12 @@ self.addEventListener('message', function(event) {
 	if (data.config && !firebase.apps.length) {
 		firebase.initializeApp(data.config);
 		messaging = firebase.messaging();
+
+		messaging.setBackgroundMessageHandler(function(payload){
+			return self.registration.showNotification();
+		});
+
 	}
 
 });
+
