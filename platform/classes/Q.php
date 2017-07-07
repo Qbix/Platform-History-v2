@@ -1365,7 +1365,8 @@ class Q
 	}
 	
 	/**
-	 * Parses a querystring without converting some characters to underscores like PHP's version does
+	 * Parses a querystring like mb_parse_str but without converting some
+	 * characters to underscores like PHP's version does
 	 * @method parse_str
 	 * @static
 	 * @param {string} $str
@@ -1383,7 +1384,7 @@ class Q
 				$r[] = "____{$i}____";
 			}
 		}
-		parse_str(str_replace($s, $r, $str), $arr);
+		mb_parse_str(str_replace($s, $r, $str), $arr);
 		return $arr = self::arrayReplace($r, $s, $arr);
 	}
 	
