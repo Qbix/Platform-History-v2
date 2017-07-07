@@ -2410,35 +2410,29 @@ Q.onReady.add(function() {
 	if (Q.info.isCordova) {
 		return;
 	}
-	Q.addScript(Q.plugins.Users.apps.web.externalScripts, function(){
-
+	Q.addScript(Q.plugins.Users.apps.web.scripts, function(){
 		// Initialize Firebase
 		firebase.initializeApp(Q.plugins.Users.apps.web.client);
 		const messaging = firebase.messaging();
 		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/Teaching/plugins/Users/js/sw.js').then(function(registration) {
+			navigator.serviceWorker.register(Q.url('/plugins/Users/js/sw.js')).then(function(registration) {
 				messaging.useServiceWorker(registration);
-				messaging.requestPermission()
-					.then(function() {
-						console.log('Notification permission granted.');
-						messaging.getToken()
-							.then(function(currentToken) {
-								if (currentToken) {
-									console.log(currentToken);
-									//sendTokenToServer(currentToken);
-									//updateUIForPushEnabled(currentToken);
-								} else {
-									console.log('No Instance ID token available. Request permission to generate one.');
-								}
-							})
-							.catch(function(err) {
-								console.log('An error occurred while retrieving token. ', err);
-							});
-					})
-					.catch(function(err) {
-						console.log('Unable to get permission to notify.', err);
+				messaging.requestPermission().then(function() {
+					console.log('Notification permission granted.');
+					messaging.getToken().then(function(currentToken) {
+						if (currentToken) {
+							console.log(currentToken);
+							//sendTokenToServer(currentToken);
+							//updateUIForPushEnabled(currentToken);
+						} else {
+							console.warn('No Instance ID token available. Request permission to generate one.');
+						}
+					}).catch(function(err) {
+						console.warn('An error occurred while retrieving token. ', err);
 					});
-
+				}).catch(function(err) {
+					console.warn('Unable to get permission to notify.', err);
+				});
 			});
 		}
 	});
