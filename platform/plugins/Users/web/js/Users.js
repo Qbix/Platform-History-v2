@@ -2407,15 +2407,15 @@ Q.onReady.add(function () {
 });
 
 Q.onReady.add(function() {
-	if (Q.info.isCordova) {
+	if (Q.Browser.detect().name !== 'chrome') {
 		return;
 	}
-	Q.addScript(Q.plugins.Users.apps.web.scripts, function(){
+	Q.addScript(Q.plugins.Users.apps.chrome.scripts, function(){
 		// Initialize Firebase
-		firebase.initializeApp(Q.plugins.Users.apps.web.client);
+		firebase.initializeApp(Q.plugins.Users.apps.chrome.client);
 		const messaging = firebase.messaging();
 		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register(Q.url('/plugins/Users/js/sw.js')).then(function(registration) {
+			navigator.serviceWorker.register(Q.url('plugins/Users/js/sw.js')).then(function(registration) {
 				messaging.useServiceWorker(registration);
 				messaging.requestPermission().then(function() {
 					console.log('Notification permission granted.');
