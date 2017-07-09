@@ -2408,13 +2408,13 @@ Q.onReady.add(function () {
 });
 
 Q.onReady.add(function() {
-	if (Q.Browser.detect().name !== 'chrome') {
+	if (Q.info.browser.name !== 'chrome') {
 		return;
 	}
-	Q.addScript(Q.plugins.Users.apps.chrome.scripts, function(){
+	var appConfig = Q.getObject('Q.Users.browserApps.chrome.' + Q.info.app);
+	Q.addScript(appConfig.scripts, function(){
 		// Initialize Firebase
-		var config = Q.plugins.Users.apps.chrome.client;
-		firebase.initializeApp(config);
+		firebase.initializeApp(appConfig.client);
 		const messaging = firebase.messaging();
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker.register(Q.url('plugins/Users/js/sw.js')).then(function(registration) {
@@ -2426,7 +2426,7 @@ Q.onReady.add(function() {
 					console.log('Notification permission granted.');
 					messaging.getToken().then(function(currentToken) {
 						if (currentToken) {
-							registration.active.postMessage(JSON.stringify({config: config}));
+							registration.active.postMessage(JSON.stringify({config: appConfig.client}));
 							console.log(currentToken);
 							//sendTokenToServer(currentToken);
 							//updateUIForPushEnabled(currentToken);
