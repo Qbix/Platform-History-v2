@@ -881,6 +881,8 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 			if (!fields) return;
 			for (var k in fields) {
 				if ((k in this.fields)
+				|| k === 'totals'
+				|| k === 'participant'
 				|| k === 'access'
 				|| k === 'isRequired') continue;
 				this.fields[k] = Q.copy(fields[k]);
@@ -4317,7 +4319,7 @@ function prepareStream(stream) {
 		delete stream.fields.access;
 	}
 	if (stream.fields.participant) {
-		stream.participant = Q.copy(stream.fields.participant);
+		stream.participant = new Streams.Participant(stream.fields.participant);
 		delete stream.fields.participant;
 	}
 	if (stream.fields.totals) {

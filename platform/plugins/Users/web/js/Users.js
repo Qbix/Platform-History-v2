@@ -11,6 +11,7 @@
 var Users = Q.Users = Q.plugins.Users = {
 	info: {}, // this gets filled when a user logs in
 	apps: {}, // this info gets added by the server, on the page
+	browserApps: {}, // this info gets added by the server, on the page
 	connected: {}, // check this to see if you are connected to a platform
 	icon: {
 		defaultSize: 40 // might be overridden, but is required by some tools
