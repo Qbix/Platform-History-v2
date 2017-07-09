@@ -125,6 +125,45 @@ var Places = Q.Places = Q.plugins.Places = {
 	},
 	
 	/**
+	 * Gets the heading of a car along a route given its current coordinates.
+	 * The coordinates should already have "latitude" and "longitude" properties.
+	 * This is good as a fallback for rotating the car icon on the map,
+	 * in case the "heading" isn't already specified.
+	 * @param {Object} route The route along which the car is traveling
+	 * @param {Object} coordinates]
+	 * @param {Object} coordinates.latitude
+	 * @param {Object} coordinates.longitude
+	 * @return {Number} the heading
+	 */
+	headingAlongRoute: function (route, coordinates) {
+		var point = {
+			x: coordinates.latitude,
+			y: coordinates.longitude
+		};
+		var polyline = [];
+		if (!route.legs || !route.legs.length) {
+			// TODO: try to get heading from Places.heading() and previous coordinates
+			return 0;
+		}
+		var steps = Q.getObject(['legs', 0, 'steps'], route) || route.legs;
+		Q.each(steps, function () {
+			polyline.push({
+				x: this.start_location.lat,
+				y: this.start_location.lng
+			})
+		});
+		var lastStep = steps[steps.length-1];
+		polyline.push({
+			x: lastStep.end_location.lat,
+			y: lastStep.end_location.lng
+		});
+		var closest = Places.closest(point, polyline);
+		var from = polyline[closest.index-1];
+		var to = polyline[closest.index];
+		return Places.heading(from.x, from.y, to.x, to.y);
+	},
+	
+	/**
 	 * Use this method to calculate the closest point on a polyline
 	 * @method closest
 	 * @static
