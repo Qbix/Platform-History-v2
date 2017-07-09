@@ -82,14 +82,8 @@ Q.Tool.define('Q/timestamp', function () {
 		}
 		var tool = this;
 		var state = this.state;
-		var timestamp = !isNaN(state.time) && parseInt(state.time);
-		if (timestamp < 10000000000) {
-			timestamp *= 1000;
-		}
 		var strftime = Q.PHPJS.strftime.bind(Q.PHPJS);
-		var date = isNaN(state.time)
-			? new Date()
-			: new Date(timestamp ? timestamp : state.time);
+		var date = isNaN(state.time) ? new Date(state.time) : Date.fromTimestamp(state.time);
 		var time = date.getTime() / 1000;
 		var now = Date.now() / 1000;
 		var date = new Date();
