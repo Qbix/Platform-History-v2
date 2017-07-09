@@ -1,7 +1,8 @@
 <?php
-	
+
 class Users_Device_Chrome extends Users_Device
 {
+
 	/**
 	 * You can use this method to send push notifications.
 	 * It is far better, however, to use the Qbix Platform's offline notification
@@ -13,9 +14,15 @@ class Users_Device_Chrome extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		// todo: implement this using documented arguments sent to for pushNotification
+		$notification = [
+			'title' => $notification['alert']['title'],
+			'body' => $notification['alert']['body'],
+			'icon' => empty($notification['badge']) ? '' : $notification['badge'],
+			'click_action' => empty($notification['payload']['click_action']) ? '/' : $notification['payload']['click_action']
+		];
+		self::$push[] = $notification;
 	}
-	
+
 	/**
 	 * Sends all scheduled push notifications
 	 * @method sendPushNotifications
@@ -24,9 +31,41 @@ class Users_Device_Chrome extends Users_Device
 	 */
 	static function sendPushNotifications()
 	{
-		// todo: implement this using documented arguments sent to for pushNotification
-		// can send to at most 1000 registration tokens per request in gcm
+		if (!self::$push) {
+			return;
+		}
+
+		$app = Q_Config::expect('Q', 'app');
+		$apiKey = Q_Config::expect('Users', 'apps', 'chrome', $app, "server", "key");
+
+		foreach (self::$push as $notification) {
+			$fields = array
+			(
+				'to'		=> self::$deviceId,
+				'notification'	=> $notification
+			);
+			$headers = array
+			(
+				'Authorization: key=' . $apiKey,
+				'Content-Type: application/json'
+			);
+
+			# Send Reponse To FireBase Server
+			$ch = curl_init();
+			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+			curl_setopt( $ch,CURLOPT_POST, true );
+			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+			$result = curl_exec($ch );
+			curl_close( $ch );
+		}
+
 	}
-	
-	static protected $push = null;
+
+	static protected $push = [];
+
+	static $deviceId = null;
+
 }

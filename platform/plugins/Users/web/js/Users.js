@@ -2420,16 +2420,12 @@ Q.onReady.add(function() {
 			navigator.serviceWorker.register(Q.url('plugins/Users/js/sw.js')).then(function(registration) {
 				messaging.useServiceWorker(registration);
 				messaging.requestPermission().then(function() {
-					console.log('request permission')
-					// post config to SW
-					// registration.active.postMessage(JSON.stringify({config: config}));
 					console.log('Notification permission granted.');
 					messaging.getToken().then(function(currentToken) {
 						if (currentToken) {
 							registration.active.postMessage(JSON.stringify({config: appConfig.client}));
+							localStorage.setItem("Q\tUsers.Device.deviceId", currentToken);
 							console.log(currentToken);
-							//sendTokenToServer(currentToken);
-							//updateUIForPushEnabled(currentToken);
 						} else {
 							console.warn('No Instance ID token available. Request permission to generate one.');
 						}
