@@ -506,6 +506,20 @@ Date.fromDateTime = function _Date_fromDateTime(dateTimeString) {
 };
 
 /**
+ * Returns a Date from a timestamp, which may be in seconds or milliseconds.
+ * Returns null if isNaN(timestamp) was true.
+ * @param {String|Number} timestamp
+ * @return {Date|null}
+ */
+Date.fromTimestamp = function (timestamp) {
+	if (isNaN(timestamp)) {
+		return null;
+	}
+	timestamp = parseFloat(timestamp);
+	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);
+};
+
+/**
  * Returns a Date from a dateTimeString
  * @param {Boolean} [dateOnly] pass true to return just the date part
  * @return {String}
