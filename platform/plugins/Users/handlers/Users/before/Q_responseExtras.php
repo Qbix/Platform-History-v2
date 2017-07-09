@@ -67,6 +67,5 @@ function Users_before_Q_responseExtras()
 			}
 		}
 	}
-	Q_Response::setScriptData('Q.plugins.Users.apps.chrome', Q_Config::get('Users', 'apps', 'chrome', $app, array()));
 
 }
