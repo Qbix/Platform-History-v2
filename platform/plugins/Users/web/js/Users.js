@@ -2419,8 +2419,9 @@ Q.onReady.add(function() {
 			navigator.serviceWorker.register(Q.url('plugins/Users/js/sw.js')).then(function(registration) {
 				messaging.useServiceWorker(registration);
 				messaging.requestPermission().then(function() {
+					console.log('request permission')
 					// post config to SW
-					//registration.active.postMessage(JSON.stringify({config: config}));
+					// registration.active.postMessage(JSON.stringify({config: config}));
 					console.log('Notification permission granted.');
 					messaging.getToken().then(function(currentToken) {
 						if (currentToken) {
