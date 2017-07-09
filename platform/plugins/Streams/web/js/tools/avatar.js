@@ -16,12 +16,14 @@ var Streams = Q.Streams;
  * @param {String} prefix Prefix of the tool to be constructed.
  * @param {Object} [options] A hash of options, containing:
  *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
- *   @param {Number|String} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. Or pass a string to specify the url of the icon.
+ *   @param {Number|String|true} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.
  *   @param {Boolean} [options.contents=true] Set to false to not show the name
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
  *   @param {Boolean|Array} [options.editable=false] If true, and userId is the logged-in user's id, the tool presents an interface for the logged-in user to edit their name and icon. This can also be an array containing one or more of 'icon', 'name'.
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
+ *   @param {String} [options.className] Any css classes to add to the tool element
  *   @param {Boolean} [options.reflectChanges=true] Whether the tool should update its contents on changes to user streams like firstName, lastName, username and icon. Set to false if you are showing many avatars in a list such as "Users/list" or "Streams/participating" tools. Otherwise it can result many database queries – one per avatar!
+ *   @param {Boolean} [options.reflectIconChanges=String(options.icon).isUrl()] Whether to automatically update the icon if the user's icon stream changes
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Object} [options.templates]
  *     @param {Object} [options.templates.icon]
@@ -56,16 +58,24 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	if (!state.userId) {
 		return;
 	}
-	Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
-	.set(function (fields, field) {
-		var $img = tool.$('.Users_avatar_icon');
-		var iconSize = state.icon || $img.width();
-		$img.attr('src', 
-			Q.url(Streams.iconUrl(fields.icon, iconSize), null, {
-				cacheBust: state.cacheBustOnUpdate
-			})
-		);
-	}, this);
+	if (state.className) {
+		$(tool.element).addClass(state.className);
+	}
+	if (state.reflectIconChanges === undefined) {
+		state.reflectIconChanges = !String(state.icon).isUrl();
+	}
+	if (state.reflectIconChanges) {
+		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/icon', 'icon')
+		.set(function (fields, field) {
+			var $img = tool.$('.Users_avatar_icon');
+			var iconSize = state.icon || $img.width();
+			$img.attr('src', 
+				Q.url(Streams.iconUrl(fields.icon, iconSize), null, {
+					cacheBust: state.cacheBustOnUpdate
+				})
+			);
+		}, this);
+	}
 	if (!state.editable || state.editable.indexOf('name') < 0) {
 		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/firstName', 'content')
 		.set(handleChange, this);
@@ -83,6 +93,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	icon: Users.icon.defaultSize,
 	contents: true,
 	"short": false,
+	className: null,
 	reflectChanges: true,
 	templates: {
 		icon: {
