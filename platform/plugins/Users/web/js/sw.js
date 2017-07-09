@@ -42,12 +42,11 @@ function getConfig() {
 				reject(err);
 			};
 			request.onsuccess = function(){
-				console.log("Get config");
+				// get config from DB
 				resolve(request.result ? request.result : -1);
 			}
 		});
 	});
-
 }
 
 function initializeFirebase(config) {
@@ -64,10 +63,7 @@ self.addEventListener('push', function(event) {
 		var config = val.config;
 		if (config) {
 			var payload = JSON.parse(event.data.text());
-			return self.registration.showNotification(payload.notification.title, {
-				title: payload.notification.title,
-				body: payload.notification.body
-			})
+			return self.registration.showNotification(payload.notification.title, Object.assign(payload.notification, {data: payload.notification}));
 		}
 		return false;
 	});
@@ -82,4 +78,22 @@ self.addEventListener('message', function(event) {
 			console.log('Saved config');
 		});
 	}
+});
+
+self.addEventListener('notificationclick', function(event) {
+	event.notification.close();
+	// This looks to see if the current is already open and
+	// focuses if it is
+	var url = event.notification.data.data.click_action ? event.notification.data.data.click_action : "/";
+	event.waitUntil(clients.matchAll({
+		type: "window"
+	}).then(function(clientList) {
+		for (var i = 0; i < clientList.length; i++) {
+			var client = clientList[i];
+			if (client.url == url && 'focus' in client)
+				return client.focus();
+		}
+		if (clients.openWindow)
+			return clients.openWindow(url);
+	}));
 });
