@@ -196,7 +196,7 @@ abstract class Places extends Base_Places
 	 * @param {double} $long2 longitude in degrees
 	 * @return {double} The heading, in degrees
 	 */
-	function heading($lat1, $long1, $lat2, $long2) {
+	static function heading($lat1, $long1, $lat2, $long2) {
 		$lat1 = $lat1 * M_PI / 180;
 		$lat2 = $lat2 * M_PI / 180;
 		$dLong = ($long2 - $long1) * M_PI / 180;
@@ -207,16 +207,46 @@ abstract class Places extends Base_Places
 	}
 	
 	/**
-	 * Use this method to calculate the closest point on a polyline
+	 * Obtain a polyline from a route
+	 * @param {array} $route the route
+	 * @param {string} $platform the platform which produced the route
+	 * @return {array} An array of arrays of (x" => $latitude, "y" => $longitude)
+	 */
+	static function polyline($route, $options = array())
+	{
+		$platform = Q::ifset($options, 'platform', 'google');
+		if ($platform !== 'google') {
+			throw new Q_Exception_PlatformNotSupported(compact('platform'));
+		}
+		$polyline = array();
+		foreach ($route['legs'] as $leg) {
+			foreach ($leg['steps'] as $step) {
+				$lat = $step['start_location']['lat'];
+				$lng = $step['start_location']['lng'];
+				$polyline[] = array(
+					'x' => $lat,
+					'y' => $lng
+				);
+			}
+		}
+		$polyline[] = array(
+			'x' => $step['end_location']['lat'],
+			'y' => $step['end_location']['lng']
+		);
+		return $polyline;
+	}
+	
+	/**
+	 * Use this method to calculate the closest point on a polyline.
 	 * @method closest
 	 * @static
 	 * @param {array} point
 	 * @param {double} point.x
 	 * @param {double} point.y 
 	 * @param {array} polyline an array of associative arrays with "x" and "y" keys
-	 * @return {array} contains properties "index", "x", "y", "distance", "fraction"
+	 * @return {array} contains properties "index", "x", "y", "fraction", "distance" (in same units as x, y)
 	 */
-	function closest($point, $polyline) {
+	static function closest($point, $polyline) {
 		$x = $point['x'];
 		$y = $point['y'];
 		$closest = null;
@@ -227,7 +257,7 @@ abstract class Places extends Base_Places
 			$c = $polyline[$i]['x'];
 			$d = $polyline[$i]['y'];
 			$n = ($c-$a)*($c-$a) + ($d-$b)*($d-$b);
-			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)+($d-$b)) / $n : 0;
+			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)*($d-$b)) / $n : 0;
 			$frac = max(0, $frac, min(1, $frac));
 			$e = $a + ($c-$a)*$frac;
 			$f = $b + ($d-$b)*$frac;
@@ -241,6 +271,9 @@ abstract class Places extends Base_Places
 					'distance' => $dist,
 					'fraction' => $frac
 				);
+				if ($dist == 0) {
+					break;
+				}
 			}
         }
 		return $closest;

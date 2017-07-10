@@ -15,6 +15,18 @@ define('Q_UTILS_INTERNAL_TIMEOUT', 1);
 class Q_Utils
 {
 	/**
+	 * Converts timestamps to standard UNIX timestamp with seconds.
+	 * Accepts timestamps with seconds or milliseconds.
+	 * @param $timestamp
+	 * @return float
+	 */
+	static function timestamp($timestamp)
+	{
+		$timestamp = intval($timestamp);
+		return $timestamp > 10000000000 ? round($timestamp / 1000) : $timestamp;
+	}
+
+	/**
 	 * Generates signature for the data
 	 * @method signature
 	 * @static
@@ -501,9 +513,9 @@ class Q_Utils
 		} else {
 			// Non-CURL based version...
 			if (!isset($header)) {
-				if ($with_data) $headers[] = "Content-type: application/x-www-form-urlencoded";
+				if ($data) $headers[] = "Content-type: application/x-www-form-urlencoded";
 				$headers[] = "User-Agent: $user_agent";
-				if ($with_data) $headers[] = "Content-length: " . strlen($data);
+				if ($data) $headers[] = "Content-length: " . strlen($data);
 				$header = implode("\r\n", $headers);
 			}
 			$context = stream_context_create(array(
