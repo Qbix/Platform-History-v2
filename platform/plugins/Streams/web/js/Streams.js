@@ -1461,7 +1461,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	}
 };
 Streams.related.options = {
-	withParticipant: true;
+	withParticipant: true
 };
 /**
  * Occurs when Streams.related encounters an error loading the response from the server
