@@ -133,30 +133,20 @@ var Places = Q.Places = Q.plugins.Places = {
 	 * @param {Object} coordinates]
 	 * @param {Object} coordinates.latitude
 	 * @param {Object} coordinates.longitude
+	 * @param {Object} [options]
+	 * @param {String} [options.platform=Places.options.platform]
 	 * @return {Number} the heading
 	 */
-	headingAlongRoute: function (route, coordinates) {
-		var point = {
-			x: coordinates.latitude,
-			y: coordinates.longitude
-		};
-		var polyline = [];
+	headingAlongRoute: function (route, coordinates, options) {
 		if (!route.legs || !route.legs.length) {
 			// TODO: try to get heading from Places.heading() and previous coordinates
 			return 0;
 		}
-		var steps = Q.getObject(['legs', 0, 'steps'], route) || route.legs;
-		Q.each(steps, function () {
-			polyline.push({
-				x: this.start_location.lat,
-				y: this.start_location.lng
-			})
-		});
-		var lastStep = steps[steps.length-1];
-		polyline.push({
-			x: lastStep.end_location.lat,
-			y: lastStep.end_location.lng
-		});
+		var point = {
+			x: coordinates.latitude,
+			y: coordinates.longitude
+		};
+		var polyline = Places.polyline(route, options);
 		var closest = Places.closest(point, polyline);
 		var from = polyline[closest.index-1];
 		var to = polyline[closest.index];
@@ -251,6 +241,35 @@ var Places = Q.Places = Q.plugins.Places = {
 			Q.handle(Places.route.onResult, Places, [directions, status, d, params]);
 			Q.handle(callback, Places, [directions, status, d, params]);
 		});
+	},
+	
+	/**
+	 * Obtain a polyline from a route
+	 * @param {Object} route the route
+	 * @param {Object} options
+	 * @param {String} [options.platform=Places.options.platform]
+	 */
+	polyline: function (route, options) {
+		options = options || {};
+		var platform = options.platform || Places.options.platform;
+		var polyline = [];
+		var lastStep = null;
+		Q.each(route.legs, function (i, leg) {
+			Q.each(leg.steps, function (j, step) {
+				polyline.push({
+					x: this.start_location.lat,
+					y: this.start_location.lng
+				});
+				lastStep = step;
+			});
+		});
+		if (lastStep) {
+			polyline.push({
+				x: lastStep.end_location.lat,
+				y: lastStep.end_location.lng
+			});
+		}
+		return polyline;
 	}
 	
 };
