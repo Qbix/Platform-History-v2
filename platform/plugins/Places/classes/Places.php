@@ -207,6 +207,36 @@ abstract class Places extends Base_Places
 	}
 	
 	/**
+	 * Obtain a polyline from a route
+	 * @param {array} $route the route
+	 * @param {string} $platform the platform which produced the route
+	 * @return {array} An array of arrays of (x" => $latitude, "y" => $longitude)
+	 */
+	static function polyline($route, $options = array())
+	{
+		$platform = Q::ifset($options, 'platform', 'google');
+		if ($platform !== 'google') {
+			throw new Q_Exception_PlatformNotSupported(compact('platform'));
+		}
+		$polyline = array();
+		foreach ($route['legs'] as $leg) {
+			foreach ($leg['steps'] as $step) {
+				$lat = $step['start_location']['lat'];
+				$lng = $step['start_location']['lng'];
+				$polyline[] = array(
+					'x' => $lat,
+					'y' => $lng
+				);
+			}
+		}
+		$polyline[] = array(
+			'x' => $step['end_location']['lat'],
+			'y' => $step['end_location']['lng']
+		);
+		return $polyline;
+	}
+	
+	/**
 	 * Use this method to calculate the closest point on a polyline.
 	 * @method closest
 	 * @static

@@ -4211,7 +4211,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	var publisherId = stream.fields.publisherId;
 	var streamName = stream.fields.name;
 	var updated = {}, cleared = [], k;
-		
+	
 	// events about updated fields
 	for (k in fields) {
 		if (onlyChangedFields
