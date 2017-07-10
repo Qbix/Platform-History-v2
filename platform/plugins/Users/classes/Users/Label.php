@@ -190,7 +190,7 @@ class Users_Label extends Base_Users_Label
 		$criteria = compact('userId');
 		if ($filter) {
 			if (is_string($filter)) {
-				$filter = explode(",", $filter);
+				$filter = explode("\t", $filter);
 			}
 			foreach ($filter as &$f) {
 				$f = trim($f);
