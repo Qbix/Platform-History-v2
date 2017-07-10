@@ -204,6 +204,9 @@ class Users_Contact extends Base_Users_Contact
 			if (is_string($label) and substr($label, -1) === '/') {
 				$label = new Db_Range($label, true, false, true);
 			}
+			if (is_string($label)) {
+				$label = explode("\t", $label);
+			}
 			$criteria['label'] = $label;
 		}
 
