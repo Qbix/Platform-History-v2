@@ -936,6 +936,19 @@ class Q_Request
 	}
 	
 	/**
+	 * Get access to more browser capabilities
+	 * @return {Q_Browscap}
+	 */
+	static function browscap()
+	{
+		static $result = null;
+		if (!isset($result)) {
+			$result = new Q_Browscap(Q_FILES_DIR.DS.'Q'.DS.'Browscap'.DS.'cache');
+		}
+		return $result;
+	}
+	
+	/**
 	 * Infers the base URL, with possible controller
 	 * @method inferControllerUrl
 	 * @static
