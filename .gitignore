@@ -9,6 +9,7 @@ docs/
 !platform
 platform/.idea/
 platform/local/*
+platform/files/Q/Browscap/*
 platform/files/Q/sessions/*
 platform/files/sessions/*
 platform/plugins/*/files/

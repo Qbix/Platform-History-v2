@@ -392,7 +392,7 @@ class Q_Plugin
 		// Check and fix permissions
 		if(!file_exists($files_dir)) {
 			$mask = umask(Q_Config::get('Q', 'internal', 'umask', 0000));
-			mkdir($files_dir, $options['dirmode']);
+			mkdir($files_dir, $options['dirmode'], true);
 			umask($mask);
 		}
 
