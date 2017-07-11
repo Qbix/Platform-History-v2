@@ -2408,10 +2408,10 @@ Q.onReady.add(function () {
 });
 
 Q.onReady.add(function() {
-	if (Q.info.browser.name !== 'chrome') {
+	if (!((Q.info.browser.name === 'chrome') || (Q.info.browser.name === 'firefox'))) {
 		return;
 	}
-	var appConfig = Q.getObject('Q.Users.browserApps.chrome.' + Q.info.app);
+	var appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
 	Q.addScript(appConfig.scripts, function(){
 		// Initialize Firebase
 		firebase.initializeApp(appConfig.client);
@@ -2423,9 +2423,11 @@ Q.onReady.add(function() {
 					console.log('Notification permission granted.');
 					messaging.getToken().then(function(currentToken) {
 						if (currentToken) {
+							// send app config to service worker
 							registration.active.postMessage(JSON.stringify({config: appConfig.client}));
 							localStorage.setItem("Q\tUsers.Device.deviceId", currentToken);
-							console.log(currentToken);
+							localStorage.setItem("Q\tUsers.Device.appId", Q.info.browser.name);
+							_registerDevice();
 						} else {
 							console.warn('No Instance ID token available. Request permission to generate one.');
 						}
@@ -2442,6 +2444,25 @@ Q.onReady.add(function() {
 			console.log('onMessage: ', payload);
 		})
 	});
+	function _registerDevice(deviceId) {
+		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+		var storedAppId = localStorage.getItem("Q\tUsers.Device.appId");
+		deviceId = storedDeviceId || deviceId;
+		if (!deviceId) {
+			return;
+		}
+		Q.req('Users/device', function (err, response) {
+			if (!err) {
+				Q.handle(Users.onDevice, [response.data]);
+			}
+		}, {
+			method: 'post',
+			fields: {
+				deviceId: deviceId,
+				appId: storedAppId
+			}
+		});
+	}
 });
 
 /**
