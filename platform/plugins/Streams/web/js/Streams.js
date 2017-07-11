@@ -1906,9 +1906,11 @@ Sp.removePermission = function (permission) {
  * @method save
  * @param {Object} [options] A hash of options for the subsequent refresh.
  *   See Q.Streams.Stream.refresh
- * @param {Q.Event} [options.onResult] When the result of the server request comes back.
+ * @param {Q.Event} [options.onSave] When the result of the server request comes back.
+ *   The first parameter is any error that may have occurred.
  *   Note: the steam may not be refreshed yet by that point.
  *   You can return false from the handler to prevent the refresh, for whatever reason.
+ * @param {Q.Event} [options.onRefresh] When the stream has been saved and refrshed.
  */
 Sp.save = function _Stream_prototype_save (options) {
 	var stream = this;
@@ -1929,17 +1931,20 @@ Sp.save = function _Stream_prototype_save (options) {
 			return Streams.onError.handle.call(this, msg, args);
 		}
 		var s = data.slots.stream || null;
-		if (options && options.onResult) {
-			if (false === Q.handle(options.onResult, stream, [err, data])) {
+		if (options && options.onSave) {
+			if (false === Q.handle(options.onSave, stream, [err, data])) {
 				return;
 			}
 		}
 		// process the Streams/changed message and any other
 		// messages that may have been posted in the meantime.
 		var o = Q.extend({
-			evenIfNotRetained: true
+			evenIfNotRetained: true,
+			messages: true,
+			unlessSocket: false
 		}, options);
-		_refreshUnlessSocket(s.publisherId, s.name, o);
+		var onRefresh = options && options.onRefresh;
+		Stream.refresh(s.publisherId, s.name, onRefresh, o);
 	}, { method: 'put', fields: pf, baseUrl: baseUrl });
 };
 
