@@ -573,14 +573,14 @@ Q.Tool.define({
  *	If there were errors, first parameter is an array of errors.
  *  Otherwise, first parameter is null and second parameter is a Streams.Stream object
  * @param {object} [extra] Optional object which can include the following keys:
- *   @param {Mixed} [extra.participants=0] Optionally fetch that many participants
- *   @param {Mixed} [extra.messages=0] Optionally fetch that many latest messages
+ *   @param {Number|Object} [extra.participants=0] Optionally fetch up to that many participants
+ *   @param {Number|Object} [extra.messages=0] Optionally fetch up to that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
  *   @param {Array} [extra.totals] an array of message types to get totals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
  *    if any fields named in this array are == null
- *   @param {Mixed} [extra."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
+ *   @param {Mixed} [extra."$Module_$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  */
 Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	var args = arguments;
@@ -618,7 +618,6 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 		streamName: streamName
 	}));
 	func.call(this, 'stream', slotNames, publisherId, streamName,
-	
 	function Streams_get_response_handler (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (!msg && (!data || !data.stream)) {
@@ -1311,9 +1310,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		callback = options;
 		options = {};
 	}
-	options = Q.extend({
-		withParticipant: true
-	}, options);
+	options = Q.extend(Streams.related.options, options);
 	var near = isCategory ? 'to' : 'from',
 		far = isCategory ? 'from' : 'to',
 		farPublisherId = far+'PublisherId',
@@ -1462,6 +1459,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		// since they may come to be out of date
 		return false;
 	}
+};
+Streams.related.options = {
+	withParticipant: true
 };
 /**
  * Occurs when Streams.related encounters an error loading the response from the server
@@ -1906,9 +1906,11 @@ Sp.removePermission = function (permission) {
  * @method save
  * @param {Object} [options] A hash of options for the subsequent refresh.
  *   See Q.Streams.Stream.refresh
- * @param {Q.Event} [options.onResult] When the result of the server request comes back.
+ * @param {Q.Event} [options.onSave] When the result of the server request comes back.
+ *   The first parameter is any error that may have occurred.
  *   Note: the steam may not be refreshed yet by that point.
  *   You can return false from the handler to prevent the refresh, for whatever reason.
+ * @param {Q.Event} [options.onRefresh] When the stream has been saved and refrshed.
  */
 Sp.save = function _Stream_prototype_save (options) {
 	var stream = this;
@@ -1929,17 +1931,20 @@ Sp.save = function _Stream_prototype_save (options) {
 			return Streams.onError.handle.call(this, msg, args);
 		}
 		var s = data.slots.stream || null;
-		if (options && options.onResult) {
-			if (false === Q.handle(options.onResult, stream, [err, data])) {
+		if (options && options.onSave) {
+			if (false === Q.handle(options.onSave, stream, [err, data])) {
 				return;
 			}
 		}
 		// process the Streams/changed message and any other
 		// messages that may have been posted in the meantime.
 		var o = Q.extend({
-			evenIfNotRetained: true
+			evenIfNotRetained: true,
+			messages: true,
+			unlessSocket: false
 		}, options);
-		_refreshUnlessSocket(s.publisherId, s.name, o);
+		var onRefresh = options && options.onRefresh;
+		Stream.refresh(s.publisherId, s.name, onRefresh, o);
 	}, { method: 'put', fields: pf, baseUrl: baseUrl });
 };
 
@@ -2643,7 +2648,7 @@ Stream.join = function _Stream_join (publisherId, streamName, callback) {
 		}
 		var participant = new Participant(data.slots.participant);
 		Participant.get.cache.set(
-			[participant.publisherId, participant.name, participant.userId],
+			[participant.publisherId, participant.streamName, participant.userId],
 			0, participant, [err, participant]
 		);
 		callback && callback.call(participant, err, participant || null);
@@ -2691,7 +2696,7 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 		}
 		var participant = new Participant(data.slots.participant);
 		Participant.get.cache.set(
-			[participant.publisherId, participant.name, participant.userId],
+			[participant.publisherId, participant.streamName, participant.userId],
 			0, participant, [err, participant]
 		);
 		callback && callback.call(this, err, participant || null);
@@ -2735,7 +2740,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		}
 		var participant = new Participant(data.slots.participant);
 		Participant.get.cache.set(
-			[participant.publisherId, participant.name, participant.userId],
+			[participant.publisherId, participant.streamName, participant.userId],
 			0, participant, [err, participant]
 		);
 		callback && callback.call(participant, err, participant || null);
@@ -2782,7 +2787,7 @@ Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, call
 		}
 		var participant = new Participant(data.slots.participant);
 		Participant.get.cache.set(
-			[participant.publisherId, participant.name, participant.userId],
+			[participant.publisherId, participant.streamName, participant.userId],
 			0, participant, [err, participant]
 		);
 		callback && callback.call(this, err, participant || null);
