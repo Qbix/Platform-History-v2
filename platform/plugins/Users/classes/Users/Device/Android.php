@@ -14,12 +14,11 @@ class Users_Device_Android extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		if (empty($notification['icon'])) {
-			$notification['icon'] = 'myicon';
-		}
-		if (empty($notification['sound'])) {
-			$notification['sound'] = 'mySound';
-		}
+		$notification = [
+			'title' => $notification['alert']['title'],
+			'body' => $notification['alert']['body'],
+			'icon' => empty($notification['badge']) ? '' : $notification['badge']
+		];
 		self::$push[] = $notification;
 	}
 

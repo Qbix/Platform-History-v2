@@ -2372,8 +2372,10 @@ Q.onReady.add(function () {
 	push.on('registration', function(data) {
 		var deviceId = data.registrationId;
 		localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
-		var appId = location.href.queryField('Q.Users.appId');
-		localStorage.setItem("Q\tUsers.Device.appId", appId);
+		var appId = location.search.queryField('Q.Users.appId');
+		if (appId) {
+			localStorage.setItem("Q\tUsers.Device.appId", appId);
+		}
 		if (Q.Users.loggedInUser) {
 			_registerDevice();
 		}
@@ -2413,7 +2415,7 @@ Q.onReady.add(function () {
 });
 
 Q.onReady.add(function() {
-	if (!((Q.info.browser.name === 'chrome') || (Q.info.browser.name === 'firefox'))) {
+	if (!((Q.info.browser.name === 'chrome') || (Q.info.browser.name === 'firefox')) || Q.info.isCordova) {
 		return;
 	}
 	var appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
