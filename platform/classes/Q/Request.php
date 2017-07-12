@@ -733,6 +733,28 @@ class Q_Request
 	}
 	
 	/**
+	 * Returns the name of the browser that made the request
+	 * @return {string} can be "ie", "firefox", "chrome", "safari", "opera", otherwise null
+	 */
+	static function browser()
+	{
+		$userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+		$detect = array(
+			'msie' => 'ie',
+			'firefox' => 'firefox',
+			'chrome' => 'chrome',
+			'safari' => 'safari',
+			'opera' => 'opera'
+		);
+		foreach ($detect as $k => $v) {
+			if (strpos($userAgent, $k) !== false) {
+				return $v;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Use this to determine what method to treat the request as.
 	 * @method method
 	 * @static
@@ -911,6 +933,19 @@ class Q_Request
 		);
 		$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
 		return Q::take($info, $fields);
+	}
+	
+	/**
+	 * Get access to more browser capabilities
+	 * @return {Q_Browscap}
+	 */
+	static function browscap()
+	{
+		static $result = null;
+		if (!isset($result)) {
+			$result = new Q_Browscap(Q_FILES_DIR.DS.'Q'.DS.'Browscap'.DS.'cache');
+		}
+		return $result;
 	}
 	
 	/**

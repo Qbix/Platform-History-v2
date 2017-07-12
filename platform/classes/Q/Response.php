@@ -1562,7 +1562,7 @@ class Q_Response
 	{
 		$parts = parse_url(Q_Request::baseUrl());
 		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
-		$domain = '.'.$parts['host'];
+		$domain = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
 		setcookie($name, $value, $expires, $path, $domain);
 	}
 
