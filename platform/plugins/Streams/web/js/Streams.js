@@ -4700,7 +4700,11 @@ Q.onInit.add(function _Streams_onInit() {
 			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
 				return; // it was already processed
 			}
-			// New message posted - update cache
+			// TODO: if a message was simulated with this ordinal, and this message
+			// was expected (e.g. it returns the same id that the simulated message had)
+			// then you can skip processing this message.
+			
+			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (Q.typeOf(msg) === 'Q.Streams.Message')
 				? msg
@@ -4742,17 +4746,38 @@ Q.onInit.add(function _Streams_onInit() {
 				
 				var streamType = stream.fields.type;
 				var instructions = msg.instructions && JSON.parse(msg.instructions);
-				var node;
 				var updatedParticipants = true;
+				var prevState;
 				switch (msg.type) {
 				case 'Streams/join':
-					_updateParticipantCache(msg, 'participating', message.getInstruction('prevState'), usingCached);
+					prevState = message.getInstruction('prevState');
+					_updateParticipantCache(msg, 'participating', prevState, usingCached);
 					break;
 				case 'Streams/leave':
-					_updateParticipantCache(msg, 'left', message.getInstruction('prevState'), usingCached);
+					prevState = message.getInstruction('prevState');
+					_updateParticipantCache(msg, 'left', prevState, usingCached);
 					break;
 				case 'Streams/changed':
-					Stream.update(stream, instructions.changes, null);
+					if (Q.isEmpty(instructions.changes)) {
+						return;
+					}
+					var doRefresh = false;
+					for (var f in instructions.changes) {
+						if (instructions.changes[f] == null) {
+							// One of the extended fields has changed, but we don't
+							// know the new value. 
+							doRefresh = true;
+							break;
+						}
+					}
+					if (doRefresh) {
+						// Refresh the stream, this will trigger Stream.update on success
+						Stream.refresh(stream.fields.publisherId, stream.fields.name, null, {
+							evenIfNotRetained: true
+						});
+					} else {
+						Stream.update(stream, instructions.changes, null);
+					}
 					break;
 				case 'Streams/progress':
 					Stream.update(stream, instructions, null);
