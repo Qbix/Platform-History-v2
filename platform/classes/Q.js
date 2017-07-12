@@ -710,10 +710,17 @@ Q.getter = function _Q_getter(original, options) {
 
 					// process waiting callbacks
 					var wk = _waiting[key];
-					if (wk) for (i = 0; i < wk.length; i++) {
-						_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, true);
-					}
 					delete _waiting[key];
+					if (wk) {
+						for (i = 0; i < wk.length; i++) {
+							try {
+								_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, true);
+							} catch (e) {
+								debugger;
+								console.warn(e);
+							}
+						}
+					}
 
 					// tell throttle to execute the next function, if any
 					if (gw.throttle && gw.throttle.throttleNext) {
