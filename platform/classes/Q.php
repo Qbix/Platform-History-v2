@@ -1504,12 +1504,24 @@ class Q
 		if (!$a && !$b) return 0;
 	    $a = explode(".", $a);
 	    $b = explode(".", $b);
-	    foreach ($a as $depth => $aVal)  {
-	    	if (!isset($b[$depth])) $b[$depth] = "0";
-            if ($aVal > $b[$depth]) return 1;
-            else if ($aVal < $b[$depth]) return -1;
-	    }
-	    return (count($a) < count($b)) ? -1 : 0;
+		$ca = count($a);
+		for ($i = 0; $i < $ca; ++$i) {
+			$ai = $a[$i];
+			$bi = isset($b[$i]) ? intval($b[$i]) : 0;
+            if ($ai > $bi) {
+				return 1;
+			}
+			if ($ai < $bi) {
+				return -1;
+			}
+		}
+		$cb = count($b);
+		for ($i = $ca; $i < $cb; ++$i) {
+			if (intval($b[$i]) > 0) {
+				return -1;
+			}
+		}
+		return 0;
 	}
 
 	/**
