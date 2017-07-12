@@ -14,13 +14,7 @@ class Users_Device_Firefox extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		$notification = [
-			'title' => $notification['alert']['title'],
-			'body' => $notification['alert']['body'],
-			'icon' => empty($notification['badge']) ? '' : $notification['badge'],
-			'click_action' => empty($notification['payload']['click_action']) ? '/' : $notification['payload']['click_action']
-		];
-		self::$push[] = $notification;
+		self::$push[] = Users_Device_FCM::prepareForWeb($notification);
 	}
 
 	/**
@@ -34,34 +28,11 @@ class Users_Device_Firefox extends Users_Device
 		if (!self::$push) {
 			return;
 		}
-
-		$app = Q_Config::expect('Q', 'app');
-		$apiKey = Q_Config::expect('Users', 'apps', 'chrome', $app, "server", "key");
-
+		$apiKey = Q_Config::expect('Users', 'apps', 'firefox', Q_Config::expect('Q', 'app'), "server", "key");
 		foreach (self::$push as $notification) {
-			$fields = array
-			(
-				'to'		=> self::$deviceId,
-				'notification'	=> $notification
-			);
-			$headers = array
-			(
-				'Authorization: key=' . $apiKey,
-				'Content-Type: application/json'
-			);
-
-			# Send Reponse To FireBase Server
-			$ch = curl_init();
-			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
-			curl_setopt( $ch,CURLOPT_POST, true );
-			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
-			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
-			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
-			$result = curl_exec($ch );
-			curl_close( $ch );
+			Users_Device_FCM::send($apiKey, self::$deviceId, $notification);
 		}
-
+		self::$push = [];
 	}
 
 	static protected $push = [];

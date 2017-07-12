@@ -38,6 +38,7 @@ module.exports = Users_Device.Safari = Users_Device_Safari;
  * @param {String} [notification.alert.locKey] Apple-only
  * @param {String} [notification.alert.locArgs] Apple-only
  * @param {String} [notification.alert.launchImage] Apple-only
+ * @param {String} [notification.url] The url of the notification
  * @param {String} [notification.badge] The badge
  * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
  * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.

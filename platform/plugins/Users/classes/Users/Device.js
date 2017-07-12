@@ -133,4 +133,5 @@ module.exports = Users.Device = Users_Device;
 Q.require('Users/Device/Ios');
 Q.require('Users/Device/Android');
 Q.require('Users/Device/Chrome');
+Q.require('Users/Device/Firefox');
 Q.require('Users/Device/Safari');
