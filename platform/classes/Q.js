@@ -2365,7 +2365,7 @@ Q.realPath = function _Q_realPath(filename, ignoreCache) {
 	for (var i = 0; i<=paths.length; ++i) {
 		var p = (i == paths.length) ? '' : paths[i];
 		var fullpath = path.normalize((p.substr(-1) === Q.DS) ? p + filename : p + Q.DS + filename);
-		if (fs.existsSync(fullpath) || fs.existsSync(fullpath + '.js')) {
+		if (fs.existsSync(fullpath)) {
 			result = fullpath;
 			break;
 		}
@@ -2473,8 +2473,17 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
  * @return {mixed}
  */
 Q.require = function _Q_require(what) {
-	var realPath = Q.realPath(what);
-	if (!realPath) throw new Error("Q.require: file '"+what+"' not found");
+	var ext = what.split('.').pop();
+	var realPath = Q.realPath(what + (ext === 'js' ? '' : '.js'));
+	if (!realPath) {
+		var path = Q.realPath(what);
+		if (path && fs.lstatSync(path).isFile()) {
+			realPath = path;
+		}
+	}
+	if (!realPath) {
+		throw new Error("Q.require: file '"+what+"' not found");
+	}
 	return require(realPath);
 };
 
