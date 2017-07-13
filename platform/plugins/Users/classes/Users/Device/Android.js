@@ -18,7 +18,7 @@ var FCM = require('fcm-node');
  * @param fields {object} The fields values to initialize table row as
  * an associative array of `{column: value}` pairs
  */
-function Users_Device_Android (fields) {
+function Users_Device_Android(fields) {
 	// Run constructors of mixed in objects
 	Users_Device.constructors.apply(this, arguments);
 }
@@ -70,7 +70,10 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 			sound: notification.sound ? 'default' : notification.sound
 		}
 	};
-	fcm.send(message, function(err, response) {
+	if (notification.badge) {
+		message.data = { badge: notification.badge };
+	}
+	fcm.send(message, function (err, response) {
 		if (callback) {
 			callback(err, response);
 		}

@@ -14,7 +14,7 @@ class Users_Device_Android extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		self::$push[] = Users_Device_FCM::prepareForAndroid($notification);
+		self::$push[] = Users_Device_FCM::prepareForAndroid(self::$deviceId, $notification);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class Users_Device_Android extends Users_Device
 		}
 		$apiKey = Q_Config::expect('Users', 'apps', 'android', Q_Config::expect('Q', 'app'), "key");
 		foreach (self::$push as $notification) {
-			Users_Device_FCM::send($apiKey, self::$deviceId, $notification);
+			Users_Device_FCM::send($apiKey, $notification);
 		}
 		self::$push = [];
 	}
