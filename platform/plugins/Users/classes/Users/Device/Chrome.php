@@ -13,7 +13,7 @@ class Users_Device_Chrome extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		self::$push[] = Users_Device_FCM::prepareForWeb($notification);
+		self::$push[] = Users_Device_FCM::prepareForWeb(self::$deviceId, $notification);
 	}
 
 	/**
@@ -29,7 +29,7 @@ class Users_Device_Chrome extends Users_Device
 		}
 		$apiKey = Q_Config::expect('Users', 'apps', 'chrome', Q_Config::expect('Q', 'app'), "server", "key");
 		foreach (self::$push as $notification) {
-			Users_Device_FCM::send($apiKey, self::$deviceId, $notification);
+			Users_Device_FCM::send($apiKey, $notification);
 		}
 		self::$push = [];
 	}
