@@ -7,37 +7,37 @@ class Users_Device_FCM
 	{
 		// Web (JavaScript) — keys for notification messages
 		// https://firebase.google.com/docs/cloud-messaging/http-server-ref
-		return [
+		return array(
 			'title' => $notification['alert']['title'],
 			'body' => $notification['alert']['body'],
-			'icon' => empty($notification['badge']) ? '' : $notification['badge'],
+			'icon' => empty($notification['icon']) ? '' : $notification['icon'],
 			'click_action' => empty($notification['url']) ? '/' : $notification['url']
-		];
+		);
 	}
 
 	static function prepareForAndroid($notification)
 	{
 		// Android — keys for notification messages
 		// https://firebase.google.com/docs/cloud-messaging/http-server-ref
-		return [
+		return array(
 			'title' => $notification['alert']['title'],
 			'body' => $notification['alert']['body'],
-			'icon' => empty($notification['badge']) ? '' : $notification['badge'],
+			'icon' => empty($notification['icon']) ? '' : $notification['icon'],
 			'click_action' => empty($notification['url']) ? null : $notification['url'],
 			'sound' => empty($notification['sound']) ? 'default' : $notification['sound']
- 		];
+		);
 	}
 
 	static function send($apiKey, $deviceId, $notification)
 	{
-		$fields = [
+		$fields = array(
 			'to' => $deviceId,
 			'notification' => $notification
-		];
-		$headers = [
+		);
+		$headers = array(
 			'Authorization: key=' . $apiKey,
 			'Content-Type: application/json'
-		];
+		);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
 		curl_setopt($ch, CURLOPT_POST, true);

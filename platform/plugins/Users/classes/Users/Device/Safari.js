@@ -41,6 +41,7 @@ module.exports = Users_Device.Safari = Users_Device_Safari;
  * @param {String} [notification.url] The url of the notification
  * @param {String} [notification.badge] The badge
  * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+ * @param {string} [notification.icon] The icon
  * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
  * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
  * @param {Object} [notification.payload] Put all your custom notification fields here
