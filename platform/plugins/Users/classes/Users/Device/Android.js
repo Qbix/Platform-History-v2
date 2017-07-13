@@ -42,6 +42,7 @@ module.exports = Users_Device.Android = Users_Device_Android;
  * @param {String} [notification.url] The url of the notification
  * @param {String} [notification.badge] The badge
  * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+ * @param {string} [notification.icon] The icon
  * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
  * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
  * @param {Object} [notification.payload] Put all your custom notification fields here
@@ -64,8 +65,8 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 		notification: {
 			title: notification.alert.title,
 			body: notification.alert.body,
-			icon: notification.badge ? null : notification.badge,
-			click_action: notification.url ? null : notification.url,
+			icon: notification.icon ? notification.icon : null,
+			click_action: notification.url ? notification.url : null,
 			sound: notification.sound ? 'default' : notification.sound
 		}
 	};

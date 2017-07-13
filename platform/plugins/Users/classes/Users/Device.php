@@ -138,6 +138,7 @@ class Users_Device extends Base_Users_Device
 	 * @param {string} [$notification.alert.launchImage] Apple-only
 	 * @param {string} [$notification.badge] The badge
 	 * @param {string} [$notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+	 * @param {string} [$notification.icon] The icon
 	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action' and 'title'.
 	 * @param {string} [$notification.category] Apple-only. The name of the category for actions registered on the client side.
 	 * @param {array} [$notification.payload] Put all your custom notification fields here
