@@ -2414,6 +2414,37 @@ Q.onReady.add(function () {
 	}
 });
 
+Q.onReady.add(function(){
+	if ((Q.info.browser.name !== 'safari') || Q.info.isCordova) {
+		return;
+	}
+	var appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
+	var permissionData = window.safari.pushNotification.permission('web.com.example.domain');
+	checkRemotePermission(permissionData);
+	function checkRemotePermission(permissionData) {
+		if (permissionData.permission === 'default') {
+			// This is a new web service URL and its validity is unknown.
+			window.safari.pushNotification.requestPermission(
+				appConfig.webServiceURL, // The web service URL.
+				appConfig.websitePushID,     // The Website Push ID.
+				{}, // Data that you choose to send to your server to help you identify the user.
+				checkRemotePermission         // The callback function.
+			);
+		}
+		else if (permissionData.permission === 'denied') {
+			// The user said no.
+			console.log('Permission dinied');
+		}
+		else if (permissionData.permission === 'granted') {
+			// The web service URL is a valid push provider, and the user said yes.
+			// permissionData.deviceToken is now available to use.
+			console.log('Permission granted');
+			console.log('Device token', permissionData.deviceToken);
+		}
+	}
+});
+
+
 Q.onReady.add(function() {
 	if (!((Q.info.browser.name === 'chrome') || (Q.info.browser.name === 'firefox')) || Q.info.isCordova) {
 		return;
