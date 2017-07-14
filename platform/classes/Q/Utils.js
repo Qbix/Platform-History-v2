@@ -30,7 +30,7 @@ Utils.signature = function (data, secret) {
 		throw new Q.Exception('Q.Utils.signature is expecting a secret');
 	}
 	if (typeof(data) !== 'string') {
-		data = http_build_query(ksort(data));
+		data = http_build_query(ksort(data)).replace(/\+/g, '%20');
 	}
 	return Q.Crypto.HmacSHA1(data, secret).toString();
 };
@@ -102,8 +102,13 @@ function ksort(obj) {
 function urlencode (str) {
 	// http://kevin.vanzonneveld.net
 	str = (str + '').toString();
-	return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
-	replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
+	return encodeURIComponent(str)
+		.replace(/!/g, '%21')
+		.replace(/'/g, '%27')
+		.replace(/\(/g, '%28')
+		.replace(/\)/g, '%29')
+		.replace(/\*/g, '%2A')
+		.replace(/%20/g, '+');
 }
 
 function http_build_query (formdata, numeric_prefix, arg_separator) {
