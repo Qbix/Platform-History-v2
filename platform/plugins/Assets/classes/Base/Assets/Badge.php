@@ -21,9 +21,7 @@
  * @param {string} [$fields.name] defaults to ""
  * @param {string} [$fields.icon] defaults to null
  * @param {string} [$fields.title] defaults to ""
- * @param {string} [$fields.description] defaults to ""
- * @param {string} [$fields.pic_small] defaults to ""
- * @param {string} [$fields.pic_big] defaults to ""
+ * @param {string} [$fields.description] defaults to null
  * @param {integer} [$fields.points] defaults to 0
  */
 abstract class Base_Assets_Badge extends Db_Row
@@ -61,19 +59,7 @@ abstract class Base_Assets_Badge extends Db_Row
 	/**
 	 * @property $description
 	 * @type string
-	 * @default ""
-	 * 
-	 */
-	/**
-	 * @property $pic_small
-	 * @type string
-	 * @default ""
-	 * 
-	 */
-	/**
-	 * @property $pic_big
-	 * @type string
-	 * @default ""
+	 * @default null
 	 * 
 	 */
 	/**
@@ -555,7 +541,7 @@ return array (
 	function beforeSet_description($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('description', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('description', $value);
@@ -592,115 +578,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_pic_small
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_pic_small($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('pic_small', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".pic_small");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".pic_small");
-		return array('pic_small', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the pic_small field
-	 * @return {integer}
-	 */
-	function maxSize_pic_small()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for pic_small column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_pic_small()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_pic_big
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_pic_big($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('pic_big', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".pic_big");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".pic_big");
-		return array('pic_big', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the pic_big field
-	 * @return {integer}
-	 */
-	function maxSize_pic_big()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for pic_big column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_pic_big()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
+  1 => true,
   2 => '',
   3 => NULL,
 );			
@@ -790,7 +668,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('appId', 'communityId', 'name', 'icon', 'title', 'description', 'pic_small', 'pic_big', 'points');
+		$field_names = array('appId', 'communityId', 'name', 'icon', 'title', 'description', 'points');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

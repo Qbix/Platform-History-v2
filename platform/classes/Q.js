@@ -2475,7 +2475,7 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 Q.require = function _Q_require(what) {
 	var ext = what.split('.').pop();
 	var realPath = Q.realPath(what + (ext === 'js' ? '' : '.js'));
-	if (!realPath) {
+	if (!realPath && ext != 'js') {
 		var path = Q.realPath(what);
 		if (path && fs.lstatSync(path).isFile()) {
 			realPath = path;

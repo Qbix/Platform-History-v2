@@ -276,7 +276,7 @@ abstract class Base_Assets_Earned extends Db_Row
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".appId");
-		if (strlen($value) > 255)
+		if (strlen($value) > 31)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".appId");
 		return array('appId', $value);			
 	}
@@ -288,7 +288,7 @@ abstract class Base_Assets_Earned extends Db_Row
 	function maxSize_appId()
 	{
 
-		return 255;			
+		return 31;			
 	}
 
 	/**
@@ -302,7 +302,7 @@ return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -461,7 +461,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'MUL',
+  2 => '',
   3 => NULL,
 );			
 	}
