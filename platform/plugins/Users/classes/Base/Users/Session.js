@@ -28,9 +28,9 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.deviceId] defaults to ""
  * @param {integer} [$fields.timeout] defaults to 0
  * @param {integer} [$fields.duration] defaults to 0
- * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.platform] defaults to null
  * @param {string} [$fields.appId] defaults to null
- * @param {string} [$fields.version] defaults to ""
+ * @param {string} [$fields.version] defaults to null
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -86,7 +86,7 @@ Q.mixin(Base, Row);
 /**
  * @property platform
  * @type String
- * @default ""
+ * @default null
  * A platform like ios or android
  */
 /**
@@ -98,7 +98,7 @@ Q.mixin(Base, Row);
 /**
  * @property version
  * @type String
- * @default ""
+ * @default null
  * The version of the platform
  */
 /**
@@ -595,9 +595,7 @@ return [["int","11","",false],false,"","0"];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_platform = function (value) {
-		if (value == null) {
-			value='';
-		}
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".platform");
@@ -621,7 +619,7 @@ Base.prototype.maxSize_platform = function () {
 	 */
 Base.column_platform = function () {
 
-return [["varchar","31","",false],false,"",null];
+return [["varchar","31","",false],true,"",null];
 };
 
 /**
@@ -669,9 +667,7 @@ return [["varchar","200","",false],true,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_version = function (value) {
-		if (value == null) {
-			value='';
-		}
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".version");
@@ -695,7 +691,7 @@ Base.prototype.maxSize_version = function () {
 	 */
 Base.column_version = function () {
 
-return [["varchar","34","",false],false,"",null];
+return [["varchar","34","",false],true,"",null];
 };
 
 /**
