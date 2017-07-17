@@ -2,7 +2,7 @@ ALTER TABLE `{$prefix}badge`
 CHANGE app appId varbinary(31) NOT NULL FIRST,
 ADD COLUMN communityId varbinary(31) NULL DEFAULT NULL AFTER appId,
 CHANGE title title varchar(255) NOT NULL,
-ADD COLUMN description TEXT NOT NULL DEFAULT "" AFTER title,
+ADD COLUMN description TEXT AFTER title,
 DROP COLUMN pic_big,
 DROP COLUMN pic_small,
 ADD COLUMN icon varbinary(255) NULL DEFAULT NULL AFTER name;
@@ -11,11 +11,11 @@ ALTER TABLE `{$prefix}earned`
 CHANGE app appId varbinary(31) NOT NULL FIRST,
 CHANGE userId userId varchar(31) NOT NULL ,
 CHANGE badge_name badgeName varchar(255) NOT NULL,
+ADD COLUMN communityId varbinary(31) NULL DEFAULT NULL AFTER appId,
 CHANGE insertedTime earnedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER communityId,
 DROP COLUMN associated_id,
-ADD COLUMN communityId varbinary(31) NULL DEFAULT NULL AFTER appId,
 ADD COLUMN publisherId varbinary(31) NULL DEFAULT NULL AFTER badgeName,
 ADD COLUMN streamName varbinary(255) NULL DEFAULT NULL AFTER publisherId,
 DROP INDEX userId,
-ADD INDEX byTime (appId, communityId, earnedTime)
+ADD INDEX byTime (appId, communityId, earnedTime),
 ADD INDEX byUser (appId, communityId, userId);
