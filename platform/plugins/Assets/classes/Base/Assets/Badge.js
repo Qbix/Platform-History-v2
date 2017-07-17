@@ -26,9 +26,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.name] defaults to ""
  * @param {string} [$fields.icon] defaults to null
  * @param {string} [$fields.title] defaults to ""
- * @param {string} [$fields.description] defaults to ""
- * @param {string} [$fields.pic_small] defaults to ""
- * @param {string} [$fields.pic_big] defaults to ""
+ * @param {string} [$fields.description] defaults to null
  * @param {integer} [$fields.points] defaults to 0
  */
 function Base (fields) {
@@ -70,19 +68,7 @@ Q.mixin(Base, Row);
 /**
  * @property description
  * @type String
- * @default ""
- * 
- */
-/**
- * @property pic_small
- * @type String|Buffer
- * @default ""
- * 
- */
-/**
- * @property pic_big
- * @type String|Buffer
- * @default ""
+ * @default null
  * 
  */
 /**
@@ -291,8 +277,6 @@ Base.prototype.fieldNames = function () {
 		"icon",
 		"title",
 		"description",
-		"pic_small",
-		"pic_big",
 		"points"
 	];
 };
@@ -492,9 +476,7 @@ return [["varchar","255","",false],false,"",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_description = function (value) {
-		if (value == null) {
-			value='';
-		}
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".description");
@@ -518,83 +500,7 @@ Base.prototype.maxSize_description = function () {
 	 */
 Base.column_description = function () {
 
-return [["text",65535,"",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_pic_small
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_pic_small = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".pic_small");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".pic_small");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the pic_small field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_pic_small = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for pic_small column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_pic_small = function () {
-
-return [["varbinary","255","",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_pic_big
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_pic_big = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".pic_big");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".pic_big");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the pic_big field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_pic_big = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for pic_big column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_pic_big = function () {
-
-return [["varbinary","255","",false],false,"",null];
+return [["text",65535,"",false],true,"",null];
 };
 
 /**
