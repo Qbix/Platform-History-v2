@@ -23,9 +23,9 @@
  * @param {string} [$fields.deviceId] defaults to ""
  * @param {integer} [$fields.timeout] defaults to 0
  * @param {integer} [$fields.duration] defaults to 0
- * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.platform] defaults to null
  * @param {string} [$fields.appId] defaults to null
- * @param {string} [$fields.version] defaults to ""
+ * @param {string} [$fields.version] defaults to null
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -77,7 +77,7 @@ abstract class Base_Users_Session extends Db_Row
 	/**
 	 * @property $platform
 	 * @type string
-	 * @default ""
+	 * @default null
 	 * A platform like ios or android
 	 */
 	/**
@@ -89,7 +89,7 @@ abstract class Base_Users_Session extends Db_Row
 	/**
 	 * @property $version
 	 * @type string
-	 * @default ""
+	 * @default null
 	 * The version of the platform
 	 */
 	/**
@@ -690,7 +690,7 @@ return array (
 	function beforeSet_platform($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('platform', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('platform', $value);
@@ -727,7 +727,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
   3 => NULL,
 );			
@@ -798,7 +798,7 @@ return array (
 	function beforeSet_version($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('version', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('version', $value);
@@ -835,7 +835,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
   3 => NULL,
 );			
