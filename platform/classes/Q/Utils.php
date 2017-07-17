@@ -42,6 +42,7 @@ class Q_Utils
 		if (is_array($data)) {
 			ksort($data);
 			$data = http_build_query($data);
+			$data = str_replace('+', '%20', $data);
 		}
 		return self::hmac('sha1', $data, $secret);
 	}
