@@ -969,6 +969,7 @@ class Streams_Stream extends Base_Streams_Stream
 			'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess',
 			'closedTime'
 		);
+		$nonCoreFields = array();
 		$original = $this->fieldsOriginal;
 		$changes = array();
 		foreach ($fieldNames as $f) {
@@ -978,9 +979,15 @@ class Streams_Stream extends Base_Streams_Stream
 			and json_encode($original[$f]) === json_encode($v)) {
 				continue;
 			}
-			$changes[$f] = in_array($f, $coreFields)
-				? $v // record the changed value in the instructions
-				: null; // record a change but the value may be too big, etc.
+			if (in_array($f, $coreFields)) {
+				// record the changed value in the instructions
+				$changes[$f] = $v;
+			} else {
+				$nonCoreFields[] = $f;
+			}
+		}
+		foreach ($nonCoreFields as $f) {
+			$changes[$f] = null; // the value may be too big, etc.
 		}
 		unset($changes['updatedTime']);
 		if (!$changes) {
