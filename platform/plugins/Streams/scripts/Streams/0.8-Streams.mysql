@@ -84,6 +84,7 @@ DROP TABLE IF EXISTS `{$prefix}message`;
 CREATE TABLE `{$prefix}message` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that publishes the stream to place the message on',
   `streamName` varbinary(255) NOT NULL COMMENT 'the stream to place the message on',
+  `ordinal` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'used for storing the order of messages in the stream',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on shard of publisherId',
   `sentTime` timestamp NULL DEFAULT NULL COMMENT 'time on shard of byUserId',
   `byUserId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of the user sending message.',
@@ -92,7 +93,6 @@ CREATE TABLE `{$prefix}message` (
   `content` varchar(1023) NOT NULL COMMENT 'short human-readable content, like twitter and its 140 characters',
   `instructions` varchar(4092) NOT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding',
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000' COMMENT 'this may depend on the reputation of user_by relative to the stream',
-  `ordinal` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Count messages posted to the stream',
   PRIMARY KEY (`publisherId`,`streamName`,`ordinal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
