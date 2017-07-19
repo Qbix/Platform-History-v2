@@ -161,10 +161,8 @@
 			"web": {
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
-					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
-					"key": "AUTHORIZATION KEY HERE",
-					"secret": "SHARED SECRET HERE",
-					"senderID": "YOUR SENDER ID HERE"
+					"privateKey": "RELATIVE TO MyApp/local",
+					"publicKey": "THE LITERAL PUBLIC KEY"
 				}
 			}
 		},
