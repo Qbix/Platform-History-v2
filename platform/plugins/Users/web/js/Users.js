@@ -2374,7 +2374,7 @@ Users.Device = {
 	 */
 	unsubscribe: function (callback) {
 		// TODO: implement this in a corresponding way
-	}
+	},
 	/**
 	 * Event occurs when a notification comes in to be processed by the app.
 	 * The handlers you add are supposed to process it.
