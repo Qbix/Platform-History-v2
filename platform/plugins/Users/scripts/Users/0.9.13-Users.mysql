@@ -1,3 +1,0 @@
-ALTER TABLE {$prefix}device
-ADD COLUMN endpoint varchar(1023) NULL COMMENT 'endpoint for web push'
-AFTER sessionId;
