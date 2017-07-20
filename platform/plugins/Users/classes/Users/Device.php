@@ -48,7 +48,9 @@ class Users_Device extends Base_Users_Device
 		$apps = Q_Config::expect('Users', 'apps', $platform);
 		list($appId, $info) = Users::appInfo($platform, $platformAppId);
 		if (!$info) {
-			throw new Q_Exception_MissingConfig("Users/apps/$platform/.../appId=$platformAppId");
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Users/apps/$platform/.../appId=$platformAppId"
+			));
 		}
 		$sessionId = isset($device['sessionId']) ? $device['sessionId'] : Q_Session::id();
 		$user = Users::loggedInUser();

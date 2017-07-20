@@ -23,6 +23,7 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
+ * @param {integer} [$fields.ordinal] defaults to 0
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.sentTime] defaults to null
  * @param {string} [$fields.byUserId] defaults to ""
@@ -31,7 +32,6 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.content] defaults to ""
  * @param {string} [$fields.instructions] defaults to ""
  * @param {float} [$fields.weight] defaults to 1
- * @param {integer} [$fields.ordinal] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -50,6 +50,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * the stream to place the message on
+ */
+/**
+ * @property ordinal
+ * @type Integer
+ * @default 0
+ * used for storing the order of messages in the stream
  */
 /**
  * @property insertedTime
@@ -98,12 +104,6 @@ Q.mixin(Base, Row);
  * @type Number
  * @default 1
  * this may depend on the reputation of user_by relative to the stream
- */
-/**
- * @property ordinal
- * @type Integer
- * @default 0
- * Count messages posted to the stream
  */
 
 /**
@@ -302,6 +302,7 @@ Base.prototype.fieldNames = function () {
 	return [
 		"publisherId",
 		"streamName",
+		"ordinal",
 		"insertedTime",
 		"sentTime",
 		"byUserId",
@@ -309,8 +310,7 @@ Base.prototype.fieldNames = function () {
 		"type",
 		"content",
 		"instructions",
-		"weight",
-		"ordinal"
+		"weight"
 	];
 };
 
@@ -391,6 +391,41 @@ return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
+ * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * @method beforeSet_ordinal
+ * @param {integer} value
+ * @return {integer} The value
+ * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ */
+Base.prototype.beforeSet_ordinal = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value) || Math.floor(value) != value) 
+			throw new Error('Non-integer value being assigned to '+this.table()+".ordinal");
+		if (value < 0 || value > 4294967295)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".ordinal");
+		return value;
+};
+
+/**
+ * Returns the maximum integer that can be assigned to the ordinal field
+ * @return {integer}
+ */
+Base.prototype.maxSize_ordinal = function () {
+
+		return 4294967295;
+};
+
+	/**
+	 * Returns schema information for ordinal column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_ordinal = function () {
+
+return [["int","10"," unsigned",true],false,"PRI","0"];
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -412,7 +447,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","10"," unsigned",true],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -438,7 +473,7 @@ Base.prototype.beforeSet_sentTime = function (value) {
 	 */
 Base.column_sentTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp","10"," unsigned",true],true,"",null];
 };
 
 /**
@@ -653,41 +688,6 @@ Base.prototype.beforeSet_weight = function (value) {
 Base.column_weight = function () {
 
 return [["decimal","14,4","",false],false,"","1.0000"];
-};
-
-/**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_ordinal
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
- */
-Base.prototype.beforeSet_ordinal = function (value) {
-		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".ordinal");
-		if (value < 0 || value > 4294967295)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".ordinal");
-		return value;
-};
-
-/**
- * Returns the maximum integer that can be assigned to the ordinal field
- * @return {integer}
- */
-Base.prototype.maxSize_ordinal = function () {
-
-		return 4294967295;
-};
-
-	/**
-	 * Returns schema information for ordinal column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_ordinal = function () {
-
-return [["int","10"," unsigned",true],false,"PRI","0"];
 };
 
 /**
