@@ -1,0 +1,3 @@
+ALTER TABLE {$prefix}app_user
+ADD COLUMN extra varchar(1023) DEFAULT '{}' COMMENT 'JSON with any extra attributes'
+AFTER state;
