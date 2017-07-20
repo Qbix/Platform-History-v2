@@ -2362,7 +2362,52 @@ Users.Device = {
 		// pushManager.subscribe().
 		// When subscription id is obtained, please call _registerDevice()
 		// to send it to the server. This is already done in the case of Cordova.
+
+		// Check that service workers are supported, if so, progressively
+		// enhance and add push messaging support, otherwise continue without it.
+
+
+		// Disable the button so it can't be changed while
+		// we process the permission request
+		// Disable the button so it can't be changed while
+		// we process the permission request
+
+		function urlB64ToUint8Array(base64String) {
+			const padding = '='.repeat((4 - base64String.length % 4) % 4);
+			const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+			const rawData = window.atob(base64);
+			const outputArray = new Uint8Array(rawData.length);
+			for (var i = 0; i < rawData.length; ++i) {
+				outputArray[i] = rawData.charCodeAt(i);
+			}
+			return outputArray;
+		}
+
+		this.serviceWorkerRegistration.pushManager.subscribe({
+			userVisibleOnly: true,
+			applicationServerKey: urlB64ToUint8Array(this.appConfig.publicKey)
+		}).then(function(subscription) {
+			// TODO: Send the subscription subscription.endpoint
+			// to your server and save it to send a push message
+			// at a later date
+			console.log(subscription);
+			//return sendSubscriptionToServer(subscription);
+		}).catch(function(e) {
+			if (Notification.permission === 'denied') {
+				// The user denied the notification permission which
+				// means we failed to subscribe and the user will need
+				// to manually change the notification permission to
+				// subscribe to push messages
+				console.warn('Permission for Notifications was denied');
+			} else {
+				// A problem occurred with the subscription, this can
+				// often be down to an issue or lack of the gcm_sender_id
+				// and / or gcm_user_visible_only
+				console.warn('Unable to subscribe to push.', e);
+			}
+		});
 	},
+
 	/**
 	 * Unsubscribe to stop handling push notifications
 	 * if we were previously subscribed
@@ -2371,7 +2416,21 @@ Users.Device = {
 	 * @param {Function} callback
 	 */
 	unsubscribe: function (callback) {
-		// TODO: implement this in a corresponding way
+		this.serviceWorkerRegistration.pushManager.getSubscription()
+			.then(function(subscription) {
+				if (subscription) {
+					return subscription.unsubscribe();
+				}
+			})
+			.catch(function(error) {
+				console.log('Error unsubscribing', error);
+			})
+			.then(function() {
+				//updateSubscriptionOnServer(null);
+				console.log('User is unsubscribed.');
+				callback(true);
+
+			});
 	},
 	/**
 	 * Checks whether the user already has a subscription.
@@ -2380,8 +2439,20 @@ Users.Device = {
 	 * @param {Boolean} callback Whether the user already has a subscription
 	 */
 	subscribed: function (callback) {
-		// TODO: Use hasPermission
+		this.serviceWorkerRegistration.pushManager.getSubscription()
+			.then(function(subscription) {
+				var isSubscribed = !(subscription === null);
+				if (isSubscribed) {
+					console.log('User IS subscribed.');
+				} else {
+					console.log('User is NOT subscribed.');
+				}
+				callback(isSubscribed);
+
+				//updateBtn();
+			});
 	},
+
 	/**
 	 * Event occurs when a notification comes in to be processed by the app.
 	 * The handlers you add are supposed to process it.
@@ -2390,7 +2461,47 @@ Users.Device = {
 	 * https://github.com/katzer/cordova-plugin-local-notifications
 	 * @event onNotification
 	 */
-	onNotification: new Q.Event()
+	onNotification: new Q.Event(),
+
+	init: function() {
+		this.appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
+		var self = this;
+		// Check that service workers are supported, if so, progressively
+		// enhance and add push messaging support, otherwise continue without it.
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register(Q.url('./sw.js'))
+				.then(function(registration){
+					// Are Notifications supported in the service worker?
+					if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+						console.warn('Notifications aren\'t supported.');
+						return;
+					}
+
+					// Check the current Notification permission.
+					// If its denied, it's a permanent block until the
+					// user changes the permission
+					if (Notification.permission === 'denied') {
+						console.warn('The user has blocked notifications.');
+						return;
+					}
+
+					// Check if push messaging is supported
+					if (!('PushManager' in window)) {
+						console.warn('Push messaging isn\'t supported.');
+						return;
+					}
+
+					self.serviceWorkerRegistration = registration;
+				});
+		} else {
+			console.warn('Service workers aren\'t supported in this browser.');
+		}
+	},
+
+	serviceWorkerRegistration: null,
+
+	appConfig: null
+
 };
 
 Q.onReady.add(function () {
@@ -2492,7 +2603,7 @@ Q.onReady.add(function() {
 		return;
 	}
 	var appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
-	Q.addScript(appConfig.scripts, function(){
+	/*Q.addScript(appConfig.scripts, function(){
 		// Initialize Firebase
 		firebase.initializeApp(appConfig.client);
 		const messaging = firebase.messaging();
@@ -2523,7 +2634,7 @@ Q.onReady.add(function() {
 		messaging.onMessage(function(payload){
 			console.log('onMessage: ', payload);
 		})
-	});
+	});*/
 	function _registerDevice(deviceId) {
 		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
 		var storedAppId = localStorage.getItem("Q\tUsers.Device.appId");
