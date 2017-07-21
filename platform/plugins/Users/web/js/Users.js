@@ -2372,6 +2372,8 @@ Users.Device = {
 		// Disable the button so it can't be changed while
 		// we process the permission request
 
+		var self = this;
+
 		function urlB64ToUint8Array(base64String) {
 			const padding = '='.repeat((4 - base64String.length % 4) % 4);
 			const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
@@ -2383,29 +2385,40 @@ Users.Device = {
 			return outputArray;
 		}
 
+		var appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
+
 		this.serviceWorkerRegistration.pushManager.subscribe({
 			userVisibleOnly: true,
-			applicationServerKey: urlB64ToUint8Array(this.appConfig.publicKey)
+			applicationServerKey: urlB64ToUint8Array(self.appConfig.publicKey)
 		}).then(function(subscription) {
-			// TODO: Send the subscription subscription.endpoint
-			// to your server and save it to send a push message
-			// at a later date
-			console.log(subscription);
-			//return sendSubscriptionToServer(subscription);
+			var subscr = JSON.stringify(subscription);
+			_saveSubscription(subscr);
+			callback(subscr);
 		}).catch(function(e) {
 			if (Notification.permission === 'denied') {
-				// The user denied the notification permission which
-				// means we failed to subscribe and the user will need
-				// to manually change the notification permission to
-				// subscribe to push messages
 				console.warn('Permission for Notifications was denied');
 			} else {
-				// A problem occurred with the subscription, this can
-				// often be down to an issue or lack of the gcm_sender_id
-				// and / or gcm_user_visible_only
 				console.warn('Unable to subscribe to push.', e);
 			}
 		});
+
+		function _saveSubscription(subscription) {
+			if (!subscription) {
+				return;
+			}
+			Q.req('Users/device', function (err, response) {
+				if (!err) {
+					Q.handle(Users.onDevice, [response.data]);
+				}
+			}, {
+				method: 'post',
+				fields: {
+					deviceId: subscription,
+					appId: appConfig.appId
+				}
+			});
+		}
+
 	},
 
 	/**
@@ -2432,6 +2445,7 @@ Users.Device = {
 
 			});
 	},
+
 	/**
 	 * Checks whether the user already has a subscription.
 	 * @method subscribed
@@ -2441,15 +2455,7 @@ Users.Device = {
 	subscribed: function (callback) {
 		this.serviceWorkerRegistration.pushManager.getSubscription()
 			.then(function(subscription) {
-				var isSubscribed = !(subscription === null);
-				if (isSubscribed) {
-					console.log('User IS subscribed.');
-				} else {
-					console.log('User is NOT subscribed.');
-				}
-				callback(isSubscribed);
-
-				//updateBtn();
+				callback(!(subscription === null));
 			});
 	},
 
@@ -2463,38 +2469,22 @@ Users.Device = {
 	 */
 	onNotification: new Q.Event(),
 
-	init: function() {
+	init: function(callback) {
 		this.appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
 		var self = this;
-		// Check that service workers are supported, if so, progressively
-		// enhance and add push messaging support, otherwise continue without it.
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register(Q.url('./sw.js'))
-				.then(function(registration){
-					// Are Notifications supported in the service worker?
-					if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
-						console.warn('Notifications aren\'t supported.');
-						return;
-					}
-
-					// Check the current Notification permission.
-					// If its denied, it's a permanent block until the
-					// user changes the permission
-					if (Notification.permission === 'denied') {
-						console.warn('The user has blocked notifications.');
-						return;
-					}
-
-					// Check if push messaging is supported
-					if (!('PushManager' in window)) {
-						console.warn('Push messaging isn\'t supported.');
-						return;
-					}
-
-					self.serviceWorkerRegistration = registration;
+		if ('serviceWorker' in navigator && 'PushManager' in window) {
+			console.log('Service Worker and Push is supported');
+			navigator.serviceWorker.register('plugins/Users/js/sw.js')
+				.then(function(swReg) {
+					console.log('Service Worker is registered', swReg);
+					self.serviceWorkerRegistration = swReg;
+					callback(self.serviceWorkerRegistration);
+				})
+				.catch(function(error) {
+					console.error('Service Worker Error', error);
 				});
 		} else {
-			console.warn('Service workers aren\'t supported in this browser.');
+			callback(null, new Error("Push messaging is not supported"));
 		}
 	},
 

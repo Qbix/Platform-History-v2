@@ -7,7 +7,7 @@ var Q = require('Q');
 var Db = Q.require('Db');
 var Users = Q.require('Users');
 var Users_Device = Users.Device;
-var FCM = require('fcm-node');
+var webpush = require('web-push');
 
 /**
  * Device adapter class for Firefox browser
@@ -58,23 +58,19 @@ module.exports = Users_Device.Firefox = Users_Device_Firefox;
  */
 Users_Device.prototype.handlePushNotification = function (notification, callback) {
 	var device = this;
-	var serverKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'server', 'key']);
-	var fcm = new FCM(serverKey);
-	var message = {
-		to: device.fields.deviceId,
-		notification: {
-			title: notification.alert.title,
-			body: notification.alert.body,
-			icon: notification.icon ? notification.icon : null,
-			click_action: notification.url ? notification.url : null
-		}
-	};
-	fcm.send(message, function(err, response) {
+	var setGCMAPIKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'server', 'key']);
+	var publicKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'publicKey']);
+	var privateKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'privateKey']);
+	webpush.setGCMAPIKey(setGCMAPIKey);
+	webpush.setVapidDetails('mailto:admin@qbix.com', publicKey, privateKey);
+	webpush.sendNotification(JSON.parse(device.fields.deviceId), JSON.stringify(notification)).then(function(){
 		if (callback) {
 			callback(err, response);
 		}
 	});
+	callback();
 };
+
 
 Q.mixin(Users_Device_Firefox, Users_Device, Q.require('Base/Users/Device'));
 
