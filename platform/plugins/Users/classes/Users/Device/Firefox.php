@@ -14,7 +14,7 @@ class Users_Device_Firefox extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		self::$push[] = Users_Device_FCM::prepareForWeb(self::$deviceId, $notification);
+		self::$push[] = Users_Device_Web::prepare($notification);
 	}
 
 	/**
@@ -28,15 +28,12 @@ class Users_Device_Firefox extends Users_Device
 		if (!self::$push) {
 			return;
 		}
-		$apiKey = Q_Config::expect('Users', 'apps', 'firefox', Q_Config::expect('Q', 'app'), "server", "key");
-		foreach (self::$push as $notification) {
-			Users_Device_FCM::send($apiKey, $notification);
-		}
+		Users_Device_Web::send(self::$subscription, self::$push);
 		self::$push = [];
 	}
 
 	static protected $push = [];
 
-	static $deviceId = null;
+	static $subscription = null;
 
 }
