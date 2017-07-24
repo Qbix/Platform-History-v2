@@ -25,6 +25,8 @@
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.auth] defaults to ""
+ * @param {string} [$fields.p256dh] defaults to null
  */
 abstract class Base_Users_Device extends Db_Row
 {
@@ -83,6 +85,18 @@ abstract class Base_Users_Device extends Db_Row
 	 * 
 	 */
 	/**
+	 * @property $auth
+	 * @type string
+	 * @default ""
+	 * used in standard Web Push
+	 */
+	/**
+	 * @property $p256dh
+	 * @type string
+	 * @default null
+	 * used in standard Web Push
+	 */
+	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
 	 * @method setUp
@@ -95,6 +109,7 @@ abstract class Base_Users_Device extends Db_Row
 			array (
 			  0 => 'userId',
 			  1 => 'deviceId',
+			  2 => 'auth',
 			)
 		);
 	}
@@ -735,6 +750,114 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_auth
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_auth($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('auth', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".auth");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".auth");
+		return array('auth', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the auth field
+	 * @return {integer}
+	 */
+	function maxSize_auth()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for auth column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_auth()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_p256dh
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_p256dh($value)
+	{
+		if (!isset($value)) {
+			return array('p256dh', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('p256dh', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".p256dh");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".p256dh");
+		return array('p256dh', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the p256dh field
+	 * @return {integer}
+	 */
+	function maxSize_p256dh()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for p256dh column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_p256dh()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -766,7 +889,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'deviceId', 'platform', 'version', 'appId', 'sessionId', 'formFactor', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'deviceId', 'platform', 'version', 'appId', 'sessionId', 'formFactor', 'insertedTime', 'updatedTime', 'auth', 'p256dh');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
