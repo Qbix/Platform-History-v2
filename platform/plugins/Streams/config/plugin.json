@@ -108,7 +108,7 @@
 				"getMessagesLimit": 100,
 				"getParticipantsLimit": 100,
 				"messages": {
-					"": {
+					"*": {
 						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""
 					},
 					"Streams/changed": {
@@ -277,7 +277,9 @@
 				"create": true,
 				"messages": {
 					"Streams/incoming/message": {"post": true},
-					"subject": "{{app}}: Incoming Message"
+					"*": {
+						"subject": "{{app}}: Incoming Message"
+					}
 				}
 			},
 			"Streams/chat": {

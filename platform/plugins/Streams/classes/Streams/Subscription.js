@@ -169,7 +169,7 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 					types && Q.typeOf(types) === 'array'
 					&& types.length && types.indexOf(msgType) < 0
 				);
-				if (notFound || (new Date(readyTime) > new Date())) {
+				if (notFound || (Date.fromTimestamp(readyTime) > new Date())) {
 					// type and readyTime filters not passed
 					return p.fill(o)();
 				}					
