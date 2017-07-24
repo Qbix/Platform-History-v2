@@ -27,7 +27,8 @@ function Users_device_post ()
 		$browser = Q_Request::browser();
 		$version = null;
 	}
-	if (Q_Config::get('Users', 'apps', $browser, false)) {
+	if (!Q_Request::isCordova()
+	and Q_Config::get('Users', 'apps', $browser, false)) {
 		$platform = $browser;
 	} else {
 		$platform = Q_Request::platform();
