@@ -22,7 +22,6 @@
  * @param {string} [$fields.version] defaults to null
  * @param {string} [$fields.appId] defaults to null
  * @param {string} [$fields.sessionId] defaults to ""
- * @param {string} [$fields.endpoint] defaults to null
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -39,7 +38,7 @@ abstract class Base_Users_Device extends Db_Row
 	 * @property $deviceId
 	 * @type string
 	 * @default ""
-	 * The actual push registration id on the platform
+	 * The push registration id or URL endpoint on the platform
 	 */
 	/**
 	 * @property $platform
@@ -64,12 +63,6 @@ abstract class Base_Users_Device extends Db_Row
 	 * @type string
 	 * @default ""
 	 * 
-	 */
-	/**
-	 * @property $endpoint
-	 * @type string
-	 * @default null
-	 * endpoint for web push
 	 */
 	/**
 	 * @property $formFactor
@@ -606,60 +599,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_endpoint
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_endpoint($value)
-	{
-		if (!isset($value)) {
-			return array('endpoint', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('endpoint', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".endpoint");
-		if (strlen($value) > 1023)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".endpoint");
-		return array('endpoint', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the endpoint field
-	 * @return {integer}
-	 */
-	function maxSize_endpoint()
-	{
-
-		return 1023;			
-	}
-
-	/**
-	 * Returns schema information for endpoint column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_endpoint()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '1023',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
 	 * @method beforeSet_formFactor
 	 * @param {string} $value
@@ -827,7 +766,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'deviceId', 'platform', 'version', 'appId', 'sessionId', 'endpoint', 'formFactor', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'deviceId', 'platform', 'version', 'appId', 'sessionId', 'formFactor', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

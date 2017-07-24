@@ -257,8 +257,8 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		stream.fields.type,
 		['messages', this.fields.type, 'subject'],
 		Q.Config.get(
-			['Streams', 'types', '*', 'messages', '', 'subject'],
-			'Please set config "Streams"/"types"/"*"/"messages"/""/"subject"'
+			['Streams', 'types', '*', 'messages', '*', 'subject'],
+			'Please set config "Streams"/"types"/"*"/"messages"/"*"/"subject"'
 		)
 	);
 	if (typeof deliver === 'string') {

@@ -2452,16 +2452,6 @@ Sp.testAdminLevel = function _Stream_prototype_testAdminLevel (level) {
 };
 
 /**
- * This function displays a Streams/access tool in a dialog
- * 
- * @method accessDialog
- * @param options {Object} Additional options to pass to Q.Dialogs.push
- */
-Sp.accessDialog = function(options) {
-	return Streams.accessDialog(this.fields.publisherId, this.fields.name, options);
-};
-
-/**
  * A convenience method to get the URL of the streams-related action
  * 
  * @method actionUrl
