@@ -373,18 +373,14 @@ function Db_Mysql(connName, dsn) {
 	/**
 	 * Returns a Date string to store in the database
 	 * @method toDate
-	 * @param {Date|String|integer} timestamp The UNIX timestamp, e.g. from a strtotime function
+	 * @param {Date|String|integer} input The UNIX timestamp, e.g. from a strtotime function
 	 * @return {String} in "yyyy-mm-dd hh:mm:ss" format
 	 */
-	dbm.toDate = function(timestamp) {
-		if (!(timestamp instanceof Date)) {
-			timestamp = new Date(timestamp);
-		}
-		timestamp = timestamp.getTime();
-		var date = new Date(timestamp),
-			year = date.getFullYear(),
-			month = date.getMonth(),
-			day = date.getDate();
+	dbm.toDate = function(input) {
+		var date = Date.from(input);
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		var day = date.getDate();
 		month = month < 10 ? '0'+month : month;
 		day = day < 10 ? '0'+day : day;
 		return year + '-' + month + '-' + day;
@@ -393,21 +389,17 @@ function Db_Mysql(connName, dsn) {
 	/**
 	 * Returns a DateTime string to store in the database
 	 * @method toDateTime
-	 * @param {Date|string|integer} timestamp a standard UNIX timestamp
+	 * @param {Date|string|integer} input a standard UNIX timestamp
 	 * @return {String} in "yyyy-mm-dd hh:mm:ss" format
 	 */
-	dbm.toDateTime = function(timestamp) {
-		if (!(timestamp instanceof Date)) {
-			timestamp = new Date(timestamp);
-		}
-		timestamp = timestamp.getTime();
-		var date = new Date(timestamp),
-			year = date.getFullYear(),
-			month = date.getMonth()+1,
-			day = date.getDate(),
-			hours = date.getHours(),
-			minutes = date.getMinutes(),
-			seconds = date.getSeconds();
+	dbm.toDateTime = function(input) {
+		var date = Date.from(input);
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		var day = date.getDate();
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var seconds = date.getSeconds();
 		month = month < 10 ? '0'+month : month;
 		day = day < 10 ? '0'+day : day;
 		hours = hours < 10 ? '0'+hours : hours;
