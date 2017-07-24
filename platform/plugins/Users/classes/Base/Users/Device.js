@@ -27,7 +27,6 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.version] defaults to null
  * @param {string} [$fields.appId] defaults to null
  * @param {string} [$fields.sessionId] defaults to ""
- * @param {string} [$fields.endpoint] defaults to null
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -48,7 +47,7 @@ Q.mixin(Base, Row);
  * @property deviceId
  * @type String|Buffer
  * @default ""
- * The actual push registration id on the platform
+ * The push registration id or URL endpoint on the platform
  */
 /**
  * @property platform
@@ -73,12 +72,6 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * 
- */
-/**
- * @property endpoint
- * @type String
- * @default null
- * endpoint for web push
  */
 /**
  * @property formFactor
@@ -298,7 +291,6 @@ Base.prototype.fieldNames = function () {
 		"version",
 		"appId",
 		"sessionId",
-		"endpoint",
 		"formFactor",
 		"insertedTime",
 		"updatedTime"
@@ -527,42 +519,6 @@ Base.prototype.maxSize_sessionId = function () {
 Base.column_sessionId = function () {
 
 return [["varbinary","255","",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_endpoint
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_endpoint = function (value) {
-		if (value == undefined) return value;
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".endpoint");
-		if (typeof value === "string" && value.length > 1023)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".endpoint");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the endpoint field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_endpoint = function () {
-
-		return 1023;
-};
-
-	/**
-	 * Returns schema information for endpoint column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_endpoint = function () {
-
-return [["varchar","1023","",false],true,"",null];
 };
 
 /**

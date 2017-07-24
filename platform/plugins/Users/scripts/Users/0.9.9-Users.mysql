@@ -1,5 +1,5 @@
 ALTER TABLE {$prefix}device
-MODIFY deviceId varbinary(700) NOT NULL COMMENT 'The actual push registration id on the platform',
+MODIFY deviceId varbinary(700) NOT NULL COMMENT 'The push registration id or URL endpoint on the platform',
 MODIFY platform varchar(31) NOT NULL COMMENT 'A platform like ios or android',
 ADD COLUMN appId varchar(200) NULL COMMENT 'An external app id registered with the platform' AFTER version,
 ADD INDEX app (userId, platform, appId);
