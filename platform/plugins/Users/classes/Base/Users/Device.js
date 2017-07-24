@@ -30,6 +30,8 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.formFactor] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.auth] defaults to ""
+ * @param {string} [$fields.p256dh] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -90,6 +92,18 @@ Q.mixin(Base, Row);
  * @type String|Db.Expression
  * @default null
  * 
+ */
+/**
+ * @property auth
+ * @type String
+ * @default ""
+ * used in standard Web Push
+ */
+/**
+ * @property p256dh
+ * @type String
+ * @default null
+ * used in standard Web Push
  */
 
 /**
@@ -274,7 +288,8 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"userId",
-		"deviceId"
+		"deviceId",
+		"auth"
 	];
 };
 
@@ -293,7 +308,9 @@ Base.prototype.fieldNames = function () {
 		"sessionId",
 		"formFactor",
 		"insertedTime",
-		"updatedTime"
+		"updatedTime",
+		"auth",
+		"p256dh"
 	];
 };
 
@@ -594,6 +611,80 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 Base.column_updatedTime = function () {
 
 return [["timestamp","'mobile','tablet','desktop'","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_auth
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_auth = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".auth");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".auth");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the auth field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_auth = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for auth column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_auth = function () {
+
+return [["varchar","31","",false],false,"PRI",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_p256dh
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_p256dh = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".p256dh");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".p256dh");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the p256dh field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_p256dh = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for p256dh column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_p256dh = function () {
+
+return [["varchar","1023","",false],true,"",null];
 };
 
 /**
