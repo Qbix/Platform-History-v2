@@ -2903,6 +2903,21 @@ if (!Object.getPrototypeOf) {
 	};
 }
 
+Date.fromTimestamp = function (timestamp) {
+	if (isNaN(timestamp)) {
+		return null;
+	}
+	timestamp = parseFloat(timestamp);
+	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);
+};
+
+Date.from = function (input) {
+	if (input instanceof Date) {
+		return input;
+	}
+	return Date.fromTimestamp(input) || new Date(input);
+};
+
 var Sp = String.prototype;
 
 Sp.toCapitalized = function _String_prototype_toCapitalized() {

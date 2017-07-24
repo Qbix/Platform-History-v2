@@ -520,6 +520,18 @@ Date.fromTimestamp = function (timestamp) {
 };
 
 /**
+ * Returns a Date from a variety of possible inputs
+ * @param {String|Number} input
+ * @return {Date}
+ */
+Date.from = function (input) {
+	if (input instanceof Date) {
+		return input;
+	}
+	return Date.fromTimestamp(input) || new Date(input);
+};
+
+/**
  * Returns a Date from a dateTimeString
  * @param {Boolean} [dateOnly] pass true to return just the date part
  * @return {String}
