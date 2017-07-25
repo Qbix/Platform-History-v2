@@ -39,12 +39,18 @@ class Users_Device extends Base_Users_Device
 	 */
 	static function add($device, $skipNotification=false)
 	{
-		$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version');
+		if (($device['platform'] === 'chrome') || ($device['platform'] === 'firefox')) {
+			$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version', 'auth', 'p256dh');
+		} else {
+			$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version');
+		}
 		Q_Valid::requireFields($fields, $device, true);
 		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
 		$platform = $device['platform'];
 		$platformAppId = $device['appId'];
+		$auth = !empty($device['auth']) ? $device['auth'] : null;
+		$p256dh = !empty($device['p256dh']) ? $device['p256dh'] : null;
 		$apps = Q_Config::expect('Users', 'apps', $platform);
 		list($appId, $info) = Users::appInfo($platform, $platformAppId);
 		if (!$info) {
@@ -58,7 +64,9 @@ class Users_Device extends Base_Users_Device
 			'sessionId' => $sessionId,
 			'userId' => $userId,
 			'deviceId' => $deviceId,
-			'appId' => $platformAppId
+			'appId' => $platformAppId,
+			'auth' => $auth,
+			'p256dh' => $p256dh
 		));
 		$deviceArray = Q::take($device, $info);
 		$className = "Users_Device_" . ucfirst($platform);
