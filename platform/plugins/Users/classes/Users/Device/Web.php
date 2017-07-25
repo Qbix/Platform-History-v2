@@ -18,24 +18,25 @@ class Users_Device_Web
 		);
 	}
 
-	static function send($subscription_string, $notifications)
+	static function send($device, $notifications)
 	{
+		$appConfig = Q_Config::expect('Users', 'apps', 'chrome', Q::app());
 		$auth = array(
 			'VAPID' => array(
-				'subject' => 'mailto:me@website.com', // can be a mailto: or your website address
-				'publicKey' => Q_Config::expect('Users', 'apps', 'chrome', Q_Config::expect('Q', 'app'), "publicKey"),
-				'privateKey' => Q_Config::expect('Users', 'apps', 'chrome', Q_Config::expect('Q', 'app'), "privateKey")
+				'subject' => $appConfig["url"],
+				'publicKey' => $appConfig["publicKey"],
+				'privateKey' => $appConfig["privateKey"]
 			),
 		);
-		$subscription = json_decode($subscription_string);
 		$webPush = new WebPush($auth);
 		// send multiple notifications with payload
 		foreach ($notifications as $notification) {
 			$webPush->sendNotification(
-				$subscription->endpoint,
+				$device->fields['deviceId'],
 				json_encode($notification), // payload
-				$subscription->keys->p256dh,
-				$subscription->keys->auth);
+				$device->fields['p256dh'],
+				$device->fields['auth']
+			);
 		}
 		$webPush->flush();
 	}

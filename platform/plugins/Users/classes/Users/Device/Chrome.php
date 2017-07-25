@@ -28,12 +28,12 @@ class Users_Device_Chrome extends Users_Device
 		if (!self::$push) {
 			return;
 		}
-		Users_Device_Web::send(self::$subscription, self::$push);
+		Users_Device_Web::send(self::$device, self::$push);
 		self::$push = [];
 	}
 
 	static protected $push = [];
 
-	static $subscription = null;
+	static $device = null;
 
 }

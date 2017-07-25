@@ -14,7 +14,13 @@ class Users_Device_Android extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		self::$push[] = Users_Device_FCM::prepareForAndroid(self::$deviceId, $notification);
+		self::$push[] = array(
+			'title' => $notification['alert']['title'],
+			'body' => $notification['alert']['body'],
+			'icon' => empty($notification['icon']) ? '' : $notification['icon'],
+			'click_action' => empty($notification['url']) ? null : $notification['url'],
+			'sound' => empty($notification['sound']) ? 'default' : $notification['sound']
+		);
 	}
 
 	/**
@@ -30,13 +36,29 @@ class Users_Device_Android extends Users_Device
 		}
 		$apiKey = Q_Config::expect('Users', 'apps', 'android', Q_Config::expect('Q', 'app'), "key");
 		foreach (self::$push as $notification) {
-			Users_Device_FCM::send($apiKey, $notification);
+			$fields = array(
+				'to' => self::$device->deviceId,
+				'notification' => $notification
+			);
+			$headers = array(
+				'Authorization: key=' . $apiKey,
+				'Content-Type: application/json'
+			);
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+			$result = curl_exec($ch);
+			curl_close($ch);
 		}
 		self::$push = [];
 	}
 
 	static protected $push = [];
 
-	static $deviceId = null;
+	static $device = null;
 
 }

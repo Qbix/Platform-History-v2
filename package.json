@@ -10,6 +10,7 @@
     "apn": "^2.1.1",
     "crypto-js": "3.x.x",
     "express": "3.x.x",
+    "fcm-node": "^1.2.0",
     "handlebars": "2.0.x",
     "mysql": "2.9.x",
     "node-adm": "^0.9.1",

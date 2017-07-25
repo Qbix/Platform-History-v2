@@ -57,18 +57,28 @@ module.exports = Users_Device.Chrome = Users_Device_Chrome;
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
 Users_Device.prototype.handlePushNotification = function (notification, callback) {
-	var device = this;
-	var setGCMAPIKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'server', 'key']);
-	var publicKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'publicKey']);
-	var privateKey = Q.Config.expect(['Users', 'apps', 'chrome', Q.Config.expect(['Q', 'app']), 'privateKey']);
-	webpush.setGCMAPIKey(setGCMAPIKey);
-	webpush.setVapidDetails('mailto:admin@qbix.com', publicKey, privateKey);
-	webpush.sendNotification(JSON.parse(device.fields.deviceId), JSON.stringify(notification)).then(function(){
-		if (callback) {
-			callback(err, response);
+	var appConfig = Q.Config.expect(['Users', 'apps', 'chrome', Q.app.name]);
+	if (!notification.alert.title || !notification.alert.body) {
+		return callback(new Error('Notification title and body are required'));
+	}
+	notification = {
+		title: notification.alert.title,
+		body: notification.alert.body,
+		icon: notification.icon ? notification.icon : null,
+		click_action: notification.url ? notification.url : null
+	};
+	webpush.setVapidDetails(appConfig.url, appConfig.publicKey, appConfig.privateKey);
+	webpush.sendNotification({
+		endpoint: this.fields.deviceId,
+		keys: {
+			auth: this.fields.auth,
+			p256dh: this.fields.p256dh
 		}
+	}, JSON.stringify(notification)).then(function(){
+		callback();
+	}).catch(function(){
+		callback(err);
 	});
-	callback();
 };
 
 Q.mixin(Users_Device_Chrome, Users_Device, Q.require('Base/Users/Device'));
