@@ -1,0 +1,5 @@
+ALTER TABLE {$prefix}device
+ADD COLUMN auth varchar(31) DEFAULT '' COMMENT 'used in standard Web Push',
+ADD COLUMN p256dh varchar(1023) NULL COMMENT 'used in standard Web Push',
+DROP PRIMARY KEY,
+ADD PRIMARY KEY(userId, deviceId, auth);
