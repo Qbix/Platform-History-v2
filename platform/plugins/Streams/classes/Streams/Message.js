@@ -280,6 +280,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			avatar: avatar,
 			callback: callback
 		};
+		var result = [];
 		var name = 'Streams/deliver/'+this.fields.type;
 		var handler = Q.getObject(name, Q.handlers, '/');
 		if (!Q.isEmpty(handler)) {
@@ -302,7 +303,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				_device(d, p1.fill('device'));
 				w1.push('device');
 			}
-			var result = [];
 			p1.add(w1, function () {
 				_next(0);
 			}).run();
