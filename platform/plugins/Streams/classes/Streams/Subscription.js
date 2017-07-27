@@ -107,6 +107,7 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 			rules.forEach(function (rule) {
 				var o = rule.fields.ordinal;
 				var readyTime = rule.fields.readyTime;
+				var filter;
 				try {
 					filter = rule.fields.filter ? JSON.parse(rule.fields.filter) : {};
 				} catch (e) {
