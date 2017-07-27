@@ -227,9 +227,11 @@ foreach ($plugins as $plugin) {
 if (!$noapp) {
 	// if application is installed/updated, it's schema is always installed/updated
 	$cons = Q_Config::get('Q', 'appInfo', 'connections', array());
-	foreach ($cons as $con)
-		if (empty($options['sql'][$con]))
+	foreach ($cons as $con) {
+		if (empty($options['sql'][$con])) {
 			$options['sql'][$con] = array('enabled' => true);
+		}
+	}
 
 	Q_Plugin::installApp($options);
 	if (empty($noInit) && file_exists($LOCAL_DIR.DS.'scripts'.DS.'init.php')) {
