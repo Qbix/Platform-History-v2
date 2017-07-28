@@ -27,25 +27,25 @@
 		"type": "Streams/image",
 		"title": "Icon",
 		"icon": "Streams/image",
-		"platforms": {"facebook": "pic"}
+		"platforms": {"facebook": "pic", "twitter": "profile_image_url"}
 	},
 	"Streams/user/username": {
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
-		"platforms": {"facebook": "username"}
+		"platforms": {"facebook": "username", "twitter": "screen_name"}
 	},
 	"Streams/user/firstName": {
 		"type": "Streams/text/name",
 		"title": "First name",
 		"icon": "",
-		"platforms": {"facebook": "first_name"}
+		"platforms": {"facebook": "first_name", "twitter": ["name", " ", 0]}
 	},
 	"Streams/user/middleName": {
 		"type": "Streams/text/name",
 		"title": "Middle name",
 		"icon": "",
-		"platforms": {"facebook": "middle_name"}
+		"platforms": {"facebook": "middle_name", "twitter": ["name", " ", 1]}
 	},	
 	"Streams/user/lastName": {
 		"type": "Streams/text/name",
@@ -60,7 +60,7 @@
 		"readLevel": 0,
 		"writeLevel": 0,
 		"adminLevel": 0,
-		"platforms": {"facebook": "email"}
+		"platforms": {"facebook": "email", "twitter": "email"}
 	},
 	"Streams/user/mobileNumber": {
 		"type": "Streams/text/mobileNumber",
@@ -114,15 +114,21 @@
 	},
 	"Streams/user/facebook/uid": {
 		"type": "Streams/uid",
-		"title": "My facebook uid",
+		"title": "Facebook uid",
 		"icon": "",
-		"platforms": {"facebook": "id", "twitter": "id"}
+		"platforms": {"facebook": "id"}
+	},
+	"Streams/user/twitter/uid": {
+		"type": "Streams/text/url",
+		"title": "Twitter uid",
+		"icon": "",
+		"platforms": {"twitter": "id"}
 	},
 	"Streams/user/timezone": {
 		"type": "Streams/number/timezone",
 		"title": "Time zone",
 		"icon": "",
-		"platforms": {"facebook": "timezone"}
+		"platforms": {"facebook": "timezone", "twitter": "time_zone"}
 	},
 	"Streams/user/gender": {
 		"type": "Streams/enum/gender",

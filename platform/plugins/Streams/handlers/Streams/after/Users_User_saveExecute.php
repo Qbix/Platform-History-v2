@@ -39,15 +39,23 @@ function Streams_after_Users_User_saveExecute($params)
 		// load standard streams info
 		$p = Streams::userStreams();
 		if (!empty(Users::$cache['platformUserData'])) {
+			$infos = $p->getAll();
 			// check for user data from various platforms
 			foreach (Users::$cache['platformUserData'] as $platform => $userData) {
 				foreach ($userData as $k => $v) {
-					foreach ($p->getAll() as $name => $info) {
-						if (isset($info['platforms'][$platform])
-						and $info['platforms'][$platform] === $k) {
-							$toInsert[] = $name;
-							$values[$name] = $v;
-							break;
+					foreach ($infos as $name => $info) {
+						if (isset($info['platforms'][$platform])) {
+							$n = $info['platforms'][$platform];
+							if (is_array($n)) {
+								$parts = explode($v, $n[1]);
+								$v = $parts[$n[2]];
+								$n = $n[0];
+							}
+							if ($n === $k)) {
+								$toInsert[] = $name;
+								$values[$name] = $v;
+								break;
+							}
 						}
 					}
 				}
