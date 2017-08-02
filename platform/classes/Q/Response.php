@@ -1530,6 +1530,7 @@ class Q_Response
 	static function clearCookie($name, $path = false)
 	{
 		self::setCookie($name, '', 1, $path);
+		unset($_COOKIE[$name]);
 	}
 	
 	/**

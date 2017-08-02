@@ -80,9 +80,7 @@ class Users_Contact extends Base_Users_Contact
 				$contacts[] = $contact;
 				continue;
 			}
-			if (isset($nickname)) {
-				$contact->nickname = $nickname;
-			}
+			$contact->nickname = isset($nickname) ? $nickname : '';
 			$contact->save(true);
 			$contacts[] = $contact;
 		}

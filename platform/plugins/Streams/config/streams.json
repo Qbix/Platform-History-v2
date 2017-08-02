@@ -27,29 +27,29 @@
 		"type": "Streams/image",
 		"title": "Icon",
 		"icon": "Streams/image",
-		"platforms": {"facebook": "pic"}
+		"platforms": {"facebook": "pic", "twitter": "profile_image_url"}
 	},
 	"Streams/user/username": {
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
-		"platforms": {"facebook": "username"}
+		"platforms": {"facebook": "username", "twitter": "screen_name"}
 	},
 	"Streams/user/firstName": {
 		"type": "Streams/text/name",
-		"title": "First name",
+		"title": "First Name",
 		"icon": "",
-		"platforms": {"facebook": "first_name"}
+		"platforms": {"facebook": "first_name", "twitter": ["name", " ", 0]}
 	},
 	"Streams/user/middleName": {
 		"type": "Streams/text/name",
-		"title": "Middle name",
+		"title": "Middle Name",
 		"icon": "",
-		"platforms": {"facebook": "middle_name"}
+		"platforms": {"facebook": "middle_name", "twitter": ["name", " ", 1]}
 	},	
 	"Streams/user/lastName": {
 		"type": "Streams/text/name",
-		"title": "Last name",
+		"title": "Last Name",
 		"icon": "",
 		"platforms": {"facebook": "last_name"}
 	},
@@ -60,7 +60,7 @@
 		"readLevel": 0,
 		"writeLevel": 0,
 		"adminLevel": 0,
-		"platforms": {"facebook": "email"}
+		"platforms": {"facebook": "email", "twitter": "email"}
 	},
 	"Streams/user/mobileNumber": {
 		"type": "Streams/text/mobileNumber",
@@ -114,15 +114,21 @@
 	},
 	"Streams/user/facebook/uid": {
 		"type": "Streams/uid",
-		"title": "My facebook uid",
+		"title": "Facebook UserID",
 		"icon": "",
-		"platforms": {"facebook": "id", "twitter": "id"}
+		"platforms": {"facebook": "id"}
+	},
+	"Streams/user/twitter/uid": {
+		"type": "Streams/text/url",
+		"title": "Twitter UserID",
+		"icon": "",
+		"platforms": {"twitter": "id"}
 	},
 	"Streams/user/timezone": {
 		"type": "Streams/number/timezone",
-		"title": "Time zone",
+		"title": "Time Zone",
 		"icon": "",
-		"platforms": {"facebook": "timezone"}
+		"platforms": {"facebook": "timezone", "twitter": "time_zone"}
 	},
 	"Streams/user/gender": {
 		"type": "Streams/enum/gender",
@@ -148,39 +154,9 @@
 	},
 	"Streams/user/political": {
 		"type": "Streams/text/small",
-		"title": "Political views",
+		"title": "Political Views",
 		"icon": ""
-	},	
-	"Streams/user/hs_info": {
-		"type": "Streams/array/hs_info",
-		"title": "High school",
-		"icon": ""
-	},	
-	"Streams/user/education_history": {
-		"type": "Streams/array/education_history",
-		"title": "Education history",
-		"icon": ""
-	},	
-	"Streams/user/work_history": {
-		"type": "Streams/array/work_history",
-		"title": "Work history",
-		"icon": ""
-	},	
-	"Streams/user/about_me": {
-		"type": "Streams/text/multiline",
-		"title": "Bio",
-		"icon": ""
-	},	
-	"Streams/user/activities": {
-		"type": "Streams/category",
-		"title": "Activities",
-		"icon": ""
-	},	
-	"Streams/user/interests": {
-		"type": "Streams/category",
-		"title": "Interests",
-		"icon": ""
-	},	
+	},
 	"Streams/user/music": {
 		"type": "Streams/category",
 		"title": "Music",

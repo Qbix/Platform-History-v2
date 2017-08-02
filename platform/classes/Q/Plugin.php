@@ -485,11 +485,7 @@ class Q_Plugin
 		}
 
 		// Check and fix permissions
-		self::checkPermissions(Q_FILES_DIR, $options);
 		self::checkPermissions(APP_FILES_DIR, $options);
-		
-		self::npmInstall(Q_DIR);
-		self::composerInstall(Q_DIR);
 		self::npmInstall(APP_DIR);
 		self::composerInstall(APP_DIR);
 
