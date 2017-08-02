@@ -1141,7 +1141,7 @@ abstract class Users extends Base_Users
 	 *  Could also be 'future' to find identifiers attached to a "future user",
 	 *  and can also be null (in which case we find mappings in all states)
 	 * @param {&string} [$normalized=null]
-	 * @return {Users_Identify}
+	 * @return {Users_Identify|null}
 	 *  The row corresponding to this type and value, otherwise null
 	 */
 	static function identify($type, $value, $state = 'verified', &$normalized=null)
@@ -1213,11 +1213,13 @@ abstract class Users extends Base_Users
 		// Make a user row to represent a "future" user and give them an empty username
 		$user = new Users_User();
 		if ($type === 'email') {
+			$user->save();
 			$user->setEmailAddress($value);
 		} else if ($type === 'mobile') {
-			$user->setMobileNumber($value);
+			$user->save();
+			$user->setMobileNumber($value, true);
 		} else if (substr($type, -7) !== '_hashed') {
-			$user->setUid($type, $value);
+			$user->setUid($type, $value, true);
 		}
 		$user->signedUpWith = 'none'; // this marks it as a future user for now
 		$user->username = "";

@@ -37,19 +37,19 @@
 	},
 	"Streams/user/firstName": {
 		"type": "Streams/text/name",
-		"title": "First name",
+		"title": "First Name",
 		"icon": "",
 		"platforms": {"facebook": "first_name", "twitter": ["name", " ", 0]}
 	},
 	"Streams/user/middleName": {
 		"type": "Streams/text/name",
-		"title": "Middle name",
+		"title": "Middle Name",
 		"icon": "",
 		"platforms": {"facebook": "middle_name", "twitter": ["name", " ", 1]}
 	},	
 	"Streams/user/lastName": {
 		"type": "Streams/text/name",
-		"title": "Last name",
+		"title": "Last Name",
 		"icon": "",
 		"platforms": {"facebook": "last_name"}
 	},
@@ -114,19 +114,19 @@
 	},
 	"Streams/user/facebook/uid": {
 		"type": "Streams/uid",
-		"title": "Facebook uid",
+		"title": "Facebook UserID",
 		"icon": "",
 		"platforms": {"facebook": "id"}
 	},
 	"Streams/user/twitter/uid": {
 		"type": "Streams/text/url",
-		"title": "Twitter uid",
+		"title": "Twitter UserID",
 		"icon": "",
 		"platforms": {"twitter": "id"}
 	},
 	"Streams/user/timezone": {
 		"type": "Streams/number/timezone",
-		"title": "Time zone",
+		"title": "Time Zone",
 		"icon": "",
 		"platforms": {"facebook": "timezone", "twitter": "time_zone"}
 	},
@@ -154,39 +154,9 @@
 	},
 	"Streams/user/political": {
 		"type": "Streams/text/small",
-		"title": "Political views",
+		"title": "Political Views",
 		"icon": ""
-	},	
-	"Streams/user/hs_info": {
-		"type": "Streams/array/hs_info",
-		"title": "High school",
-		"icon": ""
-	},	
-	"Streams/user/education_history": {
-		"type": "Streams/array/education_history",
-		"title": "Education history",
-		"icon": ""
-	},	
-	"Streams/user/work_history": {
-		"type": "Streams/array/work_history",
-		"title": "Work history",
-		"icon": ""
-	},	
-	"Streams/user/about_me": {
-		"type": "Streams/text/multiline",
-		"title": "Bio",
-		"icon": ""
-	},	
-	"Streams/user/activities": {
-		"type": "Streams/category",
-		"title": "Activities",
-		"icon": ""
-	},	
-	"Streams/user/interests": {
-		"type": "Streams/category",
-		"title": "Interests",
-		"icon": ""
-	},	
+	},
 	"Streams/user/music": {
 		"type": "Streams/category",
 		"title": "Music",

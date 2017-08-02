@@ -20,10 +20,10 @@ function Streams_after_Users_User_saveExecute($params)
 		$lastName = Users::communitySuffix();
 		$firstName = $firstName ? $firstName : "";
 		$lastName = $lastName ? $lastName : "";
-	} else if (!empty(Streams::$cache['register'])) {
-		$register = Streams::$cache['register'];
-		$firstName = Q::ifset($register, 'first', '');
-		$lastName = Q::ifset($register, 'last', '');
+	} else if (!empty(Streams::$cache['fullName'])) {
+		$fullName = Streams::$cache['fullName'];
+		$firstName = Q::ifset($fullName, 'first', '');
+		$lastName = Q::ifset($fullName, 'last', '');
 	} else {
 		$firstName = null;
 		$lastName = null;
@@ -35,31 +35,37 @@ function Streams_after_Users_User_saveExecute($params)
 	$toInsert = $params['inserted']
 		? Q_Config::get('Streams', 'onInsert', 'Users_User', array())
 		: array();
-	if ($toInsert) {
-		// load standard streams info
-		$p = Streams::userStreams();
-		if (!empty(Users::$cache['platformUserData'])) {
-			$infos = $p->getAll();
-			// check for user data from various platforms
-			foreach (Users::$cache['platformUserData'] as $platform => $userData) {
-				foreach ($userData as $k => $v) {
-					foreach ($infos as $name => $info) {
-						if (isset($info['platforms'][$platform])) {
-							$n = $info['platforms'][$platform];
-							if (is_array($n)) {
-								$parts = explode($v, $n[1]);
-								$v = $parts[$n[2]];
-								$n = $n[0];
-							}
-							if ($n === $k)) {
-								$toInsert[] = $name;
-								$values[$name] = $v;
-								break;
-							}
+	$p = Streams::userStreamsTree();
+	if (!empty(Users::$cache['platformUserData'])) {
+		$infos = $p->getAll();
+		// check for user data from various platforms
+		foreach (Users::$cache['platformUserData'] as $platform => $userData) {
+			foreach ($userData as $k => $v) {
+				foreach ($infos as $name => $info) {
+					if (isset($info['platforms'][$platform])) {
+						$n = $info['platforms'][$platform];
+						if (is_array($n)) {
+							$parts = explode($n[1], $v);
+							$v = $parts[$n[2]];
+							$n = $n[0];
+						}
+						if ($n === $k) {
+							$toInsert[] = $name;
+							$values[$name] = $v;
+							break;
 						}
 					}
 				}
 			}
+		}
+	}
+	if (!empty(Users::$cache['importUserData'])) {
+		// check for user data from import
+		foreach (Users::$cache['importUserData'] as $k => $v) {
+			if (!in_array($k, $toInsert)) {
+				$toInsert[] = $k;
+			}
+			$values[$k] = $v;
 		}
 	}
 	

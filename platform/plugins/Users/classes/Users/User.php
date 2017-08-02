@@ -726,14 +726,14 @@ class Users_User extends Base_Users_User
 		$mobile->authCode = sha1(microtime() . mt_rand());
 		if ($verified) {
 			$mobile->userId = $this->id;
-		} else {
+		} else if ($retrieved) {
 			if (!$retrieved) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => "a mobile phone",
 					'criteria' => "number $normalized"
 				), 'mobileNumber');
 			}
-			if ($mobile->userId != $this->id) {
+			if ($retrieved and $mobile->userId != $this->id) {
 				// We're going to tell them it's verified for someone else,
 				// even though it may not have been verified yet.
 				// In the future, might throw a more accurate exception.
