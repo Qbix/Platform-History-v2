@@ -950,7 +950,7 @@ abstract class Streams extends Base_Streams
 		$stream = new Streams_Stream;
 		$stream->publisherId = $publisherId;
 		if (!empty($fields['name'])) {
-			$p = Streams::userStreams();
+			$p = Streams::userStreamsTree();
 			if ($info = $p->get($fields['name'], array())) {
 				foreach (Base_Streams_Stream::fieldNames() as $f) {
 					if (isset($info[$f])) {
@@ -3361,7 +3361,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$who.platform] platform for which uids are passed
 	 * @param {string|array} [$who.uid]  platform uid or array of uids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
-	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
+	 * @param {string|array} [$who.identifier] identifier such as an email or mobile number, or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
 	 *  with empty userId, which is used whenever someone shows up with the token
@@ -3903,7 +3903,9 @@ abstract class Streams extends Base_Streams
 	 * invited user
 	 * @method register
 	 * @static
-	 * @param {string} $fullName The full name of the user in the format 'First Last' or 'Last, First'
+	 * @param {array} $fullName An array with keys
+	 * @param {string} $fullName.first The first name
+	 * @param {string} $fullName.last The last name
 	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
 	 * @param {string} [$identifier.identifier] an email address or phone number
 	 * @param {array} [$identifier.device] an array with keys
@@ -3944,19 +3946,11 @@ abstract class Streams extends Base_Streams
 			return $return;
 		}
 
-		// calculate first and last name out of name
-		if (empty($fullName)) {
-			throw new Q_Exception("Please enter your name", 'name');
-		}
-
-		$register = self::splitFullName($fullName);
-		if (empty($register['first']) && empty($register['last'])) {
-			// this is unlikely to happen
-			throw new Q_Exception("Please enter your name properly", 'name');
-		}
-
 		// this will be used in Streams_after_Users_User_saveExecute
-		Streams::$cache['register'] = $register;
+		Streams::$cache['fullName'] = $fullName ? $fullName : array(
+			'first' => '',
+			'last' => ''
+		);
 
 		$user = Users::register("", $identifier, $icon, $options);
 
@@ -4132,7 +4126,7 @@ abstract class Streams extends Base_Streams
 			.DS.Q_Utils::splitId($invitingUserId);
 	}
 	
-	static function userStreams()
+	static function userStreamsTree()
 	{
 		$p = new Q_Tree();
 		$arr = Q_Config::get('Streams', 'userStreams', array());
