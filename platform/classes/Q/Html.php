@@ -52,7 +52,7 @@ class Q_Html
 		$url = "sms:$mobileNumbers";
 		$char = $ios ? '?' : '&';
 		return $url . $char . 'body=' . urlencode($body);
-	},
+	}
 	
 	/**
 	 * Generates a link for sending an email message
