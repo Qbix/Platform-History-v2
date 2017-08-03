@@ -33,6 +33,57 @@ class Q_Html
 	}
 	
 	/**
+	 * Generates a link for sending an sms message
+	 * @static
+	 * @method sms
+	 * @param {string} [$body]
+	 * @param {string|array} [$mobileNumbers]
+	 * @return {string}
+	 */
+	function sms ($body, $mobileNumbers) {
+		$ios = (Q_Request::platform() === 'ios');
+		if (is_array($mobileNumbers)) {
+			$temp = array();
+			foreach ($mobileNumbers as $mobileNumber) {
+				$temp[] = urlencode($mobileNumber);
+			}
+			$mobileNumbers = ($ios ? '/open?addresses=' : '') . implode(',', $temp);
+		}
+		$url = "sms:$mobileNumbers";
+		$char = $ios ? '?' : '&';
+		return $url . $char . 'body=' . urlencode($body);
+	}
+	
+	/**
+	 * Generates a link for sending an email message
+	 * @static
+	 * @method email
+	 * @param {string} [subject]
+	 * @param {string} [body]
+	 * @param {string|array} [to]
+	 * @param {string|array} [cc]
+	 * @param {string|array} [bcc]
+	 * @return {string}
+	 */
+	function email($subject, $body, $to, $cc, $bcc) {
+		$ios = (Q_Request::platform() === 'ios');
+		$to = $to ? $to : (is_array($to) ? implode(',', $to) : $to);
+		$cc = $cc ? $cc : (is_array($cc) ? implode(',', $cc) : $cc);
+		$bcc = $bcc ? $bcc : (is_array($bcc) ? implode(',', $bcc) : $bcc);
+		$names = array('cc', 'bcc', 'subject', 'body');
+		$parts = array($cc, $bcc, $subject, $body);
+		$url = "mailto:" . urlencode($to ? $to : '');
+		$char = '?';
+		for ($i=0, $l=count($names); $i<$l; ++$i) {
+			if ($parts[$i]) {
+				$url .= $char . $names[$i] . '=' . urlencode($parts[$i]);
+				$char = '&';
+			}
+		}
+		return $url;
+	}
+	
+	/**
 	 * Generates markup for a link element
 	 * @method a
 	 * @static

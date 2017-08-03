@@ -132,6 +132,8 @@
 			"Users_User": [
 				"Places/participating",
 				"Places/user/location",
+				"Places/user/location/home",
+				"Places/user/location/work",
 				"Places/user/locations"
 			]
 		}

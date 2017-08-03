@@ -32,14 +32,6 @@ interface Users_AppUser_Interface
 	function icon($sizes = null, $suffix = '');
 
 	/**
-	 * Get info about access token
-	 * @method accessInfo
-	 * @return {array} An array of ($accessToken, $sessionExpires)
-	 *  where $sessionExpires may be null
-	 */
-	function accessInfo();
-
-	/**
 	 * Import some fields from facebook. Also fills Users::$cache['platformUserData'].
 	 * @param {array} $fields
 	 * @return {array}

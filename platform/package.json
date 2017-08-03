@@ -1,0 +1,21 @@
+{
+	"name": "Q",
+	"description": "Qbix Platform",
+	"author": "Qbix",
+	"version": "1.0.0",
+	"engines": {
+		"node": ">= 0.6.0"
+	},
+	"dependencies": {
+		"yuidocjs": "0.3.x",
+		"express": "3.x.x",
+		"socket.io": "1.x.x",
+		"mysql": "2.9.x",
+		"request": "2.x.x",
+		"handlebars": "2.0.x"
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "git://github.com/EGreg/Q.git"
+	}
+}

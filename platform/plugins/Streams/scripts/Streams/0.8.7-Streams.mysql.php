@@ -36,7 +36,7 @@ function Streams_0_8_7_Streams_mysql()
 	echo PHP_EOL;
 	
 	$stream = array(
-		'publisherId' => '', 
+		'publisherId' => $communityId, 
 		'name' => "Streams/images/",
 		'type' => 'Streams/template', 
 		'title' => 'Image Gallery',

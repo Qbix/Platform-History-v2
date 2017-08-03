@@ -29,8 +29,11 @@ function Streams_register_post()
 			'identifier', 'emailAddress', 'mobileNumber'
 		));
 	}
+	if (empty($fullName)) {
+		throw new Q_Exception("Please enter your name", 'name');
+	}
 	$user = Streams::register(
-		$fullName, 
+		Streams::splitFullName($fullName), 
 		Users::requestedIdentifier(), 
 		true,
 		compact('activation')
