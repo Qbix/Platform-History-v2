@@ -4752,7 +4752,7 @@ Q.Links = {
 		var char = '?';
 		for (var i=0, l=names.length; i<l; ++i) {
 			if (parts[i]) {
-				url += char + names[i] + '=' + encodeURIComponent(parts[i])
+				url += char + names[i] + '=' + encodeURIComponent(parts[i]);
 				char = '&';
 			}
 		}

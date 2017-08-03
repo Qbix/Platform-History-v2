@@ -182,9 +182,14 @@
 			"Streams/task": {
 				"description": "for receiving updates about progress on a certain task",
 				"create": true,
-				"messages": {},
+				"messages": {
+					"Streams/task/progress": {
+						"description": "Progress has been made",
+						"subject": "Progress made on {{stream.fields.title}}"
+					}
+				},
 				"attributes": {
-					"progress": "double"
+					"completed": "double"
 				}
 			},
 			"Streams/text": {
@@ -400,6 +405,9 @@
 		"notifications": {
 			"onlyIfAllClientsOffline": true,
 			"debug": true
+		},
+		"import": {
+			"timeLimit": 100000
 		}
 	}
 }
