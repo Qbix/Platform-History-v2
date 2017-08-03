@@ -10,7 +10,7 @@
  * @class Users_AppUser_Facebook
  * @extends Users_AppUser
  */
-class Users_AppUser_Facebook extends Users_AppUser
+class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Interface
 {
 	public $facebook = null;
 

@@ -4718,16 +4718,20 @@ Q.Links = {
 	 * @return {String}
 	 */
 	sms: function (body, mobileNumbers) {
-		var ios = (Q.info.browser.OS !== 'ios');
+		var ios = (Q.info.browser.OS === 'ios');
 		if (mobileNumbers && Q.isArrayLike(mobileNumbers)) {
-			mobileNumbers = ios ? mobileNumbers[0] : mobileNumbers.join(',');
+			var temp = [];
+			Q.each(mobileNumbers, function (i) {
+				temp.push(encodeURIComponent(mobileNumbers[i]));
+			});
+			mobileNumbers = (ios ? '/open?addresses=' : '') + temp.join(',');
 		}
 		var url = "sms:" + mobileNumbers;
 		var char = ios ? '?' : '&';
 		return url + char + 'body=' + encodeURIComponent(body);
 	},
 	/**
-	 * Generates a link for sending an sms message
+	 * Generates a link for sending an email message
 	 * @static
 	 * @method email
 	 * @param {String} [subject]
@@ -4738,7 +4742,7 @@ Q.Links = {
 	 * @return {String}
 	 */
 	email: function (subject, body, to, cc, bcc) {
-		var ios = (Q.info.browser.OS !== 'ios');
+		var ios = (Q.info.browser.OS === 'ios');
 		to = to && Q.isArrayLike(to) ? to.join(',') : to;
 		cc = cc && Q.isArrayLike(cc) ? cc.join(',') : cc;
 		bcc = bcc && Q.isArrayLike(bcc) ? bcc.join(',') : bcc;
@@ -4748,7 +4752,7 @@ Q.Links = {
 		var char = '?';
 		for (var i=0, l=names.length; i<l; ++i) {
 			if (parts[i]) {
-				url += char + names[i] + '=' + encodeURIComponent(parts[i])
+				url += char + names[i] + '=' + encodeURIComponent(parts[i]);
 				char = '&';
 			}
 		}

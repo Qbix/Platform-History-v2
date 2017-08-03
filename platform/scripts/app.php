@@ -39,9 +39,6 @@ Options:
   If no --group parameter specified file permisions are set to 0666/0777
   Note: may require elevated privileges.
 
---deep
-  Make recursive check of filemode and group. Can be used when 'files' folder is not empty
-
 --noreq
   Skip requirements checking (useful when installing 2 interdependent plugins)
 
@@ -150,9 +147,6 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 				case '--noreq':
 					$options['noreq'] = true;
 					break;
-				case '--deep':
-					$options['deep'] = true;
-					break;
 				case '-all':
 				case '--all':
 					$auto_plugins = true;
@@ -210,7 +204,9 @@ if ($auto_plugins) {
 	}
 }
 
-Q_Plugin::checkPermissions(APP_FILES_DIR, array_merge($options, array('deep' => true)));
+Q_Plugin::checkPermissions(Q_FILES_DIR, $options);
+Q_Plugin::npmInstall(Q_DIR);
+Q_Plugin::composerInstall(Q_DIR);
 
 foreach ($plugins as $plugin) {
 	$cons = Q_Config::get('Q', 'pluginInfo', $plugin, 'connections', array());
@@ -227,10 +223,13 @@ foreach ($plugins as $plugin) {
 if (!$noapp) {
 	// if application is installed/updated, it's schema is always installed/updated
 	$cons = Q_Config::get('Q', 'appInfo', 'connections', array());
-	foreach ($cons as $con)
-		if (empty($options['sql'][$con]))
+	foreach ($cons as $con) {
+		if (empty($options['sql'][$con])) {
 			$options['sql'][$con] = array('enabled' => true);
+		}
+	}
 
+	$options['deep'] = true;
 	Q_Plugin::installApp($options);
 	if (empty($noInit) && file_exists($LOCAL_DIR.DS.'scripts'.DS.'init.php')) {
 		echo 'Running initialization script'.PHP_EOL;

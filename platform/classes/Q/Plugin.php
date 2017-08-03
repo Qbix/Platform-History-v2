@@ -20,24 +20,30 @@ class Q_Plugin
 	 */
 	static private function prepare() {
 		// Connect Qbix platform if it's not already connected
-		if (!class_exists('Q', false))
-			if (!file_exists($Q_file = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Q.php'))
+		if (!class_exists('Q', false)) {
+			if (!file_exists($Q_file = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Q.php')) {
 				throw new Exception("$Q_file not found");
-			else
+			} else {
 				include($Q_file);
-
-		if (!class_exists('Q', false))
+			}
+		}
+		if (!class_exists('Q', false)) {
 			throw new Exception("Could not load Qbix Platform");
+		}
 
 		// Is APP_DIR defined and does it exist?
-		if (!defined('APP_DIR'))
+		if (!defined('APP_DIR')) {
 			throw new Exception("APP_DIR is not defined");
-		if (!is_dir(APP_DIR))
+		}
+		if (!is_dir(APP_DIR)) {
 			throw new Exception(APP_DIR . " doesn't exist or is not a directory");
-		if (!defined('APP_WEB_DIR'))
+		}
+		if (!defined('APP_WEB_DIR')) {
 			throw new Exception("APP_WEB_DIR is not defined");
-		if (!defined('APP_LOCAL_DIR'))
+		}
+		if (!defined('APP_LOCAL_DIR')) {
 			throw new Exception("APP_LOCAL_DIR is not defined");
+		}
 
 	}
 
@@ -479,8 +485,9 @@ class Q_Plugin
 		}
 
 		// Check and fix permissions
-		self::checkPermissions(Q_FILES_DIR, $options);
 		self::checkPermissions(APP_FILES_DIR, $options);
+		self::npmInstall(APP_DIR);
+		self::composerInstall(APP_DIR);
 
 		// install or update application schema
 		$connections = Q_Config::get('Q', 'appInfo', 'connections', array());
@@ -601,6 +608,9 @@ EOT;
 				self::checkPermissions($files_dir.DS.$perm, $options);
 			}
 		}
+		
+		self::npmInstall($plugin_dir);
+		self::composerInstall($plugin_dir);
 
 		// Symbolic links
 		echo 'Creating symbolic links'.PHP_EOL;
@@ -624,6 +634,39 @@ EOT;
 		Q_Config::save($app_plugins_file, array('Q', 'pluginLocal'));
 
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
+	}
+	
+	static function npmInstall($dir)
+	{
+		if (!file_exists($dir . DS . 'package.json')
+		or !self::commandExists('npm')) {
+			return false;
+		}
+		echo "Installing npm modules into $dir".DS."node_modules\n";
+		$cwd = getcwd();
+		chdir($dir);
+		shell_exec("npm install");
+		chdir($cwd);
+		return true;
+	}
+	
+	static function composerInstall($dir)
+	{
+		if (!file_exists($dir . DS . 'composer.json')
+		or !self::commandExists('composer')) {
+			return false;
+		}
+		echo "Installing composer packages into $dir".DS."vendor\n";
+		$cwd = getcwd();
+		chdir($dir);
+		shell_exec("composer install");
+		chdir($cwd);
+		return true;
+	}
+	
+	static function commandExists($cmd) {
+	    $return = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
+	    return !empty($return);
 	}
 
 	/**
