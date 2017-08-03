@@ -121,9 +121,12 @@
 			}
 
 			var appConfig = Q.getObject('Q.Users.browserApps.' + Q.info.browser.name + '.' + Q.info.app);
-
+			var userVisibleOnly = true;
+			if (options && !options.userVisibleOnly) {
+				userVisibleOnly = false;
+			}
 			this.serviceWorkerRegistration.pushManager.subscribe({
-				userVisibleOnly: !!options.userVisibleOnly,
+				userVisibleOnly: userVisibleOnly,
 				applicationServerKey: urlB64ToUint8Array(self.appConfig.publicKey)
 			}).then(function (subscription) {
 				_saveSubscription(subscription);
