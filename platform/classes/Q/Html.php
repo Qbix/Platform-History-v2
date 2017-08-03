@@ -76,7 +76,7 @@ class Q_Html
 		$char = '?';
 		for ($i=0, $l=count($names); $i<$l; ++$i) {
 			if ($parts[$i]) {
-				$url .= $char . $names[$i] . '=' . urlencode($parts[$i])
+				$url .= $char . $names[$i] . '=' . urlencode($parts[$i]);
 				$char = '&';
 			}
 		}

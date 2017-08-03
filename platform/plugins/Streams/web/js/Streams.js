@@ -745,7 +745,7 @@ var _Streams_batchFunction_options = {
  *    a form element here which includes input elements of type "file", named "file" or "icon".
  *    If they have files selected in them, they will be passed along with the rest of the
  *    fields. Setting this option will cause a call to Q.formPost which will load the result
- *    in an iframe. That resulting webpage must contain 
+ *    in an iframe. That resulting webpage must contain javascript to call the resultFunction.
  * @param {String} [options.resultFunction=null] The path to the function to handle inside the
  *    contentWindow of the resulting iframe, e.g. "Foo.result". 
  *    Your document is supposed to define this function if it wants to return results to the

@@ -1381,9 +1381,11 @@ class Q_Response
 	 * Gets or sets whether the response is buffered.
 	 * @method isBuffered
 	 * @static
-	 * @param {boolean} [$new_value=null] If not present, just returns the current value of this setting.
-	 *  If true or false, sets the setting to this value, and returns the setting's old value.
-	 * @return {boolean}
+	 * @param {boolean|string} [$new_value=null] If not present,
+	 *  just returns the current value of this setting.
+	 *  If true or false, sets the setting to this value,
+	 *  and returns the setting's old value.
+	 * @return {boolean|string}
 	 */
 	static function isBuffered($new_value = null)
 	{
