@@ -404,7 +404,9 @@ class Q_Dispatcher
 	
 	/**
 	 * Returns a response to the client.
-	 * @param {boolean} [$closeConnection=false] Whether to send headers to close the connection
+	 * @param {boolean} [$closeConnection=false] Whether to flush all the buffers
+	 *   and send headers to close the connection
+	 * @param {boolean} [$flushBuffers=false] Whether to flush the buffers
 	 * @method response
 	 * @static
 	 */
@@ -445,7 +447,11 @@ class Q_Dispatcher
 			$ob->endFlush();
 		}
 		if ($closeConnection) {
-			ob_end_flush();
+			@ob_end_flush();
+			$ob = new Q_OutputBuffer();
+			for ($i=0, $l=$ob->level; $i<=$l; ++$i) {
+				@ob_end_flush();
+			}
 			flush();
 		}
 		self::$servedResponse = true;
