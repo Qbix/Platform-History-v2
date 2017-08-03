@@ -25,17 +25,18 @@ function Streams_import_post()
 		return;
 	}
 	$luid = Users::loggedInUser(true)->id;
-	$app = Q::app();
 	$communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
-	// TODO: get the other stream names from CSV
+
 	$all = Streams::userStreamsTree()->getAll();
 	$exceptions = array();
 	$users = array();
-	$j = 0;
 
 	$task = isset($_REQUEST['taskStreamName'])
 		? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
-		: Streams::create($luid, $communityId, 'Streams/task');
+		: Streams::create($luid, $communityId, 'Streams/task', array(
+			'skipAccess' => true,
+			'title' => 'Importing members into ' . Users::communityName()
+		));
 	$task->addPreloaded();
 	Q_Response::setSlot('taskStreamName', $task->name);
 	
@@ -57,6 +58,7 @@ function Streams_import_post()
 	$emailAddressKey = Q_Utils::normalize('Email Address');
 	$mobileNumberKey = Q_Utils::normalize('Mobile Number');
 	$processed = $task->getAttribute('processed', 0);
+	$j = 0;
 	while ($row = fgetcsv($fp, 0, ',')) {
 		if (++$j <= $processed) {
 			continue;
@@ -87,9 +89,13 @@ function Streams_import_post()
 					$stream = reset($streams);
 					if (!$stream) {
 						$vn = Q_Utils::normalize($value);
-						$stream = Streams::create($luid, $communityId, 'Streams/experience', array(
-							'name' => "Streams/experience/$vn",
-						));
+						$stream = Streams::fetchOne($luid, $communityId, "Streams/experience/$vn");
+						if (!$stream) {
+							$stream = Streams::create($luid, $communityId, 'Streams/experience', array(
+								'name' => "Streams/experience/$vn",
+								'title' => $value
+							));
+						}
 					}
 					$streamNames[] = $stream->name;
 				}
@@ -179,8 +185,6 @@ function Streams_import_post()
 					Users_Contact::addContact($communityId, $label, $userId, null, $luid);
 				}
 			}
-			var_dump($row);
-			echo "\n<br>\n";
 		} catch (Exception $e) {
 			$exceptions[$j] = $e;
 		}
