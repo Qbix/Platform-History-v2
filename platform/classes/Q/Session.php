@@ -706,9 +706,7 @@ class Q_Session
 						$existing_data = '';
 					}
 				}
-				if (!session_decode($existing_data)) {
-					$_SESSION = array();
-				}
+				$_SESSION = self::unserialize($existing_data);
 				$t = new Q_Tree($_SESSION);
 				$t->merge($our_SESSION);
 				$_SESSION = $t->getAll();
@@ -1068,8 +1066,8 @@ class Q_Session
 			$id
 		);
 	}
-	
-	static function decodeId($id)
+
+	protected static function decodeId($id)
 	{
 		if (!$id) {
 			return array(false, '', '');
@@ -1120,6 +1118,59 @@ class Q_Session
 		$results = self::decodeId($id);
 		return $results[0];
 	}
+	
+	/**
+	 * Unserialize a session string stored by PHP using the same
+	 * session.serialize_handler as the current one.
+	 * @param {string} $session_data
+	 * @return {array} The session data
+	 */
+    static function unserialize($session_data) {
+        $method = ini_get("session.serialize_handler");
+        switch ($method) {
+            case "php":
+                return self::unserialize_php($session_data);
+                break;
+            case "php_binary":
+                return self::unserialize_phpbinary($session_data);
+                break;
+            default:
+                throw new Exception("Unsupported session.serialize_handler: " . $method . ". Supported: php, php_binary");
+        }
+    }
+
+    protected static function unserialize_php($session_data) {
+        $return_data = array();
+        $offset = 0;
+        while ($offset < strlen($session_data)) {
+            if (!strstr(substr($session_data, $offset), "|")) {
+                throw new Exception("invalid data, remaining: " . substr($session_data, $offset));
+            }
+            $pos = strpos($session_data, "|", $offset);
+            $num = $pos - $offset;
+            $varname = substr($session_data, $offset, $num);
+            $offset += $num + 1;
+            $data = unserialize(substr($session_data, $offset));
+            $return_data[$varname] = $data;
+            $offset += strlen(serialize($data));
+        }
+        return $return_data;
+    }
+
+    protected static function unserialize_phpbinary($session_data) {
+        $return_data = array();
+        $offset = 0;
+        while ($offset < strlen($session_data)) {
+            $num = ord($session_data[$offset]);
+            $offset += 1;
+            $varname = substr($session_data, $offset, $num);
+            $offset += $num;
+            $data = unserialize(substr($session_data, $offset));
+            $return_data[$varname] = $data;
+            $offset += strlen(serialize($data));
+        }
+        return $return_data;
+    }
 	
 	/**
 	 * @property $inited
