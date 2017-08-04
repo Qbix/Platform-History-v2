@@ -186,6 +186,10 @@
 					"Streams/task/progress": {
 						"description": "Progress has been made",
 						"subject": "Progress made on {{stream.fields.title}}"
+					},
+					"Streams/task/complete": {
+						"description": "Task has been completed",
+						"subject": "Task completed: {{stream.fields.title}}"
 					}
 				},
 				"attributes": {
