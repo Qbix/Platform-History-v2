@@ -48,7 +48,7 @@ function Streams_0_8_7_Streams_mysql()
 		'adminLevel' => Streams::$ADMIN_LEVEL['invite']
 	);
 	$access = array(
-		'publisherId' => '', 
+		'publisherId' => $communityId, 
 		'streamName' => "Streams/images/",
 		'ofUserId' => '',
 		'grantedByUserId' => null,
