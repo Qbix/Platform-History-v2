@@ -50,6 +50,7 @@ function Streams_import_post()
 
 	$file = reset($_FILES);
 	$tmp = $file['tmp_name'];
+	// TODO: move uploaded file to file with some temp name, save it in stream
 	$fp = fopen($tmp, 'r');
 	$fields = fgetcsv($fp, 0, ',');
 	if ($fields === false) {
