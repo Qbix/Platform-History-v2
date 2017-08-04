@@ -13,7 +13,8 @@
  * @method post
  * @param {array} [$_REQUEST]
  * @param {string} [$_REQUEST.communityId=Users::communityId] If you want to override it
- * @param {string} [$_REQUEST.taskStreamName] Pass the name of a task stream to resume it
+ * @param {string} [$_REQUEST.taskStreamName] Pass the name of a task stream to resume it.
+ *    In this case, you don't need to pass the file, because it was saved.
  * @param {array} [$_FILES] Array consisting of one or more CSV files.
  *  The first line consists of titles or names of streams loaded from
  *  JSON files named under Streams/userStreams config.
@@ -39,6 +40,8 @@ function Streams_import_post()
 		));
 	$task->addPreloaded();
 	Q_Response::setSlot('taskStreamName', $task->name);
+
+	// TODO: make a cron to resume unfinished tasks
 
 	$dest = APP_FILES_DIR . DS . 'Streams' . DS . 'tasks';
 	if (!is_dir($dest)) {
