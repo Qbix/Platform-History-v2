@@ -314,7 +314,7 @@ class Q_Html
 			$attributes = array();
 		}
 		$tag_params = array_merge(compact('name', 'rows', 'cols'), $attributes);
-		return self::tag('textarea', $tag_params, Q::t($contents));
+		return self::tag('textarea', $tag_params, $contents);
 	}
 	
 	/**
@@ -1018,6 +1018,7 @@ class Q_Html
 			$contents = (string)$contents;
 		}
 		if (is_string($contents)) {
+			$contents = Q::t($contents);
 			$return = "<$tag $attributes>$contents</$tag>";
 		} else if ($contents === true) {
 			$return = "<$tag $attributes />";
