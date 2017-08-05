@@ -5,7 +5,10 @@
  */
 
 /**
- * Used to post a message to an existing stream.
+ * Can be used by $app/admins of a community.
+ * Starts a Streams/task to create users from an uploaded csv file, and
+ * invite them to the "Streams/experience/main" stream, as well as any
+ * other experience streams named in the csv.
  * @class HTTP Streams import
  * @method post
  * @param {array} [$_REQUEST]
@@ -21,9 +24,6 @@
  */
 function Streams_import_post()
 {
-	if (empty($_FILES)) {
-		return;
-	}
 	$luid = Users::loggedInUser(true)->id;
 	$communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
 
@@ -39,7 +39,23 @@ function Streams_import_post()
 		));
 	$task->addPreloaded();
 	Q_Response::setSlot('taskStreamName', $task->name);
-	
+
+	$dest = APP_FILES_DIR . DS . 'Streams' . DS . 'tasks';
+	if (!is_dir($dest)) {
+		mkdir($dest, fileperms(APP_FILES_DIR), true);
+	}
+	$parts = explode('/', $task->name);
+	$taskId = end($parts);
+	$filename = $dest . DS . "$taskId.csv";
+	if (!empty($_FILES)) {
+		$file = reset($_FILES);
+		$tmp = $file['tmp_name'];
+		move_uploaded_file($tmp, $filename);
+	}
+	if (!file_exists($filename)) {
+		throw new Q_Exception_MissingFile(array('filename' => $filename));
+	}
+
 	// Send the response and keep going.
 	// WARN: this potentially ties up the PHP thread for a long time
 	$timeLimit = Q_Config::get('Streams', 'import', 'timeLimit', 100000);
@@ -48,10 +64,7 @@ function Streams_import_post()
 	Q_Dispatcher::response(true);
 	session_write_close();
 
-	$file = reset($_FILES);
-	$tmp = $file['tmp_name'];
-	// TODO: move uploaded file to file with some temp name, save it in stream
-	$fp = fopen($tmp, 'r');
+	$fp = fopen($filename, 'r');
 	$fields = fgetcsv($fp, 0, ',');
 	if ($fields === false) {
 		return;
@@ -59,6 +72,20 @@ function Streams_import_post()
 	$emailAddressKey = Q_Utils::normalize('Email Address');
 	$mobileNumberKey = Q_Utils::normalize('Mobile Number');
 	$processed = $task->getAttribute('processed', 0);
+
+	// count the number of rows
+	$lineCount = 0;
+	$fp = fopen($filename,  'r');
+	if ($fp) {
+		while (!feof($fp)) {
+			if ($content = fgets($fp)) {
+				++$lineCount;
+			}
+		}
+	}
+	fclose($fp);
+
+	// start parsing the rows
 	$j = 0;
 	while ($row = fgetcsv($fp, 0, ',')) {
 		if (++$j <= $processed) {
@@ -160,9 +187,10 @@ function Streams_import_post()
 				$user->addMobile($alsoAddMobile); // sends addMobile message
 			}
 			$task->setAttribute('processed', $j);
+			$task->setAttribute('completed', min($j / $lineCount, 1));
 			$task->post($luid, array(
 				'type' => 'Streams/task/progress',
-				'instructions' => compact('mobileNumber', 'emailAddress', 'user'),
+				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'completed'),
 			), true);
 			foreach ($streamNames as $sn) {
 				// the following sends an invite message and link by email or mobile
@@ -190,5 +218,9 @@ function Streams_import_post()
 			$exceptions[$j] = $e;
 		}
 	}
-	unlink($tmp);
+	// if we reached here, then the task has completed
+	unlink($filename); // remove the file
+	$task->post($luid, array(
+		'type' => 'Streams/task/complete'
+	), true);
 }
