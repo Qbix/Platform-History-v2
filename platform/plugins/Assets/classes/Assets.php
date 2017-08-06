@@ -10,7 +10,7 @@
  * @extends Base_Assets
  */
 
-require __DIR__ . '/Composer/vendor/autoload.php';
+require Q_DIR.'/../vendor/autoload.php';
 
 abstract class Assets extends Base_Assets
 {
