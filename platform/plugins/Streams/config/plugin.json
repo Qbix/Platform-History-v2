@@ -181,7 +181,6 @@
 			},
 			"Streams/task": {
 				"description": "for receiving updates about progress on a certain task",
-				"create": true,
 				"messages": {
 					"Streams/task/progress": {
 						"description": "Progress has been made",
@@ -192,6 +191,15 @@
 						"subject": "Task completed: {{stream.fields.title}}"
 					}
 				},
+				"attributes": {
+					"state": "enum('unassigned','assigned','accepted','progress','completed','approved')",
+					"progress": "double",
+					"items": "integer",
+					"processed": "integer"
+				}
+			},
+			"Streams/tasks": {
+				"description": "category for tasks",
 				"attributes": {
 					"completed": "double"
 				}
