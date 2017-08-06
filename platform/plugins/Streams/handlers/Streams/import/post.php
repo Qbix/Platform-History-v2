@@ -76,7 +76,7 @@ function Streams_import_post()
 	session_write_close();
 	
 	// count the number of rows
-	$lineCount = substr_count($instructions, "\n");
+	$lineCount = substr_count($instructions, PHP_EOL);
 	$task->setAttribute('items', $lineCount);
 
 	// get the fields from the first row
