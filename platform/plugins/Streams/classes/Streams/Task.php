@@ -24,10 +24,6 @@ class Streams_Task extends Base_Streams_Task
 		// INSERT YOUR CODE HERE
 		// e.g. $this->hasMany(...) and stuff like that.
 	}
-
-	/*
-	 * Add any Streams_Task methods here, whether public or not
-	 */
 	 
 	/**
 	 * Implements the __set_state method, so it can work with
