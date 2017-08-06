@@ -586,7 +586,7 @@ EOT;
 		if (file_exists($app_plugins_file)) {
 			Q_Config::load($app_plugins_file, true);
 		}
-		//  Do we already have this plugin installed for this app?
+		// Do we already have this plugin installed for this app?
 		// Check requirements for plugin (will throw exceptions if they aren't met)
 		if(!isset($options['noreq']) || !$options['noreq']) {
 			echo "Checking requirements".PHP_EOL;
@@ -595,10 +595,11 @@ EOT;
 
 		//  Checking LOCAL plugin version in plugins.json file
 		if (($version_installed = Q_Config::get('Q', 'pluginLocal', $plugin_name, 'version', null)) != null) {
-			//We have this plugin installed
+			// We have this plugin installed
 			echo "Plugin '$plugin_name' (version: $version_installed) is already installed" . PHP_EOL;
-			if (Q::compareVersion($version_installed, $plugin_version) < 0)
+			if (Q::compareVersion($version_installed, $plugin_version) < 0) {
 				echo "Upgrading '$plugin_name' to version: $plugin_version" . PHP_EOL;
+			}
 		}
 		
 		// Check and fix permissions

@@ -86,6 +86,7 @@ function Streams_import_post()
 			}
 		}
 	}
+	$task->setAttribute('items', $lineCount);
 	fclose($fp);
 
 	// start parsing the rows
@@ -190,10 +191,10 @@ function Streams_import_post()
 				$user->addMobile($alsoAddMobile); // sends addMobile message
 			}
 			$task->setAttribute('processed', $j);
-			$task->setAttribute('completed', min($j / $lineCount, 1));
+			$task->setAttribute('progress', min($j / $lineCount, 1));
 			$task->post($luid, array(
 				'type' => 'Streams/task/progress',
-				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'completed'),
+				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress'),
 			), true);
 			foreach ($streamNames as $sn) {
 				// the following sends an invite message and link by email or mobile
