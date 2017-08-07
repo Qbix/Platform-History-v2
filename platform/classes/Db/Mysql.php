@@ -76,6 +76,13 @@ class Db_Mysql implements Db_Interface
 	public $prefix;
 
 	/**
+	 * The cutoff after which strlen gets too expensive to check automatically
+	 * @property $maxCheckStrlen
+	 * @type string
+	 */
+	public $maxCheckStrlen = 1000000;
+
+	/**
 	 * Actually makes a connection to the database (by creating a PDO instance)
 	 * @method reallyConnect
 	 * @param {array} [$shardName=null] A shard name that was added using Db::setShard.
@@ -605,10 +612,10 @@ class Db_Mysql implements Db_Interface
         // Count all the rows
         $query = $this->select('COUNT(1) _count', $table)->where($where);
         $sharded = $query->shard();
+	    $shard = key($sharded);
         if (count($sharded) > 1 or $shard === '*') { // should be only one shard
         	throw new Exception("Db_Mysql::rank can work within at most one shard");
         }
-        $shard = key($sharded);
         $row = $query->execute()->fetch(PDO::FETCH_ASSOC);
         $count = $row['_count'];
 		
@@ -1345,11 +1352,12 @@ EOT;
 			$js_class_filename = $directory.DS.implode(DS, $class_name_parts).'.js';
 			$js_base_class_filename = $directory.DS.'Base'.DS.implode(DS, $class_name_parts).'.js';
 			$js_base_class_require = 'Base'.DS.implode(DS, $class_name_parts);
+			$dbname =
 			// because table name can be {$prefix}_Q_plugin or {$prefix}_Q_app we need to know correct table name
 			$tables = $this->rawQuery(
 				"SELECT table_comment"
 				." FROM INFORMATION_SCHEMA.TABLES"
-				." WHERE table_schema = '$dbname' and table_name LIKE '{$prefix}Q_%'"
+				." WHERE table_schema = '{$this->dbname}' and table_name LIKE '{$prefix}Q_%'"
 			)->execute()->fetchAll(PDO::FETCH_NUM);
 			$model_comment = (!empty($tables[0]['table_comment']))
 				 ? " * <br>{".$tables[0]['table_comment']."}\n"
@@ -1661,16 +1669,20 @@ EOT;
 					$type_range_max = $type_unsigned ? 18446744073709551615 : 9223372036854775807;
 					break;
 				case 'tinytext':
+				case 'tinyblob':
 					$type_display_range = 255;
 					break;
 				case 'text':
+				case 'blob':
 					$type_display_range = 65535;
 					break;
 				case 'mediumtext':
-					$type_display_range = 16777215;
+				case 'mediumblob':
+					$type_display_range = 16777216;
 					break;
 				case 'longtext':
-					$type_display_range = 4294967295;
+				case 'longblob':
+					$type_display_range = 4294967296;
 					break;
 			}
 			$field_name_exported = var_export($field_name, true);
@@ -1824,9 +1836,14 @@ EOT;
 					$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		{$null_check}{$null_fix}{$dbe_check}if (!is_string(\$value) and !is_numeric(\$value))
 			throw new Exception('Must pass a string to '.\$this->getTable().".$field_name");
+
+EOT;
+					if ($type_display_range and $type_display_range < $this->maxCheckStrlen) {
+						$functions["beforeSet_$field_name_safe"][] = <<<EOT
 		if (strlen(\$value) > $type_display_range)
 			throw new Exception('Exceedingly long value being assigned to '.\$this->getTable().".$field_name");
 EOT;
+					}
 					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.

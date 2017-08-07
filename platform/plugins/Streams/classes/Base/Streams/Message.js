@@ -85,7 +85,7 @@ Q.mixin(Base, Row);
  * @property type
  * @type String|Buffer
  * @default ""
- * the type of the message, such as text or video
+ * the type of the message, like Module/a or Module/a/b
  */
 /**
  * @property content

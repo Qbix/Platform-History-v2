@@ -76,7 +76,7 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @property $type
 	 * @type string
 	 * @default ""
-	 * the type of the message, such as text or video
+	 * the type of the message, like Module/a or Module/a/b
 	 */
 	/**
 	 * @property $content
