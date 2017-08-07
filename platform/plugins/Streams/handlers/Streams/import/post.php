@@ -66,7 +66,7 @@ function Streams_import_post()
 	}
 	$instructions = $task->instructions;
 
-	// Send the response and keep going.
+	// Send the response and keep   going.
 	// WARN: this potentially ties up the PHP thread for a long time
 	$timeLimit = Q_Config::get('Streams', 'import', 'timeLimit', 100000);
 	ignore_user_abort(true);
