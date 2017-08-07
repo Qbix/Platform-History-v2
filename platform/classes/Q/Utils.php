@@ -611,7 +611,7 @@ class Q_Utils
 			$server = "$url/$handler";
 		}
 
-		$result = json_decode(self::post(
+		$result = Q::json_decode(self::post(
 			$server, self::sign($data), null, true, null, 
 			Q_UTILS_INTERNAL_TIMEOUT, Q_UTILS_INTERNAL_TIMEOUT
 		), true);
@@ -620,7 +620,10 @@ class Q_Utils
 
 		// delete the above line to throw on error
 		if (isset($result['errors'])) {
-			throw new Q_Exception(reset($result['errors']));
+			$msg = is_array($result['errors'])
+				? reset($result['errors'])
+				: $result['errors'];
+			throw new Q_Exception($msg);
 		}
 		return isset($result['data']) ? $result['data'] : null;
 	}
