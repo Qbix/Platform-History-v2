@@ -9,7 +9,7 @@ function Streams_stream_response_content()
 	$userId = $user ? $user->id : 0;
 	$stream = isset(Streams::$cache['stream']) ? Streams::$cache['stream'] : null;
 
-	if (!isset($stream)) {
+	if (!isset($stream) or !$stream->testReadLevel('see')) {
 		throw new Q_Exception_MissingRow(array('table' => 'stream', 'criteria' => 'that name'));
 	}
 	if ($publisherId != $userId and !$stream->testReadLevel('content')) {
