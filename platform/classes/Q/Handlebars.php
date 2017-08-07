@@ -201,8 +201,12 @@ class Q_Handlebars_Loader implements Handlebars_Loader {
 		foreach ($plugins as $k => $v) {
 			$plugin = is_numeric($k) ? $v : $k;
 			$PLUGIN = strtoupper($plugin);
-			if (file_exists(constant($PLUGIN.'_PLUGIN_VIEWS_DIR').$xpath)) {
-				array_unshift(self::$loaders, new Handlebars_Loader_FilesystemLoader(constant($PLUGIN.'_PLUGIN_VIEWS_DIR').$xpath, $options));
+			$name = $PLUGIN.'_PLUGIN_VIEWS_DIR';
+			if (defined($name)
+			and file_exists(constant($name).$xpath)) {
+				array_unshift(self::$loaders, new Handlebars_Loader_FilesystemLoader(
+					constant($name).$xpath, $options
+				));
 			}
 		}
 

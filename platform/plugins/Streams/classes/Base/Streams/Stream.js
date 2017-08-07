@@ -75,7 +75,7 @@ Q.mixin(Base, Row);
  * @property type
  * @type String
  * @default ""
- * mimetypes plus more types of the form a/b and a/b/c . Can also be "group" or "chat"
+ * the type of the stream like Module/a or Module/a/b
  */
 /**
  * @property title
