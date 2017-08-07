@@ -199,7 +199,10 @@
 				},
 				"defaults": {
 					"title": "Untitled Task",
-					"icon": "Streams/task"
+					"icon": "Streams/task",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				},
 				"extend": ["Streams_Task"]
 			},
