@@ -1266,7 +1266,7 @@ Streams.invite.options = {
  * @param {Array} options.facebook.uids The facebook uids to send followup push notifications to messenger
  */
 Streams.followup = function (options, callback) {
-	var o = Q.extend({}, Streams.followup.options, options);
+	var o = Q.extend({}, Streams.followup.options, 10, options);
 	var e = o.email;
 	var m = o.mobile;
 	if (e && e.addresses && e.addresses.length) {
@@ -1277,16 +1277,19 @@ Streams.followup = function (options, callback) {
 			confirm: e.confirm
 		}, Q.info, function (params) {
 			if (o.show === 'alert' && params.alert[1]) {
-				Q.alert(params.alert[1], _emails);
+				Q.alert(params.alert[1], { onClose: _emails });
 			} else if (o.show === 'confirm' && params.confirm[1]) {
-				Q.confirm(params.confirm[1], _emails);
+				Q.confirm(params.confirm[1], function (choice) {
+					choice && _emails();
+				});
 			} else {
 				_emails();
 			}
 			function _emails() {
 				var url = Q.Links.email(
-					params.subject[1], params.body[1], e.addresses
+					params.subject[1], params.body[1], null, null, e.addresses
 				);
+				Q.handle(callback, Streams, [url, e.addresses, params]);
 				window.location = url;
 			}
 		});
@@ -1297,14 +1300,17 @@ Streams.followup = function (options, callback) {
 			confirm: m.confirm
 		}, Q.info, function (params) {
 			if (o.show === 'alert' && params.alert[1]) {
-				Q.alert(params.alert[1], _sms);
+				Q.alert(params.alert[1], { onClose: _sms });
 			} else if (o.show === 'confirm' && params.confirm[1]) {
-				Q.confirm(params.confirm[1], _sms);
+				Q.confirm(params.confirm[1], function (choice) {
+					choice && _sms();
+				});
 			} else {
 				_sms();
 			}
 			function _sms() {
-				var url = Q.Links.sms(params.text[1], mobileNumbers);
+				var url = Q.Links.sms(params.text[1], m.numbers);
+				Q.handle(callback, Streams, [url, m.numbers, params]);
 				window.location = url;
 			}
 		});
@@ -5099,17 +5105,17 @@ Q.Template.set('Streams/followup/mobile/alert', "Invites are sent from our numbe
 Q.Template.set('Streams/followup/mobile/confirm', "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 
 Q.Template.set('Streams/followup/mobile', 
-	"Hey, I just sent you an invite with {{app}}. Please check your sms and click the link!"
+	"Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
 );
 
-Q.Template.set('Streams/followup/emails/alert', "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
+Q.Template.set('Streams/followup/email/alert', "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 
-Q.Template.set('Streams/followup/emails/confirm', "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
+Q.Template.set('Streams/followup/email/confirm', "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 
 Q.Template.set('Streams/followup/email/subject', "Did you get an invite?");
 
 Q.Template.set('Streams/followup/email/body', 
-	"Hey, I just sent you an invite with {{app}}. Please check your email and click the link in there!"
+	"Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
 );
 
 _scheduleUpdate.delay = 5000;
