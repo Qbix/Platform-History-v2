@@ -46,6 +46,15 @@ Q.text.Streams = {
 
 	chat: {
 		noMessages: ""
+	},
+	
+	followup: {
+		mobile: {
+			title: 'Follow up'
+		},
+		email: {
+			title: 'Follow up'
+		}
 	}
 
 };
@@ -1277,11 +1286,11 @@ Streams.followup = function (options, callback) {
 			confirm: e.confirm
 		}, Q.info, function (params) {
 			if (o.show === 'alert' && params.alert[1]) {
-				Q.alert(params.alert[1], { onClose: _emails });
+				Q.alert(params.alert[1], { onClose: _emails, title: e.title, apply: true });
 			} else if (o.show === 'confirm' && params.confirm[1]) {
 				Q.confirm(params.confirm[1], function (choice) {
 					choice && _emails();
-				});
+				}, { title: e.title });
 			} else {
 				_emails();
 			}
@@ -1300,11 +1309,11 @@ Streams.followup = function (options, callback) {
 			confirm: m.confirm
 		}, Q.info, function (params) {
 			if (o.show === 'alert' && params.alert[1]) {
-				Q.alert(params.alert[1], { onClose: _sms });
+				Q.alert(params.alert[1], { onClose: _sms, title: title, apply: true });
 			} else if (o.show === 'confirm' && params.confirm[1]) {
 				Q.confirm(params.confirm[1], function (choice) {
 					choice && _sms();
-				});
+				}, { title: m.title });
 			} else {
 				_sms();
 			}
@@ -1323,11 +1332,13 @@ Streams.followup.options = {
 		subject: 'Streams/followup/email/subject',
 		body: 'Streams/followup/email/body',
 		alert: 'Streams/followup/email/alert',
+		title: Q.text.Streams.followup.email.title,
 		confirm: 'Streams/followup/email/confirm'
 	},
 	mobile: {
 		text: 'Streams/followup/mobile',
 		alert: 'Streams/followup/email/alert',
+		title: Q.text.Streams.followup.mobile.title,
 		confirm: 'Streams/followup/email/confirm'
 	}
 };
