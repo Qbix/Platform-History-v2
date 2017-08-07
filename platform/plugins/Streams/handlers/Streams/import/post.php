@@ -78,19 +78,26 @@ function Streams_import_post()
 	$lineCount = substr_count($instructions, PHP_EOL);
 	$task->setAttribute('items', $lineCount);
 
-	// get the fields from the first row
-	$fields = str_getcsv($instructions, ',');
-	if ($fields === false) {
-		return;
-	}
-	$emailAddressKey = Q_Utils::normalize('Email Address');
-	$mobileNumberKey = Q_Utils::normalize('Mobile Number');
-	$processed = $task->getAttribute('processed', 0);
-
 	// start parsing the rows
 	$j = 0;
-	while ($row = str_getcsv($instructions, ',')) {
-		if (++$j <= $processed) {
+	$lines = str_getcsv($instructions, "\r");
+	foreach ($lines as $line) {
+		$row = str_getcsv($line, ",");
+		if (!$row) {
+			continue;
+		}
+		if (++$j === 1) {
+			// get the fields from the first row
+			$fields = str_getcsv($instructions, ',');
+			if ($fields === false) {
+				return;
+			}
+			$emailAddressKey = Q_Utils::normalize('Email Address');
+			$mobileNumberKey = Q_Utils::normalize('Mobile Number');
+			$processed = $task->getAttribute('processed', 0);
+			continue;
+		}
+		if ($j <= $processed) {
 			continue;
 		}
 		$notEmpty = false;
