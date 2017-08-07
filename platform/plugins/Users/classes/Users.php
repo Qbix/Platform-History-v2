@@ -1762,37 +1762,37 @@ abstract class Users extends Base_Users
 		return $authorized;
 	}
 	
-	protected static function hashing($address, $type = null)
+	protected static function hashing($identifier, $type = null)
 	{
 		// process the address first
-		$address = trim($address);
+		$identifier = trim($identifier);
 		if (substr($type, -7) === '_hashed') {
-			$hashed = $address;
+			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
 			switch ($type) {
 				case 'email':
-					if (!Q_Valid::email($address, $normalized)) {
+					if (!Q_Valid::email($identifier, $normalized)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'email address')
+							array('field' => 'identifier', 'range' => 'email address')
 						);
 					}
 					break;
 				case 'mobile':
-					if (!Q_Valid::phone($address, $normalized)) {
+					if (!Q_Valid::phone($identifier, $normalized)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'phone number')
+							array('field' => 'identifier', 'range' => 'phone number')
 						);
 					}
 					break;
 				case 'facebook':
 				case 'twitter':
-					if (!is_numeric($address)) {
+					if (!is_numeric($identifier)) {
 						throw new Q_Exception_WrongValue(
 							array('field' => 'address', 'range' => 'numeric uid')
 						);
 					}
-					$normalized = $address;
+					$normalized = $identifier;
 					break;
 				default:
 					break;
