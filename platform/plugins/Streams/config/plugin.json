@@ -196,12 +196,21 @@
 					"progress": "double",
 					"items": "integer",
 					"processed": "integer"
-				}
+				},
+				"defaults": {
+					"title": "Untitled Task",
+					"icon": "Streams/task"
+				},
+				"extend": ["Streams_Task"]
 			},
 			"Streams/tasks": {
 				"description": "category for tasks",
 				"attributes": {
 					"completed": "double"
+				},
+				"defaults": {
+					"title": "Tasks",
+					"icon": "Streams/tasks"
 				}
 			},
 			"Streams/text": {

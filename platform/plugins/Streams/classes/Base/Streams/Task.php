@@ -358,8 +358,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".instructions");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".instructions");
+
 		return array('instructions', $value);			
 	}
 
@@ -370,7 +369,7 @@ return array (
 	function maxSize_instructions()
 	{
 
-		return 255;			
+		return 4294967296;			
 	}
 
 	/**
@@ -384,7 +383,7 @@ return array (
   0 => 
   array (
     0 => 'longblob',
-    1 => '255',
+    1 => 4294967296,
     2 => '',
     3 => false,
   ),

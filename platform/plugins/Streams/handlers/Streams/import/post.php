@@ -54,13 +54,12 @@ function Streams_import_post()
 	// available for any other worker to resume making progress on it.
 
 	// store the instructions
-	$parts = explode('/', $task->name);
-	$taskId = end($parts);
 	if (!empty($_FILES)) {
 		$file = reset($_FILES);
 		$tmp = $file['tmp_name'];
 		$task->instructions = file_get_contents($tmp);
 		$task->save();
+		unlink($tmp);
 	}
 	if (!$task->instructions) {
 		return;

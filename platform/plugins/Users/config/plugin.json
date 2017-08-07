@@ -53,7 +53,7 @@
 	},
 	"Users": {
 		"apps": {
-			"platforms": {}
+			"platforms": []
 		},
 		"apps-private": {
 			"facebook": ["secret"],

@@ -338,7 +338,7 @@ Base.prototype.beforeSet_instructions = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".instructions");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 4294967296)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".instructions");
 		return value;
 };
@@ -349,7 +349,7 @@ Base.prototype.beforeSet_instructions = function (value) {
 	 */
 Base.prototype.maxSize_instructions = function () {
 
-		return 255;
+		return 4294967296;
 };
 
 	/**
@@ -358,7 +358,7 @@ Base.prototype.maxSize_instructions = function () {
 	 */
 Base.column_instructions = function () {
 
-return [["longblob","255","",false],true,"",null];
+return [["longblob",4294967296,"",false],true,"",null];
 };
 
 /**
