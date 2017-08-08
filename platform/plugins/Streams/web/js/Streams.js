@@ -1309,7 +1309,7 @@ Streams.followup = function (options, callback) {
 			confirm: m.confirm
 		}, Q.info, function (params) {
 			if (o.show === 'alert' && params.alert[1]) {
-				Q.alert(params.alert[1], { onClose: _sms, title: title, apply: true });
+				Q.alert(params.alert[1], { onClose: _sms, title: m.title, apply: true });
 			} else if (o.show === 'confirm' && params.confirm[1]) {
 				Q.confirm(params.confirm[1], function (choice) {
 					choice && _sms();
@@ -1337,9 +1337,9 @@ Streams.followup.options = {
 	},
 	mobile: {
 		text: 'Streams/followup/mobile',
-		alert: 'Streams/followup/email/alert',
+		alert: 'Streams/followup/mobile/alert',
 		title: Q.text.Streams.followup.mobile.title,
-		confirm: 'Streams/followup/email/confirm'
+		confirm: 'Streams/followup/mobile/confirm'
 	}
 };
 
