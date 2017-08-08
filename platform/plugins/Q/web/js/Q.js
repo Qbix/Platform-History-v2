@@ -4727,7 +4727,7 @@ Q.Links = {
 			mobileNumbers = (ios ? '/open?addresses=' : '') + temp.join(',');
 		}
 		var url = "sms:" + mobileNumbers;
-		var char = ios ? '?' : '&';
+		var char = ios ? '&' : '?';
 		return url + char + 'body=' + encodeURIComponent(body);
 	},
 	/**

@@ -64,27 +64,35 @@ Q.Tool.define("Streams/import", function (options) {
 		_continue();
 	}
 	function _continue() {
-		tool.$('.Streams_import_file')
+		var $input = tool.$('.Streams_import_file')
 		.click(function (event) {
 			event.stopPropagation();
-		}).change(function (event) {
-			if (!this.value) {
-				return; // it was canceled
+		}).change(_change);
+		// for browsers taht don't support the change event, have an interval
+		this.ival = setInterval(function () {
+			if ($input.val()) {
+				_change();
 			}
-			var $this = $(this);
-			var form = $this.closest('form').get(0);
-			Q.request(form.action, ['taskStreamName'], function (e) {
-				Q.Streams.followup({
-					mobile: {
-						numbers: ['+17181234567', '+17181212121']
-					}
-				});
-			}, {
-				form: form
+		}, 100);
+	}
+	
+	function _change() {
+		if (!this.value) {
+			return; // it was canceled
+		}
+		var $this = $(this);
+		var form = $this.closest('form').get(0);
+		Q.request(form.action, ['taskStreamName'], function (e) {
+			Q.Streams.followup({
+				mobile: {
+					numbers: ['+17181234567', '+17181212121']
+				}
 			});
-			event.preventDefault();
-			form.reset();
+		}, {
+			form: form
 		});
+		event && event.preventDefault();
+		form.reset();
 	}
 },
 
@@ -97,7 +105,13 @@ Q.Tool.define("Streams/import", function (options) {
 },
 
 {
-
+	Q: {
+		beforeRemove: function () {
+			if (this.ival) {
+				clearInterval(this.ival);
+			}
+		}
+	}
 }
 
 );
