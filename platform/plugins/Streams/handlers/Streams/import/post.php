@@ -80,13 +80,7 @@ function Streams_import_post()
 
 	// start parsing the rows
 	$j = 0;
-	$lines = str_getcsv($instructions, "\r");
-	$lines3 = array();
-	foreach ($lines as $line) {
-		$lines2 = str_getcsv($line, "\n");
-		$lines3 = array_merge($lines3, $lines2);
-	}
-	foreach ($lines3 as $line) {
+	foreach (Q_Utils::csvLines($instructions) as $line) {
 		$row = str_getcsv($line, ",");
 		if (!$row) {
 			continue;
