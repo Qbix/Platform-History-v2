@@ -226,6 +226,27 @@ class Q_Utils
 	}
 
 	/**
+	 * Get the lines from a csv file
+	 * @method csvLines
+	 * @param {string} $input
+	 * @param {string} [$enclosure='"']
+	 * @param {string} [$escape="\\"]
+	 * @return array
+	 *
+	 */
+	static function csvLines($input, $enclosure = '"', $escape = "\\")
+	{
+		$result = array();
+		$lines = str_getcsv($input, "\r", $enclosure, $escape);
+		foreach ($lines as $line) {
+			if ($line and $line[0] === "\n") {
+				$line = substr($line, 1);
+			}
+		}
+		return $result;
+	}
+
+	/**
 	 * Generates a Universally Unique IDentifier, version 4.
 	 * This function generates a truly random UUID.
 	 * @method uuid
