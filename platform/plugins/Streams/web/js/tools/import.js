@@ -74,7 +74,11 @@ Q.Tool.define("Streams/import", function (options) {
 			var $this = $(this);
 			var form = $this.closest('form').get(0);
 			Q.request(form.action, ['taskStreamName'], function (e) {
-				debugger;
+				Q.Streams.followup({
+					mobile: {
+						numbers: ['+17181234567', '+17181212121']
+					}
+				});
 			}, {
 				form: form
 			});
