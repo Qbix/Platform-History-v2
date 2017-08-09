@@ -14,12 +14,6 @@ class Users_Device_Android extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		if (empty($notification['icon'])) {
-			$notification['icon'] = 'myicon';
-		}
-		if (empty($notification['sound'])) {
-			$notification['sound'] = 'mySound';
-		}
 		self::$push[] = $notification;
 	}
 
