@@ -3,16 +3,17 @@
 function Users_before_Q_objects(&$params)
 {
 	$app = Q_Config::expect('Q', 'app');
-	$fb_infos = Q_Config::get('Users', 'apps', 'facebook', array());
 
 	// We sometimes pass this in the request, for browsers like Safari
 	// that don't allow setting of cookies using javascript inside 3rd party iframes
 	
-	$authResponse = Q_Request::special('Users.facebook.authResponse', null);
-	$appId = Q::ifset($authResponse, 'appId', $app);
-	$fbAppId = Q::ifset($authResponse, 'fbAppId', null);
-	if ($fbAppId) {
-		$fbAppId = $fb_info['appId'];
+	if ($authResponse = Q_Request::special('Users.facebook.authResponse', null)) {
+		$appId = Q::ifset($authResponse, 'appId', $app);
+		$fbAppId = Q::ifset($authResponse, 'fbAppId', null);
+		list($appId, $appInfo) = Users::appInfo('facebook', $appId);
+		if (!isset($fbAppId)) {
+			$fbAppId = $appInfo['appId'];
+		}
 		if (is_array($authResponse)) {
 			if ($authResponse) {
 				$accessToken = $authResponse['accessToken'];
@@ -23,7 +24,7 @@ function Users_before_Q_objects(&$params)
 				$cookie = "";
 				$expires = 1;
 			}
-			$cookie_name = 'fbsr_'.$fb_info['appId'];
+			$cookie_name = "fbsr_$fbAppId";
 			if (!empty($_SERVER['HTTP_HOST'])) {
 				Q_Response::setCookie($cookie_name, $cookie, $expires);
 			}
