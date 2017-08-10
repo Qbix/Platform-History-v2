@@ -3,6 +3,7 @@
 /**
  * @module Q
  */
+
 /**
  * Used to maintain arbitrary data in persistent cache storage
  * @class Q_Cache
@@ -13,21 +14,28 @@ class Q_Cache
 	 * @method init
 	 * @static
 	 */
-	static function init() {
-		Q_Cache::$namespace = "Q_Cache\t".(defined('APP_DIR') ? APP_DIR : '')."\t";
-		self::$apc = extension_loaded('apc');
+	static function init()
+	{
+		Q_Cache::$namespace = "Q_Cache\t" . (defined('APP_DIR') ? APP_DIR : '') . "\t";
+		$apcEnabled = extension_loaded('apc');
+		$apcuEnabled = extension_loaded('apcu');
+		self::$apc = $apcEnabled || $apcuEnabled;
+		if (self::$apc) {
+			self::$apcType = $apcEnabled ? 'apc' : 'apcu';
+		}
 	}
-	
+
 	/**
 	 * Check if Q_Cache is connected to some PHP cache engine (currently APC)
 	 * @method connected
 	 * @static
 	 * @return {boolean} Whether cache is currently connected
 	 */
-	static function connected() {
+	static function connected()
+	{
 		return self::$apc;
 	}
-	
+
 	/**
 	 * Can be used to ignore the cache for a while, to re-populate it
 	 * @method ignore
@@ -50,7 +58,8 @@ class Q_Cache
 	 * @param {mixed} $value The value to set in cache
 	 * @return {boolean} Whether cache was fetched (if not, it will attempt to be saved at script shutdown)
 	 */
-	static function set($key, $value) {
+	static function set($key, $value)
+	{
 		$loaded = self::fetchStore();
 		self::$store[$key] = $value;
 		self::$changed = true; // it will be saved at shutdown
@@ -129,12 +138,12 @@ class Q_Cache
 			self::$store = array();
 			return false;
 		} else {
-            $store = apc_fetch(self::$namespace, $fetched);
-            self::$store = $fetched ? $store : array();
-            return $fetched;
-        }
+			$store = (self::$apcType . '_fetch')(self::$namespace, $fetched);
+			self::$store = $fetched ? $store : array();
+			return $fetched;
+		}
 	}
-	
+
 	/**
 	 * @method shutdownFunction
 	 * @static
@@ -143,10 +152,16 @@ class Q_Cache
 	{
 		if (self::$changed and self::$apc) {
 			self::set("Q_Config\tupdateTime", time());
-			apc_store(self::$namespace, self::$store);
+			(self::$apcType . '_store')(self::$namespace, self::$store);
 		}
 	}
 
+	/**
+	 * @property $apcType
+	 * @public
+	 * @type string
+	 */
+	public static $apcType = null;
 	/**
 	 * @property $ignore
 	 * @protected
