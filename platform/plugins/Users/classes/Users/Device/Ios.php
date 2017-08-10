@@ -24,7 +24,7 @@ class Users_Device_Ios extends Users_Device
 		$cert = Q::realPath($ssl['cert']);
 		if (!$cert) {
 			throw new Q_Exception_MissingFile(array(
-				'filename' => $cert
+				'filename' => $ssl['cert']
 			));
 		}
 		$env = $sandbox
