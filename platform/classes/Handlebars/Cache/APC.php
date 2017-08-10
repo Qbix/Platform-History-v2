@@ -40,10 +40,7 @@ class Handlebars_Cache_APC implements Handlebars_Cache
      */
     public function get($name)
     {
-        if (apc_exists($name)) {
-            return apc_fetch($name);
-        }
-        return false;
+		return Q_Cache::get($name, false);
     }
 
     /**
@@ -56,7 +53,7 @@ class Handlebars_Cache_APC implements Handlebars_Cache
      */
     public function set($name, $value)
     {
-        apc_store($name, $value);
+        Q_Cache::set($name, $value);
     }
 
     /**
@@ -68,7 +65,7 @@ class Handlebars_Cache_APC implements Handlebars_Cache
      */
     public function remove($name)
     {
-        apc_delete($name);
+        Q_Cache::clear($name);
     }
 
 }
