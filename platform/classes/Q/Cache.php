@@ -70,7 +70,7 @@ class Q_Cache
 			return false;
 		}
 		self::fetchStore();
-		return array_key_exists($key, self::$store)) {
+		return array_key_exists($key, self::$store);
 	}
 
 	/**
