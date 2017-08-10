@@ -138,7 +138,7 @@ class Q_Cache
 			self::$store = array();
 			return false;
 		} else {
-			$store = (self::$apcType . '_fetch')(self::$namespace, $fetched);
+			$store = self::apc_fetch(self::$namespace, $fetched);
 			self::$store = $fetched ? $store : array();
 			return $fetched;
 		}
@@ -152,8 +152,26 @@ class Q_Cache
 	{
 		if (self::$changed and self::$apc) {
 			self::set("Q_Config\tupdateTime", time());
-			(self::$apcType . '_store')(self::$namespace, self::$store);
+			self::apc_store(self::$namespace, self::$store);
 		}
+	}
+
+	static function __callstatic($name, $arguments)
+	{
+		$prefix = "apc_";
+		$errMsg = "Fatal error: Call to undefined function: " . $name;
+		if (substr($name, 0, 4 ) !== $prefix) {
+			throw new Exception($errMsg);
+		}
+		$name = substr($name, strlen($prefix));
+		$apcFunc = self::$apcType . '_' . $name;
+		if (!function_exists($apcFunc)) {
+			throw new Exception($errMsg);
+		}
+		// call_user_func_array fails without this silly hack with:
+		// Warning: Parameter 2 to apcu_fetch() expected to be a reference, value given
+		foreach($arguments as & $arg) { }
+		return call_user_func_array($apcFunc, $arguments);
 	}
 
 	/**
