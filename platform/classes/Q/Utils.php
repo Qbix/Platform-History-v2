@@ -226,6 +226,27 @@ class Q_Utils
 	}
 
 	/**
+	 * Get the lines from a csv file
+	 * @method csvLines
+	 * @param {string} $input
+	 * @param {string} [$enclosure='"']
+	 * @param {string} [$escape="\\"]
+	 * @return array
+	 *
+	 */
+	static function csvLines($input, $enclosure = '"', $escape = "\\")
+	{
+		$result = array();
+		$lines = str_getcsv($input, "\r", $enclosure, $escape);
+		foreach ($lines as $line) {
+			if ($line and $line[0] === "\n") {
+				$line = substr($line, 1);
+			}
+		}
+		return $result;
+	}
+
+	/**
 	 * Generates a Universally Unique IDentifier, version 4.
 	 * This function generates a truly random UUID.
 	 * @method uuid
@@ -611,7 +632,7 @@ class Q_Utils
 			$server = "$url/$handler";
 		}
 
-		$result = json_decode(self::post(
+		$result = Q::json_decode(self::post(
 			$server, self::sign($data), null, true, null, 
 			Q_UTILS_INTERNAL_TIMEOUT, Q_UTILS_INTERNAL_TIMEOUT
 		), true);
@@ -620,7 +641,10 @@ class Q_Utils
 
 		// delete the above line to throw on error
 		if (isset($result['errors'])) {
-			throw new Q_Exception(reset($result['errors']));
+			$msg = is_array($result['errors'])
+				? reset($result['errors'])
+				: $result['errors'];
+			throw new Q_Exception($msg);
 		}
 		return isset($result['data']) ? $result['data'] : null;
 	}

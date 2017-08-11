@@ -4727,7 +4727,7 @@ Q.Links = {
 			mobileNumbers = (ios ? '/open?addresses=' : '') + temp.join(',');
 		}
 		var url = "sms:" + mobileNumbers;
-		var char = ios ? '?' : '&';
+		var char = ios ? '&' : '?';
 		return url + char + 'body=' + encodeURIComponent(body);
 	},
 	/**
@@ -6557,12 +6557,12 @@ Q.jsonRequest = Q.request;
  *  An optional array of keys into the object, in the order to serialize things
  * @param {boolean} returnAsObject
  *  Pass true here to get an object of {fieldname: value} instead of a string
- * @return {String}
- *  A querystring that can be used with HTTP requests
+ * @return {String|Object}
+ *  A querystring that can be used with HTTP requests.
  */
 Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	if (Q.isEmpty(fields)) {
-		return '';
+		return returnAsObject ? {} : '';
 	}
 	if (typeof fields === 'string') {
 		return fields;
@@ -6655,6 +6655,13 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
  * @param {HTMLElement} [options.form] the form to use. In this case, the action, fields and method are ignored.
  */
 Q.formPost = function _Q_formPost(action, fields, method, options) {
+	var _sugar = 0;
+	if (action && (action instanceof Element) && typeof action.action === 'string') {
+		options = fields;
+		fields = null;
+		method = null;
+		_sugar = 1;
+	}
 	if (typeof options === 'function') {
 		options = {onLoad: options};
 	} else if (options === true) {
@@ -6663,16 +6670,13 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 		options = options || {};
 	}
 	var o = Q.copy(options);
-	if (action && typeof action.action === 'string') {
+	if (_sugar == 1) {
 		o.form = action;
-		action = action.action;
-		method = form.method;
-	} else if (o.form) {
-		method = method || o.form.method || "POST";
-		action = action || o.form.action || "";
+		action = o.form.action;
+		method = o.form.method;
 	} else {
-		method = method || "POST";
-		action = action || "";
+		method = method || (o.form && o.form.method) || "POST";
+		action = action || (o.form && o.form.action) || "";
 	}
 	method = method.toUpperCase();
 	var onload;
@@ -6681,7 +6685,9 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 			? o.onLoad.handle
 			: o.onLoad;
 	}
-	var name = o.target, iframeProvided = o.iframe, iframe;
+	var name = o.target;
+	var iframeProvided = o.iframe;
+	var iframe;
 	if (!name) {
 		iframe = o.iframe;
 		if (iframe) {
@@ -6710,8 +6716,8 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 
 	var hiddenFields = [];
 	var fields2 = Q.queryString(fields, null, true);
-	for(var key in fields2) {
-		if(fields2.hasOwnProperty(key)) {
+	for (var key in fields2) {
+		if (fields2.hasOwnProperty(key)) {
 			var hiddenField = document.createElement("input");
 			hiddenField.setAttribute("type", "hidden");
 			hiddenField.setAttribute("name", key);

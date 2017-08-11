@@ -52,21 +52,25 @@ function Users_before_Q_responseExtras()
 	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
 	Q_Response::addStylesheet("plugins/Users/css/Users.css");
-	$platform = Q_Request::platform();
-	$browser = Q_Request::browser();
-	foreach (array('apps' => $platform, 'browserApps' => $browser) as $k => $v) {
-		if (!$v) continue;
-		if ($appInfos = Q_Config::get('Users', 'apps', $v, array())) {
-			$private = Q_Config::get('Users', 'apps-private', $v, array());
-			$apps = array();
+	$platforms = array(Q_Request::platform());
+	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
+		$platforms[] = $platform;
+	}
+	$browsers = array(Q_Request::browser());
+	foreach (array('apps' => $platforms, 'browserApps' => $browsers) as $k => $arr) {
+		$apps = array();
+		foreach ($arr as $platform) {
+			$appInfos = Q_Config::get('Users', 'apps', $platform, array());
+			if (!$appInfos) continue;
+			$private = Q_Config::get('Users', 'apps-private', $platform, array());
 			foreach ($appInfos as $appName => $appInfo) {
-				$apps[$v][$appName] = $appInfo;
+				$apps[$platform][$appName] = $appInfo;
 				foreach ($private as $p) {
-					unset($apps[$v][$appName][$p]);
+					unset($apps[$platform][$appName][$p]);
 				}
-				Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 			}
 		}
+		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
 
 }

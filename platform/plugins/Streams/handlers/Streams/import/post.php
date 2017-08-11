@@ -13,7 +13,8 @@
  * @method post
  * @param {array} [$_REQUEST]
  * @param {string} [$_REQUEST.communityId=Users::communityId] If you want to override it
- * @param {string} [$_REQUEST.taskStreamName] Pass the name of a task stream to resume it
+ * @param {string} [$_REQUEST.taskStreamName] Pass the name of a task stream to resume it.
+ *    In this case, you don't need to pass the file, because it was saved.
  * @param {array} [$_FILES] Array consisting of one or more CSV files.
  *  The first line consists of titles or names of streams loaded from
  *  JSON files named under Streams/userStreams config.
@@ -24,6 +25,7 @@
  */
 function Streams_import_post()
 {
+	$app = Q::app();
 	$luid = Users::loggedInUser(true)->id;
 	$communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
 
@@ -36,59 +38,65 @@ function Streams_import_post()
 		: Streams::create($luid, $communityId, 'Streams/task', array(
 			'skipAccess' => true,
 			'title' => 'Importing members into ' . Users::communityName()
+		), array(
+			'publisherId' => $app,
+			'streamName' => "Streams/tasks/app",
+			'type' => 'Streams/import'
 		));
 	$task->addPreloaded();
 	Q_Response::setSlot('taskStreamName', $task->name);
 
-	$dest = APP_FILES_DIR . DS . 'Streams' . DS . 'tasks';
-	if (!is_dir($dest)) {
-		mkdir($dest, fileperms(APP_FILES_DIR), true);
-	}
-	$parts = explode('/', $task->name);
-	$taskId = end($parts);
-	$filename = $dest . DS . "$taskId.csv";
+	// TODO: make worker php scripts that loop and find task streams
+	// which have not been finished yet, start a transaction to
+	// mark their state "progress", and start processing the items.
+	// Also have way to inquire about whether a task is in progress,
+	// and if no response within a certain timeout, mark it as paused,
+	// available for any other worker to resume making progress on it.
+
+	// store the instructions
 	if (!empty($_FILES)) {
 		$file = reset($_FILES);
 		$tmp = $file['tmp_name'];
-		move_uploaded_file($tmp, $filename);
+		$task->instructions = file_get_contents($tmp);
+		$task->save();
+		unlink($tmp);
 	}
-	if (!file_exists($filename)) {
-		throw new Q_Exception_MissingFile(array('filename' => $filename));
+	if (!$task->instructions) {
+		return;
 	}
+	$instructions = $task->instructions;
 
-	// Send the response and keep going.
+	// Send the response and keep   going.
 	// WARN: this potentially ties up the PHP thread for a long time
 	$timeLimit = Q_Config::get('Streams', 'import', 'timeLimit', 100000);
 	ignore_user_abort(true);
 	set_time_limit($timeLimit);
 	Q_Dispatcher::response(true);
 	session_write_close();
-
-	$fp = fopen($filename, 'r');
-	$fields = fgetcsv($fp, 0, ',');
-	if ($fields === false) {
-		return;
-	}
-	$emailAddressKey = Q_Utils::normalize('Email Address');
-	$mobileNumberKey = Q_Utils::normalize('Mobile Number');
-	$processed = $task->getAttribute('processed', 0);
-
+	
 	// count the number of rows
-	$lineCount = 0;
-	$fp = fopen($filename,  'r');
-	if ($fp) {
-		while (!feof($fp)) {
-			if ($content = fgets($fp)) {
-				++$lineCount;
-			}
-		}
-	}
-	fclose($fp);
+	$lineCount = substr_count($instructions, PHP_EOL);
+	$task->setAttribute('items', $lineCount);
 
 	// start parsing the rows
 	$j = 0;
-	while ($row = fgetcsv($fp, 0, ',')) {
-		if (++$j <= $processed) {
+	foreach (Q_Utils::csvLines($instructions) as $line) {
+		$row = str_getcsv($line, ",");
+		if (!$row) {
+			continue;
+		}
+		if (++$j === 1) {
+			// get the fields from the first row
+			$fields = str_getcsv($instructions, ',');
+			if ($fields === false) {
+				return;
+			}
+			$emailAddressKey = Q_Utils::normalize('Email Address');
+			$mobileNumberKey = Q_Utils::normalize('Mobile Number');
+			$processed = $task->getAttribute('processed', 0);
+			continue;
+		}
+		if ($j <= $processed) {
 			continue;
 		}
 		$notEmpty = false;
@@ -187,10 +195,10 @@ function Streams_import_post()
 				$user->addMobile($alsoAddMobile); // sends addMobile message
 			}
 			$task->setAttribute('processed', $j);
-			$task->setAttribute('completed', min($j / $lineCount, 1));
+			$task->setAttribute('progress', min($j / $lineCount, 1));
 			$task->post($luid, array(
 				'type' => 'Streams/task/progress',
-				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'completed'),
+				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress'),
 			), true);
 			foreach ($streamNames as $sn) {
 				// the following sends an invite message and link by email or mobile
@@ -219,7 +227,7 @@ function Streams_import_post()
 		}
 	}
 	// if we reached here, then the task has completed
-	unlink($filename); // remove the file
+	$task->instructions = '';
 	$task->post($luid, array(
 		'type' => 'Streams/task/complete'
 	), true);

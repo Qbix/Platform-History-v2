@@ -10,6 +10,6 @@ function Q_init()
 	if (Q_Config::get('MyApp', 'testing', false)) {
 		// sometimes the APC can cause files to appear missing
 		// if they were created after it tried to load them once
-		apc_clear_cache('user');
+		Q_Cache::clear(true);
 	}
 }

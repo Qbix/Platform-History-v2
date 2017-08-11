@@ -66,7 +66,7 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @property $type
 	 * @type string
 	 * @default ""
-	 * mimetypes plus more types of the form a/b and a/b/c . Can also be "group" or "chat"
+	 * the type of the stream like Module/a or Module/a/b
 	 */
 	/**
 	 * @property $title

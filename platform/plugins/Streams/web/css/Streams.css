@@ -740,3 +740,15 @@
 	vertical-align: middle;
 	font-size: 20px;
 }
+
+.Streams_import_tool .Streams_import_file {
+	width: 50%;
+}
+
+.Q_js .Streams_import_tool .Streams_import_submit {
+	display: none;
+}
+
+.Q_js .Streams_import_tool .Streams_import_file {
+	width: 100%;
+}

@@ -58,21 +58,38 @@ class Q_Cache
 	}
 
 	/**
+	 * Check if a Q_Cache entry exists
+	 * @method exists
+	 * @static
+	 * @param {string} $key The key of cache entry
+	 * @return {boolean} Whether it exists
+	 */
+	static function exists($key)
+	{
+		if (self::$ignore) {
+			return false;
+		}
+		self::fetchStore();
+		return array_key_exists($key, self::$store);
+	}
+
+	/**
 	 * Get Q_Cache entry
 	 * @method get
 	 * @static
 	 * @param {string} $key The key of cache entry
+	 * @param {mixed} [$default=null]
 	 * @return {mixed} The value of Q_Cache entry, or null on failure
 	 */
-	static function get($key)
+	static function get($key, $default = null)
 	{
 		$success = false;
 		if (self::$ignore) {
-			return null;
+			return $default;
 		}
 		self::fetchStore();
 		if (!array_key_exists($key, self::$store)) {
-			return null; // no such $key is stored in cache
+			return $default; // no such $key is stored in cache
 		}
 		$success = true;
 		return self::$store[$key];
@@ -82,16 +99,24 @@ class Q_Cache
 	 * Clear Q_Cache entry
 	 * @method clear
 	 * @static
-	 * @param {string} $key The key of cache entry
+	 * @param {string|true} $key The key of cache entry. Skip this to clear all the keys.
+	 *   Pass true to also clear the user files cache.
 	 * @param {boolean} [$prefix=false] Whether to clear all keys for which $key is a prefix
 	 * @return {boolean} Whether an apc cache was fetched.
 	 */
 	static function clear($key, $prefix = false)
 	{
 		$fetched = self::fetchStore();
-		if (!isset($key)) {
+		if (!isset($key) or $key === true) {
 			self::$store = array();
 			self::$changed = true; // it will be saved at shutdown
+			if ($key === true) {
+				if (is_callable('apcu_clear_cache')) {
+					apcu_clear_cache();
+				} else if (is_callable('apc_clear_cache')) {
+					apc_clear_cache('user');
+				}
+			}
 			return $fetched;
 		}
 		if (array_key_exists($key, self::$store)) {
