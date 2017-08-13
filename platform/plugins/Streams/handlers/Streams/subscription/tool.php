@@ -107,8 +107,8 @@ function Streams_subscription_tool($options) {
 		);
 	}
 
-	Q_Response::addScript("plugins/Streams/js/Streams.js");
-	Q_Response::addScript("plugins/Streams/js/tools/subscription.js");
+	Q_Response::addScript("Q/plugins/Streams/js/Streams.js");
+	Q_Response::addScript("Q/plugins/Streams/js/tools/subscription.js");
 
 	Q_Response::setToolOptions(compact(
 		'items',

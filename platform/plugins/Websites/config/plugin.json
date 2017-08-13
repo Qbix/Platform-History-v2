@@ -61,7 +61,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Untitled Slide",
-					"icon": "{{baseUrl}}/plugins/Websites/img/icons/Websites/slide",
+					"icon": "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/slide",
 					"readLevel": 10,
 					"writeLevel": 0,
 					"adminLevel": 10
@@ -74,7 +74,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Presentation",
-					"icon": "{{baseUrl}}/plugins/Websites/img/icons/Websites/presentation",
+					"icon": "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/presentation",
 					"readLevel": 10,
 					"writeLevel": 0,
 					"adminLevel": 10

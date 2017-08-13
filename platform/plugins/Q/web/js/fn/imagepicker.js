@@ -78,7 +78,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	}
 	$this.before(state.input);
 	$this.addClass('Q_imagepicker');
-	Q.addStylesheet('plugins/Q/css/imagepicker.css');
+	Q.addStylesheet('Q/plugins/Q/css/imagepicker.css');
 	
 	function _process() {
 		var state = $this.state('Q/imagepicker');
@@ -507,7 +507,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					});
 				}
 			
-				var EXIFjslib = 'plugins/Q/js/exif.js';
+				var EXIFjslib = 'Q/plugins/Q/js/exif.js';
 				Q.addScript(EXIFjslib); // start loading it
 			
 				var params = {

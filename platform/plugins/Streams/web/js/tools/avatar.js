@@ -27,12 +27,12 @@ var Streams = Q.Streams;
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Object} [options.templates]
  *     @param {Object} [options.templates.icon]
- *       @param {String} [options.templates.icon.dir='plugins/Users/views']
+ *       @param {String} [options.templates.icon.dir='Q/plugins/Users/views']
  *       @param {String} [options.templates.icon.name='Users/avatar/icon']
  *       @param {Object} [options.templates.icon.fields]
  *         @param {String} [options.templates.icon.fields.alt="user icon"]
  *     @param {Object} [options.templates.contents]
- *       @param {String} [options.templates.contents.dir='plugins/Users/views']
+ *       @param {String} [options.templates.contents.dir='Q/plugins/Users/views']
  *       @param {String} [options.templates.contents.name='Users/avatar/contents']
  *       @param {Object} [options.templates.contents.fields]
  *         @param {String} [options.templates.contents.fields.tag="span"]
@@ -97,12 +97,12 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	reflectChanges: true,
 	templates: {
 		icon: {
-			dir: 'plugins/Users/views',
+			dir: 'Q/plugins/Users/views',
 			name: 'Users/avatar/icon',
 			fields: { alt: "user icon" }
 		},
 		contents: {
-			dir: 'plugins/Users/views',
+			dir: 'Q/plugins/Users/views',
 			name: 'Users/avatar/contents',
 			fields: { tag: "span" }
 		}

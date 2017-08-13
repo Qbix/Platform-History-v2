@@ -6,7 +6,7 @@ function Streams_user_response_data($params)
 	$hash = md5(strtolower(trim($identifier)));
 
 	$icon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)
-		? $url = "plugins/Users/img/icons/default/80.png"
+		? $url = "Q/plugins/Users/img/icons/default/80.png"
 		: Q_Request::baseUrl()
 			."/action.php/Users/thumbnail?hash=$hash&size=80&type="
 			.Q_Config::get('Users', 'login', 'iconType', 'wavatar');

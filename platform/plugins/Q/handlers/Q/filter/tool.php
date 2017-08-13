@@ -24,8 +24,8 @@ function Q_filter_tool($options)
 	$value = Q::ifset($options, 'value', '');
 	$placeholder = Q::ifset($options, 'placeholder', 'filter');
 	$class = 'Q_filter_input';
-	Q_Response::addScript('plugins/Q/js/tools/filter.js');
-	Q_Response::addStylesheet('plugins/Q/css/filter.css');
+	Q_Response::addScript('Q/plugins/Q/js/tools/filter.js');
+	Q_Response::addStylesheet('Q/plugins/Q/css/filter.css');
 	return Q_Html::input($name, $value, compact('placeholder', 'class'))
 		. '<div class="Q_filter_results"></div>';
 }

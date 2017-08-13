@@ -50,7 +50,7 @@
 			var state = this.state;
 			var $te = $(tool.element);
 
-			Q.addStylesheet('plugins/Places/css/location.css');
+			Q.addStylesheet('Q/plugins/Places/css/location.css');
 
 			// change location event
 			$te.on(Q.Pointer.click, "[data-location], .Places_location_preview_tool", function () {

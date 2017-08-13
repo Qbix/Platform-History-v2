@@ -69,34 +69,34 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 	scrollToBottom: true,
 	overflowed: {
-		src: 'plugins/Streams/img/chat/message-overflowed.png',
+		src: 'Q/plugins/Streams/img/chat/message-overflowed.png',
 		title: 'Message from {{displayName}}'
 	},
 	onRefresh: new Q.Event(),
 	templates: {
 		main: {
-			dir: 'plugins/Streams/views',
+			dir: 'Q/plugins/Streams/views',
 			name: 'Streams/chat/main',
 			fields: { placeholder: "Add a comment" }
 		},
 		Streams_chat_noMessages: {
-			dir: 'plugins/Streams/views',
+			dir: 'Q/plugins/Streams/views',
 			name: 'Streams/chat/Streams_chat_noMessages',
 			fields: { }
 		},
 		message: {
 			item: {
-				dir: 'plugins/Streams/views',
+				dir: 'Q/plugins/Streams/views',
 				name: 'Streams/chat/message/bubble',
 				fields: {  }
 			},
 			notification: {
-				dir: 'plugins/Streams/views',
+				dir: 'Q/plugins/Streams/views',
 				name: 'Streams/chat/message/notification',
 				fields: { }
 			},
 			error: {
-				dir: 'plugins/Streams/views',
+				dir: 'Q/plugins/Streams/views',
 				name: 'Streams/chat/message/error',
 				fields: {
 					text: {
