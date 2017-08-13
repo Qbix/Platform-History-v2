@@ -61,7 +61,7 @@ Q.text.Q.timestamp = {
 Q.Tool.define('Q/timestamp', function () {
 	var tool = this;
 	var state = this.state;
-	Q.ensure(Q.PHPJS, "plugins/Q/js/phpjs.js", function (){
+	Q.ensure(Q.PHPJS, "Q/plugins/Q/js/phpjs.js", function (){
 		tool.refresh();
 	});
 	tool.Q.onStateChanged('time')

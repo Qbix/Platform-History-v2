@@ -29,7 +29,7 @@ function Places_user_location_tool($options)
 		}
 	}
 	if (empty($options['map']['prompt'])) {
-		$options['map']['prompt'] = Q_Html::themedUrl('plugins/Places/img/map.png');
+		$options['map']['prompt'] = Q_Html::themedUrl('Q/plugins/Places/img/map.png');
 	}
 	if (!isset($options['defaultMeters'])) {
 		$options['defaultMeters'] = Q_Config::expect('Places', 'nearby', 'defaultMeters');

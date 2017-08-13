@@ -342,7 +342,7 @@ Streams.iconUrl = function(icon, size) {
 	var src = (icon + '/' + size).interpolate({
 		"baseUrl": Q.info.baseUrl
 	});
-	return src.isUrl() ? src : Q.url('plugins/Streams/img/icons/'+src);
+	return src.isUrl() ? src : Q.url('Q/plugins/Streams/img/icons/'+src);
 };
 
 var _socket = null;
@@ -544,30 +544,30 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 };
 
 Q.Tool.define({
-	"Users/avatar"         : "plugins/Streams/js/tools/avatar.js", // override for Users/avatar tool
-	"Streams/chat"         : "plugins/Streams/js/tools/chat.js",
-	"Streams/comments"     : "plugins/Streams/js/tools/comments.js",
-	"Streams/photoSelector": "plugins/Streams/js/tools/photoSelector.js",
-	"Streams/userChooser"  : "plugins/Streams/js/tools/userChooser.js",
-	"Streams/participants" : "plugins/Streams/js/tools/participants.js",
-	"Streams/basic"        : "plugins/Streams/js/tools/basic.js",
-	"Streams/access"       : "plugins/Streams/js/tools/access.js",
-	"Streams/subscription" : "plugins/Streams/js/tools/subscription.js",
-	"Streams/interests"    : "plugins/Streams/js/tools/interests.js",
-	"Streams/lookup"       : "plugins/Streams/js/tools/lookup.js",
-	"Streams/relate"       : "plugins/Streams/js/tools/relate.js",
-	"Streams/related"      : "plugins/Streams/js/tools/related.js",
-	"Streams/inplace"      : "plugins/Streams/js/tools/inplace.js",
-	"Streams/html"         : "plugins/Streams/js/tools/html.js",
-	"Streams/preview"  	   : "plugins/Streams/js/tools/preview.js",
-	"Streams/image/preview": "plugins/Streams/js/tools/image/preview.js",
-	"Streams/file/preview" : "plugins/Streams/js/tools/file/preview.js",
-	"Streams/category/preview" : "plugins/Streams/js/tools/category/preview.js",
-	"Streams/category"     : "plugins/Streams/js/tools/category.js",
-	"Streams/form"         : "plugins/Streams/js/tools/form.js",
-	"Streams/import"       : "plugins/Streams/js/tools/import.js",
-	"Streams/activity"     : "plugins/Streams/js/tools/activity.js",
-	"Streams/default/preview": "plugins/Streams/js/tools/default/preview.js",
+	"Users/avatar"         : "Q/plugins/Streams/js/tools/avatar.js", // override for Users/avatar tool
+	"Streams/chat"         : "Q/plugins/Streams/js/tools/chat.js",
+	"Streams/comments"     : "Q/plugins/Streams/js/tools/comments.js",
+	"Streams/photoSelector": "Q/plugins/Streams/js/tools/photoSelector.js",
+	"Streams/userChooser"  : "Q/plugins/Streams/js/tools/userChooser.js",
+	"Streams/participants" : "Q/plugins/Streams/js/tools/participants.js",
+	"Streams/basic"        : "Q/plugins/Streams/js/tools/basic.js",
+	"Streams/access"       : "Q/plugins/Streams/js/tools/access.js",
+	"Streams/subscription" : "Q/plugins/Streams/js/tools/subscription.js",
+	"Streams/interests"    : "Q/plugins/Streams/js/tools/interests.js",
+	"Streams/lookup"       : "Q/plugins/Streams/js/tools/lookup.js",
+	"Streams/relate"       : "Q/plugins/Streams/js/tools/relate.js",
+	"Streams/related"      : "Q/plugins/Streams/js/tools/related.js",
+	"Streams/inplace"      : "Q/plugins/Streams/js/tools/inplace.js",
+	"Streams/html"         : "Q/plugins/Streams/js/tools/html.js",
+	"Streams/preview"  	   : "Q/plugins/Streams/js/tools/preview.js",
+	"Streams/image/preview": "Q/plugins/Streams/js/tools/image/preview.js",
+	"Streams/file/preview" : "Q/plugins/Streams/js/tools/file/preview.js",
+	"Streams/category/preview" : "Q/plugins/Streams/js/tools/category/preview.js",
+	"Streams/category"     : "Q/plugins/Streams/js/tools/category.js",
+	"Streams/form"         : "Q/plugins/Streams/js/tools/form.js",
+	"Streams/import"       : "Q/plugins/Streams/js/tools/import.js",
+	"Streams/activity"     : "Q/plugins/Streams/js/tools/activity.js",
+	"Streams/default/preview": "Q/plugins/Streams/js/tools/default/preview.js",
 	"Streams/player": function () {
 		// does nothing
 	}
@@ -4437,7 +4437,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	var str = "_preview";
 	if (normalized.substr(normalized.length-str.length) === str) {
-		constructors[normalized] = "plugins/Streams/js/tools/default/preview.js";
+		constructors[normalized] = "Q/plugins/Streams/js/tools/default/preview.js";
 	}
 }, 'Streams');
 

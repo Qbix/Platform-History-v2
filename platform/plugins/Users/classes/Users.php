@@ -1668,7 +1668,7 @@ abstract class Users extends Base_Users
 			return null;
 		}
 		$url = Q::interpolate($icon, array('baseUrl' => Q_Request::baseUrl()));
-		$url = Q_Valid::url($url) ? $url : "plugins/Users/img/icons/$url";
+		$url = Q_Valid::url($url) ? $url : "Q/plugins/Users/img/icons/$url";
 		if ($basename and strpos($basename, '.') === false) {
 			$basename .= ".png";
 		}

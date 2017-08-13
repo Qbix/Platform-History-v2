@@ -541,7 +541,7 @@ EOT;
 
 		$app_dir = APP_DIR;
 		$plugin_dir = Q_PLUGINS_DIR . DS . $plugin_name;
-		$app_web_plugins_dir = APP_WEB_DIR.DS.'plugins';
+		$app_web_plugins_dir = APP_WEB_DIR.DS.'Q'.DS.'plugins';
 
 		echo "Installing plugin '$plugin_name' into '$app_dir'" . PHP_EOL;
 

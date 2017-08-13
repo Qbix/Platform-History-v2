@@ -302,7 +302,7 @@ Q.Tool.define("Places/user/location", function (options) {
 	updateButton: 'Update my location',
 	map: {
 		delay: 300,
-		prompt: Q.url('plugins/Places/img/map.png')
+		prompt: Q.url('Q/plugins/Places/img/map.png')
 	},
 	timeout: 10000,
 	units: 'km',

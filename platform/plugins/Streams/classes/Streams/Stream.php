@@ -1727,7 +1727,7 @@ class Streams_Stream extends Base_Streams_Stream
 		));
 		$url = (Q_Valid::url($url))
 			? $url
-			: "plugins/Streams/img/icons/$url";
+			: "Q/plugins/Streams/img/icons/$url";
 		if ($basename) {
 			if (strpos($basename, '.') === false) {
 				$basename = "$basename.png";

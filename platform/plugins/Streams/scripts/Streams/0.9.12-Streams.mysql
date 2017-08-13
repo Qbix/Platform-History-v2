@@ -1,0 +1,3 @@
+UPDATE {$prefix}stream
+SET icon = REPLACE(icon, "plugins/", "Q/plugins/"),
+attributes = REPLACE(attributes, "plugins/", "Q/plugins/");

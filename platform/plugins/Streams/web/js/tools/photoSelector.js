@@ -237,7 +237,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 		$te.find('*').remove();
 		$te.removeClass('Streams_photoSelector_by_album Streams_photoSelector_by_tags')
 			.addClass('Streams_photoSelector_by_' + state.fetchBy);
-		var src = Q.url('/plugins/Q/img/throbbers/loading.gif');
+		var src = Q.url('/Q/plugins/Q/img/throbbers/loading.gif');
 		$te.append('<div class="Streams_tools_throbber"><img src="'+src+'" alt="" /></div>');
 		Q.plugins.Users.login({
 			tryQuietly: true,

@@ -12,7 +12,7 @@ var Places = Q.Places;
  * @class Places countries
  * @constructor
  * @param {Object} [options] used to pass options
- * @param {String} [options.flags="plugins/Places/img/squareflags"] the path for the flags, or set to false to omit the flag
+ * @param {String} [options.flags="Q/plugins/Places/img/squareflags"] the path for the flags, or set to false to omit the flag
  * @param {String} [options.countryCode='US'] the initial country to select in the list
  * @param {Array} [options.firstCountryCodes='US','GB'] array of country codes to place first in the list
  * @param {Boolean} [options.sort] if true, sorts the countries alphabetically
@@ -81,7 +81,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 },
 
 { // default options here
-	flags: "plugins/Places/img/squareflags",
+	flags: "Q/plugins/Places/img/squareflags",
 	countryCode: 'US',
 	firstCountryCodes: ['US','GB'],
 	globe: null,
