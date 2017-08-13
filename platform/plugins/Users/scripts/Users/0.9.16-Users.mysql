@@ -1,0 +1,2 @@
+UPDATE {$prefix}user
+SET icon = REPLACE(icon, "uploads/", "Q/uploads/");
