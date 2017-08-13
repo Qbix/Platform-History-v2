@@ -1,5 +1,6 @@
 UPDATE {$prefix}stream
 SET icon = REPLACE(icon, "plugins/", "Q/plugins/"),
+content = REPLACE(content, "plugins/", "Q/plugins/"),
 attributes = REPLACE(attributes, "plugins/", "Q/plugins/");
 
 UPDATE {$prefix}stream
@@ -8,3 +9,5 @@ attributes = REPLACE(attributes, "uploads/", "Q/uploads/");
 
 UPDATE {$prefix}avatar
 SET icon = REPLACE(icon, "uploads/", "Q/uploads/");
+
+
