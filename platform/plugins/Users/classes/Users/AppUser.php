@@ -13,14 +13,14 @@ interface Users_AppUser_Interface
 {
 	/**
 	 * Interface class for external platforms, for Platform adapters.
-	 * @class Users_AppUser_Interface
-	 * @constructor
+	 * @method authenticate
+	 * @static
 	 * @param {string} [$appId=Q::app()] Can either be an internal appId or a platform appId.
 	 * @param {boolean} [$setCookie=true] Whether to set a cookie to do auth in subsequent requests
 	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
 	 * @return {Users_Platform_Facebook|null} Facebook object
 	 */
-	function __construct($appId = null, $setCookie = true, $longLived = true);
+	static function authenticate($appId = null, $setCookie = true, $longLived = true);
 		
 	/**
 	 * Gets the logged-in user icon urls
