@@ -112,8 +112,8 @@ function Q_tabs_tool($options)
 		'vertical', 'compact', 'overflow',
 		'field', 'loader', 'beforeSwitch', 'beforeScripts', 'onActivate'
 	));
-	Q_Response::addScript('plugins/Q/js/tools/tabs.js');
-	Q_Response::addStylesheet('plugins/Q/css/tabs.css');
+	Q_Response::addScript('Q/plugins/Q/js/tools/tabs.js');
+	Q_Response::addStylesheet('Q/plugins/Q/css/tabs.css');
 	$classes = empty($vertical) ? ' Q_tabs_horizontal' : ' Q_tabs_vertical';
 	if (!empty($compact)) {
 		$classes .= " Q_tabs_compact";

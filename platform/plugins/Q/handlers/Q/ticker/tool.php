@@ -91,8 +91,8 @@ function Q_ticker_tool($options = array())
 		}
 	}
 
-	Q_Response::addStylesheet('plugins/Q/css/ticker.css');
-	Q_Response::addScript('plugins/Q/js/tools/ticker.js');
+	Q_Response::addStylesheet('Q/plugins/Q/css/ticker.css');
+	Q_Response::addScript('Q/plugins/Q/js/tools/ticker.js');
 	Q_Response::setToolOptions($fields2);
 
 	$direction_class = $fields2['vertical'] ? 'vertical' : 'horizontal';

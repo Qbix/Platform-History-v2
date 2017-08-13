@@ -88,15 +88,15 @@
 		},
 		"javascript": {
 			"responseExtras": {
-				"plugins/Q/js/jquery-1.11.1.min.js": true,
-				"plugins/Q/js/handlebars-v4.0.5.js": true,
-				"plugins/Q/js/Q.js": true
+				"Q/plugins/Q/js/jquery-1.11.1.min.js": true,
+				"Q/plugins/Q/js/handlebars-v4.0.5.js": true,
+				"Q/plugins/Q/js/Q.js": true
 			},
 			"prettyPrintData": true
 		},
 		"stylesheets": {
 			"responseExtras": {
-				"plugins/Q/css/Q.css": true
+				"Q/plugins/Q/css/Q.css": true
 			}
 		},
 		"environments": {

@@ -27,7 +27,7 @@ function Q () {
 // external libraries, which you can override
 Q.libraries = {
 	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
-	handlebars: 'plugins/Q/js/handlebars-v4.0.5.js',
+	handlebars: 'Q/plugins/Q/js/handlebars-v4.0.5.js',
 	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
 };
 
@@ -5391,7 +5391,7 @@ Q.init = function _Q_init(options) {
 	}
 	Q.init.called = true;
 	Q.info.imgLoading = Q.info.imgLoading ||
-		Q.url('plugins/Q/img/throbbers/loading.gif');
+		Q.url('Q/plugins/Q/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
@@ -5972,7 +5972,7 @@ Q.load = function _Q_load(plugins, callback, options) {
 	}
 	Q.each(plugins, function (i, plugin) {
 		if (plugin && !Q.plugins[plugin]) {
-			urls.push(Q.info.baseUrl+'/plugins/'+plugin+'/js/'+plugin+'.js');
+			urls.push(Q.info.baseUrl+'/Q/plugins/'+plugin+'/js/'+plugin+'.js');
 		}
 	});
 	return Q.addScript(urls, callback, options);	
@@ -8573,7 +8573,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 Q.Template.load.options = {
 	type: "handlebars",
 	types: { "handlebars": true, "php": true },
-	dir: "views"
+	dir: "Q/views"
 };
 
 Q.Template.onError = new Q.Event(function (err) {
@@ -9271,7 +9271,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 			var pn = Q.normalize(pluginName);
 			results[pn] = pluginName;
 			if ($.fn[pn]) return;
-			var src = ($.fn.plugin[pn] || 'plugins/jQuery/'+pn+'.js');
+			var src = ($.fn.plugin[pn] || 'Q/plugins/jQuery/'+pn+'.js');
 			if (typeof src === 'string') {
 				srcs.push(src);
 			}
@@ -10558,7 +10558,7 @@ Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 Q.Pointer.hint.options = {
-	src: 'plugins/Q/img/hints/tap.gif',
+	src: 'Q/plugins/Q/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",
@@ -11469,7 +11469,7 @@ if (!root.console) {
  */
 function processStylesheets() {
 	// Complain about some other libraries if necessary
-	if (Q.findScript('plugins/Q/js/prefixfree.min.js')) {
+	if (Q.findScript('Q/plugins/Q/js/prefixfree.min.js')) {
 		var warning = "Q.js must be included before prefixfree in order to work properly";
 		console.warn(warning);
 	}
@@ -11509,45 +11509,45 @@ Q.onInit.add(function () {
 Q.onJQuery.add(function ($) {
 	
 	Q.Tool.define({
-		"Q/inplace": "plugins/Q/js/tools/inplace.js",
-		"Q/tabs": "plugins/Q/js/tools/tabs.js",
-		"Q/form": "plugins/Q/js/tools/form.js",
-		"Q/panel": "plugins/Q/js/tools/panel.js",
-		"Q/ticker": "plugins/Q/js/tools/ticker.js",
-		"Q/timestamp": "plugins/Q/js/tools/timestamp.js",
-		"Q/bookmarklet": "plugins/Q/js/tools/bookmarklet.js",
-		"Q/columns": "plugins/Q/js/tools/columns.js",
-		"Q/drawers": "plugins/Q/js/tools/drawers.js",
-		"Q/expandable": "plugins/Q/js/tools/expandable.js",
-		"Q/filter": "plugins/Q/js/tools/filter.js",
-		"Q/rating": "plugins/Q/js/tools/rating.js",
-		"Q/paging": "plugins/Q/js/tools/paging.js"
+		"Q/inplace": "Q/plugins/Q/js/tools/inplace.js",
+		"Q/tabs": "Q/plugins/Q/js/tools/tabs.js",
+		"Q/form": "Q/plugins/Q/js/tools/form.js",
+		"Q/panel": "Q/plugins/Q/js/tools/panel.js",
+		"Q/ticker": "Q/plugins/Q/js/tools/ticker.js",
+		"Q/timestamp": "Q/plugins/Q/js/tools/timestamp.js",
+		"Q/bookmarklet": "Q/plugins/Q/js/tools/bookmarklet.js",
+		"Q/columns": "Q/plugins/Q/js/tools/columns.js",
+		"Q/drawers": "Q/plugins/Q/js/tools/drawers.js",
+		"Q/expandable": "Q/plugins/Q/js/tools/expandable.js",
+		"Q/filter": "Q/plugins/Q/js/tools/filter.js",
+		"Q/rating": "Q/plugins/Q/js/tools/rating.js",
+		"Q/paging": "Q/plugins/Q/js/tools/paging.js"
 	});
 	
 	Q.Tool.jQuery({
-		"Q/placeholders": "plugins/Q/js/fn/placeholders.js",
-		"Q/textfill": "plugins/Q/js/fn/textfill.js",
-		"Q/autogrow": "plugins/Q/js/fn/autogrow.js",
-		"Q/dialog": "plugins/Q/js/fn/dialog.js",
-		"Q/flip": "plugins/Q/js/fn/flip.js",
-		"Q/gallery": "plugins/Q/js/fn/gallery.js",
-		"Q/zoomer": "plugins/Q/js/fn/zoomer.js",
-		"Q/fisheye": "plugins/Q/js/fn/fisheye.js",
-		"Q/listing": "plugins/Q/js/fn/listing.js",
-		"Q/hautoscroll": "plugins/Q/js/fn/hautoscroll.js",
-		"Q/imagepicker": "plugins/Q/js/fn/imagepicker.js",
-		"Q/viewport": "plugins/Q/js/fn/viewport.js",
-		"Q/actions": "plugins/Q/js/fn/actions.js",
-		"Q/clickable": "plugins/Q/js/fn/clickable.js",
-		"Q/clickfocus": "plugins/Q/js/fn/clickfocus.js",
-		"Q/contextual": "plugins/Q/js/fn/contextual.js",
-		"Q/scrollIndicators": "plugins/Q/js/fn/scrollIndicators.js",
-		"Q/iScroll": "plugins/Q/js/fn/iScroll.js",
-		"Q/scroller": "plugins/Q/js/fn/scroller.js",
-		"Q/touchscroll": "plugins/Q/js/fn/touchscroll.js",
-		"Q/scrollbarsAutoHide": "plugins/Q/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "plugins/Q/js/fn/sortable.js",
-		"Q/validator": "plugins/Q/js/fn/validator.js"
+		"Q/placeholders": "Q/plugins/Q/js/fn/placeholders.js",
+		"Q/textfill": "Q/plugins/Q/js/fn/textfill.js",
+		"Q/autogrow": "Q/plugins/Q/js/fn/autogrow.js",
+		"Q/dialog": "Q/plugins/Q/js/fn/dialog.js",
+		"Q/flip": "Q/plugins/Q/js/fn/flip.js",
+		"Q/gallery": "Q/plugins/Q/js/fn/gallery.js",
+		"Q/zoomer": "Q/plugins/Q/js/fn/zoomer.js",
+		"Q/fisheye": "Q/plugins/Q/js/fn/fisheye.js",
+		"Q/listing": "Q/plugins/Q/js/fn/listing.js",
+		"Q/hautoscroll": "Q/plugins/Q/js/fn/hautoscroll.js",
+		"Q/imagepicker": "Q/plugins/Q/js/fn/imagepicker.js",
+		"Q/viewport": "Q/plugins/Q/js/fn/viewport.js",
+		"Q/actions": "Q/plugins/Q/js/fn/actions.js",
+		"Q/clickable": "Q/plugins/Q/js/fn/clickable.js",
+		"Q/clickfocus": "Q/plugins/Q/js/fn/clickfocus.js",
+		"Q/contextual": "Q/plugins/Q/js/fn/contextual.js",
+		"Q/scrollIndicators": "Q/plugins/Q/js/fn/scrollIndicators.js",
+		"Q/iScroll": "Q/plugins/Q/js/fn/iScroll.js",
+		"Q/scroller": "Q/plugins/Q/js/fn/scroller.js",
+		"Q/touchscroll": "Q/plugins/Q/js/fn/touchscroll.js",
+		"Q/scrollbarsAutoHide": "Q/plugins/Q/js/fn/scrollbarsAutoHide.js",
+		"Q/sortable": "Q/plugins/Q/js/fn/sortable.js",
+		"Q/validator": "Q/plugins/Q/js/fn/validator.js"
 	});
 	
 	Q.onLoad.add(function () {

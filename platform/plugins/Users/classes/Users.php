@@ -1384,7 +1384,7 @@ abstract class Users extends Base_Users
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';
 		$tail = str_replace(DS, '/', substr($directory, strlen($head)));
-		$user->icon = '{{baseUrl}}/uploads'.$tail;
+		$user->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
 	}
 
@@ -1668,7 +1668,7 @@ abstract class Users extends Base_Users
 			return null;
 		}
 		$url = Q::interpolate($icon, array('baseUrl' => Q_Request::baseUrl()));
-		$url = Q_Valid::url($url) ? $url : "plugins/Users/img/icons/$url";
+		$url = Q_Valid::url($url) ? $url : "Q/plugins/Users/img/icons/$url";
 		if ($basename and strpos($basename, '.') === false) {
 			$basename .= ".png";
 		}

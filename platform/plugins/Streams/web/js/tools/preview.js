@@ -39,7 +39,7 @@
  *   @uses Q actions
  *   @param {Object} [options.sizes] If passed, uses this instead of Q.Streams.image.sizes for the sizes
  *   @param {Object} [options.overrideShowSize]  A hash of {icon: size} pairs to override imagepicker.showSize when the icon is a certain string. The empty string matches all icons.
- *   @param {String} [options.throbber="plugins/Q/img/throbbers/loading.gif"] The url of an image to use as an activity indicator when the image is loading
+ *   @param {String} [options.throbber="Q/plugins/Q/img/throbbers/loading.gif"] The url of an image to use as an activity indicator when the image is loading
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Q.Event} [options.beforeCreate] An event that occurs right before a composer requests to create a new stream
  *   @param {Q.Event} [options.onCreate] An event that occurs after a new stream is created by a creatable preview
@@ -102,7 +102,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		streamType: null,
 		options: {}
 	},
-	throbber: "plugins/Q/img/throbbers/loading.gif",
+	throbber: "Q/plugins/Q/img/throbbers/loading.gif",
 
 	imagepicker: {
 		showSize: "50",
@@ -219,7 +219,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var fields = Q.extend({
 			alt: "New Item",
 			title: "New Item",
-			src: Q.url('plugins/Q/img/actions/add.png'),
+			src: Q.url('Q/plugins/Q/img/actions/add.png'),
 			prefix: tool.prefix
 		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
 		tool.element.addClass('Streams_preview_create');
@@ -362,10 +362,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 									.substr(Q.info.baseUrl.length+1);
 								if (parts[1] === 'Users') {
 									// uploading a user icon
-									path = 'uploads/Users';
+									path = 'Q/uploads/Users';
 									subpath = state.publisherId.splitId() + '/icon';
 								} else { // uploading a regular stream icon
-									path = 'uploads/Streams';
+									path = 'Q/uploads/Streams';
 									subpath = state.publisherId.splitId() + '/'
 										+ state.streamName + '/icon';
 								}

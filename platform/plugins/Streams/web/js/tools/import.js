@@ -51,7 +51,7 @@ Q.Tool.define("Streams/import", function (options) {
 		if (state.link) {
 			fields.href = state.link.isUrl()
 				? state.link
-				: Q.url('plugins/Streams/importing/' + state.link);
+				: Q.url('Q/plugins/Streams/importing/' + state.link);
 		}
 		fields.communityId = Q.Users.communityId;
 		fields.communityName = Q.Users.communityName;
