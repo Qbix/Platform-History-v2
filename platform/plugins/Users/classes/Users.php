@@ -1528,7 +1528,7 @@ abstract class Users extends Base_Users
 	 * @return {array}
 	 *  Returns an array of all links to this user's contact info
 	 */
-	static function links($contactInfo, $userId)
+	static function links($contactInfo)
 	{
 		$links = array();
 		$identifiers = array();
