@@ -362,10 +362,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 									.substr(Q.info.baseUrl.length+1);
 								if (parts[1] === 'Users') {
 									// uploading a user icon
-									path = 'uploads/Users';
+									path = 'Q/uploads/Users';
 									subpath = state.publisherId.splitId() + '/icon';
 								} else { // uploading a regular stream icon
-									path = 'uploads/Streams';
+									path = 'Q/uploads/Streams';
 									subpath = state.publisherId.splitId() + '/'
 										+ state.streamName + '/icon';
 								}

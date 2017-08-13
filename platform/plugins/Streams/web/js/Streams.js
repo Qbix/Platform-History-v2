@@ -787,7 +787,7 @@ Streams.create = function (fields, callback, related, options) {
 	fields["Q.clientId"] = Q.clientId();
 	if (options.form) {
 		fields["file"] = {
-			path: 'uploads/Streams'
+			path: 'Q/uploads/Streams'
 		}
 	}
 	var _r = _retain;

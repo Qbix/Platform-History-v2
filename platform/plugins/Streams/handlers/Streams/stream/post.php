@@ -129,7 +129,7 @@ function Streams_stream_post($params = array())
 	}
 	if (is_array($icon)) {
 		if (empty($icon['path'])) {
-			$icon['path'] = 'uploads/Streams';
+			$icon['path'] = 'Q/uploads/Streams';
 		}
 		if (empty($icon['subpath'])) {
 			$icon['subpath'] = "$splitId/{$stream->name}/icon/".time();

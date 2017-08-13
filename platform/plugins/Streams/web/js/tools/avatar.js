@@ -264,7 +264,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 						var o = Q.extend({
 							saveSizeName: saveSizeName,
 							showSize: state.icon || $img.width(),
-							path: 'uploads/Users',
+							path: 'Q/uploads/Users',
 							preprocess: function (callback) {
 								callback({
 									subpath: state.userId.splitId()+'/icon/'

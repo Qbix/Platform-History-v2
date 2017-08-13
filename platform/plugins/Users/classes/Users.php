@@ -1384,7 +1384,7 @@ abstract class Users extends Base_Users
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';
 		$tail = str_replace(DS, '/', substr($directory, strlen($head)));
-		$user->icon = '{{baseUrl}}/uploads'.$tail;
+		$user->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
 	}
 
