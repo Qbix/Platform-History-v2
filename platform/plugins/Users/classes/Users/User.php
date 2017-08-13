@@ -531,7 +531,7 @@ class Users_User extends Base_Users_User
 		$retrieved = $email->retrieve('*', array('ignoreCache' => true));
 		if (empty($email->activationCode)) {
 			$email->activationCode = '';
-			$email->activationCodeExpires = '0000-00-00 00:00:00';
+			$email->activationCodeExpires = null;
 		}
 		$email->authCode = sha1(microtime() . mt_rand());
 		if ($verified) {
@@ -724,7 +724,7 @@ class Users_User extends Base_Users_User
 		$retrieved = $mobile->retrieve('*', array('ignoreCache' => true));
 		if (empty($mobile->activationCode)) {
 			$mobile->activationCode = '';
-			$mobile->activationCodeExpires = '0000-00-00 00:00:00';
+			$mobile->activationCodeExpires = null;
 		}
 		$mobile->authCode = sha1(microtime() . mt_rand());
 		if ($verified) {
