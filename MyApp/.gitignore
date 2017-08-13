@@ -8,6 +8,6 @@ files/*
 files/MyApp/uploads/*/*
 !files/MyApp/uploads/Users/.dir
 !files/MyApp/uploads/Streams/.dir
-web/plugins/*
-web/uploads
+web/Q/plugins/*
+web/Q/uploads
 !*.dir

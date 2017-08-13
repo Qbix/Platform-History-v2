@@ -30,7 +30,7 @@
 			"e/:emailAddress": { "module": "Users", "action": "activate" },
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
 			"Q/plugins/Users/:action": {"module": "Users"},
-			"uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
+			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Users/authorize": {"module": "Users", "action": "authorize"}
 		},
 		"session": {

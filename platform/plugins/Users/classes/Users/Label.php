@@ -248,7 +248,7 @@ class Users_Label extends Base_Users_Label
 			return;
 		}
 		// Process any icon data
-		$icon['path'] = 'uploads/Users';
+		$icon['path'] = 'Q/uploads/Users';
 		$icon['subpath'] = "$userId/label/$label/icon";
 		$data = Q::event("Q/image/post", $icon);
 		Q_Response::setSlot('icon', $data);

@@ -174,7 +174,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 },
 
 {
-	path: 'uploads',
+	path: 'Q/uploads',
 	subpath: '',
 	saveSizeName: {},
 	showSize: null,

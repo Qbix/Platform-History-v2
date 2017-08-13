@@ -8573,7 +8573,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 Q.Template.load.options = {
 	type: "handlebars",
 	types: { "handlebars": true, "php": true },
-	dir: "views"
+	dir: "Q/views"
 };
 
 Q.Template.onError = new Q.Event(function (err) {
