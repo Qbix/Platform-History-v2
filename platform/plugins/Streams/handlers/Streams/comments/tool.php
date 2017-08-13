@@ -10,10 +10,10 @@
 
 function Streams_comments_tool($options)
 {
-  Q_Response::addScript('plugins/Q/js/phpjs.js'); 
-  Q_Response::addScript('plugins/Streams/js/Streams.js');
-  Q_Response::addStylesheet('plugins/Streams/css/Streams.css');
-  Q_Response::addStylesheet('plugins/Users/css/Users.css');
+  Q_Response::addScript('Q/plugins/Q/js/phpjs.js'); 
+  Q_Response::addScript('Q/plugins/Streams/js/Streams.js');
+  Q_Response::addStylesheet('Q/plugins/Streams/css/Streams.css');
+  Q_Response::addStylesheet('Q/plugins/Users/css/Users.css');
   Q_Response::setToolOptions($options);
   return Q::view('Streams/tool/comments.php');
 }

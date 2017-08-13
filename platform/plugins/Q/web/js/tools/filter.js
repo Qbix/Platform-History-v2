@@ -23,7 +23,7 @@ Q.Tool.define('Q/filter', function (options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('plugins/Q/css/filter.css');
+	Q.addStylesheet('Q/plugins/Q/css/filter.css');
 	
 	if (!$te.children().length) {
 		// set it up with javascript
@@ -204,7 +204,7 @@ Q.Tool.define('Q/filter', function (options) {
 			if (Q.info.isTouchscreen) {
 				Q.ensure(
 					window.overthrow, 
-					"plugins/Q/js/overthrow.js",
+					"Q/plugins/Q/js/overthrow.js",
 					function () {
 						overthrow.scrollIndicatorClassName = 'Q_overflow';
 						overthrow.set();

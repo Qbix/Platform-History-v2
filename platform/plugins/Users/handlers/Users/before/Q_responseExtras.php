@@ -2,7 +2,7 @@
 
 function Users_before_Q_responseExtras()
 {
-	Q_Response::addScript('plugins/Users/js/Users.js');
+	Q_Response::addScript('Q/plugins/Users/js/Users.js');
 	$app = Q_Config::expect('Q', 'app');
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
@@ -50,7 +50,7 @@ function Users_before_Q_responseExtras()
 	}
 	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
-	Q_Response::addStylesheet("plugins/Users/css/Users.css");
+	Q_Response::addStylesheet("Q/plugins/Users/css/Users.css");
 	$platforms = array(Q_Request::platform());
 	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
 		$platforms[] = $platform;

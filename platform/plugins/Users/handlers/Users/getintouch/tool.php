@@ -37,7 +37,7 @@ function Users_getintouch_tool($options)
 	$email = $sms = $call = false;
 	if (!empty($options['email']) and $user->emailAddress) {
 		$email = is_string($options['email']) ? $options['email'] : "Email me";
-		$email = Q_Html::img("plugins/Users/img/email.png") . $email;
+		$email = Q_Html::img("Q/plugins/Users/img/email.png") . $email;
 		$ways['email'] = Q_Html::tag($tag, array('id' => 'email', 'class' => $class), $email);
 		Q_Response::setToolOptions(array(
 			'emailAddress' => Q_Utils::obfuscate($user->emailAddress),
@@ -49,7 +49,7 @@ function Users_getintouch_tool($options)
 		$obfuscated_mobileNumber = Q_Utils::obfuscate($user->mobileNumber);
 		if (!empty($options['sms']) and $user->mobileNumber) {
 			$sms = is_string($options['sms']) ? $options['sms'] : "Text me";
-			$sms = Q_Html::img("plugins/Users/img/sms.png") . $sms;
+			$sms = Q_Html::img("Q/plugins/Users/img/sms.png") . $sms;
 			$ways['sms'] = Q_Html::tag($tag, array('id' => 'sms', 'class' => $class), $sms);
 			Q_Response::setToolOptions(array(
 				'mobileNumber' => $obfuscated_mobileNumber
@@ -57,7 +57,7 @@ function Users_getintouch_tool($options)
 		}
 		if (!empty($options['call']) and $user->mobileNumber) {
 			$call = is_string($options['call']) ? $options['call'] : "Call me";
-			$call = Q_Html::img("plugins/Users/img/call.png") . $call;
+			$call = Q_Html::img("Q/plugins/Users/img/call.png") . $call;
 			$ways['call'] = Q_Html::tag($tag, array('id' => 'call', 'class' => $class), $call);
 			Q_Response::setToolOptions(array(
 				'mobileNumber' => $obfuscated_mobileNumber

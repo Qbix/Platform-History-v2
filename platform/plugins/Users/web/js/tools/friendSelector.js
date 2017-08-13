@@ -148,7 +148,7 @@ Q.Tool.define('Users/friendSelector', function(o) {
 	
 	switch (o.platform) {
 		case 'facebook':
-			toolDiv.empty().append('<div class="Users_tools_throbber"><img src="' + Q.url('/plugins/Q/img/throbbers/loading.gif') + '" alt="" /></div>');
+			toolDiv.empty().append('<div class="Users_tools_throbber"><img src="' + Q.url('/Q/plugins/Q/img/throbbers/loading.gif') + '" alt="" /></div>');
 			
 			Users.login({
 				tryQuietly: true,

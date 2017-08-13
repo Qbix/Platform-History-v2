@@ -118,7 +118,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					return;
 				}
 				tool.$input.css({
-					'background-image': 'url(' +Q.url('/plugins/Q/img/throbbers/loading.gif') + ')',
+					'background-image': 'url(' +Q.url('/Q/plugins/Q/img/throbbers/loading.gif') + ')',
 					'background-repeat': 'no-repeat'
 				});
 				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, {'public': true});
