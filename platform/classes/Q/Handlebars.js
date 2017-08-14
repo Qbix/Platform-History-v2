@@ -88,6 +88,17 @@ handlebars.registerHelper('toCapitalized', function(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 });
 
+handlebars.registerHelper('interpolate', function(expression, fields) {
+	return expression.interpolate(fields);
+});
+
+handlebars.registerHelper('option', function(value, html, selectedValue) {
+	var attr = value == selectedValue ? ' selected="selected"' : '';
+	return new Handlebars.SafeString(
+		'<option value="'+value.encodeHTML()+'"'+attr+'>'+html+"</option>"
+	);
+});
+
 /**
  * Creates a Q.Handlebars object
  * @class Handlebars

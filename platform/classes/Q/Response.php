@@ -891,22 +891,29 @@ class Q_Response
 				return false; // already added
 			}
 		}
-		$filename = Q::realPath("views/$name.$type");
+		$filename = "views/$name.$type";
+		$realpath = Q::realPath($filename);
 
-		if (!$filename) {
-			throw new Q_Exception_MissingFile(array('filename' => "views/$name.$type"));
+		if (!$realpath) {
+			throw new Q_Exception_MissingFile(compact('filename'));
 		}
 		if ($type === 'php') {
 			$ob = new Q_OutputBuffer();
-			Q::includeFile($filename, $params, false);
+			Q::includeFile($realpath, $params, false);
 			$content = $ob->getClean();
 		} else {
-			$content = file_get_contents($filename);
+			$config = Q_Config::get('Q', 'templates', array());
+	        $content = Q::readFile($realpath, Q::take($config, array(
+				'ignoreCache' => true,
+				'dontCache' => true,
+				'duration' => 3600
+			)));
 		}
 		if (!$content) {
 			throw new Q_Exception("Failed to load template '$name'");
 		}
-		self::$inlineTemplates[$slotName][] = compact('name', 'content', 'type');
+		$text = $text = Q_Text::sources(explode('/', "$name.$type"));
+		self::$inlineTemplates[$slotName][] = compact('name', 'content', 'type', 'text');
 
 		return true;
 	}
@@ -983,16 +990,17 @@ class Q_Response
 
 		$tags = array();
 		foreach ($templates as $template) {
-			$tags[] = Q_Html::script(
-				$template['content'],
-				array(
-					'cdata' => false,
-					'raw' => true,
-					'type' => 'text/'.$template['type'], 
-					'id' => Q_Utils::normalize($template['name']),
-					'data-slot' => $template['slot']
-				)
+			$attributes = array(
+				'cdata' => false,
+				'raw' => true,
+				'type' => 'text/'.$template['type'], 
+				'id' => Q_Utils::normalize($template['name']),
+				'data-slot' => $template['slot']
 			);
+			if (!empty($template['text'])) {
+				$attributes['data-text'] = Q::json_encode($template['text']);
+			}
+			$tags[] = Q_Html::script($template['content'], $attributes);
 		}
 		return implode($between, $tags);
 	}

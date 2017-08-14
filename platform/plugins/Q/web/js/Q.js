@@ -8558,7 +8558,15 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 		if (script && script.id && script.innerHTML
 		&& type && type.substr(0, 5) === 'text/'
 		&& o.types[type.substr(5)]) {
-			tpl[Q.normalize(script.id)] = script.innerHTML.trim();
+			var n = Q.normalize(script.id);
+			tpl[n] = script.innerHTML.trim();
+			Q.each(['partials', 'helpers', 'text'], function (i, aspect) {
+				var attr = script.getAttribute('data-' + aspect);
+				var value = attr && JSON.parse(attr);
+				if (value) {
+					Q.setObject([n, aspect], value, Q.Template.info);
+				}
+			});
 			trash.unshift(script);
 		}
 	}

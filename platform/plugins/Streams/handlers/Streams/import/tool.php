@@ -32,7 +32,7 @@ function Streams_import_tool($options)
 		$href = Q_Valid::url($link)
 			? $link
 			: Q_Html::themedUrl("Q/plugins/Streams/importing/$link");
-		$default = Q::t('Fill Out This Spreadsheet');
+		$default = Q::t('Fill Out This Spreadsheet', $foo, $bar);
 		$a = Q_Html::a($href, Q::ifset($options, 'linkTitle', $default));
 	} else {
 		$a = null;

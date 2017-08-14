@@ -21,6 +21,9 @@ class Q_WebController
 		if (isset($_SERVER['HTTP_X_REWRITE_URL'])) { // ISAPI 3.0
 			$_SERVER['REQUEST_URI'] = $_SERVER['HTTP_X_REWRITE_URL'];
 		}
+		if (ob_get_level()) {
+			ob_end_clean();
+		}
 		
 		// Get the base URL
 		$base_url = Q_Request::baseUrl();

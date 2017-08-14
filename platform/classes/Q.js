@@ -2999,25 +2999,34 @@ Sp.quote = function _String_prototype_quote() {
 };
 
 /**
- * Goes through the params and replaces any references
- * to their names in the string with their value.
- * References are expected to be of the form {{varname}}
+ * Interpolates some fields into the string wherever "{{fieldName}}" appears
+ * or {{index}} appears.
  * @method interpolate
- * @param {Object} params
- *  A hash of parameters for interpolating in the expression.
- *  Variable names in the expression can refer to them.
- * @return {string}
- *  The result of the interpolation
+ * @param {Object|Array} fields Can be an object with field names and values,
+ *   or an array corresponding to {{0}}, {{1}}, etc. If the string is missing
+ *   {{0}} then {{1}} is mapped to the first element of the array.
+ * @return {String}
  */
-Sp.interpolate = function _String_prototype_interpolate(params) {
-	return this.replace(/\{\{([^{}]*)\}\}/g,
-		function (a, b) {
-			var r = params[b];
-			return typeof r === 'string' || typeof r === 'number' ? r : a;
+Sp.interpolate = function _String_prototype_interpolate(fields) {
+	if (Q.isArrayLike(fields)) {
+		var result = this;
+		var b = (this.indexOf('{{0}}') < 0) ? 1 : 0;
+		for (var i=0, l=fields.length; i<l; ++i) {
+			result = result.replace('{{'+(i+b)+'}}', fields[i]);
 		}
-	);
+		return result;
+	}
+	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
+		var r = fields[b];
+		return (typeof r === 'string' || typeof r === 'number') ? r : a;
+	});
 };
 
+/**
+ * Similar to String.prototype.replace, but replaces globally
+ * @method replaceAll
+ * @return {String}
+ */
 Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 	var result = this;
 	for (var k in pairs) {
