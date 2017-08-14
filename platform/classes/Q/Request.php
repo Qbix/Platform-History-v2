@@ -875,7 +875,7 @@ class Q_Request
 	 * @param {string} [$separator='_'] The separator to use
 	 * @return {string} The locale
 	 */
-	function locale($separator = '_')
+	static function locale($separator = '_')
 	{
 		list($lang, $country, $preference) = self::languages();
 		return "$lang$separator$country";
