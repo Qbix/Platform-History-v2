@@ -214,7 +214,12 @@ class Q_Tree
 		if (!isset($arr)) {
 			try {
 				// get file contents, remove comments and parse
-				$json = file_get_contents($filename2);
+				$config = Q_Config::get('Q', 'tree', array());
+				$json = Q::readFile($filename2, Q::take($config, array(
+					'ignoreCache' => true,
+					'dontCache' => true,
+					'duration' => 3600
+				)));
 				$json = preg_replace('/\s*(?!<\")\/\*[^\*]+\*\/(?!\")\s*/', '', $json);
 				$arr = Q::json_decode($json, true);
 			} catch (Exception $e) {

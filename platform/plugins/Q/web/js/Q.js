@@ -216,11 +216,22 @@ Sp.decodeHTML = function _String_prototype_decodeHTML() {
 
 /**
  * Interpolates some fields into the string wherever "{{fieldName}}" appears
+ * or {{index}} appears.
  * @method interpolate
- * @param {Object} fields The field names and values
+ * @param {Object|Array} fields Can be an object with field names and values,
+ *   or an array corresponding to {{0}}, {{1}}, etc. If the string is missing
+ *   {{0}} then {{1}} is mapped to the first element of the array.
  * @return {String}
  */
 Sp.interpolate = function _String_prototype_interpolate(fields) {
+	if (Q.isArrayLike(fields)) {
+		var result = this;
+		var b = (this.indexOf('{{0}}') < 0) ? 1 : 0;
+		for (var i=0, l=fields.length; i<l; ++i) {
+			result = result.replace('{{'+(i+b)+'}}', fields[i]);
+		}
+		return result;
+	}
 	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
 		var r = fields[b];
 		return (typeof r === 'string' || typeof r === 'number') ? r : a;
@@ -8701,95 +8712,93 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 };
 
 /**
- * Module for text translations
+ * Module for loading text from files.
+ * Used for translations, A/B testing and more.
  * @class Q.Text
  * @constructor
  */
-Q.Text = function () {
+Q.Text = {
+	collection: {},
+	language: 'en',
+	locale: 'US',
+	dir: 'Q/text',
 
-};
+	/**
+	 * Sets the language and locale to use in Q.Text.get calls.
+	 * When Q is initialized, it is set by default from Q.first(Q.info.languages)
+	 * @method setLanguage
+	 * @static
+	 * @param {String} language Something like "en"
+	 * @param {String} locale Something like "US", but can also be blank if unknown
+	 */
+	setLanguage: function (language, locale) {
+		Q.Text.language = language.toLowerCase();
+		Q.Text.locale = locale && locale.toUpperCase();
+	},
 
-Q.Text.collection = {};
-Q.Text.info = {};
-Q.Text.language = 'en';
-Q.Text.locale = 'US';
-Q.Text.dir = 'Q/text';
+	/**
+	 * Sets the text for a specific text source.
+	 * @method set
+	 * @static
+	 * @param {String} name The name of the text source
+	 * @param {Object} content The content, a hierarchical object whose leaves are
+	 *  the actual text translated into the current language in Q.Text.language
+	 * @param {Boolean} [merges=false] If true, merges on top instead of replacing
+	 */
+	set: function (name, content, merge) {
+		var language = Q.Text.language;
+		var locale = Q.Text.locale;
+		Q.setObject([language, locale, name], content, Q.Text.collection);
+	},
 
-/**
- * Sets the language and locale to use in Q.Text.get calls.
- * When Q is initialized, it is set by default from Q.first(Q.info.languages)
- * @static
- * @method set
- * @param {String} lang Something like "en"
- * @param {String} locale Something like "US", but can also be blank if unknown
- */
-Q.Text.setLanguage = function (lang, locale) {
-	Q.Text.language = lang.toLowerCase();
-	Q.Text.locale = locale && locale.toUpperCase();
-};
-
-/**
- * Sets the text for a specific text source.
- * @static
- * @method set
- * @param {String} name The name of the text source
- * @param {Object} content The content, a hierarchical object whose leaves are
- *  the actual text translated into the current language in Q.Text.language
- * @param {Boolean} [merges=false] If true, merges on top instead of replacing
- */
-Q.Text.set = function (name, content, merge) {
-	var language = Q.Text.language;
-	var locale = Q.Text.locale;
-	var suffix = locale ? '-' + locale : '';
-	var url = Q.Text.dir + '/' + name + '/' + language + suffix + '.json';
-	Q.setObject([language, locale, name], content, Q.Text.collection);
-};
-
-/**
- * Sets the text for a specific text source.
- * @static
- * @method set
- * @param {String} name The name of the text source
- * @param {Function} callback Receives (err, content), may be called sync or async
- * @param {Object} options Options to use for Q.request . May also include:
- * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
- * @param {Boolean} [options.merge=false] If true, merges on top instead of replacing
- * @return {Boolean|Q.Request} Returns true if content was already loaded,
- *   otherwise calls the result of Q.request
- */
-Q.Text.get = function (name, callback, options) {
-	var language = Q.Text.language;
-	var locale = Q.Text.locale;
-	var dir = Q.Text.dir;
-	var suffix = locale ? '-' + locale : '';
-	var content = Q.getObject([language, locale, name], Q.Text.collection);
-	if (content) {
-		Q.handle(callback, Q.Text, [null, content]);
-		return true;
-	}
-	var names = Q.isArrayLike(name) ? name : [name];
-	var pipe = Q.pipe(names, function (params, subjects) {
-		var result = {};
-		var errors = null;
-		for (var i=0, l=names.length; i<l; ++i) {
-			var name = names[i];
-			if (params[name][0]) {
-				errors = errors || {};
-				errors[name] = params[name][0];
-			} else if (params[name][1]) {
-				Q.extend(result, 10, params[name][1]);
+	/**
+	 * Get the text from a specific text source or sources.
+	 * @method get
+	 * @static
+	 * @param {String|Array} name The name of the text source. Can be an array,
+	 *  in which case the text sources are merged in the order they are named there.
+	 * @param {Function} callback Receives (err, content), may be called sync or async,
+	 *  where content is an Object formed by merging all the named text sources.
+	 * @param {Object} [options] Options to use for Q.request . May also include:
+	 * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
+	 * @param {Boolean} [options.merge=false] For Q.Text.set if content is loaded
+	 * @return {Boolean|Q.Request} Returns true if content was already loaded,
+	 *   otherwise calls the result of Q.request
+	 */
+	get: function (name, callback, options) {
+		var language = Q.Text.language;
+		var locale = Q.Text.locale;
+		var dir = Q.Text.dir;
+		var suffix = locale ? '-' + locale : '';
+		var content = Q.getObject([language, locale, name], Q.Text.collection);
+		if (content) {
+			Q.handle(callback, Q.Text, [null, content]);
+			return true;
+		}
+		var names = Q.isArrayLike(name) ? name : [name];
+		var pipe = Q.pipe(names, function (params, subjects) {
+			var result = {};
+			var errors = null;
+			for (var i=0, l=names.length; i<l; ++i) {
+				var name = names[i];
+				if (params[name][0]) {
+					errors = errors || {};
+					errors[name] = params[name][0];
+				} else if (params[name][1]) {
+					Q.extend(result, 10, params[name][1]);
+				}
 			}
-		}
-		Q.handle(callback, Q.Text, [errors, result]);
-	});
-	Q.each(names, function (i, name) {
-		var func = _Q_Text_getter;
-		if (options && options.ignoreCache) {
-			func = func.force;
-		}
-		var url = dir + '/' + name + '/' + language + suffix + '.json';
-		return func(name, url, pipe.fill(name), options);
-	});
+			Q.handle(callback, Q.Text, [errors, result]);
+		});
+		Q.each(names, function (i, name) {
+			var func = _Q_Text_getter;
+			if (options && options.ignoreCache) {
+				func = func.force;
+			}
+			var url = dir + '/' + name + '/' + language + suffix + '.json';
+			return func(name, url, pipe.fill(name), options);
+		});
+	}
 };
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
@@ -11791,6 +11800,11 @@ function _addHandlebarsHelpers() {
 		Handlebars.registerHelper('toCapitalized', function(text) {
 			text = text || '';
 			return text.charAt(0).toUpperCase() + text.slice(1);
+		});
+	}
+	if (!Handlebars.helpers.option) {
+		Handlebars.registerHelper('interpolate', function(expression, fields) {
+			return expression.interpolate(fields);
 		});
 	}
 	if (!Handlebars.helpers.option) {

@@ -96,7 +96,12 @@ class Mustache_Loader_FilesystemLoader implements Mustache_Loader
             throw new InvalidArgumentException('Template '.$name.' not found.');
         }
 
-        return file_get_contents($fileName);
+		$config = Q_Config::get('Q', 'templates', array());
+        return Q::readFile($fileName, Q::take($config, array(
+			'ignoreCache' => true,
+			'dontCache' => true,
+			'duration' => 3600
+		)));
     }
 
     /**

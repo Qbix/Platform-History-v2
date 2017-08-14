@@ -212,9 +212,14 @@ class Q
 	 * @static
 	 * @param {string} $expression
 	 *  The string containing possible references to interpolate values for.
-	 * @param {array} $params=array()
+	 * @param {array|string} $params=array()
 	 *  An array of parameters to the expression.
 	 *  Variable names in the expression can refer to them.
+	 *  You can also pass an indexed array, in which case the expression's
+	 *  placeholders of the form {{0}}, {{1}}, or $0, $1 will be replaced by the
+	 *  corresponding strings.
+	 *  If the expression is missing {{0}} and $0, then {{1}} or $1 is replaced
+	 *  by the first string, {{2}} or $2 by the second string, and so on.
 	 * @return {string}
 	 *  The result of the interpolation
 	 */
@@ -222,6 +227,10 @@ class Q
 		$expression,
 		$params = array())
 	{
+		$a = (
+			strpos($expression, '{{0}}') === false
+			and strpos($expression, '$0') === false
+		) ? 1 : 0;
 		$keys = array_keys($params);
 		usort($keys, array(__CLASS__, 'reverseLengthCompare'));
 		$expression = str_replace('\\$', '\\REAL_DOLLAR_SIGN\\', $expression);
@@ -229,6 +238,9 @@ class Q
 			$p = (is_array($params[$key]) or is_object($params[$key]))
 				? substr(Q::json_encode($params[$key]), 0, 100)
 				: (string)$params[$key];
+			if (is_numeric($key) and floor($key) == ceil($key)) {
+				$key = $key + $a;
+			}
 			$expression = str_replace('$'.$key, $p, $expression);
 			$expression = str_replace('{{'.$key.'}}', $p, $expression);
 		}
@@ -269,7 +281,7 @@ class Q
 	 * Use for surrounding text, so it can later be processed throughout.
 	 * @method t
 	 * @static
-	 * @param {string} $test
+	 * @param {string} $text
 	 * @return {string}
 	 */
 	static function t($text)
@@ -280,6 +292,20 @@ class Q
 		 */
 		$text = Q::event('Q/t', array(), 'before', false, $text);
 		return $text;
+	}
+	
+	/**
+	 * A convenience method to use in your PHP templates.
+	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
+	 * In Handlebars templates, you just use {{interpolate expression ...}}
+	 * @method text
+	 * @static
+	 * @param {string} $expression Same as in Q::interpolate()
+	 * @param {array} $params Same as in Q::interpolate()
+	 */
+	static function text($expression, $params = array())
+	{
+		return Q_Html::text(Q::interpolate($expression, $params));
 	}
 
 	/**
@@ -344,9 +370,8 @@ class Q
 
 	}
 
-
 	/**
-	 * Includes a file and evaluates code from it
+	 * Includes a file and evaluates code from it. Uses Q::realPath().
 	 * @method includeFile
 	 * @static
 	 * @param {string} $filename
@@ -397,12 +422,7 @@ class Q
 
 		$abs_filename = self::realPath($filename);
 
-		if (!$abs_filename) {
-			$include_path = get_include_path();
-			require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
-			throw new Q_Exception_MissingFile(compact('filename', 'include_path'));
-		}
-		if (is_dir($abs_filename)) {
+		if (!$abs_filename or is_dir($abs_filename)) {
 			$include_path = get_include_path();
 			require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
 			throw new Q_Exception_MissingFile(compact('filename', 'include_path'));
@@ -423,12 +443,73 @@ class Q
 			if ($once) {
 				if (!isset(self::$included_files[$filename])) {
 					self::$included_files[$filename] = true;
-					include_once($abs_filename);
+					return include_once($abs_filename);
 				}
 			} else {
 				return include($abs_filename);
 			}
 		}
+	}
+
+	/**
+	 * Reads a file and caches it for a time period. Uses Q::realPath().
+	 * @method readFile
+	 * @static
+	 * @param {string} $filename The name of the file to get the content of
+	 * @param {array} $options
+	 * @param {integer} $options.duration Number of seconds to cache it for
+	 * @param {boolean} $options.dontCache whether to skip caching it
+	 * @param {boolean} $options.ignoreCache whether to ignore already cached result
+	 * @return {string} the content of the file
+	 * @throws {Q_Exception_MissingFile}
+	 *  May throw a Q_Exception_MissingFile exception.
+	 */
+	static function readFile(
+		$filename,
+		$options = array())
+	{
+		/**
+		 * Skips includes to prevent recursion
+		 * @event Q/readFile {before}
+		 * @param {string} $filename The name of the file to get the content of
+		 * @param {array} $options
+		 * @param {integer} $options.duration Number of seconds to cache it for
+		 * @param {boolean} $options.dontCache whether to skip caching it
+		 * @param {boolean} $options.ignoreCache whether to ignore already cached result
+		 * @return {string} Optional. If set, override method return
+		 */
+		$result = self::event(
+			'Q/readFile',
+			compact('filename', 'params', 'once', 'get_vars'),
+			'before',
+			true
+		);
+		if (isset($result)) {
+			// return this result instead
+			return $result;
+		}
+		
+		$namespace = "Q::readFile\t$filename";
+		if (empty($options['ignoreCache'])) {
+			$result = Q_Cache::get('content', null, $namespace);
+		}
+
+		$abs_filename = self::realPath($filename);
+		if (!$abs_filename or is_dir($abs_filename)) {
+			$include_path = get_include_path();
+			require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
+			throw new Q_Exception_MissingFile(compact('filename', 'include_path'));
+		}
+		
+		if (!isset($result)) {
+			$result = file_get_contents($abs_filename);
+		}
+		if (empty($options['dontCache'])) {
+			$duration = Q::ifset($options, 'duration', 0);
+			Q_Cache::set('content', $result, $namespace);
+			Q_Cache::setDuration($duration, $namespace);
+		}
+		return $result;
 	}
 
 	/**
@@ -512,12 +593,18 @@ class Q
 
 		if (empty($params)) $params = array();
 
-		$viewName = implode(DS, explode('/', $viewName));
+		$parts = explode('/', $viewName);
+		$viewName = implode(DS, $parts);
 
 		$fields = Q_Config::get('Q', 'views', 'fields', null);
 		if ($fields) {
 			$params = array_merge($fields, $params);
 		}
+		
+		// load text
+		$p = array_merge(array('Q', 'text'), $parts);
+		$text = call_user_func_array(array('Q_Config', 'get'), $p);
+		$params = array_merge($params, Q_Text::get($text, true));
 
 		/**
 		 * @event {before} Q/view
