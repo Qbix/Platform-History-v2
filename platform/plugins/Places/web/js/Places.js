@@ -40,7 +40,7 @@ var Places = Q.Places = Q.plugins.Places = {
 	 *   Q.Places.countries and Q.Places.countries is accessible
 	 */
 	loadCountries: function (callback) {
-		Q.addScript('plugins/Places/js/lib/countries.js', function () {
+		Q.addScript('Q/plugins/Places/js/lib/countries.js', function () {
 			var pc = Places.countries;
 			var cbc = Places.countriesByCode = {};
 			for (var i=0, l = Places.countries.length; i < l; ++i) {
@@ -475,11 +475,11 @@ Q.text.Places = {
 };
 
 Q.Tool.define({
-	"Places/address": "plugins/Places/js/tools/address.js",
-	"Places/globe": "plugins/Places/js/tools/globe.js",
-	"Places/countries": "plugins/Places/js/tools/countries.js",
-	"Places/user/location": "plugins/Places/js/tools/user/location.js",
-	"Places/location": "plugins/Places/js/tools/location.js"
+	"Places/address": "Q/plugins/Places/js/tools/address.js",
+	"Places/globe": "Q/plugins/Places/js/tools/globe.js",
+	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
+	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
+	"Places/location": "Q/plugins/Places/js/tools/location.js"
 });
 
 })(Q, jQuery, window);

@@ -3511,7 +3511,7 @@ abstract class Streams extends Base_Streams
 			? $options['appUrl']
 			: Q_Request::baseUrl().'/'.Q_Config::get(
 				"Streams", "types", $stream->type, 
-				"invite", "url", "plugins/Streams/stream"
+				"invite", "url", "Q/plugins/Streams/stream"
 			);
 
 		// now check and define levels for invited user

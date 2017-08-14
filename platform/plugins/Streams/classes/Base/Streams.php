@@ -35,7 +35,8 @@ abstract class Base_Streams
   12 => 'Streams_Sent',
   13 => 'Streams_Stream',
   14 => 'Streams_Subscription',
-  15 => 'Streams_Total',
+  15 => 'Streams_Task',
+  16 => 'Streams_Total',
 );
 
 	/**

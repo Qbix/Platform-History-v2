@@ -36,7 +36,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 		console.warn("Please provide 'usage' for bookmarklet.");
 	}
 	
-	Q.addStylesheet('plugins/Q/css/inplace.css');
+	Q.addStylesheet('Q/plugins/Q/css/inplace.css');
 	
 	var bookmarkletSettings = {
 		common: {
@@ -233,8 +233,8 @@ Q.Tool.define('Q/bookmarklet', function () {
 		
 	case 'ios':
 		var url = Q.info.browser.mainVersion >= 8
-			? 'plugins/Q/img/bookmarklet/ios8_action.png'
-			: 'plugins/Q/img/bookmarklet/ios_action.png';
+			? 'Q/plugins/Q/img/bookmarklet/ios8_action.png'
+			: 'Q/plugins/Q/img/bookmarklet/ios_action.png';
 		var icon = '<img src="'+Q.url(url)+'" class="Q_bookmarklet_ios_action_icon" />';
 		if (browser.device === 'iPad') {
 			$te.addClass('Q_bookmarklet_tool_iPad');
@@ -318,7 +318,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 										 '<a href="#">' +
 											 (bookmarkletSettings[browser.name][browser.OS]['icon'] ?
 												'<img src="' +
-												(state.icon ? state.icon : Q.info.proxyBaseUrl + '/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
+												(state.icon ? state.icon : Q.info.proxyBaseUrl + '/Q/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
 												'" alt="" />'
 												: '') +
 											 state.title +
@@ -339,7 +339,7 @@ $te.append('<div class="Q_bookmarklet_tool_bookmarks_bar_sample">' +
 									 '<a href="#">' +
 										 (bookmarkletSettings[browser.name][browser.OS]['icon'] ?
 											'<img src="' +
-											(state.icon ? state.icon : Q.info.proxyBaseUrl + '/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
+											(state.icon ? state.icon : Q.info.proxyBaseUrl + '/Q/plugins/Q/img/bookmarklet/' + bookmarkletSettings[browser.name][browser.OS]['icon']) +
 											'" alt="" />'
 											: '') +
 										 state.title +

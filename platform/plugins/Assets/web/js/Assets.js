@@ -441,7 +441,7 @@ var Assets = Q.Assets = Q.plugins.Assets = {
 		 *   Q.Assets.Currencies.symbols and Q.Assets.Currencies.names is accessible
 		 */
 		load: function (callback) {
-			Q.addScript('plugins/Assets/js/lib/currencies.js', callback);
+			Q.addScript('Q/plugins/Assets/js/lib/currencies.js', callback);
 		},
 		symbols: null, 
 		names: null
@@ -470,8 +470,8 @@ Assets.Payments.stripe.options = {
 };
 
 Q.Tool.define({
-	"Assets/subscription": "plugins/Assets/js/tools/subscription.js",
-	"Assets/payment": "plugins/Assets/js/tools/payment.js"
+	"Assets/subscription": "Q/plugins/Assets/js/tools/subscription.js",
+	"Assets/payment": "Q/plugins/Assets/js/tools/payment.js"
 });
 
 

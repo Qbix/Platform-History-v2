@@ -130,7 +130,7 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 		}
 		$results.empty().append(
 			$('<img class="Places_address_results_loading" />').attr({
-				src: 'plugins/Q/img/throbbers/loading.gif'
+				src: 'Q/plugins/Q/img/throbbers/loading.gif'
 			})
 		);
 		if (!latitude || !longitude || !searchQuery) {

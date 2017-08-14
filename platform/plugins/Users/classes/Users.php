@@ -1384,7 +1384,7 @@ abstract class Users extends Base_Users
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';
 		$tail = str_replace(DS, '/', substr($directory, strlen($head)));
-		$user->icon = '{{baseUrl}}/uploads'.$tail;
+		$user->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
 	}
 
@@ -1528,7 +1528,7 @@ abstract class Users extends Base_Users
 	 * @return {array}
 	 *  Returns an array of all links to this user's contact info
 	 */
-	static function links($contactInfo, $userId)
+	static function links($contactInfo)
 	{
 		$links = array();
 		$identifiers = array();
@@ -1668,7 +1668,7 @@ abstract class Users extends Base_Users
 			return null;
 		}
 		$url = Q::interpolate($icon, array('baseUrl' => Q_Request::baseUrl()));
-		$url = Q_Valid::url($url) ? $url : "plugins/Users/img/icons/$url";
+		$url = Q_Valid::url($url) ? $url : "Q/plugins/Users/img/icons/$url";
 		if ($basename and strpos($basename, '.') === false) {
 			$basename .= ".png";
 		}
@@ -1762,37 +1762,37 @@ abstract class Users extends Base_Users
 		return $authorized;
 	}
 	
-	protected static function hashing($address, $type = null)
+	protected static function hashing($identifier, $type = null)
 	{
 		// process the address first
-		$address = trim($address);
+		$identifier = trim($identifier);
 		if (substr($type, -7) === '_hashed') {
-			$hashed = $address;
+			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
 			switch ($type) {
 				case 'email':
-					if (!Q_Valid::email($address, $normalized)) {
+					if (!Q_Valid::email($identifier, $normalized)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'email address')
+							array('field' => 'identifier', 'range' => 'email address')
 						);
 					}
 					break;
 				case 'mobile':
-					if (!Q_Valid::phone($address, $normalized)) {
+					if (!Q_Valid::phone($identifier, $normalized)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'phone number')
+							array('field' => 'identifier', 'range' => 'phone number')
 						);
 					}
 					break;
 				case 'facebook':
 				case 'twitter':
-					if (!is_numeric($address)) {
+					if (!is_numeric($identifier)) {
 						throw new Q_Exception_WrongValue(
 							array('field' => 'address', 'range' => 'numeric uid')
 						);
 					}
-					$normalized = $address;
+					$normalized = $identifier;
 					break;
 				default:
 					break;
