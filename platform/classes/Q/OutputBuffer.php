@@ -93,28 +93,28 @@ class Q_OutputBuffer
 		}
 	}
 	
-	protected pushLocale($locale)
+	protected function pushLocale($locale)
 	{
 		if ($locale) {
-			self::$lastLocale = self::$locales[$this->level] = $locale;
+			$this->lastLocale = $this->locales[$this->level] = $locale;
 			setlocale($locale);
 		} else {
-			if (!self::$lastLocale) {
-				self::$lastLocale = Q_Request::locale();
+			if (!$this->lastLocale) {
+				$this->lastLocale = Q_Request::locale();
 			}
-			self::$locales[$this->level] = self::$lastLocale;
+			$this->locales[$this->level] = $this->lastLocale;
 		}
 	}
 	
-	protected popLocale()
+	protected function popLocale()
 	{
 		$locales = array();
-		foreach ($i=0; $i<$this->level; ++$i) {
-			if (isset(self::$locales[$i])) {
-				$locales = self::$locales[$i];
+		for ($i=0; $i<$this->level; ++$i) {
+			if (isset($this->locales[$i])) {
+				$locales = $this->locales[$i];
 			}
 		}
-		self::$locales = $locales;
+		$this->locales = $locales;
 	}
 
 	/**
