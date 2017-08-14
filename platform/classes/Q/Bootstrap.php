@@ -244,6 +244,8 @@ class Q_Bootstrap
 				define($PLUGIN.'_PLUGIN_TESTS_DIR', $plugin_path.DS.'tests');
 			if (!defined($PLUGIN.'_PLUGIN_WEB_DIR'))
 				define($PLUGIN.'_PLUGIN_WEB_DIR', $plugin_path.DS.'web');
+			if (!defined($PLUGIN.'_PLUGIN_TEXT_DIR'))
+				define($PLUGIN.'_PLUGIN_TEXT_DIR', $plugin_path.DS.'text');
 			self::$plugins[$plugin] = $plugin_path;
 		}
 		$paths = array_unique($paths);
