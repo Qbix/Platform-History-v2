@@ -26,7 +26,13 @@ abstract class Assets extends Base_Assets
 	{
 		static $json = null;
 		if (!isset($json)) {
-			$json = file_get_contents(ASSETS_PLUGIN_CONFIG_DIR.DS.'currencies.json');
+			$key = "Assets/currencies.json";
+			$json = Q_Cache::get($key);
+			if (!$json) {
+				$json = file_get_contents(ASSETS_PLUGIN_CONFIG_DIR.DS.'currencies.json');
+				$ttl = Q_Config::get('Assets', 'currencies', 'ttl', 3600);
+				Q_Cache::set($key, $json, $ttl);
+			}
 		}
 		$code = strtoupper($code);
 		$currencies = Q::json_decode($json, true);

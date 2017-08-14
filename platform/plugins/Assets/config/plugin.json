@@ -91,6 +91,9 @@
 				"Users/insertUser": 20
 			}
 		},
+		"currencies": {
+			"ttl": 3600
+		},
 		"reasons": {
 			"Assets/purchased": {
 				"by": "purchasing credits"
