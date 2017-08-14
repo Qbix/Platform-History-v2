@@ -8447,7 +8447,8 @@ Q.Template.info = {};
  * @param {Object|String} info You can also pass a string "type" here.
  * @param {String} [info.type="handlebars"] The type of template.
  * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
- * @param {Array} [info.partials] Relative urls of .js scripts for registering partials
+ * @param {Array} [info.partials] Relative urls of .js scripts for registering partials.
+ *   Can also be names of templates for partials (in which case they shouldn't end in .js)
  * @param {Array} [info.helpers] Relative urls of .js scripts for registering helpers
  */
 Q.Template.set = function (name, content, info) {
@@ -8662,10 +8663,36 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 		Q.Template.load(name, p.fill('template'), o);
 		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
 			var ia = info[aspect];
+			if (typeof ia === 'string') {
+				ia = [ia];
+			}
 			if (Q.isEmpty(ia)) {
 				p.fill(aspect)();
 			} else if (aspect === 'text') {
 				Q.Text.get(ia, p.fill(aspect));
+			} else if (aspect === 'partials') {
+				var p2 = Q.pipe(ia, function (params) {
+					var result = {};
+					var errors = null;
+					try {
+						Q.each(ia, function (i, pname) {
+							var r = result[pname] = params[pname][1];
+							Handlebars.registerPartial(pname, r);
+						});
+						p.fill(aspect)([null, result]);
+					} catch (e) {
+						e.params = params;
+						p.fill(aspect)([e]);
+					}
+				});
+				Q.each(ia, function (i, pname) {
+					if (pname.split('.').pop() === 'js') {
+						Q.addScript(pname, p2.fill(pname));
+						waitFor.push(pname);
+					} else {
+						Q.Template.load(pname, p2.fill(pname));
+					}
+				});
 			} else {
 				Q.addScript(ia, p.fill(aspect));
 			}
@@ -8741,8 +8768,8 @@ Q.Text.get = function (name, callback, options) {
 		return true;
 	}
 	var names = Q.isArrayLike(name) ? name : [name];
-	var result = {};
 	var pipe = Q.pipe(names, function (params, subjects) {
+		var result = {};
 		var errors = null;
 		for (var i=0, l=names.length; i<l; ++i) {
 			var name = names[i];
