@@ -1,6 +1,6 @@
 <?php
 
-class Users_Device_Chrome extends Users_Device
+class Users_Device_Firefox extends Users_Device
 {
 
 	/**

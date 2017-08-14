@@ -64,7 +64,7 @@ Q.text.Users = {
 		facebookNoEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way.",
 		picTooltip: "You can change this picture later"
 	},
-	
+
 	setIdentifier: {
 		title: "Add a way to log in",
 		sendMessage: "Send Activation Message",
@@ -75,7 +75,7 @@ Q.text.Users = {
 			username: "username"
 		}
 	},
-	
+
 	prompt: {
 		title: "{$Platform} Account",
 		areUsing: "You are using {$platform} as",
@@ -83,7 +83,7 @@ Q.text.Users = {
 		doAuth: "Log in with this account",
 		doSwitch: "Switch to this account"
 	},
-	
+
 	authorize: {
 		mustAgree: "First you must agree to the terms."
 	}
@@ -120,13 +120,13 @@ Users.onDevice = new Q.Event(function (response) {
  *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
  */
 Users.initFacebook = function(callback, options) {
-	
+
 	var appId = (options && options.appId) || Q.info.app;
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 	if (!fbAppId) {
 		throw new Q.Error("Users.initFacebook: missing facebook app info for '" + appId + "'");
 	}
-	
+
 	// should be only called once per app
 	if (Users.initFacebook.completed[Q.info.app]) {
 		callback && callback();
@@ -178,7 +178,7 @@ function FB_getLoginStatus(cb, force) {
 			console.warn("Facebook is not responding to FB.getLoginStatus within "+timeout/1000+" sec.");
 			cb({});
 		}, timeout);
-		FB.getLoginStatus(function(response) { 
+		FB.getLoginStatus(function(response) {
 			clearTimeout(t);
 			cb(response);
 		}, force);
@@ -236,7 +236,7 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 	}
 	options = options || {};
 	var fields = {};
-	
+
 	Users.authenticate.occurring = true;
 
 	var appId = options.appId || Q.info.app;
@@ -257,7 +257,7 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 				// which can be a problem especially if the authenticate() is called
 				// multiple times on the same page, or because the page is reloaded
 				Q.cookie('Users_ignoreFacebookUid', fb_uid);
-				
+
 				if (Users.loggedInUser && Users.loggedInUser.uids.facebook == fb_uid) {
 					// The correct user is already logged in.
 					// Call onSuccess but do not pass a user object -- the user didn't change.
@@ -299,7 +299,7 @@ Users.authenticate = function(platform, onSuccess, onCancel, options) {
 				Q.handle(onSuccess, this, [user, options]);
 				Users.authenticate.occurring = false;
 			}
-			
+
 			function _doCancel(ignoreUid) {
 				if (ignoreUid) {
 					// NOTE: the following line makes us ignore this uid
@@ -378,7 +378,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 	if (platform !== 'facebook') {
 		throw new Q.Error("Users.authenticate prompt: The only supported platform for now is facebook");
 	}
-	
+
 	var appId = (options && options.appId) || Q.info.app;
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
@@ -421,7 +421,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 		.prependTo(o.dialogContainer);
 	}
 	Q.Dialogs.push({
-		dialog: Users.prompt.overlay, 
+		dialog: Users.prompt.overlay,
 		alignByParent: true,
 		doNotRemove: true,
 		onActivate: function () {
@@ -438,7 +438,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 			tookAction = false;
 		}
 	});
-	
+
 	function _usingInformation(uid, explanation) {
 		return $("<table />").append(
 			$("<tr />").append(
@@ -480,7 +480,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
  * Callback parameter could be null or response object from social platform
  * @param {Object} options
  *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
- *   @param {Array} [options.check=[]] Scopes to check. 
+ *   @param {Array} [options.check=[]] Scopes to check.
  */
 Users.scope = function (platform, callback, options) {
 	if (platform !== 'facebook') {
@@ -543,23 +543,23 @@ Users.login = function(options) {
 		}
 	}
 	var o = Q.extend({}, Users.login.options, options);
-	
+
 	if (typeof o.using === 'string') {
 		o.using = o.using.split(',');
 	}
-	
+
 	Users.login.occurring = true;
-	
+
 	if (o.using.indexOf('native') < 0) {
 		_doLogin();
 	} else {
 		$.fn.plugin.load('Q/dialog', _doLogin);
 	}
-	
+
 	return false;
-	
+
 	function _doLogin() {
-	
+
 		var dest;
 
 		// try quietly, possible only with facebook
@@ -574,7 +574,7 @@ Users.login = function(options) {
 			}
 			return false;
 		}
-	
+
 		priv.result = null;
 		priv.used = null;
 
@@ -662,7 +662,7 @@ Users.login = function(options) {
 			}
 			// DEBUGGING: For debugging purposes
 			Users.login.occurring = false;
-			if (!o.onRequireComplete 
+			if (!o.onRequireComplete
 			|| response2.slots.accountStatus === 'complete') {
 				_onComplete(user);
 			} else if (response2.slots.accountStatus === 'refresh') {
@@ -679,7 +679,7 @@ Users.login = function(options) {
 			}
 		});
 	}
-	
+
 	// User clicked "cancel" or closed login dialog
 	function _onCancel(scope) {
 		if (false !== Q.handle(o.onResult, this, [scope, o])) {
@@ -687,14 +687,14 @@ Users.login = function(options) {
 		}
 		Users.login.occurring = false;
 	}
-	
+
 	// login complete - run onSuccess handler
 	function _onComplete(user) {
 		Users.onLogin.handle(user);
 		var pn = priv.used || 'native';
 		var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
 		if (false !== ret) {
-			Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);	
+			Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
 		}
 		Users.login.occurring = false;
 	}
@@ -718,7 +718,7 @@ Users.logout = function(options) {
 	if (typeof o.using === 'string') {
 		o.using = o.using.split(',');
 	}
-	
+
 	Users.logout.occurring = true;
 
 	function callback(err, response) {
@@ -777,12 +777,12 @@ Users.logout = function(options) {
 			Q.handle(o.onSuccess, this, [o]);
 		}
 	}
-	
+
 	if (!o.url) {
 		callback();
 		return false;
 	}
-	
+
 	var url = o.url + (o.url.indexOf('?') < 0 ? '?' : '') + '&logout=1';
 	Q.request(url, 'script', callback, {"method": "post"});
 	return true;
@@ -887,7 +887,7 @@ function _constructUser (fields) {
 
 Users.batchFunction = function Users_batchFunction(baseUrl, action, fields) {
     return Q.batcher.factory(
-		Users.batchFunction.functions, baseUrl, 
+		Users.batchFunction.functions, baseUrl,
 		"/action.php/Users/"+action, "batch", "batch",
 		{
 			preprocess: function (args) {
@@ -951,22 +951,22 @@ Users.importContacts = function(platform)
  */
 Users.setIdentifier = function(options) {
 	var o = Q.extend({}, Users.setIdentifier.options, options);
-	
+
 	function onSuccess(user) {
 		if (false !== Q.handle(o.onResult, this, [user])) {
 			Q.handle(o.onSuccess, this, [user]);
 		}
 	}
-	
+
 	function onCancel(scope) {
 		if (false !== Q.handle(o.onResult, this, [scope])) {
 			Q.handle(o.onCancel, this, [scope]);
 		}
 	}
-	
+
 	priv.setIdentifier_onSuccess = onSuccess;
 	priv.setIdentifier_onCancel = onCancel;
-	
+
 	$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
 		setIdentifier_setupDialog(o.identifierType, o);
 		var d = setIdentifier_setupDialog.dialog;
@@ -987,7 +987,7 @@ function login_callback(err, response) {
 
 	if (response.errors) {
 		// There were errors
-		form.plugin('Q/validator', 'invalidate', 
+		form.plugin('Q/validator', 'invalidate',
 			Q.ajaxErrors(response.errors, ['identifier'])
 		);
 		identifier_input.plugin('Q/clickfocus');
@@ -1042,7 +1042,7 @@ function login_callback(err, response) {
 		// remind to activate -- this is probably a futureUser created using an invite
 		step2_form = setupResendForm(false);
 	}
-	
+
 	var userId = response.slots.data.exists;
 
 	function onFormSubmit(event) {
@@ -1077,9 +1077,9 @@ function login_callback(err, response) {
 		}
 		var url = $this.attr('action')+'?'+$this.serialize();
 		Q.request(url, 'data', function (err, response) {
-			
+
 			$('#Users_form_passphrase').attr('value', '').trigger('change');
-			
+
 			$('input', $this).css('background-image', 'none');
 			if (err || (response && response.errors)) {
 				// there were errors
@@ -1096,7 +1096,7 @@ function login_callback(err, response) {
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = response.slots.data.roles || {};
 			switch ($this.data('form-type')) {
-				case 'resend': 
+				case 'resend':
 					$('button', $this).html('Sent').attr('disabled', 'disabled');
 					login_setupDialog.dialog.data('Q/dialog').close();
 					return;
@@ -1168,7 +1168,7 @@ function login_callback(err, response) {
 											.each(function() {
 												$(this).plugin('Q/validator', 'reset');
 											});
-											login_setupDialog.dialog.data('Q/dialog').close();		
+											login_setupDialog.dialog.data('Q/dialog').close();
 										})
 								)
 							);
@@ -1187,9 +1187,9 @@ function login_callback(err, response) {
 		).append($('<input type="hidden" name="isHashed" id="Users_login_isHashed" value="0" />'));
 		return login_form;
 	}
-	
+
 	function setupResendForm(verified) {
-		var explanation = verified 
+		var explanation = verified
 			? $('<p id="Users_login_noPassphrase"></p>').html(Q.text.Users.login.noPassphrase)
 			: $('<p id="Users_login_notVerified"></p>').html(Q.text.Users.login.notVerified);
 		var identifier_form = $('<form method="post" />')
@@ -1261,7 +1261,7 @@ function login_callback(err, response) {
 				}, 300);
 			}
 		});
-		
+
 		if (priv.activation) {
 			register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
 		}
@@ -1273,7 +1273,7 @@ function login_callback(err, response) {
 					.append($('<label for="Users_agree" />').html(json.termsLabel))
 			);
 		}
-		
+
 		var authResponse;
 		var $form = $('#Users_login_step1_form');
 		if ($form.data('used') === 'facebook') {
@@ -1394,9 +1394,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 			placeholder = Q.text.Users.login.placeholders.mobile;
 		}
 	}
-	
 	Q.addScript("Q/plugins/Q/js/sha1.js");
-	
 	var identifierInput = $('<input id="Users_login_identifier" autocomplete="email" type="'+type+'" class="text" />')
 	.attr('maxlength', Q.text.Users.login.maxlengths.identifier)
 	.attr('placeholder', placeholder)
@@ -1408,7 +1406,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 	} else if (type === 'mobile') {
 		identifierInput.attr('name', 'phone');
 	}
-	
+
 	var $a = $('<a class="Q_button Users_login_go Q_main_button" />')
 	.append(
 		$('<span id="Users_login_go_span">'  + Q.text.Users.login.goButton + '</span>')
@@ -1457,14 +1455,14 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 		identifierInput.on('keyup', function () {
 			var i, found=0, val = $(this).val();
 			if (val.length === 0) return;
-			
+
 			var number = val.replace(/[^0-9]/g, '');
 			if ((number[0] === '1' && number.length === 11)
 			|| (number[0] !== '1' && number.length === 10)) {
 				$(this).blur(); // prepare user to press Go button
 				return;
 			}
-			
+
 			if (val.indexOf('@') >= 0) {
 				var ext = val.split('.').pop();
 				var exts = ["com", "net", "org", "edu", "gov", "info", "mil"];
@@ -1557,7 +1555,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 	$('input', step1_form).add('select', step1_form).on('input', function () {
 		step1_form.plugin('Q/validator', 'reset', this);
 	});
-	
+
 	var dialog = $('<div id="Users_login_dialog" class="Users_login_dialog" />');
 	var titleSlot = $('<div class="Q_title_slot" />');
 	titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
@@ -1636,7 +1634,7 @@ function setIdentifier_callback(err, response) {
 
 	// Remove any errors we may have displayed
 	form.plugin('Q/validator', 'reset');
-	
+
 	Q.handle(priv.setIdentifier_onSuccess);
 
 	setIdentifier_setupDialog.dialog.data('Q/dialog').close();
@@ -1656,7 +1654,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 			placeholder = Q.text.Users.setIdentifier.placeholders.mobile;
 		}
 	}
-	
+
 	var step1_form = $('<form id="Users_setIdentifier_step1_form" />');
 	var step1_div = $('<div id="Users_setIdentifier_step1" class="Q_big_prompt" />').html(step1_form);
 
@@ -1693,7 +1691,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 		}));
 	}
 	step1_form.plugin('Q/validator');
-	
+
 	var dialog = $('<div id="Users_setIdentifier_dialog" class="Users_setIdentifier_dialog" />');
 	var titleSlot = $('<div class="Q_title_slot">').append(
 		$('<h2 class="Users_dialog_title Q_dialog_title" />')
@@ -1725,7 +1723,7 @@ function setIdentifier_setupDialog(identifierType, options) {
 			setIdentifier_setupDialog.dialog = null;
 		}
 	});
-	
+
 	setIdentifier_setupDialog.dialog = dialog;
 }
 
@@ -1742,7 +1740,7 @@ var submitClosestForm = Users.submitClosestForm = function submitClosestForm () 
 /**
  * Votes for something
  * @static
- * @method hint 
+ * @method hint
  * @param {String} forType The type of thing to vote for
  * @param {String} forId The id of thing to vote for
  * @param {Number} [value=1] the value the user has voted for, such as a rating etc.
@@ -1774,7 +1772,7 @@ Users.vote = function (forType, forId, value) {
 /**
  * Places a hint to click or tap on the screen
  * @static
- * @method hint 
+ * @method hint
  * @param {String} key A key to ensure the hint appears only the first time for each user. Check Users.hinted to see if this has happened.
  * @param {Element|Object|Array} elementsOrPoints Indicates where to display the hint. A point should contain properties "x" and "y". Can also be an array of elements or points.
  * @param {String} [options.src] the url of the hint pointer image
@@ -1836,7 +1834,7 @@ Users.facebookDialog = function(options)
 		'content': 'Needs content',
 		'buttons': {}
 	}, options);
-	
+
 	if (o.shadow) {
 		var shadow = $('<div class="Users_facebookDialog_shadow" />');
 		$('body').append(shadow);
@@ -1868,12 +1866,12 @@ Users.facebookDialog = function(options)
 	dialog.append(buttonsBlock);
 	$('body').append(dialog);
 	if (o.position) {
-		dialog.css({ 
-			left: o.position.x + 'px', 
+		dialog.css({
+			left: o.position.x + 'px',
 			top: o.position.y + 'px'
 		});
 	} else {
-		dialog.css({ 
+		dialog.css({
 			left: ((Q.Pointer.windowHeight() - dialog.width()) / 2) + 'px',
 			top: ((Q.Pointer.windowHeight() - dialog.height()) / 2) + 'px'
 		});
@@ -2134,7 +2132,7 @@ Label.remove = function (userId, label, callback) {
 
 /**
  * Calculate the url of a label's icon
- * @method 
+ * @method
  * @param {Number} [size=40] the size of the icon to render.
  * @return {String} the url
  */
@@ -2158,22 +2156,22 @@ Q.Tool.define({
 Q.beforeInit.add(function _Users_beforeInit() {
 
 	Users.get = Q.getter(Users.get, {
-		cache: Q.Cache.document("Users.get", 100), 
+		cache: Q.Cache.document("Users.get", 100),
 		throttle: 'Users.get'
 	});
 
 	Users.getContacts = Q.getter(Users.getContacts, {
-		cache: Q.Cache.document("Users.getContacts", 100), 
+		cache: Q.Cache.document("Users.getContacts", 100),
 		throttle: 'Users.getContacts'
 	});
-	
+
 	Users.getLabels = Q.getter(Users.getLabels, {
-		cache: Q.Cache.document("Users.getLabels", 100), 
+		cache: Q.Cache.document("Users.getLabels", 100),
 		throttle: 'Users.getLabels'
 	});
 
 	Users.lastSeenNonce = Q.cookie('Q_nonce');
-	
+
 	Q.Users.login.options = Q.extend({
 		onCancel: new Q.Event(),
 		onSuccess: new Q.Event(function Users_login_onSuccess(user, options) {
@@ -2181,7 +2179,7 @@ Q.beforeInit.add(function _Users_beforeInit() {
 			if (user) {
 				// the user changed, redirect to their home page
 				var urls = Q.urls || {};
-				var url = options.successUrl 
+				var url = options.successUrl
 					|| urls[Q.info.app+'/home']
 					|| Q.url('');
 				Q.handle(url);
@@ -2205,8 +2203,8 @@ Q.beforeInit.add(function _Users_beforeInit() {
 		using: 'native',
 		onSuccess: new Q.Event(function (options) {
 			var urls = Q.urls || {};
-			Q.handle( options.welcomeUrl 
-				|| urls[Q.info.app+'/welcome'] 
+			Q.handle( options.welcomeUrl
+				|| urls[Q.info.app+'/welcome']
 				|| Q.url(''));
 		}, 'Users')
 	}, Q.Users.logout.options, Q.Users.logout.serverOptions);
@@ -2217,7 +2215,7 @@ Q.beforeInit.add(function _Users_beforeInit() {
 		identifierType: 'email,mobile',
 		dialogContainer: 'body'
 	}, Q.Users.setIdentifier.options, Q.Users.setIdentifier.serverOptions);
-	
+
 	Q.Users.prompt.options = Q.extend({
 		dialogContainer: 'body'
 	}, Q.Users.prompt.options, Q.Users.prompt.serverOptions);
@@ -2231,7 +2229,7 @@ Q.onInit.add(function () {
 		Q.nonce = Q.cookie('Q_nonce');
 	}
 	document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
-    
+
 	var appId = Q.info.app;
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 	if (fbAppId) {
@@ -2335,119 +2333,38 @@ Users.onLoginLost = new Q.Event(function () {
 Users.onConnected = new Q.Event();
 Users.onConnectionLost = new Q.Event();
 
-/**
- * Some methods related to Users.Device
- * @class Users.Device
- */
-Users.Device = {
-	/**
-	 * Subscribe to listen for push notifications
-	 * if the current environment supports it.
-	 * (Web Push, Cordova, etc.)
-	 * @method subscribe
-	 * @static
-	 * @param {Function} callback
-	 * @param {Object} options
-	 * @param {Boolean} options.userVisibleOnly whether the returned push subscription
-	 *   will only be used for messages whose effect is made visible to the user
-	 * @param {String} options.applicationServerKey A public key your push server 
-	 *   will use to send messages to client apps via a push server. This value is 
-	 *   part of a signing key pair generated by your application server, and usable 
-	 *   with elliptic curve digital signature (ECDSA), over the P-256 curve. 
-	 */
-	subscribe: function (callback, options) {
-		// TODO: implement this in a web-standard way
-		// If this is Cordova, then call push.subscribe()
-		// Otherwise if this is a browser that supports Web Push, call
-		// pushManager.subscribe().
-		// When subscription id is obtained, please call _registerDevice()
-		// to send it to the server. This is already done in the case of Cordova.
-	},
-	/**
-	 * Unsubscribe to stop handling push notifications
-	 * if we were previously subscribed
-	 * @method unsubscribe
-	 * @static
-	 * @param {Function} callback
-	 */
-	unsubscribe: function (callback) {
-		// TODO: implement this in a corresponding way
-	},
-	/**
-	 * Checks whether the user already has a subscription.
-	 * @method subscribed
-	 * @static
-	 * @param {Boolean} callback Whether the user already has a subscription
-	 */
-	subscribed: function (callback) {
-		// TODO: Use hasPermission
-	},
-	/**
-	 * Event occurs when a notification comes in to be processed by the app.
-	 * The handlers you add are supposed to process it.
-	 * The notification might have brought the app back from the background,
-	 * or not. Please see the documentation here:
-	 * https://github.com/katzer/cordova-plugin-local-notifications
-	 * @event onNotification
-	 */
-	onNotification: new Q.Event()
-};
+/*
 
-Q.onReady.add(function () {
-	if (!Q.info.isCordova || !window.PushNotification) {
-	  return;
+Q.onReady.add(function(){
+	if ((Q.info.browser.name !== 'safari') || Q.info.isCordova) {
+		return;
 	}
-	Device.Cordova.push = PushNotification.init({
-	    android: {
-			senderID: Q.getObject('Q.Users.apps.android.' + Q.info.app)
-		},
-		browser: {
-			pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-		},
-		ios: {
-			alert: true,
-			badge: true,
-			sound: true
-		},
-		windows: {}
-	});
-	push.on('registration', function(data) {
-		var deviceId = data.registrationId;
-		localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
-		if (Q.Users.loggedInUser) {
-			_registerDevice();
+	var appConfig = Q.getObject('Q.Users.browserApps.'+ Q.info.browser.name + '.' + Q.info.app);
+	var permissionData = window.safari.pushNotification.permission('web.com.example.domain');
+	checkRemotePermission(permissionData);
+	function checkRemotePermission(permissionData) {
+		if (permissionData.permission === 'default') {
+			// This is a new web service URL and its validity is unknown.
+			window.safari.pushNotification.requestPermission(
+				appConfig.webServiceURL, // The web service URL.
+				appConfig.websitePushID,     // The Website Push ID.
+				{}, // Data that you choose to send to your server to help you identify the user.
+				checkRemotePermission         // The callback function.
+			);
 		}
-	});
-	push.on('notification', function(data) {
-		Users.Device.onNotification.handle(data);
-	});
-	push.on('error', function(e) {
-		console.log("ERROR", e);
-	});
-	Users.login.options.onSuccess.set(function () {
-		_registerDevice();
-	}, 'Users.PushNotification');
-	Users.logout.options.onSuccess.set(function() {
-		PushNotification.setApplicationBadgeNumber(0);
-	}, 'Users.PushNotifications');
-	function _registerDevice(deviceId) {
-		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-		deviceId = storedDeviceId || deviceId;
-		if (!deviceId) {
-			return;
+		else if (permissionData.permission === 'denied') {
+			// The user said no.
+			console.log('Permission dinied');
 		}
-		Q.req('Users/device', function (err, response) {
-			if (!err) {
-				Q.handle(Users.onDevice, [response.data]);
-			}
-		}, {
-			method: 'post',
-			fields: {
-				deviceId: deviceId
-			}
-		});
+		else if (permissionData.permission === 'granted') {
+			// The web service URL is a valid push provider, and the user said yes.
+			// permissionData.deviceToken is now available to use.
+			console.log('Permission granted');
+			console.log('Device token', permissionData.deviceToken);
+		}
 	}
 });
+*/
 
 /**
  * Some replacements for Q.Socket methods, use these instead.
@@ -2472,7 +2389,7 @@ Users.Socket = {
 			});
 		});
 	},
-	
+
 	/**
 	 * Returns a socket, if it was already connected, or returns undefined
 	 * @static
@@ -2483,7 +2400,7 @@ Users.Socket = {
 	get: function _Users_Socket_get(url) {
 		return Q.Socket.get('Users', url);
 	},
-	
+
 	/**
 	 * Returns Q.Event that occurs on some socket event coming from socket.io
 	 * through the Users namespace
