@@ -154,7 +154,11 @@ class Q_Cache
 			self::$store = array();
 			return false;
 		} else {
-            $store = apc_fetch(self::$namespace, $fetched);
+			if (is_callable('apcu_fetch')) {
+				$store = apcu_fetch(self::$namespace, $fetched);
+			} else {
+				$store = apc_fetch(self::$namespace, $fetched);
+			}
             self::$store = $fetched ? $store : array();
             return $fetched;
         }
@@ -168,7 +172,11 @@ class Q_Cache
 	{
 		if (self::$changed and self::$apc) {
 			self::set("Q_Config\tupdateTime", time());
-			apc_store(self::$namespace, self::$store);
+			if (is_callable('apcu_store')) {
+				apcu_store(self::$namespace, self::$store);
+			} else if (is_callable('apc_store')) {
+				apc_store(self::$namespace, self::$store);
+			}
 		}
 	}
 
