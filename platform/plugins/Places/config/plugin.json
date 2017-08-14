@@ -9,7 +9,7 @@
 			}
 		},
 		"routes": {
-			"plugins/Places/:action": {"module": "Places"}
+			"Q/plugins/Places/:action": {"module": "Places"}
 		},
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["Places/before/Q_responseExtras"]
@@ -38,7 +38,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Locations",
-					"icon": "{{baseUrl}}/plugins/Places/icons/locations"
+					"icon": "{{baseUrl}}/Q/plugins/Places/icons/locations"
 				}
 			},
 			"Places/location": {
@@ -50,7 +50,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
-					"icon": "{{baseUrl}}/plugins/Places/icons/location",
+					"icon": "{{baseUrl}}/Q/plugins/Places/icons/location",
 					"title": "Location"
 				},
 				"relatedFrom": {

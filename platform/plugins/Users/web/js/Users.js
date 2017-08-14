@@ -383,7 +383,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 	if (!Users.prompt.overlay) {
-		Q.addStylesheet(Q.url('plugins/Users/css/Users.css'));
+		Q.addStylesheet(Q.url('Q/plugins/Users/css/Users.css'));
 		var o = Q.extend({}, Users.prompt.options, options);
 		var title = Q.text.Users.prompt.title
 			.replace(/{\$platform}/g, platform)
@@ -869,7 +869,7 @@ Users.iconUrl = function Users_iconUrl(icon, size) {
 	var src = (icon + '/' + size).interpolate({
 		"baseUrl": Q.info.baseUrl
 	});
-	return src.isUrl() ? src : Q.url('plugins/Users/img/icons/'+src);
+	return src.isUrl() ? src : Q.url('Q/plugins/Users/img/icons/'+src);
 };
 
 function _constructUser (fields) {
@@ -1394,9 +1394,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 			placeholder = Q.text.Users.login.placeholders.mobile;
 		}
 	}
-
-	Q.addScript("plugins/Q/js/sha1.js");
-
+	Q.addScript("Q/plugins/Q/js/sha1.js");
 	var identifierInput = $('<input id="Users_login_identifier" autocomplete="email" type="'+type+'" class="text" />')
 	.attr('maxlength', Q.text.Users.login.maxlengths.identifier)
 	.attr('placeholder', placeholder)
@@ -1491,7 +1489,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 				++platformCount;
 				var facebookLogin = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 					$('<img alt="login with facebook" />')
-					.attr('src', Q.text.Users.login.facebookSrc || Q.url('plugins/Users/img/facebook-login.png'))
+					.attr('src', Q.text.Users.login.facebookSrc || Q.url('Q/plugins/Users/img/facebook-login.png'))
 				).css({'display': 'inline-block', 'vertical-align': 'middle'})
 				.click(function () {
 					Users.initFacebook(function() {
@@ -2145,14 +2143,14 @@ Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
 };
 
 Q.Tool.define({
-    "Users/avatar": "plugins/Users/js/tools/avatar.js",
-	"Users/list": "plugins/Users/js/tools/list.js",
-	"Users/pile": "plugins/Users/js/tools/pile.js",
-	"Users/labels": "plugins/Users/js/tools/labels.js",
-	"Users/status": "plugins/Users/js/tools/status.js",
-	"Users/friendSelector": "plugins/Users/js/tools/friendSelector.js",
-	"Users/getintouch": "plugins/Users/js/tools/getintouch.js",
-	"Users/sessions": "plugins/Users/js/tools/sessions.js"
+    "Users/avatar": "Q/plugins/Users/js/tools/avatar.js",
+	"Users/list": "Q/plugins/Users/js/tools/list.js",
+	"Users/pile": "Q/plugins/Users/js/tools/pile.js",
+	"Users/labels": "Q/plugins/Users/js/tools/labels.js",
+	"Users/status": "Q/plugins/Users/js/tools/status.js",
+	"Users/friendSelector": "Q/plugins/Users/js/tools/friendSelector.js",
+	"Users/getintouch": "Q/plugins/Users/js/tools/getintouch.js",
+	"Users/sessions": "Q/plugins/Users/js/tools/sessions.js"
 });
 
 Q.beforeInit.add(function _Users_beforeInit() {

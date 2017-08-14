@@ -102,6 +102,7 @@
 		},
 		"apps": {
 			"platforms": ["facebook", "ios", "android"],
+			"export": ["facebook"],
 			"facebook": {
 				"MyApp": {
 					"name": "FACEBOOK APP NAME HERE",

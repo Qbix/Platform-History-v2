@@ -46,6 +46,15 @@ Q.text.Streams = {
 
 	chat: {
 		noMessages: ""
+	},
+	
+	followup: {
+		mobile: {
+			title: 'Follow up'
+		},
+		email: {
+			title: 'Follow up'
+		}
 	}
 
 };
@@ -333,7 +342,7 @@ Streams.iconUrl = function(icon, size) {
 	var src = (icon + '/' + size).interpolate({
 		"baseUrl": Q.info.baseUrl
 	});
-	return src.isUrl() ? src : Q.url('plugins/Streams/img/icons/'+src);
+	return src.isUrl() ? src : Q.url('Q/plugins/Streams/img/icons/'+src);
 };
 
 var _socket = null;
@@ -535,30 +544,30 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 };
 
 Q.Tool.define({
-	"Users/avatar"         : "plugins/Streams/js/tools/avatar.js", // override for Users/avatar tool
-	"Streams/chat"         : "plugins/Streams/js/tools/chat.js",
-	"Streams/comments"     : "plugins/Streams/js/tools/comments.js",
-	"Streams/photoSelector": "plugins/Streams/js/tools/photoSelector.js",
-	"Streams/userChooser"  : "plugins/Streams/js/tools/userChooser.js",
-	"Streams/participants" : "plugins/Streams/js/tools/participants.js",
-	"Streams/basic"        : "plugins/Streams/js/tools/basic.js",
-	"Streams/access"       : "plugins/Streams/js/tools/access.js",
-	"Streams/subscription" : "plugins/Streams/js/tools/subscription.js",
-	"Streams/interests"    : "plugins/Streams/js/tools/interests.js",
-	"Streams/lookup"       : "plugins/Streams/js/tools/lookup.js",
-	"Streams/relate"       : "plugins/Streams/js/tools/relate.js",
-	"Streams/related"      : "plugins/Streams/js/tools/related.js",
-	"Streams/inplace"      : "plugins/Streams/js/tools/inplace.js",
-	"Streams/html"         : "plugins/Streams/js/tools/html.js",
-	"Streams/preview"  	   : "plugins/Streams/js/tools/preview.js",
-	"Streams/image/preview": "plugins/Streams/js/tools/image/preview.js",
-	"Streams/file/preview" : "plugins/Streams/js/tools/file/preview.js",
-	"Streams/category/preview" : "plugins/Streams/js/tools/category/preview.js",
-	"Streams/category"     : "plugins/Streams/js/tools/category.js",
-	"Streams/form"         : "plugins/Streams/js/tools/form.js",
-	"Streams/import"       : "plugins/Streams/js/tools/import.js",
-	"Streams/activity"     : "plugins/Streams/js/tools/activity.js",
-	"Streams/default/preview": "plugins/Streams/js/tools/default/preview.js",
+	"Users/avatar"         : "Q/plugins/Streams/js/tools/avatar.js", // override for Users/avatar tool
+	"Streams/chat"         : "Q/plugins/Streams/js/tools/chat.js",
+	"Streams/comments"     : "Q/plugins/Streams/js/tools/comments.js",
+	"Streams/photoSelector": "Q/plugins/Streams/js/tools/photoSelector.js",
+	"Streams/userChooser"  : "Q/plugins/Streams/js/tools/userChooser.js",
+	"Streams/participants" : "Q/plugins/Streams/js/tools/participants.js",
+	"Streams/basic"        : "Q/plugins/Streams/js/tools/basic.js",
+	"Streams/access"       : "Q/plugins/Streams/js/tools/access.js",
+	"Streams/subscription" : "Q/plugins/Streams/js/tools/subscription.js",
+	"Streams/interests"    : "Q/plugins/Streams/js/tools/interests.js",
+	"Streams/lookup"       : "Q/plugins/Streams/js/tools/lookup.js",
+	"Streams/relate"       : "Q/plugins/Streams/js/tools/relate.js",
+	"Streams/related"      : "Q/plugins/Streams/js/tools/related.js",
+	"Streams/inplace"      : "Q/plugins/Streams/js/tools/inplace.js",
+	"Streams/html"         : "Q/plugins/Streams/js/tools/html.js",
+	"Streams/preview"  	   : "Q/plugins/Streams/js/tools/preview.js",
+	"Streams/image/preview": "Q/plugins/Streams/js/tools/image/preview.js",
+	"Streams/file/preview" : "Q/plugins/Streams/js/tools/file/preview.js",
+	"Streams/category/preview" : "Q/plugins/Streams/js/tools/category/preview.js",
+	"Streams/category"     : "Q/plugins/Streams/js/tools/category.js",
+	"Streams/form"         : "Q/plugins/Streams/js/tools/form.js",
+	"Streams/import"       : "Q/plugins/Streams/js/tools/import.js",
+	"Streams/activity"     : "Q/plugins/Streams/js/tools/activity.js",
+	"Streams/default/preview": "Q/plugins/Streams/js/tools/default/preview.js",
 	"Streams/player": function () {
 		// does nothing
 	}
@@ -778,7 +787,7 @@ Streams.create = function (fields, callback, related, options) {
 	fields["Q.clientId"] = Q.clientId();
 	if (options.form) {
 		fields["file"] = {
-			path: 'uploads/Streams'
+			path: 'Q/uploads/Streams'
 		}
 	}
 	var _r = _retain;
@@ -1144,12 +1153,13 @@ Streams.release = function (key) {
  *   @param {String} [options.writeLevel] the write level to grant those who are invited
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
  *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
- *   @param {String} [options.callback] Also can be used to provide callbacks.
+ *   @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
  *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
  *   See Streams::invite on the PHP side for the possible return values.
+ *   This is called before the followup flow.
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
 Streams.invite = function (publisherId, streamName, options, callback) {
@@ -1213,37 +1223,17 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						break;
 				}
 			});
-			if (emailAddresses.length) {
-				Q.Template.render({
-					subject: 'Streams/followup/email/subject',
-					body: 'Streams/followup/email/body',
-					alert: 'Streams/followup/email/alert'
-				}, Q.info, function (params) {
-					var url = Q.Links.email(
-						params.subject[1], params.body[1], emailAddresses
-					);
-					if (params.alert[1]) {
-						alert(params.alert[1]);
-					}
-					window.location = url;
-				});
-			}
-			if (mobileNumbers.length) {
-				Q.Template.render({
-					text: 'Streams/followup/mobile',
-					alert: 'Streams/followup/mobile/alert'
-				}, Q.info, function (params) {
-					var url = Q.Links.sms(params.text[1], mobileNumbers);
-					if (params.alert[1]) {
-						alert(params.alert[1]);
-					}
-					window.location = url;
-				});
-			}
-			if (fb_uids.length) {
-				// maybe invite some facebook people somehow,
-				// such as via facebook messenger mass message
-			}
+			Streams.followup({
+				mobile: {
+					numbers: mobileNumbers
+				},
+				emails: {
+					addresses: emailAddresses
+				},
+				facebook: {
+					uids: fb_uids
+				}
+			}, callback);
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
 	if (o.identifier || o.token || o.uids || o.userIds || o.label) {
@@ -1263,6 +1253,94 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 
 Streams.invite.options = {
 	followup: "future"
+};
+
+/**
+ * @method followup
+ * @static
+ * @param {Object} options
+ * @param {String} [options.show="alert"] Can be "alert" or "confirm", or empty
+ * @param {Object} [options.mobile]
+ * @param {Array} [options.mobile.numbers] The list of phone numbers to send to
+ * @param {String} [options.mobile.text] Override template for sms body
+ * @param {String} [options.mobile.alert] Override template for alert
+ * @param {String} [options.mobile.confirm] Override template for confirmation dialog to continue
+ * @param {Object} [options.email]
+ * @param {Array} [options.email.addresses] The list of email addresses to send to
+ * @param {String} [options.email.subject] Override template for subject
+ * @param {String} [options.email.body] Override template for email body
+ * @param {String} [options.email.alert] Override template for alert
+ * @param {String} [options.email.confirm] Override template for confirmation dialog to continue
+ * @param {Object} options.facebook
+ * @param {Array} options.facebook.uids The facebook uids to send followup push notifications to messenger
+ */
+Streams.followup = function (options, callback) {
+	var o = Q.extend({}, Streams.followup.options, 10, options);
+	var e = o.email;
+	var m = o.mobile;
+	if (e && e.addresses && e.addresses.length) {
+		Q.Template.render({
+			subject: e.subject,
+			body: e.body,
+			alert: e.alert,
+			confirm: e.confirm
+		}, Q.info, function (params) {
+			if (o.show === 'alert' && params.alert[1]) {
+				Q.alert(params.alert[1], { onClose: _emails, title: e.title, apply: true });
+			} else if (o.show === 'confirm' && params.confirm[1]) {
+				Q.confirm(params.confirm[1], function (choice) {
+					choice && _emails();
+				}, { title: e.title });
+			} else {
+				_emails();
+			}
+			function _emails() {
+				var url = Q.Links.email(
+					params.subject[1], params.body[1], null, null, e.addresses
+				);
+				Q.handle(callback, Streams, [url, e.addresses, params]);
+				window.location = url;
+			}
+		});
+	} else if (m && m.numbers && m.numbers.length) {
+		Q.Template.render({
+			text: m.text,
+			alert: m.alert,
+			confirm: m.confirm
+		}, Q.info, function (params) {
+			if (o.show === 'alert' && params.alert[1]) {
+				Q.alert(params.alert[1], { onClose: _sms, title: m.title, apply: true });
+			} else if (o.show === 'confirm' && params.confirm[1]) {
+				Q.confirm(params.confirm[1], function (choice) {
+					choice && _sms();
+				}, { title: m.title });
+			} else {
+				_sms();
+			}
+			function _sms() {
+				var url = Q.Links.sms(params.text[1], m.numbers);
+				Q.handle(callback, Streams, [url, m.numbers, params]);
+				window.location = url;
+			}
+		});
+	}
+};
+
+Streams.followup.options = {
+	show: "alert",
+	email: {
+		subject: 'Streams/followup/email/subject',
+		body: 'Streams/followup/email/body',
+		alert: 'Streams/followup/email/alert',
+		title: Q.text.Streams.followup.email.title,
+		confirm: 'Streams/followup/email/confirm'
+	},
+	mobile: {
+		text: 'Streams/followup/mobile',
+		alert: 'Streams/followup/mobile/alert',
+		title: Q.text.Streams.followup.mobile.title,
+		confirm: 'Streams/followup/mobile/confirm'
+	}
 };
 
 /**
@@ -4359,7 +4437,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	var str = "_preview";
 	if (normalized.substr(normalized.length-str.length) === str) {
-		constructors[normalized] = "plugins/Streams/js/tools/default/preview.js";
+		constructors[normalized] = "Q/plugins/Streams/js/tools/default/preview.js";
 	}
 }, 'Streams');
 
@@ -5033,18 +5111,22 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 	}, options));
 }
 
-Q.Template.set('Streams/followup/mobile/alert', "The invite was sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
+Q.Template.set('Streams/followup/mobile/alert', "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
+
+Q.Template.set('Streams/followup/mobile/confirm', "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 
 Q.Template.set('Streams/followup/mobile', 
-	"Hey, I just sent you an invite with {{app}}. Please check your sms and click the link!"
+	"Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
 );
 
-Q.Template.set('Streams/followup/email/alert', "");
+Q.Template.set('Streams/followup/email/alert', "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
+
+Q.Template.set('Streams/followup/email/confirm', "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
 
 Q.Template.set('Streams/followup/email/subject', "Did you get an invite?");
 
 Q.Template.set('Streams/followup/email/body', 
-	"Hey, I just sent you an invite with {{app}}. Please check your email and click the link in there!"
+	"Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
 );
 
 _scheduleUpdate.delay = 5000;

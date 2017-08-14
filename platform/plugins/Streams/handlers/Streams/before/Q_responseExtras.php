@@ -2,7 +2,7 @@
 
 function Streams_before_Q_responseExtras()
 {
-	Q_Response::addScript('plugins/Streams/js/Streams.js');
+	Q_Response::addScript('Q/plugins/Streams/js/Streams.js');
 
 	$user = Users::loggedInUser();
 	if ($user) {
@@ -28,5 +28,5 @@ function Streams_before_Q_responseExtras()
 			Q_Response::setScriptData('Q.plugins.Streams.froala.key', $froalaKey);
 		}
 	}
-	Q_Response::addStylesheet("plugins/Streams/css/Streams.css");
+	Q_Response::addStylesheet("Q/plugins/Streams/css/Streams.css");
 }

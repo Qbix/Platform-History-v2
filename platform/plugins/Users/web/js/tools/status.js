@@ -184,7 +184,7 @@ Q.Tool.define("Users/status", function(options) {
 },
 
 {
-	'icon': 'plugins/Q/img/ui/qbix_icon' + (Q.info.isMobile ? '_small' : '') + '.png',
+	'icon': 'Q/plugins/Q/img/ui/qbix_icon' + (Q.info.isMobile ? '_small' : '') + '.png',
 	'label': 'log in',
 	'fullName': false,
 	'logoutIcon': null,

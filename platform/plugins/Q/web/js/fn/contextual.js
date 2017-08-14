@@ -101,6 +101,6 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 
 );
 
-Q.addStylesheet('plugins/Q/css/contextual.css');
+Q.addStylesheet('Q/plugins/Q/css/contextual.css');
 
 })(Q, jQuery, window, document);

@@ -828,7 +828,8 @@ class Q_Request
 	}
 	
 	/**
-	 * Used to find out what languages are accepted by the user agent
+	 * Used to find out what languages are accepted by the user agent,
+	 * by analyzing the Accepts-Language header. May also get locale information.
 	 * @method accepts
 	 * @static
 	 * @return {array} returns array of array("en", "US", 0.8) entries
@@ -865,6 +866,19 @@ class Q_Request
 			return array(array("en", "US", 1));
 		}
 		return $result;
+	}
+	
+	/**
+	 * Gets the locale of the user agent in the form "en_GB" etc.
+	 * @method locale
+	 * @static
+	 * @param {string} [$separator='_'] The separator to use
+	 * @return {string} The locale
+	 */
+	static function locale($separator = '_')
+	{
+		list($lang, $country, $preference) = self::languages();
+		return "$lang$separator$country";
 	}
 	
 	/**

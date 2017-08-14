@@ -67,6 +67,6 @@ Q.Tool.define("Assets/payment", function (options) {
 
 });
 
-Q.addStylesheet('plugins/Assets/css/Assets.css');
+Q.addStylesheet('Q/plugins/Assets/css/Assets.css');
 
 })(window, Q, jQuery);

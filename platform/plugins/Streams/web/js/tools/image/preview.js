@@ -54,7 +54,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 	}
 	ps.onRefresh.add(tool.refresh.bind(tool), tool);
 	ps.onComposer.add(function () {
-		var src = Q.url('plugins/Q/img/actions/add.png');
+		var src = Q.url('Q/plugins/Q/img/actions/add.png');
 		this.$('img.Streams_preview_add').attr('src', src);
 	}, tool);
 },

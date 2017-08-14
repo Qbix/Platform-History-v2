@@ -34,8 +34,8 @@ Q.Tool.define('Q/paging', function (options) {
 	index: null,
 	total: null,
 	pages: {
-		current: 'plugins/Q/img/paging/dot-white.png',
-		other: 'plugins/Q/img/paging/dot-gray.png'
+		current: 'Q/plugins/Q/img/paging/dot-white.png',
+		other: 'Q/plugins/Q/img/paging/dot-gray.png'
 	}
 }, 
 

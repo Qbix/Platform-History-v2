@@ -1,0 +1,6 @@
+CREATE TABLE {$prefix}task (
+  publisherId varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that publishes the stream',
+  streamName varbinary(255) NOT NULL COMMENT 'the name of the stream',
+  instructions longblob NULL COMMENT 'instructions for the task, encoded in binary, for workers to access',
+  PRIMARY KEY (publisherId, streamName)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';

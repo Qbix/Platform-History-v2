@@ -30,7 +30,7 @@
 							'value' => 'Get Started'
 						)
 					),
-					'onSuccess' => Q_Request::baseUrl()."/plugins/Streams/stream?publisherId={$stream->publisherId}&streamName={$stream->name}"
+					'onSuccess' => Q_Request::baseUrl()."/Q/plugins/Streams/stream?publisherId={$stream->publisherId}&streamName={$stream->name}"
 				), array('id' => 'Streams_Register'));
 			?>
 			</form>

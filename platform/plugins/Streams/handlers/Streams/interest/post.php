@@ -58,7 +58,7 @@ function Streams_interest_post()
 				ksort($sizes);
 				$params = array(
 					'data' => $data,
-					'path' => "plugins/Streams/img/icons",
+					'path' => "Q/plugins/Streams/img/icons",
 					'subpath' => $name,
 					'save' => $sizes,
 					'skipAccess' => true

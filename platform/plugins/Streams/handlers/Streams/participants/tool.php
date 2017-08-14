@@ -68,8 +68,8 @@ function Streams_participants_tool($options)
 	}
 	$participants = $stream->getParticipants(compact('limit', 'offset', 'state'));
 	
-	Q_Response::addScript('plugins/Streams/js/Streams.js');
-	Q_Response::addStylesheet('plugins/Streams/css/Streams.css');
+	Q_Response::addScript('Q/plugins/Streams/js/Streams.js');
+	Q_Response::addStylesheet('Q/plugins/Streams/css/Streams.css');
 	$options['rendered'] = true;
 	Q_Response::setToolOptions($options);
 	$stream->addPreloaded();
@@ -109,7 +109,7 @@ function Streams_participants_tool($options)
 	$count = "<span class='Streams_participants_count'>$c</span>";
 	$m = isset($options['max']) ? '/'.$options['max'] : '';
 	$max = "<span class='Streams_participants_max'>$m</span>";
-	$img = Q_Html::img('plugins/Q/img/expand.png', 'expand', array(
+	$img = Q_Html::img('Q/plugins/Q/img/expand.png', 'expand', array(
 		'class' => 'Streams_participants_expand_img'
 	));
 	$control = "<div class='Streams_participants_expand'>$img<span class='Streams_participants_expand_text'>See All</span></div>";

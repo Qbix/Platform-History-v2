@@ -29,10 +29,7 @@ MyApp/local/*
 MyApp/files/MyApp/uploads/*/*
 !MyApp/files/MyApp/uploads/Users/.dir
 !MyApp/files/MyApp/uploads/Streams/.dir
-MyApp/web/plugins/*
-SmartApp/local/*
-SmartApp/files/*
-SmartApp/web/plugins/*
+MyApp/web/Q/*
 !*.dir
 
 api/*
