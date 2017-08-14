@@ -82,6 +82,38 @@ class Q_Text
 	}
 
 	/**
+	 * Get sources for a view template merged from all the wildcards in the config
+	 * @method sources
+	 * @static
+	 * @param {array} $parts The parts of the view name, to use with Q/text config
+	 * @return {array} The merged array of names of sources to load
+	 */
+	static function sources($parts = array())
+	{
+		$count = count($parts);
+		$try = array();
+		for ($i=$count, $j=0; $i>=0; --$i) {
+			$try[$j] = $parts;
+			if ($i > 0) {
+				array_splice($try[$j], -$i, $i, '*');
+			}
+			++$j;
+		}
+		$result = array();
+		$count = count($try);
+		for ($j=0; $j<$count; ++$j) {
+			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
+			if ($sources = call_user_func_array(array('Q_Config', 'get'), $p)) {
+				if (Q::isAssociative($sources)) {
+					$sources = Q::ifset($sources, 'sources', array());
+				}
+				$result = array_merge($result, $sources);
+			}
+		}
+		return $result;
+	}
+
+	/**
 	 * Get parameters merged from all the text sources corresponding to a view template
 	 * @method params
 	 * @static
