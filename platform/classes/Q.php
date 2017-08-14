@@ -600,11 +600,8 @@ class Q
 		if ($fields) {
 			$params = array_merge($fields, $params);
 		}
-		
-		// load text
-		$p = array_merge(array('Q', 'text'), $parts);
-		$text = call_user_func_array(array('Q_Config', 'get'), $p);
-		$params = array_merge($params, Q_Text::get($text, true));
+
+		$params = array_merge($params, Q_Text::params($parts));
 
 		/**
 		 * @event {before} Q/view

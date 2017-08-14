@@ -901,7 +901,12 @@ class Q_Response
 			Q::includeFile($filename, $params, false);
 			$content = $ob->getClean();
 		} else {
-			$content = file_get_contents($filename);
+			$config = Q_Config::get('Q', 'templates', array());
+	        $content = Q::readFile($filename, Q::take($config, array(
+				'ignoreCache' => true,
+				'dontCache' => true,
+				'duration' => 3600
+			)));
 		}
 		if (!$content) {
 			throw new Q_Exception("Failed to load template '$name'");

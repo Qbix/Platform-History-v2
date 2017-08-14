@@ -1,16 +1,19 @@
 <p>
-	Greetings from <?php echo Q_Html::text($communityName) ?>.
+	<?php echo Q::text($Greetings, $communityName) ?>
 </p>
 
 <p>
-	Is this really your email address, <?php echo Q_Html::text($user->displayName()) ?>?
-	If so, click <?php echo Q_Html::a(
-		'Users/activate?code='.urlencode($email->activationCode)
-		 . ' emailAddress='.urlencode($email->address),
-		'here'
-	) ?> to attach it to your account.
+	<?php echo Q::interpolate($activation['ReallyYourEmail'], 
+		array($user->displayName(), $link)
+	) ?>
 </p>
 
 <p>
-	See you on <a href="<?php echo Q_Request::baseUrl() ?>"><?php echo Q_Html::text($communityName) ?></a>!
+	<?php echo Q::text($activation['SeeYou'],
+		array(Q_Request::baseUrl(), $communityName)
+	) ?>
+</p>
+
+<p style="margin-top: 100px;">
+	<?php echo Q::text($LinkToUnsubscribe, array($unsubscribe)) ?>
 </p>
