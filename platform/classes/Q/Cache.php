@@ -14,8 +14,9 @@ class Q_Cache
 	 * @static
 	 */
 	static function init() {
-		Q_Cache::$namespace = "Q_Cache\t".(defined('APP_DIR') ? APP_DIR : '')."\t";
+		Q_Cache::$namespace = "Q_Cache\t".(defined('APP_DIR') ? APP_DIR : '');
 		self::$apc = extension_loaded('apc');
+		self::$apcu = extension_loaded('apcu');
 	}
 	
 	/**
@@ -25,7 +26,7 @@ class Q_Cache
 	 * @return {boolean} Whether cache is currently connected
 	 */
 	static function connected() {
-		return self::$apc;
+		return self::$apc or self::$apcu;
 	}
 	
 	/**
@@ -48,13 +49,17 @@ class Q_Cache
 	 * @static
 	 * @param {string} $key The key of cache entry
 	 * @param {mixed} $value The value to set in cache
+	 * @param {string} [$namespace=self::$namespace] The namespace to use
 	 * @return {boolean} Whether cache was fetched (if not, it will attempt to be saved at script shutdown)
 	 */
-	static function set($key, $value) {
-		$loaded = self::fetchStore();
-		self::$store[$key] = $value;
-		self::$changed = true; // it will be saved at shutdown
-		return $loaded;
+	static function set($key, $value, $namespace = null) {
+		if (!isset($namespace)) {
+			$namespace = self::$namespace;
+		}
+		$store = self::fetchStore($namespace, $fetched);
+		$store[$key] = $value;
+		self::$changed[$namespace] = true; // it will be saved at shutdown
+		return $fetched;
 	}
 
 	/**
@@ -62,15 +67,19 @@ class Q_Cache
 	 * @method exists
 	 * @static
 	 * @param {string} $key The key of cache entry
+	 * @param {string} [$namespace=self::$namespace] The namespace to use
 	 * @return {boolean} Whether it exists
 	 */
-	static function exists($key)
+	static function exists($key, $namespace = null)
 	{
+		if (!isset($namespace)) {
+			$namespace = self::$namespace;
+		}
 		if (self::$ignore) {
 			return false;
 		}
-		self::fetchStore();
-		return array_key_exists($key, self::$store);
+		$store = self::fetchStore($namespace);
+		return array_key_exists($key, $store);
 	}
 
 	/**
@@ -78,21 +87,24 @@ class Q_Cache
 	 * @method get
 	 * @static
 	 * @param {string} $key The key of cache entry
-	 * @param {mixed} [$default=null]
+	 * @param {mixed} [$default=null] In case the entry isn't there
+	 * @param {string} [$namespace=self::$namespace] The namespace to use
 	 * @return {mixed} The value of Q_Cache entry, or null on failure
 	 */
-	static function get($key, $default = null)
+	static function get($key, $default = null, $namespace = null)
 	{
+		if (!isset($namespace)) {
+			$namespace = self::$namespace;
+		}
 		$success = false;
 		if (self::$ignore) {
 			return $default;
 		}
-		self::fetchStore();
-		if (!array_key_exists($key, self::$store)) {
+		$store = self::fetchStore($namespace);
+		if (!array_key_exists($key, $store)) {
 			return $default; // no such $key is stored in cache
 		}
-		$success = true;
-		return self::$store[$key];
+		return $store[$key];
 	}
 
 	/**
@@ -102,14 +114,18 @@ class Q_Cache
 	 * @param {string|true} $key The key of cache entry. Skip this to clear all the keys.
 	 *   Pass true to also clear the user files cache.
 	 * @param {boolean} [$prefix=false] Whether to clear all keys for which $key is a prefix
+	 * @param {string} [$namespace=self::$namespace] The namespace to use
 	 * @return {boolean} Whether an apc cache was fetched.
 	 */
-	static function clear($key, $prefix = false)
+	static function clear($key, $prefix = false, $namespace = null)
 	{
-		$fetched = self::fetchStore();
+		if (!isset($namespace)) {
+			$namespace = self::$namespace;
+		}
+		$store = self::fetchStore($namespace, $fetched);
 		if (!isset($key) or $key === true) {
-			self::$store = array();
-			self::$changed = true; // it will be saved at shutdown
+			$store = array();
+			self::$changed[$namespace] = true; // it will be saved at shutdown
 			if ($key === true) {
 				if (is_callable('apcu_clear_cache')) {
 					apcu_clear_cache();
@@ -117,51 +133,68 @@ class Q_Cache
 					apc_clear_cache('user');
 				}
 			}
-			return $fetched;
+			return $store;
 		}
-		if (array_key_exists($key, self::$store)) {
+		if (array_key_exists($key, $store)) {
 			if ($prefix) {
 				$len = strlen($key);
-				foreach (self::$store as $k => $v) {
+				foreach ($store as $k => $v) {
 					if (substr($k, 0, $len) === $key) {
-						unset(self::$store[$k]);
+						unset($store[$namespace][$k]);
 					}
 				}
 			} else {
-				unset(self::$store[$key]);
+				unset($store[$key]);
 			}
-			self::$changed = true; // it will be saved at shutdown
+			self::$changed[$namespace] = true; // it will be saved at shutdown
 		}
 		return $fetched;
 	}
 
 	/**
 	 * Fetches the cache store from APC.
-	 * In either case, prepares `self::$store` to be used as an array.
+	 * In either case, prepares self::$store[$namespace] to be used as an array.
 	 * @method fetchStore
 	 * @protected
 	 * @static
-	 * @return {boolean} Whether the cache store was fetched.
+	 * @param {string} [$namespace=self::$namespace] The namespace to use
+	 * @param {boolean} [$fetched] If passed, this is filled with whether the store was fetched
+	 * @return {array} A reference to the cache store, or to an empty array if nothing was fetched
 	 */
-	protected static function fetchStore()
+	protected static function &fetchStore($namespace = null, &$fetched = null)
 	{
-		static $fetched = null;
-		if (isset($fetched)) {
-			return $fetched; // return previous result
+		if (!isset($namespace)) {
+			$namespace = self::$namespace;
 		}
-		if (!self::$apc) {
+		$namespace = "Q_Cache\t".$namespace;
+		if (!self::$apc and !self::$apcu) {
 			$fetched = false;
-			self::$store = array();
-			return false;
+			self::$store[$namespace] = array();
 		} else {
 			if (is_callable('apcu_fetch')) {
-				$store = apcu_fetch(self::$namespace, $fetched);
+				$store = apcu_fetch($namespace, $fetched);
 			} else {
-				$store = apc_fetch(self::$namespace, $fetched);
+				$store = apc_fetch($namespace, $fetched);
 			}
-            self::$store = $fetched ? $store : array();
-            return $fetched;
+            self::$store[$namespace] = $fetched ? $store : array();
         }
+		return self::$store[$namespace];
+	}
+
+	/**
+	 * Set the duration for a given cache store. The default is in Q/cache/duration config.
+	 * @method setDuration
+	 * @protected
+	 * @static
+	 * @param {integer} $duration The number of seconds to until the cache store under this namespace expires
+	 * @param {string} [$namespace=self::$namespace] The namespace to use
+	 */
+	public static function setDuration($duration, $namespace = null)
+	{
+		if (!isset($namespace)) {
+			$namespace = self::$namespace;
+		}
+		self::$durations[$namespace] = $duration;
 	}
 	
 	/**
@@ -170,12 +203,18 @@ class Q_Cache
 	 */
 	static function shutdownFunction()
 	{
-		if (self::$changed and self::$apc) {
-			self::set("Q_Config\tupdateTime", time());
+		if (!self::$apc and !self::$apcu) {
+			return;
+		}
+		foreach (self::$changed as $namespace => $changed) {
+			$namespace = "Q_Cache\t".$namespace;
+			self::set("Q_Cache\tupdateTime", time());
+			$duration = Q_Config::get('Q', 'cache', 'duration', 0);
+			$duration = Q::ifset(self::$durations, $namespace, $duration);
 			if (is_callable('apcu_store')) {
-				apcu_store(self::$namespace, self::$store);
+				apcu_store($namespace, self::$store[$namespace], $duration);
 			} else if (is_callable('apc_store')) {
-				apc_store(self::$namespace, self::$store);
+				apc_store($namespace, self::$store[$namespace], $duration);
 			}
 		}
 	}
@@ -195,9 +234,15 @@ class Q_Cache
 	/**
 	 * @property $changed
 	 * @protected
-	 * @type boolean
+	 * @type array
 	 */
 	protected static $changed = false;
+	/**
+	 * @property $durations
+	 * @protected
+	 * @type array
+	 */
+	protected static $durations = false;
 	/**
 	 * @property $namespace
 	 * @protected
@@ -210,6 +255,12 @@ class Q_Cache
 	 * @type boolean
 	 */
 	protected static $apc;
+	/**
+	 * @property $apcu
+	 * @protected
+	 * @type boolean
+	 */
+	protected static $apcu;
 }
 
 Q_Cache::init();

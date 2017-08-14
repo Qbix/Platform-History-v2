@@ -121,7 +121,12 @@ class Handlebars_Loader_FilesystemLoader implements Handlebars_Loader
             throw new InvalidArgumentException('Handlebars_Template ' . $name . ' not found.');
         }
 
-        return file_get_contents($fileName);
+		$config = Q_Config::get('Q', 'templates', array());
+        return Q::readFile($fileName, Q::take($config, array(
+			'ignoreCache' => true,
+			'dontCache' => true,
+			'duration' => 3600
+		)));
     }
 
     /**
