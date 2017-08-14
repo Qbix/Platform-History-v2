@@ -89,7 +89,10 @@ EOT;
 				throw $e; // if forwarding was requested, do it
 				// for all other errors, continue trying other things
 			}
-			$output = $ob->getClean();
+
+			if(is_object($ob)){
+				$output = $ob->getClean();
+			}
 		}
 	}
 	if ($errors) {
