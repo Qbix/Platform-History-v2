@@ -41,7 +41,7 @@ class Q_Handlebars {
 					APP_FILES_DIR.DS.'Q'.DS.'cache'.DS.'handlebars'
 	            ),
 				'loader' => new Q_Handlebars_Loader(),
-				'partials_loader' => new Q_Handlebars_Loader('partials'),
+				'partials_loader' => new Q_Handlebars_Loader(),
 				'escape' => function($value) {
 					return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
 				}
@@ -51,6 +51,7 @@ class Q_Handlebars {
 			self::$handlebars->addHelper('idPrefix', array('Q_Handlebars', 'helperIdPrefix'));
 			self::$handlebars->addHelper('toUrl', array('Q_Handlebars', 'helperToUrl'));
 			self::$handlebars->addHelper('toCapitalized', array('Q_Handlebars', 'helperToCapitalized'));
+			self::$handlebars->addHelper('interpolate', array('Q_Handlebars', 'helperInterpolate'));
 		}
 		return self::$handlebars;
 	}
@@ -167,6 +168,16 @@ class Q_Handlebars {
 	{
 		$args = self::parseArgs($template, $context, $args);
 		return isset($args[0]) ? ucfirst($args[0]) : '';
+	}
+	
+	static function helperInterpolate($template, $context, $args, $source)
+	{
+		$args = self::parseArgs($template, $context, $args);
+		$expression = array_shift($args);
+		if (!$expression) {
+			return '';
+		}
+		return Q::interpolate($expression, $args);
 	}
 
 	private static $handlebars = null;

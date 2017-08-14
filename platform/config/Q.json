@@ -13,6 +13,9 @@
 		"routes": {
 			"": {"module": "Q", "action": "welcome"}
 		},
+		"cache": {
+			"duration": 0
+		},
 		"exception": {
 			"showTrace": false,
 			"showFileAndLine": false,
@@ -130,6 +133,23 @@
 					"js/ckeditor", "js/froala", "img/bookmarklet"
 				]
 			}
+		},
+		"text": {
+			"*": {
+				"ignoreCache": true,
+				"dontCache": true,
+				"duration": 3600
+			}
+		},
+		"templates": {
+			"ignoreCache": true,
+			"dontCache": true,
+			"duration": 3600
+		},
+		"tree": {
+			"ignoreCache": false,
+			"dontCache": false,
+			"duration": 3600
 		}
 	},
 	"Db": {
