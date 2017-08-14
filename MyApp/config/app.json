@@ -73,6 +73,25 @@
 					"js/MyApp.js": "all.js"
 				}
 			}
+		},
+		"text": {
+			"MyApp": {
+				"content": {
+					"*": ["MyApp/main"]
+				},
+				"email": {
+					"*": ["MyApp/email"]
+				},
+				"sms": {
+					"*": ["MyApp/sms"]
+				},
+				"dialogs": {
+					"*": ["MyApp/dialogs"]
+				},
+				"invitations": {
+					"*": ["MyApp/invitations"]
+				}
+			}
 		}
 	},
 	"Users": {

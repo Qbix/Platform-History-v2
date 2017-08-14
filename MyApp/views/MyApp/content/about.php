@@ -1,5 +1,9 @@
 <div id='content'>
-	<h1>About <?php echo Users::communityName() ?></h1>
-	Here you can write something about this app or website.<br>
-	Or if you want, you can remove this page.
+	<h1>
+		<?php echo Q::text($about['About'], array(
+			Users::communityName()
+		)) ?>
+	</h1>
+	<?php echo Q::text($about['CanWrite']) ?><br>
+	<?php echo Q::text($about['OrRemove']) ?>
 </div>
