@@ -92,7 +92,9 @@
 			}
 		},
 		"currencies": {
-			"ttl": 3600
+			"ignoreCache": false,
+			"dontCache": false,
+			"duration": 3600
 		},
 		"reasons": {
 			"Assets/purchased": {
