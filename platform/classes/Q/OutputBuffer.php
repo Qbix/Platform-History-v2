@@ -13,6 +13,7 @@ class Q_OutputBuffer
 	 * @class Q_OutputBuffer
 	 * @constructor
 	 * @param {string} [$handler=null] The output handler, such as 'ob_gzhandler'.
+	 * @param {string} [$locale=null] Can be used to change the locale for a while, e.g. "en_GB"
 	 * @param {boolean} [$throw_on_failure=false] If true, and throws an exception if failed
 	 *  to create output buffer with this handler.
 	 *  Otherwise, silently creates a "normal" output buffer.
@@ -20,6 +21,7 @@ class Q_OutputBuffer
 	 */
 	function __construct(
 	 $handler = null, 
+	 $locale = null,
 	 $throw_on_failure = false)
 	{
 		if (empty($handler) or !is_string($handler)) {
@@ -37,6 +39,7 @@ class Q_OutputBuffer
 		}
 		$status = ob_get_status(false);
 		$this->level = $status['level']; // nesting level of current buffer
+		$this->pushLocale($locale);
 	}
 	
 	/**
@@ -49,6 +52,7 @@ class Q_OutputBuffer
 	function getClean()
 	{
 		$this->flushHigherBuffers();
+		$this->popLocale();
 		return ob_get_clean();
 	}
 	
@@ -61,6 +65,7 @@ class Q_OutputBuffer
 	function endFlush()
 	{
 		$this->flushHigherBuffers();
+		$this->popLocale();
 		return @ob_end_flush();
 	}
 	
@@ -87,10 +92,41 @@ class Q_OutputBuffer
 			@ob_end_flush();
 		}
 	}
+	
+	protected pushLocale($locale)
+	{
+		if ($locale) {
+			self::$lastLocale = self::$locales[$this->level] = $locale;
+			setlocale($locale);
+		} else {
+			if (!self::$lastLocale) {
+				self::$lastLocale = Q_Request::locale();
+			}
+			self::$locales[$this->level] = self::$lastLocale;
+		}
+	}
+	
+	protected popLocale()
+	{
+		$locales = array();
+		foreach ($i=0; $i<$this->level; ++$i) {
+			if (isset(self::$locales[$i])) {
+				$locales = self::$locales[$i];
+			}
+		}
+		self::$locales = $locales;
+	}
 
 	/**
 	 * @property $level
 	 * @type integer
 	 */
-	public $level;	
+	public $level;
+	
+	/**
+	 * @property $locales
+	 * @static
+	 * @type array
+	 */
+	public $locales = array();
 }

@@ -44,10 +44,12 @@ if (!defined('Q_PLUGINS_DIR'))
 	define('Q_PLUGINS_DIR', Q_DIR.DS.'plugins');
 if (!defined('Q_SCRIPTS_DIR'))
 	define('Q_SCRIPTS_DIR', Q_DIR.DS.'scripts');
-if (!defined('Q_TESTS_DIR'))
-	define('Q_TESTS_DIR', Q_DIR.DS.'tests');	
+if (!defined('Q_TEXT_DIR'))
+	define('Q_TEXT_DIR', Q_DIR.DS.'text');	
 if (!defined('Q_VIEWS_DIR'))
 	define('Q_VIEWS_DIR', Q_DIR.DS.'views');
+if (!defined('Q_TESTS_DIR'))
+	define('Q_TESTS_DIR', Q_DIR.DS.'tests');	
 
 if (defined('APP_DIR')) {
 	if (!defined('APP_CONFIG_DIR'))
@@ -68,8 +70,12 @@ if (defined('APP_DIR')) {
 		define('APP_TESTS_DIR', APP_DIR.DS.'tests');
 	if (!defined('APP_VIEWS_DIR'))
 		define('APP_VIEWS_DIR', APP_DIR.DS.'views');
+	if (!defined('APP_TEXT_DIR'))
+		define('APP_TEXT_DIR', APP_DIR.DS.'text');
 	if (!defined('APP_WEB_DIR'))
 		define('APP_WEB_DIR', APP_DIR.DS.'web');
+	if (!defined('APP_TESTS_DIR'))
+		define('APP_TESTS_DIR', APP_DIR.DS.'tests');
 }
 
 // For backwards compatibility

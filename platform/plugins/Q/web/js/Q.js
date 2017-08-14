@@ -26,9 +26,9 @@ function Q () {
 
 // external libraries, which you can override
 Q.libraries = {
-	json: "http://cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
-	handlebars: 'Q/plugins/Q/js/handlebars-v4.0.5.js',
-	jQuery: 'https://code.jquery.com/jquery-1.11.3.min.js'
+	json: "Q/plugins/Q/js/json3-3.2.4.min.js",
+	handlebars: 'Q/plugins/Q/js/handlebars-v4.0.10.min.js',
+	jQuery: 'Q/plugins/Q/js/jquery-3.2.1.min.js'
 };
 
 /**
@@ -5632,7 +5632,7 @@ Q.loadHandlebars = function _Q_loadHandlebars(callback) {
 	Q.onInit.addOnce(function () {
 		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
 			_addHandlebarsHelpers();
-			callback();
+			Q.handle(callback);
 		});
 	});
 };
@@ -8433,6 +8433,7 @@ Q.Template = function () {
 };
 
 Q.Template.collection = {};
+Q.Template.info = {};
 
 
 /**
@@ -8443,15 +8444,25 @@ Q.Template.collection = {};
  * @method set
  * @param {String} name The template's name under which it will be found
  * @param {String} content The content of the template that will be processed by the template engine
- * @param {String} type The type of template. Defaults to "handlebars"
+ * @param {Object|String} info You can also pass a string "type" here.
+ * @param {String} [info.type="handlebars"] The type of template.
+ * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
+ * @param {Array} [info.partials] Relative urls of .js scripts for registering partials.
+ *   Can also be names of templates for partials (in which case they shouldn't end in .js)
+ * @param {Array} [info.helpers] Relative urls of .js scripts for registering helpers
  */
-Q.Template.set = function (name, content, type) {
-	type = type || 'handlebars';
-	Q.Template.remove(name);
-	Q.Template.collection[Q.normalize(name)] = content;
-	Q.loadHandlebars(function () {
-		Q.Template.compile(content);
-	});
+Q.Template.set = function (name, content, info) {
+	var T = Q.Template;
+	T.remove(name);
+	var n = Q.normalize(name);
+	T.collection[n] = content;
+	if (typeof info === 'string') {
+		info = { type: info };
+	}
+	info = info || {};
+	info.type = info.type || 'handlebars';
+	T.info[n] = info;
+	Q.loadHandlebars();
 };
 
 /**
@@ -8476,14 +8487,21 @@ Q.Template.remove = function (name) {
  * @static
  * @method compile
  * @param {String} content The content of the template
+ * @param {String} [type="handlebars"] The type of the template
  * @return {Function} a function that can be called to render the template
  */
-Q.Template.compile = function _Q_Template_compile (content) {
+Q.Template.compile = function _Q_Template_compile (content, type) {
+	if (type !== 'handlebars') {
+		throw new Q.Error("Q.Template.compile: only supports Handlebars for now");
+	}
 	var r = Q.Template.compile.results;
 	if (!r[content]) {
-		r[content] = Handlebars.compile(content);
+		r[content] = Handlebars.compile(content, Q.Template.compile.options);
 	}
 	return r[content];
+};
+Q.Template.compile.options = {
+	preventIndent: true
 };
 Q.Template.compile.results = {};
 
@@ -8588,24 +8606,18 @@ Q.Template.onError = new Q.Event(function (err) {
  *   You can also pass an object of {key: name}, and then the callback receives
  *   {key: arguments} of what the callback would get.
  * @param {Object} fields The fields to pass to the template when rendering it
- * @param {Array} [partials] Names of partials to load and use for rendering the template
  * @param {Function} [callback] a callback - receives (error) or (error, html)
- * @param {Object} [options={}] Options.
+ * @param {Object} [options={}] Options for the template engine compiler. Also can include:
  * @param {String} [options.type='handlebars'] the type and extension of the template
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
  * @param {String} [options.tool] if the rendered html will be placed inside a tool, pass it here so that its prefix will be used
  */
-Q.Template.render = function _Q_Template_render(name, fields, partials, callback, options) {
+Q.Template.render = function _Q_Template_render(name, fields, callback, options) {
 	if (typeof fields === "function") {
-		options = partials;
-		callback = fields;
-		partials = undefined;
-		fields = {};
-	} else if (typeof partials === "function") {
 		options = callback;
-		callback = partials;
-		partials = undefined;
+		callback = fields;
+		fields = {};
 	}
 	if (!callback) {
 		throw new Q.Error("Q.Template.render: callback is missing");
@@ -8616,25 +8628,31 @@ Q.Template.render = function _Q_Template_render(name, fields, partials, callback
 		var p = Q.pipe(isArray ? names : Object.keys(names), callback);
 		return Q.each(names, function (key, name) {
 			Q.Template.render(
-				name, fields, partials, p.fill(isArray ? name : key), options
+				name, fields, p.fill(isArray ? name : key), options
 			);
 		});
 	}
 	var tba = (options && options.tool) || Q.Tool.beingActivated;
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
-		// load the template and partials
-		var p = Q.pipe(['template', 'partials'], function (params) {
+		// load the template and its associated info
+		var n = Q.normalize(name);
+		var info = Q.Template.info[n];
+		var p = Q.pipe(['template', 'partials', 'helpers', 'text'], function (params) {
 			if (params.template[0]) {
 				return callback(params.template[0]);
+			}
+			// the partials, helpers and text should have already been processed
+			if (params.text[1]) {
+				Q.extend(fields, 10, params.text[1]);
 			}
 			var tbaOld = Q.Tool.beingActivated;
 			var pbaOld = Q.Page.beingActivated;
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
 			try {
-				var compiled = Q.Template.compile(params.template[1]);
-				callback(null, compiled(fields, {partials: params.partials[0]}));
+				var compiled = Q.Template.compile(params.template[1], info.type);
+				callback(null, compiled(fields, options));
 			} catch (e) {
 				console.warn(e);
 			}
@@ -8643,24 +8661,148 @@ Q.Template.render = function _Q_Template_render(name, fields, partials, callback
 		});
 		var o = Q.copy(options, ['type', 'dir', 'name']);
 		Q.Template.load(name, p.fill('template'), o);
-		// pipe for partials
-		if (partials && partials.length) {
-			var pp = Q.pipe(partials, function (params) {
-				var i, partial, part = {};
-				for (i=0; i<partials.length; i++) {
-					partial = partials[i];
-					part[partial] = params[partial][0] ? null : params[partial][1];
-				}
-				p.fill('partials')(part);
-			});
-			for (var i=0; i<partials.length; i++) {
-				Q.Template.load(partials[i], pp.fill(partials[i]), options);
+		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
+			var ia = info[aspect];
+			if (typeof ia === 'string') {
+				ia = [ia];
 			}
-		} else {
-			p.fill('partials')();
-		}
+			if (Q.isEmpty(ia)) {
+				p.fill(aspect)();
+			} else if (aspect === 'text') {
+				Q.Text.get(ia, p.fill(aspect));
+			} else if (aspect === 'partials') {
+				var p2 = Q.pipe(ia, function (params) {
+					var result = {};
+					var errors = null;
+					try {
+						Q.each(ia, function (i, pname) {
+							var r = result[pname] = params[pname][1];
+							Handlebars.registerPartial(pname, r);
+						});
+						p.fill(aspect)([null, result]);
+					} catch (e) {
+						e.params = params;
+						p.fill(aspect)([e]);
+					}
+				});
+				Q.each(ia, function (i, pname) {
+					if (pname.split('.').pop() === 'js') {
+						Q.addScript(pname, p2.fill(pname));
+						waitFor.push(pname);
+					} else {
+						Q.Template.load(pname, p2.fill(pname));
+					}
+				});
+			} else {
+				Q.addScript(ia, p.fill(aspect));
+			}
+		});
 	});
 };
+
+/**
+ * Module for text translations
+ * @class Q.Text
+ * @constructor
+ */
+Q.Text = function () {
+
+};
+
+Q.Text.collection = {};
+Q.Text.info = {};
+Q.Text.language = 'en';
+Q.Text.locale = 'US';
+Q.Text.dir = 'Q/text';
+
+/**
+ * Sets the language and locale to use in Q.Text.get calls.
+ * When Q is initialized, it is set by default from Q.first(Q.info.languages)
+ * @static
+ * @method set
+ * @param {String} lang Something like "en"
+ * @param {String} locale Something like "US", but can also be blank if unknown
+ */
+Q.Text.setLanguage = function (lang, locale) {
+	Q.Text.language = lang.toLowerCase();
+	Q.Text.locale = locale && locale.toUpperCase();
+};
+
+/**
+ * Sets the text for a specific text source.
+ * @static
+ * @method set
+ * @param {String} name The name of the text source
+ * @param {Object} content The content, a hierarchical object whose leaves are
+ *  the actual text translated into the current language in Q.Text.language
+ * @param {Boolean} [merges=false] If true, merges on top instead of replacing
+ */
+Q.Text.set = function (name, content, merge) {
+	var language = Q.Text.language;
+	var locale = Q.Text.locale;
+	var suffix = locale ? '-' + locale : '';
+	var url = Q.Text.dir + '/' + name + '/' + language + suffix + '.json';
+	Q.setObject([language, locale, name], content, Q.Text.collection);
+};
+
+/**
+ * Sets the text for a specific text source.
+ * @static
+ * @method set
+ * @param {String} name The name of the text source
+ * @param {Function} callback Receives (err, content), may be called sync or async
+ * @param {Object} options Options to use for Q.request . May also include:
+ * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
+ * @param {Boolean} [options.merge=false] If true, merges on top instead of replacing
+ * @return {Boolean|Q.Request} Returns true if content was already loaded,
+ *   otherwise calls the result of Q.request
+ */
+Q.Text.get = function (name, callback, options) {
+	var language = Q.Text.language;
+	var locale = Q.Text.locale;
+	var dir = Q.Text.dir;
+	var suffix = locale ? '-' + locale : '';
+	var content = Q.getObject([language, locale, name], Q.Text.collection);
+	if (content) {
+		Q.handle(callback, Q.Text, [null, content]);
+		return true;
+	}
+	var names = Q.isArrayLike(name) ? name : [name];
+	var pipe = Q.pipe(names, function (params, subjects) {
+		var result = {};
+		var errors = null;
+		for (var i=0, l=names.length; i<l; ++i) {
+			var name = names[i];
+			if (params[name][0]) {
+				errors = errors || {};
+				errors[name] = params[name][0];
+			} else if (params[name][1]) {
+				Q.extend(result, 10, params[name][1]);
+			}
+		}
+		Q.handle(callback, Q.Text, [errors, result]);
+	});
+	Q.each(names, function (i, name) {
+		var func = _Q_Text_getter;
+		if (options && options.ignoreCache) {
+			func = func.force;
+		}
+		var url = dir + '/' + name + '/' + language + suffix + '.json';
+		return func(name, url, pipe.fill(name), options);
+	});
+};
+
+var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
+	return Q.request(url, function (err, content) {
+		if (!err) {
+			Q.Text.set(name, content, options);
+		}
+		Q.handle(callback, Q.Text, [err, content]);
+	}, options);
+}, {
+	cache: Q.Cache.document('Q.Text.get', 100),
+	throttle: 'Q.Text.get'
+});
 
 var _qsockets = {}, _eventHandlers = {}, _connectHandlers = {}, _ioCleanup = [];
 var _socketRegister = [];
@@ -11503,7 +11645,8 @@ Q.onInit.add(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
 	}, 'Q.Socket');
-
+	var info = Q.first(Q.info.languages) || ['en', 'US', 1];
+	Q.Text.setLanguage(info[0], info[1]);
 }, 'Q');
 
 Q.onJQuery.add(function ($) {

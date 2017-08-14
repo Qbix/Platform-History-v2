@@ -15,6 +15,71 @@ require __DIR__ . '/Composer/vendor/autoload.php';
 abstract class Assets extends Base_Assets
 {
 	/**
+	 * Get the official currency name (e.g. "US Dollar") and symbol (e.g. $)
+	 * @method currency
+	 * @static
+	 * @param {string} $code The three-letter currency code
+	 * @return {array} Returns an array of ($currencyName, $symbol)
+	 * @throws Q_Exception_BadValue
+	 */
+	function currency($code)
+	{
+		static $json = null;
+		if (!isset($json)) {
+			$json = file_get_contents(ASSETS_PLUGIN_CONFIG_DIR.DS.'currencies.json');
+		}
+		$code = strtoupper($code);
+		$currencies = Q::json_decode($json, true);
+		if (!isset($currencies['symbols'][$code])) {
+			throw new Q_Exception_BadValue(array(
+				'internal' => 'currency', 
+				'problem' => "no symbol found for $code"
+			), 'currency');
+		}
+		if (!isset($currencies['names'][$code])) {
+			throw new Q_Exception_BadValue(array(
+				'internal' => 'currency', 
+				'problem' => "no name found for $code"
+			), 'currency');
+		}
+		$symbol = $currencies['symbols'][$code];
+		$currencyName = $currencies['names'][$code];
+		return array($currencyName, $symbol);
+	}
+	
+	/**
+	 * Get the official currency name (e.g. "US Dollar") and symbol (e.g. $)
+	 * @method display
+	 * @static
+	 * @param {string} $code The three-letter currency code
+	 * @param {double} $amount The amount of money in that currency
+	 * @return {string} The display, in the current locale
+	 */
+	function display($code, $amount)
+	{
+		list($currencyName, $symbol) = self::currency($code);
+		return "$code$amount"; // TODO: make it fit the locale better
+	}
+	
+	/**
+	 * Get the official currency name (e.g. "US Dollar") and symbol (e.g. $)
+	 * @method display
+	 * @static
+	 * @param {string} $format The format to pass to money_format
+	 * @param {double} $amount The amount of money in the currency of that locale
+	 * @param {string} [$locale] Can be used to override the locale
+	 * @return {string} The display, in the current locale
+	 */
+	function formatted($format = "%=(n", $amount, $locale = null)
+	{
+		if (is_callable('money_format')) {
+			$ob = new Q_OutputBuffer(null, $locale);
+			echo money_format($format, $amount);
+			return $ob->getClean();
+		}
+	}
+	
+	/**
 	 * Makes a one-time charge on a customer account using a payments processor
 	 * @method charge
 	 * @static
