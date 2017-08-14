@@ -2,7 +2,7 @@
 	
 function Assets_after_Assets_charge($params)
 {
-	$user = $payments = $amount = $currency = $charge = $adapter = $options = null;
+	$user = $payments = $amount = $currency = $charge = $adapter = $options = $format = null;
 	extract($params, EXTR_OVERWRITE);
 
 	$description = 'a product or service';
@@ -29,15 +29,8 @@ function Assets_after_Assets_charge($params)
 	if (isset($options['description'])) {
 		$description = $options['description'];
 	}
-	$currencies = Q::json_decode(file_get_contents(ASSETS_PLUGIN_CONFIG_DIR.DS.'currencies.json'), true);
-	if (!isset($currencies['symbols'][$currency])) {
-		throw new Q_Exception_BadValue(array('internal' => 'currency', 'problem' => 'no symbol found'), 'currency');
-	}
-	if (!isset($currencies['names'][$currency])) {
-		throw new Q_Exception_BadValue(array('internal' => 'currency', 'problem' => 'no name found'), 'currency');
-	}
-	$symbol = $currencies['symbols'][$currency];
-	$currencyName = $currencies['names'][$currency];
+	list($currencyName, $symbol) = Assets::currency($currency);
+	$displayAmount = Assets::display($currency, $amount);
 	$communityId = Users::communityId();
 	$communityName = Users::communityName();
 	$communitySuffix = Users::communitySuffix();
@@ -48,7 +41,8 @@ function Assets_after_Assets_charge($params)
 	$fields = compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency', 
-		'name', 'symbol', 'currencyName', 'amount', 'months', 'startDate', 'endDate', 'link'
+		'name', 'symbol', 'currencyName', 'amount', 'displayAmount',
+		'months', 'startDate', 'endDate', 'link'
 	);
 	
 	if ($user->emailAddress) {
