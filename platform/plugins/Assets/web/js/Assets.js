@@ -288,6 +288,10 @@ var Assets = Q.Assets = Q.plugins.Assets = {
 			if (!o.amount) {
 				throw new Q.Error("Assets.Payments.stripe: amount is required");
 			}
+			if (window.PaymentRequest) {
+				this.paymentRequestStripe(o, callback);
+				return;
+			}
 			Q.addScript(o.javascript, function () {
 				var params = Q.extend({
 					name: o.name,
@@ -303,7 +307,92 @@ var Assets = Q.Assets = Q.plugins.Assets = {
 				}, params)).open();
 			});
 		},
-		
+
+		paymentRequestStripe: function (options, callback) {
+
+			var supportedInstruments = [
+				{
+					supportedMethods: ['basic-card'],
+					data: {
+						supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
+						supportedTypes: ['credit']
+					}
+				},
+				{
+					supportedMethods: ['https://android.com/pay'],
+					data: {
+						merchantId: Assets.Payments.androidPay.gateway,
+						environment: 'TEST',
+						allowedCardNetwork: ['amex', 'discover', 'mastercard', 'visa'],
+						paymentMethodTokenizationParameters: {
+							tokenizationType: 'GATEWAY_TOKEN',
+							parameters: {
+								'gateway': 'stripe',
+								'stripe:publishableKey': Assets.Payments.stripe.publishableKey,
+								'stripe:version': Assets.Payments.stripe.version
+							}
+						}
+					}
+				}
+			];
+
+			var details = {
+				total: {
+					label: options.description ? options.description : 'Total due',
+					amount: { currency: options.currency ? options.currency : 'USD', value : options.amount }
+				}
+			};
+
+			var request = new PaymentRequest(supportedInstruments, details, { requestPayerEmail: true });
+
+			request.show().then(function (result) {
+				var promise;
+				if (result.methodName === 'basic-card') {
+					promise = new Promise(function (resolve, reject) {
+						Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+						Stripe.card.createToken({
+							number: result.details.cardNumber,
+							cvc: result.details.cardSecurityCode,
+							exp_month: result.details.expiryMonth,
+							exp_year: result.details.expiryYear
+						}, function(res, token){
+							if (res !== 200) {
+								return reject({ result: result, err: new Error('Stripe gateway error') });
+							}
+							options.token = token;
+							return Q.Assets.Payments.pay('stripe', options, function (err) {
+								if (err) {
+									return reject({ result: result, err: err });
+								}
+								return resolve(result);
+							});
+						});
+					});
+				}
+				if (result.methodName === 'https://android.com/pay') {
+					promise = new Promise(function (resolve, reject) {
+						options.token = JSON.parse(result.details.paymentMethodToken);
+						return Q.Assets.Payments.pay('stripe', options, function (err) {
+							if (err) {
+								return reject({ result: result, err: err });
+							}
+							return resolve(result);
+						});
+					});
+				}
+				return promise ? promise : Promise.reject({ result: result, err: new Error('Unsupported method') });
+			}).then(function(result) {
+				result.complete('success');
+				alert('Payment success');
+			}).catch(function (res) {
+				res.result.complete('fail');
+				console.error('Uh oh, something bad happened: ' + res.err.message);
+			}).then(function() {
+				callback();
+			});
+
+		},
+
 		/**
 		 * Charge the user once you've obtained a token
 		 * @method pay

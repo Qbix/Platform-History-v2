@@ -39,12 +39,18 @@ class Users_Device extends Base_Users_Device
 	 */
 	static function add($device, $skipNotification=false)
 	{
-		$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version');
+		if (($device['platform'] === 'chrome') || ($device['platform'] === 'firefox')) {
+			$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version', 'auth', 'p256dh');
+		} else {
+			$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version');
+		}
 		Q_Valid::requireFields($fields, $device, true);
 		$userId = $device['userId'];
 		$deviceId = $device['deviceId'];
 		$platform = $device['platform'];
 		$platformAppId = $device['appId'];
+		$auth = !empty($device['auth']) ? $device['auth'] : null;
+		$p256dh = !empty($device['p256dh']) ? $device['p256dh'] : null;
 		$apps = Q_Config::expect('Users', 'apps', $platform);
 		list($appId, $info) = Users::appInfo($platform, $platformAppId);
 		if (!$info) {
@@ -57,8 +63,10 @@ class Users_Device extends Base_Users_Device
 		$info = array_merge(Q_Request::userAgentInfo(), array(
 			'sessionId' => $sessionId,
 			'userId' => $userId,
-			'deviceId' => null,
-			'appId' => $platformAppId
+			'deviceId' => $deviceId,
+			'appId' => $platformAppId,
+			'auth' => $auth,
+			'p256dh' => $p256dh
 		));
 		$deviceArray = Q::take($device, $info);
 		$className = "Users_Device_" . ucfirst($platform);
@@ -140,6 +148,7 @@ class Users_Device extends Base_Users_Device
 	 * @param {string} [$notification.alert.launchImage] Apple-only
 	 * @param {string} [$notification.badge] The badge
 	 * @param {string} [$notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+	 * @param {string} [$notification.icon] The icon
 	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action' and 'title'.
 	 * @param {string} [$notification.category] Apple-only. The name of the category for actions registered on the client side.
 	 * @param {array} [$notification.payload] Put all your custom notification fields here

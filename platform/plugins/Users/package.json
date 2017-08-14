@@ -10,6 +10,8 @@
 		"nodemailer": "2.3.x",
 		"nodemailer-smtp-transport": "2.3.x",
 		"nodemailer-sendmail-transport": "1.x",
+		"fcm-node": "^1.2.0",
+		"web-push": "^3.2.2",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
 		"crypto-js": "3.x.x",

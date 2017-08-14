@@ -7,9 +7,10 @@ var Q = require('Q');
 var Db = Q.require('Db');
 var Users = Q.require('Users');
 var Users_Device = Users.Device;
+var webpush = require('web-push');
 
 /**
- * Device adapter class for chrome platform
+ * Device adapter class for Chrome browser
  * @namespace Users
  * @class Device.Chrome
  * @extends Users.Device
@@ -17,7 +18,7 @@ var Users_Device = Users.Device;
  * @param fields {object} The fields values to initialize table row as
  * an associative array of `{column: value}` pairs
  */
-function Users_Device_Chrome (fields) {
+function Users_Device_Chrome(fields) {
 	// Run constructors of mixed in objects
 	Users_Device.constructors.apply(this, arguments);
 }
@@ -38,8 +39,10 @@ module.exports = Users_Device.Chrome = Users_Device_Chrome;
  * @param {String} [notification.alert.locKey] Apple-only
  * @param {String} [notification.alert.locArgs] Apple-only
  * @param {String} [notification.alert.launchImage] Apple-only
+ * @param {String} [notification.url] The url of the notification
  * @param {String} [notification.badge] The badge
  * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+ * @param {string} [notification.icon] The icon
  * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
  * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
  * @param {Object} [notification.payload] Put all your custom notification fields here
@@ -53,9 +56,29 @@ module.exports = Users_Device.Chrome = Users_Device_Chrome;
  * @param {boolean} [options.silent=false] Deliver a silent notification, may throw an exception
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
-Users_Device.prototype.handlePushNotification = function (notification, options, callback) {
-	var device = this;
-	// TODO: add support for web push in Chrome
+Users_Device.prototype.handlePushNotification = function (notification, callback) {
+	var appConfig = Q.Config.expect(['Users', 'apps', 'chrome', Q.app.name]);
+	if (!notification.alert.title || !notification.alert.body) {
+		return callback(new Error('Notification title and body are required'));
+	}
+	notification = {
+		title: notification.alert.title,
+		body: notification.alert.body,
+		icon: notification.icon ? notification.icon : null,
+		click_action: notification.url ? notification.url : null
+	};
+	webpush.setVapidDetails(appConfig.url, appConfig.publicKey, appConfig.privateKey);
+	webpush.sendNotification({
+		endpoint: this.fields.deviceId,
+		keys: {
+			auth: this.fields.auth,
+			p256dh: this.fields.p256dh
+		}
+	}, JSON.stringify(notification)).then(function(){
+		callback();
+	}).catch(function(){
+		callback(err);
+	});
 };
 
 Q.mixin(Users_Device_Chrome, Users_Device, Q.require('Base/Users/Device'));

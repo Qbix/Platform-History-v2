@@ -3,6 +3,7 @@
 function Users_before_Q_responseExtras()
 {
 	Q_Response::addScript('Q/plugins/Users/js/Users.js');
+	Q_Response::addScript('Q/plugins/Users/js/UsersDevice.js');
 	$app = Q_Config::expect('Q', 'app');
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
@@ -71,4 +72,5 @@ function Users_before_Q_responseExtras()
 		}
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
+
 }

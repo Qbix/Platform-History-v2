@@ -1,7 +1,8 @@
 <?php
-	
+
 class Users_Device_Android extends Users_Device
 {
+
 	/**
 	 * You can use this method to send push notifications.
 	 * It is far better, however, to use the Qbix Platform's offline notification
@@ -13,9 +14,15 @@ class Users_Device_Android extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
-		// todo: implement this using documented arguments sent to for pushNotification
+		self::$push[] = array(
+			'title' => $notification['alert']['title'],
+			'body' => $notification['alert']['body'],
+			'icon' => empty($notification['icon']) ? '' : $notification['icon'],
+			'click_action' => empty($notification['url']) ? null : $notification['url'],
+			'sound' => empty($notification['sound']) ? 'default' : $notification['sound']
+		);
 	}
-	
+
 	/**
 	 * Sends all scheduled push notifications
 	 * @method sendPushNotifications
@@ -24,9 +31,34 @@ class Users_Device_Android extends Users_Device
 	 */
 	static function sendPushNotifications()
 	{
-		// todo: implement this using documented arguments sent to for pushNotification
-		// can send to at most 1000 registration tokens per request in gcm
+		if (!self::$push) {
+			return;
+		}
+		$apiKey = Q_Config::expect('Users', 'apps', 'android', Q_Config::expect('Q', 'app'), "key");
+		foreach (self::$push as $notification) {
+			$fields = array(
+				'to' => self::$device->deviceId,
+				'notification' => $notification
+			);
+			$headers = array(
+				'Authorization: key=' . $apiKey,
+				'Content-Type: application/json'
+			);
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+			$result = curl_exec($ch);
+			curl_close($ch);
+		}
+		self::$push = [];
 	}
-	
-	static protected $push = null;
+
+	static protected $push = [];
+
+	static $device = null;
+
 }
