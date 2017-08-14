@@ -2399,7 +2399,7 @@ Q.onReady.add(function () {
 	}
 	Device.Cordova.push = PushNotification.init({
 	    android: {
-			senderID: Q.getObject('Q.Users.apps.android.' + Q.info.app)
+			senderID: Q.getObject('Q.Users.apps.android.' + Q.info.app + '.senderId')
 		},
 		browser: {
 			pushServiceURL: 'http://push.api.phonegap.com/v1/push'
@@ -2414,6 +2414,8 @@ Q.onReady.add(function () {
 	push.on('registration', function(data) {
 		var deviceId = data.registrationId;
 		localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
+		var appId = location.href.queryField('Q.Users.appId');
+		localStorage.setItem("Q\tUsers.Device.appId", appId);
 		if (Q.Users.loggedInUser) {
 			_registerDevice();
 		}
@@ -2430,9 +2432,11 @@ Q.onReady.add(function () {
 	Users.logout.options.onSuccess.set(function() {
 		PushNotification.setApplicationBadgeNumber(0);
 	}, 'Users.PushNotifications');
-	function _registerDevice(deviceId) {
+	function _registerDevice(deviceId, appId) {
 		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
+		var storedAppId = localStorage.getItem("Q\tUsers.Device.appId");
 		deviceId = storedDeviceId || deviceId;
+		appId = storedAppId || appId;
 		if (!deviceId) {
 			return;
 		}
@@ -2443,6 +2447,7 @@ Q.onReady.add(function () {
 		}, {
 			method: 'post',
 			fields: {
+				appId: appId,
 				deviceId: deviceId
 			}
 		});

@@ -57,7 +57,7 @@ class Users_Device extends Base_Users_Device
 		$info = array_merge(Q_Request::userAgentInfo(), array(
 			'sessionId' => $sessionId,
 			'userId' => $userId,
-			'deviceId' => null,
+			'deviceId' => $deviceId,
 			'appId' => $platformAppId
 		));
 		$deviceArray = Q::take($device, $info);
