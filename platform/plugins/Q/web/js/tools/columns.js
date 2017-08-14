@@ -1,7 +1,14 @@
 (function (Q, $) {
+	
 /**
  * @module Q-tools
  */
+	
+var dataKey_index = 'index';
+var dataKey_scrollTop = 'scrollTop';
+var dataKey_hide = 'hide';
+var dataKey_lastShow = 'lastShow';
+var dataKey_opening = 'opening';
 	
 /**
  * This tool contains functionality to show things in columns
@@ -814,11 +821,5 @@ function prepareColumns(tool) {
 		});
 	}
 }
-
-var dataKey_index = 'index';
-var dataKey_scrollTop = 'scrollTop';
-var dataKey_hide = 'hide';
-var dataKey_lastShow = 'lastShow';
-var dataKey_opening = 'opening';
 
 })(Q, jQuery);
