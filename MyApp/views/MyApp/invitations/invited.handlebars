@@ -4,7 +4,7 @@
 		<img src="{{toUrl 'Q/plugins/Streams/img/invitations/header.png'}}" alt="{{YouAreInvited}}">
 	</div>
 	<div class="{{app}}_invitation_member">
-		{{interpolate Member title=stream.fields.title}}
+		{{interpolate Member stream.fields.title}}
 	</div>
 	<div class="Streams_explanation">
 		{{interpolate Explanation (toCapitalized communityName)}}
