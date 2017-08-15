@@ -102,6 +102,7 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 	switch ($mode) {
 		case 'composer':
 			$options['composer'] = true;
+			$mode = '';
 			break;
 		case 'npm':
 			$options['npm'] = true;
