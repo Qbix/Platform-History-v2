@@ -223,8 +223,8 @@ if ($auto_plugins) {
 }
 
 Q_Plugin::checkPermissions(Q_FILES_DIR, $options);
-Q_Plugin::npmInstall(Q_DIR);
-Q_Plugin::composerInstall(Q_DIR);
+Q_Plugin::npmInstall(Q_DIR, !empty($options['npm']));
+Q_Plugin::composerInstall(Q_DIR, !empty($options['composer']));
 
 foreach ($plugins as $plugin) {
 	$cons = Q_Config::get('Q', 'pluginInfo', $plugin, 'connections', array());
