@@ -7,7 +7,6 @@ var Q = require('Q');
 var Db = Q.require('Db');
 var Users = Q.require('Users');
 var Users_Device = Users.Device;
-var FCM = require('fcm-node');
 
 /**
  * Device adapter class for android platform
@@ -62,6 +61,7 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 		return callback(new Error('Notification title and body are required'));
 	}
 	var serverKey = Q.Config.expect(['Users', 'apps', 'android', Q.Config.expect(['Q', 'app']), "key"]);
+	var FCM = require('fcm-node');
 	var fcm = new FCM(serverKey);
 	var message = {
 		to: device.fields.deviceId,
