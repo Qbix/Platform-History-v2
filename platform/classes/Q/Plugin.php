@@ -486,8 +486,8 @@ class Q_Plugin
 
 		// Check and fix permissions
 		self::checkPermissions(APP_FILES_DIR, $options);
-		self::npmInstall(APP_DIR);
-		self::composerInstall(APP_DIR);
+		self::npmInstall(APP_DIR, !empty($options['npm']));
+		self::composerInstall(APP_DIR, !empty($options['composer']));
 
 		// install or update application schema
 		$connections = Q_Config::get('Q', 'appInfo', 'connections', array());
@@ -637,10 +637,10 @@ EOT;
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
 	}
 	
-	static function npmInstall($dir)
+	static function npmInstall($dir, $exists = false)
 	{
-		if (!file_exists($dir . DS . 'package.json')
-		or !self::commandExists('npm')) {
+		$exists = $exists || self::commandExists('npm');
+		if (!file_exists($dir . DS . 'package.json') or !$npm) {
 			return false;
 		}
 		echo "Installing npm modules into $dir".DS."node_modules\n";
@@ -651,10 +651,10 @@ EOT;
 		return true;
 	}
 	
-	static function composerInstall($dir)
+	static function composerInstall($dir, $exists = false)
 	{
-		if (!file_exists($dir . DS . 'composer.json')
-		or !self::commandExists('composer')) {
+		$exists = $exists || self::commandExists('composer');
+		if (!file_exists($dir . DS . 'composer.json')) {
 			return false;
 		}
 		echo "Installing composer packages into $dir".DS."vendor\n";
