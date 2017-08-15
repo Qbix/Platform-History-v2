@@ -640,7 +640,7 @@ EOT;
 	static function npmInstall($dir, $exists = false)
 	{
 		$exists = $exists || self::commandExists('npm');
-		if (!file_exists($dir . DS . 'package.json') or !$npm) {
+		if (!file_exists($dir . DS . 'package.json') or !$exists) {
 			return false;
 		}
 		echo "Installing npm modules into $dir".DS."node_modules\n";
@@ -654,7 +654,7 @@ EOT;
 	static function composerInstall($dir, $exists = false)
 	{
 		$exists = $exists || self::commandExists('composer');
-		if (!file_exists($dir . DS . 'composer.json')) {
+		if (!file_exists($dir . DS . 'composer.json') or !$exists) {
 			return false;
 		}
 		echo "Installing composer packages into $dir".DS."vendor\n";
