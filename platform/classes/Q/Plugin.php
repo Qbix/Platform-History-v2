@@ -610,8 +610,8 @@ EOT;
 			}
 		}
 		
-		self::npmInstall($plugin_dir);
-		self::composerInstall($plugin_dir);
+		self::npmInstall($plugin_dir, !empty($options['npm']));
+		self::composerInstall($plugin_dir, !empty($options['composer']));
 
 		// Symbolic links
 		echo 'Creating symbolic links'.PHP_EOL;
