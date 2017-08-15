@@ -7,7 +7,6 @@ var Q = require('Q');
 var Db = Q.require('Db');
 var Users = Q.require('Users');
 var Users_Device = Users.Device;
-var webpush = require('web-push');
 
 /**
  * Device adapter class for Chrome browser
@@ -67,6 +66,7 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 		icon: notification.icon ? notification.icon : null,
 		click_action: notification.url ? notification.url : null
 	};
+	var webpush = require('web-push');
 	webpush.setVapidDetails(appConfig.url, appConfig.publicKey, appConfig.privateKey);
 	webpush.sendNotification({
 		endpoint: this.fields.deviceId,
