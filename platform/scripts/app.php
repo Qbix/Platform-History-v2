@@ -100,14 +100,6 @@ $options = array(
 $mode = '';
 for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 	switch ($mode) {
-		case 'composer':
-			$options['composer'] = true;
-			$mode = '';
-			break;
-		case 'npm':
-			$options['npm'] = true;
-			$mode = '';
-			break;
 		case 'sql':
 			$sql_array[$argv[$i]] = array('enabled'=>true);
 			$plugins[] = $argv[$i];
@@ -182,6 +174,12 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 					break;
 				case '--noinit':
 					$noInit = true;
+					break;
+				case '--composer':
+					$options['composer'] = true;
+					break;
+				case '--npm':
+					$options['npm'] = true;
 					break;
 			}
 			break;
