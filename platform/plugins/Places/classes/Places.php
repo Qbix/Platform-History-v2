@@ -327,4 +327,76 @@ abstract class Places extends Base_Places
 			? ($l1 > $l2 ? 1 : -1)
 			: (($f1 != $f2) ? ($f1 > $f2 ? 1 : -1) : ($c1 != $c2 ? ($c1 > $c2 ? 1 : -1) : 0));
 	}
+	
+	/**
+	 * Get streams related to Places/timeslot streams, which are found from the
+	 * following parameters.
+	 * @method byTime
+	 * @static
+	 * @param {string} [$relationType=""] The type of the relation
+	 * @param {integer} [$fromTime=time()] A unix timestamp, in either seconds or milliseconds
+	 * @param {integer} [$toTime=time()] A unix timestamp, in either seconds or milliseconds
+	 * @param {string} [$experienceId="main"] The id of a community experience, the last part of its stream name
+	 * @param {string} [$meters=null] One of the values in Places/nearby/meters config array,
+	 *  used to find the right Places/timeslot stream.
+	 */
+	static function byTime(
+		$relationType = null,
+		$fromTime = null, 
+		$toTimestamp = null, 
+		$experienceId = 'main', 
+		$meters = null)
+	{
+		if (!isset($fromTime)) {
+			$fromTime = time();
+		} else {
+			$fromTime = Q_Utils::timestamp($fromTime);
+		}
+		if (!isset($toTimestamp)) {
+			$toTime = time() + self::defaultListingDuration();
+		} else {
+			$toTime = Q_Utils::timestamp($toTime);
+		}
+		if (!isset($meters)) {
+			$metersArray = Q_Config::expect('Places', 'nearby', 'meters');
+			$meters = $metersArrays[floor(count($metersArray)/2)];
+		}
+		$user = Users::loggedInUser();
+		if ($uls = Places_Location::userStream()) {
+			$latitude = $uls->getAttribute('latitude', null);
+			$longitude = $uls->getAttribute('longitude', null);
+			if (!isset($meters)) {
+				$meters = $uls->getAttribute('meters', $meters);
+			}
+		} else {
+			$latitude = Q_Config::expect('Places', 'locations', 'default', 'latitude');
+			$longitude = Q_Config::expect('Places', 'locations', 'default', 'longitude');
+			$meters = $meters;
+		}
+	
+		$relations = array();
+		$nearby = Places_Nearby::forSubscribers($latitude, $longitude, $meters);
+		foreach ($nearby as $n) {
+			$geohash = $n['geohash'];
+			$meters = $n['meters'];
+			$prefix = "Places/timeslot/$experienceId/$geohash/$meters/h/";
+			$relations2 = Streams::related(
+				$user,
+				Users::communityId(),
+				new Db_Range($prefix.$fromTime, true, false, $prefix.$toTimestamp),
+				true,
+				array(
+					'relationsOnly' => true,
+					'type' => $relationType
+                )
+			);
+			$relations = array_merge($relations, $relations2);
+		};
+		uasort($relations, function ($a, $b) {
+			return ($a->weight !== $b->weight)
+				? ($a->weight > $b->weight ? 1 : -1)
+				: 0;
+		});
+		return $relations;
+	}
 };
