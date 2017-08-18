@@ -1,1 +1,6 @@
-This is just a quick confirmation that you've successfully paid <?php echo "$symbol$amount" ?> to <?php echo $publisher->displayName() ?> for <?php echo $description ?>.
+<?php echo Q::text($charged['HavePaid'], array(
+	$user->displayName(array('short' => true)),
+	$displayAmount,
+	Q_Html::a(Q_Request::baseUrl(), Q_Html::text($publisher->displayName())),
+	$description
+)) ?>,

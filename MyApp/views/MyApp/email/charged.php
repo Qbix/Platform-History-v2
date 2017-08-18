@@ -1,5 +1,5 @@
 <p>
-	Hey <?php echo Q::text($charged['HavePaid'], array(
+	<?php echo Q::text($charged['HavePaid'], array(
 		$user->displayName(array('short' => true)),
 		$displayAmount,
 		Q_Html::a(Q_Request::baseUrl(), Q_Html::text($publisher->displayName())),
@@ -14,7 +14,7 @@
 </p>
 
 <p>
-	<?php echo Q::text($charge['SeeAllSubscriptions'], array(
+	<?php echo Q::text($SeeHistory, array(
 		Q_Html::a($link, Q_Html::text($publisher->displayName())
 	))) ?>
 </p>

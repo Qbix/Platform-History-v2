@@ -22,7 +22,7 @@ abstract class Assets extends Base_Assets
 	 * @return {array} Returns an array of ($currencyName, $symbol)
 	 * @throws Q_Exception_BadValue
 	 */
-	function currency($code)
+	static function currency($code)
 	{
 		$config = Q_Config::get('Assets', 'currencies', array());
         $json = Q::readFile(ASSETS_PLUGIN_CONFIG_DIR.DS.'currencies.json',
@@ -58,7 +58,7 @@ abstract class Assets extends Base_Assets
 	 * @param {double} $amount The amount of money in that currency
 	 * @return {string} The display, in the current locale
 	 */
-	function display($code, $amount)
+	static function display($code, $amount)
 	{
 		list($currencyName, $symbol) = self::currency($code);
 		return "$code$amount"; // TODO: make it fit the locale better
@@ -73,7 +73,7 @@ abstract class Assets extends Base_Assets
 	 * @param {string} [$locale] Can be used to override the locale
 	 * @return {string} The display, in the current locale
 	 */
-	function formatted($format = "%=(n", $amount, $locale = null)
+	static function formatted($format = "%=(n", $amount, $locale = null)
 	{
 		if (is_callable('money_format')) {
 			$ob = new Q_OutputBuffer(null, $locale);
