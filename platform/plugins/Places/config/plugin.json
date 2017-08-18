@@ -158,6 +158,12 @@
 			"cache": {
 				"duration": 2592000
 			}
+		},
+		"locations": {
+			"default": {
+				"latitude": 40.7537,
+				"longitude": -73.9992
+			}
 		}
 	}
 }

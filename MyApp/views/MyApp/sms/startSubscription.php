@@ -1,1 +1,7 @@
-You've successfully subscribed to <?php echo $plan->title ?> in <?php echo $communityName ?> at <?php echo "$symbol$amount" ?>/month for <?php echo $months ?> months.
+<?php echo Q_Html::text($subscription['HasStarted'], array(
+	$user->displayName(),
+	$plan->title,
+	$publisher->displayName(),
+	$displayAmount,
+	$months
+)) ?>

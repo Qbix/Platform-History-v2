@@ -1,2 +1,1 @@
-Click here to verify your mobile number:
-<?php echo Q_Uri::url($link) ?>
+<?php echo Q::text($addMobile['ClickHere'], array(Q_Uri::url($link))) ?>
