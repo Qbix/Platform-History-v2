@@ -1409,7 +1409,7 @@ class Q_Html
 					}
 				}
 			}
-			$url = $theme . '/' . $filePath;
+			$url = $theme . ($filePath ? '/'.$filePath : $filePath);
 		}
 		
 		if (empty($filename)) {
