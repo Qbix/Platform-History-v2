@@ -1,2 +1,2 @@
-Thanks for signing up with <?php echo $communityName ?>. Click here to activate your account:
-<?php echo Q_Uri::url($link) ?>
+<?php echo Q::text($activation['Thanks'], array($communityName)) ?>
+<?php echo Q::text($activation['ClickHere'], array(Q_Uri::url($link))) ?>
