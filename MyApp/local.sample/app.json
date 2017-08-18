@@ -168,7 +168,7 @@
 			}
 		},
 		"newsapi": {
-			"key": "GET A KEY FOR Users/activate suggestions"
+			"key": "GET A NEWSAPI.ORG KEY FOR Users/activate suggestions"
 		}
 	},
 	"Streams": {
@@ -190,6 +190,14 @@
 				"transactionKey": "XXXXX",
 				"testing": false
 			} */
+		}
+	},
+	"Places": {
+		"google": {
+			"keys": {
+				"server": "GET A GOOGLE API KEY for server API calls",
+				"web": "GET A GOOGLE API KEY for website calls"
+			}
 		}
 	}
 }
