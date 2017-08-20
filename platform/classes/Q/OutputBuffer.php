@@ -129,4 +129,11 @@ class Q_OutputBuffer
 	 * @type array
 	 */
 	public $locales = array();
+	
+	/**
+	 * @property $lastLocale
+	 * @static
+	 * @type string
+	 */
+	public $lastLocale = null;
 }

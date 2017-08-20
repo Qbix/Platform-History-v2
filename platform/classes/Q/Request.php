@@ -877,7 +877,8 @@ class Q_Request
 	 */
 	static function locale($separator = '_')
 	{
-		list($lang, $country, $preference) = self::languages();
+		$languages = self::languages();
+		list($lang, $country, $preference) = reset($languages);
 		return "$lang$separator$country";
 	}
 	
