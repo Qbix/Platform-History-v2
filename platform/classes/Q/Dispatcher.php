@@ -153,6 +153,17 @@ class Q_Dispatcher
 			$request_uri = Q_Request::uri();
 			self::$uri = clone($request_uri);
 		}
+		
+		$languages = Q_Request::languages();
+		$l_chosen = reset($languages);
+		$l_preference = 0;
+		foreach ($languages as $language) {
+			if (isset($language[2]) and $l_preference < $language[2]) {
+				$l_preference = $language[2];
+				$l_chosen = $language;
+			}
+		}
+		Q_Text::setLanguage($l_chosen[0], Q::ifset($l_chosen, 1, null));
 
 		// if file or dir is requested, try to serve it
 		$served = false;
