@@ -77,7 +77,7 @@
 		"text": {
 			"MyApp": {
 				"content": {
-					"*": ["MyApp/main"]
+					"*": ["MyApp/content"]
 				},
 				"email": {
 					"*": ["MyApp/email"]
