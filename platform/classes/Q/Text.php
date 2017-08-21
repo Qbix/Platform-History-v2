@@ -35,9 +35,9 @@ class Q_Text
 	 * @param {string} name The name of the text source
 	 * @param {array} content The content, a hierarchical object whose leaves are
 	 *  the actual text translated into the current language in Q.Text.language
-	 * @param {boolean} [merges=false] If true, merges on top instead of replacing
+	 * @param {boolean} [merge=false] If true, merges on top instead of replacing
 	 */
-	static function set($name, $content, $merge)
+	static function set($name, $content, $merge = false)
 	{
 		$language = self::$language;
 		$locale = self::$locale;
