@@ -20,12 +20,12 @@ class Q_Text
 	 * @method set
 	 * @static
 	 * @param {String} language Something like "en"
-	 * @param {String} locale Something like "US", but can also be blank if unknown
+	 * @param {String} [locale=null] Something like "US", but can also be null if unknown
 	 */
-	static function setLanguage($language, $locale)
+	static function setLanguage($language, $locale = null)
 	{
 		self::$language = strtolower($language);
-		self::$locale = strtoupper($locale);
+		self::$locale = $locale ? strtoupper($locale) : '';
 	}
 	
 	/**
