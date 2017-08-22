@@ -140,8 +140,6 @@ h2 { margin: 0; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
 .Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }
-/*.Q_mobile #dashboard h1,
-.Q_mobile #dashboard>h2 { display: none; }*/
 
 /* inputs */
 
@@ -206,6 +204,15 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 
 
 
+/* The following lines are for a flatter look */
+html .Q_listing li { font-size: 18px; padding: 0 10px; line-height: 40px; text-align: left; border-top: solid 1px white; border-bottom: solid 1px #CCC; background: #f2f2f2; -webkit-touch-callout: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; white-space: nowrap; overflow: hidden;
+}
+.Q_dialog_title { background: #444; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#333)); background: -moz-linear-gradient(top, #444, #333);
+}
+.Q_button { background: #555; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#444444'); background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#444)); background: -moz-linear-gradient(top, #555, #444);
+}
+
+
 /* The following lines override default styles for a block-style website */
 /* Try removing them and seeing what happens */
 html.Q_notMobile { height: 100%; }
@@ -224,45 +231,3 @@ html.MyApp_notFound #content,
 html.MyApp_errors #content { padding: 30px; text-align: center; overflow: hidden; text-overflow: ellipsis; }
 html.MyApp_notFound .url,
 html.MyApp_errors .url { font-weight: bold; text-decoration: underline; }
-
-
-
-html .Q_listing li {
-    font-size: 18px;
-    padding: 0 10px;
-    line-height: 40px;
-    text-align: left;
-    border-top: solid 1px white !important;
-    border-bottom: solid 1px #CCC !important;
-    background: #f2f2f2;
-/*    background: -moz-linear-gradient(top, #f2f2f2 0%, #f2f2f2 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#f2f2f2));
-    background: -webkit-linear-gradient(top, #f2f2f2 0%,#f2f2f2 100%);
-    background: -o-linear-gradient(top, #f2f2f2 0%,#f2f2f2 100%);
-    background: -ms-linear-gradient(top, #f2f2f2 0%,#f2f2f2 100%);
-    background: linear-gradient(top, #f2f2f2 0%,#f2f2f2 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#f2f2f2',GradientType=0 );*/
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.Q_dialog_title {
-    background: #444;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111');
-    background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#333));
-    background: -moz-linear-gradient(top, #444, #333);
-}
-
-.Q_button {
-    background: #555;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#444444');
-    background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#444));
-    background: -moz-linear-gradient(top, #555, #444);
-}
