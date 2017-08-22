@@ -1,7 +1,7 @@
 {
 	"activation": {
 		"Thanks": "Thanks for signing up for {{1}}.",
-		"ClickHere": "Click here to activate your account: {{1}}",
+		"ClickHere": "Click here to activate your account: {{1}}"
 	},
 	"addMobile": {
 		"ClickHere": "Click here to verify your mobile number: {{1}}"
