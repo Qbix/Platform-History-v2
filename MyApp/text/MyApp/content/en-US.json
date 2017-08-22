@@ -1,7 +1,7 @@
 {
 	"welcome": {
 		"Welcome": "Welcome!",
-		"ToStart": "To start a new app, you should follow the instructions <a href='{{link}}'>here</a>",
+		"ToStart": "To start a new app, you should follow the instructions <a href='{{1}}'>here</a>.",
 		"RenderedInMs": "Oh, and by the way, this rendered in {{1}} ms.",
 		"RefreshPage": "Refresh the page a few times and see how efficient the Qbix Platform can be.",
 		"EvenFaster": "In fact, it can execute <a href='{{1}}'>even faster</a>."
