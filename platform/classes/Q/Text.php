@@ -92,7 +92,7 @@ class Q_Text
 	{
 		$count = count($parts);
 		$try = array();
-		for ($i=$count, $j=0; $i>=0; --$i) {
+		for ($i=0, $j=0; $i<=$count; ++$i) {
 			$try[$j] = $parts;
 			if ($i > 0) {
 				array_splice($try[$j], -$i, $i, '*');
@@ -124,7 +124,7 @@ class Q_Text
 	{
 		$count = count($parts);
 		$try = array();
-		for ($i=$count, $j=0; $i>=0; --$i) {
+		for ($i=0, $j=0; $i<=$count; ++$i) {
 			$try[$j] = $parts;
 			if ($i > 0) {
 				array_splice($try[$j], -$i, $i, '*');
