@@ -27,10 +27,7 @@
 			'content' => '{{html}}'
 		),
 		'compact' => true,
-		'tabs' => array(
-			'welcome' => 'Welcome',
-			'about' => 'About'
-		),
+		'tabs' => $tabs,
 		'urls' => array(
 			'welcome' => 'MyApp/welcome',
 			'about' => 'MyApp/about'
