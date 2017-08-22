@@ -25,7 +25,7 @@
 		'vertical' => !Q_Request::isMobile(),
 		'overflow' => array(
 			'content' => '{{html}}',
-			'defaultHtml' => Q::text($Menu)
+			'defaultHtml' => $dashboard['Menu']
 		),
 		'compact' => true,
 		'tabs' => $tabs,
