@@ -76,6 +76,7 @@
 		},
 		"text": {
 			"MyApp": {
+				"dashboard.php": ["MyApp/content"],
 				"content": {
 					"*": ["MyApp/content"]
 				},
