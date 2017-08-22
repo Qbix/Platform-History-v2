@@ -1,4 +1,7 @@
 {
+	"dashboard": {
+		"Menu": "Menu"
+	},
 	"welcome": {
 		"Welcome": "Welcome!",
 		"ToStart": "To start a new app, you should follow the instructions <a href='{{1}}'>here</a>.",
