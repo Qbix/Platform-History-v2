@@ -24,7 +24,8 @@
 	<?php echo Q::tool('Q/tabs', array(
 		'vertical' => !Q_Request::isMobile(),
 		'overflow' => array(
-			'content' => '{{html}}'
+			'content' => '{{html}}',
+			'defaultHtml' => Q::text($Menu)
 		),
 		'compact' => true,
 		'tabs' => $tabs,
