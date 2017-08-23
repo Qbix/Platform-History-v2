@@ -29,9 +29,6 @@
 		),
 		'compact' => true,
 		'tabs' => $tabs,
-		'urls' => array(
-			'welcome' => 'MyApp/welcome',
-			'about' => 'MyApp/about'
-		)
+		'urls' => $urls
 	))?>
 </div>
