@@ -21,7 +21,7 @@ function Users_device_post ()
 	try {
 		// NOTE: this requires http://browscap.org to be operating
 		$info = Q_Request::browscap()->getBrowser();
-		$browser = $info->Browser;
+		$browser = strtolower($info->Browser);
 		$version = $info->Version;
 	} catch (Exception $e) {
 		$browser = Q_Request::browser();

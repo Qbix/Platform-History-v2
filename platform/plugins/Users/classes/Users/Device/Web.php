@@ -1,8 +1,8 @@
 <?php
 
-require Q_DIR.'/../vendor/autoload.php';
+//require Q_DIR.'/../vendor/autoload.php';
 
-use Minishlink\WebPush\WebPush;
+//use Minishlink\WebPush\WebPush;
 
 class Users_Device_Web
 {
