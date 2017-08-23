@@ -1,0 +1,11 @@
+{
+	"name": "Q_Users",
+	"authors": [
+		{
+			"name": "Qbix"
+		}
+	],
+	"require": {
+		"minishlink/web-push": "^1.4"
+	}
+}

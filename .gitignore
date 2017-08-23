@@ -16,6 +16,7 @@ platform/plugins/*/files/
 !platform/plugins/Users/files/
 !platform/plugins/Streams/files/
 platform/plugins/Users/files/Users/icons/*
+platform/plugins/Users/vendor/
 !platform/plugins/Users/files/Users/icons/default
 !platform/plugins/Users/files/Users/icons/future
 platform/plugins/Streams/files/Streams/icons/*
@@ -45,3 +46,5 @@ node_modules/
 platform/plugins/Communities
 platform/plugins/Streams/web/img/icons.lnk
 platform/plugins/Travel
+
+composer.lock
