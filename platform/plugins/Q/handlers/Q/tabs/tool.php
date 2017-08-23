@@ -58,10 +58,13 @@ function Q_tabs_tool($options)
 	$i = 0;
 	$selectedName = null;
 	$uri_string = (string)Q_Dispatcher::uri();
+	$uri_string2 = (string)Q_Request::uri();
 	foreach ($tabs as $name => $title) {
 		if ($name === $sel
 		or $name === $uri_string
 		or $urls[$name] === $uri_string
+		or $name === $uri_string2
+		or $urls[$name] === $uri_string2
 		or $urls[$name] === Q_Request::url()) {
 			$selectedName = $name;
 			break;
