@@ -5,7 +5,7 @@
 </p>
 
 <p>
-	<?php echo Q::text($SeeHistory, array(
+	<?php echo Q::interpolate($SeeHistory, array(
 		Q_Html::a($link, Q_Html::text($publisher->displayName())
 	))) ?>
 </p>
