@@ -1,5 +1,5 @@
 <p>
-	<?php echo Q::text($Greetings, $communityName) ?>
+	<?php echo Q::text($Greetings, array($communityName)) ?>
 </p>
 
 <p>
