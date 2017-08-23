@@ -9,5 +9,5 @@
 </p>
 
 <p>
-	<?php echo Q::text($SeeYou, array(Q_Html::a(Q_Html::themedUrl(''), $communityName))) ?>
+	<?php echo Q::interpolate($SeeYou, array(Q_Html::a(Q_Html::themedUrl(''), $communityName))) ?>
 </p>
