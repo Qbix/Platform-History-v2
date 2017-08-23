@@ -1,5 +1,5 @@
 <p>
-	<?php echo Q::text($Greetings, $communityName) ?>
+	<?php echo Q::text($Greetings, array($communityName)) ?>
 </p>
 
 <p>
@@ -9,11 +9,11 @@
 </p>
 
 <p>
-	<?php echo Q::text($activation['SeeYou'],
+	<?php echo Q::interpolate($activation['SeeYou'],
 		array(Q_Request::baseUrl(), $communityName)
 	) ?>
 </p>
 
 <p style="margin-top: 100px;">
-	<?php echo Q::text($LinkToUnsubscribe, array($unsubscribe)) ?>
+	<?php echo Q::interpolate($LinkToUnsubscribe, array($unsubscribe)) ?>
 </p>
