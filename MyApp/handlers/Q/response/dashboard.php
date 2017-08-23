@@ -13,5 +13,10 @@ function Q_response_dashboard()
 	$tabs = array_merge($tabs, array(
 		'about' => 'About'
 	));
-	return Q::view("$app/dashboard.php", compact('slogan', 'user', 'tabs'));
+	$urls = array(
+		'welcome' => 'MyApp/welcome',
+		'home' => 'MyApp/home',
+		'about' => 'MyApp/about'
+	);
+	return Q::view("$app/dashboard.php", compact('slogan', 'user', 'tabs', 'urls'));
 }
