@@ -8,7 +8,7 @@ Q.setObject('Q.text.Q.imagepicker', {
 		library: "Select from library"
 	}
 });
-Q.setObject("Q.text_en.Places.Location", Q.text.Places.Location);
+Q.setObject("Q.text_en.Q.imagepicker", Q.text.Q.imagepicker);
 
 /**
  * Q Tools

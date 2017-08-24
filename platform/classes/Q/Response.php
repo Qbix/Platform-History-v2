@@ -230,7 +230,7 @@ class Q_Response
 		}
 		unset(self::$notices[$key]);
 		if (Q_Session::id()) {
-			unset($_SESSION['Q']['notices'][$key]);
+			$_SESSION['Q']['notices'][$key] = null;
 		}
 		self::$removedNotices[$key] = true;
 		return true;
