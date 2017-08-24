@@ -3346,14 +3346,16 @@ Message.post.onError = new Q.Event();
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Boolean} [checkMessageCache=false] whether to check the Streams.Message cache in addition to the Streams.Stream cache
- * @return {Number}
+ * @return {Integer|null} Returns null if there was no info about latest ordinal.
  */
 Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName, checkMessageCache) {
+	var found = false;
 	var latest = 0;
 	if (checkMessageCache) {
 		Message.get.cache.each([publisherId, streamName], function (k, v) {
 			if (!v.params[0] && v.subject.ordinal > 0) {
 				latest = Math.max(latest, v.subject.ordinal);
+				found = true;
 			}
 		});
 	}
@@ -3361,11 +3363,12 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
 		Streams.get.cache.each([publisherId, streamName], function (k, v) {
 			if (!v.params[0] && v.subject.fields.messageCount > 0) {
 				latest = v.subject.fields.messageCount;
+				found = true;
 				return false;
 			}
 		});
 	}
-	return parseInt(latest);
+	return found ? parseInt(latest) : null;
 };
 
 /**
@@ -3396,7 +3399,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
 	var latest = Message.latestOrdinal(publisherId, streamName);
-	if (!latest && (!options || !options.evenIfNotRetained)) {
+	if (latest === null && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
 	}
@@ -4754,7 +4757,7 @@ Q.onInit.add(function _Streams_onInit() {
 			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
 		}
 		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName, false);
-		if (parseInt(msg.ordinal) <= latest) {
+		if (latest !== null && parseInt(msg.ordinal) <= latest) {
 			return;
 		}
 		// Wait until the previous message has been posted, then process this one.
