@@ -10721,7 +10721,7 @@ Q.Pointer.hint.options = {
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",
-	zIndex: 99999,
+	zIndex: 2147483647,
 	show: {
 		delay: 500,
 		duration: 500,
