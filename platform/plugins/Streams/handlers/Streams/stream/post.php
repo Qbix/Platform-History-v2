@@ -157,7 +157,9 @@ function Streams_stream_post($params = array())
 	// since it might have been retrieved and modified to be different
 	// from what is currently in $stream.
 	// This also calculates the access levels on the stream.
-	$stream = Streams::fetchOne($user->id, $publisherId, $stream->name);
+	$stream = Streams::fetchOne($user->id, $publisherId, $stream->name, '*', array(
+		'refetch' => true
+	));
 	
 	if (empty($req['dontSubscribe'])) {
 		// autosubscribe to streams you yourself create, using templates

@@ -12,7 +12,7 @@ function Streams_stream_response_stream()
 	$fields = Streams::requestedFields();
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
-	$options = array('withParticipant' => true);
+	$options = array('withParticipant' => true, 'refetch' => true);
 	if (!empty($_REQUEST['totals'])) {
 		$options['withTotals'][$name] = $_REQUEST['totals'];
 	}
