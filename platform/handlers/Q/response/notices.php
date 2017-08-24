@@ -6,14 +6,22 @@ function Q_response_notices()
 	$notices = Q_Response::getNotices();
 	
 	// Get any notices that we should know about
+	$atLeastOne = false;
 	if (!empty($notices)) {
-		$result .= "<ul class='Q_notices'>";
+		$ul = "<ul class='Q_notices'>";
 		foreach ($notices as $k => $n) {
+			if (empty($n)) {
+				continue;
+			}
+			$atLeastOne = true;
 			$key = Q_Html::text($k);
 			$close = "<div class='x'>x</div>";
-			$result .= "<li data-key='$key'>$close$n</li>\n";
+			$ul .= "<li data-key='$key'>$close$n</li>\n";
 		}
-		$result .= "</ul>";
+		$ul .= "</ul>";
+	}
+	if ($atLeastOne) {
+		$result = $ul;
 	}
 
 	// Get any errors that we should display
