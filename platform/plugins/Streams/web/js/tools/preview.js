@@ -376,7 +376,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 						onSuccess: {'Streams/preview': function (data, key, file) {
 							Q.Streams.Stream.refresh(state.publisherId, state.streamName, null, {
 								messages: true,
-								changed: {icon: true}
+								changed: {icon: true},
+								evenIfNotRetained: true
 							});
 							return false;
 						}}
