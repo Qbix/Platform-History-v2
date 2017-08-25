@@ -369,8 +369,8 @@ abstract class Places extends Base_Places
 				$meters = $uls->getAttribute('meters', $meters);
 			}
 		} else {
-			$latitude = Q_Config::expect('Places', 'locations', 'default', 'latitude');
-			$longitude = Q_Config::expect('Places', 'locations', 'default', 'longitude');
+			$latitude = Q_Config::expect('Places', 'location', 'default', 'latitude');
+			$longitude = Q_Config::expect('Places', 'location', 'default', 'longitude');
 			$meters = $meters;
 		}
 	
