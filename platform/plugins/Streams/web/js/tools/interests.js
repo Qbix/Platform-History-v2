@@ -70,9 +70,8 @@ Q.Tool.define("Streams/interests", function (options) {
 	state.communityId = state.communityId || Q.Users.communityId;
 	
 	function addExpandable(category, interests) {
-		var cn = Q.normalize(category);
-		var url = Q.url('Q/plugins/Streams/img/icons/interests/categories/white/'+cn+'.png');
-		var img = "<img src='"+url+"'>";
+		var src = Streams.Interests.categoryIconUrl(state.communityId, category);
+		var img = "<img src='" + Q.url(src).encodeHTML() + "'>";
 		var content = '';
 		var count = 0;
 		Q.each(interests, function (subcategory, interests) {
@@ -93,10 +92,7 @@ Q.Tool.define("Streams/interests", function (options) {
 		$expandable.appendTo(tool.container).activate(p.fill(category));
 	}
 
-	var src = 'action.php/Streams/interests';
-	var criteria = { communityId: state.communityId };
-	Q.addScript(Q.url(src, criteria, { cacheBust: state.cacheBust }),
-	function () {
+	Streams.Interests.load(state.communityId, function () {
 		var categories = state.ordering
 			= state.ordering || Object.keys(Interests.all[state.communityId]);
 		Q.each(state.ordering, function (i, category) {
