@@ -10,11 +10,13 @@ function Streams_interests_response()
 	header("Cache-Control: public, max-age=60"); // cache for 1 minute
 	$expires = date("D, d M Y H:i:s T", time() + 60); // cache for 1 minute
 	header("Expires: $expires");
-	if ($ordering = Q::ifset($interests, '#', 'ordering', false)) {
-		$oj = Q::json_encode($ordering);
-		echo "Q.setObject(['Q', 'Streams', 'Interests', 'ordering', '$communityId'], $oj);\n";
-	}
+	$ordering = Q::ifset($interests, '#', 'ordering', false);
 	unset($interests['#']);
+	if (!$ordering) {
+		$ordering = array_keys($interests);
+	}
+	$o_json = Q::json_encode($ordering);
+	echo "Q.setObject(['Q', 'Streams', 'Interests', 'ordering', '$communityId'], $o_json);\n";
 	$info = array();
 	foreach ($interests as $k => &$v) {
 		if ($v['#']) {
