@@ -15,8 +15,22 @@ class Q_Text
 	public static $locale = 'US';
 	
 	/**
-	 * Sets the language and locale to use in Q.Text.get calls.
-	 * When Q is initialized, it is set by default from Q.first(Q.info.languages)
+	 * Call this function to get the basename to use for loading files,
+	 * based on the language and locale set on this class.
+	 * Used to load files customized to a user's language (and locale).
+	 * @return {string} something like "en-US"
+	 */
+	static function basename()
+	{
+		$language = self::$language;
+		$locale = self::$locale;
+		return $locale ? "$language-$locale" : $language;
+	}
+	
+	/**
+	 * Sets the language and locale to use in Q_Text::basename() calls.
+	 * The Q_Dispatcher::dispatch() method calls this by default using
+	 * information from Q_Request::languages().
 	 * @method set
 	 * @static
 	 * @param {String} language Something like "en"
@@ -64,10 +78,8 @@ class Q_Text
 			}
 			return $result->getAll();
 		}
-		$language = self::$language;
-		$locale = self::$locale;
-		$suffix = $locale ? "-$locale" : '';
-		$filename = "text/$name/$language$suffix.json";
+		$basename = self::basename();
+		$filename = "text/$name/$basename.json";
 		$config = Q_Config::get('Q', 'text', '*', array());
         $json = Q::readFile($filename, Q::take($config, array(
 			'ignoreCache' => true,
