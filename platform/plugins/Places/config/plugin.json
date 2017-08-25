@@ -5,7 +5,7 @@
 				"version": "1.0",
 				"compatible": "0.5",
 				"connections": ["Streams", "Places"],
-				"requires": {"Streams": "0.9.6"}
+				"requires": {"Streams": "1.0"}
 			}
 		},
 		"routes": {

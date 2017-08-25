@@ -5,14 +5,14 @@
 			"version" : "0.1",
 			"compatible": "0.1",
 			"requires": {
-				"Q": "0.9",
-				"Users": "0.9.3",
-				"Streams": "0.9"
+				"Q": "1.0",
+				"Users": "1.0",
+				"Streams": "1.0"
 			},
 			"recognizes": {
-				"Q": "0.8",
-				"Users": "0.9.3",
-				"Streams": "0.9"
+				"Q": "1.0",
+				"Users": "1.0",
+				"Streams": "1.0"
 			},
 			"connections": []
 		},
