@@ -3976,6 +3976,16 @@ Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
  * @param {Object} [options.publisherId=Q.Users.communityId] Can be used to override the community id
  */
 var Interests = Streams.Interests = {
+	/**
+	 * Add an interest to the logged-in user
+	 * @method add
+	 * @static
+	 * @param {String} title The title of the interest
+	 * @param {Function} callback
+	 * @param {Object} [options]
+	 * @param {Boolean} [options.subscribe] Whether to subscribe
+	 * @param {String} [options.publisherId] Defaults to the current community id
+	 */
 	add: function (title, callback, options) {
 		if (!Users.loggedInUser) {
 			return false;
@@ -4003,13 +4013,27 @@ var Interests = Streams.Interests = {
 			fields: fields
 		}, options));
 	},
-	remove: function (title, callback) {
+	/**
+	 * Remove an interest from the logged-in user in the main community
+	 * @method remove
+	 * @static
+	 * @param {String} title The title of the interest
+	 * @param {Function} callback
+	 * @param {Object} [options]
+	 * @param {String} [options.publisherId] Defaults to the current community id
+	 */
+	remove: function (title, callback, options) {
 		if (!Users.loggedInUser) {
 			return false;
 		}
 		var fields = {
 			title: title
 		};
+		if (options) {
+			if (options.publisherId) {
+				fields.publisherId = options.publisherId;
+			}
+		}
 		Q.req('Streams/interest', ['publisherId', 'streamName'],
 		function (err, response) {
 			Q.handle(callback, this, arguments);
@@ -4022,6 +4046,14 @@ var Interests = Streams.Interests = {
 			fields: fields
 		});
 	},
+	/**
+	 * Load interests for a user
+	 * @method forUsr
+	 * @static
+	 * @param {String} userId
+	 * @param {String} communityId
+	 * @param {Function} callback
+	 */
 	forUser: function (userId, communityId, callback) {
 		var fields = {};
 		if (userId) {
@@ -4047,6 +4079,13 @@ var Interests = Streams.Interests = {
 			callback && callback.call(this, null, results);
 		}, { fields: fields });
 	},
+	/**
+	 * Load my own interests
+	 * @method forMe
+	 * @static
+	 * @param {String} communityId
+	 * @param {Function} callback
+	 */
 	forMe: function (communityId, callback) {
 		if (!Q.isEmpty(Interests.my)) {
 			return callback && callback(null, Interests.my);
@@ -4060,7 +4099,40 @@ var Interests = Streams.Interests = {
 			callback(null, results);
 		});
 	},
+	/**
+	 * Load official interests from a community
+	 * @method load
+	 * @static
+	 * @param {String} communityId
+	 * @param {Function} callback
+	 */
+	load: function (communityId, callback) {
+		var src = Q.action('Streams/interests', {
+			communityId: communityId
+		});
+		Q.addScript(src, callback);
+	},
+	/**
+	 * Get the url of a category icon
+	 * @method categoryIconUrl
+	 * @static
+	 * @param {String} communityId
+	 * @param {String} category
+	 * @param {String} [style='white'] Can be "white" or "colorful"
+	 * @return {String}
+	 */
+	categoryIconUrl: function (communityId, category, style) {
+		style = style || 'white';
+		var info = Interests.info[communityId];
+		var cn = Q.normalize(category);
+		if (info && info[category] && info[category].white) {
+			return info[category].white.interpolate({ baseUrl: Q.info.baseUrl })
+		}
+		return 'Q/plugins/Streams/img/icons/interests/categories/'
+			+ style + '/' + cn + '.png';
+	},
 	all: {},
+	info: {},
 	my: null
 };
 

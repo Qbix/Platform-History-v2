@@ -4035,7 +4035,8 @@ abstract class Streams extends Base_Streams
 			$communityId = Users::communityId();
 		}
 		$tree = new Q_Tree();
-		$tree->load("files/Streams/interests/$communityId.json");
+		$basename = Q_Text::basename();
+		$tree->load("files/Streams/interests/$communityId/$basename.json");
 		$interests = $tree->getAll();
 		foreach ($interests as $category => &$v1) {
 			foreach ($v1 as $k2 => &$v2) {

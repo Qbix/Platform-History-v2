@@ -3845,8 +3845,8 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 Q.Tool.beingActivated = undefined;
 
 /**
- * Call this function to define options for a tool constructor
- * that may not have been loaded yet.
+ * Call this function to define default options for a tool constructor,
+ * even if has not been loaded yet.
  * @static
  * @method define.options
  * @param {String} toolName the name of the tool
@@ -3966,8 +3966,8 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 };
 
 /**
- * Call this function to define options for a jQuery tool constructor
- * that may not have been loaded yet.
+ * Call this function to define default options for a jQuery tool constructor,
+ * even if it has not been loaded yet.
  * @static
  * @method jQuery.options
  * @param {String} pluginName the name of the tool

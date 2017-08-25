@@ -10,7 +10,21 @@ function Streams_interests_response()
 	header("Cache-Control: public, max-age=60"); // cache for 1 minute
 	$expires = date("D, d M Y H:i:s T", time() + 60); // cache for 1 minute
 	header("Expires: $expires");
-	$json = Q::json_encode($interests, true);
- 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'all', '$communityId'], $json);";
+	if ($ordering = Q::ifset($interests, '#', 'ordering', false)) {
+		$oj = Q::json_encode($ordering);
+		echo "Q.setObject(['Q', 'Streams', 'Interests', 'ordering', '$communityId'], $oj);\n";
+	}
+	unset($interests['#']);
+	$info = array();
+	foreach ($interests as $k => &$v) {
+		if ($v['#']) {
+			$info[$k] = $v['#'];
+			unset($v['#']);
+		}
+	}
+	$all_json = Q::json_encode($interests, true);
+	$info_json = Q::json_encode($info, true);
+ 	echo "Q.setObject(['Q', 'Streams', 'Interests', 'all', '$communityId'], $all_json);\n";
+	echo "Q.setObject(['Q', 'Streams', 'Interests', 'info', '$communityId'], $info_json);";
 	return false;
 }
