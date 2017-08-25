@@ -4,7 +4,7 @@
 			"Users": {
 				"version": "1.0",
 				"compatible": "0.9.3",
-				"requires": {"Q": "0.9"},
+				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
 				"connections": ["Users"]
 			}
