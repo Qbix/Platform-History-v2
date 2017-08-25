@@ -61,6 +61,11 @@
 		"logging": true
 	},
 	"Users": {
+		"community": {
+			"id": "MyApp",
+			"name": "MyApp"
+			/* "suffix": "Inc" */
+		},
 		"email": {
 			"smtp": null, /* {
 				"auth": "login",

@@ -5,7 +5,7 @@
  *
  * @param {array} $_REQUEST 
  * @param {string} [$_REQUEST.title] Required. The title of the interest.
- * @param {string} [$_REQUEST.publisherId] Optional. Defaults to the app name.
+ * @param {string} [$_REQUEST.publisherId] Optional. Defaults to the current community's id.
  * @return {void}
  */
 function Streams_interest_delete()
