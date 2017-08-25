@@ -52,7 +52,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	if (typeof all === 'string') {
 		all = {
 			title: all,
-			icon: Q.url("Q/plugins/Streams/img/icons/interests/categories/all.png")
+			icon: Q.url("Q/plugins/Streams/img/icons/interests/categories/white/all.png")
 		};
 	}
 	
@@ -71,7 +71,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	
 	function addExpandable(category, interests) {
 		var cn = Q.normalize(category);
-		var url = Q.url('Q/plugins/Streams/img/icons/interests/categories/'+cn+'.png');
+		var url = Q.url('Q/plugins/Streams/img/icons/interests/categories/white/'+cn+'.png');
 		var img = "<img src='"+url+"'>";
 		var content = '';
 		var count = 0;
