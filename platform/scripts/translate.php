@@ -9,12 +9,12 @@ define('SRC_DIR', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../text
 $params = array(
 	'h::' => 'help::',
 	's::' => 'source::',
-	'e::' => 'export::'
+	'e::' => 'export::',
+	'n::' => 'null::'
 );
 
 // Default values
 $source = 'en';
-$export = 'en';
 
 $help = <<<EOT
 This script automatically translates app interface into different languages.
@@ -35,17 +35,19 @@ if (isset($options['source'])) {
 
 define('EXPORT', $options['export'] ? $options['export'] : null);
 
+define('SAVENULL', isset($options['null']));
+
 if (isset($options['help'])) {
 	echo $help;
 	exit;
 }
 
-function getLangSrc($lang)
+function getLangSrc($lang, $locale)
 {
 	$arr = array();
 	$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(SRC_DIR, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
 	foreach ($objects as $filename => $object) {
-		if (basename($filename) === $lang . '.json') {
+		if (basename($filename) === $lang . ($locale ? '-' . $locale : '' ) . '.json') {
 			$tree = new Q_Tree();
 			$tree->load($filename);
 			$all = $tree->getAll();
@@ -92,6 +94,27 @@ function saveLangJsonFiles($lang, $data)
 		fclose($fp);
 	}
 	return $filenames;
+}
+
+function saveNullFiles($data) {
+	$nullFiles = [];
+	foreach ($data as $d) {
+		$arr =& $nullFiles[$d['dirname']];
+		if (!sizeof($arr)) {
+			$arr = [];
+		}
+		array_push($d['key'], null);
+		$nullFiles[$d['dirname']] = array_merge_recursive($arr, arrayToBranch($d['key']));
+	}
+	foreach ($nullFiles as $dirname => $json) {
+		$dirname = (EXPORT ? EXPORT : SRC_DIR) . DS . $dirname . DS;
+		if (!is_dir($dirname)) {
+			mkdir($dirname, 0755, true);
+		}
+		$fp = fopen($dirname . DS . 'null.json', 'w');
+		fwrite($fp, json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+		fclose($fp);
+	}
 }
 
 function translate($fromLang, $toLang, $data, $chunkSize = 100)
@@ -209,10 +232,18 @@ function arrayToBranch($arr)
 	}
 }
 
-function translateAll($fromLang)
+function translateAll($langLocale)
 {
-	$src = getLangSrc($fromLang);
+	list($fromLang, $locale) = preg_split( "/(_|-)/", $langLocale);
+    $src = getLangSrc($fromLang, $locale);
+
+    if (SAVENULL) {
+	    saveNullFiles($src);
+	    return;
+    }
+
 	$locales = getLocales();
+
 	foreach ($locales as $toLang => $localeNames) {
 		if (($toLang === $fromLang) && EXPORT) {
 			$res = $src;
@@ -228,5 +259,5 @@ function translateAll($fromLang)
 		}
 	}
 }
-
+Q_Cache::clear(true, false, 'Q_Text::get');
 translateAll($source);

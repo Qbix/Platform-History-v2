@@ -71,6 +71,11 @@ class Q_Text
 	 */
 	static function get($name, $options = array())
 	{
+		$namespace = 'Q_Text::get';
+		$content = Q_Cache::get($name, null, $namespace);
+		if ($content) {
+			return $content;
+		}
 		if (is_array($name)) {
 			$result = new Q_Tree();
 			foreach ($name as $n) {
@@ -80,8 +85,12 @@ class Q_Text
 		}
 		$basename = self::basename();
 		$filename = "text/$name/$basename.json";
+		if (!file_exists($filename)) {
+			list($basename) = explode('-', $basename);
+			$filename = "text/$name/$basename.json";
+		}
 		$config = Q_Config::get('Q', 'text', '*', array());
-        $json = Q::readFile($filename, Q::take($config, array(
+		$json = Q::readFile($filename, Q::take($config, array(
 			'ignoreCache' => true,
 			'dontCache' => true,
 			'duration' => 3600
@@ -90,7 +99,11 @@ class Q_Text
 			$content = Q::json_decode($json, true);
 			self::set($name, $content, Q::ifset($options, 'merge', false));
 		}
-		return $content ? $content : array();
+		if (!$content) {
+			$content = array();
+		}
+		Q_Cache::set($name, $content, $namespace);
+		return $content;
 	}
 
 	/**
