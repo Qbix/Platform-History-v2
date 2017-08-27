@@ -58,7 +58,7 @@ function getLangSrc($lang, $locale)
 		}
 	}
 	if (!sizeof($arr)) {
-		die("No source files found on language: " . $lang. "\n");
+		die("No source files found for " . $lang . ($locale ? '-' . $locale : '') . "\n");
 	}
 	return $arr;
 }
