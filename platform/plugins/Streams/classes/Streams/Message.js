@@ -278,6 +278,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			stream: stream,
 			url: stream.url(message.fields.ordinal),
 			icon: stream.iconUrl(80),
+			user: this,
 			avatar: avatar,
 			callback: callback
 		};
@@ -290,7 +291,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		var name = 'Streams/deliver/'+message.fields.type;
 		var handler = Q.getObject(name, Q.handlers, '/');
 		if (!Q.isEmpty(handler)) {
-			Q.handle(handler, this, [o, _afterTransform]);
+			Q.handle(handler, message, [o, _afterTransform]);
 		} else {
 			_afterTransform();
 		}
