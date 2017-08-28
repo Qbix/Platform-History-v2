@@ -93,6 +93,18 @@ Users_User.devices = function (userId, appIds, callback) {
 	})
 };
 
+/**
+ * Calculate the url of a user's icon
+ * @method
+ * @param {Number} [size=40] the size of the icon to render.
+ * @return {String} the url
+ */
+Users_User.prototype.iconUrl = function Users_User_iconUrl(size) {
+	return Users.iconUrl(this.fields.icon.interpolate({
+		userId: this.fields.id.splitId()
+	}), size);
+};
+
 Q.mixin(Users_User, Q.require('Base/Users/User'));
 
 /*

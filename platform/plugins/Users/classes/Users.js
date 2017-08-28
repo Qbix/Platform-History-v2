@@ -203,6 +203,28 @@ Users.fetch = function (id, callback) {
 };
 
 /**
+ * Calculate the url of a user's icon
+ * @method
+ * @param {String} icon the value of the user's "icon" field
+ * @param {Number} [size=40] the size of the icon to render.
+ * @return {String} the url
+ */
+Users.iconUrl = function Users_iconUrl(icon, size) {
+	if (!icon) {
+		console.warn("Users.iconUrl: icon is empty");
+		return '';
+	}
+	if (!size || size === true) {
+		size = '40';
+	}
+	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
+	var src = (icon + '/' + size).interpolate({
+		"baseUrl": Q.Config.expect('Q', 'web', 'appRootUrl')
+	});
+	return src.isUrl() ? src : Q.url('Q/plugins/Users/img/icons/'+src);
+};
+
+/**
  * Pushes notifications to all devices of the given user or users
  * @method pushNotifications
  * @static
