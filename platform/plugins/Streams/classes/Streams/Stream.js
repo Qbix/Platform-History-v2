@@ -70,6 +70,16 @@ function Streams_Stream (fields) {
 Sp = Streams_Stream.prototype;
 
 /**
+ * Calculate the url of a stream's icon
+ * @method iconUrl
+ * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
+ * @return {String} the url
+ */
+Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
+	return Streams.iconUrl(this.fields.icon, size)
+};
+
+/**
  * @method getAllAttributes
  * @return {Object} The object of all attributes set in the stream
  */
