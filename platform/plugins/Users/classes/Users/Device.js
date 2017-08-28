@@ -47,6 +47,8 @@ function Users_Device (fields) {
  * @param {String} [notification.alert.launchImage] Apple-only
  * @param {String} [notification.badge] The badge
  * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
+ * @param {String} [notification.icon] Url of icon, can be png any square size
+ * @param {String} [notification.url] Url to which the notifiation will be linked
  * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
  * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
  * @param {Object} [notification.payload] Put all your custom notification fields here
