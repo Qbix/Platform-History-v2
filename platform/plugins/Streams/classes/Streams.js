@@ -1035,6 +1035,29 @@ Streams.messageHandler = function(msgType, callback) {
 	_messageHandlers[msgType] = callback;
 };
 
+/**
+ * Calculate the url of a stream's icon
+ * @static
+ * @method iconUrl
+ * @param {String} icon the value of the stream's "icon" field
+ * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
+ * @return {String} the url
+ */
+Streams.iconUrl = function(icon, size) {
+	if (!icon) {
+		console.warn("Streams.iconUrl: icon is empty");
+		return '';
+	}
+	if (!size || size === true) {
+		size = '40';
+	}
+	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
+	var src = (icon + '/' + size).interpolate({
+		"baseUrl": Q.Config.expect('Q', 'web', 'appRootUrl')
+	});
+	return src.isUrl() ? src : Q.url('Q/plugins/Streams/img/icons/'+src);
+};
+
 Streams.invitedUrl = function _Streams_invitedUrl(token) {
 	return Q.url(Q.Config.get(['Streams', 'invites', 'baseUrl'], "i"))
 		+ "/" + token;
