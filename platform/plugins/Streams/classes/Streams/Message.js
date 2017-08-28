@@ -281,7 +281,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			callback: callback
 		};
 		var result = [];
-		var name = 'Streams/deliver/'+this.fields.type;
+		var name = 'Streams/deliver/'+message.fields.type;
 		var handler = Q.getObject(name, Q.handlers, '/');
 		if (!Q.isEmpty(handler)) {
 			Q.handle(handler, this, [o, _afterTransform]);
@@ -434,7 +434,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				var notification = {
 					alert: o.subject,
 					href: o.url,
-					ref: this.fields.type
+					ref: message.fields.type
 				};
 				if (appuser) {
 					appuser.pushNotification(notification);
