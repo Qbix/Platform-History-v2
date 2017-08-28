@@ -277,10 +277,16 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			deliver: deliver,
 			stream: stream,
 			url: stream.url(message.fields.ordinal),
+			icon: stream.iconUrl(80),
 			avatar: avatar,
 			callback: callback
 		};
 		var result = [];
+		/**
+		 * @event "Streams/deliver/:messageType"
+		 * @param {Object} options for the notification delivery
+		 * @param {Function} callback to call when options has been transformed
+		 */
 		var name = 'Streams/deliver/'+message.fields.type;
 		var handler = Q.getObject(name, Q.handlers, '/');
 		if (!Q.isEmpty(handler)) {
@@ -409,7 +415,9 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				toUserId, 
 				{
 					alert: { title: o.subject },
-					payload: message.getAllInstructions()
+					payload: message.getAllInstructions(),
+					url: o.url,
+					icon: o.icon
 				},
 				callback, 
 				{ view: viewPath, fields: o.fields },
