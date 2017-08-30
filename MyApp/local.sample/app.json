@@ -204,5 +204,8 @@
 				"web": "GET A GOOGLE API KEY for website calls"
 			}
 		}
+	},
+	"MyApp": {
+		"debugging": true
 	}
 }
