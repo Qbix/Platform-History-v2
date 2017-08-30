@@ -249,7 +249,7 @@ Bootstrap.loadHandlers = function (callback) {
 					if (filename.substr(-3) !== '.js') {
 						continue;
 					}
-					var parts = filename.substring(len, filename.length-3).split('/');
+					var parts = filename.substring(len, filename.length-3).split(Q.DS);
 					var handler = Q.require(filename);
 					var obj = Q.handlers;
 					for (var j=0; j<parts.length-1; ++j) {
