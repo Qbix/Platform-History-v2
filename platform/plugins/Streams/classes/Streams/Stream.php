@@ -384,8 +384,19 @@ class Streams_Stream extends Base_Streams_Stream
 				$modifiedFields[$name] = $value;
 			}
 		}
+
+		// any remaining unset fields are filled with config defaults for this stream type
+		$fieldNames = Streams::getExtendFieldNames($this->type);
+		$defaults = Streams_Stream::getConfigField(
+			$this->type, 'defaults', Streams_Stream::$DEFAULTS
+		);
+		foreach ($fieldNames as $f) {
+			if (!isset($this->$f) && array_key_exists($f, $defaults)) {
+				$this->$f = $defaults[$f];
+			}
+		}
+
 		$this->beforeSaveExtended($modifiedFields);
-		
 		$result = parent::beforeSave($modifiedFields);
 		
 		// Assume that the stream's name is not being changed
