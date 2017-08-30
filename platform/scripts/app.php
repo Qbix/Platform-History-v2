@@ -102,7 +102,6 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 	switch ($mode) {
 		case 'sql':
 			$sql_array[$argv[$i]] = array('enabled'=>true);
-			$plugins[] = $argv[$i];
 			$mode = '';
 			break;
 		case 'sql-user-pass':
@@ -220,9 +219,11 @@ if ($auto_plugins) {
 	}
 }
 
-Q_Plugin::checkPermissions(Q_FILES_DIR, $options);
-Q_Plugin::npmInstall(Q_DIR, !empty($options['npm']));
-Q_Plugin::composerInstall(Q_DIR, !empty($options['composer']));
+if (in_array('Q', $plugins) !== false) {
+	Q_Plugin::checkPermissions(Q_FILES_DIR, $options);
+	Q_Plugin::npmInstall(Q_DIR, !empty($options['npm']));
+	Q_Plugin::composerInstall(Q_DIR, !empty($options['composer']));
+}
 
 foreach ($plugins as $plugin) {
 	$cons = Q_Config::get('Q', 'pluginInfo', $plugin, 'connections', array());
@@ -233,6 +234,10 @@ foreach ($plugins as $plugin) {
 	}
 	Q_Plugin::installPlugin($plugin, $options);
 	++$Q_Bootstrap_config_plugin_limit;
+	Q_Bootstrap::configure(true);
+}
+if (empty($plugins)) {
+	$Q_Bootstrap_config_plugin_limit = null;
 	Q_Bootstrap::configure(true);
 }
 
