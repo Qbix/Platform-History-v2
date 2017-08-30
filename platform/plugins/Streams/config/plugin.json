@@ -312,12 +312,16 @@
 				}
 			},
 			"Streams/chat": {
-				"description": "chatroom",
+				"description": "conversation",
 				"create": true,
 				"messages": {
 					"Streams/chat/message": { "post": true },
 					"Streams/chat/edit": { "post": true },
 					"Streams/chat/remove": { "post": true }
+				},
+				"defaults": {
+					"title": "Conversation",
+					"icon": "Streams/chat"
 				}
 			},
 			"Streams/experience": {
