@@ -981,14 +981,9 @@ abstract class Streams extends Base_Streams
 		// extend with any config defaults for this stream type
 		$fieldNames = Streams::getExtendFieldNames($type);
 		$fieldNames[] = 'name';
-		$defaults = Streams_Stream::getConfigField(
-			$stream->type, 'defaults', Streams_Stream::$DEFAULTS
-		);
 		foreach ($fieldNames as $f) {
 			if (isset($fields[$f])) {
 				$stream->$f = $fields[$f];
-			} else if (!isset($stream->$f) && array_key_exists($f, $defaults)) {
-				$stream->$f = $defaults[$f];
 			}
 		}
 	
