@@ -218,12 +218,12 @@ class Users_Email extends Base_Users_Email
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
 		$this->authCode = sha1(microtime() . mt_rand());
-		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
-			. ' emailAddress='.urlencode($this->address);
-		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
+		$link = Q_Uri::url('Users/activate?p=1&code='.urlencode($this->activationCode)
+			. ' emailAddress='.urlencode($this->address));
+		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $this->authCode, 
 			'emailAddress' => $this->address
-		));
+		)));
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
 		/**
