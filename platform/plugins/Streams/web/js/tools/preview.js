@@ -14,13 +14,6 @@
  *   @param {String} options.publisherId The publisher's user id.
  *   @required
  *   @param {String} [options.streamName] If empty, and "creatable" is true, then this can be used to add new related streams.
- *   @param {Function} [options.preprocess] This function receives 
- *   (a callback, this tool, the event if any that triggered it). 
- *   This is your chance to do any processing before the request to create the stream is sent.
- *   The function must call the callback. If it passes false as the first parameter,
- *   it stops the process from continuing. However, if you want to go ahead and continue
- *   to call Q.Streams.create, you can pass here any extra fields for the stream, such
- *   as "title", "content", "attributes" (as JSON string), etc.
  *   @param {Object} [options.related] , Optional information to add a relation from the newly created stream to another one. Usually set by a "Streams/related" tool. Can include:
  *   @param {String} [options.related.publisherId] the id of whoever is publishing the related stream
  *   @param {String} [options.related.streamName] the name of the related stream
@@ -33,6 +26,13 @@
  *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
  *     @param {Number} [options.creatable.addIconSize=100] The size in pixels of the square add icon
  *     @param {Number} [options.creatable.options={}] Any options to pass to Q.Streams.create
+ *     @param {Function} [options.creatable.preprocess] This function receives 
+ *       (a callback, this tool, the event if any that triggered it). 
+ *       This is your chance to do any processing before the request to create the stream is sent.
+ *       The function must call the callback. If it passes false as the first parameter,
+ *       it stops the process from continuing. However, if you want to go ahead and continue
+ *       to call Q.Streams.create, you can pass here any extra fields for the stream, such
+ *       as "title", "content", "attributes" (as JSON string), etc.
  *   @param {Object} [options.imagepicker] Any options to pass to the Q/imagepicker jquery plugin -- see its options.
  *   @uses Q imagepicker
  *   @param {Object} [options.actions] Any options to pass to the Q/actions jquery plugin -- see its options.
