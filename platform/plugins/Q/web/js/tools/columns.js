@@ -50,6 +50,10 @@ Q.Tool.define("Q/columns", function(options) {
 	Q.addStylesheet('Q/plugins/Q/css/columns.css');
 
 	prepareColumns(tool);
+	
+	if (state.title === undefined) {
+		state.title = '<img class="Q_columns_loading" src="' + Q.url('Q/plugins/Q/img/throbbers/loading.gif') +'" alt="">';
+	}
 
 	var selector = '.Q_close';
 	if (Q.info.isMobile && state.back.triggerFromTitle) {
@@ -122,7 +126,7 @@ Q.Tool.define("Q/columns", function(options) {
 		src: "Q/plugins/Q/img/x.png",
 		clickable: null
 	},
-	title: '<img class="Q_columns_loading" src="' + Q.url('Q/plugins/Q/img/throbbers/loading.gif') +'" alt="">',
+	title: undefined,
 	column: undefined,
 	controls: undefined,
 	scrollbarsAutoHide: {},
@@ -669,7 +673,6 @@ Q.Tool.define("Q/columns", function(options) {
 		var top = 0;
 		
 		$te.prevAll()
-		.add($te.parents().prevAll())
 		.each(function () {
 			var $this = $(this);
 			if ($this.css('position') === 'fixed'
@@ -680,9 +683,6 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');
-			$te.add($container)
-				.add($columns)
-				.width($(window).width());
 			if (!state.fullscreen) {
 				$te.add($container)
 					.add($columns)
