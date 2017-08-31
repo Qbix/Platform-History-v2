@@ -85,7 +85,7 @@ function _Streams_default_preview(options, preview) {
 		var editable = stream.testWriteLevel('suggest');
 		var mode = editable ? 'edit' : 'view';
 		var fields = Q.extend({}, state.templates[mode].fields, f, {
-			alt: stream.fields.title,
+			alt: 'icon',
 			title: stream.fields.title,
 			inplace: inplace
 		});
