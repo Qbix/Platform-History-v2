@@ -602,6 +602,8 @@ class Q
 		}
 
 		$params = array_merge($params, Q_Text::params($parts));
+		Q::log($viewName, 'a');
+		Q::log(Q::ifset($params, 'activation', ''), 'a');
 
 		/**
 		 * @event {before} Q/view
