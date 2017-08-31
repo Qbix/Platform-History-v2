@@ -673,7 +673,6 @@ Q.Tool.define("Q/columns", function(options) {
 		var top = 0;
 		
 		$te.prevAll()
-		.add($te.parents().prevAll())
 		.each(function () {
 			var $this = $(this);
 			if ($this.css('position') === 'fixed'
@@ -684,9 +683,6 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');
-			$te.add($container)
-				.add($columns)
-				.width($(window).width());
 			if (!state.fullscreen) {
 				$te.add($container)
 					.add($columns)
