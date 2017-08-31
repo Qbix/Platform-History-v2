@@ -8663,7 +8663,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			}
 			// the partials, helpers and text should have already been processed
 			if (params.text[1]) {
-				Q.extend(fields, 10, params.text[1]);
+				fields = Q.extend(fields, 10, params.text[1]);
 			}
 			var tbaOld = Q.Tool.beingActivated;
 			var pbaOld = Q.Page.beingActivated;
