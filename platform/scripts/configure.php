@@ -65,7 +65,7 @@ do {
 	}
 } while($go_again);
 
-if ($desired !== CONFIGURE_ORIGINAL_APP_NAME) {
+if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	$it = new RecursiveDirectoryIterator(APP_DIR);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)) continue;

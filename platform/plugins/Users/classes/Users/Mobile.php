@@ -233,9 +233,9 @@ class Users_Mobile extends Base_Users_Mobile
 		if (substr($number, 0, 2) == '+1') {
 			$number = substr($number, 2);
 		}
-		$link = 'Users/activate?p=1&code='.urlencode($this->activationCode)
-			. ' mobileNumber='.urlencode($number);
-		$unsubscribe = 'Users/unsubscribe?mobileNumber='.urlencode($number);
+		$link = Q_Uri::url('Users/activate?p=1&code='.urlencode($this->activationCode)
+			. ' mobileNumber='.urlencode($number));
+		$unsubscribe = Q_Uri::url('Users/unsubscribe?mobileNumber='.urlencode($number));
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
 		/**
