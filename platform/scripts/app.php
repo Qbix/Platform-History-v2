@@ -200,7 +200,7 @@ if (is_dir($uploads_dir)) {
 	Q_Utils::symlink($uploads_dir, $web_uploads_path);
 }
 
-$text_dir = APP_TEXT_DIR.DS.$app.DS.'text';
+$text_dir = APP_TEXT_DIR;
 if (is_dir($text_dir)) {
 	$web_text_path = APP_WEB_DIR.DS.'Q'.DS.'text';
 	if (file_exists($web_text_path)) {

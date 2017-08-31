@@ -10,4 +10,5 @@ files/MyApp/uploads/*/*
 !files/MyApp/uploads/Streams/.dir
 web/Q/plugins/*
 web/Q/uploads
+web/Q/text
 !*.dir

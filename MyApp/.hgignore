@@ -11,3 +11,4 @@ syntax: regexp
 ^files/MyApp/uploads/Streams/(?!.dir).+
 ^web/Q/uploads
 ^web/Q/plugins
+^web/Q/text
