@@ -83,7 +83,7 @@ function _Q_autogrow(o) {
 			var tH = t.scrollHeight; // + H;
 			t.style.height = tH + 'px';
 			setTimeout(function () {
-				c.style.height = t.offsetHeight + 'px';
+				c.style.height = $p.outerHeight(true) + 'px';
 				if (prevH && prevH != tH) {
 					var $sp = $(c.scrollingParent());
 					var st = $sp.scrollTop();
