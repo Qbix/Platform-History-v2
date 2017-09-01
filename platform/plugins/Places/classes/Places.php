@@ -333,30 +333,22 @@ abstract class Places extends Base_Places
 	 * following parameters.
 	 * @method byTime
 	 * @static
-	 * @param {string} [$relationType=""] The type of the relation
-	 * @param {integer} [$fromTime=time()] A unix timestamp, in either seconds or milliseconds
-	 * @param {integer} [$toTime=time()] A unix timestamp, in either seconds or milliseconds
+	 * @param {string} $relationType The type of the relation
+	 * @param {integer} $fromTime A unix timestamp, in either seconds or milliseconds
+	 * @param {integer} $toTime A unix timestamp, in either seconds or milliseconds
 	 * @param {string} [$experienceId="main"] The id of a community experience, the last part of its stream name
 	 * @param {string} [$meters=null] One of the values in Places/nearby/meters config array,
 	 *  used to find the right Places/timeslot stream.
 	 */
 	static function byTime(
-		$relationType = null,
-		$fromTime = null, 
-		$toTimestamp = null, 
+		$relationType,
+		$fromTime, 
+		$toTimestamp, 
 		$experienceId = 'main', 
 		$meters = null)
 	{
-		if (!isset($fromTime)) {
-			$fromTime = time();
-		} else {
-			$fromTime = Q_Utils::timestamp($fromTime);
-		}
-		if (!isset($toTimestamp)) {
-			$toTime = time() + self::defaultListingDuration();
-		} else {
-			$toTime = Q_Utils::timestamp($toTime);
-		}
+		$fromTime = Q_Utils::timestamp($fromTime);
+		$toTime = Q_Utils::timestamp($toTime);
 		if (!isset($meters)) {
 			$metersArray = Q_Config::expect('Places', 'nearby', 'meters');
 			$meters = $metersArrays[floor(count($metersArray)/2)];
