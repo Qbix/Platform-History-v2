@@ -58,6 +58,9 @@
 				]
 			}
 		},
+		"javascript": {
+			"uris": ["MyApp/home"]
+		},
 		"environments": {
 			"live": {
 				"files": {
@@ -116,9 +119,6 @@
 				"subject": false,
 				"body": false
 			}
-		},
-		"javascript": {
-			"uris": ["MyApp/home"]
 		},
 		"uris": {
 			"MyApp/afterActivate": "MyApp/home"
