@@ -117,6 +117,9 @@
 				"body": false
 			}
 		},
+		"javascript": {
+			"uris": ["MyApp/home"]
+		},
 		"uris": {
 			"MyApp/afterActivate": "MyApp/home"
 		},
