@@ -8545,6 +8545,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	// defaults to handlebars templates
 	var o = Q.extend({}, Q.Template.load.options, options);
 	var tpl = Q.Template.collection;
+	var tpi = Q.Template.info;
 	
 	// Now attempt to load the template.
 	// First, search the DOM for templates loaded inside script tag with type "text/theType",
@@ -8555,16 +8556,18 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	for (i = 0, l = scripts.length; i < l; i++) {
 		script = scripts[i];
 		var type = script.getAttribute('type');
+		var t;
 		if (script && script.id && script.innerHTML
 		&& type && type.substr(0, 5) === 'text/'
-		&& o.types[type.substr(5)]) {
+		&& o.types[t = type.substr(5)]) {
 			var n = Q.normalize(script.id);
 			tpl[n] = script.innerHTML.trim();
+			tpi[n] = { type: t };
 			Q.each(['partials', 'helpers', 'text'], function (i, aspect) {
 				var attr = script.getAttribute('data-' + aspect);
 				var value = attr && JSON.parse(attr);
 				if (value) {
-					Q.setObject([n, aspect], value, Q.Template.info);
+					tpi[n][aspect] = value;
 				}
 			});
 			trash.unshift(script);
