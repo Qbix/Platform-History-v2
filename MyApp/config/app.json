@@ -58,6 +58,9 @@
 				]
 			}
 		},
+		"javascript": {
+			"uris": ["MyApp/home"]
+		},
 		"environments": {
 			"live": {
 				"files": {
