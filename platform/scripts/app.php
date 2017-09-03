@@ -20,10 +20,6 @@ Options:
 --all Will install plugins listed in Q/app/plugins in \$APP_DIR/config/app.json
   All connections/schemas listed in Q/pluginInfo and Q/appInfo will be installed also.
 
---noapp Will skip installation of the app. Can be used to install/update plugins.
-
--p \$PLUGIN_NAME Install/update plugin
-
 -s \$CONN_NAME
   This will execute app's install/upgrade sql scripts for connections \$CONN_NAME.
   Note: running SQL statements may require elevated privileges.

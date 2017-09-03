@@ -6185,6 +6185,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
  *  A hash of options, to be passed to Q.request and Q.action (see their options).
+ * @return {Q.Request} Object corresponding to the request
  */
 Q.req = function _Q_req(uri, slotNames, callback, options) {
 	if (typeof options === 'string') {
@@ -6240,7 +6241,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
  * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated
  * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed
- * @return {String} the url that was requested
+ * @return {Q.Request} Object corresponding to the request
  */
 Q.request = function (url, slotNames, callback, options) {
 	
@@ -6262,14 +6263,15 @@ Q.request = function (url, slotNames, callback, options) {
 		slotNames = slotNames.split(',');
 	}
 	var o = Q.extend({}, Q.request.options, options);
+	var request = new Q.Request(url, slotNames, callback, o);
 	if (o.skipNonce) {
-		return _Q_request_makeRequest.call(this, url, slotNames, callback, o);
+		_Q_request_makeRequest.call(this, url, slotNames, callback, o);
 	} else {
 		Q.loadNonce(_Q_request_makeRequest, this, [url, slotNames, callback, o]);
 	}
+	return request;
+	
 	function _Q_request_makeRequest (url, slotNames, callback, o) {
-
-		var request = new Q.Request(url, slotNames, callback, o);
 
 		var tout = false, t = {};
 		if (o.timeout !== false) {
@@ -6454,7 +6456,7 @@ Q.request = function (url, slotNames, callback, options) {
 		if (!o.query) {
 			var script = Q.addScript(url2, null, {'duplicate': o.duplicate});
 		}
-		return url2;
+		request.urlRequested = url2;
 	}
 };
 
