@@ -42,12 +42,11 @@ Users_AppUser_Facebook.client = function (appId) {
  */
 Users_AppUser_Facebook.prototype.handlePushNotification = function (notification, callback) {
 	if (!this.fields.platform_uid) {
-		var e = new Q.Error("Users.AppUser.prototype.pushNotification: empty platform_uid");
-		return callback(e);
+		return Q.handle(callback, this, [new Q.Error("Users.AppUser.prototype.pushNotification: empty platform_uid")]);
 	}
 	var info = Users.appInfo('facebook', appId);
 	if (!info.appId || !info.secret) {
-		var e = new Q.Error("Users.AppUser.prototype.pushNotification: empty appId or secret");
+		Q.handle(callback, this, [new Q.Error("Users.AppUser.prototype.pushNotification: empty appId or secret")]);
 	}
 	var at = this.fields.access_token;
 	var graph = 'https://graph.facebook.com';
@@ -57,7 +56,7 @@ Users_AppUser_Facebook.prototype.handlePushNotification = function (notification
 		href: notification.href,
 		ref: notification.ref
 	}, function () {
-		callback();
+		Q.handle(callback, this);
 	});
 };
 
