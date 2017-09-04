@@ -58,7 +58,7 @@ module.exports = Users_Device.Android = Users_Device_Android;
 Users_Device.prototype.handlePushNotification = function (notification, callback) {
 	var device = this;
 	if (!notification.alert.title || !notification.alert.body) {
-		return callback(new Error('Notification title and body are required'));
+		return Q.handle(callback, this, [new Error('Notification title and body are required')]);
 	}
 	var serverKey = Q.Config.expect(['Users', 'apps', 'android', Q.Config.expect(['Q', 'app']), "key"]);
 	var FCM = require('fcm-node');
@@ -77,9 +77,7 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 		message.data = { badge: notification.badge };
 	}
 	fcm.send(message, function (err, response) {
-		if (callback) {
-			callback(err, response);
-		}
+		Q.handle(callback, this, [err, response]);
 	});
 };
 
