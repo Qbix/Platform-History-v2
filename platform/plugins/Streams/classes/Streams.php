@@ -2009,22 +2009,30 @@ abstract class Streams extends Base_Streams
 				'categoryName', 'streamName'
 			);
 
-			if ($u = Streams_Stream::getConfigField($category->type, array('relatedTo', $type, 'uri'),
-				Streams_Stream::getConfigField($category->type, array('relatedTo', '*', 'uri', null)))
-			) {
+			if ($u = Streams_Stream::getConfigField($category->type, 
+				array('relatedTo', $type, 'uri'),
+				Streams_Stream::getConfigField($category->type, array(
+					'relatedTo', '*', 'uri', null
+				))
+			)) {
 				$fromUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
 			}
-			if ($u = Streams_Stream::getConfigField($stream->type, array('relatedFrom', $type, 'uri'),
-				Streams_Stream::getConfigField($stream->type, array('relatedFrom', '*', 'uri', null)))
-			) {
+			if ($u = Streams_Stream::getConfigField($stream->type, 
+				array('relatedFrom', $type, 'uri'),
+				Streams_Stream::getConfigField($stream->type, array(
+					'relatedFrom', '*', 'uri', null
+				))
+			)) {
 				$toUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
 			}
 
 			$description = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField($category->type, array('relatedTo', $type, 'description'),
-					Streams_Stream::getConfigField($category->type, array('relatedTo', '*', 'description'),
-						"New $fromDisplayType added"
-					)),
+				Streams_Stream::getConfigField($category->type,
+					array('relatedTo', $type, 'description'),
+					Streams_Stream::getConfigField($category->type, array(
+						'relatedTo', '*', 'description'
+					), "New $fromDisplayType added"
+				)),
 				$params
 			);
 

@@ -72,7 +72,7 @@ class Q_Text
 	 * @method get
 	 * @param {string|array} name The name of the text source. Can also be an array,
 	 *  in which case the text sources are merged in the order they are named.
-	 * @param {array} [$options] Options to use for Q.request . May also include:
+	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
 	 * @param {boolean} [$options.merge=false] For Q_Text::set if content is loaded
 	 * @param {string} [$options.language=null] Override language
