@@ -77,7 +77,7 @@ Users_Device.prototype.handlePushNotification = function (notification, options,
 			errors = errors || [];
 			errors.push(result);
 		});
-		callback.call(device, errors, notification, n);
+		Q.handle(callback, device, [errors, notification, n]);
 	});
 };
 
