@@ -423,7 +423,8 @@ class Places_Nearby
 		$relationType,
 		$fromTime, 
 		$toTime, 
-		$experienceId = 'main')
+		$experienceId = 'main',
+		$options = array())
 	{
 		$fromTime = Q_Utils::timestamp($fromTime);
 		$toTime = Q_Utils::timestamp($toTime);
