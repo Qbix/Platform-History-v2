@@ -40,33 +40,40 @@ if (!is_dir($dir)) {
 }
 
 #First do the platform rsync
-$pluginNames = glob(APP_WEB_DIR.DS.'plugins'.DS.'*');
-foreach ($pluginNames as $src) {
-	$pluginName = basename($src);
-	$pluginsDir = $dir.DS.'plugins';
-	$dest = realpath($pluginsDir.DS.$pluginName);
-	if (!$dest or !file_exists($dest)) {
-		mkdir($pluginsDir);
-	}
-	$dest = $pluginsDir.DS.$pluginName;
-	if (!is_dir($dest)) {
-		mkdir($dest);
+$dirs = glob(APP_WEB_DIR.DS.'Q'.DS.'*');
+foreach ($dirs as $dir) {
+	$basename = basename($dir);
+	$subdirs = glob($dir.DS.'*');
+	foreach ($subdirs as $src) {
+		$subdir = basename($src);
+		$destDir = $dir.DS.$subdir;
+		$dest = realpath($destDir.DS.$subdir);
+		if (!$dest or !file_exists($dest)) {
+			mkdir($destDir);
+		}
+		$dest = $destDir.DS.$subdir;
 		if (!is_dir($dest)) {
-			die ("Could not create $dest\n");
+			if (file_exists($dest)) {
+				unlink($dest);
+			}
+			mkdir($dest);
+			if (!is_dir($dest)) {
+				die ("Could not create $dest\n");
+			}
 		}
-	}
-	$dest = realpath($dest);
-	echo "Syncing $pluginName...\n";
-	$exclude = Q_Config::get("Q", "bundle", "exclude", $pluginName, array());
-	$options = '';
-	foreach ($exclude as $e) {
-		$excludePath = "$src/$e";
-		if (!realpath($excludePath)) {
-			echo "\n  (Warning: missing $excludePath)\n";
+		$dest = realpath($dest);
+		echo "Syncing $basename/$subdir...\n";
+		$exclude = Q_Config::get("Q", "bundle", "exclude", $subdir, array());
+		$options = '';
+		foreach ($exclude as $e) {
+			$excludePath = "$src/$e";
+			if (!realpath($excludePath)) {
+				echo "\n  (Warning: missing $excludePath)\n";
+			}
+			$options .= " --exclude=" . escapeshellarg($e);
 		}
-		$options .= " --exclude=" . escapeshellarg($e);
+		exec ("rsync -az --copy-links $options $src/* $dest\n");
 	}
-	exec ("rsync -az --copy-links $options $src/* $dest\n");
 }
 
 echo "Syncing $app...\n";
