@@ -158,7 +158,7 @@ function Places_geolocation_post()
 				Streams::unsubscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
 			}
 			$attributes['unsubscribed'] = Places_Nearby::unsubscribe(
-				$oldLatitude, $oldLongitude, $oldMeters
+				Users::communityId(), $oldLatitude, $oldLongitude, $oldMeters
 			);
 		}
 	
@@ -183,6 +183,7 @@ function Places_geolocation_post()
 				Streams::subscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
 			}
 			$attributes['subscribed'] = Places_Nearby::subscribe(
+				Users::communityId(),
 				$latitude, $longitude, $meters
 			);
 		}	

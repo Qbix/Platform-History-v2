@@ -2,6 +2,8 @@
 	"name": "Q.Users",
 	"description": "Users Plugin",
 	"author": "Qbix",
+	"homepage": "https://qbix.com/platform",
+	"license": "AGPL-1.0",
 	"version": "1.0.0",
 	"engines": {
 		"node": ">= 0.6.0"
