@@ -11,7 +11,7 @@ function Users_0_8_3_Users_mysql()
 	$user->id = $communityId;
 	$user->username = $communityName;
 	$user->url = $appRootUrl;
-	$user->icon = "$appRootUrl/img/icon";
+	$user->icon = "{{baseUrl}}/img/icon";
 	$user->signedUpWith = 'none';
 	$user->save();
 }
