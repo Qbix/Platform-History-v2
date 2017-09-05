@@ -83,6 +83,51 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	{
 		$this->extra = '{}';
 	}
+	
+	/**
+	 * Fetch all the relations given multiple category streams,
+	 * and sort them by ascending weight.
+	 * @method fetchAll
+	 * @static
+	 * @param {string} $publisherId The publisher of the category streams
+	 * @param {array} $streamNames Array of criteria to put for stream names,
+	 *  which can include strings, arrays, Db_Range or Db_Expression objects.
+	 * @param {string|array} $relationType The type of the relation.
+	 *  Can also be an array of criteria corresponding to the $streamNames array.
+	 * @param {array} [$options=array()] Options to apss to the Streams::related function.
+	 *  Can also include the following:
+	 * @param {string} [$options.asUserId] Override the default user id to fetch as.
+	 *  Not used for now, since this function always fetches the relations only.
+	 * @return {array} An array of Streams_RelatedTo objects sorted by ascending weight.
+	 */
+	static function fetchAll($publisherId, $streamNames, $relationType, $options = array())
+	{
+		$result = array();
+		foreach ($streamNames as $i => $streamName) {
+			$type = is_string($relationType)
+				? $relationType
+				: $relationType[$i];
+			$options['relationsOnly'] = true;
+			$options['type'] = $type;
+			$relations = Streams::related(
+				Q::ifset($options, 'asUserId', null),
+				Users::communityId(),
+				$streamName,
+				true,
+				$options
+			);
+			$result = array_merge($result, $relations);
+		}
+		uasort($result, array('Streams_RelatedTo', '_compareByWeight'));
+		return $result;
+	}
+	
+	static function _compareByWeight($a, $b)
+	{
+		return ($a->weight !== $b->weight)
+			? ($a->weight > $b->weight ? 1 : -1)
+			: 0;
+	}
 
 	/**
 	 * Implements the __set_state method, so it can work with
