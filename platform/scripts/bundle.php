@@ -40,7 +40,7 @@ if (!is_dir($dir)) {
 }
 
 #First do the platform rsync
-$pluginNames = glob(APP_WEB_DIR.DS.'plugins'.DS.'*');
+$pluginNames = glob(APP_WEB_DIR.DS.'Q'.DS.'plugins'.DS.'*');
 foreach ($pluginNames as $src) {
 	$pluginName = basename($src);
 	$pluginsDir = $dir.DS.'plugins';
