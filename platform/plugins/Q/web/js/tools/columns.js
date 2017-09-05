@@ -555,7 +555,8 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Number|Array|Object} index The index of the column to close.
 	 *  You can pass an array of indexes here, or an object with "min" and
 	 *  optional "max"
-	 * @param {Function} callback Called when the column is opened
+	 * @param {Function} callback Called when the column is closed, or if no column
+	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override various tool options
 	 * @return {Boolean} Whether the column was actually closed.
 	 */
@@ -577,15 +578,18 @@ Q.Tool.define("Q/columns", function(options) {
 				waitFor.push(i);
 			}, {ascending: false});
 		}
+		var div = tool.column(index);
 		if (p) {
-			p.add(waitFor, callback).run();
+			p.add(waitFor, function () {
+				Q.handle(callback, tool, [index, div]);
+			}).run();
+			return false;
+		}
+		if (!div) {
+			Q.handle(callback, tool, [index, div]);
 			return false;
 		}
 		var o = Q.extend({}, 10, state, 10, options);
-		var div = tool.column(index);
-		if (!div) {
-			return false;
-		}
 		var $div = $(div);
 		var width = $div.outerWidth(true);
 		var w = $div.outerWidth(true);
