@@ -204,7 +204,9 @@ if (is_dir($text_dir)) {
 }
 
 $web_views_path = APP_WEB_DIR.DS.'Q'.DS.'views';
-mkdir($web_views_path, 0755, true);
+if (!file_exists($web_views_path)) {
+	mkdir($web_views_path, 0755, true);
+}
 
 if ($auto_plugins) {
 	$plugins = Q_Config::get('Q', 'plugins', array());
