@@ -31,6 +31,7 @@ syntax: regexp
 ^\.project
 ^\.settings/
 node_modules/
+vendor/
 
 # Class files includes
 .+\.php\.inc$

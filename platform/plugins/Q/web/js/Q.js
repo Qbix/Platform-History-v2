@@ -508,12 +508,20 @@ Date.now = function _Date_now() {
 };
 
 /**
- * Returns a Date from a dateTimeString
+ * Returns a Date from a dateTimeString.
  * @param {String} dateTimeString
+ * @param {Number} [timezoneOffset=0]
+ *  The timezone in which the dateTimeString was supposed to be. Defaults to UTC.
  * @return {Date}
  */
-Date.fromDateTime = function _Date_fromDateTime(dateTimeString) {
-	return new Date(dateTimeString.replace(/-/g,"/"));
+Date.fromDateTime = function _Date_fromDateTime(dateTimeString, timezoneOffset) {
+	timezoneOffset = timezoneOffset || 0;
+	var date = new Date(dateTimeString.replace(/-/g,"/"));
+	var minutes = (new Date()).timezoneOffset() - timezoneOffset;
+	if (minutes) {
+		date = new Date(date.getTime() + minutes*60000);
+	}
+	return date;
 };
 
 /**
@@ -525,6 +533,9 @@ Date.fromDateTime = function _Date_fromDateTime(dateTimeString) {
 Date.fromTimestamp = function (timestamp) {
 	if (isNaN(timestamp)) {
 		return null;
+	}
+	if (timezoneOffset === undefined) {
+		timezoneOffset = (new Date()).timezoneOffset()
 	}
 	timestamp = parseFloat(timestamp);
 	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);

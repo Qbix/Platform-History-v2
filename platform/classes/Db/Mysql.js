@@ -131,12 +131,25 @@ function Db_Mysql(connName, dsn) {
 					return _setUpConnection();
 				}
 				Q.log("Db.Mysql error: " + err, 'mysql');
-				mq.getSQL(function (repres) {
-					Q.log("Query was: " + repres, 'mysql');
-				});
-				// our app will survive mysql errors, and continue operating
+				if (mq) {
+					mq.getSQL(function (repres) {
+						Q.log("Query was: " + repres, 'mysql');
+					});
+				}
+				if (!Q.Config.expect(['Db', 'survive', 'mysql'])) {
+					console.log("Db: MySQL error, see files/Q/logs/mysql_node.log");
+					process.exit();
+					// our app will survive mysql errors, and continue operating
+				}
 			});
-			connection.query('SET NAMES UTF8');
+			var time = require('time');
+			var timezone = Q.Config.expect(['Q', 'defaultTimezone']);
+			var offset = new time.Date().setTimezone(timezone).getTimezoneOffset();
+		    var dt = new Date(
+		       Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
+		    ).toTimeString();
+		    var tz = (offset < 0 ? '-' : '+') + dt.substr(0,2) + ':' + dt.substr(3,2);
+			connection.query('SET NAMES UTF8; SET time_zone = "'+tz+'"');
 		}
 		
 		info = this.info(shardName, modifications);
