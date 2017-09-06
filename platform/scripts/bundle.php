@@ -84,7 +84,7 @@ foreach ($srcs as $src) {
 			}
 		}
 		$realdest = realpath($dest);
-		echo "Syncing $basename/$basename2...\n";
+		echo "Syncing web/Q/$basename/$basename2...\n";
 		$pluginName = $basename2;
 		if (glob("$subsrc/*")) {
 			exec ("rsync -az --copy-links $options[$pluginName] $subsrc/* $dest\n");
@@ -93,7 +93,7 @@ foreach ($srcs as $src) {
 }
 
 // Then do the app rsync
-echo "Syncing $app...\n";
+echo "Syncing web...\n";
 $src = APP_WEB_DIR;
 $dest = $dir;
 exec ("rsync -az --copy-links $options[$app] $src/* $dest\n");
