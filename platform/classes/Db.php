@@ -37,6 +37,22 @@ interface Db_Interface
 	 *  The arguments
 	 */
 	//function __call ($name, array $arguments);
+	
+	/**
+	 * Actually makes a connection to the database (by creating a PDO instance)
+	 * @method reallyConnect
+	 * @param {array} [$shardName=null] A shard name that was added using Db::setShard.
+	 * This modifies how we connect to the database.
+	 * @return {PDO} The PDO object for connection
+	 */
+	function reallyConnect($shardName = null);
+	
+	/**
+	 * If connected, sets the timezone in the database to match the one in PHP.
+	 * @param {integer} [$offset=timezone_offset_get()] in seconds
+	 * @method setTimezone
+	 */
+	function setTimezone($offset = null);
 
 	/**
 	 * Returns the name of the connection with which this Db object was created.
@@ -320,18 +336,35 @@ interface Db_Interface
 abstract class Db
 {	
 	/**
-	 * The array of db objects that have been constructed
+	 * The array of Db objects that have been constructed
 	 * @property $dbs
 	 * @type array
 	 */
- 	public static $dbs;
+ 	public static $dbs = array();
 	
 	/**
-	 * The database connections that have been added
+	 * Info about the database connections that have been added
 	 * @property $connections
 	 * @type array
 	 */
  	public static $connections;
+
+	/**
+	 * The array of all pdo objects that have been constructed,
+	 * representing actual connections made to the databases.
+	 * @property $pdo_array
+	 * @type array
+	 * @protected
+	 * @default array()
+	 */
+	protected static $pdo_array = array();
+
+	/**
+	 * Info about the database connections that have been added
+	 * @property $connections
+	 * @type array
+	 */
+	protected static $timezoneSet = array();
 
 	/**
 	 * Add a database connection with a name
@@ -385,11 +418,11 @@ abstract class Db
 	static function getConnection ($name)
 	{
 		if (class_exists('Q_Config')) {
-			$result = Q_Config::get('Db', 'connections', $name, null);
+			$result = Q_Config::get('Db', 'connections', $name, array());
 		} else { // standalone, no Q
 			$result = isset(self::$connections['name'])
 				? self::$connections[$name]
-				: null;
+				: array();
 		}
 		return ($name !== '*' and $base = self::getConnection('*'))
 			? array_merge($base, $result)
@@ -518,6 +551,58 @@ abstract class Db
 		$db_adapted = new $class_name($conn_name);
 		Db::$dbs[$conn_name] = $db_adapted;
 		return $db_adapted;
+	}
+
+	/**
+	 * Gets the key into the associative $pdo_array
+	 * corresponding to some database credentials.
+	 * @method pdo
+	 * @protected
+	 * @static
+	 * @param {string} $dsn The dsn to create PDO
+	 * @param {string} $username Username for connection
+	 * @param {string} $password Passwork for connection
+	 * @param {array} $driver_options Driver options
+	 * @return {PDO}
+	 */
+	static function pdo ($dsn, $username, $password, $driver_options)
+	{
+		$key = $dsn . $username . $password . serialize($driver_options);
+		if (isset(self::$pdo_array[$key])) {
+			return self::$pdo_array[$key];
+		}
+		// Make a new connection to a database!
+		try {
+			self::$pdo_array[$key] = @new PDO($dsn, $username, $password, $driver_options);
+		} catch (Exception $e) {
+			if (class_exists('Q_Config') and Q_Config::get('Db', 'exceptions', 'log', true)) {
+				Q::log($e);
+			}
+			throw $e;
+		}
+		return self::$pdo_array[$key];
+	}
+
+	/**
+	 * If connected, sets the timezone in the database to match the one in PHP.
+	 * @param {integer} [$offset=timezone_offset_get()] in seconds
+	 * @method setTimezones
+	 */
+	static function setTimezones($offset = null)
+	{
+		if (!isset($offset)) {
+			$offset = (int)date('Z');
+		}
+		if (!$offset) {
+			$offset = 0;
+		}
+		self::$timezoneSet = array();
+		foreach (Db::$dbs as $db) {
+			if ($db->pdo and !in_array($db->pdo, self::$timezoneSet)) {
+				$db->setTimezone($offset);
+				self::$timezoneSet[] = $db;
+			}
+		}
 	}
 
 	/**
