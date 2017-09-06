@@ -50,6 +50,11 @@ Bootstrap.configure = function (callback, reload) {
 	if (reload) {
 		clearTimeout(_reloadConfig); // if called manually clear the loop
 	}
+	var c = callback;
+	callback = function () {
+		process.env.tz = Q.Config.expect(['Q', 'defaultTimezone']);
+		c.apply(this, arguments);
+	}
 	var Config = new Q.Tree();
 	var pluginInfo = {};
 	var p = new Q.Pipe(['Q_config', 'app_merged'], function (params) {
@@ -139,7 +144,9 @@ Bootstrap.configure = function (callback, reload) {
 				for (var i=0; i<config_files.length; i++) {
 					Q.Config.getFromServer(config_files[i], p.fill(config_files[i]));
 				}
-			} else callback && callback();
+			} else {
+				callback && callback();
+			}
 		}
 		function _merge_app_config (err) {
 			if (err) {
