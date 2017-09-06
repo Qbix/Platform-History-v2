@@ -37,15 +37,6 @@ class Db_Mysql implements Db_Interface
 	public $pdo;
 	
 	/**
-	 * The array of all pdo objects that have been constructed
-	 * @property $pdo_array
-	 * @type array
-	 * @protected
-	 * @default array()
-	 */
-	protected static $pdo_array = array();
-	
-	/**
 	 * The name of the connection
 	 * @property $connectionName
 	 * @type string
@@ -91,6 +82,9 @@ class Db_Mysql implements Db_Interface
 	 */
 	function reallyConnect($shardName = null)
 	{
+		if ($this->pdo) {
+			return $this->pdo;
+		}
 		$connectionName = $this->connectionName;
 		$connectionInfo = Db::getConnection($connectionName);
 		if (empty($connectionInfo)) {
@@ -148,7 +142,7 @@ class Db_Mysql implements Db_Interface
 
 		// The connection may have already been made with these parameters,
 		// in which case we will just retrieve the existing connection.
-		$this->pdo = self::pdo($dsn, $username, $password, $driver_options);
+		$this->pdo = Db::pdo($dsn, $username, $password, $driver_options);
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$this->shardName = $shardName;
 		$this->dbname = $dsn_array['dbname'];
@@ -170,7 +164,29 @@ class Db_Mysql implements Db_Interface
 		}
 		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+		$this->setTimezone();
 		return $this->pdo;
+	}
+	
+	/**
+	 * Sets the timezone in the database to match the one in PHP
+	 * @param {integer} [$offset=timezone_offset_get()] in seconds
+	 * @method setTimezone
+	 */
+	function setTimezone($offset = null)
+	{
+		if (!isset($offset)) {
+			$offset = (int)date('Z');
+		}
+		if (!$offset) {
+			$offset = 0;
+		}
+		$abs = abs($offset);
+		$hours = sprintf("%02d", floor($abs / 3600));
+		$minutes = sprintf("%02d", floor(($abs % 3600) / 60));
+		$sign = ($offset > 0) ? '+' : '-';
+		echo "$sign$hours:$minutes"; exit;
+		$this->rawQuery("SET time_zone = '$sign$hours:$minutes';")->execute();
 	}
 	
 	/**
@@ -181,36 +197,6 @@ class Db_Mysql implements Db_Interface
 	function shardName()
 	{
 		return $this->shardName;
-	}
-	
-	/**
-	 * Gets the key into the associative $pdo_array
-	 * corresponding to some database credentials.
-	 * @method pdo
-	 * @protected
-	 * @static
-	 * @param {string} $dsn The dsn to create PDO
-	 * @param {string} $username Username for connection
-	 * @param {string} $password Passwork for connection
-	 * @param {array} $driver_options Driver options
-	 * @return {PDO}
-	 */
-	protected static function pdo ($dsn, $username, $password, $driver_options)
-	{
-		$key = $dsn . $username . $password . serialize($driver_options);
-		if (isset(self::$pdo_array[$key])) {
-			return self::$pdo_array[$key];
-		}
-		// Make a new connection to a database!
-		try {
-			self::$pdo_array[$key] = @new PDO($dsn, $username, $password, $driver_options);
-		} catch (Exception $e) {
-			if (class_exists('Q_Config') and Q_Config::get('Db', 'exceptions', 'log', true)) {
-				Q::log($e);
-			}
-			throw $e;
-		}
-		return self::$pdo_array[$key];
 	}
 
 	/**

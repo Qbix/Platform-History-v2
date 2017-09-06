@@ -13,4 +13,6 @@ text/*
 web/Q/plugins/*
 web/Q/uploads
 web/Q/text
+vendor/
+npm_modules/
 !*.dir
