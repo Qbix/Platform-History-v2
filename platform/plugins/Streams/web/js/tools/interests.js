@@ -261,7 +261,8 @@ Q.Tool.define("Streams/interests", function (options) {
 			var wasSelected = $this.hasClass('Q_selected');
 			var category = title.split(':')[0].trim();
 			var title2 = title.split(':')[1].trim();
-			if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])) {
+			if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])
+			|| !Q.Users.loggedInUserId()) {
 				return;
 			};
 			if (wasSelected) {

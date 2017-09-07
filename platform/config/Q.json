@@ -1,6 +1,6 @@
 {
 	"Q": {
-		"defaultTimezone": "America/New_York",
+		"defaultTimezone": "UTC",
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["Q/before/Q/responseExtras"],
 			"Q/tool/render": ["Q/before/Q/tool/render"],
@@ -155,6 +155,9 @@
 	"Db": {
 		"sql": {
 			"querySeparator": "-------- NEXT QUERY STARTS HERE --------"
+		},
+		"survive": {
+			"mysql": false
 		}
 	}
 }

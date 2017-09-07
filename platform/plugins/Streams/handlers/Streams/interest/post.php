@@ -24,6 +24,8 @@ function Streams_interest_post()
 	}
 	$publisherId = Q::ifset($_REQUEST, 'publisherId', Users::communityId());
 	$name = 'Streams/interest/' . Q_Utils::normalize($title);
+	list($latitude, $longitude, $meters) = Places_Nearby::defaults();
+	Places_Nearby::stream($publisherId, $latitude, $longitude, $meters);
 	$stream = Streams::fetchOne(null, $publisherId, $name);
 	if (!$stream) {
 		$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(

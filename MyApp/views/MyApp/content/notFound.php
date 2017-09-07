@@ -1,3 +1,3 @@
 <div id="content">
-	<?php echo Q::text($notFound['Explanation'], $url) ?>
+	<?php echo Q::interpolate($notFound['Explanation'], $url) ?>
 </div>

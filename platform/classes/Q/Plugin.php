@@ -540,8 +540,11 @@ EOT;
 		self::prepare();
 
 		$app_dir = APP_DIR;
-		$plugin_dir = Q_PLUGINS_DIR . DS . $plugin_name;
+		$plugin_dir = Q_PLUGINS_DIR.DS.$plugin_name;
+		$plugin_text_dir = $plugin_dir.DS.'text'.DS.$plugin_name;
 		$app_web_plugins_dir = APP_WEB_DIR.DS.'Q'.DS.'plugins';
+		$app_web_text_dir = APP_WEB_DIR.DS.'Q'.DS.'text';
+		$app_text_plugin_dir = APP_TEXT_DIR.DS.$plugin_name;
 
 		echo "Installing plugin '$plugin_name' into '$app_dir'" . PHP_EOL;
 
@@ -557,13 +560,16 @@ EOT;
 		$app_plugins_file = APP_LOCAL_DIR.DS.'plugins.json';
 
 		// Check access to $app_web_plugins_dir
-		if(!file_exists($app_web_plugins_dir))
-			if(!@mkdir($app_web_plugins_dir, 0755, true))
-				throw new Exception("Could not create $app_web_plugins_dir");
-		if(!is_dir($app_web_plugins_dir))
-			throw new Exception("$app_web_plugins_dir exists, but is not a directory");
-		elseif(!is_writable($app_web_plugins_dir))
-			throw new Exception("Can not write to $app_web_plugins_dir");
+		$dirs = array($app_web_plugins_dir, $app_web_text_dir);
+		foreach ($dirs as $dir) {
+			if(!file_exists($dir))
+				if(!@mkdir($dir, 0755, true))
+					throw new Exception("Could not create $dir");
+			if(!is_dir($dir))
+				throw new Exception("$dir exists, but is not a directory");
+			elseif(!is_writable($dir))
+				throw new Exception("Can not write to $dir");
+		}
 
 		// Check access to $app_plugins_file
 		if(file_exists($app_plugins_file) && !is_writable($app_plugins_file))
@@ -615,7 +621,17 @@ EOT;
 
 		// Symbolic links
 		echo 'Creating symbolic links'.PHP_EOL;
-		Q_Utils::symlink($plugin_dir.DS.'web', $app_web_plugins_dir.DS.$plugin_name);
+		if (!file_exists($app_web_plugins_dir.DS.$plugin_name)) {
+			$p = $app_web_plugins_dir.DS.$plugin_name;
+			echo '  '.$p.PHP_EOL;
+			Q_Utils::symlink($plugin_dir.DS.'web', $p);
+		}
+		
+		if (!file_exists($app_text_plugin_dir) and file_exists($plugin_text_dir)) {
+			$p = $app_text_plugin_dir;
+			echo '  '.$p.PHP_EOL;
+			Q_Utils::symlink($plugin_text_dir, $app_text_plugin_dir);
+		}
 
 		//  Checking if schema update is requested and updating database version
 		$connections = Q_Config::get('Q', 'pluginInfo', $plugin_name, 'connections', array());

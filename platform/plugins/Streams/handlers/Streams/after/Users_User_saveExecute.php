@@ -82,7 +82,11 @@ function Streams_after_Users_User_saveExecute($params)
 		}
 		$stream->type = $p->expect($name, "type");
 		$stream->title = $p->expect($name, "title");
-		$stream->content = $p->get($name, "content", ''); // usually empty
+		if ($userField = $p->get($name, 'userField', null)) {
+			$stream->content = $user->$userField;
+		} else {
+			$stream->content = $p->get($name, "content", ''); // usually empty
+		}
 		$stream->readLevel = $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']);
 		$stream->writeLevel = $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']);
 		$stream->adminLevel = $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel']);
@@ -90,7 +94,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$sizes = Q_Config::expect('Users', 'icon', 'sizes');
 			sort($sizes);
 			$stream->setAttribute('sizes', $sizes);
-			$stream->icon = $user->iconUrl();
+			$stream->icon = $user->icon;
 		}
 		if (isset($values[$name])) {
 			$stream->content = $values[$name];
@@ -183,7 +187,7 @@ function Streams_after_Users_User_saveExecute($params)
                 $sizes = Q_Config::expect('Users', 'icon', 'sizes');
 				sort($sizes);
                 $stream->setAttribute('sizes', $sizes);
-				$stream->icon = $changes['icon'] = $user->iconUrl();
+				$stream->icon = $changes['icon'] = $user->icon;
 			}
 			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}

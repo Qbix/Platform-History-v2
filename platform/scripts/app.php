@@ -20,10 +20,6 @@ Options:
 --all Will install plugins listed in Q/app/plugins in \$APP_DIR/config/app.json
   All connections/schemas listed in Q/pluginInfo and Q/appInfo will be installed also.
 
---noapp Will skip installation of the app. Can be used to install/update plugins.
-
--p \$PLUGIN_NAME Install/update plugin
-
 -s \$CONN_NAME
   This will execute app's install/upgrade sql scripts for connections \$CONN_NAME.
   Note: running SQL statements may require elevated privileges.
@@ -194,23 +190,23 @@ $app = Q_Config::expect('Q', 'app');
 $uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
 	$web_uploads_path = APP_WEB_DIR.DS.'Q'.DS.'uploads';
-	if (file_exists($web_uploads_path)) {
-		unlink($web_uploads_path);
+	if (!file_exists($web_uploads_path)) {
+		Q_Utils::symlink($uploads_dir, $web_uploads_path);
 	}
-	Q_Utils::symlink($uploads_dir, $web_uploads_path);
 }
 
-$text_dir = APP_TEXT_DIR.DS.$app.DS.'text';
+$text_dir = APP_TEXT_DIR;
 if (is_dir($text_dir)) {
 	$web_text_path = APP_WEB_DIR.DS.'Q'.DS.'text';
-	if (file_exists($web_text_path)) {
-		unlink($web_text_path);
+	if (!file_exists($web_text_path)) {
+		Q_Utils::symlink($text_dir, $web_text_path);
 	}
-	Q_Utils::symlink($text_dir, $web_text_path);
 }
 
 $web_views_path = APP_WEB_DIR.DS.'Q'.DS.'views';
-mkdir($web_views_path, 0755, true);
+if (!file_exists($web_views_path)) {
+	mkdir($web_views_path, 0755, true);
+}
 
 if ($auto_plugins) {
 	$plugins = Q_Config::get('Q', 'plugins', array());

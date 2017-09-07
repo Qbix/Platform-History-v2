@@ -54,9 +54,12 @@
 			"exclude": {
 				"MyApp": [
 					"action.php", "batch.php", "index.php", "fast.php", "Q.inc.php",
-					".htaccess", "uploads"
+					".htaccess", "Q/uploads"
 				]
 			}
+		},
+		"javascript": {
+			"uris": ["MyApp/home"]
 		},
 		"environments": {
 			"live": {

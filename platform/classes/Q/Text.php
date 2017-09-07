@@ -18,12 +18,20 @@ class Q_Text
 	 * Call this function to get the basename to use for loading files,
 	 * based on the language and locale set on this class.
 	 * Used to load files customized to a user's language (and locale).
+	 * @param {array} [$options]
+	 * @param {string} [$options.language=null] Override language
+	 * @param {string} [$options.locale=null] Override locale
 	 * @return {string} something like "en-US"
 	 */
-	static function basename()
+	static function basename($options)
 	{
-		$language = self::$language;
-		$locale = self::$locale;
+		if (isset($options['language'])) {
+			$language = $options['language'];
+			$locale = Q::ifset($options, 'locale', '');
+		} else {
+			$language = self::$language;
+			$locale = self::$locale;	
+		}
 		return $locale ? "$language-$locale" : $language;
 	}
 	
@@ -64,9 +72,11 @@ class Q_Text
 	 * @method get
 	 * @param {string|array} name The name of the text source. Can also be an array,
 	 *  in which case the text sources are merged in the order they are named.
-	 * @param {array} [options] Options to use for Q.request . May also include:
-	 * @param {boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
-	 * @param {boolean} [options.merge=false] For Q_Text::set if content is loaded
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
+	 * @param {boolean} [$options.merge=false] For Q_Text::set if content is loaded
+	 * @param {string} [$options.language=null] Override language
+	 * @param {string} [$options.locale=null] Override locale
 	 * @return {array} Returns the (merged) content of the text source(s)
 	 */
 	static function get($name, $options = array())
@@ -83,7 +93,7 @@ class Q_Text
 			}
 			return $result->getAll();
 		}
-		$basename = self::basename();
+		$basename = self::basename($options);
 		$filename = "text/$name/$basename.json";
 		if (!file_exists($filename)) {
 			list($basename) = explode('-', $basename);

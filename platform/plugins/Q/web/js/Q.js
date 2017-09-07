@@ -508,12 +508,20 @@ Date.now = function _Date_now() {
 };
 
 /**
- * Returns a Date from a dateTimeString
+ * Returns a Date from a dateTimeString.
  * @param {String} dateTimeString
+ * @param {Number} [timezoneOffset=0]
+ *  The timezone in which the dateTimeString was supposed to be. Defaults to UTC.
  * @return {Date}
  */
-Date.fromDateTime = function _Date_fromDateTime(dateTimeString) {
-	return new Date(dateTimeString.replace(/-/g,"/"));
+Date.fromDateTime = function _Date_fromDateTime(dateTimeString, timezoneOffset) {
+	timezoneOffset = timezoneOffset || 0;
+	var date = new Date(dateTimeString.replace(/-/g,"/"));
+	var minutes = (new Date()).timezoneOffset() - timezoneOffset;
+	if (minutes) {
+		date = new Date(date.getTime() + minutes*60000);
+	}
+	return date;
 };
 
 /**
@@ -525,6 +533,9 @@ Date.fromDateTime = function _Date_fromDateTime(dateTimeString) {
 Date.fromTimestamp = function (timestamp) {
 	if (isNaN(timestamp)) {
 		return null;
+	}
+	if (timezoneOffset === undefined) {
+		timezoneOffset = (new Date()).timezoneOffset()
 	}
 	timestamp = parseFloat(timestamp);
 	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);
@@ -6185,6 +6196,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
  *  A hash of options, to be passed to Q.request and Q.action (see their options).
+ * @return {Q.Request} Object corresponding to the request
  */
 Q.req = function _Q_req(uri, slotNames, callback, options) {
 	if (typeof options === 'string') {
@@ -6240,7 +6252,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
  * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated
  * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed
- * @return {String} the url that was requested
+ * @return {Q.Request} Object corresponding to the request
  */
 Q.request = function (url, slotNames, callback, options) {
 	
@@ -6262,14 +6274,15 @@ Q.request = function (url, slotNames, callback, options) {
 		slotNames = slotNames.split(',');
 	}
 	var o = Q.extend({}, Q.request.options, options);
+	var request = new Q.Request(url, slotNames, callback, o);
 	if (o.skipNonce) {
-		return _Q_request_makeRequest.call(this, url, slotNames, callback, o);
+		_Q_request_makeRequest.call(this, url, slotNames, callback, o);
 	} else {
 		Q.loadNonce(_Q_request_makeRequest, this, [url, slotNames, callback, o]);
 	}
+	return request;
+	
 	function _Q_request_makeRequest (url, slotNames, callback, o) {
-
-		var request = new Q.Request(url, slotNames, callback, o);
 
 		var tout = false, t = {};
 		if (o.timeout !== false) {
@@ -6454,7 +6467,7 @@ Q.request = function (url, slotNames, callback, options) {
 		if (!o.query) {
 			var script = Q.addScript(url2, null, {'duplicate': o.duplicate});
 		}
-		return url2;
+		request.urlRequested = url2;
 	}
 };
 
@@ -8545,6 +8558,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	// defaults to handlebars templates
 	var o = Q.extend({}, Q.Template.load.options, options);
 	var tpl = Q.Template.collection;
+	var tpi = Q.Template.info;
 	
 	// Now attempt to load the template.
 	// First, search the DOM for templates loaded inside script tag with type "text/theType",
@@ -8555,16 +8569,18 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	for (i = 0, l = scripts.length; i < l; i++) {
 		script = scripts[i];
 		var type = script.getAttribute('type');
+		var t;
 		if (script && script.id && script.innerHTML
 		&& type && type.substr(0, 5) === 'text/'
-		&& o.types[type.substr(5)]) {
+		&& o.types[t = type.substr(5)]) {
 			var n = Q.normalize(script.id);
 			tpl[n] = script.innerHTML.trim();
+			tpi[n] = { type: t };
 			Q.each(['partials', 'helpers', 'text'], function (i, aspect) {
 				var attr = script.getAttribute('data-' + aspect);
 				var value = attr && JSON.parse(attr);
 				if (value) {
-					Q.setObject([n, aspect], value, Q.Template.info);
+					tpi[n][aspect] = value;
 				}
 			});
 			trash.unshift(script);
@@ -8663,7 +8679,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			}
 			// the partials, helpers and text should have already been processed
 			if (params.text[1]) {
-				Q.extend(fields, 10, params.text[1]);
+				fields = Q.extend(fields, 10, params.text[1]);
 			}
 			var tbaOld = Q.Tool.beingActivated;
 			var pbaOld = Q.Page.beingActivated;
@@ -8770,12 +8786,15 @@ Q.Text = {
 	 * @param {Object} [options] Options to use for Q.request . May also include:
 	 * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
 	 * @param {Boolean} [options.merge=false] For Q.Text.set if content is loaded
+	 * @param {String} [options.language=null] Override language
+	 * @param {String} [options.locale=null] Override locale
 	 * @return {Boolean|Q.Request} Returns true if content was already loaded,
 	 *   otherwise calls the result of Q.request
 	 */
 	get: function (name, callback, options) {
-		var language = Q.Text.language;
-		var locale = Q.Text.locale;
+		options = options || {};
+		var language = options.language || Q.Text.language;
+		var locale = (options.language && options.locale) || Q.Text.locale;
 		var dir = Q.Text.dir;
 		var suffix = locale ? '-' + locale : '';
 		var content = Q.getObject([language, locale, name], Q.Text.collection);
@@ -10948,6 +10967,7 @@ Q.Dialogs = {
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
+	 *  @param {Array} [options.template.text] any text to load for the template
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open

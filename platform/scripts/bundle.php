@@ -39,46 +39,61 @@ if (!is_dir($dir)) {
 	die("Destination directory not found: $dir\n");
 }
 
-#First do the platform rsync
-$pluginNames = glob(APP_WEB_DIR.DS.'plugins'.DS.'*');
-foreach ($pluginNames as $src) {
-	$pluginName = basename($src);
-	$pluginsDir = $dir.DS.'plugins';
-	$dest = realpath($pluginsDir.DS.$pluginName);
-	if (!$dest or !file_exists($dest)) {
-		mkdir($pluginsDir);
-	}
-	$dest = $pluginsDir.DS.$pluginName;
-	if (!is_dir($dest)) {
-		mkdir($dest);
-		if (!is_dir($dest)) {
-			die ("Could not create $dest\n");
-		}
-	}
-	$dest = realpath($dest);
-	echo "Syncing $pluginName...\n";
+// Set up rsync options
+$options = array();
+$pluginDirs = glob(APP_WEB_DIR.DS.'Q'.DS.'plugins'.DS.'*');
+foreach ($pluginDirs as $pluginDir) {
+	$pluginName = basename($pluginDir);
+	$options[$pluginName] = '';
 	$exclude = Q_Config::get("Q", "bundle", "exclude", $pluginName, array());
-	$options = '';
 	foreach ($exclude as $e) {
-		$excludePath = "$src/$e";
+		$excludePath = $pluginDir.DS.$e;
 		if (!realpath($excludePath)) {
 			echo "\n  (Warning: missing $excludePath)\n";
 		}
-		$options .= " --exclude=" . escapeshellarg($e);
+		$options[$pluginName] .= " --exclude=" . escapeshellarg($e);
 	}
-	exec ("rsync -az --copy-links $options $src/* $dest\n");
 }
-
-echo "Syncing $app...\n";
-$src = APP_WEB_DIR;
-$dest = $dir;
+$options[$app] = '';
 $exclude = Q_Config::get("Q", "bundle", "exclude", $app, array());
-$exclude[] = 'plugins';
+$exclude[] = 'Q/plugins';
 foreach ($exclude as $e) {
 	$excludePath = "$e";
-	if (!realpath($src.DS.$excludePath)) {
+	if (!realpath(APP_WEB_DIR.DS.$excludePath)) {
 		echo "\n  (Warning: missing $excludePath)\n";
 	}
-	$options .= " --exclude=" . escapeshellarg($e);
+	$options[$app] .= " --exclude=" . escapeshellarg($e);
 }
-exec ("rsync -az --copy-links $options $src/* $dest\n");
+
+// Do the platform rsync
+$srcs = glob(APP_WEB_DIR.DS.'Q'.DS.'*');
+foreach ($srcs as $src) {
+	$basename = basename($src);
+	$subsrcs = glob($src.DS.'*');
+	foreach ($subsrcs as $subsrc) {
+		$basename2 = basename($subsrc);
+		$dest = $dir.DS.'Q'.DS.$basename.DS.$basename2;
+		$realdest = realpath($dest);
+		if (!$realdest or !is_dir($dest)) {
+			if (file_exists($dest)) {
+				unlink($dest);
+			}
+			mkdir($dest, 0777, true);
+			if (!is_dir($dest)) {
+				die ("Could not create $dest\n");
+			}
+		}
+		$realdest = realpath($dest);
+		echo "Syncing web/Q/$basename/$basename2...\n";
+		$pluginName = $basename2;
+		if (glob("$subsrc/*")) {
+			exec ("rsync -az --copy-links $options[$pluginName] $subsrc/* $dest\n");
+		}
+	}
+}
+
+// Then do the app rsync
+echo "Syncing web...\n";
+$src = APP_WEB_DIR;
+$dest = $dir;
+exec ("rsync -az --copy-links $options[$app] $src/* $dest\n");

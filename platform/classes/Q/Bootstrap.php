@@ -152,10 +152,11 @@ class Q_Bootstrap
 	 */
 	static function setDefaultTimezone()
 	{
-		$script_tz = Q_Config::get('Q', 'defaultTimezone', 'America/New_York');
+		$script_tz = Q_Config::get('Q', 'defaultTimezone', 'UTC');
 		if (isset($script_tz)) {
 			date_default_timezone_set($script_tz);
 		}
+		Db::setTimezones();
 	}
 	
 	/**

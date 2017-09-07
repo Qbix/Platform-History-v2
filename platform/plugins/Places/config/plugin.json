@@ -98,16 +98,13 @@
 				"participating": ["Places/participating"]
 			},
 			"Places/nearby": {
-				"description": "Category for things within a certain distance of a geohash"
-			},
-			"Places/timeslot": {
-				"description": "Category for things matching a certain experience, within a certain hour and distance of a geohash",
+				"description": "Category for things within a certain distance of a geohash",
 				"defaults": {
 					"title": "Nearby Timeslot"
 				},
 				"relatedTo": {
 					"*": {
-						"description": "New {{fromDisplayType}} scheduled in timeslot"
+						"description": "New {{fromDisplayType}} posted {{toTitle}}"
 					}
 				}
 			},

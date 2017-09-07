@@ -50,6 +50,10 @@ Q.Tool.define("Q/columns", function(options) {
 	Q.addStylesheet('Q/plugins/Q/css/columns.css');
 
 	prepareColumns(tool);
+	
+	if (state.title === undefined) {
+		state.title = '<img class="Q_columns_loading" src="' + Q.url('Q/plugins/Q/img/throbbers/loading.gif') +'" alt="">';
+	}
 
 	var selector = '.Q_close';
 	if (Q.info.isMobile && state.back.triggerFromTitle) {
@@ -122,7 +126,7 @@ Q.Tool.define("Q/columns", function(options) {
 		src: "Q/plugins/Q/img/x.png",
 		clickable: null
 	},
-	title: '<img class="Q_columns_loading" src="' + Q.url('Q/plugins/Q/img/throbbers/loading.gif') +'" alt="">',
+	title: undefined,
 	column: undefined,
 	controls: undefined,
 	scrollbarsAutoHide: {},
@@ -551,7 +555,8 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Number|Array|Object} index The index of the column to close.
 	 *  You can pass an array of indexes here, or an object with "min" and
 	 *  optional "max"
-	 * @param {Function} callback Called when the column is opened
+	 * @param {Function} callback Called when the column is closed, or if no column
+	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override various tool options
 	 * @return {Boolean} Whether the column was actually closed.
 	 */
@@ -573,15 +578,18 @@ Q.Tool.define("Q/columns", function(options) {
 				waitFor.push(i);
 			}, {ascending: false});
 		}
+		var div = tool.column(index);
 		if (p) {
-			p.add(waitFor, callback).run();
+			p.add(waitFor, function () {
+				Q.handle(callback, tool, [index, div]);
+			}).run();
+			return false;
+		}
+		if (!div) {
+			Q.handle(callback, tool, [index, div]);
 			return false;
 		}
 		var o = Q.extend({}, 10, state, 10, options);
-		var div = tool.column(index);
-		if (!div) {
-			return false;
-		}
 		var $div = $(div);
 		var width = $div.outerWidth(true);
 		var w = $div.outerWidth(true);
@@ -669,7 +677,6 @@ Q.Tool.define("Q/columns", function(options) {
 		var top = 0;
 		
 		$te.prevAll()
-		.add($te.parents().prevAll())
 		.each(function () {
 			var $this = $(this);
 			if ($this.css('position') === 'fixed'
@@ -680,9 +687,6 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');
-			$te.add($container)
-				.add($columns)
-				.width($(window).width());
 			if (!state.fullscreen) {
 				$te.add($container)
 					.add($columns)

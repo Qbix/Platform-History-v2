@@ -9,5 +9,7 @@ syntax: regexp
 ^files/MyApp/uploads/(?!.dir|Users|Streams).+
 ^files/MyApp/uploads/Users/(?!.dir).+
 ^files/MyApp/uploads/Streams/(?!.dir).+
+^text/(?!MyApp)
 ^web/Q/uploads
 ^web/Q/plugins
+^web/Q/text

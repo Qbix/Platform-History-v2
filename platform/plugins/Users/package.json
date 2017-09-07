@@ -2,6 +2,8 @@
 	"name": "Q.Users",
 	"description": "Users Plugin",
 	"author": "Qbix",
+	"homepage": "https://qbix.com/platform",
+	"license": "AGPL-1.0",
 	"version": "1.0.0",
 	"engines": {
 		"node": ">= 0.6.0"
@@ -14,7 +16,6 @@
 		"web-push": "^3.2.2",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
-		"crypto-js": "3.x.x",
 	    "apn": "^2.1.1",
 	    "node-adm": "^0.9.1",
 	    "wns": "^0.5.3"

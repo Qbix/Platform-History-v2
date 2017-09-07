@@ -27,12 +27,14 @@
 		"type": "Streams/image",
 		"title": "Icon",
 		"icon": "Streams/image",
+		"userField": "icon",
 		"platforms": {"facebook": "pic", "twitter": "profile_image_url"}
 	},
 	"Streams/user/username": {
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
+		"userField": "username",
 		"platforms": {"facebook": "username", "twitter": "screen_name"}
 	},
 	"Streams/user/firstName": {

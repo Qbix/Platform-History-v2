@@ -602,6 +602,8 @@ class Q
 		}
 
 		$params = array_merge($params, Q_Text::params($parts));
+		Q::log($viewName, 'a');
+		Q::log(Q::ifset($params, 'activation', ''), 'a');
 
 		/**
 		 * @event {before} Q/view
@@ -650,6 +652,8 @@ class Q
 	 * @param {string} [$extra.id]
 	 *    An additional ID to distinguish tools instantiated
 	 *    side-by-side from each other, within the same parent HTMLElement.
+	 * @param {string} [$extra.prefix]
+	 *    Set a custom prefix for the tool's id
 	 * @param {boolean} [$extra.cache=false]
 	 *    If true, then the Qbix front end will not replace existing tools with same id
 	 *    during Q.loadUrl when this tool appears in the rendered HTML
