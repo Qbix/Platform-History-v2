@@ -185,7 +185,6 @@ class Db_Mysql implements Db_Interface
 		$hours = sprintf("%02d", floor($abs / 3600));
 		$minutes = sprintf("%02d", floor(($abs % 3600) / 60));
 		$sign = ($offset > 0) ? '+' : '-';
-		echo "$sign$hours:$minutes"; exit;
 		$this->rawQuery("SET time_zone = '$sign$hours:$minutes';")->execute();
 	}
 	
