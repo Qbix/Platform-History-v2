@@ -478,7 +478,6 @@
 }
 .Streams_chat_messages {
 	min-height: 70px;
-	overflow-x: hidden;
 }
 .Streams_chat_item {
 	font-size: 11pt;

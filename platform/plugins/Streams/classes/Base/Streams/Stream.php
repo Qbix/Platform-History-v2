@@ -473,7 +473,7 @@ return array (
 		} else {
 			$datetime = new DateTime($value);
 		}
-		$value = $datetime->format("Y-m-d h:i:s");
+		$value = $datetime->format("Y-m-d H:i:s");
 		return array('insertedTime', $value);			
 	}
 
@@ -522,7 +522,7 @@ return array (
 		} else {
 			$datetime = new DateTime($value);
 		}
-		$value = $datetime->format("Y-m-d h:i:s");
+		$value = $datetime->format("Y-m-d H:i:s");
 		return array('updatedTime', $value);			
 	}
 
@@ -1327,7 +1327,7 @@ return array (
 		} else {
 			$datetime = new DateTime($value);
 		}
-		$value = $datetime->format("Y-m-d h:i:s");
+		$value = $datetime->format("Y-m-d H:i:s");
 		return array('closedTime', $value);			
 	}
 

@@ -2834,7 +2834,7 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 		}
 	}
 
-	message = (timestamp ? '['+Q.date('Y-m-d h:i:s')+'] ' : '')+(name ? name : 'Q')+': ' + message + "\n";
+	message = (timestamp ? '['+Q.date('Y-m-d H:i:s')+'] ' : '')+(name ? name : 'Q')+': ' + message + "\n";
 
 	if (!name) {
 		return console.log(message);

@@ -517,9 +517,9 @@ Date.now = function _Date_now() {
 Date.fromDateTime = function _Date_fromDateTime(dateTimeString, timezoneOffset) {
 	timezoneOffset = timezoneOffset || 0;
 	var date = new Date(dateTimeString.replace(/-/g,"/"));
-	var minutes = (new Date()).timezoneOffset() - timezoneOffset;
+	var minutes = (new Date()).getTimezoneOffset() - timezoneOffset;
 	if (minutes) {
-		date = new Date(date.getTime() + minutes*60000);
+		date = new Date(date.getTime() - minutes*60000);
 	}
 	return date;
 };
