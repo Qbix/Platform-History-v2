@@ -1883,7 +1883,7 @@ EOT;
 			\$json = json_encode(\$value);
 			throw new Exception("Date \$json in incorrect format being assigned to ".\$this->getTable().".$field_name");
 		}
-		\$value = date("Y-m-d h:i:s", strtotime(\$value));
+		\$value = date("Y-m-d H:i:s", strtotime(\$value));
 		\$date = date_parse(\$value);
 		foreach (array('year', 'month', 'day', 'hour', 'minute', 'second') as \$v) {
 			\$\$v = \$date[\$v];
@@ -1949,7 +1949,7 @@ EOT;
 		} else {
 			\$datetime = new DateTime(\$value);
 		}
-		\$value = \$datetime->format("Y-m-d h:i:s");
+		\$value = \$datetime->format("Y-m-d H:i:s");
 EOT;
 					$functions["beforeSet_$field_name_safe"]['comment'] = <<<EOT
 	$dc
