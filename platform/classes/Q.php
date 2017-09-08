@@ -1204,7 +1204,7 @@ class Q
 			$realPath = Q::realPath($path, true);
 		}
 		$filename = (isset($key) ? $key : $app).'.log';
-		$toSave = "\n".($timestamp ? '['.date('Y-m-d h:i:s') . '] ' : '') .substr($message, 0, $max_len);
+		$toSave = "\n".($timestamp ? '['.date('Y-m-d H:i:s') . '] ' : '') .substr($message, 0, $max_len);
 		file_put_contents($realPath.DS.$filename, $toSave, FILE_APPEND);
 		umask($mask);
 	}
