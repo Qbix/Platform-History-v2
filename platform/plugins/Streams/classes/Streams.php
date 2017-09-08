@@ -2293,7 +2293,11 @@ abstract class Streams extends Base_Streams
 	 * @param {integer} [$options.offset] offset to start from
 	 * @param {double} [$options.min] the minimum orderBy value (inclusive) to filter by, if any
 	 * @param {double} [$options.max] the maximum orderBy value (inclusive) to filter by, if any
-	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
+	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation.
+	 *   Can be useful for implementing custom indexes using relations and varying the value of "type".
+	 * @param {string|array|Db_Range} [$options.weight] if specified, this filters the weight of the relation.
+	 *   Can be useful for implementing custom indexes using relations and varying the weight ranges.
+	 *   Only used if $options.isCategory is true.
 	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
 	 * @param {string} [$options.title] if specified, this filters the titles of the streams with a LIKE condition
 	 * @param {array} [$options.where] you can also specify any extra conditions here
@@ -2371,6 +2375,9 @@ abstract class Streams extends Base_Streams
 			} else if ($options['orderBy'] === true) {
 				$query = $query->orderBy('weight', true);
 			}
+			if (!empty($options['weight'])) {
+				$query = $query->andWhere(array('weight' => $options['weight']));
+			}
 		}
 		if (isset($options['prefix'])) {
 			if (substr($options['prefix'], -1) !== '/') {
@@ -2440,7 +2447,7 @@ abstract class Streams extends Base_Streams
 		}
 
 		if (empty($relations)) {
-			return empty($options['streamsOnly'])
+			return !empty($options['streamsOnly'])
 				? array(array(), array(), $returnMultiple ? $streams : $stream)
 				: array();
 		}
