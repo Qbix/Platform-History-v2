@@ -58,7 +58,7 @@ module.exports = Users_Device.Chrome = Users_Device_Chrome;
 Users_Device.prototype.handlePushNotification = function (notification, callback) {
 	var appConfig = Q.Config.expect(['Users', 'apps', 'chrome', Q.app.name]);
 	if (!notification.alert.title || !notification.alert.body) {
-		return callback(new Error('Notification title and body are required'));
+		return Q.handle(callback, this, [new Error('Notification title and body are required')]);
 	}
 	notification = {
 		title: notification.alert.title,
@@ -75,9 +75,9 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 			p256dh: this.fields.p256dh
 		}
 	}, JSON.stringify(notification)).then(function(){
-		callback();
+		Q.handle(callback, this);
 	}).catch(function(){
-		callback(err);
+		Q.handle(callback, this, [err]);
 	});
 };
 
