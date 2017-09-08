@@ -431,7 +431,8 @@ class Places_Nearby
 		list($latitude, $longitude, $meters) = Places_Nearby::defaults();
 		extract(Q::take($options, array('latitude', 'longitude', 'meters')), EXTR_IF_EXISTS);
 		$categories = array('Places_Nearby', '_categories');
-		$options = compact('categories', 'experienceId', 'fromTime', 'toTime');
+		$weight = new Db_Range($fromTime, true, false, $toTime);
+		$options = compact('categories', 'experienceId', 'fromTime', 'toTime', 'weight');
 		return Places_Nearby::related(
 			$publisherId, $relationType, $latitude, $longitude, $meters, $options
 		);
@@ -442,12 +443,7 @@ class Places_Nearby
 		$experienceId = Q::ifset($options, 'experienceId', 'main');
 		$result = array();
 		foreach ($nearby as $k => $info) {
-			$p = "Places/nearby/$experienceId/$info[geohash]/$info[meters]/";
-			if (isset($options['fromTime']) and isset($options['toTime'])) {
-				$result[$k] = new Db_Range(
-					$p.$options['fromTime'], true, false, $p.$options['toTime']
-				);
-			}
+			$result[$k] = "Places/nearby/$experienceId/$info[geohash]/$info[meters]";
 		}
 		return $result;
 	}

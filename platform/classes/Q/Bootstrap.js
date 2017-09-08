@@ -52,7 +52,9 @@ Bootstrap.configure = function (callback, reload) {
 	}
 	var c = callback;
 	callback = function () {
-		process.env.tz = Q.Config.expect(['Q', 'defaultTimezone']);
+		process.env.TZ = Q.Config.expect(['Q', 'defaultTimezone']);
+		var time = require('time');
+		time.tzset(process.env.TZ);
 		c.apply(this, arguments);
 	}
 	var Config = new Q.Tree();
