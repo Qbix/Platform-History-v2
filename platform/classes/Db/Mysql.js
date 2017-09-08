@@ -144,7 +144,12 @@ function Db_Mysql(connName, dsn) {
 			});
 			var time = require('time');
 			var timezone = Q.Config.expect(['Q', 'defaultTimezone']);
-			var offset = new time.Date().setTimezone(timezone).getTimezoneOffset();
+			var offset = 0;
+			try {
+				offset = new time.Date().setTimezone(timezone).getTimezoneOffset();
+			} catch (e) {
+				// ignore
+			}
 		    var dt = new Date(
 		       Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
 		    ).toTimeString();
