@@ -2322,7 +2322,7 @@ Sp.onFieldChanged = function _Stream_prototype_onFieldChanged (field) {
  * @event onClosed
  */
 Sp.onClosed = function _Stream_prototype_onClosed () {
-	return Stream.onClosed(this.fields.publisherId, this.fields.name, field);
+	return Stream.onClosed(this.fields.publisherId, this.fields.name);
 };
 
 /**
