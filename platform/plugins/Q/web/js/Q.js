@@ -534,9 +534,6 @@ Date.fromTimestamp = function (timestamp) {
 	if (isNaN(timestamp)) {
 		return null;
 	}
-	if (timezoneOffset === undefined) {
-		timezoneOffset = (new Date()).timezoneOffset()
-	}
 	timestamp = parseFloat(timestamp);
 	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);
 };
