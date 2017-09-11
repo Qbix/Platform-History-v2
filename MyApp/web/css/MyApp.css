@@ -50,13 +50,25 @@ h2 { margin: 0; }
 	background: white;
 	color: #333;
 }
-.Q_mobile #dashboard .Users_avatar_icon { margin: 0; }
+.Q_mobile #dashboard .Users_avatar_icon { margin: 0; border-radius: 4px; }
 .Q_mobile #dashboard .Users_avatar_name { display: none; }
 
 #dashboard, #notices, #content { margin: auto; text-align: left; }
 #content { position: relative; }
 
 #dashboard { display: inline-block; width: 100%; }
+
+.Q_notMobile #dashboard_slot .MyApp_dashboard_logo {
+	background: url(../static/ui/logo.png) no-repeat
+	center center; background-repeat: no-repeat; padding-top: 100px; text-align: center;
+}
+.Q_mobile #dashboard_slot .MyApp_dashboard_logo {
+	display: inline-block; width: 40px; height: 40px; float: left; margin: 5px;
+	background: url(../img/icon/40.png) no-repeat;
+}
+.Q_mobile #dashboard_slot .MyApp_dashboard_logo h1 {
+	display: none;
+}
 
 /* Notices contents */
 #notices_slot { text-align: center; margin: auto; padding: 0; z-index: 5000; }
