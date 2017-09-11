@@ -1,5 +1,7 @@
 <div id='dashboard'>
-	<h1><?php echo Users::communityName() ?></h1>
+	<?php echo Q_Html::a('MyApp/home', array('class' => 'MyApp_dashboard_logo')) ?>
+		<h1><?php echo Users::communityName() ?></h1>
+	</a>
 
 	<div id="dashboard_user">
 		<?php if ($user): ?>

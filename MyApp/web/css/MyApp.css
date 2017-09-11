@@ -50,13 +50,26 @@ h2 { margin: 0; }
 	background: white;
 	color: #333;
 }
-.Q_mobile #dashboard .Users_avatar_icon { margin: 0; }
+.Q_mobile #dashboard .Users_avatar_icon { margin: 0; border-radius: 4px; }
 .Q_mobile #dashboard .Users_avatar_name { display: none; }
+.Q_notMobile .Users_avatar_icon { margin-right: 5px; }
 
 #dashboard, #notices, #content { margin: auto; text-align: left; }
 #content { position: relative; }
 
 #dashboard { display: inline-block; width: 100%; }
+
+.Q_notMobile #dashboard_slot .MyApp_dashboard_logo {
+	background: url(../static/ui/logo.png) no-repeat
+	center center; background-repeat: no-repeat; padding-top: 100px; text-align: center;
+}
+.Q_mobile #dashboard_slot .MyApp_dashboard_logo {
+	display: inline-block; width: 40px; height: 40px; float: left; margin: 5px;
+	background: url(../img/icon/40.png) no-repeat;
+}
+.Q_mobile #dashboard_slot .MyApp_dashboard_logo h1 {
+	display: none;
+}
 
 /* Notices contents */
 #notices_slot { text-align: center; margin: auto; padding: 0; z-index: 5000; }
@@ -98,14 +111,14 @@ h2 { margin: 0; }
 #dashboard>h2 { float: left; }
 #dashboard_user { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: right; padding: 5px; }
 .Q_mobile #dashboard_user { max-width: 40%; }
-.Q_mobile.Users_loggedIn #dashboard_user { margin: 0 5px 0 0; }
+.Q_mobile.Users_loggedIn #dashboard_user { margin: 0; }
 .Q_mobile.Users_loggedOut #dashboard_user { line-height: 40px; }
 #dashboard .Q_contextual * { color: black; }
 #dashboard td { vertical-align: middle; }
 #dashboard table { width: 100%; padding: 0; margin: 0; }
 #dashboard .Q_dashboard_logo { padding: 0; }
 #dashboard .Q_dashboard_logo a { padding: 5px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
-#dashboard .Q_dashboard_logo img { height: 40px; }
+#dashboard .Q_dashboard_logo img { height: 40px; border-radius: 5px; }
 #dashboard .Q_dashboard_search { padding: 8px 10px 8px 10px; font-weight: bold; text-align: left; }
 #dashboard .Q_dashboard_search input {
 	width: 104px;
@@ -122,7 +135,7 @@ h2 { margin: 0; }
 
 /* Dashboard tabs */
 #dashboard .Q_tabs_tabs { border: 0; width: 100%; margin: auto; text-align: left; }
-#dashboard .Q_tabs_tab { cursor: pointer; width: auto; border: 0 !important; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #f8f8f8; background: none; line-height: 30px !important; text-align: left; max-width: 100%; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+#dashboard .Q_tabs_tab { cursor: pointer; width: auto; border: 0 !important; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #f8f8f8; background: none; line-height: 30px !important; text-align: left; max-width: 100%; overflow: hidden; text-overflow: ellipsis; text-align: left; }
 #dashboard .Q_tabs_tab.Streams_preview_tool { padding-left: 10px; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal { margin: 0; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab { padding: 5px 10px; background: #222; color: white; width: 100%; }
@@ -134,12 +147,15 @@ h2 { margin: 0; }
 #dashboard .Q_tabs_tab>* { cursor: pointer; }
 #dashboard .Q_tabs_tab { text-decoration: none; color: white; }
 .Q_notTouchscreen #dashboard .Q_tabs_tab:hover { background: rgba(100, 100, 100, 0.1); }
-#dashboard .Q_tabs_tab img { margin-right: 10px; width: 24px; }
+#dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
 #dashboard .Q_tabs_tab.Q_current { background-image: url(../Q/plugins/Q/img/bg/stucco.png) !important; color: black !important; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
 .Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }
+
+body .Q_tabs_contextual .Q_listing li { text-align: left; }
+html .Q_listing img { height: 30px; }
 
 /* inputs */
 
@@ -194,8 +210,6 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 }
 .Q_mobile .Q_overlay { width: 90%; }
 
-.Users_avatar_icon { margin-right: 5px; }
-
 /* The following lines are for cordova on iOS */
 .Q_cordova.Q_ios #status_background { background: #f2f2f2; height: 20px; }
 .Q_notCordova.Q_ios .status_background { display: none; }
@@ -226,6 +240,7 @@ html.Q_notMobile { height: 100%; }
 .Q_notMobile #content { padding: 20px; }
 .Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }
 .Q_notMobile #dashboard_user { float: none; position: absolute; width: 100%; margin: 10px 0 10px 0;  text-align: center;  bottom: 0; }
+.Q_mobile #dashboard_user .Users_avatar_name { display: none; }
 
 html.MyApp_notFound #content,
 html.MyApp_errors #content { padding: 30px; text-align: center; overflow: hidden; text-overflow: ellipsis; }
