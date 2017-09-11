@@ -124,8 +124,11 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	
 	static function _compareByWeight($a, $b)
 	{
-		return ($a->weight !== $b->weight)
-			? ($a->weight > $b->weight ? 1 : -1)
+		$aWeight = Q::ifset($a, 'weight', 0);
+		$bWeight = Q::ifset($b, 'weight', 0);
+
+		return ($aWeight !== $bWeight)
+			? ($aWeight > $bWeight ? 1 : -1)
 			: 0;
 	}
 
