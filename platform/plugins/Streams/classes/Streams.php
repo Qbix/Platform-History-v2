@@ -2447,7 +2447,7 @@ abstract class Streams extends Base_Streams
 		}
 
 		if (empty($relations)) {
-			return !empty($options['streamsOnly'])
+			return empty($options['streamsOnly'])
 				? array(array(), array(), $returnMultiple ? $streams : $stream)
 				: array();
 		}
