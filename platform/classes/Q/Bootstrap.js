@@ -54,9 +54,16 @@ Bootstrap.configure = function (callback, reload) {
 	callback = function () {
 		process.env.TZ = Q.Config.expect(['Q', 'defaultTimezone']);
 		var time = require('time');
-		time.tzset(process.env.TZ);
+
+		// this added because on Win node module "time" return error:
+		// Unknown Timezone: 'UTC'
+		try {
+			time.tzset(process.env.TZ);
+		} catch (e) {
+			// ignore
+		}
 		c.apply(this, arguments);
-	}
+	};
 	var Config = new Q.Tree();
 	var pluginInfo = {};
 	var p = new Q.Pipe(['Q_config', 'app_merged'], function (params) {
