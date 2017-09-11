@@ -7938,8 +7938,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			for (slotName in response.templates) {
 				newTemplates[slotName] = [];
 				Q.each(response.templates[slotName], function (i) {
+					var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
 					newTemplates[slotName].push(
-						Q.Template.set(this.name, this.content, this.type)
+						Q.Template.set(this.name, this.content, info)
 					);
 				});
 			}
@@ -8819,7 +8820,7 @@ Q.Text = {
 			if (options && options.ignoreCache) {
 				func = func.force;
 			}
-			var url = dir + '/' + name + '/' + language + suffix + '.json';
+			var url = Q.url(dir + '/' + name + '/' + language + suffix + '.json');
 			return func(name, url, pipe.fill(name), options);
 		});
 	}
