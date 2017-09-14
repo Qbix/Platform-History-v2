@@ -37,7 +37,7 @@
 			"host": "127.0.0.1",
 			"port": "10500",
 			"https": false,
-			"socket.io": {}
+			"socket": {}
 		},
 		"nodeInternal": {
 			"host": "127.0.0.1",
