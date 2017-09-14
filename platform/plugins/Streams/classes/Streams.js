@@ -388,6 +388,11 @@ Streams.listen = function (options) {
 		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg);
 		stream.notifyParticipants('Streams/post', byUserId, msg);
 	});
+	
+	var baseUrl = (options && options.baseUrl);
+	if (!baseUrl) {
+		baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
+	}
 
 	/**
 	 * @property socketServer
