@@ -303,7 +303,8 @@ Users.Socket = {
 	 * Use this instead of Users.socket
 	 * This also attaches a few event handlers for Users events.
 	 * @method listen
-	 * @param {Object} options 
+	 * @param {Object} options Can be any options for the server.listen() in socket.io,
+	 *    as well as the following options:
 	 * @param {Object} options.host Set the hostname to listen on
 	 * @param {Object} options.port Set the port to listen on
 	 * @param {Object} options.https If you use https, pass https options here (see Q.listen)
