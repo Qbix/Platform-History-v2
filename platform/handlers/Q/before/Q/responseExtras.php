@@ -37,6 +37,7 @@ function Q_before_Q_responseExtras()
 				'proxyUrl' => Q_Uri::url($url),
 				'sessionName' => Q_Session::name(),
 				'nodeUrl' => Q_Utils::nodeUrl(),
+				'socketPath' => Q_Utils::socketPath(),
 				'slotNames' => Q_Config::get("Q", "response", "slotNames", array('content', 'dashboard', 'title', 'notices')),
 			)
 		);
