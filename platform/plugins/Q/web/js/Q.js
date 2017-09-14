@@ -8957,7 +8957,11 @@ function _connectSocketNS(ns, url, callback, callback2, force) {
 	if (root.io && root.io.Socket) {
 		_connectNS(ns, url, callback, callback2);
 	} else {
-		Q.addScript(url+'/socket.io/socket.io.js', function () {
+		var socketPath = Q.getObject('Q.info.socketPath');
+		if (socketPath === undefined) {
+			socketPath = '/socket.io';
+		}
+		Q.addScript(url+socketPath+'/socket.io.js', function () {
 			_connectNS(ns, url, callback, callback2);
 		});
 	}

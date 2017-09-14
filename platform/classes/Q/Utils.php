@@ -743,7 +743,7 @@ class Q_Utils
 	}
 
 	/**
-	 * Returns base url for socket.io connection
+	 * Returns base url for node.js requests
 	 * @method nodeUrl
 	 * @static
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
@@ -763,6 +763,16 @@ class Q_Utils
 		$https = Q_Config::get('Q', 'node', 'https', false);
 		$s = $https ? 's' : '';
 		return "http$s://$host:$port";
+	}
+	
+	/**
+	 * Returns path option for socket.io connection
+	 * @method socketPath
+	 * @static
+	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
+	 */
+	static function socketPath () {
+		return Q_Config::get('Q', 'node', 'socket', 'path', '/socket.io');
 	}
 
 	/**

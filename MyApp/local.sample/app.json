@@ -15,7 +15,7 @@
 				"ca": "location of the ca file, optional",
 				"dhparam": "location of the dhparam file, optional"
 			}, */
-			"socket.io": {}
+			"socket": {}
 		},
 		"nodeInternal": {
 			"host": "127.0.0.1",
