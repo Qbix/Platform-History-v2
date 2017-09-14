@@ -677,6 +677,12 @@
 	cursor: pointer;
 }
 
+.Streams_interests_subcategory {
+	text-align: center;
+	opacity: 0.5;
+	font-weight: 200;
+}
+
 .Streams_preview_error {
 	opacity: 0.8;
 	font-size: 12px;
