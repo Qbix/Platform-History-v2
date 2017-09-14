@@ -16,7 +16,7 @@ var util = require('util');
  */
 function Socket (server, options) {
 	var io = require('socket.io');
-	this.io = io.listen(server, options);
+	this.io = io.listen(server, options || {});
 }
 
 /**
@@ -31,11 +31,12 @@ function Socket (server, options) {
 Socket.listen = function (options) {
 	options = options || {};
 	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
-	var fields = {
-		baseUrl: baseUrl + '/socket.io'
-	};
-	var url = Q.Config.get(['Q', 'node', 'url'], '/socket.io');
-	options.path = options.path || url.interpolate(fields);
+	if (options.path) {
+		var url = Q.Config.get(['Q', 'node', 'url'], '') + '/socket.io';
+		options.path = url.interpolate({
+			baseUrl: ''
+		});
+	}
 	var server = Q.listen(options);
 	if (!server.attached.socket) {
 		var s = !Q.isEmpty(options.https) ? 's' : '';
