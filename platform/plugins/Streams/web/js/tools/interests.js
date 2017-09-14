@@ -75,7 +75,9 @@ Q.Tool.define("Streams/interests", function (options) {
 		var content = '';
 		var count = 0;
 		Q.each(interests, function (subcategory, interests) {
-			var h3 = subcategory ? "<h3>"+subcategory+"</h3>" : '';
+			var h3 = subcategory
+				? "<h3 class='Streams_interests_subcategory'>"+subcategory+"</h3>"
+				: '';
 			content += h3 + _listInterests(category, interests);
 			count += Object.keys(interests).length;
 		});
