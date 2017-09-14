@@ -30,12 +30,10 @@ function Socket (server, options) {
  */
 Socket.listen = function (options) {
 	options = options || {};
-	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
+	Q.extend(options, Q.Config.get(['Q', 'web', 'node', 'socket.io']));
 	if (options.path) {
-		var url = Q.Config.get(['Q', 'node', 'url'], '') + '/socket.io';
-		options.path = url.interpolate({
-			baseUrl: ''
-		});
+		var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
+		options.path = options.path.interpolate({baseUrl: baseUrl});
 	}
 	var server = Q.listen(options);
 	if (!server.attached.socket) {
