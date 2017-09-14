@@ -397,7 +397,7 @@ Streams.listen = function (options) {
 	socket = Users.Socket.listen({
 		host: pubHost,
 		port: pubPort,
-		https: Q.Config.get(['Q', 'node', 'https'], false) || {}
+		https: Q.Config.get(['Q', 'node', 'https'], false) || {},
 	});
 
 	socket.io.of('/Users').on('connection', function(client) {
