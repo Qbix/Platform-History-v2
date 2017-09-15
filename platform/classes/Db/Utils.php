@@ -109,7 +109,7 @@ class Db_Utils
 			openlog($ident, LOG_NDELAY | LOG_PID | LOG_PERROR, LOG_USER);
 		$logOpen = true;
 		syslog($level, 
-			($timestamp ? date('Y-m-d h:i:s') . ' ' : '') . $message);
+			($timestamp ? date('Y-m-d H:i:s') . ' ' : '') . $message);
 	}
 
 	/**

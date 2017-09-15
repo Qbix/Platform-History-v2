@@ -868,7 +868,7 @@ class Q_Response
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned first by Q_Response::scriptLines.
 	 *  The other special value, "Q", is intended for internal use.
-	 * @param {string} [$type="handlebars"] The extension, such as 'handlebars' or 'php'
+	 * @param {string} [$type="handlebars"] The type of the template, such as "php" or "handlebars".
 	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
 	 * @return {boolean} returns false if template was already added, else returns true
 	 */
@@ -912,8 +912,14 @@ class Q_Response
 		if (!$content) {
 			throw new Q_Exception("Failed to load template '$name'");
 		}
-		$text = $text = Q_Text::sources(explode('/', "$name.$type"));
-		self::$inlineTemplates[$slotName][] = compact('name', 'content', 'type', 'text');
+		if ($fields = Q_Config::get('Q', 'views', 'fields', null)) {
+			$params = array_merge($fields, $params);
+		}
+		$parts = explode('/', "$name.$type");
+		$text = array_merge($params, Q_Text::sources($parts));
+		self::$inlineTemplates[$slotName][] = compact(
+			'name', 'content', 'type', 'text'
+		);
 
 		return true;
 	}
@@ -997,8 +1003,10 @@ class Q_Response
 				'id' => Q_Utils::normalize($template['name']),
 				'data-slot' => $template['slot']
 			);
-			if (!empty($template['text'])) {
-				$attributes['data-text'] = Q::json_encode($template['text']);
+			foreach (array('text', 'partials', 'helpers') as $aspect) {
+				if (!empty($template[$aspect])) {
+					$attributes["data-$aspect"] = Q::json_encode($template[$aspect]);
+				}
 			}
 			$tags[] = Q_Html::script($template['content'], $attributes);
 		}

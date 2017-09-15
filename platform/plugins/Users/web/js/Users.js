@@ -1394,9 +1394,13 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 			placeholder = Q.text.Users.login.placeholders.mobile;
 		}
 	}
+	var autocomplete = (type === 'text') ? 'on' : type;
 	Q.addScript("Q/plugins/Q/js/sha1.js");
-	var identifierInput = $('<input id="Users_login_identifier" autocomplete="email" type="'+type+'" class="text" />')
-	.attr('maxlength', Q.text.Users.login.maxlengths.identifier)
+	var identifierInput = $('<input id="Users_login_identifier" />').attr({
+		name: 'identifier',
+		autocomplete: autocomplete,
+		type: type
+	}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
 	.attr('placeholder', placeholder)
 	.attr('autocomplete', 'username')
 	.focus(hideForm2);
@@ -1643,7 +1647,7 @@ function setIdentifier_callback(err, response) {
 function setIdentifier_setupDialog(identifierType, options) {
 	var options = options || {};
 	var placeholder = Q.text.Users.setIdentifier.placeholders.identifier;
-	var type = 'email';
+	var type = Q.info.isTouchscreen ? 'email' : 'text';
 	var parts = identifierType ? identifierType.split(',') : [];
 	if (parts.length === 1) {
 		if (parts[0] == 'email') {
@@ -1658,9 +1662,13 @@ function setIdentifier_setupDialog(identifierType, options) {
 	var step1_form = $('<form id="Users_setIdentifier_step1_form" />');
 	var step1_div = $('<div id="Users_setIdentifier_step1" class="Q_big_prompt" />').html(step1_form);
 
+	var autocomplete = (type === 'text') ? 'on' : type;
 	step1_form.empty().append(
-		$('<input id="Users_setIdentifier_identifier" type="email" name="identifier" class="text" />')
-		.attr('maxlength', Q.text.Users.login.maxlengths.identifier)
+		$('<input id="Users_setIdentifier_identifier" />').attr({
+			name: 'identifier',
+			autocomplete: autocomplete,
+			type: type
+		}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
 		.attr('placeholder', placeholder)
 	).append(
 		$('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />').val(identifierType)

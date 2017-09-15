@@ -517,9 +517,9 @@ Date.now = function _Date_now() {
 Date.fromDateTime = function _Date_fromDateTime(dateTimeString, timezoneOffset) {
 	timezoneOffset = timezoneOffset || 0;
 	var date = new Date(dateTimeString.replace(/-/g,"/"));
-	var minutes = (new Date()).timezoneOffset() - timezoneOffset;
+	var minutes = (new Date()).getTimezoneOffset() - timezoneOffset;
 	if (minutes) {
-		date = new Date(date.getTime() + minutes*60000);
+		date = new Date(date.getTime() - minutes*60000);
 	}
 	return date;
 };
@@ -533,9 +533,6 @@ Date.fromDateTime = function _Date_fromDateTime(dateTimeString, timezoneOffset) 
 Date.fromTimestamp = function (timestamp) {
 	if (isNaN(timestamp)) {
 		return null;
-	}
-	if (timezoneOffset === undefined) {
-		timezoneOffset = (new Date()).timezoneOffset()
 	}
 	timestamp = parseFloat(timestamp);
 	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);
@@ -7941,8 +7938,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			for (slotName in response.templates) {
 				newTemplates[slotName] = [];
 				Q.each(response.templates[slotName], function (i) {
+					var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
 					newTemplates[slotName].push(
-						Q.Template.set(this.name, this.content, this.type)
+						Q.Template.set(this.name, this.content, info)
 					);
 				});
 			}
@@ -8822,7 +8820,7 @@ Q.Text = {
 			if (options && options.ignoreCache) {
 				func = func.force;
 			}
-			var url = dir + '/' + name + '/' + language + suffix + '.json';
+			var url = Q.url(dir + '/' + name + '/' + language + suffix + '.json');
 			return func(name, url, pipe.fill(name), options);
 		});
 	}
@@ -8959,7 +8957,11 @@ function _connectSocketNS(ns, url, callback, callback2, force) {
 	if (root.io && root.io.Socket) {
 		_connectNS(ns, url, callback, callback2);
 	} else {
-		Q.addScript(url+'/socket.io/socket.io.js', function () {
+		var socketPath = Q.getObject('Q.info.socketPath');
+		if (socketPath === undefined) {
+			socketPath = '/socket.io';
+		}
+		Q.addScript(url+socketPath+'/socket.io.js', function () {
 			_connectNS(ns, url, callback, callback2);
 		});
 	}

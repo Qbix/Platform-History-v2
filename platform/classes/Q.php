@@ -591,38 +591,38 @@ class Q
 	{
 		require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
 
-		if (empty($params)) $params = array();
-
-		$parts = explode('/', $viewName);
-		$viewName = implode(DS, $parts);
-
-		$fields = Q_Config::get('Q', 'views', 'fields', null);
-		if ($fields) {
-			$params = array_merge($fields, $params);
+		if (empty($params)) {
+			$params = array();
 		}
 
+		$parts = explode('/', $viewName);
+		$viewPath = implode(DS, $parts);
+		if ($fields = Q_Config::get('Q', 'views', 'fields', null)) {
+			$params = array_merge($fields, $params);
+		}
 		$params = array_merge($params, Q_Text::params($parts));
-		Q::log($viewName, 'a');
-		Q::log(Q::ifset($params, 'activation', ''), 'a');
 
 		/**
 		 * @event {before} Q/view
 		 * @param {string} viewName
+		 * @param {string} viewPath
 		 * @param {string} params
 		 * @return {string}
 		 *  Optional. If set, override method return
 		 */
-		$result = self::event('Q/view', compact('viewName', 'params'), 'before');
+		$result = self::event('Q/view', compact(
+			'viewName', 'viewPath', 'params'
+		), 'before');
 		if (isset($result)) {
 			return $result;
 		}
 
 		try {
 			$ob = new Q_OutputBuffer();
-			self::includeFile('views'.DS.$viewName, $params);
+			self::includeFile('views'.DS.$viewPath, $params);
 			return $ob->getClean();
 		} catch (Q_Exception_MissingFile $e) {
-			if (basename($e->params['filename']) != basename($viewName)) {
+			if (basename($e->params['filename']) != basename($viewPath)) {
 				throw $e;
 			}
 			$ob->flushHigherBuffers();
@@ -630,9 +630,10 @@ class Q
 			 * Renders 'Missing View' page
 			 * @event Q/missingView
 			 * @param {string} viewName
+			 * @param {string} viewpath
 			 * @return {string}
 			 */
-			return self::event('Q/missingView', compact('viewName'));
+			return self::event('Q/missingView', compact('viewName', 'viewPath', 'params'));
 		}
 	}
 
@@ -1204,7 +1205,7 @@ class Q
 			$realPath = Q::realPath($path, true);
 		}
 		$filename = (isset($key) ? $key : $app).'.log';
-		$toSave = "\n".($timestamp ? '['.date('Y-m-d h:i:s') . '] ' : '') .substr($message, 0, $max_len);
+		$toSave = "\n".($timestamp ? '['.date('Y-m-d H:i:s') . '] ' : '') .substr($message, 0, $max_len);
 		file_put_contents($realPath.DS.$filename, $toSave, FILE_APPEND);
 		umask($mask);
 	}
