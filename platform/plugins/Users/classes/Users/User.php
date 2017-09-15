@@ -455,11 +455,14 @@ class Users_User extends Base_Users_User
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
 		$email->authCode = sha1(microtime() . mt_rand());
-		$link = 'Users/activate?code='.urlencode($email->activationCode) . ' emailAddress='.urlencode($email->address);
-		$unsubscribe = 'Users/unsubscribe?' . http_build_query(array(
+		$link = Q_Uri::url(
+			'Users/activate?code='.urlencode($email->activationCode)
+			. ' emailAddress='.urlencode($email->address)
+		);
+		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $email->authCode, 
 			'emailAddress' => $email->address
-		));
+		)));
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
 		/**
@@ -656,8 +659,10 @@ class Users_User extends Base_Users_User
 			$number = substr($number, 2);
 		}
 		$mobile->authCode = sha1(microtime() . mt_rand());
-		$link = 'Users/activate?code='.urlencode($mobile->activationCode)
-			. ' mobileNumber='.urlencode($number);
+		$link = Q_Uri::url(
+			'Users/activate?code='.urlencode($mobile->activationCode)
+			. ' mobileNumber='.urlencode($number)
+		);
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
 		/**
