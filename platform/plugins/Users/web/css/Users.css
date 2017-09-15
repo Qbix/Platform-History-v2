@@ -433,3 +433,26 @@
 	border-radius: 2px;
 	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
+
+.Users_getintouch_tool button {
+	background: transparent;
+	border: 1px solid #777;
+	font-size: 16px;
+	line-height: 32px;
+	cursor: pointer;
+}
+
+button.Users_getintouch_email {
+	background: url(../img/email.png) no-repeat left 5px top;
+	text-indent: 40px;
+}
+
+button.Users_getintouch_text {
+	background: url(../img/text.png) no-repeat left 5px top;
+	text-indent: 40px;
+}
+
+button.Users_getintouch_call {
+	background: url(../img/call.png) no-repeat left 5px top;
+	text-indent: 40px;
+}
