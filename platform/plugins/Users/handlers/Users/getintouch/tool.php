@@ -4,8 +4,9 @@
  * This tool renders ways to get in touch
  *
  * @param array [$options] An associative array of options, containing:
- *   @param {string|Users_User} [$options.user] Required. The user object or id of the user exposing their primary identifiers for getting in touch.
- *   @param {boolean|string} [$options.email] Pass true here to use the primary verified email address, if any. Or pass the string label for this button.
+ *   @param {string|Users_User} $options.user Required. The user object or id of the user exposing their primary identifiers for getting in touch.
+ *   @param {string} [$key='blah'] The key to use for obfuscation to try and prevent harvesting
+ *   @param {boolean|string} [$options.email] Pass true here to allow emailing on the primary verified email address, if any. Or pass the string label for this button.
  *   @param {string} [$options.emailSubject] Fill this if you want the email subject to be automatically filled in
  *   @param {string} [$options.emailBody] Fill this if you want the email body to be automatically filled in
  *   @param {boolean|string} [$options.sms] Pass true here to allow texting the primary verified mobile number, if any. Or pass the string label for this button.
@@ -17,7 +18,7 @@
 function Users_getintouch_tool($options)
 {
 	$tag = 'button';
-	$class = null;
+	$class = '';
 	$between = '';
 	$user = null;
 	$emailSubject = '';
@@ -37,30 +38,33 @@ function Users_getintouch_tool($options)
 	$email = $sms = $call = false;
 	if (!empty($options['email']) and $user->emailAddress) {
 		$email = is_string($options['email']) ? $options['email'] : "Email me";
-		$email = Q_Html::img("Q/plugins/Users/img/email.png") . $email;
-		$ways['email'] = Q_Html::tag($tag, array('id' => 'email', 'class' => $class), $email);
+		$class2 = $class . ' Users_getintouch_email';
+		$ways['email'] = Q_Html::tag($tag, array('id' => 'email', 'class' => $class2), $email);
 		Q_Response::setToolOptions(array(
 			'emailAddress' => Q_Utils::obfuscate($user->emailAddress),
 			'emailSubject' => Q_Utils::obfuscate($emailSubject),
-			'emailBody' => Q_Utils::obfuscate($emailBody)
+			'emailBody' => Q_Utils::obfuscate($emailBody, $key),
+			'key' => $key
 		));
 	}
 	if (Q_Request::isMobile()) {
-		$obfuscated_mobileNumber = Q_Utils::obfuscate($user->mobileNumber);
+		$obfuscated_mobileNumber = Q_Utils::obfuscate($user->mobileNumber, $key);
 		if (!empty($options['sms']) and $user->mobileNumber) {
 			$sms = is_string($options['sms']) ? $options['sms'] : "Text me";
-			$sms = Q_Html::img("Q/plugins/Users/img/sms.png") . $sms;
-			$ways['sms'] = Q_Html::tag($tag, array('id' => 'sms', 'class' => $class), $sms);
+			$class2 = $class . ' Users_getintouch_sms';
+			$ways['sms'] = Q_Html::tag($tag, array('id' => 'sms', 'class' => $class2), $sms);
 			Q_Response::setToolOptions(array(
-				'mobileNumber' => $obfuscated_mobileNumber
+				'mobileNumber' => $obfuscated_mobileNumber,
+				'key' => $key
 			));
 		}
 		if (!empty($options['call']) and $user->mobileNumber) {
 			$call = is_string($options['call']) ? $options['call'] : "Call me";
-			$call = Q_Html::img("Q/plugins/Users/img/call.png") . $call;
-			$ways['call'] = Q_Html::tag($tag, array('id' => 'call', 'class' => $class), $call);
+			$class2 = $class . ' Users_getintouch_call';
+			$ways['call'] = Q_Html::tag($tag, array('id' => 'call', 'class' => $class2), $call);
 			Q_Response::setToolOptions(array(
-				'mobileNumber' => $obfuscated_mobileNumber
+				'mobileNumber' => $obfuscated_mobileNumber,
+				'key' => $key
 			));
 		}
 	}
