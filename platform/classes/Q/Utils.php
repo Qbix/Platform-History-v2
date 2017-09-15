@@ -161,17 +161,47 @@ class Q_Utils
 	/**
 	 * Some basic obfuscation to thwart scrapers from getting emails, phone numbers, etc.
 	 * @static
-	 * @param {string} $text
+	 * @method obfuscate
+	 * @param {string} $text The text to obfuscate
+	 * @param {string} [$key="blah"] Some key to use for obfuscation
 	 * @return {text}
 	 */
-	static function obfuscate($text)
+	static function obfuscate($text, $key = 'blah')
 	{
 		$len = strlen($text);
+		$len2 = strlen($key);
 		$result = '';
 		for ($i=0; $i<$len; ++$i) {
-			$result .= chr(ord($text[$i])-1);
+			$j = $i % $len2;
+			$diff = self::ord($text[$i]) - self::ord($key[$j]);
+			$result .= ($diff < 0 ? '1' : '0') . self::chr(abs($diff));
 		}
 		return $result;
+	}
+	
+	/**
+	 * Like ord but handles utf-8 encoding
+	 * @static
+	 * @method ord
+	 * @param {string} $text
+	 * @return {integer}
+	 */
+	static function ord($text) { 
+	    $k = mb_convert_encoding($text, 'UCS-2LE', 'UTF-8'); 
+	    $k1 = ord(substr($k, 0, 1)); 
+	    $k2 = ord(substr($k, 1, 1)); 
+	    return $k2 * 256 + $k1; 
+	}
+	
+	/**
+	 * Like chr but handles utf-8 encoding
+	 * @static
+	 * @method chr
+	 * @param {integer} $intval
+	 * @return {string}
+	 */
+	static function chr($intval) {
+		return mb_convert_encoding(pack('n', $intval), 'UTF-8', 'UTF-16BE');
 	}
 
 	/**
