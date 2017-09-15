@@ -2187,14 +2187,17 @@ Q.beforeInit.add(function _Users_beforeInit() {
 			if (user) {
 				// the user changed, redirect to their home page
 				var urls = Q.urls || {};
-				var url = options.successUrl
-					|| urls[Q.info.app+'/home']
-					|| Q.url('');
+				var nextUrl = user.result === 'registered' 
+					? options.onboardingUrl
+					: options.successUrl;
+					var url = nextUrl || urls[Q.info.app+'/home'] || Q.url('');
 				Q.handle(url);
 			}
 		}, 'Users'),
 		onResult: new Q.Event(),
 		onRequireComplete: new Q.Event(),
+		onboardingUrl: null,
+		successUrl: null,
 		accountStatusUrl: null,
 		tryQuietly: false,
 		using: 'native', // can also be a platform name like 'facebook'
