@@ -58,9 +58,9 @@ class Q_Tree
 		for ($i = 0; $i < $args_count - 1; ++$i) {
 			$key = $args[$i];
 			if (! is_array($result)) {
-				return null; // silently ignore the rest of the path
-				$keys = '["' . implode('"]["', $key_array) . '"]';
-				throw new Q_Exception_NotArray(compact('keys', 'key'));
+				return $default; // silently ignore the rest of the path
+				// $keys = '["' . implode('"]["', $key_array) . '"]';
+				// throw new Q_Exception_NotArray(compact('keys', 'key'));
 			}
 			if (!isset($key) or !array_key_exists($key, $result)) {
 				return $default;
