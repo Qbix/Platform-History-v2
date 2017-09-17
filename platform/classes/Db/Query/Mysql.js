@@ -1240,58 +1240,53 @@ function criteria_internal (query, criteria) {
 				var lhs = '(' + columns.join(',') + ')';
 				var rhs = '(\n' + list.join(',\n') + '\n)';
 				criteria_list.push(lhs + ' IN ' + rhs);
-			} else {
-				if (value === undefined) {
-					// do not add this value to criteria
-				} else if (value == null) {
-					criteria_list.push( "ISNULL(" + expr + ")");
-				} else if (value && value.typename === "Db.Expression") {
-					Q.extend(query.parameters, value.parameters);
-					if (/\W/.test(expr.substr(-1))) {
-						criteria_list.push( "" + expr + "(" + value + ")" );
-					} else {
-						criteria_list.push( "" + expr + " = (" + value + ")");
-					}
-				} else if (Q.isArrayLike(value)) {
-					var valueList = '';
-					if (value.length) {
-						values = [];
-						for (i=0; i<value.length; ++i) {
-							values.push(":_criteria_" + _valueCounter);
-							query.parameters["_criteria_" + _valueCounter] = value[i];
-							_valueCounter = (_valueCounter + 1) % 1000000;
-						}
-						valueList = values.join(',');
-					}
-					if (/\W/.test(expr.substr(-1))) {
-						criteria_list.push( "" + expr + "(" + valueList + ")" );
-					} else if (value.length === 0) {
-						criteria_list.push("FALSE"); // since value array is empty
-					} else {
-						criteria_list.push( "" + expr + " IN (" + valueList + ")");
-					}
-				} else if (value && value.typename === 'Db.Range') {
-					if (value.min != null) {
-						var c_min = value.includeMin ? ' >= ' : ' > ';
-						criteria_list.push( "" + expr + c_min + ":_criteria_" + _valueCounter );
-						query.parameters["_criteria_" + _valueCounter] = value.min;
-						_valueCounter = (_valueCounter + 1) % 1000000;
-					}
-					if (value.max != null) {
-						var c_max = value.includeMax ? ' <= ' : ' < ';
-						criteria_list.push( "" + expr + c_max + ":_criteria_" + _valueCounter );
-						query.parameters["_criteria_" + _valueCounter] = value.max;
-						_valueCounter = (_valueCounter + 1) % 1000000;
-					}
-				} else if (/\W/.test(expr.substr(-1))) {
-					criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
-					query.parameters["_criteria_" + _valueCounter] = value;
-					++ _valueCounter;
+			} else if (value === undefined) {
+				// do not add this value to criteria
+			} else if (value == null) {
+				criteria_list.push( "ISNULL(" + expr + ")");
+			} else if (value && value.typename === "Db.Expression") {
+				Q.extend(query.parameters, value.parameters);
+				if (/\W/.test(expr.substr(-1))) {
+					criteria_list.push( "" + expr + "(" + value + ")" );
 				} else {
-					criteria_list.push(expr + " = :_criteria_" + _valueCounter);
-					query.parameters["_criteria_" + _valueCounter] = value;
+					criteria_list.push( "" + expr + " = (" + value + ")");
+				}
+			} else if (Q.isArrayLike(value)) {
+				var valueList = '';
+				if (value.length) {
+					values = [];
+					for (i=0; i<value.length; ++i) {
+						values.push(":_criteria_" + _valueCounter);
+						query.parameters["_criteria_" + _valueCounter] = value[i];
+						_valueCounter = (_valueCounter + 1) % 1000000;
+					}
+					valueList = values.join(',');
+				}
+				if (/\W/.test(expr.substr(-1))) {
+					criteria_list.push( "" + expr + "(" + valueList + ")" );
+				} else if (value.length === 0) {
+					criteria_list.push("FALSE"); // since value array is empty
+				} else {
+					criteria_list.push( "" + expr + " IN (" + valueList + ")");
+				}
+			} else if (value && value.typename === 'Db.Range') {
+				if (value.min != null) {
+					var c_min = value.includeMin ? ' >= ' : ' > ';
+					criteria_list.push( "" + expr + c_min + ":_criteria_" + _valueCounter );
+					query.parameters["_criteria_" + _valueCounter] = value.min;
 					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
+				if (value.max != null) {
+					var c_max = value.includeMax ? ' <= ' : ' < ';
+					criteria_list.push( "" + expr + c_max + ":_criteria_" + _valueCounter );
+					query.parameters["_criteria_" + _valueCounter] = value.max;
+					_valueCounter = (_valueCounter + 1) % 1000000;
+				}
+			} else {
+				var eq = /\W/.test(expr.substr(-1)) ? '' : ' = ';
+				criteria_list.push( "" + expr + eq + ":_criteria_" + _valueCounter );
+				query.parameters["_criteria_" + _valueCounter] = value;
+				_valueCounter = (_valueCounter + 1) % 1000000;
 			}
 		}
 		criteria = criteria_list.join(" AND ");
