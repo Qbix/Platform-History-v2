@@ -1665,7 +1665,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					foreach ($value as $j => $arr) {
 						if (!is_array($arr)) {
 							$json = json_encode($arr);
-							throw new Exception("Db.Query.Mysql: Value $json needs to be an array")
+							throw new Exception("Db.Query.Mysql: Value $json needs to be an array");
 						}
 						if (count($arr) != $c) {
 							throw new Exception(
