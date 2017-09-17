@@ -1661,6 +1661,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					if (!is_array($value)) {
 						throw new Exception("Db_Query_Mysql: The value should be an array of arrays");
 					}
+					$columns = array();
+					foreach ($parts as $column) {
+						$columns[] = self::column($column);
+						if (!empty($this->criteria[$column])) {
+							$this->criteria[$column] = array(); // sharding heuristics
+						}
+					}
 					$list = array();
 					foreach ($value as $j => $arr) {
 						if (!is_array($arr)) {
@@ -1673,16 +1680,14 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 							);
 						}
 						$vector = array();
+						$valuesArray = array();
 						foreach ($arr as $v) {
 							$vector[] = ":_where_$i";
 							$this->parameters["_where_$i"] = $v;
 							++ $i;
+							$this->criteria[$column][] = $v; // sharding heuristics
 						}
 						$list[] = '(' .  implode(',', $vector) . ')';
-					}
-					$columns = array();
-					foreach ($parts as $part) {
-						$columns[] = self::column($part);
 					}
 					$lhs = '(' . implode(',', $columns) . ')';
 					$rhs = "(\n" . implode(",\n", $list) . "\n)";
