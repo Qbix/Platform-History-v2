@@ -1238,7 +1238,7 @@ function criteria_internal (query, criteria) {
 					columns.push(parts[j]);
 				}
 				var lhs = '(' + columns.join(',') + ')';
-				var rhs = '(' + list.join(',') + ')';
+				var rhs = '(\n' + list.join(',\n') + '\n)';
 				criteria_list.push(lhs + ' IN ' + rhs);
 			} else {
 				if (value === undefined) {
