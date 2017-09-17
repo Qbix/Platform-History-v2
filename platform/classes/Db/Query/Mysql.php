@@ -1654,56 +1654,88 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (is_array($criteria)) {
 			$criteria_list = array();
 			foreach ($criteria as $expr => $value) {
-				if ($value === null) {
-					$criteria_list[] = "ISNULL($expr)";
-				} else if ($value instanceof Db_Expression) {
-					if (is_array($value->parameters)) {
-						$this->parameters = array_merge(
-							$this->parameters, $value->parameters
-						);
+				$parts = explode(',', $expr);
+				$parts = array_map('trim', $parts);
+				$c = count($parts);
+				if ($c > 1) {
+					if (!is_array($value)) {
+						throw new Exception("Db_Query_Mysql: The value should be an array of arrays");
 					}
-					$criteria_list[] = preg_match('/\W/', substr($expr, -1))
-						? "$expr ($value)"
-						: self::column($expr)." = ($value)";
-				} else if (is_array($value)) {
-					if (!empty($value)) {
-						$value = array_unique($value);
-						$values = array();
-						foreach ($value as $v) {
-							$values[] = ":_where_$i";
+					$list = array();
+					foreach ($value as $j => $arr) {
+						if (!is_array($arr)) {
+							$json = json_encode($arr);
+							throw new Exception("Db.Query.Mysql: Value $json needs to be an array")
+						}
+						if (count($arr) != $c) {
+							throw new Exception(
+								"Db_Query_Mysql: Arrays should have $c elements to match $expr"
+							);
+						}
+						$vector = array();
+						foreach ($arr as $v) {
+							$vector[] = ":_where_$i";
 							$this->parameters["_where_$i"] = $v;
 							++ $i;
 						}
-						$value_list = implode(',', $values);
+						$list[] = '(' .  implode(',', $vector) . ')';
 					}
-					if (preg_match('/\W/', substr($expr, -1))) {
-						$criteria_list[] = "$expr ($value_list)";
-					} else if (empty($value)) {
-						$criteria_list[] = "FALSE"; // since $value list is empty
-					} else {
-						$criteria_list[] = self::column($expr) . " IN ($value_list)";
+					$columns = array();
+					foreach ($parts as $part) {
+						$columns[] = self::column($part);
 					}
-				} else if (preg_match('/\W/', substr($expr, -1))) {
-					$criteria_list[] = "$expr :_where_$i";
-					$this->parameters["_where_$i"] = $value;
-					++ $i;
-				} else if ($value instanceof Db_Range) {
-					if (isset($value->min)) {
-						$c_min = $value->includeMin ? '>=' : '>';
-						$criteria_list[] = self::column($expr) . " $c_min :_where_$i";
-						$this->parameters["_where_$i"] = $value->min;
-						++ $i;
-					}
-					if (isset($value->max)) {
-						$c_max = $value->includeMax ? '<=' : '<';
-						$criteria_list[] = self::column($expr) . " $c_max :_where_$i";
-						$this->parameters["_where_$i"] = $value->max;
-						++ $i;
-					}
+					$lhs = '(' . implode(',', $columns) . ')';
+					$rhs = '(' . implode(',', $list) . ')';
+					$criteria_list[] = "$lhs IN $rhs";
 				} else {
-					$criteria_list[] = self::column($expr) . " = :_where_$i";
-					$this->parameters["_where_$i"] = $value;
-					++ $i;
+					if ($value === null) {
+						$criteria_list[] = "ISNULL($expr)";
+					} else if ($value instanceof Db_Expression) {
+						if (is_array($value->parameters)) {
+							$this->parameters = array_merge(
+								$this->parameters, $value->parameters
+							);
+						}
+						$criteria_list[] = preg_match('/\W/', substr($expr, -1))
+							? "$expr ($value)"
+							: self::column($expr)." = ($value)";
+					} else if (is_array($value)) {
+						if (!empty($value)) {
+							$value = array_unique($value);
+							$values = array();
+							foreach ($value as $v) {
+								$values[] = ":_where_$i";
+								$this->parameters["_where_$i"] = $v;
+								++ $i;
+							}
+							$value_list = implode(',', $values);
+						}
+						if (preg_match('/\W/', substr($expr, -1))) {
+							$criteria_list[] = "$expr ($value_list)";
+						} else if (empty($value)) {
+							$criteria_list[] = "FALSE"; // since $value list is empty
+						} else {
+							$criteria_list[] = self::column($expr) . " IN ($value_list)";
+						}
+					} else if ($value instanceof Db_Range) {
+						if (isset($value->min)) {
+							$c_min = $value->includeMin ? '>=' : '>';
+							$criteria_list[] = self::column($expr) . " $c_min :_where_$i";
+							$this->parameters["_where_$i"] = $value->min;
+							++ $i;
+						}
+						if (isset($value->max)) {
+							$c_max = $value->includeMax ? '<=' : '<';
+							$criteria_list[] = self::column($expr) . " $c_max :_where_$i";
+							$this->parameters["_where_$i"] = $value->max;
+							++ $i;
+						}
+					} else {
+						$eq = preg_match('/\W/', substr($expr, -1)) ? '=' : '';
+						$criteria_list[] = self::column($expr) . " $eq :_where_$i";
+						$this->parameters["_where_$i"] = $value;
+						++ $i;
+					}
 				}
 			}
 			$criteria = implode(' AND ', $criteria_list);
