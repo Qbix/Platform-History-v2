@@ -1685,7 +1685,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						$columns[] = self::column($part);
 					}
 					$lhs = '(' . implode(',', $columns) . ')';
-					$rhs = '(' . implode(',', $list) . ')';
+					$rhs = "(\n" . implode(",\n", $list) . "\n)";
 					$criteria_list[] = "$lhs IN $rhs";
 				} else {
 					if ($value === null) {
