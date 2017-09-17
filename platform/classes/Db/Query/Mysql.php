@@ -1622,12 +1622,27 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 	static function column($column)
 	{
-		$parts = explode(' ', $column);
-		$pos = strrpos($parts[0], '.');
-		if ($pos === false) {
-			return "`$column`";
+		$len = strlen($column);
+		$part = $column;
+		$pos = false;
+		for ($i=0; $i<$len; ++$i) {
+			$c = $column[$i];
+			if ($c !== '.'
+			and $c !== '_'
+			and $c !== '$'
+			and ($c < 'a' or $c > 'z')
+			and ($c < 'A' or $c > 'Z')
+			and ($c < '0' or $c > '9')) {
+				$pos = $i;
+				$part = substr($column, 0, $i);
+				break;
+			}
 		}
-		return substr($column, 0, $pos).".`".substr($column, $pos+1)."`";
+		$pos2 = strrpos($part, '.');
+		if ($pos === false or $pos2 === false) {
+			return "`$part`";
+		}
+		return substr($part, 0, $pos2).".`".substr($part, $pos2+1)."`";
 	}
 
 	/**
@@ -1661,6 +1676,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					if (!is_array($value)) {
 						throw new Exception("Db_Query_Mysql: The value should be an array of arrays");
 					}
+					$columns = array();
+					foreach ($parts as $column) {
+						$columns[] = self::column($column);
+						if (!empty($this->criteria[$column])) {
+							$this->criteria[$column] = array(); // sharding heuristics
+						}
+					}
 					$list = array();
 					foreach ($value as $j => $arr) {
 						if (!is_array($arr)) {
@@ -1673,16 +1695,14 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 							);
 						}
 						$vector = array();
+						$valuesArray = array();
 						foreach ($arr as $v) {
 							$vector[] = ":_where_$i";
 							$this->parameters["_where_$i"] = $v;
 							++ $i;
+							$this->criteria[$column][] = $v; // sharding heuristics
 						}
 						$list[] = '(' .  implode(',', $vector) . ')';
-					}
-					$columns = array();
-					foreach ($parts as $part) {
-						$columns[] = self::column($part);
 					}
 					$lhs = '(' . implode(',', $columns) . ')';
 					$rhs = "(\n" . implode(",\n", $list) . "\n)";
