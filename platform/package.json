@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"yuidocjs": "0.3.x",
-		"time": "0.x.x",
+		"moment-timezone": "0.5.x",
 		"crypto-js": "3.x.x",
 		"express": "3.x.x",
 		"socket.io": "1.x.x",
