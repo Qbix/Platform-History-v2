@@ -402,7 +402,7 @@ class Q_Utils
 		if (!isset($ip)) $ip = $host;
 		$request_uri = isset($parts['path']) ? $parts['path'] : '';
 		if (!empty($parts['query'])) $request_uri .= "?".$parts['query'];
-		$port = $parts['port'] ? ':'.$parts['port'] : '';
+		$port = !empty($parts['port']) ? ':'.$parts['port'] : '';
 		$url = $parts['scheme']."://".$ip.$port.$request_uri;
 
 		if (empty($parts['path'])) $parts['path'] = '/';
