@@ -1210,6 +1210,14 @@ function criteria_internal (query, criteria) {
 				if (!Q.isArrayLike(value)) {
 					throw new Q.Exception("Db.Query.Mysql: The value should be an array of arrays");
 				}
+				var columns = [];
+				for (k=0; k<pl; ++k) {
+					var column = parts[k];
+					columns.push(column);
+					if (!query.criteria[column]) {
+						query.criteria[column] = []; // sharding heuristics
+					}
+				}
 				var list = [];
 				for (j=0, vl=value.length; j<vl; ++j) {
 					if (!Q.isArrayLike(value[j])) {
@@ -1230,13 +1238,11 @@ function criteria_internal (query, criteria) {
 						vector.push(":_criteria_" + _valueCounter);
 						query.parameters["_criteria_" + _valueCounter] = value[j][k];
 						_valueCounter = (_valueCounter + 1) % 1000000;
+						query.criteria[column].push(value[j][k]); // sharding heuristics
 					}
 					list.push('(' + vector.join(',') + ')');
 				}
-				var columns = [];
-				for (j=0; j<pl; ++j) {
-					columns.push(parts[j]);
-				}
+
 				var lhs = '(' + columns.join(',') + ')';
 				var rhs = '(\n' + list.join(',\n') + '\n)';
 				criteria_list.push(lhs + ' IN ' + rhs);
