@@ -1622,12 +1622,27 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 	static function column($column)
 	{
-		$parts = explode(' ', $column);
-		$pos = strrpos($parts[0], '.');
-		if ($pos === false) {
-			return "`$column`";
+		$len = strlen($column);
+		$part = $column;
+		$pos = false;
+		for ($i=0; $i<$len; ++$i) {
+			$c = $column[$i];
+			if ($c !== '.'
+			and $c !== '_'
+			and $c !== '$'
+			and ($c < 'a' or $c > 'z')
+			and ($c < 'A' or $c > 'Z')
+			and ($c < '0' or $c > '9')) {
+				$pos = $i;
+				$part = substr($column, 0, $i);
+				break;
+			}
 		}
-		return substr($column, 0, $pos).".`".substr($column, $pos+1)."`";
+		$pos2 = strrpos($part, '.');
+		if ($pos === false or $pos2 === false) {
+			return "`$part`";
+		}
+		return substr($part, 0, $pos2).".`".substr($part, $pos2+1)."`";
 	}
 
 	/**
