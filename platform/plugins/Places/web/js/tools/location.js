@@ -140,23 +140,39 @@
 				var tool = this;
 				var state = tool.state;
 				var $te = $(tool.element);
-				var userId = Users.loggedInUser.id;
 
-				// location already set in state - just type it
-				if (state.location) {
-					Places.Coordinates.from(state.location)
-					.geocode(function (err, results) {
-						var fem = Q.firstErrorMessage(err);
-						if (fem) {
-							return console.warn(fem);
-						}
-						var result = results[0];
-						var address = result.formatted_address || result.address;
-						$te.html(address).addClass("Q_selected");
-						Q.handle(state.onChoose, tool, [result.geometry.location]);
-					});
+				// location empty - render standard location select template
+				if (Q.isEmpty(state.location)) {
+					tool.selectLocation();
 					return;
 				}
+
+				// location already set in state - just type it
+				Places.Coordinates.from(state.location).geocode(function (err, results) {
+					var fem = Q.firstErrorMessage(err);
+					if (fem) {
+						// if something wrong with location
+						// render standard location select template
+						tool.selectLocation();
+
+						return console.warn(fem);
+					}
+
+					var result = results[0];
+					var address = result.formatted_address || result.address;
+					$te.html(address).addClass("Q_selected");
+					Q.handle(state.onChoose, tool, [result.geometry.location]);
+				});
+			},
+			/**
+			 * Render template with locations, so user can select one of them
+			 * @method selectLocation
+			 */
+			selectLocation: function(){
+				var tool = this;
+				var state = tool.state;
+				var $te = $(tool.element);
+				var userId = Users.loggedInUser.id;
 
 				Q.Template.render('Places/location/select', Q.extend({
 					text: Q.text.Places.Location
@@ -165,27 +181,27 @@
 
 						// set address tool
 						tool.$(".Places_location_address")
-						.tool('Places/address', {
-							onChoose: _onChoose
-						}, 'Places_address', tool.prefix)
-						.activate(function () {
-							tool.addressTool = this;
-						});
+							.tool('Places/address', {
+								onChoose: _onChoose
+							}, 'Places_address', tool.prefix)
+							.activate(function () {
+								tool.addressTool = this;
+							});
 
 						// set showLocationsf state.
 						if (state.showLocations && userId) {
 							tool.$(".Places_location_related")
-							.tool('Streams/related', {
-								publisherId: userId,
-								streamName: 'Places/user/locations',
-								relationType: 'Places/locations',
-								isCategory: true
-							}, tool.prefix + 'relatedLocations')
-							.activate(function () {
-								tool.relatedTool = this;
-							});
+								.tool('Streams/related', {
+									publisherId: userId,
+									streamName: 'Places/user/locations',
+									relationType: 'Places/locations',
+									isCategory: true
+								}, tool.prefix + 'relatedLocations')
+								.activate(function () {
+									tool.relatedTool = this;
+								});
 						}
-						
+
 						function _onChoose(place) {
 							if (!place || !place.id) {
 								return Q.handle(state.onChoose, tool, [null]);
