@@ -214,6 +214,7 @@ class Q_Request
 		return self::$url;
 	}
 	/**
+	 * Get combination of module/action from URL
 	 * @method uri
 	 * @static
 	 * @return {Q_Uri}
@@ -226,6 +227,7 @@ class Q_Request
 		return self::$uri;
 	}
 	/**
+	 * Get just action name (without module name) from URL
 	 * @method tail
 	 * @static
 	 * @param {string} [$url=null]
@@ -262,8 +264,7 @@ class Q_Request
 		if (isset($ret)) {
 			return $ret;
 		}
-		$parts = explode('.', $url);
-		$ext = end($parts);
+		$ext = pathinfo($url, PATHINFO_EXTENSION);
 		$intercept = true;
 		switch ($ext) {
 			case 'png':
