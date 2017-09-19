@@ -83,7 +83,7 @@
 .Q_contextual .Q_listing .Q_current *,
 .Q_selectable_listing .Q_current * {
 	color: black;
-	font-weight: bold;
+	font-weight: 400;
 	text-shadow: #ccc 0 1px 0;
 }
 
@@ -98,6 +98,12 @@
 	background: -ms-linear-gradient(top,  #eaf5ff 0%,#98bede 100%);
 	background: linear-gradient(top,  #eaf5ff 0%,#98bede 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf5ff', endColorstr='#98bede',GradientType=0 );
+    border-top: solid 1px white;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: white;
+	border-left-width: 0;
+	border-right-width: 0;
 }
 
 .Q_contextual .Q_contextual_bottom_arrow, .Q_contextual .Q_contextual_top_arrow
