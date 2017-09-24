@@ -264,7 +264,11 @@ class Q_Request
 		if (isset($ret)) {
 			return $ret;
 		}
-		$ext = pathinfo($url, PATHINFO_EXTENSION);
+		$parts = explode('.', $url);
+		$ext = end($parts);
+		if (strpos($ext, '/') !== false) {
+			$ext = '';
+		}
 		$intercept = true;
 		switch ($ext) {
 			case 'png':
