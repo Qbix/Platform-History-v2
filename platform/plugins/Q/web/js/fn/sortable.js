@@ -51,6 +51,9 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 	$this.on([Q.Pointer.start, '.Q_sortable'], state.draggable, liftHandler);
 	$this.on([Q.Pointer.end, '.Q_sortable'], state.draggable, function () {
 		if (tLift) clearTimeout(tLift);
+
+		$this.off(Q.Pointer.move, moveHandler);
+		Q.removeEventListener(body, Q.Pointer.move, moveHandler, false);
 	});
 
 	$('*', $this).css('-webkit-touch-callout', 'none');
@@ -238,6 +241,9 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		var y = Q.Pointer.getY(event);
 		var $target = getTarget(x, y);
 		var $item = $body.data(dataLifted);
+		if(Q.isEmpty($item)){
+			return;
+		}
 		var data = $item.data('Q/sortable');
 		if (data) {
 			data.$dragged[0].style.transition = state.prevStyleTransition;
@@ -274,7 +280,6 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		if (tScroll) clearTimeout(tScroll);
 		if (iScroll) clearInterval(iScroll);
 		
-		var $item = $body.data(dataLifted);
 		$body.removeData(dataLifted);
 		if (!$item) return;
 		
