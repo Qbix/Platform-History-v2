@@ -10155,12 +10155,9 @@ Q.Pointer = {
 		return function _Q_fastclick_on_wrapper (e) {
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
-
-			// exit if elem not DOM node
-			if(!(elem instanceof HTMLElement)){
+			if (!(elem instanceof Element)){
 				return;
 			}
-
 			if (Q.Pointer.canceledClick
 			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {
