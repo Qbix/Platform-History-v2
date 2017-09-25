@@ -185,17 +185,15 @@ Q.Tool.define('Q/filter', function (options) {
 			return true;
 		}
 		state.begun = true;
-		tool.canceledBlur = true;
-		setTimeout(function () {
-			tool.canceledBlur = false;
-		}, 300);
-		
+
 		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
 		
 		var $te = $(tool.element);
 		$te.addClass('Q_filter_begun');
 
 		if (state.fullscreen) {
+			tool.canceledBlur = true;
+
 			// on slower mobile browsers, the following might synchronously lag a bit
 			var $body = $('body');
 			state.oldBodyOverflow = $body.css('overflow');
@@ -257,7 +255,7 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.cancelBegin = true;
 			setTimeout(function () {
 				tool.cancelBegin = false;
-			}, 300)
+			}, 300);
 			tool.setText(chosenText);
 		}
 		if (!state.begun || tool.suspended) return;
