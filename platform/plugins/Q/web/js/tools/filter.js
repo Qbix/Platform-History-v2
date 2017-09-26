@@ -47,11 +47,6 @@ Q.Tool.define('Q/filter', function (options) {
 		$te.css('position', 'relative');
 	}
 	
-	tool.canceledBlur = true;		 +
-	setTimeout(function () {		
-		tool.canceledBlur = false;		
-	}, 500);
-	
 	var events = 'focus ' + Q.Pointer.start;
 	var wasAlreadyFocused = false;
 	tool.$input.on(events, function (event) {
@@ -190,6 +185,11 @@ Q.Tool.define('Q/filter', function (options) {
 			return true;
 		}
 		state.begun = true;
+		
+		tool.canceledBlur = true;		 +
+		setTimeout(function () {		
+			tool.canceledBlur = false;		
+		}, 500);
 
 		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
 		
