@@ -47,6 +47,11 @@ Q.Tool.define('Q/filter', function (options) {
 		$te.css('position', 'relative');
 	}
 	
+	tool.canceledBlur = true;		 +
+	setTimeout(function () {		
+		tool.canceledBlur = false;		
+	}, 500);
+	
 	var events = 'focus ' + Q.Pointer.start;
 	var wasAlreadyFocused = false;
 	tool.$input.on(events, function (event) {
@@ -66,7 +71,7 @@ Q.Tool.define('Q/filter', function (options) {
 		tool.cancelBegin = true;
 		setTimeout(function () {
 			tool.cancelBegin = false;
-		}, 300);
+		}, 500);
 	}).on('keydown keyup change input focus paste blur Q_refresh Q_refresh_filter', _changed)
 	.on(Q.Pointer.fastclick, function (evt) {
 		var $this = $(this);
