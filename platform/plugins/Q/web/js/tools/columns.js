@@ -500,6 +500,7 @@ Q.Tool.define("Q/columns", function(options) {
 					if (!_suddenlyClosing && o.hideBackgroundColumns) {
 						$div.prev().hide();
 					}
+					$div.width('100%');
 				} else {
 					if (o.close.clickable) {
 						$close.plugin("Q/clickable", o.close.clickable);
