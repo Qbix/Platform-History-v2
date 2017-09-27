@@ -190,10 +190,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}
 
 			fields = Q.extend({}, state.templates.contents.fields, {
-				name: this.displayName({
-					"short": state["short"],
-					"html": true
-				})
+				name: this.displayName(Q.extend({}, state, {html: true}))
 			});
 			if (fields.name) {
 				Q.Template.render('Users/avatar/contents', fields,
