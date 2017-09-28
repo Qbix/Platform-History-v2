@@ -25,9 +25,10 @@ class Users_Email extends Base_Users_Email
 	/**
 	 * Send e-mail message
 	 * @method sendMessage
-	 * @param {string} $subject
-	 *  The subject. May contain variable references to members
-	 *  of the $fields array.
+	 * @param {string|array} $subject
+	 *  The subject. May contain variable references to members of the $fields array.
+	 *  You can also pass an array($source, array($key1, ...)) to use Q_Text to obtain
+	 *  the subject.
 	 * @param {string} $view
 	 *  The name of a view for the body. Fields are passed to it.
 	 * @param {array} $fields=array()
@@ -50,6 +51,16 @@ class Users_Email extends Base_Users_Email
 				'type' => 'email address',
 				'emailAddress' => $this->address
 			));
+		}
+		
+		if (is_array($subject)) {
+			$source = $subject[0];
+			$keys = $subject[1];
+			$texts = Q_Text::get($source);
+			$args = array_merge(array($texts), $keys, array("Missing subject in $source"));
+			$subject = call_user_func_array(
+				array('Q', 'ifset'), $args
+			);
 		}
 		
 		$app = Q_Config::expect('Q', 'app');
@@ -193,7 +204,8 @@ class Users_Email extends Base_Users_Email
 	{
 		if (!isset($subject)) {
 			$subject = Q_Config::get('Users', 'transactional', 'resend', 'subject', Q_Config::get(
-				'Users', 'transactional', 'activation', 'subject', 'Did you forget your passphrase?'
+				'Users', 'transactional', 'activation', 'subject', 
+				'Did you forget your passphrase?'
 			));
 		}
 		if (!isset($view)) {

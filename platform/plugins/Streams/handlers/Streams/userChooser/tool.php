@@ -29,7 +29,7 @@ function Streams_userChooser_tool($options)
 		$exclude = array($user->id => true);
 	}
 	
-	Q_Response::addScript('Q/plugins/Streams/js/Streams.js');
+	Q_Response::addScript('{{Streams}}/js/Streams.js');
 	Q_Response::setToolOptions($options);
 	return Q_Html::input('query', '', array(
 		'class' => 'text Streams_userChooser_input', 
