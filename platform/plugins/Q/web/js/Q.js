@@ -8742,6 +8742,31 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 	});
 };
 
+	/**
+	 * Interpolate some standard placeholders inside a url, such as
+	 * {{AppName}} or {{PluginName}}
+	 * @static
+	 * @method interpolateUrl
+	 * @param {String} url
+	 * @param {Object} [additional={}] Any additional substitutions
+	 * @return {String} The url with substitutions applied
+	 */
+	Q.interpolateUrl = function (url, additional) {
+		if (url.indexOf('{{') < 0) {
+			return url;
+		}
+		var substitutions = {};
+		substitutions['baseUrl'] = substitutions[Q.info.app] = Q.info.baseUrl;
+		for (var plugin in Q.plugins) {
+			substitutions[plugin] = Q.info.baseUrl + '/Q/plugins/' + plugin;
+		}
+		url = url.interpolate(substitutions);
+		if (additional) {
+			url = url.interpolate(additional);
+		}
+		return url;
+	};
+
 /**
  * Module for loading text from files.
  * Used for translations, A/B testing and more.
