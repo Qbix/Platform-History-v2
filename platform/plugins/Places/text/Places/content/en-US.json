@@ -1,7 +1,0 @@
-{
-	"LatLng": "({{1}} lat, {{2}} lng)",
-	"nearby": {
-		"PostcodeLabel": "{{1}} ({{2}})",
-		"Title": "Within {{1}} of {{2}}"
-	}
-}
