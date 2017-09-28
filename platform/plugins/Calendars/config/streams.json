@@ -1,0 +1,10 @@
+{
+	"Calendars/participating/events": {
+		"type": "Streams/participating",
+		"title": "Messages about joining/leaving events",
+		"icon": "",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	}
+}

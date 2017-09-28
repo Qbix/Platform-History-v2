@@ -10,8 +10,8 @@
  */
 function Streams_search_tool($options)
 {
-  Q_Response::addScript('Q/plugins/Streams/js/Streams.js');
-  Q_Response::addStylesheet('Q/plugins/Streams/css/Streams.css');
+  Q_Response::addScript('{{Streams}}/js/Streams.js');
+  Q_Response::addStylesheet('{{Streams}}/css/Streams.css');
   $default = array('placeholder' => 'search', 'submit' => 'Submit');
   $options = array_merge($default, $options);
   Q_Response::setToolOptions($options);

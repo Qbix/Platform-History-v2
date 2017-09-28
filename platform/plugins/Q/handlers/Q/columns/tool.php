@@ -79,12 +79,18 @@ EOT;
 				$attributes .= ' ' . Q_Html::attributes($column['attributes']);
 			}
 			$data = Q::ifset($column, 'data', '');
+			$titleElement = '';
+			if (isset($titleHtml)) {
+				$titleElement = <<<EOT
+	<div class="Q_columns_title">
+		$closeHtml
+		<h2 class="Q_title_slot">$titleHtml</h2>
+	</div>
+EOT;
+			}
 			$columns[] = <<<EOT
 	<div class="Q_columns_column $classes" data-index="$i" data-name="$n" $attrs>
-		<div class="Q_columns_title">
-			$closeHtml
-			<h2 class="Q_title_slot">$titleHtml</h2>
-		</div>
+		$titleElement
 		<div class="Q_column_slot">$columnHtml</div>
 		<div class="Q_controls_slot">$controlsHtml</div>
 	</div>
