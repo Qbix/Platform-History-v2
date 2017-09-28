@@ -2904,7 +2904,8 @@ Q.interpolateUrl = function (url, additional) {
 		return url;
 	}
 	var substitutions = {};
-	substitutions['baseUrl'] = substitutions[Q.info.app] = Q.info.baseUrl;
+	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
+	substitutions['baseUrl'] = substitutions[Q.info.app] = baseUrl;
 	for (var plugin in Q.plugins) {
 		substitutions[plugin] = Q.info.baseUrl + '/Q/plugins/' + plugin;
 	}
