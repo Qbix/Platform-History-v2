@@ -4126,8 +4126,10 @@ var Interests = Streams.Interests = {
 		if (info && info[category] && info[category].white) {
 			return info[category].white.interpolate({ baseUrl: Q.info.baseUrl })
 		}
-		return '{{Streams}}/img/icons/interests/categories/'
-			+ style + '/' + cn + '.png';
+		return Q.url(
+			'{{Streams}}/img/icons/interests/categories/'
+			+ style + '/' + cn + '.png'
+		);
 	},
 	all: {},
 	info: {},
