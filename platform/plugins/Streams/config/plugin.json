@@ -119,16 +119,13 @@
 						"description": "You were invited",
 						"subject": "You were invited to {{& stream.fields.title}}"
 					},
-					"Streams/chat/message": {
-						"subject": "Chat in {{stream.fields.title}}"
-					},
 					"Streams/relatedTo": {
 						"description": "Some other stream has been related to this one",
-						"subject": "{{&call 'message.getInstruction 'description'}}"
+						"subject": "{{&call 'message.getInstruction' 'description'}}"
 					},
 					"Streams/relatedFrom": {
 						"description": "This stream has been related to some other one",
-						"subject": "{{&call 'message.getInstruction 'description'}}"
+						"subject": "{{&call 'message.getInstruction' 'description'}}"
 					},
 					"Streams/access": {
 						"description": "Access to stream has changed",
