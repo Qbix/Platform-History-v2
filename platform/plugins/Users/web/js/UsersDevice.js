@@ -92,7 +92,7 @@
 			var self = this;
 			if ('serviceWorker' in navigator && 'PushManager' in window) {
 				console.log('Service Worker and Push is supported');
-				navigator.serviceWorker.register('Q/plugins/Users/js/sw.js')
+				navigator.serviceWorker.register('{{Users}}/js/sw.js')
 					.then(function (swReg) {
 						console.log('Service Worker is registered', swReg);
 						self.serviceWorkerRegistration = swReg;

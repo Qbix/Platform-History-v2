@@ -1,0 +1,102 @@
+{{&tool "Streams/participants" "event" max=peopleMax maxShow=10 showSummary=false showControls=true showBlanks=true }}
+<div class="Q_big_prompt Calendars_going_prompt">
+	Are you in?
+	<span class="Calendars_going" data-going="{{going}}">
+		<span data-going="no" class="Calendars_no {{no}}">No
+		</span><span data-going="maybe" class="Calendars_maybe {{maybe}}">Maybe
+		</span><span data-going="yes" class="Calendars_yes {{yes}}">Yes</span>
+	</span>
+</div>
+<div class="Calendars_info">
+	<div class="Q_button Travel_aspect_trips" style="display: none;">
+		<div class="Calendars_info_content Calendars_info_buttons" colspan="2">
+			{{&tool "Travel/trips" publisherId=stream.fields.publisherId streamName=stream.fields.name}}
+		</div>
+	</div>
+	<div class="Q_button Assets_aspect_funds" data-invoke="fund">
+		<div class="Calendars_info_icon">
+			<img alt="People" src='{{toUrl "img/white/fund.png"}}'>
+		</div>
+		<div class="Calendars_info_content">
+			$500 contributed<br>
+			by 30 people
+		</div>
+		<div class="Calendars_info_button">
+			<button class="Q_button Assets_aspect_funds">Contribute</button>
+		</div>
+	</div>
+	<div class="Q_button Streams_aspect_chats" data-invoke="chat">
+		<div class="Calendars_info_icon">
+			<img alt="People" src='{{toUrl "img/white/chat.png"}}'>
+		</div>
+		<div class="Calendars_info_unseen"></div>
+		<div class="Calendars_info_content">
+			Conversation
+		</div>
+		<div class="Calendars_info_button">
+			<button class="Q_button Streams_aspect_chats">Chat</button>
+		</div>
+	</div>
+	<div class="Q_button Q_aspect_when" data-invoke="time">
+		<div class="Calendars_info_icon">
+			<img alt="Time" src='{{toUrl "img/white/time.png"}}'>
+		</div>
+		<div class="Calendars_info_content">
+			{{&tool "Q/timestamp" "start" capitalized=true}}
+		</div>
+		<div class="Calendars_info_button">
+			<button class="Q_button Q_aspect_when Calendars_calendar_add">Calendar</button>
+		</div>
+	</div>
+	<div class="Q_button Q_aspect_where" data-invoke="local">
+		<div class="Calendars_info_icon">
+			<img alt="Location" src='{{toUrl "img/white/location.png"}}'>
+		</div>
+		<div class="Calendars_info_content">
+			<div class="Calendars_location_area">
+				{{call "stream.getAttribute" "area"}}
+			</div>
+			<div class="Calendars_location_venue">
+				{{call "stream.getAttribute" "venue"}}
+			</div>
+			<div class="Calendars_location_address">
+				{{call "stream.getAttribute" "address"}}
+			</div>
+		</div>
+		<div class="Calendars_info_button">
+			<button class="Q_button Q_aspect_where">Directions</button>
+		</div>
+	</div>
+	<div class="Q_button Assets_aspect_deals" data-invoke="deals">
+		<div class="Calendars_info_icon">
+			<img alt="Time" src='{{toUrl "img/white/deals.png"}}'>
+		</div>
+		<div class="Calendars_info_content">
+			Free Popcorn for<br>Calendars of 5 or more
+		</div>
+		<div class="Calendars_info_button">
+			<button class="Q_button Assets_aspect_business">Redeem</button>
+		</div>
+	</div>
+	<div class="Q_button Streams_aspect_interests" data-invoke="interests">
+		<div class="Calendars_info_icon">
+			<img alt="Interests" src='{{toUrl "img/white/interests.png"}}'>
+		</div>
+		<div class="Calendars_info_content">
+			{{&tool "Streams/inplace" "interest" inplaceType="text" field="title" editable=false}}
+		</div>
+		<div class="Calendars_info_button">
+			<button class="Q_button Streams_aspect_interests">Interests</button>
+		</div>
+	</div>
+	<div class="Calendars_participants_info">
+		Open to
+		{{peopleMin}}
+		&ndash;
+		{{peopleMax}}
+		{{labelTitles}}
+	</div>
+	<div class="Calendars_variable_height Calendars_description">
+		{{&tool "Streams/inplace" "content" inplaceType="textarea" inplace-placeholder="Enter a description of this event or activity" inplace-selectOnEdit=false}}
+	</div>
+</div>

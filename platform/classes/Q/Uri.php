@@ -254,6 +254,27 @@ class Q_Uri
 	}
 	
 	/**
+	 * Get the base url of a plugin
+	 * @method pluginBaseUrl
+	 * @static
+	 * @param string $plugin The name of the plugin, with first letter uppercase.
+	 * @return {string} Returns an absolute or relative URL
+	 */
+	static function pluginBaseUrl($plugin)
+	{
+		/**
+		 * Hook for custom logic modifying the urls for a plugin
+		 * @event Q/Uri/pluginUrl {before}
+		 * @param {string} plugin
+		 * @return {string}
+		 */
+		if ($url = Q::event('Q/Uri/fromUrl', compact('url'), 'before')) {
+			return;
+		}
+		return "Q/plugins/$plugin";
+	}
+	
+	/**
 	 * Returns the value of the specified URI field, or null
 	 * if it is not present.
 	 * @method __get

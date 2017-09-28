@@ -3523,7 +3523,7 @@ abstract class Streams extends Base_Streams
 			? $options['appUrl']
 			: Q_Request::baseUrl().'/'.Q_Config::get(
 				"Streams", "types", $stream->type, 
-				"invite", "url", "Q/plugins/Streams/stream"
+				"invite", "url", "{{Streams}}/stream"
 			);
 
 		// now check and define levels for invited user
@@ -3906,6 +3906,19 @@ abstract class Streams extends Base_Streams
 		$last = trim($last);
 
 		return compact('first', 'last');
+	}
+	
+	/**
+	 * Get a stream of type "Streams/experience" published by the community
+	 * @method experience
+	 * @static
+	 * @param {string} [$experienceId='main']
+	 * @return {Streams_Stream}
+	 */
+	static function experience($experienceId = 'main')
+	{
+		$communityId = Users::communityId();
+		return Streams::fetchOne(null, $communityId, "Streams/experience/$experienceId", true);
 	}
 
 	/**

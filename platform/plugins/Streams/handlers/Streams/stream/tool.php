@@ -144,7 +144,7 @@ function Streams_stream_tool($options) {
 					if (data.errors) alert(data.errors);
 					else {
 						var stream = Q.getObject(["slots", "form", "fields"], data);
-						Q.handle(Q.info.baseUrl+"/Q/plugins/Streams/put?publisherId="+stream.publisherId+"&name="+stream.name);
+						Q.handle(Q.info.baseUrl+"/{{Streams}}/put?publisherId="+stream.publisherId+"&name="+stream.name);
 					}
 				}'
 		))

@@ -80,7 +80,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 		if (typeof all === 'string') {
 			all = {
 				title: all,
-				icon: Q.url("Q/plugins/Users/img/icons/labels/all/40.png")
+				icon: Q.url("{{Users}}/img/icons/labels/all/40.png")
 			};
 		}
 		Q.Users.getLabels(state.userId, state.prefix, function (err, labels) {

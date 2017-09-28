@@ -80,7 +80,7 @@ function Streams_message_tool($options) {
 					else {
 						alert("Message posted");
 						var message = Q.getObject(["slots", "form", "fields"], data);
-						Q.handle(Q.info.baseUrl+"/Q/plugins/Streams/message?publisherId="+message.publisherId+"&name="+message.streamName);
+						Q.handle(Q.info.baseUrl+"/{{Streams}}/message?publisherId="+message.publisherId+"&name="+message.streamName);
 					}
 				}'
 		))
