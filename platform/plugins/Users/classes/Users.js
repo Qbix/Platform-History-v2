@@ -218,10 +218,8 @@ Users.iconUrl = function Users_iconUrl(icon, size) {
 		size = '40';
 	}
 	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = (icon + '/' + size).interpolate({
-		"baseUrl": Q.Config.expect('Q', 'web', 'appRootUrl')
-	});
-	return src.isUrl() ? src : Q.url('Q/plugins/Users/img/icons/'+src);
+	var src = Q.interpolateUrl(icon + '/' + size);
+	return src.isUrl() ? src : Q.url('{{Users}}/img/icons/'+src);
 };
 
 /**

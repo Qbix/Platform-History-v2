@@ -103,9 +103,9 @@ Q.onInit.set(function () {
  * @constructor
  */
 Q.Tool.define({
-	"Websites/seo": "Q/plugins/Websites/js/tools/seo.js",
-	"Websites/presentation": "Q/plugins/Websites/js/tools/presentation.js",
-	"Websites/slide": "Q/plugins/Websites/js/tools/slide.js"
+	"Websites/seo": "{{Websites}}/js/tools/seo.js",
+	"Websites/presentation": "{{Websites}}/js/tools/presentation.js",
+	"Websites/slide": "{{Websites}}/js/tools/slide.js"
 });
 
 Q.page('', function () {

@@ -18,7 +18,7 @@
  */
 function Users_friendSelector_tool($options)
 {
-	Q_Response::addStylesheet('Q/plugins/Users/css/Users.css');
+	Q_Response::addStylesheet('{{Users}}/css/Users.css');
 	Q_Response::setToolOptions($options);
 	return '';
 }

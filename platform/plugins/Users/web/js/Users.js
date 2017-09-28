@@ -383,7 +383,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 	if (!Users.prompt.overlay) {
-		Q.addStylesheet(Q.url('Q/plugins/Users/css/Users.css'));
+		Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 		var o = Q.extend({}, Users.prompt.options, options);
 		var title = Q.text.Users.prompt.title
 			.replace(/{\$platform}/g, platform)
@@ -866,10 +866,8 @@ Users.iconUrl = function Users_iconUrl(icon, size) {
 		size = '40';
 	}
 	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = (icon + '/' + size).interpolate({
-		"baseUrl": Q.info.baseUrl
-	});
-	return src.isUrl() ? src : Q.url('Q/plugins/Users/img/icons/'+src);
+	var src = Q.interpolateUrl(icon + '/' + size);
+	return src.isUrl() ? src : Q.url('{{Users}}/img/icons/'+src);
 };
 
 function _constructUser (fields) {
@@ -1493,7 +1491,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 				++platformCount;
 				var facebookLogin = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 					$('<img alt="login with facebook" />')
-					.attr('src', Q.text.Users.login.facebookSrc || Q.url('Q/plugins/Users/img/facebook-login.png'))
+					.attr('src', Q.text.Users.login.facebookSrc || Q.url('{{Users}}/img/facebook-login.png'))
 				).css({'display': 'inline-block', 'vertical-align': 'middle'})
 				.click(function () {
 					Users.initFacebook(function() {
@@ -2151,14 +2149,14 @@ Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
 };
 
 Q.Tool.define({
-    "Users/avatar": "Q/plugins/Users/js/tools/avatar.js",
-	"Users/list": "Q/plugins/Users/js/tools/list.js",
-	"Users/pile": "Q/plugins/Users/js/tools/pile.js",
-	"Users/labels": "Q/plugins/Users/js/tools/labels.js",
-	"Users/status": "Q/plugins/Users/js/tools/status.js",
-	"Users/friendSelector": "Q/plugins/Users/js/tools/friendSelector.js",
-	"Users/getintouch": "Q/plugins/Users/js/tools/getintouch.js",
-	"Users/sessions": "Q/plugins/Users/js/tools/sessions.js"
+    "Users/avatar": "{{Users}}/js/tools/avatar.js",
+	"Users/list": "{{Users}}/js/tools/list.js",
+	"Users/pile": "{{Users}}/js/tools/pile.js",
+	"Users/labels": "{{Users}}/js/tools/labels.js",
+	"Users/status": "{{Users}}/js/tools/status.js",
+	"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
+	"Users/getintouch": "{{Users}}/js/tools/getintouch.js",
+	"Users/sessions": "{{Users}}/js/tools/sessions.js"
 });
 
 Q.beforeInit.add(function _Users_beforeInit() {

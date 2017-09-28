@@ -115,8 +115,8 @@ function Streams_access_tool($options)
 	$avatarArray = Db::exportArray($avatar_array);
 
 	if (empty($controls)) {
-		Q_Response::addScript("Q/plugins/Streams/js/Streams.js");
-		Q_Response::addScript("Q/plugins/Streams/js/tools/access.js");
+		Q_Response::addScript("{{Streams}}/js/Streams.js");
+		Q_Response::addScript("{{Streams}}/js/tools/access.js");
 		Q_Response::setToolOptions(compact(
 			'accessArray', 'avatarArray', 'labels', 
 			'icons', 'tab', 'publisherId', 

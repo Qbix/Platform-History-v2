@@ -1385,6 +1385,8 @@ class Q_Html
 			}
 		}
 		
+		$filePath = Q_Utils::interpolateUrl($filePath);
+		
 		$filename = false;
 		if (Q_Valid::url($filePath)) {
 			$url = $filePath;

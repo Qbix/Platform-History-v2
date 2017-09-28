@@ -6027,6 +6027,7 @@ Q.url = function _Q_url(what, fields, options) {
 	if (parts.length > 2) {
 		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
+	what2 = Q.interpolateUrl(what2);
 	var result = '';
 	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl;
 	if (!what) {
@@ -6050,6 +6051,39 @@ Q.url = function _Q_url(what, fields, options) {
 
 Q.url.options = {
 	beforeResult: null
+};
+
+/**
+ * Interpolate some standard placeholders inside a url, such as 
+ * {{AppName}} or {{PluginName}}
+ * @static
+ * @method interpolateUrl
+ * @param {String} url
+ * @param {Object} [additional={}] Any additional substitutions
+ * @return {String} The url with substitutions applied
+ */
+Q.interpolateUrl = function (url, additional) {
+	if (url.indexOf('{{') < 0) {
+		return url;
+	}
+	var substitutions = {};
+	substitutions['baseUrl'] = substitutions[Q.info.app] = Q.info.baseUrl;
+	for (var plugin in Q.plugins) {
+		substitutions[plugin] = Q.info.baseUrl + '/Q/plugins/' + plugin;
+	}
+	url = url.interpolate(substitutions);
+	if (additional) {
+		url = url.interpolate(additional);
+	}
+	return url;
+};
+
+/**
+ * You can override this function to do something special
+ * @method pluginBaseUrl
+ */
+Q.pluginBaseUrl = function (plugin) {
+	return Q.info.baseUrl + '/Q/plugins/' + plugin;
 };
 
 /**
