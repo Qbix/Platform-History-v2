@@ -30,7 +30,9 @@ class Q_Text
 			$locale = Q::ifset($options, 'locale', '');
 		} else {
 			$language = self::$language;
-			$locale = self::$locale;	
+			if (Q_Config::get('Q', 'text', 'useLocale', false)) {
+				$locale = self::$locale;
+			}
 		}
 		return $locale ? "$language-$locale" : $language;
 	}
