@@ -78,6 +78,7 @@
 			}
 		},
 		"text": {
+			"useLocale": false,
 			"MyApp": {
 				"dashboard.php": ["MyApp/content"],
 				"content": {
