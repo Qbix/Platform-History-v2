@@ -140,7 +140,8 @@
 				"ignoreCache": true,
 				"dontCache": true,
 				"duration": 3600
-			}
+			},
+			"useLocale": false
 		},
 		"templates": {
 			"ignoreCache": true,
