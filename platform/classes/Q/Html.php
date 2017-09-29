@@ -1376,20 +1376,22 @@ class Q_Html
 			return $result;
 		}
 		
+		$filePath2 = Q_Utils::interpolateUrl($filePath);
+		
 		if (!$ignoreEnvironment
 		and $environment = Q_Config::get('Q', 'environment', false)) {
 			if ($info = Q_Config::get('Q', 'environments', $environment, false)) {
 				if (!empty($info['files'][$filePath])) {
-					$filePath = $info['files'][$filePath];
+					$filePath2 = $info['files'][$filePath];
+				} else if (!empty($info['files'][$filePath2])) {
+					$filePath2 = $info['files'][$filePath2];
 				}
 			}
 		}
 		
-		$filePath = Q_Utils::interpolateUrl($filePath);
-		
 		$filename = false;
-		if (Q_Valid::url($filePath)) {
-			$url = $filePath;
+		if (Q_Valid::url($filePath2)) {
+			$url = $filePath2;
 		} else {
 			$theme = Q_Uri::url(self::themeUrl());
 			$themes = self::$themes;
@@ -1400,7 +1402,7 @@ class Q_Html
 				for ($i = $c - 1; $i >= 0; -- $i) {
 					try {
 						$filename = Q_Uri::filenameFromUrl(
-							$themes[$i] . '/' . $filePath
+							$themes[$i] . '/' . $filePath2
 						);
 					} catch (Exception $e) {
 						continue;
@@ -1411,7 +1413,7 @@ class Q_Html
 					}
 				}
 			}
-			$url = $theme . ($filePath ? '/'.$filePath : $filePath);
+			$url = $theme . ($filePath2 ? '/'.$filePath2 : $filePath2);
 		}
 		
 		if (empty($filename)) {
