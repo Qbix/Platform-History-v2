@@ -47,12 +47,12 @@ Q.Tool.define("Q/columns", function(options) {
 
 	//state.triggers = [];
 	
-	Q.addStylesheet('Q/plugins/Q/css/columns.css');
+	Q.addStylesheet('{{Q}}/css/columns.css');
 
 	prepareColumns(tool);
 	
 	if (state.title === undefined) {
-		state.title = '<img class="Q_columns_loading" src="' + Q.url('Q/plugins/Q/img/throbbers/loading.gif') +'" alt="">';
+		state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
 	}
 
 	var selector = '.Q_close';
@@ -118,12 +118,12 @@ Q.Tool.define("Q/columns", function(options) {
 		duration: 300 // until it's safe to register clicks
 	},
 	back: {
-		src: "Q/plugins/Q/img/back-v.png",
+		src: "{{Q}}/img/back-v.png",
 		triggerFromTitle: true,
 		hide: false
 	},
 	close: {
-		src: "Q/plugins/Q/img/x.png",
+		src: "{{Q}}/img/x.png",
 		clickable: null
 	},
 	title: undefined,
@@ -531,7 +531,7 @@ Q.Tool.define("Q/columns", function(options) {
 						if (Q.info.isTouchscreen) {
 							Q.ensure(
 								window.overthrow, 
-								"Q/plugins/Q/js/overthrow.js",
+								"{{Q}}/js/overthrow.js",
 								function () {
 									overthrow.scrollIndicatorClassName = 'Q_overflow';
 									overthrow.set();

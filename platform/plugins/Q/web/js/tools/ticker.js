@@ -49,7 +49,7 @@ Q.Tool.define("Q/ticker", function(options) {
 		$children = $children.children();
 	}
 	
-	Q.addStylesheet('Q/plugins/Q/css/Ticker.css');
+	Q.addStylesheet('{{Q}}/css/Ticker.css');
 
 	this.onHitStart = function() {}; // override this to handle this event
 	this.onHitEnd = function() {}; // override this to handle this event

@@ -1034,7 +1034,7 @@ Q.Layout = {
 			{
 				if (!Q.Layout.orientationMaskIcon)
 				{
-					Q.Layout.orientationMaskIcon = '/Q/plugins/Q/img/ui/qbix_logo_small.png';
+					Q.Layout.orientationMaskIcon = '/{{Q}}/img/ui/qbix_logo_small.png';
 				}
 				orientationMask = $('body').prepend(
 					'<div class="Q_orientation_mask">' +

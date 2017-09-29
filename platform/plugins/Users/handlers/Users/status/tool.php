@@ -19,7 +19,7 @@
 function Users_status_tool($options)
 {
 	$defaults = array(
-		'icon' => 'Q/plugins/Q/img/ui/qbix_icon' . (Q_Request::isMobile() ? '_small' : '') . '.png',
+		'icon' => '{{Q}}/img/ui/qbix_icon' . (Q_Request::isMobile() ? '_small' : '') . '.png',
 		'label' => 'log in',
 		'logoutIcon' => null,
 		'menuItems' => array(),
@@ -29,7 +29,7 @@ function Users_status_tool($options)
 		'onMenuSelect' => null
 	);
 	$options = array_merge($defaults, $options);
-	Q_Response::addStylesheet('Q/plugins/Q/css/Q.css');
+	Q_Response::addStylesheet('{{Q}}/css/Q.css');
 	Q_Response::addStylesheet('{{Users}}/css/Users.css');
 	Q_Response::setToolOptions($options);
 	return Q::view('Users/tool/status/status.php', $options);

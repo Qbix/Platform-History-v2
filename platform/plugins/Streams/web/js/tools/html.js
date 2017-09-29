@@ -82,7 +82,7 @@ Q.Tool.define("Streams/html", function (options) {
 			break;
 		case 'ckeditor':
 			tool.element.setAttribute('contenteditable', true);
-            Q.addScript("Q/plugins/Q/js/ckeditor/ckeditor.js", function () {
+            Q.addScript("{{Q}}/js/ckeditor/ckeditor.js", function () {
                 CKEDITOR.disableAutoInline = true;
                 var editor = CKEDITOR.inline(tool.element, state.ckeditor || undefined);
                 state.editorObject = editor;
@@ -91,35 +91,35 @@ Q.Tool.define("Streams/html", function (options) {
 		case 'froala':
 		default:
 			Q.addStylesheet([
-				"Q/plugins/Q/font-awesome/css/font-awesome.min.css",
-				"Q/plugins/Q/js/froala/css/froala_editor.min.css",
-				"Q/plugins/Q/js/froala/css/froala_style.min.css",
-				"Q/plugins/Q/js/froala/css/plugins/fullscreen.min.css",
-				"Q/plugins/Q/js/froala/css/plugins/colors.min.css",
-				"Q/plugins/Q/js/froala/css/plugins/image.min.css",
-				"Q/plugins/Q/js/froala/css/plugins/table.min.css",
-				"Q/plugins/Q/js/froala/css/plugins/code_view.min.css"
+				"{{Q}}/font-awesome/css/font-awesome.min.css",
+				"{{Q}}/js/froala/css/froala_editor.min.css",
+				"{{Q}}/js/froala/css/froala_style.min.css",
+				"{{Q}}/js/froala/css/plugins/fullscreen.min.css",
+				"{{Q}}/js/froala/css/plugins/colors.min.css",
+				"{{Q}}/js/froala/css/plugins/image.min.css",
+				"{{Q}}/js/froala/css/plugins/table.min.css",
+				"{{Q}}/js/froala/css/plugins/code_view.min.css"
 			]);
 			var scripts = [
-				"Q/plugins/Q/js/froala/js/froala_editor.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/fullscreen.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/code_view.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/align.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/table.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/lists.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/colors.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/font_family.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/font_size.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/paragraph_style.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/paragraph_format.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/quote.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/link.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/image.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/image_manager.min.js",
-				"Q/plugins/Q/js/froala/js/plugins/video.min.js"
+				"{{Q}}/js/froala/js/froala_editor.min.js",
+				"{{Q}}/js/froala/js/plugins/fullscreen.min.js",
+				"{{Q}}/js/froala/js/plugins/code_view.min.js",
+				"{{Q}}/js/froala/js/plugins/align.min.js",
+				"{{Q}}/js/froala/js/plugins/table.min.js",
+				"{{Q}}/js/froala/js/plugins/lists.min.js",
+				"{{Q}}/js/froala/js/plugins/colors.min.js",
+				"{{Q}}/js/froala/js/plugins/font_family.min.js",
+				"{{Q}}/js/froala/js/plugins/font_size.min.js",
+				"{{Q}}/js/froala/js/plugins/paragraph_style.min.js",
+				"{{Q}}/js/froala/js/plugins/paragraph_format.min.js",
+				"{{Q}}/js/froala/js/plugins/quote.min.js",
+				"{{Q}}/js/froala/js/plugins/link.min.js",
+				"{{Q}}/js/froala/js/plugins/image.min.js",
+				"{{Q}}/js/froala/js/plugins/image_manager.min.js",
+				"{{Q}}/js/froala/js/plugins/video.min.js"
 			];
 			if (Q.info.isIE(0, 8)) {
- 				scripts.push("Q/plugins/Q/js/froala/froala_editor_ie8.min.js");
+ 				scripts.push("{{Q}}/js/froala/froala_editor_ie8.min.js");
 			}
             Q.addScript(scripts, function() {
 				var $te = $(tool.element);
