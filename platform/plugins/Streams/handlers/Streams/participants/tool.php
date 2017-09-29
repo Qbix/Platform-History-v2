@@ -109,7 +109,7 @@ function Streams_participants_tool($options)
 	$count = "<span class='Streams_participants_count'>$c</span>";
 	$m = isset($options['max']) ? '/'.$options['max'] : '';
 	$max = "<span class='Streams_participants_max'>$m</span>";
-	$img = Q_Html::img('Q/plugins/Q/img/expand.png', 'expand', array(
+	$img = Q_Html::img('{{Q}}/img/expand.png', 'expand', array(
 		'class' => 'Streams_participants_expand_img'
 	));
 	$control = "<div class='Streams_participants_expand'>$img<span class='Streams_participants_expand_text'>See All</span></div>";

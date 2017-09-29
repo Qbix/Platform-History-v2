@@ -56,6 +56,6 @@ Q.Tool.define("Assets/subscription", function (options) {
 
 });
 
-Q.addStylesheet('Q/plugins/Assets/css/Assets.css');
+Q.addStylesheet('{{Assets}}/css/Assets.css');
 
 })(window, Q, jQuery);

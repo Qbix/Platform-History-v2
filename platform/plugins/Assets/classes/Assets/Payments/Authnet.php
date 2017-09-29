@@ -227,7 +227,7 @@ class Assets_Payments_Authnet extends Assets_Payments implements Assets_Payments
 		// 2do: fix domain name and path for iframe popup
 
 		$setting->setSettingName("hostedProfileIFrameCommunicatorUrl");
-		$setting->setSettingValue(Q_Html::themedUrl('Q/plugins/Assets/authnet_iframe_communicator.html'));
+		$setting->setSettingValue(Q_Html::themedUrl('{{Assets}}/authnet_iframe_communicator.html'));
 
 		$setting->setSettingName("hostedProfilePageBorderVisible");
 		$setting->setSettingValue("false");

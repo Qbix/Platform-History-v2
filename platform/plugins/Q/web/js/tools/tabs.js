@@ -38,7 +38,7 @@ Q.Tool.define("Q/tabs", function(options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('Q/plugins/Q/css/tabs.css');
+	Q.addStylesheet('{{Q}}/css/tabs.css');
 
 	state.defaultTabName = state.defaultTabName || null;
 	
@@ -387,7 +387,7 @@ Q.Tool.define("Q/tabs", function(options) {
 		tool.overflowIndex = index;
 		tool.$overflow = $overflow;
 		_copyClassToOverflow(tool);
-		Q.addScript("Q/plugins/Q/js/QTools.js", function () {
+		Q.addScript("{{Q}}/js/QTools.js", function () {
 			var elements = [];
 			for (var i=index+1; i<$tabs.length; ++i) {
 				elements.push($tabs[i]);

@@ -29,7 +29,7 @@ var MyApp = (function (Q, $) {
 			return false;
 		});
 		
-		Q.addScript("Q/plugins/Q/js/QTools.js", function () {
+		Q.addScript("{{Q}}/js/QTools.js", function () {
 			var $avatar = $('#dashboard .Users_avatar_tool');
 			if ($avatar.length) {
 				Q.Contextual.add($avatar, $('#dashboard_user_contextual'));	

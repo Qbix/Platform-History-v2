@@ -17,7 +17,7 @@
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"]
 		},
 		"routes": {
-			"Q/plugins/Assets/:action": {"module": "Assets"}
+			"{{Assets}}/:action": {"module": "Assets"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
