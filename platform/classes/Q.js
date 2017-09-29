@@ -2906,14 +2906,23 @@ Q.interpolateUrl = function (url, additional) {
 	var substitutions = {};
 	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
 	substitutions['baseUrl'] = substitutions[Q.info.app] = baseUrl;
+	substitutions['Q'] = Q.pluginBaseUrl('Q');
 	for (var plugin in Q.plugins) {
-		substitutions[plugin] = Q.info.baseUrl + '/Q/plugins/' + plugin;
+		substitutions[plugin] = Q.pluginBaseUrl(plugin);
 	}
 	url = url.interpolate(substitutions);
 	if (additional) {
 		url = url.interpolate(additional);
 	}
 	return url;
+};
+
+/**
+ * You can override this function to do something special
+ * @method pluginBaseUrl
+ */
+Q.pluginBaseUrl = function (plugin) {
+	return 'Q/plugins/' + plugin;
 };
 
 /*
