@@ -393,6 +393,12 @@ Cp.geocode = function (callback, options) {
 	&& c.latitude && c.longitude) {
 		return callback && callback.call(c, null, []);
 	}
+
+	if (Q.typeOf(c.lat) === "function" && Q.typeOf(c.lng) === "function") {
+		c.latitude = c.latitude || c.lat();
+		c.longitude = c.longitude || c.lng();
+	}
+
 	Places.loadGoogleMaps(function () {
 		var param = {};
 		var p = "Places.Location.geocode: ";
@@ -402,7 +408,7 @@ Cp.geocode = function (callback, options) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing latitude");
 			}
-			if (!c.latitude) {
+			if (!c.longitude) {
 				callback && callback.call(c, p + "missing longitude");
 			}
 			param.location = {
