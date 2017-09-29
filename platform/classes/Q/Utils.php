@@ -793,6 +793,7 @@ class Q_Utils
 			$app => $baseUrl
 		);
 		$plugins = Q_Config::expect('Q', 'plugins');
+		$plugins[] = 'Q';
 		foreach ($plugins as $plugin) {
 			$substitutions[$plugin] = Q_Uri::pluginBaseUrl($plugin);
 		}
