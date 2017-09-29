@@ -49,7 +49,7 @@ function Calendars_newEvent_tool()
 		? "Calendars_location_set"
 		: "Calendars_location_unset";
 	
-	Q_Response::addStylesheet('Q/plugins/Q/css/filter.css');
+	Q_Response::addStylesheet('{{Q}}/css/filter.css');
 
 	return Q::view('Groups/columns/newGroup.php', compact(
 		'interests', 'locations', 'times', 'days',

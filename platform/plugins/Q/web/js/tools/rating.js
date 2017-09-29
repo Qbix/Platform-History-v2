@@ -47,8 +47,8 @@ Q.Tool.define('Q/rating', function (options) {
 	stars: {
 		count: 5,
 		titles: Q.text.Q.rating.titles,
-		full: 'Q/plugins/Q/img/rating/star-yellow.png',
-		empty: 'Q/plugins/Q/img/rating/star-gray.png'
+		full: '{{Q}}/img/rating/star-yellow.png',
+		empty: '{{Q}}/img/rating/star-gray.png'
 	}
 }, 
 

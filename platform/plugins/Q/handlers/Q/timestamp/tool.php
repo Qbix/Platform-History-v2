@@ -13,8 +13,8 @@
  */
 function Q_timestamp_tool($options)
 {
-	Q_Response::addScript('Q/plugins/Q/js/tools/timestamp.js');
-	Q_Response::addScript('Q/plugins/Q/js/phpjs.js');
+	Q_Response::addScript('{{Q}}/js/tools/timestamp.js');
+	Q_Response::addScript('{{Q}}/js/phpjs.js');
 	
 	$defaults = array(
 		'time' => time(),
