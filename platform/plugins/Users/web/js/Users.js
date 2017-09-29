@@ -1393,7 +1393,7 @@ function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierTyp
 		}
 	}
 	var autocomplete = (type === 'text') ? 'on' : type;
-	Q.addScript("Q/plugins/Q/js/sha1.js");
+	Q.addScript("{{Q}}/js/sha1.js");
 	var identifierInput = $('<input id="Users_login_identifier" />').attr({
 		name: 'identifier',
 		autocomplete: autocomplete,

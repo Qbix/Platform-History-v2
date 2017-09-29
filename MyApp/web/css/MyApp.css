@@ -129,7 +129,7 @@ h2 { margin: 0; }
 	padding-right: 17px;
 	border: none;
 	border-top: 1px solid #CCC;
-	background: white url(../Q/plugins/Q/img/search_icon.png) no-repeat;
+	background: white url(../{{Q}}/img/search_icon.png) no-repeat;
 	color: #444;
 }
 
@@ -149,7 +149,7 @@ h2 { margin: 0; }
 .Q_notTouchscreen #dashboard .Q_tabs_tab:hover { background: rgba(100, 100, 100, 0.1); }
 #dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
-#dashboard .Q_tabs_tab.Q_current { background-image: url(../Q/plugins/Q/img/bg/stucco.png) !important; color: black !important; }
+#dashboard .Q_tabs_tab.Q_current { background-image: url(../{{Q}}/img/bg/stucco.png) !important; color: black !important; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
 .Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }

@@ -10,7 +10,7 @@
 
 function Streams_comments_tool($options)
 {
-  Q_Response::addScript('Q/plugins/Q/js/phpjs.js'); 
+  Q_Response::addScript('{{Q}}/js/phpjs.js'); 
   Q_Response::addScript('{{Streams}}/js/Streams.js');
   Q_Response::addStylesheet('{{Streams}}/css/Streams.css');
   Q_Response::addStylesheet('{{Users}}/css/Users.css');

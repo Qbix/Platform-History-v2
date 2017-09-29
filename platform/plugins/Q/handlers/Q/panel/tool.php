@@ -140,8 +140,8 @@ function Q_panel_tool($options)
 	if ($toggle === 'click') $panel_classes .= ' Q_panel_tool_toggle_onclick';
 	if ($toggle === 'move') $panel_classes .= ' Q_panel_tool_toggle_move';
 	
-	Q_Response::addScript('Q/plugins/Q/js/tools/panel.js');
-	Q_Response::addStylesheet('Q/plugins/Q/css/panel.css');
+	Q_Response::addScript('{{Q}}/js/tools/panel.js');
+	Q_Response::addStylesheet('{{Q}}/css/panel.css');
 	
 	if (isset($setSlots)) {
 		Q_Response::setSlot('form', $form);

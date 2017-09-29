@@ -325,7 +325,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			var existing = {};
 			var image = val ? 'clear' : 'filter';
 			if (image != lastImage) {
-				var src = Q.url('Q/plugins/Q/img/white/'+image+'.png');
+				var src = Q.url('{{Q}}/img/white/'+image+'.png');
 				$this.css({
 					'background-image': 'url('+src+')',
 					'background-position': '100% 50%',
