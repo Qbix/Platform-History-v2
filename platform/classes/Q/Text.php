@@ -1,5 +1,6 @@
+
 <?php
-	
+
 /**
  * @module Q
  */
@@ -13,7 +14,7 @@ class Q_Text
 	public static $collection = array();
 	public static $language = 'en';
 	public static $locale = 'US';
-	
+
 	/**
 	 * Call this function to get the basename to use for loading files,
 	 * based on the language and locale set on this class.
@@ -36,7 +37,7 @@ class Q_Text
 		}
 		return $locale ? "$language-$locale" : $language;
 	}
-	
+
 	/**
 	 * Sets the language and locale to use in Q_Text::basename() calls.
 	 * The Q_Dispatcher::dispatch() method calls this by default using
@@ -51,7 +52,7 @@ class Q_Text
 		self::$language = strtolower($language);
 		self::$locale = $locale ? strtoupper($locale) : '';
 	}
-	
+
 	/**
 	 * Sets the text for a specific text source.
 	 * @static
@@ -67,7 +68,7 @@ class Q_Text
 		$locale = self::$locale;
 		self::$collection[$language][$locale][$name] = $content;
 	}
-	
+
 	/**
 	 * Get the text from a specific text source or sources.
 	 * @static
@@ -83,11 +84,6 @@ class Q_Text
 	 */
 	static function get($name, $options = array())
 	{
-		$namespace = 'Q_Text::get';
-		$content = Q_Cache::get($name, null, $namespace);
-		if ($content) {
-			return $content;
-		}
 		if (is_array($name)) {
 			$result = new Q_Tree();
 			foreach ($name as $n) {
@@ -97,10 +93,6 @@ class Q_Text
 		}
 		$basename = self::basename($options);
 		$filename = "text/$name/$basename.json";
-		if (!file_exists($filename)) {
-			list($basename) = explode('-', $basename);
-			$filename = "text/$name/$basename.json";
-		}
 		$config = Q_Config::get('Q', 'text', '*', array());
 		$json = Q::readFile($filename, Q::take($config, array(
 			'ignoreCache' => true,
@@ -111,11 +103,7 @@ class Q_Text
 			$content = Q::json_decode($json, true);
 			self::set($name, $content, Q::ifset($options, 'merge', false));
 		}
-		if (!$content) {
-			$content = array();
-		}
-		Q_Cache::set($name, $content, $namespace);
-		return $content;
+		return $content ? $content : array();
 	}
 
 	/**
