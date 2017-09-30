@@ -36,8 +36,8 @@ function _Q_clickfocus(o) {
 		$p.scrollTop(scrollTop - autoScrolled);
 	}
 	if ($this.is('input, textarea, select')) {
-		$this.focus();
-		$this.click();
+		$this.trigger("focus");
+		$this.trigger("click");
 	}
 	$this.focus();
 	setTimeout(function () {

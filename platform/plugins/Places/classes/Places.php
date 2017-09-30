@@ -72,12 +72,14 @@ abstract class Places extends Base_Places
 				if (!isset($meters)) {
 					$meters = $uls->getAttribute('meters', 40234);
 				}
-			} else {
-				// put some defaults
-				$latitude = 40.5806032;
-				$longitude = -73.9755244;
-				$meters = 40234;
 			}
+		}
+		
+		if (!isset($latitude) or !isset($longitude)) {
+			// put some defaults
+			$latitude = 40.5806032;
+			$longitude = -73.9755244;
+			$meters = 40234;
 		}
 
 		$pa = null;
@@ -326,5 +328,35 @@ abstract class Places extends Base_Places
 		return ($l1 != $l2)
 			? ($l1 > $l2 ? 1 : -1)
 			: (($f1 != $f2) ? ($f1 > $f2 ? 1 : -1) : ($c1 != $c2 ? ($c1 > $c2 ? 1 : -1) : 0));
+	}
+	
+	/**
+	 * Set the user's location from a "Places/location" stream, or any stream
+	 * that has the attributes "latitude", "longitude" and possibly "timezone"
+	 * @param {Users_User} $user
+	 * @param {Streams_Stream} $locationStream
+	 */
+	static function setUserLocation($user, $locationStream)
+	{
+		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
+		$latitude = $stream2->getAttribute('latitude');
+		$longitude = $stream2->getAttribute('longitude');
+		$timezone = $stream2->getAttribute('timezone');
+		$zipcodes = Places_Zipcode::nearby($latitude, $longitude, $meters, 1);
+		if ($zipcodes) {
+			$z = reset($zipcodes);
+			$zipcode = $z->zipcode;
+			$placeName = $z->placeName;
+			$state = $z->state;
+		}
+		$userLocationStream = Places_Location::userStream();
+		if (null === $userLocationStream->getAttribute('latitude')) {
+			$userLocationStream->setAttribute(compact(
+				'latitude', 'longitude', 'meters', 'timezone',
+				'zipcode', 'placeName', 'state'
+				// accuracy has been omitted
+			));
+			$userLocationStream->save();
+		}
 	}
 };

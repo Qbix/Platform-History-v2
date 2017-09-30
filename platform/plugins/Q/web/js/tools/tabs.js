@@ -38,7 +38,7 @@ Q.Tool.define("Q/tabs", function(options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('Q/plugins/Q/css/tabs.css');
+	Q.addStylesheet('{{Q}}/css/tabs.css');
 
 	state.defaultTabName = state.defaultTabName || null;
 	
@@ -219,10 +219,13 @@ Q.Tool.define("Q/tabs", function(options) {
 			});
 		}
 
-		tab = tool.getCurrentTab.call(tool, tab);
+		tab = tool.getCurrentTab(tab);
 		
+		var $tab = $(tab);
 		tool.$tabs.removeClass('Q_current Q_tabs_switchingTo');
-		$(tab).addClass('Q_current');
+		$tab.addClass('Q_current');
+		
+		_copyClassToOverflow(tool);
 		state.tab = tab;
 		state.tabName = name || tool.getName(tab);
 		state.onCurrent.handle.call(tool, tab, name);
@@ -383,7 +386,8 @@ Q.Tool.define("Q/tabs", function(options) {
 		}
 		tool.overflowIndex = index;
 		tool.$overflow = $overflow;
-		Q.addScript("Q/plugins/Q/js/QTools.js", function () {
+		_copyClassToOverflow(tool);
+		Q.addScript("{{Q}}/js/QTools.js", function () {
 			var elements = [];
 			for (var i=index+1; i<$tabs.length; ++i) {
 				elements.push($tabs[i]);
@@ -413,5 +417,24 @@ Q.Tool.define("Q/tabs", function(options) {
 	})
 }
 );
+
+function _copyClassToOverflow(tool) {
+	var state = tool.state;
+	var tab = tool.getCurrentTab();
+	var classNames = tab && tab.className.split(' ');
+	var currentClass = null;
+	Q.each(classNames, function (i, className) {
+		className = className.trim();
+		if (className.substr(0, 6) === 'Q_tab_') {
+			currentClass = className;
+			return false;
+		}
+	});
+	if (tool.$overflow) {
+		tool.$overflow.removeClass(state.lastClass)
+			.addClass(currentClass);
+	};
+	state.lastClass = currentClass;
+}
 
 })(Q, jQuery);

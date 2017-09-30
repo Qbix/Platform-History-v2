@@ -142,16 +142,11 @@ function Db_Mysql(connName, dsn) {
 					// our app will survive mysql errors, and continue operating
 				}
 			});
-			var time = require('time');
+			var mt = require('moment-timezone');
 			var timezone = Q.Config.expect(['Q', 'defaultTimezone']);
-			var offset = 0;
-			try {
-				offset = new time.Date().setTimezone(timezone).getTimezoneOffset();
-			} catch (e) {
-				// ignore
-			}
+			var offset = mt.tz.zone(timezone).offset(Date.now());
 		    var dt = new Date(
-		       Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
+				Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
 		    ).toTimeString();
 		    var tz = (offset < 0 ? '-' : '+') + dt.substr(0,2) + ':' + dt.substr(3,2);
 			connection.query('SET NAMES UTF8; SET time_zone = "'+tz+'"');

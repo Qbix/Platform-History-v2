@@ -40,13 +40,13 @@ function Q_columns_tool($options)
 	if (!isset($options['columns'])) {
 		return '';
 	}
-	Q_Response::addScript('Q/plugins/Q/js/tools/columns.js');
-	Q_Response::addStylesheet('Q/plugins/Q/css/columns.css');
+	Q_Response::addScript('{{Q}}/js/tools/columns.js');
+	Q_Response::addStylesheet('{{Q}}/css/columns.css');
 	$result = '<div class="Q_columns_container Q_clearfix">';
 	$columns = array();
 	$i=0;
-	$closeSrc = Q::ifset($options, 'close', 'src', 'Q/plugins/Q/img/x.png');
-	$backSrc = Q::ifset($options, 'back', 'src', 'Q/plugins/Q/img/back-v.png');
+	$closeSrc = Q::ifset($options, 'close', 'src', '{{Q}}/img/x.png');
+	$backSrc = Q::ifset($options, 'back', 'src', '{{Q}}/img/back-v.png');
 	foreach ($options['columns'] as $name => $column) {
 		$close = Q::ifset($column, 'close', $i > 0);
 		$Q_close = Q_Request::isMobile() ? 'Q_close' : 'Q_close Q_back';
@@ -79,12 +79,18 @@ EOT;
 				$attributes .= ' ' . Q_Html::attributes($column['attributes']);
 			}
 			$data = Q::ifset($column, 'data', '');
+			$titleElement = '';
+			if (isset($titleHtml)) {
+				$titleElement = <<<EOT
+	<div class="Q_columns_title">
+		$closeHtml
+		<h2 class="Q_title_slot">$titleHtml</h2>
+	</div>
+EOT;
+			}
 			$columns[] = <<<EOT
 	<div class="Q_columns_column $classes" data-index="$i" data-name="$n" $attrs>
-		<div class="Q_columns_title">
-			$closeHtml
-			<h2 class="Q_title_slot">$titleHtml</h2>
-		</div>
+		$titleElement
 		<div class="Q_column_slot">$columnHtml</div>
 		<div class="Q_controls_slot">$controlsHtml</div>
 	</div>

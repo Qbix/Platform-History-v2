@@ -2,6 +2,9 @@
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     cursor: pointer;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
     font-weight: 300;
     text-align:  left;
     font-size: 20px;

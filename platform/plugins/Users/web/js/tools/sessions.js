@@ -23,7 +23,7 @@ Q.Tool.define("Users/sessions", function Users_avatar_tool(options) {
 	if (state.userId == null) {
 		state.userId = Users.loggedInUserId();
 	}
-	Q.addStylesheet('Q/plugins/Users/css/tools/sessions.js');
+	Q.addStylesheet('{{Users}}/css/tools/sessions.js');
 	// session delete action
 	tool.$("button[name=delete]").on(Q.Pointer.fastclick, function (e) {
 		var $this = $(this);

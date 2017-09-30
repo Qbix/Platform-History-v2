@@ -757,3 +757,6 @@
 .Q_js .Streams_import_tool .Streams_import_file {
 	width: 100%;
 }
+
+.Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
+.Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }

@@ -45,3 +45,22 @@
     -webkit-transform-origin: 0 0;
 	overflow: auto;
 }
+
+.Assets_aspect_business,
+.Assets_aspect_deals { color: #e3892f; border-color: #e3892f; }
+.Assets_aspect_funds { color: #742e7f; border-color: #742e7f; }
+.Q_button.Assets_aspect_business,
+.Q_button.Assets_aspect_deals {
+	background: #e3892f; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e3892f', endColorstr='#d2781e'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#e3892f), to(#d2781e)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #e3892f,  #d2781e); /* for firefox 3.6+ */
+	color: white;
+}
+.Q_button.Assets_aspect_business:active,
+.Q_button.Assets_aspect_business:focus,
+.Q_button.Assets_aspect_deals:active,
+.Q_button.Assets_aspect_deals:focus {
+	background: #d2781e;
+	color: white;
+}

@@ -22,14 +22,14 @@
 function Streams_html_tool($options)
 {
 	$stylesheets = array(
-		"Q/plugins/Q/font-awesome/css/font-awesome.min.css",
-		"Q/plugins/Q/js/froala/css/froala_editor.min.css",
-		"Q/plugins/Q/js/froala/css/froala_style.min.css",
-		"Q/plugins/Q/js/froala/css/plugins/fullscreen.min.css",
-		"Q/plugins/Q/js/froala/css/plugins/colors.min.css",
-		"Q/plugins/Q/js/froala/css/plugins/image.min.css",
-		"Q/plugins/Q/js/froala/css/plugins/table.min.css",
-		"Q/plugins/Q/js/froala/css/plugins/code_view.min.css"
+		"{{Q}}/font-awesome/css/font-awesome.min.css",
+		"{{Q}}/js/froala/css/froala_editor.min.css",
+		"{{Q}}/js/froala/css/froala_style.min.css",
+		"{{Q}}/js/froala/css/plugins/fullscreen.min.css",
+		"{{Q}}/js/froala/css/plugins/colors.min.css",
+		"{{Q}}/js/froala/css/plugins/image.min.css",
+		"{{Q}}/js/froala/css/plugins/table.min.css",
+		"{{Q}}/js/froala/css/plugins/code_view.min.css"
 	);
 	foreach ($stylesheets as $stylesheet) {
 		Q_Response::addStylesheet($stylesheet);

@@ -70,7 +70,7 @@
 	<h1 class='Q_big_message'>Please try <a href='#' id='activate_login'>logging in</a> to activate your account.</h1>
 <?php endif; ?>
 
-<?php Q_Response::addScript('Q/plugins/Q/js/Q.js'); ?>
+<?php Q_Response::addScript('{{Q}}/js/Q.js'); ?>
 
 <?php Q_Response::addScriptLine("jQuery(function() {
 	$('#activate_setIdentifier').click(function() { Q.plugins.Users.setIdentifier(); });

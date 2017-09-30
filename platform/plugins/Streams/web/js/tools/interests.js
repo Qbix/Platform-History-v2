@@ -52,7 +52,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	if (typeof all === 'string') {
 		all = {
 			title: all,
-			icon: Q.url("Q/plugins/Streams/img/icons/interests/categories/white/all.png")
+			icon: Q.url("{{Streams}}/img/icons/interests/categories/white/all.png")
 		};
 	}
 	
@@ -325,7 +325,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			var existing = {};
 			var image = val ? 'clear' : 'filter';
 			if (image != lastImage) {
-				var src = Q.url('Q/plugins/Q/img/white/'+image+'.png');
+				var src = Q.url('{{Q}}/img/white/'+image+'.png');
 				$this.css({
 					'background-image': 'url('+src+')',
 					'background-position': '100% 50%',

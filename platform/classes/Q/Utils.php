@@ -161,17 +161,47 @@ class Q_Utils
 	/**
 	 * Some basic obfuscation to thwart scrapers from getting emails, phone numbers, etc.
 	 * @static
-	 * @param {string} $text
+	 * @method obfuscate
+	 * @param {string} $text The text to obfuscate
+	 * @param {string} [$key="blah"] Some key to use for obfuscation
 	 * @return {text}
 	 */
-	static function obfuscate($text)
+	static function obfuscate($text, $key = 'blah')
 	{
 		$len = strlen($text);
+		$len2 = strlen($key);
 		$result = '';
 		for ($i=0; $i<$len; ++$i) {
-			$result .= chr(ord($text[$i])-1);
+			$j = $i % $len2;
+			$diff = self::ord($text[$i]) - self::ord($key[$j]);
+			$result .= ($diff < 0 ? '1' : '0') . self::chr(abs($diff));
 		}
 		return $result;
+	}
+	
+	/**
+	 * Like ord but handles utf-8 encoding
+	 * @static
+	 * @method ord
+	 * @param {string} $text
+	 * @return {integer}
+	 */
+	static function ord($text) { 
+	    $k = mb_convert_encoding($text, 'UCS-2LE', 'UTF-8'); 
+	    $k1 = ord(substr($k, 0, 1)); 
+	    $k2 = ord(substr($k, 1, 1)); 
+	    return $k2 * 256 + $k1; 
+	}
+	
+	/**
+	 * Like chr but handles utf-8 encoding
+	 * @static
+	 * @method chr
+	 * @param {integer} $intval
+	 * @return {string}
+	 */
+	static function chr($intval) {
+		return mb_convert_encoding(pack('n', $intval), 'UTF-8', 'UTF-16BE');
 	}
 
 	/**
@@ -372,7 +402,7 @@ class Q_Utils
 		if (!isset($ip)) $ip = $host;
 		$request_uri = isset($parts['path']) ? $parts['path'] : '';
 		if (!empty($parts['query'])) $request_uri .= "?".$parts['query'];
-		$port = $parts['port'] ? ':'.$parts['port'] : '';
+		$port = !empty($parts['port']) ? ':'.$parts['port'] : '';
 		$url = $parts['scheme']."://".$ip.$port.$request_uri;
 
 		if (empty($parts['path'])) $parts['path'] = '/';
@@ -741,6 +771,38 @@ class Q_Utils
 
 		return $result;
 	}
+	
+	/**
+	 * Interpolate some standard placeholders inside a url, such as 
+	 * {{AppName}} or {{PluginName}}
+	 * @static
+	 * @method interpolateUrl
+	 * @param {string} $url
+	 * @param {array} [$additional=array()] Any additional substitutions
+	 * @return {string} The url with substitutions applied
+	 */
+	static function interpolateUrl($url, $additional = array())
+	{
+		if (strpos($url, '{{') === false) {
+			return $url;
+		}
+		$app = Q::app();
+		$baseUrl = Q_Request::baseUrl();
+		$substitutions = array(
+			'baseUrl' => $baseUrl,
+			$app => $baseUrl
+		);
+		$plugins = Q_Config::expect('Q', 'plugins');
+		$plugins[] = 'Q';
+		foreach ($plugins as $plugin) {
+			$substitutions[$plugin] = Q_Uri::pluginBaseUrl($plugin);
+		}
+		$url = Q::interpolate($url, $substitutions);
+		if ($additional) {
+			$url = Q::interpolate($url, $additional);
+		}
+		return $url;
+	}
 
 	/**
 	 * Returns base url for node.js requests
@@ -751,9 +813,7 @@ class Q_Utils
 	static function nodeUrl () {
 		$url = Q_Config::get('Q', 'node', 'url', null);
 		if (isset($url)) {
-			return Q::interpolate($url, array(
-				'baseUrl' => Q_Request::baseUrl()
-			));
+			return self::interpolateUrl($url);
 		}
 		$host = Q_Config::get('Q', 'node', 'host', null);
 		$port = Q_Config::get('Q', 'node', 'port', null);

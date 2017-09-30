@@ -26,9 +26,9 @@ function Q () {
 
 // external libraries, which you can override
 Q.libraries = {
-	json: "Q/plugins/Q/js/json3-3.2.4.min.js",
-	handlebars: 'Q/plugins/Q/js/handlebars-v4.0.10.min.js',
-	jQuery: 'Q/plugins/Q/js/jquery-3.2.1.min.js'
+	json: "{{Q}}/js/json3-3.2.4.min.js",
+	handlebars: '{{Q}}/js/handlebars-v4.0.10.min.js',
+	jQuery: '{{Q}}/js/jquery-3.2.1.min.js'
 };
 
 /**
@@ -5410,7 +5410,7 @@ Q.init = function _Q_init(options) {
 	}
 	Q.init.called = true;
 	Q.info.imgLoading = Q.info.imgLoading ||
-		Q.url('Q/plugins/Q/img/throbbers/loading.gif');
+		Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
@@ -6027,6 +6027,7 @@ Q.url = function _Q_url(what, fields, options) {
 	if (parts.length > 2) {
 		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
+	what2 = Q.interpolateUrl(what2);
 	var result = '';
 	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl;
 	if (!what) {
@@ -6050,6 +6051,40 @@ Q.url = function _Q_url(what, fields, options) {
 
 Q.url.options = {
 	beforeResult: null
+};
+
+/**
+ * Interpolate some standard placeholders inside a url, such as 
+ * {{AppName}} or {{PluginName}}
+ * @static
+ * @method interpolateUrl
+ * @param {String} url
+ * @param {Object} [additional={}] Any additional substitutions
+ * @return {String} The url with substitutions applied
+ */
+Q.interpolateUrl = function (url, additional) {
+	if (url.indexOf('{{') < 0) {
+		return url;
+	}
+	var substitutions = {};
+	substitutions['baseUrl'] = substitutions[Q.info.app] = Q.info.baseUrl;
+	substitutions['Q'] = Q.pluginBaseUrl('Q');
+	for (var plugin in Q.plugins) {
+		substitutions[plugin] = Q.pluginBaseUrl(plugin);
+	}
+	url = url.interpolate(substitutions);
+	if (additional) {
+		url = url.interpolate(additional);
+	}
+	return url;
+};
+
+/**
+ * You can override this function to do something special
+ * @method pluginBaseUrl
+ */
+Q.pluginBaseUrl = function (plugin) {
+	return 'Q/plugins/' + plugin;
 };
 
 /**
@@ -10155,6 +10190,9 @@ Q.Pointer = {
 		return function _Q_fastclick_on_wrapper (e) {
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
+			if (!(elem instanceof Element)){
+				return;
+			}
 			if (Q.Pointer.canceledClick
 			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {
@@ -10738,7 +10776,7 @@ Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 Q.Pointer.hint.options = {
-	src: 'Q/plugins/Q/img/hints/tap.gif',
+	src: '{{Q}}/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",
@@ -11650,7 +11688,7 @@ if (!root.console) {
  */
 function processStylesheets() {
 	// Complain about some other libraries if necessary
-	if (Q.findScript('Q/plugins/Q/js/prefixfree.min.js')) {
+	if (Q.findScript('{{Q}}/js/prefixfree.min.js')) {
 		var warning = "Q.js must be included before prefixfree in order to work properly";
 		console.warn(warning);
 	}
@@ -11691,45 +11729,45 @@ Q.onInit.add(function () {
 Q.onJQuery.add(function ($) {
 	
 	Q.Tool.define({
-		"Q/inplace": "Q/plugins/Q/js/tools/inplace.js",
-		"Q/tabs": "Q/plugins/Q/js/tools/tabs.js",
-		"Q/form": "Q/plugins/Q/js/tools/form.js",
-		"Q/panel": "Q/plugins/Q/js/tools/panel.js",
-		"Q/ticker": "Q/plugins/Q/js/tools/ticker.js",
-		"Q/timestamp": "Q/plugins/Q/js/tools/timestamp.js",
-		"Q/bookmarklet": "Q/plugins/Q/js/tools/bookmarklet.js",
-		"Q/columns": "Q/plugins/Q/js/tools/columns.js",
-		"Q/drawers": "Q/plugins/Q/js/tools/drawers.js",
-		"Q/expandable": "Q/plugins/Q/js/tools/expandable.js",
-		"Q/filter": "Q/plugins/Q/js/tools/filter.js",
-		"Q/rating": "Q/plugins/Q/js/tools/rating.js",
-		"Q/paging": "Q/plugins/Q/js/tools/paging.js"
+		"Q/inplace": "{{Q}}/js/tools/inplace.js",
+		"Q/tabs": "{{Q}}/js/tools/tabs.js",
+		"Q/form": "{{Q}}/js/tools/form.js",
+		"Q/panel": "{{Q}}/js/tools/panel.js",
+		"Q/ticker": "{{Q}}/js/tools/ticker.js",
+		"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
+		"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
+		"Q/columns": "{{Q}}/js/tools/columns.js",
+		"Q/drawers": "{{Q}}/js/tools/drawers.js",
+		"Q/expandable": "{{Q}}/js/tools/expandable.js",
+		"Q/filter": "{{Q}}/js/tools/filter.js",
+		"Q/rating": "{{Q}}/js/tools/rating.js",
+		"Q/paging": "{{Q}}/js/tools/paging.js"
 	});
 	
 	Q.Tool.jQuery({
-		"Q/placeholders": "Q/plugins/Q/js/fn/placeholders.js",
-		"Q/textfill": "Q/plugins/Q/js/fn/textfill.js",
-		"Q/autogrow": "Q/plugins/Q/js/fn/autogrow.js",
-		"Q/dialog": "Q/plugins/Q/js/fn/dialog.js",
-		"Q/flip": "Q/plugins/Q/js/fn/flip.js",
-		"Q/gallery": "Q/plugins/Q/js/fn/gallery.js",
-		"Q/zoomer": "Q/plugins/Q/js/fn/zoomer.js",
-		"Q/fisheye": "Q/plugins/Q/js/fn/fisheye.js",
-		"Q/listing": "Q/plugins/Q/js/fn/listing.js",
-		"Q/hautoscroll": "Q/plugins/Q/js/fn/hautoscroll.js",
-		"Q/imagepicker": "Q/plugins/Q/js/fn/imagepicker.js",
-		"Q/viewport": "Q/plugins/Q/js/fn/viewport.js",
-		"Q/actions": "Q/plugins/Q/js/fn/actions.js",
-		"Q/clickable": "Q/plugins/Q/js/fn/clickable.js",
-		"Q/clickfocus": "Q/plugins/Q/js/fn/clickfocus.js",
-		"Q/contextual": "Q/plugins/Q/js/fn/contextual.js",
-		"Q/scrollIndicators": "Q/plugins/Q/js/fn/scrollIndicators.js",
-		"Q/iScroll": "Q/plugins/Q/js/fn/iScroll.js",
-		"Q/scroller": "Q/plugins/Q/js/fn/scroller.js",
-		"Q/touchscroll": "Q/plugins/Q/js/fn/touchscroll.js",
-		"Q/scrollbarsAutoHide": "Q/plugins/Q/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "Q/plugins/Q/js/fn/sortable.js",
-		"Q/validator": "Q/plugins/Q/js/fn/validator.js"
+		"Q/placeholders": "{{Q}}/js/fn/placeholders.js",
+		"Q/textfill": "{{Q}}/js/fn/textfill.js",
+		"Q/autogrow": "{{Q}}/js/fn/autogrow.js",
+		"Q/dialog": "{{Q}}/js/fn/dialog.js",
+		"Q/flip": "{{Q}}/js/fn/flip.js",
+		"Q/gallery": "{{Q}}/js/fn/gallery.js",
+		"Q/zoomer": "{{Q}}/js/fn/zoomer.js",
+		"Q/fisheye": "{{Q}}/js/fn/fisheye.js",
+		"Q/listing": "{{Q}}/js/fn/listing.js",
+		"Q/hautoscroll": "{{Q}}/js/fn/hautoscroll.js",
+		"Q/imagepicker": "{{Q}}/js/fn/imagepicker.js",
+		"Q/viewport": "{{Q}}/js/fn/viewport.js",
+		"Q/actions": "{{Q}}/js/fn/actions.js",
+		"Q/clickable": "{{Q}}/js/fn/clickable.js",
+		"Q/clickfocus": "{{Q}}/js/fn/clickfocus.js",
+		"Q/contextual": "{{Q}}/js/fn/contextual.js",
+		"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
+		"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
+		"Q/scroller": "{{Q}}/js/fn/scroller.js",
+		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
+		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
+		"Q/sortable": "{{Q}}/js/fn/sortable.js",
+		"Q/validator": "{{Q}}/js/fn/validator.js"
 	});
 	
 	Q.onLoad.add(function () {
