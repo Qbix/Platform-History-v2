@@ -1,6 +1,6 @@
 <?php
 
-class HumanTranslate {
+class Human {
 
 	function __construct(Translate $parent)
 	{
@@ -38,7 +38,7 @@ class HumanTranslate {
 				}
 				foreach ($toSave as $dirname => $data) {
 					$dir = $this->parent->createDirectory($dirname);
-					$filename =$this->parent->joinPaths($dir, $toLang . ($locale ? '-' . $locale : '') . '.json');
+					$filename =$this->parent->joinPaths($dir, $toLang . ($locale ? '-' . $locale : '') . '.human.json');
 					$fp = fopen($filename, 'w');
 					fwrite($fp, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 					fclose($fp);

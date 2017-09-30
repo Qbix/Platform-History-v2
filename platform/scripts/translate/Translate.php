@@ -1,6 +1,6 @@
 <?php
-include 'AutoTranslate.php';
-include 'HumanTranslate.php';
+include 'Auto.php';
+include 'Human.php';
 
 class Translate
 {
@@ -166,10 +166,10 @@ EOT;
 		switch ($this->options['format'])
 		{
 			case 'auto':
-				$this->adapter = new AutoTranslate($this);
+				$this->adapter = new Auto($this);
 				break;
 			case 'human':
-				$this->adapter = new HumanTranslate($this);
+				$this->adapter = new Human($this);
 				break;
 			default:
 				die("Unknown format value\n");

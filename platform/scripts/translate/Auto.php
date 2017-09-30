@@ -1,6 +1,6 @@
 <?php
 
-class AutoTranslate {
+class Auto {
 
 	function __construct(Translate $parent)
 	{
