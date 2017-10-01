@@ -51,7 +51,7 @@ function Calendars_newEvent_tool()
 	
 	Q_Response::addStylesheet('{{Q}}/css/filter.css');
 
-	return Q::view('Groups/columns/newGroup.php', compact(
+	return Q::view('Calendars/tool/newEvent.php', compact(
 		'interests', 'locations', 'times', 'days',
 		'labels', 'selectedLabels', 'locationSetClass',
 		'areas'
