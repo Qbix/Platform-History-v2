@@ -152,10 +152,10 @@ function _Users_listen_ios (options, server) {
 	var apn = require('apn');
 	var path = require('path');
 	var appName = Q.app.name;
-	var appId = options.appId || app;
+	var appId = options.appId || appName;
 	var sandbox = Q.Config.get(["Users", "apps", "ios", appId, "sandbox"], false);
 	var s = sandbox ? "sandbox" : "production";
-	var appId = (options && options.appId) || Q.app.name;
+	appId = (options && options.appId) || Q.app.name;
 	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
 	var token = o.token;
 	var ssl = o.ssl;
@@ -179,10 +179,10 @@ function _Users_listen_ios (options, server) {
 		console.log("WARNING: APN provider not enabled due to missing token and ssl config");
 		return;
 	}
-	if (o.production == undefined) {
+	if (o.production === undefined) {
 		o.production = !sandbox;
 	}
-	var appId = o.appId || Q.app.name;
+	appId = o.appId || Q.app.name;
 	var passphrase = Q.Config.get(["Users", "apps", "ios", appId, "passphrase"], null);
 	if (passphrase) {
 		o.passphase = passphase;
@@ -190,7 +190,7 @@ function _Users_listen_ios (options, server) {
 	var provider = Users.push.apn.provider = new apn.Provider(Q.extend(
 		{}, o, options && options.apn && options.apn.provider
 	));
-};
+}
 
 /**
  * Fetches a user from the database
