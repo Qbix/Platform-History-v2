@@ -8827,7 +8827,8 @@ Q.Text = {
 	get: function (name, callback, options) {
 		options = options || {};
 		var language = options.language || Q.Text.language;
-		var locale = (options.language && options.locale) || Q.Text.locale;
+		var locale = (options.language && options.locale)
+			|| (Q.getObject('Q.info.text.useLocale') ? Q.Text.locale : '');
 		var dir = Q.Text.dir;
 		var suffix = locale ? '-' + locale : '';
 		var content = Q.getObject([language, locale, name], Q.Text.collection);
