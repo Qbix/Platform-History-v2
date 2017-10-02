@@ -27,6 +27,7 @@ function Q_before_Q_responseExtras()
 		$info['uri'] = $uri->toArray();
 	}
 	if (!$ajax) {
+		$text = Q::take(Q_Config::get('Q', 'text', array()), array('useLocale'));
 		$info = array_merge(
 			array('app' => Q_Config::expect('Q', 'app')),
 			$info,
@@ -35,6 +36,7 @@ function Q_before_Q_responseExtras()
 				'baseUrl' => $base_url,
 				'proxyBaseUrl' => Q_Uri::url($base_url),
 				'proxyUrl' => Q_Uri::url($url),
+				'text' => $text,
 				'sessionName' => Q_Session::name(),
 				'nodeUrl' => Q_Utils::nodeUrl(),
 				'socketPath' => Q_Utils::socketPath(),
