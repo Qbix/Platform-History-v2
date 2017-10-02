@@ -1,5 +1,15 @@
 <?php
-	
+
+/**
+ * Calendars
+ * @module Calendars
+ * @main Calendars
+ */
+/**
+ * Static methods for the Calendars plugin
+ * @class Calendars
+ * @abstract
+ */
 class Calendars
 {
 	/**

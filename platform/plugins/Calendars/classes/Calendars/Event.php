@@ -1,13 +1,10 @@
 <?php
 /**
- * @module Travel
+ * @module Calendars
  */
 /**
- * Class representing 'Trip' rows in the 'Travel' database
- * You can create an object of this class either to
- * access its non-static methods, or to actually
- * represent a stream row in the Travel database.
- *
+ * Class for dealing with calendar events
+ * 
  * @class Calendars_Event
  */
 class Calendars_Event
