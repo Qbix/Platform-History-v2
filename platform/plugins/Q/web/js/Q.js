@@ -10776,7 +10776,7 @@ Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 Q.Pointer.hint.options = {
-	src: 'plugins/Q/img/hints/tap.gif',
+	src: Q.url('{{Q}}/img/hints/tap.gif'),
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",
