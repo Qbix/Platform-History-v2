@@ -69,7 +69,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 	scrollToBottom: true,
 	overflowed: {
-		src: '{{Streams}}/img/chat/message-overflowed.png',
+		src: 'plugins/Streams/img/chat/message-overflowed.png',
 		title: 'Message from {{displayName}}'
 	},
 	onRefresh: new Q.Event(),
