@@ -17,7 +17,7 @@ var Users_Device = Users.Device;
  * @param fields {object} The fields values to initialize table row as
  * an associative array of `{column: value}` pairs
  */
-function Users_Device_Firefox (fields) {
+function Users_Device_Firefox(fields) {
 	// Run constructors of mixed in objects
 	Users_Device.constructors.apply(this, arguments);
 }
@@ -75,9 +75,9 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 			auth: this.fields.auth,
 			p256dh: this.fields.p256dh
 		}
-	}, JSON.stringify(notification)).then(function(){
+	}, JSON.stringify(notification)).then(function () {
 		Q.handle(callback, this);
-	}).catch(function(){
+	}).catch(function (err) {
 		Q.handle(callback, this, [err]);
 	});
 };
