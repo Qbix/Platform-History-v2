@@ -4389,10 +4389,11 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * @method setUpElement
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
- * @param {String} toolName
- *  The type of the tool, such as "Q/tabs"
- * @param {Object} [toolOptions]
- *  The options for the tool
+ * @param {String|Array} toolName
+ *  The type of the tool, such as "Q/tabs", or an array of types
+ * @param {Object|Array} [toolOptions]
+ *  The options for the tool. If toolName is an array, this is the array 
+ *  of corresponding objects to use for options.
  * @param {String|Function} [id=null]
  *  Optional id of the tool, such as "Q_tabs_2", used if element doesn't have an "id" attribute.
  *  If null, calculates an automatically unique id beginning with the tool's name
@@ -9517,10 +9518,11 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 * @method tool
 	 * @param {String|Element} element
 	 *  The tag of the element, such as "div", or a reference to an existing Element
-	 * @param {String} toolName
-	 *  The type of the tool, such as "Q/tabs"
-	 * @param {Object} [toolOptions]
-	 *  The options for the tool
+	 * @param {String|Array} toolName
+	 *  The type of the tool, such as "Q/tabs", or an array of types
+	 * @param {Object|Array} [toolOptions]
+	 *  The options for the tool. If toolName is an array, this is the array 
+	 *  of corresponding objects to use for options.
 	 * @param {String|Function} [id]
 	 *  Optional id of the tool, such as "Q_tabs_2"
 	 * @param {String} [prefix]
