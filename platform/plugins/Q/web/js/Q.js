@@ -4077,7 +4077,7 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
  * Gets child tools contained in the tool, as determined by their ids.
  * @method children
  * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace"
- * @param {number} [levels] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
+ * @param {number} [levels=null] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
  * @return {Object} A two-level hash of pairs like {id: {name: Tool}}
  */
 Tp.children = function Q_Tool_prototype_children(name, levels) {
