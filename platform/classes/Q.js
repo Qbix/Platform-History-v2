@@ -1970,6 +1970,7 @@ Q.dir = function _Q_dir(start, callback) {
  *  You can also change this default using the config Db/normalize/characters
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
+ * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
  * @return {String} the normalized string
  */
 Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
@@ -1982,10 +1983,13 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
 	if (text === undefined) {
 		debugger; // pause here if debugging
 	}
-	var result = text.toLowerCase().replace(characters, replacement);
-	if (text.length > numChars) {
-		result = text.substr(0, numChars-11) + '_'
-			+ Math.abs(text.substr(numChars-11).hashCode());
+	if (!keepCaseIntact) {
+		text = text.toLowerCase();
+	}
+	var result = text.replace(characters, replacement);
+	if (result.length > numChars) {
+		result = result.substr(0, numChars-11) + '_'
+			+ Math.abs(result.substr(numChars-11).hashCode());
 	}
 	return result;
 };

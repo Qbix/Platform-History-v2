@@ -176,6 +176,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @method open
 	 * @param {Object} options Can be used to override various tool options,
 	 *  including events such as "onOpen" and "onClose". Additional options include:
+	 *  @param {String} [options.name] any name to assign to the column
 	 *  @param {String} [options.columnClass] to add a class to the column
 	 *  @param {Object} [options.data] to add data on the column element with jQuery
 	 *  @param {Object} [options.template] template to render for the "column" slot
@@ -216,7 +217,9 @@ Q.Tool.define("Q/columns", function(options) {
 		var div = this.column(index);
 		var titleSlot, columnSlot, controlsSlot;
 		var $div, $mask, $close, $title, $controls;
+		var createdNewDiv = false;
 		if (!div) {
+			createdNewDiv = true;
 			div = document.createElement('div').addClass('Q_columns_column');
 			div.style.display = 'none';
 			$div = $(div);
@@ -292,7 +295,7 @@ Q.Tool.define("Q/columns", function(options) {
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
 		if (options.name) {
-			var n = Q.normalize(options.name);
+			var n = Q.normalize(options.name, null, null, null, true);
 			$div.attr('data-name', options.name)
 				.addClass('Q_column_'+n);
 		}
@@ -383,7 +386,7 @@ Q.Tool.define("Q/columns", function(options) {
 					Q.handle(options.onOpen, tool, [options, index, div, data]);
 					state.onOpen.handle.call(tool, options, index, div, data);
 					var url = $div.attr('data-url');
-					if (o.pagePushUrl && url && url != location.href) {
+					if (o.pagePushUrl && createdNewDiv && url && url != location.href) {
 						Q.Page.push(url);
 					}
 					setTimeout(function () {
