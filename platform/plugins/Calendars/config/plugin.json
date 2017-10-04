@@ -5,11 +5,12 @@
 				"version": "0.1",
 				"compatible": "0.1",
 				"requires": {
+					"Users": "1.0",
 					"Streams": "1.0",
 					"Places": "1.0"
 				},
 				"permissions": [],
-				"connections": ["Streams"]
+				"connections": ["Users", "Streams"]
 			}
 		},
 		"handlersBeforeEvent": {
