@@ -54,10 +54,14 @@ function Q_columns_tool($options)
 			? '<div class="Q_close Q_back">'.Q_Html::img($backSrc, 'Back').'</div>'
 			: '<div class="Q_close">'.Q_Html::img($closeSrc, 'Close').'</div>');
 		$n = Q_Html::text($name);
-		$columnClass = 'Q_column_'.Q_Utils::normalize($name) . ' Q_column_'.$i;
+		$n2 = Q_Utils::normalize($name, '_', null, null, true);
+		$columnClass = "Q_column_$n2 Q_column_$i";
 		$attrs1 = "data-index=\"$i\" data-name=\"$n\"";
 		if (isset($column['url'])) {
 			$attrs1 .= " data-url=\"" . Q_Html::text($column['url']) . "\"";
+		}
+		if (isset($column['attributes'])) {
+			$attrs1 .= ' ' . Q_Html::attributes($column['attributes']);
 		}
 		if (isset($column['html'])) {
 			$html = $column['html'];
@@ -78,9 +82,6 @@ EOT;
 			if (isset($column['data'])) {
 				$json = Q::json_encode($column['data']);
 				$attrs2 = 'data-more="' . Q_Html::text($json) . '"';
-			}
-			if (isset($column['attributes'])) {
-				$attributes .= ' ' . Q_Html::attributes($column['attributes']);
 			}
 			$data = Q::ifset($column, 'data', '');
 			$titleElement = '';
