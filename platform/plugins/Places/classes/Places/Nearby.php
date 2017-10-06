@@ -379,7 +379,7 @@ class Places_Nearby
 	 * @param {double} $latitude The latitude of the point to search around
 	 * @param {double} $longitude The longitude of the point to search around
 	 * @param {double} $meters The radius to search within
-	 * @param {array} $options The options to pass to the Streams::relate function. Also can contain the following options:
+	 * @param {array} $options The options to pass to the Streams::related function. Also can contain the following options:
 	 * @param {callable} [$options.categories="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forSubscribers, and this $options array, and returns the array of ($originalStreamName => $criteria) pairs. The $criteria can be a string or array or Db_Range or Db_Expression.
 	 * @return {array} An array of Streams_RelatedTo objects, sorted by ascending weight.
 	 */

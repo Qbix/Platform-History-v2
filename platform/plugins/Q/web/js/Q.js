@@ -1791,19 +1791,23 @@ Q.mixin = function _Q_mixin(A /*, B, ... */) {
  *  You can also change this default using the config Db/normalize/characters
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
+ * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
  * @return {String} the normalized string
  */
-Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
+Q.normalize = function _Q_normalize(text, replacement, characters, numChars, keepCaseIntact) {
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
 	characters = characters || /[^A-Za-z0-9]+/g;
 	if (text === undefined) {
 		debugger; // pause here if debugging
 	}
-	var result = text.toLowerCase().replace(characters, replacement);
-	if (text.length > numChars) {
-		result = text.substr(0, numChars-11) + '_' 
-				 + Math.abs(text.substr(numChars-11).hashCode());
+	if (!keepCaseIntact) {
+		text = text.toLowerCase();
+	}
+	var result = text.replace(characters, replacement);
+	if (result.length > numChars) {
+		result = result.substr(0, numChars-11) + '_' 
+				 + Math.abs(result.substr(numChars-11).hashCode());
 	}
 	return result;
 };
@@ -4389,10 +4393,11 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * @method setUpElement
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
- * @param {String} toolName
- *  The type of the tool, such as "Q/tabs"
- * @param {Object} [toolOptions]
- *  The options for the tool
+ * @param {String|Array} toolName
+ *  The type of the tool, such as "Q/tabs", or an array of types
+ * @param {Object|Array} [toolOptions]
+ *  The options for the tool. If toolName is an array, this is the array 
+ *  of corresponding objects to use for options.
  * @param {String|Function} [id=null]
  *  Optional id of the tool, such as "Q_tabs_2", used if element doesn't have an "id" attribute.
  *  If null, calculates an automatically unique id beginning with the tool's name
@@ -8827,7 +8832,8 @@ Q.Text = {
 	get: function (name, callback, options) {
 		options = options || {};
 		var language = options.language || Q.Text.language;
-		var locale = (options.language && options.locale) || Q.Text.locale;
+		var locale = (options.language && options.locale)
+			|| (Q.getObject('Q.info.text.useLocale') ? Q.Text.locale : '');
 		var dir = Q.Text.dir;
 		var suffix = locale ? '-' + locale : '';
 		var content = Q.getObject([language, locale, name], Q.Text.collection);
@@ -9516,10 +9522,11 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 * @method tool
 	 * @param {String|Element} element
 	 *  The tag of the element, such as "div", or a reference to an existing Element
-	 * @param {String} toolName
-	 *  The type of the tool, such as "Q/tabs"
-	 * @param {Object} [toolOptions]
-	 *  The options for the tool
+	 * @param {String|Array} toolName
+	 *  The type of the tool, such as "Q/tabs", or an array of types
+	 * @param {Object|Array} [toolOptions]
+	 *  The options for the tool. If toolName is an array, this is the array 
+	 *  of corresponding objects to use for options.
 	 * @param {String|Function} [id]
 	 *  Optional id of the tool, such as "Q_tabs_2"
 	 * @param {String} [prefix]
@@ -10776,7 +10783,7 @@ Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 Q.Pointer.hint.options = {
-	src: '{{Q}}/img/hints/tap.gif',
+	src: Q.url('{{Q}}/img/hints/tap.gif'),
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",

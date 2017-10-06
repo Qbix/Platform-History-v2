@@ -24,7 +24,7 @@ class Q_Text
 	 * @param {string} [$options.locale=null] Override locale
 	 * @return {string} something like "en-US"
 	 */
-	static function basename($options)
+	static function basename($options = array())
 	{
 		if (isset($options['language'])) {
 			$language = $options['language'];

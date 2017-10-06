@@ -13,6 +13,9 @@ var Calendars = Q.Calendars = Q.plugins.Calendars = {
 }
 
 Calendars.Event = {
+	weekdays: [
+		'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+	],
 	going: function (stream, callback) {
 		var going = 'no';
 		if (!Q.Users.loggedInUser) {
@@ -33,7 +36,8 @@ Calendars.Event = {
 
 Q.Tool.define({
 	"Calendars/event": "{{Calendars}}/js/tools/event.js",
-	"Calendars/event/preview": "{{Calendars}}/js/tools/event/preview.js"
+	"Calendars/event/preview": "{{Calendars}}/js/tools/event/preview.js",
+	"Calendars/event/composer": "{{Calendars}}/js/tools/event/composer.js"
 });
 
 })(Q, jQuery);
