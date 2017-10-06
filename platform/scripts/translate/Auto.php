@@ -12,6 +12,11 @@ class Auto {
 		list($fromLang, $locale) = preg_split("/(_|-)/", $this->parent->options['source']);
 		$src = $this->parent->getSrc($fromLang, $locale);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
+			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
+				if (($fromLang == $toLang) && ($this->parent->options['in'] === $this->parent->options['out'])) {
+					continue;
+				}
+			}
 			if (($toLang === $fromLang) && $this->parent->options['out']) {
 				$res = $src;
 			}
