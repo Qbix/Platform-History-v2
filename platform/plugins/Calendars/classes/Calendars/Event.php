@@ -80,10 +80,10 @@ class Calendars_Event
 	 * @param {string} [$options.interestTitle] Required. Title of an interest that exists in the system.
 	 * @param {string} [$options.placeId] Required. Pass the id of a location where people will gather.
 	 * @param {string} [$options.startTime] Required. When the people should gather at the location.
-	 * @param {string} [$options.timezone=null] Optional. The timezone offset on the browser of the user who created the group.
+	 * @param {string} [$options.timezone=null] Optional. The timezone offset on the browser of the user who created the event.
 	 * @param {string} [$options.labels=''] Optional. You can specify a tab-delimited string of labels to which access is granted. Otherwise access is public.
-	 * @param {string} [$options.publisherId] Optional. The user who would publish the group. Defaults to the logged-in user.
-	 * @param {string} [$options.communityId] Optional. The user who would publish the group. Defaults to the app's name.
+	 * @param {string} [$options.publisherId] Optional. The user who would publish the event. Defaults to the logged-in user.
+	 * @param {string} [$options.communityId] Optional. The user who would publish the event. Defaults to the app's name.
 	 * @return void
 	 */
 	static function create($options)
@@ -251,15 +251,15 @@ class Calendars_Event
 		));
 		$participant = new Streams_Participant();
 		$participant->publisherId = $publisherId;
-		$participant->streamName = $group->name;
+		$participant->streamName = $event->name;
 		$participant->userId = $user->id;
 		$participant->retrieve();
 		$going = 'yes';
-		$startTime = $group->getAttribute('startTime');
+		$startTime = $event->getAttribute('startTime');
 		$participant->setExtra(compact('going', 'startTime'));
 		$participant->save();
 	
-		Q_Response::setSlot('stream', $group);
+		Q_Response::setSlot('stream', $event);
 		Q_Response::setSlot('participant', $participant);
 	}
 	
