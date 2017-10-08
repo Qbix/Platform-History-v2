@@ -3854,7 +3854,10 @@ abstract class Streams extends Base_Streams
 					$r->toStreamName,
 					$r->type,
 					$stream->publisherId,
-					$stream->name
+					$stream->name,
+					array(
+						'skipAccess' => true
+					)
 				);
 			} catch (Exception $e) {}
 		}

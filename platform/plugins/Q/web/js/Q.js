@@ -4434,6 +4434,10 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 		var ba = Q.Tool.beingActivated;
 		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
+		if (toolOptions && toolOptions[i]) {
+			element.options = element.options || {};
+			element.options[Q.normalize(tn)] = toolOptions[i];
+		}
 		if (!element.getAttribute('id')) {
 			if (typeof id === 'function') {
 				id = id();
@@ -4452,10 +4456,6 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 				}
 			}
 			element.setAttribute('id', id);
-		}
-		if (toolOptions && toolOptions[i]) {
-			element.options = element.options || {};
-			element.options[Q.normalize(tn)] = toolOptions[i];
 		}
 	}
 	return element;
@@ -4615,7 +4615,8 @@ Q.Tool.calculatePrefix = function _Q_Tool_calculatePrefix(id) {
 };
 
 /**
- * Computes and returns a tool's id
+ * Computes and returns a tool's id from some string that's likely to contain it,
+ * such as an HTML element's id, a tool's id, or a tool's prefix.
  * @static
  * @method calculateId
  * @param {String} id the id or prefix of an existing tool or its element
@@ -4651,7 +4652,6 @@ Tp.toString = function _Q_Tool_prototype_toString() {
  */
 function _loadToolScript(toolElement, callback, shared, parentId) {
 	var toolId = Q.Tool.calculateId(toolElement.id);
-	var normalizedId = Q.normalize(toolId);
 	var classNames = toolElement.className.split(' ');
 	var toolNames = [];
 	for (var i=0, nl = classNames.length; i<nl; ++i) {
@@ -8354,7 +8354,7 @@ function _activateTools(toolElement, options, shared) {
 		}
 		var key;
 		if (pendingParentEvent) {
-			key = pendingParentEvent.add(_reallyConstruct, toolId);
+			key = pendingParentEvent.add(_reallyConstruct, toolId + ' ' + toolName);
 		} else {
 			_reallyConstruct();
 		}
@@ -8402,7 +8402,7 @@ function _initTools(toolElement) {
 	
 	_loadToolScript(toolElement,
 	function _initTools_doInit(toolElement, toolConstructor, toolName) {
-		currentEvent.add(_doInit, currentId);
+		currentEvent.add(_doInit, currentId + ' ' + toolName);
 	}, null, parentId);
 	
 	function _doInit() {

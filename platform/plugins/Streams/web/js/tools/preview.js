@@ -133,7 +133,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Masks.hide(this);
 		if (wasRemoved) {
 			this.$().hide(300, function () {
-				$(this).remove();
+				Q.removeElement(this, true);
 			});
 		}
 	}, 'Streams/preview'),
