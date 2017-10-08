@@ -684,18 +684,26 @@ Elp.cssDimensions = function () {
 /**
  * Returns the first element in the chain of parent elements which supports scrolling
  * @method scrollingParent
- * @param {Boolean} skipIfNotOverflowed
+ * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
+ * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
  */
-Elp.scrollingParent = function(skipIfNotOverflowed) {
+Elp.scrollingParent = function(skipIfNotOverflowed, direction) {
 	var p = this;
 	while (p = p.parentNode) {
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
 		var pcs = p.computedStyle();
-		var overflow = pcs.overflow || p.style.overflow
-			|| pcs.overflowY || p.style.overflowY
-			|| pcs.overflowX || p.style.overflowX;
+		var overflow;
+		if (direction === 'vertical') {
+			overflow = pcs.overflowY || p.style.overflowY;
+		} else if (direction === 'horizontal') {
+			overflow = pcs.overflowX || p.style.overflowX;
+		} else {
+			overflow = pcs.overflow || p.style.overflow
+				|| pcs.overflowY || p.style.overflowY
+				|| pcs.overflowX || p.style.overflowX;
+		}
 		if (overflow && ['hidden', 'visible'].indexOf(overflow) < 0) {
 			if (!skipIfNotOverflowed || p.clientHeight < p.scrollHeight) {
 				return p;
