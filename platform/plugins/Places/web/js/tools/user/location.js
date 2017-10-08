@@ -62,9 +62,9 @@ Q.Tool.define("Places/user/location", function (options) {
 		Streams.Stream
 		.onRefresh(publisherId, streamName)
 		.set(function () {
-			var meters = parseFloat(this.getAttribute('meters'));
-			var latitude = parseFloat(this.getAttribute('latitude'));
-			var longitude = parseFloat(this.getAttribute('longitude'));
+			var meters = parseFloat(this.getAttribute('meters')) || null;
+			var latitude = parseFloat(this.getAttribute('latitude')) || null;
+			var longitude = parseFloat(this.getAttribute('longitude')) || null;
 			if (meters) {
 				tool.$('.Places_user_location_meters').val(meters);
 			};
@@ -229,9 +229,7 @@ Q.Tool.define("Places/user/location", function (options) {
 	var previous = {};
 	function _showMap(latitude, longitude, meters, callback) {
 
-		if (latitude == undefined
-		|| longitude == undefined
-		|| !meters) {
+		if (latitude == null || longitude == null || !meters) {
 			return;
 		}
 		if (latitude == previous.latitude

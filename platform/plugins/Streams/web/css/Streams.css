@@ -800,3 +800,17 @@
 	background: #0b94a9;
 	color: white;
 }
+
+.Streams_dialog_interests {
+	min-width: 300px;
+	width: 90%;
+	background: url(../img/bg/overlay-interests.png);
+}
+
+.Streams_dialog_interests * {
+	color: white;
+}
+
+.Streams_dialog_interests .Q_dialog_slot {
+	padding: 10px;
+}

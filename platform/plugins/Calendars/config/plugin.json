@@ -21,6 +21,11 @@
 		},
 		"web": {
 			"requireValidNonce": ["Calendars"]
+		},
+		"text": {
+			"Calendars": {
+				"*": ["Calendars/content"]
+			}
 		}
 	},
 	"Streams": {

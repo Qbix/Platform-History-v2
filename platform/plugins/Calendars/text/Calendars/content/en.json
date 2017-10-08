@@ -25,6 +25,19 @@
 	"event": {
 		"preview": {
 			"EventComposerDialogTitle": "Plan New Event"
+		},
+		"composer": {
+			"SetLocation": "Set My Location",
+			"ChooseActivity": "Choose an Activity",
+			"Day": "Day",
+			"Starting": "Starting",
+			"Share": "Share",
+			"location": {
+				"Title": "Set Your Location"
+			},
+			"interest": {
+				"Title": "Choose an Activity"
+			}
 		}
 	}
 }
