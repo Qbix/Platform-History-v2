@@ -64,16 +64,16 @@
 		"environments": {
 			"live": {
 				"files": {
-					"{{Q}}/css/Q.css": "all.css",
-					"{{Users}}/css/Users.css": "all.css",
-					"{{Streams}}/css/Streams.css": "all.css",
-					"css/MyApp.css": "all.css",
-					"{{Q}}/js/jquery-3.2.1.min.js": "all.js",
-					"{{Q}}/js/handlebars-v4.0.10.js": "all.js",
-					"{{Q}}/js/Q.js": "all.js",
-					"{{Users}}/js/Users.js": "all.js",
-					"{{Streams}}/js/Streams.js": "all.js",
-					"js/MyApp.js": "all.js"
+					"{{Q}}/css/Q.css": "css/all.css",
+					"{{Users}}/css/Users.css": "css/all.css",
+					"{{Streams}}/css/Streams.css": "css/all.css",
+					"css/MyApp.css": "css/all.css",
+					"{{Q}}/js/jquery-3.2.1.min.js": "js/all.js",
+					"{{Q}}/js/handlebars-v4.0.10.js": "js/all.js",
+					"{{Q}}/js/Q.js": "js/all.js",
+					"{{Users}}/js/Users.js": "js/all.js",
+					"{{Streams}}/js/Streams.js": "js/all.js",
+					"js/MyApp.js": "js/all.js"
 				}
 			}
 		},

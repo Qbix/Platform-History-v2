@@ -46,7 +46,7 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 		tool.refresh();
 	});
 	Q.Places.loadGoogleMaps(p.fill('google'));
-	$('<div />').tool('Q/filter', state.filter, 'filter')
+	$('<div />').tool('Q/filter', state.filter, 'Q_filter')
 	.appendTo(tool.element)
 	.activate(function () {
 		var filter = tool.filter = this;

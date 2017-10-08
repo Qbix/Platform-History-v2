@@ -1,7 +1,0 @@
-.Calendars_event_composer_location.Calendars_location_unset .Places_address_tool {
-	display: none !important;
-}
-
-.Calendars_event_composer_location.Calendars_location_set .Calendars_event_composer_setLocation {
-	display: none !important;
-}
