@@ -4077,7 +4077,7 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
  * Gets child tools contained in the tool, as determined by their ids.
  * @method children
  * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace"
- * @param {number} [levels] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
+ * @param {number} [levels=null] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
  * @return {Object} A two-level hash of pairs like {id: {name: Tool}}
  */
 Tp.children = function Q_Tool_prototype_children(name, levels) {
@@ -10783,7 +10783,7 @@ Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 Q.Pointer.hint.options = {
-	src: Q.url('{{Q}}/img/hints/tap.gif'),
+	src: '{{Q}}/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",

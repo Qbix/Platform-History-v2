@@ -16,7 +16,7 @@ class Q_File
 	 * @static
 	 * @param {array} $params 
 	 * @param {string} [$params.data] the file data
-	 * @param {string} [$params.path="uploads"] parent path under web dir (see subpath)
+	 * @param {string} [$params.path="Q/uploads"] parent path under web dir (see subpath)
 	 * @param {string} [$params.subpath=""] subpath that should follow the path, to save the image under
 	 * @param {string} [$params.name] override the name of the file, after the subpath
 	 * @param {string} [$params.skipAccess=false] if true, skips the check for authorization to write files there
@@ -31,7 +31,9 @@ class Q_File
 		
 		// check whether we can write to this path, and create dirs if needed
 		$data = $params['data'];
-		$path = isset($params['path']) ? $params['path'] : 'uploads';
+		$path = isset($params['path'])
+			? Q_Utils::interpolateUrl($params['path'])
+			: 'Q/uploads';
 		$subpath = isset($params['subpath']) ? $params['subpath'] : '';
 		$realPath = Q::realPath(APP_WEB_DIR.DS.$path);
 		if ($realPath === false) {
