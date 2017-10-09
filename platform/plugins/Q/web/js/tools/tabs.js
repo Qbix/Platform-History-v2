@@ -431,8 +431,9 @@ function _copyClassToOverflow(tool) {
 		}
 	});
 	if (tool.$overflow) {
-		tool.$overflow.removeClass(state.lastClass)
-			.addClass(currentClass);
+		tool.$overflow
+		.removeClass(state.lastClass)
+		.addClass(currentClass || 'Q_tabs_noMatchingTab');
 	};
 	state.lastClass = currentClass;
 }
