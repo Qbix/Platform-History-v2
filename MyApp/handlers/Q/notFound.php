@@ -7,10 +7,10 @@
  */
 function Q_notFound($params)
 {
-	if (!Q_Dispatcher::uri()->facebook) {
-		header("HTTP/1.0 404 Not Found");
+	$uri = Q::ifset(Q_Dispatcher::uri(), 'module', $app);
+	$app = Q::app();
+	if ($module !== $app) {
+		$module = $app;
 	}
-	Q_Dispatcher::uri()->module = Q_Config::expect('Q', 'app');
-	Q_Dispatcher::uri()->action = 'notFound';
-	Q::event('Q/response', $params);
+	Q_Dispatcher::forward("$module/notFound");
 }
