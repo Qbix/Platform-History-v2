@@ -335,6 +335,7 @@ class Q_Uri
 		if (empty($url)) {
 			return null;
 		}
+		$url = Q_Utils::interpolateUrl($url);
 			
 		static $routed_cache = array();
 		if (isset($routed_cache[$url])) {
@@ -397,7 +398,8 @@ class Q_Uri
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue; // this provides a way to disable a route via config
-				$uri_fields = self::matchSegments($pattern, $segments);
+				$pattern2 = Q_Utils::interpolateUrl($pattern);
+				$uri_fields = self::matchSegments($pattern2, $segments);
 				if ($uri_fields !== false) {
 					$matched = true;
 					foreach ((array)$uri_fields as $k => $v) {
@@ -412,7 +414,7 @@ class Q_Uri
 					if (!empty($fields[''])) {
 						$params = array(
 							'fields' => $uri_fields, 
-							'pattern' => $pattern, 
+							'pattern' => $pattern,
 							'fromUrl' => $url
 						);
 						if (false === Q::event($fields[''], $params)) {

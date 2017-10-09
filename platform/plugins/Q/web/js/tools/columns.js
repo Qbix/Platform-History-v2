@@ -251,6 +251,7 @@ Q.Tool.define("Q/columns", function(options) {
 			titleSlot = $('.Q_title_slot', div)[0];
 			columnSlot = $('.Q_column_slot', div)[0];
 			controlsSlot = $('.Q_controls_slot', div)[0];
+			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
 		if (o.url) {
 			var url = Q.url(o.url);
@@ -362,6 +363,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$titleSlot.empty().append(
 					Q.instanceOf(o.title, Element) ? $(o.title) : o.title
 				);
+				$div.attr('data-title', $titleSlot.text());
 			}
 			if (o.column != undefined) {
 				$columnSlot.empty().append(
@@ -387,6 +389,8 @@ Q.Tool.define("Q/columns", function(options) {
 					state.onOpen.handle.call(tool, options, index, div, data);
 					var url = $div.attr('data-url');
 					if (o.pagePushUrl && createdNewDiv && url && url != location.href) {
+						document.title = $div.find('.Q_title_slot').text();
+						$div.attr('data-title', document.title);
 						Q.Page.push(url);
 					}
 					setTimeout(function () {
@@ -661,8 +665,9 @@ Q.Tool.define("Q/columns", function(options) {
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
 			var url = $prev.attr('data-url');
+			var title = $prev.attr('data-title');
 			if (o.pagePushUrl && url && url != location.href) {
-				Q.Page.push(url);
+				Q.Page.push(url, title);
 			}
 		}
 	},

@@ -11,7 +11,7 @@ function Q_response_content()
 	$action = Q_Dispatcher::uri()->action;
 	$event = "$module/$action/response/content";
 	if (!Q::canHandle($event)) {
-		return Q::event("$app/notFound/response/content");
+		Q_Dispatcher::forward("$module/notFound");
 	}
 	
 	Q_Response::setMeta('format-detection', 'telephone=no,date=no,address=no,email=no,url=no');
