@@ -55,8 +55,37 @@ class Auto {
 		return $filenames;
 	}
 
+	private function replaceTagsByNumbers($data, $startNumber = 10000) {
+		for ($i = 0; $i < sizeof($data); $i++) {
+			if (preg_match_all("/{{(.*?)}}/", $data[$i]['value'], $matches)) {
+				$j = 0;
+				foreach($matches[0] as $search) {
+					$data[$i]['value'] = str_replace($search, "{{" . ($j + $startNumber) . "}}", $data[$i]['value']);
+					$data[$i]['value'];
+					$j++;
+				}
+				$data[$i]['tags'] = $matches[0];
+			}
+		};
+		return $data;
+	}
+
+	private function revertTags($data, $startNumber = 10000) {
+		for ($i = 0; $i < sizeof($data); $i++) {
+			if (!empty($data[$i]['tags'])) {
+				$j = 0;
+				foreach($data[$i]['tags'] as $tag) {
+					$data[$i]['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $data[$i]['value']);
+					$j++;
+				}
+			}
+		};
+		return $data;
+	}
+
 	private function translate($fromLang, $toLang, $data, $chunkSize = 100)
 	{
+		$data = $this->replaceTagsByNumbers($data);
 		$chunks = array_chunk($data, $chunkSize);
 		$translations = [];
 		$count = 0;
@@ -82,6 +111,7 @@ class Auto {
 		foreach ($data as $n => & $d) {
 			$d['value'] = $translations[$n]['translatedText'];
 		}
+		$data = $this->revertTags($data);
 		return $data;
 	}
 
