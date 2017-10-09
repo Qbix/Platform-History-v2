@@ -8565,6 +8565,7 @@ Q.Template.remove = function (name) {
  * @return {Function} a function that can be called to render the template
  */
 Q.Template.compile = function _Q_Template_compile (content, type) {
+	type = type || 'handlebars';
 	if (type !== 'handlebars') {
 		throw new Q.Error("Q.Template.compile: only supports Handlebars for now");
 	}
@@ -8736,7 +8737,8 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
 			try {
-				var compiled = Q.Template.compile(params.template[1], info.type);
+				var type = (info && info.type) || (options && options.type);
+				var compiled = Q.Template.compile(params.template[1], type);
 				callback(null, compiled(fields, options));
 			} catch (e) {
 				console.warn(e);
@@ -8747,6 +8749,10 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 		var o = Q.copy(options, ['type', 'dir', 'name']);
 		Q.Template.load(name, p.fill('template'), o);
 		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
+			if (!info) {
+				// template was not defined yet, so no partials/helpers/text to load
+				return p.fill(aspect)();
+			}
 			var ia = info[aspect];
 			if (typeof ia === 'string') {
 				ia = [ia];

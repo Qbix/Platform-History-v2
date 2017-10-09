@@ -191,6 +191,9 @@ Q.Tool.define("Q/columns", function(options) {
 	open: function (options, index, callback, internal) {
 		var tool = this;
 		var state = this.state;
+		if (index === undefined) {
+			index = tool.max();
+		}
 		if (typeof options === 'number') {
 			options = {};
 			callback = index;
