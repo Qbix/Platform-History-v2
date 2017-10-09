@@ -5281,8 +5281,9 @@ Q.Page = function (uriString) {
  * @static
  * @method push
  * @param {String} url The url to push
+ * @param {String} [title=null] The title to go with the url, to override current title
  */
-Q.Page.push = function (url) {
+Q.Page.push = function (url, title) {
 	url = Q.url(url);
 	if (url.substr(0, Q.info.baseUrl.length) !== Q.info.baseUrl) {
 		return;
@@ -5306,6 +5307,9 @@ Q.Page.push = function (url) {
 			Q_hashChangeHandler.ignore = true;
 			location.hash = hash;
 		}
+	}
+	if (typeof title === 'string') {
+		document.title = title;
 	}
 	Q_hashChangeHandler.currentUrl = url.substr(Q.info.baseUrl.length + 1);
 	Q.info.url = url;
