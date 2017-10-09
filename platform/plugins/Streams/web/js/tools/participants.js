@@ -32,6 +32,13 @@ function _Streams_participants(options) {
 	var tool = this;
 	var state = tool.state;
 	
+	if (!state.publisherId) {
+		throw new Q.Error("Streams/chat: missing publisherId option");
+	}
+	if (!state.streamName) {
+		throw new Q.Error("Streams/chat: missing streamName option");
+	}
+	
 	tool.Q.onStateChanged('count').set(function (name) {
 		var c = state.count;
 		tool.$count.text(c >= 100 ? '99+' : c.toString());

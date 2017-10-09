@@ -53,9 +53,6 @@ function Q_response($params)
 		Q::event('Q/responseExtras', array(), 'before');
 	}
 
-	// Get the main module (the app)
-	$app = Q_Config::expect('Q', 'app');
-
 	$action = $uri->action;
 	if (Q::canHandle("$module/$action/response")) {
 		if (false === Q::event("$module/$action/response", $_REQUEST) and !$isAjax) {
@@ -187,10 +184,8 @@ Q.init();
 ", null, 'Q');
 		$added_Q_init = true;
 	}
-	
 
 	// Get all the usual slots for a webpage
-	$slots = array();
 	foreach ($slotNames as $sn) {
 		Q_Response::fillSlot($sn, 'default', Q::ifset($idPrefixes, $sn, null));
 	}
