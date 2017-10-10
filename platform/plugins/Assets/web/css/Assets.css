@@ -64,3 +64,16 @@
 	background: #d2781e;
 	color: white;
 }
+.Q_button.Assets_aspect_funds {
+	background: #742e7f; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='##742e7f', endColorstr='#4b1c52'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#742e7f), to(#631d6e)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #742e7f,  #631d6e); /* for firefox 3.6+ */
+	color: white;
+}
+
+.Q_button.Assets_aspect_funds:active,
+.Q_button.Assets_aspect_funds:focus {
+	background: #631d6e;
+	color: white;
+}

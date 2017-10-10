@@ -4345,7 +4345,7 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSibl
 	if (typeof name !== 'string') {
 		levels = name;
 		callback = levels;
-		name = null;
+		name = "";
 	}
 	if (typeof levels !== 'number') {
 		withSiblings = levels;
@@ -6315,6 +6315,7 @@ Q.request = function (url, slotNames, callback, options) {
 		delim = (url.indexOf('?') < 0) ? '?' : '&';
 		url += delim + Q.queryString(fields);
 	}
+	url = Q.url(url);
 	if (typeof slotNames === 'function') {
 		options = callback;
 		callback = slotNames;
