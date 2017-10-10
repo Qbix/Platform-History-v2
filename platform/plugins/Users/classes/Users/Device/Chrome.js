@@ -74,9 +74,9 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 			auth: this.fields.auth,
 			p256dh: this.fields.p256dh
 		}
-	}, JSON.stringify(notification)).then(function(){
+	}, JSON.stringify(notification)).then(function () {
 		Q.handle(callback, this);
-	}).catch(function(){
+	}).catch(function (err) {
 		Q.handle(callback, this, [err]);
 	});
 };
