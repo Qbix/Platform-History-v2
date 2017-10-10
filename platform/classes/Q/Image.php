@@ -169,7 +169,7 @@ class Q_Image
 	
 		// check whether we can write to this path, and create dirs if needed
 		$path = isset($params['path'])
-			? Q_Utils::interpolateUrl($params['path'])
+			? Q_Uri::interpolateUrl($params['path'])
 			: 'Q/uploads';
 		$subpath = isset($params['subpath']) ? $params['subpath'] : '';
 		$realPath = Q::realPath(APP_WEB_DIR.DS.$path);

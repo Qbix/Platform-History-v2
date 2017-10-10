@@ -1732,7 +1732,7 @@ class Streams_Stream extends Base_Streams_Stream
 	function iconUrl($basename = null)
 	{
 		if (empty($this->icon)) return '';
-		$url = Q_Utils::interpolateUrl($this->icon, array(
+		$url = Q_Uri::interpolateUrl($this->icon, array(
 			'publisherId' => Q_Utils::splitId($this->publisherId)
 		));
 		$url = (Q_Valid::url($url))
