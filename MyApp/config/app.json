@@ -69,7 +69,7 @@
 					"{{Streams}}/css/Streams.css": "css/all.css",
 					"css/MyApp.css": "css/all.css",
 					"{{Q}}/js/jquery-3.2.1.min.js": "js/all.js",
-					"{{Q}}/js/handlebars-v4.0.10.js": "js/all.js",
+					"{{Q}}/js/handlebars-v4.0.10.min.js": "js/all.js",
 					"{{Q}}/js/Q.js": "js/all.js",
 					"{{Users}}/js/Users.js": "js/all.js",
 					"{{Streams}}/js/Streams.js": "js/all.js",
