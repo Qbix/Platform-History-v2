@@ -789,7 +789,7 @@ class Q_Utils
 	static function nodeUrl () {
 		$url = Q_Config::get('Q', 'node', 'url', null);
 		if (isset($url)) {
-			return self::interpolateUrl($url);
+			return Q_Uri::interpolateUrl($url);
 		}
 		$host = Q_Config::get('Q', 'node', 'host', null);
 		$port = Q_Config::get('Q', 'node', 'port', null);
