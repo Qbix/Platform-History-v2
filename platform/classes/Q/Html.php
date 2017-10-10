@@ -1373,7 +1373,7 @@ class Q_Html
 			return $result;
 		}
 		
-		$filePath2 = Q_Utils::interpolateUrl($filePath);
+		$filePath2 = Q_Uri::interpolateUrl($filePath);
 		
 		if (!$ignoreEnvironment
 		and $environment = Q_Config::get('Q', 'environment', false)) {
