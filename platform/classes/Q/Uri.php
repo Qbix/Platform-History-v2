@@ -335,7 +335,7 @@ class Q_Uri
 		if (empty($url)) {
 			return null;
 		}
-		$url = Q_Utils::interpolateUrl($url);
+		$url = Q_Uri::interpolateUrl($url);
 			
 		static $routed_cache = array();
 		if (isset($routed_cache[$url])) {
@@ -398,7 +398,7 @@ class Q_Uri
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue; // this provides a way to disable a route via config
-				$pattern2 = Q_Utils::interpolateUrl($pattern);
+				$pattern2 = Q_Uri::interpolateUrl($pattern);
 				$uri_fields = self::matchSegments($pattern2, $segments);
 				if ($uri_fields !== false) {
 					$matched = true;
@@ -729,7 +729,6 @@ class Q_Uri
 				return false;
 			}
 		}
-
 		$url = Q_Request::baseUrl($controller).'/'.implode('/', $segments);
 		return $url;
 	}
@@ -838,7 +837,39 @@ class Q_Uri
 	}
 	
 	/**
-	 * Fixes a URL to have only one question mark and hash mark
+	 * Interpolate some standard placeholders inside a url, such as 
+	 * {{AppName}} or {{PluginName}}
+	 * @static
+	 * @method interpolateUrl
+	 * @param {string} $url
+	 * @param {array} [$additional=array()] Any additional substitutions
+	 * @return {strQ_Uri::interpolateUrlitutions applied
+	 */
+	static function interpolateUrl($url, $additional = array())
+	{
+		if (strpos($url, '{{') === false) {
+			return $url;
+		}
+		$app = Q::app();
+		$baseUrl = Q_Request::baseUrl();
+		$substitutions = array(
+			'baseUrl' => $baseUrl,
+			$app => $baseUrl
+		);
+		$plugins = Q_Config::expect('Q', 'plugins');
+		$plugins[] = 'Q';
+		foreach ($plugins as $plugin) {
+			$substitutions[$plugin] = Q_Uri::pluginBaseUrl($plugin);
+		}
+		$url = Q::interpolate($url, $substitutions);
+		if ($additional) {
+			$url = Q::interpolate($url, $additional);
+		}
+		return $url;
+	}
+	
+	/**
+	 * Interpolates a URL and fixes it to have only one question mark and hash mark.
 	 * @method fixUrl
 	 * @static
 	 * @param {string} $url The url to fix
@@ -846,6 +877,7 @@ class Q_Uri
 	 */
 	static function fixUrl($url)
 	{
+		$url = self::interpolateUrl($url);
 		$pieces = explode('?', $url);
 		$url = $pieces[0];
 		if (isset($pieces[1])) {

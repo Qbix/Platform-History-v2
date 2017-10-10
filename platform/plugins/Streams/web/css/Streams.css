@@ -189,7 +189,8 @@
 
 .Streams_participants_tool .Users_avatar_tool,
 .Streams_participants_tool .Streams_participants_invite {
-	width: 44px;
+	display: inline-block;
+	width: 45px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;

@@ -4003,20 +4003,21 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $publisherId
 	 *	The name of the publisher
-	 * @param {string} $streamName
+	 * @param {string} $name
 	 *	The name of the stream
 	 * @param {string} $what
 	 *	Defaults to 'stream'. Can also be 'message', 'relation', etc.
 	 * @return {string} 
 	 *	The corresponding URL
 	 */
-	static function actionUrl($publisherId, $streamName, $what = 'stream')
+	static function actionUrl($publisherId, $name, $what = 'stream')
 	{
 		switch ($what) {
 			case 'stream':
 			case 'message':
 			case 'relation':
-				return Q_Uri::url("Streams/$what?publisherId=".urlencode($publisherId)."&name=".urlencode($streamName));
+				$qs = http_build_query(compact('publisherId', 'name'));
+				return Q_Uri::url("Streams/$what?$qs");
 		}
 		return null;
 	}
