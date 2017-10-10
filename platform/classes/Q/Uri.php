@@ -877,7 +877,7 @@ class Q_Uri
 	 */
 	static function fixUrl($url)
 	{
-		$url = self::interpolateUrl($url);
+		$url = Q_Uri::interpolateUrl($url);
 		$pieces = explode('?', $url);
 		$url = $pieces[0];
 		if (isset($pieces[1])) {
