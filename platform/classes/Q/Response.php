@@ -251,7 +251,7 @@ class Q_Response
 		if (Q_Response::$layoutView) {
 			return Q_Response::$layoutView;
 		}
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$layout_view = Q_Config::get('Q', 'response', 'layout', 'html', "$app/layout/html.php");
 		$desktop_layout_view = Q_Config::get('Q', 'response', 'layout', 'desktop', false);
 		if ($desktop_layout_view) {

@@ -186,7 +186,7 @@ $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
 echo 'Q Platform app installer'.PHP_EOL;
 
-$app = Q_Config::expect('Q', 'app');
+$app = Q::app();
 $uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
 	$web_uploads_path = APP_WEB_DIR.DS.'Q'.DS.'uploads';

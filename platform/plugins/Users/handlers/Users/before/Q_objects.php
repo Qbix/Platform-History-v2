@@ -2,7 +2,7 @@
 
 function Users_before_Q_objects(&$params)
 {
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 
 	// We sometimes pass this in the request, for browsers like Safari
 	// that don't allow setting of cookies using javascript inside 3rd party iframes

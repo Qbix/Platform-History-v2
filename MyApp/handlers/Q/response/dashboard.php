@@ -2,7 +2,7 @@
 
 function Q_response_dashboard()
 {	
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$slogan = "Powered by Qbix.";
 	$user = Users::loggedInUser();
 	if (Users::loggedInUser(false, false)) {

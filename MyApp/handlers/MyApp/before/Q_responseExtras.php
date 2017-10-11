@@ -2,7 +2,7 @@
 
 function MyApp_before_Q_responseExtras()
 {
-	$app = Q_Config::expect('Q', 'app');	
+	$app = Q::app();	
 	
 	Q_Response::addStylesheet('{{Q}}/css/Q.css');
 	Q_Response::addStylesheet('css/MyApp.css', '@end');

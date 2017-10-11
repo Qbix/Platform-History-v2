@@ -4146,7 +4146,7 @@ abstract class Streams extends Base_Streams
 	
 	static function invitationsPath($invitingUserId)
 	{
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$subpath = Q_Config::get(
 			'Streams', 'invites', 'subpath',
 			'{{app}}/uploads/Streams/invitations'

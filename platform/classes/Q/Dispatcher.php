@@ -79,7 +79,7 @@ class Q_Dispatcher
 	 */
 	static function notFound()
 	{
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		self::forward("$app/notFound");
 	}
 	
@@ -207,21 +207,21 @@ class Q_Dispatcher
 				self::$routed = self::$uri->toArray();
 			}
 
-			// If no module was found, then respond with noModule and return
-			if (!isset(self::$uri->module)) {
-				/**
-				 * Occurs when no module was found during routing.
-				 * The parameters are the routed array
-				 * @event Q/noModule
-				 */
-				Q::event("Q/noModule", self::$routed); // should echo things
-				self::result("No module");
-				return false;
-			}
-			
-			$module = self::$uri->module;
-
 			try {
+				// If no module was found, then respond with noModule and return
+				if (!isset(self::$uri->module)) {
+					/**
+					 * Occurs when no module was found during routing.
+					 * The parameters are the routed array
+					 * @event Q/noModule
+					 */
+					Q::event("Q/noModule", self::$routed); // should echo things
+					self::result("No module");
+					return false;
+				}
+
+				$module = self::$uri->module;
+
 				// Implement restricting of modules we are allowed to access
 				$routed_modules = Q_Config::get('Q', 'routedModules', null);
 				if (isset($routed_modules)) {
