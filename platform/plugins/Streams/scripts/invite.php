@@ -71,7 +71,7 @@ try {
 	die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
 }
 
-$app = Q_Config::expect('Q', 'app');
+$app = Q::app();
 $identifier = $FROM_APP ? $argv[1] : $argv[2];
 $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
 $labels = array_slice($argv, $FROM_APP ? 3 : 4);

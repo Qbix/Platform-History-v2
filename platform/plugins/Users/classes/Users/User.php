@@ -240,7 +240,7 @@ class Users_User extends Base_Users_User
 			$user->icon = $updatedFields['icon'] = 'default';
 		}
 		if (!empty($updatedFields['username'])) {
-			$app = Q_Config::expect('Q', 'app');
+			$app = Q::app();
 			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', true);
 			if ($unique) {
 				$username = $updatedFields['username'];
@@ -492,7 +492,7 @@ class Users_User extends Base_Users_User
 			$fields2 = array_merge($fields, array(
 				'user' => $this,
 				'email' => $email,
-				'app' => Q_Config::expect('Q', 'app'),
+				'app' => Q::app(),
 				'communityName' => $communityName,
 				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
@@ -687,7 +687,7 @@ class Users_User extends Base_Users_User
 			$fields2 = array_merge($fields, array(
 				'user' => $this,
 				'mobile' => $mobile,
-				'app' => Q_Config::expect('Q', 'app'),
+				'app' => Q::app(),
 				'communityName' => $communityName,
 				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),

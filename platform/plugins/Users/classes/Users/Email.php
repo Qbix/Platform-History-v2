@@ -63,7 +63,7 @@ class Users_Email extends Base_Users_Email
 			);
 		}
 		
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$subject = Q_Handlebars::renderSource($subject, $fields);
 		$body = Q::view($view, $fields);
 
@@ -249,7 +249,7 @@ class Users_Email extends Base_Users_Email
 		$fields2 = array_merge($fields, array(
 			'user' => $user,
 			'email' => $this,
-			'app' => Q_Config::expect('Q', 'app'),
+			'app' => Q::app(),
 			'communityName' => $communityName,
 			'communitySuffix' => $communitySuffix,
 			'baseUrl' => Q_Request::baseUrl(),

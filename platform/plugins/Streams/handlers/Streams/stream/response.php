@@ -45,7 +45,7 @@ function Streams_stream_response()
 				Q_Response::setSlot('related', null);
 				Q_Response::setSlot('relatedTo', null);
 			} else if (!Q_Request::slotName('streams')) {
-				$app = Q_Config::expect('Q', 'app');
+				$app = Q::app();
 				Q_Dispatcher::forward("$app/notFound");
 			}
 			return null;

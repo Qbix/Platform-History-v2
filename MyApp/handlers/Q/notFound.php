@@ -7,8 +7,9 @@
  */
 function Q_notFound($params)
 {
-	$uri = Q::ifset(Q_Dispatcher::uri(), 'module', $app);
 	$app = Q::app();
+	$uri = Q_Dispatcher::uri();
+	$module = Q::ifset($uri, 'module', $app);
 	if ($module !== $app) {
 		$module = $app;
 	}
