@@ -1,7 +1,13 @@
 <?php
 
 /**
+ * @module Q-tools
+ */
+
+/**
  * This tool is meant to be wrapped in a <form> tag
+ * @class Q form
+ * @constructor
  * @param {array} $options An associative array of parameters, containing:
  * @param {array} $options.fields an associative array of fieldname => fieldinfo pairs,
  *   where fieldinfo contains the following:
@@ -152,7 +158,7 @@ function Q_form_tool($options)
 	}
 	$fields = array('onSubmit', 'onResponse', 'onSuccess', 'slotsToRequest', 'loader', 'contentElements');
 	Q_Response::setToolOptions(Q::take($options, $fields));
-	Q_Response::addScript('Q/plugins/Q/js/tools/form.js');
-	Q_Response::addStylesheet('Q/plugins/Q/css/form.css');
+	Q_Response::addScript('{{Q}}/js/tools/form.js');
+	Q_Response::addStylesheet('{{Q}}/css/form.css');
 	return $result;
 }

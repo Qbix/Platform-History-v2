@@ -1281,7 +1281,7 @@ class Q_Html
 	static function popIdPrefix ()
 	{
 		if (count(self::$id_prefixes) <= 1) {
-			throw new Exception("Nothing to Qbix from prefix stack");
+			throw new Exception("Nothing to pop from prefix stack");
 		}
 		array_pop(self::$tool_ids);
 		$popped_prefix = array_pop(self::$id_prefixes);
@@ -1299,9 +1299,6 @@ class Q_Html
 	 */
 	static function getIdPrefix ($tool_name = null)
 	{
-		if (!isset($tool_name)) {
-			$tool_name = Q::$toolName;
-		}
 		$tool_name = $tool_name ? $tool_name : Q::$toolName;
 		return is_string(self::$id_prefix)
 			? self::$id_prefix
@@ -1376,18 +1373,22 @@ class Q_Html
 			return $result;
 		}
 		
+		$filePath2 = Q_Uri::interpolateUrl($filePath);
+		
 		if (!$ignoreEnvironment
 		and $environment = Q_Config::get('Q', 'environment', false)) {
 			if ($info = Q_Config::get('Q', 'environments', $environment, false)) {
 				if (!empty($info['files'][$filePath])) {
-					$filePath = $info['files'][$filePath];
+					$filePath2 = $info['files'][$filePath];
+				} else if (!empty($info['files'][$filePath2])) {
+					$filePath2 = $info['files'][$filePath2];
 				}
 			}
 		}
 		
 		$filename = false;
-		if (Q_Valid::url($filePath)) {
-			$url = $filePath;
+		if (Q_Valid::url($filePath2)) {
+			$url = $filePath2;
 		} else {
 			$theme = Q_Uri::url(self::themeUrl());
 			$themes = self::$themes;
@@ -1398,7 +1399,7 @@ class Q_Html
 				for ($i = $c - 1; $i >= 0; -- $i) {
 					try {
 						$filename = Q_Uri::filenameFromUrl(
-							$themes[$i] . '/' . $filePath
+							$themes[$i] . '/' . $filePath2
 						);
 					} catch (Exception $e) {
 						continue;
@@ -1409,7 +1410,7 @@ class Q_Html
 					}
 				}
 			}
-			$url = $theme . ($filePath ? '/'.$filePath : $filePath);
+			$url = $theme . ($filePath2 ? '/'.$filePath2 : $filePath2);
 		}
 		
 		if (empty($filename)) {

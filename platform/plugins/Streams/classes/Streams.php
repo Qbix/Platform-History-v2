@@ -3523,7 +3523,7 @@ abstract class Streams extends Base_Streams
 			? $options['appUrl']
 			: Q_Request::baseUrl().'/'.Q_Config::get(
 				"Streams", "types", $stream->type, 
-				"invite", "url", "Q/plugins/Streams/stream"
+				"invite", "url", "{{Streams}}/stream"
 			);
 
 		// now check and define levels for invited user
@@ -3854,7 +3854,10 @@ abstract class Streams extends Base_Streams
 					$r->toStreamName,
 					$r->type,
 					$stream->publisherId,
-					$stream->name
+					$stream->name,
+					array(
+						'skipAccess' => true
+					)
 				);
 			} catch (Exception $e) {}
 		}
@@ -3906,6 +3909,19 @@ abstract class Streams extends Base_Streams
 		$last = trim($last);
 
 		return compact('first', 'last');
+	}
+	
+	/**
+	 * Get a stream of type "Streams/experience" published by the community
+	 * @method experience
+	 * @static
+	 * @param {string} [$experienceId='main']
+	 * @return {Streams_Stream}
+	 */
+	static function experience($experienceId = 'main')
+	{
+		$communityId = Users::communityId();
+		return Streams::fetchOne(null, $communityId, "Streams/experience/$experienceId", true);
 	}
 
 	/**
@@ -3987,20 +4003,21 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $publisherId
 	 *	The name of the publisher
-	 * @param {string} $streamName
+	 * @param {string} $name
 	 *	The name of the stream
 	 * @param {string} $what
 	 *	Defaults to 'stream'. Can also be 'message', 'relation', etc.
 	 * @return {string} 
 	 *	The corresponding URL
 	 */
-	static function actionUrl($publisherId, $streamName, $what = 'stream')
+	static function actionUrl($publisherId, $name, $what = 'stream')
 	{
 		switch ($what) {
 			case 'stream':
 			case 'message':
 			case 'relation':
-				return Q_Uri::url("Streams/$what?publisherId=".urlencode($publisherId)."&name=".urlencode($streamName));
+				$qs = http_build_query(compact('publisherId', 'name'));
+				return Q_Uri::url("Streams/$what?$qs");
 		}
 		return null;
 	}

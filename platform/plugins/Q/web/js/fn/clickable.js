@@ -14,7 +14,7 @@
  * @param {Object} [options] options for function configuration
  * @param {String} [options.className] any CSS classes to add to the container element
  * @param {Object|null} [options.shadow] shadow effect configuration, or false for no shadow
- * @param {String} [options.shadow.src="Q/plugins/Q/img/shadow3d.png"] url of the shadow image
+ * @param {String} [options.shadow.src="{{Q}}/img/shadow3d.png"] url of the shadow image
  * @param {Number} [options.shadow.stretch=1.5] stretch
  * @param {Number} [options.shadow.dip=0.25] dip
  * @param {Number} [options.shadow.opacity=0.5] opacity
@@ -411,7 +411,7 @@ function _Q_clickable(o) {
 
 {	// default options
 	shadow: {
-		src: "Q/plugins/Q/img/shadow3d.png",
+		src: "{{Q}}/img/shadow3d.png",
 		stretch: 1.5,
 		dip: 0.25,
 		opacity: 0.5

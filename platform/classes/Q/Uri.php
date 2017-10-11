@@ -254,6 +254,27 @@ class Q_Uri
 	}
 	
 	/**
+	 * Get the base url of a plugin
+	 * @method pluginBaseUrl
+	 * @static
+	 * @param string $plugin The name of the plugin, with first letter uppercase.
+	 * @return {string} Returns an absolute or relative URL
+	 */
+	static function pluginBaseUrl($plugin)
+	{
+		/**
+		 * Hook for custom logic modifying the urls for a plugin
+		 * @event Q/Uri/pluginUrl {before}
+		 * @param {string} plugin
+		 * @return {string}
+		 */
+		if ($url = Q::event('Q/Uri/pluginUrl', compact('url'), 'before')) {
+			return;
+		}
+		return "Q/plugins/$plugin";
+	}
+	
+	/**
 	 * Returns the value of the specified URI field, or null
 	 * if it is not present.
 	 * @method __get
@@ -314,6 +335,7 @@ class Q_Uri
 		if (empty($url)) {
 			return null;
 		}
+		$url = Q_Uri::interpolateUrl($url);
 			
 		static $routed_cache = array();
 		if (isset($routed_cache[$url])) {
@@ -376,7 +398,8 @@ class Q_Uri
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue; // this provides a way to disable a route via config
-				$uri_fields = self::matchSegments($pattern, $segments);
+				$pattern2 = Q_Uri::interpolateUrl($pattern);
+				$uri_fields = self::matchSegments($pattern2, $segments);
 				if ($uri_fields !== false) {
 					$matched = true;
 					foreach ((array)$uri_fields as $k => $v) {
@@ -391,7 +414,7 @@ class Q_Uri
 					if (!empty($fields[''])) {
 						$params = array(
 							'fields' => $uri_fields, 
-							'pattern' => $pattern, 
+							'pattern' => $pattern,
 							'fromUrl' => $url
 						);
 						if (false === Q::event($fields[''], $params)) {
@@ -706,7 +729,6 @@ class Q_Uri
 				return false;
 			}
 		}
-
 		$url = Q_Request::baseUrl($controller).'/'.implode('/', $segments);
 		return $url;
 	}
@@ -815,7 +837,39 @@ class Q_Uri
 	}
 	
 	/**
-	 * Fixes a URL to have only one question mark and hash mark
+	 * Interpolate some standard placeholders inside a url, such as 
+	 * {{AppName}} or {{PluginName}}
+	 * @static
+	 * @method interpolateUrl
+	 * @param {string} $url
+	 * @param {array} [$additional=array()] Any additional substitutions
+	 * @return {strQ_Uri::interpolateUrlitutions applied
+	 */
+	static function interpolateUrl($url, $additional = array())
+	{
+		if (strpos($url, '{{') === false) {
+			return $url;
+		}
+		$app = Q::app();
+		$baseUrl = Q_Request::baseUrl();
+		$substitutions = array(
+			'baseUrl' => $baseUrl,
+			$app => $baseUrl
+		);
+		$plugins = Q_Config::expect('Q', 'plugins');
+		$plugins[] = 'Q';
+		foreach ($plugins as $plugin) {
+			$substitutions[$plugin] = Q_Uri::pluginBaseUrl($plugin);
+		}
+		$url = Q::interpolate($url, $substitutions);
+		if ($additional) {
+			$url = Q::interpolate($url, $additional);
+		}
+		return $url;
+	}
+	
+	/**
+	 * Interpolates a URL and fixes it to have only one question mark and hash mark.
 	 * @method fixUrl
 	 * @static
 	 * @param {string} $url The url to fix
@@ -823,6 +877,7 @@ class Q_Uri
 	 */
 	static function fixUrl($url)
 	{
+		$url = Q_Uri::interpolateUrl($url);
 		$pieces = explode('?', $url);
 		$url = $pieces[0];
 		if (isset($pieces[1])) {

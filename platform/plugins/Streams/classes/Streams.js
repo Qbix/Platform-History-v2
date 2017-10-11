@@ -362,6 +362,7 @@ Streams.define = function (type, ctor, methods) {
  * @method listen
  * @static
  * @param {Object} options={} So far no options are implemented.
+ * @return {Boolean} Whether the server has started
  */
 Streams.listen = function (options) {
 
@@ -370,6 +371,10 @@ Streams.listen = function (options) {
 	server.attached.express.post('/Q/node', Streams_request_handler);
 
 	// Start external socket server
+	var node = Q.Config.get(['Q', 'node']);
+	if (!node) {
+		return false;
+	}
 	var pubHost = Q.Config.get(['Streams', 'node', 'host'], Q.Config.get(['Q', 'node', 'host'], null));
 	var pubPort = Q.Config.get(['Streams', 'node', 'port'], Q.Config.get(['Q', 'node', 'port'], null));
 
@@ -486,6 +491,7 @@ Streams.listen = function (options) {
 			delete Streams.observing[client.id];
 		});
 	});
+	return true;
 };
 
 /**
@@ -1052,10 +1058,8 @@ Streams.iconUrl = function(icon, size) {
 		size = '40';
 	}
 	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = (icon + '/' + size).interpolate({
-		"baseUrl": Q.Config.expect('Q', 'web', 'appRootUrl')
-	});
-	return src.isUrl() ? src : Q.url('Q/plugins/Streams/img/icons/'+src);
+	var src = Q.interpolateUrl(icon + '/' + size);
+	return src.isUrl() ? src : Q.url('{{Streams}}/img/icons/'+src);
 };
 
 Streams.invitedUrl = function _Streams_invitedUrl(token) {

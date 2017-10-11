@@ -19,12 +19,12 @@ var Users = Q.Users;
  *   @param {String} [options.className] Any css classes to add to the tool element
  *   @param {Object} [options.templates] Object for avatar template parameters
  *     @param {Object} [options.templates.icon]
- *       @param {String} [options.templates.icon.dir='Q/plugins/Users/views']
+ *       @param {String} [options.templates.icon.dir='{{Users}}/views']
  *       @param {String} [options.templates.icon.name='Users/avatar/icon']
  *       @param {Object} [options.templates.icon.fields]
  *         @param {String} [options.templates.icon.fields.alt="user icon"]
  *     @param {Object} [options.templates.contents]
- *       @param {String} [options.templates.contents.dir='Q/plugins/Users/views']
+ *       @param {String} [options.templates.contents.dir='{{Users}}/views']
  *       @param {String} [options.templates.contents.name='Users/avatar/contents']
  *       @param {Object} [options.templates.contents.fields]
  *         @param {String} [options.templates.contents.fields.tag="span"]
@@ -55,12 +55,12 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	contents: true,
 	templates: {
 		icon: {
-			dir: 'Q/plugins/Users/views',
+			dir: '{{Users}}/views',
 			name: 'Users/avatar/icon',
 			fields: { alt: "user icon" }
 		},
 		contents: {
-			dir: 'Q/plugins/Users/views',
+			dir: '{{Users}}/views',
 			name: 'Users/avatar/contents',
 			fields: { tag: "span" }
 		}

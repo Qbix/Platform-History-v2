@@ -23,14 +23,16 @@ class Q_Text
 	 * @param {string} [$options.locale=null] Override locale
 	 * @return {string} something like "en-US"
 	 */
-	static function basename($options)
+	static function basename($options = array())
 	{
 		if (isset($options['language'])) {
 			$language = $options['language'];
 			$locale = Q::ifset($options, 'locale', '');
 		} else {
 			$language = self::$language;
-			$locale = self::$locale;	
+			$locale = Q_Config::get('Q', 'text', 'useLocale', false)
+				? self::$locale
+				: '';
 		}
 		return $locale ? "$language-$locale" : $language;
 	}
@@ -153,8 +155,8 @@ class Q_Text
 			}
 			++$j;
 		}
-		$result = array();
 		$count = count($try);
+		$tree = new Q_Tree();
 		for ($j=0; $j<$count; ++$j) {
 			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
 			if ($text = call_user_func_array(array('Q_Config', 'get'), $p)) {
@@ -167,9 +169,9 @@ class Q_Text
 				} else {
 					$o = array();
 				}
-				$result = array_merge($result, Q_Text::get($text, true, $o));
+				$tree->merge(Q_Text::get($text, true, $o));
 			}
 		}
-		return $result;
+		return $tree->getAll();
 	}
 }

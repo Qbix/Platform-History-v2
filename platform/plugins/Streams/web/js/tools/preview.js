@@ -29,9 +29,12 @@
  *     @param {Function} [options.creatable.preprocess] This function receives 
  *       (a callback, this tool, the event if any that triggered it). 
  *       This is your chance to do any processing before the request to create the stream is sent.
- *       The function must call the callback. If it passes false as the first parameter,
- *       it stops the process from continuing. However, if you want to go ahead and continue
- *       to call Q.Streams.create, you can pass here any extra fields for the stream, such
+ *       The function must call the callback.
+ *       If you handled creating the stream yourself, pass the stream name as the first parameter,
+ *       (and optionally the weight of the relation as the second parameter.)
+ *       If you canceled the process, pass false instead as the first parameter.
+ *       However, if you want to go ahead and let the preview tool call Q.Streams.create,
+ *       you can pass here a plain Object with any fields to set for the stream, such
  *       as "title", "content", "attributes" (as JSON string), etc.
  *   @param {Object} [options.imagepicker] Any options to pass to the Q/imagepicker jquery plugin -- see its options.
  *   @uses Q imagepicker
@@ -39,12 +42,12 @@
  *   @uses Q actions
  *   @param {Object} [options.sizes] If passed, uses this instead of Q.Streams.image.sizes for the sizes
  *   @param {Object} [options.overrideShowSize]  A hash of {icon: size} pairs to override imagepicker.showSize when the icon is a certain string. The empty string matches all icons.
- *   @param {String} [options.throbber="Q/plugins/Q/img/throbbers/loading.gif"] The url of an image to use as an activity indicator when the image is loading
+ *   @param {String} [options.throbber="{{Q}}/img/throbbers/loading.gif"] The url of an image to use as an activity indicator when the image is loading
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Q.Event} [options.beforeCreate] An event that occurs right before a composer requests to create a new stream
  *   @param {Q.Event} [options.onCreate] An event that occurs after a new stream is created by a creatable preview
- *   @param {Q.Event} [options.onComposer] An event that occurs after a composer is rendered
- *   @param {Q.Event} [options.onRefresh] An event that occurs after a stream preview is rendered for an existing stream
+ *   @param {Q.Event} [options.onComposer] An event that occurs after a composer is rendered. Tools that extend Streams/preview can bind this event to a method to override the contents of the composer.
+ *   @param {Q.Event} [options.onRefresh] An event that occurs after a stream preview is rendered for an existing stream. Tools that extend Streams/preview can bind this event to a method to override the contents of the tool.
  *   @param {Q.Event} [options.onLoad] An event that occurs after the refresh calls its callback, which should happen when everything has fully rendered
  *   @param {Q.Event} [options.beforeClose] Optionally set to a function that takes a callback, to display e.g. a dialog box confirming whether to close the stream. It should call the callback with no arguments, in order to proceed with the closing.
  *   @param {Q.Event} [options.onClose] An event that occurs after a stream with a preview has been closed
@@ -83,12 +86,15 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		if (!$te.closest('html').length) {
 			return; // tool is removed
 		}
-		if (state.streamName) {
-			tool.loading();
-			tool.preview();
-		} else {
-			tool.composer();
-		}
+		Q.Text.get('Streams/content', function (err, content) {
+			_content = content;
+			if (state.streamName) {
+				tool.loading();
+				tool.preview();
+			} else {
+				tool.composer();
+			}
+		});
 	}, 0);
 },
 
@@ -96,13 +102,12 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	related: null,
 	editable: true,
 	creatable: {
-		title: null,
 		clickable: true,
 		addIconSize: 50,
 		streamType: null,
 		options: {}
 	},
-	throbber: "Q/plugins/Q/img/throbbers/loading.gif",
+	throbber: "{{Q}}/img/throbbers/loading.gif",
 
 	imagepicker: {
 		showSize: "50",
@@ -128,7 +133,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Masks.hide(this);
 		if (wasRemoved) {
 			this.$().hide(300, function () {
-				$(this).remove();
+				Q.removeElement(this, true);
 			});
 		}
 	}, 'Streams/preview'),
@@ -165,7 +170,18 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 {
 	create: function (event, callback) {
-		function _proceed(overrides) {
+		function _proceed(overrides, weight) {
+			if (typeof overrides === 'string') {
+				Q.Streams.get(state.publisherId, overrides, function (err) {
+					if (!err) {
+						state.streamName = overrides;
+						if (!isNaN(weight)) {
+							r.weight = weight;
+						}
+						Streams_preview_afterCreateRefresh.call(this);
+					}
+				});
+			}
 			if (overrides != undefined && !Q.isPlainObject(overrides)) {
 				return;
 			}
@@ -192,15 +208,14 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					messages: true
 				});
 				if (wait === false) {
-					Streams_preview_afterCreateRefresh();
-				}
-				var stream = this;
-				function Streams_preview_afterCreateRefresh(r) {
-					state.onCreate.handle.call(tool, stream);
-					Q.handle(callback, tool, [stream]);
-					tool.preview();
+					Streams_preview_afterCreateRefresh.call(this);
 				}
 			}, r, state.creatable.options);
+			function Streams_preview_afterCreateRefresh() {
+				state.onCreate.handle.call(tool, this);
+				Q.handle(callback, tool, [this]);
+				tool.preview();
+			}
 		}
 		var tool = this;
 		var state = tool.state;
@@ -217,9 +232,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var state = tool.state;
 		var f = state.template && state.template.fields;
 		var fields = Q.extend({
-			alt: "New Item",
-			title: "New Item",
-			src: Q.url('Q/plugins/Q/img/actions/add.png'),
+			alt: _content.preview.NewItemTitle,
+			title: _content.preview.NewItemTitle,
+			src: Q.url('{{Q}}/img/actions/add.png'),
 			prefix: tool.prefix
 		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
 		tool.element.addClass('Streams_preview_create');
@@ -473,6 +488,8 @@ Q.Template.set('Streams/preview/create',
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
 	+ '</div></div>'
 );
+
+var _content = {};
 
 function _setWidthHeight(tool, $img) {
 	var state = tool.state;

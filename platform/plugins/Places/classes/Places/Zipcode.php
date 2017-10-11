@@ -54,26 +54,24 @@ class Places_Zipcode extends Base_Places_Zipcode
 		$longGrid = abs($latGrid / cos(deg2rad($latitude)));
 		
 		// Now, select zipcodes in a bounding box using one of the indexes
-		$q = Places_Zipcode::select('*')->where(array(
-			'latitude >' => $latitude - $latGrid,
-			'latitude <' => $latitude + $latGrid
+		$q = Places_Zipcode::select('*')
+		->where(array('latitude' => new Db_Range(
+			$latitude - $latGrid, false, true, $latitude + $latGrid
+		)));
+		$condition1 = array('longitude' => new Db_Range(
+			max($longitude - $longGrid, -180), false,
+			false, min($longitude + $longGrid, 180)
 		));
-		$longitudes = array(
-			'longitude >' => max($longitude - $longGrid, -180),
-			'longitude <' => min($longitude + $longGrid, 180),
-		);
-		if ($latitude + $longGrid > 180) {
-			$q->andWhere($longitudes, array(
-				'longitude >' => -180, // should always be the case anyway
-				'longitude <' => $longitude + $longGrid - 180 * 2,
-			));
-		} else if ($latitude - $longGrid < -180) {
-			$q->andWhere($longitudes, array(
-				'longitude <=' => 180, // should always be the case anyway
-				'longitude >' => $longitude - $longGrid + 180 * 2,
-			));
+		if ($longitude + $longGrid > 180) {
+			$q = $q->andWhere($condition1, array('longitude' => new Db_Range(
+				-180, true, false, $longitude + $longGrid - 180 * 2
+			)));
+		} else if ($longitude - $longGrid < -180) {
+			$q = $q->andWhere($condition1, array('longitude' => new Db_Range(
+				$longitude - $longGrid + 180 * 2, false, true, 180
+			)));
 		} else {
-			$q->andWhere($longitudes);
+			$q = $q->andWhere($condition1);
 		}
 		$latitude = substr($latitude, 0, 10);
 		$longitude = substr($longitude, 0, 10);

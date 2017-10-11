@@ -27,7 +27,7 @@
  *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
  *  @param {array}  [options.scrollbarsAutoHide] If not null, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android, false everywhere else.
- *  @param {array}   [options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true, 'controls' => $html) with "controls" and "close" being optional
+ *  @param {array}   [options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true, 'controls' => $html, 'url' => $url) with "controls", "close" and $url being optional
  * @return {string}
  */
 function Q_columns_tool($options)
@@ -40,13 +40,13 @@ function Q_columns_tool($options)
 	if (!isset($options['columns'])) {
 		return '';
 	}
-	Q_Response::addScript('Q/plugins/Q/js/tools/columns.js');
-	Q_Response::addStylesheet('Q/plugins/Q/css/columns.css');
+	Q_Response::addScript('{{Q}}/js/tools/columns.js');
+	Q_Response::addStylesheet('{{Q}}/css/columns.css');
 	$result = '<div class="Q_columns_container Q_clearfix">';
 	$columns = array();
 	$i=0;
-	$closeSrc = Q::ifset($options, 'close', 'src', 'Q/plugins/Q/img/x.png');
-	$backSrc = Q::ifset($options, 'back', 'src', 'Q/plugins/Q/img/back-v.png');
+	$closeSrc = Q::ifset($options, 'close', 'src', '{{Q}}/img/x.png');
+	$backSrc = Q::ifset($options, 'back', 'src', '{{Q}}/img/back-v.png');
 	foreach ($options['columns'] as $name => $column) {
 		$close = Q::ifset($column, 'close', $i > 0);
 		$Q_close = Q_Request::isMobile() ? 'Q_close' : 'Q_close Q_back';
@@ -54,11 +54,19 @@ function Q_columns_tool($options)
 			? '<div class="Q_close Q_back">'.Q_Html::img($backSrc, 'Back').'</div>'
 			: '<div class="Q_close">'.Q_Html::img($closeSrc, 'Close').'</div>');
 		$n = Q_Html::text($name);
-		$columnClass = 'Q_column_'.Q_Utils::normalize($name) . ' Q_column_'.$i;
+		$n2 = Q_Utils::normalize($name, '_', null, null, true);
+		$columnClass = "Q_column_$n2 Q_column_$i";
+		$attrs1 = "data-index=\"$i\" data-name=\"$n\"";
+		if (isset($column['url'])) {
+			$attrs1 .= " data-url=\"" . Q_Html::text($column['url']) . "\"";
+		}
+		if (isset($column['attributes'])) {
+			$attrs1 .= ' ' . Q_Html::attributes($column['attributes']);
+		}
 		if (isset($column['html'])) {
 			$html = $column['html'];
 			$columns[] = <<<EOT
-	<div class="Q_columns_column $columnClass" data-index="$i" data-name="$n">
+	<div class="Q_columns_column $columnClass" $attrs1>
 		$html
 	</div>
 EOT;
@@ -70,21 +78,24 @@ EOT;
 			if ($controlsHtml) {
 				$classes .= ' Q_columns_hasControls';
 			}
-			$attrs = '';
+			$attrs2 = '';
 			if (isset($column['data'])) {
 				$json = Q::json_encode($column['data']);
-				$attrs = 'data-more="' . Q_Html::text($json) . '"';
-			}
-			if (isset($column['attributes'])) {
-				$attributes .= ' ' . Q_Html::attributes($column['attributes']);
+				$attrs2 = 'data-more="' . Q_Html::text($json) . '"';
 			}
 			$data = Q::ifset($column, 'data', '');
+			$titleElement = '';
+			if (isset($titleHtml)) {
+				$titleElement = <<<EOT
+	<div class="Q_columns_title">
+		$closeHtml
+		<h2 class="Q_title_slot">$titleHtml</h2>
+	</div>
+EOT;
+			}
 			$columns[] = <<<EOT
-	<div class="Q_columns_column $classes" data-index="$i" data-name="$n" $attrs>
-		<div class="Q_columns_title">
-			$closeHtml
-			<h2 class="Q_title_slot">$titleHtml</h2>
-		</div>
+	<div class="Q_columns_column $classes" $attrs1 $attrs2>
+		$titleElement
 		<div class="Q_column_slot">$columnHtml</div>
 		<div class="Q_controls_slot">$controlsHtml</div>
 	</div>

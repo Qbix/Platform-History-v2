@@ -138,7 +138,8 @@
 	"Places": {
 		"nearby": {
 			"meters": [1000, 5000, 10000, 15000, 20000, 25000, 50000, 75000, 100000],
-			"defaultMeters": 50000
+			"defaultMeters": 50000,
+			"invitedMeters": 50000
 		},
 		"geolocation": {
 			"requireLogin": false,

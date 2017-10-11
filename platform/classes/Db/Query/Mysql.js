@@ -1110,69 +1110,6 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 		var after = this.after[clause_name] || '';
 		return [clause, after];
 	};
-	
-	/**
-	 * Calculates which shards the query should be issued to, based on those
-	 * "WHERE" criteria that were specified in a structured way.
-	 * Used mostly by .execute(), but you can call it too, to see how a query
-	 * would be executed.
-	 * @method shard
-	 * @param {object} [index={}] Used internally to override configuration setting for sharding
-	 * @return {object} Returns a hash of shardName => query pairs, where shardName
-	 *  can be the name of a shard, or "*" to have the query run on all the shards.
-	 */
-	mq.shard = function(index) {
-		if (!this.className) {
-			return {"": this};
-		}
-		var point, max, field, i, value, hash, parts, shards, len, hashed = [], missing = 0;
-		var connName = this.db.connName;
-		var className = this.className.substr(connName.length + 1);
-		index = index || Q.Config.get(['Db', 'connections', connName, 'indexes', className], false);
-		if (!index) {
-			return {"": this};
-		}
-		if (Q.isEmpty(this.criteria)) {
-			return {"*": this};
-		}
-		if (Q.isEmpty(index.fields)) {
-			throw new Q.Exception("Db.Query.Mysql: index for " + this.className + " should have at least one field");
-		}
-		if (Q.isEmpty(index.partition)) {
-			return {"": this};
-		}
-		var arr, j, hashed_min, hashed_max;
-		var fields = Object.keys(index.fields);
-		for (i=0; i<fields.length; ++i) {
-			field = fields[i];
-			if (!(field in this.criteria)) return {"*": this};
-			value = this.criteria[field];
-			hash = index.fields[field] ? index.fields[field] : 'md5';
-			parts = hash.split('%');
-			hash = parts[0];
-			len = parts[1] ? parts[1] : _HASH_LEN;
-			if (Q.typeOf(value) === 'array') {
-				arr = [];
-				for (j=0; j<value.length; j++)
-					arr.push(applyHash(value[j], hash, len));
-				hashed[i] = arr;
-			} else if (value instanceof Db.Range) {
-				if (hash !== 'normalize') {
-					throw new Exception("Db.Query: ranges don't work with "+hash+" hash");
-				}
-				hashed_min = applyHash(value.min, hash, len);
-				hashed_max = applyHash(value.max, hash, len);
-				hashed[i] = new Db.Range(hashed_min, value.includeMin, value.includeMax, hashed_max);
-			} else {
-				hashed[i] = applyHash(value, hash, len);
-			}
-		}
-		// collect array of shards
-		shards = shard_internal(index, hashed);
-		var result = {}, mapping = (Q.typeOf(index.partition) === 'object' ? index.partition : false);
-		for (i=0; i<shards.length; i++) result[map_shard(shards[i], mapping)] = this;
-		return result;
-	};
 
 	/**
 	 * Gets the SQL that would be executed with the execute() method.
@@ -1241,100 +1178,6 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	};
 };
 
-/**
- * @method applyHash
- * @private
- * @param {string} value
- * @param {string} hash
- * @param {number} len
- * @return {string}
- * @throws {Q.Exception} if hash is not supported
- */
-function applyHash(value, hash, len)
-{
-	if (!hash) hash = 'normalize';
-	if (!len) len = _HASH_LEN;
-	if (value == null) {
-		return value;
-	}
-	switch (hash) {
-		case 'normalize':
-			hashed = Q.normalize(value).substr(0, len);
-			break;
-		case 'md5':
-			hashed = Q.Crypto.MD5(value).substr(0, len).toString();
-			break;
-		default:
-			throw new Q.Exception("Db.Query.Mysql: The hash " + hash + " is not supported");
-	}
-	while (hashed.length < len) hashed = " " + hashed;
-	return hashed;
-}
-
-function shard_internal(index, hashed) {
-	var partition = [], keys = Object.keys(index.fields), point, last_point = null, i, result = {};
-	var points = (Q.typeOf(index.partition) === 'object') ? Object.keys(index.partition) : index.partition;
-	for (i=0; i<points.length; i++) {
-		point = points[i];
-		partition[i] = point.split('.');
-		if (last_point && point <= last_point)
-			throw new Q.Exception("Db.Query.Mysql: in "+this.className+" partition, point "+i+" is not greater than the previous point");
-		last_point = point;
-	}
-	return slice_partitions(partition, 0, hashed);
-}
-
-function slice_partitions(partition, j, hashed, adjust) {
-	if (!adjust) adjust = false;
-	if (partition.length <= 1) return partition;
-	var hj = hashed[j], result = [], temp = hashed.slice(0), i, point;
-	
-	if (Q.typeOf(hj) === 'array') {
-		for (i=0; i<hj.length; i++) {
-			temp[j] = hj[i];
-			result = result.concat(slice_partitions(partition, j, temp, adjust));
-		}
-		return result;
-	}
-	var min = hj, max = hj;
-	if (hj instanceof Db.Range) {
-		min = hj.min;
-		max = hj.max;
-		if (min === null) {
-			throw new Q.Exception("Db.Query.Mysql slice_partitions: The minimum of the range should be set.");
-		}
-	}
-	var current, next = null;
-	var lower = 0, upper = partition.length-1;
-	var lower_found = false, upper_found = false;
-	
-	for (i=0; i<partition.length; i++) {
-		point = partition[i];
-		upper_found = upper_found && next;
-		current = point[j];
-		if (!adjust && max != null && current > max) break;
-		if ((next = (Q.getObject([i+1, j], partition) || null)) === current) continue;
-		if (adjust && current > next) lower_found = !(next = null);
-		if (!lower_found && next && min >= next) lower = i+1;
-		if (!upper_found) {
-			if (!next || max < next) {
-				upper = i;
-				if (!adjust) break;
-				else upper_found = true;
-			}
-		}
-	}
-	if (!Q.isEmpty(hashed[j+1]))
-		return slice_partitions(partition.slice(lower, upper+1), j+1, hashed, hj instanceof Db.Range || adjust);
-	else
-		return partition.slice(lower, upper+1);
-}
-
-function map_shard(a, map) {
-	var aj = a.join('.');
-	return map ? map[aj] : aj;
-}
-
 function replaceKeysCompare(a, b) {
 	var aIsInteger = Q.isInteger(a);
 	var bIsInteger = Q.isInteger(b);
@@ -1351,7 +1194,7 @@ function replaceKeysCompare(a, b) {
 }
 
 function criteria_internal (query, criteria) {
-	var criteria_list, expr, value, values, v, i, k;
+	var criteria_list, expr, parts, columns, value, values, v, i, j, k, vl, vl2, pl;
 	if (typeof criteria === 'object') {
 		criteria_list = [];
 		for (expr in criteria) {
@@ -1359,7 +1202,51 @@ function criteria_internal (query, criteria) {
 			if (value instanceof Buffer) {
 				value = value.toString();
 			}
-			if (value === undefined) {
+			parts = expr.split(',').map(function (str) {
+				return str.trim();
+			});
+			pl = parts.length;
+			if (pl > 1) {
+				if (!Q.isArrayLike(value)) {
+					throw new Q.Exception("Db.Query.Mysql: The value should be an array of arrays");
+				}
+				var columns = [];
+				for (k=0; k<pl; ++k) {
+					var column = parts[k];
+					columns.push(column);
+					if (!query.criteria[column]) {
+						query.criteria[column] = []; // sharding heuristics
+					}
+				}
+				var list = [];
+				for (j=0, vl=value.length; j<vl; ++j) {
+					if (!Q.isArrayLike(value[j])) {
+						var json = JSON.stringify(value[j]);
+						throw new Q.Exception(
+							"Db.Query.Mysql: Value " + json
+								+ " needs to be an array"
+						);
+					}
+					if (value[j].length != pl) {
+						throw new Q.Exception(
+							"Db_Query_Mysql: Arrays should have " + pl +
+							" elements to match " + expr
+						);
+					}
+					var vector = [];
+					for (k=0, vl2=value[j].length; k<vl2; ++k) {
+						vector.push(":_criteria_" + _valueCounter);
+						query.parameters["_criteria_" + _valueCounter] = value[j][k];
+						_valueCounter = (_valueCounter + 1) % 1000000;
+						query.criteria[column].push(value[j][k]); // sharding heuristics
+					}
+					list.push('(' + vector.join(',') + ')');
+				}
+
+				var lhs = '(' + columns.join(',') + ')';
+				var rhs = '(\n' + list.join(',\n') + '\n)';
+				criteria_list.push(lhs + ' IN ' + rhs);
+			} else if (value === undefined) {
 				// do not add this value to criteria
 			} else if (value == null) {
 				criteria_list.push( "ISNULL(" + expr + ")");
@@ -1388,10 +1275,6 @@ function criteria_internal (query, criteria) {
 				} else {
 					criteria_list.push( "" + expr + " IN (" + valueList + ")");
 				}
-			} else if (/\W/.test(expr.substr(-1))) {
-				criteria_list.push( "" + expr + ":_criteria_" + _valueCounter );
-				query.parameters["_criteria_" + _valueCounter] = value;
-				++ _valueCounter;
 			} else if (value && value.typename === 'Db.Range') {
 				if (value.min != null) {
 					var c_min = value.includeMin ? ' >= ' : ' > ';
@@ -1406,7 +1289,8 @@ function criteria_internal (query, criteria) {
 					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
 			} else {
-				criteria_list.push(expr + " = :_criteria_" + _valueCounter);
+				var eq = /\W/.test(expr.substr(-1)) ? '' : ' = ';
+				criteria_list.push( "" + expr + eq + ":_criteria_" + _valueCounter );
 				query.parameters["_criteria_" + _valueCounter] = value;
 				_valueCounter = (_valueCounter + 1) % 1000000;
 			}
@@ -1447,5 +1331,8 @@ function set_internal (query, updates) {
 	}
 	return updates;
 }
+
+debugger;
+Q.mixin(Query_Mysql, Db.Query);
 
 module.exports = Query_Mysql;

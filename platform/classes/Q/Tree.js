@@ -145,11 +145,12 @@ module.exports = function (linked) {
 		for (var i=0, len = keys.length; i<len; ++i) {
 			key = keys[i];
 			if (typeof result !== 'object') {
-				var sawString = '["' + sawKeys.join('"]["') + '"]';
-				throw new Q.Exception(
-					"Q.Tree: subtree at '"+sawString+"' is not an object", 
-					{keys: keys, key: key}
-				);
+				return def; // silently ignore the rest of the path
+				// var sawString = '["' + sawKeys.join('"]["') + '"]';
+				// throw new Q.Exception(
+				// 	"Q.Tree: subtree at '"+sawString+"' is not an object",
+				// 	{keys: keys, key: key}
+				// );
 			}
 			if (!result || key == null || !(key in result)) {
 				return def;

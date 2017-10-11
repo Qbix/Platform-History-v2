@@ -49,8 +49,8 @@ function Websites_article_tool($options)
 	}
 	$html = Q::ifset($options, 'html', array());
 	$article->addPreloaded();
-	Q_Response::addStylesheet('Q/plugins/Websites/css/Websites.css');
-	Q_Response::addScript("Q/plugins/Websites/js/Websites.js");
+	Q_Response::addStylesheet('{{Websites}}/css/Websites.css');
+	Q_Response::addScript("{{Websites}}/js/Websites.js");
 	Q_Response::setToolOptions($options);
 	return Q::view("Websites/tool/article.php", 
 		compact('article', 'getintouch', 'canEdit', 'canView', 'html')
