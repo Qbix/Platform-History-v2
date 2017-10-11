@@ -1665,10 +1665,10 @@ abstract class Users extends Base_Users
 	static function iconUrl($icon, $basename = null)
 	{
 		if (empty($icon)) {
-			return null;
+			return '';
 		}
-		$url = Q::interpolate($icon, array('baseUrl' => Q_Request::baseUrl()));
-		$url = Q_Valid::url($url) ? $url : "Q/plugins/Users/img/icons/$url";
+		$url = Q_Uri::interpolateUrl($icon);
+		$url = Q_Valid::url($url) ? $url : "{{Users}}/img/icons/$url";
 		if ($basename and strpos($basename, '.') === false) {
 			$basename .= ".png";
 		}

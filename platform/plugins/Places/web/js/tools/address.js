@@ -46,7 +46,7 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 		tool.refresh();
 	});
 	Q.Places.loadGoogleMaps(p.fill('google'));
-	$('<div />').tool('Q/filter', state.filter, 'filter')
+	$('<div />').tool('Q/filter', state.filter, 'Q_filter')
 	.appendTo(tool.element)
 	.activate(function () {
 		var filter = tool.filter = this;
@@ -130,7 +130,7 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 		}
 		$results.empty().append(
 			$('<img class="Places_address_results_loading" />').attr({
-				src: 'Q/plugins/Q/img/throbbers/loading.gif'
+				src: Q.url('{{Q}}/img/throbbers/loading.gif')
 			})
 		);
 		if (!latitude || !longitude || !searchQuery) {

@@ -1,7 +1,7 @@
 <?php
 
 function Assets_before_Q_responseExtras() {
-	Q_Response::addScript('Q/plugins/Assets/js/Assets.js');
+	Q_Response::addScript('{{Assets}}/js/Assets.js');
 
 	try {
 		$amount = Assets_Credits::amount();

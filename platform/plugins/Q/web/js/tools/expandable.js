@@ -15,7 +15,7 @@
  *  @param {Number} [options.spaceAbove] How many pixels of space to leave above at the end of the scrolling animation
  *  @param {Boolean} [options.expanded] Whether it should start out expanded
  *  @param {Boolean} [options.autoCollapseSiblings] Whether, when expanding an expandable, its siblings should be automatically collapsed.
- *  @param {Boolean} [options.scrollContainer] Closest parent element that could scroll
+ *  @param {Boolean} [options.scrollContainer] Whether to scroll a parent container when necessary
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/expandable', function (options) {
@@ -23,7 +23,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('Q/plugins/Q/css/expandable.css');
+	Q.addStylesheet('{{Q}}/css/expandable.css');
 	
 	if (!$te.children().length) {
 		// set it up with javascript
@@ -89,7 +89,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	 * @method expand
 	 * @param {Object} [options]
 	 *  @param {Boolean} [options.autoCollapseSiblings] Whether, when expanding an expandable,
-	 *  @param {Boolean} [options.scrollContainer] Closest parent element that could scroll
+	 *  @param {Boolean} [options.scrollContainer] Whether to scroll a parent container
 	 *  @param {Boolean} [options.scrollToElement] Can be used to specify another element to scroll to when expanding. Defaults to the title element of the expandable.
  *  @param {Number} [options.spaceAbove] How many pixels of space to leave above at the end of the scrolling animation
 	 * @param {Function} [callback] the function to call once the expanding has completed
@@ -121,15 +121,28 @@ Q.Tool.define('Q/expandable', function (options) {
 		var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
 		var t1 = $element.offset().top - offset.top;
 		var defaultSpaceAbove = $element.height() / 2;
+		var moreSpaceAbove = 0;
 		var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
 		if ($ts.length && $ts.css('position') === 'fixed') {
-			defaultSpaceAbove += $ts.outerHeight();
+			spaceAbove = $ts.outerHeight();
+		} else {
+			$('body').children().each(function () {
+				var $this = $(this);
+				if ($this.css('position') === 'fixed') {
+					var top = $this.offset().top - Q.Pointer.scrollTop();
+					if (top < 100) {
+						moreSpaceAbove = top + $this.outerHeight();
+						return false;
+					}
+				}
+			});
 		}
+		defaultSpaceAbove += moreSpaceAbove;
 		var spaceAbove = (state.spaceAbove == null)
 			? defaultSpaceAbove
 			: state.spaceAbove;
 		var isBody = $scrollable &&
-			$scrollable[0].tagName.toUpperCase() === 'BODY';
+			['BODY', 'HTML'].indexOf($scrollable[0].tagName.toUpperCase()) >= 0;
 		if (isBody) {
 			t1 -= Q.Pointer.scrollTop();
 		}
@@ -165,16 +178,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	},
 	
 	scrollable: function () {
-		var $scrollable = $('body');
-		$(this.element).parents().each(function () {
-			var $this = $(this);
-			var overflow = $this.css('overflow');
-			if (['hidden', 'visible'].indexOf(overflow) < 0) {
-				$scrollable = $this;
-				return false;
-			}
-		});
-		return $scrollable;
+		return $(this.element.scrollingParent(true, 'vertical'));
 	}
 });
 

@@ -23,7 +23,7 @@ Q.Tool.define('Q/filter', function (options) {
 	var state = tool.state;
 	var $te = $(tool.element);
 	
-	Q.addStylesheet('Q/plugins/Q/css/filter.css');
+	Q.addStylesheet('{{Q}}/css/filter.css');
 	
 	if (!$te.children().length) {
 		// set it up with javascript
@@ -66,7 +66,7 @@ Q.Tool.define('Q/filter', function (options) {
 		tool.cancelBegin = true;
 		setTimeout(function () {
 			tool.cancelBegin = false;
-		}, 300);
+		}, 500);
 	}).on('keydown keyup change input focus paste blur Q_refresh Q_refresh_filter', _changed)
 	.on(Q.Pointer.fastclick, function (evt) {
 		var $this = $(this);
@@ -185,17 +185,20 @@ Q.Tool.define('Q/filter', function (options) {
 			return true;
 		}
 		state.begun = true;
-		tool.canceledBlur = true;
-		setTimeout(function () {
-			tool.canceledBlur = false;
-		}, 300);
 		
+		tool.canceledBlur = true;		 +
+		setTimeout(function () {		
+			tool.canceledBlur = false;		
+		}, 500);
+
 		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
 		
 		var $te = $(tool.element);
 		$te.addClass('Q_filter_begun');
 
 		if (state.fullscreen) {
+			tool.canceledBlur = true;
+
 			// on slower mobile browsers, the following might synchronously lag a bit
 			var $body = $('body');
 			state.oldBodyOverflow = $body.css('overflow');
@@ -204,7 +207,7 @@ Q.Tool.define('Q/filter', function (options) {
 			if (Q.info.isTouchscreen) {
 				Q.ensure(
 					window.overthrow, 
-					"Q/plugins/Q/js/overthrow.js",
+					"{{Q}}/js/overthrow.js",
 					function () {
 						overthrow.scrollIndicatorClassName = 'Q_overflow';
 						overthrow.set();
@@ -257,7 +260,7 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.cancelBegin = true;
 			setTimeout(function () {
 				tool.cancelBegin = false;
-			}, 300)
+			}, 300);
 			tool.setText(chosenText);
 		}
 		if (!state.begun || tool.suspended) return;

@@ -189,7 +189,8 @@
 
 .Streams_participants_tool .Users_avatar_tool,
 .Streams_participants_tool .Streams_participants_invite {
-	width: 44px;
+	display: inline-block;
+	width: 45px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
@@ -756,4 +757,61 @@
 
 .Q_js .Streams_import_tool .Streams_import_file {
 	width: 100%;
+}
+
+.Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
+.Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
+
+.Q_button.Streams_aspect_interests {
+	background: #bf1118; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
+	color: white;
+}
+.Q_button.Streams_aspect_interests:active,
+.Q_button.Streams_aspect_interests:focus {
+	background: #a10e14;
+	color: white;
+}
+
+.Q_button.Streams_aspect_interests {
+	background: #bf1118; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
+	color: white;
+}
+.Q_button.Streams_aspect_interests:active,
+.Q_button.Streams_aspect_interests:focus {
+	background: #a10e14;
+	color: white;
+}
+
+.Q_button.Streams_aspect_chats {
+	background: #1ca5b1; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d9e4', endColorstr='#0b94a9'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#1ca5b1), to(#0b94a9)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #1ca5b1,  #0b94a9); /* for firefox 3.6+ */
+	color: white;
+}
+
+.Q_button.Streams_aspect_chats:active,
+.Q_button.Streams_aspect_chats:focus {
+	background: #0b94a9;
+	color: white;
+}
+
+.Streams_dialog_interests {
+	min-width: 300px;
+	width: 90%;
+	background: url(../img/bg/overlay-interests.png);
+}
+
+.Streams_dialog_interests * {
+	color: white;
+}
+
+.Streams_dialog_interests .Q_dialog_slot {
+	padding: 10px;
 }

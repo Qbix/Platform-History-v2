@@ -32,7 +32,7 @@ function _Streams_file_preview(options, preview) {
 	this.preview = preview;
 	var state = this.state;
 	var ps = preview.state;
-	ps.templates.create.fields.src = Q.url('Q/plugins/Q/img/actions/upload.png');
+	ps.templates.create.fields.src = Q.url('{{Q}}/img/actions/upload.png');
 	ps.templates.create.name = 'Streams/file/preview/create';
 	ps.templates.create.showTitle = (state.showTitle !== false);
 	if (ps.creatable) {
@@ -68,14 +68,14 @@ function _Streams_file_preview(options, preview) {
 },
 
 {
-	refresh: function (stream, onLoad) {
+	refresh: function (stream, callback) {
 		var tool = this;
 		var state = tool.state;
 		var ps = tool.preview.state;
 		var $te = $(tool.element);
 		// set up a pipe to know when the icon has loaded
 		var p = Q.pipe(['inplace', 'icon'], function () {
-			Q.handle(onLoad, tool);
+			Q.handle(callback, tool);
 		});
 		$te.removeClass('Q_uploading');
 		// set up the inplace options

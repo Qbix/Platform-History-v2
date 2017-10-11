@@ -27,7 +27,7 @@
  *  @param {array}   [$options.placeholders=['','']] Array of [html0, html1] for drawers that are pinned
  *  @param {array}   [$options.behind=[true,false]] Array of [boolean0, boolean1] to indicate which drawer is behind the others
  *  @param {array}   [$options.bottom=[false,false]] Array of [boolean0, boolean1] to indicate whether to scroll to the bottom of a drawer after switching to it
- *  @param {array}   [$options.triggers=['Q/plugins/Q/img/drawers/up.png', 'Q/plugins/Q/img/drawers/down.png']] Array of [src0, src1] for img elements that act as triggers to swap drawers. Set array elements to false to avoid rendering a trigger.
+ *  @param {array}   [$options.triggers=['{{Q}}/img/drawers/up.png', '{{Q}}/img/drawers/down.png']] Array of [src0, src1] for img elements that act as triggers to swap drawers. Set array elements to false to avoid rendering a trigger.
  *  @param {array}   [$options.trigger]] Options for the trigger elements
  *  @param {integer}   [$options.trigger.rightMargin=10]] How many pixels from the right side of the drawers
  *  @param {integer}   [$options.transition=300]] Number of milliseconds for fading in the trigger images
@@ -43,8 +43,8 @@ function Q_drawers_tool($options)
 		$result .= Q_Html::div("drawer_$i", "Q_drawers_drawer Q_drawers_drawer_$i", $html);
 	}
 	unset($options['drawers']);
-	Q_Response::addScript('Q/plugins/Q/js/tools/drawers.js');
-	Q_Response::addStylesheet('Q/plugins/Q/css/drawers.css');
+	Q_Response::addScript('{{Q}}/js/tools/drawers.js');
+	Q_Response::addStylesheet('{{Q}}/css/drawers.css');
 	Q_Response::setToolOptions($options);
 	return $result;
 }

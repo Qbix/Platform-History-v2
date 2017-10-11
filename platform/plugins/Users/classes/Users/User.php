@@ -384,8 +384,9 @@ class Users_User extends Base_Users_User
 	 * @method addEmail
 	 * @param {string} $emailAddress
 	 *  The email address to add.
-	 * @param {string} [$activationEmailSubject=null]
+	 * @param {string|array} [$activationEmailSubject=null]
 	 *  The subject of the activation email to send.
+	 *  You can also pass an array($source, array($key1, $key2)) to use Q_Text.
 	 * @param {string} [$activationEmailView=null]
 	 *  The view to use for the body of the activation email to send.
 	 * @param {boolean} [$html=true]
@@ -484,7 +485,8 @@ class Users_User extends Base_Users_User
 			}
 			if (!isset($activationEmailSubject)) {
 				$activationEmailSubject = Q_Config::get(
-					'Users', 'transactional', $activation, 'subject', "Welcome! Please confirm your email address." 
+					'Users', 'transactional', $activation, 'subject', 
+					"Welcome! Please confirm your email address." 
 				);
 			}
 			$fields2 = array_merge($fields, array(

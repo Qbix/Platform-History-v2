@@ -26,9 +26,9 @@ function Q () {
 
 // external libraries, which you can override
 Q.libraries = {
-	json: "Q/plugins/Q/js/json3-3.2.4.min.js",
-	handlebars: 'Q/plugins/Q/js/handlebars-v4.0.10.min.js',
-	jQuery: 'Q/plugins/Q/js/jquery-3.2.1.min.js'
+	json: "{{Q}}/js/json3-3.2.4.min.js",
+	handlebars: '{{Q}}/js/handlebars-v4.0.10.min.js',
+	jQuery: '{{Q}}/js/jquery-3.2.1.min.js'
 };
 
 /**
@@ -684,18 +684,26 @@ Elp.cssDimensions = function () {
 /**
  * Returns the first element in the chain of parent elements which supports scrolling
  * @method scrollingParent
- * @param {Boolean} skipIfNotOverflowed
+ * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
+ * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
  */
-Elp.scrollingParent = function(skipIfNotOverflowed) {
+Elp.scrollingParent = function(skipIfNotOverflowed, direction) {
 	var p = this;
 	while (p = p.parentNode) {
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
 		var pcs = p.computedStyle();
-		var overflow = pcs.overflow || p.style.overflow
-			|| pcs.overflowY || p.style.overflowY
-			|| pcs.overflowX || p.style.overflowX;
+		var overflow;
+		if (direction === 'vertical') {
+			overflow = pcs.overflowY || p.style.overflowY;
+		} else if (direction === 'horizontal') {
+			overflow = pcs.overflowX || p.style.overflowX;
+		} else {
+			overflow = pcs.overflow || p.style.overflow
+				|| pcs.overflowY || p.style.overflowY
+				|| pcs.overflowX || p.style.overflowX;
+		}
 		if (overflow && ['hidden', 'visible'].indexOf(overflow) < 0) {
 			if (!skipIfNotOverflowed || p.clientHeight < p.scrollHeight) {
 				return p;
@@ -1791,19 +1799,23 @@ Q.mixin = function _Q_mixin(A /*, B, ... */) {
  *  You can also change this default using the config Db/normalize/characters
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
+ * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
  * @return {String} the normalized string
  */
-Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
+Q.normalize = function _Q_normalize(text, replacement, characters, numChars, keepCaseIntact) {
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
 	characters = characters || /[^A-Za-z0-9]+/g;
 	if (text === undefined) {
 		debugger; // pause here if debugging
 	}
-	var result = text.toLowerCase().replace(characters, replacement);
-	if (text.length > numChars) {
-		result = text.substr(0, numChars-11) + '_' 
-				 + Math.abs(text.substr(numChars-11).hashCode());
+	if (!keepCaseIntact) {
+		text = text.toLowerCase();
+	}
+	var result = text.replace(characters, replacement);
+	if (result.length > numChars) {
+		result = result.substr(0, numChars-11) + '_' 
+				 + Math.abs(result.substr(numChars-11).hashCode());
 	}
 	return result;
 };
@@ -2456,10 +2468,6 @@ Evp.onStop = function () {
  *  You can pass an array of defaults for the fields in the returned function
  *  The last element of this array can be a function that further processes the arguments,
  *  returning an array of the resulting arguments
- * @param {Function} [callback]
- *  An optional callback that gets called when a new event is created.
- *  The "this" object is the Q.Event, and the parameters are the processed parameters
- *  passed to the returned factory function.
  * @param {Function} [callback]
  *  An optional callback that gets called when a new event is created.
  *  The "this" object is the Q.Event, and the parameters are the processed parameters
@@ -4073,7 +4081,7 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
  * Gets child tools contained in the tool, as determined by their ids.
  * @method children
  * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace"
- * @param {number} [levels] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
+ * @param {number} [levels=null] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
  * @return {Object} A two-level hash of pairs like {id: {name: Tool}}
  */
 Tp.children = function Q_Tool_prototype_children(name, levels) {
@@ -4333,7 +4341,7 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSibl
 	if (typeof name !== 'string') {
 		levels = name;
 		callback = levels;
-		name = null;
+		name = "";
 	}
 	if (typeof levels !== 'number') {
 		withSiblings = levels;
@@ -4389,10 +4397,11 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * @method setUpElement
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
- * @param {String} toolName
- *  The type of the tool, such as "Q/tabs"
- * @param {Object} [toolOptions]
- *  The options for the tool
+ * @param {String|Array} toolName
+ *  The type of the tool, such as "Q/tabs", or an array of types
+ * @param {Object|Array} [toolOptions]
+ *  The options for the tool. If toolName is an array, this is the array 
+ *  of corresponding objects to use for options.
  * @param {String|Function} [id=null]
  *  Optional id of the tool, such as "Q_tabs_2", used if element doesn't have an "id" attribute.
  *  If null, calculates an automatically unique id beginning with the tool's name
@@ -4421,6 +4430,10 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 		var ba = Q.Tool.beingActivated;
 		var p1 = prefix || (ba ? ba.prefix : '');
 		element.addClass('Q_tool '+ntt+'_tool');
+		if (toolOptions && toolOptions[i]) {
+			element.options = element.options || {};
+			element.options[Q.normalize(tn)] = toolOptions[i];
+		}
 		if (!element.getAttribute('id')) {
 			if (typeof id === 'function') {
 				id = id();
@@ -4439,10 +4452,6 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 				}
 			}
 			element.setAttribute('id', id);
-		}
-		if (toolOptions && toolOptions[i]) {
-			element.options = element.options || {};
-			element.options[Q.normalize(tn)] = toolOptions[i];
 		}
 	}
 	return element;
@@ -4602,7 +4611,8 @@ Q.Tool.calculatePrefix = function _Q_Tool_calculatePrefix(id) {
 };
 
 /**
- * Computes and returns a tool's id
+ * Computes and returns a tool's id from some string that's likely to contain it,
+ * such as an HTML element's id, a tool's id, or a tool's prefix.
  * @static
  * @method calculateId
  * @param {String} id the id or prefix of an existing tool or its element
@@ -4638,7 +4648,6 @@ Tp.toString = function _Q_Tool_prototype_toString() {
  */
 function _loadToolScript(toolElement, callback, shared, parentId) {
 	var toolId = Q.Tool.calculateId(toolElement.id);
-	var normalizedId = Q.normalize(toolId);
 	var classNames = toolElement.className.split(' ');
 	var toolNames = [];
 	for (var i=0, nl = classNames.length; i<nl; ++i) {
@@ -5268,8 +5277,9 @@ Q.Page = function (uriString) {
  * @static
  * @method push
  * @param {String} url The url to push
+ * @param {String} [title=null] The title to go with the url, to override current title
  */
-Q.Page.push = function (url) {
+Q.Page.push = function (url, title) {
 	url = Q.url(url);
 	if (url.substr(0, Q.info.baseUrl.length) !== Q.info.baseUrl) {
 		return;
@@ -5293,6 +5303,9 @@ Q.Page.push = function (url) {
 			Q_hashChangeHandler.ignore = true;
 			location.hash = hash;
 		}
+	}
+	if (typeof title === 'string') {
+		document.title = title;
 	}
 	Q_hashChangeHandler.currentUrl = url.substr(Q.info.baseUrl.length + 1);
 	Q.info.url = url;
@@ -5410,7 +5423,7 @@ Q.init = function _Q_init(options) {
 	}
 	Q.init.called = true;
 	Q.info.imgLoading = Q.info.imgLoading ||
-		Q.url('Q/plugins/Q/img/throbbers/loading.gif');
+		Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
@@ -6027,6 +6040,7 @@ Q.url = function _Q_url(what, fields, options) {
 	if (parts.length > 2) {
 		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
+	what2 = Q.interpolateUrl(what2);
 	var result = '';
 	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl;
 	if (!what) {
@@ -6050,6 +6064,40 @@ Q.url = function _Q_url(what, fields, options) {
 
 Q.url.options = {
 	beforeResult: null
+};
+
+/**
+ * Interpolate some standard placeholders inside a url, such as 
+ * {{AppName}} or {{PluginName}}
+ * @static
+ * @method interpolateUrl
+ * @param {String} url
+ * @param {Object} [additional={}] Any additional substitutions
+ * @return {String} The url with substitutions applied
+ */
+Q.interpolateUrl = function (url, additional) {
+	if (url.indexOf('{{') < 0) {
+		return url;
+	}
+	var substitutions = {};
+	substitutions['baseUrl'] = substitutions[Q.info.app] = Q.info.baseUrl;
+	substitutions['Q'] = Q.pluginBaseUrl('Q');
+	for (var plugin in Q.plugins) {
+		substitutions[plugin] = Q.pluginBaseUrl(plugin);
+	}
+	url = url.interpolate(substitutions);
+	if (additional) {
+		url = url.interpolate(additional);
+	}
+	return url;
+};
+
+/**
+ * You can override this function to do something special
+ * @method pluginBaseUrl
+ */
+Q.pluginBaseUrl = function (plugin) {
+	return 'Q/plugins/' + plugin;
 };
 
 /**
@@ -6263,6 +6311,7 @@ Q.request = function (url, slotNames, callback, options) {
 		delim = (url.indexOf('?') < 0) ? '?' : '&';
 		url += delim + Q.queryString(fields);
 	}
+	url = Q.url(url);
 	if (typeof slotNames === 'function') {
 		options = callback;
 		callback = slotNames;
@@ -8306,7 +8355,7 @@ function _activateTools(toolElement, options, shared) {
 		}
 		var key;
 		if (pendingParentEvent) {
-			key = pendingParentEvent.add(_reallyConstruct, toolId);
+			key = pendingParentEvent.add(_reallyConstruct, toolId + ' ' + toolName);
 		} else {
 			_reallyConstruct();
 		}
@@ -8354,7 +8403,7 @@ function _initTools(toolElement) {
 	
 	_loadToolScript(toolElement,
 	function _initTools_doInit(toolElement, toolConstructor, toolName) {
-		currentEvent.add(_doInit, currentId);
+		currentEvent.add(_doInit, currentId + ' ' + toolName);
 	}, null, parentId);
 	
 	function _doInit() {
@@ -8513,6 +8562,7 @@ Q.Template.remove = function (name) {
  * @return {Function} a function that can be called to render the template
  */
 Q.Template.compile = function _Q_Template_compile (content, type) {
+	type = type || 'handlebars';
 	if (type !== 'handlebars') {
 		throw new Q.Error("Q.Template.compile: only supports Handlebars for now");
 	}
@@ -8684,7 +8734,8 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			Q.Tool.beingActivated = tba;
 			Q.Page.beingActivated = pba;
 			try {
-				var compiled = Q.Template.compile(params.template[1], info.type);
+				var type = (info && info.type) || (options && options.type);
+				var compiled = Q.Template.compile(params.template[1], type);
 				callback(null, compiled(fields, options));
 			} catch (e) {
 				console.warn(e);
@@ -8695,6 +8746,10 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 		var o = Q.copy(options, ['type', 'dir', 'name']);
 		Q.Template.load(name, p.fill('template'), o);
 		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
+			if (!info) {
+				// template was not defined yet, so no partials/helpers/text to load
+				return p.fill(aspect)();
+			}
 			var ia = info[aspect];
 			if (typeof ia === 'string') {
 				ia = [ia];
@@ -8792,7 +8847,8 @@ Q.Text = {
 	get: function (name, callback, options) {
 		options = options || {};
 		var language = options.language || Q.Text.language;
-		var locale = (options.language && options.locale) || Q.Text.locale;
+		var locale = (options.language && options.locale)
+			|| (Q.getObject('Q.info.text.useLocale') ? Q.Text.locale : '');
 		var dir = Q.Text.dir;
 		var suffix = locale ? '-' + locale : '';
 		var content = Q.getObject([language, locale, name], Q.Text.collection);
@@ -9481,10 +9537,11 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 * @method tool
 	 * @param {String|Element} element
 	 *  The tag of the element, such as "div", or a reference to an existing Element
-	 * @param {String} toolName
-	 *  The type of the tool, such as "Q/tabs"
-	 * @param {Object} [toolOptions]
-	 *  The options for the tool
+	 * @param {String|Array} toolName
+	 *  The type of the tool, such as "Q/tabs", or an array of types
+	 * @param {Object|Array} [toolOptions]
+	 *  The options for the tool. If toolName is an array, this is the array 
+	 *  of corresponding objects to use for options.
 	 * @param {String|Function} [id]
 	 *  Optional id of the tool, such as "Q_tabs_2"
 	 * @param {String} [prefix]
@@ -10155,6 +10212,9 @@ Q.Pointer = {
 		return function _Q_fastclick_on_wrapper (e) {
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
+			if (!(elem instanceof Element)){
+				return;
+			}
 			if (Q.Pointer.canceledClick
 			|| !this.contains(Q.Pointer.started || null)
 			|| !this.contains(elem)) {
@@ -10738,7 +10798,7 @@ Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 Q.Pointer.hint.options = {
-	src: 'Q/plugins/Q/img/hints/tap.gif',
+	src: '{{Q}}/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
 	height: "50px",
@@ -11650,7 +11710,7 @@ if (!root.console) {
  */
 function processStylesheets() {
 	// Complain about some other libraries if necessary
-	if (Q.findScript('Q/plugins/Q/js/prefixfree.min.js')) {
+	if (Q.findScript('{{Q}}/js/prefixfree.min.js')) {
 		var warning = "Q.js must be included before prefixfree in order to work properly";
 		console.warn(warning);
 	}
@@ -11691,45 +11751,45 @@ Q.onInit.add(function () {
 Q.onJQuery.add(function ($) {
 	
 	Q.Tool.define({
-		"Q/inplace": "Q/plugins/Q/js/tools/inplace.js",
-		"Q/tabs": "Q/plugins/Q/js/tools/tabs.js",
-		"Q/form": "Q/plugins/Q/js/tools/form.js",
-		"Q/panel": "Q/plugins/Q/js/tools/panel.js",
-		"Q/ticker": "Q/plugins/Q/js/tools/ticker.js",
-		"Q/timestamp": "Q/plugins/Q/js/tools/timestamp.js",
-		"Q/bookmarklet": "Q/plugins/Q/js/tools/bookmarklet.js",
-		"Q/columns": "Q/plugins/Q/js/tools/columns.js",
-		"Q/drawers": "Q/plugins/Q/js/tools/drawers.js",
-		"Q/expandable": "Q/plugins/Q/js/tools/expandable.js",
-		"Q/filter": "Q/plugins/Q/js/tools/filter.js",
-		"Q/rating": "Q/plugins/Q/js/tools/rating.js",
-		"Q/paging": "Q/plugins/Q/js/tools/paging.js"
+		"Q/inplace": "{{Q}}/js/tools/inplace.js",
+		"Q/tabs": "{{Q}}/js/tools/tabs.js",
+		"Q/form": "{{Q}}/js/tools/form.js",
+		"Q/panel": "{{Q}}/js/tools/panel.js",
+		"Q/ticker": "{{Q}}/js/tools/ticker.js",
+		"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
+		"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
+		"Q/columns": "{{Q}}/js/tools/columns.js",
+		"Q/drawers": "{{Q}}/js/tools/drawers.js",
+		"Q/expandable": "{{Q}}/js/tools/expandable.js",
+		"Q/filter": "{{Q}}/js/tools/filter.js",
+		"Q/rating": "{{Q}}/js/tools/rating.js",
+		"Q/paging": "{{Q}}/js/tools/paging.js"
 	});
 	
 	Q.Tool.jQuery({
-		"Q/placeholders": "Q/plugins/Q/js/fn/placeholders.js",
-		"Q/textfill": "Q/plugins/Q/js/fn/textfill.js",
-		"Q/autogrow": "Q/plugins/Q/js/fn/autogrow.js",
-		"Q/dialog": "Q/plugins/Q/js/fn/dialog.js",
-		"Q/flip": "Q/plugins/Q/js/fn/flip.js",
-		"Q/gallery": "Q/plugins/Q/js/fn/gallery.js",
-		"Q/zoomer": "Q/plugins/Q/js/fn/zoomer.js",
-		"Q/fisheye": "Q/plugins/Q/js/fn/fisheye.js",
-		"Q/listing": "Q/plugins/Q/js/fn/listing.js",
-		"Q/hautoscroll": "Q/plugins/Q/js/fn/hautoscroll.js",
-		"Q/imagepicker": "Q/plugins/Q/js/fn/imagepicker.js",
-		"Q/viewport": "Q/plugins/Q/js/fn/viewport.js",
-		"Q/actions": "Q/plugins/Q/js/fn/actions.js",
-		"Q/clickable": "Q/plugins/Q/js/fn/clickable.js",
-		"Q/clickfocus": "Q/plugins/Q/js/fn/clickfocus.js",
-		"Q/contextual": "Q/plugins/Q/js/fn/contextual.js",
-		"Q/scrollIndicators": "Q/plugins/Q/js/fn/scrollIndicators.js",
-		"Q/iScroll": "Q/plugins/Q/js/fn/iScroll.js",
-		"Q/scroller": "Q/plugins/Q/js/fn/scroller.js",
-		"Q/touchscroll": "Q/plugins/Q/js/fn/touchscroll.js",
-		"Q/scrollbarsAutoHide": "Q/plugins/Q/js/fn/scrollbarsAutoHide.js",
-		"Q/sortable": "Q/plugins/Q/js/fn/sortable.js",
-		"Q/validator": "Q/plugins/Q/js/fn/validator.js"
+		"Q/placeholders": "{{Q}}/js/fn/placeholders.js",
+		"Q/textfill": "{{Q}}/js/fn/textfill.js",
+		"Q/autogrow": "{{Q}}/js/fn/autogrow.js",
+		"Q/dialog": "{{Q}}/js/fn/dialog.js",
+		"Q/flip": "{{Q}}/js/fn/flip.js",
+		"Q/gallery": "{{Q}}/js/fn/gallery.js",
+		"Q/zoomer": "{{Q}}/js/fn/zoomer.js",
+		"Q/fisheye": "{{Q}}/js/fn/fisheye.js",
+		"Q/listing": "{{Q}}/js/fn/listing.js",
+		"Q/hautoscroll": "{{Q}}/js/fn/hautoscroll.js",
+		"Q/imagepicker": "{{Q}}/js/fn/imagepicker.js",
+		"Q/viewport": "{{Q}}/js/fn/viewport.js",
+		"Q/actions": "{{Q}}/js/fn/actions.js",
+		"Q/clickable": "{{Q}}/js/fn/clickable.js",
+		"Q/clickfocus": "{{Q}}/js/fn/clickfocus.js",
+		"Q/contextual": "{{Q}}/js/fn/contextual.js",
+		"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
+		"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
+		"Q/scroller": "{{Q}}/js/fn/scroller.js",
+		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
+		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
+		"Q/sortable": "{{Q}}/js/fn/sortable.js",
+		"Q/validator": "{{Q}}/js/fn/validator.js"
 	});
 	
 	Q.onLoad.add(function () {

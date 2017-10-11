@@ -27,7 +27,7 @@ var Places = Q.Places;
  * @param {Object} [options.pings.size=10] default size of any ping animation
  * @param {Object} [options.pings.color='white'] default color of any ping animation
  * @param {Object} [options.shadow] shadow effect configuration
- * @param {String} [options.shadow.src="Q/plugins/Q/img/shadow3d.png"] src , path to image
+ * @param {String} [options.shadow.src="{{Q}}/img/shadow3d.png"] src , path to image
  * @param {Number} [options.shadow.stretch=1.5] stretch
  * @param {Number} [options.shadow.dip=0.25] dip
  * @param {Number} [options.shadow.opacity=0.5] opacity
@@ -182,7 +182,7 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		color: 'white'
 	},
 	shadow: {
-		src: "Q/plugins/Q/img/shadow3d.png",
+		src: "{{Q}}/img/shadow3d.png",
 		stretch: 1.2,
 		dip: 0.25,
 		opacity: 0.5

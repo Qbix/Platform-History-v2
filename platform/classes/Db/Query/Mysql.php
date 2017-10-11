@@ -1622,12 +1622,35 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 	static function column($column)
 	{
-		$parts = explode(' ', $column);
-		$pos = strrpos($parts[0], '.');
-		if ($pos === false) {
-			return "`$column`";
+		$len = strlen($column);
+		$part = $column;
+		$pos = false;
+		for ($i=0; $i<$len; ++$i) {
+			$c = $column[$i];
+			if ($c !== '.'
+			and $c !== '_'
+			and $c !== '$'
+			and ($c < 'a' or $c > 'z')
+			and ($c < 'A' or $c > 'Z')
+			and ($c < '0' or $c > '9')) {
+				$pos = $i;
+				$part = substr($column, 0, $i);
+				break;
+			}
 		}
-		return substr($column, 0, $pos).".`".substr($column, $pos+1)."`";
+		if ($pos === false) {
+			return "`$part`";
+		}
+		$pos2 = strrpos($part, '.');
+		if ($pos2 === false) {
+			return "`$part`".substr($column, $pos);
+		}
+		if ($pos === false or $pos2 === false) {
+			return "`$part`";
+		}
+		return substr($part, 0, $pos2)
+			.".`".substr($part, $pos2+1)."`"
+			.substr($column, $pos);
 	}
 
 	/**
@@ -1654,7 +1677,45 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (is_array($criteria)) {
 			$criteria_list = array();
 			foreach ($criteria as $expr => $value) {
-				if ($value === null) {
+				$parts = explode(',', $expr);
+				$parts = array_map('trim', $parts);
+				$c = count($parts);
+				if ($c > 1) {
+					if (!is_array($value)) {
+						throw new Exception("Db_Query_Mysql: The value should be an array of arrays");
+					}
+					$columns = array();
+					foreach ($parts as $column) {
+						$columns[] = self::column($column);
+						if (!empty($this->criteria[$column])) {
+							$this->criteria[$column] = array(); // sharding heuristics
+						}
+					}
+					$list = array();
+					foreach ($value as $j => $arr) {
+						if (!is_array($arr)) {
+							$json = json_encode($arr);
+							throw new Exception("Db.Query.Mysql: Value $json needs to be an array");
+						}
+						if (count($arr) != $c) {
+							throw new Exception(
+								"Db_Query_Mysql: Arrays should have $c elements to match $expr"
+							);
+						}
+						$vector = array();
+						$valuesArray = array();
+						foreach ($arr as $v) {
+							$vector[] = ":_where_$i";
+							$this->parameters["_where_$i"] = $v;
+							++ $i;
+							$this->criteria[$column][] = $v; // sharding heuristics
+						}
+						$list[] = '(' .  implode(',', $vector) . ')';
+					}
+					$lhs = '(' . implode(',', $columns) . ')';
+					$rhs = "(\n" . implode(",\n", $list) . "\n)";
+					$criteria_list[] = "$lhs IN $rhs";
+				} else if ($value === null) {
 					$criteria_list[] = "ISNULL($expr)";
 				} else if ($value instanceof Db_Expression) {
 					if (is_array($value->parameters)) {
@@ -1683,10 +1744,6 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					} else {
 						$criteria_list[] = self::column($expr) . " IN ($value_list)";
 					}
-				} else if (preg_match('/\W/', substr($expr, -1))) {
-					$criteria_list[] = "$expr :_where_$i";
-					$this->parameters["_where_$i"] = $value;
-					++ $i;
 				} else if ($value instanceof Db_Range) {
 					if (isset($value->min)) {
 						$c_min = $value->includeMin ? '>=' : '>';
@@ -1701,7 +1758,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						++ $i;
 					}
 				} else {
-					$criteria_list[] = self::column($expr) . " = :_where_$i";
+					$eq = preg_match('/\W/', substr($expr, -1)) ? '' : ' = ';
+					$criteria_list[] = self::column($expr) . "$eq:_where_$i";
 					$this->parameters["_where_$i"] = $value;
 					++ $i;
 				}

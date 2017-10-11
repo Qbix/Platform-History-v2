@@ -1034,7 +1034,7 @@ Q.Layout = {
 			{
 				if (!Q.Layout.orientationMaskIcon)
 				{
-					Q.Layout.orientationMaskIcon = '/Q/plugins/Q/img/ui/qbix_logo_small.png';
+					Q.Layout.orientationMaskIcon = '/{{Q}}/img/ui/qbix_logo_small.png';
 				}
 				orientationMask = $('body').prepend(
 					'<div class="Q_orientation_mask">' +
@@ -2499,8 +2499,10 @@ Q.Contextual = {
 	 */
 	calcRelativeCoords: function(trigger, contextual, info)
 	{
-		info.coords.x = trigger.offset().left + ((trigger.outerWidth() - (info.size ? info.size.width : contextual.outerWidth())) / 2) - document.body.scrollLeft;
-		var y = trigger.offset().top + trigger.outerHeight() / 2 - document.body.scrollTop;
+		info.coords.x = trigger.offset().left + ((trigger.outerWidth() - (info.size ? info.size.width : contextual.outerWidth())) / 2)
+			- document.body.scrollLeft - document.documentElement.scrollLeft;
+		var y = trigger.offset().top + trigger.outerHeight() / 2
+			- document.body.scrollTop - document.documentElement.scrollTop;
 		info.inBottomHalf = y > $(window).height() / 2;
 		info.coords.y = info.inBottomHalf ? y - trigger.outerHeight() / 2 : y + trigger.outerHeight() / 2;
 	},

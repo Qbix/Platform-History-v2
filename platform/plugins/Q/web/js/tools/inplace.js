@@ -24,7 +24,7 @@
  *  @param {String} [options.staticHtml] The static HTML to start out with
  *  @param {String} [options.placeholder=null] Text to show in the staticHtml or input field when the editor is empty
  *  @param {Object} [options.template]  Can be used to override info for the tool's view template.
- *	@param {String} [options.template.dir='Q/plugins/Q/views']
+ *	@param {String} [options.template.dir='{{Q}}/views']
  *	@param {String} [options.template.name='Q/inplace/tool']
  *  @param {Q.Event} [options.beforeSave] This event triggers before save
  *  @param {Q.Event} [options.onSave] This event triggers after save
@@ -39,7 +39,7 @@ Q.Tool.define("Q/inplace", function (options) {
 		return _Q_inplace_tool_constructor.call(tool, this.element, state);
 	}
 	
-	Q.addStylesheet('Q/plugins/Q/css/inplace.css');
+	Q.addStylesheet('{{Q}}/css/inplace.css');
 	
 	// if activated with JS should have following options:
 	//	- action: required. the form action to save tool value
@@ -103,7 +103,7 @@ Q.Tool.define("Q/inplace", function (options) {
 	placeholder: 'Type something...',
 	cancelPrompt: "Would you like to save your changes?",
 	template: {
-		dir: 'Q/plugins/Q/views',
+		dir: '{{Q}}/views',
 		name: 'Q/inplace/tool'
 	},
 	timing: {
@@ -194,7 +194,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		.addClass('Q_inplace_tool_fieldinput');
 	var undermessage = tool.$('.Q_inplace_tool_undermessage');
 	var throbber_img = $('<img />')
-		.attr('src', Q.url('Q/plugins/Q/img/throbbers/bars16.gif'));
+		.attr('src', Q.url('{{Q}}/img/throbbers/bars16.gif'));
 	if (container_span.hasClass('Q_nocancel')) {
 		noCancel = true;
 	}

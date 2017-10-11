@@ -1970,6 +1970,7 @@ Q.dir = function _Q_dir(start, callback) {
  *  You can also change this default using the config Db/normalize/characters
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
+ * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
  * @return {String} the normalized string
  */
 Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
@@ -1982,10 +1983,13 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
 	if (text === undefined) {
 		debugger; // pause here if debugging
 	}
-	var result = text.toLowerCase().replace(characters, replacement);
-	if (text.length > numChars) {
-		result = text.substr(0, numChars-11) + '_'
-			+ Math.abs(text.substr(numChars-11).hashCode());
+	if (!keepCaseIntact) {
+		text = text.toLowerCase();
+	}
+	var result = text.replace(characters, replacement);
+	if (result.length > numChars) {
+		result = result.substr(0, numChars-11) + '_'
+			+ Math.abs(result.substr(numChars-11).hashCode());
 	}
 	return result;
 };
@@ -2874,6 +2878,7 @@ Q.url = function _Q_url(what, fields, options) {
 	if (parts.length > 2) {
 		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
+	what2 = Q.interpolateUrl(what2);
 	var result = '';
 	var baseUrl = (options && options.baseUrl);
 	if (!baseUrl) {
@@ -2887,6 +2892,41 @@ Q.url = function _Q_url(what, fields, options) {
 		result = baseUrl + ((what2.substr(0, 1) == '/') ? '' : '/') + what;
 	}
 	return result;
+};
+
+/**
+ * Interpolate some standard placeholders inside a url, such as 
+ * {{AppName}} or {{PluginName}}
+ * @static
+ * @method interpolateUrl
+ * @param {String} url
+ * @param {Object} [additional={}] Any additional substitutions
+ * @return {String} The url with substitutions applied
+ */
+Q.interpolateUrl = function (url, additional) {
+	if (url.indexOf('{{') < 0) {
+		return url;
+	}
+	var substitutions = {};
+	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
+	substitutions['baseUrl'] = substitutions[Q.info.app] = baseUrl;
+	substitutions['Q'] = Q.pluginBaseUrl('Q');
+	for (var plugin in Q.plugins) {
+		substitutions[plugin] = Q.pluginBaseUrl(plugin);
+	}
+	url = url.interpolate(substitutions);
+	if (additional) {
+		url = url.interpolate(additional);
+	}
+	return url;
+};
+
+/**
+ * You can override this function to do something special
+ * @method pluginBaseUrl
+ */
+Q.pluginBaseUrl = function (plugin) {
+	return 'Q/plugins/' + plugin;
 };
 
 /*

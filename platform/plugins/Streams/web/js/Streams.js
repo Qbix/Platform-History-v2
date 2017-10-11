@@ -339,10 +339,8 @@ Streams.iconUrl = function(icon, size) {
 		size = '40';
 	}
 	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = (icon + '/' + size).interpolate({
-		"baseUrl": Q.info.baseUrl
-	});
-	return src.isUrl() ? src : Q.url('Q/plugins/Streams/img/icons/'+src);
+	var src = Q.interpolateUrl(icon + '/' + size);
+	return src.isUrl() ? src : Q.url('{{Streams}}/img/icons/'+src);
 };
 
 var _socket = null;
@@ -544,30 +542,30 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 };
 
 Q.Tool.define({
-	"Users/avatar"         : "Q/plugins/Streams/js/tools/avatar.js", // override for Users/avatar tool
-	"Streams/chat"         : "Q/plugins/Streams/js/tools/chat.js",
-	"Streams/comments"     : "Q/plugins/Streams/js/tools/comments.js",
-	"Streams/photoSelector": "Q/plugins/Streams/js/tools/photoSelector.js",
-	"Streams/userChooser"  : "Q/plugins/Streams/js/tools/userChooser.js",
-	"Streams/participants" : "Q/plugins/Streams/js/tools/participants.js",
-	"Streams/basic"        : "Q/plugins/Streams/js/tools/basic.js",
-	"Streams/access"       : "Q/plugins/Streams/js/tools/access.js",
-	"Streams/subscription" : "Q/plugins/Streams/js/tools/subscription.js",
-	"Streams/interests"    : "Q/plugins/Streams/js/tools/interests.js",
-	"Streams/lookup"       : "Q/plugins/Streams/js/tools/lookup.js",
-	"Streams/relate"       : "Q/plugins/Streams/js/tools/relate.js",
-	"Streams/related"      : "Q/plugins/Streams/js/tools/related.js",
-	"Streams/inplace"      : "Q/plugins/Streams/js/tools/inplace.js",
-	"Streams/html"         : "Q/plugins/Streams/js/tools/html.js",
-	"Streams/preview"  	   : "Q/plugins/Streams/js/tools/preview.js",
-	"Streams/image/preview": "Q/plugins/Streams/js/tools/image/preview.js",
-	"Streams/file/preview" : "Q/plugins/Streams/js/tools/file/preview.js",
-	"Streams/category/preview" : "Q/plugins/Streams/js/tools/category/preview.js",
-	"Streams/category"     : "Q/plugins/Streams/js/tools/category.js",
-	"Streams/form"         : "Q/plugins/Streams/js/tools/form.js",
-	"Streams/import"       : "Q/plugins/Streams/js/tools/import.js",
-	"Streams/activity"     : "Q/plugins/Streams/js/tools/activity.js",
-	"Streams/default/preview": "Q/plugins/Streams/js/tools/default/preview.js",
+	"Users/avatar"         : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
+	"Streams/chat"         : "{{Streams}}/js/tools/chat.js",
+	"Streams/comments"     : "{{Streams}}/js/tools/comments.js",
+	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
+	"Streams/userChooser"  : "{{Streams}}/js/tools/userChooser.js",
+	"Streams/participants" : "{{Streams}}/js/tools/participants.js",
+	"Streams/basic"        : "{{Streams}}/js/tools/basic.js",
+	"Streams/access"       : "{{Streams}}/js/tools/access.js",
+	"Streams/subscription" : "{{Streams}}/js/tools/subscription.js",
+	"Streams/interests"    : "{{Streams}}/js/tools/interests.js",
+	"Streams/lookup"       : "{{Streams}}/js/tools/lookup.js",
+	"Streams/relate"       : "{{Streams}}/js/tools/relate.js",
+	"Streams/related"      : "{{Streams}}/js/tools/related.js",
+	"Streams/inplace"      : "{{Streams}}/js/tools/inplace.js",
+	"Streams/html"         : "{{Streams}}/js/tools/html.js",
+	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
+	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
+	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
+	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
+	"Streams/category"     : "{{Streams}}/js/tools/category.js",
+	"Streams/form"         : "{{Streams}}/js/tools/form.js",
+	"Streams/import"       : "{{Streams}}/js/tools/import.js",
+	"Streams/activity"     : "{{Streams}}/js/tools/activity.js",
+	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/player": function () {
 		// does nothing
 	}
@@ -4128,8 +4126,10 @@ var Interests = Streams.Interests = {
 		if (info && info[category] && info[category].white) {
 			return info[category].white.interpolate({ baseUrl: Q.info.baseUrl })
 		}
-		return 'Q/plugins/Streams/img/icons/interests/categories/'
-			+ style + '/' + cn + '.png';
+		return Q.url(
+			'{{Streams}}/img/icons/interests/categories/'
+			+ style + '/' + cn + '.png'
+		);
 	},
 	all: {},
 	info: {},
@@ -4512,7 +4512,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	var str = "_preview";
 	if (normalized.substr(normalized.length-str.length) === str) {
-		constructors[normalized] = "Q/plugins/Streams/js/tools/default/preview.js";
+		constructors[normalized] = "{{Streams}}/js/tools/default/preview.js";
 	}
 }, 'Streams');
 

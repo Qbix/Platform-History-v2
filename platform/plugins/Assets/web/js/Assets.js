@@ -378,7 +378,7 @@
 			 *   Q.Assets.Currencies.symbols and Q.Assets.Currencies.names is accessible
 			 */
 			load: function (callback) {
-				Q.addScript('Q/plugins/Assets/js/lib/currencies.js', callback);
+				Q.addScript('{{Assets}}/js/lib/currencies.js', callback);
 			},
 			symbols: null,
 			names: null
@@ -407,8 +407,8 @@
 	};
 
 	Q.Tool.define({
-		"Assets/subscription": "Q/plugins/Assets/js/tools/subscription.js",
-		"Assets/payment": "Q/plugins/Assets/js/tools/payment.js"
+		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
+		"Assets/payment": "{{Assets}}/js/tools/payment.js"
 	});
 
 	function _applePayStripe(options, callback) {

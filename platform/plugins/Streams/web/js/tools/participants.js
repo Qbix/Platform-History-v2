@@ -32,6 +32,13 @@ function _Streams_participants(options) {
 	var tool = this;
 	var state = tool.state;
 	
+	if (!state.publisherId) {
+		throw new Q.Error("Streams/chat: missing publisherId option");
+	}
+	if (!state.streamName) {
+		throw new Q.Error("Streams/chat: missing streamName option");
+	}
+	
 	tool.Q.onStateChanged('count').set(function (name) {
 		var c = state.count;
 		tool.$count.text(c >= 100 ? '99+' : c.toString());
@@ -115,7 +122,7 @@ function _Streams_participants(options) {
 		tool.$max = $("<span class='Streams_participants_max'></span>");
 		tool.$pet = $("<span class='Streams_participants_expand_text'>See All</span>");
 		tool.$pei = $('<img class="Streams_participants_expand_img" />').attr({
-			src: Q.url('Q/plugins/Q/img/expand.png'),
+			src: Q.url('{{Q}}/img/expand.png'),
 			alt: "expand"
 		});
 		tool.$controls = $("<div class='Streams_participants_controls' />")
@@ -274,7 +281,7 @@ function _Streams_participants(options) {
 										height: state.originalHeight
 									});
 									tool.$pei.attr({
-										src: Q.url('Q/plugins/Q/img/expand.png'),
+										src: Q.url('{{Q}}/img/expand.png'),
 										alt: 'expand'
 									});
 									tool.$pet.html('See All');
@@ -285,7 +292,7 @@ function _Streams_participants(options) {
 										height: tool.$pc.height()
 									});
 									tool.$pei.attr({
-										src: Q.url('Q/plugins/Q/img/collapse.png'),
+										src: Q.url('{{Q}}/img/collapse.png'),
 										alt: 'collapse'
 									});
 									tool.$pet.html('Fewer');
