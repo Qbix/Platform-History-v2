@@ -1973,7 +1973,7 @@ Q.dir = function _Q_dir(start, callback) {
  * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
  * @return {String} the normalized string
  */
-Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
+Q.normalize = function _Q_normalize(text, replacement, characters, numChars, keepCaseIntact) {
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
 	if (text instanceof Buffer) {
