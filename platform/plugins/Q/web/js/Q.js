@@ -2471,10 +2471,6 @@ Evp.onStop = function () {
  * @param {Function} [callback]
  *  An optional callback that gets called when a new event is created.
  *  The "this" object is the Q.Event, and the parameters are the processed parameters
- *  passed to the returned factory function.
- * @param {Function} [callback]
- *  An optional callback that gets called when a new event is created.
- *  The "this" object is the Q.Event, and the parameters are the processed parameters
  *  passed to the returned factory function. The callback should return the
  *  event to be added to the collection (could just return this).
  * @param {Function} [removeOnEmpty=false]
