@@ -29,7 +29,7 @@ function Q_before_Q_responseExtras()
 	if (!$ajax) {
 		$text = Q::take(Q_Config::get('Q', 'text', array()), array('useLocale'));
 		$info = array_merge(
-			array('app' => Q_Config::expect('Q', 'app')),
+			array('app' => Q::app()),
 			$info,
 			array(
 				'proxies' => Q_Config::get('Q', 'proxies', array()),

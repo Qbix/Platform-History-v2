@@ -48,7 +48,7 @@ class Users_Mobile extends Base_Users_Mobile
 			));
 		}
 		
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$body = Q::view($view, $fields);
 		
 		/**
@@ -248,7 +248,7 @@ class Users_Mobile extends Base_Users_Mobile
 		$fields2 = array_merge($fields, array(
 			'user' => $user,
 			'mobile' => $this,
-			'app' => Q_Config::expect('Q', 'app'),
+			'app' => Q::app(),
 			'communityName' => $communityName,
 			'communitySuffix' => $communitySuffix,
 			'baseUrl' => Q_Request::baseUrl(),

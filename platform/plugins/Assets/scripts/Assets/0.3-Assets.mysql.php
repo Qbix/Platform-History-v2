@@ -2,7 +2,7 @@
 
 function Assets_0_3()
 {
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	Streams::create($app, $app, 'Streams/category', 
 		array('name' => 'Assets/plans', 'title' => 'Subscription Plans')
 	);

@@ -94,7 +94,7 @@ class Assets_Credits
 		$stream->save();
 		
 		$instructions_json = Q::json_encode(array_merge(
-			array('app' => Q_Config::expect('Q', 'app')),
+			array('app' => Q::app()),
 			$more
 		));
 		$stream->post($user->id, array(
@@ -124,7 +124,7 @@ class Assets_Credits
 		$stream->save();
 		
 		// Post that this user earned $amount credits by $reason
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$stream->post($user->id, array(
 			'type' => 'Assets/credits/earned',
 			'content' => $amount,
@@ -150,7 +150,7 @@ class Assets_Credits
 			));
 		}
 		$instructions_json = Q::json_encode(array_merge(
-			array('app' => Q_Config::expect('Q', 'app')),
+			array('app' => Q::app()),
 			$more
 		));
 		$from_stream = self::userStream(null, null, true);

@@ -34,7 +34,7 @@ class Users_Device_Android extends Users_Device
 		if (!self::$push) {
 			return;
 		}
-		$apiKey = Q_Config::expect('Users', 'apps', 'android', Q_Config::expect('Q', 'app'), "key");
+		$apiKey = Q_Config::expect('Users', 'apps', 'android', Q::app(), "key");
 		foreach (self::$push as $notification) {
 			$fields = array(
 				'to' => self::$device->deviceId,
