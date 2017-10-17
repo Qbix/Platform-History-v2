@@ -7073,22 +7073,78 @@ Q.findScript = function (src) {
 };
 
 /**
+ * Gets information about the currently running script.
+ * Only works when called synchronously when the script loads.
+ * @method currentScript
+ * @static
+ * @param {Number} [stackLevels=0] If called within a function
+ *  that was called inside a script, put 1, if deeper put 2, etc.
+ * @return {Object} object with properties "src", "path" and "file"
+ */
+Q.currentScript = function (stackLevels) {
+	var result = '', index = 0, lines, parts, i, l;
+	try {
+		throw new Error();
+	} catch (e) {
+		lines = e.stack.split('\n');
+	}
+	for (i=0, l=lines.length; i<l; ++i) {
+		if (lines[i].match(/http[s]?:\/\//)) {
+			index = i + 2 + (stackLevels || 0);
+			break;
+		}
+	}
+	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/);
+	return {
+		src: parts[1],
+		path: parts[2],
+		file: parts[3]
+	};
+};
+
+/**
+ * Exports one or more variables from a javascript file.
+ * The arguments you pass to this function will be passed
+ * as arguments to the callback of Q.require() whenever it requires
+ * the file in which this is called. They will also be saved,
+ * for subsequent calls of Q.require().
+ * @method exports
+ * @static
+ */
+Q.exports = function () {
+	var src = Q.currentScript(1).src;
+	_exports[src] = Array.prototype.slice.call(arguments, 0);
+};
+
+/**
  * Loads the Javascript file and then executes the callback,
- * The code in the file is supposed to assign something to Q.exports,
- * which is then passed as the first parameter to the callback.
+ * The code in the file is supposed to synchronously call Q.exports()
+ * and pass arguments to it which are then passed as arguments
+ * to the callback. If the code was loaded and Q.exports() was
+ * already called, then the callback is called with saved arguments.
  * @method require
  * @static
- * @param {String} src
- * @param {Function} callback
+ * @param {String} src The src of the script to load
+ * @param {Function} callback Always called asynchronously
  */
 Q.require = function (src, callback) {
-	Q.addScript(src, function _Q_require_callback(err) {
-		var exports = Q.exports;
-		Q.exports = null;
-		Q.handle(callback, Q, [exports]);
-	});
+	src = Q.url(src);
+	if (_exports[src]) {
+		setTimeout(function () {
+			Q.handle(callback, Q, [_exports[src]]);
+		}, 0);
+	} else {
+		Q.addScript(src, function _Q_require_callback(err) {
+			if (!(src in _exports)) {
+				_exports[src] = Q.exports;
+			}
+			Q.exports = null;
+			Q.handle(callback, Q, [_exports[src]]);
+		});
+	}
 };
-Q.exports = null;
+
+var _exports = {};
 
 /**
  * Adds a reference to a stylesheet, if it's not already there
