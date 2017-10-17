@@ -3,7 +3,7 @@
 /**
  * @module Q-tools
  */
-	
+
 var dataKey_index = 'index';
 var dataKey_scrollTop = 'scrollTop';
 var dataKey_hide = 'hide';
