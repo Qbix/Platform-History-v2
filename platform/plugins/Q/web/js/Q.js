@@ -1901,15 +1901,17 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 
 /**
  * Use this to ensure that a property exists before running some javascript code.
- * If something is undefined, loads a script or executes a function, calling the callback on success.
+ * If something is undefined, loads a script or executes a function,
+ * calling the callback on success.
  * @static
  * @method ensure
  * @param {Mixed} property
  *  The property to test for being undefined.
- * @param {String|Function} loader
+ * @param {String|Function|Q.Event} loader
  *  Something to execute if the property was undefined.
  *  If a string, this is interpreted as the URL of a javascript to load.
  *  If a function, this is called with the callback as the first argument.
+ *  If an event, the callback is added to it.
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
  *  This is where you would put the code that relies on the property being defined.
@@ -1920,7 +1922,7 @@ Q.ensure = function _Q_ensure(property, loader, callback) {
 		return;
 	}
 	if (typeof loader === 'string') {
-		Q.addScript(loader, callback);
+		Q.require(loader, callback);
 		return;
 	} else if (typeof loader === 'function') {
 		loader(callback);
@@ -6835,7 +6837,7 @@ Q.formPost.counter = 0;
  * Adds a reference to a javascript, if it's not already there
  * @static
  * @method addScript
- * @param {String|Array} src
+ * @param {String|Array} src The script url or an array of script urls
  * @param {Function} onload
  * @param {Object} options
  *  Optional. A hash of options, including:
@@ -7131,15 +7133,14 @@ Q.require = function (src, callback) {
 	src = Q.url(src);
 	if (_exports[src]) {
 		setTimeout(function () {
-			Q.handle(callback, Q, [_exports[src]]);
+			Q.handle(callback, Q, _exports[src]);
 		}, 0);
 	} else {
 		Q.addScript(src, function _Q_require_callback(err) {
 			if (!(src in _exports)) {
-				_exports[src] = Q.exports;
+				_exports[src] = [];
 			}
-			Q.exports = null;
-			Q.handle(callback, Q, [_exports[src]]);
+			Q.handle(callback, Q, _exports[src]);
 		});
 	}
 };
