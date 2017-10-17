@@ -25,7 +25,7 @@ abstract class Users extends Base_Users
 	static function communityId()
 	{
 		$communityId = Q_Config::get('Users', 'community', 'id', null);
-		return $communityId ? $communityId : Q_Config::expect('Q', 'app');
+		return $communityId ? $communityId : Q::app();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ abstract class Users extends Base_Users
 	static function communityName()
 	{
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
-		return $communityName ? $communityName : Q_Config::expect('Q', 'app');
+		return $communityName ? $communityName : Q::app();
 	}
 	
 	/**
@@ -1299,7 +1299,7 @@ abstract class Users extends Base_Users
 	static function importIcon($user, $urls = array(), $directory = null)
 	{
 		if (empty($directory)) {
-			$app = Q_Config::expect('Q', 'app');
+			$app = Q::app();
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
 				.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'imported';
 		}

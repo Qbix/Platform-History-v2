@@ -2,7 +2,7 @@
 
 function Users_0_9_2_Users_mysql()
 {
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$communityId = Users::communityId();
 	$rows = Users_Session::select('COUNT(1)')
 		->fetchAll(PDO::FETCH_NUM);

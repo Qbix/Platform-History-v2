@@ -434,7 +434,7 @@ class Q_Utils
 		$fp = self::socket($ip, $port, $errno, $errstr, $timeout);
 		if (!$fp) {
 			if ($throwIfRefused) {
-				$app = Q_Config::expect('Q', 'app');
+				$app = Q::app();
 				throw new Q_Exception("PHP couldn't open a socket to " . $url . " (" . $errstr . ") Go to scripts/$app and run node $app.js");
 			}
 			return false;

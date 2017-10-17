@@ -4,7 +4,7 @@ function Users_before_Q_responseExtras()
 {
 	Q_Response::addScript('{{Users}}/js/Users.js');
 	Q_Response::addScript('{{Users}}/js/UsersDevice.js');
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
 	foreach ($requireLogin as $rl => $value) {

@@ -2,7 +2,7 @@
 
 function Users_0_8_3_Users_mysql()
 {
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$communityId = Users::communityId();
 	$communityName = Q_Config::get('Users', 'community', 'name', $app);
 	$appRootUrl = Q_Config::expect('Q', 'web', 'appRootUrl');

@@ -1901,15 +1901,17 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 
 /**
  * Use this to ensure that a property exists before running some javascript code.
- * If something is undefined, loads a script or executes a function, calling the callback on success.
+ * If something is undefined, loads a script or executes a function,
+ * calling the callback on success.
  * @static
  * @method ensure
  * @param {Mixed} property
  *  The property to test for being undefined.
- * @param {String|Function} loader
+ * @param {String|Function|Q.Event} loader
  *  Something to execute if the property was undefined.
  *  If a string, this is interpreted as the URL of a javascript to load.
  *  If a function, this is called with the callback as the first argument.
+ *  If an event, the callback is added to it.
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
  *  This is where you would put the code that relies on the property being defined.
@@ -1920,7 +1922,7 @@ Q.ensure = function _Q_ensure(property, loader, callback) {
 		return;
 	}
 	if (typeof loader === 'string') {
-		Q.addScript(loader, callback);
+		Q.require(loader, callback);
 		return;
 	} else if (typeof loader === 'function') {
 		loader(callback);
@@ -6835,7 +6837,7 @@ Q.formPost.counter = 0;
  * Adds a reference to a javascript, if it's not already there
  * @static
  * @method addScript
- * @param {String|Array} src
+ * @param {String|Array} src The script url or an array of script urls
  * @param {Function} onload
  * @param {Object} options
  *  Optional. A hash of options, including:
@@ -7071,6 +7073,79 @@ Q.findScript = function (src) {
 	}
 	return null;
 };
+
+/**
+ * Gets information about the currently running script.
+ * Only works when called synchronously when the script loads.
+ * @method currentScript
+ * @static
+ * @param {Number} [stackLevels=0] If called within a function
+ *  that was called inside a script, put 1, if deeper put 2, etc.
+ * @return {Object} object with properties "src", "path" and "file"
+ */
+Q.currentScript = function (stackLevels) {
+	var result = '', index = 0, lines, parts, i, l;
+	try {
+		throw new Error();
+	} catch (e) {
+		lines = e.stack.split('\n');
+	}
+	for (i=0, l=lines.length; i<l; ++i) {
+		if (lines[i].match(/http[s]?:\/\//)) {
+			index = i + 2 + (stackLevels || 0);
+			break;
+		}
+	}
+	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/);
+	return {
+		src: parts[1],
+		path: parts[2],
+		file: parts[3]
+	};
+};
+
+/**
+ * Exports one or more variables from a javascript file.
+ * The arguments you pass to this function will be passed
+ * as arguments to the callback of Q.require() whenever it requires
+ * the file in which this is called. They will also be saved,
+ * for subsequent calls of Q.require().
+ * @method exports
+ * @static
+ */
+Q.exports = function () {
+	var src = Q.currentScript(1).src;
+	_exports[src] = Array.prototype.slice.call(arguments, 0);
+};
+
+/**
+ * Loads the Javascript file and then executes the callback,
+ * The code in the file is supposed to synchronously call Q.exports()
+ * and pass arguments to it which are then passed as arguments
+ * to the callback. If the code was loaded and Q.exports() was
+ * already called, then the callback is called with saved arguments.
+ * @method require
+ * @static
+ * @param {String} src The src of the script to load
+ * @param {Function} callback Always called asynchronously
+ */
+Q.require = function (src, callback) {
+	src = Q.url(src);
+	if (_exports[src]) {
+		setTimeout(function () {
+			Q.handle(callback, Q, _exports[src]);
+		}, 0);
+	} else {
+		Q.addScript(src, function _Q_require_callback(err) {
+			if (!(src in _exports)) {
+				_exports[src] = [];
+			}
+			Q.handle(callback, Q, _exports[src]);
+		});
+	}
+};
+
+var _exports = {};
 
 /**
  * Adds a reference to a stylesheet, if it's not already there
