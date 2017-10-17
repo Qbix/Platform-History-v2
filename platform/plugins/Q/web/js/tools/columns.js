@@ -31,6 +31,7 @@ var dataKey_opening = 'opening';
  *  @param {String}  [options.close.src] The src of the image to use for the close button
  *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
  *  @param {Object}  [options.scrollbarsAutoHide] If an object, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
+ *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
  *  @param {Boolean} [options.pagePushUrl] if this is true and the url of the column 
@@ -128,6 +129,7 @@ Q.Tool.define("Q/columns", function(options) {
 		src: "{{Q}}/img/x.png",
 		clickable: null
 	},
+	handlers: {},
 	title: undefined,
 	column: undefined,
 	controls: undefined,
@@ -385,6 +387,17 @@ Q.Tool.define("Q/columns", function(options) {
 			p.add(waitFor, function () {
 				var data = tool.data(index);
 				if ($(div).closest('html').length) {
+					var name = $(div).attr('data-name');
+					var js = state.handlers && state.handlers[name];
+					if (js) {
+						if (typeof js === 'string') {
+							Q.require(js, function (js) {
+								Q.handle(js, tool, [options, index, div, data]);
+							});
+						} else {
+							Q.handle(js, tool, [options, index, div, data]);
+						}
+					}
 					// call the callback before the events,
 					// so something custom can be done first
 					Q.handle(callback, tool, [options, index, div, data]);
