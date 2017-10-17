@@ -7073,6 +7073,24 @@ Q.findScript = function (src) {
 };
 
 /**
+ * Loads the Javascript file and then executes the callback,
+ * The code in the file is supposed to assign something to Q.exports,
+ * which is then passed as the first parameter to the callback.
+ * @method require
+ * @static
+ * @param {String} src
+ * @param {Function} callback
+ */
+Q.require = function (src, callback) {
+	Q.addScript(src, function _Q_require_callback(err) {
+		var exports = Q.exports;
+		Q.exports = null;
+		Q.handle(callback, Q, [exports]);
+	});
+};
+Q.exports = null;
+
+/**
  * Adds a reference to a stylesheet, if it's not already there
  * @static
  * @method addStylesheet
