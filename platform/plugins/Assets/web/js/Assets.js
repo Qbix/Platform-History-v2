@@ -50,6 +50,8 @@
 			}
 		},
 
+		onSuccessPayment: new Q.Event(),
+
 		/**
 		 * Operates with subscriptions.
 		 * @class Assets.Subscriptions
@@ -287,6 +289,9 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
+				if (!Assets.Payments || !Assets.Payments.stripe) {
+					throw new Q.Error("Assets.Payments.stripe: missing configuration");
+				}
 				var o = Q.extend({},
 					Q.text.Assets.payments,
 					Assets.Payments.stripe.options,
@@ -295,10 +300,13 @@
 				if (!o.amount) {
 					throw new Q.Error("Assets.Payments.stripe: amount is required");
 				}
-				var self = this;
 				// check for ApplePay
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari') && !Assets.Payments.applePayIsNotAvailable) {
-					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+					try {
+						Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+					} catch (err) {
+						throw(new Error('Please preload Stripe js library'));
+					}
 					Stripe.applePay.checkAvailability(function (available) {
 						if (available) {
 							_applePayStripe(o, callback);
@@ -309,9 +317,11 @@
 					});
 					return;
 				}
-				// check for PaymentRequest (Mobile Chrome at the moment)
+				// check for PaymentRequest
 				if (window.PaymentRequest) {
-					_paymentRequestStripe(o, callback);
+					Q.addScript(Assets.Payments.stripe.jsLibrary, function () {
+						_paymentRequestStripe(o, callback);//
+					});
 					return;
 				}
 				Q.addScript(o.javascript, function () {
@@ -358,6 +368,7 @@
 						return callback(msg, null);
 					}
 					Q.handle(callback, this, [null, response.slots.charge]);
+					Assets.onSuccessPayment.handle(response);
 				}, {
 					method: 'post',
 					fields: fields
@@ -452,12 +463,15 @@
 					supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
 					supportedTypes: ['credit']
 				}
-			},
-			{
+			}
+		];
+
+		if (Assets.Payments.androidPay) {
+			supportedInstruments.push({
 				supportedMethods: ['https://android.com/pay'],
 				data: {
 					merchantId: Assets.Payments.androidPay.gateway,
-					environment: 'TEST',
+					environment: Assets.Payments.androidPay.environment,
 					allowedCardNetwork: ['amex', 'discover', 'mastercard', 'visa'],
 					paymentMethodTokenizationParameters: {
 						tokenizationType: 'GATEWAY_TOKEN',
@@ -468,8 +482,8 @@
 						}
 					}
 				}
-			}
-		];
+			})
+		}
 
 		var details = {
 			total: {
@@ -518,10 +532,10 @@
 			return promise ? promise : Promise.reject({result: result, err: new Error('Unsupported method')});
 		}).then(function (result) {
 			result.complete('success');
-			alert('Payment success');
 		}).catch(function (res) {
-			res.result.complete('fail');
-			console.error('Uh oh, something bad happened: ' + res.err.message);
+			if (res.result && res.result.complete) {
+				res.result.complete('fail');
+			}
 		}).then(function () {
 			callback();
 		});
