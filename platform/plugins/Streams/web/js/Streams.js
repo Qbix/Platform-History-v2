@@ -3399,7 +3399,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	var latest = Message.latestOrdinal(publisherId, streamName);
 	if (latest === null && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
-		return null;
+		return true;
 	}
 	if (ordinal >= 0 && ordinal <= latest) {
 		// The cached stream already got this message
