@@ -22,6 +22,7 @@
  *   @param {Boolean|Array} [options.editable=true] Set to false to avoid showing even authorized users an interface to replace the image or text. Or set to an array naming only certain fields, which the rendering method would hopefully recognize.
  *   @param {Boolean} [options.closeable=true] Set to false to avoid showing even authorized users an option to closeable (or close) this stream
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
+ *     @param {String} [options.creatable.streamType="Streams/text/small"] Set the type of the stream to be created
  *     @param {String} [options.creatable.title="New Item"] Optional title for the case when streamName = "", i.e. the composer
  *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
  *     @param {Number} [options.creatable.addIconSize=100] The size in pixels of the square add icon
@@ -35,7 +36,7 @@
  *       If you canceled the process, pass false instead as the first parameter.
  *       However, if you want to go ahead and let the preview tool call Q.Streams.create,
  *       you can pass here a plain Object with any fields to set for the stream, such
- *       as "title", "content", "attributes" (as JSON string), etc.
+ *       as "title", "content", "attributes" (as JSON string), "name", etc.
  *   @param {Object} [options.imagepicker] Any options to pass to the Q/imagepicker jquery plugin -- see its options.
  *   @uses Q imagepicker
  *   @param {Object} [options.actions] Any options to pass to the Q/actions jquery plugin -- see its options.

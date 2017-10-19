@@ -1144,28 +1144,30 @@ abstract class Streams extends Base_Streams
 		if (!isset($uri)) {
 			$uri = Q_Dispatcher::uri();
 		}
+		$publisherId = null;
 		if (isset($_REQUEST['publisherId'])) {
-			return $_REQUEST['publisherId'];
+			$publisherId = $_REQUEST['publisherId'];
 		} else if (isset($uri->publisherId)) {
-			return $uri->publisherId;
+			$publisherId = $uri->publisherId;
 		} else if (isset($uri->username)) {
 			$publisher = new Users_User();
 			$publisher->username = $uri->username; // Warning: SECONDARY_LOOKUP
 			if (!$publisher->retrieve()) {
 				throw new Users_Exception_NoSuchUser(array(), 'username');
 			}
-			return $publisher->id;
-		}
-		if (Streams::$followedInvite) {
-			return Streams::$followedInvite->publisherId;
-		}
-		if ($throwIfMissing) {
+			$publisherId = $publisher->id;
+		} else if (Streams::$followedInvite) {
+			$publisherId = Streams::$followedInvite->publisherId;
+		} else if ($throwIfMissing) {
 			throw new Q_Exception_RequiredField(
 				array('field' => 'publisher id'),
 				'publisherId'
 			);
 		}
-		return null;
+		if (!is_string($publisherId)) {
+			throw new Q_Exception_WrongType(array('field' => 'publisherId', 'type' => 'string'));
+		}
+		return $publisherId;
 	}
 
 	/**
@@ -1177,8 +1179,7 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {boolean} $throwIfMissing=false
 	 *  Optional. If true, throws an exception if the stream name cannot be deduced
-	 * @param {string} $returnAs
-	 *  Defaults to "string". Can also be "array" or "original"
+	 * @param {string} [$returnAs='string'] Can be "array" or "string".
 	 * @param {array|string} [$uri=Q_Dispatcher::uri()]
 	 *  An array or string representing a uri to use instead of the Q_Dispatcher::uri()
 	 * @return {string}
@@ -1194,45 +1195,39 @@ abstract class Streams extends Base_Streams
 		if (!isset($uri)) {
 			$uri = Q_Dispatcher::uri();
 		}
+		$name = $result = null;
+		$fieldName = 'streamName';
 		if (isset($_REQUEST['streamName'])) {
 			$result = $_REQUEST['streamName'];
 		} else if (isset($_REQUEST['name'])) {
 			$result = $_REQUEST['name'];
+			$fieldName = 'name';
 		} else if (isset($uri->streamName)) {
 			$result = $uri->streamName;
 		} else if (isset($uri->name)) {
+			$fieldName = 'name';
 			$result = $uri->name;
 		}
 		if (isset($result)) {
-			if ($returnAs === 'string' and is_array($result)) {
+			if (is_array($result)) {
 				$result = implode('/', $result);
 			}
-			if ($returnAs === 'array' and is_string($result)) {
-				$result = explode('/', $result);
-			}
-			if (is_array($result)) {
-				if (isset($uri->name_prefix)) {
-					foreach ($result as $k => $v) {
-						$result[$k] = $uri->name_prefix.$result;
-					}
-				}
-				return $result;
-			}
-			if (!is_string($result)) {
-				return $result;
-			}
-			return isset($uri->name_prefix) ? $uri->name_prefix.$result : $result;
-		}
-		if (Streams::$followedInvite) {
-			return Streams::$followedInvite->streamName;
-		}
-		if ($throwIfMissing) {
+			$name = isset($uri->name_prefix) ? $uri->name_prefix.$result : $result;
+		} else if (Streams::$followedInvite) {
+			$name = Streams::$followedInvite->streamName;
+		} else if ($throwIfMissing) {
 			throw new Q_Exception_RequiredField(
 				array('field' => 'stream name'),
 				'streamName'
 			);
 		}
-		return null;
+		if (!is_string($name)) {
+			throw new Q_Exception_WrongType(array('field' => $fieldName, 'type' => 'string or array'));
+		}
+		if ($returnAs === 'array' and is_string($name)) {
+			$name = explode('/', $result);
+		}
+		return $name;
 	}
 
 	/**
