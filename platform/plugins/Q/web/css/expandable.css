@@ -23,7 +23,7 @@
 
 
 .Q_expandable_tool h2 img {
-	width:25px; height:25px; vertical-align: middle; margin-left: 5px
+	width:25px; height:25px; vertical-align: middle; margin-left: 5px; margin-right: 5px;
 }
 
 .Q_expandable_tool h2 span {

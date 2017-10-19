@@ -186,7 +186,7 @@ class Q_Cache
 	 * @method setDuration
 	 * @protected
 	 * @static
-	 * @param {integer} $duration The number of seconds to until the cache store under this namespace expires
+	 * @param {integer} $duration The number of seconds to store until the cache under this namespace expires
 	 * @param {string} [$namespace=self::$namespace] The namespace to use
 	 */
 	public static function setDuration($duration, $namespace = null)

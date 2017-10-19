@@ -9,7 +9,7 @@
 			localStorage.setItem("Q\tUsers.Device.appId", appId);
 		}
 		Users.Device.init(function () {
-			console.log('Device adapter init: ' + Users.Device.adapter.adapterName);
+			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
 		});
 	}, 'Users.Device');
 
@@ -82,7 +82,7 @@
 				// TODO implement adapter for Safari Browser
 			}
 			if (!this.adapter) {
-				throw(new Error('There is no suitable adapter for push notifications.'));
+				return console.error("Users.Device: No suitable adapter for push notifications");
 			}
 			this.adapter.init(callback);
 		},
@@ -142,9 +142,9 @@
 				callback(subscription);
 			}).catch(function (e) {
 				if (Notification.permission === 'denied') {
-					console.warn('Permission for Notifications was denied');
+					console.error('Users.Device: Permission for Notifications was denied');
 				} else {
-					console.warn('Unable to subscribe to push.', e);
+					console.error('Users.Device: Unable to subscribe to push.', e);
 				}
 			});
 
@@ -176,13 +176,11 @@
 					if (subscription) {
 						return subscription.unsubscribe();
 					}
-				})
-				.catch(function (error) {
-					console.log('Error unsubscribing', error);
-				})
-				.then(function () {
+				}).catch(function (error) {
+					console.error('Users.Device: Error unsubscribing', error);
+				}).then(function () {
 					//updateSubscriptionOnServer(null);
-					console.log('User is unsubscribed.');
+					console.log('Users.Device: User is unsubscribed.');
 					callback(true);
 
 				});
@@ -340,7 +338,7 @@
 		});
 
 		push.on('error', function (e) {
-			console.log("ERROR", e);
+			console.warn("Users.Device: ERROR", e);
 		});
 
 		Users.logout.options.onSuccess.set(function () {
@@ -350,17 +348,20 @@
 	}
 
 	function _registerServiceWorker(callback) {
+		if (Q.info.url.substr(0, 8) !== 'https://') {
+			return false;
+		}
 		navigator.serviceWorker.register('/Q/plugins/Users/js/sw.js')
-			.then(function (swReg) {
-				console.log('Service Worker is registered', swReg);
-				self.serviceWorkerRegistration = swReg;
-				if (callback)
-					callback(swReg);
-			})
-			.catch(function (error) {
-				callback(null, error);
-				console.error('Service Worker Error', error);
-			});
+		.then(function (swReg) {
+			console.log('Service Worker is registered', swReg);
+			self.serviceWorkerRegistration = swReg;
+			if (callback)
+				callback(swReg);
+		}).catch(function (error) {
+			callback(null, error);
+			console.error('Users.Device: Service Worker Error', error);
+		});
+		return true;
 	}
 
 	function _registerDevice(deviceId) {

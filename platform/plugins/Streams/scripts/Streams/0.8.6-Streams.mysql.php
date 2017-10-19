@@ -11,7 +11,7 @@ function Streams_0_8_6_Streams_mysql()
 	$access->streamName = 'Streams/experience/';
 	$access->ofUserId = '';
 	$access->ofContactLabel = "$app/admins";
-	$access->readLevel = Streams::$READ_LEVEL['messages'];
+	$access->readLevel = Streams::$READ_LEVEL['relations'];
 	$access->writeLevel = Streams::$WRITE_LEVEL['edit'];
 	$access->adminLevel = Streams::$ADMIN_LEVEL['own'];
 	$access->save();
