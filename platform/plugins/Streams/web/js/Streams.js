@@ -4123,8 +4123,8 @@ var Interests = Streams.Interests = {
 		style = style || 'white';
 		var info = Interests.info[communityId];
 		var cn = Q.normalize(category);
-		if (info && info[category] && info[category].white) {
-			return info[category].white.interpolate({ baseUrl: Q.info.baseUrl })
+		if (info && info[category] && info[category][style]) {
+			return info[category][style].interpolate({ baseUrl: Q.info.baseUrl })
 		}
 		return Q.url(
 			'{{Streams}}/img/icons/interests/categories/'
