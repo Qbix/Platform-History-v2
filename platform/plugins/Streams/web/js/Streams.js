@@ -740,6 +740,7 @@ var _Streams_batchFunction_options = {
  * @method create
  * @param {Object} fields
  *  Should contain at least the publisherId and type of the stream.
+ *  Fields are passed to the Streams/stream POST handler.
  *  The attributes field can be an object.
  * @param {Function} callback 
  *	if there were errors, first parameter is the error message
@@ -749,6 +750,8 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
+ *   @param {Object} [options.fields] Used to override any fields passed in the request
+ *   @param {String} [options.filename] Overrides the default filename for file uploads
  *   @param {HTMLElement} [options.form] If you want to upload a file or an icon, pass
  *    a form element here which includes input elements of type "file", named "file" or "icon".
  *    If they have files selected in them, they will be passed along with the rest of the
@@ -763,6 +766,9 @@ Streams.create = function (fields, callback, related, options) {
 	var slotNames = ['stream'];
 	var options = options || {};
 	fields = Q.copy(fields);
+	if (options.fields) {
+		Q.extend(fields, 10, options.fields);
+	}
 	if (fields.icon) {
 		slotNames.push('icon');
 	}
