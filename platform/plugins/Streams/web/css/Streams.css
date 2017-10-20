@@ -820,11 +820,11 @@
 	cursor: pointer;
 }
 
-.Streams_file_preview_tool:hover {
+.Streams_file_preview_tool.Streams_preview_stream:hover {
 	background: rgba(150, 150, 150, 0.1);
 }
 
-.Streams_file_preview_tool:focus,
-.Streams_file_preview_tool:active {
+.Streams_file_preview_tool.Streams_preview_stream:focus,
+.Streams_file_preview_tool.Streams_preview_stream:active {
 	background: rgba(150, 150, 150, 0.2);
 }
