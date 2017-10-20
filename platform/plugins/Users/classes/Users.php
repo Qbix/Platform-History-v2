@@ -1214,7 +1214,7 @@ abstract class Users extends Base_Users
 		$user = new Users_User();
 		if ($type === 'email') {
 			$user->save();
-			$user->setEmailAddress($value);
+			$user->setEmailAddress($value, true);
 		} else if ($type === 'mobile') {
 			$user->save();
 			$user->setMobileNumber($value, true);
@@ -1262,7 +1262,7 @@ abstract class Users extends Base_Users
 			$ui->state = 'future';
 			if (!$ui->retrieve()) {
 				$ui->userId = $user->id;
-				$ui->save();
+				$ui->save(true);
 			}
 			$status = $ui->state;
 		}
