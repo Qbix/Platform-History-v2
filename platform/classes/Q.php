@@ -457,9 +457,9 @@ class Q
 	 * @static
 	 * @param {string} $filename The name of the file to get the content of
 	 * @param {array} $options
-	 * @param {integer} $options.duration Number of seconds to cache it for
-	 * @param {boolean} $options.dontCache whether to skip caching it
-	 * @param {boolean} $options.ignoreCache whether to ignore already cached result
+	 * @param {integer} [$options.duration=0] Number of seconds to cache it for
+	 * @param {boolean} [$options.dontCache=false] whether to skip caching it
+	 * @param {boolean} [$options.ignoreCache=false] whether to ignore already cached result
 	 * @return {string} the content of the file
 	 * @throws {Q_Exception_MissingFile}
 	 *  May throw a Q_Exception_MissingFile exception.
@@ -600,7 +600,7 @@ class Q
 		if ($fields = Q_Config::get('Q', 'views', 'fields', null)) {
 			$params = array_merge($fields, $params);
 		}
-		$params = array_merge($params, Q_Text::params($parts));
+		$params = array_merge(Q_Text::params($parts), $params);
 
 		/**
 		 * @event {before} Q/view

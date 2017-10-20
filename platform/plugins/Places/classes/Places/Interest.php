@@ -47,10 +47,10 @@ class Places_Interest
 	 * @static
 	 * @param {string} $publisherId The publisher of the category streams
 	 * @param {string} $relationType The type of the relation
-	 * @param {string|array} $titles The titles of the interests, which will be normalized
-	 * @param {string} [$experienceId="main"] The id of a community experience, the last part of its stream name
-	 * @param {string} [$meters=null] One of the values in Places/nearby/meters config array,
-	 *  used to find the right Places/interest stream.
+	 * @param {string|array|Db_Range} $titles
+	 *    The titles of the interests, which will be normalized
+	 * @param {string} [$experienceId="main"]
+	 *    The id of a community experience, the last part of its stream name
 	 * @return {array} Returns an array of Streams_RelatedTo objects
 	 */
 	static function related(
@@ -70,6 +70,54 @@ class Places_Interest
 		);
 	}
 	
+	/**
+	 * Get streams related to Places/nearby streams, which are found from the
+	 * following parameters.
+	 * @method byTime
+	 * @static
+	 * @param {string} $publisherId The publisher of the category streams
+	 * @param {string} $relationType The type of the relation
+	 * @param {string|array|Db_Range} $titles 
+	 *   The titles of the interests, which will be normalized
+	 * @param {integer} $fromTime A unix timestamp, in either seconds or milliseconds
+	 * @param {integer} $toTime A unix timestamp, in either seconds or milliseconds
+	 * @param {string} [$experienceId="main"]
+	 *   The id of a community experience, the last part of its stream name
+	 * @param {array} [$options]
+	 * @param {double} [$options.latitude] The latitude of the point to search around
+	 * @param {double} [$options.longitude] The longitude of the point to search around
+	 * @param {double} [$options.meters] The radius to search within
+	 * @param {double} [$meters=null] One of the values in Places/nearby/meters config array,
+	 *  used to find the right Places/nearby stream.
+	 * @return {array} Returns an array of Streams_RelatedTo objects
+	 */
+	static function byTime(
+		$publisherId, 
+		$relationType,
+		$titles,
+		$fromTime, 
+		$toTime, 
+		$experienceId = 'main',
+		$options = array())
+	{
+		if (is_string($titles)) {
+			$titles = array($titles);
+		}
+		$fromTime = Q_Utils::timestamp($fromTime);
+		$toTime = Q_Utils::timestamp($toTime);
+		list($latitude, $longitude, $meters) = Places_Nearby::defaults();
+		extract(Q::take($options, array('latitude', 'longitude', 'meters')), EXTR_IF_EXISTS);
+		$categories = array('Places_Interest', '_categories');
+		$weight = new Db_Range($fromTime, true, false, $toTime);
+		$options = compact(
+			'categories', 'experienceId', 'titles',
+			'fromTime', 'toTime', 'weight'
+		);
+		return Places_Nearby::related(
+			$publisherId, $relationType, $latitude, $longitude, $meters, $options
+		);
+	}
+	
 	static function _transform($nearby, $options)
 	{
 		$title = Q_Utils::normalize($options['title']);
@@ -83,16 +131,24 @@ class Places_Interest
 	
 	static function _categories($nearby, $options)
 	{
-		$titles = array();
-		foreach ($options['titles'] as $title) {
-			$titles[] = Q_Utils::normalize($title);
-		}
 		$experienceId = Q::ifset($options, 'experienceId', 'main');
 		$result = array();
+		$titles = $options['titles'];
 		foreach ($nearby as $k => $info) {
-			$t = array();
-			foreach ($titles as $title) {
-				$t[] = "Places/interest/$experienceId/$info[geohash]/$info[meters]/$title";
+			if ($titles instanceof Db_Range) {
+				$prefix = "Places/interest/$experienceId/$info[geohash]/$info[meters]/";
+				$t = new Db_Range(
+					$prefix . $options['titles']->min,
+					$titles->includeMin,
+					$titles->includeMax,
+					$prefix . $titles->max
+				);
+			} else {
+				$t = array();
+				foreach ($titles as $title) {
+					$title = Q_Utils::normalize($title);
+					$t[] = "Places/interest/$experienceId/$info[geohash]/$info[meters]/$title";
+				}
 			}
 			$result[$k] = $t;
 		}

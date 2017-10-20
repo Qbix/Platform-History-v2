@@ -9,7 +9,7 @@
 			localStorage.setItem("Q\tUsers.Device.appId", appId);
 		}
 		Users.Device.init(function () {
-			console.log('Device adapter init: ' + Users.Device.adapter.adapterName);
+			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
 		});
 	}, 'Users.Device');
 
@@ -107,6 +107,8 @@
 			}
 			if (this.adapter) {
 				this.adapter.init(callback);
+			} else {
+				console.error("Users.Device: No suitable adapter for push notifications");
 			}
 		},
 
@@ -151,9 +153,9 @@
 						}
 					}).catch(function (err) {
 						if (Notification.permission === 'denied') {
-							console.warn('Permission for Notifications was denied');
+							console.error('Users.Device: Permission for Notifications was denied');
 						} else {
-							console.warn('Unable to subscribe to push.', err);
+							console.error('Users.Device: Unable to subscribe to push.', err);
 						}
 						if (callback) {
 							callback(null, err);
@@ -176,13 +178,13 @@
 							}
 						})
 						.catch(function (error) {
-							console.log('Error while unsubscribing', error);
+							console.error('Users.Device: Error unsubscribing', error);
 							if (callback) {
 								callback(false, error);
 							}
 						})
 						.then(function () {
-							console.log('User is unsubscribed.');
+							console.log('Users.Device: User is unsubscribed.');
 							if (callback) {
 								callback(true);
 							}
@@ -360,7 +362,7 @@
 		});
 
 		push.on('error', function (e) {
-			console.log("ERROR", e);
+			console.warn("Users.Device: ERROR", e);
 		});
 
 		Users.logout.options.onSuccess.set(function () {
@@ -370,6 +372,11 @@
 	}
 
 	function _registerServiceWorker(callback) {
+		if (Q.info.url.substr(0, 8) !== 'https://') {
+			if (callback)
+				callback(null, new Error("Push notifications require HTTPS"));
+			return;
+		}
 		if (!'serviceWorker' in navigator && 'PushManager' in window) {
 			if (callback)
 				callback(null, new Error("Push messaging is not supported"));
@@ -386,7 +393,7 @@
 			})
 			.catch(function (error) {
 				callback(null, error);
-				console.error('Service Worker Error', error);
+				console.error('Users.Device: Service Worker Error', error);
 			});
 	}
 

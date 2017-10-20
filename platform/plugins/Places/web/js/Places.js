@@ -409,6 +409,17 @@ Cp.geocode = function (callback, options) {
 				lat: parseFloat(c.latitude),
 				lng: parseFloat(c.longitude)
 			};
+		} else if (c.lat && c.lng) {
+			if (!c.lat) {
+				callback && callback.call(c, p + "missing latitude");
+			}
+			if (!c.lng) {
+				callback && callback.call(c, p + "missing longitude");
+			}
+			param.location = {
+				lat: parseFloat(c.lat()),
+				lng: parseFloat(c.lng())
+			};
 		} else if (c.address) {
 			param.address = c.address;
 		} else {
@@ -425,19 +436,19 @@ Cp.geocode = function (callback, options) {
 				if (status !== 'OK') {
 					json = JSON.stringify(c);
 					err = p + "can't geocode " + json;
-				}
-				if (!results[0]) {
+				} else if (!results[0]) {
 					json = JSON.stringify(c);
 					err = p + "no place matched " + json;
+				} else {
+					var result = results[0];
+					if (result.geometry && result.geometry.location) {
+						var loc = result.geometry.location;
+						c.latitude = loc.lat();
+						c.longitude = loc.lng();
+					}
+					_geocodeCache.set(param, 0, c, [err, results]);
+					Q.handle(callback, c, [err, results]);
 				}
-				var result = results[0];
-				if (result.geometry && result.geometry.location) {
-					var loc = result.geometry.location;
-					c.latitude = loc.lat();
-					c.longitude = loc.lng();
-				}
-				_geocodeCache.set(param, 0, c, [err, results]);
-				Q.handle(callback, c, [err, results]);
 			});
 		}
 	});

@@ -815,3 +815,16 @@
 .Streams_dialog_interests .Q_dialog_slot {
 	padding: 10px;
 }
+
+.Streams_file_preview_tool {
+	cursor: pointer;
+}
+
+.Streams_file_preview_tool.Streams_preview_stream:hover {
+	background: rgba(150, 150, 150, 0.1);
+}
+
+.Streams_file_preview_tool.Streams_preview_stream:focus,
+.Streams_file_preview_tool.Streams_preview_stream:active {
+	background: rgba(150, 150, 150, 0.2);
+}

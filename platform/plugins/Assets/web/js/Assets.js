@@ -50,6 +50,8 @@
 			}
 		},
 
+		onSuccessPayment: new Q.Event(),
+
 		/**
 		 * Operates with subscriptions.
 		 * @class Assets.Subscriptions
@@ -287,6 +289,9 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
+				if (!Assets.Payments || !Assets.Payments.stripe) {
+					throw new Q.Error("Assets.Payments.stripe: missing configuration");
+				}
 				var o = Q.extend({},
 					Q.text.Assets.payments,
 					Assets.Payments.stripe.options,
@@ -295,23 +300,28 @@
 				if (!o.amount) {
 					throw new Q.Error("Assets.Payments.stripe: amount is required");
 				}
-				var self = this;
 				// check for ApplePay
-				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari') && !Assets.Payments.ApplePayIsNotAvailable) {
-					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari') && !Assets.Payments.applePayIsNotAvailable) {
+					try {
+						Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+					} catch (err) {
+						throw(new Error('Please preload Stripe js library'));
+					}
 					Stripe.applePay.checkAvailability(function (available) {
 						if (available) {
-							self.applePayStripe(o, callback);
+							_applePayStripe(o, callback);
 						} else {
-							Assets.Payments.ApplePayIsNotAvailable = true;
+							Assets.Payments.applePayIsNotAvailable = true;
 							Assets.Payments.stripe(options, callback);
 						}
 					});
 					return;
 				}
-				// check for PaymentRequest (Mobile Chrome at the moment)
+				// check for PaymentRequest
 				if (window.PaymentRequest) {
-					this.paymentRequestStripe(o, callback);
+					Q.addScript(Assets.Payments.stripe.jsLibrary, function () {
+						_paymentRequestStripe(o, callback);//
+					});
 					return;
 				}
 				Q.addScript(o.javascript, function () {
@@ -328,123 +338,6 @@
 						}
 					}, params)).open();
 				});
-			},
-
-			applePayStripe: function (options, callback) {
-				var paymentRequest = {
-					currencyCode: options.currency,
-					countryCode: options.countryCode ? options.countryCode : 'US',
-					total: {
-						label: options.description,
-						amount: options.amount
-					}
-				};
-				var session = Stripe.applePay.buildSession(paymentRequest, function (result, completion) {
-					options.token = result.token;
-					Q.Assets.Payments.pay('stripe', options, function (err) {
-						if (err) {
-							completion(ApplePaySession.STATUS_FAILURE);
-						} else {
-							completion(ApplePaySession.STATUS_SUCCESS);
-						}
-						callback();
-					});
-				}, function (error) {
-					console.log(error);
-					callback();
-				});
-
-				session.oncancel = function () {
-					console.log("User hit the cancel button in the payment window");
-					callback();
-				};
-
-				session.begin();
-			},
-
-			paymentRequestStripe: function (options, callback) {
-
-				var supportedInstruments = [
-					{
-						supportedMethods: ['basic-card'],
-						data: {
-							supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
-							supportedTypes: ['credit']
-						}
-					},
-					{
-						supportedMethods: ['https://android.com/pay'],
-						data: {
-							merchantId: Assets.Payments.androidPay.gateway,
-							environment: 'TEST',
-							allowedCardNetwork: ['amex', 'discover', 'mastercard', 'visa'],
-							paymentMethodTokenizationParameters: {
-								tokenizationType: 'GATEWAY_TOKEN',
-								parameters: {
-									'gateway': 'stripe',
-									'stripe:publishableKey': Assets.Payments.stripe.publishableKey,
-									'stripe:version': Assets.Payments.stripe.version
-								}
-							}
-						}
-					}
-				];
-
-				var details = {
-					total: {
-						label: options.description ? options.description : 'Total due',
-						amount: {currency: options.currency ? options.currency : 'USD', value: options.amount}
-					}
-				};
-
-				var request = new PaymentRequest(supportedInstruments, details, {requestPayerEmail: true});
-
-				request.show().then(function (result) {
-					var promise;
-					if (result.methodName === 'basic-card') {
-						promise = new Promise(function (resolve, reject) {
-							Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-							Stripe.card.createToken({
-								number: result.details.cardNumber,
-								cvc: result.details.cardSecurityCode,
-								exp_month: result.details.expiryMonth,
-								exp_year: result.details.expiryYear
-							}, function (res, token) {
-								if (res !== 200) {
-									return reject({result: result, err: new Error('Stripe gateway error')});
-								}
-								options.token = token;
-								return Q.Assets.Payments.pay('stripe', options, function (err) {
-									if (err) {
-										return reject({result: result, err: err});
-									}
-									return resolve(result);
-								});
-							});
-						});
-					}
-					if (result.methodName === 'https://android.com/pay') {
-						promise = new Promise(function (resolve, reject) {
-							options.token = JSON.parse(result.details.paymentMethodToken);
-							return Q.Assets.Payments.pay('stripe', options, function (err) {
-								if (err) {
-									return reject({result: result, err: err});
-								}
-								return resolve(result);
-							});
-						});
-					}
-					return promise ? promise : Promise.reject({result: result, err: new Error('Unsupported method')});
-				}).then(function (result) {
-					result.complete('success');
-					alert('Payment success');
-				}).catch(function (res) {
-					res.result.complete('fail');
-					console.error('Uh oh, something bad happened: ' + res.err.message);
-				}).then(function () {
-					callback();
-				});
-
 			},
 
 			/**
@@ -475,6 +368,7 @@
 						return callback(msg, null);
 					}
 					Q.handle(callback, this, [null, response.slots.charge]);
+					Assets.onSuccessPayment.handle(response);
 				}, {
 					method: 'post',
 					fields: fields
@@ -528,5 +422,124 @@
 		"Assets/payment": "{{Assets}}/js/tools/payment.js"
 	});
 
+	function _applePayStripe(options, callback) {
+		var paymentRequest = {
+			currencyCode: options.currency,
+			countryCode: options.countryCode ? options.countryCode : 'US',
+			total: {
+				label: options.description,
+				amount: options.amount
+			}
+		};
+		var session = Stripe.applePay.buildSession(paymentRequest, function (result, completion) {
+			options.token = result.token;
+			Q.Assets.Payments.pay('stripe', options, function (err) {
+				if (err) {
+					completion(ApplePaySession.STATUS_FAILURE);
+				} else {
+					completion(ApplePaySession.STATUS_SUCCESS);
+				}
+				callback();
+			});
+		}, function (error) {
+			console.log(error);
+			callback();
+		});
+
+		session.oncancel = function () {
+			console.log("User hit the cancel button in the payment window");
+			callback();
+		};
+
+		session.begin();
+	}
+
+	function _paymentRequestStripe(options, callback) {
+
+		var supportedInstruments = [
+			{
+				supportedMethods: ['basic-card'],
+				data: {
+					supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
+					supportedTypes: ['credit']
+				}
+			}
+		];
+
+		if (Assets.Payments.androidPay) {
+			supportedInstruments.push({
+				supportedMethods: ['https://android.com/pay'],
+				data: {
+					merchantId: Assets.Payments.androidPay.gateway,
+					environment: Assets.Payments.androidPay.environment,
+					allowedCardNetwork: ['amex', 'discover', 'mastercard', 'visa'],
+					paymentMethodTokenizationParameters: {
+						tokenizationType: 'GATEWAY_TOKEN',
+						parameters: {
+							'gateway': 'stripe',
+							'stripe:publishableKey': Assets.Payments.stripe.publishableKey,
+							'stripe:version': Assets.Payments.stripe.version
+						}
+					}
+				}
+			})
+		}
+
+		var details = {
+			total: {
+				label: options.description ? options.description : 'Total due',
+				amount: {currency: options.currency ? options.currency : 'USD', value: options.amount}
+			}
+		};
+
+		var request = new PaymentRequest(supportedInstruments, details, {requestPayerEmail: true});
+
+		request.show().then(function (result) {
+			var promise;
+			if (result.methodName === 'basic-card') {
+				promise = new Promise(function (resolve, reject) {
+					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+					Stripe.card.createToken({
+						number: result.details.cardNumber,
+						cvc: result.details.cardSecurityCode,
+						exp_month: result.details.expiryMonth,
+						exp_year: result.details.expiryYear
+					}, function (res, token) {
+						if (res !== 200) {
+							return reject({result: result, err: new Error('Stripe gateway error')});
+						}
+						options.token = token;
+						return Q.Assets.Payments.pay('stripe', options, function (err) {
+							if (err) {
+								return reject({result: result, err: err});
+							}
+							return resolve(result);
+						});
+					});
+				});
+			}
+			if (result.methodName === 'https://android.com/pay') {
+				promise = new Promise(function (resolve, reject) {
+					options.token = JSON.parse(result.details.paymentMethodToken);
+					return Q.Assets.Payments.pay('stripe', options, function (err) {
+						if (err) {
+							return reject({result: result, err: err});
+						}
+						return resolve(result);
+					});
+				});
+			}
+			return promise ? promise : Promise.reject({result: result, err: new Error('Unsupported method')});
+		}).then(function (result) {
+			result.complete('success');
+		}).catch(function (res) {
+			if (res.result && res.result.complete) {
+				res.result.complete('fail');
+			}
+		}).then(function () {
+			callback();
+		});
+
+	}
 
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

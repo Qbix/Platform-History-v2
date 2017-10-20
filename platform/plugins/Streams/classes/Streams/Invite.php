@@ -97,10 +97,15 @@ class Streams_Invite extends Base_Streams_Invite
 		if (!$this->save()) {
 			return false;
 		}
+		
+		$stream = Streams::fetchOne(
+			$this->userId, $this->publisherId, $this->streamName, true
+		);
 	
 		$participant = new Streams_Participant();
 		$participant->publisherId = $this->publisherId; // shouldn't change
 		$participant->streamName = $this->streamName; // shouldn't change
+		$participant->streamType = $stream->type; // shouldn't change
 		$participant->userId = $userId; // shouldn't change
 		$participant->state = 'participating'; // since invite was accepted, user has begun participating in the stream
 		$participant->save(true);
@@ -110,9 +115,6 @@ class Streams_Invite extends Base_Streams_Invite
 			$invitedUser = Users_User::fetch($userId, true);
 			$byUser = Users_User::fetch($this->invitingUserId, true);
 			// Set up the objects
-			$stream = Streams::fetchOne(
-				$this->userId, $this->publisherId, $this->streamName, true
-			);
 			$byStream = Streams::fetchOne(
 				$this->invitingUserId, $this->publisherId, $this->streamName, true
 			);
