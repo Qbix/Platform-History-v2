@@ -58,7 +58,7 @@ class Users_Label extends Base_Users_Label
 					$icon = $title[1];
 					$title = $title[0];
 				} else {
-					$icon = 'default';
+					$icon = 'labels/default';
 				}
 				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $unlessExists);
 			}
