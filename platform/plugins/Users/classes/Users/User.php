@@ -235,9 +235,12 @@ class Users_User extends Base_Users_User
 				// put an empty username for now
 				$this->username = $updatedFields['username'] = '';
 			}
+			if (empty($updatedFields['icon'])) {
+				$this->icon = $updatedFields['icon'] = 'default';
+			}
 		}
 		if (isset($updatedFields['icon']) and !$updatedFields['icon']) {
-			$user->icon = $updatedFields['icon'] = 'default';
+			$this->icon = $updatedFields['icon'] = 'default';
 		}
 		if (!empty($updatedFields['username'])) {
 			$app = Q::app();
