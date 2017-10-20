@@ -101,6 +101,7 @@ class Streams_Invite extends Base_Streams_Invite
 		$participant = new Streams_Participant();
 		$participant->publisherId = $this->publisherId; // shouldn't change
 		$participant->streamName = $this->streamName; // shouldn't change
+		$participant->streamType = $this->type; // shouldn't change
 		$participant->userId = $userId; // shouldn't change
 		$participant->state = 'participating'; // since invite was accepted, user has begun participating in the stream
 		$participant->save(true);
