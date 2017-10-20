@@ -1735,7 +1735,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$url = Q_Uri::interpolateUrl($this->icon, array(
 			'publisherId' => Q_Utils::splitId($this->publisherId)
 		));
-		$url = (Q_Valid::url($url))
+		$url = (Q_Valid::url($url) or mb_substr($this->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
 		if ($basename) {
