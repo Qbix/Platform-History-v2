@@ -39,6 +39,12 @@ Q.Tool.define("Q/tabs", function(options) {
 	var $te = $(tool.element);
 	
 	Q.addStylesheet('{{Q}}/css/tabs.css');
+	
+	var refresh = function () {
+		tool.refresh();
+	};
+	Q.onPopState.set(refresh, tool);
+	Q.Page.onPush.set(refresh, tool);
 
 	state.defaultTabName = state.defaultTabName || null;
 	
