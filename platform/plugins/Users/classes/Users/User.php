@@ -236,12 +236,12 @@ class Users_User extends Base_Users_User
 				$this->username = $updatedFields['username'] = '';
 			}
 			if (empty($updatedFields['icon'])) {
-				$this->icon = $updatedFields['icon'] = 'default';
+				$this->icon = $updatedFields['icon'] = '{{Users}}/img/icons/default';
 			}
+		} else if (isset($updatedFields['icon']) and !$updatedFields['icon']) {
+			$this->icon = $updatedFields['icon'] = '{{Users}}/img/icons/default';
 		}
-		if (isset($updatedFields['icon']) and !$updatedFields['icon']) {
-			$this->icon = $updatedFields['icon'] = 'default';
-		}
+
 		if (!empty($updatedFields['username'])) {
 			$app = Q::app();
 			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', true);
