@@ -90,9 +90,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Text.get('Streams/content', function (err, content) {
 			_content = content;
 			if (state.streamName) {
+				tool.element.addClass('Streams_preview_stream');
 				tool.loading();
 				tool.preview();
 			} else {
+				tool.element.addClass('Streams_preview_composer');
 				tool.composer();
 			}
 		});
@@ -215,6 +217,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			function Streams_preview_afterCreateRefresh() {
 				state.onCreate.handle.call(tool, this);
 				Q.handle(callback, tool, [this]);
+				tool.element.removeClass('Streams_preview_composer');
+				tool.element.addClass('Streams_preview_stream');
 				tool.preview();
 			}
 		}
@@ -238,7 +242,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			src: Q.url('{{Q}}/img/actions/add.png'),
 			prefix: tool.prefix
 		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
-		tool.element.addClass('Streams_preview_create');
 		Q.Template.render(
 			'Streams/preview/create',
 			fields,
