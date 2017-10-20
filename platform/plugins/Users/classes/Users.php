@@ -405,7 +405,7 @@ abstract class Users extends Base_Users
 				if (!$user->wasRetrieved()) {
 					// Register a new user basically and give them an empty username for now
 					$user->username = "";
-					$user->icon = 'default';
+					$user->icon = '{{Users}}/img/icons/default';
 					$user->signedUpWith = $platform;
 					$user->save();
 
@@ -991,7 +991,7 @@ abstract class Users extends Base_Users
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
 		}
-		$user->icon = 'default';
+		$user->icon = '{{Users}}/img/icons/default';
 		$user->passphraseHash = '';
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
@@ -1223,7 +1223,7 @@ abstract class Users extends Base_Users
 		}
 		$user->signedUpWith = 'none'; // this marks it as a future user for now
 		$user->username = "";
-		$user->icon = 'future';
+		$user->icon = '{{Users}}/img/icons/future';
 		$during = 'future';
 		/**
 		 * @event Users/insertUser {before}
