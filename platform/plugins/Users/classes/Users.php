@@ -405,7 +405,7 @@ abstract class Users extends Base_Users
 				if (!$user->wasRetrieved()) {
 					// Register a new user basically and give them an empty username for now
 					$user->username = "";
-					$user->icon = 'default';
+					$user->icon = '{{Users}}/img/icons/default';
 					$user->signedUpWith = $platform;
 					$user->save();
 
@@ -991,7 +991,7 @@ abstract class Users extends Base_Users
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
 		}
-		$user->icon = 'default';
+		$user->icon = '{{Users}}/img/icons/default';
 		$user->passphraseHash = '';
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
@@ -1214,7 +1214,7 @@ abstract class Users extends Base_Users
 		$user = new Users_User();
 		if ($type === 'email') {
 			$user->save();
-			$user->setEmailAddress($value);
+			$user->setEmailAddress($value, true);
 		} else if ($type === 'mobile') {
 			$user->save();
 			$user->setMobileNumber($value, true);
@@ -1223,7 +1223,7 @@ abstract class Users extends Base_Users
 		}
 		$user->signedUpWith = 'none'; // this marks it as a future user for now
 		$user->username = "";
-		$user->icon = 'future';
+		$user->icon = '{{Users}}/img/icons/future';
 		$during = 'future';
 		/**
 		 * @event Users/insertUser {before}
@@ -1262,7 +1262,7 @@ abstract class Users extends Base_Users
 			$ui->state = 'future';
 			if (!$ui->retrieve()) {
 				$ui->userId = $user->id;
-				$ui->save();
+				$ui->save(true);
 			}
 			$status = $ui->state;
 		}
@@ -1668,7 +1668,9 @@ abstract class Users extends Base_Users
 			return '';
 		}
 		$url = Q_Uri::interpolateUrl($icon);
-		$url = Q_Valid::url($url) ? $url : "{{Users}}/img/icons/$url";
+		$url = (Q_Valid::url($url) or mb_substr($icon, 0, 2) === '{{') 
+			? $url 
+			: "{{Users}}/img/icons/$url";
 		if ($basename and strpos($basename, '.') === false) {
 			$basename .= ".png";
 		}

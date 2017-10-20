@@ -5282,6 +5282,7 @@ Q.Page = function (uriString) {
  * @param {String} [title=null] The title to go with the url, to override current title
  */
 Q.Page.push = function (url, title) {
+	var prevUrl = location.href;
 	url = Q.url(url);
 	if (url.substr(0, Q.info.baseUrl.length) !== Q.info.baseUrl) {
 		return;
@@ -5311,7 +5312,10 @@ Q.Page.push = function (url, title) {
 	}
 	Q_hashChangeHandler.currentUrl = url.substr(Q.info.baseUrl.length + 1);
 	Q.info.url = url;
+	Q.handle(Q.Page.onPush, Q, [url, title, prevUrl]);
 };
+
+Q.Page.onPush = new Q.Event();
 
 Q.Page.currentUrl = function () {
 	var url = location.hash.queryField('url');
@@ -7549,6 +7553,9 @@ Q.activate = function _Q_activate(elem, options, callback) {
 	
 	function _activated() {
 		var tool = shared.firstTool || shared.tool;
+		if (!Q.isEmpty(shared.tools) && !tool) {
+			throw new Q.Error("Q.activate: tool " + shared.firstToolId + " not found.");
+		}
 		if (callback) {
 			Q.handle(callback, tool, [elem, options, shared.tools]);
 		}
