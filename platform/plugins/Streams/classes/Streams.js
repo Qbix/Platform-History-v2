@@ -1059,7 +1059,9 @@ Streams.iconUrl = function(icon, size) {
 	}
 	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
 	var src = Q.interpolateUrl(icon + '/' + size);
-	return src.isUrl() ? src : Q.url('{{Streams}}/img/icons/'+src);
+	return src.isUrl() || icon.substr(0, 2) == '{{'
+		? src
+		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
 Streams.invitedUrl = function _Streams_invitedUrl(token) {
