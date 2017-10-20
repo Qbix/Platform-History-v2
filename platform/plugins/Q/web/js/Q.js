@@ -7549,6 +7549,9 @@ Q.activate = function _Q_activate(elem, options, callback) {
 	
 	function _activated() {
 		var tool = shared.firstTool || shared.tool;
+		if (!Q.isEmpty(shared.tools) && !tool) {
+			throw new Q.Error("Q.activate: tool " + shared.firstToolId + " not found.");
+		}
 		if (callback) {
 			Q.handle(callback, tool, [elem, options, shared.tools]);
 		}

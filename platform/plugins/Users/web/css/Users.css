@@ -476,3 +476,9 @@ button.Users_getintouch_call {
 	background: #2839c4;
 	color: white;
 }
+
+.Users_labels_icon { vertical-align: middle; }
+
+.Q_dialog_slot .Users_labels_tool .Users_labels_label {
+	cursor: pointer;
+}
