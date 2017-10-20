@@ -61,12 +61,15 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 	if (!notification.alert.title || !notification.alert.body) {
 		return Q.handle(callback, this, [new Error('Notification title and body are required')]);
 	}
-	notification = {
+	var message = {
 		title: notification.alert.title,
-		body: notification.alert.body,
-		icon: notification.icon ? notification.icon : null,
-		click_action: notification.url ? notification.url : null
+		body: notification.alert.body
 	};
+	Q.each(['url', 'sound', 'color', 'icon', 'requireInteraction', 'renotify', 'silent', 'tag', 'vibrate', 'badge', 'dir', 'actions'], function (i, item) {
+		if (notification[item] !== undefined) {
+			message[item] = notification[item];
+		}
+	});
 	var webpush = require('web-push');
 	webpush.setVapidDetails(appConfig.url, appConfig.publicKey, appConfig.privateKey);
 	webpush.sendNotification({
@@ -75,7 +78,7 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 			auth: this.fields.auth,
 			p256dh: this.fields.p256dh
 		}
-	}, JSON.stringify(notification)).then(function () {
+	}, JSON.stringify(message)).then(function () {
 		Q.handle(callback, this);
 	}).catch(function (err) {
 		Q.handle(callback, this, [err]);

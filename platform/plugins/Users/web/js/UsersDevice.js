@@ -34,7 +34,15 @@
 		 *   with elliptic curve digital signature (ECDSA), over the P-256 curve.
 		 */
 		subscribe: function (callback, options) {
-			this.adapter.subscribe(callback, options);
+			this.getAdapter(function(adapter, err) {
+				if (err) {
+					callback(null, err);
+				} else {
+					adapter.subscribe(function(subscribed, err){
+						callback(subscribed, err);
+					}, options);
+				}
+			});
 		},
 
 		/**
@@ -45,7 +53,15 @@
 		 * @param {Function} callback
 		 */
 		unsubscribe: function (callback) {
-			this.adapter.unsubscribe(callback);
+			this.getAdapter(function(adapter, err) {
+				if (err) {
+					callback(null, err);
+				} else {
+					adapter.unsubscribe(function(subscribed, err){
+						callback(subscribed, err);
+					});
+				}
+			});
 		},
 
 		/**
@@ -55,7 +71,15 @@
 		 * @param {Boolean} callback Whether the user already has a subscription
 		 */
 		subscribed: function (callback) {
-			this.adapter.subscribed(callback);
+			this.getAdapter(function(adapter, err) {
+				if (err) {
+					callback(null, err);
+				} else {
+					adapter.subscribed(function(subscribed, err){
+						callback(subscribed, err);
+					});
+				}
+			})
 		},
 
 		/**
@@ -81,10 +105,17 @@
 			} else if (Q.info.browser.name === 'safari') {
 				// TODO implement adapter for Safari Browser
 			}
-			if (!this.adapter) {
-				throw(new Error('There is no suitable adapter for push notifications.'));
+			if (this.adapter) {
+				this.adapter.init(callback);
 			}
-			this.adapter.init(callback);
+		},
+
+		getAdapter: function(callback) {
+			if (!this.adapter) {
+				callback(null, new Error('There is no suitable adapter for this type of device'));
+				return;
+			}
+			callback(this.adapter);
 		},
 
 		adapter: null
@@ -96,111 +127,96 @@
 
 		adapterName: 'Web',
 
-		init: function (callback) {
-			var self = this;
+		init: function () {
 			this.appConfig = Q.getObject('Q.Users.browserApps.' + Q.info.browser.name + '.' + Q.info.app);
-			if (!'serviceWorker' in navigator && 'PushManager' in window) {
-				var msg = "Push messaging is not supported";
-				if (callback)
-					callback(new Error(msg));
-				return;
-			}
-			_registerServiceWorker(function(sw, err){
-				if (err)
-					callback(err);
-				else {
-					self.serviceWorkerRegistration = sw;
-					callback();
-				}
-			});
 		},
 
 		subscribe: function (callback, options) {
 			var self = this;
-
-			function urlB64ToUint8Array(base64String) {
-				var padding = '='.repeat((4 - base64String.length % 4) % 4);
-				var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
-				var rawData = window.atob(base64);
-				var outputArray = new Uint8Array(rawData.length);
-				for (var i = 0; i < rawData.length; ++i) {
-					outputArray[i] = rawData.charCodeAt(i);
-				}
-				return outputArray;
-			}
-
-			var appConfig = Q.getObject('Q.Users.browserApps.' + Q.info.browser.name + '.' + Q.info.app);
-			var userVisibleOnly = true;
-			if (options && !options.userVisibleOnly) {
-				userVisibleOnly = false;
-			}
-			this.serviceWorkerRegistration.pushManager.subscribe({
-				userVisibleOnly: userVisibleOnly,
-				applicationServerKey: urlB64ToUint8Array(self.appConfig.publicKey)
-			}).then(function (subscription) {
-				_saveSubscription(subscription);
-				callback(subscription);
-			}).catch(function (e) {
-				if (Notification.permission === 'denied') {
-					console.warn('Permission for Notifications was denied');
-				} else {
-					console.warn('Unable to subscribe to push.', e);
-				}
-			});
-
-			function _saveSubscription(subscription) {
-				if (!subscription) {
-					return;
-				}
-				subscription = JSON.parse(JSON.stringify(subscription));
-				Q.req('Users/device', function (err, response) {
-					if (!err) {
-						Q.handle(Users.onDevice, [response.data]);
-					}
-				}, {
-					method: 'post',
-					fields: {
-						deviceId: subscription.endpoint,
-						auth: subscription.keys.auth,
-						p256dh: subscription.keys.p256dh,
-						appId: appConfig.appId
-					}
-				});
-			}
-
-		},
-
-		unsubscribe: function (callback) {
-			this.serviceWorkerRegistration.pushManager.getSubscription()
-				.then(function (subscription) {
-					if (subscription) {
-						return subscription.unsubscribe();
-					}
-				})
-				.catch(function (error) {
-					console.log('Error unsubscribing', error);
-				})
-				.then(function () {
-					//updateSubscriptionOnServer(null);
-					console.log('User is unsubscribed.');
-					callback(true);
-
-				});
-		},
-
-		subscribed: function (callback) {
-			var self = this;
-			_registerServiceWorker(function(sw, err){
+			this.getServiceWorkerRegistration(function(sw, err) {
 				if (err)
 					callback(null, err);
 				else {
-					self.serviceWorkerRegistration = sw;
+					var userVisibleOnly = true;
+					if (options && !options.userVisibleOnly) {
+						userVisibleOnly = false;
+					}
+					sw.pushManager.subscribe({
+						userVisibleOnly: userVisibleOnly,
+						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
+					}).then(function (subscription) {
+						_saveSubscription(subscription, self.appConfig);
+						if (callback) {
+							callback(subscription);
+						}
+					}).catch(function (err) {
+						if (Notification.permission === 'denied') {
+							console.warn('Permission for Notifications was denied');
+						} else {
+							console.warn('Unable to subscribe to push.', err);
+						}
+						if (callback) {
+							callback(null, err);
+						}
+					});
+				}
+			});
+		},
+
+		unsubscribe: function (callback) {
+			this.getServiceWorkerRegistration(function(sw, err) {
+				if (err)
+					callback(null, err);
+				else {
+					sw.pushManager.getSubscription()
+						.then(function (subscription) {
+							if (subscription) {
+								_deleteSubscription(subscription.endpoint);
+								return subscription.unsubscribe();
+							}
+						})
+						.catch(function (error) {
+							console.log('Error while unsubscribing', error);
+							if (callback) {
+								callback(false, error);
+							}
+						})
+						.then(function () {
+							console.log('User is unsubscribed.');
+							if (callback) {
+								callback(true);
+							}
+						});
+				}
+			});
+		},
+
+		subscribed: function (callback) {
+			this.getServiceWorkerRegistration(function(sw, err) {
+				if (err)
+					callback(null, err);
+				else {
 					sw.pushManager.getSubscription()
 						.then(function (subscription) {
 							callback(!(subscription === null));
 						}).catch(function(err) {
 							callback(null, err);
 						});
+				}
+			});
+		},
+
+		getServiceWorkerRegistration: function(callback) {
+			var self = this;
+			if (this.serviceWorkerRegistration) {
+				return callback(this.serviceWorkerRegistration);
+			}
+			_registerServiceWorker.bind(this)(function(sw, err) {
+				if (err)
+					return callback(null, err);
+				else {
+					self.serviceWorkerRegistration = sw;
+					return callback(sw);
 				}
 			});
 		},
@@ -223,13 +239,15 @@
 		},
 
 		subscribe: function (callback) {
-			this.push = _FCMPluginInit(true);
+			this.push = _FCMInit(true);
 			if (callback)
 				callback();
 		},
 
 		unsubscribe: function (callback) {
+			var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
 			localStorage.removeItem("Q\tUsers.Device.deviceId");
+			_deleteSubscription(deviceId);
 			if (callback)
 				callback();
 		},
@@ -266,7 +284,9 @@
 		},
 
 		unsubscribe: function (callback) {
+			var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
 			localStorage.removeItem("Q\tUsers.Device.deviceId");
+			_deleteSubscription(deviceId);
 			if (callback)
 				callback();
 		},
@@ -350,10 +370,17 @@
 	}
 
 	function _registerServiceWorker(callback) {
+		if (!'serviceWorker' in navigator && 'PushManager' in window) {
+			if (callback)
+				callback(null, new Error("Push messaging is not supported"));
+			return;
+		}
 		navigator.serviceWorker.register('/Q/plugins/Users/js/sw.js')
 			.then(function (swReg) {
-				console.log('Service Worker is registered', swReg);
-				self.serviceWorkerRegistration = swReg;
+				navigator.serviceWorker.addEventListener('message', function(event){
+					Users.Device.onNotification.handle(event.data);
+				});
+				console.log('Service Worker is registered.');
 				if (callback)
 					callback(swReg);
 			})
@@ -386,6 +413,50 @@
 			method: 'post',
 			fields: {
 				appId: appId,
+				deviceId: deviceId
+			}
+		});
+	}
+
+	function _urlB64ToUint8Array(base64String) {
+		var padding = '='.repeat((4 - base64String.length % 4) % 4);
+		var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+		var rawData = window.atob(base64);
+		var outputArray = new Uint8Array(rawData.length);
+		for (var i = 0; i < rawData.length; ++i) {
+			outputArray[i] = rawData.charCodeAt(i);
+		}
+		return outputArray;
+	}
+
+	function _saveSubscription(subscription, appConfig) {
+		if (!subscription) {
+			return;
+		}
+		subscription = JSON.parse(JSON.stringify(subscription));
+		Q.req('Users/device', function (err, response) {
+			if (!err) {
+				Q.handle(Users.onDevice, [response.data]);
+			}
+		}, {
+			method: 'post',
+			fields: {
+				deviceId: subscription.endpoint,
+				auth: subscription.keys.auth,
+				p256dh: subscription.keys.p256dh,
+				appId: appConfig.appId
+			}
+		});
+	}
+
+	function _deleteSubscription(deviceId) {
+		if (!deviceId) {
+			return;
+		}
+		Q.req('Users/device', function (err, response) {
+		}, {
+			method: 'delete',
+			fields: {
 				deviceId: deviceId
 			}
 		});
