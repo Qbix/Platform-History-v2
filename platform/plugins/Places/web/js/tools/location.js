@@ -36,6 +36,8 @@
 	 * @class Places location
 	 * @constructor
 	 * @param {Object} [options] used to pass options
+	 * @param {String} [options.publisherId=Q.Users.loggedInUserId()] Override the publisherId
+	 *  for saving new locations.
 	 * @param {Object} [options.geocode] Default google location object, if available
 	 * @param {Places.Coordinates} [options.location] Provide a location to start off with.
 	 *  Can be anything that is accepted by Places.Coordinates constructor.
@@ -172,7 +174,7 @@
 				var tool = this;
 				var state = tool.state;
 				var $te = $(tool.element);
-				var userId = Users.loggedInUser.id;
+				var userId = Users.loggedInUserId();
 
 				Q.Template.render('Places/location/select', Q.extend({
 					text: Q.text.Places.Location
@@ -181,14 +183,14 @@
 
 						// set address tool
 						tool.$(".Places_location_address")
-							.tool('Places/address', {
-								onChoose: _onChoose
-							}, 'Places_address', tool.prefix)
-							.activate(function () {
-								tool.addressTool = this;
-							});
+						.tool('Places/address', {
+							onChoose: _onChoose
+						}, 'Places_address', tool.prefix)
+						.activate(function () {
+							tool.addressTool = this;
+						});
 
-						// set showLocationsf state.
+						// set showLocations state.
 						if (state.showLocations && userId) {
 							tool.$(".Places_location_related")
 								.tool('Streams/related', {
@@ -210,7 +212,7 @@
 								placeId: place.id
 							}).geocode(function (err, results) {
 								var result = results[0];
-								if (!result) {
+								if (!result || !userId) {
 									return;
 								}
 								var c = Q.text.Places.Location.confirm;
@@ -224,6 +226,7 @@
 											return;
 										}
 										Streams.create({
+											publisherId: state.publisherId || userId,
 											type: 'Places/location',
 											title: title,
 											attributes: {

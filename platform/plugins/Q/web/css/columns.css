@@ -11,7 +11,7 @@
 .Q_columns_column {
 	display: block;
 	float: left;
-	background: white;
+	background: transparent;
 	overflow: hidden;
 }
 

@@ -600,7 +600,7 @@ class Q
 		if ($fields = Q_Config::get('Q', 'views', 'fields', null)) {
 			$params = array_merge($fields, $params);
 		}
-		$params = array_merge($params, Q_Text::params($parts));
+		$params = array_merge(Q_Text::params($parts), $params);
 
 		/**
 		 * @event {before} Q/view

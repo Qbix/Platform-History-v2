@@ -689,7 +689,7 @@ abstract class Streams extends Base_Streams
 		// Avoid making a join to allow more flexibility for sharding
 		$accesses = Streams_Access::select('*')
 		->where(array(
-			'publisherId' => $publisherId,
+			'publisherId' => array($publisherId, ''),
 			'streamName' => $names,
 			'ofUserId' => array('', $asUserId)
 		))->ignoreCache()->fetchDbRows();
