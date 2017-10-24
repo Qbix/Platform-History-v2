@@ -10,7 +10,7 @@ class Places_Nearby
 	 * @static
 	 * @param {double} $latitude The latitude of the coordinates to search around
 	 * @param {double} $longitude The longitude of the coordinates to search around
-	 * @param {array} [$metersArray=null] To override the default in "Places"/"nearby"/"meters" config
+	 * @param {array} [$metersArray=null] To override the default in "Places"/"nearby"/"meters" config. Useful for only notifying people within a certain radius.
 	 * @param {string} [$experienceId='main'] The id of the experience stream, the part that comes after "Streams/experience/"
 	 * @return {array} Returns an array of several ($streamName => $info) pairs
 	 *  where the $streamName is the name of the stream corresponding to the "nearby point"
@@ -319,7 +319,7 @@ class Places_Nearby
 			return $stream;
 		}
 		$zipcode = $zipcodes ? reset($zipcodes) : null;
-		$attributes = compact('latitude', 'longitude');
+		$attributes = compact('latitude', 'longitude', 'meters');
 		if ($zipcode) {
 			foreach (array('zipcode', 'placeName', 'state') as $attr) {
 				$attributes[$attr] = $zipcode->$attr;
@@ -371,8 +371,10 @@ class Places_Nearby
 	}
 	
 	/**
-	 * Get all the relations to various category streams, sorted by ascending weight.
-	 * @method related
+	 * Get all the relations to various Places/nearby (or similar type category)
+	 * streams, sorted by ascending weight.
+	 * @method related. Note that these streams may be slightly out of range
+	 * and you may want to perform additional filtering using Places::distance().
 	 * @static
 	 * @param {string} $publisherId The publisher of the category streams
 	 * @param {string} $relationType The type of the relation to the category streams
@@ -402,7 +404,8 @@ class Places_Nearby
 	
 	/**
 	 * Get streams related to Places/nearby streams, which are found from the
-	 * following parameters.
+	 * following parameters. Note that these streams may be slightly out of range
+	 * and you may want to perform additional filtering using Places::distance().
 	 * @method byTime
 	 * @static
 	 * @param {string} $publisherId The publisher of the category streams
@@ -410,7 +413,7 @@ class Places_Nearby
 	 * @param {integer} $fromTime A unix timestamp, in either seconds or milliseconds
 	 * @param {integer} $toTime A unix timestamp, in either seconds or milliseconds
 	 * @param {string} [$experienceId="main"] The id of a community experience, the last part of its stream name
-	 * @param {array} [$options]
+	 * @param {array} [$options] Options to pass to Places_Nearby::related(). Also can contain:
 	 * @param {double} [$options.latitude] The latitude of the point to search around
 	 * @param {double} [$options.longitude] The longitude of the point to search around
 	 * @param {double} [$options.meters] The radius to search within
