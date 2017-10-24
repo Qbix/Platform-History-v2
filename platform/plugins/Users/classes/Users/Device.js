@@ -81,6 +81,9 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 	if (o.collapseId) {
 		n.collapseId = o.collapseId;
 	}
+	if (o.alert && o.alert.title) {
+		o.alert.title = Q.Handlebars.renderSource(o.alert.title, o.fields);
+	}
 	if (o && o.view) {
 		var body = o.isSource
 			? Q.Handlebars.renderSource(o.view, o.fields)
