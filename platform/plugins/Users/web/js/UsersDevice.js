@@ -377,7 +377,7 @@
 				callback(null, new Error("Push notifications require HTTPS"));
 			return;
 		}
-		if (!'serviceWorker' in navigator && 'PushManager' in window) {
+		if (!(('serviceWorker' in navigator) && ('PushManager' in window))) {
 			if (callback)
 				callback(null, new Error("Push messaging is not supported"));
 			return;
