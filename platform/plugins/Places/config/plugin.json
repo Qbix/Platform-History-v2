@@ -38,7 +38,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Locations",
-					"icon": "{{baseUrl}}/Q/plugins/Places/icons/locations"
+					"icon": "{{Places}}/icons/locations"
 				}
 			},
 			"Places/location": {
@@ -50,7 +50,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
-					"icon": "{{baseUrl}}/Q/plugins/Places/icons/location",
+					"icon": "{{Places}}/icons/location",
 					"title": "Location"
 				},
 				"relatedFrom": {
