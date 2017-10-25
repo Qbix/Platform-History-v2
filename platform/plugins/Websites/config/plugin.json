@@ -61,7 +61,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Untitled Slide",
-					"icon": "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/slide",
+					"icon": "{{Websites}}/img/icons/Websites/slide",
 					"readLevel": 10,
 					"writeLevel": 0,
 					"adminLevel": 10
@@ -74,10 +74,50 @@
 				"edit": true,
 				"defaults": {
 					"title": "Presentation",
-					"icon": "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/presentation",
+					"icon": "{{Websites}}/img/icons/Websites/presentation",
 					"readLevel": 10,
 					"writeLevel": 0,
 					"adminLevel": 10
+				}
+			},
+			"Websites/advert/unit": {
+				"description": "An advertising unit on a website",
+				"defaults": {
+					"title": "Advertising Unit",
+					"icon": "{{Websites}}/img/icons/Websites/presentation",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
+				}
+			},
+			"Websites/advert/placement": {
+				"description": "A way of grouping advertising units under a name",
+				"defaults": {
+					"title": "Advertising Placement",
+					"icon": "Streams/category",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
+				}
+			},
+			"Websites/advert/creative": {
+				"description": "An advertising campaign",
+				"defaults": {
+					"title": "Advertising Creative",
+					"icon": "{{Websites}}/img/icons/Websites/advert/creative",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
+				}
+			},
+			"Websites/advert/campaign": {
+				"description": "An advertising campaign",
+				"defaults": {
+					"title": "Advertising Campaign",
+					"icon": "{{Websites}}/img/icons/Websites/advert/campaign",
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0
 				}
 			}
 		}
