@@ -221,7 +221,7 @@
 		},
 
 		subscribe: function (callback) {
-			this.push = _FCMPluginInit(true);
+			this.push = _FCMInit(true);
 			if (callback)
 				callback();
 		},
