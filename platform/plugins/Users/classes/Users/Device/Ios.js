@@ -52,20 +52,18 @@ module.exports = Users_Device.Ios = Users_Device_Ios;
  * @param {String} [options.priority="high"] Can be set to "normal" to make it lower priority
  * @param {String} [options.collapseId] A string under 64 bytes for collapsing notifications
  * @param {String} [options.id] You can provide your own uuid for the notification
+ * @param {Object} [options.providerOptions={}] Override any apn.Provider constructor options
  * @param {boolean} [options.silent=false] Deliver a silent notification, may throw an exception
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
-Users_Device.prototype.handlePushNotification = function (notification, options, callback) {
+Users_Device_Ios.prototype.handlePushNotification = function (notification, options, callback) {
 	var device = this;
-	if (!Users.push.apn.provider) {
-		console.warn("Users.Device.prototype.pushNotification: Users.apn.provider missing, call Users.listen() first");
-		return;
-	}
 	var appId = this.fields.appId || Q.Config.expect(['Q', 'app']);
 	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'appId']);
 	var apn = require('apn');
 	var n = new apn.Notification(notification);
-	Users.push.apn.provider.send(n, device.fields.deviceId)
+	var provider = Users_Device_Ios.provider(appId, options && options.providerOptions);
+	provider.send(n, device.fields.deviceId)
 	.then(function (responses) {
 		var errors = null;
 		responses.failed.forEach(function (result) {
@@ -80,6 +78,66 @@ Users_Device.prototype.handlePushNotification = function (notification, options,
 		Q.handle(callback, device, [errors, notification, n]);
 	});
 };
+
+/**
+ * Starts iOS APNs provider server, based on options
+ * @method provider
+ * @static
+ * @param {String} appId
+ * @param {Object} [providerOptions={}] Override any apn.Provider constructor options
+ * @return {apn.Provider}
+ */
+Users_Device_Ios.provider = function (appId, providerOptions) {
+	appId = appId || Q.app.name;
+	var provider = Users_Device_Ios.provider.collection[appId];
+	if (provider) {
+		return provider;
+	}
+	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") >= 0) {
+		throw new Q.Exception(
+			'Users.Device.Ios: Config Users/platforms/'+appId+' must include "ios"'
+		);
+	}
+ 	var fs = require('fs');
+ 	var apn = require('apn');
+ 	var path = require('path');
+ 	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
+ 	var sandbox = o.sandbox || false;
+ 	var token = o.token;
+ 	var ssl = o.ssl;
+ 	if (token) {
+ 		token.key = path.join(Q.app.DIR, token.key);
+ 		if (!fs.existsSync(token.key)) {
+ 			console.log("WARNING: APN provider not enabled due to missing token.key at " + token.key + "\n");
+ 			return;
+ 		}
+ 	} else if (ssl) {
+ 		ssl.ca = Q.pluginInfo.Users.FILES_DIR + '/Users/certs/EntrustRootCA.pem';
+ 		var keys = ['cert', 'key', 'ca'];
+ 		for (var i=0, l=keys.length; i<l; ++i) {
+ 			var k = files[i];
+ 			if (!ssl[k] || !fs.existsSync(ssl[k])) {
+ 				console.log("WARNING: APN provider not enabled due to missing " + k + " at " + ssl[k] + "\n");
+ 				return;
+ 			}
+ 		}
+ 	} else {
+ 		console.log("WARNING: APN provider not enabled due to missing token and ssl config");
+ 		return;
+ 	}
+ 	if (o.production === undefined) {
+ 		o.production = !sandbox;
+ 	}
+ 	var passphrase = Q.Config.get(["Users", "apps", "ios", appId, "passphrase"], null);
+ 	if (passphrase) {
+ 		o.passphase = passphase;
+ 	}
+ 	return Users_Device_Ios.provider.collection[appId] = new apn.Provider(
+		Q.extend({}, o, providerOptions)
+	);
+}
+
+Users_Device_Ios.provider.collection = {};
 
 Q.mixin(Users_Device_Ios, Users_Device, Q.require('Base/Users/Device'));
 
