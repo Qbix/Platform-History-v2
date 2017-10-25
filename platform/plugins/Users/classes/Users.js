@@ -124,9 +124,7 @@ Users.listen = function (options) {
     server.attached.express.post('/Q/node', Users_request_handler);
 };
 
-
-// for attaching various push-notification-related objects
-Users.push = {};
+Users.listen.options = {};
 
 /**
  * Fetches a user from the database
