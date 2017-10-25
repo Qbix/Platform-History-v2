@@ -36,7 +36,7 @@ class Users_User extends Base_Users_User
 	static function fetch ($userId, $throwIfMissing = false)
 	{
 		if (is_array($userId)) {
-			$users = Users_User::select('*')
+			$users = Users_User::select()
 				->where(array('id' => $userId))
 				->fetchDbRows('id');
 			if ($throwIfMissing) {

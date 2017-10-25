@@ -22,7 +22,7 @@ function Streams_subscription_put($params) {
 		));
 	}
 
-	$rules = Streams_Rule::select('*')->where(array(
+	$rules = Streams_Rule::select()->where(array(
 		'ofUserId'    => $user->id,
 		'publisherId' => $publisherId,
 		'streamName'  => $streamName

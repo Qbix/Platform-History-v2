@@ -388,7 +388,7 @@ abstract class Streams extends Base_Streams
 			: array();
 		
 		if (!empty($options['withParticipant']) and $asUserId) {
-			$prows = Streams_Participant::select('*')->where(array(
+			$prows = Streams_Participant::select()->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $namesToFetch,
 				'userId' => $asUserId
@@ -405,7 +405,7 @@ abstract class Streams extends Base_Streams
 		if (!empty($options['withTotals'])) {
 			$infoForTotals = array();
 			if (isset($options['withTotals']['*'])) {
-				$trows = Streams_Total::select('*')->where(array(
+				$trows = Streams_Total::select()->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $name,
 					'messageType' => $options['withTotals']['*']
@@ -426,7 +426,7 @@ abstract class Streams extends Base_Streams
 				$infoForTotals[$j] = array($n, $mt);
 			}
 			foreach ($infoForTotals as $info) {
-				$frows = Streams_Total::select('*')->where(array(
+				$frows = Streams_Total::select()->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $info[0],
 					'messageType' => $info[1]
@@ -687,7 +687,7 @@ abstract class Streams extends Base_Streams
 
 		// Get the per-label access data
 		// Avoid making a join to allow more flexibility for sharding
-		$accesses = Streams_Access::select('*')
+		$accesses = Streams_Access::select()
 		->where(array(
 			'publisherId' => array($publisherId, ''),
 			'streamName' => $names,
@@ -702,7 +702,7 @@ abstract class Streams extends Base_Streams
 		}
 		if (!empty($labels)) {
 			$labels = array_unique($labels);
-			$contacts = Users_Contact::select('*')
+			$contacts = Users_Contact::select()
 				->where(array(
 					'userId' => $actualPublisherId,
 					'label' => $labels,
@@ -1558,7 +1558,7 @@ abstract class Streams extends Base_Streams
 		$readLevels2 = array();
 		if ($contact_label_list) {
 			$contact_label_list = array_unique($contact_label_list);
-			$contacts = Users_Contact::select('*')
+			$contacts = Users_Contact::select()
 				->where(array(
 					'userId' => $publisherId,
 					'label' => $contact_label_list
@@ -1766,14 +1766,14 @@ abstract class Streams extends Base_Streams
 		
 		// Fetch relatedTo
 		if ($relatedTo !== false) {
-			$relatedTo = Streams_RelatedTo::select('*')
+			$relatedTo = Streams_RelatedTo::select()
 			->where($criteria)
 			->fetchDbRows(null, null, $arrayField);
 		}
 		
 		// Fetch relatedFrom
 		if ($relatedFrom !== false) {
-			$relatedFrom = Streams_RelatedFrom::select('*')
+			$relatedFrom = Streams_RelatedFrom::select()
 			->where($criteria)
 			->fetchDbRows(null, null, $arrayField);
 		}
@@ -2352,13 +2352,13 @@ abstract class Streams extends Base_Streams
 		$stream = reset($streams);
 
 		if ($isCategory) {
-			$query = Streams_RelatedTo::select('*')
+			$query = Streams_RelatedTo::select()
 			->where(array(
 				'toPublisherId' => $publisherId,
 				'toStreamName' => $streamName
 			));
 		} else {
-			$query = Streams_RelatedFrom::select('*')
+			$query = Streams_RelatedFrom::select()
 			->where(array(
 				'fromPublisherId' => $publisherId,
 				'fromStreamName' => $streamName
@@ -2678,7 +2678,7 @@ abstract class Streams extends Base_Streams
 		if (empty($options['skipAccess'])) {
 			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
-		$participants = Streams_Participant::select('*')
+		$participants = Streams_Participant::select()
 		->where(array(
 			'publisherId' => $publisherId,
 			'streamName' => $streamNames,
@@ -2846,7 +2846,7 @@ abstract class Streams extends Base_Streams
 		if (empty($options['skipAccess'])) {
 			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
-		$participants = Streams_Participant::select('*')
+		$participants = Streams_Participant::select()
 		->where(array(
 			'publisherId' => $publisherId,
 			'streamName' => $streamNames,
@@ -3019,7 +3019,7 @@ abstract class Streams extends Base_Streams
 			$shouldUpdate = true;
 		}
 		$subscriptions = array();
-		$rows = Streams_Subscription::select('*')
+		$rows = Streams_Subscription::select()
 		->where(array(
 			'publisherId' => $publisherId,
 			'streamName' => $streamNames,
@@ -3063,7 +3063,7 @@ abstract class Streams extends Base_Streams
 			foreach ($types as $type => $sns) {
 				// insert subscriptions
 				if (!isset($filter) or !isset($untilTime)) {
-					$templates = Streams_Subscription::select('*')
+					$templates = Streams_Subscription::select()
 						->where(array(
 							'publisherId' => array('', $publisherId),
 							'streamName' => $type.'/',
@@ -3127,7 +3127,7 @@ abstract class Streams extends Base_Streams
 					}
 				}
 				if (!isset($rule)) {
-					$templates = Streams_Rule::select('*')
+					$templates = Streams_Rule::select()
 						->where(array(
 							'ofUserId' => array('', $asUserId),
 							'publisherId' => array('', $publisherId),
@@ -3225,7 +3225,7 @@ abstract class Streams extends Base_Streams
 			Streams_Participant::update()
 				->set(array('subscribed' => 'no'))
 				->where($criteria)->execute();
-			$participants = Streams_Participant::select('*')
+			$participants = Streams_Participant::select()
 				->where($criteria)
 				->fetchDbRows();
 		} else {
@@ -4039,7 +4039,7 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		$limit = Q_Config::get('Streams', 'lookup', 'limit', 10);
-		return Streams_Stream::select('*')->where(array(
+		return Streams_Stream::select()->where(array(
 			'publisherId' => $publisherId,
 			'type' => $types,
 			'title LIKE ' => $title

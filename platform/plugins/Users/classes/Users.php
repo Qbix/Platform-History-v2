@@ -73,7 +73,7 @@ abstract class Users extends Base_Users
 			}
 			$userId = $user->id;
 		}
-		$contacts = Users_Contact::select('*')
+		$contacts = Users_Contact::select()
 			->where(array(
 				'userId' => $publisherId,
 				'contactUserId' => $userId
@@ -474,7 +474,7 @@ abstract class Users extends Base_Users
 		if (isset($_SESSION['Users']['appUsers'][$key])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$key];
-			$au = Users_AppUser::select('*')->where($pk)->fetchDbRow();
+			$au = Users_AppUser::select()->where($pk)->fetchDbRow();
 			if (empty($au)) {
 				// somehow this app_user disappeared from the database
 				throw new Q_Exception_MissingRow(array(
@@ -813,7 +813,7 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'after');
 		
-		$votes = Users_Vote::select('*')
+		$votes = Users_Vote::select()
 			->where(array(
 				'userId' => $user->id,
 				'forType' => 'Users/hinted'
@@ -1153,7 +1153,7 @@ abstract class Users extends Base_Users
 			list($hashed, $ui_type) = self::hashing($value, $type);
 			$identifiers = "$ui_type:$hashed";
 		}
-		$uis = Users_Identify::select('*')->where(array(
+		$uis = Users_Identify::select()->where(array(
 			'identifier' => $identifiers,
 			'state' => isset($state) ? $state : array('verified', 'future')
 		))->limit(1)->fetchDbRows();
@@ -1536,7 +1536,7 @@ abstract class Users extends Base_Users
 			list($hashed, $ui_type) = self::hashing($v, $k);
 			$identifiers[] = "$ui_type:$hashed";
 		}
-		return Users_Link::select('*')->where(array(
+		return Users_Link::select()->where(array(
 			'identifier' => $identifiers
 		))->fetchDbRows();
 	}

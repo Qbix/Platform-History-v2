@@ -22,8 +22,8 @@ var Row = Q.require('Db/Row');
  * @param {object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
  * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.id] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
  * @param {string} [$fields.description] defaults to ""
  * @param {string} [$fields.attributes] defaults to ""
@@ -43,16 +43,16 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property publisherId
- * @type String|Buffer
- * @default ""
- * publisherId of the stream regarding which the charge was made
- */
-/**
  * @property id
  * @type String|Buffer
  * @default ""
  * 
+ */
+/**
+ * @property publisherId
+ * @type String|Buffer
+ * @default ""
+ * publisherId of the stream regarding which the charge was made
  */
 /**
  * @property streamName
@@ -130,12 +130,17 @@ Base.connectionName = function() {
 /**
  * Create SELECT query to the class table
  * @method SELECT
- * @param {String|Object} [fields='*'] The fields as strings, or object of {alias:field} pairs
- * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs
+ * @param {String|Object} [fields=null] The fields as strings, or object of {alias:field} pairs.
+ *   The default is to return all fields of the table.
+ * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs.
  * @return {Db.Query.Mysql} The generated query
  */
 Base.SELECT = function(fields, alias) {
-	fields = fields || '*';
+	if (!fields) {
+		fields = Base.fieldNames().map(function (fn) {
+			return '`' + fn + '`';
+		}).join(',');
+	}
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
 	q.className = 'Assets_Charge';
 	return q;
@@ -279,8 +284,8 @@ Base.prototype.primaryKey = function () {
 Base.prototype.fieldNames = function () {
 	return [
 		"userId",
-		"publisherId",
 		"id",
+		"publisherId",
 		"streamName",
 		"description",
 		"attributes",
@@ -330,44 +335,6 @@ return [["varbinary","31","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_publisherId
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_publisherId = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_publisherId = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for publisherId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_publisherId = function () {
-
-return [["varbinary","255","",false],false,"",""];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
  * @method beforeSet_id
  * @param {string} value
  * @return {string} The value
@@ -401,6 +368,44 @@ Base.prototype.maxSize_id = function () {
 Base.column_id = function () {
 
 return [["varbinary","255","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_publisherId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_publisherId = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_publisherId = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_publisherId = function () {
+
+return [["varbinary","255","",false],false,"",""];
 };
 
 /**
