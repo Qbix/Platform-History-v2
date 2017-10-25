@@ -55,7 +55,7 @@ function Streams_access_tool($options)
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$access_array = Streams_Access::select('*')
+	$access_array = Streams_Access::select()
 		->where(array(
 			'publisherId' => $stream->publisherId,
 			'streamName' => $stream->name,

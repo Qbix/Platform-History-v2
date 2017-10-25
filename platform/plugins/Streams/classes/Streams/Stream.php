@@ -435,7 +435,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 		if ($this->retrieved and !$publicField) {
 			// Update all avatars corresponding to access rows for this stream
-			$taintedAccess = Streams_Access::select('*')
+			$taintedAccess = Streams_Access::select()
 				->where(array(
 					'publisherId' => $this->publisherId,
 					'streamName' => $this->name
@@ -573,7 +573,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		
 		// Update all avatars corresponding to access rows for this stream
-		$taintedAccess = Streams_Access::select('*')
+		$taintedAccess = Streams_Access::select()
 			->where(array(
 				'publisherId' => $this->publisherId,
 				'streamName' => $this->name
@@ -1623,7 +1623,7 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!empty($options['type'])) {
 			$criteria['type'] = $options['type'];
 		}
-		$q = Streams_Message::select('*')->where($criteria);
+		$q = Streams_Message::select()->where($criteria);
 		
 		// getting $min and $max
 		$result = Streams_Message::select("MIN(ordinal) min, MAX(ordinal) max")
@@ -1691,7 +1691,7 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 			$criteria['state'] = $options['state'];
 		}
-		$q = Streams_Participant::select('*')->where($criteria);
+		$q = Streams_Participant::select()->where($criteria);
 		$ascending = false;
 		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
@@ -1716,7 +1716,7 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!$userId) {
 			$userId = Users::loggedInUser(true)->id;
 		}
-		$rows = Streams_Participant::select('*')->where(array(
+		$rows = Streams_Participant::select()->where(array(
 			'publisherId' => $this->publisherId,
 			'streamName' => $this->name,
 			'userId' => $userId
