@@ -1164,7 +1164,7 @@ abstract class Streams extends Base_Streams
 				'publisherId'
 			);
 		}
-		if (!is_string($publisherId)) {
+		if ($throwIfMissing && !is_string($publisherId)) {
 			throw new Q_Exception_WrongType(array('field' => 'publisherId', 'type' => 'string'));
 		}
 		return $publisherId;
