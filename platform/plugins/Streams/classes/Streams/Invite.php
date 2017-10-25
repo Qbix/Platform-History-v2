@@ -37,7 +37,7 @@ class Streams_Invite extends Base_Streams_Invite
 	 */
 	static function forStream($publisherId, $streamName, $userId)
 	{
-		$rows = Streams_Invite::select('*')->where(
+		$rows = Streams_Invite::select()->where(
 			compact('publisherId', 'streamName', 'userId')
 		)->fetchDbRows();
 		if (!is_string($streamName) || !is_string($userId)) {

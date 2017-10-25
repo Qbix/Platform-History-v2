@@ -162,12 +162,20 @@ abstract class Base_Streams_Request extends Db_Row
 	 * Create SELECT query to the class table
 	 * @method select
 	 * @static
-	 * @param {string|array} [$fields='*'] The fields as strings, or array of alias=>field
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table
+	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
+	 *   The default is to return all fields of the table.
+	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
-	static function select($fields, $alias = null)
+	static function select($fields=null, $alias = null)
 	{
+		if (!isset($fields)) {
+			$fieldNames = array();
+			foreach (self::fieldNames() as $fn) {
+				$fieldNames[] = "`$fn`";
+			}
+			$fields = implode(',', $fieldNames);
+		}
 		if (!isset($alias)) $alias = '';
 		$q = self::db()->select($fields, self::table().' '.$alias);
 		$q->className = 'Streams_Request';

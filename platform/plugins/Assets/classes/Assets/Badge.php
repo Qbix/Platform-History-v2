@@ -41,14 +41,14 @@ class Assets_Badge extends Base_Assets_Badge
 		if (isset($options['badgeName'])) {
 			$criteria['badgeName'] = $options['badgeName'];
 		}
-		$earned = Assets_Earned::select('*')
+		$earned = Assets_Earned::select()
 			->where($criteria)
 			->fetchDbRows();
 		$name = array();
 		foreach ($earned as $earned) {
 			$name[] = $earned->badgeName;
 		}
-		$badges = Assets_Badge::select('*')
+		$badges = Assets_Badge::select()
 			->where(compact('communityId', 'app', 'name'))
 			->fetchDbRows('name');
 		$result = array();

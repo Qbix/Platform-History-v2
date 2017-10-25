@@ -71,7 +71,7 @@ class Users_OAuth extends Base_Users_OAuth
 	 */
 	static function fetch($userId, $client_id, $scope='user')
 	{
-		$rows = oAuth::select('*')
+		$rows = oAuth::select()
 			->where(compact('userId', 'client_id'))
 			->fetchDbRows();
 		foreach ($rows as $row) {

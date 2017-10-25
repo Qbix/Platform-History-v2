@@ -208,7 +208,7 @@ class Users_Contact extends Base_Users_Contact
 			$criteria['label'] = $label;
 		}
 
-		$query = Users_Contact::select('*')->where($criteria);
+		$query = Users_Contact::select()->where($criteria);
 		if ($limit) {
 			$query = $query->limit($limit, $offset);
 		}

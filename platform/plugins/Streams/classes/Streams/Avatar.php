@@ -49,7 +49,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 			$publisherId = array($publisherId);
 			$return_one = true;
 		}
-		$rows = Streams_Avatar::select('*')->where(array(
+		$rows = Streams_Avatar::select()->where(array(
 			'toUserId' => array($toUserId, ''),
 			'publisherId' => $publisherId
 		))->fetchDbRows(null, '', $indexField);
@@ -121,7 +121,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 		$count = count($criteria);
 		for ($i=0; $i<$count; ++$i) {
 			// NOTE: sharding should be done on toUserId only, not publisherId
-			$q = Streams_Avatar::select('*')
+			$q = Streams_Avatar::select()
 				->where(array(
 					'toUserId' => $toUserId
 				))->andWhere($criteria[$i])
