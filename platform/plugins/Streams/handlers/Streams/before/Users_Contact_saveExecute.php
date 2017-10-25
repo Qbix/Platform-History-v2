@@ -7,7 +7,7 @@ function Streams_before_Users_Contact_saveExecute($params)
 		// we are updating an existing contact
 		$contacts = array_merge(
 			$contacts,
-			Users_Contact::select('*')
+			Users_Contact::select()
 				->where($params['where'])
 				->limit(1)
 				->fetchDbRows()

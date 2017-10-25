@@ -13,7 +13,7 @@ function Streams_0_8_7_Streams_mysql()
 	$offset = 0;
 	$batch = 1000;
 	for ($i=1; true; ++$i) {
-		$users = Users_User::select('*')
+		$users = Users_User::select()
 			->orderBy('id')
 			->limit($batch, $offset)
 			->fetchDbRows();

@@ -3,7 +3,7 @@
 function Users_0_9_4_Users()
 {
 	echo "Adding labels for users...";
-	$users = Users_User::select("*")->fetchDbRows();
+	$users = Users_User::select()->fetchDbRows();
 	$c = count($users);
 	$i = 0;
 	$labels = Q_Config::get('Users', 'onInsert', 'labels', array());
