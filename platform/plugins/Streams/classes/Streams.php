@@ -1221,7 +1221,7 @@ abstract class Streams extends Base_Streams
 				'streamName'
 			);
 		}
-		if (!is_string($name)) {
+		if ($throwIfMissing && !is_string($name)) {
 			throw new Q_Exception_WrongType(array('field' => $fieldName, 'type' => 'string or array'));
 		}
 		if ($returnAs === 'array' and is_string($name)) {
