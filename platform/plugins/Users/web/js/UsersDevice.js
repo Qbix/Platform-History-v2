@@ -369,8 +369,6 @@
 			throw(new Error('Error while registering device. User must be logged in and deviceId must be set.'));
 		}
 		var appId = localStorage.getItem("Q\tUsers.Device.appId");
-		// todo remove next line
-		appId = 'com.qbix.cordova';
 		if (!appId) {
 			throw(new Error('Error while registering device. AppId must be must be set.'));
 		}
