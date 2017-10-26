@@ -175,7 +175,8 @@ Q.Tool.define("Places/location", function (options) {
 								publisherId: userId,
 								streamName: 'Places/user/locations',
 								relationType: 'Places/locations',
-								isCategory: true
+								isCategory: true,
+								editable: false
 							}, tool.prefix + 'relatedLocations')
 							.activate(function () {
 								tool.relatedTool = this;
