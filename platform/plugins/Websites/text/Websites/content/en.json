@@ -2,6 +2,7 @@
 	"advert": {
 		"campaign": {
 			"placeholders": {
+				"link": "Link to promote",
 				"startDate": "Start Date",
 				"startTime": "Start Time",
 				"endDate": "End Date",

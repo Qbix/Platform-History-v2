@@ -50,7 +50,7 @@ function (options, preview) {
 				}
 			};
 			var fields = [
-				'creative', 'language',
+				'creative', 'link', 'language',
 				'startDate', 'startTime', 'endDate', 'endTime', 
 				'location', 'interest', 'budget', 'state'
 			];
@@ -121,8 +121,8 @@ function (options, preview) {
 						title: text.advert.campaign.interests.Title,
 						className: 'Streams_dialog_interests',
 						content: Q.Tool.setUpElement('div', 'Places/location', {
-							onClick: function (element, normalized, category, interest, wasSelected) {
-								tool.$interest.text(interest).val(normalized);
+							onChoose: function (coordinates) {
+								tool.$location.text(results, coordinates.latitude);
 								Q.Dialogs.pop();
 								return false;
 							}
@@ -164,6 +164,7 @@ function (options, preview) {
 
 Q.Template.set("Websites/advert/campaign",
 	"<select class='Websites_advert_campaign_creative'></select>"
+	+ "<input type='text' class='Websites_advert_campaign_link'>"
 	+ "<select class='Websites_advert_campaign_language'>"
 	+   "<option value='en' selected='selected'>English</option>"
 	+ "</select>"
