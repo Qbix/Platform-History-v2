@@ -1,0 +1,19 @@
+{
+	"advert": {
+		"campaign": {
+			"placeholders": {
+				"startDate": "Start Date",
+				"startTime": "Start Time",
+				"endDate": "End Date",
+				"endTime": "End Time",
+				"budget": "Budget"
+			},
+			"interests": {
+				"Title": "Filter By Interest",
+				"FilterInterests": "Start typing an interest..."
+			},
+			"Interest": "Interest",
+			"Location": "Location"
+		}
+	}
+}

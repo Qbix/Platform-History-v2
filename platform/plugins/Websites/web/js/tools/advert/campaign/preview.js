@@ -32,70 +32,129 @@ function (options, preview) {
 
 {
 	refresh: function (stream, callback) {
-		
 		var tool = this;
-		var state = tool.state;
-		var ps = tool.preview.state;
-		var sf = stream.fields;
-		var _fill = {
-			creative: function () {
-				tool.$creative.empty();
-				Websites.advert.creatives(sf.publisherId, function (err) {
-					if (err) return;
-					Q.each(this.streams, function () {
-						$('<option />', {value: this.fields.name})
-						.text(this.fields.title).appendTo(tool.$creative);
-					});
-					p.fill('creative')();
-				});
-			}
-		}
-		
-		var fields = [
-			'creative', 'language', 'startTime', 'endTime', 
-			'location', 'interest', 'budget', 'state'
-		];
-		
-		Q.Template.render('Websites/advert/campaign',
-		function (err, html) {
-			if (err) return;
-			tool.element.innerHTML = html;
-			Q.each(fields, function (i, field) {
-				tool['$'+field] = tool.$('.Websites_advert_campaign_' + field);	
-			});
-			
-			var p = new Q.pipe(['creative'], function () {
-				Q.handle(callback, tool);
-			});
-			
-			Q.addStylesheet([
-				'{{Q}}/pickadate/themes/default.css',
-				'{{Q}}/pickadate/themes/default.date.css'
-			]);
-			Q.addScript([
-				'{{Q}}/pickadate/picker.js',
-				'{{Q}}/pickadate/picker.date.js'
-			], function () {
-				tool.$startTime.pickadate({
-					min: new Date(),
-					onSet: function () {
-						var date = this.get('value');
-						tool.$startTime.pickatime(function () {
-						
+		Q.Text.get('Websites/content', function (err, text) {
+			var state = tool.state;
+			var ps = tool.preview.state;
+			var sf = stream.fields;
+			var _fill = {
+				creative: function () {
+					Websites.advert.creatives(sf.publisherId, function (err) {
+						if (err) return;
+						tool.$creative.empty();
+						Q.each(this.relatedStreams, function () {
+							$('<option />', {value: this.fields.name})
+							.text(this.fields.title).appendTo(tool.$creative);
 						});
+					});
+				}
+			};
+			var fields = [
+				'creative', 'language',
+				'startDate', 'startTime', 'endDate', 'endTime', 
+				'location', 'interest', 'budget', 'state'
+			];
+			var _notYetEnabled = 'Websites_advert_campaign_notYetEnabled';
+			var placeholders = text.advert.campaign.placeholders;
+		
+			Q.Template.render('Websites/advert/campaign', Q.extend({
+				notYetEnabled: _notYetEnabled
+			}, text.advert.campaign), function (err, html) {
+				if (err) return;
+				tool.element.innerHTML = html;
+				Q.each(fields, function (i, field) {
+					var $e = tool['$'+field] = tool.$('.Websites_advert_campaign_' + field);	
+					if (placeholders[field]) {
+						$e.attr('placeholder', placeholders[field]).plugin('Q/placeholders');
 					}
 				});
-			});
 			
-			tool.$state.plugin('Q/clickable').click(function () {
+				var p = new Q.pipe(['creative'], function () {
+					Q.handle(callback, tool);
+				});
+			
+				Q.addStylesheet([
+					'{{Q}}/pickadate/themes/default.css',
+					'{{Q}}/pickadate/themes/default.date.css',
+					'{{Q}}/pickadate/themes/default.time.css'
+				]);
+				Q.addScript([
+					'{{Q}}/pickadate/picker.js',
+					'{{Q}}/pickadate/picker.date.js',
+					'{{Q}}/pickadate/picker.time.js'
+				], function () {
+					tool.$startDate.pickadate({
+						min: new Date(),
+						onSet: _onStartDate
+					});
+				});
+			
+				function _onStartDate() {
+					state.startDate = this.get('value');
+					tool.$startTime.removeClass(_notYetEnabled).pickatime({
+						onSet: _onStartTime
+					});
+				}
+				function _onStartTime() {
+					state.startTime = this.get('value');
+					tool.$endDate.removeClass(_notYetEnabled).pickadate({
+						min: state.startDate,
+						onSet: _onEndDate
+					});
+				}
+				function _onEndDate() {
+					state.endDate = this.get('value');
+					tool.$endTime.removeClass(_notYetEnabled).pickatime({
+						onSet: _onEndTime
+					});
+				}
+				function _onEndTime() {
+					state.endTime = this.get('value');
+				}
 				
-			});
+				tool.$location.plugin('Q/clickable').click(function () {
+					
+				});
+				
+				tool.$location.plugin('Q/clickable').click(function () {
+					Q.Dialogs.push({
+						title: text.advert.campaign.interests.Title,
+						className: 'Streams_dialog_interests',
+						content: Q.Tool.setUpElement('div', 'Places/location', {
+							onClick: function (element, normalized, category, interest, wasSelected) {
+								tool.$interest.text(interest).val(normalized);
+								Q.Dialogs.pop();
+								return false;
+							}
+						})
+					});
+				});
+				
+				tool.$interest.plugin('Q/clickable').click(function () {
+					Q.Dialogs.push({
+						title: text.advert.campaign.interests.Title,
+						className: 'Streams_dialog_interests',
+						content: Q.Tool.setUpElement('div', 'Streams/interests', {
+							filter: text.advert.campaign.interests.FilterInterests,
+							all: text.advert.campaign.interests.AllInterests,
+							onClick: function (element, normalized, category, interest, wasSelected) {
+								tool.$interest.text(interest).val(normalized);
+								Q.Dialogs.pop();
+								return false;
+							}
+						})
+					});
+				});
 			
-			_fill.creative();
+				tool.$state.plugin('Q/clickable').click(function () {
+				
+				});
 			
-			Streams.Stream.onRelatedTo(sf.publisherId, 'Websites/advert/creatives')
-			.set(function () {
 				_fill.creative();
+			
+				Streams.Stream.onRelatedTo(sf.publisherId, 'Websites/advert/creatives')
+				.or(Streams.Stream.onUnrelatedTo(sf.publisherId, 'Websites/advert/creatives'))
+				.set(_fill.creative);
 			});
 		});
 	}
@@ -108,11 +167,13 @@ Q.Template.set("Websites/advert/campaign",
 	+ "<select class='Websites_advert_campaign_language'>"
 	+   "<option value='en' selected='selected'>English</option>"
 	+ "</select>"
-	+ "<input type='datetime' class='Websites_advert_campaign_startTime'>"
-	+ "<input type='datetime' class='Websites_advert_campaign_endTime'>"
-	+ "<input class='Websites_advert_campaign_location'>"
-	+ "<button class='Websites_advert_campaign_interest'>Interest</button>"
-	+ "<input class='Websites_advert_campaign_budget'>"
+	+ "<input type='text' class='Websites_advert_campaign_startDate'>"
+	+ "<input type='text' class='Websites_advert_campaign_startTime {{notYetEnabled}}'>"
+	+ "<input type='text' class='Websites_advert_campaign_endDate {{notYetEnabled}}'>"
+	+ "<input type='text' class='Websites_advert_campaign_endTime {{notYetEnabled}}'>"
+	+ "<button class='Websites_advert_campaign_location Q_button'>{{Location}}</button>"
+	+ "<button class='Websites_advert_campaign_interest Q_button'>{{Interest}}</button>"
+	+ "<input type='number' class='Websites_advert_campaign_budget'>"
 	+ "<button class='Websites_advert_campaign_state Q_button'>Start</button>"
 );
 
