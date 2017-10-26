@@ -12,5 +12,6 @@
  */
 function Websites_advert_campaigns_tool($options)
 {
+	$options['streamName'] = $options['categoryName'];
 	return Q::tool('Streams/related', $options);
 }

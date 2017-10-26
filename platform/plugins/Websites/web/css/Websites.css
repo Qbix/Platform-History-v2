@@ -40,3 +40,42 @@
 .Websites_announcement_preview_tool {
 	cursor: pointer;
 }
+
+.Websites_advert_campaign_preview_tool .Websites_advert_campaign_state,
+.Websites_advert_campaign_preview_tool input[type=text] {
+	cursor: pointer;
+}
+
+.Websites_advert_campaign_notYetEnabled {
+	background: #aaa;
+	opacity: 50;
+	pointer-events: none;
+}
+
+.Websites_advert_campaign_interest.Q_button {
+	background-image: url(../img/white/interests.png) !important;
+}
+
+.Websites_advert_campaign_location.Q_button {
+	background-image: url(../img/white/locations.png) !important;
+}
+
+.Websites_advert_campaign_state.Q_button {
+	padding: 5px;
+	background: #5A5;
+}
+
+.Websites_advert_campaign_budget {
+	text-align: right;
+}
+
+.Websites_advert_campaign_preview_tool button.Q_button,
+.Websites_advert_campaign_preview_tool button.Q_button:active {
+	padding: 5px 5px 10px 50px;
+	box-sizing: border-box;
+	vertical-align: middle; min-height: 40px;
+	background-color: #555;
+	background-repeat: no-repeat;
+	background-size: 40px 40px;
+	background-position: left center;
+}

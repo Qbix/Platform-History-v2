@@ -38,8 +38,8 @@ Utils.signature = function (data, secret) {
 /**
  * Sign data by adding signature field
  * @method sign
- * @param data {object} The data to sign
- * @param fieldKeys {array} Optionally specify the array key path for the signature field
+ * @param {object} data The data to sign
+ * @param {array} fieldKeys Optionally specify the array key path for the signature field
  * @return {object}
  */
 Utils.sign = function (data, fieldKeys) {
@@ -155,13 +155,13 @@ function http_build_query (formdata, numeric_prefix, arg_separator) {
  * Issues an http request, and returns the response
  * @method _request
  * @private
- * @param method {string} The http method to use
- * @param uri {string|array} The URL to request
+ * @param {string} method The http method to use
+ * @param {string|array} uri The URL to request
  *  This can also be an array of [url, ip] to send the request
  *  to a particular IP, while retaining the hostname and request URI
- * @param [data=''] {object|string} The associative array of data to add to query
- * @param [query=null] {object} The associative array of data to post
- * @param [user_agent='Mozilla/5.0'] {string} The user-agent string to send. Defaults to Mozilla.
+ * @param {object|string} [data=''] The associative array of data to add to query
+ * @param {object} [query=null] The associative array of data to post
+ * @param {string} [user_agent='Mozilla/5.0'] The user-agent string to send. Defaults to Mozilla.
  * @param {object} [header={}] Optional associative array of headers to replace the entire header
  * @param [callback=null] {function} Callback receives error and result string as arguments
  */
@@ -226,12 +226,12 @@ function _request(method, uri, data /* '' */, query /* null */, user_agent /* Mo
 /**
  * Issues a POST request, and returns the response
  * @method post
- * @param url {string|array} The URL to post to
+ * @param{string|array}  url The URL to post to
  *  This can also be an array of [url, ip] to send the request
  *  to a particular IP, while retaining the hostname and request URI
- * @param [data=''] {object|string} The associative array of data or string to add to query
- * @param [query=null] {array} The associative array of data to post
- * @param [user_agent='Mozilla/5.0'] {string} The user-agent string to send. Defaults to Mozilla.
+ * @param {object|string} [data=''] The associative array of data or string to add to query
+ * @param {array} [query=null] The associative array of data to post
+ * @param {string} [user_agent='Mozilla/5.0'] The user-agent string to send. Defaults to Mozilla.
  * @param {object} [header={}] Optional associative array of headers to replace the entire header
  * @param [callback=null] {function} Callback receives error and result string as arguments
  */
@@ -242,11 +242,11 @@ Utils.post = function (url, data, query, user_agent, header, callback) {
 /**
  * Issues a GET request, and returns the response
  * @method get
- * @param url {string|array} The URL to get from
+ * @param {string|array} url The URL to get from
  *  This can also be an array of [url, ip] to send the request
  *  to a particular IP, while retaining the hostname and request URI
- * @param [data=''] {object|string} The associative array of data or string to add to query
- * @param [user_agent='Mozilla/5.0'] {string} The user-agent string to send. Defaults to Mozilla.
+ * @param {object|string} [data=''] The associative array of data or string to add to query
+ * @param {string} [user_agent='Mozilla/5.0'] The user-agent string to send. Defaults to Mozilla.
  * @param {object} [header={}] Optional associative array of headers to replace the entire header
  * @param [callback=null] {function} Callback receives error and result string as arguments
  */
@@ -258,10 +258,10 @@ Utils.get = function (url, data, user_agent, header, callback) {
  * Queries a server externally to the specified handler. Expects json array with
  * either ['slots']['data'] or ['error'] fields filled
  * @method queryExternal
- * @param handler {string} the handler to call
+ * @param {string} handler the handler to call
  * @param {array} [data={}] Associative array of data of the message to send.
- * @param [url=null] {string|array} and url to query. Default to 'Q/web/appRootUrl' config value
- * @param [callback=null] {function} Callback receives error and result string as arguments
+ * @param {string|array} [url=null] and url to query. Default to 'Q/web/appRootUrl' config value
+ * @param {function} [callback=null] Callback receives error and result string as arguments
  */
 Utils.queryExternal = function(handler, data /* {} */, url /* null */, callback)
 {
@@ -323,7 +323,7 @@ Utils.queryExternal = function(handler, data /* {} */, url /* null */, callback)
  * Sends a query to Node.js internal server and gets the response
  * This method shall make communications behind firewal
  * @method queryInternal
- * @param handler {string} the handler to call
+ * @param {string} handler the handler to call
  * @param {array} [data={}] Associative array of data of the message to send.
  * @param [url=null] {string|array} and url to query. Default to 'Q/nodeInternal' config value
  * @param [callback=null] {function} Callback receives error and result string as arguments

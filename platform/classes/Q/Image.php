@@ -30,10 +30,10 @@ class Q_Image
 	 * Returns png avatar image. Can check gravatar.com for avatar
 	 * @method avatar
 	 * @static
-	 * @param $hash {string} The md5 hash to build avatar
-	 * @param [$size=Q_AVATAR_SIZE] {integer} Avatar size in pixels
-	 * @param [$type='wavatar'] {string} Type of avatar - one of 'wavatar', 'monster', 'imageid'
-	 * @param [$gravatar=false] {boolean}
+	 * @param {string} $hash The md5 hash to build avatar
+	 * @param {integer} [$size=Q_AVATAR_SIZE] Avatar size in pixels
+	 * @param [$type='wavatar'] Type of avatar - one of 'wavatar', 'monster', 'imageid'
+	 * @param {boolean} [$gravatar=false]
 	 * @return {GDImageLink}
      * @throws {Q_Exception} If GD is not supported
      * @throws {Q_Exception_WrongValue} If avatar type is not supported
@@ -112,11 +112,11 @@ class Q_Image
 	 * Saves an avatar image, in a certain size. Can check gravatar.com for avatar
 	 * @method put
 	 * @static
-	 * @param $filename {string} The name of image file
-	 * @param $hash {string} The md5 hash to build avatar
-	 * @param [$size=Q_AVATAR_SIZE] {integer} Avatar size in pixels
-	 * @param [$type='wavatar'] {string} Type of avatar - one of 'wavatar', 'monster', 'imageid'
-	 * @param [$gravatar=false] {boolean}
+	 * @param {string} $filename The name of image file
+	 * @param {string} $hash The md5 hash to build avatar
+	 * @param {integer} [$size=Q_AVATAR_SIZE] Avatar size in pixels
+	 * @param {string} [$type='wavatar'] Type of avatar - one of 'wavatar', 'monster', 'imageid'
+	 * @param {boolean} [$gravatar=false]
 	 * @return {GDImageLink}
      * @throws {Q_Exception} If GD is not supported
      * @throws {Q_Exception_WrongValue} If avatar type is not supported
@@ -350,9 +350,9 @@ class Q_Image
 	 * Resizes an image file and saves it as another file
 	 * @method resize
 	 * @static
-	 * @param $in_filename {string} The filename of image to load.
-	 * @param $out_filename {string} Where to save the result. The extension determines the file type to save.
-	 * @param $sizes {array} An array of options, including:
+	 * @param {string} $in_filename The filename of image to load.
+	 * @param {string} $out_filename Where to save the result. The extension determines the file type to save.
+	 * @param {array} $sizes An array of options, including:
 	 *  "width": this lets you specify the width of the result
 	 *  "height": this lets you specify the height of the result
 	 *  "width_max": this lets you specify the max width of the result
@@ -440,9 +440,9 @@ class Q_Image
 	 * @method hsl2rgb
 	 * @static
 	 * @private
-	 * @param $h {integer}
-	 * @param $s {integer}
-	 * @param $l {integer}
+	 * @param {integer} $h
+	 * @param {integer} $s
+	 * @param {integer} $l
 	 * @return {array} RGB vlue as array($R, $G, $B)
 	 */
 
@@ -503,8 +503,8 @@ class Q_Image
 	 * @method applyImage
 	 * @static
 	 * @private
-	 * @param $base {GDImageLink}
-	 * @param $part {string}
+	 * @param {GDImageLink} $base
+	 * @param {string} $part
 	 */
 
 	static private function applyImage ($base, $part)
@@ -523,10 +523,10 @@ class Q_Image
 	 * @method getSprite
 	 * @static
 	 * @private
-	 * @param $shape {integer}
-	 * @param $R {integer}
-	 * @param $G {integer}
-	 * @param $B {integer}
+	 * @param {integer} $shape
+	 * @param {integer} $R
+	 * @param {integer} $G
+	 * @param {integer} $B
 	 * @param $rotation {integer}
 	 * @return {GDImageLink}
 	 */
@@ -601,14 +601,14 @@ class Q_Image
 	 * @method getCenter
 	 * @static
 	 * @private
-	 * @param $shape {integer}
-	 * @param $fR {integer}
-	 * @param $fG {integer}
-	 * @param $fB {integer}
-	 * @param $bR {integer}
-	 * @param $bG {integer}
-	 * @param $bB {integer}
-	 * @param $usebg {integer}
+	 * @param {integer} $shape
+	 * @param {integer} $fR
+	 * @param {integer} $fG
+	 * @param {integer} $fB
+	 * @param {integer} $bR
+	 * @param {integer} $bG
+	 * @param {integer} $bB
+	 * @param {integer} $usebg
 	 * @return {GDImageLink}
 	 */
 	static private function getCenter($shape, $fR, $fG, $fB, $bR, $bG, $bB, $usebg) {
@@ -660,8 +660,8 @@ class Q_Image
 	 * @method buildWAvatar
 	 * @static
 	 * @private
-	 * @param $hash {integer}
-	 * @param $size {integer}
+	 * @param {integer} $hash
+	 * @param {integer} $size
 	 * @return {GDImageLink}
 	 */
 	static private function buildWAvatar ($hash, $size)
@@ -708,8 +708,8 @@ class Q_Image
 	 * @method buildIAvatar
 	 * @static
 	 * @private
-	 * @param $hash {integer}
-	 * @param $size {integer}
+	 * @param {integer} $hash
+	 * @param {integer} $size
 	 * @return {GDImageLink}
 	 */
 	static private function buildIAvatar ($hash, $size) {
@@ -795,8 +795,8 @@ class Q_Image
 	 * @method buildIAvatar
 	 * @static
 	 * @private
-	 * @param $hash {integer}
-	 * @param $size {integer}
+	 * @param {integer} $hash
+	 * @param {integer} $size
 	 * @return {GDImageLink}
 	 */
 	static private function buildMAvatar($hash, $size){

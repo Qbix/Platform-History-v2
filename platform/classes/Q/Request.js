@@ -20,7 +20,7 @@ Request.baseUrl = function () {
 /**
  * Use this to determine what method to treat the request as.
  * @method method
- * @param req {http.Request}
+ * @param {http.Request} req
  * @return {string} Returns an uppercase string such as "GET", "POST", "PUT", "DELETE"
  *  See [Request methods](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods)
  */
@@ -38,8 +38,8 @@ Request.method = function (req) {
 /**
  * The names of slots that were requested, if any
  * @method slotNames
- * @param req {http.Request}
- * @param [returnDefaults=false] {boolean} If set to true, returns the array of slot names set in config field
+ * @param {http.Request} req
+ * @param {boolean} [returnDefaults=false]If set to true, returns the array of slot names set in config field
  *  named Q/response/$app/slotNames in the event that slotNames was not specified at all in the request.
  * @return {array}
  */
