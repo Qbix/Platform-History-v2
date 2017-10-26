@@ -1502,6 +1502,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {array} $options=array()
 	 * @param {string} [$options.asUserId] Defaults to the logged in user, or "" if not logged in
 	 *	If access is not already set for the stream, it will be calculated for $asUserId.
+	 * @param {string} [$options.skipAccess=false] If true, skips access checks
 	 * @param {array} [$fields] By default, all fields from tables used to "extend" the
 	 *  stream are returned. You can indicate here an array consisting of only the names of
 	 *  fields to export. An empty array means no extended fields will be exported.
@@ -1514,8 +1515,14 @@ class Streams_Stream extends Base_Streams_Stream
 			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
-		$this->calculateAccess($asUserId);
-		if ($this->testReadLevel('content')) {
+		if (!empty($options["skipAccess"])) {
+			$skip = true;
+		} else {
+			$this->calculateAccess($asUserId);
+			$skip = false;
+		}
+
+		if ($skip or $this->testReadLevel('content')) {
 			$result = $this->toArray();
 		} else {
 			if (!$this->testReadLevel('see')) {
