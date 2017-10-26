@@ -1,5 +1,7 @@
 (function (Q, $, window, document, undefined) {
 
+var Websites = Q.plugins.Websites;
+
 /**
  * @module Websites-tools
  */
@@ -20,7 +22,6 @@
  */
 
 Q.Tool.define("Websites/seo", function () {
-	var Websites = Q.plugins.Websites;
 	var tool = this, state = tool.state;
 	
 	if (state.skip) {

@@ -16,10 +16,10 @@ var _HASH_LEN = 7;
  * @namespace Db.Query
  * @constructor
  * @param mysql Db.Mysql
- * @param type {Number} One of the TYPE_* constants in Db.Query
- * @param query {String|Object} A sql query (for raw queries) or an associative array of clauses
- * @param parameters {Object|Array} The parameters to add to the query right away (to be bound when executing). Values corresponding to numeric keys replace question marks, while values corresponding to string keys replace ":key" placeholders, in the SQL.
- * @param table {String} The table operated with query
+ * @param {Number} type One of the TYPE_* constants in Db.Query
+ * @param {String|Object} query A sql query (for raw queries) or an associative array of clauses
+ * @param {Object|Array} parameters The parameters to add to the query right away (to be bound when executing). Values corresponding to numeric keys replace question marks, while values corresponding to string keys replace ":key" placeholders, in the SQL.
+ * @param {String} table The table operated with query
  */
 var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	Db.Query.apply(this, arguments);
@@ -57,7 +57,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Executes the query against a database connection
 	 * Connects to one or more shard(s) as necessary.
-	 * @param callback {function} This function is called when the queries have all completed.
+	 * @param {function} callback This function is called when the queries have all completed.
 	 *  It is passed the following arguments:
 	 * * errors: an Object. If there were any errors, it will contain shardName: error pairs
 	 * * results: an array of results merged from all the shards (for SELECT queries)
@@ -179,9 +179,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 					/**
 					 * Database error
 					 * @event error
-					 * @param error {Error}
+					 * @param {Error} error
 					 *	The error object
-					 * @param mq {Db.Query.Mysql}
+					 * @param {Db.Query.Mysql} mq
 					 *	Db.Query.Mysql object which caused an error
 					 */
 					mq.db.emit('error', err, mq);
@@ -296,9 +296,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Creates a query to select fields from one or more tables.
 	 * @method SELECT
-	 * @param fields {string|object} The fields as strings, or associative array of {alias: field};
-	 * @param tables {string|object} The tables as strings, or associative array of {alias: table};
-	 * @param [repeat=false] {boolean} If tables is an array, and select() has
+	 * @param {string|object} fields The fields as strings, or associative array of {alias: field};
+	 * @param {string|object} tables The tables as strings, or associative array of {alias: table};
+	 * @param {boolean} [repeat=false] If tables is an array, and select() has
 	 *  already been called with the exact table name and alias
 	 *  as one of the tables in that array, then
 	 *  this table is not appended to the tables list if
@@ -383,9 +383,9 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Joins another table to use in the query
 	 * @method join
-	 * @param table {string} The name of the table. May also be "name AS alias".
-	 * @param condition {Db.Expression|object|string} The condition to join on. Thus, JOIN table ON (condition)
-	 * @param [join_type='INNER'] {string} The string to prepend to JOIN, such as 'INNER', 'LEFT OUTER', etc.
+	 * @param {string} table The name of the table. May also be "name AS alias".
+	 * @param {Db.Expression|object|string} condition The condition to join on. Thus, JOIN table ON (condition)
+	 * @param {string} [join_type='INNER'] The string to prepend to JOIN, such as 'INNER', 'LEFT OUTER', etc.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @throws {Q.Exception} If JOIN clause does not belong in this context or the JOIN condition specified incorrectly.
 	 * @chainable
@@ -424,7 +424,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Adds a WHERE clause to a query
 	 * @method where
-	 * @param criteria {Db.Expression|object|string} An associative array of expression: value pairs.
+	 * @param {Db.Expression|object|string} criteria An associative array of expression: value pairs.
 	 *  The values are automatically turned into placeholders to be escaped later.
 	 *  They can also be arrays, in which case they are placed into an expression of the form "key IN ('val1', 'val2')"
 	 *  Or, this could be a Db.Expression object.
@@ -464,11 +464,11 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * Adds to the WHERE clause, like this:  " ... AND (x OR y OR z)",
 	 * where x, y and z are the arguments to this function.
 	 * @method andWhere
-	 * @param criteria {Db.Expression|object|string} An associative array of expression: value pairs.
+	 * @param {Db.Expression|object|string} criteria An associative array of expression: value pairs.
 	 *  The values are automatically turned into placeholders to be escaped later.
 	 *  They can also be arrays, in which case they are placed into an expression of the form "key IN ('val1', 'val2')"
 	 *  Or, this could be a Db.Expression object.
-	 * @param or_criteria {Db.Expression|object|string} You can have any number of these, including zero.
+	 * @param {Db.Expression|object|string} or_criteria You can have any number of these, including zero.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
 	 */
@@ -520,11 +520,11 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * Adds to the WHERE clause, like this:  " ... OR (x AND y AND z)",
 	 * where x, y and z are the arguments to this function.
 	 * @method orWhere
-	 * @param criteria {Db.Expression|object|string} An associative array of expression: value pairs.
+	 * @param {Db.Expression|object|string} criteria An associative array of expression: value pairs.
 	 *  The values are automatically turned into placeholders to be escaped later.
 	 *  They can also be arrays, in which case they are placed into an expression of the form "key IN ('val1', 'val2')"
 	 *  Or, this could be a Db.Expression object.
-	 * @param and_criteria {Db.Expression|object|string}
+	 * @param {Db.Expression|object|string} and_criteria
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
 	 */
@@ -612,7 +612,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Adds a HAVING clause to a query
 	 * @method having
-	 * @param criteria {Db.Expression|object|string} An associative array of expression => value pairs.
+	 * @param {Db.Expression|object|string} criteria An associative array of expression => value pairs.
 	 *  The values are automatically escaped using PDO placeholders.
 	 *  Or, this could be a Db.Expression object.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
@@ -680,8 +680,8 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Adds optional LIMIT and OFFSET clauses to the query
 	 * @method limit
-	 * @param limit {number} A non-negative integer showing how many rows to return
-	 * @param [offset=0] {number} A non-negative integer showing what row to start the result set with.
+	 * @param {number} limit A non-negative integer showing how many rows to return
+	 * @param {number} [offset=0] A non-negative integer showing what row to start the result set with.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
 	 */
@@ -724,7 +724,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Adds a SET clause to an UPDATE statement
 	 * @method set
-	 * @param updates {object} An associative array of column: value pairs.
+	 * @param {object} updates An associative array of column: value pairs.
 	 *  The values are automatically escaped using PDO placeholders.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
@@ -739,7 +739,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * Adds an ON DUPLICATE KEY UPDATE clause to an INSERT statement.
 	 * Use only with MySQL.
 	 * @method onDuplicateKeyUpdate
-	 * @param updates {object} An associative array of {column: value} pairs.
+	 * @param {object} updates An associative array of {column: value} pairs.
 	 *  The values are automatically escaped using PDO placeholders.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
@@ -759,7 +759,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 * Works with SELECT queries to lock the selected rows.
 	 * Use only with MySQL.
 	 * @method lock
-	 * @param [type='FOR UPDATE'] {string} Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
+	 * @param {string} [type='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
 	 */
@@ -858,7 +858,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * This function provides an easy way to provide additional clauses to the query.
 	 * @method options
-	 * @param options {object} An associative array of {key: value} pairs, where the key is
+	 * @param {object} options An associative array of {key: value} pairs, where the key is
 	 *  the name of the method to call, and the value is the array of arguments.
 	 *  If the value is not an array, it is wrapped in one.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
@@ -1053,8 +1053,8 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Create mysql.Connection and connects to the database table
 	 * @method reallyConnect
-	 * @param callback {function} The callback is fired after connection is complete. mysql.Connection is passed as argument
-	 * @param [shardName=''] {string} The name of the shard to connect
+	 * @param {function} callback The callback is fired after connection is complete. mysql.Connection is passed as argument
+	 * @param {string} [shardName=''] The name of the shard to connect
 	 * @param {object} modifications={} Additional modifications to table information. If supplied override shard modifications
 	 */
 	mq.reallyConnect = function(callback, shardName, modifications) {
@@ -1082,8 +1082,8 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Inserts a custom clause after a particular clause
 	 * @method after
-	 * @param after {string} The name of the standard clause to add after, such as FROM or UPDATE
-	 * @param clause {string} The text of the clause to add
+	 * @param {string} after The name of the standard clause to add after, such as FROM or UPDATE
+	 * @param {string} clause The text of the clause to add
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 * @chainable
 	 */
@@ -1097,8 +1097,8 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Gets a clause from the query
 	 * @method getClause
-	 * @param clause {string} Name of the clause
-	 * @param with_after {boolean} Also get the sql after the clause, if any
+	 * @param {string} clause Name of the clause
+	 * @param {boolean} with_after Also get the sql after the clause, if any
 	 * @return {string|array} If with_after is true, returns [clause, after]
 	 *  Otherwise just returns clause
 	 */
@@ -1114,8 +1114,8 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	/**
 	 * Gets the SQL that would be executed with the execute() method.
 	 * @method getSQL
-	 * @param callback {function} This callback is passed the resulting SQL string.
-	 * @param [shardName=''] {string} The name of the shard on which to execute getSQL.
+	 * @param {function} callback This callback is passed the resulting SQL string.
+	 * @param {string} [shardName=''] The name of the shard on which to execute getSQL.
 	 * @return {Db.Query|string} Returns the db query again, for chainable interface.
 	 *	If "callback" is not defined returns string representation of the query
 	 */
