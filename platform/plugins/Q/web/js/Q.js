@@ -185,7 +185,7 @@ Sp.isIPAddress = function _String_prototype_isIPAddress () {
 /**
  * Returns a copy of the string with special HTML characters escaped
  * @method encodeHTML
- * @param {Array} convert Array of characters to convert. Can include
+ * @param {Array} [convert] Array of characters to convert. Can include
  *   '&', '<', '>', '"', "'", "\n"
  * @return {String}
  */
@@ -207,7 +207,7 @@ Sp.encodeHTML = function _String_prototype_encodeHTML(convert) {
 /**
  * Reverses what encodeHTML does
  * @method decodeHTML
- * @param {Array} convert Array of codes to unconvert. Can include
+ * @param {Array} [convert] Array of codes to unconvert. Can include
  *  '&amp;', '&lt;', '&gt;, '&quot;', '&apos;', "<br>", "<br />"
  * @return {String}
  */
