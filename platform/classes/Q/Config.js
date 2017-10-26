@@ -15,7 +15,7 @@ var Config = {};
 /**
  * Loads a configuration file and merges it into the internal config.
  * @method load
- * @param filename {string} The filename of the file to load.
+ * @param {string} filename The filename of the file to load.
  */
 Config.load = function (filename, callback) {
 	return p.load.apply(this, arguments);
@@ -24,10 +24,10 @@ Config.load = function (filename, callback) {
 /**
  * Saves the configuration to a file
  * @method save
- * @param filename {string} The filename to save into
- * @param [arrayPath=[]] {array} Array of keys identifying the path of the config to save
- * @param [prefixPath=[]] {array} Array of keys identifying the prefix path of the config to save
- * @param [callback=null] {function}
+ * @param {string} filename The filename to save into
+ * @param {array} [arrayPath=[]] Array of keys identifying the path of the config to save
+ * @param {array} [prefixPath=[]] Array of keys identifying the prefix path of the config to save
+ * @param {function} [callback=null]
  */
 Config.save = function (filename, arrayPath, prefixPath, callback) {
 	return p.save.apply(this, arguments);
@@ -45,8 +45,8 @@ Config.getAll = function () {
 /**
  * Gets the value of a configuration field
  * @method get
- * @param [keys=[]] {string|array} A key or an array of keys for traversing the configuration tree.
- * @param [def=undefined] {mixed} The value to return if the field is not found. Defaults to undefined.
+ * @param {string|array} [keys=[]] A key or an array of keys for traversing the configuration tree.
+ * @param {mixed} [def=undefined] The value to return if the field is not found. Defaults to undefined.
  * @return {mixed} The configuration field if it is found, otherwise def or undefined.
  */
 Config.get = function (keys, def) {
@@ -56,8 +56,8 @@ Config.get = function (keys, def) {
 /**
  * Sets the value of a configuration field
  * @method set
- * @param keys {string|array} A key or an array of keys for traversing the configuration tree.
- * @param value {mixed} The value to set for that field.
+ * @param {string|array} keys A key or an array of keys for traversing the configuration tree.
+ * @param {mixed} value The value to set for that field.
  */
 Config.set = function (keys, value) {
 	return p.set.apply(this, arguments);
@@ -66,7 +66,7 @@ Config.set = function (keys, value) {
 /**
  * Clears the value of a field, removing that key from the tree
  * @method clear
- * @param [keys=null] {string|array} A key or an array of keys for traversing the configuration tree. If null, clears entire config.
+ * @param {string|array} [keys=null] A key or an array of keys for traversing the configuration tree. If null, clears entire config.
  * @return {boolean} Returns whether the field to be cleared was found
  */
 Config.clear = function (keys) {
@@ -76,7 +76,7 @@ Config.clear = function (keys) {
 /**
  * Merges a configuration over the top of an existing configuration
  * @method merge
- * @param second {Q.Tree|object} The Object or Q.Tree to merge on top of the existing one
+ * @param {Q.Tree|object} second The Object or Q.Tree to merge on top of the existing one
  **/
 Config.merge = function(second) {
 	return p.merge.apply(this, arguments);
@@ -87,7 +87,7 @@ Config.merge = function(second) {
  * throws an exception. Otherwise, it is guaranteed to return a non-null value.
  * May throw an exception if the config field is missing.
  * @method expect
- * @param keys {string|array} A key or an array of keys for traversing the configuration tree.
+ * @param {string|array} keys A key or an array of keys for traversing the configuration tree.
  * @return {mixed} Only returns non-null values
  * @throws {Q.Exception} if value is missing
  */
@@ -118,8 +118,8 @@ Config.serverInfo = function() {
  * Config file is searched in APP_DIR/files forder. If config server url is defined
  * the filename is searched on config server
  * @method getFromServer
- * @param filename {string} The name of the config file. If config server is defined, file is got from there
- * @param callback {function} Callback receives error and Q.tree content as arguments
+ * @param {string} filename The name of the config file. If config server is defined, file is got from there
+ * @param {function} callback Callback receives error and Q.tree content as arguments
  */
 Config.getFromServer = function(filename, callback) {
 	var cs;
@@ -146,10 +146,10 @@ Config.getFromServer = function(filename, callback) {
  * Config file is searched in APP_DIR/files forder. If config server url is defined
  * the filename is searched on config server
  * @method setOnServer
- * @param filename {string} The name of the config file. If config server is defined, file is changed there
- * @param data {array} The data to merge to the file
- * @param callback {function} Callback receives error as arguments
- * @param [clear=false] {boolean} Weather data shall be merged over or cleared and set
+ * @param {string} filename The name of the config file. If config server is defined, file is changed there
+ * @param {array} data The data to merge to the file
+ * @param {function} callback Callback receives error as arguments
+ * @param {boolean} [clear=false] Weather data shall be merged over or cleared and set
  */
 Config.setOnServer = function(filename, data, callback, clear) {
 	if (typeof data !== "object") callback && callback(new Error("Wrong argument type in 'setConfig'"));
@@ -192,15 +192,15 @@ Config.setOnServer = function(filename, data, callback, clear) {
  * Config file is searched in APP_DIR/files forder. If config server url is defined
  * the filename is searched on config server
  * @method clearOnServer
- * @param filename {string} The name of the config file. If config server is defined, file is changed there
- * @param [keys=null] {string|array} A key or an array of keys for traversing the tree.
+ * @param {string} filename The name of the config file. If config server is defined, file is changed there
+ * @param {string|array} [keys=null] A key or an array of keys for traversing the tree.
  *	If keys are not supplied the file is cleared
  *	If all-but-last keys point to plain array, last key is interpreted as a member
  *	of that array and only this array member is removed
  *	If all-but-last keys point to associative array (A) and last key is plain array (B)
  *	all keys from array A which are in array B are unset
- * @param callback {function} Callback receives error as arguments
- * @param [noSave=false] {boolean} if true the new tree is returned as callback second argument and not saved
+ * @param {function} callback Callback receives error as arguments
+ * @param {boolean} [noSave=false] if true the new tree is returned as callback second argument and not saved
  */
 Config.clearOnServer = function(filename, keys /* null */, callback, noSave) {
 	if (typeof keys === "function") {

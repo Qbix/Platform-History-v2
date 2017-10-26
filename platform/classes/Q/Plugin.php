@@ -669,6 +669,7 @@ EOT;
 	
 	static function composerInstall($dir, $exists = false)
 	{
+		return true;
 		$exists = $exists || self::commandExists('composer');
 		if (!file_exists($dir . DS . 'composer.json') or !$exists) {
 			return false;

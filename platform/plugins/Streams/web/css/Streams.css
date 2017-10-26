@@ -522,7 +522,7 @@
 }
 .Streams_chat_more {
 	cursor: pointer;
-	background: #eee;
+	background-color: #eee;
 	color: #555;
 	text-align: center;
 	padding: 5px 0;
@@ -530,11 +530,11 @@
 }
 .Streams_chat_more:hover {
 	color: #fff;
-	background: #ccc;
+	background-color: #ccc;
 }
 .Streams_chat_more:active {
 	color: #fff;
-	background: #bbb;
+	background-color: #bbb;
 }
 .Streams_chat_timestamp {
 	margin-right: 15px;
@@ -564,12 +564,12 @@
 .Streams_chat_to_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
-	background: #DAE3ED;
+	background-color: #DAE3ED;
 }
 .Streams_chat_from_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
-	background: #FFFFFF;
+	background-color: #FFFFFF;
 }
 .Streams_chat_from_me .Streams_chat_tick {
 	float: right;
@@ -606,7 +606,7 @@
 .Q_expandable_count,
 .Q_expandable_tool .Q_selected,
 .Streams_interests_unlisted .Q_selected {
-	background: rgba(255, 180, 180, 0.9);
+	background-color: rgba(255, 180, 180, 0.9);
     color: #220;
 	text-shadow: none;
 }
@@ -651,7 +651,7 @@
 	font-size: 16px;
 	padding: 5px 15% 5px 5%;
 	border-radius: 16px; -moz-border-radius: 16px; -webkit-border-radius: 16px;
-	background: transparent;
+	background-color: transparent;
 }
 
 .Users_avatar_tool .Users_avatar_name>*{ position: relative; }
@@ -688,7 +688,7 @@
 	opacity: 0.8;
 	font-size: 12px;
 	font-weight: bold;
-	background: red;
+	background-color: red;
 	color: black;
 	position: absolute;
 	top: 50%;
@@ -763,7 +763,7 @@
 .Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
 
 .Q_button.Streams_aspect_interests {
-	background: #bf1118; /* for non-css3 browsers */
+	background-color: #bf1118; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
@@ -771,12 +771,12 @@
 }
 .Q_button.Streams_aspect_interests:active,
 .Q_button.Streams_aspect_interests:focus {
-	background: #a10e14;
+	background-color: #a10e14;
 	color: white;
 }
 
 .Q_button.Streams_aspect_interests {
-	background: #bf1118; /* for non-css3 browsers */
+	background-color: #bf1118; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
@@ -784,12 +784,12 @@
 }
 .Q_button.Streams_aspect_interests:active,
 .Q_button.Streams_aspect_interests:focus {
-	background: #a10e14;
+	background-color: #a10e14;
 	color: white;
 }
 
 .Q_button.Streams_aspect_chats {
-	background: #1ca5b1; /* for non-css3 browsers */
+	background-color: #1ca5b1; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d9e4', endColorstr='#0b94a9'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#1ca5b1), to(#0b94a9)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  #1ca5b1,  #0b94a9); /* for firefox 3.6+ */
@@ -798,7 +798,7 @@
 
 .Q_button.Streams_aspect_chats:active,
 .Q_button.Streams_aspect_chats:focus {
-	background: #0b94a9;
+	background-color: #0b94a9;
 	color: white;
 }
 

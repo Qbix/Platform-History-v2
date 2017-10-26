@@ -512,7 +512,7 @@ Q.pipe = function _Q_pipe(a, b, c, d) {
  *  Typically you would serialize the array of arguments e.g. into JSON when sending 
  *  the request down to the server, and the server should also return an array of results
  *  that is in the same order.
- * @param options {Object}
+ * @param {Object} options 
  *  An optional hash of possible options, which can include:
  * @param {boolean} [options.max=10] When the number of individual calls 
  *  in the queue reaches this number, the batch function is run.
@@ -1029,7 +1029,7 @@ Q.Cache = function  _Q_Cache(options) {
  * Generates the key under which things will be stored in a cache
  * @static
  * @method key
- * @param  {Array} args the arguments from which to generate the key
+ * @param {Array} args the arguments from which to generate the key
  * @param {Array} functions  optional array to which all the functions found in the arguments will be pushed
  * @return {String}
  */
@@ -1599,7 +1599,7 @@ Q.instanceOf = function (testing, Constructor) {
  * @method copy
  * @param {Array} fields
  *  Optional array of fields to copy. Otherwise copy all that we can.
- * @param levels {number}
+ * @param {number} levels
  *  Optional. Copy this many additional levels inside x if it is a plain object.
  * @return {Object}
  *  Returns the shallow copy where some properties may have deepened the copy

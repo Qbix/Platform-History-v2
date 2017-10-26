@@ -55,6 +55,16 @@ var Websites = Q.Websites = Q.plugins.Websites = {
 				});
 			});
 		}
+	},
+	advert: {
+		creatives: function (publisherId, callback) {
+			Q.Streams.related(
+				publisherId, 'Websites/advert/creatives',
+				'Websites/advert/creatives', true, function () {
+					Q.handle(callback, this, arguments);
+				}
+			);
+		}
 	}
 	
 };
@@ -105,7 +115,9 @@ Q.onInit.set(function () {
 Q.Tool.define({
 	"Websites/seo": "{{Websites}}/js/tools/seo.js",
 	"Websites/presentation": "{{Websites}}/js/tools/presentation.js",
-	"Websites/slide": "{{Websites}}/js/tools/slide.js"
+	"Websites/slide": "{{Websites}}/js/tools/slide.js",
+	"Websites/advert/campaign/preview": "{{Websites}}/js/tools/advert/campaign/preview.js",
+	"Websites/advert/campaigns": function () {}
 });
 
 Q.page('', function () {

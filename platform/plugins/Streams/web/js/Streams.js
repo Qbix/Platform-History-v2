@@ -1357,13 +1357,12 @@ Streams.followup.options = {
  *  Publisher's user id
  * @param {String} streamName
  *	Name of the stream to/from which the others are related
- * @param relationType {String|null} the type of the relation
- * @param isCategory {boolean} defaults to false. If true, then gets streams related TO this stream.
+ * @param {String|null} relationType the type of the relation
+ * @param {boolean} isCategory defaults to false. If true, then gets streams related TO this stream.
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
- *   @default false
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
  *   @param {Number} [options.min] the minimum weight (inclusive) to filter by, if any
  *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
  *   @param {String} [options.prefix] optional prefix to filter the streams by
@@ -1374,7 +1373,7 @@ Streams.followup.options = {
  *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
  *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
  *   @param {Object} [options."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
- * @param callback {function}
+ * @param{function} callback
  *	if there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and the "this" object is the data containing "stream", "relations" and "streams"
  */
@@ -2604,13 +2603,12 @@ Sp.refresh = function _Stream_prototype_refresh (callback, options) {
  * Returns all the streams this stream is related to
  * 
  * @method relatedFrom
- * @param relationType {String} the type of the relation
+ * @param {String} relationType the type of the relation
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
- *   @default false
- * @param callback {Function} callback to call with the results
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
+ * @param {Function} callback callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedFrom objects you can iterate over with Q.each
  */
 Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, callback) {
@@ -2621,12 +2619,11 @@ Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, 
  * Returns all the streams related to this stream
  * 
  * @method relatedTo
- * @param relationType {String} the type of the relation
+ * @param {String} relationType the type of the relation
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
- *   @default false
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
  *   @param {String} [options.prefix] optional prefix to filter the streams by
  * @param {Function} callback callback to call with the results
  *  First parameter is the error, the second one is an object of
@@ -3816,9 +3813,9 @@ var Avatar = Streams.Avatar = function Streams_Avatar (fields) {
  * 
  * @static
  * @method get
- * @param userId {String|Object} The id of the user whose avatar we are requesting.
+ * @param {String|Object} userId The id of the user whose avatar we are requesting.
  *  Alternatively, this can also be an object with keys "prefix", "limit", "offset"
- * @param callback {function}
+ * @param {function} callback
  *	if there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and second parameter is a Streams.Avatar object
  */
@@ -3850,14 +3847,13 @@ Avatar.get.onError = new Q.Event();
  * @method byPrefix
  * @param prefix {string}
  *  For example something the user started typing in an autocomplete field
- * @param callback {function}
+ * @param {Function} callback
  *	If there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and second parameter is a hash of {userId: Streams.Avatar} pairs
  * @param {Object} [options]
  *   @param {Number} [options.limit] for paging
  *   @param {Number} [options.offset] for paging
- *   @param {Boolean} [options.public] If true, also gets publicly accessible names.
- *   @default false
+ *   @param {Boolean} [options.public=false] If true, also gets publicly accessible names.
  */
 Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 	var userId = Q.plugins.Users.loggedInUser ? Users.loggedInUser.id : "";
