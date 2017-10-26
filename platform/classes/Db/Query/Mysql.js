@@ -1332,7 +1332,6 @@ function set_internal (query, updates) {
 	return updates;
 }
 
-debugger;
 Q.mixin(Query_Mysql, Db.Query);
 
 module.exports = Query_Mysql;
