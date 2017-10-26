@@ -190,7 +190,7 @@ function Db_Mysql(connName, dsn) {
 	 * Creates a raw query.
 	 * @method rawQuery
 	 * @param {String} query The query string
- * @param parameters {Object|Array} The parameters to add to the query right away (to be bound when executing). Values corresponding to numeric keys replace question marks, while values corresponding to string keys replace ":key" placeholders, in the SQL.
+	 * @param {Object|Array} parameters The parameters to add to the query right away (to be bound when executing). Values corresponding to numeric keys replace question marks, while values corresponding to string keys replace ":key" placeholders, in the SQL.
 	 * @return {Db.Query.Mysql} The resulting Db.Query object
 	 */
 	dbm.rawQuery = function(query, parameters) {

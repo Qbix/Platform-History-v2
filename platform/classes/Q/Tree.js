@@ -28,8 +28,8 @@ module.exports = function (linked) {
 	/**
 	 * Loads data into a tree from a file.
 	 * @method load
-	 * @param filename {string} The filename of the file to load.
-	 * @param [callback=null] {function} Function to call back, with params (err, data)
+	 * @param {string} filename The filename of the file to load.
+	 * @param {function} [callback=null] Function to call back, with params (err, data)
 	 * @throws {Q.Exception} if filename is not string or array of strings
 	 */
 	this.load = function (filename, callback) {
@@ -78,11 +78,11 @@ module.exports = function (linked) {
 	/**
 	 * Saves a (sub)tree of parameters to a file
 	 * @method save
-	 * @param filename {string} The filename to save into.
+	 * @param {string} filename The filename to save into.
 	 *   If tree was loaded from a single file, you can leave this blank to update that file.
-	 * @param [arrayPath=[]] {array} Array of keys identifying the path of the subtree to save
-	 * @param [prefixPath=[]] {array} Array of keys identifying the prefix path of the subtree to save
-	 * @param [callback=null] {function} Function to call back, with params (err)
+	 * @param {array} [arrayPath=[]] Array of keys identifying the path of the subtree to save
+	 * @param {array} [prefixPath=[]] Array of keys identifying the prefix path of the subtree to save
+	 * @param {function} [callback=null] Function to call back, with params (err)
 	 */
 	this.save = function (filename, arrayPath, prefixPath, callback) {
 		if (!filename && (typeof this.filename === 'string')) {
@@ -126,8 +126,8 @@ module.exports = function (linked) {
 	/**
 	 * Gets the value of a field in the tree
 	 * @method get
-	 * @param [keys=[]] {string|array} A key or an array of keys for traversing the tree.
-	 * @param [def=undefined] {mixed} The value to return if the field is not found. Defaults to undefined.
+	 * @param {string|array} [keys=[]] A key or an array of keys for traversing the tree.
+	 * @param {mixed} [def=undefined] The value to return if the field is not found. Defaults to undefined.
 	 * @return {mixed} The field if it is found, otherwise def or undefined.
 	 * @throws {Q.Exception} if subtree is not an object
 	 */
@@ -165,8 +165,8 @@ module.exports = function (linked) {
 	 * Sets the value of a field in the tree. If only one argument is given,
 	 * it is assigned as tree value
 	 * @method set
-	 * @param keys {string|array} A key or an array of keys for traversing the tree.
-	 * @param value {mixed} The value to set for that field.
+	 * @param {string|array} keys A key or an array of keys for traversing the tree.
+	 * @param {mixed} value The value to set for that field.
 	 * @return {Q.Tree} Returns itself for chaining
 	 * @chainable
 	 */
@@ -207,7 +207,7 @@ module.exports = function (linked) {
 	/**
 	 * Clears the value of a field, removing that key from the tree
 	 * @method clear
-	 * @param [keys=null] {string|array} A key or an array of keys for traversing the tree. If null, clears entire tree.
+	 * @param {string|array} [keys=null] A key or an array of keys for traversing the tree. If null, clears entire tree.
 	 * @return {boolean} Returns whether the field to be cleared was found
 	 */
 	this.clear = function (keys) {
@@ -240,8 +240,8 @@ module.exports = function (linked) {
 	/**
 	 * Merges a tree over the top of an existing tree
 	 * @method merge
-	 * @param second {Q.Tree|Object} The Object or Q.Tree to merge over the existing tree.
-	 * @param [under=false] {boolean} If true, merges the second under this tree, instead of over it.
+	 * @param {Q.Tree|Object} second The Object or Q.Tree to merge over the existing tree.
+	 * @param {boolean} [under=false] If true, merges the second under this tree, instead of over it.
 	 *  By default, second is merged on top of this tree.
 	 * @return {object} Returns the resulting tree, modified by the merge.
 	 **/

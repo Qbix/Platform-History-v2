@@ -82,6 +82,8 @@
 			},
 			"Websites/advert/unit": {
 				"description": "An advertising unit on a website",
+				"create": true,
+				"edit": true,
 				"defaults": {
 					"title": "Advertising Unit",
 					"icon": "{{Websites}}/img/icons/Websites/presentation",
@@ -92,6 +94,8 @@
 			},
 			"Websites/advert/placement": {
 				"description": "A way of grouping advertising units under a name",
+				"create": true,
+				"edit": true,
 				"defaults": {
 					"title": "Advertising Placement",
 					"icon": "Streams/category",
@@ -101,7 +105,9 @@
 				}
 			},
 			"Websites/advert/creative": {
-				"description": "An advertising campaign",
+				"description": "Content for an advertisement",
+				"create": true,
+				"edit": true,
 				"defaults": {
 					"title": "Advertising Creative",
 					"icon": "{{Websites}}/img/icons/Websites/advert/creative",
@@ -112,6 +118,8 @@
 			},
 			"Websites/advert/campaign": {
 				"description": "An advertising campaign",
+				"create": true,
+				"edit": true,
 				"defaults": {
 					"title": "Advertising Campaign",
 					"icon": "{{Websites}}/img/icons/Websites/advert/campaign",

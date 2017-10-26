@@ -11,7 +11,7 @@ var util = require('util');
  * @class Socket
  * @namespace Q
  * @constructor
- * @param server {http.Server}
+ * @param {http.Server} server
  * @param {Object} [options={}]
  */
 function Socket (server, options) {
