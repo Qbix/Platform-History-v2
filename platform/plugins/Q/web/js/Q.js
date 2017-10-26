@@ -151,12 +151,13 @@ Object.keys = (function () {
  * @description Q extended methods for Strings
  */
 
+var Sp = String.prototype;
+
 /**
  * Returns a copy of the string with Every Word Capitalized
  * @method toCapitalized
  * @return {String}
  */
-var Sp = String.prototype;
 Sp.toCapitalized = function _String_prototype_toCapitalized() {
 	return this.replace(/^([a-z])|\s+([a-z])/g, function (found) {
 		return found.toUpperCase();
@@ -184,26 +185,34 @@ Sp.isIPAddress = function _String_prototype_isIPAddress () {
 /**
  * Returns a copy of the string with special HTML characters escaped
  * @method encodeHTML
+ * @param {Array} convert Array of characters to convert. Can include
+ *   '&', '<', '>', '"', "'", "\n"
  * @return {String}
  */
-Sp.encodeHTML = function _String_prototype_encodeHTML() {
-	return this.replaceAll({
+Sp.encodeHTML = function _String_prototype_encodeHTML(convert) {
+	var conversions = {
 		'&': '&amp;',
 		'<': '&lt;',
 		'>': '&gt;',
 		'"': '&quot;',
 		"'": '&apos;',
 		"\n": '<br>'
-	});
+	};
+	if (convert) {
+		conversions = Q.take(conversions, convert);
+	}
+	return this.replaceAll(conversions);
 };
 
 /**
  * Reverses what encodeHTML does
  * @method decodeHTML
+ * @param {Array} convert Array of codes to unconvert. Can include
+ *  '&amp;', '&lt;', '&gt;, '&quot;', '&apos;', "<br>", "<br />"
  * @return {String}
  */
-Sp.decodeHTML = function _String_prototype_decodeHTML() {
-	return this.replaceAll({
+Sp.decodeHTML = function _String_prototype_decodeHTML(unconvert) {
+	var conversions = {
 		'&amp;': '&',
 		'&lt;': '<',
 		'&gt;': '>',
@@ -211,7 +220,11 @@ Sp.decodeHTML = function _String_prototype_decodeHTML() {
 		'&apos;': "'",
 		"<br>": "\n",
 		"<br />": "\n"
-	});
+	};
+	if (unconvert) {
+		conversions = Q.take(conversions, unconvert);
+	}
+	return this.replaceAll(conversions);
 };
 
 /**
