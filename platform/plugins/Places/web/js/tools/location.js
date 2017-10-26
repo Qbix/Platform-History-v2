@@ -55,7 +55,7 @@ Q.Tool.define("Places/location", function (options) {
 		}
 
 		var selector = $this.attr("data-location");
-		if (selector == 'current') {
+		if (selector === 'current') {
 			tool.getCurrentPosition(function (pos) {
 				var crd = pos.coords;
 				if (!crd) {
@@ -75,7 +75,7 @@ Q.Tool.define("Places/location", function (options) {
 			});
 
 			return;
-		} else if (selector == 'address') {
+		} else if (selector === 'address') {
 			// if address selected just repeat onChoose event of places/address tool
 			Q.handle(
 				tool.addressTool.state.onChoose, 
@@ -193,13 +193,13 @@ Q.Tool.define("Places/location", function (options) {
 							if (!result || !userId) {
 								return;
 							}
-							var c = text.location.confirm;
-							Q.confirm(c.message, function (shouldSave) {
+							var textConfirm = text.location.confirm;
+							Q.confirm(textConfirm.message, function (shouldSave) {
 								if (!shouldSave) {
 									return;
 								}
-								var a = text.location.add;
-								Q.prompt(a.prompt, function (title) {
+								var textAdd = text.location.add;
+								Q.prompt(textAdd.title, function (title) {
 									if (!title) {
 										return;
 									}
@@ -226,14 +226,14 @@ Q.Tool.define("Places/location", function (options) {
 										type: 'Places/locations'
 									});
 								}, {
-									title: a.title,
-									placeholder: a.placeholder,
-									ok: a.ok
+									title: textAdd.title,
+									placeholder: textAdd.placeholder,
+									ok: textAdd.ok
 								});
 							}, {
-								title: c.title,
-								ok: c.ok,
-								cancel: c.cancel
+								title: textConfirm.title,
+								ok: textConfirm.ok,
+								cancel: textConfirm.cancel
 							});
 							Q.handle(state.onChoose, tool, [result.geometry.location, this]);
 						});
@@ -266,25 +266,16 @@ Q.Tool.define("Places/location", function (options) {
 
 Q.Template.set('Places/location/select',
 	'{{#if showCurrent}}' +
-		'<div data-location="current">{{text.myCurrentLocation}}</div>' +
+		'<div data-location="current">{{text.location.myCurrentLocation}}</div>' +
 	'{{/if}}' +
 	'{{#if showLocations}}' +
 		'<div class="Places_location_related"></div>' +
 	'{{/if}}' +
 	'{{#if showAddress}}' +
 		'<div data-location="address">' +
-			'<label>{{text.enterAddress}}</label>' +
+			'<label>{{text.location.enterAddress}}</label>' +
 			'<div class="Places_location_address"></div>' +
 		'</div>' +
 	'{{/if}}'
 );
-
-Q.Template.set("Places/location/new",
-	'<div class="Places_location_new">' +
-	'	<div class="Places_location_new_title"><input placeholder="{{text.nameYourLocation}}" name="title"></div>' +
-	'	<div class="Places_location_new_select"></div>' +
-	'	<div class="Places_location_new_actions"><button class="Q_button" name="submit">{{text.action}}</button></div>' +
-	'</div>'
-);
-
 })(Q, jQuery, window, document);
