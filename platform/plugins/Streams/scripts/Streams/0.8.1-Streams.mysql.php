@@ -9,11 +9,12 @@ function Streams_0_8_1_Streams_mysql()
 	$stream->publisherId = '';
 	$stream->name = 'Streams/experience/';
 	$stream->type = 'Streams/template';
+	$stream->icon = 'Streams/experience';
 	$stream->title = "Community Experience";
 	$stream->content = '';
-	$stream->readLevel = Streams::$READ_LEVEL['content'];
+	$stream->readLevel = Streams::$READ_LEVEL['see'];
 	$stream->writeLevel = Streams::$WRITE_LEVEL['join'];
-	$stream->adminLevel = Streams::$ADMIN_LEVEL['invite'];
+	$stream->adminLevel = Streams::$ADMIN_LEVEL['tell'];
 	$stream->save();
 	
 	// main community experience stream, for community-wide announcements etc.
