@@ -65,6 +65,11 @@ function Users_before_Q_responseExtras()
 			$private = Q_Config::get('Users', 'apps-private', $platform, array());
 			foreach ($appInfos as $appName => $appInfo) {
 				$apps[$platform][$appName] = $appInfo;
+				foreach($appInfo as $key => $value) {
+					if (stristr($key, 'private')) {
+						unset($apps[$platform][$appName][$key]);
+					}
+				}
 				foreach ($private as $p) {
 					unset($apps[$platform][$appName][$p]);
 				}
