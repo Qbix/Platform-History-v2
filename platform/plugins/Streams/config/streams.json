@@ -1,4 +1,12 @@
 {
+	"Streams/experience/main": {
+		"type": "Streams/experience",
+		"title": "Main Experience",
+		"icon": "Streams/experience",
+		"readLevel": 40,
+		"writeLevel": 23,
+		"adminLevel": 20
+	},
 	"Streams/participating": {
 		"type": "Streams/participating",
 		"title": "Messages about joining/leaving streams",
