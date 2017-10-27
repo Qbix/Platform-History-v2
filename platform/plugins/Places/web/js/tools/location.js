@@ -96,6 +96,10 @@ Q.Tool.define("Places/location", function (options) {
 		});
 	});
 
+	tool.Q.onStateChanged('location').set(function () {
+		Q.handle(state.onChoose, tool, [state.location]);
+	});
+
 	tool.refresh();
 },
 
@@ -176,7 +180,9 @@ Q.Tool.define("Places/location", function (options) {
 								streamName: 'Places/user/locations',
 								relationType: 'Places/locations',
 								isCategory: true,
-								editable: false
+								editable: false,
+								realtime: true,
+								sortable: false
 							}, tool.prefix + 'relatedLocations')
 							.activate(function () {
 								tool.relatedTool = this;
