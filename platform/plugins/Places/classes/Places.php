@@ -142,10 +142,16 @@ abstract class Places extends Base_Places
 	 * @param {double} $long_1
 	 * @param {double} $lat_2
 	 * @param {double} $long_2
-	 * @return {double} The result, in meters, of applying the haversine formula
+	 * @return {double|null} The result, in meters, of applying the haversine formula.
+	 *  Returns null if any of the inputs are null.
 	 */
 	static function distance($lat_1,$long_1,$lat_2,$long_2)
 	{
+		if (!isset($lat1) or !isset($lat_2)
+		or !isset($long_1) or !isset($long_2)) {
+			return null;
+		}
+
 		$earth_radius = 6378084.1454; // in meters
 
 		$sin_lat   = sin(deg2rad($lat_2  - $lat_1)  / 2.0);
