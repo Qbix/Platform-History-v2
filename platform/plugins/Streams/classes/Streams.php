@@ -2114,14 +2114,16 @@ abstract class Streams extends Base_Streams
 	 *  The user who is making aggreagtor operation on the stream (remove stream from category)
 	 * @param {string} $toPublisherId
 	 *  The user who has published the category stream
-	 * @param {string} $toStreamName
-	 *  The name of the category stream
+	 * @param {string|array} $toStreamName
+	 *  The name of the category stream. Pass an array of strings to relate a single stream
+	 *  to multiple categories, but in that case make sure fromStreamName is a string.
 	 * @param {string} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
 	 *  The user who has publishes the related stream
 	 * @param {string} $fromStreamName
-	 *  The name of the related stream
+	 *  The name of the related stream. Pass an array of strings to relate multiple streams
+	 *  to a single category, but in that case make sure toStreamName is a string.
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
@@ -2796,22 +2798,24 @@ abstract class Streams extends Base_Streams
 				$p->streamType, array('participating'), array()
 			);
 			foreach ($participatingNames as $pn) {
-				$relateStreams[$pn][] = $sn;
+				$relateStreams[$pn][$p->streamType][] = $sn;
 			}
 		}
-		foreach ($relateStreams as $pn => $streamNames) {
-			if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
-				Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+		foreach ($relateStreams as $pn => $streamTypes) {
+			foreach ($streamTypes as $streamType => $streamNames) {
+				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+					Streams::create($asUserId, $asUserId, 'Streams/participating/', array('name' => $pn));
+				}
+				Streams::relate(
+					$asUserId, $asUserId, $pn,
+					$streamType, $publisherId, $streamNames,
+					array(
+						'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
+						'skipAccess' => true,
+						'weight' => time()
+					)
+				);
 			}
-			Streams::relate(
-				$asUserId, $asUserId, $pn,
-				'Streams/participating', $publisherId, $streamNames,
-				array(
-					'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
-					'skipAccess' => true, 
-					'weight' => time()
-				)
-			);
 		}
 		return $results;
 	}
@@ -2936,22 +2940,24 @@ abstract class Streams extends Base_Streams
 				$p->streamType, array('participating'), array()
 			);
 			foreach ($participatingNames as $pn) {
-				$unrelateStreams[$pn][] = $sn;
+				$unrelateStreams[$pn][$p->streamType][] = $sn;
 			}
 		}
-		foreach ($unrelateStreams as $pn => $streamNames) {
-			if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
-				Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+		foreach ($unrelateStreams as $pn => $streamTypes) {
+			foreach ($streamTypes as $streamType => $streamNames) {
+				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+					Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+				}
+				Streams::unrelate(
+					$asUserId, $asUserId, $pn,
+					$streamType, $publisherId, $streamNames,
+					array(
+						'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
+						'skipAccess' => true,
+						'weight' => time()
+					)
+				);
 			}
-			Streams::unrelate(
-				$asUserId, $asUserId, $pn,
-				'Streams/participating', $publisherId, $streamNames,
-				array(
-					'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
-					'skipAccess' => true, 
-					'weight' => time()
-				)
-			);
 		}
 		return $participants;
 	}
@@ -3297,7 +3303,8 @@ abstract class Streams extends Base_Streams
 	 * "Streams"/"types"/$streamType/"participating", which is an array of stream names.
 	 * @method participating
 	 * @static
-	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of onr or more streams of type Streams/participating
+	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of one or more streams
+	 *  of type Streams/participating
 	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
 	 * @param {string} [$options.publisherId=Users::loggedInUser(true)->id] the publisher of the category stream
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
