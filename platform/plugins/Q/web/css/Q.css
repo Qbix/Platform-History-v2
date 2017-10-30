@@ -92,12 +92,14 @@ table { border-spacing:0; border-collapse:collapse; }
 .Q_throb,
 .Q_throb input,
 .Q_throb textarea { background-image: url(../img/throbbers/loading.gif); background-repeat: no-repeat; background-position: center center; }
-.Q_loading { 
+.Q_loading {
+	pointer-events: none;
 	opacity:0.9; filter:alpha(opacity=90);
 	animation: Q_loading 1s ease-in-out infinite alternate;
 	-webkit-animation: Q_loading 1s ease-in-out infinite alternate;
 }
 .Q_working {
+	pointer-events: none;
 	opacity: 0.5;
 	animation: Q_working 1s ease-in-out infinite alternate;
 	-webkit-animation: Q_working 1s ease-in-out infinite alternate;

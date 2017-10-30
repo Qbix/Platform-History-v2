@@ -906,6 +906,7 @@ class Q_Request
 	 * @method requireFields
 	 * @static
 	 * @param {array} $fields Array of strings or arrays naming fields that are required
+	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if the field is missing
 	 * @return {array} The resulting list of exceptions
 	 */
 	static function requireFields($fields, $throwIfMissing = false)
