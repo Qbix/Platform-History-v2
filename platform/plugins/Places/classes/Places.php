@@ -147,8 +147,8 @@ abstract class Places extends Base_Places
 	 */
 	static function distance($lat_1,$long_1,$lat_2,$long_2)
 	{
-		if (!isset($lat1) or !isset($lat_2)
-		or !isset($long_1) or !isset($long_2)) {
+		if (!isset($lat_1) or !isset($long_1)
+		or !isset($lat_2) or !isset($long_2)) {
 			return null;
 		}
 
