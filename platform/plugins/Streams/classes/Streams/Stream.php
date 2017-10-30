@@ -1503,7 +1503,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} [$options.asUserId] Defaults to the logged in user, or "" if not logged in
 	 *	If access is not already set for the stream, it will be calculated for $asUserId.
 	 * @param {string} [$options.skipAccess=false] If true, skips access checks
-	 * @param {array} [$fields] By default, all fields from tables used to "extend" the
+	 * @param {array} [$options.fields=null] By default, all fields from tables used to "extend" the
 	 *  stream are returned. You can indicate here an array consisting of only the names of
 	 *  fields to export. An empty array means no extended fields will be exported.
 	 * @return {array}
@@ -1529,7 +1529,7 @@ class Streams_Stream extends Base_Streams_Stream
 				return array();
 			}
 			$result = array();
-			$default = array( // the array of fields allowed to see
+			$fields = array( // the array of fields allowed to see
 				'publisherId',
 				'name',
 				'type',
@@ -1538,7 +1538,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'updatedTime'
 			);
 			if (isset($this->type)) {
-				$fields = array_merge($default, Q_Config::get(
+				$fields = array_merge($fields, Q_Config::get(
 					'Streams', 'types', $this->type, 'see', array()
 				));
 			}

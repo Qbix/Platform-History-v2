@@ -204,7 +204,8 @@
 					"writeLevel": 0,
 					"adminLevel": 0
 				},
-				"extend": ["Streams_Task"]
+				"extend": ["Streams_Task"],
+				"participating": ["Streams/participating/tasks"]
 			},
 			"Streams/tasks": {
 				"description": "category for tasks",
