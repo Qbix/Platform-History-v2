@@ -173,7 +173,9 @@ var Places = Q.Places = Q.plugins.Places = {
 			var b = polyline[i-1].y;
 			var c = polyline[i].x;
 			var d = polyline[i].y;
-			var n = (c-a)*(c-a) + (d-b)*(d-b);
+			var n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
+			var n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
+			var n = n1 * n2;
 			var frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
 			var e = a + (c-a)*frac;
