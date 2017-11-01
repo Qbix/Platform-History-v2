@@ -75,6 +75,7 @@ function Users_before_Q_responseExtras()
 				}
 			}
 		}
+		//exit;
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
 
