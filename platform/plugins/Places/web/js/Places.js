@@ -173,7 +173,9 @@ var Places = Q.Places = Q.plugins.Places = {
 			var b = polyline[i-1].y;
 			var c = polyline[i].x;
 			var d = polyline[i].y;
-			var n = (c-a)*(c-a) + (d-b)*(d-b);
+			var n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
+			var n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
+			var n = n1 * n2;
 			var frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
 			var e = a + (c-a)*frac;
@@ -253,22 +255,16 @@ var Places = Q.Places = Q.plugins.Places = {
 		options = options || {};
 		var platform = options.platform || Places.options.platform;
 		var polyline = [];
-		var lastStep = null;
-		Q.each(route.legs, function (i, leg) {
-			Q.each(leg.steps, function (j, step) {
-				polyline.push({
-					x: this.start_location.lat,
-					y: this.start_location.lng
-				});
-				lastStep = step;
+
+		// decode plyline
+		var points = google.maps.geometry.encoding.decodePath(route.overview_polyline.points);
+
+		Q.each(points, function () {
+			polyline.push({
+				x: this.lat(),
+				y: this.lng()
 			});
 		});
-		if (lastStep) {
-			polyline.push({
-				x: lastStep.end_location.lat,
-				y: lastStep.end_location.lng
-			});
-		}
 		return polyline;
 	}
 	
