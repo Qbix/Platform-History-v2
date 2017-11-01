@@ -226,21 +226,14 @@ abstract class Places extends Base_Places
 		if ($platform !== 'google') {
 			throw new Q_Exception_PlatformNotSupported(compact('platform'));
 		}
+		$points = Places_Polyline::decode($route["overview_polyline"]["points"]);
 		$polyline = array();
-		foreach ($route['legs'] as $leg) {
-			foreach ($leg['steps'] as $step) {
-				$lat = $step['start_location']['lat'];
-				$lng = $step['start_location']['lng'];
-				$polyline[] = array(
-					'x' => $lat,
-					'y' => $lng
-				);
-			}
+		for ($i = 0, $l = count($points); $i < $l; $i+=2) {
+			$polyline[] = array(
+				'x' => $points[$i],
+				'y' => $points[$i+1]
+			);
 		}
-		$polyline[] = array(
-			'x' => $step['end_location']['lat'],
-			'y' => $step['end_location']['lng']
-		);
 		return $polyline;
 	}
 	
