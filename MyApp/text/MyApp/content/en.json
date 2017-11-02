@@ -3,7 +3,8 @@
 		"Menu": "Menu",
 		"Home": "Home",
 		"Welcome": "Welcome",
-		"About": "About"
+		"About": "About",
+		"LogIn": "log in"
 	},
 	"welcome": {
 		"Welcome": "Welcome!",
