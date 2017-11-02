@@ -120,11 +120,12 @@ Q.Tool.define('Q/expandable', function (options) {
 			: {left: 0, top: 0};
 		var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
 		var t1 = $element.offset().top - offset.top;
+		var spaceAbove;
 		var defaultSpaceAbove = $element.height() / 2;
 		var moreSpaceAbove = 0;
 		var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
 		if ($ts.length && $ts.css('position') === 'fixed') {
-			spaceAbove = $ts.outerHeight();
+			moreSpaceAbove = $ts.outerHeight();
 		} else {
 			$('body').children().each(function () {
 				var $this = $(this);
