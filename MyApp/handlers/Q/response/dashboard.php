@@ -5,15 +5,15 @@ function Q_response_dashboard()
 	$app = Q::app();
 	$slogan = "Powered by Qbix.";
 	$user = Users::loggedInUser();
-	$text = Q_Text::get("MyApp/dashboard");
+	$text = Q_Text::get("MyApp/content");
 
 	if (Users::loggedInUser(false, false)) {
-		$tabs = array('home' => $text["home"]);
+		$tabs = array('home' => $text['dashboard']["Home"]);
 	} else {
-		$tabs = array('welcome' => $text["welcome"]);
+		$tabs = array('welcome' => $text['dashboard']["Welcome"]);
 	}
 	$tabs = array_merge($tabs, array(
-		'about' => $text["about"]
+		'about' => $text['dashboard']["About"]
 	));
 	$urls = array(
 		'welcome' => 'MyApp/welcome',
