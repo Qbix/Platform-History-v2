@@ -1,6 +1,9 @@
 {
 	"dashboard": {
-		"Menu": "Menu"
+		"Menu": "Menu",
+		"Home": "Home",
+		"Welcome": "Welcome",
+		"About": "About"
 	},
 	"welcome": {
 		"Welcome": "Welcome!",
