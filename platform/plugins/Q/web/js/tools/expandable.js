@@ -114,40 +114,45 @@ Q.Tool.define('Q/expandable', function (options) {
 			});
 		}
 		var $expandable = $h2.next().slideDown(state.duration, 'linear');
-		var $scrollable = this.scrollable();
-		var offset = $scrollable
-			? $scrollable.offset()
-			: {left: 0, top: 0};
-		var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
-		var t1 = $element.offset().top - offset.top;
-		var defaultSpaceAbove = $element.height() / 2;
-		var moreSpaceAbove = 0;
-		var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
-		if ($ts.length && $ts.css('position') === 'fixed') {
-			spaceAbove = $ts.outerHeight();
-		} else {
-			$('body').children().each(function () {
-				var $this = $(this);
-				if ($this.css('position') === 'fixed') {
-					var top = $this.offset().top - Q.Pointer.scrollTop();
-					if (top < 100) {
-						moreSpaceAbove = top + $this.outerHeight();
-						return false;
-					}
-				}
-			});
-		}
-		defaultSpaceAbove += moreSpaceAbove;
-		var spaceAbove = (state.spaceAbove == null)
-			? defaultSpaceAbove
-			: state.spaceAbove;
-		var isBody = $scrollable &&
-			['BODY', 'HTML'].indexOf($scrollable[0].tagName.toUpperCase()) >= 0;
-		if (isBody) {
-			t1 -= Q.Pointer.scrollTop();
+		state.expanded = true;
+		if (!o.scrollContainer) {
+			return;
 		}
 		Q.Animation.play(function (x, y) {
-			if (!o.scrollContainer) return;
+			var $scrollable = (o.scrollContainer instanceof Element)
+				? $(o.scrollContainer) : tool.scrollable();
+			var offset = $scrollable
+				? $scrollable.offset()
+				: {left: 0, top: 0};
+			var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
+			var t1 = $element.offset().top - offset.top;
+			var spaceAbove;
+			var defaultSpaceAbove = $element.height() / 2;
+			var moreSpaceAbove = 0;
+			var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
+			if ($ts.length && $ts.css('position') === 'fixed') {
+				moreSpaceAbove = $ts.outerHeight();
+			} else {
+				$('body').children().each(function () {
+					var $this = $(this);
+					if ($this.css('position') === 'fixed') {
+						var top = $this.offset().top - Q.Pointer.scrollTop();
+						if (top < 100) {
+							moreSpaceAbove = top + $this.outerHeight();
+							return false;
+						}
+					}
+				});
+			}
+			defaultSpaceAbove += moreSpaceAbove;
+			var spaceAbove = (state.spaceAbove == null)
+				? defaultSpaceAbove
+				: state.spaceAbove;
+			var isBody = $scrollable &&
+				['BODY', 'HTML'].indexOf($scrollable[0].tagName.toUpperCase()) >= 0;
+			if (isBody) {
+				t1 -= Q.Pointer.scrollTop();
+			}
 			if ($scrollable) {
 				var t = $element.offset().top - offset.top;
 				if (isBody) {
@@ -161,7 +166,6 @@ Q.Tool.define('Q/expandable', function (options) {
 			Q.handle(state.onExpand, tool, []);
 			$h2.add($expandable).addClass('Q_expanded');
 		});
-		state.expanded = true;
 	},
 	
 	collapse: function () {
