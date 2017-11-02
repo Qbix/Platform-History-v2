@@ -7,7 +7,7 @@
 a { text-decoration: none; color: #0055ff; }
 a:visited { color: #aa88cc; }
 html { background: #f2f2f2; height: 100%; box-sizing: border-box; }
-body { height: 100%; touch-action: none; }
+body { height: 100%; overflow: auto; touch-action: none; }
 h2 { margin: 0; }
 *, *:before, *:after { box-sizing: inherit; }
 
@@ -45,6 +45,7 @@ h2 { margin: 0; }
 #dashboard_slot input,
 #dashboard_slot textarea { color: black; }
 #page { position: absolute; left: 0%; width: 100%; top:50px; bottom: 0; } 
+.Q_mobile #page { overflow: auto; -webkit-overflow-scrolling: touch; z-index: 0; }
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_static,
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_blockstatic { 
 	background: white;
@@ -52,6 +53,7 @@ h2 { margin: 0; }
 }
 .Q_mobile #dashboard .Users_avatar_icon { margin: 0; border-radius: 4px; }
 .Q_mobile #dashboard .Users_avatar_name { display: none; }
+.Q_mobile #page { position: relative; }
 .Q_notMobile .Users_avatar_icon { margin-right: 5px; }
 
 #dashboard, #notices, #content { margin: auto; text-align: left; }
