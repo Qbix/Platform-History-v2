@@ -226,21 +226,14 @@ abstract class Places extends Base_Places
 		if ($platform !== 'google') {
 			throw new Q_Exception_PlatformNotSupported(compact('platform'));
 		}
+		$points = Places_Polyline::decode($route["overview_polyline"]["points"]);
 		$polyline = array();
-		foreach ($route['legs'] as $leg) {
-			foreach ($leg['steps'] as $step) {
-				$lat = $step['start_location']['lat'];
-				$lng = $step['start_location']['lng'];
-				$polyline[] = array(
-					'x' => $lat,
-					'y' => $lng
-				);
-			}
+		for ($i = 0, $l = count($points); $i < $l; $i+=2) {
+			$polyline[] = array(
+				'x' => $points[$i],
+				'y' => $points[$i+1]
+			);
 		}
-		$polyline[] = array(
-			'x' => $step['end_location']['lat'],
-			'y' => $step['end_location']['lng']
-		);
 		return $polyline;
 	}
 	
@@ -255,8 +248,8 @@ abstract class Places extends Base_Places
 	 * @return {array} contains properties "index", "x", "y", "fraction", "distance" (in same units as x, y)
 	 */
 	static function closest($point, $polyline) {
-		$x = $point['x'];
-		$y = $point['y'];
+		$x = (float)$point['x'];
+		$y = (float)$point['y'];
 		$closest = null;
 		$distance = null;
         for ($i=1, $l=count($polyline); $i<$l; $i++) {
@@ -264,7 +257,9 @@ abstract class Places extends Base_Places
 			$b = $polyline[$i-1]['y'];
 			$c = $polyline[$i]['x'];
 			$d = $polyline[$i]['y'];
-			$n = ($c-$a)*($c-$a) + ($d-$b)*($d-$b);
+			$n1 = sqrt(($x-$a)*($x-$a) + ($y-$b)*($y-$b));
+			$n2 = sqrt(($c-$a)*($c-$a) + ($d-$b)*($d-$b));
+			$n = $n1 * $n2;
 			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)*($d-$b)) / $n : 0;
 			$frac = max(0, $frac, min(1, $frac));
 			$e = $a + ($c-$a)*$frac;
