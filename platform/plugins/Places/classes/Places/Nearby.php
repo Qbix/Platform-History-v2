@@ -373,16 +373,21 @@ class Places_Nearby
 	/**
 	 * Get all the relations to various Places/nearby (or similar type category)
 	 * streams, sorted by ascending weight.
-	 * @method related. Note that these streams may be slightly out of range
+	 * Note that some of these streams may be slightly out of range
 	 * and you may want to perform additional filtering using Places::distance().
+	 * @method related.
 	 * @static
 	 * @param {string} $publisherId The publisher of the category streams
 	 * @param {string} $relationType The type of the relation to the category streams
 	 * @param {double} $latitude The latitude of the point to search around
 	 * @param {double} $longitude The longitude of the point to search around
 	 * @param {double} $meters The radius to search within
-	 * @param {array} $options The options to pass to the Streams::related function. Also can contain the following options:
-	 * @param {callable} [$options.categories="array_keys"] Can be used to override the function which takes the output of Places_Nearby::forSubscribers, and this $options array, and returns the array of ($originalStreamName => $criteria) pairs. The $criteria can be a string or array or Db_Range or Db_Expression.
+	 * @param {array} $options The options to pass to the Streams_RelatedTo::fetchAll function.
+	 *  Also can contain the following options:
+	 * @param {callable} [$options.categories="array_keys"] Can be used to override the function
+	 *   which takes the output of Places_Nearby::forSubscribers, and this $options array,
+	 *   and returns the array of ($originalStreamName => $criteria) pairs.
+	 *   The $criteria can be a string or array or Db_Range or Db_Expression.
 	 * @return {array} An array of Streams_RelatedTo objects, sorted by ascending weight.
 	 */
 	static function related(
@@ -404,8 +409,12 @@ class Places_Nearby
 	
 	/**
 	 * Get streams related to Places/nearby streams, which are found from the
-	 * following parameters. Note that these streams may be slightly out of range
+	 * following parameters. Note that some of these streams may be slightly out of range
 	 * and you may want to perform additional filtering using Places::distance().
+	 * The "latitude", "longitude" and "meters" options can be used to override
+	 * those found in Places_Nearby::defaults(). If after this, any one of
+	 * "latitude", "longitude" or "meters" is still not set, then the
+	 * "Streams/experience/$experienceId" stream is used instead of Places_Nearby streams.
 	 * @method byTime
 	 * @static
 	 * @param {string} $publisherId The publisher of the category streams
@@ -431,10 +440,16 @@ class Places_Nearby
 	{
 		$fromTime = Q_Utils::timestamp($fromTime);
 		$toTime = Q_Utils::timestamp($toTime);
+		$weight = new Db_Range($fromTime, true, false, $toTime);
 		list($latitude, $longitude, $meters) = Places_Nearby::defaults();
 		extract(Q::take($options, array('latitude', 'longitude', 'meters')), EXTR_IF_EXISTS);
+		if (!isset($latitude) or !isset($longitude) or !isset($meters)) {
+			$o = compact('weight');
+			return Streams_RelatedTo::fetchAll(
+				$publisherId, array("Streams/experience/$experienceId"), $relationType, $o
+			);
+		}
 		$categories = array('Places_Nearby', '_categories');
-		$weight = new Db_Range($fromTime, true, false, $toTime);
 		$options = compact('categories', 'experienceId', 'fromTime', 'toTime', 'weight');
 		return Places_Nearby::related(
 			$publisherId, $relationType, $latitude, $longitude, $meters, $options
