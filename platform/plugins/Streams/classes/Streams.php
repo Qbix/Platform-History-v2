@@ -1387,7 +1387,7 @@ abstract class Streams extends Base_Streams
 			$asUserId = $asUser ? $asUser->id : "";
 		}
 		$avatar = Streams_Avatar::fetch($asUserId, $userId);
-		return $avatar ? $avatar->displayName($options, $fallback) : $default;
+		return $avatar ? $avatar->displayName($options, $fallback) : $fallback;
 	}
 
 	/**
@@ -1838,7 +1838,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just relates the stream to the category
-	 * @param {boolean} [$options.skipMessage=false] If true, skips posting the Streams/relatedFrom message to the "from" streams
+	 * @param {boolean} [$options.skipMessageTo=false] If true, skips posting the Streams/relatedFrom message to the "to" streams
+	 * @param {boolean} [$options.skipMessageFrom=false] If true, skips posting the Streams/relatedFrom message to the "from" streams
 	 * @param {double|string} [$options.weight] Pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
@@ -2097,8 +2098,10 @@ abstract class Streams extends Base_Streams
 			);
 		}
 
-		list($messagesTo, $s) = Streams_Message::postMessages($asUserId, $relatedTo_messages, true);
-		if (empty($options['skipMessage'])) {
+		if (empty($options['skipMessageTo'])) {
+			list($messagesTo, $s) = Streams_Message::postMessages($asUserId, $relatedTo_messages, true);
+		}
+		if (empty($options['skipMessageFrom'])) {
 			list($messagesFrom, $s) = Streams_Message::postMessages($asUserId, $relatedFrom_messages, true);
 		}
 
@@ -2127,7 +2130,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
-	 * @param {boolean} [$options.skipMessage=false] If true, skips posting the Streams/unrelatedFrom message to the "from" streams
+	 * @param {boolean} [$options.skipMessageTo=false] If true, skips posting the Streams/unrelatedTo message to the "to" streams
+	 * @param {boolean} [$options.skipMessageFrom=false] If true, skips posting the Streams/unrelatedFrom message to the "from" streams
 	 * @param {boolean} [$options.adjustWeights=false] If true, also decrements all following relations' weights by one.
 	 * @return {boolean}
 	 *  Whether the relation was removed
@@ -2222,16 +2226,18 @@ abstract class Streams extends Base_Streams
 			
 			// Send Streams/unrelatedTo message to a stream
 			// node server will be notified by Streams_Message::post
-			Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
-				'type' => 'Streams/unrelatedTo',
-				'instructions' => compact(
-					'fromPublisherId', 'fromStreamName', 'type', 'options', 'weight'
-				)
-			), true);
+			if (empty($options['skipMessageTo'])) {
+				Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
+					'type' => 'Streams/unrelatedTo',
+					'instructions' => compact(
+						'fromPublisherId', 'fromStreamName', 'type', 'options', 'weight'
+					)
+				), true);
+			}
 		}
 
 		if ($relatedFrom && $relatedFrom->remove()) {
-			if (empty($options['skipMessage'])) {
+			if (empty($options['skipMessageFrom'])) {
 				// Send Streams/unrelatedFrom message to a stream
 				// node server will be notified by Streams_Message::post
 				Streams_Message::post($asUserId, $fromPublisherId, $stream->name, array(
@@ -2662,7 +2668,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.extra] Any extra information to tree-merge for the participants
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
-	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being related to the joining asUserId's Streams/participating streams.
+	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being
+	 *  related to the Streams/participating streams of the joining user with id asUserId's
 	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs.
 	 *  The newly inserted rows will have wasInserted() return true.
 	 */
@@ -2810,7 +2817,7 @@ abstract class Streams extends Base_Streams
 					$asUserId, $asUserId, $pn,
 					$streamType, $publisherId, $streamNames,
 					array(
-						'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
+						'skipMessageFrom' => Q::ifset($options, 'skipRelationMessages', true),
 						'skipAccess' => true,
 						'weight' => time()
 					)
@@ -2952,7 +2959,7 @@ abstract class Streams extends Base_Streams
 					$asUserId, $asUserId, $pn,
 					$streamType, $publisherId, $streamNames,
 					array(
-						'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
+						'skipMessageFrom' => Q::ifset($options, 'skipRelationMessages', true),
 						'skipAccess' => true,
 						'weight' => time()
 					)
@@ -3483,9 +3490,10 @@ abstract class Streams extends Base_Streams
 			if (is_string($uids)) {
 				$uids = array_map('trim', explode("\t", $uids)) ;
 			}
+			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users::idsFromPlatformUids($platform, $uids, $statuses2)
+				Users_User::idsFromPlatformUids($platform, $uids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
 			$identifiers = array_merge($identifiers, $uids);
