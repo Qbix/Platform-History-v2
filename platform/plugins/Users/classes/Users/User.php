@@ -1014,6 +1014,7 @@ class Users_User extends Base_Users_User
 	 * Check platform uids or array of uids and return users - existing or future
 	 * @method idsFromPlatformUids
 	 * @static
+	 * @param {string} $platform The name of the platform
 	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
@@ -1031,7 +1032,7 @@ class Users_User extends Base_Users_User
 		}
 		$users = array();
 		foreach ($uids as $uid) {
-			$users[] = Users::futureUser('facebook', $uid, $status);
+			$users[] = Users::futureUser($platform, $uid, $status);
 			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);
