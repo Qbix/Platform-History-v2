@@ -10,4 +10,3 @@ attributes = REPLACE(attributes, "uploads/", "Q/uploads/");
 UPDATE {$prefix}avatar
 SET icon = REPLACE(icon, "uploads/", "Q/uploads/");
 
-
