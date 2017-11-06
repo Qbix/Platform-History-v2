@@ -3100,6 +3100,7 @@ abstract class Streams extends Base_Streams
 							"types" => array(
 								"^(?!(Users/)|(Streams/)).*/",
 								"Streams/relatedTo",
+								"Streams/announcement",
 								"Streams/chat/message"
 							),
 							"notifications" => 0

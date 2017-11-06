@@ -119,8 +119,9 @@
 						"description": "You were invited",
 						"subject": "You were invited to {{& stream.fields.title}}"
 					},
-					"Streams/chat/message": {
-						"subject": "Chat in {{stream.fields.title}}"
+					"Streams/announcement": {
+						"description": "Announcement for everyone in the stream",
+						"subject": "Announcement in {{& streams.fields.title}}"
 					},
 					"Streams/relatedTo": {
 						"description": "Some other stream has been related to this one",
