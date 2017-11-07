@@ -169,7 +169,7 @@ module.exports = {
 		if (partials) {
 			_getLoaders();
 			for (i=0; i<partials.length; i++) {
-				var path = partials[i];
+				path = partials[i];
 				for (j=0; j<_partials.length; j++) {
 					if (part[path] = _partials[j](path)) {
 						break;

@@ -76,13 +76,13 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 		notification.priority = o.priority;
 	}
 	if (o.expiry) {
-		o.expiry = o.expiry;
+		n.expiry = o.expiry;
 	}
 	if (o.collapseId) {
 		n.collapseId = o.collapseId;
 	}
-	if (o.alert && o.alert.title) {
-		o.alert.title = Q.Handlebars.renderSource(o.alert.title, o.fields);
+	if (n.alert && n.alert.title) {
+		n.alert.title = Q.Handlebars.renderSource(n.alert.title, o.fields);
 	}
 	if (o && o.view) {
 		var body = o.isSource
