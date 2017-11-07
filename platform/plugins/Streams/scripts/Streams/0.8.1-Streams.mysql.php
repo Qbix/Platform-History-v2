@@ -29,6 +29,7 @@ function Streams_0_8_1_Streams_mysql()
 		),
 		"notifications" => 0
 	));
+	$subscription->ofUserId = '';
 	$subscription->untilTime = null;
 	$subscription->duration = 0;
 	$subscription->save();
