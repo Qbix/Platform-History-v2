@@ -24,7 +24,7 @@ function Websites_article_tool($options)
 	if (!$article) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'article', 
-			'criteria' => $streamName
+			'criteria' => "stream named $streamName"
 		));
 	}
 	$getintouch = array_merge(array(

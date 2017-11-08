@@ -6046,16 +6046,17 @@ Q.load = function _Q_load(plugins, callback, options) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
+	var parts = what2.split('?');
 	if (fields) {
 		for (var k in fields) {
-			if (fields[k] == null) continue;
-			what2 += '?'+encodeURIComponent(k)+'='+encodeURIComponent(fields[k]);
+			parts[1] = (parts[1] || "").queryField(k, fields[k]);
 		}
+		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
 	if (options && options.cacheBust) {
 		what2 += "?Q.cacheBust="+Math.floor(Date.now()/options.cacheBust);
 	}
-	var parts = what2.split('?');
+	parts = what2.split('?');
 	if (parts.length > 2) {
 		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
