@@ -1733,7 +1733,7 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Get the url of the stream's icon
-	 * @param {string} [$basename=""] The last part after the slash, such as "50.png"
+	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
 	 * @return {string} The stream's icon url
 	 */
 	function iconUrl($basename = null)
