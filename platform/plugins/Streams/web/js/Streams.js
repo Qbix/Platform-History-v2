@@ -327,19 +327,19 @@ Streams.define = function (type, ctor, methods) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
+ * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
  * @return {String} the url
  */
-Streams.iconUrl = function(icon, size) {
+Streams.iconUrl = function(icon, basename) {
 	if (!icon) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if (!size || size === true) {
-		size = '40';
+	if (!basename || basename === true) {
+		basename = '40';
 	}
-	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = Q.interpolateUrl(icon + '/' + size);
+	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
+	var src = Q.interpolateUrl(icon + '/' + basename);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? src
 		: Q.url('{{Streams}}/img/icons/'+src);
@@ -3957,13 +3957,13 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 /**
  * Get the url of the user icon from a Streams.Avatar
  * @method
- * @param {Number} [size=40] the size of the icon to render.
+ * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
  * @return {String} the url
  */
-Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
+Ap.iconUrl = function _Avatar_prototype_iconUrl (basename) {
 	return Users.iconUrl(this.icon.interpolate({
 		userId: this.publisherId.splitId()
-	}), size);
+	}), basename);
 };
 
 /**
