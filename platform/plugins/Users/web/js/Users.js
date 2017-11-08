@@ -859,19 +859,19 @@ Users.User.get = Users.get;
  * Calculate the url of a user's icon
  * @method
  * @param {String} icon the value of the user's "icon" field
- * @param {Number} [size=40] the size of the icon to render.
+ * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
  * @return {String} the url
  */
-Users.iconUrl = function Users_iconUrl(icon, size) {
+Users.iconUrl = function Users_iconUrl(icon, basename) {
 	if (!icon) {
 		console.warn("Users.iconUrl: icon is empty");
 		return '';
 	}
-	if (!size || size === true) {
-		size = '40';
+	if (!basename || basename === true) {
+		basename = '40';
 	}
-	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = Q.interpolateUrl(icon + '/' + size);
+	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
+	var src = Q.interpolateUrl(icon + '/' + basename);
 	return src.isUrl() || icon.substr(0, 2) === '{{'
 		? src
 		: Q.url('{{Users}}/img/icons/'+src);
