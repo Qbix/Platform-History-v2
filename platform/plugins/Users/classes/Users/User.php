@@ -244,7 +244,7 @@ class Users_User extends Base_Users_User
 
 		if (!empty($updatedFields['username'])) {
 			$app = Q::app();
-			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', true);
+			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', false);
 			if ($unique) {
 				$username = $updatedFields['username'];
 				$criteria = compact('username');

@@ -62,8 +62,9 @@ h2 { margin: 0; }
 #dashboard { display: inline-block; width: 100%; }
 
 .Q_notMobile #dashboard_slot .MyApp_dashboard_logo {
-	background: url(../static/ui/logo.png) no-repeat
-	center center; background-repeat: no-repeat; padding-top: 100px; text-align: center;
+	overflow: hidden;
+	background: url(../img/logo/logo.png) no-repeat;
+	background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center;
 }
 .Q_mobile #dashboard_slot .MyApp_dashboard_logo {
 	display: inline-block; width: 40px; height: 40px; float: left; margin: 5px;
