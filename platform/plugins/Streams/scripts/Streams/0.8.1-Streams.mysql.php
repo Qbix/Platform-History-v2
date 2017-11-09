@@ -20,6 +20,7 @@ function Streams_0_8_1_Streams_mysql()
 	// also save subscription template
 	$subscription = new Streams_Subscription();
 	$subscription->publisherId = '';
+	$subscription->ofUserId = '';
 	$subscription->streamName = 'Streams/experience/';
 	$subscription->filter = Q::json_encode(array(
 		"types" => array(
