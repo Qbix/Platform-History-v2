@@ -1,2 +1,3 @@
 ALTER TABLE {$prefix}contact
-ADD INDEX reverse (contactUserId, userId, label);
+ADD INDEX reverse (contactUserId, userId, label),
+ADD INDEX reverseByLabel(contactUserId, label, userId);
