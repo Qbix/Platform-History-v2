@@ -20,15 +20,6 @@ var MyApp = (function (Q, $) {
 		}
 	};
 	
-	Q.onReady.set(function () {
-		Q.addScript("{{Q}}/js/QTools.js", function () {
-			$('#dashboard .Users_avatar_tool').plugin('Q/contextual', {
-				elements: $('#dashboard_user_contextual .Q_listing').children(),
-				defaultHandler: MyApp.userContextual
-			});
-		});
-	});
-	
 	// The following code is for all pages.
 	// For specific pages, see web/js/pages directory. 
 	Q.page('', function () {
@@ -36,6 +27,13 @@ var MyApp = (function (Q, $) {
 		$('.MyApp_login').on(Q.Pointer.click, function () {
 			Q.Users.login();
 			return false;
+		});
+		
+		Q.addScript("{{Q}}/js/QTools.js", function () {
+			$('#dashboard .Users_avatar_tool').plugin('Q/contextual', {
+				elements: $('#dashboard_user_contextual .Q_listing').clone().children(),
+				defaultHandler: MyApp.userContextual
+			});
 		});
 		
 		// For example, we can hide notices when the user clicks/taps on them
