@@ -1955,8 +1955,11 @@ abstract class Streams extends Base_Streams
 			}
 			$tsn = ($arrayField === 'toStreamName') ? $sn : $toStreamName;
 			$newRT[$sn] = $newRF[$sn] = compact(
-				'toPublisherId', 'type', 'fromPublisherId', 'extra'
+				'toPublisherId', 'type', 'fromPublisherId'
 			);
+			if (isset($extra)) {
+				$newRT[$sn]['extra'] = $extra;
+			}
 			if ($calculateWeights) {
 				if (!isset($weights2[$tsn])) {
 					$weights2[$tsn] = isset($maxWeights[$tsn]) ? $maxWeights[$tsn] : 0;
