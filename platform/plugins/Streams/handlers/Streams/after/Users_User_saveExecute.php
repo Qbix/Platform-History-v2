@@ -115,7 +115,7 @@ function Streams_after_Users_User_saveExecute($params)
 		// Save a greeting stream, to be edited
 		$communityId = Users::communityId();
 		Streams::create($user->id, $user->id, "Streams/greeting", array(
-			'name' =>"Streams/greeting/$communityId"
+			'name' => "Streams/greeting/$communityId"
 		));
 	
 		// Create some standard labels

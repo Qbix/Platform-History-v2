@@ -48,7 +48,9 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * @param string [$publisherId] The id of the publisher relative to whom to calculate the roles. Defaults to the app name.
+	 * @param string [$publisherId=Users::communityId()]
+	 *  The id of the publisher relative to whom to calculate the roles.
+	 *  Defaults to the community id.
 	 * @param {string|array|Db_Expression} [$filter=null] 
 	 *  You can pass additional criteria here for the label field
 	 *  in the `Users_Contact::select`, such as an array or Db_Range

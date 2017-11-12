@@ -6432,11 +6432,7 @@ Q.request = function (url, slotNames, callback, options) {
 				url = Q.ajaxExtend(url, slotNames, overrides);
 			}			
 			var xmlhttp;
-			if (root.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp = new XMLHttpRequest();
-			} else { // code for IE6, IE5
-				xmlhttp = new root.ActiveXObject("Microsoft.XMLHTTP");
-			}
+			xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4) {
 					if (xmlhttp.status == 200) {
@@ -7237,7 +7233,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 				onload2.call(links[j]); // it doesn't support onload
 			} else {
 				links[j].onload = onload2;
-				links[j].onreadystatechange = onload2; // for IE6
+				links[j].onreadystatechange = onload2; // for IE8
 			}
 			break;
 		}
@@ -7798,6 +7794,151 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action; // old page going out
 			var i, newStylesheets, newStyles;
 			
+			var domElements = null;
+			if (o.ignorePage) {
+				newStylesheets = [];
+				afterStylesheets();
+			} else {
+				_doEvents('on', moduleSlashAction);
+				newStylesheets = loadStylesheets(afterStylesheets);
+			}
+			
+			function afterStylesheets() {
+				var newStyles = loadStyles();
+				
+				afterStyles(); // Synchronous to allow additional scripts to change the styles before allowing the browser reflow.
+			
+				if (!o.ignoreHash && parts[1] && history.pushState) {
+					var e = document.getElementById(parts[1]);
+					if (e) {
+						location.hash = parts[1];
+						// history.back();
+						// todo: modify history successfully somehow
+						// history.replaceState({}, null, url + '#' + parts[1]);
+					}
+				}
+			}
+			
+			function afterStyles() {
+				
+				if (!o.ignorePage) {
+					_doEvents('before', moduleSlashAction);
+					while (Q.Event.forPage && Q.Event.forPage.length) {
+						// keep removing the first element of the array until it is empty
+						Q.Event.forPage[0].remove(true);
+					}
+					var p = Q.Event.jQueryForPage;
+					for (i=p.length-1; i >= 0; --i) {
+						var off = p[i][0];
+						root.jQuery.fn[off].call(p[i][1], p[i][2], p[i][3]);
+					}
+					Q.Event.jQueryForPage = [];
+				}
+
+				if (!o.ignoreHistory) {
+					Q.Page.push(url);
+				}
+			
+				if (!o.ignorePage) {
+					// Remove various elements belonging to the slots that are being reloaded
+					Q.each(['link', 'style', 'script'], function (i, tag) {
+						if (tag !== 'style' && !o.loadExtras) {
+							return;
+						}
+						Q.each(document.getElementsByTagName(tag), function (k, e) {
+							if (tag === 'link' && e.getAttribute('rel').toLowerCase() != 'stylesheet') {
+								return;
+							}
+
+							var slot = e.getAttribute('data-slot');
+							if (slot && slotNames.indexOf(slot) >= 0) {
+								var found = false;
+								if (response.stylesheets && response.stylesheets[slot]) {
+									var stylesheets = response.stylesheets[slot];
+									for (var i=0, l=stylesheets.length; i<l; ++i) {
+										var stylesheet = stylesheets[i];
+										if (stylesheet.href === e.href
+										&& (!stylesheet.media || stylesheet.media === e.media)) {
+											found = true;
+											break;
+										}
+									}
+								}
+								if (!found) {
+									Q.removeElement(e);
+								}
+							}
+
+							// now let's deal with style tags inserted by prefixfree
+							if (tag === 'style') {
+								var href = e.getAttribute('data-href');
+								if (slotNames.indexOf(processStylesheets.slots[href]) >= 0) {
+									Q.removeElement(e);
+									delete processStylesheets.slots[href];
+								}
+							}
+						});
+					});
+				}
+			
+				domElements = handler(response, url, o); // this is where we fill all the slots
+			
+				if (!o.ignorePage && Q.info && Q.info.uri) {
+					Q.Page.onLoad(moduleSlashAction).occurred = false;
+					Q.Page.onActivate(moduleSlashAction).occurred = false;
+					if (Q.info.uriString !== Q.moduleSlashAction) {
+						Q.Page.onLoad(Q.info.uriString).occurred = false;
+						Q.Page.onActivate(Q.info.uriString).occurred = false;
+					}
+				}
+
+				if (response.scriptData) {
+					Q.each(response.scriptData,
+					function _Q_loadUrl_scriptData_each(slot, data) {
+						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
+							Q.setObject(k, v);
+						});
+					});
+				}
+				if (response.scriptLines) {
+					for (i in response.scriptLines) {
+						if (response.scriptLines[i]) {
+							eval(response.scriptLines[i]);
+						}
+					}
+				}
+
+				if (!o.ignorePage) {
+					try {
+						Q.Page.beingLoaded = true;
+						Q.Page.onLoad('').handle(url, o);
+						if (Q.info && Q.info.uri) {
+							moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action; // new page coming in
+							Q.Page.onLoad(moduleSlashAction).handle(url, o);
+							if (Q.info.uriString !== moduleSlashAction) {
+								Q.Page.onLoad(Q.info.uriString).handle(url, o);
+							}
+						}
+						Q.Page.beingLoaded = false;
+					} catch (e) {
+						debugger; // pause here if debugging
+						Q.Page.beingLoaded = false;
+						throw e;
+					}
+				}
+			
+				if (Q.isEmpty(domElements)) {
+					_activatedSlot();
+				} else if (Q.isPlainObject(domElements)) { // is a plain object with elements
+					_activatedSlot.remaining = Object.keys(domElements).length;
+					for (var slotName in domElements) {
+						Q.activate(domElements[slotName], undefined, _activatedSlot);
+					}
+				} else { // it's an element
+					Q.activate(domElements, undefined, _activatedSlot);
+				}
+			}
+			
 			function _doEvents(prefix, moduleSlashAction) {
 				var event, f = Q.Page[prefix+'Unload'];
 				if (Q.info && Q.info.uri) {
@@ -7865,148 +8006,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
-			}
-			
-			function afterStyles() {
-			
-				if (!o.ignorePage && Q.info && Q.info.uri) {
-					Q.Page.onLoad(moduleSlashAction).occurred = false;
-					Q.Page.onActivate(moduleSlashAction).occurred = false;
-					if (Q.info.uriString !== Q.moduleSlashAction) {
-						Q.Page.onLoad(Q.info.uriString).occurred = false;
-						Q.Page.onActivate(Q.info.uriString).occurred = false;
-					}
-				}
-
-				if (response.scriptData) {
-					Q.each(response.scriptData, function _Q_loadUrl_scriptData_each(slot, data) {
-						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
-							Q.setObject(k, v);
-						});
-					});
-				}
-				if (response.scriptLines) {
-					for (i in response.scriptLines) {
-						if (response.scriptLines[i]) {
-							eval(response.scriptLines[i]);
-						}
-					}
-				}
-
-				if (!o.ignorePage) {
-					try {
-						Q.Page.beingLoaded = true;
-						Q.Page.onLoad('').handle(url, o);
-						if (Q.info && Q.info.uri) {
-							moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action; // new page coming in
-							Q.Page.onLoad(moduleSlashAction).handle(url, o);
-							if (Q.info.uriString !== moduleSlashAction) {
-								Q.Page.onLoad(Q.info.uriString).handle(url, o);
-							}
-						}
-						Q.Page.beingLoaded = false;
-					} catch (e) {
-						debugger; // pause here if debugging
-						Q.Page.beingLoaded = false;
-						throw e;
-					}
-				}
-			
-				if (Q.isEmpty(domElements)) {
-					_activatedSlot();
-				} else if (Q.isPlainObject(domElements)) { // is a plain object with elements
-					_activatedSlot.remaining = Object.keys(domElements).length;
-					for (var slotName in domElements) {
-						Q.activate(domElements[slotName], undefined, _activatedSlot);
-					}
-				} else { // it's an element
-					Q.activate(domElements, undefined, _activatedSlot);
-				}
-			}
-
-			if (!o.ignorePage) {
-				_doEvents('before', moduleSlashAction);
-				while (Q.Event.forPage && Q.Event.forPage.length) {
-					// keep removing the first element of the array until it is empty
-					Q.Event.forPage[0].remove(true);
-				}
-				var p = Q.Event.jQueryForPage;
-				for (i=p.length-1; i >= 0; --i) {
-					var off = p[i][0];
-					root.jQuery.fn[off].call(p[i][1], p[i][2], p[i][3]);
-				}
-				Q.Event.jQueryForPage = [];
-			}
-
-			if (!o.ignoreHistory) {
-				Q.Page.push(url);
-			}
-			
-			if (!o.ignorePage) {
-				// Remove various elements belonging to the slots that are being reloaded
-				Q.each(['link', 'style', 'script'], function (i, tag) {
-					if (tag !== 'style' && !o.loadExtras) {
-						return;
-					}
-					Q.each(document.getElementsByTagName(tag), function (k, e) {
-						if (tag === 'link' && e.getAttribute('rel').toLowerCase() != 'stylesheet') {
-							return;
-						}
-
-						var slot = e.getAttribute('data-slot');
-						if (slot && slotNames.indexOf(slot) >= 0) {
-							var found = false;
-							if (response.stylesheets && response.stylesheets[slot]) {
-								var stylesheets = response.stylesheets[slot];
-								for (var i=0, l=stylesheets.length; i<l; ++i) {
-									var stylesheet = stylesheets[i];
-									if (stylesheet.href === e.href
-									&& (!stylesheet.media || stylesheet.media === e.media)) {
-										found = true;
-										break;
-									}
-								}
-							}
-							if (!found) {
-								Q.removeElement(e);
-							}
-						}
-
-						// now let's deal with style tags inserted by prefixfree
-						if (tag === 'style') {
-							var href = e.getAttribute('data-href');
-							if (slotNames.indexOf(processStylesheets.slots[href]) >= 0) {
-								Q.removeElement(e);
-								delete processStylesheets.slots[href];
-							}
-						}
-					});
-				});
-			}
-			
-			var domElements = handler(response, url, o); // this is where we fill all the slots
-			if (o.ignorePage) {
-				newStylesheets = [];
-				afterStylesheets();
-			} else {
-				_doEvents('on', moduleSlashAction);
-				newStylesheets = loadStylesheets(afterStylesheets);
-			}
-			
-			function afterStylesheets() {
-				var newStyles = loadStyles();
-				
-				afterStyles(); // Synchronous to allow additional scripts to change the styles before allowing the browser reflow.
-			
-				if (!o.ignoreHash && parts[1] && history.pushState) {
-					var e = document.getElementById(parts[1]);
-					if (e) {
-						location.hash = parts[1];
-						// history.back();
-						// todo: modify history successfully somehow
-						// history.replaceState({}, null, url + '#' + parts[1]);
-					}
-				}
 			}
 		}
 		
