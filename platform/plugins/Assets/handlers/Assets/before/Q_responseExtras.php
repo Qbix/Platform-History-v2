@@ -23,5 +23,7 @@ function Assets_before_Q_responseExtras() {
 	}
     if (!empty($_GET['browsertab']) && $_GET['browsertab'] == 'yes') {
         Q_Response::layoutView('Assets/browsertab.php');
+        Q_Response::addStylesheet('Q/plugins/Assets/css/browsertab.css');
+        Q_Response::addScript('Q/plugins/Assets/js/browsertab.js');
     }
 }
