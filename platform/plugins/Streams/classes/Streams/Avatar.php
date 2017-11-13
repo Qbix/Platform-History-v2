@@ -30,7 +30,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 * @static
 	 * @param $toUserId {User_User|string} The id of the user to which this would be displayed
 	 * @param $publisherIds {string|array} Array of various users whose avatars are being fetched
-	 * @param $indexField {string} Optional name of the field by which to index the resulting array
+	 * @param $indexField {string} Optional name of the field by which to index the resulting array. Can be "toUserId" or "publisherId"
 	 * @return {Streams_Avatar|array}
 	 */
 	static function fetch($toUserId, $publisherId, $indexField = null) {
