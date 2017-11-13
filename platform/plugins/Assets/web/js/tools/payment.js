@@ -49,7 +49,7 @@ Q.Tool.define("Assets/payment", function (options) {
 		Q.Assets.Payments[payments](state, function (err) {
 			if (err) {
 				if (err.code !== 20) {
-                    alert(Q.firstErrorMessage(err));
+					alert(Q.firstErrorMessage(err));
 				}
 				return;
 			}
