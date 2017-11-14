@@ -530,11 +530,17 @@ and 'used' is "native", or the name of the platform used, such as "facebook".
  *  It is passed the user information as well as the response from hitting accountStatusUrl
  *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
  *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
+ *  @param {Boolean} [options.unlessLoggedIn] if true, this only proceeds with the login flow if the user isn't already logged in. Can be combined with tryQuietly option.
  *  @param {Array} [options.scope=['email','public_profile','user_friends'] permissions to request from the authentication platform
  *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
  *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
  */
 Users.login = function(options) {
+
+	var o = Q.extend({}, Users.login.options, options);
+	if (o.unlessLoggedIn && Users.loggedInUser) {
+		return _onConnect(Users.loggedInUser);
+	}
 
 	if (typeof options === 'function') {
 		options = { onSuccess: { 'options': options } };
@@ -542,7 +548,6 @@ Users.login = function(options) {
 			options.onRequireComplete = { 'Users.login.options': arguments[1] };
 		}
 	}
-	var o = Q.extend({}, Users.login.options, options);
 
 	if (typeof o.using === 'string') {
 		o.using = o.using.split(',');
@@ -854,19 +859,19 @@ Users.User.get = Users.get;
  * Calculate the url of a user's icon
  * @method
  * @param {String} icon the value of the user's "icon" field
- * @param {Number} [size=40] the size of the icon to render.
+ * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
  * @return {String} the url
  */
-Users.iconUrl = function Users_iconUrl(icon, size) {
+Users.iconUrl = function Users_iconUrl(icon, basename) {
 	if (!icon) {
 		console.warn("Users.iconUrl: icon is empty");
 		return '';
 	}
-	if (!size || size === true) {
-		size = '40';
+	if (!basename || basename === true) {
+		basename = '40';
 	}
-	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = Q.interpolateUrl(icon + '/' + size);
+	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
+	var src = Q.interpolateUrl(icon + '/' + basename);
 	return src.isUrl() || icon.substr(0, 2) === '{{'
 		? src
 		: Q.url('{{Users}}/img/icons/'+src);

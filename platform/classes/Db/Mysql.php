@@ -2422,12 +2422,20 @@ $field_hints
 	 * Create SELECT query to the class table
 	 * @method select
 	 * @static
-	 * @param {string|array} [\$fields='*'] The fields as strings, or array of alias=>field
-	 * @param {string|array} [\$alias=null] The tables as strings, or array of alias=>table
+	 * @param {string|array} [\$fields=null] The fields as strings, or array of alias=>field.
+	 *   The default is to return all fields of the table.
+	 * @param {string|array} [\$alias=null] The tables as strings, or array of alias=>table.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
-	static function select(\$fields, \$alias = null)
+	static function select(\$fields=null, \$alias = null)
 	{
+		if (!isset(\$fields)) {
+			\$fieldNames = array();
+			foreach (self::fieldNames() as \$fn) {
+				\$fieldNames[] = "`\$fn`";
+			}
+			\$fields = implode(',', \$fieldNames);
+		}
 		if (!isset(\$alias)) \$alias = '';
 		\$q = self::db()->select(\$fields, self::table().' '.\$alias);
 		\$q->className = $class_name_var;
@@ -2633,12 +2641,17 @@ Base.connectionName = function() {
 $dc
  * Create SELECT query to the class table
  * @method SELECT
- * @param {String|Object} [fields='*'] The fields as strings, or object of {alias:field} pairs
- * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs
+ * @param {String|Object} [fields=null] The fields as strings, or object of {alias:field} pairs.
+ *   The default is to return all fields of the table.
+ * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs.
  * @return {Db.Query.Mysql} The generated query
  */
 Base.SELECT = function(fields, alias) {
-	fields = fields || '*';
+	if (!fields) {
+		fields = Base.fieldNames().map(function (fn) {
+			return '`' + fn + '`';
+		}).join(',');
+	}
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
 	q.className = '$class_name';
 	return q;
@@ -2777,6 +2790,16 @@ $dc
  * @return {array} An array of field names
  */
 Base.prototype.fieldNames = function () {
+	return Base.fieldNames();
+};
+
+$dc
+ * Retrieves field names for class table
+ * @method fieldNames
+ * @static
+ * @return {array} An array of field names
+ */
+Base.fieldNames = function () {
 	return $field_names_json_indented;
 };
 

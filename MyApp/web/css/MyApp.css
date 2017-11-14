@@ -7,7 +7,7 @@
 a { text-decoration: none; color: #0055ff; }
 a:visited { color: #aa88cc; }
 html { background: #f2f2f2; height: 100%; box-sizing: border-box; }
-body { height: 100%; touch-action: none; }
+body { height: 100%; overflow: auto; touch-action: none; }
 h2 { margin: 0; }
 *, *:before, *:after { box-sizing: inherit; }
 
@@ -45,6 +45,7 @@ h2 { margin: 0; }
 #dashboard_slot input,
 #dashboard_slot textarea { color: black; }
 #page { position: absolute; left: 0%; width: 100%; top:50px; bottom: 0; } 
+.Q_mobile #page { overflow: auto; -webkit-overflow-scrolling: touch; z-index: 0; }
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_static,
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_blockstatic { 
 	background: white;
@@ -52,6 +53,7 @@ h2 { margin: 0; }
 }
 .Q_mobile #dashboard .Users_avatar_icon { margin: 0; border-radius: 4px; }
 .Q_mobile #dashboard .Users_avatar_name { display: none; }
+.Q_mobile #page { position: relative; }
 .Q_notMobile .Users_avatar_icon { margin-right: 5px; }
 
 #dashboard, #notices, #content { margin: auto; text-align: left; }
@@ -60,8 +62,9 @@ h2 { margin: 0; }
 #dashboard { display: inline-block; width: 100%; }
 
 .Q_notMobile #dashboard_slot .MyApp_dashboard_logo {
-	background: url(../static/ui/logo.png) no-repeat
-	center center; background-repeat: no-repeat; padding-top: 100px; text-align: center;
+	overflow: hidden;
+	background: url(../img/logo/logo.png) no-repeat;
+	background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center;
 }
 .Q_mobile #dashboard_slot .MyApp_dashboard_logo {
 	display: inline-block; width: 40px; height: 40px; float: left; margin: 5px;
@@ -149,7 +152,7 @@ h2 { margin: 0; }
 .Q_notTouchscreen #dashboard .Q_tabs_tab:hover { background: rgba(100, 100, 100, 0.1); }
 #dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
-#dashboard .Q_tabs_tab.Q_current { background-image: url(/Q/plugins/Q/img/bg/stucco.png) !important; color: black !important; }
+#dashboard .Q_tabs_tab.Q_current { background-image: url(../Q/plugins/Q/img/bg/stucco.png) !important; color: black !important; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
 .Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }

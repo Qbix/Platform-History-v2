@@ -48,7 +48,9 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * @param string [$publisherId] The id of the publisher relative to whom to calculate the roles. Defaults to the app name.
+	 * @param string [$publisherId=Users::communityId()]
+	 *  The id of the publisher relative to whom to calculate the roles.
+	 *  Defaults to the community id.
 	 * @param {string|array|Db_Expression} [$filter=null] 
 	 *  You can pass additional criteria here for the label field
 	 *  in the `Users_Contact::select`, such as an array or Db_Range
@@ -73,7 +75,7 @@ abstract class Users extends Base_Users
 			}
 			$userId = $user->id;
 		}
-		$contacts = Users_Contact::select('*')
+		$contacts = Users_Contact::select()
 			->where(array(
 				'userId' => $publisherId,
 				'contactUserId' => $userId
@@ -474,7 +476,7 @@ abstract class Users extends Base_Users
 		if (isset($_SESSION['Users']['appUsers'][$key])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$key];
-			$au = Users_AppUser::select('*')->where($pk)->fetchDbRow();
+			$au = Users_AppUser::select()->where($pk)->fetchDbRow();
 			if (empty($au)) {
 				// somehow this app_user disappeared from the database
 				throw new Q_Exception_MissingRow(array(
@@ -813,7 +815,7 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'after');
 		
-		$votes = Users_Vote::select('*')
+		$votes = Users_Vote::select()
 			->where(array(
 				'userId' => $user->id,
 				'forType' => 'Users/hinted'
@@ -1153,7 +1155,7 @@ abstract class Users extends Base_Users
 			list($hashed, $ui_type) = self::hashing($value, $type);
 			$identifiers = "$ui_type:$hashed";
 		}
-		$uis = Users_Identify::select('*')->where(array(
+		$uis = Users_Identify::select()->where(array(
 			'identifier' => $identifiers,
 			'state' => isset($state) ? $state : array('verified', 'future')
 		))->limit(1)->fetchDbRows();
@@ -1536,7 +1538,7 @@ abstract class Users extends Base_Users
 			list($hashed, $ui_type) = self::hashing($v, $k);
 			$identifiers[] = "$ui_type:$hashed";
 		}
-		return Users_Link::select('*')->where(array(
+		return Users_Link::select()->where(array(
 			'identifier' => $identifiers
 		))->fetchDbRows();
 	}
@@ -1659,7 +1661,7 @@ abstract class Users extends Base_Users
 	/**
 	 * Get the url of a user's icon
 	 * @param {string} [$icon] The contents of a user row's icon field
-	 * @param {string} [$basename=""] The last part after the slash, such as "50.png"
+	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
 	 * @return {string} The stream's icon url
 	 */
 	static function iconUrl($icon, $basename = null)

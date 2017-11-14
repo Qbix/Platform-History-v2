@@ -144,6 +144,14 @@
 					"automatic": true
 				}
 			}
+		},
+		"onInsert": {
+			"labels": {
+				"Users/friends": ["Friends", "labels/Users/friends"],
+				"Users/family": ["Family", "labels/Users/family"],
+				"Users/business": ["Business", "labels/Users/business"],
+				"Users/dating": ["Dating", "labels/Users/dating"]
+			}
 		}
 	},
 	"Streams": {

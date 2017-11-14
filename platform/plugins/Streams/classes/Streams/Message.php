@@ -356,7 +356,7 @@ class Streams_Message extends Base_Streams_Message
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Streams/Message/postMessages",
 				"posted" => Q::json_encode($messages2),
-				"streams" => Q::json_encode(Db::exportArray($streams))
+				"streams" => Q::json_encode(Db::exportArray($streams, array("skipAccess" => true)))
 			));
 		}
 		

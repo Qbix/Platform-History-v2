@@ -255,7 +255,7 @@ CREATE TABLE `{$prefix}subscription` (
   `filter` varchar(255) NOT NULL,
   `duration` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`),
-  KEY `SUBSCRIBER` (`ofUserId`)
+  KEY `subscriber` (`ofUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='{"type": [ array of message types ], "notifications": 5}';
 
 # Dump of table {$prefix}total

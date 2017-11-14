@@ -123,7 +123,7 @@ class Users_Device extends Base_Users_Device
 			list($appId, $appInfo) = Users::appInfo($appId);
 			$appId = $appInfo['appId'];
 		}
-		return Users_Device::select('*')
+		return Users_Device::select()
 			->where(compact('userId', 'platform', 'appId'))
 			->orderBy('insertedTime', false)
 			->fetchDbRows();

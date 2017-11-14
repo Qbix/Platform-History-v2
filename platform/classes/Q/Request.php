@@ -615,7 +615,7 @@ class Q_Request
 	/**
 	 * Gets all the names of the fields with no value or equal
 	 * @method special
- * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns array(123,456)
+	 * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns array(123,456)
 	 * @param {mixed} $default what to return if field is missing
 	 * @param {string} [$source=null] optionally provide an array to use instead of $_REQUEST
 	 * @static
@@ -906,6 +906,7 @@ class Q_Request
 	 * @method requireFields
 	 * @static
 	 * @param {array} $fields Array of strings or arrays naming fields that are required
+	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if the field is missing
 	 * @return {array} The resulting list of exceptions
 	 */
 	static function requireFields($fields, $throwIfMissing = false)
