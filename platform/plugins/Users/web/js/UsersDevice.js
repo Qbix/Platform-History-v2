@@ -7,6 +7,9 @@
 		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
 			var appId = location.search.queryField('Q.Users.appId');
 			_setToStorage('appId', appId);
+			if (!Q.isEmpty(appId)) {
+				localStorage.setItem("Q\tUsers.Device.appId", appId);
+			}
 		}
 		Users.Device.init(function () {
 			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);

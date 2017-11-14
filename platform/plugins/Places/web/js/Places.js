@@ -173,7 +173,9 @@ var Places = Q.Places = Q.plugins.Places = {
 			var b = polyline[i-1].y;
 			var c = polyline[i].x;
 			var d = polyline[i].y;
-			var n = (c-a)*(c-a) + (d-b)*(d-b);
+			var n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
+			var n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
+			var n = n1 * n2;
 			var frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
 			var e = a + (c-a)*frac;
@@ -242,36 +244,66 @@ var Places = Q.Places = Q.plugins.Places = {
 			Q.handle(callback, Places, [directions, status, d, params]);
 		});
 	},
-	
 	/**
 	 * Obtain a polyline from a route
 	 * @param {Object} route the route
 	 * @param {Object} options
 	 * @param {String} [options.platform=Places.options.platform]
 	 */
-	polyline: function (route, options) {
+	polyline: function(route, options) {
 		options = options || {};
 		var platform = options.platform || Places.options.platform;
 		var polyline = [];
-		var lastStep = null;
-		Q.each(route.legs, function (i, leg) {
-			Q.each(leg.steps, function (j, step) {
-				polyline.push({
-					x: this.start_location.lat,
-					y: this.start_location.lng
-				});
-				lastStep = step;
-			});
-		});
-		if (lastStep) {
+		var str = route.overview_polyline.points;
+		var index = 0,
+			lat = 0,
+			lng = 0,
+			shift = 0,
+			result = 0,
+			byte = null,
+			latitude_change,
+			longitude_change,
+			precision = 5,
+			factor = Math.pow(10, precision);
+
+		// Coordinates have variable length when encoded, so just keep
+		// track of whether we've hit the end of the string. In each
+		// loop iteration, a single coordinate is decoded.
+		while (index < str.length) {
+			// Reset shift, result, and byte
+			byte = null;
+			shift = 0;
+			result = 0;
+
+			do {
+				byte = str.charCodeAt(index++) - 63;
+				result |= (byte & 0x1f) << shift;
+				shift += 5;
+			} while (byte >= 0x20);
+
+			latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+			shift = result = 0;
+
+			do {
+				byte = str.charCodeAt(index++) - 63;
+				result |= (byte & 0x1f) << shift;
+				shift += 5;
+			} while (byte >= 0x20);
+
+			longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+			lat += latitude_change;
+			lng += longitude_change;
+
 			polyline.push({
-				x: lastStep.end_location.lat,
-				y: lastStep.end_location.lng
+				x: lat / factor,
+				y: lng / factor
 			});
 		}
+
 		return polyline;
 	}
-	
 };
 
 Places.route.onResult = new Q.Event();

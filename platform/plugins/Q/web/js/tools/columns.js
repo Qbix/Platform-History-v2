@@ -845,7 +845,7 @@ function prepareColumns(tool) {
 	if (!state.container) {
 		state.container = document.createElement('div')
 			.addClass('Q_columns_container Q_clearfix');
-		tool.element.appendChild(this.state.container);
+		tool.element.appendChild(state.container);
 	} else {
 		state.columns = [];
 		tool.$('.Q_columns_column').each(function (index) {

@@ -302,10 +302,12 @@ class Q
 	 * @static
 	 * @param {string} $expression Same as in Q::interpolate()
 	 * @param {array} $params Same as in Q::interpolate()
+	 * @param {string} [$convert=array()] Same as in Q_Html::text().
+	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
 	 */
-	static function text($expression, $params = array())
+	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
 	{
-		return Q_Html::text(Q::interpolate($expression, $params));
+		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
 	}
 
 	/**

@@ -96,7 +96,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	 *  Can also be an array of criteria corresponding to the $streamNames array.
 	 * @param {array} [$options=array()] Options to apss to the Streams::related function.
 	 *  Can also include the following:
-	 * @param {string} [$options.asUserId] Override the default user id to fetch as.
+	 * @param {string} [$options.asUserId] Override the default user id to fetch streams as.
 	 *  Not used for now, since this function always fetches the relations only.
 	 * @return {array} An array of Streams_RelatedTo objects sorted by ascending weight.
 	 */

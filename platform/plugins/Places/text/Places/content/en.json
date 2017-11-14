@@ -3,5 +3,25 @@
 	"nearby": {
 		"PostcodeLabel": "{{1}} ({{2}})",
 		"Title": "Within {{1}} of {{2}}"
+	},
+	"location": {
+		"myCurrentLocation": "My current location",
+		"enterAddress": "Enter an address",
+		"create": {
+			"action": "Add Location",
+			"title": "New Location",
+			"nameYourLocation": "Name your location"
+		},
+		"confirm": {
+			"title": "Save this location?",
+			"message": "Do you plan to use this location again in the future?",
+			"ok": "Yes",
+			"cancel": "No"
+		},
+		"add": {
+			"title": "Name this location",
+			"placeholder": "Home, Work etc.",
+			"ok": "Save"
+		}
 	}
 }

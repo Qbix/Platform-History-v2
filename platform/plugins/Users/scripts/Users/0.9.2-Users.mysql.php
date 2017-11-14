@@ -9,7 +9,7 @@ function Users_0_9_2_Users_mysql()
 	$count = $rows[0][0];
 	$limit = 100;
 	$offset = 0;
-	$sessions = Users_Session::select('*')
+	$sessions = Users_Session::select()
 		->orderBy('id')
 		->limit($limit, $offset)
 		->caching(false)
@@ -35,7 +35,7 @@ function Users_0_9_2_Users_mysql()
 		if ($offset > $count) {
 			break;
 		}
-		$sessions = Users_Session::select('*')
+		$sessions = Users_Session::select()
 			->orderBy('id')
 			->limit($limit, $offset)
 			->caching(false)

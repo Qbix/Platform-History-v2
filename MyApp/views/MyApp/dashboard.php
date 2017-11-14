@@ -7,7 +7,7 @@
 		<?php if ($user): ?>
 			<?php echo Q::tool("Users/avatar", array('userId' => $user->id, 'icon' => 50, 'short' => true), 'dashboard') ?>
 		<?php else: ?>
-			<a href="#login" class="MyApp_login"><?php echo $text["logIn"] ?></a>
+			<a href="#login" class="MyApp_login"><?php echo $dashboard["LogIn"] ?></a>
 		<?php endif; ?>
 		<div id="dashboard_user_contextual" class="Q_contextual" data-handler="MyApp.userContextual">
 			<ul class="Q_listing">

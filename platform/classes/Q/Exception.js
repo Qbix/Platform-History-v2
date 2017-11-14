@@ -6,7 +6,7 @@
  * @class Exception
  * @namespace Q
  * @constructor
- * @param [message=""] {string} The error message
+ * @param {string} [message=""] The error message
  * @param {object} fields={}
  */
 var Exception = function (message, fields) {

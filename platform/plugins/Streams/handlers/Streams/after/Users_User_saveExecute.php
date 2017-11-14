@@ -15,12 +15,7 @@ function Streams_after_Users_User_saveExecute($params)
 	}
 
 	// some standard values
-	if ($user->id === Users::communityId()) {
-		$firstName = Users::communityName();
-		$lastName = Users::communitySuffix();
-		$firstName = $firstName ? $firstName : "";
-		$lastName = $lastName ? $lastName : "";
-	} else if (!empty(Streams::$cache['fullName'])) {
+	if (!empty(Streams::$cache['fullName'])) {
 		$fullName = Streams::$cache['fullName'];
 		$firstName = Q::ifset($fullName, 'first', '');
 		$lastName = Q::ifset($fullName, 'last', '');
@@ -120,7 +115,7 @@ function Streams_after_Users_User_saveExecute($params)
 		// Save a greeting stream, to be edited
 		$communityId = Users::communityId();
 		Streams::create($user->id, $user->id, "Streams/greeting", array(
-			'name' =>"Streams/greeting/$communityId"
+			'name' => "Streams/greeting/$communityId"
 		));
 	
 		// Create some standard labels

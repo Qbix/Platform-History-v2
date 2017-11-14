@@ -30,10 +30,10 @@ var MyApp = (function (Q, $) {
 		});
 		
 		Q.addScript("{{Q}}/js/QTools.js", function () {
-			var $avatar = $('#dashboard .Users_avatar_tool');
-			if ($avatar.length) {
-				Q.Contextual.add($avatar, $('#dashboard_user_contextual'));	
-			}
+			$('#dashboard .Users_avatar_tool').plugin('Q/contextual', {
+				elements: $('#dashboard_user_contextual .Q_listing').clone().children(),
+				defaultHandler: MyApp.userContextual
+			});
 		});
 		
 		// For example, we can hide notices when the user clicks/taps on them

@@ -201,6 +201,7 @@ function _Q_clickable(o) {
 			// if (Q.info.isTouchscreen) {
 			// 	evt.preventDefault();
 			// }
+			if ($this.css('pointer-events') === 'none') return;
 			if (_started) return;
 			_started = this;
 			setTimeout(function () {
