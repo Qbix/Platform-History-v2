@@ -335,10 +335,16 @@ abstract class Places extends Base_Places
 	 * Set the user's location from a "Places/location" stream, or any stream
 	 * that has the attributes "latitude", "longitude" and possibly "timezone"
 	 * @param {Streams_Stream} $locationStream
+	 * @param {boolean} [$onlyIfNotSet=false] If true, proceeds only if the user
+	 *   location stream's latitude and longitude were not already set.
 	 * @param {boolean} [$throwIfNotLoggedIn=false]
 	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
+	 * @return {boolean} Whether the location stream was updated
 	 */
-	static function setUserLocation($locationStream, $throwIfNotLoggedIn = false)
+	static function setUserLocation(
+		$locationStream,
+		$onlyIfNotSet = false,
+		$throwIfNotLoggedIn = false)
 	{
 		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
 		$latitude = $locationStream->getAttribute('latitude');
@@ -352,13 +358,17 @@ abstract class Places extends Base_Places
 			$state = $z->state;
 		}
 		$userLocationStream = Places_Location::userStream($throwIfNotLoggedIn);
-		if (null === $userLocationStream->getAttribute('latitude')) {
-			$userLocationStream->setAttribute(compact(
-				'latitude', 'longitude', 'meters', 'timezone',
-				'zipcode', 'placeName', 'state'
-				// accuracy has been omitted
-			));
-			$userLocationStream->save();
+		$lat = $userLocationStream->getAttribute('latitude');
+		$lon = $userLocationStream->getAttribute('longitude');
+		if ($onlyIfNotSet and isset($lat) and isset($lon)) {
+			return false;
 		}
+		$userLocationStream->setAttribute(compact(
+			'latitude', 'longitude', 'meters', 'timezone',
+			'zipcode', 'placeName', 'state'
+			// accuracy has been omitted
+		));
+		$userLocationStream->save();
+		return true;
 	}
 };
