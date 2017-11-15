@@ -373,6 +373,9 @@ abstract class Streams extends Base_Streams
 		} else {
 			$namesToFetch = $name;
 		}
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
 		$criteria = array(
 			'publisherId' => $publisherId,
 			'name' => $namesToFetch
@@ -2292,6 +2295,9 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Fetch all the streams which are related to, or from, a given stream.
+	 * Right now, all the streams that are fetched have to be from the same publisher.
+	 * So, if there are relations to streams from other publishers, you have to additionally
+	 * go ahead and fetch them yourself.
 	 * @method related
 	 * @static
 	 * @param {string} $asUserId
