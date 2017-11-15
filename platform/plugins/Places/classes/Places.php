@@ -340,9 +340,9 @@ abstract class Places extends Base_Places
 	static function setUserLocation($user, $locationStream)
 	{
 		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
-		$latitude = $stream2->getAttribute('latitude');
-		$longitude = $stream2->getAttribute('longitude');
-		$timezone = $stream2->getAttribute('timezone');
+		$latitude = $locationStream->getAttribute('latitude');
+		$longitude = $locationStream->getAttribute('longitude');
+		$timezone = $locationStream->getAttribute('timezone');
 		$zipcodes = Places_Zipcode::nearby($latitude, $longitude, $meters, 1);
 		if ($zipcodes) {
 			$z = reset($zipcodes);
