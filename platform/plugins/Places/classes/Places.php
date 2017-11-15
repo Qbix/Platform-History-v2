@@ -334,10 +334,11 @@ abstract class Places extends Base_Places
 	/**
 	 * Set the user's location from a "Places/location" stream, or any stream
 	 * that has the attributes "latitude", "longitude" and possibly "timezone"
-	 * @param {Users_User} $user
 	 * @param {Streams_Stream} $locationStream
+	 * @param {boolean} [$throwIfNotLoggedIn=false]
+	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
 	 */
-	static function setUserLocation($user, $locationStream)
+	static function setUserLocation($locationStream, $throwIfNotLoggedIn = false)
 	{
 		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
 		$latitude = $locationStream->getAttribute('latitude');
@@ -350,7 +351,7 @@ abstract class Places extends Base_Places
 			$placeName = $z->placeName;
 			$state = $z->state;
 		}
-		$userLocationStream = Places_Location::userStream();
+		$userLocationStream = Places_Location::userStream($throwIfNotLoggedIn);
 		if (null === $userLocationStream->getAttribute('latitude')) {
 			$userLocationStream->setAttribute(compact(
 				'latitude', 'longitude', 'meters', 'timezone',
