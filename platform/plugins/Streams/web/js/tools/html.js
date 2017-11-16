@@ -63,7 +63,7 @@ Q.Tool.define("Streams/html", function (options) {
 			state.froala = state.froala || {};
 			if (Q.info.isTouchscreen) {
 				state.froala.toolbarInline = false;
-				state.froala.toolbarSticky = false;
+				state.froala.toolbarSticky = true;
 			}
 		}
 		if (state.editor === 'froala') {
@@ -75,6 +75,7 @@ Q.Tool.define("Streams/html", function (options) {
 				'Q.nonce': Q.nonce
 			});
 			state.froala.key = state.froala.key || Q.Streams.froala.key;
+			state.froala.toolbarStickyOffset = _getTopOffset();
 		}
 		switch (state.editor && state.editor.toLowerCase()) {
 		case 'basic':
@@ -123,7 +124,7 @@ Q.Tool.define("Streams/html", function (options) {
 			}
             Q.addScript(scripts, function() {
 				var $te = $(tool.element);
-                $te.froalaEditor(state.froala)
+				$te.froalaEditor(state.froala)
 				.on('froalaEditor.image.removed', function (e, editor, $img) {
 					var src = $img.attr('src');
 					if (src.substr(0, 5) === 'data:'
@@ -238,6 +239,19 @@ Q.Tool.define("Streams/html", function (options) {
 			}, {messages: true});
 		}, state.related);
 	}
+
+	function _getTopOffset() {
+		var $children = $('body').children(':visible');
+		var top = 0;
+		$children.each(function () {
+			var $this = $(this);
+			var position = $this.css('position');
+			if (position === 'fixed' || position === 'absolute' && parseInt($this.css('top')) === 0) {
+				top += $this.outerHeight() + parseInt($this.css('margin-bottom'));
+			}
+		});
+		return top;
+	}
 },
 
 {
@@ -253,7 +267,7 @@ Q.Tool.define("Streams/html", function (options) {
 			"fontFamily", "fontSize", "color", "-",
 			"inlineStyle", "paragraphStyle", "paragraphFormat", "|",
 			"align", "formatOL", "formatUL", "|",
-			"outdent", "indent", "quote", "-", 
+			"outdent", "indent", "quote", "-",
 			"insertHR", "insertLink", "|",
 			"insertImage", "insertTable", "|", "html"
 		],
