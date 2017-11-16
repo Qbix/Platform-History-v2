@@ -5000,19 +5000,18 @@ function Q_Cache_remove(cache, key, special) {
 function Q_Cache_pluck(cache, existing) {
 	var value;
 	if (existing.prev) {
-		value = Q_Cache_get(cache, existing.prev);
-		if (!value) {
-			debugger; // pause here if debugging
+		if (value = Q_Cache_get(cache, existing.prev)) {
+			value.next = existing.next;
+			Q_Cache_set(cache, existing.prev, value);
 		}
-		value.next = existing.next;
-		Q_Cache_set(cache, existing.prev, value);
 	} else {
 		cache.earliest(existing.next);
 	}
 	if (existing.next) {
-		value = Q_Cache_get(cache, existing.next);
-		value.prev = existing.prev;
-		Q_Cache_set(cache, existing.next, value);
+		if (value = Q_Cache_get(cache, existing.next)) {
+			value.prev = existing.prev;
+			Q_Cache_set(cache, existing.next, value);
+		}
 	} else {
 		cache.latest(existing.prev);
 	}
@@ -8603,13 +8602,14 @@ Q.Template.info = {};
 
 
 /**
- * Sets the text of a template in this document's collection, and compiles it.
+ * Sets the text and/or info of a template in this document's collection, and compiles it.
  * This is e.g. called by Q.loadUrl when the server sends over some templates,
  * so they won't have to be requested later.
  * @static
  * @method set
  * @param {String} name The template's name under which it will be found
- * @param {String} content The content of the template that will be processed by the template engine
+ * @param {String} content The content of the template that will be processed by the template engine.
+ *   To avoid setting the content (so the template will be loaded on demand later), pass undefined here.
  * @param {Object|String} info You can also pass a string "type" here.
  * @param {String} [info.type="handlebars"] The type of template.
  * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
@@ -8621,7 +8621,9 @@ Q.Template.set = function (name, content, info) {
 	var T = Q.Template;
 	T.remove(name);
 	var n = Q.normalize(name);
-	T.collection[n] = content;
+	if (content !== undefined) {
+		T.collection[n] = content;
+	}
 	if (typeof info === 'string') {
 		info = { type: info };
 	}
