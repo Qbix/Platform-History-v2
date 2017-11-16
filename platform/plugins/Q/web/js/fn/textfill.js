@@ -57,6 +57,7 @@ Q.Tool.jQuery('Q/textfill',
 			var maxHeight = o.fillPadding ? $this.innerHeight() : $this.height();
 			var maxWidth = o.fillPadding ? $this.innerWidth() : $this.width();
 			var textHeight, textWidth, lines, tooBig;
+			ourElement.addClass('Q_textfill_resized');
 			for (var i=0; i<100; ++i) {
 				ourElement.css('font-size', fontSize + 'px');
 				textHeight = ourElement.outerHeight(true);
