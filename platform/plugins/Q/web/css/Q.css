@@ -441,6 +441,8 @@ div.Q_placeholder { pointer-events: none; }
 .Q_textfill_resized {
 	line-height: 1.2;
 	display: inline-block !important;
+	left: 0 !important;
+	width: 100% !important;
 	vertical-align: middle !important;
 	overflow: visible !important;
 	white-space: normal !important;
