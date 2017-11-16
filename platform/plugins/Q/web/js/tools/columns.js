@@ -26,6 +26,7 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.back] For customizing the back button on mobile
  *  @param {String}  [options.back.src] The src of the image to use for the back button
  *  @param {Boolean} [options.back.triggerFromTitle] Whether the whole title would be a trigger for the back button. Defaults to true.
+ *  @param {Object}  [options.textfill={}] Options for Q/textfill on the title, or pass null here to skip this effect.
  *  @param {Boolean} [options.back.hide] Whether to hide the back button. Defaults to false, but you can pass true on android, for example.
  *  @param {Object}  [options.close] For customizing the back button on desktop and tablet
  *  @param {String}  [options.close.src] The src of the image to use for the close button
@@ -135,6 +136,7 @@ Q.Tool.define("Q/columns", function(options) {
 	controls: undefined,
 	pagePushUrl: true,
 	scrollbarsAutoHide: {},
+	textfill: {},
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(),
@@ -221,7 +223,7 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		var div = this.column(index);
 		var titleSlot, columnSlot, controlsSlot;
-		var $div, $mask, $close, $title, $controls;
+		var $div, $mask, $close, $title, $controls, $tc;
 		var createdNewDiv = false;
 		if (!div) {
 			createdNewDiv = true;
@@ -230,9 +232,10 @@ Q.Tool.define("Q/columns", function(options) {
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
-			var $ts = $('<h2 class="Q_title_slot"></h2>');
+			var $tc = $('<div class="Q_columns_title_container">');
+			var $ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
 			titleSlot = $ts[0];
-			$title = $('<div class="Q_columns_title"></div>').append($ts);
+			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
 			$controls = $('<h2 class="Q_controls_slot"></h2>');
 			controlsSlot = $controls[0];
@@ -252,6 +255,7 @@ Q.Tool.define("Q/columns", function(options) {
 		} else {
 			$div = $(div);
 			$close = $('.Q_close', div);
+			$tc = $('.Q_columns_title_container', div);
 			$title = $('.Q_columns_title', div);
 			titleSlot = $('.Q_title_slot', div)[0];
 			columnSlot = $('.Q_column_slot', div)[0];
@@ -520,6 +524,10 @@ Q.Tool.define("Q/columns", function(options) {
 				.css(o.animation.css.hide)
 				.stop()
 				.animate(show, duration, function() {
+					$tc.outerWidth($tc[0].remainingWidth());
+					if (o.textfill) {
+						$tc.plugin('Q/textfill', o.textfill);
+					}
 					setTimeout(function () {
 						$div.data(dataKey_opening, false);
 						afterAnimation($cs, $sc, $ct);
