@@ -22,7 +22,7 @@ var Places = Q.Places;
  * @param {Boolean} [options.showCurrent=true] Whether to allow user to select current location
  * @param {Boolean} [options.showLocations=true] Whether to allow user to select their saved locations
  * @param {Boolean} [options.showAddress=true] Whether to allow user to enter a custom address
- * @param {Q.Event} [options.onChoose] this event occurs when user selected some valid location
+ * @param {Q.Event} [options.onChoose] User selected some valid location. First parameter is Places.Coordinates object.
  */
 Q.Tool.define("Places/location", function (options) {
 	var tool = this;
@@ -38,9 +38,6 @@ Q.Tool.define("Places/location", function (options) {
 		if ($this.hasClass('Q_selected')) {
 			return false;
 		}
-
-		// set onChoose status to null
-		Q.handle(state.onChoose, tool, [null]);
 
 		// toggle Q_selected class
 		$te.find(".Q_selected").removeClass("Q_selected");
@@ -67,7 +64,7 @@ Q.Tool.define("Places/location", function (options) {
 					longitude: crd.longitude
 				}).geocode(function (err, results) {
 					var loc = Q.getObject([0, 'geometry', 'location'], results);
-					Q.handle(state.onChoose, tool, [loc, this]);
+					Q.handle(state.onChoose, tool, [this, loc]);
 				});
 			}, function (err) {
 				Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
@@ -76,7 +73,7 @@ Q.Tool.define("Places/location", function (options) {
 
 			return;
 		} else if (selector === 'address') {
-			// if address selected just repeat onChoose event of places/address tool
+			// if address selected just repeat onChoose event of Places/address tool
 			Q.handle(
 				tool.addressTool.state.onChoose, 
 				tool.addressTool, 
@@ -105,8 +102,8 @@ Q.Tool.define("Places/location", function (options) {
 
 { // default options here
 	geocode: null,
-	onChoose: new Q.Event(function (geocode) {
-		this.state.location = geocode;
+	onChoose: new Q.Event(function (coordinates) {
+		this.state.location = coordinates;
 	}, 'Places/location'),
 	location: null, // currently selected location
 	showCurrent: true,
@@ -144,7 +141,7 @@ Q.Tool.define("Places/location", function (options) {
 			var result = results[0];
 			var address = result.formatted_address || result.address;
 			$te.html(address).addClass("Q_selected");
-			Q.handle(state.onChoose, tool, [result.geometry.location]);
+			Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 		});
 	},
 	/**
@@ -191,7 +188,7 @@ Q.Tool.define("Places/location", function (options) {
 
 					function _onChoose(place) {
 						if (!place || !place.id) {
-							return Q.handle(state.onChoose, tool, [null]);
+							return Q.handle(state.onChoose, tool, [null, null]);
 						}
 						Places.Coordinates.from({
 							placeId: place.id
@@ -242,7 +239,7 @@ Q.Tool.define("Places/location", function (options) {
 								ok: textConfirm.ok,
 								cancel: textConfirm.cancel
 							});
-							Q.handle(state.onChoose, tool, [result.geometry.location, this]);
+							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 						});
 					}
 				});
