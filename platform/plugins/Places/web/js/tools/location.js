@@ -22,6 +22,7 @@ var Places = Q.Places;
  * @param {Boolean} [options.showCurrent=true] Whether to allow user to select current location
  * @param {Boolean} [options.showLocations=true] Whether to allow user to select their saved locations
  * @param {Boolean} [options.showAddress=true] Whether to allow user to enter a custom address
+ * @param {Boolean} [options.showAreas=false] Whether to show Places/areas tool for selected location
  * @param {Q.Event} [options.onChoose] User selected some valid location. First parameter is Places.Coordinates object.
  */
 Q.Tool.define("Places/location", function (options) {
@@ -97,6 +98,24 @@ Q.Tool.define("Places/location", function (options) {
 		Q.handle(state.onChoose, tool, [state.location]);
 	});
 
+	// if showAreas - add Places/areas tool if not exist
+	if(state.showAreas){
+		state.onChoose.set(function(address){
+			var placesAreas = tool.$(".Q_tool.Places_areas_tool")[0];
+			placesAreas = placesAreas ? Q.Tool.from(placesAreas) : null;
+
+			if (Q.isEmpty(address)) {
+				if (Q.typeOf(placesAreas) === "Q.Tool") {
+					Q.Tool.remove(placesAreas.element);
+				}
+			} else {
+				if (!placesAreas) {
+					$("<div>").tool("Places/areas", {}).appendTo($te).activate();
+				}
+			}
+		}, tool);
+	}
+
 	tool.refresh();
 },
 
@@ -108,7 +127,8 @@ Q.Tool.define("Places/location", function (options) {
 	location: null, // currently selected location
 	showCurrent: true,
 	showLocations: true,
-	showAddress: true
+	showAddress: true,
+	showAreas: false
 },
 
 { // methods go here
