@@ -113,6 +113,9 @@ Q.Tool.define("Places/location", function (options) {
 					$("<div>").tool("Places/areas", {
 						location: address
 					}).appendTo($te).activate();
+				} else {
+					placesAreas.state.location = address;
+					placesAreas.refresh();
 				}
 			}
 		}, tool);
@@ -237,7 +240,8 @@ Q.Tool.define("Places/location", function (options) {
 											types: result.types,
 											latitude: result.geometry.location.lat(),
 											longitude: result.geometry.location.lng(),
-											locationType: result.geometry.type
+											locationType: result.geometry.type,
+											venue: place.name
 										},
 										readLevel: 0,
 										writeLevel: 0,
