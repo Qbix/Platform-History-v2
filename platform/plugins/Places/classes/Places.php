@@ -334,15 +334,22 @@ abstract class Places extends Base_Places
 	/**
 	 * Set the user's location from a "Places/location" stream, or any stream
 	 * that has the attributes "latitude", "longitude" and possibly "timezone"
-	 * @param {Users_User} $user
 	 * @param {Streams_Stream} $locationStream
+	 * @param {boolean} [$onlyIfNotSet=false] If true, proceeds only if the user
+	 *   location stream's latitude and longitude were not already set.
+	 * @param {boolean} [$throwIfNotLoggedIn=false]
+	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
+	 * @return {boolean} Whether the location stream was updated
 	 */
-	static function setUserLocation($user, $locationStream)
+	static function setUserLocation(
+		$locationStream,
+		$onlyIfNotSet = false,
+		$throwIfNotLoggedIn = false)
 	{
 		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
-		$latitude = $stream2->getAttribute('latitude');
-		$longitude = $stream2->getAttribute('longitude');
-		$timezone = $stream2->getAttribute('timezone');
+		$latitude = $locationStream->getAttribute('latitude');
+		$longitude = $locationStream->getAttribute('longitude');
+		$timezone = $locationStream->getAttribute('timezone');
 		$zipcodes = Places_Zipcode::nearby($latitude, $longitude, $meters, 1);
 		if ($zipcodes) {
 			$z = reset($zipcodes);
@@ -350,14 +357,18 @@ abstract class Places extends Base_Places
 			$placeName = $z->placeName;
 			$state = $z->state;
 		}
-		$userLocationStream = Places_Location::userStream();
-		if (null === $userLocationStream->getAttribute('latitude')) {
-			$userLocationStream->setAttribute(compact(
-				'latitude', 'longitude', 'meters', 'timezone',
-				'zipcode', 'placeName', 'state'
-				// accuracy has been omitted
-			));
-			$userLocationStream->save();
+		$userLocationStream = Places_Location::userStream($throwIfNotLoggedIn);
+		$lat = $userLocationStream->getAttribute('latitude');
+		$lon = $userLocationStream->getAttribute('longitude');
+		if ($onlyIfNotSet and isset($lat) and isset($lon)) {
+			return false;
 		}
+		$userLocationStream->setAttribute(compact(
+			'latitude', 'longitude', 'meters', 'timezone',
+			'zipcode', 'placeName', 'state'
+			// accuracy has been omitted
+		));
+		$userLocationStream->save();
+		return true;
 	}
 };

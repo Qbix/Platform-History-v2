@@ -92,7 +92,9 @@ EOT;
 				$titleElement = <<<EOT
 	<div class="Q_columns_title">
 		$closeHtml
-		<h2 class="Q_title_slot">$titleHtml</h2>
+		<div class="Q_columns_title_container">
+			<h2 class="Q_title_slot">$titleHtml</h2>
+		</div>
 	</div>
 EOT;
 			}

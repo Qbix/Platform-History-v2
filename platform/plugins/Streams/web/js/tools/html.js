@@ -63,7 +63,7 @@ Q.Tool.define("Streams/html", function (options) {
 			state.froala = state.froala || {};
 			if (Q.info.isTouchscreen) {
 				state.froala.toolbarInline = false;
-				state.froala.toolbarSticky = false;
+				state.froala.toolbarSticky = true;
 			}
 		}
 		if (state.editor === 'froala') {
@@ -75,6 +75,7 @@ Q.Tool.define("Streams/html", function (options) {
 				'Q.nonce': Q.nonce
 			});
 			state.froala.key = state.froala.key || Q.Streams.froala.key;
+			state.froala.toolbarStickyOffset = _getTopOffset();
 		}
 		switch (state.editor && state.editor.toLowerCase()) {
 		case 'basic':
@@ -82,11 +83,11 @@ Q.Tool.define("Streams/html", function (options) {
 			break;
 		case 'ckeditor':
 			tool.element.setAttribute('contenteditable', true);
-            Q.addScript("{{Q}}/js/ckeditor/ckeditor.js", function () {
-                CKEDITOR.disableAutoInline = true;
-                var editor = CKEDITOR.inline(tool.element, state.ckeditor || undefined);
-                state.editorObject = editor;
-            });
+			Q.addScript("{{Q}}/js/ckeditor/ckeditor.js", function () {
+				CKEDITOR.disableAutoInline = true;
+				var editor = CKEDITOR.inline(tool.element, state.ckeditor || undefined);
+				state.editorObject = editor;
+			});
 			break;
 		case 'froala':
 		default:
@@ -119,11 +120,11 @@ Q.Tool.define("Streams/html", function (options) {
 				"{{Q}}/js/froala/js/plugins/video.min.js"
 			];
 			if (Q.info.isIE(0, 8)) {
- 				scripts.push("{{Q}}/js/froala/froala_editor_ie8.min.js");
+				scripts.push("{{Q}}/js/froala/froala_editor_ie8.min.js");
 			}
-            Q.addScript(scripts, function() {
+			Q.addScript(scripts, function() {
 				var $te = $(tool.element);
-                $te.froalaEditor(state.froala)
+				$te.froalaEditor(state.froala)
 				.on('froalaEditor.image.removed', function (e, editor, $img) {
 					var src = $img.attr('src');
 					if (src.substr(0, 5) === 'data:'
@@ -137,10 +138,10 @@ Q.Tool.define("Streams/html", function (options) {
 				});
 				state.froalaEditor = $te.data('froala.editor');
 				Q.handle(state.onFroalaEditor, tool, state.froalaEditor);
-            });
+			});
 		}
 		function _blur() {
-            var content = state.editorObject
+			var content = state.editorObject
 				? state.editorObject.getData()
 				: $(tool.element).froalaEditor('html.get');
 			if (state.editorObject) {
@@ -150,9 +151,9 @@ Q.Tool.define("Streams/html", function (options) {
 			}
 			_blurred = true;
 			state.editing = false;
-            if (state.startingContent === content) return;
-            state.startingContent = null;
-            if (!stream) return;
+			if (state.startingContent === content) return;
+			state.startingContent = null;
+			if (!stream) return;
 			if (state && state.beforeSave) {
 				if (false === Q.handle(state.beforeSave, tool, [state.froalaEditor])) {
 					return;
@@ -161,19 +162,19 @@ Q.Tool.define("Streams/html", function (options) {
 			Q.Streams.retainWith(tool)
 			.get(state.publisherId, state.streamName, function (err) {
 				var stream = this;
-	            stream.pendingFields[state.field] = content;
-	            stream.save();
+				stream.pendingFields[state.field] = content;
+				stream.save();
 			}, {fields: [state.field]});
 		}
 		function _focus() {
 			if (!_blurred) return;
 			_blurred = false;
-            var content = state.editorObject
+			var content = state.editorObject
 				? state.editorObject.getData()
 				: $(tool.element).froalaEditor('html.get');
 			state.editing = true;
-            state.startingContent = content;
-        }
+			state.startingContent = content;
+		}
 		var _blurred = true;
 		$(tool.element)
 			.off(Q.Pointer.focusin)
@@ -182,10 +183,10 @@ Q.Tool.define("Streams/html", function (options) {
 			.on(Q.Pointer.focusout, _blur)
 			.off('keydown')
 			.on('keydown', function(e){
-	            if (e.originalEvent.keyCode != 27) return;
+				if (e.originalEvent.keyCode != 27) return;
 				e.target.blur();
-                document.body.focus();
-	        });
+				document.body.focus();
+			});
 		Q.Streams.retainWith(tool)
 		.get(state.publisherId, state.streamName, function (err) {
 			var stream = this;
@@ -238,6 +239,19 @@ Q.Tool.define("Streams/html", function (options) {
 			}, {messages: true});
 		}, state.related);
 	}
+
+	function _getTopOffset() {
+		var $children = $('body').children(':visible');
+		var top = 0;
+		$children.each(function () {
+			var $this = $(this);
+			var position = $this.css('position');
+			if (position === 'fixed' || position === 'absolute' && parseInt($this.css('top')) === 0) {
+				top += $this.outerHeight() + parseInt($this.css('margin-bottom'));
+			}
+		});
+		return top;
+	}
 },
 
 {
@@ -253,7 +267,7 @@ Q.Tool.define("Streams/html", function (options) {
 			"fontFamily", "fontSize", "color", "-",
 			"inlineStyle", "paragraphStyle", "paragraphFormat", "|",
 			"align", "formatOL", "formatUL", "|",
-			"outdent", "indent", "quote", "-", 
+			"outdent", "indent", "quote", "-",
 			"insertHR", "insertLink", "|",
 			"insertImage", "insertTable", "|", "html"
 		],
