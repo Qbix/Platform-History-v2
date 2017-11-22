@@ -110,7 +110,9 @@ Q.Tool.define("Places/location", function (options) {
 				}
 			} else {
 				if (!placesAreas) {
-					$("<div>").tool("Places/areas", {}).appendTo($te).activate();
+					$("<div>").tool("Places/areas", {
+						location: address
+					}).appendTo($te).activate();
 				}
 			}
 		}, tool);
@@ -259,6 +261,7 @@ Q.Tool.define("Places/location", function (options) {
 								ok: textConfirm.ok,
 								cancel: textConfirm.cancel
 							});
+							this.venue = place.name;
 							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 						});
 					}
