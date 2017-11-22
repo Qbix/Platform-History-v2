@@ -15,6 +15,9 @@ var Places = Q.Places;
  * @constructor
  * @param {Object} options used to pass options
  * @param {String} options.publisherId Location stream publisher id
+ * @param {String} options.streamName Location stream name
+ * @param {String} options.stream Location stream
+ * @param {Object} options.location Location object
  */
 Q.Tool.define("Places/areas", function (options) {
 	var tool = this;
@@ -24,14 +27,40 @@ Q.Tool.define("Places/areas", function (options) {
 	// set communityId as publisherId if last empty
 	state.publisherId = state.publisherId || Q.Users.communityId;
 
+	if (!state.stream && (state.publisherId && state.streamName)) {
+		state.stream = {
+			publisherId: state.publisherId,
+			name: state.streamName,
+			stripped: true
+		};
+	}
+
+	// required publisherId and streamName OR location
+	if (!state.stream && !state.location) {
+		throw new Exception("Places/areas: required publisherId and streamName OR location");
+	}
+
 	Q.addStylesheet('Q/plugins/Places/css/areas.css');
+
+	if (state.stream && state.stream.stripped) { // stripped stream means that it have only publisherId and name
+		Q.Streams.get(state.stream.publisherId, state.stream.name, function () {
+			tool.refresh(this);
+		});
+	} else if(state.stream) { // we have pure stream
+		tool.refresh(state.stream);
+	} else if(state.location) { // we have just location object and need to check whether stream exist
+
+	}
 
 	// get location stream and run refresh method
 	tool.refresh();
 },
 
 { // default options here
-	publisherId: null
+	publisherId: null,
+	streamName: null,
+	location: null,
+	stream: null
 },
 
 { // methods go here
