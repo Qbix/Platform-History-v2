@@ -62,6 +62,7 @@
 			},
 			"Places/area": {
 				"description": "Represents an area within a location, such as a room or suite",
+				"create": true,
 				"edit": true,
 				"messages": {
 					"Places/location/visit": { "post": true },
