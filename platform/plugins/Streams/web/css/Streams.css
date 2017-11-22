@@ -761,6 +761,7 @@
 
 .Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
 .Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
+.Streams_aspect_promote { color: #742e7f; border-color: #742e7f; }
 
 .Q_button.Streams_aspect_interests {
 	background-color: #bf1118; /* for non-css3 browsers */
@@ -799,6 +800,20 @@
 .Q_button.Streams_aspect_chats:active,
 .Q_button.Streams_aspect_chats:focus {
 	background-color: #0b94a9;
+	color: white;
+}
+
+.Q_button.Streams_aspect_promote {
+	background: #742e7f; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='##742e7f', endColorstr='#4b1c52'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#742e7f), to(#631d6e)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #742e7f,  #631d6e); /* for firefox 3.6+ */
+	color: white;
+}
+
+.Q_button.Streams_aspect_promote:active,
+.Q_button.Streams_aspect_promote:focus {
+	background: #631d6e;
 	color: white;
 }
 

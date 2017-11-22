@@ -111,7 +111,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 			$options['type'] = $type;
 			$relations = Streams::related(
 				Q::ifset($options, 'asUserId', null),
-				Users::communityId(),
+				$publisherId,
 				$streamName,
 				true,
 				$options
