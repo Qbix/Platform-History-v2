@@ -515,7 +515,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$ct.css('position', 'absolute');
 					$cs.css('overflow', 'hidden');
 				} else if (Q.info.isMobile) {
-					$('html').css('overflow', 'hidden');
+					$('html').addClass('overflowHidden');
 				}
 				$mask = $('<div class="Q_columns_mask" />')
 				.appendTo($div);
