@@ -46,21 +46,51 @@ Q.Tool.define("Places/areas", function (options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
+		var qFilterTool = tool.$(".Q_tool.Q_filter_tool")[0];
+		qFilterTool = qFilterTool ? Q.Tool.from(qFilterTool) : null;
+
+		// if Q/filter didn't created - create one
+		if (!qFilterTool) {
+			$te.tool('Q/filter', {
+				placeholder: "Any area inside this location?"
+			}, 'Q_filter')
+			.appendTo(tool.element)
+			.activate(function(){
+				qFilterTool = Q.Tool.from(this.element, "Q/filter");
+			});
+		}
 
 		tool.getStream(function(stream){
-			// create Streams/participants tool
-			$te.tool('Streams/lookup', {
+			$("<div>").tool("Streams/related", {
 				publisherId: stream.fields.publisherId,
-				types: ["Places/area"],
-				filter: {
-					placeholder: "Any area inside this location?"
+				streamName: stream.fields.name,
+				relationType: 'area',
+				isCategory: true,
+				editable: false,
+				onRefresh: function(){
+					// add Q_filter_result class to each preview tool
+					$(".Streams_preview_container", this.element).addClass("Q_filter_result");
 				},
-				onChoose: function (streamName, element, obj) {
-					console.log(streamName);
+				creatable: {
+					"Places/area": {
+						'title': "New area",
+						'preprocess': function(_proceed){
+							var title = qFilterTool.$input.val();
+
+							if (!title) {
+								Q.alert("Please set area");
+								return false;
+							}
+
+							Q.handle(_proceed, this, [{
+								title: title
+							}]);
+						}
+					}
 				}
-			}, tool.prefix).activate(function(){
-				// no need stream type selector as we use only one
-				$("select[name=streamType]", this.element).remove();
+			}).appendTo(qFilterTool.element).activate(function(){
+				qFilterTool.state.results = this.element;
+				qFilterTool.stateChanged('results');
 			});
 		});
 	},

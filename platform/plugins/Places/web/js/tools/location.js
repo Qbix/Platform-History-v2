@@ -102,7 +102,7 @@ Q.Tool.define("Places/location", function (options) {
 	if(state.showAreas){
 		state.onChoose.set(function(address){
 			var placesAreas = tool.$(".Q_tool.Places_areas_tool")[0];
-			placesAreas = placesAreas ? Q.Tool.from(placesAreas) : null;
+			placesAreas = placesAreas ? Q.Tool.from(placesAreas, "Places/areas") : null;
 
 			if (Q.isEmpty(address)) {
 				if (Q.typeOf(placesAreas) === "Q.Tool") {
