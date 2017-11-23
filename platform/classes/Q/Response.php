@@ -1516,7 +1516,7 @@ class Q_Response
 	 * @static
 	 * @param {string} $name The name of the cookie
 	 * @param {string} $value The value of the cookie
-	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means never expires
+	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means expire when browser session ends
 	 * @param {string} [$path=false] You can specify a path on the server here for the cookie
 	 * @return {string}
 	 */
