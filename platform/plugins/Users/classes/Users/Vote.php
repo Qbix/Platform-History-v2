@@ -33,7 +33,7 @@ class Users_Vote extends Base_Users_Vote
 		$total = new Users_Total();
 		$total->forType = $this->forType;
 		$total->forId = $this->forId;
-		if (!$total->retrieve('*', array("begin" => true))) {
+		if (!$total->retrieve(null, array("begin" => true))) {
 			$total->weightTotal = 0;
 			$total->voteCount = 0;
 			$total->value = 0;
@@ -114,7 +114,7 @@ class Users_Vote extends Base_Users_Vote
 			$total = new Users_Total();
 			$total->forType = $vote->forType;
 			$total->forId = $vote->forId;
-			if ($total->retrieve('*', array('begin' => true))) {
+			if ($total->retrieve(null, array('begin' => true))) {
 				$weightTotal = $total->weightTotal;
 				$total->set('transaction', true);
 				$total->weightTotal -= $vote->weight;
