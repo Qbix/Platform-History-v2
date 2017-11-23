@@ -1945,7 +1945,7 @@ class Db_Row implements Iterator
 	 *  If retrieve() is called with no arguments, may return false if nothing retrieved.
 	 */
 	function retrieve (
-		$fields = '*', 
+		$fields = null,
 		$useIndex = false, 
 		$modifyQuery = false,
 		$options = array())
@@ -1956,11 +1956,22 @@ class Db_Row implements Iterator
 		}
 		if ($fields === true) {
 			$throwIfMissing = true;
-			$fields = '*';
+			$fields = null;
 		} else {
 			$throwIfMissing = false;
 		}
-		if (!isset($fields)) $fields = '*';
+		if (!isset($fields)) {
+			$method = array($this, 'fieldNames');
+			if (is_callable($method)) {
+				$fieldNames = array();
+				foreach (call_user_func($method) as $fn) {
+					$fieldNames[] = "`$fn`";
+				}
+				$fields = implode(',', $fieldNames);
+			} else {
+				$fields = '*';
+			}
+		};
 		if (!isset($useIndex)) $useIndex = false;
 		$search_criteria = null;
 		$class_name = get_class($this);
@@ -2083,7 +2094,7 @@ class Db_Row implements Iterator
 	}
 
 	function retrieve_resume (
-		$fields = '*', 
+		$fields = '*',
 		$useIndex = false, 
 		$modifyQuery = false,
 		$options = array(),

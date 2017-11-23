@@ -18,7 +18,7 @@ function Websites_before_Streams_Stream_save_Websites_seo($params)
 	
 	$wp = new Websites_Permalink();
 	$wp->uri = $uri;
-	$wp->retrieve('*', array('ignoreCache' => true));
+	$wp->retrieve(null, array('ignoreCache' => true));
 	
 	if ($url = $stream->getAttribute('url', null)) {
 		$url = Q_Html::themedUrl($url);

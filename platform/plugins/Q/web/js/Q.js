@@ -2623,6 +2623,11 @@ Q.onReady = new Q.Event();
  * @event onJQuery
  */
 Q.onJQuery = new Q.Event();
+/**
+ * This event occurs when an app url is open in Cordova
+ * @event onHandleOpenUrl
+ */
+Q.onHandleOpenUrl = new Q.Event();
 var _layoutElements = [];
 var _layoutEvents = [];
 /**
@@ -12091,7 +12096,7 @@ Q.request.options = {
 	}, 'Q')
 };
 
-Q.onReady.set(function _Q_masks() {	
+Q.onReady.set(function _Q_masks() {
 	_Q_restoreScrolling();
 	Q.request.options.onLoadStart.set(function(url, slotNames, o) {
 		if (o.quiet) return;
@@ -12118,6 +12123,30 @@ Q.onReady.set(function _Q_masks() {
 	}, 'Q.request.load.mask');
 	Q.layout();
 }, 'Q.Masks');
+
+if (_isCordova) {
+	Q.onReady.set(function _Q_handleOpenUrl() {
+		root.handleOpenUrl = function (url) {
+			Q.handle(Q.onHandleOpenUrl, Q, url);
+		};
+	}, 'Q.handleOpenUrl');
+
+	Q.onReady.set(function _Q_browsertab() {
+		if (!cordova.plugins.browsertab) {
+			return;
+		}
+		cordova.plugins.browsertab.isAvailable(function(result) {
+			delete window.open;
+			window.open = function (url, target, options) {
+				if (result) {
+					cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
+				} else if (cordova.InAppBrowser) {
+					cordova.InAppBrowser.open(url, '_system', options);
+				}
+			};
+		}, function () {});
+	}, 'Q.browsertab');
+}
 
 /**
  * @module Q
