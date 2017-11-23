@@ -431,7 +431,7 @@ class Users_User extends Base_Users_User
 		}
 		$email = new Users_Email();
 		$email->address = $normalized;
-		if ($email->retrieve('*', array('ignoreCache' => true))
+		if ($email->retrieve(null, array('ignoreCache' => true))
 		and $email->state !== 'unverified') {
 			if ($email->userId === $this->id) {
 				$email->set('user', $this);
@@ -536,7 +536,7 @@ class Users_User extends Base_Users_User
 		$email = new Users_Email();
 		Q_Valid::email($emailAddress, $normalized);
 		$email->address = $normalized;
-		$retrieved = $email->retrieve('*', array('ignoreCache' => true));
+		$retrieved = $email->retrieve(null, array('ignoreCache' => true));
 		if (empty($email->activationCode)) {
 			$email->activationCode = '';
 			$email->activationCodeExpires = null;
@@ -632,7 +632,7 @@ class Users_User extends Base_Users_User
 		}
 		$mobile = new Users_Mobile();
 		$mobile->number = $normalized;
-		if ($mobile->retrieve('*', array('ignoreCache' => true))
+		if ($mobile->retrieve(null, array('ignoreCache' => true))
 		and $mobile->state !== 'unverified') {
 			if ($mobile->userId === $this->id) {
 				$mobile->set('user', $this);
@@ -731,7 +731,7 @@ class Users_User extends Base_Users_User
 		Q_Valid::phone($mobileNumber, $normalized);
 		$mobile = new Users_Mobile();
 		$mobile->number = $normalized;
-		$retrieved = $mobile->retrieve('*', array('ignoreCache' => true));
+		$retrieved = $mobile->retrieve(null, array('ignoreCache' => true));
 		if (empty($mobile->activationCode)) {
 			$mobile->activationCode = '';
 			$mobile->activationCodeExpires = null;

@@ -671,7 +671,7 @@ class Q_Session
 					'old_data' => $old_data
 				);
 				if (!empty(self::$session_db_connection)) {
-					$row->retrieve('*', false, array(
+					$row->retrieve(null, false, array(
 						'begin' => true,
 						'ignoreCache' => true
 					));
