@@ -200,7 +200,7 @@ abstract class Users extends Base_Users
 	 * If the user was not originally retrieved from the database,
 	 * inserts a new one.
 	 * Thus, this can also be used to turn visitors into registered
-	 * users.
+	 * users by authenticating with some external platform.
 	 * @method authenticate
 	 * @static
 	 * @param {string} $platform Currently only supports the value "facebook".
@@ -430,6 +430,7 @@ abstract class Users extends Base_Users
 				}
 		 	}
 		}
+		$app_user->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
 		Users::$cache['user'] = $user;
 		Users::$cache['authenticated'] = $authenticated;
@@ -506,8 +507,7 @@ abstract class Users extends Base_Users
 			}
 		} else {
 			// We have to put the session info in
-			$app_user->userId = $user->id;
-			if ($app_user->retrieve('*', true)) {
+			if ($app_user->retrieve(null, true)) {
 				// App user exists in database. Do we need to update it?
 				if (!isset($app_user->access_token)
 				or $app_user->access_token != $accessToken) {
