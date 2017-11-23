@@ -12091,7 +12091,7 @@ Q.request.options = {
 	}, 'Q')
 };
 
-Q.onReady.set(function _Q_masks() {	
+Q.onReady.set(function _Q_masks() {
 	_Q_restoreScrolling();
 	Q.request.options.onLoadStart.set(function(url, slotNames, o) {
 		if (o.quiet) return;
@@ -12118,6 +12118,21 @@ Q.onReady.set(function _Q_masks() {
 	}, 'Q.request.load.mask');
 	Q.layout();
 }, 'Q.Masks');
+
+Q.onReady.set(function _Q_browsertab() {
+	if (!_isCordova || !cordova.plugins.browsertab) {
+		return;
+	}
+	cordova.plugins.browsertab.isAvailable(function(result) {
+		window.open = function (url, target) {
+			if (result) {
+				cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
+			} else if (cordova.InAppBrowser) {
+				cordova.InAppBrowser.open(url, '_system');
+			}
+		};
+	}, function () {});
+}, 'Q.browsertab');
 
 /**
  * @module Q
