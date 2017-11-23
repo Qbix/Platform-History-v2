@@ -69,18 +69,18 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 				// and should be retrieved from the Users_AppUser in the database
 				$fbsr = $_COOKIE["fbsr_$fbAppId"];
 			}
-			if ($fbsr) {
-				$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
-				$accessToken = isset($authResponse['accessToken'])
-					? $authResponse['accessToken']
-					: $sr->get('oauth_token');
-				$result = array(
-					'signedRequest' => $fbsr,
-					'expires' => $sr->get('expires'),
-					'accessToken' => $accessToken,
-					'userID' => $sr->get('user_id')
-				);
-			}
+		}
+		if ($fbsr) {
+			$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
+			$accessToken = isset($authResponse['accessToken'])
+				? $authResponse['accessToken']
+				: $sr->get('oauth_token');
+			$result = array(
+				'signedRequest' => $fbsr,
+				'expires' => $sr->get('expires'),
+				'accessToken' => $accessToken,
+				'userID' => $sr->get('user_id')
+			);
 		}
 		if (isset($result['accessToken'])) {
 			$defaultAccessToken = $result['accessToken'];
