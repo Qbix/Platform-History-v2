@@ -68,27 +68,54 @@ Q.Tool.define("Places/areas", function (options) {
 				isCategory: true,
 				editable: false,
 				onRefresh: function(){
-					// add Q_filter_result class to each preview tool
-					$(".Streams_preview_container", this.element).addClass("Q_filter_result");
+					// add Q_filter_result class to each preview tool except composer
+					$(".Streams_preview_container", $(".Streams_preview_tool", this.element).not(".Streams_preview_composer")).addClass("Q_filter_result");
+
+					console.log(1);
 				},
 				creatable: {
 					"Places/area": {
 						'title': "New area",
 						'preprocess': function(_proceed){
+							var previewTool = this;
 							var title = qFilterTool.$input.val();
 
+							// title required
 							if (!title) {
 								Q.alert("Please set area");
 								return false;
 							}
 
-							Q.handle(_proceed, this, [{
-								title: title
-							}]);
+							// get array of sreas exist
+							var areasExist = state.relatedTool.$(".Streams_preview_title").map(function(){
+								return $.trim($(this).text());
+							}).get();
+
+							// if title already exist
+							if ($.inArray(title, areasExist) >= 0) {
+								Q.alert("Area already exist");
+								return false;
+							}
+
+							Q.handle(_proceed, this, [{title: title}]);
+
+							// wait when new preview tool created with this title and add class Q_filter_result
+							var timerId = setInterval(function(){
+								var container = $(".Streams_preview_container .Streams_preview_title:contains('"+title+"')", state.relatedTool.element);
+
+								if(!container.length){
+									return;
+								}
+
+								clearInterval(timerId);
+
+								container.closest(".Streams_preview_container").addClass("Q_filter_result")
+							}, 500);
 						}
 					}
 				}
 			}).appendTo(qFilterTool.element).activate(function(){
+				state.relatedTool = this;
 				qFilterTool.state.results = this.element;
 				qFilterTool.stateChanged('results');
 			});
