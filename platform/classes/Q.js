@@ -1482,15 +1482,13 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 				}
 			});
 			if (found) {
-				break;
+				return;
 			}
 		}
-		if (!found) {
-			if (isArr) {
-				result.push(v1);
-			} else {
-				result[k] = v1;
-			}
+		if (isArr) {
+			result.push(v1);
+		} else {
+			result[k] = v1;
 		}
 	});
 	return result;
