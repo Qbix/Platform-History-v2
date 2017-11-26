@@ -10052,7 +10052,7 @@ Q.Browser = {
 	
 };
 
-var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
+_isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| location.search.queryField('Q.cordova');
 
 var detected = Q.Browser.detect();
@@ -12146,11 +12146,11 @@ Q.onReady.set(function _Q_masks() {
 }, 'Q.Masks');
 
 if (_isCordova) {
-	Q.onReady.set(function _Q_handleOpenUrl() {
-		root.handleOpenUrl = function (url) {
+	Q.onReady.set(function _Q_handleOpenURL() {
+		root.handleOpenURL = function (url) {
 			Q.handle(Q.onHandleOpenUrl, Q, url);
 		};
-	}, 'Q.handleOpenUrl');
+	}, 'Q.handleOpenURL');
 
 	Q.onReady.set(function _Q_browsertab() {
 		if (!cordova.plugins.browsertab) {
