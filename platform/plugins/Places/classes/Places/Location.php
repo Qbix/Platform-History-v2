@@ -94,7 +94,8 @@ class Places_Location
 			'types' => $result['types'],
 			'rating' => Q::ifset($result, 'rating', null),
 			'address' => Q::ifset($result, 'formatted_address', null),
-			'website' => $result['website']
+			'website' => $result['website'],
+			'placeId' => $placeId
 		);
 		$location->title = $result['name'];
 		$location->setAttribute($attributes);
