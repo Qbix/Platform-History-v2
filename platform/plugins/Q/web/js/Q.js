@@ -4581,7 +4581,7 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
 	} if (typeof toolElement === 'string') {
 		toolElement = document.getElementById(toolElement);
 	}
-	return toolElement.Q ? toolElement.Q(toolName) : null;
+	return toolElement && toolElement.Q ? toolElement.Q(toolName) : null;
 };
 
 /**
