@@ -3658,6 +3658,9 @@ var Total = Streams.Total = {
 	setUpElement: function _Total_setUpElement(
 		element, publisherId, streamName, messageType, key, options
 	) {
+		if (!element) {
+			return;
+		}
 		var p = publisherId;
 		var n = streamName;
 		var m = messageType;
