@@ -57,11 +57,26 @@ Q.Tool.define("Places/areas", function (options) {
 			.appendTo(tool.element)
 			.activate(function(){
 				qFilterTool = Q.Tool.from(this.element, "Q/filter");
+
+				qFilterTool.state.onFilter.set(function (query, element) {
+					var titles = qFilterTool.$(".Streams_related_tool .Streams_preview_tool").not(".Streams_preview_composer");
+
+					titles.each(function(){
+						var $this = $(this);
+
+						// if title start with query string - show Streams/preview tool element, and hide otherwise
+						if ($(".Streams_preview_title", $this).text().toUpperCase().startsWith(query.toUpperCase())) {
+							$this.show();
+						} else {
+							$this.hide();
+						}
+					});
+				}, tool);
 			});
 		}
 
 		tool.getStream(function(stream){
-			$("<div>").tool("Streams/related", {
+			tool.$(".Q_filter_results").tool("Streams/related", {
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
 				relationType: 'area',
@@ -70,8 +85,6 @@ Q.Tool.define("Places/areas", function (options) {
 				onRefresh: function(){
 					// add Q_filter_result class to each preview tool except composer
 					$(".Streams_preview_container", $(".Streams_preview_tool", this.element).not(".Streams_preview_composer")).addClass("Q_filter_result");
-
-					console.log(1);
 				},
 				creatable: {
 					"Places/area": {
@@ -86,7 +99,7 @@ Q.Tool.define("Places/areas", function (options) {
 								return false;
 							}
 
-							// get array of sreas exist
+							// get array of areas exist
 							var areasExist = state.relatedTool.$(".Streams_preview_title").map(function(){
 								return $.trim($(this).text());
 							}).get();
@@ -101,7 +114,7 @@ Q.Tool.define("Places/areas", function (options) {
 
 							// wait when new preview tool created with this title and add class Q_filter_result
 							var timerId = setInterval(function(){
-								var container = $(".Streams_preview_container .Streams_preview_title:contains('"+title+"')", state.relatedTool.element);
+								var container = state.relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
 
 								if(!container.length){
 									return;
@@ -116,7 +129,6 @@ Q.Tool.define("Places/areas", function (options) {
 				}
 			}).appendTo(qFilterTool.element).activate(function(){
 				state.relatedTool = this;
-				qFilterTool.state.results = this.element;
 				qFilterTool.stateChanged('results');
 			});
 		});
