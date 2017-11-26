@@ -1513,7 +1513,17 @@
 					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 						.click(function () {
 							Users.initFacebook(function () {
-								if (Q.info.isCordova && facebookConnectPlugin) {
+								if (Q.info.isCordova && window.facebookConnectPlugin) {
+
+									Users.Facebook = {
+										login: function () { },
+										api: function () { },
+										appInvites: function () { }
+									};
+
+
+
+
 									facebookConnectPlugin.login(["public_profile", "email"], function (response) {
 										doLogin(response);
 									}, function (err) {
@@ -2420,6 +2430,107 @@
 		}
 
 	};
+
+	Users.Facebook = {
+
+		options: {
+			login: {
+				native: true
+			}
+		},
+
+		construct: function() {
+			//var testUrl = 'https://www.facebook.com/v2.11/dialog/oauth?client_id=688805724662356&redirect_uri=http://hillel.local/login/facebook&state=kk23459dsf10432hs92&response_type=token'
+			var testUrl = 'http://hillel.local/login/facebook?#state=kk23459dsf10432hs92&access_token=EAAJydxSJqlQBALfxgJsVa9ahqRF4CmLFhWUGR98Sof5lDzSVYC54vWU8vbzGnlWT6vcZCuRUJVKwXNKFMSzhxeSKaxP7eaz1FloX9MBo8wIZCBb0ydWirUMWrKHVNB5ERwcyUYSgusWZAUirYseVaGXVzu4yEOFDzDycN9MgAZDZD&expires_in=5184000';
+			cordova.plugins.browsertab.openUrl(testUrl);
+			//win.addEventListener('exit', function(event) {  });
+			/*setTimeout(function(){
+				win.close();
+			}, 3000);*/
+
+			console.log(Q.parseQueryString(window.location.href));
+
+/*			function getStateSecondWindow() {
+				win.executeScript(
+					{code: "localStorage.getItem('loginOauth')"},
+					function (data) {
+						console.log(data)
+						if (data[0] === 'OK') {
+							//do what I need to do
+							win.close();
+						}
+					}
+				);
+			}
+
+			setInterval(getStateSecondWindow, 1000);*/
+
+
+			/*cordova.p lugins.browsertab.isAvailable(function(result) {
+					if (!result) {
+						//cordova.InAppBrowser.open(testUrl, '_system');
+					} else {
+						console.log('open')
+						cordova.plugins.browsertab.openUrl(
+							testUrl,
+							function(successResp) {
+								console.log(successResp)
+							},
+							function(failureResp) {
+								console.log(failureResp)
+								error.textContent = "failed to launch browser tab";
+								error.style.display = '';
+							});
+					}
+				},
+				function(isAvailableError) {
+					error.textContent = "failed to query availability of in-app browser tab";
+					error.style.display = '';
+				});*/
+
+
+			/*this.options.login.native = Q.info.isCordova;
+			console.log(this.options.login.native)*/
+		},
+
+		init: function() {
+
+		},
+
+		login: function() {
+
+		},
+
+		getAuthResponse: function() {
+
+		},
+
+		api: function() {
+
+		},
+
+		getLoginStatus: function() {
+
+		},
+
+		getAccessToken: function() {
+
+		}
+
+	};
+
+
+	var handleOpenUrl = function(param) {
+		console.log(param);
+	};
+
+	Q.onReady.add(function () {
+		Users.Facebook.construct();
+	});
+
+
+
+	Users.Facebook.options.login.native = 1;
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog) {
 		var $dialog = $(dialog);
