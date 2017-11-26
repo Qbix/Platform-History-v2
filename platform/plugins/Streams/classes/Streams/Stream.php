@@ -298,7 +298,7 @@ class Streams_Stream extends Base_Streams_Stream
 			// we don't want user to update private fields but will set initial values to them
 			$privateFieldNames = self::getConfigField($this->type, 'private', array());
 			// magic fields are handled by parent method
-			$magicFieldNames = array('insertedTime', 'updatedTime');
+			$magicFieldNames = array('insertedTime', 'updatedTime', 'name');
 			$privateFieldNames = array_diff($privateFieldNames, $magicFieldNames);
 
 			$streamTemplate = self::getStreamTemplate(
@@ -373,7 +373,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		// Generate a unique name for the stream
-		if (!isset($modifiedFields['name'])) {
+		if (!isset($modifiedFields['name']) and !isset($this->name)) {
 			$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
 				Streams_Stream::table(), 'name',
 				array('publisherId' => $this->publisherId),
