@@ -195,6 +195,8 @@ Q.Tool.define("Places/location", function (options) {
 								ok: textConfirm.ok,
 								cancel: textConfirm.cancel
 							});
+							$te.find(".Q_selected").removeClass("Q_selected");
+							$(tool.addressTool.element).addClass('Q_selected');
 							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 						});
 					}
