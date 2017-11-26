@@ -146,7 +146,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var $te = $(this.element);
 		var position = $te.css('position');
 		var $div = $("<div class='Streams_preview_error' />")
-		.text(err).animate({opacity: 0.5}, 300);
+		.text(fem).animate({opacity: 0.5}, 300);
 		$te.css({
 			'cursor': 'grabbing',
 			'position': (position === 'static' ? 'relative' : position),
