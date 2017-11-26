@@ -5053,7 +5053,7 @@ function _preloadedStreams(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams data we find
 	Q.each(Stream.preloaded, function (i, fields) {
-		Streams.construct(fields, {}, null);
+		Streams.construct(fields, {}, null, true);
 	});
 	Stream.preloaded = null;
 }
