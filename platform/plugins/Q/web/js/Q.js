@@ -1381,15 +1381,13 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 				}
 			});
 			if (found) {
-				break;
+				return;
 			}
 		}
-		if (!found) {
-			if (isArr) {
-				result.push(v1);
-			} else {
-				result[k] = v1;
-			}
+		if (isArr) {
+			result.push(v1);
+		} else {
+			result[k] = v1;
 		}
 	});
 	return result;
@@ -2159,6 +2157,29 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
 		Q.handle(handler, this.lastContext, this.lastArgs);
 	}
 	return ret;
+};
+
+/**
+ * Like "set" method, but removes the handler right after it has executed.
+ * @method setOnce
+ * @param {mixed} handler Any kind of callable which Q.handle can invoke
+ * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
+ *  Used to replace handlers previously added under the same key.
+ *  If the key is not provided, a unique one is computed.
+ *  Pass a Q.Tool object here to associate the handler to the tool,
+ *  and it will be automatically removed when the tool is removed.
+ * @param {boolean} prepend If true, then prepends the handler to the chain
+ * @return {String} The key under which the handler was set
+ */
+Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+	if (!handler) return null;
+	var event = this;
+	return key = event.set(function _setOnce() {
+		handler.apply(this, arguments);
+		setTimeout(function () {
+			event.remove(key);
+		}, 0);
+	}, key, prepend);
 };
 
 /**
@@ -4560,7 +4581,7 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
 	} if (typeof toolElement === 'string') {
 		toolElement = document.getElementById(toolElement);
 	}
-	return toolElement.Q ? toolElement.Q(toolName) : null;
+	return toolElement && toolElement.Q ? toolElement.Q(toolName) : null;
 };
 
 /**
