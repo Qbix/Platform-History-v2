@@ -12148,7 +12148,7 @@ Q.onReady.set(function _Q_masks() {
 if (_isCordova) {
 	Q.onReady.set(function _Q_handleOpenURL() {
 		root.handleOpenURL = function (url) {
-			Q.handle(Q.onHandleOpenUrl, Q, url);
+			Q.handle(Q.onHandleOpenUrl, Q, [url]);
 		};
 	}, 'Q.handleOpenURL');
 
