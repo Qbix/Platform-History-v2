@@ -23,8 +23,8 @@ function Q_bookmarklet_tool($options)
     $options = array_merge(array(
   		'icon' => null
     ), $options);
-	Q_Response::addScript('{{Q}}/js/tools/bookmarklet.js');
-	Q_Response::addStylesheet('{{Q}}/css/bookmarklet.css');
+	Q_Response::addScript('{{Q}}/js/tools/bookmarklet.js', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/bookmarklet.css', 'Q');
 	Q_Response::setToolOptions($options);
 	return '';
 }

@@ -78,7 +78,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	}
 	$this.before(state.input);
 	$this.addClass('Q_imagepicker');
-	Q.addStylesheet('{{Q}}/css/imagepicker.css');
+	Q.addStylesheet('{{Q}}/css/imagepicker.css', { slotName: 'Q' });
 	
 	function _process() {
 		var state = $this.state('Q/imagepicker');

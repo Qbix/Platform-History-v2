@@ -28,8 +28,8 @@
  */
 function Streams_photoSelector_tool($options)
 {
-	Q_Response::addScript('{{Streams}}/js/Streams.js');
-	Q_Response::addStylesheet('{{Streams}}/css/Streams.css');
+	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
+	Q_Response::addStylesheet('{{Streams}}/css/Streams.css', 'Streams');
 	Q_Response::setToolOptions($options);
 	return '';
 }

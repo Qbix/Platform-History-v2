@@ -77,7 +77,7 @@ function (options, preview) {
 					'{{Q}}/pickadate/themes/default.css',
 					'{{Q}}/pickadate/themes/default.date.css',
 					'{{Q}}/pickadate/themes/default.time.css'
-				]);
+				], {slotName: 'Q'});
 				Q.addScript([
 					'{{Q}}/pickadate/picker.js',
 					'{{Q}}/pickadate/picker.date.js',

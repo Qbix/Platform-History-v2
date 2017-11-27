@@ -99,7 +99,7 @@ Q.Tool.define("Streams/html", function (options) {
 				"{{Q}}/js/froala/css/plugins/image.min.css",
 				"{{Q}}/js/froala/css/plugins/table.min.css",
 				"{{Q}}/js/froala/css/plugins/code_view.min.css"
-			]);
+			], { slotName: 'Q' });
 			var scripts = [
 				"{{Q}}/js/froala/js/froala_editor.min.js",
 				"{{Q}}/js/froala/js/plugins/fullscreen.min.js",

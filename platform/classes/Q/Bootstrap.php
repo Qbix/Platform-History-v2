@@ -8,7 +8,16 @@
  * @class Q_Bootstrap
  */
 class Q_Bootstrap
-{	
+{
+	/**
+	 * Returns the array of ($pluginName => $pluginDir), in the order they were loaded.
+	 * @return array
+	 */
+	static function plugins()
+	{
+		return self::$plugins;
+	}
+
 	/**
 	 * @method setIncludePath
 	 * @static
