@@ -8065,7 +8065,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		function loadStylesheets(callback) {
 			if (!response.stylesheets) {
-				return null;
+				return callback();
 			}
 			var newStylesheets = {};
 			var keys = Object.keys(response.stylesheets);
