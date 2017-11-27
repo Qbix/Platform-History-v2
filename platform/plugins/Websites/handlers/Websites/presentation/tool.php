@@ -10,8 +10,8 @@
  */
 function Websites_presentation_tool($options)
 {
-	Q_Response::addStylesheet('{{Websites}}/css/Websites.css');
-	Q_Response::addScript('{{Websites}}/js/Websites.js');
+	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
+	Q_Response::addScript('{{Websites}}/js/Websites.js', 'Websites');
 	Q_Response::setToolOptions($options);
 	return '';
 }

@@ -383,7 +383,7 @@ Users.prompt = function(platform, uid, authCallback, cancelCallback, options) {
 	var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 	if (!Users.prompt.overlay) {
-		Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
+		Q.addStylesheet(Q.url('{{Users}}/css/Users.css'), { slotName: 'Users' });
 		var o = Q.extend({}, Users.prompt.options, options);
 		var title = Q.text.Users.prompt.title
 			.replace(/{\$platform}/g, platform)
