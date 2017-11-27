@@ -6883,7 +6883,7 @@ Q.formPost.counter = 0;
  * @param {Boolean} [options.duplicate] if true, adds script even if one with that src was already loaded
  * @param {Boolean} [options.onError] optional function that may be called in newer browsers if the script fails to load. Its this object is the script tag.
  * @param {Boolean} [options.ignoreLoadingErrors] If true, ignores any errors in loading scripts.
- * @param {Boolean} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document)
+ * @param {Boolean} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document).
  * @param {Boolean} [options.returnAll] If true, returns all the script elements instead of just the new ones
  * @return {Array} An array of SCRIPT elements
  */
@@ -6948,13 +6948,13 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		Q.jQueryPluginPlugin();
 		onload();
 	}
-	
-	var p, ret = [];
+
 	if (!onload) {
 		onload = function () {};
 	}
-	
+
 	if (Q.isArrayLike(src)) {
+		var pipe, ret = [];
 		var srcs = [];
 		Q.each(src, function (i, src) {
 			if (!src) return;
@@ -6964,9 +6964,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			onload();
 			return [];
 		}
-		p = new Q.Pipe(srcs, onload);
+		pipe = new Q.Pipe(srcs, onload);
 		Q.each(srcs, function (i, src) {
-			ret.push(Q.addScript(src, p.fill(src), options));
+			ret.push(Q.addScript(src, pipe.fill(src), options));
 		});
 		return ret;
 	}
@@ -6979,7 +6979,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		onload = function() { };
 	}
 	
-	var script, i;
+	var script, i, p;
 	_onload.loaded = {};
 	src = (src && src.src) ? src.src : src;
 	if (!src) {
@@ -7195,28 +7195,55 @@ var _exports = {};
  * @param {Function} onload
  * @param {Object} options
  *  An optional hash of options, which can include:
+ * @param {Boolean} [options.slotName] The slot name to which the stylesheet should be added, used to control the order they're applied in.
+ *  Do not use together with container option.
  * @param {HTMLElement} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document)
+ *  Although this won't result in valid HTML, all browsers support it, and it enables the CSS to later be easily removed at runtime.
  * @param {Boolean} [options.returnAll=false] If true, returns all the link elements instead of just the new ones
  * @return {Array} Returns an aray of LINK elements
  */
 Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
-	var i;
-	options = options || {};
-	if (typeof media === 'function') {
-		onload = media; media = undefined;
+
+	function onload2() {
+		if (onload2.executed) {
+			return;
+		}
+		if (('readyState' in this) &&
+			(this.readyState !== 'complete' && this.readyState !== 'loaded')) {
+			return;
+		}
+		Q.addStylesheet.loaded[href] = true;
+		var cb;
+		while ((cb = Q.addStylesheet.onLoadCallbacks[href].shift())) {
+			cb.call(this);
+		}
+		onload2.executed = true;
 	}
+
+	if (typeof media === 'function') {
+		options = onload; onload = media; media = undefined;
+	} else if (Q.isPlainObject(media) && !(media instanceof Q.Event)) {
+		options = media; media = onload = null;
+	}
+	options = options || {};
 	if (!onload) {
 		onload = function _onload() { };
 	}
 	if (Q.isArrayLike(href)) {
-		var ret = [];
-		var len = href.length;
-		for (i=0; i<len; ++i) {
-			ret.push(Q.addStylesheet(
-				href[i].href || href[i],
-				href[i].media
-			));
+		var pipe, ret = [];
+		var hrefs = [];
+		Q.each(href, function (i, href) {
+			if (!href) return;
+			hrefs.push((href && href.href) ? href.href : href);
+		});
+		if (Q.isEmpty(hrefs)) {
+			onload();
+			return [];
 		}
+		pipe = new Q.Pipe(hrefs, 1, onload);
+		Q.each(hrefs, function (i, href) {
+			ret.push(Q.addStylesheet(href, media, pipe.fill(href), options));
+		});
 		return ret;
 	}
 	var container = options.container || document.getElementsByTagName('head')[0];
@@ -7227,12 +7254,17 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	href = Q.url(href);
 	if (!media) media = 'screen,print';
+	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
+	var i, e, m, p;
 	for (i=0; i<links.length; ++i) {
-		if (links[i].getAttribute('href') !== href) continue;
-		// move the element to the right container if necessary
-		// hopefully, moving the link element won't change the order of applying the styles
-		var p = links[i], outside = true;
+		e = links[i];
+		m = e.getAttribute('media');
+		if ((m && m !== media) || e.getAttribute('href') !== href) continue;
+		// A link element with this media and href is already found in the document.
+		// Move the element to the right container if necessary
+		// (This may change the order in which stylesheets are applied).
+		var p = e, outside = true;
 		while (p = p.parentNode) {
 			if (p === container) {
 				outside = false;
@@ -7240,45 +7272,24 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 			}
 		}
 		if (outside) {
-			container.appendChild(links[i]);
+			container.appendChild(e);
 		}
 		if (Q.addStylesheet.loaded[href] || !Q.addStylesheet.added[href]) {
 			onload();
-			return options.returnAll ? links[i] : false;
+			return options.returnAll ? e : false;
 		}
 		if (Q.addStylesheet.onLoadCallbacks[href]) {
 			Q.addStylesheet.onLoadCallbacks[href].push(onload);
 		} else {
 			Q.addStylesheet.onLoadCallbacks[href] = [onload];
 		}
-		links = document.getElementsByTagName('link');
-		for (var j=0; j<links.length; ++j) {
-			if (links[j].href !== href) continue;
-			if (Q.info.isAndroidStock) {
-				onload2.call(links[j]); // it doesn't support onload
-			} else {
-				links[j].onload = onload2;
-				links[j].onreadystatechange = onload2; // for IE8
-			}
-			break;
+		if (Q.info.isAndroidStock) {
+			onload2.call(e); // it doesn't support onload
+		} else {
+			e.onload = onload2;
+			e.onreadystatechange = onload2; // for IE8
 		}
-		return options.returnAll ? links[i] : false; // don't add
-	}
-
-	function onload2() {
-		if (onload2.executed) {
-			return;
-		}
-		if (('readyState' in this) &&
-		(this.readyState !== 'complete' && this.readyState !== 'loaded')) {
-			return;
-		}
-		Q.addStylesheet.loaded[href] = true;
-		var cb;
-		while ((cb = Q.addStylesheet.onLoadCallbacks[href].shift())) {
-			cb.call(this);
-		}
-		onload2.executed = true;
+		return options.returnAll ? e : false; // don't add
 	}
 
 	// Create the stylesheet's tag and insert it into the document
@@ -7291,7 +7302,25 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.onload = onload2;
 	link.onreadystatechange = onload2; // for IE
 	link.setAttribute('href', href);
-	container.appendChild(link);
+	links = document.getElementsByTagName('link');
+	var insertBefore = null;
+	if (Q.allSlotNames && options.slotName) {
+		link.setAttribute('data-slot', options.slotName);
+		var slotIndex = Q.allSlotNames.indexOf(options.slotName);
+		for (var j=0; j<links.length; ++j) {
+			e = links[j];
+			var slotName = e.getAttribute('data-slot');
+			if (Q.allSlotNames.indexOf(slotName) > slotIndex) {
+				insertBefore = e;
+				break;
+			}
+		}
+	}
+	if (insertBefore) {
+		insertBefore.parentNode.insertBefore(link, insertBefore);
+	} else {
+		container.appendChild(link);
+	}
 	// By now all widespread browser versions support at least one of the above methods:
 	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#Browser_compatibility
 	return link;
@@ -8056,7 +8085,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
 					var elem = Q.addStylesheet(
 						stylesheet.href, stylesheet.media,
-						slotPipe.fill(key), { returnAll: false }
+						slotPipe.fill(key), { slotName: slotName, returnAll: false }
 					);
 					if (elem) {
 						stylesheets.push(elem);
@@ -9806,6 +9835,10 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 };
 Q.jQueryPluginPlugin();
 
+_isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
+	|| location.search.queryField('Q.cordova')
+	|| Q.cookie('Q_cordova');
+
 /**
  * A tool for detecting user browser parameters.
  * @class Q.Browser
@@ -10052,9 +10085,6 @@ Q.Browser = {
 	
 };
 
-var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
-	|| location.search.queryField('Q.cordova');
-
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
@@ -10068,6 +10098,7 @@ Q.info = {
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
 	isStandalone: detected.isStandalone,
+	isCordova: _isCordova,
 	platform: detected.OS,
 	browser: detected,
 	isIE: function (minVersion, maxVersion) {
@@ -12147,7 +12178,7 @@ Q.onReady.set(function _Q_masks() {
 
 if (_isCordova) {
 	Q.onReady.set(function _Q_handleOpenUrl() {
-		root.handleOpenUrl = function (url) {
+		root.handleOpen = function (url) {
 			Q.handle(Q.onHandleOpenUrl, Q, url);
 		};
 	}, 'Q.handleOpenUrl');

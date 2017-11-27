@@ -17,7 +17,7 @@ function Websites_announcement_response_content($params)
 	$relationType = 'announcement';
 	$onRelate = 'Websites.announcement.onRelate';
 	Q_Response::addStylesheet('{{Websites}}/css/Websites.css');
-	Q_Response::addScript("{{Websites}}/js/Websites.js");
+	Q_Response::addScript("{{Websites}}/js/Websites.js", 'Websites');
 	return Q::view("Websites/content/announcement.php", compact(
 		'publisherId', 'streamName', 'relationType', 'onRelate'
 	));

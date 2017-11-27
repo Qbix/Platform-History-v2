@@ -101,6 +101,6 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 
 );
 
-Q.addStylesheet('{{Q}}/css/contextual.css');
+Q.addStylesheet('{{Q}}/css/contextual.css', { slotName: 'Q' });
 
 })(Q, jQuery, window, document);
