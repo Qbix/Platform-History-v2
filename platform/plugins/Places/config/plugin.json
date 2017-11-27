@@ -39,7 +39,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Locations",
-					"icon": "{{Places}}/icons/locations"
+					"icon": "{{Places}}/img/icons/locations"
 				}
 			},
 			"Places/location": {
@@ -51,7 +51,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
-					"icon": "{{Places}}/icons/location",
+					"icon": "{{Websites}}/img/icons/Websites/advert/creative",
 					"title": "Location"
 				},
 				"relatedFrom": {
@@ -69,6 +69,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
+					"icon": "{{Places}}/icons/location",
 					"title": "Area"
 				},
 				"relatedFrom": {
