@@ -9806,6 +9806,10 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 };
 Q.jQueryPluginPlugin();
 
+_isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
+	|| location.search.queryField('Q.cordova')
+	|| Q.cookie('Q_cordova');
+
 /**
  * A tool for detecting user browser parameters.
  * @class Q.Browser
@@ -10052,9 +10056,6 @@ Q.Browser = {
 	
 };
 
-_isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
-	|| location.search.queryField('Q.cordova');
-
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
@@ -10068,6 +10069,7 @@ Q.info = {
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
 	isStandalone: detected.isStandalone,
+	isCordova: _isCordova,
 	platform: detected.OS,
 	browser: detected,
 	isIE: function (minVersion, maxVersion) {
@@ -12146,11 +12148,11 @@ Q.onReady.set(function _Q_masks() {
 }, 'Q.Masks');
 
 if (_isCordova) {
-	Q.onReady.set(function _Q_handleOpenURL() {
-		root.handleOpenURL = function (url) {
-			Q.handle(Q.onHandleOpenUrl, Q, [url]);
+	Q.onReady.set(function _Q_handleOpenUrl() {
+		root.handleOpen = function (url) {
+			Q.handle(Q.onHandleOpenUrl, Q, url);
 		};
-	}, 'Q.handleOpenURL');
+	}, 'Q.handleOpenUrl');
 
 	Q.onReady.set(function _Q_browsertab() {
 		if (!cordova.plugins.browsertab) {
