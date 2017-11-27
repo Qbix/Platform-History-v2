@@ -181,7 +181,7 @@ EOT;
 		Q_Response::addScriptLine("
 // Now, initialize Q
 Q.init();
-", null, 'Q');
+", null, '@end');
 		$added_Q_init = true;
 	}
 
