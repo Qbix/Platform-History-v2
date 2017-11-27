@@ -107,7 +107,7 @@ function Q_response($params)
 				Q::event('Q/responseExtras', array(), 'after');
 				$to_encode['slots'] = Q_Response::slots(true);
 				// add stylesheets, stylesinline, scripts, scriptlines, scriptdata, templates
-				foreach (array_merge(array(''), $slotNames) as $slotName) {
+				foreach (array_merge($slotNames, array('')) as $slotName) {
 					$temp = Q_Response::stylesheetsArray($slotName);
 					if ($temp) $to_encode['stylesheets'][$slotName] = $temp;
 					$temp = Q_Response::stylesInline($slotName);
