@@ -826,10 +826,10 @@ class Q_Response
 		$modules = array_keys(Q_Bootstrap::plugins());
 		$modules[] = Q::app();
 		return array_merge(
-			array('@start', ''),
+			array('@start'),
 			$modules,
 			Q_Request::slotNames(true),
-			array('@end')
+			array('', '@end')
 		);
 	}
 
