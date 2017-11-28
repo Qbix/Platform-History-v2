@@ -228,6 +228,10 @@ Q.Tool.define("Places/location", function (options) {
 							});
 
 							this.venue = place.name;
+							var description = place.description;
+							if (description.indexOf(',') >= 0) {
+								this.venue += description.substr(description.indexOf(','));
+							}
 
 							$te.find(".Q_selected").removeClass("Q_selected");
 							$(tool.addressTool.element).addClass('Q_selected');
