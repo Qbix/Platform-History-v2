@@ -71,14 +71,14 @@ try {
 	die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
 }
 
-$app = Q_Config::expect('Q', 'app');
+$app = Q::app();
 $identifier = $FROM_APP ? $argv[1] : $argv[2];
 $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
 $labels = array_slice($argv, $FROM_APP ? 3 : 4);
 $addLabel = empty($labels) ? "$app/admins" : $labels;
 $asUserId = $app;
 $skipAccess = true;
-$appUrl = Q_Uri::url('Communities/onboarding');
+$appUrl = Q_Uri::url('Communities/onboarding?communityId='.urlencode($communityId));
 
 Streams::invite($communityId, 'Streams/experience/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl'));
 echo "Successfully invited $identifier\n";

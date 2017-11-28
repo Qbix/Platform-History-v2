@@ -45,7 +45,12 @@ Q.Tool.jQuery('Q/overlay',
 			var apr = ap && ap.getBoundingClientRect();
 			var br = document.body.getBoundingClientRect();
 			var sl = ap ? apr.left : -br.left;
+
 			var st = ap ? apr.top : -br.top;
+			// if dialog element have position=fixed - it means it positioned related to viewport
+			// It means that position independent of scrolls of all ancestors.
+			st = $this.css("position") === "fixed" ? 0 : st;
+
 			var sw = ap ? apr.right - apr.left : Q.Pointer.windowWidth();
 			var sh = ap ? apr.bottom - apr.top : Q.Pointer.windowHeight();
 

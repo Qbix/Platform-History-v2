@@ -385,7 +385,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			o.emailAddress = emailAddress;
 			Streams_Message.emit('deliver/before', o);  // app may modify some fields
 			var viewPath = messageType+'/email.handlebars';
-			if (!Q.Handlebars.template(viewPath)) {
+			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
 			Users.Email.sendMessage(
@@ -398,7 +398,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			o.mobileNumber = mobileNumber;
 			Streams_Message.emit('deliver/before', o); // app may modify some fields
 			var viewPath = messageType+'/mobile.handlebars';
-			if (!Q.Handlebars.template(viewPath)) {
+			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
 			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {}, callback);

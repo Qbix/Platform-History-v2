@@ -3,7 +3,7 @@
 function Users_after_Q_reroute($params, &$stop_dispatch)
 {
 	$uri = Q_Dispatcher::uri();
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$ma = $uri->module.'/'.$uri->action;
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	if (!isset($requireLogin[$ma])) {

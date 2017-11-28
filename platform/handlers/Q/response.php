@@ -53,9 +53,6 @@ function Q_response($params)
 		Q::event('Q/responseExtras', array(), 'before');
 	}
 
-	// Get the main module (the app)
-	$app = Q_Config::expect('Q', 'app');
-
 	$action = $uri->action;
 	if (Q::canHandle("$module/$action/response")) {
 		if (false === Q::event("$module/$action/response", $_REQUEST) and !$isAjax) {
@@ -110,7 +107,7 @@ function Q_response($params)
 				Q::event('Q/responseExtras', array(), 'after');
 				$to_encode['slots'] = Q_Response::slots(true);
 				// add stylesheets, stylesinline, scripts, scriptlines, scriptdata, templates
-				foreach (array_merge(array(''), $slotNames) as $slotName) {
+				foreach (array_merge($slotNames, array('')) as $slotName) {
 					$temp = Q_Response::stylesheetsArray($slotName);
 					if ($temp) $to_encode['stylesheets'][$slotName] = $temp;
 					$temp = Q_Response::stylesInline($slotName);
@@ -184,13 +181,11 @@ EOT;
 		Q_Response::addScriptLine("
 // Now, initialize Q
 Q.init();
-", null, 'Q');
+", null, '@end');
 		$added_Q_init = true;
 	}
-	
 
 	// Get all the usual slots for a webpage
-	$slots = array();
 	foreach ($slotNames as $sn) {
 		Q_Response::fillSlot($sn, 'default', Q::ifset($idPrefixes, $sn, null));
 	}

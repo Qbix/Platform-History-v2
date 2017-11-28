@@ -2,14 +2,14 @@
 
 function Users_0_9_2_Users_mysql()
 {
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$communityId = Users::communityId();
 	$rows = Users_Session::select('COUNT(1)')
 		->fetchAll(PDO::FETCH_NUM);
 	$count = $rows[0][0];
 	$limit = 100;
 	$offset = 0;
-	$sessions = Users_Session::select('*')
+	$sessions = Users_Session::select()
 		->orderBy('id')
 		->limit($limit, $offset)
 		->caching(false)
@@ -35,7 +35,7 @@ function Users_0_9_2_Users_mysql()
 		if ($offset > $count) {
 			break;
 		}
-		$sessions = Users_Session::select('*')
+		$sessions = Users_Session::select()
 			->orderBy('id')
 			->limit($limit, $offset)
 			->caching(false)

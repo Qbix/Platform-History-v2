@@ -1,5 +1,5 @@
 (function (Q, $, window, document, undefined) {
-	
+
 Q.setObject('Q.text.Q.imagepicker', {
 	errorReadingFile: "Error reading file",
 	cameraCommands: {
@@ -78,7 +78,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	}
 	$this.before(state.input);
 	$this.addClass('Q_imagepicker');
-	Q.addStylesheet('{{Q}}/css/imagepicker.css');
+	Q.addStylesheet('{{Q}}/css/imagepicker.css', { slotName: 'Q' });
 	
 	function _process() {
 		var state = $this.state('Q/imagepicker');
@@ -128,7 +128,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				});
 			}, {
 				ok: state.cameraCommands.photo,
-				cancel: state.cameraCommands.library
+				cancel: state.cameraCommands.library,
+				noClose: false
 			});
 			e.preventDefault();
 			e.stopPropagation();

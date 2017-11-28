@@ -18,6 +18,8 @@ function Websites_before_Q_responseExtras()
 		}
 		Q_Response::setSlot('title', $stream->getAttribute('title'));
 	}
+	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
+	Q_Response::addScript('{{Websites}}/js/Websites.js', 'Websites');
 	Q_Response::setScriptData('Q.plugins.Websites.seoStreamName', $seoStreamName);
 	Q_Response::setScriptData('Q.plugins.Websites.userId', Users::communityId());
 	Q_Response::setScriptData('Q.plugins.Websites.seoReload', Q_Config::expect('Websites', 'seoReload'));

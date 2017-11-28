@@ -171,7 +171,7 @@ class Streams_Access extends Base_Streams_Access
 		}
 		
 		// Update all avatars corresponding to access rows for this stream
-		$tainted_access = Streams_Access::select('*')
+		$tainted_access = Streams_Access::select()
 			->where(array(
 				'publisherId' => $this->publisherId,
 				'streamName' => $this->streamName

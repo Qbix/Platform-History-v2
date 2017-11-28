@@ -295,18 +295,10 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		if (!$this->retrieved) {
-			// Generate a unique name for the stream
-			if (!isset($modifiedFields['name'])) {
-				$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
-					Streams_Stream::table(), 'name',
-					array('publisherId' => $this->publisherId),
-					array('prefix' => $this->type.'/Q')
-				);
-			}
 			// we don't want user to update private fields but will set initial values to them
 			$privateFieldNames = self::getConfigField($this->type, 'private', array());
 			// magic fields are handled by parent method
-			$magicFieldNames = array('insertedTime', 'updatedTime');
+			$magicFieldNames = array('insertedTime', 'updatedTime', 'name');
 			$privateFieldNames = array_diff($privateFieldNames, $magicFieldNames);
 
 			$streamTemplate = self::getStreamTemplate(
@@ -370,13 +362,23 @@ class Streams_Stream extends Base_Streams_Stream
 		/**
 		 * @event Streams/Stream/save/$streamType {before}
 		 * @param {Streams_Stream} stream
+		 * @param {array} modifiedFields reference to modifiedFields array
 		 * @return {false} To cancel further processing
 		 */
-		$params = array('stream' => $this, 'modifiedFields' => $modifiedFields);
+		$params = array('stream' => $this, 'modifiedFields' => &$modifiedFields);
 		if (false === Q::event(
 			"Streams/Stream/save/{$this->type}", $params, 'before'
 		)) {
 			return false;
+		}
+
+		// Generate a unique name for the stream
+		if (!isset($modifiedFields['name']) and !isset($this->name)) {
+			$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
+				Streams_Stream::table(), 'name',
+				array('publisherId' => $this->publisherId),
+				array('prefix' => $this->type.'/Q')
+			);
 		}
 		
 		foreach ($this->fields as $name => $value) {
@@ -435,7 +437,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 		if ($this->retrieved and !$publicField) {
 			// Update all avatars corresponding to access rows for this stream
-			$taintedAccess = Streams_Access::select('*')
+			$taintedAccess = Streams_Access::select()
 				->where(array(
 					'publisherId' => $this->publisherId,
 					'streamName' => $this->name
@@ -573,7 +575,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		
 		// Update all avatars corresponding to access rows for this stream
-		$taintedAccess = Streams_Access::select('*')
+		$taintedAccess = Streams_Access::select()
 			->where(array(
 				'publisherId' => $this->publisherId,
 				'streamName' => $this->name
@@ -1502,7 +1504,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {array} $options=array()
 	 * @param {string} [$options.asUserId] Defaults to the logged in user, or "" if not logged in
 	 *	If access is not already set for the stream, it will be calculated for $asUserId.
-	 * @param {array} [$fields] By default, all fields from tables used to "extend" the
+	 * @param {string} [$options.skipAccess=false] If true, skips access checks
+	 * @param {array} [$options.fields=null] By default, all fields from tables used to "extend" the
 	 *  stream are returned. You can indicate here an array consisting of only the names of
 	 *  fields to export. An empty array means no extended fields will be exported.
 	 * @return {array}
@@ -1514,15 +1517,21 @@ class Streams_Stream extends Base_Streams_Stream
 			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
-		$this->calculateAccess($asUserId);
-		if ($this->testReadLevel('content')) {
+		if (!empty($options["skipAccess"])) {
+			$skip = true;
+		} else {
+			$this->calculateAccess($asUserId);
+			$skip = false;
+		}
+
+		if ($skip or $this->testReadLevel('content')) {
 			$result = $this->toArray();
 		} else {
 			if (!$this->testReadLevel('see')) {
 				return array();
 			}
 			$result = array();
-			$default = array( // the array of fields allowed to see
+			$fields = array( // the array of fields allowed to see
 				'publisherId',
 				'name',
 				'type',
@@ -1531,7 +1540,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'updatedTime'
 			);
 			if (isset($this->type)) {
-				$fields = array_merge($default, Q_Config::get(
+				$fields = array_merge($fields, Q_Config::get(
 					'Streams', 'types', $this->type, 'see', array()
 				));
 			}
@@ -1623,7 +1632,7 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!empty($options['type'])) {
 			$criteria['type'] = $options['type'];
 		}
-		$q = Streams_Message::select('*')->where($criteria);
+		$q = Streams_Message::select()->where($criteria);
 		
 		// getting $min and $max
 		$result = Streams_Message::select("MIN(ordinal) min, MAX(ordinal) max")
@@ -1691,7 +1700,7 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 			$criteria['state'] = $options['state'];
 		}
-		$q = Streams_Participant::select('*')->where($criteria);
+		$q = Streams_Participant::select()->where($criteria);
 		$ascending = false;
 		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
@@ -1716,7 +1725,7 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!$userId) {
 			$userId = Users::loggedInUser(true)->id;
 		}
-		$rows = Streams_Participant::select('*')->where(array(
+		$rows = Streams_Participant::select()->where(array(
 			'publisherId' => $this->publisherId,
 			'streamName' => $this->name,
 			'userId' => $userId
@@ -1726,16 +1735,16 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Get the url of the stream's icon
-	 * @param {string} [$basename=""] The last part after the slash, such as "50.png"
+	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
 	 * @return {string} The stream's icon url
 	 */
 	function iconUrl($basename = null)
 	{
 		if (empty($this->icon)) return '';
-		$url = Q_Utils::interpolateUrl($this->icon, array(
+		$url = Q_Uri::interpolateUrl($this->icon, array(
 			'publisherId' => Q_Utils::splitId($this->publisherId)
 		));
-		$url = (Q_Valid::url($url))
+		$url = (Q_Valid::url($url) or mb_substr($this->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
 		if ($basename) {

@@ -27,14 +27,16 @@ function Q_before_Q_responseExtras()
 		$info['uri'] = $uri->toArray();
 	}
 	if (!$ajax) {
+		$text = Q::take(Q_Config::get('Q', 'text', array()), array('useLocale'));
 		$info = array_merge(
-			array('app' => Q_Config::expect('Q', 'app')),
+			array('app' => Q::app()),
 			$info,
 			array(
 				'proxies' => Q_Config::get('Q', 'proxies', array()),
 				'baseUrl' => $base_url,
 				'proxyBaseUrl' => Q_Uri::url($base_url),
 				'proxyUrl' => Q_Uri::url($url),
+				'text' => $text,
 				'sessionName' => Q_Session::name(),
 				'nodeUrl' => Q_Utils::nodeUrl(),
 				'socketPath' => Q_Utils::socketPath(),
@@ -59,17 +61,19 @@ function Q_before_Q_responseExtras()
 	if ($nonce) {
 		Q_Response::setScriptData('Q.nonce', $nonce);
 	}
+
+	Q_Response::setScriptData('Q.allSlotNames', Q_Response::allSlotNames());
 	
 	// Attach stylesheets and scripts
 	foreach (Q_Config::get('Q', 'javascript', 'responseExtras', array()) as $src => $b) {
 		if (!$b) continue;
-		Q_Response::addScript($src);
+		Q_Response::addScript($src, 'Q');
 	}
 	foreach (Q_Config::get('Q', 'stylesheets', 'responseExtras', array()) as $src => $media) {
 		if (!$media) continue;
 		if ($media === true) {
 			$media = 'screen,print';
 		}
-		Q_Response::addStylesheet($src, null, $media);
+		Q_Response::addStylesheet($src, 'Q', $media);
 	}
 }

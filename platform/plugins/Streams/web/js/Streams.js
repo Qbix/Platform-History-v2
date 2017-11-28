@@ -327,20 +327,22 @@ Streams.define = function (type, ctor, methods) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
+ * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
  * @return {String} the url
  */
-Streams.iconUrl = function(icon, size) {
+Streams.iconUrl = function(icon, basename) {
 	if (!icon) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if (!size || size === true) {
-		size = '40';
+	if (!basename || basename === true) {
+		basename = '40';
 	}
-	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = Q.interpolateUrl(icon + '/' + size);
-	return src.isUrl() ? src : Q.url('{{Streams}}/img/icons/'+src);
+	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
+	var src = Q.interpolateUrl(icon + '/' + basename);
+	return src.isUrl() || icon.substr(0, 2) == '{{'
+		? src
+		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
 var _socket = null;
@@ -740,6 +742,7 @@ var _Streams_batchFunction_options = {
  * @method create
  * @param {Object} fields
  *  Should contain at least the publisherId and type of the stream.
+ *  Fields are passed to the Streams/stream POST handler.
  *  The attributes field can be an object.
  * @param {Function} callback 
  *	if there were errors, first parameter is the error message
@@ -749,6 +752,8 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
+ *   @param {Object} [options.fields] Used to override any fields passed in the request
+ *   @param {String} [options.filename] Overrides the default filename for file uploads
  *   @param {HTMLElement} [options.form] If you want to upload a file or an icon, pass
  *    a form element here which includes input elements of type "file", named "file" or "icon".
  *    If they have files selected in them, they will be passed along with the rest of the
@@ -763,6 +768,9 @@ Streams.create = function (fields, callback, related, options) {
 	var slotNames = ['stream'];
 	var options = options || {};
 	fields = Q.copy(fields);
+	if (options.fields) {
+		Q.extend(fields, 10, options.fields);
+	}
 	if (fields.icon) {
 		slotNames.push('icon');
 	}
@@ -1349,13 +1357,12 @@ Streams.followup.options = {
  *  Publisher's user id
  * @param {String} streamName
  *	Name of the stream to/from which the others are related
- * @param relationType {String|null} the type of the relation
- * @param isCategory {boolean} defaults to false. If true, then gets streams related TO this stream.
+ * @param {String|null} relationType the type of the relation
+ * @param {boolean} isCategory defaults to false. If true, then gets streams related TO this stream.
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
- *   @default false
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
  *   @param {Number} [options.min] the minimum weight (inclusive) to filter by, if any
  *   @param {Number} [options.max] the maximum weight (inclusive) to filter by, if any
  *   @param {String} [options.prefix] optional prefix to filter the streams by
@@ -1366,7 +1373,7 @@ Streams.followup.options = {
  *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
  *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
  *   @param {Object} [options."$Module/$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
- * @param callback {function}
+ * @param{function} callback
  *	if there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and the "this" object is the data containing "stream", "relations" and "streams"
  */
@@ -2596,13 +2603,12 @@ Sp.refresh = function _Stream_prototype_refresh (callback, options) {
  * Returns all the streams this stream is related to
  * 
  * @method relatedFrom
- * @param relationType {String} the type of the relation
+ * @param {String} relationType the type of the relation
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
- *   @default false
- * @param callback {Function} callback to call with the results
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
+ * @param {Function} callback callback to call with the results
  *  First parameter is the error, the second one is an object of Streams.RelatedFrom objects you can iterate over with Q.each
  */
 Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, callback) {
@@ -2613,12 +2619,11 @@ Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, 
  * Returns all the streams related to this stream
  * 
  * @method relatedTo
- * @param relationType {String} the type of the relation
+ * @param {String} relationType the type of the relation
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
  *   @param {Number} [options.offset] the page offset that goes with the limit
- *   @param {Boolean} [options.ascending] whether to sort by ascending weight.
- *   @default false
+ *   @param {Boolean} [options.ascending=false] whether to sort by ascending weight.
  *   @param {String} [options.prefix] optional prefix to filter the streams by
  * @param {Function} callback callback to call with the results
  *  First parameter is the error, the second one is an object of
@@ -3653,6 +3658,9 @@ var Total = Streams.Total = {
 	setUpElement: function _Total_setUpElement(
 		element, publisherId, streamName, messageType, key, options
 	) {
+		if (!element) {
+			return;
+		}
 		var p = publisherId;
 		var n = streamName;
 		var m = messageType;
@@ -3808,9 +3816,9 @@ var Avatar = Streams.Avatar = function Streams_Avatar (fields) {
  * 
  * @static
  * @method get
- * @param userId {String|Object} The id of the user whose avatar we are requesting.
+ * @param {String|Object} userId The id of the user whose avatar we are requesting.
  *  Alternatively, this can also be an object with keys "prefix", "limit", "offset"
- * @param callback {function}
+ * @param {function} callback
  *	if there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and second parameter is a Streams.Avatar object
  */
@@ -3842,14 +3850,13 @@ Avatar.get.onError = new Q.Event();
  * @method byPrefix
  * @param prefix {string}
  *  For example something the user started typing in an autocomplete field
- * @param callback {function}
+ * @param {Function} callback
  *	If there were errors, first parameter is an array of errors
  *  otherwise, first parameter is null and second parameter is a hash of {userId: Streams.Avatar} pairs
  * @param {Object} [options]
  *   @param {Number} [options.limit] for paging
  *   @param {Number} [options.offset] for paging
- *   @param {Boolean} [options.public] If true, also gets publicly accessible names.
- *   @default false
+ *   @param {Boolean} [options.public=false] If true, also gets publicly accessible names.
  */
 Avatar.byPrefix = function _Avatar_byPrefix (prefix, callback, options) {
 	var userId = Q.plugins.Users.loggedInUser ? Users.loggedInUser.id : "";
@@ -3953,13 +3960,13 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 /**
  * Get the url of the user icon from a Streams.Avatar
  * @method
- * @param {Number} [size=40] the size of the icon to render.
+ * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
  * @return {String} the url
  */
-Ap.iconUrl = function _Avatar_prototype_iconUrl (size) {
+Ap.iconUrl = function _Avatar_prototype_iconUrl (basename) {
 	return Users.iconUrl(this.icon.interpolate({
 		userId: this.publisherId.splitId()
-	}), size);
+	}), basename);
 };
 
 /**
@@ -4123,8 +4130,8 @@ var Interests = Streams.Interests = {
 		style = style || 'white';
 		var info = Interests.info[communityId];
 		var cn = Q.normalize(category);
-		if (info && info[category] && info[category].white) {
-			return info[category].white.interpolate({ baseUrl: Q.info.baseUrl })
+		if (info && info[category] && info[category][style]) {
+			return Q.url(info[category][style]);
 		}
 		return Q.url(
 			'{{Streams}}/img/icons/interests/categories/'
@@ -5046,7 +5053,7 @@ function _preloadedStreams(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams data we find
 	Q.each(Stream.preloaded, function (i, fields) {
-		Streams.construct(fields, {}, null);
+		Streams.construct(fields, {}, null, true);
 	});
 	Stream.preloaded = null;
 }

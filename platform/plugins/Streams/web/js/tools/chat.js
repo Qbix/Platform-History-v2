@@ -69,7 +69,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 	scrollToBottom: true,
 	overflowed: {
-		src: '{{Streams}}/img/chat/message-overflowed.png',
+		src: 'Q/plugins/Streams/img/chat/message-overflowed.png',
 		title: 'Message from {{displayName}}'
 	},
 	onRefresh: new Q.Event(),
@@ -209,7 +209,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					return false;
 				});
 
-				state.$inputElement = tool.$('.Streams_chat_composer textarea');
+				state.$inputElement = tool.$('.Streams_chat_composer :input').eq(0);
 				callback && callback();
 			},
 			state.templates.main

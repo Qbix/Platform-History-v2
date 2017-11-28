@@ -138,7 +138,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
  * @method setObject
  * @param {String|Array} name Path to a property, in the form "A.B.C" or ["A", "B", "C"]
  * @param {mixed} value value or object to place at location given by name
- * @param {Object} [context=window] Optional. Object to use as root of path.
+ * @param {Object} [context=root] Optional. Object to use as root of path.
  * @param {String} [delimiter='.'] The delimiter to use in the name
  * @return {Object|undefined} Returns the passed value if setting is successful or `undefined` if not.
  */
@@ -169,7 +169,7 @@ Q.setObject = function _Q_setObject(name, value, context, delimiter) {
  * @static
  * @method getObject
  * @param {String|Array} name Path to a property, in the form "A.B.C" or ["A", "B", "C"]
- * @param {Object} [context=window] Optional. Object to use as root of path. Null may be passed.
+ * @param {Object} [context=root] Optional. Object to use as root of path. Null may be passed.
  * @param {String} [delimiter='.'] The delimiter to use in the name
  * @param {mixed} [create=undefined] Pass a value here to set with Q.setObject if nothing was there
  * @return {Object|undefined} Returns the originally stored value, or `undefined` if nothing is there
@@ -512,7 +512,7 @@ Q.pipe = function _Q_pipe(a, b, c, d) {
  *  Typically you would serialize the array of arguments e.g. into JSON when sending 
  *  the request down to the server, and the server should also return an array of results
  *  that is in the same order.
- * @param options {Object}
+ * @param {Object} options 
  *  An optional hash of possible options, which can include:
  * @param {boolean} [options.max=10] When the number of individual calls 
  *  in the queue reaches this number, the batch function is run.
@@ -1029,7 +1029,7 @@ Q.Cache = function  _Q_Cache(options) {
  * Generates the key under which things will be stored in a cache
  * @static
  * @method key
- * @param  {Array} args the arguments from which to generate the key
+ * @param {Array} args the arguments from which to generate the key
  * @param {Array} functions  optional array to which all the functions found in the arguments will be pushed
  * @return {String}
  */
@@ -1482,15 +1482,13 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 				}
 			});
 			if (found) {
-				break;
+				return;
 			}
 		}
-		if (!found) {
-			if (isArr) {
-				result.push(v1);
-			} else {
-				result[k] = v1;
-			}
+		if (isArr) {
+			result.push(v1);
+		} else {
+			result[k] = v1;
 		}
 	});
 	return result;
@@ -1599,7 +1597,7 @@ Q.instanceOf = function (testing, Constructor) {
  * @method copy
  * @param {Array} fields
  *  Optional array of fields to copy. Otherwise copy all that we can.
- * @param levels {number}
+ * @param {number} levels
  *  Optional. Copy this many additional levels inside x if it is a plain object.
  * @return {Object}
  *  Returns the shallow copy where some properties may have deepened the copy
@@ -1970,9 +1968,10 @@ Q.dir = function _Q_dir(start, callback) {
  *  You can also change this default using the config Db/normalize/characters
  * @param {number} numChars
  *  The maximum length of a normalized string. Default is 200.
+ * @param {boolean} [keepCaseIntact=false] If true, doesn't convert to lowercase
  * @return {String} the normalized string
  */
-Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
+Q.normalize = function _Q_normalize(text, replacement, characters, numChars, keepCaseIntact) {
 	if (!numChars) numChars = 200;
 	if (replacement === undefined) replacement = '_';
 	if (text instanceof Buffer) {
@@ -1982,10 +1981,13 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars) {
 	if (text === undefined) {
 		debugger; // pause here if debugging
 	}
-	var result = text.toLowerCase().replace(characters, replacement);
-	if (text.length > numChars) {
-		result = text.substr(0, numChars-11) + '_'
-			+ Math.abs(text.substr(numChars-11).hashCode());
+	if (!keepCaseIntact) {
+		text = text.toLowerCase();
+	}
+	var result = text.replace(characters, replacement);
+	if (result.length > numChars) {
+		result = result.substr(0, numChars-11) + '_'
+			+ Math.abs(result.substr(numChars-11).hashCode());
 	}
 	return result;
 };
@@ -2862,15 +2864,17 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what;
+	var parts = what2.split('?');
 	if (fields) {
 		for (var k in fields) {
-			what2 += '?'+encodeURIComponent(k)+'='+encodeURIComponent(fields[k]);
+			parts[1] = (parts[1] || "").queryField(k, fields[k]);
 		}
+		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
 	if (options && options.cacheBust) {
 		what2 += "?Q.cacheBust="+Math.floor(Date.now()/options.cacheBust);
 	}
-	var parts = what2.split('?');
+	parts = what2.split('?');
 	if (parts.length > 2) {
 		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
@@ -2954,84 +2958,85 @@ Date.from = function (input) {
 	return Date.fromTimestamp(input) || new Date(input);
 };
 
+/**
+ * @class String
+ * @description Q extended methods for Strings
+ */
+
 var Sp = String.prototype;
 
+/**
+ * Returns a copy of the string with Every Word Capitalized
+ * @method toCapitalized
+ * @return {String}
+ */
 Sp.toCapitalized = function _String_prototype_toCapitalized() {
-	return (this + '').replace(/^([a-z])|\s+([a-z])/g, function (found) {
+	return this.replace(/^([a-z])|\s+([a-z])/g, function (found) {
 		return found.toUpperCase();
 	});
 };
 
-Sp.isUrl = function () {
-	return this.match(/^[A-Za-z]*:\/\//);
+/**
+ * Determins whether the string's contents are a URL
+ * @method isUrl
+ * @return {boolean}
+ */
+Sp.isUrl = function _String_prototype_isUrl () {
+	return !!this.match(/^([A-Za-z]*:|)\/\//);
 };
 
-Sp.encodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
-	return this.replaceAll({
+/**
+ * Determins whether the string's contents are an IP address
+ * @method isUrl
+ * @return {boolean}
+ */
+Sp.isIPAddress = function _String_prototype_isIPAddress () {
+	return !!this.match(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
+};
+
+/**
+ * Returns a copy of the string with special HTML characters escaped
+ * @method encodeHTML
+ * @param {Array} [convert] Array of characters to convert. Can include
+ *   '&', '<', '>', '"', "'", "\n"
+ * @return {String}
+ */
+Sp.encodeHTML = function _String_prototype_encodeHTML(convert) {
+	var conversions = {
 		'&': '&amp;',
 		'<': '&lt;',
 		'>': '&gt;',
 		'"': '&quot;',
-		"'": '&apos;'
-	});
+		"'": '&apos;',
+		"\n": '<br>'
+	};
+	if (convert) {
+		conversions = Q.take(conversions, convert);
+	}
+	return this.replaceAll(conversions);
 };
 
-Sp.decodeHTML = function _String_prototype_encodHTML(quote_style, charset, double_encode) {
-	return this.replaceAll({
+/**
+ * Reverses what encodeHTML does
+ * @method decodeHTML
+ * @param {Array} [convert] Array of codes to unconvert. Can include
+ *  '&amp;', '&lt;', '&gt;, '&quot;', '&apos;', "<br>", "<br />"
+ * @return {String}
+ */
+Sp.decodeHTML = function _String_prototype_decodeHTML(unconvert) {
+	var conversions = {
 		'&amp;': '&',
 		'&lt;': '<',
 		'&gt;': '>',
 		'&quot;': '"',
-		'&apos;': "'"
-	});
-};
-
-Sp.hashCode = function() {
-	var hash = 0;
-	if (this.length == 0) return hash;
-	for (i = 0; i < this.length; i++) {
-		var c = this.charCodeAt(i);
-		hash = hash % 16777216;
-		hash = ((hash<<5)-hash)+c;
-		hash = hash & 0xffffffff; // Convert to 32bit integer
+		'&apos;': "'",
+		"<br>": "\n",
+		"<br />": "\n"
+	};
+	if (unconvert) {
+		conversions = Q.take(conversions, unconvert);
 	}
-	return hash;
-};
-
-Sp.quote = function _String_prototype_quote() {
-	var c, i, l = this.length, o = '"';
-	for (i = 0; i < l; i += 1) {
-		c = this.charAt(i);
-		if (c >= ' ') {
-			if (c === '\\' || c === '"') {
-				o += '\\';
-			}
-			o += c;
-		} else {
-			switch (c) {
-			case '\b':
-				o += '\\b';
-				break;
-			case '\f':
-				o += '\\f';
-				break;
-			case '\n':
-				o += '\\n';
-				break;
-			case '\r':
-				o += '\\r';
-				break;
-			case '\t':
-				o += '\\t';
-				break;
-			default:
-				c = c.charCodeAt();
-				o += '\\u00' + Math.floor(c / 16).toString(16) +
-					(c % 16).toString(16);
-			}
-		}
-	}
-	return o + '"';
+	return this.replaceAll(conversions);
 };
 
 /**
@@ -3074,7 +3079,7 @@ Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
 /**
  * Get or set querystring fields from a string, usually from location.search or location.hash
  * @method queryField
- * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned.
+ * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns [123,456]
  * @param {String} [value] Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
  * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring. Finally, if 
  */
@@ -3102,7 +3107,7 @@ Sp.queryField = function Q_queryField(name, value) {
 			}
 		}
 		return ret;
-	} else if (Q.isArrayLike(name)) {
+	} if (Q.isArrayLike(name)) {
 		ret = {}, keys = [];
 		parsed = Q.parseQueryString(what, keys);
 		for (i=0, l=name.length; i<l; ++i) {
@@ -3139,6 +3144,23 @@ Sp.queryField = function Q_queryField(name, value) {
 	}
 };
 
+/**
+ * Obtain some unique hash from a string, analogous to Q_Utils::hashCode
+ * @method hashCode
+ * @return {number}
+ */
+Sp.hashCode = function() {
+	var hash = 0;
+	if (!this.length) return hash;
+	for (var i = 0; i < this.length; i++) {
+		var c = this.charCodeAt(i);
+		hash = hash % 16777216;
+		hash = ((hash<<5)-hash)+c;
+		hash = hash & 0xffffffff; // Convert to 32bit integer
+	}
+	return hash;
+};
+
 if (!Sp.trim) {
 	Sp.trim = function _String_prototype_trim() {
 		return this.replace(/^\s+|\s+$/g, "");
@@ -3149,7 +3171,7 @@ if (!Sp.trim) {
  * Analogous to PHP's parse_url function
  * @method parseUrl
  * @param {String} component Optional name of component to return
- * @return {String}
+ * @return {Object}
  */
 Sp.parseUrl = function _String_prototype_parseUrl (component) {
 	// http://kevin.vanzonneveld.net
@@ -3193,7 +3215,66 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
  * @return {boolean}
  */
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
+	if (this.length < prefix.length) {
+		return false;
+	}
 	return this.substr(0, prefix.length) === prefix;
+};
+
+/**
+ * Used to split ids into one or more segments, in order to store millions
+ * of files under a directory, without running into limits of various filesystems
+ * on the number of files in a directory.
+ * Consider using Amazon S3 or another service for uploading files in production.
+ * @param {string} id the id to split
+ * @param {integer} [lengths=3] the lengths of each segment (the last one can be smaller)
+ * @param {string} [delimiter='/'] the delimiter to put between segments
+ * @return {string} the segments, delimited by the delimiter
+ */
+Sp.splitId = function(lengths, delimiter) {
+	lengths = lengths || 3;
+	delimiter = delimiter || '/';
+	var segments = [], pos = 0, len = this.length;
+	while (pos < len) {
+		segments.push(this.slice(pos, pos += lengths));
+	}
+	return segments.join(delimiter);
+};
+
+Sp.quote = function _String_prototype_quote() {
+	var c, i, l = this.length, o = '"';
+	for (i = 0; i < l; i += 1) {
+		c = this.charAt(i);
+		if (c >= ' ') {
+			if (c === '\\' || c === '"') {
+				o += '\\';
+			}
+			o += c;
+		} else {
+			switch (c) {
+			case '\b':
+				o += '\\b';
+				break;
+			case '\f':
+				o += '\\f';
+				break;
+			case '\n':
+				o += '\\n';
+				break;
+			case '\r':
+				o += '\\r';
+				break;
+			case '\t':
+				o += '\\t';
+				break;
+			default:
+				c = c.charCodeAt();
+				o += '\\u00' + Math.floor(c / 16).toString(16) +
+					(c % 16).toString(16);
+			}
+		}
+	}
+	return o + '"';
 };
 
 /**
@@ -3207,7 +3288,7 @@ Sp.startsWith = function _String_prototype_startsWith(prefix) {
 if (!Function.prototype.bind)
 Function.prototype.bind = function _Function_prototype_bind(obj, options) {
 	var method = this;
-	if (!obj) obj = window;
+	if (!obj) obj = root;
 	if (!options) {
 		return function _Q_bind_result() {
 			return method.apply(obj, arguments);
@@ -3247,7 +3328,7 @@ if (!Array.prototype.indexOf) {
 			n = Number(arguments[1]);
 			if (n !== n) { // shortcut for verifying if it's NaN
 				n = 0;
-			} else if (n !== 0 && n !== window.Infinity && n !== -window.Infinity) {
+			} else if (n !== 0 && n !== root.Infinity && n !== -root.Infinity) {
 				n = (n > 0 || -1) * Math.floor(Math.abs(n));
 			}
 		}
@@ -3272,5 +3353,5 @@ Q.globalNames = Object.keys(root); // to find stray globals
  * @static
  */
 Q.globalNamesAdded = function () {
-	return Q.diff(Object.keys(window), Q.globalNames);
+	return Q.diff(Object.keys(root), Q.globalNames);
 };

@@ -15,7 +15,7 @@
  *  @param {Number} [options.spaceAbove] How many pixels of space to leave above at the end of the scrolling animation
  *  @param {Boolean} [options.expanded] Whether it should start out expanded
  *  @param {Boolean} [options.autoCollapseSiblings] Whether, when expanding an expandable, its siblings should be automatically collapsed.
- *  @param {Boolean} [options.scrollContainer] Closest parent element that could scroll
+ *  @param {Boolean} [options.scrollContainer] Whether to scroll a parent container when necessary
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/expandable', function (options) {
@@ -89,7 +89,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	 * @method expand
 	 * @param {Object} [options]
 	 *  @param {Boolean} [options.autoCollapseSiblings] Whether, when expanding an expandable,
-	 *  @param {Boolean} [options.scrollContainer] Closest parent element that could scroll
+	 *  @param {Boolean} [options.scrollContainer] Whether to scroll a parent container
 	 *  @param {Boolean} [options.scrollToElement] Can be used to specify another element to scroll to when expanding. Defaults to the title element of the expandable.
  *  @param {Number} [options.spaceAbove] How many pixels of space to leave above at the end of the scrolling animation
 	 * @param {Function} [callback] the function to call once the expanding has completed
@@ -114,27 +114,45 @@ Q.Tool.define('Q/expandable', function (options) {
 			});
 		}
 		var $expandable = $h2.next().slideDown(state.duration, 'linear');
-		var $scrollable = this.scrollable();
-		var offset = $scrollable
-			? $scrollable.offset()
-			: {left: 0, top: 0};
-		var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
-		var t1 = $element.offset().top - offset.top;
-		var defaultSpaceAbove = $element.height() / 2;
-		var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
-		if ($ts.length && $ts.css('position') === 'fixed') {
-			defaultSpaceAbove += $ts.outerHeight();
-		}
-		var spaceAbove = (state.spaceAbove == null)
-			? defaultSpaceAbove
-			: state.spaceAbove;
-		var isBody = $scrollable &&
-			$scrollable[0].tagName.toUpperCase() === 'BODY';
-		if (isBody) {
-			t1 -= Q.Pointer.scrollTop();
+		state.expanded = true;
+		if (!o.scrollContainer) {
+			return;
 		}
 		Q.Animation.play(function (x, y) {
-			if (!o.scrollContainer) return;
+			var $scrollable = (o.scrollContainer instanceof Element)
+				? $(o.scrollContainer) : tool.scrollable();
+			var offset = $scrollable
+				? $scrollable.offset()
+				: {left: 0, top: 0};
+			var $element = o.scrollToElement ? $(o.scrollToElement) : $h2;
+			var t1 = $element.offset().top - offset.top;
+			var spaceAbove;
+			var defaultSpaceAbove = $element.height() / 2;
+			var moreSpaceAbove = 0;
+			var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
+			if ($ts.length && $ts.css('position') === 'fixed') {
+				moreSpaceAbove = $ts.outerHeight();
+			} else {
+				$('body').children().each(function () {
+					var $this = $(this);
+					if ($this.css('position') === 'fixed') {
+						var top = $this.offset().top - Q.Pointer.scrollTop();
+						if (top < 100) {
+							moreSpaceAbove = top + $this.outerHeight();
+							return false;
+						}
+					}
+				});
+			}
+			defaultSpaceAbove += moreSpaceAbove;
+			var spaceAbove = (state.spaceAbove == null)
+				? defaultSpaceAbove
+				: state.spaceAbove;
+			var isBody = $scrollable &&
+				['BODY', 'HTML'].indexOf($scrollable[0].tagName.toUpperCase()) >= 0;
+			if (isBody) {
+				t1 -= Q.Pointer.scrollTop();
+			}
 			if ($scrollable) {
 				var t = $element.offset().top - offset.top;
 				if (isBody) {
@@ -148,7 +166,6 @@ Q.Tool.define('Q/expandable', function (options) {
 			Q.handle(state.onExpand, tool, []);
 			$h2.add($expandable).addClass('Q_expanded');
 		});
-		state.expanded = true;
 	},
 	
 	collapse: function () {
@@ -165,16 +182,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	},
 	
 	scrollable: function () {
-		var $scrollable = $('body');
-		$(this.element).parents().each(function () {
-			var $this = $(this);
-			var overflow = $this.css('overflow');
-			if (['hidden', 'visible'].indexOf(overflow) < 0) {
-				$scrollable = $this;
-				return false;
-			}
-		});
-		return $scrollable;
+		return $(this.element.scrollingParent(true, 'vertical'));
 	}
 });
 

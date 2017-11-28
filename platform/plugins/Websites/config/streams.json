@@ -1,0 +1,30 @@
+{
+	"Websites/advert/units": {
+		"type": "Streams/category",
+		"title": "Advertising Units",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	},
+	"Websites/advert/placements": {
+		"type": "Streams/category",
+		"title": "Advertising Placements",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	},
+	"Websites/advert/creatives": {
+		"type": "Streams/category",
+		"title": "Advertising Creatives",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	},
+	"Websites/advert/campaigns": {
+		"type": "Streams/category",
+		"title": "Advertising Campaigns",
+		"readLevel": "0",
+		"writeLevel": "0",
+		"adminLevel": "0"
+	}
+}

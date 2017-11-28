@@ -18,7 +18,7 @@ function Assets_payment_post($params = array())
 	
 	// to be safe, we only start subscriptions from existing plans
 	$publisherId = Q::ifset($req, 'publisherId', Users::communityId());
-	$streamName = Q::ifset($req, 'publisherId', null);
+	$streamName = Q::ifset($req, 'streamName', null);
 	if ($publisherId and $streamName) {
 		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName, true);
 	}

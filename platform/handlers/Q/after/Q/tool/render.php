@@ -37,7 +37,7 @@ function Q_after_Q_tool_render($params, &$result)
 		if (isset($options) or $count > 1) {
 			$id = $tool_ids[$name];
 			$id_string = ($count > 1) ? "$id " : '';
-			$data_options .= " data-$normalized='$id_string$friendly_options'";
+			$data_options .= " data-$normalized='$friendly_options'";
 		}
 		$names[] = $name;
 	}

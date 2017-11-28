@@ -30,7 +30,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 * @static
 	 * @param $toUserId {User_User|string} The id of the user to which this would be displayed
 	 * @param $publisherIds {string|array} Array of various users whose avatars are being fetched
-	 * @param $indexField {string} Optional name of the field by which to index the resulting array
+	 * @param $indexField {string} Optional name of the field by which to index the resulting array. Can be "toUserId" or "publisherId"
 	 * @return {Streams_Avatar|array}
 	 */
 	static function fetch($toUserId, $publisherId, $indexField = null) {
@@ -49,7 +49,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 			$publisherId = array($publisherId);
 			$return_one = true;
 		}
-		$rows = Streams_Avatar::select('*')->where(array(
+		$rows = Streams_Avatar::select()->where(array(
 			'toUserId' => array($toUserId, ''),
 			'publisherId' => $publisherId
 		))->fetchDbRows(null, '', $indexField);
@@ -121,7 +121,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 		$count = count($criteria);
 		for ($i=0; $i<$count; ++$i) {
 			// NOTE: sharding should be done on toUserId only, not publisherId
-			$q = Streams_Avatar::select('*')
+			$q = Streams_Avatar::select()
 				->where(array(
 					'toUserId' => $toUserId
 				))->andWhere($criteria[$i])
@@ -224,6 +224,20 @@ class Streams_Avatar extends Base_Streams_Avatar
 		} else {
 			return $u ? $u2 : $f2;
 		}
+	}
+
+	/**
+	 * Get the url of the user icon from a Streams.Avatar
+	 * @method
+	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
+	 * @return {string} the url
+	 */
+	function iconUrl ($basename = null)
+	{
+		$icon = Q::interpolate($this->icon, array(
+			'userId' => Q_Utils::splitId($this->publisherId)
+		));
+		return Users::iconUrl($icon, $basename);
 	}
 
 	protected static $cache;

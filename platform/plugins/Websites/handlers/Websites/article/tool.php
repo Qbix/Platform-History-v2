@@ -24,7 +24,7 @@ function Websites_article_tool($options)
 	if (!$article) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'article', 
-			'criteria' => $streamName
+			'criteria' => "stream named $streamName"
 		));
 	}
 	$getintouch = array_merge(array(
@@ -49,8 +49,8 @@ function Websites_article_tool($options)
 	}
 	$html = Q::ifset($options, 'html', array());
 	$article->addPreloaded();
-	Q_Response::addStylesheet('{{Websites}}/css/Websites.css');
-	Q_Response::addScript("{{Websites}}/js/Websites.js");
+	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
+	Q_Response::addScript("{{Websites}}/js/Websites.js", 'Websites');
 	Q_Response::setToolOptions($options);
 	return Q::view("Websites/tool/article.php", 
 		compact('article', 'getintouch', 'canEdit', 'canView', 'html')
