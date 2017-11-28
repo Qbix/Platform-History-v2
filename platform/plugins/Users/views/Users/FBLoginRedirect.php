@@ -15,32 +15,18 @@
 <body>
 <?php echo Q_Response::scripts(true, "\n\t") ?>
 <script>
-
 	var params = getParams();
-	var storageVar = 'facebookToken';
 	if (!params.access_token) {
 		throw(new Error('Undefined token'));
 	}
-
-	setTimeout(function(){
-		window.location.replace('qcordova://nothing?someParameter=value')
-		//window.open('qcordova://nothing');
-		//alert(window.open);
-	}, 1);
-
-/*
-	localStorage.setItem(storageVar, null);
-	setTimeout(function(){
-		localStorage.setItem(storageVar, params.access_token);
-	}, 5000);
-*/
+	// replace works in android
+	window.location.replace('qcordova://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : ''))
 
 	function getParams() {
 		var res = {};
 		try {
 			var str = window.location.href.split('#')[1];
 			var pieces = str.split('&');
-			console.log(pieces)
 			for (var i = 0; i < pieces.length; i++) {
 				var val = pieces[i].split('=');
 				if (val.length !== 2) {
@@ -54,7 +40,6 @@
 		}
 		return res;
 	}
-
 </script>
 </body>
 </html>

@@ -171,27 +171,6 @@
 		frictionlessRequests: true
 	};
 
-	function FB_getLoginStatus(cb, force) {
-		var timeout = 2000;
-		if (timeout) {
-			var t = setTimeout(function () {
-				// just in case, if FB is not responding let's still fire the callback
-				// FB ignores callback if:
-				//	-- domain is not properly setup
-				//	-- application is running in sandbox mode and developer is not logged in
-				console.warn("Facebook is not responding to FB.getLoginStatus within " + timeout / 1000 + " sec.");
-				cb({});
-			}, timeout);
-			var FB_login = (Q.info.isCordova && facebookConnectPlugin) ? facebookConnectPlugin : FB;
-			FB_login.getLoginStatus(function (response) {
-				clearTimeout(t);
-				cb(response);
-			}, force);
-		} else {
-			FB.getLoginStatus(cb, force);
-		}
-	}
-
 	/**
 	 * You can wrap all uses of FB object with this
 	 * @method initFacebook.ready
@@ -210,10 +189,10 @@
 		}
 
 		function _proceed() {
-			if (FB.getAccessToken()) {
+			if (Users.Facebook.getAccessToken()) {
 				callback();
 			} else {
-				FB_getLoginStatus(function (response) {
+				Users.Facebook.getLoginStatus(function (response) {
 					callback();
 				});
 			}
@@ -255,7 +234,7 @@
 		// make sure facebook is initialized
 		Users.initFacebook(function () {
 			// check if user is connected to facebook
-			FB_getLoginStatus(function (response) {
+			Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
 					var fb_uid = parseInt(response.authResponse.userID);
 					var ignoreUid = parseInt(Q.cookie('Users_ignoreFacebookUid'));
@@ -325,16 +304,14 @@
 				}
 
 				function _doAuthenticate() {
-					if (!(Q.info.isCordova && facebookConnectPlugin)) {
-						if (!FB.getAuthResponse()) {
-							// in some rare cases, the user may have logged out of facebook
-							// while our prompt was visible, so there is no longer a valid
-							// facebook authResponse. In this case, even though they want
-							// to authenticate, we must cancel it.
-							alert("Connection to facebook was lost. Try connecting again.");
-							_doCancel();
-							return;
-						}
+					if (!Users.Facebook.getAuthResponse()) {
+						// in some rare cases, the user may have logged out of facebook
+						// while our prompt was visible, so there is no longer a valid
+						// facebook authResponse. In this case, even though they want
+						// to authenticate, we must cancel it.
+						alert("Connection to facebook was lost. Try connecting again.");
+						_doCancel();
+						return;
 					}
 					var ar = response.authResponse;
 					ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
@@ -497,7 +474,7 @@
 		var appId = (options && options.appId) || Q.info.app;
 		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 		Users.initFacebook(function () {
-			if (!FB.getAuthResponse()) {
+			if (!Users.Facebook.getAuthResponse()) {
 				callback(null);
 			}
 			FB.api('/me/permissions', function (response) {
@@ -762,7 +739,7 @@
 					Q.nonce = Q.cookie('Q_nonce'); // null
 				}
 				Users.initFacebook(function logoutCallback() {
-					FB_getLoginStatus(function (response) {
+					Users.Facebook.getLoginStatus(function (response) {
 						if (response.authResponse) {
 							FB.logout(function () {
 								delete Users.connected.facebook;
@@ -1299,7 +1276,7 @@
 				}
 				Users.initFacebook(function () {
 					var k;
-					if ((authResponse = FB.getAuthResponse())) {
+					if ((authResponse = Users.Facebook.getAuthResponse())) {
 						authResponse.appId = appId;
 						authResponse.fbAppId = fbAppId;
 						for (k in authResponse) {
@@ -1513,77 +1490,9 @@
 					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 						.click(function () {
 							Users.initFacebook(function () {
-								if (Q.info.isCordova && window.facebookConnectPlugin) {
-
-									Users.Facebook = {
-										login: function () { },
-										api: function () { },
-										appInvites: function () { }
-									};
-
-
-
-
-									facebookConnectPlugin.login(["public_profile", "email"], function (response) {
-										doLogin(response);
-									}, function (err) {
-										console.warn(err);
-									})
-								} else {
-									FB.login(function (response) {
-										doLogin(response);
-									}, scope ? {scope: scope.join(',')} : undefined);
-								}
-
-								function doLogin(response) {
-									if (!response.authResponse) {
-										// The user is still staring at our native login dialog
-										return;
-									}
-									step1_form.data('used', 'facebook');
-									step1_form.data('platforms', usingPlatforms);
-									var p = Q.pipe(['me', 'picture'], function (params) {
-										var me = params.me[0];
-										var picture = params.picture[0].data;
-										if (!me.email) {
-											step1_form.data('used', null);
-											alert(Q.text.Users.login.facebookNoEmail);
-											$('#Users_login_identifier')
-												.plugin('Q/clickfocus');
-											return true;
-										}
-										priv.registerInfo = {
-											firstName: me.first_name,
-											lastName: me.last_name,
-											gender: me.gender,
-											birthday: me.birthday,
-											timezone: me.timezone,
-											locale: me.locale,
-											verified: me.verified,
-											pic: picture.url,
-											picWidth: picture.width,
-											picHeight: picture.height
-										};
-										$('#Users_login_identifier')
-											.val(me.email)
-											.closest('form')
-											.submit();
-										// The login onSuccess callback is about to be called
-									});
-									var paramsPicture = {
-										"redirect": false,
-										"height": "200",
-										"type": "normal",
-										"width": "200"
-									};
-									var paramsFields = {};
-									if (response.authResponse.accessToken) {
-										paramsPicture.access_token = response.authResponse.accessToken;
-										paramsFields.access_token = response.authResponse.accessToken;
-									}
-									FB.api("/me/picture", paramsPicture, p.fill('picture'));
-									FB.api('/me?fields=first_name,last_name,gender,birthday,timezone,locale,verified,email', paramsFields, p.fill('me'));
-								}
+								Users.Facebook.usingPlatforms = usingPlatforms;
+								Users.Facebook.scope = scope;
+								Users.Facebook.login();
 							}, {
 								appId: appId
 							});
@@ -2433,104 +2342,217 @@
 
 	Users.Facebook = {
 
-		options: {
-			login: {
-				native: true
-			}
-		},
+		usingPlatforms: null,
 
-		construct: function() {
-			//var testUrl = 'https://www.facebook.com/v2.11/dialog/oauth?client_id=688805724662356&redirect_uri=http://hillel.local/login/facebook&state=kk23459dsf10432hs92&response_type=token'
-			var testUrl = 'http://hillel.local/login/facebook?#state=kk23459dsf10432hs92&access_token=EAAJydxSJqlQBALfxgJsVa9ahqRF4CmLFhWUGR98Sof5lDzSVYC54vWU8vbzGnlWT6vcZCuRUJVKwXNKFMSzhxeSKaxP7eaz1FloX9MBo8wIZCBb0ydWirUMWrKHVNB5ERwcyUYSgusWZAUirYseVaGXVzu4yEOFDzDycN9MgAZDZD&expires_in=5184000';
-			cordova.plugins.browsertab.openUrl(testUrl);
-			//win.addEventListener('exit', function(event) {  });
-			/*setTimeout(function(){
-				win.close();
-			}, 3000);*/
+		me: {},
 
-			console.log(Q.parseQueryString(window.location.href));
+		type: 'web',
 
-/*			function getStateSecondWindow() {
-				win.executeScript(
-					{code: "localStorage.getItem('loginOauth')"},
-					function (data) {
-						console.log(data)
-						if (data[0] === 'OK') {
-							//do what I need to do
-							win.close();
+		accessToken: null,
+
+		appId: null,
+
+		scope: null,
+
+		construct: function () {
+			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
+			if (Q.info.isCordova) {
+				Q.onHandleOpenUrl.set(function (url) {
+					var params = _getParams(url);
+					Users.Facebook.accessToken = params.access_token;
+					Users.Facebook.doLogin({
+						status: 'connected',
+						authResponse: {
+							accessToken: params.access_token
 						}
+					});
+
+					function _getParams(url) {
+						var res = {};
+						try {
+							var str = url.split('?')[1];
+							var pieces = str.split('&');
+							for (var i = 0; i < pieces.length; i++) {
+								var val = pieces[i].split('=');
+								if (val.length !== 2) {
+									continue;
+								}
+								res[val[0]] = val[1];
+							}
+						} catch (err) {
+							console.warn('Error parsing params');
+							throw(err);
+						}
+						return res;
 					}
-				);
+				}, 'Users');
+				Users.Facebook.type = 'oauth'
+
+				// todo: use fg:// for ios
+				window.appAvailability.check('com.facebook.katana', function () {
+					Users.Facebook.type = 'native';
+				}, function () {
+					window.appAvailability.check('com.facebook.lite', function () {
+						Users.Facebook.type = 'native';
+					});
+				});
+			}
+		},
+
+		login: function () {
+			switch (Users.Facebook.type) {
+				case 'web':
+					var scope = Users.Facebook.scope;
+					FB.login(function (response) {
+						Users.Facebook.doLogin(response);
+					}, scope ? {scope: scope.join(',')} : undefined);
+					break;
+				case 'native':
+					facebookConnectPlugin.login(["public_profile", "email"], function (response) {
+						Users.Facebook.doLogin(response);
+					}, function (err) {
+						console.warn(err);
+					});
+					break;
+				case 'oauth':
+					var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
+						'?client_id=' + Users.Facebook.appId +
+						'&redirect_uri=' + Q.baseUrl() + '/login/facebook&' +
+						'state=' + _stringGen(10) +
+						'&response_type=token&scope=email,public_profile';
+					cordova.plugins.browsertab.openUrl(url);
+					break;
 			}
 
-			setInterval(getStateSecondWindow, 1000);*/
+			function _stringGen(len) {
+				var text = "";
+				var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+				for (var i = 0; i < len; i++)
+					text += charset.charAt(Math.floor(Math.random() * charset.length));
+				return text;
+			}
+		},
 
+		doLogin: function (response) {
+			if (!response.authResponse) {
+				return;
+			}
+			console.log(response);
+			var step1_form = $('#Users_login_step1_form');
+			step1_form.data('used', 'facebook');
+			step1_form.data('platforms', Users.Facebook.usingPlatforms);
+			var p = Q.pipe(['me', 'picture'], function (params) {
+				var me = params.me[0];
+				Users.Facebook.me = me;
+				var picture = params.picture[0].data;
+				if (!me.email) {
+					step1_form.data('used', null);
+					alert(Q.text.Users.login.facebookNoEmail);
+					$('#Users_login_identifier')
+						.plugin('Q/clickfocus');
+					return true;
+				}
+				priv.registerInfo = {
+					firstName: me.first_name,
+					lastName: me.last_name,
+					gender: me.gender,
+					birthday: me.birthday,
+					timezone: me.timezone,
+					locale: me.locale,
+					verified: me.verified,
+					pic: picture.url,
+					picWidth: picture.width,
+					picHeight: picture.height
+				};
+				$('#Users_login_identifier')
+					.val(me.email)
+					.closest('form')
+					.submit();
+				// The login onSuccess callback is about to be called
+			});
+			var paramsPicture = {
+				"redirect": false,
+				"height": "200",
+				"type": "normal",
+				"width": "200"
+			};
+			var paramsFields = {};
+			if (response.authResponse.accessToken) {
+				paramsPicture.access_token = response.authResponse.accessToken;
+				paramsFields.access_token = response.authResponse.accessToken;
+			}
+			FB.api("/me/picture", paramsPicture, p.fill('picture'));
+			FB.api('/me?fields=first_name,last_name,gender,birthday,timezone,locale,verified,email', paramsFields, p.fill('me'));
+		},
 
-			/*cordova.p lugins.browsertab.isAvailable(function(result) {
-					if (!result) {
-						//cordova.InAppBrowser.open(testUrl, '_system');
+		getAuthResponse: function () {
+			switch (Users.Facebook.type) {
+				case 'web':
+					return FB.getAuthResponse();
+					break;
+				case 'native':
+				case 'oauth':
+					return {
+						status: 'connected',
+						authResponse: {
+							accessToken: Q.isEmpty(Users.Facebook.accessToken) ? '' : Users.Facebook.accessToken,
+							expiresIn: 4400,
+							signedRequest: '',
+							userID: Q.isEmpty(Users.Facebook.me.id) ? '' : Users.Facebook.me.id
+						}
+					};
+					break;
+			}
+		},
+
+		getLoginStatus: function (cb, force) {
+			switch (Users.Facebook.type) {
+				case 'web':
+					var timeout = 2000;
+					if (timeout) {
+						var t = setTimeout(function () {
+							// just in case, if FB is not responding let's still fire the callback
+							// FB ignores callback if:
+							//	-- domain is not properly setup
+							//	-- application is running in sandbox mode and developer is not logged in
+							console.warn("Facebook is not responding to FB.getLoginStatus within " + timeout / 1000 + " sec.");
+							cb({});
+						}, timeout);
+						FB.getLoginStatus(function (response) {
+							clearTimeout(t);
+							cb(response);
+						}, force);
 					} else {
-						console.log('open')
-						cordova.plugins.browsertab.openUrl(
-							testUrl,
-							function(successResp) {
-								console.log(successResp)
-							},
-							function(failureResp) {
-								console.log(failureResp)
-								error.textContent = "failed to launch browser tab";
-								error.style.display = '';
-							});
+						FB.getLoginStatus(cb, force);
 					}
-				},
-				function(isAvailableError) {
-					error.textContent = "failed to query availability of in-app browser tab";
-					error.style.display = '';
-				});*/
-
-
-			/*this.options.login.native = Q.info.isCordova;
-			console.log(this.options.login.native)*/
+					break;
+				case 'native':
+					facebookConnectPlugin.getLoginStatus(function (response) {
+						cb(response);
+					});
+					break;
+				case 'oauth':
+					cb(Users.Facebook.getAuthResponse());
+					break;
+			}
 		},
 
-		init: function() {
-
-		},
-
-		login: function() {
-
-		},
-
-		getAuthResponse: function() {
-
-		},
-
-		api: function() {
-
-		},
-
-		getLoginStatus: function() {
-
-		},
-
-		getAccessToken: function() {
-
+		getAccessToken: function () {
+			switch (Users.Facebook.type) {
+				case 'web':
+					return FB.getAccessToken();
+				case 'native':
+					return facebookConnectPlugin.getAccessToken();
+				case 'oauth':
+					return Q.isEmpty(Users.Facebook.accessToken) ? '' : Users.Facebook.accessToken;
+			}
 		}
 
 	};
 
-
-	var handleOpenUrl = function(param) {
-		console.log(param);
-	};
-
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
-	});
-
-
-
-	Users.Facebook.options.login.native = 1;
+	}, 'Users');
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog) {
 		var $dialog = $(dialog);
