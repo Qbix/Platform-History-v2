@@ -9,6 +9,10 @@
 	display: none;
 }
 
+.Places_location_address {
+	display: inline-block;
+}
+
 .Places_user_location_container {
 	text-align: center;
 	padding: 10px;
