@@ -15,6 +15,7 @@
 .Places_location_tool .Places_address_tool input {
 	padding: 2px;
 }
+
 .Places_location_tool .Places_location_preview_tool .Streams_preview_icon,
 .Places_location_tool div[data-location=other].Q_selected > label,
 .Places_location_tool div[data-location=other] > .Places_address_tool {
