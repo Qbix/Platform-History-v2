@@ -61,17 +61,19 @@ function Q_before_Q_responseExtras()
 	if ($nonce) {
 		Q_Response::setScriptData('Q.nonce', $nonce);
 	}
+
+	Q_Response::setScriptData('Q.allSlotNames', Q_Response::allSlotNames());
 	
 	// Attach stylesheets and scripts
 	foreach (Q_Config::get('Q', 'javascript', 'responseExtras', array()) as $src => $b) {
 		if (!$b) continue;
-		Q_Response::addScript($src);
+		Q_Response::addScript($src, 'Q');
 	}
 	foreach (Q_Config::get('Q', 'stylesheets', 'responseExtras', array()) as $src => $media) {
 		if (!$media) continue;
 		if ($media === true) {
 			$media = 'screen,print';
 		}
-		Q_Response::addStylesheet($src, null, $media);
+		Q_Response::addStylesheet($src, 'Q', $media);
 	}
 }

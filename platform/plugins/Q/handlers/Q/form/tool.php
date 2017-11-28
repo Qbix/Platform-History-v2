@@ -158,7 +158,7 @@ function Q_form_tool($options)
 	}
 	$fields = array('onSubmit', 'onResponse', 'onSuccess', 'slotsToRequest', 'loader', 'contentElements');
 	Q_Response::setToolOptions(Q::take($options, $fields));
-	Q_Response::addScript('{{Q}}/js/tools/form.js');
-	Q_Response::addStylesheet('{{Q}}/css/form.css');
+	Q_Response::addScript('{{Q}}/js/tools/form.js', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/form.css', 'Q');
 	return $result;
 }

@@ -67,6 +67,6 @@ Q.Tool.define("Assets/payment", function (options) {
 
 });
 
-Q.addStylesheet('{{Assets}}/css/Assets.css');
+Q.addStylesheet('{{Assets}}/css/Assets.css', { slotName: 'Assets' });
 
 })(window, Q, jQuery);

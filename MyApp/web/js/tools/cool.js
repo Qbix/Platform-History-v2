@@ -26,7 +26,7 @@ Q.Tool.define("MyApp/cool", function (options) {
 		$(tool.element).text(this.fields.title);
 	});
 
-	Q.addStylesheet("css/MyApp.css"); // add any css you need
+	Q.addStylesheet("css/MyApp.css", { slotName: 'MyApp' }); // add any css you need
 	
 	// set up some event handlers
 	this.getMyStream(function (err) {

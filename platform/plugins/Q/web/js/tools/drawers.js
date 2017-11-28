@@ -41,7 +41,7 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 	state.containerOriginal = state.container;
 	state.swapCount = 0;
 	
-	Q.addStylesheet('{{Q}}/css/drawers.css');
+	Q.addStylesheet('{{Q}}/css/drawers.css', { slotName: 'Q' });
 	
 	if (state.fullscreen || !state.container) {
 		state.container = $(tool.element).parents().eq(-3)[0];

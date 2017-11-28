@@ -51,60 +51,60 @@ Q.Tool.define("Q/columns", function(options) {
 
 	//state.triggers = [];
 	
-	Q.addStylesheet('{{Q}}/css/columns.css');
+	Q.addStylesheet('{{Q}}/css/columns.css', function () {
+		prepareColumns(tool);
 
-	prepareColumns(tool);
-	
-	if (state.title === undefined) {
-		state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
-	}
+		if (state.title === undefined) {
+			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
+		}
 
-	var selector = '.Q_close';
-	if (Q.info.isMobile && state.back.triggerFromTitle) {
-		selector = '.Q_columns_title';
-	};
-	$(tool.element).on(Q.Pointer.fastclick, selector, function(){
-		var index = $(this).closest('.Q_columns_column').data(dataKey_index);
-		if (state.locked) return;
-		if (index) {
-			tool.close(index);
+		var selector = '.Q_close';
+		if (Q.info.isMobile && state.back.triggerFromTitle) {
+			selector = '.Q_columns_title';
 		}
-	}); // no need for key, it will be removed when tool element is removed
-	
-	Q.onScroll.set(Q.debounce(function () {
-		if (state.$currentColumn) {
-			state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
-		}
-	}, 100), tool);
-	
-	if (Q.info.isAndroidStock) {
-		var w = Q.Pointer.windowWidth();
-		$(tool.element).parents().andSelf().each(function () {
-			$(this).data('Q/columns maxWidth', this.style.maxWidth)
-				.css('max-width', w);
-		});
-	}
-	
-	// Call setControls whenever a controls slot or a parent element is activated
-	Q.onActivate.set(function (element) {
-		var isContained = !!$(tool.element).closest(element).length;
-		for (var i=0, l=state.columns.length; i<l; ++i) {
-			var column = tool.column(i);
-			if (!column) continue;
-			var $controlsSlot = $('.Q_controls_slot', column);
-			if (($controlsSlot[0] && isContained)
-			|| $controlsSlot[0] === element) {
-				var html = $controlsSlot.html();
-				column.setClass('Q_columns_hasControls', html)
-				presentColumn(tool);
+		$(tool.element).on(Q.Pointer.fastclick, selector, function(){
+			var index = $(this).closest('.Q_columns_column').data(dataKey_index);
+			if (state.locked) return;
+			if (index) {
+				tool.close(index);
 			}
+		}); // no need for key, it will be removed when tool element is removed
+
+		Q.onScroll.set(Q.debounce(function () {
+			if (state.$currentColumn) {
+				state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
+			}
+		}, 100), tool);
+
+		if (Q.info.isAndroidStock) {
+			var w = Q.Pointer.windowWidth();
+			$(tool.element).parents().andSelf().each(function () {
+				$(this).data('Q/columns maxWidth', this.style.maxWidth)
+					.css('max-width', w);
+			});
 		}
-	}, this);
-	
-	tool.refresh();
-	Q.onLayout(tool).set(function () {
+
+		// Call setControls whenever a controls slot or a parent element is activated
+		Q.onActivate.set(function (element) {
+			var isContained = !!$(tool.element).closest(element).length;
+			for (var i=0, l=state.columns.length; i<l; ++i) {
+				var column = tool.column(i);
+				if (!column) continue;
+				var $controlsSlot = $('.Q_controls_slot', column);
+				if (($controlsSlot[0] && isContained)
+					|| $controlsSlot[0] === element) {
+					var html = $controlsSlot.html();
+					column.setClass('Q_columns_hasControls', html)
+					presentColumn(tool);
+				}
+			}
+		}, tool);
+
 		tool.refresh();
-	}, tool);
+		Q.onLayout(tool).set(function () {
+			tool.refresh();
+		}, tool);
+	}, { slotName: 'Q' });
 },
 
 {

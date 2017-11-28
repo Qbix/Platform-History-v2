@@ -32,8 +32,8 @@ function Websites_seo_tool($options)
 	}
 	unset($options['skipIfNotAuthorized']);
 	
-	Q_Response::addStylesheet('{{Websites}}/css/Websites.css');
-	Q_Response::addScript("{{Websites}}/js/Websites.js");
+	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
+	Q_Response::addScript("{{Websites}}/js/Websites.js", 'Websites');
 	Q_Response::setToolOptions($options);
 	
 	$user = Users::loggedInUser(false, false);

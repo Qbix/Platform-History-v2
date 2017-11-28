@@ -29,8 +29,8 @@ function Users_status_tool($options)
 		'onMenuSelect' => null
 	);
 	$options = array_merge($defaults, $options);
-	Q_Response::addStylesheet('{{Q}}/css/Q.css');
-	Q_Response::addStylesheet('{{Users}}/css/Users.css');
+	Q_Response::addStylesheet('{{Q}}/css/Q.css', 'Q');
+	Q_Response::addStylesheet('{{Users}}/css/Users.css', 'Users');
 	Q_Response::setToolOptions($options);
 	return Q::view('Users/tool/status/status.php', $options);
 }
