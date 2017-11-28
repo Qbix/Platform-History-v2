@@ -161,6 +161,11 @@ Q.Tool.define("Places/location", function (options) {
 						Places.Coordinates.from({
 							placeId: place.id
 						}).geocode(function (err, results) {
+							var msg = Q.firstErrorMessage(err);
+							if (msg) {
+								throw new Q.Error(msg);
+							}
+
 							var result = results[0];
 							if (!result || !userId) {
 								return;
