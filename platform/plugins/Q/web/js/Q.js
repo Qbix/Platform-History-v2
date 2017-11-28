@@ -3903,7 +3903,7 @@ Q.Tool.beingActivated = undefined;
 
 /**
  * Call this function to define default options for a tool constructor,
- * even if has not been loaded yet.
+ * even if has not been loaded yet. Extends existing options with Q.extend().
  * @static
  * @method define.options
  * @param {String} toolName the name of the tool
@@ -12178,7 +12178,7 @@ Q.onReady.set(function _Q_masks() {
 
 if (_isCordova) {
 	Q.onReady.set(function _Q_handleOpenUrl() {
-		root.handleOpen = function (url) {
+		root.handleOpenURL = function (url) {
 			Q.handle(Q.onHandleOpenUrl, Q, url);
 		};
 	}, 'Q.handleOpenUrl');
