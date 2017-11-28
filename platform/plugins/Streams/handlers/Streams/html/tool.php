@@ -32,7 +32,7 @@ function Streams_html_tool($options)
 		"{{Q}}/js/froala/css/plugins/code_view.min.css"
 	);
 	foreach ($stylesheets as $stylesheet) {
-		Q_Response::addStylesheet($stylesheet);
+		Q_Response::addStylesheet($stylesheet, 'Streams');
 	}
 	if ($froalaKey = Q_Config::get('Streams', 'froala', 'key', null)) {
 		if (!empty($options['froala'])) {

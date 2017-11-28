@@ -368,6 +368,38 @@
 		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 		if (!Users.prompt.overlay) {
+			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'), {slotName: 'Users'});
+			var o = Q.extend({}, Users.prompt.options, options);
+			var title = Q.text.Users.prompt.title
+				.replace(/{\$platform}/g, platform)
+				.replace(/{\$Platform}/g, platform.toCapitalized());
+			var areUsing = Q.text.Users.prompt.areUsing
+				.replace(/{\$platform}/g, platform)
+				.replace(/{\$Platform}/g, platform.toCapitalized());
+			var noLongerUsing = Q.text.Users.prompt.noLongerUsing
+				.replace(/{\$platform}/g, platform)
+				.replace(/{\$Platform}/g, platform.toCapitalized());
+			var caption;
+			var tookAction = false;
+
+			var content_div = $('<div />');
+			var fb_uid;
+			if (fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
+				content_div.append(_usingInformation(fb_uid, noLongerUsing));
+				caption = Q.text.Users.prompt.doSwitch
+					.replace(/{\$platform}/, platform)
+					.replace(/{\$Platform}/, platform.toCapitalized());
+			} else {
+				caption = Q.text.Users.prompt.doAuth
+					.replace(/{\$platform}/, platform)
+					.replace(/{\$Platform}/, platform.toCapitalized());
+			}
+		}
+
+		var appId = (options && options.appId) || Q.info.app;
+		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+
+		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
 			var title = Q.text.Users.prompt.title
