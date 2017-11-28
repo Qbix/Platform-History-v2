@@ -26,8 +26,13 @@ Q.Tool.define("Places/areas", function (options) {
 
 	Q.addStylesheet('Q/plugins/Places/css/areas.css');
 
-	// get location stream and run refresh method
-	tool.refresh();
+	Q.Text.get('Places/content', function (err, text) {
+		state.text = text;
+
+		// get location stream and run refresh method
+		tool.refresh();
+	});
+
 },
 
 { // default options here
@@ -52,7 +57,7 @@ Q.Tool.define("Places/areas", function (options) {
 		// if Q/filter didn't created - create one
 		if (!qFilterTool) {
 			$te.tool('Q/filter', {
-				placeholder: "Any area inside this location?"
+				placeholder: state.text.areas.filterPlaceholder
 			}, 'Q_filter')
 			.appendTo(tool.element)
 			.activate(function(){
@@ -99,7 +104,7 @@ Q.Tool.define("Places/areas", function (options) {
 				},
 				creatable: {
 					"Places/area": {
-						'title': "New area",
+						'title': state.text.areas.newArea,
 						'preprocess': function(_proceed){
 							var previewTool = this;
 							var title = qFilterTool.$input.val();
@@ -115,12 +120,13 @@ Q.Tool.define("Places/areas", function (options) {
 	},
 	prompt: function(title, relatedTool, _proceed){
 		var tool = this;
+		var state = this.state;
 
-		var $prompt = Q.prompt("Enter a name for the area:", function (title, dialog) {
+		var $prompt = Q.prompt(state.text.areas.promptTitle, function (title, dialog) {
 			// title required
 			if (!title) {
-				Q.alert("Please set area", {
-					title: "Error",
+				Q.alert(state.text.areas.absent, {
+					title: state.text.areas.error,
 					onClose: function(){
 						tool.prompt(title, relatedTool, _proceed);
 					}
@@ -135,8 +141,8 @@ Q.Tool.define("Places/areas", function (options) {
 
 			// if title already exist
 			if ($.inArray(title, areasExist) >= 0) {
-				Q.alert("Area already exist", {
-					title: "Error",
+				Q.alert(state.text.areas.exist, {
+					title: state.text.areas.error,
 					onClose: function(){
 						tool.prompt(title, relatedTool, _proceed);
 					}
@@ -160,8 +166,8 @@ Q.Tool.define("Places/areas", function (options) {
 			}, 500);
 		},
 		{
-			title: "Add new area",
-			ok: "Add"
+			title: state.text.areas.addNewArea,
+			ok: state.text.areas.add
 		});
 
 		// set default value
