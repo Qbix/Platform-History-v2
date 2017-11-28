@@ -47,7 +47,7 @@ Q.Tool.define("Places/areas", function (options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 		var qFilterTool = tool.$(".Q_tool.Q_filter_tool")[0];
-		qFilterTool = qFilterTool ? Q.Tool.from(qFilterTool) : null;
+		qFilterTool = qFilterTool ? Q.Tool.from(qFilterTool, "Q/filter") : null;
 
 		// if Q/filter didn't created - create one
 		if (!qFilterTool) {
@@ -75,7 +75,18 @@ Q.Tool.define("Places/areas", function (options) {
 			});
 		}
 
+		var relatedTool = Q.Tool.from(tool.$(".Q_filter_results"), "Streams/related");
 		tool.getStream(function(stream){
+			// if related tool already exist - set new stream and refresh
+			if (relatedTool) {
+				relatedTool.state.publisherId = stream.fields.publisherId;
+				relatedTool.state.streamName = stream.fields.name;
+				relatedTool.refresh();
+
+				return;
+			}
+
+			// apply Streams/related tool exactly to Q/filter results element
 			tool.$(".Q_filter_results").tool("Streams/related", {
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
@@ -100,7 +111,7 @@ Q.Tool.define("Places/areas", function (options) {
 							}
 
 							// get array of areas exist
-							var areasExist = state.relatedTool.$(".Streams_preview_title").map(function(){
+							var areasExist = relatedTool.$(".Streams_preview_title").map(function(){
 								return $.trim($(this).text());
 							}).get();
 
@@ -114,7 +125,7 @@ Q.Tool.define("Places/areas", function (options) {
 
 							// wait when new preview tool created with this title and add class Q_filter_result
 							var timerId = setInterval(function(){
-								var container = state.relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
+								var container = relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
 
 								if(!container.length){
 									return;
@@ -127,9 +138,8 @@ Q.Tool.define("Places/areas", function (options) {
 						}
 					}
 				}
-			}).appendTo(qFilterTool.element).activate(function(){
-				state.relatedTool = this;
-				qFilterTool.stateChanged('results');
+			}).activate(function(){
+				relatedTool = this;
 			});
 		});
 	},
