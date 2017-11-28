@@ -118,9 +118,26 @@ Q.Tool.define("Places/areas", function (options) {
 			});
 		});
 	},
+	/**
+	 * Get area selected
+	 * @method getValue
+	 * @return {string} selected value
+	 */
+	getValue: function() {
+		return this.$(".Q_filter_input").val();
+	},
+	/**
+	 * Show Q.prompt to add new area
+	 * @method prompt
+	 * @param {string} [title] default area name
+	 * @param {Q.Tool} relatedTool Streams/related tool with areas related to Places/location stream
+	 * @param {function} _proceed Callback from Streams/related tool to create new stream
+	 */
 	prompt: function(title, relatedTool, _proceed){
 		var tool = this;
 		var state = this.state;
+
+		title = title || "";
 
 		var $prompt = Q.prompt(state.text.areas.promptTitle, function (title, dialog) {
 			// user click cancel button
@@ -230,7 +247,8 @@ Q.Tool.define("Places/areas", function (options) {
 					location: {
 						latitude: location.latitude,
 						longitude: location.longitude,
-						venue: location.venue
+						venue: location.venue,
+						placeId: location.placeId
 					}
 				}
 			});
