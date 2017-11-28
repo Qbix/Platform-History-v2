@@ -22,6 +22,7 @@ var Places = Q.Places;
  * @param {Boolean} [options.showCurrent=true] Whether to allow user to select current location
  * @param {Boolean} [options.showLocations=true] Whether to allow user to select their saved locations
  * @param {Boolean} [options.showAddress=true] Whether to allow user to enter a custom address
+ * @param {Boolean} [options.showAreas=false] Whether to show Places/areas tool for selected location
  * @param {Q.Event} [options.onChoose] User selected some valid location. First parameter is Places.Coordinates object.
  */
 Q.Tool.define("Places/location", function (options) {
@@ -40,6 +41,29 @@ Q.Tool.define("Places/location", function (options) {
 		Q.handle(state.onChoose, tool, [state.location]);
 	});
 
+	// if showAreas - add Places/areas tool if not exist
+	if(state.showAreas){
+		state.onChoose.set(function(address){
+			var placesAreas = tool.$(".Q_tool.Places_areas_tool")[0];
+			placesAreas = placesAreas ? Q.Tool.from(placesAreas, "Places/areas") : null;
+
+			if (Q.isEmpty(address)) {
+				if (Q.typeOf(placesAreas) === "Q.Tool") {
+					Q.Tool.remove(placesAreas.element);
+				}
+			} else {
+				if (!placesAreas) {
+					$("<div>").tool("Places/areas", {
+						location: address
+					}).appendTo($te).activate();
+				} else {
+					placesAreas.state.location = address;
+					placesAreas.refresh();
+				}
+			}
+		}, tool);
+	}
+
 	tool.refresh();
 },
 
@@ -51,7 +75,8 @@ Q.Tool.define("Places/location", function (options) {
 	location: null, // currently selected location
 	showCurrent: true,
 	showLocations: true,
-	showAddress: true
+	showAddress: true,
+	showAreas: false
 },
 
 { // methods go here
@@ -149,7 +174,8 @@ Q.Tool.define("Places/location", function (options) {
 								types: result.types,
 								latitude: result.geometry.location.lat(),
 								longitude: result.geometry.location.lng(),
-								locationType: result.geometry.type
+								locationType: result.geometry.type,
+								venue: place.name
 							};
 							if (result.place_id) {
 								attributes.placeId = result.place_id;
@@ -200,6 +226,9 @@ Q.Tool.define("Places/location", function (options) {
 								ok: textConfirm.ok,
 								cancel: textConfirm.cancel
 							});
+
+							this.venue = place.name;
+
 							$te.find(".Q_selected").removeClass("Q_selected");
 							$(tool.addressTool.element).addClass('Q_selected');
 							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
