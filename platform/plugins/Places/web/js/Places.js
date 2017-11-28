@@ -528,7 +528,8 @@ Q.Tool.define({
 	"Places/globe": "Q/plugins/Places/js/tools/globe.js",
 	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
 	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
-	"Places/location": "Q/plugins/Places/js/tools/location.js"
+	"Places/location": "Q/plugins/Places/js/tools/location.js",
+	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
 });
 
 })(Q, jQuery, window);
