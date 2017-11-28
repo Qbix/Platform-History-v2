@@ -479,8 +479,8 @@ Cp.geocode = function (callback, options) {
 						c.longitude = loc.lng();
 					}
 					_geocodeCache.set(param, 0, c, [err, results]);
-					Q.handle(callback, c, [err, results]);
 				}
+				Q.handle(callback, c, [err, results]);
 			});
 		}
 	});
