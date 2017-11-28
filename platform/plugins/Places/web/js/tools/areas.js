@@ -123,6 +123,11 @@ Q.Tool.define("Places/areas", function (options) {
 		var state = this.state;
 
 		var $prompt = Q.prompt(state.text.areas.promptTitle, function (title, dialog) {
+			// user click cancel button
+			if (title === null) {
+				return false;
+			}
+
 			// title required
 			if (!title) {
 				Q.alert(state.text.areas.absent, {
