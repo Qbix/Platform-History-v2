@@ -104,37 +104,7 @@ Q.Tool.define("Places/areas", function (options) {
 							var previewTool = this;
 							var title = qFilterTool.$input.val();
 
-							// title required
-							if (!title) {
-								Q.alert("Please set area");
-								return false;
-							}
-
-							// get array of areas exist
-							var areasExist = relatedTool.$(".Streams_preview_title").map(function(){
-								return $.trim($(this).text());
-							}).get();
-
-							// if title already exist
-							if ($.inArray(title, areasExist) >= 0) {
-								Q.alert("Area already exist");
-								return false;
-							}
-
-							Q.handle(_proceed, this, [{title: title}]);
-
-							// wait when new preview tool created with this title and add class Q_filter_result
-							var timerId = setInterval(function(){
-								var container = relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
-
-								if(!container.length){
-									return;
-								}
-
-								clearInterval(timerId);
-
-								container.closest(".Streams_preview_container").addClass("Q_filter_result")
-							}, 500);
+							tool.prompt(title, relatedTool, _proceed);
 						}
 					}
 				}
@@ -142,6 +112,60 @@ Q.Tool.define("Places/areas", function (options) {
 				relatedTool = this;
 			});
 		});
+	},
+	prompt: function(title, relatedTool, _proceed){
+		var tool = this;
+
+		var $prompt = Q.prompt("Enter a name for the area:", function (title, dialog) {
+			// title required
+			if (!title) {
+				Q.alert("Please set area", {
+					title: "Error",
+					onClose: function(){
+						tool.prompt(title, relatedTool, _proceed);
+					}
+				});
+				return false;
+			}
+
+			// get array of areas exist
+			var areasExist = relatedTool.$(".Streams_preview_title").map(function(){
+				return $.trim($(this).text());
+			}).get();
+
+			// if title already exist
+			if ($.inArray(title, areasExist) >= 0) {
+				Q.alert("Area already exist", {
+					title: "Error",
+					onClose: function(){
+						tool.prompt(title, relatedTool, _proceed);
+					}
+				});
+				return false;
+			}
+
+			Q.handle(_proceed, this, [{title: title}]);
+
+			// wait when new preview tool created with this title and add class Q_filter_result
+			var timerId = setInterval(function(){
+				var container = relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
+
+				if(!container.length){
+					return;
+				}
+
+				clearInterval(timerId);
+
+				container.closest(".Streams_preview_container").addClass("Q_filter_result")
+			}, 500);
+		},
+		{
+			title: "Add new area",
+			ok: "Add"
+		});
+
+		// set default value
+		$("input[type=text]", $prompt).val(title);
 	},
 	/**
 	 * Get location stream and launch callback with this stream as argument
