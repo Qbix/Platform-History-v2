@@ -24,12 +24,17 @@
 	margin-right: 10px;
 	width: 300px;
 	box-shadow: black 2px 2px 4px;
+	visibility: hidden;
 	-webkit-box-shadow: black 0 0 4px;
 	-moz-box-shadow: black 0 0 4px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-o-user-select: none;
+}
+
+.Q_notMobile .Q_columns_sized .Q_columns_column {
+	visibility: visible;
 }
 
 .Q_columns_title {
