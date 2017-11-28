@@ -55,7 +55,7 @@ function Streams_access_tool($options)
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$access_array = Streams_Access::select('*')
+	$access_array = Streams_Access::select()
 		->where(array(
 			'publisherId' => $stream->publisherId,
 			'streamName' => $stream->name,
@@ -115,8 +115,8 @@ function Streams_access_tool($options)
 	$avatarArray = Db::exportArray($avatar_array);
 
 	if (empty($controls)) {
-		Q_Response::addScript("{{Streams}}/js/Streams.js");
-		Q_Response::addScript("{{Streams}}/js/tools/access.js");
+		Q_Response::addScript("{{Streams}}/js/Streams.js", 'Streams');
+		Q_Response::addScript("{{Streams}}/js/tools/access.js", 'Streams');
 		Q_Response::setToolOptions(compact(
 			'accessArray', 'avatarArray', 'labels', 
 			'icons', 'tab', 'publisherId', 

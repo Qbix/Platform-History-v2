@@ -10,7 +10,7 @@ var express = require('express');
  * @class Dispatcher
  * @namespace Q
  * @constructor
- * @param server {object} The server object
+ * @param {object} server The server object
  * @param {object} [options={}] Options
  */
 function Dispatcher (server, options) {
@@ -31,7 +31,7 @@ function Dispatcher (server, options) {
 		/**
 		 * Http request validation
 		 * @event validate
-		 * @param info {object}
+		 * @param {object} info
 		 *	The object containing request, response and url
 		 */
 		dispatcher.emit('validate', info);
@@ -57,25 +57,25 @@ function Dispatcher (server, options) {
 			/**
 			 * Http POST request
 			 * @event post
-			 * @param info {object}
+			 * @param {object} info
 			 *	The object containing request, response and url
 			 */
 			/**
 			 * Http PUT request
 			 * @event put
-			 * @param info {object}
+			 * @param {object} info
 			 *	The object containing request, response and url
 			 */
 			/**
 			 * Http DELETE request
 			 * @event delete
-			 * @param info {object}
+			 * @param {object} info
 			 *	The object containing request, response and url
 			 */
 			/**
 			 * Http OPTIONS request
 			 * @event options
-			 * @param info {object}
+			 * @param {object} info
 			 *	The object containing request, response and url
 			 */
 
@@ -96,7 +96,7 @@ function Dispatcher (server, options) {
 			/**
 			 * Http response
 			 * @event response
-			 * @param info {object}
+			 * @param {object} info
 			 *	The object containing request, response and url
 			 */
 			dispatcher.emit('response', info);

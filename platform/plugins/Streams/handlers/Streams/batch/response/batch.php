@@ -110,10 +110,13 @@ function Streams_batch_response_batch()
 			$slots = Q_Response::slots(true);
 			unset($slots['batch']);
 			$result[] = compact('slots');
+			foreach ($slots as $k => $v) {
+				Q_Response::clearSlot($k);
+			}
 		} catch (Exception $e) {
 			$result[] = array('errors' => Q_Exception::toArray(array($e)));
 		}
-		$prev_request = $_REQUEST;
+		$_REQUEST = $prev_request;
 		Q_Request::$slotNames_override = null;
 		Q_Request::$method_override = null;
 		Streams::$requestedPublisherId_override = null;

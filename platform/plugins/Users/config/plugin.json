@@ -29,7 +29,7 @@
 		"routes": {
 			"e/:emailAddress": { "module": "Users", "action": "activate" },
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
-			"{{Users}}/:action": {"module": "Users"},
+			"Q/plugins/Users/:action": {"module": "Users"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Users/authorize": {"module": "Users", "action": "authorize"}
 		},
@@ -172,10 +172,7 @@
 		},
 		"onInsert": {
 			"labels": {
-				"Users/friends": ["Friends", "labels/Users/friends"],
-				"Users/family": ["Family", "labels/Users/family"],
-				"Users/business": ["Business", "labels/Users/business"],
-				"Users/dating": ["Dating", "labels/Users/dating"]
+			  /* default labels should be defined individual by each application */
 			}
 		}
 	}

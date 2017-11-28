@@ -37,8 +37,8 @@
 			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"]
 		},
 		"routes": {
-			"{{Streams}}/:action": {"module": "Streams"},
-			"{{Streams}}/invite/:token": {"module": "Streams", "action": "invite"},
+			"Q/plugins/Streams/:action": {"module": "Streams"},
+			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
 			"i/:token": {"module": "Streams", "action": "invited"},
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"}
 		},
@@ -119,8 +119,9 @@
 						"description": "You were invited",
 						"subject": "You were invited to {{& stream.fields.title}}"
 					},
-					"Streams/chat/message": {
-						"subject": "Chat in {{stream.fields.title}}"
+					"Streams/announcement": {
+						"description": "Announcement for everyone in the stream",
+						"subject": "Announcement in {{& streams.fields.title}}"
 					},
 					"Streams/relatedTo": {
 						"description": "Some other stream has been related to this one",
@@ -204,7 +205,8 @@
 					"writeLevel": 0,
 					"adminLevel": 0
 				},
-				"extend": ["Streams_Task"]
+				"extend": ["Streams_Task"],
+				"participating": ["Streams/participating/tasks"]
 			},
 			"Streams/tasks": {
 				"description": "category for tasks",

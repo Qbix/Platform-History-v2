@@ -4,6 +4,9 @@
  * @module Streams-tools
  */
 
+var Users = Q.Users;
+var Streams = Q.Streams;
+
 /**
  * Renders a bunch of Stream/preview tools for streams related to the given stream.
  * Has options for adding new related streams, as well as sorting the relations, etc.
@@ -66,7 +69,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		droppable: '.Streams_related_stream'
 	},
 	tabs: function (previewTool, tabsTool) {
-		return Q.Streams.key(previewTool.state.publisherId, previewTool.state.streamName);
+		return Streams.key(previewTool.state.publisherId, previewTool.state.streamName);
 	},
 	toolName: function (streamType) {
 		return streamType+'/preview';
@@ -124,6 +127,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						.addClass('Streams_related_stream');
 					ps.onCreate.remove(tool);
 				}, tool);
+				Q.handle(state.onComposer, tool, [preview]);
 			});
 		}
 		
@@ -152,7 +156,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						if (!data.direction) return;
 						var p = new Q.Pipe(['timeout', 'updated'], function () {
 							if (state.realtime) return;
-							Q.Streams.related.cache.removeEach(
+							Streams.related.cache.removeEach(
 								[state.publisherId, state.streamName]
 							);
 							// TODO: replace with animation?
@@ -165,7 +169,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 							p.fill('timeout'),
 							this.state('Q/sortable').drop.duration
 						);
-						Q.Streams.updateRelation(
+						Streams.updateRelation(
 							r.publisherId,
 							r.streamName,
 							r.type,
@@ -196,6 +200,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 			$container.append(element);
 		});
+		// activate the elements one by one, asynchronously
+		var previews = [];
+		var map = {};
 		var i=0;
 		setTimeout(function _activatePreview() {
 			var element = elements[i++];
@@ -203,10 +210,13 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				if (tool.tabs) {
 					tool.tabs.refresh();
 				}
-				tool.state.onRefresh.handle.call(tool);
+				tool.state.onRefresh.handle.call(tool, previews, map, entering, exiting, updating);
 				return;
 			}
 			Q.activate(element, null, function () {
+				var index = previews.push(this) - 1;
+				var key = Streams.key(this.state.publisherId, this.state.streamName);
+				map[key] = index;
 				tool.integrateWithTabs([element], true);
 				setTimeout(_activatePreview, 0);
 			});
@@ -222,15 +232,17 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 * Call this method to refresh the contents of the tool, requesting only
 	 * what's needed and redrawing only what's needed.
 	 * @method refresh
-	 * @param {Function} An optional callback to call after refresh has completed.
+	 * @param {Function} onUpdate An optional callback to call after the update has completed.
 	 *  It receives (result, entering, exiting, updating) arguments.
+	 *  The child tools may still be refreshing after this. If you want to call a function
+	 *  after they have all refreshed, use the tool.state.onRefresh event.
 	 */
-	refresh: function (callback) {
+	refresh: function (onUpdate) {
 		var tool = this;
 		var state = tool.state;
 		var publisherId = state.publisherId;
 		var streamName = state.streamName;
-		Q.Streams.retainWith(tool).related(
+		Streams.retainWith(tool).related(
 			publisherId, 
 			streamName, 
 			state.relationType, 
@@ -256,13 +268,13 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			if (tsr) {
 				exiting = Q.diff(tsr.relatedStreams, result.relatedStreams, comparator);
 				entering = Q.diff(result.relatedStreams, tsr.relatedStreams, comparator);
-				updating = Q.diff(result.relatedStreams, entering, entering, comparator);
+				updating = Q.diff(result.relatedStreams, entering, exiting, comparator);
 			} else {
 				exiting = updating = [];
 				entering = result.relatedStreams;
 			}
 			tool.state.onUpdate.handle.apply(tool, [result, entering, exiting, updating]);
-			Q.handle(callback, tool, [result, entering, exiting, updating]);
+			Q.handle(onUpdate, tool, [result, entering, exiting, updating]);
 			
 			// Now that we have the stream, we can update the event listeners again
 			var dir = tool.state.isCategory ? 'To' : 'From';
@@ -285,8 +297,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			if (fields.type !== tool.state.relationType) {
 				return;
 			}
-			if (!Q.Users.loggedInUser
-			|| msg.byUserId != Q.Users.loggedInUser.id
+			if (!Users.loggedInUser
+			|| msg.byUserId != Users.loggedInUser.id
 			|| msg.byClientId != Q.clientId()
 			|| msg.ordinal !== tool.state.lastMessageOrdinal + 1) {
 				tool.refresh();

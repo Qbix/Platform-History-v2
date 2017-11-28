@@ -10,8 +10,8 @@ var util = require('util');
  * @class Row
  * @namespace Db
  * @constructor
- * @param fields {object} Optional object of fields
- * @param [retrieved=false] {boolean} Optional if object was retrieved from database or created
+ * @param {object} fields Optional object of fields
+ * @param {boolean} [retrieved=false] Optional if object was retrieved from database or created
  */
 function Row(fields, retrieved /* false */) {
 
@@ -557,8 +557,8 @@ function Row(fields, retrieved /* false */) {
 		 * **NOTE:** *if this method is defined but do not return result and do not call callback,
 		 * the remove() method fails silently without changing database!!!*
 		 * @method beforeRemove
-		 * @param search_criteria {object}
-		 * @param [callback=null] {function} This function is called when hook completes. Returns error -
+		 * @param {object} search_criteria
+		 * @param {function} [callback=null] This function is called when hook completes. Returns error -
 		 *	error object if any and search_criteria as parameters.
 		 */
 		if (typeof this.beforeRemove === "function") {

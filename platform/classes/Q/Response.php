@@ -251,7 +251,7 @@ class Q_Response
 		if (Q_Response::$layoutView) {
 			return Q_Response::$layoutView;
 		}
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$layout_view = Q_Config::get('Q', 'response', 'layout', 'html', "$app/layout/html.php");
 		$desktop_layout_view = Q_Config::get('Q', 'response', 'layout', 'desktop', false);
 		if ($desktop_layout_view) {
@@ -341,7 +341,7 @@ class Q_Response
 			return is_array(self::$styles) ? self::$styles : array();
 		}
 		if (!isset($slotName) or $slotName === true) {
-			$slotName = array_merge(array(''), Q_Request::slotNames(true));
+			$slotName = self::allSlotNames();
 		}
 		if (is_array($slotName)) {
 			$styles = array();
@@ -458,7 +458,7 @@ class Q_Response
 			return is_array(self::$metas) ? self::$metas : array();
 		}
 		if (!isset($slotName) or $slotName === true) {
-			$slotName = array_merge(array(''), Q_Request::slotNames(true));
+			$slotName = self::allSlotNames();
 		}
 		if (is_array($slotName)) {
 			$metas = array();
@@ -595,7 +595,7 @@ class Q_Response
 			return is_array(self::$scriptLines) ? self::$scriptLines : array();
 		}
 		if (!isset($slotName) or $slotName === true) {
-			$slotName = array_merge(array('', 'Q'), Q_Request::slotNames(true), array('@end'));
+			$slotName = self::allSlotNames();
 		}
 		if (is_array($slotName)) {
 			$scriptLines = array();
@@ -815,6 +815,25 @@ class Q_Response
 	}
 
 	/**
+	 * The names of all the slot names for scripts, stylesheets, etc. to load in order.
+	 * You can use any of these names in your addScript(), addStylesheet(),
+	 * setStyle(), setScriptData(), addTemplate(), etc.
+	 * They are "@start", "", "Q", then the plugin names, the app name, then the slot names and finally '@end'
+	 * @return {array}
+	 */
+	static function allSlotNames()
+	{
+		$modules = array_keys(Q_Bootstrap::plugins());
+		$modules[] = Q::app();
+		return array_merge(
+			array('@start'),
+			$modules,
+			Q_Request::slotNames(true),
+			array('', '@end')
+		);
+	}
+
+	/**
 	 * Adds a script reference to the response
 	 * @method addScript
 	 * @static
@@ -1027,7 +1046,7 @@ class Q_Response
 	{
 		if (isset($slotName)) {
 			if ($slotName === true) {
-				$slotName = array_merge(array(''), Q_Request::slotNames(true));
+				$slotName = self::allSlotNames();
 			}
 			if (is_array($slotName)) {
 				$scripts = array();
@@ -1207,7 +1226,7 @@ class Q_Response
 			return $sheets = self::$stylesheets;
 		}
 		if (!isset($slotName) or $slotName === true) {
-			$slotName = array_merge(array('', 'Q'), Q_Request::slotNames(true), array('@end'));
+			$slotName = self::allSlotNames();
 		}
 		if (is_array($slotName)) {
 			$sheets = array();
@@ -1516,7 +1535,7 @@ class Q_Response
 	 * @static
 	 * @param {string} $name The name of the cookie
 	 * @param {string} $value The value of the cookie
-	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means never expires
+	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means expire when browser session ends
 	 * @param {string} [$path=false] You can specify a path on the server here for the cookie
 	 * @return {string}
 	 */

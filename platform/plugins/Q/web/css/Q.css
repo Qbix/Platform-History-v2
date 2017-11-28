@@ -87,17 +87,19 @@ table { border-spacing:0; border-collapse:collapse; }
 .Q_success { background: #e2ffee !important; }
 .Q_selectable { border: 1px solid transparent; }
 .Q_notTouchscreen .Q_selectable:hover { background: #aeaeae; background: rgba(175,175,175,0.5); }
-.Q_selected { background: #98bede; border: 1px solid #5ca3df; }
+.Q_selected { background: #98bede; border: 1px solid #5ca3df; margin: -1px; }
 .Q_selectable.Q_selected:hover { background: #98bede; }
 .Q_throb,
 .Q_throb input,
 .Q_throb textarea { background-image: url(../img/throbbers/loading.gif); background-repeat: no-repeat; background-position: center center; }
-.Q_loading { 
+.Q_loading {
+	pointer-events: none;
 	opacity:0.9; filter:alpha(opacity=90);
 	animation: Q_loading 1s ease-in-out infinite alternate;
 	-webkit-animation: Q_loading 1s ease-in-out infinite alternate;
 }
 .Q_working {
+	pointer-events: none;
 	opacity: 0.5;
 	animation: Q_working 1s ease-in-out infinite alternate;
 	-webkit-animation: Q_working 1s ease-in-out infinite alternate;
@@ -312,14 +314,26 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_notTouchscreen button.basic16:active { background-color: #ccc; color: black; }
 .Q_button { padding: 0.4em 1em 0.4em 1em; box-sizing: border-box; }
 
+.Q_aspect_who { color: #394ad5; border-color: #394ad5; }
 .Q_aspect_what { color: #bf1118; border-color: #bf1118; }
 .Q_aspect_info,
 .Q_aspect_where { color: #222; }
 .Q_aspect_when { color: #449944; border-color: #449944; }
 
-.Q_button.Q_aspect_what,
-.Q_button.Streams_aspect_interests,
-.Q_button.Users_aspect_me {
+.Q_button.Q_aspect_who {
+	background: #394ad5; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#394ad5', endColorstr='#2839c4'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#394ad5), to(#2839c4)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #394ad5,  #2839c4); /* for firefox 3.6+ */
+	color: white;
+}
+.Q_button.Q_aspect_who:active,
+.Q_button.Q_aspect_who:focus {
+	background: #2839c4;
+	color: white;
+}
+
+.Q_button.Q_aspect_what {
 	background: #bf1118; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
@@ -424,6 +438,15 @@ div.Q_placeholder { pointer-events: none; }
 .Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
  { display: block; max-width: none !important; }
 .Q_inplace_tool { display: none; visibility: hidden; }
+.Q_textfill_resized {
+	line-height: 1.2;
+	display: inline-block !important;
+	left: 0 !important;
+	width: 100% !important;
+	vertical-align: middle !important;
+	overflow: visible !important;
+	white-space: normal !important;
+}
 
 #dialogs_slot { display: none; }
 

@@ -2,8 +2,8 @@
 
 function Places_before_Q_responseExtras()
 {
-	Q_Response::addScript('Q/plugins/Places/js/Places.js');
-	Q_Response::addStylesheet("Q/plugins/Places/css/Places.css");
+	Q_Response::addScript('Q/plugins/Places/js/Places.js', 'Places');
+	Q_Response::addStylesheet("Q/plugins/Places/css/Places.css", 'Places');
 	if ($key = Q_Config::get('Places', 'google', 'keys', 'web', null)) {
 		Q_Response::setScriptData("Q.plugins.Places.loadGoogleMaps.key", $key);
 	}

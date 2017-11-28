@@ -14,7 +14,7 @@ function Websites_article_response_content($params)
 		$publisherId = Users::communityId();
 	}
 	$streamName = "Websites/article/$articleId";
-	Q_Response::addStylesheet('{{Websites}}/css/Websites.css');
-	Q_Response::addScript("{{Websites}}/js/Websites.js");
+	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
+	Q_Response::addScript("{{Websites}}/js/Websites.js", 'Websites');
 	return Q::view("Websites/content/article.php", compact('publisherId', 'streamName'));
 }

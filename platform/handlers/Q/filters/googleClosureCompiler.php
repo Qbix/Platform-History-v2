@@ -6,7 +6,7 @@ function Q_filters_googleClosureCompiler($params)
 	$compilation_level = isset($params['compilation_level'])
 		? $params['compilation_level']
 		: 'SIMPLE_OPTIMIZATIONS';
-	$service_url = "http://closure-compiler.appspot.com/compile";
+	$service_url = "https://closure-compiler.appspot.com/compile";
 	$options = array(
 		'js_code' => $content,
 		'compilation_level' => $compilation_level,

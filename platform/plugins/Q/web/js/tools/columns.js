@@ -3,7 +3,7 @@
 /**
  * @module Q-tools
  */
-	
+
 var dataKey_index = 'index';
 var dataKey_scrollTop = 'scrollTop';
 var dataKey_hide = 'hide';
@@ -26,13 +26,17 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.back] For customizing the back button on mobile
  *  @param {String}  [options.back.src] The src of the image to use for the back button
  *  @param {Boolean} [options.back.triggerFromTitle] Whether the whole title would be a trigger for the back button. Defaults to true.
+ *  @param {Object}  [options.textfill={}] Options for Q/textfill on the title, or pass null here to skip this effect.
  *  @param {Boolean} [options.back.hide] Whether to hide the back button. Defaults to false, but you can pass true on android, for example.
  *  @param {Object}  [options.close] For customizing the back button on desktop and tablet
  *  @param {String}  [options.close.src] The src of the image to use for the close button
  *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
  *  @param {Object}  [options.scrollbarsAutoHide] If an object, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
+ *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
+ *  @param {Boolean} [options.pagePushUrl] if this is true and the url of the column 
+ *    is specified, then Q.Page.push() is called with this URL.
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
  *  @param {Q.Event} [options.onOpen] Event that happens after a column is opened. Receives (options, index, columnElement).
@@ -47,60 +51,60 @@ Q.Tool.define("Q/columns", function(options) {
 
 	//state.triggers = [];
 	
-	Q.addStylesheet('{{Q}}/css/columns.css');
+	Q.addStylesheet('{{Q}}/css/columns.css', function () {
+		prepareColumns(tool);
 
-	prepareColumns(tool);
-	
-	if (state.title === undefined) {
-		state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
-	}
+		if (state.title === undefined) {
+			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
+		}
 
-	var selector = '.Q_close';
-	if (Q.info.isMobile && state.back.triggerFromTitle) {
-		selector = '.Q_columns_title';
-	};
-	$(tool.element).on(Q.Pointer.fastclick, selector, function(){
-		var index = $(this).closest('.Q_columns_column').data(dataKey_index);
-		if (state.locked) return;
-		if (index) {
-			tool.close(index);
+		var selector = '.Q_close';
+		if (Q.info.isMobile && state.back.triggerFromTitle) {
+			selector = '.Q_columns_title';
 		}
-	}); // no need for key, it will be removed when tool element is removed
-	
-	Q.onScroll.set(Q.debounce(function () {
-		if (state.$currentColumn) {
-			state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
-		}
-	}, 100), tool);
-	
-	if (Q.info.isAndroidStock) {
-		var w = Q.Pointer.windowWidth();
-		$(tool.element).parents().andSelf().each(function () {
-			$(this).data('Q/columns maxWidth', this.style.maxWidth)
-				.css('max-width', w);
-		});
-	}
-	
-	// Call setControls whenever a controls slot or a parent element is activated
-	Q.onActivate.set(function (element) {
-		var isContained = !!$(tool.element).closest(element).length;
-		for (var i=0, l=state.columns.length; i<l; ++i) {
-			var column = tool.column(i);
-			if (!column) continue;
-			var $controlsSlot = $('.Q_controls_slot', column);
-			if (($controlsSlot[0] && isContained)
-			|| $controlsSlot[0] === element) {
-				var html = $controlsSlot.html();
-				column.setClass('Q_columns_hasControls', html)
-				presentColumn(tool);
+		$(tool.element).on(Q.Pointer.fastclick, selector, function(){
+			var index = $(this).closest('.Q_columns_column').data(dataKey_index);
+			if (state.locked) return;
+			if (index) {
+				tool.close(index);
 			}
+		}); // no need for key, it will be removed when tool element is removed
+
+		Q.onScroll.set(Q.debounce(function () {
+			if (state.$currentColumn) {
+				state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
+			}
+		}, 100), tool);
+
+		if (Q.info.isAndroidStock) {
+			var w = Q.Pointer.windowWidth();
+			$(tool.element).parents().andSelf().each(function () {
+				$(this).data('Q/columns maxWidth', this.style.maxWidth)
+					.css('max-width', w);
+			});
 		}
-	}, this);
-	
-	tool.refresh();
-	Q.onLayout(tool).set(function () {
+
+		// Call setControls whenever a controls slot or a parent element is activated
+		Q.onActivate.set(function (element) {
+			var isContained = !!$(tool.element).closest(element).length;
+			for (var i=0, l=state.columns.length; i<l; ++i) {
+				var column = tool.column(i);
+				if (!column) continue;
+				var $controlsSlot = $('.Q_controls_slot', column);
+				if (($controlsSlot[0] && isContained)
+					|| $controlsSlot[0] === element) {
+					var html = $controlsSlot.html();
+					column.setClass('Q_columns_hasControls', html)
+					presentColumn(tool);
+				}
+			}
+		}, tool);
+
 		tool.refresh();
-	}, tool);
+		Q.onLayout(tool).set(function () {
+			tool.refresh();
+		}, tool);
+	}, { slotName: 'Q' });
 },
 
 {
@@ -126,10 +130,13 @@ Q.Tool.define("Q/columns", function(options) {
 		src: "{{Q}}/img/x.png",
 		clickable: null
 	},
+	handlers: {},
 	title: undefined,
 	column: undefined,
 	controls: undefined,
+	pagePushUrl: true,
 	scrollbarsAutoHide: {},
+	textfill: {},
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(),
@@ -173,6 +180,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @method open
 	 * @param {Object} options Can be used to override various tool options,
 	 *  including events such as "onOpen" and "onClose". Additional options include:
+	 *  @param {String} [options.name] any name to assign to the column
 	 *  @param {String} [options.columnClass] to add a class to the column
 	 *  @param {Object} [options.data] to add data on the column element with jQuery
 	 *  @param {Object} [options.template] template to render for the "column" slot
@@ -187,6 +195,9 @@ Q.Tool.define("Q/columns", function(options) {
 	open: function (options, index, callback, internal) {
 		var tool = this;
 		var state = this.state;
+		if (index === undefined) {
+			index = tool.max();
+		}
 		if (typeof options === 'number') {
 			options = {};
 			callback = index;
@@ -212,16 +223,19 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		var div = this.column(index);
 		var titleSlot, columnSlot, controlsSlot;
-		var $div, $mask, $close, $title, $controls;
+		var $div, $mask, $close, $title, $controls, $tc;
+		var createdNewDiv = false;
 		if (!div) {
+			createdNewDiv = true;
 			div = document.createElement('div').addClass('Q_columns_column');
 			div.style.display = 'none';
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
-			var $ts = $('<h2 class="Q_title_slot"></h2>');
+			var $tc = $('<div class="Q_columns_title_container">');
+			var $ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
 			titleSlot = $ts[0];
-			$title = $('<div class="Q_columns_title"></div>').append($ts);
+			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
 			$controls = $('<h2 class="Q_controls_slot"></h2>');
 			controlsSlot = $controls[0];
@@ -241,13 +255,19 @@ Q.Tool.define("Q/columns", function(options) {
 		} else {
 			$div = $(div);
 			$close = $('.Q_close', div);
+			$tc = $('.Q_columns_title_container', div);
 			$title = $('.Q_columns_title', div);
 			titleSlot = $('.Q_title_slot', div)[0];
 			columnSlot = $('.Q_column_slot', div)[0];
 			controlsSlot = $('.Q_controls_slot', div)[0];
+			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
-		if (options && options.columnClass) {
-			$div.addClass(options.columnClass);
+		if (o.url) {
+			var url = Q.url(o.url);
+			$div.attr('data-url', url);
+		}
+		if (o && o.columnClass) {
+			$div.addClass(o.columnClass);
 		}
 		var dataMore = div.getAttribute('data-more');
 		tool.state.data[index] = Q.extend(
@@ -285,7 +305,7 @@ Q.Tool.define("Q/columns", function(options) {
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
 		if (options.name) {
-			var n = Q.normalize(options.name);
+			var n = Q.normalize(options.name, null, null, null, true);
 			$div.attr('data-name', options.name)
 				.addClass('Q_column_'+n);
 		}
@@ -352,6 +372,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$titleSlot.empty().append(
 					Q.instanceOf(o.title, Element) ? $(o.title) : o.title
 				);
+				$div.attr('data-title', $titleSlot.text());
 			}
 			if (o.column != undefined) {
 				$columnSlot.empty().append(
@@ -370,11 +391,28 @@ Q.Tool.define("Q/columns", function(options) {
 			p.add(waitFor, function () {
 				var data = tool.data(index);
 				if ($(div).closest('html').length) {
+					var name = $(div).attr('data-name');
+					var js = state.handlers && state.handlers[name];
+					if (js) {
+						if (typeof js === 'string') {
+							Q.require(js, function (js) {
+								Q.handle(js, tool, [options, index, div, data]);
+							});
+						} else {
+							Q.handle(js, tool, [options, index, div, data]);
+						}
+					}
 					// call the callback before the events,
 					// so something custom can be done first
 					Q.handle(callback, tool, [options, index, div, data]);
 					Q.handle(options.onOpen, tool, [options, index, div, data]);
 					state.onOpen.handle.call(tool, options, index, div, data);
+					var url = $div.attr('data-url');
+					if (o.pagePushUrl && createdNewDiv && url && url != location.href) {
+						document.title = $div.find('.Q_title_slot').text();
+						$div.attr('data-title', document.title);
+						Q.Page.push(url);
+					}
 					setTimeout(function () {
 						$mask.remove();
 						$div.removeClass('Q_columns_loading');
@@ -486,6 +524,10 @@ Q.Tool.define("Q/columns", function(options) {
 				.css(o.animation.css.hide)
 				.stop()
 				.animate(show, duration, function() {
+					$tc.outerWidth($tc[0].remainingWidth());
+					if (o.textfill) {
+						$tc.plugin('Q/textfill', o.textfill);
+					}
 					setTimeout(function () {
 						$div.data(dataKey_opening, false);
 						afterAnimation($cs, $sc, $ct);
@@ -558,7 +600,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 *  optional "max"
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
-	 * @param {Object} options Can be used to override various tool options
+	 * @param {Object} options Can be used to override some values taken from tool state
 	 * @return {Boolean} Whether the column was actually closed.
 	 */
 	close: function (index, callback, options) {
@@ -646,6 +688,11 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
+			var url = $prev.attr('data-url');
+			var title = $prev.attr('data-title');
+			if (o.pagePushUrl && url && url != location.href) {
+				Q.Page.push(url, title);
+			}
 		}
 	},
 
@@ -806,7 +853,7 @@ function prepareColumns(tool) {
 	if (!state.container) {
 		state.container = document.createElement('div')
 			.addClass('Q_columns_container Q_clearfix');
-		tool.element.appendChild(this.state.container);
+		tool.element.appendChild(state.container);
 	} else {
 		state.columns = [];
 		tool.$('.Q_columns_column').each(function (index) {

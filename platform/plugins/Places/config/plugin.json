@@ -12,7 +12,8 @@
 			"Q/plugins/Places/:action": {"module": "Places"}
 		},
 		"handlersBeforeEvent": {
-			"Q/responseExtras": ["Places/before/Q_responseExtras"]
+			"Q/responseExtras": ["Places/before/Q_responseExtras"],
+			"Streams/Stream/save/Places/location": ["Places/before/Streams_Stream_save_Places_location"]
 		},
 		"handlersAfterEvent": {
 			"Streams/interest/add": ["Places/after/Streams_interest_add"],
@@ -38,7 +39,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Locations",
-					"icon": "{{baseUrl}}/Q/plugins/Places/icons/locations"
+					"icon": "{{Places}}/img/icons/locations"
 				}
 			},
 			"Places/location": {
@@ -50,7 +51,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
-					"icon": "{{baseUrl}}/Q/plugins/Places/icons/location",
+					"icon": "{{Websites}}/img/icons/Websites/advert/creative",
 					"title": "Location"
 				},
 				"relatedFrom": {
@@ -68,6 +69,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
+					"icon": "{{Places}}/icons/location",
 					"title": "Area"
 				},
 				"relatedFrom": {

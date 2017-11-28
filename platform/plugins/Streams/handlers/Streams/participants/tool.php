@@ -68,8 +68,8 @@ function Streams_participants_tool($options)
 	}
 	$participants = $stream->getParticipants(compact('limit', 'offset', 'state'));
 	
-	Q_Response::addScript('{{Streams}}/js/Streams.js');
-	Q_Response::addStylesheet('{{Streams}}/css/Streams.css');
+	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
+	Q_Response::addStylesheet('{{Streams}}/css/Streams.css', 'Streams');
 	$options['rendered'] = true;
 	Q_Response::setToolOptions($options);
 	$stream->addPreloaded();
