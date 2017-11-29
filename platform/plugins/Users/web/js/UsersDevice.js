@@ -6,6 +6,7 @@
 	Q.onReady.add(function () {
 		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
 			var appId = location.search.queryField('Q.Users.appId');
+			_setToStorage('appId', appId);
 			if (!Q.isEmpty(appId)) {
 				localStorage.setItem("Q\tUsers.Device.appId", appId);
 			}
@@ -16,7 +17,6 @@
 	}, 'Users.Device');
 
 	/**
-	 * Some methods related to Users.Device
 	 * @class Users.Device
 	 */
 	Users.Device = {
@@ -36,12 +36,12 @@
 		 *   with elliptic curve digital signature (ECDSA), over the P-256 curve.
 		 */
 		subscribe: function (callback, options) {
-			this.getAdapter(function(adapter, err) {
+			this.getAdapter(function (err, adapter) {
 				if (err) {
-					callback(null, err);
+					callback(err);
 				} else {
-					adapter.subscribe(function(subscribed, err){
-						callback(subscribed, err);
+					adapter.subscribe(function (err, subscribed) {
+						callback(err, subscribed);
 					}, options);
 				}
 			});
@@ -55,12 +55,14 @@
 		 * @param {Function} callback
 		 */
 		unsubscribe: function (callback) {
-			this.getAdapter(function(adapter, err) {
+			this.getAdapter(function (err, adapter) {
 				if (err) {
-					callback(null, err);
+					if (callback)
+						callback(err);
 				} else {
-					adapter.unsubscribe(function(subscribed, err){
-						callback(subscribed, err);
+					adapter.unsubscribe(function (err) {
+						if (callback)
+							callback(err);
 					});
 				}
 			});
@@ -73,12 +75,12 @@
 		 * @param {Boolean} callback Whether the user already has a subscription
 		 */
 		subscribed: function (callback) {
-			this.getAdapter(function(adapter, err) {
+			this.getAdapter(function (err, adapter) {
 				if (err) {
-					callback(null, err);
+					callback(err);
 				} else {
-					adapter.subscribed(function(subscribed, err){
-						callback(subscribed, err);
+					adapter.subscribed(function (err, subscribed) {
+						callback(err, subscribed);
 					});
 				}
 			})
@@ -114,12 +116,12 @@
 			}
 		},
 
-		getAdapter: function(callback) {
+		getAdapter: function (callback) {
 			if (!this.adapter) {
-				callback(null, new Error('There is no suitable adapter for this type of device'));
+				callback(new Error('There is no suitable adapter for this type of device'));
 				return;
 			}
-			callback(this.adapter);
+			callback(null, this.adapter);
 		},
 
 		adapter: null
@@ -137,9 +139,9 @@
 
 		subscribe: function (callback, options) {
 			var self = this;
-			this.getServiceWorkerRegistration(function(sw, err) {
+			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(null, err);
+					callback(err);
 				else {
 					var userVisibleOnly = true;
 					if (options && !options.userVisibleOnly) {
@@ -149,10 +151,9 @@
 						userVisibleOnly: userVisibleOnly,
 						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
 					}).then(function (subscription) {
-						_saveSubscription(subscription, self.appConfig);
-						if (callback) {
-							callback(subscription);
-						}
+						_saveSubscription(subscription, self.appConfig, function(err, res){
+							callback(err, res);
+						});
 					}).catch(function (err) {
 						if (Notification.permission === 'denied') {
 							console.error('Users.Device: Permission for Notifications was denied');
@@ -160,7 +161,7 @@
 							console.error('Users.Device: Unable to subscribe to push.', err);
 						}
 						if (callback) {
-							callback(null, err);
+							callback(err);
 						}
 					});
 				}
@@ -168,27 +169,18 @@
 		},
 
 		unsubscribe: function (callback) {
-			this.getServiceWorkerRegistration(function(sw, err) {
+			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(null, err);
+					callback(err);
 				else {
 					sw.pushManager.getSubscription()
 						.then(function (subscription) {
 							if (subscription) {
-								_deleteSubscription(subscription.endpoint);
-								return subscription.unsubscribe();
-							}
-						})
-						.catch(function (error) {
-							console.error('Users.Device: Error unsubscribing', error);
-							if (callback) {
-								callback(false, error);
-							}
-						})
-						.then(function () {
-							console.log('Users.Device: User is unsubscribed.');
-							if (callback) {
-								callback(true);
+								_deleteSubscription(subscription.endpoint, function (err, res) {
+									callback(err, res);
+								});
+								subscription.unsubscribe();
+								console.log('Users.Device: User is unsubscribed.');
 							}
 						});
 				}
@@ -196,31 +188,31 @@
 		},
 
 		subscribed: function (callback) {
-			this.getServiceWorkerRegistration(function(sw, err) {
+			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(null, err);
+					callback(err);
 				else {
 					sw.pushManager.getSubscription()
 						.then(function (subscription) {
-							callback(!(subscription === null));
-						}).catch(function(err) {
-							callback(null, err);
-						});
+							callback(null, subscription);
+						}).catch(function (err) {
+						callback(err);
+					});
 				}
 			});
 		},
 
-		getServiceWorkerRegistration: function(callback) {
+		getServiceWorkerRegistration: function (callback) {
 			var self = this;
 			if (this.serviceWorkerRegistration) {
-				return callback(this.serviceWorkerRegistration);
+				return callback(null, this.serviceWorkerRegistration);
 			}
-			_registerServiceWorker.bind(this)(function(sw, err) {
+			_registerServiceWorker.bind(this)(function (err, sw) {
 				if (err)
-					return callback(null, err);
+					return callback(err);
 				else {
 					self.serviceWorkerRegistration = sw;
-					return callback(sw);
+					return callback(null, sw);
 				}
 			});
 		},
@@ -237,37 +229,42 @@
 		adapterName: 'FCM',
 
 		init: function (callback) {
-			this.push = _FCMInit();
+			FCMPlugin.onTokenRefresh(function (token) {
+				_registerDevice(token);
+			});
+
+			FCMPlugin.onNotification(function (data) {
+				// data.wasTapped is true: Notification was received on device tray and tapped by the user.
+				// data.wasTapped is false: Notification was received in foreground. Maybe the user needs to be notified.
+				Users.Device.onNotification.handle(data);
+			});
+
 			if (callback)
 				callback();
 		},
 
 		subscribe: function (callback) {
-			this.push = _FCMInit(true);
-			if (callback)
-				callback();
+			FCMPlugin.getToken(function (token) {
+				_registerDevice(token, callback);
+			});
 		},
 
 		unsubscribe: function (callback) {
-			var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-			localStorage.removeItem("Q\tUsers.Device.deviceId");
-			_deleteSubscription(deviceId);
-			if (callback)
-				callback();
+			var deviceId = _getFromStorage('deviceId');
+			_removeFromStorage('deviceId');
+			_deleteSubscription(deviceId, function (err, res) {
+				callback(err, res);
+			});
 		},
 
 		subscribed: function (callback) {
-			var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-			if (storedDeviceId) {
-				callback(true);
+			if (_getFromStorage('deviceId')) {
+				callback(null, true);
 			} else {
-				callback(false);
+				callback(null, false);
 			}
-		},
+		}
 
-		serviceWorkerRegistration: null,
-
-		appConfig: null
 	};
 
 	// Adapter for PushNotification
@@ -276,146 +273,77 @@
 		adapterName: 'PushNotification',
 
 		init: function (callback) {
-			_PushNotificationInit();
+			if (_getFromStorage('deviceId')) {
+				_pushNotificationInit();
+			}
 			if (callback)
 				callback();
 		},
 
 		subscribe: function (callback) {
-			this.push = _PushNotificationInit(true);
+			_pushNotificationInit();
 			if (callback)
 				callback();
 		},
 
 		unsubscribe: function (callback) {
-			var deviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-			localStorage.removeItem("Q\tUsers.Device.deviceId");
-			_deleteSubscription(deviceId);
-			if (callback)
-				callback();
+			var deviceId = _getFromStorage('deviceId');
+			_removeFromStorage('deviceId');
+			_deleteSubscription(deviceId, function (err, res) {
+				callback(err, res);
+			});
 		},
 
 		subscribed: function (callback) {
-			var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-			if (storedDeviceId) {
-				callback(true);
+			if (_getFromStorage('deviceId')) {
+				callback(null, true);
 			} else {
-				callback(false);
+				callback(null, false);
 			}
-		},
+		}
 
-		serviceWorkerRegistration: null,
-
-		appConfig: null
 	};
-
-	function _FCMInit(register) {
-
-		FCMPlugin.onTokenRefresh(function (token) {
-			_registerDevice(token);
-		});
-
-		if (register) {
-			FCMPlugin.getToken(function (token) {
-				_registerDevice(token);
-			});
-		}
-
-		FCMPlugin.onNotification(function (data) {
-			// data.wasTapped is true: Notification was received on device tray and tapped by the user.
-			// data.wasTapped is false: Notification was received in foreground. Maybe the user needs to be notified.
-			Users.Device.onNotification.handle(data);
-		});
-
-	}
-
-	function _PushNotificationInit(register) {
-		var push = PushNotification.init({
-			android: {},
-			browser: {
-				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-			},
-			ios: {
-				alert: true,
-				badge: true,
-				sound: true
-			},
-			windows: {}
-		});
-
-		if (register) {
-			push.on('registration', function (data) {
-				var deviceId = data.registrationId;
-				localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
-				var appId = location.search.queryField('Q.Users.appId');
-				if (appId) {
-					localStorage.setItem("Q\tUsers.Device.appId", appId);
-				}
-				if (Q.Users.loggedInUser) {
-					_registerDevice();
-				}
-				if (callback)
-					callback();
-			});
-		}
-
-		push.on('notification', function (data) {
-			Users.Device.onNotification.handle(data);
-		});
-
-		push.on('error', function (e) {
-			console.warn("Users.Device: ERROR", e);
-		});
-
-		Users.logout.options.onSuccess.set(function () {
-			PushNotification.setApplicationBadgeNumber(0);
-		}, 'Users.PushNotifications');
-
-	}
 
 	function _registerServiceWorker(callback) {
 		if (Q.info.url.substr(0, 8) !== 'https://') {
 			if (callback)
-				callback(null, new Error("Push notifications require HTTPS"));
+				callback(new Error("Push notifications require HTTPS"));
 			return;
 		}
 		if (!(('serviceWorker' in navigator) && ('PushManager' in window))) {
 			if (callback)
-				callback(null, new Error("Push messaging is not supported"));
+				callback(new Error("Push messaging is not supported"));
 			return;
 		}
 		navigator.serviceWorker.register('/Q/plugins/Users/js/sw.js')
 			.then(function (swReg) {
-				navigator.serviceWorker.addEventListener('message', function(event){
+				navigator.serviceWorker.addEventListener('message', function (event) {
 					Users.Device.onNotification.handle(event.data);
 				});
 				console.log('Service Worker is registered.');
 				if (callback)
-					callback(swReg);
+					callback(null, swReg);
 			})
 			.catch(function (error) {
-				callback(null, error);
+				callback(error);
 				console.error('Users.Device: Service Worker Error', error);
 			});
 	}
 
-	function _registerDevice(deviceId) {
+	function _registerDevice(deviceId, callback) {
 		if (!deviceId || !Q.Users.loggedInUser) {
-			throw(new Error('Error while registering device. User must be logged in and deviceId must be set.'));
+			return callback(new Error('Error while registering device. User must be logged in and deviceId must be set.'))
 		}
-		var appId = localStorage.getItem("Q\tUsers.Device.appId");
+		var appId = _getFromStorage('appId');
 		if (!appId) {
-			throw(new Error('Error while registering device. AppId must be must be set.'));
+			return callback(new Error('Error while registering device. AppId must be must be set.'));
 		}
-		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-		if (storedDeviceId === deviceId) {
-			return;
-		}
-		localStorage.setItem("Q\tUsers.Device.deviceId", deviceId);
+		_setToStorage('deviceId', deviceId);
 		Q.req('Users/device', function (err, response) {
 			if (!err) {
 				Q.handle(Users.onDevice, [response.data]);
 			}
+			callback(err, response)
 		}, {
 			method: 'post',
 			fields: {
@@ -436,15 +364,16 @@
 		return outputArray;
 	}
 
-	function _saveSubscription(subscription, appConfig) {
+	function _saveSubscription(subscription, appConfig, callback) {
 		if (!subscription) {
-			return;
+			return callback(new Error('No subscription data'));
 		}
 		subscription = JSON.parse(JSON.stringify(subscription));
 		Q.req('Users/device', function (err, response) {
 			if (!err) {
 				Q.handle(Users.onDevice, [response.data]);
 			}
+			callback(err, response);
 		}, {
 			method: 'post',
 			fields: {
@@ -456,17 +385,67 @@
 		});
 	}
 
-	function _deleteSubscription(deviceId) {
+	function _deleteSubscription(deviceId, callback) {
 		if (!deviceId) {
 			return;
 		}
 		Q.req('Users/device', function (err, response) {
+			if (callback) {
+				callback(err, response);
+			}
 		}, {
 			method: 'delete',
 			fields: {
 				deviceId: deviceId
 			}
 		});
+	}
+
+	function _pushNotificationInit() {
+		var push = PushNotification.init({
+			android: {},
+			browser: {
+				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+			},
+			ios: {
+				alert: true,
+				badge: true,
+				sound: true
+			},
+			windows: {}
+		});
+
+		push.on('registration', function (data) {
+			_setToStorage('deviceId', data.registrationId);
+			if (Q.Users.loggedInUser) {
+				_registerDevice();
+			}
+		});
+
+		push.on('notification', function (data) {
+			Users.Device.onNotification.handle(data);
+		});
+
+		push.on('error', function (e) {
+			console.warn("Users.Device: ERROR", e);
+		});
+
+		Users.logout.options.onSuccess.set(function () {
+			PushNotification.setApplicationBadgeNumber(0);
+		}, 'Users.PushNotifications');
+
+	}
+
+	function _getFromStorage(type) {
+		return localStorage.getItem("Q\tUsers.Device." + type);
+	}
+
+	function _setToStorage(type, value) {
+		localStorage.setItem("Q\tUsers.Device." + type, value);
+	}
+
+	function _removeFromStorage(type) {
+		localStorage.removeItem("Q\tUsers.Device." + type);
 	}
 
 })(Q, jQuery);
