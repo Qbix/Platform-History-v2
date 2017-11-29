@@ -13,20 +13,24 @@
 	<title id="title_slot"><?php echo $title; ?></title>
 </head>
 <body>
-<?php echo Q_Response::scripts(true, "\n\t") ?>
 <script>
 	var params = getParams();
 	if (!params.access_token) {
 		throw(new Error('Undefined token'));
 	}
-	var url = 'qcordova://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : '');
+	var appName = getAppName();
+	if (!appName) {
+		throw(new Error('Undefined application name'));
+	}
+
+	var url = appName + '://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : '');
 
 	window.location.replace(url);
 
-	/*setTimeout(function() {
-		alert('here')
-		window.close();
-	}, 3000);*/
+	function getAppName() {
+		var str = window.location.href.split('#')[0];
+		return str.split('?app=')[1];
+	}
 
 	function getParams() {
 		var res = {};

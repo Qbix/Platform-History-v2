@@ -2459,8 +2459,8 @@
 			case 'oauth':
 				var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
 					'?client_id=' + Users.Facebook.appId +
-					'&redirect_uri=' + Q.baseUrl() + '/login/facebook&' +
-					'state=' + _stringGen(10) +
+					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fapp%3D' + Users.Facebook.appName +
+					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
 				// todo: replace hardcoded app name
 				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.appName + '://'},
