@@ -110,7 +110,7 @@
 			if (this.adapter) {
 				this.adapter.init(callback);
 			} else {
-				console.error("Users.Device: No suitable adapter for push notifications");
+				console.info("Users.Device: No suitable adapter for push notifications");
 			}
 		},
 
