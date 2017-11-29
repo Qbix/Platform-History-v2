@@ -39,7 +39,8 @@ Q.Tool.define("Places/areas", function (options) {
 	publisherId: null,
 	streamName: null,
 	location: null,
-	stream: null
+	stream: null,
+	areaSelected: null
 },
 
 { // methods go here
@@ -67,6 +68,7 @@ Q.Tool.define("Places/areas", function (options) {
 				// only Places/area stream, which are listed in drop down
 				qFilterTool.$(".Q_filter_input").prop("readonly", true);
 
+				// filtering Streams/related tool results
 				qFilterTool.state.onFilter.set(function (query, element) {
 					var titles = qFilterTool.$(".Streams_related_tool .Streams_preview_tool").not(".Streams_preview_composer");
 
@@ -80,6 +82,22 @@ Q.Tool.define("Places/areas", function (options) {
 							$this.hide();
 						}
 					});
+				}, tool);
+
+				// set selected Places/area stream
+				qFilterTool.state.onChoose.set(function (element, details) {
+					var previewTool = Q.Tool.from($(element).closest(".Streams_preview_tool"), "Streams/preview");
+
+					state.areaSelected = {
+						publisherId: previewTool.state.publisherId,
+						streamName: previewTool.state.streamName,
+						text: details.text
+					};
+				}, tool);
+
+				// clear selected Places/area stream
+				qFilterTool.state.onClear.set(function () {
+					state.areaSelected = null;
 				}, tool);
 			});
 		}
@@ -121,14 +139,6 @@ Q.Tool.define("Places/areas", function (options) {
 				relatedTool = this;
 			});
 		});
-	},
-	/**
-	 * Get area selected
-	 * @method getValue
-	 * @return {string} selected value
-	 */
-	getValue: function() {
-		return this.$(".Q_filter_input").val();
 	},
 	/**
 	 * Show Q.prompt to add new area
