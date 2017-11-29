@@ -833,6 +833,7 @@
 
 .Streams_file_preview_tool {
 	cursor: pointer;
+	position: relative;
 }
 
 .Streams_file_preview_tool.Streams_preview_stream:hover {
