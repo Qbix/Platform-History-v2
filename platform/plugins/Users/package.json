@@ -16,12 +16,12 @@
 		"web-push": "^3.2.2",
 		"twilio": "0.4.x",
 		"yuidocjs": "0.3.x",
-	    "apn": "^2.1.1",
-	    "node-adm": "^0.9.1",
-	    "wns": "^0.5.3"
+		"apn": "^2.1.1",
+		"node-adm": "^0.9.1",
+		"wns": "^0.5.3"
 	},
 	"repository": {
-	  "type": "git",
-	  "url": "git://github.com/EGreg/Q.git"
+		"type": "git",
+		"url": "git://github.com/EGreg/Q.git"
 	}
 }

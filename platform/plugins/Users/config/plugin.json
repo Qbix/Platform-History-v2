@@ -31,7 +31,8 @@
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
-			"Users/authorize": {"module": "Users", "action": "authorize"}
+			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"login/facebook": {"module": "Users", "action": "facebook"}
 		},
 		"session": {
 			"db": {
