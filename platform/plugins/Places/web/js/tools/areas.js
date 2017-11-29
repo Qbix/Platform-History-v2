@@ -63,6 +63,10 @@ Q.Tool.define("Places/areas", function (options) {
 			.activate(function(){
 				qFilterTool = Q.Tool.from(this.element, "Q/filter");
 
+				// make input non-editable because choice is possible
+				// only Places/area stream, which are listed in drop down
+				qFilterTool.$(".Q_filter_input").prop("readonly", true);
+
 				qFilterTool.state.onFilter.set(function (query, element) {
 					var titles = qFilterTool.$(".Streams_related_tool .Streams_preview_tool").not(".Streams_preview_composer");
 
