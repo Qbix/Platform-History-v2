@@ -19,8 +19,14 @@
 	if (!params.access_token) {
 		throw(new Error('Undefined token'));
 	}
-	// replace works in android
-	window.location.replace('qcordova://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : ''))
+	var url = 'qcordova://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : '');
+
+	window.location.replace(url);
+
+	/*setTimeout(function() {
+		alert('here')
+		window.close();
+	}, 3000);*/
 
 	function getParams() {
 		var res = {};

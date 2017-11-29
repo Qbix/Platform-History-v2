@@ -2384,12 +2384,16 @@
 
 		appId: null,
 
+		appName: null,
+
 		scope: null,
 
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
+			Users.Facebook.appName = Q.getObject(['facebook', Q.info.app, 'appName'], Users.apps);
 			if (Q.info.isCordova) {
 				Q.onHandleOpenUrl.set(function (url) {
+					window.cordova.plugins.browsertab.close();
 					var params = _getParams(url);
 					Users.Facebook.accessToken = params.access_token;
 					Users.Facebook.doLogin({
@@ -2418,42 +2422,50 @@
 						return res;
 					}
 				}, 'Users');
-				Users.Facebook.type = 'oauth'
-
-				// todo: use fg:// for ios
-				window.appAvailability.check('com.facebook.katana', function () {
-					Users.Facebook.type = 'native';
-				}, function () {
-					window.appAvailability.check('com.facebook.lite', function () {
+				Users.Facebook.type = 'oauth';
+				if (Q.info.platform === 'ios') {
+					// ios
+					window.appAvailability.check('fb://', function () {
 						Users.Facebook.type = 'native';
 					});
-				});
+				} else {
+					// android
+					window.appAvailability.check('com.facebook.katana', function () {
+						Users.Facebook.type = 'native';
+					}, function () {
+						window.appAvailability.check('com.facebook.lite', function () {
+							Users.Facebook.type = 'native';
+						});
+					});
+				}
 			}
 		},
 
 		login: function () {
 			switch (Users.Facebook.type) {
-				case 'web':
-					var scope = Users.Facebook.scope;
-					FB.login(function (response) {
-						Users.Facebook.doLogin(response);
-					}, scope ? {scope: scope.join(',')} : undefined);
-					break;
-				case 'native':
-					facebookConnectPlugin.login(["public_profile", "email"], function (response) {
-						Users.Facebook.doLogin(response);
-					}, function (err) {
-						console.warn(err);
-					});
-					break;
-				case 'oauth':
-					var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
-						'?client_id=' + Users.Facebook.appId +
-						'&redirect_uri=' + Q.baseUrl() + '/login/facebook&' +
-						'state=' + _stringGen(10) +
-						'&response_type=token&scope=email,public_profile';
-					cordova.plugins.browsertab.openUrl(url);
-					break;
+			case 'web':
+				var scope = Users.Facebook.scope;
+				FB.login(function (response) {
+					Users.Facebook.doLogin(response);
+				}, scope ? {scope: scope.join(',')} : undefined);
+				break;
+			case 'native':
+				facebookConnectPlugin.login(["public_profile", "email"], function (response) {
+					Users.Facebook.doLogin(response);
+				}, function (err) {
+					console.warn(err);
+				});
+				break;
+			case 'oauth':
+				var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
+					'?client_id=' + Users.Facebook.appId +
+					'&redirect_uri=' + Q.baseUrl() + '/login/facebook&' +
+					'state=' + _stringGen(10) +
+					'&response_type=token&scope=email,public_profile';
+				// todo: replace hardcoded app name
+				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.appName + '://'},
+					function(success){ console.log(success); },
+					function(err){ console.log(err); });
 			}
 
 			function _stringGen(len) {
@@ -2469,7 +2481,6 @@
 			if (!response.authResponse) {
 				return;
 			}
-			console.log(response);
 			var step1_form = $('#Users_login_step1_form');
 			step1_form.data('used', 'facebook');
 			step1_form.data('platforms', Users.Facebook.usingPlatforms);
