@@ -5801,8 +5801,11 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		return;
 	}
+	function _Q_addEventListener_wrapper(e) {
+		Q.handle(eventHandler, element, [e]);
+	}
 	var handler = (eventHandler.typename === "Q.Event"
-		? eventHandler.eventListener = function _Q_addEventListener_wrapper(e) { Q.handle(eventHandler, element, [e]); }
+		? eventHandler.eventListener = _Q_addEventListener_wrapper
 		: eventHandler);
 	if (typeof eventName === 'string') {
 		var split = eventName.split(' ');
@@ -10272,41 +10275,65 @@ _setLayoutInterval.options = {
  */
 Q.Pointer = {
 	/**
-	 * Either 'touchstart' or 'mousedown' event name, depending on environment
+	 * Intelligent pointer start event that also works on touchscreens
 	 * @static
-	 * @property {String} start
+	 * @method start
 	 */
-	start: (Q.info.isTouchscreen ? 'touchstart' : 'mousedown'),
+	start: function _Q_Pointer_start(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		return function (e) {
+			Q.Pointer.startCancelingClicksOnScroll(e.target);
+			Q.addEventListener(e.target, Q.Pointer.end, function () {
+				Q.Pointer.stopCancelingClicksOnScroll(e.target);
+			});
+			return params.original.apply(this, arguments);
+		};
+	},
 	/**
-	 * Either 'touchmove' or 'mousemove' event name, depending on environment
+	 * Intelligent pointer end event that also works on touchscreens
 	 * @static
-	 * @property {String} move
+	 * @method end
 	 */
-	move: (Q.info.isTouchscreen ? 'touchmove' : 'mousemove'),
+	end: function _Q_Pointer_end(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'mouseup';
+		return params.original;
+	},
 	/**
-	 * Either 'touchend' or 'mouseup' event name, depending on environment
+	 * Intelligent pointer move event that also works on touchscreens
 	 * @static
-	 * @property {String} end
+	 * @method move
 	 */
-	end: (Q.info.isTouchscreen ? 'touchend' : 'mouseup'),
+	move: function _Q_Pointer_move(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchmove' : 'mousemove';
+		return params.original;
+	},
 	/**
-	 * Either 'touchenter' or 'mouseenter' event name, depending on environment
+	 * Intelligent pointer enter event that also works on touchscreens
 	 * @static
-	 * @property {String} enter
+	 * @method enter
 	 */
-	enter: (Q.info.isTouchscreen ? 'touchenter' : 'mouseenter'),
+	enter: function _Q_Pointer_enter(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchenter' : 'mouseenter';
+		return params.original;
+	},
 	/**
-	 * Either 'touchleave' or 'mouseleave' event name, depending on environment
+	 * Intelligent pointer leave event that also works on touchscreens
 	 * @static
-	 * @property {String} leave
+	 * @method leave
 	 */
-	leave: (Q.info.isTouchscreen ? 'touchleave' : 'mouseleave'),
+	leave: function _Q_Pointer_leave(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchleave' : 'mouseleave';
+		return params.original;
+	},
 	/**
-	 * The 'touchcancel' event name, depending on environment
+	 * Intelligent pointer cancel event that also works on touchscreens
 	 * @static
-	 * @property {String} cancel
+	 * @method cancel
 	 */
-	cancel: (Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'), // mousecancel can be a custom event
+	cancel: function _Q_Pointer_cancel(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
+		return params.original;
+	},
 	/**
 	 * Intelligent focusin event that fires only once per focusin
 	 * @static
@@ -10379,7 +10406,8 @@ Q.Pointer = {
 	},
 	/**
 	 * Like click event but works on touchscreens even if the viewport moves 
-	 * during click (such as when the on-screen keyboard disappears).
+	 * during click, such as when the on-screen keyboard disappears
+	 * or a scrolling parent gets scrollTop = 0 because content changed.
 	 * Respects Q.Pointer.canceledClick
 	 * @static
 	 * @method touchclick
@@ -10388,7 +10416,7 @@ Q.Pointer = {
 		if (!Q.info.isTouchscreen) {
 			return Q.Pointer.click(params);
 		}
-		params.eventName = Q.Pointer.start;
+		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
 		return function _Q_touchclick_on_wrapper (e) {
 			var _relevantClick = true;
 			var t = this, a = arguments;
@@ -10851,8 +10879,8 @@ Q.Pointer = {
 	 * returning false.
 	 * @static
 	 * @method cancelClick
-	 * @param {Q.Event} event Some mouse or touch event from the DOM
-	 * @param {Object} extraInfo Extra info to pass to onCancelClick
+	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
+	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @param {boolean} [skipMask=false] Pass true here to skip showing
 	 *   the Q.click.mask for 300 milliseconds, which blocks any
 	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
@@ -10909,15 +10937,37 @@ Q.Pointer = {
 	 * Call this function to begin blurring active elements when touching outside them
 	 * @method startBlurringOnTouch
 	 */
-	startBlurringOnTouch: function (options) {
+	startBlurringOnTouch: function () {
 		Q.addEventListener(window, 'touchstart', _touchBlurHandler, false, true);
 	},
 	/**
 	 * Call this function to begin blurring active elements when touching outside them
 	 * @method startBlurringOnTouch
 	 */
-	stopBlurringOnTouch: function (options) {
+	stopBlurringOnTouch: function () {
 		Q.removeEventListener(window, 'touchstart', _touchBlurHandler, false, true);
+	},
+	/**
+	 * Call this function to begin canceling clicks on the element or its scrolling parent.
+	 * This is to good for preventing stray clicks from happening after an accidental scroll,
+	 * for instance if content changed after a tab was selected, and scrollTop became 0.
+	 * @method startCancelingClicksOnScroll
+	 * @param {
+	 */
+	startCancelingClicksOnScroll: function (element) {
+		var sp = element.scrollingParent(true);
+		Q.addEventListener(sp, 'scroll', Q.Pointer.cancelClick);
+	},
+	/**
+	 * Call this function to stop canceling clicks on the element or its scrolling parent.
+	 * This is to good for preventing stray clicks from happening after an accidental scroll,
+	 * for instance if content changed after a tab was selected, and scrollTop became 0.
+	 * @method startCancelingClicksOnScroll
+	 * @param {
+	 */
+	stopCancelingClicksOnScroll: function (element) {
+		var sp = element.scrollingParent(true);
+		Q.removeEventListener(sp, 'scroll', Q.Pointer.cancelClick);
 	},
 	/**
 	 * This event occurs when a click has been canceled, for one of several possible reasons.
@@ -12179,7 +12229,7 @@ Q.onReady.set(function _Q_masks() {
 if (_isCordova) {
 	Q.onReady.set(function _Q_handleOpenUrl() {
 		root.handleOpenURL = function (url) {
-			Q.handle(Q.onHandleOpenUrl, Q, url);
+			Q.handle(Q.onHandleOpenUrl, Q, [url]);
 		};
 	}, 'Q.handleOpenUrl');
 

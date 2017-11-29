@@ -294,6 +294,28 @@ class Streams_Stream extends Base_Streams_Stream
 			));
 		}
 
+		/**
+		 * @event Streams/Stream/save/$streamType {before}
+		 * @param {Streams_Stream} stream
+		 * @param {array} modifiedFields reference to modifiedFields array
+		 * @return {false} To cancel further processing
+		 */
+		$params = array('stream' => $this, 'modifiedFields' => &$modifiedFields);
+		if (false === Q::event(
+				"Streams/Stream/save/{$this->type}", $params, 'before'
+			)) {
+			return false;
+		}
+
+		// Generate a unique name for the stream
+		if (!isset($modifiedFields['name']) and !isset($this->name)) {
+			$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
+				Streams_Stream::table(), 'name',
+				array('publisherId' => $this->publisherId),
+				array('prefix' => $this->type.'/Q')
+			);
+		}
+
 		if (!$this->retrieved) {
 			// we don't want user to update private fields but will set initial values to them
 			$privateFieldNames = self::getConfigField($this->type, 'private', array());
@@ -357,28 +379,6 @@ class Streams_Stream extends Base_Streams_Stream
 					}
 				}
 			}
-		}
-
-		/**
-		 * @event Streams/Stream/save/$streamType {before}
-		 * @param {Streams_Stream} stream
-		 * @param {array} modifiedFields reference to modifiedFields array
-		 * @return {false} To cancel further processing
-		 */
-		$params = array('stream' => $this, 'modifiedFields' => &$modifiedFields);
-		if (false === Q::event(
-			"Streams/Stream/save/{$this->type}", $params, 'before'
-		)) {
-			return false;
-		}
-
-		// Generate a unique name for the stream
-		if (!isset($modifiedFields['name']) and !isset($this->name)) {
-			$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
-				Streams_Stream::table(), 'name',
-				array('publisherId' => $this->publisherId),
-				array('prefix' => $this->type.'/Q')
-			);
 		}
 		
 		foreach ($this->fields as $name => $value) {

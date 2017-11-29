@@ -111,6 +111,7 @@ function Streams_stream_post($params = array())
 		}
 	}
 
+
 	// Create the stream
 	$stream = Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
 	$messageTo = false;
