@@ -490,7 +490,7 @@ Q.Tool.define("Q/columns", function(options) {
 					tool.$('.Q_columns_column').each(function () {
 						width += $(this).outerWidth(true);
 					});
-					$sc.width(width);
+					$sc.width(width).addClass('Q_columns_sized');
 
 					var $toScroll = ($te.css('overflow') === 'visible')
 						? $te.parents()
