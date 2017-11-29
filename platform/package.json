@@ -19,7 +19,7 @@
 		"handlebars": "2.0.x"
 	},
 	"repository": {
-	  "type": "git",
-	  "url": "git://github.com/EGreg/Q.git"
+		"type": "git",
+		"url": "git://github.com/EGreg/Q.git"
 	}
 }
