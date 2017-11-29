@@ -925,7 +925,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
-	 * @return {Streams_Stream|boolean} Returns the stream that was created.
+	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
 	static function create(
