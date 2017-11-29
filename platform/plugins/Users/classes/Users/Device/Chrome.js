@@ -70,6 +70,9 @@ Users_Device_Chrome.prototype.handlePushNotification = function (notification, c
 		}
 	});
 	var webpush = require('web-push');
+	if (appConfig.fcmPrivateServerKey) {
+		webpush.setGCMAPIKey(appConfig.fcmPrivateServerKey);
+	}
 	webpush.setVapidDetails(appConfig.url, appConfig.publicKey, appConfig.privateKey);
 	webpush.sendNotification({
 		endpoint: this.fields.deviceId,
