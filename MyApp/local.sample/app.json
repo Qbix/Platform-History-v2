@@ -122,7 +122,7 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
-					"baseUrl": "myapp://",
+					"scheme": "myapp://",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
@@ -145,6 +145,7 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
+					"scheme": "myapp://",
 					"key": "AUTHORIZATION KEY HERE",
 					"senderID": "YOUR SENDER ID HERE"
 				}
