@@ -12,6 +12,9 @@
 	cursor: pointer;
 	max-width: 210px;
 }
+.Places_location_tool .Places_areas_tool {
+	margin: 5px 0 0 10px;
+}
 .Places_location_tool .Places_address_tool input {
 	padding: 2px;
 }
