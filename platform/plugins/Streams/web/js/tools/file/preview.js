@@ -148,7 +148,7 @@ function _Streams_file_preview(options, preview) {
 		var tool = this;
 		var state = tool.state;
 		tool.$('.Streams_file_input')
-		.click(function (event) {
+		.on(Q.Pointer.fastclick, function (event) {
 			event.stopPropagation();
 		}).change(function (event) {
 			if (!this.value) {
