@@ -18,18 +18,18 @@
 	if (!params.access_token) {
 		throw(new Error('Undefined token'));
 	}
-	var appName = getAppName();
-	if (!appName) {
+	var scheme = getScheme();
+	if (!scheme) {
 		throw(new Error('Undefined application name'));
 	}
 
-	var url = appName + '://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : '');
+	var url = scheme + '://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : '');
 
 	window.location.replace(url);
 
-	function getAppName() {
+	function getScheme() {
 		var str = window.location.href.split('#')[0];
-		return str.split('?app=')[1];
+		return str.split('?scheme=')[1];
 	}
 
 	function getParams() {
