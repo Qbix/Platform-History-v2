@@ -37,7 +37,6 @@ Q.Tool.jQuery('Q/overlay',
 			}
 			var width = $this.outerWidth(), height = $this.outerHeight();
 
-
 			if (!width && $this.css('width'))
 				width = parseInt($this.css('width'));
 			if (!height && $this.css('height'))
