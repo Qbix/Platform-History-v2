@@ -2384,14 +2384,15 @@
 
 		appId: null,
 
-		appName: null,
+		scheme: null,
 
 		scope: null,
 
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
-			Users.Facebook.appName = Q.getObject(['facebook', Q.info.app, 'appName'], Users.apps);
+
 			if (Q.info.isCordova) {
+				Users.Facebook.scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps).replace('://', '');
 				Q.onHandleOpenUrl.set(function (url) {
 					window.cordova.plugins.browsertab.close();
 					var params = _getParams(url);
@@ -2459,11 +2460,11 @@
 			case 'oauth':
 				var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
 					'?client_id=' + Users.Facebook.appId +
-					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fapp%3D' + Users.Facebook.appName +
+					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
 				// todo: replace hardcoded app name
-				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.appName + '://'},
+				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.scheme + '://'},
 					function(success){ console.log(success); },
 					function(err){ console.log(err); });
 			}
