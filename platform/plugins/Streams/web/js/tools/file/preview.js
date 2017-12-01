@@ -158,7 +158,12 @@ function _Streams_file_preview(options, preview) {
 			var form = $this.closest('form').get(0);
 			tool.preview.state.creatable.options.form = form;
 			tool.preview.state.creatable.options.resultFunction = 'result';
-			tool.preview.create(event);
+			tool.preview.create(event, function (err) {
+				var fem = Q.firstErrorMessage(err);
+				if (fem) {
+					Q.alert(fem);
+				}
+			});
 			form.reset();
 		});
 	}
