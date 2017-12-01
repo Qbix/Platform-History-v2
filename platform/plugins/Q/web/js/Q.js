@@ -10997,6 +10997,12 @@ Q.Pointer = {
 	}
 };
 
+var _isTouchscreen = Q.info.isTouchscreen;
+Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
+Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
+Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
+Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
+
 Q.Pointer.which.LEFT = 1;
 Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;

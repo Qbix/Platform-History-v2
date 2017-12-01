@@ -547,7 +547,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	cancel_button.add(save_button).add(edit_button).on(Q.Pointer.end, function() {
 		return false;
 	});
-	cancel_button.on('focus '+Q.Pointer.start, function() {
+	cancel_button.on('focus '+Q.Pointer.start.eventName, function() {
 		setTimeout(function() {
 			focusedOn = 'cancel_button';
 		}, 50);
@@ -557,7 +557,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		setTimeout(onBlur, 100); 
 	});
 	save_button.on(Q.Pointer.fastclick, function() { onSave(); return false; });
-	save_button.on('focus '+Q.Pointer.start, function() {
+	save_button.on('focus '+Q.Pointer.start.eventName, function() {
 		setTimeout(function() {
 			focusedOn = 'save_button';
 		}, 50);
