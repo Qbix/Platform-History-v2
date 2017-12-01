@@ -1,9 +1,8 @@
-.Q_tool.Places_areas_tool {
-	padding: 5px 10px;
+.Places_areas_tool {
 	max-width: 210px;
 	border-radius: 5px;
 }
-.Q_tool.Places_areas_tool input.Q_filter_input {
+.Places_areas_tool input.Q_filter_input {
 	padding-left: 2px;
 	padding-top: 2px;
 	padding-right: 2px;
@@ -11,6 +10,9 @@
 	height: 30px;
 	width: 190px;
 }
-.Places_area_preview_tool .Streams_preview_icon {
+.Places_areas_tool .Places_area_preview_tool .Streams_preview_icon {
 	display: none;
+}
+.Places_areas_container {
+	padding: 5px 10px;
 }

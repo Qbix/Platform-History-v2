@@ -39,7 +39,7 @@
 			});
 
 			$te.on(Q.Pointer.click, function () {
-				$te.addClass("Q_selected");
+				// $te.find('.Places_areas_filter').addClass("Q_selected");
 			});
 		},
 
@@ -65,10 +65,11 @@
 
 				// if Q/filter didn't created - create one
 				if (!state.qFilterTool) {
+					var $container = $('<div class="Places_areas_container" />').appendTo(tool.element);
 					$("<div class='Places_areas_filter'>").tool('Q/filter', {
 						placeholder: state.text.areas.filterPlaceholder
 					}, 'Q_filter')
-						.appendTo(tool.element)
+						.appendTo($container)
 						.activate(function(){
 							state.qFilterTool = Q.Tool.from(this.element, "Q/filter");
 
