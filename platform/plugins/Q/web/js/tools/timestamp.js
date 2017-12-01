@@ -148,13 +148,13 @@ Q.Tool.define('Q/timestamp', function () {
 			refreshAfterSeconds = 60 - (-diff%60);
 		} else if (diff < -60) {
 			result = t.minuteAgo.interpolate({ m: 1 });
-			refreshAfterSeconds = (diff + 60 || 60);
+			refreshAfterSeconds = 60 - (-diff%60);
 		} else if (diff < -10) {
 			result = t.secondsAgo.interpolate({ s: Math.floor(-diff) });
-			refreshAfterSeconds = (diff + 60 || 60);
+			refreshAfterSeconds = 60 - (-diff%60);
 		} else if (diff < 0) {
 			result = t.fewSecondsAgo;
-			refreshAfterSeconds = (diff + 60 || 60);
+			refreshAfterSeconds = 60 - (-diff%60);
 		} else if (diff == 0) {
 			result = t.rightNow;
 			refreshAfterSeconds = 1;
