@@ -19,6 +19,10 @@
  *   @param {String} [options.messageMaxHeight] The maximum height, in pixels, of a rendered message
  *   @param {String} [options.animations] Options for animations, which can include:
  *   @param {String} [options.animations.duration=300] The duration of the animation
+ *   @param {Object} [options.controls={}] Controls to show next to each chat message
+ *   @param {Boolean|Array} [options.controls.up] Can be true or an array of [off, on] image urls.
+ *   @param {Boolean|Array} [options.controls.down] Can be true or an array of [off, on] image urls.
+ *   @param {Boolean|Array} [options.controls.flag] Can be true or an array of [off, on] image urls.
  *   @param {Object} [options.loadMore] May be "scroll", "click" or null/false. Defaults to "click".
  *     <ul>
  *         <li>"click" will show label with "Click to see earlier messages" (configurable in Q.text.Streams.chat.loadMore.click string), and when the user clicks it, new messages will be loaded.</li>

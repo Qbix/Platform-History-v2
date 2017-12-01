@@ -248,7 +248,8 @@ class Q_Request
 				return null;
 			}
 		}
-		return substr($url, $base_url_len + 1);
+		$result = substr($url, $base_url_len + 1);
+		return $result ? $result : '';
 	}
 	
 	/**
