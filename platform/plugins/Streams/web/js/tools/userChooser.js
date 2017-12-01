@@ -44,7 +44,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			background: 'white',
 			border: 'solid 1px #99a',
 			'tab-index': 9000
-		}).on(Q.Pointer.start + ' focusin', function () {
+		}).on(Q.Pointer.start.eventName + ' focusin', function () {
 			focusedResults = true;
 		}).appendTo('body');
 
@@ -162,7 +162,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					onChoose($(this));
 				}).data('userId', k)
 				.data('avatar', avatars[k])
-				.on(Q.Pointer.start + ' focusin', function () {
+				.on(Q.Pointer.start.eventName + ' focusin', function () {
 					focusedResults = true;
 				}).appendTo(tool.$results);
 				if (!show) {

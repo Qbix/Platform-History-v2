@@ -604,17 +604,17 @@ Q.Tool.define('Streams/chat', function(options) {
 		};
 
 		$(document.body)
-			.bind('touchstart', touchstart)
-			.bind('touchend', touchend)
-			.bind('touchmove', function(event){
+			.on('touchstart', touchstart)
+			.on('touchend', touchend)
+			.on('touchmove', function(event){
 
 			if (isScrollNow && event.originalEvent.touches[0].pageY > startY) {
 				// isset scollbar in window
 				if (0 > $(window).height() - $(document.body).height()) {
 					$(document.body)
-						.unbind('touchstart')
-						.unbind('touchend')
-						.unbind('touchmove');
+						.off('touchstart')
+						.off('touchend')
+						.off('touchmove');
 
 					tool.$('.Streams_chat_messages').scroll(function(event){
 						if ($(this).scrollToTop() == 0) {

@@ -148,7 +148,7 @@ Q.Tool.jQuery('Q/touchscroll',
                 });
             }
             setScrollbarPos();
-            $this.on(Q.Pointer.start + '.Q_touchscroll', function(e)
+            $this.on([Q.Pointer.start, '.Q_touchscroll'], function(e)
             {
                 e.preventDefault();
 
@@ -182,7 +182,7 @@ Q.Tool.jQuery('Q/touchscroll',
 
                 Q.handle(o.onScrollStart, $this[0], [$this]);
             });
-            $this.on(Q.Pointer.move + '.Q_touchscroll', function(e)
+            $this.on(Q.Pointer.move.eventName + '.Q_touchscroll', function(e)
             {
                 e.preventDefault();
 
@@ -358,8 +358,8 @@ Q.Tool.jQuery('Q/touchscroll',
                 if ($this.data('Q_touchscroll_scrollbar_v')) {
                     $this.data('Q_touchscroll_scrollbar_v').remove();
                 }
-                $this.off(Q.Pointer.start + '.Q_touchscroll');
-                $this.off(Q.Pointer.move + '.Q_touchscroll');
+                $this.off([Q.Pointer.start, '.Q_touchscroll']);
+                $this.off([Q.Pointer.move, '.Q_touchscroll']);
                 if ($this.data('Q_touchscroll_end_handler')) {
                     $(document.body).off(Q.Pointer.end, $this.data('Q_touchscroll_end_handler'));
                 }

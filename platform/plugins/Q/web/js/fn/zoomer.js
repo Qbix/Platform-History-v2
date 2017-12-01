@@ -40,11 +40,11 @@
 
             var data = $this.data('Q/zoomer');
             if (data) {
-                $this.unbind('mousemove', data.onMouseMove);
-                $this.unbind('mouseleave', data.onMouseLeave);
+                $this.off(Q.Pointer.move, data.onMouseMove);
+                $this.off(Q.Pointer.leave, data.onMouseLeave);
 
-                data.o_div.unbind('mousemove', data.onZoomerMouseMove);
-                data.o_div.unbind('mouseleave', data.onZoomerMouseLeave);
+                data.o_div.off(Q.Pointer.move, data.onZoomerMouseMove);
+                data.o_div.off(Q.Pointer.leave, data.onZoomerMouseLeave);
                 data.o_div.remove();
                 $this.data('Q/zoomer', null);
             }
@@ -132,11 +132,11 @@
             var onZoomerMouseLeave = onZoomerMouseMove;
 
             //this.css('height', '200px');
-            $this.mousemove(onMouseMove);
-            $this.mouseleave(onMouseLeave);
+            $this.on(Q.Pointer.move, onMouseMove);
+            $this.on(Q.Pointer.leave, onMouseLeave);
 
-            o_div.mousemove(onZoomerMouseMove);
-            o_div.mouseleave(onZoomerMouseLeave);
+            o_div.on(Q.Pointer.move, onZoomerMouseMove);
+            o_div.on(Q.Pointer.leave, onZoomerMouseLeave);
 
             o_div.empty().append(z_img);
             o_div.appendTo('body');
@@ -167,16 +167,16 @@
 
         {
             remove: function () {
-                var data = this.data('Q/zoomer');
-                if (data) {
-                    this.unbind('mousemove', data.onMouseMove);
-                    this.unbind('mouseleave', data.onMouseLeave);
+	            var data = $this.data('Q/zoomer');
+	            if (data) {
+		            $this.off(Q.Pointer.move, data.onMouseMove);
+		            $this.off(Q.Pointer.leave, data.onMouseLeave);
 
-                    data.o_div.unbind('mousemove', data.onZoomerMouseMove);
-                    data.o_div.unbind('mouseleave', data.onZoomerMouseLeave);
-                    data.o_div.remove();
-                    this.data('Q/zoomer', null);
-                }
+		            data.o_div.off(Q.Pointer.move, data.onZoomerMouseMove);
+		            data.o_div.off(Q.Pointer.leave, data.onZoomerMouseLeave);
+		            data.o_div.remove();
+		            $this.data('Q/zoomer', null);
+	            }
             }
         }
 
