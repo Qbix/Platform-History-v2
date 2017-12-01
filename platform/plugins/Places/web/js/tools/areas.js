@@ -93,6 +93,10 @@
 							state.qFilterTool.state.onChoose.set(function (element, details) {
 								var previewTool = Q.Tool.from($(element).closest(".Streams_preview_tool"), "Streams/preview");
 
+								if (!previewTool) {
+									return false;
+								}
+
 								state.areaSelected = {
 									publisherId: previewTool.state.publisherId,
 									streamName: previewTool.state.streamName,
