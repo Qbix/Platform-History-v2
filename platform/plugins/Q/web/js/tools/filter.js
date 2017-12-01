@@ -47,7 +47,7 @@ Q.Tool.define('Q/filter', function (options) {
 		$te.css('position', 'relative');
 	}
 	
-	var events = 'focus ' + Q.Pointer.start;
+	var events = 'focus ' + Q.Pointer.start.eventName;
 	var wasAlreadyFocused = false;
 	tool.$input.on(events, function (event) {
 		if (wasAlreadyFocused) return;
@@ -85,7 +85,7 @@ Q.Tool.define('Q/filter', function (options) {
 	});
 	$te.addClass(state.fullscreen ? 'Q_filter_fullscreen' : 'Q_filter_notFullscreen');
 	
-	tool.$results.on(Q.Pointer.start+' '+Q.Pointer.end, function () {
+	tool.$results.on(Q.Pointer.start.eventName + ' ' + Q.Pointer.end.eventName, function () {
 		tool.canceledBlur = true;
 	});
 	
