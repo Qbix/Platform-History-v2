@@ -1508,7 +1508,7 @@ Q.instanceOf = function (testing, Constructor) {
  * or levels > 0, it recursively calls that method to copy the property.
  * @static
  * @method copy
- * @param {Array} fields
+ * @param {Array} [fields=null]
  *  Optional array of fields to copy. Otherwise copy all that we can.
  * @param levels {number}
  *  Optional. Copy this many additional levels inside x if it is a plain object.
