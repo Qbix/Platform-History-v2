@@ -48,9 +48,7 @@
 			streamName: null,
 			location: null,
 			stream: null,
-			areaSelected: null,
-			qFilterTool: null,
-			relatedTool: null
+			areaSelected: null
 		},
 
 		{ // methods go here
@@ -64,18 +62,18 @@
 				var $te = $(tool.element);
 
 				// if Q/filter didn't created - create one
-				if (!state.qFilterTool) {
+				if (!tool.filterTool) {
 					var $container = $('<div class="Places_areas_container" />').appendTo(tool.element);
 					$("<div class='Places_areas_filter'>").tool('Q/filter', {
 						placeholder: state.text.areas.filterPlaceholder
 					}, 'Q_filter')
 						.appendTo($container)
 						.activate(function(){
-							state.qFilterTool = Q.Tool.from(this.element, "Q/filter");
+							tool.filterTool = Q.Tool.from(this.element, "Q/filter");
 
 							// filtering Streams/related tool results
-							state.qFilterTool.state.onFilter.set(function (query, element) {
-								var titles = state.qFilterTool.$(".Streams_related_tool .Streams_preview_tool").not(".Streams_preview_composer");
+							tool.filterTool.state.onFilter.set(function (query, element) {
+								var titles = tool.filterTool.$(".Streams_related_tool .Streams_preview_tool").not(".Streams_preview_composer");
 
 								titles.each(function(){
 									var $this = $(this);
@@ -90,7 +88,7 @@
 							}, tool);
 
 							// set selected Places/area stream
-							state.qFilterTool.state.onChoose.set(function (element, details) {
+							tool.filterTool.state.onChoose.set(function (element, details) {
 								var previewTool = Q.Tool.from($(element).closest(".Streams_preview_tool"), "Streams/preview");
 
 								state.areaSelected = {
@@ -101,7 +99,7 @@
 							}, tool);
 
 							// clear selected Places/area stream
-							state.qFilterTool.state.onClear.set(function () {
+							tool.filterTool.state.onClear.set(function () {
 								state.areaSelected = null;
 							}, tool);
 						});
@@ -109,10 +107,10 @@
 
 				tool.getStream(function(stream){
 					// if related tool already exist - set new stream and refresh
-					if (state.relatedTool) {
-						state.relatedTool.state.publisherId = stream.fields.publisherId;
-						state.relatedTool.state.streamName = stream.fields.name;
-						state.relatedTool.refresh();
+					if (tool.relatedTool) {
+						tool.relatedTool.state.publisherId = stream.fields.publisherId;
+						tool.relatedTool.state.streamName = stream.fields.name;
+						tool.relatedTool.refresh();
 
 						return;
 					}
@@ -139,7 +137,7 @@
 							}
 						}
 					}).activate(function(){
-						state.relatedTool = this;
+						tool.relatedTool = this;
 					});
 				});
 			},
@@ -152,7 +150,7 @@
 				var tool = this;
 				var state = this.state;
 
-				var title = state.qFilterTool.$input.val() || "";
+				var title = tool.filterTool.$input.val() || "";
 
 				var $prompt = Q.prompt(state.text.areas.promptTitle, function (title, dialog) {
 						// user click cancel button
@@ -172,7 +170,7 @@
 						}
 
 						// get array of areas exist
-						var areasExist = state.relatedTool.$(".Streams_preview_title").map(function(){
+						var areasExist = tool.relatedTool.$(".Streams_preview_title").map(function(){
 							return $.trim($(this).text());
 						}).get();
 
@@ -191,7 +189,7 @@
 
 						// wait when new preview tool created with this title and add class Q_filter_result
 						var timerId = setInterval(function(){
-							var container = state.relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
+							var container = tool.relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
 
 							if(!container.length){
 								return;
@@ -203,7 +201,7 @@
 							var $result = container.closest(".Streams_preview_container").addClass("Q_filter_result");
 
 							// select just created area
-							state.qFilterTool.choose($result[0])
+							tool.filterTool.choose($result[0])
 						}, 500);
 					},
 					{
