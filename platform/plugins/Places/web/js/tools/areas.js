@@ -10,14 +10,14 @@
 	var Places = Q.Places;
 
 	/**
-	 * Allows the logged-in user to select/add areas to locations
+	 * Allows the logged-in user to select/add areas to locations.
+	 * Pass either (publisherId,streamName) or (location) options.
 	 * @class Places areas
 	 * @constructor
 	 * @param {Object} options used to pass options
 	 * @param {String} options.publisherId Location stream publisher id
-	 * @param {String} options.streamName Location stream name
-	 * @param {String} options.stream Location stream
-	 * @param {Object} options.location Location object
+	 * @param {String} options.streamName Places/location stream name
+	 * @param {Places.Coordinates} options.location To relate the areas to
 	 */
 	Q.Tool.define("Places/areas", function (options) {
 			var tool = this;
@@ -221,32 +221,19 @@
 			 */
 			getStream: function(callback){
 				var state = this.state;
-
-				// set communityId as publisherId if last empty
-				state.publisherId = state.publisherId || Q.info.appId;
-
-				if (!state.stream && (state.publisherId && state.streamName)) {
-					state.stream = {
-						publisherId: state.publisherId,
-						name: state.streamName,
-						stripped: true
-					};
-				}
-
 				var location = state.location;
 
-				// required publisherId and streamName OR location
-				if (!state.stream && !location) {
-					throw new Exception("Places/areas: required publisherId and streamName OR location");
+				// default publisherId to communityId
+				if (state.streamName && !state.publisherId) {
+					state.publisherId = state.publisherId || Q.info.appId;
 				}
 
-				if (state.stream && state.stream.stripped) { // stripped stream means that it have only publisherId and name
+				if (state.publisherId && state.streamName) { // stripped stream means that it have only publisherId and name
 					Q.Streams.get(state.stream.publisherId, state.stream.name, function () {
 						Q.handle(callback, this, [this]);
 					});
-				} else if(state.stream) { // we have pure stream
-					Q.handle(callback, state.stream, [state.stream]);
-				} else if(location) { // we have just location object and need to check whether stream exist
+				} else if(location) {
+					// we have just location object and need to check whether stream exist
 					// check if we already have location with lat, lng and use one
 					// if no - create Places/location stream
 					Q.req("Places/areas", 'data', function (err, response) {
@@ -271,6 +258,8 @@
 							}
 						}
 					});
+				} else {
+					throw new Exception("Places/areas: required publisherId and streamName, or location");
 				}
 			}
 		});

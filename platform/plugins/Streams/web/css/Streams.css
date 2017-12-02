@@ -854,6 +854,7 @@
 .Streams_chat_vote_container img {
 	width: 20px;
 	height: 20px;
+	margin-bottom: 10px;
 }
 
 .Streams_chat_with_vote .Streams_chat_bubble {
