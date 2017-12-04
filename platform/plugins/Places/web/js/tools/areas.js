@@ -240,13 +240,12 @@
 							console.warn("Places/areas: " + msg);
 							return false;
 						}
-
-						var stream = response.slots.data;
-						Q.Streams.get(stream.publisherId, stream.name, function () {
+						var data = response.slots.data;
+						Q.Streams.get(data.publisherId, data.streamName, function () {
 							Q.handle(callback, this, [this]);
 						});
 					}, {
-						method: 'GET',
+						method: 'POST',
 						fields: {
 							location: {
 								latitude: location.latitude,

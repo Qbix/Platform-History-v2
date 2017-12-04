@@ -4234,7 +4234,7 @@ abstract class Streams extends Base_Streams
 			if (!isset($classes[$type])) {
 				$classes[$type] = Streams::getExtendClasses($type);
 				foreach ($classes[$type] as $className => $fieldNames) {
-					$rows[$className] = call_user_func(array($className, 'select'), '*')
+					$rows[$className] = call_user_func(array($className, 'select'))
 						->where(array(
 							'publisherId' => $publisherId,
 							'streamName' => $streamNamesByType[$type]

@@ -232,7 +232,7 @@ class Streams_Stream extends Base_Streams_Stream
 		// if $templateType == true return all found templates sorted by type,
 		// otherwise return one template and its type
 		$field = ($className === 'Streams_Stream' ? 'name' : 'streamName');
-		$rows = call_user_func(array($className, 'select'), '*')
+		$rows = call_user_func(array($className, 'select'))
 			->where(array(
 				'publisherId' => array('', $publisherId), // generic or specific publisher
 				$field => $streamType.'/'
@@ -260,7 +260,7 @@ class Streams_Stream extends Base_Streams_Stream
 		&$templateType = null
 	) {
 		// fetch template for subscription's PK - publisher, name & user
-		$rows = call_user_func(array($className, 'select'), '*')
+		$rows = call_user_func(array($className, 'select'))
 			->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $streamType.'/', // generic or specific stream name
