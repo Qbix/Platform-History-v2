@@ -33,6 +33,7 @@ class Places_Location
 	 * This is used to cache information from the Google Places API.
 	 * @method stream
 	 * @static
+	 * @param {string} $asUserId
 	 * @param {string} $publisherId
 	 * @param {string} $placeId The id of the place in Google Places
 	 * @param {boolean} $throwIfBadValue
@@ -40,7 +41,7 @@ class Places_Location
 	 * @return {Streams_Stream|null}
 	 * @throws {Q_Exception} if a bad value is encountered and $throwIfBadValue is true
 	 */
-	static function stream($publisherId, $placeId, $throwIfBadValue = false)
+	static function stream($asUserId, $publisherId, $placeId, $throwIfBadValue = false)
 	{
 		if (empty($placeId)) {
 			if ($throwIfBadValue) {
@@ -54,10 +55,9 @@ class Places_Location
 		$result = preg_replace($characters, '_', $placeId);
 		
 		// see if it's already in the system
-		$location = new Streams_Stream();
-		$location->publisherId = $publisherId;
-		$location->name = "Places/location/$placeId";
-		if ($location->retrieve()) {
+		$streamName = "Places/location/$result";
+		$location = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		if ($location) {
 			$ut = $location->updatedTime;
 			if (isset($ut)) {
 				$db = $location->db();
@@ -97,10 +97,11 @@ class Places_Location
 			'website' => $result['website'],
 			'placeId' => $placeId
 		);
-		$location->title = $result['name'];
-		$location->setAttribute($attributes);
-		$location->type = 'Places/location';
-		$location->save();
+		$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
+			'name' => $streamName,
+			'title' => $result['name'],
+			'attributes' => Q::json_encode($attributes)
+		));
 		return $location;
 	}
 	
