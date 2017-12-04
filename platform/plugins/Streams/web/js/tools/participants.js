@@ -233,7 +233,7 @@ function _Streams_participants(options) {
 							return false;
 						}).on(Q.Pointer.click, filter, function () {
 							return false;
-						}).on(Q.Pointer.start, filter, function () {
+						}).on(Q.Pointer.start.eventName, filter, function () {
 							$(tool.element).addClass('Q_discouragePointerEvents');
 							function _pointerEndHandler() {
 								$(tool.element).removeClass('Q_discouragePointerEvents');
