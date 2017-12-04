@@ -298,7 +298,7 @@ Q.Tool.define("Places/location", function (options) {
 					longitude: crd.longitude
 				}).geocode(function (err, results) {
 					var loc = Q.getObject([0, 'geometry', 'location'], results);
-					Q.handle(state.onChoose, tool, [elem, loc]);
+					Q.handle(state.onChoose, tool, [this, loc]);
 				});
 			}, function (err) {
 				Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
