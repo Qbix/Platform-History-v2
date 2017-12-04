@@ -844,3 +844,19 @@
 .Streams_file_preview_tool.Streams_preview_stream:active {
 	background: rgba(150, 150, 150, 0.2);
 }
+
+.Streams_chat_vote_container {
+	width: 20px;
+	position: absolute;
+	right: 0;
+}
+
+.Streams_chat_vote_container img {
+	width: 20px;
+	height: 20px;
+	margin-bottom: 5px;
+}
+
+.Streams_chat_with_vote .Streams_chat_bubble {
+	margin-right: 20px;
+}

@@ -43,21 +43,21 @@ Q.Tool.define("Places/location", function (options) {
 
 	// if showAreas - add Places/areas tool if not exist
 	if(state.showAreas){
-		state.onChoose.set(function(address){
+		state.onChoose.set(function(location){
 			var placesAreas = tool.$(".Q_tool.Places_areas_tool")[0];
 			placesAreas = placesAreas ? Q.Tool.from(placesAreas, "Places/areas") : null;
 
-			if (Q.isEmpty(address)) {
+			if (Q.isEmpty(location)) {
 				if (Q.typeOf(placesAreas) === "Q.Tool") {
 					Q.Tool.remove(placesAreas.element);
 				}
 			} else {
 				if (!placesAreas) {
 					$("<div>").tool("Places/areas", {
-						location: address
+						location: location
 					}).appendTo($te).activate();
 				} else {
-					placesAreas.state.location = address;
+					placesAreas.state.location = location;
 					placesAreas.refresh();
 				}
 			}

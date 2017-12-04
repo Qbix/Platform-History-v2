@@ -1508,7 +1508,7 @@ Q.instanceOf = function (testing, Constructor) {
  * or levels > 0, it recursively calls that method to copy the property.
  * @static
  * @method copy
- * @param {Array} fields
+ * @param {Array} [fields=null]
  *  Optional array of fields to copy. Otherwise copy all that we can.
  * @param levels {number}
  *  Optional. Copy this many additional levels inside x if it is a plain object.
@@ -10996,6 +10996,12 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+var _isTouchscreen = Q.info.isTouchscreen;
+Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
+Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
+Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
+Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
 
 Q.Pointer.which.LEFT = 1;
 Q.Pointer.which.MIDDLE = 2;

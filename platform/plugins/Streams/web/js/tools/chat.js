@@ -51,6 +51,13 @@ Q.Tool.define('Streams/chat', function(options) {
 	if (!state.streamName) {
 		throw new Q.Error("Streams/chat: missing streamName option");
 	}
+	if (!Q.isEmpty(state.vote)) {
+		$(this).addClass('Streams_chat_with_vote');
+		for (var k in state.vote) {
+			state.vote[k].src = Q.url(state.vote[k].src);
+			state.vote[k].activeSrc = Q.url(state.vote[k].activeSrc);
+		}
+	}
 	tool.refresh(function () {
 		if (state.scrollToBottom) {
 			tool.scrollToBottom();
@@ -71,9 +78,24 @@ Q.Tool.define('Streams/chat', function(options) {
 	animations: {
 		duration: 300
 	},
+	vote: {
+		up: {
+			src: '{{Streams}}/img/chat/vote-up.png',
+			activeSrc: '{{Streams}}/img/chat/vote-up-active.png',
+		},
+		down: {
+			src: '{{Streams}}/img/chat/vote-down.png',
+			activeSrc: '{{Streams}}/img/chat/vote-down-active.png',
+		},
+		flag: {
+			src: '{{Streams}}/img/chat/vote-flag.png',
+			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png',
+		}
+	},
 	scrollToBottom: true,
 	overflowed: {
-		src: 'Q/plugins/Streams/img/chat/message-overflowed.png',
+		srcToMe: '{{Streams}}/img/chat/message-overflowed-to-me.png',
+		srcFromMe: '{{Streams}}/img/chat/message-overflowed-from-me.png',
 		title: 'Message from {{displayName}}'
 	},
 	onRefresh: new Q.Event(),
@@ -92,7 +114,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			item: {
 				dir: '{{Streams}}/views',
 				name: 'Streams/chat/message/bubble',
-				fields: {  }
+				fields: { }
 			},
 			notification: {
 				dir: '{{Streams}}/views',
@@ -175,15 +197,12 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		for (var ordinal in messages) {
 			var message = messages[ordinal];
-			var r = res[ordinal] = {
-				content    : message.content,
+			var r = res[ordinal] = Q.extend({
 				time       : Date.fromDateTime(message.sentTime).getTime() / 1000,
-				byUserId   : message.byUserId,
-				ordinal    : message.ordinal,
 				classes    : (message.byUserId === Q.Users.loggedInUserId())
 								? ' Streams_chat_from_me'
 								: ' Streams_chat_to_me'
-			};
+			}, message);
 			r[action] = true;
 		}
 
@@ -235,12 +254,16 @@ Q.Tool.define('Streams/chat', function(options) {
 			);
 		}
 		
-		function _processMessage(ordinal, message) {
+		function _processMessage(ordinal, fields) {
 			// TODO: in the future, render stream players inside message template
 			// according to the instructions in the message
+			var byMe = (fields.byUserId === Q.Users.loggedInUserId());
+			if (!byMe) {
+				fields = Q.extend({}, fields, { vote: state.vote });
+			}
 			Q.Template.render(
 				'Streams/chat/message/bubble',
-				message,
+				fields,
 				p.fill(ordinal)
 			);
 			ordinals.push(ordinal);
@@ -249,23 +272,47 @@ Q.Tool.define('Streams/chat', function(options) {
 		var ordinals = [];
 		Q.each(messages, _processMessage, {ascending: true, numeric: true});
 		p.add(ordinals, 1, function (params) {
-			var snippets = {};
+			var items = {};
 			for (var ordinal in params) {
-				var $html = $(params[ordinal][1]);
-				$('.Streams_chat_avatar', $html).each(function () {
+				var $element = $(params[ordinal][1]);
+				$('.Streams_chat_avatar', $element).each(function () {
 					Q.Tool.setUpElement(this, 'Users/avatar', {
 						userId: $(this).attr('data-byUserId'),
 						short: true
 					}, null, tool.prefix);
 				});
-				$('.Streams_chat_timestamp', $html).each(function () {
+				$('.Streams_chat_timestamp', $element).each(function () {
 					Q.Tool.setUpElement(this, 'Q/timestamp', {
 						time: $(this).attr('data-time')
 					}, null, tool.prefix);
 				});
-				snippets[ordinal] = $html;
+				$element.find('.Streams_chat_vote')
+				.plugin('Q/clickable')
+				.on(Q.Pointer.click, function () {
+					var $this = $(this);
+					var thisType = $this.attr('data-vote');
+					$this.closest('.Streams_chat_item')
+					.find('.Streams_chat_vote')
+					.each(function () {
+						var $this = $(this);
+						var type = $this.attr('data-vote');
+						var src = $this.attr('src');
+						src = (type === thisType && src === state.vote[type].src)
+							? state.vote[type].activeSrc
+							: state.vote[type].src;
+						$this.attr('src', src);
+						if (type === 'flag' && src === state.vote[type].activeSrc) {
+							Q.alert("Message has been flagged for admin review. Tap again to unflag.");
+							var fields = {type: type};
+							Q.req('Streams/chatVote', function () {
+								// Vote up/down/flag has been submitted
+							}, { fields: fields, method: 'post' });
+						}
+					});
+				});
+				items[ordinal] = $element;
 			}
-			callback(snippets, messages);
+			callback(items, messages);
 		}).run();
 		
 		Q.Streams.Total.seen(
@@ -357,20 +404,20 @@ Q.Tool.define('Streams/chat', function(options) {
 		 * get more messages
 		 */
 		function _renderMore(messages) {
-			messages = tool.prepareMessages(messages);
+			var results = tool.prepareMessages(messages);
 			var $more = tool.$('.Streams_chat_more');
-			if (Q.isEmpty(messages)) {
+			if (Q.isEmpty(results)) {
 				return $more.hide();
 			};
 			var $scm = tool.$('.Streams_chat_messages');
-			tool.renderMessages(messages, function (snippets) {
+			tool.renderMessages(results, function (items) {
 				tool.$('.Streams_chat_noMessages').remove();
 				var least = 1000;
 				var totalHeight = 0;
-				Q.each(snippets, function (ordinal, $html) {
-					$html.prependTo($scm).activate();
+				Q.each(items, function (ordinal, $element) {
+					$element.prependTo($scm).activate();
 					least = ordinal;
-					totalHeight += ($html.outerHeight(true) + $html.outerHeight())/2;
+					totalHeight += ($element.outerHeight(true) + $element.outerHeight())/2;
 				}, {ascending: false});
 				$more.prependTo($scm);
 				$scm.scrollTop(totalHeight);
@@ -419,10 +466,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		// new message arrived
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/chat/message')
 		.set(function(stream, message) {
-			tool.renderMessages(tool.prepareMessages(message), function (snippets) {
+			tool.renderMessages(tool.prepareMessages(message), function (items) {
 				tool.$('.Streams_chat_noMessages').remove();
 				var $scm = tool.$('.Streams_chat_messages'); 
-				Q.each(snippets, function (key, $html) {
+				Q.each(items, function (key, $html) {
 					$html.appendTo($scm).activate();
 				}, {ascending: true});
 				tool.processDOM();
@@ -557,17 +604,17 @@ Q.Tool.define('Streams/chat', function(options) {
 		};
 
 		$(document.body)
-			.bind('touchstart', touchstart)
-			.bind('touchend', touchend)
-			.bind('touchmove', function(event){
+			.on('touchstart', touchstart)
+			.on('touchend', touchend)
+			.on('touchmove', function(event){
 
 			if (isScrollNow && event.originalEvent.touches[0].pageY > startY) {
 				// isset scollbar in window
 				if (0 > $(window).height() - $(document.body).height()) {
 					$(document.body)
-						.unbind('touchstart')
-						.unbind('touchend')
-						.unbind('touchmove');
+						.off('touchstart')
+						.off('touchend')
+						.off('touchmove');
 
 					tool.$('.Streams_chat_messages').scroll(function(event){
 						if ($(this).scrollToTop() == 0) {
@@ -652,8 +699,10 @@ Q.Tool.define('Streams/chat', function(options) {
 				return;
 			}
 			this.style.cursor = 'pointer';
+			var type = $(this).closest('.Streams_chat_item').hasClass('Streams_chat_to_me')
+				? 'srcToMe' : 'srcFromMe';
 			var $indicator = $('<img />', {
-				"src": Q.url(state.overflowed.src),
+				"src": Q.url(state.overflowed[type]),
 				"class": "Streams_chat_overflowed_indicator"
 			});
 			$(this).closest('.Streams_chat_bubble')
@@ -680,8 +729,8 @@ Q.Tool.define('Streams/chat', function(options) {
 			tool.render(function() {
 				tool.renderMessages(
 					tool.prepareMessages(messages), 
-					function (snippets) {
-						Q.each(snippets, function (key, $html) {
+					function (items) {
+						Q.each(items, function (key, $html) {
 							tool.$('.Streams_chat_noMessages').remove();
 							var $scm = tool.$('.Streams_chat_messages'); 
 							$html.appendTo($scm).activate();
@@ -719,6 +768,13 @@ Q.Template.set('Streams/chat/message/bubble',
 			'data-ordinal="{{ordinal}}">'+
 		'<div class="Streams_chat_avatar" data-byUserId="{{byUserId}}"></div>'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
+		'{{#if vote}}' +
+		'<div class="Streams_chat_vote_container">' +
+			'<img class="Streams_chat_vote_up Streams_chat_vote" data-vote="up" src="{{vote.up.src}}">' +
+			'<img class="Streams_chat_vote_down Streams_chat_vote" data-vote="down" src="{{vote.down.src}}">' +
+			'<img class="Streams_chat_vote_flag Streams_chat_vote" data-vote="flag" src="{{vote.flag.src}}">' +
+		'</div>' +
+		'{{/if}}' +
 		'<div class="Streams_chat_bubble">'+
 			'<div class="Streams_chat_tick"></div>'+
 			'<div class="Streams_chat_message">{{content}}</div>'+
@@ -756,7 +812,9 @@ Q.Template.set('Streams/chat/message/error',
 	'</div>'
 );
 
-Q.Template.set('Streams/chat/Streams_chat_noMessages', '<i class="Streams_chat_noMessages">No one has said anything</i>');
+Q.Template.set('Streams/chat/Streams_chat_noMessages',
+	'<i class="Streams_chat_noMessages">No one has said anything</i>'
+);
 
 Q.Template.set('Streams/chat/main', 
 	'<div class="Q_clear"></div>'+
