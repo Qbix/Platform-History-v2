@@ -45,7 +45,7 @@ function Streams_promote_post()
 		if ($location->retrieve()) {
 			$parts = explode('/', $locationName);
 			$placeId = end($parts);
-			$location = Places_Location::stream($communityId, $placeId, true);
+			$location = Places_Location::stream(null, $communityId, $placeId, true);
 			$relations['location'] = $stream->relateTo($location, $relationType, null, $o);
 			$latitude = $location->getAttribute('latitude');
 			$longitude = $location->getAttribute('longitude');
