@@ -51,16 +51,22 @@ Q.Tool.define("Places/location", function (options) {
 				if (Q.typeOf(placesAreas) === "Q.Tool") {
 					Q.Tool.remove(placesAreas.element);
 				}
-			} else {
-				if (!placesAreas) {
-					$("<div>").tool("Places/areas", {
-						location: location
-					}).appendTo($te).activate();
-				} else {
-					placesAreas.state.location = location;
-					placesAreas.refresh();
-				}
+
+				return false;
 			}
+
+			if (!placesAreas) {
+				$("<div>").tool("Places/areas", {
+					location: location
+				}).appendTo($te).activate();
+
+				return true;
+			}
+
+			placesAreas.state.location = location;
+			placesAreas.refresh();
+
+			return true;
 		}, tool);
 	}
 
