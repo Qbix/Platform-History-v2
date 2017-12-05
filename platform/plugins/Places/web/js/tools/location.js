@@ -255,7 +255,9 @@ Q.Tool.define("Places/location", function (options) {
 			Q.handle(success, tool, [pos]);
 		}, function (err) {
 			Q.handle(fail, tool, [err]);
-			console.warn("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
+			Q.alert("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
+
+			return false;
 		}, {
 			enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 			timeout: 5000,
