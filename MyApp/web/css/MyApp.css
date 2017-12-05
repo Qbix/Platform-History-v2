@@ -1,3 +1,4 @@
+
 /**
  * This CSS is just to get you started.
  * Feel free to modify any of it for your own app.
@@ -249,3 +250,5 @@ html.MyApp_notFound #content,
 html.MyApp_errors #content { padding: 30px; text-align: center; overflow: hidden; text-overflow: ellipsis; }
 html.MyApp_notFound .url,
 html.MyApp_errors .url { font-weight: bold; text-decoration: underline; }
+
+span.c3 { font-weight: bold; }
