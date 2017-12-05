@@ -302,9 +302,6 @@ Q.Tool.define("Places/location", function (options) {
 					var loc = Q.getObject([0, 'geometry', 'location'], results);
 					Q.handle(state.onChoose, tool, [this, loc]);
 				});
-			}, function (err) {
-				Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
-				return false;
 			});
 
 			return;
