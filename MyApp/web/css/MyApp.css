@@ -216,7 +216,7 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 
 /* The following lines are for cordova on iOS */
 .Q_cordova.Q_ios #status_background { background: #f2f2f2; height: 20px; }
-.Q_notCordova.Q_ios .status_background { display: none; }
+.Q_notCordova.Q_ios #status_background { display: none; }
 .Q_cordova.Q_ios.Q_mobile #dashboard_slot { top: 20px; height: 50px; }
 .Q_cordova.Q_ios.Q_mobile #page { top: 70px; }
 

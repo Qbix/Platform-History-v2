@@ -458,6 +458,7 @@
 .Streams_chat_to_me .Users_avatar_tool {
 	float: left;
 	position: relative;
+	font-weight: bold;
 }
 .Streams_chat_tool .Users_avatar_icon {
 	position: absolute;
@@ -470,7 +471,6 @@
 }
 .Streams_chat_message {
 	color: #222;
-	width: 96%;
 	max-height: 100px;
 	overflow: hidden;
 	word-wrap: break-word;
@@ -541,7 +541,7 @@
 	text-align: right;
 	float: right;
 	cursor: default;
-	font-size: 10pt;
+	font-size: 0.8em;
 	color: gray;
 }
 .Streams_chat_bubble {
@@ -551,6 +551,7 @@
 	padding: 10px;
 	border: 1px solid #D0D9E4;
 	clear: both;
+	font-size: 0.8em;
 }
 .Streams_chat_tick {
 	background: url('../../Streams/img/chat/message-tick.png');

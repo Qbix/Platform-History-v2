@@ -2426,12 +2426,12 @@
 				Users.Facebook.type = 'oauth';
 				if (Q.info.platform === 'ios') {
 					// ios
-					window.appAvailability.check('fb://', function () {
+					window.appAvailability && appAvailability.check('fb://', function () {
 						Users.Facebook.type = 'native';
 					});
 				} else {
 					// android
-					window.appAvailability.check('com.facebook.katana', function () {
+					window.appAvailability && appAvailability.check('com.facebook.katana', function () {
 						Users.Facebook.type = 'native';
 					}, function () {
 						window.appAvailability.check('com.facebook.lite', function () {
