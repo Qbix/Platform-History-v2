@@ -220,7 +220,12 @@ Q.Tool.define('Q/filter', function (options) {
 				.insertAfter($te);
 			$te.addClass('Q_filter_begun')
 				.prependTo('body');
-			$te.nextAll().addClass('Q_filter_hide');
+			$te.nextAll().not('.Q_dont_hide').addClass('Q_filter_hide');
+			var top = 0;
+			$te.nextAll('.Q_dont_hide').each(function () {
+				top += $(this).outerHeight(true);
+			});
+			$te.css('top', top + 'px');
 			Q.Masks.show(tool);
 			tool.$input.trigger('Q_refresh').plugin('Q/clickfocus');
 			setTimeout(function () {
