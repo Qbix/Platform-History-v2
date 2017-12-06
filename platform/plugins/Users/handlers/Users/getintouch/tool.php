@@ -34,6 +34,7 @@ function Users_getintouch_tool($options)
 			throw new Q_Exception_MissingRow(array('table' => 'user', 'criteria' => "id=$userId"));
 		}
 	}
+	$key = Q::ifset($options, 'key', 'blah');;
 	$ways = array();
 	$email = $sms = $call = false;
 	if (!empty($options['email']) and $user->emailAddress) {
