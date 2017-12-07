@@ -1242,10 +1242,13 @@ function criteria_internal (query, criteria) {
 					}
 					list.push('(' + vector.join(',') + ')');
 				}
-
-				var lhs = '(' + columns.join(',') + ')';
-				var rhs = '(\n' + list.join(',\n') + '\n)';
-				criteria_list.push(lhs + ' IN ' + rhs);
+				if (list.length) {
+					var lhs = '(' + columns.join(',') + ')';
+					var rhs = '(\n' + list.join(',\n') + '\n)';
+					criteria_list.push(lhs + ' IN ' + rhs);
+				} else {
+					criteria_list.push('FALSE');
+				}
 			} else if (value === undefined) {
 				// do not add this value to criteria
 			} else if (value == null) {
