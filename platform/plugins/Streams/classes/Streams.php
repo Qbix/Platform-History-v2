@@ -2022,17 +2022,17 @@ abstract class Streams extends Base_Streams
 			);
 
 			if ($u = Streams_Stream::getConfigField($category->type, 
-				array('relatedTo', $type, 'uri'),
+				array('relatedTo', $type, 'url'),
 				Streams_Stream::getConfigField($category->type, array(
-					'relatedTo', '*', 'uri', null
+					'relatedTo', '*', 'url', null
 				))
 			)) {
 				$fromUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
 			}
 			if ($u = Streams_Stream::getConfigField($stream->type, 
-				array('relatedFrom', $type, 'uri'),
+				array('relatedFrom', $type, 'url'),
 				Streams_Stream::getConfigField($stream->type, array(
-					'relatedFrom', '*', 'uri', null
+					'relatedFrom', '*', 'url', null
 				))
 			)) {
 				$toUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
