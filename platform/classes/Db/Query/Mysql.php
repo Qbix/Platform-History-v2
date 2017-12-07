@@ -1712,9 +1712,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						}
 						$list[] = '(' .  implode(',', $vector) . ')';
 					}
-					$lhs = '(' . implode(',', $columns) . ')';
-					$rhs = "(\n" . implode(",\n", $list) . "\n)";
-					$criteria_list[] = "$lhs IN $rhs";
+					if (!empty($list)) {
+						$lhs = '(' . implode(',', $columns) . ')';
+						$rhs = "(\n" . implode(",\n", $list) . "\n)";
+						$criteria_list[] = "$lhs IN $rhs";
+					} else {
+						$criteria_list[] = "FALSE";
+					}
 				} else if ($value === null) {
 					$criteria_list[] = "ISNULL($expr)";
 				} else if ($value instanceof Db_Expression) {
