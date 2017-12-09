@@ -55,7 +55,7 @@ class Auto {
 		return $filenames;
 	}
 
-	private function replaceTagsByNumbers($data, $startNumber = 10000) {
+	private function replaceTagsByNumbers($data, $startNumber = 999) {
 		for ($i = 0; $i < sizeof($data); $i++) {
 			if (preg_match_all("/{{(.*?)}}/", $data[$i]['value'], $matches)) {
 				$j = 0;
@@ -70,7 +70,7 @@ class Auto {
 		return $data;
 	}
 
-	private function revertTags($data, $startNumber = 10000) {
+	private function revertTags($data, $startNumber = 999) {
 		for ($i = 0; $i < sizeof($data); $i++) {
 			if (!empty($data[$i]['tags'])) {
 				$j = 0;

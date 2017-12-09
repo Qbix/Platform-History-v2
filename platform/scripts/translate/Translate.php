@@ -105,7 +105,17 @@ class Translate
 	protected function getLocales()
 	{
 		$tree = new Q_Tree();
-		$tree->load(Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json');
+		$platformLocalesConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
+		$appLocalesConfig = APP_CONFIG_DIR . DS . 'locales.json';
+		$config = null;
+		if (file_exists($appLocalesConfig)) {
+			$config = $tree->load($appLocalesConfig);
+		} elseif (file_exists($platformLocalesConfig)) {
+			$config = $tree->load($platformLocalesConfig);
+		}
+		if (!$config) {
+			throw new Exception('Empty locales.json');
+		}
 		return $tree->getAll();
 	}
 
