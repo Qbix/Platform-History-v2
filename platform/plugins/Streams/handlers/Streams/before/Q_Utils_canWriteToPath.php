@@ -13,7 +13,7 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$len = strlen(APP_DIR);
 	if (substr($path, 0, $len) === APP_DIR) {
 		$sp = str_replace(DS, '/', substr($path, $len+1));

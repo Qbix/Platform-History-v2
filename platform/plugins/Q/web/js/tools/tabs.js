@@ -39,6 +39,12 @@ Q.Tool.define("Q/tabs", function(options) {
 	var $te = $(tool.element);
 	
 	Q.addStylesheet('{{Q}}/css/tabs.css');
+	
+	var refresh = function () {
+		tool.refresh();
+	};
+	Q.onPopState.set(refresh, tool);
+	Q.Page.onPush.set(refresh, tool);
 
 	state.defaultTabName = state.defaultTabName || null;
 	
@@ -431,8 +437,9 @@ function _copyClassToOverflow(tool) {
 		}
 	});
 	if (tool.$overflow) {
-		tool.$overflow.removeClass(state.lastClass)
-			.addClass(currentClass);
+		tool.$overflow
+		.removeClass(state.lastClass)
+		.addClass(currentClass || 'Q_tabs_noMatchingTab');
 	};
 	state.lastClass = currentClass;
 }

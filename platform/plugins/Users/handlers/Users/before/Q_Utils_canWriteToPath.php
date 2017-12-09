@@ -15,7 +15,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	if (!$user) {
 		return false;
 	}
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$subpaths = Q_Config::get('Users', 'paths', 'uploads', array(
 		'files/{{app}}/uploads/Users/{{userId}}' => true
 	));

@@ -107,13 +107,15 @@ handlebars.registerHelper('option', function(value, html, selectedValue) {
 module.exports = {
 
 	/**
-	 * Search for handlebars template
+	 * Load and return the content of a handlebars template (synchronously)
 	 * @method template
 	 * @param {string} path The template name
-	 * @return {string|null}
+	 * @return {string|null} The content of the template, or null if it wasn't found
 	 */
 	template: function (path) {
-		if (_templates[path]) return _templates[path];
+		if (_templates[path]) {
+			return _templates[path];
+		}
 		var i, tpl = null, loaders = _getLoaders();
 		for (i=0; i<loaders.length; i++) {
 			if ((tpl = loaders[i](path))) break;
@@ -167,7 +169,7 @@ module.exports = {
 		if (partials) {
 			_getLoaders();
 			for (i=0; i<partials.length; i++) {
-				var path = partials[i];
+				path = partials[i];
 				for (j=0; j<_partials.length; j++) {
 					if (part[path] = _partials[j](path)) {
 						break;

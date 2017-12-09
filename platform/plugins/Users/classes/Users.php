@@ -25,7 +25,7 @@ abstract class Users extends Base_Users
 	static function communityId()
 	{
 		$communityId = Q_Config::get('Users', 'community', 'id', null);
-		return $communityId ? $communityId : Q_Config::expect('Q', 'app');
+		return $communityId ? $communityId : Q::app();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ abstract class Users extends Base_Users
 	static function communityName()
 	{
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
-		return $communityName ? $communityName : Q_Config::expect('Q', 'app');
+		return $communityName ? $communityName : Q::app();
 	}
 	
 	/**
@@ -48,7 +48,9 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * @param string [$publisherId] The id of the publisher relative to whom to calculate the roles. Defaults to the app name.
+	 * @param string [$publisherId=Users::communityId()]
+	 *  The id of the publisher relative to whom to calculate the roles.
+	 *  Defaults to the community id.
 	 * @param {string|array|Db_Expression} [$filter=null] 
 	 *  You can pass additional criteria here for the label field
 	 *  in the `Users_Contact::select`, such as an array or Db_Range
@@ -73,7 +75,7 @@ abstract class Users extends Base_Users
 			}
 			$userId = $user->id;
 		}
-		$contacts = Users_Contact::select('*')
+		$contacts = Users_Contact::select()
 			->where(array(
 				'userId' => $publisherId,
 				'contactUserId' => $userId
@@ -198,7 +200,7 @@ abstract class Users extends Base_Users
 	 * If the user was not originally retrieved from the database,
 	 * inserts a new one.
 	 * Thus, this can also be used to turn visitors into registered
-	 * users.
+	 * users by authenticating with some external platform.
 	 * @method authenticate
 	 * @static
 	 * @param {string} $platform Currently only supports the value "facebook".
@@ -405,7 +407,7 @@ abstract class Users extends Base_Users
 				if (!$user->wasRetrieved()) {
 					// Register a new user basically and give them an empty username for now
 					$user->username = "";
-					$user->icon = 'default';
+					$user->icon = '{{Users}}/img/icons/default';
 					$user->signedUpWith = $platform;
 					$user->save();
 
@@ -428,6 +430,7 @@ abstract class Users extends Base_Users
 				}
 		 	}
 		}
+		$app_user->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
 		Users::$cache['user'] = $user;
 		Users::$cache['authenticated'] = $authenticated;
@@ -474,7 +477,7 @@ abstract class Users extends Base_Users
 		if (isset($_SESSION['Users']['appUsers'][$key])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$key];
-			$au = Users_AppUser::select('*')->where($pk)->fetchDbRow();
+			$au = Users_AppUser::select()->where($pk)->fetchDbRow();
 			if (empty($au)) {
 				// somehow this app_user disappeared from the database
 				throw new Q_Exception_MissingRow(array(
@@ -504,8 +507,7 @@ abstract class Users extends Base_Users
 			}
 		} else {
 			// We have to put the session info in
-			$app_user->userId = $user->id;
-			if ($app_user->retrieve('*', true)) {
+			if ($app_user->retrieve(null, true)) {
 				// App user exists in database. Do we need to update it?
 				if (!isset($app_user->access_token)
 				or $app_user->access_token != $accessToken) {
@@ -813,7 +815,7 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'after');
 		
-		$votes = Users_Vote::select('*')
+		$votes = Users_Vote::select()
 			->where(array(
 				'userId' => $user->id,
 				'forType' => 'Users/hinted'
@@ -991,7 +993,7 @@ abstract class Users extends Base_Users
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
 		}
-		$user->icon = 'default';
+		$user->icon = '{{Users}}/img/icons/default';
 		$user->passphraseHash = '';
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
@@ -1153,7 +1155,7 @@ abstract class Users extends Base_Users
 			list($hashed, $ui_type) = self::hashing($value, $type);
 			$identifiers = "$ui_type:$hashed";
 		}
-		$uis = Users_Identify::select('*')->where(array(
+		$uis = Users_Identify::select()->where(array(
 			'identifier' => $identifiers,
 			'state' => isset($state) ? $state : array('verified', 'future')
 		))->limit(1)->fetchDbRows();
@@ -1214,7 +1216,7 @@ abstract class Users extends Base_Users
 		$user = new Users_User();
 		if ($type === 'email') {
 			$user->save();
-			$user->setEmailAddress($value);
+			$user->setEmailAddress($value, true);
 		} else if ($type === 'mobile') {
 			$user->save();
 			$user->setMobileNumber($value, true);
@@ -1223,7 +1225,7 @@ abstract class Users extends Base_Users
 		}
 		$user->signedUpWith = 'none'; // this marks it as a future user for now
 		$user->username = "";
-		$user->icon = 'future';
+		$user->icon = '{{Users}}/img/icons/future';
 		$during = 'future';
 		/**
 		 * @event Users/insertUser {before}
@@ -1262,7 +1264,7 @@ abstract class Users extends Base_Users
 			$ui->state = 'future';
 			if (!$ui->retrieve()) {
 				$ui->userId = $user->id;
-				$ui->save();
+				$ui->save(true);
 			}
 			$status = $ui->state;
 		}
@@ -1299,7 +1301,7 @@ abstract class Users extends Base_Users
 	static function importIcon($user, $urls = array(), $directory = null)
 	{
 		if (empty($directory)) {
-			$app = Q_Config::expect('Q', 'app');
+			$app = Q::app();
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
 				.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'imported';
 		}
@@ -1536,7 +1538,7 @@ abstract class Users extends Base_Users
 			list($hashed, $ui_type) = self::hashing($v, $k);
 			$identifiers[] = "$ui_type:$hashed";
 		}
-		return Users_Link::select('*')->where(array(
+		return Users_Link::select()->where(array(
 			'identifier' => $identifiers
 		))->fetchDbRows();
 	}
@@ -1659,7 +1661,7 @@ abstract class Users extends Base_Users
 	/**
 	 * Get the url of a user's icon
 	 * @param {string} [$icon] The contents of a user row's icon field
-	 * @param {string} [$basename=""] The last part after the slash, such as "50.png"
+	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
 	 * @return {string} The stream's icon url
 	 */
 	static function iconUrl($icon, $basename = null)
@@ -1667,8 +1669,10 @@ abstract class Users extends Base_Users
 		if (empty($icon)) {
 			return '';
 		}
-		$url = Q_Utils::interpolateUrl($icon);
-		$url = Q_Valid::url($url) ? $url : "{{Users}}/img/icons/$url";
+		$url = Q_Uri::interpolateUrl($icon);
+		$url = (Q_Valid::url($url) or mb_substr($icon, 0, 2) === '{{') 
+			? $url 
+			: "{{Users}}/img/icons/$url";
 		if ($basename and strpos($basename, '.') === false) {
 			$basename .= ".png";
 		}

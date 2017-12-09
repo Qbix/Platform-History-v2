@@ -373,6 +373,9 @@ abstract class Streams extends Base_Streams
 		} else {
 			$namesToFetch = $name;
 		}
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
 		$criteria = array(
 			'publisherId' => $publisherId,
 			'name' => $namesToFetch
@@ -388,7 +391,7 @@ abstract class Streams extends Base_Streams
 			: array();
 		
 		if (!empty($options['withParticipant']) and $asUserId) {
-			$prows = Streams_Participant::select('*')->where(array(
+			$prows = Streams_Participant::select()->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $namesToFetch,
 				'userId' => $asUserId
@@ -405,7 +408,7 @@ abstract class Streams extends Base_Streams
 		if (!empty($options['withTotals'])) {
 			$infoForTotals = array();
 			if (isset($options['withTotals']['*'])) {
-				$trows = Streams_Total::select('*')->where(array(
+				$trows = Streams_Total::select()->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $name,
 					'messageType' => $options['withTotals']['*']
@@ -426,7 +429,7 @@ abstract class Streams extends Base_Streams
 				$infoForTotals[$j] = array($n, $mt);
 			}
 			foreach ($infoForTotals as $info) {
-				$frows = Streams_Total::select('*')->where(array(
+				$frows = Streams_Total::select()->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $info[0],
 					'messageType' => $info[1]
@@ -687,9 +690,9 @@ abstract class Streams extends Base_Streams
 
 		// Get the per-label access data
 		// Avoid making a join to allow more flexibility for sharding
-		$accesses = Streams_Access::select('*')
+		$accesses = Streams_Access::select()
 		->where(array(
-			'publisherId' => $publisherId,
+			'publisherId' => array($publisherId, ''),
 			'streamName' => $names,
 			'ofUserId' => array('', $asUserId)
 		))->ignoreCache()->fetchDbRows();
@@ -702,7 +705,7 @@ abstract class Streams extends Base_Streams
 		}
 		if (!empty($labels)) {
 			$labels = array_unique($labels);
-			$contacts = Users_Contact::select('*')
+			$contacts = Users_Contact::select()
 				->where(array(
 					'userId' => $actualPublisherId,
 					'label' => $labels,
@@ -922,7 +925,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
-	 * @return {Streams_Stream|boolean} Returns the stream that was created.
+	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
 	static function create(
@@ -1144,28 +1147,30 @@ abstract class Streams extends Base_Streams
 		if (!isset($uri)) {
 			$uri = Q_Dispatcher::uri();
 		}
+		$publisherId = null;
 		if (isset($_REQUEST['publisherId'])) {
-			return $_REQUEST['publisherId'];
+			$publisherId = $_REQUEST['publisherId'];
 		} else if (isset($uri->publisherId)) {
-			return $uri->publisherId;
+			$publisherId = $uri->publisherId;
 		} else if (isset($uri->username)) {
 			$publisher = new Users_User();
 			$publisher->username = $uri->username; // Warning: SECONDARY_LOOKUP
 			if (!$publisher->retrieve()) {
 				throw new Users_Exception_NoSuchUser(array(), 'username');
 			}
-			return $publisher->id;
-		}
-		if (Streams::$followedInvite) {
-			return Streams::$followedInvite->publisherId;
-		}
-		if ($throwIfMissing) {
+			$publisherId = $publisher->id;
+		} else if (Streams::$followedInvite) {
+			$publisherId = Streams::$followedInvite->publisherId;
+		} else if ($throwIfMissing) {
 			throw new Q_Exception_RequiredField(
 				array('field' => 'publisher id'),
 				'publisherId'
 			);
 		}
-		return null;
+		if ($throwIfMissing && !is_string($publisherId)) {
+			throw new Q_Exception_WrongType(array('field' => 'publisherId', 'type' => 'string'));
+		}
+		return $publisherId;
 	}
 
 	/**
@@ -1177,8 +1182,7 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {boolean} $throwIfMissing=false
 	 *  Optional. If true, throws an exception if the stream name cannot be deduced
-	 * @param {string} $returnAs
-	 *  Defaults to "string". Can also be "array" or "original"
+	 * @param {string} [$returnAs='string'] Can be "array" or "string".
 	 * @param {array|string} [$uri=Q_Dispatcher::uri()]
 	 *  An array or string representing a uri to use instead of the Q_Dispatcher::uri()
 	 * @return {string}
@@ -1194,45 +1198,39 @@ abstract class Streams extends Base_Streams
 		if (!isset($uri)) {
 			$uri = Q_Dispatcher::uri();
 		}
+		$name = $result = null;
+		$fieldName = 'streamName';
 		if (isset($_REQUEST['streamName'])) {
 			$result = $_REQUEST['streamName'];
 		} else if (isset($_REQUEST['name'])) {
 			$result = $_REQUEST['name'];
+			$fieldName = 'name';
 		} else if (isset($uri->streamName)) {
 			$result = $uri->streamName;
 		} else if (isset($uri->name)) {
+			$fieldName = 'name';
 			$result = $uri->name;
 		}
 		if (isset($result)) {
-			if ($returnAs === 'string' and is_array($result)) {
+			if (is_array($result)) {
 				$result = implode('/', $result);
 			}
-			if ($returnAs === 'array' and is_string($result)) {
-				$result = explode('/', $result);
-			}
-			if (is_array($result)) {
-				if (isset($uri->name_prefix)) {
-					foreach ($result as $k => $v) {
-						$result[$k] = $uri->name_prefix.$result;
-					}
-				}
-				return $result;
-			}
-			if (!is_string($result)) {
-				return $result;
-			}
-			return isset($uri->name_prefix) ? $uri->name_prefix.$result : $result;
-		}
-		if (Streams::$followedInvite) {
-			return Streams::$followedInvite->streamName;
-		}
-		if ($throwIfMissing) {
+			$name = isset($uri->name_prefix) ? $uri->name_prefix.$result : $result;
+		} else if (Streams::$followedInvite) {
+			$name = Streams::$followedInvite->streamName;
+		} else if ($throwIfMissing) {
 			throw new Q_Exception_RequiredField(
 				array('field' => 'stream name'),
 				'streamName'
 			);
 		}
-		return null;
+		if ($throwIfMissing && !is_string($name)) {
+			throw new Q_Exception_WrongType(array('field' => $fieldName, 'type' => 'string or array'));
+		}
+		if ($returnAs === 'array' and is_string($name)) {
+			$name = explode('/', $result);
+		}
+		return $name;
 	}
 
 	/**
@@ -1392,7 +1390,7 @@ abstract class Streams extends Base_Streams
 			$asUserId = $asUser ? $asUser->id : "";
 		}
 		$avatar = Streams_Avatar::fetch($asUserId, $userId);
-		return $avatar ? $avatar->displayName($options, $fallback) : $default;
+		return $avatar ? $avatar->displayName($options, $fallback) : $fallback;
 	}
 
 	/**
@@ -1563,7 +1561,7 @@ abstract class Streams extends Base_Streams
 		$readLevels2 = array();
 		if ($contact_label_list) {
 			$contact_label_list = array_unique($contact_label_list);
-			$contacts = Users_Contact::select('*')
+			$contacts = Users_Contact::select()
 				->where(array(
 					'userId' => $publisherId,
 					'label' => $contact_label_list
@@ -1771,14 +1769,14 @@ abstract class Streams extends Base_Streams
 		
 		// Fetch relatedTo
 		if ($relatedTo !== false) {
-			$relatedTo = Streams_RelatedTo::select('*')
+			$relatedTo = Streams_RelatedTo::select()
 			->where($criteria)
 			->fetchDbRows(null, null, $arrayField);
 		}
 		
 		// Fetch relatedFrom
 		if ($relatedFrom !== false) {
-			$relatedFrom = Streams_RelatedFrom::select('*')
+			$relatedFrom = Streams_RelatedFrom::select()
 			->where($criteria)
 			->fetchDbRows(null, null, $arrayField);
 		}
@@ -1843,8 +1841,11 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just relates the stream to the category
-	 * @param {boolean} [$options.skipMessage=false] If true, skips posting the Streams/relatedFrom message to the "from" streams
+	 * @param {boolean} [$options.skipMessageTo=false] If true, skips posting the Streams/relatedFrom message to the "to" streams
+	 * @param {boolean} [$options.skipMessageFrom=false] If true, skips posting the Streams/relatedFrom message to the "from" streams
 	 * @param {double|string} [$options.weight] Pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
+	 * @param {array} [$options.extra] Can be array of ($streamName => $extra) info
+	 *  to save in the "extra" field.
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
@@ -1907,7 +1908,7 @@ abstract class Streams extends Base_Streams
 				$maxWeights[$r['toStreamName']] = $r['w'];
 			}
 		}
-
+		
 		$newRT = array();
 		$newRF = array();
 		$weights2 = array();
@@ -1917,6 +1918,12 @@ abstract class Streams extends Base_Streams
 			}
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
+			if (!empty($options['extra'][$sn])) {
+				$extra = $options['extra'][$sn];
+				$extra = is_string($extra) ? $extra : Q::json_encode($extra);
+			} else {
+				unset($extra);
+			}
 			/**
 			 * @event Streams/relateTo/$categoryType {before}
 			 * @param {array} relatedTo
@@ -1928,7 +1935,7 @@ abstract class Streams extends Base_Streams
 			 */
 			if (false === Q::event(
 				"Streams/relateTo/{$category->type}",
-				compact('asUserId', 'category', 'stream'),
+				compact('asUserId', 'category', 'stream', 'extra'),
 				'before'
 			)) {
 				continue;
@@ -1950,7 +1957,12 @@ abstract class Streams extends Base_Streams
 				continue;
 			}
 			$tsn = ($arrayField === 'toStreamName') ? $sn : $toStreamName;
-			$newRT[$sn] = $newRF[$sn] = compact('toPublisherId', 'type', 'fromPublisherId');
+			$newRT[$sn] = $newRF[$sn] = compact(
+				'toPublisherId', 'type', 'fromPublisherId'
+			);
+			if (isset($extra)) {
+				$newRT[$sn]['extra'] = $extra;
+			}
 			if ($calculateWeights) {
 				if (!isset($weights2[$tsn])) {
 					$weights2[$tsn] = isset($maxWeights[$tsn]) ? $maxWeights[$tsn] : 0;
@@ -2006,7 +2018,7 @@ abstract class Streams extends Base_Streams
 				'relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream',
 				'fromUrl', 'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType',
 				'toUrl', 'toIcon', 'toTitle', 'toType', 'toDisplayType', 'displayType',
-				'categoryName', 'streamName'
+				'categoryName', 'streamName', 'extra'
 			);
 
 			if ($u = Streams_Stream::getConfigField($category->type, 
@@ -2079,12 +2091,13 @@ abstract class Streams extends Base_Streams
 			 * @param {string} relatedTo
 			 * @param {string} relatedFrom
 			 * @param {string} asUserId
+			 * @param {array} extra
 			 * @param {Streams_Stream} category
 			 * @param {Streams_Stream} stream
 			 */
 			Q::event(
 				"Streams/relate/{$stream->type}",
-				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
+				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream', 'extra'),
 				'after'
 			);
 			/**
@@ -2102,8 +2115,10 @@ abstract class Streams extends Base_Streams
 			);
 		}
 
-		list($messagesTo, $s) = Streams_Message::postMessages($asUserId, $relatedTo_messages, true);
-		if (empty($options['skipMessage'])) {
+		if (empty($options['skipMessageTo'])) {
+			list($messagesTo, $s) = Streams_Message::postMessages($asUserId, $relatedTo_messages, true);
+		}
+		if (empty($options['skipMessageFrom'])) {
 			list($messagesFrom, $s) = Streams_Message::postMessages($asUserId, $relatedFrom_messages, true);
 		}
 
@@ -2116,21 +2131,24 @@ abstract class Streams extends Base_Streams
 	 * @method unrelate
 	 * @static
 	 * @param {string} $asUserId
-	 *  The user who is making aggreagtor operation on the stream (remove stream from category)
+	 *  The user who is making unrelate operation on the stream (remove stream from category)
 	 * @param {string} $toPublisherId
 	 *  The user who has published the category stream
-	 * @param {string} $toStreamName
-	 *  The name of the category stream
+	 * @param {string|array} $toStreamName
+	 *  The name of the category stream. Pass an array of strings to relate a single stream
+	 *  to multiple categories, but in that case make sure fromStreamName is a string.
 	 * @param {string} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
 	 *  The user who has publishes the related stream
 	 * @param {string} $fromStreamName
-	 *  The name of the related stream
+	 *  The name of the related stream. Pass an array of strings to relate multiple streams
+	 *  to a single category, but in that case make sure toStreamName is a string.
 	 * @param {array} $options=array()
 	 *  An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
-	 * @param {boolean} [$options.skipMessage=false] If true, skips posting the Streams/unrelatedFrom message to the "from" streams
+	 * @param {boolean} [$options.skipMessageTo=false] If true, skips posting the Streams/unrelatedTo message to the "to" streams
+	 * @param {boolean} [$options.skipMessageFrom=false] If true, skips posting the Streams/unrelatedFrom message to the "from" streams
 	 * @param {boolean} [$options.adjustWeights=false] If true, also decrements all following relations' weights by one.
 	 * @return {boolean}
 	 *  Whether the relation was removed
@@ -2225,16 +2243,18 @@ abstract class Streams extends Base_Streams
 			
 			// Send Streams/unrelatedTo message to a stream
 			// node server will be notified by Streams_Message::post
-			Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
-				'type' => 'Streams/unrelatedTo',
-				'instructions' => compact(
-					'fromPublisherId', 'fromStreamName', 'type', 'options', 'weight'
-				)
-			), true);
+			if (empty($options['skipMessageTo'])) {
+				Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
+					'type' => 'Streams/unrelatedTo',
+					'instructions' => compact(
+						'fromPublisherId', 'fromStreamName', 'type', 'options', 'weight'
+					)
+				), true);
+			}
 		}
 
 		if ($relatedFrom && $relatedFrom->remove()) {
-			if (empty($options['skipMessage'])) {
+			if (empty($options['skipMessageFrom'])) {
 				// Send Streams/unrelatedFrom message to a stream
 				// node server will be notified by Streams_Message::post
 				Streams_Message::post($asUserId, $fromPublisherId, $stream->name, array(
@@ -2275,6 +2295,9 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Fetch all the streams which are related to, or from, a given stream.
+	 * Right now, all the streams that are fetched have to be from the same publisher.
+	 * So, if there are relations to streams from other publishers, you have to additionally
+	 * go ahead and fetch them yourself.
 	 * @method related
 	 * @static
 	 * @param {string} $asUserId
@@ -2357,13 +2380,13 @@ abstract class Streams extends Base_Streams
 		$stream = reset($streams);
 
 		if ($isCategory) {
-			$query = Streams_RelatedTo::select('*')
+			$query = Streams_RelatedTo::select()
 			->where(array(
 				'toPublisherId' => $publisherId,
 				'toStreamName' => $streamName
 			));
 		} else {
-			$query = Streams_RelatedFrom::select('*')
+			$query = Streams_RelatedFrom::select()
 			->where(array(
 				'fromPublisherId' => $publisherId,
 				'fromStreamName' => $streamName
@@ -2506,15 +2529,15 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $asUserId
 	 *  The id of the user on whose behalf the app will be updating the relation
 	 * @param {string} $toPublisherId
-	 *  The publisher of the stream on the 'to' end of the reltion
+	 *  The publisher of the stream on the 'to' end of the relation
 	 * @param {string} $toStreamName
 	 *  The name of the stream on the 'to' end of the relation
 	 * @param {string} $type
 	 *  The type of the relation
 	 * @param {string} $fromPublisherId
-	 *  The publisher of the stream on the 'from' end of the reltion
+	 *  The publisher of the stream on the 'from' end of the relation
 	 * @param {string} $fromStreamName
-	 *  The name of the stream on the 'from' end of the reltion
+	 *  The name of the stream on the 'from' end of the relation
 	 * @param {double} $weight
 	 *  The new weight
 	 * @param {double} [$adjustWeights=1]
@@ -2523,6 +2546,7 @@ abstract class Streams extends Base_Streams
 	 *  Or, set to 0 to prevent moving the other weights.
 	 * @param {array} $options=array()
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
+	 * @param {string|array} [$options.extra] Any info to save in the "extra" field.
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Otherwise returns array with key "to" and value of type Streams_Message
@@ -2576,6 +2600,11 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		
+		if (!empty($options['extra'])) {
+			$extra = $options['extra'];
+			$relatedTo->extra = is_string($extra) ? $extra : Q::json_encode($extra);
+		}
+		
 		/**
 		 * @event Streams/updateRelation/$streamType {before}
 		 * @param {string} relatedTo
@@ -2597,7 +2626,10 @@ abstract class Streams extends Base_Streams
 		$adjustWeightsBy = $weight < $previousWeight ? $adjustWeights : -$adjustWeights;
 		if (Q::event(
 			"Streams/updateRelation/{$stream->type}",
-			compact('relatedTo', 'relatedFrom', 'type', 'weight', 'previousWeight', 'adjustWeightsBy', 'asUserId'), 
+			compact(
+				'relatedTo', 'relatedFrom', 'type', 'weight', 
+				'previousWeight', 'adjustWeightsBy', 'asUserId', 'extra'
+			), 
 			'before') === false
 		) {
 			return false;
@@ -2640,7 +2672,10 @@ abstract class Streams extends Base_Streams
 		 */
 		Q::event(
 			"Streams/updateRelation/{$category->type}",
-			compact('relatedTo', 'relatedFrom', 'type', 'weight', 'previousWeight', 'adjustWeightsBy', 'asUserId'),
+			compact(
+				'relatedTo', 'relatedFrom', 'type', 'weight', 
+				'previousWeight', 'adjustWeightsBy', 'asUserId', 'extra'
+			),
 			'after'
 		);
 		
@@ -2665,7 +2700,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.extra] Any extra information to tree-merge for the participants
 	 * @param {boolean} [$options.noVisit] If user is already participating, don't post a "Streams/visited" message
 	 * @param {boolean} [$options.skipAccess] If true, skip access check for whether user can join
-	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being related to the joining asUserId's Streams/participating streams.
+	 * @param {boolean} [$options.skipRelationMessages=true] if true, skip posting messages on the stream about being
+	 *  related to the Streams/participating streams of the joining user with id asUserId's
 	 * @return {array} Returns an array of (streamName => Streams_Participant) pairs.
 	 *  The newly inserted rows will have wasInserted() return true.
 	 */
@@ -2683,7 +2719,7 @@ abstract class Streams extends Base_Streams
 		if (empty($options['skipAccess'])) {
 			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
-		$participants = Streams_Participant::select('*')
+		$participants = Streams_Participant::select()
 		->where(array(
 			'publisherId' => $publisherId,
 			'streamName' => $streamNames,
@@ -2801,28 +2837,35 @@ abstract class Streams extends Base_Streams
 				$p->streamType, array('participating'), array()
 			);
 			foreach ($participatingNames as $pn) {
-				$relateStreams[$pn][] = $sn;
+				$relateStreams[$pn][$p->streamType][] = $sn;
 			}
 		}
-		foreach ($relateStreams as $pn => $streamNames) {
-			if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
-				Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+		foreach ($relateStreams as $pn => $streamTypes) {
+			foreach ($streamTypes as $streamType => $streamNames) {
+				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+					Streams::create($asUserId, $asUserId, 'Streams/participating/', array('name' => $pn));
+				}
+				$extraArray = array();
+				foreach ($streamNames as $sn) {
+					$extraArray[$sn] = $results[$sn]->extra;
+				}
+				Streams::relate(
+					$asUserId, $asUserId, $pn,
+					$streamType, $publisherId, $streamNames,
+					array(
+						'skipMessageFrom' => Q::ifset($options, 'skipRelationMessages', true),
+						'skipAccess' => true,
+						'weight' => time(),
+						'extra' => $extraArray
+					)
+				);
 			}
-			Streams::relate(
-				$asUserId, $asUserId, $pn,
-				'Streams/participating', $publisherId, $streamNames,
-				array(
-					'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
-					'skipAccess' => true, 
-					'weight' => time()
-				)
-			);
 		}
 		return $results;
 	}
 	
 	/**
-	 * If the user is participating in (soe of) the streams, sets state of participant row
+	 * If the user is participating in (some of) the streams, sets state of participant row
 	 * as "left" and posts a "Streams/leave" type message to the streams.
 	 * Also unrelates every stream left to streams named under the config field
 	 * "Streams"/"types"/$streamType/"participating"
@@ -2851,7 +2894,7 @@ abstract class Streams extends Base_Streams
 		if (empty($options['skipAccess'])) {
 			self::_accessExceptions($streams2, $streamNames, 'join');
 		}
-		$participants = Streams_Participant::select('*')
+		$participants = Streams_Participant::select()
 		->where(array(
 			'publisherId' => $publisherId,
 			'streamName' => $streamNames,
@@ -2941,22 +2984,24 @@ abstract class Streams extends Base_Streams
 				$p->streamType, array('participating'), array()
 			);
 			foreach ($participatingNames as $pn) {
-				$unrelateStreams[$pn][] = $sn;
+				$unrelateStreams[$pn][$p->streamType][] = $sn;
 			}
 		}
-		foreach ($unrelateStreams as $pn => $streamNames) {
-			if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
-				Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+		foreach ($unrelateStreams as $pn => $streamTypes) {
+			foreach ($streamTypes as $streamType => $streamNames) {
+				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+					Streams::create($asUserId, $asUserId, null, array('name' => $pn));
+				}
+				Streams::unrelate(
+					$asUserId, $asUserId, $pn,
+					$streamType, $publisherId, $streamNames,
+					array(
+						'skipMessageFrom' => Q::ifset($options, 'skipRelationMessages', true),
+						'skipAccess' => true,
+						'weight' => time()
+					)
+				);
 			}
-			Streams::unrelate(
-				$asUserId, $asUserId, $pn,
-				'Streams/participating', $publisherId, $streamNames,
-				array(
-					'skipMessage' => Q::ifset($options, 'skipRelationMessages', true),
-					'skipAccess' => true, 
-					'weight' => time()
-				)
-			);
 		}
 		return $participants;
 	}
@@ -3024,7 +3069,7 @@ abstract class Streams extends Base_Streams
 			$shouldUpdate = true;
 		}
 		$subscriptions = array();
-		$rows = Streams_Subscription::select('*')
+		$rows = Streams_Subscription::select()
 		->where(array(
 			'publisherId' => $publisherId,
 			'streamName' => $streamNames,
@@ -3068,7 +3113,7 @@ abstract class Streams extends Base_Streams
 			foreach ($types as $type => $sns) {
 				// insert subscriptions
 				if (!isset($filter) or !isset($untilTime)) {
-					$templates = Streams_Subscription::select('*')
+					$templates = Streams_Subscription::select()
 						->where(array(
 							'publisherId' => array('', $publisherId),
 							'streamName' => $type.'/',
@@ -3092,6 +3137,7 @@ abstract class Streams extends Base_Streams
 							"types" => array(
 								"^(?!(Users/)|(Streams/)).*/",
 								"Streams/relatedTo",
+								"Streams/announcement",
 								"Streams/chat/message"
 							),
 							"notifications" => 0
@@ -3132,7 +3178,7 @@ abstract class Streams extends Base_Streams
 					}
 				}
 				if (!isset($rule)) {
-					$templates = Streams_Rule::select('*')
+					$templates = Streams_Rule::select()
 						->where(array(
 							'ofUserId' => array('', $asUserId),
 							'publisherId' => array('', $publisherId),
@@ -3230,7 +3276,7 @@ abstract class Streams extends Base_Streams
 			Streams_Participant::update()
 				->set(array('subscribed' => 'no'))
 				->where($criteria)->execute();
-			$participants = Streams_Participant::select('*')
+			$participants = Streams_Participant::select()
 				->where($criteria)
 				->fetchDbRows();
 		} else {
@@ -3302,7 +3348,8 @@ abstract class Streams extends Base_Streams
 	 * "Streams"/"types"/$streamType/"participating", which is an array of stream names.
 	 * @method participating
 	 * @static
-	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of onr or more streams of type Streams/participating
+	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of one or more streams
+	 *  of type Streams/participating
 	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
 	 * @param {string} [$options.publisherId=Users::loggedInUser(true)->id] the publisher of the category stream
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
@@ -3481,9 +3528,10 @@ abstract class Streams extends Base_Streams
 			if (is_string($uids)) {
 				$uids = array_map('trim', explode("\t", $uids)) ;
 			}
+			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users::idsFromPlatformUids($platform, $uids, $statuses2)
+				Users_User::idsFromPlatformUids($platform, $uids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
 			$identifiers = array_merge($identifiers, $uids);
@@ -3854,7 +3902,10 @@ abstract class Streams extends Base_Streams
 					$r->toStreamName,
 					$r->type,
 					$stream->publisherId,
-					$stream->name
+					$stream->name,
+					array(
+						'skipAccess' => true
+					)
 				);
 			} catch (Exception $e) {}
 		}
@@ -4000,20 +4051,21 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string} $publisherId
 	 *	The name of the publisher
-	 * @param {string} $streamName
+	 * @param {string} $name
 	 *	The name of the stream
 	 * @param {string} $what
 	 *	Defaults to 'stream'. Can also be 'message', 'relation', etc.
 	 * @return {string} 
 	 *	The corresponding URL
 	 */
-	static function actionUrl($publisherId, $streamName, $what = 'stream')
+	static function actionUrl($publisherId, $name, $what = 'stream')
 	{
 		switch ($what) {
 			case 'stream':
 			case 'message':
 			case 'relation':
-				return Q_Uri::url("Streams/$what?publisherId=".urlencode($publisherId)."&name=".urlencode($streamName));
+				$qs = http_build_query(compact('publisherId', 'name'));
+				return Q_Uri::url("Streams/$what?$qs");
 		}
 		return null;
 	}
@@ -4040,7 +4092,7 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		$limit = Q_Config::get('Streams', 'lookup', 'limit', 10);
-		return Streams_Stream::select('*')->where(array(
+		return Streams_Stream::select()->where(array(
 			'publisherId' => $publisherId,
 			'type' => $types,
 			'title LIKE ' => $title
@@ -4142,7 +4194,7 @@ abstract class Streams extends Base_Streams
 	
 	static function invitationsPath($invitingUserId)
 	{
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$subpath = Q_Config::get(
 			'Streams', 'invites', 'subpath',
 			'{{app}}/uploads/Streams/invitations'
@@ -4182,7 +4234,7 @@ abstract class Streams extends Base_Streams
 			if (!isset($classes[$type])) {
 				$classes[$type] = Streams::getExtendClasses($type);
 				foreach ($classes[$type] as $className => $fieldNames) {
-					$rows[$className] = call_user_func(array($className, 'select'), '*')
+					$rows[$className] = call_user_func(array($className, 'select'))
 						->where(array(
 							'publisherId' => $publisherId,
 							'streamName' => $streamNamesByType[$type]

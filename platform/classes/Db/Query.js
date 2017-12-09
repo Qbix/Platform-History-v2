@@ -10,7 +10,7 @@ var Db = Q.require('Db');
  * @namespace Db
  * @constructor
  * @param {Db.Mysql} db
- * @param type {number}
+ * @param {number} type
  * @param {object} [clauses={}]
  * @param {object} [bind={}]
  */

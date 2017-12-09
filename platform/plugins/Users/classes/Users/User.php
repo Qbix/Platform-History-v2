@@ -36,7 +36,7 @@ class Users_User extends Base_Users_User
 	static function fetch ($userId, $throwIfMissing = false)
 	{
 		if (is_array($userId)) {
-			$users = Users_User::select('*')
+			$users = Users_User::select()
 				->where(array('id' => $userId))
 				->fetchDbRows('id');
 			if ($throwIfMissing) {
@@ -235,13 +235,16 @@ class Users_User extends Base_Users_User
 				// put an empty username for now
 				$this->username = $updatedFields['username'] = '';
 			}
+			if (empty($updatedFields['icon'])) {
+				$this->icon = $updatedFields['icon'] = '{{Users}}/img/icons/default';
+			}
+		} else if (isset($updatedFields['icon']) and !$updatedFields['icon']) {
+			$this->icon = $updatedFields['icon'] = '{{Users}}/img/icons/default';
 		}
-		if (isset($updatedFields['icon']) and !$updatedFields['icon']) {
-			$user->icon = $updatedFields['icon'] = 'default';
-		}
+
 		if (!empty($updatedFields['username'])) {
-			$app = Q_Config::expect('Q', 'app');
-			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', true);
+			$app = Q::app();
+			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', false);
 			if ($unique) {
 				$username = $updatedFields['username'];
 				$criteria = compact('username');
@@ -428,7 +431,7 @@ class Users_User extends Base_Users_User
 		}
 		$email = new Users_Email();
 		$email->address = $normalized;
-		if ($email->retrieve('*', array('ignoreCache' => true))
+		if ($email->retrieve(null, array('ignoreCache' => true))
 		and $email->state !== 'unverified') {
 			if ($email->userId === $this->id) {
 				$email->set('user', $this);
@@ -492,7 +495,7 @@ class Users_User extends Base_Users_User
 			$fields2 = array_merge($fields, array(
 				'user' => $this,
 				'email' => $email,
-				'app' => Q_Config::expect('Q', 'app'),
+				'app' => Q::app(),
 				'communityName' => $communityName,
 				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
@@ -533,7 +536,7 @@ class Users_User extends Base_Users_User
 		$email = new Users_Email();
 		Q_Valid::email($emailAddress, $normalized);
 		$email->address = $normalized;
-		$retrieved = $email->retrieve('*', array('ignoreCache' => true));
+		$retrieved = $email->retrieve(null, array('ignoreCache' => true));
 		if (empty($email->activationCode)) {
 			$email->activationCode = '';
 			$email->activationCodeExpires = null;
@@ -629,7 +632,7 @@ class Users_User extends Base_Users_User
 		}
 		$mobile = new Users_Mobile();
 		$mobile->number = $normalized;
-		if ($mobile->retrieve('*', array('ignoreCache' => true))
+		if ($mobile->retrieve(null, array('ignoreCache' => true))
 		and $mobile->state !== 'unverified') {
 			if ($mobile->userId === $this->id) {
 				$mobile->set('user', $this);
@@ -687,7 +690,7 @@ class Users_User extends Base_Users_User
 			$fields2 = array_merge($fields, array(
 				'user' => $this,
 				'mobile' => $mobile,
-				'app' => Q_Config::expect('Q', 'app'),
+				'app' => Q::app(),
 				'communityName' => $communityName,
 				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
@@ -728,7 +731,7 @@ class Users_User extends Base_Users_User
 		Q_Valid::phone($mobileNumber, $normalized);
 		$mobile = new Users_Mobile();
 		$mobile->number = $normalized;
-		$retrieved = $mobile->retrieve('*', array('ignoreCache' => true));
+		$retrieved = $mobile->retrieve(null, array('ignoreCache' => true));
 		if (empty($mobile->activationCode)) {
 			$mobile->activationCode = '';
 			$mobile->activationCodeExpires = null;
@@ -1011,6 +1014,7 @@ class Users_User extends Base_Users_User
 	 * Check platform uids or array of uids and return users - existing or future
 	 * @method idsFromPlatformUids
 	 * @static
+	 * @param {string} $platform The name of the platform
 	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
@@ -1028,7 +1032,7 @@ class Users_User extends Base_Users_User
 		}
 		$users = array();
 		foreach ($uids as $uid) {
-			$users[] = Users::futureUser('facebook', $uid, $status);
+			$users[] = Users::futureUser($platform, $uid, $status);
 			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);

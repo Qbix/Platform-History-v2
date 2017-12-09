@@ -16,6 +16,12 @@ function Streams_stream_delete() {
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
 	
+	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$close = Streams_Stream::getConfigField($stream->type, 'close', true);
+	if (!$close) {
+        throw new Q_Exception("This app doesn't let clients directly close streams of type ".$stream->type, 'type');
+	}
+	
 	Streams::$cache['result'] = Streams::close($user->id, $publisherId, $streamName);
 	
 	// NOTE: we did not delete the stream. That will have to be done in a cron job like this:

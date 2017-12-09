@@ -36,6 +36,7 @@ Q.Tool.jQuery('Q/overlay',
 				return;
 			}
 			var width = $this.outerWidth(), height = $this.outerHeight();
+
 			if (!width && $this.css('width'))
 				width = parseInt($this.css('width'));
 			if (!height && $this.css('height'))
@@ -45,18 +46,27 @@ Q.Tool.jQuery('Q/overlay',
 			var apr = ap && ap.getBoundingClientRect();
 			var br = document.body.getBoundingClientRect();
 			var sl = ap ? apr.left : -br.left;
+
 			var st = ap ? apr.top : -br.top;
+			// if dialog element have position=fixed - it means it positioned related to viewport
+			// It means that position independent of scrolls of all ancestors.
+			st = $this.css("position") === "fixed" ? 0 : st;
+
 			var sw = ap ? apr.right - apr.left : Q.Pointer.windowWidth();
 			var sh = ap ? apr.bottom - apr.top : Q.Pointer.windowHeight();
 
-			if (o.left === 'center') {
-				$this.css({ 'left': (sl + (sw - width) / 2) + 'px' });
-			} else if (typeof(o.left) === 'string' && o.left.indexOf('%') !== -1) {
-				var left = sl + sw * parseInt(o.left) / 100;
-				$this.css({ 'left': left + 'px' });
-			} else {
-				$this.css({ 'left': sl + o.left + 'px' });
+			var diff = 2;
+			if (($this.previousWidth === undefined) || (Math.abs(width - $this.previousWidth) > diff)) {
+				if (o.left === 'center') {
+					$this.css({ 'left': (sl + (sw - width) / 2) + 'px' });
+				} else if (typeof(o.left) === 'string' && o.left.indexOf('%') !== -1) {
+					var left = sl + sw * parseInt(o.left) / 100;
+					$this.css({ 'left': left + 'px' });
+				} else {
+					$this.css({ 'left': sl + o.left + 'px' });
+				}
 			}
+			$this.previousWidth = width;
 			if (o.top === 'middle') {
 				$this.css({ 'top': (st + (sh - height) / 2) + 'px' });
 			} else if (typeof(o.top) === 'string' && o.top.indexOf('%') !== -1) {

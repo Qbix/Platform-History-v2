@@ -17,8 +17,8 @@
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
  * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.id] defaults to ""
+ * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
  * @param {string} [$fields.description] defaults to ""
  * @param {string} [$fields.attributes] defaults to ""
@@ -34,16 +34,16 @@ abstract class Base_Assets_Charge extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $publisherId
-	 * @type string
-	 * @default ""
-	 * publisherId of the stream regarding which the charge was made
-	 */
-	/**
 	 * @property $id
 	 * @type string
 	 * @default ""
 	 * 
+	 */
+	/**
+	 * @property $publisherId
+	 * @type string
+	 * @default ""
+	 * publisherId of the stream regarding which the charge was made
 	 */
 	/**
 	 * @property $streamName
@@ -140,12 +140,20 @@ abstract class Base_Assets_Charge extends Db_Row
 	 * Create SELECT query to the class table
 	 * @method select
 	 * @static
-	 * @param {string|array} [$fields='*'] The fields as strings, or array of alias=>field
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table
+	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
+	 *   The default is to return all fields of the table.
+	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
-	static function select($fields, $alias = null)
+	static function select($fields=null, $alias = null)
 	{
+		if (!isset($fields)) {
+			$fieldNames = array();
+			foreach (self::fieldNames() as $fn) {
+				$fieldNames[] = "`$fn`";
+			}
+			$fields = implode(',', $fieldNames);
+		}
 		if (!isset($alias)) $alias = '';
 		$q = self::db()->select($fields, self::table().' '.$alias);
 		$q->className = 'Assets_Charge';
@@ -324,60 +332,6 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_publisherId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_publisherId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('publisherId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
-		return array('publisherId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
-	 * @return {integer}
-	 */
-	function maxSize_publisherId()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for publisherId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_publisherId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '',
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_id
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -426,6 +380,60 @@ return array (
   1 => false,
   2 => 'PRI',
   3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_publisherId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_publisherId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('publisherId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
+		return array('publisherId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * @return {integer}
+	 */
+	function maxSize_publisherId()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for publisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_publisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
 );			
 	}
 
@@ -715,7 +723,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'publisherId', 'id', 'streamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'id', 'publisherId', 'streamName', 'description', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

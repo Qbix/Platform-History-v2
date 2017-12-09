@@ -11,7 +11,7 @@
 .Q_columns_column {
 	display: block;
 	float: left;
-	background: white;
+	background: transparent;
 	overflow: hidden;
 }
 
@@ -24,12 +24,17 @@
 	margin-right: 10px;
 	width: 300px;
 	box-shadow: black 2px 2px 4px;
+	visibility: hidden;
 	-webkit-box-shadow: black 0 0 4px;
 	-moz-box-shadow: black 0 0 4px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-o-user-select: none;
+}
+
+.Q_notMobile .Q_columns_sized .Q_columns_column {
+	visibility: visible;
 }
 
 .Q_columns_title {
@@ -59,13 +64,19 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	height: 40px;
 }
 
-.Q_columns_column .Q_title_slot {
+.Q_columns_title .Q_title_slot {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.Q_columns_title_container {
 	margin: 0;
-	padding: 5px;
-	line-height:40px;
-    width: 80%;
+	width: 80%;
 	height: 40px;
+	line-height: 40px;
 	box-sizing: content-box;
+	padding: 5px;
 }
 
 .Q_columns_column:first-child .Q_title_slot {

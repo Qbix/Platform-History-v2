@@ -102,12 +102,17 @@ Base.connectionName = function() {
 /**
  * Create SELECT query to the class table
  * @method SELECT
- * @param {String|Object} [fields='*'] The fields as strings, or object of {alias:field} pairs
- * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs
+ * @param {String|Object} [fields=null] The fields as strings, or object of {alias:field} pairs.
+ *   The default is to return all fields of the table.
+ * @param {String|Object} [alias=null] The tables as strings, or object of {alias:table} pairs.
  * @return {Db.Query.Mysql} The generated query
  */
 Base.SELECT = function(fields, alias) {
-	fields = fields || '*';
+	if (!fields) {
+		fields = Base.fieldNames().map(function (fn) {
+			return '`' + fn + '`';
+		}).join(',');
+	}
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
 	q.className = 'Streams_Total';
 	return q;

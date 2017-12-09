@@ -142,10 +142,16 @@ abstract class Places extends Base_Places
 	 * @param {double} $long_1
 	 * @param {double} $lat_2
 	 * @param {double} $long_2
-	 * @return {double} The result, in meters, of applying the haversine formula
+	 * @return {double|null} The result, in meters, of applying the haversine formula.
+	 *  Returns null if any of the inputs are null.
 	 */
 	static function distance($lat_1,$long_1,$lat_2,$long_2)
 	{
+		if (!isset($lat_1) or !isset($long_1)
+		or !isset($lat_2) or !isset($long_2)) {
+			return null;
+		}
+
 		$earth_radius = 6378084.1454; // in meters
 
 		$sin_lat   = sin(deg2rad($lat_2  - $lat_1)  / 2.0);
@@ -220,21 +226,14 @@ abstract class Places extends Base_Places
 		if ($platform !== 'google') {
 			throw new Q_Exception_PlatformNotSupported(compact('platform'));
 		}
+		$points = Places_Polyline::decode($route["overview_polyline"]["points"]);
 		$polyline = array();
-		foreach ($route['legs'] as $leg) {
-			foreach ($leg['steps'] as $step) {
-				$lat = $step['start_location']['lat'];
-				$lng = $step['start_location']['lng'];
-				$polyline[] = array(
-					'x' => $lat,
-					'y' => $lng
-				);
-			}
+		for ($i = 0, $l = count($points); $i < $l; $i+=2) {
+			$polyline[] = array(
+				'x' => $points[$i],
+				'y' => $points[$i+1]
+			);
 		}
-		$polyline[] = array(
-			'x' => $step['end_location']['lat'],
-			'y' => $step['end_location']['lng']
-		);
 		return $polyline;
 	}
 	
@@ -249,8 +248,8 @@ abstract class Places extends Base_Places
 	 * @return {array} contains properties "index", "x", "y", "fraction", "distance" (in same units as x, y)
 	 */
 	static function closest($point, $polyline) {
-		$x = $point['x'];
-		$y = $point['y'];
+		$x = (float)$point['x'];
+		$y = (float)$point['y'];
 		$closest = null;
 		$distance = null;
         for ($i=1, $l=count($polyline); $i<$l; $i++) {
@@ -258,7 +257,9 @@ abstract class Places extends Base_Places
 			$b = $polyline[$i-1]['y'];
 			$c = $polyline[$i]['x'];
 			$d = $polyline[$i]['y'];
-			$n = ($c-$a)*($c-$a) + ($d-$b)*($d-$b);
+			$n1 = sqrt(($x-$a)*($x-$a) + ($y-$b)*($y-$b));
+			$n2 = sqrt(($c-$a)*($c-$a) + ($d-$b)*($d-$b));
+			$n = $n1 * $n2;
 			$frac = $n ? (($x-$a)*($c-$a) + ($y-$b)*($d-$b)) / $n : 0;
 			$frac = max(0, $frac, min(1, $frac));
 			$e = $a + ($c-$a)*$frac;
@@ -333,15 +334,22 @@ abstract class Places extends Base_Places
 	/**
 	 * Set the user's location from a "Places/location" stream, or any stream
 	 * that has the attributes "latitude", "longitude" and possibly "timezone"
-	 * @param {Users_User} $user
 	 * @param {Streams_Stream} $locationStream
+	 * @param {boolean} [$onlyIfNotSet=false] If true, proceeds only if the user
+	 *   location stream's latitude and longitude were not already set.
+	 * @param {boolean} [$throwIfNotLoggedIn=false]
+	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
+	 * @return {boolean} Whether the location stream was updated
 	 */
-	static function setUserLocation($user, $locationStream)
+	static function setUserLocation(
+		$locationStream,
+		$onlyIfNotSet = false,
+		$throwIfNotLoggedIn = false)
 	{
 		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
-		$latitude = $stream2->getAttribute('latitude');
-		$longitude = $stream2->getAttribute('longitude');
-		$timezone = $stream2->getAttribute('timezone');
+		$latitude = $locationStream->getAttribute('latitude');
+		$longitude = $locationStream->getAttribute('longitude');
+		$timezone = $locationStream->getAttribute('timezone');
 		$zipcodes = Places_Zipcode::nearby($latitude, $longitude, $meters, 1);
 		if ($zipcodes) {
 			$z = reset($zipcodes);
@@ -349,14 +357,18 @@ abstract class Places extends Base_Places
 			$placeName = $z->placeName;
 			$state = $z->state;
 		}
-		$userLocationStream = Places_Location::userStream();
-		if (null === $userLocationStream->getAttribute('latitude')) {
-			$userLocationStream->setAttribute(compact(
-				'latitude', 'longitude', 'meters', 'timezone',
-				'zipcode', 'placeName', 'state'
-				// accuracy has been omitted
-			));
-			$userLocationStream->save();
+		$userLocationStream = Places_Location::userStream($throwIfNotLoggedIn);
+		$lat = $userLocationStream->getAttribute('latitude');
+		$lon = $userLocationStream->getAttribute('longitude');
+		if ($onlyIfNotSet and isset($lat) and isset($lon)) {
+			return false;
 		}
+		$userLocationStream->setAttribute(compact(
+			'latitude', 'longitude', 'meters', 'timezone',
+			'zipcode', 'placeName', 'state'
+			// accuracy has been omitted
+		));
+		$userLocationStream->save();
+		return true;
 	}
 };

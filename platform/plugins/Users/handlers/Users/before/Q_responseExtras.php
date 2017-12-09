@@ -2,9 +2,9 @@
 
 function Users_before_Q_responseExtras()
 {
-	Q_Response::addScript('{{Users}}/js/Users.js');
-	Q_Response::addScript('{{Users}}/js/UsersDevice.js');
-	$app = Q_Config::expect('Q', 'app');
+	Q_Response::addScript('{{Users}}/js/Users.js', 'Users');
+	Q_Response::addScript('{{Users}}/js/UsersDevice.js', 'Users');
+	$app = Q::app();
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
 	foreach ($requireLogin as $rl => $value) {
@@ -51,7 +51,7 @@ function Users_before_Q_responseExtras()
 	}
 	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
-	Q_Response::addStylesheet("{{Users}}/css/Users.css");
+	Q_Response::addStylesheet("{{Users}}/css/Users.css", 'Users');
 	$platforms = array(Q_Request::platform());
 	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
 		$platforms[] = $platform;
@@ -65,11 +65,17 @@ function Users_before_Q_responseExtras()
 			$private = Q_Config::get('Users', 'apps-private', $platform, array());
 			foreach ($appInfos as $appName => $appInfo) {
 				$apps[$platform][$appName] = $appInfo;
+				foreach($appInfo as $key => $value) {
+					if (stristr($key, 'private')) {
+						unset($apps[$platform][$appName][$key]);
+					}
+				}
 				foreach ($private as $p) {
 					unset($apps[$platform][$appName][$p]);
 				}
 			}
 		}
+		//exit;
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
 

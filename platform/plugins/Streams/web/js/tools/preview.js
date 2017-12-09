@@ -22,6 +22,7 @@
  *   @param {Boolean|Array} [options.editable=true] Set to false to avoid showing even authorized users an interface to replace the image or text. Or set to an array naming only certain fields, which the rendering method would hopefully recognize.
  *   @param {Boolean} [options.closeable=true] Set to false to avoid showing even authorized users an option to closeable (or close) this stream
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
+ *     @param {String} [options.creatable.streamType="Streams/text/small"] Set the type of the stream to be created
  *     @param {String} [options.creatable.title="New Item"] Optional title for the case when streamName = "", i.e. the composer
  *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
  *     @param {Number} [options.creatable.addIconSize=100] The size in pixels of the square add icon
@@ -35,7 +36,7 @@
  *       If you canceled the process, pass false instead as the first parameter.
  *       However, if you want to go ahead and let the preview tool call Q.Streams.create,
  *       you can pass here a plain Object with any fields to set for the stream, such
- *       as "title", "content", "attributes" (as JSON string), etc.
+ *       as "title", "content", "attributes" (as JSON string), "name", etc.
  *   @param {Object} [options.imagepicker] Any options to pass to the Q/imagepicker jquery plugin -- see its options.
  *   @uses Q imagepicker
  *   @param {Object} [options.actions] Any options to pass to the Q/actions jquery plugin -- see its options.
@@ -89,9 +90,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Text.get('Streams/content', function (err, content) {
 			_content = content;
 			if (state.streamName) {
+				tool.element.addClass('Streams_preview_stream');
 				tool.loading();
 				tool.preview();
 			} else {
+				tool.element.addClass('Streams_preview_composer');
 				tool.composer();
 			}
 		});
@@ -133,7 +136,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Masks.hide(this);
 		if (wasRemoved) {
 			this.$().hide(300, function () {
-				$(this).remove();
+				Q.removeElement(this, true);
 			});
 		}
 	}, 'Streams/preview'),
@@ -143,7 +146,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var $te = $(this.element);
 		var position = $te.css('position');
 		var $div = $("<div class='Streams_preview_error' />")
-		.text(err).animate({opacity: 0.5}, 300);
+		.text(fem).animate({opacity: 0.5}, 300);
 		$te.css({
 			'cursor': 'grabbing',
 			'position': (position === 'static' ? 'relative' : position),
@@ -214,6 +217,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			function Streams_preview_afterCreateRefresh() {
 				state.onCreate.handle.call(tool, this);
 				Q.handle(callback, tool, [this]);
+				tool.element.removeClass('Streams_preview_composer');
+				tool.element.addClass('Streams_preview_stream');
 				tool.preview();
 			}
 		}
@@ -237,7 +242,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			src: Q.url('{{Q}}/img/actions/add.png'),
 			prefix: tool.prefix
 		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
-		tool.element.addClass('Streams_preview_create');
 		Q.Template.render(
 			'Streams/preview/create',
 			fields,

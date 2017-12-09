@@ -8,8 +8,8 @@ function Websites_0_9_1_Streams_mysql()
 	$grantedByUserId = null;
 
 	$streams = array(
-		"Websites/presentation/" => array('type' => "Streams/template", "title" => "Untitled Presentation", "icon" => "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/presentation", "content" => "", "deletable" => true),
-		"Websites/slide/" => array('type' => "Streams/template", "title" => "Untitled Slide", "icon" => "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/presentation", "content" => "", "deletable" => true)
+		"Websites/presentation/" => array('type' => "Streams/template", "title" => "Untitled Presentation", "icon" => "{{Websites}}/img/icons/Websites/presentation", "content" => "", "deletable" => true),
+		"Websites/slide/" => array('type' => "Streams/template", "title" => "Untitled Slide", "icon" => "{{Websites}}/img/icons/Websites/presentation", "content" => "", "deletable" => true)
 	);
 	
 	$readLevel = Streams::$READ_LEVEL['messages'];

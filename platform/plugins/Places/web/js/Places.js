@@ -173,7 +173,9 @@ var Places = Q.Places = Q.plugins.Places = {
 			var b = polyline[i-1].y;
 			var c = polyline[i].x;
 			var d = polyline[i].y;
-			var n = (c-a)*(c-a) + (d-b)*(d-b);
+			var n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
+			var n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
+			var n = n1 * n2;
 			var frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
 			var e = a + (c-a)*frac;
@@ -242,36 +244,66 @@ var Places = Q.Places = Q.plugins.Places = {
 			Q.handle(callback, Places, [directions, status, d, params]);
 		});
 	},
-	
 	/**
 	 * Obtain a polyline from a route
 	 * @param {Object} route the route
 	 * @param {Object} options
 	 * @param {String} [options.platform=Places.options.platform]
 	 */
-	polyline: function (route, options) {
+	polyline: function(route, options) {
 		options = options || {};
 		var platform = options.platform || Places.options.platform;
 		var polyline = [];
-		var lastStep = null;
-		Q.each(route.legs, function (i, leg) {
-			Q.each(leg.steps, function (j, step) {
-				polyline.push({
-					x: this.start_location.lat,
-					y: this.start_location.lng
-				});
-				lastStep = step;
-			});
-		});
-		if (lastStep) {
+		var str = route.overview_polyline.points;
+		var index = 0,
+			lat = 0,
+			lng = 0,
+			shift = 0,
+			result = 0,
+			byte = null,
+			latitude_change,
+			longitude_change,
+			precision = 5,
+			factor = Math.pow(10, precision);
+
+		// Coordinates have variable length when encoded, so just keep
+		// track of whether we've hit the end of the string. In each
+		// loop iteration, a single coordinate is decoded.
+		while (index < str.length) {
+			// Reset shift, result, and byte
+			byte = null;
+			shift = 0;
+			result = 0;
+
+			do {
+				byte = str.charCodeAt(index++) - 63;
+				result |= (byte & 0x1f) << shift;
+				shift += 5;
+			} while (byte >= 0x20);
+
+			latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+			shift = result = 0;
+
+			do {
+				byte = str.charCodeAt(index++) - 63;
+				result |= (byte & 0x1f) << shift;
+				shift += 5;
+			} while (byte >= 0x20);
+
+			longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+			lat += latitude_change;
+			lng += longitude_change;
+
 			polyline.push({
-				x: lastStep.end_location.lat,
-				y: lastStep.end_location.lng
+				x: lat / factor,
+				y: lng / factor
 			});
 		}
+
 		return polyline;
 	}
-	
 };
 
 Places.route.onResult = new Q.Event();
@@ -393,6 +425,12 @@ Cp.geocode = function (callback, options) {
 	&& c.latitude && c.longitude) {
 		return callback && callback.call(c, null, []);
 	}
+
+	if (Q.typeOf(c.lat) === "function" && Q.typeOf(c.lng) === "function") {
+		c.latitude = c.latitude || c.lat();
+		c.longitude = c.longitude || c.lng();
+	}
+
 	Places.loadGoogleMaps(function () {
 		var param = {};
 		var p = "Places.Location.geocode: ";
@@ -402,12 +440,23 @@ Cp.geocode = function (callback, options) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing latitude");
 			}
-			if (!c.latitude) {
+			if (!c.longitude) {
 				callback && callback.call(c, p + "missing longitude");
 			}
 			param.location = {
 				lat: parseFloat(c.latitude),
 				lng: parseFloat(c.longitude)
+			};
+		} else if (c.lat && c.lng) {
+			if (!c.lat) {
+				callback && callback.call(c, p + "missing latitude");
+			}
+			if (!c.lng) {
+				callback && callback.call(c, p + "missing longitude");
+			}
+			param.location = {
+				lat: parseFloat(c.lat()),
+				lng: parseFloat(c.lng())
 			};
 		} else if (c.address) {
 			param.address = c.address;
@@ -425,18 +474,18 @@ Cp.geocode = function (callback, options) {
 				if (status !== 'OK') {
 					json = JSON.stringify(c);
 					err = p + "can't geocode " + json;
-				}
-				if (!results[0]) {
+				} else if (!results[0]) {
 					json = JSON.stringify(c);
 					err = p + "no place matched " + json;
+				} else {
+					var result = results[0];
+					if (result.geometry && result.geometry.location) {
+						var loc = result.geometry.location;
+						c.latitude = loc.lat();
+						c.longitude = loc.lng();
+					}
+					_geocodeCache.set(param, 0, c, [err, results]);
 				}
-				var result = results[0];
-				if (result.geometry && result.geometry.location) {
-					var loc = result.geometry.location;
-					c.latitude = loc.lat();
-					c.longitude = loc.lng();
-				}
-				_geocodeCache.set(param, 0, c, [err, results]);
 				Q.handle(callback, c, [err, results]);
 			});
 		}
@@ -479,7 +528,8 @@ Q.Tool.define({
 	"Places/globe": "Q/plugins/Places/js/tools/globe.js",
 	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
 	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
-	"Places/location": "Q/plugins/Places/js/tools/location.js"
+	"Places/location": "Q/plugins/Places/js/tools/location.js",
+	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
 });
 
 })(Q, jQuery, window);

@@ -11,6 +11,7 @@
  * @param {array} [$params] Parameters that can come from the request
  *   @param {string} $params.publisherId  Required. The id of the user to publish the stream.
  *   @param {string} $params.type Required. The type of the stream.
+ *   @param {string} [$params.name] Optionally set the exact name of the stream to be created. This only works if the name of the stream is in Streams/possibleUserStreams config array, and the logged-inuser has adminLevel >= "own".
  *   @param {string} [$params.Q_Streams_related_publisherId] Optionally indicate the publisher of the stream to relate the newly created to. Used together with the related.streamName option.
  *   @param {string} [$params.Q_Streams_related_streamName] Optionally indicate the name of a stream to relate the newly crated stream to. This is often necessary in order to obtain permissions to create the stream.
  *   @param {bool} [$params.dontSubscribe=false] Pass 1 or true here in order to skip auto-subscribing to the newly created stream.
@@ -109,6 +110,7 @@ function Streams_stream_post($params = array())
 			}
 		}
 	}
+
 
 	// Create the stream
 	$stream = Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);

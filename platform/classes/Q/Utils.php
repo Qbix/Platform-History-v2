@@ -434,7 +434,7 @@ class Q_Utils
 		$fp = self::socket($ip, $port, $errno, $errstr, $timeout);
 		if (!$fp) {
 			if ($throwIfRefused) {
-				$app = Q_Config::expect('Q', 'app');
+				$app = Q::app();
 				throw new Q_Exception("PHP couldn't open a socket to " . $url . " (" . $errstr . ") Go to scripts/$app and run node $app.js");
 			}
 			return false;
@@ -779,38 +779,6 @@ class Q_Utils
 
 		return $result;
 	}
-	
-	/**
-	 * Interpolate some standard placeholders inside a url, such as 
-	 * {{AppName}} or {{PluginName}}
-	 * @static
-	 * @method interpolateUrl
-	 * @param {string} $url
-	 * @param {array} [$additional=array()] Any additional substitutions
-	 * @return {string} The url with substitutions applied
-	 */
-	static function interpolateUrl($url, $additional = array())
-	{
-		if (strpos($url, '{{') === false) {
-			return $url;
-		}
-		$app = Q::app();
-		$baseUrl = Q_Request::baseUrl();
-		$substitutions = array(
-			'baseUrl' => $baseUrl,
-			$app => $baseUrl
-		);
-		$plugins = Q_Config::expect('Q', 'plugins');
-		$plugins[] = 'Q';
-		foreach ($plugins as $plugin) {
-			$substitutions[$plugin] = Q_Uri::pluginBaseUrl($plugin);
-		}
-		$url = Q::interpolate($url, $substitutions);
-		if ($additional) {
-			$url = Q::interpolate($url, $additional);
-		}
-		return $url;
-	}
 
 	/**
 	 * Returns base url for node.js requests
@@ -821,7 +789,7 @@ class Q_Utils
 	static function nodeUrl () {
 		$url = Q_Config::get('Q', 'node', 'url', null);
 		if (isset($url)) {
-			return self::interpolateUrl($url);
+			return Q_Uri::interpolateUrl($url);
 		}
 		$host = Q_Config::get('Q', 'node', 'host', null);
 		$port = Q_Config::get('Q', 'node', 'port', null);

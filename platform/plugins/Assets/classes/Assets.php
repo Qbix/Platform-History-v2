@@ -167,7 +167,7 @@ abstract class Assets extends Base_Assets
 			$options['user'] = Users::loggedInUser(true);
 		}
 		
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$user = Q::ifset($options, 'user', Users::loggedInUser(true));
 		$currency = 'USD'; // TODO: may want to implement support for currency conversion
 		$startDate = Q::ifset($options, 'startDate', date("Y-m-d"));

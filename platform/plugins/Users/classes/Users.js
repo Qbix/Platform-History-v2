@@ -113,7 +113,7 @@ Users.userFromSession = function (sessionId, callback) {
  * @method listen
  * @param {Object} [options={}]
  * @param {Object} [options.apn.provider={}] Additional options for node-apn Provider
- * @param {String} [options.apn.appId=Q.app.name] Only needed if you have multiple ios platforms
+ * @param {String} [options.apn.appId=Q.app.name] Only needed if you have multiple ios platform apps
  */
 Users.listen = function (options) {
 
@@ -122,75 +122,9 @@ Users.listen = function (options) {
 	// Start internal server
 	var server = Q.listen();
     server.attached.express.post('/Q/node', Users_request_handler);
-
-	// Set up ios push notification agent
-	var appId = o.apn && o.apn.appId || Q.app.name;
-	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") >= 0) {
-		_Users_listen_ios(o, server);
-	}
-
-	// TODO: implement android
 };
 
-Users.listen.options = {
-	ios: {
-		feedback: {
-			batchFeedback: true,
-			interval: 300
-		}
-	}
-};
-
-Users.push = {
-	apn: {
-		provider: null
-	}
-};
-
-function _Users_listen_ios (options, server) {
-	var fs = require('fs');
-	var apn = require('apn');
-	var path = require('path');
-	var appName = Q.app.name;
-	var appId = options.appId || app;
-	var sandbox = Q.Config.get(["Users", "apps", "ios", appId, "sandbox"], false);
-	var s = sandbox ? "sandbox" : "production";
-	var appId = (options && options.appId) || Q.app.name;
-	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
-	var token = o.token;
-	var ssl = o.ssl;
-	if (token) {
-		token.key = path.join(Q.app.DIR, token.key);
-		if (!fs.existsSync(token.key)) {
-			console.log("WARNING: APN provider not enabled due to missing token.key at " + token.key + "\n");
-			return;
-		}
-	} else if (ssl) {
-		ssl.ca = Q.pluginInfo.Users.FILES_DIR + '/Users/certs/EntrustRootCA.pem';
-		var keys = ['cert', 'key', 'ca'];
-		for (var i=0, l=keys.length; i<l; ++i) {
-			var k = files[i];
-			if (!ssl[k] || !fs.existsSync(ssl[k])) {
-				console.log("WARNING: APN provider not enabled due to missing " + k + " at " + ssl[k] + "\n");
-				return;
-			}
-		}
-	} else {
-		console.log("WARNING: APN provider not enabled due to missing token and ssl config");
-		return;
-	}
-	if (o.production == undefined) {
-		o.production = !sandbox;
-	}
-	var appId = o.appId || Q.app.name;
-	var passphrase = Q.Config.get(["Users", "apps", "ios", appId, "passphrase"], null);
-	if (passphrase) {
-		o.passphase = passphase;
-	}
-	var provider = Users.push.apn.provider = new apn.Provider(Q.extend(
-		{}, o, options && options.apn && options.apn.provider
-	));
-};
+Users.listen.options = {};
 
 /**
  * Fetches a user from the database
@@ -219,7 +153,9 @@ Users.iconUrl = function Users_iconUrl(icon, size) {
 	}
 	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
 	var src = Q.interpolateUrl(icon + '/' + size);
-	return src.isUrl() ? src : Q.url('{{Users}}/img/icons/'+src);
+	return src.isUrl() || icon.substr(0, 2) === '{{'
+		? src
+		: Q.url('{{Users}}/img/icons/'+src);
 };
 
 /**

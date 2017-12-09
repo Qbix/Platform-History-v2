@@ -11,7 +11,7 @@ function Users_identifier_post()
 	} else {
 		$user = Users::loggedInUser(true);
 	}
-	$app = Q_Config::expect('Q', 'app');
+	$app = Q::app();
 	$fields = array();
 
 	$identifier = Users::requestedIdentifier($type);

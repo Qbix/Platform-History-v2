@@ -13,7 +13,7 @@ var Bootstrap = {};
 /**
  * Add path to the list of paths checked by node.js while searching a module
  * @method setIncludePath
- * @param path {string}
+ * @param {string} path
  */
 Bootstrap.setIncludePath = function (path) {
   var paths = (process.env.NODE_PATH || '').split(Q.PS);
@@ -40,9 +40,9 @@ var _reloadConfig;
 /**
  * Load platform configuration
  * @method configure
- * @param callback {function} Callback is fired when config is ready. 
+ * @param {function} callback Callback is fired when config is ready. 
  *  Errors are thrown if "reload" is false and passed to "callback" if "reload" is true
- * @param [reload=false] {boolean} Wheather config is loaded on process start or reloaded by active process
+ * @param {boolean} [reload=false] Wheather config is loaded on process start or reloaded by active process
  * @throws {Error} if reload is `false` throws any errors appearing during config load process, otherwise
  * 	passes them to callback
  */
@@ -53,15 +53,6 @@ Bootstrap.configure = function (callback, reload) {
 	var c = callback;
 	callback = function () {
 		process.env.TZ = Q.Config.expect(['Q', 'defaultTimezone']);
-		var time = require('time');
-
-		// this added because on Win node module "time" return error:
-		// Unknown Timezone: 'UTC'
-		try {
-			time.tzset(process.env.TZ);
-		} catch (e) {
-			// ignore
-		}
 		c.apply(this, arguments);
 	};
 	var Config = new Q.Tree();
@@ -172,7 +163,7 @@ Bootstrap.configure = function (callback, reload) {
 						/**
 						 * Config tree hs been reloaded
 						 * @event Config/reload
-						 * @param error {Error}
+						 * @param {Error} error
 						 *	The error object if any
 						 */
 						Q.emit('Config/reload', null);
@@ -208,7 +199,7 @@ Bootstrap.configure = function (callback, reload) {
 /**
  * Add plugins to Q.plugins namespace
  * @method loadPlugins
- * @param callback {function}
+ * @param {function} callback
  */
 Bootstrap.loadPlugins = function (callback) {
 	Q.plugins = {};
@@ -227,7 +218,7 @@ Bootstrap.loadPlugins = function (callback) {
 /**
  * Load handlers available in the platform and plugins
  * @method loadHandlers
- * @param callback {function}
+ * @param {function} callback
  */
 Bootstrap.loadHandlers = function (callback) {
 	Q.handlers = {};

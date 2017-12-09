@@ -3,5 +3,35 @@
 	"nearby": {
 		"PostcodeLabel": "{{1}} ({{2}})",
 		"Title": "Within {{1}} of {{2}}"
+	},
+	"location": {
+		"myCurrentLocation": "My current location",
+		"enterAddress": "Enter an address",
+		"create": {
+			"action": "Add Location",
+			"title": "New Location",
+			"nameYourLocation": "Name your location"
+		},
+		"confirm": {
+			"title": "Save this location?",
+			"message": "Do you plan to use this location again in the future?",
+			"ok": "Yes",
+			"cancel": "No"
+		},
+		"add": {
+			"title": "Name this location",
+			"placeholder": "Home, Work etc.",
+			"ok": "Save"
+		}
+	},
+	"areas": {
+		"filterPlaceholder": "Any area inside this location?",
+		"newArea": "New area",
+		"promptTitle": "Enter a name for the area:",
+		"absent": "Please set area",
+		"error": "Error",
+		"exist": "Area already exist",
+		"addNewArea": "Add new area",
+	 	"add": "Add"
 	}
 }

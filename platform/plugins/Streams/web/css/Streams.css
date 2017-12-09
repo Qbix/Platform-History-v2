@@ -189,7 +189,8 @@
 
 .Streams_participants_tool .Users_avatar_tool,
 .Streams_participants_tool .Streams_participants_invite {
-	width: 44px;
+	display: inline-block;
+	width: 45px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
@@ -457,6 +458,7 @@
 .Streams_chat_to_me .Users_avatar_tool {
 	float: left;
 	position: relative;
+	font-weight: bold;
 }
 .Streams_chat_tool .Users_avatar_icon {
 	position: absolute;
@@ -469,7 +471,6 @@
 }
 .Streams_chat_message {
 	color: #222;
-	width: 96%;
 	max-height: 100px;
 	overflow: hidden;
 	word-wrap: break-word;
@@ -521,7 +522,7 @@
 }
 .Streams_chat_more {
 	cursor: pointer;
-	background: #eee;
+	background-color: #eee;
 	color: #555;
 	text-align: center;
 	padding: 5px 0;
@@ -529,18 +530,18 @@
 }
 .Streams_chat_more:hover {
 	color: #fff;
-	background: #ccc;
+	background-color: #ccc;
 }
 .Streams_chat_more:active {
 	color: #fff;
-	background: #bbb;
+	background-color: #bbb;
 }
 .Streams_chat_timestamp {
 	margin-right: 15px;
 	text-align: right;
 	float: right;
 	cursor: default;
-	font-size: 10pt;
+	font-size: 0.8em;
 	color: gray;
 }
 .Streams_chat_bubble {
@@ -550,6 +551,7 @@
 	padding: 10px;
 	border: 1px solid #D0D9E4;
 	clear: both;
+	font-size: 0.8em;
 }
 .Streams_chat_tick {
 	background: url('../../Streams/img/chat/message-tick.png');
@@ -563,12 +565,12 @@
 .Streams_chat_to_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
-	background: #DAE3ED;
+	background-color: #DAE3ED;
 }
 .Streams_chat_from_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
-	background: #FFFFFF;
+	background-color: #FFFFFF;
 }
 .Streams_chat_from_me .Streams_chat_tick {
 	float: right;
@@ -605,7 +607,7 @@
 .Q_expandable_count,
 .Q_expandable_tool .Q_selected,
 .Streams_interests_unlisted .Q_selected {
-	background: rgba(255, 180, 180, 0.9);
+	background-color: rgba(255, 180, 180, 0.9);
     color: #220;
 	text-shadow: none;
 }
@@ -650,7 +652,7 @@
 	font-size: 16px;
 	padding: 5px 15% 5px 5%;
 	border-radius: 16px; -moz-border-radius: 16px; -webkit-border-radius: 16px;
-	background: transparent;
+	background-color: transparent;
 }
 
 .Users_avatar_tool .Users_avatar_name>*{ position: relative; }
@@ -687,7 +689,7 @@
 	opacity: 0.8;
 	font-size: 12px;
 	font-weight: bold;
-	background: red;
+	background-color: red;
 	color: black;
 	position: absolute;
 	top: 50%;
@@ -760,3 +762,102 @@
 
 .Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
 .Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
+.Streams_aspect_promote { color: #742e7f; border-color: #742e7f; }
+
+.Q_button.Streams_aspect_interests {
+	background-color: #bf1118; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
+	color: white;
+}
+.Q_button.Streams_aspect_interests:active,
+.Q_button.Streams_aspect_interests:focus {
+	background-color: #a10e14;
+	color: white;
+}
+
+.Q_button.Streams_aspect_interests {
+	background-color: #bf1118; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#bf1118), to(#a10e14)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
+	color: white;
+}
+.Q_button.Streams_aspect_interests:active,
+.Q_button.Streams_aspect_interests:focus {
+	background-color: #a10e14;
+	color: white;
+}
+
+.Q_button.Streams_aspect_chats {
+	background-color: #1ca5b1; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d9e4', endColorstr='#0b94a9'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#1ca5b1), to(#0b94a9)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #1ca5b1,  #0b94a9); /* for firefox 3.6+ */
+	color: white;
+}
+
+.Q_button.Streams_aspect_chats:active,
+.Q_button.Streams_aspect_chats:focus {
+	background-color: #0b94a9;
+	color: white;
+}
+
+.Q_button.Streams_aspect_promote {
+	background: #742e7f; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='##742e7f', endColorstr='#4b1c52'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#742e7f), to(#631d6e)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #742e7f,  #631d6e); /* for firefox 3.6+ */
+	color: white;
+}
+
+.Q_button.Streams_aspect_promote:active,
+.Q_button.Streams_aspect_promote:focus {
+	background: #631d6e;
+	color: white;
+}
+
+.Streams_dialog_interests {
+	min-width: 300px;
+	width: 90%;
+	background: url(../img/bg/overlay-interests.png);
+}
+
+.Streams_dialog_interests * {
+	color: white;
+}
+
+.Streams_dialog_interests .Q_dialog_slot {
+	padding: 10px;
+}
+
+.Streams_file_preview_tool {
+	cursor: pointer;
+	position: relative;
+}
+
+.Streams_file_preview_tool.Streams_preview_stream:hover {
+	background: rgba(150, 150, 150, 0.1);
+}
+
+.Streams_file_preview_tool.Streams_preview_stream:focus,
+.Streams_file_preview_tool.Streams_preview_stream:active {
+	background: rgba(150, 150, 150, 0.2);
+}
+
+.Streams_chat_vote_container {
+	width: 20px;
+	position: absolute;
+	right: 0;
+}
+
+.Streams_chat_vote_container img {
+	width: 20px;
+	height: 20px;
+	margin-bottom: 5px;
+}
+
+.Streams_chat_with_vote .Streams_chat_bubble {
+	margin-right: 20px;
+}

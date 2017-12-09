@@ -15,7 +15,7 @@ function Users_activate_response_content()
 	}
 	
 	if (!empty(Users::$cache['success'])) {
-		$app = Q_Config::expect('Q', 'app');
+		$app = Q::app();
 		$successUrl = Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home");
 		if (Q_Request::method() === 'POST') {
 			if ($qs = $_SERVER['QUERY_STRING']) {

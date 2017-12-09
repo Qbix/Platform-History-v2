@@ -525,8 +525,8 @@ class Q_Session
 	{
 		/**
 		 * @event Q/session/read {before}
-		 * @param 'save_path' {string}
-		 * @param 'session_db_connection' {Db_Interface}
+		 * @param {string} 'save_path'
+		 * @param {Db_Interface} 'session_db_connection'
 		 * @return {string}
 		 */
 		$result = Q::event('Q/session/read', 
@@ -569,8 +569,8 @@ class Q_Session
 		self::$sess_data = $result;
 		/**
 		 * @event Q/session/read {after}
-		 * @param 'save_path' {string}
-		 * @param 'session_db_connection' {Db_Interface}
+		 * @param {string} 'save_path'
+		 * @param {Db_Interface} 'session_db_connection'
 		 * @return {string}
 		 */
 		$result = Q::event('Q/session/read', 
@@ -671,7 +671,7 @@ class Q_Session
 					'old_data' => $old_data
 				);
 				if (!empty(self::$session_db_connection)) {
-					$row->retrieve('*', false, array(
+					$row->retrieve(null, false, array(
 						'begin' => true,
 						'ignoreCache' => true
 					));
@@ -790,7 +790,7 @@ class Q_Session
 	{
 		/**
 		* @event Q/session/destroy {before}
-		* @param 'id' {string}
+		* @param {string} id
 		* @return {false}
 		*/
 		if (false === Q::event(

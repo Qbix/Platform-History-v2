@@ -17,7 +17,7 @@ var Users_Device = Users.Device;
  * @param fields {object} The fields values to initialize table row as
  * an associative array of `{column: value}` pairs
  */
-function Users_Device_Firefox (fields) {
+function Users_Device_Firefox(fields) {
 	// Run constructors of mixed in objects
 	Users_Device.constructors.apply(this, arguments);
 }
@@ -55,18 +55,20 @@ module.exports = Users_Device.Firefox = Users_Device_Firefox;
  * @param {boolean} [options.silent=false] Deliver a silent notification, may throw an exception
  * @param {Function} [callback] This is called after the notification was sent. The first parameter might contain any errors. The "this" object is the Users.Device
  */
-
-Users_Device.prototype.handlePushNotification = function (notification, callback) {
+Users_Device_Firefox.prototype.handlePushNotification = function (notification, callback) {
 	var appConfig = Q.Config.expect(['Users', 'apps', 'firefox', Q.app.name]);
 	if (!notification.alert.title || !notification.alert.body) {
 		return Q.handle(callback, this, [new Error('Notification title and body are required')]);
 	}
-	notification = {
+	var message = {
 		title: notification.alert.title,
-		body: notification.alert.body,
-		icon: notification.icon ? notification.icon : null,
-		click_action: notification.url ? notification.url : null
+		body: notification.alert.body
 	};
+	Q.each(['url', 'sound', 'color', 'icon', 'requireInteraction', 'renotify', 'silent', 'tag', 'vibrate', 'badge', 'dir', 'actions'], function (i, item) {
+		if (notification[item] !== undefined) {
+			message[item] = notification[item];
+		}
+	});
 	var webpush = require('web-push');
 	webpush.setVapidDetails(appConfig.url, appConfig.publicKey, appConfig.privateKey);
 	webpush.sendNotification({
@@ -75,9 +77,9 @@ Users_Device.prototype.handlePushNotification = function (notification, callback
 			auth: this.fields.auth,
 			p256dh: this.fields.p256dh
 		}
-	}, JSON.stringify(notification)).then(function(){
+	}, JSON.stringify(message)).then(function () {
 		Q.handle(callback, this);
-	}).catch(function(){
+	}).catch(function (err) {
 		Q.handle(callback, this, [err]);
 	});
 };
