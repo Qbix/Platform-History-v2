@@ -3348,10 +3348,11 @@ abstract class Streams extends Base_Streams
 	 * "Streams"/"types"/$streamType/"participating", which is an array of stream names.
 	 * @method participating
 	 * @static
-	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of one or more streams
-	 *  of type Streams/participating
+	 * @param {string|array|Db_Range} [$options.type]
+	 *  Filter the type(s) of the streams to return, that the user is participating in.
 	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
 	 * @param {string} [$options.publisherId=Users::loggedInUser(true)->id] the publisher of the category stream
+	 * @param {string} [$options.categoryName='Streams/participating'] the name of the category stream
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
@@ -3361,9 +3362,15 @@ abstract class Streams extends Base_Streams
 	 *  then returns only $relatedStreams or $relations.
 	 */
 	static function participating(
-		$streamName = 'Streams/participating',
+		$type = null,
 		$options = array())
 	{
+		if (isset($type)) {
+			$options['type'] = $type;
+		}
+		$streamName = isset($options['categoryName'])
+			? $options['categoryName']
+			: 'Streams/participating';
 		$publisherId = isset($options['publisherId'])
 			? $options['publisherId']
 			: Users::loggedInUser(true)->id;
