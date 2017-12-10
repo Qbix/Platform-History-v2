@@ -3,7 +3,7 @@
 function MyApp_before_Q_responseExtras()
 {
 	Q_Response::addStylesheet('css/MyApp.css', '@end');
-	Q_Response::addScript('js/MyApp.js', 'Q');
+	Q_Response::addScript('js/MyApp.js', 'MyApp');
 	if (Q_Request::isIE()) {
 		header("X-UA-Compatible", "IE=edge");
 	}
