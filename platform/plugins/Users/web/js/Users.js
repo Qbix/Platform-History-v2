@@ -2392,7 +2392,8 @@
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
 
 			if (Q.info.isCordova) {
-				Users.Facebook.scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps).replace('://', '');
+				Users.Facebook.scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
+				Users.Facebook.scheme = Users.Facebook.scheme ? Users.Facebook.scheme.replace('://', '') : null;
 				Q.onHandleOpenUrl.set(function (url) {
 					window.cordova.plugins.browsertab.close();
 					var params = _getParams(url);
@@ -2458,6 +2459,10 @@
 				});
 				break;
 			case 'oauth':
+				if (!Users.Facebook.scheme) {
+					console.error('Application scheme is missing. Please provide valid scheme to use FB oAuth login method.');
+					return;
+				}
 				var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
 					'?client_id=' + Users.Facebook.appId +
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
