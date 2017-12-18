@@ -11973,7 +11973,8 @@ Q.onJQuery.add(function ($) {
 		"Q/expandable": "{{Q}}/js/tools/expandable.js",
 		"Q/filter": "{{Q}}/js/tools/filter.js",
 		"Q/rating": "{{Q}}/js/tools/rating.js",
-		"Q/paging": "{{Q}}/js/tools/paging.js"
+		"Q/paging": "{{Q}}/js/tools/paging.js",
+		"Q/pie": "{{Q}}/js/tools/pie.js"
 	});
 	
 	Q.Tool.jQuery({
