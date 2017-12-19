@@ -66,14 +66,6 @@ function Streams_stream_post($params = array())
 		unset($req['icon']);
 	}
 	
-	// Hold on to any file that was posted
-	$file = null;
-	if (!empty($req['file']) and is_array($req['file'])) {
-		$file = $req['file'];
-		$file["name"] = $req["title"];
-		unset($req['file']);
-	}
-	
 	// Check if the user owns the stream
 	if ($user->id === $publisherId) {
 		$asOwner = true;
@@ -141,11 +133,13 @@ function Streams_stream_post($params = array())
 		// the Streams/after/Q_image_save hook saves some attributes
 	}
 	
-	// Process any file that was posted
-	if ($file === true) {
-		$file = array();
-	}
-	if (is_array($file)) {
+	// Hold on to any file that was posted
+	$file = null;
+	if (!empty($req['file']) and is_array($req['file'])) {
+		$file = $req['file'];
+		$file["name"] = $req["title"];
+		unset($req['file']);
+
 		if (empty($file['path'])) {
 			$file['path'] = 'Q'.DS.'uploads'.DS.'Streams';
 		}
