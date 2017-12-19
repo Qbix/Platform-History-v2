@@ -11677,12 +11677,12 @@ Aup.recorderInit = function (options) {
 	var tool = this;
 
 	// load recorder
-	Q.addScript("plugins/Q/js/audioRecorder/recorder.js", function(){
+	Q.addScript("{{Q}}/js/audioRecorder/recorder.js", function(){
 	//new Recorder({leaveStreamOpen: true, encoderPath: Q.url("plugins/Q/js/audioRecorder/encoderWorker.min.js")}); - ogg format encoder
 		tool.recorder = tool.recorder || new Recorder({leaveStreamOpen: true, encoderPath: Q.url("plugins/Q/js/audioRecorder/recorderWorkerMP3.js")}); // mp3 format encoder
 
 		tool.recorder.addEventListener("streamReady", function(e){
-			if(typeof options.onStreamReady == "function") options.onStreamReady.call();
+			if(typeof options.onStreamReady === "function") options.onStreamReady.call();
 		});
 
 		// when error occur with audio stream
@@ -11691,7 +11691,7 @@ Aup.recorderInit = function (options) {
 		});
 
 		tool.recorder.addEventListener("dataAvailable", function(e){
-			if(typeof options.onDataAvailable == "function") options.onDataAvailable.call(e);
+			if(typeof options.onDataAvailable === "function") options.onDataAvailable.call(e);
 		});
 
 		tool.recorder.initStream();
