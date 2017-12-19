@@ -146,7 +146,7 @@ function Streams_stream_post($params = array())
 	}
 	if (is_array($file)) {
 		if (empty($file['path'])) {
-			$file['path'] = 'uploads/Streams';
+			$file['path'] = 'Q/uploads/Streams';
 		}
 		if (empty($file['subpath'])) {
 			$file['subpath'] = "$splitId/{$stream->name}/file/".time();
