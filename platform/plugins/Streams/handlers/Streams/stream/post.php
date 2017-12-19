@@ -131,10 +131,10 @@ function Streams_stream_post($params = array())
 	}
 	if (is_array($icon)) {
 		if (empty($icon['path'])) {
-			$icon['path'] = 'Q/uploads/Streams';
+			$icon['path'] = 'Q'.DS.'uploads'.DS.'Streams';
 		}
 		if (empty($icon['subpath'])) {
-			$icon['subpath'] = "$splitId/{$stream->name}/icon/".time();
+			$icon['subpath'] = $splitId.DS."{$stream->name}".DS."icon".DS.time();
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
@@ -146,10 +146,10 @@ function Streams_stream_post($params = array())
 	}
 	if (is_array($file)) {
 		if (empty($file['path'])) {
-			$file['path'] = 'Q/uploads/Streams';
+			$file['path'] = 'Q'.DS.'uploads'.DS.'Streams';
 		}
 		if (empty($file['subpath'])) {
-			$file['subpath'] = "$splitId/{$stream->name}/file/".time();
+			$file['subpath'] = $splitId.DS."{$stream->name}".DS."file".DS.time();
 		}
 		Q_Response::setSlot('file', Q::event("Q/file/post", $file));
 		// the Streams/after/Q_file_save hook saves some attributes
