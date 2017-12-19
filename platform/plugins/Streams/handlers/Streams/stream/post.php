@@ -70,6 +70,7 @@ function Streams_stream_post($params = array())
 	$file = null;
 	if (!empty($req['file']) and is_array($req['file'])) {
 		$file = $req['file'];
+		$file["name"] = $req["title"];
 		unset($req['file']);
 	}
 	
