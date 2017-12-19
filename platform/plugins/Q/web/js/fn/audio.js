@@ -60,9 +60,9 @@
 				state.duration = this.duration;
 
 				// onAudioLoad hook
-				if(typeof(state.onAudioLoad) == "function"){ state.onAudioLoad.call(state); }
+				if(typeof(state.onAudioLoad) === "function"){ state.onAudioLoad.call(state); }
 
-				if(state.action == "recorder"){
+				if(state.action === "recorder"){
 					state.recorderStateChange("play");
 				}
 			});
@@ -81,15 +81,15 @@
 				// set box attribute to apply valid styles
 				state.pieBox.attr("data-state", "play");
 
-				if(state.action == "player"){
+				if(state.action === "player"){
 
-				}else if(state.action == "recorder"){
+				}else if(state.action === "recorder"){
 					state.recorderStateChange("play");
 					state.recordTimeElement.html(state.formatRecordTime(duration));
 				}
 
 				// onEnded hook
-				if(typeof(state.onEnded) == "function"){ state.onEnded.call(state); }
+				if(typeof(state.onEnded) === "function"){ state.onEnded.call(state); }
 			});
 			state.audio.audio.addEventListener("pause", function(){
 				// stop timer if exist
@@ -103,7 +103,7 @@
 				//}
 
 				// onPause hook
-				if(typeof(state.onPause) == "function"){ state.onPause.call(state); }
+				if(typeof(state.onPause) === "function"){ state.onPause.call(state); }
 			});
 			state.audio.audio.addEventListener("playing", function(){
 				// set box attribute to apply valid styles
@@ -117,12 +117,12 @@
 					var currentTime = state.audio.audio.currentTime;
 
 					// onPlaying hook
-					if(typeof(state.onPlaying) == "function"){ state.onPlaying.call(state); }
+					if(typeof(state.onPlaying) === "function"){ state.onPlaying.call(state); }
 
 					state.pieTool.state.fraction = 100*currentTime/state.duration;
 					state.pieTool.stateChanged('fraction');
 
-					if(state.action == "recorder"){
+					if(state.action === "recorder"){
 						state.recordTimeElement.html(state.formatRecordTime(state.duration - currentTime) + '/' + state.formatRecordTime(state.duration));
 					}
 				}, 100);
@@ -199,7 +199,7 @@
 				state.pieBox.attr("data-state", newState);
 
 				// init recorder
-				if(newState == "init"){
+				if(newState === "init"){
 					// reset pie tool to start point
 					if(state.pieTool){
 						state.currentRecordTime = state.maxRecordTime;
@@ -237,7 +237,7 @@
 				}
 
 				// play recorded track
-				if(newState == "playing"){
+				if(newState === "playing"){
 					state.recordTextElement.html(state.text.playing);
 					state.audio.audio.play();
 				}else{
@@ -245,19 +245,19 @@
 				}
 
 				// ready to play
-				if(newState == "play"){
+				if(newState === "play"){
 					state.recordTextElement.html(state.text.recorded);
 					state.recordElapsedElement.html(state.text.clip);
 					state.recordTimeElement.html(state.formatRecordTime(state.duration));
 				}
 
 				// recorder stoped
-				if(newState == "recorded"){
+				if(newState === "recorded"){
 					state.pieTool.initPos();
 				}
 
 				// stop recording
-				if(newState != "recording"){
+				if(newState !== "recording"){
 					// stop recording if recorder exist
 					if(state.recorder){ state.recorder.stop(); }
 
@@ -280,7 +280,7 @@
 				// start recorder timer to handle all recorder interface actions
 				state.recordIntervalID = setInterval(function(){
 					// set currentRecordTime to maxRecordTime if undefined
-					if(typeof state.currentRecordTime == 'undefined') state.currentRecordTime = state.maxRecordTime - 1;
+					if(typeof state.currentRecordTime === 'undefined') state.currentRecordTime = state.maxRecordTime - 1;
 
 					// decrease currentRecordTime to 100 milliseconds
 					state.currentRecordTime -= 0.1;
@@ -305,7 +305,7 @@
 			state.playAudio = function(){
 				var promise = state.audio.audio.play();
 
-				if(typeof promise == 'undefined') return;
+				if(typeof promise === 'undefined') return;
 
 				state.userGesture("play", promise);
 			};
@@ -317,7 +317,7 @@
 			state.pauseAudio = function(){
 				var promise = state.audio.audio.pause();
 
-				if(typeof promise == 'undefined') return;
+				if(typeof promise === 'undefined') return;
 
 				state.userGesture("pause", promise);
 			};
@@ -351,8 +351,8 @@
 								event.stopPropagation();
 								event.preventDefault();
 
-								if(action == "play") state.audio.audio.play();
-								if(action == "pause") state.audio.audio.pause();
+								if(action === "play") state.audio.audio.play();
+								if(action === "pause") state.audio.audio.pause();
 
 								Q.Dialogs.pop();
 							})
@@ -522,7 +522,7 @@
 							return;
 						}
 
-						if($this.attr("data-state") == "play"){
+						if($this.attr("data-state") === "play"){
 							state.playAudio();
 						}else{
 							state.pauseAudio();
@@ -590,17 +590,17 @@
 									var recorderState = state.recorderState;
 
 									// click on arc border - means change play position
-									if(!pieTool.state.clickPos.inside && recorderState == "playing"){
+									if(!pieTool.state.clickPos.inside && recorderState === "playing"){
 										state.audio.audio.currentTime = state.audio.audio.duration/100*pieTool.state.clickPos.anglePercent;
 										return;
 									}
 
 									// set pie state
 									if(!recorderState) recorderState = "init";
-									else if(recorderState == "ready") recorderState = "recording";
-									else if(recorderState == "recording") recorderState = "recorded";
-									else if(recorderState == "playing") recorderState = "play";
-									else if(recorderState == "play") recorderState = "playing";
+									else if(recorderState === "ready") recorderState = "recording";
+									else if(recorderState === "recording") recorderState = "recorded";
+									else if(recorderState === "playing") recorderState = "play";
+									else if(recorderState === "play") recorderState = "playing";
 
 									state.recorderStateChange(recorderState);
 								});
@@ -624,7 +624,7 @@
 
 									// wait while track encoded
 									state.encodeIntervalID = setInterval(function(){
-										if(typeof state.dataBlob == 'undefined') return;
+										if(typeof state.dataBlob === 'undefined') return;
 
 										state.file = state.dataBlob;
 										state.file.name = "audio.mp3";
