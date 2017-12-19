@@ -42,6 +42,23 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 		}
 		$paths[] = Q_DIR.$subpath;
 	}
+
+	// small patch for Win systems. hard to replace / with DS everywhere.
+	function fixPath ($symbol, $path) {
+		return str_replace($symbol, DS, $path);
+	}
+	if (DS == '/') {
+		$path = fixPath ('\\', $path);
+		array_walk($paths, function (&$item) {
+			$item = fixPath ('\\', $item);
+		});
+	} elseif (DS == '\\') {
+		$path = fixPath ('/', $path);
+		array_walk($paths, function (&$item) {
+			$item = fixPath ('/', $item);
+		});
+	}
+
 	if (strpos($path, "../") === false
 	and strpos($path, "..".DS) === false) {
 		foreach ($paths as $p) {
