@@ -1061,7 +1061,6 @@ class Q_Utils
 		switch (gettype($path)) {
 			case "string":
 				$path = str_replace($symbol, DS, $path);
-				return $path;
 				break;
 			case "array":
 				array_walk($path, function (&$item, $key, $symbol) {
