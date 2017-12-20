@@ -28,11 +28,11 @@
 				"relatedTo": {
 					"Websites/announcements": {
 						"description": "An announcement was posted",
-						"url": "{{baseUrl}}/Websites/announcement/{{streamName.2}}"
+						"url": "{{baseUrl}}/Websites/announcement/{{streamName.[2]}}"
 					},
 					"Websites/articles": {
 						"description": "An article was posted",
-						"url": "{{baseUrl}}/Websites/article/{{streamName.2}}"
+						"url": "{{baseUrl}}/Websites/article/{{streamName.[2]}}"
 					}
 				}
 			},
