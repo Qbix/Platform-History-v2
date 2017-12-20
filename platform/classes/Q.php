@@ -928,31 +928,6 @@ class Q
 		return function_exists($function_name);
 
 	}
-
-	/**
-	 * Replace from string wring directory separators
-	 * @method normalizePath
-	 * @static
-	 * @param {string|array} $path String need to normalize
-	 */
-	static function normalizePath (&$path)
-	{
-		$symbol = '/';
-		if (DS == '/') {
-			$symbol = '\\';
-		}
-
-		switch (gettype($path)) {
-			case "string":
-				$path = str_replace($symbol, DS, $path);
-				break;
-			case "array":
-				array_walk($path, function (&$item, $key, $symbol) {
-					$item = str_replace($symbol, DS, $item);
-				}, $symbol);
-				break;
-		}
-	}
 	/**
 	 * Executes a particular handler
 	 * @method handle
