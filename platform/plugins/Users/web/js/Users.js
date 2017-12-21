@@ -2393,7 +2393,7 @@
 
 			if (Q.info.isCordova) {
 				Users.Facebook.scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
-				Users.Facebook.scheme = Users.Facebook.scheme ? Users.Facebook.scheme.replace('://', '') : null;
+				Users.Facebook.scheme = Users.Facebook.scheme && Users.Facebook.scheme.replace('://', '');
 				Q.onHandleOpenUrl.set(function (url) {
 					window.cordova.plugins.browsertab.close();
 					var params = _getParams(url);
