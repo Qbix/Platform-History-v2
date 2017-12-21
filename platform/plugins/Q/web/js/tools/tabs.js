@@ -436,10 +436,13 @@ function _addListeners(tool, $jq) {
 		return;
 	}
 	$jq.on([Q.Pointer.fastclick, '.Q_tabs'], '.Q_tabs_tab', function () {
-		if (false === state.onClick.handle.call(tool, this.getAttribute('data-name'), this)) {
+		if (false === tool.state.onClick.handle.call(
+			tool, this.getAttribute('data-name'), this
+		)) {
 			return;
 		}
-		if (Q.Pointer.canceledClick || $('.Q_discouragePointerEvents', tool.element).length) {
+		if (Q.Pointer.canceledClick
+		|| $('.Q_discouragePointerEvents', tool.element).length) {
 			return;
 		}
 		var element = this;
