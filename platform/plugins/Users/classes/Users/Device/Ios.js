@@ -93,7 +93,7 @@ Users_Device_Ios.provider = function (appId, providerOptions) {
 	if (provider) {
 		return provider;
 	}
-	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") >= 0) {
+	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") === -1) {
 		throw new Q.Exception(
 			'Users.Device.Ios: Config Users/platforms/'+appId+' must include "ios"'
 		);
