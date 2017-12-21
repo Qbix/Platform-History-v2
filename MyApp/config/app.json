@@ -17,9 +17,6 @@
 			"connections": []
 		},
 		"plugins": ["Users", "Streams"],
-		"filename": {
-			"extensions": ["png", "jpeg", "gif", "jpg", "pdf", "js", "ogg", "mp3", "css", "cur"]
-		},
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["MyApp/before/Q_responseExtras"]
 		},
