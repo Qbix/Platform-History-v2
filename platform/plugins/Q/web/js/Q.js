@@ -5528,7 +5528,7 @@ Q.init = function _Q_init(options) {
 				do {
 					if (t && t.nodeName === "A" && t.href && !t.outerHTML.match(/\Whref=[',"]#[',"]\W/) && t.href.match(/^https?:\/\//)) {
 						e.preventDefault();
-						s = (t.target === "_blank") ? "_system" : "_blank";
+						s = t.target && (t.target === "_blank" ? "_blank" : "_system");
 						root.open(t.href, s, "location=no");
 					}
 				} while ((t = t.parentNode));
@@ -12244,8 +12244,14 @@ if (_isCordova) {
 			return;
 		}
 		cordova.plugins.browsertab.isAvailable(function(result) {
+			var a = window.open;
 			delete window.open;
 			window.open = function (url, target, options) {
+				var noopener = options && options.noopener;
+				var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
+				if (!target || w) {
+					return a.apply(this, arguments);
+				}
 				if (result) {
 					cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
 				} else if (cordova.InAppBrowser) {
