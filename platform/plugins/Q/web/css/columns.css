@@ -151,6 +151,6 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_columns_loading .Q_controls_slot { display: none; }
 
-.overflowHidden {
+.Q_overflowHidden {
 	overflow: hidden;
 }
