@@ -12244,13 +12244,14 @@ if (_isCordova) {
 			return;
 		}
 		cordova.plugins.browsertab.isAvailable(function(result) {
-			var a = window.open;
-			delete window.open;
-			window.open = function (url, target, options) {
+			var a = root.open;
+			delete root.open;
+			root.open = function (url, target, options) {
 				var noopener = options && options.noopener;
 				var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
 				if (!target || w) {
-					return a.apply(this, arguments);
+					Q.handle(url);
+					return root;
 				}
 				if (result) {
 					cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
