@@ -51,16 +51,22 @@ Q.Tool.define("Places/location", function (options) {
 				if (Q.typeOf(placesAreas) === "Q.Tool") {
 					Q.Tool.remove(placesAreas.element);
 				}
-			} else {
-				if (!placesAreas) {
-					$("<div>").tool("Places/areas", {
-						location: location
-					}).appendTo($te).activate();
-				} else {
-					placesAreas.state.location = location;
-					placesAreas.refresh();
-				}
+
+				return false;
 			}
+
+			if (!placesAreas) {
+				$("<div>").tool("Places/areas", {
+					location: location
+				}).appendTo($te).activate();
+
+				return true;
+			}
+
+			placesAreas.state.location = location;
+			placesAreas.refresh();
+
+			return true;
 		}, tool);
 	}
 
@@ -255,7 +261,9 @@ Q.Tool.define("Places/location", function (options) {
 			Q.handle(success, tool, [pos]);
 		}, function (err) {
 			Q.handle(fail, tool, [err]);
-			console.warn("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
+			Q.alert("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
+
+			return false;
 		}, {
 			enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 			timeout: 5000,
@@ -301,8 +309,7 @@ Q.Tool.define("Places/location", function (options) {
 					Q.handle(state.onChoose, tool, [this, loc]);
 				});
 			}, function (err) {
-				Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
-				return false;
+				Q.handle(state.onChoose, tool, [null, null]);
 			});
 
 			return;
