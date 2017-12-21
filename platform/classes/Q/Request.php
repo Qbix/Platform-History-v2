@@ -270,8 +270,9 @@ class Q_Request
 		if (strpos($ext, '/') !== false) {
 			$ext = '';
 		}
-		$extensions = Q_Config::get("Q", "filename", "extensions", array());
-		return in_array($ext, $extensions) ? Q_PLUGIN_WEB_DIR.DS.'img'.DS.'404'.DS."404.$ext" : null;
+		$extensions = Q_Config::expect("Q", "filename", "extensions");
+		$filename = Q_PLUGIN_WEB_DIR.DS.'img'.DS.'404'.DS."404.$ext";
+		return in_array($ext, $extensions) ? $filename : null;
 	}
 	
 	/**
