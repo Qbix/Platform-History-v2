@@ -2459,6 +2459,10 @@
 				});
 				break;
 			case 'oauth':
+				if (!Users.Facebook.scheme) {
+					console.error('Application scheme is missing. Please provide valid scheme to use FB oAuth login method.');
+					return;
+				}
 				var url = 'https://www.facebook.com/v2.11/dialog/oauth' +
 					'?client_id=' + Users.Facebook.appId +
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
