@@ -107,6 +107,9 @@
 								state.areaSelected = null;
 							}, tool);
 						});
+				} else {
+					// clear Q/filter input
+					tool.filterTool.setText('');
 				}
 
 				tool.getStream(function(stream){
