@@ -16,7 +16,7 @@
 		"mysql": "2.9.x",
 		"request": "2.x.x",
 		"socket.io": "1.x.x",
-		"yuidocjs": "0.3.x"
+		"yuidocjs": "^0.10.2"
 	},
 	"repository": {
 		"type": "git",
