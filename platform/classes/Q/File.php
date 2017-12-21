@@ -60,7 +60,7 @@ class Q_File
 		$tailUrl = $subpath ? "$path/$subpath/$name" : "$path/$name";
 
 		// need to send to Q/file/save after event
-		$audio = (bool)$params['audio'];
+		$audio = !empty($params['audio']);
 
 		/**
 		 * @event Q/file/save {after}
