@@ -391,7 +391,7 @@ Q.Tool.define("Q/tabs", function(options) {
 				},
 				className: "Q_tabs_contextual",
 				onConstruct: function ($contextual) {
-					_addListeners(tool, $te);
+					_addListeners(tool, $contextual);
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					callback && callback.call(tool);
