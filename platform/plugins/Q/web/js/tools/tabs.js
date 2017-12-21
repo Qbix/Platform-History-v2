@@ -49,21 +49,7 @@ Q.Tool.define("Q/tabs", function(options) {
 	state.defaultTabName = state.defaultTabName || null;
 	
 	// catches events that bubble up from any child elements
-	$te.on([Q.Pointer.fastclick, '.Q_tabs'], '.Q_tabs_tab', function () {
-		if (false === state.onClick.handle.call(tool, this.getAttribute('data-name'), this)) {
-			return;
-		}
-		if (Q.Pointer.canceledClick || $('.Q_discouragePointerEvents', tool.element).length) {
-			return;
-		}
-		var element = this;
-		setTimeout(function () {
-			tool.switchTo([element.getAttribute('data-name'), element]);	
-		}, 0);
-	}).click(function (event) {
-		event.preventDefault();
-		// return false;
-	});
+	_addListeners(tool, $te);
 	
 	tool.$tabs = $('.Q_tabs_tab', tool.element).css('visibility', 'hidden');
 	Q.onLayout(tool).set(function () {
@@ -331,6 +317,8 @@ Q.Tool.define("Q/tabs", function(options) {
 					$('.Q_tabs_tab', cs.contextual).insertAfter($o);
 				}
 				$o.plugin("Q/contextual", "remove");
+				// catches events that bubble up from any child elements
+				_addListeners(tool, cs.contextual);
 			}
 			$o.remove();
 		}
@@ -442,6 +430,27 @@ function _copyClassToOverflow(tool) {
 		.addClass(currentClass || 'Q_tabs_noMatchingTab');
 	};
 	state.lastClass = currentClass;
+}
+
+function _addListeners(tool, $jq) {
+	if ($jq.data('Q/tabs added listeners')) {
+		return;
+	}
+	$jq.on([Q.Pointer.fastclick, '.Q_tabs'], '.Q_tabs_tab', function () {
+		if (false === state.onClick.handle.call(tool, this.getAttribute('data-name'), this)) {
+			return;
+		}
+		if (Q.Pointer.canceledClick || $('.Q_discouragePointerEvents', tool.element).length) {
+			return;
+		}
+		var element = this;
+		setTimeout(function () {
+			tool.switchTo([element.getAttribute('data-name'), element]);	
+		}, 0);
+	}).click(function (event) {
+		event.preventDefault();
+		// return false;
+	}).data('Q/tabs added listeners', true);
 }
 
 })(Q, jQuery);
