@@ -317,8 +317,6 @@ Q.Tool.define("Q/tabs", function(options) {
 					$('.Q_tabs_tab', cs.contextual).insertAfter($o);
 				}
 				$o.plugin("Q/contextual", "remove");
-				// catches events that bubble up from any child elements
-				_addListeners(tool, cs.contextual);
 			}
 			$o.remove();
 		}
@@ -393,6 +391,7 @@ Q.Tool.define("Q/tabs", function(options) {
 				},
 				className: "Q_tabs_contextual",
 				onConstruct: function ($contextual) {
+					_addListeners(tool, $te);
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					callback && callback.call(tool);
