@@ -376,7 +376,8 @@
 			subpath: '', // subpath where new files will upload by default
 			pie: { // default Q/pie options
 				fraction: 0,
-				borderSize: 5
+				borderSize: 5,
+				size: null
 			},
 			maxRecordTime: 10, // seconds
 			url: Q.action("Q/file"),
