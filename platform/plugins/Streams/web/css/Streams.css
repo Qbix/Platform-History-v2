@@ -566,11 +566,13 @@
 	border-radius: 13px;
 	margin-left: 50px;
 	background-color: #DAE3ED;
+	text-align: left;
 }
 .Streams_chat_from_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
 	background-color: #FFFFFF;
+	text-align: right;
 }
 .Streams_chat_from_me .Streams_chat_tick {
 	float: right;
