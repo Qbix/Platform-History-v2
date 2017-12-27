@@ -481,7 +481,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 		$stream->calculateAccess($asUserId);
 		
-		if (!$stream->retrieved) {
+		if ($stream->inserted) {
 			// The stream was just saved
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Streams/Stream/create",
