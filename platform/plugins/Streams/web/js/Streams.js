@@ -570,7 +570,8 @@ Q.Tool.define({
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/player": function () {
 		// does nothing
-	}
+	},
+	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js"
 });
 
 /**

@@ -42,6 +42,11 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 		}
 		$paths[] = Q_DIR.$subpath;
 	}
+
+	// small patch for Win systems. hard to replace / with DS everywhere.
+	Q_Utils::normalizePath($path);
+	Q_Utils::normalizePath($paths);
+
 	if (strpos($path, "../") === false
 	and strpos($path, "..".DS) === false) {
 		foreach ($paths as $p) {

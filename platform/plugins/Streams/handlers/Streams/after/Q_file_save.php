@@ -12,6 +12,7 @@ function Streams_after_Q_file_save($params)
 		return;
 	}
 	$url = Q_Valid::url($tailUrl) ? $tailUrl : '{{baseUrl}}/'.$tailUrl;
+	$url = str_replace('\\', '/', $url);
 	$stream->setAttribute('Q.file.url', $url);
 	$stream->setAttribute('Q.file.size', $size);
 	if ($audio) {
