@@ -110,13 +110,22 @@ function Streams_stream_put($params) {
 	}
 	
 	// Process any file that was posted
-	$file = Q::ifset($fieldNames, 'file', null);
-	if (is_array($file)) {
-		unset($fieldNames['file']);
-		$data = Q::event("Q/file/post", $file);
-		Q_Response::setSlot('file', $data);
+	if (!empty($req['file']) and is_array($req['file'])) {
+		$file = $req['file'];
+		$file["name"] = $req["title"];
+		unset($req['file']);
+
+		if (empty($file['path'])) {
+			$file['path'] = 'Q'.DS.'uploads'.DS.'Streams';
+		}
+		if (empty($file['subpath'])) {
+			$splitId = Q_Utils::splitId($publisherId);
+			$file['subpath'] = $splitId.DS."{$stream->name}".DS."file".DS.time();
+		}
+		Q_Response::setSlot('file', Q::event("Q/file/post", $file));
+		// the Streams/after/Q_file_save hook saves some attributes
 	}
-	
+
 	if (!empty($fieldNames)) {
 		foreach ($fieldNames as $f) {
 			if (array_key_exists($f, $req)) {
