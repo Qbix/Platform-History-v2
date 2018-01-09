@@ -1,0 +1,18 @@
+a#activate_login {
+	text-decoration: underline;
+}
+
+.users_unsubscribe,
+.users_login,
+.users_unsubscribed,
+.users_just_unsubscribed {
+	text-align: center;
+	display: none;
+}
+
+#content[data-state=unsubscribe] .users_unsubscribe,
+#content[data-state=login] .users_login,
+#content[data-state=unsubscribed] .users_unsubscribed,
+#content[data-state=just_unsubscribed] .users_just_unsubscribed {
+	display: block;
+}
