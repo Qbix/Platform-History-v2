@@ -275,9 +275,17 @@ Q.Tool.define('Streams/chat', function(options) {
 			var items = {};
 			for (var ordinal in params) {
 				var $element = $(params[ordinal][1]);
-				$('.Streams_chat_avatar', $element).each(function () {
+				$('.Streams_chat_avatar_icon', $element).each(function () {
 					Q.Tool.setUpElement(this, 'Users/avatar', {
 						userId: $(this).attr('data-byUserId'),
+						icon: true,
+						contents: false
+					}, null, tool.prefix);
+				});
+				$('.Streams_chat_avatar_name', $element).each(function () {
+					Q.Tool.setUpElement(this, 'Users/avatar', {
+						userId: $(this).attr('data-byUserId'),
+						icon: false,
 						short: true
 					}, null, tool.prefix);
 				});
@@ -766,7 +774,15 @@ Q.Template.set('Streams/chat/message/bubble',
 	'<div class="Streams_chat_item {{classes}}" '+
 			'data-byUserId="{{byUserId}}" '+
 			'data-ordinal="{{ordinal}}">'+
-		'<div class="Streams_chat_avatar" data-byUserId="{{byUserId}}"></div>'+
+		'<div class="Streams_chat_avatar_icon" data-byUserId="{{byUserId}}"></div>'+
+		'<div class="Streams_chat_bubble">'+
+			'<div class="Streams_chat_tick"></div>'+
+			'<div class="Streams_chat_message">'+
+				'<div class="Streams_chat_avatar_name" data-byUserId="{{byUserId}}"></div>'+
+				'<span class="Streams_chat_message_content">{{content}}</span>'+
+			'</div>'+
+			'<div class="Q_clear"></div>'+
+		'</div>'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
 		'{{#if vote}}' +
 		'<div class="Streams_chat_vote_container">' +
@@ -775,12 +791,6 @@ Q.Template.set('Streams/chat/message/bubble',
 			'<img class="Streams_chat_vote_flag Streams_chat_vote" data-vote="flag" src="{{vote.flag.src}}">' +
 		'</div>' +
 		'{{/if}}' +
-		'<div class="Streams_chat_bubble">'+
-			'<div class="Streams_chat_tick"></div>'+
-			'<div class="Streams_chat_message">{{content}}</div>'+
-			'<div class="Q_clear"></div>'+
-			'<div class="Q_clear"></div>'+
-		'</div>'+
 		'<div class="Q_clear"></div>'+
 	'</div>'
 );

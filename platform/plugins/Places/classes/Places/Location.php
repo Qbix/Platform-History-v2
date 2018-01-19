@@ -97,10 +97,10 @@ class Places_Location
 			'website' => $result['website'],
 			'placeId' => $placeId
 		);
-
 		if ($location) {
-			$location->attributes = Q::json_encode($attributes);
-			$location->save();
+			$location->title = $result['name'];
+			$location->setAttribute($attributes);
+			$location->changed();
 		} else {
 			$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
 				'name' => $streamName,
@@ -108,7 +108,6 @@ class Places_Location
 				'attributes' => Q::json_encode($attributes)
 			));
 		}
-
 		return $location;
 	}
 	
