@@ -455,19 +455,20 @@
 	text-align: center;
 	width: 100%;
 }
-.Streams_chat_to_me .Users_avatar_tool {
-	float: left;
-	position: relative;
-	font-weight: bold;
-}
 .Streams_chat_tool .Users_avatar_icon {
 	position: absolute;
 }
-.Streams_chat_tool .Users_avatar_name {
-	font-size: 10pt;
-	color: #222;
+.Streams_chat_avatar_icon {
+	float: left;
+}
+.Streams_chat_to_me .Streams_chat_bubble .Users_avatar_tool {
+	float: left;
+	font-weight: bold;
+}
+.Streams_chat_tool .Streams_chat_bubble .Users_avatar_name {
+	margin-right: 5px;
 	display: block;
-	margin-left: 55px;
+	color: #222;
 }
 .Streams_chat_message {
 	color: #222;
@@ -483,6 +484,7 @@
 .Streams_chat_item {
 	font-size: 11pt;
 	margin: 10px 0;
+	position: relative;
 }
 .Streams_chat_noMessages {
 	color: gray;
@@ -547,7 +549,7 @@
 .Streams_chat_bubble {
 	position: relative;
 	min-width: 30%;
-	margin-right: 10px;
+	margin-right: 15px;
 	padding: 10px;
 	border: 1px solid #D0D9E4;
 	clear: both;
@@ -591,14 +593,10 @@
 }
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
-	.Streams_chat_tool .Users_avatar_name {
-		position: absolute;
-		top: 0;
-	}
 	.Streams_chat_date {
 		width: 100%;
 		float: right;
-		margin-top: 15px;
+		margin-bottom: 15px;
 	}
 }
 
@@ -851,13 +849,14 @@
 .Streams_chat_vote_container {
 	width: 20px;
 	position: absolute;
-	right: 0;
+	right: -10px;
+	top: 0;
+	line-height: 18px;
 }
 
 .Streams_chat_vote_container img {
-	width: 20px;
-	height: 20px;
-	margin-bottom: 5px;
+	width: 15px;
+	height: 15px;
 }
 
 .Streams_chat_with_vote .Streams_chat_bubble {
