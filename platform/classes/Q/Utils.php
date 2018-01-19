@@ -1043,7 +1043,36 @@ class Q_Utils
 		$prefix = $parts ? (implode($delimiter, $parts) . $delimiter) : '';
 		return $prefix . implode($delimiter, str_split($last, $lengths));
 	}
-	
+
+	/**
+	 * Replace from string wring directory separators
+	 * @method normalizePath
+	 * @static
+	 * @param string|array $path String need to normalize
+	 * @return string|array
+	 */
+	static function normalizePath (&$path)
+	{
+		$symbol = '/';
+		if (DS == '/') {
+			$symbol = '\\';
+		}
+
+		switch (gettype($path)) {
+			case "string":
+				$path = str_replace($symbol, DS, $path);
+				break;
+			case "array":
+				array_walk($path, function (&$item, $key, $symbol) {
+					$item = str_replace($symbol, DS, $item);
+				}, $symbol);
+				break;
+		}
+
+		// in case user wan to use $path = Q::normalizePath($path)
+		return $path;
+	}
+
 	protected static $urand;
 	protected static $sockets = array();
 }

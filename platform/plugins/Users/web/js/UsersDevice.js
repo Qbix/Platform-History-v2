@@ -37,10 +37,18 @@
 		subscribe: function (callback, options) {
 			this.getAdapter(function (err, adapter) {
 				if (err) {
-					callback(err);
+					if (callback) {
+						callback(err);
+					} else {
+						console.warn(err);
+					}
 				} else {
 					adapter.subscribe(function (err, subscribed) {
-						callback(err, subscribed);
+						if (callback) {
+							callback(err, subscribed);
+						} else {
+							console.warn(err);
+						}
 					}, options);
 				}
 			});
@@ -56,8 +64,11 @@
 		unsubscribe: function (callback) {
 			this.getAdapter(function (err, adapter) {
 				if (err) {
-					if (callback)
+					if (callback) {
 						callback(err);
+					} else {
+						console.warn(err);
+					}
 				} else {
 					adapter.unsubscribe(function (err) {
 						if (callback)
@@ -76,10 +87,16 @@
 		subscribed: function (callback) {
 			this.getAdapter(function (err, adapter) {
 				if (err) {
-					callback(err);
+					if (callback) {
+						callback(err);
+					} else {
+						console.warn(err);
+					}
 				} else {
 					adapter.subscribed(function (err, subscribed) {
-						callback(err, subscribed);
+						if (callback) {
+							callback(err, subscribed);
+						}
 					});
 				}
 			})
@@ -117,7 +134,9 @@
 
 		getAdapter: function (callback) {
 			if (!this.adapter) {
-				callback(new Error('There is no suitable adapter for this type of device'));
+				if (callback) {
+					callback(new Error('There is no suitable adapter for this type of device'));
+				}
 				return;
 			}
 			callback(null, this.adapter);
@@ -134,6 +153,9 @@
 
 		init: function () {
 			this.appConfig = Q.getObject('Q.Users.browserApps.' + Q.info.browser.name + '.' + Q.info.app);
+			if (!this.appConfig) {
+				console.warn('Unable to init adapter. App config is not defined.');
+			}
 		},
 
 		subscribe: function (callback, options) {
