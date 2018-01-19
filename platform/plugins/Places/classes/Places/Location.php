@@ -97,11 +97,17 @@ class Places_Location
 			'website' => $result['website'],
 			'placeId' => $placeId
 		);
-		$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
-			'name' => $streamName,
-			'title' => $result['name'],
-			'attributes' => Q::json_encode($attributes)
-		));
+		if ($location) {
+			$location->title = $result['name'];
+			$location->setAttribute($attributes);
+			$location->changed();
+		} else {
+			$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
+				'name' => $streamName,
+				'title' => $result['name'],
+				'attributes' => Q::json_encode($attributes)
+			));
+		}
 		return $location;
 	}
 	
