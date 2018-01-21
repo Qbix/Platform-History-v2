@@ -86,6 +86,21 @@
 
 		authorize: {
 			mustAgree: "First you must agree to the terms."
+		},
+
+		audio: {
+			allowMicrophoneAccess: "Please allow access to your microphone",
+			record: "Record",
+			recording: "Recording",
+			remains: "remains",
+			maximum: "maximum",
+			playing: "Playing",
+			recorded: "Recorded",
+			clip: "clip",
+			orupload: "Or Upload",
+			usethis: "Use This",
+			discard: "Discard",
+			encoding: "Encoding"
 		}
 
 	};
