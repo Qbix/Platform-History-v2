@@ -928,7 +928,6 @@ class Q
 		return function_exists($function_name);
 
 	}
-
 	/**
 	 * Executes a particular handler
 	 * @method handle
