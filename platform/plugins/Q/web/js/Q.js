@@ -6908,7 +6908,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	
 	function onload2(e, s, u) {
 		var cb;
-		if (('readyState' in this) && (this.readyState !== 'complete' && this.readyState !== 'loaded')) {
+		if (this && ('readyState' in this) && (this.readyState !== 'complete' && this.readyState !== 'loaded')) {
 			return;	
 		}
 		if (s) {
