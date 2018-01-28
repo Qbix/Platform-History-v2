@@ -94,7 +94,7 @@ class Places_Location
 			'types' => $result['types'],
 			'rating' => Q::ifset($result, 'rating', null),
 			'address' => Q::ifset($result, 'formatted_address', null),
-			'website' => $result['website'],
+			'website' => Q::ifset($result, 'website', null),
 			'placeId' => $placeId
 		);
 		if ($location) {

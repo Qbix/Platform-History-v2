@@ -16,7 +16,7 @@ var Interests = Streams.Interests;
  * @param {Object} [options] This is an object of parameters for this function
  *  @param {String} [options.communityId=Q.Users.communityId] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
- *  @param {Array} [options.ordering={}] To override what interest categories to show and in what order
+ *  @param {Array} [options.ordering=[]] To override what interest categories to show and in what order
  *  @param {String|null} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
  *  @param {String} [options.trySynonyms] You can override the "try synonyms" text using this option
  *  @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new interest, or a string to override the title of the command.
