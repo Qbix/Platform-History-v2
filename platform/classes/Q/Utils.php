@@ -1048,7 +1048,7 @@ class Q_Utils
 	 * Normalize paths to use DS, used mostly on Windows
 	 * @method normalizePath
 	 * @static
-	 * @param $path {string|array} the path or paths to normalize
+	 * @param {string|array} $path the path or paths to normalize
 	 */
 	static function normalizePath (&$path)
 	{
