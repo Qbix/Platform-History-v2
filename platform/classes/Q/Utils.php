@@ -1045,19 +1045,14 @@ class Q_Utils
 	}
 
 	/**
-	 * Replace from string wring directory separators
+	 * Normalize paths to use DS, used mostly on Windows
 	 * @method normalizePath
 	 * @static
-	 * @param string|array $path String need to normalize
-	 * @return string|array
+	 * @param $path {string|array} the path or paths to normalize
 	 */
 	static function normalizePath (&$path)
 	{
-		$symbol = '/';
-		if (DS == '/') {
-			$symbol = '\\';
-		}
-
+		$symbol = (DS === '/') ? '\\' : '/';
 		switch (gettype($path)) {
 			case "string":
 				$path = str_replace($symbol, DS, $path);
@@ -1068,9 +1063,6 @@ class Q_Utils
 				}, $symbol);
 				break;
 		}
-
-		// in case user wan to use $path = Q::normalizePath($path)
-		return $path;
 	}
 
 	protected static $urand;
