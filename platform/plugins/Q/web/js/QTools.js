@@ -3078,7 +3078,7 @@ Q.Contextual = {
 			var mask = Q.Masks.show('Q.screen.mask', {
 				'fadeIn': Q.Contextual.fadeTime
 			});
-			contextual.insertAfter(mask);
+			contextual.insertAfter(mask.element);
 		}
 		
 		if (!info.ellipsissed)
