@@ -12,6 +12,7 @@ platform/local/*
 platform/files/Q/Browscap/*
 platform/files/Q/sessions/*
 platform/files/sessions/*
+platform/plugins/*/web/img/icons
 platform/plugins/*/files/
 !platform/plugins/Users/files/
 !platform/plugins/Streams/files/

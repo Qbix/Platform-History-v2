@@ -1003,7 +1003,7 @@ class Q_Utils
 			return;
 		}
 
-		if (file_exists($target)) {
+		if (file_exists($link)) {
 			if ($skipIfExists) {
 				return false;
 			}
@@ -1014,13 +1014,13 @@ class Q_Utils
 			}
 		}
 
-		if($is_win) {
+		if ($is_win) {
 			exec('mklink /j "' . $link . '" "' . $target . '"');
 		} else {
 			@symlink($target, $link);
 		}
 		
-		if(!file_exists($link)) {
+		if (!file_exists($link)) {
 			throw new Q_Exception("Link $link to target $target was not created");
 		}
 	}
