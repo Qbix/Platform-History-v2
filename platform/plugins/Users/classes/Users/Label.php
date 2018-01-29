@@ -203,12 +203,12 @@ class Users_Label extends Base_Users_Label
 			$criteria['label'] = $labelNames;
 		}
 		if (!empty($options['checkContacts'])) {
-			$contact_array = Users_Contact::select()
+			$contact_array = Users_Contact::select('userId, label')
 				->where($criteria)
 				->groupBy('userId, label')
 				->fetchDbRows();
 			foreach ($prefixes as $p) {
-				$contact_array = array_merge($contact_array, Users_Contact::select()
+				$contact_array = array_merge($contact_array, Users_Contact::select('userId, label')
 					->where(array_merge($criteria, array('label' => $p)))
 					->groupBy('userId, label')
 					->fetchDbRows()
