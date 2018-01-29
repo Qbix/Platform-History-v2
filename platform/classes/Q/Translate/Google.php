@@ -1,6 +1,6 @@
 <?php
 
-class Q_TranslateGoogle {
+class Q_Translate_Google {
 
 	function __construct(Q_Translate $parent)
 	{
