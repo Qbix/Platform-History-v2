@@ -980,9 +980,11 @@ class Q_Utils
 	 * @static
 	 * @param {string} $target
 	 * @param {string} $link
+	 * @param {boolean} [$skipIfExists=false]
+	 * @return {boolean} true if link was created, false if it already exists
 	 * @throws Q_Exception if link could not be created
 	 */
-	static function symlink($target, $link)
+	static function symlink($target, $link, $skipIfExists = false)
 	{
 		// Make sure destination directory exists
 		if(!file_exists(dirname($link))) {
@@ -1002,6 +1004,9 @@ class Q_Utils
 		}
 
 		if (file_exists($target)) {
+			if ($skipIfExists) {
+				return false;
+			}
 			if ($is_win && is_dir($link)) {
 				rmdir($link);
 			} else if (is_link($link)) {
