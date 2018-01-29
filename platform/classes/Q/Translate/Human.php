@@ -1,6 +1,6 @@
 <?php
 
-class Q_TranslateHuman {
+class Q_Translate_Human {
 
 	function __construct(Q_Translate $parent)
 	{

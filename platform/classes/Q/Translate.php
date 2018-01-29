@@ -191,10 +191,10 @@ EOT;
 		switch ($this->options['format'])
 		{
 			case 'auto':
-				$this->adapter = new Q_TranslateGoogle($this);
+				$this->adapter = new Q_Translate_Google($this);
 				break;
 			case 'human':
-				$this->adapter = new Q_TranslateHuman($this);
+				$this->adapter = new Q_Translate_Human($this);
 				break;
 			default:
 				die("Unknown format value\n");
