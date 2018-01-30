@@ -93,16 +93,12 @@ class Q_Translate_Google {
 			$qArr = array_map(function ($item) {
 				return $item['value'];
 			}, $chunk);
-			//var_dump($qArr);
 			print "Requesting google translation api\n";
-			//print "https://translation.googleapis.com/language/translate/v2?key=" . $this->apiKey . "\n";
 			$ch = curl_init('https://translation.googleapis.com/language/translate/v2?key=' . $this->apiKey);
-			$postFields = array("q" => $qArr, "source" => $fromLang, "target" => $toLang, "format" => "html");
-			//var_dump($postFields);
+			$postFields = array("q" => $qArr, "source" => $fromLang, "target" => $toLang, "format" => $this->parent->options['google-format']);
 			$this->curlSetoptCustomPostfields($ch, $postFields);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			$response = json_decode(curl_exec($ch), true);
-			//var_dump($response);
 			if (!$response) {
 				die("Wrong translation response\n");
 			}
