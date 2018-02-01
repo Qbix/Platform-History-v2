@@ -82,7 +82,7 @@
 	$('#activate_logoutAndTryAgain').click(function () {
 		Q.Users.logout({
 			onSuccess: function () {
-				window.reload(true);
+				window.location.reload(true);
 			}
 		}
 	)})
