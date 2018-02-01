@@ -316,7 +316,7 @@
 			"Streams/chat": {
 				"description": "conversation",
 				"create": true,
-				"edit": ["title", "content"],
+				"edit": ["icon", "title", "content"],
 				"messages": {
 					"Streams/chat/message": { "post": true },
 					"Streams/chat/edit": { "post": true },
