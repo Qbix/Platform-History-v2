@@ -14,9 +14,7 @@
 						value="<?php echo Q_Html::text($identifier) ?>">
 					<div class='Q_buttons'>
 						<button class="Q_button" id="Users_activate_set_emailAddress" type="submit">
-							Set
-							<?php echo Q_Html::text($identifier) ?>
-							as my primary <?php echo $type ?>
+							<?php echo Q::text($activate['SetAsPrimary'], array($identifier, $type)) ?>
 						</button>
 					</div>
 				</div>
@@ -34,12 +32,9 @@
 				<div class='Q_big_prompt'>
 					<p style="max-width: 350px;">
 					<?php if (empty($_REQUEST['p'])): ?>
-						Choose a <strong>pass phrase</strong> to log in with.<br>
-						A simple phrase consisting of a few words that
-						you will easily remember.
+						<?php echo Q::interpolate($activate['ChoosePassPhrase']) ?>
 					<?php else: ?>
-						Choose a good <strong>pass phrase</strong> to protect your account.
-						See the suggestions for some ideas.
+						<?php echo Q::interpolate($activate['ChoosePassPhraseSeeSuggestions']) ?>
 					<?php endif; ?>
 					</p>
 					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
@@ -65,7 +60,17 @@
 		</div>
 	<?php endif; ?>
 <?php elseif (Users::loggedInUser()): ?>
-	<h1 class='Q_big_message'>If you feel something went wrong, <button id='activate_setIdentifier'>try again</button></h1>
+	<h1 class="Q_big_message">
+		<button id='activate_logoutAndTryAgain'>
+			<?php echo Q::text($activate['LogOutAndTryAgain'])?>
+		</button>
+	</h1>
+	<h1 class='Q_big_message'>
+		<?php echo Q::text($activate['IfYouFeel'])?>
+		<button id='activate_setIdentifier'>
+			<?php echo Q::text($activate['SetIdentifierButtonTitle'])?>
+		</button>
+	</h1>
 <?php else: ?>
 	<h1 class='Q_big_message'>Please try <a href='#' id='activate_login'>logging in</a> to activate your account.</h1>
 <?php endif; ?>
@@ -74,6 +79,13 @@
 
 <?php Q_Response::addScriptLine("jQuery(function() {
 	$('#activate_setIdentifier').click(function() { Q.plugins.Users.setIdentifier(); });
+	$('#activate_logoutAndTryAgain).click(function () {
+		Q.Users.logout({
+			onSuccess: function () {
+				window.reload(true);
+			}
+		}
+	)})
 	$('#activate_login').click(function() { Q.plugins.Users.login(); });
 	$('#activate_passphrase').val('').focus();
 	
