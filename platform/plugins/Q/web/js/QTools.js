@@ -667,7 +667,7 @@ Q.Layout = {
 				});
 			}
 			
-			$('.Q_selected').on(Q.Pointer.start, function(event)
+			$('.Q_selected').on(Q.Pointer.start.eventName, function(event)
 			{
 				$(this).addClass('Q_active');
 				event.preventDefault();
@@ -1218,14 +1218,14 @@ Q.Layout = {
 					Q.Layout.orientationOnLoad == 'landscape' && Q.info.isTablet && Q.info.platform == 'ios')
 			{
 				body.css({ 'margin-left': ((screen.height - screen.width) / 2) + 'px' });
-				body.on(Q.Pointer.start + '.Q_orientation', function()
+				body.on(Q.Pointer.start.eventName + '.Q_orientation', function()
 				{
 					// found that on focus on any text field, document body come to its initial position,
 					// so we need to add temporary text field, then immediately focus it, blur it and remove it
 					var input = $('<input type="text" />');
 					body.append(input);
 					input.trigger('focus').trigger('blur').remove();
-					body.css({ 'margin-left': '' }).off(Q.Pointer.start + '.Q_orientation');
+					body.css({ 'margin-left': '' }).off(Q.Pointer.start.eventName + '.Q_orientation');
 					Q.Contextual.updateLayout();
 				});
 			}
@@ -2057,7 +2057,7 @@ Q.Dashboard = {
 			expandables.show();
 			Q.Dashboard.currentExpandable = null;
 			
-			items.off(Q.Pointer.start + '.Q_expandable').on(Q.Pointer.start + '.Q_expandable', function() {
+			items.off(Q.Pointer.start.eventName + '.Q_expandable').on(Q.Pointer.start + '.Q_expandable', function() {
 				if (!Q.Dashboard.animating) {
 					Q.Dashboard.openExpandable($(this).next());
 				}
@@ -2075,7 +2075,7 @@ Q.Dashboard = {
 		{
 			dashboard.addClass('Q_dashboard_horizontal');
 			dashboard.css({ 'width': Q.Pointer.windowWidth() + 'px', 'height': '', 'min-height': '' });
-			items.off(Q.Pointer.start + '.Q_expandable').addClass('Q_dashboard_item_horizontal');
+			items.off(Q.Pointer.start.eventName + '.Q_expandable').addClass('Q_dashboard_item_horizontal');
 			items.find('br').remove();
 			items.find('img, .Q_people_icon, .Q_dashboard_back_icon_small').after('<br />');
 			expandables.hide();
@@ -2331,7 +2331,7 @@ Q.Dashboard = {
 		Q.Dashboard.openExpandable = null;
 		var dashboard = $('#dashboard_slot');
 		var items = dashboard.find('.Q_dashboard_item');
-		items.off(Q.Pointer.start + '.Q_expandable');
+		items.off(Q.Pointer.start.eventName + '.Q_expandable');
 	}
 };
 
@@ -2603,7 +2603,7 @@ Q.Contextual = {
 					}
 				}
 			};
-			Q.addEventListener(document.body, Q.Pointer.start, Q.Contextual.showHandler, {
+			Q.addEventListener(document.body, Q.Pointer.start.eventName, Q.Contextual.showHandler, {
 				passive: false
 			});
 		}
@@ -2676,7 +2676,7 @@ Q.Contextual = {
 					return false;
 				}
 			};
-			$(document.body).on(Q.Pointer.start, Q.Contextual.startEventHandler);
+			$(document.body).on(Q.Pointer.start.eventName, Q.Contextual.startEventHandler);
 			
 			Q.Contextual.moveEventHandler = function(e)
 			{
@@ -3075,7 +3075,10 @@ Q.Contextual = {
 		
 		if (Q.info.isTouchscreen)
 		{
-			Q.Masks.show('Q.screen.mask', { 'fadeIn': Q.Contextual.fadeTime });
+			var mask = Q.Masks.show('Q.screen.mask', {
+				'fadeIn': Q.Contextual.fadeTime
+			});
+			contextual.insertAfter(mask.element);
 		}
 		
 		if (!info.ellipsissed)
@@ -3315,8 +3318,8 @@ Q.Notice = {
 					{
 						if (Q.info.isMobile || Q.info.isTablet)
 						{
-							noticesSlot.bind(Q.Pointer.start, Q.Notice.eventHandlers.expand);
-							Q.Masks.mask('Q.screen.mask').element.bind(Q.Pointer.start, Q.Notice.eventHandlers.collapse);
+							noticesSlot.bind(Q.Pointer.start.eventName, Q.Notice.eventHandlers.expand);
+							Q.Masks.mask('Q.screen.mask').element.bind(Q.Pointer.start.eventName, Q.Notice.eventHandlers.collapse);
 						}
 						else
 						{
@@ -3333,8 +3336,8 @@ Q.Notice = {
 					{
 						if (Q.info.isTouchscreen)
 						{
-							noticesSlot.unbind(Q.Pointer.start, Q.Notice.eventHandlers.expand);
-							Q.Masks.mask('Q.screen.mask').element.unbind(Q.Pointer.start, Q.Notice.eventHandlers.collapse);
+							noticesSlot.unbind(Q.Pointer.start.eventName, Q.Notice.eventHandlers.expand);
+							Q.Masks.mask('Q.screen.mask').element.unbind(Q.Pointer.start.eventName, Q.Notice.eventHandlers.collapse);
 						}
 						else
 						{

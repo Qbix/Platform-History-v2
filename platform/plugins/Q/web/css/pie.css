@@ -1,0 +1,61 @@
+.Q_tool.Q_pie_tool {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	left: 50%;
+}
+.Q_pie_tool .Q_pie_box {
+	padding: 0;
+	margin: 0 auto;
+	position: relative;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 100%;
+	height: 100%;
+}
+.Q_pie_tool .Q_pie_shield {
+	border-color: #c0c0c0;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 5px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+}
+.Q_pie_tool .Q_pie_arc {
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 5px;
+	box-sizing: border-box;
+	height: 100%;
+	width: 200%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	-moz-transform: rotate(45deg); /* Firefox */
+	-ms-transform: rotate(45deg); /* IE */
+	-webkit-transform: rotate(45deg); /* Safari, Chrome, iOS */
+	-o-transform: rotate(45deg); /* Opera */
+	transform: rotate(45deg);
+}
+.Q_pie_tool .Q_pie_arcLeft {
+	border-color: red red transparent transparent;
+}
+.Q_pie_tool .Q_pie_arcRight {
+	border-color: transparent transparent red red;
+	left: -100%;
+}
+.Q_pie_tool .Q_pie_arcBox {
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	height: 100%;
+	width: 50%;
+}
+.Q_pie_tool .Q_pie_arcBoxRight {
+	left: 50%;
+}

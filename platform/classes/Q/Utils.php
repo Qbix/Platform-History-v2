@@ -980,9 +980,11 @@ class Q_Utils
 	 * @static
 	 * @param {string} $target
 	 * @param {string} $link
+	 * @param {boolean} [$skipIfExists=false]
+	 * @return {boolean} true if link was created, false if it already exists
 	 * @throws Q_Exception if link could not be created
 	 */
-	static function symlink($target, $link)
+	static function symlink($target, $link, $skipIfExists = false)
 	{
 		// Make sure destination directory exists
 		if(!file_exists(dirname($link))) {
@@ -1001,7 +1003,10 @@ class Q_Utils
 			return;
 		}
 
-		if (file_exists($target)) {
+		if (file_exists($link)) {
+			if ($skipIfExists) {
+				return false;
+			}
 			if ($is_win && is_dir($link)) {
 				rmdir($link);
 			} else if (is_link($link)) {
@@ -1009,13 +1014,13 @@ class Q_Utils
 			}
 		}
 
-		if($is_win) {
+		if ($is_win) {
 			exec('mklink /j "' . $link . '" "' . $target . '"');
 		} else {
 			@symlink($target, $link);
 		}
 		
-		if(!file_exists($link)) {
+		if (!file_exists($link)) {
 			throw new Q_Exception("Link $link to target $target was not created");
 		}
 	}
@@ -1043,7 +1048,28 @@ class Q_Utils
 		$prefix = $parts ? (implode($delimiter, $parts) . $delimiter) : '';
 		return $prefix . implode($delimiter, str_split($last, $lengths));
 	}
-	
+
+	/**
+	 * Normalize paths to use DS, used mostly on Windows
+	 * @method normalizePath
+	 * @static
+	 * @param {string|array} $path the path or paths to normalize
+	 */
+	static function normalizePath (&$path)
+	{
+		$symbol = (DS === '/') ? '\\' : '/';
+		switch (gettype($path)) {
+			case "string":
+				$path = str_replace($symbol, DS, $path);
+				break;
+			case "array":
+				array_walk($path, function (&$item, $key, $symbol) {
+					$item = str_replace($symbol, DS, $item);
+				}, $symbol);
+				break;
+		}
+	}
+
 	protected static $urand;
 	protected static $sockets = array();
 }

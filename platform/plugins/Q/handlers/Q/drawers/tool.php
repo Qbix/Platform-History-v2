@@ -43,8 +43,8 @@ function Q_drawers_tool($options)
 		$result .= Q_Html::div("drawer_$i", "Q_drawers_drawer Q_drawers_drawer_$i", $html);
 	}
 	unset($options['drawers']);
-	Q_Response::addScript('{{Q}}/js/tools/drawers.js');
-	Q_Response::addStylesheet('{{Q}}/css/drawers.css');
+	Q_Response::addScript('{{Q}}/js/tools/drawers.js', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/drawers.css', 'Q');
 	Q_Response::setToolOptions($options);
 	return $result;
 }

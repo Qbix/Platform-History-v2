@@ -40,8 +40,8 @@ function Q_columns_tool($options)
 	if (!isset($options['columns'])) {
 		return '';
 	}
-	Q_Response::addScript('{{Q}}/js/tools/columns.js');
-	Q_Response::addStylesheet('{{Q}}/css/columns.css');
+	Q_Response::addScript('{{Q}}/js/tools/columns.js', 'Q');
+	Q_Response::addStylesheet('{{Q}}/css/columns.css', 'Q');
 	$result = '<div class="Q_columns_container Q_clearfix">';
 	$columns = array();
 	$i=0;
@@ -92,7 +92,9 @@ EOT;
 				$titleElement = <<<EOT
 	<div class="Q_columns_title">
 		$closeHtml
-		<h2 class="Q_title_slot">$titleHtml</h2>
+		<div class="Q_columns_title_container">
+			<h2 class="Q_title_slot">$titleHtml</h2>
+		</div>
 	</div>
 EOT;
 			}

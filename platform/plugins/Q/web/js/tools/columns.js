@@ -26,6 +26,7 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.back] For customizing the back button on mobile
  *  @param {String}  [options.back.src] The src of the image to use for the back button
  *  @param {Boolean} [options.back.triggerFromTitle] Whether the whole title would be a trigger for the back button. Defaults to true.
+ *  @param {Object}  [options.textfill={}] Options for Q/textfill on the title, or pass null here to skip this effect.
  *  @param {Boolean} [options.back.hide] Whether to hide the back button. Defaults to false, but you can pass true on android, for example.
  *  @param {Object}  [options.close] For customizing the back button on desktop and tablet
  *  @param {String}  [options.close.src] The src of the image to use for the close button
@@ -50,60 +51,60 @@ Q.Tool.define("Q/columns", function(options) {
 
 	//state.triggers = [];
 	
-	Q.addStylesheet('{{Q}}/css/columns.css');
+	Q.addStylesheet('{{Q}}/css/columns.css', function () {
+		prepareColumns(tool);
 
-	prepareColumns(tool);
-	
-	if (state.title === undefined) {
-		state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
-	}
+		if (state.title === undefined) {
+			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
+		}
 
-	var selector = '.Q_close';
-	if (Q.info.isMobile && state.back.triggerFromTitle) {
-		selector = '.Q_columns_title';
-	};
-	$(tool.element).on(Q.Pointer.fastclick, selector, function(){
-		var index = $(this).closest('.Q_columns_column').data(dataKey_index);
-		if (state.locked) return;
-		if (index) {
-			tool.close(index);
+		var selector = '.Q_close';
+		if (Q.info.isMobile && state.back.triggerFromTitle) {
+			selector = '.Q_columns_title';
 		}
-	}); // no need for key, it will be removed when tool element is removed
-	
-	Q.onScroll.set(Q.debounce(function () {
-		if (state.$currentColumn) {
-			state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
-		}
-	}, 100), tool);
-	
-	if (Q.info.isAndroidStock) {
-		var w = Q.Pointer.windowWidth();
-		$(tool.element).parents().andSelf().each(function () {
-			$(this).data('Q/columns maxWidth', this.style.maxWidth)
-				.css('max-width', w);
-		});
-	}
-	
-	// Call setControls whenever a controls slot or a parent element is activated
-	Q.onActivate.set(function (element) {
-		var isContained = !!$(tool.element).closest(element).length;
-		for (var i=0, l=state.columns.length; i<l; ++i) {
-			var column = tool.column(i);
-			if (!column) continue;
-			var $controlsSlot = $('.Q_controls_slot', column);
-			if (($controlsSlot[0] && isContained)
-			|| $controlsSlot[0] === element) {
-				var html = $controlsSlot.html();
-				column.setClass('Q_columns_hasControls', html)
-				presentColumn(tool);
+		$(tool.element).on(Q.Pointer.fastclick, selector, function(){
+			var index = $(this).closest('.Q_columns_column').data(dataKey_index);
+			if (state.locked) return;
+			if (index) {
+				tool.close(index);
 			}
+		}); // no need for key, it will be removed when tool element is removed
+
+		Q.onScroll.set(Q.debounce(function () {
+			if (state.$currentColumn) {
+				state.$currentColumn.data(dataKey_scrollTop, Q.Pointer.scrollTop());
+			}
+		}, 100), tool);
+
+		if (Q.info.isAndroidStock) {
+			var w = Q.Pointer.windowWidth();
+			$(tool.element).parents().andSelf().each(function () {
+				$(this).data('Q/columns maxWidth', this.style.maxWidth)
+					.css('max-width', w);
+			});
 		}
-	}, this);
-	
-	tool.refresh();
-	Q.onLayout(tool).set(function () {
+
+		// Call setControls whenever a controls slot or a parent element is activated
+		Q.onActivate.set(function (element) {
+			var isContained = !!$(tool.element).closest(element).length;
+			for (var i=0, l=state.columns.length; i<l; ++i) {
+				var column = tool.column(i);
+				if (!column) continue;
+				var $controlsSlot = $('.Q_controls_slot', column);
+				if (($controlsSlot[0] && isContained)
+					|| $controlsSlot[0] === element) {
+					var html = $controlsSlot.html();
+					column.setClass('Q_columns_hasControls', html)
+					presentColumn(tool);
+				}
+			}
+		}, tool);
+
 		tool.refresh();
-	}, tool);
+		Q.onLayout(tool).set(function () {
+			tool.refresh();
+		}, tool);
+	}, { slotName: 'Q' });
 },
 
 {
@@ -135,6 +136,7 @@ Q.Tool.define("Q/columns", function(options) {
 	controls: undefined,
 	pagePushUrl: true,
 	scrollbarsAutoHide: {},
+	textfill: {},
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(),
@@ -221,7 +223,7 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		var div = this.column(index);
 		var titleSlot, columnSlot, controlsSlot;
-		var $div, $mask, $close, $title, $controls;
+		var $div, $mask, $close, $title, $controls, $tc;
 		var createdNewDiv = false;
 		if (!div) {
 			createdNewDiv = true;
@@ -230,9 +232,10 @@ Q.Tool.define("Q/columns", function(options) {
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
-			var $ts = $('<h2 class="Q_title_slot"></h2>');
+			var $tc = $('<div class="Q_columns_title_container">');
+			var $ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
 			titleSlot = $ts[0];
-			$title = $('<div class="Q_columns_title"></div>').append($ts);
+			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
 			$controls = $('<h2 class="Q_controls_slot"></h2>');
 			controlsSlot = $controls[0];
@@ -252,6 +255,7 @@ Q.Tool.define("Q/columns", function(options) {
 		} else {
 			$div = $(div);
 			$close = $('.Q_close', div);
+			$tc = $('.Q_columns_title_container', div);
 			$title = $('.Q_columns_title', div);
 			titleSlot = $('.Q_title_slot', div)[0];
 			columnSlot = $('.Q_column_slot', div)[0];
@@ -486,7 +490,7 @@ Q.Tool.define("Q/columns", function(options) {
 					tool.$('.Q_columns_column').each(function () {
 						width += $(this).outerWidth(true);
 					});
-					$sc.width(width);
+					$sc.width(width).addClass('Q_columns_sized');
 
 					var $toScroll = ($te.css('overflow') === 'visible')
 						? $te.parents()
@@ -511,7 +515,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$ct.css('position', 'absolute');
 					$cs.css('overflow', 'hidden');
 				} else if (Q.info.isMobile) {
-					$('html').css('overflow', 'hidden');
+					$('html').addClass('Q_overflowHidden');
 				}
 				$mask = $('<div class="Q_columns_mask" />')
 				.appendTo($div);
@@ -520,6 +524,10 @@ Q.Tool.define("Q/columns", function(options) {
 				.css(o.animation.css.hide)
 				.stop()
 				.animate(show, duration, function() {
+					$tc.outerWidth($tc[0].remainingWidth());
+					if (o.textfill) {
+						$tc.plugin('Q/textfill', o.textfill);
+					}
 					setTimeout(function () {
 						$div.data(dataKey_opening, false);
 						afterAnimation($cs, $sc, $ct);

@@ -81,7 +81,7 @@ Q.Tool.define("Users/status", function(options) {
 						Q.Dashboard.build();
 						Users.userStatus.button.html('<img src="' + Q.url(o.icon) + '" />'+br+'<span>' + o.label +  '</span>');
 						Users.userStatus.button.addClass('.Q_dialog_trigger').plugin('Q/contextual', 'remove');
-						Users.userStatus.button.unbind(Q.Pointer.end).bind(Q.Pointer.end, Users.login);
+						Users.userStatus.button.off(Q.Pointer.end).bind(Q.Pointer.end, Users.login);
 						setTimeout(function()
 						{
 							Q.Contextual.updateLayout();

@@ -17,12 +17,10 @@ function Users_sessions_tool($options)
 		'editable' => true,
 		'devices' => true
 	), $options);
-	Q_Response::addStylesheet('{{Users}}/css/tools/sessions.css');
+	Q_Response::addStylesheet('{{Users}}/css/tools/sessions.css', 'Users');
 	if (empty($options['userId'])) {
 		$options['userId'] = Users::loggedInUser(true)->id;
 	}
-
-	Q_Response::addStylesheet('{{Users}}/css/tools/sessions.css');
 	Q_Response::setToolOptions($options);
 
 	$sessions = Users_Session::select("us.*, ud.deviceId, ud.platform, ud.version, ud.formFactor", "us")

@@ -1,0 +1,92 @@
+.Q_audio_start {
+	padding: 10px;
+	position: relative;
+}
+.Q_audio_record {
+	position: relative;
+}
+.Q_audio_record .Q_audio_pie {
+	height: 100px;
+	width: 100px;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+}
+.Q_audio_record .Q_audio_record_label, .Q_audio_start button {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+.Q_audio_record .Q_audio_record_label p {
+	margin: 5px 0;
+}
+.Q_audio_start .Q_tool.Q_pie_tool {
+	cursor: pointer;
+}
+.Q_audio_start .Q_tool.Q_pie_tool .Q_pie_box {
+	background-image: url(../img/audio/record.png);
+}
+div[data-state=recording] .Q_tool.Q_pie_tool .Q_pie_box {
+	background-image: url(../img/audio/stop.png);
+}
+div[data-state=recorded] .Q_audio_start .Q_audio_encoding {
+	display: block;
+}
+
+div[data-state=play] .Q_tool.Q_pie_tool .Q_pie_box {
+	background-image: url(../img/audio/play.png);
+}
+div[data-state=playing] .Q_tool.Q_pie_tool .Q_pie_box,
+div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
+	background-image: url(../img/audio/pause.png);
+}
+
+.Q_dialog_audio[data-state] .Q_audio_start button[name=upload] {
+	display: none;
+}
+
+.Q_dialog_audio .Q_audio_actions { text-align: center; }
+
+.Q_audio_start button[name=usethis] { display: none; }
+.Q_audio_start button[name=discard] { display: none; }
+.Q_dialog_audio[data-state=recorded] .Q_audio_start button[name=usethis],
+.Q_dialog_audio[data-state=play] .Q_audio_start button[name=usethis],
+.Q_dialog_audio[data-state=recorded] .Q_audio_start button[name=discard],
+.Q_dialog_audio[data-state=play] .Q_audio_start button[name=discard] { display: inline-block; }
+
+.Q_audio_record .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
+	display: none;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	opacity: 0.8;
+	text-align: center;
+	font-weight: bold;
+}
+
+.Q_dialog_audio[data-state=init] .Q_audio_record .Q_audio_allow {
+	display: block;
+}
+.Q_dialog_audio audio { display: none }
+
+/* Promise play dialog */
+.Streams_audio_preview_dialog_promisePlay.Q_overlay { width: auto; }
+.Streams_audio_preview_dialog_promisePlay .Q_title_slot {
+	display: none;
+}
+.Streams_audio_preview_dialog_promisePlay .Q_dialog_content {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+}
+/* ------------------- */
+
+/* preload images */
+body:after{
+	position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+	content: url(../img/audio/record.png) url(../img/audio/stop.png) url(../img/audio/play.png) url(../img/audio/pause.png);
+}

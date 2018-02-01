@@ -1,9 +1,10 @@
+
 /**
  * This CSS is just to get you started.
  * Feel free to modify any of it for your own app.
  */
 
-* { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }
+* { font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }
 a { text-decoration: none; color: #0055ff; }
 a:visited { color: #aa88cc; }
 html { background: #f2f2f2; height: 100%; box-sizing: border-box; }
@@ -215,7 +216,7 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 
 /* The following lines are for cordova on iOS */
 .Q_cordova.Q_ios #status_background { background: #f2f2f2; height: 20px; }
-.Q_notCordova.Q_ios .status_background { display: none; }
+.Q_notCordova.Q_ios #status_background { display: none; }
 .Q_cordova.Q_ios.Q_mobile #dashboard_slot { top: 20px; height: 50px; }
 .Q_cordova.Q_ios.Q_mobile #page { top: 70px; }
 
@@ -249,3 +250,5 @@ html.MyApp_notFound #content,
 html.MyApp_errors #content { padding: 30px; text-align: center; overflow: hidden; text-overflow: ellipsis; }
 html.MyApp_notFound .url,
 html.MyApp_errors .url { font-weight: bold; text-decoration: underline; }
+
+span.c3 { font-weight: bold; }
