@@ -112,9 +112,9 @@ class Q_Translate
 			$options['format'] = 'google';
 		};
 		if (!empty($options['google-format'])) {
-			$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'text';
+			$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
 		} else {
-			$options['google-format'] = 'text';
+			$options['google-format'] = 'html';
 		}
 		return $options;
 	}
@@ -176,9 +176,10 @@ You can use such options:
 --google-format   Google translation format. This option is used along with --format=google.
                   The format of the source text, in either HTML (default) or plain-text.
                   A value of html indicates HTML and a value of text indicates plain-text.
+                  Default value is "html".
                   Examples:
-                  --google-format=text
                   --google-format=html
+                  --google-format=text
 
 EOT;
 		print $help;
