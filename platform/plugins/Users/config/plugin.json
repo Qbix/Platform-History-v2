@@ -50,6 +50,11 @@
 		},
 		"socket": {
 			"disconnectTimeout": 1500
+		},
+		"text": {
+			"Users": {
+				"*": ["Users/content"]
+			}
 		}
 	},
 	"Users": {
