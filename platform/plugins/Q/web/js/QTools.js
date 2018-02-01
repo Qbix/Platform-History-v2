@@ -2825,11 +2825,11 @@ Q.Contextual = {
 					}
 					else
 					{
-						if ((info.curScroll == 'iScroll' || info.curScroll == 'touchscroll' || listingWrapper.css('overflow') == 'auto') &&
-								 Math.abs(info.moveY - info.startY) >= 5)
-						{
-							return;
-						}
+						// if ((info.curScroll == 'iScroll' || info.curScroll == 'touchscroll' || listingWrapper.css('overflow') == 'auto') &&
+						// 		 Math.abs(info.moveY - info.startY) >= 5)
+						// {
+						// 	return;
+						// }
 						var element = target;
 						while (element)
 						{
