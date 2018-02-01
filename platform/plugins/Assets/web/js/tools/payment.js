@@ -48,7 +48,10 @@ Q.Tool.define("Assets/payment", function (options) {
 	tool.$('.Assets_pay').on(Q.Pointer.click, function () {
 		Q.Assets.Payments[payments](state, function (err) {
 			if (err) {
-				return alert(Q.firstErrorMessage(err));
+				if (err.code !== 20) {
+					alert(Q.firstErrorMessage(err));
+				}
+				return;
 			}
 			Q.handle(state.onPay, tool, arguments);
 		});
