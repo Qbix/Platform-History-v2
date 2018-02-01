@@ -79,7 +79,7 @@
 
 <?php Q_Response::addScriptLine("jQuery(function() {
 	$('#activate_setIdentifier').click(function() { Q.plugins.Users.setIdentifier(); });
-	$('#activate_logoutAndTryAgain).click(function () {
+	$('#activate_logoutAndTryAgain').click(function () {
 		Q.Users.logout({
 			onSuccess: function () {
 				window.reload(true);
