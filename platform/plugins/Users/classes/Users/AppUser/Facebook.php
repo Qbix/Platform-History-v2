@@ -47,6 +47,7 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 
 		$defaultAccessToken = null;
 		$fbsr = null;
+		$result = array();
 		if ($authResponse = Q_Request::special('Users.facebook.authResponse', null)) {
 			// Users.js sent along Users.facebook.authResponse in the request
 			$result = Q::take($authResponse, array(
@@ -64,18 +65,22 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 				$fbsr = $_POST['signed_request'];
 			} else if (isset($_COOKIE["fbsr_$fbAppId"])) {
 				// A previous request has set the fbsr cookie
+				// note: the accessToken and expires are not set in this case,
+				// and should be retrieved from the Users_AppUser in the database
 				$fbsr = $_COOKIE["fbsr_$fbAppId"];
 			}
-			if ($fbsr) {
-				$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
-				$accessToken = isset($authResponse['accessToken']) ? $authResponse['accessToken'] : $sr->get('oauth_token');
-				$result = array(
-					'signedRequest' => $fbsr,
-					'expires' => $sr->get('expires'),
-					'accessToken' => $accessToken,
-					'userID' => $sr->get('user_id')
-				);
-			}
+		}
+		if ($fbsr) {
+			$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
+			$accessToken = isset($authResponse['accessToken'])
+				? $authResponse['accessToken']
+				: $sr->get('oauth_token');
+			$result = array(
+				'signedRequest' => $fbsr,
+				'expires' => $sr->get('expires'),
+				'accessToken' => $accessToken,
+				'userID' => $sr->get('user_id')
+			);
 		}
 		if (isset($result['accessToken'])) {
 			$defaultAccessToken = $result['accessToken'];
@@ -91,25 +96,25 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 		}
 		if ($defaultAccessToken) {
 			$facebook->setDefaultAccessToken($defaultAccessToken);
+			$defaultAccessToken = $facebook->getDefaultAccessToken();
+			$expiresAt = $defaultAccessToken->getExpiresAt();
+			$result['accessToken'] = $defaultAccessToken->getValue();
+			$result['expires'] = $expiresAt ? $expiresAt->getTimestamp() : null;
 		}
 		if ($fbsr and $setCookie) {
-			Q_Response::setCookie("fbsr_$fbAppId", $fbsr);
+			Q_Response::setCookie("fbsr_$fbAppId", $fbsr, $result['expires']);
 		}
 		if ($facebook instanceof Facebook\Facebook
 		and $app = $facebook->getApp()) {
-			if ($fbsr = Q::ifset($_COOKIE, 'fbsr_'.$app->getId(), null)) {
-				$sr = new Facebook\SignedRequest($facebook->getApp(), $fbsr);
-				$at = $facebook->getDefaultAccessToken();
-				$expiresAt = $at->getExpiresAt();
-				$appuser = new Users_AppUser_Facebook();
-				$appuser->platform = 'facebook';
-				$appuser->appId = $fbAppId;
-				$appuser->platform_uid = $sr->getUserId();
-				$appuser->access_token = $at->getValue();
-				$appuser->session_expires = $expiresAt ? $expiresAt->getTimestamp() : null;
-				$appuser->facebook = $facebook;
-				return $appuser;
-			}
+			$appuser = new Users_AppUser_Facebook();
+			// note that $appuser->userId was not set
+			$appuser->platform = 'facebook';
+			$appuser->appId = $fbAppId;
+			$appuser->platform_uid = $result['userID'];
+			$appuser->access_token = $result['accessToken'];
+			$appuser->session_expires = $result['expires'];
+			$appuser->facebook = $facebook;
+			return $appuser;
 		}
 		return null;
 	}

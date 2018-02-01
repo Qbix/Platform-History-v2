@@ -425,6 +425,12 @@ Cp.geocode = function (callback, options) {
 	&& c.latitude && c.longitude) {
 		return callback && callback.call(c, null, []);
 	}
+
+	if (Q.typeOf(c.lat) === "function" && Q.typeOf(c.lng) === "function") {
+		c.latitude = c.latitude || c.lat();
+		c.longitude = c.longitude || c.lng();
+	}
+
 	Places.loadGoogleMaps(function () {
 		var param = {};
 		var p = "Places.Location.geocode: ";
@@ -434,7 +440,7 @@ Cp.geocode = function (callback, options) {
 			if (!c.latitude) {
 				callback && callback.call(c, p + "missing latitude");
 			}
-			if (!c.latitude) {
+			if (!c.longitude) {
 				callback && callback.call(c, p + "missing longitude");
 			}
 			param.location = {
@@ -479,8 +485,8 @@ Cp.geocode = function (callback, options) {
 						c.longitude = loc.lng();
 					}
 					_geocodeCache.set(param, 0, c, [err, results]);
-					Q.handle(callback, c, [err, results]);
 				}
+				Q.handle(callback, c, [err, results]);
 			});
 		}
 	});
@@ -522,7 +528,8 @@ Q.Tool.define({
 	"Places/globe": "Q/plugins/Places/js/tools/globe.js",
 	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
 	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
-	"Places/location": "Q/plugins/Places/js/tools/location.js"
+	"Places/location": "Q/plugins/Places/js/tools/location.js",
+	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
 });
 
 })(Q, jQuery, window);

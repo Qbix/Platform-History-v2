@@ -146,3 +146,7 @@
 .Q_contextual {
 	z-index: 8675309;
 }
+
+.Q_contextual .Q_listing_wrapper {
+	overflow: auto;
+}

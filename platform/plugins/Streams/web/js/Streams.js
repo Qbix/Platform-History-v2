@@ -570,7 +570,8 @@ Q.Tool.define({
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/player": function () {
 		// does nothing
-	}
+	},
+	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js"
 });
 
 /**
@@ -3658,6 +3659,9 @@ var Total = Streams.Total = {
 	setUpElement: function _Total_setUpElement(
 		element, publisherId, streamName, messageType, key, options
 	) {
+		if (!element) {
+			return;
+		}
 		var p = publisherId;
 		var n = streamName;
 		var m = messageType;
@@ -5050,7 +5054,7 @@ function _preloadedStreams(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams data we find
 	Q.each(Stream.preloaded, function (i, fields) {
-		Streams.construct(fields, {}, null);
+		Streams.construct(fields, {}, null, true);
 	});
 	Stream.preloaded = null;
 }

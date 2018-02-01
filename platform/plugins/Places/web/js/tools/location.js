@@ -22,7 +22,8 @@ var Places = Q.Places;
  * @param {Boolean} [options.showCurrent=true] Whether to allow user to select current location
  * @param {Boolean} [options.showLocations=true] Whether to allow user to select their saved locations
  * @param {Boolean} [options.showAddress=true] Whether to allow user to enter a custom address
- * @param {Q.Event} [options.onChoose] this event occurs when user selected some valid location
+ * @param {Boolean} [options.showAreas=false] Whether to show Places/areas tool for selected location
+ * @param {Q.Event} [options.onChoose] User selected some valid location. First parameter is Places.Coordinates object.
  */
 Q.Tool.define("Places/location", function (options) {
 	var tool = this;
@@ -33,85 +34,55 @@ Q.Tool.define("Places/location", function (options) {
 
 	// change location event
 	$te.on(Q.Pointer.click, "[data-location], .Places_location_preview_tool", function () {
-		var $this = $(this);
-
-		if ($this.hasClass('Q_selected')) {
-			return false;
-		}
-
-		// set onChoose status to null
-		Q.handle(state.onChoose, tool, [null]);
-
-		// toggle Q_selected class
-		$te.find(".Q_selected").removeClass("Q_selected");
-		$this.addClass('Q_selected');
-		
-		var $olt = $this.find(tool.addressTool.element);
-		if ($olt.length) {
-			$olt.plugin('Q/placeholders', function () {
-				tool.addressTool.filter.setText('');
-				tool.addressTool.filter.$input.plugin('Q/clickfocus');
-			});
-		}
-
-		var selector = $this.attr("data-location");
-		if (selector === 'current') {
-			tool.getCurrentPosition(function (pos) {
-				var crd = pos.coords;
-				if (!crd) {
-					Q.alert("Places/location tool: could not obtain location", pos);
-					return false;
-				}
-				Places.Coordinates.from({
-					latitude: crd.latitude,
-					longitude: crd.longitude
-				}).geocode(function (err, results) {
-					var loc = Q.getObject([0, 'geometry', 'location'], results);
-					Q.handle(state.onChoose, tool, [loc, this]);
-				});
-			}, function (err) {
-				Q.alert("Places/location tool: ERROR(" + err.code + "): " + err.message);
-				return false;
-			});
-
-			return;
-		} else if (selector === 'address') {
-			// if address selected just repeat onChoose event of places/address tool
-			Q.handle(
-				tool.addressTool.state.onChoose, 
-				tool.addressTool, 
-				[tool.addressTool.place]
-			);
-			return;
-		}
-
-		// related location selected
-		var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
-		var ls = locationPreviewTool.state;
-		Streams.get(ls.publisherId, ls.streamName, function () {
-			Places.Coordinates.from(this).geocode(function (err, results) {
-				var loc = Q.getObject([0, 'geometry', 'location'], results);
-				Q.handle(state.onChoose, tool, [loc, this]);
-			});
-		});
+		tool.toggle(this);
 	});
 
 	tool.Q.onStateChanged('location').set(function () {
 		Q.handle(state.onChoose, tool, [state.location]);
 	});
 
+	// if showAreas - add Places/areas tool if not exist
+	if(state.showAreas){
+		state.onChoose.set(function(location){
+			var placesAreas = tool.$(".Q_tool.Places_areas_tool")[0];
+			placesAreas = placesAreas ? Q.Tool.from(placesAreas, "Places/areas") : null;
+
+			if (Q.isEmpty(location)) {
+				if (Q.typeOf(placesAreas) === "Q.Tool") {
+					Q.Tool.remove(placesAreas.element);
+				}
+
+				return false;
+			}
+
+			if (!placesAreas) {
+				$("<div>").tool("Places/areas", {
+					location: location
+				}).appendTo($te).activate();
+
+				return true;
+			}
+
+			placesAreas.state.location = location;
+			placesAreas.refresh();
+
+			return true;
+		}, tool);
+	}
+
 	tool.refresh();
 },
 
 { // default options here
 	geocode: null,
-	onChoose: new Q.Event(function (geocode) {
-		this.state.location = geocode;
+	onChoose: new Q.Event(function (coordinates) {
+		this.state.location = coordinates;
 	}, 'Places/location'),
 	location: null, // currently selected location
 	showCurrent: true,
 	showLocations: true,
-	showAddress: true
+	showAddress: true,
+	showAreas: false
 },
 
 { // methods go here
@@ -144,7 +115,7 @@ Q.Tool.define("Places/location", function (options) {
 			var result = results[0];
 			var address = result.formatted_address || result.address;
 			$te.html(address).addClass("Q_selected");
-			Q.handle(state.onChoose, tool, [result.geometry.location]);
+			Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 		});
 	},
 	/**
@@ -191,14 +162,29 @@ Q.Tool.define("Places/location", function (options) {
 
 					function _onChoose(place) {
 						if (!place || !place.id) {
-							return Q.handle(state.onChoose, tool, [null]);
+							return Q.handle(state.onChoose, tool, [null, null]);
 						}
 						Places.Coordinates.from({
 							placeId: place.id
 						}).geocode(function (err, results) {
+							var msg = Q.firstErrorMessage(err);
+							if (msg) {
+								throw new Q.Error(msg);
+							}
+
 							var result = results[0];
 							if (!result || !userId) {
 								return;
+							}
+							var attributes = {
+								types: result.types,
+								latitude: result.geometry.location.lat(),
+								longitude: result.geometry.location.lng(),
+								locationType: result.geometry.type,
+								venue: place.name
+							};
+							if (result.place_id) {
+								attributes.placeId = result.place_id;
 							}
 							var textConfirm = text.location.confirm;
 							Q.confirm(textConfirm.message, function (shouldSave) {
@@ -210,22 +196,26 @@ Q.Tool.define("Places/location", function (options) {
 									if (!title) {
 										return;
 									}
+									var publisherId = state.publisherId || userId;
 									Streams.create({
-										publisherId: state.publisherId || userId,
+										publisherId: publisherId,
 										type: 'Places/location',
 										title: title,
-										attributes: {
-											types: result.types,
-											latitude: result.geometry.location.lat(),
-											longitude: result.geometry.location.lng(),
-											locationType: result.geometry.type
-										},
+										attributes: attributes,
 										readLevel: 0,
 										writeLevel: 0,
 										adminLevel: 0
 									}, function (err) {
 										if (!err) {
-											tool.relatedTool.refresh();
+											var sf = this.fields;
+											tool.relatedTool.state.onRefresh.setOnce(
+											function (previews, map, entering, exiting, updating) {
+												var key = Q.firstKey(entering);
+												var index = map[key];
+												var preview = previews[index];
+												Q.Pointer.canceledClick = false;
+												tool.toggle(preview.element);
+											});
 										}
 									}, {
 										publisherId: userId,
@@ -242,7 +232,16 @@ Q.Tool.define("Places/location", function (options) {
 								ok: textConfirm.ok,
 								cancel: textConfirm.cancel
 							});
-							Q.handle(state.onChoose, tool, [result.geometry.location, this]);
+
+							this.venue = place.name;
+							var description = place.description;
+							if (description.indexOf(',') >= 0) {
+								this.venue += description.substr(description.indexOf(','));
+							}
+
+							$te.find(".Q_selected").removeClass("Q_selected");
+							$(tool.addressTool.element).addClass('Q_selected');
+							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 						});
 					}
 				});
@@ -262,11 +261,76 @@ Q.Tool.define("Places/location", function (options) {
 			Q.handle(success, tool, [pos]);
 		}, function (err) {
 			Q.handle(fail, tool, [err]);
-			console.warn("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
+			Q.alert("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
+
+			return false;
 		}, {
 			enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 			timeout: 5000,
 			maximumAge: 0
+		});
+	},
+
+	toggle: function (elem) {
+		var tool = this;
+		var state = this.state;
+		var $te = $(tool.element);
+		var $this = $(elem);
+
+		if ($this.hasClass('Q_selected')) {
+			return false;
+		}
+
+		// toggle Q_selected class
+		$te.find(".Q_selected").removeClass("Q_selected");
+		$this.addClass('Q_selected');
+
+		var $olt = $this.find(tool.addressTool.element);
+		if ($olt.length) {
+			$olt.plugin('Q/placeholders', function () {
+				tool.addressTool.filter.setText('');
+				tool.addressTool.filter.$input.plugin('Q/clickfocus');
+			});
+		}
+
+		var selector = $this.attr("data-location");
+		if (selector === 'current') {
+			tool.getCurrentPosition(function (pos) {
+				var crd = pos.coords;
+				if (!crd) {
+					Q.alert("Places/location tool: could not obtain location", pos);
+					return false;
+				}
+				Places.Coordinates.from({
+					latitude: crd.latitude,
+					longitude: crd.longitude
+				}).geocode(function (err, results) {
+					var loc = Q.getObject([0, 'geometry', 'location'], results);
+					Q.handle(state.onChoose, tool, [this, loc]);
+				});
+			}, function (err) {
+				Q.handle(state.onChoose, tool, [null, null]);
+			});
+
+			return;
+		} else if (selector === 'address') {
+			// if address selected just repeat onChoose event of Places/address tool
+			Q.handle(
+				tool.addressTool.state.onChoose,
+				tool.addressTool,
+				[tool.addressTool.place]
+			);
+			return;
+		}
+
+		// related location selected
+		var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
+		var ls = locationPreviewTool.state;
+		Streams.get(ls.publisherId, ls.streamName, function () {
+			Places.Coordinates.from(this).geocode(function (err, results) {
+				var loc = Q.getObject([0, 'geometry', 'location'], results);
+				Q.handle(state.onChoose, tool, [this, loc]);
+			});
 		});
 	}
 });

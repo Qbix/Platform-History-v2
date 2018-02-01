@@ -373,6 +373,9 @@ abstract class Streams extends Base_Streams
 		} else {
 			$namesToFetch = $name;
 		}
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
 		$criteria = array(
 			'publisherId' => $publisherId,
 			'name' => $namesToFetch
@@ -922,7 +925,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
-	 * @return {Streams_Stream|boolean} Returns the stream that was created.
+	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
 	static function create(
@@ -2019,17 +2022,17 @@ abstract class Streams extends Base_Streams
 			);
 
 			if ($u = Streams_Stream::getConfigField($category->type, 
-				array('relatedTo', $type, 'uri'),
+				array('relatedTo', $type, 'url'),
 				Streams_Stream::getConfigField($category->type, array(
-					'relatedTo', '*', 'uri', null
+					'relatedTo', '*', 'url', null
 				))
 			)) {
 				$fromUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
 			}
 			if ($u = Streams_Stream::getConfigField($stream->type, 
-				array('relatedFrom', $type, 'uri'),
+				array('relatedFrom', $type, 'url'),
 				Streams_Stream::getConfigField($stream->type, array(
-					'relatedFrom', '*', 'uri', null
+					'relatedFrom', '*', 'url', null
 				))
 			)) {
 				$toUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
@@ -2292,6 +2295,9 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Fetch all the streams which are related to, or from, a given stream.
+	 * Right now, all the streams that are fetched have to be from the same publisher.
+	 * So, if there are relations to streams from other publishers, you have to additionally
+	 * go ahead and fetch them yourself.
 	 * @method related
 	 * @static
 	 * @param {string} $asUserId
@@ -3342,10 +3348,11 @@ abstract class Streams extends Base_Streams
 	 * "Streams"/"types"/$streamType/"participating", which is an array of stream names.
 	 * @method participating
 	 * @static
-	 * @param {string|array|Db_Range} [$streamName='Streams/participating'] the name(s) of one or more streams
-	 *  of type Streams/participating
+	 * @param {string|array|Db_Range} [$options.type]
+	 *  Filter the type(s) of the streams to return, that the user is participating in.
 	 * @param {array} [$options=array()] options you can pass to Streams::relate() method
 	 * @param {string} [$options.publisherId=Users::loggedInUser(true)->id] the publisher of the category stream
+	 * @param {string} [$options.categoryName='Streams/participating'] the name of the category stream
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] the user to fetch as
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
@@ -3355,9 +3362,15 @@ abstract class Streams extends Base_Streams
 	 *  then returns only $relatedStreams or $relations.
 	 */
 	static function participating(
-		$streamName = 'Streams/participating',
+		$type = null,
 		$options = array())
 	{
+		if (isset($type)) {
+			$options['type'] = $type;
+		}
+		$streamName = isset($options['categoryName'])
+			? $options['categoryName']
+			: 'Streams/participating';
 		$publisherId = isset($options['publisherId'])
 			? $options['publisherId']
 			: Users::loggedInUser(true)->id;
@@ -4228,7 +4241,7 @@ abstract class Streams extends Base_Streams
 			if (!isset($classes[$type])) {
 				$classes[$type] = Streams::getExtendClasses($type);
 				foreach ($classes[$type] as $className => $fieldNames) {
-					$rows[$className] = call_user_func(array($className, 'select'), '*')
+					$rows[$className] = call_user_func(array($className, 'select'))
 						->where(array(
 							'publisherId' => $publisherId,
 							'streamName' => $streamNamesByType[$type]

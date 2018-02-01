@@ -23,5 +23,15 @@
 			"placeholder": "Home, Work etc.",
 			"ok": "Save"
 		}
+	},
+	"areas": {
+		"filterPlaceholder": "Any area inside this location?",
+		"newArea": "New area",
+		"promptTitle": "Enter a name for the area:",
+		"absent": "Please set area",
+		"error": "Error",
+		"exist": "Area already exist",
+		"addNewArea": "Add new area",
+	 	"add": "Add"
 	}
 }

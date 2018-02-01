@@ -1381,15 +1381,13 @@ Q.diff = function _Q_diff(container1, container2 /*, ... comparator */) {
 				}
 			});
 			if (found) {
-				break;
+				return;
 			}
 		}
-		if (!found) {
-			if (isArr) {
-				result.push(v1);
-			} else {
-				result[k] = v1;
-			}
+		if (isArr) {
+			result.push(v1);
+		} else {
+			result[k] = v1;
 		}
 	});
 	return result;
@@ -1510,7 +1508,7 @@ Q.instanceOf = function (testing, Constructor) {
  * or levels > 0, it recursively calls that method to copy the property.
  * @static
  * @method copy
- * @param {Array} fields
+ * @param {Array} [fields=null]
  *  Optional array of fields to copy. Otherwise copy all that we can.
  * @param levels {number}
  *  Optional. Copy this many additional levels inside x if it is a plain object.
@@ -2162,6 +2160,29 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
 };
 
 /**
+ * Like "set" method, but removes the handler right after it has executed.
+ * @method setOnce
+ * @param {mixed} handler Any kind of callable which Q.handle can invoke
+ * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
+ *  Used to replace handlers previously added under the same key.
+ *  If the key is not provided, a unique one is computed.
+ *  Pass a Q.Tool object here to associate the handler to the tool,
+ *  and it will be automatically removed when the tool is removed.
+ * @param {boolean} prepend If true, then prepends the handler to the chain
+ * @return {String} The key under which the handler was set
+ */
+Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+	if (!handler) return null;
+	var event = this;
+	return key = event.set(function _setOnce() {
+		handler.apply(this, arguments);
+		setTimeout(function () {
+			event.remove(key);
+		}, 0);
+	}, key, prepend);
+};
+
+/**
  * Like "add" method, but removes the handler right after it has executed.
  * @method addOnce
  * @param {mixed} handler Any kind of callable which Q.handle can invoke
@@ -2623,6 +2644,11 @@ Q.onReady = new Q.Event();
  * @event onJQuery
  */
 Q.onJQuery = new Q.Event();
+/**
+ * This event occurs when an app url is open in Cordova
+ * @event onHandleOpenUrl
+ */
+Q.onHandleOpenUrl = new Q.Event();
 var _layoutElements = [];
 var _layoutEvents = [];
 /**
@@ -3877,7 +3903,7 @@ Q.Tool.beingActivated = undefined;
 
 /**
  * Call this function to define default options for a tool constructor,
- * even if has not been loaded yet.
+ * even if has not been loaded yet. Extends existing options with Q.extend().
  * @static
  * @method define.options
  * @param {String} toolName the name of the tool
@@ -4555,7 +4581,7 @@ Q.Tool.from = function _Q_Tool_from(toolElement, toolName) {
 	} if (typeof toolElement === 'string') {
 		toolElement = document.getElementById(toolElement);
 	}
-	return toolElement.Q ? toolElement.Q(toolName) : null;
+	return toolElement && toolElement.Q ? toolElement.Q(toolName) : null;
 };
 
 /**
@@ -5000,19 +5026,18 @@ function Q_Cache_remove(cache, key, special) {
 function Q_Cache_pluck(cache, existing) {
 	var value;
 	if (existing.prev) {
-		value = Q_Cache_get(cache, existing.prev);
-		if (!value) {
-			debugger; // pause here if debugging
+		if (value = Q_Cache_get(cache, existing.prev)) {
+			value.next = existing.next;
+			Q_Cache_set(cache, existing.prev, value);
 		}
-		value.next = existing.next;
-		Q_Cache_set(cache, existing.prev, value);
 	} else {
 		cache.earliest(existing.next);
 	}
 	if (existing.next) {
-		value = Q_Cache_get(cache, existing.next);
-		value.prev = existing.prev;
-		Q_Cache_set(cache, existing.next, value);
+		if (value = Q_Cache_get(cache, existing.next)) {
+			value.prev = existing.prev;
+			Q_Cache_set(cache, existing.next, value);
+		}
 	} else {
 		cache.latest(existing.prev);
 	}
@@ -5503,7 +5528,7 @@ Q.init = function _Q_init(options) {
 				do {
 					if (t && t.nodeName === "A" && t.href && !t.outerHTML.match(/\Whref=[',"]#[',"]\W/) && t.href.match(/^https?:\/\//)) {
 						e.preventDefault();
-						s = (t.target === "_blank") ? "_system" : "_blank";
+						s = t.target && (t.target === "_blank" ? "_blank" : "_system");
 						root.open(t.href, s, "location=no");
 					}
 				} while ((t = t.parentNode));
@@ -5776,8 +5801,11 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		}
 		return;
 	}
+	function _Q_addEventListener_wrapper(e) {
+		Q.handle(eventHandler, element, [e]);
+	}
 	var handler = (eventHandler.typename === "Q.Event"
-		? eventHandler.eventListener = function _Q_addEventListener_wrapper(e) { Q.handle(eventHandler, element, [e]); }
+		? eventHandler.eventListener = _Q_addEventListener_wrapper
 		: eventHandler);
 	if (typeof eventName === 'string') {
 		var split = eventName.split(' ');
@@ -6858,7 +6886,7 @@ Q.formPost.counter = 0;
  * @param {Boolean} [options.duplicate] if true, adds script even if one with that src was already loaded
  * @param {Boolean} [options.onError] optional function that may be called in newer browsers if the script fails to load. Its this object is the script tag.
  * @param {Boolean} [options.ignoreLoadingErrors] If true, ignores any errors in loading scripts.
- * @param {Boolean} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document)
+ * @param {Boolean} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document).
  * @param {Boolean} [options.returnAll] If true, returns all the script elements instead of just the new ones
  * @return {Array} An array of SCRIPT elements
  */
@@ -6880,7 +6908,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	
 	function onload2(e, s, u) {
 		var cb;
-		if (('readyState' in this) && (this.readyState !== 'complete' && this.readyState !== 'loaded')) {
+		if (this && ('readyState' in this) && (this.readyState !== 'complete' && this.readyState !== 'loaded')) {
 			return;	
 		}
 		if (s) {
@@ -6923,13 +6951,13 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		Q.jQueryPluginPlugin();
 		onload();
 	}
-	
-	var p, ret = [];
+
 	if (!onload) {
 		onload = function () {};
 	}
-	
+
 	if (Q.isArrayLike(src)) {
+		var pipe, ret = [];
 		var srcs = [];
 		Q.each(src, function (i, src) {
 			if (!src) return;
@@ -6939,9 +6967,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			onload();
 			return [];
 		}
-		p = new Q.Pipe(srcs, onload);
+		pipe = new Q.Pipe(srcs, onload);
 		Q.each(srcs, function (i, src) {
-			ret.push(Q.addScript(src, p.fill(src), options));
+			ret.push(Q.addScript(src, pipe.fill(src), options));
 		});
 		return ret;
 	}
@@ -6954,7 +6982,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		onload = function() { };
 	}
 	
-	var script, i;
+	var script, i, p;
 	_onload.loaded = {};
 	src = (src && src.src) ? src.src : src;
 	if (!src) {
@@ -7170,28 +7198,55 @@ var _exports = {};
  * @param {Function} onload
  * @param {Object} options
  *  An optional hash of options, which can include:
+ * @param {Boolean} [options.slotName] The slot name to which the stylesheet should be added, used to control the order they're applied in.
+ *  Do not use together with container option.
  * @param {HTMLElement} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document)
+ *  Although this won't result in valid HTML, all browsers support it, and it enables the CSS to later be easily removed at runtime.
  * @param {Boolean} [options.returnAll=false] If true, returns all the link elements instead of just the new ones
  * @return {Array} Returns an aray of LINK elements
  */
 Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
-	var i;
-	options = options || {};
-	if (typeof media === 'function') {
-		onload = media; media = undefined;
+
+	function onload2() {
+		if (onload2.executed) {
+			return;
+		}
+		if (('readyState' in this) &&
+			(this.readyState !== 'complete' && this.readyState !== 'loaded')) {
+			return;
+		}
+		Q.addStylesheet.loaded[href] = true;
+		var cb;
+		while ((cb = Q.addStylesheet.onLoadCallbacks[href].shift())) {
+			cb.call(this);
+		}
+		onload2.executed = true;
 	}
+
+	if (typeof media === 'function') {
+		options = onload; onload = media; media = undefined;
+	} else if (Q.isPlainObject(media) && !(media instanceof Q.Event)) {
+		options = media; media = onload = null;
+	}
+	options = options || {};
 	if (!onload) {
 		onload = function _onload() { };
 	}
 	if (Q.isArrayLike(href)) {
-		var ret = [];
-		var len = href.length;
-		for (i=0; i<len; ++i) {
-			ret.push(Q.addStylesheet(
-				href[i].href || href[i],
-				href[i].media
-			));
+		var pipe, ret = [];
+		var hrefs = [];
+		Q.each(href, function (i, href) {
+			if (!href) return;
+			hrefs.push((href && href.href) ? href.href : href);
+		});
+		if (Q.isEmpty(hrefs)) {
+			onload();
+			return [];
 		}
+		pipe = new Q.Pipe(hrefs, 1, onload);
+		Q.each(hrefs, function (i, href) {
+			ret.push(Q.addStylesheet(href, media, pipe.fill(href), options));
+		});
 		return ret;
 	}
 	var container = options.container || document.getElementsByTagName('head')[0];
@@ -7202,12 +7257,17 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	href = Q.url(href);
 	if (!media) media = 'screen,print';
+	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
+	var i, e, m, p;
 	for (i=0; i<links.length; ++i) {
-		if (links[i].getAttribute('href') !== href) continue;
-		// move the element to the right container if necessary
-		// hopefully, moving the link element won't change the order of applying the styles
-		var p = links[i], outside = true;
+		e = links[i];
+		m = e.getAttribute('media');
+		if ((m && m !== media) || e.getAttribute('href') !== href) continue;
+		// A link element with this media and href is already found in the document.
+		// Move the element to the right container if necessary
+		// (This may change the order in which stylesheets are applied).
+		var p = e, outside = true;
 		while (p = p.parentNode) {
 			if (p === container) {
 				outside = false;
@@ -7215,45 +7275,24 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 			}
 		}
 		if (outside) {
-			container.appendChild(links[i]);
+			container.appendChild(e);
 		}
 		if (Q.addStylesheet.loaded[href] || !Q.addStylesheet.added[href]) {
 			onload();
-			return options.returnAll ? links[i] : false;
+			return options.returnAll ? e : false;
 		}
 		if (Q.addStylesheet.onLoadCallbacks[href]) {
 			Q.addStylesheet.onLoadCallbacks[href].push(onload);
 		} else {
 			Q.addStylesheet.onLoadCallbacks[href] = [onload];
 		}
-		links = document.getElementsByTagName('link');
-		for (var j=0; j<links.length; ++j) {
-			if (links[j].href !== href) continue;
-			if (Q.info.isAndroidStock) {
-				onload2.call(links[j]); // it doesn't support onload
-			} else {
-				links[j].onload = onload2;
-				links[j].onreadystatechange = onload2; // for IE8
-			}
-			break;
+		if (Q.info.isAndroidStock) {
+			onload2.call(e); // it doesn't support onload
+		} else {
+			e.onload = onload2;
+			e.onreadystatechange = onload2; // for IE8
 		}
-		return options.returnAll ? links[i] : false; // don't add
-	}
-
-	function onload2() {
-		if (onload2.executed) {
-			return;
-		}
-		if (('readyState' in this) &&
-		(this.readyState !== 'complete' && this.readyState !== 'loaded')) {
-			return;
-		}
-		Q.addStylesheet.loaded[href] = true;
-		var cb;
-		while ((cb = Q.addStylesheet.onLoadCallbacks[href].shift())) {
-			cb.call(this);
-		}
-		onload2.executed = true;
+		return options.returnAll ? e : false; // don't add
 	}
 
 	// Create the stylesheet's tag and insert it into the document
@@ -7266,7 +7305,25 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.onload = onload2;
 	link.onreadystatechange = onload2; // for IE
 	link.setAttribute('href', href);
-	container.appendChild(link);
+	links = document.getElementsByTagName('link');
+	var insertBefore = null;
+	if (Q.allSlotNames && options.slotName) {
+		link.setAttribute('data-slot', options.slotName);
+		var slotIndex = Q.allSlotNames.indexOf(options.slotName);
+		for (var j=0; j<links.length; ++j) {
+			e = links[j];
+			var slotName = e.getAttribute('data-slot');
+			if (Q.allSlotNames.indexOf(slotName) > slotIndex) {
+				insertBefore = e;
+				break;
+			}
+		}
+	}
+	if (insertBefore) {
+		insertBefore.parentNode.insertBefore(link, insertBefore);
+	} else {
+		container.appendChild(link);
+	}
 	// By now all widespread browser versions support at least one of the above methods:
 	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#Browser_compatibility
 	return link;
@@ -8011,7 +8068,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		function loadStylesheets(callback) {
 			if (!response.stylesheets) {
-				return null;
+				return callback();
 			}
 			var newStylesheets = {};
 			var keys = Object.keys(response.stylesheets);
@@ -8031,7 +8088,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
 					var elem = Q.addStylesheet(
 						stylesheet.href, stylesheet.media,
-						slotPipe.fill(key), { returnAll: false }
+						slotPipe.fill(key), { slotName: slotName, returnAll: false }
 					);
 					if (elem) {
 						stylesheets.push(elem);
@@ -8603,13 +8660,14 @@ Q.Template.info = {};
 
 
 /**
- * Sets the text of a template in this document's collection, and compiles it.
+ * Sets the text and/or info of a template in this document's collection, and compiles it.
  * This is e.g. called by Q.loadUrl when the server sends over some templates,
  * so they won't have to be requested later.
  * @static
  * @method set
  * @param {String} name The template's name under which it will be found
- * @param {String} content The content of the template that will be processed by the template engine
+ * @param {String} content The content of the template that will be processed by the template engine.
+ *   To avoid setting the content (so the template will be loaded on demand later), pass undefined here.
  * @param {Object|String} info You can also pass a string "type" here.
  * @param {String} [info.type="handlebars"] The type of template.
  * @param {Array} [info.text] Names of sources for text translations, ending in .json or .js
@@ -8621,7 +8679,9 @@ Q.Template.set = function (name, content, info) {
 	var T = Q.Template;
 	T.remove(name);
 	var n = Q.normalize(name);
-	T.collection[n] = content;
+	if (content !== undefined) {
+		T.collection[n] = content;
+	}
 	if (typeof info === 'string') {
 		info = { type: info };
 	}
@@ -9778,6 +9838,10 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 };
 Q.jQueryPluginPlugin();
 
+_isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
+	|| location.search.queryField('Q.cordova')
+	|| Q.cookie('Q_cordova');
+
 /**
  * A tool for detecting user browser parameters.
  * @class Q.Browser
@@ -10024,9 +10088,6 @@ Q.Browser = {
 	
 };
 
-var _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
-	|| location.search.queryField('Q.cordova');
-
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
@@ -10040,6 +10101,7 @@ Q.info = {
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
 	isStandalone: detected.isStandalone,
+	isCordova: _isCordova,
 	platform: detected.OS,
 	browser: detected,
 	isIE: function (minVersion, maxVersion) {
@@ -10213,41 +10275,65 @@ _setLayoutInterval.options = {
  */
 Q.Pointer = {
 	/**
-	 * Either 'touchstart' or 'mousedown' event name, depending on environment
+	 * Intelligent pointer start event that also works on touchscreens
 	 * @static
-	 * @property {String} start
+	 * @method start
 	 */
-	start: (Q.info.isTouchscreen ? 'touchstart' : 'mousedown'),
+	start: function _Q_Pointer_start(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		return function (e) {
+			Q.Pointer.startCancelingClicksOnScroll(e.target);
+			Q.addEventListener(e.target, Q.Pointer.end, function () {
+				Q.Pointer.stopCancelingClicksOnScroll(e.target);
+			});
+			return params.original.apply(this, arguments);
+		};
+	},
 	/**
-	 * Either 'touchmove' or 'mousemove' event name, depending on environment
+	 * Intelligent pointer end event that also works on touchscreens
 	 * @static
-	 * @property {String} move
+	 * @method end
 	 */
-	move: (Q.info.isTouchscreen ? 'touchmove' : 'mousemove'),
+	end: function _Q_Pointer_end(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'mouseup';
+		return params.original;
+	},
 	/**
-	 * Either 'touchend' or 'mouseup' event name, depending on environment
+	 * Intelligent pointer move event that also works on touchscreens
 	 * @static
-	 * @property {String} end
+	 * @method move
 	 */
-	end: (Q.info.isTouchscreen ? 'touchend' : 'mouseup'),
+	move: function _Q_Pointer_move(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchmove' : 'mousemove';
+		return params.original;
+	},
 	/**
-	 * Either 'touchenter' or 'mouseenter' event name, depending on environment
+	 * Intelligent pointer enter event that also works on touchscreens
 	 * @static
-	 * @property {String} enter
+	 * @method enter
 	 */
-	enter: (Q.info.isTouchscreen ? 'touchenter' : 'mouseenter'),
+	enter: function _Q_Pointer_enter(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchenter' : 'mouseenter';
+		return params.original;
+	},
 	/**
-	 * Either 'touchleave' or 'mouseleave' event name, depending on environment
+	 * Intelligent pointer leave event that also works on touchscreens
 	 * @static
-	 * @property {String} leave
+	 * @method leave
 	 */
-	leave: (Q.info.isTouchscreen ? 'touchleave' : 'mouseleave'),
+	leave: function _Q_Pointer_leave(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchleave' : 'mouseleave';
+		return params.original;
+	},
 	/**
-	 * The 'touchcancel' event name, depending on environment
+	 * Intelligent pointer cancel event that also works on touchscreens
 	 * @static
-	 * @property {String} cancel
+	 * @method cancel
 	 */
-	cancel: (Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'), // mousecancel can be a custom event
+	cancel: function _Q_Pointer_cancel(params) {
+		params.eventName = Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
+		return params.original;
+	},
 	/**
 	 * Intelligent focusin event that fires only once per focusin
 	 * @static
@@ -10320,7 +10406,8 @@ Q.Pointer = {
 	},
 	/**
 	 * Like click event but works on touchscreens even if the viewport moves 
-	 * during click (such as when the on-screen keyboard disappears).
+	 * during click, such as when the on-screen keyboard disappears
+	 * or a scrolling parent gets scrollTop = 0 because content changed.
 	 * Respects Q.Pointer.canceledClick
 	 * @static
 	 * @method touchclick
@@ -10329,7 +10416,7 @@ Q.Pointer = {
 		if (!Q.info.isTouchscreen) {
 			return Q.Pointer.click(params);
 		}
-		params.eventName = Q.Pointer.start;
+		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
 		return function _Q_touchclick_on_wrapper (e) {
 			var _relevantClick = true;
 			var t = this, a = arguments;
@@ -10792,8 +10879,8 @@ Q.Pointer = {
 	 * returning false.
 	 * @static
 	 * @method cancelClick
-	 * @param {Q.Event} event Some mouse or touch event from the DOM
-	 * @param {Object} extraInfo Extra info to pass to onCancelClick
+	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
+	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @param {boolean} [skipMask=false] Pass true here to skip showing
 	 *   the Q.click.mask for 300 milliseconds, which blocks any
 	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
@@ -10850,15 +10937,37 @@ Q.Pointer = {
 	 * Call this function to begin blurring active elements when touching outside them
 	 * @method startBlurringOnTouch
 	 */
-	startBlurringOnTouch: function (options) {
+	startBlurringOnTouch: function () {
 		Q.addEventListener(window, 'touchstart', _touchBlurHandler, false, true);
 	},
 	/**
 	 * Call this function to begin blurring active elements when touching outside them
 	 * @method startBlurringOnTouch
 	 */
-	stopBlurringOnTouch: function (options) {
+	stopBlurringOnTouch: function () {
 		Q.removeEventListener(window, 'touchstart', _touchBlurHandler, false, true);
+	},
+	/**
+	 * Call this function to begin canceling clicks on the element or its scrolling parent.
+	 * This is to good for preventing stray clicks from happening after an accidental scroll,
+	 * for instance if content changed after a tab was selected, and scrollTop became 0.
+	 * @method startCancelingClicksOnScroll
+	 * @param {
+	 */
+	startCancelingClicksOnScroll: function (element) {
+		var sp = element.scrollingParent(true);
+		Q.addEventListener(sp, 'scroll', Q.Pointer.cancelClick);
+	},
+	/**
+	 * Call this function to stop canceling clicks on the element or its scrolling parent.
+	 * This is to good for preventing stray clicks from happening after an accidental scroll,
+	 * for instance if content changed after a tab was selected, and scrollTop became 0.
+	 * @method startCancelingClicksOnScroll
+	 * @param {
+	 */
+	stopCancelingClicksOnScroll: function (element) {
+		var sp = element.scrollingParent(true);
+		Q.removeEventListener(sp, 'scroll', Q.Pointer.cancelClick);
 	},
 	/**
 	 * This event occurs when a click has been canceled, for one of several possible reasons.
@@ -10887,6 +10996,12 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+var _isTouchscreen = Q.info.isTouchscreen;
+Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
+Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
+Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
+Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
 
 Q.Pointer.which.LEFT = 1;
 Q.Pointer.which.MIDDLE = 2;
@@ -11551,7 +11666,38 @@ Aup.play = function (from, until, removeAfterPlaying) {
 	Q.handle(Q.Audio.onPlay, this);
 	return t;
 };
+/**
+ * @method recorderInit
+ * Set recorder class
+ * @param {object} [options] Object with options
+ * @param {function} [options.onStreamReady] callback onStreamReady - fire when user apply access to microphones
+ * @param {function} [options.onDataAvailable] callback onDataAvailable - fire when audio stream encoded and redy o use
+ */
+Aup.recorderInit = function (options) {
+	var tool = this;
 
+	// load recorder
+	Q.addScript("{{Q}}/js/audioRecorder/recorder.js", function(){
+	//new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/encoderWorker.min.js")}); - ogg format encoder
+		tool.recorder = tool.recorder || new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/recorderWorkerMP3.js")}); // mp3 format encoder
+
+		tool.recorder.addEventListener("streamReady", function(e){
+			if(typeof options.onStreamReady === "function") options.onStreamReady.call();
+		});
+
+		// when error occur with audio stream
+		tool.recorder.addEventListener("streamError", function(e){
+			console.log('Error encountered: ' + e.error.name );
+		});
+
+		tool.recorder.addEventListener("dataAvailable", function(e){
+			if(typeof options.onDataAvailable === "function") options.onDataAvailable.call(e);
+		});
+
+		tool.recorder.initStream();
+	});
+
+};
 /**
  * @method pause
  * Pauses the audio if it is playing
@@ -11858,7 +12004,8 @@ Q.onJQuery.add(function ($) {
 		"Q/expandable": "{{Q}}/js/tools/expandable.js",
 		"Q/filter": "{{Q}}/js/tools/filter.js",
 		"Q/rating": "{{Q}}/js/tools/rating.js",
-		"Q/paging": "{{Q}}/js/tools/paging.js"
+		"Q/paging": "{{Q}}/js/tools/paging.js",
+		"Q/pie": "{{Q}}/js/tools/pie.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -11884,7 +12031,8 @@ Q.onJQuery.add(function ($) {
 		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js"
+		"Q/validator": "{{Q}}/js/fn/validator.js",
+		"Q/audio": "{{Q}}/js/fn/audio.js"
 	});
 	
 	Q.onLoad.add(function () {
@@ -12089,7 +12237,7 @@ Q.request.options = {
 	}, 'Q')
 };
 
-Q.onReady.set(function _Q_masks() {	
+Q.onReady.set(function _Q_masks() {
 	_Q_restoreScrolling();
 	Q.request.options.onLoadStart.set(function(url, slotNames, o) {
 		if (o.quiet) return;
@@ -12116,6 +12264,37 @@ Q.onReady.set(function _Q_masks() {
 	}, 'Q.request.load.mask');
 	Q.layout();
 }, 'Q.Masks');
+
+if (_isCordova) {
+	Q.onReady.set(function _Q_handleOpenUrl() {
+		root.handleOpenURL = function (url) {
+			Q.handle(Q.onHandleOpenUrl, Q, [url]);
+		};
+	}, 'Q.handleOpenUrl');
+
+	Q.onReady.set(function _Q_browsertab() {
+		if (!cordova.plugins.browsertab) {
+			return;
+		}
+		cordova.plugins.browsertab.isAvailable(function(result) {
+			var a = root.open;
+			delete root.open;
+			root.open = function (url, target, options) {
+				var noopener = options && options.noopener;
+				var w = !noopener && (['_top', '_self', '_parent'].indexOf(target) >= 0);
+				if (!target || w) {
+					Q.handle(url);
+					return root;
+				}
+				if (result) {
+					cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
+				} else if (cordova.InAppBrowser) {
+					cordova.InAppBrowser.open(url, '_system', options);
+				}
+			};
+		}, function () {});
+	}, 'Q.browsertab');
+}
 
 /**
  * @module Q

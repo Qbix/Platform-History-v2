@@ -13,6 +13,7 @@ syntax: regexp
 ^platform/files/Q/Browscap/
 ^platform/files/Q/sessions/
 ^platform/files/sessions/
+^platform/plugins/.*/web/img/icons
 ^platform/plugins/(?!Users|Streams).*/files/
 ^platform/plugins/Users/files/Users/icons/(?!default|future)
 ^platform/plugins/Streams/files/Streams/icons/(?!default)

@@ -31,7 +31,8 @@
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
-			"Users/authorize": {"module": "Users", "action": "authorize"}
+			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"login/facebook": {"module": "Users", "action": "facebook"}
 		},
 		"session": {
 			"db": {
@@ -119,7 +120,6 @@
 				"t-mobile": "tmomail.net",
 				"boost": "myboostmobile.com",
 				"uscellular": "email.uscc.net",
-				"verizon": "vtext.com",
 				"virginmobile": "vmobl.com"
 			}
 		},
@@ -172,10 +172,7 @@
 		},
 		"onInsert": {
 			"labels": {
-				"Users/friends": ["Friends", "labels/Users/friends"],
-				"Users/family": ["Family", "labels/Users/family"],
-				"Users/business": ["Business", "labels/Users/business"],
-				"Users/dating": ["Dating", "labels/Users/dating"]
+			  /* default labels should be defined individual by each application */
 			}
 		}
 	}

@@ -455,22 +455,23 @@
 	text-align: center;
 	width: 100%;
 }
-.Streams_chat_to_me .Users_avatar_tool {
-	float: left;
-	position: relative;
-}
 .Streams_chat_tool .Users_avatar_icon {
 	position: absolute;
 }
-.Streams_chat_tool .Users_avatar_name {
-	font-size: 10pt;
-	color: #222;
+.Streams_chat_avatar_icon {
+	float: left;
+}
+.Streams_chat_to_me .Streams_chat_bubble .Users_avatar_tool {
+	float: left;
+	font-weight: bold;
+}
+.Streams_chat_tool .Streams_chat_bubble .Users_avatar_name {
+	margin-right: 5px;
 	display: block;
-	margin-left: 55px;
+	color: #222;
 }
 .Streams_chat_message {
 	color: #222;
-	width: 96%;
 	max-height: 100px;
 	overflow: hidden;
 	word-wrap: break-word;
@@ -483,6 +484,7 @@
 .Streams_chat_item {
 	font-size: 11pt;
 	margin: 10px 0;
+	position: relative;
 }
 .Streams_chat_noMessages {
 	color: gray;
@@ -541,16 +543,17 @@
 	text-align: right;
 	float: right;
 	cursor: default;
-	font-size: 10pt;
+	font-size: 0.8em;
 	color: gray;
 }
 .Streams_chat_bubble {
 	position: relative;
 	min-width: 30%;
-	margin-right: 10px;
+	margin-right: 15px;
 	padding: 10px;
 	border: 1px solid #D0D9E4;
 	clear: both;
+	font-size: 0.8em;
 }
 .Streams_chat_tick {
 	background: url('../../Streams/img/chat/message-tick.png');
@@ -565,11 +568,13 @@
 	border-radius: 13px;
 	margin-left: 50px;
 	background-color: #DAE3ED;
+	text-align: left;
 }
 .Streams_chat_from_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
 	background-color: #FFFFFF;
+	text-align: left;
 }
 .Streams_chat_from_me .Streams_chat_tick {
 	float: right;
@@ -588,14 +593,10 @@
 }
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
-	.Streams_chat_tool .Users_avatar_name {
-		position: absolute;
-		top: 0;
-	}
 	.Streams_chat_date {
 		width: 100%;
 		float: right;
-		margin-top: 15px;
+		margin-bottom: 15px;
 	}
 }
 
@@ -761,6 +762,7 @@
 
 .Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
 .Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
+.Streams_aspect_promote { color: #742e7f; border-color: #742e7f; }
 
 .Q_button.Streams_aspect_interests {
 	background-color: #bf1118; /* for non-css3 browsers */
@@ -802,6 +804,20 @@
 	color: white;
 }
 
+.Q_button.Streams_aspect_promote {
+	background: #742e7f; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='##742e7f', endColorstr='#4b1c52'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#742e7f), to(#631d6e)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #742e7f,  #631d6e); /* for firefox 3.6+ */
+	color: white;
+}
+
+.Q_button.Streams_aspect_promote:active,
+.Q_button.Streams_aspect_promote:focus {
+	background: #631d6e;
+	color: white;
+}
+
 .Streams_dialog_interests {
 	min-width: 300px;
 	width: 90%;
@@ -818,6 +834,7 @@
 
 .Streams_file_preview_tool {
 	cursor: pointer;
+	position: relative;
 }
 
 .Streams_file_preview_tool.Streams_preview_stream:hover {
@@ -827,4 +844,21 @@
 .Streams_file_preview_tool.Streams_preview_stream:focus,
 .Streams_file_preview_tool.Streams_preview_stream:active {
 	background: rgba(150, 150, 150, 0.2);
+}
+
+.Streams_chat_vote_container {
+	width: 20px;
+	position: absolute;
+	right: -10px;
+	top: 0;
+	line-height: 18px;
+}
+
+.Streams_chat_vote_container img {
+	width: 15px;
+	height: 15px;
+}
+
+.Streams_chat_with_vote .Streams_chat_bubble {
+	margin-right: 20px;
 }

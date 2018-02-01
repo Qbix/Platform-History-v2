@@ -1,3 +1,7 @@
+.Q_filter_tool {
+	display: inline-block;
+}
+
 .Q_filter_fullscreen {
 	overflow: auto;
 }

@@ -38,7 +38,7 @@
 				"edit": true,
 				"defaults": {
 					"title": "Locations",
-					"icon": "{{Places}}/icons/locations"
+					"icon": "{{Places}}/img/icons/locations"
 				}
 			},
 			"Places/location": {
@@ -50,7 +50,7 @@
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
-					"icon": "{{Places}}/icons/location",
+					"icon": "{{Places}}/img/icons/location",
 					"title": "Location"
 				},
 				"relatedFrom": {
@@ -62,12 +62,14 @@
 			},
 			"Places/area": {
 				"description": "Represents an area within a location, such as a room or suite",
+				"create": true,
 				"edit": true,
 				"messages": {
 					"Places/location/visit": { "post": true },
 					"Places/location/stay": { "post": true }
 				},
 				"defaults": {
+					"icon": "{{Places}}/img/icons/area",
 					"title": "Area"
 				},
 				"relatedFrom": {
@@ -80,6 +82,10 @@
 			"Places/floor": {
 				"description": "Represents a floor in a building or ship",
 				"edit": true,
+				"defaults": {
+					"icon": "{{Places}}/img/icons/floor",
+					"title": "Floor"
+				},
 				"relatedFrom": {
 					"*": {
 						"description": "Posted to entire floor"
@@ -90,6 +96,10 @@
 			"Places/column": {
 				"description": "Represents a column in a building or ship",
 				"edit": true,
+				"defaults": {
+					"icon": "{{Places}}/img/icons/column",
+					"title": "Column"
+				},
 				"relatedFrom": {
 					"*": {
 						"description": "Posted to entire column"

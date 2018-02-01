@@ -232,7 +232,7 @@ class Streams_Stream extends Base_Streams_Stream
 		// if $templateType == true return all found templates sorted by type,
 		// otherwise return one template and its type
 		$field = ($className === 'Streams_Stream' ? 'name' : 'streamName');
-		$rows = call_user_func(array($className, 'select'), '*')
+		$rows = call_user_func(array($className, 'select'))
 			->where(array(
 				'publisherId' => array('', $publisherId), // generic or specific publisher
 				$field => $streamType.'/'
@@ -260,7 +260,7 @@ class Streams_Stream extends Base_Streams_Stream
 		&$templateType = null
 	) {
 		// fetch template for subscription's PK - publisher, name & user
-		$rows = call_user_func(array($className, 'select'), '*')
+		$rows = call_user_func(array($className, 'select'))
 			->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $streamType.'/', // generic or specific stream name
@@ -294,19 +294,33 @@ class Streams_Stream extends Base_Streams_Stream
 			));
 		}
 
+		/**
+		 * @event Streams/Stream/save/$streamType {before}
+		 * @param {Streams_Stream} stream
+		 * @param {array} modifiedFields reference to modifiedFields array
+		 * @return {false} To cancel further processing
+		 */
+		$params = array('stream' => $this, 'modifiedFields' => &$modifiedFields);
+		if (false === Q::event(
+				"Streams/Stream/save/{$this->type}", $params, 'before'
+			)) {
+			return false;
+		}
+
+		// Generate a unique name for the stream
+		if (!isset($modifiedFields['name']) and !isset($this->name)) {
+			$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
+				Streams_Stream::table(), 'name',
+				array('publisherId' => $this->publisherId),
+				array('prefix' => $this->type.'/Q')
+			);
+		}
+
 		if (!$this->retrieved) {
-			// Generate a unique name for the stream
-			if (!isset($modifiedFields['name'])) {
-				$this->name = $modifiedFields['name'] = Streams::db()->uniqueId(
-					Streams_Stream::table(), 'name',
-					array('publisherId' => $this->publisherId),
-					array('prefix' => $this->type.'/Q')
-				);
-			}
 			// we don't want user to update private fields but will set initial values to them
 			$privateFieldNames = self::getConfigField($this->type, 'private', array());
 			// magic fields are handled by parent method
-			$magicFieldNames = array('insertedTime', 'updatedTime');
+			$magicFieldNames = array('insertedTime', 'updatedTime', 'name');
 			$privateFieldNames = array_diff($privateFieldNames, $magicFieldNames);
 
 			$streamTemplate = self::getStreamTemplate(
@@ -365,18 +379,6 @@ class Streams_Stream extends Base_Streams_Stream
 					}
 				}
 			}
-		}
-
-		/**
-		 * @event Streams/Stream/save/$streamType {before}
-		 * @param {Streams_Stream} stream
-		 * @return {false} To cancel further processing
-		 */
-		$params = array('stream' => $this, 'modifiedFields' => $modifiedFields);
-		if (false === Q::event(
-			"Streams/Stream/save/{$this->type}", $params, 'before'
-		)) {
-			return false;
 		}
 		
 		foreach ($this->fields as $name => $value) {
@@ -479,7 +481,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 		$stream->calculateAccess($asUserId);
 		
-		if (!$stream->retrieved) {
+		if ($stream->inserted) {
 			// The stream was just saved
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Streams/Stream/create",

@@ -11,11 +11,14 @@
  * @param {array} [$_REQUEST] Parameters that can come from the request
  *   @param {string} $_REQUEST.publisherId  Required. The user id of the publisher of the stream.
  *   @param {string} $_REQUEST.streamName  Required streamName or name. The name of the stream
+ *   @param {string|array} $_REQUEST.type The type of the relation(s)
  *   @param {boolean} [$_REQUEST.isCategory=false] Whether to fetch streams related TO the stream with this publisherId and streamName.
  *   @param {boolean} [$_REQUEST.relationsOnly=false] Return only the relations, not the streams
  *   @param {boolean} [$_REQUEST.ascending=false] Whether to sort by ascending instead of descending weight
  *   @param {boolean} [$_REQUEST.omitRedundantInfo=false] Whether to omit redundant publisherId and streamName fields in the output
  *   @param {integer} [$_REQUEST.messages=0] Whether to also return this many latest messages per stream
+ *   @param {string} [$_REQUEST.messageType] The type of messages to get
+ *   @param {string|array} $_REQUEST.type The type of the relation(s)
  *   @param {integer} [$_REQUEST.participants=0] Whether to also return this many participants per stream
  */
 function Streams_related_response()
@@ -107,6 +110,7 @@ function Streams_related_response()
 		$messages = false;
 		$type = isset($_REQUEST['messageType']) ? $_REQUEST['messageType'] : null;
 		if ($stream->testReadLevel('messages')) {
+			$type = Q::ifset($_REQUEST, 'messageType', null);
 			$messages = Db::exportArray($stream->getMessages(
 				compact('type', 'max', 'limit')
 			));
