@@ -615,3 +615,43 @@ button.basic32 { height: 40px; border: solid 1px transparent; cursor: pointer; f
 .basic32_close { background-position: 0 -644px; }
 .basic16_open { background-position: 0 -342px; }
 .basic32_open { background-position: 0 -684px; }
+
+html.Q_scanning body > * { opacity: 0; transition: all 2s; }
+html > .Q_scanning_close, html > .Q_scanning_code {
+	display: none;
+}
+html.Q_scanning body > .Q_scanning_close {
+	display: block;
+	opacity: 1;
+}
+html.Q_scanning body > .Q_scanning_code {
+	display: block;
+	opacity: 1;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+}
+.Q_scanning_close {
+	display: none;
+	position: absolute;
+	right: 32px;
+	top: 32px;
+	width: 32px;
+	height: 32px;
+	z-index: 9999;
+	cursor: pointer;
+}
+.Q_scanning_close:before, .Q_scanning_close:after {
+	position: absolute;
+	left: 15px;
+	content: ' ';
+	height: 33px;
+	width: 2px;
+	background-color: #333;
+}
+.Q_scanning_close:before {
+	transform: rotate(45deg);
+}
+.Q_scanning_close:after {
+	transform: rotate(-45deg);
+}
