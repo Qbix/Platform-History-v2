@@ -20,7 +20,7 @@ function Users_after_Q_reroute($params, &$stop_dispatch)
 		return; // We don't have to require login here
 	}
 	$redirect_action = Q_Config::get('Users', 'uris', "$app/login", "$app/welcome");
-	if ($redirect and $ma != $redirect_action) {
+	if ($redirect_action and $ma != $redirect_action) {
 		Q_Response::redirect($redirect_action);
 		$stop_dispatch = true;
 		return;
