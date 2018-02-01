@@ -289,8 +289,15 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
+				var paymentOptions = JSON.stringify(options);
+
+				var err;
 				if (!Assets.Payments || !Assets.Payments.stripe) {
-					throw new Q.Error("Assets.Payments.stripe: missing configuration");
+					err = _error("Assets.Payments.stripe: missing configuration");
+					if (callback) {
+						callback(err);
+					}
+					return;
 				}
 				var o = Q.extend({},
 					Q.text.Assets.payments,
@@ -298,46 +305,50 @@
 					options
 				);
 				if (!o.amount) {
-					throw new Q.Error("Assets.Payments.stripe: amount is required");
-				}
-				// check for ApplePay
-				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari') && !Assets.Payments.applePayIsNotAvailable) {
-					try {
-						Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-					} catch (err) {
-						throw(new Error('Please preload Stripe js library'));
+					err = _error("Assets.Payments.stripe: amount is required");
+					if (callback) {
+						callback(err);
 					}
-					Stripe.applePay.checkAvailability(function (available) {
-						if (available) {
-							_applePayStripe(o, callback);
-						} else {
-							Assets.Payments.applePayIsNotAvailable = true;
-							Assets.Payments.stripe(options, callback);
-						}
-					});
 					return;
 				}
-				// check for PaymentRequest
-				if (window.PaymentRequest) {
-					Q.addScript(Assets.Payments.stripe.jsLibrary, function () {
-						_paymentRequestStripe(o, callback);//
-					});
+				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+					_redirectToBrowserTab(paymentOptions);
 					return;
 				}
-				Q.addScript(o.javascript, function () {
-					var params = Q.extend({
-						name: o.name,
-						amount: o.amount
-					}, o);
-					params.amount *= 100;
-					StripeCheckout.configure(Q.extend({
-						key: Assets.Payments.stripe.publishableKey,
-						token: function (token) {
-							o.token = token;
-							Assets.Payments.pay('stripe', o, callback);
+
+				try {
+					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+				} catch (err) {
+					err = _error('Please preload Stripe js library');
+					if (callback) {
+						callback(err);
+					}
+					return;
+				}
+				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
+					_applePayStripe(o, function (err, res) {
+						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
+							_standardStripe(o);
+							return;
 						}
-					}, params)).open();
-				});
+
+						if (callback) {
+							callback(err, res);
+						}
+					});
+				} else if (window.PaymentRequest) { // check for payment request
+					_paymentRequestStripe(o, function (err, res) {
+						if (err && (err.code === 21)) {
+							_standardStripe(o);
+						}
+						if (callback) {
+							callback(err, res);
+						}
+						//window.close();
+					});
+				} else {
+					_standardStripe(o, callback);
+				}
 			},
 
 			/**
@@ -423,39 +434,41 @@
 	});
 
 	function _applePayStripe(options, callback) {
-		var paymentRequest = {
-			currencyCode: options.currency,
-			countryCode: options.countryCode ? options.countryCode : 'US',
-			total: {
-				label: options.description,
-				amount: options.amount
+		Stripe.applePay.checkAvailability(function (available) {
+			if (available) {
+				var request = {
+					currencyCode: options.currency,
+					countryCode: options.countryCode ? options.countryCode : 'US',
+					total: {
+						label: options.description,
+						amount: options.amount
+					}
+				};
+				var session = Stripe.applePay.buildSession(request, function (result, completion) {
+					options.token = result.token;
+					Q.Assets.Payments.pay('stripe', options, function (err) {
+						if (err) {
+							completion(ApplePaySession.STATUS_FAILURE);
+							callback(err);
+						} else {
+							completion(ApplePaySession.STATUS_SUCCESS);
+							callback(null, true);
+						}
+					});
+				}, function (err) {
+					callback(err);
+				});
+				session.oncancel = function () {
+					callback(_error("Request cancelled", 20));
+				};
+				session.begin();
+			} else {
+				callback(_error('Apple pay is not available', 21));
 			}
-		};
-		var session = Stripe.applePay.buildSession(paymentRequest, function (result, completion) {
-			options.token = result.token;
-			Q.Assets.Payments.pay('stripe', options, function (err) {
-				if (err) {
-					completion(ApplePaySession.STATUS_FAILURE);
-				} else {
-					completion(ApplePaySession.STATUS_SUCCESS);
-				}
-				callback();
-			});
-		}, function (error) {
-			console.log(error);
-			callback();
 		});
-
-		session.oncancel = function () {
-			console.log("User hit the cancel button in the payment window");
-			callback();
-		};
-
-		session.begin();
 	}
 
 	function _paymentRequestStripe(options, callback) {
-
 		var supportedInstruments = [
 			{
 				supportedMethods: ['basic-card'],
@@ -465,7 +478,6 @@
 				}
 			}
 		];
-
 		if (Assets.Payments.androidPay) {
 			supportedInstruments.push({
 				supportedMethods: ['https://android.com/pay'],
@@ -484,16 +496,13 @@
 				}
 			})
 		}
-
 		var details = {
 			total: {
 				label: options.description ? options.description : 'Total due',
 				amount: {currency: options.currency ? options.currency : 'USD', value: options.amount}
 			}
 		};
-
 		var request = new PaymentRequest(supportedInstruments, details, {requestPayerEmail: true});
-
 		request.show().then(function (result) {
 			var promise;
 			if (result.methodName === 'basic-card') {
@@ -532,14 +541,85 @@
 			return promise ? promise : Promise.reject({result: result, err: new Error('Unsupported method')});
 		}).then(function (result) {
 			result.complete('success');
-		}).catch(function (res) {
-			if (res.result && res.result.complete) {
-				res.result.complete('fail');
+			callback(null, result);
+		}).catch(function (err) {
+			if (err.result && err.result.complete) {
+				err.result.complete('fail');
 			}
-		}).then(function () {
-			callback();
+			callback(err);
 		});
-
 	}
+
+	function _standardStripe(o) {
+		Q.addScript(o.javascript, function () {
+			var params = Q.extend({
+				name: o.name,
+				amount: o.amount
+			}, o);
+			params.amount *= 100;
+			StripeCheckout.configure(Q.extend({
+				key: Assets.Payments.stripe.publishableKey,
+				token: function (token) {
+					o.token = token;
+					Assets.Payments.pay('stripe', o, callback);
+				}
+			}, params)).open();
+		});
+	}
+
+	function _error(message, code) {
+		var err = new Q.Error(message);
+		if (code) {
+			err.code = code;
+		}
+		console.warn(err);
+		return err;
+	}
+
+	function _redirectToBrowserTab(paymentOptions) {
+		var url = window.location.href;
+		if(url.indexOf('?') !== -1) {
+			url = url + "&browsertab=yes";
+		}else{
+			url = url + "?browsertab=yes";
+		}
+		url += "&paymentOptions=" + encodeURIComponent(JSON.stringify(paymentOptions));
+		cordova.plugins.browsertab.openUrl(url);
+	}
+
+	if (window.location.href.indexOf('browsertab=yes') !== -1) {
+		window.onload = function() {
+			try {
+				var paymentOptions = JSON.parse(JSON.parse(decodeURIComponent(location.search.split('paymentOptions=')[1])));
+			} catch(err) {
+				console.warn('Undefined payment options');
+				throw(err);
+			}
+			if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
+				var $button = $('#browsertab_pay');
+				var $info = $('#browsertab_pay_info');
+				var $cancel = $('#browsertab_pay_cancel');
+				var $error = $('#browsertab_pay_error');
+				$button.show();
+				$button.on('click', function() {
+					Assets.Payments.stripe(paymentOptions, function(err, res){
+						$button.hide();
+						if (err && err.code === 20) {
+							$cancel.show();
+						} else if (err) {
+							$error.show();
+						} else {
+							$info.show();
+						}
+					})
+				});
+			} else {
+				Assets.Payments.stripe(paymentOptions, function(){
+					window.close();
+				})
+			}
+		};
+	}
+
 
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

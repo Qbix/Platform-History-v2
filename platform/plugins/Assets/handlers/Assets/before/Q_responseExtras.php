@@ -21,4 +21,9 @@ function Assets_before_Q_responseExtras() {
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.androidPay', Q_Config::get('Assets', 'payments', 'androidPay', null));
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.version', Q_Config::get('Assets', 'payments', 'stripe', 'version', null));
 	}
+	if (!empty($_GET['browsertab']) && $_GET['browsertab'] == 'yes') {
+		Q_Response::layoutView('Assets/browsertab.php');
+		Q_Response::addStylesheet('Q/plugins/Assets/css/browsertab.css');
+		Q_Response::addScript('Q/plugins/Assets/js/browsertab.js');
+	}
 }
