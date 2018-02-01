@@ -61,13 +61,13 @@
 	<?php endif; ?>
 <?php elseif (Users::loggedInUser()): ?>
 	<h1 class="Q_big_message">
-		<button id='activate_logoutAndTryAgain'>
+		<button id='activate_logoutAndTryAgain' class='Q_button'>
 			<?php echo Q::text($activate['LogOutAndTryAgain'])?>
 		</button>
 	</h1>
 	<h1 class='Q_big_message'>
 		<?php echo Q::text($activate['IfYouFeel'])?>
-		<button id='activate_setIdentifier'>
+		<button id='activate_setIdentifier' class='Q_button'>
 			<?php echo Q::text($activate['SetIdentifierButtonTitle'])?>
 		</button>
 	</h1>
