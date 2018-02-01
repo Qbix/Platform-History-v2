@@ -25,11 +25,7 @@ class Q_Translate
 	function getSrc($lang, $locale)
 	{
 		$arr = array();
-
 		if (!is_dir($this->options['in'])) {
-			// try relative path
-			$path = APP_SCRIPTS_DIR . DS .
-
 			die("No such source directory: " . $this->options['in'] . "\n");
 		}
 		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->options['in'], RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
@@ -88,7 +84,8 @@ class Q_Translate
 			'i::' => 'in::',
 			'o::' => 'out::',
 			'n::' => 'null::',
-			'f::' => 'format::'
+			'f::' => 'format::',
+			'g::' => 'google-format::'
 		);
 		$options = getopt(implode('', array_keys($params)), $params);
 		$textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
@@ -112,21 +109,29 @@ class Q_Translate
 			$options['source'] = 'en';
 		};
 		if (empty($options['format'])) {
-			$options['format'] = 'auto';
+			$options['format'] = 'google';
 		};
+		if (!empty($options['google-format'])) {
+			$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
+		} else {
+			$options['google-format'] = 'html';
+		}
 		return $options;
 	}
 
 	protected function getLocales()
 	{
 		$tree = new Q_Tree();
-		$platformLocalesConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
-		$appLocalesConfig = APP_CONFIG_DIR . DS . 'locales.json';
+		$appLocalConfig = APP_LOCAL_DIR . DS . 'locales.json';
+		$appConfig = APP_CONFIG_DIR . DS . 'locales.json';
+		$platformConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
 		$config = null;
-		if (file_exists($appLocalesConfig)) {
-			$config = $tree->load($appLocalesConfig);
-		} elseif (file_exists($platformLocalesConfig)) {
-			$config = $tree->load($platformLocalesConfig);
+		if (file_exists($appLocalConfig)) {
+			$config = $tree->load($appLocalConfig);
+		} elseif (file_exists($appConfig)) {
+			$config = $tree->load($appConfig);
+		} elseif (file_exists($platformConfig)) {
+			$config = $tree->load($platformConfig);
 		}
 		if (!$config) {
 			throw new Exception('Empty locales.json');
@@ -142,27 +147,39 @@ This script automatically translates app interface into various languages or pre
 
 You can use such options:
 
---source   Use language code as a value. The value can be combined with location code.
-           Examples:
-           --source=en-US
-           --source=ru-UA
-           --source=ru
-
---in       Input directory which contains source json files.
-           Example:
-           --in=/home/user/input
-
---out      Output directory.
-           Example:
-           --out=/home/user/output
-
---format   Can be "auto" or "human". Default value is "auto".
-           "auto" automatically translates files using Google Translation API.
-           "human" prepares files for further human translators.
-           Examples:
-           --format=auto
-           --format=human
-
+--source          Use language code as a value. The value can be combined with location code.
+                  Default value is en, if the option is not specified.
+                  Examples:
+                  --source=en-US
+                  --source=ru-UA
+                  --source=ru
+           
+--in              Input directory which contains source json files.
+                  Default value APP_DIR/text, where APP_DIR is your application folder.
+                  Example:
+                  --in=/home/user/input
+       
+--out             Output directory.
+                  Default value APP_DIR/translations, where APP_DIR is your application folder.
+                  Example:
+                  --out=/home/user/output
+       
+--format          Can be "google" or "human".
+                  "google" automatically translates files using Google Translation API.
+                  Google API key must be provided in your application config (app.json).
+                  "human" prepares files for further human translators.
+                  Default value is "google".
+                  Examples:
+                  --format=google
+                  --format=human
+                  
+--google-format   Google translation format. This option is used along with --format=google.
+                  The format of the source text, in either HTML (default) or plain-text.
+                  A value of html indicates HTML and a value of text indicates plain-text.
+                  Default value is "html".
+                  Examples:
+                  --google-format=html
+                  --google-format=text
 
 EOT;
 		print $help;
@@ -190,7 +207,7 @@ EOT;
 
 		switch ($this->options['format'])
 		{
-			case 'auto':
+			case 'google':
 				$this->adapter = new Q_Translate_Google($this);
 				break;
 			case 'human':
