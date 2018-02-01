@@ -10,8 +10,6 @@
  * @extends Base_Assets
  */
 
-require Q_DIR.'/../vendor/autoload.php';
-
 abstract class Assets extends Base_Assets
 {
 	/**
