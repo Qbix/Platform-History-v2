@@ -39,7 +39,7 @@ function Users_activate_objects_email($emailAddress, &$email)
 	$user = Users::loggedInUser();
 	if ($user) {
 		if ($user->id != $email->userId) {
-			throw new Q_Exception("You are logged in as a different user. Please log out first.");
+			throw new Q_Exception("You are logged in as a different user.");
 		}
 	} else {
 		$user = new Users_User();
@@ -82,7 +82,7 @@ function Users_activate_objects_mobile($mobileNumber, &$mobile)
 	$user = Users::loggedInUser();
 	if ($user) {
 		if ($user->id != $mobile->userId) {
-			throw new Q_Exception("You are logged in as a different user. Please log out and click the link again.");
+			throw new Q_Exception("You are logged in as a different user.");
 		}
 	} else {
 		$user = new Users_User();
