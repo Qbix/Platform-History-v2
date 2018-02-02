@@ -3441,7 +3441,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 	}
 	// Wait for messages to arrive via the socket,
 	// and if they don't all arrive, try loading them via an http request.
-	var t = setTimeout(_tryLoading, o.timeout);
+	var t = setInterval(_tryLoading, o.timeout);
 	var ordinals = [];
 	var p = new Q.Pipe();
 	Q.each(latest+1, ordinal, 1, function (ord) {
@@ -3458,7 +3458,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		if (!alreadyCalled) {
 			Q.handle(callback, this, [true, ordinals]);
 		}
-		clearTimeout(t);
+		clearInterval(t);
 		alreadyCalled = true;
 		return true;
 	}).run();
@@ -3471,7 +3471,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		// var filled = Q.Object(pipe.subjects),
 		//	 remaining = Q.diff(ordinals, filled);
 		// but we are going to request the entire range.
-		
+
 		if (ordinal < 0) {
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
@@ -5169,9 +5169,9 @@ function _clearCaches() {
 function _scheduleUpdate() {
 	var ms = 1000;
 	if (_scheduleUpdate.timeout) {
-		clearTimeout(_scheduleUpdate.timeout);
+		clearInterval(_scheduleUpdate.timeout);
 	}
-	_scheduleUpdate.timeout = setTimeout(function () {
+	_scheduleUpdate.timeout = setInterval(function () {
 		var now = Date.now();
 		if (_scheduleUpdate.lastTime !== undefined
 		&& now - _scheduleUpdate.lastTime - ms > _scheduleUpdate.delay) {
