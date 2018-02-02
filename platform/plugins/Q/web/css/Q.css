@@ -655,3 +655,11 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_scanning_close:after {
 	transform: rotate(-45deg);
 }
+
+.Q_cordova.Q_ios #Q_status_background {
+	background: #f2f2f2;
+	height: 20px;
+    height: constant(safe-area-inset-bottom);
+    height: env(safe-area-inset-bottom);
+}
+.Q_notCordova.Q_ios #Q_status_background { display: none; }
