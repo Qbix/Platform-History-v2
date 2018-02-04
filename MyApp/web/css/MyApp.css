@@ -222,7 +222,7 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 }
 .Q_cordova.Q_ios.Q_mobile #dashboard_slot { top: 20px; height: 50px; }
 .Q_cordova.Q_ios.Q_mobile #page { top: 70px; }
-.Q_cordova.Q_ios.Q_notch #status_background {
+.Q_cordova.Q_ios.Q_mobile.Q_notch #status_background {
 	background: black;
     height: constant(safe-area-inset-bottom);
     height: env(safe-area-inset-top);
