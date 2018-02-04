@@ -21,7 +21,7 @@ abstract class Base_Places
 	 */
 	static $table_classnames = array (
   0 => 'Places_Autocomplete',
-  1 => 'Places_Zipcode',
+  1 => 'Places_Postcode',
 );
 
 	/**

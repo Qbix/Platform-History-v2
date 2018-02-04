@@ -28,7 +28,7 @@ module.exports = Base;
  */
 Base.tableClasses = [
 	"Places_Autocomplete",
-	"Places_Zipcode"
+	"Places_Postcode"
 ];
 
 /**
@@ -58,8 +58,8 @@ Base.connectionName = function() {
 Base.Autocomplete = Q.require('Places/Autocomplete');
 
 /**
- * Link to Places.Zipcode model
- * @property Zipcode
- * @type Places.Zipcode
+ * Link to Places.Postcode model
+ * @property Postcode
+ * @type Places.Postcode
  */
-Base.Zipcode = Q.require('Places/Zipcode');
+Base.Postcode = Q.require('Places/Postcode');

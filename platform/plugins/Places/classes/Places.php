@@ -350,10 +350,10 @@ abstract class Places extends Base_Places
 		$latitude = $locationStream->getAttribute('latitude');
 		$longitude = $locationStream->getAttribute('longitude');
 		$timezone = $locationStream->getAttribute('timezone');
-		$zipcodes = Places_Zipcode::nearby($latitude, $longitude, $meters, 1);
-		if ($zipcodes) {
-			$z = reset($zipcodes);
-			$zipcode = $z->zipcode;
+		$postcodes = Places_Postcode::nearby($latitude, $longitude, $meters, 1);
+		if ($postcodes) {
+			$z = reset($postcodes);
+			$postcode = $z->postcode;
 			$placeName = $z->placeName;
 			$state = $z->state;
 		}
@@ -365,7 +365,7 @@ abstract class Places extends Base_Places
 		}
 		$userLocationStream->setAttribute(compact(
 			'latitude', 'longitude', 'meters', 'timezone',
-			'zipcode', 'placeName', 'state'
+			'postcode', 'placeName', 'state'
 			// accuracy has been omitted
 		));
 		$userLocationStream->save();
