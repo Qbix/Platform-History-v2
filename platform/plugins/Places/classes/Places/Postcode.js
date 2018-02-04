@@ -1,5 +1,5 @@
 /**
- * Class representing zipcode rows.
+ * Class representing postcode rows.
  *
  * @module Places
  */
@@ -7,15 +7,15 @@ var Q = require('Q');
 var Db = Q.require('Db');
 
 /**
- * Class representing 'Zipcode' rows in the 'Places' database
+ * Class representing 'Postcode' rows in the 'Places' database
  * @namespace Places
- * @class Zipcode
- * @extends Base.Places.Zipcode
+ * @class Postcode
+ * @extends Base.Places.Postcode
  * @constructor
  * @param fields {object} The fields values to initialize table row as
  * an associative array of `{column: value}` pairs
  */
-function Places_Zipcode (fields) {
+function Places_Postcode (fields) {
 
 	/**
 	 * The setUp() method is called the first time
@@ -27,10 +27,10 @@ function Places_Zipcode (fields) {
 	};
 
 	// Run constructors of mixed in objects
-	Places_Zipcode.constructors.apply(this, arguments);
+	Places_Postcode.constructors.apply(this, arguments);
 
 }
 
-Q.mixin(Places_Zipcode, Q.require('Base/Places/Zipcode'));
+Q.mixin(Places_Postcode, Q.require('Base/Places/Postcode'));
 
-module.exports = Places_Zipcode;
+module.exports = Places_Postcode;
