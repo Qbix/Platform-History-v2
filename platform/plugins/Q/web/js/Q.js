@@ -10115,7 +10115,27 @@ Q.info = {
 			&& (maxHeight == undefined || maxHeight >= Q.Pointer.windowHeight())	
 			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
 			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
-	}
+	},
+	hasNotch: (function () {
+	    var proceed = false;
+	    var div = document.createElement('div');
+	    if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
+	        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
+	        proceed = true;
+	    } else if (CSS.supports('padding-bottom: constant(safe-area-inset-bottom)')) {
+	        div.style.paddingBottom = 'constant(safe-area-inset-bottom)';
+	        proceed = true;
+	    }
+	    if (proceed) {
+	        document.body.appendChild(div);
+	        var calculatedPadding = parseInt(_div.computedStyle('padding-bottom'));
+	        document.body.removeChild(div);
+	        if (calculatedPadding > 0) {
+	            return true;
+	        }
+	    }
+		return false;
+	})()
 };
 Q.info.isAndroidStock = !!(Q.info.platform === 'android'
 	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
@@ -10130,6 +10150,9 @@ de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
 de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
 if (Q.info.isAndroidStock) {
 	de.addClass('Q_androidStock');
+}
+if (Q.info.hasNotch) {
+	de.addClass('Q_notch');
 }
 
 Q.Page.onLoad('').set(function () {
