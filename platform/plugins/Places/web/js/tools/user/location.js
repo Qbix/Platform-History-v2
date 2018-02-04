@@ -152,17 +152,19 @@ Q.Tool.define("Places/user/location", function (options) {
 		
 			function geolocationFailed() {
 				handledFail = true;
-				Q.prompt("Please enter your zipcode:",
-				function (zipcode, dialog) {
-					if (zipcode) {
-						_submit(zipcode);
-					}
-				}, {
-					title: "My Location",
-					ok: "Update",
-					onClose: function () {
-						$this.removeClass('Places_obtaining');	
-					}
+				Q.Text.get('Places/content', function (err, text) {
+					Q.prompt(text.location.enterPostcode,
+					function (postcode, dialog) {
+						if (postcode) {
+							_submit(postcode);
+						}
+					}, {
+						title: "My Location",
+						ok: "Update",
+						onClose: function () {
+							$this.removeClass('Places_obtaining');	
+						}
+					});
 				});
 			}
 		
@@ -189,7 +191,7 @@ Q.Tool.define("Places/user/location", function (options) {
 		});
 	});
 	
-	function _submit(zipcode, fields, callback) {
+	function _submit(postcode, fields, callback) {
 		fields = Q.extend({}, fields, {
 			subscribe: true,
 			unsubscribe: true,
@@ -197,8 +199,8 @@ Q.Tool.define("Places/user/location", function (options) {
 			timezone: (new Date()).getTimezoneOffset() / 60,
 			defaultMeters: state.defaultMeters
 		});
-		if (zipcode) {
-			fields.zipcode = zipcode;
+		if (postcode) {
+			fields.postcode = postcode;
 		}
 		Q.req('Places/geolocation', [], function (err, data) {
 			var msg = Q.firstErrorMessage(err, data && data.errors);

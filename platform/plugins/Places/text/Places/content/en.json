@@ -2,11 +2,12 @@
 	"LatLng": "({{1}} lat, {{2}} lng)",
 	"nearby": {
 		"PostcodeLabel": "{{1}} ({{2}})",
-		"Title": "Within {{1}} of {{2}}"
+		"Title": "within {{1}}"
 	},
 	"location": {
 		"myCurrentLocation": "My current location",
 		"enterAddress": "Enter an address",
+		"enterPostcode": "Please enter your postcode / zipcode",
 		"create": {
 			"action": "Add Location",
 			"title": "New Location",

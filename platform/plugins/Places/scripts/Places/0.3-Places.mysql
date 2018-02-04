@@ -2,9 +2,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -------- NEXT QUERY STARTS HERE --------
 
-CREATE TABLE IF NOT EXISTS `{$prefix}zipcode` (
+CREATE TABLE IF NOT EXISTS `{$prefix}postcode` (
   `countryCode` varchar(2) NOT NULL,
-  `zipcode` varchar(10) NOT NULL,
+  `postcode` varchar(10) NOT NULL,
   `placeName` varchar(180) NOT NULL,
   `stateName` varchar(100) NOT NULL,
   `state` varchar(20) NOT NULL,
@@ -16,12 +16,12 @@ CREATE TABLE IF NOT EXISTS `{$prefix}zipcode` (
   `accuracy` int(11) NOT NULL,
   KEY `latitude` (`latitude`),
   KEY `longitude` (`longitude`),
-  KEY `zipcode` (`countryCode`, `zipcode`)
+  KEY `postcode` (`countryCode`, `postcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '96941', 'Pohnpei', '', '64', '', '002', '', 7.1383, 151.5031, 0),
 ('US', '96942', 'Chuuk', '', '64', '', '002', '', 7.1383, 151.5031, 0),
 ('US', '96943', 'Yap', '', '64', '', '002', '', 7.1383, 151.5031, 0),
@@ -563,7 +563,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '35585', 'Spruce Pine', 'Alabama', 'AL', 'Franklin', '059', '', 34.4246, -87.8145, 0),
 ('US', '35593', 'Vina', 'Alabama', 'AL', 'Franklin', '059', '', 34.3712, -88.0774, 0),
 ('US', '35653', 'Russellville', 'Alabama', 'AL', 'Franklin', '059', '', 34.5066, -87.7257, 0),
@@ -1128,7 +1128,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '36548', 'Leroy', 'Alabama', 'AL', 'Washington', '129', '', 31.491, -87.9687, 0),
 ('US', '36553', 'Mc Intosh', 'Alabama', 'AL', 'Washington', '129', '', 31.2361, -88.0511, 0),
 ('US', '36556', 'Malcolm', 'Alabama', 'AL', 'Washington', '129', '', 31.4067, -88.1758, 0),
@@ -1696,7 +1696,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '72837', 'Dover', 'Arkansas', 'AR', 'Pope', '115', '', 35.4074, -93.1355, 0),
 ('US', '72843', 'Hector', 'Arkansas', 'AR', 'Pope', '115', '', 35.5499, -92.9616, 0),
 ('US', '72847', 'London', 'Arkansas', 'AR', 'Pope', '115', '', 35.3744, -93.2736, 0),
@@ -2259,7 +2259,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '86411', 'Hackberry', 'Arizona', 'AZ', 'Mohave', '015', '', 35.6053, -113.6427, 0),
 ('US', '86412', 'Hualapai', 'Arizona', 'AZ', 'Mohave', '015', '', 35.3972, -113.8432, 0),
 ('US', '86413', 'Golden Valley', 'Arizona', 'AZ', 'Mohave', '015', '', 35.3002, -114.2215, 0),
@@ -2815,7 +2815,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '95514', 'Blocksburg', 'California', 'CA', 'Humboldt', '023', '', 40.2987, -123.6576, 0),
 ('US', '95518', 'Arcata', 'California', 'CA', 'Humboldt', '023', '', 40.8685, -124.0856, 0),
 ('US', '95519', 'Mckinleyville', 'California', 'CA', 'Humboldt', '023', '', 40.9465, -124.0834, 0),
@@ -3340,7 +3340,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '91316', 'Encino', 'California', 'CA', 'Los Angeles', '037', '', 34.1655, -118.5175, 0),
 ('US', '91321', 'Newhall', 'California', 'CA', 'Los Angeles', '037', '', 34.3795, -118.523, 0),
 ('US', '91322', 'Newhall', 'California', 'CA', 'Los Angeles', '037', '', 33.7866, -118.2987, 0),
@@ -3874,7 +3874,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '95713', 'Colfax', 'California', 'CA', 'Placer', '061', '', 39.0783, -120.9549, 0),
 ('US', '95714', 'Dutch Flat', 'California', 'CA', 'Placer', '061', '', 39.1978, -120.8262, 0),
 ('US', '95715', 'Emigrant Gap', 'California', 'CA', 'Placer', '061', '', 39.2747, -120.611, 0),
@@ -4394,7 +4394,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '92115', 'San Diego', 'California', 'CA', 'San Diego', '073', '', 32.7607, -117.0721, 0),
 ('US', '92116', 'San Diego', 'California', 'CA', 'San Diego', '073', '', 32.7624, -117.1242, 0),
 ('US', '92117', 'San Diego', 'California', 'CA', 'San Diego', '073', '', 32.8239, -117.1965, 0),
@@ -4911,7 +4911,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '96094', 'Weed', 'California', 'CA', 'Siskiyou', '093', '', 41.6661, -122.4086, 0),
 ('US', '96097', 'Yreka', 'California', 'CA', 'Siskiyou', '093', '', 41.7206, -122.6376, 0),
 ('US', '96134', 'Tulelake', 'California', 'CA', 'Siskiyou', '093', '', 41.9316, -121.4347, 0),
@@ -5472,7 +5472,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '80235', 'Denver', 'Colorado', 'CO', 'Denver', '031', '', 39.6472, -105.0795, 0),
 ('US', '80236', 'Denver', 'Colorado', 'CO', 'Denver', '031', '', 39.6535, -105.0376, 0),
 ('US', '80237', 'Denver', 'Colorado', 'CO', 'Denver', '031', '', 39.6431, -104.8987, 0),
@@ -6030,7 +6030,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '06830', 'Greenwich', 'Connecticut', 'CT', 'Fairfield', '001', '', 41.0427, -73.6262, 0),
 ('US', '06831', 'Greenwich', 'Connecticut', 'CT', 'Fairfield', '001', '', 41.0549, -73.6594, 0),
 ('US', '06832', 'Greenwich', 'Connecticut', 'CT', 'Fairfield', '001', '', 41.3089, -73.3637, 0),
@@ -6538,7 +6538,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '20228', 'Washington', 'District of Columbia', 'DC', 'District of Columbia', '001', '', 38.8933, -77.0146, 0),
 ('US', '20229', 'Washington', 'District of Columbia', 'DC', 'District of Columbia', '001', '', 38.8933, -77.0146, 0),
 ('US', '20230', 'Washington', 'District of Columbia', 'DC', 'District of Columbia', '001', '', 38.8933, -77.0146, 0),
@@ -7042,7 +7042,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '33443', 'Deerfield Beach', 'Florida', 'FL', 'Broward', '011', '', 26.1457, -80.4483, 0),
 ('US', '32421', 'Altha', 'Florida', 'FL', 'Calhoun', '013', '', 30.5319, -85.1704, 0),
 ('US', '32424', 'Blountstown', 'Florida', 'FL', 'Calhoun', '013', '', 30.4394, -85.062, 0),
@@ -7606,7 +7606,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '34479', 'Ocala', 'Florida', 'FL', 'Marion', '083', '', 29.1782, -82.0282, 0),
 ('US', '34480', 'Ocala', 'Florida', 'FL', 'Marion', '083', '', 29.1801, -82.0323, 0),
 ('US', '34481', 'Ocala', 'Florida', 'FL', 'Marion', '083', '', 29.1281, -82.2975, 0),
@@ -8165,7 +8165,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '34950', 'Fort Pierce', 'Florida', 'FL', 'St. Lucie', '111', '', 27.4486, -80.3385, 0),
 ('US', '34951', 'Fort Pierce', 'Florida', 'FL', 'St. Lucie', '111', '', 27.5391, -80.4052, 0),
 ('US', '34952', 'Port Saint Lucie', 'Florida', 'FL', 'St. Lucie', '111', '', 27.2889, -80.298, 0),
@@ -8745,7 +8745,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '31063', 'Montezuma', 'Georgia', 'GA', 'Dooly', '093', '', 32.3026, -84.0041, 0),
 ('US', '31070', 'Pinehurst', 'Georgia', 'GA', 'Dooly', '093', '', 32.1967, -83.7209, 0),
 ('US', '31091', 'Unadilla', 'Georgia', 'GA', 'Dooly', '093', '', 32.2558, -83.7447, 0),
@@ -9319,7 +9319,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '31799', 'Thomasville', 'Georgia', 'GA', 'Thomas', '275', '', 30.881, -83.8859, 0),
 ('US', '31727', 'Brookfield', 'Georgia', 'GA', 'Tift', '277', '', 31.4417, -83.5037, 0),
 ('US', '31733', 'Chula', 'Georgia', 'GA', 'Tift', '277', '', 31.5439, -83.5509, 0),
@@ -9910,7 +9910,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '50220', 'Perry', 'Iowa', 'IA', 'Dallas', '049', '', 41.8397, -94.1022, 0),
 ('US', '50233', 'Redfield', 'Iowa', 'IA', 'Dallas', '049', '', 41.5873, -94.1897, 0),
 ('US', '50261', 'Van Meter', 'Iowa', 'IA', 'Dallas', '049', '', 41.6582, -93.9446, 0),
@@ -10505,7 +10505,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '51542', 'Honey Creek', 'Iowa', 'IA', 'Pottawattamie', '155', '', 41.463, -95.8802, 0),
 ('US', '51548', 'Mc Clelland', 'Iowa', 'IA', 'Pottawattamie', '155', '', 41.2932, -95.6813, 0),
 ('US', '51549', 'Macedonia', 'Iowa', 'IA', 'Pottawattamie', '155', '', 41.1916, -95.4314, 0),
@@ -11099,7 +11099,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '83316', 'Buhl', 'Idaho', 'ID', 'Twin Falls', '083', '', 42.6008, -114.7825, 0),
 ('US', '83321', 'Castleford', 'Idaho', 'ID', 'Twin Falls', '083', '', 42.521, -114.8734, 0),
 ('US', '83328', 'Filer', 'Idaho', 'ID', 'Twin Falls', '083', '', 42.5653, -114.614, 0),
@@ -11671,7 +11671,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '61484', 'Vermont', 'Illinois', 'IL', 'Fulton', '057', '', 40.3062, -90.422, 0),
 ('US', '61501', 'Astoria', 'Illinois', 'IL', 'Fulton', '057', '', 40.2311, -90.3443, 0),
 ('US', '61519', 'Bryant', 'Illinois', 'IL', 'Fulton', '057', '', 40.4663, -90.091, 0),
@@ -12238,7 +12238,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '62638', 'Franklin', 'Illinois', 'IL', 'Morgan', '137', '', 39.6222, -90.0889, 0),
 ('US', '62650', 'Jacksonville', 'Illinois', 'IL', 'Morgan', '137', '', 39.737, -90.3014, 0),
 ('US', '62651', 'Jacksonville', 'Illinois', 'IL', 'Morgan', '137', '', 39.6983, -90.2615, 0),
@@ -12804,7 +12804,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '46808', 'Fort Wayne', 'Indiana', 'IN', 'Allen', '003', '', 41.0939, -85.1621, 0),
 ('US', '46809', 'Fort Wayne', 'Indiana', 'IN', 'Allen', '003', '', 41.0254, -85.1834, 0),
 ('US', '46814', 'Fort Wayne', 'Indiana', 'IN', 'Allen', '003', '', 41.0456, -85.3058, 0),
@@ -13373,7 +13373,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '46911', 'Amboy', 'Indiana', 'IN', 'Miami', '103', '', 40.6105, -85.9497, 0),
 ('US', '46914', 'Bunker Hill', 'Indiana', 'IN', 'Miami', '103', '', 40.6423, -86.0962, 0),
 ('US', '46919', 'Converse', 'Indiana', 'IN', 'Miami', '103', '', 40.577, -85.8763, 0),
@@ -13943,7 +13943,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '66087', 'Troy', 'Kansas', 'KS', 'Doniphan', '043', '', 39.7906, -95.1434, 0),
 ('US', '66090', 'Wathena', 'Kansas', 'KS', 'Doniphan', '043', '', 39.7625, -94.9255, 0),
 ('US', '66094', 'White Cloud', 'Kansas', 'KS', 'Doniphan', '043', '', 39.9627, -95.2982, 0),
@@ -14523,7 +14523,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '67656', 'Ogallah', 'Kansas', 'KS', 'Trego', '195', '', 38.9144, -99.8729, 0),
 ('US', '67672', 'Wa Keeney', 'Kansas', 'KS', 'Trego', '195', '', 39.0114, -99.8818, 0),
 ('US', '66401', 'Alma', 'Kansas', 'KS', 'Wabaunsee', '197', '', 39.0092, -96.2923, 0),
@@ -15090,7 +15090,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '40225', 'Louisville', 'Kentucky', 'KY', 'Jefferson', '111', '', 38.189, -85.6768, 0),
 ('US', '40228', 'Louisville', 'Kentucky', 'KY', 'Jefferson', '111', '', 38.1442, -85.6265, 0),
 ('US', '40229', 'Louisville', 'Kentucky', 'KY', 'Jefferson', '111', '', 38.136, -85.6494, 0),
@@ -15661,7 +15661,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '41131', 'Concord', 'Kentucky', 'KY', '', '', '', 38.6861, -83.491, 0),
 ('US', '41163', 'Oldtown', 'Kentucky', 'KY', '', '', '', 38.4403, -82.9582, 0),
 ('US', '41177', 'Stephens', 'Kentucky', 'KY', '', '', '', 38.1131, -82.9868, 0),
@@ -16219,7 +16219,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '70170', 'New Orleans', 'Louisiana', 'LA', 'Orleans', '071', '', 30.033, -89.8826, 0),
 ('US', '70172', 'New Orleans', 'Louisiana', 'LA', 'Orleans', '071', '', 30.033, -89.8826, 0),
 ('US', '70174', 'New Orleans', 'Louisiana', 'LA', 'Orleans', '071', '', 30.033, -89.8826, 0),
@@ -16757,7 +16757,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '01355', 'New Salem', 'Massachusetts', 'MA', 'Franklin', '011', '', 42.5146, -72.3062, 0),
 ('US', '01360', 'Northfield', 'Massachusetts', 'MA', 'Franklin', '011', '', 42.6887, -72.451, 0),
 ('US', '01364', 'Orange', 'Massachusetts', 'MA', 'Franklin', '011', '', 42.5783, -72.5566, 0),
@@ -17280,7 +17280,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '01772', 'Southborough', 'Massachusetts', 'MA', 'Worcester', '027', '', 42.2939, -71.532, 0),
 ('US', '01195', 'Springfield', 'Massachusetts', 'MA', '', '', '', 42.1029, -72.5921, 0),
 ('US', '01433', 'Ft Devens', 'Massachusetts', 'MA', '', '', '', 42.5336, -71.6215, 0),
@@ -17821,7 +17821,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '21713', 'Boonsboro', 'Maryland', 'MD', 'Washington', '043', '', 39.552, -77.6957, 0),
 ('US', '21715', 'Brownsville', 'Maryland', 'MD', 'Washington', '043', '', 39.3869, -77.658, 0),
 ('US', '21719', 'Cascade', 'Maryland', 'MD', 'Washington', '043', '', 39.6958, -77.4955, 0),
@@ -18384,7 +18384,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '04491', 'Vanceboro', 'Maine', 'ME', 'Washington', '029', '', 45.003, -67.4955, 0),
 ('US', '04492', 'Waite', 'Maine', 'ME', 'Washington', '029', '', 45.003, -67.4955, 0),
 ('US', '04606', 'Addison', 'Maine', 'ME', 'Washington', '029', '', 44.583, -67.7146, 0),
@@ -18953,7 +18953,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '49083', 'Richland', 'Michigan', 'MI', 'Kalamazoo', '077', '', 42.3757, -85.4447, 0),
 ('US', '49087', 'Schoolcraft', 'Michigan', 'MI', 'Kalamazoo', '077', '', 42.1329, -85.6637, 0),
 ('US', '49088', 'Scotts', 'Michigan', 'MI', 'Kalamazoo', '077', '', 42.1819, -85.4685, 0),
@@ -19513,7 +19513,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '48746', 'Millington', 'Michigan', 'MI', 'Tuscola', '157', '', 43.2718, -83.5619, 0),
 ('US', '48757', 'Reese', 'Michigan', 'MI', 'Tuscola', '157', '', 43.4531, -83.7015, 0),
 ('US', '48758', 'Richville', 'Michigan', 'MI', 'Tuscola', '157', '', 43.4073, -83.6762, 0),
@@ -20073,7 +20073,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '55576', 'Maple Plain', 'Minnesota', 'MN', 'Hennepin', '053', '', 45.0159, -93.4719, 0),
 ('US', '55577', 'Maple Plain', 'Minnesota', 'MN', 'Hennepin', '053', '', 45.0159, -93.4719, 0),
 ('US', '55578', 'Maple Plain', 'Minnesota', 'MN', 'Hennepin', '053', '', 45.0159, -93.4719, 0),
@@ -20631,7 +20631,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '55945', 'Kellogg', 'Minnesota', 'MN', 'Wabasha', '157', '', 44.2739, -92.1095, 0),
 ('US', '55956', 'Mazeppa', 'Minnesota', 'MN', 'Wabasha', '157', '', 44.2646, -92.5207, 0),
 ('US', '55957', 'Millville', 'Minnesota', 'MN', 'Wabasha', '157', '', 44.2359, -92.2672, 0),
@@ -21197,7 +21197,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '65789', 'Pomona', 'Missouri', 'MO', 'Howell', '091', '', 36.8441, -91.9137, 0),
 ('US', '65790', 'Pottersville', 'Missouri', 'MO', 'Howell', '091', '', 36.7068, -92.044, 0),
 ('US', '65793', 'Willow Springs', 'Missouri', 'MO', 'Howell', '091', '', 36.9958, -91.9405, 0),
@@ -21756,7 +21756,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '63131', 'Saint Louis', 'Missouri', 'MO', 'St. Louis', '189', '', 38.6171, -90.4504, 0),
 ('US', '63132', 'Saint Louis', 'Missouri', 'MO', 'St. Louis', '189', '', 38.6746, -90.3747, 0),
 ('US', '63133', 'Saint Louis', 'Missouri', 'MO', 'St. Louis', '189', '', 38.6779, -90.3033, 0),
@@ -22308,7 +22308,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '39629', 'Bogue Chitto', 'Mississippi', 'MS', 'Lincoln', '085', '', 31.4563, -90.4732, 0),
 ('US', '39662', 'Ruth', 'Mississippi', 'MS', 'Lincoln', '085', '', 31.3795, -90.2867, 0),
 ('US', '39701', 'Columbus', 'Mississippi', 'MS', 'Lowndes', '087', '', 33.5163, -88.4613, 0),
@@ -22864,7 +22864,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '59255', 'Poplar', 'Montana', 'MT', 'Roosevelt', '085', '', 48.1307, -105.187, 0),
 ('US', '59003', 'Ashland', 'Montana', 'MT', 'Rosebud', '087', '', 45.5828, -106.2797, 0),
 ('US', '59004', 'Ashland', 'Montana', 'MT', 'Rosebud', '087', '', 46.018, -106.992, 0),
@@ -23395,7 +23395,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '27214', 'Browns Summit', 'North Carolina', 'NC', 'Guilford', '081', '', 36.2019, -79.7101, 0),
 ('US', '27233', 'Climax', 'North Carolina', 'NC', 'Guilford', '081', '', 35.9345, -79.7019, 0),
 ('US', '27235', 'Colfax', 'North Carolina', 'NC', 'Guilford', '081', '', 36.1003, -80.0103, 0),
@@ -23916,7 +23916,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '27030', 'Mount Airy', 'North Carolina', 'NC', 'Surry', '171', '', 36.5007, -80.6119, 0),
 ('US', '27031', 'White Plains', 'North Carolina', 'NC', 'Surry', '171', '', 36.3994, -80.7081, 0),
 ('US', '27041', 'Pilot Mountain', 'North Carolina', 'NC', 'Surry', '171', '', 36.4109, -80.4921, 0),
@@ -24459,7 +24459,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '58339', 'Hansboro', 'North Dakota', 'ND', 'Towner', '095', '', 48.9001, -99.4278, 0),
 ('US', '58363', 'Perth', 'North Dakota', 'ND', 'Towner', '095', '', 48.7546, -99.4384, 0),
 ('US', '58365', 'Rocklake', 'North Dakota', 'ND', 'Towner', '095', '', 48.8216, -99.1796, 0),
@@ -25031,7 +25031,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '68662', 'Shelby', 'Nebraska', 'NE', 'Polk', '143', '', 41.2435, -97.4295, 0),
 ('US', '68666', 'Stromsburg', 'Nebraska', 'NE', 'Polk', '143', '', 41.1118, -97.5742, 0),
 ('US', '69001', 'Mc Cook', 'Nebraska', 'NE', 'Red Willow', '145', '', 40.2049, -100.6279, 0),
@@ -25570,7 +25570,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '07653', 'Paramus', 'New Jersey', 'NJ', 'Bergen', '003', '', 40.9481, -74.0832, 0),
 ('US', '07656', 'Park Ridge', 'New Jersey', 'NJ', 'Bergen', '003', '', 41.0343, -74.0396, 0),
 ('US', '07657', 'Ridgefield', 'New Jersey', 'NJ', 'Bergen', '003', '', 40.8326, -74.0015, 0),
@@ -26114,7 +26114,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '07920', 'Basking Ridge', 'New Jersey', 'NJ', 'Somerset', '035', '', 40.6789, -74.5605, 0),
 ('US', '07921', 'Bedminster', 'New Jersey', 'NJ', 'Somerset', '035', '', 40.6571, -74.6432, 0),
 ('US', '07924', 'Bernardsville', 'New Jersey', 'NJ', 'Somerset', '035', '', 40.7225, -74.5778, 0),
@@ -26659,7 +26659,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '88436', 'Sedan', 'New Mexico', 'NM', 'Union', '059', '', 36.226, -103.1449, 0),
 ('US', '88437', 'Seneca', 'New Mexico', 'NM', 'Union', '059', '', 36.6279, -103.0894, 0),
 ('US', '87002', 'Belen', 'New Mexico', 'NM', 'Valencia', '061', '', 34.6511, -106.6952, 0),
@@ -27229,7 +27229,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '13809', 'Mount Upton', 'New York', 'NY', 'Chenango', '017', '', 42.4081, -75.4003, 0),
 ('US', '13814', 'North Norwich', 'New York', 'NY', 'Chenango', '017', '', 42.6036, -75.5282, 0),
 ('US', '13815', 'Norwich', 'New York', 'NY', 'Chenango', '017', '', 42.5414, -75.5274, 0),
@@ -27789,7 +27789,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '14546', 'Scottsville', 'New York', 'NY', 'Monroe', '055', '', 43.0246, -77.7743, 0),
 ('US', '14559', 'Spencerport', 'New York', 'NY', 'Monroe', '055', '', 43.1895, -77.8043, 0),
 ('US', '14580', 'Webster', 'New York', 'NY', 'Monroe', '055', '', 43.2196, -77.4616, 0),
@@ -28338,7 +28338,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '12555', 'Mid Hudson', 'New York', 'NY', 'Orange', '071', '', 41.3878, -74.3547, 0),
 ('US', '12566', 'Pine Bush', 'New York', 'NY', 'Orange', '071', '', 41.6178, -74.3263, 0),
 ('US', '12575', 'Rock Tavern', 'New York', 'NY', 'Orange', '071', '', 41.4575, -74.1659, 0),
@@ -28886,7 +28886,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '12754', 'Liberty', 'New York', 'NY', 'Sullivan', '105', '', 41.7962, -74.7484, 0),
 ('US', '12758', 'Livingston Manor', 'New York', 'NY', 'Sullivan', '105', '', 41.8778, -74.827, 0),
 ('US', '12759', 'Loch Sheldrake', 'New York', 'NY', 'Sullivan', '105', '', 41.7789, -74.6614, 0),
@@ -29457,7 +29457,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '45176', 'Williamsburg', 'Ohio', 'OH', 'Clermont', '025', '', 39.0753, -84.0432, 0),
 ('US', '45245', 'Cincinnati', 'Ohio', 'OH', 'Clermont', '025', '', 39.0688, -84.2802, 0),
 ('US', '45107', 'Blanchester', 'Ohio', 'OH', 'Clinton', '027', '', 39.3034, -83.974, 0),
@@ -30038,7 +30038,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '44054', 'Sheffield Lake', 'Ohio', 'OH', 'Lorain', '093', '', 41.4823, -82.0965, 0),
 ('US', '44055', 'Lorain', 'Ohio', 'OH', 'Lorain', '093', '', 41.4361, -82.135, 0),
 ('US', '44074', 'Oberlin', 'Ohio', 'OH', 'Lorain', '093', '', 41.2899, -82.2229, 0),
@@ -30630,7 +30630,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '44334', 'Fairlawn', 'Ohio', 'OH', 'Rice', '159', '', 40.3974, -83.328, 0),
 ('US', '45832', 'Convoy', 'Ohio', 'OH', 'Van Wert', '161', '', 40.927, -84.7238, 0),
 ('US', '45838', 'Elgin', 'Ohio', 'OH', 'Van Wert', '161', '', 40.7355, -84.485, 0),
@@ -31209,7 +31209,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '73034', 'Edmond', 'Oklahoma', 'OK', 'Oklahoma', '109', '', 35.6665, -97.4798, 0),
 ('US', '73045', 'Harrah', 'Oklahoma', 'OK', 'Oklahoma', '109', '', 35.4833, -97.1734, 0),
 ('US', '73049', 'Jones', 'Oklahoma', 'OK', 'Oklahoma', '109', '', 35.5753, -97.2891, 0),
@@ -31777,7 +31777,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '97403', 'Eugene', 'Oregon', 'OR', 'Lane', '039', '', 44.0385, -123.0614, 0),
 ('US', '97404', 'Eugene', 'Oregon', 'OR', 'Lane', '039', '', 44.1005, -123.1334, 0),
 ('US', '97405', 'Eugene', 'Oregon', 'OR', 'Lane', '039', '', 44.0185, -123.0998, 0),
@@ -32327,7 +32327,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '19539', 'Mertztown', 'Pennsylvania', 'PA', 'Berks', '011', '', 40.4992, -75.6872, 0),
 ('US', '19540', 'Mohnton', 'Pennsylvania', 'PA', 'Berks', '011', '', 40.2584, -75.9833, 0),
 ('US', '19541', 'Mohrsville', 'Pennsylvania', 'PA', 'Berks', '011', '', 40.4783, -76.0125, 0),
@@ -32860,7 +32860,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '17122', 'Harrisburg', 'Pennsylvania', 'PA', 'Dauphin', '043', '', 40.2498, -76.8712, 0),
 ('US', '17123', 'Harrisburg', 'Pennsylvania', 'PA', 'Dauphin', '043', '', 40.2675, -76.8837, 0),
 ('US', '17124', 'Harrisburg', 'Pennsylvania', 'PA', 'Dauphin', '043', '', 40.2675, -76.886, 0),
@@ -33393,7 +33393,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '18062', 'Macungie', 'Pennsylvania', 'PA', 'Lehigh', '077', '', 40.5285, -75.5666, 0),
 ('US', '18065', 'Neffs', 'Pennsylvania', 'PA', 'Lehigh', '077', '', 40.6967, -75.6116, 0),
 ('US', '18066', 'New Tripoli', 'Pennsylvania', 'PA', 'Lehigh', '077', '', 40.6545, -75.7417, 0),
@@ -33911,7 +33911,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '18242', 'Oneida', 'Pennsylvania', 'PA', 'Schuylkill', '107', '', 40.911, -76.1223, 0),
 ('US', '18245', 'Quakake', 'Pennsylvania', 'PA', 'Schuylkill', '107', '', 40.7226, -76.2296, 0),
 ('US', '18248', 'Sheppton', 'Pennsylvania', 'PA', 'Schuylkill', '107', '', 40.902, -76.1188, 0),
@@ -34441,7 +34441,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '29831', 'Jackson', 'South Carolina', 'SC', 'Aiken', '003', '', 33.3389, -81.7976, 0),
 ('US', '29834', 'Langley', 'South Carolina', 'SC', 'Aiken', '003', '', 33.4979, -81.8445, 0),
 ('US', '29839', 'Montmorenci', 'South Carolina', 'SC', 'Aiken', '003', '', 33.5073, -81.5992, 0),
@@ -34959,7 +34959,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '29733', 'Rock Hill', 'South Carolina', 'SC', 'York', '091', '', 34.9926, -81.1787, 0),
 ('US', '29734', 'Rock Hill', 'South Carolina', 'SC', 'York', '091', '', 34.9926, -81.1787, 0),
 ('US', '29742', 'Sharon', 'South Carolina', 'SC', 'York', '091', '', 34.9084, -81.3729, 0),
@@ -35505,7 +35505,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '37722', 'Cosby', 'Tennessee', 'TN', 'Cocke', '029', '', 35.8347, -83.2187, 0),
 ('US', '37727', 'Del Rio', 'Tennessee', 'TN', 'Cocke', '029', '', 35.883, -83.015, 0),
 ('US', '37753', 'Hartford', 'Tennessee', 'TN', 'Cocke', '029', '', 35.8256, -83.0996, 0),
@@ -36059,7 +36059,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '38113', 'Memphis', 'Tennessee', 'TN', 'Shelby', '157', '', 35.1274, -89.9845, 0),
 ('US', '38114', 'Memphis', 'Tennessee', 'TN', 'Shelby', '157', '', 35.0981, -89.9825, 0),
 ('US', '38115', 'Memphis', 'Tennessee', 'TN', 'Shelby', '157', '', 35.0579, -89.864, 0),
@@ -36636,7 +36636,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '76878', 'Santa Anna', 'Texas', 'TX', 'Coleman', '083', '', 31.7215, -99.3212, 0),
 ('US', '76882', 'Talpa', 'Texas', 'TX', 'Coleman', '083', '', 31.8034, -99.6747, 0),
 ('US', '76884', 'Valera', 'Texas', 'TX', 'Coleman', '083', '', 31.7731, -99.564, 0),
@@ -37232,7 +37232,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '78960', 'Warda', 'Texas', 'TX', 'Fayette', '149', '', 30.0702, -96.902, 0),
 ('US', '78961', 'Round Top', 'Texas', 'TX', 'Fayette', '149', '', 29.6655, -97.0397, 0),
 ('US', '78963', 'West Point', 'Texas', 'TX', 'Fayette', '149', '', 29.9524, -97.0361, 0),
@@ -37823,7 +37823,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '77707', 'Beaumont', 'Texas', 'TX', 'Jefferson', '245', '', 30.0686, -94.1755, 0),
 ('US', '77708', 'Beaumont', 'Texas', 'TX', 'Jefferson', '245', '', 30.14, -94.1604, 0),
 ('US', '77709', 'Voth', 'Texas', 'TX', 'Jefferson', '245', '', 30.1764, -94.1877, 0),
@@ -38408,7 +38408,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '77882', 'Wheelock', 'Texas', 'TX', 'Robertson', '395', '', 30.9121, -96.4211, 0),
 ('US', '75032', 'Rockwall', 'Texas', 'TX', 'Rockwall', '397', '', 32.886, -96.4095, 0),
 ('US', '75087', 'Rockwall', 'Texas', 'TX', 'Rockwall', '397', '', 32.9492, -96.4418, 0),
@@ -38999,7 +38999,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '84751', 'Milford', 'Utah', 'UT', 'Beaver', '001', '', 38.3311, -112.9934, 0),
 ('US', '84752', 'Minersville', 'Utah', 'UT', 'Beaver', '001', '', 38.2149, -112.9231, 0),
 ('US', '84301', 'Bear River City', 'Utah', 'UT', 'Box Elder', '003', '', 41.6093, -112.1241, 0),
@@ -39568,7 +39568,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '22546', 'Ruther Glen', 'Virginia', 'VA', 'Caroline', '033', '', 37.9451, -77.4714, 0),
 ('US', '22552', 'Sparta', 'Virginia', 'VA', 'Caroline', '033', '', 38.0094, -77.2251, 0),
 ('US', '22580', 'Woodford', 'Virginia', 'VA', 'Caroline', '033', '', 38.0847, -77.4399, 0),
@@ -40121,7 +40121,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '24082', 'Critz', 'Virginia', 'VA', 'Patrick', '141', '', 36.6211, -80.1298, 0),
 ('US', '24120', 'Meadows Of Dan', 'Virginia', 'VA', 'Patrick', '141', '', 36.725, -80.4022, 0),
 ('US', '24133', 'Patrick Springs', 'Virginia', 'VA', 'Patrick', '141', '', 36.6744, -80.1388, 0),
@@ -40652,7 +40652,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '22115', 'Marshall', 'Virginia', 'VA', '', '', '', 38.8288, -77.891, 0),
 ('US', '22117', 'Middleburg', 'Virginia', 'VA', '', '', '', 38.9966, -77.7327, 0),
 ('US', '22123', 'Nokesville', 'Virginia', 'VA', '', '', '', 38.6919, -77.5611, 0),
@@ -41211,7 +41211,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '98027', 'Issaquah', 'Washington', 'WA', 'King', '033', '', 47.4974, -122.0107, 0),
 ('US', '98028', 'Kenmore', 'Washington', 'WA', 'King', '033', '', 47.7542, -122.1246, 0),
 ('US', '98029', 'Issaquah', 'Washington', 'WA', 'King', '033', '', 47.5656, -122.0258, 0),
@@ -41763,7 +41763,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '98087', 'Lynnwood', 'Washington', 'WA', '', '', '', 47.862, -122.2532, 0),
 ('US', '98089', 'Kent', 'Washington', 'WA', '', '', '', 47.3871, -122.2023, 0),
 ('US', '98113', 'Seattle', 'Washington', 'WA', '', '', '', 47.6716, -122.3411, 0),
@@ -42323,7 +42323,7 @@ INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateNam
 
 -------- NEXT QUERY STARTS HERE --------
 
-INSERT INTO `{$prefix}zipcode` (`countryCode`, `zipcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
+INSERT INTO `{$prefix}postcode` (`countryCode`, `postcode`, `placeName`, `stateName`, `state`, `regionName`, `region`, `community`, `latitude`, `longitude`, `accuracy`) VALUES
 ('US', '54619', 'Cashton', 'Wisconsin', 'WI', 'Monroe', '081', '', 43.7456, -90.7612, 0),
 ('US', '54620', 'Cataract', 'Wisconsin', 'WI', 'Monroe', '081', '', 44.0876, -90.8423, 0),
 ('US', '54638', 'Kendall', 'Wisconsin', 'WI', 'Monroe', '081', '', 43.8161, -90.4107, 0),
