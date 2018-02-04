@@ -11,7 +11,7 @@
  * @param $_REQUEST
  * @param [$_REQUEST.latitude] The new latitude. If set, must also specify longitude.
  * @param [$_REQUEST.longitude] The new longitude. If set, must also specify latitude.
- * @param [$_REQUEST.zipcode] The new zip code. Can be set instead of latitude, longitude.
+ * @param [$_REQUEST.postcode] The new zip code. Can be set instead of latitude, longitude.
  * @param [$_REQUEST.meters] The distance around their location around that the user is interested in
  * @param [$_REQUEST.subscribe] Whether to subscribe to all the local interests at the new location.
  * @param [$_REQUEST.unsubscribe] Whether to unsubscribe from all the local interests at the old location.
@@ -41,7 +41,7 @@ function Places_geolocation_post()
 		'longitude',
 		'speed',
 		'meters',
-		'zipcode',
+		'postcode',
 		'timezone',
 		'placeName',
 		'state',
@@ -58,19 +58,19 @@ function Places_geolocation_post()
 			array('latitude', 'longitude')
 		);
 	}
-	if (!empty($attributes['zipcode']) and !isset($attributes['latitude'])) {
-		$z = new Places_Zipcode();
+	if (!empty($attributes['postcode']) and !isset($attributes['latitude'])) {
+		$z = new Places_Postcode();
 		$z->countryCode = 'US';
-		$z->zipcode = $attributes['zipcode'];
+		$z->postcode = $attributes['postcode'];
 		if ($z->retrieve()) {
 			$attributes['latitude'] = $z->latitude;
 			$attributes['longitude'] = $z->longitude;
 			$attributes['country'] = $z->countryCode;
 		} else {
 			throw new Q_Exception_MissingRow(array(
-				'table' => 'zipcode',
-				'criteria' => $attributes['zipcode']
-			), 'zipcode');
+				'table' => 'postcode',
+				'criteria' => $attributes['postcode']
+			), 'postcode');
 		}
 	}
 	$attributes['meters'] = floatval(Q::ifset($attributes, 'meters', 
@@ -79,18 +79,18 @@ function Places_geolocation_post()
 			Q_Config::expect('Places', 'nearby', 'defaultMeters')
 		)
 	));
-	if (empty($attributes['zipcode']) and isset($attributes['latitude'])) {
-		$zipcodes = Places_Zipcode::nearby(
+	if (empty($attributes['postcode']) and isset($attributes['latitude'])) {
+		$postcodes = Places_Postcode::nearby(
 			floatval($attributes['latitude']),
 			floatval($attributes['longitude']),
 			floatval($attributes['meters']),
 			1
 		);
-		if ($zipcode = $zipcodes ? reset($zipcodes) : null) {
-			$attributes['zipcode'] = $zipcode->zipcode;
-			$attributes['placeName'] = $zipcode->placeName;
-			$attributes['state'] = $zipcode->state;
-			$attributes['country'] = $zipcode->countryCode;
+		if ($postcode = $postcodes ? reset($postcodes) : null) {
+			$attributes['postcode'] = $postcode->postcode;
+			$attributes['placeName'] = $postcode->placeName;
+			$attributes['state'] = $postcode->state;
+			$attributes['country'] = $postcode->countryCode;
 		}
 	}
 	$stream->setAttribute($attributes);
