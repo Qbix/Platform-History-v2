@@ -10135,7 +10135,7 @@ Q.info = {
 	    }
 	    if (proceed) {
 	        document.body.appendChild(div);
-	        var calculatedPadding = parseInt(_div.computedStyle('padding-bottom'));
+	        var calculatedPadding = parseInt(div.computedStyle('padding-bottom'));
 	        document.body.removeChild(div);
 	        if (calculatedPadding > 0) {
 	            return true;
