@@ -14,18 +14,24 @@ var Bootstrap = {};
  * Add path to the list of paths checked by node.js while searching a module
  * @method setIncludePath
  * @param {string} path
+ * @param {boolean} whether a new path was added
  */
 Bootstrap.setIncludePath = function (path) {
-  var paths = (process.env.NODE_PATH || '').split(Q.PS);
-	if (!path)
+	var paths = (process.env.NODE_PATH || '').split(Q.PS);
+	if (!path) {
 		paths.unshift(Q.app.CLASSES_DIR, Q.CLASSES_DIR);
-	else
+	} else if (paths.indexOf(path) >= 0) {
+		return false;
+	} else {
 		paths.splice(1, 0, path);
+	}
 	var normalize = require('path').normalize;
-	for (var i in paths)
-	  paths[i] = normalize(paths[i]);
+	for (var i = 0, l = paths.length; i<l; ++i) {
+		paths[i] = normalize(paths[i]);
+	}
 	process.env.NODE_PATH = paths.join(Q.PS);
 	require('module')._initPaths();
+	return true;
 };
 
 /**
@@ -105,7 +111,7 @@ Bootstrap.configure = function (callback, reload) {
 			_merge_app_config();
 		}
 		function _startConfigLoop() {
-			var timeout = Q.Config.get(['Q', 'internal', 'configServer', 'inteval'], 60)*1000;
+			var timeout = Q.Config.get(['Q', 'internal', 'configServer', 'interval'], 60)*100;
 			if (timeout)
 				_reloadConfig = setTimeout(function () {
 					Bootstrap.configure(function (err) {
