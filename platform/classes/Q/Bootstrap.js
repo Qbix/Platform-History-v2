@@ -165,7 +165,9 @@ Bootstrap.configure = function (callback, reload) {
 					_loadConfigExtras(function () {
 						Q.Config.clear(); // clear the config
 						Q.Config.set(Config.getAll());
-						_startConfigLoop();
+						// TODO: THIS LEAKS MEMORY!  FIX IT
+						// THANKSFULLY WE DON'T NEED IT FOR NOW
+						// _startConfigLoop();
 						/**
 						 * Config tree hs been reloaded
 						 * @event Config/reload
