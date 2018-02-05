@@ -504,7 +504,7 @@ Ap.forEach = function _Array_prototype_forEach(callback) {
 	}
 };
 
-if (!Ap.unique) {
+if (!Ap.unique)
 Ap.unique = function _Array_prototype_unique() {
 	return this.filter(function (value, index, self) { 
 		return self.indexOf(value) === index;
