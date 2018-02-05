@@ -498,10 +498,17 @@ Ap.indexOf = function _Array_prototype_indexOf(searchElement /*, fromIndex */ ) 
 };
 
 if (!Ap.forEach)
-Ap.forEach = function(callback) {
+Ap.forEach = function _Array_prototype_forEach(callback) {
 	for (var i = 0; i < this.length; i++){
 		callback.apply(this, [this[i], i, this]);
 	}
+};
+
+if (!Ap.unique)
+Ap.unique = function _Array_prototype_unique() {
+	return this.filter(function (value, index, self) { 
+		return self.indexOf(value) === index;
+	});
 };
 
 /**
