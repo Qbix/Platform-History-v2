@@ -9,21 +9,23 @@
  * @class HTTP Places geolocation
  * @method post
  * @param $_REQUEST
- * @param [$_REQUEST.latitude] The new latitude. If set, must also specify longitude.
- * @param [$_REQUEST.longitude] The new longitude. If set, must also specify latitude.
- * @param [$_REQUEST.postcode] The new zip code. Can be set instead of latitude, longitude.
- * @param [$_REQUEST.meters] The distance around their location around that the user is interested in
- * @param [$_REQUEST.subscribe] Whether to subscribe to all the local interests at the new location.
- * @param [$_REQUEST.unsubscribe] Whether to unsubscribe from all the local interests at the old location.
- * @param [$_REQUEST.accuracy]
- * @param [$_REQUEST.altitude]
- * @param [$_REQUEST.altitudeAccuracy]
- * @param [$_REQUEST.heading]
- * @param [$_REQUEST.speed]
- * @param [$_REQUEST.timezone]
- * @param [$_REQUEST.placeName] optional
- * @param [$_REQUEST.state] optional
- * @param [$_REQUEST.country] optional
+ * @param {double} [$_REQUEST.latitude] The new latitude. If set, must also specify longitude.
+ * @param {double} [$_REQUEST.longitude] The new longitude. If set, must also specify latitude.
+ * @param {string} [$_REQUEST.postcode] The new zip code. Can be set instead of latitude, longitude.
+ * @param {double} [$_REQUEST.meters] The distance around their location around that the user is interested in
+ * @param {Number} [$_REQUEST.joinNearby=0] Pass 1 to join to the Places/nearby stream at the new location. Pass 2 to join and subscribe.
+ * @param {Number} [$_REQUEST.leaveNearby=0] Pass 1 to unsubscribe from the Places/nearby stream at the old location. Pass 2 to unsubscribe and leave.
+ * @param {Number} [$_REQUEST.joinInterests=0] Pass 1 to join to all the local interests at the new location. Pass 2 to join and subscribe.
+ * @param {Number} [$_REQUEST.leaveInterests=0] Whether to unsubscribe from all the local interests at the old location. Pass 2 to unsubscribe and leave.
+ * @param {double} [$_REQUEST.accuracy]
+ * @param {double} [$_REQUEST.altitude]
+ * @param {double} [$_REQUEST.altitudeAccuracy]
+ * @param {double} [$_REQUEST.heading]
+ * @param {double} [$_REQUEST.speed]
+ * @param {integer} [$_REQUEST.timezone]
+ * @param {string} [$_REQUEST.placeName] optional
+ * @param {string} [$_REQUEST.state] optional
+ * @param {string} [$_REQUEST.country] optional
  */
 function Places_geolocation_post()
 {
@@ -101,16 +103,17 @@ function Places_geolocation_post()
 		'instructions' => $stream->getAllAttributes()
 	), true);
 	
-	$shouldUnsubscribe = !empty($_REQUEST['unsubscribe']) && isset($oldMeters);
-	$shouldSubscribe = !empty($_REQUEST['subscribe']);
+	$leaveNearby = isset($oldMeters) ? Q::ifset($_REQUEST, 'leaveNearby', 0) : 0;
+	$joinNearby = Q::ifset($_REQUEST, 'joinNearby', 0);
+	$leaveInterests = isset($oldMeters) ? Q::ifset($_REQUEST, 'leaveInterests', 0) : 0;
+	$joinInterests = Q::ifset($_REQUEST, 'joinInterests', 0);
 	$noChange = false;
 
 	$latitude = $stream->getAttribute('latitude');
 	$longitude = $stream->getAttribute('longitude');
 	$meters = $stream->getAttribute('meters');
 
-	if ($shouldUnsubscribe and $shouldSubscribe
-	and abs($latitude - $oldLatitude) < 0.0001
+	if (abs($latitude - $oldLatitude) < 0.0001
 	and abs($longitude - $oldLongitude) < 0.0001
 	and abs($meters - $oldMeters) < 0.001) {
 		$noChange = true;
@@ -128,7 +131,7 @@ function Places_geolocation_post()
 		Q_Dispatcher::response(true);
 		session_write_close();
 		
-		if ($shouldUnsubscribe or $shouldSubscribe) {
+		if ($leaveInterests or $joinInterests) {
 			$myInterests = Streams_Category::getRelatedTo(
 				$user->id, 'Streams/user/interests', 'Streams/interests'
 			);
@@ -137,7 +140,7 @@ function Places_geolocation_post()
 			}
 		}
 
-		if ($shouldUnsubscribe and $oldLatitude and $oldLongitude and $oldMeters) {
+		if ($leaveInterests and $oldLatitude and $oldLongitude and $oldMeters) {
 			$results = array();
 			foreach ($myInterests as $weight => $info) {
 				$publisherId = $info[0];
@@ -154,15 +157,23 @@ function Places_geolocation_post()
 					)
 				);
 			}
+			$method = ($leaveInterests == 2) ? 'leave' : 'unsubscribe';
 			foreach ($results as $publisherId => $streams) {
-				Streams::unsubscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
+				$attributes['leftInterests'][$publisherId] = call_user_func(
+					array('Streams', $method),
+					$user->id, $publisherId, $streams, array('skipAccess' => true)
+				);
 			}
-			$attributes['unsubscribed'] = Places_Nearby::unsubscribe(
+		}
+		if ($leaveNearby and $oldLatitude and $oldLongitude and $oldMeters) {
+			$method = ($leaveNearby == 2) ? 'leave' : 'unsubscribe';
+			$attributes['leftNearby'] = call_user_func(
+				array('Places_Nearby', $method),
 				Users::communityId(), $oldLatitude, $oldLongitude, $oldMeters
 			);
 		}
 	
-		if ($shouldSubscribe) {
+		if ($joinInterests) {
 			$results = array();
 			foreach ($myInterests as $weight => $info) {
 				$publisherId = $info[0];
@@ -179,14 +190,22 @@ function Places_geolocation_post()
 					)
 				);
 			}
+			$method = ($joinInterests == 1) ? 'join' : 'subscribe';
 			foreach ($results as $publisherId => $streams) {
-				Streams::subscribe($user->id, $publisherId, $streams, array('skipAccess' => true));
+				$attributes['joinedInterests'][$publisherId] = call_user_func(
+					array('Streams', $method),
+					$user->id, $publisherId, $streams, array('skipAccess' => true)
+				);
 			}
-			$attributes['subscribed'] = Places_Nearby::subscribe(
+		}
+		if ($joinNearby) {
+			$method = ($joinNearby == 1) ? 'join' : 'subscribe';
+			$attributes['joinedNearby'] = call_user_func(
+				array('Places_Nearby', $method),
 				Users::communityId(),
 				$latitude, $longitude, $meters
 			);
-		}	
+		}
 	}
 	Q::event("Places/geolocation", $attributes, 'after');
 }

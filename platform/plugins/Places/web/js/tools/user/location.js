@@ -14,6 +14,11 @@ var Places = Q.Places;
  * @class Places user location
  * @constructor
  * @param {Object} [options] used to pass options
+ * @param {Object} [options.changes] what to do when location changes
+ * @param {Number} [options.joinNearby=1] Pass 1 to join to the Places/nearby stream at the new location. Pass 2 to join and subscribe.
+ * @param {Number} [options.leaveNearby=2] Pass 1 to unsubscribe from the Places/nearby stream at the old location. Pass 2 to unsubscribe and leave.
+ * @param {Number} [options.joinInterests=2] Pass 1 to join to all the local interests at the new location. Pass 2 to join and subscribe.
+ * @param {Number} [options.leaveInterests=2] Whether to unsubscribe from all the local interests at the old location. Pass 2 to unsubscribe and leave.
  * @param {Object} [options.meters] object of { meters: title } pairs, by default is generated from Places/nearby/meters config
  * @param {array} [options.defaultMeters] override the key in the meters array to select by default. Defaults to "Places/nearby/defaultMeters" config
  * @param {String} [options.units] second parameter to pass to Places.distanceLabel
@@ -193,8 +198,10 @@ Q.Tool.define("Places/user/location", function (options) {
 	
 	function _submit(postcode, fields, callback) {
 		fields = Q.extend({}, fields, {
-			subscribe: true,
-			unsubscribe: true,
+			joinNearby: state.changes.joinNearby,
+			joinInterests: state.changes.joinInterests,
+			leaveNearby: state.changes.leaveNearby,
+			leaveInterests: state.changes.leaveInterests,
 			meters: tool.$('.Places_user_location_meters').val(),
 			timezone: (new Date()).getTimezoneOffset() / 60,
 			defaultMeters: state.defaultMeters
@@ -303,6 +310,12 @@ Q.Tool.define("Places/user/location", function (options) {
 	map: {
 		delay: 300,
 		prompt: Q.url('Q/plugins/Places/img/map.png')
+	},
+	changes: {
+		joinNearby: 1,
+		joinInterests: 2,
+		leaveNearby: 1,
+		leaveInterests: 1
 	},
 	timeout: 10000,
 	units: 'km',
