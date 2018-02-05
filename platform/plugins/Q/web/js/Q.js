@@ -28,7 +28,8 @@ function Q () {
 Q.libraries = {
 	json: "{{Q}}/js/json3-3.2.4.min.js",
 	handlebars: '{{Q}}/js/handlebars-v4.0.10.min.js',
-	jQuery: '{{Q}}/js/jquery-3.2.1.min.js'
+	jQuery: '{{Q}}/js/jquery-3.2.1.min.js',
+	bluebird: '{{Q}}/js/bluebird.min.js'
 };
 
 /**
@@ -12379,6 +12380,18 @@ Q.stackTrace = function() {
 	}
 	return obj.stack;
 };
+
+/**
+ * This loads bluebird library to enable Promise for browsers which do not
+ * support Promise natively. For example: IE, Opera Mini.
+ */
+if (!(typeof Promise !== "undefined" && Promise.toString().indexOf("[native code]") !== -1)) {
+	Q.beforeInit.addOnce(function () {
+		Q.addScript(Q.url(Q.libraries.bluebird), function() {
+			Q.Promise = Promise;
+		});
+	});
+}
 
 return Q;
 

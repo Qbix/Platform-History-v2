@@ -328,7 +328,7 @@
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
 					_applePayStripe(o, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-							_standardStripe(o);
+							_standardStripe(o, callback);
 							return;
 						}
 
@@ -339,7 +339,7 @@
 				} else if (window.PaymentRequest) { // check for payment request
 					_paymentRequestStripe(o, function (err, res) {
 						if (err && (err.code === 21)) {
-							_standardStripe(o);
+							_standardStripe(o, callback);
 						}
 						if (callback) {
 							callback(err, res);
@@ -550,7 +550,7 @@
 		});
 	}
 
-	function _standardStripe(o) {
+	function _standardStripe(o, callback) {
 		Q.addScript(o.javascript, function () {
 			var params = Q.extend({
 				name: o.name,
