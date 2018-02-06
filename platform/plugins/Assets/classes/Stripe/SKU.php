@@ -2,10 +2,16 @@
 
 namespace Stripe;
 
+/**
+ * Class SKU
+ *
+ * @package Stripe
+ */
 class SKU extends ApiResource
 {
     /**
-     * @param string $id The ID of the SKU to retrieve.
+     * @param array|string $id The ID of the SKU to retrieve, or an options
+     *     array containing an `id` key.
      * @param array|string|null $opts
      *
      * @return SKU
@@ -24,6 +30,18 @@ class SKU extends ApiResource
     public static function create($params = null, $opts = null)
     {
         return self::_create($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the SKU to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return SKU The updated SKU.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**

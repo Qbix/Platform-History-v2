@@ -2,6 +2,18 @@
 
 namespace Stripe;
 
+/**
+ * Class FileUpload
+ *
+ * @property string $id
+ * @property string $object
+ * @property int $created
+ * @property string $purpose
+ * @property int $size
+ * @property string $type
+ *
+ * @package Stripe
+ */
 class FileUpload extends ApiResource
 {
     public static function baseUrl()
@@ -15,7 +27,8 @@ class FileUpload extends ApiResource
     }
 
     /**
-     * @param string $id The ID of the file upload to retrieve.
+     * @param array|string $id The ID of the file upload to retrieve, or an
+     *     options array containing an `id key.
      * @param array|string|null $opts
      *
      * @return FileUpload
