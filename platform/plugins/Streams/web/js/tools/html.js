@@ -217,6 +217,7 @@ Q.Tool.define("Streams/html", function (options) {
 				});
 				break;
 			}
+			Q.fixScrollingParent(tool.element);
 		}
 	}
 	

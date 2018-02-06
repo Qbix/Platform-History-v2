@@ -5974,6 +5974,30 @@ Q.layout = function _Q_layout(element) {
 };
 
 /**
+ * Call this to fix the iOS Safari bug where dynamically
+ * added content doesn't cause the scrolling parent element
+ * to start scrolling when -webkit-overflow-scrolling is enabled.
+ */
+Q.fixScrollingParent = function _Q_fixScrollingParent(element) {
+	if (Q.info.platform !== 'ios') {
+		return;
+	}
+	var scrolling = element.scrollingParent(true);
+	if (!scrolling) {
+		return;
+	}
+	var prevOverflow = scrolling.style.overflow;
+	scrolling.style.overflow = 'hidden';
+	setTimeout(function () {
+		if (prevOverflow) {
+			scrolling.style.overflow = prevOverflow;
+		} else {
+			delete scrolling.style.overflow;
+		}
+	});
+};
+
+/**
  * Returns whether Q.ready() has been called
  * @static
  * @method isReady
