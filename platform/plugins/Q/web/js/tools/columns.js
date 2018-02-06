@@ -811,12 +811,14 @@ function presentColumn(tool, $column, fullscreen) {
 	var $ct = $('.Q_columns_title', $column);
 	var $cs = $('.Q_column_slot', $column);
 	var $controls = $column.find('.Q_controls_slot');
+	var cth = $ct.is(":visible") ? $ct.height() : 0;
+	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
 	if (Q.info.isMobile) {
 		var heightToBottom = Q.Pointer.windowHeight()
 			- $cs.offset().top
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
-			- $controls.height();
+			- controlsh;
 		if (fullscreen) {
 			$cs.add($div).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
@@ -827,7 +829,7 @@ function presentColumn(tool, $column, fullscreen) {
 	} else {
 		$column.css('min-height', tool.oldMinHeight);
 		var show = $column.data(dataKey_lastShow);
-		$cs.css('height', show.height - $ct.height() - $controls.height() + 'px');
+		$cs.css('height', show.height - cth - controlsh + 'px');
 	}
 	Q.layout($cs[0]);
 	if (!fullscreen) {
