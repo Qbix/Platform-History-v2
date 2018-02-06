@@ -311,6 +311,9 @@
 					}
 					return;
 				}
+				if (!o.userId && Q.Users.loggedInUser && Q.Users.loggedInUser.id) {
+					o.userId = Q.Users.loggedInUser.id;
+				}
 				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
 					_redirectToBrowserTab(paymentOptions);
 					return;
@@ -331,7 +334,6 @@
 							_standardStripe(o, callback);
 							return;
 						}
-
 						if (callback) {
 							callback(err, res);
 						}
@@ -557,9 +559,16 @@
 				amount: o.amount
 			}, o);
 			params.amount *= 100;
+			var token_triggered = false;
 			StripeCheckout.configure(Q.extend({
 				key: Assets.Payments.stripe.publishableKey,
+				closed: function() {
+					if (!token_triggered) {
+						callback(new Error('Cancelled'));
+					}
+				},
 				token: function (token) {
+					token_triggered = true;
 					o.token = token;
 					Assets.Payments.pay('stripe', o, callback);
 				}
