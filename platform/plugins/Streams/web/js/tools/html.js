@@ -45,11 +45,13 @@ Q.Tool.define("Streams/html", function (options) {
 		.get(state.publisherId, state.streamName, function (err) {
 			if (Q.firstErrorMessage(err)) return false;
 			tool.element.innerHTML = this.fields[state.field] || state.placeholder;
+			Q.fixScrollingParent(tool.element);
 			_editor(this);
 			Q.loadNonce(_editor);
 		}, {fields: [state.field]});
 	} else if (state.placeholder) {
 		tool.element.innerHTML = state.placeholder;
+		Q.fixScrollingParent(tool.element);
 		Q.loadNonce(_editor);
 	}
 
