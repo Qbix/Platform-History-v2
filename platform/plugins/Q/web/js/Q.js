@@ -5992,9 +5992,9 @@ Q.fixScrollingParent = function _Q_fixScrollingParent(element) {
 		if (prevOverflow) {
 			scrolling.style.overflow = prevOverflow;
 		} else {
-			delete scrolling.style.overflow;
+			scrolling.style.overflow = null;
 		}
-	});
+	}, 0);
 };
 
 /**
