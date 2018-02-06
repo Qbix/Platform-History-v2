@@ -5592,6 +5592,24 @@ Q.ready = function _Q_ready() {
 		Q.jQueryPluginPlugin();
 		
 		Q.onDOM.handle.call(root, root.jQuery);
+		
+		// This is an HTML document loaded from our server
+		if (Q.info.uri && Q.info.uri.module) {
+			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
+			try {
+				Q.Page.beingLoaded = true;
+				Q.Page.onLoad('').handle();
+				Q.Page.onLoad(moduleSlashAction).handle();
+				if (Q.info.uriString !== moduleSlashAction) {
+					Q.Page.onLoad(Q.info.uriString).handle();
+				}
+			} catch (e) {
+				debugger; // pause here if debugging
+				Q.Page.beingLoaded = false;
+				throw e;
+			}
+		}
+		Q.Page.beingLoaded = false;	
 
 		Q.activate(document.body, undefined, function _onReadyActivate() {
 			// Hash changes -- will work only in browsers that support it natively
@@ -5638,24 +5656,6 @@ Q.ready = function _Q_ready() {
 				Q_hashChangeHandler();
 			}
 		});
-
-		// This is an HTML document loaded from our server
-		if (Q.info.uri && Q.info.uri.module) {
-			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
-			try {
-				Q.Page.beingLoaded = true;
-				Q.Page.onLoad('').handle();
-				Q.Page.onLoad(moduleSlashAction).handle();
-				if (Q.info.uriString !== moduleSlashAction) {
-					Q.Page.onLoad(Q.info.uriString).handle();
-				}
-			} catch (e) {
-				debugger; // pause here if debugging
-				Q.Page.beingLoaded = false;
-				throw e;
-			}
-		}
-		Q.Page.beingLoaded = false;	
 	});
 };
 
