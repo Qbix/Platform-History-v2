@@ -22,24 +22,24 @@ function Places_geolocation_response_data()
 	$meters = floatval(Q::ifset($_REQUEST, 'meters', 
 		isset($meters) ? $meters : Q_Config::expect('Places', 'nearby', 'defaultMeters')
 	));
-	$zipcodes = Places_Zipcode::nearby(
+	$postcodes = Places_Postcode::nearby(
 		$latitude,
 		$longitude,
 		$meters,
 		1
 	);
-	$zipcode = $zipcodes ? reset($zipcodes) : null;
+	$postcode = $postcodes ? reset($postcodes) : null;
 	$result = array(
 		'requested' => compact('latitude', 'longitude'),
-		'countryCode' => $zipcode->countryCode,
-		'zipcode' => $zipcode->zipcode,
-		'placeName' => $zipcode->placeName,
-		'stateName' => $zipcode->stateName,
-		'state' => $zipcode->state,
-		'regionName' => $zipcode->regionName,
-		'region' => $zipcode->region,
-		'latitude' => $zipcode->latitude,
-		'longitude' => $zipcode->longitude
+		'countryCode' => $postcode->countryCode,
+		'postcode' => $postcode->postcode,
+		'placeName' => $postcode->placeName,
+		'stateName' => $postcode->stateName,
+		'state' => $postcode->state,
+		'regionName' => $postcode->regionName,
+		'region' => $postcode->region,
+		'latitude' => $postcode->latitude,
+		'longitude' => $postcode->longitude
 	);
 	return $result;
 }

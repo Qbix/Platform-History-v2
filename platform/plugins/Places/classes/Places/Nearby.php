@@ -307,7 +307,7 @@ class Places_Nearby
 	{
 		list($latQuantized, $longQuantized)
 			= Places::quantize($latitude, $longitude, $meters);
-		$zipcodes = Places_Zipcode::nearby(
+		$postcodes = Places_Postcode::nearby(
 			$latitude, $longitude, $meters, 1
 		);
 		if (!isset($streamName)) {
@@ -318,23 +318,23 @@ class Places_Nearby
 		if ($stream = Streams::fetchOne(null, $publisherId, $streamName)) {
 			return $stream;
 		}
-		$zipcode = $zipcodes ? reset($zipcodes) : null;
+		$postcode = $postcodes ? reset($postcodes) : null;
 		$attributes = compact('latitude', 'longitude', 'meters');
-		if ($zipcode) {
-			foreach (array('zipcode', 'placeName', 'state') as $attr) {
-				$attributes[$attr] = $zipcode->$attr;
+		if ($postcode) {
+			foreach (array('postcode', 'placeName', 'state') as $attr) {
+				$attributes[$attr] = $postcode->$attr;
 			}
 		}
 		$lat = sprintf("%0.1f", $latitude);
 		$lng = sprintf("%0.1f", $longitude);
 		$content = Q_Text::get('Places/content', $options);
 		$postcodeLabel = Q::interpolate(
-			$content['nearby']['PostcodeLabel'], array($zipcode->placeName, $zipcode->zipcode)
+			$content['nearby']['PostcodeLabel'], array($postcode->placeName, $postcode->postcode)
 		);
 		$latLng = Q::interpolate($content['LatLng'], array($lat, $lng));
 		$title = Q::interpolate(
 			$content['nearby']['Title'],
-			array(Places::distanceLabel($meters), $zipcode ? $postcodeLabel : $latLng)
+			array(Places::distanceLabel($meters), $postcode ? $postcodeLabel : $latLng)
 		);
 		$stream = Streams::create($publisherId, $publisherId, 'Places/nearby', array(
 			'name' => $streamName,

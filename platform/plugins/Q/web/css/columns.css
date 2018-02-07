@@ -132,7 +132,6 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_columns_column .Q_controls_slot {
 	background: #fafafa;
-	margin-top: -49px;
 	height: 50px;
 	line-height: 50px;
 	position: relative;
@@ -148,10 +147,6 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_columns_column.Q_columns_hasControls .Q_controls_slot {
 	display: block;
-}
-
-.Q_columns_column.Q_columns_hasControls .Q_column_slot {
-	padding-bottom: 50px;
 }
 
 .Q_columns_loading .Q_controls_slot { display: none; }

@@ -764,12 +764,12 @@ Q.Tool.define("Q/columns", function(options) {
 		var $controlsSlot = $('.Q_controls_slot', column);
 		if (html) {
 			$(column).addClass('Q_columns_hasControls');
-			$controlsSlot.html(html).activate(function () {
+			$controlsSlot.html(html).show().activate(function () {
 				Q.handle(callback, tool);
 			});
 		} else {
 			$(column).removeClass('Q_columns_hasControls');
-			$controlsSlot.empty();
+			$controlsSlot.empty().hide();
 		}
 		presentColumn(tool);
 		return $controlsSlot[0];
@@ -808,12 +808,17 @@ function presentColumn(tool, $column, fullscreen) {
 			return;
 		}
 	}
+	var $ct = $('.Q_columns_title', $column);
 	var $cs = $('.Q_column_slot', $column);
+	var $controls = $column.find('.Q_controls_slot');
+	var cth = $ct.is(":visible") ? $ct.height() : 0;
+	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
 	if (Q.info.isMobile) {
 		var heightToBottom = Q.Pointer.windowHeight()
 			- $cs.offset().top
 			- parseInt($cs.css('padding-top'))
-			- parseInt($cs.css('padding-bottom'));
+			- parseInt($cs.css('padding-bottom'))
+			- controlsh;
 		if (fullscreen) {
 			$cs.add($div).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
@@ -823,12 +828,13 @@ function presentColumn(tool, $column, fullscreen) {
 		}
 	} else {
 		$column.css('min-height', tool.oldMinHeight);
+		var show = $column.data(dataKey_lastShow);
+		$cs.css('height', show.height - cth - controlsh + 'px');
 	}
 	Q.layout($cs[0]);
 	if (!fullscreen) {
 		return;
 	}
-	var $ct = $('.Q_columns_title', $column);
 	$ct.css('position', 'fixed');
 	$ct.css('top', $(tool.element).offset().top + 'px');
 	var paddingTop = $ct.outerHeight();
@@ -837,7 +843,8 @@ function presentColumn(tool, $column, fullscreen) {
 		heightToBottom = Q.Pointer.windowHeight()
 			- $cs.offset().top
 			- paddingTop
-			- parseInt($cs.css('padding-bottom'));
+			- parseInt($cs.css('padding-bottom'))
+			- $controls.height();
 		$cs.add($div).css('height', 'auto');
 		$cs.css('min-height', heightToBottom);
 	} else {
