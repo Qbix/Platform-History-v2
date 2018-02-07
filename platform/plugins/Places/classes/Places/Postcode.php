@@ -3,15 +3,15 @@
  * @module Places
  */
 /**
- * Class representing 'Zipcode' rows in the 'Places' database
+ * Class representing 'Postcode' rows in the 'Places' database
  * You can create an object of this class either to
  * access its non-static methods, or to actually
- * represent a zipcode row in the Places database.
+ * represent a postcode row in the Places database.
  *
- * @class Places_Zipcode
- * @extends Base_Places_Zipcode
+ * @class Places_Postcode
+ * @extends Base_Places_Postcode
  */
-class Places_Zipcode extends Base_Places_Zipcode
+class Places_Postcode extends Base_Places_Postcode
 {
 	/**
 	 * The setUp() method is called the first time
@@ -28,11 +28,11 @@ class Places_Zipcode extends Base_Places_Zipcode
 	 * with var_export and be re-imported successfully.
 	 * @method __set_state
 	 * @param {array} $array
-	 * @return {Places_Zipcode} Class instance
+	 * @return {Places_Postcode} Class instance
 	 */
 	static function __set_state(array $array)
 	{
-		$result = new Places_Zipcode();
+		$result = new Places_Postcode();
 		foreach($array as $k => $v)
 			$result->$k = $v;
 		return $result;
@@ -40,12 +40,12 @@ class Places_Zipcode extends Base_Places_Zipcode
 	
 	
 	/**
-	 * Call this function to find zipcodes near a certain location
+	 * Call this function to find postcodes near a certain location
 	 * @param {double} $latitude The latitude of the coordinates to search around
 	 * @param {double} $longitude The longitude of the coordinates to search around
-	 * @param {double} $meters The radius, in meters, around the central point of the zipcode
+	 * @param {double} $meters The radius, in meters, around the central point of the postcode
 	 * @param {double} $limit Limit on how many to return. Defaults to 100.
-	 * @return {array} Returns an array of Places_Zipcode objects, if any are found.
+	 * @return {array} Returns an array of Places_Postcode objects, if any are found.
 	 */
 	public static function nearby($latitude, $longitude, $meters, $limit = 100)
 	{
@@ -53,8 +53,8 @@ class Places_Zipcode extends Base_Places_Zipcode
 		$latGrid = $meters / (1609.34 * 69.1703234283616);
 		$longGrid = abs($latGrid / cos(deg2rad($latitude)));
 		
-		// Now, select zipcodes in a bounding box using one of the indexes
-		$q = Places_Zipcode::select()
+		// Now, select postcodes in a bounding box using one of the indexes
+		$q = Places_Postcode::select()
 		->where(array('latitude' => new Db_Range(
 			$latitude - $latGrid, false, true, $latitude + $latGrid
 		)));
@@ -85,7 +85,7 @@ class Places_Zipcode extends Base_Places_Zipcode
 	}
 	
 	/**
-	 * Use this to calculate the distance of a zipcode's central point to some
+	 * Use this to calculate the distance of a postcode's central point to some
 	 * pair of geographic coordinates.
 	 * @param {double} $latitude
 	 * @param {double} $longitude
@@ -96,12 +96,12 @@ class Places_Zipcode extends Base_Places_Zipcode
 	}
 	
 	/**
-	 * Use this to calculate the distance of a zipcode's central point to some lat/long pair
+	 * Use this to calculate the distance of a postcode's central point to some lat/long pair
 	 * @param {double} $lat
 	 * @param {double} $long
 	 */
-	function distanceToZipcode($zipcode)
+	function distanceToPostcode($postcode)
 	{
-		return Places::distance($this->latitude, $this->longitude, $zipcode->latitude, $zipcode->longitude);
+		return Places::distance($this->latitude, $this->longitude, $postcode->latitude, $postcode->longitude);
 	}
 };

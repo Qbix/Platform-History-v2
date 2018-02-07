@@ -463,49 +463,6 @@ Fp.bind = function _Function_prototype_bind(obj /*, arg1, arg2, ... */) {
 };
 
 /**
- * @class Array
- * @description Q extended methods for Arrays
- */
-var Ap = Array.prototype;
-if (!Ap.indexOf)
-Ap.indexOf = function _Array_prototype_indexOf(searchElement /*, fromIndex */ ) {
-	if (this === 0 || this === null) {
-		throw new TypeError();
-	}
-	var t = Object(this);
-	var len = t.length >>> 0;
-	if (len === 0) {
-		return -1;
-	}
-	var n = 0;
-	if (arguments.length > 0) {
-		n = Number(arguments[1]);
-		if (n !== n) { // shortcut for verifying if it's NaN
-			n = 0;
-		} else if (n !== 0 && n !== Infinity && n !== -Infinity) {
-			n = (n > 0 || -1) * Math.floor(Math.abs(n));
-		}
-	}
-	if (n >= len) {
-		return -1;
-	}
-	var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-	for (; k < len; k++) {
-		if (k in t && t[k] === searchElement) {
-			return k;
-		}
-	}
-	return -1;
-};
-
-if (!Ap.forEach)
-Ap.forEach = function(callback) {
-	for (var i = 0; i < this.length; i++){
-		callback.apply(this, [this[i], i, this]);
-	}
-};
-
-/**
  * @class Date
  * @description Q methods for Date
  */
@@ -5586,6 +5543,24 @@ Q.ready = function _Q_ready() {
 		Q.jQueryPluginPlugin();
 		
 		Q.onDOM.handle.call(root, root.jQuery);
+		
+		// This is an HTML document loaded from our server
+		if (Q.info.uri && Q.info.uri.module) {
+			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
+			try {
+				Q.Page.beingLoaded = true;
+				Q.Page.onLoad('').handle();
+				Q.Page.onLoad(moduleSlashAction).handle();
+				if (Q.info.uriString !== moduleSlashAction) {
+					Q.Page.onLoad(Q.info.uriString).handle();
+				}
+			} catch (e) {
+				debugger; // pause here if debugging
+				Q.Page.beingLoaded = false;
+				throw e;
+			}
+		}
+		Q.Page.beingLoaded = false;	
 
 		Q.activate(document.body, undefined, function _onReadyActivate() {
 			// Hash changes -- will work only in browsers that support it natively
@@ -5632,24 +5607,6 @@ Q.ready = function _Q_ready() {
 				Q_hashChangeHandler();
 			}
 		});
-
-		// This is an HTML document loaded from our server
-		if (Q.info.uri && Q.info.uri.module) {
-			var moduleSlashAction = Q.info.uri.module+"/"+Q.info.uri.action;
-			try {
-				Q.Page.beingLoaded = true;
-				Q.Page.onLoad('').handle();
-				Q.Page.onLoad(moduleSlashAction).handle();
-				if (Q.info.uriString !== moduleSlashAction) {
-					Q.Page.onLoad(Q.info.uriString).handle();
-				}
-			} catch (e) {
-				debugger; // pause here if debugging
-				Q.Page.beingLoaded = false;
-				throw e;
-			}
-		}
-		Q.Page.beingLoaded = false;	
 	});
 };
 
@@ -6015,6 +5972,30 @@ Q.layout = function _Q_layout(element) {
 			event.handle.call(event, e, element);
 		}
 	});
+};
+
+/**
+ * Call this to fix the iOS Safari bug where dynamically
+ * added content doesn't cause the scrolling parent element
+ * to start scrolling when -webkit-overflow-scrolling is enabled.
+ */
+Q.fixScrollingParent = function _Q_fixScrollingParent(element) {
+	if (Q.info.platform !== 'ios') {
+		return;
+	}
+	var scrolling = element.scrollingParent(true);
+	if (!scrolling) {
+		return;
+	}
+	var prevOverflow = scrolling.style.overflow;
+	scrolling.style.overflow = 'hidden';
+	setTimeout(function () {
+		if (prevOverflow) {
+			scrolling.style.overflow = prevOverflow;
+		} else {
+			scrolling.style.overflow = null;
+		}
+	}, 0);
 };
 
 /**
@@ -10116,7 +10097,27 @@ Q.info = {
 			&& (maxHeight == undefined || maxHeight >= Q.Pointer.windowHeight())	
 			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
 			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
-	}
+	},
+	hasNotch: (function () {
+	    var proceed = false;
+	    var div = document.createElement('div');
+	    if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
+	        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
+	        proceed = true;
+	    } else if (CSS.supports('padding-bottom: constant(safe-area-inset-bottom)')) {
+	        div.style.paddingBottom = 'constant(safe-area-inset-bottom)';
+	        proceed = true;
+	    }
+	    if (proceed) {
+	        document.body.appendChild(div);
+	        var calculatedPadding = parseInt(div.computedStyle('padding-bottom'));
+	        document.body.removeChild(div);
+	        if (calculatedPadding > 0) {
+	            return true;
+	        }
+	    }
+		return false;
+	})()
 };
 Q.info.isAndroidStock = !!(Q.info.platform === 'android'
 	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
@@ -10131,6 +10132,9 @@ de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
 de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
 if (Q.info.isAndroidStock) {
 	de.addClass('Q_androidStock');
+}
+if (Q.info.hasNotch) {
+	de.addClass('Q_notch');
 }
 
 Q.Page.onLoad('').set(function () {
