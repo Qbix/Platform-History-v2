@@ -57,6 +57,9 @@ module.exports = Users_Device.Firefox = Users_Device_Firefox;
  */
 Users_Device_Firefox.prototype.handlePushNotification = function (notification, callback) {
 	var appConfig = Q.Config.expect(['Users', 'apps', 'firefox', Q.app.name]);
+	if (!notification.alert) {
+		return Q.handle(callback, this, [new Error('Notification alert required')]);
+	}
 	if (!notification.alert.title || !notification.alert.body) {
 		return Q.handle(callback, this, [new Error('Notification title and body are required')]);
 	}
