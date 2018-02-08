@@ -831,7 +831,6 @@ function presentColumn(tool, $column, fullscreen) {
 		var show = $column.data(dataKey_lastShow);
 		if (show) {
 			$cs.css('height', show.height - cth - controlsh + 'px');
-
 		}
 	}
 	Q.layout($cs[0]);
