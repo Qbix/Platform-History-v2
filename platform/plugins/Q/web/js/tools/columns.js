@@ -829,7 +829,6 @@ function presentColumn(tool, $column, fullscreen) {
 	} else {
 		$column.css('min-height', tool.oldMinHeight);
 		var show = $column.data(dataKey_lastShow);
-
 		if (show && show.height) {
 			$cs.css('height', show.height - cth - controlsh + 'px');
 		}

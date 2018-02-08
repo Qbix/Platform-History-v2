@@ -14,6 +14,8 @@
 		"handlebars": "4.0.x",
 		"moment-timezone": "0.5.x",
 		"mysql": "2.9.x",
+		"nodemailer": "^4.4.2",
+		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
 		"socket.io": "1.x.x",
 		"yuidocjs": "^0.10.2"
