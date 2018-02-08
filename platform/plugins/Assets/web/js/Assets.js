@@ -340,7 +340,7 @@
 					});
 				} else if (window.PaymentRequest) { // check for payment request
 					_paymentRequestStripe(o, function (err, res) {
-						if (err) {
+						if (err && (err.code === 9)) {
 							_standardStripe(o, callback);
 							return;
 						}
