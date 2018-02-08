@@ -453,8 +453,8 @@ Q.Tool.define("Q/columns", function(options) {
 			} else {
 				var cs = $div[0].computedStyle();
 				$div.show();
-				show.width = parseFloat(cs.width);
-				show.height = parseFloat(cs.height);
+				show.width = parseFloat(cs.width) || 0;
+				show.height = parseFloat(cs.height) || 0;
 				for (var k in hide) {
 					var str = hide[k].toString();
 					if (str.substr(str.length-1) === '%') {
