@@ -340,13 +340,13 @@
 					});
 				} else if (window.PaymentRequest) { // check for payment request
 					_paymentRequestStripe(o, function (err, res) {
-						if (err && (err.code === 21)) {
+						if (err) {
 							_standardStripe(o, callback);
+							return;
 						}
 						if (callback) {
 							callback(err, res);
 						}
-						//window.close();
 					});
 				} else {
 					_standardStripe(o, callback);

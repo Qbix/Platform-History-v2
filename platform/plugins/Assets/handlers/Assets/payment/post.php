@@ -15,7 +15,6 @@ function Assets_payment_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('payments', 'amount'), $req, true);
-	
 	// to be safe, we only start subscriptions from existing plans
 	$publisherId = Q::ifset($req, 'publisherId', Users::communityId());
 	$streamName = Q::ifset($req, 'streamName', null);
@@ -28,8 +27,12 @@ function Assets_payment_post($params = array())
 	Q_Valid::requireFields(array('token'), $req, true);
 	$token = $req['token'];
 	$currency = Q::ifset($req, 'currency', 'USD');
-	$charge = Assets::charge($req['payments'], $req['amount'], $currency, compact(
-		'token', 'stream'
-	));
+	$metadata = array(
+		'streamName' => $streamName,
+		'publisherId' => $publisherId,
+		'userId' => Users::loggedInUser()->id,
+		'description' => Q::ifset($req, 'description', null)
+	);
+	$charge = Assets::charge($req['payments'], $req['amount'], $currency, compact('token', 'stream',  'metadata'));
 	Q_Response::setSlot('charge', $charge);
 }
