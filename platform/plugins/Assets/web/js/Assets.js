@@ -311,7 +311,6 @@
 					}
 					return;
 				}
-				debugger;
 				if (!o.userId) {
 					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
 				}
