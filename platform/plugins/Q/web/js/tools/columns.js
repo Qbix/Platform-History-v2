@@ -453,8 +453,8 @@ Q.Tool.define("Q/columns", function(options) {
 			} else {
 				var cs = $div[0].computedStyle();
 				$div.show();
-				show.width = parseFloat(cs.width);
-				show.height = parseFloat(cs.height);
+				show.width = parseFloat(cs.width) || 0;
+				show.height = parseFloat(cs.height) || 0;
 				for (var k in hide) {
 					var str = hide[k].toString();
 					if (str.substr(str.length-1) === '%') {
@@ -829,7 +829,9 @@ function presentColumn(tool, $column, fullscreen) {
 	} else {
 		$column.css('min-height', tool.oldMinHeight);
 		var show = $column.data(dataKey_lastShow);
-		$cs.css('height', show.height - cth - controlsh + 'px');
+		if (show && show.height) {
+			$cs.css('height', show.height - cth - controlsh + 'px');
+		}
 	}
 	Q.layout($cs[0]);
 	if (!fullscreen) {

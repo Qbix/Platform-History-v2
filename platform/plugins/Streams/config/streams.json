@@ -162,6 +162,16 @@
 		"title": "Age",
 		"icon": ""
 	},
+	"Streams/user/affiliation": {
+		"type": "Streams/text/affiliation",
+		"title": "Affiliation",
+		"icon": ""
+	},
+	"Streams/user/dating": {
+		"type": "Streams/enum/dating",
+		"title": "Dating",
+		"icon": ""
+	},
 	"Streams/user/political": {
 		"type": "Streams/text/small",
 		"title": "Political Views",
