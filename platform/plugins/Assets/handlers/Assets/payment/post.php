@@ -27,12 +27,13 @@ function Assets_payment_post($params = array())
 	Q_Valid::requireFields(array('token'), $req, true);
 	$token = $req['token'];
 	$currency = Q::ifset($req, 'currency', 'USD');
+	$user = Users::fetch(Q::ifset($req, 'userId', null));
 	$metadata = array(
 		'streamName' => $streamName,
 		'publisherId' => $publisherId,
-		'userId' => Users::loggedInUser()->id,
+		'userId' => $user ? $user->id : null,
 		'description' => Q::ifset($req, 'description', null)
 	);
-	$charge = Assets::charge($req['payments'], $req['amount'], $currency, compact('token', 'stream',  'metadata'));
+	$charge = Assets::charge($req['payments'], $req['amount'], $currency, compact('token', 'stream',  'metadata', 'user'));
 	Q_Response::setSlot('charge', $charge);
 }

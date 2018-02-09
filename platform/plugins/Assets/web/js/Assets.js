@@ -311,8 +311,9 @@
 					}
 					return;
 				}
-				if (!o.userId && Q.Users.loggedInUser && Q.Users.loggedInUser.id) {
-					o.userId = Q.Users.loggedInUser.id;
+				debugger;
+				if (!o.userId) {
+					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
 				}
 				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
 					_redirectToBrowserTab(paymentOptions);
@@ -364,6 +365,7 @@
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
 			 *  @param {String} [options.token] the token obtained from the hosted forms
+			 *  @param {String} [options.userId] logged in userId, needed for cordova ios / android payments
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			pay: function (payments, options, callback) {
@@ -373,7 +375,9 @@
 					streamName: options.streamName,
 					token: options.token,
 					amount: options.amount,
-					description: options.description
+					description: options.description,
+					userId: options.userId
+
 				};
 				Q.req('Assets/payment', 'charge', function (err, response) {
 					var msg;
