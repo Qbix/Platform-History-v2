@@ -590,7 +590,9 @@
 	}
 
 	function _redirectToBrowserTab(paymentOptions) {
-		var url = window.location.href;
+		var protocol = location.protocol;
+		var slashes = protocol.concat("//");
+		var url = slashes.concat(window.location.hostname);
 		if(url.indexOf('?') !== -1) {
 			url = url + "&browsertab=yes";
 		}else{
