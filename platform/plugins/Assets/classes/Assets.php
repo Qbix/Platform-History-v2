@@ -102,7 +102,7 @@ abstract class Assets extends Base_Assets
 	static function charge($payments, $amount, $currency = 'USD', $options = array())
 	{
 		$currency = strtoupper($currency);
-		$user = Q::ifset($options, 'user', Users::loggedInUser(true));
+		$user = Q::ifset($options, 'user', Users::loggedInUser(false));
 		$className = 'Assets_Payments_' . ucfirst($payments);
 		$adapter = new $className($options);
 		$communityId = Users::communityId();
