@@ -447,18 +447,18 @@ Q.Tool.define("Q/columns", function(options) {
 			if (Q.info.isMobile) {
 				var $sc = $(state.container);
 				var h = Q.Pointer.windowHeight() - $sc.offset().top;
-				show.width = $(tool.element).width();
+				show.width = tool.element.clientWidth;
 				show.height = h;
 				$sc.height(h);
 			} else {
 				var cs = $div[0].computedStyle();
 				$div.show();
-				show.width = parseFloat(cs.width) || 0;
-				show.height = parseFloat(cs.height) || 0;
+				show.width = cs.width;
+				show.height = tool.element.clientHeight;
 				for (var k in hide) {
 					var str = hide[k].toString();
 					if (str.substr(str.length-1) === '%') {
-						hide[k] = show.height * parseInt(hide[k]) / 100;
+						hide[k] = parseFloat(show.height) * parseInt(hide[k]) / 100;
 					}
 				}
 				$div.hide()
