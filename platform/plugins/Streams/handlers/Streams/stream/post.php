@@ -162,8 +162,6 @@ function Streams_stream_post($params = array())
 		// autosubscribe to streams you yourself create, using templates
 		$stream->subscribe();
 	}
-	
-	$stream->addPreloaded(); // let the clients cache this stream automatically
 
 	Streams::$cache['stream'] = $stream;
 	
