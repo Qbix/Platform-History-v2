@@ -1855,6 +1855,27 @@ class Streams_Stream extends Base_Streams_Stream
 		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
 		return Q_Uri::url($urlString . $qs);
 	}
+	
+	/**
+	 * Returns the canonical uri of the stream, if any
+	 * @param {integer} [$messageOrdinal] pass this to link to the message in the stream, e.g. to highlight it
+	 * @return {string|null|false}
+	 */
+	function uri($messageOrdinal = null)
+	{
+		$uri = self::getConfigField($this->type, 'uri', null);
+		if (!$uri) {
+			return null;
+		}
+		$uriString = Q_Handlebars::renderSource($uri, array(
+			'publisherId' => $this->publisherId,
+			'streamName' => explode('/', $this->name),
+			'name' => $this->name
+		));
+		$parts = explode(' ', $uriString);
+		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
+		return array_shift($parts) . $qs . ' ' . ($parts ? implode(' ', $parts) : '');
+	}
 
 	/**
 	 * @method numericReadLevel
