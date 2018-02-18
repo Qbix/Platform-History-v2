@@ -611,10 +611,10 @@ Sp.inheritAccess = function (callback) {
 		callback.call(subj, null, false);
 	}
 
-	if (!Q.isArrayLike(names)) {
+	if (Q.isArrayLike(names)) {
 		var temp = names;
 		names = [];
-		for (var k in names) {
+		for (var k in temp) {
 			names.push(JSON.stringify(temp[k]));
 		}
 	}
@@ -663,6 +663,7 @@ Sp.inheritAccess = function (callback) {
 			name = name[1];
 		} else {
 			publisherId = subj.fields.publisherId;
+			name = subj.fields.name;
 		}
 		Streams.fetchOne(asUserId, publisherId, name, 
 		function (err, stream) {
