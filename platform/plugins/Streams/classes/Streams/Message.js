@@ -271,12 +271,19 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		);
 		var uf = this.fields;
 		var p1 = new Q.Pipe();
+		var url = Q.url(stream.url(message.fields.ordinal), null, {'cacheBust': true});
+
+		// if message contain valid url - use one
+		if (message.getInstruction("toUrl").isUrl()) {
+			url = Q.url(message.getInstruction("toUrl"), null, {'cacheBust': true});
+		}
+
 		var o = {
 			fields: fields,
 			subject: subject,
 			deliver: deliver,
 			stream: stream,
-			url: stream.url(message.fields.ordinal),
+			url: url,
 			icon: stream.iconUrl(80),
 			user: this,
 			avatar: avatar,
