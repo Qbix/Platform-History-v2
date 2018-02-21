@@ -635,13 +635,6 @@ Sp.inheritAccess = function (callback) {
 	var adminLevel_source = this.get('adminLevel_source', public_source);
 	
 	var p = new Q.Pipe(names.map(JSON.stringify), function (params) {
-		var i, errors = params[Object.keys(params)[0]][0] || [];
-		for (i = 0; i < errors.length; i++) {
-			if (errors[i]) {
-				callback.call(subj, errors[i]); // only one error reported
-				return;
-			}
-		}
 		subj.set('readLevel', readLevel);
 		subj.set('writeLevel', writeLevel);
 		subj.set('adminLevel', adminLevel);
