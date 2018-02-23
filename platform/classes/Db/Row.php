@@ -1208,7 +1208,8 @@ class Db_Row implements Iterator
 			foreach ($where_fields as $k => $v) {
 				$exploded = explode(' ', $k, 2);
 				$pieces = end($exploded);
-				$a = reset(explode('.', $pieces, 2));
+				$exploded2 =
+				$a = reset();
 				if (isset($skipped_aliases[$a])) {
 					continue 2; // do not have conditions for tables that were not joined
 				}

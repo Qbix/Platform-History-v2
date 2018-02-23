@@ -1638,19 +1638,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				break;
 			}
 		}
-		if ($pos === false) {
-			return "`$part`";
+		$parts = explode('.', $part);
+		$quoted = array();
+		foreach ($parts as $p) {
+			$quoted[] = "`$p`";
 		}
-		$pos2 = strrpos($part, '.');
-		if ($pos2 === false) {
-			return "`$part`".substr($column, $pos);
-		}
-		if ($pos === false or $pos2 === false) {
-			return "`$part`";
-		}
-		return substr($part, 0, $pos2)
-			.".`".substr($part, $pos2+1)."`"
-			.substr($column, $pos);
+		return implode('.', $quoted);
 	}
 
 	/**
