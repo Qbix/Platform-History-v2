@@ -382,11 +382,12 @@ class Db_Mysql implements Db_Interface
 			$parts = array();
 			foreach ($onDuplicateKeyUpdate as $k => $v) {
 				if ($v instanceof Db_Expression) {
-					$parts[] .= "`$k` = $v";
+					$part = "= $v";
 				} else {
-					$parts[] .= "`$k` = :__update_$k";
+					$part = " = :__update_$k";
 					$update_fields["__update_$k"] = $v;
 				}
+				$parts[] .= Db_Query_Mysql::column($k) . $part;
 			}
 			$odku_clause .= implode(",\n\t", $parts);
 		}
@@ -2432,7 +2433,7 @@ $field_hints
 		if (!isset(\$fields)) {
 			\$fieldNames = array();
 			foreach (self::fieldNames() as \$fn) {
-				\$fieldNames[] = "`\$fn`";
+				\$fieldNames[] = \$fn;
 			}
 			\$fields = implode(',', \$fieldNames);
 		}
@@ -2649,7 +2650,7 @@ $dc
 Base.SELECT = function(fields, alias) {
 	if (!fields) {
 		fields = Base.fieldNames().map(function (fn) {
-			return '`' + fn + '`';
+			return fn;
 		}).join(',');
 	}
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
