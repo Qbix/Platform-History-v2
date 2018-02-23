@@ -20,6 +20,16 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	function setUp()
 	{
+		$this->hasMany('categories', array(
+			'rt' => 'Streams_RelatedTo',
+			'c' => 'Streams_Stream'
+		), array(
+			'{$this}.publisherId' => 'rt.fromPublisherId',
+			'{$this}.name' => 'rt.fromStreamName'
+		), array(
+			'rt.toPublisherId' => 'c.publisherId',
+			'rt.toStreamName' => 'c.name'
+		));
 		parent::setUp();
 	}
 
