@@ -1316,7 +1316,28 @@ Sp.url = function (messageOrdinal, baseUrl)
 	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
 	return Q.url(urlString + sep + qs);
-}
+};
+
+/**
+ * Returns the canonical url of the stream, if any
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @return {String|null|false}
+ */
+Sp.uri = function (messageOrdinal)
+{
+	var uri = Streams_Stream.getConfigField(this.fields.type, 'uri', null);
+	if (!uri) {
+		return null;
+	}
+	var uriString = Q.Handlebars.renderSource(uri, {
+		publisherId: this.fields.publisherId,
+		streamName: this.fields.name.split('/'),
+		name: this.fields.name
+	});
+	var parts = uriString.split(' ');
+	var qs = messageOrdinal ? '?'+messageOrdinal : "";
+	return parts.shift() + qs + ' ' + (parts.length ? parts.join(' ') : '');
+};
 
 /**
  * Find out whether a certain field is restricted from being
