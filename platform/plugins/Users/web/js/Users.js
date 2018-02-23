@@ -217,8 +217,7 @@
 	/**
 	 * Authenticates this session with a given platform
 	 * @method authenticate
-	 * @param {String} platform For now, only "facebook" is supported
-	 * @required
+	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
 	 *  It is passed the user information if the user changed.
 	 * @param {Function} onCancel Called if the authentication was canceled.
@@ -231,13 +230,30 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.authenticate = function (platform, onSuccess, onCancel, options) {
-		if (platform !== 'facebook') {
-			throw new Q.Error("Users.authenticate: The only supported platform for now is facebook");
+		var handler = Users.authenticate.handlers[platform];
+		if (!handler) {
+			var handlers = Object.keys(Users.authenticate.handlers);
+			throw new Q.Error(
+				"Users.authenticate: platform must be one of " + handlers.join(', ')
+			);
 		}
+		Users.authenticate.occurring = true;
+		return handler.call(this, platform, onSuccess, onCancel, options);
+	};
+	
+	Users.authenticate.handlers = {};
+	
+	Users.authenticate.handlers.ios = 
+	Users.authenticate.handlers.android = function (platform, onSuccess, onCancel, options) {
+		_doAuthenticate({
+			udid: Q.info.udid, // TODO: sign this with private key
+			platform: platform
+		}, platform, onSuccess, onCancel, options);
+	};
+	
+	Users.authenticate.handlers.facebook = function (platform, onSuccess, onCancel, options) {
 		options = options || {};
 		var fields = {};
-
-		Users.authenticate.occurring = true;
 
 		var appId = options.appId || Q.info.app;
 		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
@@ -252,34 +268,37 @@
 			Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
 					var fb_uid = parseInt(response.authResponse.userID);
-					var ignoreUid = parseInt(Q.cookie('Users_ignoreFacebookUid'));
+					var ignoreUid = parseInt(Q.cookie('Users_ignorePlatformUid'));
 					// the following line prevents multiple prompts for the same user,
 					// which can be a problem especially if the authenticate() is called
 					// multiple times on the same page, or because the page is reloaded
-					Q.cookie('Users_ignoreFacebookUid', fb_uid);
+					Q.cookie('Users_ignorePlatformUid', fb_uid);
 
 					if (Users.loggedInUser && Users.loggedInUser.uids.facebook == fb_uid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
-						_doSuccess(null);
+						_doSuccess(null, platform, onSuccess, onCancel, options);
 						return;
+					}
+					function __doCancel(x) {
+						_doCancel.call(this, x, platform, onSuccess, onCancel, options);
 					}
 					if (options.prompt === undefined || options.prompt === null) {
 						// show prompt only if we aren't ignoring this facebook uid
 						if (fb_uid === ignoreUid) {
-							_doCancel();
+							_doCancel(null, platform, onSuccess, onCancel, options);
 						} else {
-							Users.prompt('facebook', fb_uid, _doAuthenticate, _doCancel);
+							Users.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
 						}
 					} else if (options.prompt === false) {
 						// authenticate without prompting
-						_doAuthenticate();
+						__doAuthenticate();
 					} else if (options.prompt === true) {
 						// show the usual prompt no matter what
-						Users.prompt('facebook', fb_uid, _doAuthenticate, _doCancel);
+						Users.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
 					} else if (typeof options.prompt === 'function') {
 						// custom prompt
-						options.prompt('facebook', fb_uid, _doAuthenticate, _doCancel);
+						options.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
 					} else {
 						Users.authenticate.occurring = false;
 						throw new Q.Error("Users.authenticate: options.prompt is the wrong type");
@@ -289,43 +308,17 @@
 					// otherwise they might confuse our server-side authentication.
 					Q.cookie('fbs_' + fbAppId, null, {path: '/'});
 					Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
-					_doCancel();
+					_doCancel(null, platform, onSuccess, onCancel, options);
 				}
 
-				function _doSuccess(user) {
-					// if the user hasn't changed then user is null here
-					Users.connected.facebook = true;
-					Users.onConnected.handle.call(Users, platform, user, options);
-					Q.handle(onSuccess, this, [user, options]);
-					Users.authenticate.occurring = false;
-				}
-
-				function _doCancel(ignoreUid) {
-					if (ignoreUid) {
-						// NOTE: the following line makes us ignore this uid
-						// until the user explicitly wants to connect.
-						// This usually has the right effect -- because the user
-						// doesn't want to see the prompt all the time.
-						// However, sometimes if the user is already logged in
-						// and then the javascript discovers that the facebook connection was lost,
-						// the user will not be prompted to restore it when it becomes available again.
-						// They will have to do it explicitly (calling Users.authenticate with prompt: true)
-						Q.cookie('Users_ignoreFacebookUid', ignoreUid);
-					}
-					delete Users.connected.facebook;
-					Users.onConnectionLost.handle.call(Users, platform, options);
-					Q.handle(onCancel, Users, [options]);
-					Users.authenticate.occurring = false;
-				}
-
-				function _doAuthenticate() {
+				function __doAuthenticate() {
 					if (!Users.Facebook.getAuthResponse()) {
 						// in some rare cases, the user may have logged out of facebook
 						// while our prompt was visible, so there is no longer a valid
 						// facebook authResponse. In this case, even though they want
 						// to authenticate, we must cancel it.
 						alert("Connection to facebook was lost. Try connecting again.");
-						_doCancel();
+						_doCancel(null, platform, onSuccess, onCancel, options);
 						return;
 					}
 					var ar = response.authResponse;
@@ -334,32 +327,62 @@
 					ar.appId = appId;
 					fields['Q.Users.facebook.authResponse'] = ar;
 					fields.platform = 'facebook';
-					Q.req('Users/authenticate', 'data', function (err, response) {
-						var fem = Q.firstErrorMessage(err, response);
-						if (fem) {
-							alert(fem);
-							return _doCancel();
-						}
-						var user = response.slots.data;
-						if (user.authenticated !== true) {
-							priv.result = user.authenticated;
-						}
-						priv.used = 'facebook';
-						user.result = user.authenticated;
-						user.used = 'facebook';
-						Users.loggedInUser = new Users.User(user);
-						Q.nonce = Q.cookie('Q_nonce');
-						_doSuccess(user);
-					}, {
-						method: "post",
-						fields: fields
-					});
+					_doAuthenticate(fields, platform, onSuccess, onCancel, options);
 				}
 			}, options.force ? true : false);
 		}, {
 			appId: appId
 		});
 	};
+	
+	function _doSuccess(user, platform, onSuccess, onCancel, options) {
+		// if the user hasn't changed then user is null here
+		Users.connected[platform] = true;
+		Users.onConnected.handle.call(Users, platform, user, options);
+		Q.handle(onSuccess, this, [user, options]);
+		Users.authenticate.occurring = false;
+	}
+
+	function _doCancel(ignoreUid, platform, onSuccess, onCancel, options) {
+		if (ignoreUid) {
+			// NOTE: the following line makes us ignore this uid
+			// until the user explicitly wants to connect.
+			// This usually has the right effect -- because the user
+			// doesn't want to see the prompt all the time.
+			// However, sometimes if the user is already logged in
+			// and then the javascript discovers that the platform connection was lost,
+			// the user will not be prompted to restore it when it becomes available again.
+			// They will have to do it explicitly (calling Users.authenticate with prompt: true)
+			Q.cookie('Users_ignorePlatformUid', ignoreUid);
+		}
+		delete Users.connected[platform];
+		Users.onConnectionLost.handle.call(Users, platform, options);
+		Q.handle(onCancel, Users, [options]);
+		Users.authenticate.occurring = false;
+	}
+	
+	function _doAuthenticate(fields, platform, onSuccess, onCancel, options) {
+		Q.req('Users/authenticate', 'data', function (err, response) {
+			var fem = Q.firstErrorMessage(err, response);
+			if (fem) {
+				alert(fem);
+				return _doCancel(null, platform, onSuccess, onCancel, options);
+			}
+			var user = response.slots.data;
+			if (user.authenticated !== true) {
+				priv.result = user.authenticated;
+			}
+			priv.used = platform;
+			user.result = user.authenticated;
+			user.used = platform;
+			Users.loggedInUser = new Users.User(user);
+			Q.nonce = Q.cookie('Q_nonce');
+			_doSuccess(user, platform, onSuccess, onCancel, options);
+		}, {
+			method: "post",
+			fields: fields
+		});
+	}
 
 	/**
 	 * Used when platform user is logged in to platform but not to app.
@@ -807,7 +830,7 @@
 				// when authenticating, until it is forced
 				var fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
 				if (fb_uid) {
-					Q.cookie('Users_ignoreFacebookUid', fb_uid);
+					Q.cookie('Users_ignorePlatformUid', fb_uid);
 				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');

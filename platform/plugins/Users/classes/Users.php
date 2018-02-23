@@ -203,7 +203,7 @@ abstract class Users extends Base_Users
 	 * users by authenticating with some external platform.
 	 * @method authenticate
 	 * @static
-	 * @param {string} $platform Currently only supports the value "facebook".
+	 * @param {string} $platform Currently only supports "facebook", "ios" or "android"
 	 * @param {string} [$appId=null] The id of the app within the specified platform.
 	 * @param {&boolean} [$authenticated=null] If authentication fails, puts false here.
 	 *  Otherwise, puts one of the following:
