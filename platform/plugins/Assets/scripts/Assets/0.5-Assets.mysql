@@ -6,6 +6,6 @@ CREATE TABLE `{$prefix}customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `{$prefix}charge`
-ADD COLUMN `subscriptionPublisherId` varbinary(255) NOT NULL DEFAULT '' AFTER `userId`,
+ADD COLUMN `subscriptionPublisherId` varbinary(255) NOT NULL DEFAULT '' AFTER `id`,
 CHANGE `subscriptionId` `subscriptionStreamName` varbinary(255) NOT NULL DEFAULT '',
 ADD PRIMARY KEY (id, userId);
