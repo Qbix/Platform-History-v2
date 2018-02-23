@@ -242,12 +242,13 @@ Streams_Message.post = function (fields, callback)
  *	Callback reports errors and response from delivery systems
  */
 Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
+	var instructions = this.getAllInstructions();
 	var fields = {
 		app: Q.app,
 		communityName: Users.communityName(),
 		stream: stream,
 		message: this,
-		instructions: this.getAllInstructions(),
+		instructions: instructions,
 		avatar: avatar,
 		config: Q.Config.getAll()
 	};
@@ -271,12 +272,14 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		);
 		var uf = this.fields;
 		var p1 = new Q.Pipe();
+		var streamUrl = stream.url(message.fields.ordinal);
 		var o = {
 			fields: fields,
 			subject: subject,
 			deliver: deliver,
 			stream: stream,
-			url: stream.url(message.fields.ordinal),
+			streamUrl: streamUrl,
+			url: instructions.url || streamUrl,
 			icon: stream.iconUrl(80),
 			user: this,
 			avatar: avatar,
