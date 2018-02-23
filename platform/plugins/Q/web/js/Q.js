@@ -9823,6 +9823,12 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| location.search.queryField('Q.cordova')
 	|| Q.cookie('Q_cordova');
 
+var udid = location.search.queryField('Q.udid');
+if (udid) {
+	Q.info.udid = udid;
+	Q.cookie('Q_udid', udid);
+}
+
 /**
  * A tool for detecting user browser parameters.
  * @class Q.Browser
