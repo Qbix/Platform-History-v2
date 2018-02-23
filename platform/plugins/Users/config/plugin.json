@@ -63,8 +63,8 @@
 		},
 		"apps-private": {
 			"facebook": ["secret"],
-			"ios": ["token", "device", "logging"],
-			"android": ["key"],
+			"ios": ["token", "device", "logging", "secret"],
+			"android": ["key", "secret"],
 			"amazon": ["key", "secret"],
 			"windows": ["key", "secret"]
 		},
