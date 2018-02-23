@@ -614,7 +614,7 @@ Sp.inheritAccess = function (callback) {
 	if (!Q.isArrayLike(names)) {
 		var temp = names;
 		names = [];
-		for (var k in names) {
+		for (var k in temp) {
 			names.push(JSON.stringify(temp[k]));
 		}
 	}
@@ -634,14 +634,7 @@ Sp.inheritAccess = function (callback) {
 	var adminLevel = this.get('adminLevel', 0);
 	var adminLevel_source = this.get('adminLevel_source', public_source);
 	
-	var p = new Q.Pipe(names, function (params) {
-		var i, errors = params[0];
-		for (i=0; i<errors.length; i++) {
-			if (errors[i]) {
-				callback.call(subj, errors[i]); // only one error reported
-				return;
-			}
-		}
+	var p = new Q.Pipe(names.map(JSON.stringify), function (params) {
 		subj.set('readLevel', readLevel);
 		subj.set('writeLevel', writeLevel);
 		subj.set('adminLevel', adminLevel);
@@ -663,6 +656,7 @@ Sp.inheritAccess = function (callback) {
 			name = name[1];
 		} else {
 			publisherId = subj.fields.publisherId;
+			name = subj.fields.name;
 		}
 		Streams.fetchOne(asUserId, publisherId, name, 
 		function (err, stream) {
