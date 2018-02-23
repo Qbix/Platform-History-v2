@@ -139,7 +139,7 @@ abstract class Base_Streams_RelatedFrom extends Db_Row
 		if (!isset($fields)) {
 			$fieldNames = array();
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = "`$fn`";
+				$fieldNames[] = $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}

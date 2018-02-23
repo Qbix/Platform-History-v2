@@ -159,7 +159,7 @@ Base.connectionName = function() {
 Base.SELECT = function(fields, alias) {
 	if (!fields) {
 		fields = Base.fieldNames().map(function (fn) {
-			return '`' + fn + '`';
+			return fn;
 		}).join(',');
 	}
 	var q = Base.db().SELECT(fields, Base.table()+(alias ? ' '+alias : ''));
@@ -302,6 +302,16 @@ Base.prototype.primaryKey = function () {
  * @return {array} An array of field names
  */
 Base.prototype.fieldNames = function () {
+	return Base.fieldNames();
+};
+
+/**
+ * Retrieves field names for class table
+ * @method fieldNames
+ * @static
+ * @return {array} An array of field names
+ */
+Base.fieldNames = function () {
 	return [
 		"countryCode",
 		"postcode",
