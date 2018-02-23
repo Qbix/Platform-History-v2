@@ -2061,6 +2061,7 @@ abstract class Streams extends Base_Streams
 				'fromUrl', 'toUrl',
 				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
 			);
+			$instructions['url'] = $instructions['fromUrl'];
 			$instructions['fromStreamName'] = $stream->name;
 			$relatedTo_messages[$toPublisherId][$category->name][] = array(
 				'type' => 'Streams/relatedTo',
@@ -2084,6 +2085,7 @@ abstract class Streams extends Base_Streams
 				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
 				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'description'
 			);
+			$instructions['url'] = $instructions['toUrl'];
 			$instructions['toStreamName'] = $category->name;
 			$relatedFrom_messages[$fromPublisherId][$stream->name][] = array(
 				'type' => 'Streams/relatedFrom',
