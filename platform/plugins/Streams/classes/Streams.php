@@ -1993,6 +1993,7 @@ abstract class Streams extends Base_Streams
 			if (!$stream) {
 				continue;
 			}
+			$fromUri = $stream->uri();
 			$fromUrl = $stream->url();
 			$fromIcon = $stream->icon;
 			$fromTitle = $stream->title;
@@ -2001,6 +2002,7 @@ abstract class Streams extends Base_Streams
 			if (!$category) {
 				continue;
 			}
+			$toUri = $category->uri();
 			$toUrl = $category->url();
 			$toIcon = $category->icon;
 			$toTitle = $category->title;
@@ -2016,9 +2018,11 @@ abstract class Streams extends Base_Streams
 
 			$params = compact(
 				'relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream',
-				'fromUrl', 'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType',
-				'toUrl', 'toIcon', 'toTitle', 'toType', 'toDisplayType', 'displayType',
-				'categoryName', 'streamName', 'extra'
+				'fromUri', 'fromUrl',
+				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType',
+				'toUri', 'toUrl',
+				'toIcon', 'toTitle', 'toType', 'toDisplayType',
+				'displayType', 'categoryName', 'streamName', 'extra'
 			);
 
 			if ($u = Streams_Stream::getConfigField($category->type, 
@@ -2077,7 +2081,7 @@ abstract class Streams extends Base_Streams
 			// so posting this message may require internet communication.
 			$instructions = compact(
 				'toPublisherId', 'type', 'weight', 'displayType',
-				'fromUrl', 'toUrl',
+				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
 				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'description'
 			);
 			$instructions['toStreamName'] = $category->name;
