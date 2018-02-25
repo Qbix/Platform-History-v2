@@ -2,6 +2,11 @@
 
 namespace Stripe;
 
+/**
+ * Class Invoice
+ *
+ * @package Stripe
+ */
 class Invoice extends ApiResource
 {
     /**
@@ -16,7 +21,8 @@ class Invoice extends ApiResource
     }
 
     /**
-     * @param string $id The ID of the invoice to retrieve.
+     * @param array|string $id The ID of the invoice to retrieve, or an options
+     *     array containing an `id` key.
      * @param array|string|null $opts
      *
      * @return Invoice
@@ -35,6 +41,18 @@ class Invoice extends ApiResource
     public static function all($params = null, $opts = null)
     {
         return self::_all($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the invoice to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Invoice The updated invoice.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**
@@ -65,10 +83,10 @@ class Invoice extends ApiResource
     /**
      * @return Invoice The paid invoice.
      */
-    public function pay($opts = null)
+    public function pay($params = null, $opts = null)
     {
         $url = $this->instanceUrl() . '/pay';
-        list($response, $opts) = $this->_request('post', $url, null, $opts);
+        list($response, $opts) = $this->_request('post', $url, $params, $opts);
         $this->refreshFrom($response, $opts);
         return $this;
     }

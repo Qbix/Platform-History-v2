@@ -2,10 +2,26 @@
 
 namespace Stripe;
 
+/**
+ * Class Event
+ *
+ * @property string $id
+ * @property string $object
+ * @property string $api_version
+ * @property int $created
+ * @property mixed $data
+ * @property bool $livemode
+ * @property int $pending_webhooks
+ * @property string $request
+ * @property string $type
+ *
+ * @package Stripe
+ */
 class Event extends ApiResource
 {
     /**
-     * @param string $id The ID of the event to retrieve.
+     * @param array|string $id The ID of the event to retrieve, or an options
+     *     array containing an `id` key.
      * @param array|string|null $opts
      *
      * @return Event
