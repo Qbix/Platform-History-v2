@@ -1063,6 +1063,7 @@ Streams.refresh = function (callback, options) {
 	}
 	var now = Date.now();
 	if (now - Streams.refresh.lastTime < Streams.refresh.options.minSeconds * 1000) {
+		Q.handle(callback, this, [false]);
 		return false;
 	}
 	Streams.refresh.lastTime = now;
