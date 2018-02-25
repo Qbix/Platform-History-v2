@@ -10,7 +10,7 @@
  * @param {string} $_REQUEST.streamName Required. The name of the stream to promote.
  * @param {string} $_REQUEST.communityId Required. The user id of the community to promote to.
  * @param {string} [$_REQUEST.experienceId='main'] You can specify an experience to promote to
- * @param {string} $_REQUEST.relationType='Calendars/events' Required. The type of relation.
+ * @param {string} $_REQUEST.relationType Required. The type of relation.
  * @return {slots} Sets the slot "relations".
  */
 
@@ -58,7 +58,7 @@ function Streams_promote_post()
 		$interest->publisherId = $communityId;
 		$interest->name = $interestName;
 		if ($interest->retrieve()) {
-			$relations['interest'] = $stream->relateTo($interest, 'Calendars/events', null, $o);
+			$relations['interest'] = $stream->relateTo($interest, $relationType, null, $o);
 		}
 	}
 

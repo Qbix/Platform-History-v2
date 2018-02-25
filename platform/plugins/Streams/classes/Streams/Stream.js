@@ -614,7 +614,7 @@ Sp.inheritAccess = function (callback) {
 	if (!Q.isArrayLike(names)) {
 		var temp = names;
 		names = [];
-		for (var k in names) {
+		for (var k in temp) {
 			names.push(JSON.stringify(temp[k]));
 		}
 	}
@@ -634,14 +634,7 @@ Sp.inheritAccess = function (callback) {
 	var adminLevel = this.get('adminLevel', 0);
 	var adminLevel_source = this.get('adminLevel_source', public_source);
 	
-	var p = new Q.Pipe(names, function (params) {
-		var i, errors = params[0];
-		for (i=0; i<errors.length; i++) {
-			if (errors[i]) {
-				callback.call(subj, errors[i]); // only one error reported
-				return;
-			}
-		}
+	var p = new Q.Pipe(names.map(JSON.stringify), function (params) {
 		subj.set('readLevel', readLevel);
 		subj.set('writeLevel', writeLevel);
 		subj.set('adminLevel', adminLevel);
@@ -663,6 +656,7 @@ Sp.inheritAccess = function (callback) {
 			name = name[1];
 		} else {
 			publisherId = subj.fields.publisherId;
+			name = subj.fields.name;
 		}
 		Streams.fetchOne(asUserId, publisherId, name, 
 		function (err, stream) {
@@ -1316,7 +1310,28 @@ Sp.url = function (messageOrdinal, baseUrl)
 	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
 	return Q.url(urlString + sep + qs);
-}
+};
+
+/**
+ * Returns the canonical url of the stream, if any
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @return {String|null|false}
+ */
+Sp.uri = function (messageOrdinal)
+{
+	var uri = Streams_Stream.getConfigField(this.fields.type, 'uri', null);
+	if (!uri) {
+		return null;
+	}
+	var uriString = Q.Handlebars.renderSource(uri, {
+		publisherId: this.fields.publisherId,
+		streamName: this.fields.name.split('/'),
+		name: this.fields.name
+	});
+	var parts = uriString.split(' ');
+	var qs = messageOrdinal ? '?'+messageOrdinal : "";
+	return parts.shift() + qs + ' ' + (parts.length ? parts.join(' ') : '');
+};
 
 /**
  * Find out whether a certain field is restricted from being

@@ -151,19 +151,19 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 
 	/**
 	 * Import some fields from facebook. Also fills Users::$cache['platformUserData'].
-	 * @param {array} $fields
+	 * @param {array} $fieldNames
 	 * @return {array}
 	 */
-	function import($fields)
+	function import($fieldNames)
 	{
-		if (!is_array($fields)) {
-			$fields = Q_Config::get('Users', 'import', 'facebook', null);
+		if (!is_array($fieldNames)) {
+			$fieldNames = Q_Config::get('Users', 'import', 'facebook', null);
 		}
-		if (!$fields) {
+		if (!$fieldNames) {
 			return array();
 		}
 		$uid = $this->platform_uid;
-		$response = $this->facebook->get("/$uid?fields=".implode(',', $fields));
+		$response = $this->facebook->get("/$uid?fields=".implode(',', $fieldNames));
 		$userNode = $response->getGraphUser();
 		Users::$cache['platformUserData'] = array(
 			'facebook' => $userNode->uncastItems()
