@@ -124,6 +124,7 @@
 				this.adapter = adapterWeb;
 			} else if (Q.info.browser.name === 'safari') {
 				// TODO implement adapter for Safari Browser
+				this.adapter = adapterWeb;
 			}
 			if (this.adapter) {
 				this.adapter.init(callback);
