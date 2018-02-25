@@ -5,6 +5,11 @@ namespace Stripe;
 use ArrayAccess;
 use InvalidArgumentException;
 
+/**
+ * Class StripeObject
+ *
+ * @package Stripe
+ */
 class StripeObject implements ArrayAccess, JsonSerializable
 {
     /**
@@ -22,10 +27,30 @@ class StripeObject implements ArrayAccess, JsonSerializable
     {
         self::$permanentAttributes = new Util\Set(array('_opts', 'id'));
         self::$nestedUpdatableAttributes = new Util\Set(array(
-            'metadata', 'legal_entity', 'address', 'dob', 'transfer_schedule', 'verification',
-            'tos_acceptance', 'personal_address',
-            // will make the array into an AttachedObject: weird, but works for now
-            'additional_owners', 0, 1, 2, 3, 4 // Max 3, but leave the 4th so errors work properly
+            // Numbers are in place for indexes in an `additional_owners` array.
+            //
+            // There's a maximum allowed additional owners of 3, but leave the
+            // 4th so errors work properly.
+            0, 1, 2, 3, 4,
+
+            'additional_owners',
+            'address',
+            'address_kana',
+            'address_kanji',
+            'card',
+            'dob',
+            'inventory',
+            'legal_entity',
+            'metadata',
+            'owner',
+            'payout_schedule',
+            'personal_address',
+            'personal_address_kana',
+            'personal_address_kanji',
+            'shipping',
+            'tos_acceptance',
+            'transfer_schedule',
+            'verification',
         ));
     }
 
@@ -113,9 +138,9 @@ class StripeObject implements ArrayAccess, JsonSerializable
     {
         // function should return a reference, using $nullval to return a reference to null
         $nullval = null;
-        if (array_key_exists($k, $this->_values)) {
+        if (!empty($this->_values) && array_key_exists($k, $this->_values)) {
             return $this->_values[$k];
-        } else if ($this->_transientValues->includes($k)) {
+        } else if (!empty($this->_transientValues) && $this->_transientValues->includes($k)) {
             $class = get_class($this);
             $attrs = join(', ', array_keys($this->_values));
             $message = "Stripe Notice: Undefined property of $class instance: $k. "
@@ -124,13 +149,19 @@ class StripeObject implements ArrayAccess, JsonSerializable
                     . "with the result returned by Stripe's API, "
                     . "probably as a result of a save(). The attributes currently "
                     . "available on this object are: $attrs";
-            error_log($message);
+            Stripe::getLogger()->error($message);
             return $nullval;
         } else {
             $class = get_class($this);
-            error_log("Stripe Notice: Undefined property of $class instance: $k");
+            Stripe::getLogger()->error("Stripe Notice: Undefined property of $class instance: $k");
             return $nullval;
         }
+    }
+
+    // Magic method for var_dump output. Only works with PHP >= 5.6
+    public function __debugInfo()
+    {
+        return $this->_values;
     }
 
     // ArrayAccess methods
@@ -177,11 +208,15 @@ class StripeObject implements ArrayAccess, JsonSerializable
      * Refreshes this object using the provided values.
      *
      * @param array $values
-     * @param array $opts
+     * @param array|Util\RequestOptions $opts
      * @param boolean $partial Defaults to false.
      */
     public function refreshFrom($values, $opts, $partial = false)
     {
+        if (is_array($opts)) {
+            $opts = Util\RequestOptions::parse($opts);
+        }
+
         $this->_opts = $opts;
 
         // Wipe old state before setting new.  This is useful for e.g. updating a

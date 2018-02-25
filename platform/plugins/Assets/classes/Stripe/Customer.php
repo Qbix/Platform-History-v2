@@ -2,10 +2,35 @@
 
 namespace Stripe;
 
+/**
+ * Class Customer
+ *
+ * @property string $id
+ * @property string $object
+ * @property int $account_balance
+ * @property string $business_vat_id
+ * @property string $created
+ * @property string $currency
+ * @property string $default_source
+ * @property bool $delinquent
+ * @property string $description
+ * @property mixed $discount
+ * @property string $email
+ * @property bool $livemode
+ * @property array $metadata
+ * @property mixed $shipping
+ * @property Collection $sources
+ * @property Collection $subscriptions
+ *
+ * @package Stripe
+ */
 class Customer extends ApiResource
 {
+    const PATH_SOURCES = '/sources';
+
     /**
-     * @param string $id The ID of the customer to retrieve.
+     * @param array|string $id The ID of the customer to retrieve, or an
+     *     options array containing an `id` key.
      * @param array|string|null $opts
      *
      * @return Customer
@@ -35,6 +60,18 @@ class Customer extends ApiResource
     public static function create($params = null, $opts = null)
     {
         return self::_create($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the customer to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Customer The updated customer.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**
@@ -145,8 +182,6 @@ class Customer extends ApiResource
     }
 
     /**
-     * @param array|null $params
-     *
      * @return Customer The updated customer.
      */
     public function deleteDiscount()
@@ -154,5 +189,68 @@ class Customer extends ApiResource
         $url = $this->instanceUrl() . '/discount';
         list($response, $opts) = $this->_request('delete', $url);
         $this->refreshFrom(array('discount' => null), $opts, true);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer on which to create the source.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ExternalAccount
+     */
+    public static function createSource($id, $params = null, $opts = null)
+    {
+        return self::_createNestedResource($id, static::PATH_SOURCES, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer to which the source belongs.
+     * @param array|null $sourceId The ID of the source to retrieve.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ExternalAccount
+     */
+    public static function retrieveSource($id, $sourceId, $params = null, $opts = null)
+    {
+        return self::_retrieveNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer to which the source belongs.
+     * @param array|null $sourceId The ID of the source to update.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ExternalAccount
+     */
+    public static function updateSource($id, $sourceId, $params = null, $opts = null)
+    {
+        return self::_updateNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer to which the source belongs.
+     * @param array|null $sourceId The ID of the source to delete.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ExternalAccount
+     */
+    public static function deleteSource($id, $sourceId, $params = null, $opts = null)
+    {
+        return self::_deleteNestedResource($id, static::PATH_SOURCES, $sourceId, $params, $opts);
+    }
+
+    /**
+     * @param array|null $id The ID of the customer on which to retrieve the sources.
+     * @param array|null $params
+     * @param array|string|null $opts
+     *
+     * @return ExternalAccount
+     */
+    public static function allSources($id, $params = null, $opts = null)
+    {
+        return self::_allNestedResources($id, static::PATH_SOURCES, $params, $opts);
     }
 }
