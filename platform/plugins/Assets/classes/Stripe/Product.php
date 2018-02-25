@@ -2,10 +2,16 @@
 
 namespace Stripe;
 
+/**
+ * Class Product
+ *
+ * @package Stripe
+ */
 class Product extends ApiResource
 {
     /**
-     * @param string $id The ID of the Product to retrieve.
+     * @param array|string $id The ID of the product to retrieve, or an options
+     *     array contianing an `id` key.
      * @param array|string|null $opts
      *
      * @return Product
@@ -24,6 +30,18 @@ class Product extends ApiResource
     public static function create($params = null, $opts = null)
     {
         return self::_create($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the product to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Product The updated product.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**

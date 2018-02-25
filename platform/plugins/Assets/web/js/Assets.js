@@ -311,6 +311,9 @@
 					}
 					return;
 				}
+				if (!o.userId) {
+					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
+				}
 				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
 					_redirectToBrowserTab(paymentOptions);
 					return;
@@ -328,23 +331,22 @@
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
 					_applePayStripe(o, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-							_standardStripe(o);
+							_standardStripe(o, callback);
 							return;
 						}
-
 						if (callback) {
 							callback(err, res);
 						}
 					});
 				} else if (window.PaymentRequest) { // check for payment request
 					_paymentRequestStripe(o, function (err, res) {
-						if (err && (err.code === 21)) {
-							_standardStripe(o);
+						if (err && (err.code === 9)) {
+							_standardStripe(o, callback);
+							return;
 						}
 						if (callback) {
 							callback(err, res);
 						}
-						//window.close();
 					});
 				} else {
 					_standardStripe(o, callback);
@@ -362,6 +364,7 @@
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
 			 *  @param {String} [options.token] the token obtained from the hosted forms
+			 *  @param {String} [options.userId] logged in userId, needed for cordova ios / android payments
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			pay: function (payments, options, callback) {
@@ -371,7 +374,9 @@
 					streamName: options.streamName,
 					token: options.token,
 					amount: options.amount,
-					description: options.description
+					description: options.description,
+					userId: options.userId
+
 				};
 				Q.req('Assets/payment', 'charge', function (err, response) {
 					var msg;
@@ -550,16 +555,23 @@
 		});
 	}
 
-	function _standardStripe(o) {
+	function _standardStripe(o, callback) {
 		Q.addScript(o.javascript, function () {
 			var params = Q.extend({
 				name: o.name,
 				amount: o.amount
 			}, o);
 			params.amount *= 100;
+			var token_triggered = false;
 			StripeCheckout.configure(Q.extend({
 				key: Assets.Payments.stripe.publishableKey,
+				closed: function() {
+					if (!token_triggered) {
+						callback(new Error('Cancelled'));
+					}
+				},
 				token: function (token) {
+					token_triggered = true;
 					o.token = token;
 					Assets.Payments.pay('stripe', o, callback);
 				}
@@ -577,7 +589,9 @@
 	}
 
 	function _redirectToBrowserTab(paymentOptions) {
-		var url = window.location.href;
+		var protocol = location.protocol;
+		var slashes = protocol.concat("//");
+		var url = slashes.concat(window.location.hostname);
 		if(url.indexOf('?') !== -1) {
 			url = url + "&browsertab=yes";
 		}else{
