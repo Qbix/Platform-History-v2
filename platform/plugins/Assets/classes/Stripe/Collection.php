@@ -2,6 +2,16 @@
 
 namespace Stripe;
 
+/**
+ * Class Collection
+ *
+ * @property string $object
+ * @property string $url
+ * @property bool $has_more
+ * @property mixed $data
+ *
+ * @package Stripe
+ */
 class Collection extends ApiResource
 {
     protected $_requestParams = array();
@@ -46,7 +56,7 @@ class Collection extends ApiResource
     }
 
     /**
-     * @return AutoPagingIterator An iterator that can be used to iterate
+     * @return Util\AutoPagingIterator An iterator that can be used to iterate
      *    across all objects across all pages. As page boundaries are
      *    encountered, the next page will be fetched automatically for
      *    continued iteration.

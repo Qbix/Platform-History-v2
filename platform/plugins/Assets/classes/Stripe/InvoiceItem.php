@@ -2,10 +2,16 @@
 
 namespace Stripe;
 
+/**
+ * Class InvoiceItem
+ *
+ * @package Stripe
+ */
 class InvoiceItem extends ApiResource
 {
     /**
-     * @param string $id The ID of the invoice item to retrieve.
+     * @param array|string $id The ID of the invoice item to retrieve, or an
+     *     options array containing an `id` key.
      * @param array|string|null $opts
      *
      * @return InvoiceItem
@@ -35,6 +41,18 @@ class InvoiceItem extends ApiResource
     public static function create($params = null, $opts = null)
     {
         return self::_create($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the invoice item to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return InvoiceItem The updated invoice item.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**

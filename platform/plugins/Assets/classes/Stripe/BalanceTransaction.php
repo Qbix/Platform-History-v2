@@ -2,6 +2,26 @@
 
 namespace Stripe;
 
+/**
+ * Class BalanceTransaction
+ *
+ * @property string $id
+ * @property string $object
+ * @property int $amount
+ * @property int $available_on
+ * @property int $created
+ * @property string $currency
+ * @property string $description
+ * @property int $fee
+ * @property mixed $fee_details
+ * @property int $net
+ * @property string $source
+ * @property mixed $sourced_transfers
+ * @property string $status
+ * @property string $type
+ *
+ * @package Stripe
+ */
 class BalanceTransaction extends ApiResource
 {
     /**
@@ -14,7 +34,8 @@ class BalanceTransaction extends ApiResource
     }
 
     /**
-     * @param string $id The ID of the balance transaction to retrieve.
+     * @param array|string $id The ID of the balance transaction to retrieve,
+     *     or an options array containing an `id` key.
      * @param array|string|null $opts
      *
      * @return BalanceTransaction

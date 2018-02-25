@@ -6,6 +6,22 @@ use Stripe\Stripe;
 use Stripe\Error;
 use Stripe\Util;
 
+// cURL constants are not defined in PHP < 5.5
+
+// @codingStandardsIgnoreStart
+// PSR2 requires all constants be upper case. Sadly, the CURL_SSLVERSION
+// constants do not abide by those rules.
+
+// Note the values 1 and 6 come from their position in the enum that
+// defines them in cURL's source code.
+if (!defined('CURL_SSLVERSION_TLSv1')) {
+    define('CURL_SSLVERSION_TLSv1', 1);
+}
+if (!defined('CURL_SSLVERSION_TLSv1_2')) {
+    define('CURL_SSLVERSION_TLSv1_2', 6);
+}
+// @codingStandardsIgnoreEnd
+
 class CurlClient implements ClientInterface
 {
     private static $instance;
@@ -16,6 +32,48 @@ class CurlClient implements ClientInterface
             self::$instance = new self();
         }
         return self::$instance;
+    }
+
+    protected $defaultOptions;
+
+    protected $userAgentInfo;
+
+    /**
+     * CurlClient constructor.
+     *
+     * Pass in a callable to $defaultOptions that returns an array of CURLOPT_* values to start
+     * off a request with, or an flat array with the same format used by curl_setopt_array() to
+     * provide a static set of options. Note that many options are overridden later in the request
+     * call, including timeouts, which can be set via setTimeout() and setConnectTimeout().
+     *
+     * Note that request() will silently ignore a non-callable, non-array $defaultOptions, and will
+     * throw an exception if $defaultOptions returns a non-array value.
+     *
+     * @param array|callable|null $defaultOptions
+     */
+    public function __construct($defaultOptions = null)
+    {
+        $this->defaultOptions = $defaultOptions;
+        $this->initUserAgentInfo();
+    }
+
+    public function initUserAgentInfo()
+    {
+        $curlVersion = curl_version();
+        $this->userAgentInfo = array(
+            'httplib' =>  'curl ' . $curlVersion['version'],
+            'ssllib' => $curlVersion['ssl_version'],
+        );
+    }
+
+    public function getDefaultOptions()
+    {
+        return $this->defaultOptions;
+    }
+
+    public function getUserAgentInfo()
+    {
+        return $this->userAgentInfo;
     }
 
     // USER DEFINED TIMEOUTS
@@ -54,7 +112,17 @@ class CurlClient implements ClientInterface
     {
         $curl = curl_init();
         $method = strtolower($method);
+
         $opts = array();
+        if (is_callable($this->defaultOptions)) { // call defaultOptions callback, set options to return value
+            $opts = call_user_func_array($this->defaultOptions, func_get_args());
+            if (!is_array($opts)) {
+                throw new Error\Api("Non-array value returned by defaultOptions CurlClient callback");
+            }
+        } elseif (is_array($this->defaultOptions)) { // set default curlopts from array
+            $opts = $this->defaultOptions;
+        }
+
         if ($method == 'get') {
             if ($hasFile) {
                 throw new Error\Api(
@@ -63,16 +131,16 @@ class CurlClient implements ClientInterface
             }
             $opts[CURLOPT_HTTPGET] = 1;
             if (count($params) > 0) {
-                $encoded = self::encode($params);
+                $encoded = Util\Util::urlEncode($params);
                 $absUrl = "$absUrl?$encoded";
             }
         } elseif ($method == 'post') {
             $opts[CURLOPT_POST] = 1;
-            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : self::encode($params);
+            $opts[CURLOPT_POSTFIELDS] = $hasFile ? $params : Util\Util::urlEncode($params);
         } elseif ($method == 'delete') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'DELETE';
             if (count($params) > 0) {
-                $encoded = self::encode($params);
+                $encoded = Util\Util::urlEncode($params);
                 $absUrl = "$absUrl?$encoded";
             }
         } else {
@@ -91,6 +159,20 @@ class CurlClient implements ClientInterface
             return strlen($header_line);
         };
 
+        // By default for large request body sizes (> 1024 bytes), cURL will
+        // send a request without a body and with a `Expect: 100-continue`
+        // header, which gives the server a chance to respond with an error
+        // status code in cases where one can be determined right away (say
+        // on an authentication problem for example), and saves the "large"
+        // request body from being ever sent.
+        //
+        // Unfortunately, the bindings don't currently correctly handle the
+        // success case (in which the server sends back a 100 CONTINUE), so
+        // we'll error under that condition. To compensate for that problem
+        // for the time being, override cURL's behavior by simply always
+        // sending an empty `Expect:` header.
+        array_push($headers, 'Expect: ');
+
         $absUrl = Util\Util::utf8($absUrl);
         $opts[CURLOPT_URL] = $absUrl;
         $opts[CURLOPT_RETURNTRANSFER] = true;
@@ -101,18 +183,6 @@ class CurlClient implements ClientInterface
         if (!Stripe::$verifySslCerts) {
             $opts[CURLOPT_SSL_VERIFYPEER] = false;
         }
-        // @codingStandardsIgnoreStart
-        // PSR2 requires all constants be upper case. Sadly, the CURL_SSLVERSION
-        // constants to not abide by those rules.
-        //
-        // Opt into TLS 1.x support on older versions of curl. This causes some
-        // curl versions, notably on RedHat, to upgrade the connection to TLS
-        // 1.2, from the default TLS 1.0.
-        if (!defined('CURL_SSLVERSION_TLSv1')) {
-            define('CURL_SSLVERSION_TLSv1', 1); // constant not defined in PHP < 5.5
-        }
-        $opts[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1;
-        // @codingStandardsIgnoreEnd
 
         curl_setopt_array($curl, $opts);
         $rbody = curl_exec($curl);
@@ -184,46 +254,5 @@ class CurlClient implements ClientInterface
     private static function caBundle()
     {
         return dirname(__FILE__) . '/../../data/ca-certificates.crt';
-    }
-
-    /**
-     * @param array $arr An map of param keys to values.
-     * @param string|null $prefix
-     *
-     * Only public for testability, should not be called outside of CurlClient
-     *
-     * @return string A querystring, essentially.
-     */
-    public static function encode($arr, $prefix = null)
-    {
-        if (!is_array($arr)) {
-            return $arr;
-        }
-
-        $r = array();
-        foreach ($arr as $k => $v) {
-            if (is_null($v)) {
-                continue;
-            }
-
-            if ($prefix) {
-                if ($k !== null && (!is_int($k) || is_array($v))) {
-                    $k = $prefix."[".$k."]";
-                } else {
-                    $k = $prefix."[]";
-                }
-            }
-
-            if (is_array($v)) {
-                $enc = self::encode($v, $k);
-                if ($enc) {
-                    $r[] = $enc;
-                }
-            } else {
-                $r[] = urlencode($k)."=".urlencode($v);
-            }
-        }
-
-        return implode("&", $r);
     }
 }
