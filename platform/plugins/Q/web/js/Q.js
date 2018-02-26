@@ -9824,12 +9824,6 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| location.search.queryField('Q.cordova')
 	|| Q.cookie('Q_cordova');
 
-var udid = location.search.queryField('Q.udid');
-if (udid) {
-	Q.info.udid = udid;
-	Q.cookie('Q_udid', udid);
-}
-
 /**
  * A tool for detecting user browser parameters.
  * @class Q.Browser
@@ -10129,6 +10123,11 @@ Q.info.isAndroidStock = !!(Q.info.platform === 'android'
 	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
 Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
+var udid = location.search.queryField('Q.udid');
+if (udid) {
+	Q.info.udid = udid;
+	Q.cookie('Q_udid', udid);
+}
 var de = document.documentElement;
 de.addClass('Q_js');
 de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
