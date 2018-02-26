@@ -1643,7 +1643,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		foreach ($parts as $p) {
 			$quoted[] = "`$p`";
 		}
-		return implode('.', $quoted) . substr($column, $pos);
+		return implode('.', $quoted) . ($pos ? substr($column, $pos) : '');
 	}
 
 	/**
