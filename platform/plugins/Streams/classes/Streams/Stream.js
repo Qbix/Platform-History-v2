@@ -512,7 +512,7 @@ Sp.calculateAccess = function(asUserId, callback) {
 							for (var i=0; i<result.length; i++) {
 								for (var j=0; j<rows.length; j++) {
 									row = rows[j];
-									if (row.fields.ofContactLabel !== result[i]) continue;
+									if (row.fields.ofContactLabel !== result[i].fields.label) continue;
 									var readLevel =  subj.get('readLevel', 0);
 									var writeLevel = subj.get('writeLevel', 0);
 									var adminLevel = subj.get('adminLevel', 0);
