@@ -1966,7 +1966,7 @@ class Db_Row implements Iterator
 			if (is_callable($method)) {
 				$fieldNames = array();
 				foreach (call_user_func($method) as $fn) {
-					$fieldNames[] = "`$fn`";
+					$fieldNames[] = $fn;
 				}
 				$fields = implode(',', $fieldNames);
 			} else {
