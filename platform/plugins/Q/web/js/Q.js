@@ -10123,11 +10123,6 @@ Q.info.isAndroidStock = !!(Q.info.platform === 'android'
 	&& navigator.userAgent.match(/Android .*Version\/[\d]+\.[\d]+/i));
 Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
-var udid = location.search.queryField('Q.udid');
-if (udid) {
-	Q.info.udid = udid;
-	Q.cookie('Q_udid', udid);
-}
 var de = document.documentElement;
 de.addClass('Q_js');
 de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
@@ -11981,9 +11976,6 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
-	if (!Q.info.baseUrl) {
-		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
-	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.info.baseUrl.length + 1);
 	if (window.history.pushState) {
@@ -12366,10 +12358,18 @@ Q.stackTrace = function() {
  */
 if (!(typeof Promise !== "undefined" && Promise.toString().indexOf("[native code]") !== -1)) {
 	Q.beforeInit.addOnce(function () {
+		if (!Q.info.baseUrl) {
+			throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
+		}
+		var udid = location.search.queryField('Q.udid');
+		if (udid) {
+			Q.info.udid = udid;
+			Q.cookie('Q_udid', udid);
+		}
 		Q.addScript(Q.url(Q.libraries.bluebird), function() {
 			Q.Promise = Promise;
 		});
-	});
+	}, 'Q');
 }
 
 return Q;
