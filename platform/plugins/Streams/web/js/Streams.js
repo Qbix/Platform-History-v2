@@ -4160,6 +4160,15 @@ Streams.displayType = function _Streams_displayType(type) {
 	return type.split('/').slice(1).join('/');
 };
 
+/**
+ * Use this to check whether variable is a Q.Streams.Stream object
+ * @static
+ * @method isStream
+ * @param {mixed} testing
+ */
+Streams.isStream = function (testing) {
+	return typeof(testing) === "object" && testing.typename === "Q.Streams.Stream";
+};
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
 	var src = json.entry[0].thumbnailUrl;
 	var src40 = src, src50 = src, src80 = src;
