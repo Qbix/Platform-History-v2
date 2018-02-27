@@ -1462,6 +1462,15 @@ Q.instanceOf = function (testing, Constructor) {
 };
 
 /**
+ * Use this to check whether variable is a Q.Streams.Stream object
+ * @static
+ * @method isStream
+ * @param {mixed} testing
+ */
+Q.isStream = function (testing) {
+	return typeof(testing) === "object" && testing.typename === "Q.Streams.Stream";
+};
+/**
  * Makes a shallow copy of an object. But, if any property is an object with a "copy" method,
  * or levels > 0, it recursively calls that method to copy the property.
  * @static
