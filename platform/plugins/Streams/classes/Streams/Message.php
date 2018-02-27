@@ -389,12 +389,15 @@ class Streams_Message extends Base_Streams_Message
 	 * @param {string|array} $instructionName The name of the instruction to set,
 	 *  or an array of $instructionName => $value pairs
 	 * @param {mixed} $value The value to set the instruction to
+	 * @return Streams_Message
 	 */
 	function setInstruction($instructionName, $value)
 	{
 		$instr = $this->getAllInstructions();
 		$instr[$instructionName] = $value;
 		$this->instructions = Q::json_encode($instr);
+
+		return $this;
 	}
 	
 	/**
