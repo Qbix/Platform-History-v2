@@ -1396,7 +1396,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		callback = options;
 		options = {};
 	}
-	options = Q.extend(Streams.related.options, options);
+	options = Q.extend({}, Streams.related.options, options);
 	var near = isCategory ? 'to' : 'from',
 		far = isCategory ? 'from' : 'to',
 		farPublisherId = far+'PublisherId',
