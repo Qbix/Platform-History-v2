@@ -10101,10 +10101,11 @@ Q.info = {
 	hasNotch: (function () {
 	    var proceed = false;
 	    var div = document.createElement('div');
-	    if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
+		var CSS = window.CSS || null;
+	    if (CSS && CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
 	        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
 	        proceed = true;
-	    } else if (CSS.supports('padding-bottom: constant(safe-area-inset-bottom)')) {
+	    } else if (CSS && CSS.supports('padding-bottom: constant(safe-area-inset-bottom)')) {
 	        div.style.paddingBottom = 'constant(safe-area-inset-bottom)';
 	        proceed = true;
 	    }
