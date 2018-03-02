@@ -4164,10 +4164,11 @@ Streams.displayType = function _Streams_displayType(type) {
  * Use this to check whether variable is a Q.Streams.Stream object
  * @static
  * @method isStream
- * @param {mixed} testing
+ * @param {mixed} value
+ * @return {boolean}
  */
-Streams.isStream = function (testing) {
-	return typeof(testing) === "object" && testing.typename === "Q.Streams.Stream";
+Streams.isStream = function (value) {
+	return Q.typeOf(value) === "Q.Streams.Stream";
 };
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
 	var src = json.entry[0].thumbnailUrl;
