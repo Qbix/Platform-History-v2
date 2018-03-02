@@ -266,6 +266,10 @@
 		Users.initFacebook(function () {
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
+				function __doCancel(x) {
+					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
+				}
+
 				if (response.status === 'connected') {
 					var fb_uid = parseInt(response.authResponse.userID);
 					var ignoreUid = parseInt(Q.cookie('Users_ignorePlatformUid'));
@@ -274,14 +278,11 @@
 					// multiple times on the same page, or because the page is reloaded
 					Q.cookie('Users_ignorePlatformUid', fb_uid);
 
-					if (Users.loggedInUser && Users.loggedInUser.uids.facebook == fb_uid) {
+					if (Users.loggedInUser && Users.loggedInUser.uids.facebook === fb_uid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
 						return;
-					}
-					function __doCancel(x) {
-						_doCancel.call(this, x, platform, onSuccess, onCancel, options);
 					}
 					if (options.prompt === undefined || options.prompt === null) {
 						// show prompt only if we aren't ignoring this facebook uid
