@@ -1086,7 +1086,7 @@ Streams.invitationsPath = function _Streams_invitationsPath(userId) {
  * @return {boolean}
  */
 Streams.isStream = function (testing) {
-	return typeof(testing) === "object" && testing.typename === "Q.Streams.Stream";
+	return Q.typeOf(testing) === "Q.Streams.Stream";
 };
 
 /**
