@@ -106,6 +106,7 @@ class Streams_Participant extends Base_Streams_Participant
 	 * @param {string} $extraName The name of the extra to set,
 	 *  or an array of $extraName => $extraValue pairs
 	 * @param {mixed} $value The value to set the extra to
+	 * @return Streams_Participant
 	 */
 	function setExtra($extraName, $value = null)
 	{
@@ -118,6 +119,8 @@ class Streams_Participant extends Base_Streams_Participant
 			$attr[$extraName] = $value;
 		}
 		$this->extra = Q::json_encode($attr);
+
+		return $this;
 	}
 	
 	/**

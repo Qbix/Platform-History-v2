@@ -676,6 +676,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string|array} $attributeName The name of the attribute to set,
 	 *  or an array of $attributeName => $attributeValue pairs
 	 * @param {mixed} $value The value to set the attribute to
+	 * @return Streams_Stream
 	 */
 	function setAttribute($attributeName, $value = null)
 	{
@@ -688,6 +689,8 @@ class Streams_Stream extends Base_Streams_Stream
 			$attr[$attributeName] = $value;
 		}
 		$this->attributes = Q::json_encode($attr);
+
+		return $this;
 	}
 	
 	/**

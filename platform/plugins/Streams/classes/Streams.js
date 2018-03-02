@@ -1078,6 +1078,16 @@ Streams.invitationsPath = function _Streams_invitationsPath(userId) {
 		app: Q.Config.expect(['Q', 'app'])
 	}) + '/' + Q.Utils.splitId(userId);
 };
+/**
+ * Use this to check whether variable is a Q.Streams.Stream object
+ * @static
+ * @method isStream
+ * @param {mixed} testing
+ * @return {boolean}
+ */
+Streams.isStream = function (testing) {
+	return Q.typeOf(testing) === "Q.Streams.Stream";
+};
 
 /**
  * @property _messageHandlers
