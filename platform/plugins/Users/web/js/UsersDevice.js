@@ -440,7 +440,7 @@
 		push.on('registration', function (data) {
 			_setToStorage('deviceId', data.registrationId);
 			if (Q.Users.loggedInUser) {
-				_registerDevice();
+				_registerDevice(data.registrationId);
 			}
 		});
 
