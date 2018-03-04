@@ -280,9 +280,6 @@
 						_doSuccess(null, platform, onSuccess, onCancel, options);
 						return;
 					}
-					function __doCancel(x) {
-						_doCancel.call(this, x, platform, onSuccess, onCancel, options);
-					}
 					if (options.prompt === undefined || options.prompt === null) {
 						// show prompt only if we aren't ignoring this facebook uid
 						if (fb_uid === ignoreUid) {
@@ -309,6 +306,10 @@
 					Q.cookie('fbs_' + fbAppId, null, {path: '/'});
 					Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
 					_doCancel(null, platform, onSuccess, onCancel, options);
+				}
+				
+				function __doCancel(x) {
+					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
 				}
 
 				function __doAuthenticate() {
