@@ -57,7 +57,7 @@ Q.Tool.define('Users/list', function () {
 	 * Refresh the contents
 	 */
 	refresh: function (callback) {
-		Q.removeElement(this.element.children || this.element.childNodes);
+		Q.removeElement(this.element.children || this.element.childNodes, true);
 		this.loaded = 0;
 		this.loadMore(callback);
 		Q.handle(this.state.onRefresh, this);
