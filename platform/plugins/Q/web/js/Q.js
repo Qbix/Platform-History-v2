@@ -12276,7 +12276,7 @@ if (_isCordova) {
 	}, 'Q.handleOpenUrl');
 
 	Q.onReady.set(function _Q_browsertab() {
-		if (!cordova.plugins.browsertab) {
+		if (!(cordova.plugins && cordova.plugins.browsertab)) {
 			return;
 		}
 		cordova.plugins.browsertab.isAvailable(function(result) {
