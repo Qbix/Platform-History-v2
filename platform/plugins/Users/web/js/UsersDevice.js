@@ -85,20 +85,16 @@
 		 * @param {Boolean} callback Whether the user already has a subscription
 		 */
 		subscribed: function (callback) {
-			this.getAdapter(function (err, adapter) {
-				if (err) {
-					if (callback) {
-						callback(err);
-					} else {
-						console.warn(err);
-					}
-				} else {
-					adapter.subscribed(function (err, subscribed) {
-						if (callback) {
-							callback(err, subscribed);
-						}
-					});
+			Q.req('Users/device', 'subscribed', function (err, response) {
+				var msg;
+				if (msg = Q.firstErrorMessage(err, response && response.errors)) {
+					console.warn("Users/device/subscribed: " + msg);
+					return false;
 				}
+
+				var subscribed = response.slots.subscribed;
+
+				Q.handle(callback, response, [subscribed]);
 			})
 		},
 
