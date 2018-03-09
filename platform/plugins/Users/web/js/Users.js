@@ -311,6 +311,10 @@
 					Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
 					_doCancel(null, platform, onSuccess, onCancel, options);
 				}
+				
+				function __doCancel(x) {
+					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
+				}
 
 				function __doAuthenticate() {
 					if (!Users.Facebook.getAuthResponse()) {
