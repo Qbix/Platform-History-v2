@@ -97,7 +97,28 @@
 				Q.handle(callback, response, [subscribed]);
 			})
 		},
+		/**
+		 * Return whether device have notifications granted or no
+		 * @method notificationGranted
+		 * @static
+		 * @param {function} callback
+		 */
+		notificationGranted: function (callback) {
+			if (window.Notification) {
+				return Q.handle(callback, window.Notification, [window.Notification.permission === 'granted']);
+			}
 
+			if(cordova && cordova.plugins && cordova.plugins.notification && cordova.plugins.notification.badge && cordova.plugins.notification.badge.hasPermission) {
+				var hasPermission = cordova.plugins.notification.badge.hasPermission;
+				hasPermission(function (granted) {
+					return Q.handle(callback, hasPermission, [granted]);
+				});
+			}
+
+			console.warn("Users.Device.notificationGranted: Unable to define notification object");
+
+			Q.handle(callback, null, [null]);
+		},
 		/**
 		 * Event occurs when a notification comes in to be processed by the app.
 		 * The handlers you add are supposed to process it.
