@@ -85,17 +85,21 @@
 		 * @param {Boolean} callback Whether the user already has a subscription
 		 */
 		subscribed: function (callback) {
-			Q.req('Users/device', 'subscribed', function (err, response) {
-				var msg;
-				if (msg = Q.firstErrorMessage(err, response && response.errors)) {
-					console.warn("Users/device/subscribed: " + msg);
-					return false;
+			this.getAdapter(function (err, adapter) {
+				if (err) {
+					if (callback) {
+						callback(err);
+					} else {
+						console.warn(err);
+					}
+				} else {
+					adapter.subscribed(function (err, subscribed) {
+						if (callback) {
+							callback(err, subscribed);
+						}
+					});
 				}
-
-				var subscribed = response.slots.subscribed;
-
-				Q.handle(callback, response, [subscribed]);
-			})
+			});
 		},
 		/**
 		 * Return whether device have notifications granted or no
@@ -194,14 +198,15 @@
 							callback(err, res);
 						});
 					}).catch(function (err) {
-						if (Notification.permission === 'denied') {
-							console.error('Users.Device: Permission for Notifications was denied');
-						} else {
-							console.error('Users.Device: Unable to subscribe to push.', err);
-						}
-						if (callback) {
-							callback(err);
-						}
+						Users.Device.notificationGranted(function (granted) {
+							if (granted) {
+								console.error('Users.Device: Unable to subscribe to push.', err);
+							} else {
+								console.error('Users.Device: Permission for Notifications was denied');
+							}
+						});
+
+						Q.handle(callback, null, [err]);
 					});
 				}
 			});
@@ -377,12 +382,16 @@
 		if (!appId) {
 			return callback(new Error('Error while registering device. AppId must be must be set.'));
 		}
-		_setToStorage('deviceId', deviceId);
+
 		Q.req('Users/device', function (err, response) {
-			if (!err) {
-				Q.handle(Users.onDevice, [response.data]);
+			var msg = Q.firstErrorMessage(err, response && response.errors);
+			if (msg) {
+				return console.warn("Users.Device._registerDevice" + msg);
 			}
-			callback(err, response)
+
+			Q.handle(Users.onDevice, [response.data]);
+			_setToStorage('deviceId', deviceId);
+			Q.handle(callback, null, [err, response]);
 		}, {
 			method: 'post',
 			fields: {
@@ -487,4 +496,8 @@
 		localStorage.removeItem("Q\tUsers.Device." + type);
 	}
 
+	// remove device info from localStorage when user logout
+	Users.onLogout.set(function () {
+		_removeFromStorage('deviceId');
+	}, "Users.Device");
 })(Q, jQuery);
