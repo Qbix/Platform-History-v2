@@ -360,9 +360,9 @@
 		if (!appId) {
 			return callback(new Error('Error while registering device. AppId must be must be set.'));
 		}
-		_setToStorage('deviceId', deviceId);
 		Q.req('Users/device', function (err, response) {
 			if (!err) {
+				_setToStorage('deviceId', deviceId);
 				Q.handle(Users.onDevice, [response.data]);
 			}
 			callback(err, response)
