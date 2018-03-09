@@ -365,7 +365,7 @@
 				_setToStorage('deviceId', deviceId);
 				Q.handle(Users.onDevice, [response.data]);
 			}
-			callback(err, response)
+			callback && callback(err, response);
 		}, {
 			method: 'post',
 			fields: {
