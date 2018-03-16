@@ -114,6 +114,8 @@ Q.Tool.define("Q/tabs", function(options) {
 			}
 		}
 		
+		Q.Pointer.cancelClick(event);
+		
 		$(tab).addClass('Q_tabs_switchingTo');
 
 		state.slots = typeof state.slot === "string" 
@@ -445,6 +447,7 @@ function _addListeners(tool, $jq) {
 		|| $('.Q_discouragePointerEvents', tool.element).length) {
 			return;
 		}
+		Q.Pointer.cancelClick(event);
 		var element = this;
 		setTimeout(function () {
 			tool.switchTo([element.getAttribute('data-name'), element]);	
