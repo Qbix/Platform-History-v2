@@ -2861,7 +2861,7 @@ Q.Contextual = {
 				var li = $(element);
 				
 				if (Q.Pointer.canceledClick) {
-					return;
+					return Q.Contextual.hide();
 				}
 				
 				li.removeClass('Q_selected');
