@@ -2858,8 +2858,12 @@ Q.Contextual = {
 			{
 				var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
 				var info = Q.Contextual.collection[Q.Contextual.current].info;
-				
 				var li = $(element);
+				
+				if (Q.Pointer.canceledClick) {
+					return;
+				}
+				
 				li.removeClass('Q_selected');
 				setTimeout(function()
 				{
