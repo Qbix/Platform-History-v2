@@ -6444,7 +6444,8 @@ Q.request = function (url, slotNames, callback, options) {
 			var xmlhttp;
 			xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4) {
+				if (xmlhttp.readyState == 4 && !xmlhttp.handled) {
+					xmlhttp.handled = true;
 					if (xmlhttp.status == 200) {
 						onSuccess.call(xmlhttp, xmlhttp.responseText);
 					} else {
@@ -7560,13 +7561,13 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
  *  If this is empty, then Q.activate exits early
  * @param {Object} options
  *  Optional options to provide to tools and their children.
- * @param {Function|Q.Event} callback
+ * @param {Function|Q.Event} [callback]
  *  This will get called when the content has been completely activated.
  *  That is, after all the files, if any, have been loaded and all the
  *  constructors have run.
  *  It receives (elem, options, tools) as arguments, and the last tool to be
  *  activated as "this".
- *  @optional
+ * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
 Q.activate = function _Q_activate(elem, options, callback) {
 	
@@ -7588,7 +7589,8 @@ Q.activate = function _Q_activate(elem, options, callback) {
 		tool: null,
 		tools: {},
 		waitingForTools: [],
-		pipe: Q.pipe()
+		pipe: Q.pipe(),
+		canceled: false
 	};
 	if (typeof options === 'function') {
 		callback = options;
@@ -7597,8 +7599,23 @@ Q.activate = function _Q_activate(elem, options, callback) {
 	Q.find(elem, true, _activateTools, _initTools, options, shared);
 	shared.pipe.add(shared.waitingForTools, 1, _activated)
 		.run();
-	
+		
 	Q.Tool.beingActivated = ba;
+	
+	var promise = {};
+	var _resolve = null;
+	var _reject = null;
+	if (Q.Promise) {
+		promise = new Q.Promise(function (resolve, reject) {
+			_resolve = resolve;
+			_reject = reject;
+		});
+	}
+	promise.cancel = function () {
+		shared.canceled = true;
+		_reject && _reject();
+	};
+	return promise;
 	
 	function _activated() {
 		var tool = shared.firstTool || shared.tool;
@@ -7608,6 +7625,9 @@ Q.activate = function _Q_activate(elem, options, callback) {
 		if (callback) {
 			Q.handle(callback, tool, [elem, options, shared.tools]);
 		}
+		_resolve && _resolve({
+			element: elem, options: options, tools: shared.tools
+		});
 		Q.handle(Q.onActivate, tool, [elem, options, shared.tools]);
 	}
 };
@@ -7747,6 +7767,7 @@ var _latestLoadUrlObjects = {};
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
  * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated.
  * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed.
+ * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
 Q.loadUrl = function _Q_loadUrl(url, options) {
 	url = Q.url(url);
@@ -7786,25 +7807,51 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	var _loadUrlObject = {};
 	_latestLoadUrlObjects[o.key] = _loadUrlObject;
 	loader(urlToLoad, slotNames, loadResponse, o);
+	
+	var promise = {};
+	var _resolve = null;
+	var _reject = null;
+	var _canceled = null;
+	if (Q.Promise) {
+		promise = new Q.Promise(function (resolve, reject) {
+			_resolve = resolve;
+			_reject = reject;
+		});
+	}
+	promise.cancel = function () {
+		_canceled = true;
+		_reject && _reject();
+	};
+	return promise;
 
 	function loadResponse(err, response, redirected) {
+		if (_canceled) {
+			return; // this loadUrl call was canceled
+		}
 		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
+			_reject && _reject()
 			return; // a newer request was sent
 		}
 		if (err) {
+			_reject && _reject()
 			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
 		}
 		if (!response) {
+			_reject && _reject()
 			return Q.handle(onError, this, ["Response is empty", response]);
 		}
 		if (response.errors) {
+			_reject && _reject()
 			return Q.handle(onError, this, [response.errors[0].message]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		
 		if (redirected) {
+			_reject && _reject();
 			return;
 		}
+		
+		_resolve && _resolve(response);
 		
 		Q.Page.beingProcessed = true;
 		
@@ -8331,7 +8378,7 @@ Q.handle.options = {
 Q.handle.onUrl = new Q.Event(function () {
 	var elements = document.getElementsByClassName('Q_error_message');
 	Q.each(elements, function () {
-		Q.removeElement(this);
+		Q.removeElement(this, true);
 	});
 	Q.Pointer.stopHints();
 }, "Q");
@@ -8486,6 +8533,9 @@ function _activateTools(toolElement, options, shared) {
 			};
 			Q.mixin(toolConstructor, Q.Tool);
 			Q.mixin(_constructors[toolName], toolConstructor);
+		}
+		if (shared.canceled) {
+			return;
 		}
 		var key;
 		if (pendingParentEvent) {
