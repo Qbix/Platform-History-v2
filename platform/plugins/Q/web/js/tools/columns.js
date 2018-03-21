@@ -133,6 +133,7 @@ Q.Tool.define("Q/columns", function(options) {
 	handlers: {},
 	title: undefined,
 	column: undefined,
+	columns: [],
 	controls: undefined,
 	pagePushUrl: true,
 	scrollbarsAutoHide: {},
