@@ -382,13 +382,11 @@
 		if (!appId) {
 			return callback(new Error('Error while registering device. AppId must be must be set.'));
 		}
-
 		Q.req('Users/device', function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
 			if (msg) {
 				return console.warn("Users.Device._registerDevice" + msg);
 			}
-
 			Q.handle(Users.onDevice, [response.data]);
 			_setToStorage('deviceId', deviceId);
 			Q.handle(callback, null, [err, response]);
@@ -466,7 +464,7 @@
 		push.on('registration', function (data) {
 			_setToStorage('deviceId', data.registrationId);
 			if (Q.Users.loggedInUser) {
-				_registerDevice();
+				_registerDevice(data.registrationId);
 			}
 		});
 
