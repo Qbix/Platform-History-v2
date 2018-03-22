@@ -655,3 +655,15 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_scanning_close:after {
 	transform: rotate(-45deg);
 }
+@-webkit-keyframes Q_newsflash {
+	0%   { background-color: yellow; }
+	100% { background-color: transparent; }
+}
+@keyframes Q_newsflash {
+	0%   { background-color: yellow; }
+	100% { background-color: transparent; }
+}
+.Q_newsflash {
+	background-image:none !important;
+	animation: Q_newsflash 2s ease-in-out;
+}
