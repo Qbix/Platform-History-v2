@@ -4329,7 +4329,7 @@ Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(cla
 };
 
 /**
- * Do something for every and future child tool that is activated inside this element
+ * Do something for every and future child tool that is activated inside this tool
  * @method forEachChild
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {number} [levels] Optionally pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
