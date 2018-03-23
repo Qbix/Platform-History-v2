@@ -10,10 +10,10 @@
 Q.onReady.set(function()
 {		
 	// we really need to remove column=<id> from hash on fresh load
-	if (location.hash.indexOf('column') != -1)
+	if (location.hash.indexOf('column') !== -1)
 	{
 		location.hash = location.hash.replace(/(&|#)column=[^&]+/, '');
-		if (location.hash.charAt(1) == '&') location.hash = location.hash.substr(2);
+		if (location.hash.charAt(1) === '&') location.hash = location.hash.substr(2);
 	}
 }, 'QTools');
 
@@ -56,11 +56,11 @@ Q.Interval = {
 	 */
 	set: function(callback, interval, key)
 	{
-		if (typeof(callback) != 'function')
+		if (typeof(callback) !== 'function')
 		{
 			throw new Q.Error("Q.Interval.set: 'callback' must be a function");
 		}
-		if (typeof(interval) != 'number' || interval < 0)
+		if (typeof(interval) !== 'number' || interval < 0)
 		{
 			throw new Q.Error("Q.Interval.set: 'interval' must be a positive number");
 		}
@@ -102,7 +102,7 @@ Q.Interval = {
 	pause: function(keyOrId)
 	{
 		var col = Q.Interval.collection;
-		if (typeof(keyOrId) == 'string')
+		if (typeof(keyOrId) === 'string')
 		{
 			if (keyOrId in col)
 			{
@@ -118,7 +118,7 @@ Q.Interval = {
 		{
 			for (var i in col)
 			{
-				if (keyOrId == col[i].id)
+				if (keyOrId === col[i].id)
 				{
 					clearInterval(col[i].id);
 					col[keyOrId].running = false;
@@ -143,7 +143,7 @@ Q.Interval = {
 	resume: function(keyOrId)
 	{
 		var col = Q.Interval.collection, interval;
-		if (typeof(keyOrId) == 'string')
+		if (typeof(keyOrId) === 'string')
 		{
 			if (keyOrId in col)
 			{
@@ -164,7 +164,7 @@ Q.Interval = {
 		{
 			for (var i in col)
 			{
-				if (keyOrId == col[i].id)
+				if (keyOrId === col[i].id)
 				{
 					interval = col[keyOrId];
 					if (!interval.running)
@@ -188,7 +188,7 @@ Q.Interval = {
 	clear: function(keyOrId)
 	{
 		var col = Q.Interval.collection;
-		if (typeof(keyOrId) == 'string')
+		if (typeof(keyOrId) === 'string')
 		{
 			if (keyOrId in col)
 			{
@@ -204,7 +204,7 @@ Q.Interval = {
 		{
 			for (var i in col)
 			{
-				if (keyOrId == col[i].id)
+				if (keyOrId === col[i].id)
 				{
 					clearInterval(col[i].id);
 					delete col[i];
@@ -552,7 +552,7 @@ Q.Layout = {
 		if (!Q.Layout.inited) {
 			// some IE specific initialization
 			var browser = Q.Browser.detect();
-			if (browser.name == 'explorer' && parseInt(browser.mainVersion) <= 8)
+			if (browser.name === 'explorer' && parseInt(browser.mainVersion) <= 8)
 			{
 				Q.Layout.isIE8orLess = true;
 				$('.Q_player:last').after('<div style="font-size: 1px">&nbsp;</div>');
@@ -567,11 +567,11 @@ Q.Layout = {
 				body.addClass('Q_' + Q.info.platform);
 			}
 		
-			Q.Layout.scrollToOffset = (Q.info.platform == 'android' ? 1 : 0);
+			Q.Layout.scrollToOffset = (Q.info.platform === 'android' ? 1 : 0);
 		
 			if (Q.info.isMobile)
 			{
-				if (Q.info.platform == 'android')
+				if (Q.info.platform === 'android')
 				{
 					window.scrollTo(0, 0);
 					setTimeout(function()
@@ -593,7 +593,7 @@ Q.Layout = {
 			
 			if (Q.info.isTouchscreen)
 			{
-				if (Q.info.platform == 'ios')
+				if (Q.info.platform === 'ios')
 				{
 					$(document.body).on('touchmove', function(e)
 					{
@@ -614,7 +614,7 @@ Q.Layout = {
 						{
 							Q.Layout.fullScreenHeight = Q.Pointer.windowHeight();
 							Q.Layout.addressBarHeight = Q.Layout.fullScreenHeight - Q.Layout.heightWithAddressBar;
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								Q.Layout.orientationChange(false, true, true);
 							}
@@ -627,7 +627,7 @@ Q.Layout = {
 					}, 500, 'Q.Layout.hideAddressBar');
 				}
 				
-				if (Q.info.platform == 'android')
+				if (Q.info.platform === 'android')
 				{
 					$(document.body).on('touchstart', function(e)
 					{
@@ -642,7 +642,7 @@ Q.Layout = {
 						{
 							Q.Layout.hideAddressBar(true);
 							Q.Masks.hide('Q.screen.mask');
-							if ($('#main').height() != Q.Pointer.windowHeight())
+							if ($('#main').height() !== Q.Pointer.windowHeight())
 								Q.Layout.orientationChange(false, true);
 						}
 					});
@@ -660,7 +660,7 @@ Q.Layout = {
 				
 				focusableElements.on('blur', function()
 				{
-					if (Q.info.platform != 'android')
+					if (Q.info.platform !== 'android')
 						Q.Layout.hideAddressBar();
 					Q.Layout.focusEventOccured = false;
 					Q.Layout.keyboardVisible = false;
@@ -697,14 +697,14 @@ Q.Layout = {
 						'onFlipBegin': new Q.Event(function()
 						{
 							$(':focus').blur();
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								Q.Layout.savedScrollPos[2] = document.body.scrollTop;
 							}
 						}, 'Q_flip_begin'),
 						'onFlipFinish': new Q.Event(function()
 						{
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								document.body.scrollTop = Q.Layout.savedScrollPos[1];
 								Q.Layout.adjustColumnsHeight();
@@ -721,7 +721,7 @@ Q.Layout = {
 						{
 							$(':focus').blur();
 							var column2Slot = $('#column2_slot');
-							if (column2Slot.css('visibility') == 'hidden')
+							if (column2Slot.css('visibility') === 'hidden')
 							{
 								column2Slot.css({
 									'position': 'static',
@@ -731,14 +731,14 @@ Q.Layout = {
 									'left': 'auto'
 								});
 							}
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								Q.Layout.savedScrollPos[1] = document.body.scrollTop;
 							}
 						}, 'Q_flip_begin'),
 						'onFlipFinish': new Q.Event(function()
 						{
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								document.body.scrollTop = Q.Layout.savedScrollPos[2];
 								Q.Layout.adjustColumnsHeight();
@@ -765,7 +765,7 @@ Q.Layout = {
 				Q.Layout.flipColumns.options.column1 = Q.extend(Q.Layout.flipColumns.options.column1, {
 					'onFlipBegin': new Q.Event(function()
 					{
-						if (Q.info.platform == 'android')
+						if (Q.info.platform === 'android')
 						{
 							var participants = $('.Streams_participant_tool_wrapper');
 							participants.css({
@@ -806,7 +806,7 @@ Q.Layout = {
 							if (participants.participants) participants.participants('update');
 							var availableHeight = $('#column2_slot').outerHeight() - participants.outerHeight();
 							var chat = $('#Streams_chat_tool');
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								var params = { 'type': 'native', 'scroller': document.body, 'orientation': 'v', 'topOffset': Q.Layout.scrollToOffset };
 								chat.plugins('Q/scrollIndicators', 'remove')
@@ -816,13 +816,13 @@ Q.Layout = {
 								chat.chatTool('update', availableHeight);
 						}, 0);
 						
-						if (Q.info.platform == 'android')
+						if (Q.info.platform === 'android')
 						{
 							var participants = $('.Streams_participant_tool_wrapper');
 							var participantsWidth = Q.Pointer.windowWidth, participantsLeft = 0;
 							if (Q.info.isMobile)
 							{
-								if (Q.Layout.orientation == 'landscape')
+								if (Q.Layout.orientation === 'landscape')
 								{
 									participantsWidth = Q.Pointer.windowWidth() * 0.75 - 2;
 									participantsLeft = Q.Pointer.windowWidth() - participantsWidth;
@@ -856,13 +856,13 @@ Q.Layout = {
 					if (!Q.Layout.ignoreHashChange)
 					{
 						var h = location.hash;
-						if (h.indexOf('column=1') != -1
-						|| (h.indexOf('column=') == -1 && Q.Layout.currentHash))
+						if (h.indexOf('column=1') !== -1
+						|| (h.indexOf('column=') === -1 && Q.Layout.currentHash))
 						{
 							Q.Layout.wasHashChange = true;
 							Q.Layout.flipColumns('column1');
 						}
-						if (h.indexOf('column=2') != -1)
+						if (h.indexOf('column=2') !== -1)
 						{
 							Q.Layout.wasHashChange = true;
 							Q.Layout.flipColumns('column2');
@@ -916,14 +916,14 @@ Q.Layout = {
 		var column0Slot = $('#column0_slot');
 		var column1Slot = $('#column1_slot');
 		var column2Slot = $('#column2_slot');
-		if (Q.info.isTouchscreen && Q.info.platform != 'android')
+		if (Q.info.isTouchscreen && Q.info.platform !== 'android')
 		{
 			column0Slot.plugin('Q/iScroll', 'remove');
 			column1Slot.plugin('Q/iScroll', 'remove');
 			column2Slot.plugin('Q/iScroll', 'remove');
 		}
 		// hack-fast-flipping columns back to column1 if column2 currently displayed
-		if (Q.info.isMobile && Q.Layout.flipColumns.current == 'column2')
+		if (Q.info.isMobile && Q.Layout.flipColumns.current === 'column2')
 		{
 			column1Slot.show().attr({ 'data-side': 'front' });
 			column2Slot.css({ 'display': 'block', 'visibility': 'hidden', 'top': '-10000px' }).attr({ 'data-side': 'back' });
@@ -932,7 +932,7 @@ Q.Layout = {
 		
 		$('.Q_hautoscroll').plugin('Q/hautoscroll', 'remove');
 		
-		if (Q.info.platform == 'android') {
+		if (Q.info.platform === 'android') {
 			window.scrollTo(0, Q.Layout.scrollToOffset);
 			$('#column2_slot').css({ 'position': 'absolute' });
 		}
@@ -952,7 +952,7 @@ Q.Layout = {
 	 */
 	hideAddressBar: function(doNotResize)
 	{
-		if (Q.info.platform == 'android' && document.body.offsetHeight >= Q.Pointer.windowHeight())
+		if (Q.info.platform === 'android' && document.body.offsetHeight >= Q.Pointer.windowHeight())
 			doNotResize = true;
 		else if (doNotResize === undefined)
 			doNotResize = false;
@@ -976,7 +976,7 @@ Q.Layout = {
 			Q.Layout.normalBodyHeightTimeout = setTimeout(function()
 			{
 				$(document.body).css({ 'height': '' });
-				if (Q.info.platform == 'android')
+				if (Q.info.platform === 'android')
 				{
 					var nativeBlocks = Q.Layout.android.options.nativelyScrolledBlocks;
 					for (var i = 0; i < nativeBlocks.length; i++)
@@ -1026,7 +1026,7 @@ Q.Layout = {
 			}
 			
 			$(document.body).removeClass('Q_portrait Q_landscape').addClass('Q_' + Q.Layout.orientation);
-			if (Q.info.isMobile && Q.info.platform != 'android')
+			if (Q.info.isMobile && Q.info.platform !== 'android')
 				$(document.body).css({ 'height': '1000px' });
 			$('#main').css({ 'opacity': '0' });
 			var orientationMask = $('.Q_orientation_mask');
@@ -1052,16 +1052,16 @@ Q.Layout = {
 			
 			setTimeout(function()
 			{
-				if (Q.Layout.fullScreenHeight != 0 && Q.Layout.addressBarHeight != 0)
+				if (Q.Layout.fullScreenHeight !== 0 && Q.Layout.addressBarHeight !== 0)
 				{
 					Q.Layout.fullScreenHeight = windowHeight;
 					Q.Layout.heightWithAddressBar = Q.Layout.fullScreenHeight - Q.Layout.addressBarHeight;
 				}
-				Q.Layout.orientationChange(previousOrientation != Q.Layout.orientation);
+				Q.Layout.orientationChange(previousOrientation !== Q.Layout.orientation);
 			}, 0);
 		}
 		if (Q.Layout.fullScreenHeight && windowHeight < Q.Layout.fullScreenHeight &&
-				((Q.info.isMobile && (windowHeight != Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
+				((Q.info.isMobile && (windowHeight !== Q.Layout.heightWithAddressBar)) || !Q.info.isMobile))
 		{
 			Q.Layout.heightWithKeyboard = windowHeight;
 			Q.Layout.keyboardVisible = true;
@@ -1071,16 +1071,16 @@ Q.Layout = {
 			Q.Layout.keyboardVisible = false;
 		}
 		var main = $('#main');
-		if (Q.info.platform != 'android' && main.length != 0 && main.height() != windowHeight)
+		if (Q.info.platform !== 'android' && main.length !== 0 && main.height() !== windowHeight)
 		{
 			// if it's 'height-only' orientation change and if keyboard appeared
 			// we shouldn't run orientationChange() in such case
 			// also there's no need to adjust height if it's address bar appeared
-			if (!Q.Layout.keyboardVisible && windowHeight != Q.Layout.heightWithAddressBar)
+			if (!Q.Layout.keyboardVisible && windowHeight !== Q.Layout.heightWithAddressBar)
 				Q.Layout.orientationChange(false, true, true);
 		}
 		if (Q.Layout.handleAddressBarAppearing && Q.Layout.heightWithAddressBar < Q.Layout.fullScreenHeight &&
-				Q.Pointer.windowHeight() == Q.Layout.heightWithAddressBar && !Q.Masks.isVisible('Q.screen.mask'))
+				Q.Pointer.windowHeight() === Q.Layout.heightWithAddressBar && !Q.Masks.isVisible('Q.screen.mask'))
 		{
 			Q.Masks.show('Q.screen.mask');
 			Q.Layout.addressBarVisible = true;
@@ -1105,7 +1105,7 @@ Q.Layout = {
 			switched = false;
 		if (heightOnly === undefined)
 			heightOnly = false;
-		if (Q.info.platform == 'android')
+		if (Q.info.platform === 'android')
 			dontHideAddressBar = true;
 		else if (dontHideAddressBar === undefined)
 			dontHideAddressBar = false;
@@ -1134,7 +1134,7 @@ Q.Layout = {
 				$('.Q_placeholder').css({ 'visibility': 'hidden' });
 			}
 			
-			if (Q.info.platform == 'android')
+			if (Q.info.platform === 'android')
 			{
 				Q.Layout.androidInitialOffset = -1;
 				
@@ -1146,7 +1146,7 @@ Q.Layout = {
 				Q.Layout.processAndroidFixedBlocks();
 				if (Q.info.isMobile)
 				{
-					if (Q.Layout.orientation == 'landscape')
+					if (Q.Layout.orientation === 'landscape')
 				 	{
 						var dashboardWidth = Q.Pointer.windowWidth() * 0.25;
 						dashboard.css({ 'width': dashboardWidth + 'px' });
@@ -1173,7 +1173,7 @@ Q.Layout = {
 						});
 						column2Slot.data('left', column0Slot.css('margin-left'));
 					}
-					else if (Q.Layout.orientation == 'portrait')
+					else if (Q.Layout.orientation === 'portrait')
 					{
 						column0Slot.css({ 'width': '', 'left': 0, 'margin-left': '0' });
 						column0Slot.data('left', '0');
@@ -1186,12 +1186,12 @@ Q.Layout = {
 			}
 		}
 		
-		if (Q.info.isMobile && Q.Layout.orientation == 'landscape') {
+		if (Q.info.isMobile && Q.Layout.orientation === 'landscape') {
 			var w = parseInt(dashboard.css('width'));
 			dashboard.data('Q_dashboard_width', Math.min(Q.Pointer.windowWidth() - column1Slot.width() - 2, column1Slot.width()));
 		}
 		
-		if (Q.info.platform == 'android')
+		if (Q.info.platform === 'android')
 		{
 			Q.Layout.adjustColumnsHeight();
 		}
@@ -1214,8 +1214,8 @@ Q.Layout = {
 			// document body is offset to the left behind left border of the screen
 			var body = $(document.body);
 			body.css({ 'width': Q.Pointer.windowWidth() + 'px' });
-			if (switched && Q.info.isLocalFile && Q.Layout.orientation == 'portrait' &&
-					Q.Layout.orientationOnLoad == 'landscape' && Q.info.isTablet && Q.info.platform == 'ios')
+			if (switched && Q.info.isLocalFile && Q.Layout.orientation === 'portrait' &&
+					Q.Layout.orientationOnLoad === 'landscape' && Q.info.isTablet && Q.info.platform === 'ios')
 			{
 				body.css({ 'margin-left': ((screen.height - screen.width) / 2) + 'px' });
 				body.on(Q.Pointer.start.eventName + '.Q_orientation', function()
@@ -1234,7 +1234,7 @@ Q.Layout = {
 				body.css({ 'margin-left': '' });
 			}
 			
-			if (Q.info.platform != 'android')
+			if (Q.info.platform !== 'android')
 			{
 				main.css({ 'height': Q.Pointer.windowHeight() + 'px' });
 			}
@@ -1257,10 +1257,10 @@ Q.Layout = {
 		var columnsHeight = 0;
 		if (Q.info.isMobile)
 		{
-			if (Q.info.platform != 'android')
+			if (Q.info.platform !== 'android')
 			{
 				columnsHeight = main.height() - topStub.height()
-											- (Q.Layout.orientation == 'portrait' ? dashboard.outerHeight() : 0);
+											- (Q.Layout.orientation === 'portrait' ? dashboard.outerHeight() : 0);
 				column0Slot.css({ 'height': columnsHeight + 'px' });
 				column1Slot.css({ 'height': columnsHeight + 'px' });
 				column2Slot.css({ 'height': columnsHeight + 'px' });
@@ -1268,7 +1268,7 @@ Q.Layout = {
 		}
 		else if (Q.info.isTablet)
 		{
-			if (Q.Layout.orientation == 'portrait')
+			if (Q.Layout.orientation === 'portrait')
 			{
 				columnsHeight = Q.Pointer.windowHeight() - topStub.height() - dashboard.outerHeight();
 			}
@@ -1293,8 +1293,8 @@ Q.Layout = {
 			column1Contents.css({ 'height': contentsHeight + 'px' });
 			
 			var column2Contents = column2Slot.find('.Q_column2_contents');
-			if (column2Contents.find('.Streams_chat_tool').length == 0 &&
-					column2Contents.find('#Streams_participant_tool').length == 0)
+			if (column2Contents.find('.Streams_chat_tool').length === 0 &&
+					column2Contents.find('#Streams_participant_tool').length === 0)
 			{
 				contentsHeight = column2Slot.height() - parseInt(column2Contents.css('padding-top'))
                        - parseInt(column2Contents.css('padding-bottom'));
@@ -1330,7 +1330,7 @@ Q.Layout = {
 			}, 1000);
 		}
 		
-		if (Q.info.platform == 'android')
+		if (Q.info.platform === 'android')
 		{
 			var params = { 'type': 'native', 'scroller': document.body, 'orientation': 'v', 'topOffset': Q.Layout.scrollToOffset };
 			var nativeBlocks = Q.Layout.android.options.nativelyScrolledBlocks;
@@ -1362,7 +1362,7 @@ Q.Layout = {
 		var column1Slot = $('#column1_slot');
 		var column2Slot = $('#column2_slot');
 		var topStub = $('#main > .Q_top_stub');
-		if (Q.info.platform == 'android') // TODO (DT): android-specific scrolling adjustments, if any.
+		if (Q.info.platform === 'android') // TODO (DT): android-specific scrolling adjustments, if any.
 		{
 			
 		}
@@ -1381,7 +1381,7 @@ Q.Layout = {
 						column0Slot.plugin('Q/iScroll');
 					}
 					var column0Scrollbar = column0Slot.children('div:last:not(.Q_column0_contents)');
-					if (column0Scrollbar.length != 0)
+					if (column0Scrollbar.length !== 0)
 					{
 						column0Scrollbar.detach();
 						$(document.body).append(column0Scrollbar);
@@ -1394,7 +1394,7 @@ Q.Layout = {
 					if (column0Scrollbar)
 					{
 						column0Scrollbar.css({
-							'top': (topStub.height() + (Q.Layout.orientation == 'portrait' ? dashboard.height() : 0)) + 'px',
+							'top': (topStub.height() + (Q.Layout.orientation === 'portrait' ? dashboard.height() : 0)) + 'px',
 							'left': (column0Slot.offset().left + column0Slot.width() - column0Scrollbar.outerWidth()) + 'px',
 							'right': '',
 							'height': column0Slot.outerHeight() + 'px'
@@ -1424,7 +1424,7 @@ Q.Layout = {
 						column1Slot.plugin('Q/iScroll');
 					}
 					var column1Scrollbar = column1Slot.children('div:last:not(.Q_column1_contents)');
-					if (column1Scrollbar.length != 0)
+					if (column1Scrollbar.length !== 0)
 					{
 						column1Scrollbar.detach();
 						$(document.body).append(column1Scrollbar);
@@ -1437,7 +1437,7 @@ Q.Layout = {
 					if (column1Scrollbar)
 					{
 						column1Scrollbar.css({
-							'top': (topStub.height() + (Q.Layout.orientation == 'portrait' ? dashboard.height() : 0)) + 'px',
+							'top': (topStub.height() + (Q.Layout.orientation === 'portrait' ? dashboard.height() : 0)) + 'px',
 							'left': (column1Slot.offset().left + column1Slot.width() - column1Scrollbar.outerWidth()) + 'px',
 							'right': '',
 							'height': column1Slot.outerHeight() + 'px'
@@ -1467,7 +1467,7 @@ Q.Layout = {
 						column2Slot.plugin('Q/iScroll');
 					}
 					var column2Scrollbar = column2Slot.children('div:last:not(.Q_column2_contents)');
-					if (column2Scrollbar.length != 0)
+					if (column2Scrollbar.length !== 0)
 					{
 						column2Scrollbar.detach();
 						$(document.body).append(column2Scrollbar);
@@ -1480,7 +1480,7 @@ Q.Layout = {
 					if (column2Scrollbar)
 					{
 						column2Scrollbar.css({
-							'top': (topStub.height() + (Q.Layout.orientation == 'portrait' ? dashboard.height() : 0)) + 'px',
+							'top': (topStub.height() + (Q.Layout.orientation === 'portrait' ? dashboard.height() : 0)) + 'px',
 							'left': (column2Slot.offset().left + column2Slot.width() - column2Scrollbar.outerWidth()) + 'px',
 							'right': '',
 							'height': column2Slot.outerHeight() + 'px'
@@ -1527,7 +1527,7 @@ Q.Layout = {
 	adjustColumnsHeight: function()
 	{
 		var column1Slot = $('#column1_slot'), column2Slot = $('#column2_slot'), dashboard = $('#dashboard_slot');
-		var columnsAvailableHeight = Q.Pointer.windowHeight() - (Q.Layout.orientation == 'portrait' ? dashboard.outerHeight() : 0);
+		var columnsAvailableHeight = Q.Pointer.windowHeight() - (Q.Layout.orientation === 'portrait' ? dashboard.outerHeight() : 0);
 		if (column1Slot.children('.Q_column1_contents').outerHeight() < columnsAvailableHeight)
 		{
 			column1Slot.css({ 'height': columnsAvailableHeight + 'px' });
@@ -1558,18 +1558,18 @@ Q.Layout = {
 		var body = $(document.body);
 		var columns = $('#column0_slot, #column1_slot, #column2_slot');
 		var target = e ? e.originalEvent.touches[0].target : null, $target = $(target);
-		if (target != null && target.id != 'column0_slot' && target.id != 'column1_slot' && target.id != 'Streams_chat_tool' &&
-				$target.parents(Q.Layout.android.options.nativelyScrolledBlocks.join(', ')).length == 0 &&
-				!$target.hasClass('Q_dialog_trigger') && $target.parents('.Q_dialog_trigger').length == 0 &&
-				!$target.hasClass('Q_fullscreen_dialog') && $target.parents('.Q_fullscreen_dialog').length == 0)
+		if (target !== null && target.id !== 'column0_slot' && target.id !== 'column1_slot' && target.id !== 'Streams_chat_tool' &&
+				$target.parents(Q.Layout.android.options.nativelyScrolledBlocks.join(', ')).length === 0 &&
+				!$target.hasClass('Q_dialog_trigger') && $target.parents('.Q_dialog_trigger').length === 0 &&
+				!$target.hasClass('Q_fullscreen_dialog') && $target.parents('.Q_fullscreen_dialog').length === 0)
 		{
 			if (!Q.Layout.androidFixed)
 			{
 				body.css({ 'height': Q.Layout.androidBodyHeight + 'px' });
-				if (Q.Layout.androidInitialOffset == -1)
+				if (Q.Layout.androidInitialOffset === -1)
 				{
 					Q.Layout.androidInitialOffset = $('#notices_slot').outerHeight()
-																				+ (Q.Layout.orientation == 'portrait' ? $('#dashboard_slot').outerHeight(): 0);
+																				+ (Q.Layout.orientation === 'portrait' ? $('#dashboard_slot').outerHeight(): 0);
 				}
 				Q.Layout.curScrollPos = document.body.scrollTop;
 				columns.css({
@@ -1594,7 +1594,7 @@ Q.Layout = {
 				'top': 'auto'
 			});
 			var column2Slot = $(columns[2]);
-			if (column2Slot.css('visibility') == 'hidden')
+			if (column2Slot.css('visibility') === 'hidden')
 			{
 				column2Slot.css({ 'position': '', 'top': '' });
 			}
@@ -1643,7 +1643,7 @@ Q.Layout = {
 			if (Q.info.isMobile)
 			{
 				layoutUpdateOptions.participantsWidth = Q.Pointer.windowWidth(), layoutUpdateOptions.participantsLeft = 0;
-				if (Q.Layout.orientation == 'landscape')
+				if (Q.Layout.orientation === 'landscape')
 				{
 					participantsWidth = Q.Pointer.windowWidth() * 0.75 - 2;
 					participantsLeft = Q.Pointer.windowWidth() - participantsWidth;
@@ -1707,7 +1707,7 @@ Q.Layout = {
 				var columnsFlip = $('#columns_flip');
 				Q.each(['column1', 'column2'], function (i, columnName) {
 					Q.Layout.flipColumns.fn[columnName] = function(o) {
-						if (Q.Layout.flipColumns.current != columnName) {
+						if (Q.Layout.flipColumns.current !== columnName) {
 							Q.Layout.flipColumns.current = columnName;
 							Q.handle(o.onFlipBegin);
 							columnsFlip.plugin('Q/flip', {
@@ -1937,7 +1937,7 @@ Q.Content = {
 		listing: function(contents)
 		{
 			var container = $('#listing_slot');
-			if (Q.typeOf(contents) == 'array')
+			if (Q.typeOf(contents) === 'array')
 			{
 				var listItems = '';
 				for (var i in contents)
@@ -2034,7 +2034,7 @@ Q.Dashboard = {
 			peopleSlot.hide();
 		}
 		
-		if (!Q.info.isTouchscreen || (Q.info.isTouchscreen && Q.Layout.orientation == 'landscape'))
+		if (!Q.info.isTouchscreen || (Q.info.isTouchscreen && Q.Layout.orientation === 'landscape'))
 		{
 			var mainHeight = Q.info.isTouchscreen ? Q.Pointer.windowHeight() : $('#main').height();
 			Q.Dashboard.availableHeight = Q.info.isTouchscreen
@@ -2109,16 +2109,16 @@ Q.Dashboard = {
 			{
 				if ( expandable.hasClass('Q_dashboard_expandable')
 				&& expandable.children().length > 0
-				&& ( Q.Dashboard.currentExpandable == null
+				&& ( Q.Dashboard.currentExpandable === null
 					|| (
-						Q.Dashboard.currentExpandable != null
-						&& Q.Dashboard.currentExpandable[0] != expandable[0]
+						Q.Dashboard.currentExpandable !== null
+						&& Q.Dashboard.currentExpandable[0] !== expandable[0]
 					) 
 				)) {
 					var expandHeight = expandable.find('.Q_listing').height();
 					var itemsHeight = 0;
 					items.each(function() {
-						if ($(this).css('display') == 'block')
+						if ($(this).css('display') === 'block')
 							itemsHeight += items.outerHeight();
 					});
 					if (expandHeight + itemsHeight > Q.Dashboard.availableHeight) {
@@ -2138,7 +2138,7 @@ Q.Dashboard = {
 							var listing = expandable.find('.Q_listing');
 							if (Q.info.isTouchscreen) {
 								if (listing.height() > expandHeight) {
-									if (Q.info.platform == 'android') {
+									if (Q.info.platform === 'android') {
 										expandable.plugin('Q/touchscroll', 'remove')
 										.plugin('Q/touchscroll');
 									} else {
@@ -2167,14 +2167,14 @@ Q.Dashboard = {
 						}
 					);
 					
-					if (expandable[0] == expandables[expandables.length - 1]) {
+					if (expandable[0] === expandables[expandables.length - 1]) {
 						bottomEdge.show();
 					} else {
 						bottomEdge.hide();
 					}
 			
-					if (Q.Dashboard.currentExpandable != null) {
-						if (Q.info.platform == 'android') {
+					if (Q.Dashboard.currentExpandable !== null) {
+						if (Q.info.platform === 'android') {
 							Q.Dashboard.currentExpandable.plugin('Q/touchscroll', 'remove');
 						} else {
 							Q.Dashboard.currentExpandable.plugin('Q/iScroll', 'remove');
@@ -2199,7 +2199,7 @@ Q.Dashboard = {
 		function selectListItem(elem) {
 			if (elem) return;
 			var lis = {}, li = null;
-			var containers = (Q.Layout.orientation == 'landscape')
+			var containers = (Q.Layout.orientation === 'landscape')
 				? dashboard
 				: $('.Q_dashboard_listing_contextual');
 			containers.find('.Q_listing li').each(function () {
@@ -2209,9 +2209,9 @@ Q.Dashboard = {
 				}
 				var url = Q.url(action);
 				var u = Q.info.url.split('?')[0];
-				if (url == u.substr(0, action.length)
-				|| url == Q.info.uriString
-				|| url == Q.info.uriString.split(' ')[0]) {
+				if (url === u.substr(0, action.length)
+				|| url === Q.info.uriString
+				|| url === Q.info.uriString.split(' ')[0]) {
 					lis[url] = this;
 				}
 				$(this).removeClass('Q_permanently_selected');
@@ -2253,7 +2253,7 @@ Q.Dashboard = {
 			dashboard.find('.Q_dashboard_item').each(function()
 			{
 				var $this = $(this);
-				if ($this.css('display') == 'block')
+				if ($this.css('display') === 'block')
 					itemsHeight += $this.outerHeight();
 			});
 			$('.Q_landscape .Q_dashboard_item').plugin('Q/contextual', 'remove');
@@ -2265,7 +2265,7 @@ Q.Dashboard = {
 				if (Q.info.isTouchscreen)
 				{
 					expandable.css({ 'height': (Q.Dashboard.availableHeight - itemsHeight) + 'px' });
-					if (Q.info.platform == 'android')
+					if (Q.info.platform === 'android')
 					{
 						expandable.plugin('Q/touchscroll', 'remove').plugin('Q/touchscroll');
 					}
@@ -2303,7 +2303,7 @@ Q.Dashboard = {
 			{
 				if (Q.info.isTouchscreen)
 				{
-					if (Q.info.platform == 'android')
+					if (Q.info.platform === 'android')
 					{
 						expandable.plugin('Q/touchscroll', 'remove');
 					}
@@ -2540,7 +2540,7 @@ Q.Contextual = {
 	makeShowHandler: function(events)
 	{
 		if (!Q.Contextual.showHandler)
-		{	
+		{
 			Q.Contextual.showHandler = function(e)
 			{
 				if (Q.Contextual.triggeringDisabled) {
@@ -2553,7 +2553,7 @@ Q.Contextual = {
 				for (var i = 0; i < col.length; i++)
 				{
 					trigger = col[i].trigger;
-					if (trigger.length != 0)
+					if (trigger.length !== 0)
 					{
 						triggerTarget = trigger[0];
 						offset = trigger.offset();
@@ -2563,14 +2563,14 @@ Q.Contextual = {
 								($(e.target).closest(triggerTarget).length))
 						{
 							var current = Q.Contextual.current;
-							if (current != -1)
+							if (current !== -1)
 								Q.Contextual.hide();
 							
-							if (current == i) // if triggering same contextual that was shown before
+							if (current === i) // if triggering same contextual that was shown before
 								return e.preventDefault();
 							
 							Q.Contextual.current = i;
-							if (Q.info.platform == 'android')
+							if (Q.info.platform === 'android')
 							{
 								setTimeout(function()
 								{
@@ -2617,7 +2617,7 @@ Q.Contextual = {
 				var latest = Q.Contextual.collection[latestId];
 				latest.trigger.bind('mouseenter.Q_contextual', function()
 				{
-					if (Q.Contextual.current != -1)
+					if (Q.Contextual.current !== -1)
 						Q.Contextual.hide();
 				 
 					if (!Q.Contextual.triggeringDisabled)
@@ -2642,118 +2642,122 @@ Q.Contextual = {
 		{	
 			Q.Contextual.startEventHandler = function(e)
 			{
-				if (Q.Contextual.current != -1 && !Q.Contextual.justShown)
+				if (!(Q.Contextual.current !== -1 && !Q.Contextual.justShown))
 				{
-					var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
-					var offset = contextual.offset();
-					if (Q.info.platform == 'android')
-						offset.top -= window.scrollY;
-					
-					var info = Q.Contextual.collection[Q.Contextual.current].info;
-					
-					var event = (Q.info.isTouchscreen ? e.originalEvent.touches[0] : e);
-					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
-					info.startY = info.moveY = py;
-					if (px >= offset.left && px <= offset.left + contextual.outerWidth() &&
-							py >= offset.top && py <= offset.top + contextual.outerHeight())
-					{
-						info.moveTarget = null;
-						if (event.target.tagName && event.target.tagName.toLowerCase() == 'li')
-							info.moveTarget = $(event.target);
-						else if (event.target.parentNode.tagName && event.target.parentNode.tagName.toLowerCase() == 'li')
-							info.moveTarget = $(event.target.parentNode);
-						if (info.moveTarget)
-						{
-							contextual.find('.Q_listing > li').removeClass('Q_selected');
-							info.moveTarget.addClass('Q_selected');
-							info.selectedAtStart = true;
-						}
-					}
-					else
-					{
-						Q.Contextual.hide();
-					}
-					return false;
+					return;
 				}
+
+				var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
+				var offset = contextual.offset();
+				if (Q.info.platform === 'android')
+					offset.top -= window.scrollY;
+
+				var info = Q.Contextual.collection[Q.Contextual.current].info;
+
+				var event = (Q.info.isTouchscreen ? e.originalEvent.touches[0] : e);
+				var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
+				info.startY = info.moveY = py;
+				if (px >= offset.left && px <= offset.left + contextual.outerWidth() &&
+						py >= offset.top && py <= offset.top + contextual.outerHeight())
+				{
+					info.moveTarget = null;
+					if (event.target.tagName && event.target.tagName.toLowerCase() === 'li')
+						info.moveTarget = $(event.target);
+					else if (event.target.parentNode.tagName && event.target.parentNode.tagName.toLowerCase() === 'li')
+						info.moveTarget = $(event.target.parentNode);
+					if (info.moveTarget)
+					{
+						contextual.find('.Q_listing > li').removeClass('Q_selected');
+						info.moveTarget.addClass('Q_selected');
+						info.selectedAtStart = true;
+					}
+				}
+				else
+				{
+					Q.Contextual.hide();
+				}
+				return false;
 			};
 			$(document.body).on(Q.Pointer.start.eventName, Q.Contextual.startEventHandler);
 			
 			Q.Contextual.moveEventHandler = function(e)
 			{
-				if (Q.Contextual.current != -1)
+				if (Q.Contextual.current === -1)
 				{
-					var current = Q.Contextual.collection[Q.Contextual.current];
-					var contextual = current.contextual;
-					var conOffset = contextual.offset();
-					var trigger = current.trigger;
-					var triggerOffset = (trigger.length != 0 ? trigger.offset() : { 'top': -1000, 'left': -1000 });
-					var info = current.info;
-					if (Q.info.platform == 'android')
+					return;
+				}
+
+				var current = Q.Contextual.collection[Q.Contextual.current];
+				var contextual = current.contextual;
+				var conOffset = contextual.offset();
+				var trigger = current.trigger;
+				var triggerOffset = (trigger.length !== 0 ? trigger.offset() : { 'top': -1000, 'left': -1000 });
+				var info = current.info;
+				if (Q.info.platform === 'android')
+				{
+					conOffset.top -= window.scrollY;
+					triggerOffset.top -= window.scrollY;
+				}
+
+				var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
+				var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
+
+				var newMoveTarget = $(Q.Pointer.elementFromPoint(px, py)).closest('.Q_listing li');
+				if (info.moveTarget)
+				{
+					if (info.selectedAtStart)
 					{
-						conOffset.top -= window.scrollY;
-						triggerOffset.top -= window.scrollY;
-					}
-					
-					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
-					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
-					
-					var newMoveTarget = $(Q.Pointer.elementFromPoint(px, py)).closest('.Q_listing li');
-					if (info.moveTarget)
-					{
-						if (info.selectedAtStart)
+						if (info.startY !== 0 && Math.abs(info.moveY - info.startY) >= 5)
 						{
-							if (info.startY != 0 && Math.abs(info.moveY - info.startY) >= 5)
-							{
-								info.moveTarget.removeClass('Q_selected');
-							}
-						}
-						else
-						{
-							if (px >= conOffset.left && px <= conOffset.left + contextual.outerWidth() &&
-									py >= conOffset.top && py <= conOffset.top + contextual.outerHeight())
-							{
-								info.inside = true;
-								if (newMoveTarget.length > 0 && newMoveTarget[0] != info.moveTarget[0])
-								{
-									info.moveTarget.removeClass('Q_selected');
-									newMoveTarget.addClass('Q_selected');
-								}
-							}
-							else if (info.inside)
-							{
-								info.inside = false;
-								contextual.find('.Q_listing li').removeClass('Q_selected');
-							}
-							info.moveTarget = newMoveTarget;
+							info.moveTarget.removeClass('Q_selected');
 						}
 					}
 					else
 					{
+						if (px >= conOffset.left && px <= conOffset.left + contextual.outerWidth() &&
+							py >= conOffset.top && py <= conOffset.top + contextual.outerHeight())
+						{
+							info.inside = true;
+							if (newMoveTarget.length > 0 && newMoveTarget[0] !== info.moveTarget[0])
+							{
+								info.moveTarget.removeClass('Q_selected');
+								newMoveTarget.addClass('Q_selected');
+							}
+						}
+						else if (info.inside)
+						{
+							info.inside = false;
+							contextual.find('.Q_listing li').removeClass('Q_selected');
+						}
 						info.moveTarget = newMoveTarget;
 					}
-					
-					if (info.startY === 0)
-						info.startY = py;
-					// this condition is again to fight against strange bug in Chrome (when touchmove coordinate is the same as on touchstart)
-					else if (py != info.startY)
-						info.moveY = py;
-					
-					// if 'triggerOnHover' is on here we should track (only for desktop) if mouse cursor
-					// is out of bounds of both contextual and its trigger element
-					// if so, we're hiding contextual, but before that we should wait some time
-					if (Q.Contextual.triggerOnHover && !Q.info.isTouchscreen)
+				}
+				else
+				{
+					info.moveTarget = newMoveTarget;
+				}
+
+				if (info.startY === 0)
+					info.startY = py;
+				// this condition is again to fight against strange bug in Chrome (when touchmove coordinate is the same as on touchstart)
+				else if (py !== info.startY)
+					info.moveY = py;
+
+				// if 'triggerOnHover' is on here we should track (only for desktop) if mouse cursor
+				// is out of bounds of both contextual and its trigger element
+				// if so, we're hiding contextual, but before that we should wait some time
+				if (Q.Contextual.triggerOnHover && !Q.info.isTouchscreen)
+				{
+					if (!(
+							(px >= conOffset.left && px <= conOffset.left + contextual.outerWidth() &&
+								py >= conOffset.top - (info.inBottomHalf ? 0 : info.arrowHeight) &&
+								py <= conOffset.top + contextual.outerHeight() + (info.inBottomHalf ? info.arrowHeight : 0)) ||
+							(px >= triggerOffset.left && px <= triggerOffset.left + trigger.outerWidth() &&
+								py >= triggerOffset.top && py <= triggerOffset.top + trigger.outerHeight())
+						)
+					)
 					{
-						if (!(
-									 (px >= conOffset.left && px <= conOffset.left + contextual.outerWidth() &&
-										py >= conOffset.top - (info.inBottomHalf ? 0 : info.arrowHeight) &&
-										py <= conOffset.top + contextual.outerHeight() + (info.inBottomHalf ? info.arrowHeight : 0)) ||
-									 (px >= triggerOffset.left && px <= triggerOffset.left + trigger.outerWidth() &&
-										py >= triggerOffset.top && py <= triggerOffset.top + trigger.outerHeight())
-									)
-								)
-						{
-							Q.Contextual.hide();
-						}
+						Q.Contextual.hide();
 					}
 				}
 			};
@@ -2773,97 +2777,90 @@ Q.Contextual = {
 				if ($(e.target).hasClass('Q_contextual_inactive')) {
 					return;
 				}
-				if (Q.Contextual.current != -1)
+				if (Q.Contextual.current === -1) {
+					return;
+				}
+				var current = Q.Contextual.collection[Q.Contextual.current];
+				var contextual = current.contextual;
+				var trigger = current.trigger;
+				var info = current.info;
+				var offset = trigger.offset();
+				if (Q.info.platform === 'android')
+					offset.top -= window.scrollY;
+
+				var listingWrapper = null;
+				if (contextual.find('.Q_scroller_wrapper').length !== 0)
+					listingWrapper = contextual.find('.Q_scroller_wrapper');
+				else
+					listingWrapper = contextual.children('.Q_listing_wrapper');
+
+				var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
+				var target = (info.curScroll === 'iScroll' || info.curScroll === 'touchscroll'
+						? event.target
+						: (info.moveTarget ? info.moveTarget[0] : event.target));
+				var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
+
+				var element = target;
+				while (element)
 				{
-					var current = Q.Contextual.collection[Q.Contextual.current];
-					var contextual = current.contextual;
-					var trigger = current.trigger;
-					var info = current.info;
-					var offset = trigger.offset();
-					if (Q.info.platform == 'android')
-						offset.top -= window.scrollY;
-					
-					var listingWrapper = null;
-					if (contextual.find('.Q_scroller_wrapper').length != 0)
-						listingWrapper = contextual.find('.Q_scroller_wrapper');
-					else
-						listingWrapper = contextual.children('.Q_listing_wrapper');
-					
-					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
-					var target = (info.curScroll == 'iScroll' || info.curScroll == 'touchscroll'
-							? event.target
-							: (info.moveTarget ? info.moveTarget[0] : event.target));
-					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
-					
-					var element = target;
+					if (element.tagName && element.tagName.toLowerCase() === 'li' && $(element).parents('.Q_contextual').length !== 0) {
+						break;
+					}
+					element = element.parentNode;
+				}
+
+				if ($(target).parentsUntil(element, '.Q_discouragePointerEvents').length
+				|| $('.Q_discouragePointerEvents', target).length) {
+					return;
+				}
+
+
+				// if it was mouseup / touchend on the triggering element, then use it to switch to iScroll instead of $.fn.scroller
+				if (info.curScroll !== 'iScroll' && info.curScroll !== 'touchscroll' &&
+						px >= offset.left && px <= offset.left + trigger.outerWidth() &&
+						py >= offset.top && py <= offset.top + trigger.outerHeight())
+				{
+					Q.Contextual.toDismiss ?  Q.Contextual.hide() : Q.Contextual.applyScrolling();
+				}
+				else
+				{
+					// if ((info.curScroll == 'iScroll' || info.curScroll == 'touchscroll' || listingWrapper.css('overflow') == 'auto') &&
+					// 		 Math.abs(info.moveY - info.startY) >= 5)
+					// {
+					// 	return;
+					// }
 					while (element)
 					{
-						if (element.tagName && element.tagName.toLowerCase() == 'li' && $(element).parents('.Q_contextual').length != 0)
+						if (element.tagName && element.tagName.toLowerCase() === 'li' && $(element).parents('.Q_contextual').length !== 0)
 							break;
 						element = element.parentNode;
 					}
-					
-					if ($(target).parentsUntil(element, '.Q_discouragePointerEvents').length
-					|| $('.Q_discouragePointerEvents', target).length) {
-						return;
-					}
 
-					
-					// if it was mouseup / touchend on the triggering element, then use it to switch to iScroll instead of $.fn.scroller
-					if (info.curScroll != 'iScroll' && info.curScroll != 'touchscroll' &&
-							px >= offset.left && px <= offset.left + trigger.outerWidth() &&
-							py >= offset.top && py <= offset.top + trigger.outerHeight())
+					if (element)
 					{
-						if (Q.Contextual.toDismiss)
-						{
-							Q.Contextual.hide();
-						}
-						else
-						{
-							Q.Contextual.applyScrolling();
-						}
+						Q.Contextual.itemSelectHandler(element, event);
 					}
 					else
 					{
-						// if ((info.curScroll == 'iScroll' || info.curScroll == 'touchscroll' || listingWrapper.css('overflow') == 'auto') &&
-						// 		 Math.abs(info.moveY - info.startY) >= 5)
-						// {
-						// 	return;
-						// }
-						var element = target;
-						while (element)
+						if (contextual[0] !== event.target && $(event.target).parents('.Q_contextual').length === 0)
 						{
-							if (element.tagName && element.tagName.toLowerCase() == 'li' && $(element).parents('.Q_contextual').length != 0)
-								break;
-							element = element.parentNode;
-						}
-						
-						if (element)
-						{
-							Q.Contextual.itemSelectHandler(element);
-						}
-						else
-						{
-							if (contextual[0] != event.target && $(event.target).parents('.Q_contextual').length == 0)
-							{
-								Q.Contextual.hide();
-							}
+							Q.Contextual.hide();
 						}
 					}
 				}
 			};
 			$(document.body).on(Q.Pointer.end, Q.Contextual.endEventHandler);
 			
-			Q.Contextual.itemSelectHandler = function(element)
+			Q.Contextual.itemSelectHandler = function(element, event)
 			{
 				var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
-				var info = Q.Contextual.collection[Q.Contextual.current].info;
 				var li = $(element);
-				
-				if (Q.Pointer.canceledClick) {
+
+				// exit onCanceledClick only if event.target element is child of contextual element
+				if (Q.Pointer.canceledClick && $(event.target).parents('.Q_contextual').length) {
 					return Q.Contextual.hide();
 				}
-				
+
 				li.removeClass('Q_selected');
 				setTimeout(function()
 				{
@@ -2916,7 +2913,7 @@ Q.Contextual = {
 			var scrollerWrapper = listingWrapper.hasClass('Q_scroller_wrapper')
 				? listingWrapper
 				: listingWrapper.children('.Q_scroller_wrapper');
-			if (scrollerWrapper.length != 0)
+			if (scrollerWrapper.length !== 0)
 			{
 				scrollerWrapper.css({ 'height': listingWrapperHeight + 'px' });
 				
@@ -2924,7 +2921,7 @@ Q.Contextual = {
 				var listing = scrollerWrapper.children('.Q_listing');
 				if (info.inBottomHalf && listing.height() > listingWrapperHeight)
 					scrollTop = listingWrapperHeight - listing.height();
-				if (Q.info.platform == 'android')
+				if (Q.info.platform === 'android')
 				{
 					scrollerWrapper.plugin('Q/touchscroll', { 'y': scrollTop });
 				}
@@ -2936,7 +2933,7 @@ Q.Contextual = {
 			info.curScroll = scrollerWrapper.data('Q/iScroll') ? 'iScroll' : 'touchscroll';
 			
 			// adjusting scrollbar position
-			if (info.curScroll == 'iScroll')
+			if (info.curScroll === 'iScroll')
 			{
 				scrollerWrapper.children('div').css({
 					'margin-right': contextual.css('padding-right'),
@@ -2977,11 +2974,12 @@ Q.Contextual = {
 	 */
 	show: function(id)
 	{
-		if (id !== undefined)
+		if (id !== undefined) {
 			Q.Contextual.current = id;
-		else if (Q.Contextual.current == -1)
+		} else if (Q.Contextual.current === -1) {
 			return;
-		
+		}
+
 		var current = Q.Contextual.collection[Q.Contextual.current];
 		var trigger = current.trigger;
 		var contextual = current.contextual;
@@ -2989,7 +2987,7 @@ Q.Contextual = {
 		
 		var $body = $(document.body);
 		
-		if (trigger.length != 0)
+		if (trigger.length !== 0)
 		{
 			var triggerLeft = trigger.offset().left;
 			if (triggerLeft + trigger.outerWidth() < 0|| triggerLeft > $body.width())
@@ -3015,7 +3013,7 @@ Q.Contextual = {
 		else
 		{
 			height = Q.Contextual.options.height;
-			if (typeof(height) == 'string' && height.indexOf('%') != -1)
+			if (typeof(height) === 'string' && height.indexOf('%') !== -1)
 			{
 				height = Q.Pointer.windowHeight() * (parseInt(height) / 100);
 			}
@@ -3104,34 +3102,36 @@ Q.Contextual = {
 	 */
 	hide: function(leaveMask)
 	{
-		if (Q.Contextual.current != -1)
+		if (Q.Contextual.current === -1)
 		{
-			var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
-			var info = Q.Contextual.collection[Q.Contextual.current].info;
-			contextual.find('.Q_listing > li').removeClass('Q_selected');
-			info.moveTarget = null;
-			info.selectedAtStart = false;
-			
-			var listingWrapper = contextual.children('.Q_listing_wrapper');
-			listingWrapper.plugin('Q/scroller', 'remove');
-			listingWrapper.plugin('Q/iScroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
-			listingWrapper.plugin('Q/touchscroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
-			listingWrapper.css({ 'max-height': '' });
-			
-			if (Q.Contextual.fadeTime > 0)
-				contextual.fadeOut(Q.Contextual.fadeTime);
-			else
-				contextual.hide();
-			if (!leaveMask)
-			{
-				Q.Masks.hide('Q.screen.mask');
-			}
-			
-			Q.Contextual.current = -1;
-			Q.Contextual.outOfBounds = false;
+			return;
 		}
+
+		var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
+		var info = Q.Contextual.collection[Q.Contextual.current].info;
+		contextual.find('.Q_listing > li').removeClass('Q_selected');
+		info.moveTarget = null;
+		info.selectedAtStart = false;
+
+		var listingWrapper = contextual.children('.Q_listing_wrapper');
+		listingWrapper.plugin('Q/scroller', 'remove');
+		listingWrapper.plugin('Q/iScroll', 'remove');
+		listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
+		listingWrapper.plugin('Q/touchscroll', 'remove');
+		listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
+		listingWrapper.css({ 'max-height': '' });
+
+		if (Q.Contextual.fadeTime > 0)
+			contextual.fadeOut(Q.Contextual.fadeTime);
+		else
+			contextual.hide();
+		if (!leaveMask)
+		{
+			Q.Masks.hide('Q.screen.mask');
+		}
+
+		Q.Contextual.current = -1;
+		Q.Contextual.outOfBounds = false;
 	},
 	
 	/**
@@ -3187,7 +3187,7 @@ Q.Notice = {
 	add: function(key, contents, type)
 	{
 		var noticesSlot = $('#notices_slot');
-		if (noticesSlot.find('ul li[data-key="' + key + '"]').length == 0)
+		if (noticesSlot.find('ul li[data-key="' + key + '"]').length === 0)
 		{
 			var noticeClass = '';
 			if (typeof(type) !== 'undefined')
@@ -3197,7 +3197,7 @@ Q.Notice = {
 											 '<span class="Q_close"></span>' +
 										 '</li>');
 			var noticesList = noticesSlot.find('ul');
-			if (noticesList.length == 0)
+			if (noticesList.length === 0)
 			{
 				noticesList = $('<ul />');
 				noticesSlot.append(noticesList);
@@ -3205,7 +3205,7 @@ Q.Notice = {
 			var allNotices = noticesList.find('li');
 			allNotices.addClass('Q_hidden_notice');
 			noticesList.append(notice);
-			if (allNotices.length != 0)
+			if (allNotices.length !== 0)
 			{
 				Q.Notice.removeCounter();
 				Q.Notice.addCounter();
@@ -3231,12 +3231,12 @@ Q.Notice = {
 		var column0Slot = $('#column0_slot'), column1Slot = $('#column1_slot'), column2Slot = $('#column2_slot');
 		
 		var noticesCount = noticesSlot.find('ul li').length;
-		if (noticesCount != 0)
+		if (noticesCount !== 0)
 		{
 			setTimeout(function()
 			{
 				var lastNotice = noticesSlot.find('ul li:last');
-				var noticeWidth = lastNotice.parent().width() - (lastNotice.find('.Q_more_notices').length != 0 ?
+				var noticeWidth = lastNotice.parent().width() - (lastNotice.find('.Q_more_notices').length !== 0 ?
 						lastNotice.find('.Q_more_notices').outerWidth(true) : lastNotice.find('.Q_close').outerWidth());
 				lastNotice.find('.Q_common_notice').css({ 'width': noticeWidth + 'px' });
 			}, 0);
@@ -3401,21 +3401,22 @@ Q.Notice = {
 					if (!remove)
 					{
 						var topStubHeight = noticesSlot.outerHeight();
-						if (Q.info.platform == 'android')
+						if (Q.info.platform === 'android')
 						{
 							dashboard.clearQueue().animate({ 'top': topStubHeight + 'px' }, Q.Notice.popUpTime);
-							if (column1Slot.css('position') == 'fixed' && column1Slot.css('display') == 'block')
+							var newTop;
+							if (column1Slot.css('position') === 'fixed' && column1Slot.css('display') === 'block')
 							{
-								var newTop = parseInt(column1Slot.css('top')) + topStubHeight;
+								newTop = parseInt(column1Slot.css('top')) + topStubHeight;
 								column1Slot.clearQueue().animate({ 'top': newTop + 'px' }, Q.Notice.popUpTime);
 							}
-							if (column2Slot.css('position') == 'fixed' && column2Slot.css('display') == 'block' &&
-									column2Slot.css('visibility') == 'visible')
+							if (column2Slot.css('position') === 'fixed' && column2Slot.css('display') === 'block' &&
+									column2Slot.css('visibility') === 'visible')
 							{
-								var newTop = parseInt(column2Slot.css('top')) + topStubHeight;
+								newTop = parseInt(column2Slot.css('top')) + topStubHeight;
 								column2Slot.clearQueue().animate({ 'top': newTop + 'px' }, Q.Notice.popUpTime);
 							}
-							if (Q.Layout.orientation == 'portrait')
+							if (Q.Layout.orientation === 'portrait')
 							{
 								topStubHeight += dashboard.outerHeight();
 								participants.clearQueue().animate({ 'top': topStubHeight + 'px' }, Q.Notice.popUpTime);
@@ -3437,22 +3438,22 @@ Q.Notice = {
 					{
 						var noticesHeight = noticesSlot.outerHeight();
 						var dashboardHeight = dashboard.outerHeight();
-						if (Q.info.platform == 'android')
+						if (Q.info.platform === 'android')
 						{
-							if ((column2Slot.css('visibility') == 'visible') &&
+							if ((column2Slot.css('visibility') === 'visible') &&
 									(document.body.scrollTop + Q.Pointer.windowHeight() >= document.body.scrollHeight))
 							{
 								document.body.scrollTop = 10000;
 							}
 							dashboard.clearQueue().animate({ 'top': '0' }, Q.Notice.popUpTime);
 							participants.clearQueue().animate({ 'top': (dashboardHeight + 1) + 'px' }, Q.Notice.popUpTime);
-							if (column1Slot.css('position') == 'fixed' && column1Slot.css('display') == 'block')
+							if (column1Slot.css('position') === 'fixed' && column1Slot.css('display') === 'block')
 							{
 								var newTop = parseInt(column1Slot.css('top')) - noticesHeight;
 								column1Slot.clearQueue().animate({ 'top': newTop + 'px' }, Q.Notice.popUpTime);
 							}
-							if (column2Slot.css('position') == 'fixed' && column2Slot.css('display') == 'block' &&
-									column2Slot.css('visibility') == 'visible')
+							if (column2Slot.css('position') === 'fixed' && column2Slot.css('display') === 'block' &&
+									column2Slot.css('visibility') === 'visible')
 							{
 								var newTop = parseInt(column2Slot.css('top')) - noticesHeight;
 								column2Slot.clearQueue().animate({ 'top': newTop + 'px' }, Q.Notice.popUpTime);
@@ -3464,7 +3465,7 @@ Q.Notice = {
 							fullscreenDialog.clearQueue().animate({ 'margin-top': '0' }, Q.Notice.popUpTime);
 							fullscreenDialog.find('a.close').animate({ 'margin-top': '0' }, Q.Notice.popUpTime);
 						}
-						topStub.clearQueue().animate({ 'height': (Q.info.platform == 'android' ? dashboardHeight : '0') }, Q.Notice.popUpTime);
+						topStub.clearQueue().animate({ 'height': (Q.info.platform === 'android' ? dashboardHeight : '0') }, Q.Notice.popUpTime);
 						noticesMarginTop = '-' + noticesHeight + 'px';
 						noticesSlot.clearQueue().animate({ 'margin-top': noticesMarginTop }, Q.Notice.popUpTime, function()
 						{
@@ -3503,7 +3504,7 @@ Q.Notice = {
 							Q.Notice.slidingInProgress = false;
 							
 							notice.remove();
-							if (noticesSlot.find('ul li').length == 1)
+							if (noticesSlot.find('ul li').length === 1)
 							{
 								Q.Notice.removeCounter();
 								if (Q.info.isTouchscreen)
@@ -3531,7 +3532,7 @@ Q.Notice = {
 					}
 					else
 					{
-						if (notice.index() == noticesSlot.find('ul li:last').index())
+						if (notice.index() === noticesSlot.find('ul li:last').index())
 							notice.prev().show();
 						notice.remove();
 						Q.Notice.removeCounter();
@@ -3593,7 +3594,7 @@ Q.Notice = {
 		noticesSlot.find('ul li').each(function()
 		{
 			var $this = $(this);
-			var noticeWidth = $this.parent().width() - ($this.find('.Q_more_notices').length != 0 ?
+			var noticeWidth = $this.parent().width() - ($this.find('.Q_more_notices').length !== 0 ?
 												$this.find('.Q_more_notices').outerWidth(true) : $this.find('.Q_close').outerWidth());
 			$this.find('.Q_common_notice').css({ 'width': noticeWidth + 'px' });
 		});
@@ -3601,15 +3602,15 @@ Q.Notice = {
 		if (noticesSlot.find('ul > li').length > 0)
 		{
 			topStubHeight = noticesSlot.outerHeight();
-			if (Q.info.platform == 'android')
+			if (Q.info.platform === 'android')
 			{
-				if (Q.Layout.orientation == 'portrait')
+				if (Q.Layout.orientation === 'portrait')
 					topStubHeight += dashboard.outerHeight();
 				participants.css({ 'top': (topStubHeight + 1) + 'px' });
 			}
 			topStub.css({ 'height': topStubHeight + 'px' });
 		}
-		else if (Q.info.platform == 'android' && Q.Layout.orientation == 'portrait')
+		else if (Q.info.platform === 'android' && Q.Layout.orientation === 'portrait')
 		{
 			topStubHeight = dashboard.outerHeight();
 			topStub.css({ 'height': topStubHeight + 'px' });
@@ -3618,7 +3619,7 @@ Q.Notice = {
 		else
 		{
 			topStub.css({ 'height': '0' });
-			if (Q.info.platform == 'android')
+			if (Q.info.platform === 'android')
 			{
 				participants.css({ 'top': '1px' });
 			}
@@ -3702,7 +3703,7 @@ Q.Tool.define('Q/grammar', function(options) {
 		
 		$(document).on('keyup', function(e)
 		{
-			if (e.ctrlKey && e.which == 13)
+			if (e.ctrlKey && e.which === 13)
 			{
 				var selection = window.getSelection();
 				if (!selection.toString())
@@ -3719,7 +3720,7 @@ Q.Tool.define('Q/grammar', function(options) {
 					{
 						charsPassed++;
 						startExcerptPos--;
-						if (charsPassed >= 20 && wholeText.charAt(startExcerptPos) == ' ')
+						if (charsPassed >= 20 && wholeText.charAt(startExcerptPos) === ' ')
 						{
 							startExcerptPos++;
 							break;
@@ -3731,7 +3732,7 @@ Q.Tool.define('Q/grammar', function(options) {
 					{
 						charsPassed++;
 						endExcerptPos++;
-						if (charsPassed >= 20 && wholeText.charAt(endExcerptPos) == ' ')
+						if (charsPassed >= 20 && wholeText.charAt(endExcerptPos) === ' ')
 						{
 							break;
 						}
