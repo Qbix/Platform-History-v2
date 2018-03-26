@@ -142,11 +142,19 @@
 		onInit: new Q.Event(),
 
 		init: function (callback) {
-			if (Q.info.isCordova && window.FCMPlugin) {
+			if (Q.info.isCordova && Q.info.isAndroid()) {
 				// FCM adapter
+				if (!window.FCMPlugin) {
+					console.warn("FCMPlugin cordova plugin is not installed.");
+					return;
+				}
 				this.adapter = adapterFCM;
-			} else if (Q.info.isCordova && window.PushNotification) {
+			} else if (Q.info.isCordova && (Q.info.platform === 'ios')) {
 				// PushNotification adapter
+				if (!window.PushNotification) {
+					console.warn("PushNotification cordova plugin is not installed.");
+					return;
+				}
 				this.adapter = adapterPushNotification;
 			} else if ((Q.info.browser.name === 'chrome') || (Q.info.browser.name === 'firefox')) {
 				// Chrome and Firefox
