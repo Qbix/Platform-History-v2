@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-define("CONFIGURE_ORIGINAL_APP_NAME", "Track");
+define("CONFIGURE_ORIGINAL_APP_NAME", "MyApp");
 
 include dirname(__FILE__).'/../Q.inc.php';
 
