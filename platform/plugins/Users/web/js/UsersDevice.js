@@ -181,11 +181,13 @@
 
 		adapterName: 'Web',
 
-		init: function () {
+		init: function (callback) {
 			this.appConfig = Q.getObject('Q.Users.browserApps.' + Q.info.browser.name + '.' + Q.info.app);
 			if (!this.appConfig) {
 				console.warn('Unable to init adapter. App config is not defined.');
+				return;
 			}
+			Q.handle(callback);
 		},
 
 		subscribe: function (callback, options) {
