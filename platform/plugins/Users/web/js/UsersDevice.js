@@ -11,6 +11,8 @@
 			}
 		}
 		Users.Device.init(function () {
+			// Device adapter was initialized
+			Q.handle(Users.Device.onInit);
 			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
 		});
 	}, 'Users.Device');
@@ -132,6 +134,12 @@
 		 * @event onNotification
 		 */
 		onNotification: new Q.Event(),
+
+		/**
+		 * Event occurs when the device adapter was initialized.
+		 * @event onInit
+		 */
+		onInit: new Q.Event(),
 
 		init: function (callback) {
 			if (Q.info.isCordova && window.FCMPlugin) {
