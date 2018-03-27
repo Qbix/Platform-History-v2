@@ -11,6 +11,8 @@
 			}
 		}
 		Users.Device.init(function () {
+			// Device adapter was initialized
+			Q.handle(Users.Device.onInit);
 			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
 		});
 	}, 'Users.Device');
@@ -133,12 +135,26 @@
 		 */
 		onNotification: new Q.Event(),
 
+		/**
+		 * Event occurs when the device adapter was initialized.
+		 * @event onInit
+		 */
+		onInit: new Q.Event(),
+
 		init: function (callback) {
-			if (Q.info.isCordova && window.FCMPlugin) {
+			if (Q.info.isCordova && Q.info.isAndroid()) {
 				// FCM adapter
+				if (!window.FCMPlugin) {
+					console.warn("FCMPlugin cordova plugin is not installed.");
+					return;
+				}
 				this.adapter = adapterFCM;
-			} else if (Q.info.isCordova && window.PushNotification) {
+			} else if (Q.info.isCordova && (Q.info.platform === 'ios')) {
 				// PushNotification adapter
+				if (!window.PushNotification) {
+					console.warn("PushNotification cordova plugin is not installed.");
+					return;
+				}
 				this.adapter = adapterPushNotification;
 			} else if ((Q.info.browser.name === 'chrome') || (Q.info.browser.name === 'firefox')) {
 				// Chrome and Firefox
@@ -173,11 +189,13 @@
 
 		adapterName: 'Web',
 
-		init: function () {
+		init: function (callback) {
 			this.appConfig = Q.getObject('Q.Users.browserApps.' + Q.info.browser.name + '.' + Q.info.app);
 			if (!this.appConfig) {
 				console.warn('Unable to init adapter. App config is not defined.');
+				return;
 			}
+			Q.handle(callback);
 		},
 
 		subscribe: function (callback, options) {
