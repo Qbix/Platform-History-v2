@@ -678,6 +678,11 @@
 	position: absolute; opacity: 0;
 	cursor: pointer;
 }
+.Streams_preview_edit .Streams_file_form,
+.Streams_preview_edit .Streams_file_form input {
+	width: 0; height: 0;
+}
+
 
 .Streams_interests_subcategory {
 	text-align: center;
