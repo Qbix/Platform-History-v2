@@ -456,10 +456,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 						Q.Masks.show(tool, {
 							shouldCover: tool.element, className: 'Q_removing'
 						});
-						stream.close(function (err) {
-							if (err) return;
-							tool.state.onClose.handle.call(tool, !this.isRequired);
-						});
+
+						tool.close();
 					}
 				};
 			}
@@ -472,12 +470,14 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var tool = this;
 		var state = tool.state;
 		Q.Streams.get(state.publisherId, state.streamName, function () {
-			this.close(function (err) {
+			var stream = this;
+
+			stream.close(function (err) {
 				if (err) {
-					alert(err);
-					return;
+					return console.error(err);
 				}
-				state.onClose.handle.call(tool);
+
+				Q.handle(state.onClose, tool, [!stream.isRequired]);
 			});
 		});
 	}
