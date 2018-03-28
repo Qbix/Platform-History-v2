@@ -616,6 +616,7 @@ button.basic32 { height: 40px; border: solid 1px transparent; cursor: pointer; f
 .basic16_open { background-position: 0 -342px; }
 .basic32_open { background-position: 0 -684px; }
 
+html.Q_scanning { background: transparent !important; }
 html.Q_scanning body > * { opacity: 0; transition: all 2s; }
 html > .Q_scanning_close, html > .Q_scanning_code {
 	display: none;
