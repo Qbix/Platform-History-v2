@@ -29,7 +29,9 @@
  */
 Q.Tool.define("Streams/file/preview", "Streams/preview",
 function _Streams_file_preview(options, preview) {
-	this.preview = preview;
+	var tool = this;
+	tool.preview = preview;
+	var $te = $(tool.element);
 	var state = this.state;
 	var ps = preview.state;
 	ps.templates.create.fields.src = Q.url('{{Q}}/img/actions/upload.png');
@@ -42,14 +44,50 @@ function _Streams_file_preview(options, preview) {
 			ps.creatable.clickable.preventDefault = false;
 		}
 	}
-	ps.onRefresh.add(this.refresh.bind(this), this);
-	ps.onComposer.add(this.composer.bind(this), this);
+	ps.onRefresh.add(tool.refresh.bind(tool), tool);
+	ps.onComposer.add(tool.composer.bind(tool), tool);
 	preview.loading = function () {
-		var $te = $(this.element);
 		var $form = $te.find('form').detach();
 		var $img = $te.find('img.Streams_preview_add').detach();
 		$te.empty().append($img, $form).addClass('Q_uploading');
 	};
+
+	// edit action
+	if (Q.getObject(["actions", "actions", "edit"], ps)) {
+		ps.actions.actions.edit = function(){
+			tool.$('.Streams_file_input')
+			.one("click", function (event) {
+				event.stopPropagation();
+			})
+			.one("change", function (event) {
+				if (!this.value) {
+					return; // it was canceled
+				}
+
+				$te.addClass("Q_working");
+
+				var form = $(this).closest('form')[0];
+
+				// send request to replace file
+				Q.req("Streams/file", function(err, responce){
+					var msg = Q.firstErrorMessage(err, responce && responce.errors);
+					if (msg) {
+						return Q.alert(msg);
+					}
+
+					// refresh tool
+					preview.preview();
+
+					$te.removeClass("Q_working");
+				}, {
+					method: 'POST',
+					form: form
+				});
+			}).trigger("click");
+
+			return false;
+		};
+	}
 },
 
 {
@@ -102,7 +140,9 @@ function _Streams_file_preview(options, preview) {
 			alt: stream.fields.title,
 			title: stream.fields.title,
 			inplace: inplace,
-			size: _formatSize(size)
+			size: _formatSize(size),
+			streamName: ps.streamName,
+			streamType: stream.fields.type
 		});
 		var tpl = (ps.editable !== false && stream.testWriteLevel('suggest'))
 			? 'edit' 
@@ -158,8 +198,8 @@ function _Streams_file_preview(options, preview) {
 			var form = $this.closest('form').get(0);
 			tool.preview.state.creatable.options.form = form;
 			tool.preview.state.creatable.options.resultFunction = 'result';
-			tool.preview.create(event, function (err) {
-				var fem = Q.firstErrorMessage(err);
+			tool.preview.create(event, function (data) {
+				var fem = Q.firstErrorMessage(data && data.error);
 				if (fem) {
 					Q.alert(fem);
 				}
@@ -200,6 +240,11 @@ Q.Template.set('Streams/file/preview/edit',
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
 	+ '<div class="Streams_preview_file_size">{{size}}</div>'
+	+ '<form enctype="multipart/form-data" class="Streams_file_form">'
+	+ '	<input name="file" type="file" id="{{prefix}}file" class="Streams_file_input">'
+	+ ' <input name="streamName" type="hidden" value="{{streamName}}">'
+	+ ' <input name="streamType" type="hidden" value="{{streamType}}">'
+	+ '</form>'
 	+ '</div></div>'
 );
 
