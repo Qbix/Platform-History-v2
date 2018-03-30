@@ -104,9 +104,23 @@ function Streams_stream_post($params = array())
 		}
 	}
 
+	$stream = null;
 
-	// Create the stream
-	$stream = Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
+	// if stream named defined - check whether this stream already exist
+	if (Q::ifset($fields, 'name', null)) {
+		$stream = Streams::fetchOne($user->id, $publisherId, $fields['name']);
+
+		// if stream exist - clear closedTime (resurrection)
+		if ($stream instanceof Streams_Stream) {
+			$stream->closedTime = null;
+			$stream->save();
+		}
+	}
+
+	// if $stream is null - Create new stream
+	if (!$stream instanceOf Streams_Stream) {
+		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
+	}
 	$messageTo = false;
 	if (isset($result['messagesTo'])) {
 		$messageTo = reset($result['messagesTo']);
