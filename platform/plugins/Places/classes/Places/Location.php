@@ -74,7 +74,7 @@ class Places_Location
 		$key = Q_Config::expect('Places', 'google', 'keys', 'server');
 		$query = http_build_query(array('key' => $key, 'placeid' => $placeId));
 		$url = "https://maps.googleapis.com/maps/api/place/details/json?$query";
-		$json = file_get_contents($url);
+		$json = Places::getRemoteContents($url);
 		$response = json_decode($json, true);
 		if (empty($response['result'])) {
 			throw new Q_Exception("Places_Location::stream: Couldn't obtain place information for $placeId");
