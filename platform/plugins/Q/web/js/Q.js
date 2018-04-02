@@ -12407,21 +12407,23 @@ Q.stackTrace = function() {
  * This loads bluebird library to enable Promise for browsers which do not
  * support Promise natively. For example: IE, Opera Mini.
  */
-if (!(typeof Promise !== "undefined" && Promise.toString().indexOf("[native code]") !== -1)) {
-	Q.beforeInit.addOnce(function () {
-		if (!Q.info.baseUrl) {
-			throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
-		}
-		var udid = location.search.queryField('Q.udid');
-		if (udid) {
-			Q.info.udid = udid;
-			Q.cookie('Q_udid', udid);
-		}
+Q.beforeInit.addOnce(function () {
+	if (!Q.info.baseUrl) {
+		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
+	}
+	var udid = location.search.queryField('Q.udid');
+	if (udid) {
+		Q.info.udid = udid;
+		Q.cookie('Q_udid', udid);
+	}
+	// WARN: Could have race conditions:
+	if (!(typeof Promise !== "undefined"
+	&& Promise.toString().indexOf("[native code]") !== -1)) {
 		Q.addScript(Q.url(Q.libraries.bluebird), function() {
 			Q.Promise = Promise;
 		});
-	}, 'Q');
-}
+	}
+}, 'Q');
 
 return Q;
 
