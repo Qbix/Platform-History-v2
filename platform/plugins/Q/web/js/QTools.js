@@ -2858,7 +2858,7 @@ Q.Contextual = {
 
 				// exit onCanceledClick only if event.target element is child of contextual element
 				if (Q.Pointer.canceledClick && $(event.target).parents('.Q_contextual').length) {
-					return Q.Contextual.hide();
+					return;
 				}
 
 				li.removeClass('Q_selected');
