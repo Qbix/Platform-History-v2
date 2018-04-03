@@ -144,7 +144,8 @@ function Db_Mysql(connName, dsn) {
 			});
 			var mt = require('moment-timezone');
 			var timezone = Q.Config.expect(['Q', 'defaultTimezone']);
-			var offset = mt.tz.zone(timezone).utcOffset(Date.now());
+			var offset = mt.tz.zone(timezone);
+			offset = typeof offset.utcOffset === 'function' ? offset.utcOffset(Date.now()) : offset.offset(Date.now());
 		    var dt = new Date(
 				Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
 		    ).toTimeString();
