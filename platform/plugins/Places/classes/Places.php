@@ -113,12 +113,7 @@ abstract class Places extends Base_Places
 		}
 		$query = http_build_query(compact('key', 'input', 'types', 'location', 'radius'));
 		$url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?$query";
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		//$json = curl_exec($ch);
-		$json = file_get_contents($url);
-		curl_close($ch);
+		$json = self::getRemoteContents($url);
 		$response = json_decode($json, true);
 		if (!empty($response['error_message'])) {
 			throw new Q_Exception("Places::autocomplete: ".$response['error_message']);
@@ -133,8 +128,33 @@ abstract class Places extends Base_Places
 		}
 		return $results;
 	}
-	
 	/**
+	 * Create valid request to remote server to get contents
+	 * @method getRemoteContents
+	 * @static
+	 * @param {string} $url
+	 * @return {string} request result
+	 */
+	static function getRemoteContents($url)
+	{
+		$cafile = __DIR__.'/../files/cacert.pem';
+
+		// if url is https://... and certificate file exist
+		if (strpos($url, 'https') === 0 && is_file($cafile)) {
+			$context = stream_context_create(array(
+				'ssl'=>array(
+					'cafile' => $cafile,
+					'verify_peer' => true,
+					'verify_peer_name' => true,
+				)
+			));
+			return file_get_contents($url, false, $context);
+		}
+
+		// otherwise return standard file_get_contents
+		return file_get_contents($url);
+	}
+		/**
 	 * Use this to calculate the haversine distance between two sets of lat/long coordinates on the Earth
 	 * @method distance
 	 * @static
