@@ -3838,7 +3838,7 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		}
 		_qtc[n] = ctor;
 		ctor.toolName = n;
-		if (typeof stateKeys === 'object') {
+		if (!Q.isArrayLike(stateKeys)) {
 			methods = stateKeys;
 			stateKeys = undefined;
 		}
