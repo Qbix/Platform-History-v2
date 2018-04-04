@@ -44,7 +44,9 @@
 <body>
 <div class="browsertab">
 	<div class="browsertab_wrapper">
-		<button class="Q_button" id="browsertab_pay" style="display: none">Tap to pay</button>
+		<?php echo Q::interpolate($browsertab["html"], array("button" =>
+			"<button class='Q_button' id='browsertab_pay' style='display: none'>$browsertab[button]</button>"
+		));?>
 		<div id="browsertab_pay_error" style="display: none">There was an error during the payment process. To return to the application please close the window.</div>
 		<div id="browsertab_pay_info" style="display: none">Successfully paid. To return to the application please close the window.</div>
 		<div id="browsertab_pay_cancel" style="display: none">Cancelled. To return to the application please close the window.</div>
