@@ -2858,6 +2858,11 @@ Q.Contextual = {
 
 				// exit onCanceledClick only if event.target element is child of contextual element
 				if (Q.Pointer.canceledClick && $(event.target).parents('.Q_contextual').length) {
+					// if event type is 'touchend' - hide menu
+					if (Q.getObject(['Pointer', 'canceledEvent', 'type'], Q) === 'touchend') {
+						Q.Contextual.hide();
+					}
+
 					return;
 				}
 
