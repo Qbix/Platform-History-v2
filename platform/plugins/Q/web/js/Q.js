@@ -12404,6 +12404,9 @@ Q.stackTrace = function() {
 	return obj.stack;
 };
 
+var _udid = location.search.queryField('Q.udid');
+var _appId = location.search.queryField('Q.appId');
+
 /**
  * This loads bluebird library to enable Promise for browsers which do not
  * support Promise natively. For example: IE, Opera Mini.
@@ -12412,10 +12415,13 @@ Q.beforeInit.addOnce(function () {
 	if (!Q.info.baseUrl) {
 		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
 	}
-	var udid = location.search.queryField('Q.udid');
-	if (udid) {
-		Q.info.udid = udid;
-		Q.cookie('Q_udid', udid);
+	if (_appId) {
+		Q.info.appId = _appId;
+		Q.cookie('Q_appId', _appId);
+	}
+	if (_udid) {
+		Q.info.udid = _udid;
+		Q.cookie('Q_udid', _udid);
 	}
 	// WARN: Could have race conditions:
 	if (!(typeof Promise !== "undefined"
