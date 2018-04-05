@@ -648,7 +648,8 @@ html.Q_scanning body > .Q_scanning_code {
 	content: ' ';
 	height: 33px;
 	width: 2px;
-	background-color: #333;
+	background-color: #000;
+	box-shadow: 0 0 12px 1px #fff;
 }
 .Q_scanning_close:before {
 	transform: rotate(45deg);
