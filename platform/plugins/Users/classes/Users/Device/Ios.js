@@ -59,7 +59,7 @@ module.exports = Users_Device.Ios = Users_Device_Ios;
 Users_Device_Ios.prototype.handlePushNotification = function (notification, options, callback) {
 	var device = this;
 	var appId = this.fields.appId || Q.Config.expect(['Q', 'app']);
-	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', appId, 'appId']);
+	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', Q.Config.expect(['Q', 'app']), 'appId']);
 	var apn = require('apn');
 	var n = new apn.Notification(notification);
 	var provider = Users_Device_Ios.provider(appId, options && options.providerOptions);
@@ -93,7 +93,7 @@ Users_Device_Ios.provider = function (appId, providerOptions) {
 	if (provider) {
 		return provider;
 	}
-	if (Q.Config.get(["Users", "platforms", appId], []).indexOf("ios") === -1) {
+	if (Q.Config.get(["Users", "apps", "platforms"], []).indexOf("ios") === -1) {
 		throw new Q.Exception(
 			'Users.Device.Ios: Config Users/platforms/'+appId+' must include "ios"'
 		);
@@ -101,7 +101,7 @@ Users_Device_Ios.provider = function (appId, providerOptions) {
  	var fs = require('fs');
  	var apn = require('apn');
  	var path = require('path');
- 	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
+ 	var o = Q.Config.expect(['Users', 'apps', 'ios', Q.app.name]);
  	var sandbox = o.sandbox || false;
  	var token = o.token;
  	var ssl = o.ssl;
