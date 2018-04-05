@@ -458,6 +458,7 @@
 		});
 
 		push.on('notification', function (data) {
+			Q.extend(data, data.additionalData);
 			Users.Device.onNotification.handle(data);
 		});
 
