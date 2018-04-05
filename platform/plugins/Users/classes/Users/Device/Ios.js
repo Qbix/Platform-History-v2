@@ -60,6 +60,10 @@ Users_Device_Ios.prototype.handlePushNotification = function (notification, opti
 	var device = this;
 	var appId = this.fields.appId || Q.Config.expect(['Q', 'app']);
 	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', Q.Config.expect(['Q', 'app']), 'appId']);
+	if (notification && notification.url) {
+		notification.payload = notification.payload || {};
+ 		notification.payload.url = notification.url;
+	}
 	var apn = require('apn');
 	var n = new apn.Notification(notification);
 	var provider = Users_Device_Ios.provider(appId, options && options.providerOptions);
