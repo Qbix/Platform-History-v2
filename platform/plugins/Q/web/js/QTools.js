@@ -2667,7 +2667,6 @@ Q.Contextual = {
 						info.moveTarget = $(event.target.parentNode);
 					if (info.moveTarget)
 					{
-						contextual.find('.Q_listing > li').removeClass('Q_selected');
 						info.moveTarget.addClass('Q_selected');
 						info.selectedAtStart = true;
 					}
@@ -2727,7 +2726,6 @@ Q.Contextual = {
 						else if (info.inside)
 						{
 							info.inside = false;
-							contextual.find('.Q_listing li').removeClass('Q_selected');
 						}
 						info.moveTarget = newMoveTarget;
 					}
@@ -2856,47 +2854,35 @@ Q.Contextual = {
 				var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
 				var li = $(element);
 
-				// exit onCanceledClick only if event.target element is child of contextual element
-				if (Q.Pointer.canceledClick && $(event.target).parents('.Q_contextual').length) {
-					// if event type is 'touchend' - hide menu
-					if (Q.getObject(['Pointer', 'canceledEvent', 'type'], Q) === 'touchend') {
-						Q.Contextual.hide();
-					}
-
+				// if event.target element is child of contextual element and event.type is 'touchmove' - just exit
+				if (
+					Q.Pointer.canceledClick
+					&& $(event.target).parents('.Q_contextual').length
+					&& Q.getObject(['Pointer', 'canceledEvent', 'type'], Q) === 'touchmove'
+				) {
 					return;
 				}
 
-				li.removeClass('Q_selected');
-				setTimeout(function()
+				// deselect all element
+				li.siblings().removeClass('Q_selected');
+
+				// select current element
+				li.addClass('Q_selected');
+
+				var handler = li.attr('data-handler');
+				handler = handler || contextual.attr('data-handler') || contextual.data('defaultHandler');
+
+				try
 				{
-					li.addClass('Q_selected');
-					setTimeout(function()
-					{
-						li.removeClass('Q_selected');
-						Q.Contextual.hide();
-						
-						var handler = li.attr('data-handler');
-						if (!handler)
-							handler = contextual.attr('data-handler');
-						if (handler)
-						{
-							try
-							{
-								handler = eval(handler);
-							}
-							catch (e)
-							{
-								return;
-							}
-							Q.handle(handler, contextual, [li]);
-						}
-						else
-						{
-							handler = contextual.data('defaultHandler');
-							Q.handle(handler, contextual, [li]);
-						}
-					}, 200);
-				}, 200);
+					handler = eval(handler);
+				}
+				catch (e)
+				{
+					return;
+				}
+				Q.handle(handler, contextual, [li]);
+
+				Q.Contextual.hide();
 			};
 		}
 	},
@@ -3114,7 +3100,6 @@ Q.Contextual = {
 
 		var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
 		var info = Q.Contextual.collection[Q.Contextual.current].info;
-		contextual.find('.Q_listing > li').removeClass('Q_selected');
 		info.moveTarget = null;
 		info.selectedAtStart = false;
 
