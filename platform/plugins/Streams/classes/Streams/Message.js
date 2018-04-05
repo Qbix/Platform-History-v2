@@ -131,7 +131,7 @@ Mp.getAllInstructions = function _Message_prototype_getAllInstructions () {
  */
 Mp.getInstruction = function _Message_prototype_get (instructionName) {
 	var instr = this.getAllInstructions();
-	return instr[instructionName];
+	return Q.getObject([instructionName], instr);
 };
 
 /**
