@@ -27,6 +27,9 @@
 			"exclude": {
 				"Assets": ["img"]
 			}
+		},
+		"text": {
+			"Assets/browsertab": ["Assets/content"]
 		}
 	},
 	"Streams": {
@@ -126,6 +129,9 @@
 				"body": "Assets/email/startedSubscription.php",
 				"sms": "Assets/sms/startedSubscription.php"
 			}
+		},
+		"browsertab": {
+			"css": []
 		}
 	}
 }

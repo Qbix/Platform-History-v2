@@ -39,18 +39,10 @@
 		subscribe: function (callback, options) {
 			this.getAdapter(function (err, adapter) {
 				if (err) {
-					if (callback) {
-						callback(err);
-					} else {
-						console.warn(err);
-					}
+					Q.handle(callback, null, [err]);
 				} else {
 					adapter.subscribe(function (err, subscribed) {
-						if (callback) {
-							callback(err, subscribed);
-						} else {
-							console.warn(err);
-						}
+						Q.handle(callback, null, [err, subscribed]);
 					}, options);
 				}
 			});
@@ -66,15 +58,10 @@
 		unsubscribe: function (callback) {
 			this.getAdapter(function (err, adapter) {
 				if (err) {
-					if (callback) {
-						callback(err);
-					} else {
-						console.warn(err);
-					}
+					Q.handle(callback, null, [err]);
 				} else {
 					adapter.unsubscribe(function (err) {
-						if (callback)
-							callback(err);
+						Q.handle(callback, null, [err]);
 					});
 				}
 			});
@@ -89,16 +76,10 @@
 		subscribed: function (callback) {
 			this.getAdapter(function (err, adapter) {
 				if (err) {
-					if (callback) {
-						callback(err);
-					} else {
-						console.warn(err);
-					}
+					Q.handle(callback, null, [err]);
 				} else {
 					adapter.subscribed(function (err, subscribed) {
-						if (callback) {
-							callback(err, subscribed);
-						}
+						Q.handle(callback, null, [err, subscribed]);
 					});
 				}
 			});
@@ -172,9 +153,7 @@
 
 		getAdapter: function (callback) {
 			if (!this.adapter) {
-				if (callback) {
-					callback(new Error('There is no suitable adapter for this type of device'));
-				}
+				Q.handle(callback, null, [new Error('There is no suitable adapter for this type of device')]);
 				return;
 			}
 			callback(null, this.adapter);
@@ -294,15 +273,12 @@
 			FCMPlugin.onTokenRefresh(function (token) {
 				_registerDevice(token);
 			});
-
 			FCMPlugin.onNotification(function (data) {
 				// data.wasTapped is true: Notification was received on device tray and tapped by the user.
 				// data.wasTapped is false: Notification was received in foreground. Maybe the user needs to be notified.
 				Users.Device.onNotification.handle(data);
 			});
-
-			if (callback)
-				callback();
+			Q.handle(callback);
 		},
 
 		subscribe: function (callback) {
@@ -338,14 +314,12 @@
 			if (_getFromStorage('deviceId')) {
 				_pushNotificationInit();
 			}
-			if (callback)
-				callback();
+			Q.handle(callback);
 		},
 
 		subscribe: function (callback) {
 			_pushNotificationInit();
-			if (callback)
-				callback();
+			Q.handle(callback);
 		},
 
 		unsubscribe: function (callback) {
@@ -368,13 +342,11 @@
 
 	function _registerServiceWorker(callback) {
 		if (Q.info.url.substr(0, 8) !== 'https://') {
-			if (callback)
-				callback(new Error("Push notifications require HTTPS"));
+			Q.handle(callback, null, [new Error("Push notifications require HTTPS")]);
 			return;
 		}
 		if (!(('serviceWorker' in navigator) && ('PushManager' in window))) {
-			if (callback)
-				callback(new Error("Push messaging is not supported"));
+			Q.handle(callback, null, [new Error("Push messaging is not supported")]);
 			return;
 		}
 		navigator.serviceWorker.register('/Q/plugins/Users/js/sw.js')
@@ -383,8 +355,7 @@
 					Users.Device.onNotification.handle(event.data);
 				});
 				console.log('Service Worker is registered.');
-				if (callback)
-					callback(null, swReg);
+				Q.handle(callback, null, [null, swReg]);
 			})
 			.catch(function (error) {
 				callback(error);
@@ -456,9 +427,7 @@
 			return;
 		}
 		Q.req('Users/device', function (err, response) {
-			if (callback) {
-				callback(err, response);
-			}
+			Q.handle(callback, null, [err, response]);
 		}, {
 			method: 'delete',
 			fields: {
@@ -484,11 +453,12 @@
 		push.on('registration', function (data) {
 			_setToStorage('deviceId', data.registrationId);
 			if (Q.Users.loggedInUser) {
-				_registerDevice();
+				_registerDevice(data.registrationId);
 			}
 		});
 
 		push.on('notification', function (data) {
+			Q.extend(data, data.additionalData);
 			Users.Device.onNotification.handle(data);
 		});
 
