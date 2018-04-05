@@ -10947,7 +10947,8 @@ Q.Pointer = {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
-		Q.Pointer.canceledClick = true;	
+		Q.Pointer.canceledClick = true;
+		Q.Pointer.canceledEvent = event;
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
 		}
