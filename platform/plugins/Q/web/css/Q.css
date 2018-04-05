@@ -641,7 +641,6 @@ html.Q_scanning body > .Q_scanning_code {
 	height: 32px;
 	z-index: 9999;
 	cursor: pointer;
-	background-color: #fff;
 }
 .Q_scanning_close:before, .Q_scanning_close:after {
 	position: absolute;
