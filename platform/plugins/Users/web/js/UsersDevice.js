@@ -5,9 +5,8 @@
 
 	Q.onReady.add(function () {
 		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
-			var appId = location.search.queryField('Q.Users.appId');
 			if (!Q.isEmpty(appId)) {
-				_setToStorage('appId', appId);
+				_setToStorage('appId', Q.appId);
 			}
 		}
 		Users.Device.init(function () {
