@@ -4,11 +4,9 @@
 	var Users = Q.plugins.Users;
 
 	Q.onReady.add(function () {
-		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
-			Users.Device.appId = Q.cookie('Q_appId');
-			if (!Users.Device.appId) {
-				return console.warn("appId is not defined");
-			}
+		Users.Device.appId = Q.cookie('Q_appId');
+		if (!Users.Device.appId) {
+			return console.warn("appId is not defined");
 		}
 		Users.Device.init(function () {
 			// Device adapter was initialized
