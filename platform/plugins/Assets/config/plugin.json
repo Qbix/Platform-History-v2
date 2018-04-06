@@ -29,7 +29,9 @@
 			}
 		},
 		"text": {
-			"Assets/browsertab": ["Assets/content"]
+			"Assets": {
+				"*": ["Assets/content"]
+			}
 		}
 	},
 	"Streams": {
