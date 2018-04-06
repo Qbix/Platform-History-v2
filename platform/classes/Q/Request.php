@@ -626,12 +626,12 @@ class Q_Request
 	 * Gets a field passed in special a part of the request
 	 * @method special
 	 * @param {string} $fieldname the name of the field, which can be namespaced as "Module.fieldname"
-	 * @param {mixed} $default what to return if field is missing
+	 * @param {mixed} $default optionally what to return if field is missing
 	 * @param {string} [$source=null] optionally provide an array to use instead of $_REQUEST
 	 * @static
 	 * @return {mixed|null}
 	 */
-	static function special($fieldname, $default, $source = null)
+	static function special($fieldname, $default = null, $source = null)
 	{
 		if (!$source) {
 			$source = array_merge($_GET, $_POST, $_COOKIE);
@@ -751,7 +751,7 @@ class Q_Request
 	 */
 	static function appId()
 	{
-		return Q::special('appId');
+		return self::special('appId');
 	}
 	
 	/**
@@ -760,7 +760,7 @@ class Q_Request
 	 */
 	static function udid()
 	{
-		return Q::special('udid');
+		return self::special('udid');
 	}
 	
 	/**
