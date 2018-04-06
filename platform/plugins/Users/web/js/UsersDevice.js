@@ -5,8 +5,9 @@
 
 	Q.onReady.add(function () {
 		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
-			if (!Q.isEmpty(appId)) {
-				_setToStorage('appId', Q.appId);
+			Users.Device.appId = Q.cookie('Q_appId');
+			if (!Users.Device.appId) {
+				return console.warn("appId is not defined");
 			}
 		}
 		Users.Device.init(function () {
@@ -366,7 +367,7 @@
 		if (!deviceId || !Q.Users.loggedInUser) {
 			return callback(new Error('Error while registering device. User must be logged in and deviceId must be set.'))
 		}
-		var appId = _getFromStorage('appId');
+		var appId = Users.Device.appId;
 		if (!appId) {
 			return callback(new Error('Error while registering device. AppId must be must be set.'));
 		}
