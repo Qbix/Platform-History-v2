@@ -631,7 +631,7 @@ class Q_Request
 	 * @static
 	 * @return {mixed|null}
 	 */
-	static function special($fieldname, $default, $source = null)
+	static function special($fieldname, $default = null, $source = null)
 	{
 		if (!$source) {
 			$source = array_merge($_GET, $_POST, $_COOKIE);
@@ -751,7 +751,7 @@ class Q_Request
 	 */
 	static function appId()
 	{
-		return Q::special('appId');
+		return self::special('appId');
 	}
 	
 	/**
@@ -760,7 +760,7 @@ class Q_Request
 	 */
 	static function udid()
 	{
-		return Q::special('udid');
+		return self::special('udid');
 	}
 	
 	/**
