@@ -249,5 +249,23 @@ abstract class Assets extends Base_Assets
 		$stream->save();
 	}
 
-	/* * * */
+	static function checkPaid(& $stream, $user) {
+		if ($stream->publisherId === $user->id) {
+			return;
+		}
+		$payment = $stream->getAttribute('payment');
+		if (!$payment || $payment['type'] !== 'required') {
+			return;
+		}
+		$assets = new Assets_Charge();
+		$assets->publisherId = $stream->publisherId;
+		$assets->streamName = $stream->name;
+		$assets->userId = $user->id;
+		$assets = $assets->retrieve();
+		if (!$assets) {
+			throw new Q_Exception_PaymentRequired(array(
+				'message'=> $stream->name,
+			));
+		}
+	}
 };

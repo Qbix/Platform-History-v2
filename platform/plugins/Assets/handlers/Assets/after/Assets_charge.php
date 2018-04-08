@@ -52,7 +52,7 @@ function Assets_after_Assets_charge($params)
 		$emailSubject = Q_Config::get('Assets', 'transactional', 'charged', 'subject', false);
 		$emailView = Q_Config::get('Assets', 'transactional', 'charged', 'body', false);
 		if ($emailSubject !== false and $emailView) {
-			$email->sendMessage($emailSubject, $emailView, $fields);
+			$email->sendMessage($emailSubject, $emailView, $fields, array('html' => true));
 		}
 	} else if ($user->mobileNumber) {
 		$mobile = new Users_Mobile();
@@ -70,7 +70,7 @@ function Assets_after_Assets_charge($params)
 		$emailSubject = Q_Config::get('Assets', 'transactional', 'charge', 'subject', false);
 		$emailView = Q_Config::get('Assets', 'transactional', 'charge', 'body', false);
 		if ($emailSubject !== false and $emailView) {
-			$email->sendMessage($emailSubject, $emailView, $fields);
+			$email->sendMessage($emailSubject, $emailView, $fields, array('html' => true));
 		}
 	} else if ($publisher->mobileNumber) {
 		$mobile = new Users_Mobile();
