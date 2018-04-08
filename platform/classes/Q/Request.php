@@ -626,7 +626,7 @@ class Q_Request
 	 * Gets a field passed in special a part of the request
 	 * @method special
 	 * @param {string} $fieldname the name of the field, which can be namespaced as "Module.fieldname"
-	 * @param {mixed} $default what to return if field is missing
+	 * @param {mixed} $default optionally what to return if field is missing
 	 * @param {string} [$source=null] optionally provide an array to use instead of $_REQUEST
 	 * @static
 	 * @return {mixed|null}
