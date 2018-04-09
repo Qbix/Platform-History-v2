@@ -437,40 +437,45 @@
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
 		"Assets/payment": "{{Assets}}/js/tools/payment.js"
 	});
+	
+	Q.onInit.set(function () {
+		if (Q.info.platform === 'ios') {
+			Stripe.applePay.checkAvailability(function (available) {
+				Assets.Payments.stripe.applePayAvailable = available;
+			});
+		}
+	}, 'Assets');
 
 	function _applePayStripe(options, callback) {
-		Stripe.applePay.checkAvailability(function (available) {
-			if (available) {
-				var request = {
-					currencyCode: options.currency,
-					countryCode: options.countryCode ? options.countryCode : 'US',
-					total: {
-						label: options.description,
-						amount: options.amount
-					}
-				};
-				var session = Stripe.applePay.buildSession(request, function (result, completion) {
-					options.token = result.token;
-					Q.Assets.Payments.pay('stripe', options, function (err) {
-						if (err) {
-							completion(ApplePaySession.STATUS_FAILURE);
-							callback(err);
-						} else {
-							completion(ApplePaySession.STATUS_SUCCESS);
-							callback(null, true);
-						}
-					});
-				}, function (err) {
-					callback(err);
-				});
-				session.oncancel = function () {
-					callback(_error("Request cancelled", 20));
-				};
-				session.begin();
-			} else {
-				callback(_error('Apple pay is not available', 21));
+		if (!Assets.Payments.stripe.applePayAvailable) {
+			callback(_error('Apple pay is not available', 21));
+		}
+		var request = {
+			currencyCode: options.currency,
+			countryCode: options.countryCode ? options.countryCode : 'US',
+			total: {
+				label: options.description,
+				amount: options.amount
 			}
+		};
+		var session = Stripe.applePay.buildSession(request, function (result, completion) {
+			options.token = result.token;
+			Q.Assets.Payments.pay('stripe', options, function (err) {
+				if (err) {
+					completion(ApplePaySession.STATUS_FAILURE);
+					callback(err);
+				} else {
+					completion(ApplePaySession.STATUS_SUCCESS);
+					callback(null, true);
+				}
+			});
+		}, function (err) {
+			callback(err);
 		});
+		session.oncancel = function () {
+			callback(_error("Request cancelled", 20));
+		};
+		session.begin();
 	}
 
 	function _paymentRequestStripe(options, callback) {
