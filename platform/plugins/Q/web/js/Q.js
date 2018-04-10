@@ -12444,7 +12444,7 @@ Q.Scanner = {
 			QRScanner.cancelScan();
 
 			// say parent that video closed
-			Q.handle(callback, null, [null, true]);
+			Q.handle(Q.Scanner.onClose);
 		};
 
 		// generate close icon
@@ -12470,8 +12470,7 @@ Q.Scanner = {
 
 					console.log("start scanning...");
 
-					// start scanning
-					QRScanner.scan(function(err, text){
+					var _scan = function(err, text){
 						if(err){
 							console.warn(err);
 							return;
@@ -12480,8 +12479,15 @@ Q.Scanner = {
 						// play audio when QR code found
 						audio.play();
 
+						// execute callback with QR code text in arguments
 						Q.handle(callback, null, [text]);
-					});
+
+						// recursive run scanner
+						QRScanner.scan(_scan);
+					};
+
+					// start scanning
+					QRScanner.scan(_scan);
 				} else if (status.denied) {
 					Q.handle(_close, $closeIcon);
 
