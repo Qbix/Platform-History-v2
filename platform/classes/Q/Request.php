@@ -751,7 +751,7 @@ class Q_Request
 	 */
 	static function appId()
 	{
-		return self::special('appId');
+		return self::special('appId') ?: self::special('Users_appId');
 	}
 	
 	/**
@@ -760,7 +760,7 @@ class Q_Request
 	 */
 	static function udid()
 	{
-		return self::special('udid');
+		return self::special('udid') ?: self::special('Users_udid');
 	}
 	
 	/**
