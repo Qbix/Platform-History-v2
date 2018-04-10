@@ -12444,7 +12444,7 @@ Q.Scanner = {
 			QRScanner.cancelScan();
 
 			// say parent that video closed
-			Q.handle(callback, null, [null, true]);
+			Q.handle(Q.Scanner.onClose);
 		};
 
 		// generate close icon
@@ -12470,8 +12470,7 @@ Q.Scanner = {
 
 					console.log("start scanning...");
 
-					// start scanning
-					QRScanner.scan(function(err, text){
+					var _scan = function(err, text){
 						if(err){
 							console.warn(err);
 							return;
@@ -12480,8 +12479,15 @@ Q.Scanner = {
 						// play audio when QR code found
 						audio.play();
 
+						// execute callback with QR code text in arguments
 						Q.handle(callback, null, [text]);
-					});
+
+						// recursive run scanner
+						QRScanner.scan(_scan);
+					};
+
+					// start scanning
+					QRScanner.scan(_scan);
 				} else if (status.denied) {
 					Q.handle(_close, $closeIcon);
 
@@ -12509,10 +12515,18 @@ Q.Scanner = {
 	 */
 	instascan: function (audio, callback, options) {
 		var _constructor = function ($element) {
+			var elementHeight = $element.height();
+			var elementWidth = $element.width();
+
 			// create video element
-			var $videoElement = $("<video>")
-				.height($element.height()) // set same height as parent
-				.appendTo($element);
+			var $videoElement = $("<video>").appendTo($element);
+
+			// set heigth/width of video element to stretch full screen
+			if (elementHeight > elementWidth) {
+				$videoElement.width(elementWidth);
+			} else {
+				$videoElement.height(elementHeight);
+			}
 
 			// stop scanner onClose event
 			Q.Scanner.onClose.set(function(){
@@ -12544,7 +12558,7 @@ Q.Scanner = {
 				var selectedCam = cameras[0];
 
 				// search for back camera, if found - use one
-				$.each(cameras, function (i, camera) {
+				Q.each(cameras, function (i, camera) {
 					var name = Q.getObject(['name'], camera) || "";
 					if (name.indexOf('back') !== -1) {
 						selectedCam = camera;
