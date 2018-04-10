@@ -12509,10 +12509,18 @@ Q.Scanner = {
 	 */
 	instascan: function (audio, callback, options) {
 		var _constructor = function ($element) {
+			var elementHeight = $element.height();
+			var elementWidth = $element.width();
+
 			// create video element
-			var $videoElement = $("<video>")
-				.height($element.height()) // set same height as parent
-				.appendTo($element);
+			var $videoElement = $("<video>").appendTo($element);
+
+			// set heigth/width of video element to stretch full screen
+			if (elementHeight > elementWidth) {
+				$videoElement.width(elementWidth);
+			} else {
+				$videoElement.height(elementHeight);
+			}
 
 			// stop scanner onClose event
 			Q.Scanner.onClose.set(function(){
@@ -12544,7 +12552,7 @@ Q.Scanner = {
 				var selectedCam = cameras[0];
 
 				// search for back camera, if found - use one
-				$.each(cameras, function (i, camera) {
+				Q.each(cameras, function (i, camera) {
 					var name = Q.getObject(['name'], camera) || "";
 					if (name.indexOf('back') !== -1) {
 						selectedCam = camera;
