@@ -12450,9 +12450,10 @@ Q.Camera = {
 			 * @param {Object} options object with options to replace default
 			 */
 			cordova: function (audio, callback, options) {
-				$("html").addClass("Q_scanning");
+				var $html = $('html');
+				$html.addClass("Q_scanning");
 				var _close = function(){
-					$("html").removeClass("Q_scanning");
+					$html.removeClass("Q_scanning");
 					$(this).remove();
 					QRScanner.cancelScan();
 					Q.handle(Q.Camera.Scan.onClose);
@@ -12468,6 +12469,7 @@ Q.Camera = {
 						}
 						if (status.authorized) {
 							QRScanner.show();
+							$html.hide().show(); // to make safari redraw it properly
 							var _scan = function(err, text){
 								if(err){
 									console.warn(err);
