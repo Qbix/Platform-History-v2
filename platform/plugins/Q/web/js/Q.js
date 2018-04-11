@@ -12409,210 +12409,163 @@ var _appId = location.search.queryField('Q.appId');
 
 /**
  * Class to handle with cameras.
- * @class Scanner
+ * @class Camera
  * @namespace Q
  * @static
  */
-Q.Scanner = {
-	// event executed when scanner closed
-	onClose: new Q.Event(),
-
-	// default options
-	options: {
-		sound: {
-			src: "{{Q}}/audio/qrfound.mp3"
-		},
-		dialog: {
-			title: "Scan QR codes"
-		}
-	},
-	/**
-	 * Using to scan QR code on mobile devices if cordova plugin QRScanner founded
-	 * @method qrscan
-	 * @static
-	 * @param {object} audio Q.audio with loaded audio file to play when QR code found
-	 * @param {function} callback function to execute when QR code found and provide text as argument
-	 * @param {object} options object with options to replace default
-	 */
-	qrscan: function (audio, callback, options) {
-		$("html").addClass("Q_scanning");
-
-		// exit QR code scanning mode method
-		var _close = function(){
-			$("html").removeClass("Q_scanning");
-			$(this).remove();
-			QRScanner.cancelScan();
-
-			// say parent that video closed
-			Q.handle(Q.Scanner.onClose);
-		};
-
-		// generate close icon
-		var $closeIcon = $('<a href="#" class="Q_scanning_close">')
-			.on(Q.Pointer.fastclick, _close)
-			.appendTo("body");
-
-		// when device ready start scanning
-		Q.addEventListener(document, 'deviceready', function () {
-			QRScanner.prepare(function(err, status){
-				if (err) {
-					Q.handle(_close, $closeIcon);
-
-					// here we can handle errors and clean up any loose ends.
-					return console.error(err);
-				}
-
-				if (status.authorized) {
-					// W00t, you have camera access and the scanner is initialized.
-
-					// to make the camera preview visible
-					QRScanner.show(); //should feel very fast.
-
-					console.log("start scanning...");
-
-					var _scan = function(err, text){
-						if(err){
-							console.warn(err);
-							return;
-						}
-
-						// play audio when QR code found
-						audio.play();
-
-						// execute callback with QR code text in arguments
-						Q.handle(callback, null, [text]);
-
-						// recursive run scanner
-						QRScanner.scan(_scan);
-					};
-
-					// start scanning
-					QRScanner.scan(_scan);
-				} else if (status.denied) {
-					Q.handle(_close, $closeIcon);
-
-					// The video preview will remain black, and scanning is disabled. We can
-					// try to ask the user to change their mind, but we'll have to send them
-					// to their device settings with `QRScanner.openSettings()`.
-				} else {
-					Q.handle(_close, $closeIcon);
-
-					// we didn't get permission, but we didn't get permanently denied. (On
-					// Android, a denial isn't permanent unless the user checks the "Don't
-					// ask again" box.) We can ask again at the next relevant opportunity.
-				}
-			});
-		});
-	},
-	/**
-	 * Using to scan QR code with first camera founded on device
-	 * (using Instascan library dynamically loaded)
-	 * @method instascan
-	 * @static
-	 * @param {object} audio Q.audio with loaded audio file to play when QR code found
-	 * @param {function} callback function to execute when QR code found and provide text as argument
-	 * @param {object} options object with options to replace default
-	 */
-	instascan: function (audio, callback, options) {
-		var _constructor = function ($element) {
-			var elementHeight = $element.height();
-			var elementWidth = $element.width();
-
-			// create video element
-			var $videoElement = $("<video>").appendTo($element);
-
-			// set heigth/width of video element to stretch full screen
-			if (elementHeight > elementWidth) {
-				$videoElement.width(elementWidth);
-			} else {
-				$videoElement.height(elementHeight);
+Q.Camera = {
+	Scan: {
+		onClose: new Q.Event(),
+		options: {
+			sound: {
+				src: "{{Q}}/audio/qrfound.mp3"
+			},
+			dialog: {
+				title: "Scan QR codes"
 			}
-
-			// stop scanner onClose event
-			Q.Scanner.onClose.set(function(){
-				scanner.stop();
-			});
-
-			//initialise scanner
-			var scanner = new Instascan.Scanner({ video: $videoElement[0], scanPeriod: 5 });
-
-			//add listener for get scan
-			scanner.addListener('scan', function (text, image) {
-
-				// play sound when QR code found
-				audio.play();
-
-				Q.handle(callback, null, [text]);
-			});
-
-			//check camera available or not
-			// if avail then get them
-			Instascan.Camera.getCameras().then(function (cameras) {
-				var camerasAmount = Q.getObject(['length'], cameras);
-				if (!camerasAmount || camerasAmount <= 0) {
-					console.error('No cameras found.');
-
-				}
-
-				// select first founded camera by default
-				var selectedCam = cameras[0];
-
-				// search for back camera, if found - use one
-				Q.each(cameras, function (i, camera) {
-					var name = Q.getObject(['name'], camera) || "";
-					if (name.indexOf('back') !== -1) {
-						selectedCam = camera;
-					}
+		},
+		/**
+		 * Method - interface for QR code scan action. It decide which plugin or library to use
+		 * and handle callback (when QR code found) to mark participants as "checked".
+		 * @method qr
+		 * @static
+		 * @param {function} callback Executed when QR code found with text of this code in arguments
+		 * @param {object} options Object with options to replace default
+		 */
+		qr: function (callback, options) {
+			options = Q.extend({}, this.options, options);
+			var audio =  new Q.Audio(options.sound.src);
+			if (typeof QRScanner !== "undefined") {
+				return this.adapters.cordova(audio, callback, options);
+			}
+			this.adapters.instascan(audio, callback, options);
+		},
+		adapters: {
+			/**
+			 * Using to scan QR codes using QRScanner Cordova plugin
+			 * @method cordova
+			 * @static
+			 * @param {Object} audio Q.audio with loaded audio file to play when QR code found
+			 * @param {Function} callback function to execute when QR code found and provide text as argument
+			 * @param {Object} options object with options to replace default
+			 */
+			cordova: function (audio, callback, options) {
+				$("html").addClass("Q_scanning");
+				var _close = function(){
+					$("html").removeClass("Q_scanning");
+					$(this).remove();
+					QRScanner.cancelScan();
+					Q.handle(Q.Camera.Scan.onClose);
+				};
+				var $closeIcon = $('<a href="#" class="Q_scanning_close">')
+					.on(Q.Pointer.fastclick, _close)
+					.appendTo("body");
+				Q.addEventListener(document, 'deviceready', function () {
+					QRScanner.prepare(function(err, status){
+						if (err) {
+							Q.handle(_close, $closeIcon);
+							return console.error(err);
+						}
+						if (status.authorized) {
+							QRScanner.show();
+							var _scan = function(err, text){
+								if(err){
+									console.warn(err);
+									return;
+								}
+								if (audio) {
+									audio.play();
+								}
+								Q.handle(callback, null, [text]);
+								QRScanner.scan(_scan); // run scanner for next code
+							};
+							QRScanner.scan(_scan); // start scanning
+						} else if (status.denied) {
+							Q.handle(_close, $closeIcon);
+							// The video preview will remain black, and scanning is disabled. We can
+							// try to ask the user to change their mind, but we'll have to send them
+							// to their device settings with `QRScanner.openSettings()`.
+						} else {
+							Q.handle(_close, $closeIcon);
+							// we didn't get permission, but we didn't get permanently denied. (On
+							// Android, a denial isn't permanent unless the user checks the "Don't
+							// ask again" box.) We can ask again at the next relevant opportunity.
+						}
+					});
 				});
+			},
+			/**
+			 * Using to scan QR code with first camera found on device
+			 * (using Instascan library dynamically loaded)
+			 * @method instascan
+			 * @static
+			 * @param {object} audio Q.audio with loaded audio file to play when QR code found
+			 * @param {function} callback function to execute when QR code found and provide text as argument
+			 * @param {object} options object with options to replace default
+			 */
+			instascan: function (audio, callback, options) {
+				var _constructor = function ($element) {
+					var elementHeight = $element.height();
+					var elementWidth = $element.width();
 
-				scanner.start(selectedCam);
-			}).catch(function (e) {
-				console.error(e);
-			});
-		};
+					// create video element
+					var $videoElement = $("<video>").appendTo($element);
 
-		Q.addScript(['{{Q}}/js/qrcode/instascan.min.js'], function () {
-			Q.Dialogs.push({
-				title: options.dialog.title,
-				className: "Q_scanning",
-				content: "",
-				fullscreen: true,
-				onActivate: function (dialog) {
-					var $content = $(".Q_dialog_slot", dialog);
-					var $title = $(".Q_title_slot", dialog);
+					// set heigth/width of video element to stretch full screen
+					if (elementHeight > elementWidth) {
+						$videoElement.width(elementWidth);
+					} else {
+						$videoElement.height(elementHeight);
+					}
+					Q.Camera.Scan.onClose.set(function(){
+						scanner.stop();
+					});
+					var scanner = new Instascan.Scanner({ video: $videoElement[0], scanPeriod: 5 });
+					scanner.addListener('scan', function (text, image) {
+						audio.play();
+						Q.handle(callback, null, [text]);
+					});
 
-					// set max height
-					$content.height(dialog.height() - $title.height());
+					Instascan.Camera.getCameras().then(function (cameras) {
+						var camerasAmount = Q.getObject(['length'], cameras);
+						if (!camerasAmount || camerasAmount <= 0) {
+							console.error('No cameras found.');
+						}
+						var selectedCam = cameras[0];
+						Q.each(cameras, function (i, camera) {
+							var name = Q.getObject(['name'], camera) || "";
+							if (name.indexOf('back') !== -1) {
+								selectedCam = camera;
+							}
+						});
+						scanner.start(selectedCam);
+					}).catch(function (e) {
+						console.error(e);
+					});
+				};
 
-					_constructor($content);
-				},
-				onClose: function () {
-					Q.handle(Q.Scanner.onClose);
-				}
-			});
-		});
-	},
-	/**
-	 * Method - interface for QR code scan action. It decide which plugin or library to use
-	 * and handle callback (when QR code found) to mark participants as "checked".
-	 * @method qr
-	 * @static
-	 * @param {function} callback Executed when QR code found with text of this code in arguments
-	 * @param {object} options Object with options to replace default
-	 */
-	qr: function (callback, options) {
-		options = Q.extend({}, this.options, options);
+				Q.addScript(['{{Q}}/js/qrcode/instascan.min.js'], function () {
+					Q.Dialogs.push({
+						title: options.dialog.title,
+						className: "Q_scanning",
+						content: "",
+						fullscreen: true,
+						onActivate: function (dialog) {
+							var $content = $(".Q_dialog_slot", dialog);
+							var $title = $(".Q_title_slot", dialog);
 
-		// create audio element to sound when QR code found
-		var audio =  new Q.Audio(options.sound.src);
+							// set max height
+							$content.height(dialog.height() - $title.height());
 
-		// if plugin QRScanner defined - use it
-		if (typeof QRScanner !== "undefined") {
-			return this.qrscan(audio, callback, options);
+							_constructor($content);
+						},
+						onClose: function () {
+							Q.handle(Q.Camera.Scan.onClose);
+						}
+					});
+				});
+			}
 		}
-
-		// in all other ways use instascan
-		this.instascan(audio, callback, options);
 	}
 };
 
