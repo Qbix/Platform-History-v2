@@ -12480,11 +12480,17 @@ Q.Camera = {
 									console.warn(err);
 									return;
 								}
+
 								if (audio) {
 									audio.play();
 								}
+
 								Q.handle(callback, null, [text]);
-								QRScanner.scan(_scan); // run scanner for next code
+
+								// run scanner for next code with 5 sec delay
+								setTimeout(function(){
+									QRScanner.scan(_scan);
+								}, 3000);
 							};
 							QRScanner.scan(_scan); // start scanning
 						} else if (status.denied) {
@@ -12538,20 +12544,15 @@ Q.Camera = {
 						if (!camerasAmount || camerasAmount <= 0) {
 							console.error('No cameras found.');
 						}
-						var selectedCam = cameras[0];
-						Q.each(cameras, function (i, camera) {
-							var name = Q.getObject(['name'], camera) || "";
-							if (name.indexOf('back') !== -1) {
-								selectedCam = camera;
-							}
-						});
-						scanner.start(selectedCam);
+
+						// select last camera, because last camera always back camera
+						scanner.start(cameras[camerasAmount - 1]);
 					}).catch(function (e) {
 						console.error(e);
 					});
 				};
 
-				Q.addScript(['{{Q}}/js/qrcode/instascan.min.js'], function () {
+				Q.addScript(['{{Q}}/js/qrcode/instascan.js'], function () {
 					Q.Dialogs.push({
 						title: options.dialog.title,
 						className: "Q_scanning",
