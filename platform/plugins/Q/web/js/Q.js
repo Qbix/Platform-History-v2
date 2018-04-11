@@ -12469,7 +12469,12 @@ Q.Camera = {
 						}
 						if (status.authorized) {
 							QRScanner.show();
-							$html.hide().show(); // to make safari redraw it properly
+							if (Q.info.platform === 'ios') {
+								$html.hide();
+								setTimeout(function () {
+									$html.show();
+								}, 0);
+							}
 							var _scan = function(err, text){
 								if(err){
 									console.warn(err);
