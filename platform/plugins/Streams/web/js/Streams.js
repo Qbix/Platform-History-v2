@@ -4915,6 +4915,7 @@ Q.onInit.add(function _Streams_onInit() {
 				case 'Streams/join':
 					prevState = message.getInstruction('prevState');
 					_updateParticipantCache(msg, 'participating', prevState, usingCached);
+					_registerUserDevice(msg);
 					break;
 				case 'Streams/leave':
 					prevState = message.getInstruction('prevState');
@@ -5113,7 +5114,50 @@ function _updateTotalsCache(msg) {
 		}
 	});
 }
+function _registerUserDevice(message) {
+	// filter current user messages
+	if (Q.getObject(['byUserId'], message) !== Users.loggedInUserId()) {
+		return;
+	}
 
+	// heck whether notification granted
+	Users.Device.notificationGranted(function (granted) {
+		if (granted) {
+			return;
+		}
+
+		Q.Text.get('Streams/content', function (err, text) {
+			text = Q.getObject(["notifications"], text);
+
+			if (!text) {
+				return;
+			}
+
+			// if not - ask
+			Q.confirm(text.prompt, function (res) {
+				if (!res){
+					return;
+				}
+
+				Users.Device.onInit.add(function(){
+					Users.Device.subscribe(function(err, subscribed){
+						var fem = Q.firstErrorMessage(err);
+						if (fem) {
+							console.error("Device registration: " + fem);
+							return false;
+						}
+
+						if(subscribed) {
+							console.log("device subscribed");
+						} else {
+							console.log("device subscribtion fail!!!");
+						}
+					});
+				}, 'Streams');
+			}, {ok: text.yes, cancel: text.no});
+		});
+	});
+}
 function _updateParticipantCache(msg, newState, prevState, usingCached) {
 	Participant.get.cache.removeEach([msg.publisherId, msg.streamName]);
 	if (!usingCached) {

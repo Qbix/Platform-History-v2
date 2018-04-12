@@ -6,5 +6,11 @@
 		"Filter": "What do you enjoy?",
 		"CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
 		"TrySynonyms": "Don't see it? Try some synonyms."
+	},
+	"notifications": {
+		"title": "Permission",
+		"prompt": "Do you want to enable notifications?",
+	 	"yes": "Yes",
+		"no": "No"
 	}
 }
