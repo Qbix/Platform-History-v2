@@ -403,17 +403,20 @@ Q.Tool.define("Q/columns", function(options) {
 							Q.handle(js, tool, [options, index, div, data]);
 						}
 					}
+					// check url before document location changed
+					var url = $div.attr('data-url');
+					// set document title anyway
+					document.title = $div.find('.Q_title_slot').text();
+					$div.attr('data-title', document.title);
+					if (o.pagePushUrl && createdNewDiv && url && url !== location.href) {
+						Q.Page.push(url);
+					}
+
 					// call the callback before the events,
 					// so something custom can be done first
 					Q.handle(callback, tool, [options, index, div, data]);
 					Q.handle(options.onOpen, tool, [options, index, div, data]);
 					state.onOpen.handle.call(tool, options, index, div, data);
-					var url = $div.attr('data-url');
-					if (o.pagePushUrl && createdNewDiv && url && url != location.href) {
-						document.title = $div.find('.Q_title_slot').text();
-						$div.attr('data-title', document.title);
-						Q.Page.push(url);
-					}
 					setTimeout(function () {
 						$mask.remove();
 						$div.removeClass('Q_columns_loading');
@@ -691,7 +694,7 @@ Q.Tool.define("Q/columns", function(options) {
 			state.onClose.handle.call(tool, index, div, data);
 			var url = $prev.attr('data-url');
 			var title = $prev.attr('data-title');
-			if (o.pagePushUrl && url && url != location.href) {
+			if (o.pagePushUrl && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
 		}
