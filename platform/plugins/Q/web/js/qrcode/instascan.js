@@ -31077,6 +31077,7 @@ var Scanner = function (_EventEmitter) {
 
       var video = opts.video || document.createElement('video');
       video.setAttribute('autoplay', 'autoplay');
+      video.setAttribute('playsinline', 'true');
 
       return video;
     }

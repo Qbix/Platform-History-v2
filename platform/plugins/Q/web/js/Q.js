@@ -12517,7 +12517,13 @@ Q.Camera = {
 			 * @param {object} options object with options to replace default
 			 */
 			instascan: function (audio, callback, options) {
-				var _constructor = function ($element) {
+				var _constructor = function (dialog) {
+					var $element = $(".Q_dialog_slot", dialog);
+					var $title = $(".Q_title_slot", dialog);
+
+					// set max height
+					$element.height(dialog.height() - $title.height());
+
 					var elementHeight = $element.height();
 					var elementWidth = $element.width();
 
@@ -12533,20 +12539,42 @@ Q.Camera = {
 					Q.Camera.Scan.onClose.set(function(){
 						scanner.stop();
 					});
-					var scanner = new Instascan.Scanner({ video: $videoElement[0], scanPeriod: 5 });
+					var scanner = new Instascan.Scanner({
+						video: $videoElement[0],
+						scanPeriod: 5,
+						mirror: false
+					});
 					scanner.addListener('scan', function (text, image) {
 						audio.play();
 						Q.handle(callback, null, [text]);
 					});
 
 					Instascan.Camera.getCameras().then(function (cameras) {
-						var camerasAmount = Q.getObject(['length'], cameras);
+						var camerasAmount = Q.getObject(['length'], cameras) || 0;
 						if (!camerasAmount || camerasAmount <= 0) {
 							console.error('No cameras found.');
 						}
 
-						// select last camera, because last camera always back camera
-						scanner.start(cameras[camerasAmount - 1]);
+						// index of selected camera to last camera
+						var selectedCamera = camerasAmount - 1;
+
+						// if more than 1 camera - add swap icon
+						if (camerasAmount > 1) {
+							$("<a class='Q_swap'>").on(Q.Pointer.fastclick, function(){
+
+								if (selectedCamera + 1 < camerasAmount) {
+									selectedCamera++;
+								} else if (selectedCamera - 1 >= 0) {
+									selectedCamera--;
+								} else {
+									return;
+								}
+
+								scanner.start(cameras[selectedCamera]);
+							}).appendTo(dialog);
+						}
+
+						scanner.start(cameras[selectedCamera]);
 					}).catch(function (e) {
 						console.error(e);
 					});
@@ -12559,13 +12587,7 @@ Q.Camera = {
 						content: "",
 						fullscreen: true,
 						onActivate: function (dialog) {
-							var $content = $(".Q_dialog_slot", dialog);
-							var $title = $(".Q_title_slot", dialog);
-
-							// set max height
-							$content.height(dialog.height() - $title.height());
-
-							_constructor($content);
+							_constructor(dialog);
 						},
 						onClose: function () {
 							Q.handle(Q.Camera.Scan.onClose);
