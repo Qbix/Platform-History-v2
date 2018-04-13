@@ -2792,11 +2792,16 @@ Stream.leave.onError = new Q.Event();
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} streamName name of stream to join
  * @param {Function} [callback] receives (err, participant) as parameters
+ * @param {Object} [options] optional object that can include:
+ *   @param {bool} [options.device] Whether to subscribe device when user subscribed to some stream
  */
-Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback) {
+Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback, options) {
 	if (!Q.plugins.Users.loggedInUser) {
 		throw new Error("Streams.Stream.subscribe: Not logged in.");
 	}
+
+	options = Q.extend({}, Stream.subscribe.options, options);
+
 	var slotName = "participant";
 	var fields = {"publisherId": publisherId, "name": streamName};
 	var baseUrl = Q.baseUrl({
@@ -2819,6 +2824,11 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		);
 		callback && callback.call(participant, err, participant || null);
 		_refreshUnlessSocket(publisherId, streamName);
+
+		// check whether subscribe device and subscribe if yes
+		if (Q.getObject(["device"], options) === true) {
+			_registerUserDevice();
+		}
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
 /**
@@ -2826,6 +2836,13 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
  * @event subscribe.onError
  */
 Stream.subscribe.onError = new Q.Event();
+
+/** default options for  Stream.subscribe class.
+ * @param {bool} device Whether to subscribe device when user subscribed to some stream
+ */
+Stream.subscribe.options = {
+	device: true
+};
 
 /**
  * Unsubscribe from a stream you previously subscribed to
@@ -5203,6 +5220,66 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 		messages: true,
 		unlessSocket: true
 	}, options));
+}
+	/**
+	 * Check whether notifications permission==default
+	 * if yes, check whether notifications permissions already requested,
+	 * if yes - return, if no - Q.Confirm user whether he want to grant
+	 * notifications permissions, and if yes - run Users.Device.subscribe(),
+	 * otherwise - save to cache that requested (to refuse request in future)
+	 *
+	 * @method _registerUserDevice
+	 */
+function _registerUserDevice() {
+	// check whether notification granted
+	Users.Device.notificationGranted(function (granted) {
+		// if user already granted or blocked notifications - do nothing
+		if (granted !== "default") {
+			return;
+		}
+
+		var userId = Q.Users.loggedInUserId();
+		var cache = Q.Cache.local('Users.Permissions.notifications', 1000);
+		var requested = cache.get([userId]);
+
+		// if permissions already requested - don't request it again
+		if (Q.getObject(['cbpos'], requested) === true) {
+			return;
+		}
+
+		Q.Text.get('Streams/content', function (err, text) {
+			text = Q.getObject(["notifications"], text);
+
+			if (!text) {
+				return;
+			}
+
+			// if not - ask
+			Q.confirm(text.prompt, function (res) {
+				if (!res){
+					// save to cache that notifications requested
+					// only if user refused, because otherwise - notifications has granted
+					cache.set([userId], true);
+
+					return;
+				}
+
+				Users.Device.subscribe(function(err, subscribed){
+					var fem = Q.firstErrorMessage(err);
+					if (fem) {
+						console.error("Device registration: " + fem);
+						return false;
+					}
+
+					if(subscribed) {
+						console.log("device subscribed");
+					} else {
+						console.log("device subscribtion fail!!!");
+					}
+				});
+			}, {ok: text.yes, cancel: text.no});
+		});
+	});
 }
 
 Q.Template.set('Streams/followup/mobile/alert', "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
