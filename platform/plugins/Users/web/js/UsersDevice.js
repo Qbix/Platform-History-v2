@@ -37,14 +37,50 @@
 		 *   with elliptic curve digital signature (ECDSA), over the P-256 curve.
 		 */
 		subscribe: function (callback, options) {
-			this.getAdapter(function (err, adapter) {
-				if (err) {
-					Q.handle(callback, null, [err]);
-				} else {
-					adapter.subscribe(function (err, subscribed) {
-						Q.handle(callback, null, [err, subscribed]);
-					}, options);
+			// check whether notification granted
+			Users.Device.notificationGranted(function (granted) {
+				// if user already granted or blocked notifications - do nothing
+				if (granted !== "default") {
+					return;
 				}
+
+				var userId = Q.Users.loggedInUserId();
+				var cache = Q.Cache.local('Users.Permissions.notifications', 1000);
+				var requested = cache.get([userId]);
+
+				// if permissions already requested - don't request it again
+				if (Q.getObject(['cbpos'], requested) === true) {
+					return;
+				}
+
+				Q.Text.get('Users/content', function (err, text) {
+					text = Q.getObject(["notifications"], text);
+
+					if (!text) {
+						return;
+					}
+
+					// if not - ask
+					Q.confirm(text.prompt, function (res) {
+						if (!res){
+							// save to cache that notifications requested
+							// only if user refused, because otherwise - notifications has granted
+							cache.set([userId], true);
+
+							return;
+						}
+
+						Users.Device.getAdapter(function (err, adapter) {
+							if (err) {
+								Q.handle(callback, null, [err]);
+							} else {
+								adapter.subscribe(function (err, subscribed) {
+									Q.handle(callback, null, [err, subscribed]);
+								}, options);
+							}
+						});
+					}, {ok: text.yes, cancel: text.no});
+				});
 			});
 		},
 
