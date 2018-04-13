@@ -2827,7 +2827,19 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 
 		// check whether subscribe device and subscribe if yes
 		if (Q.getObject(["device"], options) === true) {
-			_registerUserDevice();
+			Users.Device.subscribe(function(err, subscribed){
+				var fem = Q.firstErrorMessage(err);
+				if (fem) {
+					console.error("Device registration: " + fem);
+					return false;
+				}
+
+				if(subscribed) {
+					console.log("device subscribed");
+				} else {
+					console.log("device subscription fail!!!");
+				}
+			});
 		}
 	}, { method: 'post', fields: fields, baseUrl: baseUrl });
 };
@@ -5220,66 +5232,6 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 		messages: true,
 		unlessSocket: true
 	}, options));
-}
-	/**
-	 * Check whether notifications permission==default
-	 * if yes, check whether notifications permissions already requested,
-	 * if yes - return, if no - Q.Confirm user whether he want to grant
-	 * notifications permissions, and if yes - run Users.Device.subscribe(),
-	 * otherwise - save to cache that requested (to refuse request in future)
-	 *
-	 * @method _registerUserDevice
-	 */
-function _registerUserDevice() {
-	// check whether notification granted
-	Users.Device.notificationGranted(function (granted) {
-		// if user already granted or blocked notifications - do nothing
-		if (granted !== "default") {
-			return;
-		}
-
-		var userId = Q.Users.loggedInUserId();
-		var cache = Q.Cache.local('Users.Permissions.notifications', 1000);
-		var requested = cache.get([userId]);
-
-		// if permissions already requested - don't request it again
-		if (Q.getObject(['cbpos'], requested) === true) {
-			return;
-		}
-
-		Q.Text.get('Streams/content', function (err, text) {
-			text = Q.getObject(["notifications"], text);
-
-			if (!text) {
-				return;
-			}
-
-			// if not - ask
-			Q.confirm(text.prompt, function (res) {
-				if (!res){
-					// save to cache that notifications requested
-					// only if user refused, because otherwise - notifications has granted
-					cache.set([userId], true);
-
-					return;
-				}
-
-				Users.Device.subscribe(function(err, subscribed){
-					var fem = Q.firstErrorMessage(err);
-					if (fem) {
-						console.error("Device registration: " + fem);
-						return false;
-					}
-
-					if(subscribed) {
-						console.log("device subscribed");
-					} else {
-						console.log("device subscribtion fail!!!");
-					}
-				});
-			}, {ok: text.yes, cancel: text.no});
-		});
-	});
 }
 
 Q.Template.set('Streams/followup/mobile/alert', "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
