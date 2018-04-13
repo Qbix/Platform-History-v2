@@ -89,10 +89,11 @@
 		 * @method notificationGranted
 		 * @static
 		 * @param {function} callback
+		 * @return {string|bool} return true if granted, false if blocked, "default" if didn't make choise yet
 		 */
 		notificationGranted: function (callback) {
 			if (window.Notification) {
-				return Q.handle(callback, window.Notification, [window.Notification.permission === 'granted']);
+				return Q.handle(callback, window.Notification, [window.Notification.permission]);
 			}
 
 			if(cordova && cordova.plugins && cordova.plugins.notification && cordova.plugins.notification.badge && cordova.plugins.notification.badge.hasPermission) {
