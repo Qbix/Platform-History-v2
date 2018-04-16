@@ -481,6 +481,10 @@
 .Streams_chat_messages {
 	min-height: 70px;
 }
+.Streams_chat_messages button[name=close] {
+	display: block;
+	margin: 20px auto;
+}
 .Streams_chat_item {
 	font-size: 11pt;
 	margin: 10px 0;
