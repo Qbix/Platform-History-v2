@@ -250,9 +250,14 @@ abstract class Assets extends Base_Assets
 	}
 
 	static function checkPaid(& $stream, $user) {
-		if ($stream->publisherId === $user->id) {
+		$communityId = $stream->getAttribute("communityId");
+		$roles = Users::roles($communityId, array(Q::app()."/admins", "Calendars/admins"));
+
+		// if current user is a publisher or participant of app/admins or Calendars/admin
+		if ($stream->publisherId === $user->id || count($roles)) {
 			return;
 		}
+
 		$payment = $stream->getAttribute('payment');
 		if (!$payment || $payment['type'] !== 'required') {
 			return;
