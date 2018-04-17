@@ -2909,7 +2909,7 @@ Q.interpolateUrl = function (url, additional) {
 	}
 	var substitutions = {};
 	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
-	substitutions['baseUrl'] = substitutions[Q.info.app] = baseUrl;
+	substitutions['baseUrl'] = substitutions[Q.app.name] = baseUrl;
 	substitutions['Q'] = Q.pluginBaseUrl('Q');
 	for (var plugin in Q.plugins) {
 		substitutions[plugin] = Q.pluginBaseUrl(plugin);
