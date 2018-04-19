@@ -130,7 +130,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		srcFromMe: '{{Streams}}/img/chat/message-overflowed-from-me.png',
 		title: 'Message from {{displayName}}'
 	},
-	closable: false,
+	closeable: false,
 	onRefresh: new Q.Event(),
 	onClose: new Q.Event(function () {
 		// remove tool when chat stream closed
@@ -283,7 +283,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				'Streams/chat/Streams_chat_noMessages',
 				{
 					text: tool.text,
-					closable: state.closable && isPublisher
+					closeable: state.closeable && isPublisher
 				},
 				function(error, html){
 					if (error) { return error; }
@@ -863,7 +863,7 @@ Q.Template.set('Streams/chat/message/error',
 
 Q.Template.set('Streams/chat/Streams_chat_noMessages',
 	'<i class="Streams_chat_noMessages">{{text.noOneSaid}}</i>' +
-	'{{#if closable}}' +
+	'{{#if closeable}}' +
 		'<button class="Q_button Q_tool Q_clickable_tool" name="close">{{text.closeChat}}</button>' +
 	'{{/if}}'
 );
