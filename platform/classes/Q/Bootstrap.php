@@ -287,7 +287,7 @@ class Q_Bootstrap
 		if (isset($old_setting)) {
 			Q_Cache::ignore($old_setting);
 		}
-		set_time_limit(Q_Config::get('Q', 'internal', 'phpTimeout', 30));
+		set_time_limit(Q_Config::get('Q', 'internal', 'phpTimeout', 300));
 		self::setDefaultTimezone();
 		
 		Q::event('Q/configure', compact(
