@@ -69,9 +69,6 @@ class Users_AppUser extends Base_Users_AppUser
 		if (!isset($appId)) {
 			$appId = Q::app();
 		}
-		if (!isset($appId)) {
-			$appId = Q::app();
-		}
 		list($appId, $appInfo) = Users::appInfo($platform, $appId);
 		if (!$appId) {
 			return null;
