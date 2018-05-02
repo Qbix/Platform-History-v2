@@ -4453,9 +4453,9 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	if (('attributes' in fields)
 	&& (!onlyChangedFields || fields.attributes != stream.fields.attributes)) {
 		var attributes = JSON.parse(fields.attributes || "{}");
-		var publisherId = stream.fields.publisherId;
-		var streamName = stream.fields.name, obj;
-		updated = {}, cleared = [];
+		var obj;
+		updated = {};
+		cleared = [];
 		
 		// events about cleared attributes
 		var streamAttributes = stream.getAllAttributes();
@@ -4475,8 +4475,9 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		}
 		
 		// events about updated attributes
+		var currentAttributes = JSON.parse(stream.fields.attributes || "{}");
 		for (k in attributes) {
-			if (JSON.stringify(attributes[k]) == JSON.stringify(stream.getAttribute(k))) {
+			if (JSON.stringify(attributes[k]) === JSON.stringify(currentAttributes[k])) {
 				continue;
 			}
 			obj = {};
