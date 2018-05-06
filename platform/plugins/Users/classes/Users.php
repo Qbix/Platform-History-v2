@@ -1798,6 +1798,15 @@ abstract class Users extends Base_Users
 					}
 					$normalized = $identifier;
 					break;
+				case 'ios':
+				case 'android':
+					if (!is_string($identifier)) {
+						throw new Q_Exception_WrongValue(
+							array('field' => 'identifier', 'range' => 'string uid')
+						);
+					}
+					$normalized = $identifier;
+					break;
 				default:
 					break;
 			}

@@ -31,6 +31,7 @@
  *     </ul>
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
+ *   @param {Q.Event} [options.onClose] Event for when chat stream closed
  */
 Q.Tool.define('Streams/chat', function(options) {		
 	var tool = this;
@@ -58,18 +59,49 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.vote[k].activeSrc = Q.url(state.vote[k].activeSrc);
 		}
 	}
-	tool.refresh(function () {
-		if (state.scrollToBottom) {
-			tool.scrollToBottom();
+
+	Q.Text.get('Streams/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			console.warn(msg);
 		}
+
+		tool.text = text.chat;
+
+		tool.refresh(function () {
+			if (state.scrollToBottom) {
+				tool.scrollToBottom();
+			}
+		});
+		Q.Streams.refresh.beforeRequest.add(function () {
+			if (state.stream) {
+				state.stream.refresh(null, {messages: true});
+			}
+		}, tool);
 	});
-	Q.Streams.refresh.beforeRequest.add(function () {
-		if (state.stream) {
-			state.stream.refresh(null, {messages: true});
-		}
-	}, tool);
-	//tool.Q.onInit.set(_init, "Streams/chat");
-}, 
+
+	// close chat button handler
+	$(tool.element).on(Q.Pointer.fastclick, "button[name=close]", function (event) {
+		event.stopPropagation();
+		event.preventDefault();
+
+		var button = $(this);
+		var stream = state.stream;
+
+		button.addClass("Q_working");
+		Q.Streams.Stream.close(stream.fields.publisherId, stream.fields.name, function(err, response){
+			var msg = Q.firstErrorMessage(err);
+			button.removeClass("Q_working");
+			if (msg) {
+				return Q.alert(msg);
+			}
+
+			Q.handle(state.onClose, tool, [stream]);
+		});
+
+		return false;
+	});
+},
 
 {
 	messageMaxHeight: '200px',
@@ -99,6 +131,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		title: 'Message from {{displayName}}'
 	},
 	onRefresh: new Q.Event(),
+	onClose: new Q.Event(function () {
+		// remove tool when chat stream closed
+		this.remove();
+	}),
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -124,12 +160,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			error: {
 				dir: '{{Streams}}/views',
 				name: 'Streams/chat/message/error',
-				fields: {
-					text: {
-						notLoggedIn: "You are not logged in",
-						notAuthorized: "You are not authorized"
-					}
-				}
+				fields: { }
 			}
 		}
 	}
@@ -216,6 +247,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
+		fields.text = tool.text;
 		Q.Template.render(
 			'Streams/chat/main',
 			fields,
@@ -245,10 +277,14 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		if (Q.isEmpty(messages)) {
 			return Q.Template.render(
-				'Streams/chat/Streams_chat_noMessages', 
+				'Streams/chat/Streams_chat_noMessages',
+				{
+					text: tool.text,
+					isPublisher: Q.Users.loggedInUserId() === state.stream.fields.publisherId
+				},
 				function(error, html){
 					if (error) { return error; }
-					tool.$('.Streams_chat_messages').html(html);
+					tool.$('.Streams_chat_messages').html(html).activate();
 				},
 				state.templates.Streams_chat_noMessages
 			);
@@ -310,7 +346,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							: state.vote[type].src;
 						$this.attr('src', src);
 						if (type === 'flag' && src === state.vote[type].activeSrc) {
-							Q.alert("Message has been flagged for admin review. Tap again to unflag.");
+							Q.alert(tool.text.flaggedForAdminReview);
 							var fields = {type: type};
 							Q.req('Streams/chatVote', function () {
 								// Vote up/down/flag has been submitted
@@ -665,13 +701,13 @@ Q.Tool.define('Streams/chat', function(options) {
 			return tool.$(query+byParam);
 		}
 
-		if (typeof(action) == 'string') {
+		if (typeof(action) === 'string') {
 			switch(action){
 				case 'first':
 				case 'last':
 					return tool.$(query+':'+action+byParam);
 			}
-		} else if (typeof(action) == 'number') {
+		} else if (typeof(action) === 'number') {
 			var messages = tool.$(query+byParam);
 			return messages.length <= action ? $(messages.get(action)) : null;
 		}
@@ -823,14 +859,17 @@ Q.Template.set('Streams/chat/message/error',
 );
 
 Q.Template.set('Streams/chat/Streams_chat_noMessages',
-	'<i class="Streams_chat_noMessages">No one has said anything</i>'
+	'<i class="Streams_chat_noMessages">{{text.noOneSaid}}</i>' +
+	'{{#if isPublisher}}' +
+		'<button class="Q_button Q_tool Q_clickable_tool" name="close">{{text.closeChat}}</button>' +
+	'{{/if}}'
 );
 
 Q.Template.set('Streams/chat/main', 
 	'<div class="Q_clear"></div>'+
 	'<div class="Streams_chat_messages">'+
 		'{{#isClick}}'+
-			'<div class="Streams_chat_more">earlier comments</div>'+
+			'<div class="Streams_chat_more">{{text.earlierComments}}</div>'+
 		'{{/isClick}}'+
 		'<!-- messages -->'+
 	'</div>'+

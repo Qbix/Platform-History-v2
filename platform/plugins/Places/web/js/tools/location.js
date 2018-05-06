@@ -265,7 +265,7 @@ Q.Tool.define("Places/location", function (options) {
 
 			return false;
 		}, {
-			enableHighAccuracy: true, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
+			enableHighAccuracy: false, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
 			timeout: 5000,
 			maximumAge: 0
 		});
