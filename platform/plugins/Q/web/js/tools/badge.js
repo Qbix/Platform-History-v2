@@ -15,6 +15,9 @@
 	 *  	@param {string}  [options.tl.left=0] Badge left position.
 	 *  	@param {string}  [options.tl.right] Badge right position. if defined - left position ignored.
 	 *  	@param {string}  [options.tl.bottom] Badge bottom position. if defined - top position ignored.
+	 *  	@param {string}  [options.tl.font-size] Badge content font size.
+	 *  	@param {string}  [options.tl.content] Badge content.
+	 *  	@param {string}  [options.tl.onClick] Badge click event handler.
 	 *  @param {string}  [options.tr] settings for top right badge. If == null - badge remove.
 	 *  	@param {string}  [options.tr.icon] Badge icon. Can be "{{Q}}/img/..." or "../img/...". If icon=null - badge remove.
 	 *  	@param {string}  [options.tr.size=options.size] Badge width.
@@ -22,6 +25,9 @@
 	 *  	@param {string}  [options.tr.right=0] Badge right position.
 	 *  	@param {string}  [options.tr.left] Badge left position. if defined - right position ignored.
 	 *  	@param {string}  [options.tr.bottom] Badge bottom position. if defined - top position ignored.
+	 *  	@param {string}  [options.tr.font-size] Badge content font size.
+	 *  	@param {string}  [options.tr.content] Badge content.
+	 *  	@param {string}  [options.tr.onClick] Badge click event handler.
 	 *  @param {string}  [options.br] settings for bottom right badge. If == null - badge remove.
 	 *  	@param {string}  [options.br.icon] Badge icon. Can be "{{Q}}/img/..." or "../img/...". If icon=null - badge remove.
 	 *  	@param {string}  [options.br.size=options.size] Badge width.
@@ -29,6 +35,9 @@
 	 *  	@param {string}  [options.br.bottom=0] Badge bottom position.
 	 *  	@param {string}  [options.br.left] Badge left position. if defined - right position ignored.
 	 *  	@param {string}  [options.br.top] Badge top position. if defined - bottom position ignored.
+	 *  	@param {string}  [options.br.font-size] Badge content font size.
+	 *  	@param {string}  [options.br.content] Badge content.
+	 *  	@param {string}  [options.br.onClick] Badge click event handler.
 	 *  @param {string}  [options.bl] settings for bottom left badge
 	 *  	@param {string}  [options.bl.icon] Badge icon. Can be "{{Q}}/img/..." or "../img/...". If icon=null - badge remove.
 	 *  	@param {string}  [options.bl.size=options.size] Badge width.
@@ -36,6 +45,9 @@
 	 *  	@param {string}  [options.bl.left=0] Badge left position.
 	 *  	@param {string}  [options.bl.right] Badge right position. if defined - left position ignored.
 	 *  	@param {string}  [options.bl.top] Badge top position. if defined - bottom position ignored.
+	 *  	@param {string}  [options.bl.font-size] Badge content font size.
+	 *  	@param {string}  [options.bl.content] Badge content.
+	 *  	@param {string}  [options.bl.onClick] Badge click event handler.
 	 *  @param {string}  [options.size="15px"] Default badge size.
 	 * @return {Q.Tool}
 	 */
@@ -90,6 +102,8 @@
 				var style = {
 					width: badgeStyle.size,
 					height: badgeStyle.size,
+					"line-height": badgeStyle.size,
+					'font-size': Q.getObject(['font-size'], badgeStyle) || 'auto',
 					'background-image': 'url(' + Q.url(badgeStyle.icon) + ')'
 				};
 
@@ -163,11 +177,19 @@
 
 				// if badge element don't exist - create one
 				if (!($badgeElement instanceof jQuery)) {
-					$badgeElement = Q.setObject(corner, $("<div class='Q_badge'>").appendTo($te), tool);
+					$badgeElement = Q.setObject(corner, $("<div class='Q_badge'>"), tool);
+
+					if (badgeStyle.content) {
+						$badgeElement.html(badgeStyle.content);
+					}
+
+					if (Q.typeOf(badgeStyle.onClick) === 'function') {
+						$badgeElement.on('click', badgeStyle.onClick);
+					}
 				}
 
 				// remove old styles and apply new
-				$badgeElement.removeAttr("style").css(style);
+				$badgeElement.removeAttr("style").css(style).appendTo($te);
 			});
 		},
 		Q: {
