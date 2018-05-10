@@ -2784,13 +2784,9 @@ abstract class Streams extends Base_Streams
 			$results[$sn] = $participant;
 		}
 		if ($streamNamesUpdate) {
-			Streams_Participant::update()
-				->set(compact('subscribed', 'posted', 'state'))
-				->where(array(
-					'publisherId' => $publisherId,
-					'streamName' => $streamNamesUpdate,
-					'userId' => $asUserId
-				))->execute();
+			foreach ($results as $result) {
+				$result->save();
+			}
 		}
 		self::_updateCounts($publisherId, $updateCounts, $state);
 		if ($streamNamesMissing) {
