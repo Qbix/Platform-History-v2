@@ -3596,7 +3596,7 @@ var Total = Streams.Total = {
 			var totals = Q.isArrayLike(messageType)
 				? Q.copy(data.totals)
 				: data.totals[messageType];
-			callback && callback.call(Total, err, totals || null);
+			callback && callback.call(Total, err, totals || 0);
 		});
 	},
 	/**
