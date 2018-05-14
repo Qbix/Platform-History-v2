@@ -128,17 +128,27 @@
 		 * @return {string|bool} return true if granted, false if blocked, "default" if didn't make choise yet
 		 */
 		notificationGranted: function (callback) {
+			// for desktop browsers
 			if (window.Notification) {
 				return Q.handle(callback, window.Notification, [window.Notification.permission]);
 			}
 
-			if(cordova && cordova.plugins && cordova.plugins.notification && cordova.plugins.notification.badge && cordova.plugins.notification.badge.hasPermission) {
-				var hasPermission = cordova.plugins.notification.badge.hasPermission;
-				hasPermission(function (granted) {
+			// for iOS and Android
+			var hasPermission = Q.getObject(["cordova", "plugins", "notification", "badge", "hasPermission"], window);
+			var isIos = /ipad|iphone/gi.test(navigator.userAgent);
+			var isAndroid = /android/gi.test(navigator.userAgent);
+
+			if(hasPermission && isIos) {
+				Q.handle(hasPermission, null, [function (granted) {
 					return Q.handle(callback, hasPermission, [granted]);
-				});
+				}]);
+			} else if(isAndroid) {
+				// for android always return true,
+				// because android devices allow notifications without questions
+				return Q.handle(callback, null, [true]);
 			}
 
+			// for unknown
 			console.warn("Users.Device.notificationGranted: Unable to define notification object");
 
 			Q.handle(callback, null, [null]);
