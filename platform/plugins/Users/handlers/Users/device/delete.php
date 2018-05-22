@@ -2,9 +2,8 @@
 
 function Users_device_delete($params = array())
 {
-	if (Q_Request::requireFields(array('deviceId', 'appId'))) {
-		return false;
-	}
+	Q_Request::requireFields(array('deviceId'));
+
 	$req = array_merge($_REQUEST, $params);
 	$userId = Users::loggedInUser(true)->id;
 	$deviceId = Q::ifset($req, 'deviceId', '');
