@@ -63,7 +63,7 @@
 	 *  @param {string}  [options.size="15px"] Default badge size.
 	 * @return {Q.Tool}
 	 */
-	Q.Tool.define("Q/badge", function (options) {
+	Q.Tool.define("Q/badge", function () {
 		var tool = this;
 		var state = this.state;
 		var $te = $(tool.element);
@@ -77,7 +77,7 @@
 		Q.addStylesheet('{{Q}}/css/badge.css', function () {
 			state.interval = setInterval(function () {
 				tool.refresh();
-			}, 1000);
+			}, 3000);
 		});
 	},
 	{
@@ -209,7 +209,7 @@
 					tool[corner] = $badgeElement;
 
 					// execute onCreate event every time element created
-					Q.handle(badgeStyle.onCreate, tool, [$badgeElement, corner, style])
+					Q.handle(badgeStyle.onCreate, tool, [$badgeElement, corner, style]);
 				}
 
 				if (badgeStyle.content) {
