@@ -16,4 +16,15 @@ function Users_oAuth_post()
 
 	// Set the session id to the access_token
 	Q_Session::id($params['access_token']);
+	
+	// Add a device, if any
+	if ($deviceId = Q::ifset($_REQUEST, 'deviceId', null)) {
+		$fields2 = array(
+			'deviceId', 'platform', 'version', 'formFactor'
+		);
+		Q_Request::requireFields($fields2);
+		$device = Q::take($_REQUEST, $fields2);
+		$device['userId'] = Users::loggedInUser(true)->id;
+		Users_Device::add($device);
+	}
 }

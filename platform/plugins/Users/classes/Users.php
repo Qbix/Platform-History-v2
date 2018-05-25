@@ -667,7 +667,7 @@ abstract class Users extends Base_Users
 		if ($session = Q_Session::row()) {
 			$deviceId = isset($session->deviceId) ? $session->deviceId : null;
 		}
-
+		
 		if ($user) {
 			Q_Utils::sendToNode(array(
 				"Q/method" => "Users/logout",
@@ -675,6 +675,12 @@ abstract class Users extends Base_Users
 				"userId" => $user->id,
 				"deviceId" => $deviceId
 			));
+
+			// forget the device for this user/session
+			Users_Device::delete()->where(array(
+				'userId' => $user->id,
+				'sessionId' => $sessionId
+			))->execute();
 		}
 
 		// Destroy the current session, which clears the $_SESSION and all notices, etc.
@@ -897,6 +903,16 @@ abstract class Users extends Base_Users
 					$platform = $app['platform'];
 					$appId = Q::ifset($app, 'appId', null);
 					break;
+				case 'device':
+					$device = $identifier['device'];
+					$fields = array('deviceId', 'platform', 'appId', 'version', 'formFactor');
+					Q_Valid::requireFields($fields, $device, true);
+					$identifier = Q::ifset($identifier, 'identifier', null);
+					if (empty($device['platform'])) {
+						throw new Q_Exception_RequiredField(array('field' => 'identifier.device.platform'));
+					}
+					$signedUpWith = $device['platform'];
+					break;
 				default:
 					throw new Q_Exception_WrongType(array(
 						'field' => 'identifier', 
@@ -1015,6 +1031,10 @@ abstract class Users extends Base_Users
 				$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
 				$user->addMobile($mobileNumber, $sms, array(), $p);
 			}
+		}
+		if (!empty($device)) {
+			$device['userId'] = $user->id;
+			Users_Device::add($device);
 		}
 
 		$user->save(); // saves the user with the id
