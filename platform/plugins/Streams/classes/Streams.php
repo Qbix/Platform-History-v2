@@ -2736,9 +2736,10 @@ abstract class Streams extends Base_Streams
 		$messages = array();
 		$results = array();
 		$state = 'participating';
-		$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
-		$posted = empty($options['posted']) ? 'no' : 'yes';
 		$updateCounts = array();
+
+		// this fields will modified in streams_participant table row
+		$changedFields = compact('state');
 		foreach ($streamNames as $sn) {
 			if (!isset($participants[$sn])) {
 				$updateCounts[''][] = $sn;
@@ -2748,10 +2749,10 @@ abstract class Streams extends Base_Streams
 			$stream = $streams2[$sn];
 			$participant = &$participants[$sn];
 			if (isset($options['subscribed'])) {
-				$participant->subscribed = $subscribed;
+				$changedFields['subscribed'] = $participant->subscribed = 'yes';
 			}
 			if (isset($options['posted'])) {
-				$participant->posted = $posted;
+				$changedFields['posted'] = $participant->posted = 'yes';
 			}
 			if (isset($options['extra'])) {
 				$extra = Q::json_decode($participant->extra, true);
@@ -2785,7 +2786,7 @@ abstract class Streams extends Base_Streams
 		}
 		if ($streamNamesUpdate) {
 			Streams_Participant::update()
-				->set(compact('subscribed', 'posted', 'state'))
+				->set($changedFields)
 				->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $streamNamesUpdate,
