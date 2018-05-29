@@ -387,9 +387,14 @@ Streams.listen = function (options) {
 
 	// Handle messages being posted to streams
 	Streams.Stream.on('post', function (stream, byUserId, msg, clientId) {
+		if (!stream) {
+			return console.error("Streams.Stream.on POST: invalid stream!!!");
+		}
+
 		if (_messageHandlers[msg.fields.type]) {
 			_messageHandlers[msg.fields.type].call(this, msg);
 		}
+
 		Streams.Stream.emit('post/'+msg.fields.type, stream, byUserId, msg);
 		stream.notifyParticipants('Streams/post', byUserId, msg);
 	});
