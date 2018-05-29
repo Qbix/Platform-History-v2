@@ -219,6 +219,15 @@
 				// remove old styles and apply new
 				$badgeElement.removeAttr("style").css(style);
 			});
+
+			// remove copied elements
+			$(".Q_badge").each(function(){
+				var $this = $(this);
+				
+				if (!$this.parent().hasClass("Q_badge_tool")) {
+					$this.remove();
+				}
+			});
 		},
 		Q: {
 			beforeRemove: function () {
