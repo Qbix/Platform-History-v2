@@ -88,15 +88,24 @@ Q.Tool.define('Streams/chat', function(options) {
 		var button = $(this);
 		var stream = state.stream;
 
-		button.addClass("Q_working");
-		Q.Streams.Stream.close(stream.fields.publisherId, stream.fields.name, function(err, response){
-			var msg = Q.firstErrorMessage(err);
-			button.removeClass("Q_working");
-			if (msg) {
-				return Q.alert(msg);
-			}
+		Q.confirm(tool.text.closeChatConfirm, function (res) {
+			if (!res) return;
 
-			Q.handle(state.onClose, tool, [stream]);
+
+			button.addClass("Q_working");
+			Q.Streams.Stream.close(stream.fields.publisherId, stream.fields.name, function(err, response){
+				var msg = Q.firstErrorMessage(err);
+				button.removeClass("Q_working");
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+				Q.handle(state.onClose, tool, [stream]);
+			});
+		}, {
+			ok: tool.text.closeChatConfirmYes,
+			cancel: tool.text.closeChatConfirmNo,
+			title: tool.text.closeChatConfirmTitle
 		});
 
 		return false;
@@ -113,15 +122,15 @@ Q.Tool.define('Streams/chat', function(options) {
 	vote: {
 		up: {
 			src: '{{Streams}}/img/chat/vote-up.png',
-			activeSrc: '{{Streams}}/img/chat/vote-up-active.png',
+			activeSrc: '{{Streams}}/img/chat/vote-up-active.png'
 		},
 		down: {
 			src: '{{Streams}}/img/chat/vote-down.png',
-			activeSrc: '{{Streams}}/img/chat/vote-down-active.png',
+			activeSrc: '{{Streams}}/img/chat/vote-down-active.png'
 		},
 		flag: {
 			src: '{{Streams}}/img/chat/vote-flag.png',
-			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png',
+			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png'
 		}
 	},
 	scrollToBottom: true,
@@ -130,6 +139,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		srcFromMe: '{{Streams}}/img/chat/message-overflowed-from-me.png',
 		title: 'Message from {{displayName}}'
 	},
+	closeable: true,
 	onRefresh: new Q.Event(),
 	onClose: new Q.Event(function () {
 		// remove tool when chat stream closed
@@ -244,16 +254,18 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var $te = $(tool.element);
 		var state = tool.state;
+		var isPublisher = Q.Users.loggedInUserId() === Q.getObject("stream.fields.publisherId", state);
 
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
 		fields.text = tool.text;
+		fields.closeable = state.closeable && isPublisher;
 		Q.Template.render(
 			'Streams/chat/main',
 			fields,
 			function(error, html){
 				if (error) { return error; }
-				$te.html(html);
+				$te.html(html).activate();
 				
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
@@ -279,12 +291,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			return Q.Template.render(
 				'Streams/chat/Streams_chat_noMessages',
 				{
-					text: tool.text,
-					isPublisher: Q.Users.loggedInUserId() === state.stream.fields.publisherId
+					text: tool.text
 				},
 				function(error, html){
 					if (error) { return error; }
-					tool.$('.Streams_chat_messages').html(html).activate();
+					tool.$('.Streams_chat_messages').html(html);
 				},
 				state.templates.Streams_chat_noMessages
 			);
@@ -859,10 +870,7 @@ Q.Template.set('Streams/chat/message/error',
 );
 
 Q.Template.set('Streams/chat/Streams_chat_noMessages',
-	'<i class="Streams_chat_noMessages">{{text.noOneSaid}}</i>' +
-	'{{#if isPublisher}}' +
-		'<button class="Q_button Q_tool Q_clickable_tool" name="close">{{text.closeChat}}</button>' +
-	'{{/if}}'
+	'<i class="Streams_chat_noMessages">{{text.noOneSaid}}</i>'
 );
 
 Q.Template.set('Streams/chat/main', 
@@ -882,6 +890,9 @@ Q.Template.set('Streams/chat/main',
 		'<input type="submit" style="display:none">' +
 	'</form>'+
 	'<hr />'+
+	'{{#if closeable}}' +
+		'<button class="Q_button Q_tool Q_clickable_tool" style="display: block; margin: 0 auto;" name="close">{{text.closeChatButton}}</button>' +
+	'{{/if}}' +
 	'<div class="Q_clear"></div>'
 );
 

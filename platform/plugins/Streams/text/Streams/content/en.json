@@ -10,7 +10,11 @@
 	"chat": {
 		"flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
 		"noOneSaid": "No one has said anything",
-		"closeChat": "Close chat",
+		"closeChatButton": "Close chat",
+		"closeChatConfirmTitle": "Close this chat?",
+		"closeChatConfirm": "Are you sure you want to close this chat?",
+		"closeChatConfirmYes": "Yes",
+		"closeChatConfirmNo": "No",
 		"earlierComments": "earlier comments"
 	}
 }
