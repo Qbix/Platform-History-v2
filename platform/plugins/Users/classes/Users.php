@@ -404,29 +404,28 @@ abstract class Users extends Base_Users
 				if (isset($ret)) {
 					$user = $ret;
 				}
-				if (!$user->wasRetrieved()) {
-					// Register a new user basically and give them an empty username for now
-					$user->username = "";
-					$user->icon = '{{Users}}/img/icons/default';
-					$user->signedUpWith = $platform;
+
+				// Register a new user basically and give them an empty username for now
+				$user->username = "";
+				$user->icon = '{{Users}}/img/icons/default';
+				$user->signedUpWith = $platform;
+				$user->save();
+
+				// Save the identifier in the quick lookup table
+				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$ui = new Users_Identify();
+				$ui->identifier = "$ui_type:$hashed";
+				$ui->state = 'verified';
+				$ui->userId = $user->id;
+				$ui->save(true);
+
+				// Download and save platform icon for the user
+				$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+				sort($sizes);
+				$icon = $app_user->icon($sizes, '.png');
+				if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
+					self::importIcon($user, $icon);
 					$user->save();
-
-					// Save the identifier in the quick lookup table
-					list($hashed, $ui_type) = self::hashing($uid, $platform);
-					$ui = new Users_Identify();
-					$ui->identifier = "$ui_type:$hashed";
-					$ui->state = 'verified';
-					$ui->userId = $user->id;
-					$ui->save(true);
-
-					// Download and save platform icon for the user
-					$sizes = Q_Config::expect('Users', 'icon', 'sizes');
-					sort($sizes);
-					$icon = $app_user->icon($sizes, '.png');
-					if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
-						self::importIcon($user, $icon);
-						$user->save();
-					}
 				}
 		 	}
 		}

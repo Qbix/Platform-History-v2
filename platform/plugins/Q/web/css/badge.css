@@ -1,0 +1,7 @@
+.Q_badge {
+	display: block;
+	position: absolute;
+	content: "\00a0";
+	background-repeat: no-repeat;
+	background-size: contain;
+}
