@@ -54,22 +54,19 @@
 				}
 
 				Q.Text.get('Users/content', function (err, text) {
-					text = Q.getObject(["notifications"], text);
-
-					if (!text) {
+					var n = text.notifications;
+					if (!n) {
 						return;
 					}
 
 					// if not - ask
-					Q.confirm(text.prompt, function (res) {
+					Q.confirm(n.prompt, function (res) {
 						if (!res){
 							// save to cache that notifications requested
 							// only if user refused, because otherwise - notifications has granted
 							cache.set([userId], true);
-
 							return;
 						}
-
 						Users.Device.getAdapter(function (err, adapter) {
 							if (err) {
 								Q.handle(callback, null, [err]);
@@ -79,7 +76,7 @@
 								}, options);
 							}
 						});
-					}, {ok: text.yes, cancel: text.no});
+					}, {ok: n.yes, cancel: n.no});
 				});
 			});
 		},
