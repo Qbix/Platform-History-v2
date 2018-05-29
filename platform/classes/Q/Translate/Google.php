@@ -128,9 +128,11 @@ class Q_Translate_Google {
 			$translations = array_merge($translations, $response['data']['translations']);
 			curl_close($ch);
 		}
-		$res = $in;
+		$res = $out;
 		foreach ($in2 as $n => $d) {
-			$res[$d['originalKey']]['value'] = $translations[$n]['translatedText'];
+			$originalKey = $d['originalKey'];
+			$res[$originalKey] = $d;
+			$res[$originalKey]['value'] = $translations[$n]['translatedText'];
 		}
 		return $this->revertTags($res);
 	}
