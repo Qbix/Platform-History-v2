@@ -178,9 +178,9 @@
 }
 
 .Streams_participants_tool {
-	padding: 0 5px 0 5px;
+	padding: 0 5px;
 	overflow: hidden;
-	height: 54px;
+	height: 60px;
 }
 
 .Users_avatar_tool {
@@ -190,7 +190,7 @@
 .Streams_participants_tool .Users_avatar_tool,
 .Streams_participants_tool .Streams_participants_invite {
 	display: inline-block;
-	width: 45px;
+	padding: 7px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
@@ -199,6 +199,7 @@
 
 .Streams_participants_tool .Streams_participants_invite {
 	cursor: pointer;
+	width: 45px;
 }
 
 .Streams_participants_tool .Users_avatar_name,
