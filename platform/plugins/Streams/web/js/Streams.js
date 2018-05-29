@@ -4620,11 +4620,11 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			if (Q.isPlainObject(args[2])) {
 				var p1 = params[1];
 				Q.each(p1, function (ordinal, message) {
-					message = Message.construct(message, true);
+					message = message && Message.construct(message, true);
 					p1[ordinal] = message;
 				});
 			} else {
-				params[1] = Message.construct(message, true);
+				params[1] = message && Message.construct(message, true);
 			}
 			callback(params[1], params);
 		}
@@ -4645,11 +4645,11 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			if (Q.isPlainObject(args[2])) {
 				var p1 = params[1];
 				Q.each(p1, function (userId, participant) {
-					participant = new Participant(participant);
+					participant = participant && new Participant(participant);
 					p1[userId] = participant;
 				});
 			} else {
-				params[1] = new Participant(subject);
+				params[1] = subject && new Participant(subject);
 			}
 			callback(params[1], params);
 		}
