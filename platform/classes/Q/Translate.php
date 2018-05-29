@@ -8,25 +8,25 @@ class Q_Translate
 
 	private $adapter;
 
-	function __construct()
+	function __construct($options)
 	{
-		// get all CLI options
-		$this->options = $this->getOptions();
-		if (isset($this->options['help'])) {
-			$this->printHelp();
-			exit;
-		}
+		$this->options = $options;
 		$this->initAdapter();
-		// get all locales from json config
 		$this->locales = $this->getLocales();
+	}
+	
+	function saveAll()
+	{
 		$this->adapter->saveAll();
 	}
 
-	function getSrc($lang, $locale)
+	function getSrc($lang, $locale, $throwIfMissing = false)
 	{
 		$arr = array();
 		if (!is_dir($this->options['in'])) {
-			die("No such source directory: " . $this->options['in'] . "\n");
+			if ($throwIfMissing) {
+				throw new Q_Exception("No such source directory: " . $this->options['in'] . "\n");
+			}
 		}
 		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->options['in'], RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
 		foreach ($objects as $filename => $object) {
@@ -40,8 +40,10 @@ class Q_Translate
 				$arr = array_merge($arr, $res);
 			}
 		}
-		if (!sizeof($arr)) {
-			die("No source files found for " . $lang . ($locale ? '-' . $locale : '') . "\n");
+		if (!sizeof($arr) and !$throwIfMissing) {
+			if ($throwIfMissing) {
+				throw new Q_Exception("No source files found for " . $lang . ($locale ? '-' . $locale : '') . "\n");
+			}
 		}
 		return $arr;
 	}
@@ -76,49 +78,6 @@ class Q_Translate
 		}
 	}
 
-	protected function getOptions()
-	{
-		$params = array(
-			'h::' => 'help::',
-			's::' => 'source::',
-			'i::' => 'in::',
-			'o::' => 'out::',
-			'n::' => 'null::',
-			'f::' => 'format::',
-			'g::' => 'google-format::'
-		);
-		$options = getopt(implode('', array_keys($params)), $params);
-		$textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
-		if (empty($options['in'])) {
-			$options['in'] = $textFolder;
-		} else {
-			// relative path
-			if (substr($options['in'], 0, 1) === '.') {
-				$options['in'] = APP_SCRIPTS_DIR . DS . 'Q' . DS .$options['in'];
-			}
-		}
-		if (empty($options['out'])) {
-			$options['out'] = APP_DIR . DS . 'translations';
-		} else {
-			// relative path
-			if (substr($options['in'], 0, 1) === '.') {
-				$options['out'] = APP_SCRIPTS_DIR . DS . 'Q' . DS .$options['out'];
-			}
-		};
-		if (empty($options['source'])) {
-			$options['source'] = 'en';
-		};
-		if (empty($options['format'])) {
-			$options['format'] = 'google';
-		};
-		if (!empty($options['google-format'])) {
-			$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
-		} else {
-			$options['google-format'] = 'html';
-		}
-		return $options;
-	}
-
 	protected function getLocales()
 	{
 		$tree = new Q_Tree();
@@ -139,52 +98,6 @@ class Q_Translate
 		return $tree->getAll();
 	}
 
-	protected function printHelp()
-	{
-		$help = <<<EOT
-
-This script automatically translates app interface into various languages or prepares json files for human translators.
-
-You can use such options:
-
---source          Use language code as a value. The value can be combined with location code.
-                  Default value is en, if the option is not specified.
-                  Examples:
-                  --source=en-US
-                  --source=ru-UA
-                  --source=ru
-           
---in              Input directory which contains source json files.
-                  Default value APP_DIR/text, where APP_DIR is your application folder.
-                  Example:
-                  --in=/home/user/input
-       
---out             Output directory.
-                  Default value APP_DIR/translations, where APP_DIR is your application folder.
-                  Example:
-                  --out=/home/user/output
-       
---format          Can be "google" or "human".
-                  "google" automatically translates files using Google Translation API.
-                  Google API key must be provided in your application config (app.json).
-                  "human" prepares files for further human translators.
-                  Default value is "google".
-                  Examples:
-                  --format=google
-                  --format=human
-                  
---google-format   Google translation format. This option is used along with --format=google.
-                  The format of the source text, in either HTML (default) or plain-text.
-                  A value of html indicates HTML and a value of text indicates plain-text.
-                  Default value is "html".
-                  Examples:
-                  --google-format=html
-                  --google-format=text
-
-EOT;
-		print $help;
-	}
-
 	protected function flatten($filename, $arr, & $res = null, & $key = [])
 	{
 		foreach ($arr as $itemKey => $item) {
@@ -192,7 +105,8 @@ EOT;
 			if (is_array($item)) {
 				$this->flatten($filename, $item, $res, $key);
 			} else {
-				$res[] = array(
+				$k = implode("\t", $key);
+				$res[$k] = array(
 					"dirname" => pathinfo($filename)['dirname'],
 					"key" => $key,
 					"value" => $item,
@@ -203,7 +117,8 @@ EOT;
 		}
 	}
 
-	protected function initAdapter() {
+	protected function initAdapter()
+	{
 
 		switch ($this->options['format'])
 		{
@@ -214,7 +129,7 @@ EOT;
 				$this->adapter = new Q_Translate_Human($this);
 				break;
 			default:
-				die("Unknown format value\n");
+				throw new Q_Exception("Unknown format value\n");
 		}
 	}
 
