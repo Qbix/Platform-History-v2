@@ -20,11 +20,13 @@ class Q_Translate
 		$this->adapter->saveAll();
 	}
 
-	function getSrc($lang, $locale)
+	function getSrc($lang, $locale, $throwIfMissing = false)
 	{
 		$arr = array();
 		if (!is_dir($this->options['in'])) {
-			die("No such source directory: " . $this->options['in'] . "\n");
+			if ($throwIfMissing) {
+				throw new Q_Exception("No such source directory: " . $this->options['in'] . "\n");
+			}
 		}
 		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->options['in'], RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
 		foreach ($objects as $filename => $object) {
@@ -38,8 +40,10 @@ class Q_Translate
 				$arr = array_merge($arr, $res);
 			}
 		}
-		if (!sizeof($arr)) {
-			die("No source files found for " . $lang . ($locale ? '-' . $locale : '') . "\n");
+		if (!sizeof($arr) and !$throwIfMissing) {
+			if ($throwIfMissing) {
+				throw new Q_Exception("No source files found for " . $lang . ($locale ? '-' . $locale : '') . "\n");
+			}
 		}
 		return $arr;
 	}
@@ -125,7 +129,7 @@ class Q_Translate
 				$this->adapter = new Q_Translate_Human($this);
 				break;
 			default:
-				die("Unknown format value\n");
+				throw new Q_Exception("Unknown format value\n");
 		}
 	}
 

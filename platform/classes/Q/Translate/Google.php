@@ -10,7 +10,7 @@ class Q_Translate_Google {
 
 	function saveAll() {
 		list($fromLang, $locale) = preg_split("/(_|-)/", $this->parent->options['source']);
-		$in = $this->parent->getSrc($fromLang, $locale);
+		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
 			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
 				if (($fromLang == $toLang) && ($this->parent->options['in'] === $this->parent->options['out'])) {
@@ -117,13 +117,11 @@ class Q_Translate_Google {
 			$json = curl_exec($ch);
 			$response = json_decode($json, true);
 			if (!$response) {
-				echo "Bad translation response".PHP_EOL;
-				exit;
+				throw new Q_Exception ("Bad translation response");
 			}
 			if ($response['error']) {
-				echo $response['error']['message'].PHP_EOL;
-				echo "Make sure you have Q/translate/google/key specified.".PHP_EOL;
-				exit;
+				$more = "Make sure you have Q/translate/google/key specified.";
+				throw new Q_Exception($response['error']['message'] . $more);
 			}
 			$count += sizeof($chunk);
 			echo "Translated " . $count . " queries of " . $toLang . "\n";
