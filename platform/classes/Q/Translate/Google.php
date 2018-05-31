@@ -73,13 +73,14 @@ class Q_Translate_Google {
 	}
 
 	private function revertTags($data, $startNumber = 999) {
-		for ($i = 0; $i < sizeof($data); $i++) {
-			if (!empty($data[$i]['tags'])) {
-				$j = 0;
-				foreach($data[$i]['tags'] as $tag) {
-					$data[$i]['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $data[$i]['value']);
-					$j++;
-				}
+		foreach ($data as $k => &$d) {
+			if (empty($d['tags'])) {
+				continue;
+			}
+			$j = 0;
+			foreach($d['tags'] as $tag) {
+				$d['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $d['value']);
+				$j++;
 			}
 		};
 		return $data;
