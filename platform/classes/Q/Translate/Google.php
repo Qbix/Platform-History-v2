@@ -21,7 +21,8 @@ class Q_Translate_Google {
 				$res = $in;
 			}
 			if ($toLang !== $fromLang) {
-				$out = $this->parent->getSrc($toLang, $locale);
+				$out = $this->parent->getSrc($toLang, $locale, false, $objects);
+				echo "Processing $fromLang->$toLang".PHP_EOL;
 				$res = $this->translate($fromLang, $toLang, $in, $out);
 			}
 			$files = $this->saveJson($toLang, $res);
@@ -37,12 +38,13 @@ class Q_Translate_Google {
 	{
 		$jsonFiles = array();
 		foreach ($data as $d) {
-			$arr =& $jsonFiles[$d['dirname']];
+			$dirname = $d['dirname'];
+			$arr =& $jsonFiles[$dirname];
 			if (!sizeof($arr)) {
 				$arr = array();
 			}
 			array_push($d['key'], $d['value']);
-			$jsonFiles[$d['dirname']] = array_merge_recursive($arr, $this->parent->arrayToBranch($d['key']));
+			$jsonFiles[$dirname] = array_merge_recursive($arr, $this->parent->arrayToBranch($d['key']));
 		}
 		$filenames = array();
 		foreach ($jsonFiles as $dirname => $content) {
@@ -80,6 +82,7 @@ class Q_Translate_Google {
 			$j = 0;
 			foreach($d['tags'] as $tag) {
 				$d['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $d['value']);
+				$d['value'] = str_replace("({" . ($j + $startNumber) . "}}", $tag, $d['value']);
 				$j++;
 			}
 		};
@@ -90,11 +93,10 @@ class Q_Translate_Google {
 	{
 		$in = $this->replaceTagsByNumbers($in);
 		$in2 = array();
-		echo "Processing $fromLang -> $toLang".PHP_EOL;
 		$rt = Q::ifset($this, 'parent', 'options', 'retranslate', array());
 		$rt = is_array($rt) ? $rt : array($rt);
 		foreach ($in as $n => $v) {
-			$key = implode("\t", $v['key']);
+			$key = $v['dirname'] . "\t" . implode("\t", $v['key']);
 			$key2 = implode("/", $v['key']);
 			$doIt = false;
 			if (empty($out[$key])) {

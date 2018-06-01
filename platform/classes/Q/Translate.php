@@ -20,7 +20,7 @@ class Q_Translate
 		$this->adapter->saveAll();
 	}
 
-	function getSrc($lang, $locale, $throwIfMissing = false)
+	function getSrc($lang, $locale, $throwIfMissing = false, &$objects)
 	{
 		$arr = array();
 		if (!is_dir($this->options['in'])) {
@@ -105,9 +105,12 @@ class Q_Translate
 			if (is_array($item)) {
 				$this->flatten($filename, $item, $res, $key);
 			} else {
-				$k = implode("\t", $key);
+				$pathinfo = pathinfo($filename);
+				$dirname = $pathinfo['dirname'];
+				$k = $dirname . "\t" . implode("\t", $key);
 				$res[$k] = array(
-					"dirname" => pathinfo($filename)['dirname'],
+					"filename" => $filename,
+					"dirname" => $dirname,
 					"key" => $key,
 					"value" => $item,
 					"original" => $item
