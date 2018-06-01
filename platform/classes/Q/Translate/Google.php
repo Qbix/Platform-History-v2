@@ -91,9 +91,11 @@ class Q_Translate_Google {
 		$in = $this->replaceTagsByNumbers($in);
 		$in2 = array();
 		echo "Processing $fromLang -> $toLang".PHP_EOL;
+		$rt = array_flip(Q::ifset($this, 'parent', 'options', 'retranslate', array()));
 		foreach ($in as $n => $v) {
 			$key = implode("\t", $v['key']);
-			if (empty($out[$key])) {
+			$key2 = implode("/", $v['key']);
+			if (empty($out[$key]) or $rt[$key2]) {
 				$v['originalKey'] = $n;
 				$in2[] = $v;
 			} else {
