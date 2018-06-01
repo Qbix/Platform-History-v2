@@ -88,8 +88,9 @@ Options include:
                   --google-format=text
 
 --retranslate     This option can be used more than once. It should be followed by a
-                  slash-separated ("/") set of strings that together form the key of a string
-                  to be translated even if it is in the destination JSON already. 
+                  slash-separated ("/") set of strings that together form the key of a string,
+                  or of an object containing strings, to be translated even if already translated
+                  in the destination. 
 
 EOT;
 	echo $help;
