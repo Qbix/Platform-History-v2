@@ -16,6 +16,7 @@
  *  @param {Q.Event} [options.onFilter] You are meant to attach an event handler to fetch and update results by editing the contents of the element pointed to by the second argument. The first argument is the content of the text input.
  *  @param {Q.Event} [options.onChoose] This event occurs when one of the elements with class "Q_filter_result" is chosen. It is passed (element, details) where you can modify details.text to set the text which will be displayed in the text input to represent the chosen item.
  *  @param {Q.Event} [options.onClear] This event occurs when the filter input is cleared
+ *  @param {Q.Event} [options.onFocus] This event occurs when input element focused
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/filter', function (options) {
@@ -53,6 +54,7 @@ Q.Tool.define('Q/filter', function (options) {
 		if (wasAlreadyFocused) return;
 		var that = this;
 		wasAlreadyFocused = true;
+		Q.handle(state.onFocus, tool);
 		_changed.call(that, event);
 	}).on('blur', function () {
 		wasAlreadyFocused = false;
@@ -99,11 +101,11 @@ Q.Tool.define('Q/filter', function (options) {
 		if (!tool.cancelRemoveClass) {
 			tool.$input.removeClass('Q_filter_chose');
 		}
-		if (event.type != 'blur' && event.type != 'Q_refresh') {
+		if (event.type !== 'blur' && event.type !== 'Q_refresh') {
 			tool.begin();
 		}
 		var val = $this.val();
-		if (val != lastVal) {
+		if (val !== lastVal) {
 			state.onFilter.handle.call(tool, val, tool.$results[0]);
 		}
 		if (val) {
@@ -168,7 +170,8 @@ Q.Tool.define('Q/filter', function (options) {
 	fullscreen: Q.info.isMobile,
 	onFilter: new Q.Event(),
 	onChoose: new Q.Event(),
-	onClear: new Q.Event()
+	onClear: new Q.Event(),
+	onFocus: new Q.Event()
 }, {
 	/**
 	 * Show the filtered results
@@ -186,7 +189,7 @@ Q.Tool.define('Q/filter', function (options) {
 		}
 		state.begun = true;
 		
-		tool.canceledBlur = true;		 +
+		tool.canceledBlur = true;
 		setTimeout(function () {		
 			tool.canceledBlur = false;		
 		}, 500);
