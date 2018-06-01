@@ -54,7 +54,7 @@ class Users_Email extends Base_Users_Email
 		}
 		
 		if (!isset($options['html'])) {
-			$view = Q_Config::get('Q', 'views', $view, 'html', false);
+			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', false);
 		}
 		
 		if (is_array($subject)) {
