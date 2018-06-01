@@ -91,13 +91,28 @@ class Q_Translate_Google {
 		$in = $this->replaceTagsByNumbers($in);
 		$in2 = array();
 		echo "Processing $fromLang -> $toLang".PHP_EOL;
+		$rt = Q::ifset($this, 'parent', 'options', 'retranslate', array());
+		$rt = is_array($rt) ? $rt : array($rt);
 		foreach ($in as $n => $v) {
 			$key = implode("\t", $v['key']);
+			$key2 = implode("/", $v['key']);
+			$doIt = false;
 			if (empty($out[$key])) {
+				$doIt = true;
+			} else {
+				foreach ($rt as $v2) {
+					$parts = explode('/', $v2);
+					foreach ($parts as $i => $p) {
+						if ($v['key'][$i] !== $p) {
+							break 2;
+						}
+					}
+					$doIt = true;
+				}
+			}
+			if ($doIt) {
 				$v['originalKey'] = $n;
 				$in2[] = $v;
-			} else {
-				continue;
 			}
 		}
 		$translations = array();
