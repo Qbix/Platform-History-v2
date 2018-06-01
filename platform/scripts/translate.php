@@ -13,7 +13,8 @@ $params = array(
 	'o::' => 'out::',
 	'n::' => 'null::',
 	'f::' => 'format::',
-	'g::' => 'google-format::'
+	'g::' => 'google-format::',
+	'r:' => 'retranslate:'
 );
 $options = getopt(implode('', array_keys($params)), $params);
 $textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
@@ -49,8 +50,8 @@ if (isset($options['help'])) {
 		$help = <<<EOT
 
 This script automatically translates app interface into various languages or prepares json files for human translators.
-
-You can use such options:
+		
+Options include:
 
 --source          Use language code as a value. The value can be combined with location code.
                   Default value is en, if the option is not specified.
@@ -85,6 +86,11 @@ You can use such options:
                   Examples:
                   --google-format=html
                   --google-format=text
+
+--retranslate     This option can be used more than once. It should be followed by a
+                  slash-separated ("/") set of strings that together form the key of a string,
+                  or of an object containing strings, to be translated even if already translated
+                  in the destination. 
 
 EOT;
 	echo $help;
