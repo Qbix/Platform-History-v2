@@ -34,7 +34,7 @@ class Users_Email extends Base_Users_Email
 	 * @param {array} $fields=array()
 	 *  The fields referenced in the subject and/or view
 	 * @param {array} [$options=array()] Array of options. Can include:
-	 * @param {array} [$options.html] Defaults to false. Whether to send as HTML email.
+	 * @param {array} [$options.html=false] Whether to send as HTML email.
 	 * @param {array} [$options.name] A human-readable name in addition to the address to send to.
 	 * @param {array} [$options.from] An array of (emailAddress, humanReadableName)
 	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
@@ -51,6 +51,10 @@ class Users_Email extends Base_Users_Email
 				'type' => 'email address',
 				'emailAddress' => $this->address
 			));
+		}
+		
+		if (!isset($options['html'])) {
+			$view = Q_Config::get('Q', 'views', $view, 'html', false);
 		}
 		
 		if (is_array($subject)) {
@@ -213,7 +217,6 @@ class Users_Email extends Base_Users_Email
 				'Users', 'transactional', 'activation', 'body', 'Users/email/activation.php'
 			));
 		}
-		if (!isset($options['html'])) $options['html'] = true;
 		$user = $this->get('user', null);
 		if (!$user) {
 			$user = new Users_User();
