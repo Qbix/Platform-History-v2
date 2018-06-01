@@ -443,7 +443,9 @@ abstract class Users extends Base_Users
 			$emailSubject = Q_Config::get('Users', 'transactional', 'authenticated', 'subject', false);
 			$emailView = Q_Config::get('Users', 'transactional', 'authenticated', 'body', false);
 			if ($emailSubject !== false and $emailView) {
-				$email->sendMessage($emailAddress, $emailSubject, $emailView);
+				$email->sendMessage($emailAddress, $emailSubject, $emailView, array(
+					'html' => true
+				));
 			}
 		}
 		if (!$userWasLoggedIn) {
