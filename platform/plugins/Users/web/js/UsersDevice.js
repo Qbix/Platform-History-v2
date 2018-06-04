@@ -199,8 +199,20 @@
 			callback(null, this.adapter);
 		},
 
-		adapter: null
+		adapter: null,
 
+		serviceWorkerUpdate: function() {
+			if ((this.adapter.adapterName !== 'Web') || !('serviceWorker' in navigator)) {
+				return;
+			}
+			navigator.serviceWorker.getRegistrations().then(function (registrations) {
+				Q.each(registrations, function (index, registration) {
+					registration.update().then(function () {
+						console.log("Service worker " + registration.active.scriptURL + " has been successfully updated");
+					});
+				});
+			});
+		}
 	};
 
 	// Adapter for Chrome and Firefox
