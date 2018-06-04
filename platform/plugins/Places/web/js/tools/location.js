@@ -141,6 +141,15 @@ Q.Tool.define("Places/location", function (options) {
 					}, 'Places_address', tool.prefix)
 					.activate(function () {
 						tool.addressTool = this;
+						var $toolParent = $(tool.addressTool.element).closest("[data-location=address]");
+
+						// wait when included Q/filter tool activated
+						this.state.onFilterActivated.set(function () {
+							// start toggle locations when address tool input focused.
+							this.state.onFocus.set(function () {
+								tool.toggle($toolParent);
+							}, tool);
+						}, tool);
 					});
 
 					// set showLocations state.
@@ -270,7 +279,11 @@ Q.Tool.define("Places/location", function (options) {
 			maximumAge: 0
 		});
 	},
-
+	/**
+	 * Make some needed actions when user select some other location.
+	 * @method toggle
+	 * @param {HTMLElement} elem Selected currently element
+	 */
 	toggle: function (elem) {
 		var tool = this;
 		var state = this.state;
