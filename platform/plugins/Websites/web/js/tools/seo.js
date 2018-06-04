@@ -47,7 +47,7 @@ Q.Tool.define("Websites/seo", function () {
 	
 	Q.Streams.get(publisherId, streamName, function _proceed(err) {
 		if (err) {
-			if (Q.getObject([1, 0, 0, 'classname'], arguments) !== "Q_Exception_MissingRow") {
+			if (Q.getObject([0, 0, 'classname'], arguments) !== "Q_Exception_MissingRow") {
 				return console.warn(err);
 			}
 			Q.req("Websites/seo", ['stream'], function (err, data) {
