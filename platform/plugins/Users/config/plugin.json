@@ -59,7 +59,8 @@
 		"views": {
 			"Users/email/activation.php": {"html": true},
 			"Users/email/addEmail.php": {"html": true},
-			"Users/email/resend.php": {"html": true}
+			"Users/email/resend.php": {"html": true},
+			"Users/email/authenticated.php": {"html": true}
 		}
 	},
 	"Users": {
