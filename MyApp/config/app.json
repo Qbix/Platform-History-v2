@@ -102,17 +102,17 @@
 	"Users": {
 		"transactional": {
 			"activation": {
-				"subject": "Welcome! Please verify your email address.",
+				"subject": ["MyApp/email", ["activation", "Subject"]],
 				"body": "MyApp/email/activation.php",
 				"sms": "MyApp/sms/activation.php"
 			},
 			"identifier": {
-				"subject": "Welcome! Verify your email address.",
+				"subject": ["MyApp/email", ["identifier", "Subject"]],
 				"body": "MyApp/email/addEmail.php",
 				"sms": "MyApp/sms/addMobile.php"
 			},
 			"resend": {
-				"subject": "Hey, did you forget your passphrase?",
+				"subject": ["MyApp/email", ["resend", "Subject"]],
 				"body": "MyApp/email/resend.php",
 				"sms": "MyApp/sms/resend.php"
 			},
