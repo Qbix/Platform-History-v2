@@ -4011,8 +4011,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
-	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
-	 * @throws {Q_Exception} If user was already verified for someone else
+	 * @throws {Q_Exception_WrongType} If identifier is not a valid email address or mobile number
+	 * @throws {Q_Exception} If identifier was already verified for someone else
 	 * @throws {Users_Exception_AlreadyVerified} If user was already verified
 	 * @throws {Users_Exception_UsernameExists} If username exists
 	 */
