@@ -61,10 +61,10 @@ class Users_Email extends Base_Users_Email
 			$source = $subject[0];
 			$keys = $subject[1];
 			$texts = Q_Text::get($source);
-			$args = array_merge(array($texts), $keys, array("Missing subject in $source"));
-			$subject = call_user_func_array(
-				array('Q', 'ifset'), $args
-			);
+			$tree = new Q_Tree($texts);
+			$keyPath = implode('/', $keys);
+			$args = array_merge($keys, array("Missing $keyPath in $source"));
+			$subject = call_user_func_array(array($tree, 'get'), $args);
 		}
 		
 		$app = Q::app();
