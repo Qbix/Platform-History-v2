@@ -20,6 +20,7 @@
 			"Users/User/displayName": ["Streams/before/Users_User_displayName"]
 		},
 		"handlersAfterEvent": {
+			"Q/Plugin/install": ["Streams/after/Q_Plugin_install"],
 			"Q/objects": ["Streams/after/Q_objects"],
 			"Q/responseExtras": ["Streams/after/Q_responseExtras"],
 			"Q/image/save": ["Streams/after/Q_image_save"],

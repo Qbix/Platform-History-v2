@@ -55,7 +55,7 @@ class Q_Plugin
 	 * @param {string} $name The name of application or plugin
 	 * @param {string} $type One of 'app' or 'plugin'
 	 * @param {string} $conn_name The name of the connection to affect
-	 * @param {string} $options Contain data parsed from command line
+	 * @param {array} $options Contain data parsed from command line
 	 * @throws {Exception} If cannot connect to database
 	 */
 	static function installSchema($base_dir, $name, $type, $conn_name, $options)
@@ -223,14 +223,14 @@ class Q_Plugin
 
 			// Process script files
 			foreach ($scripts as $script) {
-
+				
 				try {
+					list($new_version) = preg_split('/(-|__)/', $script, 2);
 					if (substr($script, -4) === '.php') {
 						echo "Processing PHP file: $script " . PHP_EOL;
-						list($newver) = preg_split('/(-|__)/', $script, 2);
 						Q::includeFile($scriptsdir.DS.$script);
 						$db->update("{$prefix}Q_{$type}")->set(array(
-							'versionPHP' => $newver
+							'versionPHP' => $new_version
 						))->where(array(
 							$type => $name
 						))->execute();
@@ -242,6 +242,29 @@ class Q_Plugin
 					$sqltext = str_replace('{$prefix}', $prefix, $sqltext);
 					$sqltext = str_replace('{$dbname}', $db->dbname, $sqltext);
 
+					/**
+					 * @event Q/Plugin/installSchema {before}
+					 * @param {string} $base_dir The directory where application or plugin is located
+					 * @param {string} $name The name of application or plugin
+					 * @param {string} $type One of 'app' or 'plugin'
+					 * @param {string} $conn_name The name of the connection to affect
+					 * @param {array} $options Contain data parsed from command line
+					 * @param {string} $shard
+					 * @param {array} $shard_data
+					 * @param {string} $new_version
+					 * @param {string} $current_version
+					 * @param {string} $script The script to execute
+					 */
+					$ret = Q::event("Q/Plugin/installSchema", compact(
+						'base_dir', 'name', 'type', 'options',
+						'conn_name', 'connection',
+						'shard', 'shard_data',
+						'script', 'newver', 'current_version'
+					), 'before');
+					if ($ret === false) {
+						continue;
+					}
+
 					$queries = $db->scriptToQueries($sqltext);
 					// Process each query
 					foreach ($queries as $q) {
@@ -251,16 +274,15 @@ class Q_Plugin
 
 					// Update plugin db version
 					if ($dbms === 'mysql') {
-						list($newver) = preg_split('/(-|__)/', $script, 2);
 						$fields = array(
 							$type => $name, 
-							'version' => $newver, 
+							'version' => $new_version, 
 							'versionPHP' => 0
 						);
 						$db->insert("{$prefix}Q_{$type}", $fields)
-							->onDuplicateKeyUpdate(array('version' => $newver))
+							->onDuplicateKeyUpdate(array('version' => $new_version))
 							->execute();
-						$current_version = $newver;
+						$current_version = $new_version;
 					}
 					echo PHP_EOL;
 				} catch (Exception $e) {
@@ -546,6 +568,14 @@ EOT;
 		$app_web_text_dir = APP_WEB_DIR.DS.'Q'.DS.'text';
 		$app_text_plugin_dir = APP_TEXT_DIR.DS.$plugin_name;
 
+		/**
+		 * @event Q/Plugin/install {before}
+		 * @param {string} $app_dir the directory where the app is installed
+		 * @param {string} $plugin_name the name of the plugin
+		 * @param {array} $options options passed to the installPlugin method
+		 */
+		Q::event("Q/Plugin/install", compact('app_dir', 'plugin_name', 'options'), 'before');
+
 		echo "Installing plugin '$plugin_name' into '$app_dir'" . PHP_EOL;
 
 		// Do we even have such a plugin?
@@ -649,6 +679,14 @@ EOT;
 		echo 'Registering plugin'.PHP_EOL;
 		Q_Config::set('Q', 'pluginLocal', $plugin_name, $plugin_conf);
 		Q_Config::save($app_plugins_file, array('Q', 'pluginLocal'));
+		
+		/**
+		 * @event Q/Plugin/install {after}
+		 * @param {string} $app_dir the directory where the app is installed
+		 * @param {string} $plugin_name the name of the plugin
+		 * @param {array} $options options passed to the installPlugin method
+		 */
+		Q::event("Q/Plugin/install", compact('app_dir', 'plugin_name', 'options'), 'after');
 
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
 	}
