@@ -3993,7 +3993,7 @@ abstract class Streams extends Base_Streams
 	 * invited user
 	 * @method register
 	 * @static
-	 * @param {array} $fullName An array with keys
+	 * @param {array|string} $fullName A string, or an array with keys
 	 * @param {string} $fullName.first The first name
 	 * @param {string} $fullName.last The last name
 	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
@@ -4037,6 +4037,9 @@ abstract class Streams extends Base_Streams
 		}
 
 		// this will be used in Streams_after_Users_User_saveExecute
+		if (is_string($fullName)) {
+			$fullName = Streams::splitFullName($fullName);
+		}
 		Streams::$cache['fullName'] = $fullName ? $fullName : array(
 			'first' => '',
 			'last' => ''
