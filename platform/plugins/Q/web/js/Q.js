@@ -12458,7 +12458,12 @@ Q.Camera = {
 			cordova: function (audio, callback, options) {
 				var $html = $('html');
 				$html.addClass("Q_scanning");
-				var _close = function(){
+				var _close = function(event){
+					if (Q.getObject("target", event)) {
+						event.stopPropagation();
+						event.preventDefault();
+					}
+
 					$html.removeClass("Q_scanning");
 					$(this).remove();
 					QRScanner.cancelScan();
