@@ -3768,6 +3768,11 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 			return; // being replaced is inside another slot element being replaced
 		}
 		for (var i=tn.length-1; i>=0; --i) {
+			// check if "remove" method exist
+			if (Q.typeOf(Q.getObject(["Q", "tools", tn[i], "remove"], toolElement)) !== "function") {
+				continue;
+			}
+
 			toolElement.Q.tools[tn[i]].remove(removeCached);
 		}
 	});
@@ -12453,7 +12458,12 @@ Q.Camera = {
 			cordova: function (audio, callback, options) {
 				var $html = $('html');
 				$html.addClass("Q_scanning");
-				var _close = function(){
+				var _close = function(event){
+					if (Q.getObject("target", event)) {
+						event.stopPropagation();
+						event.preventDefault();
+					}
+
 					$html.removeClass("Q_scanning");
 					$(this).remove();
 					QRScanner.cancelScan();
