@@ -92,7 +92,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	userId: undefined,
 	icon: Users.icon.defaultSize,
 	contents: true,
-	"short": false,
+	short: false,
 	className: null,
 	reflectChanges: true,
 	templates: {
@@ -127,7 +127,6 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	 * @param {boolean} [unlessContent=false] only used by constructor to pass true
 	 */
 	refresh: function (unlessContent) {
-		
 		var tool = this;
 		var state = this.state;
 		if (state.userId === undefined) {
@@ -148,7 +147,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			tool.element.innerHTML = icon + contents;
 			_present();
 		});
-		if (state.userId == '') {
+		if (state.userId === '') {
 			var fields = Q.extend({}, state.templates.contents.fields, {
 				name: ''
 			});
@@ -180,11 +179,14 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 				var src = isNaN(state.icon)
 					? state.icon
 					: Q.url(avatar.iconUrl(state.icon), null);
-				fields = Q.extend({}, state.templates.icon.fields, {src: src});
+				fields = Q.extend({}, state.templates.icon.fields, {
+					src: src,
+					size: parseInt(state.icon)
+				});
 				Q.Template.render('Users/avatar/icon', fields, 
 				function (err, html) {
 					p.fill('icon')(html);
-				}, state.templates.icon);
+				}, Q.extend({size: state.icon}, state.templates.icon));
 			} else {
 				p.fill('icon')('');
 			}
