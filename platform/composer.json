@@ -1,0 +1,11 @@
+{
+	"name": "qbix/platform",
+	"require": {
+		"ircmaxell/password-compat": "^1",
+		"paragonie/random_compat": "^2",
+		"paragonie/sodium_compat": "^1.6"
+	},
+	"require-dev": {
+		"vimeo/psalm": "^1"
+	}
+}

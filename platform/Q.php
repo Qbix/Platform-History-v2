@@ -85,16 +85,27 @@ if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
 //
 // Include core classes
 //
-require(Q_CLASSES_DIR.DS.'Q.php'); 
-require(Q_CLASSES_DIR.DS.'Q'.DS.'Cache.php');
-require(Q_CLASSES_DIR.DS.'Q'.DS.'Bootstrap.php');
-require(Q_CLASSES_DIR.DS.'Q'.DS.'Tree.php');
-require(Q_CLASSES_DIR.DS.'Q'.DS.'Config.php');
-require(Q_CLASSES_DIR.DS.'Q'.DS.'Exception.php');
-require(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PhpError.php');
-require(Q_CLASSES_DIR.DS.'Db.php');
-require(Q_CLASSES_DIR.DS.'Db'.DS.'Expression.php');
-require(Q_CLASSES_DIR.DS.'Db'.DS.'Query.php');
+require_once(Q_CLASSES_DIR.DS.'Q.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Cache.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Bootstrap.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Tree.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Config.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PhpError.php');
+require_once(Q_CLASSES_DIR.DS.'Db.php');
+require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Expression.php');
+require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Query.php');
+
+// if composer.json provided, check whether dependencies installed
+if (file_exists(Q_DIR . DS . 'composer.json')) {
+	$autoload = Q_DIR . DS. 'vendor' . DS . 'autoload.php';
+	if (!file_exists($autoload)) {
+		die("Please install the dependencies using Composer.");
+	}
+
+	// Composer dependencies
+	require_once $autoload;
+}
 
 //
 // Set things up
