@@ -624,9 +624,15 @@ abstract class Users extends Base_Users
 
 		// User exists in database. Now check the passphrase.
 		$passphraseHash = $user->computePassphraseHash($passphrase, $isHashed);
-		if ($passphraseHash != $user->passphraseHash) {
-			// Passphrases don't match!
-			throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
+		if ($passphraseHash[0] === '$') {
+			if (!password_verify($passphraseHash, $user->passphraseHash)) {
+				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
+			}
+		} else {
+			if (!Q_Utils::hashEquals($passphraseHash, $user->passphraseHash)) {
+				// Passphrases don't match!
+				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
+			}
 		}
 
 		/**
@@ -1097,6 +1103,7 @@ abstract class Users extends Base_Users
 			'username', 'identifier', 'icon', 'user', 'platform', 'options', 'device'
 		), 'after');
 
+		// Shouldn't this be return $return not return $user?
 		return $user;
 	}
 
