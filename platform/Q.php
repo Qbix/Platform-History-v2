@@ -95,17 +95,9 @@ require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PhpError.php');
 require_once(Q_CLASSES_DIR.DS.'Db.php');
 require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Expression.php');
 require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Query.php');
-
-// if composer.json provided, check whether dependencies installed
-if (file_exists(Q_DIR . DS . 'composer.json')) {
-	$autoload = Q_DIR . DS. 'vendor' . DS . 'autoload.php';
-	if (!file_exists($autoload)) {
-		die("Please install the dependencies using Composer.");
-	}
-
-	// Composer dependencies
-	require_once $autoload;
-}
+require_once(Q_CLASSES_DIR.DS.'PasswordCompat'.DS.'password.php');
+require_once(Q_CLASSES_DIR.DS.'RandomCompat'.DS.'random.php');
+require_once(Q_CLASSES_DIR.DS.'SodiumCompat'.DS.'autoload.php');
 
 //
 // Set things up
