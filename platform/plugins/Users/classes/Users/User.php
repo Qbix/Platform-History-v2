@@ -150,7 +150,7 @@ class Users_User extends Base_Users_User
 			return $result;
 		}
 		if (!$isHashed) {
-			$passphrase = sha1($passphrase . "\t" . $this->id);
+			return password_hash($passphrase, PASSWORD_DEFAULT);
 		}
 		return Users::hashPassphrase($passphrase, $this->passphraseHash);
 	}

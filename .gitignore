@@ -28,6 +28,7 @@ platform/plugins/Awards/classes/Composer/vendor
 platform/plugins/Communities/
 platform/plugins/Calendars/
 platform/node_modules
+platform/vendor
 MyApp/local/*
 MyApp/files/MyApp/uploads/*/*
 !MyApp/files/MyApp/uploads/Users/.dir
@@ -49,4 +50,6 @@ platform/plugins/Communities
 platform/plugins/Streams/web/img/icons.lnk
 platform/plugins/Travel
 
+!composer.json
 composer.lock
+platform/plugins/Streams/files/Streams/icons.tar.gz
