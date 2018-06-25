@@ -264,6 +264,108 @@ class Q_Utils
 	}
 
 	/**
+	 * Cache-timing-safe variant of ord()
+	 *
+	 * @internal You should not use this directly from another application
+	 *
+	 * @param string $chr
+	 * @return int
+	 * @throws TypeError
+	*/
+	public static function chrToInt($chr)
+	{
+		/* Type checks: */
+		if (!is_string($chr)) {
+			throw new TypeError('Argument 1 must be a string, ' . gettype($chr) . ' given.');
+		}
+		/** @var array<int, int> $chunk */
+		$chunk = unpack('C', $chr);
+		return (int) ($chunk[1]);
+	}
+
+    /**
+	 * Safe string length
+	 *
+	 * @internal You should not use this directly from another application
+	 *
+	 * @ref mbstring.func_overload
+	 *
+	 * @param string $str
+	 * @return int
+	*/
+	public static function strlen($str)
+	{
+		return (int) (
+			self::isMbStringOverride()
+				? mb_strlen($str, '8bit')
+				: strlen($str)
+		);
+	}
+
+	/**
+	 * Returns whether or not mbstring.func_overload is in effect.
+	 *
+	 * @internal You should not use this directly from another application
+	 *
+	 * @return bool
+	*/
+	protected static function isMbStringOverride()
+	{
+		static $mbstring = null;
+
+		if ($mbstring === null) {
+			$mbstring = extension_loaded('mbstring')
+			&&
+			(ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING);
+		}
+		/** @var bool $mbstring */
+		return $mbstring;
+	}
+
+	/**
+	 * @param string $a
+	 * @param string $b
+	 *
+	 * @return bool
+	*/
+	public static function hashEquals($a, $b)
+	{
+		if (is_callable('hash_equals')) {
+			// PHP 5.6
+			return hash_equals($a, $b);
+		}
+		try {
+			if (class_exists('ParagonIE_Sodium_Core_Util')) {
+				// sodium_compat
+				try {
+					return ParagonIE_Sodium_Core_Util::hashEquals($a, $b);
+				} catch (SodiumException $ex) {
+
+				}
+			}
+			// Home-grown polyfill:
+			$d = 0;
+			/** @var int $len */
+			$len = self::strlen($a);
+			if ($len !== self::strlen($b)) {
+				return false;
+			}
+			for ($i = 0; $i < $len; ++$i) {
+				$d |= self::chrToInt($a[$i]) ^ self::chrToInt($b[$i]);
+			}
+
+			if ($d !== 0) {
+				return false;
+			}
+
+			return $a === $b;
+		} catch (TypeError $ex) {
+			// Safe bet: Fail closed
+			return false;
+		}
+	}
+
+	/**
 	 * Get the lines from a csv file
 	 * @method csvLines
 	 * @param {string} $input
@@ -300,7 +402,9 @@ class Q_Utils
 		}
 
 		$pr_bits = false;
-		if (is_resource ( self::$urand )) {
+		if (is_callable('random_bytes')) {
+			$pr_bits .= random_bytes(16);
+		} elseif (is_resource ( self::$urand )) {
 			$pr_bits .= @fread ( self::$urand, 16 );
 		}
 		if (! $pr_bits) {
