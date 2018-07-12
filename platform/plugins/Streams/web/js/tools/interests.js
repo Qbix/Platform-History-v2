@@ -261,7 +261,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				var category = title.split(':')[0].trim();
 				var title2 = title.split(':')[1].trim();
 				if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])
-				|| !Q.Users.loggedInUserId()) {
+				|| Users.loggedInUserId() !== state.userId) {
 					return;
 				};
 				if (wasSelected) {
