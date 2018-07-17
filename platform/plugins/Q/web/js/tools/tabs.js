@@ -388,9 +388,6 @@ Q.Tool.define("Q/tabs", function(options) {
 			}
 			$overflow.plugin("Q/contextual", {
 				elements: elements,
-				defaultHandler: function ($tab) {
-					tool.switchTo([$tab.attr('data-name'), $tab[0]]);
-				},
 				className: "Q_tabs_contextual",
 				onConstruct: function ($contextual) {
 					_addListeners(tool, $contextual);
