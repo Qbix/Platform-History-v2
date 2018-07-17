@@ -48,16 +48,12 @@ Q.Tool.define("Q/tabs", function(options) {
 
 	state.defaultTabName = state.defaultTabName || null;
 	
-	// catches events that bubble up from any child elements
-	_addListeners(tool, $te);
-	
 	tool.$tabs = $('.Q_tabs_tab', tool.element).css('visibility', 'hidden');
 	Q.onLayout(tool).set(function () {
 		tool.refresh();
 	}, tool);
 	tool.refresh();
-	state.onActivate.handle.call(tool, state.tab, tool.getName(state.tab));
-	
+	Q.handle(state.onActivate, tool, [state.tab, tool.getName(state.tab)]);
 },
 
 {
@@ -114,8 +110,6 @@ Q.Tool.define("Q/tabs", function(options) {
 			}
 		}
 		
-		Q.Pointer.cancelClick(event);
-		
 		$(tab).addClass('Q_tabs_switchingTo');
 
 		state.slots = typeof state.slot === "string" 
@@ -124,7 +118,7 @@ Q.Tool.define("Q/tabs", function(options) {
 
 		var slots = state.slots;
 
-		href = tool.getUrl(tab);
+		var href = tool.getUrl(tab);
 
 		if (false === Q.handle(state.beforeSwitch, tool, [tab, href, extra])) {
 			return false;
@@ -148,7 +142,7 @@ Q.Tool.define("Q/tabs", function(options) {
 			onActivate: new Q.Event(function () {
 				tool.indicateCurrent(tool.getName(tab));
 				tool.refresh();
-				state.onActivate.handle.call(tool, tab, name);
+				Q.handle(state.onActivate, tool, [tab, name]);
 			}, "Q/tabs"),
 			loadExtras: true,
 			ignorePage: tool.isInDialog(),
@@ -222,7 +216,7 @@ Q.Tool.define("Q/tabs", function(options) {
 		_copyClassToOverflow(tool);
 		state.tab = tab;
 		state.tabName = name || tool.getName(tab);
-		state.onCurrent.handle.call(tool, tab, name);
+		Q.handle(state.onCurrent, tool, [tab, name]);
 	},
 	
 	/**
@@ -309,7 +303,7 @@ Q.Tool.define("Q/tabs", function(options) {
 		var w = $te.find('.Q_tabs_tabs').width();
 		var w2 = 0, w3 = 0, index = -10;
 		var $o = $('.Q_tabs_overflow', $te);
-		Q.handle(state.beforeRefresh, tool, []);
+		Q.handle(state.beforeRefresh, tool);
 		tool.indicateCurrent();
 		if ($o.length) {
 			var cs = $o.state('Q/contextual');
@@ -388,12 +382,14 @@ Q.Tool.define("Q/tabs", function(options) {
 			}
 			$overflow.plugin("Q/contextual", {
 				elements: elements,
+				defaultHandler: function ($tab) {
+					tool.switchTo([$tab.attr('data-name'), $tab[0]]);
+				},
 				className: "Q_tabs_contextual",
 				onConstruct: function ($contextual) {
-					_addListeners(tool, $contextual);
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
-					callback && callback.call(tool);
+					Q.handle(callback, tool);
 				},
 				onShow: function (cs) {
 					Q.handle(state.onContextual, this, arguments);
@@ -428,31 +424,6 @@ function _copyClassToOverflow(tool) {
 		.addClass(currentClass || 'Q_tabs_noMatchingTab');
 	};
 	state.lastClass = currentClass;
-}
-
-function _addListeners(tool, $jq) {
-	if ($jq.data('Q/tabs added listeners')) {
-		return;
-	}
-	$jq.on([Q.Pointer.fastclick, '.Q_tabs'], '.Q_tabs_tab', function () {
-		if (false === tool.state.onClick.handle.call(
-			tool, this.getAttribute('data-name'), this
-		)) {
-			return;
-		}
-		if (Q.Pointer.canceledClick
-		|| $('.Q_discouragePointerEvents', tool.element).length) {
-			return;
-		}
-		Q.Pointer.cancelClick(event);
-		var element = this;
-		setTimeout(function () {
-			tool.switchTo([element.getAttribute('data-name'), element]);	
-		}, 0);
-	}).click(function (event) {
-		event.preventDefault();
-		// return false;
-	}).data('Q/tabs added listeners', true);
 }
 
 })(Q, jQuery);
