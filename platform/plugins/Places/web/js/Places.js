@@ -166,22 +166,34 @@ var Places = Q.Places = Q.plugins.Places = {
 	closest: function(point, polyline) {
 		var x = point.x;
 		var y = point.y;
-		var closest = null;
-		var distance = null;
-		for (var i=1, l=polyline.length; i<l; i++) {
-			var a = polyline[i-1].x;
-			var b = polyline[i-1].y;
-			var c = polyline[i].x;
-			var d = polyline[i].y;
-			var n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
-			var n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
-			var n = n1 * n2;
-			var frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
+		var a, b, c, d, e, f, i, l, n, n1, n2, frac, dist, distance, closest;
+
+		// calculation of the first point
+		a = polyline[0].x;
+		b = polyline[0].y;
+		distance = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
+		closest = {
+			index: 0,
+			x: a,
+			y: b,
+			distance: distance,
+			fraction: 0
+		};
+
+		for (i = 1, l = polyline.length; i < l; i++) {
+			a = polyline[i-1].x;
+			b = polyline[i-1].y;
+			c = polyline[i].x;
+			d = polyline[i].y;
+			n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
+			n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
+			n = n1 * n2;
+			frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
-			var e = a + (c-a)*frac;
-			var f = b + (d-b)*frac;
-			var dist = Math.sqrt((x-e)*(x-e) + (y-f)*(y-f));
-			if (distance === null || distance > dist) {
+			e = a + (c-a)*frac;
+			f = b + (d-b)*frac;
+			dist = Math.sqrt((x-e)*(x-e) + (y-f)*(y-f));
+			if (distance > dist) {
 				distance = dist;
 				closest = {
 					index: i,
