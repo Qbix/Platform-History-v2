@@ -250,7 +250,7 @@ var Places = Q.Places = Q.plugins.Places = {
 		}
 		d.route(params, function (directions, status) {
 			if (status !== google.maps.DirectionsStatus.OK) {
-				return Q.handle(Places.route.onError, Places, directions, status, d, params);
+				return Q.handle(Places.route.onError, Places, [directions, status, d, params]);
 			}
 			Q.handle(Places.route.onResult, Places, [directions, status, d, params]);
 			Q.handle(callback, Places, [directions, status, d, params]);
