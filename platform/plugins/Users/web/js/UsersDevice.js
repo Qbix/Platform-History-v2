@@ -295,9 +295,22 @@
 			});
 		},
 
+		/**
+		 *
+		 * @param callback
+		 * @return {string|bool} Possible values: true, false, 'default'
+		 */
 		notificationGranted: function (callback) {
 			if (window.Notification) {
-				return Q.handle(callback, window.Notification, [window.Notification.permission]);
+				var permission;
+				if (window.Notification.permission === 'granted') {
+					permission = true;
+				} else if (window.Notification.permission === 'denied') {
+					permission = false;
+				} else {
+					permission = window.Notification.permission;
+				}
+				return Q.handle(callback, window.Notification, [permission]);
 			}
 			callback(false);
 		},
