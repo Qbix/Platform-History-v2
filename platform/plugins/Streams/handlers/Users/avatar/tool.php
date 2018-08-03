@@ -43,7 +43,6 @@ function Users_avatar_tool($options)
 	} else if ($options['editable'] === true) {
 		$options['editable'] = array('icon', 'name');
 	}
-	Q_Response::setToolOptions($options);
 	if (!empty($options['renderOnClient'])) {
 		return '';
 	}
@@ -91,8 +90,17 @@ function Users_avatar_tool($options)
 	}
 	if (!empty($options['show'])) {
 		$o['show'] = $options['show'];
+		$displayName = $avatar->displayName($o, 'Someone');
+		$result .= "<span class='Users_avatar_name'>$displayName</span>";
 	}
-	$displayName = $avatar->displayName($o, 'Someone');
-	$result .= "<span class='Users_avatar_name'>$displayName</span>";
+
+	// define 'content' if 'show' defined
+	// if 'show' empty - means 'content'=false
+	if (!isset($options['contents']) && isset($options['show'])) {
+		$options['contents'] = (bool)$options['show'];
+	}
+
+	Q_Response::setToolOptions($options);
+
 	return $result;
 }
