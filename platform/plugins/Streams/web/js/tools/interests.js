@@ -109,7 +109,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				var interests = anotherUser ? params.anotherUser[0] : params.my[0];
 				var myInterests = params.my[0];
 				for (normalized in interests) {
-					$jq = $('#Streams_interest_title_' + normalized)
+					$jq = tool.$('#Streams_interest_title_' + normalized)
 					.addClass('Streams_interests_anotherUser');
 					if ($jq.length) {
 						if (normalized in myInterests) {
@@ -129,7 +129,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						var category = parts[0];
 						var title = parts[1];
 						var id = 'Q_expandable_'+Q.normalize(category) + '_tool';
-						var $expandable = $('#' + tool.prefix + id);
+						var $expandable = tool.$('#' + tool.prefix + id);
 						var $content = $expandable.find('.Q_expandable_content');
 						if (!$expandable.length) {
 							continue;
@@ -158,7 +158,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						}
 						Q.setObject([title, id], true, allInterests);
 					}
-					$('.Q_expandable_content .Streams_interests_other').each(function () {
+					tool.$('.Q_expandable_content .Streams_interests_other').each(function () {
 						$(this).nextAll('.Streams_interest_sep').last().remove(); // the last separator	
 					});
 				}
@@ -261,7 +261,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				var category = title.split(':')[0].trim();
 				var title2 = title.split(':')[1].trim();
 				if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected])
-				|| !Q.Users.loggedInUserId()) {
+				|| !Users.loggedInUserId() || state.userId) {
 					return;
 				};
 				if (wasSelected) {
@@ -335,7 +335,7 @@ Q.Tool.define("Streams/interests", function (options) {
 					tool.$('.Streams_interest_sep').html(' ');
 					Q.each(allInterests, function (interest, ids) {
 						for (var id in ids) {
-							var $span = $('#'+id);
+							var $span = tool.$('#'+id);
 							if (!$span.length) continue;
 							var matched = false;
 							var parts1 = val.split(' ');
