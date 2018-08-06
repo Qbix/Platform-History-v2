@@ -2,52 +2,123 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0",
+				"version": "2.1",
 				"compatible": "0.9",
-				"requires": {"Users": "1.0"},
-				"permissions": ["Streams/icons"],
-				"connections": ["Streams"]
+				"requires": {
+					"Users": "1.0"
+				},
+				"permissions": [
+					"Streams/icons"
+				],
+				"connections": [
+					"Streams"
+				]
 			}
 		},
 		"handlersBeforeEvent": {
-			"Q/objects": ["Streams/before/Q_objects"],
-			"Q/responseExtras": ["Streams/before/Q_responseExtras"],
-			"Q/Utils/canWriteToPath": ["Streams/before/Q_Utils_canWriteToPath"],
-			"Db/Row/Users_Contact/saveExecute": ["Streams/before/Users_Contact_saveExecute"],
-			"Db/Row/Users_Contact/removeExecute": ["Streams/before/Users_Contact_removeExecute"],
-			"Users/canManageContacts": ["Streams/before/Users_canManageContacts"],
-			"Users/canManageLabels": ["Streams/before/Users_canManageLabels"],
-			"Users/User/displayName": ["Streams/before/Users_User_displayName"]
+			"Q/objects": [
+				"Streams/before/Q_objects"
+			],
+			"Q/responseExtras": [
+				"Streams/before/Q_responseExtras"
+			],
+			"Q/Utils/canWriteToPath": [
+				"Streams/before/Q_Utils_canWriteToPath"
+			],
+			"Db/Row/Users_Contact/saveExecute": [
+				"Streams/before/Users_Contact_saveExecute"
+			],
+			"Db/Row/Users_Contact/removeExecute": [
+				"Streams/before/Users_Contact_removeExecute"
+			],
+			"Users/canManageContacts": [
+				"Streams/before/Users_canManageContacts"
+			],
+			"Users/canManageLabels": [
+				"Streams/before/Users_canManageLabels"
+			],
+			"Users/User/displayName": [
+				"Streams/before/Users_User_displayName"
+			]
 		},
 		"handlersAfterEvent": {
-			"Q/objects": ["Streams/after/Q_objects"],
-			"Q/responseExtras": ["Streams/after/Q_responseExtras"],
-			"Q/image/save": ["Streams/after/Q_image_save"],
-			"Q/file/save": ["Streams/after/Q_file_save"],
-			"Db/Row/Users_User/saveExecute": ["Streams/after/Users_User_saveExecute"],
-			"Db/Row/Users_Contact/saveExecute": ["Streams/after/Users_Contact_saveExecute"],
-			"Db/Row/Users_Label/saveExecute": ["Streams/after/Users_Label_saveExecute"],
-			"Db/Row/Users_Contact/removeExecute": ["Streams/after/Users_Contact_removeExecute"],
-			"Db/Row/Users_Label/removeExecute": ["Streams/after/Users_Label_removeExecute"],
-			"Users/saveContactsFromLinks": ["Streams/after/Users_saveContactsFromLinks"],
-			"Users/setLoggedInUser": ["Streams/after/Users_setLoggedInUser"],
-			"Streams/message/Streams/relatedTo": ["Streams/after/Streams_message_Streams_relatedTo"],
-			"Streams/message/Streams/unrelatedTo": ["Streams/after/Streams_message_Streams_unrelatedTo"],
-			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
-			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"]
+			"Q/Plugin/install": [
+				"Streams/after/Q_Plugin_install"
+			],
+			"Q/objects": [
+				"Streams/after/Q_objects"
+			],
+			"Q/responseExtras": [
+				"Streams/after/Q_responseExtras"
+			],
+			"Q/image/save": [
+				"Streams/after/Q_image_save"
+			],
+			"Q/file/save": [
+				"Streams/after/Q_file_save"
+			],
+			"Db/Row/Users_User/saveExecute": [
+				"Streams/after/Users_User_saveExecute"
+			],
+			"Db/Row/Users_Contact/saveExecute": [
+				"Streams/after/Users_Contact_saveExecute"
+			],
+			"Db/Row/Users_Label/saveExecute": [
+				"Streams/after/Users_Label_saveExecute"
+			],
+			"Db/Row/Users_Contact/removeExecute": [
+				"Streams/after/Users_Contact_removeExecute"
+			],
+			"Db/Row/Users_Label/removeExecute": [
+				"Streams/after/Users_Label_removeExecute"
+			],
+			"Users/saveContactsFromLinks": [
+				"Streams/after/Users_saveContactsFromLinks"
+			],
+			"Users/setLoggedInUser": [
+				"Streams/after/Users_setLoggedInUser"
+			],
+			"Streams/message/Streams/relatedTo": [
+				"Streams/after/Streams_message_Streams_relatedTo"
+			],
+			"Streams/message/Streams/unrelatedTo": [
+				"Streams/after/Streams_message_Streams_unrelatedTo"
+			],
+			"Streams/message/Streams/updateRelateTo": [
+				"Streams/after/Streams_message_Streams_updateRelateTo"
+			],
+			"Streams/Stream/save/Streams/greeting": [
+				"Streams/after/Streams_Stream_save_Streams_greeting"
+			]
 		},
 		"routes": {
-			"Q/plugins/Streams/:action": {"module": "Streams"},
-			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
-			"i/:token": {"module": "Streams", "action": "invited"},
-			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"}
+			"Q/plugins/Streams/:action": {
+				"module": "Streams"
+			},
+			"Q/plugins/Streams/invite/:token": {
+				"module": "Streams",
+				"action": "invite"
+			},
+			"i/:token": {
+				"module": "Streams",
+				"action": "invited"
+			},
+			"s/:publisherId/:streamName[]": {
+				"module": "Streams",
+				"action": "stream"
+			}
 		},
 		"web": {
-			"requireValidNonce": ["Streams"]
+			"requireValidNonce": [
+				"Streams"
+			]
 		},
 		"bundle": {
 			"exclude": {
-				"Streams": ["img/icons/Streams/interest", "img/icons/files"]
+				"Streams": [
+					"img/icons/Streams/interest",
+					"img/icons/files"
+				]
 			}
 		}
 	},
@@ -87,8 +158,7 @@
 						"user": {
 							"text": "has invited you to"
 						},
-						"related": {
-						},
+						"related": {},
 						"prompt": "Let friends recognize you:",
 						"button": "Get Started",
 						"templateName": "Streams/invite/complete"
@@ -100,7 +170,11 @@
 				},
 				"subscriptions": {
 					"filter": {
-						"types": ["^(?!(Users/)|(Streams/)).*/", "Streams/relatedTo", "Streams/chat/message"],
+						"types": [
+							"^(?!(Users/)|(Streams/)).*/",
+							"Streams/relatedTo",
+							"Streams/chat/message"
+						],
 						"notifications": 0
 					}
 				},
@@ -167,12 +241,16 @@
 					"leftCount": 0
 				},
 				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
-				"participating": ["Streams/participating"]
+				"participating": [
+					"Streams/participating"
+				]
 			},
 			"Streams/invited": {
 				"subscriptions": {
 					"filter": {
-						"types": ["Streams/invite"],
+						"types": [
+							"Streams/invite"
+						],
 						"notifications": 0
 					}
 				}
@@ -205,8 +283,12 @@
 					"writeLevel": 0,
 					"adminLevel": 0
 				},
-				"extend": ["Streams_Task"],
-				"participating": ["Streams/participating/tasks"]
+				"extend": [
+					"Streams_Task"
+				],
+				"participating": [
+					"Streams/participating/tasks"
+				]
 			},
 			"Streams/tasks": {
 				"description": "category for tasks",
@@ -219,28 +301,58 @@
 				}
 			},
 			"Streams/text": {
-				"create": true, 
+				"create": true,
 				"edit": true
 			},
-			"Streams/text/small": {"create": true, "edit": true,
+			"Streams/text/small": {
+				"create": true,
+				"edit": true,
 				"messages": {
 					"Streams/chat/message": {
 						"post": true
 					}
 				}
 			},
-			"Streams/text/medium": {"create": true, "edit": true},
-			"Streams/text/name": {"create": true, "edit": true},
-			"Streams/text/url": {"create": true, "edit": true},
-			"Streams/text/emailAddress": {"create": true, "edit": true},
-			"Streams/text/mobileNumber": {"create": true, "edit": true},
-			"Streams/date": {"create": true, "edit": true},
-			"Streams/number": {"create": true, "edit": true},
+			"Streams/text/medium": {
+				"create": true,
+				"edit": true
+			},
+			"Streams/text/name": {
+				"create": true,
+				"edit": true
+			},
+			"Streams/text/url": {
+				"create": true,
+				"edit": true
+			},
+			"Streams/text/emailAddress": {
+				"create": true,
+				"edit": true
+			},
+			"Streams/text/mobileNumber": {
+				"create": true,
+				"edit": true
+			},
+			"Streams/date": {
+				"create": true,
+				"edit": true
+			},
+			"Streams/number": {
+				"create": true,
+				"edit": true
+			},
 			"Streams/image": {
 				"description": "visual image",
 				"create": true,
 				"edit": true,
-				"sizes": ["40", "50", "80", "200", "x200", "200x"],
+				"sizes": [
+					"40",
+					"50",
+					"80",
+					"200",
+					"x200",
+					"200x"
+				],
 				"defaults": {
 					"title": "Untitled Image",
 					"icon": "Streams/image"
@@ -252,6 +364,23 @@
 				"edit": true,
 				"defaults": {
 					"title": "Untitled Gallery"
+				}
+			},
+			"Streams/album": {
+				"description": "",
+				"create": true,
+				"edit": true,
+				"sizes": [
+					"40",
+					"50",
+					"80",
+					"200",
+					"x200",
+					"200x"
+				],
+				"defaults": {
+					"icon": "Streams/image",
+					"title": "Untitled Image"
 				}
 			},
 			"Streams/audio": {
@@ -283,7 +412,9 @@
 					"title": "Untitled Category",
 					"icon": "Streams/category"
 				},
-				"see": ["relatedTo"]
+				"see": [
+					"relatedTo"
+				]
 			},
 			"Streams/participating": {
 				"description": "streams are related/unrelated to this when a user joins/leaves",
@@ -307,7 +438,9 @@
 				"description": "destination for messages sent by other users",
 				"create": true,
 				"messages": {
-					"Streams/incoming/message": {"post": true},
+					"Streams/incoming/message": {
+						"post": true
+					},
 					"*": {
 						"subject": "{{app}}: Incoming Message"
 					}
@@ -316,11 +449,21 @@
 			"Streams/chat": {
 				"description": "conversation",
 				"create": true,
-				"edit": ["icon", "title", "content"],
+				"edit": [
+					"icon",
+					"title",
+					"content"
+				],
 				"messages": {
-					"Streams/chat/message": { "post": true },
-					"Streams/chat/edit": { "post": true },
-					"Streams/chat/remove": { "post": true }
+					"Streams/chat/message": {
+						"post": true
+					},
+					"Streams/chat/edit": {
+						"post": true
+					},
+					"Streams/chat/remove": {
+						"post": true
+					}
 				},
 				"defaults": {
 					"title": "Conversation",
@@ -339,15 +482,22 @@
 			}
 		},
 		"categorize": {
-			"relationTypes": ["Streams/interests"],
-			"streamTypes": ["Streams/category"]
+			"relationTypes": [
+				"Streams/interests"
+			],
+			"streamTypes": [
+				"Streams/category"
+			]
 		},
 		"lookup": {
 			"limit": 10,
 			"requireTitleIndex": true
 		},
 		"relate": {
-			"types": ["Streams/experience", "Streams/interest"]
+			"types": [
+				"Streams/experience",
+				"Streams/interest"
+			]
 		},
 		"invites": {
 			"tokens": {
@@ -405,7 +555,8 @@
 				"Streams/user/mobileNumber",
 				"Streams/user/interests",
 				"Streams/contacts",
-				"Streams/labels"
+				"Streams/labels",
+				"Streams/image/album"
 			]
 		},
 		"onUpdate": { /* streams to update when a row is updated */
@@ -415,7 +566,7 @@
 				"emailAddress": "Streams/user/emailAddress",
 				"mobileNumber": "Streams/user/mobileNumber"
 			}
-		}, 
+		},
 		"icons": {
 			"sizes": {
 				"40": "40.png",
@@ -429,8 +580,16 @@
 		},
 		"rules": {
 			"deliver": {
-				"default": ["devices", "email", "mobile"],
-				"invited": ["devices", "mobile+pending", "email+pending"]
+				"default": [
+					"devices",
+					"email",
+					"mobile"
+				],
+				"invited": [
+					"devices",
+					"mobile+pending",
+					"email+pending"
+				]
 			}
 		},
 		"notifications": {
