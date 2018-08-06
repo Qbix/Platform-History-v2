@@ -30,7 +30,8 @@ function Users_avatar_tool($options)
 		'icon' => false,
 		'short' => false,
 		'cacheBust' => null,
-		'editable' => false
+		'editable' => false,
+		'contents' => true
 	);
 	$options = array_merge($defaults, $options);
 	$loggedInUser = Users::loggedInUser();
@@ -88,16 +89,17 @@ function Users_avatar_tool($options)
 			$s->addPreloaded();
 		}
 	}
-	if (!empty($options['show'])) {
-		$o['show'] = $options['show'];
-		$displayName = $avatar->displayName($o, 'Someone');
-		$result .= "<span class='Users_avatar_name'>$displayName</span>";
-	}
 
 	// define 'content' if 'show' defined
 	// if 'show' empty - means 'content'=false
-	if (!isset($options['contents']) && isset($options['show'])) {
-		$options['contents'] = (bool)$options['show'];
+	if (!isset($options['contents']) && ((bool)$options['show'] || (bool)$options['short'])) {
+		$options['contents'] = true;
+	}
+
+	if ($options['contents']) {
+		$o['show'] = $options['show'];
+		$displayName = $avatar->displayName($o, 'Someone');
+		$result .= "<span class='Users_avatar_name'>$displayName</span>";
 	}
 
 	Q_Response::setToolOptions($options);
