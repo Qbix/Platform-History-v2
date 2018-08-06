@@ -32,12 +32,13 @@ Q.text.Places.address = {
  * @param {HTMLElement} [options.mapElement] You can supply an existing element if you want
  * @param {Q.Event} [options.onChoose] When a valid location is selected. Receives (placeId, details)
  * @param {Q.Event} [options.onError] When there was some kind of error
+ * @param {Q.Event} [options.onFilterActivated] Event occur when included Q/filter tool activated.
  */
 
 Q.Tool.define("Places/address", function _Places_address(options) {
 	var tool = this;
 	var state = this.state;
-	if (state.metric == null) {
+	if (state.metric === null) {
 		state.metric = Places.metric;
 	}
 	state.mapElement = state.mapElement || $('<div />').appendTo(this.element)[0];
@@ -50,6 +51,9 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 	.appendTo(tool.element)
 	.activate(function () {
 		var filter = tool.filter = this;
+
+		Q.handle(state.onFilterActivated, this);
+
 		filter.state.onFilter.set(function (query, element) {
 			var latest = Q.latest(filter);
 			_getResults(query, function ($content) {
@@ -99,6 +103,7 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 	},
 	place: null,
 	mapElement: null,
+	onFilterActivated: new Q.Event(),
 	onChoose: new Q.Event(),
 	onError: new Q.Event()
 },

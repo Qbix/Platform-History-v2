@@ -48,6 +48,134 @@ class Q_Plugin
 	}
 
 	/**
+	 * Get or set extra column from [plugin_name]_Q_plugin or [app_name]_Q_app tables
+	 * Also check whether this column exist, and create if not.
+	 * @method handleExtra
+	 * @static
+	 * @param {string} $name The name of application or plugin
+	 * @param {string} $type One of 'app' or 'plugin'
+	 * @param {string} $conn_name The name of the connection to affect
+	 * @param {array} $options Contain data parsed from command line
+	 * @param {array} $options.extra
+	 * @throws {Exception} If cannot connect to database
+	 * @return array List of installed stream names
+	 */
+	static function handleExtra($name, $type, $conn_name, $options = array())
+	{
+		// Get SQL connection for currently installed schema
+		// Is schema connection information provided?
+		if (($dbconf = Db::getConnection($conn_name)) == null) {
+			throw new Exception("Could not get info for database connection '$conn_name'. Check " . APP_LOCAL_DIR . "/app.json");
+		}
+
+		$tempname = $conn_name . '_' . time();
+		Db::setConnection($tempname, $dbconf);
+
+		// Try connecting
+		try {
+			$db = Db::connect($tempname);
+			$prefix = $dbconf['prefix'];
+		} catch (Exception $e) {
+			throw new Exception("Could not connect to DB connection '$conn_name': " . $e->getMessage(), $e->getCode(), $e);
+		}
+
+		$db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+
+		$tableName = "{$prefix}Q_{$type}";
+
+		if ($db->dbms() === 'mysql') {
+			$cols = false;
+
+			// check if table exist
+			try {
+				$cols = $db->rawQuery("SHOW COLUMNS FROM $tableName")
+					->execute()->fetchAll(PDO::FETCH_ASSOC);
+			} catch (Exception $e) {
+				// table not exist
+				throw new Exception("Table '$tableName': " . $e->getMessage(), $e->getCode(), $e);
+			}
+
+			// check if column "extra" exist, if not - create one
+			if ($cols) {
+				$found = false;
+				foreach ($cols as $col) {
+					if ($col['Field'] === 'extra') {
+						$found = true;
+						break;
+					}
+				}
+				if (!$found) {
+					echo "Adding 'extra' column to '$tableName'" . PHP_EOL;
+					$db->rawQuery("ALTER TABLE `$tableName` 
+						ADD COLUMN `extra` VARCHAR (2047) DEFAULT '{}' COMMENT 'json encoded';")
+						->execute();
+				}
+			}
+		}
+
+		// if defined $options['streamsList'] - add these streams to extra
+		if (is_array($options['extra'])) {
+			// update extra
+			$db->update($tableName)
+				->set(array('extra' => Q::json_encode($options['extra'])))
+				->where(array($type => $name))
+				->execute();
+		}
+
+		// get current extra
+		$res = $db->select('extra', $tableName)
+			->where(array($type => $name))
+			->fetchAll(PDO::FETCH_ASSOC);
+
+		if (!empty($res)) {
+			$extra = Q::json_decode($res[0]['extra'], true) ?: array();
+		} else {
+			$extra = array();
+		}
+
+		return $extra;
+	}
+	/**
+	 * Get list of users specified streams (Streams/onInsert/Users_User) installed.
+	 * To compare with config data and decide whether need to install new streams.
+	 * @method getUsersStreams
+	 * @static
+	 * @throws {Exception} If cannot connect to database
+	 * @return array
+	 */
+	static function getUsersStreams()
+	{
+		// under this key we save streams names
+		$key = "Streams/User/onInsert";
+
+		$extra = self::handleExtra('Streams', 'plugin', 'Streams');
+
+		$extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+
+		return $extra[$key];
+	}
+	/**
+	 * Set list of users specified streams (Streams/onInsert/Users_User) installed.
+	 * @method setUsersStreams
+	 * @static
+	 * @param {array} $streamsList array of streams list installed.
+	 * @throws {Exception} If cannot connect to database
+	 * @return array Result extra
+	 */
+	static function setUsersStreams($streamsList)
+	{
+		// under this key we save streams names
+		$key = "Streams/User/onInsert";
+
+		$extra = self::handleExtra('Streams', 'plugin', 'Streams');
+
+		$extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+
+		$extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsList)));
+
+		return self::handleExtra('Streams', 'plugin', 'Streams', compact('extra'));
+	}
+	/**
 	 * Install or update schema for app or plugin
 	 * @method installSchema
 	 * @static
@@ -55,7 +183,7 @@ class Q_Plugin
 	 * @param {string} $name The name of application or plugin
 	 * @param {string} $type One of 'app' or 'plugin'
 	 * @param {string} $conn_name The name of the connection to affect
-	 * @param {string} $options Contain data parsed from command line
+	 * @param {array} $options Contain data parsed from command line
 	 * @throws {Exception} If cannot connect to database
 	 */
 	static function installSchema($base_dir, $name, $type, $conn_name, $options)
@@ -223,14 +351,14 @@ class Q_Plugin
 
 			// Process script files
 			foreach ($scripts as $script) {
-
+				
 				try {
+					list($new_version) = preg_split('/(-|__)/', $script, 2);
 					if (substr($script, -4) === '.php') {
 						echo "Processing PHP file: $script " . PHP_EOL;
-						list($newver) = preg_split('/(-|__)/', $script, 2);
 						Q::includeFile($scriptsdir.DS.$script);
 						$db->update("{$prefix}Q_{$type}")->set(array(
-							'versionPHP' => $newver
+							'versionPHP' => $new_version
 						))->where(array(
 							$type => $name
 						))->execute();
@@ -242,6 +370,29 @@ class Q_Plugin
 					$sqltext = str_replace('{$prefix}', $prefix, $sqltext);
 					$sqltext = str_replace('{$dbname}', $db->dbname, $sqltext);
 
+					/**
+					 * @event Q/Plugin/installSchema {before}
+					 * @param {string} $base_dir The directory where application or plugin is located
+					 * @param {string} $name The name of application or plugin
+					 * @param {string} $type One of 'app' or 'plugin'
+					 * @param {string} $conn_name The name of the connection to affect
+					 * @param {array} $options Contain data parsed from command line
+					 * @param {string} $shard
+					 * @param {array} $shard_data
+					 * @param {string} $new_version
+					 * @param {string} $current_version
+					 * @param {string} $script The script to execute
+					 */
+					$ret = Q::event("Q/Plugin/installSchema", compact(
+						'base_dir', 'name', 'type', 'options',
+						'conn_name', 'connection',
+						'shard', 'shard_data',
+						'script', 'newver', 'current_version'
+					), 'before');
+					if ($ret === false) {
+						continue;
+					}
+
 					$queries = $db->scriptToQueries($sqltext);
 					// Process each query
 					foreach ($queries as $q) {
@@ -251,16 +402,15 @@ class Q_Plugin
 
 					// Update plugin db version
 					if ($dbms === 'mysql') {
-						list($newver) = preg_split('/(-|__)/', $script, 2);
 						$fields = array(
 							$type => $name, 
-							'version' => $newver, 
+							'version' => $new_version, 
 							'versionPHP' => 0
 						);
 						$db->insert("{$prefix}Q_{$type}", $fields)
-							->onDuplicateKeyUpdate(array('version' => $newver))
+							->onDuplicateKeyUpdate(array('version' => $new_version))
 							->execute();
-						$current_version = $newver;
+						$current_version = $new_version;
 					}
 					echo PHP_EOL;
 				} catch (Exception $e) {
@@ -546,6 +696,14 @@ EOT;
 		$app_web_text_dir = APP_WEB_DIR.DS.'Q'.DS.'text';
 		$app_text_plugin_dir = APP_TEXT_DIR.DS.$plugin_name;
 
+		/**
+		 * @event Q/Plugin/install {before}
+		 * @param {string} $app_dir the directory where the app is installed
+		 * @param {string} $plugin_name the name of the plugin
+		 * @param {array} $options options passed to the installPlugin method
+		 */
+		Q::event("Q/Plugin/install", compact('app_dir', 'plugin_name', 'options'), 'before');
+
 		echo "Installing plugin '$plugin_name' into '$app_dir'" . PHP_EOL;
 
 		// Do we even have such a plugin?
@@ -649,6 +807,14 @@ EOT;
 		echo 'Registering plugin'.PHP_EOL;
 		Q_Config::set('Q', 'pluginLocal', $plugin_name, $plugin_conf);
 		Q_Config::save($app_plugins_file, array('Q', 'pluginLocal'));
+		
+		/**
+		 * @event Q/Plugin/install {after}
+		 * @param {string} $app_dir the directory where the app is installed
+		 * @param {string} $plugin_name the name of the plugin
+		 * @param {array} $options options passed to the installPlugin method
+		 */
+		Q::event("Q/Plugin/install", compact('app_dir', 'plugin_name', 'options'), 'after');
 
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
 	}

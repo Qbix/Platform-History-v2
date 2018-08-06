@@ -150,7 +150,7 @@ class Users_User extends Base_Users_User
 			return $result;
 		}
 		if (!$isHashed) {
-			$passphrase = sha1($passphrase . "\t" . $this->id);
+			return password_hash($passphrase, PASSWORD_DEFAULT);
 		}
 		return Users::hashPassphrase($passphrase, $this->passphraseHash);
 	}
@@ -397,7 +397,7 @@ class Users_User extends Base_Users_User
 	 * @param {array} [$fields=array()]
 	 *  An array of additional fields to pass to the email view.
 	 * @param {array} [$options=array()] Array of options. Can include:
-	 * @param {string} [$options.html] Defaults to false. Whether to send as HTML email.<br/>
+	 * @param {string} [$options.html=false] Whether to send as HTML email.<br/>
 	 * @param {string} [$options.name] A human-readable name in addition to the address.
 	 * @param {string} [$options.from] An array of (emailAddress, human_readable_name)
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
