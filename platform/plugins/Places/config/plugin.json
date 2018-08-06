@@ -122,6 +122,11 @@
 				"description": "Category for things within a certain distance of a geohash, matching an interest",
 				"defaults": {
 					"title": "Nearby Interest"
+				},
+				"relatedTo": {
+					"*": {
+						"description": "New {{fromDisplayType}} posted to {{toTitle}}"
+					}
 				}
 			}
 		},

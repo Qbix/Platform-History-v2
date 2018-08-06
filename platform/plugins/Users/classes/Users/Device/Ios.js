@@ -45,12 +45,12 @@ module.exports = Users_Device.Ios = Users_Device_Ios;
  * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
  * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
  * @param {Object} [notification.payload] Put all your custom notification fields here
+ * @param {String} [notification.collapseId] A string under 64 bytes for collapsing notifications
  * @param {Object} [options]
  * @param {String} [options.view] Optionally set a view to render for the alert body
  * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
  * @param {timestamp} [options.expiry] A UNIX timestamp for when the notification expires
  * @param {String} [options.priority="high"] Can be set to "normal" to make it lower priority
- * @param {String} [options.collapseId] A string under 64 bytes for collapsing notifications
  * @param {String} [options.id] You can provide your own uuid for the notification
  * @param {Object} [options.providerOptions={}] Override any apn.Provider constructor options
  * @param {boolean} [options.silent=false] Deliver a silent notification, may throw an exception
@@ -65,13 +65,16 @@ Users_Device_Ios.prototype.handlePushNotification = function (notification, opti
  		notification.payload.url = notification.url;
 	}
 	var apn = require('apn');
+	if (notification.url && !notification.collapseId) {
+		notification.collapseId = notification.url;
+	}
 	var n = new apn.Notification(notification);
 	var provider = Users_Device_Ios.provider(appId, options && options.providerOptions);
 	provider.send(n, device.fields.deviceId)
 	.then(function (responses) {
 		var errors = null;
 		responses.failed.forEach(function (result) {
-			if (result.status == '401') {
+			if (result.status === '401') {
 				setTimeout(function () {
 					device.remove();
 				}, 0);

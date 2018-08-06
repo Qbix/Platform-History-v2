@@ -37,49 +37,59 @@
 		 *   with elliptic curve digital signature (ECDSA), over the P-256 curve.
 		 */
 		subscribe: function (callback, options) {
-			// check whether notification granted
-			Users.Device.notificationGranted(function (granted) {
-				// if user already granted or blocked notifications - do nothing
-				if (granted !== "default") {
-					return;
+			Users.Device.getAdapter(function (err, adapter) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
 				}
-
-				var userId = Q.Users.loggedInUserId();
-				var cache = Q.Cache.local('Users.Permissions.notifications', 1000);
-				var requested = cache.get([userId]);
-
-				// if permissions already requested - don't request it again
-				if (Q.getObject(['cbpos'], requested) === true) {
-					return;
-				}
-
-				Q.Text.get('Users/content', function (err, text) {
-					text = Q.getObject(["notifications"], text);
-
-					if (!text) {
-						return;
+				// check whether notification granted
+				Users.Device.notificationGranted(function (granted) {
+					// if user refuses notifications - do nothing
+					if (granted === false) {
+						return Q.handle(callback, null, [null, null]);
 					}
-
-					// if not - ask
-					Q.confirm(text.prompt, function (res) {
-						if (!res){
-							// save to cache that notifications requested
-							// only if user refused, because otherwise - notifications has granted
-							cache.set([userId], true);
-
-							return;
+					// check if the device is subscribed
+					Users.Device.subscribed(function (err, subscribed) {
+						if (err) {
+							Q.handle(callback, null, [err]);
 						}
-
-						Users.Device.getAdapter(function (err, adapter) {
-							if (err) {
-								Q.handle(callback, null, [err]);
-							} else {
+						// if the device is subscribed then do nothing
+						if (subscribed) {
+							return Q.handle(callback, null, [null, subscribed]);
+						}
+						// if the user already granted notifications but the device is not subscribed then just subscribe
+						// device without any confirmation dialog
+						if (granted === true) {
+							return adapter.subscribe(function (err, subscribed) {
+								Q.handle(callback, null, [err, subscribed]);
+							}, options);
+						}
+						// if the user is undecided with notifications then do call the confirmation
+						var userId = Q.Users.loggedInUserId();
+						var cache = Q.Cache.local('Users.Permissions.notifications');
+						var requested = cache.get(userId);
+						// if permissions already requested - don't request it again
+						if (Q.getObject(['cbpos'], requested) === true) {
+							return Q.handle(callback, null, [null, null]);
+						}
+						Q.Text.get('Users/content', function (err, text) {
+							text = Q.getObject(["notifications"], text);
+							if (!text) {
+								console.warn('Notifications confirmations texts not found');
+							}
+							// if not - ask
+							Q.confirm(text.prompt, function (res) {
+								if (!res) {
+									// save to cache that notifications requested
+									// only if user refused, because otherwise - notifications has granted
+									cache.set(userId, true);
+									return Q.handle(callback, null, [null, null]);
+								}
 								adapter.subscribe(function (err, subscribed) {
 									Q.handle(callback, null, [err, subscribed]);
 								}, options);
-							}
+							}, { ok: text.yes, cancel: text.no });
 						});
-					}, {ok: text.yes, cancel: text.no});
+					});
 				});
 			});
 		},
@@ -128,20 +138,13 @@
 		 * @return {string|bool} return true if granted, false if blocked, "default" if didn't make choise yet
 		 */
 		notificationGranted: function (callback) {
-			if (window.Notification) {
-				return Q.handle(callback, window.Notification, [window.Notification.permission]);
-			}
-
-			if(cordova && cordova.plugins && cordova.plugins.notification && cordova.plugins.notification.badge && cordova.plugins.notification.badge.hasPermission) {
-				var hasPermission = cordova.plugins.notification.badge.hasPermission;
-				hasPermission(function (granted) {
-					return Q.handle(callback, hasPermission, [granted]);
-				});
-			}
-
-			console.warn("Users.Device.notificationGranted: Unable to define notification object");
-
-			Q.handle(callback, null, [null]);
+			this.getAdapter(function (err, adapter) {
+				if (err) {
+					Q.handle(callback, null, [err]);
+				} else {
+					adapter.notificationGranted(callback);
+				}
+			});
 		},
 		/**
 		 * Event occurs when a notification comes in to be processed by the app.
@@ -196,8 +199,20 @@
 			callback(null, this.adapter);
 		},
 
-		adapter: null
+		adapter: null,
 
+		serviceWorkerUpdate: function() {
+			if ((this.adapter.adapterName !== 'Web') || !('serviceWorker' in navigator)) {
+				return;
+			}
+			navigator.serviceWorker.getRegistrations().then(function (registrations) {
+				Q.each(registrations, function (index, registration) {
+					registration.update().then(function () {
+						console.log("Service worker " + registration.active.scriptURL + " has been successfully updated");
+					});
+				});
+			});
+		}
 	};
 
 	// Adapter for Chrome and Firefox
@@ -228,7 +243,7 @@
 						userVisibleOnly: userVisibleOnly,
 						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
 					}).then(function (subscription) {
-						_saveSubscription(subscription, self.appConfig, function(err, res){
+						_saveSubscription(subscription, self.appConfig, function (err, res) {
 							callback(err, res);
 						});
 					}).catch(function (err) {
@@ -278,6 +293,26 @@
 					});
 				}
 			});
+		},
+
+		/**
+		 *
+		 * @param callback
+		 * @return {string|bool} Possible values: true, false, 'default'
+		 */
+		notificationGranted: function (callback) {
+			if (window.Notification) {
+				var permission;
+				if (window.Notification.permission === 'granted') {
+					permission = true;
+				} else if (window.Notification.permission === 'denied') {
+					permission = false;
+				} else {
+					permission = window.Notification.permission;
+				}
+				return Q.handle(callback, window.Notification, [permission]);
+			}
+			callback(false);
 		},
 
 		getServiceWorkerRegistration: function (callback) {
@@ -338,6 +373,10 @@
 			} else {
 				callback(null, false);
 			}
+		},
+
+		notificationGranted: function (callback) {
+			callback(true);
 		}
 
 	};
@@ -373,11 +412,17 @@
 			} else {
 				callback(null, false);
 			}
+		},
+
+		notificationGranted: function (callback) {
+			PushNotification.hasPermission(function (data) {
+				data.isEnabled ? callback(true) : callback('default');
+			});
 		}
 
 	};
 
-	function _registerServiceWorker(callback) {
+	function _registerServiceWorker (callback) {
 		if (Q.info.url.substr(0, 8) !== 'https://') {
 			Q.handle(callback, null, [new Error("Push notifications require HTTPS")]);
 			return;
@@ -400,7 +445,7 @@
 			});
 	}
 
-	function _registerDevice(deviceId, callback) {
+	function _registerDevice (deviceId, callback) {
 		if (!deviceId || !Q.Users.loggedInUser) {
 			return callback(new Error('Error while registering device. User must be logged in and deviceId must be set.'))
 		}
@@ -427,7 +472,7 @@
 		});
 	}
 
-	function _urlB64ToUint8Array(base64String) {
+	function _urlB64ToUint8Array (base64String) {
 		var padding = '='.repeat((4 - base64String.length % 4) % 4);
 		var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
 		var rawData = window.atob(base64);
@@ -438,7 +483,7 @@
 		return outputArray;
 	}
 
-	function _saveSubscription(subscription, appConfig, callback) {
+	function _saveSubscription (subscription, appConfig, callback) {
 		if (!subscription) {
 			return callback(new Error('No subscription data'));
 		}
@@ -459,7 +504,7 @@
 		});
 	}
 
-	function _deleteSubscription(deviceId, callback) {
+	function _deleteSubscription (deviceId, callback) {
 		if (!deviceId) {
 			return;
 		}
@@ -473,7 +518,7 @@
 		});
 	}
 
-	function _pushNotificationInit() {
+	function _pushNotificationInit () {
 		var push = PushNotification.init({
 			android: {},
 			browser: {
@@ -491,11 +536,11 @@
 			if (!Q.Users.loggedInUser) {
 				return;
 			}
-			Q.Users.Device.subscribed(function(err, subscribed){
+			Q.Users.Device.subscribed(function (err, subscribed) {
 				if (subscribed) {
 					return;
 				}
-				_registerDevice(data.registrationId, function(err, res) {
+				_registerDevice(data.registrationId, function (err, res) {
 					if (!err && !res.error) {
 						_setToStorage('deviceId', data.registrationId);
 					}
@@ -518,20 +563,23 @@
 
 	}
 
-	function _getFromStorage(type) {
+	function _getFromStorage (type) {
 		return localStorage.getItem("Q\tUsers.Device." + type);
 	}
 
-	function _setToStorage(type, value) {
+	function _setToStorage (type, value) {
 		localStorage.setItem("Q\tUsers.Device." + type, value);
 	}
 
-	function _removeFromStorage(type) {
+	function _removeFromStorage (type) {
 		localStorage.removeItem("Q\tUsers.Device." + type);
 	}
 
 	// remove device info from localStorage when user logout
 	Users.onLogout.set(function () {
-		_removeFromStorage('deviceId');
+		Users.Device.unsubscribe(function () {
+			console.log('Device is unsubscribed');
+		});
 	}, "Users.Device");
+
 })(Q, jQuery);

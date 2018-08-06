@@ -2736,9 +2736,10 @@ abstract class Streams extends Base_Streams
 		$messages = array();
 		$results = array();
 		$state = 'participating';
-		$subscribed = empty($options['subscribed']) ? 'no' : 'yes';
-		$posted = empty($options['posted']) ? 'no' : 'yes';
 		$updateCounts = array();
+
+		// this fields will modified in streams_participant table row
+		$changedFields = compact('state');
 		foreach ($streamNames as $sn) {
 			if (!isset($participants[$sn])) {
 				$updateCounts[''][] = $sn;
@@ -2748,10 +2749,10 @@ abstract class Streams extends Base_Streams
 			$stream = $streams2[$sn];
 			$participant = &$participants[$sn];
 			if (isset($options['subscribed'])) {
-				$participant->subscribed = $subscribed;
+				$changedFields['subscribed'] = $participant->subscribed = 'yes';
 			}
 			if (isset($options['posted'])) {
-				$participant->posted = $posted;
+				$changedFields['posted'] = $participant->posted = 'yes';
 			}
 			if (isset($options['extra'])) {
 				$extra = Q::json_decode($participant->extra, true);
@@ -2785,7 +2786,7 @@ abstract class Streams extends Base_Streams
 		}
 		if ($streamNamesUpdate) {
 			Streams_Participant::update()
-				->set(compact('subscribed', 'posted', 'state'))
+				->set($changedFields)
 				->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $streamNamesUpdate,
@@ -3992,7 +3993,7 @@ abstract class Streams extends Base_Streams
 	 * invited user
 	 * @method register
 	 * @static
-	 * @param {array} $fullName An array with keys
+	 * @param {array|string} $fullName A string, or an array with keys
 	 * @param {string} $fullName.first The first name
 	 * @param {string} $fullName.last The last name
 	 * @param {string|array} $identifier Can be an email address or mobile number. Or it could be an array of $type => $info
@@ -4010,8 +4011,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @return {Users_User}
-	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
-	 * @throws {Q_Exception} If user was already verified for someone else
+	 * @throws {Q_Exception_WrongType} If identifier is not a valid email address or mobile number
+	 * @throws {Q_Exception} If identifier was already verified for someone else
 	 * @throws {Users_Exception_AlreadyVerified} If user was already verified
 	 * @throws {Users_Exception_UsernameExists} If username exists
 	 */
@@ -4036,6 +4037,9 @@ abstract class Streams extends Base_Streams
 		}
 
 		// this will be used in Streams_after_Users_User_saveExecute
+		if (is_string($fullName)) {
+			$fullName = Streams::splitFullName($fullName);
+		}
 		Streams::$cache['fullName'] = $fullName ? $fullName : array(
 			'first' => '',
 			'last' => ''

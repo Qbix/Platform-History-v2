@@ -41,7 +41,7 @@ Q.mixin(Users_Email, Q.require('Base/Users/Email'));
  * @param {String} view The name of a view for the body. Fields are passed to it.
  * @param {Object} [fields={}] The fields referenced in the subject and/or view
  * @param {Object} [options={}]
- * @param {String} [options.html] Defaults to false. Whether to send as HTML email.
+ * @param {String} [options.html=false] Whether to send as HTML email.
  * @param {String} [options.name] A human-readable name in addition to the address to send to.
  * @param {Array} [options.from] An array of [emailAddress, humanReadableName].
  * @param {Boolean} [options.isSource] If true, the view parameter contains the exact source, not the path of the template
