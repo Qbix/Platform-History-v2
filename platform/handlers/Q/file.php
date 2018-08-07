@@ -25,6 +25,12 @@ function Q_file($params)
 		case 'mp3':
 			header ("Content-type: audio/$ext");
 			break;
+		case 'flv':
+			header ("Content-type: video/x-flv");
+			break;
+		case 'mp4':
+			header ("Content-type: video/$ext");
+			break;
 		case 'css':
 			header ("Content-type: text/css");
 			break;

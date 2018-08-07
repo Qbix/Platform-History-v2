@@ -139,7 +139,7 @@ class Q_Translate_Google {
 			}
 			if ($response['error']) {
 				$more = "Make sure you have Q/translate/google/key specified.";
-				throw new Q_Exception($response['error']['message'] . $more);
+				throw new Q_Exception($response['error']['message'] . ' ' . $more);
 			}
 			$count += sizeof($chunk);
 			echo "Translated " . $count . " queries of " . $toLang . "\n";

@@ -20,7 +20,7 @@ class Q_Translate
 		$this->adapter->saveAll();
 	}
 
-	function getSrc($lang, $locale, $throwIfMissing = false, &$objects)
+	function getSrc($lang, $locale, $throwIfMissing = false, &$objects = null)
 	{
 		$arr = array();
 		if (!is_dir($this->options['in'])) {
