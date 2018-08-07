@@ -51,38 +51,113 @@ if (!defined('APP_DIR'))
 #Include Q
 include($Q_filename);
 
-$result = Q_script_urls(APP_WEB_DIR);
+$ignore = array('php');
+$filter = array(
+	"/.*\.(?!php)/"
+	// "/.*\.json/", "/.*\.js/", "/.*\.css/", "/.*\.md/",
+	// "/.*\.gif/", "/.*\.png/", "/.*\.jpg/", "/.*\.jpeg/", "/.*\.ico/",
+	// "/.*\.ogg/", "/.*\.mp3/", "/.*\.mp4/",
+	// "/.*\.html/", "/.*\.javascript/"
+);
+$array = array();
+Q_script_urls_glob(APP_WEB_DIR, $ignore, 'sha256', null, $result);
 $dir_to_save = APP_CONFIG_DIR.DS.'Q';
-if (!file_exists($dir_to_save)) {
-	mkdir($dir_to_save);
+$parent_dir = $dir_to_save.DS.'urls';
+$urls_dir = $parent_dir.DS.'urls';
+$trees_dir = $parent_dir.DS.'trees';
+$diffs_dir = $parent_dir.DS.'diffs';
+foreach (array($dir_to_save, $parent_dir, $urls_dir, $diffs_dir) as $dir) {
+	if (!file_exists($dir)) {
+		mkdir($dir);
+	}
 }
 file_put_contents(
 	$dir_to_save.DS.'urls.php',
 	"<?php\nQ_Uri::\$urls = " . var_export($result, true) . ";"
 );
+echo PHP_EOL;
+$time = time();
+file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
+$tree = new Q_Tree($result);
+//file_put_contents($arrays_dir.DS."$time.json", Q::json_encode($array));
+$diffs = Q_script_urls_diffs($tree, $urls_dir, $diffs_dir);
+echo PHP_EOL;
 
-function Q_script_urls($dir, $len = null, &$result = null, $was_link = false) {
+function Q_script_urls_glob(
+	$dir, 
+	$ignore = null,
+	$algo = 'sha256', 
+	$len = null,
+	&$result = null,
+	$was_link = false
+) {
+	static $n = 0, $i = 0;
+	$algo = 'sha256';
 	if (!isset($result)) {
 		$result = array();
 		$len = strlen($dir);
 	}
 	$tree = new Q_Tree($result);
 	$filenames = glob($dir.DS.'*');
+	$n = $n + count($filenames);
 	foreach ($filenames as $f) {
-		$u = substr($f, $len);
+		$u = substr($f, $len+1);		
 		if (!empty($result[$u])) {
 			continue;
 		}
+		$ext = pathinfo($u, PATHINFO_EXTENSION);
 		if (!is_dir($f)) {
+			if (is_array($ignore) and in_array($ext, $ignore)) {
+				continue;
+			}
+			$c = file_get_contents($f);
+			$value = array(filemtime($f), hash($algo, $c));
 			$parts = explode('/', $u);
-			$parts[] = filemtime($f);
+			$parts[] = $value;
 			call_user_func_array(array($tree, 'set'), $parts);
 		}
 		$is_link = is_link($f);
 		// do depth first search, following symlinks one level down
 		if (!$was_link or !$is_link) {
-			Q_script_urls($f, $len, $result, $was_link or $is_link);
+			Q_script_urls_glob($f, $ignore, $algo, $len, $result, $was_link or $is_link);
 		}
+		++$i;
+		echo "\033[100D";
+		echo "Processed $i of $n files                 ";
 	}
 	return $result;
+}
+
+function Q_script_urls_diffs($tree, $urls_dir, $diffs_dir)
+{
+	$i = 0;
+	$filenames = glob($urls_dir.DS.'*');
+	$n = count($filenames);
+	foreach ($filenames as $g) {
+		$t = new Q_Tree();
+		$t->load($g);
+		$diff = $t->diff($tree);
+		$b = basename($g);
+		$diff->save($diffs_dir.DS.$b);
+//		$tree = new Tree();
+//		$tree->load($g);
+//		$diff = $tree->diff()
+//		$tree = new Q_Tree($diff);
+//		$c = file_get_contents($g);
+//		if (!$c) continue;
+//		$arr = Q::json_decode($c, true);
+//		foreach ($arr as $k => $v) {
+//			$v2 = Q::ifset($array, $k, null);
+//			if ($k and $v != $v2) {
+//				$parts = explode('/', $k);
+//				$parts[] = $v;
+//				var_dump($k);
+//				call_user_func_array(array($tree, 'set'), $parts);
+//			}
+//		}
+		++$i;
+		echo "\033[100D";
+		echo "Generated $i of $n diff files    ";
+		//file_put_contents(, Q::json_encode($diff));
+	}
 }
