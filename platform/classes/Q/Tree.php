@@ -384,7 +384,7 @@ class Q_Tree
 		$success = file_put_contents(
 			$filename2, 
 			!empty($toSave) 
-				? Q::json_encode($toSave, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+				? Q::json_encode($toSave, JSON_UNESCAPED_SLASHES)
 				: '{}',
 			LOCK_EX);
 		clearstatcache(true, $filename2);

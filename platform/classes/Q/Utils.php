@@ -323,6 +323,7 @@ class Q_Utils
 	}
 
 	/**
+	 * A polyfill for hash_equals
 	 * @param string $a
 	 * @param string $b
 	 *

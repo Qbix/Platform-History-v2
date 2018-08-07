@@ -48,7 +48,7 @@ function Streams_after_Q_Plugin_install($params)
 			$user->set('Streams', 'skipExistingOnInsert', true);
 			Q::event('Db/Row/Users_User/saveExecute', $simulated, 'after');
 			echo "\033[100D";
-			echo "$plugin_name processed streams for ".($j + 1)." of $c users                          ".PHP_EOL;
+			echo "$plugin_name processed streams for ".($j + 1)." of $c users                          ";
 		}
 	}
 
