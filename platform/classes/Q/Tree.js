@@ -238,6 +238,66 @@ module.exports = function (linked) {
 	};
 
 	/**
+	 * Traverse the tree depth-first and call the callback
+	 * @method depthFirst
+	 * @param {Function} callback Will receive (path, value, tree, context)
+	 * @param {mixed} [context=null] To propagate some context to the callback
+	 */
+	this.depthFirst = function(callback, context) {
+		_depthFirst.call(this, [], linked, callback, context);
+	};
+
+	/**
+	 * Traverse the tree breadth-first and call the callback
+	 * @method breadthFirst
+	 * @param {Function} callback Will receive (path, value, tree, context)
+	 * @param {mixed} [context=null] To propagate some context to the callback
+	 */
+	this.breadthFirst = function(callback, context) {
+		callback.call(this, [], linked, linked, context);
+		_breadthFirst.call(this, [], linked, callback, context);
+	};
+
+	/**
+	 * Calculates a diff between this tree and another tree
+	 * @method diff
+	 * @param {Q.Tree} tree
+	 * @return {Q.Tree} This tree holds the results of the diff
+	 */
+	this.diff = function(tree) {
+		var context = {
+			from: this,
+			to: tree,
+			diff: new Q.Tree()
+		};
+		this.depthFirst(_diffTo, context);
+		tree.depthFirst(_diffFrom, context);
+		return context.diff;
+	};
+
+	function _diffTo (path, value, arr, context) {
+		var valueTo = context.to.get(path, null);
+		if ((!Q.isPlainObject(value) || !Q.isPlainObject(valueTo))
+		&& valueTo !== value) {
+			if (Q.isArrayLike(value) && Q.isArrayLike(valueTo)) {
+				valueTo = {replace: valueTo};
+			}
+			context.diff.set(path, valueTo);
+		}
+		if (valueTo == null) {
+			return false;
+		}
+	}
+
+	function _diffFrom (path, value, arr, context) {
+		var valueFrom = context.from.get(path, undefined);
+		if (valueFrom === undefined) {
+			context.diff.set(path, value);
+			return false;
+		}
+	}
+
+	/**
 	 * Merges a tree over the top of an existing tree
 	 * @method merge
 	 * @param {Q.Tree|Object} second The Object or Q.Tree to merge over the existing tree.
@@ -305,3 +365,34 @@ module.exports = function (linked) {
 		return result;
 	}
 };
+
+function _depthFirst(subpath, obj, callback, context)  {
+	var k, v, path;
+	for (k in obj) {
+		v = obj[k];
+		path = subpath.concat([k]);
+		if (false === callback.call(this, path, v, obj, context)) {
+			continue;
+		}
+		if (Q.isPlainObject(v)) {
+			_depthFirst.call(this, path, v, callback, context);
+		}
+	}
+}
+
+function _breadthFirst(subpath, obj, callback, context) {
+	var k, v, path;
+	for (k in obj) {
+		v = obj[k];
+		path = subpath.concat([k]);
+		if (false === callback.call(this, path, v, obj, context)) {
+			break;
+		}
+	}
+	for (k in obj) {
+		if (Q.isPlainObject(v)) {
+			path = subpath.concat([k]);
+			_breadthFirst.call(this, path, v, callback);
+		}
+	}
+}

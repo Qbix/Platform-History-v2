@@ -623,14 +623,13 @@ abstract class Users extends Base_Users
 		}
 
 		// User exists in database. Now check the passphrase.
-		$passphraseHash = $user->computePassphraseHash($passphrase, $isHashed);
-		if ($passphraseHash[0] === '$') {
-			if (!password_verify($passphraseHash, $user->passphraseHash)) {
-				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
-			}
+		if (!$user->passphraseHash or $user->passphraseHash[0] !== '$') {
+			throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
 		} else {
-			if (!Q_Utils::hashEquals($passphraseHash, $user->passphraseHash)) {
-				// Passphrases don't match!
+			if (!$isHashed) {
+				$passphrase = sha1($passphrase . "\t" . $user->id);
+			}
+			if (!Users::verifyPassphrase($passphrase, $user->passphraseHash)) {
 				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
 			}
 		}
@@ -1410,53 +1409,65 @@ abstract class Users extends Base_Users
 	 * @method hashPassphrase
 	 * @static
 	 * @param {string} $passphrase the passphrase to hash
-	 * @param {string} [$existing_hash=null] must provide when comparing with a passphrase
-	 * hash that has been already stored. It contains the salt for the passphrase.
 	 * @return {string} the hashed passphrase, or "" if the passphrase was ""
 	 */
-	static function hashPassphrase ($passphrase, $existing_hash = null)
+	static function hashPassphrase ($passphrase)
 	{
 		if ($passphrase === '') {
 			return '';
 		}
+		return password_hash($passphrase, PASSWORD_DEFAULT);
 
-		$hash_function = Q_Config::get(
-			'Users', 'passphrase', 'hashFunction', 'sha1'
-		);
-		$passphraseHash_iterations = Q_Config::get(
-			'Users', 'passphrase', 'hashIterations', 1103
-		);
-		$salt_length = Q_Config::set('Users', 'passphrase', 'saltLength', 0);
-
-		if ($salt_length > 0) {
-			if (empty($existing_hash)) {
-				$salt = substr(sha1(uniqid(mt_rand(), true)), 0,
-					$salt_length);
-			} else {
-				$salt = substr($existing_hash, - $salt_length);
-			}
-		}
-
-		$salt2 = isset($salt) ? '_'.$salt : '';
-		$result = $passphrase;
-
-		// custom hash function
-		if (!is_callable($hash_function)) {
-			throw new Q_Exception_MissingFunction(array(
-				'function_name' => $hash_function
-			));
-		}
-		$confounder = $passphrase . $salt2;
-		$confounder_len = strlen($confounder);
-		for ($i = 0; $i < $passphraseHash_iterations; ++$i) {
-			$result = call_user_func(
-				$hash_function,
-				$result . $confounder[$i % $confounder_len]
-			);
-		}
-		$result .= $salt2;
-
-		return $result;
+		// $hash_function = Q_Config::get(
+		// 	'Users', 'passphrase', 'hashFunction', 'sha1'
+		// );
+		// $passphraseHash_iterations = Q_Config::get(
+		// 	'Users', 'passphrase', 'hashIterations', 1103
+		// );
+		// $salt_length = Q_Config::set('Users', 'passphrase', 'saltLength', 0);
+		//
+		// if ($salt_length > 0) {
+		// 	if (empty($existing_hash)) {
+		// 		$salt = substr(sha1(uniqid(mt_rand(), true)), 0,
+		// 			$salt_length);
+		// 	} else {
+		// 		$salt = substr($existing_hash, - $salt_length);
+		// 	}
+		// }
+		//
+		// $salt2 = isset($salt) ? '_'.$salt : '';
+		// $result = $passphrase;
+		//
+		// // custom hash function
+		// if (!is_callable($hash_function)) {
+		// 	throw new Q_Exception_MissingFunction(array(
+		// 		'function_name' => $hash_function
+		// 	));
+		// }
+		// $confounder = $passphrase . $salt2;
+		// $confounder_len = strlen($confounder);
+		// for ($i = 0; $i < $passphraseHash_iterations; ++$i) {
+		// 	$result = call_user_func(
+		// 		$hash_function,
+		// 		$result . $confounder[$i % $confounder_len]
+		// 	);
+		// }
+		// $result .= $salt2;
+		//
+		// return $result;
+	}
+	
+	/**
+	 * Verifies a passphrase against a hash generated previously
+	 * @method hashPassphrase
+	 * @static
+	 * @param {string} $passphrase the passphrase to hash
+	 * @param {string} $existing_hash the hash that is was previously generated
+	 * @return {boolean} whether the password is verified to be correct, or not
+	 */
+	static function verifyPassphrase ($passphrase, $existing_hash)
+	{
+		return password_verify($passphrase, $existing_hash);
 	}
 	
 	/**

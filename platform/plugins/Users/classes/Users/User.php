@@ -137,22 +137,25 @@ class Users_User extends Base_Users_User
  		$name = Q::event('Users/User/displayName', compact('user', 'options'), 'before');
 		return isset($name) ? $name : $this->username;
 	}
-	
+
 	/**
-	 * Use this function to compute the hash of a passphrase
+	 * Call this to prepare the passphrase before passing it to
+	 * Users::hashPassphrase() and Users::verifyPassphrase()
 	 * @param {array} $passphrase The value to be checked depends on value of isHashed.
-	 * @param {integer} $isHashed You can pass 0 if this is actually the passphrase, 1 if it has been hashed using sha1("$realPassphrase\t$userId")
+	 * @param {integer} $isHashed You can pass 0 if this is actually the passphrase,
+	 *   1 if it has been hashed using sha1("$realPassphrase\t$userId")
 	 */
-	function computePassphraseHash($passphrase, $isHashed)
+	function preparePassphrase($passphrase, $isHashed)
 	{
-		$user = $this;
-		if ($result = Q::event("Users/computePassphraseHash", compact('passphrase', 'isHashed', 'user'), 'before')) {
+		if ($result = Q::event("Users/preparePassphraseHash", compact(
+			'passphrase', 'isHashed', 'user'), 'before'
+		)) {
 			return $result;
 		}
-		if (!$isHashed) {
-			return password_hash($passphrase, PASSWORD_DEFAULT);
+		if (!$isHashed and $passphrase) {
+			$passphrase = sha1($passphrase . "\t" . $this->id);
 		}
-		return Users::hashPassphrase($passphrase, $this->passphraseHash);
+		return $passphrase;
 	}
 	
 	/**
