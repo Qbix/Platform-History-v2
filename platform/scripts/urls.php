@@ -86,13 +86,12 @@ echo PHP_EOL;
 function Q_script_urls_glob(
 	$dir, 
 	$ignore = null,
-	$algo = 'sha256', 
+	$algo = 'sha256',
 	$len = null,
 	&$result = null,
 	$was_link = false
 ) {
 	static $n = 0, $i = 0;
-	$algo = 'sha256';
 	if (!isset($result)) {
 		$result = array();
 		$len = strlen($dir);
@@ -111,7 +110,7 @@ function Q_script_urls_glob(
 				continue;
 			}
 			$c = file_get_contents($f);
-			$value = array(filemtime($f), hash($algo, $c));
+			$value = array('t' => filemtime($f), 'h' => hash($algo, $c));
 			$parts = explode('/', $u);
 			$parts[] = $value;
 			call_user_func_array(array($tree, 'set'), $parts);
