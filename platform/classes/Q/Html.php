@@ -1183,10 +1183,12 @@ class Q_Html
 				continue; // skip null attributes
 			}
 			$name2 = $name;
-			if (strpos(strtolower($tag), 'frame') !== false and strtolower($name) == 'src') {
+			$ltag = strtolower($tag);
+			$lname = strtolower($name);
+			if (strpos($ltag, 'frame') !== false and $lname == 'src') {
 				$name2 = 'href'; // treat the src as href
 			}
-			if (strtolower($tag) == 'link' and strtolower($name) == 'href') {
+			if ($ltag == 'link' and $lname == 'href') {
 				$name2 = 'src'; // treat the href as src
 			}
 
@@ -1202,7 +1204,7 @@ class Q_Html
 					$isUrl = true;
 					break;
 				case 'src': // Automatically prefixes theme url if any
-					list ($value, $filename) = self::themedUrlAndFilename($value);
+					list ($value, $filename, $hash) = self::themedUrlFilenameAndHash($value);
 					$isUrl = true;
 					break;
 				case 'id': // Automatic prefixing of this attribute
@@ -1219,6 +1221,9 @@ class Q_Html
 			if ($escape) {
 				$name = self::text($name);
 				$value = self::text($value);
+			}
+			if (!empty($hash) and ($ltag === 'link' or $ltag === 'script')) {
+				$result .= ' integrity="sha256-' . base64_encode(hex2bin($hash)) . '"';
 			}
 			$result .= ($i > 0 ? $between : '') . $name . '="' . $value . '"';
 			++ $i;
@@ -1355,20 +1360,20 @@ class Q_Html
 	
 	/**
 	 * Gets the url and filename of a themed file
-	 * @method themedUrlAndFilename
+	 * @method themedUrlFilenameAndHash
 	 * @static
 	 * @param {string} $filePath  Basically the subpath of the file underneath the web or theme directory
 	 * @param {boolean} [$ignoreEnvironment=false] If true, doesn't apply environment transformations
 	 * @return {array} A two-element array containing the url and filename
 	 */
-	static function themedUrlAndFilename ($filePath, $ignoreEnvironment = false)
+	static function themedUrlFilenameAndHash ($filePath, $ignoreEnvironment = false)
 	{
 		/**
-		 * @event Q/themedUrlAndFilename {before}
+		 * @event Q/themedUrlFilenameAndHash {before}
 		 * @param {string} file_path
 		 * @return {array}
 		 */
-		$result = Q::event('Q/themedUrlAndFilename', compact('file_path'), 'before');
+		$result = Q::event('Q/themedUrlFilenameAndHash', compact('file_path'), 'before');
 		if ($result) {
 			return $result;
 		}
@@ -1421,8 +1426,8 @@ class Q_Html
 			}
 		}
 		
-		$url = Q_Uri::cachedUrl($url);
-		return array($url, $filename);
+		list($url, $hash) = Q_Uri::cachedUrlAndHash($url);
+		return array($url, $filename, $hash);
 	}
 	
 	/**
@@ -1435,7 +1440,7 @@ class Q_Html
 	 */
 	static function themedUrl($filePath, $ignoreEnvironment = false)
 	{
-		list($url, $filename) = self::themedUrlAndFilename($filePath, $ignoreEnvironment);
+		list($url, $filename) = self::themedUrlFilenameAndHash($filePath, $ignoreEnvironment);
 		return $url;
 	}
 	
@@ -1448,7 +1453,7 @@ class Q_Html
 	 */
 	static function themedFilename($filePath, $ignoreEnvironment = false)
 	{
-		list($url, $filename) = self::themedUrlAndFilename($filePath, $ignoreEnvironment);
+		list($url, $filename) = self::themedUrlFilenameAndHash($filePath, $ignoreEnvironment);
 		return $filename;
 	}
 	

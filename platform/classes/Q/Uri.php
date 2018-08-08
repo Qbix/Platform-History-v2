@@ -907,22 +907,35 @@ class Q_Uri
 	 * Otherwise, the url relative to cacheBaseUrl is used, making the client
 	 * load the locally cached version.
 	 */
-	static function cachedUrl($url) {
-		$timestamp = Q_Request::cacheTimestamp();
-		if (empty($timestamp)) {
-			return $url;
+	static function cachedUrlAndHash($url) {
+		$updateTimestamp = Q_Request::updateTimestamp();
+		$cacheTimestamp = Q_Request::cacheTimestamp();
+		if (empty($cacheTimestamp) and empty($updateTimestamp)) {
+			return array($url, null);
 		}
-		$urlRelativeToBase = substr($url, strlen(Q_Request::baseUrl(false)));
+		list($head, $tail) = explode('?', $url);
+		$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
 		$parts = explode('/', $urlRelativeToBase);
+		array_shift($parts);
 		$parts[] = null;
 		$tree = new Q_Tree(Q_Uri::$urls);
-		$fileTimestamp = call_user_func_array(array($tree, 'get'), $parts);
-		if (isset($fileTimestamp)
-		and $fileTimestamp <= $timestamp
+		$info = call_user_func_array(array($tree, 'get'), $parts);
+		$fileTimestamp = Q::ifset($info, 't', null);
+		$fileSHA1 = Q::ifset($info, 'h', null);
+		if ($cacheTimestamp
+		and isset($fileTimestamp)
+		and $fileTimestamp <= $cacheTimestamp
 		and self::$cacheBaseUrl) {
-			return self::$cacheBaseUrl . $urlRelativeToBase;
+			return array(self::$cacheBaseUrl . $urlRelativeToBase, $fileSHA1);
 		}
-		return $url;
+		if ($fileTimestamp) {
+			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cacheBust');
+			$fields = parse_str($tail);
+			$fields[$field] = $fileTimestamp;
+			$qs = http_build_query($fields);
+			return array(Q_Uri::fixUrl("$head?$qs"), $fileSHA1);
+		}
+		return array($url, $fileSHA1);
 	}
 	
 	/**
