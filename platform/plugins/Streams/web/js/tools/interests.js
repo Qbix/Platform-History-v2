@@ -22,7 +22,7 @@ var Interests = Streams.Interests;
  *  @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new interest, or a string to override the title of the command.
  *  @param {String|Object} [options.all] To show "all interests" option, pass here its title or object with "title" and "icon" properties.
  *  @param {Object} [options.expandable={}] Any options to pass to the expandable tools
- *  @param {String} [options.cachebust=1000*60*60*24] How often to reload the list of major community interests
+ *  @param {String} [options.cacheBust=1000*60*60*24] How often to reload the list of major community interests
  *  @param {Q.Event} [options.onReady] occurs when the tool interface is ready
  *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps an interest. Is passed (element, normalizedTitle, category, interest, wasSelected). Handlers may return false to cancel the default behavior of toggling the interest. If the "All Interests" option was clicked, '*' is passed as the second parameter.
  */

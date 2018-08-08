@@ -902,6 +902,18 @@ class Q_Request
 	{
 		return self::special('ct', null);
 	}
+
+	/**
+	 * Used by the system to find out the last timestamp an update of urls
+	 * was loaded by the client.
+	 * @method updateTimestamp
+	 * @static
+	 * @return {boolean}
+	 */
+	static function updateTimestamp()
+	{
+		return self::special('ut', null);
+	}
 	
 	/**
 	 * Convenience method to apply certain criteria to an array.

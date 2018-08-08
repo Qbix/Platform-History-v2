@@ -1113,7 +1113,7 @@ class Q_Response
 					include($src);
 				} catch (Exception $e) {}
 			} else {
-				list ($src, $filename) = Q_Html::themedUrlAndFilename($src);
+				list ($src, $filename) = Q_Html::themedUrlFilenameAndHash($src);
 				try {
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
@@ -1298,7 +1298,7 @@ class Q_Response
 						include($href);
 					} catch (Exception $e) {}
 				} else {
-					list ($href, $filename) = Q_Html::themedUrlAndFilename($href);
+					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
 					try {
 						Q::includeFile($filename);
 					} catch (Exception $e) {}
