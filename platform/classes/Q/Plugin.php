@@ -720,13 +720,16 @@ EOT;
 		// Check access to $app_web_plugins_dir
 		$dirs = array($app_web_plugins_dir, $app_web_text_dir);
 		foreach ($dirs as $dir) {
-			if(!file_exists($dir))
-				if(!@mkdir($dir, 0755, true))
+			if(!file_exists($dir)) {
+				if(!@mkdir($dir, 0755, true)) {
 					throw new Exception("Could not create $dir");
-			if(!is_dir($dir))
+				}
+			}
+			if (!is_dir($dir)) {
 				throw new Exception("$dir exists, but is not a directory");
-			elseif(!is_writable($dir))
+			} else if(!is_writable($dir)) {
 				throw new Exception("Can not write to $dir");
+			}
 		}
 
 		// Check access to $app_plugins_file

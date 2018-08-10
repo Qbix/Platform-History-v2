@@ -71,16 +71,24 @@ foreach (array($dir_to_save, $parent_dir, $urls_dir, $diffs_dir) as $dir) {
 		mkdir($dir);
 	}
 }
+if (is_dir($parent_dir)) {
+	$web_urls_path = APP_WEB_DIR.DS.'Q'.DS.'urls';
+	if (!file_exists($web_urls_path)) {
+		Q_Utils::symlink($parent_dir, $web_urls_path);
+	}
+}
+$time = time();
 file_put_contents(
 	$dir_to_save.DS.'urls.php',
 	"<?php\nQ_Uri::\$urls = " . var_export($result, true) . ";"
 );
 echo PHP_EOL;
-$time = time();
 file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
+$result['#timestamp'] = $time;
+file_put_contents($urls_dir.DS."latest.json", Q::json_encode($result));
 $tree = new Q_Tree($result);
 //file_put_contents($arrays_dir.DS."$time.json", Q::json_encode($array));
-$diffs = Q_script_urls_diffs($tree, $urls_dir, $diffs_dir);
+$diffs = Q_script_urls_diffs($tree, $urls_dir, $diffs_dir, $time);
 echo PHP_EOL;
 
 function Q_script_urls_glob(
@@ -98,10 +106,9 @@ function Q_script_urls_glob(
 	}
 	$tree = new Q_Tree($result);
 	$filenames = glob($dir.DS.'*');
-	$n = $n + count($filenames);
 	foreach ($filenames as $f) {
-		$u = substr($f, $len+1);		
-		if (!empty($result[$u])) {
+		$u = substr($f, $len+1);
+		if ($u === 'Q'.DS.'urls') {
 			continue;
 		}
 		$ext = pathinfo($u, PATHINFO_EXTENSION);
@@ -115,6 +122,7 @@ function Q_script_urls_glob(
 			$parts[] = $value;
 			call_user_func_array(array($tree, 'set'), $parts);
 		}
+		++$n;
 		$is_link = is_link($f);
 		// do depth first search, following symlinks one level down
 		if (!$was_link or !$is_link) {
@@ -127,16 +135,20 @@ function Q_script_urls_glob(
 	return $result;
 }
 
-function Q_script_urls_diffs($tree, $urls_dir, $diffs_dir)
+function Q_script_urls_diffs($tree, $urls_dir, $diffs_dir, $time)
 {
 	$i = 0;
 	$filenames = glob($urls_dir.DS.'*');
-	$n = count($filenames);
+	$n = count($filenames)-1;
 	foreach ($filenames as $g) {
+		$b = basename($g);
+		if ($b === 'latest.json') {
+			continue;
+		}
 		$t = new Q_Tree();
 		$t->load($g);
 		$diff = $t->diff($tree);
-		$b = basename($g);
+		$diff->set('#timestamp', $time);
 		$diff->save($diffs_dir.DS.$b);
 //		$tree = new Tree();
 //		$tree->load($g);
