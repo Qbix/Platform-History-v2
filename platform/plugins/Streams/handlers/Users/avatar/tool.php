@@ -90,14 +90,8 @@ function Users_avatar_tool($options)
 		}
 	}
 
-	// define 'content' if 'show' defined
-	// if 'show' empty - means 'content'=false
-	if (!isset($options['contents']) && ((bool)$options['show'] || (bool)$options['short'])) {
-		$options['contents'] = true;
-	}
-
 	if ($options['contents']) {
-		$o['show'] = $options['show'];
+		$o['show'] = Q::ifset($o, 'show', $options['show']);
 		$displayName = $avatar->displayName($o, 'Someone');
 		$result .= "<span class='Users_avatar_name'>$displayName</span>";
 	}
