@@ -577,7 +577,7 @@ function _handlePosAndScroll(o)
 		clearInterval(interval);
 	}
 
-	interval = setInterval(_adjustPosition, 100);
+	interval = setInterval(_adjustPosition, 500);
 	_adjustPosition();
 
 	function _adjustPosition() {
