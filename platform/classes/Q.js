@@ -558,25 +558,30 @@ Q.batcher = function _Q_batch(batch, options) {
 			if (batch.timeout) {
 				clearTimeout(batch.timeout);
 			}
-			function runBatch() {
-				try {
-					batch.call(this, batch.subjects, batch.params, batch.callbacks);
-					batch.subjects = batch.params = batch.callbacks = null;
-					batch.count = 0;
-					batch.argmax = 0;
-					batch.cbmax = 0;
-				} catch (e) {
-					batch.count = 0;
-					batch.argmax = 0;
-					batch.cbmax = 0;
-					throw e;
-				}
-			}
 			if (batch.count == o.max) {
 				runBatch();
 			} else {
 				batch.timeout = setTimeout(runBatch, o.ms);
 			} 
+			
+			function runBatch() {
+				try {
+					if (batch.count) {
+						batch.call(this, batch.subjects, batch.params, batch.callbacks);
+						batch.subjects = batch.params = batch.callbacks = null;
+						batch.count = 0;
+						batch.argmax = 0;
+						batch.cbmax = 0;
+					}
+					batch.timeout = null;
+				} catch (e) {
+					batch.count = 0;
+					batch.argmax = 0;
+					batch.cbmax = 0;
+					batch.timeout = null;
+					throw e;
+				}
+			}
 		}
 		// Make the batcher re-entrant. Without this technique, if 
 		// something is requested while runBatch is calling its callback,

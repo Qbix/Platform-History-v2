@@ -636,8 +636,9 @@ Q.Tool.define('Streams/chat', function(options) {
 						return;
 					}
 					state.stream.refresh(null, {
-						messages: true,
-						unlessSocket: true
+						messages: true, 
+						unlessSocket: true,
+						evenIfNotRetained: true
 					});
 					$this.val('').trigger('Q_refresh');
 					if (!Q.info.isTouchscreen && state.hadFocus) {
