@@ -30,8 +30,7 @@ function Users_avatar_tool($options)
 		'icon' => false,
 		'short' => false,
 		'cacheBust' => null,
-		'editable' => false,
-		'contents' => true
+		'editable' => false
 	);
 	$options = array_merge($defaults, $options);
 	$loggedInUser = Users::loggedInUser();
@@ -90,11 +89,9 @@ function Users_avatar_tool($options)
 		}
 	}
 
-	if ($options['contents']) {
-		$o['show'] = Q::ifset($o, 'show', $options['show']);
-		$displayName = $avatar->displayName($o, 'Someone');
-		$result .= "<span class='Users_avatar_name'>$displayName</span>";
-	}
+	$o['show'] = Q::ifset($o, 'show', $options['show']);
+	$displayName = $avatar->displayName($o, 'Someone');
+	$result .= "<span class='Users_avatar_name'>$displayName</span>";
 
 	Q_Response::setToolOptions($options);
 
