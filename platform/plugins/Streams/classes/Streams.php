@@ -2850,7 +2850,7 @@ abstract class Streams extends Base_Streams
 		foreach ($relateStreams as $pn => $streamTypes) {
 			foreach ($streamTypes as $streamType => $streamNames) {
 				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
-					Streams::create($asUserId, $asUserId, 'Streams/participating/', array('name' => $pn));
+					Streams::create($asUserId, $asUserId, 'Streams/participating', array('name' => $pn));
 				}
 				$extraArray = array();
 				foreach ($streamNames as $sn) {
