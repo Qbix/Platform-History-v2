@@ -2949,13 +2949,22 @@ Q.batcher = function _Q_batch(batch, options) {
 			if (batch.timeout) {
 				clearTimeout(batch.timeout);
 			}
+			if (batch.count == o.max) {
+				runBatch();
+			} else {
+				batch.timeout = setTimeout(runBatch, o.ms);
+			} 
+			
 			function runBatch() {
 				try {
-					batch.call(this, batch.subjects, batch.params, batch.callbacks);
-					batch.subjects = batch.params = batch.callbacks = null;
-					batch.count = 0;
-					batch.argmax = 0;
-					batch.cbmax = 0;
+					if (batch.count) {
+						batch.call(this, batch.subjects, batch.params, batch.callbacks);
+						batch.subjects = batch.params = batch.callbacks = null;
+						batch.count = 0;
+						batch.argmax = 0;
+						batch.cbmax = 0;
+					}
+					batch.timeout = null;
 				} catch (e) {
 					batch.count = 0;
 					batch.argmax = 0;
@@ -2963,11 +2972,6 @@ Q.batcher = function _Q_batch(batch, options) {
 					throw e;
 				}
 			}
-			if (batch.count == o.max) {
-				runBatch();
-			} else {
-				batch.timeout = setTimeout(runBatch, o.ms);
-			} 
 		}
 		// Make the batcher re-entrant. Without this technique, if 
 		// something is requested while runBatch is calling its callback,
@@ -5667,14 +5671,16 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
  * @method loadHandlebars
  * @param {Function} callback This function is called when the library is loaded
  */
-Q.loadHandlebars = function _Q_loadHandlebars(callback) {
+Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 	Q.onInit.addOnce(function () {
 		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
 	});
-};
+}, {
+	cache: Q.Cache.document('Q.loadHandlebars', 1)
+});
 
 /**
  * Call this function to set a notice that is shown when the page is almost about to be unloaded
@@ -6862,6 +6868,41 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 	}, 0);
 };
 Q.formPost.counter = 0;
+
+/**
+ * Requests a diff from the server to find any updates to files since
+ * the last Q.ut timestamp, then saves current timestamp in Q.ut cookie.
+ * @param {Function} callback
+ */
+Q.updateUrls = function() {
+	var timestamp, url, json, ut = Q.cookie('Q.ut'), lskey = 'Q.updateUrls.urls';
+	if (ut) {
+		url = 'Q/urls/diffs/' + ut + '.json';
+		Q.request(url, [], function (err, result) {
+			var urls = JSON.parse(localStorage.getItem('Q.updateUrls.urls'));
+			if (!Q.isEmpty(urls)) {
+				Q.updateUrls.urls = urls;
+				Q.extend(Q.updateUrls.urls, 100, result);
+			}
+			json = JSON.stringify(Q.updateUrls.urls);
+			localStorage.setItem(lskey, json);
+			if (timestamp = result['#timestamp']) {
+				Q.cookie('Q.ut', timestamp);
+			}
+		}, {extend: false});
+	} else {
+		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
+			Q.updateUrls.urls = result;
+			json = JSON.stringify(Q.updateUrls.urls);
+			localStorage.setItem(lskey, json);
+			if (timestamp = result['#timestamp']) {
+				Q.cookie('Q.ut', timestamp);
+			}
+		}, {extend: false});
+	}
+};
+
+Q.updateUrls.urls = {};
 
 /**
  * Adds a reference to a javascript, if it's not already there

@@ -311,6 +311,11 @@
 
 #Users_login_resend_success { text-align: center; }
 
+a.Users_activation_resend {
+	display: inline-block;
+	padding: 3px 5px;
+	background: green;
+}
 
 .Users_app_icon { vertical-align: middle; }
 

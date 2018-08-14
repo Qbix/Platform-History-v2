@@ -44,8 +44,8 @@
 			resendClose: "Close",
 			noPassphrase: "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
 			notVerified: "You must send yourself an activation message in order to log in.",
-			emailExists: "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend'>Click to re-send the message</a>.",
-			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend'>Click to re-send the message</a>.",
+			emailExists: "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Users_activation_resend'>Click to re-send the message</a>.",
+			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Users_activation_resend'>Click to re-send the message</a>.",
 			usingOther: "or you can ",
 			facebookSrc: null,
 			prompt: "Choose a username:",
@@ -266,10 +266,6 @@
 		Users.initFacebook(function () {
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
-				function __doCancel(x) {
-					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
-				}
-
 				if (response.status === 'connected') {
 					var fb_uid = parseInt(response.authResponse.userID);
 					var ignoreUid = parseInt(Q.cookie('Users_ignorePlatformUid'));
