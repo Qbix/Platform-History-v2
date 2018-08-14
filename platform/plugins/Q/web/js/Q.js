@@ -2951,11 +2951,13 @@ Q.batcher = function _Q_batch(batch, options) {
 			}
 			function runBatch() {
 				try {
-					batch.call(this, batch.subjects, batch.params, batch.callbacks);
-					batch.subjects = batch.params = batch.callbacks = null;
-					batch.count = 0;
-					batch.argmax = 0;
-					batch.cbmax = 0;
+					if (batch.count) {
+						batch.call(this, batch.subjects, batch.params, batch.callbacks);
+						batch.subjects = batch.params = batch.callbacks = null;
+						batch.count = 0;
+						batch.argmax = 0;
+						batch.cbmax = 0;
+					}
 				} catch (e) {
 					batch.count = 0;
 					batch.argmax = 0;
@@ -5667,14 +5669,16 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
  * @method loadHandlebars
  * @param {Function} callback This function is called when the library is loaded
  */
-Q.loadHandlebars = function _Q_loadHandlebars(callback) {
+Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 	Q.onInit.addOnce(function () {
 		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
 	});
-};
+}, {
+	cache: Q.Cache.document('Q.loadHandlebars', 1)
+});
 
 /**
  * Call this function to set a notice that is shown when the page is almost about to be unloaded
