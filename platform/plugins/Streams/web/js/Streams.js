@@ -3380,7 +3380,7 @@ Message.post.onError = new Q.Event();
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Boolean} [checkMessageCache=false] whether to check the Streams.Message cache in addition to the Streams.Stream cache
- * @return {Integer|null} Returns null if there was no info about latest ordinal.
+ * @return {Integer}
  */
 Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName, checkMessageCache) {
 	var found = false;
@@ -3402,7 +3402,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
 			}
 		});
 	}
-	return found ? parseInt(latest) : null;
+	return found ? parseInt(latest) : 0;
 };
 
 /**
@@ -3422,7 +3422,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  *   @param {Number} [options.max=5] The maximum number of messages to wait and hope they will arrive via sockets. Any more and we just request them again.
  *   @param {Number} [options.timeout=1000] The maximum amount of time to wait and hope the messages will arrive via sockets. After this we just request them again.
  *   @param {Number} [options.unlessSocket=true] Whether to avoid doing any requests when a socket is attached and user is a participant in the stream
- *   @param {Boolean} [options.evenIfNotRetained] Set this to true to fetch all messages posted to the stream, in the event that it wasn't cached or retained.
+ *   @param {Boolean} [options.evenIfNotRetained] Set this to true to wait for messages posted to the stream, in the event that it wasn't cached or retained.
  * @return {Boolean|null|Q.Pipe}
  *   Returns false if the cached stream already got this message.
  *   Returns true if we decided to send a request for the messages.
@@ -3433,11 +3433,11 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
 	var latest = Message.latestOrdinal(publisherId, streamName);
-	if (latest === null && ordinal < 0 && (!options || !options.evenIfNotRetained)) {
+	if (!latest && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
 	}
-	if (ordinal >= 0 && ordinal <= latest) {
+	if (ordinal >= 0 &&  ordinal <= latest) {
 		// The cached stream already got this message
 		Q.handle(callback, this, [[]]);
 		return false;
@@ -4878,7 +4878,7 @@ Q.onInit.add(function _Streams_onInit() {
 			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
 		}
 		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName, false);
-		if (latest !== null && parseInt(msg.ordinal) <= latest) {
+		if (latest && parseInt(msg.ordinal) <= latest) {
 			return;
 		}
 		// Wait until the previous message has been posted, then process this one.
