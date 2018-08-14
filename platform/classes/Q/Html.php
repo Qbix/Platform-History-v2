@@ -1222,11 +1222,11 @@ class Q_Html
 				$name = self::text($name);
 				$value = self::text($value);
 			}
-			if (!empty($hash) and ($ltag === 'link' or $ltag === 'script')) {
-				$result .= ' integrity="sha256-' . base64_encode(hex2bin($hash)) . '"';
-			}
 			$result .= ($i > 0 ? $between : '') . $name . '="' . $value . '"';
 			++ $i;
+		}
+		if (!empty($hash) and ($ltag === 'link' or $ltag === 'script')) {
+			$result .= ' integrity="sha256-' . base64_encode(hex2bin($hash)) . '"';
 		}
 		return $result;
 	}
