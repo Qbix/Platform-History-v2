@@ -2102,7 +2102,7 @@ abstract class Streams extends Base_Streams
 			 * @param {Streams_Stream} stream
 			 */
 			Q::event(
-				"Streams/relate/{$stream->type}",
+				"Streams/relateFrom/{$stream->type}",
 				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream', 'extra'),
 				'after'
 			);
