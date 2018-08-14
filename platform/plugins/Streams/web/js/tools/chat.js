@@ -552,7 +552,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var isTextarea = (state.inputType === 'textarea');
 		var sel1 = '.Streams_chat_composer textarea';
 		var sel2 = '.Streams_chat_composer input[type=text]';
-		var $input = $(isTextarea ? sel1: sel2);
+		var $input = tool.$(isTextarea ? sel1: sel2);
 		$input.plugin('Q/placeholders', {}, function () {
 			if (isTextarea) {
 				this.plugin('Q/autogrow', {
@@ -562,24 +562,44 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (!Q.info.isTouchscreen) {
 				this.plugin('Q/clickfocus');
 			}
-		}).keypress(function(event) {
-			if (event.keyCode != 13) {
-				return;
+		}).on('keypress change input focus paste blur Q_refresh', function(event) {
+			var $this = $(this);
+			var $form = $this.closest('form');
+			var content = $this.val().trim();
+
+			// 'enter' key handler
+			if (event.keyCode === 13) {
+				Q.handle(_submit, this, [$this]);
+				return false;
 			}
+
+			if (content) {
+				$form.attr('data-content', 1);
+			} else {
+				$form.removeAttr('data-content');
+			}
+		});
+
+		// submit button handler
+		tool.$(".Streams_chat_composer .submit").on(Q.Pointer.fastclick, function(){
+			Q.handle(_submit, $input[0], [$input]);
+		});
+
+
+		function _submit ($this) {
 			if (blocked) {
 				return false;
 			}
-			var $this = $(this);
 			var content = $this.val().trim();
-			if (content.length == 0) {
+			if (content.length === 0) {
 				return false;
 			}
-			
+
 			state.hadFocus = true;
 
-			blocked = true;	
+			blocked = true;
 			$this.attr('disabled', 'disabled');
-			
+
 			if (Q.Users.loggedInUser) {
 				_postMessage();
 			} else {
@@ -600,7 +620,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					calledBy: tool
 				});
 			}
-			
+
 			function _postMessage() {
 				Q.Streams.Message.post({
 					'publisherId': state.publisherId,
@@ -629,15 +649,13 @@ Q.Tool.define('Streams/chat', function(options) {
 					}
 					state.hadFocus = false;
 					Q.Streams.Total.seen(
-						state.publisherId, 
-						state.streamName, 
-						'Streams/chat/message', 
+						state.publisherId,
+						state.streamName,
+						'Streams/chat/message',
 						true);
 				});
 			}
-
-			return false;
-		});
+		}
 	},
 
 	niceScroll: function(callback) {
@@ -888,7 +906,7 @@ Q.Template.set('Streams/chat/main',
 		'{{else}}' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
-		'<input type="submit" style="display:none">' +
+		'<div class="submit"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +
