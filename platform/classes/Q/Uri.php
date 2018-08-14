@@ -913,6 +913,9 @@ class Q_Uri
 		if (empty($cacheTimestamp) and empty($updateTimestamp)) {
 			return array($url, null);
 		}
+		$parts = explode('?', $url);
+		$head = $parts[0];
+		$tail = (count($parts) > 1 ? $parts[1] : '');
 		list($head, $tail) = explode('?', $url);
 		$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
 		$parts = explode('/', $urlRelativeToBase);
