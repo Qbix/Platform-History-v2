@@ -2969,9 +2969,7 @@ Q.batcher = function _Q_batch(batch, options) {
 			if (batch.count == o.max) {
 				runBatch();
 			} else {
-				if (!batch.timeout) {
-					batch.timeout = setTimeout(runBatch, o.ms);
-				}
+				batch.timeout = setTimeout(runBatch, o.ms);
 			} 
 		}
 		// Make the batcher re-entrant. Without this technique, if 
