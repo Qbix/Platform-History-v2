@@ -2949,6 +2949,12 @@ Q.batcher = function _Q_batch(batch, options) {
 			if (batch.timeout) {
 				clearTimeout(batch.timeout);
 			}
+			if (batch.count == o.max) {
+				runBatch();
+			} else {
+				batch.timeout = setTimeout(runBatch, o.ms);
+			} 
+			
 			function runBatch() {
 				try {
 					if (batch.count) {
@@ -2966,11 +2972,6 @@ Q.batcher = function _Q_batch(batch, options) {
 					throw e;
 				}
 			}
-			if (batch.count == o.max) {
-				runBatch();
-			} else {
-				batch.timeout = setTimeout(runBatch, o.ms);
-			} 
 		}
 		// Make the batcher re-entrant. Without this technique, if 
 		// something is requested while runBatch is calling its callback,
