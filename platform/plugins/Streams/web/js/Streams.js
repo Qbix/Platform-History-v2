@@ -3427,13 +3427,13 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  *   Returns false if the cached stream already got this message.
  *   Returns true if we decided to send a request for the messages.
  *   Returns new Q.Pipe if we decided to wait for messages to arrive via socket.
- *   Returns null if no attempt was made because stream wasn't cached.
+ *   Returns null if no attempt was made because ordinal=-1 and stream wasn't cached.
  *   In this last case, the callback is not called.
  */
 Message.wait = function _Message_wait (publisherId, streamName, ordinal, callback, options) {
 	var alreadyCalled = false, handlerKey;
 	var latest = Message.latestOrdinal(publisherId, streamName);
-	if (latest === null && (!options || !options.evenIfNotRetained)) {
+	if (latest === null && ordinal < 0 && (!options || !options.evenIfNotRetained)) {
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
 	}
@@ -4570,7 +4570,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
-		cache: Q.Cache[where]("Streams.get", 100), 
+		cache: Q.Cache[where]("Streams.get", 1000), 
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Q.typeOf(subject) === 'Q.Streams.Stream') {
@@ -4587,7 +4587,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Streams.related = Q.getter(Streams.related, {
-		cache: Q.Cache[where]("Streams.related", 100), 
+		cache: Q.Cache[where]("Streams.related", 1000), 
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
 			if (params[0]) { // some error
@@ -4611,7 +4611,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Message.get = Q.getter(Message.get, {
-		cache: Q.Cache[where]("Streams.Message.get", 1000), 
+		cache: Q.Cache[where]("Streams.Message.get", 10000), 
 		throttle: 'Streams.Message.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -4631,12 +4631,12 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 	
 	Total.get = Q.getter(Total.get, {
-		cache: Q.Cache[where]("Streams.Total.get", 1000),
+		cache: Q.Cache[where]("Streams.Total.get", 10000),
 		throttle: 'Streams.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
-		cache: Q.Cache[where]("Streams.Participant.get", 1000), 
+		cache: Q.Cache[where]("Streams.Participant.get", 10000), 
 		throttle: 'Streams.Participant.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -4656,7 +4656,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.get = Q.getter(Avatar.get, {
-		cache: Q.Cache[where]("Streams.Avatar.get", 1000), 
+		cache: Q.Cache[where]("Streams.Avatar.get", 10000), 
 		throttle: 'Streams.Avatar.get',
 		prepare: function (subject, params, callback) {
 			if (params[0]) {
@@ -4668,7 +4668,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.byPrefix = Q.getter(Avatar.byPrefix, {
-		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 100),
+		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 10000),
 		throttle: 'Streams.Avatar.byPrefix'
 	});
 	
