@@ -560,11 +560,13 @@ Q.batcher = function _Q_batch(batch, options) {
 			}
 			function runBatch() {
 				try {
-					batch.call(this, batch.subjects, batch.params, batch.callbacks);
-					batch.subjects = batch.params = batch.callbacks = null;
-					batch.count = 0;
-					batch.argmax = 0;
-					batch.cbmax = 0;
+					if (batch.count) {
+						batch.call(this, batch.subjects, batch.params, batch.callbacks);
+						batch.subjects = batch.params = batch.callbacks = null;
+						batch.count = 0;
+						batch.argmax = 0;
+						batch.cbmax = 0;
+					}
 				} catch (e) {
 					batch.count = 0;
 					batch.argmax = 0;
