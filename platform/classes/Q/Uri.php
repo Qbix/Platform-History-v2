@@ -916,7 +916,6 @@ class Q_Uri
 		$parts = explode('?', $url);
 		$head = $parts[0];
 		$tail = (count($parts) > 1 ? $parts[1] : '');
-		list($head, $tail) = explode('?', $url);
 		$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
 		$parts = explode('/', $urlRelativeToBase);
 		array_shift($parts);
