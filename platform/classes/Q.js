@@ -567,17 +567,21 @@ Q.batcher = function _Q_batch(batch, options) {
 						batch.argmax = 0;
 						batch.cbmax = 0;
 					}
+					batch.timeout = null;
 				} catch (e) {
 					batch.count = 0;
 					batch.argmax = 0;
 					batch.cbmax = 0;
+					batch.timeout = null;
 					throw e;
 				}
 			}
 			if (batch.count == o.max) {
 				runBatch();
 			} else {
-				batch.timeout = setTimeout(runBatch, o.ms);
+				if (!batch.timeout) {
+					batch.timeout = setTimeout(runBatch, o.ms);
+				}
 			} 
 		}
 		// Make the batcher re-entrant. Without this technique, if 
