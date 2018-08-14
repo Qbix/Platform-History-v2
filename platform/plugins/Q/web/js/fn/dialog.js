@@ -20,6 +20,7 @@
  * @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
  * @param {DOMElement} [options.alignParent]  Can be DOM element, jQuery object or jQuery selector.
  * If provided overlay will be positioned relatively to that element. If null, overlay will be positioned considering window dimensions. Optional.
+ * @param {DOMElement} [options.adjustPositionMs=500] How many milliseconds between adjusting position interval
  * @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
  * @param {Q.Event} [options.beforeLoad] beforeLoad Q.Event or function which is called before overlay is loaded (shown).
  * @param {Q.Event} [options.onLoad] onLoad occurs when overlay has been loaded (shown).
@@ -577,7 +578,7 @@ function _handlePosAndScroll(o)
 		clearInterval(interval);
 	}
 
-	interval = setInterval(_adjustPosition, 500);
+	interval = setInterval(_adjustPosition, o.adjustPositionMs || 500);
 	_adjustPosition();
 
 	function _adjustPosition() {
