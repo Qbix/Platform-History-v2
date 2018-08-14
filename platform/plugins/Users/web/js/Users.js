@@ -266,10 +266,6 @@
 		Users.initFacebook(function () {
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
-				function __doCancel(x) {
-					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
-				}
-
 				if (response.status === 'connected') {
 					var fb_uid = parseInt(response.authResponse.userID);
 					var ignoreUid = parseInt(Q.cookie('Users_ignorePlatformUid'));

@@ -482,11 +482,17 @@ Cp.geocode = function (callback, options) {
 		if (param) {
 			var geocoder = new google.maps.Geocoder;
 			geocoder.geocode(param, function (results, status) {
-				var json, err;
+				var json, err, d;
 				if (status !== 'OK') {
-					json = JSON.stringify(c);
-					err = p + "can't geocode " + json;
+					d = Q.copy(c);
+					delete d.onReady;
+					delete d.onUpdated;
+					json = JSON.stringify(d);
+					err = p + "can't geocode (" + status + ") " + json;
 				} else if (!results[0]) {
+					d = Q.copy(c);
+					delete d.onReady;
+					delete d.onUpdated;
 					json = JSON.stringify(c);
 					err = p + "no place matched " + json;
 				} else {
