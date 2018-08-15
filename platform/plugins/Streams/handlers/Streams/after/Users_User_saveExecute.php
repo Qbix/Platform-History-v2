@@ -148,7 +148,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$access->readLevel = Streams::$READ_LEVEL['content'];
 			$access->writeLevel = -1;
 			$access->adminLevel = -1;
-			$access->save();
+			$access->save(true);
 
 			$access = new Streams_Access();
 			$access->publisherId = $user->id;
@@ -159,7 +159,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$access->readLevel = Streams::$READ_LEVEL['content'];
 			$access->writeLevel = -1;
 			$access->adminLevel = -1;
-			$access->save();
+			$access->save(true);
 
 			// NOTE: the above saving of access caused Streams::updateAvatar
 			// to run, to insert a Streams_Avatar row for the new user, and
