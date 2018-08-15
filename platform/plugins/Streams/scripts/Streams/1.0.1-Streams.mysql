@@ -1,4 +1,4 @@
-#RENAME TABLE {$prefix}total TO {$prefix}message_total;
+RENAME TABLE {$prefix}total TO {$prefix}message_total;
 
 CREATE TABLE IF NOT EXISTS `{$prefix}related_to_total` (
   `toPublisherId` varbinary(31) NOT NULL,
