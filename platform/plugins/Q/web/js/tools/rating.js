@@ -79,7 +79,7 @@ Q.Tool.define('Q/rating', function (options) {
 				.attr({
 					'alt': value,
 					'title': value + ': ' + state.stars.titles[rounded],
-					'src': state.stars.empty
+					'src': Q.url(state.stars.empty)
 				}).appendTo($occlusion);
 				$star.appendTo(tool.element);
 			} else {
