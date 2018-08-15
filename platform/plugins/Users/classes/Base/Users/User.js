@@ -540,7 +540,7 @@ Base.prototype.beforeSet_passphraseHash = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".passphraseHash");
-		if (typeof value === "string" && value.length > 64)
+		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".passphraseHash");
 		return value;
 };
@@ -551,7 +551,7 @@ Base.prototype.beforeSet_passphraseHash = function (value) {
 	 */
 Base.prototype.maxSize_passphraseHash = function () {
 
-		return 64;
+		return 255;
 };
 
 	/**
@@ -560,7 +560,7 @@ Base.prototype.maxSize_passphraseHash = function () {
 	 */
 Base.column_passphraseHash = function () {
 
-return [["varchar","64","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**

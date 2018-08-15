@@ -370,7 +370,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			callback(items, messages);
 		}).run();
 		
-		Q.Streams.Total.seen(
+		Q.Streams.Message.Total.seen(
 			state.publisherId, 
 			state.streamName, 
 			'Streams/chat/message',
@@ -434,7 +434,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			max  : state.earliest ? state.earliest - 1 : -1,
 			limit: state.messagesToLoad,
 			type: "Streams/chat/message",
-			withTotals: ["Streams/chat/message"]
+			withMessageTotals: ["Streams/chat/message"]
 		};
 
 		Q.Streams.Message.get(state.publisherId, state.streamName, params,
@@ -648,10 +648,10 @@ Q.Tool.define('Streams/chat', function(options) {
 						$this.blur();
 					}
 					state.hadFocus = false;
-					Q.Streams.Total.seen(
-						state.publisherId,
-						state.streamName,
-						'Streams/chat/message',
+					Q.Streams.Message.Total.seen(
+						state.publisherId, 
+						state.streamName, 
+						'Streams/chat/message', 
 						true);
 				});
 			}

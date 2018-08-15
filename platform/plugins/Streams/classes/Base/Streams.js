@@ -33,17 +33,19 @@ Base.tableClasses = [
 	"Streams_Invite",
 	"Streams_Invited",
 	"Streams_Message",
+	"Streams_MessageTotal",
 	"Streams_Notification",
 	"Streams_Participant",
 	"Streams_RelatedFrom",
+	"Streams_RelatedFromTotal",
 	"Streams_RelatedTo",
+	"Streams_RelatedToTotal",
 	"Streams_Request",
 	"Streams_Rule",
 	"Streams_Sent",
 	"Streams_Stream",
 	"Streams_Subscription",
-	"Streams_Task",
-	"Streams_Total"
+	"Streams_Task"
 ];
 
 /**
@@ -108,6 +110,13 @@ Base.Invited = Q.require('Streams/Invited');
 Base.Message = Q.require('Streams/Message');
 
 /**
+ * Link to Streams.MessageTotal model
+ * @property MessageTotal
+ * @type Streams.MessageTotal
+ */
+Base.MessageTotal = Q.require('Streams/MessageTotal');
+
+/**
  * Link to Streams.Notification model
  * @property Notification
  * @type Streams.Notification
@@ -129,11 +138,25 @@ Base.Participant = Q.require('Streams/Participant');
 Base.RelatedFrom = Q.require('Streams/RelatedFrom');
 
 /**
+ * Link to Streams.RelatedFromTotal model
+ * @property RelatedFromTotal
+ * @type Streams.RelatedFromTotal
+ */
+Base.RelatedFromTotal = Q.require('Streams/RelatedFromTotal');
+
+/**
  * Link to Streams.RelatedTo model
  * @property RelatedTo
  * @type Streams.RelatedTo
  */
 Base.RelatedTo = Q.require('Streams/RelatedTo');
+
+/**
+ * Link to Streams.RelatedToTotal model
+ * @property RelatedToTotal
+ * @type Streams.RelatedToTotal
+ */
+Base.RelatedToTotal = Q.require('Streams/RelatedToTotal');
 
 /**
  * Link to Streams.Request model
@@ -176,10 +199,3 @@ Base.Subscription = Q.require('Streams/Subscription');
  * @type Streams.Task
  */
 Base.Task = Q.require('Streams/Task');
-
-/**
- * Link to Streams.Total model
- * @property Total
- * @type Streams.Total
- */
-Base.Total = Q.require('Streams/Total');

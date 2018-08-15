@@ -58,6 +58,6 @@ UPDATE {$prefix}subscription
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}total
+UPDATE {$prefix}message_total
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";

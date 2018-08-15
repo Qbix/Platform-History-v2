@@ -1582,8 +1582,8 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->get('participant')) {
 			$result['participant'] = $this->get('participant')->exportArray();
 		}
-		if ($totals = $this->get('totals')) {
-			$result['totals'] = $totals;
+		if ($messageTotals = $this->get('messageTotals')) {
+			$result['messageTotals'] = $messageTotals;
 		}
 		return $result;
 	}
