@@ -499,6 +499,9 @@
 	display: block;
 	line-height: 50pt;
 }
+.Streams_chat_composer {
+	position: relative;
+}
 .Streams_chat_composer textarea {
 	font-size: 12pt;
 	margin: 0 auto;
@@ -516,6 +519,25 @@
 	margin-left: 50px;
 	height: 30px;
 	color: black;
+	padding-right: 30px;
+}
+.Streams_chat_composer .submit {
+	display: none;
+	cursor: pointer;
+	position: absolute;
+	right: 2px;
+	top: 1px;
+	background-size: contain;
+	background-image: url("../img/chat/message-post.png");
+	background-repeat: no-repeat;
+	width: 28px;
+	height: 28px;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.Streams_chat_composer[data-content] .submit {
+	display: block;
 }
 .Streams_chat_prevent {
 	text-align: center;
