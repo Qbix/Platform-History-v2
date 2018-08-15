@@ -1981,25 +1981,25 @@ abstract class Streams extends Base_Streams
 				'relationType' => $type,
 				'fromStreamType' => $stream->type,
 				'relationCount' => 1
-			);
+			));
 			$newRFT = compact(array(
 				'fromPublisherId' => $stream->publisherId,
 				'fromStreamName' => $stream->name,
 				'relationType' => $type,
 				'toStreamType' => $category->type,
 				'relationCount' => 1
-			);
+			));
 		}
 		// Insert/update all the relatedTo and relatedFrom rows
 		Streams_RelatedTo::insertManyAndExecute($newRT);
 		Streams_RelatedFrom::insertManyAndExecute($newRF);
 		// Insert/update all the corresponding totals
-		Streams_RelatedToTotal()::insertManyAndExecute($newRTT, array(
-			'relationCount' => new Db_Expression('relationCount + 1'))
-		);
-		Streams_RelatedFromTotal()::insertManyAndExecute($newRFT, array(
-			'relationCount' => new Db_Expression('relationCount + 1'))
-		);
+		Streams_RelatedToTotal::insertManyAndExecute($newRTT, array(
+			'relationCount' => new Db_Expression('relationCount + 1')
+		));
+		Streams_RelatedFromTotal::insertManyAndExecute($newRFT, array(
+			'relationCount' => new Db_Expression('relationCount + 1')
+		));
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
 		foreach ($$arrayField as $sn) {
@@ -2267,9 +2267,9 @@ abstract class Streams extends Base_Streams
 				))->where($criteria)->execute();
 			}
 			
-			Streams_RelatedToTotal()::update()->set(array(
+			Streams_RelatedToTotal::update()->set(array(
 				'relationCount' => new Db_Expression('relationCount - 1')
-			)->where(array(
+			))->where(array(
 				'toPublisherId' => $catgeory->publisherId,
 				'toStreamName' => $category->name,
 				'relationType' => $type,
@@ -2289,9 +2289,9 @@ abstract class Streams extends Base_Streams
 		}
 
 		if ($relatedFrom && $relatedFrom->remove()) {
-			Streams_RelatedFromTotal()::update()->set(array(
+			Streams_RelatedFromTotal::update()->set(array(
 				'relationCount' => new Db_Expression('relationCount - 1')
-			)->where(array(
+			))->where(array(
 				'fromPublisherId' => $stream->publisherId,
 				'fromStreamName' => $stream->name,
 				'relationType' => $type,
