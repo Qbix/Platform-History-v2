@@ -2271,6 +2271,10 @@ abstract class Streams extends Base_Streams
 				), true);
 			}
 		}
+		
+		Streams_RelatedToTotal()::update()->where(array(
+			'toPublisherId' => ''
+		));
 
 		/**
 		 * @event Streams/unrelateFrom/$streamType {after}

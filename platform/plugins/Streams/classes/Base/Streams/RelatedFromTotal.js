@@ -21,10 +21,10 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.fromPublisherId] defaults to ""
+ * @param {string} [$fields.fromStreamName] defaults to ""
  * @param {string} [$fields.relationType] defaults to ""
- * @param {string} [$fields.streamType] defaults to ""
+ * @param {string} [$fields.toStreamType] defaults to ""
  * @param {integer} [$fields.relationCount] defaults to 0
  */
 function Base (fields) {
@@ -34,13 +34,13 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property publisherId
+ * @property fromPublisherId
  * @type String|Buffer
  * @default ""
  * 
  */
 /**
- * @property streamName
+ * @property fromStreamName
  * @type String|Buffer
  * @default ""
  * 
@@ -52,7 +52,7 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property streamType
+ * @property toStreamType
  * @type String|Buffer
  * @default ""
  * 
@@ -250,10 +250,10 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"publisherId",
-		"streamName",
+		"fromPublisherId",
+		"fromStreamName",
 		"relationType",
-		"streamType"
+		"toStreamType"
 	];
 };
 
@@ -274,10 +274,10 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"publisherId",
-		"streamName",
+		"fromPublisherId",
+		"fromStreamName",
 		"relationType",
-		"streamType",
+		"toStreamType",
 		"relationCount"
 	];
 };
@@ -285,37 +285,37 @@ Base.fieldNames = function () {
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_publisherId
+ * @method beforeSet_fromPublisherId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_publisherId = function (value) {
+Base.prototype.beforeSet_fromPublisherId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".fromPublisherId");
 		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".fromPublisherId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * Returns the maximum string length that can be assigned to the fromPublisherId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_publisherId = function () {
+Base.prototype.maxSize_fromPublisherId = function () {
 
 		return 31;
 };
 
 	/**
-	 * Returns schema information for publisherId column
+	 * Returns schema information for fromPublisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_publisherId = function () {
+Base.column_fromPublisherId = function () {
 
 return [["varbinary","31","",false],false,"PRI",null];
 };
@@ -323,37 +323,37 @@ return [["varbinary","31","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_streamName
+ * @method beforeSet_fromStreamName
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_streamName = function (value) {
+Base.prototype.beforeSet_fromStreamName = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".fromStreamName");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".fromStreamName");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the streamName field
+	 * Returns the maximum string length that can be assigned to the fromStreamName field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_streamName = function () {
+Base.prototype.maxSize_fromStreamName = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for streamName column
+	 * Returns schema information for fromStreamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_streamName = function () {
+Base.column_fromStreamName = function () {
 
 return [["varbinary","255","",false],false,"PRI",null];
 };
@@ -399,37 +399,37 @@ return [["varbinary","255","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_streamType
+ * @method beforeSet_toStreamType
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_streamType = function (value) {
+Base.prototype.beforeSet_toStreamType = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamType");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".toStreamType");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamType");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".toStreamType");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the streamType field
+	 * Returns the maximum string length that can be assigned to the toStreamType field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_streamType = function () {
+Base.prototype.maxSize_toStreamType = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for streamType column
+	 * Returns schema information for toStreamType column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_streamType = function () {
+Base.column_toStreamType = function () {
 
 return [["varbinary","255","",false],false,"PRI",null];
 };
@@ -478,7 +478,7 @@ return [["bigint","20","",false],false,"","0"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['publisherId','streamName','relationType','streamType'], i;
+	var fields = ['fromPublisherId','fromStreamName','relationType','toStreamType'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
