@@ -1,4 +1,4 @@
-ALTER TABLE {$prefix}total
+ALTER TABLE {$prefix}message_total
 MODIFY value decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT 'average of all vote values',
 MODIFY weightTotal decimal(14,4) NOT NULL DEFAULT '0.0000' COMMENT 'total weight of all votes';
 

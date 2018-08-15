@@ -326,9 +326,9 @@ abstract class Streams extends Base_Streams
 	 *  @param {boolean} [$options.withParticipant=false]
 	 *   Additionally call ->set('participant', $p) on the stream objects,
 	 *   with the participant object corresponding to $asUserId, if any.
-	 *  @param {array} [$options.withTotals]
+	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of ($streamName => $messageTypes) here
-	 *   to additionally call ->set('totals', $t) on the stream objects.
+	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -405,19 +405,19 @@ abstract class Streams extends Base_Streams
 
 		Streams::calculateAccess($asUserId, $publisherId, $streams, false);
 		
-		if (!empty($options['withTotals'])) {
+		if (!empty($options['withMessageTotals'])) {
 			$infoForTotals = array();
-			if (isset($options['withTotals']['*'])) {
-				$trows = Streams_Total::select()->where(array(
+			if (isset($options['withMessageTotals']['*'])) {
+				$trows = Streams_MessageTotal::select()->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $name,
-					'messageType' => $options['withTotals']['*']
+					'messageType' => $options['withMessageTotals']['*']
 				))->fetchDbRows();
-				unset($options['withTotals']['*']);
+				unset($options['withMessageTotals']['*']);
 			} else {
 				$trows = array();
 			}
-			foreach ($options['withTotals'] as $n => $mt) {
+			foreach ($options['withMessageTotals'] as $n => $mt) {
 				if (!$mt) {
 					continue;
 				}
@@ -429,7 +429,7 @@ abstract class Streams extends Base_Streams
 				$infoForTotals[$j] = array($n, $mt);
 			}
 			foreach ($infoForTotals as $info) {
-				$frows = Streams_Total::select()->where(array(
+				$frows = Streams_MessageTotal::select()->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $info[0],
 					'messageType' => $info[1]
@@ -440,13 +440,13 @@ abstract class Streams extends Base_Streams
 				if (!$s->testReadLevel('messages')) {
 					return;
 				}
-				$totals = array();
+				$messageTotals = array();
 				foreach ($trows as $row) {
 					if ($row->streamName === $s->name) {
-						$totals[$row->messageType] = $row->messageCount;
+						$messageTotals[$row->messageType] = $row->messageCount;
 					}
 				}
-				$s->set('totals', $totals);
+				$s->set('messageTotals', $messageTotals);
 			}
 		}
 
@@ -546,9 +546,9 @@ abstract class Streams extends Base_Streams
 	 *   fetching the streams
 	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
 	 *   on the stream object, with the participant object corresponding to $asUserId, if any.
-	 *  @param {array} [$options.withTotals]
+	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of arrays ($streamName => $messageTypes) here
-	 *   to additionally call ->set('totals', $t) on the stream objects.
+	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 

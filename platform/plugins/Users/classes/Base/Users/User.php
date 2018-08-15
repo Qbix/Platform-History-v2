@@ -616,7 +616,8 @@ return array (
 	 */
 	function maxSize_passphraseHash()
 	{
-		return 255;
+
+		return 255;			
 	}
 
 	/**
@@ -625,17 +626,19 @@ return array (
 	 */
 	static function column_passphraseHash()
 	{
-		return array (
-			0 => array (
-				0 => 'varchar',
-				1 => '255',
-				2 => '',
-				3 => false
-			),
-			1 => true,
-			2 => '',
-			3 => NULL
-		);
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
