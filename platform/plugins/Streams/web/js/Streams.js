@@ -3658,11 +3658,11 @@ var MTotal = Streams.Message.Total = {
 			Q.setObject([publisherId, streamName, messageType], messageTotal, _seen);
 			tsc.set([publisherId, streamName, messageType], 0, messageTotal);
 			// TODO: use websockets to do Streams.seen, then call callback
-			Q.handle(callback, Total, [null, messageTotal]);
+			Q.handle(callback, MTotal, [null, messageTotal]);
 			_seenHandlers[publisherId] &&
 			_seenHandlers[publisherId][streamName] &&
 			_seenHandlers[publisherId][streamName][messageType] &&
-			Q.handle(_seenHandlers[publisherId][streamName][messageType], Total, [t]);
+			Q.handle(_seenHandlers[publisherId][streamName][messageType], MTotal, [t]);
 			return messageTotal;
 		}
 		var t = Q.getObject([publisherId, streamName, messageType], _seen);
@@ -4388,7 +4388,7 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 			}
 		});
 		MTotal.get.cache.set([publisherId, streamName, type],
-			0, Total, [null, messageTotals[type]]
+			0, MTotal, [null, messageTotals[type]]
 		);
 	}
 }
@@ -4921,7 +4921,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 				// update the stream
 				stream.fields.messageCount = msg.ordinal;
-				// update the Total.get.cache first
+				// update the Streams.Message.Total.get.cache first
 				_updateMessageTotalsCache(msg);
 				// now update the message cache
 				_updateMessageCache(msg);
