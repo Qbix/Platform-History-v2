@@ -1975,11 +1975,31 @@ abstract class Streams extends Base_Streams
 			foreach (array('toStreamName', 'fromStreamName') as $f) {
 				$newRT[$sn][$f] = $newRF[$sn][$f] = ($f === $arrayField) ? $sn : $$f;
 			}
+			$newRTT = compact(array(
+				'toPublisherId' => $category->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $type,
+				'fromStreamType' => $stream->type,
+				'relationCount' => 1
+			);
+			$newRFT = compact(array(
+				'fromPublisherId' => $stream->publisherId,
+				'fromStreamName' => $stream->name,
+				'relationType' => $type,
+				'toStreamType' => $category->type,
+				'relationCount' => 1
+			);
 		}
-		// Save all the relatedTo
+		// Insert/update all the relatedTo and relatedFrom rows
 		Streams_RelatedTo::insertManyAndExecute($newRT);
 		Streams_RelatedFrom::insertManyAndExecute($newRF);
-
+		// Insert/update all the corresponding totals
+		Streams_RelatedToTotal()::insertManyAndExecute($newRTT, array(
+			'relationCount' => new Db_Expression('relationCount + 1'))
+		);
+		Streams_RelatedFromTotal()::insertManyAndExecute($newRFT, array(
+			'relationCount' => new Db_Expression('relationCount + 1'))
+		);
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
 		foreach ($$arrayField as $sn) {
@@ -2247,6 +2267,15 @@ abstract class Streams extends Base_Streams
 				))->where($criteria)->execute();
 			}
 			
+			Streams_RelatedToTotal()::update()->set(array(
+				'relationCount' => new Db_Expression('relationCount - 1')
+			)->where(array(
+				'toPublisherId' => $catgeory->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $type,
+				'fromStreamType' => $stream->type,
+			))->execute();
+			
 			// Send Streams/unrelatedTo message to a stream
 			// node server will be notified by Streams_Message::post
 			if (empty($options['skipMessageTo'])) {
@@ -2260,6 +2289,15 @@ abstract class Streams extends Base_Streams
 		}
 
 		if ($relatedFrom && $relatedFrom->remove()) {
+			Streams_RelatedFromTotal()::update()->set(array(
+				'relationCount' => new Db_Expression('relationCount - 1')
+			)->where(array(
+				'fromPublisherId' => $stream->publisherId,
+				'fromStreamName' => $stream->name,
+				'relationType' => $type,
+				'toStreamType' => $category->type,
+			))->execute();
+			
 			if (empty($options['skipMessageFrom'])) {
 				// Send Streams/unrelatedFrom message to a stream
 				// node server will be notified by Streams_Message::post
@@ -2271,10 +2309,6 @@ abstract class Streams extends Base_Streams
 				), true);
 			}
 		}
-		
-		Streams_RelatedToTotal()::update()->where(array(
-			'toPublisherId' => ''
-		));
 
 		/**
 		 * @event Streams/unrelateFrom/$streamType {after}
