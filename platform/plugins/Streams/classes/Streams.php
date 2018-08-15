@@ -329,6 +329,17 @@ abstract class Streams extends Base_Streams
 	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of ($streamName => $messageTypes) here
 	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedToTotals] pass array here to get info about relations TO this stream
+	 *	 array('streamType' => array(...))
+	 *	 array('relationType' => array(...))
+	 *	 array('*' => true).
+	 *	 Also can be true (same as above).
+	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedFromTotals] pass array here to get info about relations FROM this stream
+	 *	 array('streamType', 'streamType', ...)
+	 *	 array('*')
+	 *	 Also can be true and '*' (same as above).
+	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -447,6 +458,23 @@ abstract class Streams extends Base_Streams
 					}
 				}
 				$s->set('messageTotals', $messageTotals);
+
+			}
+		}
+
+		// collect withRelatedToTotals and withRelatedFromTotals
+		if (!empty($options['withRelatedToTotals']) || !empty($options['withRelatedFromTotals'])) {
+			foreach ($streams as $s) {
+				if (!$s->testReadLevel('relations')) {
+					return;
+				}
+
+				if (isset($options['withRelatedToTotals'])) {
+					$s->set('relatedToTotals', self::getRelatedToTotals($s, $options['withRelatedToTotals']));
+				}
+				if (isset($options['withRelatedFromTotals'])) {
+					$s->set('relatedFromTotals', self::getRelatedFromTotals($s, $options['withRelatedFromTotals']));
+				}
 			}
 		}
 
@@ -517,7 +545,102 @@ abstract class Streams extends Base_Streams
 		}
 		return $streams;
 	}
-	
+
+	/**
+	 * Get info about related TO streams
+	 * @method getRelatedToTotals
+	 * @static
+	 * @param {Streams_Stream} $stream
+	 * @param {array} $options
+	 *	 array('streamType', 'streamType', ...)
+	 *	 array('*')
+	 *	 Also can be true and '*' (same as above).
+	 * @return {array} Returns array('streamType' => count) or array('relationType' => count)
+	 */
+	static function getRelatedToTotals ($stream, $options) {
+		$publisherId = $stream->publisherId;
+		$streamName = $stream->name;
+		$res = array();
+
+		if ($options === true || $options === '*' || isset($options['*'])) {
+			$options = array();
+		}
+
+		if (!is_array($options)) {
+			return $res;
+		}
+
+		if (in_array('*', $options)) {
+			$options = array();
+		}
+
+		$rows = Streams_RelatedToTotal::select()->where(array(
+			'toPublisherId' => $publisherId,
+			'toStreamName' => $streamName
+		));
+
+		if (count($options)) {
+			$rows->andWhere(array(
+				'fromStreamType' => $options
+			));
+		}
+
+		$rows = $rows->fetchDbRows();
+
+		foreach ($rows as $row) {
+			$res[$row->fromStreamType] = $row->relationCount;
+		}
+
+		return $res;
+	}
+
+	/**
+	 * Get info about related FROM streams
+	 * @method getRelatedFromTotals
+	 * @static
+	 * @param {Streams_Stream} $stream
+	 * @param {array} $options
+	 *	 array('streamType', 'streamType', ...)
+	 *	 array('*')
+	 *	 Also can be true and '*' (same as above).
+	 * @return {array} Returns array('streamType' => count) or array('relationType' => count)
+	 */
+	static function getRelatedFromTotals ($stream, $options) {
+		$publisherId = $stream->publisherId;
+		$streamName = $stream->name;
+		$res = array();
+
+		if ($options === true || $options === '*' || isset($options['*'])) {
+			$options = array();
+		}
+
+		if (!is_array($options)) {
+			return $res;
+		}
+
+		if (in_array('*', $options)) {
+			$options = array();
+		}
+
+		$rows = Streams_RelatedFromTotal::select()->where(array(
+			'fromPublisherId' => $publisherId,
+			'fromStreamName' => $streamName
+		));
+
+		if (count($options)) {
+			$rows->andWhere(array(
+				'toStreamType' => $options
+			));
+		}
+
+		$rows = $rows->fetchDbRows();
+
+		foreach ($rows as $row) {
+			$res[$row->toStreamType] = $row->relationCount;
+		}
+
+		return $res;
+	}
 	/**
 	 * Fetches one stream from the database.
 	 * @method fetchOne
