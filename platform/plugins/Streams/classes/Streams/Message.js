@@ -178,7 +178,7 @@ Streams_Message.post = function (fields, callback)
 	+"			?, ?, ?, ?, CURRENT_TIMESTAMP,"
 	+"			?, ?, ?, ?, @Streams_messageCount+1"
 	+"		);"
-	+"		INSERT INTO {$prefix}total("
+	+"		INSERT INTO {$prefix}message_total("
 	+"			publisherId, streamName, messageType, messageCount"
 	+"		)"
 	+"		VALUES("
