@@ -587,7 +587,7 @@ Q.Tool.define({
  *   @param {Number|Object} [extra.participants=0] Optionally fetch up to that many participants
  *   @param {Number|Object} [extra.messages=0] Optionally fetch up to that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
- *   @param {Array} [extra.totals] an array of message types to get totals for in the returned stream object
+ *   @param {Array} [extra.messageTotals] an array of message types to get messageTotals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
  *    if any fields named in this array are == null
@@ -878,7 +878,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 		fields = Q.extend({}, fields.fields, {
 			access: fields.access,
 			participant: fields.participant,
-			totals: fields.totals,
+			messageTotals: fields.messageTotals,
 			isRequired: fields.isRequired
 		});
 	}
@@ -897,7 +897,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 			if (!fields) return;
 			for (var k in fields) {
 				if ((k in this.fields)
-				|| k === 'totals'
+				|| k === 'messageTotals'
 				|| k === 'participant'
 				|| k === 'access'
 				|| k === 'isRequired') continue;
@@ -953,7 +953,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
 		
-		updateTotalsCache(fields.publisherId, fields.name, stream.totals);
+		updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
 		
 		if (extra && extra.messages) {
 			Q.each(extra.messages, function (ordinal, message) {
@@ -1590,7 +1590,7 @@ var Stream = Streams.Stream = function (fields) {
 		'inheritAccess',
 		'closedTime',
 		'access',
-		'totals',
+		'messageTotals',
 		'isRequired',
 		'participant'
 	]);
@@ -3244,18 +3244,18 @@ Mp.getInstruction = function _Message_prototype_getInstruction (instructionName)
 };
 
 /**
- * Mark the message as seen, updating the totals
+ * Mark the message as seen, updating the messageTotals
  * 
  * @method seen
- * @param {Number|Boolean} [total] Pass the total messages seen of this type.
- *  Or, pass true to set the latest total if any was cached, otherwise do nothing.
+ * @param {Number|Boolean} [messageTotal] Pass the total messages seen of this type.
+ *  Or, pass true to set the latest messageTotal if any was cached, otherwise do nothing.
  * @return {Number|false}
  */
-Mp.seen = function _Message_seen (total) {
-	if (total == null) {
-		total = true;
+Mp.seen = function _Message_seen (messageTotal) {
+	if (messageTotal == null) {
+		messageTotal = true;
 	}
-	return Total.seen(this.publisherId, this.streamName, this.messageType, total);
+	return MTotal.seen(this.publisherId, this.streamName, this.messageType, messageTotal);
 };
 
 /**
@@ -3267,7 +3267,7 @@ Mp.seen = function _Message_seen (total) {
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Number|Object} ordinal Can be the ordinal, or an object containing one or more of:
- * @param {Array} [ordinal.withTotals] Highly encouraged if ordinal is an object. All the possible message types to automatically update totals for.
+ * @param {Array} [ordinal.withMessageTotals] Highly encouraged if ordinal is an object. All the possible message types to automatically update messageTotals for.
  * @param {Number} [ordinal.min] The minimum ordinal in the range. If omitted, uses limit.
  * @param {Number} [ordinal.max] The maximum ordinal in the range. If omitted, gets the latest messages.
  * @param {Number} [ordinal.limit] Change the max number of messages to retrieve. If only max and limit are specified, messages are sorted by decreasing ordinal.
@@ -3278,14 +3278,14 @@ Mp.seen = function _Message_seen (total) {
 Message.get = function _Message_get (publisherId, streamName, ordinal, callback) {
 	var slotName, criteria = {};
 	if (Q.typeOf(ordinal) === 'object') {
-		slotName = ordinal.withTotals ? ['messages', 'totals'] : ['messages'];
+		slotName = ordinal.withMessageTotals ? ['messages', 'messageTotals'] : ['messages'];
 		if (ordinal.min) {
 			criteria.min = parseInt(ordinal.min);
 		}
 		criteria.max = parseInt(ordinal.max);
 		criteria.limit = parseInt(ordinal.limit);
-		if (ordinal.withTotals) {
-			criteria.withTotals = ordinal.withTotals;
+		if (ordinal.withMessageTotals) {
+			criteria.withMessageTotals = ordinal.withMessageTotals;
 		}
 		if ('type' in ordinal) criteria.type = ordinal.type;
 		if ('ascending' in ordinal) criteria.ascending = ordinal.ascending;
@@ -3310,8 +3310,8 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 		var messages = {};
 		if ('messages' in data) {
 			messages = data.messages;
-			if (data.totals) {
-				updateTotalsCache(publisherId, streamName, data.totals);
+			if (data.messageTotals) {
+				updateMessageTotalsCache(publisherId, streamName, data.messageTotals);
 			}
 		} else if ('message' in data) {
 			messages[ordinal] = data.message;
@@ -3564,13 +3564,13 @@ Message.shouldRefreshStream = function (type, should) {
 };
 
 /**
- * Methods related to working with totals of different message types in a stream
- * @class Streams.Total
+ * Methods related to working with messageTotals of different message types in a stream
+ * @class Streams.Message.Total
  */
-var Total = Streams.Total = {
+var MTotal = Streams.Message.Total = {
 	/**
-	 * Get one or more totals, which may result in batch requests to the server.
-	 * May call Total.get.onError if an error occurs.
+	 * Get one or more messageTotals, which may result in batch requests to the server.
+	 * May call MTotal.get.onError if an error occurs.
 	 * 
 	 * @static
 	 * @method get
@@ -3578,27 +3578,27 @@ var Total = Streams.Total = {
 	 * @param {String} streamName
 	 * @param {String|Array} messageType can be the message type, or an array of them
 	 * @param {Function} callback This receives two parameters. The first is the error.
-	 *   If messageType was a String, then the second parameter is the total.
-	 *   If messageType was an Array, then the second parameter is a hash of {messageType: total} pairs
+	 *   If messageType was a String, then the second parameter is the messageTotal.
+	 *   If messageType was an Array, then the second parameter is a hash of {messageType: messageTotal} pairs
 	 */
 	get: function _Total_get (publisherId, streamName, messageType, callback) {
 		var func = Streams.batchFunction(Q.baseUrl({
 			publisherId: publisherId,
 			streamName: streamName
 		}));
-		func.call(this, 'total', 'totals', publisherId, streamName, messageType,
+		func.call(this, 'messageTotal', 'messageTotals', publisherId, streamName, messageType,
 		function (err, data) {
 			var msg = Q.firstErrorMessage(err, data);
 			if (msg) {
 				var args = [err, data];
 				Streams.onError.handle.call(this, msg, args);
-				Total.get.onError.handle.call(this, msg, args);
+				MTotal.get.onError.handle.call(this, msg, args);
 				return callback && callback.call(this, msg, args);
 			}
-			var totals = Q.isArrayLike(messageType)
-				? Q.copy(data.totals)
-				: data.totals[messageType];
-			callback && callback.call(Total, err, totals || 0);
+			var messageTotals = Q.isArrayLike(messageType)
+				? Q.copy(data.messageTotals)
+				: data.messageTotals[messageType];
+			callback && callback.call(Total, err, messageTotals || 0);
 		});
 	},
 	/**
@@ -3611,7 +3611,7 @@ var Total = Streams.Total = {
 	 * @return {Integer|null}
 	 */
 	latest: function (publisherId, streamName, messageType) {
-		var item = Total.get.cache.get([publisherId, streamName, messageType]);
+		var item = MTotal.get.cache.get([publisherId, streamName, messageType]);
 		var value = item && item.params[1];
 		if (value == null) {
 			return null;
@@ -3626,11 +3626,11 @@ var Total = Streams.Total = {
 	 * @param {String} streamName the name of the stream
 	 * @param {String} messageType the type of the messages
 	 * @return {Integer|null}
-	 *   Returns the number of unseen messages if there is a latest total, otherwise null.
+	 *   Returns the number of unseen messages if there is a latest messageTotal, otherwise null.
 	 */
 	unseen: function _Total_unseen (publisherId, streamName, messageType) {
-		var latest = Total.latest(publisherId, streamName, messageType);
-		var seen = Total.seen(publisherId, streamName, messageType);
+		var latest = MTotal.latest(publisherId, streamName, messageType);
+		var seen = MTotal.seen(publisherId, streamName, messageType);
 		return latest && (latest - seen);
 	},
 	/**
@@ -3639,31 +3639,31 @@ var Total = Streams.Total = {
 	 * @param {String} publisherId id of the user publishing the stream
 	 * @param {String} streamName the name of the stream
 	 * @param {String} messageType the type of messages
-	 * @param {Number|Boolean} [total] Pass the total messages seen of this type.
-	 *  Or, pass true to set the latest total if any was cached, otherwise do nothing.
-	 * @param {Function} [callback] This is only in the case where total is passed
+	 * @param {Number|Boolean} [messageTotal] Pass the total messages seen of this type.
+	 *  Or, pass true to set the latest messageTotal if any was cached, otherwise do nothing.
+	 * @param {Function} [callback] This is only in the case where messageTotal is passed
 	 * @return {Number|false} Returns the total number of messages seen of this type.
-	 *  If total === true, however, returns false if nothing was actually done.
+	 *  If messageTotal === true, however, returns false if nothing was actually done.
 	 */
-	seen: function _Total_seen (publisherId, streamName, messageType, total, callback) {
-		var tsc = Total.seen.cache;
-		if (total === true) {
-			var cached = Total.get.cache.get([publisherId, streamName, messageType]);
+	seen: function _Total_seen (publisherId, streamName, messageType, messageTotal, callback) {
+		var tsc = MTotal.seen.cache;
+		if (messageTotal === true) {
+			var cached = MTotal.get.cache.get([publisherId, streamName, messageType]);
 			if (!cached) {
 				return false;
 			}
-			total = cached.params[1];
+			messageTotal = cached.params[1];
 		}
-		if (total !== undefined) {
-			Q.setObject([publisherId, streamName, messageType], total, _seen);
-			tsc.set([publisherId, streamName, messageType], 0, total);
+		if (messageTotal !== undefined) {
+			Q.setObject([publisherId, streamName, messageType], messageTotal, _seen);
+			tsc.set([publisherId, streamName, messageType], 0, messageTotal);
 			// TODO: use websockets to do Streams.seen, then call callback
-			Q.handle(callback, Total, [null, total]);
+			Q.handle(callback, Total, [null, messageTotal]);
 			_seenHandlers[publisherId] &&
 			_seenHandlers[publisherId][streamName] &&
 			_seenHandlers[publisherId][streamName][messageType] &&
 			Q.handle(_seenHandlers[publisherId][streamName][messageType], Total, [t]);
-			return total;
+			return messageTotal;
 		}
 		var t = Q.getObject([publisherId, streamName, messageType], _seen);
 		if (t === undefined) {
@@ -3697,11 +3697,11 @@ var Total = Streams.Total = {
 		var p = publisherId;
 		var n = streamName;
 		var m = messageType;
-		Q.Streams.Total.get(p, n, m, _unseen);
-		Q.Streams.Stream.onMessage(p, n, m).add(_unseen);
-		Q.Streams.Total.onSeen(p, n, m).set(_unseen);
+		MTotal.get(p, n, m, _unseen);
+		Stream.onMessage(p, n, m).add(_unseen);
+		MTotal.onSeen(p, n, m).set(_unseen);
 		function _unseen() {
-			var c = Q.Streams.Total.unseen(p, n, m);
+			var c = MTotal.unseen(p, n, m);
 			element.innerHTML = c;
 			if (options && options.unseenClass) {
 				element.setClass(options.unseenClass, c);
@@ -3710,8 +3710,8 @@ var Total = Streams.Total = {
 	},
 	
 	/**
-	 * Occurs when Total.seen is called to update the number of seen messages.
-	 * The first parameter passed is the new total.
+	 * Occurs when MTotal.seen is called to update the number of seen messages.
+	 * The first parameter passed is the new messageTotal.
 	 * @event onSeen
 	 * @param {String} publisherId
 	 * @param {String} streamName
@@ -3722,11 +3722,11 @@ var Total = Streams.Total = {
 };
 var _seen = {};
 /**
- * Occurs when Total.get encounters an error loading a total from the server
+ * Occurs when MTotal.get encounters an error loading a messageTotal from the server
  * @event get.onError
  */
-Total.get.onError = new Q.Event();
-Total.seen.cache = Q.Cache.local("Streams.Total.seen", 1000);
+MTotal.get.onError = new Q.Event();
+MTotal.seen.cache = Q.Cache.local("Streams.Message.Total.seen", 1000);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -4372,23 +4372,23 @@ function updateAvatarCache(stream) {
 	}
 }
 
-function updateTotalsCache(publisherId, streamName, totals) {
-	if (!totals) {
+function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
+	if (!messageTotals) {
 		return;
 	}
-	for (var type in totals) {
-		Total.get.cache.each([publisherId, streamName, type],
+	for (var type in messageTotals) {
+		MTotal.get.cache.each([publisherId, streamName, type],
 		function (k, v) {
 			var args = JSON.parse(k);
 			var result = v.params[1];
 			if (Q.isInteger(result)) {
-				v.params[1] = totals[type];
+				v.params[1] = messageTotals[type];
 			} else if (Q.isPlainObject[result] && (type in result)) {
-				result[type] = totals[type];
+				result[type] = messageTotals[type];
 			}
 		});
-		Total.get.cache.set([publisherId, streamName, type],
-			0, Total, [null, totals[type]]
+		MTotal.get.cache.set([publisherId, streamName, type],
+			0, Total, [null, messageTotals[type]]
 		);
 	}
 }
@@ -4505,7 +4505,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	// Now time to replace the fields in the stream with the incoming fields
 	Q.extend(stream.fields, fields);
 	prepareStream(stream);
-	updateTotalsCache(publisherId, streamName, stream.totals);
+	updateMessageTotalsCache(publisherId, streamName, stream.messageTotals);
 	updateStreamCache(stream);
 	updateAvatarCache(stream);
 }
@@ -4522,9 +4522,9 @@ function prepareStream(stream) {
 		stream.participant = new Streams.Participant(stream.fields.participant);
 		delete stream.fields.participant;
 	}
-	if (stream.fields.totals) {
-		stream.totals = stream.fields.totals;
-		delete stream.fields.totals;
+	if (stream.fields.messageTotals) {
+		stream.messageTotals = stream.fields.messageTotals;
+		delete stream.fields.messageTotals;
 	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
@@ -4632,9 +4632,9 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		}
 	});
 	
-	Total.get = Q.getter(Total.get, {
-		cache: Q.Cache[where]("Streams.Total.get", 10000),
-		throttle: 'Streams.Total.get'
+	MTotal.get = Q.getter(MTotal.get, {
+		cache: Q.Cache[where]("Streams.Message.Total.get", 10000),
+		throttle: 'Streams.Message.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
@@ -4922,16 +4922,16 @@ Q.onInit.add(function _Streams_onInit() {
 				// update the stream
 				stream.fields.messageCount = msg.ordinal;
 				// update the Total.get.cache first
-				_updateTotalsCache(msg);
+				_updateMessageTotalsCache(msg);
 				// now update the message cache
 				_updateMessageCache(msg);
 				
-				var latest = Total.latest(msg.publisherId, msg.streamName, msg.type);
+				var latest = MTotal.latest(msg.publisherId, msg.streamName, msg.type);
 				var params = [stream, message, messages, latest];
 				
-				// Handlers for below events might call message.seen() to update latest totals.
+				// Handlers for below events might call message.seen() to update latest messageTotals.
 				// Otherwise, if no one updated them, synchronously, fire an event.
-				var unseen = Total.unseen(msg.publisherId, msg.streamName, msg.type);
+				var unseen = MTotal.unseen(msg.publisherId, msg.streamName, msg.type);
 				if (unseen) {
 					setTimeout(function () {
 						params.push(unseen);
@@ -5123,18 +5123,18 @@ function _updateMessageCache(msg) {
 	});
 }
 
-function _updateTotalsCache(msg) {
+function _updateMessageTotalsCache(msg) {
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 	function (k, v) {
 		var stream = (v && !v.params[0]) ? v.subject : null;
 		if (!stream) {
 			return;
 		}
-		if (stream.totals && stream.totals[msg.type]) {
-			++stream.totals[msg.type];
+		if (stream.messageTotals && stream.messageTotals[msg.type]) {
+			++stream.messageTotals[msg.type];
 		}
 	});
-	Total.get.cache.each([msg.publisherId, msg.streamName, msg.type],
+	MTotal.get.cache.each([msg.publisherId, msg.streamName, msg.type],
 	function (k, v) {
 		var args = JSON.parse(k);
 		var result = v.params[1];
@@ -5202,7 +5202,7 @@ function _clearCaches() {
 	Message.get.cache.clear();
 	Participant.get.cache.clear();
 	Avatar.get.cache.clear();
-	Total.seen.cache.clear();
+	MTotal.seen.cache.clear();
 	_retainedByKey = {};
 	_retainedByStream = {};
 	_retainedStreams = {};

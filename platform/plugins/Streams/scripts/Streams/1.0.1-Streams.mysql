@@ -1,0 +1,19 @@
+RENAME TABLE {$prefix}message_total TO {$prefix}message_total;
+
+CREATE TABLE IF NOT EXISTS `{$prefix}related_to_total` (
+  `publisherId` varbinary(31) NOT NULL,
+  `streamName` varbinary(255) NOT NULL,
+  `relationType` varbinary(255) NOT NULL,
+  `streamType` varbinary(255) NOT NULL,
+  `relationCount` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`publisherId`,`streamName`,`relationType`,`streamType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Used to count the number of relations of a certain type';
+
+CREATE TABLE IF NOT EXISTS `{$prefix}related_from_total` (
+  `publisherId` varbinary(31) NOT NULL,
+  `streamName` varbinary(255) NOT NULL,
+  `relationType` varbinary(255) NOT NULL,
+  `streamType` varbinary(255) NOT NULL,
+  `relationCount` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`publisherId`,`streamName`,`relationType`,`streamType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Used to count the number of relations of a certain type';

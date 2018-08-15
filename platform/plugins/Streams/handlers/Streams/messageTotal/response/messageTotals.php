@@ -1,6 +1,6 @@
 <?php
 
-function Streams_total_response_totals($options) {
+function Streams_messageTotal_response_messageTotals($options) {
 	extract($options);
 	$user = Users::loggedInUser();
 	$asUserId = $user ? $user->id : "";
@@ -8,7 +8,7 @@ function Streams_total_response_totals($options) {
 	$streamName = Streams::requestedName(true);
 	$type = Streams::requestedMessageType();
 	$stream = Streams::fetchOne($asUserId, $publisherId, $streamName, true, array(
-		'withTotals' => array($streamName => $type)
+		'withMessageTotals' => array($streamName => $type)
 	));
-	return $stream->get('totals');
+	return $stream->get('messageTotals');
 }
