@@ -4526,6 +4526,14 @@ function prepareStream(stream) {
 		stream.messageTotals = stream.fields.messageTotals;
 		delete stream.fields.messageTotals;
 	}
+	if (stream.fields.relatedToTotals) {
+		stream.relatedToTotals = stream.fields.relatedToTotals;
+		delete stream.fields.relatedToTotals;
+	}
+	if (stream.fields.relatedFromTotals) {
+		stream.relatedFromTotals = stream.fields.relatedFromTotals;
+		delete stream.fields.relatedFromTotals;
+	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
 		delete stream.fields.isRequired;

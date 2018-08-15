@@ -1585,6 +1585,12 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($messageTotals = $this->get('messageTotals')) {
 			$result['messageTotals'] = $messageTotals;
 		}
+		if ($relatedToTotals = $this->get('relatedToTotals')) {
+			$result['relatedToTotals'] = $relatedToTotals;
+		}
+		if ($relatedFromTotals = $this->get('relatedFromTotals')) {
+			$result['relatedFromTotals'] = $relatedFromTotals;
+		}
 		return $result;
 	}
 
