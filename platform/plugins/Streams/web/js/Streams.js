@@ -4995,18 +4995,22 @@ Q.onInit.add(function _Streams_onInit() {
 					break;
 				case 'Streams/relatedFrom':
 					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'From', 1);
 					_relationHandlers(_streamRelatedFromHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/relatedTo':
 					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'To', 1);
 					_relationHandlers(_streamRelatedToHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/unrelatedFrom':
 					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'From', -1);
 					_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/unrelatedTo':
 					_updateRelatedCache(msg, instructions);
+					_updateRelatedTotalsCache(msg, instructions, 'To', -1);
 					_relationHandlers(_streamUnrelatedToHandlers, msg, stream, instructions);
 					break;
 				case 'Streams/updatedRelateFrom':
@@ -5135,6 +5139,20 @@ function _updateMessageCache(msg) {
 		var args = JSON.parse(k), ordinal = args[2];
 		if (ordinal && ordinal.max && ordinal.max < 0) {
 			this.remove(k); 
+		}
+	});
+}
+
+function _updateRelatedTotalsCache(msg, instructions, which, change) {
+	Streams.get.cache.each([msg.publisherId, msg.streamName],
+	function (k, v) {
+		var stream = (v && !v.params[0]) ? v.subject : null;
+		if (!stream) {
+			return;
+		}
+		var f = 'related' + which + 'Totals';
+		if (stream[f] && stream[f][instructions.type]) {
+			stream[f][instructions.type] += change;
 		}
 	});
 }
