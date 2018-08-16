@@ -1512,7 +1512,8 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Returns array of fields allowed for user
+	 * Returns the fields and values we can export to clients.
+	 * Can also contain "messageTotals", "relatedToTotals" and "relatedFromTotals".
 	 * @method exportArray
 	 * @param {array} $options=array()
 	 * @param {string} [$options.asUserId] Defaults to the logged in user, or "" if not logged in
@@ -1584,6 +1585,12 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		if ($messageTotals = $this->get('messageTotals')) {
 			$result['messageTotals'] = $messageTotals;
+		}
+		if ($relatedToTotals = $this->get('relatedToTotals')) {
+			$result['relatedToTotals'] = $relatedToTotals;
+		}
+		if ($relatedFromTotals = $this->get('relatedToTotals')) {
+			$result['relatedFromTotals'] = $relatedFromTotals;
 		}
 		return $result;
 	}

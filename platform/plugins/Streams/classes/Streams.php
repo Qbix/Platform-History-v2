@@ -329,6 +329,12 @@ abstract class Streams extends Base_Streams
 	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of ($streamName => $messageTypes) here
 	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedToTotals]
+	 *   Pass an array of ($streamName => $relationTypes) here
+	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedFromTotals]
+	 *   Pass an array of ($streamName => $relationTypes) here
+	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -405,50 +411,9 @@ abstract class Streams extends Base_Streams
 
 		Streams::calculateAccess($asUserId, $publisherId, $streams, false);
 		
-		if (!empty($options['withMessageTotals'])) {
-			$infoForTotals = array();
-			if (isset($options['withMessageTotals']['*'])) {
-				$trows = Streams_MessageTotal::select()->where(array(
-					'publisherId' => $publisherId,
-					'streamName' => $name,
-					'messageType' => $options['withMessageTotals']['*']
-				))->fetchDbRows();
-				unset($options['withMessageTotals']['*']);
-			} else {
-				$trows = array();
-			}
-			foreach ($options['withMessageTotals'] as $n => $mt) {
-				if (!$mt) {
-					continue;
-				}
-				if (!is_array($mt)) {
-					$mt = array($mt);
-				}
-				ksort($mt);
-				$j = json_encode($mt);
-				$infoForTotals[$j] = array($n, $mt);
-			}
-			foreach ($infoForTotals as $info) {
-				$frows = Streams_MessageTotal::select()->where(array(
-					'publisherId' => $publisherId,
-					'streamName' => $info[0],
-					'messageType' => $info[1]
-				))->fetchDbRows();
-				$trows = array_merge($trows, $frows);
-			}
-			foreach ($streams as $s) {
-				if (!$s->testReadLevel('messages')) {
-					return;
-				}
-				$messageTotals = array();
-				foreach ($trows as $row) {
-					if ($row->streamName === $s->name) {
-						$messageTotals[$row->messageType] = $row->messageCount;
-					}
-				}
-				$s->set('messageTotals', $messageTotals);
-			}
-		}
+		$streams = self::messageTotals($publisherId, $name, $options, $streams);
+		$streams = self::relatedToTotals($publisherId, $name, $options, $streams);
+		$streams = self::relatedFromTotals($publisherId, $name, $options, $streams);
 
 		if (is_array($name) and count($name) > 1) {
 			// put the streams back in the same internal PHP array order
@@ -549,6 +514,12 @@ abstract class Streams extends Base_Streams
 	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of arrays ($streamName => $messageTypes) here
 	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedToTotals]
+	 *   Pass an array of ($streamName => $relationTypes) here
+	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedFromTotals]
+	 *   Pass an array of ($streamName => $relationTypes) here
+	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -4312,6 +4283,156 @@ abstract class Streams extends Base_Streams
 				$stream->set($className, $row);
 			}
 		}
+	}
+	
+	private static function messageTotals($publisherId, $name, $options, $streams)
+	{
+		if (empty($options['withMessageTotals'])) {
+			return $streams;
+		}
+		$infoForTotals = array();
+		if (isset($options['withMessageTotals']['*'])) {
+			$trows = Streams_MessageTotal::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $name,
+				'messageType' => $options['withMessageTotals']['*']
+			))->fetchDbRows();
+			unset($options['withMessageTotals']['*']);
+		} else {
+			$trows = array();
+		}
+		foreach ($options['withMessageTotals'] as $n => $mt) {
+			if (!$mt) {
+				continue;
+			}
+			if (!is_array($mt)) {
+				$mt = array($mt);
+			}
+			ksort($mt);
+			$j = json_encode($mt);
+			$infoForTotals[$j] = array($n, $mt);
+		}
+		foreach ($infoForTotals as $info) {
+			$frows = Streams_MessageTotal::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $info[0],
+				'messageType' => $info[1]
+			))->fetchDbRows();
+			$trows = array_merge($trows, $frows);
+		}
+		foreach ($streams as $s) {
+			if (!$s->testReadLevel('messages')) {
+				return;
+			}
+			$messageTotals = array();
+			foreach ($trows as $row) {
+				if ($row->streamName === $s->name) {
+					$messageTotals[$row->messageType] = $row->messageCount;
+				}
+			}
+			$s->set('messageTotals', $messageTotals);
+		}
+		return $streams;
+	}
+	
+	private static function relatedToTotals($publisherId, $name, $options, $streams)
+	{
+		if (empty($options['withRelatedToTotals'])) {
+			return $streams;
+		}
+		$infoForTotals = array();
+		if (isset($options['withRelatedToTotals']['*'])) {
+			$trows = Streams_RelatedToTotal::select()->where(array(
+				'toPublisherId' => $publisherId,
+				'toStreamName' => $name,
+				'relationType' => $options['withRelatedToTotals']['*']
+			))->fetchDbRows();
+			unset($options['withRelatedToTotals']['*']);
+		} else {
+			$trows = array();
+		}
+		foreach ($options['withRelatedToTotals'] as $n => $mt) {
+			if (!$mt) {
+				continue;
+			}
+			if (!is_array($mt)) {
+				$mt = array($mt);
+			}
+			ksort($mt);
+			$j = json_encode($mt);
+			$infoForTotals[$j] = array($n, $mt);
+		}
+		foreach ($infoForTotals as $info) {
+			$frows = Streams_RelatedToTotal::select()->where(array(
+				'toPublisherId' => $publisherId,
+				'toStreamName' => $info[0],
+				'relationType' => $info[1]
+			))->fetchDbRows();
+			$trows = array_merge($trows, $frows);
+		}
+		foreach ($streams as $s) {
+			if (!$s->testReadLevel('relations')) {
+				return;
+			}
+			$relatedToTotals = array();
+			foreach ($trows as $row) {
+				if ($row->toStreamName === $s->name) {
+					$relatedToTotals[$row->relationType] = $row->relationCount;
+				}
+			}
+			$s->set('relatedToTotals', $relatedToTotals);
+		}
+		return $streams;
+	}
+	
+	private static function relatedFromTotals($publisherId, $name, $options, $streams)
+	{
+		if (empty($options['withRelatedFromTotals'])) {
+			return $streams;
+		}
+		$infoForTotals = array();
+		if (isset($options['withRelatedFromTotals']['*'])) {
+			$trows = Streams_RelatedFromTotal::select()->where(array(
+				'fromPublisherId' => $publisherId,
+				'fromStreamName' => $name,
+				'relationType' => $options['withRelatedFromTotals']['*']
+			))->fetchDbRows();
+			unset($options['withRelatedFromTotals']['*']);
+		} else {
+			$trows = array();
+		}
+		foreach ($options['withRelatedFromTotals'] as $n => $mt) {
+			if (!$mt) {
+				continue;
+			}
+			if (!is_array($mt)) {
+				$mt = array($mt);
+			}
+			ksort($mt);
+			$j = json_encode($mt);
+			$infoForTotals[$j] = array($n, $mt);
+		}
+		foreach ($infoForTotals as $info) {
+			$frows = Streams_RelatedFromTotal::select()->where(array(
+				'fromPublisherId' => $publisherId,
+				'fromStreamName' => $info[0],
+				'relationType' => $info[1]
+			))->fetchDbRows();
+			$trows = array_merge($trows, $frows);
+		}
+		foreach ($streams as $s) {
+			if (!$s->testReadLevel('relations')) {
+				return;
+			}
+			$relatedFromTotals = array();
+			foreach ($trows as $row) {
+				if ($row->fromStreamName === $s->name) {
+					$relatedFromTotals[$row->relationType] = $row->relationCount;
+				}
+			}
+			$s->set('relatedFromTotals', $relatedFromTotals);
+		}
+		return $streams;
 	}
 
 	/**
