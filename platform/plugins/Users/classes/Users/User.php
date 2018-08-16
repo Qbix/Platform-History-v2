@@ -87,9 +87,11 @@ class Users_User extends Base_Users_User
 	}
 
 	/**
+	 * Returns the fields and values we can export to clients.
+	 * Can also contain "messageTotals", "relatedToTotals" and "relatedFromTotals".
 	 * @method exportArray
 	 * @param {$array} [$options=null] can include the following:
-	 *  "asAvatar": set to true if only the avatar fields should be exported
+	 * @param {string} [$options.asAvatar] set to true if only the avatar fields should be exported
 	 * @return {array}
 	 */
 	function exportArray($options = null)

@@ -13,8 +13,11 @@ function Streams_stream_response_stream()
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
 	$options = array('withParticipant' => true, 'refetch' => true);
-	if (!empty($_REQUEST['messageTotals'])) {
-		$options['withMessageTotals'][$name] = $_REQUEST['messageTotals'];
+	$wNames = array('withMessageTotals', 'withRelatedToTotals', 'withRelatedFromTotals');
+	foreach ($wNames as $wn) {
+		if (!empty($_REQUEST[$wn])) {
+			$options[$wn][$name] = $_REQUEST[$wn];
+		}
 	}
 
 	Streams::$cache['stream'] = $stream = Streams::fetchOne(
