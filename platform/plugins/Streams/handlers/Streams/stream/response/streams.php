@@ -14,6 +14,12 @@ function Streams_stream_response_streams()
 	if (isset($limit)) {
 		$options['limit'] = $limit;
 	}
+	$wNames = array('withMessageTotals', 'withRelatedToTotals', 'withRelatedFromTotals');
+	foreach ($wNames as $wn) {
+		if (!empty($_REQUEST[$wn])) {
+			$options[$wn]['*'] = $_REQUEST[$wn];
+		}
+	}
 	$streams = Streams::fetch(
 		$userId,
 		$publisherId,

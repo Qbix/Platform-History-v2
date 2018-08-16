@@ -587,7 +587,9 @@ Q.Tool.define({
  *   @param {Number|Object} [extra.participants=0] Optionally fetch up to that many participants
  *   @param {Number|Object} [extra.messages=0] Optionally fetch up to that many latest messages
  *   @param {String} [extra.messageType] optional String specifying the type of messages to fetch
- *   @param {Array} [extra.messageTotals] an array of message types to get messageTotals for in the returned stream object
+ *   @param {Array} [extra.withMessageTotals] an array of message types to get messageTotals for in the returned stream object
+ *   @param {Array} [extra.withRelatedToTotals] an array of relation types to get relatedToTotals for in the returned stream object
+ *   @param {Array} [extra.withRelatedFromTotals] an array of relation types to get relatedFromTotals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
  *    if any fields named in this array are == null
@@ -879,6 +881,8 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 			access: fields.access,
 			participant: fields.participant,
 			messageTotals: fields.messageTotals,
+			relatedToTotals: fields.relatedToTotals,
+			relatedFromTotals: fields.relatedFromTotals,
 			isRequired: fields.isRequired
 		});
 	}
@@ -898,6 +902,8 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 			for (var k in fields) {
 				if ((k in this.fields)
 				|| k === 'messageTotals'
+				|| k === 'relatedToTotals'
+				|| k === 'relatedFromTotals'
 				|| k === 'participant'
 				|| k === 'access'
 				|| k === 'isRequired') continue;
@@ -1591,6 +1597,8 @@ var Stream = Streams.Stream = function (fields) {
 		'closedTime',
 		'access',
 		'messageTotals',
+		'relatedToTotals',
+		'relatedFromTotals',
 		'isRequired',
 		'participant'
 	]);
@@ -4525,6 +4533,14 @@ function prepareStream(stream) {
 	if (stream.fields.messageTotals) {
 		stream.messageTotals = stream.fields.messageTotals;
 		delete stream.fields.messageTotals;
+	}
+	if (stream.fields.relatedToTotals) {
+		stream.relatedToTotals = stream.fields.relatedToTotals;
+		delete stream.fields.relatedToTotals;
+	}
+	if (stream.fields.relatedFromTotals) {
+		stream.relatedFromTotals = stream.fields.relatedFromTotals;
+		delete stream.fields.relatedFromTotals;
 	}
 	if (stream.fields.isRequired) {
 		stream.isRequired = stream.fields.isRequired;
