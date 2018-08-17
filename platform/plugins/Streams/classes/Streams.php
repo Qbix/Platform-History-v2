@@ -1882,6 +1882,8 @@ abstract class Streams extends Base_Streams
 		
 		$newRT = array();
 		$newRF = array();
+		$newRTT = array();
+		$newRFT = array();
 		$weights2 = array();
 		foreach ($$arrayField as $sn) {
 			if (isset($relatedToArray[$sn])) {
@@ -1946,30 +1948,34 @@ abstract class Streams extends Base_Streams
 			foreach (array('toStreamName', 'fromStreamName') as $f) {
 				$newRT[$sn][$f] = $newRF[$sn][$f] = ($f === $arrayField) ? $sn : $$f;
 			}
-			$newRTT = compact(array(
+			$newRTT[] = array(
 				'toPublisherId' => $category->publisherId,
 				'toStreamName' => $category->name,
 				'relationType' => $type,
 				'fromStreamType' => $stream->type,
 				'relationCount' => 1
-			));
-			$newRFT = compact(array(
+			);
+			$newRFT[] = array(
 				'fromPublisherId' => $stream->publisherId,
 				'fromStreamName' => $stream->name,
 				'relationType' => $type,
 				'toStreamType' => $category->type,
 				'relationCount' => 1
-			));
+			);
 		}
 		// Insert/update all the relatedTo and relatedFrom rows
 		Streams_RelatedTo::insertManyAndExecute($newRT);
 		Streams_RelatedFrom::insertManyAndExecute($newRF);
 		// Insert/update all the corresponding totals
 		Streams_RelatedToTotal::insertManyAndExecute($newRTT, array(
-			'relationCount' => new Db_Expression('relationCount + 1')
+			'onDuplicateKeyUpdate' => array(
+				'relationCount' => new Db_Expression('relationCount + 1')
+			)
 		));
 		Streams_RelatedFromTotal::insertManyAndExecute($newRFT, array(
-			'relationCount' => new Db_Expression('relationCount + 1')
+			'onDuplicateKeyUpdate' => array(
+				'relationCount' => new Db_Expression('relationCount + 1')
+			)
 		));
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
@@ -2241,7 +2247,7 @@ abstract class Streams extends Base_Streams
 			Streams_RelatedToTotal::update()->set(array(
 				'relationCount' => new Db_Expression('relationCount - 1')
 			))->where(array(
-				'toPublisherId' => $catgeory->publisherId,
+				'toPublisherId' => $category->publisherId,
 				'toStreamName' => $category->name,
 				'relationType' => $type,
 				'fromStreamType' => $stream->type,
