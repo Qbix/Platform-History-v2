@@ -605,7 +605,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".passphraseHash");
-		if (strlen($value) > 64)
+		if (strlen($value) > 255)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".passphraseHash");
 		return array('passphraseHash', $value);			
 	}
@@ -616,8 +616,7 @@ return array (
 	 */
 	function maxSize_passphraseHash()
 	{
-
-		return 64;			
+		return 255;
 	}
 
 	/**
@@ -626,19 +625,17 @@ return array (
 	 */
 	static function column_passphraseHash()
 	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '64',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
-);			
+		return array (
+			0 => array (
+				0 => 'varchar',
+				1 => '255',
+				2 => '',
+				3 => false
+			),
+			1 => true,
+			2 => '',
+			3 => NULL
+		);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0",
+				"version": "1.0.1",
 				"compatible": "0.9.3",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -55,6 +55,12 @@
 			"Users": {
 				"*": ["Users/content"]
 			}
+		},
+		"views": {
+			"Users/email/activation.php": {"html": true},
+			"Users/email/addEmail.php": {"html": true},
+			"Users/email/resend.php": {"html": true},
+			"Users/email/authenticated.php": {"html": true}
 		}
 	},
 	"Users": {

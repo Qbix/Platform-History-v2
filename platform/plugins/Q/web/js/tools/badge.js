@@ -15,6 +15,12 @@
 	 *  	@param {string}  [options.tl.left=0] Badge left position.
 	 *  	@param {string}  [options.tl.right] Badge right position. if defined - left position ignored.
 	 *  	@param {string}  [options.tl.bottom] Badge bottom position. if defined - top position ignored.
+	 *  	@param {string}  [options.tl.font-size] Badge content font size.
+	 *  	@param {string}  [options.tl.content] Badge content.
+	 *  	@param {string}  [options.tl.onClick] Badge click event handler.
+	 *  	@param {string}  [options.tl.className] Name of class to add to element
+	 *  	@param {string}  [options.tl.display] css "display" style for corner element.
+	 *		@param {Q.Event} [options.tl.onCreate] Event executed every time badge element created. Get tool as context and badge element, corner, style as arguments.
 	 *  @param {string}  [options.tr] settings for top right badge. If == null - badge remove.
 	 *  	@param {string}  [options.tr.icon] Badge icon. Can be "{{Q}}/img/..." or "../img/...". If icon=null - badge remove.
 	 *  	@param {string}  [options.tr.size=options.size] Badge width.
@@ -22,6 +28,12 @@
 	 *  	@param {string}  [options.tr.right=0] Badge right position.
 	 *  	@param {string}  [options.tr.left] Badge left position. if defined - right position ignored.
 	 *  	@param {string}  [options.tr.bottom] Badge bottom position. if defined - top position ignored.
+	 *  	@param {string}  [options.tr.font-size] Badge content font size.
+	 *  	@param {string}  [options.tr.content] Badge content.
+	 *  	@param {string}  [options.tr.onClick] Badge click event handler.
+	 *  	@param {string}  [options.tr.className] Name of class to add to element
+	 *  	@param {string}  [options.tr.display] css "display" style for corner element.
+	 *		@param {Q.Event} [options.tr.onCreate] Event executed every time badge element created. Get tool as context and badge element, corner, style as arguments.
 	 *  @param {string}  [options.br] settings for bottom right badge. If == null - badge remove.
 	 *  	@param {string}  [options.br.icon] Badge icon. Can be "{{Q}}/img/..." or "../img/...". If icon=null - badge remove.
 	 *  	@param {string}  [options.br.size=options.size] Badge width.
@@ -29,6 +41,12 @@
 	 *  	@param {string}  [options.br.bottom=0] Badge bottom position.
 	 *  	@param {string}  [options.br.left] Badge left position. if defined - right position ignored.
 	 *  	@param {string}  [options.br.top] Badge top position. if defined - bottom position ignored.
+	 *  	@param {string}  [options.br.font-size] Badge content font size.
+	 *  	@param {string}  [options.br.content] Badge content.
+	 *  	@param {string}  [options.br.onClick] Badge click event handler.
+	 *  	@param {string}  [options.br.className] Name of class to add to element
+	 *  	@param {string}  [options.br.display] css "display" style for corner element.
+	 *		@param {Q.Event} [options.br.onCreate] Event executed every time badge element created. Get tool as context and badge element, corner, style as arguments.
 	 *  @param {string}  [options.bl] settings for bottom left badge
 	 *  	@param {string}  [options.bl.icon] Badge icon. Can be "{{Q}}/img/..." or "../img/...". If icon=null - badge remove.
 	 *  	@param {string}  [options.bl.size=options.size] Badge width.
@@ -36,10 +54,16 @@
 	 *  	@param {string}  [options.bl.left=0] Badge left position.
 	 *  	@param {string}  [options.bl.right] Badge right position. if defined - left position ignored.
 	 *  	@param {string}  [options.bl.top] Badge top position. if defined - bottom position ignored.
+	 *  	@param {string}  [options.bl.font-size] Badge content font size.
+	 *  	@param {string}  [options.bl.content] Badge content.
+	 *  	@param {string}  [options.bl.onClick] Badge click event handler.
+	 *  	@param {string}  [options.bl.className] Name of class to add to element
+	 *  	@param {string}  [options.bl.display] css "display" style for corner element.
+	 *		@param {Q.Event} [options.bl.onCreate] Event executed every time badge element created. Get tool as context and badge element, corner, style as arguments.
 	 *  @param {string}  [options.size="15px"] Default badge size.
 	 * @return {Q.Tool}
 	 */
-	Q.Tool.define("Q/badge", function (options) {
+	Q.Tool.define("Q/badge", function () {
 		var tool = this;
 		var state = this.state;
 		var $te = $(tool.element);
@@ -53,7 +77,7 @@
 		Q.addStylesheet('{{Q}}/css/badge.css', function () {
 			state.interval = setInterval(function () {
 				tool.refresh();
-			}, 1000);
+			}, 3000);
 		});
 	},
 	{
@@ -75,8 +99,8 @@
 				var badgeStyle = Q.getObject(corner, state);
 				var $badgeElement = Q.getObject(corner, tool);
 
-				// if empty corner or corner.icon - remove this badge
-				if (Q.typeOf(badgeStyle) !== "object" || !Q.getObject("icon", badgeStyle)) {
+				// if empty corner - remove this badge
+				if (Q.typeOf(badgeStyle) !== "object") {
 					if ($badgeElement instanceof jQuery) {
 						$badgeElement.remove();
 					}
@@ -90,8 +114,17 @@
 				var style = {
 					width: badgeStyle.size,
 					height: badgeStyle.size,
-					'background-image': 'url(' + Q.url(badgeStyle.icon) + ')'
+					"line-height": badgeStyle.size,
+					'font-size': Q.getObject(['font-size'], badgeStyle) || 'auto'
 				};
+
+				if (badgeStyle.icon) {
+					style['background-image'] = 'url(' + Q.url(badgeStyle.icon) + ')';
+				}
+
+				if (badgeStyle.display) {
+					style.display = badgeStyle.display;
+				}
 
 				// default position
 				switch (corner) {
@@ -163,11 +196,37 @@
 
 				// if badge element don't exist - create one
 				if (!($badgeElement instanceof jQuery)) {
-					$badgeElement = Q.setObject(corner, $("<div class='Q_badge'>").appendTo($te), tool);
+					$badgeElement = $("<div class='Q_badge'>").appendTo($te);
+
+					if (Q.typeOf(badgeStyle.onClick) === 'function') {
+						$badgeElement.on('click', badgeStyle.onClick);
+					}
+
+					if (badgeStyle.className) {
+						$badgeElement.addClass(badgeStyle.className);
+					}
+
+					tool[corner] = $badgeElement;
+
+					// execute onCreate event every time element created
+					Q.handle(badgeStyle.onCreate, tool, [$badgeElement, corner, style]);
+				}
+
+				if (badgeStyle.content) {
+					$badgeElement.html(badgeStyle.content);
 				}
 
 				// remove old styles and apply new
 				$badgeElement.removeAttr("style").css(style);
+			});
+
+			// remove copied elements
+			$(".Q_badge").each(function(){
+				var $this = $(this);
+				
+				if (!$this.parent().hasClass("Q_badge_tool")) {
+					$this.remove();
+				}
 			});
 		},
 		Q: {
