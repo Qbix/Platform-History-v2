@@ -3,7 +3,10 @@
 function Users_activate_post()
 {
 	Q_Valid::nonce(true);
-	
+
+	/**
+	 * @var Users_User $user
+	*/
 	$email = $mobile = $type = $user = null;
 	extract(Users::$cache, EXTR_IF_EXISTS);
 

@@ -924,7 +924,11 @@ class Q_Session
 	{
 		self::start();
 		if ($overwrite or !isset($_SESSION['Q']['nonce'])) {
-			$_SESSION['Q']['nonce'] = sha1(mt_rand().microtime());
+			if (is_callable('random_bytes')) {
+				$_SESSION['Q']['nonce'] = bin2hex(random_bytes(32));
+			} else {
+				$_SESSION['Q']['nonce'] = sha1(mt_rand().microtime());
+			}
 		}
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
@@ -1051,7 +1055,11 @@ class Q_Session
 	 */
 	static function generateId()
 	{
-		$id = str_replace('-', '', Q_Utils::uuid());
+		if (is_callable('random_bytes')) {
+			$id = bin2hex(random_bytes(16));
+		} else {
+			$id = str_replace('-', '', Q_Utils::uuid());
+		}
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		if (isset($secret)) {
 			$sig = Q_Utils::signature($id, "$secret");
@@ -1064,7 +1072,13 @@ class Q_Session
 			$id
 		);
 	}
-
+	/**
+	 * @param string $id
+	 *
+	 * @return array
+	 * @throws Q_Exception
+	 * @throws TypeError
+	*/
 	protected static function decodeId($id)
 	{
 		if (!$id) {
@@ -1100,7 +1114,7 @@ class Q_Session
 		$b = substr($result, 32, 32);
 		$secret = Q_Config::get('Q', 'external', 'secret', null);
 		$c = isset($secret)
-			? ($b === substr(Q_Utils::signature($a, $secret), 0, 32))
+			? Q_Utils::hashEquals($b, substr(Q_Utils::signature($a, $secret), 0, 32))
 			: true;
 		return array($c, $a, $b);
 	}

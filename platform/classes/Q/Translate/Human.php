@@ -4,7 +4,6 @@ class Q_Translate_Human {
 
 	function __construct(Q_Translate $parent)
 	{
-		$this->apiKey = Q_Config::get('Translation', 'google', 'key')['key'];
 		$this->parent = $parent;
 	}
 	

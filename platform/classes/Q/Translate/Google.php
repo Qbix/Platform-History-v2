@@ -4,13 +4,13 @@ class Q_Translate_Google {
 
 	function __construct(Q_Translate $parent)
 	{
-		$this->apiKey = Q_Config::get('Translation', 'google', 'key')['key'];
+		$this->apiKey = Q_Config::get('Q', 'translate', 'google', 'key', '');
 		$this->parent = $parent;
 	}
 
 	function saveAll() {
 		list($fromLang, $locale) = preg_split("/(_|-)/", $this->parent->options['source']);
-		$src = $this->parent->getSrc($fromLang, $locale);
+		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
 			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
 				if (($fromLang == $toLang) && ($this->parent->options['in'] === $this->parent->options['out'])) {
@@ -18,10 +18,12 @@ class Q_Translate_Google {
 				}
 			}
 			if (($toLang === $fromLang) && $this->parent->options['out']) {
-				$res = $src;
+				$res = $in;
 			}
 			if ($toLang !== $fromLang) {
-				$res = $this->translate($fromLang, $toLang, $src);
+				$out = $this->parent->getSrc($toLang, $locale, false, $objects);
+				echo "Processing $fromLang->$toLang".PHP_EOL;
+				$res = $this->translate($fromLang, $toLang, $in, $out);
 			}
 			$files = $this->saveJson($toLang, $res);
 			foreach ($localeNames as $localeName) {
@@ -34,60 +36,92 @@ class Q_Translate_Google {
 
 	private function saveJson($lang, $data)
 	{
-		$jsonFiles = [];
+		$jsonFiles = array();
 		foreach ($data as $d) {
-			$arr =& $jsonFiles[$d['dirname']];
+			$dirname = $d['dirname'];
+			$arr =& $jsonFiles[$dirname];
 			if (!sizeof($arr)) {
-				$arr = [];
+				$arr = array();
 			}
 			array_push($d['key'], $d['value']);
-			$jsonFiles[$d['dirname']] = array_merge_recursive($arr, $this->parent->arrayToBranch($d['key']));
+			$jsonFiles[$dirname] = array_merge_recursive($arr, $this->parent->arrayToBranch($d['key']));
 		}
-		$filenames = [];
-		foreach ($jsonFiles as $dirname => $json) {
+		$filenames = array();
+		foreach ($jsonFiles as $dirname => $content) {
 			$dir = $this->parent->createDirectory($dirname);
 			$filename = $this->parent->joinPaths($dir, $lang . '.json');
 			$filenames[] = $filename;
 			$fp = fopen($filename, 'w');
-			fwrite($fp, json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+			fwrite($fp, json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 			fclose($fp);
 		}
 		return $filenames;
 	}
 
 	private function replaceTagsByNumbers($data, $startNumber = 999) {
-		for ($i = 0; $i < sizeof($data); $i++) {
-			if (preg_match_all("/{{(.*?)}}/", $data[$i]['value'], $matches)) {
-				$j = 0;
-				foreach($matches[0] as $search) {
-					$data[$i]['value'] = str_replace($search, "{{" . ($j + $startNumber) . "}}", $data[$i]['value']);
-					$data[$i]['value'];
-					$j++;
-				}
-				$data[$i]['tags'] = $matches[0];
+		foreach ($data as $k => &$v) {
+			if (!preg_match_all("/{{(.*?)}}/", $v['value'], $matches)) {
+				continue;
 			}
-		};
+			$j = 0;
+			foreach($matches[0] as $search) {
+				$v['value'] = str_replace($search, "{{" . ($j + $startNumber) . "}}", $v['value']);
+				$v['value'];
+				$j++;
+			}
+			$v['tags'] = $matches[0];
+		}
 		return $data;
 	}
 
 	private function revertTags($data, $startNumber = 999) {
-		for ($i = 0; $i < sizeof($data); $i++) {
-			if (!empty($data[$i]['tags'])) {
-				$j = 0;
-				foreach($data[$i]['tags'] as $tag) {
-					$data[$i]['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $data[$i]['value']);
-					$j++;
-				}
+		foreach ($data as $k => &$d) {
+			if (empty($d['tags'])) {
+				continue;
+			}
+			$j = 0;
+			foreach($d['tags'] as $tag) {
+				$d['value'] = str_replace("{{" . ($j + $startNumber) . "}}", $tag, $d['value']);
+				$d['value'] = str_replace("({" . ($j + $startNumber) . "}}", $tag, $d['value']);
+				$j++;
 			}
 		};
 		return $data;
 	}
 
-	private function translate($fromLang, $toLang, $data, $chunkSize = 100)
+	private function translate($fromLang, $toLang, $in, &$out = array(), $chunkSize = 100)
 	{
-		$data = $this->replaceTagsByNumbers($data);
-		$chunks = array_chunk($data, $chunkSize);
-		$translations = [];
+		$in = $this->replaceTagsByNumbers($in);
+		$in2 = array();
+		$rt = Q::ifset($this, 'parent', 'options', 'retranslate', array());
+		$rt = is_array($rt) ? $rt : array($rt);
+		foreach ($in as $n => $v) {
+			$key = $v['dirname'] . "\t" . implode("\t", $v['key']);
+			$key2 = implode("/", $v['key']);
+			$doIt = false;
+			if (empty($out[$key])) {
+				$doIt = true;
+			} else {
+				foreach ($rt as $v2) {
+					$parts = explode('/', $v2);
+					foreach ($parts as $i => $p) {
+						if ($v['key'][$i] !== $p) {
+							break 2;
+						}
+					}
+					$doIt = true;
+				}
+			}
+			if ($doIt) {
+				$v['originalKey'] = $n;
+				$in2[] = $v;
+			}
+		}
+		$translations = array();
+		if (!$in2) {
+			return array();
+		}
+		$chunks = array_chunk($in2, $chunkSize);
 		$count = 0;
 		foreach ($chunks as $chunk) {
 			$qArr = array_map(function ($item) {
@@ -98,23 +132,27 @@ class Q_Translate_Google {
 			$postFields = array("q" => $qArr, "source" => $fromLang, "target" => $toLang, "format" => $this->parent->options['google-format']);
 			$this->curlSetoptCustomPostfields($ch, $postFields);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$response = json_decode(curl_exec($ch), true);
+			$json = curl_exec($ch);
+			$response = json_decode($json, true);
 			if (!$response) {
-				die("Wrong translation response\n");
+				throw new Q_Exception ("Bad translation response");
 			}
 			if ($response['error']) {
-				die($response['error']['message']);
+				$more = "Make sure you have Q/translate/google/key specified.";
+				throw new Q_Exception($response['error']['message'] . $more);
 			}
 			$count += sizeof($chunk);
 			echo "Translated " . $count . " queries of " . $toLang . "\n";
 			$translations = array_merge($translations, $response['data']['translations']);
 			curl_close($ch);
 		}
-		foreach ($data as $n => & $d) {
-			$d['value'] = $translations[$n]['translatedText'];
+		$res = $out;
+		foreach ($in2 as $n => $d) {
+			$originalKey = $d['originalKey'];
+			$res[$originalKey] = $d;
+			$res[$originalKey]['value'] = $translations[$n]['translatedText'];
 		}
-		$data = $this->revertTags($data);
-		return $data;
+		return $this->revertTags($res);
 	}
 
 	private function curlSetoptCustomPostfields($ch, $postfields)
