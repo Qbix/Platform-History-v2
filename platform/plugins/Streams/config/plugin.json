@@ -251,8 +251,25 @@
 				"description": "gallery of images",
 				"create": true,
 				"edit": true,
-				"defaults": {
+				"defaults": { 
 					"title": "Untitled Gallery"
+				}
+			},
+			"Streams/album": {
+				"description": "",
+				"create": true,
+				"edit": true,
+				"sizes": [
+					"40",
+					"50",
+					"80",
+					"200",
+					"x200",
+					"200x"
+				],
+				"defaults": {
+					"icon": "Streams/image",
+					"title": "Untitled Image"
 				}
 			},
 			"Streams/audio": {
@@ -406,7 +423,8 @@
 				"Streams/user/mobileNumber",
 				"Streams/user/interests",
 				"Streams/contacts",
-				"Streams/labels"
+				"Streams/labels",
+				"Streams/image/album"
 			]
 		},
 		"onUpdate": { /* streams to update when a row is updated */

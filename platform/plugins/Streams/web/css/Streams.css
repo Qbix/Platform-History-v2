@@ -405,9 +405,9 @@
 .Streams_preview_contents .Q_inplace_tool_static_container {
 	overflow-x: hidden; text-overflow: ellipsis; white-space: nowrap; 
 }
-.Streams_preview .Streams_preview_title { margin: 0; padding: 0px; line-height: 24px; font-size: 18px; font-weight: normal; }
+.Streams_preview .Streams_preview_title { margin: 0; padding: 0px; line-height: 24px; font-size: 16px; font-weight: normal; }
 .Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
-.Streams_image_preview_tool { text-align: center; display: inline-block; }
+.Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; padding: 10px; margin: 4px;border: 1px solid #c5c0c0; }
 .Streams_preview_tool .Streams_preview_icon,
 .Streams_preview_tool .Streams_preview_add { margin-right: 3px; }
 
@@ -472,7 +472,7 @@
 	color: #222;
 }
 .Streams_chat_message {
-	color: #222;
+	color: #222; 
 	max-height: 100px;
 	overflow: hidden;
 	word-wrap: break-word;
@@ -697,7 +697,7 @@
 .Streams_callToAction h2 { font-size: 25px; }
 .Streams_explanation { text-align: left; }
 
-.Streams_related_composer { display: inline-block; margin-right: 10px; }
+.Streams_related_composer { display: inline-block; margin-right: 10px; width: 100%; text-align: left; border: none; }
 .Streams_file_preview_tool label { cursor: pointer; }
 .Streams_file_form,
 .Streams_file_form input { 
@@ -893,4 +893,33 @@
 
 .Streams_chat_with_vote .Streams_chat_bubble {
 	margin-right: 20px;
+}
+ 
+.fb_selector-btn {
+	white-space: nowrap;
+    border-width: 1px;
+    font-size: 1em;
+	padding: 5px 10px 5px 10px;
+    color: #fff; 
+    cursor: pointer;
+    border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    -webkit-border-radius: 0.3em;
+    border-color: rgba(200,2050,200,50.5);
+    border-bottom-color: rgba(0,50,200,50.2);
+    border-right-color: rgba(0,50,200,50.2);
+    box-sizing: content-box;
+    box-shadow: 0 0 1px rgba(50,50,50,0.5);
+    -moz-box-shadow: 0 0 1px rgba(50,50,50,0.5);
+	-webkit-box-shadow: 0 0 1px rgba(50,50,50,0.5);
+	background: #444;
+	margin: 0 10px 10px 10px;
+}
+
+.Streams_photoSelector_albums{
+	margin-bottom: 10px !important;
+}
+
+.Streams_photoSelector_container img {
+	margin: 5px !important;
 }
