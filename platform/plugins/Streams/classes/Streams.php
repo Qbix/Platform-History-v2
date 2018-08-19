@@ -4352,8 +4352,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $publisherId Stream publisher id
 	 * @param {string|array} $name Stream name or array of names
 	 * @param {array} $options Can be:
-	 *	 array('withRelatedFromTotals' => array('streamName' => true)) for all rows
-	 *	 array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 *	 array('withRelatedToTotals' => array('streamName' => true)) for all rows
+	 *	 array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
 	 * @return {array} Returns array('relationType_1' => array('fromStreamType' => relationCount), 'relationType_2' => ...)
 	*/
 	private static function relatedToTotals($publisherId, $name, $options, $streams)
