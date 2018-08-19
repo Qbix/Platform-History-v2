@@ -36,32 +36,54 @@
 		"title": "Icon",
 		"icon": "Streams/image",
 		"userField": "icon",
-		"platforms": {"facebook": "pic", "twitter": "profile_image_url"}
+		"platforms": {
+			"facebook": "pic",
+			"twitter": "profile_image_url"
+		}
 	},
 	"Streams/user/username": {
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
 		"userField": "username",
-		"platforms": {"facebook": "username", "twitter": "screen_name"}
+		"platforms": {
+			"facebook": "username",
+			"twitter": "screen_name"
+		}
 	},
 	"Streams/user/firstName": {
 		"type": "Streams/text/name",
 		"title": "First Name",
 		"icon": "",
-		"platforms": {"facebook": "first_name", "twitter": ["name", " ", 0]}
+		"platforms": {
+			"facebook": "first_name",
+			"twitter": [
+				"name",
+				" ",
+				0
+			]
+		}
 	},
 	"Streams/user/middleName": {
 		"type": "Streams/text/name",
 		"title": "Middle Name",
 		"icon": "",
-		"platforms": {"facebook": "middle_name", "twitter": ["name", " ", 1]}
-	},	
+		"platforms": {
+			"facebook": "middle_name",
+			"twitter": [
+				"name",
+				" ",
+				1
+			]
+		}
+	},
 	"Streams/user/lastName": {
 		"type": "Streams/text/name",
 		"title": "Last Name",
 		"icon": "",
-		"platforms": {"facebook": "last_name"}
+		"platforms": {
+			"facebook": "last_name"
+		}
 	},
 	"Streams/user/emailAddress": {
 		"type": "Streams/text/emailAddress",
@@ -70,7 +92,10 @@
 		"readLevel": 0,
 		"writeLevel": 0,
 		"adminLevel": 0,
-		"platforms": {"facebook": "email", "twitter": "email"}
+		"platforms": {
+			"facebook": "email",
+			"twitter": "email"
+		}
 	},
 	"Streams/user/mobileNumber": {
 		"type": "Streams/text/mobileNumber",
@@ -84,12 +109,14 @@
 		"type": "Streams/text/small",
 		"title": "Status",
 		"icon": ""
-	},	
+	},
 	"Streams/user/description": {
 		"type": "Streams/text/small",
 		"title": "Description",
 		"icon": "",
-		"platforms": {"facebook": "profile_blurb"}
+		"platforms": {
+			"facebook": "profile_blurb"
+		}
 	},
 	"Streams/user/presence": {
 		"type": "Streams/enum/presence",
@@ -120,31 +147,42 @@
 		"type": "Streams/text/url",
 		"title": "Facebook Profile",
 		"icon": "",
-		"platforms": {"facebook": "link"}
+		"platforms": {
+			"facebook": "link"
+		}
 	},
 	"Streams/user/facebook/uid": {
 		"type": "Streams/uid",
 		"title": "Facebook UserID",
 		"icon": "",
-		"platforms": {"facebook": "id"}
+		"platforms": {
+			"facebook": "id"
+		}
 	},
 	"Streams/user/twitter/uid": {
 		"type": "Streams/text/url",
 		"title": "Twitter UserID",
 		"icon": "",
-		"platforms": {"twitter": "id"}
+		"platforms": {
+			"twitter": "id"
+		}
 	},
 	"Streams/user/timezone": {
 		"type": "Streams/number/timezone",
 		"title": "Time Zone",
 		"icon": "",
-		"platforms": {"facebook": "timezone", "twitter": "time_zone"}
+		"platforms": {
+			"facebook": "timezone",
+			"twitter": "time_zone"
+		}
 	},
 	"Streams/user/gender": {
 		"type": "Streams/enum/gender",
 		"title": "Gender",
 		"icon": "",
-		"platforms": {"facebook": "gender"}
+		"platforms": {
+			"facebook": "gender"
+		}
 	},
 	"Streams/user/height": {
 		"type": "Streams/date/height",
@@ -155,7 +193,9 @@
 		"type": "Streams/date/birthday",
 		"title": "Birthday",
 		"icon": "",
-		"platforms": {"facebook": "birthday"}
+		"platforms": {
+			"facebook": "birthday"
+		}
 	},
 	"Streams/user/age": {
 		"type": "Streams/number/age",
@@ -181,24 +221,29 @@
 		"type": "Streams/category",
 		"title": "Music",
 		"icon": ""
-	},	
+	},
 	"Streams/user/tv": {
 		"type": "Streams/category",
 		"title": "TV Shows",
 		"icon": ""
-	},	
+	},
 	"Streams/user/movies": {
 		"type": "Streams/category",
 		"title": "Movies",
 		"icon": ""
-	},	
+	},
 	"Streams/user/books": {
 		"type": "Streams/category",
 		"title": "Books",
 		"icon": ""
-	},	
+	},
 	"Streams/user/quotes": {
 		"type": "Streams/category",
+		"title": "Quotes",
+		"icon": ""
+	},
+	"Streams/image/album": {
+		"type": "Streams/album",
 		"title": "Quotes",
 		"icon": ""
 	}
