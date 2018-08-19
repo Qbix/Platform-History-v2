@@ -330,10 +330,12 @@ abstract class Streams extends Base_Streams
 	 *   Pass an array of ($streamName => $messageTypes) here
 	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedToTotals]
-	 *   Pass an array of ($streamName => $relationTypes) here
+	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => array($relationType$, ...))) for particular rows
 	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedFromTotals]
-	 *   Pass an array of ($streamName => $relationTypes) here
+	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
@@ -515,10 +517,12 @@ abstract class Streams extends Base_Streams
 	 *   Pass an array of arrays ($streamName => $messageTypes) here
 	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedToTotals]
-	 *   Pass an array of ($streamName => $relationTypes) here
+	 *	 pass array('withRelatedToTotals' => array('streamName' => true)) for all rows
+	 *	 pass array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedFromTotals]
-	 *   Pass an array of ($streamName => $relationTypes) here
+	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
@@ -1882,6 +1886,8 @@ abstract class Streams extends Base_Streams
 		
 		$newRT = array();
 		$newRF = array();
+		$newRTT = array();
+		$newRFT = array();
 		$weights2 = array();
 		foreach ($$arrayField as $sn) {
 			if (isset($relatedToArray[$sn])) {
@@ -1946,30 +1952,34 @@ abstract class Streams extends Base_Streams
 			foreach (array('toStreamName', 'fromStreamName') as $f) {
 				$newRT[$sn][$f] = $newRF[$sn][$f] = ($f === $arrayField) ? $sn : $$f;
 			}
-			$newRTT = compact(array(
+			$newRTT[] = array(
 				'toPublisherId' => $category->publisherId,
 				'toStreamName' => $category->name,
 				'relationType' => $type,
 				'fromStreamType' => $stream->type,
 				'relationCount' => 1
-			));
-			$newRFT = compact(array(
+			);
+			$newRFT[] = array(
 				'fromPublisherId' => $stream->publisherId,
 				'fromStreamName' => $stream->name,
 				'relationType' => $type,
 				'toStreamType' => $category->type,
 				'relationCount' => 1
-			));
+			);
 		}
 		// Insert/update all the relatedTo and relatedFrom rows
 		Streams_RelatedTo::insertManyAndExecute($newRT);
 		Streams_RelatedFrom::insertManyAndExecute($newRF);
 		// Insert/update all the corresponding totals
 		Streams_RelatedToTotal::insertManyAndExecute($newRTT, array(
-			'relationCount' => new Db_Expression('relationCount + 1')
+			'onDuplicateKeyUpdate' => array(
+				'relationCount' => new Db_Expression('relationCount + 1')
+			)
 		));
 		Streams_RelatedFromTotal::insertManyAndExecute($newRFT, array(
-			'relationCount' => new Db_Expression('relationCount + 1')
+			'onDuplicateKeyUpdate' => array(
+				'relationCount' => new Db_Expression('relationCount + 1')
+			)
 		));
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
@@ -2241,7 +2251,7 @@ abstract class Streams extends Base_Streams
 			Streams_RelatedToTotal::update()->set(array(
 				'relationCount' => new Db_Expression('relationCount - 1')
 			))->where(array(
-				'toPublisherId' => $catgeory->publisherId,
+				'toPublisherId' => $category->publisherId,
 				'toStreamName' => $category->name,
 				'relationType' => $type,
 				'fromStreamType' => $stream->type,
@@ -4334,24 +4344,42 @@ abstract class Streams extends Base_Streams
 		}
 		return $streams;
 	}
-	
+
+	/**
+	 * Get info about relations TO streams
+	 * @method relatedToTotals
+	 * @static
+	 * @param {string} $publisherId Stream publisher id
+	 * @param {string|array} $name Stream name or array of names
+	 * @param {array} $options Can be:
+	 *	 array('withRelatedToTotals' => array('streamName' => true)) for all rows
+	 *	 array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 * @return {array} Returns array('relationType_1' => array('fromStreamType' => relationCount), 'relationType_2' => ...)
+	*/
 	private static function relatedToTotals($publisherId, $name, $options, $streams)
 	{
-		if (empty($options['withRelatedToTotals'])) {
+		$options = $options['withRelatedToTotals'];
+		if (empty($options) || !is_array($options)) {
 			return $streams;
 		}
+
 		$infoForTotals = array();
-		if (isset($options['withRelatedToTotals']['*'])) {
+		if ($options === true){
+			$trows = Streams_RelatedToTotal::select()->where(array(
+				'toPublisherId' => $publisherId,
+				'toStreamName' => $name
+			))->fetchDbRows();
+		} elseif (isset($options['*'])) {
 			$trows = Streams_RelatedToTotal::select()->where(array(
 				'toPublisherId' => $publisherId,
 				'toStreamName' => $name,
-				'relationType' => $options['withRelatedToTotals']['*']
+				'relationType' => $options['*']
 			))->fetchDbRows();
-			unset($options['withRelatedToTotals']['*']);
+			unset($options['*']);
 		} else {
 			$trows = array();
 		}
-		foreach ($options['withRelatedToTotals'] as $n => $mt) {
+		foreach ($options as $n => $mt) {
 			if (!$mt) {
 				continue;
 			}
@@ -4363,45 +4391,72 @@ abstract class Streams extends Base_Streams
 			$infoForTotals[$j] = array($n, $mt);
 		}
 		foreach ($infoForTotals as $info) {
-			$frows = Streams_RelatedToTotal::select()->where(array(
-				'toPublisherId' => $publisherId,
-				'toStreamName' => $info[0],
-				'relationType' => $info[1]
-			))->fetchDbRows();
+			if ($info[1] === array(true)) { // all relations
+				$frows = Streams_RelatedToTotal::select()->where(array(
+					'toPublisherId' => $publisherId,
+					'toStreamName' => $info[0]
+				))->fetchDbRows();
+			} else { // particular relations
+				$frows = Streams_RelatedToTotal::select()->where(array(
+					'toPublisherId' => $publisherId,
+					'toStreamName' => $info[0],
+					'relationType' => $info[1]
+				))->fetchDbRows();
+			}
 			$trows = array_merge($trows, $frows);
 		}
+
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
 				return;
 			}
 			$relatedToTotals = array();
 			foreach ($trows as $row) {
-				if ($row->toStreamName === $s->name) {
-					$relatedToTotals[$row->relationType] = $row->relationCount;
+				if ($row->toStreamName !== $s->name) {
+					continue;
 				}
+
+				$relatedToTotals[$row->relationType][$row->fromStreamType] = $row->relationCount;
 			}
 			$s->set('relatedToTotals', $relatedToTotals);
 		}
 		return $streams;
 	}
-	
+
+	/**
+	 * Get info about relations FROM streams
+	 * @method relatedFromTotals
+	 * @static
+	 * @param {string} $publisherId Stream publisher id
+	 * @param {array} $options Can be:
+	 *	 array('withRelatedFromTotals' => array('streamName' => true)) for all rows
+	 *	 array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 * @return {array} Returns array('relationType_1' => array('fromStreamType' => relationCount), 'relationType_2' => ...)
+	*/
 	private static function relatedFromTotals($publisherId, $name, $options, $streams)
 	{
-		if (empty($options['withRelatedFromTotals'])) {
+		$options = $options['withRelatedFromTotals'];
+		if (empty($options) || !is_array($options)) {
 			return $streams;
 		}
+
 		$infoForTotals = array();
-		if (isset($options['withRelatedFromTotals']['*'])) {
+		if ($options === true){
+			$trows = Streams_RelatedFromTotal::select()->where(array(
+				'fromPublisherId' => $publisherId,
+				'fromStreamName' => $name
+			))->fetchDbRows();
+		} elseif (isset($options['*'])) {
 			$trows = Streams_RelatedFromTotal::select()->where(array(
 				'fromPublisherId' => $publisherId,
 				'fromStreamName' => $name,
-				'relationType' => $options['withRelatedFromTotals']['*']
+				'relationType' => $options['*']
 			))->fetchDbRows();
-			unset($options['withRelatedFromTotals']['*']);
+			unset($options['*']);
 		} else {
 			$trows = array();
 		}
-		foreach ($options['withRelatedFromTotals'] as $n => $mt) {
+		foreach ($options as $n => $mt) {
 			if (!$mt) {
 				continue;
 			}
@@ -4413,22 +4468,32 @@ abstract class Streams extends Base_Streams
 			$infoForTotals[$j] = array($n, $mt);
 		}
 		foreach ($infoForTotals as $info) {
-			$frows = Streams_RelatedFromTotal::select()->where(array(
-				'fromPublisherId' => $publisherId,
-				'fromStreamName' => $info[0],
-				'relationType' => $info[1]
-			))->fetchDbRows();
+			if ($info[1] === array(true)) { // all relations
+				$frows = Streams_RelatedFromTotal::select()->where(array(
+					'fromPublisherId' => $publisherId,
+					'fromStreamName' => $info[0]
+				))->fetchDbRows();
+			} else { // particular relations
+				$frows = Streams_RelatedFromTotal::select()->where(array(
+					'fromPublisherId' => $publisherId,
+					'fromStreamName' => $info[0],
+					'relationType' => $info[1]
+				))->fetchDbRows();
+			}
 			$trows = array_merge($trows, $frows);
 		}
+
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
 				return;
 			}
 			$relatedFromTotals = array();
 			foreach ($trows as $row) {
-				if ($row->fromStreamName === $s->name) {
-					$relatedFromTotals[$row->relationType] = $row->relationCount;
+				if ($row->fromStreamName !== $s->name) {
+					continue;
 				}
+
+				$relatedFromTotals[$row->relationType][$row->toStreamType] = $row->relationCount;
 			}
 			$s->set('relatedFromTotals', $relatedFromTotals);
 		}
