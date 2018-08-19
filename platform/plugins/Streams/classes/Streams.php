@@ -330,12 +330,12 @@ abstract class Streams extends Base_Streams
 	 *   Pass an array of ($streamName => $messageTypes) here
 	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedToTotals]
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => array($relationType$, ...))) for particular rows
 	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedFromTotals]
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
