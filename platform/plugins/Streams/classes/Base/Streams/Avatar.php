@@ -23,6 +23,7 @@
  * @param {string} [$fields.firstName] defaults to ""
  * @param {string} [$fields.lastName] defaults to ""
  * @param {string} [$fields.icon] defaults to ""
+ * @param {string} [$fields.gender] defaults to ""
  */
 abstract class Base_Streams_Avatar extends Db_Row
 {
@@ -67,6 +68,12 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 * @type string
 	 * @default ""
 	 * the icon to display
+	 */
+	/**
+	 * @property $gender
+	 * @type string
+	 * @default ""
+	 * if not empty, the user can see this first name
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -642,6 +649,60 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_gender
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_gender($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('gender', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".gender");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".gender");
+		return array('gender', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the gender field
+	 * @return {integer}
+	 */
+	function maxSize_gender()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for gender column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_gender()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -673,7 +734,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('toUserId', 'publisherId', 'updatedTime', 'username', 'firstName', 'lastName', 'icon');
+		$field_names = array('toUserId', 'publisherId', 'updatedTime', 'username', 'firstName', 'lastName', 'icon', 'gender');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
