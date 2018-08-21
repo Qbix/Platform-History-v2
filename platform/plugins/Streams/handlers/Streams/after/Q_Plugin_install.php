@@ -7,7 +7,7 @@ function Streams_after_Q_Plugin_install($params)
 		->fetchAll(PDO::FETCH_NUM);
 	$c = $result[0][0];
 
-	echo "$plugin_name inserting streams for users...".PHP_EOL;
+	echo "$plugin_name: inserting streams for users...";
 
 	// get stream names need to install
 	$streamsToInstall = Q_Config::get('Streams', 'onInsert', 'Users_User', array());
@@ -23,9 +23,11 @@ function Streams_after_Q_Plugin_install($params)
 
 	// if all streams already inserted - exit
 	if (!count($streamsNeedToInstall)) {
-		echo "$plugin_name all streams for users already inserted".PHP_EOL;
+		echo " already inserted".PHP_EOL;
 		return;
 	}
+	
+	echo PHP_EOL;
 
 	$offset = 0;
 	$batch = 1000;
@@ -48,7 +50,7 @@ function Streams_after_Q_Plugin_install($params)
 			$user->set('Streams', 'skipExistingOnInsert', true);
 			Q::event('Db/Row/Users_User/saveExecute', $simulated, 'after');
 			echo "\033[100D";
-			echo "$plugin_name processed streams for ".($j + 1)." of $c users                          ";
+			echo "$plugin_name: processed streams for ".($j + 1)." of $c users                          ";
 		}
 	}
 

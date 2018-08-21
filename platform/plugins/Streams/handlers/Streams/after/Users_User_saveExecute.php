@@ -161,7 +161,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$access->adminLevel = -1;
 			$access->save(true);
 
-			// NOTE: the above saving of access caused Streams::updateAvatar
+			// NOTE: the above saving of access caused Streams_Avatar::updateAvatar
 			// to run, to insert a Streams_Avatar row for the new user, and
 			// to properly configure it.
 		}

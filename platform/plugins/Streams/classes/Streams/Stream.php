@@ -415,6 +415,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$fields = array(
 			'Streams/user/firstName' => false,
 			'Streams/user/lastName' => false,
+			'Streams/user/gender' => false,
 			'Streams/user/username' => 'username',
 			'Streams/user/icon' => 'icon'
 		);
@@ -452,7 +453,7 @@ class Streams_Stream extends Base_Streams_Stream
 					'publisherId' => $this->publisherId,
 					'streamName' => $this->name
 				))->fetchDbRows();
-			Streams::updateAvatars($this->publisherId, $taintedAccess, $this, true);
+			Streams_Avatar::updateAvatars($this->publisherId, $taintedAccess, $this, true);
 		}
 
 		return $result;
@@ -580,7 +581,8 @@ class Streams_Stream extends Base_Streams_Stream
 		Q::event("Streams/remove/{$stream->type}", compact('stream', 'result'), 'after');
 
 		if ($this->name !== 'Streams/user/firstName'
-		and $this->name !== 'Streams/user/lastName') {
+		and $this->name !== 'Streams/user/lastName'
+		and $this->name !== 'Streams/user/gender') {
 			return $result;
 		}
 		
@@ -590,7 +592,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'publisherId' => $this->publisherId,
 				'streamName' => $this->name
 			))->fetchDbRows();
-		Streams::updateAvatars($this->publisherId, $taintedAccess, $this, true);
+		Streams_Avatar::updateAvatars($this->publisherId, $taintedAccess, $this, true);
 
 		return $result;
 	}

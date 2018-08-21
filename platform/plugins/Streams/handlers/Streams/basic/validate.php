@@ -48,8 +48,8 @@ function Streams_basic_validate()
 		}
 	}
 	if (!empty($_REQUEST['gender'])) {
-		if (!in_array($_REQUEST['gender'], array('male', 'female'))) {
-			Q_Response::addError(new Q_Exception("Please enter male or female", "gender"));
+		if (!in_array($_REQUEST['gender'], array('male', 'female', 'other'))) {
+			Q_Response::addError(new Q_Exception("Please enter male, female or other", "gender"));
 		}
 	}
 }
