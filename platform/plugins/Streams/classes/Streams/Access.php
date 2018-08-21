@@ -134,7 +134,7 @@ class Streams_Access extends Base_Streams_Access
 		if ($this->get('removed', false)) {
 			$this->set('removed', false);
 		}
-		Streams::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
+		Streams_Avatar::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
 		if (!empty($this->publisherId) and !empty($this->streamName)
 		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
 			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
@@ -162,7 +162,7 @@ class Streams_Access extends Base_Streams_Access
 	{
 		if (!empty($this->ofUserId)) {
 			// Removed an access for a specific user
-			Streams::updateAvatar($this->ofUserId, $this->publisherId);
+			Streams_Avatar::updateAvatar($this->ofUserId, $this->publisherId);
 			return $result;
 		}
 		
@@ -188,7 +188,7 @@ class Streams_Access extends Base_Streams_Access
 			$this->set('removed', true);
 			$tainted_access[] = $this;
 		}
-		Streams::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
+		Streams_Avatar::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
 		if (!empty($this->publisherId) and !empty($this->streamName)
 		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
 			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();

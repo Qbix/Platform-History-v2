@@ -81,6 +81,8 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		.set(handleChange, this);
 		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/lastName', 'content')
 		.set(handleChange, this);
+		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/gender', 'content')
+		.set(handleChange, this);
 	}
 	function handleChange(fields, field) {
 		Streams.Avatar.get.forget(state.userId);
@@ -214,6 +216,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			Streams.Stream.retain(state.userId, [
 				'Streams/user/firstName', 
 				'Streams/user/lastName', 
+				'Streams/user/gender', 
 				'Streams/user/username',
 				'Streams/user/icon'
 			], tool);
