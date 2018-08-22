@@ -10,7 +10,9 @@ function Users_validate_username($params)
 	if (empty($username)) {
 		return;
 	}
-	if (!empty($user)) {
+	if (empty($user)) {
+		$user = new Users_User();
+	} else {
 		$first = mb_substr($user->id, 0, 1, "UTF-8");
 		if (mb_strtolower($first, "UTF-8") != $first) {
 			// first letter is uppercase, this represents a specially recognized
@@ -18,13 +20,16 @@ function Users_validate_username($params)
 			return;
 		}
 	}
+
+	$maxSize_username = (int)$user->maxSize_username();
+
 	if (strlen($username) < 4) {
 		throw new Q_Exception("usernames are at least 4 characters long", array('username'));
 	}
-	if (strlen($username) > 16) {
-		throw new Q_Exception("usernames are at most 16 characters long", array('username'));
+	if (strlen($username) > $maxSize_username) {
+		throw new Q_Exception("usernames are at most ".$maxSize_username." characters long", array('username'));
 	}
-	$match = preg_match('/^[a-zA-Z][a-zA-Z0-9-_]+$/', $username);
+	$match = preg_match('/^[a-zA-Z][a-zA-Z0-9-_\s\/]+$/', $username);
 	if (!$match) {
 		if (preg_match('/^[a-zA-Z0-9-_]+$/', $username)) {
 			throw new Q_Exception("usernames must start with a letter", array('username'));
