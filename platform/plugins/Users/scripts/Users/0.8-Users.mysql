@@ -190,12 +190,12 @@ CREATE TABLE `{$prefix}session` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';
 
-# Dump of table {$prefix}message_total
+# Dump of table {$prefix}total
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}message_total`;
+DROP TABLE IF EXISTS `{$prefix}total`;
 
-CREATE TABLE `{$prefix}message_total` (
+CREATE TABLE `{$prefix}total` (
   `forType` varbinary(31)  NOT NULL,
   `forId` varbinary(255)  NOT NULL,
   `voteCount` bigint(20) NOT NULL DEFAULT '0',
