@@ -258,12 +258,12 @@ CREATE TABLE `{$prefix}subscription` (
   KEY `subscriber` (`ofUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='{"type": [ array of message types ], "notifications": 5}';
 
-# Dump of table {$prefix}message_total
+# Dump of table {$prefix}total
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}message_total`;
+DROP TABLE IF EXISTS `{$prefix}total`;
 
-CREATE TABLE `{$prefix}message_total` (
+CREATE TABLE `{$prefix}total` (
   `publisherId` varbinary(31) NOT NULL,
   `streamName` varbinary(255) NOT NULL,
   `messageType` varbinary(255) NOT NULL,
