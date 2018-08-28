@@ -421,7 +421,7 @@ class Places_Nearby
 	 * @param {string} $relationType The type of the relation
 	 * @param {integer} $fromTime A unix timestamp, in either seconds or milliseconds
 	 * @param {integer} $toTime A unix timestamp, in either seconds or milliseconds
-	 * @param {string} [$experienceId="main"] The id of a community experience, the last part of its stream name
+	 * @param {string} [$streamName="Streams/experience/main"] The stream name of a community experience
 	 * @param {array} [$options] Options to pass to Places_Nearby::related(). Also can contain:
 	 * @param {double} [$options.latitude] The latitude of the point to search around
 	 * @param {double} [$options.longitude] The longitude of the point to search around
@@ -435,7 +435,7 @@ class Places_Nearby
 		$relationType,
 		$fromTime, 
 		$toTime, 
-		$experienceId = 'main',
+		$streamName = "Streams/experience/main",
 		$options = array())
 	{
 		$fromTime = Q_Utils::timestamp($fromTime);
@@ -446,7 +446,7 @@ class Places_Nearby
 		if (!isset($latitude) or !isset($longitude) or !isset($meters)) {
 			$o = compact('weight');
 			return Streams_RelatedTo::fetchAll(
-				$publisherId, array("Streams/experience/$experienceId"), $relationType, $o
+				$publisherId, array($streamName), $relationType, $o
 			);
 		}
 		$categories = array('Places_Nearby', '_categories');
