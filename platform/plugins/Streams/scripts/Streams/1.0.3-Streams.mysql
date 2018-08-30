@@ -1,0 +1,2 @@
+DELETE FROM {$prefix}subscription WHERE streamName="Streams/experience/";
+UPDATE {$prefix}subscription SET filter='{"types":["^(?!(Users/)|(Streams/)).*/","Streams/relatedTo", "Streams/announcement","Streams/chat/message"],"notifications":0}'
