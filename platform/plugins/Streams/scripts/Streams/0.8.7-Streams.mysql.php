@@ -6,7 +6,7 @@ function Streams_0_8_7_Streams_mysql()
 	$communityId = Users::communityId();
 	
 	$stream = array(
-		'publisherId' => $communityId, 
+		'publisherId' => '', 
 		'name' => "Streams/images/",
 		'type' => 'Streams/template', 
 		'title' => 'Image Gallery',
@@ -18,7 +18,7 @@ function Streams_0_8_7_Streams_mysql()
 		'adminLevel' => Streams::$ADMIN_LEVEL['invite']
 	);
 	$access = array(
-		'publisherId' => $communityId, 
+		'publisherId' => '', 
 		'streamName' => "Streams/images/",
 		'ofUserId' => '',
 		'grantedByUserId' => null,
