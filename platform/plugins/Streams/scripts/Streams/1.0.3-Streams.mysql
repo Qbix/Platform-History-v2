@@ -1,0 +1,1 @@
+RENAME TABLE {$prefix}rule TO {$prefix}subscription_rule;

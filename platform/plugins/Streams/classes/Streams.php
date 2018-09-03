@@ -2918,7 +2918,7 @@ abstract class Streams extends Base_Streams
 					}
 				}
 				if (!isset($rule)) {
-					$templates = Streams_Rule::select()
+					$templates = Streams_SubscriptionRule::select()
 						->where(array(
 							'ofUserId' => array('', $asUserId),
 							'publisherId' => array('', $publisherId),
@@ -2958,7 +2958,7 @@ abstract class Streams extends Base_Streams
 				}
 			}
 			Streams_Subscription::insertManyAndExecute($subscriptionRows);
-			Streams_Rule::insertManyAndExecute($ruleRows);
+			Streams_SubscriptionRule::insertManyAndExecute($ruleRows);
 		}
 
 		$streams5 = Q::take($streams, $streamNames);
