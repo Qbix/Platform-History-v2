@@ -184,9 +184,9 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 $options['sql'] = $sql_array;
 $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
-echo 'Q Platform app installer'.PHP_EOL;
-
 $app = Q::app();
+echo "Q Platform installer for $app app".PHP_EOL;
+
 $uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
 	$web_uploads_path = APP_WEB_DIR.DS.'Q'.DS.'uploads';
