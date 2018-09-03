@@ -83,7 +83,7 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 		if (!matched) {
 			return callback(null, []); // not subscribed to this message type
 		}
-		Streams.Rule.SELECT('*').where({
+		Streams.SubscriptionRule.SELECT('*').where({
 			ofUserId: userId,
 			publisherId: stream.fields.publisherId,
 			streamName: stream.fields.name
