@@ -1056,7 +1056,7 @@ Sp.subscribe = function(options, callback) {
 							});
 						}
 						function _insertRule(fields) {
-							new Streams.Rule(fields).save(function(err) {
+							new Streams.SubscriptionRule(fields).save(function(err) {
 								if (err) {
 									return callback.call(stream, err);
 								}
