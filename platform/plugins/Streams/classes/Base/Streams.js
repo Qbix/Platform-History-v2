@@ -41,10 +41,10 @@ Base.tableClasses = [
 	"Streams_RelatedTo",
 	"Streams_RelatedToTotal",
 	"Streams_Request",
-	"Streams_Rule",
 	"Streams_Sent",
 	"Streams_Stream",
 	"Streams_Subscription",
+	"Streams_SubscriptionRule",
 	"Streams_Task"
 ];
 
@@ -166,13 +166,6 @@ Base.RelatedToTotal = Q.require('Streams/RelatedToTotal');
 Base.Request = Q.require('Streams/Request');
 
 /**
- * Link to Streams.Rule model
- * @property Rule
- * @type Streams.Rule
- */
-Base.Rule = Q.require('Streams/Rule');
-
-/**
  * Link to Streams.Sent model
  * @property Sent
  * @type Streams.Sent
@@ -192,6 +185,13 @@ Base.Stream = Q.require('Streams/Stream');
  * @type Streams.Subscription
  */
 Base.Subscription = Q.require('Streams/Subscription');
+
+/**
+ * Link to Streams.SubscriptionRule model
+ * @property SubscriptionRule
+ * @type Streams.SubscriptionRule
+ */
+Base.SubscriptionRule = Q.require('Streams/SubscriptionRule');
 
 /**
  * Link to Streams.Task model
