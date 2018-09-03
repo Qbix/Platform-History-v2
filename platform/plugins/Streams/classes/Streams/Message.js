@@ -224,7 +224,7 @@ Streams_Message.post = function (fields, callback)
 
 /**
  * Delivers the message posted to stream according to particular
- * delivery method (see: Streams_Rule.deliver). Message template is taken from views/{message.type} folder -
+ * delivery method (see: Streams_SubscriptionRule.deliver). Message template is taken from views/{message.type} folder -
  * 'email.handlebars' or 'mobile.handlebars' or 'device.handlebars' depending on delivery
  * @method deliver
  * @param {Streams.Stream} stream
