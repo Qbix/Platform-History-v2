@@ -4072,7 +4072,7 @@ abstract class Streams extends Base_Streams
 	*/
 	private static function relatedToTotals($publisherId, $name, $options, $streams)
 	{
-		$options = $options['withRelatedToTotals'];
+		$options = Q::ifset($options, 'withRelatedToTotals', null);
 		if (empty($options) || !is_array($options)) {
 			return $streams;
 		}
@@ -4149,7 +4149,7 @@ abstract class Streams extends Base_Streams
 	*/
 	private static function relatedFromTotals($publisherId, $name, $options, $streams)
 	{
-		$options = $options['withRelatedFromTotals'];
+		$options = Q::ifset($options, 'withRelatedFromTotals', null);
 		if (empty($options) || !is_array($options)) {
 			return $streams;
 		}
