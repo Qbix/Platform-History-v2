@@ -1028,7 +1028,7 @@ abstract class Users extends Base_Users
 		if (empty($user->emailAddress) and empty($user->mobileNumber)
 			and ($signedUpWith === 'email' or $signedUpWith === 'mobile')) {
 			// Add an email address or mobile number to the user, that they'll have to verify
-			$activation = Q::ifset($options, 'activation', 'activation');
+			$activation = Q::ifset($options, 'activation', false);
 			if ($activation) {
 				$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
 				$body = Q_Config::get('Users', 'transactional', $activation, "body", null);

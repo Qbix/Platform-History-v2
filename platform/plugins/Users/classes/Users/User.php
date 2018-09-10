@@ -485,7 +485,7 @@ class Users_User extends Base_Users_User
 		$this->emailAddressPending = $normalized;
 		$this->save();
 		
-		if ($activation = Q::ifset($options, 'activation', 'activation')) {
+		if ($activation = Q::ifset($options, 'activation', false)) {
 			if (!isset($activationEmailView)) {
 				$activationEmailView = Q_Config::get(
 					'Users', 'transactional', $activation, 'body', 'Users/email/activation.php'
@@ -493,7 +493,7 @@ class Users_User extends Base_Users_User
 			}
 			if (!isset($activationEmailSubject)) {
 				$activationEmailSubject = Q_Config::get(
-					'Users', 'transactional', $activation, 'subject', 
+					'Users', 'transactional', $activation, 'subject',
 					"Welcome! Please confirm your email address." 
 				);
 			}
@@ -686,7 +686,7 @@ class Users_User extends Base_Users_User
 		$this->mobileNumberPending = $normalized;
 		$this->save();
 		
-		if ($activation = Q::ifset($options, 'activation', 'activation')) {
+		if ($activation = Q::ifset($options, 'activation', false)) {
 			if (!isset($activationMessageView)) {
 				$activationMessageView = Q_Config::get(
 					'Users', 'transactional', $activation, 'sms', 'Users/sms/activation.php'
