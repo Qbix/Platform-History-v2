@@ -7,16 +7,28 @@
 			"requires": {
 				"Q": "1.0",
 				"Users": "1.0",
-				"Streams": "1.0"
+				"Streams": "1.0",
+				"Assets": "1.0",
+				"Places": "1.0",
+				"Travel": "0.3",
+				"Websites": "1.0",
+				"Communities": "0.9",
+				"Calendars": "0.1"
 			},
 			"recognizes": {
 				"Q": "1.0",
 				"Users": "1.0",
-				"Streams": "1.0"
+				"Streams": "1.0",
+				"Assets": "1.0",
+				"Places": "1.0",
+				"Travel": "0.3",
+				"Websites": "1.0",
+				"Communities": "0.9",
+				"Calendars": "0.1"
 			},
-			"connections": []
+			"connections": ["Users", "Streams"]
 		},
-		"plugins": ["Users", "Streams"],
+		"plugins": ["Users", "Streams", "Places", "Travel", "Websites", "Assets","Calendars", "Communities"],
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["MyApp/before/Q_responseExtras"]
 		},
