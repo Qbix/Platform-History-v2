@@ -3470,7 +3470,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		var participant;
 		if (o.unlessSocket) {
 			Streams.get.cache.each([publisherId, streamName], function (key, info) {
-				var p = info.subject.participant;
+				var p = Q.getObject("subject.participant", info);
 				if (p && p.state === 'participating') {
 					participant = p;
 					return false;
