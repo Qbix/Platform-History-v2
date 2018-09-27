@@ -139,7 +139,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		srcFromMe: '{{Streams}}/img/chat/message-overflowed-from-me.png',
 		title: 'Message from {{displayName}}'
 	},
-	closeable: true,
+	closeable: false,
 	onRefresh: new Q.Event(),
 	onClose: new Q.Event(function () {
 		// remove tool when chat stream closed
