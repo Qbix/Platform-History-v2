@@ -1078,6 +1078,99 @@ class Users_User extends Base_Users_User
 		return $users;
 	}
 
+	/**
+	 * Remove users from system
+	 * @method removeUser
+	 * @static
+	 * @param {string|array} $userId Array of id's or single id
+	 */
+	static function removeUser($userIds) {
+		if (is_array($userIds)) {
+			foreach ($userIds as $userId) {
+				self::removeUser($userId);
+			}
+
+			return;
+		}
+
+		Streams_RelatedTo::delete()
+			->where(array('toPublisherId' => $userIds))
+			->orWhere(array('fromPublisherId' => $userIds))
+			->execute();
+
+		Streams_RelatedFrom::delete()
+			->where(array('toPublisherId' => $userIds))
+			->orWhere(array('fromPublisherId' => $userIds))
+			->execute();
+
+		Streams_Message::delete()
+			->where(array('publisherId' => $userIds))
+			->execute();
+
+		Streams_Participant::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('userId' => $userIds))
+			->execute();
+
+		Streams_Notification::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('userId' => $userIds))
+			->execute();
+
+		Streams_Subscription::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('ofUserId' => $userIds))
+			->execute();
+
+		Streams_MessageTotal::delete()
+			->where(array('publisherId' => $userIds))
+			->execute();
+
+		Streams_RelatedFromTotal::delete()
+			->where(array('fromPublisherId' => $userIds))
+			->execute();
+
+		Streams_RelatedToTotal::delete()
+			->where(array('toPublisherId' => $userIds))
+			->execute();
+
+		Streams_Stream::delete()
+			->where(array('publisherId' => $userIds))
+			->execute();
+
+		Users_Vote::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Session::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Mobile::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Email::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Identify::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Device::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Contact::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_User::delete()
+			->where(array('id' => $userIds))
+			->execute();
+	}
+
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
