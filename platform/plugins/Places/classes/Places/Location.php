@@ -105,7 +105,8 @@ class Places_Location
 			$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
 				'name' => $streamName,
 				'title' => $result['name'],
-				'attributes' => Q::json_encode($attributes)
+				'attributes' => Q::json_encode($attributes),
+				'skipAccess' => true
 			));
 		}
 		return $location;

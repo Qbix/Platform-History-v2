@@ -11,8 +11,7 @@ function Places_0_9_5_Streams()
 			'name' => $name,
 			'icon' => $defaults['icon'],
 			'title' => $defaults['title'],
-			'type' => 'Streams/template',
-			'adminLevel' => 40
+			'type' => 'Streams/template'
 		));
 		if ($name == 'Places/location/') {
 			$s->writeLevel = 23;
