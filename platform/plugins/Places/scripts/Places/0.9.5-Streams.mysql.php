@@ -13,6 +13,9 @@ function Places_0_9_5_Streams()
 			'title' => $defaults['title'],
 			'type' => 'Streams/template'
 		));
+		if ($name == 'Places/location/') {
+			$s->writeLevel = 23;
+		}
 		$s->save();
 		$a = new Streams_Access(array(
 			'publisherId' => '',
