@@ -544,7 +544,10 @@ abstract class Users extends Base_Users
 				 * @param {Users_User} user
 				 */
 				Q::event('Users/authenticate/insertAppUser', compact('user'), 'after');
-				$authenticated = 'authorized';
+
+				if (!isset($authenticated)){
+					$authenticated = 'authorized';
+				}
 			}
 		}
 
