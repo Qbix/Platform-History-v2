@@ -168,32 +168,18 @@ var Places = Q.Places = Q.plugins.Places = {
 		var y = point.y;
 		var a, b, c, d, e, f, i, l, n, n1, n2, frac, dist, distance, closest;
 
-		// calculation of the first point
-		a = polyline[0].x;
-		b = polyline[0].y;
-		distance = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
-		closest = {
-			index: 0,
-			x: a,
-			y: b,
-			distance: distance,
-			fraction: 0
-		};
-
 		for (i = 1, l = polyline.length; i < l; i++) {
 			a = polyline[i-1].x;
 			b = polyline[i-1].y;
 			c = polyline[i].x;
 			d = polyline[i].y;
-			n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
-			n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
-			n = n1 * n2;
+			n = (c-a)*(c-a) + (d-b)*(d-b);
 			frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
 			e = a + (c-a)*frac;
 			f = b + (d-b)*frac;
 			dist = Math.sqrt((x-e)*(x-e) + (y-f)*(y-f));
-			if (distance > dist) {
+			if (distance === undefined && distance > dist) {
 				distance = dist;
 				closest = {
 					index: i,
