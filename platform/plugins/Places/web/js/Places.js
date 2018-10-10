@@ -166,7 +166,9 @@ var Places = Q.Places = Q.plugins.Places = {
 	closest: function(point, polyline) {
 		var x = point.x;
 		var y = point.y;
-		var a, b, c, d, e, f, i, l, n, n1, n2, frac, dist, distance, closest;
+		var a, b, c, d, e, f, i, l, n, n1, n2, frac, dist;
+		var distance = null;
+		var closest = null;
 
 		for (i = 1, l = polyline.length; i < l; i++) {
 			a = polyline[i-1].x;
@@ -179,7 +181,7 @@ var Places = Q.Places = Q.plugins.Places = {
 			e = a + (c-a)*frac;
 			f = b + (d-b)*frac;
 			dist = Math.sqrt((x-e)*(x-e) + (y-f)*(y-f));
-			if (distance === undefined && distance > dist) {
+			if (distance === null || distance > dist) {
 				distance = dist;
 				closest = {
 					index: i,
