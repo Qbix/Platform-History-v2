@@ -9444,17 +9444,17 @@ Q.Socket.prototype.onEvent = function(name) {
  * @param {Number} [options.locale="en-US"] a 4 character code that specifies the language that should be used to synthesize the text.
  */
 Q.Speech = function (text, options) {
+	// Cordova
+	var TTS = Q.getObject("window.TTS");
+	// browsers
+	var SS = Q.getObject("window.speechSynthesis");
 	var o = Q.extend(
 		{}, Q.Speech.options, 10, options
 	);
-	if(!text) {
-		throw new Q.Error("Q/Speech: specify the text for speech");
-	}
 	if(typeof text !== "string") {
 		throw new Q.Error("Q/Speech: the text for speech must be a string");
 	}
-	// Cordova
-	if (typeof TTS !== "undefined") {
+	if (TTS) {
 		if (_isCyrillic(text)) {
 			o.locale = "ru-RU";
 		}
@@ -9468,9 +9468,8 @@ Q.Speech = function (text, options) {
 			console.warn("Q/Speech: " + reason);
 		});
 	}
-	// browsers
-	else if (typeof speechSynthesis !== "undefined") {
-		if (speechSynthesis.speaking) {
+	else if (SS) {
+		if (SS.speaking) {
 			return;
 		}
 		var availableVoices = null;
@@ -9504,9 +9503,13 @@ Q.Speech = function (text, options) {
 
 			function _search(){
 				var result = null;
-				for(var i = 0; i < availableVoices[language][gender].length; i++){
+				var av = Q.getObject([language, gender], availableVoices) || [];
+				if (typeof av !== "object" || !av.length){
+					return {error: "Q/Speech: no such available voice"};
+				}
+				for(var i = 0; i < av.length; i++){
 					for(var j = 0; j < voicesList.length; j++){
-						if(availableVoices[language][gender][i] == voicesList[j].name){
+						if(av[i] == voicesList[j].name){
 							// founded voice ID from voices list
 							result = j;
 							break;
@@ -9533,22 +9536,22 @@ Q.Speech = function (text, options) {
 				gender = o.gender = "female";
 			}
 			voice = _search();
-			if(voice.error){
-				console.warn(voice.error);
+			if(typeof voice !== 'number'){
+				var voiceError = Q.getObject("error", voice);
+				console.warn(voiceError);
 				return false;
-			} else {
-				return voice;
 			}
+			return voice;
 		}
 		var loadingSeconds = 0;
 		var loadingVoices = setInterval(function () {
-			var voicesList = speechSynthesis.getVoices();
+			var voicesList = SS.getVoices();
 			if (voicesList.length) {
 				_stopLoading();
 				// get available voices list
 				$.getJSON(Q.url("{{Q}}/js/speech/voices.json"), function(data) {
-					if(!data) {
-						return;
+					if(typeof data !== "object") {
+						return console.warn("Q/Speech: could not get the available voices list");
 					}
 					availableVoices = data;
 					// removing tags from text;
@@ -9562,7 +9565,7 @@ Q.Speech = function (text, options) {
 					msg.rate = o.rate;
 					msg.pitch = o.pitch;
 					msg.volume = o.volume;
-					speechSynthesis.speak(msg);
+					SS.speak(msg);
 				});
 			} else {
 				loadingSeconds ++;
