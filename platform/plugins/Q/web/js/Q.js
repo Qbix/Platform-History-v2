@@ -12652,6 +12652,165 @@ Q.Camera = {
 };
 
 /**
+ * Operates with notices.
+ * @class Q.Notice
+ */
+Q.Notice = {
+
+	/**
+	 * Setting that changes notices slide down / slide up time.
+	 * @property popUpTime
+	 * @type {Number}
+	 * @default 500
+	 */
+	popUpTime: 500,
+	/**
+	 * Container for notices
+	 * @property container
+	 * @type {HTMLElement}
+	 */
+	container: document.getElementById("notices_slot"),
+
+	/**
+	 * Adds a notice.
+	 * @method add
+	 * @param {object} options Object of options
+	 * @param {string} [options.key] Unique key for this notice. Need if you want to modify/remove notice by key.
+	 * @param {string} options.content HTML contents of this notice.
+	 * @param {bool} [options.closeable=true] Whether notice can be closed with red x icon.
+	 * @param {function|string} [options.handler] Something (callback or URL) to handle with Q.handle()
+	 * @param {string} [options.type=common] Arbitrary type of notice. Can be used to apply different styles dependent on type,
+	 * because appropriate CSS class appended to the notice. May be 'error', 'warning'.
+	 */
+	add: function(options)
+	{
+		if (!this.container instanceof HTMLElement) {
+			throw new Error("Q.Notice.add: Notices container element don't exists.");
+		}
+
+		// default options
+		options = Q.extend({
+			key: null,
+			closeable: true,
+			type: 'common'
+		}, options);
+
+		var key = options.key;
+		var content = options.content;
+		var closeable = options.closeable;
+		var handler = options.handler;
+		var noticeClass = 'Q_' + options.type + '_notice';
+
+
+		// if key not empty and notice with this key already exist
+		if (key && this.container.querySelector('li[data-key="' + key + '"]')) {
+			throw new Error('Q.Notice.add: A notice with key "' + key + '" already exists.');
+		}
+		//document.getElementsByTagName('head')[0].appendChild(script);
+		var ul = this.container.getElementsByTagName('ul')[0];
+		if (!ul) {
+			ul = document.createElement('ul');
+			this.container.appendChild(ul);
+		}
+		var li = document.createElement('li');
+		li.setAttribute('data-key', key);
+		li.classList.add(noticeClass);
+		li.onclick = function () {
+			Q.handle(handler, li, [content]);
+		};
+		var span = document.createElement('span');
+		span.innerHTML = content.trim();
+		li.appendChild(span);
+
+		// close icon
+		if (closeable) {
+			var closeIcon = document.createElement('span');
+			closeIcon.classList.add("Q_close");
+			li.appendChild(closeIcon);
+			closeIcon.onclick = function (event) {
+				event.stopPropagation();
+				Q.Notice.remove(li);
+			}
+		}
+
+		// insert new notice as first child
+		ul.insertBefore(li, ul.firstChild);
+
+		// apply transition
+		setTimeout(function () {
+			Q.Notice.show(li);
+		}, 0);
+	},
+	/**
+	 * Get a notice by key.
+	 * @method get
+	 * @param {string|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	get: function(notice)
+	{
+		if (typeof notice === 'string') {
+			notice = this.container.querySelector('li[data-key="' + notice + '"]');
+		}
+
+		if (notice instanceof HTMLElement) {
+			return notice;
+		}
+
+		return null;
+	},
+	/**
+	 * Removes a notice.
+	 * @method remove
+	 * @param {string|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	remove: function(notice)
+	{
+		notice = this.get(notice);
+
+		if (notice instanceof HTMLElement) {
+			this.hide(notice);
+
+			setTimeout(function () {
+				notice.remove();
+			}, 750);
+		}
+	},
+	/**
+	 * Hides a notice.
+	 * @method hide
+	 * @param {string|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	hide: function(notice)
+	{
+		notice = this.get(notice);
+
+		if (notice instanceof HTMLElement) {
+			notice.classList.remove("Q_show_notice");
+		}
+	},
+	/**
+	 * Shows a previously notice.
+	 * @method show
+	 * @param {string|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	show: function(notice)
+	{
+		notice = this.get(notice);
+		if (notice instanceof HTMLElement) {
+			notice.classList.add("Q_show_notice");
+		}
+	}
+};
+
+/**
  * This loads bluebird library to enable Promise for browsers which do not
  * support Promise natively. For example: IE, Opera Mini.
  */
