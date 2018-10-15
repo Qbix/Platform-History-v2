@@ -683,3 +683,56 @@ html.Q_scanning body > .Q_scanning_code {
 	background-image:none !important;
 	animation: Q_newsflash 2s ease-in-out;
 }
+
+#notices_slot ul:empty {
+	display: none;
+}
+#notices_slot ul li {
+	position: relative;
+	text-align: left;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height .75s ease-in-out 0s;
+}
+#notices_slot ul li.Q_common_notice {
+}
+#notices_slot ul li.Q_error_notice {
+	background-color: #ebb;
+	color: #500;
+}
+#notices_slot ul li span {
+	padding: 0 10px;
+	display: inline-block;
+}
+#notices_slot ul .Q_hidden_notice {
+	display: none;
+}
+#notices_slot ul li.Q_show_notice {
+	max-height: 100px;
+	display: block;
+}
+#notices_slot ul li .Q_more_notices {
+	margin-left: 5px;
+}
+#notices_slot ul li .Q_more_notices span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	line-height: 14px;
+	text-align: center;
+	color: #FFFFE5;
+	font-weight: bold;
+	background: url('../img/ui/circle_trans_small.png') no-repeat;
+}
+
+#notices_slot ul li .Q_close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: block;
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
+	background: url('../img/icons/basic16.png') 5px -477px no-repeat;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
