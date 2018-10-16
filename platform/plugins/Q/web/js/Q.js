@@ -12680,6 +12680,7 @@ Q.Notice = {
 	 * @param {bool} [options.closeable=true] Whether notice can be closed with red x icon.
 	 * @param {function|string} [options.handler] Something (callback or URL) to handle with Q.handle()
 	 * @param {string} [options.type=common] Arbitrary type of notice. Can be used to apply different styles dependent on type,
+	 * @param {bool|number} [options.timeOut=false] Time in seconds after which to remove notice.
 	 * because appropriate CSS class appended to the notice. May be 'error', 'warning'.
 	 */
 	add: function(options)
@@ -12692,12 +12693,14 @@ Q.Notice = {
 		options = Q.extend({
 			key: null,
 			closeable: true,
-			type: 'common'
+			type: 'common',
+			timeOut: false
 		}, options);
 
 		var key = options.key;
 		var content = options.content;
 		var closeable = options.closeable;
+		var timeOut = options.timeOut;
 		var handler = options.handler;
 		var noticeClass = 'Q_' + options.type + '_notice';
 
@@ -12731,6 +12734,13 @@ Q.Notice = {
 				event.stopPropagation();
 				Q.Notice.remove(li);
 			}
+		}
+
+		// whether remove notice by timeout
+		if (typeof timeOut === 'number' && timeOut > 0) {
+			setTimeout(function () {
+				Q.Notice.remove(li);
+			}, timeOut * 1000);
 		}
 
 		// insert new notice as first child
