@@ -46,7 +46,18 @@ abstract class Users extends Base_Users
 	{
 		return Q_Config::get('Users', 'community', 'suffix', null);
 	}
+	/**
+	 * Get default user language from users_user table
+	 * @method getLanguage
+	 * @static
+	 * @param {string} $userId
+	 * @return {string}
+	 */
+	static function getLanguage($userId){
+		$user = self::fetch($userId, true);
 
+		return isset($user->preferredLanguage) ? $user->preferredLanguage : 'en';
+	}
 	/**
 	 * @param string [$publisherId=Users::communityId()]
 	 *  The id of the publisher relative to whom to calculate the roles.
