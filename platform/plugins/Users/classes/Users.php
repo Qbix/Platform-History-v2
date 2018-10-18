@@ -56,7 +56,7 @@ abstract class Users extends Base_Users
 	static function getLanguage($userId){
 		$user = self::fetch($userId, true);
 
-		return isset($user->preferredLanguage) ? $user->preferredLanguage : 'en';
+		return isset($user->preferredLanguage) ? $user->preferredLanguage : Q_Text::$language;
 	}
 	/**
 	 * @param string [$publisherId=Users::communityId()]
