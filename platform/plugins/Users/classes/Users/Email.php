@@ -56,12 +56,16 @@ class Users_Email extends Base_Users_Email
 		if (!isset($options['html'])) {
 			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', false);
 		}
-		
+
+		// set language
+		if (!isset($fields['language']) && isset($this->userId)) {
+			$fields['language'] = Users::getLanguage($this->userId);
+		}
+
 		if (is_array($subject)) {
 			$source = $subject[0];
 			$keys = $subject[1];
-			$language = Users::getLanguage($this->userId);
-			$texts = Q_Text::get($source, compact('language'));
+			$texts = Q_Text::get($source, array('language' => $fields['language']));
 			$tree = new Q_Tree($texts);
 			$keyPath = implode('/', $keys);
 			$args = array_merge($keys, array("Missing $keyPath in $source"));

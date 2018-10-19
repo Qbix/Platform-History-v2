@@ -47,7 +47,12 @@ class Users_Mobile extends Base_Users_Mobile
 				'mobileNumber' => $this->number
 			));
 		}
-		
+
+		// set language
+		if (!isset($fields['language']) && isset($this->userId)) {
+			$fields['language'] = Users::getLanguage($this->userId);
+		}
+
 		$app = Q::app();
 		$body = Q::view($view, $fields);
 		
