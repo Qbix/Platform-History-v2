@@ -142,9 +142,10 @@ class Q_Text
 	 * @method params
 	 * @static
 	 * @param {array} $parts The parts of the view name, to use with Q/text config
+	 * @param {array} [$options=array()] Array of options which will pass to Q_Text::get
 	 * @return {array} The merged parameters that come from the text
 	 */
-	static function params($parts = array())
+	static function params($parts = array(), $options = array())
 	{
 		$count = count($parts);
 		$try = array();
@@ -161,15 +162,13 @@ class Q_Text
 			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
 			if ($text = call_user_func_array(array('Q_Config', 'get'), $p)) {
 				if (Q::isAssociative($text)) {
-					$o = $text;
-					if (!isset($o['sources'])) {
+					$options = array_merge($options, $text);
+					if (!isset($options['sources'])) {
 						continue;
 					}
-					$text = $o['sources'];
-				} else {
-					$o = array();
+					$text = $options['sources'];
 				}
-				$tree->merge(Q_Text::get($text, true, $o));
+				$tree->merge(Q_Text::get($text, $options));
 			}
 		}
 		return $tree->getAll();
