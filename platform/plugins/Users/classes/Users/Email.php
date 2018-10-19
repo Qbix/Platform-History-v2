@@ -60,13 +60,6 @@ class Users_Email extends Base_Users_Email
 		if (is_array($subject)) {
 			$source = $subject[0];
 			$keys = $subject[1];
-			$fields2 = $subject[2];
-			if (is_array($fields2)) {
-				foreach($fields2 as $i => $f) {
-					// normalize fields from json
-					$fields[$i] = Q_Handlebars::renderSource($f, $fields);
-				}
-			}
 			$language = Users::getLanguage($this->userId);
 			$texts = Q_Text::get($source, compact('language'));
 			$tree = new Q_Tree($texts);
