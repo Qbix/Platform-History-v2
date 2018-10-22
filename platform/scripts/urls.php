@@ -97,7 +97,7 @@ function Q_script_urls_glob(
 	$algo = 'sha256',
 	$len = null,
 	&$result = null,
-	$was_link = false
+	$levels = 0
 ) {
 	static $n = 0, $i = 0;
 	if (!isset($result)) {
@@ -117,16 +117,18 @@ function Q_script_urls_glob(
 				continue;
 			}
 			$c = file_get_contents($f);
-			$value = array('t' => filemtime($f), 'h' => hash($algo, $c));
+			$hash = hash($algo, $c);
+			$enchash = base64_encode(hex2bin($hash));
+			$value = array('t' => filemtime($f), 'h' => $enchash);
 			$parts = explode('/', $u);
 			$parts[] = $value;
 			call_user_func_array(array($tree, 'set'), $parts);
 		}
 		++$n;
-		$is_link = is_link($f);
-		// do depth first search, following symlinks one level down
-		if (!$was_link or !$is_link) {
-			Q_script_urls_glob($f, $ignore, $algo, $len, $result, $was_link or $is_link);
+		$is_link = is_link($f) ? 1 : 0;
+		// do depth first search, following symlinks two levels down
+		if ($levels <= 2 or !$is_link) {
+			Q_script_urls_glob($f, $ignore, $algo, $len, $result, $levels + $is_link);
 		}
 		++$i;
 		echo "\033[100D";
