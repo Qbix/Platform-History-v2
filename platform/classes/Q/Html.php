@@ -1226,7 +1226,7 @@ class Q_Html
 			++ $i;
 		}
 		if (!empty($hash) and ($ltag === 'link' or $ltag === 'script')) {
-			$result .= ' integrity="sha256-' . base64_encode(hex2bin($hash)) . '"';
+			$result .= ' integrity="sha256-' . $hash . '"';
 		}
 		return $result;
 	}
@@ -1381,7 +1381,7 @@ class Q_Html
 		$filePath2 = Q_Uri::interpolateUrl($filePath);
 		
 		if (!$ignoreEnvironment
-		and $environment = Q_Config::get('Q', 'environment', false)) {
+		and $environment = Q_Config::get('Q', 'environment', '')) {
 			if ($info = Q_Config::get('Q', 'environments', $environment, false)) {
 				if (!empty($info['files'][$filePath])) {
 					$filePath2 = $info['files'][$filePath];
