@@ -74,6 +74,10 @@
 					"{{Users}}/js/Users.js": "js/all.js",
 					"{{Streams}}/js/Streams.js": "js/all.js",
 					"js/MyApp.js": "js/all.js"
+				},
+				"urls": {
+					"cacheBust": true,
+					"integrity": true
 				}
 			}
 		},
