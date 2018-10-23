@@ -9431,10 +9431,9 @@ Q.Socket.prototype.onEvent = function(name) {
 };
 
 /**
- * Speeches the given text
- * Detectes the language, recognize the voice if not set.
- * @static
- * @method Speech
+ * Methods to do speech in various browsers
+ * @Class Q.Speech
+ * @constructor
  * @param {String} text specifies the text that will be spoken.
  * @param {Object} [options] An optional hash of options for Q.Speech:
  * @param {String} [options.gender="female"] the voice in which will be speech the text.
