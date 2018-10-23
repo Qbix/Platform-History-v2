@@ -162,13 +162,15 @@ class Q_Text
 			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
 			if ($text = call_user_func_array(array('Q_Config', 'get'), $p)) {
 				if (Q::isAssociative($text)) {
-					$options = array_merge($options, $text);
-					if (!isset($options['sources'])) {
+					$options2 = array_merge($options, $text);
+					if (!isset($options2['sources'])) {
 						continue;
 					}
-					$text = $options['sources'];
+					$text = $options2['sources'];
+				} else {
+					$options2 = $options;
 				}
-				$tree->merge(Q_Text::get($text, $options));
+				$tree->merge(Q_Text::get($text, $options2));
 			}
 		}
 		return $tree->getAll();
