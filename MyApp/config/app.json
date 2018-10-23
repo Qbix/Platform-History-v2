@@ -79,6 +79,11 @@
 					"cacheBust": true,
 					"integrity": true
 				}
+			},
+			"test": {
+				"urls": {
+					"cacheBust": true
+				}
 			}
 		},
 		"text": {

@@ -931,8 +931,12 @@ class Q_Uri
 			$parts[] = null;
 			$tree = new Q_Tree(Q_Uri::$urls);
 			$info = call_user_func_array(array($tree, 'get'), $parts);
-			$fileTimestamp = Q::ifset($info, 't', null);
-			$fileSHA1 = Q::ifset($info, 'h', null);
+			if (!empty($config['cacheBust'])) {
+				$fileTimestamp = Q::ifset($info, 't', null);
+			}
+			if (!empty($config['integrity'])) {
+				$fileSHA1 = Q::ifset($info, 'h', null);
+			}
 		}
 		if ($cacheTimestamp
 		and isset($fileTimestamp)
