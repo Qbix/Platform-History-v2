@@ -603,11 +603,7 @@ class Q
 			$params = array_merge($fields, $params);
 		}
 
-		// set options
-		$options = array();
-		$options['language'] = isset($params['language']) ? $params['language'] : null;
-
-		$params = array_merge(Q_Text::params($parts, $options), $params);
+		$params = array_merge(Q_Text::params($parts), $params);
 
 		/**
 		 * @event {before} Q/view

@@ -57,9 +57,13 @@ class Users_Email extends Base_Users_Email
 			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', false);
 		}
 
-		// set language
-		if (!isset($fields['language']) && isset($this->userId)) {
-			$fields['language'] = Users::getLanguage($this->userId);
+		// set language if didn't defined yet
+		if (!isset($fields['language'])) {
+			if(isset($this->userId)) {
+				$fields['language'] = Users::getLanguage($this->userId);
+			} else {
+				$fields['language'] = null;
+			}
 		}
 
 		if (is_array($subject)) {
@@ -74,6 +78,8 @@ class Users_Email extends Base_Users_Email
 		
 		$app = Q::app();
 		$subject = Q_Handlebars::renderSource($subject, $fields);
+		$viewParams = Q_Text::params(explode('/', $view), array('language' => $fields['language']));
+		$fields = array_merge($viewParams, $fields);
 		$body = Q::view($view, $fields);
 
 		$from = Q::ifset($options, 'from', Q_Config::get('Users', 'email', 'from', null));
