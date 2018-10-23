@@ -54,6 +54,8 @@ class Users_Mobile extends Base_Users_Mobile
 		}
 
 		$app = Q::app();
+		$viewParams = Q_Text::params(explode('/', $view), array('language' => $fields['language']));
+		$fields = array_merge($viewParams, $fields);
 		$body = Q::view($view, $fields);
 		
 		/**
