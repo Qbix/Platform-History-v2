@@ -4715,6 +4715,7 @@ Q.onInit.add(function _Streams_onInit() {
 			_clearCaches();
 		};
 		_connectSockets.apply(this, arguments);
+		_notificationsToNotice();
 	}, "Streams");
 	Users.onLogout.set(function () {
 		Interests.my = {}; // clear the interests
@@ -4724,6 +4725,7 @@ Q.onInit.add(function _Streams_onInit() {
 	}, "Streams");
 	if (Users.loggedInUser) {
 		_connectSockets(true); // refresh streams
+		_notificationsToNotice();
 	}
 	
 	// handle resign/resume application in Cordova
@@ -4733,7 +4735,69 @@ Q.onInit.add(function _Streams_onInit() {
 			_connectSockets(true);
 		});
 	}
-	
+
+	/**
+	 * Lesten for messages and show them as notices
+	 */
+	function _notificationsToNotice () {
+		var userId = Q.Users.loggedInUserId();
+		var notificationsAsNotice = Q.getObject("Q.plugins.Streams.notifications.notices");
+
+		if (!userId || !notificationsAsNotice) {
+			return;
+		}
+
+		// get texts for notices
+		var texts = {};
+		Q.Text.get('Streams/content', function (err, text) {
+			texts = Q.getObject("notifications", text);
+		});
+
+		// this is GREAT thing!!! It listen ALL messages user participated, regardless streams in cache or not.
+		Users.Socket.onEvent('Streams/post').set(function (message) {
+			var publisherId = Q.getObject(["publisherId"], message);
+			var streamName = Q.getObject(["streamName"], message);
+			var messageType = Q.getObject(["type"], message);
+			var byUserId = Q.getObject(["byUserId"], message);
+			var content = Q.getObject(["content"], message);
+
+			// if this message type absent in config
+			if (!Q.getObject([messageType], notificationsAsNotice)) {
+				return;
+			}
+
+			// only messages for Streams plugin
+			if (messageType.slice(0, messageType.indexOf('/')) !== 'Streams') {
+				return;
+			}
+
+			// skip myself messages
+			if (byUserId === userId) {
+				return;
+			}
+
+			// check 'notices' attribute
+			Streams.get(publisherId, streamName, function () {
+				if (!this.getAttribute('notices')) {
+					return;
+				}
+
+				Streams.Avatar.get(byUserId, function (err, avatar) {
+					var text = Q.getObject([messageType], texts);
+
+					if (!text || typeof text !== 'string') {
+						return console.warn('notificationsAsNotice: no text for ' + messageType);
+					}
+
+					Q.Notice.add({
+						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
+						timeOut: 10
+					});
+				});
+			});
+		}, 'Streams/notifications/notice');
+	};
+
 	// handle updates
 	function _updateDisplayName(fields, k) {
 		Avatar.get.force(Users.loggedInUser.id, function () {

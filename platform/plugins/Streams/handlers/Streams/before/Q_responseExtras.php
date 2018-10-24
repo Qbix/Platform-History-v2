@@ -29,4 +29,5 @@ function Streams_before_Q_responseExtras()
 		}
 	}
 	Q_Response::addStylesheet("{{Streams}}/css/Streams.css", 'Streams');
+	Q_Response::setScriptData('Q.plugins.Streams.notifications.notices', Q_Config::get("Streams", "notifications", "notices", null));
 }

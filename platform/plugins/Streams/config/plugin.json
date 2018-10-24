@@ -455,7 +455,10 @@
 		},
 		"notifications": {
 			"onlyIfAllClientsOffline": true,
-			"debug": true
+			"debug": true,
+			"notices": {
+				"Streams/chat/message": true
+			}
 		},
 		"import": {
 			"timeLimit": 100000
