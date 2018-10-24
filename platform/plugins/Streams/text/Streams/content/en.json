@@ -16,5 +16,8 @@
 		"closeChatConfirmYes": "Yes",
 		"closeChatConfirmNo": "No",
 		"earlierComments": "earlier comments"
+	},
+	"notifications": {
+		"Streams/chat/message": "{{displayName}} said: {{content}}"
 	}
 }
