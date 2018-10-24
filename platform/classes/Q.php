@@ -583,13 +583,16 @@ class Q
 	 *  The full name of the view
 	 * @param {array} $params=array()
 	 *  Parameters to pass to the view
+	 * @param {array} $options Some options
+	 * @param {string|null} $options.language Preferred language
 	 * @return {string}
 	 *  The rendered content of the view
 	 * @throws {Q_Exception_MissingFile}
 	 */
 	static function view(
 	 $viewName,
-	 $params = array())
+	 $params = array(),
+	 $options = array())
 	{
 		require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
 
@@ -603,7 +606,10 @@ class Q
 			$params = array_merge($fields, $params);
 		}
 
-		$params = array_merge(Q_Text::params($parts), $params);
+		// set options
+		$options['language'] = isset($options['language']) ? $options['language'] : null;
+
+		$params = array_merge(Q_Text::params($parts, array('language' => $options['language'])), $params);
 
 		/**
 		 * @event {before} Q/view
