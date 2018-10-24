@@ -1997,7 +1997,35 @@ Sp.removePermission = function (permission) {
 	}
 	pf.permissions = JSON.stringify(permissions);
 };
+/**
+ * Returns the canonical url of the stream, if any
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
+ * @return {String|null|false}
+ */
+Sp.url = function (messageOrdinal, baseUrl)
+{
+	var url = Q.getObject("Q.plugins.Streams.urls." + this.fields.type);
+	if (!url) {
+		return null;
+	}
 
+	var urlString = '';
+
+	Q.Template.set(url, url);
+	Q.Template.render(url, {
+		publisherId: this.fields.publisherId,
+		streamName: this.fields.name.split('/'),
+		name: this.fields.name,
+		baseUrl: baseUrl || Q.baseUrl()
+	}, function (err, html) {
+		if (err) return;
+		urlString = html;
+	});
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
+	var qs = messageOrdinal ? sep+messageOrdinal : "";
+	return Q.url(urlString + sep + qs);
+};
 /**
  * Save a stream to the server
  * 
@@ -4778,7 +4806,9 @@ Q.onInit.add(function _Streams_onInit() {
 
 			// check 'notices' attribute
 			Streams.get(publisherId, streamName, function () {
-				if (!this.getAttribute('notices')) {
+				var stream = this;
+
+				if (!stream.getAttribute('notices')) {
 					return;
 				}
 
@@ -4791,7 +4821,8 @@ Q.onInit.add(function _Streams_onInit() {
 
 					Q.Notice.add({
 						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
-						timeOut: 10
+						timeOut: 10,
+						handler: stream.url()
 					});
 				});
 			});
