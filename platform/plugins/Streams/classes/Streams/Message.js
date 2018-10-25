@@ -265,6 +265,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	if (typeof deliver === 'string') {
 		deliver = {to: deliver};
 	}
+
 	Users.fetch(toUserId, function (err) {
 		var to = Q.Config.get(
 			['Streams', 'rules', 'deliver', deliver.to],
@@ -286,17 +287,41 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			callback: callback
 		};
 		var result = [];
-		/**
-		 * @event "Streams/deliver/:messageType"
-		 * @param {Object} options for the notification delivery
-		 * @param {Function} callback to call when options has been transformed
-		 */
-		var name = 'Streams/deliver/'+message.fields.type;
-		var handler = Q.getObject(name, Q.handlers, '/');
-		if (!Q.isEmpty(handler)) {
-			Q.handle(handler, message, [o, _afterTransform]);
+
+		// if subject is object - get subject from text file
+		if (typeof subject === 'object') {
+			Q.Text.get(subject[0], uf.preferredLanguage, function (err, data) {
+				if (err) {
+					return callback && callback(err);
+				}
+
+				subject = Q.getObject(subject[1], data);
+
+				if (!subject) {
+					return callback && callback("Text " + subject[1].join('/') + " not found in " + subject[0]);
+				}
+
+				o.subject = subject;
+
+				_afterSubjectTransform();
+			});
 		} else {
-			_afterTransform();
+			_afterSubjectTransform();
+		}
+
+		function _afterSubjectTransform () {
+			/**
+			 * @event "Streams/deliver/:messageType"
+			 * @param {Object} options for the notification delivery
+			 * @param {Function} callback to call when options has been transformed
+			 */
+			var name = 'Streams/deliver/'+message.fields.type;
+			var handler = Q.getObject(name, Q.handlers, '/');
+			if (!Q.isEmpty(handler)) {
+				Q.handle(handler, message, [o, _afterTransform]);
+			} else {
+				_afterTransform();
+			}
 		}
 		function _afterTransform() {
 			var w1 = [];
