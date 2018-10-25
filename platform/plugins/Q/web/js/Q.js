@@ -9471,161 +9471,6 @@ Q.Socket.prototype.onEvent = function(name) {
 };
 
 /**
- * Methods to do speech in various browsers
- * @Class Q.Speech
- * @constructor
- * @param {String} text specifies the text that will be spoken.
- * @param {Object} [options] An optional hash of options for Q.Speech:
- * @param {String} [options.gender="female"] the voice in which will be speech the text.
- * @param {Number} [options.rate=1] the speaking rate of the SpeechSynthesizer object, from 0.1 to 1.
- * @param {Number} [options.pitch=1] the speaking pitch of the SpeechSynthesizer object, from 0.1 to 1.9.
- * @param {Number} [options.volume=1] the volume height of speech (0.1 - 1).
- * @param {Number} [options.locale="en-US"] a 4 character code that specifies the language that should be used to synthesize the text.
- */
-Q.Speech = function (text, options) {
-	// Cordova
-	var TTS = Q.getObject("window.TTS");
-	// browsers
-	var SS = Q.getObject("window.speechSynthesis");
-	var o = Q.extend(
-		{}, Q.Speech.options, 10, options
-	);
-	if(typeof text !== "string") {
-		throw new Q.Error("Q/Speech: the text for speech must be a string");
-	}
-	if (TTS) {
-		if (_isCyrillic(text)) {
-			o.locale = "ru-RU";
-		}
-		TTS.speak({
-			text: text,
-			locale: o.locale,
-			rate: o.rate
-		}).then(function () {
-			// Text succesfully spoken
-		}, function (reason) {
-			console.warn("Q/Speech: " + reason);
-		});
-	}
-	else if (SS) {
-		if (SS.speaking) {
-			return;
-		}
-		var availableVoices = null;
-		// recognize the language of text
-		function _isCyrillic(text) {
-			var en = text.match(/[a-z]/ig);
-			var ru = text.match(/[а-я]/ig);
-			if (!en) {
-				return true;
-			} else if (!ru) {
-				return false;
-			} else if (ru.length > en.length) {
-				return true;
-			}
-		}
-		// stop voice list loading
-		function _stopLoading() {
-			clearInterval(loadingVoices);
-			loadingSeconds = 0;
-		}
-		// recognize the voice by language of text and gender
-		function _recognizeVoice(text, voicesList) {
-			var language = (_isCyrillic(text)) ? "ru-RU" : "en-US"
-			var gender = o.gender;
-			var voice = null;
-			var toggled = false;
-
-			function _switchGender(gender) {
-				return (gender == "female") ? "male" : "female"
-			}
-
-			function _search(){
-				var result = null;
-				var av = Q.getObject([language, gender], availableVoices) || [];
-				if (typeof av !== "object" || !av.length){
-					return {error: "Q/Speech: no such available voice"};
-				}
-				for(var i = 0; i < av.length; i++){
-					for(var j = 0; j < voicesList.length; j++){
-						if(av[i] == voicesList[j].name){
-							// founded voice ID from voices list
-							result = j;
-							break;
-						}
-					}
-					if(typeof result === "number") {
-						break;
-					}
-				}
-				if(result === null && toggled){
-					return {error: "Q/Speech: no voice support in this device for this language"};
-				} else if(result === null) {
-					var previousGender = gender;
-					gender = _switchGender(gender);
-					toggled = true;
-					console.info("%cQ/Speech: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
-					return _search();
-				} else {
-					return result;
-				}
-			}
-			// if the gender doesn't set manually - set to default
-			if (gender != "male" && gender != "female") {
-				gender = o.gender = "female";
-			}
-			voice = _search();
-			if(typeof voice !== 'number'){
-				var voiceError = Q.getObject("error", voice);
-				console.warn(voiceError);
-				return false;
-			}
-			return voice;
-		}
-		var loadingSeconds = 0;
-		var loadingVoices = setInterval(function () {
-			var voicesList = SS.getVoices();
-			if (voicesList.length) {
-				_stopLoading();
-				// get available voices list
-				$.getJSON(Q.url("{{Q}}/js/speech/voices.json"), function(data) {
-					if(typeof data !== "object") {
-						return console.warn("Q/Speech: could not get the available voices list");
-					}
-					availableVoices = data;
-					// removing tags from text;
-					var msg = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
-					// recognize the voice by gender
-					var recognizedVoice = _recognizeVoice(msg.text, voicesList);
-					if(recognizedVoice === false) {
-						return;
-					}
-					msg.voice = voicesList[recognizedVoice];
-					msg.rate = o.rate;
-					msg.pitch = o.pitch;
-					msg.volume = o.volume;
-					SS.speak(msg);
-				});
-			} else {
-				loadingSeconds ++;
-				if (loadingSeconds > 20) {
-					_stopLoading();
-					console.warn("Q/Speech: could not load voices list");
-				}
-			}
-		}, 100);
-	}
-};
-
-Q.Speech.options = {
-	gender: "female",
-	rate: 1,
-	pitch: 1,
-	volume: 1,
-	locale: "en-US"
-};
-
-/**
  * Q.Animation class can be used to repeatedly call a function
  * in order to animate something
  * @class Q.Animation
@@ -12019,6 +11864,160 @@ Q.Audio.pauseAll = function () {
 	for (var url in Q.Audio.collection) {
 		Q.Audio.collection[url].pause();
 	}
+};
+
+/**
+ * Methods to do speech in various browsers
+ * @Class Q.Audio.speak
+ * @constructor
+ * @param {String} text specifies the text that will be spoken.
+ * @param {Object} [options] An optional hash of options for Q.Audio.speak:
+ * @param {String} [options.gender="female"] the voice in which will be speech the text.
+ * @param {Number} [options.rate=1] the speaking rate of the SpeechSynthesizer object, from 0.1 to 1.
+ * @param {Number} [options.pitch=1] the speaking pitch of the SpeechSynthesizer object, from 0.1 to 1.9.
+ * @param {Number} [options.volume=1] the volume height of speech (0.1 - 1).
+ * @param {Number} [options.locale="en-US"] a 4 character code that specifies the language that should be used to synthesize the text.
+ */
+Q.Audio.speak = function (text, options) {
+	// Cordova
+	var TTS = Q.getObject("window.TTS");
+	// browsers
+	var SS = Q.getObject("window.speechSynthesis");
+	var o = Q.extend(
+		{}, Q.Audio.speak.options, 10, options
+	);
+	if(typeof text !== "string") {
+		throw new Q.Error("Q/Speech: the text for speech must be a string");
+	}
+	if (TTS) {
+		if (_isCyrillic(text)) {
+			o.locale = "ru-RU";
+		}
+		TTS.speak({
+			text: text,
+			locale: o.locale,
+			rate: o.rate
+		}).then(function () {
+			// Text succesfully spoken
+		}, function (reason) {
+			console.warn("Q/Speech: " + reason);
+		});
+	}
+	else if (SS) {
+		if (SS.speaking) {
+			return;
+		}
+		var availableVoices = null;
+		// recognize the language of text
+		function _isCyrillic(text) {
+			var en = text.match(/[a-z]/ig);
+			var ru = text.match(/[а-я]/ig);
+			if (!en) {
+				return true;
+			} else if (!ru) {
+				return false;
+			} else if (ru.length > en.length) {
+				return true;
+			}
+		}
+		// stop voice list loading
+		function _stopLoading() {
+			clearInterval(loadingVoices);
+			loadingSeconds = 0;
+		}
+		// recognize the voice by language of text and gender
+		function _recognizeVoice(text, voicesList) {
+			var language = (_isCyrillic(text)) ? "ru-RU" : "en-US"
+			var gender = o.gender;
+			var voice = null;
+			var toggled = false;
+
+			function _switchGender(gender) {
+				return (gender == "female") ? "male" : "female"
+			}
+
+			function _search(){
+				var result = null;
+				var av = Q.getObject([language, gender], availableVoices) || [];
+				if (typeof av !== "object" || !av.length){
+					return {error: "Q/Speech: no such available voice"};
+				}
+				for(var i = 0; i < av.length; i++){
+					for(var j = 0; j < voicesList.length; j++){
+						if(av[i] == voicesList[j].name){
+							// founded voice ID from voices list
+							result = j;
+							break;
+						}
+					}
+					if(typeof result === "number") {
+						break;
+					}
+				}
+				if(result === null && toggled){
+					return {error: "Q/Speech: no voice support in this device for this language"};
+				} else if(result === null) {
+					var previousGender = gender;
+					gender = _switchGender(gender);
+					toggled = true;
+					console.info("%cQ/Speech: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
+					return _search();
+				} else {
+					return result;
+				}
+			}
+			// if the gender doesn't set manually - set to default
+			if (gender != "male" && gender != "female") {
+				gender = o.gender = "female";
+			}
+			voice = _search();
+			if(typeof voice !== 'number'){
+				var voiceError = Q.getObject("error", voice);
+				console.warn(voiceError);
+				return false;
+			}
+			return voice;
+		}
+		var loadingSeconds = 0;
+		var loadingVoices = setInterval(function () {
+			var voicesList = SS.getVoices();
+			if (voicesList.length) {
+				_stopLoading();
+				// get available voices list
+				$.getJSON(Q.url("{{Q}}/js/speech/voices.json"), function(data) {
+					if(typeof data !== "object") {
+						return console.warn("Q/Speech: could not get the available voices list");
+					}
+					availableVoices = data;
+					// removing tags from text;
+					var msg = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
+					// recognize the voice by gender
+					var recognizedVoice = _recognizeVoice(msg.text, voicesList);
+					if(recognizedVoice === false) {
+						return;
+					}
+					msg.voice = voicesList[recognizedVoice];
+					msg.rate = o.rate;
+					msg.pitch = o.pitch;
+					msg.volume = o.volume;
+					SS.speak(msg);
+				});
+			} else {
+				loadingSeconds ++;
+				if (loadingSeconds > 20) {
+					_stopLoading();
+					console.warn("Q/Speech: could not load voices list");
+				}
+			}
+		}, 100);
+	}
+};
+Q.Audio.speak.options = {
+	gender: "female",
+	rate: 1,
+	pitch: 1,
+	volume: 1,
+	locale: "en-US"
 };
 
 /**
