@@ -406,7 +406,7 @@ Sp.sameDomain = function _String_prototype_sameDomain (url2, options) {
  * @return {boolean}
  */
 Sp.startsWith = function _String_prototype_startsWith(prefix) {
-	if (this.length < prefix.length) {
+	if (prefix == null || this.length < prefix.length) {
 		return false;
 	}
 	return this.substr(0, prefix.length) === prefix;
@@ -5526,7 +5526,15 @@ Q.init = function _Q_init(options) {
 	
 	_waitForDeviceReady();
 	Q.handle(Q.beforeInit);
-	Q.handle(Q.onInit); // Call all the onInit handlers
+	
+	// Time to call all the onInit handlers
+	if (Q.info.updateUrlsBeforeInit) {
+		Q.updateUrls(function () {
+			Q.handle(Q.onInit);
+		});
+	} else {
+		Q.handle(Q.onInit);
+	}
 };
 
 /**
@@ -6064,36 +6072,55 @@ Q.load = function _Q_load(plugins, callback, options) {
  * @param {Object} [options] A hash of options, including:
  * @param {String} [options.baseUrl] A string to replace the default base url
  * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
+ * @param {Object} [options.info] if passed, extends this object with any info about the url
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
 	var parts = what2.split('?');
+	var what3, tail, info, cb;
 	if (fields) {
 		for (var k in fields) {
 			parts[1] = (parts[1] || "").queryField(k, fields[k]);
 		}
 		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
-	if (options && options.cacheBust) {
-		what2 += "?Q.cacheBust="+Math.floor(Date.now()/options.cacheBust);
-	}
-	parts = what2.split('?');
-	if (parts.length > 2) {
-		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
-	}
-	what2 = Q.interpolateUrl(what2);
-	var result = '';
 	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl;
+	what3 = Q.interpolateUrl(what2);
+	if (what3.isUrl()) {
+		if (what3.startsWith(baseUrl)) {
+			tail = what3.substr(baseUrl.length+1);
+			tail = tail.split('?')[0];
+			info = Q.getObject(tail, Q.updateUrls.urls, '/');
+		}
+	} else {
+		info = Q.getObject(what3, Q.updateUrls.urls, '/');
+	}
+	if (info) {
+		if (info.t) {
+			what3 += '?Q.cacheBust=' + info.t;
+		}
+		if (options && options.info) {
+			Q.extend(options.info, 10, info);
+		}
+	} else if (options && options.cacheBust) {
+		cb = options.cacheBust;
+		what3 += "?Q.cacheBust=" + Math.floor(Date.now()/cb)*cb;
+	}
+	parts = what3.split('?');
+	if (parts.length > 2) {
+		what3 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
+	}
+	var result = '';
 	if (!what) {
 		result = baseUrl + (what === '' ? '/' : '');
-	} else if (what2.isUrl()) {
-		result = what2;
+	} else if (what3.isUrl()) {
+		result = what3;
 	} else {
-		result = baseUrl + ((what2.substr(0, 1) == '/') ? '' : '/') + what2;
+		result = baseUrl + ((what3.substr(0, 1) == '/') ? '' : '/') + what3;
 	}
 	if (Q.url.options.beforeResult) {
 		var params = {
-			what: what2,
+			what: what3,
 			fields: fields,
 			result: result
 		};
@@ -6310,7 +6337,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *  (unless parse is false, in which case the raw content is passed as a String),
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
- *  A hash of options, including:
+ *  A hash of options, including options that would be passed to Q.url(), but also these:
  * @param {String} [options.method] if set, adds a &Q.method= that value to the querystring, default "get"
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
@@ -6352,7 +6379,7 @@ Q.request = function (url, slotNames, callback, options) {
 		delim = (url.indexOf('?') < 0) ? '?' : '&';
 		url += delim + Q.queryString(fields);
 	}
-	url = Q.url(url);
+	url = Q.url(url, null, options);
 	if (typeof slotNames === 'function') {
 		options = callback;
 		callback = slotNames;
@@ -6516,8 +6543,7 @@ Q.request = function (url, slotNames, callback, options) {
 			return;
 		}
 
-		if (!o.query && o.xhr !== false
-		&& Q.url(url).search(Q.info.baseUrl) === 0) {
+		if (!o.query && o.xhr !== false && url.startsWith(Q.info.baseUrl)) {
 			_onStart();
 			return xhr(_onResponse, _onCancel);
 		}
@@ -6874,8 +6900,8 @@ Q.formPost.counter = 0;
  * the last Q.ut timestamp, then saves current timestamp in Q.ut cookie.
  * @param {Function} callback
  */
-Q.updateUrls = function() {
-	var timestamp, url, json, ut = Q.cookie('Q.ut'), lskey = 'Q.updateUrls.urls';
+Q.updateUrls = function(callback) {
+	var timestamp, url, json, ut = Q.cookie('Q.ut');
 	if (ut) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
@@ -6885,24 +6911,27 @@ Q.updateUrls = function() {
 				Q.extend(Q.updateUrls.urls, 100, result);
 			}
 			json = JSON.stringify(Q.updateUrls.urls);
-			localStorage.setItem(lskey, json);
+			localStorage.setItem(Q.updateUrls.lskey, json);
 			if (timestamp = result['#timestamp']) {
 				Q.cookie('Q.ut', timestamp);
 			}
-		}, {extend: false});
+			Q.handle(callback, null, [result, timestamp]);
+		}, {extend: false, cacheBust: 1000});
 	} else {
 		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
 			Q.updateUrls.urls = result;
 			json = JSON.stringify(Q.updateUrls.urls);
-			localStorage.setItem(lskey, json);
+			localStorage.setItem(Q.updateUrls.lskey, json);
 			if (timestamp = result['#timestamp']) {
 				Q.cookie('Q.ut', timestamp);
 			}
-		}, {extend: false});
+			Q.handle(callback, null, [result, timestamp]);
+		}, {extend: false, cacheBust: 1000});
 	}
 };
 
-Q.updateUrls.urls = {};
+Q.updateUrls.lskey = 'Q.updateUrls.urls';
+Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.lskey) || "{}");
 
 /**
  * Adds a reference to a javascript, if it's not already there
@@ -6910,9 +6939,10 @@ Q.updateUrls.urls = {};
  * @method addScript
  * @param {String|Array} src The script url or an array of script urls
  * @param {Function} onload
- * @param {Object} options
- *  Optional. A hash of options, including:
+ * @param {Object} [options]
+ *  Optional. A hash of options, including options for Q.url() and these:
  * @param {Boolean} [options.duplicate] if true, adds script even if one with that src was already loaded
+ * @param {Boolean} [options.skipIntegrity] if true, skips adding "integrity" attribute even if one can be calculated
  * @param {Boolean} [options.onError] optional function that may be called in newer browsers if the script fails to load. Its this object is the script tag.
  * @param {Boolean} [options.ignoreLoadingErrors] If true, ignores any errors in loading scripts.
  * @param {Boolean} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document).
@@ -7017,7 +7047,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	if (!src) {
 		return null;
 	}
-	src = Q.url(src);
+	options = options || {};
+	options.info = {};
+	src = Q.url(src, null, options);
 	
 	if (!o || !o.duplicate) {
 		var scripts = document.getElementsByTagName('script');
@@ -7096,6 +7128,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	// Create the script tag and insert it into the document
 	script = document.createElement('script');
 	script.setAttribute('type', 'text/javascript');
+	if (options.info.h && !options.skipIntegrity) {
+		script.setAttribute('integrity', 'sha256-' + options.info.h);
+	}
 	Q.addScript.added[src] = true;
 	Q.addScript.onLoadCallbacks[src] = [_onload];
 	Q.addScript.onErrorCallbacks[src] = [];
@@ -7225,12 +7260,13 @@ var _exports = {};
  * @param {String} href
  * @param {String} media
  * @param {Function} onload
- * @param {Object} options
- *  An optional hash of options, which can include:
+ * @param {Object} [options]
+ *  Optional. A hash of options, including options for Q.url() and these:
  * @param {Boolean} [options.slotName] The slot name to which the stylesheet should be added, used to control the order they're applied in.
  *  Do not use together with container option.
  * @param {HTMLElement} [options.container] An element to which the stylesheet should be appended (unless it already exists in the document)
  *  Although this won't result in valid HTML, all browsers support it, and it enables the CSS to later be easily removed at runtime.
+ * @param {Boolean} [options.skipIntegrity] if true, skips adding "integrity" attribute even if one can be calculated
  * @param {Boolean} [options.returnAll=false] If true, returns all the link elements instead of just the new ones
  * @return {Array} Returns an aray of LINK elements
  */
@@ -7284,7 +7320,8 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		onload(false);
 		return false;
 	}
-	href = Q.url(href);
+	options.info = {};
+	href = Q.url(href, null, options);
 	if (!media) media = 'screen,print';
 	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
@@ -7329,6 +7366,9 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
 	link.setAttribute('media', media);
+	if (options.info.h && !options.skipIntegrity) {
+		link.setAttribute('integrity', 'sha256-' + options.info.h);
+	}
 	Q.addStylesheet.added[href] = true;
 	Q.addStylesheet.onLoadCallbacks[href] = [onload];
 	link.onload = onload2;

@@ -5,14 +5,7 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 	$message = $params['message'];
 	$type = $message->getInstruction('type', null);
 	$stream = $params['stream'];
-	$rtypes = Q_Config::get(
-		'Streams', 'categorize', 'relationTypes', array()
-	);
-	$stypes = Q_Config::get(
-		'Streams', 'categorize', 'streamTypes', array()
-	);
-	if (!in_array($type, $rtypes)
-	or !in_array($stream->type, $stypes)) {
+	if (!Q_Config::get('Streams', 'categorize', $stream->type, $type, false)) {
 		return;
 	}
 
