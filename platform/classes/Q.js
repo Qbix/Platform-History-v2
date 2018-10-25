@@ -2288,6 +2288,12 @@ Q.init = function _Q_init(app, notListen) {
 	 */
 	Q.Config = require('./Q/Config');
 	/**
+	 * Reference to Q.Text class
+	 * @property Text
+	 * @type {object}
+	 */
+	Q.Text = require('./Q/Text');
+	/**
 	 * Reference to Q.Bootstrap class
 	 * @property Bootstrap
 	 * @type {object}
