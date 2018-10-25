@@ -892,6 +892,9 @@ class Q_Uri
 	}
 	
 	/**
+	 * May append a "Q.cacheBust" parameter to URL's querystring, and also
+	 * returns the content digest hash for that particular URL, 
+	 * if it corresponds to a file processed by the urls.php script.
 	 * This function is very useful to use with clients like PhoneGap which can
 	 * intercept URLs and load whatever locally cached files are stored in their bundle.
 	 * The urls for these files will be relative to the cache base url.
@@ -906,24 +909,31 @@ class Q_Uri
 	 * $url is used instead.
 	 * Otherwise, the url relative to cacheBaseUrl is used, making the client
 	 * load the locally cached version.
+	 * @param {string} $url The url to get the cached URL and hash for
+	 * @return {array} array($urlWithCacheBust, $hash)
 	 */
 	static function cachedUrlAndHash($url) {
-		$updateTimestamp = Q_Request::updateTimestamp();
 		$cacheTimestamp = Q_Request::cacheTimestamp();
-		if (empty($cacheTimestamp) and empty($updateTimestamp)) {
+		$environment = Q_Config::get('Q', 'environment', '');
+		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
+		if (empty(Q_Uri::$urls)) {
 			return array($url, null);
 		}
-		$parts = explode('?', $url);
-		$head = $parts[0];
-		$tail = (count($parts) > 1 ? $parts[1] : '');
-		$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
-		$parts = explode('/', $urlRelativeToBase);
-		array_shift($parts);
-		$parts[] = null;
-		$tree = new Q_Tree(Q_Uri::$urls);
-		$info = call_user_func_array(array($tree, 'get'), $parts);
-		$fileTimestamp = Q::ifset($info, 't', null);
-		$fileSHA1 = Q::ifset($info, 'h', null);
+		$fileTimestamp = null;
+		$fileSHA = null;
+		if (!empty($config['cacheBust']) or !empty($config['integrity'])) {
+			$parts = explode('?', $url);
+			$head = $parts[0];
+			$tail = (count($parts) > 1 ? $parts[1] : '');
+			$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
+			$parts = explode('/', $urlRelativeToBase);
+			array_shift($parts);
+			$parts[] = null;
+			$tree = new Q_Tree(Q_Uri::$urls);
+			$info = call_user_func_array(array($tree, 'get'), $parts);
+			$fileTimestamp = Q::ifset($info, 't', null);
+			$fileSHA1 = Q::ifset($info, 'h', null);
+		}
 		if ($cacheTimestamp
 		and isset($fileTimestamp)
 		and $fileTimestamp <= $cacheTimestamp

@@ -1367,7 +1367,7 @@ Streams.followup.options = {
  *  Publisher's user id
  * @param {String} streamName
  *	Name of the stream to/from which the others are related
- * @param {String|null} relationType the type of the relation
+ * @param {String|Array|null} relationType the type of the relation
  * @param {boolean} isCategory defaults to false. If true, then gets streams related TO this stream.
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
@@ -1391,9 +1391,11 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	if (!publisherId || !streamName) {
 		throw new Q.Error("Streams.related is expecting publisherId and streamName to be non-empty");
 	}
-	if (typeof publisherId !== 'string'
-	|| (relationType && typeof relationType !== 'string')) {
-		throw new Q.Error("Streams.related is expecting publisherId, relationType as strings");
+	if (typeof publisherId !== 'string') {
+		throw new Q.Error("Streams.related is expecting publisherId as a string");
+	}
+	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relatedType))) {
+		throw new Q.Error("Streams.related is expecting relationType as string or array");
 	}
 	if (typeof isCategory !== 'boolean') {
 		callback = options;
@@ -3580,7 +3582,7 @@ Message.shouldRefreshStream = function (type, should) {
 var MTotal = Streams.Message.Total = {
 	/**
 	 * Get one or more messageTotals, which may result in batch requests to the server.
-	 * May call MTotal.get.onError if an error occurs.
+	 * May call Streams.Message.Total.get.onError if an error occurs.
 	 * 
 	 * @static
 	 * @method get
@@ -3612,11 +3614,11 @@ var MTotal = Streams.Message.Total = {
 		});
 	},
 	/**
-	 * Returns the latest total number of messages posted to the stream
+	 * Returns the latest total number of messages (of a certain type) posted to the stream
 	 * @method latest
 	 * @static
 	 * @param {String} publisherId
-	 * @param {String} streamName
+	 * @param {String|Array} streamName
 	 * @param {String} messageType
 	 * @return {Integer|null}
 	 */
@@ -3629,7 +3631,7 @@ var MTotal = Streams.Message.Total = {
 		return Q.isInteger(value) ? value : (value[messageType] || null);
 	},
 	/**
-	 * Returns the latest number of unseen messages posted to the stream
+	 * Returns the latest number of unseen messages (of a certain type) posted to the stream
 	 * @method unseen
 	 * @static
 	 * @param {String} publisherId id of the user publishing the straem
@@ -3688,6 +3690,8 @@ var MTotal = Streams.Message.Total = {
 	},
 	
 	/**
+	 * Sets up an element to show the total number of unseen messages (of a certain type)
+	 * from a stream, and update the display in real time.
 	 * @method setUpElement
 	 * @static
 	 * @param {Element} element The element to set up

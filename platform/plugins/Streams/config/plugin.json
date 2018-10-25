@@ -357,8 +357,9 @@
 			}
 		},
 		"categorize": {
-			"relationTypes": ["Streams/interests"],
-			"streamTypes": ["Streams/category"]
+			"Streams/category": {
+				"Streams/interests": true
+			}
 		},
 		"lookup": {
 			"limit": 10,
