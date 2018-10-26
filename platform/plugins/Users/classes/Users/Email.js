@@ -73,14 +73,21 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 	}
 	if (typeof from === "string") from = [from, Q.Config.expect(['Q', 'app'])];
 
+	// if subject is object - get subject from text file
+	if (typeof subject === 'object') {
+		var fileData = Q.Text.get(subject[0], options.language);
+		subject = Q.getObject(subject[1], fileData);
+	}
+
+	subject = subject ? Q.view(subject, fields, {language: options.language, source: true}) : '';
+	var body = Q.view(view, fields, {language: options.language, source: options.isSource});
+
 	var mailOptions = {
 		from: from[1]+' <'+from[0]+'>',
 		to: to,
-		subject: subject ? Q.Handlebars.renderSource(subject, fields) : ''
+		subject: subject
 	};
-	mailOptions[options.html ? 'html' : 'text'] = options.isSource
-		? Q.Handlebars.renderSource(view, fields)
-		: Q.Handlebars.render(view, fields);
+	mailOptions[options.html ? 'html' : 'text'] = body;
 
 	var smtp = Q.Config.get(['Users', 'email', 'smtp'], {host: 'sendmail'});
 	if (!_transport && smtp) {
