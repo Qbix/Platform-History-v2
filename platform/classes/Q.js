@@ -2288,6 +2288,12 @@ Q.init = function _Q_init(app, notListen) {
 	 */
 	Q.Config = require('./Q/Config');
 	/**
+	 * Reference to Q.Text class
+	 * @property Text
+	 * @type {object}
+	 */
+	Q.Text = require('./Q/Text');
+	/**
 	 * Reference to Q.Bootstrap class
 	 * @property Bootstrap
 	 * @type {object}
@@ -2354,6 +2360,40 @@ Q.init = function _Q_init(app, notListen) {
 	}, notListen);
 };
 
+/**
+ * Renders a particular view
+ * @method view
+ * @param {string} viewName
+ *  The full name of the view
+ * @param {array} [params=array] Parameters to pass to the view
+ * @param {array} [options=array] Some options
+ * @param {string|null} [options.language=null] Preferred language
+ * @param {string|null} [options.source=false]
+ * @return {string} The rendered content of the view
+ */
+Q.view = function _Q_view(viewName, params, options) {
+	params = params || [];
+	options = options || [];
+
+	if (options.source) {
+		return Q.Handlebars.renderSource(viewName, params);
+	}
+
+	var parts = viewName.split('/');
+	var viewPath = parts.join(Q.DS);
+	var fields = Q.Config.get(['Q', 'views', 'fields'], null);
+	if (fields && typeof fields === 'object') {
+		params = Q.extend(fields, params);
+	}
+
+	// set options
+	options.language = options.language || null;
+
+	var textParams = Q.Text.params(parts, {'language': options.language});
+	params = Q.extend(textParams, params);
+
+	return Q.Handlebars.render(viewPath, params);
+};
 /**
  * Check if a file exists in the include path
  * And if it does, return the absolute path.
