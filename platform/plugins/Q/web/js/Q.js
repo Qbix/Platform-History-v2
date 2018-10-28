@@ -11867,9 +11867,8 @@ Q.Audio.pauseAll = function () {
 };
 
 /**
- * Methods to do speech in various browsers
- * @Class Q.Audio.speak
- * @constructor
+ * Speak text in various browsers
+ * @method speak
  * @param {String} text specifies the text that will be spoken.
  * @param {Object} [options] An optional hash of options for Q.Audio.speak:
  * @param {String} [options.gender="female"] the voice in which will be speech the text.
@@ -11886,7 +11885,7 @@ Q.Audio.speak = function (text, options) {
 	var o = Q.extend(
 		{}, Q.Audio.speak.options, 10, options
 	);
-	if(typeof text !== "string") {
+	if (typeof text !== "string") {
 		throw new Q.Error("Q/Speech: the text for speech must be a string");
 	}
 	if (TTS) {
@@ -11902,8 +11901,7 @@ Q.Audio.speak = function (text, options) {
 		}, function (reason) {
 			console.warn("Q/Speech: " + reason);
 		});
-	}
-	else if (SS) {
+	} else if (SS) {
 		if (SS.speaking) {
 			return;
 		}
