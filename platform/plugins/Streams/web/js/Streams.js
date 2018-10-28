@@ -4765,7 +4765,7 @@ Q.onInit.add(function _Streams_onInit() {
 	}
 
 	/**
-	 * Lesten for messages and show them as notices
+	 * Listen for messages and show them as notices
 	 */
 	function _notificationsToNotice () {
 		var userId = Q.Users.loggedInUserId();
@@ -4781,7 +4781,6 @@ Q.onInit.add(function _Streams_onInit() {
 			texts = Q.getObject("notifications", text);
 		});
 
-		// this is GREAT thing!!! It listen ALL messages user participated, regardless streams in cache or not.
 		Users.Socket.onEvent('Streams/post').set(function (message) {
 			var publisherId = Q.getObject(["publisherId"], message);
 			var streamName = Q.getObject(["streamName"], message);
@@ -4826,7 +4825,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 				});
 			});
-		}, 'Streams/notifications/notice');
+		}, 'Streams.notifications.notice');
 	};
 
 	// handle updates
