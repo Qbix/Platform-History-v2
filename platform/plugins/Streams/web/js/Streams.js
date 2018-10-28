@@ -1997,7 +1997,35 @@ Sp.removePermission = function (permission) {
 	}
 	pf.permissions = JSON.stringify(permissions);
 };
+/**
+ * Returns the canonical url of the stream, if any
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
+ * @return {String|null|false}
+ */
+Sp.url = function (messageOrdinal, baseUrl)
+{
+	var url = Q.getObject("Q.plugins.Streams.urls." + this.fields.type);
+	if (!url) {
+		return null;
+	}
 
+	var urlString = '';
+
+	Q.Template.set(url, url);
+	Q.Template.render(url, {
+		publisherId: this.fields.publisherId,
+		streamName: this.fields.name.split('/'),
+		name: this.fields.name,
+		baseUrl: baseUrl || Q.baseUrl()
+	}, function (err, html) {
+		if (err) return;
+		urlString = html;
+	});
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
+	var qs = messageOrdinal ? sep+messageOrdinal : "";
+	return Q.url(urlString + sep + qs);
+};
 /**
  * Save a stream to the server
  * 
@@ -4715,6 +4743,7 @@ Q.onInit.add(function _Streams_onInit() {
 			_clearCaches();
 		};
 		_connectSockets.apply(this, arguments);
+		_notificationsToNotice();
 	}, "Streams");
 	Users.onLogout.set(function () {
 		Interests.my = {}; // clear the interests
@@ -4724,6 +4753,7 @@ Q.onInit.add(function _Streams_onInit() {
 	}, "Streams");
 	if (Users.loggedInUser) {
 		_connectSockets(true); // refresh streams
+		_notificationsToNotice();
 	}
 	
 	// handle resign/resume application in Cordova
@@ -4733,7 +4763,71 @@ Q.onInit.add(function _Streams_onInit() {
 			_connectSockets(true);
 		});
 	}
-	
+
+	/**
+	 * Listen for messages and show them as notices
+	 */
+	function _notificationsToNotice () {
+		var userId = Q.Users.loggedInUserId();
+		var notificationsAsNotice = Q.getObject("Q.plugins.Streams.notifications.notices");
+
+		if (!userId || !notificationsAsNotice) {
+			return;
+		}
+
+		// get texts for notices
+		var texts = {};
+		Q.Text.get('Streams/content', function (err, text) {
+			texts = Q.getObject("notifications", text);
+		});
+
+		Users.Socket.onEvent('Streams/post').set(function (message) {
+			var publisherId = Q.getObject(["publisherId"], message);
+			var streamName = Q.getObject(["streamName"], message);
+			var messageType = Q.getObject(["type"], message);
+			var byUserId = Q.getObject(["byUserId"], message);
+			var content = Q.getObject(["content"], message);
+
+			// if this message type absent in config
+			if (!Q.getObject([messageType], notificationsAsNotice)) {
+				return;
+			}
+
+			// only messages for Streams plugin
+			if (messageType.slice(0, messageType.indexOf('/')) !== 'Streams') {
+				return;
+			}
+
+			// skip myself messages
+			if (byUserId === userId) {
+				return;
+			}
+
+			// check 'notices' attribute
+			Streams.get(publisherId, streamName, function () {
+				var stream = this;
+
+				if (!stream.getAttribute('notices')) {
+					return;
+				}
+
+				Streams.Avatar.get(byUserId, function (err, avatar) {
+					var text = Q.getObject([messageType], texts);
+
+					if (!text || typeof text !== 'string') {
+						return console.warn('notificationsAsNotice: no text for ' + messageType);
+					}
+
+					Q.Notice.add({
+						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
+						timeOut: 10,
+						handler: stream.url()
+					});
+				});
+			});
+		}, 'Streams.notifications.notice');
+	};
+
 	// handle updates
 	function _updateDisplayName(fields, k) {
 		Avatar.get.force(Users.loggedInUser.id, function () {
