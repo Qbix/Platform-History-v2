@@ -265,6 +265,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	if (typeof deliver === 'string') {
 		deliver = {to: deliver};
 	}
+
 	Users.fetch(toUserId, function (err) {
 		var to = Q.Config.get(
 			['Streams', 'rules', 'deliver', deliver.to],
@@ -286,6 +287,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			callback: callback
 		};
 		var result = [];
+
 		/**
 		 * @event "Streams/deliver/:messageType"
 		 * @param {Object} options for the notification delivery
@@ -298,6 +300,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		} else {
 			_afterTransform();
 		}
+
 		function _afterTransform() {
 			var w1 = [];
 			var e, m, d;
@@ -392,7 +395,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				viewPath = 'Streams/message/email.handlebars';
 			}
 			Users.Email.sendMessage(
-				emailAddress, o.subject, viewPath, o.fields, {html: true}, callback
+				emailAddress, o.subject, viewPath, o.fields, {html: true, language: uf.preferredLanguage}, callback
 			);
 			result.push({'email': emailAddress});
 		}
@@ -404,7 +407,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
-			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {}, callback);
+			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {language: uf.preferredLanguage}, callback);
 			result.push({'mobile': mobileNumber});
 		}
 		function _device(deviceId, callback) {
@@ -415,6 +418,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
 			}
+
 			Users.pushNotifications(
 				toUserId, 
 				{
@@ -424,7 +428,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 					icon: o.icon
 				},
 				callback, 
-				{ view: viewPath, fields: o.fields },
+				{view: viewPath, fields: o.fields, language: uf.preferredLanguage},
 				function (device) {
 					if (deviceId && device.deviceId !== deviceId) {
 					return false;

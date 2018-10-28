@@ -70,9 +70,7 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 		}
 	}
 	
-	var content = options.isSource
-		? Q.Handlebars.renderSource(view, fields)
-		: Q.Handlebars.render(view, fields);
+	var content = Q.view(view, fields, {language: options.language, source: options.isSource});
 	
 	if (twilioClient
 	&& (from = options.from || Q.Config.get(['Users', 'mobile', 'from'], null))) {

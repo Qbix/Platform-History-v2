@@ -2177,7 +2177,8 @@
 		"Users/status": "{{Users}}/js/tools/status.js",
 		"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
 		"Users/getintouch": "{{Users}}/js/tools/getintouch.js",
-		"Users/sessions": "{{Users}}/js/tools/sessions.js"
+		"Users/sessions": "{{Users}}/js/tools/sessions.js",
+		"Users/language": "{{Users}}/js/tools/language.js"
 	});
 
 	Q.beforeInit.add(function _Users_beforeInit() {

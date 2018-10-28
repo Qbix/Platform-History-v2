@@ -12,5 +12,6 @@
 		"prompt": "Do you want to enable notifications?",
 		"yes": "Yes",
 		"no": "No"
-	}
+	},
+	"invalidLanguageSelected": "Invalid language selected"
 }
