@@ -78,9 +78,10 @@ if (is_dir($parent_dir)) {
 	}
 }
 $time = time();
+$urls_export = Q::var_export($result);
 file_put_contents(
 	$dir_to_save.DS.'urls.php',
-	"<?php\nQ_Uri::\$urls = " . var_export($result, true) . ";"
+	"<?php\nQ_Uri::\$urls = $urls_export;"
 );
 echo PHP_EOL;
 file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
@@ -108,9 +109,9 @@ function Q_script_urls_glob(
 	$filenames = glob($dir.DS.'*');
 	foreach ($filenames as $f) {
 		$u = substr($f, $len+1);
-		if ($u === 'Q'.DS.'urls') {
-			continue;
-		}
+		// if ($u === 'Q'.DS.'urls') {
+		// 	continue;
+		// }
 		$ext = pathinfo($u, PATHINFO_EXTENSION);
 		if (!is_dir($f)) {
 			if (is_array($ignore) and in_array($ext, $ignore)) {
