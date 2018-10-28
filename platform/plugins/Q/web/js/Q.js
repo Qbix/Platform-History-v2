@@ -6059,7 +6059,8 @@ Q.load = function _Q_load(plugins, callback, options) {
 };
 
 /**
- * Obtain a URL
+ * Obtain a URL to request. Takes into account the Q_ct and Q_ut cookies
+ * in order to work with Cordova file bundles, as well as Q.updateUrls()
  * @static
  * @method url
  * @param {Object|String|null} what
@@ -6098,6 +6099,9 @@ Q.url = function _Q_url(what, fields, options) {
 	if (info) {
 		if (info.t) {
 			what3 += '?Q.cacheBust=' + info.t;
+			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
+				baseUrl = info.cacheBaseUrl;
+			}
 		}
 		if (options && options.info) {
 			Q.extend(options.info, 10, info);

@@ -1388,22 +1388,26 @@ class Q
 			$var_2 = addslashes($var);
 			return "'$var_2'";
 		} elseif (is_array($var)) {
+			$len = 0;
 			$indexed_values_quoted = array();
 			$keyed_values_quoted = array();
 			foreach ($var as $key => $value) {
 				$value = self::var_export($value);
-				if (is_string($key)) {
-					$keyed_values_quoted[] = "'" . addslashes($key) . "' => $value";
-				} else {
+				if ($key === $len) {
 					$indexed_values_quoted[] = $value;
+				} else {
+					$keyed_values_quoted[] = "'" . addslashes($key) . "' => $value";
 				}
+				++$len;
 			}
 			$parts = array();
-			if (! empty($indexed_values_quoted))
+			if (!empty($indexed_values_quoted)) {
 				$parts['indexed'] = implode(', ', $indexed_values_quoted);
-			if (! empty($keyed_values_quoted))
+			}
+			if (!empty($keyed_values_quoted)) {
 				$parts['keyed'] = implode(', ', $keyed_values_quoted);
-			$exported = 'array(' . implode(", ".PHP_EOL, $parts) . ')';
+			}
+			$exported = '[' . implode(", ".PHP_EOL, $parts) . ']';
 			return $exported;
 		} else {
 			return var_export($var, true);
