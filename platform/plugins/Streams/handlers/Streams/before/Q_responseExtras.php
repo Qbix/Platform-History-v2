@@ -29,4 +29,17 @@ function Streams_before_Q_responseExtras()
 		}
 	}
 	Q_Response::addStylesheet("{{Streams}}/css/Streams.css", 'Streams');
+	Q_Response::setScriptData('Q.plugins.Streams.notifications.notices', Q_Config::get("Streams", "notifications", "notices", null));
+
+	// collect url for all stream types and return to client
+	$types = Q_Config::get("Streams", "types", array());
+	$typeUrls = array();
+	foreach($types as $type => $content) {
+		if (!isset($content['url'])) {
+			continue;
+		}
+
+		$typeUrls[$type] = $content['url'];
+	}
+	Q_Response::setScriptData('Q.plugins.Streams.urls', $typeUrls);
 }
