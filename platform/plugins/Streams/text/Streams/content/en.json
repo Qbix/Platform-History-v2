@@ -19,5 +19,18 @@
 	},
 	"notifications": {
 		"Streams/chat/message": "{{displayName}} said: {{content}}"
+	},
+	"followup": {
+		"mobile": {
+			"alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
+		},
+		"email": {
+			"alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"subject": "Did you get an invite?",
+			"body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
+		}
 	}
 }
