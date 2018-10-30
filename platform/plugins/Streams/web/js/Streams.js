@@ -5374,7 +5374,7 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 Q.Text.get('Streams/content', function (err, text) {
 	var msg = Q.firstErrorMessage(err);
 	if (msg) {
-		console.warn(msg);
+		return console.warn(msg);
 	}
 
 	Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
