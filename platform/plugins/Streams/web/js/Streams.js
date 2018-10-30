@@ -5371,23 +5371,20 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 	}, options));
 }
 
-Q.Template.set('Streams/followup/mobile/alert', "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
+Q.Text.get('Streams/content', function (err, text) {
+	var msg = Q.firstErrorMessage(err);
+	if (msg) {
+		return console.warn(msg);
+	}
 
-Q.Template.set('Streams/followup/mobile/confirm', "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/mobile', 
-	"Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
-);
-
-Q.Template.set('Streams/followup/email/alert', "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/email/confirm', "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/email/subject', "Did you get an invite?");
-
-Q.Template.set('Streams/followup/email/body', 
-	"Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
-);
+	Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
+	Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
+	Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
+	Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
+	Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
+	Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
+	Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
+});
 
 _scheduleUpdate.delay = 5000;
 
