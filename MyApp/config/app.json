@@ -176,22 +176,22 @@
 	"Assets": {
 		"transactional": {
 			"charge": {
-				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+				"subject": ["MyApp/content", ["notifications", "ChargeProcessedFor"]],
 				"body": "MyApp/email/charge.php",
 				"sms": "MyApp/sms/charge.php"
 			},
 			"charged": {
-				"subject": "Thank you for your payment to {{call 'publisher.displayName'}}",
+				"subject": ["MyApp/content", ["notifications", "ThankForPayment"]],
 				"body": "MyApp/email/charged.php",
 				"sms": "MyApp/sms/charged.php"
 			},
 			"startSubscription": {
-				"subject": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+				"subject": ["MyApp/content", ["notifications", "SubscribedToPlan"]],
 				"body": "MyApp/email/startSubscription.php",
 				"sms": "MyApp/sms/startSubscription.php"
 			},
 			"startedSubscription": {
-				"subject": "You have been subscribed to {{plan.title}}",
+				"subject": ["MyApp/content", ["notifications", "YouSubscribedToPlan"]],
 				"body": "MyApp/email/startedSubscription.php",
 				"sms": "MyApp/sms/startedSubscription.php"
 			}
