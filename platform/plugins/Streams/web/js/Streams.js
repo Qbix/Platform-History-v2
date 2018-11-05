@@ -4826,6 +4826,21 @@ Q.onInit.add(function _Streams_onInit() {
 				});
 			});
 		}, 'Streams.notifications.notice');
+
+		Q.Text.get('Streams/content', function (err, text) {
+			var msg = Q.firstErrorMessage(err);
+			if (msg) {
+				return console.warn(msg);
+			}
+
+			Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
+			Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
+			Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
+			Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
+			Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
+			Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
+			Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
+		});
 	};
 
 	// handle updates
@@ -5370,21 +5385,6 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 		unlessSocket: true
 	}, options));
 }
-
-Q.Text.get('Streams/content', function (err, text) {
-	var msg = Q.firstErrorMessage(err);
-	if (msg) {
-		return console.warn(msg);
-	}
-
-	Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
-	Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
-	Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
-	Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
-	Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
-	Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
-	Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
-});
 
 _scheduleUpdate.delay = 5000;
 
