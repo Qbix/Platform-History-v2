@@ -12913,6 +12913,7 @@ Q.Notice = {
 		}
 		var li = document.createElement('li');
 		li.setAttribute('data-key', key);
+		li.setAttribute('data-local', true);
 		li.classList.add(noticeClass);
 		li.onclick = function () {
 			Q.handle(handler, li, [content]);
