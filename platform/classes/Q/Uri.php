@@ -914,7 +914,7 @@ class Q_Uri
 	 * @param {boolean} [$options.skipCacheBaseUrl=false] If true, skips the cacheBaseUrl transformations
 	 * @return {array} array($urlWithCacheBust, $hash)
 	 */
-	static function cachedUrlAndHash($url, $options) {
+	static function cachedUrlAndHash($url, $options = array()) {
 		$cacheTimestamp = Q_Request::cacheTimestamp();
 		$environment = Q_Config::get('Q', 'environment', '');
 		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
@@ -923,7 +923,7 @@ class Q_Uri
 		}
 		$fileTimestamp = null;
 		$fileSHA = null;
-		if (!empty($config['cacheBust']) or !empty($config['integrity'])) {
+		if (!empty($config['caching']) or !empty($config['integrity'])) {
 			$parts = explode('?', $url);
 			$head = $parts[0];
 			$tail = (count($parts) > 1 ? $parts[1] : '');
@@ -933,7 +933,7 @@ class Q_Uri
 			$parts[] = null;
 			$tree = new Q_Tree(Q_Uri::$urls);
 			$info = call_user_func_array(array($tree, 'get'), $parts);
-			if (!empty($config['cacheBust'])) {
+			if (!empty($config['caching'])) {
 				$fileTimestamp = Q::ifset($info, 't', null);
 			}
 			if (!empty($config['integrity'])) {
