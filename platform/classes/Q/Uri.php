@@ -910,9 +910,11 @@ class Q_Uri
 	 * Otherwise, the url relative to cacheBaseUrl is used, making the client
 	 * load the locally cached version.
 	 * @param {string} $url The url to get the cached URL and hash for
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.skipCacheBaseUrl=false] If true, skips the cacheBaseUrl transformations
 	 * @return {array} array($urlWithCacheBust, $hash)
 	 */
-	static function cachedUrlAndHash($url) {
+	static function cachedUrlAndHash($url, $options) {
 		$cacheTimestamp = Q_Request::cacheTimestamp();
 		$environment = Q_Config::get('Q', 'environment', '');
 		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
