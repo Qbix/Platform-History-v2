@@ -910,9 +910,11 @@ class Q_Uri
 	 * Otherwise, the url relative to cacheBaseUrl is used, making the client
 	 * load the locally cached version.
 	 * @param {string} $url The url to get the cached URL and hash for
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.skipCacheBaseUrl=false] If true, skips the cacheBaseUrl transformations
 	 * @return {array} array($urlWithCacheBust, $hash)
 	 */
-	static function cachedUrlAndHash($url) {
+	static function cachedUrlAndHash($url, $options = array()) {
 		$cacheTimestamp = Q_Request::cacheTimestamp();
 		$environment = Q_Config::get('Q', 'environment', '');
 		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
@@ -921,7 +923,7 @@ class Q_Uri
 		}
 		$fileTimestamp = null;
 		$fileSHA = null;
-		if (!empty($config['cacheBust']) or !empty($config['integrity'])) {
+		if (!empty($config['caching']) or !empty($config['integrity'])) {
 			$parts = explode('?', $url);
 			$head = $parts[0];
 			$tail = (count($parts) > 1 ? $parts[1] : '');
@@ -931,7 +933,7 @@ class Q_Uri
 			$parts[] = null;
 			$tree = new Q_Tree(Q_Uri::$urls);
 			$info = call_user_func_array(array($tree, 'get'), $parts);
-			if (!empty($config['cacheBust'])) {
+			if (!empty($config['caching'])) {
 				$fileTimestamp = Q::ifset($info, 't', null);
 			}
 			if (!empty($config['integrity'])) {

@@ -1078,7 +1078,9 @@ class Q_Response
 		$result = array();
 		foreach ($scripts as $k => $b) {
 			if ($urls) {
-				$b['src'] = Q_Html::themedUrl($b['src']);
+				list($src, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['src']);
+				$b['src'] = $src;
+				$b['hash'] = $hash;
 			}
 			if (!empty($srcs[ $b['src'] ])) {
 				continue;
@@ -1148,10 +1150,13 @@ class Q_Response
 			$src = '';
 			// $media = 'screen,print';
 			$type = 'text/css';
+			$hash = null;
 			extract($script, EXTR_IF_EXISTS);
 			$tags[] = Q_Html::tag(
 				'script',
-				array('type' => $type, 'src' => $src, 'data-slot' => $script['slot'])
+				array('type' => $type, 'src' => $src, 'data-slot' => $script['slot']),
+				null,
+				compact('hash')
 			) . '</script>';
 		}
 		return implode($between, $tags);
@@ -1256,7 +1261,9 @@ class Q_Response
 		$saw = array();
 		foreach ($sheets as $b)  {
 			if ($urls) {
-				$b['href'] = Q_Html::themedUrl($b['href']);
+				list($href, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['href']);
+				$b['href'] = $href;
+				$b['hash'] = $hash;
 			}
 			$key = $b['href'].' '.$b['media'];
 			if (!empty($saw[$key])) {
@@ -1333,10 +1340,11 @@ class Q_Response
 			$href = '';
 			$media = 'screen,print';
 			$type = 'text/css';
+			$hash = null;
 			extract($stylesheet, EXTR_IF_EXISTS);
 			$attributes = compact('rel', 'type', 'href', 'media');
 			$attributes['data-slot'] = $stylesheet['slot'];
-			$tags[] = Q_Html::tag('link', $attributes);
+			$tags[] = Q_Html::tag('link', $attributes, null, compact('hash'));
 		}
 		return implode($between, $tags);
 	}

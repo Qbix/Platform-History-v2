@@ -76,13 +76,13 @@
 					"js/MyApp.js": "js/all.js"
 				},
 				"urls": {
-					"cacheBust": true,
+					"caching": true,
 					"integrity": true
 				}
 			},
 			"test": {
 				"urls": {
-					"cacheBust": true
+					"caching": true
 				}
 			}
 		},

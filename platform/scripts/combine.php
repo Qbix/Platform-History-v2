@@ -73,7 +73,9 @@ function Q_scripts_combine()
 	}
 	$combined = array();
 	foreach ($files as $src => $dest) {
-		$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, true));
+		$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, array(
+			'ignoreEnvironment' => true
+		)));
 		if (!file_exists($f)) {
 			return "Aborting: File $f corresponding to $src doesn't exist";
 		}
