@@ -690,8 +690,10 @@ html.Q_scanning body > .Q_scanning_code {
 #notices_slot ul li {
 	position: relative;
 	text-align: left;
-	max-height: 0;
 	overflow: hidden;
+}
+#notices_slot ul li[data-local] {
+	max-height: 0;
 	transition: max-height .75s ease-in-out 0s;
 }
 #notices_slot ul li.Q_common_notice {
