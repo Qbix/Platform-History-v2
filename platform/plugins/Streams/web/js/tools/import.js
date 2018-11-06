@@ -27,7 +27,7 @@ Q.setObject("Q.text_en.Travel.trip", Q.text.Streams.trip);
  * @constructor
  * @param {array} [options] this array contains function parameters
  *   @param {String} [options.link] Required. URL to the csv file to download, if any.
- *      Can be a full url or one of "university" or "building".
+ *    Can be a full url, "{{Module}}/path/file.csv" or one of "university.csv" or "building.csv".
  *   @param {String} [options.linkTitle="Fill Out This Spreadsheet"] The content of the link to the csv, if csv is set
  *   @param {String} [options.fileLabel="Upload Spreadsheet"] The content of the link to the csv, if csv is set
  *   @param {String} [options.smsText] The text to send in SMS followups
@@ -49,7 +49,7 @@ Q.Tool.define("Streams/import", function (options) {
 			action: Q.action('Streams/import')
 		}, Q.text.Streams.import, state);
 		if (state.link) {
-			fields.href = state.link.isUrl()
+			fields.href = state.link.isUrl() || state.link[0] === '{'
 				? state.link
 				: Q.url('{{Streams}}/importing/' + state.link);
 		}

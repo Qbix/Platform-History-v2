@@ -82,6 +82,6 @@ function Q_before_Q_responseExtras()
 	// We may want to set the initial URL and updateTimestamp cookie
 	$environment = Q_Config::get('Q', 'environment', '');
 	$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
-	$updateurlsBeforeInit = !empty($config['integrity']) or !empty($config['cacheBust']);
-	Q_Response::setScriptData('Q.info.updateUrlsBeforeInit', $updateurlsBeforeInit);
+	$config['updateBeforeInit'] = (!empty($config['integrity']) or !empty($config['caching']));
+	Q_Response::setScriptData('Q.info.urls', $config);
 }
