@@ -5528,7 +5528,7 @@ Q.init = function _Q_init(options) {
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
-	if (Q.info.updateUrlsBeforeInit) {
+	if (Q.info.urls.updateBeforeInit) {
 		Q.updateUrls(function () {
 			Q.handle(Q.onInit);
 		});
@@ -6097,7 +6097,7 @@ Q.url = function _Q_url(what, fields, options) {
 		info = Q.getObject(what3, Q.updateUrls.urls, '/');
 	}
 	if (info) {
-		if (info.t) {
+		if (Q.info.urls && Q.info.urls.caching && info.t) {
 			what3 += '?Q.cacheBust=' + info.t;
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
@@ -7133,7 +7133,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	script = document.createElement('script');
 	script.setAttribute('type', 'text/javascript');
 	if (options.info.h && !options.skipIntegrity) {
-		script.setAttribute('integrity', 'sha256-' + options.info.h);
+		if (Q.info.urls && Q.info.urls.integrity) {
+			script.setAttribute('integrity', 'sha256-' + options.info.h);
+		}
 	}
 	Q.addScript.added[src] = true;
 	Q.addScript.onLoadCallbacks[src] = [_onload];
@@ -7206,7 +7208,7 @@ Q.currentScript = function (stackLevels) {
 			break;
 		}
 	}
-	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/);
+	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*)):/);
 	return {
 		src: parts[1],
 		path: parts[2],
@@ -7371,7 +7373,9 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.setAttribute('type', 'text/css');
 	link.setAttribute('media', media);
 	if (options.info.h && !options.skipIntegrity) {
-		link.setAttribute('integrity', 'sha256-' + options.info.h);
+		if (Q.info.urls && Q.info.urls.caching) {
+			link.setAttribute('integrity', 'sha256-' + options.info.h);
+		}
 	}
 	Q.addStylesheet.added[href] = true;
 	Q.addStylesheet.onLoadCallbacks[href] = [onload];
