@@ -353,7 +353,7 @@ class Q_Session
 		}
 		if (isset($_SESSION['Q']['notices'])) {
 			foreach ($_SESSION['Q']['notices'] as $k => $v) {
-				Q_Response::setNotice($k, $v);
+				Q_Response::setNotice($k, $v['notice'], $v['options']);
 			}
 		}
 		if (!empty($_SESSION['Q']['terminated'])) {

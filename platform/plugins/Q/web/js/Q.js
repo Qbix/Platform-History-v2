@@ -12878,6 +12878,7 @@ Q.Notice = {
 	 * @param {String} [options.type=common] Arbitrary type of notice. Can be used to apply different styles dependent on type,
 	 * because appropriate CSS class appended to the notice. May be 'error', 'warning'.
 	 * @param {Boolean|Number} [options.timeout=false] Time in seconds after which to remove notice.
+	 * @param {Boolean|Number} [options.persistent=false] Whether to save this notice to session to show after page refresh.
 	 */
 	add: function(options)
 	{
@@ -12890,7 +12891,8 @@ Q.Notice = {
 			key: null,
 			closeable: true,
 			type: 'common',
-			timeout: false
+			timeout: false,
+			persistent: false
 		}, options);
 
 		var key = options.key;
@@ -12898,6 +12900,7 @@ Q.Notice = {
 		var closeable = options.closeable;
 		var timeout = options.timeout;
 		var handler = options.handler;
+		var persistent = options.persistent;
 		var noticeClass = 'Q_' + options.type + '_notice';
 
 
@@ -12913,6 +12916,7 @@ Q.Notice = {
 		}
 		var li = document.createElement('li');
 		li.setAttribute('data-key', key);
+		li.setAttribute('data-persistent', persistent);
 		li.setAttribute('data-local', true);
 		li.classList.add(noticeClass);
 		li.onclick = function () {
@@ -12946,6 +12950,22 @@ Q.Notice = {
 		// apply transition
 		setTimeout(function () {
 			Q.Notice.show(li);
+
+			if (persistent) {
+				Q.req('Q/notice', [], null, {
+					method: 'post',
+					fields: {
+						key: key,
+						content: content,
+						options: {
+							persistent: persistent,
+							closeable: closeable,
+							timeout: timeout,
+							handler: handler
+						}
+					}
+				});
+			}
 		}, 0);
 	},
 	/**
@@ -12976,12 +12996,28 @@ Q.Notice = {
 	 */
 	remove: function(notice)
 	{
+		if (Array.isArray(notice)) {
+			notice.forEach(function(item) {
+				Q.Notice.remove(item);
+			});
+		}
+
 		notice = this.get(notice);
 
 		if (notice instanceof HTMLElement) {
 			this.hide(notice);
 
 			setTimeout(function () {
+				var key = notice.getAttribute('data-key');
+
+				// if notice persistent - send request to remove from session
+				if (typeof key === 'string' && notice.getAttribute('data-persistent')) {
+					Q.req('Q/notice', 'data', null, {
+						method: 'delete',
+						fields: {key: key}
+					});
+				}
+
 				notice.remove();
 			}, 750);
 		}
@@ -13014,8 +13050,52 @@ Q.Notice = {
 		if (notice instanceof HTMLElement) {
 			notice.classList.add("Q_show_notice");
 		}
+	},
+	/**
+	 * Parse notices loaded from backend.
+	 * @method parseNotices
+	 */
+	parseNotices: function () {
+		var noticeElements = document.getElementById("notices").getElementsByTagName("li");
+		var options = {}, handler, key, persistent, timeout, type;
+
+		for (var li of noticeElements) {
+			options = {};
+			options.content = li.innerHTML;
+
+			handler = li.getAttribute('data-handler');
+			if (handler) {
+				options.handler = handler;
+			}
+
+			key = li.getAttribute('data-key');
+			if (typeof key === 'string') {
+				options.key = key;
+			}
+
+			persistent = li.getAttribute('data-persistent');
+			if (persistent) {
+				options.persistent = persistent;
+			}
+
+			timeout = li.getAttribute('data-timeout');
+			if (timeout) {
+				options.timeout = timeout;
+			}
+
+			type = li.getAttribute('data-type') || 'common';
+			if (type) {
+				options.type = type;
+			}
+
+			// need to remove before adding because can be keys conflict
+			li.remove();
+
+			Q.Notice.add(options);
+		};
 	}
 };
+Q.Notice.parseNotices();
 
 /**
  * This loads bluebird library to enable Promise for browsers which do not
