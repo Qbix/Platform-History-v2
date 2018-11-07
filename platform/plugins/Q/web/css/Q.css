@@ -683,3 +683,11 @@ html.Q_scanning body > .Q_scanning_code {
 	background-image:none !important;
 	animation: Q_newsflash 2s ease-in-out;
 }
+.Q_appear {
+	transition: transform .25s!important;
+	transform: scale(1)!important;
+}
+.Q_disappear {
+	transition: transform .25s!important;
+	transform: scale(0)!important;
+}
