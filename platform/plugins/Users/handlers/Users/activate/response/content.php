@@ -111,13 +111,6 @@ function Users_activate_response_content()
 		
 	}
 
-	Q_Response::addScriptLine("Q.onReady.set(function () {
-		if (Q.Notice) {
-			Q.Notice.hide('Users/email');
-			Q.Notice.hide('Users/mobile');
-		}
-	});"); // shh! not while I'm activating! lol
-	
 	return Q::view($view, compact(
 		'identifier', 'type', 'user', 'code',
 		'suggestions', 'verb_ue', 'noun_ue', 't', 'app', 'home', 'complete'
