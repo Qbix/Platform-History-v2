@@ -1164,6 +1164,7 @@ class Users_User extends Base_Users_User
 
 		Users_Contact::delete()
 			->where(array('userId' => $userIds))
+			->orWhere(array('contactUserId' => $userIds))
 			->execute();
 
 		Users_User::delete()
