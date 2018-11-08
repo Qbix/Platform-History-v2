@@ -121,7 +121,7 @@ function Q_script_urls_glob(
 			$hash = hash($algo, $c);
 			$enchash = base64_encode(hex2bin($hash));
 			$value = array('t' => filemtime($f), 'h' => $enchash);
-			$parts = explode('/', $u);
+			$parts = explode(DS, $u);
 			$parts[] = $value;
 			call_user_func_array(array($tree, 'set'), $parts);
 		}
