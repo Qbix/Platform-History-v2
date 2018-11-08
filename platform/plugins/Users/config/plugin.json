@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.1",
+				"version": "1.0.2",
 				"compatible": "0.9.3",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -98,17 +98,17 @@
 		},
 		"transactional": {
 			"activation": {
-				"subject": "Welcome! Please verify your email address.",
+				"subject": ["Users/content", ["notifications", "WelcomePleaseVerifyEmail"]],
 				"body": "Users/email/activation.php",
 				"sms": "Users/sms/activation.php"
 			},
 			"identifier": {
-				"subject": "Welcome! Verify your email address.",
+				"subject": ["Users/content", ["notifications", "WelcomeVerifyEmail"]],
 				"body": "Users/email/addEmail.php",
 				"sms": "Users/sms/addMobile.php"
 			},
 			"resend": {
-				"subject": "Hey, did you forget your passphrase?",
+				"subject": ["Users/content", ["notifications", "ForgetPass"]],
 				"body": "Users/email/resend.php",
 				"sms": "Users/sms/resend.php"
 			},

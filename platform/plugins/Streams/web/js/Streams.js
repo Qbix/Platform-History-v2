@@ -1367,7 +1367,7 @@ Streams.followup.options = {
  *  Publisher's user id
  * @param {String} streamName
  *	Name of the stream to/from which the others are related
- * @param {String|null} relationType the type of the relation
+ * @param {String|Array|null} relationType the type of the relation
  * @param {boolean} isCategory defaults to false. If true, then gets streams related TO this stream.
  * @param {Object} [options] optional object that can include:
  *   @param {Number} [options.limit] the maximum number of results to return
@@ -1391,9 +1391,11 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	if (!publisherId || !streamName) {
 		throw new Q.Error("Streams.related is expecting publisherId and streamName to be non-empty");
 	}
-	if (typeof publisherId !== 'string'
-	|| (relationType && typeof relationType !== 'string')) {
-		throw new Q.Error("Streams.related is expecting publisherId, relationType as strings");
+	if (typeof publisherId !== 'string') {
+		throw new Q.Error("Streams.related is expecting publisherId as a string");
+	}
+	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relatedType))) {
+		throw new Q.Error("Streams.related is expecting relationType as string or array");
 	}
 	if (typeof isCategory !== 'boolean') {
 		callback = options;
@@ -1562,6 +1564,25 @@ Streams.related.options = {
  * @event related.onError
  */
 Streams.related.onError = new Q.Event();
+
+/**
+ * Detect whether stream retained
+ * @static
+ * @method retainedByKey
+ * @param {String} publisherId
+ * @param {String} streamName
+ * @return {Boolean} Whether stream retained (true) or not (false)
+ */
+Streams.retainedByKey = function (publisherId, streamName) {
+	var ps = Streams.key(publisherId, streamName);
+	for (var i in _retainedByKey) {
+		if (Q.getObject([ps], _retainedByKey[i]) === true) {
+			return true;
+		}
+	}
+
+	return false;
+}
 
 /**
  * @class Streams.Stream
@@ -1995,7 +2016,35 @@ Sp.removePermission = function (permission) {
 	}
 	pf.permissions = JSON.stringify(permissions);
 };
+/**
+ * Returns the canonical url of the stream, if any
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
+ * @return {String|null|false}
+ */
+Sp.url = function (messageOrdinal, baseUrl)
+{
+	var url = Q.getObject("Q.plugins.Streams.urls." + this.fields.type);
+	if (!url) {
+		return null;
+	}
 
+	var urlString = '';
+
+	Q.Template.set(url, url);
+	Q.Template.render(url, {
+		publisherId: this.fields.publisherId,
+		streamName: this.fields.name.split('/'),
+		name: this.fields.name,
+		baseUrl: baseUrl || Q.baseUrl()
+	}, function (err, html) {
+		if (err) return;
+		urlString = html;
+	});
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
+	var qs = messageOrdinal ? sep+messageOrdinal : "";
+	return Q.url(urlString + sep + qs);
+};
 /**
  * Save a stream to the server
  * 
@@ -2609,6 +2658,15 @@ Sp.invite = function (options, callback) {
  */
 Sp.refresh = function _Stream_prototype_refresh (callback, options) {
 	return Stream.refresh(this.fields.publisherId, this.fields.name, callback, options);
+};
+
+/**
+ * Whether stream retained
+ * @method retainedByKey
+ * @return {Boolean}
+ */
+Sp.retainedByKey = function () {
+	return Streams.retainedByKey(this.fields.publisherId, this.fields.name);
 };
 
 /**
@@ -3580,7 +3638,7 @@ Message.shouldRefreshStream = function (type, should) {
 var MTotal = Streams.Message.Total = {
 	/**
 	 * Get one or more messageTotals, which may result in batch requests to the server.
-	 * May call MTotal.get.onError if an error occurs.
+	 * May call Streams.Message.Total.get.onError if an error occurs.
 	 * 
 	 * @static
 	 * @method get
@@ -3612,11 +3670,11 @@ var MTotal = Streams.Message.Total = {
 		});
 	},
 	/**
-	 * Returns the latest total number of messages posted to the stream
+	 * Returns the latest total number of messages (of a certain type) posted to the stream
 	 * @method latest
 	 * @static
 	 * @param {String} publisherId
-	 * @param {String} streamName
+	 * @param {String|Array} streamName
 	 * @param {String} messageType
 	 * @return {Integer|null}
 	 */
@@ -3629,7 +3687,7 @@ var MTotal = Streams.Message.Total = {
 		return Q.isInteger(value) ? value : (value[messageType] || null);
 	},
 	/**
-	 * Returns the latest number of unseen messages posted to the stream
+	 * Returns the latest number of unseen messages (of a certain type) posted to the stream
 	 * @method unseen
 	 * @static
 	 * @param {String} publisherId id of the user publishing the straem
@@ -3688,6 +3746,8 @@ var MTotal = Streams.Message.Total = {
 	},
 	
 	/**
+	 * Sets up an element to show the total number of unseen messages (of a certain type)
+	 * from a stream, and update the display in real time.
 	 * @method setUpElement
 	 * @static
 	 * @param {Element} element The element to set up
@@ -4711,6 +4771,7 @@ Q.onInit.add(function _Streams_onInit() {
 			_clearCaches();
 		};
 		_connectSockets.apply(this, arguments);
+		_notificationsToNotice();
 	}, "Streams");
 	Users.onLogout.set(function () {
 		Interests.my = {}; // clear the interests
@@ -4720,6 +4781,7 @@ Q.onInit.add(function _Streams_onInit() {
 	}, "Streams");
 	if (Users.loggedInUser) {
 		_connectSockets(true); // refresh streams
+		_notificationsToNotice();
 	}
 	
 	// handle resign/resume application in Cordova
@@ -4729,7 +4791,91 @@ Q.onInit.add(function _Streams_onInit() {
 			_connectSockets(true);
 		});
 	}
-	
+
+	/**
+	 * Listen for messages and show them as notices
+	 */
+	function _notificationsToNotice () {
+		var userId = Q.Users.loggedInUserId();
+		var notificationsAsNotice = Q.getObject("Q.plugins.Streams.notifications.notices");
+
+		if (!userId || !notificationsAsNotice) {
+			return;
+		}
+
+		// get texts for notices
+		var texts = {};
+		Q.Text.get('Streams/content', function (err, text) {
+			texts = Q.getObject("notifications", text);
+		});
+
+		Users.Socket.onEvent('Streams/post').set(function (message) {
+			var publisherId = Q.getObject(["publisherId"], message);
+			var streamName = Q.getObject(["streamName"], message);
+			var messageType = Q.getObject(["type"], message);
+			var byUserId = Q.getObject(["byUserId"], message);
+			var content = Q.getObject(["content"], message);
+
+			// if this message type absent in config
+			if (!Q.getObject([messageType], notificationsAsNotice)) {
+				return;
+			}
+
+			// only messages for Streams plugin
+			if (messageType.slice(0, messageType.indexOf('/')) !== 'Streams') {
+				return;
+			}
+
+			// skip myself messages
+			if (byUserId === userId) {
+				return;
+			}
+
+			// check 'notices' attribute
+			Streams.get(publisherId, streamName, function () {
+				var stream = this;
+
+				if (!stream.getAttribute('notices')) {
+					return;
+				}
+
+				// if stream retained - don't show notice
+				if (stream.retainedByKey()) {
+					return;
+				}
+
+				Streams.Avatar.get(byUserId, function (err, avatar) {
+					var text = Q.getObject([messageType], texts);
+
+					if (!text || typeof text !== 'string') {
+						return console.warn('notificationsAsNotice: no text for ' + messageType);
+					}
+
+					Q.Notice.add({
+						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
+						timeOut: 10,
+						handler: stream.url()
+					});
+				});
+			});
+		}, 'Streams.notifications.notice');
+
+		Q.Text.get('Streams/content', function (err, text) {
+			var msg = Q.firstErrorMessage(err);
+			if (msg) {
+				return console.warn(msg);
+			}
+
+			Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
+			Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
+			Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
+			Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
+			Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
+			Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
+			Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
+		});
+	};
+
 	// handle updates
 	function _updateDisplayName(fields, k) {
 		Avatar.get.force(Users.loggedInUser.id, function () {
@@ -5272,24 +5418,6 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 		unlessSocket: true
 	}, options));
 }
-
-Q.Template.set('Streams/followup/mobile/alert', "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/mobile/confirm', "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/mobile', 
-	"Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
-);
-
-Q.Template.set('Streams/followup/email/alert', "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/email/confirm', "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.");
-
-Q.Template.set('Streams/followup/email/subject', "Did you get an invite?");
-
-Q.Template.set('Streams/followup/email/body', 
-	"Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
-);
 
 _scheduleUpdate.delay = 5000;
 

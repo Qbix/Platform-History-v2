@@ -5528,7 +5528,7 @@ Q.init = function _Q_init(options) {
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
-	if (Q.info.updateUrlsBeforeInit) {
+	if (Q.info.urls.updateBeforeInit) {
 		Q.updateUrls(function () {
 			Q.handle(Q.onInit);
 		});
@@ -6097,7 +6097,7 @@ Q.url = function _Q_url(what, fields, options) {
 		info = Q.getObject(what3, Q.updateUrls.urls, '/');
 	}
 	if (info) {
-		if (info.t) {
+		if (Q.info.urls && Q.info.urls.caching && info.t) {
 			what3 += '?Q.cacheBust=' + info.t;
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
@@ -7133,7 +7133,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	script = document.createElement('script');
 	script.setAttribute('type', 'text/javascript');
 	if (options.info.h && !options.skipIntegrity) {
-		script.setAttribute('integrity', 'sha256-' + options.info.h);
+		if (Q.info.urls && Q.info.urls.integrity) {
+			script.setAttribute('integrity', 'sha256-' + options.info.h);
+		}
 	}
 	Q.addScript.added[src] = true;
 	Q.addScript.onLoadCallbacks[src] = [_onload];
@@ -7206,7 +7208,7 @@ Q.currentScript = function (stackLevels) {
 			break;
 		}
 	}
-	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/);
+	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*)):/);
 	return {
 		src: parts[1],
 		path: parts[2],
@@ -7371,7 +7373,9 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.setAttribute('type', 'text/css');
 	link.setAttribute('media', media);
 	if (options.info.h && !options.skipIntegrity) {
-		link.setAttribute('integrity', 'sha256-' + options.info.h);
+		if (Q.info.urls && Q.info.urls.caching) {
+			link.setAttribute('integrity', 'sha256-' + options.info.h);
+		}
 	}
 	Q.addStylesheet.added[href] = true;
 	Q.addStylesheet.onLoadCallbacks[href] = [onload];
@@ -11892,6 +11896,76 @@ Q.Audio.speak = function (text, options) {
 	if (typeof text !== "string") {
 		throw new Q.Error("Q/Speech: the text for speech must be a string");
 	}
+	// recognize the language of text
+	function _isCyrillic(text) {
+		var en = text.match(/[a-z]/ig);
+		var ru = text.match(/[а-я]/ig);
+		if (!en) {
+			return true;
+		} else if (!ru) {
+			return false;
+		} else if (ru.length > en.length) {
+			return true;
+		}
+	}
+	// stop voice list loading
+	function _stopLoading() {
+		clearInterval(loadingVoices);
+		loadingSeconds = 0;
+	}
+	// recognize the voice by language of text and gender
+	function _recognizeVoice(text, voicesList) {
+		var language = (_isCyrillic(text)) ? "ru-RU" : "en-US"
+		var gender = o.gender;
+		var voice = null;
+		var toggled = false;
+
+		function _switchGender(gender) {
+			return (gender == "female") ? "male" : "female"
+		}
+
+		function _search(){
+			var result = null;
+			var av = Q.getObject([language, gender], availableVoices) || [];
+			if (typeof av !== "object" || !av.length){
+				return {error: "Q/Speech: no such available voice"};
+			}
+			for(var i = 0; i < av.length; i++){
+				for(var j = 0; j < voicesList.length; j++){
+					if(av[i] == voicesList[j].name){
+						// founded voice ID from voices list
+						result = j;
+						break;
+					}
+				}
+				if(typeof result === "number") {
+					break;
+				}
+			}
+			if(result === null && toggled){
+				return {error: "Q/Speech: no voice support in this device for this language"};
+			} else if(result === null) {
+				var previousGender = gender;
+				gender = _switchGender(gender);
+				toggled = true;
+				console.info("%cQ/Speech: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
+				return _search();
+			} else {
+				return result;
+			}
+		}
+		// if the gender doesn't set manually - set to default
+		if (gender != "male" && gender != "female") {
+			gender = o.gender = "female";
+		}
+		voice = _search();
+		if(typeof voice !== 'number'){
+			var voiceError = Q.getObject("error", voice);
+			console.warn(voiceError);
+			return false;
+		}
+		return voice;
+	}
 	if (TTS) {
 		if (_isCyrillic(text)) {
 			o.locale = "ru-RU";
@@ -11910,6 +11984,7 @@ Q.Audio.speak = function (text, options) {
 			return;
 		}
 		var availableVoices = null;
+    
 		// recognize the language of text
 		function _isCyrillic(text) {
 			var en = text.match(/[a-z]/ig);
@@ -11980,6 +12055,7 @@ Q.Audio.speak = function (text, options) {
 			}
 			return voice;
 		}
+
 		var loadingSeconds = 0;
 		var loadingVoices = setInterval(function () {
 			var voicesList = SS.getVoices();

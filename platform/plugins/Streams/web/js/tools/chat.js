@@ -565,6 +565,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}).on('keypress change input focus paste blur Q_refresh', function(event) {
 			var $this = $(this);
 			var $form = $this.closest('form');
+			var $submit = $form.find('.submit');
 			var content = $this.val().trim();
 
 			// 'enter' key handler
@@ -574,9 +575,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			if (content) {
-				$form.attr('data-content', 1);
+				$submit.removeClass('Q_disappear').addClass('Q_appear');
 			} else {
-				$form.removeAttr('data-content');
+				$submit.removeClass('Q_appear').addClass('Q_disappear');
 			}
 		});
 
@@ -906,7 +907,7 @@ Q.Template.set('Streams/chat/main',
 		'{{else}}' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
-		'<div class="submit"></div>' +
+		'<div class="submit Q_disappear"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +

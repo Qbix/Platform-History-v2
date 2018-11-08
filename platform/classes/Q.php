@@ -583,13 +583,16 @@ class Q
 	 *  The full name of the view
 	 * @param {array} $params=array()
 	 *  Parameters to pass to the view
+	 * @param {array} $options Some options
+	 * @param {string|null} $options.language Preferred language
 	 * @return {string}
 	 *  The rendered content of the view
 	 * @throws {Q_Exception_MissingFile}
 	 */
 	static function view(
 	 $viewName,
-	 $params = array())
+	 $params = array(),
+	 $options = array())
 	{
 		require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
 
@@ -602,7 +605,11 @@ class Q
 		if ($fields = Q_Config::get('Q', 'views', 'fields', null)) {
 			$params = array_merge($fields, $params);
 		}
-		$params = array_merge(Q_Text::params($parts), $params);
+
+		// set options
+		$options['language'] = isset($options['language']) ? $options['language'] : null;
+
+		$params = array_merge(Q_Text::params($parts, array('language' => $options['language'])), $params);
 
 		/**
 		 * @event {before} Q/view
@@ -1388,22 +1395,26 @@ class Q
 			$var_2 = addslashes($var);
 			return "'$var_2'";
 		} elseif (is_array($var)) {
+			$len = 0;
 			$indexed_values_quoted = array();
 			$keyed_values_quoted = array();
 			foreach ($var as $key => $value) {
 				$value = self::var_export($value);
-				if (is_string($key)) {
-					$keyed_values_quoted[] = "'" . addslashes($key) . "' => $value";
-				} else {
+				if ($key === $len) {
 					$indexed_values_quoted[] = $value;
+				} else {
+					$keyed_values_quoted[] = "'" . addslashes($key) . "' => $value";
 				}
+				++$len;
 			}
 			$parts = array();
-			if (! empty($indexed_values_quoted))
+			if (!empty($indexed_values_quoted)) {
 				$parts['indexed'] = implode(', ', $indexed_values_quoted);
-			if (! empty($keyed_values_quoted))
+			}
+			if (!empty($keyed_values_quoted)) {
 				$parts['keyed'] = implode(', ', $keyed_values_quoted);
-			$exported = 'array(' . implode(", ".PHP_EOL, $parts) . ')';
+			}
+			$exported = '[' . implode(", ".PHP_EOL, $parts) . ']';
 			return $exported;
 		} else {
 			return var_export($var, true);

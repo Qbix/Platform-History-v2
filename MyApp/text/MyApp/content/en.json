@@ -23,5 +23,11 @@
 	},
 	"notFound": {
 		"Explanation": "<span class='url'>{{1}}</span> doesn't point to anything."
+	},
+	"notifications": {
+		"ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+		"ThankForPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+		"SubscribedToPlan": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+		"YouSubscribedToPlan": "You have been subscribed to {{plan.title'}}"
 	}
 }

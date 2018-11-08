@@ -16,5 +16,32 @@
 		"closeChatConfirmYes": "Yes",
 		"closeChatConfirmNo": "No",
 		"earlierComments": "earlier comments"
+	},
+	"notifications": {
+		"*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+		"Streams/chat/message": "{{displayName}} said: {{content}}",
+		"Streams/changed": "Changes in {{stream.fields.title}}",
+		"Streams/invite": "You were invited to {{& stream.fields.title}}",
+		"Streams/announcement": "Announcement in {{& streams.fields.title}}",
+		"Streams/access": "{{&call 'avatar.displayName'}} changed stream access",
+		"Streams/chat/edit": "Chat message edited",
+		"Streams/chat/remove": "Chat message removed",
+		"Streams/closed": "{{stream.fields.title}} has been closed",
+		"Streams/task/progress": "Progress made on {{stream.fields.title}}",
+		"Streams/task/complete": "Task completed: {{stream.fields.title}}",
+		"Streams/incoming/*": "{{app}}: Incoming Message"
+	},
+	"followup": {
+		"mobile": {
+			"alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
+		},
+		"email": {
+			"alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"subject": "Did you get an invite?",
+			"body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
+		}
 	}
 }

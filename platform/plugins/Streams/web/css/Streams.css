@@ -522,22 +522,18 @@
 	padding-right: 30px;
 }
 .Streams_chat_composer .submit {
-	display: none;
 	cursor: pointer;
 	position: absolute;
-	right: 2px;
-	top: 1px;
+	right: -6px;
+	top: -3px;
 	background-size: contain;
 	background-image: url("../img/chat/message-post.png");
 	background-repeat: no-repeat;
-	width: 28px;
-	height: 28px;
+	width: 36px;
+	height: 36px;
 	border: none;
 	margin: 0;
 	padding: 0;
-}
-.Streams_chat_composer[data-content] .submit {
-	display: block;
 }
 .Streams_chat_prevent {
 	text-align: center;
