@@ -11984,6 +11984,78 @@ Q.Audio.speak = function (text, options) {
 			return;
 		}
 		var availableVoices = null;
+    
+		// recognize the language of text
+		function _isCyrillic(text) {
+			var en = text.match(/[a-z]/ig);
+			var ru = text.match(/[а-я]/ig);
+			if (!en) {
+				return true;
+			} else if (!ru) {
+				return false;
+			} else if (ru.length > en.length) {
+				return true;
+			}
+		}
+		// stop voice list loading
+		function _stopLoading() {
+			clearInterval(loadingVoices);
+			loadingSeconds = 0;
+		}
+		// recognize the voice by language of text and gender
+		function _recognizeVoice(text, voicesList) {
+			var language = (_isCyrillic(text)) ? "ru-RU" : "en-US"
+			var gender = o.gender;
+			var voice = null;
+			var toggled = false;
+
+			function _switchGender(gender) {
+				return (gender == "female") ? "male" : "female"
+			}
+
+			function _search(){
+				var result = null;
+				var av = Q.getObject([language, gender], availableVoices) || [];
+				if (typeof av !== "object" || !av.length){
+					return {error: "Q/Speech: no such available voice"};
+				}
+				for(var i = 0; i < av.length; i++){
+					for(var j = 0; j < voicesList.length; j++){
+						if(av[i] == voicesList[j].name){
+							// founded voice ID from voices list
+							result = j;
+							break;
+						}
+					}
+					if(typeof result === "number") {
+						break;
+					}
+				}
+				if(result === null && toggled){
+					return {error: "Q/Speech: no voice support in this device for this language"};
+				} else if(result === null) {
+					var previousGender = gender;
+					gender = _switchGender(gender);
+					toggled = true;
+					console.info("%cQ/Speech: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
+					return _search();
+				} else {
+					return result;
+				}
+			}
+			// if the gender doesn't set manually - set to default
+			if (gender != "male" && gender != "female") {
+				gender = o.gender = "female";
+			}
+			voice = _search();
+			if(typeof voice !== 'number'){
+				var voiceError = Q.getObject("error", voice);
+				console.warn(voiceError);
+				return false;
+			}
+			return voice;
+		}
+
 		var loadingSeconds = 0;
 		var loadingVoices = setInterval(function () {
 			var voicesList = SS.getVoices();
@@ -12850,6 +12922,256 @@ Q.Camera = {
 		}
 	}
 };
+
+/**
+ * Operates with notices.
+ * @class Q.Notice
+ */
+Q.Notice = {
+
+	/**
+	 * Setting that changes notices slide down / slide up time.
+	 * @property popUpTime
+	 * @type {Number}
+	 * @default 500
+	 */
+	popUpTime: 500,
+	/**
+	 * Container for notices
+	 * @property container
+	 * @type {HTMLElement}
+	 */
+	container: document.getElementById("notices_slot"),
+
+	/**
+	 * Adds a notice.
+	 * @method add
+	 * @param {Object} options Object of options
+	 * @param {String} [options.key] Unique key for this notice. Need if you want to modify/remove notice by key.
+	 * @param {String} options.content HTML contents of this notice.
+	 * @param {Boolean} [options.closeable=true] Whether notice can be closed with red x icon.
+	 * @param {Function|String} [options.handler] Something (callback or URL) to handle with Q.handle()
+	 * @param {String} [options.type=common] Arbitrary type of notice. Can be used to apply different styles dependent on type,
+	 * because appropriate CSS class appended to the notice. May be 'error', 'warning'.
+	 * @param {Boolean|Number} [options.timeout=false] Time in seconds after which to remove notice.
+	 * @param {Boolean|Number} [options.persistent=false] Whether to save this notice to session to show after page refresh.
+	 */
+	add: function(options)
+	{
+		if (!this.container instanceof HTMLElement) {
+			throw new Error("Q.Notice.add: Notices container element don't exists.");
+		}
+
+		// default options
+		options = Q.extend({
+			key: null,
+			closeable: true,
+			type: 'common',
+			timeout: false,
+			persistent: false
+		}, options);
+
+		var key = options.key;
+		var content = options.content;
+		var closeable = options.closeable;
+		var timeout = options.timeout;
+		var handler = options.handler;
+		var persistent = options.persistent;
+		var noticeClass = 'Q_' + options.type + '_notice';
+
+
+		// if key not empty and notice with this key already exist
+		if (key && this.container.querySelector('li[data-key="' + key + '"]')) {
+			throw new Error('Q.Notice.add: A notice with key "' + key + '" already exists.');
+		}
+		//document.getElementsByTagName('head')[0].appendChild(script);
+		var ul = this.container.getElementsByTagName('ul')[0];
+		if (!ul) {
+			ul = document.createElement('ul');
+			this.container.appendChild(ul);
+		}
+		var li = document.createElement('li');
+		li.setAttribute('data-key', key);
+		li.setAttribute('data-persistent', persistent);
+		li.setAttribute('data-local', true);
+		li.classList.add(noticeClass);
+		li.onclick = function () {
+			Q.handle(handler, li, [content]);
+		};
+		var span = document.createElement('span');
+		span.innerHTML = content.trim();
+		li.appendChild(span);
+
+		// close icon
+		if (closeable) {
+			var closeIcon = document.createElement('span');
+			closeIcon.classList.add("Q_close");
+			li.appendChild(closeIcon);
+			closeIcon.onclick = function (event) {
+				event.stopPropagation();
+				Q.Notice.remove(li);
+			}
+		}
+
+		// whether remove notice by timeout
+		if (typeof timeout === 'number' && timeout > 0) {
+			setTimeout(function () {
+				Q.Notice.remove(li);
+			}, timeout * 1000);
+		}
+
+		// insert new notice as first child
+		ul.insertBefore(li, ul.firstChild);
+
+		// apply transition
+		setTimeout(function () {
+			Q.Notice.show(li);
+
+			if (persistent) {
+				Q.req('Q/notice', [], null, {
+					method: 'post',
+					fields: {
+						key: key,
+						content: content,
+						options: {
+							persistent: persistent,
+							closeable: closeable,
+							timeout: timeout,
+							handler: handler
+						}
+					}
+				});
+			}
+		}, 0);
+	},
+	/**
+	 * Get a notice by key.
+	 * @method get
+	 * @param {String|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	get: function(notice)
+	{
+		if (typeof notice === 'string') {
+			notice = this.container.querySelector('li[data-key="' + notice + '"]');
+		}
+
+		if (notice instanceof HTMLElement) {
+			return notice;
+		}
+
+		return null;
+	},
+	/**
+	 * Removes a notice.
+	 * @method remove
+	 * @param {String|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	remove: function(notice)
+	{
+		if (Array.isArray(notice)) {
+			notice.forEach(function(item) {
+				Q.Notice.remove(item);
+			});
+		}
+
+		notice = this.get(notice);
+
+		if (notice instanceof HTMLElement) {
+			this.hide(notice);
+
+			setTimeout(function () {
+				var key = notice.getAttribute('data-key');
+
+				// if notice persistent - send request to remove from session
+				if (typeof key === 'string' && notice.getAttribute('data-persistent')) {
+					Q.req('Q/notice', 'data', null, {
+						method: 'delete',
+						fields: {key: key}
+					});
+				}
+
+				notice.remove();
+			}, 750);
+		}
+	},
+	/**
+	 * Hides a notice.
+	 * @method hide
+	 * @param {String|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	hide: function(notice)
+	{
+		notice = this.get(notice);
+
+		if (notice instanceof HTMLElement) {
+			notice.classList.remove("Q_show_notice");
+		}
+	},
+	/**
+	 * Shows a previously notice.
+	 * @method show
+	 * @param {String|HTMLElement} notice HTMLElement or key
+	 * Unique key of notice which has been provided when notice was added.
+	 * Or notice HTMLElement
+	 */
+	show: function(notice)
+	{
+		notice = this.get(notice);
+		if (notice instanceof HTMLElement) {
+			notice.classList.add("Q_show_notice");
+		}
+	},
+	/**
+	 * Parse notices loaded from backend.
+	 * @method parseNotices
+	 */
+	parseNotices: function () {
+		var noticeElements = document.getElementById("notices").getElementsByTagName("li");
+		var options = {}, handler, key, persistent, timeout, type;
+
+		for (var li of noticeElements) {
+			options = {};
+			options.content = li.innerHTML;
+
+			handler = li.getAttribute('data-handler');
+			if (handler) {
+				options.handler = handler;
+			}
+
+			key = li.getAttribute('data-key');
+			if (typeof key === 'string') {
+				options.key = key;
+			}
+
+			persistent = li.getAttribute('data-persistent');
+			if (persistent) {
+				options.persistent = persistent;
+			}
+
+			timeout = li.getAttribute('data-timeout');
+			if (timeout) {
+				options.timeout = timeout;
+			}
+
+			type = li.getAttribute('data-type') || 'common';
+			if (type) {
+				options.type = type;
+			}
+
+			// need to remove before adding because can be keys conflict
+			li.remove();
+
+			Q.Notice.add(options);
+		};
+	}
+};
+Q.Notice.parseNotices();
 
 /**
  * This loads bluebird library to enable Promise for browsers which do not
