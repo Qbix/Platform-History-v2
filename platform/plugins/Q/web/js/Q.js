@@ -13132,8 +13132,13 @@ Q.Notice = {
 	 * @method parseNotices
 	 */
 	parseNotices: function () {
-		var noticeElements = document.getElementById("notices").getElementsByTagName("li");
-		var options = {}, handler, key, persistent, timeout, type;
+		var noticeElement = document.getElementById("notices_slot");
+		if (!(noticeElement instanceof HTMLElement)) {
+			return console.warn("Q.Notice.parseNotices: element with id=notices_slot not found");
+		}
+
+		var noticeElements = noticeElement.getElementsByTagName("li");
+		var options, handler, key, persistent, timeout, type;
 
 		for (var li of noticeElements) {
 			options = {};
@@ -13171,7 +13176,11 @@ Q.Notice = {
 		};
 	}
 };
-Q.Notice.parseNotices();
+
+Q.onInit.add(function () {
+	// on Q initiated, parse all notices loaded from backend and parse them
+	Q.Notice.parseNotices();
+});
 
 /**
  * This loads bluebird library to enable Promise for browsers which do not
