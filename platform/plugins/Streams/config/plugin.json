@@ -110,19 +110,19 @@
 				"getParticipantsLimit": 100,
 				"messages": {
 					"*": {
-						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""
+						"subject": ["Streams/content", ["notifications", "*"]]
 					},
 					"Streams/changed": {
 						"description": "Fields or attributes of the stream have changed",
-						"subject": "Changes in {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/changed"]]
 					},
 					"Streams/invite": {
 						"description": "You were invited",
-						"subject": "You were invited to {{& stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/invite"]]
 					},
 					"Streams/announcement": {
 						"description": "Announcement for everyone in the stream",
-						"subject": "Announcement in {{& streams.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/announcement"]]
 					},
 					"Streams/relatedTo": {
 						"description": "Some other stream has been related to this one",
@@ -134,23 +134,23 @@
 					},
 					"Streams/access": {
 						"description": "Access to stream has changed",
-						"subject": "{{&call 'avatar.displayName'}} changed stream access"
+						"subject": ["Streams/content", ["notifications", "Streams/access"]]
 					},
 					"Streams/chat/message": {
 						"description": "A chat message was posted",
-						"subject": "Chat in {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/chat/message"]]
 					},
 					"Streams/chat/edit": {
 						"description": "A chat message was edited",
-						"title": "Chat message edited"
+						"subject": ["Streams/content", ["notifications", "Streams/chat/edit"]]
 					},
 					"Streams/chat/remove": {
 						"description": "A chat message was removed",
-						"title": "Chat message removed"
+						"subject": ["Streams/content", ["notifications", "Streams/chat/remove"]]
 					},
 					"Streams/closed": {
 						"description": "The stream has been closed",
-						"subject": "{{stream.fields.title}} has been closed"
+						"subject": ["Streams/content", ["notifications", "Streams/closed"]]
 					}
 				},
 				"defaults": {
@@ -186,11 +186,11 @@
 				"messages": {
 					"Streams/task/progress": {
 						"description": "Progress has been made",
-						"subject": "Progress made on {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/task/progress"]]
 					},
 					"Streams/task/complete": {
 						"description": "Task has been completed",
-						"subject": "Task completed: {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/task/complete"]]
 					}
 				},
 				"attributes": {
@@ -327,7 +327,7 @@
 				"messages": {
 					"Streams/incoming/message": {"post": true},
 					"*": {
-						"subject": "{{app}}: Incoming Message"
+						"subject": ["Streams/content", ["notifications", "Streams/incoming/*"]]
 					}
 				}
 			},

@@ -11,7 +11,10 @@
 		"title": "Permission",
 		"prompt": "Do you want to enable notifications?",
 		"yes": "Yes",
-		"no": "No"
+		"no": "No",
+		"WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+		"WelcomeVerifyEmail": "Welcome! Verify your email address.",
+		"ForgetPass": "Hey, did you forget your passphrase?"
 	},
 	"invalidLanguageSelected": "Invalid language selected"
 }

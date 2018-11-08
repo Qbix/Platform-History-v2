@@ -18,7 +18,18 @@
 		"earlierComments": "earlier comments"
 	},
 	"notifications": {
-		"Streams/chat/message": "{{displayName}} said: {{content}}"
+		"*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+		"Streams/chat/message": "{{displayName}} said: {{content}}",
+		"Streams/changed": "Changes in {{stream.fields.title}}",
+		"Streams/invite": "You were invited to {{& stream.fields.title}}",
+		"Streams/announcement": "Announcement in {{& streams.fields.title}}",
+		"Streams/access": "{{&call 'avatar.displayName'}} changed stream access",
+		"Streams/chat/edit": "Chat message edited",
+		"Streams/chat/remove": "Chat message removed",
+		"Streams/closed": "{{stream.fields.title}} has been closed",
+		"Streams/task/progress": "Progress made on {{stream.fields.title}}",
+		"Streams/task/complete": "Task completed: {{stream.fields.title}}",
+		"Streams/incoming/*": "{{app}}: Incoming Message"
 	},
 	"followup": {
 		"mobile": {
