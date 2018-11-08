@@ -82,12 +82,15 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 		n.collapseId = o.collapseId;
 	}
 	if (n.alert && n.alert.title) {
+		// if subject is object - get subject from text file
+		if (Array.isArray(n.alert.title)) {
+			n.alert.title = Q.getObject(n.alert.title[1], Q.Text.get(n.alert.title[0], o.language));
+		}
+
 		n.alert.title = Q.Handlebars.renderSource(n.alert.title, o.fields);
 	}
 	if (o && o.view) {
-		var body = o.isSource
-			? Q.Handlebars.renderSource(o.view, o.fields)
-			: Q.Handlebars.render(o.view, o.fields);
+		var body = Q.view(o.view, o.fields, {language: o.language, source: o.isSource});
 		Q.setObject(['alert', 'body'], body, n);
 	}
 	return this.handlePushNotification(n, o, callback);

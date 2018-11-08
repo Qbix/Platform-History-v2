@@ -31,6 +31,7 @@ class Users_Mobile extends Base_Users_Mobile
 	 * @param {array} $options=array()
 	 *  Array of options. Can include:<br/>
 	 *  "delay" => A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {string} [$options.language] Preferred language
 	 * @return {boolean}
 	 * @throws {Q_Exception_WrongType}
 	 *	If phone number is invalid
@@ -47,9 +48,14 @@ class Users_Mobile extends Base_Users_Mobile
 				'mobileNumber' => $this->number
 			));
 		}
-		
+
+		// set language if didn't defined yet
+		if (!isset($options['language'])) {
+			$options['language'] = isset($this->userId) ? Users::getLanguage($this->userId) : null;
+		}
+
 		$app = Q::app();
-		$body = Q::view($view, $fields);
+		$body = Q::view($view, $fields, array('language' => $options['language']));
 		
 		/**
 		 * @event Users/mobile/sendMessage {before}

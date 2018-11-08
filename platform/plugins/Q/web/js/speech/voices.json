@@ -1,0 +1,28 @@
+{
+  "en-US": {
+    "male": [
+      "Alex",
+      "Google UK English Male"
+    ],
+    "female": [
+      "Samantha",
+      "English United States",
+      "Google US English",
+      "Google UK English Female",
+      "Microsoft Zira Desktop - English (United States)"
+    ]
+  },
+  "ru-RU": {
+    "male": [
+      "Yuri",
+      "Microsoft Pavel - Russian (Russia)"
+    ],
+    "female": [
+      "Milena",
+      "Russian Russia",
+      "Google русский",
+      "Microsoft Irina - Russian (Russia)",
+      "Microsoft Irina Desktop - Russian"
+    ]
+  }
+}

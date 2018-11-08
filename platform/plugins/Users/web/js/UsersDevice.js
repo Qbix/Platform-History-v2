@@ -10,12 +10,27 @@
 				return console.warn("appId is not defined");
 			}
 		}
+
+		Users.Device.onInit.set(function () {
+			// update device id if device subscribed
+			Users.Device.subscribed(function (err, subscribed) {
+				if (!subscribed) {
+					return;
+				}
+
+				// resubscribe device
+				Users.Device.unsubscribe(Users.Device.subscribe);
+			});
+		}, 'Users.Device');
+
 		Users.Device.init(function () {
 			// Device adapter was initialized
 			Q.handle(Users.Device.onInit);
 			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
 		});
+
 	}, 'Users.Device');
+
 
 	/**
 	 * @class Users.Device
@@ -196,7 +211,7 @@
 				Q.handle(callback, null, [new Error('There is no suitable adapter for this type of device')]);
 				return;
 			}
-			callback(null, this.adapter);
+			Q.handle(callback, null, [null, this.adapter]);
 		},
 
 		adapter: null,
@@ -233,7 +248,7 @@
 			var self = this;
 			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(err);
+					Q.handle(callback, null, [err]);
 				else {
 					var userVisibleOnly = true;
 					if (options && !options.userVisibleOnly) {
@@ -244,7 +259,7 @@
 						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
 					}).then(function (subscription) {
 						_saveSubscription(subscription, self.appConfig, function (err, res) {
-							callback(err, res);
+							Q.handle(callback, null, [err, res]);
 						});
 					}).catch(function (err) {
 						Users.Device.notificationGranted(function (granted) {
@@ -264,13 +279,13 @@
 		unsubscribe: function (callback) {
 			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(err);
+					Q.handle(callback, null, [err]);
 				else {
 					sw.pushManager.getSubscription()
 						.then(function (subscription) {
 							if (subscription) {
 								_deleteSubscription(subscription.endpoint, function (err, res) {
-									callback(err, res);
+									Q.handle(callback, null, [err, res]);
 								});
 								subscription.unsubscribe();
 								console.log('Users.Device: User is unsubscribed.');
@@ -283,13 +298,13 @@
 		subscribed: function (callback) {
 			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(err);
+					Q.handle(callback, null, [err]);
 				else {
 					sw.pushManager.getSubscription()
 						.then(function (subscription) {
-							callback(null, subscription);
+							Q.handle(callback, null, [null, subscription]);
 						}).catch(function (err) {
-						callback(err);
+						Q.handle(callback, null, [err]);
 					});
 				}
 			});
@@ -312,20 +327,20 @@
 				}
 				return Q.handle(callback, window.Notification, [permission]);
 			}
-			callback(false);
+			Q.handle(callback, null, [false]);
 		},
 
 		getServiceWorkerRegistration: function (callback) {
 			var self = this;
 			if (this.serviceWorkerRegistration) {
-				return callback(null, this.serviceWorkerRegistration);
+				return Q.handle(callback, null, [null, this.serviceWorkerRegistration]);
 			}
 			_registerServiceWorker.bind(this)(function (err, sw) {
 				if (err)
-					return callback(err);
+					return Q.handle(callback, null, [err]);
 				else {
 					self.serviceWorkerRegistration = sw;
-					return callback(null, sw);
+					return Q.handle(callback, null, [null, sw]);
 				}
 			});
 		},
@@ -363,20 +378,20 @@
 			var deviceId = _getFromStorage('deviceId');
 			_removeFromStorage('deviceId');
 			_deleteSubscription(deviceId, function (err, res) {
-				callback(err, res);
+				Q.handle(callback, null, [err, res]);
 			});
 		},
 
 		subscribed: function (callback) {
 			if (_getFromStorage('deviceId')) {
-				callback(null, true);
+				Q.handle(callback, null, [null, true]);
 			} else {
-				callback(null, false);
+				Q.handle(callback, null, [null, false]);
 			}
 		},
 
 		notificationGranted: function (callback) {
-			callback(true);
+			Q.handle(callback, null, [true]);
 		}
 
 	};
@@ -402,21 +417,21 @@
 			var deviceId = _getFromStorage('deviceId');
 			_removeFromStorage('deviceId');
 			_deleteSubscription(deviceId, function (err, res) {
-				callback(err, res);
+				Q.handle(callback, null, [err, res]);
 			});
 		},
 
 		subscribed: function (callback) {
 			if (_getFromStorage('deviceId')) {
-				callback(null, true);
+				Q.handle(callback, null, [null, true]);
 			} else {
-				callback(null, false);
+				Q.handle(callback, null, [null, false]);
 			}
 		},
 
 		notificationGranted: function (callback) {
 			PushNotification.hasPermission(function (data) {
-				data.isEnabled ? callback(true) : callback('default');
+				data.isEnabled ? Q.handle(callback, null, [true]) : Q.handle(callback, null, ['default']);
 			});
 		}
 
@@ -440,18 +455,18 @@
 				Q.handle(callback, null, [null, swReg]);
 			})
 			.catch(function (error) {
-				callback(error);
+				Q.handle(callback, null, [error]);
 				console.error('Users.Device: Service Worker Error', error);
 			});
 	}
 
 	function _registerDevice (deviceId, callback) {
 		if (!deviceId || !Q.Users.loggedInUser) {
-			return callback(new Error('Error while registering device. User must be logged in and deviceId must be set.'))
+			return Q.handle(callback, null, [new Error('Error while registering device. User must be logged in and deviceId must be set.')]);
 		}
 		var appId = Users.Device.appId;
 		if (!appId) {
-			return callback(new Error('Error while registering device. AppId must be must be set.'));
+			return Q.handle(callback, null, [new Error('Error while registering device. AppId must be must be set.')]);
 		}
 
 		Q.req('Users/device', function (err, response) {
@@ -485,14 +500,14 @@
 
 	function _saveSubscription (subscription, appConfig, callback) {
 		if (!subscription) {
-			return callback(new Error('No subscription data'));
+			return Q.handle(callback, null, [new Error('No subscription data')]);
 		}
 		subscription = JSON.parse(JSON.stringify(subscription));
 		Q.req('Users/device', function (err, response) {
 			if (!err) {
 				Q.handle(Users.onDevice, [response.data]);
 			}
-			callback(err, response);
+			Q.handle(callback, null, [err, response]);
 		}, {
 			method: 'post',
 			fields: {
