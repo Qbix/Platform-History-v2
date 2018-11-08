@@ -2375,10 +2375,6 @@ Q.view = function _Q_view(viewName, params, options) {
 	params = params || [];
 	options = options || [];
 
-	if (options.source) {
-		return Q.Handlebars.renderSource(viewName, params);
-	}
-
 	var parts = viewName.split('/');
 	var viewPath = parts.join(Q.DS);
 	var fields = Q.Config.get(['Q', 'views', 'fields'], null);
@@ -2388,9 +2384,15 @@ Q.view = function _Q_view(viewName, params, options) {
 
 	// set options
 	options.language = options.language || null;
+	params.language = options.language;
 
 	var textParams = Q.Text.params(parts, {'language': options.language});
 	params = Q.extend(textParams, params);
+
+
+	if (options.source) {
+		return Q.Handlebars.renderSource(viewName, params);
+	}
 
 	return Q.Handlebars.render(viewPath, params);
 };
