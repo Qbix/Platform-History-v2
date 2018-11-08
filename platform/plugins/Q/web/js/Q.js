@@ -7208,7 +7208,7 @@ Q.currentScript = function (stackLevels) {
 			break;
 		}
 	}
-	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js)):/);
+	parts = lines[index].match(/((http[s]?:\/\/.+\/)([^\/]+\.js.*?)):/);
 	return {
 		src: parts[1],
 		path: parts[2],
