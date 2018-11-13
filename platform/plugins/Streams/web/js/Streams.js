@@ -4271,6 +4271,38 @@ Streams.displayType = function _Streams_displayType(type) {
 Streams.isStream = function (value) {
 	return Q.typeOf(value) === "Q.Streams.Stream";
 };
+/**
+ * Use this to check whether user subscribed to stream
+ * and also whether subscribed to message type (from streams_subscription_rule)
+ * @static
+ * @method showNoticeIfSubscribed
+ * @param {string} publisherId
+ * @param {string} streamName
+ * @param {string} messageType
+ * @param {function} callback Function which called to show notice if all fine.
+ */
+Streams.showNoticeIfSubscribed = function (publisherId, streamName, messageType, callback) {
+	Streams.get(publisherId, streamName, function () {
+		// return if user doesn't subscribed to stream
+		if (Q.getObject("participant.subscribed", this) !== 'yes') {
+			return;
+		}
+
+		var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
+		if ($.inArray(messageType, Q.getObject("types", streamsSubscribeRulesFilter) || []) >= 0) {
+			return;
+		}
+
+		// if stream retained - don't show notice
+		if (this.retainedByKey()) {
+			return;
+		}
+
+		Q.handle(callback, this);
+	}, {
+		withParticipant: true
+	});
+};
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
 	var src = json.entry[0].thumbnailUrl;
 	var src40 = src, src50 = src, src80 = src;
@@ -4832,17 +4864,8 @@ Q.onInit.add(function _Streams_onInit() {
 			}
 
 			// check 'notices' attribute
-			Streams.get(publisherId, streamName, function () {
+			Streams.showNoticeIfSubscribed(publisherId, streamName, messageType, function () {
 				var stream = this;
-
-				if (!stream.getAttribute('notices')) {
-					return;
-				}
-
-				// if stream retained - don't show notice
-				if (stream.retainedByKey()) {
-					return;
-				}
 
 				Streams.Avatar.get(byUserId, function (err, avatar) {
 					var text = Q.getObject([messageType], texts);
