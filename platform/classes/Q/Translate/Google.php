@@ -25,16 +25,31 @@ class Q_Translate_Google {
 				echo "Processing $fromLang->$toLang".PHP_EOL;
 				$res = $this->translate($fromLang, $toLang, $in, $out);
 			}
-			$files = $this->saveJson($toLang, $res);
+			$this->saveJson($toLang, $res, $jsonFiles);
 			foreach ($localeNames as $localeName) {
-				foreach ($files as $file) {
-					copy($file, dirname($file) . DS . $toLang . '-' . $localeName . '.json');
-				}
+				$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+			}
+		}
+	}
+	
+	private function saveLocale($lang, $locale, $res, $jsonFiles)
+	{
+		foreach ($jsonFiles as $dirname => $content) {
+			$directory = $this->parent->createDirectory($dirname);
+			$langFile = $directory . DS . "$lang.json";
+			$localeFile = $directory . DS . "$lang-$locale.json";
+			if (file_exists($localeFile)) {
+				$arr = $content;
+				$tree = new Q_Tree($arr);
+				$tree->load($localeFile);
+				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT);
+			} else {
+				copy($langFile, $localeFile);
 			}
 		}
 	}
 
-	private function saveJson($lang, $data)
+	private function saveJson($lang, $data, &$jsonFiles)
 	{
 		$jsonFiles = array();
 		foreach ($data as $d) {
