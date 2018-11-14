@@ -87,7 +87,7 @@
 			}
 		},
 		"text": {
-			"useLocale": false,
+			"useLocale": false, /* run translate.php script first */
 			"MyApp": {
 				"dashboard.php": ["MyApp/content"],
 				"content": {

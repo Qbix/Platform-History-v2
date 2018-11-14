@@ -33,8 +33,8 @@ class Places_Location
 	 * This is used to cache information from the Google Places API.
 	 * @method stream
 	 * @static
-	 * @param {string} $asUserId
-	 * @param {string} $publisherId
+	 * @param {string} $asUserId The user to fetch as
+	 * @param {string} $publisherId The user publishing the stream
 	 * @param {string} $placeId The id of the place in Google Places
 	 * @param {boolean} $throwIfBadValue
 	 *  Whether to throw Q_Exception if the result contains a bad value
