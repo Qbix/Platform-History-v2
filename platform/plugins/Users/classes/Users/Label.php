@@ -162,7 +162,50 @@ class Users_Label extends Base_Users_Label
 		$label->label = $label;
 		$label->remove();
 	}
-	
+	/**
+	 * Whether $label_1 can add $label_2
+	 * @method canAddLabel
+	 * @param {string} $label_1 - Label which request permission for action
+	 * @param {string} $label_2 - Label need to do action with
+	 * @throws Exception
+	 * @return {bool}
+	 */
+	static function canAddLabel($label_1, $label_2)
+	{
+		$roles = Q_Config::expect("Communities", "roles");
+		$keyRoles = array_keys($roles);
+
+		// check whether label exist
+		foreach(array($label_1, $label_2) as $label) {
+			if (!in_array($label, $keyRoles)) {
+				throw new Exception("Label ".$label." not found");
+			}
+		}
+
+		return in_array($label_2, $roles[$label_1]["canAdd"]);
+	}
+	/**
+	 * Whether $label_1 can remove $label_2
+	 * @method canRemoveLabel
+	 * @param {string} $label_1 - Label which request permission for action
+	 * @param {string} $label_2 - Label need to do action with
+	 * @throws Exception
+	 * @return {bool}
+	 */
+	static function canRemoveLabel($label_1, $label_2)
+	{
+		$roles = Q_Config::expect("Communities", "roles");
+		$keyRoles = array_keys($roles);
+
+		// check whether label exist
+		foreach(array($label_1, $label_2) as $label) {
+			if (!in_array($label, $keyRoles)) {
+				throw new Exception("Label ".$label." not found");
+			}
+		}
+
+		return in_array($label_2, $roles[$label_1]["canRemove"]);
+	}
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
