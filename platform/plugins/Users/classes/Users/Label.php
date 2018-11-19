@@ -172,7 +172,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canAddLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Communities", "roles");
+		$roles = Q_Config::expect("Users", "roles");
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
@@ -194,7 +194,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canRemoveLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Communities", "roles");
+		$roles = Q_Config::expect("Users", "roles");
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
