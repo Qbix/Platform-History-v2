@@ -176,10 +176,8 @@ class Users_Label extends Base_Users_Label
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
-		foreach(array($label_1, $label_2) as $label) {
-			if (!in_array($label, $keyRoles)) {
-				throw new Exception("Label ".$label." not found");
-			}
+		if (!in_array($label_1, $keyRoles)) {
+			return false;
 		}
 
 		return in_array($label_2, $roles[$label_1]["canAdd"]);
@@ -198,10 +196,8 @@ class Users_Label extends Base_Users_Label
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
-		foreach(array($label_1, $label_2) as $label) {
-			if (!in_array($label, $keyRoles)) {
-				throw new Exception("Label ".$label." not found");
-			}
+		if (!in_array($label_1, $keyRoles)) {
+			return false;
 		}
 
 		return in_array($label_2, $roles[$label_1]["canRemove"]);
