@@ -27,6 +27,9 @@ abstract class Users extends Base_Users
 	 */
 	static function isCommunityId($userId)
 	{
+        if (in_array($userId, Q_Config::expect("Q", "plugins"))) {
+			return false;
+        }
 		$first = mb_substr($userId, 0, 1, "UTF-8");
 		return (mb_strtolower($first, "UTF-8") != $first);
 	}
