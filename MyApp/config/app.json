@@ -166,6 +166,16 @@
 				"Users/members": ["Members", "labels/Users/family"],
 				"Users/guests": ["Guests", "labels/Users/business"]
 			}
+		},
+		"quotas": {
+			"Streams/invite": {
+				"": {
+					"604800": 10
+				},
+				"Users/admins": {
+					"604800": 1000
+				}
+			}
 		}
 	},
 	"Streams": {
