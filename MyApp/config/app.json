@@ -160,6 +160,11 @@
 				"Users/family": ["Family", "labels/Users/family"],
 				"Users/business": ["Business", "labels/Users/business"],
 				"Users/dating": ["Dating", "labels/Users/dating"]
+			},
+			"roles": {
+				"Users/admins": ["Admins", "labels/Users/friends"],
+				"Users/members": ["Members", "labels/Users/family"],
+				"Users/guests": ["Guests", "labels/Users/business"]
 			}
 		}
 	},

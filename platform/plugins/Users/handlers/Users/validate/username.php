@@ -11,8 +11,7 @@ function Users_validate_username($params)
 		return;
 	}
 	if (!empty($user)) {
-		$first = mb_substr($user->id, 0, 1, "UTF-8");
-		if (mb_strtolower($first, "UTF-8") != $first) {
+		if (Users::isCommunityId($user->id)) {
 			// first letter is uppercase, this represents a specially recognized
 			// organization or app, so allow anything in the username
 			return;
