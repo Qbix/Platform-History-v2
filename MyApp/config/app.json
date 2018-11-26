@@ -165,7 +165,7 @@
 				"Users/owners": ["Owners", "labels/Users/owners"],
 				"Users/admins": ["Admins", "labels/Users/admins"],
 				"Users/members": ["Members", "labels/Users/members"],
-				"Communities/guests": ["Guests", "labels/Users/guests"]
+				"Users/guests": ["Guests", "labels/Users/guests"]
 			}
 		},
 		"quotas": {
