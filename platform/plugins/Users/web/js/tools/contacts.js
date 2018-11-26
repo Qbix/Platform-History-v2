@@ -17,6 +17,7 @@ var Users = Q.Users;
  *   @param {String} [options.prefix="Users/"] Pass any prefix here, to filter labels by this prefix
  *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
  *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Is passed (element, label, title, wasSelected). Handlers may return false to cancel the default behavior of toggling the label.
+ *  @param {Q.Event} [options.onInvited] occurs when the user invited.
  */
 Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 	var tool = this
@@ -31,19 +32,14 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 
 		tool.refresh();
 	});
-
-	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
-		var $this = $(this);
-		state.label = $this.attr('data-label');
-
-		$this.addClass('Q_selected').siblings().removeClass('Q_selected');
-	});
 },
 
 {
 	prefix: 'Users/',
 	communityId: null,
-	label: null,
+	canAdd: true,
+	onRefresh: new Q.Event(),
+	onClick: new Q.Event(),
 	onInvited: new Q.Event()
 },
 
@@ -63,35 +59,47 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 				icon: Q.url("{{Users}}/img/icons/labels/all/40.png")
 			};
 		}
+
+		var selectedLabel = null;
+
 		Q.Users.getLabels(state.communityId, state.prefix, function (err, labels) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
-				canAdd: tool.text.inviteUser,
+				canAdd: state.canAdd,
+				canAddText: tool.text.inviteUser,
 				canAddIcon: Q.url('{{Q}}/img/actions/add.png')
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
 				tool.element.innerHTML = html;
+
+				$('.Users_labels_label', tool.element).on(Q.Pointer.fastclick, function () {
+					var $this = $(this);
+					selectedLabel = $this.attr('data-label');
+					var labelTitle = $(".Users_labels_title", $this).text();
+
+					if (false === Q.handle(state.onClick, tool, [selectedLabel, labelTitle])) {
+						return;
+					};
+
+					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
+				});
+
+				$('.Users_labels_add', tool.element).on(Q.Pointer.fastclick, function () {
+
+					if(!selectedLabel) {
+						return Q.alert(tool.text.selectLabel);
+					}
+
+					Q.Streams.invite(state.communityId, 'Streams/experience/main', {
+						addLabel: selectedLabel
+					}, function () {
+						Q.handle(state.onInvited, tool);
+					});
+				});
+
 				Q.handle(state.onRefresh, tool, []);
 			});
-
-			var $add = tool.$('.Users_labels_add').on(Q.Pointer.fastclick, function () {
-
-				if(!state.label) {
-					return Q.alert(tool.text.selectLabel);
-				}
-
-				Q.Streams.invite(state.communityId, 'Streams/experience/main', {
-					addLabel: state.label
-				}, function () {
-					Q.handle(state.onInvited, tool);
-				});
-			});
-
-			setTimeout(function () {
-				// add clickable after the sizing has been done
-				$add.plugin('Q/clickable');
-			}, 0);
 		});
 	}
 }
@@ -112,10 +120,12 @@ Q.Template.set('Users/labels', ''
 +   '<div class="Users_labels_title">{{this.title}}</div>'
 + '</li>'
 + '{{/each}}'
-+ '<li class="Users_labels_action Users_labels_add">'
++ '{{#if canAdd}}'
++ '<li class="Users_labels_action Users_labels_add Q/clickable">'
 +   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
-+   '<div class="Users_labels_title">{{canAdd}}</div>'
++   '<div class="Users_labels_title">{{canAddText}}</div>'
 + '</li>'
++ '{{/if}}'
 + '<ul>');
 
 })(Q, jQuery, window);
