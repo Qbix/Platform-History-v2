@@ -12925,9 +12925,9 @@ Q.Camera = {
 
 /**
  * Operates with notices.
- * @class Q.Notice
+ * @class Q.Notices
  */
-Q.Notice = {
+Q.Notices = {
 
 	/**
 	 * Setting that changes notices slide down / slide up time.
@@ -12959,7 +12959,7 @@ Q.Notice = {
 	add: function(options)
 	{
 		if (!this.container instanceof HTMLElement) {
-			throw new Error("Q.Notice.add: Notices container element don't exists.");
+			throw new Error("Q.Notices.add: Notices container element don't exists.");
 		}
 
 		// default options
@@ -12982,7 +12982,7 @@ Q.Notice = {
 
 		// if key not empty and notice with this key already exist
 		if (key && this.container.querySelector('li[data-key="' + key + '"]')) {
-			throw new Error('Q.Notice.add: A notice with key "' + key + '" already exists.');
+			throw new Error('Q.Notices.add: A notice with key "' + key + '" already exists.');
 		}
 		//document.getElementsByTagName('head')[0].appendChild(script);
 		var ul = this.container.getElementsByTagName('ul')[0];
@@ -13009,14 +13009,14 @@ Q.Notice = {
 			li.appendChild(closeIcon);
 			closeIcon.onclick = function (event) {
 				event.stopPropagation();
-				Q.Notice.remove(li);
+				Q.Notices.remove(li);
 			}
 		}
 
 		// whether remove notice by timeout
 		if (typeof timeout === 'number' && timeout > 0) {
 			setTimeout(function () {
-				Q.Notice.remove(li);
+				Q.Notices.remove(li);
 			}, timeout * 1000);
 		}
 
@@ -13025,7 +13025,7 @@ Q.Notice = {
 
 		// apply transition
 		setTimeout(function () {
-			Q.Notice.show(li);
+			Q.Notices.show(li);
 
 			if (persistent) {
 				Q.req('Q/notice', [], null, {
@@ -13074,7 +13074,7 @@ Q.Notice = {
 	{
 		if (Array.isArray(notice)) {
 			notice.forEach(function(item) {
-				Q.Notice.remove(item);
+				Q.Notices.remove(item);
 			});
 		}
 
@@ -13129,12 +13129,12 @@ Q.Notice = {
 	},
 	/**
 	 * Parse notices loaded from backend.
-	 * @method parseNotices
+	 * @method process
 	 */
-	parseNotices: function () {
+	process: function () {
 		var noticeElement = document.getElementById("notices_slot");
 		if (!(noticeElement instanceof HTMLElement)) {
-			return console.warn("Q.Notice.parseNotices: element with id=notices_slot not found");
+			return console.warn("Q.Notices.process: element with id=notices_slot not found");
 		}
 
 		var noticeElements = noticeElement.getElementsByTagName("li");
@@ -13172,14 +13172,14 @@ Q.Notice = {
 			// need to remove before adding because can be keys conflict
 			li.remove();
 
-			Q.Notice.add(options);
+			Q.Notices.add(options);
 		};
 	}
 };
 
 Q.onInit.add(function () {
 	// on Q initiated, parse all notices loaded from backend and parse them
-	Q.Notice.parseNotices();
+	Q.Notices.process();
 });
 
 /**
