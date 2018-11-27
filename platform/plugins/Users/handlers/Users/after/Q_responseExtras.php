@@ -7,7 +7,10 @@ function Users_after_Q_responseExtras() {
 			Db::exportArray($preloaded, array('asAvatar' => true))
 		);
 	}
-	Q_Response::setScriptData('Q.plugins.Users.roles', Users::roles());
+	$roles = Users::roles();
+	foreach ($roles as $label => $role) {
+		Q_Response::setScriptData('Q.plugins.Users.roles.'.$label, $role);
+	}
 	$user = Users::loggedInUser(false, false);
 	Q_Response::addHtmlCssClass($user ? 'Users_loggedIn' : 'Users_loggedOut');
 }
