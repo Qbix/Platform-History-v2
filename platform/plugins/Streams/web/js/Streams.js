@@ -4289,7 +4289,7 @@ Streams.showNoticeIfSubscribed = function (publisherId, streamName, messageType,
 		}
 
 		var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
-		if ($.inArray(messageType, Q.getObject("types", streamsSubscribeRulesFilter) || []) >= 0) {
+		if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
 			return;
 		}
 
