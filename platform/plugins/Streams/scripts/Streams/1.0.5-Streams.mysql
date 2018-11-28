@@ -1,0 +1,2 @@
+ALTER TABLE {$prefix}avatar CHANGE gender gender varchar(31) default null;
+ALTER TABLE {$prefix}avatar CHANGE lastName lastName varchar(255) default null;
