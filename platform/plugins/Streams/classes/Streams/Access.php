@@ -134,9 +134,10 @@ class Streams_Access extends Base_Streams_Access
 		if ($this->get('removed', false)) {
 			$this->set('removed', false);
 		}
-		Streams_Avatar::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
 		if (!empty($this->publisherId) and !empty($this->streamName)
 		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
+			Streams_Avatar::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
+
 			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
 			Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(
 				'type' => 'Streams/access/save',
