@@ -4010,9 +4010,9 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
-		fn = fn.encodeHTML();
-		ln = ln.encodeHTML();
-		u = u.encodeHTML();
+		fn = fn && fn.encodeHTML();
+		ln = ln && ln.encodeHTML();
+		u = u && u.encodeHTML();
 		fallback = fallback.encodeHTML();
 	}
 	if (options && options.html) {
