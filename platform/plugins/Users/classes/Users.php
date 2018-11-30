@@ -1039,6 +1039,9 @@ abstract class Users extends Base_Users
 		}
 		
 		// Insert a new user into the database, or simply modify an existing (adopted) user
+		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
+			'filter' => array('Users_User', 'idFilter')
+		));
 		$user->username = $username;
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
@@ -1056,10 +1059,6 @@ abstract class Users extends Base_Users
 		 * @param {Users_User} user
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'before');
-
-		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
-			'filter' => array('Users_User', 'idFilter')
-		));
 
 		// the following code could throw exceptions
 		if (empty($user->emailAddress) and empty($user->mobileNumber)
