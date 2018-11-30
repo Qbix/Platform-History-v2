@@ -36,7 +36,12 @@ function Users_after_Q_image_save($params, &$return)
 			return;
 		}
 
-		$permitted = array_keys(Users::byRoles(array("Communities/admins", "Users/owners")));
+		$permitted = array();
+		// get users where logged user assigned as one of "Users/icon/canManage" labels
+		if ($labelsCanManage = Q_Config::get("Users", "icon", "canManage", array())) {
+			// if founded labels which can manage icons, collect users who can edit logged user
+			$permitted = array_keys(Users::byRoles(Q_Config::get("Users", "icon", "canManage", array())));
+		}
 
 		// check whether logged user have permissiosn to change icon of another user
 		if (in_array($anotherUserId, $permitted)) {
