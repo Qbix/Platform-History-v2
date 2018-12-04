@@ -404,8 +404,21 @@ abstract class Streams extends Base_Streams
 				'streamName' => $namesToFetch,
 				'userId' => $asUserId
 			))->fetchDbRows(null, '', 'streamName');
+
+			$ssr_rows = Streams_SubscriptionRule::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $namesToFetch,
+				'ofUserId' => $asUserId
+			))->fetchDbRows(null, '', 'streamName');
+
 			foreach ($allRetrieved as $s) {
-				$s->set('participant', Q::ifset($prows, $s->name, null));
+				$participant = Q::ifset($prows, $s->name, null);
+
+				if (gettype($participant) == 'object' && !empty($participant)) {
+					$participant->subscriptionRules = Q::ifset($ssr_rows, $s->name, null);
+				}
+
+				$s->set('participant', $participant);
 			}
 		}
 
