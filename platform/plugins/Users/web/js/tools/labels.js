@@ -160,6 +160,6 @@ Q.Template.set('Users/labels', ''
 +   '<div class="Users_labels_title">{{canAdd}}</div>'
 + '</li>'
 + '{{/if}}'
-+ '<ul>');
++ '</ul>');
 
 })(Q, jQuery, window);
