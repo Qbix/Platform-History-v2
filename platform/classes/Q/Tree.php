@@ -346,12 +346,14 @@ class Q_Tree
 	 * @method save
 	 * @param {string} $filename Name of file to save to. If tree was loaded, you can leave this blank to update that file.
 	 * @param {array} [$array_path=array()] Array of keys identifying the path of the config subtree to save
+	 * @param {integer} [$flags=0] Any additional flags for json_encode, such as JSON_PRETTY_PRINT
 	 * @return {boolean} Returns true if saved, otherwise false;
 	 **/
 	function save (
 		$filename = null, 
 		$array_path = array(),
-		$prefix_path = null)
+		$prefix_path = null,
+		$flags = 0)
 	{
 		if (empty($filename) and !empty($this->filename)) {
 			$filename = $this->filename;
@@ -381,10 +383,11 @@ class Q_Tree
 		}
 
 		$mask = umask(Q_Config::get('Q', 'internal','umask' , 0000));
+		$flags = JSON_UNESCAPED_SLASHES | $flags;
 		$success = file_put_contents(
 			$filename2, 
 			!empty($toSave) 
-				? Q::json_encode($toSave, JSON_UNESCAPED_SLASHES)
+				? Q::json_encode($toSave, $flags)
 				: '{}',
 			LOCK_EX);
 		clearstatcache(true, $filename2);

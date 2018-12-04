@@ -4271,6 +4271,38 @@ Streams.displayType = function _Streams_displayType(type) {
 Streams.isStream = function (value) {
 	return Q.typeOf(value) === "Q.Streams.Stream";
 };
+/**
+ * Use this to check whether user subscribed to stream
+ * and also whether subscribed to message type (from streams_subscription_rule)
+ * @static
+ * @method showNoticeIfSubscribed
+ * @param {string} publisherId
+ * @param {string} streamName
+ * @param {string} messageType
+ * @param {function} callback Function which called to show notice if all fine.
+ */
+Streams.showNoticeIfSubscribed = function (publisherId, streamName, messageType, callback) {
+	Streams.get(publisherId, streamName, function () {
+		// return if user doesn't subscribed to stream
+		if (Q.getObject("participant.subscribed", this) !== 'yes') {
+			return;
+		}
+
+		var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
+		if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
+			return;
+		}
+
+		// if stream retained - don't show notice
+		if (this.retainedByKey()) {
+			return;
+		}
+
+		Q.handle(callback, this);
+	}, {
+		withParticipant: true
+	});
+};
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
 	var src = json.entry[0].thumbnailUrl;
 	var src40 = src, src50 = src, src80 = src;
@@ -4832,17 +4864,8 @@ Q.onInit.add(function _Streams_onInit() {
 			}
 
 			// check 'notices' attribute
-			Streams.get(publisherId, streamName, function () {
+			Streams.showNoticeIfSubscribed(publisherId, streamName, messageType, function () {
 				var stream = this;
-
-				if (!stream.getAttribute('notices')) {
-					return;
-				}
-
-				// if stream retained - don't show notice
-				if (stream.retainedByKey()) {
-					return;
-				}
 
 				Streams.Avatar.get(byUserId, function (err, avatar) {
 					var text = Q.getObject([messageType], texts);
@@ -4859,21 +4882,6 @@ Q.onInit.add(function _Streams_onInit() {
 				});
 			});
 		}, 'Streams.notifications.notice');
-
-		Q.Text.get('Streams/content', function (err, text) {
-			var msg = Q.firstErrorMessage(err);
-			if (msg) {
-				return console.warn(msg);
-			}
-
-			Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
-			Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
-			Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
-			Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
-			Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
-			Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
-			Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
-		});
 	};
 
 	// handle updates
@@ -5251,6 +5259,20 @@ Q.onInit.add(function _Streams_onInit() {
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
 
+	Q.Text.get('Streams/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			return console.warn(msg);
+		}
+
+		Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
+		Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
+		Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
+		Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
+		Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
+		Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
+		Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
+	});
 }, 'Streams');
 
 Q.Tool.beforeRemove("").set(function (tool) {

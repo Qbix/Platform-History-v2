@@ -87,7 +87,7 @@
 			}
 		},
 		"text": {
-			"useLocale": false,
+			"useLocale": false, /* run translate.php script first */
 			"MyApp": {
 				"dashboard.php": ["MyApp/content"],
 				"content": {
@@ -160,6 +160,22 @@
 				"Users/family": ["Family", "labels/Users/family"],
 				"Users/business": ["Business", "labels/Users/business"],
 				"Users/dating": ["Dating", "labels/Users/dating"]
+			},
+			"roles": {
+				"Users/owners": ["Owners", "labels/Users/owners"],
+				"Users/admins": ["Admins", "labels/Users/admins"],
+				"Users/members": ["Members", "labels/Users/members"],
+				"Users/guests": ["Guests", "labels/Users/guests"]
+			}
+		},
+		"quotas": {
+			"Streams/invite": {
+				"": {
+					"604800": 10
+				},
+				"Users/admins": {
+					"604800": 1000
+				}
 			}
 		}
 	},

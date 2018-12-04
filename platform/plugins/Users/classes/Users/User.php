@@ -277,8 +277,13 @@ class Users_User extends Base_Users_User
 	{
 		$user = $this;
 		if ($inserted) {
-			$labels = Q_Config::get('Users', 'onInsert', 'labels', array());
-			Users_Label::addLabel($labels, $this->id, null, null, $this->id, true);
+			if (Users::isCommunityid($user->id)) {
+				$roles = Q_Config::get('Users', 'onInsert', 'roles', array());
+				Users_Label::addLabel($roles, $this->id, null, null, $this->id, true);
+			} else {
+				$labels = Q_Config::get('Users', 'onInsert', 'labels', array());
+				Users_Label::addLabel($labels, $this->id, null, null, $this->id, true);
+			}
 		}
 		Q::event(
 			'Users/User/save', 
@@ -1105,6 +1110,12 @@ class Users_User extends Base_Users_User
 
 		Streams_Message::delete()
 			->where(array('publisherId' => $userIds))
+			->orWhere(array('byUserId' => $userIds))
+			->execute();
+
+		Streams_Avatar::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('toUserId' => $userIds))
 			->execute();
 
 		Streams_Participant::delete()
@@ -1122,6 +1133,11 @@ class Users_User extends Base_Users_User
 			->orWhere(array('ofUserId' => $userIds))
 			->execute();
 
+		Streams_SubscriptionRule::delete()
+			->where(array('ofUserId' => $userIds))
+			->orWhere(array('publisherId' => $userIds))
+			->execute();
+
 		Streams_MessageTotal::delete()
 			->where(array('publisherId' => $userIds))
 			->execute();
@@ -1132,6 +1148,11 @@ class Users_User extends Base_Users_User
 
 		Streams_RelatedToTotal::delete()
 			->where(array('toPublisherId' => $userIds))
+			->execute();
+
+		Streams_Access::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('grantedByUserId' => $userIds))
 			->execute();
 
 		Streams_Stream::delete()
@@ -1165,6 +1186,10 @@ class Users_User extends Base_Users_User
 		Users_Contact::delete()
 			->where(array('userId' => $userIds))
 			->orWhere(array('contactUserId' => $userIds))
+			->execute();
+
+		Users_Label::delete()
+			->where(array('userId' => $userIds))
 			->execute();
 
 		Users_User::delete()

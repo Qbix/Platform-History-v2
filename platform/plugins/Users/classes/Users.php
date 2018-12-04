@@ -19,7 +19,25 @@ abstract class Users extends Base_Users
 	 * * * */
 	
 	/**
+	 * Determine whether a user id is that of a community
+	 * @method isCommunityId
+	 * @static
+	 * @param {string} $userId The user id to test 
+	 * @return {boolean}
+	 */
+	static function isCommunityId($userId)
+	{
+        if (in_array($userId, Q_Config::expect("Q", "plugins"))) {
+			return false;
+        }
+		$first = mb_substr($userId, 0, 1, "UTF-8");
+		return (mb_strtolower($first, "UTF-8") != $first);
+	}
+	
+	/**
 	 * Get the id of the main community from the config. Defaults to the app name.
+	 * @method communityId
+	 * @static
 	 * @return {string} The id of the main community for the installed app.
 	 */
 	static function communityId()
@@ -30,6 +48,8 @@ abstract class Users extends Base_Users
 	
 	/**
 	 * Get the name of the main community from the config. Defaults to the app name.
+	 * @method communityName
+	 * @static
 	 * @return {string} The name of the main community for the installed app.
 	 */
 	static function communityName()
@@ -59,6 +79,9 @@ abstract class Users extends Base_Users
 		return isset($user->preferredLanguage) ? $user->preferredLanguage : Q_Text::$language;
 	}
 	/**
+	 * Rturn an array of the user's roles relative to a publisher
+	 * @method roles
+	 * @static
 	 * @param string [$publisherId=Users::communityId()]
 	 *  The id of the publisher relative to whom to calculate the roles.
 	 *  Defaults to the community id.
@@ -1016,6 +1039,9 @@ abstract class Users extends Base_Users
 		}
 		
 		// Insert a new user into the database, or simply modify an existing (adopted) user
+		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
+			'filter' => array('Users_User', 'idFilter')
+		));
 		$user->username = $username;
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
@@ -1025,7 +1051,7 @@ abstract class Users extends Base_Users
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
 			// By default, the user's url would be this:
-			$user->url = $username ? "http://$username.".$url_parts['host'] : "";
+			$user->url = "http://".$user->id.'.'.$url_parts['host'];
 		}
 		/**
 		 * @event Users/insertUser {before}
@@ -1033,10 +1059,6 @@ abstract class Users extends Base_Users
 		 * @param {Users_User} user
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'before');
-
-		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
-			'filter' => array('Users_User', 'idFilter')
-		));
 
 		// the following code could throw exceptions
 		if (empty($user->emailAddress) and empty($user->mobileNumber)
