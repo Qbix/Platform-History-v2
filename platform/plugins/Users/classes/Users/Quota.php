@@ -33,6 +33,7 @@ class Users_Quota extends Base_Users_Quota
 	 * and expect to find {"duration": info} where info can be either an integer quota,
 	 * or a hash of {privilegeName: quotaForPrivilege} which should have at least the key ""
 	 * for default quota with no privileges.
+	 * Please pay attention to "begin" argument!
 	 * @param {string} $userId the user that will be using the quota
 	 * @param {string} $resourceId pass an empty string for global resource check, or for example a string beginning with Users::communityId()
 	 * @param {string} $name the name of the quota to check
