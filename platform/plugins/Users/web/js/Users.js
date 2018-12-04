@@ -2177,6 +2177,7 @@
 		"Users/list": "{{Users}}/js/tools/list.js",
 		"Users/pile": "{{Users}}/js/tools/pile.js",
 		"Users/labels": "{{Users}}/js/tools/labels.js",
+		"Users/contacts": "{{Users}}/js/tools/contacts.js",
 		"Users/status": "{{Users}}/js/tools/status.js",
 		"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
 		"Users/getintouch": "{{Users}}/js/tools/getintouch.js",
