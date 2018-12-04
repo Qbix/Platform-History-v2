@@ -162,9 +162,10 @@
 				"Users/dating": ["Dating", "labels/Users/dating"]
 			},
 			"roles": {
-				"Users/admins": ["Admins", "labels/Users/friends"],
-				"Users/members": ["Members", "labels/Users/family"],
-				"Users/guests": ["Guests", "labels/Users/business"]
+				"Users/owners": ["Owners", "labels/Users/owners"],
+				"Users/admins": ["Admins", "labels/Users/admins"],
+				"Users/members": ["Members", "labels/Users/members"],
+				"Users/guests": ["Guests", "labels/Users/guests"]
 			}
 		},
 		"quotas": {
