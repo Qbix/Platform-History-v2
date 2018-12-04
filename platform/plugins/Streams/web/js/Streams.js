@@ -4874,7 +4874,7 @@ Q.onInit.add(function _Streams_onInit() {
 						return console.warn('notificationsAsNotice: no text for ' + messageType);
 					}
 
-					Q.Notice.add({
+					Q.Notices.add({
 						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
 						timeOut: 10,
 						handler: stream.url()
