@@ -1012,6 +1012,8 @@
 	 */
 	Users.setIdentifier = function (options) {
 		var o = Q.extend({}, Users.setIdentifier.options, options);
+		var identifierType = Q.getObject("identifierType", o);
+		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
 
 		function onSuccess(user) {
 			if (false !== Q.handle(o.onResult, this, [user])) {
@@ -1029,12 +1031,13 @@
 		priv.setIdentifier_onCancel = onCancel;
 
 		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
-			setIdentifier_setupDialog(o.identifierType, o);
+			setIdentifier_setupDialog(identifierType, o);
 			var d = setIdentifier_setupDialog.dialog;
-			if (d.css('display') == 'none') {
+			if (d.css('display') === 'none') {
 				d.data('Q/dialog').load();
 			}
-			$('#Users_setIdentifier_type').val(o.identifierType);
+			$('input[name="identifierType"]', d).val(identifierType);
+			$('input[name="identifier"]', d).val(identifier);
 		});
 	};
 
@@ -2174,6 +2177,7 @@
 		"Users/list": "{{Users}}/js/tools/list.js",
 		"Users/pile": "{{Users}}/js/tools/pile.js",
 		"Users/labels": "{{Users}}/js/tools/labels.js",
+		"Users/contacts": "{{Users}}/js/tools/contacts.js",
 		"Users/status": "{{Users}}/js/tools/status.js",
 		"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
 		"Users/getintouch": "{{Users}}/js/tools/getintouch.js",

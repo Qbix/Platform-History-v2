@@ -2,16 +2,16 @@
 
 /**
  * @module Streams
+ * @class HTTP Streams interest
  */
 
 /**
  * Used by HTTP clients to create a new interest in the system.
- * @class HTTP Streams interest
  * @method post
  *
  * @param {array} $_REQUEST 
  * @param {string} [$_REQUEST.title] Required. The title of the interest.
- * @param {string} [$_REQUEST.publisherId] Optional. Defaults to the current community's id.
+ * @param {string} [$_REQUEST.publisherId=Users::communityId()] Optional. Defaults to the current community's id.
  * @param {string} [$_REQUEST.subscribe] Optional. Defauls to false. Whether to subscribe rather than just join the interest stream.
  * @return {void}
  */

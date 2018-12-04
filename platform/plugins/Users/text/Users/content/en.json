@@ -16,5 +16,9 @@
 		"WelcomeVerifyEmail": "Welcome! Verify your email address.",
 		"ForgetPass": "Hey, did you forget your passphrase?"
 	},
+	"usersContacts": {
+		"selectLabel": "Please select label.",
+		"inviteUser": "Invite User"
+	},
 	"invalidLanguageSelected": "Invalid language selected"
 }

@@ -74,12 +74,23 @@ class Streams_Invite extends Base_Streams_Invite
 			$invited->token = $this->token;
 			$invited->userId = $userId;
 			if (!$invited->retrieve() or $invited->state !== 'accepted') {
+				$quotaName = "Streams/invite";
+				$roles = Users::roles($this->publisherId, null, null, $userId);
+				Users_Quota::check($userId, $this->token, $quotaName, true, 1, $roles);
+				
 				$invited2 = new Streams_Invited();
 				$invited2->token = $invited->token;
 				$invited2->userId = $invited->userId;
 				$invited2->state = 'accepted';
 				$invited2->expireTime = $this->expireTime;
 				$invited2->save();
+				
+				$quota = new Users_Quota(array(
+					'userId' => $userId,
+					'resourceId' => $this->token,
+					'name' => $quotaName
+				));
+				$quota->save();
 			}
 		}
 		

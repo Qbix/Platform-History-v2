@@ -227,10 +227,10 @@ class Q_Request
 		return self::$uri;
 	}
 	/**
-	 * Get just action name (without module name) from URL
+	 * Get just the part of the URL after the Q_Request::baseUrl() and slash
 	 * @method tail
 	 * @static
-	 * @param {string} [$url=null]
+	 * @param {string} [$url=Q_Request::url()] Defaults to the currently requested url
 	 * @return {string}
 	 */
 	static function tail(
