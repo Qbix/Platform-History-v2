@@ -174,7 +174,8 @@
 		"icon": {
 			"sizes": ["40", "50", "80", "200", "x200", "200x"],
 			"defaultSize": "40",
-			"labels": "labels/default"
+			"labels": "labels/default",
+			"canManage": ["Users/owners", "Users/admins"]
 		},
 		"vote": {
 			"Users/hinted": {
