@@ -134,18 +134,21 @@ class Streams_Access extends Base_Streams_Access
 		if ($this->get('removed', false)) {
 			$this->set('removed', false);
 		}
-		if (!empty($this->publisherId) and !empty($this->streamName)
-		and !in_array(substr($this->streamName, -1), array('/', '*'))) {
+
+		if (!empty($this->publisherId) and !empty($this->streamName)) {
+
 			Streams_Avatar::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
 
-			$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
-			Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(
-				'type' => 'Streams/access/save',
-				'instructions' => Q::take($this->fields, array(
-					'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-					'ofUserId', 'ofContactLabel'
-				))
-			), true);
+			if (!in_array(substr($this->streamName, -1), array('/', '*'))) {
+				$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
+				Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(
+					'type' => 'Streams/access/save',
+					'instructions' => Q::take($this->fields, array(
+						'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+						'ofUserId', 'ofContactLabel'
+					))
+				), true);
+			}
 		}
 		return $query;
 	}
