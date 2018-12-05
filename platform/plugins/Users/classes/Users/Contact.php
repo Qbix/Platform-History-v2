@@ -53,7 +53,7 @@ class Users_Contact extends Base_Users_Contact
 		$unlessExists = false)
 	{
 		Q::event('Users/Contact/addContact',
-			compact('userId', 'contactUserId', 'label'),
+			compact('userId', 'asUserId', 'contactUserId', 'label'),
 			'before'
 		);
 
