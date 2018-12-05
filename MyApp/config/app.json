@@ -176,6 +176,9 @@
 				"Users/admins": {
 					"604800": 1000
 				}
+			},
+			"Communities/create": {
+				"604800": 1
 			}
 		}
 	},
