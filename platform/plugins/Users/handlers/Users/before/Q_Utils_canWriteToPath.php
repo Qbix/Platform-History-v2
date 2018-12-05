@@ -23,7 +23,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	// user ids for which have permissions to save files
 	// first user is self
 	$usersCanHandle = array($user->id);
-	// get users where logged user assigned as "Communities/admins", "Users/owners"
+	// get labels which can manage icons
 	if ($labelsCanManage = Q_Config::get("Users", "icon", "canManage", array())) {
 		// if founded labels which can manage icons, collect users who can edit logged user
 		$usersCanHandle = array_merge($usersCanHandle, array_keys(Users::byRoles($labelsCanManage)));
