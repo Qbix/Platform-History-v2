@@ -12953,7 +12953,7 @@ Q.Notices = {
 	 * @param {Function|String} [options.handler] Something (callback or URL) to handle with Q.handle()
 	 * @param {String} [options.type=common] Arbitrary type of notice. Can be used to apply different styles dependent on type,
 	 * because appropriate CSS class appended to the notice. May be 'error', 'warning'.
-	 * @param {Boolean|Number} [options.timeout=false] Time in seconds after which to remove notice.
+	 * @param {Boolean|Number} [options.timeOut=false] Time in seconds after which to remove notice.
 	 * @param {Boolean|Number} [options.persistent=false] Whether to save this notice to session to show after page refresh.
 	 */
 	add: function(options)
@@ -12967,14 +12967,14 @@ Q.Notices = {
 			key: null,
 			closeable: true,
 			type: 'common',
-			timeout: false,
+			timeOut: false,
 			persistent: false
 		}, options);
 
 		var key = options.key;
 		var content = options.content;
 		var closeable = options.closeable;
-		var timeout = options.timeout;
+		var timeOut = options.timeOut;
 		var handler = options.handler;
 		var persistent = options.persistent;
 		var noticeClass = 'Q_' + options.type + '_notice';
@@ -13013,11 +13013,11 @@ Q.Notices = {
 			}
 		}
 
-		// whether remove notice by timeout
-		if (typeof timeout === 'number' && timeout > 0) {
+		// whether remove notice by timeOut
+		if (typeof timeOut === 'number' && timeOut > 0) {
 			setTimeout(function () {
 				Q.Notices.remove(li);
-			}, timeout * 1000);
+			}, timeOut * 1000);
 		}
 
 		// insert new notice as first child
@@ -13036,7 +13036,7 @@ Q.Notices = {
 						options: {
 							persistent: persistent,
 							closeable: closeable,
-							timeout: timeout,
+							timeOut: timeOut,
 							handler: handler
 						}
 					}
