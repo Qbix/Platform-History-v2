@@ -4875,7 +4875,7 @@ Q.onInit.add(function _Streams_onInit() {
 					}
 
 					Q.Notices.add({
-						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
+						content: text.replace('{{&call \'avatar.displayName\'}}', avatar.displayName()) + content,
 						timeOut: 10,
 						handler: stream.url()
 					});
