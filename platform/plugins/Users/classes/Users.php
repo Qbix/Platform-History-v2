@@ -1296,6 +1296,9 @@ abstract class Users extends Base_Users
 
 		// Make a user row to represent a "future" user and give them an empty username
 		$user = new Users_User();
+		$user->signedUpWith = 'none'; // this marks it as a future user for now
+		$user->username = "";
+		$user->icon = '{{Users}}/img/icons/future';
 		if ($type === 'email') {
 			$user->save();
 			$user->setEmailAddress($value, true);
@@ -1305,9 +1308,6 @@ abstract class Users extends Base_Users
 		} else if (substr($type, -7) !== '_hashed') {
 			$user->setUid($type, $value, true);
 		}
-		$user->signedUpWith = 'none'; // this marks it as a future user for now
-		$user->username = "";
-		$user->icon = '{{Users}}/img/icons/future';
 		$during = 'future';
 		/**
 		 * @event Users/insertUser {before}
