@@ -1243,7 +1243,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				mobile: {
 					numbers: mobileNumbers
 				},
-				emails: {
+				email: {
 					addresses: emailAddresses
 				},
 				facebook: {
