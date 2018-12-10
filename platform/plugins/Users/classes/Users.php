@@ -126,6 +126,7 @@ abstract class Users extends Base_Users
 	 *  You can pass additional criteria here for the label field
 	 *  in the `Users_Contact::select`, such as an array or Db_Range
 	 * @param {array} [$options=array()] Any additional options to pass to the query, such as "ignoreCache"
+	 * @param {bool} [$options.onlyCommunities=false] Set this to true if you want to get only communities rows (userId - is community).
 	 * @param {string} [$userId=null] If not passed, the logged in user is used, if any
 	 * @return {array} An associative array of $roleName => $contactRow pairs
 	 * @throws {Users_Exception_NotLoggedIn}
@@ -149,6 +150,17 @@ abstract class Users extends Base_Users
 			))->andWhere(array('label' => $filter))
 			->options($options)
 			->fetchDbRows(null, null, 'userId');
+
+		if (Q::ifset($options, "onlyCommunities", false)) {
+			foreach ($contacts as $i => $contact) {
+				if (Users::isCommunityId($contact->userId)) {
+					continue;
+				}
+
+				unset($contacts[$i]);
+			}
+		}
+
 		return $contacts;
 	}
 	/**
