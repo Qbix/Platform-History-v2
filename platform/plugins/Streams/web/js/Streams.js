@@ -1243,7 +1243,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				mobile: {
 					numbers: mobileNumbers
 				},
-				emails: {
+				email: {
 					addresses: emailAddresses
 				},
 				facebook: {
@@ -4875,8 +4875,8 @@ Q.onInit.add(function _Streams_onInit() {
 					}
 
 					Q.Notices.add({
-						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
-						timeOut: 10,
+						content: text.replace('{{&call \'avatar.displayName\'}}', avatar.displayName()) + content,
+						timeout: 10,
 						handler: stream.url()
 					});
 				});
