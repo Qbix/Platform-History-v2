@@ -94,7 +94,8 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 
 					$this.addClass("Q_working");
 					Q.Streams.invite(state.communityId, 'Streams/experience/main', {
-						addLabel: selectedLabel
+						addLabel: selectedLabel,
+						alwaysSend: true
 					}, function (err, info) {
 						var msg = Q.firstErrorMessage(err);
 						if (msg) {
