@@ -190,11 +190,10 @@ Q.Tool.define("Places/location", function (options) {
 								latitude: result.geometry.location.lat(),
 								longitude: result.geometry.location.lng(),
 								locationType: result.geometry.type,
-								venue: place.name
+								venue: place.name,
+								placeId: result.place_id
 							};
-							if (result.place_id) {
-								attributes.placeId = result.place_id;
-							}
+
 							var textConfirm = text.location.confirm;
 							Q.confirm(textConfirm.message, function (shouldSave) {
 								if (!shouldSave) {
@@ -205,31 +204,20 @@ Q.Tool.define("Places/location", function (options) {
 									if (!title) {
 										return;
 									}
-									var publisherId = state.publisherId || userId;
-									Streams.create({
-										publisherId: publisherId,
-										type: 'Places/location',
-										title: title,
-										attributes: attributes,
-										readLevel: 0,
-										writeLevel: 0,
-										adminLevel: 0
-									}, function (err) {
-										if (!err) {
-											var sf = this.fields;
-											tool.relatedTool.state.onRefresh.setOnce(
-											function (previews, map, entering, exiting, updating) {
-												var key = Q.firstKey(entering);
-												var index = map[key];
-												var preview = previews[index];
-												Q.Pointer.canceledClick = false;
-												tool.toggle(preview.element);
-											});
+									Q.req("Places/location", "data", function (err, response) {
+										var msg;
+										if (msg = Q.firstErrorMessage(err, response && response.errors)) {
+											return console.warn("Places/location: " + msg);
 										}
+
+										var data = response.slots.data;
+
 									}, {
-										publisherId: userId,
-										streamName: 'Places/user/locations',
-										type: 'Places/locations'
+										method: 'POST',
+										fields: {
+											title: title,
+											attributes: attributes
+										}
 									});
 								}, {
 									title: textAdd.title,

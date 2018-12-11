@@ -45,7 +45,7 @@ class Places_Location
 	{
 		if (empty($placeId)) {
 			if ($throwIfBadValue) {
-				throw new Q_Exception_RequiredField(array('field' => 'id'));
+				throw new Q_Exception_RequiredField(array('field' => 'placeId'));
 			}
 			return null;
 		}
