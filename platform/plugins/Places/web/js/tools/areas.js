@@ -137,8 +137,6 @@
 							"Places/area": {
 								'title': state.text.areas.newArea,
 								'preprocess': function(_proceed){
-									var previewTool = this;
-
 									tool.prompt(_proceed);
 								}
 							}
@@ -192,7 +190,10 @@
 							return false;
 						}
 
-						Q.handle(_proceed, this, [{title: title}]);
+						Q.handle(_proceed, this, [{
+							title: title,
+							publisherId: Users.loggedInUserId()
+						}]);
 
 						// wait when new preview tool created with this title and add class Q_filter_result
 						var timerId = setInterval(function(){
