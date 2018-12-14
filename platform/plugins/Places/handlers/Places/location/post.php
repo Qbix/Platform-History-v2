@@ -6,6 +6,7 @@ function Places_location_post($params)
 
 	// required fields
 	Q_Valid::requireFields(array(
+		'publisherId',
 		'title',
 		'attributes'
 	), $r, true);
@@ -15,10 +16,10 @@ function Places_location_post($params)
 		"placeId"
 	), $r['attributes'], true);
 
-	$data = Q::take($r, array('title', 'attributes'));
+	$data = Q::take($r, array('publisherId', 'title', 'attributes'));
 
 	$communityId = Users::communityId();
-	$loggedUser = Users::loggedInUser(true);
+	$publisherId = $data['publisherId'];
 
 	// get or create Places/location stream
 	$globalStream = Places_Location::stream(null, $communityId, $data['attributes']['placeId'], true);
@@ -31,9 +32,9 @@ function Places_location_post($params)
 	}
 
 	// copy this stream to user with selected title
-	$userStream = Streams::fetchOne($loggedUser->id, $loggedUser->id, $globalStream->name);
+	$userStream = Streams::fetchOne($publisherId, $publisherId, $globalStream->name);
 	if (!$userStream instanceof Streams_Stream) {
-		$userStream = Streams::create($loggedUser->id, $loggedUser->id, 'Places/location', array(
+		$userStream = Streams::create($publisherId, $publisherId, 'Places/location', array(
 			'name' => $globalStream->name,
 			'title' => $data['title'],
 			'attributes' => $globalStream->attributes
@@ -42,7 +43,7 @@ function Places_location_post($params)
 
 	// relate stream to logged user Places/user/locations category
 	$userStream->relateTo(
-		(object)array('publisherId' => $loggedUser->id, 'name' => 'Places/user/locations'),
+		(object)array('publisherId' => $publisherId, 'name' => 'Places/user/locations'),
 		'Places/locations'
 	);
 

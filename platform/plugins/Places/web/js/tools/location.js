@@ -74,6 +74,7 @@ Q.Tool.define("Places/location", function (options) {
 },
 
 { // default options here
+	publisherId: Users.loggedInUserId(),
 	geocode: null,
 	onChoose: new Q.Event(function (coordinates) {
 		this.state.location = coordinates;
@@ -124,9 +125,9 @@ Q.Tool.define("Places/location", function (options) {
 	 */
 	selectLocation: function(){
 		var tool = this;
-		var state = tool.state;
+		var state = this.state;
 		var $te = $(tool.element);
-		var userId = Users.loggedInUserId();
+		var userId = state.publisherId;
 
 		Q.Text.get('Places/content', function (err, text) {
 			Q.Template.render('Places/location/select', Q.extend({
@@ -154,6 +155,13 @@ Q.Tool.define("Places/location", function (options) {
 
 					// set showLocations state.
 					if (state.showLocations && userId) {
+						// if logged user is not a publisher of Places/user/locations
+						// need to participate this user to this category to allow
+						// get messages about changes
+						if (userId !== Users.loggedInUserId()) {
+							Streams.Stream.join(userId, 'Places/user/locations');
+						}
+
 						tool.$(".Places_location_related")
 							.tool('Streams/related', {
 								publisherId: userId,
@@ -166,7 +174,7 @@ Q.Tool.define("Places/location", function (options) {
 							}, tool.prefix + 'relatedLocations')
 							.activate(function () {
 								tool.relatedTool = this;
-							});
+						});
 					}
 
 					function _onChoose(place) {
@@ -211,10 +219,10 @@ Q.Tool.define("Places/location", function (options) {
 										}
 
 										var data = response.slots.data;
-
 									}, {
 										method: 'POST',
 										fields: {
+											publisherId: userId,
 											title: title,
 											attributes: attributes
 										}
