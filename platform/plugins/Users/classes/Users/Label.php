@@ -263,15 +263,18 @@ class Users_Label extends Base_Users_Label
 					$labelNames[] = $f;
 				}
 			}
+
 			$criteria['label'] = $labelNames;
 		}
 		if (!empty($options['checkContacts'])) {
-			$contact_array = Users_Contact::select()
+			$contact_array = Users_Contact::select('userId, label, contactUserId')
 				->where($criteria)
+				->groupBy('userId, label, contactUserId')
 				->fetchDbRows();
 			foreach ($prefixes as $p) {
-				$contact_array = array_merge($contact_array, Users_Contact::select()
+				$contact_array = array_merge($contact_array, Users_Contact::select('userId, label, contactUserId')
 					->where(array_merge($criteria, array('label' => $p)))
+					->groupBy('userId, label, contactUserId')
 					->fetchDbRows()
 				);
 			}
