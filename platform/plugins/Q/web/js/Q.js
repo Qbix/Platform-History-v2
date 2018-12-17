@@ -12997,6 +12997,7 @@ Q.Notices = {
 		li.classList.add(noticeClass);
 		li.onclick = function () {
 			Q.handle(handler, li, [content]);
+			Q.Notices.remove(li);
 		};
 		var span = document.createElement('span');
 		span.innerHTML = content.trim();
@@ -13031,7 +13032,8 @@ Q.Notices = {
 				Q.req('Q/notice', [], null, {
 					method: 'post',
 					fields: {
-						key: key,
+						// we need key for persistent notices
+						key: key || Date.now().toString(),
 						content: content,
 						options: {
 							persistent: persistent,
