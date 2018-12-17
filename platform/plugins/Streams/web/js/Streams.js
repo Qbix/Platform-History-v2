@@ -1243,7 +1243,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				mobile: {
 					numbers: mobileNumbers
 				},
-				emails: {
+				email: {
 					addresses: emailAddresses
 				},
 				facebook: {
@@ -4835,26 +4835,28 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 
-		// get texts for notices
-		var texts = {};
-		Q.Text.get('Streams/content', function (err, text) {
-			texts = Q.getObject("notifications", text);
-		});
-
 		Users.Socket.onEvent('Streams/post').set(function (message) {
+			message = Streams.Message.construct(message);
 			var publisherId = Q.getObject(["publisherId"], message);
 			var streamName = Q.getObject(["streamName"], message);
 			var messageType = Q.getObject(["type"], message);
 			var byUserId = Q.getObject(["byUserId"], message);
 			var content = Q.getObject(["content"], message);
+			var messageUrl = message.getInstruction('invitedUrl') || message.getInstruction('url');
+			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
+			var pluginName = messageType.slice(0, messageType.indexOf('/'));
 
-			// if this message type absent in config
-			if (!Q.getObject([messageType], notificationsAsNotice)) {
-				return;
+			// Travel plugin settings
+			if (pluginName === 'Travel') {
+				var passengerId = message.getInstruction('passengerId');
+				// 	skip messages for other passengers
+				if (passengerId && passengerId !== userId) {
+					return;
+				}
 			}
 
-			// only messages for Streams plugin
-			if (messageType.slice(0, messageType.indexOf('/')) !== 'Streams') {
+			// if this message type absent in config
+			if (!noticeOptions) {
 				return;
 			}
 
@@ -4863,21 +4865,49 @@ Q.onInit.add(function _Streams_onInit() {
 				return;
 			}
 
-			// check 'notices' attribute
-			Streams.showNoticeIfSubscribed(publisherId, streamName, messageType, function () {
-				var stream = this;
+			Q.Text.get(pluginName + '/content', function (err, text) {
+				text = Q.getObject(["notifications", messageType], text);
+				if (!text || typeof text !== 'string') {
+					return console.warn('notificationsAsNotice: no text for ' + messageType);
+				}
 
-				Streams.Avatar.get(byUserId, function (err, avatar) {
-					var text = Q.getObject([messageType], texts);
+				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType, function () {
+					var stream = this;
 
-					if (!text || typeof text !== 'string') {
-						return console.warn('notificationsAsNotice: no text for ' + messageType);
-					}
+					Streams.Avatar.get(byUserId, function (err, avatar) {
+						var templateName;
 
-					Q.Notices.add({
-						content: text.replace('{{&call \'avatar.displayName\'}}', avatar.displayName()) + content,
-						timeOut: 10,
-						handler: stream.url()
+						if (Q.getObject("showSubject", noticeOptions) !== false) {
+							templateName = text + content;
+						} else {
+							templateName = content;
+						}
+
+						if (!templateName) {
+							return;
+						}
+
+						Q.Template.set(templateName, templateName);
+						Q.Template.render(templateName, {
+							stream: stream,
+							avatar: avatar,
+							message: message
+						}, function (err, html) {
+							var msg;
+							if (msg = Q.firstErrorMessage(err)) {
+								return console.error(msg);
+							}
+
+							if (!html) {
+								return;
+							}
+
+							Q.Notices.add(Q.extend(noticeOptions, {
+								content: html,
+								handler: messageUrl || stream.url()
+							}));
+						});
+
 					});
 				});
 			});
