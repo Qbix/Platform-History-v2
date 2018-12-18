@@ -4059,7 +4059,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('messages')) {
-				return;
+				continue;
 			}
 			$messageTotals = array();
 			foreach ($trows as $row) {
@@ -4135,7 +4135,7 @@ abstract class Streams extends Base_Streams
 
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
-				return;
+				continue;
 			}
 			$relatedToTotals = array();
 			foreach ($trows as $row) {
@@ -4212,7 +4212,7 @@ abstract class Streams extends Base_Streams
 
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
-				return;
+				continue;
 			}
 			$relatedFromTotals = array();
 			foreach ($trows as $row) {
