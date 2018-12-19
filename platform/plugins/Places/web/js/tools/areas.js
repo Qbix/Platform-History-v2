@@ -7,7 +7,6 @@
 
 	var Users = Q.Users;
 	var Streams = Q.Streams;
-	var Places = Q.Places;
 
 	/**
 	 * Allows the logged-in user to select/add areas to locations.
@@ -17,6 +16,7 @@
 	 * @param {Object} options used to pass options
 	 * @param {String} options.publisherId Location stream publisher id
 	 * @param {String} options.streamName Places/location stream name
+	 * @param {String} options.location Location object. It will be used to find Places/location stream.
 	 * @param {Places.Coordinates} options.location To relate the areas to
 	 */
 	Q.Tool.define("Places/areas", function (options) {
@@ -47,7 +47,6 @@
 			publisherId: null,
 			streamName: null,
 			location: null,
-			stream: null,
 			areaSelected: null
 		},
 
@@ -59,7 +58,10 @@
 			refresh: function () {
 				var tool = this;
 				var state = tool.state;
-				var $te = $(tool.element);
+
+				// if location defined, try to get publisherId and streamName from it
+				state.publisherId = state.publisherId || Q.getObject("location.stream.fields.publisherId", state) || Users.loggedInUserId();
+				state.streamName = state.streamName || Q.getObject("location.stream.fields.name", state);
 
 				// if Q/filter didn't created - create one
 				if (!tool.filterTool) {
@@ -158,64 +160,64 @@
 				var title = tool.filterTool.$input.val() || "";
 
 				var $prompt = Q.prompt(state.text.areas.promptTitle, function (title, dialog) {
-						// user click cancel button
-						if (title === null) {
-							return false;
-						}
+					// user click cancel button
+					if (title === null) {
+						return false;
+					}
 
-						// title required
-						if (!title) {
-							Q.alert(state.text.areas.absent, {
-								title: state.text.areas.error,
-								onClose: function(){
-									tool.prompt(_proceed);
-								}
-							});
-							return false;
-						}
-
-						// get array of areas exist
-						var areasExist = tool.relatedTool.$(".Streams_preview_title").map(function(){
-							return $.trim($(this).text());
-						}).get();
-
-						// if title already exist
-						if ($.inArray(title, areasExist) >= 0) {
-							Q.alert(state.text.areas.exist, {
-								title: state.text.areas.error,
-								onClose: function(){
-									tool.prompt(_proceed);
-								}
-							});
-							return false;
-						}
-
-						Q.handle(_proceed, this, [{
-							title: title,
-							publisherId: Users.loggedInUserId()
-						}]);
-
-						// wait when new preview tool created with this title and add class Q_filter_result
-						var timerId = setInterval(function(){
-							var container = tool.relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
-
-							if(!container.length){
-								return;
+					// title required
+					if (!title) {
+						Q.alert(state.text.areas.absent, {
+							title: state.text.areas.error,
+							onClose: function(){
+								tool.prompt(_proceed);
 							}
+						});
+						return false;
+					}
 
-							clearInterval(timerId);
+					// get array of areas exist
+					var areasExist = tool.relatedTool.$(".Streams_preview_title").map(function(){
+						return $.trim($(this).text());
+					}).get();
 
-							// set Q_filter_result class to just created area
-							var $result = container.closest(".Streams_preview_container").addClass("Q_filter_result");
+					// if title already exist
+					if ($.inArray(title, areasExist) >= 0) {
+						Q.alert(state.text.areas.exist, {
+							title: state.text.areas.error,
+							onClose: function(){
+								tool.prompt(_proceed);
+							}
+						});
+						return false;
+					}
 
-							// select just created area
-							tool.filterTool.choose($result[0])
-						}, 500);
-					},
-					{
-						title: state.text.areas.addNewArea,
-						ok: state.text.areas.add
-					});
+					Q.handle(_proceed, null, [{
+						title: title,
+						publisherId: state.publisherId
+					}]);
+
+					// wait when new preview tool created with this title and add class Q_filter_result
+					var timerId = setInterval(function(){
+						var container = tool.relatedTool.$(".Streams_preview_container .Streams_preview_title:contains('"+title+"')");
+
+						if(!container.length){
+							return;
+						}
+
+						clearInterval(timerId);
+
+						// set Q_filter_result class to just created area
+						var $result = container.closest(".Streams_preview_container").addClass("Q_filter_result");
+
+						// select just created area
+						tool.filterTool.choose($result[0])
+					}, 500);
+				},
+				{
+					title: state.text.areas.addNewArea,
+					ok: state.text.areas.add
+				});
 
 				// set default value
 				$("input[type=text]", $prompt).val(title);
@@ -231,11 +233,11 @@
 
 				// default publisherId to communityId
 				if (state.streamName && !state.publisherId) {
-					state.publisherId = state.publisherId || Q.info.appId;
+					state.publisherId = Q.info.appId;
 				}
 
 				if (state.publisherId && state.streamName) { // stripped stream means that it have only publisherId and name
-					Q.Streams.get(state.stream.publisherId, state.stream.name, function () {
+					Streams.get(state.publisherId, state.streamName, function () {
 						Q.handle(callback, this, [this]);
 					});
 				} else if(location) {
@@ -249,7 +251,7 @@
 							return false;
 						}
 						var data = response.slots.data;
-						Q.Streams.get(data.publisherId, data.streamName, function () {
+						Streams.get(data.publisherId, data.streamName, function () {
 							Q.handle(callback, this, [this]);
 						});
 					}, {
