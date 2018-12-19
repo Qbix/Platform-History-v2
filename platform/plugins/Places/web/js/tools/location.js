@@ -74,6 +74,7 @@ Q.Tool.define("Places/location", function (options) {
 },
 
 { // default options here
+	publisherId: Users.loggedInUserId(),
 	geocode: null,
 	onChoose: new Q.Event(function (coordinates) {
 		this.state.location = coordinates;
@@ -124,9 +125,9 @@ Q.Tool.define("Places/location", function (options) {
 	 */
 	selectLocation: function(){
 		var tool = this;
-		var state = tool.state;
+		var state = this.state;
 		var $te = $(tool.element);
-		var userId = Users.loggedInUserId();
+		var userId = state.publisherId;
 
 		Q.Text.get('Places/content', function (err, text) {
 			Q.Template.render('Places/location/select', Q.extend({
@@ -154,6 +155,13 @@ Q.Tool.define("Places/location", function (options) {
 
 					// set showLocations state.
 					if (state.showLocations && userId) {
+						// if logged user is not a publisher of Places/user/locations
+						// need to participate this user to this category to allow
+						// get messages about changes
+						if (userId !== Users.loggedInUserId()) {
+							Streams.Stream.join(userId, 'Places/user/locations');
+						}
+
 						tool.$(".Places_location_related")
 							.tool('Streams/related', {
 								publisherId: userId,
@@ -166,7 +174,7 @@ Q.Tool.define("Places/location", function (options) {
 							}, tool.prefix + 'relatedLocations')
 							.activate(function () {
 								tool.relatedTool = this;
-							});
+						});
 					}
 
 					function _onChoose(place) {
@@ -190,11 +198,10 @@ Q.Tool.define("Places/location", function (options) {
 								latitude: result.geometry.location.lat(),
 								longitude: result.geometry.location.lng(),
 								locationType: result.geometry.type,
-								venue: place.name
+								venue: place.name,
+								placeId: result.place_id
 							};
-							if (result.place_id) {
-								attributes.placeId = result.place_id;
-							}
+
 							var textConfirm = text.location.confirm;
 							Q.confirm(textConfirm.message, function (shouldSave) {
 								if (!shouldSave) {
@@ -205,31 +212,38 @@ Q.Tool.define("Places/location", function (options) {
 									if (!title) {
 										return;
 									}
-									var publisherId = state.publisherId || userId;
-									Streams.create({
-										publisherId: publisherId,
-										type: 'Places/location',
-										title: title,
-										attributes: attributes,
-										readLevel: 0,
-										writeLevel: 0,
-										adminLevel: 0
-									}, function (err) {
-										if (!err) {
-											var sf = this.fields;
-											tool.relatedTool.state.onRefresh.setOnce(
-											function (previews, map, entering, exiting, updating) {
-												var key = Q.firstKey(entering);
-												var index = map[key];
-												var preview = previews[index];
-												Q.Pointer.canceledClick = false;
-												tool.toggle(preview.element);
-											});
+
+									Q.req("Places/location", "data", function (err, response) {
+										var msg;
+										if (msg = Q.firstErrorMessage(err, response && response.errors)) {
+											return console.warn("Places/location: " + msg);
 										}
+
+										var data = response.slots.data;
+
+										// wait when new preview tool created with this title and add make selected
+										var timerId = setInterval(function(){
+											tool.relatedTool.$(".Streams_preview_tool").each(function () {
+												var previewTool = Q.Tool.from(this, "Places/location/preview");
+
+												// filter just created preview tool
+												if (Q.typeOf(previewTool) !== 'Q.Tool' || Q.getObject("preview.state.streamName", previewTool) !== data.streamName) {
+													return;
+												}
+
+												clearInterval(timerId);
+
+												tool.toggle(this);
+											});
+
+										}, 500);
 									}, {
-										publisherId: userId,
-										streamName: 'Places/user/locations',
-										type: 'Places/locations'
+										method: 'POST',
+										fields: {
+											publisherId: userId,
+											title: title,
+											attributes: attributes
+										}
 									});
 								}, {
 									title: textAdd.title,
