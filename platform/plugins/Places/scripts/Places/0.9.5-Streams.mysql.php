@@ -2,7 +2,6 @@
 
 function Places_0_9_5_Streams()
 {
-	$app = Q::app();
 	foreach (array('Places/location', 'Places/area', 'Places/floor', 'Places/column') as $type) {
 		$defaults =  Streams_Stream::getConfigField($type, 'defaults');
 		$name = "$type/";
@@ -13,9 +12,6 @@ function Places_0_9_5_Streams()
 			'title' => $defaults['title'],
 			'type' => 'Streams/template'
 		));
-		if ($name == 'Places/location/') {
-			$s->writeLevel = 23;
-		}
 		$s->save();
 		$a = new Streams_Access(array(
 			'publisherId' => '',
@@ -39,6 +35,7 @@ function Places_0_9_5_Streams()
 			$r->save();
 		}
 	}
+
 	echo "Inserted Templates for location, area, floor and column". PHP_EOL;
 }
 
