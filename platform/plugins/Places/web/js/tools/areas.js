@@ -60,8 +60,8 @@
 				var state = tool.state;
 
 				// if location defined, try to get publisherId and streamName from it
-				state.publisherId = state.publisherId || Q.getObject("location.stream.fields.publisherId", state) || Users.loggedInUserId();
-				state.streamName = state.streamName || Q.getObject("location.stream.fields.name", state);
+				state.publisherId = Q.getObject("location.stream.fields.publisherId", state) || Users.communityId;
+				state.streamName = Q.getObject("location.stream.fields.name", state);
 
 				// if Q/filter didn't created - create one
 				if (!tool.filterTool) {
@@ -108,11 +108,23 @@
 							tool.filterTool.state.onClear.set(function () {
 								state.areaSelected = null;
 							}, tool);
+
+							tool.buildAreas();
 						});
 				} else {
 					// clear Q/filter input
 					tool.filterTool.setText('');
+
+					tool.buildAreas();
 				}
+			},
+			/**
+			 * Create or refresh Streams/related tool with areas
+			 * @method buildAreas
+			 */
+			buildAreas: function () {
+				var tool = this;
+				var state = this.state;
 
 				tool.getStream(function(stream){
 					// if related tool already exist - set new stream and refresh
@@ -233,7 +245,7 @@
 
 				// default publisherId to communityId
 				if (state.streamName && !state.publisherId) {
-					state.publisherId = Q.info.appId;
+					state.publisherId = Users.communityId;
 				}
 
 				if (state.publisherId && state.streamName) { // stripped stream means that it have only publisherId and name
