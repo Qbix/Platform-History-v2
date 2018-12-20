@@ -264,6 +264,7 @@ Q.Tool.define("Places/location", function (options) {
 
 							$te.find(".Q_selected").removeClass("Q_selected");
 							$(tool.addressTool.element).addClass('Q_selected');
+							this.stream = null;
 							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 						});
 					}
@@ -354,8 +355,10 @@ Q.Tool.define("Places/location", function (options) {
 		var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
 		var ls = locationPreviewTool.state;
 		Streams.get(ls.publisherId, ls.streamName, function () {
-			Places.Coordinates.from(this).geocode(function (err, results) {
+			var locationStream = this;
+			Places.Coordinates.from(locationStream).geocode(function (err, results) {
 				var loc = Q.getObject([0, 'geometry', 'location'], results);
+				this.stream = locationStream;
 				Q.handle(state.onChoose, tool, [this, loc]);
 			});
 		});
