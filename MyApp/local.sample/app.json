@@ -35,9 +35,6 @@
 		},
 		"environment": "",
 		/* "scriptFiles": ["config/Q/urls.php"], */
-		"session": {
-			"allowHijack": true /* set to false in production */
-		},
 		"javascript": {
 			"prettyPrintData": true
 		}

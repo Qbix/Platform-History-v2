@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * TODO: DOCUMENT THIS
+ */
 function Users_authorize_post($params = array())
 {
 	$params = array_merge($_REQUEST, $params);

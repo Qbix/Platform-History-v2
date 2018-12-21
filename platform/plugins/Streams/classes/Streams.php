@@ -3197,9 +3197,14 @@ abstract class Streams extends Base_Streams
 	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
+	 * @param {boolean} [$options.alwaysSend=false] Send invitation message even if already sent.
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
 	 * @see Users::addLink()
-	 * @return {array} Returns array with keys 
+	 * @throws Users_Exception_NotAuthorized
+	 * @throws Q_Exception_WrongType
+	 * @throws Q_Exception_MissingFile
+	 * @throws Q_Exception_WrongValue
+	 * @return {array} Returns array with keys
 	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
 	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
@@ -3320,12 +3325,15 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		// ensure that each userId is included only once
-		// and remove already participating users
 		$userIds = array_unique($raw_userIds);
 		$alreadyParticipating = Streams_Participant::filter(
 			$userIds, $stream->publisherId, $stream->name, null
 		);
-		$userIds = array_diff($raw_userIds, $alreadyParticipating);
+
+		// remove already participating users if alwaysSend=false
+		if (!Q::ifset($options, 'alwaysSend', false)) {
+			$userIds = array_diff($raw_userIds, $alreadyParticipating);
+		}
 
 		$appUrl = !empty($options['appUrl'])
 			? $options['appUrl']
@@ -4059,7 +4067,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('messages')) {
-				return;
+				continue;
 			}
 			$messageTotals = array();
 			foreach ($trows as $row) {
@@ -4135,7 +4143,7 @@ abstract class Streams extends Base_Streams
 
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
-				return;
+				continue;
 			}
 			$relatedToTotals = array();
 			foreach ($trows as $row) {
@@ -4212,7 +4220,7 @@ abstract class Streams extends Base_Streams
 
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
-				return;
+				continue;
 			}
 			$relatedFromTotals = array();
 			foreach ($trows as $row) {
