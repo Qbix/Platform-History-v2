@@ -19,7 +19,7 @@
 	},
 	"notifications": {
 		"*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-		"Streams/chat/message": "{{displayName}} said: {{content}}",
+		"Streams/chat/message": "{{&call 'avatar.displayName'}} said: ",
 		"Streams/changed": "Changes in {{stream.fields.title}}",
 		"Streams/invite": "You were invited to {{& stream.fields.title}}",
 		"Streams/announcement": "Announcement in {{& streams.fields.title}}",

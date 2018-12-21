@@ -467,7 +467,14 @@
 			"onlyIfAllClientsOffline": true,
 			"debug": true,
 			"notices": {
-				"Streams/chat/message": true
+				"Streams/chat/message": {
+					"timeout": 10
+				},
+				"Streams/invite": {
+					"persistent": true,
+					"closeable": false,
+					"showSubject": false
+				}
 			}
 		},
 		"import": {
