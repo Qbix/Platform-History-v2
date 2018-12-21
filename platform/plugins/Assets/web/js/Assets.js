@@ -439,8 +439,8 @@
 	});
 	
 	Q.onInit.set(function () {
-		if (Q.info.platform === 'ios') {
-			Stripe && Stripe.applePay.checkAvailability(function (available) {
+		if (Q.info.platform === 'ios' && Q.getObject("Stripe.applePay.checkAvailability")) {
+			Stripe.applePay.checkAvailability(function (available) {
 				Assets.Payments.stripe.applePayAvailable = available;
 			});
 		}
