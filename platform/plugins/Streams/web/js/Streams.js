@@ -4844,16 +4844,7 @@ Q.onInit.add(function _Streams_onInit() {
 			var content = Q.getObject(["content"], message);
 			var messageUrl = message.getInstruction('invitedUrl') || message.getInstruction('url');
 			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
-			var pluginName = messageType.slice(0, messageType.indexOf('/'));
-
-			// Travel plugin settings
-			if (pluginName === 'Travel') {
-				var passengerId = message.getInstruction('passengerId');
-				// 	skip messages for other passengers
-				if (passengerId && passengerId !== userId) {
-					return;
-				}
-			}
+			var pluginName = messageType.split('/')[0];
 
 			// if this message type absent in config
 			if (!noticeOptions) {
