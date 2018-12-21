@@ -1159,6 +1159,11 @@ class Users_User extends Base_Users_User
 			->where(array('publisherId' => $userIds))
 			->execute();
 
+		Streams_Invite::delete()
+			->where(array('userId' => $userIds))
+			->orWhere(array('invitingUserId' => $userIds))
+			->execute();
+
 		Users_Vote::delete()
 			->where(array('userId' => $userIds))
 			->execute();
