@@ -10,7 +10,7 @@ var Streams = Q.Streams;
 var Places = Q.Places;
 
 /**
- * Allows the logged-in user to add his own locations and select among these locations
+ * Allows the logged-in user to locations to a publisher and select among already added locations
  * @class Places location
  * @constructor
  * @param {Object} [options] used to pass options

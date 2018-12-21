@@ -4090,7 +4090,7 @@ var Interests = Streams.Interests = {
 	 * @static
 	 * @param {String} title The title of the interest
 	 * @param {Function} callback
-	 * @param {Object} [options]
+	 * @param {Object} [options] Pass options for Q.req call, also supports the following:
 	 * @param {Boolean} [options.subscribe] Whether to subscribe
 	 * @param {String} [options.publisherId] Defaults to the current community id
 	 */
