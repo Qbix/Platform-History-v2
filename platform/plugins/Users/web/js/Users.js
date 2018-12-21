@@ -187,6 +187,20 @@
 	};
 
 	/**
+	 * Check whether string is community id
+	 * @method isCommunityId
+	 * @param {String} id
+	 * @return boolean
+	 */
+	Users.isCommunityId = function (id) {
+		if (id[0] !== id[0].toUpperCase()) {
+			return false;
+		}
+
+		return true;
+	};
+
+	/**
 	 * You can wrap all uses of FB object with this
 	 * @method initFacebook.ready
 	 * @param {String} [appId=Q.info.app] only specify this if you have multiple facebook apps
@@ -2508,10 +2522,11 @@
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
-				// todo: replace hardcoded app name
-				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.scheme + '://'},
-					function(success){ console.log(success); },
-					function(err){ console.log(err); });
+				cordova.plugins.browsertab.openUrl(url,
+					{schema: Users.Facebook.scheme + '://'},
+					function(success) { console.log(success); },
+					function(err) { console.log(err); }
+				);
 			}
 
 			function _stringGen(len) {
