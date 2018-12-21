@@ -2504,10 +2504,11 @@
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
-				// todo: replace hardcoded app name
-				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.scheme + '://'},
-					function(success){ console.log(success); },
-					function(err){ console.log(err); });
+				cordova.plugins.browsertab.openUrl(url,
+					{schema: Users.Facebook.scheme + '://'},
+					function(success) { console.log(success); },
+					function(err) { console.log(err); }
+				);
 			}
 
 			function _stringGen(len) {

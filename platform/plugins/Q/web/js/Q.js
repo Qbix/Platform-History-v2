@@ -13173,10 +13173,6 @@ Q.Notice = {
 };
 Q.Notice.parseNotices();
 
-/**
- * This loads bluebird library to enable Promise for browsers which do not
- * support Promise natively. For example: IE, Opera Mini.
- */
 Q.beforeInit.addOnce(function () {
 	if (!Q.info.baseUrl) {
 		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
@@ -13189,6 +13185,8 @@ Q.beforeInit.addOnce(function () {
 		Q.info.udid = _udid;
 		Q.cookie('Q_udid', _udid);
 	}
+	// This loads bluebird library to enable Promise for browsers which do not
+	// support Promise natively. For example: IE, Opera Mini.
 	// WARN: Could have race conditions:
 	if (!(typeof Promise !== "undefined"
 	&& Promise.toString().indexOf("[native code]") !== -1)) {
