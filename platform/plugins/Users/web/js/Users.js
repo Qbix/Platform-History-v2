@@ -187,6 +187,20 @@
 	};
 
 	/**
+	 * Check whether string is community id
+	 * @method isCommunityId
+	 * @param {String} id
+	 * @return boolean
+	 */
+	Users.isCommunityId = function (id) {
+		if (id[0] !== id[0].toUpperCase()) {
+			return false;
+		}
+
+		return true;
+	};
+
+	/**
 	 * You can wrap all uses of FB object with this
 	 * @method initFacebook.ready
 	 * @param {String} [appId=Q.info.app] only specify this if you have multiple facebook apps
