@@ -440,7 +440,7 @@
 	
 	Q.onInit.set(function () {
 		if (Q.info.platform === 'ios') {
-			Stripe.applePay.checkAvailability(function (available) {
+			Stripe && Stripe.applePay.checkAvailability(function (available) {
 				Assets.Payments.stripe.applePayAvailable = available;
 			});
 		}
@@ -458,7 +458,8 @@
 				amount: options.amount
 			}
 		};
-		var session = Stripe.applePay.buildSession(request, function (result, completion) {
+		var session = Stripe && Stripe.applePay.buildSession(request, 
+		function (result, completion) {
 			options.token = result.token;
 			Q.Assets.Payments.pay('stripe', options, function (err) {
 				if (err) {
