@@ -162,7 +162,70 @@ class Users_Label extends Base_Users_Label
 		$label->label = $label;
 		$label->remove();
 	}
-	
+	/**
+	 * Whether $label_1 can add $label_2
+	 * @method canAddLabel
+	 * @param {string} $label_1 - Label which request permission for action
+	 * @param {string|array} $label_2 - Label need to do action with
+	 * @throws Exception
+	 * @return {bool}
+	 */
+	static function canAddLabel($label_1, $label_2)
+	{
+		$roles = Q_Config::expect("Users", "roles");
+		$keyRoles = array_keys($roles);
+
+		// check whether label exist
+		if (!in_array($label_1, $keyRoles)) {
+			return false;
+		}
+
+		if (gettype($label_2) == 'string') {
+			$label_2 = array($label_2);
+		}
+
+		$rolesCanAdd = Q::ifset($roles, $label_1, "canAdd", array());
+
+		foreach ($label_2 as $label) {
+			if (!in_array($label, $rolesCanAdd)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	/**
+	 * Whether $label_1 can remove $label_2
+	 * @method canRemoveLabel
+	 * @param {string} $label_1 - Label which request permission for action
+	 * @param {string|array} $label_2 - Label need to do action with
+	 * @throws Exception
+	 * @return {bool}
+	 */
+	static function canRemoveLabel($label_1, $label_2)
+	{
+		$roles = Q_Config::expect("Users", "roles");
+		$keyRoles = array_keys($roles);
+
+		// check whether label exist
+		if (!in_array($label_1, $keyRoles)) {
+			return false;
+		}
+
+		if (gettype($label_2) == 'string') {
+			$label_2 = array($label_2);
+		}
+
+		$rolesCanRemove = Q::ifset($roles, $label_1, "canRemove", array());
+
+		foreach ($label_2 as $label) {
+			if (!in_array($label, $rolesCanRemove)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
@@ -200,17 +263,18 @@ class Users_Label extends Base_Users_Label
 					$labelNames[] = $f;
 				}
 			}
+
 			$criteria['label'] = $labelNames;
 		}
 		if (!empty($options['checkContacts'])) {
-			$contact_array = Users_Contact::select('userId, label')
+			$contact_array = Users_Contact::select('userId, label, contactUserId')
 				->where($criteria)
-				->groupBy('userId, label')
+				->groupBy('userId, label, contactUserId')
 				->fetchDbRows();
 			foreach ($prefixes as $p) {
-				$contact_array = array_merge($contact_array, Users_Contact::select('userId, label')
+				$contact_array = array_merge($contact_array, Users_Contact::select('userId, label, contactUserId')
 					->where(array_merge($criteria, array('label' => $p)))
-					->groupBy('userId, label')
+					->groupBy('userId, label, contactUserId')
 					->fetchDbRows()
 				);
 			}
