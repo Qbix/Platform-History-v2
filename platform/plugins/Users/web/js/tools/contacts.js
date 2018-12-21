@@ -86,15 +86,25 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 				});
 
 				$('.Users_labels_add', tool.element).on(Q.Pointer.fastclick, function () {
-
 					if(!selectedLabel) {
 						return Q.alert(tool.text.selectLabel);
 					}
 
+					var $this = $(this);
+
+					$this.addClass("Q_working");
 					Q.Streams.invite(state.communityId, 'Streams/experience/main', {
-						addLabel: selectedLabel
-					}, function () {
-						Q.handle(state.onInvited, tool);
+						addLabel: selectedLabel,
+						alwaysSend: true
+					}, function (err, info) {
+						var msg = Q.firstErrorMessage(err);
+						if (msg) {
+							return alert(msg);
+						}
+
+						$this.removeClass("Q_working");
+
+						Q.handle(state.onInvited, tool, [selectedLabel, info]);
 					});
 				});
 
