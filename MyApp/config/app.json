@@ -136,24 +136,6 @@
 		"login": {
 			"identifierType": "email,mobile"
 		},
-		"authorize": {
-			"clients": {
-				"MyApp-ios": {
-					"paths": null,
-					"scopes": {
-						"all": "give this app full access"
-					},
-					"automatic": true
-				},
-				"MyApp-android": {
-					"paths": null,
-					"scopes": {
-						"all": "give this app full access"
-					},
-					"automatic": true
-				}
-			}
-		},
 		"onInsert": {
 			"labels": {
 				"Users/friends": ["Friends", "labels/Users/friends"],

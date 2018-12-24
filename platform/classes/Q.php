@@ -47,10 +47,35 @@ class Q
 			return isset($ref) ? $ref : $def;
 		}
 		$args = func_get_args();
-		$ref2 = $ref;
 		$def = end($args);
-		for ($i=1; $i<$count-1; ++$i) {
-			$key = $args[$i];
+		$path = array_slice($args, 1, -1);
+		return self::getObject($ref, $path, $def);
+	}
+	
+	/**
+	 * Used for shorthand for avoiding when you don't want to write
+	 * (isset($some_long_expression) ? $some_long_expression: null)
+	 * when you want to avoid possible "undefined variable" errors.
+	 * @method ifset
+	 * @param {&mixed} $ref
+	 *  The reference to test. Only lvalues can be passed.
+	 * @param {array} $path
+	 *  An array of one or more strings or numbers, which will be used to
+	 *  index deeper into the contained arrays or objects.
+	 *  You can also pass arrays instead of the strings and numbers,
+	 *  which will then widen the search to try all combinations
+	 *  of the strings and numbers in all the arrays, before returning
+	 *  the default.
+	 * @param {mixed} $def=null
+	 *  The default, if the reference isn't set
+	 * @return {mixed}
+	 */
+	static function getObject(& $ref, $path, $def=null)
+	{
+		$ref2 = $ref;
+		$count = count($path);
+		for ($i=0; $i<$count; ++$i) {
+			$key = $path[$i];
 			if (!is_array($key)) {
 				$key = array($key);
 			}
@@ -227,6 +252,14 @@ class Q
 		$expression,
 		$params = array())
 	{
+		if (is_array($expression)) {
+			$name = array_shift($expression);
+			$text = Q_Text::get($name);
+			$expression = Q::getObject($text, $expression, null);
+			if (!isset($expression)) {
+				throw new Q_Exception_MissingObject(array('name' => 'expression'));
+			}
+		}
 		$a = (
 			strpos($expression, '{{0}}') === false
 			and strpos($expression, '$0') === false

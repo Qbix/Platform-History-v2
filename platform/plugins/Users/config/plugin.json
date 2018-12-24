@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.2",
+				"version": "1.0.3",
 				"compatible": "0.9.3",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -144,8 +144,8 @@
 			"duration": "decade",
 			"terms": {
 				"uri": null,
-				"label": "I have read and agree<br>to the {{link}}",
-				"title": "Terms"
+				"label": ["Users/content", "authorize", "TermsLabel"],
+				"title": ["Users/content", "authorize", "TermsTitle"]
 			},
 			"stateMinLength": 10,
 			"clients": {
@@ -155,8 +155,8 @@
 		"register": {
 			"terms": {
 				"uri": "{{baseUrl}}/terms",
-				"label": "I accept the {{link}}",
-				"title": "Terms"
+				"label": ["Users/content", "register", "TermsLabel"],
+				"title": ["Users/content", "register", "TermsTitle"]
 			},
 			"icon": {
 				"leaveDefault": false

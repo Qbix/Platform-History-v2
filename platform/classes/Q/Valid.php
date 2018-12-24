@@ -301,16 +301,23 @@ class Q_Valid
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
 	 * @param {array} [$data=$_REQUEST] The data to check the signature of
-	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
+	 * @param {array|string} [$fieldKeys] Path of the key under which signature is stored
+	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {boolean} Whether the phone number seems like it could be valid
 	 * @throws {Q_Exception_FailedValidation}
 	 */
-	static function signature ($throwIfInvalid = false, $data = null, $fieldKeys = null)
+	static function signature (
+		$throwIfInvalid = false, 
+		$data = null, 
+		$fieldKeys = null, 
+		$secret = null)
 	{
 		if (!isset($data)) {
 			$data = $_REQUEST;
 		}
-		$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		if (!isset($secret)) {
+			$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		}
 		if (!isset($secret)) {
 			return true;
 		}

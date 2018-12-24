@@ -37,7 +37,7 @@ class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
     /**
      * Generate a pseudorandom number within the given range.
      * Will attempt to read from a systems RNG if it exists or else utilises
-     * a simple random character to maximum length process. Simplicity
+     * a simple random character to maximum length process. SresponseTypey
      * is a factor better left for development...
      *
      * @param string|int $minimum

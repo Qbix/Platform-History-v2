@@ -53,10 +53,13 @@ class Q_Utils
 	 * @static
 	 * @param {array} $data The array of data
 	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
+	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {array}
 	 */
-	static function sign($data, $fieldKeys = null) {
-		$secret = Q_Config::get('Q', 'internal', 'secret', null);
+	static function sign($data, $fieldKeys = null, $secret = null) {
+		if (!isset($secret)) {
+			$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		}
 		if (isset($secret)) {
 			if (!$fieldKeys) {
 				$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');

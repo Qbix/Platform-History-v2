@@ -31,11 +31,11 @@
 					<?php echo Q_Response::setScriptData("Q.Users.authorize.noTerms", true) ?>
 				<?php endif ?>
 				<div id="Users_authorize_buttons">
-					<a class="Q_button" name="authorize" id="Users_authorize">Authorize</a>
+					<a class="Q_button" name="authorize" id="Users_authorize"><?php echo $authorize['Authorize'] ?></a>
 				</div>
 			<?php else: ?>
 				<div id="Users_authorize_buttons">
-					<a class="Q_button" id="Users_login">Get Started</a>
+					<a class="Q_button" id="Users_login"><?php echo $authorize['GetStarted'] ?></a>
 				</div>
 			<?php endif; ?>
 			<?php echo Q_Html::hidden(compact('deviceId')) ?>
