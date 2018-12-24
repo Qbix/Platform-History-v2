@@ -198,9 +198,11 @@ Q.Tool.define("Places/location", function (options) {
 								latitude: result.geometry.location.lat(),
 								longitude: result.geometry.location.lng(),
 								locationType: result.geometry.type,
-								venue: place.name,
-								placeId: result.place_id
+								venue: place.name
 							};
+							if (result.place_id) {
+								attributes.placeId = result.place_id;
+							}
 
 							var textConfirm = text.location.confirm;
 							Q.confirm(textConfirm.message, function (shouldSave) {
@@ -213,37 +215,30 @@ Q.Tool.define("Places/location", function (options) {
 										return;
 									}
 
-									Q.req("Places/location", "data", function (err, response) {
-										var msg;
-										if (msg = Q.firstErrorMessage(err, response && response.errors)) {
-											return console.warn("Places/location: " + msg);
+									Streams.create({
+										publisherId: userId,
+										type: 'Places/location',
+										title: title,
+										attributes: attributes,
+										readLevel: 0,
+										writeLevel: 0,
+										adminLevel: 0
+									}, function (err) {
+										if (err) {
+											return;
 										}
 
-										var data = response.slots.data;
-
-										// wait when new preview tool created with this title and add make selected
-										var timerId = setInterval(function(){
-											tool.relatedTool.$(".Streams_preview_tool").each(function () {
-												var previewTool = Q.Tool.from(this, "Places/location/preview");
-
-												// filter just created preview tool
-												if (Q.typeOf(previewTool) !== 'Q.Tool' || Q.getObject("preview.state.streamName", previewTool) !== data.streamName) {
-													return;
-												}
-
-												clearInterval(timerId);
-
-												tool.toggle(this);
-											});
-
-										}, 500);
+										tool.relatedTool.state.onRefresh.setOnce(function (previews, map, entering, exiting, updating) {
+											var key = Q.firstKey(entering);
+											var index = map[key];
+											var preview = previews[index];
+											Q.Pointer.canceledClick = false;
+											tool.toggle(preview.element);
+										});
 									}, {
-										method: 'POST',
-										fields: {
-											publisherId: userId,
-											title: title,
-											attributes: attributes
-										}
+										publisherId: userId,
+										streamName: 'Places/user/locations',
+										type: 'Places/locations'
 									});
 								}, {
 									title: textAdd.title,
