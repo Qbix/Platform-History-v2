@@ -7,7 +7,7 @@ class Q_OutputBuffer
 {
 	/**
 	 * Allows use of output buffers that deal intelligently with exceptions.
-	 * Constructor implicitly calls ob_start().
+	 * Constructor responseTypely calls ob_start().
 	 * The getClean() method calls ob_end_flush() repeatedly to flush buffers
 	 * which have been started but not flushed yet, after this one.
 	 * @class Q_OutputBuffer

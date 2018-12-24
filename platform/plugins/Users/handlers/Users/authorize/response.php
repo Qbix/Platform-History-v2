@@ -9,26 +9,37 @@ function Users_authorize_response()
 	if (Q_Response::getErrors()) {
 		Q_Dispatcher::showErrors();
 	}
+	Q_Request::requireFields(array('client_id', 'state'), true);
+	$req = Q_Request::fromUnderscores(array('Q.Users.deviceId'));
 
 	$response_type = 'token';
 	$token_type = 'bearer';
-	$client_id = $_REQUEST['client_id'];
-	$scope = Users_OAuth::requestedScope($client_id, true, $scopes);
+	$appId = $client_id = $req['client_id'];
+	$scope = Users_OAuth::requestedScope($appId, true, $scopes);
 	$remaining = $scope;
-	$state = $_REQUEST['state'];
-	$client = Users_User::fetch($client_id, true);
-	if (empty($client->url)) {
-		throw new Q_Exception("Client app needs to register url", 'client_id');
+	$state = $req['state'];
+	$platform = Q_Request::platform();
+	list($appId, $info) = Users::appInfo($platform, $appId);
+	if (empty($info['baseUrl'])) {
+		throw new Q_Exception("Client app must have baseUrl in config", 'client_id');
 	}
-	$redirect_uri = Q::ifset($_REQUEST, 'redirect_uri', $client->url);
-	$paths = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'paths', false);
-	$path = substr($redirect_uri, strlen($client->url)+1);
+	if (!empty($info['custom'])
+	and $info['custom'] !== Q_Request::customUserAgentString()) {
+		throw new Q_Exception("User-Agent string must have Q-custom($info[custom])");
+	}
+	
+	$redirect_uri = Q::ifset($req, 'redirect_uri', $info['baseUrl']);
+	if (empty($info['baseUrl'])) {
+		throw new Q_Exception("Client app must have paths array in config", 'client_id');
+	}
+	$paths = $appInfo['paths'];
+	$path = substr($redirect_uri, $info['baseUrl']+1);
 	if (!Q::startsWith($redirect_uri, $client->url)
 	or (is_array($paths) and !in_array($path, $paths))) {
 		throw new Users_Exception_Redirect(array('uri' => $redirect_uri));
 	}
 	$authorize = true;
-	$automatic = Q_Config::get('Users', 'authorize', 'clients', $client_id, 'automatic', false);
+	$automatic = Q::ifset($appInfo, 'authorize', 'automatic', false);
 	$params = compact(
 		'client_id', 'redirect_uri', 'scope', 'scopes', 'remaining',
 		'state', 'response_type', 'automatic', 'authorize'
@@ -39,28 +50,30 @@ function Users_authorize_response()
 
 	$user = Users::loggedInUser();
 
-	$oa = null;
-	if (isset(Users::$cache['oAuth'])) {
-		$oa = Users::$cache['oAuth'];
+	$externalTo = null;
+	if (isset(Users::$cache['externalTo'])) {
+		$externalTo = Users::$cache['externalTo'];
 	} else if ($user) {
-		$oa = new Users_OAuth();
-		$oa->client_id = $client_id;
-		$oa->userId = $user->id;
-		$oa = $oa->retrieve();
+		$externalTo = new Users_ExternalTo();
+		$externalTo->appId = $appId;
+		$externalTo->userId = $user->id;
+		$externalTo = $externalTo->retrieve();
 	}
 
-	if ($oa and $oa->wasRetrieved()) {
+	if ($externalTo and $externalTo->wasRetrieved()) {
 		// User is logged in and already has a token for this client_id and state
 		$p = array(
+			'Q.Users.platform' => $platform,
+			'Q.Users.appId' => $appId,
 			'response_type' => $response_type,
 			'token_type' => $token_type,
-			'access_token' => $oa->access_token,
-			'expires_in' => $oa->token_expires_seconds,
+			'access_token' => $externalTo->accessToken,
+			'expires_in' => $externalTo->expires,
 			'scope' => implode(' ', $scope),
 			'state' => $state
 		);
-		if (!empty($_REQUEST['Q_deviceId'])) {
-			$p['Q_deviceId'] = $_REQUEST['Q_deviceId'];
+		if (!empty($req['Q.Users.deviceId'])) {
+			$p['Q.Users.deviceId'] = $req['Q.Users.deviceId'];
 		}
 		$p = Q_Utils::sign($p, 'Q.Users.oAuth');
 		// the redirect uri could be a native app url scheme
@@ -72,8 +85,8 @@ function Users_authorize_response()
 	$terms_label = Users::termsLabel('authorize');
 	
 	Q_Response::setScriptData('Q.Users.authorize', $params);
-	if (isset($_REQUEST['Q_deviceId'])) {
-		$deviceId = $_REQUEST['Q_deviceId'];
+	if (isset($req['Q.Users.deviceId'])) {
+		$deviceId = $req['Q.Users.deviceId'];
 	}
 	$content = Q::view('Users/content/authorize.php', compact(
 		'client', 'user', 'redirect_uri',  'scope', 'scopes', 'remaining',

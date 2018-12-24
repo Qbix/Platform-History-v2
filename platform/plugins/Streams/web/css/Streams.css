@@ -574,7 +574,7 @@
 	min-width: 30%;
 	margin-right: 15px;
 	padding: 10px;
-	border: 1px solid #D0D9E4;
+	border: 1px solid #bae8ea;
 	clear: both;
 	font-size: 0.8em;
 }
@@ -590,7 +590,7 @@
 .Streams_chat_to_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
-	background-color: #DAE3ED;
+	background-color: #cbf9fb;
 	text-align: left;
 }
 .Streams_chat_from_me .Streams_chat_bubble {

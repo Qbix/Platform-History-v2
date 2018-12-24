@@ -37,6 +37,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.icon] defaults to ""
  * @param {string} [$fields.url] defaults to null
  * @param {string} [$fields.pincodeHash] defaults to null
+ * @param {string} [$fields.preferredLanguage] defaults to "en"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -139,6 +140,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default null
  * a smaller security code for when user is already logged in
+ */
+/**
+ * @property preferredLanguage
+ * @type String
+ * @default "en"
+ * 
  */
 
 /**
@@ -363,7 +370,8 @@ Base.fieldNames = function () {
 		"username",
 		"icon",
 		"url",
-		"pincodeHash"
+		"pincodeHash",
+		"preferredLanguage"
 	];
 };
 
@@ -933,6 +941,42 @@ Base.prototype.maxSize_pincodeHash = function () {
 Base.column_pincodeHash = function () {
 
 return [["varbinary","255","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_preferredLanguage
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_preferredLanguage = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".preferredLanguage");
+		if (typeof value === "string" && value.length > 3)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".preferredLanguage");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the preferredLanguage field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_preferredLanguage = function () {
+
+		return 3;
+};
+
+	/**
+	 * Returns schema information for preferredLanguage column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_preferredLanguage = function () {
+
+return [["varchar","3","",false],true,"","en"];
 };
 
 Base.prototype.beforeSave = function (value) {

@@ -438,24 +438,24 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		}
 		function _platform(platform, callback) {
 			var appId = Users.appInfo(platform).appId;
-			Users.AppUser.SELECT('*').WHERE({
+			Users.ExternalFrom.SELECT('*').WHERE({
 				userId: toUserId,
 				platform: platform,
 				appId: appId
-			}).execute(function (err, appusers) {
+			}).execute(function (err, externals) {
 				if (err) {
 					return callback(err);
 				}
-				var appuser = appusers[0];
+				var e = externals[0];
 				var notification = {
 					alert: o.subject,
 					href: o.url,
 					ref: message.fields.type
 				};
-				if (appuser) {
-					appuser.pushNotification(notification);
+				if (e) {
+					e.pushNotification(notification);
 				}
-				Q.handle(callback, Users, [null, appuser, notification]);
+				Q.handle(callback, Users, [null, e, notification]);
 			});
 		}
 	});

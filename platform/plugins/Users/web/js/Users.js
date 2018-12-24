@@ -2307,17 +2307,20 @@
 		}
 		var fieldNames = [
 			'response_type', 'token_type', 'access_token',
-			'expires_in', 'scope', 'state', 'Q.deviceId', 'Q.Users.oAuth'
+			'expires_in', 'scope', 'state',
+			'Q.Users.platform', 'Q.Users.appId', 'Q.Users.deviceId', 'Q.Users.oAuth'
 		];
 		var fields = location.hash.queryField(fieldNames);
 		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-		fields.deviceId = storedDeviceId || fields.deviceId;
-		Q.req('Users/oAuth', function () {
-			// user was redirected from Users/authorize or some similar flow
-		}, {
-			method: 'post',
-			fields: fields
-		});
+		fields['Q.Users.deviceId'] = storedDeviceId || fields['Q.Users.deviceId'];
+		if (fields['Q.Users.oAuth']) {
+			Q.req('Users/oAuth', function () {
+				// user was redirected from Users/authorize or some similar oAuth flow
+			}, {
+				method: 'post',
+				fields: fields
+			});
+		}
 	}, 'Users');
 
 	Q.beforeActivate.add(function (elem) {

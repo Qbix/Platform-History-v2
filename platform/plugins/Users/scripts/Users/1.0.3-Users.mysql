@@ -1,0 +1,36 @@
+DROP TABLE {$prefix}external_from;
+DROP TABLE {$prefix}external_to;
+
+CREATE TABLE {$prefix}external_from (
+  platform varchar(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
+  appId varchar(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
+  xid varchar(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
+  insertedTime timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedTime timestamp NULL DEFAULT NULL,
+  userId varchar(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
+  responseType enum('token', 'code') DEFAULT NULL COMMENT 'The type of oAuth 2 response',
+  accessToken varchar(1023) DEFAULT NULL COMMENT 'Bearer token given to the client to access resources',
+  expires int(11) DEFAULT NULL COMMENT 'How many seconds until token expires',
+  extra varchar(1023) COLLATE utf8_unicode_ci DEFAULT '{}' COMMENT 'JSON with any extra attributes',
+  PRIMARY KEY (platform,appId,xid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT 'Represents using external apps to authenticate';
+
+CREATE TABLE {$prefix}external_to (
+  userId varchar(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
+  platform varchar(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
+  appId varchar(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
+  insertedTime timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedTime timestamp NULL DEFAULT NULL,
+  xid varchar(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
+  responseType enum('token', 'code') DEFAULT NULL COMMENT 'The type of oAuth 2 response',
+  accessToken varchar(1023) DEFAULT NULL COMMENT 'Bearer token given to the client to access resources',
+  expires int(11) DEFAULT NULL COMMENT 'How many seconds until token expires',
+  extra varchar(1023) COLLATE utf8_unicode_ci DEFAULT '{}' COMMENT 'JSON with any extra attributes',
+  PRIMARY KEY (userId,platform,appId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT 'Represents granting access to external apps';
+
+INSERT INTO external_from (platform, appId, xid, insertedTime, updatedTime, userId, responseType, accessToken, expires)
+SELECT platform, appId, platform_uid, insertedTime, updatedTime, userId, re
+
+DROP TABLE {$prefix}app_user;
+DROP TABLE {$prefix}users_oAuth;
