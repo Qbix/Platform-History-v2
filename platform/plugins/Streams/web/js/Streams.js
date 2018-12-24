@@ -4899,12 +4899,6 @@ Q.onInit.add(function _Streams_onInit() {
 								handler: messageUrl || stream.url()
 							}));
 						});
-
-						Q.Notices.add({
-							content: text.replace('{{&call \'avatar.displayName\'}}', avatar.displayName()) + content,
-							timeout: 10,
-							handler: stream.url()
-						});
 					});
 				});
 			});
