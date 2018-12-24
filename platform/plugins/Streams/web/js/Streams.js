@@ -4862,7 +4862,8 @@ Q.onInit.add(function _Streams_onInit() {
 					return console.warn('notificationsAsNotice: no text for ' + messageType);
 				}
 
-				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType, function () {
+				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType,
+				function () {
 					var stream = this;
 
 					Streams.Avatar.get(byUserId, function (err, avatar) {
@@ -4899,15 +4900,16 @@ Q.onInit.add(function _Streams_onInit() {
 							}));
 						});
 
-					Q.Notices.add({
-						content: text.replace('{{&call \'avatar.displayName\'}}', avatar.displayName()) + content,
-						timeout: 10,
-						handler: stream.url()
+						Q.Notices.add({
+							content: text.replace('{{&call \'avatar.displayName\'}}', avatar.displayName()) + content,
+							timeout: 10,
+							handler: stream.url()
+						});
 					});
 				});
 			});
 		}, 'Streams.notifications.notice');
-	};
+	}
 
 	// handle updates
 	function _updateDisplayName(fields, k) {
