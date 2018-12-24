@@ -122,7 +122,7 @@ abstract class Users extends Base_Users
 	 * Return an array of users_contact rows where user assigned by labels
 	 * @method byRoles
 	 * @static
-	 * @param {string|array|Db_Expression} $filter
+	 * @param {string|array|Db_Expression} [$filter=null]
 	 *  You can pass additional criteria here for the label field
 	 *  in the `Users_Contact::select`, such as an array or Db_Range
 	 * @param {array} [$options=array()] Any additional options to pass to the query, such as "ignoreCache"
@@ -131,10 +131,7 @@ abstract class Users extends Base_Users
 	 * @return {array} An associative array of $roleName => $contactRow pairs
 	 * @throws {Users_Exception_NotLoggedIn}
 	 */
-	static function byRoles (
-		$filter,
-		$options = array(),
-		$userId = null)
+	static function byRoles ($filter = null, $options = array(), $userId = null)
 	{
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(false, false);
@@ -147,7 +144,7 @@ abstract class Users extends Base_Users
 		$contacts = Users_Contact::select()
 			->where(array(
 				'contactUserId' => $userId
-			))->andWhere(array('label' => $filter))
+			))->andWhere($filter ? array('label' => $filter) : null)
 			->options($options)
 			->fetchDbRows(null, null, 'userId');
 
