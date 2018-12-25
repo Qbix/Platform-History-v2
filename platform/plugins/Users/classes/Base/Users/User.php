@@ -24,7 +24,7 @@
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
- * @param {string} [$fields.uids] defaults to "{}"
+ * @param {string} [$fields.xids] defaults to "{}"
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
  * @param {string} [$fields.signedUpWith] defaults to ""
@@ -85,10 +85,10 @@ abstract class Base_Users_User extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $uids
+	 * @property $xids
 	 * @type string
 	 * @default "{}"
-	 * JSON of {platformName: [uid1, ...]}
+	 * JSON of {platformName: [xid1, ...]}
 	 */
 	/**
 	 * @property $emailAddressPending
@@ -759,41 +759,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_uids
+	 * @method beforeSet_xids
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_uids($value)
+	function beforeSet_xids($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('uids', $value);
+			return array('xids', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".uids");
+			throw new Exception('Must pass a string to '.$this->getTable().".xids");
 		if (strlen($value) > 1023)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".uids");
-		return array('uids', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".xids");
+		return array('xids', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the uids field
+	 * Returns the maximum string length that can be assigned to the xids field
 	 * @return {integer}
 	 */
-	function maxSize_uids()
+	function maxSize_xids()
 	{
 
 		return 1023;			
 	}
 
 	/**
-	 * Returns schema information for uids column
+	 * Returns schema information for xids column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_uids()
+	static function column_xids()
 	{
 
 return array (
@@ -1260,7 +1260,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'uids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash', 'preferredLanguage');
+		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'xids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash', 'preferredLanguage');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

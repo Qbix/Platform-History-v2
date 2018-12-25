@@ -51,7 +51,7 @@ Users_ExternalFrom_Facebook.prototype.handlePushNotification = function (notific
 	var at = this.fields.accessToken;
 	var graph = 'https://graph.facebook.com';
 	// todo: https://developers.facebook.com/docs/graph-api/securing-requests
-	Q.Utils.post(graph+'/'+this.fields.fb_uid+'/notifications?access_token='+at, {
+	Q.Utils.post(graph+'/'+this.fields.fb_xid+'/notifications?access_token='+at, {
 		template: notification.alert,
 		href: notification.href,
 		ref: notification.ref

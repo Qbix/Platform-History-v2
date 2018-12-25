@@ -151,15 +151,15 @@
 			"facebook": "link"
 		}
 	},
-	"Streams/user/facebook/uid": {
-		"type": "Streams/uid",
+	"Streams/user/facebook/xid": {
+		"type": "Streams/xid",
 		"title": "Facebook UserID",
 		"icon": "",
 		"platforms": {
 			"facebook": "id"
 		}
 	},
-	"Streams/user/twitter/uid": {
+	"Streams/user/twitter/xid": {
 		"type": "Streams/text/url",
 		"title": "Twitter UserID",
 		"icon": "",

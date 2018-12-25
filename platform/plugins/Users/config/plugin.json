@@ -2,8 +2,8 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.3",
-				"compatible": "0.9.3",
+				"version": "1.0.4",
+				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
 				"connections": ["Users"]
@@ -135,7 +135,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url", "uids"
+			"id", "username", "signedUpWith", "icon", "url", "xids"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"

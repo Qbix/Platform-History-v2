@@ -235,8 +235,9 @@ class Q
 	 * However, dollar signs prefixed with backslashes will not be replaced.
 	 * @method interpolate
 	 * @static
-	 * @param {string} $expression
+	 * @param {string|array} $expression
 	 *  The string containing possible references to interpolate values for.
+	 *  Can also be array($textName, $pathArray) to load expression using Q_Text::get()
 	 * @param {array|string} $params=array()
 	 *  An array of parameters to the expression.
 	 *  Variable names in the expression can refer to them.
@@ -253,9 +254,10 @@ class Q
 		$params = array())
 	{
 		if (is_array($expression)) {
-			$name = array_shift($expression);
+			$name = $expression[0];
+			$path = $expression[1];
 			$text = Q_Text::get($name);
-			$expression = Q::getObject($text, $expression, null);
+			$expression = Q::getObject($text, $path, null);
 			if (!isset($expression)) {
 				throw new Q_Exception_MissingObject(array('name' => 'expression'));
 			}
@@ -282,9 +284,25 @@ class Q
 	}
 	
 	/**
-	 * Evaluates a string containing an expression,
+	 * A convenience method to use in your PHP templates.
+	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
+	 * In Handlebars templates, you just use {{interpolate expression ...}}
+	 * @method text
+	 * @static
+	 * @param {string} $expression Same as in Q::interpolate()
+	 * @param {array} $params Same as in Q::interpolate()
+	 * @param {string} [$convert=array()] Same as in Q_Html::text().
+	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
+	 */
+	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
+	{
+		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
+	}
+	
+	/**
+	 * Evaluates a string containing a PHP expression,
 	 * with possible references to parameters.
-	 * CAUTION: make sure the expression is safe!!
+	 * CAUTION: uses PHP eval, so make sure the expression is safe!!
 	 * @method evalExpression
 	 * @static
 	 * @param {string} $expression
@@ -302,14 +320,15 @@ class Q
 		if (is_array($params)) {
 			extract($params);
 		}
-		@eval('$value = ' . $expression . ';');
+		@eval('$_valueToReturn = ' . $expression . ';');
 		extract($params);
 		/**
-		 * @var $value
+		 * @var $_valueToReturn
 		 */
-		return $value;
+		return $_valueToReturn;
 	}
-
+	
+	
 	/**
 	 * Use for surrounding text, so it can later be processed throughout.
 	 * @method t
@@ -325,22 +344,6 @@ class Q
 		 */
 		$text = Q::event('Q/t', array(), 'before', false, $text);
 		return $text;
-	}
-	
-	/**
-	 * A convenience method to use in your PHP templates.
-	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
-	 * In Handlebars templates, you just use {{interpolate expression ...}}
-	 * @method text
-	 * @static
-	 * @param {string} $expression Same as in Q::interpolate()
-	 * @param {array} $params Same as in Q::interpolate()
-	 * @param {string} [$convert=array()] Same as in Q_Html::text().
-	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
-	 */
-	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
-	{
-		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
 	}
 
 	/**
