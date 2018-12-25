@@ -10,7 +10,7 @@ CREATE TABLE {$prefix}external_from (
   userId varchar(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
   responseType enum('token', 'code') DEFAULT NULL COMMENT 'The type of oAuth 2 response',
   accessToken varchar(1023) DEFAULT NULL COMMENT 'Bearer token given to the client to access resources',
-  expires int(11) DEFAULT NULL COMMENT 'How many seconds until token expires',
+  expires timestamp NOT NULL COMMENT 'When the token expires',
   extra varchar(1023) COLLATE utf8_unicode_ci DEFAULT '{}' COMMENT 'JSON with any extra attributes',
   PRIMARY KEY (platform,appId,xid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT 'Represents using external apps to authenticate';
@@ -24,13 +24,15 @@ CREATE TABLE {$prefix}external_to (
   xid varchar(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
   responseType enum('token', 'code') DEFAULT NULL COMMENT 'The type of oAuth 2 response',
   accessToken varchar(1023) DEFAULT NULL COMMENT 'Bearer token given to the client to access resources',
-  expires int(11) DEFAULT NULL COMMENT 'How many seconds until token expires',
+  expires timestamp NOT NULL COMMENT 'When the token expires',
   extra varchar(1023) COLLATE utf8_unicode_ci DEFAULT '{}' COMMENT 'JSON with any extra attributes',
   PRIMARY KEY (userId,platform,appId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT 'Represents granting access to external apps';
 
-INSERT INTO external_from (platform, appId, xid, insertedTime, updatedTime, userId, responseType, accessToken, expires)
-SELECT platform, appId, platform_uid, insertedTime, updatedTime, userId, re
+INSERT INTO external_from (platform, appId, xid, insertedTime, updatedTime, userId, responseType, accessToken, expires, extra)
+SELECT platform, appId, platform_xid, insertedTime, updatedTime, userId, 'token', access_token, session_expires, extra);
 
 DROP TABLE {$prefix}app_user;
 DROP TABLE {$prefix}users_oAuth;
+
+ALTER TABLE {$prefix}user CHANGE uids xids varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'JSON of {platformName: [xid1, ...]}';

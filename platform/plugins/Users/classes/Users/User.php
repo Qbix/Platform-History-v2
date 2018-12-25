@@ -40,9 +40,9 @@ class Users_User extends Base_Users_User
 				->where(array('id' => $userId))
 				->fetchDbRows('id');
 			if ($throwIfMissing) {
-				foreach ($userId as $uid) {
-					if (!isset($users[$uid])) {
-						$missing[] = $uid;
+				foreach ($userId as $xid) {
+					if (!isset($users[$xid])) {
+						$missing[] = $xid;
 					}
 				}
 				if ($missing) {
@@ -105,8 +105,8 @@ class Users_User extends Base_Users_User
 				$u[$field] = $this->$field;
 			}
 		}
-		if (isset($u['uids'])) {
-			$u['uids'] = $this->getAllUids();
+		if (isset($u['xids'])) {
+			$u['xids'] = $this->getAllXids();
 		}
 		return $u;
 	}
@@ -877,64 +877,64 @@ class Users_User extends Base_Users_User
 	}
 	
 	/**
-	 * @method getAllUids
-	 * @return {array} An array of ($platform => $uid) pairs
+	 * @method getAllXids
+	 * @return {array} An array of ($platform => $xid) pairs
 	 */
-	function getAllUids()
+	function getAllXids()
 	{
-		return empty($this->uids) 
+		return empty($this->xids) 
 			? array()
-			: json_decode($this->uids, true);
+			: json_decode($this->xids, true);
 	}
 	
 	/**
-	 * @method getUid
-	 * @param {string} $platform The name of the platform
-	 * @param {string|null} $default The value to return if the uid is missing
-	 * @return {string|null} The value of the uid, or the default value, or null
+	 * @method getXid
+	 * @param {string} $platformApp String of the form "$platform\t$appId"
+	 * @param {string|null} $default The value to return if the xid is missing
+	 * @return {string|null} The value of the xid, or the default value, or null
 	 */
-	function getUid($platform, $default = null)
+	function getXid($platformApp, $default = null)
 	{
-		$uids = $this->getAllUids();
-		return isset($uids[$platform]) ? $uids[$platform] : $default;
+		$xids = $this->getAllXids();
+		return isset($xids[$platformApp]) ? $xids[$platformApp] : $default;
 	}
 	
 	/**
-	 * @method setUid
-	 * @param {string|array} $platform The name of the platform,
-	 *  or an array of $platform => $uid pairs
-	 * @param {string} $uid The value to set the uid to
+	 * @method setXid
+	 * @param {string|array} $platformApp String of the form "$platform\t$appId"
+	 *  or an array of $platformApp => $xid pairs
+	 * @param {string} $xid The value to set the xid to
 	 */
-	function setUid($platform, $uid = null)
+	function setXid($platformApp, $xid = null)
 	{
-		$uids = $this->getAllUids();
-		if (is_array($platform)) {
-			foreach ($platform as $k => $v) {
-				$uids[$k] = $v;
+		$xids = $this->getAllXids();
+		if (is_array($platformApp)) {
+			foreach ($platformApp as $k => $v) {
+				$xids[$k] = $v;
 			}
 		} else {
-			$uids[$platform] = $uid;
+			$xids[$platformApp] = $xid;
 		}
-		$this->uids = Q::json_encode($uids);
+		$this->xids = Q::json_encode($xids);
 	}
 	
 	/**
-	 * @method clearUid
-	 * @param {string} $platform The name of the platform
+	 * @method clearXid
+	 * @param {string} $platform String of the form "$platform\t$appId"
 	 */
-	function clearUid($platform)
+	function clearXid($platformApp)
 	{
-		$uids = $this->getAllUids();
-		unset($uids[$platform]);
-		$this->uids = Q::json_encode($uids);
+		$xids = $this->getAllXids();
+		unset($xids[$platformApp]);
+		$this->xids = Q::json_encode($xids);
 	}
 	
 	/**
-	 * @method clearAllUids
+	 * @method clearAllXids
 	 */
-	function clearAllUids()
+	function clearAllXids()
 	{
-		$this->uids = '{}';
+		$this->xids = '{}';
 	}
 	
 	/**
@@ -1021,28 +1021,28 @@ class Users_User extends Base_Users_User
 	}
 	
 	/**
-	 * Check platform uids or array of uids and return users - existing or future
-	 * @method idsFromPlatformUids
+	 * Check platform xids or array of xids and return users - existing or future
+	 * @method idsFromPlatformXids
 	 * @static
 	 * @param {string} $platform The name of the platform
-	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
+	 * @param {array|string} $xids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
-	static function idsFromPlatformUids (
+	static function idsFromPlatformXids (
 		$platform, 
-		$uids, 
+		$xids, 
 		&$statuses = array()
 	) {
-		if (empty($uids)) {
+		if (empty($xids)) {
 			return array();
 		}
-		if (!is_array($uids)) {
-			$uids = array_map('trim', explode(',', $uids));
+		if (!is_array($xids)) {
+			$xids = array_map('trim', explode(',', $xids));
 		}
 		$users = array();
-		foreach ($uids as $uid) {
-			$users[] = Users::futureUser($platform, $uid, $status);
+		foreach ($xids as $xid) {
+			$users[] = Users::futureUser($platform, $xid, $status);
 			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);

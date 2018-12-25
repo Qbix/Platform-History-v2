@@ -109,7 +109,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 			$ef = new Users_ExternalFrom_Facebook();
 			// note that $$ef->userId was not set
 			$ef->platform = 'facebook';
-			$ef->appId = $fbAppId;
+			$ef->appId = $appId;
 			$ef->xid = $result['userID'];
 			$ef->accessToken = $result['accessToken'];
 			$ef->expires = $result['expires'];
@@ -162,8 +162,8 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 		if (!$fieldNames) {
 			return array();
 		}
-		$uid = $this->xid;
-		$response = $this->facebook->get("/$uid?fields=".implode(',', $fieldNames));
+		$xid = $this->xid;
+		$response = $this->facebook->get("/$xid?fields=".implode(',', $fieldNames));
 		$userNode = $response->getGraphUser();
 		Users::$cache['platformUserData'] = array(
 			'facebook' => $userNode->uncastItems()

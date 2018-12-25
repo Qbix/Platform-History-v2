@@ -357,46 +357,49 @@ abstract class Users extends Base_Users
 			// no authentication happened
 			return $userWasLoggedIn ? $user : false;
 		}
-		$uid = $externalFrom->platform_uid;
+		$xid = $externalFrom->xid;
 		$authenticated = true;
 		if ($retrieved) {
-			$user_uid = $user->getUid($platform);
-			if (!$user_uid) {
+			$platformApp = "$platform\t$appId";
+			$user_xid = $user->getXid($platformApp);
+			if (!$user_xid) {
 				// this is a logged-in user who was never authenticated with this platform.
 				// First, let's find any other user who has authenticated with the
-				// authenticated uid, and set their $field to 0.
+				// authenticated xid, and set their $field to 0.
 				$authenticated = 'connected';
-				$ui = Users::identify($platform, $uid);
+				$ui = Users::identify($platform, $xid);
 				if ($ui) {
 					$u = new Users_User();
 					$u->id = $ui->userId;
 					if ($u->retrieve()) {
-						$u->clearUid($platform);
+						$u->clearXid($platformApp);
 						$u->save();
 					};
 					$ui->remove();
 				}
 
-				// Now, let's associate the current user's account with this platform uid.
+				// Now, let's associate the current user's account with this platform xid.
 				if (!$user->displayName()) {
 					// import some fields automatically from the platform
 					$imported = $externalFrom->import($import);
 				}
-				$user->setUid($platform, $uid);
+				$platformApp = "$platform\t$appId";
+				$user->setXid($platformApp, $xid);
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$platformApp = "$platform\t$appId";
+				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
 				$ui->state = 'verified';
 				$ui->userId = $user->id;
 				$ui->save(true);
-			} else if ($user_uid !== $uid) {
+			} else if ($user_xid !== $xid) {
 				// The logged-in user was authenticated with the platform already,
-				// and associated with a different platform uid.
+				// and associated with a different platform xid.
 				// Most likely, a completely different person has logged into the platform
-				// at this computer. So rather than changing the associated plaform uid
+				// at this computer. So rather than changing the associated plaform xid
 				// for the logged-in user, simply log out and essentially run this function
 				// from the beginning again.
 				Users::logout();
@@ -406,19 +409,20 @@ abstract class Users extends Base_Users
 			}
 		}
 		if (!$retrieved) {
-			$ui = Users::identify($platform, $uid, null);
+			$ui = Users::identify($platform, $xid, null);
 			if ($ui) {
 				$user = new Users_User();
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
-					throw new Q_Exception("Users_Identify for $platform uid $uid exists but not user with id {$ui->userId}");
+					throw new Q_Exception("Users_Identify for $platform xid $xid exists but not user with id {$ui->userId}");
 				}
 				$retrieved = true;
 				if ($ui->state === 'future') {
 					$authenticated = 'adopted';
-					$user->setUid($platform, $uid);
-					$user->signedUpWith = $platform; // should have been "none" before this
+					$platformApp = "$platform\t$appId";
+					$user->setXid($platformApp, $xid);
+					$user->signedUpWith = $platformApp; // should have been "none" before this
 					/**
 					 * @event Users/adoptFutureUser {before}
 					 * @param {Users_User} user
@@ -444,12 +448,12 @@ abstract class Users extends Base_Users
 					Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
 				} else {
 					// If we are here, that simply means that we already verified the
-					// $uid => $userId mapping for some existing user who signed up
+					// $xid => $userId mapping for some existing user who signed up
 					// and has been using the system. So there is nothing more to do besides
 					// setting this user as the logged-in user below.
 				}
 			} else {
-				// user is logged out and no user corresponding to $uid yet
+				// user is logged out and no user corresponding to $xid yet
 
 				$authenticated = 'registered';
 				
@@ -467,7 +471,8 @@ abstract class Users extends Base_Users
 					}
 				}
 
-				$user->setUid($platform, $uid);
+				$platformApp = "$platform\t$appId";
+				$user->setXid($platformApp, $xid);
 				/**
 				 * @event Users/insertUser {before}
 				 * @param {Users_User} user
@@ -486,7 +491,8 @@ abstract class Users extends Base_Users
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$platformApp = "$platform\t$appId";
+				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
 				$ui->state = 'verified';
@@ -1221,7 +1227,7 @@ abstract class Users extends Base_Users
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * $platform - this is the user's id on that platform
+	 * * $platformApp - a string of the form "$platform\t$appId"
 	 *
 	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
 	 *  Could also be 'future' to find identifiers attached to a "future user",
@@ -1255,7 +1261,8 @@ abstract class Users extends Base_Users
 	 * Inserts a new user if one doesn't already exist.
 	 *
 	 * @method futureUser
-	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 * @param {string} $type can be "email", "mobile", 
+	 *  a string of the form "$platform\t$appId"
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. The type
@@ -1263,7 +1270,7 @@ abstract class Users extends Base_Users
 	 *  with optional "_hashed" suffix to indicate that the value has already been hashed.
 	 *  It can also be "none", in which case the type is ignored, no "identify" rows are
 	 *  inserted into the database at this time. Later, as the user adds an email address
-	 *  or platform uids, they will be inserted.
+	 *  or platform xids, they will be inserted.
 	 * <br><br>
 	 * NOTE: If the person we are representing here comes and registers the regular way,
 	 * and then later adds an email, mobile, or authenticates with a platform,
@@ -1308,7 +1315,7 @@ abstract class Users extends Base_Users
 			$user->save();
 			$user->setMobileNumber($value, true);
 		} else if (substr($type, -7) !== '_hashed') {
-			$user->setUid($type, $value, true);
+			$user->setXid($type, $value, true);
 		}
 		$during = 'future';
 		/**
@@ -1889,7 +1896,7 @@ abstract class Users extends Base_Users
 				case 'twitter':
 					if (!is_numeric($identifier)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'numeric uid')
+							array('field' => 'address', 'range' => 'numeric xid')
 						);
 					}
 					$normalized = $identifier;
@@ -1898,7 +1905,7 @@ abstract class Users extends Base_Users
 				case 'android':
 					if (!is_string($identifier)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'identifier', 'range' => 'string uid')
+							array('field' => 'identifier', 'range' => 'string xid')
 						);
 					}
 					$normalized = $identifier;
