@@ -29,10 +29,10 @@ CREATE TABLE {$prefix}external_to (
   PRIMARY KEY (userId,platform,appId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT 'Represents granting access to external apps';
 
-INSERT INTO external_from (platform, appId, xid, insertedTime, updatedTime, userId, responseType, accessToken, expires, extra)
-SELECT platform, appId, platform_xid, insertedTime, updatedTime, userId, 'token', access_token, session_expires, extra);
+INSERT INTO {$prefix}external_from (platform, appId, xid, insertedTime, updatedTime, userId, responseType, accessToken, expires, extra)
+SELECT platform, appId, platform_uid, insertedTime, updatedTime, userId, 'token', access_token, session_expires, extra FROM {$prefix}app_user;
 
 DROP TABLE {$prefix}app_user;
-DROP TABLE {$prefix}users_oAuth;
+DROP TABLE {$prefix}oAuth;
 
 ALTER TABLE {$prefix}user CHANGE uids xids varchar(1023) NOT NULL DEFAULT '{}' COMMENT 'JSON of {platformName: [xid1, ...]}';
