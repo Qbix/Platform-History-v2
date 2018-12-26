@@ -55,7 +55,21 @@ Q.text = {
 		"months": [
 			'January', 'February', 'March', 'April', 'May', 'June',
 			'July', 'August', 'September', 'October', 'November', 'December'
-		]
+		],
+		"audio": {
+			"allowMicrophoneAccess": "Please allow access to your microphone",
+			"record": "Record",
+			"recording": "Recording",
+			"remains": "remains",
+			"maximum": "maximum",
+			"playing": "Playing",
+			"recorded": "Recorded",
+			"clip": "clip",
+			"orupload": "Or Upload",
+			"usethis": "Use This",
+			"discard": "Discard",
+			"encoding": "Encoding"
+		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
 
