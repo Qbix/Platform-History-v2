@@ -117,6 +117,20 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		}
 		return parent::beforeSave($updatedFields);
 	}
+	
+	/**
+	 * Inserts or updates a corresponding Users_ExternalFrom row
+	 * @method afterSaveExecute
+	 * @param {Db_Result} $result
+	 * @return {array}
+	 */
+	function afterSaveExecute($result)
+	{
+		Users_ExternalFrom::insert($this->fields)
+			->onDuplicateKeyUpdate($this->fields)
+			->execute();
+		return $result;
+	}
 
 	/* * * */
 	/**

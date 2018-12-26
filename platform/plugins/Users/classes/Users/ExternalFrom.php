@@ -171,10 +171,11 @@ class Users_ExternalFrom extends Base_Users_ExternalFrom
 	{
 		parent::setUp();
 	}	
+
 	/**
-	 * Assign 'xid' field if not set
+	 * Assigns a unique (and random) 'xid' field if not set
 	 * @method beforeSave
-	 * @param {array} $modifiedFields
+	 * @param {array} $updatedFields
 	 * @return {array}
 	 */
 	function beforeSave($updatedFields)
@@ -186,6 +187,20 @@ class Users_ExternalFrom extends Base_Users_ExternalFrom
 			}
 		}
 		return parent::beforeSave($updatedFields);
+	}
+	
+	/**
+	 * Inserts or updates a corresponding Users_ExternalTo row
+	 * @method afterSaveExecute
+	 * @param {Db_Result} $result
+	 * @return {array}
+	 */
+	function afterSaveExecute($result)
+	{
+		Users_ExternalTo::insert($this->fields)
+			->onDuplicateKeyUpdate($this->fields)
+			->execute();
+		return $result;
 	}
 
 	/* * * */
