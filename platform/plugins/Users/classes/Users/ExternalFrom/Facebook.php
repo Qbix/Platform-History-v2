@@ -107,7 +107,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 		if ($facebook instanceof Facebook\Facebook
 		and $app = $facebook->getApp()) {
 			$ef = new Users_ExternalFrom_Facebook();
-			// note that $$ef->userId was not set
+			// note that $ef->userId was not set
 			$ef->platform = 'facebook';
 			$ef->appId = $appId;
 			$ef->xid = $result['userID'];
