@@ -278,11 +278,13 @@ class Users_User extends Base_Users_User
 		$user = $this;
 		if ($inserted) {
 			if (Users::isCommunityid($user->id)) {
-				$roles = Q_Config::get('Users', 'onInsert', 'roles', array());
-				Users_Label::addLabel($roles, $this->id, null, null, $this->id, true);
+				if ($roles = Q_Config::get('Users', 'onInsert', 'roles', array())) {
+					Users_Label::addLabel($roles, $this->id, null, null, $this->id, true);
+				}
 			} else {
-				$labels = Q_Config::get('Users', 'onInsert', 'labels', array());
-				Users_Label::addLabel($labels, $this->id, null, null, $this->id, true);
+				if ($labels = Q_Config::get('Users', 'onInsert', 'labels', array())) {
+					Users_Label::addLabel($labels, $this->id, null, null, $this->id, true);
+				}
 			}
 		}
 		Q::event(
