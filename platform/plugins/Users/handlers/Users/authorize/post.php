@@ -43,9 +43,6 @@ function Users_authorize_post($params = array())
 	$externalTo->appId = $appId;
 	$externalTo->userId = $user->id;
 	if ($externalTo->retrieve()) {
-		if ($externalTo->scope !== $scope || $externalTo->redirect_uri !== $redirect_uri) {
-			throw new Q_Exception("Different parameters were requested with the same state string before", 'state');
-		}
 		Users::$cache['externalTo'] = $externalTo;
 		return;
 	}

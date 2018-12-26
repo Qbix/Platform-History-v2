@@ -113,7 +113,7 @@
 					"secret": "PUT SECRET HERE",
 					"url": "http://apps.facebook.com/YOURAPP",
 					"baseUrl": "https://myapp.local",
-					"paths": ["/"],
+					"paths": [""],
 					"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
 				}
 			},
@@ -121,15 +121,15 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+					"baseUrl": "https://myapp.local",
 					"scheme": "myapp://",
+					"paths": [""],
 					"customUserAgentString": "myapp.ios",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
 						"added": "Notifications have been enabled"
 					},
-					"baseUrl": "https://myapp.local",
-					"paths": ["/"],
 					"secret": "SHARED SECRET HERE",
 					"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
 						"key": "local/Users/certs/MyApp/token/cert.p8",
@@ -151,8 +151,8 @@
 					"appId": "com.mycompany.myapp",
 					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
 					"baseUrl": "https://myapp.local",
-					"paths": ["/"],
 					"scheme": "myapp://",
+					"paths": ["/"],
 					"custom": "myapp.android",
 					"key": "AUTHORIZATION KEY HERE",
 					"senderID": "YOUR SENDER ID HERE",
