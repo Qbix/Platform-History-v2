@@ -32,6 +32,7 @@
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"Users/session": {"module": "Users", "action": "session"},
 			"login/facebook": {"module": "Users", "action": "facebook"}
 		},
 		"session": {
@@ -162,6 +163,9 @@
 				"leaveDefault": false
 			},
 			"delaySMS": 30000
+		},
+		"session": {
+			"redirectSecondsMax" : 300
 		},
 		"passphrase": {
 			"hashFunction": "sha1",

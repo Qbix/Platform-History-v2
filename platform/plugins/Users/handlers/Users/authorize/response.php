@@ -29,7 +29,7 @@ function Users_authorize_response()
 	}
 	
 	$redirect_uri = Q::ifset($req, 'redirect_uri', $info['baseUrl']);
-	if (empty($info['baseUrl'])) {
+	if (empty($info['paths'])) {
 		throw new Q_Exception("Client app must have paths array in config", 'client_id');
 	}
 	$paths = $appInfo['paths'];

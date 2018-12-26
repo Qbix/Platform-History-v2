@@ -1553,9 +1553,11 @@ abstract class Users extends Base_Users
 	 * @static
 	 * @param {string} $platform The platform or platform for the app
 	 * @param {string} $appId Can be either an internal or external app id
+	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if missing
 	 * @return {array} Returns array($appId, $appInfo) where $appId is internal app id
+	 * @throws Q_Exception_MissingConfig
 	 */
-	static function appInfo($platform, $appId)
+	static function appInfo($platform, $appId, $throwIfMissing = false)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
 		if (isset($apps[$appId])) {
@@ -1570,6 +1572,9 @@ abstract class Users extends Base_Users
 				}
 			}
 			$appId = $id;
+		}
+		if ($throwIfMissing and !$appInfo) {
+			throw new Q_Exception_MissingConfig("Users/apps/$platform/$appId");
 		}
 		return array($appId, $appInfo);
 	}

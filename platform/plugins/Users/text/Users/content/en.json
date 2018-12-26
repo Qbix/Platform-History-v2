@@ -7,6 +7,9 @@
 		"IfYouFeel": "If you feel something went wrong, you can ",
 		"SetIdentifierButtonTitle": "start over"
 	},
+	"session": {
+		"GetStarted": "Get Started"
+	},
 	"authorize": {
 		"GetStarted": "Get Started",
 		"Authorize": "Authorize",
