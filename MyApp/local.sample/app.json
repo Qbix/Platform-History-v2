@@ -27,11 +27,8 @@
 				"key": "YOUR SECRET KEY HERE"
 			} */
 		},
-		"external": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA FOR EXTERNAL CLIENTS"
-		},
 		"internal": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING INTERNAL MESSAGES"
+			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA TO BE SENT BACK TO US"
 		},
 		"environment": "",
 		/* "scriptFiles": ["config/Q/urls.php"], */
