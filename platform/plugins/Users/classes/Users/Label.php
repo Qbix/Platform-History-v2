@@ -46,6 +46,9 @@ class Users_Label extends Base_Users_Label
 		$asUserId = null,
 		$unlessExists = false)
 	{
+		if (!isset($label)) {
+			throw new Q_Exception_RequiredField(array('field' => 'label'));
+		}
 		if (is_array($label)) {
 			if (!Q::isAssociative($label)) {
 				foreach ($label as $l) {

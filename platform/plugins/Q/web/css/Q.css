@@ -705,6 +705,7 @@ html.Q_scanning body > .Q_scanning_code {
 #notices_slot ul li span {
 	padding: 0 10px;
 	display: inline-block;
+	width: 100%;
 }
 #notices_slot ul .Q_hidden_notice {
 	display: none;
