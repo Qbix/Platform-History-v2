@@ -9,7 +9,8 @@
 
 var Places = Q.Places = Q.plugins.Places = {
 	
-	metric: true, // whether to display things using the metric system units
+	// whether to display things using the metric system units
+	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR'].indexOf(navigator.language) >= 0),
 	
 	options: {
 		platform: 'google'
@@ -93,13 +94,16 @@ var Places = Q.Places = Q.plugins.Places = {
 			var kmr = Math.abs(meters/1000 - Math.round(meters/1000));
 			units = milesr < kmr ? 'miles' : 'km';
 		}
+		var displayUnits = Places.units[units];
 		switch (units) {
 		case 'miles':
-			return Math.round(meters/1609.34*10)/10+" miles";
+			return Math.round(meters/1609.34*10)/10+' '+displayUnits;
 		case 'km':
 		case 'kilometers':
 		default:
-			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
+			return meters % 100 == 0
+				? (meters/1000)+' '+displayUnits
+				: Math.ceil(meters)+' '+Places.units.meters;
 		}
 	},
 
@@ -399,6 +403,19 @@ Places.Coordinates.from = function (data, callback) {
 		}, data));
 	}
 };
+
+Places.units = {
+	meters: "meters",
+	kilometers: "kiometers",
+	km: "km",
+	miles: "miles"
+};
+
+Q.Text.get('Places/content', function (err, text) {
+	if (text && text.units) {
+		Places.units = text.units;
+	}
+});
 
 var Cp = Places.Coordinates.prototype;
 	

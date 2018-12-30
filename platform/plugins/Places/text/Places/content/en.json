@@ -4,6 +4,15 @@
 		"PostcodeLabel": "{{1}} ({{2}})",
 		"Title": "within {{1}}"
 	},
+	"units": {
+		"meters": "meters",
+		"kilometers": "kiometers",
+		"km": "km",
+		"miles": "miles",
+		"mi": "mi",
+		"feet": "feet",
+		"inches": "inches"
+	},
 	"location": {
 		"myCurrentLocation": "My current location",
 		"enterAddress": "Enter an address",
