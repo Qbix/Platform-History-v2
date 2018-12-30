@@ -204,13 +204,17 @@ abstract class Places extends Base_Places
 			$kmr = abs($meters/1000 - round($meters/1000));
 			$units = $milesr < $kmr ? 'miles' : 'km';
 		}
+		$text = Q_Text::get('Places/content');
+		$displayUnits = $text['units'][$units];
 		switch ($units) {
 		case 'miles':
-			return (round($meters/1609.34*10)/10)." miles";
+			return (round($meters/1609.34*10)/10).' '.$displayUnits;
 		case 'km':
 		case 'kilometers':
 		default:
-			return  $meters % 100 == 0 ? ($meters/1000).' '.$units : ceil($meters)." meters";
+			return  $meters % 100 == 0
+				? ($meters/1000).' '.$units
+				: ceil($meters).$text['units']['meters'];
 		}
 	}
 	

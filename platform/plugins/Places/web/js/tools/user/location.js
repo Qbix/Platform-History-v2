@@ -21,7 +21,7 @@ var Places = Q.Places;
  * @param {Number} [options.leaveInterests=2] Whether to unsubscribe from all the local interests at the old location. Pass 2 to unsubscribe and leave.
  * @param {Object} [options.meters] object of { meters: title } pairs, by default is generated from Places/nearby/meters config
  * @param {array} [options.defaultMeters] override the key in the meters array to select by default. Defaults to "Places/nearby/defaultMeters" config
- * @param {String} [options.units] second parameter to pass to Places.distanceLabel
+ * @param {String} [options.units] second parameter to pass to Places.distanceLabel, default depends on Places.metric
  * @param {String} [options.updateButton="Update my location"] the title of the update button
  * @param {Object} [options.map] options for the map
  * @param {Number} [options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
@@ -318,7 +318,7 @@ Q.Tool.define("Places/user/location", function (options) {
 		leaveInterests: 1
 	},
 	timeout: 10000,
-	units: 'km',
+	units: Places.metric ? 'km' : 'miles',
 	onReady: new Q.Event(),
 	onSet: new Q.Event(),
 	onUnset: new Q.Event(),
