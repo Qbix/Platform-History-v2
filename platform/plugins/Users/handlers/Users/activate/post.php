@@ -25,7 +25,9 @@ function Users_activate_post()
 		// At least the user will be able to log in.
 		$passphrase = $user->preparePassphrase($_REQUEST['passphrase'], $isHashed);
 		$user->passphraseHash = Users::hashPassphrase($passphrase, $user->passphraseHash);
-		Q_Response::setNotice("Users/activate/passphrase", "Your pass phrase has been saved.", true);
+		Q_Response::setNotice("Users/activate/passphrase", "Your pass phrase has been saved.", array(
+			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+		));
 		// Log the user in, since they were able to set the passphrase
 		Users::setLoggedInUser($user); // This also saves the user.
 
@@ -43,7 +45,9 @@ function Users_activate_post()
 		// Log the user in, since they have just added an email to their account
 		Users::setLoggedInUser($user); // This also saves the user.
 		Q_Response::removeNotice('Users/activate/objects');
-		Q_Response::setNotice("Users/activate/activated", "Your $type has been activated.", true);
+		Q_Response::setNotice("Users/activate/activated", "Your $type has been activated.", array(
+			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+		));
 	}
 	
 	Users::$cache['passphrase_set'] = true;

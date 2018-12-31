@@ -14,6 +14,8 @@
 		"inches": "inches"
 	},
 	"location": {
+		"update": "Update my location",
+		"prompt": "{{ClickOrTap}} here to<br>set your<br>location",
 		"myCurrentLocation": "My current location",
 		"enterAddress": "Enter an address",
 		"enterPostcode": "Please enter your postcode / zipcode",
