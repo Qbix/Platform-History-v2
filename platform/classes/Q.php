@@ -259,7 +259,7 @@ class Q
 			$text = Q_Text::get($name);
 			$expression = Q::getObject($text, $path, null);
 			if (!isset($expression)) {
-				throw new Q_Exception_MissingObject(array('name' => 'expression'));
+				return null;
 			}
 		}
 		$a = (

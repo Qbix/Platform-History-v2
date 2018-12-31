@@ -1,10 +1,26 @@
 <?php
 
+/**
+ * @module Q
+ */
+
+/**
+ * Used to add a notice from the client
+ * @class HTTP Q notice
+ * @method post
+ * @param $_REQUEST
+ * @param {string} $_REQUEST.key Required, the key for the notice
+ * @param {string} $_REQUEST.content Required, the text content for the notice, will be HTML escaped
+ * @param {string} $_REQUEST.options Required. JSON of options for Q_Request::setNotice()
+ * @return void
+ */
 function Q_notice_post()
 {
-	if (!isset($_REQUEST['key'])) {
-		throw new Q_Exception_RequiredField(array('field' => 'key'), 'key');
+	Q_Request::requireFields(array('key', 'content'), true);
+	$options = Q::ifset($_REQUEST, 'options', array());
+	if (is_string($options)) {
+		$options = Q::json_decode($options);
 	}
-
-	Q_Response::setNotice($_REQUEST['key'], $_REQUEST['content'], $_REQUEST['options']);
+	$content = Q::text($_REQUEST['content']);
+	Q_Response::setNotice($_REQUEST['key'], $content, $options);
 }

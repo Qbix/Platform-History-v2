@@ -52,10 +52,30 @@ Q.text = {
 			"404": "Not found: {{url}}",
 			"0": "Request interrupted"
 		},
-		"months": [
-			'January', 'February', 'March', 'April', 'May', 'June',
-			'July', 'August', 'September', 'October', 'November', 'December'
-		],
+		"words": {
+			"tap": "tap",
+			"click": "click",
+			"yes": "yes",
+			"no": "no",
+			"Tap": "Tap",
+			"Click": "Click",
+			"Yes": "Yes",
+			"No": "No"
+		},
+		"months": {
+			"1": "January",
+			"2": "February", 
+			"3": "March",
+			"4": "April", 
+			"5": "May",
+			"6": "June",
+			"7": "July",
+			"8": "August",
+			"9": "September",
+			"10": "October",
+			"11": "November",
+			"12": "December"
+		},
 		"audio": {
 			"allowMicrophoneAccess": "Please allow access to your microphone",
 			"record": "Record",
@@ -12373,6 +12393,16 @@ Q.onInit.add(function () {
 	}, 'Q.Socket');
 	var info = Q.first(Q.info.languages) || ['en', 'US', 1];
 	Q.Text.setLanguage(info[0], info[1]);
+	var QtQw = Q.text.Q.words;
+	QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
+	QtQw.clickOrTap = isTouchscreen ? QtQw.click : QtQw.tap;
+
+	Q.Text.get('Q/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Q.extend(Q.text.Q, text);
+	});
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -12977,7 +13007,7 @@ Q.Notices = {
 		}
 
 		// default options
-		options = Q.extend({
+		var o = Q.extend({
 			key: null,
 			closeable: true,
 			type: 'common',
@@ -12985,40 +13015,35 @@ Q.Notices = {
 			persistent: false
 		}, options);
 
-		var key = options.key;
-		var content = options.content;
-		var closeable = options.closeable;
-		var timeout = options.timeout;
-		var handler = options.handler;
-		var persistent = options.persistent;
-		var noticeClass = 'Q_' + options.type + '_notice';
-
+		var key = o.key;
+		var content = o.content;
+		var noticeClass = 'Q_' + o.type + '_notice';
 
 		// if key not empty and notice with this key already exist
-		if (key && this.container.querySelector('li[data-key="' + key + '"]')) {
-			throw new Error('Q.Notices.add: A notice with key "' + key + '" already exists.');
+		if (key && this.container.querySelector('li[data-key="'+key+'"]')) {
+			throw new Error('Q.Notices.add: A notice with key "'+key+'" already exists.');
 		}
-		//document.getElementsByTagName('head')[0].appendChild(script);
 		var ul = this.container.getElementsByTagName('ul')[0];
 		if (!ul) {
 			ul = document.createElement('ul');
 			this.container.appendChild(ul);
 		}
 		var li = document.createElement('li');
-		li.setAttribute('data-key', key);
-		li.setAttribute('data-persistent', persistent);
-		li.setAttribute('data-local', true);
+		var notice = Q.take(o, ['key', 'closeable', 'persistent', 'timeout']);
+		notice.local = true;
+		if (key) {
+			li.setAttribute('data-key', notice.key);
+		}
+		li.setAttribute('data-notice', JSON.stringify(notice));
 		li.classList.add(noticeClass);
 		li.onclick = function () {
-			Q.handle(handler, li, [content]);
+			Q.handle(o.handler, li, [content]);
 			Q.Notices.remove(li);
 		};
 		var span = document.createElement('span');
 		span.innerHTML = content.trim();
 		li.appendChild(span);
-
-		// close icon
-		if (closeable) {
+		if (o.closeable) {
 			var closeIcon = document.createElement('span');
 			closeIcon.classList.add("Q_close");
 			li.appendChild(closeIcon);
@@ -13027,34 +13052,24 @@ Q.Notices = {
 				Q.Notices.remove(li);
 			}
 		}
-
-		// whether remove notice by timeout
-		if (typeof timeout === 'number' && timeout > 0) {
+		if (typeof o.timeout === 'number' && o.timeout > 0) {
 			setTimeout(function () {
 				Q.Notices.remove(li);
-			}, timeout * 1000);
+			}, o.timeout * 1000);
 		}
-
-		// insert new notice as first child
-		ul.insertBefore(li, ul.firstChild);
-
-		// apply transition
+		ul.appendChild(li);
 		setTimeout(function () {
 			Q.Notices.show(li);
 
-			if (persistent) {
+			if (o.persistent) {
+				var oj = Q.take(o, ['persistent', 'closeable', 'timeout', 'handler']);
 				Q.req('Q/notice', [], null, {
 					method: 'post',
 					fields: {
 						// we need key for persistent notices
 						key: key || Date.now().toString(),
 						content: content,
-						options: {
-							persistent: persistent,
-							closeable: closeable,
-							timeout: timeout,
-							handler: handler
-						}
+						options: oj
 					}
 				});
 			}
@@ -13093,25 +13108,22 @@ Q.Notices = {
 				Q.Notices.remove(item);
 			});
 		}
-
 		notice = this.get(notice);
-
 		if (notice instanceof HTMLElement) {
 			this.hide(notice);
-
 			setTimeout(function () {
 				var key = notice.getAttribute('data-key');
-
+				var json = notice.getAttribute('data-notice');
+				var o = JSON.parse(json) || {};
 				// if notice persistent - send request to remove from session
-				if (typeof key === 'string' && notice.getAttribute('data-persistent')) {
+				if (typeof key === 'string' && o.persistent) {
 					Q.req('Q/notice', 'data', null, {
 						method: 'delete',
 						fields: {key: key}
 					});
 				}
-
 				notice.remove();
-			}, 750);
+			}, 1000);
 		}
 	},
 	/**
@@ -13121,12 +13133,10 @@ Q.Notices = {
 	 * Unique key of notice which has been provided when notice was added.
 	 * Or notice HTMLElement
 	 */
-	hide: function(notice)
-	{
+	hide: function(notice) {
 		notice = this.get(notice);
-
 		if (notice instanceof HTMLElement) {
-			notice.classList.remove("Q_show_notice");
+			notice.addClass("Q_hidden_notice").removeClass("Q_show_notice");
 		}
 	},
 	/**
@@ -13140,7 +13150,7 @@ Q.Notices = {
 	{
 		notice = this.get(notice);
 		if (notice instanceof HTMLElement) {
-			notice.classList.add("Q_show_notice");
+			notice.removeClass("Q_hidden_notice").addClass("Q_show_notice");
 		}
 	},
 	/**
@@ -13156,40 +13166,17 @@ Q.Notices = {
 		var noticeElements = noticeElement.getElementsByTagName("li");
 		var options, handler, key, persistent, timeout, type;
 
-		for (var li of noticeElements) {
+		Q.each(noticeElements, function () {
 			options = {};
-			options.content = li.innerHTML;
-
-			handler = li.getAttribute('data-handler');
-			if (handler) {
-				options.handler = handler;
-			}
-
-			key = li.getAttribute('data-key');
-			if (typeof key === 'string') {
-				options.key = key;
-			}
-
-			persistent = li.getAttribute('data-persistent');
-			if (persistent) {
-				options.persistent = persistent;
-			}
-
-			timeout = li.getAttribute('data-timeout');
-			if (timeout) {
-				options.timeout = timeout;
-			}
-
-			type = li.getAttribute('data-type') || 'common';
-			if (type) {
-				options.type = type;
-			}
-
-			// need to remove before adding because can be keys conflict
-			li.remove();
-
+			options.content = this.innerHTML;
+			options.type = 'common';
+			var json = this.getAttribute('data-notice');
+			var o = JSON.parse(json) || {};
+			Q.extend(options, o);
+			this.remove(); // need to remove before adding because can be keys conflict
+			delete options.persistent; // this was already set on the server
 			Q.Notices.add(options);
-		};
+		});
 	}
 };
 

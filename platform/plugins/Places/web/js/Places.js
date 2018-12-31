@@ -412,9 +412,10 @@ Places.units = {
 };
 
 Q.Text.get('Places/content', function (err, text) {
-	if (text && text.units) {
-		Places.units = text.units;
+	if (!text) {
+		return;
 	}
+	Places.units = text.units;
 });
 
 var Cp = Places.Coordinates.prototype;

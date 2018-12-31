@@ -914,7 +914,9 @@ abstract class Users extends Base_Users
 			$html = Q_Handlebars::renderSource($template, compact(
 				'user', 'displayName'
 			));
-			Q_Response::setNotice('Users::setLoggedInUser', $html, true);
+			Q_Response::setNotice('Users::setLoggedInUser', $html, array(
+				'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+			));
 		}
 
 		/**
