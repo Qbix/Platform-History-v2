@@ -12781,7 +12781,7 @@ Q.Camera = {
 		onClose: new Q.Event(),
 		options: {
 			sound: {
-				src: "{{Q}}/audio/qrfound.mp3"
+				src: "{{Q}}/audio/scanned.mp3"
 			},
 			dialog: {
 				title: "Scan QR codes"

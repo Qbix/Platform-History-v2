@@ -54,11 +54,25 @@ Q.Tool.define("Places/user/location", function (options) {
 	if (state.defaultMeters === undefined) {
 		state.defaultMeters = Places.nearby.defaultMeters;
 	}
+	var select = document.createElement('select');
+	select.addClass('Places_user_location_meters');
+	Q.each(state.meters, function (m, l) {
+		var option = document.createElement('option');
+		option.setAttribute('value', m);
+		option.innerHTML = l;
+		if (m == state.defaultMeters) {
+			option.setAttribute('selected', 'selected');
+		}
+		select.appendChild(option);
+	});
 	
 	Q.Text.get('Places/content', function (err, text) {
 		state.updateButton = state.updateButton || text.location.update;
 		state.map.prompt = (state.map.prompt || text.location.prompt)
 			.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+		state.interested = text.location.interested.interpolate({
+			select: select.outerHTML
+		});
 		Q.Template.render('Places/user/location', state, function (err, html) {
 			tool.element.innerHTML = html;
 			$te.find('.Places_user_location_container')
@@ -336,13 +350,7 @@ Q.Tool.define("Places/user/location", function (options) {
 
 Q.Template.set('Places/user/location', 
 	'<div class="Places_user_location_container Places_user_location_checking">'
-		+ 'I\'m interested in things taking place within '
-		+ '<select name="meters" class="Places_user_location_meters">'
-			+ '{{#each meters}}'
-				+ '{{option @key this ../defaultMeters}}'
-			+ '{{/each}}'
-		+ '</select>'
-		+ ' of '
+		+ '{{& interested}}'
 		+ '<div class="Places_user_location_whileObtaining">'
 			+ '<div class="Places_user_location_set Q_aspect_where">'
 				+ '<span>{{& map.prompt}}</span>'

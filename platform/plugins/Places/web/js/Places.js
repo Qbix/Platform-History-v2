@@ -10,7 +10,7 @@
 var Places = Q.Places = Q.plugins.Places = {
 	
 	// whether to display things using the metric system units
-	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR'].indexOf(navigator.language) >= 0),
+	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR'].indexOf(navigator.language) < 0),
 	
 	options: {
 		platform: 'google'
@@ -96,14 +96,24 @@ var Places = Q.Places = Q.plugins.Places = {
 		}
 		var displayUnits = Places.units[units];
 		switch (units) {
+		case 'mi':
 		case 'miles':
-			return Math.round(meters/1609.34*10)/10+' '+displayUnits;
+			var mi = Math.round(meters/1609.34*10)/10;
+			if (mi === 1 && units === 'miles') {
+				units = 'mile';
+			}
+			return val+' '+displayUnits;
 		case 'km':
 		case 'kilometers':
 		default:
+			var km = (meters/1000);
+			var m = Math.ceil(meters);
+			if (km === 1 && units === 'kilometers') {
+				units = 'kilometer';
+			}
 			return meters % 100 == 0
-				? (meters/1000)+' '+displayUnits
-				: Math.ceil(meters)+' '+Places.units.meters;
+				? km +' '+displayUnits
+				: m+' '+Places.units.meters;
 		}
 	},
 

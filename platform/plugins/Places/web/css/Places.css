@@ -23,6 +23,11 @@
 	display: none;
 }
 
+.Places_location_tool select {
+	box-shadow: #222 2px 2px 2px;
+	font-size: 1em;
+}
+
 .Places_location_address {
 	display: inline-block;
 }
