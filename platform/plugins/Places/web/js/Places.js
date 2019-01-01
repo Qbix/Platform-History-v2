@@ -10,7 +10,8 @@
 var Places = Q.Places = Q.plugins.Places = {
 	
 	// whether to display things using the metric system units
-	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR'].indexOf(Q.Text.language) < 0),
+	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR']
+		.indexOf(Q.Text.language + '-' + Q.Text.locale) < 0),
 	
 	options: {
 		platform: 'google'
