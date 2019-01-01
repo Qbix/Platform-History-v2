@@ -8,7 +8,7 @@
 				}
 			});
 			setTimeout(function () {
-				Q.hint($('#Users_login_identifier')[0]);
+				Q.Pointer.hint($('#Users_login_identifier')[0]);
 			}, 500);
 		}
 		Q.page('Users/session', function () {
