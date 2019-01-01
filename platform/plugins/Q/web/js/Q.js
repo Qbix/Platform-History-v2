@@ -12391,7 +12391,9 @@ Q.onInit.add(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
 	}, 'Q.Socket');
-	var info = Q.first(Q.info.languages) || ['en', 'US', 1];
+	var browserLanguage = navigator.language.split('-');
+	browserLanguage.push(1);
+	var info = Q.first(Q.info.languages) || browserLanguage;
 	Q.Text.setLanguage(info[0], info[1]);
 	var QtQw = Q.text.Q.words;
 	QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
