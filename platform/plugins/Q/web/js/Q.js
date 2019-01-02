@@ -9126,6 +9126,8 @@ Q.Text = {
 	setLanguage: function (language, locale) {
 		Q.Text.language = language.toLowerCase();
 		Q.Text.locale = locale && locale.toUpperCase();
+		Q.Text.languageLocaleString = Q.Text.language
+			+ (Q.Text.useLocale ? '-' + Q.Text.locale : '');
 	},
 
 	/**
@@ -9138,9 +9140,15 @@ Q.Text = {
 	 * @param {Boolean} [merges=false] If true, merges on top instead of replacing
 	 */
 	set: function (name, content, merge) {
-		var language = Q.Text.language;
-		var locale = Q.Text.locale;
-		Q.setObject([language, locale, name], content, Q.Text.collection);
+		var obj = null;
+		if (merge) {
+			obj = Q.getObject([Q.Text.languageLocaleString, name], content);
+		}
+		if (obj) {
+			Q.extend(obj, 10, content);
+		} else {
+			Q.setObject([Q.Text.languageLocaleString, name], content, Q.Text.collection);
+		}
 	},
 
 	/**
@@ -9161,12 +9169,9 @@ Q.Text = {
 	 */
 	get: function (name, callback, options) {
 		options = options || {};
-		var language = options.language || Q.Text.language;
-		var locale = (options.language && options.locale)
-			|| (Q.getObject('Q.info.text.useLocale') ? Q.Text.locale : '');
 		var dir = Q.Text.dir;
-		var suffix = locale ? '-' + locale : '';
-		var content = Q.getObject([language, locale, name], Q.Text.collection);
+		var lls = Q.Text.languageLocaleString;
+		var content = Q.getObject([lls, name], Q.Text.collection);
 		if (content) {
 			Q.handle(callback, Q.Text, [null, content]);
 			return true;
@@ -9191,11 +9196,14 @@ Q.Text = {
 			if (options && options.ignoreCache) {
 				func = func.force;
 			}
-			var url = Q.url(dir + '/' + name + '/' + language + suffix + '.json');
+			var url = Q.url(dir + '/' + name + '/' + lls + '.json');
 			return func(name, url, pipe.fill(name), options);
 		});
 	}
 };
+
+// Set the initial language, but this can be overridden after Q.onInit
+Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	return Q.request(url, function (err, content) {
@@ -12391,10 +12399,10 @@ Q.onInit.add(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
 	}, 'Q.Socket');
-	var browserLanguage = navigator.language.split('-');
-	browserLanguage.push(1);
-	var info = Q.first(Q.info.languages) || browserLanguage;
-	Q.Text.setLanguage(info[0], info[1]);
+	var info = Q.first(Q.info.languages);
+	if (info) {
+		Q.Text.setLanguage.apply(Q.Text, info);
+	}
 	var QtQw = Q.text.Q.words;
 	QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
 	QtQw.clickOrTap = isTouchscreen ? QtQw.click : QtQw.tap;
