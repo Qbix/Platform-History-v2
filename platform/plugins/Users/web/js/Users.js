@@ -86,21 +86,6 @@
 
 		authorize: {
 			mustAgree: "First you must agree to the terms."
-		},
-
-		audio: {
-			allowMicrophoneAccess: "Please allow access to your microphone",
-			record: "Record",
-			recording: "Recording",
-			remains: "remains",
-			maximum: "maximum",
-			playing: "Playing",
-			recorded: "Recorded",
-			clip: "clip",
-			orupload: "Or Upload",
-			usethis: "Use This",
-			discard: "Discard",
-			encoding: "Encoding"
 		}
 
 	};
@@ -281,35 +266,35 @@
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
-					var fb_uid = parseInt(response.authResponse.userID);
-					var ignoreUid = parseInt(Q.cookie('Users_ignorePlatformUid'));
+					var fb_xid = parseInt(response.authResponse.userID);
+					var ignoreXid = parseInt(Q.cookie('Users_ignorePlatformXid'));
 					// the following line prevents multiple prompts for the same user,
 					// which can be a problem especially if the authenticate() is called
 					// multiple times on the same page, or because the page is reloaded
-					Q.cookie('Users_ignorePlatformUid', fb_uid);
+					Q.cookie('Users_ignorePlatformXid', fb_xid);
 
-					if (Users.loggedInUser && Users.loggedInUser.uids.facebook === fb_uid) {
+					if (Users.loggedInUser && Users.loggedInUser.xids.facebook === fb_xid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
 						return;
 					}
 					if (options.prompt === undefined || options.prompt === null) {
-						// show prompt only if we aren't ignoring this facebook uid
-						if (fb_uid === ignoreUid) {
+						// show prompt only if we aren't ignoring this facebook xid
+						if (fb_xid === ignoreXid) {
 							_doCancel(null, platform, onSuccess, onCancel, options);
 						} else {
-							Users.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
+							Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
 						}
 					} else if (options.prompt === false) {
 						// authenticate without prompting
 						__doAuthenticate();
 					} else if (options.prompt === true) {
 						// show the usual prompt no matter what
-						Users.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
+						Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
 					} else if (typeof options.prompt === 'function') {
 						// custom prompt
-						options.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
+						options.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
 					} else {
 						Users.authenticate.occurring = false;
 						throw new Q.Error("Users.authenticate: options.prompt is the wrong type");
@@ -358,9 +343,9 @@
 		Users.authenticate.occurring = false;
 	}
 
-	function _doCancel(ignoreUid, platform, onSuccess, onCancel, options) {
-		if (ignoreUid) {
-			// NOTE: the following line makes us ignore this uid
+	function _doCancel(ignoreXid, platform, onSuccess, onCancel, options) {
+		if (ignoreXid) {
+			// NOTE: the following line makes us ignore this xid
 			// until the user explicitly wants to connect.
 			// This usually has the right effect -- because the user
 			// doesn't want to see the prompt all the time.
@@ -368,7 +353,7 @@
 			// and then the javascript discovers that the platform connection was lost,
 			// the user will not be prompted to restore it when it becomes available again.
 			// They will have to do it explicitly (calling Users.authenticate with prompt: true)
-			Q.cookie('Users_ignorePlatformUid', ignoreUid);
+			Q.cookie('Users_ignorePlatformXid', ignoreXid);
 		}
 		delete Users.connected[platform];
 		Users.onConnectionLost.handle.call(Users, platform, options);
@@ -404,7 +389,7 @@
 	 * Shows prompt asking if user wants to log in to the app as platform user.
 	 * @method prompt
 	 * @param {String} platform For now, only "facebook" is supported
-	 * @param {String} uid The platform uid
+	 * @param {String} xid The platform xid
 	 * @param {Function} authCallback , this function will be called after user authentication
 	 * @param {Function} cancelCallback , this function will be called if user closed social platform login window
 	 * @param {object} options
@@ -412,7 +397,7 @@
 	 * @param {Object} options
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-	Users.prompt = function (platform, uid, authCallback, cancelCallback, options) {
+	Users.prompt = function (platform, xid, authCallback, cancelCallback, options) {
 		if (platform !== 'facebook') {
 			throw new Q.Error("Users.authenticate prompt: The only supported platform for now is facebook");
 		}
@@ -440,9 +425,9 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var fb_uid;
-			if (fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
-				content_div.append(_usingInformation(fb_uid, noLongerUsing));
+			var fb_xid;
+			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
+				content_div.append(_usingInformation(fb_xid, noLongerUsing));
 				caption = Q.text.Users.prompt.doSwitch.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
@@ -474,9 +459,9 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var fb_uid;
-			if (fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
-				content_div.append(_usingInformation(fb_uid, noLongerUsing));
+			var fb_xid;
+			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
+				content_div.append(_usingInformation(fb_xid, noLongerUsing));
 				caption = Q.text.Users.prompt.doSwitch({
 					'platform': platform,
 					'Platform': platformCapitalized
@@ -487,7 +472,7 @@
 					'Platform': platformCapitalized
 				});
 			}
-			content_div.append(_usingInformation(uid, areUsing))
+			content_div.append(_usingInformation(xid, areUsing))
 				.append(_authenticateActions(caption));
 
 			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
@@ -511,23 +496,23 @@
 			},
 			onClose: function () {
 				if (!tookAction) {
-					if (cancelCallback) cancelCallback(uid);
+					if (cancelCallback) cancelCallback(xid);
 				}
 				tookAction = false;
 			}
 		});
 
-		function _usingInformation(uid, explanation) {
+		function _usingInformation(xid, explanation) {
 			return $("<table />").append(
 				$("<tr />").append(
 					$("<td class='Users_profile_pic' />").html(
-						"<fb:profile-pic uid='" + uid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
+						"<fb:profile-pic uid='" + xid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
 					)
 				).append(
 					$("<td class='Users_explanation_name' />").append(
 						$("<div class='Users_explanation' />").html(explanation)
 					).append(
-						"<fb:name uid='" + uid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + uid + "</fb:name>"
+						"<fb:name xid='" + xid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + xid + "</fb:name>"
 					)
 				)
 			);
@@ -849,11 +834,11 @@
 				});
 			} else {
 				// if we log out without logging out of facebook,
-				// then we should ignore the logged-in user's fb_uid
+				// then we should ignore the logged-in user's fb_xid
 				// when authenticating, until it is forced
-				var fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
-				if (fb_uid) {
-					Q.cookie('Users_ignorePlatformUid', fb_uid);
+				var fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
+				if (fb_xid) {
+					Q.cookie('Users_ignorePlatformXid', fb_xid);
 				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');
@@ -1338,7 +1323,7 @@
 					var $this = $(this);
 					$this.removeData('cancelSubmit');
 					document.activeElement.blur();
-					if (!$('#Users_agree').is(':checked')) {
+					if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
 						$this.data('cancelSubmit', true);
 						setTimeout(function () {
 							if (confirm(Q.text.Users.login.confirmTerms)) {
@@ -2306,18 +2291,20 @@
 			return;
 		}
 		var fieldNames = [
-			'response_type', 'token_type', 'access_token',
-			'expires_in', 'scope', 'state', 'Q.deviceId', 'Q.Users.oAuth'
+			'Q.Users.appId', 'Q.Users.newSessionId', 
+			'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
 		];
 		var fields = location.hash.queryField(fieldNames);
-		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-		fields.deviceId = storedDeviceId || fields.deviceId;
-		Q.req('Users/oAuth', function () {
-			// user was redirected from Users/authorize or some similar flow
-		}, {
-			method: 'post',
-			fields: fields
-		});
+		var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
+		fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
+		if (fields['Q.Users.newSessionId']) {
+			Q.req('Users/session', function () {
+				// user was redirected from Users/session
+			}, {
+				method: 'post',
+				fields: fields
+			});
+		}
 	}, 'Users');
 
 	Q.beforeActivate.add(function (elem) {

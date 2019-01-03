@@ -381,4 +381,4 @@ Users.Socket = {
 
 /* * * */
 
-Q.require('Users/AppUser/Facebook');
+Q.require('Users/ExternalFrom/Facebook');

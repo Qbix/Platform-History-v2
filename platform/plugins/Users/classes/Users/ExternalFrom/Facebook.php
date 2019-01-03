@@ -7,22 +7,22 @@
 /**
  * Class representing facebook app user.
  *
- * @class Users_AppUser_Facebook
- * @extends Users_AppUser
+ * @class Users_ExternalFrom_Facebook
+ * @extends Users_ExternalFrom
  */
-class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Interface
+class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_ExternalFrom_Interface
 {
 	public $facebook = null;
 
 	/**
-	 * Gets an Users_AppUser_Facebook object constructed from request and/or cookies.
+	 * Gets an Users_ExternalFrom_Facebook object constructed from request and/or cookies.
 	 * It is your job to populate it with a user id and save it.
 	 * @constructor
 	 * @static
 	 * @param {string} [$appId=Q::app()] Can either be an interal appId or a Facebook appId.
 	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
 	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
-	 * @return {Users_AppUser_Facebook|null}
+	 * @return {Users_ExternalFrom_Facebook|null}
 	 *  May return null if no such user is authenticated.
 	 */
 	static function authenticate($appId = null, $setCookie = true, $longLived = true)
@@ -66,7 +66,7 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 			} else if (isset($_COOKIE["fbsr_$fbAppId"])) {
 				// A previous request has set the fbsr cookie
 				// note: the accessToken and expires are not set in this case,
-				// and should be retrieved from the Users_AppUser in the database
+				// and should be retrieved from the Users_ExternalFrom in the database
 				$fbsr = $_COOKIE["fbsr_$fbAppId"];
 			}
 		}
@@ -106,15 +106,15 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 		}
 		if ($facebook instanceof Facebook\Facebook
 		and $app = $facebook->getApp()) {
-			$appuser = new Users_AppUser_Facebook();
-			// note that $appuser->userId was not set
-			$appuser->platform = 'facebook';
-			$appuser->appId = $fbAppId;
-			$appuser->platform_uid = $result['userID'];
-			$appuser->access_token = $result['accessToken'];
-			$appuser->session_expires = $result['expires'];
-			$appuser->facebook = $facebook;
-			return $appuser;
+			$ef = new Users_ExternalFrom_Facebook();
+			// note that $ef->userId was not set
+			$ef->platform = 'facebook';
+			$ef->appId = $appId;
+			$ef->xid = $result['userID'];
+			$ef->accessToken = $result['accessToken'];
+			$ef->expires = $result['expires'];
+			$ef->facebook = $facebook;
+			return $ef;
 		}
 		return null;
 	}
@@ -132,7 +132,7 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 			$sizes = Q_Config::expect('Users', 'icon', 'sizes');
 		}
 		sort($sizes);
-		if (!$this->platform_uid) {
+		if (!$this->xid) {
 			return null;
 		}
 		$icon = array();
@@ -143,7 +143,7 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 			$width = $width ? $width : $height;
 			$height = $height ? $height : $width;
 			$icon[$size.$suffix] = "https://graph.facebook.com/"
-				. $this->platform_uid
+				. $this->xid
 				. "/picture?width=$size&height=$size";
 		}
 		return $icon;
@@ -162,8 +162,8 @@ class Users_AppUser_Facebook extends Users_AppUser implements Users_AppUser_Inte
 		if (!$fieldNames) {
 			return array();
 		}
-		$uid = $this->platform_uid;
-		$response = $this->facebook->get("/$uid?fields=".implode(',', $fieldNames));
+		$xid = $this->xid;
+		$response = $this->facebook->get("/$xid?fields=".implode(',', $fieldNames));
 		$userNode = $response->getGraphUser();
 		Users::$cache['platformUserData'] = array(
 			'facebook' => $userNode->uncastItems()

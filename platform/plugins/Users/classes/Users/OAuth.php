@@ -3,26 +3,12 @@
  * @module Users
  */
 /**
- * Class representing 'OAuth' rows in the 'Users' database
- * You can create an object of this class either to
- * access its non-static methods, or to actually
- * represent a oAuth row in the Users database.
+ * For oAuth methods
  *
  * @class Users_OAuth
- * @extends Base_Users_OAuth
  */
-class Users_OAuth extends Base_Users_OAuth
+class Users_OAuth
 {
-	/**
-	 * The setUp() method is called the first time
-	 * an object of this class is constructed.
-	 * @method setUp
-	 */
-	function setUp()
-	{
-		parent::setUp();
-	}
-	
 	/**
 	 * Get an array of ($code => $title) pairs from space-separated list in $_REQUEST['scope'],
 	 * defaulting to the "all" scope.
@@ -59,43 +45,5 @@ class Users_OAuth extends Base_Users_OAuth
 			}
 		}
 		return $scope;
-	}
-	
-	/**
-	 * Fetch a Users_OAuth row if it exists, which authorizes
-	 * the client app to access the given scope for the given user.
-	 * @param {string} $userId The userId of the local user
-	 * @param {string} $client_id The userId of the client app
-	 * @param {string} [$scope='user'] The scope
-	 * @return {Users_OAuth|null}
-	 */
-	static function fetch($userId, $client_id, $scope='user')
-	{
-		$rows = oAuth::select()
-			->where(compact('userId', 'client_id'))
-			->fetchDbRows();
-		foreach ($rows as $row) {
-			$scopes = array_map('trim', explode(' ', $row->scope));
-			foreach ($scopes as $s) {
-				if ($scopes === $scope) {
-					return $row;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Implements the __set_state method, so it can work with
-	 * with var_export and be re-imported successfully.
-	 * @method __set_state
-	 * @param {array} $array
-	 * @return {Users_OAuth} Class instance
-	 */
-	static function __set_state(array $array) {
-		$result = new Users_OAuth();
-		foreach($array as $k => $v)
-			$result->$k = $v;
-		return $result;
 	}
 };

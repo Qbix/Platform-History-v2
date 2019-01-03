@@ -1,12 +1,31 @@
-.Places_user_location_set { padding-top: 20px; width: 100%; cursor: pointer; }
+.Places_user_location_set { 
+	padding-top: 20px; width: 100%; cursor: pointer;;
+	padding-left: 20%;
+	text-align: right;
+	text-shadow: white 0px 0px 5px;
+	background-image: url(../img/prompt.svg);
+	background-position: left center;
+	background-repeat: no-repeat;
+	font-size: 30px;
+	font-weight: bold;
+	animation: Places_user_location_set 1s ease-in-out infinite alternate;
+	-webkit-animation: Places_user_location_set 1s ease-in-out infinite alternate;
+	padding-top: 30px;
+}
 
-.Places_user_location_map { height: 200px; }
+.Places_user_location_map,
+.Places_user_location_set { height: 200px; }
 
 .Places_user_location_obtained .Places_user_location_whileObtaining,
 .Places_user_location_obtaining .Places_user_location_whileObtained,
 .Places_user_location_checking .Places_user_location_whileObtaining,
 .Places_user_location_checking .Places_user_location_whileObtained {
 	display: none;
+}
+
+.Places_location_tool select {
+	box-shadow: #222 2px 2px 2px;
+	font-size: 1em;
 }
 
 .Places_location_address {
@@ -34,6 +53,15 @@
 @-webkit-keyframes Places_obtaining {
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }
+}
+
+@keyframes Places_user_location_set {
+	from { transform: scale(0.975); }
+	to { transform: scale(1.025); }
+}
+@-webkit-keyframes Places_user_location_set {
+	from { transform: scale(0.075); }
+	to { transform: scale(1.025); }
 }
 
 .Places_obtaining {

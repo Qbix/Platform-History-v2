@@ -9,7 +9,7 @@ function Users_before_Q_objects(&$params)
 	
 	if ($authResponse = Q_Request::special('Users.facebook.authResponse', null)) {
 		$appId = Q::ifset($authResponse, 'appId', $app);
-		Users_AppUser_Facebook::authenticate($appId);
+		Users_ExternalFrom_Facebook::authenticate($appId);
 	}
 
 	$uri = Q_Dispatcher::uri();

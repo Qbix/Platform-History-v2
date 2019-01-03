@@ -691,6 +691,7 @@ html.Q_scanning body > .Q_scanning_code {
 	position: relative;
 	text-align: left;
 	overflow: hidden;
+	padding: 0 10px;
 }
 #notices_slot ul li[data-local] {
 	max-height: 0;
@@ -703,13 +704,17 @@ html.Q_scanning body > .Q_scanning_code {
 	color: #500;
 }
 #notices_slot ul li span {
-	padding: 0 10px;
 	display: inline-block;
+	width: 100%;
 }
 #notices_slot ul .Q_hidden_notice {
-	display: none;
+	transition: all .25s;
+	max-height: 0;
+	opacity: 0;
 }
 #notices_slot ul li.Q_show_notice {
+	transition: opacity .25s;
+	opacity: 1;
 	max-height: 100px;
 	display: block;
 }

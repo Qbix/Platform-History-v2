@@ -22,7 +22,7 @@ function Streams_user_response_data($params)
 			'displayName' => $displayname,
 			'icon' => $verified ? $icon : $user->icon,
 			'passphrase_set' => !empty($user->passphraseHash),
-			'uids' => $user->getAllUids()
+			'xids' => $user->getAllXids()
 		);
 	}
 	if ($type === 'email') {

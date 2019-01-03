@@ -20,22 +20,20 @@ abstract class Base_Users
 	 * @type array
 	 */
 	static $table_classnames = array (
-  0 => 'Users_AppUser',
-  1 => 'Users_Contact',
-  2 => 'Users_Device',
-  3 => 'Users_Email',
-  4 => 'Users_ExternalFrom',
-  5 => 'Users_ExternalTo',
-  6 => 'Users_Identify',
-  7 => 'Users_Label',
-  8 => 'Users_Link',
-  9 => 'Users_Mobile',
-  10 => 'Users_OAuth',
-  11 => 'Users_Quota',
-  12 => 'Users_Session',
-  13 => 'Users_Total',
-  14 => 'Users_User',
-  15 => 'Users_Vote',
+  0 => 'Users_Contact',
+  1 => 'Users_Device',
+  2 => 'Users_Email',
+  3 => 'Users_ExternalFrom',
+  4 => 'Users_ExternalTo',
+  5 => 'Users_Identify',
+  6 => 'Users_Label',
+  7 => 'Users_Link',
+  8 => 'Users_Mobile',
+  9 => 'Users_Quota',
+  10 => 'Users_Session',
+  11 => 'Users_Total',
+  12 => 'Users_User',
+  13 => 'Users_Vote',
 );
 
 	/**

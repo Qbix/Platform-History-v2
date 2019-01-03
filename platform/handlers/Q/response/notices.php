@@ -14,12 +14,17 @@ function Q_response_notices()
 			}
 
 			// collect attributes
-			$attributes = "data-key='".Q_Html::text($k)."'";
-			$attributes .= " data-handler='".Q::ifset($n, 'options', 'handler', null)."''";
-			$attributes .= " data-closeable='".Q::ifset($n, 'options', 'closeable', null)."'";
-			$attributes .= " data-persistent='".Q::ifset($n, 'options', 'persistent', false)."'";
-			$attributes .= " data-timeout='".Q::ifset($n, 'options', 'timeout', false)."'";
-			$result .= "<li $attributes>".$n['notice']."</li>\n";
+			$options = Q::ifset($n, 'options', array());
+			$notice = Q::json_encode(Q::take($options, array(
+				'key' => $k,
+				'closeable' => false,
+				'persistent' => false,
+				'timeout' => false
+			)));
+			$result .= Q_Html::tag('li', array(
+				'data-key' => $k,
+				'data-notice' => $notice
+			), $n['notice']) . "\n";
 		}
 		$result .= "</ul>";
 	}

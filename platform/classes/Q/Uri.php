@@ -922,7 +922,7 @@ class Q_Uri
 			return array($url, null);
 		}
 		$fileTimestamp = null;
-		$fileSHA = null;
+		$fileSHA1 = null;
 		if (!empty($config['caching']) or !empty($config['integrity'])) {
 			$parts = explode('?', $url);
 			$head = $parts[0];

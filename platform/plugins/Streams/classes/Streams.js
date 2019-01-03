@@ -814,7 +814,7 @@ function Streams_request_handler (req, res, next) {
 					Q.log("ERROR: Not authorized to post to invited stream for user '"+userId+"' during invite");
 					return;
 				}
-				var invitedUrl = Streams.invitedUrl(token);
+				var inviteUrl = Streams.inviteUrl(token);
 				displayName = displayName || "Someone";
 				var msg = {
 					publisherId: invited.fields.publisherId,
@@ -823,12 +823,12 @@ function Streams_request_handler (req, res, next) {
 					type: 'Streams/invite',
 					sentTime: new Db.Expression("CURRENT_TIMESTAMP"),
 					state: 'posted',
-					content: displayName + " invited you to " + invitedUrl,
+					content: displayName + " invited you to " + inviteUrl,
 					instructions: JSON.stringify({
 						token: token,
 						displayName: displayName,
 						appUrl: appUrl,
-						invitedUrl: invitedUrl,
+						inviteUrl: inviteUrl,
 						type: stream.fields.type,
 						title: stream.fields.title,
 						content: stream.fields.content
@@ -1069,7 +1069,7 @@ Streams.iconUrl = function(icon, size) {
 		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
-Streams.invitedUrl = function _Streams_invitedUrl(token) {
+Streams.inviteUrl = function _Streams_inviteUrl(token) {
 	return Q.url(Q.Config.get(['Streams', 'invites', 'baseUrl'], "i"))
 		+ "/" + token;
 };

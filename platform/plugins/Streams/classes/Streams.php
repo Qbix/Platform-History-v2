@@ -3177,14 +3177,15 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $streamName The name of the stream the user will be invited to
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
-	 * @param {string} [$who.platform] platform for which uids are passed
-	 * @param {string|array} [$who.uid]  platform uid or array of uids
+	 * @param {string} [$who.platform] platform for which xids are passed
+	 * @param {string|array} [$who.xid]  platform xid or array of xids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier] identifier such as an email or mobile number, or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
 	 *  with empty userId, which is used whenever someone shows up with the token
 	 *  and presents it via "Q.Streams.token" querystring parameter.
+	 *  This row is stored under "invite" key of the returned array
 	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
@@ -3205,8 +3206,8 @@ abstract class Streams extends Base_Streams
 	 * @throws Q_Exception_MissingFile
 	 * @throws Q_Exception_WrongValue
 	 * @return {array} Returns array with keys
-	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
+	 *  "success", "invite", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"
@@ -3269,7 +3270,7 @@ abstract class Streams extends Base_Streams
 			}
 			$users = Users::fetch($userIds, true);
 			$raw_userIds = array_keys($users);
-			foreach ($users as $uid => $user) {
+			foreach ($users as $xid => $user) {
 				$identifierTypes[] = 'userId';
 				$statuses[] = $user->sessionCount ? 'verified' : 'future';
 			}
@@ -3286,20 +3287,20 @@ abstract class Streams extends Base_Streams
 			$statuses = array_merge($statuses, $statuses1);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes1);
 		}
-		if (!empty($who['platform']) and !empty($who['uid'])) {
-			// merge users from platform uids
+		if (!empty($who['platform']) and !empty($who['xid'])) {
+			// merge users from platform xids
 			$platform = $who['platform'];
-			$uids = $who['uid'];
-			if (is_string($uids)) {
-				$uids = array_map('trim', explode("\t", $uids)) ;
+			$xids = $who['xid'];
+			if (is_string($xids)) {
+				$xids = array_map('trim', explode("\t", $xids)) ;
 			}
 			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromPlatformUids($platform, $uids, $statuses2)
+				Users_User::idsFromPlatformXids($platform, $xids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
-			$identifiers = array_merge($identifiers, $uids);
+			$identifiers = array_merge($identifiers, $xids);
 			$identifierTypes2 = array_fill(0, count($statuses2), $platform);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes2);
 		}
@@ -3441,7 +3442,11 @@ abstract class Streams extends Base_Streams
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;
 		}
-		$result = Q_Utils::queryInternal('Q/node', $params);
+		try {
+			$result = Q_Utils::queryInternal('Q/node', $params);
+		} catch (Exception $e) {
+			// just suppress it
+		}
 
 		$return = array(
 			'success' => $result,
@@ -3958,7 +3963,7 @@ abstract class Streams extends Base_Streams
 		return $fieldNames;
 	}
 	
-	static function invitedUrl ($token) {
+	static function inviteUrl ($token) {
 		$baseUrl = Q_Config::get(array('Streams', 'invites', 'baseUrl'), "i");
 		return Q_Html::themedUrl("$baseUrl/$token");
 	}
@@ -3986,6 +3991,39 @@ abstract class Streams extends Base_Streams
 			$p->load($path.DS.$v);
 		}
 		return $p;
+	}
+	
+	/**
+	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
+	 * containing additional querystring fields such as "userId", "expires"
+	 * and "sig" which is a signature truncated to have length specified in config
+	 * Streams/userInviteUrl/signature/length
+	 * @param {string} $userId The id of the user for whom to generate this url
+	 * @return {string}
+	 */
+	static function userInviteUrl($userId)
+	{
+		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
+		$fields = array(compact('userId', 'expires'));
+		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
+		Q_Utils::sign($fields, array('sig'));
+		$fields['sig'] = substr($fields['sig'], 0, $len);
+		$streamName = 'Streams/userInviteUrl';
+		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		if (!$stream) {
+			$stream = Streams::create($userId, $userId, 'Streams/text/url', array(
+				'name' => 'Streams/userInviteUrl',
+				'title' => 'User Invite URL'
+			));
+			$ret = $stream->invite(array('token' => true));
+			$invite = $ret['invite'];
+			$userInviteUrl = $invite->url() . '?' . http_build_query($fields, null, '&');
+			$stream->content = $userInviteUrl;
+			$stream->changed();
+		} else {
+			$userInviteUrl = $stream->content;
+		}
+		return $userInviteUrl;
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)

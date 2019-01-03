@@ -579,15 +579,15 @@
 	}
 
 	function _getFromStorage (type) {
-		return localStorage.getItem("Q\tUsers.Device." + type);
+		return localStorage.getItem("Q.Users.Device." + type);
 	}
 
 	function _setToStorage (type, value) {
-		localStorage.setItem("Q\tUsers.Device." + type, value);
+		localStorage.setItem("Q.Users.Device." + type, value);
 	}
 
 	function _removeFromStorage (type) {
-		localStorage.removeItem("Q\tUsers.Device." + type);
+		localStorage.removeItem("Q.Users.Device." + type);
 	}
 
 	// remove device info from localStorage when user logout

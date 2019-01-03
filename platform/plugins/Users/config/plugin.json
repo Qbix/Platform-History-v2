@@ -2,8 +2,8 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.2",
-				"compatible": "0.9.3",
+				"version": "1.0.4",
+				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
 				"connections": ["Users"]
@@ -32,6 +32,7 @@
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"Users/session": {"module": "Users", "action": "session"},
 			"login/facebook": {"module": "Users", "action": "facebook"}
 		},
 		"session": {
@@ -90,6 +91,9 @@
 			"noRegister": false,
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
 		},
+		"notices": {
+			"timeout": 5
+		},
 		"paths": {
 			"icons": "files/Users/icons",
 			"uploads": {
@@ -135,7 +139,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url", "uids"
+			"id", "username", "signedUpWith", "icon", "url", "xids"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"
@@ -144,8 +148,8 @@
 			"duration": "decade",
 			"terms": {
 				"uri": null,
-				"label": "I have read and agree<br>to the {{link}}",
-				"title": "Terms"
+				"label": ["Users/content", "authorize", "TermsLabel"],
+				"title": ["Users/content", "authorize", "TermsTitle"]
 			},
 			"stateMinLength": 10,
 			"clients": {
@@ -155,13 +159,16 @@
 		"register": {
 			"terms": {
 				"uri": "{{baseUrl}}/terms",
-				"label": "I accept the {{link}}",
-				"title": "Terms"
+				"label": ["Users/content", "register", "TermsLabel"],
+				"title": ["Users/content", "register", "TermsTitle"]
 			},
 			"icon": {
 				"leaveDefault": false
 			},
 			"delaySMS": 30000
+		},
+		"session": {
+			"redirectSecondsMax" : 300
 		},
 		"passphrase": {
 			"hashFunction": "sha1",
