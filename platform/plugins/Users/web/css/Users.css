@@ -333,8 +333,10 @@ a.Users_activation_resend:active {
 #Users_authorize_terms * { font-size: 14px; }
 #Users_login_dialog #Users_register_terms,
 #Users_login_dialog #Users_register_terms * { font-size: 14px; }
-#Users_authorize_buttons { padding: 10px; }
-#Users_authorize_buttons .Q_button { font-size: 36px; line-height: 80px; }
+#Users_authorize_buttons,
+#Users_session_buttons { padding: 10px; }
+#Users_authorize_buttons .Q_button,
+#Users_session_buttons .Q_button { font-size: 36px; line-height: 80px; }
 
 .Users_fromServer,
 .Users_fromYahoo { font-family: "Comic Sans MS"; font-weight: 100; }

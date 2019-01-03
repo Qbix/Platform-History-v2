@@ -5,27 +5,27 @@
  */
 
 /**
- * Class representing Android app user.
+ * Class representing iOS app user.
  *
- * @class Users_AppUser_Android
- * @extends Users_AppUser
+ * @class Users_ExternalFrom_Ios
+ * @extends Users_ExternalFrom
  */
-class Users_AppUser_Android extends Users_AppUser implements Users_AppUser_Interface
+class Users_ExternalFrom_Ios extends Users_ExternalFrom implements Users_ExternalFrom_Interface
 {
 	/**
-	 * Gets a Users_AppUser_Android object constructed from request and/or cookies.
+	 * Gets a Users_ExternalFrom_Ios object constructed from request and/or cookies.
 	 * It is your job to populate it with a user id and save it.
 	 * @constructor
 	 * @static
-	 * @param {string} [$appId=Q::app()] Can either be an interal appId or an Android appId.
+	 * @param {string} [$appId=Q::app()] Can either be an interal appId or an iOS appId.
 	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
 	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
-	 * @return {Users_AppUser_Android|null}
+	 * @return {Users_ExternalFrom_Ios|null}
 	 *  May return null if no such user is authenticated.
 	 */
 	static function authenticate($appId = null, $setCookie = true, $longLived = true)
 	{
-		list($appId, $appInfo) = Users::appInfo('android', $appId);
+		list($appId, $appInfo) = Users::appInfo('ios', $appId);
 		$platformAppId = (isset($appInfo['appId']) && isset($appInfo['secret']))
 			? $appInfo['appId']
 			: '';
@@ -34,14 +34,14 @@ class Users_AppUser_Android extends Users_AppUser implements Users_AppUser_Inter
 		if (!$udid) {
 			return null;
 		}
-		$appuser = new Users_AppUser_Android();
-		// note that $appuser->userId was not set
-		$appuser->platform = 'android';
-		$appuser->appId = $platformAppId;
-		$appuser->platform_uid = $udid;
-		$appuser->access_token = null;
-		$appuser->session_expires = null;
-		return $appuser;
+		$ef = new Users_ExternalFrom_Ios();
+		// note that $ef->userId was not set
+		$ef->platform = 'ios';
+		$ef->appId = $platformAppId;
+		$ef->xid = $udid;
+		$ef->accessToken = null;
+		$ef->expires = null;
+		return $ef;
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Users_AppUser_Android extends Users_AppUser implements Users_AppUser_Inter
 	 */
 	function import($fieldNames)
 	{
-		$platform = 'android';
+		$platform = 'ios';
 		if (!is_array($fieldNames)) {
 			$fieldNames = Q_Config::get('Users', 'import', $platform, null);
 		}

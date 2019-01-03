@@ -1160,8 +1160,8 @@ Streams.release = function (key) {
  *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {string} [options.platform] platform for which uids are passed
- *   @param {String} [options.uid] uid or arary of uids to invite
+ *   @param {string} [options.platform] platform for which xids are passed
+ *   @param {String} [options.xid] xid or arary of xids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
@@ -1211,7 +1211,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Q.handle(callback, null, [err, rsd]);
 			var emailAddresses = [];
 			var mobileNumbers = [];
-			var fb_uids = [];
+			var fb_xids = [];
 			Q.each(rsd.userIds, function (i, userId) {
 				if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
 					return;
@@ -1230,7 +1230,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case 'mobile': mobileNumbers.push(identifier); break;
 					case 'facebook': 
 						if (shouldFollowup === true) {
-							fb_uids.push(identifier[i]); 
+							fb_xids.push(identifier[i]); 
 						}
 						break;
 					case 'label':
@@ -1247,12 +1247,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					addresses: emailAddresses
 				},
 				facebook: {
-					uids: fb_uids
+					xids: fb_xids
 				}
 			}, callback);
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
-	if (o.identifier || o.token || o.uids || o.userIds || o.label) {
+	if (o.identifier || o.token || o.xids || o.userIds || o.label) {
 		return _request();
 	}
 	Q.prompt(
@@ -1288,7 +1288,7 @@ Streams.invite.options = {
  * @param {String} [options.email.alert] Override template for alert
  * @param {String} [options.email.confirm] Override template for confirmation dialog to continue
  * @param {Object} options.facebook
- * @param {Array} options.facebook.uids The facebook uids to send followup push notifications to messenger
+ * @param {Array} options.facebook.xids The facebook xids to send followup push notifications to messenger
  */
 Streams.followup = function (options, callback) {
 	var o = Q.extend({}, Streams.followup.options, 10, options);
@@ -2621,8 +2621,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {string} [options.platform] platform for which uids are passed
- *   @param {String} [options.uid] uid or arary of uids to invite
+ *   @param {string} [options.platform] platform for which xids are passed
+ *   @param {String} [options.xid] xid or arary of xids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
@@ -4364,7 +4364,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		var $this = $(this);
 		$this.removeData('cancelSubmit');
 		document.activeElement.blur();
-		if (!$('#Users_agree').is(':checked')) {
+		if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
 			$this.data('cancelSubmit', true);
 			setTimeout(function () {
 				if (confirm(Q.text.Users.login.confirmTerms)) {
@@ -4843,7 +4843,7 @@ Q.onInit.add(function _Streams_onInit() {
 			var messageType = Q.getObject(["type"], message);
 			var byUserId = Q.getObject(["byUserId"], message);
 			var content = Q.getObject(["content"], message);
-			var messageUrl = message.getInstruction('invitedUrl') || message.getInstruction('url');
+			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
 			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
 			var pluginName = messageType.split('/')[0];
 

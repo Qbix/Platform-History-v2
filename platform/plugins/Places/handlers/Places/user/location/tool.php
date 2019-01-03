@@ -14,7 +14,7 @@
  * @param {string} [$options.units] second parameter to pass to Places::distanceLabel()
  * @param {array} [$options.map] options for the map
  * @param {integer} [$options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
- * @param {string} [$options.map.prompt="img/map.png"] The src of the map graphical prompt when no location has been selected yet
+ * @param {string} [$options.map.prompt] The text of the prompt for when no location has been selected yet
  * @param {String} [$options.updateButton="Update my location"] the title of the update button
  * @param {string} [$options.onUpdate] name an event handler for when the location is updated
  * @param {string} [$options.onUnset] name an event handler for when the location is unset
@@ -27,9 +27,6 @@ function Places_user_location_tool($options)
 		foreach (Q_Config::expect('Places', 'nearby', 'meters') as $m) {
 			$options['meters'][$m] = Places::distanceLabel($m, $units);
 		}
-	}
-	if (empty($options['map']['prompt'])) {
-		$options['map']['prompt'] = Q_Html::themedUrl('Q/plugins/Places/img/map.png');
 	}
 	if (!isset($options['defaultMeters'])) {
 		$options['defaultMeters'] = Q_Config::expect('Places', 'nearby', 'defaultMeters');

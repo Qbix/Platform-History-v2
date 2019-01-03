@@ -65,9 +65,6 @@
 				"interval": 60
 			}
 		},
-		"external": {
-			"secret": null
-		},
 		"configFiles": ["Q/config/bootstrap.json"],
 		"install": {
 			"timeLimit": 600

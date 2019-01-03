@@ -131,7 +131,7 @@ Q.Tool.define('Users/friendSelector', function(o) {
 		for (i in friends)
 		{
 			var friendItem = $(
-				'<li data-uid="'+ friends[i].id + '">' +
+				'<li data-xid="'+ friends[i].id + '">' +
 					'<div class="Users_friendSelector_tool_user_picture">' +
 						'<img src="https://graph.facebook.com/' + friends[i].id + '/picture" alt="User picture" />' +
 					 '</div>' +
@@ -139,7 +139,7 @@ Q.Tool.define('Users/friendSelector', function(o) {
 				 '</li>'
 			);
 			friendItem.click(function() {
-				Q.handle(options.onSelect, this, [$(this).attr('data-uid')]);
+				Q.handle(options.onSelect, this, [$(this).attr('data-xid')]);
 			});
 			friendsList.append(friendItem);
 			}

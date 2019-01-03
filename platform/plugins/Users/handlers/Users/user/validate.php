@@ -45,7 +45,7 @@ function Users_user_validate()
 			'username' => $user->username,
 			'icon' => $user->icon,
 			'passphrase_set' => !empty($user->passphraseHash),
-			'uids' => $user->getAllUids()
+			'xids' => $user->getAllXids()
 		);
 	}
 	if ($type === 'email') {

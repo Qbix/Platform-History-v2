@@ -7,6 +7,19 @@
 		"IfYouFeel": "If you feel something went wrong, you can ",
 		"SetIdentifierButtonTitle": "start over"
 	},
+	"session": {
+		"GetStarted": "Get Started"
+	},
+	"authorize": {
+		"GetStarted": "Get Started",
+		"Authorize": "Authorize",
+		"TermsLabel": "I have read and agree<br>to the {{link}}",
+		"TermsTitle": "Terms"
+	},
+	"register": {
+		"TermsLabel": "I accept the {{link}}",
+		"TermsTitle": "Terms"
+	},
 	"notifications": {
 		"title": "Permission",
 		"prompt": "Do you want to enable notifications?",
