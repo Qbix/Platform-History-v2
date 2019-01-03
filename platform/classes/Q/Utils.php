@@ -31,13 +31,13 @@ class Q_Utils
 	 * @method signature
 	 * @static
 	 * @param {array|string} $data
-	 * @param {string} $secret
+	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {string}
 	 */
-	static function signature($data, $secret)
+	static function signature($data, $secret = null)
 	{
 		if (!isset($secret)) {
-			throw new Q_Exception("Q_Utils::signature is expecting a \$secret");
+			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
 		if (is_array($data)) {
 			ksort($data);
@@ -54,7 +54,7 @@ class Q_Utils
 	 * @param {array} $data The array of data
 	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
 	 * @param {string} [$secret] A different secret to use for generating the signature
-	 * @return {array}
+	 * @return {array} The data, with the signature added
 	 */
 	static function sign($data, $fieldKeys = null, $secret = null) {
 		if (!isset($secret)) {
@@ -565,11 +565,18 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
 	 * @param {string} [$header=null] Optional string to replace the entire POST header
-	 * @return {string} The response.
+	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	static function post ($url, $data, $user_agent = null, $follow_redirects = true, $header = null, $conn_t = 120, $res_t = 120)
+	static function post (
+		$url, 
+		$data, 
+		$user_agent = null, 
+		$follow_redirects = true, 
+		$header = null, 
+		$conn_t = Q_UTILS_CONNECTION_TIMEOUT, 
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
 		return Q_Utils::request('POST', $url, $data, $user_agent, $follow_redirects, $header, $conn_t, $res_t);
 	}
@@ -584,7 +591,7 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
 	 * @param {string} [$header=null] Optional string to replace the entire GET header
-	 * @return {string} The response.
+	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
@@ -606,7 +613,7 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
 	 * @param {string} [$header=null] Optional string to replace the entire header
-	 * @return {string} The response.
+	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
@@ -706,7 +713,7 @@ class Q_Utils
 	}
 
 	/**
-	 * Queries a server externally to the specified handler. Expects json array with 
+	 * Queries an external server. Expects json object with 
 	 * either ['slots']['data'] or ['error'] fields filled
 	 * @method queryExternal
 	 * @static
@@ -734,7 +741,14 @@ class Q_Utils
 			$server = "$url/action.php/$handler";
 		}
 
-		$result = json_decode(self::post($server, self::sign($data)), null, true, null, Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT, true);
+		$response = self::post(
+			$server, self::sign($data), null, true, null, 
+			Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT
+		);
+		if (empty($result)) {
+			throw new Q_Exception("Utils::queryExternal: not sent");
+		}
+		$result = Q::json_decode($response, true);
 		
 		// TODO: check signature of returned data
 
@@ -778,10 +792,14 @@ class Q_Utils
 			$server = "$url/$handler";
 		}
 
-		$result = Q::json_decode(self::post(
+		$response = self::post(
 			$server, self::sign($data), null, true, null, 
-			Q_UTILS_INTERNAL_TIMEOUT, Q_UTILS_INTERNAL_TIMEOUT
-		), true);
+			Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT
+		);
+		if (empty($result)) {
+			throw new Q_Exception("Utils::queryInternal: not sent");
+		}
+		$result = Q::json_decode($response, true);
 
 		// TODO: check signature of returned data
 

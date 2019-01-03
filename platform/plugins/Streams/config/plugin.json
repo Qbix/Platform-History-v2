@@ -389,6 +389,10 @@
 			"layout": {
 				"default": "Streams/layout/invitations.php"
 			},
+			"signature": {
+				"length": 10
+			},
+			"expires": 86400,
 			"subpath": "{{app}}/uploads/Streams/invitations",
 			"sort": {}
 		},

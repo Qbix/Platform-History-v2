@@ -3,6 +3,9 @@
 function Streams_validate_stream($params)
 {
 	extract($params);
+	/**
+	 * @var $stream
+	 */
 	switch ($stream->name) {
 		case 'Streams/user/firstName':
 		case 'Streams/user/lastName':

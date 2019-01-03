@@ -24,6 +24,15 @@ class Streams_Invite extends Base_Streams_Invite
 	}
 	
 	/**
+	 * Returns the shareable URL corresponding to the invite
+	 * @return {string}
+	 */
+	function url()
+	{
+		return Streams::inviteUrl($this->token);
+	}
+	
+	/**
 	 * Get the invites that have been left for one or more users in some stream.
 	 * This is useful for auto-accepting them or presenting the user with a
 	 * button to accept the invite when the stream is rendered on their client.
