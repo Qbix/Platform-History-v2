@@ -3185,6 +3185,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
 	 *  with empty userId, which is used whenever someone shows up with the token
 	 *  and presents it via "Q.Streams.token" querystring parameter.
+	 *  This row is stored under "invite" key of the returned array
 	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
@@ -3205,7 +3206,7 @@ abstract class Streams extends Base_Streams
 	 * @throws Q_Exception_MissingFile
 	 * @throws Q_Exception_WrongValue
 	 * @return {array} Returns array with keys
-	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  "success", "invite", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
 	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
@@ -3441,7 +3442,11 @@ abstract class Streams extends Base_Streams
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;
 		}
-		$result = Q_Utils::queryInternal('Q/node', $params);
+		try {
+			$result = Q_Utils::queryInternal('Q/node', $params);
+		} catch (Exception $e) {
+			// just suppress it
+		}
 
 		$return = array(
 			'success' => $result,
@@ -3958,7 +3963,7 @@ abstract class Streams extends Base_Streams
 		return $fieldNames;
 	}
 	
-	static function invitedUrl ($token) {
+	static function inviteUrl ($token) {
 		$baseUrl = Q_Config::get(array('Streams', 'invites', 'baseUrl'), "i");
 		return Q_Html::themedUrl("$baseUrl/$token");
 	}
@@ -3986,6 +3991,39 @@ abstract class Streams extends Base_Streams
 			$p->load($path.DS.$v);
 		}
 		return $p;
+	}
+	
+	/**
+	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
+	 * containing additional querystring fields such as "userId", "expires"
+	 * and "sig" which is a signature truncated to have length specified in config
+	 * Streams/userInviteUrl/signature/length
+	 * @param {string} $userId The id of the user for whom to generate this url
+	 * @return {string}
+	 */
+	static function userInviteUrl($userId)
+	{
+		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
+		$fields = array(compact('userId', 'expires'));
+		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
+		Q_Utils::sign($fields, array('sig'));
+		$fields['sig'] = substr($fields['sig'], 0, $len);
+		$streamName = 'Streams/userInviteUrl';
+		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		if (!$stream) {
+			$stream = Streams::create($userId, $userId, 'Streams/text/url', array(
+				'name' => 'Streams/userInviteUrl',
+				'title' => 'User Invite URL'
+			));
+			$ret = $stream->invite(array('token' => true));
+			$invite = $ret['invite'];
+			$userInviteUrl = $invite->url() . '?' . http_build_query($fields, null, '&');
+			$stream->content = $userInviteUrl;
+			$stream->changed();
+		} else {
+			$userInviteUrl = $stream->content;
+		}
+		return $userInviteUrl;
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)

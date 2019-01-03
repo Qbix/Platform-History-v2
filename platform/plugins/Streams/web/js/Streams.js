@@ -4842,7 +4842,7 @@ Q.onInit.add(function _Streams_onInit() {
 			var messageType = Q.getObject(["type"], message);
 			var byUserId = Q.getObject(["byUserId"], message);
 			var content = Q.getObject(["content"], message);
-			var messageUrl = message.getInstruction('invitedUrl') || message.getInstruction('url');
+			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
 			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
 			var pluginName = messageType.split('/')[0];
 
