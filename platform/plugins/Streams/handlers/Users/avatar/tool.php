@@ -90,6 +90,8 @@ function Users_avatar_tool($options)
 	}
 	if (!empty($options['show'])) {
 		$o['show'] = $options['show'];
+	}
+	if (!empty($o['show'])) {
 		$displayName = $avatar->displayName($o, 'Someone');
 		$result .= "<span class='Users_avatar_name'>$displayName</span>";
 	}
