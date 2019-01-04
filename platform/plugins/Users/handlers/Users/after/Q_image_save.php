@@ -17,7 +17,7 @@ function Users_after_Q_image_save($params, &$return)
 	$prefix = "Q/uploads/Users/$splitId/icon";
 	Q_Utils::normalizePath($prefix);
 
-	if (Q::startsWith($fullpath, $prefix) {
+	if (Q::startsWith($fullpath, $prefix)) {
 		// modification of logged user icon
 		if ($user->icon != $subpath) {
 			$user->icon = Q_Html::themedUrl("$path/$subpath");
