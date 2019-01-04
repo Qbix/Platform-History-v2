@@ -17,7 +17,8 @@ function Users_after_Q_image_save($params, &$return)
 	$prefix = "Q/uploads/Users/$splitId/icon";
 	Q_Utils::normalizePath($prefix);
 
-	if (substr($fullpath, 0, strlen($prefix)) === $prefix) { // modification of logged user icon
+	if (Q::startsWith($fullpath, $prefix) {
+		// modification of logged user icon
 		if ($user->icon != $subpath) {
 			$user->icon = Q_Html::themedUrl("$path/$subpath");
 			$user->save(); // triggers any registered hooks
@@ -25,7 +26,8 @@ function Users_after_Q_image_save($params, &$return)
 		} else {
 			Users::$cache['iconUrlWasChanged'] = false;
 		}
-	} else { // modification of another user
+	} else if (Q::startsWith($fullpath, "Q/uploads/Users")) {
+		// modification of another user
 		// trying to fetch userId from subpath
 		$anotherUserId = preg_replace('/\/icon.*/', '', $subpath);
 		$anotherUserId = preg_replace('/\//', '', $anotherUserId);
