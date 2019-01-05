@@ -422,12 +422,14 @@ Places.units = {
 	miles: "miles"
 };
 
-Q.Text.get('Places/content', function (err, text) {
-	if (!text) {
-		return;
-	}
-	Places.units = text.units;
-});
+Q.onInit.add(function () {
+	Q.Text.get('Places/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Places.units = text.units;
+	});
+}, 'Q.Places');
 
 var Cp = Places.Coordinates.prototype;
 	
