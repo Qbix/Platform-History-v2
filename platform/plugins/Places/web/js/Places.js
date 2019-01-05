@@ -103,7 +103,7 @@ var Places = Q.Places = Q.plugins.Places = {
 			if (mi === 1 && units === 'miles') {
 				units = 'mile';
 			}
-			return val+' '+displayUnits;
+			return mi+' '+displayUnits;
 		case 'km':
 		case 'kilometers':
 		default:
