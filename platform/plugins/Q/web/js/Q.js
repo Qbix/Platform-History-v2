@@ -9206,12 +9206,13 @@ Q.Text = {
 Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
+	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
 		if (!err) {
 			Q.Text.set(name, content, options);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
-	}, options);
+	}, o);
 }, {
 	cache: Q.Cache.document('Q.Text.get', 100),
 	throttle: 'Q.Text.get'
