@@ -10,7 +10,8 @@
  * @param {boolean} [options.short]
  *   Optional. Renders the short version of the display name.
  * @param {boolean|integer} [options.icon=false]
- *   Optional. Pass the size in pixels of the (square) icon to render
+ *   By default, the value is false, so the icon is not rendered.
+ *   Pass the size in pixels of the (square) icon to render
  *   before the username. Or pass true to render the default size.
  * @param {array} [options.iconAttributes]
  *   Optional. Array of attributes to render for the icon.
@@ -88,13 +89,11 @@ function Users_avatar_tool($options)
 			$s->addPreloaded();
 		}
 	}
-	if (!empty($options['show'])) {
+	if (isset($options['show'])) {
 		$o['show'] = $options['show'];
 	}
-	if (!empty($o['show'])) {
-		$displayName = $avatar->displayName($o, 'Someone');
-		$result .= "<span class='Users_avatar_name'>$displayName</span>";
-	}
+	$displayName = $avatar->displayName($o, 'Someone');
+	$result .= "<span class='Users_avatar_name'>$displayName</span>";
 
 	// define 'content' if 'show' defined
 	// if 'show' empty - means 'content'=false
