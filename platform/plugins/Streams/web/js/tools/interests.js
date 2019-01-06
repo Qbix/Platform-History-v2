@@ -78,7 +78,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				count += Object.keys(interests).length;
 			});
 			var expandableOptions = Q.extend({
-				title: "<img src='"+src+"'>"
+				title: "<img src='"+Q.url(src)+"'>"
 					+"<span class='Streams_interests_category_title'>"+category+"</span>",
 				content: content,
 	            count: '',
