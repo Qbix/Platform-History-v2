@@ -65,7 +65,9 @@ Q.Tool.define("Streams/interests", function (options) {
 		state.communityId = state.communityId || Q.Users.communityId;
 	
 		function addExpandable(category, interests) {
-			var img = "<i class='qp-communities-" + category.toLowerCase() + " white'></i>";
+			var color = Q.getObject([
+				Q.Users.communityId, category, 'white'
+			], Streams.Interests.info);
 			var content = '';
 			var count = 0;
 			Q.each(interests, function (subcategory, interests) {
