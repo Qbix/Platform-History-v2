@@ -331,6 +331,7 @@ Q.Tool.define("Places/location", function (options) {
 				}).geocode(function (err, results) {
 					var loc = Q.getObject([0, 'geometry', 'location'], results);
 					Q.handle(state.onChoose, tool, [this, loc]);
+					$this.removeClass('Q_working');
 				});
 			}, function (err) {
 				Q.handle(state.onChoose, tool, [null, null]);
