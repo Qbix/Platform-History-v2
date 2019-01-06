@@ -148,8 +148,8 @@
 			"duration": "decade",
 			"terms": {
 				"uri": null,
-				"label": ["Users/content", "authorize", "TermsLabel"],
-				"title": ["Users/content", "authorize", "TermsTitle"]
+				"label": ["Users/content", ["authorize", "TermsLabel"]],
+				"title": ["Users/content", ["authorize", "TermsTitle"]]
 			},
 			"stateMinLength": 10,
 			"clients": {
