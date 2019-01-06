@@ -15,7 +15,7 @@ function Users_authorize_response()
 	$response_type = 'token';
 	$token_type = 'bearer';
 	$appId = $client_id = $req['client_id'];
-	$scope = Users_OAuth::requestedScope($appId, true, $scopes);
+	$scope = Users_OAuth::requestedScope($appId, true);
 	$remaining = $scope;
 	$state = $req['state'];
 	$platform = Q_Request::platform();
@@ -32,9 +32,9 @@ function Users_authorize_response()
 	if (empty($info['paths'])) {
 		throw new Q_Exception("Client app must have paths array in config", 'client_id');
 	}
-	$paths = $appInfo['paths'];
-	$path = substr($redirect_uri, $info['baseUrl']+1);
-	if (!Q::startsWith($redirect_uri, $client->url)
+	$paths = $info['paths'];
+	$path = substr($redirect_uri, strlen($info['baseUrl'])+1);
+	if (!Q::startsWith($redirect_uri, $info['baseUrl'])
 	or (is_array($paths) and !in_array($path, $paths))) {
 		throw new Users_Exception_Redirect(array('uri' => $redirect_uri));
 	}

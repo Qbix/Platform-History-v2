@@ -29,8 +29,8 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.xid] defaults to ""
  * @param {string} [$fields.responseType] defaults to null
  * @param {string} [$fields.accessToken] defaults to null
- * @param {string} [$fields.extra] defaults to null
- * @param {integer} [$fields.expires] defaults to 0
+ * @param {string|Db_Expression} [$fields.expires] defaults to null
+ * @param {string} [$fields.extra] defaults to "{}"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -78,7 +78,7 @@ Q.mixin(Base, Row);
  * @property responseType
  * @type String
  * @default null
- * The type of oAuth 2 grant
+ * The type of oAuth 2 response
  */
 /**
  * @property accessToken
@@ -87,16 +87,16 @@ Q.mixin(Base, Row);
  * Bearer token given to the client to access resources
  */
 /**
- * @property extra
- * @type String
+ * @property expires
+ * @type String|Db.Expression
  * @default null
- * 
+ * When the token expires
  */
 /**
- * @property expires
- * @type Integer
- * @default 0
- * How many seconds until token expires
+ * @property extra
+ * @type String
+ * @default "{}"
+ * JSON with any extra attributes
  */
 
 /**
@@ -316,8 +316,8 @@ Base.fieldNames = function () {
 		"xid",
 		"responseType",
 		"accessToken",
-		"extra",
-		"expires"
+		"expires",
+		"extra"
 	];
 };
 
@@ -535,7 +535,7 @@ return [["varchar","200","",false],false,"",""];
 Base.prototype.beforeSet_responseType = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (['token'].indexOf(value) < 0)
+		if (['token','code'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".responseType");
 		return value;
 };
@@ -546,7 +546,7 @@ Base.prototype.beforeSet_responseType = function (value) {
 	 */
 Base.column_responseType = function () {
 
-return [["enum","'token'","",false],true,"",null];
+return [["enum","'token','code'","",false],true,"",null];
 };
 
 /**
@@ -586,6 +586,32 @@ return [["varchar","1023","",false],true,"",null];
 };
 
 /**
+ * Method is called before setting the field
+ * @method beforeSet_expires
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_expires = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for expires column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_expires = function () {
+
+return [["timestamp","1023","",false],true,"",null];
+};
+
+/**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
  * @method beforeSet_extra
@@ -618,43 +644,7 @@ Base.prototype.maxSize_extra = function () {
 	 */
 Base.column_extra = function () {
 
-return [["varchar","1023","",false],true,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_expires
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
- */
-Base.prototype.beforeSet_expires = function (value) {
-		if (value == undefined) return value;
-		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".expires");
-		if (value < -2147483648 || value > 2147483647)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".expires");
-		return value;
-};
-
-/**
- * Returns the maximum integer that can be assigned to the expires field
- * @return {integer}
- */
-Base.prototype.maxSize_expires = function () {
-
-		return 2147483647;
-};
-
-	/**
-	 * Returns schema information for expires column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_expires = function () {
-
-return [["int","11","",false],true,"",null];
+return [["varchar","1023","",false],true,"","{}"];
 };
 
 Base.prototype.beforeSave = function (value) {
