@@ -4435,7 +4435,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	if (json.emailExists || json.mobileExists) {
 		var p = $('<p id="Streams_login_identifierExists" />')
 			.html(json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists);
-		$('a', p).click(function() {
+		$('a', p).click(function () {
+			$(this).addClass('Q_working');
 			$.post(Q.ajaxExtend(Q.action("Users/resend"), 'data'), 'identifier='+encodeURIComponent(identifier), function () {
 				overlay.close();
 			});

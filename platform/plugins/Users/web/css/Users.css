@@ -311,9 +311,10 @@
 
 #Users_login_resend_success { text-align: center; }
 
-a.Users_activation_resend {
-	display: inline-block;
-	padding: 3px 5px;
+a.Users_activation_resend:link,
+a.Users_activation_resend:visited,
+a.Users_activation_resend:active {
+	color: #fff;
 	background: green;
 }
 
