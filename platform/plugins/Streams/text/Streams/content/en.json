@@ -5,7 +5,8 @@
 	"interests": {
 		"Filter": "What do you enjoy?",
 		"CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-		"TrySynonyms": "Don't see it? Try some synonyms."
+		"TrySynonyms": "Don't see it? Try some synonyms.",
+		"Other": "Other"
 	},
 	"chat": {
 		"flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
