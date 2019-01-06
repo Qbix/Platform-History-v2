@@ -3999,9 +3999,11 @@ abstract class Streams extends Base_Streams
 	 * and "sig" which is a signature truncated to have length specified in config
 	 * Streams/userInviteUrl/signature/length
 	 * @param {string} $userId The id of the user for whom to generate this url
+	 * @param {Streams_Invite} [&$invite=null] You can pass a variable reference here
+	 *  to be filled with the Streams_Invite object.
 	 * @return {string}
 	 */
-	static function userInviteUrl($userId)
+	static function userInviteUrl($userId, &$invite = null)
 	{
 		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
 		$fields = array(compact('userId', 'expires'));
