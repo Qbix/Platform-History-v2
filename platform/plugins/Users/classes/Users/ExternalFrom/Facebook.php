@@ -112,7 +112,9 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 			$ef->appId = $appId;
 			$ef->xid = $result['userID'];
 			$ef->accessToken = $result['accessToken'];
-			$ef->expires = $result['expires'];
+			$ef->expires = is_integer($result['expires'])
+				? $result['expires']
+				: Db::fromDateTime($result['expires']);
 			$ef->facebook = $facebook;
 			return $ef;
 		}
