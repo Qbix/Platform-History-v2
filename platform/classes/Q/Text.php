@@ -187,6 +187,6 @@ class Q_Text
 	static function clickOrTap($word = 'click')
 	{
 		$text = Q_Text::get('Q/content');
-		return Q::ifset($text, 'words', $word);
+		return Q::ifset($text, 'words', $word, $word);
 	}
 }
