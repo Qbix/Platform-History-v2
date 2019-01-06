@@ -49,7 +49,7 @@ function Users_authorize_post($params = array())
 	$duration_name = Q_Config::expect('Users', 'authorize', 'duration');
 	$duration = Q_Config::expect('Q', 'session', 'durations', $duration_name);
 	$sessionFields = Q_Request::userAgentInfo();
-	$sessionFields['appId'] = $appInfo['appId'];
+	$sessionFields['appId'] = $appId;
 	if (isset($_REQUEST['deviceId'])) {
 		$sessionFields['deviceId'] = $_REQUEST['deviceId'];
 	}

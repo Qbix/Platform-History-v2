@@ -24,8 +24,8 @@
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.responseType] defaults to null
  * @param {string} [$fields.accessToken] defaults to null
- * @param {string} [$fields.extra] defaults to null
- * @param {integer} [$fields.expires] defaults to 0
+ * @param {string|Db_Expression} [$fields.expires] defaults to null
+ * @param {string} [$fields.extra] defaults to "{}"
  */
 abstract class Base_Users_ExternalFrom extends Db_Row
 {
@@ -69,7 +69,7 @@ abstract class Base_Users_ExternalFrom extends Db_Row
 	 * @property $responseType
 	 * @type string
 	 * @default null
-	 * The type of oAuth 2 grant
+	 * The type of oAuth 2 response
 	 */
 	/**
 	 * @property $accessToken
@@ -78,16 +78,16 @@ abstract class Base_Users_ExternalFrom extends Db_Row
 	 * Bearer token given to the client to access resources
 	 */
 	/**
-	 * @property $extra
-	 * @type string
+	 * @property $expires
+	 * @type string|Db_Expression
 	 * @default null
-	 * 
+	 * When the token expires
 	 */
 	/**
-	 * @property $expires
-	 * @type integer
-	 * @default 0
-	 * How many seconds until token expires
+	 * @property $extra
+	 * @type string
+	 * @default "{}"
+	 * JSON with any extra attributes
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -619,7 +619,7 @@ return array (
 		if ($value instanceof Db_Expression) {
 			return array('responseType', $value);
 		}
-		if (!in_array($value, array('token')))
+		if (!in_array($value, array('token','code')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".responseType");
 		return array('responseType', $value);			
 	}
@@ -635,7 +635,7 @@ return array (
   0 => 
   array (
     0 => 'enum',
-    1 => '\'token\'',
+    1 => '\'token\',\'code\'',
     2 => '',
     3 => false,
   ),
@@ -700,6 +700,55 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_expires
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_expires($value)
+	{
+		if (!isset($value)) {
+			return array('expires', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('expires', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDateTime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d H:i:s");
+		return array('expires', $value);			
+	}
+
+	/**
+	 * Returns schema information for expires column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_expires()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_extra
@@ -749,64 +798,7 @@ return array (
   ),
   1 => true,
   2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_expires
-	 * @param {integer} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
-	 */
-	function beforeSet_expires($value)
-	{
-		if (!isset($value)) {
-			return array('expires', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('expires', $value);
-		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".expires");
-		$value = intval($value);
-		if ($value < -2147483648 or $value > 2147483647) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".expires");
-		}
-		return array('expires', $value);			
-	}
-
-	/**
-	 * @method maxSize_expires
-	 * Returns the maximum integer that can be assigned to the expires field
-	 * @return {integer}
-	 */
-	function maxSize_expires()
-	{
-
-		return 2147483647;			
-	}
-
-	/**
-	 * Returns schema information for expires column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_expires()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'int',
-    1 => '11',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => NULL,
+  3 => '{}',
 );			
 	}
 
@@ -828,7 +820,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('platform', 'appId', 'xid', 'insertedTime', 'updatedTime', 'userId', 'responseType', 'accessToken', 'extra', 'expires');
+		$field_names = array('platform', 'appId', 'xid', 'insertedTime', 'updatedTime', 'userId', 'responseType', 'accessToken', 'expires', 'extra');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
