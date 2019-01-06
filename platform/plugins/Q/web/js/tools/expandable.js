@@ -130,12 +130,18 @@ Q.Tool.define('Q/expandable', function (options) {
 			var defaultSpaceAbove = $element.height() / 2;
 			var moreSpaceAbove = 0;
 			var $ts = $expandable.closest('.Q_columns_column').find('.Q_columns_title');
+			var scrollableRect = $scrollable[0].getBoundingClientRect();
 			if ($ts.length && $ts.css('position') === 'fixed') {
 				moreSpaceAbove = $ts.outerHeight();
 			} else {
 				$('body').children().each(function () {
 					var $this = $(this);
-					if ($this.css('position') === 'fixed') {
+					var fixedRect = this.getBoundingClientRect();
+					var midpoint = (scrollableRect.left + scrollableRect.right) / 2;
+					if ($this.css('position') === 'fixed'
+					&& fixedRect.left <= midpoint
+					&& fixedRect.right >= midpoint
+					&& fixedRect.top <= scrollableRect.top) {
 						var top = $this.offset().top - Q.Pointer.scrollTop();
 						if (top < 100) {
 							moreSpaceAbove = top + $this.outerHeight();
