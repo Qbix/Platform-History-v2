@@ -707,7 +707,8 @@
 }
 
 
-.Streams_interests_subcategory {
+.Streams_interests_subcategory,
+.Streams_interests_other {
 	text-align: center;
 	opacity: 0.5;
 	font-weight: 200;
