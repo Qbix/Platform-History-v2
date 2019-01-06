@@ -138,7 +138,9 @@ Q.Tool.define("Streams/interests", function (options) {
 						}
 						var $other = $expandable.find('.Streams_interests_other');
 						if (!$other.length) {
-							$other = $('<h3 class="Streams_interests_other">Other</h3>')
+							var otherText = text.interests.Other;
+							$other = $('<h3 class="Streams_interests_other"></h3>')
+								.html(otherText)
 								.appendTo($content);
 						}
 						var id = 'Streams_interest_title_' + normalized;
