@@ -6935,11 +6935,11 @@ Q.formPost.counter = 0;
 
 /**
  * Requests a diff from the server to find any updates to files since
- * the last Q.ut timestamp, then saves current timestamp in Q.ut cookie.
+ * the last Q_ut timestamp, then saves current timestamp in Q_ut cookie.
  * @param {Function} callback
  */
 Q.updateUrls = function(callback) {
-	var timestamp, url, json, ut = Q.cookie('Q.ut');
+	var timestamp, url, json, ut = Q.cookie('Q_ut');
 	if (ut) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
@@ -6951,7 +6951,7 @@ Q.updateUrls = function(callback) {
 			json = JSON.stringify(Q.updateUrls.urls);
 			localStorage.setItem(Q.updateUrls.lskey, json);
 			if (timestamp = result['#timestamp']) {
-				Q.cookie('Q.ut', timestamp);
+				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000});
@@ -6961,7 +6961,7 @@ Q.updateUrls = function(callback) {
 			json = JSON.stringify(Q.updateUrls.urls);
 			localStorage.setItem(Q.updateUrls.lskey, json);
 			if (timestamp = result['#timestamp']) {
-				Q.cookie('Q.ut', timestamp);
+				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000});
@@ -13207,6 +13207,9 @@ Q.beforeInit.addOnce(function () {
 	if (_udid) {
 		Q.info.udid = _udid;
 		Q.cookie('Q_udid', _udid);
+	}
+	if (Q.info.cookies.indexOf('Q_dpr')) {
+		Q.cookie('Q_dpr', window.devicePixelRatio);
 	}
 	// This loads bluebird library to enable Promise for browsers which do not
 	// support Promise natively. For example: IE, Opera Mini.
