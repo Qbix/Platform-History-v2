@@ -84,4 +84,5 @@ function Q_before_Q_responseExtras()
 	$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
 	$config['updateBeforeInit'] = (!empty($config['integrity']) or !empty($config['caching']));
 	Q_Response::setScriptData('Q.info.urls', $config);
+	Q_Response::setScriptData('Q.info.cookies', array('Q_cordova', 'Q_nonce', 'Q_dpr'));
 }
