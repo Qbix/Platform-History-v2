@@ -175,4 +175,18 @@ class Q_Text
 		}
 		return $tree->getAll();
 	}
+	
+	/**
+	 * Depending on whether the client is a touchscreen or not,
+	 * returns either the word "click" or "tap" in the current language,
+	 * @method clickOrTap
+	 * @static
+	 * @param {string} [$word='click'] Can be either "click" or "Click"
+	 * @return {string}
+	 */
+	function clickOrTap($word = 'click')
+	{
+		$text = Q_Text::get('Q/content');
+		return Q::ifset($text, 'words', $word);
+	}
 }
