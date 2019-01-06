@@ -10958,7 +10958,7 @@ Q.Pointer = {
 							}
 							return; // perhaps it disappeared
 						}
-						var offset = Q.Pointer.offset(target);
+						var offset = target.getBoundingClientRect(); //Q.Pointer.offset(target)
 						point = {
 							x: offset.left + target.offsetWidth / 2,
 							y: offset.top + target.offsetHeight / 2

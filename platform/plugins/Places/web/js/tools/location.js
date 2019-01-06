@@ -125,7 +125,7 @@ Q.Tool.define("Places/location", function (options) {
 	 */
 	selectLocation: function(){
 		var tool = this;
-		var state = tool.state;
+		var state = this.state;
 		var $te = $(tool.element);
 		var userId = state.publisherId || Users.loggedInUserId();
 
@@ -155,6 +155,13 @@ Q.Tool.define("Places/location", function (options) {
 
 					// set showLocations state.
 					if (state.showLocations && userId) {
+						// if logged user is not a publisher of Places/user/locations
+						// need to participate this user to this category to allow
+						// get messages about changes
+						if (userId !== Users.loggedInUserId()) {
+							Streams.Stream.join(userId, 'Places/user/locations');
+						}
+
 						tool.$(".Places_location_related")
 							.tool('Streams/related', {
 								publisherId: userId,
@@ -167,7 +174,7 @@ Q.Tool.define("Places/location", function (options) {
 							}, tool.prefix + 'relatedLocations')
 							.activate(function () {
 								tool.relatedTool = this;
-							});
+						});
 					}
 
 					function _onChoose(place) {
@@ -196,6 +203,7 @@ Q.Tool.define("Places/location", function (options) {
 							if (result.place_id) {
 								attributes.placeId = result.place_id;
 							}
+
 							var textConfirm = text.location.confirm;
 							Q.confirm(textConfirm.message, function (shouldSave) {
 								if (!shouldSave) {
@@ -206,9 +214,9 @@ Q.Tool.define("Places/location", function (options) {
 									if (!title) {
 										return;
 									}
-									var publisherId = state.publisherId || userId;
+
 									Streams.create({
-										publisherId: publisherId,
+										publisherId: userId,
 										type: 'Places/location',
 										title: title,
 										attributes: attributes,
@@ -216,17 +224,17 @@ Q.Tool.define("Places/location", function (options) {
 										writeLevel: 0,
 										adminLevel: 0
 									}, function (err) {
-										if (!err) {
-											var sf = this.fields;
-											tool.relatedTool.state.onRefresh.setOnce(
-											function (previews, map, entering, exiting, updating) {
-												var key = Q.firstKey(entering);
-												var index = map[key];
-												var preview = previews[index];
-												Q.Pointer.canceledClick = false;
-												tool.toggle(preview.element);
-											});
+										if (err) {
+											return;
 										}
+
+										tool.relatedTool.state.onRefresh.setOnce(function (previews, map, entering, exiting, updating) {
+											var key = Q.firstKey(entering);
+											var index = map[key];
+											var preview = previews[index];
+											Q.Pointer.canceledClick = false;
+											tool.toggle(preview.element);
+										});
 									}, {
 										publisherId: userId,
 										streamName: 'Places/user/locations',
@@ -251,6 +259,7 @@ Q.Tool.define("Places/location", function (options) {
 
 							$te.find(".Q_selected").removeClass("Q_selected");
 							$(tool.addressTool.element).addClass('Q_selected');
+							this.stream = null;
 							Q.handle(state.onChoose, tool, [this, result.geometry.location]);
 						});
 					}
@@ -341,8 +350,10 @@ Q.Tool.define("Places/location", function (options) {
 		var locationPreviewTool = Q.Tool.from($this, "Streams/preview");
 		var ls = locationPreviewTool.state;
 		Streams.get(ls.publisherId, ls.streamName, function () {
-			Places.Coordinates.from(this).geocode(function (err, results) {
+			var locationStream = this;
+			Places.Coordinates.from(locationStream).geocode(function (err, results) {
 				var loc = Q.getObject([0, 'geometry', 'location'], results);
+				this.stream = locationStream;
 				Q.handle(state.onChoose, tool, [this, loc]);
 			});
 		});
