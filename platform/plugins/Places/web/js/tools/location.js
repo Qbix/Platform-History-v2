@@ -74,6 +74,7 @@ Q.Tool.define("Places/location", function (options) {
 },
 
 { // default options here
+	publisherId: null,
 	geocode: null,
 	onChoose: new Q.Event(function (coordinates) {
 		this.state.location = coordinates;
@@ -126,7 +127,7 @@ Q.Tool.define("Places/location", function (options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
-		var userId = Users.loggedInUserId();
+		var userId = state.publisherId || Users.loggedInUserId();
 
 		Q.Text.get('Places/content', function (err, text) {
 			Q.Template.render('Places/location/select', Q.extend({
