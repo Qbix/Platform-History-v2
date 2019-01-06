@@ -65,7 +65,7 @@ Q.Tool.define("Streams/interests", function (options) {
 		state.communityId = state.communityId || Q.Users.communityId;
 	
 		function addExpandable(category, interests) {
-			var color = Q.getObject([
+			var src = Q.getObject([
 				Q.Users.communityId, category, 'white'
 			], Streams.Interests.info);
 			var content = '';
@@ -78,7 +78,8 @@ Q.Tool.define("Streams/interests", function (options) {
 				count += Object.keys(interests).length;
 			});
 			var expandableOptions = Q.extend({
-				title: img+"<span class='Streams_interests_category_title'>"+category+"</span>",
+				title: "<img src='"+src+"'>"
+					+"<span class='Streams_interests_category_title'>"+category+"</span>",
 				content: content,
 	            count: '',
 				category: category
