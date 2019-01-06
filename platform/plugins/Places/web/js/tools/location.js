@@ -318,6 +318,7 @@ Q.Tool.define("Places/location", function (options) {
 
 		var selector = $this.attr("data-location");
 		if (selector === 'current') {
+			$this.addClass('Q_working');
 			tool.getCurrentPosition(function (pos) {
 				var crd = pos.coords;
 				if (!crd) {
@@ -333,17 +334,21 @@ Q.Tool.define("Places/location", function (options) {
 				});
 			}, function (err) {
 				Q.handle(state.onChoose, tool, [null, null]);
+				$this.removeClass('Q_working');
 			});
 
 			return;
-		} else if (selector === 'address') {
-			// if address selected just repeat onChoose event of Places/address tool
-			Q.handle(
-				tool.addressTool.state.onChoose,
-				tool.addressTool,
-				[tool.addressTool.place]
-			);
-			return;
+		} else {
+			tool.$('[data-location="current"]').removeClass('Q_working');
+			if (selector === 'address') {
+				// if address selected just repeat onChoose event of Places/address tool
+				Q.handle(
+					tool.addressTool.state.onChoose,
+					tool.addressTool,
+					[tool.addressTool.place]
+				);
+				return;
+			}
 		}
 
 		// related location selected
