@@ -184,7 +184,7 @@ class Q_Text
 	 * @param {string} [$word='click'] Can be either "click" or "Click"
 	 * @return {string}
 	 */
-	function clickOrTap($word = 'click')
+	static function clickOrTap($word = 'click')
 	{
 		$text = Q_Text::get('Q/content');
 		return Q::ifset($text, 'words', $word);
