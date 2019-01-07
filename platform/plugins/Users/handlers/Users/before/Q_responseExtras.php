@@ -47,11 +47,11 @@ function Users_before_Q_responseExtras()
 		'Q.plugins.Users.hinted',
 		Q::ifset($_SESSION, 'Users', 'hinted', array())
 	);
-	if ($sizes = Q_Config::expect('Users', 'icon', 'sizes')) {
+	if ($sizes = Q_Image::getSizes('Users/icon');) {
 		sort($sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.sizes', $sizes);
 	}
-	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
+	$defaultSize = Q_Image::getDefaultSize('Users/icon');
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
 	Q_Response::addStylesheet("{{Users}}/css/Users.css", 'Users');
 	$platforms = array(Q_Request::platform());

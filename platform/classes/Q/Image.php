@@ -25,6 +25,68 @@ define('Q_SPRITE_Z',			128);
  */
 class Q_Image
 {
+	/**
+	 * Gets an array of "WxH" => "$filename.png" pairs from the
+	 * "Q"/"images"/$type/"sizes" config. These are stored in the config
+	 * for various types of images, so that e.g. clients can't simply
+	 * specify their own sizes.
+	 * Call array_keys() on the returned value to get just an array of sizes.
+	 * @method getSizes
+	 * @static
+	 * @param {string} $type The type of image
+	 * @return {array} 
+	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
+	 */
+	function getSizes($type)
+	{
+		return Q_Config::expect("Q", "images", $type, "sizes");
+	}
+
+	/**
+	 * Gets the value of the the "Q"/"images"/$type/"defaultSize" config.
+	 * It should be a key in the "Q"/"images"/$type/"sizes" config array.
+	 * @method getDefaultSize
+	 * @static
+	 * @param {string} $type The type of image
+	 * @return {array} 
+	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
+	 */
+	function getDefaultSize($type)
+	{
+		return Q_Config::expect('Q', 'images', $types, 'defaultSize');
+	}
+	
+	/**
+	 * Returns the name of the image size that should be used
+	 * based on the device pixel ratio in Q_dpr cookie, if any.
+	 * @method calculateSize
+	 * @static
+	 * @param {double} $size
+	 * @param {array} [$sizes=array()] The array of possible sizes for this image
+	 * @return {string} The index in the "sizes" array, like "200" or "200x"
+	 */
+	static function calculateSize($size, $sizes = array())
+	{
+		$dpr = Q::ifset($_COOKIE, 'Q_dpr', 1);
+		$scaled = $size * $dpr;
+		$closest = $max = 100000000;
+		$index = null;
+		foreach ($sizes as $k => $s) {
+			$parts = explode('x', $k);
+			if (empty($parts[1])) {
+				$parts[1] = $parts[0];
+			}
+			if (!$parts[0]) {
+				$parts[0] = $parts[1];
+			}
+			$diff = $scaled - min($parts[0], $parts[1]);
+			if ($diff >= 0 and $diff < $closest) {
+				$closest = $diff;
+				$index = $k;
+			}
+		}
+		return isset($index) ? $index : "$k"; // take the last key by default
+	}
 
 	/**
 	 * Returns png avatar image. Can check gravatar.com for avatar
@@ -140,8 +202,12 @@ class Q_Image
 	 * @param {string} [$params.subpath=""] subpath that should follow the path, to save the image under
 	 * @param {string} [$params.merge=""] path under web dir for an optional image to use as a background
 	 * @param {string} [$params.crop] array with keys "x", "y", "w", "h" to crop the original image
-	 * @param {string} [$params.save=array("x" => "")] array of $size => $basename pairs
+	 * @param {string} [$params.save='x'] name of config under Q/image/sizes, which
+	 *  are an array of $size => $basename pairs
 	 *  where the size is of the format "WxH", and either W or H can be empty.
+	 *  These are stored in the config for various types of images, 
+	 *  and you pass the name of the config, so that e.g. clients can't simply
+	 *  specify their own sizes.
 	 * @param {string} [$params.skipAccess=false] if true, skips the check for authorization to write files there
 	 * @return {array} an array of ($size => $fullImagePath) pairs
 	 */
@@ -205,13 +271,14 @@ class Q_Image
 			}
 		}
 		$crop = isset($params['crop']) ? $params['crop'] : array();
-		$save = !empty($params['save']) ? $params['save'] : array('x' => '');
-		if (!Q::isAssociative($save)) {
+		$save = !empty($params['save']) ? $params['save'] : 'x';
+		if (!is_string($save)) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'save',
-				'type' => 'associative array'
+				'type' => 'string'
 			));
 		}
+		$sizes = Q_Image::getSizes($save);
 		// crop parameters - size of source image
 		$isw = isset($crop['w']) ? $crop['w'] : $iw;
 		$ish = isset($crop['h']) ? $crop['h'] : $ih;
@@ -229,7 +296,7 @@ class Q_Image
 				$mh = imagesy($merge);
 			}
 		}
-		foreach ($save as $size => $name) {
+		foreach ($sizes as $size => $name) {
 			if (empty($name)) {
 				// generate a filename
 				do {
@@ -829,12 +896,12 @@ class Q_Image
 		// restore random seed
 		srand();
 		// resize if needed, then output
-		if($size && $size < Q_AVATAR_SIZE){
+		if ($size && $size < Q_AVATAR_SIZE){
 			$out = imagecreatetruecolor($size,$size);
 			imagecopyresampled($out,$monster,0,0,0,0,$size,$size,Q_AVATAR_SIZE,Q_AVATAR_SIZE);
 			imagedestroy($monster);
 			return $out;
-		}else{
+		} else{
 			return $monster;
 		}
 	}
