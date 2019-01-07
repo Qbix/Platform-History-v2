@@ -509,7 +509,7 @@ abstract class Users extends Base_Users
 				$ui->save(true);
 
 				// Download and save platform icon for the user
-				$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+				$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 				sort($sizes);
 				$icon = $externalFrom->icon($sizes, '.png');
 				if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
@@ -1147,7 +1147,7 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'after');
 
-		$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 		sort($sizes);
 		if (!isset($icon)) {
 			if ($externalFrom = Users_ExternalFrom::authenticate($platform, $appId)) {

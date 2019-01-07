@@ -90,7 +90,7 @@ function Streams_after_Users_User_saveExecute($params)
 		$stream->writeLevel = $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']);
 		$stream->adminLevel = $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel']);
 		if ($name === "Streams/user/icon") {
-			$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+			$sizes = Q_Image::getSizes('Users/icon');
 			sort($sizes);
 			$stream->setAttribute('sizes', $sizes);
 			$stream->icon = $user->icon;
@@ -185,7 +185,7 @@ function Streams_after_Users_User_saveExecute($params)
 			}
 			$stream->content = $value;
 			if ($name === "Streams/user/icon") {
-                $sizes = Q_Config::expect('Users', 'icon', 'sizes');
+                $sizes = Q_Image::getSizes('Users/icon');
 				sort($sizes);
                 $stream->setAttribute('sizes', $sizes);
 				$stream->icon = $changes['icon'] = $user->icon;

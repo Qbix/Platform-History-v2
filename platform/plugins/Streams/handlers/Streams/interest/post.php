@@ -54,13 +54,11 @@ function Streams_interest_post()
 				}
 			}
 			if ($data) {
-				$sizes = Q_Config::expect('Streams', 'icons', 'sizes');
-				ksort($sizes);
 				$params = array(
 					'data' => $data,
 					'path' => "{{Streams}}/img/icons",
 					'subpath' => $name,
-					'save' => $sizes,
+					'save' => 'Streams/interest',
 					'skipAccess' => true
 				);
 				Q_Image::save($params);

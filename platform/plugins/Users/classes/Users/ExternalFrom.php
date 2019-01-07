@@ -24,9 +24,9 @@ interface Users_ExternalFrom_Interface
 		
 	/**
 	 * Gets the logged-in user icon urls
-	 * @param {array} $sizes=[Q_Config::expect('Users','icon','sizes')]
+	 * @param {array} [$sizes=Q_Image::getSizes('Users/icon')]
 	 *  An array of size strings such "80x80"
-	 * @return {array|null} Keys are the size strings with optional $suffix
+	 * @return {array|null} [$suffix=''] Keys are the size strings with optional $suffix
 	 *  and values are the urls
 	 */
 	function icon($sizes = null, $suffix = '');
