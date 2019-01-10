@@ -383,8 +383,8 @@ class Q_Utils
 		$result = array();
 		$lines = str_getcsv($input, "\r", $enclosure, $escape);
 		foreach ($lines as $line) {
-			if ($line and $line[0] === "\n") {
-				$line = substr($line, 1);
+			if ($line = rtrim($line)) {
+				$result[] = $line;
 			}
 		}
 		return $result;
