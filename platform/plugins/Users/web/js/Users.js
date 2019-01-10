@@ -2232,7 +2232,7 @@
 			accountStatusUrl: null,
 			tryQuietly: false,
 			using: 'native', // can also be a platform name like 'facebook'
-			scope: ['email', 'public_profile', 'user_friends'], // the permissions to ask for
+			scope: ['email', 'public_profile'], // the permissions to ask for
 			linkToken: null,
 			dialogContainer: 'body',
 			setupRegisterForm: null,
