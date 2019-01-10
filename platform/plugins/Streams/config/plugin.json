@@ -223,6 +223,10 @@
 					"Streams/task/complete": {
 						"description": "Task has been completed",
 						"subject": ["Streams/content", ["notifications", "Streams/task/complete"]]
+					},
+					"Streams/task/error": {
+						"description": "Error during task",
+						"subject": ["Streams/content", ["notifications", "Streams/task/error"]]
 					}
 				},
 				"attributes": {
@@ -484,7 +488,10 @@
 			}
 		},
 		"import": {
-			"timeLimit": 100000
+			"timeLimit": 100000,
+			"task": {
+				"title": "Importing members into {{communityName}}"
+			}
 		}
 	}
 }
