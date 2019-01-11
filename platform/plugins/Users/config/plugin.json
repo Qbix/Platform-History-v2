@@ -62,6 +62,17 @@
 			"Users/email/addEmail.php": {"html": true},
 			"Users/email/resend.php": {"html": true},
 			"Users/email/authenticated.php": {"html": true}
+		},
+		"images": {
+			"x": {
+				"sizes": {"x": ""},
+				"defaultSize": "x"
+			},
+			"Users/icon": {
+				"sizes": ["40", "50", "80", "200", "400", "400x", "x400"],
+				"defaultSize": "40",
+				"defaultCacheBust": 1000
+			}
 		}
 	},
 	"Users": {
@@ -87,7 +98,7 @@
 			"using": "native,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
-			"gravatar": false,
+			"gravatar": true,
 			"noRegister": false,
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
 		},
@@ -179,8 +190,6 @@
 			"default": "Someone"
 		},
 		"icon": {
-			"sizes": ["40", "50", "80", "200", "x200", "200x"],
-			"defaultSize": "40",
 			"labels": "labels/default",
 			"canManage": ["Users/owners", "Users/admins"]
 		},

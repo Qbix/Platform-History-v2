@@ -153,6 +153,12 @@
 			"ignoreCache": false,
 			"dontCache": false,
 			"duration": 3600
+		},
+		"images": {
+			"x": {
+				"sizes": {"x": ""},
+				"defaultSize": "x"
+			}
 		}
 	},
 	"Db": {

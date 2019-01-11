@@ -549,11 +549,13 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				'data': data,
 				'path': path,
 				'subpath': subpath,
-				'save': state.saveSizeName,
 				'url': state.url,
 				'loader': state.loader,
 				'crop': null
 			};
+			if (state.save) {
+				params.save = state.save;
+			}
 			Q.extend(params, override);
 			if (Q.isEmpty(params.crop)) {
 				delete params.crop;

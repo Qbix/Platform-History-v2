@@ -20,7 +20,7 @@ function Users_thumbnail_response () {
 		$hash,
 		isset($_REQUEST['size']) ? $_REQUEST['size'] : null,
 		isset($_REQUEST['type']) ? $_REQUEST['type'] : null,
-		$gravatar
+		!!$gravatar
 	);
 	if ($gravatar) {
 		echo $result;

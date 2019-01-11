@@ -357,6 +357,10 @@ a.Users_activation_resend:active {
 	width: 200px;
 	height: 200px;
 }
+.Users_avatar_icon.Users_avatar_icon_400 {
+	width: 200px;
+	height: 200px;
+}
 
 .Users_avatar_icon_blank {
 	width: 40px;
