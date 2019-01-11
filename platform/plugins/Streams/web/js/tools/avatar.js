@@ -257,7 +257,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 				var $img = tool.$('.Users_avatar_icon').addClass('Streams_editable');
 				var saveSizeName = {};
 				Q.each(Users.icon.sizes, function (k, v) {
-					saveSizeName[v] = v+".png";
+					saveSizeName[k] = v;
 				});
 				Streams.retainWith(tool).get(
 					Users.loggedInUser.id,

@@ -114,7 +114,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 	imagepicker: {
 		showSize: "50",
-		fullSize: "200x"
+		fullSize: "200x",
+		save: "Streams/image"
 	},
 	sizes: null,
 	overrideShowSize: {},
