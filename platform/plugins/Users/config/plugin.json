@@ -64,10 +64,6 @@
 			"Users/email/authenticated.php": {"html": true}
 		},
 		"images": {
-			"x": {
-				"sizes": {"x": ""},
-				"defaultSize": "x"
-			},
 			"Users/icon": {
 				"sizes": ["40", "50", "80", "200", "400", "400x", "x400"],
 				"defaultSize": "40",
@@ -102,9 +98,6 @@
 			"noRegister": false,
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
 		},
-		"notices": {
-			"timeout": 5
-		},
 		"paths": {
 			"icons": "files/Users/icons",
 			"uploads": {
@@ -136,6 +129,7 @@
 			"expires": 10080
 		},
 		"notices": {
+			"timeout": 5,
 			"contact": true
 		},
 		"mobile": {
@@ -170,8 +164,8 @@
 		"register": {
 			"terms": {
 				"uri": "{{baseUrl}}/terms",
-				"label": ["Users/content", "register", "TermsLabel"],
-				"title": ["Users/content", "register", "TermsTitle"]
+				"label": ["Users/content", ["register", "TermsLabel"]],
+				"title": ["Users/content", ["register", "TermsTitle"]]
 			},
 			"icon": {
 				"leaveDefault": false
