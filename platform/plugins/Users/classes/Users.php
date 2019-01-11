@@ -1772,7 +1772,7 @@ abstract class Users extends Base_Users
 		$terms_link = Q_Html::a(
 			Q::interpolate($terms_uri, array('baseUrl' => Q_Request::baseUrl())),
 			array('target' => '_blank'),
-			$terms_title
+			Q::text($terms_title)
 		);
 		return Q::interpolate($terms_label, array('link' => $terms_link));
 	}
