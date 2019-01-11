@@ -117,11 +117,6 @@
 				}
 			}
 		},
-		"images": {
-			"maxWidth": 5000,
-			"maxHeight": 5000,
-			"pixabay": null
-		},
 		"uploads": {
 			"limits": {
 				"time": 18000,
@@ -158,7 +153,11 @@
 			"x": {
 				"sizes": {"x": ""},
 				"defaultSize": "x"
-			}
+			},
+			"maxWidth": 5000,
+			"maxHeight": 5000,
+			"pixabay": null
+
 		}
 	},
 	"Db": {

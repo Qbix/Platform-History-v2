@@ -271,7 +271,8 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 							preprocess: function (callback) {
 								callback({
 									subpath: state.userId.splitId()+'/icon/'
-										+Math.floor(Date.now()/1000)
+										+Math.floor(Date.now()/1000),
+									save: "Users/icon"
 								});
 							},
 							onSuccess: {"Users/avatar": function () {

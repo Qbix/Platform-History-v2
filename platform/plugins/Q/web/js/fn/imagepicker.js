@@ -560,10 +560,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			if (Q.isEmpty(params.crop)) {
 				delete params.crop;
 			}
-			if (params.save && !params.save[state.showSize]) {
-				throw new Q.Error("Q/imagepicker tool: no size found corresponding to showSize");
-			}
-		
+
 			if (params.loader) {
 				var callable = params.loader;
 				delete params.loader;
