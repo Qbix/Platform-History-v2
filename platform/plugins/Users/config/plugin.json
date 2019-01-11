@@ -62,6 +62,13 @@
 			"Users/email/addEmail.php": {"html": true},
 			"Users/email/resend.php": {"html": true},
 			"Users/email/authenticated.php": {"html": true}
+		},
+		"images": {
+			"Users/icon": {
+				"sizes": ["40", "50", "80", "200", "400", "400x", "x400"],
+				"defaultSize": "40",
+				"defaultCacheBust": 1000
+			}
 		}
 	},
 	"Users": {
@@ -87,12 +94,9 @@
 			"using": "native,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
-			"gravatar": false,
+			"gravatar": true,
 			"noRegister": false,
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
-		},
-		"notices": {
-			"timeout": 5
 		},
 		"paths": {
 			"icons": "files/Users/icons",
@@ -125,6 +129,7 @@
 			"expires": 10080
 		},
 		"notices": {
+			"timeout": 5,
 			"contact": true
 		},
 		"mobile": {
@@ -159,8 +164,8 @@
 		"register": {
 			"terms": {
 				"uri": "{{baseUrl}}/terms",
-				"label": ["Users/content", "register", "TermsLabel"],
-				"title": ["Users/content", "register", "TermsTitle"]
+				"label": ["Users/content", ["register", "TermsLabel"]],
+				"title": ["Users/content", ["register", "TermsTitle"]]
 			},
 			"icon": {
 				"leaveDefault": false
@@ -179,8 +184,6 @@
 			"default": "Someone"
 		},
 		"icon": {
-			"sizes": ["40", "50", "80", "200", "x200", "200x"],
-			"defaultSize": "40",
 			"labels": "labels/default",
 			"canManage": ["Users/owners", "Users/admins"]
 		},
