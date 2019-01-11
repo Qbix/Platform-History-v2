@@ -49,7 +49,7 @@ function Users_avatar_tool($options)
 	$icon = $options['icon'];
 	if ($icon) {
 		if ($icon === true) {
-			$icon = Q_Config::get('Users', 'icon', 'defaultSize', 40);
+			$icon = Q_Image::getDefaultSize('Users/icon');
 		}
 		$attributes = isset($options['iconAttributes'])
 			? $options['iconAttributes']

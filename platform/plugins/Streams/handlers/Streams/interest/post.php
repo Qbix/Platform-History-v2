@@ -15,14 +15,15 @@
  * @param {string} [$_REQUEST.subscribe] Optional. Defauls to false. Whether to subscribe rather than just join the interest stream.
  * @return {void}
  */
-function Streams_interest_post()
+function Streams_interest_post($params = array())
 {
+	$r = array_merge($_REQUEST, $params);
 	$user = Users::loggedInUser(true);
-	$title = Q::ifset($_REQUEST, 'title', null);
+	$title = Q::ifset($r, 'title', null);
 	if (!isset($title)) {
 		throw new Q_Exception_RequiredField(array('field' => 'title'));
 	}
-	$publisherId = Q::ifset($_REQUEST, 'publisherId', Users::communityId());
+	$publisherId = Q::ifset($r, 'publisherId', Users::communityId());
 	$name = 'Streams/interest/' . Q_Utils::normalize($title);
 	$stream = Streams::fetchOne(null, $publisherId, $name);
 	if (!$stream) {
@@ -54,13 +55,11 @@ function Streams_interest_post()
 				}
 			}
 			if ($data) {
-				$sizes = Q_Config::expect('Streams', 'icons', 'sizes');
-				ksort($sizes);
 				$params = array(
 					'data' => $data,
 					'path' => "{{Streams}}/img/icons",
 					'subpath' => $name,
-					'save' => $sizes,
+					'save' => 'Streams/interest',
 					'skipAccess' => true
 				);
 				Q_Image::save($params);
@@ -69,7 +68,7 @@ function Streams_interest_post()
 		}
 		$stream->save();
 	}
-	$subscribe = !!Q::ifset($_REQUEST, 'subscribe', false);
+	$subscribe = !!Q::ifset($r, 'subscribe', false);
 	if ($subscribe) {
 		$stream->subscribe();
 	} else {

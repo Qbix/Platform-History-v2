@@ -46,11 +46,13 @@ function Streams_import_post()
 	
 	$sha1 = substr(sha1($instructions), 0, 10);
 
+	$streamTitle = Q_Config::expect('Streams', 'import', 'task', 'title');
+	$communityName = Users::communityName();
 	$task = isset($_REQUEST['taskStreamName'])
 		? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
 		: Streams::create($luid, $communityId, 'Streams/task', array(
 			'skipAccess' => true,
-			'title' => 'Importing members into ' . Users::communityName(),
+			'title' => Q::interpolate($streamTitle, compact('communityName')),
 			'name' => "Streams/task/$sha1"
 		), array(
 			'publisherId' => $app,
@@ -227,6 +229,14 @@ function Streams_import_post()
 				}
 			}
 		} catch (Exception $e) {
+			$file = $e->getFile();
+			$line = $e->getLine();
+			$task->post($luid, array(
+				'type' => 'Streams/task/error',
+				'content' => $e->getMessage(),
+				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress', 'file', 'line'),
+			), true);
+			Q::log($e, 'Calendars_import');
 			$exceptions[$j] = $e;
 		}
 	}

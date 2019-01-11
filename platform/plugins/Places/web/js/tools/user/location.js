@@ -69,7 +69,7 @@ Q.Tool.define("Places/user/location", function (options) {
 	Q.Text.get('Places/content', function (err, text) {
 		state.updateButton = state.updateButton || text.location.update;
 		state.map.prompt = (state.map.prompt || text.location.prompt)
-			.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+			.interpolate({ClickOrTap: Q.getObject(['text', 'Q', 'words', (Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click')], Q)});
 		state.interested = text.location.interested.interpolate({
 			select: select.outerHTML
 		});
