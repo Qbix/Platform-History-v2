@@ -47,7 +47,7 @@ function Users_before_Q_responseExtras()
 		'Q.plugins.Users.hinted',
 		Q::ifset($_SESSION, 'Users', 'hinted', array())
 	);
-	if ($sizes = Q_Image::getSizes('Users/icon');) {
+	if ($sizes = Q_Image::getSizes('Users/icon')) {
 		sort($sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.sizes', $sizes);
 	}
