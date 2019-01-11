@@ -37,9 +37,19 @@ class Q_Image
 	 * @return {array} 
 	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
 	 */
-	function getSizes($type)
+	static function getSizes($type)
 	{
-		return Q_Config::expect("Q", "images", $type, "sizes");
+		$sizes = Q_Config::expect("Q", "images", $type, "sizes");
+		if (Q::isAssociative($sizes)) {
+			return $sizes;
+		}
+
+		$sizes2 = array();
+		foreach ($sizes as $size) {
+			$sizes2[$size] = "$size.png";
+		}
+
+		return $sizes2;
 	}
 
 	/**
@@ -51,9 +61,9 @@ class Q_Image
 	 * @return {array} 
 	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
 	 */
-	function getDefaultSize($type)
+	static function getDefaultSize($type)
 	{
-		return Q_Config::expect('Q', 'images', $types, 'defaultSize');
+		return Q_Config::expect('Q', 'images', $type, 'defaultSize');
 	}
 	
 	/**
