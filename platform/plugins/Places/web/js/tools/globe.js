@@ -142,6 +142,8 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 			}).insertAfter(tool.$canvas);
 			tool.$canvas.css({
 				'position': 'absolute',
+				'top': 0,
+				'left': 0,
 				'z-index': 2
 			});
 			if ($te.css('position') === 'static') {
