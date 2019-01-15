@@ -703,12 +703,23 @@ class Q
 	 * @param {boolean} [$extra.cache=false]
 	 *    If true, then the Qbix front end will not replace existing tools with same id
 	 *    during Q.loadUrl when this tool appears in the rendered HTML
+	 * @param {string} [$extra.classes]
+	 *    You can pass this to add any additional CSS classes to the tool's element
+	 * @param {string} [$extra.attributes]
+	 *    You can pass this to add any additional HTML attributes to the tool's element
+	 * @param {boolean} [$extra.retain]
+	 *    Pass true to retain the tool when HTML is being replaced in the future,
+	 *    so it's not replaced by any incoming rendered tools unless they have replace=true
+	 * @param {boolean} [$extra.replace]
+	 *    Pass true to tell Q.js to replace any previously rendered tool tool
+	 *    even if it was marked to be retained.
 	 * @param {boolean} [$extra.merge=false]
 	 *    If true, the element for this tool is merged with the element of the tool
-	 *    already being rendered (if any), producing one element with markup
-	 *    for both tools and their options. This can be used more than once, merging
-	 *    multiple tools in one element.
-	 *    As part of the mege, the content this tool (if any) is prepended
+	 *    already being rendered when this function is called (if any),
+	 *    producing one element with markup for both tools and their options.
+	 *    This can be used more than once, merging multiple tools in one element
+	 *    through nested function calls.
+	 *    As part of the merge, the content this tool (if any) is prepended
 	 *    to the content of the tool which is already being rendered.
 	 * @throws {Q_Exception_WrongType}
 	 * @throws {Q_Exception_MissingFile}
