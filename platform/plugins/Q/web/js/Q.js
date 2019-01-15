@@ -10988,10 +10988,14 @@ Q.Pointer = {
 			}, o.show.delay);
 		}));
 		if (!Q.Pointer.hint.addedListeners) {
+			Q.Pointer.stopHintsIgnore = true;
 			Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
 			Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
 			Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
 			Q.Pointer.hint.addedListeners = true;
+			setTimeout(function () {
+				delete Q.Pointer.stopHintsIgnore;
+			}, 0);
 		}
 		if (options.waitForEvents) {
 			return;
@@ -11020,6 +11024,9 @@ Q.Pointer = {
 	 * @param {HTMLElement} [container] If provided, only hints for elements in this container are stopped.
 	 */
 	stopHints: function (container) {
+		if (Q.Pointer.stopHintsIgnore) {
+			return; // workaround for iOS Safari
+		}
 		var imgs = Q.Pointer.hint.imgs;
 		var imgs2 = [];
 		Q.each(imgs, function (i, img) {
