@@ -1879,7 +1879,7 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Returns the canonical uri of the stream, if any
+	 * Returns the canonical URI of the stream, if any
 	 * @param {integer} [$messageOrdinal] pass this to link to the message in the stream, e.g. to highlight it
 	 * @return {string|null|false}
 	 */

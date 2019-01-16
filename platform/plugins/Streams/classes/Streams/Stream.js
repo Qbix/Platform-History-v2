@@ -1313,7 +1313,7 @@ Sp.url = function (messageOrdinal, baseUrl)
 };
 
 /**
- * Returns the canonical url of the stream, if any
+ * Returns the canonical URI of the stream, if any
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @return {String|null|false}
  */
