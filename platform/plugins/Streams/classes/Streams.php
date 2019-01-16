@@ -3200,6 +3200,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
 	 * @param {boolean} [$options.alwaysSend=false] Send invitation message even if already sent.
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
+	 * @param {string} [$options.baseUrl] Override the base url when making the invite url
 	 * @see Users::addLink()
 	 * @throws Users_Exception_NotAuthorized
 	 * @throws Q_Exception_WrongType
@@ -3336,13 +3337,17 @@ abstract class Streams extends Base_Streams
 			$userIds = array_diff($raw_userIds, $alreadyParticipating);
 		}
 
-		$appUrl = !empty($options['appUrl'])
-			? $options['appUrl']
-			: Streams_Stream::getConfigField(
-				$stream->type, 
-				array('invite', 'url'),
-				$stream->url()
-			);
+		if (!empty($options['appUrl'])) {
+			$appUrl = $options['appUrl'];
+		} else {
+			$url = Streams_Stream::getConfigField($stream->type, 'url', $stream->url());
+			$appUrl = Q_Handlebars::renderSource($url, array(
+				'publisherId' => $stream->publisherId,
+				'streamName' => explode('/', $stream->name),
+				'name' => $stream->name,
+				'baseUrl' => Q::ifset($options, 'baseUrl', Q_Request::baseUrl())
+			));
+		}
 
 		// now check and define levels for invited user
 		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
