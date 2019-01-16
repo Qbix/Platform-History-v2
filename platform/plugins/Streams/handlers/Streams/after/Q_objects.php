@@ -8,6 +8,17 @@ function Streams_after_Q_objects () {
 	$displayName = $user->displayName(array('show' => 'flu'));
 	$showDialog = !$displayName;
 	
+	$nameIsMissing = true;
+	$avatar = new Streams_Avatar(array(
+		'toUserId' => $user->id,
+		'publisherId' => $user->id
+	));
+	if ($avatar->fetch()) {
+		if ($avatar->username or $avatar->firstName or $avatar->lastName) {
+			$nameIsMissing = false;
+		}
+	}
+	
 	$p = compact('user', 'invite', 'displayName');
 	Q::event('Streams/inviteDialog', $p, 'before', false, $showDialog);
 	if (!$showDialog) {
@@ -40,6 +51,7 @@ function Streams_after_Q_objects () {
 	);
 	$params = array(
 		'displayName' => $displayName,
+		'nameIsMissing' => $nameIsMissing,
 		'action' => 'Streams/basic',
 		'icon' => $user->iconUrl(),
 		'token' => $invite->token,
