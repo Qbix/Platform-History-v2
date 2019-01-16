@@ -200,6 +200,7 @@
 					"leftCount": 0
 				},
 				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
+				"uri": "Streams/stream publisherId={{publisherId}} streamName={{streamName}}",
 				"participating": ["Streams/participating"]
 			},
 			"Streams/invited": {
