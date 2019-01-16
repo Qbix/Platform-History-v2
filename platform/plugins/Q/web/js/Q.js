@@ -11713,6 +11713,7 @@ Q.confirm.options = {
  * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
+ * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
  * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
  * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
@@ -11729,15 +11730,19 @@ Q.prompt = function(message, callback, options) {
 	if (options === undefined) options = {};
 	var o = Q.extend({}, Q.prompt.options, options);
 	var buttonClicked = false;
+	var attr = {
+		'placeholder': o.placeholder,
+		'maxlength': o.maxLength
+	};
+	if (o.initialText) {
+		attr.value = o.initialText;
+	}
 	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
 			$('<div class="Q_buttons" />').append(
-				$('<input type="text" />').attr({
-					'placeholder': o.placeholder,
-					'maxlength': o.maxLength
-				}), ' ',
+				$('<input type="text" />').attr(attr), ' ',
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
@@ -11756,6 +11761,7 @@ Q.prompt = function(message, callback, options) {
 					_done();
 				}
 			});
+			field[0].select();
 		},
 		'onClose': {'Q.prompt': function() {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
