@@ -16,7 +16,7 @@
 						<td><img src="{{stream.fields.icon}}/50.png" title="{{stream.fields.title}}"></td>
 						<td><div>{{stream.fields.title}}</div></td>
 					</tr>
-				{{#unless displayName}}
+				{{#unless nameIsMissing}}
 					<tr class="Users_register_form">
 						<td class="Streams_login_picture"><img src="{{user.icon}}/50.png"></td>
 						<td class="Streams_login_fullname_block">
