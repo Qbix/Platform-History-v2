@@ -243,7 +243,8 @@ Q.Tool.define("Places/location", function (options) {
 								}, {
 									title: textAdd.title,
 									placeholder: textAdd.placeholder,
-									ok: textAdd.ok
+									ok: textAdd.ok,
+									initialText: place.name
 								});
 							}, {
 								title: textConfirm.title,

@@ -3340,13 +3340,7 @@ abstract class Streams extends Base_Streams
 		if (!empty($options['appUrl'])) {
 			$appUrl = $options['appUrl'];
 		} else {
-			$url = Streams_Stream::getConfigField($stream->type, 'url', $stream->url());
-			$appUrl = Q_Handlebars::renderSource($url, array(
-				'publisherId' => $stream->publisherId,
-				'streamName' => explode('/', $stream->name),
-				'name' => $stream->name,
-				'baseUrl' => Q::ifset($options, 'baseUrl', Q_Request::baseUrl())
-			));
+			$appUrl = $stream->url();
 		}
 
 		// now check and define levels for invited user
