@@ -3217,6 +3217,11 @@ abstract class Streams extends Base_Streams
 	 */
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
+		$options = Q::take($options, array(
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess'
+		));
+		
 		if (isset($options['asUserId'])) {
 			$asUserId = $options['asUserId'];
 			$asUser = Users_User::fetch($asUserId);
