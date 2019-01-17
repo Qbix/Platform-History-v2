@@ -4276,6 +4276,86 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Remove streams from system
+	 * @method removeStream
+	 * @static
+	 * @param {Streams_Stream|array} $stream Data about stream to remove.
+	 * Can be Streams_Stream object or array('publisherId' => ..., 'name' => ...)
+	 * Or array of these values.
+	 */
+	static function removeStream ($stream) {
+		if (is_array($stream)) {
+			if (isset($stream['name']) && isset($stream['publisherId'])) {
+				$stream = (object)$stream;
+			} else {
+				foreach ($stream as $item) {
+					self::removeStream($item);
+				}
+
+				return;
+			}
+		}
+
+		Streams_RelatedTo::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedFrom::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_Message::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_MessageTotal::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Participant::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Access::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Subscription::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_SubscriptionRule::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Invite::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Notification::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedFromTotal::delete()
+			->where(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedToTotal::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->execute();
+
+		Streams_Task::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Stream::delete()
+			->where(array('publisherId' => $stream->publisherId, 'name' => $stream->name))
+			->execute();
+	}
+
+	/**
 	 * @property $fetch
 	 * @static
 	 * @type array
