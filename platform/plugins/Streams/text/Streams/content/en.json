@@ -33,6 +33,9 @@
 		"Streams/task/error": "Error during: {{stream.fields.title}}",
 		"Streams/incoming/*": "{{app}}: Incoming Message"
 	},
+	"invite": {
+		"messageContent": "{{displayName}} invited you to {{inviteUrl}}"
+	},
 	"followup": {
 		"mobile": {
 			"alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
