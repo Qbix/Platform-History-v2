@@ -4008,7 +4008,7 @@ abstract class Streams extends Base_Streams
 		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
 		$fields = array(compact('userId', 'expires'));
 		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
-		Q_Utils::sign($fields, array('sig'));
+		$fields = Q_Utils::sign($fields, array('sig'));
 		$fields['sig'] = substr($fields['sig'], 0, $len);
 		$streamName = 'Streams/userInviteUrl';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
