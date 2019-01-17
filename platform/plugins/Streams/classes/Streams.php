@@ -4279,11 +4279,13 @@ abstract class Streams extends Base_Streams
 	 * Remove streams from system
 	 * @method removeStream
 	 * @static
-	 * @param {Streams_Stream|array} $stream
+	 * @param {Streams_Stream|array} $stream Data about stream to remove.
+	 * Can be Streams_Stream object or array('publisherId' => ..., 'name' => ...)
+	 * Or array of these values.
 	 */
 	static function removeStream ($stream) {
 		if (is_array($stream)) {
-			if (Q::ifset($stream, 'name', null) && Q::ifset($stream, 'publisherId', null)) {
+			if (isset($stream['name']) && isset($stream['publisherId'])) {
 				$stream = (object)$stream;
 			} else {
 				foreach ($stream as $item) {
