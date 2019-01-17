@@ -816,6 +816,7 @@ function Streams_request_handler (req, res, next) {
 				}
 				var inviteUrl = Streams.inviteUrl(token);
 				displayName = displayName || "Someone";
+				var text = Q.Text.get('Streams/content');
 				var msg = {
 					publisherId: invited.fields.publisherId,
 					streamName: invited.fields.name,
@@ -823,11 +824,15 @@ function Streams_request_handler (req, res, next) {
 					type: 'Streams/invite',
 					sentTime: new Db.Expression("CURRENT_TIMESTAMP"),
 					state: 'posted',
-					content: displayName + " invited you to " + inviteUrl,
+					content: text.invite.messageContent.interpolate({
+						displayName: displayName,
+						inviteUrl: inviteUrl
+					}),
 					instructions: JSON.stringify({
 						token: token,
 						displayName: displayName,
 						appUrl: appUrl,
+						userId: userId,
 						inviteUrl: inviteUrl,
 						type: stream.fields.type,
 						title: stream.fields.title,
