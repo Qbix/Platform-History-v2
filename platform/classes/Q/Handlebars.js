@@ -127,11 +127,11 @@ module.exports = {
 	 * Render handlebars template
 	 * @method render
 	 * @param {string} template The template name
-	 * @param {object} data Optional. The data to render
+	 * @param {object} [fields] Optional. The fields to pass to the template.
 	 * @param {Array} partials Optional. The names of partials to load and use for rendering.
 	 * @return {string|null}
 	 */
-	render: function(tPath, data, partials) {
+	render: function(tPath, fields, partials) {
 		try {
 			if (!tPath) return null;
 			var i, tpl = this.template(tPath), part = {}, path;
@@ -148,7 +148,7 @@ module.exports = {
 					}
 				}
 			}
-			return handlebars.compile(tpl)(data, {partials: part});
+			return handlebars.compile(tpl)(fields, {partials: part});
 		} catch(e) {
 			console.warn(e);
 			throw e;
@@ -159,11 +159,11 @@ module.exports = {
 	 * Render handlebars literal source string
 	 * @method render
 	 * @param {string} content The source content
-	 * @param {object} data Optional. The data to render
+	 * @param {object} [fields] Optional. The fields to pass to the template
 	 * @param {Array} partials Optional. The names of partials to load and use for rendering.
 	 * @return {string|null}
 	 */
-	renderSource: function(content, data, partials) {
+	renderSource: function(content, fields, partials) {
 		var i, j, path, part = {};
 
 		if (partials) {
@@ -177,6 +177,6 @@ module.exports = {
 				}
 			}
 		}
-		return handlebars.compile(content)(data, {partials: part});
+		return handlebars.compile(content)(fields, {partials: part});
 	}
 };
