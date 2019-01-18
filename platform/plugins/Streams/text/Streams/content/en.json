@@ -36,6 +36,14 @@
 	"invite": {
 		"messageContent": "{{displayName}} invited you to {{inviteUrl}}"
 	},
+	"message": {
+		"html": {
+			"posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}>/em> message to {{stream.fields.title}}",
+		},
+		"text": {
+			"body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+		}
+	},
 	"followup": {
 		"mobile": {
 			"alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
