@@ -280,6 +280,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			deliver: deliver,
 			stream: stream,
 			streamUrl: streamUrl,
+			message: message,
 			url: message.getInstruction("url") || streamUrl,
 			icon: stream.iconUrl(80),
 			user: this,
@@ -395,7 +396,10 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				viewPath = 'Streams/message/email.handlebars';
 			}
 			Users.Email.sendMessage(
-				emailAddress, o.subject, viewPath, o.fields, {html: true, language: uf.preferredLanguage}, callback
+				emailAddress, o.subject, viewPath, o.fields, {
+					html: true, 
+					language: uf.preferredLanguage
+				}, callback
 			);
 			result.push({'email': emailAddress});
 		}
