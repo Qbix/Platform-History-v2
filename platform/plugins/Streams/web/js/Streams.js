@@ -1276,8 +1276,8 @@ Streams.release = function (key) {
  *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {string} [options.platform] platform for which uids are passed
- *   @param {String} [options.uid] uid or arary of uids to invite
+ *   @param {string} [options.platform] platform for which xids are passed
+ *   @param {String} [options.xid] xid or arary of xids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
@@ -1356,7 +1356,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 			var emailAddresses = [];
 			var mobileNumbers = [];
-			var fb_uids = [];
+			var fb_xids = [];
 			Q.each(rsd.userIds, function (i, userId) {
 				if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
 					return;
@@ -1375,7 +1375,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case 'mobile': mobileNumbers.push(identifier); break;
 					case 'facebook': 
 						if (shouldFollowup === true) {
-							fb_uids.push(identifier[i]); 
+							fb_xids.push(identifier[i]); 
 						}
 						break;
 					case 'label':
@@ -1388,16 +1388,16 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				mobile: {
 					numbers: mobileNumbers
 				},
-				emails: {
+				email: {
 					addresses: emailAddresses
 				},
 				facebook: {
-					uids: fb_uids
+					xids: fb_xids
 				}
 			}, callback);
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
-	if (o.identifier || o.token || o.uids || o.userIds || o.label) {
+	if (o.identifier || o.token || o.xids || o.userIds || o.label) {
 		return _request();
 	}
 	Streams.Dialogs.invite(publisherId, streamName, function (r) {
@@ -1452,7 +1452,7 @@ Streams.invite.options = {
  * @param {String} [options.email.alert] Override template for alert
  * @param {String} [options.email.confirm] Override template for confirmation dialog to continue
  * @param {Object} options.facebook
- * @param {Array} options.facebook.uids The facebook uids to send followup push notifications to messenger
+ * @param {Array} options.facebook.xids The facebook xids to send followup push notifications to messenger
  */
 Streams.followup = function (options, callback) {
 	var o = Q.extend({}, Streams.followup.options, 10, options);
@@ -2785,8 +2785,8 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *    keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {string} [options.platform] platform for which uids are passed
- *   @param {String} [options.uid] uid or arary of uids to invite
+ *   @param {string} [options.platform] platform for which xids are passed
+ *   @param {String} [options.xid] xid or arary of xids to invite
  *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
  *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
  *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
@@ -4174,9 +4174,9 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
-		fn = fn.encodeHTML();
-		ln = ln.encodeHTML();
-		u = u.encodeHTML();
+		fn = fn && fn.encodeHTML();
+		ln = ln && ln.encodeHTML();
+		u = u && u.encodeHTML();
 		fallback = fallback.encodeHTML();
 	}
 	if (options && options.html) {
@@ -4254,7 +4254,7 @@ var Interests = Streams.Interests = {
 	 * @static
 	 * @param {String} title The title of the interest
 	 * @param {Function} callback
-	 * @param {Object} [options]
+	 * @param {Object} [options] Pass options for Q.req call, also supports the following:
 	 * @param {Boolean} [options.subscribe] Whether to subscribe
 	 * @param {String} [options.publisherId] Defaults to the current community id
 	 */
@@ -4435,6 +4435,38 @@ Streams.displayType = function _Streams_displayType(type) {
 Streams.isStream = function (value) {
 	return Q.typeOf(value) === "Q.Streams.Stream";
 };
+/**
+ * Use this to check whether user subscribed to stream
+ * and also whether subscribed to message type (from streams_subscription_rule)
+ * @static
+ * @method showNoticeIfSubscribed
+ * @param {string} publisherId
+ * @param {string} streamName
+ * @param {string} messageType
+ * @param {function} callback Function which called to show notice if all fine.
+ */
+Streams.showNoticeIfSubscribed = function (publisherId, streamName, messageType, callback) {
+	Streams.get(publisherId, streamName, function () {
+		// return if user doesn't subscribed to stream
+		if (Q.getObject("participant.subscribed", this) !== 'yes') {
+			return;
+		}
+
+		var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
+		if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
+			return;
+		}
+
+		// if stream retained - don't show notice
+		if (this.retainedByKey()) {
+			return;
+		}
+
+		Q.handle(callback, this);
+	}, {
+		withParticipant: true
+	});
+};
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
 	var src = json.entry[0].thumbnailUrl;
 	var src40 = src, src50 = src, src80 = src;
@@ -4496,7 +4528,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		var $this = $(this);
 		$this.removeData('cancelSubmit');
 		document.activeElement.blur();
-		if (!$('#Users_agree').is(':checked')) {
+		if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
 			$this.data('cancelSubmit', true);
 			setTimeout(function () {
 				if (confirm(Q.text.Users.login.confirmTerms)) {
@@ -4567,7 +4599,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	if (json.emailExists || json.mobileExists) {
 		var p = $('<p id="Streams_login_identifierExists" />')
 			.html(json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists);
-		$('a', p).click(function() {
+		$('a', p).click(function () {
+			$(this).addClass('Q_working');
 			$.post(Q.ajaxExtend(Q.action("Users/resend"), 'data'), 'identifier='+encodeURIComponent(identifier), function () {
 				overlay.close();
 			});
@@ -4967,26 +5000,19 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 
-		// get texts for notices
-		var texts = {};
-		Q.Text.get('Streams/content', function (err, text) {
-			texts = Q.getObject("notifications", text);
-		});
-
 		Users.Socket.onEvent('Streams/post').set(function (message) {
+			message = Streams.Message.construct(message);
 			var publisherId = Q.getObject(["publisherId"], message);
 			var streamName = Q.getObject(["streamName"], message);
 			var messageType = Q.getObject(["type"], message);
 			var byUserId = Q.getObject(["byUserId"], message);
 			var content = Q.getObject(["content"], message);
+			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
+			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
+			var pluginName = messageType.split('/')[0];
 
 			// if this message type absent in config
-			if (!Q.getObject([messageType], notificationsAsNotice)) {
-				return;
-			}
-
-			// only messages for Streams plugin
-			if (messageType.slice(0, messageType.indexOf('/')) !== 'Streams') {
+			if (!noticeOptions) {
 				return;
 			}
 
@@ -4995,50 +5021,54 @@ Q.onInit.add(function _Streams_onInit() {
 				return;
 			}
 
-			// check 'notices' attribute
-			Streams.get(publisherId, streamName, function () {
-				var stream = this;
-
-				if (!stream.getAttribute('notices')) {
-					return;
+			Q.Text.get(pluginName + '/content', function (err, text) {
+				text = Q.getObject(["notifications", messageType], text);
+				if (!text || typeof text !== 'string') {
+					return console.warn('notificationsAsNotice: no text for ' + messageType);
 				}
 
-				// if stream retained - don't show notice
-				if (stream.retainedByKey()) {
-					return;
-				}
+				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType,
+				function () {
+					var stream = this;
 
-				Streams.Avatar.get(byUserId, function (err, avatar) {
-					var text = Q.getObject([messageType], texts);
+					Streams.Avatar.get(byUserId, function (err, avatar) {
+						var templateName;
 
-					if (!text || typeof text !== 'string') {
-						return console.warn('notificationsAsNotice: no text for ' + messageType);
-					}
+						if (Q.getObject("showSubject", noticeOptions) !== false) {
+							templateName = text + content;
+						} else {
+							templateName = content;
+						}
 
-					Q.Notice.add({
-						content: text.replace('{{displayName}}', avatar.displayName()).replace('{{content}}', content),
-						timeOut: 10,
-						handler: stream.url()
+						if (!templateName) {
+							return;
+						}
+
+						Q.Template.set(templateName, templateName);
+						Q.Template.render(templateName, {
+							stream: stream,
+							avatar: avatar,
+							message: message
+						}, function (err, html) {
+							var msg;
+							if (msg = Q.firstErrorMessage(err)) {
+								return console.error(msg);
+							}
+
+							if (!html) {
+								return;
+							}
+
+							Q.Notices.add(Q.extend(noticeOptions, {
+								content: html,
+								handler: messageUrl || stream.url()
+							}));
+						});
 					});
 				});
 			});
 		}, 'Streams.notifications.notice');
-
-		Q.Text.get('Streams/content', function (err, text) {
-			var msg = Q.firstErrorMessage(err);
-			if (msg) {
-				return console.warn(msg);
-			}
-
-			Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
-			Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
-			Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
-			Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
-			Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
-			Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
-			Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
-		});
-	};
+	}
 
 	// handle updates
 	function _updateDisplayName(fields, k) {
@@ -5415,6 +5445,20 @@ Q.onInit.add(function _Streams_onInit() {
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
 
+	Q.Text.get('Streams/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			return console.warn(msg);
+		}
+
+		Q.Template.set('Streams/followup/mobile/alert', Q.getObject(["followup", "mobile", "alert"], text));
+		Q.Template.set('Streams/followup/mobile/confirm', Q.getObject(["followup", "mobile", "confirm"], text));
+		Q.Template.set('Streams/followup/mobile', Q.getObject(["followup", "mobile", "check"], text));
+		Q.Template.set('Streams/followup/email/alert', Q.getObject(["followup", "email", "alert"], text));
+		Q.Template.set('Streams/followup/email/confirm', Q.getObject(["followup", "email", "confirm"], text));
+		Q.Template.set('Streams/followup/email/subject', Q.getObject(["followup", "email", "subject"], text));
+		Q.Template.set('Streams/followup/email/body', Q.getObject(["followup", "email", "body"], text));
+	});
 }, 'Streams');
 
 Q.Tool.beforeRemove("").set(function (tool) {

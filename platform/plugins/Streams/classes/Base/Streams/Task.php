@@ -19,6 +19,7 @@
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
  * @param {string} [$fields.instructions] defaults to null
+ * @param {string} [$fields.errors] defaults to null
  */
 abstract class Base_Streams_Task extends Db_Row
 {
@@ -39,6 +40,12 @@ abstract class Base_Streams_Task extends Db_Row
 	 * @type string
 	 * @default null
 	 * instructions for the task, encoded in binary, for workers to access
+	 */
+	/**
+	 * @property $errors
+	 * @type string
+	 * @default null
+	 * here store all errors occurred during import
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -402,6 +409,60 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_errors
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_errors($value)
+	{
+		if (!isset($value)) {
+			return array('errors', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('errors', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".errors");
+		if (strlen($value) > 65535)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".errors");
+		return array('errors', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the errors field
+	 * @return {integer}
+	 */
+	function maxSize_errors()
+	{
+
+		return 65535;			
+	}
+
+	/**
+	 * Returns schema information for errors column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_errors()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'text',
+    1 => 65535,
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -431,7 +492,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'streamName', 'instructions');
+		$field_names = array('publisherId', 'streamName', 'instructions', 'errors');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

@@ -1,0 +1,47 @@
+{
+	"request": {
+		"error": "Error {{status}} during request",
+		"canceled": "Request canceled",
+		"500": "Internal server error",
+		"404": "Not found: {{url}}",
+		"0": "Request interrupted"
+	},
+	"words": {
+		"tap": "tap",
+		"click": "click",
+		"yes": "yes",
+		"no": "no",
+		"Tap": "Tap",
+		"Click": "Click",
+		"Yes": "Yes",
+		"No": "No"
+	},
+	"months": {
+		"1": "January",
+		"2": "February", 
+		"3": "March",
+		"4": "April", 
+		"5": "May",
+		"6": "June",
+		"7": "July",
+		"8": "August",
+		"9": "September",
+		"10": "October",
+		"11": "November",
+		"12": "December"
+	},
+	"audio": {
+		"allowMicrophoneAccess": "Please allow access to your microphone",
+		"record": "Record",
+		"recording": "Recording",
+		"remains": "remains",
+		"maximum": "maximum",
+		"playing": "Playing",
+		"recorded": "Recorded",
+		"clip": "clip",
+		"orupload": "Or Upload",
+		"usethis": "Use This",
+		"discard": "Discard",
+		"encoding": "Encoding"
+	}
+}

@@ -14,7 +14,7 @@
  *   @param {Q.Event} [options.beforePhotos] Triggered when photos are about to be rendered.
  *   @param {Q.Event} [options.onPhotos] Triggered when photos have been rendered.
  *   @param {Q.Event} [options.onPhotosLoaded] Triggered when the photos have all been loaded.
- *   @param {String} [options.uid='me'] Optional. The uid of the user on the platform whose photos are shown. Facebook only allows 'me' or a page id as a value.
+ *   @param {String} [options.xid='me'] Optional. The xid of the user on the platform whose photos are shown. Facebook only allows 'me' or a page id as a value.
  *   @param {String} [$options.fetchBy='album'] The tool supports different algoriths for fetching photos. Can be either by 'album' or 'tags'. Maybe more will be added later.
  *   @param {String} [$options.preprocessAlbums] Optional function to process the albums array before presenting it in the select. Receives a reference to the albums array as the first parameter, and a callback to call when it's done as the second.
  *   @param {String} [$options.preprocessPhotos] Optional function to process the photos array before presenting it in the select. Receives a reference to the albums array as the first parameter, and a callback to call when it's done as the second.
@@ -57,7 +57,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 			});
 		}),
 		tags: Q.getter(function(callback) {
-			FB.api('/'+state.uid+'/photos?limit=100&type=tagged&fields='+fields,
+			FB.api('/'+state.xid+'/photos?limit=100&type=tagged&fields='+fields,
 			function (response) {
 				_returnedPhotos(response, callback);
 			});
@@ -79,7 +79,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 	}
 
 	function fetchAlbums(callback) {
-		FB.api('/'+state.uid+'/albums?fields=id,name,type,created_time', function (response) {
+		FB.api('/'+state.xid+'/albums?fields=id,name,type,created_time', function (response) {
 			if (!response || response.error) {
 				return;
 			}
@@ -326,7 +326,7 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 		});
 		callback();
 	},
-	uid: 'me',
+	xid: 'me',
 	fetchBy: 'album',
 	onLoad: new Q.Event(function() {}),
 	onError: new Q.Event(function() {}),

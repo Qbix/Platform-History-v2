@@ -12,5 +12,9 @@ function Streams_invited_response()
 		Users_User::fetch($invite->userId, true)->setVerified();
 	}
 	$querystring = http_build_query(array('Q.Streams.token' => $token), null, '&');
+	if (!Q_Valid::url($invite->appUrl)) {
+		$stream = Streams::fetchOne($invite->publisherId, $invite->publisherId, $invite->streamName, true);
+		$invite->appUrl = $stream->url();
+	}
 	Q_Response::redirect($invite->appUrl.'?'.$querystring);
 }

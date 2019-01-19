@@ -52,10 +52,44 @@ Q.text = {
 			"404": "Not found: {{url}}",
 			"0": "Request interrupted"
 		},
-		"months": [
-			'January', 'February', 'March', 'April', 'May', 'June',
-			'July', 'August', 'September', 'October', 'November', 'December'
-		]
+		"words": {
+			"tap": "tap",
+			"click": "click",
+			"yes": "yes",
+			"no": "no",
+			"Tap": "Tap",
+			"Click": "Click",
+			"Yes": "Yes",
+			"No": "No"
+		},
+		"months": {
+			"1": "January",
+			"2": "February", 
+			"3": "March",
+			"4": "April", 
+			"5": "May",
+			"6": "June",
+			"7": "July",
+			"8": "August",
+			"9": "September",
+			"10": "October",
+			"11": "November",
+			"12": "December"
+		},
+		"audio": {
+			"allowMicrophoneAccess": "Please allow access to your microphone",
+			"record": "Record",
+			"recording": "Recording",
+			"remains": "remains",
+			"maximum": "maximum",
+			"playing": "Playing",
+			"recorded": "Recorded",
+			"clip": "clip",
+			"orupload": "Or Upload",
+			"usethis": "Use This",
+			"discard": "Discard",
+			"encoding": "Encoding"
+		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
 
@@ -6901,11 +6935,11 @@ Q.formPost.counter = 0;
 
 /**
  * Requests a diff from the server to find any updates to files since
- * the last Q.ut timestamp, then saves current timestamp in Q.ut cookie.
+ * the last Q_ut timestamp, then saves current timestamp in Q_ut cookie.
  * @param {Function} callback
  */
 Q.updateUrls = function(callback) {
-	var timestamp, url, json, ut = Q.cookie('Q.ut');
+	var timestamp, url, json, ut = Q.cookie('Q_ut');
 	if (ut) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
@@ -6917,7 +6951,7 @@ Q.updateUrls = function(callback) {
 			json = JSON.stringify(Q.updateUrls.urls);
 			localStorage.setItem(Q.updateUrls.lskey, json);
 			if (timestamp = result['#timestamp']) {
-				Q.cookie('Q.ut', timestamp);
+				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000});
@@ -6927,7 +6961,7 @@ Q.updateUrls = function(callback) {
 			json = JSON.stringify(Q.updateUrls.urls);
 			localStorage.setItem(Q.updateUrls.lskey, json);
 			if (timestamp = result['#timestamp']) {
-				Q.cookie('Q.ut', timestamp);
+				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000});
@@ -9092,6 +9126,8 @@ Q.Text = {
 	setLanguage: function (language, locale) {
 		Q.Text.language = language.toLowerCase();
 		Q.Text.locale = locale && locale.toUpperCase();
+		Q.Text.languageLocaleString = Q.Text.language
+			+ (Q.Text.useLocale ? '-' + Q.Text.locale : '');
 	},
 
 	/**
@@ -9104,9 +9140,15 @@ Q.Text = {
 	 * @param {Boolean} [merges=false] If true, merges on top instead of replacing
 	 */
 	set: function (name, content, merge) {
-		var language = Q.Text.language;
-		var locale = Q.Text.locale;
-		Q.setObject([language, locale, name], content, Q.Text.collection);
+		var obj = null;
+		if (merge) {
+			obj = Q.getObject([Q.Text.languageLocaleString, name], content);
+		}
+		if (obj) {
+			Q.extend(obj, 10, content);
+		} else {
+			Q.setObject([Q.Text.languageLocaleString, name], content, Q.Text.collection);
+		}
 	},
 
 	/**
@@ -9127,12 +9169,9 @@ Q.Text = {
 	 */
 	get: function (name, callback, options) {
 		options = options || {};
-		var language = options.language || Q.Text.language;
-		var locale = (options.language && options.locale)
-			|| (Q.getObject('Q.info.text.useLocale') ? Q.Text.locale : '');
 		var dir = Q.Text.dir;
-		var suffix = locale ? '-' + locale : '';
-		var content = Q.getObject([language, locale, name], Q.Text.collection);
+		var lls = Q.Text.languageLocaleString;
+		var content = Q.getObject([lls, name], Q.Text.collection);
 		if (content) {
 			Q.handle(callback, Q.Text, [null, content]);
 			return true;
@@ -9157,19 +9196,23 @@ Q.Text = {
 			if (options && options.ignoreCache) {
 				func = func.force;
 			}
-			var url = Q.url(dir + '/' + name + '/' + language + suffix + '.json');
+			var url = Q.url(dir + '/' + name + '/' + lls + '.json');
 			return func(name, url, pipe.fill(name), options);
 		});
 	}
 };
 
+// Set the initial language, but this can be overridden after Q.onInit
+Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
+
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
+	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
 		if (!err) {
 			Q.Text.set(name, content, options);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
-	}, options);
+	}, o);
 }, {
 	cache: Q.Cache.document('Q.Text.get', 100),
 	throttle: 'Q.Text.get'
@@ -10915,7 +10958,7 @@ Q.Pointer = {
 							}
 							return; // perhaps it disappeared
 						}
-						var offset = Q.Pointer.offset(target);
+						var offset = target.getBoundingClientRect(); //Q.Pointer.offset(target)
 						point = {
 							x: offset.left + target.offsetWidth / 2,
 							y: offset.top + target.offsetHeight / 2
@@ -10945,10 +10988,14 @@ Q.Pointer = {
 			}, o.show.delay);
 		}));
 		if (!Q.Pointer.hint.addedListeners) {
+			Q.Pointer.stopHintsIgnore = true;
 			Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
 			Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
 			Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
 			Q.Pointer.hint.addedListeners = true;
+			setTimeout(function () {
+				delete Q.Pointer.stopHintsIgnore;
+			}, 0);
 		}
 		if (options.waitForEvents) {
 			return;
@@ -10977,6 +11024,9 @@ Q.Pointer = {
 	 * @param {HTMLElement} [container] If provided, only hints for elements in this container are stopped.
 	 */
 	stopHints: function (container) {
+		if (Q.Pointer.stopHintsIgnore) {
+			return; // workaround for iOS Safari
+		}
 		var imgs = Q.Pointer.hint.imgs;
 		var imgs2 = [];
 		Q.each(imgs, function (i, img) {
@@ -11663,6 +11713,7 @@ Q.confirm.options = {
  * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
+ * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
  * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
  * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
@@ -11679,15 +11730,19 @@ Q.prompt = function(message, callback, options) {
 	if (options === undefined) options = {};
 	var o = Q.extend({}, Q.prompt.options, options);
 	var buttonClicked = false;
+	var attr = {
+		'placeholder': o.placeholder,
+		'maxlength': o.maxLength
+	};
+	if (o.initialText) {
+		attr.value = o.initialText;
+	}
 	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
 			$('<p />').html(message),
 			$('<div class="Q_buttons" />').append(
-				$('<input type="text" />').attr({
-					'placeholder': o.placeholder,
-					'maxlength': o.maxLength
-				}), ' ',
+				$('<input type="text" />').attr(attr), ' ',
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
@@ -11706,6 +11761,7 @@ Q.prompt = function(message, callback, options) {
 					_done();
 				}
 			});
+			field[0].select();
 		},
 		'onClose': {'Q.prompt': function() {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
@@ -12357,8 +12413,20 @@ Q.onInit.add(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
 	}, 'Q.Socket');
-	var info = Q.first(Q.info.languages) || ['en', 'US', 1];
-	Q.Text.setLanguage(info[0], info[1]);
+	var info = Q.first(Q.info.languages);
+	if (info) {
+		Q.Text.setLanguage.apply(Q.Text, info);
+	}
+	var QtQw = Q.text.Q.words;
+	QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
+	QtQw.clickOrTap = isTouchscreen ? QtQw.click : QtQw.tap;
+
+	Q.Text.get('Q/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Q.extend(Q.text.Q, text);
+	});
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -12737,7 +12805,7 @@ Q.Camera = {
 		onClose: new Q.Event(),
 		options: {
 			sound: {
-				src: "{{Q}}/audio/qrfound.mp3"
+				src: "{{Q}}/audio/scanned.mp3"
 			},
 			dialog: {
 				title: "Scan QR codes"
@@ -12925,9 +12993,9 @@ Q.Camera = {
 
 /**
  * Operates with notices.
- * @class Q.Notice
+ * @class Q.Notices
  */
-Q.Notice = {
+Q.Notices = {
 
 	/**
 	 * Setting that changes notices slide down / slide up time.
@@ -12959,11 +13027,11 @@ Q.Notice = {
 	add: function(options)
 	{
 		if (!this.container instanceof HTMLElement) {
-			throw new Error("Q.Notice.add: Notices container element don't exists.");
+			throw new Error("Q.Notices.add: Notices container element don't exists.");
 		}
 
 		// default options
-		options = Q.extend({
+		var o = Q.extend({
 			key: null,
 			closeable: true,
 			type: 'common',
@@ -12971,74 +13039,61 @@ Q.Notice = {
 			persistent: false
 		}, options);
 
-		var key = options.key;
-		var content = options.content;
-		var closeable = options.closeable;
-		var timeout = options.timeout;
-		var handler = options.handler;
-		var persistent = options.persistent;
-		var noticeClass = 'Q_' + options.type + '_notice';
-
+		var key = o.key;
+		var content = o.content;
+		var noticeClass = 'Q_' + o.type + '_notice';
 
 		// if key not empty and notice with this key already exist
-		if (key && this.container.querySelector('li[data-key="' + key + '"]')) {
-			throw new Error('Q.Notice.add: A notice with key "' + key + '" already exists.');
+		if (key && this.container.querySelector('li[data-key="'+key+'"]')) {
+			throw new Error('Q.Notices.add: A notice with key "'+key+'" already exists.');
 		}
-		//document.getElementsByTagName('head')[0].appendChild(script);
 		var ul = this.container.getElementsByTagName('ul')[0];
 		if (!ul) {
 			ul = document.createElement('ul');
 			this.container.appendChild(ul);
 		}
 		var li = document.createElement('li');
-		li.setAttribute('data-key', key);
-		li.setAttribute('data-persistent', persistent);
-		li.setAttribute('data-local', true);
+		var notice = Q.take(o, ['key', 'closeable', 'persistent', 'timeout']);
+		notice.local = true;
+		if (key) {
+			li.setAttribute('data-key', notice.key);
+		}
+		li.setAttribute('data-notice', JSON.stringify(notice));
 		li.classList.add(noticeClass);
 		li.onclick = function () {
-			Q.handle(handler, li, [content]);
+			Q.handle(o.handler, li, [content]);
+			Q.Notices.remove(li);
 		};
 		var span = document.createElement('span');
 		span.innerHTML = content.trim();
 		li.appendChild(span);
-
-		// close icon
-		if (closeable) {
+		if (o.closeable) {
 			var closeIcon = document.createElement('span');
 			closeIcon.classList.add("Q_close");
 			li.appendChild(closeIcon);
 			closeIcon.onclick = function (event) {
 				event.stopPropagation();
-				Q.Notice.remove(li);
+				Q.Notices.remove(li);
 			}
 		}
-
-		// whether remove notice by timeout
-		if (typeof timeout === 'number' && timeout > 0) {
+		if (typeof o.timeout === 'number' && o.timeout > 0) {
 			setTimeout(function () {
-				Q.Notice.remove(li);
-			}, timeout * 1000);
+				Q.Notices.remove(li);
+			}, o.timeout * 1000);
 		}
-
-		// insert new notice as first child
-		ul.insertBefore(li, ul.firstChild);
-
-		// apply transition
+		ul.appendChild(li);
 		setTimeout(function () {
-			Q.Notice.show(li);
+			Q.Notices.show(li);
 
-			if (persistent) {
+			if (o.persistent) {
+				var oj = Q.take(o, ['persistent', 'closeable', 'timeout', 'handler']);
 				Q.req('Q/notice', [], null, {
 					method: 'post',
 					fields: {
-						key: key,
+						// we need key for persistent notices
+						key: key || Date.now().toString(),
 						content: content,
-						options: {
-							persistent: persistent,
-							closeable: closeable,
-							timeout: timeout,
-							handler: handler
-						}
+						options: oj
 					}
 				});
 			}
@@ -13074,28 +13129,25 @@ Q.Notice = {
 	{
 		if (Array.isArray(notice)) {
 			notice.forEach(function(item) {
-				Q.Notice.remove(item);
+				Q.Notices.remove(item);
 			});
 		}
-
 		notice = this.get(notice);
-
 		if (notice instanceof HTMLElement) {
 			this.hide(notice);
-
 			setTimeout(function () {
 				var key = notice.getAttribute('data-key');
-
+				var json = notice.getAttribute('data-notice');
+				var o = JSON.parse(json) || {};
 				// if notice persistent - send request to remove from session
-				if (typeof key === 'string' && notice.getAttribute('data-persistent')) {
+				if (typeof key === 'string' && o.persistent) {
 					Q.req('Q/notice', 'data', null, {
 						method: 'delete',
 						fields: {key: key}
 					});
 				}
-
 				notice.remove();
-			}, 750);
+			}, 1000);
 		}
 	},
 	/**
@@ -13105,12 +13157,10 @@ Q.Notice = {
 	 * Unique key of notice which has been provided when notice was added.
 	 * Or notice HTMLElement
 	 */
-	hide: function(notice)
-	{
+	hide: function(notice) {
 		notice = this.get(notice);
-
 		if (notice instanceof HTMLElement) {
-			notice.classList.remove("Q_show_notice");
+			notice.addClass("Q_hidden_notice").removeClass("Q_show_notice");
 		}
 	},
 	/**
@@ -13124,59 +13174,41 @@ Q.Notice = {
 	{
 		notice = this.get(notice);
 		if (notice instanceof HTMLElement) {
-			notice.classList.add("Q_show_notice");
+			notice.removeClass("Q_hidden_notice").addClass("Q_show_notice");
 		}
 	},
 	/**
 	 * Parse notices loaded from backend.
-	 * @method parseNotices
+	 * @method process
 	 */
-	parseNotices: function () {
-		var noticeElements = document.getElementById("notices").getElementsByTagName("li");
-		var options = {}, handler, key, persistent, timeout, type;
+	process: function () {
+		var noticeElement = document.getElementById("notices_slot");
+		if (!(noticeElement instanceof HTMLElement)) {
+			return console.warn("Q.Notices.process: element with id=notices_slot not found");
+		}
 
-		for (var li of noticeElements) {
+		var noticeElements = noticeElement.getElementsByTagName("li");
+		var options, handler, key, persistent, timeout, type;
+
+		Q.each(noticeElements, function () {
 			options = {};
-			options.content = li.innerHTML;
-
-			handler = li.getAttribute('data-handler');
-			if (handler) {
-				options.handler = handler;
-			}
-
-			key = li.getAttribute('data-key');
-			if (typeof key === 'string') {
-				options.key = key;
-			}
-
-			persistent = li.getAttribute('data-persistent');
-			if (persistent) {
-				options.persistent = persistent;
-			}
-
-			timeout = li.getAttribute('data-timeout');
-			if (timeout) {
-				options.timeout = timeout;
-			}
-
-			type = li.getAttribute('data-type') || 'common';
-			if (type) {
-				options.type = type;
-			}
-
-			// need to remove before adding because can be keys conflict
-			li.remove();
-
-			Q.Notice.add(options);
-		};
+			options.content = this.innerHTML;
+			options.type = 'common';
+			var json = this.getAttribute('data-notice');
+			var o = JSON.parse(json) || {};
+			Q.extend(options, o);
+			this.remove(); // need to remove before adding because can be keys conflict
+			delete options.persistent; // this was already set on the server
+			Q.Notices.add(options);
+		});
 	}
 };
-Q.Notice.parseNotices();
 
-/**
- * This loads bluebird library to enable Promise for browsers which do not
- * support Promise natively. For example: IE, Opera Mini.
- */
+Q.onInit.add(function () {
+	// on Q initiated, parse all notices loaded from backend and parse them
+	Q.Notices.process();
+});
+
 Q.beforeInit.addOnce(function () {
 	if (!Q.info.baseUrl) {
 		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
@@ -13189,6 +13221,11 @@ Q.beforeInit.addOnce(function () {
 		Q.info.udid = _udid;
 		Q.cookie('Q_udid', _udid);
 	}
+	if (Q.info.cookies.indexOf('Q_dpr')) {
+		Q.cookie('Q_dpr', window.devicePixelRatio);
+	}
+	// This loads bluebird library to enable Promise for browsers which do not
+	// support Promise natively. For example: IE, Opera Mini.
 	// WARN: Could have race conditions:
 	if (!(typeof Promise !== "undefined"
 	&& Promise.toString().indexOf("[native code]") !== -1)) {

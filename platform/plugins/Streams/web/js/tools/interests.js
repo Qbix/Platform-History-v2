@@ -65,7 +65,9 @@ Q.Tool.define("Streams/interests", function (options) {
 		state.communityId = state.communityId || Q.Users.communityId;
 	
 		function addExpandable(category, interests) {
-			var img = "<i class='qp-communities-" + category.toLowerCase() + " white'></i>";
+			var src = Q.getObject([
+				Q.Users.communityId, category, 'white'
+			], Streams.Interests.info);
 			var content = '';
 			var count = 0;
 			Q.each(interests, function (subcategory, interests) {
@@ -76,7 +78,8 @@ Q.Tool.define("Streams/interests", function (options) {
 				count += Object.keys(interests).length;
 			});
 			var expandableOptions = Q.extend({
-				title: img+"<span class='Streams_interests_category_title'>"+category+"</span>",
+				title: "<img src='"+Q.url(src)+"'>"
+					+"<span class='Streams_interests_category_title'>"+category+"</span>",
 				content: content,
 	            count: '',
 				category: category
@@ -135,7 +138,9 @@ Q.Tool.define("Streams/interests", function (options) {
 						}
 						var $other = $expandable.find('.Streams_interests_other');
 						if (!$other.length) {
-							$other = $('<h3 class="Streams_interests_other">Other</h3>')
+							var otherText = text.interests.Other;
+							$other = $('<h3 class="Streams_interests_other"></h3>')
+								.html(otherText)
 								.appendTo($content);
 						}
 						var id = 'Streams_interest_title_' + normalized;

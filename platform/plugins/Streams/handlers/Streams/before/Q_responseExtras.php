@@ -14,7 +14,7 @@ function Streams_before_Q_responseExtras()
 	if (!Q_Request::isAjax()) {
 		$invite_url = Q_Config::get('Streams', 'invite', 'url', "http://invites.to");
 		Q_Response::setScriptData('Q.plugins.Streams.invite.url', $invite_url);
-		if ($sizes = Q_Config::expect('Streams', 'types', 'Streams/image', 'sizes')) {
+		if ($sizes = Q_Image::getSizes('Streams/image')) {
 			sort($sizes);
 			Q_Response::setScriptData('Q.plugins.Streams.image.sizes', $sizes);
 		}

@@ -65,9 +65,6 @@
 				"interval": 60
 			}
 		},
-		"external": {
-			"secret": null
-		},
 		"configFiles": ["Q/config/bootstrap.json"],
 		"install": {
 			"timeLimit": 600
@@ -120,11 +117,6 @@
 				}
 			}
 		},
-		"images": {
-			"maxWidth": 5000,
-			"maxHeight": 5000,
-			"pixabay": null
-		},
 		"uploads": {
 			"limits": {
 				"time": 18000,
@@ -156,6 +148,16 @@
 			"ignoreCache": false,
 			"dontCache": false,
 			"duration": 3600
+		},
+		"images": {
+			"x": {
+				"sizes": {"x": ""},
+				"defaultSize": "x"
+			},
+			"maxWidth": 5000,
+			"maxHeight": 5000,
+			"pixabay": null
+
 		}
 	},
 	"Db": {

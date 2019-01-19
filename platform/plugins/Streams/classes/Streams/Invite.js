@@ -34,7 +34,7 @@ function Streams_Invite (fields) {
 var Base = Q.require('Base/Streams/Invite');
 
 Streams_Invite.prototype.url = function _Streams_Invite_prototype_getUrl() {
-	return Streams.invitedUrl(this.fields.token);
+	return Streams.inviteUrl(this.fields.token);
 };
 
 Streams_Invite.prototype.beforeSave = function _Streams_Invite_prototype_beforeSave(fields, callback) {

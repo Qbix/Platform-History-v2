@@ -1060,7 +1060,7 @@ class Q_Session
 		} else {
 			$id = str_replace('-', '', Q_Utils::uuid());
 		}
-		$secret = Q_Config::get('Q', 'external', 'secret', null);
+		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (isset($secret)) {
 			$sig = Q_Utils::signature($id, "$secret");
 			$id .= substr($sig, 0, 32);
@@ -1112,7 +1112,7 @@ class Q_Session
 		$result = bin2hex(base64_decode($result));
 		$a = substr($result, 0, 32);
 		$b = substr($result, 32, 32);
-		$secret = Q_Config::get('Q', 'external', 'secret', null);
+		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		$c = isset($secret)
 			? Q_Utils::hashEquals($b, substr(Q_Utils::signature($a, $secret), 0, 32))
 			: true;

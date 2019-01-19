@@ -24,8 +24,8 @@ var Users = Q.Users;
 Q.Tool.define('Users/list', function () {
 	var tool = this;
 	var state = tool.state;
-	if (!state.userIds) {
-		throw new Q.Error("Users/list tool: userIds is required")
+	if (Q.isEmpty(state.userIds)) {
+		return;
 	}
 	var lastScrollTop = 0;
 	var $te = $(tool.element);

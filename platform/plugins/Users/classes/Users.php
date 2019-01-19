@@ -118,7 +118,48 @@ abstract class Users extends Base_Users
 			->fetchDbRows(null, null, 'label');
 		return $contacts;
 	}
+	/**
+	 * Return an array of users_contact rows where user assigned by labels
+	 * @method byRoles
+	 * @static
+	 * @param {string|array|Db_Expression} [$filter=null]
+	 *  You can pass additional criteria here for the label field
+	 *  in the `Users_Contact::select`, such as an array or Db_Range
+	 * @param {array} [$options=array()] Any additional options to pass to the query, such as "ignoreCache"
+	 * @param {bool} [$options.onlyCommunities=false] Set this to true if you want to get only communities rows (userId - is community).
+	 * @param {string} [$userId=null] If not passed, the logged in user is used, if any
+	 * @return {array} An associative array of $roleName => $contactRow pairs
+	 * @throws {Users_Exception_NotLoggedIn}
+	 */
+	static function byRoles ($filter = null, $options = array(), $userId = null)
+	{
+		if (!isset($userId)) {
+			$user = Users::loggedInUser(false, false);
+			if (!$user) {
+				return array();
+			}
+			$userId = $user->id;
+		}
 
+		$contacts = Users_Contact::select()
+			->where(array(
+				'contactUserId' => $userId
+			))->andWhere($filter ? array('label' => $filter) : null)
+			->options($options)
+			->fetchDbRows(null, null, 'userId');
+
+		if (Q::ifset($options, "onlyCommunities", false)) {
+			foreach ($contacts as $i => $contact) {
+				if (Users::isCommunityId($contact->userId)) {
+					continue;
+				}
+
+				unset($contacts[$i]);
+			}
+		}
+
+		return $contacts;
+	}
 	/**
 	 * Intelligently retrieves user by id
 	 * @method fetch
@@ -143,6 +184,9 @@ abstract class Users extends Base_Users
 	 */
 	static function oAuth($platform, $appId = null)
 	{
+		return;
+		// TODO: REFACTOR TO USE oAuth 2
+		/*
 		$nativeuser = self::loggedInUser();
 
 		if(!$nativeuser)
@@ -157,16 +201,16 @@ abstract class Users extends Base_Users
 		$customOptions = Q_Config::get('Users', 'apps', $platform, $appId, 'options', null);
 
 		#If the user already has a token in our DB:
-		$app_user = new Users_AppUser();
-		$app_user->userId = $nativeuser->id;
-		$app_user->platform = $platform;
-		$app_user->appId = $appId;
+		$externalFrom = new Users_ExternalFrom();
+		$externalFrom->userId = $nativeuser->id;
+		$externalFrom->platform = $platform;
+		$externalFrom->appId = $appId;
 
-		if($app_user->retrieve())
+		if($externalFrom->retrieve())
 		{
 				$zt = new Zend_Oauth_Token_Access();
-				$zt->setToken($app_user->access_token);
-				$zt->setTokenSecret($app_user->session_secret);
+				$zt->setToken($externalFrom->access_token);
+				$zt->setTokenSecret($externalFrom->session_secret);
 
 				return $zt->getHttpClient($oauthOptions);
 		}
@@ -182,9 +226,9 @@ abstract class Users extends Base_Users
 			$_SESSION[$platform.'_request_token'] = null;
 
 			#Save tokens to database
-			$app_user->access_token = $token->getToken();
-			$app_user->session_secret = $token->getTokenSecret();
-			$app_user->save();
+			$externalFrom->accessToken = $token->getToken();
+			$externalFrom->setExtra('secret') = $token->getTokenSecret();
+			$externalFrom->save();
 
 			return $token->getHttpClient($oauthOptions);
 		}
@@ -198,6 +242,7 @@ abstract class Users extends Base_Users
 
 			return null;
 		}
+		*/
 
 	}
 
@@ -210,6 +255,9 @@ abstract class Users extends Base_Users
 	 */
 	static function oAuthClear($platform, $appId = null)
 	{
+		return;
+		// TODO: REFACTOR THIS
+		/*
 		$nativeuser = self::loggedInUser();
 
 		if(!$nativeuser)
@@ -221,12 +269,13 @@ abstract class Users extends Base_Users
 			$appId = Q_Config::expect('Users', 'apps', $platform, $app, 'appId');
 		}
 
-		$app_user = new Users_AppUser();
-		$app_user->userId = $nativeuser->id;
-		$app_user->platform = $platform;
-		$app_user->appId = $appId;
-		$app_user->retrieve();
-		$app_user->remove();
+		$externalFrom = new Users_ExternalFrom();
+		$externalFrom->userId = $nativeuser->id;
+		$externalFrom->platform = $platform;
+		$externalFrom->appId = $appId;
+		$externalFrom->retrieve();
+		$externalFrom->remove();
+		*/
 	}
 
 	/**
@@ -312,51 +361,54 @@ abstract class Users extends Base_Users
 		$emailAddress = null;
 
 		// Try authenticating the user with the specified platform
-		$app_user = Users_AppUser::authenticate($platform, $appId);
-		if (!$app_user) {
+		$externalFrom = Users_ExternalFrom::authenticate($platform, $appId);
+		if (!$externalFrom) {
 			// no authentication happened
 			return $userWasLoggedIn ? $user : false;
 		}
-		$uid = $app_user->platform_uid;
+		$xid = $externalFrom->xid;
 		$authenticated = true;
 		if ($retrieved) {
-			$user_uid = $user->getUid($platform);
-			if (!$user_uid) {
+			$platformApp = "$platform\t$appId";
+			$user_xid = $user->getXid($platformApp);
+			if (!$user_xid) {
 				// this is a logged-in user who was never authenticated with this platform.
 				// First, let's find any other user who has authenticated with the
-				// authenticated uid, and set their $field to 0.
+				// authenticated xid, and set their $field to 0.
 				$authenticated = 'connected';
-				$ui = Users::identify($platform, $uid);
+				$ui = Users::identify($platform, $xid);
 				if ($ui) {
 					$u = new Users_User();
 					$u->id = $ui->userId;
 					if ($u->retrieve()) {
-						$u->clearUid($platform);
+						$u->clearXid($platformApp);
 						$u->save();
 					};
 					$ui->remove();
 				}
 
-				// Now, let's associate the current user's account with this platform uid.
+				// Now, let's associate the current user's account with this platform xid.
 				if (!$user->displayName()) {
 					// import some fields automatically from the platform
-					$imported = $app_user->import($import);
+					$imported = $externalFrom->import($import);
 				}
-				$user->setUid($platform, $uid);
+				$platformApp = "$platform\t$appId";
+				$user->setXid($platformApp, $xid);
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$platformApp = "$platform\t$appId";
+				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
 				$ui->state = 'verified';
 				$ui->userId = $user->id;
 				$ui->save(true);
-			} else if ($user_uid !== $uid) {
+			} else if ($user_xid !== $xid) {
 				// The logged-in user was authenticated with the platform already,
-				// and associated with a different platform uid.
+				// and associated with a different platform xid.
 				// Most likely, a completely different person has logged into the platform
-				// at this computer. So rather than changing the associated plaform uid
+				// at this computer. So rather than changing the associated plaform xid
 				// for the logged-in user, simply log out and essentially run this function
 				// from the beginning again.
 				Users::logout();
@@ -366,19 +418,20 @@ abstract class Users extends Base_Users
 			}
 		}
 		if (!$retrieved) {
-			$ui = Users::identify($platform, $uid, null);
+			$ui = Users::identify($platform, $xid, null);
 			if ($ui) {
 				$user = new Users_User();
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
-					throw new Q_Exception("Users_Identify for $platform uid $uid exists but not user with id {$ui->userId}");
+					throw new Q_Exception("Users_Identify for $platform xid $xid exists but not user with id {$ui->userId}");
 				}
 				$retrieved = true;
 				if ($ui->state === 'future') {
 					$authenticated = 'adopted';
-					$user->setUid($platform, $uid);
-					$user->signedUpWith = $platform; // should have been "none" before this
+					$platformApp = "$platform\t$appId";
+					$user->setXid($platformApp, $xid);
+					$user->signedUpWith = $platformApp; // should have been "none" before this
 					/**
 					 * @event Users/adoptFutureUser {before}
 					 * @param {Users_User} user
@@ -389,7 +442,7 @@ abstract class Users extends Base_Users
 					if ($ret) {
 						$user = $ret;
 					}
-					$imported = $app_user->import($import);
+					$imported = $externalFrom->import($import);
 					$user->save();
 
 					$ui->state = 'verified';
@@ -404,16 +457,16 @@ abstract class Users extends Base_Users
 					Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
 				} else {
 					// If we are here, that simply means that we already verified the
-					// $uid => $userId mapping for some existing user who signed up
+					// $xid => $userId mapping for some existing user who signed up
 					// and has been using the system. So there is nothing more to do besides
 					// setting this user as the logged-in user below.
 				}
 			} else {
-				// user is logged out and no user corresponding to $uid yet
+				// user is logged out and no user corresponding to $xid yet
 
 				$authenticated = 'registered';
 				
-				$imported = $app_user->import($import);
+				$imported = $externalFrom->import($import);
 				if (!empty($imported['email'])) {
 					$ui = Users::identify('email', $imported['email'], 'verified');
 					if ($ui) {
@@ -427,7 +480,8 @@ abstract class Users extends Base_Users
 					}
 				}
 
-				$user->setUid($platform, $uid);
+				$platformApp = "$platform\t$appId";
+				$user->setXid($platformApp, $xid);
 				/**
 				 * @event Users/insertUser {before}
 				 * @param {Users_User} user
@@ -446,7 +500,8 @@ abstract class Users extends Base_Users
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$platformApp = "$platform\t$appId";
+				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
 				$ui->state = 'verified';
@@ -454,16 +509,16 @@ abstract class Users extends Base_Users
 				$ui->save(true);
 
 				// Download and save platform icon for the user
-				$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+				$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 				sort($sizes);
-				$icon = $app_user->icon($sizes, '.png');
+				$icon = $externalFrom->icon($sizes, '.png');
 				if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 					self::importIcon($user, $icon);
 					$user->save();
 				}
 		 	}
 		}
-		$app_user->userId = $user->id;
+		$externalFrom->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
 		Users::$cache['user'] = $user;
 		Users::$cache['authenticated'] = $authenticated;
@@ -488,96 +543,90 @@ abstract class Users extends Base_Users
 			/**
 			 * @event Users/updateUser {after}
 			 * @param {Users_User} user
-			 * @param {Users_AppUser} 'app_user'
+			 * @param {Users_ExternalFrom} externalFrom
 			 * @param {string} during
 			 */
-			Q::event('Users/updateUser', compact('user', 'app_user', 'during'), 'after');
+			Q::event('Users/updateUser', compact('user', 'externalFrom', 'during'), 'after');
 		} else {
 			/**
 			 * @event Users/insertUser {after}
 			 * @param {Users_User} 'user'
-			 * @param {Users_AppUser} 'app_user'
+			 * @param {Users_ExternalFrom} externalFrom
 			 * @param {string} during
 			 */
-			Q::event('Users/insertUser', compact('user', 'app_user', 'during'), 'after');
+			Q::event('Users/insertUser', compact('user', 'externalFrom', 'during'), 'after');
 		}
 
 		// Now make sure our master session contains the
 		// session info for the platform app.
-		$accessToken = $app_user->access_token;
-		$sessionExpires = $app_user->session_expires;
+		$accessToken = $externalFrom->accessToken;
+		$sessionExpires = $externalFrom->expires;
 		$key = $platform.'_'.$appId;
 		if (isset($_SESSION['Users']['appUsers'][$key])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$key];
-			$au = Users_AppUser::select()->where($pk)->fetchDbRow();
-			if (empty($au)) {
-				// somehow this app_user disappeared from the database
+			$ef = Users_ExternalFrom::select()->where($pk)->fetchDbRow();
+			if (empty($ef)) {
+				// somehow this externalFrom disappeared from the database
 				throw new Q_Exception_MissingRow(array(
-					'table' => 'AppUser',
+					'table' => 'ExternalFrom',
 					'criteria' => http_build_query($pk, null, ' & ')
 				));
 			}
-			if (empty($au->state) or $au->state !== 'added') {
-				$au->state = 'added';
-			}
 
-			if (!isset($au->access_token)
-			or ($au->access_token != $app_user->access_token)) {
+			if (!isset($ef->accessToken)
+			or ($ef->accessToken != $externalFrom->accessToken)) {
 				/**
-				 * @event Users/authenticate/updateAppUser {before}
+				 * @event Users/authenticate/updateExternalFrom {before}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-				$au->access_token = $accessToken;
-				$au->session_expires = $sessionExpires;
-				$au->save(); // update access_token in app_user
+				Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'before');
+				$ef->accessToken = $accessToken;
+				$ef->expires = $sessionExpires;
+				$ef->save(); // update accessToken in externalFrom
 				/**
-				 * @event Users/authenticate/updateAppUser {after}
+				 * @event Users/authenticate/updateExternalFrom {after}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
+				Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'after');
 			}
 		} else {
 			// We have to put the session info in
-			if ($app_user->retrieve(null, true)) {
+			if ($externalFrom->retrieve(null, true)) {
 				// App user exists in database. Do we need to update it?
-				if (!isset($app_user->access_token)
-				or $app_user->access_token != $accessToken) {
+				if (!isset($externalFrom->accessToken)
+				or $externalFrom->accessToken != $accessToken) {
 					/**
-					 * @event Users/authenticate/updateAppUser {before}
+					 * @event Users/authenticate/updateExternalFrom {before}
 					 * @param {Users_User} user
 					 */
-					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-					$app_user->access_token = $accessToken;
-					$app_user->save(); // update access_token in app_user
+					Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'before');
+					$externalFrom->accessToken = $accessToken;
+					$externalFrom->save(); // update accessToken in externalFrom
 					/**
-					 * @event Users/authenticate/updateAppUser {after}
+					 * @event Users/authenticate/updateExternalFrom {after}
 					 * @param {Users_User} user
 					 */
-					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
+					Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'after');
 				}
 			} else {
-				if (empty($app_user->state) or $app_user->state !== 'added') {
-					$app_user->state = 'added';
-				}
 				/**
-				 * @event Users/insertAppUser {before}
+				 * @event Users/insertExternalFrom {before}
 				 * @param {Users_User} user
 				 * @param {string} 'during'
 				 */
-				Q::event('Users/insertAppUser', compact('user', 'during'), 'before');
-				// The following may update an existing app_user row
+				Q::event('Users/insertExternalFrom', compact('user', 'during'), 'before');
+				// The following may update an existing externalFrom row
 				// in the rare event that someone tries to tie the same
 				// platform account to two different accounts.
 				// A platform app user can only be tied to one native user, so the
 				// old connection will be dropped, and the new connection saved.
-				$app_user->save(true);
+				$externalFrom->save(true);
 				/**
-				 * @event Users/authenticate/insertAppUser {after}
+				 * @event Users/authenticate/insertExternalFrom {after}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/insertAppUser', compact('user'), 'after');
+				Q::event('Users/authenticate/insertExternalFrom', compact('user'), 'after');
 
 				if (!isset($authenticated)){
 					$authenticated = 'authorized';
@@ -585,7 +634,7 @@ abstract class Users extends Base_Users
 			}
 		}
 
-		$_SESSION['Users']['appUsers'][$key] = $app_user->getPkValue();
+		$_SESSION['Users']['appUsers'][$key] = $externalFrom->getPkValue();
 
 		Users::$cache['authenticated'] = $authenticated;
 
@@ -874,7 +923,9 @@ abstract class Users extends Base_Users
 			$html = Q_Handlebars::renderSource($template, compact(
 				'user', 'displayName'
 			));
-			Q_Response::setNotice('Users::setLoggedInUser', $html, true);
+			Q_Response::setNotice('Users::setLoggedInUser', $html, array(
+				'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+			));
 		}
 
 		/**
@@ -1096,11 +1147,11 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'after');
 
-		$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 		sort($sizes);
 		if (!isset($icon)) {
-			if ($app_user = Users_AppUser::authenticate($platform, $appId)) {
-				$icon = $app_user->icon($sizes, '.png');
+			if ($externalFrom = Users_ExternalFrom::authenticate($platform, $appId)) {
+				$icon = $externalFrom->icon($sizes, '.png');
 			}
 		} else {
 			// Import the user's icon and save it
@@ -1187,7 +1238,7 @@ abstract class Users extends Base_Users
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * $platform - this is the user's id on that platform
+	 * * $platformApp - a string of the form "$platform\t$appId"
 	 *
 	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
 	 *  Could also be 'future' to find identifiers attached to a "future user",
@@ -1221,7 +1272,8 @@ abstract class Users extends Base_Users
 	 * Inserts a new user if one doesn't already exist.
 	 *
 	 * @method futureUser
-	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 * @param {string} $type can be "email", "mobile", 
+	 *  a string of the form "$platform\t$appId"
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. The type
@@ -1229,7 +1281,7 @@ abstract class Users extends Base_Users
 	 *  with optional "_hashed" suffix to indicate that the value has already been hashed.
 	 *  It can also be "none", in which case the type is ignored, no "identify" rows are
 	 *  inserted into the database at this time. Later, as the user adds an email address
-	 *  or platform uids, they will be inserted.
+	 *  or platform xids, they will be inserted.
 	 * <br><br>
 	 * NOTE: If the person we are representing here comes and registers the regular way,
 	 * and then later adds an email, mobile, or authenticates with a platform,
@@ -1264,6 +1316,9 @@ abstract class Users extends Base_Users
 
 		// Make a user row to represent a "future" user and give them an empty username
 		$user = new Users_User();
+		$user->signedUpWith = 'none'; // this marks it as a future user for now
+		$user->username = "";
+		$user->icon = '{{Users}}/img/icons/future';
 		if ($type === 'email') {
 			$user->save();
 			$user->setEmailAddress($value, true);
@@ -1271,11 +1326,8 @@ abstract class Users extends Base_Users
 			$user->save();
 			$user->setMobileNumber($value, true);
 		} else if (substr($type, -7) !== '_hashed') {
-			$user->setUid($type, $value, true);
+			$user->setXid($type, $value, true);
 		}
-		$user->signedUpWith = 'none'; // this marks it as a future user for now
-		$user->username = "";
-		$user->icon = '{{Users}}/img/icons/future';
 		$during = 'future';
 		/**
 		 * @event Users/insertUser {before}
@@ -1512,9 +1564,11 @@ abstract class Users extends Base_Users
 	 * @static
 	 * @param {string} $platform The platform or platform for the app
 	 * @param {string} $appId Can be either an internal or external app id
-	 * @return {array} Returns array($appId, $appInfo)
+	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if missing
+	 * @return {array} Returns array($appId, $appInfo) where $appId is internal app id
+	 * @throws Q_Exception_MissingConfig
 	 */
-	static function appInfo($platform, $appId)
+	static function appInfo($platform, $appId, $throwIfMissing = false)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
 		if (isset($apps[$appId])) {
@@ -1529,6 +1583,9 @@ abstract class Users extends Base_Users
 				}
 			}
 			$appId = $id;
+		}
+		if ($throwIfMissing and !$appInfo) {
+			throw new Q_Exception_MissingConfig("Users/apps/$platform/$appId");
 		}
 		return array($appId, $appInfo);
 	}
@@ -1715,7 +1772,7 @@ abstract class Users extends Base_Users
 		$terms_link = Q_Html::a(
 			Q::interpolate($terms_uri, array('baseUrl' => Q_Request::baseUrl())),
 			array('target' => '_blank'),
-			$terms_title
+			Q::text($terms_title)
 		);
 		return Q::interpolate($terms_label, array('link' => $terms_link));
 	}
@@ -1855,7 +1912,7 @@ abstract class Users extends Base_Users
 				case 'twitter':
 					if (!is_numeric($identifier)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'numeric uid')
+							array('field' => 'address', 'range' => 'numeric xid')
 						);
 					}
 					$normalized = $identifier;
@@ -1864,7 +1921,7 @@ abstract class Users extends Base_Users
 				case 'android':
 					if (!is_string($identifier)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'identifier', 'range' => 'string uid')
+							array('field' => 'identifier', 'range' => 'string xid')
 						);
 					}
 					$normalized = $identifier;

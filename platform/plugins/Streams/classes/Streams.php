@@ -404,8 +404,21 @@ abstract class Streams extends Base_Streams
 				'streamName' => $namesToFetch,
 				'userId' => $asUserId
 			))->fetchDbRows(null, '', 'streamName');
+
+			$ssr_rows = Streams_SubscriptionRule::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $namesToFetch,
+				'ofUserId' => $asUserId
+			))->fetchDbRows(null, '', 'streamName');
+
 			foreach ($allRetrieved as $s) {
-				$s->set('participant', Q::ifset($prows, $s->name, null));
+				$participant = Q::ifset($prows, $s->name, null);
+
+				if (gettype($participant) == 'object' && !empty($participant)) {
+					$participant->subscriptionRules = Q::ifset($ssr_rows, $s->name, null);
+				}
+
+				$s->set('participant', $participant);
 			}
 		}
 
@@ -3164,14 +3177,15 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $streamName The name of the stream the user will be invited to
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
-	 * @param {string} [$who.platform] platform for which uids are passed
-	 * @param {string|array} [$who.uid]  platform uid or array of uids
+	 * @param {string} [$who.platform] platform for which xids are passed
+	 * @param {string|array} [$who.xid]  platform xid or array of xids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier] identifier such as an email or mobile number, or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
 	 *  with empty userId, which is used whenever someone shows up with the token
 	 *  and presents it via "Q.Streams.token" querystring parameter.
+	 *  This row is stored under "invite" key of the returned array
 	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
@@ -3184,11 +3198,17 @@ abstract class Streams extends Base_Streams
 	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
+	 * @param {boolean} [$options.alwaysSend=false] Send invitation message even if already sent.
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
+	 * @param {string} [$options.baseUrl] Override the base url when making the invite url
 	 * @see Users::addLink()
-	 * @return {array} Returns array with keys 
-	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
+	 * @throws Users_Exception_NotAuthorized
+	 * @throws Q_Exception_WrongType
+	 * @throws Q_Exception_MissingFile
+	 * @throws Q_Exception_WrongValue
+	 * @return {array} Returns array with keys
+	 *  "success", "invite", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"
@@ -3197,6 +3217,11 @@ abstract class Streams extends Base_Streams
 	 */
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
+		$options = Q::take($options, array(
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess'
+		));
+		
 		if (isset($options['asUserId'])) {
 			$asUserId = $options['asUserId'];
 			$asUser = Users_User::fetch($asUserId);
@@ -3251,7 +3276,7 @@ abstract class Streams extends Base_Streams
 			}
 			$users = Users::fetch($userIds, true);
 			$raw_userIds = array_keys($users);
-			foreach ($users as $uid => $user) {
+			foreach ($users as $xid => $user) {
 				$identifierTypes[] = 'userId';
 				$statuses[] = $user->sessionCount ? 'verified' : 'future';
 			}
@@ -3268,20 +3293,20 @@ abstract class Streams extends Base_Streams
 			$statuses = array_merge($statuses, $statuses1);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes1);
 		}
-		if (!empty($who['platform']) and !empty($who['uid'])) {
-			// merge users from platform uids
+		if (!empty($who['platform']) and !empty($who['xid'])) {
+			// merge users from platform xids
 			$platform = $who['platform'];
-			$uids = $who['uid'];
-			if (is_string($uids)) {
-				$uids = array_map('trim', explode("\t", $uids)) ;
+			$xids = $who['xid'];
+			if (is_string($xids)) {
+				$xids = array_map('trim', explode("\t", $xids)) ;
 			}
 			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromPlatformUids($platform, $uids, $statuses2)
+				Users_User::idsFromPlatformXids($platform, $xids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
-			$identifiers = array_merge($identifiers, $uids);
+			$identifiers = array_merge($identifiers, $xids);
 			$identifierTypes2 = array_fill(0, count($statuses2), $platform);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes2);
 		}
@@ -3307,19 +3332,21 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		// ensure that each userId is included only once
-		// and remove already participating users
 		$userIds = array_unique($raw_userIds);
 		$alreadyParticipating = Streams_Participant::filter(
 			$userIds, $stream->publisherId, $stream->name, null
 		);
-		$userIds = array_diff($raw_userIds, $alreadyParticipating);
 
-		$appUrl = !empty($options['appUrl'])
-			? $options['appUrl']
-			: Q_Request::baseUrl().'/'.Q_Config::get(
-				"Streams", "types", $stream->type, 
-				"invite", "url", "{{Streams}}/stream"
-			);
+		// remove already participating users if alwaysSend=false
+		if (!Q::ifset($options, 'alwaysSend', false)) {
+			$userIds = array_diff($raw_userIds, $alreadyParticipating);
+		}
+
+		if (!empty($options['appUrl'])) {
+			$appUrl = $options['appUrl'];
+		} else {
+			$appUrl = $stream->url();
+		}
 
 		// now check and define levels for invited user
 		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
@@ -3420,7 +3447,11 @@ abstract class Streams extends Base_Streams
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;
 		}
-		$result = Q_Utils::queryInternal('Q/node', $params);
+		try {
+			$result = Q_Utils::queryInternal('Q/node', $params);
+		} catch (Exception $e) {
+			// just suppress it
+		}
 
 		$return = array(
 			'success' => $result,
@@ -3938,7 +3969,7 @@ abstract class Streams extends Base_Streams
 		return $fieldNames;
 	}
 	
-	static function invitedUrl ($token) {
+	static function inviteUrl ($token) {
 		$baseUrl = Q_Config::get(array('Streams', 'invites', 'baseUrl'), "i");
 		return Q_Html::themedUrl("$baseUrl/$token");
 	}
@@ -3966,6 +3997,41 @@ abstract class Streams extends Base_Streams
 			$p->load($path.DS.$v);
 		}
 		return $p;
+	}
+	
+	/**
+	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
+	 * containing additional querystring fields such as "userId", "expires"
+	 * and "sig" which is a signature truncated to have length specified in config
+	 * Streams/userInviteUrl/signature/length
+	 * @param {string} $userId The id of the user for whom to generate this url
+	 * @param {Streams_Invite} [&$invite=null] You can pass a variable reference here
+	 *  to be filled with the Streams_Invite object.
+	 * @return {string}
+	 */
+	static function userInviteUrl($userId, &$invite = null)
+	{
+		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
+		$fields = array(compact('userId', 'expires'));
+		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
+		$fields = Q_Utils::sign($fields, array('sig'));
+		$fields['sig'] = substr($fields['sig'], 0, $len);
+		$streamName = 'Streams/userInviteUrl';
+		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		if (!$stream) {
+			$stream = Streams::create($userId, $userId, 'Streams/text/url', array(
+				'name' => 'Streams/userInviteUrl',
+				'title' => 'User Invite URL'
+			));
+			$ret = $stream->invite(array('token' => true));
+			$invite = $ret['invite'];
+			$userInviteUrl = $invite->url() . '?' . http_build_query($fields, null, '&');
+			$stream->content = $userInviteUrl;
+			$stream->changed();
+		} else {
+			$userInviteUrl = $stream->content;
+		}
+		return $userInviteUrl;
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)
@@ -4047,7 +4113,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('messages')) {
-				return;
+				continue;
 			}
 			$messageTotals = array();
 			foreach ($trows as $row) {
@@ -4123,7 +4189,7 @@ abstract class Streams extends Base_Streams
 
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
-				return;
+				continue;
 			}
 			$relatedToTotals = array();
 			foreach ($trows as $row) {
@@ -4200,7 +4266,7 @@ abstract class Streams extends Base_Streams
 
 		foreach ($streams as $s) {
 			if (!$s->testReadLevel('relations')) {
-				return;
+				continue;
 			}
 			$relatedFromTotals = array();
 			foreach ($trows as $row) {
@@ -4213,6 +4279,86 @@ abstract class Streams extends Base_Streams
 			$s->set('relatedFromTotals', $relatedFromTotals);
 		}
 		return $streams;
+	}
+
+	/**
+	 * Remove streams from system
+	 * @method removeStream
+	 * @static
+	 * @param {Streams_Stream|array} $stream Data about stream to remove.
+	 * Can be Streams_Stream object or array('publisherId' => ..., 'name' => ...)
+	 * Or array of these values.
+	 */
+	static function removeStream ($stream) {
+		if (is_array($stream)) {
+			if (isset($stream['name']) && isset($stream['publisherId'])) {
+				$stream = (object)$stream;
+			} else {
+				foreach ($stream as $item) {
+					self::removeStream($item);
+				}
+
+				return;
+			}
+		}
+
+		Streams_RelatedTo::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedFrom::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_Message::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_MessageTotal::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Participant::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Access::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Subscription::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_SubscriptionRule::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Invite::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Notification::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedFromTotal::delete()
+			->where(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedToTotal::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->execute();
+
+		Streams_Task::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Stream::delete()
+			->where(array('publisherId' => $stream->publisherId, 'name' => $stream->name))
+			->execute();
 	}
 
 	/**

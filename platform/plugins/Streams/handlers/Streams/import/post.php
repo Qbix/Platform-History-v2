@@ -32,12 +32,28 @@ function Streams_import_post()
 	$all = Streams::userStreamsTree()->getAll();
 	$exceptions = array();
 	$users = array();
+	
+	// get the instructions
+	if (!empty($_FILES)) {
+		$file = reset($_FILES);
+		$tmp = $file['tmp_name'];
+		$instructions = file_get_contents($tmp);
+		unlink($tmp);
+	}
+	if (!$instructions) {
+		return;
+	}
+	
+	$sha1 = substr(sha1($instructions), 0, 10);
 
+	$streamTitle = Q_Config::expect('Streams', 'import', 'task', 'title');
+	$communityName = Users::communityName();
 	$task = isset($_REQUEST['taskStreamName'])
 		? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
 		: Streams::create($luid, $communityId, 'Streams/task', array(
 			'skipAccess' => true,
-			'title' => 'Importing members into ' . Users::communityName()
+			'title' => Q::interpolate($streamTitle, compact('communityName')),
+			'name' => "Streams/task/$sha1"
 		), array(
 			'publisherId' => $app,
 			'streamName' => "Streams/tasks/app",
@@ -53,18 +69,8 @@ function Streams_import_post()
 	// and if no response within a certain timeout, mark it as paused,
 	// available for any other worker to resume making progress on it.
 
-	// store the instructions
-	if (!empty($_FILES)) {
-		$file = reset($_FILES);
-		$tmp = $file['tmp_name'];
-		$task->instructions = file_get_contents($tmp);
-		$task->save();
-		unlink($tmp);
-	}
-	if (!$task->instructions) {
-		return;
-	}
-	$instructions = $task->instructions;
+	$task->instructions = $instructions;
+	$task->save();
 
 	// Send the response and keep   going.
 	// WARN: this potentially ties up the PHP thread for a long time
@@ -223,6 +229,14 @@ function Streams_import_post()
 				}
 			}
 		} catch (Exception $e) {
+			$file = $e->getFile();
+			$line = $e->getLine();
+			$task->post($luid, array(
+				'type' => 'Streams/task/error',
+				'content' => $e->getMessage(),
+				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress', 'file', 'line'),
+			), true);
+			Q::log($e, 'Calendars_import');
 			$exceptions[$j] = $e;
 		}
 	}

@@ -203,32 +203,23 @@ class Q_Response
 	 * Adds a notice
 	 * @method setNotice
 	 * @static
-	 * @param {string} $key
-	 * @param {string} $notice
+	 * @param {string} $key The key for the notices
+	 * @param {string} $notice The HTML content of the notice
 	 * @param {array} [$options=array] Different options
 	 * @param {boolean} [$options.persistent=false] If false, save notice in the session to show again if page reloaded.
 	 * @param {boolean} [$options.closeable=true] If true, add cross icon to close notice.
-	 * @param {boolean} [$options.handler=null] URL to redirect when notice clicked.
-	 * @param {boolean|number} [$options.timeout=false] Whether to save this notice to session to show after page refresh.
+	 * @param {boolean} [$options.handler=null] URL to redirect to, or name of function to call, when notice is clicked.
+	 * @param {Boolean|Number} [$options.timeout=false] Time in seconds after which to remove notice.
+	 * @param {Boolean|Number} [$options.persistent=false] Whether to save this notice to session to show after page refresh.
 	 */
 	static function setNotice($key, $notice, $options = array())
 	{
-		// For backwards compatibility
-		if (gettype($options) == 'boolean') {
-			$options = array('persistent' => $options);
+		if (!isset($options['closeable'])) {
+			$options['closeable'] = true;
 		}
-
-		// set default options
-		$options['persistent'] = Q::ifset($options, 'persistent', false);
-		$options['closeable'] = Q::ifset($options, 'closeable', true);
-		$options['handler'] = Q::ifset($options, 'handler', null);
-		$options['timeout'] = Q::ifset($options, 'timeout', null);
-
-		// save options in notice
 		$notice = compact('notice', 'options');
-
 		self::$notices[$key] = $notice;
-		if ($options['persistent'] and Q_Session::id()) {
+		if (!empty($options['persistent']) and Q_Session::id()) {
 			$_SESSION['Q']['notices'][$key] = Q::t($notice);
 		}
 		unset(self::$removedNotices[$key]);

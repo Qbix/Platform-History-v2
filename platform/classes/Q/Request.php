@@ -8,7 +8,29 @@
  * @class Q_Request
  */
 class Q_Request
-{	
+{
+	/**
+	 * Converts the specified fields from underscores
+	 * @param {array} $fieldNames An array of field names
+	 * @param {array} [$source=$_REQUEST] The source array
+	 * @return {array} The source array, with the named fields with underscores
+	 *  renamed to match the names in $fieldNames
+	 */
+	static function fromUnderscores($fieldNames, $source = null)
+	{
+		if (!isset($source)) {
+			$source = $_REQUEST;
+		}
+		foreach ($fieldNames as $fn) {
+			$fn2 = str_replace('.', '_', $fn);
+			if (isset($source[$fn2])) {
+				$source[$fn] = $source[$fn2];
+				unset($source[$fn2]);
+			}
+		}
+		return $source;
+	}
+	
 	/**
 	 * Get the base URL, possibly with a controller script
 	 * @method baseUrl
@@ -660,16 +682,36 @@ class Q_Request
 			return null;
 		}
 		$useragent = $_SERVER['HTTP_USER_AGENT'];
-		if (preg_match('/ip(hone|od|ad)/i', $useragent))
+		if (preg_match('/ip(hone|od|ad)/i', $useragent)) {
 			return 'ios';
-		else if (preg_match('/android/i', $useragent))
+		} else if (preg_match('/android/i', $useragent)) {
 			return 'android';
-		else if (preg_match('/mac/i', $useragent))
+		} else if (preg_match('/mac/i', $useragent)) {
 			return 'mac';
-		else if (preg_match('/linux/i', $useragent))
+		} else if (preg_match('/linux/i', $useragent)) {
 			return 'linux';
-		else if (preg_match('/windows/i', $useragent))
+		} else if (preg_match('/windows/i', $useragent)) {
 			return 'windows';
+		}
+	}
+	
+	/**
+	 * Returns a string identifying a custom value in the useragent string
+	 * @method customUserAgentString
+	 * @static
+	 * @return {string|null}
+	 */
+	static function customUserAgentString()
+	{
+		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+			return null;
+		}
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		if (preg_match('/Q-custom\((.*)\)/', $useragent, $matches)) {
+			return $matches[1];
+		} else {
+			return null;
+		}
 	}
 
 	/**

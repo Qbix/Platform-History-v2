@@ -19,28 +19,40 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	$subpaths = Q_Config::get('Users', 'paths', 'uploads', array(
 		'files/{{app}}/uploads/Users/{{userId}}' => true
 	));
+
+	// user ids for which have permissions to save files
+	// first user is self
+	$usersCanHandle = array($user->id);
+	// get labels which can manage icons
+	if ($labelsCanManage = Q_Config::get("Users", "icon", "canManage", array())) {
+		// if founded labels which can manage icons, collect users who can edit logged user
+		$usersCanHandle = array_merge($usersCanHandle, array_keys(Users::byRoles($labelsCanManage)));
+	}
+
 	$paths = array();
-	foreach ($subpaths as $subpath => $can_write) {
-		if (!$can_write) continue;
-		$subpath = Q::interpolate($subpath, array(
-			'userId' => Q_Utils::splitId($user->id),
-			'app' => $app
-		));
-		if ($subpath and ($subpath[0] !== '/' or $subpath[0] !== DS)) {
-			$subpath = DS.$subpath;
-		}
-		$last_char = substr($subpath, -1);
-		if ($subpath and $last_char !== '/' and $last_char !== DS) {
-			$subpath .= DS;
-		}
-		$paths[] = APP_DIR.$subpath;
-		foreach (Q_Config::get('Q', 'plugins', array()) as $plugin) {
-			$c = strtoupper($plugin).'_PLUGIN_DIR';
-			if (defined($c)) {
-				$paths[] = constant($c).$subpath;
+	foreach($usersCanHandle as $userId) {
+		foreach ($subpaths as $subpath => $can_write) {
+			if (!$can_write) continue;
+			$subpath = Q::interpolate($subpath, array(
+				'userId' => Q_Utils::splitId($userId),
+				'app' => $app
+			));
+			if ($subpath and ($subpath[0] !== '/' or $subpath[0] !== DS)) {
+				$subpath = DS.$subpath;
 			}
+			$last_char = substr($subpath, -1);
+			if ($subpath and $last_char !== '/' and $last_char !== DS) {
+				$subpath .= DS;
+			}
+			$paths[] = APP_DIR.$subpath;
+			foreach (Q_Config::get('Q', 'plugins', array()) as $plugin) {
+				$c = strtoupper($plugin).'_PLUGIN_DIR';
+				if (defined($c)) {
+					$paths[] = constant($c).$subpath;
+				}
+			}
+			$paths[] = Q_DIR.$subpath;
 		}
-		$paths[] = Q_DIR.$subpath;
 	}
 
 	// small patch for Win systems. hard to replace / with DS everywhere.

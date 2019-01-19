@@ -12,8 +12,8 @@ var Places = Q.Places;
  * @class Places globe
  * @constructor
  * @param {Object} [options] used to pass options
- * @param {String} [options.countryCode='US'] the initial country to rotate to and highlight
- * @param {Array} [options.highlight={US:true}] pairs of {countryCode: color},
+ * @param {String} [options.countryCode=null] the initial country to rotate to and highlight
+ * @param {Array} [options.highlight={}] pairs of {countryCode: color},
  *   if color is true then state.colors.highlight is used.
  *   This is modified by the default handler for beforeRotateToCountry added by this tool.
  * @param {Number} [options.radius=0.9] The radius of the globe, as a fraction of Math.min(canvas.width, canvas.height) / 2.
@@ -142,6 +142,8 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 			}).insertAfter(tool.$canvas);
 			tool.$canvas.css({
 				'position': 'absolute',
+				'top': 0,
+				'left': 0,
 				'z-index': 2
 			});
 			if ($te.css('position') === 'static') {
@@ -166,14 +168,14 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 },
 
 { // default options here
-	countryCode: 'US',
+	countryCode: null,
 	colors: {
 		oceans: '#2a357d',
 		land: '#389631',
 		borders: '#008000',
 		highlight: '#ff0000'
 	},
-	highlight: {'US':true},
+	highlight: {},
 	radius: null,
 	duration: 1000,
 	pings: {
@@ -235,17 +237,23 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 	 * Rotate the globe to center around a location
 	 * @param {Number} latitude
 	 * @param {Number} longitude
-	 * @param {Number} [duration=state.duration] number of milliseconds for the animation to take
+	 * @param {Number} [duration=state.duration] number of milliseconds for the animation to take.
+	 *  Pass 0 to skip any kind of animation.
 	 */
 	rotateTo: Q.preventRecursion('Places/globe rotateTo', 
 	function Places_globe_rotateTo (latitude, longitude, duration, callback) {
 		var tool = this;
-		duration = duration || this.state.duration;
+		if (duration == null) {
+			duration = tool.state.duration;
+		}
+		var projection = tool.globe.projection;
+		if (duration === 0) {
+			return projection.rotate([-longitude, -latitude]);
+		}
 		Q.handle(tool.state.beforeRotate, tool, [latitude, longitude, duration]);
 		d3.transition()
 			.duration(duration)
 			.tween('rotate', function() {
-				var projection = tool.globe.projection;
 				var r = d3.interpolate(projection.rotate(), [-longitude, -latitude]);
 				tool.center = {
 					latitude: latitude,
@@ -262,7 +270,8 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 	/**
 	 * Rotate the globe to center around a country
 	 * @param {String} countryCode which is described in ISO-3166-1 alpha-2 code
-	 * @param {Number} duration number of milliseconds for the animation to take
+	 * @param {Number} [duration=state.duration] number of milliseconds for the animation to take.
+	 *  Pass 0 to skip any kind of animation.
 	 * @return {Boolean} whether the country was found on the globe, and the rotation started
 	 */
 	rotateToCountry: Q.preventRecursion('Q/globe rotateToCountry', 

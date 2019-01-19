@@ -47,10 +47,35 @@ class Q
 			return isset($ref) ? $ref : $def;
 		}
 		$args = func_get_args();
-		$ref2 = $ref;
 		$def = end($args);
-		for ($i=1; $i<$count-1; ++$i) {
-			$key = $args[$i];
+		$path = array_slice($args, 1, -1);
+		return self::getObject($ref, $path, $def);
+	}
+	
+	/**
+	 * Used for shorthand for avoiding when you don't want to write
+	 * (isset($some_long_expression) ? $some_long_expression: null)
+	 * when you want to avoid possible "undefined variable" errors.
+	 * @method ifset
+	 * @param {&mixed} $ref
+	 *  The reference to test. Only lvalues can be passed.
+	 * @param {array} $path
+	 *  An array of one or more strings or numbers, which will be used to
+	 *  index deeper into the contained arrays or objects.
+	 *  You can also pass arrays instead of the strings and numbers,
+	 *  which will then widen the search to try all combinations
+	 *  of the strings and numbers in all the arrays, before returning
+	 *  the default.
+	 * @param {mixed} $def=null
+	 *  The default, if the reference isn't set
+	 * @return {mixed}
+	 */
+	static function getObject(& $ref, $path, $def=null)
+	{
+		$ref2 = $ref;
+		$count = count($path);
+		for ($i=0; $i<$count; ++$i) {
+			$key = $path[$i];
 			if (!is_array($key)) {
 				$key = array($key);
 			}
@@ -210,8 +235,9 @@ class Q
 	 * However, dollar signs prefixed with backslashes will not be replaced.
 	 * @method interpolate
 	 * @static
-	 * @param {string} $expression
+	 * @param {string|array} $expression
 	 *  The string containing possible references to interpolate values for.
+	 *  Can also be array($textName, $pathArray) to load expression using Q_Text::get()
 	 * @param {array|string} $params=array()
 	 *  An array of parameters to the expression.
 	 *  Variable names in the expression can refer to them.
@@ -227,6 +253,15 @@ class Q
 		$expression,
 		$params = array())
 	{
+		if (is_array($expression)) {
+			$name = $expression[0];
+			$path = $expression[1];
+			$text = Q_Text::get($name);
+			$expression = Q::getObject($text, $path, null);
+			if (!isset($expression)) {
+				return null;
+			}
+		}
 		$a = (
 			strpos($expression, '{{0}}') === false
 			and strpos($expression, '$0') === false
@@ -249,9 +284,25 @@ class Q
 	}
 	
 	/**
-	 * Evaluates a string containing an expression,
+	 * A convenience method to use in your PHP templates.
+	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
+	 * In Handlebars templates, you just use {{interpolate expression ...}}
+	 * @method text
+	 * @static
+	 * @param {string} $expression Same as in Q::interpolate()
+	 * @param {array} $params Same as in Q::interpolate()
+	 * @param {string} [$convert=array()] Same as in Q_Html::text().
+	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
+	 */
+	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
+	{
+		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
+	}
+	
+	/**
+	 * Evaluates a string containing a PHP expression,
 	 * with possible references to parameters.
-	 * CAUTION: make sure the expression is safe!!
+	 * CAUTION: uses PHP eval, so make sure the expression is safe!!
 	 * @method evalExpression
 	 * @static
 	 * @param {string} $expression
@@ -269,14 +320,15 @@ class Q
 		if (is_array($params)) {
 			extract($params);
 		}
-		@eval('$value = ' . $expression . ';');
+		@eval('$_valueToReturn = ' . $expression . ';');
 		extract($params);
 		/**
-		 * @var $value
+		 * @var $_valueToReturn
 		 */
-		return $value;
+		return $_valueToReturn;
 	}
-
+	
+	
 	/**
 	 * Use for surrounding text, so it can later be processed throughout.
 	 * @method t
@@ -292,22 +344,6 @@ class Q
 		 */
 		$text = Q::event('Q/t', array(), 'before', false, $text);
 		return $text;
-	}
-	
-	/**
-	 * A convenience method to use in your PHP templates.
-	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
-	 * In Handlebars templates, you just use {{interpolate expression ...}}
-	 * @method text
-	 * @static
-	 * @param {string} $expression Same as in Q::interpolate()
-	 * @param {array} $params Same as in Q::interpolate()
-	 * @param {string} [$convert=array()] Same as in Q_Html::text().
-	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
-	 */
-	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
-	{
-		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
 	}
 
 	/**
@@ -667,12 +703,23 @@ class Q
 	 * @param {boolean} [$extra.cache=false]
 	 *    If true, then the Qbix front end will not replace existing tools with same id
 	 *    during Q.loadUrl when this tool appears in the rendered HTML
+	 * @param {string} [$extra.classes]
+	 *    You can pass this to add any additional CSS classes to the tool's element
+	 * @param {string} [$extra.attributes]
+	 *    You can pass this to add any additional HTML attributes to the tool's element
+	 * @param {boolean} [$extra.retain]
+	 *    Pass true to retain the tool when HTML is being replaced in the future,
+	 *    so it's not replaced by any incoming rendered tools unless they have replace=true
+	 * @param {boolean} [$extra.replace]
+	 *    Pass true to tell Q.js to replace any previously rendered tool tool
+	 *    even if it was marked to be retained.
 	 * @param {boolean} [$extra.merge=false]
 	 *    If true, the element for this tool is merged with the element of the tool
-	 *    already being rendered (if any), producing one element with markup
-	 *    for both tools and their options. This can be used more than once, merging
-	 *    multiple tools in one element.
-	 *    As part of the mege, the content this tool (if any) is prepended
+	 *    already being rendered when this function is called (if any),
+	 *    producing one element with markup for both tools and their options.
+	 *    This can be used more than once, merging multiple tools in one element
+	 *    through nested function calls.
+	 *    As part of the merge, the content this tool (if any) is prepended
 	 *    to the content of the tool which is already being rendered.
 	 * @throws {Q_Exception_WrongType}
 	 * @throws {Q_Exception_MissingFile}
