@@ -51,7 +51,7 @@
 	},
 	"message": {
 		"html": {
-			"posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}>/em> message to {{stream.fields.title}}",
+			"posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
 		},
 		"text": {
 			"body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
@@ -69,5 +69,5 @@
 			"subject": "Did you get an invite?",
 			"body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
 		}
-	},
+	}
 }
