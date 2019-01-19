@@ -43,5 +43,20 @@
 			"subject": "Did you get an invite?",
 			"body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
 		}
+	},
+	"invite": {
+		"dialog": {
+			"to": "To: {{Stream Title}}",
+			"go": "Go",
+			"title": "Invite",
+			"placeholder": "Mobile number or email address",
+			"orInvite": "Or invite people by using:",
+			"QR": "{{ClickOrTap}} to generate QR code",
+			"QRtitle": "Scan this QR code",
+			"byEmail": "Email",
+			"byText": "Text",
+			"byFacebook": "Facebook",
+			"byTwitter": "Twitter"
+		}
 	}
 }
