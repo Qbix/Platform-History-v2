@@ -204,13 +204,27 @@ abstract class Places extends Base_Places
 			$kmr = abs($meters/1000 - round($meters/1000));
 			$units = $milesr < $kmr ? 'miles' : 'km';
 		}
+		$text = Q_Text::get('Places/content');
+		$displayUnits = $text['units'][$units];
 		switch ($units) {
+		case 'mi':
 		case 'miles':
-			return (round($meters/1609.34*10)/10)." miles";
+			$mi = intval(round($meters/1609.34*10)/10);
+			if ($mi == 1 and $displayUnits === 'miles') {
+				$displayUnits = 'mile';
+			}
+			return "$mi $displayUnits";
 		case 'km':
 		case 'kilometers':
 		default:
-			return  $meters % 100 == 0 ? ($meters/1000).' '.$units : ceil($meters)." meters";
+			$km = $meters/1000;
+			$m = ceil($meters);
+			if ($km == 1 and $displayUnits === 'kilometers') {
+				$displayUnits = 'kilometer';
+			}
+			return  $meters % 100 == 0
+				? "$km $displayUnits"
+				: $m.$text['units']['meters'];
 		}
 	}
 	
@@ -365,7 +379,7 @@ abstract class Places extends Base_Places
 		$onlyIfNotSet = false,
 		$throwIfNotLoggedIn = false)
 	{
-		$meters = Q_Config::expect('Places', 'nearby', 'invitedMeters');
+		$meters = Q_Config::expect('Places', 'nearby', 'defaultMeters');
 		$latitude = $locationStream->getAttribute('latitude');
 		$longitude = $locationStream->getAttribute('longitude');
 		$timezone = $locationStream->getAttribute('timezone');

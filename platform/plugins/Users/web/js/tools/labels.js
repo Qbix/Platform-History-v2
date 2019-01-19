@@ -159,7 +159,7 @@ Q.Template.set('Users/labels', ''
 +   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
 +   '<div class="Users_labels_title">{{canAdd}}</div>'
 + '</li>'
-+ '{{/if}}')
-+ '<ul>';
++ '{{/if}}'
++ '</ul>');
 
 })(Q, jQuery, window);

@@ -9,7 +9,9 @@
 
 var Places = Q.Places = Q.plugins.Places = {
 	
-	metric: true, // whether to display things using the metric system units
+	// whether to display things using the metric system units
+	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR']
+		.indexOf(Q.Text.language + '-' + Q.Text.locale) < 0),
 	
 	options: {
 		platform: 'google'
@@ -93,13 +95,26 @@ var Places = Q.Places = Q.plugins.Places = {
 			var kmr = Math.abs(meters/1000 - Math.round(meters/1000));
 			units = milesr < kmr ? 'miles' : 'km';
 		}
+		var displayUnits = Places.units[units];
 		switch (units) {
+		case 'mi':
 		case 'miles':
-			return Math.round(meters/1609.34*10)/10+" miles";
+			var mi = Math.round(meters/1609.34*10)/10;
+			if (mi === 1 && units === 'miles') {
+				units = 'mile';
+			}
+			return mi+' '+displayUnits;
 		case 'km':
 		case 'kilometers':
 		default:
-			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
+			var km = (meters/1000);
+			var m = Math.ceil(meters);
+			if (km === 1 && units === 'kilometers') {
+				units = 'kilometer';
+			}
+			return meters % 100 == 0
+				? km +' '+displayUnits
+				: m+' '+Places.units.meters;
 		}
 	},
 
@@ -399,6 +414,22 @@ Places.Coordinates.from = function (data, callback) {
 		}, data));
 	}
 };
+
+Places.units = {
+	meters: "meters",
+	kilometers: "kiometers",
+	km: "km",
+	miles: "miles"
+};
+
+Q.onInit.add(function () {
+	Q.Text.get('Places/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Places.units = text.units;
+	});
+}, 'Q.Places');
 
 var Cp = Places.Coordinates.prototype;
 	

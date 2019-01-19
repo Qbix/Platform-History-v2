@@ -6,8 +6,8 @@
  * @param {string} $_REQUEST.publisherId The id of the stream publisher
  * @param {string} $_REQUEST.streamName The name of the stream the user will be invited to
  *  @param {string} [$_REQUEST.userId] user id or an array of user ids
- * @param {string} [$who.platform] platform for which uids are passed
- * @param {string|array} [$who.uid]  platform uid or array of uids
+ * @param {string} [$who.platform] platform for which xids are passed
+ * @param {string|array} [$who.xid]  platform xid or array of xids
  *  @param {string} [$_REQUEST.label]  label or an array of labels, or tab-delimited string
  *  @param {string} [$_REQUEST.identifier] identifier or an array of identifiers
  *  @param {string|array} [$_REQUEST.addLabel] label or an array of labels for adding publisher's contacts

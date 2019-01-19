@@ -13,7 +13,7 @@ function Users_after_Q_reroute($params, &$stop_dispatch)
 	if ($requireLogin[$ma] === true and !$user) {
 		// require login
 	} else if (isset($requireLogin[$ma])) {
-		if ($appUser = Users_AppUser::authenticate($requireLogin)) {
+		if ($appUser = Users_ExternalFrom::authenticate($requireLogin)) {
 			return; // We don't have to require login here
 		}
 	} else {

@@ -114,7 +114,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 	imagepicker: {
 		showSize: "50",
-		fullSize: "200x"
+		fullSize: "200x",
+		save: "Streams/image"
 	},
 	sizes: null,
 	overrideShowSize: {},
@@ -374,6 +375,13 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			&& this.testWriteLevel('suggest')) {
 				$(element).off('load.Streams-preview')
 				.on('load.Streams-preview', function () {
+					var $this = $(this);
+
+					// if plugin Q/imagepicker already applied - exit
+					if ($this.data('q_imagepicker state')) {
+						return;
+					}
+
 					// add imagepicker
 					var ipo = Q.extend({}, si, 10, {
 						preprocess: function (callback) {
@@ -404,7 +412,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 							return false;
 						}}
 					});
-					$(this).plugin('Q/imagepicker', ipo, function () {
+					$this.plugin('Q/imagepicker', ipo, function () {
 						Q.handle(onLoad, tool, [element]);
 					});
 				});

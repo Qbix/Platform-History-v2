@@ -24,7 +24,7 @@
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
- * @param {string} [$fields.uids] defaults to "{}"
+ * @param {string} [$fields.xids] defaults to "{}"
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
  * @param {string} [$fields.signedUpWith] defaults to ""
@@ -32,6 +32,7 @@
  * @param {string} [$fields.icon] defaults to ""
  * @param {string} [$fields.url] defaults to null
  * @param {string} [$fields.pincodeHash] defaults to null
+ * @param {string} [$fields.preferredLanguage] defaults to "en"
  */
 abstract class Base_Users_User extends Db_Row
 {
@@ -84,10 +85,10 @@ abstract class Base_Users_User extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $uids
+	 * @property $xids
 	 * @type string
 	 * @default "{}"
-	 * JSON of {platformName: [uid1, ...]}
+	 * JSON of {platformName: [xid1, ...]}
 	 */
 	/**
 	 * @property $emailAddressPending
@@ -130,6 +131,12 @@ abstract class Base_Users_User extends Db_Row
 	 * @type string
 	 * @default null
 	 * a smaller security code for when user is already logged in
+	 */
+	/**
+	 * @property $preferredLanguage
+	 * @type string
+	 * @default "en"
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -752,41 +759,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_uids
+	 * @method beforeSet_xids
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_uids($value)
+	function beforeSet_xids($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('uids', $value);
+			return array('xids', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".uids");
+			throw new Exception('Must pass a string to '.$this->getTable().".xids");
 		if (strlen($value) > 1023)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".uids");
-		return array('uids', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".xids");
+		return array('xids', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the uids field
+	 * Returns the maximum string length that can be assigned to the xids field
 	 * @return {integer}
 	 */
-	function maxSize_uids()
+	function maxSize_xids()
 	{
 
 		return 1023;			
 	}
 
 	/**
-	 * Returns schema information for uids column
+	 * Returns schema information for xids column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_uids()
+	static function column_xids()
 	{
 
 return array (
@@ -1181,6 +1188,60 @@ return array (
 );			
 	}
 
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_preferredLanguage
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_preferredLanguage($value)
+	{
+		if (!isset($value)) {
+			return array('preferredLanguage', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('preferredLanguage', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".preferredLanguage");
+		if (strlen($value) > 3)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".preferredLanguage");
+		return array('preferredLanguage', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the preferredLanguage field
+	 * @return {integer}
+	 */
+	function maxSize_preferredLanguage()
+	{
+
+		return 3;			
+	}
+
+	/**
+	 * Returns schema information for preferredLanguage column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_preferredLanguage()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '3',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => 'en',
+);			
+	}
+
 	function beforeSave($value)
 	{
 						
@@ -1199,7 +1260,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'uids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash');
+		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'xids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash', 'preferredLanguage');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

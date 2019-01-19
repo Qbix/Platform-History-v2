@@ -35,7 +35,7 @@ Users_Session.decodeId = function (id) {
 	if (!id) {
 		return [false, '', ''];
 	}
-	var secret = Q.Config.get(['Q', 'external', 'secret'], null);
+	var secret = Q.Config.get(['Q', 'internal', 'secret'], null);
 	var result = '';
 	var i = 0;
 	var len = id.length;

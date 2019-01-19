@@ -10,7 +10,8 @@
  * @param {boolean} [options.short]
  *   Optional. Renders the short version of the display name.
  * @param {boolean|integer} [options.icon=false]
- *   Optional. Pass the size in pixels of the (square) icon to render
+ *   By default, the value is false, so the icon is not rendered.
+ *   Pass the size in pixels of the (square) icon to render
  *   before the username. Or pass true to render the default size.
  * @param {array} [options.iconAttributes]
  *   Optional. Array of attributes to render for the icon.
@@ -60,8 +61,10 @@ function Users_avatar_tool($options)
 	$result = '';
 	if ($icon = $options['icon']) {
 		if ($icon === true) {
-			$icon = Q_Config::get('Users', 'icon', 'defaultSize', 40);
+			$icon = Q_Image::getDefaultSize('Users/icon');
 		}
+		$sizes = Q_Image::getSizes('Users/icon');
+		$icon2 = Q_Image::calculateSize($icon, $sizes);
 		$attributes = isset($options['iconAttributes'])
 			? $options['iconAttributes']
 			: array();
@@ -73,7 +76,7 @@ function Users_avatar_tool($options)
 			$attributes['cacheBust'] = $options['cacheBust'];
 		}
 		$result .= Q_Html::img(
-			Users::iconUrl($avatar->icon, "$icon.png"),
+			Users::iconUrl($avatar->icon, "$icon2.png"),
 			'user icon', $attributes
 		);
 	}
@@ -88,11 +91,11 @@ function Users_avatar_tool($options)
 			$s->addPreloaded();
 		}
 	}
-	if (!empty($options['show'])) {
+	if (isset($options['show'])) {
 		$o['show'] = $options['show'];
-		$displayName = $avatar->displayName($o, 'Someone');
-		$result .= "<span class='Users_avatar_name'>$displayName</span>";
 	}
+	$displayName = $avatar->displayName($o, 'Someone');
+	$result .= "<span class='Users_avatar_name'>$displayName</span>";
 
 	// define 'content' if 'show' defined
 	// if 'show' empty - means 'content'=false

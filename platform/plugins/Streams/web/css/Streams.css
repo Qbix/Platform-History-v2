@@ -318,6 +318,8 @@
 	width: 96%; padding: 2%;
 }
 
+#Streams_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
+
 #Users_login_username, #Streams_login_fullname
 {
   width: 188px;
@@ -407,7 +409,7 @@
 }
 .Streams_preview .Streams_preview_title { margin: 0; padding: 0px; line-height: 24px; font-size: 16px; font-weight: normal; }
 .Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
-.Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; padding: 10px; margin: 4px;border: 1px solid #c5c0c0; }
+.Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; }
 .Streams_preview_tool .Streams_preview_icon,
 .Streams_preview_tool .Streams_preview_add { margin-right: 3px; }
 
@@ -574,7 +576,7 @@
 	min-width: 30%;
 	margin-right: 15px;
 	padding: 10px;
-	border: 1px solid #D0D9E4;
+	border: 1px solid #bae8ea;
 	clear: both;
 	font-size: 0.8em;
 }
@@ -590,7 +592,7 @@
 .Streams_chat_to_me .Streams_chat_bubble {
 	border-radius: 13px;
 	margin-left: 50px;
-	background-color: #DAE3ED;
+	background-color: #cbf9fb;
 	text-align: left;
 }
 .Streams_chat_from_me .Streams_chat_bubble {
@@ -707,7 +709,8 @@
 }
 
 
-.Streams_interests_subcategory {
+.Streams_interests_subcategory,
+.Streams_interests_other {
 	text-align: center;
 	opacity: 0.5;
 	font-weight: 200;
@@ -921,7 +924,7 @@
 }
 
 .Streams_completeInvited_dialog {
-	
+
 }
 
 .Streams_invite_dialog {

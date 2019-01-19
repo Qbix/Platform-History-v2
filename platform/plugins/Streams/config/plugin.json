@@ -2,9 +2,9 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0.4",
+				"version": "1.0.6",
 				"compatible": "0.9",
-				"requires": {"Users": "1.0"},
+				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
 				"connections": ["Streams"]
 			}
@@ -50,12 +50,34 @@
 			"exclude": {
 				"Streams": ["img/icons/Streams/interest", "img/icons/files"]
 			}
+		},
+		"images": {
+			"Streams/image": {
+				"sizes": ["40", "50", "80", "200", "400", "x400", "400x"],
+				"defaultSize": "400"
+			},
+			"Streams/album": {
+				"sizes": ["40", "50", "80", "200", "400"],
+				"defaultSize": "400"
+			},
+			"Streams/interest": {
+				"sizes": {
+					"40": "40.png",
+					"50": "50.png",
+					"80": "80.png",
+					"200": "200.png",
+					"400": "400.png",
+					"400x": "400x.png",
+					"x400": "x400.png",
+					"150x100": "x100.png",
+					"500x333": "500x.png"
+				},
+				"defaultSize": "400",
+				"defaultCacheBust": 1000
+			}
 		}
 	},
 	"Users": {
-		"login": {
-			"userQueryUri": "Streams/user"
-		},
 		"paths": {
 			"uploads": {
 				"files/{{app}}/uploads/Streams": true
@@ -178,6 +200,7 @@
 					"leftCount": 0
 				},
 				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
+				"uri": "Streams/stream publisherId={{publisherId}} streamName={{streamName}}",
 				"participating": ["Streams/participating"]
 			},
 			"Streams/invited": {
@@ -201,6 +224,10 @@
 					"Streams/task/complete": {
 						"description": "Task has been completed",
 						"subject": ["Streams/content", ["notifications", "Streams/task/complete"]]
+					},
+					"Streams/task/error": {
+						"description": "Error during task",
+						"subject": ["Streams/content", ["notifications", "Streams/task/error"]]
 					}
 				},
 				"attributes": {
@@ -251,7 +278,6 @@
 				"description": "visual image",
 				"create": true,
 				"edit": true,
-				"sizes": ["40", "50", "80", "200", "x200", "200x"],
 				"defaults": {
 					"title": "Untitled Image",
 					"icon": "Streams/image"
@@ -269,14 +295,6 @@
 				"description": "",
 				"create": true,
 				"edit": true,
-				"sizes": [
-					"40",
-					"50",
-					"80",
-					"200",
-					"x200",
-					"200x"
-				],
 				"defaults": {
 					"icon": "Streams/image",
 					"title": "Untitled Image"
@@ -389,6 +407,10 @@
 			"layout": {
 				"default": "Streams/layout/invitations.php"
 			},
+			"signature": {
+				"length": 10
+			},
+			"expires": 86400,
 			"subpath": "{{app}}/uploads/Streams/invitations",
 			"sort": {}
 		},
@@ -446,17 +468,6 @@
 				"mobileNumber": "Streams/user/mobileNumber"
 			}
 		}, 
-		"icons": {
-			"sizes": {
-				"40": "40.png",
-				"50": "50.png",
-				"80": "80.png",
-				"67x100": "x100.png",
-				"500x333": "500x.png"
-			},
-			"defaultSize": "40",
-			"defaultCacheBust": "1000"
-		},
 		"rules": {
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
@@ -467,11 +478,21 @@
 			"onlyIfAllClientsOffline": true,
 			"debug": true,
 			"notices": {
-				"Streams/chat/message": true
+				"Streams/chat/message": {
+					"timeout": 10
+				},
+				"Streams/invite": {
+					"persistent": true,
+					"closeable": false,
+					"showSubject": false
+				}
 			}
 		},
 		"import": {
-			"timeLimit": 100000
+			"timeLimit": 100000,
+			"task": {
+				"title": "Importing members into {{communityName}}"
+			}
 		}
 	}
 }

@@ -27,17 +27,11 @@
 				"key": "YOUR SECRET KEY HERE"
 			} */
 		},
-		"external": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA FOR EXTERNAL CLIENTS"
-		},
 		"internal": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING INTERNAL MESSAGES"
+			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA TO BE SENT BACK TO US"
 		},
 		"environment": "",
 		/* "scriptFiles": ["config/Q/urls.php"], */
-		"session": {
-			"allowHijack": true /* set to false in production */
-		},
 		"javascript": {
 			"prettyPrintData": true
 		}
@@ -115,6 +109,8 @@
 					"appId": "FACEBOOK APP ID HERE",
 					"secret": "PUT SECRET HERE",
 					"url": "http://apps.facebook.com/YOURAPP",
+					"baseUrl": "https://myapp.local",
+					"paths": [""],
 					"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
 				}
 			},
@@ -122,7 +118,10 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+					"baseUrl": "https://myapp.local",
 					"scheme": "myapp://",
+					"paths": [""],
+					"customUserAgentString": "myapp.ios",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
@@ -138,6 +137,9 @@
 					"ssl": { /* see https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11 */
 						"cert": "local/Users/certs/MyApp/sandbox/bundle.pem",
 						"passphrase": null
+					},
+					"authorize": {
+						"automatic": false,
 					}
 				}
 			},
@@ -145,15 +147,24 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
+					"baseUrl": "https://myapp.local",
 					"scheme": "myapp://",
+					"paths": ["/"],
+					"custom": "myapp.android",
 					"key": "AUTHORIZATION KEY HERE",
-					"senderID": "YOUR SENDER ID HERE"
+					"senderID": "YOUR SENDER ID HERE",
+					"authorize": {
+						"automatic": false,
+					}
 				}
 			},
 			"amazon": {
 				"MyApp": {
 					"appId": "B01MQTS32B",
 					"url": "http://www.amazon.com/gp/mas/dl/android?asin=B01MQTS32B",
+					"baseUrl": "https://myapp.local",
+					"paths": ["/"],
+					"customUserAgentString": "myapp.amazon",
 					"clientId": "ADM CLIENT ID HERE",
 					"secret": "SHARED SECRET HERE"
 				}
@@ -162,20 +173,25 @@
 				"MyApp": {
 					"appId": "9nblggh2s4gt",
 					"url": "https://www.microsoft.com/en-us/store/p/monster-go/9nblggh2s4gt",
+					"baseUrl": "https://myapp.local",
+					"paths": ["/"],
+					"customUserAgentString": "myapp.windows",
 					"clientId": "PACKAGE SECURITY IDENTIFIER",
 					"secret": "SHARED SECRET HERE"
 				}
 			},
 			"web": {
 				"MyApp": {
-					"appId": "com.mycompany.myapp",
-					"privateKey": "RELATIVE TO MyApp/local",
+					"appId": "myapp.local",
+					"baseUrl": "https://myapp.local",
+					"paths": ["/"],
+					"privateKey": "FILENAME RELATIVE TO MyApp/local",
 					"publicKey": "THE LITERAL PUBLIC KEY"
 				}
 			}
 		},
 		"newsapi": {
-			"key": "GET A NEWSAPI.ORG KEY FOR Users/activate suggestions"
+			"key": "GET A NEWSAPI.ORG KEY FOR Users/activate SUGGESTIONS"
 		}
 	},
 	"Streams": {

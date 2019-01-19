@@ -2,8 +2,8 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.2",
-				"compatible": "0.9.3",
+				"version": "1.0.4",
+				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
 				"connections": ["Users"]
@@ -32,6 +32,7 @@
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"Users/session": {"module": "Users", "action": "session"},
 			"login/facebook": {"module": "Users", "action": "facebook"}
 		},
 		"session": {
@@ -61,6 +62,13 @@
 			"Users/email/addEmail.php": {"html": true},
 			"Users/email/resend.php": {"html": true},
 			"Users/email/authenticated.php": {"html": true}
+		},
+		"images": {
+			"Users/icon": {
+				"sizes": ["40", "50", "80", "200", "400", "400x", "x400"],
+				"defaultSize": "40",
+				"defaultCacheBust": 1000
+			}
 		}
 	},
 	"Users": {
@@ -86,7 +94,7 @@
 			"using": "native,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
-			"gravatar": false,
+			"gravatar": true,
 			"noRegister": false,
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
 		},
@@ -121,6 +129,7 @@
 			"expires": 10080
 		},
 		"notices": {
+			"timeout": 5,
 			"contact": true
 		},
 		"mobile": {
@@ -135,7 +144,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url", "uids"
+			"id", "username", "signedUpWith", "icon", "url", "xids"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"
@@ -144,8 +153,8 @@
 			"duration": "decade",
 			"terms": {
 				"uri": null,
-				"label": "I have read and agree<br>to the {{link}}",
-				"title": "Terms"
+				"label": ["Users/content", ["authorize", "TermsLabel"]],
+				"title": ["Users/content", ["authorize", "TermsTitle"]]
 			},
 			"stateMinLength": 10,
 			"clients": {
@@ -155,13 +164,16 @@
 		"register": {
 			"terms": {
 				"uri": "{{baseUrl}}/terms",
-				"label": "I accept the {{link}}",
-				"title": "Terms"
+				"label": ["Users/content", ["register", "TermsLabel"]],
+				"title": ["Users/content", ["register", "TermsTitle"]]
 			},
 			"icon": {
 				"leaveDefault": false
 			},
 			"delaySMS": 30000
+		},
+		"session": {
+			"redirectSecondsMax" : 300
 		},
 		"passphrase": {
 			"hashFunction": "sha1",
@@ -172,9 +184,8 @@
 			"default": "Someone"
 		},
 		"icon": {
-			"sizes": ["40", "50", "80", "200", "x200", "200x"],
-			"defaultSize": "40",
-			"labels": "labels/default"
+			"labels": "labels/default",
+			"canManage": ["Users/owners", "Users/admins"]
 		},
 		"vote": {
 			"Users/hinted": {

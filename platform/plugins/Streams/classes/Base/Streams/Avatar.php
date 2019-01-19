@@ -21,9 +21,9 @@
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.username] defaults to ""
  * @param {string} [$fields.firstName] defaults to ""
- * @param {string} [$fields.lastName] defaults to ""
+ * @param {string} [$fields.lastName] defaults to null
  * @param {string} [$fields.icon] defaults to ""
- * @param {string} [$fields.gender] defaults to ""
+ * @param {string} [$fields.gender] defaults to null
  */
 abstract class Base_Streams_Avatar extends Db_Row
 {
@@ -60,8 +60,8 @@ abstract class Base_Streams_Avatar extends Db_Row
 	/**
 	 * @property $lastName
 	 * @type string
-	 * @default ""
-	 * if not empty, the user can see this last name
+	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $icon
@@ -72,8 +72,8 @@ abstract class Base_Streams_Avatar extends Db_Row
 	/**
 	 * @property $gender
 	 * @type string
-	 * @default ""
-	 * if not empty, the user can see this first name
+	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -551,7 +551,7 @@ return array (
 	function beforeSet_lastName($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('lastName', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('lastName', $value);
@@ -588,9 +588,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '',
+  3 => NULL,
 );			
 	}
 
@@ -659,7 +659,7 @@ return array (
 	function beforeSet_gender($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('gender', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('gender', $value);
@@ -696,9 +696,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '',
+  3 => NULL,
 );			
 	}
 

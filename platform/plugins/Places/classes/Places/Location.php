@@ -107,6 +107,10 @@ class Places_Location
 				'title' => $result['name'],
 				'attributes' => Q::json_encode($attributes),
 				'skipAccess' => true
+			), array(
+				'publisherId' => $publisherId,
+				'streamName' => 'Places/user/locations',
+				'type' => 'Places/locations'
 			));
 		}
 		return $location;

@@ -6,9 +6,17 @@ Q.setObject('Q.text.Q.imagepicker', {
 		prompt: "What would you like to do?",
 		photo: "Take new photo",
 		library: "Select from library"
+	},
+	tooSmall: 'Please choose a larger image.',
+	cropping: {
+		title: 'Adjust size and position',
+		touchscreen: 'Use your fingers to zoom and drag',
+		notTouchscreen: 'Use your mouse & wheel to zoom and drag'
 	}
 });
 Q.setObject("Q.text_en.Q.imagepicker", Q.text.Q.imagepicker);
+
+var qtqi = Q.text.Q.imagepicker;
 
 /**
  * Q Tools
@@ -182,9 +190,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	useAnySize: false,
 	crop: null,
 	cropping: true,
-	croppingTitle: 'Adjust size and position',
-	croppingTouchscreen: 'Use your fingers to zoom and drag',
-	croppingNotTouchscreen: 'Use your mouse & wheel to zoom and drag',
+	croppingTitle: qtqi.cropping.title,
+	croppingTouchscreen: qtqi.cropping.touchscreen,
+	croppingNotTouchscreen: qtqi.cropping.notTouchscreen,
 	url: Q.action("Q/image"),
 	cacheBust: 1000,
 	throbber: null,
@@ -196,7 +204,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		alert('Image upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/imagepicker'),
 	onTooSmall: new Q.Event(function (requiredSize, imageSize) {
-		alert('Please choose a larger image.');
+		alert(qtqi.tooSmall);
 		return false;
 	}, 'Q/imagepicker'),
 	onFinish: new Q.Event(),
@@ -541,19 +549,18 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				'data': data,
 				'path': path,
 				'subpath': subpath,
-				'save': state.saveSizeName,
 				'url': state.url,
 				'loader': state.loader,
 				'crop': null
 			};
+			if (state.save) {
+				params.save = state.save;
+			}
 			Q.extend(params, override);
 			if (Q.isEmpty(params.crop)) {
 				delete params.crop;
 			}
-			if (params.save && !params.save[state.showSize]) {
-				throw new Q.Error("Q/imagepicker tool: no size found corresponding to showSize");
-			}
-		
+
 			if (params.loader) {
 				var callable = params.loader;
 				delete params.loader;

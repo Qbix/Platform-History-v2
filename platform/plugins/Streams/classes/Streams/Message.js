@@ -280,6 +280,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			deliver: deliver,
 			stream: stream,
 			streamUrl: streamUrl,
+			message: message,
 			url: message.getInstruction("url") || streamUrl,
 			icon: stream.iconUrl(80),
 			user: this,
@@ -395,7 +396,10 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				viewPath = 'Streams/message/email.handlebars';
 			}
 			Users.Email.sendMessage(
-				emailAddress, o.subject, viewPath, o.fields, {html: true, language: uf.preferredLanguage}, callback
+				emailAddress, o.subject, viewPath, o.fields, {
+					html: true, 
+					language: uf.preferredLanguage
+				}, callback
 			);
 			result.push({'email': emailAddress});
 		}
@@ -438,24 +442,24 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		}
 		function _platform(platform, callback) {
 			var appId = Users.appInfo(platform).appId;
-			Users.AppUser.SELECT('*').WHERE({
+			Users.ExternalFrom.SELECT('*').WHERE({
 				userId: toUserId,
 				platform: platform,
 				appId: appId
-			}).execute(function (err, appusers) {
+			}).execute(function (err, externals) {
 				if (err) {
 					return callback(err);
 				}
-				var appuser = appusers[0];
+				var e = externals[0];
 				var notification = {
 					alert: o.subject,
 					href: o.url,
 					ref: message.fields.type
 				};
-				if (appuser) {
-					appuser.pushNotification(notification);
+				if (e) {
+					e.pushNotification(notification);
 				}
-				Q.handle(callback, Users, [null, appuser, notification]);
+				Q.handle(callback, Users, [null, e, notification]);
 			});
 		}
 	});
