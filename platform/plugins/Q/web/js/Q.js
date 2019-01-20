@@ -11782,6 +11782,29 @@ Q.prompt.options = {
 };
 
 /**
+ * Methods relating to internationalization
+ * @class Q.Intl
+ */
+
+Q.Intl = {
+   /**
+    * Get internationalization information about how to display and handle
+	* calendar, date and time-related values
+    * @method intl
+    * @static
+    * @return {Object} Returns an object with possible keys:
+    *  "calendar", "day", "locale", "month", "numberingSystem", "year", "timeZone"
+    */
+	calendar: function () {
+		var result = {}, dtf;
+		if (dtf = Intl.DateTimeFormat() && dtf.resolvedOptions) {
+			result = dtf.resolvedOptions() || {};
+		}
+		return result;
+	}
+};
+
+/**
  * Q.Audio objects facilitate audio functionality on various browsers.
  * Please do not create them directly, but use the Q.audio function.
  * @class Q.Audio
