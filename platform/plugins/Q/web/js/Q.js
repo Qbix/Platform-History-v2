@@ -89,6 +89,18 @@ Q.text = {
 			"usethis": "Use This",
 			"discard": "Discard",
 			"encoding": "Encoding"
+		},
+		"alert": {
+			"title": "Alert"
+		},
+		"confirm": {
+			"title": "Confirm",
+			"ok": "Yes",
+			"cancel": "No",
+		},
+		"prompt": {
+			"title": "Prompt",
+			"ok": "Go"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -11624,12 +11636,14 @@ Q.Dialogs.push.options = {
  * @method alert
  * @param {String} message The only required parameter, this specifies text of the alert.
  * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
- *   @param {String} [options.title] Optional parameter to override alert dialog title. Defaults to 'Alert'.
+ *   @param {String} [options.title="Alert"] Optional parameter to override alert dialog title. Defaults to 'Alert'.
  *   @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
 Q.alert = function(message, options) {
 	if (options === undefined) options = {};
-	if (options.title === undefined) options.title = 'Alert';
+	if (options.title === undefined) {
+		options.title = Q.alert.options.title;
+	}
 	return Q.Dialogs.push(Q.extend({
 		'title': options.title,
 		'content': '<div class="Q_messagebox Q_big_prompt"><p>' + message + '</p></div>',
@@ -11639,6 +11653,11 @@ Q.alert = function(message, options) {
 		'hidePrevious': true
 	}, options));
 };
+
+Q.alert.options = {
+	title: 'Alert'
+};
+Q.extend(Q.alert.options, Q.text.alert);
 
 /**
  * Provides replacement for default javascript confirm() using Q front-end features, specifically dialogs.
@@ -11654,8 +11673,8 @@ Q.alert = function(message, options) {
  *   or null if the user closed the dialog.
  * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
  * @param {String} [options.title='Confirm'] to override confirm dialog title.
- * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
- * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
+ * @param {String} [options.ok='Yes'] to override confirm dialog 'Yes' button label, e.g. 'OK'.
+ * @param {String} [options.cancel='No'] to override confirm dialog 'No' button label, e.g. 'Cancel'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
@@ -11695,10 +11714,11 @@ Q.confirm = function(message, callback, options) {
 
 Q.confirm.options = {
 	title: 'Confirm',
-	ok: 'OK',
-	cancel: 'Cancel',
+	ok: 'Yes',
+	cancel: 'No',
 	noClose: true
 };
+Q.extend(Q.confirm.options, Q.text.confirm);
 
 /**
  * Provides replacement for default javascript prompt() using Q front-end features, specifically dialogs.
@@ -11780,6 +11800,7 @@ Q.prompt.options = {
 	maxlength: 100,
 	noClose: true
 };
+Q.extend(Q.confirm.options, Q.text.prompt);
 
 /**
  * Methods relating to internationalization
@@ -12449,6 +12470,9 @@ Q.onInit.add(function () {
 			return;
 		}
 		Q.extend(Q.text.Q, text);
+		Q.extend(Q.confirm.options, Q.text.confirm);
+		Q.extend(Q.prompt.options, Q.text.prompt);
+		Q.extend(Q.alert.options, Q.text.alert);
 	});
 }, 'Q');
 
