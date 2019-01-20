@@ -1038,8 +1038,95 @@ Streams.Dialogs = {
 			publisherId: publisherId,
 			streamName: streamName
 		}, callback, 'Streams_access_tool_dialog_container');
+	},
+
+	/**
+	 * Show a dialog to invite others to a stream.
+	 * @static
+	 * @method invite
+	 * @param {String} publisherId id of publisher which is publishing the stream
+	 * @param {String} streamName the stream's name
+	 * @param {Function} [callback] The function to call after dialog is activated
+	 */
+	invite: function(publisherId, streamName, callback) {
+		var stream = null;
+		var text = null;
+
+		var pipe = Q.pipe(['stream', 'text'], function () {
+			Q.Template.render("Streams/invite/dialog", {
+				to: text.to.interpolate({"Stream Title": stream.fields.title}),
+				go: text.go,
+				placeholder: text.placeholder,
+				orInvite: text.orInvite,
+				QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
+				email: text.byEmail,
+				text: text.byText,
+				facebook: text.byFacebook,
+				twitter: text.byTwitter,
+			}, function (err, html) {
+				if (err) {
+					return;
+				}
+				Q.Dialogs.push({
+					title: text.title,
+					content: html,
+					onActivate: function (dialog) {
+						// handle "go" button
+						$('.Streams_invite_submit button', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								Q.handle(callback, Streams, [{
+									identifier: $(".Streams_invite_submit input[type=text]", dialog).val()
+								}]);
+							});
+						// handle social buttons
+						$('.Streams_invite_social_buttons button', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								var sendBy = $(this).data('sendby');
+								var result = {};
+								switch (sendBy) {
+									case "facebook":
+									case "twitter":
+										// token 1 to generate a link for public invite
+										result.token = 1;
+										result.identifier = null;
+										result.sendBy = sendBy;
+										Q.Dialogs.pop(); // close the Dialog
+										break;
+									case "text":
+										result.sendBy = sendBy;
+										Q.Dialogs.pop(); // close the Dialog
+									case "email":
+										result.identifier = $(".Streams_invite_submit input[type=text]", dialog).val()
+										break;
+								}
+								Q.handle(callback, Streams, [result]);
+							});
+						// handle QR button
+						$('.Streams_invite_QR', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								var sendBy = $(this).data('sendby');
+								Q.Dialogs.pop(); // close the Dialog
+								Q.handle(callback, Streams, [{
+									token: 1,
+									identifier: null,
+									sendBy: sendBy
+								}]);
+							});
+					},
+				});
+			});
+		});
+
+		Q.Text.get("Streams/content", function (err, result) {
+			text = Q.getObject(["invite", "dialog"], result);
+			pipe.fill('text')();
+		})
+
+		Streams.get(publisherId, streamName, function() {
+			stream = this;
+			pipe.fill('stream')();
+		});
 	}
-	
 };
 
 /**
@@ -1209,6 +1296,35 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			var rsd = response.slots.data;
 			Q.handle(o && o.callback, null, [err, rsd]);
 			Q.handle(callback, null, [err, rsd]);
+			if(o.sendBy) {
+				switch (o.sendBy) {
+					case "facebook": return window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url);
+					case "twitter": return window.open("http://www.twitter.com/share?url=" + rsd.url);
+					case "QR":
+						Q.Text.get('Streams/content', function (err, text) {
+							if (err) return;
+							Q.Dialogs.push({
+								title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
+								content: '<div class="Streams_invite_QR_content"></div>',
+								onActivate: function (dialog) {
+									// fill QR code
+									Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
+										var $qrIcon = $(".Streams_invite_QR_content", dialog);
+										new QRCode($qrIcon[0], {
+											text: rsd.url,
+											width: 250,
+											height: 250,
+											colorDark : "#000000",
+											colorLight : "#ffffff",
+											correctLevel : QRCode.CorrectLevel.H
+										});
+									});
+								}
+							})
+						});
+						return;
+				}
+			}
 			var emailAddresses = [];
 			var mobileNumbers = [];
 			var fb_xids = [];
@@ -1255,14 +1371,33 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 	if (o.identifier || o.token || o.xids || o.userIds || o.label) {
 		return _request();
 	}
-	Q.prompt(
-	'Enter a mobile # or email address',
-	function (value) {
-		if (!value) return;
-		o.identifier = value;
+	Streams.Dialogs.invite(publisherId, streamName, function (r) {
+		if (!r) return;
+		for (var option in r) {
+			o[option] = r[option];
+		}
+		if (r.sendBy == "text") {
+			function validateEmail(email) {
+				var re = /\S+@\S+\.\S+/;
+				return re.test(email);
+			}
+			if (r.identifier && validateEmail(r.identifier)){
+				Streams.followup({
+					mobile: {
+						numbers: []
+					},
+					email: {
+						addresses: [r.identifier]
+					},
+					facebook: {
+						xids: []
+					}
+				});
+				return;
+			}
+			return Q.alert("Streams.invite: identifier '"+ r.identifier +"' is the wrong type, expecting email address");
+		}
 		_request();
-	}, {
-		title: "Invite"
 	});
 	return null;
 };

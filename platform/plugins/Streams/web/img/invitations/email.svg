@@ -1,0 +1,335 @@
+<svg width="664" height="584" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+ <title>social-icons</title>
+ <desc>Created with Sketch.</desc>
+ <defs>
+  <circle id="path-1" cx="22" cy="22" r="22"/>
+  <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-1" id="svg_1"/>
+  </mask>
+  <circle id="path-3" cx="22" cy="22" r="22"/>
+  <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-3" id="svg_2"/>
+  </mask>
+  <circle id="path-5" cx="22" cy="22" r="22"/>
+  <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-5" id="svg_3"/>
+  </mask>
+  <circle id="path-7" cx="22" cy="22" r="22"/>
+  <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-7" id="svg_4"/>
+  </mask>
+  <circle id="path-9" cx="22" cy="22" r="22"/>
+  <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-9" id="svg_5"/>
+  </mask>
+  <circle id="path-11" cx="22" cy="22" r="22"/>
+  <mask id="mask-12" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-11" id="svg_6"/>
+  </mask>
+  <circle id="path-13" cx="22" cy="22" r="22"/>
+  <mask id="mask-14" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-13" id="svg_7"/>
+  </mask>
+  <circle id="path-15" cx="22" cy="22" r="22"/>
+  <mask id="mask-16" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-15" id="svg_8"/>
+  </mask>
+  <circle id="path-17" cx="22" cy="22" r="22"/>
+  <mask id="mask-18" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-17" id="svg_9"/>
+  </mask>
+  <circle id="path-19" cx="22" cy="22" r="22"/>
+  <mask id="mask-20" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-19" id="svg_10"/>
+  </mask>
+  <circle id="path-21" cx="22" cy="22" r="22"/>
+  <mask id="mask-22" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-21" id="svg_11"/>
+  </mask>
+  <circle id="path-23" cx="22" cy="22" r="22"/>
+  <mask id="mask-24" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-23" id="svg_12"/>
+  </mask>
+  <circle id="path-25" cx="22" cy="22" r="22"/>
+  <mask id="mask-26" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-25" id="svg_13"/>
+  </mask>
+  <circle id="path-27" cx="22" cy="22" r="22"/>
+  <mask id="mask-28" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-27" id="svg_14"/>
+  </mask>
+  <circle id="path-29" cx="22" cy="22" r="22"/>
+  <mask id="mask-30" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-29" id="svg_15"/>
+  </mask>
+  <circle id="path-31" cx="22" cy="22" r="22"/>
+  <mask id="mask-32" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-31" id="svg_16"/>
+  </mask>
+  <circle id="path-33" cx="22" cy="22" r="22"/>
+  <mask id="mask-34" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-33" id="svg_17"/>
+  </mask>
+  <circle id="path-35" cx="22" cy="22" r="22"/>
+  <mask id="mask-36" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-35" id="svg_18"/>
+  </mask>
+  <circle id="path-37" cx="22" cy="22" r="22"/>
+  <mask id="mask-38" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-37" id="svg_19"/>
+  </mask>
+  <circle id="path-39" cx="22" cy="22" r="22"/>
+  <mask id="mask-40" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-39" id="svg_20"/>
+  </mask>
+  <circle id="path-41" cx="22" cy="22" r="22"/>
+  <mask id="mask-42" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-41" id="svg_21"/>
+  </mask>
+  <circle id="path-43" cx="22" cy="22" r="22"/>
+  <mask id="mask-44" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-43" id="svg_22"/>
+  </mask>
+  <circle id="path-45" cx="22" cy="22" r="22"/>
+  <mask id="mask-46" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-45" id="svg_23"/>
+  </mask>
+  <circle id="path-47" cx="22" cy="22" r="22"/>
+  <mask id="mask-48" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-47" id="svg_24"/>
+  </mask>
+  <circle id="path-49" cx="22" cy="22" r="22"/>
+  <mask id="mask-50" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-49" id="svg_25"/>
+  </mask>
+  <circle id="path-51" cx="22" cy="22" r="22"/>
+  <mask id="mask-52" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-51" id="svg_26"/>
+  </mask>
+  <circle id="path-53" cx="22" cy="22" r="22"/>
+  <mask id="mask-54" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-53" id="svg_27"/>
+  </mask>
+  <circle id="path-55" cx="22" cy="22" r="22"/>
+  <mask id="mask-56" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-55" id="svg_28"/>
+  </mask>
+  <circle id="path-57" cx="22" cy="22" r="22"/>
+  <mask id="mask-58" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-57" id="svg_29"/>
+  </mask>
+  <circle id="path-59" cx="22" cy="22" r="22"/>
+  <mask id="mask-60" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-59" id="svg_30"/>
+  </mask>
+  <circle id="path-61" cx="22" cy="22" r="22"/>
+  <mask id="mask-62" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-61" id="svg_31"/>
+  </mask>
+  <circle id="path-63" cx="22" cy="22" r="22"/>
+  <mask id="mask-64" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-63" id="svg_32"/>
+  </mask>
+  <circle id="path-65" cx="22" cy="22" r="22"/>
+  <mask id="mask-66" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-65" id="svg_33"/>
+  </mask>
+  <circle id="path-67" cx="22" cy="22" r="22"/>
+  <mask id="mask-68" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-67" id="svg_34"/>
+  </mask>
+  <circle id="path-69" cx="22" cy="22" r="22"/>
+  <mask id="mask-70" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-69" id="svg_35"/>
+  </mask>
+  <circle id="path-71" cx="22" cy="22" r="22"/>
+  <mask id="mask-72" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-71" id="svg_36"/>
+  </mask>
+  <circle id="path-73" cx="22" cy="22" r="22"/>
+  <mask id="mask-74" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-73" id="svg_37"/>
+  </mask>
+  <circle id="path-75" cx="22" cy="22" r="22"/>
+  <mask id="mask-76" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-75" id="svg_38"/>
+  </mask>
+  <circle id="path-77" cx="22" cy="22" r="22"/>
+  <mask id="mask-78" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-77" id="svg_39"/>
+  </mask>
+  <circle id="path-79" cx="22" cy="22" r="22"/>
+  <mask id="mask-80" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-79" id="svg_40"/>
+  </mask>
+  <circle id="path-81" cx="22" cy="22" r="22"/>
+  <mask id="mask-82" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-81" id="svg_41"/>
+  </mask>
+  <circle id="path-83" cx="22" cy="22" r="22"/>
+  <mask id="mask-84" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-83" id="svg_42"/>
+  </mask>
+  <circle id="path-85" cx="22" cy="22" r="22"/>
+  <mask id="mask-86" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-85" id="svg_43"/>
+  </mask>
+  <circle id="path-87" cx="22" cy="22" r="22"/>
+  <mask id="mask-88" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-87" id="svg_44"/>
+  </mask>
+  <circle id="path-89" cx="22" cy="22" r="22"/>
+  <mask id="mask-90" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-89" id="svg_45"/>
+  </mask>
+  <circle id="path-91" cx="22" cy="22" r="22"/>
+  <mask id="mask-92" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-91" id="svg_46"/>
+  </mask>
+  <circle id="path-93" cx="22" cy="22" r="22"/>
+  <mask id="mask-94" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-93" id="svg_47"/>
+  </mask>
+  <circle id="path-95" cx="22" cy="22" r="22"/>
+  <mask id="mask-96" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-95" id="svg_48"/>
+  </mask>
+  <circle id="path-97" cx="22" cy="22" r="22"/>
+  <mask id="mask-98" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-97" id="svg_49"/>
+  </mask>
+  <circle id="path-99" cx="22" cy="22" r="22"/>
+  <mask id="mask-100" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-99" id="svg_50"/>
+  </mask>
+  <circle id="path-101" cx="22" cy="22" r="22"/>
+  <mask id="mask-102" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-101" id="svg_51"/>
+  </mask>
+  <circle id="path-103" cx="22" cy="22" r="22"/>
+  <mask id="mask-104" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-103" id="svg_52"/>
+  </mask>
+  <circle id="path-105" cx="22" cy="22" r="22"/>
+  <mask id="mask-106" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-105" id="svg_53"/>
+  </mask>
+  <circle id="path-107" cx="22" cy="22" r="22"/>
+  <mask id="mask-108" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-107" id="svg_54"/>
+  </mask>
+  <circle id="path-109" cx="22" cy="22" r="22"/>
+  <mask id="mask-110" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-109" id="svg_55"/>
+  </mask>
+  <circle id="path-111" cx="22" cy="22" r="22"/>
+  <mask id="mask-112" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-111" id="svg_56"/>
+  </mask>
+  <circle id="path-113" cx="22" cy="22" r="22"/>
+  <mask id="mask-114" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-113" id="svg_57"/>
+  </mask>
+  <circle id="path-115" cx="22" cy="22" r="22"/>
+  <mask id="mask-116" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-115" id="svg_58"/>
+  </mask>
+  <circle id="path-117" cx="22" cy="22" r="22"/>
+  <mask id="mask-118" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-117" id="svg_59"/>
+  </mask>
+  <circle id="path-119" cx="22" cy="22" r="22"/>
+  <mask id="mask-120" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-119" id="svg_60"/>
+  </mask>
+  <circle id="path-121" cx="22" cy="22" r="22"/>
+  <mask id="mask-122" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-121" id="svg_61"/>
+  </mask>
+  <circle id="path-123" cx="22" cy="22" r="22"/>
+  <mask id="mask-124" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-123" id="svg_62"/>
+  </mask>
+  <circle id="path-125" cx="22" cy="22" r="22"/>
+  <mask id="mask-126" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-125" id="svg_63"/>
+  </mask>
+  <circle id="path-127" cx="22" cy="22" r="22"/>
+  <mask id="mask-128" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-127" id="svg_64"/>
+  </mask>
+  <circle id="path-129" cx="22" cy="22" r="22"/>
+  <mask id="mask-130" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-129" id="svg_65"/>
+  </mask>
+  <circle id="path-131" cx="22" cy="22" r="22"/>
+  <mask id="mask-132" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-131" id="svg_66"/>
+  </mask>
+  <circle id="path-133" cx="22" cy="22" r="22"/>
+  <mask id="mask-134" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-133" id="svg_67"/>
+  </mask>
+  <circle id="path-135" cx="22" cy="22" r="22"/>
+  <mask id="mask-136" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-135" id="svg_68"/>
+  </mask>
+  <circle id="path-137" cx="22" cy="22" r="22"/>
+  <mask id="mask-138" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-137" id="svg_69"/>
+  </mask>
+  <circle id="path-139" cx="22" cy="22" r="22"/>
+  <mask id="mask-140" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-139" id="svg_70"/>
+  </mask>
+  <circle id="path-141" cx="22" cy="22" r="22"/>
+  <mask id="mask-142" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-141" id="svg_71"/>
+  </mask>
+  <circle id="path-143" cx="22" cy="22" r="22"/>
+  <mask id="mask-144" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-143" id="svg_72"/>
+  </mask>
+  <circle id="path-145" cx="22" cy="22" r="22"/>
+  <mask id="mask-146" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-145" id="svg_73"/>
+  </mask>
+  <circle id="path-147" cx="22" cy="22" r="22"/>
+  <mask id="mask-148" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-147" id="svg_74"/>
+  </mask>
+  <circle id="path-149" cx="22" cy="22" r="22"/>
+  <mask id="mask-150" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-149" id="svg_75"/>
+  </mask>
+  <circle id="path-151" cx="22" cy="22" r="22"/>
+  <mask id="mask-152" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-151" id="svg_76"/>
+  </mask>
+  <circle id="path-153" cx="22" cy="22" r="22"/>
+  <mask id="mask-154" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-153" id="svg_77"/>
+  </mask>
+  <circle id="path-155" cx="22" cy="22" r="22"/>
+  <mask id="mask-156" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-155" id="svg_78"/>
+  </mask>
+  <circle id="path-157" cx="22" cy="22" r="22"/>
+  <mask id="mask-158" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-157" id="svg_79"/>
+  </mask>
+  <circle id="path-159" cx="22" cy="22" r="22"/>
+  <mask id="mask-160" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="44" height="44">
+   <use xlink:href="#path-159" id="svg_80"/>
+  </mask>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="666" height="586" id="canvas_background" fill="none"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path d="m126.75761,221.155239c6.426431,4.196542 25.796702,16.663555 58.113816,37.391803c32.317113,20.728248 57.073339,36.689608 74.272372,47.881541c1.889298,1.227051 5.904576,3.89382 12.045835,8.003309c6.141258,4.112722 11.245504,7.43966 15.30604,9.974349c4.064,2.534689 8.977053,5.378566 14.742391,8.525164c5.765569,3.146598 11.200477,5.510415 16.301259,7.07898c5.104476,1.578033 9.829569,2.360815 14.175278,2.360815l0.285404,0l0.285404,0c4.345709,0 9.070802,-0.782782 14.175278,-2.360815c5.100782,-1.568565 10.539153,-3.935615 16.301259,-7.07898c5.761875,-3.149831 10.674927,-5.990475 14.738928,-8.525164c4.064,-2.534689 9.164782,-5.861627 15.30604,-9.974349c6.141258,-4.112722 10.16,-6.776258 12.049298,-8.003309c17.383299,-11.194935 61.610703,-39.620537 132.668128,-85.279809c13.795895,-8.91794 25.319875,-19.678304 34.582332,-32.274164c9.265689,-12.589626 13.893338,-25.797626 13.893338,-39.617304c0,-11.546148 -4.491875,-21.430442 -13.468928,-29.652653c-8.977053,-8.222442 -19.610186,-12.331931 -31.889239,-12.331931l-417.287142,0c-14.551198,0 -25.747981,4.547524 -33.590577,13.642802c-7.842827,9.09828 -11.764126,20.470322 -11.764126,34.113124c0,11.02106 5.198226,22.963217 15.591444,35.820235c10.393218,12.856788 21.450762,22.959984 33.166166,30.306357l0.000002,-0.000001zm430.891844,28.07439c-61.982929,38.831521 -109.046128,69.009031 -141.168354,90.526295c-10.772371,7.346373 -19.512742,13.079153 -26.224577,17.185409c-6.708371,4.112722 -15.636702,8.309264 -26.788457,12.596091c-11.14806,4.286596 -21.541279,6.428278 -31.179193,6.428278l-0.288867,0l-0.285404,0c-9.637915,0 -20.034597,-2.141682 -31.182657,-6.428278c-11.148291,-4.286827 -20.080086,-8.483369 -26.788457,-12.596091c-6.708371,-4.106256 -15.448742,-9.839037 -26.221113,-17.185409c-25.514762,-17.317489 -72.477054,-47.494999 -140.889878,-90.526295c-10.772371,-6.644178 -20.316537,-14.257713 -28.632497,-22.827904l0,208.337732c0,11.54938 4.439689,21.430442 13.322762,29.652653c8.883073,8.225675 19.561464,12.335164 32.035404,12.335164l417.287142,0c12.470477,0 23.148868,-4.109489 32.031941,-12.335164c8.886537,-8.225444 13.322762,-18.103273 13.322762,-29.652653l0,-208.337732c-8.128,8.392853 -17.574722,16.006619 -28.350557,22.827904z" id="Shape" fill="#ffffff" stroke="null"/>
+ </g>
+</svg>
