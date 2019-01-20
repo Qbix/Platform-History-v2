@@ -177,10 +177,7 @@ class Streams_Invite extends Base_Streams_Invite
 		
 		if (!empty($options['subscribe']) and !$stream->subscription($userId)) {
 			try {
-				$extra = Streams::getConfigField($stream->type, array(
-					'participant', 'extra'
-				), null); //  to have "going"
-				$stream->subscribe(compact('extra'));
+				$stream->subscribe();
 			} catch (Exception $e) {
 				// Swallow this exception. If the caller wanted to catch
 				// this exception, hey could have written this code block themselves.
