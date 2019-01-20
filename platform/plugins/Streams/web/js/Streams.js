@@ -1041,9 +1041,9 @@ Streams.Dialogs = {
 	},
 
 	/**
-	 * Show a dialog to manage "invite" related stuff in a stream.
+	 * Show a dialog to invite others to a stream.
 	 * @static
-	 * @method access
+	 * @method invite
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
 	 * @param {Function} [callback] The function to call after dialog is activated
@@ -1053,36 +1053,7 @@ Streams.Dialogs = {
 		var text = null;
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
-			Q.Template.set('StreamsInviteDialog',
-				'<div class="Streams_invite_dialog"><p>{{to}}</p>' +
-				'    <div class="Q_buttons Streams_invite_submit">' +
-				'        <input type="text" placeholder="{{placeholder}}">' +
-				'        <button class="Q_button">{{go}}</button>' +
-				'    </div>' +
-				'    <p>{{orInvite}}</p>' +
-				'    <div class="Q_buttons Streams_invite_social_buttons">' +
-				'        <button class="Q_button Streams_invite_button_email" data-sendBy="email">' +
-				'            <div class="Streams_invite_social_icons"></div>' +
-				'            {{email}}' +
-				'        </button>' +
-				'        <button class="Q_button Streams_invite_button_text" data-sendBy="text">' +
-				'            <div class="Streams_invite_social_icons"></div>' +
-				'            {{text}}' +
-				'        </button>' +
-				'        <button class="Q_button Streams_invite_button_facebook" data-sendBy="facebook">' +
-				'            <div class="Streams_invite_social_icons"></div>' +
-				'            {{facebook}}' +
-				'        </button>' +
-				'        <button class="Q_button Streams_invite_button_twitter" data-sendBy="twitter">' +
-				'            <div class="Streams_invite_social_icons"></div>' +
-				'            {{twitter}}' +
-				'        </button>' +
-				'    </div>' +
-				'    <div class="Q_button Streams_invite_QR" data-sendBy="QR">{{QR}}</div>' +
-				'</div>'
-			);
-
-			Q.Template.render("StreamsInviteDialog", {
+			Q.Template.render("Streams/invite/dialog", {
 				to: text.to.interpolate({"Stream Title": stream.fields.title}),
 				go: text.go,
 				placeholder: text.placeholder,
