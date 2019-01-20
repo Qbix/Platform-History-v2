@@ -34,11 +34,24 @@
 		"Streams/incoming/*": "{{app}}: Incoming Message"
 	},
 	"invite": {
-		"messageContent": "{{displayName}} invited you to {{inviteUrl}}"
+		"messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+		"dialog": {
+			"to": "To: {{Stream Title}}",
+			"go": "Go",
+			"title": "Invite",
+			"placeholder": "Mobile number or email address",
+			"orInvite": "Or invite people by using:",
+			"QR": "{{ClickOrTap}} to generate QR code",
+			"QRtitle": "Scan this QR code",
+			"byEmail": "Email",
+			"byText": "Text",
+			"byFacebook": "Facebook",
+			"byTwitter": "Twitter"
+		}
 	},
 	"message": {
 		"html": {
-			"posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}>/em> message to {{stream.fields.title}}",
+			"posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
 		},
 		"text": {
 			"body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"

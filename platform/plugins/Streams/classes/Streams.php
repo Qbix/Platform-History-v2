@@ -3476,6 +3476,7 @@ abstract class Streams extends Base_Streams
 			$invite->state = 'pending';
 			$invite->save();
 			$return['invite'] = $invite;
+			$return['url'] = $invite->url();
 		}
 		
 		$instructions = array_merge($who, $options, compact(
