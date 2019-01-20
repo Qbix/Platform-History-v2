@@ -2776,7 +2776,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
-	 * @param {array} [$options=array()] Options for the subscribe() and join() methods
+	 * @param {array} [$options=array()] Options for both the subscribe() and join() methods
 	 * @param {array} [$options.filter] optional array with two keys
 	 * @param {array} [$options.filter.types] array of message types, if this is empty then subscribes to all types
 	 * @param {array} [$options.filter.notifications=0] limit number of notifications, 0 means no limit
