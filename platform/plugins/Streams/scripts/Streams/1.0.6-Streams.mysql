@@ -1,1 +1,1 @@
-ALTER TABLE {$prefix}task ADD errors longblob default null COMMENT 'here we store all errors that occurred during import';
+ALTER TABLE {$prefix}task ADD errors longblob default null COMMENT 'here we store all errors that occurred during the task';
