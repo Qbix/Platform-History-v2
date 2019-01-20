@@ -1070,6 +1070,7 @@ Streams.Dialogs = {
 				Q.Dialogs.push({
 					title: text.title,
 					content: html,
+					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					onActivate: function (dialog) {
 						// handle "go" button
 						$('.Streams_invite_submit button', dialog)
