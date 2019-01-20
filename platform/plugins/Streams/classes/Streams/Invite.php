@@ -57,15 +57,17 @@ class Streams_Invite extends Base_Streams_Invite
 	}
 	
 	/**
-	 * Accept the invite and set up user's access levels
+	 * Accept the invite and set up the user's access levels
 	 * If invite was already accepted, this function simply returns null
 	 * @method accept
-	 * @param {array} $options Things to do with the logged-in user
+	 * @param {array} $options
+	 *  These options are passed to stream->subscribe() and stream->join()
+	 *  but can also include the following:
 	 * @param {boolean} [$options.subscribe=false]
 	 *  Whether to auto-subscribe them to the stream if not already subscribed.
 	 *  If the subscribe() call throws an exception, it is swallowed.
 	 * @param {boolean} [$options.access=true]
-	 *  Whether to upgrade their access to the stream
+	 *  Whether to upgrade the user's access to the stream, based on the invite
 	 * @return {Streams_Participant|false|null}
 	 * @throws {Users_Exception_NotLoggedIn}
 	 *  If the $this->userId is false and user is not logged in
@@ -177,7 +179,13 @@ class Streams_Invite extends Base_Streams_Invite
 		
 		if (!empty($options['subscribe']) and !$stream->subscription($userId)) {
 			try {
-				$stream->subscribe();
+				$extra = Q::ifset($options, 'extra', array());
+				$configExtra = Streams::getConfigField($stream->type, array(
+					'invite', 'extra'
+				), array());
+				$extra = array_merge($configExtra, $extra);
+				$options['extra'] = $extra;
+				$stream->subscribe($options);
 			} catch (Exception $e) {
 				// Swallow this exception. If the caller wanted to catch
 				// this exception, hey could have written this code block themselves.
