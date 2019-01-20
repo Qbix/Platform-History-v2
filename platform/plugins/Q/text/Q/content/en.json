@@ -43,5 +43,17 @@
 		"usethis": "Use This",
 		"discard": "Discard",
 		"encoding": "Encoding"
+	},
+	"alert": {
+		"title": "Alert"
+	},
+	"confirm": {
+		"title": "Confirm",
+		"ok": "Yes",
+		"cancel": "No",
+	},
+	"prompt": {
+		"title": "Prompt",
+		"ok": "Go"
 	}
 }
