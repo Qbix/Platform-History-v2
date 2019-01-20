@@ -2500,7 +2500,7 @@ abstract class Streams extends Base_Streams
 			if (isset($options['posted'])) {
 				$changedFields['posted'] = $participant->posted = 'yes';
 			}
-			if (isset($options['extra'])) {
+			if (!empty($options['extra'])) {
 				$extra = Q::json_decode($participant->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
