@@ -46,8 +46,8 @@ function Streams_after_Q_objects () {
 	
 	$templateName = Streams_Stream::getConfigField(
 		$stream->type,
-		array('invite', 'dialog', 'templateName'),
-		'Streams/invite/complete'
+		array('invited', 'dialog', 'templateName'),
+		'Streams/invited/complete'
 	);
 	$params = array(
 		'displayName' => $displayName,
@@ -74,7 +74,7 @@ function Streams_after_Q_objects () {
 	if ($tree->merge($params)) {
 		$dialogData = $tree->getAll();
 		if ($dialogData) {
-			Q_Response::setScriptData('Q.plugins.Streams.invite.dialog', $dialogData);
+			Q_Response::setScriptData('Q.plugins.Streams.invited.dialog', $dialogData);
 			Q_Response::addTemplate($templateName);
 		}
 	}
