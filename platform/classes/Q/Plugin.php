@@ -636,6 +636,8 @@ class Q_Plugin
 
 		// Check and fix permissions
 		self::checkPermissions(APP_FILES_DIR, $options);
+		
+		// Use package managers
 		self::npmInstall(APP_DIR, !empty($options['npm']));
 		self::composerInstall(APP_DIR, !empty($options['composer']));
 
@@ -777,6 +779,7 @@ EOT;
 			}
 		}
 		
+		// Use package managers
 		self::npmInstall($plugin_dir, !empty($options['npm']));
 		self::composerInstall($plugin_dir, !empty($options['composer']));
 
@@ -822,9 +825,9 @@ EOT;
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
 	}
 	
-	static function npmInstall($dir, $exists = false)
+	static function npmInstall($dir, $doIt = false)
 	{
-		$exists = $exists || self::commandExists('npm');
+		$exists = $doIt && self::commandExists('npm');
 		if (!file_exists($dir . DS . 'package.json') or !$exists) {
 			return false;
 		}
@@ -836,9 +839,9 @@ EOT;
 		return true;
 	}
 	
-	static function composerInstall($dir, $exists = false)
+	static function composerInstall($dir, $doIt = false)
 	{
-		$exists = $exists || self::commandExists('composer');
+		$exists = $doIt && self::commandExists('composer');
 		if (!file_exists($dir . DS . 'composer.json') or !$exists) {
 			return false;
 		}
