@@ -57,7 +57,7 @@ class Users_Email extends Base_Users_Email
 		}
 		
 		if (!isset($options['html'])) {
-			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', false);
+			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', true);
 		}
 
 		// set language if didn't defined yet
