@@ -1048,12 +1048,13 @@ Streams.Dialogs = {
 	 * @param {String} streamName the stream's name
 	 * @param {Function} [callback] The function to call after dialog is activated
 	 */
-	invite: function(publisherId, streamName, callback) {
+	invite: function(publisherId, streamName, callback, options) {
 		var stream = null;
 		var text = null;
+		var o = Q.extend({}, Streams.Dialogs.invite.options, options);
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
-			Q.Template.render("Streams/invite/dialog", {
+			Q.Template.render(o.templateName, {
 				to: text.to.interpolate({"Stream Title": stream.fields.title}),
 				go: text.go,
 				placeholder: text.placeholder,
@@ -1128,6 +1129,10 @@ Streams.Dialogs = {
 			pipe.fill('stream')();
 		});
 	}
+};
+
+Streams.Dialogs.invite.options = {
+	templateName: "Streams/templates/invite/dialog"
 };
 
 /**
@@ -4945,7 +4950,7 @@ Q.onInit.add(function _Streams_onInit() {
 	Users.onLogout.set(function () {
 		Interests.my = {}; // clear the interests
 		_clearCaches();
-		Streams.invite.dialog = null;  // clear invite dialog info
+		Streams.invited.dialog = null;  // clear invited dialog info
 		Q.Socket.destroyAll();
 	}, "Streams");
 	if (Users.loggedInUser) {
@@ -5071,12 +5076,12 @@ Q.onInit.add(function _Streams_onInit() {
 
 	// set up invite complete dialog
 	Q.Page.onLoad('').add(function _Streams_onPageLoad() {
-		var params = Q.getObject("Q.plugins.Streams.invite.dialog");
+		var params = Q.getObject("Q.plugins.Streams.invited.dialog");
 		if (!params || _showedComplete) {
 			return;
 		}
 		_showedComplete = true;
-		var templateName = params.templateName || 'Streams/invite/complete';
+		var templateName = params.templateName || 'Streams/invited/complete';
 		params.prompt = (params.prompt !== undefined)
 			? params.prompt
 			: Q.text.Streams.login.prompt;
