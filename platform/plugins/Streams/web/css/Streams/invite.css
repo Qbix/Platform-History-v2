@@ -67,7 +67,7 @@ Email
 }
 
 .Streams_invite_dialog .Streams_invite_button_email .Streams_invite_social_icons {
-	background-image: url("../img/invitations/email.svg");
+	background-image: url("../../img/invitations/email.svg");
 }
 
 /*
@@ -90,7 +90,7 @@ Text
 }
 
 .Streams_invite_dialog .Streams_invite_button_text .Streams_invite_social_icons {
-	background-image: url("../img/invitations/text.svg");
+	background-image: url("../../img/invitations/text.svg");
 }
 
 /*
@@ -113,7 +113,7 @@ Facebook
 }
 
 .Streams_invite_dialog .Streams_invite_button_facebook .Streams_invite_social_icons {
-	background-image: url("../img/invitations/facebook.svg");
+	background-image: url("../../img/invitations/facebook.svg");
 }
 
 /*
@@ -136,5 +136,5 @@ Twitter
 }
 
 .Streams_invite_dialog .Streams_invite_button_twitter .Streams_invite_social_icons {
-	background-image: url("../img/invitations/twitter.svg");
+	background-image: url("../../img/invitations/twitter.svg");
 }

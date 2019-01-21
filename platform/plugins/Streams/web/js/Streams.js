@@ -1131,7 +1131,7 @@ Streams.Dialogs = {
 	}
 };
 
-Q.Dialogs.invite.options = {
+Streams.Dialogs.invite.options = {
 	templateName: "Streams/templates/invite/dialog"
 };
 

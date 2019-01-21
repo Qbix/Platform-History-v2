@@ -33,7 +33,8 @@ Q.Tool.define('Q/filter', function (options) {
 			name: state.name,
 			value: state.value,
 			'class': 'Q_filter_input',
-			placeholder: state.placeholder
+			placeholder: state.placeholder,
+			autocomplete: "off"
 		}).appendTo(this.element);
 		if (state.placeholders) {
 			tool.$input.plugin('Q/placeholders', state.placeholders);
