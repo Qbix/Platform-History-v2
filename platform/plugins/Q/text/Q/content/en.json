@@ -50,7 +50,7 @@
 	"confirm": {
 		"title": "Confirm",
 		"ok": "Yes",
-		"cancel": "No",
+		"cancel": "No"
 	},
 	"prompt": {
 		"title": "Prompt",

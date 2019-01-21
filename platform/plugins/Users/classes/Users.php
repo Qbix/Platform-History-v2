@@ -859,7 +859,8 @@ abstract class Users extends Base_Users
 		Q::event('Users/setLoggedInUser', compact('user', 'loggedInUserId'), 'before');
 		
 		if ($loggedInUserId) {
-			// always log out existing user, so their session data isn't carried over
+			// Always log out existing user, so their session data isn't carried over.
+			// This also removes the devices for this session, stopping notifications.
 			Users::logout();
 		} else {
 			// Otherwise the session data of the logged-out user is merged

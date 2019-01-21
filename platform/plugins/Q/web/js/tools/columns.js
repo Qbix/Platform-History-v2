@@ -137,7 +137,7 @@ Q.Tool.define("Q/columns", function(options) {
 	controls: undefined,
 	pagePushUrl: true,
 	scrollbarsAutoHide: {},
-	textfill: {},
+	textfill: null,
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(),
