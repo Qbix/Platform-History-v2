@@ -71,7 +71,7 @@ class Places_Nearby
 
 		$metersArray = Q_Config::expect('Places', 'nearby', 'meters');
 		if (!in_array($meters, $metersArray)) {
-			throw new Q_Exception("The meters value needs to be in Places/nearby/meters config.");
+			throw new Q_Exception("The $meters meters value needs to be in Places/nearby/meters config.");
 		}
 		
 		$result = array();
