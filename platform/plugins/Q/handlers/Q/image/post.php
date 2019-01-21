@@ -40,7 +40,7 @@ function Q_image_post($params = null)
 		}
 		$p['data'] = base64_decode(chunk_split(substr($p['data'], strpos($p['data'], ',')+1)));
 	}
-	$timeLimit = Q_Config::get('Q', 'uploads', 'limits', 'image', 'time', 5*60*60);
+	$timeLimit = Q_Config::get('Q', 'uploads', 'limits', 'time', 5*60*60);
 	set_time_limit($timeLimit); // default is 5 min for saving the image in various formats
 	$data = Q_Image::save($p);
 	if (empty($params)) {
