@@ -119,8 +119,9 @@
 		},
 		"uploads": {
 			"limits": {
+				"time": 18000,
+				"size": 4194304,
 				"image": {
-					"time": 18000,
 					"width": 5000,
 					"height": 5000
 				}
