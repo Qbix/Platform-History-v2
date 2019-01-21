@@ -11817,8 +11817,8 @@ Q.Intl = {
     *  "calendar", "day", "locale", "month", "numberingSystem", "year", "timeZone"
     */
 	calendar: function () {
-		var result = {}, dtf;
-		if (dtf = Intl.DateTimeFormat() && dtf.resolvedOptions) {
+		var result = {}, dtf = Intl.DateTimeFormat();
+		if (dtf && dtf.resolvedOptions) {
 			result = dtf.resolvedOptions() || {};
 		}
 		return result;
