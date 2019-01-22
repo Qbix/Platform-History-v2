@@ -1408,8 +1408,8 @@ abstract class Users extends Base_Users
 	 */
 	static function importIcon($user, $urls = array(), $directory = null)
 	{
+		$app = Q::app();
 		if (empty($directory)) {
-			$app = Q::app();
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
 				.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'imported';
 		}
