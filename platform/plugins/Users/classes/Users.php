@@ -1148,6 +1148,7 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'after');
 
+		$directory = null;
 		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 		sort($sizes);
 		if (!isset($icon)) {
@@ -1170,10 +1171,13 @@ abstract class Users extends Base_Users
 				foreach ($sizes as $size) {
 					$icon["$size.png"] = array('hash' => $hash, 'size' => $size);
 				}
+				$app = Q::app();
+				$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
+					.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'generated';
 			}
 		}
 		if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
-			self::importIcon($user, $icon);
+			self::importIcon($user, $icon, $directory);
 			$user->save();
 		}
 
@@ -1397,7 +1401,8 @@ abstract class Users extends Base_Users
 	 * @method importIcon
 	 * @static
 	 * @param {array} $user The user for whom the icon should be downloaded
-	 * @param {array} [$urls=array()] Array of urls
+	 * @param {array} [$urls=array()] Array of urls to download from, or
+	 *   of arrays with keys "hash" and "size"
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
 	 * @return {string} the path to the icon directory
 	 */
