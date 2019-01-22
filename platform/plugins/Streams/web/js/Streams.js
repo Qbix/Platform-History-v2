@@ -4950,7 +4950,9 @@ Q.onInit.add(function _Streams_onInit() {
 	Users.onLogout.set(function () {
 		Interests.my = {}; // clear the interests
 		_clearCaches();
-		Streams.invited.dialog = null;  // clear invited dialog info
+		if (Streams.invited) {
+			Streams.invited.dialog = null;  // clear invited dialog info
+		}
 		Q.Socket.destroyAll();
 	}, "Streams");
 	if (Users.loggedInUser) {
