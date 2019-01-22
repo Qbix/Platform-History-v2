@@ -48,22 +48,27 @@
 	margin: 0 auto;
 }
 
+.Streams_invite_email,
+.Streams_invite_text {
+	padding: 15px;
+}
+
 /*
 Email
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email {
-	background-color: #0073b2; /* fallback color */
-	background: -moz-linear-gradient(top, #009cda, #0073b2);
-	background: -webkit-linear-gradient(top, #009cda, #0073b2);
-	border: 1px solid #0073b2;
-	text-shadow: 0 -1px -1px #005486;
+	background-color: #8a5900;
+	background: -moz-linear-gradient(top, #b57500, #8a5900);
+	background: -webkit-linear-gradient(top, #b57500, #8a5900);
+	border: 1px solid #8a5900;
+	text-shadow: 0 -1px -1px #613400;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email:hover {
-	background-color: #009cda; /* fallback color */
-	background: -moz-linear-gradient(top, #0073b2, #009cda);
-	background: -ms-linear-gradient(top, #0073b2, #009cda);
-	background: -webkit-linear-gradient(top, #0073b2, #009cda);
+	background-color: #b57500; /* fallback color */
+	background: -moz-linear-gradient(top, #8a5900, #b57500);
+	background: -ms-linear-gradient(top, #8a5900, #b57500);
+	background: -webkit-linear-gradient(top, #8a5900, #b57500);
 }
 
 .Streams_invite_dialog .Streams_invite_button_email .Streams_invite_social_icons {
