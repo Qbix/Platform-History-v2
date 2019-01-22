@@ -73,7 +73,7 @@ class Q_Valid
 					$domain_array[$i]))
 					return false;
 			}
-			if (! preg_match("/^[A-Za-z]{2,4}$/", $domain_array[$count - 1]))
+			if (! preg_match("/^[A-Za-z]{2,10}$/", $domain_array[$count - 1]))
 				return false;
 		}
 		
