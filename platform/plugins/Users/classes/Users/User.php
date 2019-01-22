@@ -843,7 +843,10 @@ class Users_User extends Base_Users_User
 				'50.png' => array('hash' => $hash, 'size' => 50),
 				'80.png' => array('hash' => $hash, 'size' => 80)
 			);
-			Users::importIcon($this, $icon);
+			$app = Q::app();
+			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
+				.DS.Q_Utils::splitId($this->id).DS.'icon'.DS.'generated';
+			Users::importIcon($this, $icon, $directory);
 		}
 		return true;
 	}
