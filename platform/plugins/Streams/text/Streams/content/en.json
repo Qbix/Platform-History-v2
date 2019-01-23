@@ -46,11 +46,13 @@
 			"byEmail": "Email",
 			"byText": "Text",
 			"byFacebook": "Facebook",
-			"byTwitter": "Twitter",
-			"body": {
-				"email": "Send the email with this URL to your friends to invite them",
-				"text": "Hey, I just sent you an invite. Please check your email and click the link!"
-			}
+			"byTwitter": "Twitter"
+		},
+		"email": {
+			"subject": "You have been invited"
+		},
+		"text": {
+			"content": "You have been invited to {{streamName}}. Please enter the link to accept invite. {{url}}"
 		}
 	},
 	"message": {
