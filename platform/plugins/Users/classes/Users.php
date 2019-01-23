@@ -35,6 +35,18 @@ abstract class Users extends Base_Users
 	}
 	
 	/**
+	 * Check if an icon is custom or whether it's been automatically generated
+	 * @method isCustomIcon
+	 * @static
+	 * @param {String} $icon
+	 * @return {boolean}
+	 */
+	static function isCustomIcon ($icon) {
+		return strpos($icon, 'imported') !== false
+		or preg_match("/\/icon\/[0-9]+/", $icon);
+	}
+
+	/**
 	 * Get the id of the main community from the config. Defaults to the app name.
 	 * @method communityId
 	 * @static
