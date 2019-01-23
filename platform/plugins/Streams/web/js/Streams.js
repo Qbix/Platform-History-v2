@@ -1079,6 +1079,7 @@ Streams.Dialogs = {
 								Q.handle(callback, Streams, [{
 									identifier: $(".Streams_invite_submit input[type=text]", dialog).val()
 								}]);
+								Q.Dialogs.pop(); // close the Dialog
 							});
 						// handle social buttons
 						$('.Streams_invite_social_buttons button', dialog)
@@ -1092,11 +1093,11 @@ Streams.Dialogs = {
 										result.token = 1;
 										result.identifier = null;
 										result.sendBy = sendBy;
-										Q.Dialogs.pop(); // close the Dialog
+										Q.Dialogs.pop();
 										break;
 									case "text":
 										result.sendBy = sendBy;
-										Q.Dialogs.pop(); // close the Dialog
+										Q.Dialogs.pop();
 									case "email":
 										result.identifier = $(".Streams_invite_submit input[type=text]", dialog).val()
 										break;
