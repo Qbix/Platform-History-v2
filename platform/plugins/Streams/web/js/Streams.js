@@ -1079,11 +1079,36 @@ Streams.Dialogs = {
 								Q.handle(callback, Streams, [{
 									identifier: $(".Streams_invite_submit input[type=text]", dialog).val()
 								}]);
+								Q.Dialogs.pop(); // close the Dialog
 							});
 						// handle social buttons
 						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
 							.on(Q.Pointer.fastclick, function () {
 								var sendBy = $(this).data('sendby');
+								var result = {};
+								switch (sendBy) {
+									case "facebook":
+									case "twitter":
+										// token 1 to generate a link for public invite
+										result.token = 1;
+										result.identifier = null;
+										result.sendBy = sendBy;
+										Q.Dialogs.pop();
+										break;
+									case "text":
+										result.sendBy = sendBy;
+										Q.Dialogs.pop();
+									case "email":
+										result.identifier = $(".Streams_invite_submit input[type=text]", dialog).val()
+										break;
+								}
+								Q.handle(callback, Streams, [result]);
+							});
+						// handle QR button
+						$('.Streams_invite_QR', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								var sendBy = $(this).data('sendby');
+								Q.Dialogs.pop(); // close the Dialog
 								Q.handle(callback, Streams, [{
 									token: 1,
 									sendBy: sendBy,

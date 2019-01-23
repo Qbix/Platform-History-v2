@@ -1790,18 +1790,10 @@
 	/**
 	 * Votes for something
 	 * @static
-	 * @method hint
+	 * @method vote
 	 * @param {String} forType The type of thing to vote for
 	 * @param {String} forId The id of thing to vote for
 	 * @param {Number} [value=1] the value the user has voted for, such as a rating etc.
-	 * @param {Element|Object} elementOrPoint Indicates where to display the hint. A point should contain properties "x" and "y".
-	 * @param {Object} [options] possible options, which can include:
-	 * @param {String} [options.src] the url of the image
-	 * @param {Point} [options.hotspot={x:0.5,y:0.4}] "x" and "y" represent the location of the hotspot within the image, using fractions between 0 and 1
-	 * @param {String} [options.width="200px"]
-	 * @param {String} [options.height="200px"]
-	 * @param {Number} [options.zIndex=99999]
-	 * @return {Boolean} Returns true if the hint with will be shown, or false if a hint with this key was already shown before.
 	 */
 	Users.vote = function (forType, forId, value) {
 		var fields = {
