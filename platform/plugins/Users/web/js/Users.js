@@ -174,8 +174,9 @@
 	/**
 	 * Check whether string is community id
 	 * @method isCommunityId
+	 * @static
 	 * @param {String} id
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	Users.isCommunityId = function (id) {
 		if (id[0] !== id[0].toUpperCase()) {
@@ -183,6 +184,18 @@
 		}
 
 		return true;
+	};
+	
+	/**
+	 * Check if an icon is custom or whether it's been automatically generated
+	 * @method isCustomIcon
+	 * @static
+	 * @param {String} id
+	 * @return {boolean}
+	 */
+	Users.isCustomIcon = function (icon) {
+		return (icon.indexOf('imported') >= 0
+		|| icon.match(/\/icon\/[0-9]+/));
 	};
 
 	/**
