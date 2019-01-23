@@ -39,6 +39,13 @@
 			var $te = $(tool.element);
 
 			Q.addStylesheet('{{Q}}/css/tabs.css');
+			
+			if (state.contextualHandler == null) {
+				state.contextualHandler = function ($jq) {
+					var element = $jq[0];
+					tool.switchTo([element.getAttribute('data-name'), element]);
+				}
+			}
 
 			var refresh = function () {
 				tool.refresh();
@@ -64,6 +71,7 @@
 			slot: 'content,title',
 			selectors: { content: '#content_slot' },
 			checkQueryString: false,
+			contextualHandler: null,
 			overflow: {
 				content: '<span><span>{{count}} more</span></span>',
 				glyph: '&#9662;',
@@ -386,6 +394,7 @@
 					$overflow.plugin("Q/contextual", {
 						elements: elements,
 						className: "Q_tabs_contextual",
+						defaultHandler: state.contextualHandler,
 						onConstruct: function ($contextual) {
 							_addListeners(tool, $contextual);
 							tool.$tabs.css('visibility', 'visible');
