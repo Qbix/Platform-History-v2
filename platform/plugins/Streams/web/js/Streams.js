@@ -1085,34 +1085,10 @@ Streams.Dialogs = {
 						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
 							.on(Q.Pointer.fastclick, function () {
 								var sendBy = $(this).data('sendby');
-								var result = {};
-								switch (sendBy) {
-									case "facebook":
-									case "twitter":
-										// token 1 to generate a link for public invite
-										result.token = 1;
-										result.identifier = null;
-										result.sendBy = sendBy;
-										Q.Dialogs.pop();
-										break;
-									case "text":
-										result.sendBy = sendBy;
-										Q.Dialogs.pop();
-									case "email":
-										result.identifier = $(".Streams_invite_submit input[type=text]", dialog).val()
-										break;
-								}
-								Q.handle(callback, Streams, [result]);
-							});
-						// handle QR button
-						$('.Streams_invite_QR', dialog)
-							.on(Q.Pointer.fastclick, function () {
-								var sendBy = $(this).data('sendby');
-								Q.Dialogs.pop(); // close the Dialog
 								Q.handle(callback, Streams, [{
 									token: 1,
-									sendBy: sendBy,
-									identifier: null
+									identifier: null,
+									sendBy: sendBy
 								}]);
 								Q.Dialogs.pop(); // close the Dialog
 							});
@@ -1363,18 +1339,26 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Q.Text.get('Streams/content', function (err, text) {
 				switch (o.sendBy) {
 					case "email":
-						Q.Dialogs.push({
-							content: '<div class="Streams_invite_email">'+
-										'<p>' + Q.getObject(['invite', 'dialog', 'body', 'email'], text) + '</p>' +
-										'<p>' + rsd.url + '</p>' +
-									 '</div>'
+						Q.Template.render("Streams/templates/invite/email", {
+							inviteUrl: rsd.url,
+							inviteTitle: streamName
+						}, function (err, html) {
+							if (err) return;
+							var url = Q.Links.email(Q.getObject(['invite', 'email', 'subject'], text), html);
+							window.location = url;
 						});
 						break;
 					case "text":
-						Q.Dialogs.push({
-							content: '<div class="Streams_invite_text">'+
-										'<p>' + Q.getObject(['invite', 'dialog', 'body', 'text'], text) + '</p>' +
-									 '</div>'
+						var content = Q.getObject(['invite', 'text', 'content'], text);
+						Q.Template.render("Streams/templates/invite/text", {
+							content: content.interpolate({
+								streamName: streamName,
+								url: rsd.url
+							})
+						}, function (err, text) {
+							if (err) return;
+							var url = Q.Links.sms(text);
+							window.location = url;
 						});
 						break;
 					case "facebook":
