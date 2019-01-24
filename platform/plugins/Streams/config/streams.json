@@ -242,6 +242,11 @@
 		"title": "Quotes",
 		"icon": ""
 	},
+	"Streams/user/urls": {
+		"type": "Streams/category",
+		"title": "User URLs",
+		"icon": ""
+	},
 	"Streams/image/album": {
 		"type": "Streams/album",
 		"title": "Quotes",
