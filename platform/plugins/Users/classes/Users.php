@@ -970,6 +970,7 @@ abstract class Users extends Base_Users
 	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -1025,7 +1026,7 @@ abstract class Users extends Base_Users
 						'type' => 'an array with entry named "device"'
 					));
 			}
-		} else if (!$identifier) {
+		} else if (!$identifier && !Q::ifset($options, 'skipIdentifier', false)) {
 			throw new Q_Exception_RequiredField(array('field' => 'identifier'));
 		}
 		$ui_identifier = null;
