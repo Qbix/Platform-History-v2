@@ -18,68 +18,31 @@
 function Streams_interest_post($params = array())
 {
 	$r = array_merge($_REQUEST, $params);
-	$user = Users::loggedInUser(true);
+
+	// userId can defined only from $params for security reasons
+	$userId = Q::ifset($params, 'userId', Users::loggedInUser(true)->id);
+
 	$title = Q::ifset($r, 'title', null);
 	if (!isset($title)) {
 		throw new Q_Exception_RequiredField(array('field' => 'title'));
 	}
+
 	$publisherId = Q::ifset($r, 'publisherId', Users::communityId());
-	$name = 'Streams/interest/' . Q_Utils::normalize($title);
-	$stream = Streams::fetchOne(null, $publisherId, $name);
-	if (!$stream) {
-		$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
-			'name' => $name,
-			'title' => $title
-		));
-		if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$name)) {
-			$stream->icon = $name;
-		} else {
-			$parts = explode(': ', $title, 2);
-			$keywords = implode(' ', $parts);
-			$tries = array($keywords, $parts[1]);
-			$data = null;
-			foreach ($tries as $t) {
-				try {
-					$data = Q_Image::pixabay($t, array(
-						'orientation' => 'horizontal',
-						'min_width' => '500',
-						'safesearch' => 'true',
-						'image_type' => 'photo'
-					), true);
-				} catch (Exception $e) {
-					Q::log("Exception during Streams/interest post: " . $e->getMessage());
-					$data = null;
-				}
-				if ($data) {
-					break;
-				}
-			}
-			if ($data) {
-				$params = array(
-					'data' => $data,
-					'path' => "{{Streams}}/img/icons",
-					'subpath' => $name,
-					'save' => 'Streams/interest',
-					'skipAccess' => true
-				);
-				Q_Image::save($params);
-				$stream->icon = $name;
-			}
-		}
-		$stream->save();
-	}
+
+	$stream = Streams::getInterest($title);
+
 	$subscribe = !!Q::ifset($r, 'subscribe', false);
 	if ($subscribe) {
-		$stream->subscribe();
+		$stream->subscribe(array('userId' => $userId));
 	} else {
-		$stream->join();
+		$stream->join(array('userId' => $userId));
 	}
 	
 	$myInterestsName = 'Streams/user/interests';
-	$myInterests = Streams::fetchOne($user->id, $user->id, $myInterestsName);
+	$myInterests = Streams::fetchOne($userId, $userId, $myInterestsName);
 	if (!$myInterests) {
 		$myInterests = new Streams_Stream();
-		$myInterests->publisherId = $user->id;
+		$myInterests->publisherId = $userId;
 		$myInterests->name = $myInterestsName;
 		$myInterests->type = 'Streams/category';
 		$myInterests->title = 'My Interests';
@@ -87,17 +50,17 @@ function Streams_interest_post($params = array())
 	}
 	
 	Streams::relate(
-		$user->id,
-		$user->id,
+		$userId,
+		$userId,
 		'Streams/user/interests',
 		'Streams/interests',
 		$publisherId,
-		$name,
+		$stream->name,
 		array('weight' => '+1')
 	);
 	
 	Q_Response::setSlot('publisherId', $publisherId);
-	Q_Response::setSlot('streamName', $name);
+	Q_Response::setSlot('streamName', $stream->name);
 
 	/**
 	 * Occurs when the logged-in user has successfully added an interest via HTTP
@@ -110,6 +73,6 @@ function Streams_interest_post($params = array())
 	 * @param {Streams_Stream} myInterests The user's "Streams/user/interests" stream
 	 */
 	Q::event("Streams/interest/add", compact(
-		'publisherId', 'title', 'subscribe', 'user', 'stream', 'myInterests'
+		'publisherId', 'title', 'subscribe', 'userId', 'stream', 'myInterests'
 	), 'after');
 }
