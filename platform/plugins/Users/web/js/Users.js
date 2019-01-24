@@ -194,6 +194,9 @@
 	 * @return {boolean}
 	 */
 	Users.isCustomIcon = function (icon) {
+		if (!icon) {
+			return false;
+		}
 		return (icon.indexOf('imported') >= 0
 		|| icon.match(/\/icon\/[0-9]+/));
 	};
