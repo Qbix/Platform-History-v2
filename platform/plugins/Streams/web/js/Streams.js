@@ -1349,14 +1349,15 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						});
 						break;
 					case "text":
+						var content = Q.getObject(['invite', 'text', 'content'], text);
 						Q.Template.render("Streams/templates/invite/text", {
-							content: Q.getObject(['invite', 'text', 'content'], text).interpolate({
+							content: content.interpolate({
 								streamName: streamName,
 								url: rsd.url
 							})
-						}, function (err, html) {
+						}, function (err, text) {
 							if (err) return;
-							var url = Q.Links.sms(html);
+							var url = Q.Links.sms(text);
 							window.location = url;
 						});
 						break;
