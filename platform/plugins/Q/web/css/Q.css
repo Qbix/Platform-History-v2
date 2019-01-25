@@ -262,6 +262,7 @@ body.Q_preventScroll {
 }
 .Q_dialog_content {
 	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 .Q_alert .Q_dialog_content,
 .Q_confirm .Q_dialog_content,

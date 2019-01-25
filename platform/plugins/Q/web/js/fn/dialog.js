@@ -117,22 +117,30 @@ Q.Tool.jQuery('Q/overlay',
 				calculatePosition($this);
 				$this.show();
 				dialogs.push($this[0]);
-				var $body = $('body');
-				data.bodyStyle = {
-					left: $body.css('left'),
-					top: $body.css('top')
-				};
-				var hs = document.documentElement.style;
-				var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
-					? 0
-					: Q.Pointer.scrollLeft();
-				var st = (hs.height === '100%' && hs.overflowY === 'hidden')
-					? 0
-					: Q.Pointer.scrollTop();
-				$body.css({
-					left: -sl + 'px',
-					top: -st + 'px'
-				}).addClass('Q_preventScroll');
+				setTimeout(function _fixBody() {
+					var e = document.activeElement;
+					if (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA') {
+						// keyboard is visible, do nothing for now
+						setTimeout(_fixBody, 300);
+						return;
+					}
+					var $body = $('body');
+					data.bodyStyle = {
+						left: $body.css('left'),
+						top: $body.css('top')
+					};
+					var hs = document.documentElement.style;
+					var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
+						? 0
+						: Q.Pointer.scrollLeft();
+					var st = (hs.height === '100%' && hs.overflowY === 'hidden')
+						? 0
+						: Q.Pointer.scrollTop();
+					$body.css({
+						left: -sl + 'px',
+						top: -st + 'px'
+					}).addClass('Q_preventScroll');
+				}, 300);
 				var oom = data.options.mask;
 				var mcn = (typeof oom === 'string') ? ' ' + oom : '';
 				if (data.options.fadeInOut)
