@@ -180,7 +180,7 @@ class Streams_Invite extends Base_Streams_Invite
 		if (!empty($options['subscribe']) and !$stream->subscription($userId)) {
 			try {
 				$extra = Q::ifset($options, 'extra', array());
-				$configExtra = Streams::getConfigField($stream->type, array(
+				$configExtra = Streams_Stream::getConfigField($stream->type, array(
 					'invite', 'extra'
 				), array());
 				$extra = array_merge($configExtra, $extra);
