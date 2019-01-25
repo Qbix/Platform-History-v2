@@ -1179,6 +1179,7 @@ abstract class Users extends Base_Users
 				}
 			} else if ($icon === true) {
 				// locally generated icons
+				$identifier = $identifier ?: microtime();
 				$hash = md5(strtolower(trim($identifier)));
 				$icon = array();
 				foreach ($sizes as $size) {
@@ -1429,7 +1430,7 @@ abstract class Users extends Base_Users
 		if (empty($urls)) {
 			return $directory;
 		}
-		Q_Utils::canWriteToPath($directory, false, true);
+		Q_Utils::canWriteToPath($directory, null, true);
 		$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 		$largestSize = 0;
 		$largestUrl = null;
