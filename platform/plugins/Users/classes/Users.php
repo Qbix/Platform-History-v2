@@ -1956,6 +1956,54 @@ abstract class Users extends Base_Users
 	}
 
 	/**
+	 * Checks whether users icons exist, and if not - generate new.
+	 * @method generateIcon
+	 * @static
+	 * @param {string|array|null} $userId Can be single user id or array of ids or null if you want to fix all users.
+	 */
+	static function generateIcon($userId = null) {
+		if (is_null($userId)) {
+			$users = Users_User::select()->where(array('signedUpWith != ' => 'none'))->fetchArray();
+			foreach ($users as $user) {
+				if (!self::isCommunityId($user['id'])) {
+					self::generateIcon($user['id']);
+				}
+			}
+
+			return;
+		} elseif (is_array($userId)) {
+			foreach ($userId as $user) {
+				if (!self::isCommunityId($user)) {
+					self::generateIcon($user);
+				}
+			}
+
+			return;
+		}
+
+		$user = self::fetch($userId, true);
+		$baseUrl = Q_Request::baseUrl();
+		$iconPath = str_replace($baseUrl,"", Q::interpolate($user->icon, array('baseUrl' => $baseUrl)));
+
+		if (is_dir(APP_WEB_DIR.DS.$iconPath)) {
+			return;
+		}
+
+		// locally generated icons
+		$identifier = $user->emailAddress ?: $user->mobileNumber ?: $user->emailAddressPending ?: $user->mobileNumberPending ?: time() + microtime();
+		$hash = md5(strtolower(trim($identifier)));
+		$icon = array();
+		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
+		sort($sizes);
+		foreach ($sizes as $size) {
+			$icon["$size.png"] = array('hash' => $hash, 'size' => $size);
+		}
+		$directory = implode(DS, array(APP_FILES_DIR, Q::app(), 'uploads', 'Users', Q_Utils::splitId($user->id), 'icon', 'generated'));
+		self::importIcon($user, $icon, $directory);
+		$user->save();
+	}
+
+		/**
 	 * @property $loggedOut
 	 * @type boolean
 	 */
