@@ -1337,25 +1337,33 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Q.handle(o && o.callback, null, [err, rsd]);
 			Q.handle(callback, null, [err, rsd]);
 			Q.Text.get('Streams/content', function (err, text) {
+				var t;
 				switch (o.sendBy) {
 					case "email":
-						Q.Template.render("Streams/templates/invite/email", {
+						t = Q.extend({
 							inviteUrl: rsd.url,
 							inviteTitle: streamName
-						}, function (err, html) {
+						}, 10, text);
+						Q.Template.render("Streams/templates/invite/email", t,
+						function (err, html) {
 							if (err) return;
 							var url = Q.Links.email(Q.getObject(['invite', 'email', 'subject'], text), html);
 							window.location = url;
 						});
 						break;
 					case "text":
-						var content = Q.getObject(['invite', 'text', 'content'], text);
-						Q.Template.render("Streams/templates/invite/text", {
-							content: content.interpolate({
+						var content = Q.getObject(['invite', 'text', 'content'], text)
+							.interpolate({
 								streamName: streamName,
 								url: rsd.url
-							})
-						}, function (err, text) {
+							});
+						t = {
+							content: content
+							inviteUrl: rsd.url,
+							inviteTitle: streamName
+						}, 10, text);
+						Q.Template.render("Streams/templates/invite/sms", t,
+						function (err, text) {
 							if (err) return;
 							var url = Q.Links.sms(text);
 							window.location = url;
@@ -5086,6 +5094,7 @@ Q.onInit.add(function _Streams_onInit() {
 		if (Q.Users.loggedInUserId()) {
 			_showDialog();
 		} else {
+			params.loggedInFirst = true;
 			Q.Users.login({
 				onSuccess: {'Users': _showDialog}
 			});
