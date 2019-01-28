@@ -3724,7 +3724,7 @@ abstract class Streams extends Base_Streams
 			$parts = explode(' ', $fullName);
 			if ($capitalize) {
 				foreach ($parts as $k => $v) {
-					$parts[$k] = ucfirst($v);
+					$parts[$k] = Q_Utils::ucfirst($v);
 				}
 			}
 			$last = join(' ', array_slice($parts, 1));

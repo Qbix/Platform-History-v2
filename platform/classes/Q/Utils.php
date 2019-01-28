@@ -228,7 +228,7 @@ class Q_Utils
 		$keepCaseIntact = false)
 	{
 		if (!isset($characters)) {
-			$characters = '/[^A-Za-z0-9]+/';
+			$characters = '/[^\p{L}0-9]+/u';
 			if (class_exists('Q_Config')) {
 				$characters = Q_Config::get('Db', 'normalize', 'characters', $characters);
 			}
@@ -252,7 +252,35 @@ class Q_Utils
 		}
 		return $result;
 	}
-	
+	/**
+	 * Converts the first character of a string to upper case.
+	 * @method ucfirst
+	 * @static
+	 * @param {string} $string
+	 * @param {string} [$encoding='UTF-8']
+	 * @return {string}
+	 */
+	static function ucfirst($string, $encoding = 'UTF-8')
+	{
+		$strlen = mb_strlen($string, $encoding);
+		$firstChar = mb_substr($string, 0, 1, $encoding);
+		$then = mb_substr($string, 1, $strlen - 1, $encoding);
+		return mb_strtoupper($firstChar, $encoding) . $then;
+	}
+	/**
+	 * Converts to uppercase the first character of each word in the string.
+	 * @method ucwords
+	 * @static
+	 * @param {string} $string String
+	 * @param {string} [$encoding='UTF-8'] encoding
+	 * @return {string}
+	 */
+	static function ucwords($string, $encoding='UTF-8')
+	{
+
+		$string = mb_convert_case($string, MB_CASE_TITLE, $encoding);
+		return $string;
+	}
 	/**
 	 * Hashes text in a standard way. It uses md5, which is fast and irreversible,
 	 * so it's good for things like indexes, but not for obscuring information.
