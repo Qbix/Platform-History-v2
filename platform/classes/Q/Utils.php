@@ -228,7 +228,7 @@ class Q_Utils
 		$keepCaseIntact = false)
 	{
 		if (!isset($characters)) {
-			$characters = '/[^A-Za-z0-9]+/';
+			$characters = '/[^\p{L}0-9]+/u';
 			if (class_exists('Q_Config')) {
 				$characters = Q_Config::get('Db', 'normalize', 'characters', $characters);
 			}
