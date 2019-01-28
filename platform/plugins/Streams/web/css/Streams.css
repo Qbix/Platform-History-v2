@@ -340,7 +340,7 @@
 	vertical-align: middle;
 }
 
-.Streams_complete_user td:first-child {
+.Streams_complete_invitingUser td:first-child {
 	width: 1%;
 }
 

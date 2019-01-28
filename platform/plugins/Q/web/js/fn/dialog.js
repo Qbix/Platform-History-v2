@@ -117,18 +117,21 @@ Q.Tool.jQuery('Q/overlay',
 				calculatePosition($this);
 				$this.show();
 				dialogs.push($this[0]);
+				var $body = $('body');
+				data.bodyStyle = {
+					left: $body.css('left'),
+					top: $body.css('top')
+				};
+				var isKbd = null;
 				setTimeout(function _fixBody() {
+					$body.addClass('Q_preventScroll')
 					var e = document.activeElement;
-					if (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA') {
-						// keyboard is visible, do nothing for now
+					isKbd = (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA');
+					if (isKbd !== false) {
+						// keyboard is visible or not applicable, do nothing for now
 						setTimeout(_fixBody, 300);
 						return;
 					}
-					var $body = $('body');
-					data.bodyStyle = {
-						left: $body.css('left'),
-						top: $body.css('top')
-					};
 					var hs = document.documentElement.style;
 					var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
 						? 0
@@ -139,8 +142,8 @@ Q.Tool.jQuery('Q/overlay',
 					$body.css({
 						left: -sl + 'px',
 						top: -st + 'px'
-					}).addClass('Q_preventScroll');
-				}, 300);
+					});
+				}, 100);
 				var oom = data.options.mask;
 				var mcn = (typeof oom === 'string') ? ' ' + oom : '';
 				if (data.options.fadeInOut)
@@ -214,7 +217,9 @@ Q.Tool.jQuery('Q/overlay',
 				if (data.options.htmlClass && !data.htmlHadClass) {
 					$html.removeClass(data.options.htmlClass);
 				}
-				$('body').removeClass('Q_preventScroll').css(data.bodyStyle);
+				setTimeout(function () {
+					$('body').removeClass('Q_preventScroll').css(data.bodyStyle);	
+				}, 500);
 				$('html,body').scrollTop(data.documentScrollTop)
 					.scrollLeft(data.documentScrollLeft);
 				if (!data.options.noClose) {
