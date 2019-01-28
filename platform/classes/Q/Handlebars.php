@@ -167,7 +167,7 @@ class Q_Handlebars {
 	static function helperToCapitalized($template, $context, $args, $source)
 	{
 		$args = self::parseArgs($template, $context, $args);
-		return isset($args[0]) ? ucfirst($args[0]) : '';
+		return isset($args[0]) ? Q_Utils::ucfirst($args[0]) : '';
 	}
 	
 	static function helperInterpolate($template, $context, $args, $source)
