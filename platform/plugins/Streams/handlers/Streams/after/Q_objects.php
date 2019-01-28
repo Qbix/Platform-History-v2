@@ -59,7 +59,7 @@ function Streams_after_Q_objects () {
 		'displayName' => $displayName,
 		'nameIsMissing' => $nameIsMissing,
 		'action' => 'Streams/basic',
-		'icon' => $user->iconUrl(),
+		'icon' => $user && $user->iconUrl(),
 		'token' => $invite->token,
 		'invitingUser' => array(
 			'icon' => $invitingUser->iconUrl(),
