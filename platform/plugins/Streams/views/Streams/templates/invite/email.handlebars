@@ -1,9 +1,4 @@
-<p>
-    You have been invited to
-    <a href='{{inviteUrl}}'>{{inviteTitle}}</a>
-</p>
+{{interpolate "invite.email.InvitingYou" title=inviteTitle}}
 
-<p>
-    Please click the link above, or paste the following URL into your browser:
-    {{inviteUrl}}
-</p>
+{{invite.email.PleaseVisitLink}}
+{{inviteUrl}}

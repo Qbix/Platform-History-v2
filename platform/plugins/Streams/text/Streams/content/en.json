@@ -49,10 +49,13 @@
 			"byTwitter": "Twitter"
 		},
 		"email": {
-			"subject": "You have been invited"
+			"subject": "You have been invited",
+			"HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+			"PleaseVisitLink": "Please visit the following link:",
+			"InvitingYou": "I am inviting you to {{title}}"
 		},
-		"text": {
-			"content": "You have been invited to {{streamName}}. Please enter the link to accept invite. {{url}}"
+		"sms": {
+			"content": "You have been invited to {{streamName}}. Please tap {{url}}"
 		}
 	},
 	"message": {
