@@ -1357,7 +1357,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								streamName: streamName,
 								url: rsd.url
 							});
-						t = {
+						t = Q.extend({
 							content: content,
 							inviteUrl: rsd.url,
 							inviteTitle: streamName
