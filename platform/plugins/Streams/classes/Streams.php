@@ -4280,8 +4280,65 @@ abstract class Streams extends Base_Streams
 		}
 		return $streams;
 	}
-
 	/**
+	 * Get or create interest stream
+	 * @method getInterest
+	 * @static
+	 * @param {string} $title Stream title which will convert to stream name
+	 * @param {string} $publisherId If null, set to main community id Users::communityId()
+	 * @return {Streams_Stream}
+	 */
+	static function getInterest ($title, $publisherId = null) {
+		$streamName = 'Streams/interest/' . Q_Utils::normalize($title);
+		$publisherId = $publisherId ?: Users::communityId();
+
+		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		if (!$stream) {
+			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
+				'name' => $streamName,
+				'title' => $title
+			));
+			if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
+				$stream->icon = $streamName;
+			} else {
+				$parts = explode(': ', $title, 2);
+				$keywords = implode(' ', $parts);
+				$tries = array($keywords, $parts[1]);
+				$data = null;
+				foreach ($tries as $t) {
+					try {
+						$data = Q_Image::pixabay($t, array(
+							'orientation' => 'horizontal',
+							'min_width' => '500',
+							'safesearch' => 'true',
+							'image_type' => 'photo'
+						), true);
+					} catch (Exception $e) {
+						Q::log("Exception during Streams/interest post: " . $e->getMessage());
+						$data = null;
+					}
+					if ($data) {
+						break;
+					}
+				}
+				if ($data) {
+					$params = array(
+						'data' => $data,
+						'path' => "{{Streams}}/img/icons",
+						'subpath' => $streamName,
+						'save' => 'Streams/interest',
+						'skipAccess' => true
+					);
+					Q_Image::save($params);
+					$stream->icon = $streamName;
+				}
+			}
+			$stream->save();
+		}
+
+		return $stream;
+	}
+		/**
 	 * Remove streams from system
 	 * @method removeStream
 	 * @static
