@@ -1358,7 +1358,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								url: rsd.url
 							});
 						t = {
-							content: content
+							content: content,
 							inviteUrl: rsd.url,
 							inviteTitle: streamName
 						}, 10, text);
