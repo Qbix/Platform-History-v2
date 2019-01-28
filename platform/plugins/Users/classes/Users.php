@@ -970,6 +970,7 @@ abstract class Users extends Base_Users
 	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -1025,7 +1026,7 @@ abstract class Users extends Base_Users
 						'type' => 'an array with entry named "device"'
 					));
 			}
-		} else if (!$identifier) {
+		} else if (!$identifier && !Q::ifset($options, 'skipIdentifier', false)) {
 			throw new Q_Exception_RequiredField(array('field' => 'identifier'));
 		}
 		$ui_identifier = null;
@@ -1178,6 +1179,7 @@ abstract class Users extends Base_Users
 				}
 			} else if ($icon === true) {
 				// locally generated icons
+				$identifier = $identifier ?: microtime();
 				$hash = md5(strtolower(trim($identifier)));
 				$icon = array();
 				foreach ($sizes as $size) {
@@ -1428,7 +1430,7 @@ abstract class Users extends Base_Users
 		if (empty($urls)) {
 			return $directory;
 		}
-		Q_Utils::canWriteToPath($directory, false, true);
+		Q_Utils::canWriteToPath($directory, null, true);
 		$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 		$largestSize = 0;
 		$largestUrl = null;
@@ -1954,6 +1956,54 @@ abstract class Users extends Base_Users
 	}
 
 	/**
+	 * Checks whether users icons exist, and if not - generate new.
+	 * @method generateIcon
+	 * @static
+	 * @param {string|array|null} $userId Can be single user id or array of ids or null if you want to fix all users.
+	 */
+	static function generateIcon($userId = null) {
+		if (is_null($userId)) {
+			$users = Users_User::select()->where(array('signedUpWith != ' => 'none'))->fetchArray();
+			foreach ($users as $user) {
+				if (!self::isCommunityId($user['id'])) {
+					self::generateIcon($user['id']);
+				}
+			}
+
+			return;
+		} elseif (is_array($userId)) {
+			foreach ($userId as $user) {
+				if (!self::isCommunityId($user)) {
+					self::generateIcon($user);
+				}
+			}
+
+			return;
+		}
+
+		$user = self::fetch($userId, true);
+		$baseUrl = Q_Request::baseUrl();
+		$iconPath = str_replace($baseUrl,"", Q::interpolate($user->icon, array('baseUrl' => $baseUrl)));
+
+		if (is_dir(APP_WEB_DIR.DS.$iconPath)) {
+			return;
+		}
+
+		// locally generated icons
+		$identifier = $user->emailAddress ?: $user->mobileNumber ?: $user->emailAddressPending ?: $user->mobileNumberPending ?: time() + microtime();
+		$hash = md5(strtolower(trim($identifier)));
+		$icon = array();
+		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
+		sort($sizes);
+		foreach ($sizes as $size) {
+			$icon["$size.png"] = array('hash' => $hash, 'size' => $size);
+		}
+		$directory = implode(DS, array(APP_FILES_DIR, Q::app(), 'uploads', 'Users', Q_Utils::splitId($user->id), 'icon', 'generated'));
+		self::importIcon($user, $icon, $directory);
+		$user->save();
+	}
+
+		/**
 	 * @property $loggedOut
 	 * @type boolean
 	 */
