@@ -91,7 +91,7 @@ function Streams_after_Users_User_saveExecute($params)
 		$stream->adminLevel = $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel']);
 		if ($name === "Streams/user/icon") {
 			$sizes = Q_Image::getSizes('Users/icon');
-			sort($sizes);
+			ksort($sizes);
 			$stream->setAttribute('sizes', $sizes);
 			$stream->icon = $user->icon;
 		}
@@ -186,7 +186,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$stream->content = $value;
 			if ($name === "Streams/user/icon") {
                 $sizes = Q_Image::getSizes('Users/icon');
-				sort($sizes);
+				ksort($sizes);
                 $stream->setAttribute('sizes', $sizes);
 				$stream->icon = $changes['icon'] = $user->icon;
 			}
