@@ -433,7 +433,7 @@ Places.Dialogs = {
 	 */
 	location: function (callback, dialogOptions, toolOptions) {
 		var called = true;
-		var tool = Q.Tool.setUpElement('div', 'Places/location', Q.extend({
+		var element = Q.Tool.setUpElement('div', 'Places/location', Q.extend({
 			onChoose: function () {
 				Q.Dialogs.pop();
 				callback.apply(this, arguments);
@@ -441,11 +441,11 @@ Places.Dialogs = {
 		}, toolOptions));
 		Q.Text.get('Places/content', function (err, text) {
 			Q.Dialogs.push(Q.extend({
-				title: text.location.Title,
-				content: tool.element,
+				title: text.location.dialog.title,
+				content: element,
 				onClose: function () {
 					if (!called) {
-						callback();
+						callback(null);
 					}
 				}
 			}, dialogOptions));
