@@ -6572,6 +6572,10 @@ Q.request = function (url, slotNames, callback, options) {
 		};
 
 		if (o.form) {
+			if (verb !== 'GET') {
+				verb = 'POST'; // browsers don't always support other HTTP verbs;
+				overrides.method = o.method;
+			}
 			if (o.extend !== false) {
 				overrides.iframe = true;
 				o.fields = Q.ajaxExtend(o.fields || {}, slotNames, overrides);
