@@ -1,36 +1,31 @@
 <?php
 
 /**
- * Renders a user status area which displays logged in status and provides various user-related operations.
- * @param $options
- *   An associative array of parameters, which can include:
- *   "icon" => Optional. Icon for the login button. Defaults to Qbix icon.
- *   "label" => Optional. Text for the login button. Defaults to 'log in'.
- *   "logoutIcon" => Optional. Icon for 'Log out' item in the tool menu.
- *   "menuItems" => Optional. Additional menu items beside 'Log out' which will be shown in user menu.
- *                  Should be an array of hashes like { 'contents': 'value', 'action': 'value' }.
- *   "onCancel" => Optional. Function, string function name or Q.Event. Called when user was unable to login or cancelled login dialog.
- *   "onLogin" => Optional. Function or Q.Event. Called when user successfully logged it.
- *   "onLogout" => Optional. Function, string function name or Q.Event. Called when user successfully logged out.
- *   "onMenuSelect" => Optional. Function, string function name or Q.Event.
- *                     Called when user selected some item from user selected some item from user menu except 'Log out'.
- * @return {string}
+ * Renders a dynamic user status area which displays "log in" or the logged-in user's avatar
+ * @class Users status
+ * @constructor
+ * @param {Object} [$options] this object contains function parameters
+ *	 @param {String} [$options.avatar] Options for the user avatar
+ *	 @param {String} [$options.avatar.icon=80] The default size of the avatar icon
+ *	 @param {String} [$options.avatar.contents=!Q.info.isMobile] Whether to show the name
+ *	 @param {String} [$options.avatar.short=true] Whether the name shown should be short
  */
 function Users_status_tool($options)
 {
-	$defaults = array(
-		'icon' => '{{Q}}/img/ui/qbix_icon' . (Q_Request::isMobile() ? '_small' : '') . '.png',
-		'label' => 'log in',
-		'logoutIcon' => null,
-		'menuItems' => array(),
-		'onCancel' => null,
-		'onLogin' => null,
-		'onLogout' => null,
-		'onMenuSelect' => null
-	);
-	$options = array_merge($defaults, $options);
 	Q_Response::addStylesheet('{{Q}}/css/Q.css', 'Q');
 	Q_Response::addStylesheet('{{Users}}/css/Users.css', 'Users');
 	Q_Response::setToolOptions($options);
+	if ($user = Users::loggedInUser()) {
+		$avatar = array(
+			'icon' => '80',
+			'contents' => !Q_Request::isMobile(),
+			'short' => true,
+			'userId' => $user->id
+		);
+		$options['avatar'] = Q_Tree::mergeArrays(
+			$avatar, Q::ifset($options, 'avatar', array())
+		);
+	}
+	$options['user'] = $user;
 	return Q::view('Users/tool/status/status.php', $options);
 }

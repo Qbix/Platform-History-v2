@@ -1,4 +1,8 @@
-<div id="Q_dashboard_item_login" class="Q_dashboard_item Q_login Q_dialog_trigger">
-	<?php echo Q_Html::img($icon) . "<span>$label</span>" ?>
+<div class="Users_whenLoggedOut Users_status_login">
+	<?php echo Q_Html::text($actions['LogIn']) ?>
 </div>
-<div class="Q_dashboard_expandable"></div>
+<div class="Users_whenLoggedIn Users_status_avatar">
+	<?php if ($user): ?>
+		<?php echo Q::tool('Users/avatar', $avatar) ?> 
+	<?php endif; ?>
+</div>

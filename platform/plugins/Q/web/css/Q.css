@@ -383,11 +383,12 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_notTouchscreen button.basic16:active { background-color: #ccc; color: black; }
 .Q_button { padding: 0.4em 1em 0.4em 1em; box-sizing: border-box; }
 
-.Q_aspect_who { color: #394ad5; border-color: #394ad5; }
-.Q_aspect_what { color: #bf1118; border-color: #bf1118; }
-.Q_aspect_info,
-.Q_aspect_where { color: #222; }
-.Q_aspect_when { color: #449944; border-color: #449944; }
+.Q_aspect_who, .Q_aspect_who:before { color: #394ad5; border-color: #394ad5; }
+.Q_aspect_what, .Q_aspect_what:before { color: #bf1118; border-color: #bf1118; }
+.Q_aspect_info, .Q_aspect_info:before,
+.Q_aspect_where, .Q_aspect_where:before { color: #222; }
+.Q_aspect_when, .Q_aspect_when:before { color: #449944; border-color: #449944; }
+.Q_aspect_scan, .Q_aspect_scan:before { color: #444; }
 
 .Q_button.Q_aspect_who {
 	background: #394ad5; /* for non-css3 browsers */

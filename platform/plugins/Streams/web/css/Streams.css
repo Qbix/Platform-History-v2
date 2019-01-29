@@ -791,9 +791,15 @@
 	width: 100%;
 }
 
-.Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
-.Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
-.Streams_aspect_promote { color: #742e7f; border-color: #742e7f; }
+.Streams_aspect_interests, .Streams_aspect_interests:before {
+	color: #bf1118; border-color: #bf1118;
+}
+.Streams_aspect_chats, .Streams_aspect_chats:before {
+	color: #0b94a9; border-color: #0b94a9;
+}
+.Streams_aspect_promote, .Streams_aspect_promote:before {
+	color: #742e7f; border-color: #742e7f;
+}
 
 .Q_button.Streams_aspect_interests {
 	background-color: #bf1118; /* for non-css3 browsers */
