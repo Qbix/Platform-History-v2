@@ -446,7 +446,8 @@ Places.Dialogs = {
 				onClose: function () {
 					callback(coordinates);
 				},
-				apply: true
+				apply: true,
+				className: 'Places_location_dialog'
 			}, dialogOptions));
 		});
 	}
