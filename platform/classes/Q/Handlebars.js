@@ -95,8 +95,7 @@ handlebars.registerHelper('interpolate', function(expression) {
 	var arr = Array.prototype.slice.call(arguments, 0);
 	var last = arr.pop();
 	arr.shift();
-	var p = Q.isEmpty(last.hash) ? arr : last.hash;
-	return expression.interpolate(fields, p);
+	return expression.interpolate(Q.isEmpty(last.hash) ? arr : last.hash);
 });
 
 handlebars.registerHelper('option', function(value, html, selectedValue) {
