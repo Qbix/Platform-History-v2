@@ -10,7 +10,7 @@
 .Places_location_tool .Places_location_preview_tool {
 	padding: 5px 10px;
 	cursor: pointer;
-	max-width: 210px;
+	max-width: 100%;
 }
 .Places_location_tool .Places_areas_tool {
 	margin: 0;
