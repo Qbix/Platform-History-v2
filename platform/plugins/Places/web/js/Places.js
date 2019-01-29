@@ -433,10 +433,10 @@ Places.Dialogs = {
 	 */
 	location: function (callback, dialogOptions, toolOptions) {
 		var called = true;
+		var coordinates = null;
 		var element = Q.Tool.setUpElement('div', 'Places/location', Q.extend({
-			onChoose: function () {
-				Q.Dialogs.pop();
-				callback.apply(this, arguments);
+			onChoose: function (c) {
+				coordinates = c;
 			}
 		}, toolOptions));
 		Q.Text.get('Places/content', function (err, text) {
@@ -444,10 +444,9 @@ Places.Dialogs = {
 				title: text.location.dialog.title,
 				content: element,
 				onClose: function () {
-					if (!called) {
-						callback(null);
-					}
-				}
+					callback(coordinates);
+				},
+				apply: true
 			}, dialogOptions));
 		});
 	}
