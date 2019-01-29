@@ -4,7 +4,10 @@
 		"Home": "Home",
 		"Welcome": "Welcome",
 		"About": "About",
-		"LogIn": "log in"
+		"LogIn": "log in",
+		"LogOut": "log out",
+		"SetMobileNumber": "Set Mobile Number",
+		"SetEmailAddress": "Set Email Address"
 	},
 	"welcome": {
 		"Welcome": "Welcome!",

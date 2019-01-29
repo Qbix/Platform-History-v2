@@ -2,8 +2,9 @@
 
 /**
  * This tool renders all user sessions opened.
- *
- * @param {array} $options An associative array of parameters, containing:
+ * @class Users status
+ * @constructor
+ * @param {array} [$options] An associative array of parameters, containing:
  * @param {string} [$options.userId]
  *   The user's id. Defaults to id of the logged-in user, if any.
  * @param {bool} [$options.editable=true]
