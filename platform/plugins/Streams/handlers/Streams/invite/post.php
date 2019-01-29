@@ -26,7 +26,9 @@ function Streams_invite_post()
 	$r = $_REQUEST;
 	$r['skipAccess'] = false;
 
+	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 	Streams::$cache['invite'] = Streams::invite($publisherId, $streamName, $r, $r);
 	
+	Q_Response::setSlot('stream', $stream->exportArray());
 	Q_Response::setSlot('data', Streams::$cache['invite']);
 }
