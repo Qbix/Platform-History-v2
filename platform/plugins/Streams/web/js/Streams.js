@@ -1343,7 +1343,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case "email":
 						t = Q.extend({
 							url: rsd.url,
-							streamTitle: rss.title
+							title: rss.title
 						}, 10, text);
 						Q.Template.render("Streams/templates/invite/email", t,
 						function (err, html) {
@@ -1356,7 +1356,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						var content = Q.getObject(['invite', 'sms', 'content'], text)
 							.interpolate({
 								url: rsd.url,
-								streamTitle: rss.title
+								title: rss.title
 							});
 						t = Q.extend({
 							content: content,
