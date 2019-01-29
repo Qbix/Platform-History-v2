@@ -1420,7 +1420,7 @@
 				step2.show();
 				var isKbd = null;
 				setTimeout(function _fixBody() {
-					$body.addClass('Q_preventScroll');
+					$('body').addClass('Q_preventScroll');
 					var e = document.activeElement;
 					isKbd = (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA');
 					if (isKbd !== false) {
