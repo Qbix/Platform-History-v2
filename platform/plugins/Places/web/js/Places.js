@@ -375,8 +375,6 @@ Places.Coordinates.from = function (data, callback) {
 	var c = (data instanceof Places.Coordinates)
 		? Q.copy(data)
 		: new Places.Coordinates(true);
-	c.onUpdated = new Q.Event();
-	c.onReady = new Q.Event();
 	if (!data) {
 		throw new Q.Error("Places.Coordinates.from: data is required");
 	}
@@ -406,6 +404,8 @@ Places.Coordinates.from = function (data, callback) {
 		_geocode(callback);
 	}
 	function _geocode(callback) {
+		c.onUpdated = new Q.Event();
+		c.onReady = new Q.Event();
 		if (!callback) {
 			return;
 		}
