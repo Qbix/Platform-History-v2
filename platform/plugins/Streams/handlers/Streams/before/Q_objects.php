@@ -53,7 +53,7 @@ function Streams_before_Q_objects()
 			compact('invite', 'exception'), 'before'
 		);
 		if ($shouldThrow === null) {
-			Q_Response::setNotice('Streams/objects', $exception->getMessage(), true);
+			Q_Response::setNotice('Streams/objects', $exception->getMessage());
 		} else if ($shouldThrow === true) {
 			throw $exception;
 		}
