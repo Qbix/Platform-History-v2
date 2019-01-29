@@ -1324,7 +1324,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
 	function _generateInviteURL() {
-		return Q.req(o.uri, ['data'], function (err, response) {
+		return Q.req(o.uri, ['data', 'stream'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
 			if (msg) {
 				alert(msg);
@@ -1334,6 +1334,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Participant.get.cache.removeEach([publisherId, streamName]);
 			Streams.get.cache.removeEach([publisherId, streamName]);
 			var rsd = response.slots.data;
+			var rss = response.slots.stream;
 			Q.handle(o && o.callback, null, [err, rsd]);
 			Q.handle(callback, null, [err, rsd]);
 			Q.Text.get('Streams/content', function (err, text) {
@@ -1341,8 +1342,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				switch (o.sendBy) {
 					case "email":
 						t = Q.extend({
-							inviteUrl: rsd.url,
-							inviteTitle: streamName
+							url: rsd.url,
+							streamTitle: rss.title
 						}, 10, text);
 						Q.Template.render("Streams/templates/invite/email", t,
 						function (err, html) {
@@ -1352,10 +1353,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						});
 						break;
 					case "text":
-						var content = Q.getObject(['invite', 'text', 'content'], text)
+						var content = Q.getObject(['invite', 'sms', 'content'], text)
 							.interpolate({
-								streamName: streamName,
-								url: rsd.url
+								url: rsd.url,
+								streamTitle: rss.title
 							});
 						t = Q.extend({
 							content: content,
