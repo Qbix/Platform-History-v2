@@ -439,7 +439,7 @@ Places.Dialogs = {
 				callback.apply(this, arguments);
 			}
 		}, toolOptions));
-		Q.Text.get('Places/content', function (text) {
+		Q.Text.get('Places/content', function (err, text) {
 			Q.Dialogs.push(Q.extend({
 				title: text.location.Title,
 				content: tool.element,
