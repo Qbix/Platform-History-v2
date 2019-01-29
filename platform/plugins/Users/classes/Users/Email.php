@@ -185,7 +185,7 @@ class Users_Email extends Base_Users_Email
 					return $result;
 				}
 				try {
-					$email->send($transport);
+//					$email->send($transport);
 				} catch (Exception $e) {
 					throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
 				}
