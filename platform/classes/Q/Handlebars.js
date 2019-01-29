@@ -88,8 +88,15 @@ handlebars.registerHelper('toCapitalized', function(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 });
 
-handlebars.registerHelper('interpolate', function(expression, fields) {
-	return expression.interpolate(fields);
+handlebars.registerHelper('interpolate', function(expression) {
+	if (arguments.length < 2) {
+		return '';
+	}
+	var arr = Array.prototype.slice.call(arguments, 0);
+	var last = arr.pop();
+	arr.shift();
+	var p = Q.isEmpty(last.hash) ? arr : last.hash;
+	return expression.interpolate(fields, p);
 });
 
 handlebars.registerHelper('option', function(value, html, selectedValue) {
