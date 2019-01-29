@@ -6570,10 +6570,6 @@ Q.request = function (url, slotNames, callback, options) {
 		var overrides = {
 			loadExtras: !!o.loadExtras
 		};
-		if (verb !== 'GET') {
-			verb = 'POST'; // browsers don't always support other HTTP verbs;
-			overrides.method = o.method;
-		}
 
 		if (o.form) {
 			if (o.extend !== false) {
