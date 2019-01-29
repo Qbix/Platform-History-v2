@@ -151,3 +151,7 @@
     padding: 8px;
     box-sizing: border-box;
 }
+
+.Places_location_dialog .Q_dialog_slot {
+	overflow: visible;
+}
