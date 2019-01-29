@@ -1346,9 +1346,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							title: rss.title
 						}, 10, text);
 						Q.Template.render("Streams/templates/invite/email", t,
-						function (err, html) {
+						function (err, body) {
 							if (err) return;
-							var url = Q.Links.email(Q.getObject(['invite', 'email', 'subject'], text), html);
+							var subject = Q.getObject(['invite', 'email', 'subject'], text);
+							var url = Q.Links.email(subject, body);
 							window.location = url;
 						});
 						break;
