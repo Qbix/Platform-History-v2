@@ -55,7 +55,7 @@
 			"InvitingYou": "I am inviting you to {{title}}"
 		},
 		"sms": {
-			"content": "You have been invited to {{streamTitle}}. Please tap {{url}}"
+			"content": "You have been invited to {{title}}. Please tap {{url}}"
 		}
 	},
 	"message": {
