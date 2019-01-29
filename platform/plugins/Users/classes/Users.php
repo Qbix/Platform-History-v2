@@ -42,6 +42,9 @@ abstract class Users extends Base_Users
 	 * @return {boolean}
 	 */
 	static function isCustomIcon ($icon) {
+		if (!$icon) {
+			false;
+		}
 		return strpos($icon, 'imported') !== false
 		or preg_match("/\/icon\/[0-9]+/", $icon);
 	}

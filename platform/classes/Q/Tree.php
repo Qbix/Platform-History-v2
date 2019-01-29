@@ -449,6 +449,27 @@ class Q_Tree
 		return $result;
 	}
 	
+	/**
+	 * Pass two or more arrays to merge recursively in a tree.
+	 * You can pass null instead of an array and it will be fine.
+	 * @method mergeArrays
+	 * @static
+	 * @param {array} $first The first array
+	 * @param {array} $second The second array
+	 * @param {array} [$third] The second array
+	 * @return {array} The array that resulted from the merge
+	 */
+	static function mergeArrays ($arr1, $arr2) {
+		$args = func_get_args();
+		$count = func_num_args();
+		$arr = reset($args);
+		$tree = new Q_Tree($arr);
+		for ($i=1; $i<$count; ++$i) {
+			$tree->merge($args[$i]);
+		}
+		return $tree->getAll();
+	}
+	
 	/*
 	 * We consider array1/array2 to be arrays. no scalars shall be passes
 	 * @method merge_internal
