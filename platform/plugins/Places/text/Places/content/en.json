@@ -39,6 +39,9 @@
 			"title": "Name this location",
 			"placeholder": "Home, Work etc.",
 			"ok": "Save"
+		},
+		"dialog": {
+			"title": "Choose Location"
 		}
 	},
 	"areas": {

@@ -520,4 +520,5 @@ html.Users_loggedIn .Users_whenLoggedOut {
 .Users_status_tool .Users_avatar_tool img {
 	width: 40px;
 	height: 40px;
+	display: block;
 }
