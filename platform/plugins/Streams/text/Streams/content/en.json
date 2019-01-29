@@ -36,6 +36,7 @@
 	"invite": {
 		"messageContent": "{{displayName}} invited you to {{inviteUrl}}",
 		"dialog": {
+			"photo": "Take a photo",
 			"to": "To: {{Stream Title}}",
 			"go": "Go",
 			"title": "Invite",

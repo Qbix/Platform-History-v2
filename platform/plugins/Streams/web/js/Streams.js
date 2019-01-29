@@ -1055,6 +1055,7 @@ Streams.Dialogs = {
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
 			Q.Template.render(o.templateName, {
+				photo: (o.photo)? text.photo: o.photo,
 				to: text.to.interpolate({"Stream Title": stream.fields.title}),
 				go: text.go,
 				placeholder: text.placeholder,
@@ -1073,6 +1074,17 @@ Streams.Dialogs = {
 					content: html,
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					onActivate: function (dialog) {
+						// handle "photo" button
+						var photo = null;
+						var saveSizeName = {};
+						Q.each(Users.icon.sizes, function (k, v) {
+							saveSizeName[k] = v;
+						});
+						var o = {
+							loader: (params) => { photo = params.data },
+							saveSizeName: saveSizeName
+						}
+						$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
 						// handle "go" button
 						$('.Streams_invite_submit button', dialog)
 							.on(Q.Pointer.fastclick, function () {
@@ -1085,11 +1097,15 @@ Streams.Dialogs = {
 						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
 							.on(Q.Pointer.fastclick, function () {
 								var sendBy = $(this).data('sendby');
-								Q.handle(callback, Streams, [{
+								var result = {
 									token: 1,
 									identifier: null,
 									sendBy: sendBy
-								}]);
+								}
+								if (photo) {
+									result.photo = photo;
+								}
+								Q.handle(callback, Streams, [result]);
 								Q.Dialogs.pop(); // close the Dialog
 							});
 					},
@@ -1110,7 +1126,8 @@ Streams.Dialogs = {
 };
 
 Streams.Dialogs.invite.options = {
-	templateName: "Streams/templates/invite/dialog"
+	templateName: "Streams/templates/invite/dialog",
+	photo: true
 };
 
 /**
@@ -1324,6 +1341,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
 	function _generateInviteURL() {
+		if (o.photo) {
+			var photo = o.photo;
+			delete o.photo;
+		}
 		return Q.req(o.uri, ['data', 'stream'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
 			if (msg) {
@@ -1337,6 +1358,18 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			var rss = response.slots.stream;
 			Q.handle(o && o.callback, null, [err, rsd]);
 			Q.handle(callback, null, [err, rsd]);
+			if (photo) {
+				var params = {
+					data: photo,
+					path: 'Q/uploads/Users',
+					save: 'Users/icon',
+					subpath: publisherId.splitId() + '/invited/' + rsd.invite.token
+				}
+				Q.request(Q.action("Q/image"), 'data', function () {}, {
+					fields: params,
+					method: 'POST'
+				});
+			}
 			Q.Text.get('Streams/content', function (err, text) {
 				var t;
 				switch (o.sendBy) {

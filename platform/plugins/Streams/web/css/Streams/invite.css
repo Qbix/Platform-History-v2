@@ -2,6 +2,12 @@
 	padding: 10px;
 }
 
+.Streams_invite_dialog .Streams_invite_photo {
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
 .Streams_invite_dialog .Streams_invite_submit {
 	display: flex;
 }
