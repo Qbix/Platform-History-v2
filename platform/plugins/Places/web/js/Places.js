@@ -415,6 +415,44 @@ Places.Coordinates.from = function (data, callback) {
 	}
 };
 
+
+/**
+ * Operates with dialogs.
+ * @class Streams.Dialogs
+ */
+
+Places.Dialogs = {
+	/**
+	 * Show a dialog that lets the user choose a location.
+	 * @static
+	 * @method location
+	 * @param {Function} callback First parameter is a Places.Coordinates object,
+	 *   or null if dialog was closed without selecting anything.
+	 * @param {Object} [dialogOptions] For Q.Dialogs.push()
+	 * @param {Object} [toolOptions] For the Places/location tool
+	 */
+	location: function (callback, dialogOptions, toolOptions) {
+		var called = true;
+		var tool = Q.Tool.setUpElement('div', 'Places/location', Q.extend({
+			onChoose: function () {
+				Q.Dialogs.pop();
+				callback.apply(this, arguments);
+			}
+		}, toolOptions));
+		Q.Text.get('Places/content', function (text) {
+			Q.Dialogs.push(Q.extend({
+				title: text.location.Title,
+				content: tool.element,
+				onClose: function () {
+					if (!called) {
+						callback();
+					}
+				}
+			}, dialogOptions));
+		});
+	}
+};
+
 Places.units = {
 	meters: "meters",
 	kilometers: "kiometers",
