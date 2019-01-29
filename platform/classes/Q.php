@@ -186,6 +186,12 @@ class Q
 				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
 					'maxLength' => 10000
 				));
+				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
+					'maxLength' => 100000
+				), 'error');
+				Q::log(Q::b(PHP_EOL), null, null, array(
+					'maxLength' => 100000
+				), 'error');
 				$type = 'warning';
 				break;
 			default:
