@@ -1360,8 +1360,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							});
 						t = Q.extend({
 							content: content,
-							inviteUrl: rsd.url,
-							inviteTitle: streamName
+							url: rsd.url,
+							title: streamName
 						}, 10, text);
 						Q.Template.render("Streams/templates/invite/sms", t,
 						function (err, text) {
