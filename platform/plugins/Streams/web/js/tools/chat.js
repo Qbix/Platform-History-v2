@@ -442,6 +442,19 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (err) {
 				return Q.handle(state.onError, this, [err]);
 			}
+
+			// get maximum message ordinal
+			var maxOrdinal = Math.max.apply(null, Object.keys(messages));
+
+			// get chat stream and set messageCount to maxOrdinal
+			Q.Streams.get(state.publisherId, state.streamName, function () {
+				var messageCount = Q.getObject("fields.messageCount", this) || 0;
+
+				if (messageCount < maxOrdinal) {
+					this.fields.messageCount = maxOrdinal;
+				}
+			});
+
 			Q.each(messages, function (ordinal) {
 				state.earliest = ordinal;
 				return false;
