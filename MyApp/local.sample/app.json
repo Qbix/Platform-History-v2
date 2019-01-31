@@ -138,7 +138,7 @@
 						"passphrase": null
 					},
 					"authorize": {
-						"automatic": false,
+						"automatic": false
 					}
 				}
 			},
@@ -153,7 +153,7 @@
 					"key": "AUTHORIZATION KEY HERE",
 					"senderID": "YOUR SENDER ID HERE",
 					"authorize": {
-						"automatic": false,
+						"automatic": false
 					}
 				}
 			},
