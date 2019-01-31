@@ -42,15 +42,14 @@
 				"dsn": "mysql:host=localhost;dbname=DBNAME;charset=utf8",
 				"username": "USERNAME",
 				"password": "PASSWORD",
-				"driver_options": { "3": 2 }	
+				"driver_options": { "3": 2 },
+				"shards": {}
 			},
 			"Users": {
-				"prefix": "users_",
-				"shards": {}
+				"prefix": "users_"
 			},
 			"Streams": {
-				"prefix": "streams_",
-				"shards": {}
+				"prefix": "streams_"
 			}
 		},
 		"logging": true
