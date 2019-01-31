@@ -431,7 +431,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var state = tool.state;
 		var params = {
-			max  : state.earliest ? state.earliest - 1 : -1,
+			max  : state.earliest ? state.earliest - 1 : state.stream.fields.messageCount,
 			limit: state.messagesToLoad,
 			type: "Streams/chat/message",
 			withMessageTotals: ["Streams/chat/message"]
@@ -442,18 +442,6 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (err) {
 				return Q.handle(state.onError, this, [err]);
 			}
-
-			// get maximum message ordinal
-			var maxOrdinal = Math.max.apply(null, Object.keys(messages));
-
-			// get chat stream and set messageCount to maxOrdinal
-			Q.Streams.get(state.publisherId, state.streamName, function () {
-				var messageCount = Q.getObject("fields.messageCount", this) || 0;
-
-				if (messageCount < maxOrdinal) {
-					this.fields.messageCount = maxOrdinal;
-				}
-			});
 
 			Q.each(messages, function (ordinal) {
 				state.earliest = ordinal;
@@ -839,14 +827,18 @@ Q.Tool.define('Streams/chat', function(options) {
 		
 		}
 		
-		var p = new Q.Pipe();
-		p.add(['stream', 'messages'], function (params, subjects) {
-			state.stream = subjects.stream;
-			_render.apply(subjects.messages, params.messages);
+		Q.Streams.retainWith(this).get(state.publisherId, state.streamName, function () {
+			state.stream = this;
+			tool.more(function () {
+				_render.apply(this, arguments);
+
+				state.stream.refresh(null, {
+					messages: true,
+					unlessSocket: true,
+					evenIfNotRetained: true
+				});
+			});
 		});
-		Q.Streams.retainWith(this)
-		.get(state.publisherId, state.streamName, p.fill('stream'));
-		tool.more(p.fill('messages'));
 	}
 });
 
