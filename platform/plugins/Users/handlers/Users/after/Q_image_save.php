@@ -14,19 +14,36 @@ function Users_after_Q_image_save($params, &$return)
 	Q_Utils::normalizePath($fullpath);
 
 	$splitId = Q_Utils::splitId($user->id);
-	$prefix = "Q/uploads/Users/$splitId/icon";
+	$prefix = "Q/uploads/Users/$splitId";
 	Q_Utils::normalizePath($prefix);
 
-	if (Q::startsWith($fullpath, $prefix)) {
-		// modification of logged user icon
-		if ($user->icon != $subpath) {
-			$user->icon = Q_Html::themedUrl("$path/$subpath");
-			$user->save(); // triggers any registered hooks
-			Users::$cache['iconUrlWasChanged'] = true;
-		} else {
-			Users::$cache['iconUrlWasChanged'] = false;
-		}
-	} else if (Q::startsWith($fullpath, implode(DS, array('Q', 'uploads', 'Users')))) {
+    if (Q::startsWith($fullpath, $prefix)) {
+        $iconPrefix = "Q/uploads/Users/$splitId/icon";
+        $invitePrefix = "Q/uploads/Users/$splitId/invited";
+        Q_Utils::normalizePath($iconPrefix);
+        Q_Utils::normalizePath($invitePrefix);
+        if (Q::startsWith($fullpath,$iconPrefix)) {
+            // modification of logged user icon
+            if ($user->icon != $subpath) {
+                $user->icon = Q_Html::themedUrl("$path/$subpath");
+                $user->save(); // triggers any registered hooks
+                Users::$cache['iconUrlWasChanged'] = true;
+            } else {
+                Users::$cache['iconUrlWasChanged'] = false;
+            }
+        } else if (Q::startsWith($fullpath, $invitePrefix)) {
+            $token = preg_replace('/.*\/invited\//', '', $subpath);
+            $stream = Streams_Invited::select()->where(array('token' => $token, 'state' => 'accepted'))->fetchDbRows();
+            if (isset($stream)) {
+                $userId = $stream[0]->userId;
+                $user = Users::fetch($userId);
+                if ($user->icon != $subpath && !Users::isCustomIcon($user->icon)) {
+                    $user->icon = Q_Html::themedUrl("$path/$subpath");
+                    $user->save();
+                }
+            }
+        }
+    } elseif (Q::startsWith($fullpath, implode(DS, array('Q', 'uploads', 'Users')))) {
 		// modification of another user
 		// trying to fetch userId from subpath
 		$anotherUserId = preg_replace('/\/icon.*/', '', $subpath);
