@@ -1074,17 +1074,6 @@ Streams.Dialogs = {
 					content: html,
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					onActivate: function (dialog) {
-						// handle "photo" button
-						var photo = null;
-						var saveSizeName = {};
-						Q.each(Users.icon.sizes, function (k, v) {
-							saveSizeName[k] = v;
-						});
-						var o = {
-							loader: (params) => { photo = params.data },
-							saveSizeName: saveSizeName
-						}
-						$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
 						// handle "go" button
 						$('.Streams_invite_submit button', dialog)
 							.on(Q.Pointer.fastclick, function () {
@@ -1101,9 +1090,6 @@ Streams.Dialogs = {
 									token: 1,
 									identifier: null,
 									sendBy: sendBy
-								}
-								if (photo) {
-									result.photo = photo;
 								}
 								Q.handle(callback, Streams, [result]);
 								Q.Dialogs.pop(); // close the Dialog
@@ -1358,18 +1344,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			var rss = response.slots.stream;
 			Q.handle(o && o.callback, null, [err, rsd]);
 			Q.handle(callback, null, [err, rsd]);
-			if (photo) {
-				var params = {
-					data: photo,
-					path: 'Q/uploads/Users',
-					save: 'Users/icon',
-					subpath: publisherId.splitId() + '/invited/' + rsd.invite.token
-				}
-				Q.request(Q.action("Q/image"), 'data', function () {}, {
-					fields: params,
-					method: 'POST'
-				});
-			}
 			Q.Text.get('Streams/content', function (err, text) {
 				var t;
 				switch (o.sendBy) {
@@ -1428,11 +1402,45 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										correctLevel : QRCode.CorrectLevel.H
 									});
 								});
+
+								Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/invite/accept')
+								.set(function(stream, message) {
+									Q.Dialogs.pop();
+									Q.Dialogs.push({
+										title: Q.getObject(['invite', 'dialog', 'photo'], text),
+										apply: true,
+										content:
+											'<div class="Streams_invite_photo_dialog">' +
+												'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+											'</div>',
+										onActivate: function (dialog) {
+											// handle "photo" button
+											var photo = null;
+											var saveSizeName = {};
+											Q.each(Users.icon.sizes, function (k, v) {
+												saveSizeName[k] = v;
+											});
+											var o = {
+												path: 'Q/uploads/Users',
+												save: 'Users/icon',
+												subpath: publisherId.splitId() + '/invited/' + rsd.invite.token,
+												saveSizeName: saveSizeName,
+												onFinish: function () {
+													$(this).removeClass("Streams_invite_photo_pulsate");
+												}
+											}
+											$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
+										}
+									});
+								});
+							},
+							beforeClose: function () {
+
 							}
-						})
+						});
 						break;
 				}
-			});
+			})
 		}, { method: 'post', fields: o, baseUrl: baseUrl });
 	}
 	if (o.identifier || o.token || o.xids || o.userIds || o.label) {

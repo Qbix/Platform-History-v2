@@ -2,12 +2,6 @@
 	padding: 10px;
 }
 
-.Streams_invite_dialog .Streams_invite_photo {
-	display: block;
-	width: 100%;
-	text-align: center;
-}
-
 .Streams_invite_dialog .Streams_invite_submit {
 	display: flex;
 }
@@ -25,10 +19,6 @@
 .Streams_invite_dialog .Streams_invite_QR {
 	text-align: center;
 	margin-top: 20px;
-}
-
-.Streams_invite_QR_content img {
-	padding: 20px;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons {
@@ -59,6 +49,33 @@
 .Streams_invite_email,
 .Streams_invite_text {
 	padding: 15px;
+}
+
+.Streams_invite_photo_dialog {
+	display: flex;
+	min-height: 20vw;
+	justify-content: center;
+	align-items: center;
+	min-height: 15vw;
+}
+
+.Streams_invite_photo_dialog .Streams_invite_photo {
+	height: 9vw;
+}
+
+.Streams_invite_photo_dialog .Streams_invite_photo_pulsate {
+	animation: pulsate 2s infinite;
+}
+
+.Streams_invite_QR_content img {
+	padding: 20px;
+	margin: 0 auto;
+}
+
+@keyframes pulsate {
+	0% {transform: scale(1)}
+	50% {transform: scale(1.5)}
+	100% {transform: scale(1)}
 }
 
 /*
