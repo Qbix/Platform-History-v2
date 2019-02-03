@@ -122,12 +122,10 @@ Q.Tool.jQuery('Q/overlay',
 					left: $body.css('left'),
 					top: $body.css('top')
 				};
-				var isKbd = null;
 				setTimeout(function _fixBody() {
 					$body.addClass('Q_preventScroll')
-					var e = document.activeElement;
-					isKbd = (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA');
-					if (isKbd !== false) {
+					var isInput = $(document.activeElement).is(":input");
+					if (isInput) {
 						// keyboard is visible or not applicable, do nothing for now
 						setTimeout(_fixBody, 300);
 						return;
@@ -603,7 +601,7 @@ function _handlePosAndScroll(o)
 				inputWasFocused = false;
 			}, 400);
 		}
-		if ($this.css('display') === 'block')
+		if ($this.css('display') === 'block' && !isInput)
 		{
 			topMargin = o.topMargin || 0;
 			parentHeight = (!o.alignByParent || parent[0] === document.body)
