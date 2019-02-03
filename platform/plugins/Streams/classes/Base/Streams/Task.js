@@ -52,9 +52,9 @@ Q.mixin(Base, Row);
  */
 /**
  * @property errors
- * @type String
+ * @type String|Buffer
  * @default null
- * here store all errors occurred during import
+ * here we store all errors that occurred during the task
  */
 
 /**
@@ -395,9 +395,9 @@ return [["longblob",4294967296,"",false],true,"",null];
 Base.prototype.beforeSet_errors = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".errors");
-		if (typeof value === "string" && value.length > 65535)
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".errors");
+		if (typeof value === "string" && value.length > 4294967296)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".errors");
 		return value;
 };
@@ -408,7 +408,7 @@ Base.prototype.beforeSet_errors = function (value) {
 	 */
 Base.prototype.maxSize_errors = function () {
 
-		return 65535;
+		return 4294967296;
 };
 
 	/**
@@ -417,7 +417,7 @@ Base.prototype.maxSize_errors = function () {
 	 */
 Base.column_errors = function () {
 
-return [["text",65535,"",false],true,"",null];
+return [["longblob",4294967296,"",false],true,"",null];
 };
 
 /**

@@ -1838,7 +1838,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$bottom = call_user_func_array(array('Q_Config', 'get'), $args1);
 		$top = call_user_func_array(array('Q_Config', 'get'), $args2);
 		if ($merge and is_array($bottom) and is_array($top)) {
-			return array_merge($bottom, $top);
+			return Q_Tree::mergeArrays($bottom, $top);
 		}
 		return isset($top) ? $top : $bottom;
 	}
