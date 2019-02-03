@@ -589,7 +589,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 *  For internal use only. Used by Streams::canCreateCommunities function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -796,7 +796,7 @@ abstract class Streams extends Base_Streams
 	/**
 	 * Calculates whether a given user is authorized by a specific publisher
 	 * to create a particular type of stream.
-	 * @method isAuthorizedToCreate
+	 * @method canCreateCommunities
 	 * @static
 	 * @param {string} $userId The user who would be creating the stream.
 	 * @param {string} $publisherId The id of the user who would be publishing the stream.
@@ -813,7 +813,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream|boolean} Returns a stream template the user must use,
 	 *  otherwise a boolean true/false to indicate a yes or no regardless of template.
 	 */
-	static function isAuthorizedToCreate(
+	static function canCreateCommunities(
 		$userId,
 		$publisherId,
 		$streamType,
@@ -953,7 +953,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($stream->type)) {
 			$stream->type = $type;
 		}
-		$authorized = self::isAuthorizedToCreate(
+		$authorized = self::canCreateCommunities(
 			$asUserId, $publisherId, $stream->type, $relate
 		);
 		if (!$authorized and !$skipAccess) {
