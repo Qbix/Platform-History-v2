@@ -44,7 +44,7 @@ function Users_after_Q_image_save($params, &$return)
 				$user->save();
 			}
 		}
-	} elseif (Q::startsWith($fullpath, implode(DS, array('Q', 'uploads', 'Users')))) {
+	} else if (Q::startsWith($fullpath, implode(DS, array('Q', 'uploads', 'Users')))) {
 		// modification of another user
 		// trying to fetch userId from subpath
 		$anotherUserId = preg_replace('/\/icon.*/', '', $subpath);
