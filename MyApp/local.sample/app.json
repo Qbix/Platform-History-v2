@@ -124,7 +124,7 @@
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
-						"added": "Notifications have been enabled"
+						"added": ["MyApp/content", ["notifications", "Enabled"]],
 					},
 					"secret": "SHARED SECRET HERE",
 					"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
