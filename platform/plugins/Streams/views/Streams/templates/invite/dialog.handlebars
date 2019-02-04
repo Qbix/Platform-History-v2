@@ -1,9 +1,13 @@
 <div class="Streams_invite_dialog">
     <p>{{to}}</p>
-    <div class="Q_buttons Streams_invite_submit">
-        <input type="text" placeholder="{{placeholder}}">
-        <button class="Q_button">{{go}}</button>
-    </div>
+    {{#if isCordova}}
+        <button class="Q_button Streams_invite_choose_contact">{{chooseFromContacts}}</button>
+    {{else}}
+        <div class="Q_buttons Streams_invite_submit">
+            <input type="text" placeholder="{{placeholder}}">
+            <button class="Q_button">{{go}}</button>
+        </div>
+    {{/if}}
     <p>{{orInvite}}</p>
     <div class="Q_buttons Streams_invite_social_buttons">
         <button class="Q_button Streams_invite_button_email" data-sendBy="email">
