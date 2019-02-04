@@ -3850,7 +3850,7 @@ var MTotal = Streams.Message.Total = {
 	unseen: function _Total_unseen (publisherId, streamName, messageType) {
 		var latest = MTotal.latest(publisherId, streamName, messageType);
 		var seen = MTotal.seen(publisherId, streamName, messageType);
-		return latest && (latest - seen);
+		return latest && (latest > seen) && (latest - seen);
 	},
 	/**
 	 * Use this function to get or store the total number of messages
