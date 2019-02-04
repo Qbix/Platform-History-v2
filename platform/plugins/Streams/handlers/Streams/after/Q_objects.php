@@ -9,14 +9,9 @@ function Streams_after_Q_objects () {
 		$displayName = $user->displayName(array('show' => 'flu'));
 		$showDialog = !$displayName;	
 		$nameIsMissing = true;
-		$avatar = new Streams_Avatar(array(
-			'toUserId' => $user->id,
-			'publisherId' => $user->id
-		));
-		if ($avatar->fetch()) {
-			if ($avatar->username or $avatar->firstName or $avatar->lastName) {
-				$nameIsMissing = false;
-			}
+		$avatar = Streams_Avatar::fetch($user->id, $user->id);
+		if (Q::ifset($avatar, 'username', null) || Q::ifset($avatar, 'firstName', null) || Q::ifset($avatar, 'lastName', null)) {
+			$nameIsMissing = false;
 		}
 	} else {
 		$displayName = '';
@@ -27,6 +22,16 @@ function Streams_after_Q_objects () {
 	Q::event('Streams/inviteDialog', $p, 'before', false, $showDialog);
 	if (!$showDialog) {
 		return;
+	}
+
+	$stream = new Streams_Stream();
+	$stream->publisherId = $invite->publisherId;
+	$stream->name = $invite->streamName;
+	if (!$stream->retrieve()) {
+		throw new Q_Exception_MissingRow(array(
+			'table' => 'stream',
+			'criteria' => 'with that name'
+		), 'streamName');
 	}
 
 	// Prepare the complete invite dialog
@@ -40,16 +45,6 @@ function Streams_after_Q_objects () {
 		);
 	}
 
-	$stream = new Streams_Stream();
-	$stream->publisherId = $invite->publisherId;
-	$stream->name = $invite->streamName;
-	if (!$stream->retrieve()) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'stream',
-			'criteria' => 'with that name'
-		), 'streamName');
-	}
-	
 	$templateName = Streams_Stream::getConfigField(
 		$stream->type,
 		array('invited', 'dialog', 'templateName'),
