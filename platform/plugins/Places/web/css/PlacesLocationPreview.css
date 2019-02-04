@@ -1,0 +1,27 @@
+.Places_location_preview_tool {
+	cursor: pointer;
+}
+.Places_location_preview_tool .Places_location_preview {
+	white-space: nowrap;
+	vertical-align: top;
+}
+.Places_location_preview_tool .Places_location_preview_icon {
+	margin-right: 3px;
+	vertical-align: top;
+}
+.Places_location_preview_tool .Places_location_preview_contents {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 300px;
+}
+.Places_location_preview_tool .Places_location_preview_contents h3 {
+	margin: 0;
+	padding: 0;
+	line-height: 24px;
+	font-size: 16px;
+	font-weight: normal;
+}
+.Places_location_preview_tool .Places_location_preview_contents .Places_location_preview_address {
+	font-size: 12px;
+	white-space: normal;
+}
