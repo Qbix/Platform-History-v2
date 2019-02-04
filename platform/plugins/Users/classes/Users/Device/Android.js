@@ -66,7 +66,7 @@ Users_Device_Android.prototype.handlePushNotification = function (notification, 
 		return Q.handle(callback, this, [new Error('Notification title and body are required')]);
 	}
 
-	var serverKey = Q.Config.expect(['Users', 'apps', 'android', Q.app), "key"]);
+	var serverKey = Q.Config.expect(['Users', 'apps', 'android', Q.app, "key"]);
 	var FCM = require('fcm-node');
 	var fcm = new FCM(serverKey);
 	var message = {
