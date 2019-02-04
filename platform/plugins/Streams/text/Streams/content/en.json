@@ -36,6 +36,8 @@
 	"invite": {
 		"messageContent": "{{displayName}} invited you to {{inviteUrl}}",
 		"dialog": {
+			"chooseFromContacts": "Choose from your Contacts",
+			"selectFromContacts": "Select From Contacts",
 			"photo": "Take a photo",
 			"to": "To: {{Stream Title}}",
 			"go": "Go",

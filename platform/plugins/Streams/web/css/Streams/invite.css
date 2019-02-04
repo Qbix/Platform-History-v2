@@ -2,6 +2,16 @@
 	padding: 10px;
 }
 
+.Streams_invite_dialog .Streams_invite_choose_contact {
+	width: 100%;
+	background-color: #2b4170; /* fallback color */
+	background: -moz-linear-gradient(top, #3b5998, #2b4170);
+	background: -ms-linear-gradient(top, #3b5998, #2b4170);
+	background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+	border: 1px solid #2b4170;
+	text-shadow: 0 -1px -1px #1f2f52;
+}
+
 .Streams_invite_dialog .Streams_invite_submit {
 	display: flex;
 }
@@ -27,10 +37,18 @@
 	flex-wrap: wrap;
 }
 
+.Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Q_button {
+	width: 49%;
+	font-size: 100%;
+}
+
 .Streams_invite_dialog .Streams_invite_social_buttons .Q_button {
-	margin: 1px;
-	padding: 5px;
-	margin: 5px;
+	width: 24%;
+	font-size: 70%;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Q_button:not(:last-child) {
+	margin-right: 1%;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons img {
@@ -76,6 +94,11 @@
 	0% {transform: scale(1)}
 	50% {transform: scale(1.5)}
 	100% {transform: scale(1)}
+}
+
+.Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email,
+.Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text {
+	display: none;
 }
 
 /*
