@@ -213,6 +213,14 @@
 	position: relative;
 }
 
+.Streams_invite_social_labels {
+	display: none;
+}
+
+.Streams_invite_dialog p {
+	text-align: center;
+}
+
 .Streams_participants_invite img {
 	width: 40px;
 	height: 40px;
@@ -513,7 +521,7 @@
 	height: 30px;
 	color: black;
 }
-.Streams_chat_composer input {
+.Streams_chat_composer input[type=text] {
 	font-size: 12pt;
 	margin: 0 auto;
 	display: block;
