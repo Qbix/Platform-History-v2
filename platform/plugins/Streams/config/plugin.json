@@ -75,6 +75,11 @@
 				"defaultSize": "400",
 				"defaultCacheBust": 1000
 			}
+		},
+		"text": {
+			"Streams": {
+				"*": ["Streams/content"]
+			}
 		}
 	},
 	"Users": {
