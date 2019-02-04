@@ -26,7 +26,7 @@ function Streams_promote_post()
 	$experienceId = Q::ifset($_REQUEST, 'experienceId', 'main');
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 
-	$roles = Users::roles($communityId, Q_Config::get('Communities', 'labelsCanPromote', 'none'));
+	$roles = Users::roles($communityId, Q_Config::get('Communities', 'promote', 'labels', 'none'));
 	if (empty($roles)) {
 		throw new Users_Exception_NotAuthorized();
 	}

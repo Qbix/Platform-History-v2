@@ -15,7 +15,7 @@ function Websites_seo_post()
 	$user = Users::loggedInUser(true);
 	$publisherId = Users::communityId();
 	$type = "Websites/seo";
-	if (!Streams::isAuthorizedToCreate($user->id, $publisherId, $type)) {
+	if (!Streams::canCreateCommunities($user->id, $publisherId, $type)) {
 		throw new Users_Exception_NotAuthorized();
 	}
 	$stream = new Streams_Stream($publisherId);
