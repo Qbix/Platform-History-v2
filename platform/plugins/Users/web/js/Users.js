@@ -1418,21 +1418,7 @@
 			var $dc = step2.closest('.Q_dialog_content');
 			if (Q.info && Q.info.isTouchscreen) {
 				step2.show();
-				var isKbd = null;
-				setTimeout(function _fixBody() {
-					$body.addClass('Q_preventScroll');
-					var e = document.activeElement;
-					isKbd = (e.tagName === 'INPUT' || e.tagName === 'TEXTAREA');
-					if (isKbd !== false) {
-						// keyboard is visible or not applicable, do nothing for now
-						setTimeout(_fixBody);
-						return;
-					}
-					$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
-				}, 300);
-				if (!Q.info.isAndroid()) {
-					step2_form.plugin('Q/placeholders');
-				}
+				step2_form.plugin('Q/placeholders');
 				$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
 				_centerIt();
 			} else {

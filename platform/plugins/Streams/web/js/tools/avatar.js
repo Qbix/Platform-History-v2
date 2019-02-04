@@ -13,7 +13,6 @@ var Streams = Q.Streams;
  * Avatar representing a user
  * @class Users avatar
  * @constructor
- * @param {String} prefix Prefix of the tool to be constructed.
  * @param {Object} [options] A hash of options, containing:
  *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
  *   @param {Number|String|true} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.

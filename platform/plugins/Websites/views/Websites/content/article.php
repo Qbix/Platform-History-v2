@@ -1,4 +1,5 @@
 <div class="content">
+	<?php echo isset($header) ? $header : '' ?> 
 	<div class="Websites_article">
 		<?php echo Q::tool('Websites/article', array(
 			'publisherId' => $publisherId,
@@ -23,4 +24,5 @@
 			'streamName' => $streamName
 		)); ?>
 	</div>
+	<?php echo isset($footer) ? $footer : '' ?> 
 </div>
