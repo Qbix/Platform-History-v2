@@ -45,7 +45,7 @@ abstract class Base_Streams_Task extends Db_Row
 	 * @property $errors
 	 * @type string
 	 * @default null
-	 * here store all errors occurred during import
+	 * here we store all errors that occurred during the task
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -426,8 +426,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".errors");
-		if (strlen($value) > 65535)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".errors");
+
 		return array('errors', $value);			
 	}
 
@@ -438,7 +437,7 @@ return array (
 	function maxSize_errors()
 	{
 
-		return 65535;			
+		return 4294967296;			
 	}
 
 	/**
@@ -451,8 +450,8 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'text',
-    1 => 65535,
+    0 => 'longblob',
+    1 => 4294967296,
     2 => '',
     3 => false,
   ),

@@ -1613,7 +1613,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 *  For internal use only. Used by Streams::canCreateCommunities function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -1838,7 +1838,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$bottom = call_user_func_array(array('Q_Config', 'get'), $args1);
 		$top = call_user_func_array(array('Q_Config', 'get'), $args2);
 		if ($merge and is_array($bottom) and is_array($top)) {
-			return array_merge($bottom, $top);
+			return Q_Tree::mergeArrays($bottom, $top);
 		}
 		return isset($top) ? $top : $bottom;
 	}
