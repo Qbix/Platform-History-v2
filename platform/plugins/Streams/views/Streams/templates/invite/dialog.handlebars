@@ -1,5 +1,4 @@
 <div class="Streams_invite_dialog">
-    <p>{{to}}</p>
     {{#if isCordova}}
         <button class="Q_button Streams_invite_choose_contact">{{chooseFromContacts}}</button>
     {{else}}
@@ -12,19 +11,19 @@
     <div class="Q_buttons Streams_invite_social_buttons">
         <button class="Q_button Streams_invite_button_email" data-sendBy="email">
             <div class="Streams_invite_social_icons"></div>
-            {{email}}
+            <div class="Streams_invite_social_labels">{{email}}</div>
         </button>
         <button class="Q_button Streams_invite_button_text" data-sendBy="text">
             <div class="Streams_invite_social_icons"></div>
-            {{text}}
+            <div class="Streams_invite_social_labels">{{text}}</div>
         </button>
         <button class="Q_button Streams_invite_button_facebook" data-sendBy="facebook">
             <div class="Streams_invite_social_icons"></div>
-            {{facebook}}
+            <div class="Streams_invite_social_labels">{{facebook}}</div>
         </button>
         <button class="Q_button Streams_invite_button_twitter" data-sendBy="twitter">
             <div class="Streams_invite_social_icons"></div>
-            {{twitter}}
+            <div class="Streams_invite_social_labels">{{twitter}}</div>
         </button>
     </div>
     <div class="Q_button Streams_invite_QR" data-sendBy="QR">{{QR}}</div>
