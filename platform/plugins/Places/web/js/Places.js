@@ -604,6 +604,7 @@ Q.Tool.define({
 	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
 	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
 	"Places/location": "Q/plugins/Places/js/tools/location.js",
+	"Places/location/preview": "Q/plugins/Places/js/tools/location/preview.js",
 	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
 });
 
