@@ -241,7 +241,7 @@ class Q
 	 * @param {string|array} $expression
 	 *  The string containing possible references to interpolate values for.
 	 *  Can also be array($textName, $pathArray) to load expression using Q_Text::get()
-	 * @param {array|string} $params=array()
+	 * @param {array|string} [$params=array()]
 	 *  An array of parameters to the expression.
 	 *  Variable names in the expression can refer to them.
 	 *  You can also pass an indexed array, in which case the expression's
@@ -249,17 +249,20 @@ class Q
 	 *  corresponding strings.
 	 *  If the expression is missing {{0}} and $0, then {{1}} or $1 is replaced
 	 *  by the first string, {{2}} or $2 by the second string, and so on.
+	 * @param {array} [$options=array()]
+	 *  Pass any additional options to Q_Text::get() if it is called
 	 * @return {string}
 	 *  The result of the interpolation
 	 */
 	static function interpolate(
 		$expression,
-		$params = array())
+		$params = array(),
+		$options = array())
 	{
 		if (is_array($expression)) {
 			$name = $expression[0];
 			$path = $expression[1];
-			$text = Q_Text::get($name);
+			$text = Q_Text::get($name, $options);
 			$expression = Q::getObject($text, $path, null);
 			if (!isset($expression)) {
 				return null;
