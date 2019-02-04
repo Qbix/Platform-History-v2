@@ -59,15 +59,19 @@ class Users_Device extends Base_Users_Device
 			));
 		}
 		$sessionId = isset($device['sessionId']) ? $device['sessionId'] : Q_Session::id();
-		$user = Users::loggedInUser();
-		$info = array_merge(Q_Request::userAgentInfo(), array(
+		$user = Users::fetch($userId);
+		$liu = Q::loggedInUser();
+		$info = array(
 			'sessionId' => $sessionId,
 			'userId' => $userId,
 			'deviceId' => $deviceId,
 			'appId' => $platformAppId,
 			'auth' => $auth,
 			'p256dh' => $p256dh
-		));
+		);
+		if ($userId === $liu->id) {
+			$info = array_merge(Q_Request::userAgentInfo(), $info);
+		}
 		$deviceArray = Q::take($device, $info);
 		$className = "Users_Device_" . ucfirst($platform);
 		$deviceRow = new $className($deviceArray);
@@ -76,8 +80,11 @@ class Users_Device extends Base_Users_Device
 			// This may cancel Users::register() registration and remove user.
 			$alert = Q_Config::get(
 				"Users", "apps", $platform, $appId, "device", "added",
-				"Notifications have been enabled"
+				"Notifications have been enabled."
 			);
+			$alert = Q::interpolate($alert, array(), array(
+				'language' => $user->preferredLanguage
+			));
 			$payload = compact('userId');
 			$deviceRow->pushNotification(compact('alert', 'payload'));
 		}
