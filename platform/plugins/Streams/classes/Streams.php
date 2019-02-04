@@ -589,7 +589,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 *  For internal use only. Used by Streams::canCreateCommunities function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -796,7 +796,7 @@ abstract class Streams extends Base_Streams
 	/**
 	 * Calculates whether a given user is authorized by a specific publisher
 	 * to create a particular type of stream.
-	 * @method isAuthorizedToCreate
+	 * @method canCreateCommunities
 	 * @static
 	 * @param {string} $userId The user who would be creating the stream.
 	 * @param {string} $publisherId The id of the user who would be publishing the stream.
@@ -813,7 +813,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream|boolean} Returns a stream template the user must use,
 	 *  otherwise a boolean true/false to indicate a yes or no regardless of template.
 	 */
-	static function isAuthorizedToCreate(
+	static function canCreateCommunities(
 		$userId,
 		$publisherId,
 		$streamType,
@@ -953,7 +953,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($stream->type)) {
 			$stream->type = $type;
 		}
-		$authorized = self::isAuthorizedToCreate(
+		$authorized = self::canCreateCommunities(
 			$asUserId, $publisherId, $stream->type, $relate
 		);
 		if (!$authorized and !$skipAccess) {
@@ -3950,6 +3950,57 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		return $result[$type] = $classes;
+	}
+	
+	/**
+	 * Use this function to save a template for a specific stream type and publisher.
+	 * @method saveTemplate
+	 * @static
+	 * @param {string} $type
+	 * @param {string} $publisherId=''
+	 * @param {array} [$overrides=array()]
+	 * @param {array} [$overrides.readLevel]
+	 * @param {array} [$overrides.writeLevel]
+	 * @param {array} [$overrides.adminLevel]
+	 * @param {array} [$accessLabels=array()] Pass labels for which to save access rows
+	 * @param {array} [$accessLevels=array('max','max','max')]
+	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
+	 *  (can include strings or numbers, including -1 to not affect the type of access)
+	 * @return {Streams_Stream} The template stream
+	 */
+	static function saveTemplate(
+		$streamType,
+		$publisherId='',
+		$overrides = array(),
+		$accessLabels = array(),
+		$accessLevels = array(40, 40, 40))
+	{
+		$defaults = Streams_Stream::getConfigField($type, 'defaults', Streams_Stream::$DEFAULTS);
+		$templateName = $streamType . '/';
+		$template = new Streams_Stream();
+		$template->publisherId = $publisherId;
+		$template->name = $templateName;
+		$template->type = "Streams/template";
+		$template->retrieve();
+		$template->title = $defaults['title'];
+		$template->icon = $defaults['icon'];
+		$template->readLevel = Q::ifset($overrides, 'readLevel', $defaults['readLevel']);
+		$template->writeLevel = Q::ifset($overrides, 'writeLevel', $defaults['writeLevel']);
+		$template->adminLevel = Q::ifset($overrides, 'adminLevel', $defaults['adminLevel']);
+		$template->save();
+		foreach ($accessLabels as $label) {
+			$label = Q::interpolate($label, array('app' => Q::app()));
+			$access = new Streams_Access();
+			$access->publisherId = $publisherId;
+			$access->streamName = $templateName;
+			$access->ofContactLabel = $label;
+			$access->retrieve();
+			$access->readLevel = $numeric = Streams_Stream::numericReadLevel($accessLevels[0]);
+			$access->writeLevel = Streams_Stream::numericWriteLevel($accessLevels[1]);
+			$access->adminLevel = Streams_Stream::numericAdminLevel($accessLevels[2]);
+			$access->save();
+		}
+		return $template;
 	}
 	
 	static function getExtendFieldNames($type, $asOwner = true)
