@@ -372,49 +372,50 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var se = state.editable;
 			if (element && se && (se === true || se.indexOf('icon') >= 0)
 			&& this.testWriteLevel('suggest')) {
-				$(element).off('load.Streams-preview')
-				.on('load.Streams-preview', function () {
-					var $this = $(this);
+				var $this = $(this);
 
-					// if plugin Q/imagepicker already applied - exit
-					if ($this.data('q_imagepicker state')) {
-						return;
-					}
+				// if plugin Q/imagepicker already applied - exit
+				if ($this.data('q_imagepicker state')) {
+					return;
+				}
 
-					// add imagepicker
-					var ipo = Q.extend({}, si, 10, {
-						preprocess: function (callback) {
-							var subpath;
-							Q.Streams.get(state.publisherId, state.streamName, function () {
-								var parts = this.iconUrl(40).split('/');
-								var iconUrl = parts.slice(0, parts.length-1).join('/')
-									.substr(Q.info.baseUrl.length+1);
-								if (parts[1] === 'Users') {
-									// uploading a user icon
-									path = 'Q/uploads/Users';
-									subpath = state.publisherId.splitId() + '/icon';
-								} else { // uploading a regular stream icon
-									path = 'Q/uploads/Streams';
-									subpath = state.publisherId.splitId() + '/'
-										+ state.streamName + '/icon';
-								}
-								subpath += '/'+Math.floor(Date.now()/1000);
-								callback({ path: path, subpath: subpath });
-							});
-						},
-						onSuccess: {'Streams/preview': function (data, key, file) {
-							Q.Streams.Stream.refresh(state.publisherId, state.streamName, null, {
-								messages: true,
-								changed: {icon: true},
-								evenIfNotRetained: true
-							});
-							return false;
-						}}
-					});
-					$this.plugin('Q/imagepicker', ipo, function () {
-						Q.handle(onLoad, tool, [element]);
-					});
+				// add imagepicker
+				var ipo = Q.extend({}, si, 10, {
+					preprocess: function (callback) {
+						var subpath;
+						Q.Streams.get(state.publisherId, state.streamName, function () {
+							var parts = this.iconUrl(40).split('/');
+							var iconUrl = parts.slice(0, parts.length-1).join('/')
+								.substr(Q.info.baseUrl.length+1);
+							if (parts[1] === 'Users') {
+								// uploading a user icon
+								path = 'Q/uploads/Users';
+								subpath = state.publisherId.splitId() + '/icon';
+							} else { // uploading a regular stream icon
+								path = 'Q/uploads/Streams';
+								subpath = state.publisherId.splitId() + '/'
+									+ state.streamName + '/icon';
+							}
+							subpath += '/'+Math.floor(Date.now()/1000);
+							callback({ path: path, subpath: subpath });
+						});
+					},
+					onSuccess: {'Streams/preview': function (data, key, file) {
+						Q.Streams.Stream.refresh(state.publisherId, state.streamName, null, {
+							messages: true,
+							changed: {icon: true},
+							evenIfNotRetained: true
+						});
+						return false;
+					}}
 				});
+				var p = Q.pipe(['imagepicker', 'load'], function () {
+					Q.handle(onLoad, tool, [element]);
+				});
+				$this.plugin('Q/imagepicker', ipo, p.fill('imagepicker');
+				$(element)
+				.off('load.Streams-preview')
+				.on('load.Streams-preview', p.fill('load'));
 			} else {
 				Q.handle(onLoad, tool, [element]);
 			}
