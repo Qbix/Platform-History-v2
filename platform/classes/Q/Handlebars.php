@@ -133,7 +133,6 @@ class Q_Handlebars {
 			$arr[] = $v;
 			call_user_func_array(array($t, 'set'), $arr);
 		}
-		var_dump($args);exit;
 		$o = $t->getAll();
 		$fields = $context->fields();
 		if (isset($fields[$name])) {
