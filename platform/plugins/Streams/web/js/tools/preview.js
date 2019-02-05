@@ -412,7 +412,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				var p = Q.pipe(['imagepicker', 'load'], function () {
 					Q.handle(onLoad, tool, [element]);
 				});
-				$this.plugin('Q/imagepicker', ipo, p.fill('imagepicker');
+				$this.plugin('Q/imagepicker', ipo, p.fill('imagepicker'));
 				$(element)
 				.off('load.Streams-preview')
 				.on('load.Streams-preview', p.fill('load'));
