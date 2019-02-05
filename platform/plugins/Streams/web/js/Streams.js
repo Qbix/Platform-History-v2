@@ -1416,7 +1416,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 									apply: true,
 									content:
 										'<div class="Streams_invite_photo_dialog">' +
-										'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
+											'<div class="Streams_invite_photo_camera">' +
+												'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+											'</div>' +
 										'</div>',
 									onActivate: function (dialog) {
 										// handle "photo" button
