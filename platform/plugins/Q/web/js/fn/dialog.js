@@ -601,64 +601,67 @@ function _handlePosAndScroll(o)
 				inputWasFocused = false;
 			}, 400);
 		}
-		if ($this.css('display') === 'block' && !isInput)
-		{
-			topMargin = o.topMargin || 0;
-			parentHeight = (!o.alignByParent || parent[0] === document.body)
-				? Q.Pointer.windowHeight()
-				: parent.height();
-			if (typeof(topMargin) === 'string') // percentage
-				topMargin = Math.round(parseInt(topMargin) / 100 * parentHeight);
-			bottomMargin = o.bottomMargin || 0;
-			if (typeof(bottomMargin) === 'string') // percentage
-				bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
-
-			var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
-			var outerWidth = $this.outerWidth();
-			if (!o.noCalculatePosition
-				&& (!Q.info.isTouchscreen || !inputWasFocused)) {
-				$this.data('Q/overlay').calculatePosition();
-			}
-
-			if (!o.fullscreen && o.topMargin !== undefined) {
-				var maxHeight = parentHeight - topMargin - bottomMargin;
-				var $ts = $this.find('.Q_title_slot');
-				if ($ts.is(":visible")) {
-					maxHeight -= $ts.height();
-				}
-				var $ds = $this.find('.Q_dialog_slot');
-				var atBottom = ($ds.scrollTop() >= $ds[0].scrollHeight - $ds[0].clientHeight);
-				$ds.css('max-height', maxHeight + 'px');
-				if ($ds.hasClass('Q_scrollToBottom') && atBottom) {
-					$ds.scrollTop($ds[0].scrollHeight - $ds[0].clientHeight);
-				}
-			}
-
-			// also considering orientation
-			if (Q.info.isTouchscreen)
-			{
-				if (!wasVertical)
-					wasVertical = Q.info.isVertical;
-				if (Q.info.isVertical !== wasVertical)
-				{
-					wasVertical = Q.info.isVertical;
-					var topPos = o.topMargin;
-					if (topPos.indexOf('%') !== -1) {
-						topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
-					}
-					var noticeSlot = $('#notices_slot');
-					if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
-						topPos += noticeSlot.outerHeight();
-					}
-					var curTop = parseInt($this.css('top'));
-					if (curTop !== 0)
-						$this.css({ 'top': Q.Pointer.scrollTop() + topPos + 'px' });
-				}
-			}
-		} else {
+		if ($this.css('display') !== 'block') {
 			clearInterval(interval);
+			$this.css('visibility', 'visible');
+			return;
 		}
-		$this.css('visibility', 'visible');
+		if (isInput) {
+			$this.css('visibility', 'visible');
+			return;
+		}
+		topMargin = o.topMargin || 0;
+		parentHeight = (!o.alignByParent || parent[0] === document.body)
+			? Q.Pointer.windowHeight()
+			: parent.height();
+		if (typeof(topMargin) === 'string') // percentage
+			topMargin = Math.round(parseInt(topMargin) / 100 * parentHeight);
+		bottomMargin = o.bottomMargin || 0;
+		if (typeof(bottomMargin) === 'string') // percentage
+			bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
+
+		var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+		var outerWidth = $this.outerWidth();
+		if (!o.noCalculatePosition
+			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
+			$this.data('Q/overlay').calculatePosition();
+		}
+
+		if (!o.fullscreen && o.topMargin !== undefined) {
+			var maxHeight = parentHeight - topMargin - bottomMargin;
+			var $ts = $this.find('.Q_title_slot');
+			if ($ts.is(":visible")) {
+				maxHeight -= $ts.height();
+			}
+			var $ds = $this.find('.Q_dialog_slot');
+			var atBottom = ($ds.scrollTop() >= $ds[0].scrollHeight - $ds[0].clientHeight);
+			$ds.css('max-height', maxHeight + 'px');
+			if ($ds.hasClass('Q_scrollToBottom') && atBottom) {
+				$ds.scrollTop($ds[0].scrollHeight - $ds[0].clientHeight);
+			}
+		}
+
+		// also considering orientation
+		if (Q.info.isTouchscreen)
+		{
+			if (!wasVertical)
+				wasVertical = Q.info.isVertical;
+			if (Q.info.isVertical !== wasVertical)
+			{
+				wasVertical = Q.info.isVertical;
+				var topPos = o.topMargin;
+				if (topPos.indexOf('%') !== -1) {
+					topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
+				}
+				var noticeSlot = $('#notices_slot');
+				if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
+					topPos += noticeSlot.outerHeight();
+				}
+				var curTop = parseInt($this.css('top'));
+				if (curTop !== 0)
+					$this.css({ 'top': Q.Pointer.scrollTop() + topPos + 'px' });
+			}
+		}
 	}
 }
 
