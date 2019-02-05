@@ -59,6 +59,9 @@
 		},
 		"sms": {
 			"content": "You have been invited to {{title}}. Please tap {{url}}"
+		},
+		"notice": {
+			"text": "You have been invited. {{ClickOrTap}} here to accept and join."
 		}
 	},
 	"message": {

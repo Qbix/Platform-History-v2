@@ -260,6 +260,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		fields.textarea = (state.inputType === 'textarea');
 		fields.text = tool.text;
 		fields.closeable = state.closeable && isPublisher;
+		fields.earlierSrc = Q.url('{{Streams}}/img/chat/earlier.png');
 		Q.Template.render(
 			'Streams/chat/main',
 			fields,
@@ -436,6 +437,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			type: "Streams/chat/message",
 			withMessageTotals: ["Streams/chat/message"]
 		};
+		if (params.max - params.limit <= 0) {
+			$(tool.element).addClass('Streams_chat_reachedEarliest');
+		}
 
 		Q.Streams.Message.get(state.publisherId, state.streamName, params,
 		function(err, messages){
@@ -902,7 +906,9 @@ Q.Template.set('Streams/chat/main',
 	'<div class="Q_clear"></div>'+
 	'<div class="Streams_chat_messages">'+
 		'{{#isClick}}'+
-			'<div class="Streams_chat_more">{{text.earlierComments}}</div>'+
+			'<div class="Streams_chat_more">'+
+				'<img src="{{earlierSrc}}">{{text.earlierComments}}'+ 
+			'</div>'+
 		'{{/isClick}}'+
 		'<!-- messages -->'+
 	'</div>'+
