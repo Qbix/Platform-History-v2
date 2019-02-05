@@ -94,11 +94,12 @@ function Streams_participants_tool($options)
 	}
 	Q_Response::setToolOptions('count', $c);
 	$blanks = '';
+	$dpr = Q_Request::special('dpr');
 	if ($showBlanks) {
 		for ($i = $c; $i < $maxShow - 1; ++$i) {
 			$blanks .= Q::tool("Users/avatar", array(
 				'userId' => '',
-				'icon' => true,
+				'icon' => ($dpr > 1) ? 80 : 40,
 				'short' => true
 			), "blank_$i");
 		}

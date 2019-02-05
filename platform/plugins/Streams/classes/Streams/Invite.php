@@ -44,8 +44,15 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @return {array|Streams_Invite|null} an array of Streams_Invite objects,
 	 *  or if $streamName and $userId are strings, just returns Streams_Invite or null.
 	 */
-	static function forStream($publisherId, $streamName, $userId)
+	static function forStream($publisherId, $streamName, $userId = null)
 	{
+		if (!isset($userId)) {
+			$user = Users::loggedInUser()->id;
+			if ($user) {
+				return null;
+			}
+			$userId = $user->id;
+		}
 		$rows = Streams_Invite::select()->where(
 			compact('publisherId', 'streamName', 'userId')
 		)->fetchDbRows();
@@ -54,6 +61,53 @@ class Streams_Invite extends Base_Streams_Invite
 		}
 		$row = reset($rows);
 		return $row ? $row : null;
+	}
+	
+	/**
+	 * Call this to check if the user is not yet participating in the stream,
+	 * and has an invite pending. If so, a notice is set, with a button to accept
+	 * the invite.
+	 * @param {Streams_Stream} $stream The stream to check
+	 * @param {array} [$options=array()] Options to pass to Q_Response::setNotice(),
+	 *  and also these:
+	 * @param {string|array} [$options.notice] Information for the notice
+	 * @param {string|array} [$options.notice.html] HTML to display in the notice.
+	 *  This is a handlebars template which receives the fields
+	 *  {{stream...}}, {{clickOrTap}} and {{ClickOrTap}}.
+	 *  Defaults to the array("Streams/content", array("invite", "notice", "html"))
+	 * @param {array} [$options.userId=Users::loggedInUser()->id] The user to check
+	 * @return {boolean} Whether the notice was set
+	 */
+	static function possibleNotice($stream, $options = array())
+	{
+		$userId = Q::ifset($options, 'userId', null);
+		if (!$userId) {
+			$user = Users::loggedInUser(false, false);
+			if (!$user) {
+				return false;
+			}
+			$userId = $user->id;
+		}
+		if ($stream->participant()) {
+			return false;
+		}
+		$invite = Streams_Invite::forStream($stream->publisherId, $stream->name, $userId);
+		if (!$invite or $invite->state !== 'pending') {
+			return false;
+		}
+		$defaultHtml = array("Streams/content", array("invite", "notice", "html"));
+		$html = Q::ifset($options, 'notice', 'html', null, $defaultHtml);
+		$button = '<button class="Streams_possibleNotice_button">';
+		$clickOrTap = Q_Text::clickOrTap(false);
+		$ClickOrTap = Q_Text::clickOrTap(true);
+		$buttonClass = 'Streams_invite_accept_button';
+		$html = Q_Handlebars::render($html, compact(
+			'stream', 'clickOrTap', 'ClickOrTap'
+		));
+		$key = 'Streams_Invite_possibleNotice';
+		$options['handler'] = $invite->url();
+		Q_Response::setNotice($key, $html, $options);
+		return true;
 	}
 	
 	/**

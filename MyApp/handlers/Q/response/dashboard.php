@@ -4,10 +4,10 @@ function Q_response_dashboard()
 {	
 	$app = Q::app();
 	$slogan = "Powered by Qbix.";
-	$user = Users::loggedInUser();
+	$user = Users::loggedInUser(false, false);
 	$text = Q_Text::get("MyApp/content");
 
-	if (Users::loggedInUser(false, false)) {
+	if ($user) {
 		$tabs = array('home' => $text['dashboard']["Home"]);
 	} else {
 		$tabs = array('welcome' => $text['dashboard']["Welcome"]);
