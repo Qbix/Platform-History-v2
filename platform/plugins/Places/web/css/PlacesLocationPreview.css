@@ -20,7 +20,8 @@
 	line-height: 24px;
 	font-size: 16px;
 	font-weight: normal;
-	white-space: normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .Places_location_preview_tool .Places_location_preview_contents .Places_location_preview_address {
 	font-size: 12px;
