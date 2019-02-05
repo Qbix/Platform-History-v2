@@ -7,7 +7,7 @@
 				'clickable' => false
 			),
 			'imagepicker' => array(
-				'showSize' => '200x'
+				'showSize' => '400x'
 			),
 			'actions' => null
 		),
