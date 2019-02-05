@@ -114,7 +114,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 	imagepicker: {
 		showSize: "50",
-		fullSize: "200x",
+		fullSize: "400x",
 		save: "Streams/image"
 	},
 	sizes: null,
@@ -372,7 +372,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var se = state.editable;
 			if (element && se && (se === true || se.indexOf('icon') >= 0)
 			&& this.testWriteLevel('suggest')) {
-				var $this = $(this);
+				var $this = $(element);
 
 				// if plugin Q/imagepicker already applied - exit
 				if ($this.data('q_imagepicker state')) {
