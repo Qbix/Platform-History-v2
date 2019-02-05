@@ -70,15 +70,22 @@
 }
 
 .Streams_invite_photo_dialog {
+	min-height: 270px;
+}
+
+.Streams_invite_photo_dialog p {
+	text-align: center;
+	margin: 10px;
+}
+
+.Streams_invite_photo_camera {
 	display: flex;
-	min-height: 20vw;
 	justify-content: center;
 	align-items: center;
-	min-height: 15vw;
 }
 
 .Streams_invite_photo_dialog .Streams_invite_photo {
-	height: 9vw;
+	height: 200px;
 }
 
 .Streams_invite_photo_dialog .Streams_invite_photo_pulsate {
