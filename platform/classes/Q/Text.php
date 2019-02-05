@@ -181,11 +181,16 @@ class Q_Text
 	 * returns either the word "click" or "tap" in the current language,
 	 * @method clickOrTap
 	 * @static
-	 * @param {string} [$word='click'] Can be either "click" or "Click"
+	 * @param {boolean} $uppercase Whether the first letter should be uppercase
 	 * @return {string}
 	 */
-	static function clickOrTap($word = 'click')
+	static function clickOrTap($uppercase)
 	{
+		if (Q_Request::isTouchscreen()) {
+			$word = $uppercase ? 'Tap' : 'tap';
+		} else {
+			$word = $uppercase ? 'Click': 'click';
+		}
 		$text = Q_Text::get('Q/content');
 		return Q::ifset($text, 'words', $word, $word);
 	}
