@@ -341,10 +341,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var attributes = options.attributes || fields.attributes;
 			attributes = (attributes && JSON.parse(attributes)) || {};
 			if (attributes.sizes
-			&& attributes.sizes.indexOf(state.imagepicker.showSize) < 0) {
-				for (var i=0; i<attributes.sizes.length; ++i) {
-					size = attributes.sizes[i];
-					var parts1 = attributes.sizes[i].toString().split('x');
+			&& attributes.sizes[state.imagepicker.showSize]) {
+				for (size in attributes.sizes) {
+					var parts1 = attributes.sizes[size].toString().split('x');
 					var parts2 = si.showSize.toString().split('x');
 					if (parts1.length === 1) parts1[1] = parts1[0];
 					if (parts2.length === 2) parts2[1] = parts2[0];
