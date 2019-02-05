@@ -662,6 +662,7 @@ function _handlePosAndScroll(o)
 					$this.css({ 'top': Q.Pointer.scrollTop() + topPos + 'px' });
 			}
 		}
+		$this.css('visibility', 'visible');
 	}
 }
 
