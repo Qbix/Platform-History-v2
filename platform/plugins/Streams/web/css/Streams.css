@@ -180,7 +180,7 @@
 .Streams_participants_tool {
 	padding: 0 5px;
 	overflow: hidden;
-	height: 60px;
+	height: 70px;
 }
 
 .Users_avatar_tool {
@@ -233,6 +233,8 @@
 
 .Streams_participants_tool .Users_avatar_icon {
 	box-shadow: #222 0 0 1px;
+	width: 40px;
+	height: 40px;
 }
 
 .Streams_participants_tool .Users_avatar_icon_blank {
@@ -562,6 +564,19 @@
 	text-align: center;
 	padding: 5px 0;
 	font-size: 11pt;
+	margin: 5px;
+	border-radius: 5px;
+	position: relative;
+}
+.Streams_chat_reachedEarliest .Streams_chat_more {
+	display: none;
+}
+.Streams_chat_more img {
+	position: absolute;
+	left: 10px;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
 }
 .Streams_chat_more:hover {
 	color: #fff;
