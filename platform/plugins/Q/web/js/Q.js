@@ -12470,10 +12470,13 @@ Q.onInit.add(function () {
 		if (!text) {
 			return;
 		}
-		Q.extend(Q.text.Q, text);
-		Q.extend(Q.confirm.options, Q.text.confirm);
-		Q.extend(Q.prompt.options, Q.text.prompt);
-		Q.extend(Q.alert.options, Q.text.alert);
+		Q.extend(Q.text.Q, 10, text);
+		Q.extend(Q.confirm.options, 10, Q.text.confirm);
+		Q.extend(Q.prompt.options, 10, Q.text.prompt);
+		Q.extend(Q.alert.options, 10, Q.text.alert);
+		var QtQw = Q.text.Q.words;
+		QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
+		QtQw.clickOrTap = isTouchscreen ? QtQw.click : QtQw.tap;
 	});
 }, 'Q');
 
