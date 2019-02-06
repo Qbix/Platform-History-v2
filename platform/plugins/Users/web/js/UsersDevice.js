@@ -245,34 +245,40 @@
 		},
 
 		subscribe: function (callback, options) {
-			var self = this;
-			this.getServiceWorkerRegistration(function (err, sw) {
-				if (err)
-					Q.handle(callback, null, [err]);
-				else {
-					var userVisibleOnly = true;
-					if (options && !options.userVisibleOnly) {
-						userVisibleOnly = false;
-					}
-					sw.pushManager.subscribe({
-						userVisibleOnly: userVisibleOnly,
-						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
-					}).then(function (subscription) {
-						_saveSubscription(subscription, self.appConfig, function (err, res) {
-							Q.handle(callback, null, [err, res]);
-						});
-					}).catch(function (err) {
-						Users.Device.notificationGranted(function (granted) {
-							if (granted) {
-								console.error('Users.Device: Unable to subscribe to push.', err);
-							} else {
-								console.error('Users.Device: Permission for Notifications was denied');
-							}
-						});
+			var appConfig = this.appConfig;
 
-						Q.handle(callback, null, [err]);
-					});
+			if (!appConfig) {
+				console.warn('Unable to init adapter. App config is not defined.');
+				return Q.handle(callback, null);
+			}
+
+			this.getServiceWorkerRegistration(function (err, sw) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
 				}
+
+				var userVisibleOnly = true;
+				if (options && !options.userVisibleOnly) {
+					userVisibleOnly = false;
+				}
+				sw.pushManager.subscribe({
+					userVisibleOnly: userVisibleOnly,
+					applicationServerKey: _urlB64ToUint8Array(Q.getObject(appConfig.publicKey))
+				}).then(function (subscription) {
+					_saveSubscription(subscription, appConfig, function (err, res) {
+						Q.handle(callback, null, [err, res]);
+					});
+				}).catch(function (err) {
+					Users.Device.notificationGranted(function (granted) {
+						if (granted) {
+							console.error('Users.Device: Unable to subscribe to push.', err);
+						} else {
+							console.error('Users.Device: Permission for Notifications was denied');
+						}
+					});
+
+					Q.handle(callback, null, [err]);
+				});
 			});
 		},
 
