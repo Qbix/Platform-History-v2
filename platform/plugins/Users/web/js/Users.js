@@ -1344,6 +1344,7 @@
 						setTimeout(function () {
 							if (confirm(Q.text.Users.login.confirmTerms)) {
 								$('#Users_agree').attr('checked', 'checked');
+								$('#Users_agree')[0].checked = true;
 								$this.submit();
 							}
 						}, 300);
