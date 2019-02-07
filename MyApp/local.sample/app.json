@@ -1,9 +1,9 @@
 {
 	"Q": {
-		"localNotYetConfigured": "REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
+		"localNotYetConfigured": "TODO: REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
 		"web": {
-			"appRootUrl": "https://myapp.local",
-			"controllerSuffix": "" /* "or index.php if no URL rewriting on webserver" */
+			"appRootUrl": "http://gmba.local/Coinect",
+			"controllerSuffix": ""
 		},
 		"node" : {
 			"host": "MyApp.loc",
@@ -21,14 +21,14 @@
 			"host": "127.0.0.1",
 			"port": "10501"
 		},
+		"internal": {
+			"secret": "TODO: CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA TO BE SENT BACK TO US"
+		},
 		"images": {
 			"pixabay": null /* {
-				"username": "YOUR USERNAME HERE",
-				"key": "YOUR SECRET KEY HERE"
+				"username": "TODO: YOUR USERNAME HERE",
+				"key": "TODO: YOUR SECRET KEY HERE"
 			} */
-		},
-		"internal": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA TO BE SENT BACK TO US"
 		},
 		"environment": "",
 		/* "scriptFiles": ["config/Q/urls.php"], */
@@ -39,20 +39,17 @@
 	"Db": {
 		"connections": {
 			"*": {
-				"dsn": "mysql:host=localhost;dbname=DBNAME;charset=utf8",
-				"username": "USERNAME",
-				"password": "PASSWORD",
-				"driver_options": { "3": 2 },
-				"shards": {}
+				"dsn": "mysql:host=127.0.0.1;dbname=Coinect",
+				"username": "Coinect",
+				"password": "0wdzLx0_rp2rV62yKknC",
+				"driver_options": { "3": 2 }	
 			},
-			"Users": {
-				"prefix": "users_"
-			},
-			"Streams": {
-				"prefix": "streams_"
-			}
-		},
-		"logging": true
+			"Users": { "prefix": "users_" },
+			"Streams": { "prefix": "streams_" },
+			"Assets": { "prefix": "assets_" },
+			"Places": { "prefix": "places_" },
+			"Websites": { "prefix": "websites_" }
+		}
 	},
 	"Users": {
 		"community": {
@@ -102,6 +99,7 @@
 		"apps": {
 			"platforms": ["facebook", "ios", "android"],
 			"export": ["facebook"],
+			/* TODO: set up your external apps on external services */
 			"facebook": {
 				"MyApp": {
 					"name": "FACEBOOK APP NAME HERE",
@@ -124,14 +122,14 @@
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
-						"added": ["MyApp/content", ["notifications", "Enabled"]],
+						"added": ["MyApp/content", ["notifications", "Enabled"]]
 					},
 					"secret": "SHARED SECRET HERE",
 					"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
 						"key": "local/Users/certs/MyApp/token/cert.p8",
-						"keyId": "Find it at https://developer.apple.com/account/ios/certificate/",
+						"keyId": "TODO: Find it at https://developer.apple.com/account/ios/certificate/",
 						"passphrase": null,
-						"teamId": "Find it at https://developer.apple.com/account/#/membership"
+						"teamId": "TODO: Find it at https://developer.apple.com/account/#/membership"
 					},
 					"ssl": { /* see https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11 */
 						"cert": "local/Users/certs/MyApp/sandbox/bundle.pem",
@@ -190,7 +188,7 @@
 			}
 		},
 		"newsapi": {
-			"key": "GET A NEWSAPI.ORG KEY FOR Users/activate SUGGESTIONS"
+			"key": "TODO: GET A NEWSAPI.ORG KEY FOR Users/activate SUGGESTIONS"
 		}
 	},
 	"Streams": {
@@ -199,17 +197,20 @@
 				"facebook": ["FACEBOOK APP ID HERE"],
 				"ios": ["361285480"]
 			*/ }
+		},
+		"froala": { 
+			"key": "TODO: GET FROALA KEY"
 		}
 	},
 	"Assets": {
 		"payments":  {
 			"stripe": null, /* {
-				"secret": "XXXXX",
-				"publishableKey": "XXXXX"
+				"secret": "TODO: CAN GET STRIPE SECRET",
+				"publishableKey": "TODO: CAN GET STRIPE PUBLISHABLE KEY"
 			}, */
 			"authnet": null /* {
-				"name": "XXXXX",
-				"transactionKey": "XXXXX",
+				"name": "TODO: CAN GET AUTHNET NAME",
+				"transactionKey": "TODO: CAN GET AUTHNET TRANSACTION KEY",
 				"testing": false
 			} */
 		}
@@ -217,8 +218,8 @@
 	"Places": {
 		"google": {
 			"keys": {
-				"server": "GET A GOOGLE API KEY for server API calls",
-				"web": "GET A GOOGLE API KEY for website calls"
+				"server": "TODO: GET SERVER KEY",
+				"web": "TODO: GET WEB KEY"
 			}
 		}
 	},
