@@ -37,6 +37,7 @@
 		"messageContent": "{{displayName}} invited you to {{inviteUrl}}",
 		"dialog": {
 			"chooseFromContacts": "Choose from your Contacts",
+			"chooseAgainFromContacts": "Choose Again from Contacts",
 			"selectFromContacts": "Select From Contacts",
 			"photo": "Take a photo",
 			"photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",

@@ -1076,6 +1076,30 @@ Streams.Dialogs = {
 					content: html,
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					onActivate: function (dialog) {
+						// handle "choose from contacts" button
+						$('.Streams_invite_choose_contact', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								var $this = $(this);
+								var $eContacts = $(".Streams_invite_contacts", dialog);
+								$eContacts.html("");
+								var options = {
+									prefix: "Users",
+									data: $eContacts.data("contacts") || null
+								}
+
+								Users.Dialogs.contacts(options, function (contacts) {
+									if (!contacts) {
+										return;
+									}
+									for (let i = 0; i < contacts.length; i++) {
+										let prefix = (Object.keys(contacts[i])[Object.keys(contacts[i]).length-1] == "email" )? "email": "mobile";
+										$eContacts.append("<div><i class='qp-communities-"+ prefix +"'></i><span>"+ contacts[i].name +"</span></div>")
+									}
+
+									$eContacts.data("contacts", contacts);
+									$this.text(text.chooseAgainFromContacts);
+								})
+							});
 						// handle "go" button
 						$('.Streams_invite_submit button', dialog)
 							.on(Q.Pointer.fastclick, function () {

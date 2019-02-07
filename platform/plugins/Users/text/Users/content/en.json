@@ -33,6 +33,11 @@
 		"WelcomeVerifyEmail": "Welcome! Verify your email address.",
 		"ForgetPass": "Hey, did you forget your passphrase?"
 	},
+	"contacts": {
+		"dialog": {
+			"title": "Choose contact"
+		}
+	},
 	"usersContacts": {
 		"selectLabel": "Please select label.",
 		"inviteUser": "Invite User"
