@@ -160,7 +160,8 @@
 					},
 					"Streams/invite": {
 						"description": "You were invited",
-						"subject": ["Streams/content", ["notifications", "Streams/invite"]]
+						"subject": ["Streams/content", ["notifications", "Streams/invite"]],
+						"evenIfOnline": true
 					},
 					"Streams/announcement": {
 						"description": "Announcement for everyone in the stream",
