@@ -263,7 +263,7 @@
 				}
 				sw.pushManager.subscribe({
 					userVisibleOnly: userVisibleOnly,
-					applicationServerKey: _urlB64ToUint8Array(Q.getObject(appConfig.publicKey))
+					applicationServerKey: _urlB64ToUint8Array(appConfig.publicKey)
 				}).then(function (subscription) {
 					_saveSubscription(subscription, appConfig, function (err, res) {
 						Q.handle(callback, null, [err, res]);
