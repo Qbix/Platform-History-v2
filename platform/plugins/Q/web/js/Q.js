@@ -12463,8 +12463,8 @@ Q.onInit.add(function () {
 		Q.Text.setLanguage.apply(Q.Text, info);
 	}
 	var QtQw = Q.text.Q.words;
-	QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
-	QtQw.clickOrTap = isTouchscreen ? QtQw.click : QtQw.tap;
+	QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
+	QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 
 	Q.Text.get('Q/content', function (err, text) {
 		if (!text) {
@@ -12475,8 +12475,8 @@ Q.onInit.add(function () {
 		Q.extend(Q.prompt.options, 10, Q.text.prompt);
 		Q.extend(Q.alert.options, 10, Q.text.alert);
 		var QtQw = Q.text.Q.words;
-		QtQw.ClickOrTap = isTouchscreen ? QtQw.Click : QtQw.Tap;
-		QtQw.clickOrTap = isTouchscreen ? QtQw.click : QtQw.tap;
+		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
+		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	});
 }, 'Q');
 
