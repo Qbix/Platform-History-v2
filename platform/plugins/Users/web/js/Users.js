@@ -2383,6 +2383,143 @@
 	Users.onConnectionLost = new Q.Event();
 
 	/**
+	 * Operates with dialogs.
+	 * @class Users.Dialogs
+	 */
+	Users.Dialogs = {
+		/**
+	 	* Show a dialog with contacts.
+	 	* @static
+	 	* @method contacts
+	 	* @param {Function} [callback] The function to call after dialog is activated
+	 	*/
+		contacts: function(options, callback) {
+			if (!Q.info.isCordova || !navigator.contacts) {
+				throw new Error("Users.Dialogs.contacts: supported only in Cordova");
+			}
+			var contacts = null;
+			var text = null;
+			var o = Q.extend({}, Users.Dialogs.contacts.options, options);
+
+			var pipe = Q.pipe(['contacts', 'text'], function () {
+				Q.Template.render(o.templateName, {
+					contacts: contacts
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+					var selectedContacts = [];
+					Q.Dialogs.push({
+						title: text.title,
+						content: html,
+						stylesheet: '{{Users}}/css/Users/contacts.css',
+						apply: true,
+						onActivate: function (dialog) {
+							if (o.data) {
+								selectedContacts = o.data;
+								for (let i = 0; i < selectedContacts.length; i++) {
+									let prefix = Object.keys(selectedContacts[i])[Object.keys(selectedContacts[i]).length-1];
+									$('[data-rawid='+ selectedContacts[i].id +']', dialog)
+										.find(".Users_contacts_dialog_" + prefix)
+										.addClass("checked");
+								}
+							}
+							$('.Users_contacts_dialog_buttons', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									let $row = $(this).closest("tr");
+									let $name = $row.find(".Users_contacts_dialog_name");
+									let contact = $(this).closest("td").data();
+									let rawid = $row.data("rawid");
+									if ($(this).hasClass("checked") || contact[Object.keys(contact)[0]] == "") {
+										return;
+									}
+									$row.find(".checked").removeClass("checked");
+									$(this).addClass("checked");
+
+									for (let i = 0; i < selectedContacts.length; i++) {
+										if(selectedContacts[i].id == rawid) {
+											selectedContacts.splice(i, 1);
+											break;
+										}
+									}
+
+									selectedContacts.push({
+										id: rawid,
+										name: $name.text(),
+										...contact
+									})
+								});
+							$('.Users_contacts_dialog_name', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									let $row = $(this).closest("tr");
+									let $email = $row.find(".Users_contacts_dialog_email");
+									let $emailContact = $email.closest("td").data("email");
+									let $phone = $row.find(".Users_contacts_dialog_phone");
+									let $phoneContact = $phone.closest("td").data("phone");
+									let $name = $row.find(".Users_contacts_dialog_name");
+									let rawid = $row.data("rawid");
+									let contact = null;
+
+									$row.addClass("Users_contacts_flash");
+									setTimeout(function () {
+										$row.removeClass("Users_contacts_flash");
+									}, 1000);
+									$row.find(".checked").removeClass("checked");
+
+									if ($emailContact != "") {
+										$email.addClass("checked");
+										contact = $email.closest("td").data();
+									} else if ($phoneContact != "") {
+										$phone.addClass("checked");
+										contact = $phone.closest("td").data();
+									} else {
+										return;
+									}
+
+									for (let i = 0; i < selectedContacts.length; i++) {
+										if(selectedContacts[i].id == rawid) {
+											selectedContacts.splice(i, 1);
+											break;
+										}
+									}
+
+									selectedContacts.push({
+										id: rawid,
+										name: $name.text(),
+										...contact
+									});
+								});
+						},
+						onClose: function () {
+							Q.handle(callback, Users, [selectedContacts]);
+						}
+					});
+				});
+			});
+
+			Q.Text.get("Users/content", function (err, result) {
+				text = Q.getObject(["contacts", "dialog"], result);
+				pipe.fill('text')();
+			})
+
+			var options = new ContactFindOptions();
+			options.filter = "";
+			options.multiple = true;
+			var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			navigator.contacts.find(fields, function (data) {
+				contacts = data;
+				pipe.fill('contacts')();
+			}, function (err) {
+				throw new Error("Users.Dialogs.contacts: " + err);
+			}, options);
+		}
+	};
+	Users.Dialogs.contacts.options = {
+		templateName: "Users/templates/contacts/dialog",
+		prefix: "Users"
+	};
+
+	/**
 	 * Some replacements for Q.Socket methods, use these instead.
 	 * They implement logic involving sockets, users, sessions, devices, and more.
 	 * Everything goes through the "Users" namespace in socket.io
