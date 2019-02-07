@@ -1129,20 +1129,25 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		
 		// 1) check for socket clients which are online
 		var only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
-		var clients;
 		if (only) {
+			// check if message send even if client online
+			var evenIfOnline = Q.Config.get(['Streams', 'types', '*', 'messages', message.fields.type, 'evenIfOnline'], false);
 			// check if any socket clients are online
-			clients = Users.User.clientsOnline(userId);
-			_continue(!Q.isEmpty(clients));
+			var clients = Users.User.clientsOnline(userId);
+
+			_continue(!Q.isEmpty(clients), evenIfOnline);
 		} else {
 			// check if any socket clients associated to any device sessions are online
 			_devices(_continue);
 		}
-		function _continue(online) {
+		function _continue(online, evenIfOnline) {
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
 				Users.Socket.emitToUser(userId, event, message.getFields());
-				return callback && callback();
+
+				if (!evenIfOnline) {
+					return callback && callback();
+				}
 			}
 			// 3) if user has no socket connected, send offline notifications
 			//      to users who subscribed and filters match
