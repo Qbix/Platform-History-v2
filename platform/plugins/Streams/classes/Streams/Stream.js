@@ -1131,7 +1131,7 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		var only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
 		if (only) {
 			// check if message send even if client online
-			var evenIfOnline = Q.Config.get(['Streams', 'types', '*', 'messages', message.fields.type, 'evenIfOnline'], false);
+			var evenIfOnline = Streams.Stream.getConfigField(stream.fields.type, ['messages', message.fields.type, 'evenIfOnline'], false);
 			// check if any socket clients are online
 			var clients = Users.User.clientsOnline(userId);
 
