@@ -184,11 +184,11 @@ class Q
 					$errstr, $errfile, $errline, $context
 				);
 				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
-					'maxLength' => 10000
+					'maxLength' => 1000
 				));
-				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
+				Q::log("PHP Error($errno): \n\n$dump", 'error', null, array(
 					'maxLength' => 100000
-				), 'error');
+				));
 				$type = 'warning';
 				break;
 			default:

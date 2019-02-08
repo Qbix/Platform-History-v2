@@ -98,6 +98,12 @@
 		}	
 	},
 	"Assets": {
+		"payments": {
+			"stripe": {
+				"preloadAPI": true,
+				"jsLibrary": "https://js.stripe.com/v2/"
+			}
+		},
 		"credits": {
 			"amounts": {
 				"Users/insertUser": 20
