@@ -3952,7 +3952,8 @@ var MTotal = Streams.Message.Total = {
 	 * @param {String} messageType The type of the message
 	 * @param {String|Q.Tool|true} key Key for attaching the events
 	 * @param {Object} [options]
-	 * @param {String} [options.unseenClass] Added if there is at least one unseen message
+	 * @param {String} [options.unseenClass='Streams_unseen_nonzero']
+	 *  Added if there is at least one unseen message
 	 */
 	setUpElement: function _Total_setUpElement(
 		element, publisherId, streamName, messageType, key, options
@@ -3968,10 +3969,9 @@ var MTotal = Streams.Message.Total = {
 		MTotal.onSeen(p, n, m).set(_unseen);
 		function _unseen() {
 			var c = MTotal.unseen(p, n, m);
+			var unseenClass = (options && options.unseenClass) || 'Streams_unseen_nonzero';
 			element.innerHTML = c;
-			if (options && options.unseenClass) {
-				element.setClass(options.unseenClass, c);
-			}
+			element.setClass(unseenClass, c);
 		}
 	},
 	
