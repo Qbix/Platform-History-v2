@@ -33,15 +33,16 @@ function Users_after_Q_image_save($params, &$return)
 			}
 		} else if (Q::startsWith($fullpath, $invitePrefix)) {
 			$token = preg_replace('/.*\/invited\//', '', $subpath);
-			$stream = Streams_Invited::select()->where(array('token' => $token, 'state' => 'accepted'))->fetchDbRows();
-			if (empty($stream)) {
-				return;
-			}
-			$userId = $stream[0]->userId;
-			$user = Users::fetch($userId);
-			if ($user->icon != $subpath && !Users::isCustomIcon($user->icon)) {
-				$user->icon = Q_Html::themedUrl("$path/$subpath");
-				$user->save();
+			$invites = Streams_Invite::select()->where(
+				array('token' => $token, 'state' => 'accepted'
+			))->fetchDbRows();
+			if (!empty($invites)) {
+				$user = Users::fetch($invites[0]->userId);
+				if ($user and $user->icon != $subpath
+				and !Users::isCustomIcon($user->icon)) {
+					$user->icon = Q_Html::themedUrl("$path/$subpath");
+					$user->save();
+				}
 			}
 		}
 	} else if (Q::startsWith($fullpath, implode(DS, array('Q', 'uploads', 'Users')))) {

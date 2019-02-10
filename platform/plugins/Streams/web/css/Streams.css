@@ -956,3 +956,7 @@
 .Streams_completeInvited_dialog {
 
 }
+
+.Streams_unseen_nonzero {
+	display: inline-block !important;
+}
