@@ -36,6 +36,9 @@
 	"contacts": {
 		"dialog": {
 			"title": "Choose contact"
+		},
+		"select": {
+			"title": "Select contact of {{displayName}}"
 		}
 	},
 	"usersContacts": {

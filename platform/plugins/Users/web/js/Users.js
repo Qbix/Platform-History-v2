@@ -2410,6 +2410,19 @@
 						return;
 					}
 					var selectedContacts = [];
+					function _selectContact(id, name, contact, contactType) {
+						for (let i = 0; i < selectedContacts.length; i++) {
+							if(selectedContacts[i].id == id) {
+								selectedContacts.splice(i, 1);
+								break;
+							}
+						}
+						selectedContacts.push({
+							id: id,
+							name: name,
+							[contactType]: contact
+						})
+					}
 					Q.Dialogs.push({
 						title: text.title,
 						content: html,
@@ -2428,38 +2441,40 @@
 							$('.Users_contacts_dialog_buttons', dialog)
 								.on(Q.Pointer.fastclick, function () {
 									let $row = $(this).closest("tr");
-									let $name = $row.find(".Users_contacts_dialog_name");
-									let contact = $(this).closest("td").data();
 									let rawid = $row.data("rawid");
-									if ($(this).hasClass("checked") || contact[Object.keys(contact)[0]] == "") {
+									let name = $row.find(".Users_contacts_dialog_name").text();
+									let contact = $(this).closest("td").data();
+									let contactType = Object.keys(contact)[0];
+									if ($(this).hasClass("checked") || contact[contactType] == "") {
 										return;
 									}
 									$row.find(".checked").removeClass("checked");
 									$(this).addClass("checked");
-
-									for (let i = 0; i < selectedContacts.length; i++) {
-										if(selectedContacts[i].id == rawid) {
-											selectedContacts.splice(i, 1);
-											break;
-										}
+									if (contact[contactType].length > 1) {
+										let $this = $(this);
+										Users.Dialogs.select({
+											displayName: name,
+											contacts: contact[contactType]
+										}, function (data) {
+											if (!data) {
+												$this.removeClass("checked");
+												return;
+											}
+											_selectContact(rawid, name, data.value, contactType);
+										})
+									} else {
+										_selectContact(rawid, name, contact[contactType][0].value, contactType);
 									}
-
-									selectedContacts.push({
-										id: rawid,
-										name: $name.text(),
-										...contact
-									})
 								});
 							$('.Users_contacts_dialog_name', dialog)
 								.on(Q.Pointer.fastclick, function () {
 									let $row = $(this).closest("tr");
 									let $email = $row.find(".Users_contacts_dialog_email");
-									let $emailContact = $email.closest("td").data("email");
 									let $phone = $row.find(".Users_contacts_dialog_phone");
-									let $phoneContact = $phone.closest("td").data("phone");
-									let $name = $row.find(".Users_contacts_dialog_name");
+									let emailContact = $email.closest("td").data("email");
+									let phoneContact = $phone.closest("td").data("phone");
+									let name = $row.find(".Users_contacts_dialog_name").text();
 									let rawid = $row.data("rawid");
-									let contact = null;
 
 									$row.addClass("Users_contacts_flash");
 									setTimeout(function () {
@@ -2467,28 +2482,43 @@
 									}, 1000);
 									$row.find(".checked").removeClass("checked");
 
-									if ($emailContact != "") {
-										$email.addClass("checked");
-										contact = $email.closest("td").data();
-									} else if ($phoneContact != "") {
-										$phone.addClass("checked");
-										contact = $phone.closest("td").data();
-									} else {
-										return;
-									}
-
-									for (let i = 0; i < selectedContacts.length; i++) {
-										if(selectedContacts[i].id == rawid) {
-											selectedContacts.splice(i, 1);
-											break;
+									if (emailContact.length) {
+										if (emailContact.length > 1) {
+											let $this = $(this);
+											Users.Dialogs.select({
+												displayName: name,
+												contacts: emailContact
+											}, function (data) {
+												if (!data) {
+													$this.removeClass("checked");
+													return;
+												}
+												$email.addClass("checked");
+												_selectContact(rawid, name, data.value, "email");
+											})
+										} else if (emailContact.length == 1) {
+											$email.addClass("checked");
+											_selectContact(rawid, name, emailContact.value, "email");
+										}
+									} else if (phoneContact.length) {
+										if (phoneContact.length > 1) {
+											let $this = $(this);
+											Users.Dialogs.select({
+												displayName: name,
+												contacts: phoneContact
+											}, function (data) {
+												if (!data) {
+													$this.removeClass("checked");
+													return;
+												}
+												$phone.addClass("checked");
+												_selectContact(rawid, name, data.value, "phone");
+											})
+										} else if (phoneContact.length == 1) {
+											$phone.addClass("checked");
+											_selectContact(rawid, name, phoneContact.value, "phone");
 										}
 									}
-
-									selectedContacts.push({
-										id: rawid,
-										name: $name.text(),
-										...contact
-									});
 								});
 						},
 						onClose: function () {
@@ -2513,12 +2543,59 @@
 			}, function (err) {
 				throw new Error("Users.Dialogs.contacts: " + err);
 			}, options);
+		},
+		/**
+		 * Show a select dialog with several emails/phones.
+		 * @static
+		 * @method contacts
+		 * @param {Function} [callback] The function to call after dialog is activated
+		 */
+		select: function (options, callback) {
+			var o = Q.extend({}, Users.Dialogs.select.options, options);
+			if (!o.contacts) return;
+			Q.Text.get("Users/content", function (err, result) {
+				var text = Q.getObject(["contacts", "select"], result);
+				Q.Template.render(o.templateName, {
+				contacts: o.contacts
+			}, function (err, html) {
+				if (err) {
+					return;
+				}
+				var selectedContact = null;
+				Q.Dialogs.push({
+					title: text.title.interpolate({
+						displayName: o.displayName
+					}),
+					content: html,
+					stylesheet: '{{Users}}/css/Users/contacts.css',
+					apply: true,
+					onActivate: function (dialog) {
+						$('.Users_contacts_dialog_buttons', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								if($(this).hasClass('checked')) {
+									return;
+								}
+								$(dialog).find(".checked").removeClass("checked");
+								$(this).addClass("checked");
+								selectedContact = $(this).closest("td").data("contact");
+							});
+					},
+					onClose: function () {
+						Q.handle(callback, Users, [selectedContact]);
+					}
+				})
+			});
+			});
 		}
 	};
 	Users.Dialogs.contacts.options = {
 		templateName: "Users/templates/contacts/dialog",
 		prefix: "Users"
 	};
+
+	Users.Dialogs.select.options = {
+		templateName: "Users/templates/contacts/select"
+	}
 
 	/**
 	 * Some replacements for Q.Socket methods, use these instead.

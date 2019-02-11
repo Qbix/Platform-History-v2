@@ -1,21 +1,17 @@
 <table class="Users_contacts_dialog">
     {{#each contacts}}
         <tr data-rawId={{this.rawId}}>
-            {{#this.emails}}
-                <td data-email={{value}}>
-                    <div class="Users_contacts_dialog_buttons Users_contacts_dialog_email">
-                        <i class="qp-communities-email"></i>
-                    </div>
-                </td>
-            {{/this.emails}}
+            <td data-email={{json this.emails}}>
+                <div class="Users_contacts_dialog_buttons Users_contacts_dialog_email">
+                    <i class="qp-communities-email"></i>
+                </div>
+            </td>
 
-            {{#this.phoneNumbers}}
-                <td data-phone={{value}}>
-                    <div class="Users_contacts_dialog_buttons Users_contacts_dialog_phone">
-                        <i class="qp-communities-mobile"></i>
-                    </div>
-                </td>
-            {{/this.phoneNumbers}}
+            <td data-phone={{json this.phoneNumbers}}>
+                <div class="Users_contacts_dialog_buttons Users_contacts_dialog_phone">
+                    <i class="qp-communities-mobile"></i>
+                </div>
+            </td>
 
             <td class="Users_contacts_dialog_name">{{this.displayName}}</td>
         </tr>
