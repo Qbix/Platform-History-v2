@@ -12627,6 +12627,14 @@ function _addHandlebarsHelpers() {
 			return text.charAt(0).toUpperCase() + text.slice(1);
 		});
 	}
+	if (!Handlebars.helpers.json) {
+		Handlebars.registerHelper('json', function(context) {
+			if (typeof context == "object") {
+				return JSON.stringify(context);
+			}
+			return context;
+		});
+	}
 	if (!Handlebars.helpers.option) {
 		Handlebars.registerHelper('interpolate', function(expression) {
 			if (arguments.length < 2) {
