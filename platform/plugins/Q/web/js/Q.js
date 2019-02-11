@@ -9296,33 +9296,40 @@ function _connectSocketNS(ns, url, callback, callback2, force) {
 		var qs = _qsockets[ns][url];
 		if (!qs || !qs.socket) {
 			_qsockets[ns][url] = qs = new Q.Socket({
-				socket: root.io.connect(url+ns, force ? {
+				socket: root.io.connect(url + ns, force ? {
 					'force new connection': true
 				} : {}),
 				url: url,
 				ns: ns
 			});
-			Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
-			// remember actual socket - for disconnecting
-			var socket = qs.socket;
-			_ioOn(socket, 'connect', _connected);
-			/*
-			_ioOn(socket, 'reconnect', function () {
-				this.connected = true;
-				++this.io.connected;
-				_connected.apply(this, arguments);
-			});
-			*/
-			_ioOn(socket, 'connect_error', function (error) {
-				console.log('Failed to connect to '+url, error);
-			});
-			_ioOn(socket, 'disconnect', function () {
-				console.log('Socket ' + ns + ' disconnected from '+url);
-			});
-			_ioOn(socket, 'error', function () {
-				console.log('Error on connection '+url);
-			});
+		} else if (!qs.socket.io.connected) {
+			setTimeout(function () {
+				qs.socket.io.connect();
+			}, 0);
 		}
+
+		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
+		// remember actual socket - for disconnecting
+		var socket = qs.socket;
+		_ioOn(socket, 'connect', _connected);
+		_ioOn(socket, 'reconnect', _connected);
+		/*
+		_ioOn(socket, 'reconnect', function () {
+			this.connected = true;
+			++this.io.connected;
+			_connected.apply(this, arguments);
+		});
+		*/
+		_ioOn(socket, 'connect_error', function (error) {
+			console.log('Failed to connect to '+url, error);
+		});
+		_ioOn(socket, 'disconnect', function () {
+			console.log('Socket ' + ns + ' disconnected from '+url);
+		});
+		_ioOn(socket, 'error', function () {
+			console.log('Error on connection '+url);
+		});
+
 		callback2 && callback2(_qsockets[ns][url], ns, url);
 		
 		function _Q_Socket_register(socket) {
@@ -9335,9 +9342,9 @@ function _connectSocketNS(ns, url, callback, callback2, force) {
 		}
 		
 		function _connected() {
-			Q.Socket.onConnect().handle(this, [ns, url]);
-			Q.Socket.onConnect(ns).handle(this, [ns, url]);
-			Q.Socket.onConnect(ns, url).handle(this, [ns, url]);
+			Q.Socket.onConnect().handle(this, ns, url);
+			Q.Socket.onConnect(ns).handle(this, ns, url);
+			Q.Socket.onConnect(ns, url).handle(this, ns, url);
 			callback && callback(_qsockets[ns][url], ns, url);
 			console.log('Socket connected to '+url);
 		}
@@ -9435,11 +9442,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 	var ns, url;
 	for (ns in _qsockets) {
 		for (url in _qsockets[ns]) {
-			if (!_qsockets[ns][url]) {
-				_connectSocketNS(ns, url);
-			} else if (!_qsockets[ns][url].socket.io.connected) {
-				_qsockets[ns][url].socket.io.reconnect();
-			}
+			_connectSocketNS(ns, url);
 		}
 	}
 };
@@ -9506,6 +9509,8 @@ Q.Socket.onEvent = Q.Event.factory(
 				}
 			});
 		});
+
+		return event;
 	}
 );
 
