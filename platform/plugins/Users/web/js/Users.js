@@ -2400,11 +2400,14 @@
 		 * @param {Function} callback When a connection is made, receives the socket object
 		 */
 		connect: function _Users_Socket_connect(nodeUrl, callback) {
-			Q.Socket.connect('Users', nodeUrl, function (socket) {
+			Q.Socket.onConnect('Users', nodeUrl).set(function (socket) {
 				Q.loadNonce(function () {
-					socket.socket.emit('Users/session', Q.sessionId(), Q.clientId());
+					socket.emit('Users/session', Q.sessionId(), Q.clientId());
 				});
-			});
+			}, 'Users');
+
+			Q.Socket.connect('Users', nodeUrl);
+
 		},
 
 		/**
