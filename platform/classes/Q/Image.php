@@ -289,7 +289,7 @@ class Q_Image
 				'field' => 'save',
 				'type' => 'string'
 			));
-		},
+		}
 		$sizes = Q_Image::getSizes($save);
 		// crop parameters - size of source image
 		$isw = isset($crop['w']) ? $crop['w'] : $iw;
