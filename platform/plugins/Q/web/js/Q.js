@@ -9288,42 +9288,36 @@ Q.Socket.getAll = function _Q_Socket_all() {
 	return _qsockets;
 };
 
-function _connectSocketNS(ns, url, callback, callback2, force) {
+function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 	// load socket.io script and connect socket
 	function _connectNS(ns, url, callback, callback2) {
 		// connect to (ns, url)
 		if (!root.io) return;
 		var qs = _qsockets[ns][url];
-		if (!qs || !qs.socket) {
-			_qsockets[ns][url] = qs = new Q.Socket({
-				socket: root.io.connect(url + ns, force ? {
-					'force new connection': true
-				} : {}),
-				url: url,
-				ns: ns
-			});
-		} else if (!qs.socket.io.connected) {
-			setTimeout(function () {
-				qs.socket.io.connect();
-			}, 0);
+		var o = forceNew ? {
+			forceNew: true
+		} : {};
+		if (qs && qs.socket &&
+		(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
+			return;
 		}
-
-		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
+		// If we have a disconnected socket that is not connecting.
+		// Forget this socket manager, we must connect another one
+		// because socket.io doesn't reconnect normally otherwise
+		_qsockets[ns][url] = qs = new Q.Socket({
+			socket: root.io.connect(url + ns, o),
+			url: url,
+			ns: ns
+		});
 		// remember actual socket - for disconnecting
 		var socket = qs.socket;
+		
+		Q.Socket.onConnect(ns, url).add(_Q_Socket_register, 'Q');
 		_ioOn(socket, 'connect', _connected);
-		_ioOn(socket, 'reconnect', _connected);
-		/*
-		_ioOn(socket, 'reconnect', function () {
-			this.connected = true;
-			++this.io.connected;
-			_connected.apply(this, arguments);
-		});
-		*/
 		_ioOn(socket, 'connect_error', function (error) {
 			console.log('Failed to connect to '+url, error);
 		});
-		_ioOn(socket, 'disconnect', function () {
+		_ioOn(socket.io, 'close', function () {
 			console.log('Socket ' + ns + ' disconnected from '+url);
 		});
 		_ioOn(socket, 'error', function () {
@@ -9362,7 +9356,7 @@ function _connectSocketNS(ns, url, callback, callback2, force) {
 			socketPath = '/socket.io';
 		}
 		Q.addScript(url+socketPath+'/socket.io.js', function () {
-			_connectNS(ns, url, callback, callback2);
+			_connectNS(ns, url, callback, callback2, forceNew);
 		});
 	}
 }
@@ -9393,7 +9387,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 		_qsockets[ns][url] = null; // pending
 	}
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, callback2);
+	_connectSocketNS(ns, url, callback, callback2, true);
 };
 
 /**
@@ -9442,7 +9436,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 	var ns, url;
 	for (ns in _qsockets) {
 		for (url in _qsockets[ns]) {
-			_connectSocketNS(ns, url);
+			_connectSocketNS(ns, url, null, null, true);
 		}
 	}
 };
