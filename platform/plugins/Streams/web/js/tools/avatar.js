@@ -265,6 +265,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 						var stream = this;
 						var o = Q.extend({
 							saveSizeName: saveSizeName,
+							maxStretch: Users.icon.maxStretch,
 							showSize: state.icon || $img.width(),
 							path: 'Q/uploads/Users',
 							preprocess: function (callback) {

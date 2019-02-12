@@ -14,7 +14,6 @@ Q.setObject('Q.text.Q.imagepicker', {
 		notTouchscreen: 'Use your mouse & wheel to zoom and drag'
 	}
 });
-Q.setObject("Q.text_en.Q.imagepicker", Q.text.Q.imagepicker);
 
 var qtqi = Q.text.Q.imagepicker;
 
@@ -31,7 +30,8 @@ var qtqi = Q.text.Q.imagepicker;
  * @class Q imagepicker
  * @constructor
  * @param {Object} [options] options is an Object that contains parameters for function
- * @param {Object} options.saveSizeName Required hash where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
+ * @param {Object} options.saveSizeName Required object where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
+ * @param {Object} [options.maxStretch=1] What scaling factor can be tolerated, for images smaller than the largest size required
 *   Key may be just one number, e.g. '100' which means square image 100x100 or in format '<width>x<height>', e.g. '80x120' to make non-square image.
  *  You can have one of <width> or <height> be empty, and then it will automatically keep the proportions.
  *  Or you can pass 'x' and then it will keep the original width and height of the image.
@@ -274,8 +274,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					if (state.useAnySize) {
 						return true;
 					}
-					if (requiredSize.width > imageSize.width
-					 || requiredSize.height > imageSize.height) {
+					var ms = state.maxStretch || 1;
+					if (requiredSize.width > imageSize.width * ms
+					 || requiredSize.height > imageSize.height * ms) {
 						var result = Q.handle(
 							[state.onTooSmall, state.onFinish], state, 
 							[requiredSize, imageSize]
