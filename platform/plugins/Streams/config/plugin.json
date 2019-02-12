@@ -54,11 +54,13 @@
 		"images": {
 			"Streams/image": {
 				"sizes": ["40", "50", "80", "200", "400", "x400", "400x"],
-				"defaultSize": "400"
+				"defaultSize": "400",
+				"maxStretch": 2
 			},
 			"Streams/album": {
 				"sizes": ["40", "50", "80", "200", "400"],
-				"defaultSize": "400"
+				"defaultSize": "400",
+				"maxStretch": 2
 			},
 			"Streams/interest": {
 				"sizes": {
@@ -73,7 +75,8 @@
 					"500x333": "500x.png"
 				},
 				"defaultSize": "400",
-				"defaultCacheBust": 1000
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
 			}
 		},
 		"text": {

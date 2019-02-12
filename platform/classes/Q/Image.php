@@ -34,12 +34,14 @@ class Q_Image
 	 * @method getSizes
 	 * @static
 	 * @param {string} $type The type of image
+	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
 	 * @return {array} 
 	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
 	 */
-	static function getSizes($type)
+	static function getSizes($type, &$maxStretch = null)
 	{
-		$sizes = Q_Config::expect("Q", "images", $type, "sizes");
+		$sizes = Q_Config::expect("Q", "images", $type, 'sizes');
+		$maxStretch = Q_Config::expect("Q", "images", $type, 'maxStretch');
 		if (Q::isAssociative($sizes)) {
 			return $sizes;
 		}

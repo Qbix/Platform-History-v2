@@ -79,6 +79,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			si.saveSizeName[size] = size;
 		});
 	}
+	if (!si.maxStretch) {
+		si.maxStretch = Q.Streams.image.maxStretch;
+	}
 	var $te = $(tool.element);
 	$te.addClass('Streams_preview');
 	// let the extending tool's constructor run,
