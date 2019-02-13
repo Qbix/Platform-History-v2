@@ -11739,8 +11739,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
- * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
- * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
+ * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
