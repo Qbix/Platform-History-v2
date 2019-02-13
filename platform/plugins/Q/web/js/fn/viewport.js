@@ -97,8 +97,8 @@ function _Q_viewport(options) {
 	var grab = null;
 	var cur = null;
 	var pos = {
-		left: parseInt(stretcher.css('left')),
-		top: parseInt(stretcher.css('top'))
+		left: parseFloat(stretcher.css('left')),
+		top: parseFloat(stretcher.css('top'))
 	};
 	
 	var s = (initial && initial.scale)
@@ -120,13 +120,20 @@ function _Q_viewport(options) {
 		var touches = e.originalEvent.touches;
 		var touchDistance;
 		if (touches && touches.length > 1) {
+			var tx0 = Q.Pointer.getX(e, 0);
+			var ty0 = Q.Pointer.getY(e, 0);
+			var tx1 = Q.Pointer.getX(e, 1);
+			var ty1 = Q.Pointer.getY(e, 1);
 			touchDistance = Math.sqrt(
-				Math.pow(touches[1].pageX - touches[0].pageX, 2) +
-				Math.pow(touches[1].pageY - touches[0].pageY, 2)
+				Math.pow(tx1 - tx0, 2) +
+				Math.pow(ty1 - ty0, 2)
 			);
 		}
 		
 		function _moveHandler (e) {
+			if (scale.inProgress) {
+				return;
+			}
 			var offset, touches;
 			offset = stretcher.offset();
 			cur = {
@@ -136,13 +143,17 @@ function _Q_viewport(options) {
 			if (!pos) return;
 			if (Q.info.isTouchscreen && (touches = e.originalEvent.touches)) {
 				if (touches.length > 1) {
+					var tx0 = Q.Pointer.getX(e, 0);
+					var ty0 = Q.Pointer.getY(e, 0);
+					var tx1 = Q.Pointer.getX(e, 1);
+					var ty1 = Q.Pointer.getY(e, 1);
 					var newDistance = Math.sqrt(
-						Math.pow(touches[1].pageX - touches[0].pageX, 2) +
-						Math.pow(touches[1].pageY - touches[0].pageY, 2)
+						Math.pow(tx1 - tx0, 2) +
+						Math.pow(ty1 - ty0, 2)
 					);
 					if (touchDistance) {
-						var midX = (touches[0].pageX + touches[1].pageX) / 2;
-						var midY = (touches[0].pageY + touches[1].pageY) / 2;
+						var midX = (tx0 + tx1) / 2;
+						var midY = (ty0 + ty1) / 2;
 						var factor = state.scale * newDistance / touchDistance;
 						scale(factor, midX, midY);
 					}
@@ -191,8 +202,8 @@ function _Q_viewport(options) {
 			y: Q.Pointer.getY(e)
 		};
 		pos = {
-			left: parseInt(stretcher.css('left')),
-			top: parseInt(stretcher.css('top'))
+			left: parseFloat(stretcher.css('left')),
+			top: parseFloat(stretcher.css('top'))
 		};
 		container.on(Q.Pointer.move, _moveHandler);
 		$(window).on(Q.Pointer.end, _endHandler);
@@ -232,8 +243,8 @@ function _Q_viewport(options) {
 		var df = factor / state.scale - 1;
 		var left1, left2, left3, top1, top2, top3, offset, css;
 		var offset = stretcher.offset();
-		left1 = parseInt(stretcher.css('left')) * f;
-		top1 = parseInt(stretcher.css('top')) * f;
+		left1 = parseFloat(stretcher.css('left')) * f;
+		top1 = parseFloat(stretcher.css('top')) * f;
 		left1 -= (x - offset.left) * df;
 		top1 -= (y - offset.top) * df;
 		if (!useZoom) {
