@@ -586,7 +586,7 @@ function _returnFalse() { return false; }
 
 if (root.Element) { // only IE7 and lower, which we don't support, wouldn't have this
 
-if(!document.getElementsByClassName) {
+if (!document.getElementsByClassName) {
 	document.getElementsByClassName = function(className) {
 		return Array.prototype.slice.call(this.querySelectorAll("." + className));
 	};
@@ -986,10 +986,10 @@ function _parseFloat(value) {
 }
 	
 (function() {
-	if(navigator.appVersion.indexOf('MSIE 8') > 0) {
+	if (navigator.appVersion.indexOf('MSIE 8') > 0) {
 		var _slice = Array.prototype.slice;
 		Array.prototype.slice = function() {
-			if(this instanceof Array) {
+			if (this instanceof Array) {
 				return _slice.apply(this, arguments);
 			} else {
 				var result = [];
@@ -1839,7 +1839,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	var p, i = 0;
 	if (context === null) return undefined;
 	context = context || root;
-	if(!parts.length) return context;
+	if (!parts.length) return context;
 	while(context && (p = parts[i++]) !== undefined){
 		try {
 			if (p === '*') {
@@ -5559,7 +5559,7 @@ Q.init = function _Q_init(options) {
 	} else {
 		document.addEventListener("DOMContentLoaded", _domReady);
 		var _timer = setInterval(function() { // for old browsers
-			if(/loaded|complete/.test(document.readyState)) {
+			if (/loaded|complete/.test(document.readyState)) {
 				clearInterval(_timer);
 				_domReady();
 			}
@@ -11933,7 +11933,7 @@ Aup.recorderInit = function (options) {
 		tool.recorder = tool.recorder || new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/recorderWorkerMP3.js")}); // mp3 format encoder
 
 		tool.recorder.addEventListener("streamReady", function(e){
-			if(typeof options.onStreamReady === "function") options.onStreamReady.call();
+			if (typeof options.onStreamReady === "function") options.onStreamReady.call();
 		});
 
 		// when error occur with audio stream
@@ -11942,7 +11942,7 @@ Aup.recorderInit = function (options) {
 		});
 
 		tool.recorder.addEventListener("dataAvailable", function(e){
-			if(typeof options.onDataAvailable === "function") options.onDataAvailable.call(e);
+			if (typeof options.onDataAvailable === "function") options.onDataAvailable.call(e);
 		});
 
 		tool.recorder.initStream();
@@ -12032,19 +12032,19 @@ Q.Audio.speak = function (text, options) {
 			}
 			for(var i = 0; i < av.length; i++){
 				for(var j = 0; j < voicesList.length; j++){
-					if(av[i] == voicesList[j].name){
+					if (av[i] == voicesList[j].name){
 						// founded voice ID from voices list
 						result = j;
 						break;
 					}
 				}
-				if(typeof result === "number") {
+				if (typeof result === "number") {
 					break;
 				}
 			}
-			if(result === null && toggled){
+			if (result === null && toggled){
 				return {error: "Q/Speech: no voice support in this device for this language"};
-			} else if(result === null) {
+			} else if (result === null) {
 				var previousGender = gender;
 				gender = _switchGender(gender);
 				toggled = true;
@@ -12059,7 +12059,7 @@ Q.Audio.speak = function (text, options) {
 			gender = o.gender = "female";
 		}
 		voice = _search();
-		if(typeof voice !== 'number'){
+		if (typeof voice !== 'number'){
 			var voiceError = Q.getObject("error", voice);
 			console.warn(voiceError);
 			return false;
@@ -12121,19 +12121,19 @@ Q.Audio.speak = function (text, options) {
 				}
 				for(var i = 0; i < av.length; i++){
 					for(var j = 0; j < voicesList.length; j++){
-						if(av[i] == voicesList[j].name){
+						if (av[i] == voicesList[j].name){
 							// founded voice ID from voices list
 							result = j;
 							break;
 						}
 					}
-					if(typeof result === "number") {
+					if (typeof result === "number") {
 						break;
 					}
 				}
-				if(result === null && toggled){
+				if (result === null && toggled){
 					return {error: "Q/Speech: no voice support in this device for this language"};
-				} else if(result === null) {
+				} else if (result === null) {
 					var previousGender = gender;
 					gender = _switchGender(gender);
 					toggled = true;
@@ -12148,7 +12148,7 @@ Q.Audio.speak = function (text, options) {
 				gender = o.gender = "female";
 			}
 			voice = _search();
-			if(typeof voice !== 'number'){
+			if (typeof voice !== 'number'){
 				var voiceError = Q.getObject("error", voice);
 				console.warn(voiceError);
 				return false;
@@ -12162,8 +12162,12 @@ Q.Audio.speak = function (text, options) {
 			if (voicesList.length) {
 				_stopLoading();
 				// get available voices list
-				$.getJSON(Q.url("{{Q}}/js/speech/voices.json"), function(data) {
-					if(typeof data !== "object") {
+				Q.request('{{Q}}/js/speech/voices.json', [], function (err, data) {
+					var msg = Q.firstErrorMessage(err, data);
+					if (msg) {
+						throw new Q.Error(msg);
+					}
+					if (typeof data !== "object") {
 						return console.warn("Q/Speech: could not get the available voices list");
 					}
 					availableVoices = data;
@@ -12171,7 +12175,7 @@ Q.Audio.speak = function (text, options) {
 					var msg = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
 					// recognize the voice by gender
 					var recognizedVoice = _recognizeVoice(msg.text, voicesList);
-					if(recognizedVoice === false) {
+					if (recognizedVoice === false) {
 						return;
 					}
 					msg.voice = voicesList[recognizedVoice];
@@ -12934,17 +12938,14 @@ Q.Camera = {
 								}, 0);
 							}
 							var _scan = function(err, text){
-								if(err){
+								if (err){
 									console.warn(err);
 									return;
 								}
-
 								if (audio) {
 									audio.play();
 								}
-
 								Q.handle(callback, null, [text]);
-
 								// run scanner for next code with 5 sec delay
 								setTimeout(function(){
 									QRScanner.scan(_scan);
