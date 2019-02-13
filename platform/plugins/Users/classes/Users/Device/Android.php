@@ -14,9 +14,15 @@ class Users_Device_Android extends Users_Device
 	 */
 	function handlePushNotification($notification, $options = array())
 	{
+		if (is_string($notification['alert'])) {
+			$notification['alert'] = array(
+				'title' => Users::communityName(),
+				'body' => $notification['alert']
+			);
+		}
 		self::$push[] = array(
 			'title' => $notification['alert']['title'],
-			'body' => $notification['alert']['body'],
+			'body' => $notification['alert'],
 			'icon' => empty($notification['icon']) ? '' : $notification['icon'],
 			'click_action' => empty($notification['url']) ? null : $notification['url'],
 			'sound' => empty($notification['sound']) ? 'default' : $notification['sound']

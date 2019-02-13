@@ -4054,7 +4054,8 @@ abstract class Streams extends Base_Streams
 	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
 	 * containing additional querystring fields such as "userId", "expires"
 	 * and "sig" which is a signature truncated to have length specified in config
-	 * Streams/userInviteUrl/signature/length
+	 * Streams/userInviteUrl/signature/length.
+	 * The "sig" may be missing if the Q/internal/secret config is empty.
 	 * @param {string} $userId The id of the user for whom to generate this url
 	 * @param {Streams_Invite} [&$invite=null] You can pass a variable reference here
 	 *  to be filled with the Streams_Invite object.
@@ -4066,7 +4067,9 @@ abstract class Streams extends Base_Streams
 		$fields = array(compact('userId', 'expires'));
 		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
 		$fields = Q_Utils::sign($fields, array('sig'));
-		$fields['sig'] = substr($fields['sig'], 0, $len);
+		if (!empty($fields['sig'])) {
+			$fields['sig'] = substr($fields['sig'], 0, $len);
+		}
 		$streamName = 'Streams/userInviteUrl';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
 		if (!$stream) {

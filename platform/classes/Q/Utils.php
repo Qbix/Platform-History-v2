@@ -53,32 +53,34 @@ class Q_Utils
 	 * @static
 	 * @param {array} $data The array of data
 	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
-	 * @param {string} [$secret] A different secret to use for generating the signature
-	 * @return {array} The data, with the signature added
+	 * @param {string} [$secret] Can pass a different secret to use for generating the signature
+	 *  than the one found in Q/internal/secret config.
+	 * @return {array} The data, with the signature added unless $secret is null
 	 */
 	static function sign($data, $fieldKeys = null, $secret = null) {
 		if (!isset($secret)) {
 			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
-		if (isset($secret)) {
-			if (!$fieldKeys) {
-				$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-				$fieldKeys = array("Q.$sf");
-			}
-			if (is_string($fieldKeys)) {
-				$fieldKeys = array($fieldKeys);
-			}
-			$ref = &$data;
-			for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
-				if (!array_key_exists($fieldKeys[$i], $ref)) {
-					$ref[ $fieldKeys[$i] ] = array();
-				}
-				$ref = &$ref[ $fieldKeys[$i] ];
-			}
-			$ef = end($fieldKeys);
-			unset($ref[$ef]);
-			$ref[$ef] = Q_Utils::signature($data, $secret);
+		if (!isset($secret)) {
+			return $data;
 		}
+		if (!$fieldKeys) {
+			$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
+			$fieldKeys = array("Q.$sf");
+		}
+		if (is_string($fieldKeys)) {
+			$fieldKeys = array($fieldKeys);
+		}
+		$ref = &$data;
+		for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
+			if (!array_key_exists($fieldKeys[$i], $ref)) {
+				$ref[ $fieldKeys[$i] ] = array();
+			}
+			$ref = &$ref[ $fieldKeys[$i] ];
+		}
+		$ef = end($fieldKeys);
+		unset($ref[$ef]);
+		$ref[$ef] = Q_Utils::signature($data, $secret);
 		return $data;
 	}
 	
