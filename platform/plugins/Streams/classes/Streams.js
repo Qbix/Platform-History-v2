@@ -771,7 +771,7 @@ function Streams_request_handler (req, res, next) {
 							user: this,
 							invite: invite,
 							link: invite.url(),
-							app: Q.app,
+							app: Q.app.name,
 							communityId: Users.communityId(),
 							communityName: Users.communityName(),
 							appRootUrl: Q.Config.expect(['Q', 'web', 'appRootUrl'])

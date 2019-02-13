@@ -244,7 +244,7 @@ Streams_Message.post = function (fields, callback)
 Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
 	var instructions = this.getAllInstructions();
 	var fields = {
-		app: Q.app,
+		app: Q.app.name,
 		communityName: Users.communityName(),
 		stream: stream,
 		message: this,
