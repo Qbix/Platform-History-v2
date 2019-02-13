@@ -5810,7 +5810,8 @@ var _supportsPassive;
  *  Whether to use the capture instead of bubble phase. Ignored in IE8 and below.
  *  You can also pass {passive: true} and other such things here.
  * @param {boolean} hookStopPropagation
- *  Whether to override Event.prototype.stopPropagation in order to capture the event when a descendant of the element tries to prevent
+ *  Whether to override Event.prototype.stopPropagation in order to capture the event even
+ *  when a descendant of the element tries to prevent.
  */
 Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandler, useCapture, hookStopPropagation) {
 	useCapture = useCapture || false;
@@ -12463,6 +12464,16 @@ Q.onInit.add(function () {
 	var QtQw = Q.text.Q.words;
 	QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 	QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+	
+	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
+		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
+		function _enableSpeech () {
+			var s = new SpeechSynthesisUtterance();
+			s.text = '';
+			speechSynthesis.speak(s); // enable speech for the site, on any click
+			Q.removeEventListener(document.body, 'click', _enableSpeech);
+		}
+	}
 
 	Q.Text.get('Q/content', function (err, text) {
 		if (!text) {
