@@ -10780,14 +10780,16 @@ Q.Pointer = {
 	 * @static
 	 * @method getX
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
+	 * @param {Integer} [touchIndex=0] The index inside array of touches, if any
 	 * @return {number}
 	 */
-	getX: function(e) {
+	getX: function(e, touchIndex) {
 		var oe = e.originalEvent || e;
+		touchIndex = touchIndex || 0;
 		oe = (oe.touches && oe.touches.length)
-			? oe.touches[0]
+			? oe.touches[touchIndex]
 			: (oe.changedTouches && oe.changedTouches.length
-				? oe.changedTouches[0]
+				? oe.changedTouches[touchIndex]
 				: oe
 			);
 		return Math.max(0, ('pageX' in oe) ? oe.pageX : oe.clientX + Q.Pointer.scrollLeft());
@@ -10797,14 +10799,16 @@ Q.Pointer = {
 	 * @static
 	 * @method getY
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
+	 * @param {Integer} [touchIndex=0] The index inside array of touches, if any
 	 * @return {number}
 	 */
-	getY: function(e) {
+	getY: function(e, touchIndex) {
 		var oe = e.originalEvent || e;
+		touchIndex = touchIndex || 0;
 		oe = (oe.touches && oe.touches.length)
-			? oe.touches[0]
+			? oe.touches[touchIndex]
 			: (oe.changedTouches && oe.changedTouches.length
-				? oe.changedTouches[0]
+				? oe.changedTouches[touchIndex]
 				: oe
 			);
 		return Math.max(0, ('pageY' in oe) ? oe.pageY : oe.clientY + Q.Pointer.scrollTop());

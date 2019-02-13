@@ -426,8 +426,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			                            "Q/imagepicker": function ($dialog) {
 											var w = requiredSize.width / isw;
 											var h = requiredSize.height / ish;
-											var rsw1 = rsw2 = requiredSize.width;
-											var rsh1 = rsh2 = requiredSize.height;
+											var rsw1 = rsw2 = Math.min(requiredSize.width, isw);
+											var rsh1 = rsh2 = Math.min(requiredSize.height, ish);
 											var dw = this.width();
 											var dh = this.height();
 											if (rsw2 != dw) {
@@ -465,12 +465,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					                        requiredSize: requiredSize,
 					                        left: result.left * isw,
 					                        top: result.top * ish,
-					                        width: Math.max(
-												result.width * isw, requiredSize.width
-											),
-					                        height: Math.max(
-												result.height * ish, requiredSize.height
-											)
+					                        width: result.width * isw,
+					                        height: result.height * ish
 					                    };
 					                    if (!_checkRequiredSize(requiredSize, bounds)) {
 					                    	return _revert();
@@ -593,6 +589,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		}
 	
 	   function detectVerticalSquash(img) {
+		   if (Q.info.platform !== 'ios') {
+			   return 1;
+		   }
 	       var iw = img.naturalWidth, ih = img.naturalHeight;
 	       var canvas = document.createElement('canvas');
 	       canvas.width = 1;
