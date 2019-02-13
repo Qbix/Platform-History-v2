@@ -2382,6 +2382,14 @@
 	});
 	Users.onConnected = new Q.Event();
 	Users.onConnectionLost = new Q.Event();
+	
+	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
+		Q.loadNonce(function () {
+			socket.emit('Users/session', Q.sessionId(), Q.clientId(), function () {
+				Q.handle(Users.Socket.onSession);
+			});
+		});
+	}, 'Users');
 
 	/**
 	 * Some replacements for Q.Socket methods, use these instead.
@@ -2400,14 +2408,18 @@
 		 * @param {Function} callback When a connection is made, receives the socket object
 		 */
 		connect: function _Users_Socket_connect(nodeUrl, callback) {
-			Q.Socket.onConnect('Users', nodeUrl).set(function (socket) {
-				Q.loadNonce(function () {
-					socket.emit('Users/session', Q.sessionId(), Q.clientId());
+			var qs = Q.Socket.get('Users', nodeUrl);
+			if (qs && qs.socket &&
+			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
+				_waitForSession.call(qs.socket, 'Users', nodeUrl);
+			}
+			Q.Socket.connect('Users', nodeUrl, _waitForSession);
+			function _waitForSession() {
+				var t = this, a = arguments;
+				Users.Socket.onSession.addOnce(function (socket, ns, url) {
+					callback && callback(socket, ns, url);
 				});
-			}, 'Users');
-
-			Q.Socket.connect('Users', nodeUrl);
-
+			}
 		},
 
 		/**
@@ -2420,6 +2432,15 @@
 		get: function _Users_Socket_get(url) {
 			return Q.Socket.get('Users', url);
 		},
+		
+		/**
+		 * Returns Q.Event that occurs on some socket event coming from socket.io
+		 * through the Users namespace
+		 * @event onEvent
+		 * @param {String} name the name of the event
+		 * @return {Q.Event}
+		 */
+		onSession: new Q.Event(),
 
 		/**
 		 * Returns Q.Event that occurs on some socket event coming from socket.io
