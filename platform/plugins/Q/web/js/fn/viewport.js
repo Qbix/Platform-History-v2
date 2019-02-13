@@ -164,17 +164,18 @@ function _Q_viewport(options) {
 			} else if (Q.Pointer.which(e) !== Q.Pointer.which.LEFT) {
 				return;
 			}
-			if (!scaling) {
-				var x = Q.Pointer.getX(e);
-				var y = Q.Pointer.getY(e);
-				var newPos = {
-					left: pos.left + (x - grab.x)/f,
-					top: pos.top + (y - grab.y)/f
-				};
-				fixPosition(newPos);
-				stretcher.css(newPos);
-				Q.handle(state.onMove, $this, [state.selection, state.scale]);
+			if (scaling) {
+				return;
 			}
+			var x = Q.Pointer.getX(e);
+			var y = Q.Pointer.getY(e);
+			var newPos = {
+				left: pos.left + (x - grab.x)/f,
+				top: pos.top + (y - grab.y)/f
+			};
+			fixPosition(newPos);
+			stretcher.css(newPos);
+			Q.handle(state.onMove, $this, [state.selection, state.scale]);
 			Q.handle(state.onUpdate, $this, [state.selection, state.scale]);
 		}
 		
