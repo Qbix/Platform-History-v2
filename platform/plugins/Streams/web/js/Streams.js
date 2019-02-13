@@ -5030,7 +5030,11 @@ Q.onInit.add(function _Streams_onInit() {
 			Q.Socket.disconnectAll();
 		} else if (state[0] === false) {
 			Q.Socket.reconnectAll();
-			Streams.refresh();
+			Streams.refresh(null, {
+				messages: true,
+				unlessSocket: true,
+				evenIfNotRetained: true
+			});
 		}
 	}, 'Streams');
 
