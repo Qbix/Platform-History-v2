@@ -2180,9 +2180,7 @@ Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
 	var event = this;
 	return key = event.set(function _setOnce() {
 		handler.apply(this, arguments);
-		setTimeout(function () {
-			event.remove(key);
-		}, 0);
+		event.remove(key);
 	}, key, prepend);
 };
 
@@ -2203,9 +2201,7 @@ Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
 	var event = this;
 	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
-		setTimeout(function () {
-			event.remove(key);
-		}, 0);
+		event.remove(key);
 	}, key, prepend);
 };
 
@@ -2762,13 +2758,13 @@ Pp.on = function _Q_pipe_on(field, callback) {
 /**
  * Adds a callback to the pipe with more flexibility
  * @method add
- * @param requires {Array}
+ * @param {Array} requires
  *  Optional. Pass an array of required field names here.
  *  Alternatively, pass an array of objects, which should be followed by
  *  the name of a Q.Event to wait for.
- * @param maxTimes {number}
+ * @param {number} [maxTimes]
  *  Optional. The maximum number of times the callback should be called.
- * @param callback {Function}
+ * @param {Function} callback
  *  Once all required fields are filled, this function is called every time something is piped.
  *  It is passed four arguments: (params, subjects, field, requires)
  *  If you return false from this function, it will no longer be called for future pipe runs.
@@ -9293,7 +9289,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 	function _connectNS(ns, url, callback, callback2) {
 		// connect to (ns, url)
 		if (!root.io) return;
-		var qs = _qsockets[ns][url];
+		var qs = _qsockets[ns] && _qsockets[ns][url];
 		var o = forceNew ? {
 			forceNew: true
 		} : {};
@@ -11739,8 +11735,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
- * @param {String} [options.ok='OK'] to override confirm dialog 'Ok' button label, e.g. 'Yes'.
- * @param {String} [options.cancel='Cancel'] to override confirm dialog 'Cancel' button label, e.g. 'No'.
+ * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */

@@ -289,6 +289,16 @@ Users.Socket = {
 					}
 				});
 			});
+			client.on('Users/online', function (options, callback) {
+				var ret = {};
+				for (var userId in Users.clients) {
+					ret[userId] = {};
+					for (var clientId in Users.clients[userId]) {
+						ret[userId][clientId] = true;
+					}
+				}
+				callback(Users.clients);
+			});
 			client.on('disconnect', function(){
 				var userId = client.userId;
 				var i;
