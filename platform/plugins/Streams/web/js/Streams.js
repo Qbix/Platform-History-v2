@@ -5024,6 +5024,16 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
+	// disconnect sockets on visibility changed to hide and reconnect on visible
+	Q.onVisibilityChange.set(function (document, state) {
+		if (state[0] === true) {
+			Q.Socket.disconnectAll();
+		} else if (state[0] === false) {
+			Q.Socket.reconnectAll();
+			Streams.refresh();
+		}
+	}, 'Streams');
+
 	/**
 	 * Listen for messages and show them as notices
 	 */
