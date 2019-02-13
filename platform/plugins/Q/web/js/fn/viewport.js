@@ -131,16 +131,17 @@ function _Q_viewport(options) {
 		}
 		
 		function _moveHandler (e) {
-			if (scale.inProgress) {
-				return;
-			}
-			var offset, touches;
+			var offset, touches, scaling;
 			offset = stretcher.offset();
 			cur = {
 				x: Q.Pointer.getX(e),
 				y: Q.Pointer.getY(e)
 			};
-			if (!pos) return;
+			Q.Pointer.cancelClick(e, null, true); // even on the slightest move
+			e.preventDefault();
+			if (!pos) {
+				return;
+			}
 			if (Q.info.isTouchscreen && (touches = e.originalEvent.touches)) {
 				if (touches.length > 1) {
 					var tx0 = Q.Pointer.getX(e, 0);
@@ -156,24 +157,25 @@ function _Q_viewport(options) {
 						var midY = (ty0 + ty1) / 2;
 						var factor = state.scale * newDistance / touchDistance;
 						scale(factor, midX, midY);
+						scaling = true;
 					}
 					touchDistance = newDistance;
 				}
 			} else if (Q.Pointer.which(e) !== Q.Pointer.which.LEFT) {
 				return;
 			}
-			var x = Q.Pointer.getX(e);
-			var y = Q.Pointer.getY(e);
-			var newPos = {
-				left: pos.left + (x - grab.x)/f,
-				top: pos.top + (y - grab.y)/f
-			};
-			fixPosition(newPos);
-			stretcher.css(newPos);
-			Q.Pointer.cancelClick(e, null, true); // even on the slightest move
-			Q.handle(state.onMove, $this, [state.selection, state.scale]);
+			if (!scaling) {
+				var x = Q.Pointer.getX(e);
+				var y = Q.Pointer.getY(e);
+				var newPos = {
+					left: pos.left + (x - grab.x)/f,
+					top: pos.top + (y - grab.y)/f
+				};
+				fixPosition(newPos);
+				stretcher.css(newPos);
+				Q.handle(state.onMove, $this, [state.selection, state.scale]);
+			}
 			Q.handle(state.onUpdate, $this, [state.selection, state.scale]);
-			e.preventDefault();
 		}
 		
 		function _endHandler (e) {
