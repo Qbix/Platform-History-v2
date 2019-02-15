@@ -375,8 +375,6 @@ abstract class Users extends Base_Users
 		$authenticated = false;
 		$emailAddress = null;
 
-		Users::$cache['user'] = $user;
-
 		// Try authenticating the user with the specified platform
 		$externalFrom = Users_ExternalFrom::authenticate($platform, $appId);
 		if (!$externalFrom) {
@@ -538,6 +536,7 @@ abstract class Users extends Base_Users
 		$externalFrom->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
 		Users::$cache['authenticated'] = $authenticated;
+		Users::$cache['user'] = $user;
 
 		if (!empty($imported['email']) and empty($user->emailAddress)) {
 			$emailAddress = $imported['email'];
