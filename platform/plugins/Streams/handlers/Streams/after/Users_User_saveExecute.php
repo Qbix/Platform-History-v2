@@ -39,7 +39,7 @@ function Streams_after_Users_User_saveExecute($params)
 					continue;
 				}
 				Q_Image::save(array(
-					'data' => $image,
+					'data' => $content,
 					'path' => "Q/uploads/Users",
 					'subpath' => Q_Utils::splitId($user->id, 3, '/')."/icon/".time(),
 					'save' => "Users/icon",
