@@ -152,7 +152,7 @@ class Q_Image
 	}
 	
 	/**
-	 * Download an image from pixabay
+	 * Get an image from pixabay search
 	 * @param {string} $keywords Specify some string to search images on pixabay
 	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
 	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
@@ -160,11 +160,7 @@ class Q_Image
 	 */
 	static function pixabay($keywords, $options = array(), $returnFirstImage = false)
 	{
-		$info = Q_Config::get('Q', 'images', 'pixabay', null);
-		if (!$info['key']) {
-			throw new Q_Exception_MissingConfig(array('fieldpath' => 'Q/images/pixabay/key'));
-		}
-		$key = $info['key'];
+		$key = Q_Config::expect('Q', 'images', 'pixabay', 'key');
 		$defaults = array();
 		$options = array_merge($defaults, $options);
 		$optionString = http_build_query($options, '', '&');
@@ -179,30 +175,67 @@ class Q_Image
 			return null;
 		}
 		$webformatUrl = $data['hits'][0]['webformatURL'];
-		$data = @file_get_contents($webformatUrl);
-		return $data;
+		return @file_get_contents($webformatUrl);
 	}
-
+	
 	/**
-	 * Saves an avatar image, in a certain size. Can check gravatar.com for avatar
-	 * @method put
-	 * @static
-	 * @param {string} $filename The name of image file
-	 * @param {string} $hash The md5 hash to build avatar
-	 * @param {integer} [$size=Q_AVATAR_SIZE] Avatar size in pixels
-	 * @param {string} [$type='wavatar'] Type of avatar - one of 'wavatar', 'monster', 'imageid'
-	 * @param {boolean} [$gravatar=false]
-	 * @return {GDImageLink}
-     * @throws {Q_Exception} If GD is not supported
-     * @throws {Q_Exception_WrongValue} If avatar type is not supported
+	 * Get an image from facebook search
+	 * @param {string} $keywords Specify some string to search people on facebook
+	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
+	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
+	 * @return {array} An array of image URLs representing large photos
 	 */
-	static function put($filename, $hash, $size = Q_AVATAR_SIZE, $type = 'wavatar', $gravatar = false) {
-		$result = self::avatar($hash, $size, $type, $gravatar);
-		if ($gravatar) {
-			file_put_contents($filename, $result);
-		} else {
-			imagepng($result, $filename);
+	static function facebook($keywords, $options = array(), $returnFirstImage = false)
+	{
+		$cookie = Q_Config::expect('Q', 'images', 'facebook', 'cookie');
+		$url = 'https://mbasic.facebook.com/search/top/?q='.urlencode($keywords);
+		$html = Q_Utils::get($url, null, true, array("cookie: $cookie"));
+		$pattern = '/\\<img src=\\"([^\\"]*?)\\" class=\\"cf cg/i';
+		$matches = array();
+		preg_match_all($pattern, $html, $matches);
+		$results = array();
+		if (!empty($matches[1])) {
+			foreach ($matches[1] as $src) {
+				$results[] = htmlspecialchars_decode($src);
+			}
 		}
+		if (!$returnFirstImage) {
+			return $results;
+		}
+		return empty($results) ? null : @file_get_contents(reset($results));
+	}
+	
+	/**
+	 * Get an image from google image search
+	 * @param {string} $keywords Specify some string to search people on facebook
+	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
+	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
+	 * @return {array} An array of image URLs representing large photos
+	 */
+	static function google($keywords, $options = array(), $returnFirstImage = false)
+	{
+		$key = Q_Config::expect('Q', 'images', 'google', 'key');
+		$url = 'https://www.googleapis.com/customsearch/v1?'
+		. http_build_query(array(
+			'imgType' => 'face',
+			'searchType' => 'image',
+			'imgSize' => 'medium',
+			'num' => 3,
+			'key' => $key,
+			'q' => $keywords
+		));
+		$json = Q_Utils::get($url);
+		$result = Q::json_decode($json, true);
+		$results = array();
+		if (!empty($results['items'])) {
+			foreach ($results['items'] as $item) {
+				$results[] = $item['link'];
+			}
+		}
+		if (!$returnFirstImage) {
+			return $results;
+		}
+		return empty($results) ? null : @file_get_contents(reset($results));
 	}
 	
 	/**

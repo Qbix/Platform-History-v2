@@ -835,8 +835,9 @@ class Users_User extends Base_Users_User
 		}
 		// Import the user's icon and save it
 		if (empty($this->icon)
-		|| substr($this->icon, 0, 7) === 'default'
-		|| substr($this->icon, 0, 6) === 'future') {
+		or Q::startsWith($this->icon, 'default')
+		or Q::startsWith($this->icon, 'future')) {
+			// Download icon from gravatar or another service
 			$hash = md5(strtolower(trim($identifier)));
 			$icon = array(
 				'40.png' => array('hash' => $hash, 'size' => 40),

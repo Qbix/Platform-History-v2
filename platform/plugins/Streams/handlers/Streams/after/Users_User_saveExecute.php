@@ -25,6 +25,29 @@ function Streams_after_Users_User_saveExecute($params)
 		$firstName = null;
 		$lastName = null;
 	}
+	if ($search = Q_Config::get('Users', 'icon', 'search', array())
+	and !Users::isCustomIcon($user->icon)) {
+		foreach ($search as $service) {
+			try {
+				$content = call_user_func(
+					array('Q_Image', $service), $data['full_name'], array(), true
+				);
+				$image = imagecreatefromstring($content);
+				if (!$image) {
+					continue;
+				}
+				$data = Q_Image::save(array(
+					'data' => $image,
+					'path' => "Q/uploads/Users",
+					'subpath' => Q_Utils::splitId($user->id, 3, '/')."/icon/".time(),
+					'save' => "Users/icon",
+					'skipAccess' => true
+				));
+			} catch (Exception $e) {
+			}
+			break;
+		}
+	}
 	$values = array(
 		'Streams/user/firstName' => $firstName,
 		'Streams/user/lastName' => $lastName
