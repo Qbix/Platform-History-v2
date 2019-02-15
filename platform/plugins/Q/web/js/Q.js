@@ -4318,6 +4318,15 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
 	_beforeRemoveToolHandlers[""].handle.call(this);
 	Q.handle(this.Q.beforeRemove, this, []);
 	
+	// remove immediate children first, and so on recursively
+	var childId, childName;
+	var children = this.children(null, 1)
+	for (childId in children) {
+		for (childName in children[childId]) {
+			children[childId][childName].remove();
+		}
+	}
+	
 	var nn = Q.normalize(this.name);
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
