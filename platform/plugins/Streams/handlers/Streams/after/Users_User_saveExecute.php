@@ -29,14 +29,16 @@ function Streams_after_Users_User_saveExecute($params)
 	and !Users::isCustomIcon($user->icon)) {
 		foreach ($search as $service) {
 			try {
+				$fullName = Streams::$cache['fullName'];
+				$query = $fullName['first'] . ' ' . $fullName['last'];
 				$content = call_user_func(
-					array('Q_Image', $service), $data['full_name'], array(), true
+					array('Q_Image', $service), $query, array(), true
 				);
 				$image = imagecreatefromstring($content);
 				if (!$image) {
 					continue;
 				}
-				$data = Q_Image::save(array(
+				Q_Image::save(array(
 					'data' => $image,
 					'path' => "Q/uploads/Users",
 					'subpath' => Q_Utils::splitId($user->id, 3, '/')."/icon/".time(),
