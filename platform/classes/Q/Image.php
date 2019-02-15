@@ -56,6 +56,31 @@ class Q_Image
 	}
 
 	/**
+	 * Gets an array of "$filename.png" => $url pairs using the
+	 * "Q"/"images"/$type/"sizes" config. These are stored in the config
+	 * for various types of images, so that e.g. clients can't simply
+	 * specify their own sizes.
+	 * Call array_keys() on the returned value to get just an array of sizes.
+	 * @method iconArrayWithUrl
+	 * @static
+	 * @param {string} $url The url of the image to fill the array with.
+	 * @param {string} $type The type of image
+	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
+	 *   with a number from the config, or 1 if nothing is found
+	 * @return {array}
+	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
+	 */
+	static function iconArrayWithUrl($url, $type, &$maxStretch = null)
+	{
+		$sizes = Q_Image::getSizes($type, $maxStretch);
+		$icon = array();
+		foreach ($sizes as $size) {
+			$icon[$size] = $url;
+		}
+		return $icon;
+	}
+
+	/**
 	 * Gets the value of the the "Q"/"images"/$type/"defaultSize" config.
 	 * It should be a key in the "Q"/"images"/$type/"sizes" config array.
 	 * @method getDefaultSize
@@ -221,14 +246,15 @@ class Q_Image
 			'searchType' => 'image',
 			'imgSize' => 'medium',
 			'num' => 3,
+			'cx' => '009593684493750256938:4qicgdisydu',
 			'key' => $key,
 			'q' => $keywords
 		));
 		$json = Q_Utils::get($url);
 		$result = Q::json_decode($json, true);
 		$results = array();
-		if (!empty($results['items'])) {
-			foreach ($results['items'] as $item) {
+		if (!empty($result['items'])) {
+			foreach ($result['items'] as $item) {
 				$results[] = $item['link'];
 			}
 		}
