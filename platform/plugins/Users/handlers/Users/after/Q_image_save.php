@@ -8,7 +8,10 @@ function Users_after_Q_image_save($params, &$return)
 	 * @var string $subpath
 	 * @var Users_User $user
 	 */
-	$user = Users::loggedInUser(true);
+	$user = Q::ifset(Users::$cache, 'user', Users::loggedInUser(false, false));
+	if (!$user) {
+		return;
+	}
 
 	$fullpath = $path.($subpath ? DS.$subpath : '');
 	Q_Utils::normalizePath($fullpath);

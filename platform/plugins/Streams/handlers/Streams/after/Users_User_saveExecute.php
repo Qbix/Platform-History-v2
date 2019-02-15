@@ -25,29 +25,24 @@ function Streams_after_Users_User_saveExecute($params)
 		$firstName = null;
 		$lastName = null;
 	}
-	if ($search = Q_Config::get('Users', 'icon', 'search', array())
+	if (!$user->get('leaveDefaultIcon', false)
+	and $search = Q_Config::get('Users', 'icon', 'search', array())
 	and !Users::isCustomIcon($user->icon)) {
 		foreach ($search as $service) {
 			try {
 				$fullName = Streams::$cache['fullName'];
 				$query = $fullName['first'] . ' ' . $fullName['last'];
-				$content = call_user_func(
-					array('Q_Image', $service), $query, array(), true
+				$results = call_user_func(
+					array('Q_Image', $service), $query, array(), false
 				);
-				$image = imagecreatefromstring($content);
-				if (!$image) {
-					continue;
+				if ($src = reset($results)) {
+					$icon = Q_Image::iconArrayWithUrl($src, 'Users/icon');
+					Users::importIcon($user, $icon);
+					$user->save();
+					break;
 				}
-				Q_Image::save(array(
-					'data' => $content,
-					'path' => "Q/uploads/Users",
-					'subpath' => Q_Utils::splitId($user->id, 3, '/')."/icon/".time(),
-					'save' => "Users/icon",
-					'skipAccess' => true
-				));
 			} catch (Exception $e) {
 			}
-			break;
 		}
 	}
 	$values = array(

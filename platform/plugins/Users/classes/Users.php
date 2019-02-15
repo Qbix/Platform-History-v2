@@ -375,6 +375,8 @@ abstract class Users extends Base_Users
 		$authenticated = false;
 		$emailAddress = null;
 
+		Users::$cache['user'] = $user;
+
 		// Try authenticating the user with the specified platform
 		$externalFrom = Users_ExternalFrom::authenticate($platform, $appId);
 		if (!$externalFrom) {
@@ -435,7 +437,7 @@ abstract class Users extends Base_Users
 		if (!$retrieved) {
 			$ui = Users::identify($platform, $xid, null);
 			if ($ui) {
-				$user = new Users_User();
+				Users::$cache['user'] = $user = new Users_User();
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
@@ -535,7 +537,6 @@ abstract class Users extends Base_Users
 		}
 		$externalFrom->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
-		Users::$cache['user'] = $user;
 		Users::$cache['authenticated'] = $authenticated;
 
 		if (!empty($imported['email']) and empty($user->emailAddress)) {
@@ -1096,6 +1097,10 @@ abstract class Users extends Base_Users
 				));
 			}
 		}
+		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
+		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
+
+		Users::$cache['user'] = $user;
 
 		if ($username) {
 			if ( ! preg_match('/^[A-Za-z0-9\-_]+$/', $username)) {
@@ -1193,7 +1198,7 @@ abstract class Users extends Base_Users
 					.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'generated';
 			}
 		}
-		if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
+		if (!$leaveDefaultIcon and !Users::isCustomIcon($user->icon)) {
 			self::importIcon($user, $icon, $directory);
 			$user->save();
 		}
@@ -1210,9 +1215,8 @@ abstract class Users extends Base_Users
 		$return = Q::event('Users/register', compact(
 			'username', 'identifier', 'icon', 'user', 'platform', 'options', 'device'
 		), 'after');
-
-		// Shouldn't this be return $return not return $user?
-		return $user;
+		
+		return $return ? $return : $user;
 	}
 
 	/**
@@ -1418,8 +1422,8 @@ abstract class Users extends Base_Users
 	 * @method importIcon
 	 * @static
 	 * @param {array} $user The user for whom the icon should be downloaded
-	 * @param {array} [$urls=array()] Array of urls to download from, or
-	 *   of arrays with keys "hash" and "size"
+	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
+	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
 	 * @return {string} the path to the icon directory
 	 */
@@ -1450,6 +1454,8 @@ abstract class Users extends Base_Users
 		}
 		if ($largestSize) {
 			$largestImage = imagecreatefromstring(file_get_contents($largestUrl));
+			$liw = imagesx($largestImage);
+			$lih = imagesy($largestImage);
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
@@ -1458,7 +1464,9 @@ abstract class Users extends Base_Users
 				$size = $info['filename'];
 				$success = false;
 				if ($largestImage and (string)(int)$size === $size) {
-					if ($size == $largestSize) {
+					if ($size == $largestSize
+					and $liw == $largestSize
+					and $lih == $largestSize) {
 						$image = $largestImage;
 						$success = true;
 					} else {
@@ -1469,7 +1477,7 @@ abstract class Users extends Base_Users
 							0, 0, 
 							0, 0, 
 							$size, $size, 
-							$largestSize, $largestSize
+							$liw, $lih
 						);
 					}
 				}
@@ -1501,7 +1509,7 @@ abstract class Users extends Base_Users
 			} else {
 				$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 				$gravatar = Q_Config::get('Users', 'login', 'gravatar', false);
-				$data = self::avatar($url['hash'], $url['size'], $type, $gravatar);
+				$data = Q_Image::avatar($url['hash'], $url['size'], $type, $gravatar);
 				if ($gravatar) {
 					file_put_contents($filename, $data); // downloaded				
 				} else {

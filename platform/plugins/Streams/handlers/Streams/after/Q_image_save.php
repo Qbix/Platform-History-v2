@@ -2,7 +2,10 @@
 
 function Streams_after_Q_image_save($params)
 {
-	$user = Users::loggedInUser(true);
+	$user = Q::ifset(Users::$cache, 'user', Users::loggedInUser(false, false));
+	if (!$user) {
+		return;
+	}
 	$path = $subpath = $data = $save = null;
 	extract($params, EXTR_OVERWRITE);
 	if (isset(Users::$cache['iconUrlWasChanged'])

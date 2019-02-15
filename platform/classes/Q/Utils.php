@@ -693,7 +693,9 @@ class Q_Utils
 					$headers[] = "Content-length: " . strlen($data);
 				}
 			}
-			$headers = array_merge($headers, $header);
+			if ($header) {
+				$headers = array_merge($headers, $header);
+			}
 			$header = implode("\r\n", $headers);
 		} else {
 			$headers = explode("\r\n", $header);
