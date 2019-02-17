@@ -294,7 +294,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		            }
 		            var result = {};
 		            if ( requiredSize.width && requiredSize.height ) {
-		//              if specified two dimensions - we should remove small size to avoid double reductions
+						// if specified both dimensions - we should remove
+						// smaller size to avoid double reductions
 		                if ( requiredSize.width > requiredSize.height ) {
 		                    requiredSize.height = null;
 		                } else {
