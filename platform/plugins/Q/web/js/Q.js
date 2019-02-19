@@ -9,7 +9,7 @@
 (function _Q_setup(undefined, dontSetGlobals) {
 
 var root = this;
-var $ = root.jQuery;
+var $ = Q.$ = root.jQuery;
 
 // private properties
 var _isReady = false;
@@ -3967,12 +3967,12 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
-	if (root.jQuery) {
+	$ = $ || root.jQuery;
+	if ($) {
 		_onJQuery();
 	}
 	Q.Tool.latestName = n;
 	function _onJQuery() {
-		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
 			var key = n + ' state', args;
 			if (typeof options === 'string') {
@@ -5579,7 +5579,7 @@ Q.init = function _Q_init(options) {
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
-	if (Q.info.urls.updateBeforeInit) {
+	if (Q.info.urls && Q.info.urls.updateBeforeInit) {
 		Q.updateUrls(function () {
 			Q.handle(Q.onInit);
 		});
@@ -9786,7 +9786,7 @@ Q.Animation.playing = {};
 var _Q_Animation_index = 0;
 
 Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
-	var $ = root.jQuery;
+	$ = $ || root.jQuery;
 	if (!$ || $.fn.plugin) {
 		return;
 	}
@@ -13297,7 +13297,7 @@ Q.beforeInit.addOnce(function () {
 		Q.info.udid = _udid;
 		Q.cookie('Q_udid', _udid);
 	}
-	if (Q.info.cookies.indexOf('Q_dpr')) {
+	if (Q.getObject('Q.info.cookies.indexOf') && Q.info.cookies.indexOf('Q_dpr')) {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
 	}
 	// This loads bluebird library to enable Promise for browsers which do not

@@ -260,4 +260,4 @@ function _initScroller(o) {
     };
 }
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);
