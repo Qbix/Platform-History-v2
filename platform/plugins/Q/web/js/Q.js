@@ -9,7 +9,7 @@
 (function _Q_setup(undefined, dontSetGlobals) {
 
 var root = this;
-var $ = root.jQuery;
+var $ = Q.$ = root.jQuery;
 
 // private properties
 var _isReady = false;
@@ -3967,12 +3967,12 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		methods = stateKeys;
 		stateKeys = undefined;
 	}
-	if (root.jQuery) {
+	$ = $ || root.jQuery;
+	if ($) {
 		_onJQuery();
 	}
 	Q.Tool.latestName = n;
 	function _onJQuery() {
-		$ = root.jQuery;
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
 			var key = n + ' state', args;
 			if (typeof options === 'string') {
@@ -9786,7 +9786,7 @@ Q.Animation.playing = {};
 var _Q_Animation_index = 0;
 
 Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
-	var $ = root.jQuery;
+	$ = $ || root.jQuery;
 	if (!$ || $.fn.plugin) {
 		return;
 	}

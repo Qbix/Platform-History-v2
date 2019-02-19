@@ -643,4 +643,4 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	}
 });
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

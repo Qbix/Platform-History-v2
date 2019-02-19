@@ -64,4 +64,4 @@ var p = {
 	currentId: 0
 };
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

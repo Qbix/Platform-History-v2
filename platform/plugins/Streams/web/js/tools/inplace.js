@@ -233,4 +233,4 @@ Q.Tool.define("Streams/inplace", function (options) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

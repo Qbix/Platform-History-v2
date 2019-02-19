@@ -324,4 +324,4 @@ function _Q_viewport(options) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);
