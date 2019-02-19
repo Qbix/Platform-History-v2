@@ -608,4 +608,4 @@ Q.Tool.define({
 	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
 });
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

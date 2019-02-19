@@ -145,4 +145,4 @@ Q.Template.set('Users/avatar/contents', '<{{tag}} class="Users_avatar_name">{{& 
 Q.Template.set('Users/avatar/icon/blank', '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>');
 Q.Template.set('Users/avatar/contents/blank', '<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>');
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);
