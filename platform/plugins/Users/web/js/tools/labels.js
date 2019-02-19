@@ -162,4 +162,4 @@ Q.Template.set('Users/labels', ''
 + '{{/if}}'
 + '</ul>');
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);
