@@ -14,7 +14,8 @@ $params = array(
 	'n::' => 'null::',
 	'f::' => 'format::',
 	'g::' => 'google-format::',
-	'r:' => 'retranslate:'
+	'r:' => 'retranslate:',
+	'l:' => 'locales:'
 );
 $options = getopt(implode('', array_keys($params)), $params);
 $textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
@@ -91,6 +92,8 @@ Options include:
                   slash-separated ("/") set of strings that together form the key of a string,
                   or of an object containing strings, to be translated even if already translated
                   in the destination. 
+				  
+--locales         Use this to indicate the alternative filename to config/Q/locales.json
 
 EOT;
 	echo $help;
