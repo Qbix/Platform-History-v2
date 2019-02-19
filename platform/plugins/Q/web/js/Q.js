@@ -5579,7 +5579,7 @@ Q.init = function _Q_init(options) {
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
-	if (Q.info.urls.updateBeforeInit) {
+	if (Q.info.urls && Q.info.urls.updateBeforeInit) {
 		Q.updateUrls(function () {
 			Q.handle(Q.onInit);
 		});
