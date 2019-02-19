@@ -142,4 +142,4 @@ Q.Template.set('Streams/default/preview/edit',
 	+ '</div></div>'
 );
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

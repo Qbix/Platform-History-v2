@@ -101,4 +101,4 @@ Q.Tool.define("Streams/basic", function(options) {
 }
 );
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);
