@@ -37,4 +37,4 @@ Q.Tool.define("Websites/presentation", function () {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);
