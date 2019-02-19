@@ -1424,7 +1424,7 @@ abstract class Users extends Base_Users
 	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
-	 * @return {string} the path to the icon directory
+	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
 	static function importIcon($user, $urls = array(), $directory = null)
 	{
@@ -1514,6 +1514,9 @@ abstract class Users extends Base_Users
 				} else {
 					imagepng($data, $filename); // locally generated
 				}
+			}
+			if (!file_exists($filename)) {
+				return null;
 			}
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';

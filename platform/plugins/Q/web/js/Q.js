@@ -13297,7 +13297,7 @@ Q.beforeInit.addOnce(function () {
 		Q.info.udid = _udid;
 		Q.cookie('Q_udid', _udid);
 	}
-	if (Q.info.cookies.indexOf('Q_dpr')) {
+	if (Q.getObject('Q.info.cookies.indexOf') && Q.info.cookies.indexOf('Q_dpr')) {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
 	}
 	// This loads bluebird library to enable Promise for browsers which do not
