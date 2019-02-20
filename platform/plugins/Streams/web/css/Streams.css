@@ -663,6 +663,7 @@
 
 .Streams_interest_title,
 .Streams_new_interest_title {
+	display: inline-block;
 	font-size: 17px;
 	white-space: nowrap;
 	padding: 0 3px 0 3px;
