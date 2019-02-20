@@ -131,10 +131,11 @@ abstract class Base_Streams_Access extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Access', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'access');
@@ -145,7 +146,8 @@ abstract class Base_Streams_Access extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Streams');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -177,8 +179,8 @@ abstract class Base_Streams_Access extends Db_Row
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table().$alias);
 		$q->className = 'Streams_Access';
 		return $q;
 	}
@@ -192,8 +194,8 @@ abstract class Base_Streams_Access extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table().$alias);
 		$q->className = 'Streams_Access';
 		return $q;
 	}
@@ -208,8 +210,8 @@ abstract class Base_Streams_Access extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table().$alias, $table_using);
 		$q->className = 'Streams_Access';
 		return $q;
 	}
@@ -224,8 +226,8 @@ abstract class Base_Streams_Access extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table().$alias, $fields);
 		$q->className = 'Streams_Access';
 		return $q;
 	}

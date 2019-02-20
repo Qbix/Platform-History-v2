@@ -73,10 +73,6 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
-		if (query === lastQuery) {
-			return;
-		}
-		lastQuery = query;
 
 		switch (event.keyCode) {
 			case 38: // up arrow
@@ -110,6 +106,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				return false;
 			default:
+				if (query === lastQuery) {
+					return;
+				}
+				lastQuery = query;
 				if (event.type === 'keydown') {
 					return;
 				}
