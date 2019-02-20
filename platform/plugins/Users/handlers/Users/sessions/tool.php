@@ -25,7 +25,7 @@ function Users_sessions_tool($options)
 	Q_Response::setToolOptions($options);
 
 	$sessions = Users_Session::select("us.*, ud.deviceId, ud.platform, ud.version, ud.formFactor", "us")
-		->join(Users_Device::table().' ud', array(
+		->join(Users_Device::table(true, 'ud'), array(
 			'us.userId'=>'ud.userId', 'us.id'=>'ud.sessionId'
 		), "LEFT")
 		->where(array(
