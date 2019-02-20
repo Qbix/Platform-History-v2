@@ -60,7 +60,7 @@ class Users_Device extends Base_Users_Device
 		}
 		$sessionId = isset($device['sessionId']) ? $device['sessionId'] : Q_Session::id();
 		$user = Users::fetch($userId);
-		$liu = Q::loggedInUser();
+		$liu = Q_Users::loggedInUser();
 		$info = array(
 			'sessionId' => $sessionId,
 			'userId' => $userId,
