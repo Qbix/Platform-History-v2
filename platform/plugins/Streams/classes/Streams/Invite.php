@@ -41,8 +41,7 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @param {string} $publisherId
 	 * @param {string|array|Db_Expression} $streamName
 	 * @param {string|array|Db_Expression} $userId
-	 * @return {array|Streams_Invite|null} an array of Streams_Invite objects,
-	 *  or if $streamName and $userId are strings, just returns Streams_Invite or null.
+	 * @return {array} an array of Streams_Invite objects
 	 */
 	static function forStream($publisherId, $streamName, $userId = null)
 	{
@@ -53,14 +52,9 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 			$userId = $user->id;
 		}
-		$rows = Streams_Invite::select()->where(
+		return Streams_Invite::select()->where(
 			compact('publisherId', 'streamName', 'userId')
 		)->fetchDbRows();
-		if (!is_string($streamName) || !is_string($userId)) {
-			return $rows;
-		}
-		$row = reset($rows);
-		return $row ? $row : null;
 	}
 	
 	/**
@@ -91,9 +85,10 @@ class Streams_Invite extends Base_Streams_Invite
 		if ($stream->participant()) {
 			return false;
 		}
-		$invite = Streams_Invite::forStream($stream->publisherId, $stream->name, $userId);
+		$invites = Streams_Invite::forStream($stream->publisherId, $stream->name, $userId);
+		$invite = reset($invites); // for now just take the first one you find
 		if (!$invite or $invite->state !== 'pending') {
-			return false;
+			continue;
 		}
 		$defaultHtml = array("Streams/content", array("invite", "notice", "html"));
 		$html = Q::ifset($options, 'notice', 'html', null, $defaultHtml);
