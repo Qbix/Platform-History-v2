@@ -122,6 +122,7 @@
 					"participatingCount",
 					"leftCount"
 				],
+				"admins": ["Users/owners", "Users/admins"],
 				"invite": {
 					"dialog": {
 						"templateName": "Streams/invite"
