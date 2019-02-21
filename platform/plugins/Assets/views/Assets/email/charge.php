@@ -6,6 +6,6 @@
 	by <?php echo Q_Html::text($publisher->displayName()) ?>
 </p>
 
-<p>
-	See all subscriptions for <?php echo Q_Html::a($link, Q_Html::text($publisher->displayName())) ?>
+<p style="display: none">
+	See all charges for <?php echo Q_Html::a($link, Q_Html::text($publisher->displayName())) ?>
 </p>

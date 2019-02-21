@@ -589,7 +589,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::canCreateCommunities function.
+	 *  For internal use only. Used by Streams::canCreateStreamType function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -794,9 +794,9 @@ abstract class Streams extends Base_Streams
 	}
 	
 	/**
-	 * Calculates whether a given user is authorized by a specific publisher
-	 * to create a particular type of stream.
-	 * @method canCreateCommunities
+	 * Calculates whether a given user is authorized by a given publisher
+	 * to create a type of stream.
+	 * @method canCreateStreamType
 	 * @static
 	 * @param {string} $userId The user who would be creating the stream.
 	 * @param {string} $publisherId The id of the user who would be publishing the stream.
@@ -813,7 +813,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream|boolean} Returns a stream template the user must use,
 	 *  otherwise a boolean true/false to indicate a yes or no regardless of template.
 	 */
-	static function canCreateCommunities(
+	static function canCreateStreamType(
 		$userId,
 		$publisherId,
 		$streamType,
@@ -953,7 +953,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($stream->type)) {
 			$stream->type = $type;
 		}
-		$authorized = self::canCreateCommunities(
+		$authorized = self::canCreateStreamType(
 			$asUserId, $publisherId, $stream->type, $relate
 		);
 		if (!$authorized and !$skipAccess) {
@@ -3451,6 +3451,7 @@ abstract class Streams extends Base_Streams
 			$result = Q_Utils::queryInternal('Q/node', $params);
 		} catch (Exception $e) {
 			// just suppress it
+			$result = null;
 		}
 
 		$return = array(
@@ -3956,13 +3957,14 @@ abstract class Streams extends Base_Streams
 	 * Use this function to save a template for a specific stream type and publisher.
 	 * @method saveTemplate
 	 * @static
-	 * @param {string} $type
+	 * @param {string} $streamType
 	 * @param {string} $publisherId=''
 	 * @param {array} [$overrides=array()]
 	 * @param {array} [$overrides.readLevel]
 	 * @param {array} [$overrides.writeLevel]
 	 * @param {array} [$overrides.adminLevel]
-	 * @param {array} [$accessLabels=array()] Pass labels for which to save access rows
+	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
+	 *  Otherwise tries to look in Streams/types/$streamType/admins
 	 * @param {array} [$accessLevels=array('max','max','max')]
 	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
 	 *  (can include strings or numbers, including -1 to not affect the type of access)
@@ -3972,9 +3974,12 @@ abstract class Streams extends Base_Streams
 		$streamType,
 		$publisherId='',
 		$overrides = array(),
-		$accessLabels = array(),
+		$accessLabels = null,
 		$accessLevels = array(40, 40, 40))
 	{
+		if (!isset($accessLabels)) {
+			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
+		}
 		$defaults = Streams_Stream::getConfigField($type, 'defaults', Streams_Stream::$DEFAULTS);
 		$templateName = $streamType . '/';
 		$template = new Streams_Stream();
@@ -3993,6 +3998,43 @@ abstract class Streams extends Base_Streams
 			$access = new Streams_Access();
 			$access->publisherId = $publisherId;
 			$access->streamName = $templateName;
+			$access->ofContactLabel = $label;
+			$access->retrieve();
+			$access->readLevel = $numeric = Streams_Stream::numericReadLevel($accessLevels[0]);
+			$access->writeLevel = Streams_Stream::numericWriteLevel($accessLevels[1]);
+			$access->adminLevel = Streams_Stream::numericAdminLevel($accessLevels[2]);
+			$access->save();
+		}
+		return $template;
+	}
+	
+	/**
+	 * Use this function to save mutable access for a specific stream type and publisher.
+	 * @method saveMutable
+	 * @static
+	 * @param {string} $streamType
+	 * @param {string} $publisherId=''
+	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
+	 *    Otherwise we try to look in Streams/types/$streamType/admins
+	 * @param {array} [$accessLevels=array('max','max','max')]
+	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
+	 *  (can include strings or numbers, including -1 to not affect the type of access)
+	 * @return {Streams_Stream} The template stream
+	 */
+	static function saveMutable(
+		$streamType,
+		$publisherId='',
+		$accessLabels = null,
+		$accessLevels = array(40, 40, 40))
+	{
+		if (!isset($accessLabels)) {
+			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
+		}
+		foreach ($accessLabels as $label) {
+			$label = Q::interpolate($label, array('app' => Q::app()));
+			$access = new Streams_Access();
+			$access->publisherId = $publisherId;
+			$access->streamName = $streamType . '*';
 			$access->ofContactLabel = $label;
 			$access->retrieve();
 			$access->readLevel = $numeric = Streams_Stream::numericReadLevel($accessLevels[0]);
