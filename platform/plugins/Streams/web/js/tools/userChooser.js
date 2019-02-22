@@ -15,7 +15,8 @@
  *       parameters when a user is chosen
  *   @param {Number} [options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
- *   @param {Object} [options.exclude] hash of {userId: true}, 
+ *   @param {bool} [options.isCommunity=false] If true, search communities instead regular users
+ *   @param {Object} [options.exclude] hash of {userId: true},
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.
  */
@@ -147,6 +148,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					continue;
 				}
 
+				if ((tool.state.isCommunity && !Q.Users.isCommunityId(k)) || (!tool.state.isCommunity && Q.Users.isCommunityId(k))) {
+					continue;
+				}
+
 				var result = $('<a class="Q_selectable" style="display: block;" />').append(
 					$('<img style="vertical-align: middle; width: 40px; height: 40px;" />')
 					.attr('src', Q.plugins.Users.iconUrl(avatars[k].icon, 40))
@@ -187,6 +192,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 {
 	onChoose: new Q.Event(),
 	delay: 500,
+	isCommunity: false,
 	exclude: {}
 },
 
