@@ -83,6 +83,10 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 		language: options.language,
 		source: true
 	}) : '';
+
+	// some mailers incorrectly display encoded html chars in subject
+	subject = subject.decodeHTML();
+
 	var body = Q.view(view, fields, {
 		language: options.language,
 		source: options.isSource
@@ -176,4 +180,15 @@ Users_Email.prototype.sendMessage = function(subject, view, fields, options, cal
 	Users.Email.sendMessage(this.address, subject, view, fields, options, callback);
 };
 
+/**
+ * Convert HTML Character Entities to regular text
+ * @method decodeHTML
+ */
+String.prototype.decodeHTML = function() {
+	return this.replace(/&(#(?:x[0-9a-f]+|\d+)|[a-z]+);?/gi, function($0, $1) {
+		if ($1[0] === "#") {
+			return String.fromCharCode($1[1].toLowerCase() === "x" ? parseInt($1.substr(2), 16)  : parseInt($1.substr(1), 10));
+		}
+	});
+};
 module.exports = Users_Email;
