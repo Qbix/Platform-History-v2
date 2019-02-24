@@ -238,7 +238,7 @@ Q.Tool.define("Q/columns", function(options) {
 			titleSlot = $ts[0];
 			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
-			$controls = $('<h2 class="Q_controls_slot"></h2>');
+			$controls = $('<div class="Q_controls_slot"></div>');
 			controlsSlot = $controls[0];
 			state.container = tool.$('.Q_columns_container')[0];
 			$div.append($title, columnSlot, controlsSlot)
