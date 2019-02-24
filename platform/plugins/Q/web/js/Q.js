@@ -4813,7 +4813,7 @@ Q.Links = {
 			});
 			mobileNumbers = (ios ? '/open?addresses=' : '') + temp.join(',');
 		}
-		var url = "sms:" + mobileNumbers;
+		var url = "sms:" + (mobileNumbers || (ios ? '%20' : ''));
 		var char = ios ? '&' : '?';
 		return url + char + 'body=' + encodeURIComponent(body);
 	},
