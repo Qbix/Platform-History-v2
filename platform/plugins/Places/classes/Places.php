@@ -250,6 +250,7 @@ abstract class Places extends Base_Places
 	
 	/**
 	 * Obtain a polyline from a route
+	 * @method polyline
 	 * @param {array} $route the route
 	 * @param {string} $platform the platform which produced the route
 	 * @return {array} An array of arrays of (x" => $latitude, "y" => $longitude)
@@ -318,6 +319,7 @@ abstract class Places extends Base_Places
 	/**
 	 * Call this function to quantize a (latitude, longitude) pair to grid of quantized
 	 * (latitude, longitude) pairs which are spaced at most $meters apart.
+	 * @method quantize
 	 * @param {double} $latitude The latitude of the coordinates to search around
 	 * @param {double} $longitude The longitude of the coordinates to search around
 	 * @param {double} $meters The radius, in meters, around this location.
@@ -340,6 +342,7 @@ abstract class Places extends Base_Places
 	/**
 	 * A callback function used to sort the area filenames
 	 * when displaying invitations for the "areas" batch
+	 * @method sortAreaFilenames
 	 * @param $filename1
 	 * @param $filename2
 	 */
@@ -367,6 +370,7 @@ abstract class Places extends Base_Places
 	/**
 	 * Set the user's location from a "Places/location" stream, or any stream
 	 * that has the attributes "latitude", "longitude" and possibly "timezone"
+	 * @method setUserLocation
 	 * @param {Streams_Stream} $locationStream
 	 * @param {boolean} [$onlyIfNotSet=false] If true, proceeds only if the user
 	 *   location stream's latitude and longitude were not already set.
@@ -403,5 +407,31 @@ abstract class Places extends Base_Places
 		));
 		$userLocationStream->save();
 		return true;
+	}
+	/**
+	 * Get time zone related to lat, lng
+	 * @method timezone
+	 * @param {string} $latitude
+	 * @param {string} $longitude
+	 * @throws Exception
+	 * @return {array} google response
+	 */
+	static function timezone($latitude, $longitude)
+	{
+		$key = Q_Config::expect('Places', 'google', 'keys', 'server');
+		$location = "$latitude,$longitude";
+		$timestamp = time();
+		$query = http_build_query(compact('key', 'location', 'timestamp'));
+		$url = "https://maps.googleapis.com/maps/api/timezone/json?$query";
+		$json = self::getRemoteContents($url);
+		$response = json_decode($json, true);
+
+		if ($response['status'] != 'OK') {
+			$errorMessage = "Error with request google timezone api: ";
+			Q::log($errorMessage.$json, 'error');
+			throw new Exception($errorMessage.$response['status']);
+		}
+
+		return $response;
 	}
 };
