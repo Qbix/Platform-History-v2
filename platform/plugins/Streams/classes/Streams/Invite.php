@@ -88,7 +88,7 @@ class Streams_Invite extends Base_Streams_Invite
 		$invites = Streams_Invite::forStream($stream->publisherId, $stream->name, $userId);
 		$invite = reset($invites); // for now just take the first one you find
 		if (!$invite or $invite->state !== 'pending') {
-			continue;
+			return false;
 		}
 		$defaultHtml = array("Streams/content", array("invite", "notice", "html"));
 		$html = Q::ifset($options, 'notice', 'html', null, $defaultHtml);
