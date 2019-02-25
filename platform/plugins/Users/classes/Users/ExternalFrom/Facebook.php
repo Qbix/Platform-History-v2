@@ -146,7 +146,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 			$height = $height ? $height : $width;
 			$icon[$size.$suffix] = "https://graph.facebook.com/"
 				. $this->xid
-				. "/picture?width=$size&height=$size";
+				. "/picture?width=$width&height=$width";
 		}
 		return $icon;
 	}
