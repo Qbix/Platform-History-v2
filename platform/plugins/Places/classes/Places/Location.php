@@ -159,7 +159,7 @@ class Places_Location
 			$area = Streams::create($asUserId, $publisherId, 'Places/area',
 				compact('name', 'title', 'skipAccess', 'attributes')
 			);
-			$area->relateTo($location, 'Places/area', $asUserId, $options);
+			$area->relateTo($location, 'Places/areas', $asUserId, $options);
 			if ($floorName) {
 				$name = $floorName;
 				$title = $location->title." floor $floor";
