@@ -1,7 +1,8 @@
 {
 	"actions": {
 		"LogIn": "log in",
-		"LogOut": "log out"
+		"LogOut": "log out",
+		"Test": "Test"
 	},
 	"activate": {
 		"SetAsPrimary": "Set {{1}} as my primary {{2}}",
