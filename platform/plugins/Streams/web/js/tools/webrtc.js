@@ -1,30 +1,13 @@
 (function ($, window, undefined) {
     Streams = Q.Streams;
-    var roomStream;
     /**
      * Streams/webrtc tool.
-     * Put the description here
-     * @module First
-     * @class First photo
+     * Users can chat with each other via WebRTC using Twilio or raw streams
+     * @module Streams
+     * @class Streams webrtc
      * @constructor
      * @param {Object} options
      *  Hash of possible options
-     * @param {Boolean} [options.editable]
-     *  If the user can edit the photo
-     * @param {Object} [options.editable]
-     *  Options for Q/imagepicker
-     * @param {Boolean} [options.showFile]
-     *  Optional. Blabla.
-     * @param {String} [options.throbber]
-     *  The url of the "loading" image
-     * @param {Object} [options.templates]
-     *  Information for various templates
-     * @param {Object} [options.onRefresh]
-     *  Tool refreshed event
-     * @param {Q.Event} [options.onCreate]
-     *  New photo created event
-     * @param {Object} [options.onUpdate]
-     *  Existing photo updated event
      */
     Q.Tool.define("Streams/webrtc", function(options) {
 
@@ -487,7 +470,6 @@
                         divTop = divTop.replace('px','');
                         divLeft = divLeft.replace('px','');
                         diffX = posX - divLeft, diffY = posY - divTop;
-                        console.log('aaaa')
                         if(tool.isMobile)
                             document.addEventListener('touchmove', drag);
                         else document.addEventListener('mousemove', drag);
