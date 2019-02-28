@@ -1307,26 +1307,20 @@
 			}
 			var $img = $('<img />').attr('src', src)
 				.attr('title', Q.text.Streams.login.picTooltip);
-			var td, table = $('<table />').append(
-				$('<tr />').append(
-					$('<td class="Users_login_picture" />').append($img)
-				).append(
-					td = $('<td class="Users_login_username_block" />').append(
-						$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
-					).append(
-						$('<input id="Users_login_username" name="username" type="text" class="text" />')
-							.attr('maxlength', Q.text.Users.login.maxlengths.username)
-							.attr('placeholder', Q.text.Users.login.placeholders.username)
-							.val(username)
-							.width($('#Users_login_identifier').width() - 30)
-					)
-				)
+			var $formContent = $('<div class="Users_login_username_block" />').append(
+				$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
+			).append(
+				$('<input id="Users_login_username" name="username" type="text" class="text" />')
+					.attr('maxlength', Q.text.Users.login.maxlengths.username)
+					.attr('placeholder', Q.text.Users.login.placeholders.username)
+					.val(username)
+					.width($('#Users_login_identifier').width() - 30)
 			);
 			var register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
 				.data('form-type', 'register')
 				//.append($('<div class="Users_login_appear" />'))
-				.append(table)
+				.append($formContent)
 				.append($('<input type="hidden" name="identifier" />').val(identifier))
 				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
 				.append($('<input type="hidden" name="icon[50.png]" />').val(src50))
@@ -1356,7 +1350,7 @@
 			}
 
 			if (json.termsLabel) {
-				td.append(
+				$formContent.append(
 					$('<div />').attr("id", "Users_register_terms")
 						.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 						.append($('<label for="Users_agree" />').html(json.termsLabel))

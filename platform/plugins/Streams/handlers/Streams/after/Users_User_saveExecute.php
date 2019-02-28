@@ -25,7 +25,6 @@ function Streams_after_Users_User_saveExecute($params)
 		$firstName = null;
 		$lastName = null;
 	}
-	// TODO: move the below to the Users plugin
 	if (!$user->get('leaveDefaultIcon', false)
 	and $search = Q_Config::get('Users', 'icon', 'search', array())
 	and !Users::isCustomIcon($user->icon)) {
