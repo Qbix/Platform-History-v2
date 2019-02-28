@@ -1023,6 +1023,106 @@ abstract class Streams extends Base_Streams
 
 		return $stream;
 	}
+	
+	/**
+	 * Creates multiple streams in the system. Skips access control checks.
+	 * @method createStreams
+	 * @static
+	 * @param {string} $asUserId The user who is attempting to create the stream.
+	 * @param {string} $publisherId The id of the user to publish the streams.
+	 * @param {array} $fields Each stream's fields are a sub-array in this array
+	 * @return {array} Returns Streams_Stream objects representing streams
+	 *  that were created, but really they were saved using insertManyAndExecute.
+	 * @throws {Users_Exception_NotAuthorized}
+	 */
+	static function createStreams(
+		$asUserId,
+		$publisherId, 
+		$fields = array())
+	{
+		if (!isset($publisherId)) {
+			foreach ($fields as $f) {
+				if (!isset($f['publisherId'])) {
+					throw new Q_Exception_RequiredField(array('name' => 'publisherId'));
+				}
+				$pid = $f['publisherId'];
+				$arr[$pid] = $f;
+			}
+			$ret = array();
+			foreach ($arr as $pid => $f) {
+				$ret[$pid] = array_merge($ret, Streams::createStreams($asUserId, $pid, $f));
+			}
+			return $ret;
+		}
+
+		$streamFieldNames = Base_Streams_Stream::fieldNames();
+		
+		$toCreate = array();
+		$p = Streams::userStreamsTree();
+		$streams = array();
+		foreach ($fields as $k => &$f) {
+			if (!isset($f['type'])) {
+				throw new Q_Exception_RequiredField(array('name' => 'type'));
+			}
+			$a = isset($f['attributes']) ? $f['attributes'] : '';
+			if (is_array($a)) {
+				$a = Q::json_encode($a);;
+			}
+			$f['attributes'] = $a;
+			$a = isset($f['inheritAccess']) ? $f['inheritAccess'] : '';
+			if (is_array($a)) {
+				$a = Q::json_encode($a);
+				$f['inheritAccess'] = $a;
+			}
+			$tc = compact('publisherId');
+			if ($name = isset($f['name']) ? $f['name'] : null) {
+				if ($info = $p->get($name, array())) {
+					foreach ($streamFieldNames as $fn) {
+						if (isset($info[$fn])) {
+							$tc[$fn] = $info[$fn];
+						}
+					}
+				}
+			}
+
+			// extend with any config defaults for this stream type
+			$fieldNames = Streams::getExtendFieldNames($f['type']);
+			$fieldNames[] = 'name';
+			foreach ($fieldNames as $fn) {
+				if (isset($f[$fn])) {
+					$tc[$fn] = $f[$fn];
+				}
+			}
+			
+			// simulate calls to beforeSave, to update avatars and do other stuff
+			$s = new Streams_Stream($tc);
+			$s->beforeSave($tc);
+			$toCreate[$s->name] = $s->fields;
+			$streams[$s->name] = $s;
+			
+			$messages[$publisherId][$s->name][] = array(
+				'type' => 'Streams/created',
+				'content' => '',
+				'instructions' => $s->fields
+			);
+		}
+
+		
+
+		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
+		Streams_Message::postMessages($asUserId, $messages, true);
+
+		foreach ($streams as $name => $s) {
+			$modifiedFields = $s->fields;
+			foreach ($modifiedFields as $fn => $wasModified) {
+				$s->notModified($fn);
+			}
+			$s->wasRetrieved(true);
+			$s->afterSaveExecute(null, null, $modifiedFields, $s->getPKValue());
+		}
+		
+		return $streams;
+	}
 
 	/**
 	 * Takes some information out of an existing set of streams
@@ -2821,17 +2921,15 @@ abstract class Streams extends Base_Streams
 			$untilTime = $db->toDateTime($options['untilTime']);
 			$shouldUpdate = true;
 		}
-		$subscriptions = array();
-		$rows = Streams_Subscription::select()
+		$subscriptions = Streams_Subscription::select('*', 'a')
 		->where(array(
-			'publisherId' => $publisherId,
-			'streamName' => $streamNames,
-			'ofUserId' => $asUserId
-		))->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($rows as $row) {
-			$sn = $row['streamName'];
-			$subscriptions[$sn] = $row;
-		}
+				'a.publisherId' => $publisherId,
+				'a.streamName' => $streamNames,
+				'a.ofUserId' => $asUserId
+		))->join(Streams_Stream::table(true, 'b'), array(
+			'a.publisherId' => 'b.publisherId',
+			'a.streamName' => 'b.name'
+		))->fetchDbRows(null, '', 'streamName');
 		$messages = array();
 		$streamNamesMissing = array();
 		$streamNamesUpdate = array();
@@ -2858,8 +2956,8 @@ abstract class Streams extends Base_Streams
 		if ($streamNamesMissing) {
 			$types = array();
 			foreach ($streamNamesMissing as $sn) {
-				$stream = $streams2[$sn];
-				$types[$stream->type][] = $sn;
+				$s = $subscriptions[$sn];
+				$types[$s->type][] = $sn;
 			}
 			$subscriptionRows = array();
 			$ruleRows = array();
@@ -4042,7 +4140,7 @@ abstract class Streams extends Base_Streams
 			$access->adminLevel = Streams_Stream::numericAdminLevel($accessLevels[2]);
 			$access->save();
 		}
-		return $template;
+		return $access;
 	}
 	
 	static function getExtendFieldNames($type, $asOwner = true)
