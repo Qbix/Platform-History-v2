@@ -1080,6 +1080,7 @@ class Q
 	
 	/**
 	 * @method take
+	 * @static
 	 * @param {array|object} $source An array or object from which to take things.
 	 * @param {array} $fields An array of fields to take or an associative array of fieldname => default pairs
 	 * @param {array|object} &$dest Optional reference to an array or object in which we will set values.
