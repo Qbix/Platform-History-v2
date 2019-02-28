@@ -4514,26 +4514,19 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			src40 = src50 = src = src80 = priv.registerInfo.pic;
 		}
 	}
-	var $img = $('<img />').attr('src', src)
-		.attr('title', Q.text.Streams.login.picTooltip);
-	var $td = $('<td class="Streams_login_fullname_block" />');
+	var $formContent = $('<div class="Streams_login_fullname_block" />');
 	if (Q.text.Streams.login.prompt) {
-		$td.append(
+		$formContent.append(
 			$('<label for="Streams_login_fullname" />').html(Q.text.Streams.login.prompt),
 			'<br>'
 		)
 	}
-	$td.append(
+	$formContent.append(
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
 		.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
 		.attr('placeholder', Q.text.Users.login.placeholders.fullName)
 		.val(firstName+(lastName ? ' ' : '')+lastName)
 	)
-	var table = $('<table />').append(
-		$('<tr />').append(
-			$('<td class="Streams_login_picture" />').append($img)
-		).append($td)
-	);
 	var register_form = $('<form method="post" class="Users_register_form" />')
 	.attr('action', Q.action("Streams/register"))
 	.data('form-type', 'register')
@@ -4549,7 +4542,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		e.preventDefault(); // prevent automatic submit on click
 	});
 
-	register_form.append(table)
+	register_form.append($formContent)
 	.append($('<input type="hidden" name="identifier" />').val(identifier))
 	.append($('<input type="hidden" name="icon" />'))
 	.append($('<input type="hidden" name="Q.method" />').val('post'))
@@ -4581,7 +4574,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 
 	if (json.termsLabel) {
-		$td.append(
+		$formContent.append(
 			$('<div />').attr("id", "Users_register_terms")
 				.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 				.append($('<label for="Users_agree" />').html(json.termsLabel))

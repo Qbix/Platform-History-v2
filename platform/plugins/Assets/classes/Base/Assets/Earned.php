@@ -135,20 +135,21 @@ abstract class Base_Assets_Earned extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
 		$alias = isset($alias) ? ' '.$alias : '';
-		$q = self::db()->select($fields, self::table().$alias);
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Assets_Earned';
 		return $q;
 	}
@@ -163,7 +164,7 @@ abstract class Base_Assets_Earned extends Db_Row
 	static function update($alias = null)
 	{
 		$alias = isset($alias) ? ' '.$alias : '';
-		$q = self::db()->update(self::table().$alias);
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Assets_Earned';
 		return $q;
 	}
@@ -179,7 +180,7 @@ abstract class Base_Assets_Earned extends Db_Row
 	static function delete($table_using = null, $alias = null)
 	{
 		$alias = isset($alias) ? ' '.$alias : '';
-		$q = self::db()->delete(self::table().$alias, $table_using);
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Assets_Earned';
 		return $q;
 	}
@@ -195,7 +196,7 @@ abstract class Base_Assets_Earned extends Db_Row
 	static function insert($fields = array(), $alias = null)
 	{
 		$alias = isset($alias) ? ' '.$alias : '';
-		$q = self::db()->insert(self::table().$alias, $fields);
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Assets_Earned';
 		return $q;
 	}

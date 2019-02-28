@@ -90,49 +90,50 @@ function Streams_after_Users_User_saveExecute($params)
 	$so = array();
 	$streamsToJoin = array();
 	$streamsToSubscribe = array();
+	$existing = Streams::fetch($user->id, $user->id, $toInsert);
+	$toCreate = array();
 	foreach ($toInsert as $name) {
-		$stream = Streams::fetchOne($user->id, $user->id, $name);
-		if (!$stream) {
+		if (!empty($existing[$name]) and $skipExistingOnInsert) {
+			continue;
 			$stream = new Streams_Stream();
 			$stream->publisherId = $user->id;
 			$stream->name = $name;
 		} else if ($skipExistingOnInsert) {
 			continue;
 		}
-		$stream->type = $p->expect($name, "type");
-		$stream->title = $p->expect($name, "title");
-		if ($userField = $p->get($name, 'userField', null)) {
-			$stream->content = $user->$userField;
-		} else {
-			$stream->content = $p->get($name, "content", ''); // usually empty
-		}
-		$stream->readLevel = $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']);
-		$stream->writeLevel = $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']);
-		$stream->adminLevel = $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel']);
-		if ($name === "Streams/user/icon") {
+		$s = array(
+			'publisherId' => $user->id,
+			'name' => $name,
+			'type' => $p->expect($name, 'type'),
+			'title' => $p->expect($name, 'title'),
+			'content' => ($userField = $p->get($name, 'userField', null))
+				? $user->$userField
+				: $p->get($name, "content", ''), // usually empty
+			'attributes' => $p->get($name, 'attributes', array()),
+			'readLevel' => $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']),
+			'writeLevel' => $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']),
+			'adminLevel' => $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel'])
+		);
+		if ($name === 'Streams/user/icon') {
 			$sizes = Q_Image::getSizes('Users/icon');
 			ksort($sizes);
-			$stream->setAttribute('sizes', $sizes);
-			$stream->icon = $user->icon;
+			$s['attributes']['sizes'] = $sizes;
+			$s['attributes']['icon'] = $user->icon;
 		}
+		$toCreate[$name] = $s;
+		$stream = $existing[$name];
 		if (isset($values[$name])) {
-			$stream->content = $values[$name];
+			$s['content'] = $values[$name];
 		}
-		$stream->save(); // this also inserts avatars
-		$streams[$name] = $stream;
 		if ($so[$name] = $p->get($name, "subscribe", array())) {
-			$streamsToSubscribe[$name] = $stream;
+			$streamsToSubscribe[] = $name;
 		} else {
-			$streamsToJoin[$name] = $stream;
+			$streamsToJoin[] = $name;
 		}
 	}
-	Streams::join($user->id, $user->id, $streamsToJoin, array('skipAccess' => true));
-	foreach ($streamsToSubscribe as $name => $stream) {
-		$stream->subscribe(array_merge($so[$name], array(
-			'userId' => $user->id, 
-			'skipAccess' => true)
-		));
-	}
+	Streams::createStreams($user->id, $user->id, $toCreate);
+	Streams::join($user->id, $user->id, $streamsToJoin);
+	Streams::subscribe($user->id, $user->id, $streamsToSubscribe, array('skipAccess' => true));
 	
 	if ($params['inserted']) {
 		
