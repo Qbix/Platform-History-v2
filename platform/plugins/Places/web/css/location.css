@@ -8,7 +8,7 @@
 }
 .Places_location_tool div[data-location],
 .Places_location_tool .Places_location_preview_tool {
-	padding: 5px 10px;
+	padding: 5px;
 	cursor: pointer;
 	max-width: 100%;
 }
