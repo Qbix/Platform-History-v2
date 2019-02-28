@@ -302,7 +302,7 @@
 #Users_login_usingPlatforms { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: left; }
 #Users_form_passphrase { width: 100%; padding: 2%; }
 #Users_login_username { width: 200px; }
-.Users_login_get_started { text-align: center; }
+.Users_login_get_started { text-align: center; margin-top: 10px; }
 
 #Users_login_passphrase_div { position: relative; }
 #Users_login_passphrase_forgot { display: block; position: absolute; right: 5px; bottom: 10px; color: #888; padding: 4px; }
@@ -332,7 +332,7 @@ a.Users_activation_resend:active {
 #Users_authorize_terms,
 #Users_authorize_terms * { font-size: 14px; }
 #Users_login_dialog #Users_register_terms,
-#Users_login_dialog #Users_register_terms * { font-size: 14px; }
+#Users_login_dialog #Users_register_terms * { font-size: 14px; text-align: center; }
 #Users_authorize_buttons,
 #Users_session_buttons { padding: 10px; }
 #Users_authorize_buttons .Q_button,
@@ -524,4 +524,12 @@ html.Users_loggedIn .Users_whenLoggedOut {
 
 .Q_mobile .Users_status_tool .Users_avatar_tool img {
 	display: block;
+}
+
+#Users_login_step1 {
+	padding-bottom: 0;
+}
+
+#Users_login_step2 {
+	padding-top: 0;
 }
