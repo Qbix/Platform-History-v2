@@ -10902,11 +10902,14 @@ Q.Pointer = {
 	 * @param {Integer} [options.zIndex=99999]
 	 * @param {Boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
+	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
+	 *  function for options you can pass in this object
+	 * @param {String} [options.speak.text] The text to speak.
 	 * @param {String} [options.audio.src] Can be used to play an audio file.
 	 * @param {String} [options.audio.from=0] Number of seconds inside the audio to start playing the audio from. Make sure audio is longer than this.
 	 * @param {String} [options.audio.until] Number of seconds inside the audio to play the audio until. Make sure audio is longer than this.
-	 * @param {String} [options.audio.removeAfterPlaying=false] Whether to remove the audio object after playing
-	 * @param {Integer} [options.show.delay=500] How long to wait after the function call (or after audio file has loaded and starts playing, if one was specified) before showing the hint animation
+	 * @param {Boolean} [options.audio.removeAfterPlaying=false] Whether to remove the audio object after playing
+	 * @param {Integer} [options.show.delay=500] How long to wait after the function call (or after audio file or speech has loaded and starts playing, if one was specified) before showing the hint animation
 	 * @param {Integer} [options.show.initialScale=10] The initial scale of the hint pointer image in the show animation
 	 * @param {Integer} [options.show.duration=500] The duration of the hint show animation
 	 * @param {Function} [options.show.ease=Q.Animation.ease.smooth]
@@ -11037,8 +11040,8 @@ Q.Pointer = {
 				this.play(a.from || 0, a.until, a.removeAfterPlaying);
 				audioEvent.handle();
 			});
-		} else if (a.speak) {
-			Q.Audio.speak(a.speak, Q.extend({}, 10, a, {
+		} else if (options.speak) {
+			Q.Audio.speak(a.speak.text, Q.extend({}, 10, options.speak, {
 				onStart: audioEvent
 			}));
 		} else {
