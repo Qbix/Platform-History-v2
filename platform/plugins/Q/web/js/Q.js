@@ -9146,7 +9146,9 @@ Q.Text = {
 		Q.Text.language = language.toLowerCase();
 		Q.Text.locale = locale && locale.toUpperCase();
 		Q.Text.languageLocaleString = Q.Text.language
-			+ (Q.Text.useLocale ? '-' + Q.Text.locale : '');
+			+ (Q.Text.useLocale && Q.Text.locale ? '-' + Q.Text.locale : '');
+		Q.Text.languageLocale = Q.Text.language
+			+ (Q.Text.locale ? '-' + Q.Text.locale : '');
 	},
 
 	/**
@@ -10900,11 +10902,14 @@ Q.Pointer = {
 	 * @param {Integer} [options.zIndex=99999]
 	 * @param {Boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
+	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
+	 *  function for options you can pass in this object
+	 * @param {String} [options.speak.text] The text to speak.
 	 * @param {String} [options.audio.src] Can be used to play an audio file.
 	 * @param {String} [options.audio.from=0] Number of seconds inside the audio to start playing the audio from. Make sure audio is longer than this.
 	 * @param {String} [options.audio.until] Number of seconds inside the audio to play the audio until. Make sure audio is longer than this.
-	 * @param {String} [options.audio.removeAfterPlaying] Whether to remove the audio object after playing
-	 * @param {Integer} [options.show.delay=500] How long to wait after the function call (or after audio file has loaded and starts playing, if one was specified) before showing the hint animation
+	 * @param {Boolean} [options.audio.removeAfterPlaying=false] Whether to remove the audio object after playing
+	 * @param {Integer} [options.show.delay=500] How long to wait after the function call (or after audio file or speech has loaded and starts playing, if one was specified) before showing the hint animation
 	 * @param {Integer} [options.show.initialScale=10] The initial scale of the hint pointer image in the show animation
 	 * @param {Integer} [options.show.duration=500] The duration of the hint show animation
 	 * @param {Function} [options.show.ease=Q.Animation.ease.smooth]
@@ -11029,13 +11034,17 @@ Q.Pointer = {
 		}
 		var a = options.audio || {};
 		if (a.src) {
-			Q.audio(a.src, function () {
+			Q.Audio.load(a.src, function () {
 				img1.audio = this;
 				this.hint = [targets, options];
 				this.play(a.from || 0, a.until, a.removeAfterPlaying);
 				audioEvent.handle();
 			});
-		} else if (!options.waitForEvents) {
+		} else if (options.speak) {
+			Q.Audio.speak(a.speak.text, Q.extend({}, 10, options.speak, {
+				onStart: audioEvent
+			}));
+		} else {
 			audioEvent.handle();
 		}
 	},
@@ -11836,7 +11845,7 @@ Q.Intl = {
 
 /**
  * Q.Audio objects facilitate audio functionality on various browsers.
- * Please do not create them directly, but use the Q.audio function.
+ * Please do not create them directly, but use the Q.Audio.load function.
  * @class Q.Audio
  * @constructor
  * @param {String} url the url of the audio to load
@@ -11889,11 +11898,34 @@ Aup.onCanPlayThrough = new Q.Event();
 Aup.onEnded = new Q.Event();
 
 /**
+ * Loads an audio file and calls the callback when it's ready to play
+ * @static
+ * @method audio
+ * @param {String} url 
+ * @param {Function} handler A function to run after the audio is ready to play
+ * @param {Object} [options={}] Can be one of the following options
+ * @param {boolean} [options.canPlayThrough=true] Whether to wait until the audio can play all the way through before calling the handler.
+ */
+Q.Audio.load = Q.getter(function _Q_audio(url, handler, options) {
+	url = Q.url(url);
+	var audio = Q.Audio.collection[url]
+		? Q.Audio.collection[url]
+		: new Q.Audio(url);
+	if (options && options.canPlayThrough === false) {
+		audio.onCanPlay.add(handler);
+	} else {
+		audio.onCanPlayThrough.add(handler);
+	}
+}, {
+	cache: Q.Cache.document('Q.audio', 100)
+});
+
+/**
  * @method play
  * Plays the audio as soon as it is available
  * @param {number} [from] The time, in seconds, from which to start.
  * @param {number} [until] The time, in seconds, until which to play.
- * @param {boolean} [removeAfterPlaying]
+ * @param {boolean} [removeAfterPlaying=false]
  */
 Aup.play = function (from, until, removeAfterPlaying) {
 	var t = this;
@@ -11984,65 +12016,71 @@ Q.Audio.pauseAll = function () {
 };
 
 /**
- * Speak text in various browsers
+ * Can call this to preload data about voices, locales, genders, etc.
+ * for common voices, so it can be ready to go when Q.Audio.speak() is called.
+ * @method loadVoices
+ * @static
+ * @param {Function} callback Receives err, data
+ */
+Q.Audio.loadVoices = Q.getter(function (callback) {
+	Q.request('{{Q}}/js/speech/voices.json', [], callback);
+}, {
+	cache: Q.Cache.document('Q.Audio.speak.loadVoices', 1)
+});
+
+/**
+ * Speak text in various browsers.
  * @method speak
- * @param {String} text specifies the text that will be spoken.
+ * @param {String|Array} text Pass the string of text to speak, or an array of
+ *  [textSource, pathArray] to the string loaded with Q.Text.get() 
  * @param {Object} [options] An optional hash of options for Q.Audio.speak:
  * @param {String} [options.gender="female"] the voice in which will be speech the text.
  * @param {Number} [options.rate=1] the speaking rate of the SpeechSynthesizer object, from 0.1 to 1.
  * @param {Number} [options.pitch=1] the speaking pitch of the SpeechSynthesizer object, from 0.1 to 1.9.
  * @param {Number} [options.volume=1] the volume height of speech (0.1 - 1).
- * @param {Number} [options.locale="en-US"] a 4 character code that specifies the language that should be used to synthesize the text.
+ * @param {Number} [options.locale] a 4 character code that specifies the language that should be used to synthesize the text.
+ * @param {Q.Event|function} [options.onStart] This gets called when the speaking has begun
+ * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
  */
 Q.Audio.speak = function (text, options) {
-	// Cordova
-	var TTS = Q.getObject("window.TTS");
-	// browsers
-	var SS = Q.getObject("window.speechSynthesis");
-	var o = Q.extend(
-		{}, Q.Audio.speak.options, 10, options
-	);
+	var TTS = Q.getObject("window.TTS"); // cordova
+	var SS = Q.getObject("window.speechSynthesis"); //browsers
+	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
+	o.locale = o.locale ||  Q.Text.languageLocale;
 	if (typeof text !== "string") {
-		throw new Q.Error("Q/Speech: the text for speech must be a string");
+		throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 	}
-	// recognize the language of text
-	function _isCyrillic(text) {
-		var en = text.match(/[a-z]/ig);
-		var ru = text.match(/[а-я]/ig);
-		if (!en) {
-			return true;
-		} else if (!ru) {
-			return false;
-		} else if (ru.length > en.length) {
-			return true;
-		}
+	if (Q.isArrayLike(text)) {
+		var source = text[0];
+		var pathArray = text[1];
+		Q.Text.get(source, function (err, content) {
+			var text = Q.getObject(pathArray, content);
+			if (text) {
+				_proceed(text)
+			}
+		});
+	} else {
+		_proceed(text);
 	}
-	// stop voice list loading
-	function _stopLoading() {
-		clearInterval(loadingVoices);
-		loadingSeconds = 0;
-	}
-	// recognize the voice by language of text and gender
-	function _recognizeVoice(text, voicesList) {
-		var language = (_isCyrillic(text)) ? "ru-RU" : "en-US"
+	function _chooseVoice(text, voicesList, knownVoices) {
+		var language = o.locale.split('-')[0];
 		var gender = o.gender;
 		var voice = null;
 		var toggled = false;
-
 		function _switchGender(gender) {
 			return (gender == "female") ? "male" : "female"
 		}
-
 		function _search(){
 			var result = null;
-			var av = Q.getObject([language, gender], availableVoices) || [];
+			var av = Q.getObject([o.locale, gender], knownVoices)
+				|| Q.getObject([language, gender], knownVoices)
+				|| [];
 			if (typeof av !== "object" || !av.length){
-				return {error: "Q/Speech: no such available voice"};
+				return {error: "Q.Audio.speak: no such known voice"};
 			}
-			for(var i = 0; i < av.length; i++){
-				for(var j = 0; j < voicesList.length; j++){
+			for (var i = 0; i < av.length; i++){
+				for (var j = 0; j < voicesList.length; j++){
 					if (av[i] == voicesList[j].name){
-						// founded voice ID from voices list
 						result = j;
 						break;
 					}
@@ -12052,18 +12090,17 @@ Q.Audio.speak = function (text, options) {
 				}
 			}
 			if (result === null && toggled){
-				return {error: "Q/Speech: no voice support in this device for this language"};
+				return {error: "Q.Audio.speak: no voice support in this device for this language"};
 			} else if (result === null) {
 				var previousGender = gender;
 				gender = _switchGender(gender);
 				toggled = true;
-				console.info("%cQ/Speech: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
+				console.info("%cQ.Audio.speak: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
 				return _search();
 			} else {
 				return result;
 			}
 		}
-		// if the gender doesn't set manually - set to default
 		if (gender != "male" && gender != "female") {
 			gender = o.gender = "female";
 		}
@@ -12075,132 +12112,48 @@ Q.Audio.speak = function (text, options) {
 		}
 		return voice;
 	}
-	if (TTS) {
-		if (_isCyrillic(text)) {
-			o.locale = "ru-RU";
-		}
-		TTS.speak({
-			text: text,
-			locale: o.locale,
-			rate: o.rate
-		}).then(function () {
-			// Text succesfully spoken
-		}, function (reason) {
-			console.warn("Q/Speech: " + reason);
-		});
-	} else if (SS) {
-		if (SS.speaking) {
-			return;
-		}
-		var availableVoices = null;
-    
-		// recognize the language of text
-		function _isCyrillic(text) {
-			var en = text.match(/[a-z]/ig);
-			var ru = text.match(/[а-я]/ig);
-			if (!en) {
-				return true;
-			} else if (!ru) {
-				return false;
-			} else if (ru.length > en.length) {
-				return true;
+	function _proceed(text) {
+		if (TTS) {
+			TTS.speak({
+				text: text,
+				locale: o.locale,
+				rate: o.rate
+			}).then(function () {
+				// Text succesfully spoken
+			}, function (reason) {
+				console.warn("Q.Audio.speak: " + reason);
+			});
+		} else if (SS) {
+			if (SS.speaking) {
+				return;
 			}
-		}
-		// stop voice list loading
-		function _stopLoading() {
-			clearInterval(loadingVoices);
-			loadingSeconds = 0;
-		}
-		// recognize the voice by language of text and gender
-		function _recognizeVoice(text, voicesList) {
-			var language = (_isCyrillic(text)) ? "ru-RU" : "en-US"
-			var gender = o.gender;
-			var voice = null;
-			var toggled = false;
-
-			function _switchGender(gender) {
-				return (gender == "female") ? "male" : "female"
-			}
-
-			function _search(){
-				var result = null;
-				var av = Q.getObject([language, gender], availableVoices) || [];
-				if (typeof av !== "object" || !av.length){
-					return {error: "Q/Speech: no such available voice"};
+			Q.Audio.loadVoices(function (err, voices) {
+				var msg = Q.firstErrorMessage(err, voices);
+				if (msg) {
+					throw new Q.Error(msg);
 				}
-				for(var i = 0; i < av.length; i++){
-					for(var j = 0; j < voicesList.length; j++){
-						if (av[i] == voicesList[j].name){
-							// founded voice ID from voices list
-							result = j;
-							break;
-						}
-					}
-					if (typeof result === "number") {
-						break;
-					}
+				if (typeof voices !== "object") {
+					return console.warn("Q.Audio.speak: could not get the known voices list");
 				}
-				if (result === null && toggled){
-					return {error: "Q/Speech: no voice support in this device for this language"};
-				} else if (result === null) {
-					var previousGender = gender;
-					gender = _switchGender(gender);
-					toggled = true;
-					console.info("%cQ/Speech: no '%s' voice found for this device, switches to '%s'", 'color: Green', previousGender.toUpperCase(), gender.toUpperCase());
-					return _search();
-				} else {
-					return result;
+				var u = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
+				var voicesList = SS.getVoices();
+				var chosenVoice = _chooseVoice(u.text, voicesList, voices);
+				if (chosenVoice === false) {
+					return;
 				}
-			}
-			// if the gender doesn't set manually - set to default
-			if (gender != "male" && gender != "female") {
-				gender = o.gender = "female";
-			}
-			voice = _search();
-			if (typeof voice !== 'number'){
-				var voiceError = Q.getObject("error", voice);
-				console.warn(voiceError);
-				return false;
-			}
-			return voice;
+				u.voice = voicesList[chosenVoice];
+				u.rate = o.rate;
+				u.pitch = o.pitch;
+				u.volume = o.volume;
+				u.onstart = function () {
+					Q.handle(o.onStart, [u]);
+				};
+				u.onend = function () {
+					Q.handle(o.onEnd, [u]);
+				};
+				SS.speak(u);
+			});
 		}
-
-		var loadingSeconds = 0;
-		var loadingVoices = setInterval(function () {
-			var voicesList = SS.getVoices();
-			if (voicesList.length) {
-				_stopLoading();
-				// get available voices list
-				Q.request('{{Q}}/js/speech/voices.json', [], function (err, data) {
-					var msg = Q.firstErrorMessage(err, data);
-					if (msg) {
-						throw new Q.Error(msg);
-					}
-					if (typeof data !== "object") {
-						return console.warn("Q/Speech: could not get the available voices list");
-					}
-					availableVoices = data;
-					// removing tags from text;
-					var msg = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
-					// recognize the voice by gender
-					var recognizedVoice = _recognizeVoice(msg.text, voicesList);
-					if (recognizedVoice === false) {
-						return;
-					}
-					msg.voice = voicesList[recognizedVoice];
-					msg.rate = o.rate;
-					msg.pitch = o.pitch;
-					msg.volume = o.volume;
-					SS.speak(msg);
-				});
-			} else {
-				loadingSeconds ++;
-				if (loadingSeconds > 20) {
-					_stopLoading();
-					console.warn("Q/Speech: could not load voices list");
-				}
-			}
-		}, 100);
 	}
 };
 Q.Audio.speak.options = {
@@ -12208,35 +12161,9 @@ Q.Audio.speak.options = {
 	rate: 1,
 	pitch: 1,
 	volume: 1,
-	locale: "en-US"
+	locale: null
 };
-
-/**
- * @class Q
- */
-
-/**
- * Loads an audio file and calls the callback when it's ready to play
- * @static
- * @method audio
- * @param {String} url 
- * @param {Function} handler A function to run after the audio is ready to play
- * @param {Object} [options={}] Can be one of the following options
- * @param {boolean} [options.canPlayThrough=true] Whether to wait until the audio can play all the way through before calling the handler.
- */
-Q.audio = Q.getter(function _Q_audio(url, handler, options) {
-	url = Q.url(url);
-	var audio = Q.Audio.collection[url]
-		? Q.Audio.collection[url]
-		: new Q.Audio(url);
-	if (options && options.canPlayThrough === false) {
-		audio.onCanPlay.add(handler);
-	} else {
-		audio.onCanPlayThrough.add(handler);
-	}
-}, {
-	cache: Q.Cache.document('Q.audio', 100)
-});
+Q.Audio.speak.enabled = !Q.info.isTouchscreen;
 
 /**
  * Methods for temporarily covering up certain parts of the screen with masks
@@ -12414,7 +12341,6 @@ Q.addEventListener(window, Q.Pointer.start, _Q_PointerStartHandler, false, true)
 
 function noop() {}
 if (!root.console) {
-	// for irregular browsers like IE8 and below
 	root.console = {
 		debug: noop,
 		dir: noop,
@@ -12485,6 +12411,7 @@ Q.onInit.add(function () {
 			s.text = '';
 			speechSynthesis.speak(s); // enable speech for the site, on any click
 			Q.removeEventListener(document.body, 'click', _enableSpeech);
+			Q.Audio.speak.enabled = true;
 		}
 	}
 

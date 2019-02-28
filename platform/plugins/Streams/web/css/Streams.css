@@ -331,11 +331,6 @@
 
 #Streams_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
 
-#Users_login_username, #Streams_login_fullname
-{
-  width: 188px;
-}
-
 #Streams_login_password {
 	width: 210px;
 }
@@ -361,6 +356,7 @@
 
 .Streams_login_get_started {
 	text-align: center;
+	margin-top: 10px;
 }
 
 .Streams_login_appear table {
