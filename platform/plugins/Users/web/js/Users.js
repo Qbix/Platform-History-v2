@@ -1839,6 +1839,59 @@
 		Users.vote('Users/hinted', key);
 		return true;
 	};
+	
+	/**
+	 * Shows the next hint for an event
+	 * @static
+	 * @method nextHint
+	 * @param {String} eventName Pass the name of an event, previously set with
+	 *  Q.Users.addHint(), and the function will show the next unshown hint for that event.
+	 * @return {Boolean} whether a hint was shown or not
+	 */
+	Users.nextHint = function (eventName) {
+		var key, info, index, targets, options;
+		info = Q.Users.nextHint.hints[eventName];
+		if (!info || !Q.isArrayLike(info)) {
+			return false;
+		}
+		Q.each(info, function (hintIndex) {
+			var k = [eventName, hintIndex].join('/');
+			if (Q.Users.hinted.indexOf(k) < 0) {
+				index = hintIndex;
+				key = k;
+				return false;
+			}
+		});
+		if (!key) {
+			return false; // all hints have been shown
+		}
+		targets = info[index][0];
+		options = info[index][1];
+		Users.hint(key, targets, options);
+		return true;
+	};
+	
+	Q.Users.nextHint.hints = {};
+	
+	/**
+	 * Adds the hint information for use with Q.Users.nextHint() function.
+	 * @static
+	 * @method setHint
+	 * @param {String} eventName Pass the name of an event, previously set with
+	 *  Q.Users.setHint(), and the function will show the next unshown hint for that event.
+	 * @param {Element|Object|String|Array} targets see Q.Pointer.hint()
+	 * @param {Object} [options] see Q.Pointer.hint()
+	 * @param {Number} [hintHindex] You can specify this to override an existing hint,
+	 *  otherwise it just adds this hint as the next in the queue.
+	 */
+	Users.addHint = function (eventName, targets, options, hintIndex) {
+		var h = Q.Users.nextHint.hints[eventName] = Q.Users.nextHint.hints[eventName] || [];
+		if (hintIndex >= 0) {
+			h[hintIndex] = [targets, options];
+		} else {
+			h.push([targets, options]);
+		}
+	};
 
 	/**
 	 * Makes a dialog that resembles a facebook dialog

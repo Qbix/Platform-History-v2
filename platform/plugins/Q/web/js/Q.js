@@ -11041,8 +11041,8 @@ Q.Pointer = {
 				audioEvent.handle();
 			});
 		} else if (options.speak) {
-			Q.Audio.speak(a.speak.text, Q.extend({}, 10, options.speak, {
-				onStart: audioEvent
+			Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
+				onStart: audioEvent.handle
 			}));
 		} else {
 			audioEvent.handle();
