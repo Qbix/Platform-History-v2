@@ -12072,8 +12072,8 @@ Q.Audio.speak = function (text, options) {
 		}
 		function _search(){
 			var result = null;
-			var av = Q.getObject([o.locale, gender], knownVoices)
-				|| Q.getObject([language, gender], knownVoices)
+			var av = Q.getObject([gender, o.locale], knownVoices)
+				|| Q.getObject([gender, language], knownVoices)
 				|| [];
 			if (typeof av !== "object" || !av.length){
 				return {error: "Q.Audio.speak: no such known voice"};
