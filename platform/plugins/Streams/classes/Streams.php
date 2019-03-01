@@ -1064,11 +1064,13 @@ abstract class Streams extends Base_Streams
 			if (!isset($f['type'])) {
 				throw new Q_Exception_RequiredField(array('name' => 'type'));
 			}
-			$a = isset($f['attributes']) ? $f['attributes'] : '';
-			if (is_array($a)) {
-				$a = Q::json_encode($a);;
+			$a = isset($f['attributes']) ? $f['attributes'] : null;
+			if (is_array($a) and !empty($a)) {
+				$a = Q::json_encode($a);
+				$f['attributes'] = $a;
+			} else {
+				$f['attributes'] = null;
 			}
-			$f['attributes'] = $a;
 			$a = isset($f['inheritAccess']) ? $f['inheritAccess'] : '';
 			if (is_array($a)) {
 				$a = Q::json_encode($a);
@@ -1107,8 +1109,6 @@ abstract class Streams extends Base_Streams
 			);
 		}
 
-		
-
 		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
 		Streams_Message::postMessages($asUserId, $messages, true);
 
@@ -1116,8 +1116,8 @@ abstract class Streams extends Base_Streams
 			$modifiedFields = $s->fields;
 			foreach ($modifiedFields as $fn => $wasModified) {
 				$s->notModified($fn);
+				$s->wasRetrieved(true);
 			}
-			$s->wasRetrieved(true);
 			$s->afterSaveExecute(null, null, $modifiedFields, $s->getPKValue());
 		}
 		
