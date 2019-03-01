@@ -218,4 +218,4 @@ function _position($this, position, container) {
 	container.css('left', left);
 }
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

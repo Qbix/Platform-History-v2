@@ -303,4 +303,4 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

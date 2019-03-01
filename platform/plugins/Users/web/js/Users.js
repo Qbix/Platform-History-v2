@@ -1307,26 +1307,20 @@
 			}
 			var $img = $('<img />').attr('src', src)
 				.attr('title', Q.text.Streams.login.picTooltip);
-			var td, table = $('<table />').append(
-				$('<tr />').append(
-					$('<td class="Users_login_picture" />').append($img)
-				).append(
-					td = $('<td class="Users_login_username_block" />').append(
-						$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
-					).append(
-						$('<input id="Users_login_username" name="username" type="text" class="text" />')
-							.attr('maxlength', Q.text.Users.login.maxlengths.username)
-							.attr('placeholder', Q.text.Users.login.placeholders.username)
-							.val(username)
-							.width($('#Users_login_identifier').width() - 30)
-					)
-				)
+			var $formContent = $('<div class="Users_login_username_block" />').append(
+				$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
+			).append(
+				$('<input id="Users_login_username" name="username" type="text" class="text" />')
+					.attr('maxlength', Q.text.Users.login.maxlengths.username)
+					.attr('placeholder', Q.text.Users.login.placeholders.username)
+					.val(username)
+					.width($('#Users_login_identifier').width() - 30)
 			);
 			var register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
 				.data('form-type', 'register')
 				//.append($('<div class="Users_login_appear" />'))
-				.append(table)
+				.append($formContent)
 				.append($('<input type="hidden" name="identifier" />').val(identifier))
 				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
 				.append($('<input type="hidden" name="icon[50.png]" />').val(src50))
@@ -1356,7 +1350,7 @@
 			}
 
 			if (json.termsLabel) {
-				td.append(
+				$formContent.append(
 					$('<div />').attr("id", "Users_register_terms")
 						.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 						.append($('<label for="Users_agree" />').html(json.termsLabel))
@@ -1844,6 +1838,59 @@
 		Users.hinted.push(key);
 		Users.vote('Users/hinted', key);
 		return true;
+	};
+	
+	/**
+	 * Shows the next hint for an event
+	 * @static
+	 * @method nextHint
+	 * @param {String} eventName Pass the name of an event, previously set with
+	 *  Q.Users.addHint(), and the function will show the next unshown hint for that event.
+	 * @return {Boolean} whether a hint was shown or not
+	 */
+	Users.nextHint = function (eventName) {
+		var key, info, index, targets, options;
+		info = Q.Users.nextHint.hints[eventName];
+		if (!info || !Q.isArrayLike(info)) {
+			return false;
+		}
+		Q.each(info, function (hintIndex) {
+			var k = [eventName, hintIndex].join('/');
+			if (Q.Users.hinted.indexOf(k) < 0) {
+				index = hintIndex;
+				key = k;
+				return false;
+			}
+		});
+		if (!key) {
+			return false; // all hints have been shown
+		}
+		targets = info[index][0];
+		options = info[index][1];
+		Users.hint(key, targets, options);
+		return true;
+	};
+	
+	Q.Users.nextHint.hints = {};
+	
+	/**
+	 * Adds the hint information for use with Q.Users.nextHint() function.
+	 * @static
+	 * @method setHint
+	 * @param {String} eventName Pass the name of an event, previously set with
+	 *  Q.Users.setHint(), and the function will show the next unshown hint for that event.
+	 * @param {Element|Object|String|Array} targets see Q.Pointer.hint()
+	 * @param {Object} [options] see Q.Pointer.hint()
+	 * @param {Number} [hintHindex] You can specify this to override an existing hint,
+	 *  otherwise it just adds this hint as the next in the queue.
+	 */
+	Users.addHint = function (eventName, targets, options, hintIndex) {
+		var h = Q.Users.nextHint.hints[eventName] = Q.Users.nextHint.hints[eventName] || [];
+		if (hintIndex >= 0) {
+			h[hintIndex] = [targets, options];
+		} else {
+			h.push([targets, options]);
+		}
 	};
 
 	/**
@@ -2382,6 +2429,14 @@
 	});
 	Users.onConnected = new Q.Event();
 	Users.onConnectionLost = new Q.Event();
+	
+	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
+		Q.loadNonce(function () {
+			socket.emit('Users/session', Q.sessionId(), Q.clientId(), function () {
+				Q.handle(Users.Socket.onSession);
+			});
+		});
+	}, 'Users');
 
 	/**
 	 * Operates with dialogs.
@@ -2614,11 +2669,18 @@
 		 * @param {Function} callback When a connection is made, receives the socket object
 		 */
 		connect: function _Users_Socket_connect(nodeUrl, callback) {
-			Q.Socket.connect('Users', nodeUrl, function (socket) {
-				Q.loadNonce(function () {
-					socket.socket.emit('Users/session', Q.sessionId(), Q.clientId());
+			var qs = Q.Socket.get('Users', nodeUrl);
+			if (qs && qs.socket &&
+			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
+				_waitForSession.call(qs.socket, 'Users', nodeUrl);
+			}
+			Q.Socket.connect('Users', nodeUrl, _waitForSession);
+			function _waitForSession() {
+				var t = this, a = arguments;
+				Users.Socket.onSession.addOnce(function (socket, ns, url) {
+					callback && callback(socket, ns, url);
 				});
-			});
+			}
 		},
 
 		/**
@@ -2631,6 +2693,15 @@
 		get: function _Users_Socket_get(url) {
 			return Q.Socket.get('Users', url);
 		},
+		
+		/**
+		 * Returns Q.Event that occurs on some socket event coming from socket.io
+		 * through the Users namespace
+		 * @event onEvent
+		 * @param {String} name the name of the event
+		 * @return {Q.Event}
+		 */
+		onSession: new Q.Event(),
 
 		/**
 		 * Returns Q.Event that occurs on some socket event coming from socket.io

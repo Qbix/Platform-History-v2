@@ -382,4 +382,4 @@ var p = {
     inertiaAccel: 0.0007
 }
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

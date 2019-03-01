@@ -265,6 +265,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 						var stream = this;
 						var o = Q.extend({
 							saveSizeName: saveSizeName,
+							maxStretch: Users.icon.maxStretch,
 							showSize: state.icon || $img.width(),
 							path: 'Q/uploads/Users',
 							preprocess: function (callback) {
@@ -305,4 +306,4 @@ Q.Template.set('Users/avatar/contents', '<{{tag}} class="Users_avatar_name">{{& 
 Q.Template.set('Users/avatar/icon/blank', '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>');
 Q.Template.set('Users/avatar/contents/blank', '<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>');
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

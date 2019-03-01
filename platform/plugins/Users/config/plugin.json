@@ -67,7 +67,8 @@
 			"Users/icon": {
 				"sizes": ["40", "50", "80", "200", "400", "400x", "x400"],
 				"defaultSize": "40",
-				"defaultCacheBust": 1000
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
 			}
 		}
 	},
@@ -185,7 +186,8 @@
 		},
 		"icon": {
 			"labels": "labels/default",
-			"canManage": ["Users/owners", "Users/admins"]
+			"canManage": ["Users/owners", "Users/admins"],
+			"search": [] /* can be ["facebook", "google"] */
 		},
 		"vote": {
 			"Users/hinted": {

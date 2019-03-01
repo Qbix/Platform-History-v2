@@ -42,10 +42,6 @@ UPDATE {$prefix}subscription_rule
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}sent
-SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
-WHERE streamName LIKE "Places/timeslot/%";
-
 UPDATE {$prefix}stream
 SET name = REPLACE(name, "Places/timeslot/", "Places/timeslot/main/")
 WHERE name LIKE "Places/timeslot/%";

@@ -189,4 +189,4 @@ Q.Template.set('Streams/image/preview/create',
 	+ '</div></div>'
 );
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

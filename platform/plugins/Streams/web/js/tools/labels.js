@@ -69,4 +69,4 @@ Q.Template.set('Streams/contacts/contact/view',
 	+ '</div></div>'
 );
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

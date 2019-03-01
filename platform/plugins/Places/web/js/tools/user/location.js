@@ -369,4 +369,4 @@ Q.Template.set('Places/user/location',
 	+ '</div>'
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

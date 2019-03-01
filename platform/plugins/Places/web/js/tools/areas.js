@@ -283,4 +283,4 @@
 			}
 		});
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

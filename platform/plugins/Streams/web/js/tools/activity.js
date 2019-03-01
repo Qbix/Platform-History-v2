@@ -26,4 +26,4 @@ Q.Tool.define("Streams/activity", function (options) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);
