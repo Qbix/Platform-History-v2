@@ -40,7 +40,7 @@
                 console.log('MY PUBLISHER ID', Q.Users.loggedInUser, roomId);
 
 
-                setTimeout(function () {
+
                 if(roomId == null) {
 
                     Q.req("Streams/webrtc", ["stream"], function (err, response) {
@@ -83,7 +83,7 @@
                         }
                     });
                 }
-                }, 1000)
+
 
                 var roomsMedia = document.createElement('DIV');
                 roomsMedia.id = 'webrtc_tool-room-media';
@@ -100,6 +100,28 @@
                 stream.onMessage('Streams/join').set(function (stream, message) {
                     console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
                     tool.screensRendering().renderScreens();
+                });
+                stream.onMessage('Streams/webrtc/signalling').set(function (stream, message) {
+                    console.log('%c STREAMS: SIGNALLING MESSAGE RECEIVED', 'background:blue;color:white;', stream, message)
+                    if (message.type === 'offer') {
+                        WebRTCconference.offerReceived(message, function (localDescription) {
+                            sendMessage({
+                                name: localParticipant.identity,
+                                targetSid: message.fromSid,
+                                type: "answer",
+                                sdp: localDescription
+                            });
+                        });
+                    }
+                    else if (message.type === 'answer') {
+                        WebRTCconference.answerRecieved(message);
+                    }
+                    else if (message.type === 'candidate') {
+                        WebRTCconference.iceConfigurationReceived(message)
+                    }
+                });
+                stream.onMessage('Streams/webrtc/signalling').set(function (stream, message) {
+                    console.log('%c STREAMS: SIGNALLING MESSAGE RECEIVED', 'background:blue;color:white;', stream, message)
                 });
             },
             bindTwilioEvents: function(stream) {
@@ -168,7 +190,7 @@
                 }
 
                 var bindScreensEvents = function () {
-                    var screens =  WebRTCconference.screens();
+                    var screens =  WebRTCconference.screens;
                     var i, participantScreen;
                     for(i = 0; participantScreen = screens[i]; i++) {
                         if(tool.isMobile) {
@@ -201,7 +223,7 @@
                 }
 
                 var renderDesktopScreensGrid = function() {
-                    var screens =  WebRTCconference.screens();
+                    var screens =  WebRTCconference.screens;
                     console.log('roomScreens.length', screens.length);
 
                     var prerenderedScreens = document.createDocumentFragment();
@@ -219,7 +241,7 @@
                 }
 
                 var renderMobileScreensGrid = function() {
-                    var roomScreens =  WebRTCconference.screens();
+                    var roomScreens =  WebRTCconference.screens;
                     console.log('roomScreens.length', roomScreens.length);
 
                     var prerenderedScreens = document.createDocumentFragment();
@@ -415,7 +437,7 @@
                 }
 
                 var clearAllScreens = function () {
-                    var screens =  WebRTCconference.screens();
+                    var screens =  WebRTCconference.screens;
 
                     var i, participantScreen;
                     for(i = 0; participantScreen = screens[i]; i++) {
@@ -434,9 +456,8 @@
                         elementToMove.style.top = ypos + 'px';
                     }
                     var drag = function(evt){
-                        if(tool.isScreenResizing || evt.targetTouches.length != 1) return;
+                        if(tool.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
                         evt = evt || window.event;
-                        if(evt.changedTouches.length != 1) return;
                         var posX = tool.isMobile ? evt.changedTouches[0].clientX : evt.clientX,
                             posY = tool.isMobile ? evt.changedTouches[0].clientY : evt.clientY,
                             aX = posX - diffX,
@@ -448,7 +469,7 @@
                         move(aX,aY);
                     }
                     var initMoving = function(divid,container,evt){
-                        if(tool.isScreenResizing || evt.targetTouches.length != 1) return;
+                        if(tool.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
                         elementToMove = divid;
                         var elRect = elementToMove.getBoundingClientRect();
                         console.log('elementToMove.offsetTop',elementToMove.offsetTop)
@@ -478,6 +499,8 @@
                         if(tool.isMobile)
                             document.removeEventListener('touchmove', drag)
                         else document.removeEventListener('mousemove', drag)
+
+                        container.style.cursor='';
                     }
                     return {
                         initMoving: initMoving,
@@ -569,7 +592,7 @@
 
                             _elementToResize.style.width = elementWidth + 'px';
                             _elementToResize.style.height = elementHeight + 'px';
-                 
+
                             _latestWidthValue = elementWidth;
                             _latestHeightValue = elementHeight;
                         }
@@ -587,7 +610,7 @@
                         _latestWidthValue = null;
                         _oldx = null;
                     }
-                    
+
                     function setHandler(element) {
                         if(tool.isMobile) {
                             resizeByPinchGesture(element);
@@ -827,37 +850,10 @@
                 }
 
                 return adapter;
-            },
-            refresh: function (callback) {
-
-            },
-            // optional methods for your tool
-            // that would be called by Qbix
-            Q: {
-                onInit: function () {
-
-                },
-                beforeRemove: function () {
-                    // clean up anything you've attached
-                    // to the elements, such as
-                    // jQuery event handlers, data, etc.
-                },
-                onRetain: function (newOptions) {
-                    // compare newOptions to this.state
-                    // and update the tool's appearance.
-                    // after this event, the tool's
-                    // state will be extended with
-                    // the new options.
-                },
-                onLayout: function (elem, container) {
-                    // Occurs if the layout is being
-                    // updated for this tool's element.
-                    // If you want more fine-grained control
-                    // then use Q.onLayout(element) instead.
-                }
             }
         }
 
     );
+
 
 })(window.jQuery, window);
