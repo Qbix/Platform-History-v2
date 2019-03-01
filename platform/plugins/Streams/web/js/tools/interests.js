@@ -30,6 +30,7 @@ Q.Tool.define("Streams/interests", function (options) {
 	var tool = this;
 	Q.Text.get('Streams/content', function (err, text) {
 		var state = tool.state;
+		tool.text = text;
 		if (state.canAdd === true) {
 			state.canAdd = text.interests.CanAdd;
 		}
@@ -65,9 +66,7 @@ Q.Tool.define("Streams/interests", function (options) {
 		state.communityId = state.communityId || Q.Users.communityId;
 	
 		function addExpandable(category, interests) {
-			var src = Q.getObject([
-				Q.Users.communityId, category, 'white'
-			], Streams.Interests.info);
+			var info = Q.getObject([Users.communityId, category], Streams.Interests.info);
 			var content = '';
 			var count = 0;
 			Q.each(interests, function (subcategory, interests) {
@@ -78,17 +77,24 @@ Q.Tool.define("Streams/interests", function (options) {
 				count += Object.keys(interests).length;
 			});
 			var expandableOptions = Q.extend({
-				title: "<img src='"+Q.url(src)+"'>"
+				title: "<img src='"+Q.url(info.white)+"'>"
 					+"<span class='Streams_interests_category_title'>"+category+"</span>",
 				content: content,
 	            count: '',
 				category: category
 			}, state.expandable);
+			var nc = Q.normalize(category);
 			var $expandable = $(Q.Tool.setUpElement(
 				'div', 'Q/expandable', expandableOptions, 
-				'Q_expandable_' + Q.normalize(category),
+				'Q_expandable_' + nc,
 				tool.prefix
 			));
+			if (info.drilldown) {
+				$expandable.attr({
+					'drilldown': 'drilldown',
+					'category': nc
+				}).addClass('Q_expandable_'+nc);
+			}
 			$expandable.appendTo(tool.container).activate(p.fill(category));
 		}
 
@@ -146,6 +152,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						var id = 'Streams_interest_title_' + normalized;
 						var $span = $('<span />', {
 							'id': id,
+							'data-interest': title,
 							'data-category': category,
 							'class': 'Streams_interest_title'
 						}).text(title)
@@ -241,9 +248,10 @@ Q.Tool.define("Streams/interests", function (options) {
 				});
 				var $unlisted2 = $("<div class='Streams_interest_unlisted2' />")
 				.text(state.canAdd);
+				var Unlisted = tool.text.interests.Unlisted;
 				$unlisted.append(
 					$unlisted2, 
-					$('<div />').append($unlistedTitle.attr('data-category', 'Unlisted')),
+					$('<div />').append($unlistedTitle.attr('data-category', Unlisted)),
 					$select
 				);
 			}
@@ -264,7 +272,9 @@ Q.Tool.define("Streams/interests", function (options) {
 				var wasSelected = $this.hasClass('Q_selected');
 				var category = title.split(':')[0].trim();
 				var title2 = title.split(':')[1].trim();
-				if (false === Q.handle(state.onClick, tool, [this, normalized, category, title2, wasSelected]) || !Users.loggedInUserId()) {
+				if (false === Q.handle(state.onClick, tool, 
+						[this, normalized, category, title2, wasSelected]
+				) || !Users.loggedInUserId()) {
 					return;
 				};
 				if (wasSelected) {
@@ -282,7 +292,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				} else {
 					change = 1;
 					$this.addClass('Q_selected');
-					Interests.my[normalized] = $this.text();
+					Interests.my[normalized] = title;
 					Interests.add(title, function (err, data) {
 						var msg = Q.firstErrorMessage(
 							err, data && data.errors
@@ -402,7 +412,7 @@ Q.Tool.define("Streams/interests", function (options) {
 					if (count) {
 						$unlistedTitle.text(val.toCapitalized());
 						$('<option value="" selected="selected" disabled="disabled" />')
-							.html('Add under category...')
+							.html(tool.text.AddUnderCategory)
 							.prependTo($select);
 						$unlisted.show();
 					} else {
@@ -479,10 +489,11 @@ function _listInterests(category, interests) {
 		var normalized = Q.normalize(category + ": " + interest);
 		var id = 'Streams_interest_title_' + normalized;
 		lines.push(
-			'<span class="Streams_interest_title" id="'+id
-			+ '" data-category="' + category + '">'
-			+ interest 
-			+ '</span>'
+			$('<span class="Streams_interest_title" />').attr({
+				"id": id,
+				"data-category": category,
+				"data-interest": interest
+			}).append(interest)[0].outerHTML
 		);
 		Q.setObject([interest, id], true, allInterests);
 	}
