@@ -327,6 +327,11 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		if (!$this->retrieved) {
+			foreach (array('messageCount', 'invitedCount', 'participatingCount') as $f) {
+				if (!isset($this->$f)) {
+					$this->$f = 0;
+				}
+			}
 			// we don't want user to update private fields but will set initial values to them
 			$privateFieldNames = self::getConfigField($this->type, 'private', array());
 			// magic fields are handled by parent method
