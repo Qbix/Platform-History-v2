@@ -438,4 +438,4 @@ function _getFeature(planet, countryCode) {
 	return feature;
 }
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

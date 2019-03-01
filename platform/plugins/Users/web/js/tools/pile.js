@@ -70,4 +70,4 @@ Q.Tool.define('Users/pile', function () {
 	}
 });
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

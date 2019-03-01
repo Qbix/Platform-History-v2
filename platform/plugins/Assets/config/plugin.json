@@ -106,7 +106,8 @@
 		},
 		"credits": {
 			"amounts": {
-				"Users/insertUser": 20
+				"Users/insertUser": 20,
+				"Users/inviteUser": 10
 			}
 		},
 		"currencies": {

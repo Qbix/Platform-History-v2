@@ -589,7 +589,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::canCreateCommunities function.
+	 *  For internal use only. Used by Streams::canCreateStreamType function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -794,9 +794,9 @@ abstract class Streams extends Base_Streams
 	}
 	
 	/**
-	 * Calculates whether a given user is authorized by a specific publisher
-	 * to create a particular type of stream.
-	 * @method canCreateCommunities
+	 * Calculates whether a given user is authorized by a given publisher
+	 * to create a type of stream.
+	 * @method canCreateStreamType
 	 * @static
 	 * @param {string} $userId The user who would be creating the stream.
 	 * @param {string} $publisherId The id of the user who would be publishing the stream.
@@ -813,7 +813,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream|boolean} Returns a stream template the user must use,
 	 *  otherwise a boolean true/false to indicate a yes or no regardless of template.
 	 */
-	static function canCreateCommunities(
+	static function canCreateStreamType(
 		$userId,
 		$publisherId,
 		$streamType,
@@ -953,7 +953,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($stream->type)) {
 			$stream->type = $type;
 		}
-		$authorized = self::canCreateCommunities(
+		$authorized = self::canCreateStreamType(
 			$asUserId, $publisherId, $stream->type, $relate
 		);
 		if (!$authorized and !$skipAccess) {
@@ -1022,6 +1022,106 @@ abstract class Streams extends Base_Streams
 		self::$fetch[$asUserId][$publisherId][$stream->name] = array('*' => $stream);
 
 		return $stream;
+	}
+	
+	/**
+	 * Creates multiple streams in the system. Skips access control checks.
+	 * @method createStreams
+	 * @static
+	 * @param {string} $asUserId The user who is attempting to create the stream.
+	 * @param {string} $publisherId The id of the user to publish the streams.
+	 * @param {array} $fields Each stream's fields are a sub-array in this array
+	 * @return {array} Returns Streams_Stream objects representing streams
+	 *  that were created, but really they were saved using insertManyAndExecute.
+	 * @throws {Users_Exception_NotAuthorized}
+	 */
+	static function createStreams(
+		$asUserId,
+		$publisherId, 
+		$fields = array())
+	{
+		if (!isset($publisherId)) {
+			foreach ($fields as $f) {
+				if (!isset($f['publisherId'])) {
+					throw new Q_Exception_RequiredField(array('name' => 'publisherId'));
+				}
+				$pid = $f['publisherId'];
+				$arr[$pid] = $f;
+			}
+			$ret = array();
+			foreach ($arr as $pid => $f) {
+				$ret[$pid] = array_merge($ret, Streams::createStreams($asUserId, $pid, $f));
+			}
+			return $ret;
+		}
+
+		$streamFieldNames = Base_Streams_Stream::fieldNames();
+		
+		$toCreate = array();
+		$p = Streams::userStreamsTree();
+		$streams = array();
+		foreach ($fields as $k => &$f) {
+			if (!isset($f['type'])) {
+				throw new Q_Exception_RequiredField(array('name' => 'type'));
+			}
+			$a = isset($f['attributes']) ? $f['attributes'] : null;
+			if (is_array($a) and !empty($a)) {
+				$a = Q::json_encode($a);
+				$f['attributes'] = $a;
+			} else {
+				$f['attributes'] = null;
+			}
+			$a = isset($f['inheritAccess']) ? $f['inheritAccess'] : '';
+			if (is_array($a)) {
+				$a = Q::json_encode($a);
+				$f['inheritAccess'] = $a;
+			}
+			$tc = compact('publisherId');
+			if ($name = isset($f['name']) ? $f['name'] : null) {
+				if ($info = $p->get($name, array())) {
+					foreach ($streamFieldNames as $fn) {
+						if (isset($info[$fn])) {
+							$tc[$fn] = $info[$fn];
+						}
+					}
+				}
+			}
+
+			// extend with any config defaults for this stream type
+			$fieldNames = Streams::getExtendFieldNames($f['type']);
+			$fieldNames[] = 'name';
+			foreach ($fieldNames as $fn) {
+				if (isset($f[$fn])) {
+					$tc[$fn] = $f[$fn];
+				}
+			}
+			
+			// simulate calls to beforeSave, to update avatars and do other stuff
+			$s = new Streams_Stream($tc);
+			$s->beforeSave($tc);
+			$toCreate[$s->name] = $s->fields;
+			$streams[$s->name] = $s;
+			
+			$messages[$publisherId][$s->name][] = array(
+				'type' => 'Streams/created',
+				'content' => '',
+				'instructions' => $s->fields
+			);
+		}
+
+		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
+		Streams_Message::postMessages($asUserId, $messages, true);
+
+		foreach ($streams as $name => $s) {
+			$modifiedFields = $s->fields;
+			foreach ($modifiedFields as $fn => $wasModified) {
+				$s->notModified($fn);
+				$s->wasRetrieved(true);
+			}
+			$s->afterSaveExecute(null, null, $modifiedFields, $s->getPKValue());
+		}
+		
+		return $streams;
 	}
 
 	/**
@@ -2821,17 +2921,15 @@ abstract class Streams extends Base_Streams
 			$untilTime = $db->toDateTime($options['untilTime']);
 			$shouldUpdate = true;
 		}
-		$subscriptions = array();
-		$rows = Streams_Subscription::select()
+		$subscriptions = Streams_Subscription::select('*', 'a')
 		->where(array(
-			'publisherId' => $publisherId,
-			'streamName' => $streamNames,
-			'ofUserId' => $asUserId
-		))->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($rows as $row) {
-			$sn = $row['streamName'];
-			$subscriptions[$sn] = $row;
-		}
+				'a.publisherId' => $publisherId,
+				'a.streamName' => $streamNames,
+				'a.ofUserId' => $asUserId
+		))->join(Streams_Stream::table(true, 'b'), array(
+			'a.publisherId' => 'b.publisherId',
+			'a.streamName' => 'b.name'
+		))->fetchDbRows(null, '', 'streamName');
 		$messages = array();
 		$streamNamesMissing = array();
 		$streamNamesUpdate = array();
@@ -2858,8 +2956,8 @@ abstract class Streams extends Base_Streams
 		if ($streamNamesMissing) {
 			$types = array();
 			foreach ($streamNamesMissing as $sn) {
-				$stream = $streams2[$sn];
-				$types[$stream->type][] = $sn;
+				$s = $subscriptions[$sn];
+				$types[$s->type][] = $sn;
 			}
 			$subscriptionRows = array();
 			$ruleRows = array();
@@ -3451,6 +3549,7 @@ abstract class Streams extends Base_Streams
 			$result = Q_Utils::queryInternal('Q/node', $params);
 		} catch (Exception $e) {
 			// just suppress it
+			$result = null;
 		}
 
 		$return = array(
@@ -3956,13 +4055,14 @@ abstract class Streams extends Base_Streams
 	 * Use this function to save a template for a specific stream type and publisher.
 	 * @method saveTemplate
 	 * @static
-	 * @param {string} $type
+	 * @param {string} $streamType
 	 * @param {string} $publisherId=''
 	 * @param {array} [$overrides=array()]
 	 * @param {array} [$overrides.readLevel]
 	 * @param {array} [$overrides.writeLevel]
 	 * @param {array} [$overrides.adminLevel]
-	 * @param {array} [$accessLabels=array()] Pass labels for which to save access rows
+	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
+	 *  Otherwise tries to look in Streams/types/$streamType/admins
 	 * @param {array} [$accessLevels=array('max','max','max')]
 	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
 	 *  (can include strings or numbers, including -1 to not affect the type of access)
@@ -3972,9 +4072,12 @@ abstract class Streams extends Base_Streams
 		$streamType,
 		$publisherId='',
 		$overrides = array(),
-		$accessLabels = array(),
+		$accessLabels = null,
 		$accessLevels = array(40, 40, 40))
 	{
+		if (!isset($accessLabels)) {
+			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
+		}
 		$defaults = Streams_Stream::getConfigField($type, 'defaults', Streams_Stream::$DEFAULTS);
 		$templateName = $streamType . '/';
 		$template = new Streams_Stream();
@@ -4001,6 +4104,43 @@ abstract class Streams extends Base_Streams
 			$access->save();
 		}
 		return $template;
+	}
+	
+	/**
+	 * Use this function to save mutable access for a specific stream type and publisher.
+	 * @method saveMutable
+	 * @static
+	 * @param {string} $streamType
+	 * @param {string} $publisherId=''
+	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
+	 *    Otherwise we try to look in Streams/types/$streamType/admins
+	 * @param {array} [$accessLevels=array('max','max','max')]
+	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
+	 *  (can include strings or numbers, including -1 to not affect the type of access)
+	 * @return {Streams_Stream} The template stream
+	 */
+	static function saveMutable(
+		$streamType,
+		$publisherId='',
+		$accessLabels = null,
+		$accessLevels = array(40, 40, 40))
+	{
+		if (!isset($accessLabels)) {
+			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
+		}
+		foreach ($accessLabels as $label) {
+			$label = Q::interpolate($label, array('app' => Q::app()));
+			$access = new Streams_Access();
+			$access->publisherId = $publisherId;
+			$access->streamName = $streamType . '*';
+			$access->ofContactLabel = $label;
+			$access->retrieve();
+			$access->readLevel = $numeric = Streams_Stream::numericReadLevel($accessLevels[0]);
+			$access->writeLevel = Streams_Stream::numericWriteLevel($accessLevels[1]);
+			$access->adminLevel = Streams_Stream::numericAdminLevel($accessLevels[2]);
+			$access->save();
+		}
+		return $access;
 	}
 	
 	static function getExtendFieldNames($type, $asOwner = true)
@@ -4054,7 +4194,8 @@ abstract class Streams extends Base_Streams
 	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
 	 * containing additional querystring fields such as "userId", "expires"
 	 * and "sig" which is a signature truncated to have length specified in config
-	 * Streams/userInviteUrl/signature/length
+	 * Streams/userInviteUrl/signature/length.
+	 * The "sig" may be missing if the Q/internal/secret config is empty.
 	 * @param {string} $userId The id of the user for whom to generate this url
 	 * @param {Streams_Invite} [&$invite=null] You can pass a variable reference here
 	 *  to be filled with the Streams_Invite object.
@@ -4066,7 +4207,9 @@ abstract class Streams extends Base_Streams
 		$fields = array(compact('userId', 'expires'));
 		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
 		$fields = Q_Utils::sign($fields, array('sig'));
-		$fields['sig'] = substr($fields['sig'], 0, $len);
+		if (!empty($fields['sig'])) {
+			$fields['sig'] = substr($fields['sig'], 0, $len);
+		}
 		$streamName = 'Streams/userInviteUrl';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
 		if (!$stream) {

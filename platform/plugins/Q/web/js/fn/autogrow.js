@@ -243,4 +243,4 @@ function _surroundPlaceholders() {
 	return $container;
 }
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

@@ -435,7 +435,7 @@ abstract class Users extends Base_Users
 		if (!$retrieved) {
 			$ui = Users::identify($platform, $xid, null);
 			if ($ui) {
-				$user = new Users_User();
+				Users::$cache['user'] = $user = new Users_User();
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
@@ -535,8 +535,8 @@ abstract class Users extends Base_Users
 		}
 		$externalFrom->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
-		Users::$cache['user'] = $user;
 		Users::$cache['authenticated'] = $authenticated;
+		Users::$cache['user'] = $user;
 
 		if (!empty($imported['email']) and empty($user->emailAddress)) {
 			$emailAddress = $imported['email'];
@@ -965,11 +965,11 @@ abstract class Users extends Base_Users
 	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
-	 * @param {array|string|true} [$icon=true] By default, the user icon is "default".
+	 * @param {array|string|true} [$icon=array()] By default, the user icon would be "default".
 	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
 	 *  download the various sizes from gravatar. Finally, you can pass true to
 	 *  generate an icon instead of using the default icon.
-	 *  If $identifier['app']['platform'] is specified, and $icon==true, then
+	 *  If $identifier['app']['platform'] is specified, and $icon is empty, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
@@ -1096,6 +1096,10 @@ abstract class Users extends Base_Users
 				));
 			}
 		}
+		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
+		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
+
+		Users::$cache['user'] = $user;
 
 		if ($username) {
 			if ( ! preg_match('/^[A-Za-z0-9\-_]+$/', $username)) {
@@ -1167,7 +1171,7 @@ abstract class Users extends Base_Users
 		$directory = null;
 		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 		sort($sizes);
-		if (!isset($icon)) {
+		if (empty($icon)) {
 			if ($externalFrom = Users_ExternalFrom::authenticate($platform, $appId)) {
 				$icon = $externalFrom->icon($sizes, '.png');
 			}
@@ -1180,7 +1184,7 @@ abstract class Users extends Base_Users
 				foreach ($sizes as $size) {
 					$icon["$size.png"] = "$iconString&s=$size";
 				}
-			} else if ($icon === true) {
+			} else if ($icon === true) {				
 				// locally generated icons
 				$identifier = $identifier ?: microtime();
 				$hash = md5(strtolower(trim($identifier)));
@@ -1193,7 +1197,7 @@ abstract class Users extends Base_Users
 					.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'generated';
 			}
 		}
-		if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
+		if (!$leaveDefaultIcon and !Users::isCustomIcon($user->icon)) {
 			self::importIcon($user, $icon, $directory);
 			$user->save();
 		}
@@ -1210,9 +1214,8 @@ abstract class Users extends Base_Users
 		$return = Q::event('Users/register', compact(
 			'username', 'identifier', 'icon', 'user', 'platform', 'options', 'device'
 		), 'after');
-
-		// Shouldn't this be return $return not return $user?
-		return $user;
+		
+		return $return ? $return : $user;
 	}
 
 	/**
@@ -1418,10 +1421,10 @@ abstract class Users extends Base_Users
 	 * @method importIcon
 	 * @static
 	 * @param {array} $user The user for whom the icon should be downloaded
-	 * @param {array} [$urls=array()] Array of urls to download from, or
-	 *   of arrays with keys "hash" and "size"
+	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
+	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
-	 * @return {string} the path to the icon directory
+	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
 	static function importIcon($user, $urls = array(), $directory = null)
 	{
@@ -1434,7 +1437,6 @@ abstract class Users extends Base_Users
 			return $directory;
 		}
 		Q_Utils::canWriteToPath($directory, null, true);
-		$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 		$largestSize = 0;
 		$largestUrl = null;
 		$largestImage = null;
@@ -1451,15 +1453,19 @@ abstract class Users extends Base_Users
 		}
 		if ($largestSize) {
 			$largestImage = imagecreatefromstring(file_get_contents($largestUrl));
+			$liw = imagesx($largestImage);
+			$lih = imagesy($largestImage);
 		}
 		foreach ($urls as $basename => $url) {
+			$filename = $directory.DS.$basename;
 			if (is_string($url)) {
-				$filename = $directory.DS.$basename;
 				$info = pathinfo($filename);
 				$size = $info['filename'];
 				$success = false;
 				if ($largestImage and (string)(int)$size === $size) {
-					if ($size == $largestSize) {
+					if ($size == $largestSize
+					and $liw == $largestSize
+					and $lih == $largestSize) {
 						$image = $largestImage;
 						$success = true;
 					} else {
@@ -1470,7 +1476,7 @@ abstract class Users extends Base_Users
 							0, 0, 
 							0, 0, 
 							$size, $size, 
-							$largestSize, $largestSize
+							$liw, $lih
 						);
 					}
 				}
@@ -1500,13 +1506,17 @@ abstract class Users extends Base_Users
 				}
 				call_user_func($func, $image, $directory.DS.$info['filename'].'.png');
 			} else {
-				Q_Image::put(
-					$directory.DS.$basename,
-					$url['hash'],
-					$url['size'],
-					$type,
-					Q_Config::get('Users', 'login', 'gravatar', false)
-				);
+				$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
+				$gravatar = Q_Config::get('Users', 'login', 'gravatar', false);
+				$data = Q_Image::avatar($url['hash'], $url['size'], $type, $gravatar);
+				if ($gravatar) {
+					file_put_contents($filename, $data); // downloaded				
+				} else {
+					imagepng($data, $filename); // locally generated
+				}
+			}
+			if (!file_exists($filename)) {
+				return null;
 			}
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';
@@ -1959,54 +1969,6 @@ abstract class Users extends Base_Users
 	}
 
 	/**
-	 * Checks whether users icons exist, and if not - generate new.
-	 * @method generateIcon
-	 * @static
-	 * @param {string|array|null} $userId Can be single user id or array of ids or null if you want to fix all users.
-	 */
-	static function generateIcon($userId = null) {
-		if (is_null($userId)) {
-			$users = Users_User::select()->where(array('signedUpWith != ' => 'none'))->fetchArray();
-			foreach ($users as $user) {
-				if (!self::isCommunityId($user['id'])) {
-					self::generateIcon($user['id']);
-				}
-			}
-
-			return;
-		} elseif (is_array($userId)) {
-			foreach ($userId as $user) {
-				if (!self::isCommunityId($user)) {
-					self::generateIcon($user);
-				}
-			}
-
-			return;
-		}
-
-		$user = self::fetch($userId, true);
-		$baseUrl = Q_Request::baseUrl();
-		$iconPath = str_replace($baseUrl,"", Q::interpolate($user->icon, array('baseUrl' => $baseUrl)));
-
-		if (is_dir(APP_WEB_DIR.DS.$iconPath)) {
-			return;
-		}
-
-		// locally generated icons
-		$identifier = $user->emailAddress ?: $user->mobileNumber ?: $user->emailAddressPending ?: $user->mobileNumberPending ?: time() + microtime();
-		$hash = md5(strtolower(trim($identifier)));
-		$icon = array();
-		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
-		sort($sizes);
-		foreach ($sizes as $size) {
-			$icon["$size.png"] = array('hash' => $hash, 'size' => $size);
-		}
-		$directory = implode(DS, array(APP_FILES_DIR, Q::app(), 'uploads', 'Users', Q_Utils::splitId($user->id), 'icon', 'generated'));
-		self::importIcon($user, $icon, $directory);
-		$user->save();
-	}
-
-		/**
 	 * @property $loggedOut
 	 * @type boolean
 	 */
