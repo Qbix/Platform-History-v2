@@ -120,11 +120,11 @@ function Streams_after_Users_User_saveExecute($params)
 			$s['attributes']['sizes'] = $sizes;
 			$s['attributes']['icon'] = $user->icon;
 		}
-		$toCreate[$name] = $s;
 		$stream = $existing[$name];
 		if (isset($values[$name])) {
 			$s['content'] = $values[$name];
 		}
+		$toCreate[$name] = $s;
 		if ($so[$name] = $p->get($name, "subscribe", array())) {
 			$streamsToSubscribe[] = $name;
 		} else {
