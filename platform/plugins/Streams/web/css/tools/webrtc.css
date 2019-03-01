@@ -6,6 +6,11 @@
     left: 0;
 }
 
+.Streams_webrtc_control_tool {
+    display: flex;
+    justify-content: center;
+}
+
 .hidden {
     display: none !important;
 }
@@ -44,9 +49,9 @@
     display: flex;
     justify-content: center;
     padding-top: 15px;
-    position: absolute;
+    position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 9999999;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 15px;
     border-bottom-right-radius: 7px;
@@ -782,7 +787,7 @@
 }
 .popup-box .choose-device,
 .dialog-box .choose-device {
-    padding: 15px 15px 0 15px;
+    padding: 15px;
 }
 .popup-box .choose-device h4,
 .dialog-box .choose-device h4{

@@ -10,9 +10,9 @@ function Streams_webrtc_response_token() {
 
 
     // Substitute your Twilio AccountSid and ApiKey details
-    $twilioAccountSid = 'AC338eba4af54011fa3a73425a8ae4716c';
-    $twilioApiKey = 'SK299258ac97f231a76643b65ca08cf2ff';
-    $twilioApiSecret = 'rUwOboEYwbzy0PHi31yDCLNiFZCh1eTZ';
+    $twilioAccountSid = 'ACa160e587be20123db35fde0567875854';
+    $twilioApiKey = 'SK08db9623d4f854a1674ec2cf2faf8a59';
+    $twilioApiSecret = 'OOR7TQiGADAdpijkGxpxEwSZ8LCT1pnt';
 
     $identity = Users::loggedInUser(true)->displayName(array('short' => true));
 
