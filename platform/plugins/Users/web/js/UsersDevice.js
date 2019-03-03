@@ -60,10 +60,16 @@
 				Users.Device.notificationGranted(function (granted) {
 					// if user refuses notifications - do nothing
 					if (granted === false) {
+						Q.handle(Users.Device.beforeSubscribe, Users.Device, [
+							options, granted, false
+						]);
 						return Q.handle(callback, null, [null, null]);
 					}
 					// check if the device is subscribed
 					Users.Device.subscribed(function (err, subscribed) {
+						Q.handle(Users.Device.beforeSubscribe, Users.Device, [
+							options, granted, subscribed
+						]);
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -75,23 +81,29 @@
 						// device without any confirmation dialog
 						if (granted === true) {
 							return adapter.subscribe(function (err, subscribed) {
+								Q.handle(Users.Device.onSubscribe, Users.Device, [
+									options, granted, subscribed
+								]);
 								Q.handle(callback, null, [err, subscribed]);
 							}, options);
 						}
 						// if the user is undecided with notifications then do call the confirmation
 						var userId = Q.Users.loggedInUserId();
-						var cache = Q.Cache.local('Users.Permissions.notifications');
+						var cache = Q.Cache.session('Users.Permissions.notifications');
 						var requested = cache.get(userId);
 						// if permissions already requested - don't request it again
 						if (Q.getObject(['cbpos'], requested) === true) {
 							return Q.handle(callback, null, [null, null]);
 						}
 						Q.Text.get('Users/content', function (err, text) {
-							text = Q.getObject(["notifications"], text);
+							text = Q.copy(Q.getObject(["notifications"], text));
 							if (!text) {
 								console.warn('Notifications confirmations texts not found');
 							}
 							// if not - ask
+							Q.handle(Users.Device.beforeSubscribeConfirm, Users.Device, [
+								options, granted, subscribed, text
+							]);
 							Q.confirm(text.prompt, function (res) {
 								if (!res) {
 									// save to cache that notifications requested
@@ -100,9 +112,10 @@
 									return Q.handle(callback, null, [null, null]);
 								}
 								adapter.subscribe(function (err, subscribed) {
+									Q.handle(Users.Device.onSubscribe, [options, granted, subscribed]);
 									Q.handle(callback, null, [err, subscribed]);
 								}, options);
-							}, { ok: text.yes, cancel: text.no });
+							}, { ok: text.yes, cancel: text.no, title: text.title });
 						});
 					});
 				});
@@ -170,6 +183,39 @@
 		 * @event onNotification
 		 */
 		onNotification: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.subscribe() is called,
+	     * but before a subscription is possibly granted
+		 * @event beforeSubscribe
+		 */
+		beforeSubscribe: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.subscribe() is called,
+	     * but after a subscription is possibly granted
+		 * @event onSubscribe
+		 */
+		onSubscribe: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.subscribe() is called,
+		 * right before Q.confirm() is shown in some cases
+		 * @event beforeSubscribeConfirm
+		 */
+		beforeSubscribeConfirm: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.unsubscribe() is called, but before action is taken
+		 * @event beforeUnsubscribe
+		 */
+		beforeUnsubscribe: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.unsubscribe() is called, but before action is taken
+		 * @event onUnsubscribe
+		 */
+		onUnsubscribe: new Q.Event(),
 
 		/**
 		 * Event occurs when the device adapter was initialized.
@@ -208,7 +254,9 @@
 
 		getAdapter: function (callback) {
 			if (!this.adapter) {
-				Q.handle(callback, null, [new Error('There is no suitable adapter for this type of device')]);
+				Q.handle(callback, null, [new Error(
+					'There is no suitable adapter for this type of device'
+				)]);
 				return;
 			}
 			Q.handle(callback, null, [null, this.adapter]);
@@ -247,51 +295,54 @@
 		subscribe: function (callback, options) {
 			var self = this;
 			this.getServiceWorkerRegistration(function (err, sw) {
-				if (err)
-					Q.handle(callback, null, [err]);
-				else {
-					var userVisibleOnly = true;
-					if (options && !options.userVisibleOnly) {
-						userVisibleOnly = false;
-					}
-					sw.pushManager.subscribe({
-						userVisibleOnly: userVisibleOnly,
-						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
-					}).then(function (subscription) {
-						_saveSubscription(subscription, self.appConfig, function (err, res) {
-							Q.handle(callback, null, [err, res]);
-						});
-					}).catch(function (err) {
-						Users.Device.notificationGranted(function (granted) {
-							if (granted) {
-								console.error('Users.Device: Unable to subscribe to push.', err);
-							} else {
-								console.error('Users.Device: Permission for Notifications was denied');
-							}
-						});
-
-						Q.handle(callback, null, [err]);
-					});
+				if (err) {
+					return Q.handle(callback, null, [err]);
 				}
+				var userVisibleOnly = true;
+				if (options && !options.userVisibleOnly) {
+					userVisibleOnly = false;
+				}
+				sw.pushManager.subscribe({
+					userVisibleOnly: userVisibleOnly,
+					applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
+				}).then(function (subscription) {
+					_saveSubscription(subscription, self.appConfig, function (err, res) {
+						Q.handle(callback, null, [err, res]);
+					});
+				}).catch(function (err) {
+					Users.Device.notificationGranted(function (granted) {
+						if (granted) {
+							console.error('Users.Device: Unable to subscribe to push.', err);
+						} else {
+							console.error('Users.Device: Permission for Notifications was denied');
+						}
+					});
+
+					Q.handle(callback, null, [err]);
+				});
 			});
 		},
 
 		unsubscribe: function (callback) {
+			if (false === Q.handle(Users.Device.beforeUnsubscribe, Users.Device, [])) {
+				return false;
+			}
 			this.getServiceWorkerRegistration(function (err, sw) {
-				if (err)
-					Q.handle(callback, null, [err]);
-				else {
-					sw.pushManager.getSubscription()
-						.then(function (subscription) {
-							if (subscription) {
-								_deleteSubscription(subscription.endpoint, function (err, res) {
-									Q.handle(callback, null, [err, res]);
-								});
-								subscription.unsubscribe();
-								console.log('Users.Device: User is unsubscribed.');
-							}
-						});
+				if (err) {
+					return Q.handle(callback, null, [err]);
 				}
+				sw.pushManager.getSubscription()
+				.then(function (subscription) {
+					if (!subscription) {
+						return;
+					}
+					_deleteSubscription(subscription.endpoint, function (err, res) {
+						Q.handle(callback, null, [err, res]);
+					});
+					subscription.unsubscribe();
+					console.log('Users.Device: User is unsubscribed.');
+					Q.handle(Users.Device.onUnsubscribe, Users.Device, [subscription]);
+				});
 			});
 		},
 
@@ -446,7 +497,7 @@
 			Q.handle(callback, null, [new Error("Push messaging is not supported")]);
 			return;
 		}
-		navigator.serviceWorker.register('/Q/plugins/Users/js/sw.js')
+		navigator.serviceWorker.register(Q.url('{{Users}}/js/sw.js'))
 			.then(function (swReg) {
 				navigator.serviceWorker.addEventListener('message', function (event) {
 					Users.Device.onNotification.handle(event.data);

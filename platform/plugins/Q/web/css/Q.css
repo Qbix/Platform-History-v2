@@ -5,26 +5,14 @@ table { border-spacing:0; border-collapse:collapse; }
 @keyframes Q_rotateplane {
 	0% {
 		transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-		-webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
 	} 50% {
 		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-		-webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
 	} 100% {
 		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-		-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
 	}
-}
-@-webkit-keyframes Q_rotateplane {
-	0% { -webkit-transform: perspective(120px); }
-	50% { -webkit-transform: perspective(120px) rotateY(180deg); }
-	100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg); }
 }
 
 @keyframes Q_working {
-	from { opacity: 0.75; }
-	to { opacity: 0.25; }
-}
-@-webkit-keyframes Q_working {
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }
 }
@@ -33,16 +21,8 @@ table { border-spacing:0; border-collapse:collapse; }
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }
 }
-@-webkit-keyframes Q_loading {
-	from { opacity: 0.75; }
-	to { opacity: 0.25; }
-}
 
 @keyframes Q_uploading {
-	from { opacity: 0.75; }
-	to { opacity: 0.25; }
-}
-@-webkit-keyframes Q_uploading {
 	from { opacity: 0.75; }
 	to { opacity: 0.25; }
 }
@@ -51,19 +31,15 @@ table { border-spacing:0; border-collapse:collapse; }
 	from { opacity: 0.5; }
 	to { opacity: 0.25; }
 }
-@-webkit-keyframes Q_removing {
-	from { opacity: 0.5; }
-	to { opacity: 0.25; }
-}
 @keyframes Q_pop {
-	0% { transform: scale(1); -webkit-transform: scale(1); opacity: 1; }
-	50% { transform: scale(2); -webkit-transform: scale(2); opacity: 0.5; }
-	100% { transform: scale(1); -webkit-transform: scale(1); opacity: 1; }
+	0% { transform: scale(1); opacity: 1; }
+	50% { transform: scale(2); opacity: 0.5; }
+	100% { transform: scale(1); opacity: 1; }
 }
-@-webkit-keyframes Q_pop {
-	0% { -webkit-transform: scale(1); opacity: 1; }
-	50% { -webkit-transform: scale(2); opacity: 0.5; }
-	100% { -webkit-transform: scale(1); opacity: 1; }
+@keyframes Q_pulsate {
+	0% { transform: scale(1); opacity: 1; }
+	50% { transform: scale(1.1); opacity: 1; text-shadow: 2px 2px rgba(0, 0, 0, 0.5); }
+	100% { transform: scale(1); opacity: 1; }
 }
 @keyframes Q_wiggle {
 	0% {
@@ -77,42 +53,6 @@ table { border-spacing:0; border-collapse:collapse; }
 	70% {
 		transform: scale(0.9) perspective(120px) rotateX(10deg) rotateY(0deg);
 		opacity: 1;
-	}
-}
-@-webkit-keyframes Q_wiggle {
-	0% {
-		transform: scale(1);
-		-webkit-transform: scale(1);
-		opacity: 1;
-	}
-	30% {
-		transform: scale(1.2) perspective(120px) rotateX(-10deg) rotateY(0deg);
-		-webkit-transform: scale(1.2) perspective(120px) rotateX(10deg) rotateY(0deg);
-		opacity: 0.9;
-	}
-	70% {
-		transform: scale(0.9) perspective(120px) rotateX(10deg) rotateY(0deg);
-		-webkit-transform: scale(0.9) perspective(120px) rotateX(10deg) rotateY(0deg);
-		opacity: 1;
-	}
-}
-@-webkit-keyframes pulse {
-	0% {  -webkit-box-shadow: 0 0 0 0 rgba(50,200,50, 0.4); }
-	70% {  -webkit-box-shadow: 0 0 0 10px rgba(50,200,50, 0); }
-	100% {  -webkit-box-shadow: 0 0 0 0 rgba(50,200,50, 0); }
-}
-@keyframes pulse {
-	0% {
-		-moz-box-shadow: 0 0 0 0 rgba(50,200,50, 0.4);
-		box-shadow: 0 0 0 0 rgba(50,200,50, 0.4);
-	}
-	70% {
-		-moz-box-shadow: 0 0 0 10px rgba(50,200,50, 0);
-		box-shadow: 0 0 0 10px rgba(50,200,50, 0);
-	}
-	100% {
-		-moz-box-shadow: 0 0 0 0 rgba(50,200,50, 0);
-		box-shadow: 0 0 0 0 rgba(50,200,50, 0);
 	}
 }
 
@@ -146,29 +86,31 @@ table { border-spacing:0; border-collapse:collapse; }
 	pointer-events: none;
 	opacity:0.9; filter:alpha(opacity=90);
 	animation: Q_loading 1s ease-in-out infinite alternate;
-	-webkit-animation: Q_loading 1s ease-in-out infinite alternate;
 }
 .Q_working {
 	pointer-events: none;
 	opacity: 0.5;
 	animation: Q_working 1s ease-in-out infinite alternate;
-	-webkit-animation: Q_working 1s ease-in-out infinite alternate;
 	position: relative;
 	cursor: wait;
 }
 .Q_uploading {
 	opacity: 0.5;
 	animation: Q_uploading 1s ease-in-out infinite alternate;
-	-webkit-animation: Q_uploading 1s ease-in-out infinite alternate;
 }
 .Q_removing {
 	opacity: 0.5;
 	background: white;
 	animation: Q_removing 1s ease-in-out infinite alternate;
-	-webkit-animation: Q_removing 1s ease-in-out infinite alternate;
 }
 .Q_pop {
 	animation: Q_pop 1s ease-in-out 0s 0.7;
+}
+.Q_wiggle {
+	animation: Q_wiggle 5s ease-in-out infinite;
+}
+.Q_pulsate {
+	animation: Q_pulsate 3s ease-in-out infinite alternate;
 }
 
 .Q_clear{ clear: both; }
