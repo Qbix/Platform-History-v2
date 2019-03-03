@@ -1927,8 +1927,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
-	if (!Q.isOnline()
-	|| (notRetained && !(options && options.evenIfNotRetained))) {
+	if ((notRetained && !(options && options.evenIfNotRetained))) {
 		callback && callback.call(this, false);
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
@@ -3113,7 +3112,8 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
  */
 Stream.subscribe.onError = new Q.Event();
 
-/** default options for  Stream.subscribe class.
+/**
+ * Default options for Stream.subscribe function.
  * @param {bool} device Whether to subscribe device when user subscribed to some stream
  */
 Stream.subscribe.options = {
@@ -4436,6 +4436,29 @@ var Interests = Streams.Interests = {
 			'{{Streams}}/img/icons/interests/categories/'
 			+ style + '/' + cn + '.png'
 		);
+	},
+	/**
+	 * Find the name of the category whose "drilldown" info is
+	 * equal to the normalized string passed here ("category_interest")
+	 * @method drilldownCategory
+	 * @static
+	 * @param {String} communityId
+	 * @param {String} normalized
+	 * @return {String|null} the name of the category, if anuy
+	 */
+	drilldownCategory: function (communityId, normalized) {
+		var n = Q.normalize(normalized);
+		var infos = Q.Streams.Interests.info[communityId];
+		for (var category in infos) {
+			var info = infos[category];
+			if (!info.drilldown) {
+				continue;
+			}
+			if (Q.normalize(info.drilldown) === n) {
+				return category;
+			}
+		}
+		return null;
 	},
 	all: {},
 	info: {},
