@@ -6080,7 +6080,8 @@ Q.isReady = function _Q_isReady() {
 };
 
 /**
- * Returns whether the client is currently connected to the 'net
+ * Returns whether the client is currently connected to the Internet.
+ * In the future, this will not be a binary thing ;-)
  * @static
  * @method isOnline
  * @return {boolean}
@@ -10897,6 +10898,8 @@ Q.Pointer = {
 	 * @param {Object} [options] possible options, which can include:
 	 * @param {String} [options.src] the url of the hint pointer image
 	 * @param {Point} [options.hotspot={x:0.5,y:0.3}] "x" and "y" represent the location of the hotspot within the image, using fractions between 0 and 1
+	 * @param {String} [options.classes=""] Additional CSS classes to add to hint images
+	 * @param {Object} [options.styles=""] Additional CSS styles to add to hint images
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
@@ -10913,6 +10916,7 @@ Q.Pointer = {
 	 * @param {Integer} [options.show.initialScale=10] The initial scale of the hint pointer image in the show animation
 	 * @param {Integer} [options.show.duration=500] The duration of the hint show animation
 	 * @param {Function} [options.show.ease=Q.Animation.ease.smooth]
+	 * @param {Integer} [options.hide.after=null] Set an integer here to hide the hint animation after the specified number of milliseconds
 	 * @param {Integer} [options.hide.duration=500] The duration of the hint hide animation
 	 * @param {Function} [options.hide.ease=Q.Animation.ease.smooth]
 	 */
@@ -10941,10 +10945,14 @@ Q.Pointer = {
 		img1.style.display = 'block';
 		img1.style.pointerEvents = 'none';
 		img1.setAttribute('class', 'Q_hint');
+		if (options.classes) {
+			img1.addClass(options.classes);
+		}
 		img1.style.opacity = 0;
 		img1.hide = o.hide;
 		img1.dontStopBeforeShown = o.dontStopBeforeShown;
 		qphi.push(img1);
+		img1.style.visibility = 'hidden';
 		document.body.appendChild(img1);
 		hintEvent.add(Q.once(function _hintReady() {
 			img1.timeout = setTimeout(function () {
@@ -10956,6 +10964,7 @@ Q.Pointer = {
 				if (Q.isEmpty(targets)) {
 					return;
 				}
+				img1.style.visibility = 'visible';
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
@@ -11000,7 +11009,12 @@ Q.Pointer = {
 					var width = parseInt(img.style.width);
 					var height = parseInt(img.style.height);
 					Q.Animation.play(function (x, y) {
-						img.style.opacity = y;
+						if (options.styles) {
+							Q.extend(img.style, options.styles);
+						}
+						if (!options.styles || !options.styles.opacity) {
+							img.style.opacity = y;
+						}
 						if (o.show.initialScale !== 1) {
 							var z = 1 + (o.show.initialScale - 1) * (1 - y);
 							var w = width * z;
@@ -11011,6 +11025,11 @@ Q.Pointer = {
 							img.style.top = point.y - h * o.hotspot.y + 'px';
 						}
 					}, o.show.duration, o.show.ease);
+					if (options.hide && options.hide.after) {
+						setTimeout(function () {
+							_stopHint(img);
+						}, options.hide.after);
+					}
 				});
 			}, o.show.delay);
 		}));
@@ -11061,28 +11080,9 @@ Q.Pointer = {
 		var imgs = Q.Pointer.hint.imgs;
 		var imgs2 = [];
 		Q.each(imgs, function (i, img) {
-			var outside = (
-				Q.instanceOf(container, Element)
-				&& !container.contains(img.target)
-			);
-			if ((img.timeout !== false && img.dontStopBeforeShown)
-			|| outside) {
+			if (_stopHint(img, container)) {
 				imgs2.push(img);
-				return;
 			}
-			if (img.audio) {
-				img.audio.pause();
-			}
-			clearTimeout(img.timeout);
-			img.timeout = null;
-			Q.Animation.play(function (x, y) {
-				img.style.opacity = 1-y;
-			}, img.hide.duration, img.hide.ease)
-			.onComplete.set(function () {
-				if (img.parentNode) {
-					img.parentNode.removeChild(img);
-				}
-			});
 		});
 		Q.Pointer.hint.imgs = imgs2;
 	},
@@ -11228,6 +11228,32 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+function _stopHint(img, container) {
+	var outside = (
+		Q.instanceOf(container, Element)
+		&& !container.contains(img.target)
+	);
+	if ((img.timeout !== false && img.dontStopBeforeShown)
+	|| outside) {
+		return img;
+	}
+	if (img.audio) {
+		img.audio.pause();
+	}
+	clearTimeout(img.timeout);
+	img.timeout = null;
+	var initialOpacity = parseFloat(img.style.opacity);
+	Q.Animation.play(function (x, y) {
+		img.style.opacity = initialOpacity * (1-y);
+	}, img.hide.duration, img.hide.ease)
+	.onComplete.set(function () {
+		if (img.parentNode) {
+			img.parentNode.removeChild(img);
+		}
+	});
+	return null;
+}
 
 var _isTouchscreen = Q.info.isTouchscreen;
 Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
@@ -12047,9 +12073,6 @@ Q.Audio.speak = function (text, options) {
 	var SS = Q.getObject("window.speechSynthesis"); //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
 	o.locale = o.locale ||  Q.Text.languageLocale;
-	if (typeof text !== "string") {
-		throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
-	}
 	if (Q.isArrayLike(text)) {
 		var source = text[0];
 		var pathArray = text[1];
@@ -12113,6 +12136,9 @@ Q.Audio.speak = function (text, options) {
 		return voice;
 	}
 	function _proceed(text) {
+		if (typeof text !== "string") {
+			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
+		}
 		if (TTS) {
 			TTS.speak({
 				text: text,
@@ -12125,7 +12151,7 @@ Q.Audio.speak = function (text, options) {
 			});
 		} else if (SS) {
 			if (SS.speaking) {
-				return;
+				SS.cancel();
 			}
 			Q.Audio.loadVoices(function (err, voices) {
 				var msg = Q.firstErrorMessage(err, voices);
