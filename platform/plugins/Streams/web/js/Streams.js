@@ -1927,8 +1927,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
-	if (!Q.isOnline()
-	|| (notRetained && !(options && options.evenIfNotRetained))) {
+	if ((notRetained && !(options && options.evenIfNotRetained))) {
 		callback && callback.call(this, false);
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
@@ -3113,7 +3112,8 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
  */
 Stream.subscribe.onError = new Q.Event();
 
-/** default options for  Stream.subscribe class.
+/**
+ * Default options for Stream.subscribe function.
  * @param {bool} device Whether to subscribe device when user subscribed to some stream
  */
 Stream.subscribe.options = {
