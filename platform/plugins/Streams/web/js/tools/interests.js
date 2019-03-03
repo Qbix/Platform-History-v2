@@ -91,9 +91,9 @@ Q.Tool.define("Streams/interests", function (options) {
 			));
 			if (info.drilldown) {
 				$expandable.attr({
-					'drilldown': 'drilldown',
+					'drilldown': info.drilldown,
 					'category': nc
-				}).addClass('Q_expandable_'+nc);
+				}).addClass('Streams_interests_drilldown Q_expandable_'+nc);
 			}
 			$expandable.appendTo(tool.container).activate(p.fill(category));
 		}
