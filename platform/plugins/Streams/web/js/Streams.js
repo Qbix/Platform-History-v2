@@ -4437,6 +4437,29 @@ var Interests = Streams.Interests = {
 			+ style + '/' + cn + '.png'
 		);
 	},
+	/**
+	 * Find the name of the category whose "drilldown" info is
+	 * equal to the normalized string passed here ("category_interest")
+	 * @method drilldownCategory
+	 * @static
+	 * @param {String} communityId
+	 * @param {String} normalized
+	 * @return {String|null} the name of the category, if anuy
+	 */
+	drilldownCategory: function (communityId, normalized) {
+		var n = Q.normalize(normalized);
+		var infos = Q.Streams.Interests.info[communityId];
+		for (var category in infos) {
+			var info = infos[category];
+			if (!info.drilldown) {
+				continue;
+			}
+			if (Q.normalize(info.drilldown) === n) {
+				return category;
+			}
+		}
+		return null;
+	},
 	all: {},
 	info: {},
 	my: null
