@@ -166,13 +166,6 @@ Base.RelatedToTotal = Q.require('Streams/RelatedToTotal');
 Base.Request = Q.require('Streams/Request');
 
 /**
- * Link to Streams.Sent model
- * @property Sent
- * @type Streams.Sent
- */
-Base.Sent = Q.require('Streams/Sent');
-
-/**
  * Link to Streams.Stream model
  * @property Stream
  * @type Streams.Stream

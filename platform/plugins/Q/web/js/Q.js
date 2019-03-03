@@ -6080,7 +6080,8 @@ Q.isReady = function _Q_isReady() {
 };
 
 /**
- * Returns whether the client is currently connected to the 'net
+ * Returns whether the client is currently connected to the Internet.
+ * In the future, this will not be a binary thing ;-)
  * @static
  * @method isOnline
  * @return {boolean}
@@ -12072,9 +12073,6 @@ Q.Audio.speak = function (text, options) {
 	var SS = Q.getObject("window.speechSynthesis"); //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
 	o.locale = o.locale ||  Q.Text.languageLocale;
-	if (typeof text !== "string") {
-		throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
-	}
 	if (Q.isArrayLike(text)) {
 		var source = text[0];
 		var pathArray = text[1];
@@ -12138,6 +12136,9 @@ Q.Audio.speak = function (text, options) {
 		return voice;
 	}
 	function _proceed(text) {
+		if (typeof text !== "string") {
+			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
+		}
 		if (TTS) {
 			TTS.speak({
 				text: text,
@@ -12150,7 +12151,7 @@ Q.Audio.speak = function (text, options) {
 			});
 		} else if (SS) {
 			if (SS.speaking) {
-				return;
+				SS.cancel();
 			}
 			Q.Audio.loadVoices(function (err, voices) {
 				var msg = Q.firstErrorMessage(err, voices);
