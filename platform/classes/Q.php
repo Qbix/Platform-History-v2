@@ -81,7 +81,7 @@ class Q
 			}
 			if (is_array($ref2)) {
 				foreach ($key as $k) {
-					if (array_key_exists($k, $ref2)) {
+					if (isset($ref2[$k])) {
 						$ref2 = $ref2[$k];
 						continue 2;
 					}
