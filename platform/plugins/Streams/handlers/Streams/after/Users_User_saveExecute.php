@@ -30,7 +30,12 @@ function Streams_after_Users_User_saveExecute($params)
 	and !Users::isCustomIcon($user->icon)) {
 		foreach ($search as $service) {
 			try {
-				$fullName = Streams::$cache['fullName'];
+				$fullName = Q::ifset(Streams::$cache, 'fullName', null);
+
+				if (!$fullName) {
+					continue;
+				}
+
 				$query = $fullName['first'] . ' ' . $fullName['last'];
 				$results = call_user_func(
 					array('Q_Image', $service), $query, array(), false
