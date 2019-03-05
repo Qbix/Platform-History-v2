@@ -293,7 +293,13 @@
 		},
 
 		subscribe: function (callback, options) {
-			var self = this;
+			var appConfig = this.appConfig;
+
+			if (!appConfig) {
+				console.warn('Unable to init adapter. App config is not defined.');
+				return Q.handle(callback, null);
+			}
+
 			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
@@ -304,9 +310,9 @@
 				}
 				sw.pushManager.subscribe({
 					userVisibleOnly: userVisibleOnly,
-					applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
+					applicationServerKey: _urlB64ToUint8Array(appConfig.publicKey)
 				}).then(function (subscription) {
-					_saveSubscription(subscription, self.appConfig, function (err, res) {
+					_saveSubscription(subscription, appConfig, function (err, res) {
 						Q.handle(callback, null, [err, res]);
 					});
 				}).catch(function (err) {
