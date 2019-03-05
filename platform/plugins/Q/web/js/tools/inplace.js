@@ -667,4 +667,4 @@ Q.Template.set('Q/inplace/tool',
 +"</div>"
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

@@ -58,4 +58,4 @@ Q.Tool.define("Users/sessions", function Users_avatar_tool(options) {
 	}
 });
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

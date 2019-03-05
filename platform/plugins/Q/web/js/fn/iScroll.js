@@ -147,4 +147,4 @@ Q.Tool.jQuery("Q/iScroll", function (o) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

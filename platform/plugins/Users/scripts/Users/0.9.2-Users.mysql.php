@@ -7,7 +7,7 @@ function Users_0_9_2_Users_mysql()
 	$rows = Users_Session::select('COUNT(1)')
 		->fetchAll(PDO::FETCH_NUM);
 	$count = $rows[0][0];
-	$limit = 100;
+	$limit = 1000;
 	$offset = 0;
 	$sessions = Users_Session::select()
 		->orderBy('id')

@@ -24,36 +24,6 @@ class Streams_Access extends Base_Streams_Access
 	}
 	
 	/**
-	 * Check if user "owns" a stream template for a publisher
-	 * @method isTemplateOwner
-	 * @static
-	 * @param {string} $publisherId
-	 * @param {string} $type
-	 * @param {string|Users_User} [$user=null]
-	 * @return {boolean}
-	 */
-	static function isTemplateOwner($publisherId, $type, $user = null) {
-		if (!isset($user)) {
-			$user = Users::loggedInUser();
-		} else if (is_string($user)) {
-			$user = Users_User::fetch($user);
-		}
-		if (!isset($user)) {
-			return false;
-		}
-
-		// check if user is owner of stream template
-		$stream = new Streams_Stream();
-		$stream->publisherId = $publisherId;
-		$stream->name = $type.'/';
-		if (!$stream->retrieve()) {
-			return false;
-		}
-		$stream->calculateAccess($user->id);
-		return $stream->testAdminLevel('own');
-	}
-	
-	/**
 	 * @method getAllPermissions
 	 * @return {array}
 	 */
@@ -134,11 +104,8 @@ class Streams_Access extends Base_Streams_Access
 		if ($this->get('removed', false)) {
 			$this->set('removed', false);
 		}
-
 		if (!empty($this->publisherId) and !empty($this->streamName)) {
-
 			Streams_Avatar::updateAvatars($this->publisherId, $tainted_access, $this->streamName);
-
 			if (!in_array(substr($this->streamName, -1), array('/', '*'))) {
 				$asUserId = isset($this->grantedByUserId) ? $this->grantedByUserId : Q::app();
 				Streams_Message::post($asUserId, $this->publisherId, $this->streamName, array(

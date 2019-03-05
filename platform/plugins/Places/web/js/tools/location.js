@@ -281,8 +281,8 @@ Q.Tool.define("Places/location", function (options) {
 			Q.handle(success, tool, [pos]);
 		}, function (err) {
 			Q.handle(fail, tool, [err]);
+			tool.$('.Q_selected').removeClass('Q_selected');
 			Q.alert("Places.location.getCurrentPosition: ERROR(" + err.code + "): " + err.message);
-
 			return false;
 		}, {
 			enableHighAccuracy: false, // need to set true to make it work consistently, it doesn't seem to make it any more accurate
@@ -381,4 +381,4 @@ Q.Template.set('Places/location/select',
 		'</div>' +
 	'{{/if}}'
 );
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

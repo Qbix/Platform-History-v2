@@ -54,4 +54,4 @@ function _Q_clickfocus(o) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);
