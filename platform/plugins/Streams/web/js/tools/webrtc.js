@@ -29,13 +29,10 @@
 
                 var ua=navigator.userAgent;
                 if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-                    tool.isMobile = true;
-                } else tool.isMobile = false;
+                    Q.info.isMobile = true;
+                } else Q.info.isMobile = false;
 
-                var roomId;
-                if(location.hash.trim() != '') {
-                    roomId = location.hash.replace('#', '')
-                }
+                var roomId = tool.state.roomId != null ? tool.state.roomId : null;
 
                 console.log('MY PUBLISHER ID', Q.Users.loggedInUser, roomId);
 
@@ -88,7 +85,7 @@
                 var roomsMedia = document.createElement('DIV');
                 roomsMedia.id = 'webrtc_tool-room-media';
                 var dashboard = document.getElementById('dashboard_slot');
-                if(tool.isMobile) {
+                if(Q.info.isMobile) {
                     roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
                     roomsMedia.style.top = dashboard.offsetHeight + 'px';
                 }
@@ -167,6 +164,11 @@
                         WebRTCconference.init(function () {
                             tool.bindTwilioEvents();
                             tool.screensRendering().renderScreens();
+
+                            var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/control', {});
+                            $(controlEl).appendTo(document.querySelector('body')).activate(function () {
+                                tool.screensRendering().renderScreens();
+                            });
                         });
 
                     }, {
@@ -180,9 +182,14 @@
             screensRendering: function () {
                 var tool = this;
                 console.log('tool', tool)
+                var renderedScreens;
                 var control = {};
                 control.renderScreens = function() {
-                    if(tool.isMobile){
+                    console.log('control.renderScreens', tool.renderedScreens)
+
+                    tool.roomsMedia.innerHTML = '';
+                    tool.renderedScreens = [];
+                    if(Q.info.isMobile){
                         renderMobileScreensGrid();
                     } else renderDesktopScreensGrid();
 
@@ -190,40 +197,103 @@
                 }
 
                 var bindScreensEvents = function () {
-                    var screens =  WebRTCconference.screens;
+                    var screens =  WebRTCconference.screens();
+                    console.log('bindScreensEvents', tool.renderedScreens)
+
                     var i, participantScreen;
-                    for(i = 0; participantScreen = screens[i]; i++) {
-                        if(tool.isMobile) {
-                            participantScreen.screenEl.addEventListener('touchstart', function (e) {
+                    for(i = 0; participantScreen = tool.renderedScreens[i]; i++) {
+                        console.log('bindScreensEvents', Q.info.isMobile)
+
+                        if(Q.info.isMobile) {
+                            console.log('Q.info.isMobile', Q.info.isMobile)
+                            participantScreen.addEventListener('touchstart', function (e) {
+                                console.log('touchstart', e.currentTarget);
                                 _dragElement.initMoving(e.currentTarget, document.body, e)
                             });
-                            participantScreen.screenEl.addEventListener('touchend', function (e) {
+                            participantScreen.addEventListener('touchend', function (e) {
                                 _dragElement.stopMoving(document.body)
                             });
                         } else {
-                            participantScreen.screenEl.addEventListener('mousedown', function (e) {
+                            participantScreen.addEventListener('mousedown', function (e) {
+                                console.log(e.target, e.currentTarget)
                                 _dragElement.initMoving(e.currentTarget, document.body, e)
                             });
-                            participantScreen.screenEl.addEventListener('mouseup', function (e) {
+                            participantScreen.addEventListener('mouseup', function (e) {
                                 _dragElement.stopMoving(document.body)
                             });
 
 
-                            participantScreen.screenEl.addEventListener('mousedown', function (e) {
+                            participantScreen.addEventListener('mousedown', function (e) {
                                 _dragElement.initMoving(e.currentTarget, document.body, e)
                             });
-                            participantScreen.screenEl.addEventListener('mouseup', function (e) {
+                            participantScreen.addEventListener('mouseup', function (e) {
                                 _dragElement.stopMoving(document.body)
                             });
                         }
 
-                        resizeElement.setHandler(participantScreen.screenEl);
+                        resizeElement.setHandler(participantScreen);
 
                     }
                 }
 
+                var createRoomScreen = function(screen) {
+                    console.log('createParticipantScreen', screen);
+                    var chatParticipantEl = document.createElement('DIV');
+                    chatParticipantEl.className = 'webrtc_tool_chat-participant';
+                    chatParticipantEl.dataset.participantName = screen.sid;
+                    var chatParticipantVideoCon = screen.videoCon;
+                    chatParticipantVideoCon.className = 'webrtc_tool_chat-participant-video';
+                    var chatParticipantName = document.createElement('DIV');
+                    chatParticipantName.className = 'webrtc_tool_chat-participant-name';
+                    var participantNameTextCon = document.createElement("DIV");
+                    participantNameTextCon.className = "webrtc_tool_participant-name-text";
+                    var participantNameText = document.createElement("DIV");
+                    participantNameText.innerHTML = screen.participant.identity;
+
+                    chatParticipantEl.appendChild(chatParticipantVideoCon);
+                    participantNameTextCon.appendChild(participantNameText);
+                    chatParticipantName.appendChild(participantNameTextCon);
+                    if(screen.isLocal && Q.info.isMobile) {
+                        console.log('screen.isLocal && Q.info.isMobile', window.WebRTCcontrolBar);
+
+                        if(window.WebRTCcontrolBar != null) chatParticipantName.appendChild(window.WebRTCcontrolBar);
+                    }
+                    chatParticipantEl.appendChild(chatParticipantName);
+
+                    var videoEl = screen.videoCon.querySelector('video');
+                    if(videoEl && !Q.info.isMobile) {
+
+                        videoEl.addEventListener('loadedmetadata', function(e){
+                            console.log('loadedmetadata', e.target.videoWidth);
+                            //atParticipantEl.style.width = e.target.videoWidth + 'px;'
+                            var elRect = chatParticipantEl.getBoundingClientRect();
+                            var ratio =  e.target.videoWidth / e.target.videoHeight;
+                            var ratio2 =  e.target.videoWidth / e.target.videoHeight;
+
+                            var elementWidth,elementHeight;
+                            if(ratio < 1) {
+                                elementWidth = parseInt(elRect.height * ratio);
+                                elementheight = parseInt(elRect.width / ratio);
+                                chatParticipantEl.style.width = elementWidth + 'px'
+                                chatParticipantEl.style.height = elementheight + 'px'
+                                console.log('loadedmetadata0',  elementWidth, elRect.width);
+
+                            }
+                            else {
+                                elementHeight = parseInt(elRect.width / ratio);
+                                console.log('loadedmetadata0',  elementHeight, elRect.height);
+
+                            }
+
+                        });
+                    }
+
+                    tool.renderedScreens.push(chatParticipantEl);
+                    return chatParticipantEl;
+                }
+
                 var renderDesktopScreensGrid = function() {
-                    var screens =  WebRTCconference.screens;
+                    var screens =  WebRTCconference.screens();
                     console.log('roomScreens.length', screens.length);
 
                     var prerenderedScreens = document.createDocumentFragment();
@@ -233,15 +303,17 @@
                     var windowHeight = window.innerHeight;
                     var i, participantScreen;
                     for(i = 0; participantScreen = screens[i]; i++) {
-                        participantScreen.screenEl.style.left =  (i == 0) ? 0 : (screens[i - 1].screenEl.style.left.replace('px', '') + 100) + 'px';
-                        prerenderedScreens.appendChild(participantScreen.screenEl);
+                       // participantScreen.screenEl.style.left =  (i == 0) ? 0 : (screens[i - 1].screenEl.style.left.replace('px', '') + 100) + 'px';
+                        var screenEl = createRoomScreen(participantScreen)
+                        participantScreen.screenEl = screenEl;
+                        prerenderedScreens.appendChild(screenEl);
                     }
 
-                    document.body.appendChild(prerenderedScreens);
+                    tool.roomsMedia.appendChild(prerenderedScreens);
                 }
 
                 var renderMobileScreensGrid = function() {
-                    var roomScreens =  WebRTCconference.screens;
+                    var roomScreens =  WebRTCconference.screens();
                     console.log('roomScreens.length', roomScreens.length);
 
                     var prerenderedScreens = document.createDocumentFragment();
@@ -254,12 +326,12 @@
                             var i, participantScreen;
                             for(i = 0; participantScreen = roomScreens[i]; i++) {
                                 rowDiv = document.createElement('DIV');
-                                rowDiv.className = 'full-screen-stream';
-                                rowDiv.appendChild(participantScreen.screenEl);
+                                rowDiv.className = 'webrtc_tool_full-screen-stream';
+                                rowDiv.appendChild(createRoomScreen(participantScreen));
                                 prerenderedScreens.appendChild(rowDiv);
                             }
 
-                            toggleScreensGreedClass('full-screen-grid');
+                            toggleScreensGreedClass('webrtc_tool_full-screen-grid');
                             break;
                         case 2:
 
@@ -268,11 +340,11 @@
                             var i, participantScreen;
                             for(i = 0; participantScreen = roomScreens[i]; i++) {
                                 rowDiv = document.createElement('DIV');
-                                rowDiv.className = 'full-width-row';
-                                rowDiv.appendChild(participantScreen.screenEl);
+                                rowDiv.className = 'webrtc_tool_full-width-row';
+                                rowDiv.appendChild(createRoomScreen(participantScreen));
                                 prerenderedScreens.appendChild(rowDiv);
                             }
-                            toggleScreensGreedClass('two-rows-grid');
+                            toggleScreensGreedClass('webrtc_tool_two-rows-grid');
 
                             break;
                         case 3:
@@ -283,16 +355,16 @@
                             for(i = 0; participantScreen = roomScreens[i]; i++) {
                                 if(i == 0) {
                                     rowDiv = document.createElement('DIV');
-                                    rowDiv.className = 'full-width-row';
-                                    rowDiv.appendChild(participantScreen.screenEl)
+                                    rowDiv.className = 'webrtc_tool_full-width-row';
+                                    rowDiv.appendChild(createRoomScreen(participantScreen))
                                     prerenderedScreens.appendChild(rowDiv)
                                 } else {
                                     if(x == 0) {
                                         rowDiv = document.createElement('DIV');
-                                        rowDiv.className = 'half-width-row';
+                                        rowDiv.className = 'webrtc_tool_half-width-row';
                                         prerenderedScreens.appendChild(rowDiv)
                                     }
-                                    rowDiv.appendChild(participantScreen.screenEl)
+                                    rowDiv.appendChild(createRoomScreen(participantScreen))
 
                                     if(x == 0)
                                         x++;
@@ -300,7 +372,7 @@
                                         x = 0;
                                 }
                             }
-                            toggleScreensGreedClass('two-rows-grid');
+                            toggleScreensGreedClass('webrtc_tool_two-rows-grid');
 
                             break;
                         case 4:
@@ -312,10 +384,10 @@
 
                                 if(x == 0) {
                                     rowDiv = document.createElement('DIV');
-                                    rowDiv.className = 'half-width-row';
+                                    rowDiv.className = 'webrtc_tool_half-width-row';
 
                                 }
-                                rowDiv.appendChild(participantScreen.screenEl)
+                                rowDiv.appendChild(createRoomScreen(participantScreen))
 
                                 if(x == perRow-1) {
                                     prerenderedScreens.appendChild(rowDiv);
@@ -324,7 +396,7 @@
 
 
                             }
-                            toggleScreensGreedClass('two-rows-grid');
+                            toggleScreensGreedClass('webrtc_tool_two-rows-grid');
 
                             break;
                         case 5:
@@ -335,18 +407,18 @@
 
                                 if(i == 2){
                                     rowDiv = document.createElement('DIV');
-                                    rowDiv.className = 'full-width-row';
+                                    rowDiv.className = 'webrtc_tool_full-width-row';
                                     prerenderedScreens.appendChild(rowDiv)
 
-                                    rowDiv.appendChild(participantScreen.screenEl)
+                                    rowDiv.appendChild(createRoomScreen(participantScreen))
                                     continue;
                                 }
 
                                 if(x == 0) {
                                     rowDiv = document.createElement('DIV');
-                                    rowDiv.className = 'half-width-row';
+                                    rowDiv.className = 'webrtc_tool_half-width-row';
                                 }
-                                rowDiv.appendChild(participantScreen.screenEl)
+                                rowDiv.appendChild(createRoomScreen(participantScreen))
 
                                 if(x == 1) {
                                     prerenderedScreens.appendChild(rowDiv);
@@ -354,7 +426,7 @@
                                 } else x++;
 
                             }
-                            toggleScreensGreedClass('three-rows-grid');
+                            toggleScreensGreedClass('webrtc_tool_three-rows-grid');
 
                             break;
                         case 6:
@@ -366,10 +438,10 @@
 
                                 if(x == 0) {
                                     rowDiv = document.createElement('DIV');
-                                    rowDiv.className = 'half-width-row';
+                                    rowDiv.className = 'webrtc_tool_half-width-row';
 
                                 }
-                                rowDiv.appendChild(participantScreen.screenEl);
+                                rowDiv.appendChild(createRoomScreen(participantScreen));
 
                                 if(x == perRow-1) {
                                     prerenderedScreens.appendChild(rowDiv);
@@ -377,7 +449,7 @@
                                 } else x++;
 
                             }
-                            toggleScreensGreedClass('three-rows-grid');
+                            toggleScreensGreedClass('webrtc_tool_three-rows-grid');
 
                             break;
                         default:
@@ -386,24 +458,24 @@
                             var i = 0;
 
                             rowDiv = document.createElement('DIV');
-                            rowDiv.className = 'main-screen-stream';
+                            rowDiv.className = 'webrtc_tool_main-screen-stream';
                             rowDiv.appendChild(roomScreens[0].screenEl)
                             prerenderedScreens.appendChild(rowDiv);
                             var mainScreen = rowDiv;
 
                             var videoThumbsCon = document.createElement('div');
-                            videoThumbsCon.className = 'video-thumbs-wrapper';
+                            videoThumbsCon.className = 'webrtc_tool_video-thumbs-wrapper';
                             var videoThumbs = document.createElement('div');
-                            videoThumbs.className = 'video-thumbs-inner';
+                            videoThumbs.className = 'webrtc_tool_video-thumbs-inner';
 
                             var participantScreen;
                             for(i = 1; participantScreen = roomScreens[i]; i++) {
 
 
                                 rowDiv = document.createElement('DIV');
-                                rowDiv.className = 'flex-row-item';
+                                rowDiv.className = 'webrtc_tool_flex-row-item';
 
-                                rowDiv.appendChild(participantScreen.screenEl)
+                                rowDiv.appendChild(createRoomScreen(participantScreen))
 
 
                                 videoThumbs.appendChild(rowDiv);
@@ -413,8 +485,8 @@
                             }
                             videoThumbsCon.appendChild(videoThumbs);
                             prerenderedScreens.appendChild(videoThumbsCon);
-                            //roomsMedia.className = 'full-screen-grid';
-                            toggleScreensGreedClass('thumbs-screens-grid');
+                            //roomsMedia.className = 'webrtc_tool_webrtc_tool_full-screen-grid';
+                            toggleScreensGreedClass('webrtc_tool_thumbs-screens-grid');
 
                     }
 
@@ -424,10 +496,10 @@
 
                 var toggleScreensGreedClass = function (classToSwitch) {
                     var gridClasses = [
-                        'full-screen-grid',
-                        'two-rows-grid',
-                        'three-rows-grid',
-                        'thumbs-screens-grid'
+                        'webrtc_tool_full-screen-grid',
+                        'webrtc_tool_two-rows-grid',
+                        'webrtc_tool_three-rows-grid',
+                        'webrtc_tool_thumbs-screens-grid'
                     ];
 
                     for(var i in gridClasses){
@@ -437,7 +509,7 @@
                 }
 
                 var clearAllScreens = function () {
-                    var screens =  WebRTCconference.screens;
+                    var screens =  WebRTCconference.screens();
 
                     var i, participantScreen;
                     for(i = 0; participantScreen = screens[i]; i++) {
@@ -456,10 +528,10 @@
                         elementToMove.style.top = ypos + 'px';
                     }
                     var drag = function(evt){
-                        if(tool.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
+                        if(Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
                         evt = evt || window.event;
-                        var posX = tool.isMobile ? evt.changedTouches[0].clientX : evt.clientX,
-                            posY = tool.isMobile ? evt.changedTouches[0].clientY : evt.clientY,
+                        var posX = Q.info.isMobile ? evt.changedTouches[0].clientX : evt.clientX,
+                            posY = Q.info.isMobile ? evt.changedTouches[0].clientY : evt.clientY,
                             aX = posX - diffX,
                             aY = posY - diffY;
                         if (aX < 0) aX = 0;
@@ -469,7 +541,7 @@
                         move(aX,aY);
                     }
                     var initMoving = function(divid,container,evt){
-                        if(tool.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
+                        if(Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
                         elementToMove = divid;
                         var elRect = elementToMove.getBoundingClientRect();
                         console.log('elementToMove.offsetTop',elementToMove.offsetTop)
@@ -477,10 +549,11 @@
                         elementToMove.style.height = elRect.height + 'px';
                         elementToMove.style.top = elRect.top + 'px';
                         elementToMove.style.left = elRect.left + 'px';
+                        elementToMove.style.transform = '';
                         elementToMove.style.position = 'fixed';
                         evt = evt || window.event;
-                        posX = tool.isMobile ? evt.touches[0].clientX : evt.clientX,
-                            posY = tool.isMobile ? evt.touches[0].clientY : evt.clientY,
+                        posX = Q.info.isMobile ? evt.touches[0].clientX : evt.clientX,
+                            posY = Q.info.isMobile ? evt.touches[0].clientY : evt.clientY,
                             divTop = elementToMove.style.top,
                             divLeft = elementToMove.style.left,
                             eWi = parseInt(elementToMove.offsetWidth),
@@ -491,12 +564,12 @@
                         divTop = divTop.replace('px','');
                         divLeft = divLeft.replace('px','');
                         diffX = posX - divLeft, diffY = posY - divTop;
-                        if(tool.isMobile)
+                        if(Q.info.isMobile)
                             document.addEventListener('touchmove', drag);
                         else document.addEventListener('mousemove', drag);
                     }
                     var stopMoving = function(container){
-                        if(tool.isMobile)
+                        if(Q.info.isMobile)
                             document.removeEventListener('touchmove', drag)
                         else document.removeEventListener('mousemove', drag)
 
@@ -517,7 +590,7 @@
                     var _elementToResize;
                     var _handler;
                     var _handlerPosition = 'right';
-                    var _elLeft1Border;
+                    var _elLeftBorder;
                     var _elRightBorder;
                     var _elLeftMargin;
                     var _elRightMargin;
@@ -612,12 +685,12 @@
                     }
 
                     function setHandler(element) {
-                        if(tool.isMobile) {
+                        if(Q.info.isMobile) {
                             resizeByPinchGesture(element);
                             return;
                         }
                         var resizeHandler = document.createElement('DIV');
-                        resizeHandler.classList.add('Streams_webrtc_tool_resize-handler');
+                        resizeHandler.classList.add('webrtc_tool_resize-handler');
                         if(_handlerPosition == 'right') {
                             resizeHandler.style.right = '0';
                             resizeHandler.style.cursor = 'nw-resize';
@@ -636,7 +709,7 @@
 
                     function _startResizingByPinch(e) {
                         console.log('_startResizingByPinch')
-                        _elementToResize = e.target.closest('.chat-participant');
+                        _elementToResize = e.target.closest('.webrtc_tool_chat-participant');
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
                         window.addEventListener('touchend', _stopResizingByPinch);
                         window.addEventListener('touchmove', resizeByPinch);
@@ -753,12 +826,27 @@
                     function onWheel(e) {
                         //e = e || window.event;
                         //var currentTarget = document.elementFromPoint(e.clientX, e.clientY);
-                        if(_elementToResize == null) _elementToResize = e.target.closest('.chat-participant');
+                        if(_elementToResize == null) _elementToResize = e.target.closest('.webrtc_tool_chat-participant');
+                        var elRect = _elementToResize.getBoundingClientRect();
+                        //if(elRect.height >= window.innerHeight || elRect.width >= window.innerWidth) return;
+                        console.log('_elementToResize', _elementToResize)
                         var delta = e.deltaY || e.detail || e.wheelDelta;
                         if(_latestScaleValue == null) _latestScaleValue = 1;
                         var scale = (delta > 0) ? _latestScaleValue + 0.1 : _latestScaleValue - 0.1
                         _elementToResize.style.transform = 'scale(' + scale + ')';
-                        _latestScaleValue = scale;
+                       // _latestScaleValue = scale;
+                        setTimeout(function () {
+                            var elRect = _elementToResize.getBoundingClientRect();
+                            if(elRect.height >= window.innerHeight || elRect.width >= window.innerWidth) {
+                                _elementToResize.style.transform = 'scale(' + scale-0.1 + ')';
+                            }
+                            var elRect = _elementToResize.getBoundingClientRect();
+                            _elementToResize.style.width = elRect.width + 'px';
+                            _elementToResize.style.height = elRect.height + 'px';
+                            _elementToResize.style.top = elRect.top + 'px';
+                            _elementToResize.style.left = elRect.left + 'px';
+                            _elementToResize.style.transform = '';
+                        }, 100);
                         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
                     }
 
