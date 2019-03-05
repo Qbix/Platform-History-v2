@@ -81,7 +81,7 @@ class Q
 			}
 			if (is_array($ref2)) {
 				foreach ($key as $k) {
-					if (array_key_exists($k, $ref2)) {
+					if (isset($ref2[$k])) {
 						$ref2 = $ref2[$k];
 						continue 2;
 					}
@@ -184,11 +184,11 @@ class Q
 					$errstr, $errfile, $errline, $context
 				);
 				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
-					'maxLength' => 10000
+					'maxLength' => 1000
 				));
-				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
+				Q::log("PHP Error($errno): \n\n$dump", 'error', null, array(
 					'maxLength' => 100000
-				), 'error');
+				));
 				$type = 'warning';
 				break;
 			default:
@@ -1080,6 +1080,7 @@ class Q
 	
 	/**
 	 * @method take
+	 * @static
 	 * @param {array|object} $source An array or object from which to take things.
 	 * @param {array} $fields An array of fields to take or an associative array of fieldname => default pairs
 	 * @param {array|object} &$dest Optional reference to an array or object in which we will set values.

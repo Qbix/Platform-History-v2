@@ -2126,10 +2126,10 @@ class Db_Row implements Iterator
 		}
 		$query->limit(1); // get at most one
 		$rows = $query->fetchDbRows(get_class($this));
-		
+
 		// Return one db row, as per function description
-		if (isset($rows[0])) {
-			$this->copyFromRow($rows[0], '', true);
+		if (!empty($rows)) {
+			$this->copyFromRow(reset($rows), '', true);
 			if (class_exists('Q')) {
 				$params = array(
 					'row' => $this,

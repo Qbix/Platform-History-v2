@@ -109,4 +109,4 @@ Q.Tool.define('Users/list', function () {
 	}
 });
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

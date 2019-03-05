@@ -670,4 +670,4 @@ var interval;
 var bgLoaded;
 var dialogs = [];
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

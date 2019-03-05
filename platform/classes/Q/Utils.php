@@ -53,32 +53,34 @@ class Q_Utils
 	 * @static
 	 * @param {array} $data The array of data
 	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
-	 * @param {string} [$secret] A different secret to use for generating the signature
-	 * @return {array} The data, with the signature added
+	 * @param {string} [$secret] Can pass a different secret to use for generating the signature
+	 *  than the one found in Q/internal/secret config.
+	 * @return {array} The data, with the signature added unless $secret is null
 	 */
 	static function sign($data, $fieldKeys = null, $secret = null) {
 		if (!isset($secret)) {
 			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
-		if (isset($secret)) {
-			if (!$fieldKeys) {
-				$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-				$fieldKeys = array("Q.$sf");
-			}
-			if (is_string($fieldKeys)) {
-				$fieldKeys = array($fieldKeys);
-			}
-			$ref = &$data;
-			for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
-				if (!array_key_exists($fieldKeys[$i], $ref)) {
-					$ref[ $fieldKeys[$i] ] = array();
-				}
-				$ref = &$ref[ $fieldKeys[$i] ];
-			}
-			$ef = end($fieldKeys);
-			unset($ref[$ef]);
-			$ref[$ef] = Q_Utils::signature($data, $secret);
+		if (!isset($secret)) {
+			return $data;
 		}
+		if (!$fieldKeys) {
+			$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
+			$fieldKeys = array("Q.$sf");
+		}
+		if (is_string($fieldKeys)) {
+			$fieldKeys = array($fieldKeys);
+		}
+		$ref = &$data;
+		for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
+			if (!array_key_exists($fieldKeys[$i], $ref)) {
+				$ref[ $fieldKeys[$i] ] = array();
+			}
+			$ref = &$ref[ $fieldKeys[$i] ];
+		}
+		$ef = end($fieldKeys);
+		unset($ref[$ef]);
+		$ref[$ef] = Q_Utils::signature($data, $secret);
 		return $data;
 	}
 	
@@ -654,8 +656,12 @@ class Q_Utils
 		$ip = null;
 		if (is_array($uri)) {
 			$url = $uri[0];
-			if (isset($uri[1])) $ip = $uri[1];
-		} else $url = $uri;
+			if (isset($uri[1])) {
+				$ip = $uri[1];
+			}
+		} else {
+			$url = $uri;
+		}
 		$parts = parse_url($url);		
 		$host = $parts['host'];
 		if (!isset($ip)) $ip = $host;
@@ -663,6 +669,9 @@ class Q_Utils
 //		if (!empty($parts['query'])) $request_uri .= "?".$parts['query'];
 		$port = isset($parts['port']) ? ':'.$parts['port'] : '';
 		$url = $parts['scheme']."://".$ip.$port.$request_uri;
+		if (!empty($parts['query'])) {
+			$url .= '?' . $parts['query'];
+		}
 
 		// NOTE: this works for http(s) only
 		$headers = array("Host: ".$host);
@@ -673,7 +682,24 @@ class Q_Utils
 		if (!is_string($data)) {
 			$data = '';
 		}
-
+		
+		if (!isset($header) or is_array($header)) {
+			$headers[] = "User-Agent: $user_agent";
+			if ($data) {
+				if ($method === 'GET') {
+					$url = Q::fixUrl("$url?$data");
+				} else {
+					$headers[] = "Content-type: application/x-www-form-urlencoded";
+					$headers[] = "Content-length: " . strlen($data);
+				}
+			}
+			if ($header) {
+				$headers = array_merge($headers, $header);
+			}
+			$header = implode("\r\n", $headers);
+		} else {
+			$headers = explode("\r\n", $header);
+		}
 		if (function_exists('curl_init')) {
 			// Use CURL if installed...
 			$ch = curl_init();
@@ -699,7 +725,7 @@ class Q_Utils
 					break;
 				case 'GET':
 					// default method for cURL
-					curl_setopt($ch, CURLOPT_URL, "$url?$data");
+					curl_setopt($ch, CURLOPT_URL, $url);
 					break;
 				case 'PUT':
 					// not supported
@@ -715,20 +741,15 @@ class Q_Utils
 			curl_close($ch);
 		} else {
 			// Non-CURL based version...
-			if (!isset($header)) {
-				if ($data) $headers[] = "Content-type: application/x-www-form-urlencoded";
-				$headers[] = "User-Agent: $user_agent";
-				if ($data) $headers[] = "Content-length: " . strlen($data);
-				$header = implode("\r\n", $headers);
-			}
 			$context = stream_context_create(array(
 				'http' => array(
 					'method' => $method,
 					'header' => $header,
 					'content' => $data,
 					'max_redirects' => 10,
-					'timeout'	   => $res_t
-			)));
+					'timeout' => $res_t
+				)
+			));
 			$sock = fopen($url, 'rb', false, $context);
 			if ($sock) {
 				$result = '';

@@ -528,6 +528,17 @@ class Streams_Avatar extends Base_Streams_Avatar
 		Streams_Avatar::insertManyAndExecute($rows_that_show, array('onDuplicateKeyUpdate' => $updates_that_show));
 		Streams_Avatar::insertManyAndExecute($rows_that_hide, array('onDuplicateKeyUpdate' => $updates_that_hide));
 	}
+	
+	static function streamNames()
+	{
+		return array(
+			'Streams/user/firstName',
+			'Streams/user/lastName', 
+			'Streams/user/icon', 
+			'Streams/user/username', 
+			'Streams/user/gender'
+		);
+	}
 
 	protected static $cache;
 

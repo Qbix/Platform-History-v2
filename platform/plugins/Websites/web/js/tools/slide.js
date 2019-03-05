@@ -29,4 +29,4 @@ Q.Tool.define("Websites/slide", function () {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

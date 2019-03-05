@@ -309,21 +309,21 @@ class Db_Mysql implements Db_Interface
 		// $fields might be an empty array,
 		// but the insert will still be attempted.
 		
-		$columns_list = array();
-		$values_list = array();
+		$columnsList = array();
+		$valuesList = array();
 		foreach ($fields as $column => $value) {
-			$columns_list[] = Db_Query_Mysql::column($column);
+			$columnsList[] = Db_Query_Mysql::column($column);
 			if ($value instanceof Db_Expression) {
-				$values_list[] = "$value";
+				$valuesList[] = "$value";
 			} else {
-				$values_list[] = ":$column";
+				$valuesList[] = ":$column";
 			}
 		}
-		$columns_string = implode(', ', $columns_list);
-		$values_string = implode(', ', $values_list);
+		$columnsString = implode(', ', $columnsList);
+		$valuesString = implode(', ', $valuesList);
 		
 		$clauses = array(
-			'INTO' => "$table_into ($columns_string)", 'VALUES' => $values_string
+			'INTO' => "$table_into ($columnsString)", 'VALUES' => $valuesString
 		);
 		
 		return new Db_Query_Mysql($this, Db_Query::TYPE_INSERT, $clauses, $fields, $table_into);
@@ -338,6 +338,8 @@ class Db_Mysql implements Db_Interface
 	 * Each row should be an array of ($field => $value) pairs, with the exact
 	 * same set of keys (field names) in each array. It can also be a Db_Row.
 	 * @param {array} [$options=array()] An associative array of options, including:
+	 * @param {array} [$options.columns] Pass an array of column names, otherwise
+	 *    they are automatically taken from the first row being inserted.
 	 * @param {string} [$options.className]
 	 *    If you provide the class name, the system will be able to use any sharding
 	 *    indexes under that class name in the config.
@@ -366,13 +368,22 @@ class Db_Mysql implements Db_Interface
 		$className = isset($options['className']) ? $options['className'] : null;
 		
 		// Get the columns list
-		$row = reset($rows);
-		$record = ($row instanceof Db_Row) ? $row->fields : $row;
-		foreach ($record as $column => $value) {
-			$columns_list[] = Db_Query_Mysql::column($column);
+		$rawColumns = array();
+		if (isset($options['columns'])) {
+			$columnsList = $options['columns'];
+			foreach ($columnsList as $c) {
+				$rawColumns[$c] = $c;
+			}
+		} else {
+			$row = reset($rows);
+			$record = ($row instanceof Db_Row) ? $row->fields : $row;
+			foreach ($record as $column => $value) {
+				$columnsList[] = $c = Db_Query_Mysql::column($column);
+				$rawColumns[$c] = $column;
+			}
 		}
-		$columns_string = implode(', ', $columns_list);
-		$into = "$table_into ($columns_string)";
+		$columnsString = implode(', ', $columnsList);
+		$into = "$table_into ($columnsString)";
 		
 		// On duplicate key update clause (optional)
 		$update_fields = array();
@@ -417,21 +428,25 @@ class Db_Mysql implements Db_Interface
 			if (!isset($bindings[$shard])) {
 				$bindings[$shard] = array();
 			}
-			$values_list = array();
-			foreach ($record as $column => $value) {
+			$valuesList = array();
+			$index = 0;
+			foreach ($columnsList as $column) {
+				++$index;
+				$raw = $rawColumns[$column];
+				$value = isset($record[$raw]) ? $record[$raw] : null;
 				if ($value instanceof Db_Expression) {
-					$values_list[] = "$value";
+					$valuesList[] = "$value";
 				} else {
-					$values_list[] = ':_'.$qc.'_'.$column;
-					$bindings[$shard]['_'.$qc.'_'.$column] = $value;
+					$valuesList[] = ':_'.$qc.'_'.$index;
+					$bindings[$shard]['_'.$qc.'_'.$index] = $value;
 				}
 			}
-			$values_string = implode(', ', $values_list);
+			$valuesString = implode(', ', $valuesList);
 			if (empty($queryCounts[$shard])) {
-				$q = $queries[$shard] = "INSERT INTO $into\nVALUES ($values_string) ";
+				$q = $queries[$shard] = "INSERT INTO $into\nVALUES ($valuesString) ";
 				$queryCounts[$shard] = 1;
 			} else {
-				$q = $queries[$shard] .= ",\n       ($values_string) ";
+				$q = $queries[$shard] .= ",\n       ($valuesString) ";
 				++$queryCounts[$shard];
 			}
 
@@ -2391,10 +2406,11 @@ $field_hints
 	 * @method table
 	 * @static
 	 * @param {boolean} [\$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [\$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table(\$with_db_name = true)
+	static function table(\$with_db_name = true, \$alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', '$connectionName', 'indexes', '$class_name_base', false)) {
 			return new Db_Expression((\$with_db_name ? '{\$dbname}.' : '').'{\$prefix}'.'$table_name_base');
@@ -2405,7 +2421,8 @@ $field_hints
   			if (!\$with_db_name)
   				return \$table_name;
   			\$db = Db::connect($connectionName_var);
-  			return \$db->dbName().'.'.\$table_name;
+			\$alias = isset(\$alias) ? ' '.\$alias : '';
+  			return \$db->dbName().'.'.\$table_name.\$alias;
 		}
 	}
 	$dc
@@ -2425,20 +2442,21 @@ $field_hints
 	 * @static
 	 * @param {string|array} [\$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [\$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [\$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select(\$fields=null, \$alias = null)
 	{
 		if (!isset(\$fields)) {
 			\$fieldNames = array();
+			\$a = isset(\$alias) ? \$alias.'.' : '';
 			foreach (self::fieldNames() as \$fn) {
-				\$fieldNames[] = \$fn;
+				\$fieldNames[] = \$a .  \$fn;
 			}
 			\$fields = implode(',', \$fieldNames);
 		}
-		if (!isset(\$alias)) \$alias = '';
-		\$q = self::db()->select(\$fields, self::table().' '.\$alias);
+		\$alias = isset(\$alias) ? ' '.\$alias : '';
+		\$q = self::db()->select(\$fields, self::table(true, \$alias));
 		\$q->className = $class_name_var;
 		return \$q;
 	}
@@ -2452,8 +2470,8 @@ $field_hints
 	 */
 	static function update(\$alias = null)
 	{
-		if (!isset(\$alias)) \$alias = '';
-		\$q = self::db()->update(self::table().' '.\$alias);
+		\$alias = isset(\$alias) ? ' '.\$alias : '';
+		\$q = self::db()->update(self::table(true, \$alias));
 		\$q->className = $class_name_var;
 		return \$q;
 	}
@@ -2468,8 +2486,8 @@ $field_hints
 	 */
 	static function delete(\$table_using = null, \$alias = null)
 	{
-		if (!isset(\$alias)) \$alias = '';
-		\$q = self::db()->delete(self::table().' '.\$alias, \$table_using);
+		\$alias = isset(\$alias) ? ' '.\$alias : '';
+		\$q = self::db()->delete(self::table(true, \$alias), \$table_using);
 		\$q->className = $class_name_var;
 		return \$q;
 	}
@@ -2484,8 +2502,8 @@ $field_hints
 	 */
 	static function insert(\$fields = array(), \$alias = null)
 	{
-		if (!isset(\$alias)) \$alias = '';
-		\$q = self::db()->insert(self::table().' '.\$alias, \$fields);
+		\$alias = isset(\$alias) ? ' '.\$alias : '';
+		\$q = self::db()->insert(self::table(true, \$alias), \$fields);
 		\$q->className = $class_name_var;
 		return \$q;
 	}

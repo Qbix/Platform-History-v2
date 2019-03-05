@@ -155,12 +155,14 @@
 		"images": {
 			"x": {
 				"sizes": {"x": ""},
-				"defaultSize": "x"
+				"defaultSize": "x",
+				"maxStretch": 1
 			},
 			"maxWidth": 5000,
 			"maxHeight": 5000,
-			"pixabay": null
-
+			"pixabay": null,
+			"facebook": null,
+			"google": null
 		}
 	},
 	"Db": {

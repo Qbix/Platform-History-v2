@@ -10,7 +10,6 @@ Q.setObject("Q.text.Streams.import", {
 	emailSubject: "Just sent you a link",
 	emailBody: "Hey, I just sent you an invitation to {{communityName}}. Please check it out."
 });
-Q.setObject("Q.text_en.Travel.trip", Q.text.Streams.trip);
 
 /**
  * Streams Tools
@@ -130,4 +129,4 @@ Q.Template.set('Streams/import/tool',
 	+ '</form>'
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

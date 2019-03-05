@@ -15,7 +15,8 @@
  *       parameters when a user is chosen
  *   @param {Number} [options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
- *   @param {Object} [options.exclude] hash of {userId: true}, 
+ *   @param {bool} [options.communitiesOnly=false] If true, search communities instead regular users
+ *   @param {Object} [options.exclude] hash of {userId: true},
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.
  */
@@ -73,10 +74,6 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
-		if (query === lastQuery) {
-			return;
-		}
-		lastQuery = query;
 
 		switch (event.keyCode) {
 			case 38: // up arrow
@@ -110,6 +107,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				return false;
 			default:
+				if (query === lastQuery) {
+					return;
+				}
+				lastQuery = query;
 				if (event.type === 'keydown') {
 					return;
 				}
@@ -144,6 +145,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			var show = 0;
 			for (var k in avatars) {
 				if (k in tool.exclude && tool.exclude[k]) {
+					continue;
+				}
+
+				if ((tool.state.communitiesOnly && !Q.Users.isCommunityId(k)) || (!tool.state.communitiesOnly && Q.Users.isCommunityId(k))) {
 					continue;
 				}
 
@@ -187,6 +192,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 {
 	onChoose: new Q.Event(),
 	delay: 500,
+	communitiesOnly: false,
 	exclude: {}
 },
 

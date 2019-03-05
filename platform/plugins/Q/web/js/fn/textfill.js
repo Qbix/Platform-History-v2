@@ -93,4 +93,4 @@ Q.Tool.jQuery('Q/textfill',
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);
