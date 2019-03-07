@@ -4084,7 +4084,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($accessLabels)) {
 			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
 		}
-		$defaults = Streams_Stream::getConfigField($type, 'defaults', Streams_Stream::$DEFAULTS);
+		$defaults = Streams_Stream::getConfigField($streamType, 'defaults', Streams_Stream::$DEFAULTS);
 		$templateName = $streamType . '/';
 		$template = new Streams_Stream();
 		$template->publisherId = $publisherId;
