@@ -159,7 +159,35 @@ class Places_Nearby
 		$streams = Places_Nearby::streams($publisherId, $latitude, $longitude, $options);
 		return Streams::subscribe($user->id, $publisherId, $streams, $options);
 	}
-	
+	/**
+	 * Call this function to join to streams on which messages are posted
+	 * related to things happening the given number of $meters around the given location.
+	 * @method join
+	 * @static
+	 * @param {string} $publisherId The id of the publisher publishing these streams.
+	 * @param {double} $latitude The latitude of the coordinates to subscribe around
+	 * @param {double} $longitude The longitude of the coordinates to subscribe around
+	 * @param {double} $meters The radius, in meters, around this location.
+	 *  Should be one of the array values in the Places/nearby/meters config.
+	 * @param {array} [$options=array()]
+	 *  The options to pass to the streams() and subscribe() functions
+	 * @return {Array} Returns an array of up to four arrays of ($publisherId, $streamName)
+	 *  of streams that were subscribed to.
+	 */
+	static function join(
+		$publisherId = null,
+		$latitude,
+		$longitude,
+		$meters,
+		$options = array())
+	{
+		$user = Users::loggedInUser(true);
+		$options['forSubscribers'] = true;
+		$options['meters'] = $meters;
+		$streams = Places_Nearby::streams($publisherId, $latitude, $longitude, $options);
+		return Streams::join($user->id, $publisherId, $streams, $options);
+	}
+
 	/**
 	 * Call this function to unsubscribe from streams you previously subscribed to
 	 * using Places_Nearby::subscribe.
@@ -328,8 +356,10 @@ class Places_Nearby
 		$lat = sprintf("%0.1f", $latitude);
 		$lng = sprintf("%0.1f", $longitude);
 		$content = Q_Text::get('Places/content', $options);
+		$placeName = Q::ifSet($postcode, "placeName", null);
+		$postCode = Q::ifSet($postcode, "postcode", null);
 		$postcodeLabel = Q::interpolate(
-			$content['nearby']['PostcodeLabel'], array($postcode->placeName, $postcode->postcode)
+			$content['nearby']['PostcodeLabel'], array($placeName, $postCode)
 		);
 		$latLng = Q::interpolate($content['LatLng'], array($lat, $lng));
 		$title = Q::interpolate(
