@@ -1060,6 +1060,7 @@ abstract class Streams extends Base_Streams
 		$toCreate = array();
 		$p = Streams::userStreamsTree();
 		$streams = array();
+		$messages = array();
 		foreach ($fields as $k => &$f) {
 			if (!isset($f['type'])) {
 				throw new Q_Exception_RequiredField(array('name' => 'type'));
@@ -1110,7 +1111,10 @@ abstract class Streams extends Base_Streams
 		}
 
 		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
-		Streams_Message::postMessages($asUserId, $messages, true);
+
+		if (!empty($messages)) {
+			Streams_Message::postMessages($asUserId, $messages, true);
+		}
 
 		foreach ($streams as $name => $s) {
 			$modifiedFields = $s->fields;
@@ -2956,8 +2960,10 @@ abstract class Streams extends Base_Streams
 		if ($streamNamesMissing) {
 			$types = array();
 			foreach ($streamNamesMissing as $sn) {
-				$s = $subscriptions[$sn];
-				$types[$s->type][] = $sn;
+				$s = Q::ifset($subscriptions, $sn, null);
+				if (Q::ifset($s, 'type', null)) {
+					$types[$s->type][] = $sn;
+				}
 			}
 			$subscriptionRows = array();
 			$ruleRows = array();
