@@ -114,7 +114,7 @@ class Q_Plugin
 		}
 
 		// if defined $options['streamsList'] - add these streams to extra
-		if (is_array($options['extra'])) {
+		if (is_array(Q::ifset($options, 'extra', null))) {
 			// update extra
 			$db->update($tableName)
 				->set(array('extra' => Q::json_encode($options['extra'])))
@@ -150,7 +150,7 @@ class Q_Plugin
 
 		$extra = self::handleExtra('Streams', 'plugin', 'Streams');
 
-		$extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+		$extra[$key] = Q::ifset($extra, $key, array());
 
 		return $extra[$key];
 	}
@@ -169,7 +169,7 @@ class Q_Plugin
 
 		$extra = self::handleExtra('Streams', 'plugin', 'Streams');
 
-		$extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+		$extra[$key] = Q::ifset($extra, $key, array());
 
 		$extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsList)));
 
