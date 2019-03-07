@@ -356,8 +356,10 @@ class Places_Nearby
 		$lat = sprintf("%0.1f", $latitude);
 		$lng = sprintf("%0.1f", $longitude);
 		$content = Q_Text::get('Places/content', $options);
+		$placeName = Q::ifSet($postcode, "placeName", null);
+		$postCode = Q::ifSet($postcode, "postcode", null);
 		$postcodeLabel = Q::interpolate(
-			$content['nearby']['PostcodeLabel'], array($postcode->placeName, $postcode->postcode)
+			$content['nearby']['PostcodeLabel'], array($placeName, $postCode)
 		);
 		$latLng = Q::interpolate($content['LatLng'], array($lat, $lng));
 		$title = Q::interpolate(
