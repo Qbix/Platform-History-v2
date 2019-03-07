@@ -214,6 +214,10 @@ class Q_Response
 	 */
 	static function setNotice($key, $notice, $options = array())
 	{
+		if (!is_array($options)) {
+			$options = array();
+		}
+
 		if (!isset($options['closeable'])) {
 			$options['closeable'] = true;
 		}
