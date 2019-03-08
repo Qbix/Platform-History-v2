@@ -4137,21 +4137,27 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
 Tp.children = function Q_Tool_prototype_children(name, levels) {
 	var result = {};
 	var prefix = this.prefix;
-	var id, n, i, ids;
+	var id, n, i, ids, tool, l;
 	name = name && Q.normalize(name);
 	for (id in Q.Tool.active) {
 		for (n in Q.Tool.active[id]) {
-			if ((name && name != n)
+			if ((name && name !== n)
 			|| !id.startsWith(prefix)) {
 				continue;
 			}
-			var tool = Q.Tool.active[id][n];
+			tool = Q.Tool.active[id][n];
+
+			// skip if supposed child tool is not a descendant of parent tool
+			if (!this.element.contains(tool.element)) {
+				continue;
+			}
+
 			if (!levels) {
 				Q.setObject([id, n], tool, result);
 				continue;
 			}
 			ids = tool.parentIds();
-			var l = Math.min(levels, ids.length);
+			l = Math.min(levels, ids.length);
 			for (i=0; i<l; ++i) {
 				if (ids[i] === this.id) {
 					Q.setObject([id, n], tool, result);
