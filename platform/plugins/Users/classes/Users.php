@@ -1469,7 +1469,6 @@ abstract class Users extends Base_Users
 			$filename = $directory.DS.$basename;
 			if (is_string($url)) {
 				$info = pathinfo($filename);
-				$success = false;
 				if ($largestImage) {
 					$source = $largestImage;
 				} else {
@@ -1487,7 +1486,6 @@ abstract class Users extends Base_Users
 				}
 				if ($sw == $w and $sh == $h) {
 					$image = $largestImage;
-					$success = true;
 				} else {
 					if ($h > $sh) {
 						$w = $w * $sh / $h;
@@ -1496,11 +1494,11 @@ abstract class Users extends Base_Users
 						$h = $h * $sw / $w;
 						$w = $sw;
 					}
-					$image = imagecreatetruecolor($size, $size);
+					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled(
+					imagecopyresampled(
 						$image, $source, 
-						($sw - $w) / 2, ($sh - $h) / 2,
+						0, 0,
 						0, 0, 
 						$w, $h,
 						$sw, $sh
