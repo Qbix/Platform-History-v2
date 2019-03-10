@@ -18,7 +18,7 @@ CREATE TABLE `{$prefix}access` (
   PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`,`ofContactLabel`),
   KEY `subscriber` (`ofUserId`),
   KEY `contacts` (`ofContactLabel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
 # Dump of table {$prefix}avatar
 # ------------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `{$prefix}avatar` (
   `lastName` varchar(255) NOT NULL DEFAULT '' COMMENT 'if not empty, the user can see this last name',
   `icon` varbinary(255) NOT NULL COMMENT 'the icon to display',
 PRIMARY KEY (`toUserId`,`publisherId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
 # Dump of table {$prefix}invite
 # ------------------------------------------------------------
@@ -59,7 +59,7 @@ CREATE TABLE `{$prefix}invite` (
   KEY `user` (`userId`,`token`),
   KEY `stream` (`publisherId`,`streamName`,`userId`),
   KEY `inviting` (`invitingUserId`,`publisherId`,`streamName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores invites to the stream on publisher id server';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stores invites to the stream on publisher id server';
 
 # Dump of table {$prefix}invited
 # ------------------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE `{$prefix}invited` (
   `updatedTime` timestamp NULL DEFAULT NULL,
   `expireTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userId`,`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores tokens where user is invited on userId server';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stores tokens where user is invited on userId server';
 
 # Dump of table {$prefix}message
 # ------------------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE `{$prefix}message` (
   `instructions` varchar(4092) NOT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding',
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000' COMMENT 'this may depend on the reputation of user_by relative to the stream',
   PRIMARY KEY (`publisherId`,`streamName`,`ordinal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
 # Dump of table {$prefix}notification
 # ------------------------------------------------------------
@@ -115,7 +115,7 @@ CREATE TABLE `{$prefix}notification` (
   KEY `stream` (`publisherId`,`streamName`),
   KEY `recipient` (`userId`),
   KEY `count` (`publisherId`,`streamName`,`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on userId''s shard';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on userId''s shard';
 
 # Dump of table {$prefix}participant
 # ------------------------------------------------------------
@@ -140,7 +140,7 @@ CREATE TABLE `{$prefix}participant` (
   KEY `posted` (`publisherId`,`streamName`,`posted`),
   KEY `inserted` (`publisherId`,`streamName`,`insertedTime`),
   KEY `updated` (`publisherId`,`streamName`,`updatedTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
 # Dump of table {$prefix}related_from
 # ------------------------------------------------------------
@@ -156,7 +156,7 @@ CREATE TABLE `{$prefix}related_from` (
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`fromPublisherId`,`fromStreamName`,`type`,`toPublisherId`,`toStreamName`),
   KEY `sorting` (`fromPublisherId`,`fromStreamName`,`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table is owned by publisher of the member stream';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='This table is owned by publisher of the member stream';
 
 # Dump of table {$prefix}related_to
 # ------------------------------------------------------------
@@ -173,7 +173,7 @@ CREATE TABLE `{$prefix}related_to` (
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`toPublisherId`,`toStreamName`,`type`,`fromPublisherId`,`fromStreamName`),
   KEY `sorting` (`toPublisherId`,`toStreamName`,`type`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table is owned by publisher of the aggregator stream';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='This table is owned by publisher of the aggregator stream';
 
 # Dump of table {$prefix}rule
 # ------------------------------------------------------------
@@ -191,7 +191,7 @@ CREATE TABLE `{$prefix}rule` (
   `deliver` varchar(255) NOT NULL COMMENT 'JSON object with possible keys "email", "mobile", "device", "platforms", "to", "filter", and "mode"',
   `relevance` decimal(10,4) NOT NULL DEFAULT 1 COMMENT 'used to prioritize messages for display and processing',
   PRIMARY KEY (`ofUserId`,`publisherId`,`streamName`,`ordinal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='rules applied on the user''s side for notifications coming in';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='rules applied on the user''s side for notifications coming in';
 
 # Dump of table {$prefix}stream
 # ------------------------------------------------------------
@@ -217,7 +217,7 @@ CREATE TABLE `{$prefix}stream` (
   `participantCount` int(11) NOT NULL DEFAULT '0',
   `closedTime` TIMESTAMP NULL DEFAULT NULL COMMENT 'this records the time, if any, that the stream was last closed for updates',
   PRIMARY KEY (`publisherId`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stored primarily on publisherId''s shard';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
 # Dump of table {$prefix}subscription
 # ------------------------------------------------------------
@@ -235,7 +235,7 @@ CREATE TABLE `{$prefix}subscription` (
   `duration` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`),
   KEY `subscriber` (`ofUserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='{"type": [ array of message types ], "notifications": 5}';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='{"type": [ array of message types ], "notifications": 5}';
 
 # Dump of table {$prefix}total
 # ------------------------------------------------------------
