@@ -534,6 +534,8 @@ Q.Tool.define('Streams/chat', function(options) {
 				}, {ascending: true});
 				tool.processDOM();
 			});
+			// TODO: don't scroll to bottom, show "V 10 new messages" button
+			// on the bottom left of Streams/chat, and then jump to bottom and refresh
 			tool.scrollToBottom();
 		}, tool);
 
@@ -827,6 +829,8 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.addEvents();
 				
 				Q.handle(state.onRefresh, tool);
+				
+				tool.scrollToBottom();
 			});
 		
 		}
