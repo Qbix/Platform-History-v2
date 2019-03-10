@@ -16,7 +16,7 @@ CREATE TABLE `{$prefix}app_user` (
   `state` enum('visited','added','removed')  NOT NULL DEFAULT 'visited',
   PRIMARY KEY (`userId`,`provider`,`appId`),
   UNIQUE KEY `provider` (`provider`,`appId`,`provider_uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a user in our 3rd party app with a provider like facebook';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a user in our 3rd party app with a provider like facebook';
 
 # Dump of table {$prefix}contact
 # ------------------------------------------------------------
@@ -30,7 +30,7 @@ CREATE TABLE `{$prefix}contact` (
   `nickname` varchar(255)  NOT NULL DEFAULT '',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`userId`,`label`,`contactUserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents user contacts in the system';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents user contacts in the system';
 
 # Dump of table {$prefix}device
 # ------------------------------------------------------------
@@ -47,7 +47,7 @@ CREATE TABLE `{$prefix}device` (
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userId`,`deviceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents devices that can receive push notifications, etc.';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents devices that can receive push notifications, etc.';
 
 # Dump of table {$prefix}email
 # ------------------------------------------------------------
@@ -67,7 +67,7 @@ CREATE TABLE `{$prefix}email` (
   UNIQUE KEY `address` (`address`),
   KEY `updatedTime` (`updatedTime`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci;
 
 # Dump of table {$prefix}external_from
 # ------------------------------------------------------------
@@ -81,7 +81,7 @@ CREATE TABLE `{$prefix}external_from` (
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `nickname` varchar(255)  NOT NULL,
   PRIMARY KEY (`publisherId`,`xid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Stores external ids for users';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Stores external ids for users';
 
 # Dump of table {$prefix}external_to
 # ------------------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE `{$prefix}external_to` (
   `xid` varbinary(31)  NOT NULL COMMENT 'The external user id',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`publisherId`,`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Stores external ids for users';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Stores external ids for users';
 
 # Dump of table {$prefix}identify
 # ------------------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE `{$prefix}identify` (
   `state` enum('verified','future')  NOT NULL COMMENT '"future" is a mapping to a user which may later be adopted by someone',
   `userId` varbinary(31)  NOT NULL,
   PRIMARY KEY (`identifier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Mapping table for finding users based on various info';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Mapping table for finding users based on various info';
 
 # Dump of table {$prefix}label
 # ------------------------------------------------------------
@@ -119,7 +119,7 @@ CREATE TABLE `{$prefix}label` (
   `icon` varbinary(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`,`label`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Enables display and renaming of labels and their icons';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Enables display and renaming of labels and their icons';
 
 # Dump of table {$prefix}link
 # ------------------------------------------------------------
@@ -132,7 +132,7 @@ CREATE TABLE `{$prefix}link` (
   `extraInfo` varchar(255)  NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`identifier`, `userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents imported contact links that can turn into contacts';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents imported contact links that can turn into contacts';
 
 # Dump of table {$prefix}mobile
 # ------------------------------------------------------------
@@ -155,7 +155,7 @@ CREATE TABLE `{$prefix}mobile` (
   UNIQUE KEY `number` (`number`),
   KEY `updatedTime` (`updatedTime`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents mobile accounts that can receive sms via mobile numbers';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents mobile accounts that can receive sms via mobile numbers';
 
 # Dump of table {$prefix}oAuth
 # ------------------------------------------------------------
@@ -188,7 +188,7 @@ CREATE TABLE `{$prefix}session` (
   `duration` int(11) NOT NULL DEFAULT 0 DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'PHP timestamp of last time this row was saved',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';
 
 # Dump of table {$prefix}total
 # ------------------------------------------------------------
@@ -203,7 +203,7 @@ CREATE TABLE `{$prefix}total` (
   `value` decimal(10,4) NOT NULL DEFAULT '0.0000',
   `updatedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`forType`,`forId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a total of the votes';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a total of the votes';
 
 # Dump of table {$prefix}user
 # ------------------------------------------------------------
@@ -231,7 +231,7 @@ CREATE TABLE `{$prefix}user` (
   `url` varbinary(255)  DEFAULT NULL COMMENT 'the url of this user''s fm server',
   `pincodeHash` varbinary(255)  DEFAULT NULL COMMENT 'a smaller security code for when user is already logged in',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a user in the system';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a user in the system';
 
 # Dump of table {$prefix}vote
 # ------------------------------------------------------------
@@ -246,4 +246,4 @@ CREATE TABLE `{$prefix}vote` (
   `weight` decimal(10,4) NOT NULL DEFAULT '1.0000',
   `updatedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`userId`,`forType`,`forId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Represents a vote by a user for something';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a vote by a user for something';

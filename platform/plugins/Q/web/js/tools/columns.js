@@ -229,7 +229,8 @@ Q.Tool.define("Q/columns", function(options) {
 		if (!div) {
 			createdNewDiv = true;
 			div = document.createElement('div').addClass('Q_columns_column');
-			div.style.display = 'none';
+			// div.style.display = 'none';
+			div.style.visibility = 'hidden';
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
@@ -303,6 +304,8 @@ Q.Tool.define("Q/columns", function(options) {
 		if ($div.css('position') === 'static') {
 			$div.css('position', 'relative');
 		}
+		var _position = $div.css('position');
+		$div.css('position', 'absolute');
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
 		if (options.name) {
@@ -392,6 +395,7 @@ Q.Tool.define("Q/columns", function(options) {
 			p.add(waitFor, function () {
 				var data = tool.data(index);
 				if ($(div).closest('html').length) {
+					$div.css('position', _position);
 					var name = $(div).attr('data-name');
 					var js = state.handlers && state.handlers[name];
 					if (js) {
@@ -524,6 +528,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$mask = $('<div class="Q_columns_mask" />')
 				.appendTo($div);
 				$div.show()
+				.css('visibility', 'visible')
 				.addClass('Q_columns_opening')
 				.css(o.animation.css.hide)
 				.stop()
