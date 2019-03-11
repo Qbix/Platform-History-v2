@@ -1437,52 +1437,74 @@ abstract class Users extends Base_Users
 			return $directory;
 		}
 		Q_Utils::canWriteToPath($directory, null, true);
-		$largestSize = 0;
+		$largestWidth = 0;
+		$largestHeight = 0;
 		$largestUrl = null;
 		$largestImage = null;
+		// get image with largest width and height at the same time
 		foreach ($urls as $basename => $url) {
 			if (!is_string($url)) continue;
 			$filename = $directory.DS.$basename;
 			$info = pathinfo($filename);
-			$size = $info['filename'];
-			if ((string)(int)$size !== $size) continue;
-			if ($largestSize < (int)$size) {
-				$largestSize = (int)$size;
+			list($width, $height) = explode('x', $info['filename']);
+			if (!$width) {
+				$width = $height;
+			}
+			if (!$height) {
+				$height = $width;
+			}
+			if ($largestWidth < (int)$width
+			and $largestHeight < (int)$height) {
+				$largestWidth = (int)$width;
+				$largestHeight = (int)$height;
 				$largestUrl = $url;
 			}
 		}
-		if ($largestSize) {
+		if ($largestUrl) {
 			$largestImage = imagecreatefromstring(file_get_contents($largestUrl));
-			$liw = imagesx($largestImage);
-			$lih = imagesy($largestImage);
+			$sw = imagesx($largestImage);
+			$sh = imagesy($largestImage);
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
 			if (is_string($url)) {
 				$info = pathinfo($filename);
-				$size = $info['filename'];
 				$success = false;
-				if ($largestImage and (string)(int)$size === $size) {
-					if ($size == $largestSize
-					and $liw == $largestSize
-					and $lih == $largestSize) {
-						$image = $largestImage;
-						$success = true;
-					} else {
-						$image = imagecreatetruecolor($size, $size);
-						imagealphablending($image, false);
-						$success = imagecopyresampled(
-							$image, $largestImage, 
-							0, 0, 
-							0, 0, 
-							$size, $size, 
-							$liw, $lih
-						);
-					}
-				}
-				if (!$success) {
+				if ($largestImage) {
+					$source = $largestImage;
+				} else {
 					$data = file_get_contents($url);
-					$image = imagecreatefromstring($data);
+					$source = imagecreatefromstring($data);
+					$sw = imagesx($source);
+					$sh = imagesy($source);
+				}
+				list($w, $h) = explode('x', $info['filename']);
+				if (!$w) {
+					$w = $h / $sh * $sw;
+				}
+				if (!$h) {
+					$h = $w / $sw * $sh;
+				}
+				if ($sw == $w and $sh == $h) {
+					$image = $largestImage;
+					$success = true;
+				} else {
+					if ($h > $sh) {
+						$w = $w * $sh / $h;
+						$h = $sh;
+					} else if ($w > $sw) {
+						$h = $h * $sw / $w;
+						$w = $sw;
+					}
+					$image = imagecreatetruecolor($size, $size);
+					imagealphablending($image, false);
+					$success = imagecopyresampled(
+						$image, $source, 
+						($sw - $w) / 2, ($sh - $h) / 2,
+						0, 0, 
+						$w, $h,
+						$sw, $sh
+					);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
