@@ -12473,6 +12473,7 @@ Q.onJQuery.add(function ($) {
 		"Q/paging": "{{Q}}/js/tools/paging.js",
 		"Q/pie": "{{Q}}/js/tools/pie.js",
 		"Q/badge": "{{Q}}/js/tools/badge.js"
+		"Q/resize": "{{Q}}/js/tools/resize.js"
 	});
 	
 	Q.Tool.jQuery({
