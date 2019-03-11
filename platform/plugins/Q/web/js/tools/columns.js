@@ -693,7 +693,9 @@ Q.Tool.define("Q/columns", function(options) {
 
 			var data = tool.data(index);
 			var $sc = $(state.container);
-			$sc.width($sc.width() - w);
+			if (!Q.info.isMobile) {
+				$sc.width($sc.width() - w);
+			}
 			presentColumn(tool);
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
