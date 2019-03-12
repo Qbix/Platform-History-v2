@@ -7,4 +7,4 @@ CREATE TABLE `{$prefix}category` (
   `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'the time that this stream row has last changed for whatever reason',
   `relatedTo` TEXT COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'serialized JSON array of related stream types, icons and titles',
   PRIMARY KEY (`publisherId`,`streamName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='denormalized to speed up display of related streams';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='denormalized to speed up display of related streams';

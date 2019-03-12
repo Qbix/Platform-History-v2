@@ -12457,6 +12457,8 @@ Q.onInit.add(function () {
 
 Q.onJQuery.add(function ($) {
 	
+	Q.$ = $;
+	
 	Q.Tool.define({
 		"Q/inplace": "{{Q}}/js/tools/inplace.js",
 		"Q/tabs": "{{Q}}/js/tools/tabs.js",
