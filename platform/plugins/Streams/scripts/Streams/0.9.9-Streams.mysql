@@ -15,4 +15,4 @@ CREATE TABLE {$prefix}request (
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on shard of publisherId',
   expireTime timestamp NULL DEFAULT NULL,
   PRIMARY KEY (publisherId,streamName,userId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_unicode_ci COMMENT='stores requests for access to the stream on publisher id server';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stores requests for access to the stream on publisher id server';
