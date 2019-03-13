@@ -399,6 +399,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_big_prompt label,
 .Q_big_prompt input,
 .Q_big_prompt button,
+.Q_big_prompt select,
 .Q_big_prompt .Q_button { font-size: 18px; } 
 .Q_big_prompt .Q_button,
 .Q_notTouchscreen .Q_big_prompt .Q_button,
