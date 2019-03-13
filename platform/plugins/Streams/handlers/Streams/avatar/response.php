@@ -34,6 +34,18 @@ function Streams_avatar_response()
 	}
 
 	$avatars = Db::exportArray($avatars);
+
+	// collect participants to Streams/experience/main stream
+	foreach ($avatars as $publisherId => $avatar) {
+		$participants = Streams_Participant::select()->where(array(
+			'publisherId' => $publisherId,
+			'streamName' => 'Streams/experience/main',
+			'state' => 'participating'
+		))->fetchDbRows();
+
+		$avatars[$publisherId]['participants'] = count($participants);
+	}
+
 	if (isset($batch)) {
 		$result = array();
 		foreach ($userIds as $userId) {
