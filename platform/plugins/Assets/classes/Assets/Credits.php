@@ -19,10 +19,11 @@ class Assets_Credits
 	 * @param {string} [$asUserId=null]
 	 *   The id of the user who is trying to obtain it. Defaults to logged-in user.
 	 * @param {boolean} [$throwIfNotLoggedIn=false]
-	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
+	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in,
+	 *   and userId is null
 	 * @return {Streams_Stream|null}
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in and
-	 *   $throwIfNotLoggedIn is true
+	 *   $throwIfNotLoggedIn is true and userId is null
 	 */
 	static function userStream($userId = null, $asUserId = null, $throwIfNotLoggedIn = false)
 	{
@@ -53,31 +54,29 @@ class Assets_Credits
 	}
 	
 	/**
-	 * Amount of credits
+	 * Amount of credits for logged-in user
 	 * @method amount
 	 * @static
-	 * @param {string} [$userId = null] User which credits to return. Null = logged user.
 	 * @return {string} The amount of credits
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function amount($userId = null)
+	static function amount()
 	{
-		return self::userStream($userId, $userId)->getAttribute('amount');
+		$stream = self::userStream(null, null, true)->getAttribute('amount');
 	}
 	
 	/**
-	 * Spend credits
+	 * Spend credits as the logged-in user
 	 * @method spend
 	 * @static
 	 * @param {integer} $amount The amount of credits to spend.
-	 * @param {string} [$userId=null] User which spend credits. Null = logged user.
 	 * @param {array} $more An array supplying more info, including
 	 * @param {string} [$more.reason] Identifies the reason for spending, if any
 	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
 	 * @param {string} [$more.streamName] The name of the stream representing the purchase
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function spend($amount, $userId = null, $more = array())
+	static function spend($amount, $more = array())
 	{
 		if (!is_int($amount) or $amount <= 0) {
 			throw new Q_Exception_WrongType(array(
@@ -85,24 +84,21 @@ class Assets_Credits
 				'type' => 'positive integer'
 			));
 		}
-
-		$userId = Q::ifset($userId, Users::loggedInUser(true)->id);
-
-		$stream = self::userStream($userId, $userId);
+		$stream = self::userStream(null, null, true);
 		$existing_amount = $stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			throw new Assets_Exception_NotEnoughCredits(array(
 				'missing' => $amount - $existing_amount
 			));
 		}
-		$stream->setAttribute('amount', $existing_amount - $amount);
+		$stream->setAttribute('amount', $stream->getAttribute('amount') - $amount);
 		$stream->save();
 		
 		$instructions_json = Q::json_encode(array_merge(
 			array('app' => Q::app()),
 			$more
 		));
-		$stream->post($userId, array(
+		$stream->post($user->id, array(
 			'type' => 'Assets/credits/spent',
 			'content' => $amount,
 			'instructions' => $instructions_json
@@ -110,19 +106,13 @@ class Assets_Credits
 	}
 	
 	/**
-	 * Earn credits
+	 * Earn credits as the logged-in user
 	 * @method earn
 	 * @static
 	 * @param {integer} $amount The amount of credits to earn.
-	 * @param {string} [$userId=null] User which earn. Null = logged user.
-	 * @param {array} $more An array supplying more info, including
-	 * @param {string} [$more.reason] Identifies the reason for earn, if any
-	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
-	 * @param {string} [$more.streamName] The name of the stream representing the purchase
-	 * @throws
 	 * @param {string} $reason Identifies the reason you earned them.
 	 */
-	static function earn($amount, $userId = null, $more = array())
+	static function earn($amount, $reason = 'Assets/purchased')
 	{
 		if (!is_int($amount) or $amount <= 0) {
 			throw new Q_Exception_WrongType(array(
@@ -130,21 +120,16 @@ class Assets_Credits
 				'type' => 'integer'
 			));
 		}
-
-		$userId = Q::ifset($userId, Users::loggedInUser(true)->id);
-
-		$stream = self::userStream($userId, $userId);
+		$stream = self::userStream(null, null, true);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
 		$stream->save();
 		
 		// Post that this user earned $amount credits by $reason
-		$stream->post($userId, array(
+		$app = Q::app();
+		$stream->post($user->id, array(
 			'type' => 'Assets/credits/earned',
 			'content' => $amount,
-			'instructions' => Q::json_encode(array_merge(
-				array('app' => Q::app()),
-				$more
-			))
+			'instructions' => Q::json_encode(compact('app', 'reason'))
 		));
 	}
 	
@@ -154,11 +139,10 @@ class Assets_Credits
 	 * @static
 	 * @param {integer} $amount The amount of credits to send.
 	 * @param {string} $toUserId The id of the user to whom you will send the credits
-	 * @param {string} [$fromUserId=null] null = logged user
 	 * @param {array} $more An array supplying more info, including
  	 *  "reason" => Identifies the reason for sending, if any
 	 */
-	static function send($amount, $toUserId, $fromUserId = null, $more = array())
+	static function send($amount, $toUserId, $more = array())
 	{
 		if (!is_int($amount) or $amount <= 0) {
 			throw new Q_Exception_WrongType(array(
@@ -166,14 +150,11 @@ class Assets_Credits
 				'type' => 'integer'
 			));
 		}
-
-		$fromUserId = Q::ifset($fromUserId, Users::loggedInUser(true)->id);
-
 		$instructions_json = Q::json_encode(array_merge(
 			array('app' => Q::app()),
 			$more
 		));
-		$from_stream = self::userStream($fromUserId, $fromUserId);
+		$from_stream = self::userStream(null, null, true);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			throw new Assets_Exception_NotEnoughCredits(array(
@@ -181,10 +162,9 @@ class Assets_Credits
 			));
 		}
 		
-		$from_stream->setAttribute('amount', $existing_amount - $amount);
+		$from_stream->setAttribute('amount', $from_stream->getAttribute('amount') - $amount);
 		$from_stream->save();
-
-		$from_stream->post($fromUserId, array(
+		$from_stream->post($user->id, array(
 			'type' => 'Assets/credits/sent',
 			'content' => $amount,
 			'instructions' => $instructions_json
@@ -196,7 +176,7 @@ class Assets_Credits
 		$to_stream = self::userStream($toUserId, $toUserId, true);
 		$to_stream->setAttribute('amount', $to_stream->getAttribute('amount') + $amount);
 		$to_stream->save();
-		$to_stream->post($toUserId, array(
+		$to_stream->post($user->id, array(
 			'type' => 'Assets/credits/received',
 			'content' => $amount,
 			'instructions' => $instructions_json
