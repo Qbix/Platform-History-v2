@@ -14,9 +14,7 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
-			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
-			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Communities/community/create": ["Assets/after/Community_create"]
+			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"]
 		},
 		"routes": {
 			"Q/plugins/Assets/:action": {"module": "Assets"},
@@ -109,11 +107,7 @@
 		"credits": {
 			"amounts": {
 				"Users/insertUser": 20,
-				"Users/inviteUser": 10,
-				"createCommunity": 40
-			},
-			"earn": {
-				"acceptedInvite": 10
+				"Users/inviteUser": 10
 			}
 		},
 		"currencies": {
