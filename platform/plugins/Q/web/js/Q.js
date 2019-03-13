@@ -12474,7 +12474,7 @@ Q.onJQuery.add(function ($) {
 		"Q/rating": "{{Q}}/js/tools/rating.js",
 		"Q/paging": "{{Q}}/js/tools/paging.js",
 		"Q/pie": "{{Q}}/js/tools/pie.js",
-		"Q/badge": "{{Q}}/js/tools/badge.js"
+		"Q/badge": "{{Q}}/js/tools/badge.js",
 		"Q/resize": "{{Q}}/js/tools/resize.js"
 	});
 	
