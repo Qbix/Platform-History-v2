@@ -3,35 +3,6 @@
 
 	var Users = Q.plugins.Users;
 
-	Q.onReady.add(function () {
-		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
-			Users.Device.appId = Q.cookie('Q_appId');
-			if (!Users.Device.appId) {
-				return console.warn("appId is not defined");
-			}
-		}
-
-		Users.Device.onInit.set(function () {
-			// update device id if device subscribed
-			Users.Device.subscribed(function (err, subscribed) {
-				if (!subscribed) {
-					return;
-				}
-
-				// resubscribe device
-				Users.Device.unsubscribe(Users.Device.subscribe);
-			});
-		}, 'Users.Device');
-
-		Users.Device.init(function () {
-			// Device adapter was initialized
-			Q.handle(Users.Device.onInit);
-			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
-		});
-
-	}, 'Users.Device');
-
-
 	/**
 	 * @class Users.Device
 	 */
@@ -646,6 +617,34 @@
 	function _removeFromStorage (type) {
 		localStorage.removeItem("Q.Users.Device." + type);
 	}
+
+	Q.onReady.add(function () {
+		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
+			Users.Device.appId = Q.cookie('Q_appId');
+			if (!Users.Device.appId) {
+				return console.warn("appId is not defined");
+			}
+		}
+
+		Users.Device.onInit.set(function () {
+			// update device id if device subscribed
+			Users.Device.subscribed(function (err, subscribed) {
+				if (!subscribed) {
+					return;
+				}
+
+				// resubscribe device
+				Users.Device.unsubscribe(Users.Device.subscribe);
+			});
+		}, 'Users.Device');
+
+		Users.Device.init(function () {
+			// Device adapter was initialized
+			Q.handle(Users.Device.onInit);
+			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
+		});
+
+	}, 'Users.Device');
 
 	// remove device info from localStorage when user logout
 	Users.onLogout.set(function () {
