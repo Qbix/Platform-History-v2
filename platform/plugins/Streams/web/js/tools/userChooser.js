@@ -1,4 +1,6 @@
 (function (Q, $) {
+var Streams = Q.Streams;
+var Users = Q.Users;
 
 /**
  * Streams Tools
@@ -15,14 +17,17 @@
  *       parameters when a user is chosen
  *   @param {Number} [options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
+ *   @param {bool} [options.hideUntilParticipants=true] Whether check config Communities/community/hideUntilParticipants
+ *   for communities. If defined, check if participants amount more than Q.Communities.community.hideUntilParticipants.
+ *   Don't show community if amount less.
  *   @param {bool} [options.communitiesOnly=false] If true, search communities instead regular users
  *   @param {Object} [options.exclude] hash of {userId: true},
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.
  */
 Q.Tool.define("Streams/userChooser", function(o) {
-	Q.plugins.Streams.cache = Q.plugins.Streams.cache || {};
-    Q.plugins.Streams.cache.userChooser = Q.plugins.Streams.cache.userChooser || {};
+	Streams.cache = Streams.cache || {};
+    Streams.cache.userChooser = Streams.cache.userChooser || {};
 
 	var tool = this;
 
@@ -122,7 +127,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
 					'background-repeat': 'no-repeat'
 				});
-				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, {'public': true});
+				Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, {'public': true});
 		}
 
 		function onChoose (cur) {
@@ -143,18 +148,24 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			}
 			tool.$results.empty();
 			var show = 0;
+			var hideUntilParticipants = parseInt(Q.getObject("Q.Communities.community.hideUntilParticipants"));
+
 			for (var k in avatars) {
 				if (k in tool.exclude && tool.exclude[k]) {
 					continue;
 				}
 
-				if ((tool.state.communitiesOnly && !Q.Users.isCommunityId(k)) || (!tool.state.communitiesOnly && Q.Users.isCommunityId(k))) {
+				if ((tool.state.communitiesOnly && !Users.isCommunityId(k)) || (!tool.state.communitiesOnly && Users.isCommunityId(k))) {
+					continue;
+				}
+
+				if (tool.state.hideUntilParticipants && Users.isCommunityId(k) && hideUntilParticipants && Q.getObject([k, 'participants'], avatars) < hideUntilParticipants) {
 					continue;
 				}
 
 				var result = $('<a class="Q_selectable" style="display: block;" />').append(
 					$('<img style="vertical-align: middle; width: 40px; height: 40px;" />')
-					.attr('src', Q.plugins.Users.iconUrl(avatars[k].icon, 40))
+					.attr('src', Users.iconUrl(avatars[k].icon, 40))
 				).append(
 					$('<span />').html(avatars[k].displayName())
 				).on(Q.Pointer.enter, function () {
@@ -193,6 +204,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	onChoose: new Q.Event(),
 	delay: 500,
 	communitiesOnly: false,
+	hideUntilParticipants: true,
 	exclude: {}
 },
 
