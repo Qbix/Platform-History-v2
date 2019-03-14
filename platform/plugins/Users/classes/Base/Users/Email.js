@@ -38,7 +38,7 @@ Q.mixin(Base, Row);
 
 /**
  * @property address
- * @type String
+ * @type String|Buffer
  * @default ""
  * 
  */
@@ -316,8 +316,8 @@ Base.prototype.beforeSet_address = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".address");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".address");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".address");
 		return value;
@@ -338,7 +338,7 @@ Base.prototype.maxSize_address = function () {
 	 */
 Base.column_address = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"PRI",null];
 };
 
 /**
