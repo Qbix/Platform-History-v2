@@ -40,19 +40,19 @@ Q.mixin(Base, Row);
 
 /**
  * @property userId
- * @type String
+ * @type String|Buffer
  * @default ""
  * The native user id in our platform
  */
 /**
  * @property platform
- * @type String
+ * @type String|Buffer
  * @default ""
  * A platform like facebook or github or web
  */
 /**
  * @property appId
- * @type String
+ * @type String|Buffer
  * @default ""
  * An ID in the local/app.json config for the app
  */
@@ -334,8 +334,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -356,7 +356,7 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",""];
 };
 
 /**
@@ -372,8 +372,8 @@ Base.prototype.beforeSet_platform = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".platform");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".platform");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform");
 		return value;
@@ -394,7 +394,7 @@ Base.prototype.maxSize_platform = function () {
 	 */
 Base.column_platform = function () {
 
-return [["varchar","31","",false],false,"PRI",""];
+return [["varbinary","31","",false],false,"PRI",""];
 };
 
 /**
@@ -410,8 +410,8 @@ Base.prototype.beforeSet_appId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".appId");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".appId");
 		if (typeof value === "string" && value.length > 200)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".appId");
 		return value;
@@ -432,7 +432,7 @@ Base.prototype.maxSize_appId = function () {
 	 */
 Base.column_appId = function () {
 
-return [["varchar","200","",false],false,"PRI",""];
+return [["varbinary","200","",false],false,"PRI",""];
 };
 
 /**
