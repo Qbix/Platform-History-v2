@@ -329,7 +329,6 @@ class Q_Tree
 			}
 		}
 		if (!isset($arr)) {
-			echo $json; exit;
 			throw new Q_Exception_InvalidInput(array('source' => $filename));
 		}
 		if (!is_array($arr)) {
