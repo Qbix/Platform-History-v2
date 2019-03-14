@@ -248,7 +248,7 @@ class Q_Plugin
 						->execute()->fetchAll(PDO::FETCH_ASSOC);
 				} catch (Exception $e) {
 					$db->rawQuery("CREATE TABLE IF NOT EXISTS `$tableName` (
-						`{$type}` VARCHAR(255) NOT NULL,
+						`{$type}` VARCHAR(63) NOT NULL,
 						`version` VARCHAR( 255 ) NOT NULL,
 						`versionPHP` VARCHAR (255) NOT NULL,
 						PRIMARY KEY (`{$type}`)) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
