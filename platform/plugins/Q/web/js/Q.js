@@ -6941,7 +6941,7 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 	form.submit();
 	setTimeout(function () {
 		if (!o.form) {
-			Q.removeElement(form);
+			Q.removeElement(form, true);
 		} else {
 			for (var i=hiddenFields.length-1; i>=0; --i) {
 				Q.removeElement(hiddenFields[i]);
