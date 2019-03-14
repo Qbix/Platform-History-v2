@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS `{$prefix}autocomplete` (
   `updatedTime` timestamp NULL DEFAULT NULL,
   `results` text NOT NULL,
   PRIMARY KEY (`query`,`types`,`latitude`,`longitude`,`miles`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
