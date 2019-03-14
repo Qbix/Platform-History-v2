@@ -41,7 +41,6 @@ Base.tableClasses = [
 	"Streams_RelatedTo",
 	"Streams_RelatedToTotal",
 	"Streams_Request",
-	"Streams_Sent",
 	"Streams_Stream",
 	"Streams_Subscription",
 	"Streams_SubscriptionRule",
