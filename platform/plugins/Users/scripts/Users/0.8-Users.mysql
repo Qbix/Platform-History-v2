@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS `{$prefix}app_user`;
 CREATE TABLE `{$prefix}app_user` (
   `userId` varbinary(31) NOT NULL DEFAULT '',
   `provider` enum('native','facebook','twitter','google','yahoo')  NOT NULL,
-  `appId` varchar(200) NOT NULL COMMENT 'An external app id registered with the provider',
-  `provider_uid` varchar(200)  NOT NULL,
+  `appId` varbinary(200) NOT NULL COMMENT 'An external app id registered with the provider',
+  `provider_uid` varbinary(200)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `access_token` varchar(1023)  DEFAULT NULL COMMENT 'The OAuth access token',
@@ -55,7 +55,7 @@ CREATE TABLE `{$prefix}device` (
 DROP TABLE IF EXISTS `{$prefix}email`;
 
 CREATE TABLE `{$prefix}email` (
-  `address` varchar(255)  NOT NULL,
+  `address` varbinary(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `userId` varbinary(31)  NOT NULL DEFAULT '',
@@ -140,7 +140,7 @@ CREATE TABLE `{$prefix}link` (
 DROP TABLE IF EXISTS `{$prefix}mobile`;
 
 CREATE TABLE `{$prefix}mobile` (
-  `number` varchar(255)  NOT NULL,
+  `number` varbinary(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
   `userId` varbinary(31)  NOT NULL DEFAULT '',
