@@ -206,7 +206,6 @@ if (is_dir($uploads_dir)) {
 	if (!file_exists($web_uploads_path)
 	and !is_link($web_uploads_path)) {
 		Q_Utils::symlink($uploads_dir, $web_uploads_path);
-		var_dump($uploads_dir);exit;
 	}
 }
 
