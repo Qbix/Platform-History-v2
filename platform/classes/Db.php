@@ -575,7 +575,7 @@ abstract class Db
 		try {
 			self::$pdo_array[$key] = @new PDO($dsn, $username, $password, $driver_options);
 			if (!isset($driver_options['exec'])) {
-				$driver_options['exec'] = 'set names utf8mb4';
+				$driver_options['exec'] = 'set names utf8';
 			}
 			if (empty($driver_options['exec'])) {
 				self::$pdo_array[$key]->exec($driver_options['exec']);
