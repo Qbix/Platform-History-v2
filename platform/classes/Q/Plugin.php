@@ -251,7 +251,7 @@ class Q_Plugin
 						`{$type}` VARCHAR(63) NOT NULL,
 						`version` VARCHAR( 255 ) NOT NULL,
 						`versionPHP` VARCHAR (255) NOT NULL,
-						PRIMARY KEY (`{$type}`)) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+						PRIMARY KEY (`{$type}`)) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 					")->execute();
 				}
 				if ($cols) {
