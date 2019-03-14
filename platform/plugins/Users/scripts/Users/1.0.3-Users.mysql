@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS {$prefix}external_from;
 DROP TABLE IF EXISTS {$prefix}external_to;
 
 CREATE TABLE {$prefix}external_from (
-  platform varchar(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
-  appId varchar(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
-  xid varchar(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
+  platform varbinary(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
+  appId varbinary(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
+  xid varbinary(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
   insertedTime timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   updatedTime timestamp NULL DEFAULT NULL,
   userId varchar(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
@@ -16,9 +16,9 @@ CREATE TABLE {$prefix}external_from (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT 'Represents using external apps to authenticate';
 
 CREATE TABLE {$prefix}external_to (
-  userId varchar(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
-  platform varchar(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
-  appId varchar(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
+  userId varbinary(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
+  platform varbinary(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
+  appId varbinary(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
   insertedTime timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   updatedTime timestamp NULL DEFAULT NULL,
   xid varchar(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
