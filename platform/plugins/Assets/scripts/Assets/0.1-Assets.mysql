@@ -6,14 +6,14 @@ CREATE TABLE `{$prefix}badge` (
   `pic_big` varbinary(255) NOT NULL,
   `points` smallint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`app`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `{$prefix}earned` (
   `userId` bigint(20) unsigned NOT NULL,
   `app` varbinary(255) NOT NULL,
   `badge_name` varchar(255) NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE  `{$prefix}earned` ADD INDEX (  `userId` );
 ALTER TABLE  `{$prefix}earned` ADD  `associated_id` VARCHAR( 255 ) NOT NULL;
@@ -24,4 +24,4 @@ CREATE TABLE `{$prefix}leader` (
   `userId` bigint(20) unsigned NOT NULL,
   `points` smallint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`app`,`day`,`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
