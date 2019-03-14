@@ -4,17 +4,28 @@
 
 //use Minishlink\WebPush\WebPush;
 
-function Streams_webrtc_response_join() {
+function Streams_webrtc_response_join($params = []) {
+    $params = array_merge($_REQUEST, $params);
 
     $loggedUserId = Users::loggedInUser(true)->id;
     $communityId = Users::communityId();
-    $streamName = $_REQUEST['streamName'];
+    $streamName = Q::ifset($params, 'streamName', null);
+    $publisherId = Q::ifset($params, 'publisherId', null);
 
-    $stream = Streams::fetchOne($loggedUserId, $communityId, $streamName);
-    $participants = $stream->getParticipants(array(
-        "state" => "participating"
-    ));
-    if(!isset($participants[$loggedUserId])) $stream->join();
+    if($streamName && $publisherId) {
+        $stream = Streams::fetchOne($loggedUserId, $publisherId, $streamName);
+        $participants = $stream->getParticipants(array(
+            "state" => "participating"
+        ));
+        if (!isset($participants[$loggedUserId])) {
+            $stream->join();
+        } else {
 
-    Q_Response::setSlot('join', $stream);
+            Streams_Message::post(null, $publisherId, $streamName, array(
+                'type' => 'Streams/connected'
+            ), true);
+        }
+
+        Q_Response::setSlot('join', $stream);
+    }
 }

@@ -23,7 +23,7 @@
      * @param {Object} options
      *  Hash of possible options
      */
-    Q.Tool.define("Streams/webrtc/control", function(options) {
+    Q.Tool.define("Streams/webrtc/controls", function(options) {
 
             if (!window.WebRTCconference) {
                 throw "Video room should be created";
@@ -270,7 +270,7 @@
                     chooseCameraList.appendChild(radioBtnItem);
 
                     radioBtnItem.addEventListener('click', function (e) {
-                       //if(!WebRTCconference.conferenceControl.cameraIsEnabled()) WebRTCconference.conferenceControl.enableVideo();
+                        //if(!WebRTCconference.conferenceControl.cameraIsEnabled()) WebRTCconference.conferenceControl.enableVideo();
 
                         var checked = e.target.querySelector('input[name="cameras"]');
                         if(checked) {

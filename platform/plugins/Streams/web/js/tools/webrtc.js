@@ -17,6 +17,7 @@
         },
 
         {
+            nodeServer: 'https://www.demoproject.co.ua:8443',
             editable: false,
             onCreate: new Q.Event(),
             onUpdate: new Q.Event(),
@@ -32,12 +33,16 @@
                 var tool = this;
 
                 var roomId = tool.state.roomId != null ? tool.state.roomId : null;
-
+                var roomPublisherId = tool.state.publisherId != null ? tool.state.publisherId : Q.Users.loggedInUser.id;
+                if(roomId != null) tool.roomId = roomId;
+                if(roomPublisherId != null) tool.roomPublisherId = roomPublisherId;
                 //console.log('MY PUBLISHER ID', Q.Users.loggedInUser, roomId);
 
 
-                tool.initWithStreams();
-                return;
+                //tool.initWithNodeServer();
+                //return;
+                console.log('INIT', roomId, roomPublisherId);
+
                 if(roomId == null) {
 
                     Q.req("Streams/webrtc", ["stream"], function (err, response) {
@@ -49,11 +54,18 @@
                         console.log('response', response);
 
                         roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
-                        location.hash = roomId;
+                        //location.hash = roomId;
 
-                        Q.Streams.get(Q.Users.communityId, 'Streams/webrtc/' + roomId, function (err, stream) {
-                            tool.bindStreamsEvents(this);
-                            tool.startTwilioRoom(roomId);
+                        var connectUrl = tool.updateQueryStringParameter(location.href, 'Q.rid', roomId);
+                        connectUrl = tool.updateQueryStringParameter(connectUrl, 'Q.pid', Q.Users.loggedInUser.id);
+                        console.log('%c URL TO CONNECT', 'background:red;color:white', connectUrl)
+                        Q.Streams.get(Q.Users.loggedInUser.id, 'Streams/webrtc/' + roomId, function (err, stream) {
+                            tool.roomStream = stream;
+                            tool.bindStreamsEvents(stream);
+                            if(tool.state.mode == 'twilio') {
+                                tool.startTwilioRoom(roomId);
+                            } else tool.initWithNodeServer();
+
                         });
 
                     }, {
@@ -69,16 +81,22 @@
                             return Q.alert(msg);
                         }
 
-                        Q.Streams.get(Q.Users.communityId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                        Q.Streams.get(roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
                             console.log('Q.Streams.get');
+                            tool.roomStream = stream;
 
-                            tool.bindStreamsEvents(this);
-                            tool.startTwilioRoom(roomId);
+                            tool.bindStreamsEvents(stream);
+                            if(tool.state.mode == 'twilio') {
+                                tool.startTwilioRoom(roomId);
+                            } else tool.initWithNodeServer();
+
+
                         });
                     }, {
                         method: 'get',
                         fields: {
-                            streamName: 'Streams/webrtc/' + roomId
+                            streamName: 'Streams/webrtc/' + roomId,
+                            publisherId: roomPublisherId
                         }
                     });
                 }
@@ -95,6 +113,17 @@
                 tool.roomsMedia = roomsMedia;
             },
 
+            updateQueryStringParameter: function updateQueryStringParameter(uri, key, value) {
+                var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
+                separator = uri.indexOf('?') !== -1 ? "&" : "?";
+                if (uri.match(re)) {
+                    return uri.replace(re, '$1' + key + "=" + value + '$2');
+                }
+                else {
+                    return uri + separator + key + "=" + value;
+                }
+            },
+
             /**
              * Bind events that are needed for negotiating process to init WebRTC without using twilio
              * @method bindStreamsEvents
@@ -103,7 +132,7 @@
             bindStreamsEvents: function(stream) {
                 var tool = this;
 
-                WebRTCconference.event.on('candidate', function (candidateMessage) {
+               /* WebRTCconference.event.on('candidate', function (candidateMessage) {
                     tool.sendMessage({
                         type: "candidate",
                         label: event.candidate.sdpMLineIndex,
@@ -112,7 +141,7 @@
                         targetSid: candidateMessage.targetSid,
                         candidate: candidateMessage
                     });
-                })
+                })*/
 
                 stream.onMessage('Streams/join').set(function (stream, message) {
                     console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
@@ -192,9 +221,9 @@
 
             /**
              * Bind events that are triggered by twilio-video library
-             * @method bindTwilioEvents
+             * @method bindConferenceEvents
              */
-            bindTwilioEvents: function() {
+            bindConferenceEvents: function() {
                 var tool = this;
                 WebRTCconference.event.on('participantConnected', function (participant) {
                     console.log('%c TWILIO: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
@@ -214,7 +243,7 @@
 
             /**
              * Connect webrtc room using twilio.
-             * @method bindTwilioEvents
+             * @method startTwilioRoom
              */
             startTwilioRoom: function(roomId) {
                 var tool = this;
@@ -240,9 +269,9 @@
                             useAsLibrary: true,
                         });
                         WebRTCconference.init(function () {
-                            tool.bindTwilioEvents();
+                            tool.bindConferenceEvents();
                             tool.screensRendering().renderScreens();
-
+                            tool.updateParticipantData();
                             var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
                             $(controlEl).appendTo(document.querySelector('body')).activate(function () {
                                 tool.screensRendering().renderScreens();
@@ -252,21 +281,42 @@
                     }, {
                         method: 'get',
                         fields: {
-                            roomName: roomId,
+                            streamName: tool.roomStream.fields.name,
+                            publisherId: tool.roomPublisherId,
                         }
                     });
                 });
             },
+            updateParticipantData: function() {
+                var tool = this;
+                Q.req("Streams/webrtc", ["updateParticipantSid"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                    if (msg) {
+                        return Q.alert(msg);
+                    }
+                    console.log('response', response);
+
+                }, {
+                    method: 'put',
+                    fields: {
+                        streamName: tool.roomStream.fields.name,
+                        publisherId: tool.roomPublisherId,
+                        twilioParticipantSid: WebRTCconference.localParticipant().sid,
+                    }
+                })
+            },
 
             /**
              * Connect webrtc room using streams.
-             * @method bindTwilioEvents
+             * @method initWithStreams
              */
             initWithStreams: function() {
                 var tool = this;
                 Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
 
                 Q.addScript([
+                    "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
                     "https://requirejs.org/docs/release/2.2.0/minified/require.js",
                     "https://www.demoproject.co.ua/video-chat/src/js/app.js?t=" + (+new Date),
                 ], function () {
@@ -280,6 +330,46 @@
                     WebRTCconference.init(function () {
                         tool.startStreamsRoom();
                         tool.screensRendering().renderScreens();
+
+                        var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
+                        $(controlEl).appendTo(document.querySelector('body')).activate(function () {
+                            tool.screensRendering().renderScreens();
+                        });
+                    });
+                });
+            },
+
+            /**
+             * Init conference using own node.js server.
+             * @method initWithStreams
+             */
+            initWithNodeServer: function() {
+                var tool = this;
+                Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
+
+                Q.addScript([
+                    "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
+                    "https://requirejs.org/docs/release/2.2.0/minified/require.js",
+                    "https://www.demoproject.co.ua/video-chat/src/js/app.js?t=" + (+new Date),
+                ], function () {
+                    console.log('tool.roomStream2', tool.roomStream)
+                    var roomId = (tool.roomStream.fields.name).replace('Streams/webrtc/', '');
+                    window.WebRTCconference = WebRTCconference({
+                        webrtcMode:'nodejs',
+                        useAsLibrary: true,
+                        nodeServer: tool.state.nodeServer,
+                        roomName: roomId,
+                        sid:  Q.Users.loggedInUser.id,
+                        username:  Q.Users.loggedInUser.displayName,
+                    });
+                    WebRTCconference.init(function () {
+                        tool.startNodeJsRoom();
+                        tool.screensRendering().renderScreens();
+
+                        var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
+                        $(controlEl).appendTo(document.querySelector('body')).activate(function () {
+                            tool.screensRendering().renderScreens();
+                        });
                     });
                 });
             },
@@ -301,11 +391,74 @@
                         console.log('startStreamsRoom', response);
 
                         roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
-                        location.hash = roomId;
+                        //location.hash = roomId;
 
                         Q.Streams.get(Q.Users.communityId, 'Streams/webrtc/' + roomId, function (err, stream) {
                             tool.roomStream = this;
                             tool.bindStreamsEvents(stream);
+                        });
+
+                    }, {
+                        method: 'post'
+                    });
+
+                } else {
+                    console.log('CONNECT streamname', 'Streams/webrtc/' + roomId)
+                    Q.req("Streams/webrtc", ["join"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return console.error(msg);
+                        }
+
+                        Q.Streams.get(Q.Users.communityId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                            console.log('Q.Streams.ge', response);
+
+                            tool.bindStreamsEvents(stream);
+                        });
+                    }, {
+                        method: 'get',
+                        fields: {
+                            streamName: 'Streams/webrtc/' + roomId
+                        }
+                    });
+                }
+
+
+                var roomsMedia = document.createElement('DIV');
+                roomsMedia.id = 'webrtc_tool-room-media';
+                var dashboard = document.getElementById('dashboard_slot');
+                if(Q.info.isMobile && !Q.info.isTablet) {
+                    roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
+                    roomsMedia.style.top = dashboard.offsetHeight + 'px';
+                }
+                tool.element.appendChild(roomsMedia);
+                tool.roomsMedia = roomsMedia;
+            },
+            startNodeJsRoom: function() {
+                var tool = this;
+
+                var roomId = tool.state.roomId != null ? tool.state.roomId : null;
+
+                console.log('MY PUBLISHER ID', Q.Users.loggedInUser, roomId);
+
+                if(roomId == null) {
+
+                    Q.req("Streams/webrtc", ["stream"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return console.error(msg);
+                        }
+                        console.log('startStreamsRoom', response);
+
+                        roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
+
+                        Q.Streams.get(tool.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                            console.log('Q.Streams.get');
+
+                            tool.bindConferenceEvents();
+                            tool.roomStream = stream;
                         });
 
                     }, {
