@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS `{$prefix}charge` (
   `attributes` varchar(1023) COLLATE utf8_bin NOT NULL COMMENT 'additional information for the charge in JSON format',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
