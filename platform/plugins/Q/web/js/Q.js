@@ -11087,6 +11087,49 @@ Q.Pointer = {
 		Q.Pointer.hint.imgs = imgs2;
 	},
 	/**
+	 * Start showing touchlabels on elements with data-touchlabel="Label text"
+	 * to help people who touch an element know what it's going to do if they release
+	 * their finger on it.
+	 * @method startTouchlabels
+	 * @param {Element} [element=document.body] The element in which to activate touchlabels.
+	 * @static
+	 */
+	activateTouchlabels: function (element) {
+		if (!Q.info.isTouchscreen) {
+			return;
+		}
+		element = element || document.body;
+		var div = document.createElement('div');
+		div.addClass('Q_touchlabel');
+		document.body.appendChild(div);
+		Q.addEventListener(element, 'touchstart touchmove', function (e) {
+			var x = Q.Pointer.getX(e);
+			var y = Q.Pointer.getY(e);
+			var t = document.elementFromPoint(x, y);
+			while (t) {
+				if (!t.hasAttribute || !t.hasAttribute('data-touchlabel')) {
+					t = t.parentNode
+					continue;
+				}
+				div.innerHTML = t.getAttribute('data-touchlabel');
+				var erect = element.getBoundingClientRect();
+				var rect = div.getBoundingClientRect();
+				var r = e.touches[0].radiusY;
+				var left1 = Math.min(
+					x - rect.width / 2,
+					erect.left + erect.width - rect.width
+				);
+				div.style.left = Math.max(erect.left, left1) + 'px';
+				div.style.top = Math.max(erect.top, y - r - rect.height) + 'px';
+				div.addClass('Q_touchlabel_show');
+				break;
+			}
+		}, false, true);
+		Q.addEventListener(document.body, 'touchend', function () {
+			div.removeClass('Q_touchlabel_show');
+		}, false, true);
+	},
+	/**
 	 * Consistently prevents the default behavior of an event across browsers
 	 * @static
 	 * @method preventDefault
