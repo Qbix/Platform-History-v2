@@ -62,7 +62,8 @@ class Assets_Credits
 	 */
 	static function amount()
 	{
-		$stream = self::userStream(null, null, true)->getAttribute('amount');
+		$stream = self::userStream(null, null, true);
+		return $stream ? $stream->getAttribute('amount', null) : null;
 	}
 	
 	/**
