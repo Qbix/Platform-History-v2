@@ -63,11 +63,9 @@ class Assets_Credits
 	static function amount($userId = null)
 	{
 		$stream = self::userStream($userId, $userId);
-
 		if ($stream instanceof Streams_Stream) {
 			return $stream->getAttribute('amount');
 		}
-
 		return null;
 	}
 	
