@@ -145,7 +145,7 @@
 
                 stream.onMessage('Streams/join').set(function (stream, message) {
                     console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
-                    Q.Streams.get(message.byUserId, 'Streams/user/firstName', function () {
+                    /*Q.Streams.get(message.byUserId, 'Streams/user/firstName', function () {
                         var firstName = this.content;
                         var newParticipant = {
                             sid:message.byUserId,
@@ -162,11 +162,11 @@
                         });
 
                         tool.screensRendering().renderScreens();
-                    });
+                    });*/
                 });
                 stream.onMessage('Streams/connected').set(function (stream, message) {
                     console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
-                    Q.Streams.get(message.byUserId, 'Streams/user/firstName', function () {
+                    /*Q.Streams.get(message.byUserId, 'Streams/user/firstName', function () {
                         var firstName = this.content;
                         var newParticipant = {
                             sid:message.byUserId,
@@ -183,11 +183,11 @@
                         });
 
                         tool.screensRendering().renderScreens();
-                    });
+                    });*/
                 });
 
 
-                stream.onMessage('Streams/webrtc/signalling').set(function (stream, message) {
+               /* stream.onMessage('Streams/webrtc/signalling').set(function (stream, message) {
                     if(message.instructions.targetUserId != Q.Users.loggedInUser.id) return;
                     console.log('%c STREAMS: SIGNALLING MESSAGE RECEIVED', 'background:blue;color:white;', stream, message)
                     if (message.content.type === 'offer') {
@@ -206,7 +206,7 @@
                     else if (message.content.type === 'candidate') {
                         WebRTCconference.iceConfigurationReceived(message)
                     }
-                });
+                });*/
             },
             sendMessage: function(message) {
                 var tool = this;
@@ -363,6 +363,7 @@
                         username:  Q.Users.loggedInUser.displayName,
                     });
                     WebRTCconference.init(function () {
+                        tool.bindConferenceEvents();
                         tool.startNodeJsRoom();
                         tool.screensRendering().renderScreens();
 
@@ -457,7 +458,7 @@
                         Q.Streams.get(tool.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
                             console.log('Q.Streams.get');
 
-                            tool.bindConferenceEvents();
+                            tool.bindStreamsEvents();
                             tool.roomStream = stream;
                         });
 
@@ -474,7 +475,7 @@
                             return console.error(msg);
                         }
 
-                        Q.Streams.get(Q.Users.communityId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                        Q.Streams.get(tool.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
                             console.log('Q.Streams.ge', response);
 
                             tool.bindStreamsEvents(stream);
@@ -632,6 +633,7 @@
                  */
                 var renderMobileScreensGrid = function() {
                     var roomScreens =  WebRTCconference.screens();
+                    console.log('roomScreens', roomScreens);
                     console.log('roomScreens.length', roomScreens.length);
 
                     var prerenderedScreens = document.createDocumentFragment();
@@ -840,7 +842,7 @@
                 return control;
             },
 
-            streamsAdapter: function () {
+            /*streamsAdapter: function () {
                 //var tool = this;
                 var adapter = {};
                 adapter.participantConnected = function(stream, participant) {
@@ -883,7 +885,7 @@
                 }
 
                 return adapter;
-            }
+            }*/
         }
 
     );
