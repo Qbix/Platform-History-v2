@@ -11119,7 +11119,7 @@ Q.Pointer = {
 					x - rect.width / 2,
 					erect.left + erect.width - rect.width
 				);
-				div.style.left = Math.max(erect.left, left1,) + 'px';
+				div.style.left = Math.max(erect.left, left1) + 'px';
 				div.style.top = Math.max(erect.top, y - r - rect.height) + 'px';
 				div.addClass('Q_touchlabel_show');
 				break;
