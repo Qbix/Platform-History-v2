@@ -162,6 +162,9 @@
 		}
 	},
 	"Streams": {
+		"userStreams": {
+			"MyApp": "streams.json"
+		},
 		"possibleUserStreams": {
 			"Streams/user/birthday": true,
 			"Streams/user/gender": true,
