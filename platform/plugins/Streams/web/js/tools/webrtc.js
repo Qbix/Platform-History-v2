@@ -36,11 +36,8 @@
                 var roomPublisherId = tool.state.publisherId != null ? tool.state.publisherId : Q.Users.loggedInUser.id;
                 if(roomId != null) tool.roomId = roomId;
                 if(roomPublisherId != null) tool.roomPublisherId = roomPublisherId;
-                //console.log('MY PUBLISHER ID', Q.Users.loggedInUser, roomId);
 
 
-                //tool.initWithNodeServer();
-                //return;
                 console.log('INIT', roomId, roomPublisherId);
 
                 if(roomId == null) {
@@ -54,11 +51,11 @@
                         console.log('response', response);
 
                         roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
-                        //location.hash = roomId;
 
                         var connectUrl = tool.updateQueryStringParameter(location.href, 'Q.rid', roomId);
                         connectUrl = tool.updateQueryStringParameter(connectUrl, 'Q.pid', Q.Users.loggedInUser.id);
-                        console.log('%c URL TO CONNECT', 'background:red;color:white', connectUrl)
+                        console.log('%c URL TO CONNECT', 'background:red;color:white', connectUrl);
+                        Q.alert('URL of the room is: <a href="' + connectUrl + '">' + connectUrl + '</a>')
                         Q.Streams.get(Q.Users.loggedInUser.id, 'Streams/webrtc/' + roomId, function (err, stream) {
                             tool.roomStream = stream;
                             tool.bindStreamsEvents(stream);
@@ -458,7 +455,7 @@
                         Q.Streams.get(tool.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
                             console.log('Q.Streams.get');
 
-                            tool.bindStreamsEvents();
+                            tool.bindStreamsEvents(stream);
                             tool.roomStream = stream;
                         });
 
@@ -596,8 +593,20 @@
                     }*/
                     chatParticipantEl.appendChild(chatParticipantName);
 
+                    chatParticipantEl.addEventListener('mousedown', moveScreenFront, false)
+                    chatParticipantEl.addEventListener('touchstart', moveScreenFront, false)
+
                     tool.renderedScreens.push(chatParticipantEl);
                     return chatParticipantEl;
+                }
+
+                var moveScreenFront = function (e) {
+                    var screenEl = this;
+                    var screens = WebRTCconference.screens();
+                    var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
+                    console.log('currentHighestZIndex screenEl', screenEl)
+                    screenEl.style.zIndex = currentHighestZIndex+1;
+                    console.log(screenEl.style.zIndex)
                 }
 
                 /**
