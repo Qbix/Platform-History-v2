@@ -1496,7 +1496,7 @@ abstract class Users extends Base_Users
 						$h = $h * $sw / $w;
 						$w = $sw;
 					}
-					$image = imagecreatetruecolor($size, $size);
+					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
 					$success = imagecopyresampled(
 						$image, $source, 
