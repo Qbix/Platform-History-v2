@@ -705,4 +705,8 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_touchlabel_show {
 	opacity: 1;
 	transition: opacity 0.01s linear;
+	z-index:9999999999;
+}
+.Q_notTouchscreen .Q_touchlabel {
+	transition: opacity 0.01s linear;
 }
