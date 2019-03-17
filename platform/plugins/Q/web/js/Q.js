@@ -11092,17 +11092,18 @@ Q.Pointer = {
 	 * their finger on it.
 	 * @method startTouchlabels
 	 * @param {Element} [element=document.body] The element in which to activate touchlabels.
+	 * @param {Boolean} [onlyTouchscreen=false] Whether to only do it on a touchscreen
 	 * @static
 	 */
-	activateTouchlabels: function (element) {
-		if (!Q.info.isTouchscreen) {
+	activateTouchlabels: function (element, onlyTouchscreen) {
+		if (onlyTouchscreen && !Q.info.isTouchscreen) {
 			return;
 		}
 		element = element || document.body;
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
-		Q.addEventListener(element, 'touchstart touchmove', function (e) {
+		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
@@ -11114,18 +11115,24 @@ Q.Pointer = {
 				div.innerHTML = t.getAttribute('data-touchlabel');
 				var erect = element.getBoundingClientRect();
 				var rect = div.getBoundingClientRect();
-				var r = e.touches[0].radiusY;
+				var trect = t.getBoundingClientRect();
+				var r = Q.getObject(['touches', 0, 'radiusY'], e) || 10;
 				var left1 = Math.min(
 					x - rect.width / 2,
 					erect.left + erect.width - rect.width
 				);
+				var top1 = Q.info.isTouchscreen
+					? y - r - rect.height
+					: trect.bottom;
 				div.style.left = Math.max(erect.left, left1) + 'px';
-				div.style.top = Math.max(erect.top, y - r - rect.height) + 'px';
+				div.style.top = Math.max(erect.top, top1) + 'px';
 				div.addClass('Q_touchlabel_show');
-				break;
+				return;
 			}
+			// if we are here, nothing matched
+			div.removeClass('Q_touchlabel_show');
 		}, false, true);
-		Q.addEventListener(document.body, 'touchend', function () {
+		Q.addEventListener(document.body, 'touchend mouseup', function () {
 			div.removeClass('Q_touchlabel_show');
 		}, false, true);
 	},
