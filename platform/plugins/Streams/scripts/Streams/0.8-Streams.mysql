@@ -1,3 +1,4 @@
+
 # Dump of table {$prefix}access
 # ------------------------------------------------------------
 
@@ -19,7 +20,6 @@ CREATE TABLE `{$prefix}access` (
   KEY `subscriber` (`ofUserId`),
   KEY `contacts` (`ofContactLabel`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
-
 # Dump of table {$prefix}avatar
 # ------------------------------------------------------------
 
