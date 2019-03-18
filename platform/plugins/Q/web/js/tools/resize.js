@@ -95,6 +95,7 @@
                 var resizeElement = function (e) {
                     var docRect = document.body.getBoundingClientRect();
                     var docStyles = window.getComputedStyle(document.body);
+                    var _minSize = 100;
 
                     var _elementToResize;
                     var _handler;
@@ -175,7 +176,8 @@
                         }
 
 
-                        if(elementWidth <= 50 || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
+                        console.log('elementWidth', elementWidth, elementHeight)
+                        if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
                             return
                         }
 
@@ -223,12 +225,13 @@
 
                     function resizeByPinchGesture(element) {
                         _elementToResize = element;
-                        element.addEventListener('touchstart', _startResizingByPinch);
+                        element.addEventListener('touchstart', function () {
+                            _startResizingByPinch()
+                        });
                     }
 
                     function _startResizingByPinch(e) {
-                        console.log('_startResizingByPinch')
-                        _elementToResize = e.target;
+                        console.log('_startResizingByPinch', _elementToResize)
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
                         window.addEventListener('touchend', _stopResizingByPinch);
                         window.addEventListener('touchmove', resizeByPinch);
@@ -238,7 +241,7 @@
                         console.log('stopResizing')
 
                         tool.isScreenResizing = false;
-                        touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = _elementToResize = null;
+                        touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = null;
                         window.removeEventListener('touchend', _stopResizingByPinch);
                         window.removeEventListener('touchmove', resizeByPinch);
                     }
@@ -309,7 +312,7 @@
                         }
 
 
-                        if(elementWidth <= 50 || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
+                        if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
                             return
                         }
 
@@ -328,12 +331,12 @@
                     function onWheel(e) {
                         //e = e || window.event;
                         //var currentTarget = document.elementFromPoint(e.clientX, e.clientY);
-                        if(_elementToResize == null) _elementToResize = e.target;
+                        //if(_elementToResize == null) _elementToResize = e.target;
                         var elRect = _elementToResize.getBoundingClientRect();
                         //if(elRect.height >= window.innerHeight || elRect.width >= window.innerWidth) return;
                         console.log('_elementToResize', _elementToResize)
                         var delta = e.deltaY || e.detail || e.wheelDelta;
-                        if(delta < 0 && (elRect.height < 50 || elRect.width < 50)) return
+                        if(delta < 0 && (elRect.height < _minSize || elRect.width < _minSize)) return
 
 
                         if(_latestScaleValue == null) _latestScaleValue = 1;
@@ -364,6 +367,7 @@
                     }
 
                     function bindMouseWheelEvent(elem) {
+                        _elementToResize = elem;
                         if (elem.addEventListener) {
                             if ('onwheel' in document) {
                                 // IE9+, FF17+, Ch31+

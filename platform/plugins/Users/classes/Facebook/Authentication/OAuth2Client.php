@@ -132,7 +132,7 @@ class OAuth2Client
      *
      * @return string
      */
-    public function getAuthorizationUrl($redirectUrl, $state, array $scope = [], array $params = [], $separator = '&')
+    public function getAuthorizationUrl($redirectUrl, $state, array $scope = [], array $params = array(), $separator = '&')
     {
         $params += [
             'client_id' => $this->app->getId(),
