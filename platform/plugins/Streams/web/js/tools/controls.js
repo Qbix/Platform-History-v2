@@ -23,7 +23,7 @@
      * @param {Object} options
      *  Hash of possible options
      */
-    Q.Tool.define("Streams/webrtc/control", function(options) {
+    Q.Tool.define("Streams/webrtc/controls", function(options) {
 
             if (!window.WebRTCconference) {
                 throw "Video room should be created";
@@ -55,10 +55,15 @@
                 tool.createSettingsPopup();
                 tool.participantsPopup().createList();
 
-                if(!Q.info.isMobile) tool.element.appendChild(controlBar);
+                tool.element.appendChild(controlBar);
                 tool.bindRTCEvents();
 
             },
+
+            /**
+             * Bind WebRTCconference events to update controls UI
+             * @method bindRTCEvents
+             */
             bindRTCEvents: function() {
                 var tool = this;
                 WebRTCconference.event.on('participantConnected', function (participant) {
@@ -72,6 +77,11 @@
                     tool.participantsPopup().removeItem(participant);
                 });
             },
+
+            /**
+             * Create control bar element
+             * @method bindRTCEvents
+             */
             createControlBar: function() {
                 var tool = this;
                 var controlBar = document.createElement('DIV');
@@ -123,7 +133,6 @@
                 usersBtnCon.appendChild(usersBtn);
                 usersBtnCon.appendChild(usersBtnIcon);
                 controlBarCon.appendChild(usersBtnCon);
-                //if(!Q.info.isMobile) {controlBarCon.appendChild(screenSharingBtn);}
                 controlBar.appendChild(controlBarCon);
 
                 tool.controlBar = controlBar;
@@ -137,11 +146,12 @@
 
 
                 cameraBtn.addEventListener('mouseup', function () {
-                    if(!Q.info.isMobile) return;
+                    if(!Q.info.isMobile && !Q.info.isTablet) return;
                     Q.Dialogs.push({
-                        title: "Participants",
+                        title: "Video Sources",
                         className: 'webrtc_tool_participants-list',
-                        content: tool.settingsPopupEl
+                        content: tool.settingsPopupEl,
+                        apply: true
                     });
                     //tool.toggleVideo()
                 })
@@ -150,23 +160,19 @@
                     tool.toggleCameras()
                 })
                 speakerBtn.addEventListener('mouseup', function () {
-                    console.log('mouseupmouseupmouseup')
                     tool.toggleAudioOfAll()
                 })
                 microphoneBtn.addEventListener('mouseup', function () {
-                    console.log('bbbb')
-
                     tool.toggleAudio()
                 })
 
-                /*  if(!Q.info.isMobile) {
-                      screenSharingBtn.addEventListener('click', function () {
-                          WebRTCconference.screenSharing.startShareScreen()
-                      })
-                  }*/
-
                 return controlBar;
             },
+
+            /**
+             * Turn on/off camera (all local video tracks)
+             * @method toggleVideo
+             */
             toggleVideo: function () {
                 var tool = this;
                 var videoInputDevices = WebRTCconference.conferenceControl.videoInputDevices();
@@ -188,6 +194,11 @@
 
                 tool.updateControlBar();
             },
+
+            /**
+             * Turn on/off microphone (local audio tracks)
+             * @method toggleAudio
+             */
             toggleAudio: function () {
                 var tool = this;
                 if(WebRTCconference.conferenceControl.micIsEnabled()){
@@ -198,6 +209,11 @@
 
                 tool.updateControlBar();
             },
+
+            /**
+             * Turn on/off all participants' audio tracks
+             * @method toggleAudioOfAll
+             */
             toggleAudioOfAll: function () {
                 var tool = this;
                 if(WebRTCconference.conferenceControl.speakerIsEnabled()){
@@ -208,9 +224,19 @@
 
                 tool.updateControlBar();
             },
+
+            /**
+             * Switch to another cameras (front/back)
+             * @method toggleCameras
+             */
             toggleCameras: function () {
                 WebRTCconference.conferenceControl.toggleCameras();
             },
+
+            /**
+             * Update control buttons (active/inactive)
+             * @method updateControlBar
+             */
             updateControlBar: function () {
                 var tool = this;
                 if(tool.controlBar == null) return;
@@ -225,7 +251,6 @@
                 }
 
                 if (!conferenceControl.cameraIsEnabled()) {
-                    console.log('conferenceControl.speakerIsEnabled()', conferenceControl.speakerIsEnabled())
                     tool.speakerBtn.classList.remove('webrtc_tool_hidden');
                     tool.speakerBtn.innerHTML = conferenceControl.speakerIsEnabled() ? icons.enabledSpeaker : icons.disabledSpeaker;
                 } else {
@@ -240,6 +265,11 @@
                     tool.microphoneBtn.innerHTML = icons.microphone;
                 }
             },
+
+            /**
+             * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
+             * @method createSettingsPopup
+             */
             createSettingsPopup: function () {
                 var tool = this;
                 var settingsPopup=document.createElement('DIV');
@@ -252,7 +282,7 @@
                 chooseCameraList.appendChild(title);
                 var count = 1;
                 WebRTCconference.conferenceControl.videoInputDevices().forEach(function(mediaDevice){
-                    console.log('mediaDevice', mediaDevice)
+                    console.log('mediaDevice', mediaDevice);
                     var radioBtnItem = document.createElement('LABEL');
                     var radioBtn= document.createElement('INPUT');
                     radioBtn.name = 'cameras';
@@ -270,7 +300,7 @@
                     chooseCameraList.appendChild(radioBtnItem);
 
                     radioBtnItem.addEventListener('click', function (e) {
-                       //if(!WebRTCconference.conferenceControl.cameraIsEnabled()) WebRTCconference.conferenceControl.enableVideo();
+                        //if(!WebRTCconference.conferenceControl.cameraIsEnabled()) WebRTCconference.conferenceControl.enableVideo();
 
                         var checked = e.target.querySelector('input[name="cameras"]');
                         if(checked) {
@@ -287,6 +317,7 @@
                             if (cameraId != null) WebRTCconference.conferenceControl.toggleCameras(cameraId)
                         }
                     })
+                    count++;
 
                 });
 
@@ -318,7 +349,8 @@
                             currentSelectedItem.classList.remove('webrtc_tool_disabled-radio');
                         }
                         e.target.classList.add('webrtc_tool_disabled-radio');
-                    }, function () {
+                    }, function (e) {
+                        console.error('startShareScreen', e)
                         var currentCameraId = WebRTCconference.conferenceControl.currentCameraDevice().deviceId;
                         var currentDevice = tool.settingsPopupEl.querySelector('input[value="' + currentCameraId + '"]');
                         console.log('currentDevice', currentDevice)
@@ -353,39 +385,47 @@
                 tool.cameraBtn.parentNode.appendChild(settingsPopup);
 
                 tool.hoverTimeout = {setttingsPopup: null, participantsPopup: null};
-                tool.cameraBtn.addEventListener('mouseenter', function (e) {
-                    if(tool.hoverTimeout.setttingsPopup != null) {
-                        clearTimeout(tool.hoverTimeout.setttingsPopup);
-                        tool.hoverTimeout.setttingsPopup = null;
-                    }
-                    tool.cameraBtn.parentNode.classList.add('webrtc_tool_hover');
-                });
-                tool.cameraBtn.addEventListener('mouseleave', function (e) {
-                    if(e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
-                        e.stopPropagation();
-                        e.preventDefault();
-                    }
-                    tool.hoverTimeout.setttingsPopup = setTimeout(function () {
-                        tool.cameraBtn.parentNode.classList.remove('webrtc_tool_hover');
-                    }, 300)
-                });
+                if(!Q.info.isMobile) {
+                    console.log('usersBtn BINDING')
 
-                settingsPopup.addEventListener('mouseenter', function (e) {
-                    console.log('usersBtn CANCEL', e.target)
+                    tool.cameraBtn.addEventListener('mouseenter', function (e) {
+                        if (tool.hoverTimeout.setttingsPopup != null) {
+                            clearTimeout(tool.hoverTimeout.setttingsPopup);
+                            tool.hoverTimeout.setttingsPopup = null;
+                        }
+                        tool.cameraBtn.parentNode.classList.add('webrtc_tool_hover');
+                    });
+                    tool.cameraBtn.addEventListener('mouseleave', function (e) {
+                        if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
+                        tool.hoverTimeout.setttingsPopup = setTimeout(function () {
+                            tool.cameraBtn.parentNode.classList.remove('webrtc_tool_hover');
+                        }, 300)
+                    });
 
-                    if(tool.hoverTimeout.setttingsPopup != null) {
-                        clearTimeout(tool.hoverTimeout.setttingsPopup);
-                        tool.hoverTimeout.setttingsPopup = null;
-                    }
-                })
-                settingsPopup.addEventListener('mouseleave', function (e) {
-                    setTimeout(function () {
-                        tool.cameraBtn.parentNode.classList.remove('webrtc_tool_hover');
-                    }, 300)
+                    settingsPopup.addEventListener('mouseenter', function (e) {
+                        console.log('usersBtn CANCEL', e.target)
 
-                });
+                        if(tool.hoverTimeout.setttingsPopup != null) {
+                            clearTimeout(tool.hoverTimeout.setttingsPopup);
+                            tool.hoverTimeout.setttingsPopup = null;
+                        }
+                    })
+                    settingsPopup.addEventListener('mouseleave', function (e) {
+                        setTimeout(function () {
+                            tool.cameraBtn.parentNode.classList.remove('webrtc_tool_hover');
+                        }, 300)
+
+                    });
+                }
             },
 
+            /**
+             * Create participants popup that appears while pointer hovers users button on desktop/in modal box on mobile
+             * @method participantsPopup
+             */
             participantsPopup:function() {
                 var tool = this;
 
@@ -478,12 +518,30 @@
                             if(tool.participantsList[i].participant.sid == this.participant.sid) {
                                 tool.participantsList[i] = null;
                                 break;
-                            }removeItem
+                            }
                         }
 
                         tool.participantsList = tool.participantsList.filter(function (listItem) {
                             return listItem != null;
                         })
+
+                    };
+                    this.removeScreen = function () {
+                        var screens = WebRTCconference.screens();
+                        for(var i in screens) {
+                            if(this.participant == screens[i].participant && screens[i].screenEl.parentNode != null) {
+                                //screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
+                                console.log('removeScreen')
+                                if(screens[i].screenEl.style.display == 'none') {
+                                    screens[i].screenEl.style.display = '';
+                                    this.unmuteVideo();
+                                } else {
+                                    screens[i].screenEl.style.display = 'none';
+                                    this.muteVideo();
+                                }
+
+                            }
+                        }
 
                     };
                 }
@@ -497,6 +555,10 @@
                     locDisabledMic: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M41.411,32.236c0.001-4.678,3.794-8.473,8.473-8.473c4.681,0,8.472,3.793,8.472,8.473   v0.502L41.421,52.4c-0.001-0.068-0.01-0.135-0.01-0.203V32.236z M35.376,42.216h3.379v10.177c0,0.934,0.127,1.836,0.345,2.703   l-2.616,3.037c-0.708-1.713-1.107-3.58-1.107-5.535V42.216z M64.392,52.598c0,7.357-5.51,13.551-12.818,14.408v5.436h6.783v3.381   H41.411v-3.381h6.783v-5.436c-2.8-0.328-5.331-1.443-7.394-3.105l2.317-2.688c1.875,1.441,4.217,2.309,6.767,2.309   c6.146,0,11.127-4.984,11.127-11.129V42.216h3.381V52.598z M44.954,59.078l13.403-15.56v8.677c0,4.68-3.793,8.475-8.473,8.475   C48.042,60.67,46.344,60.076,44.954,59.078z M27.421,77.139l-3.046-2.623l47.979-55.723l3.046,2.623L27.421,77.139z"/>  </svg>',
                 }
 
+                /**
+                 * Add item to participants list and bind events that are happened on buttons click/tap
+                 * @method addItem
+                 */
                 function addItem(roomParticipant) {
                     console.log('roomParticipant.identity', roomParticipant.identity)
                     try {
@@ -541,11 +603,15 @@
                         listItem.toggleAudio();
                     });
                     muteVideoBtn.addEventListener('click', function (e) {
-                        listItem.toggleVideo();
+                        listItem.removeScreen();
                     });
 
                 }
 
+                /**
+                 * Toggle video button (active/inactive) of local participant on participants list
+                 * @method toggleLocalVideo
+                 */
                 function toggleLocalVideo() {
                     if(tool.participantsList == null) return;
 
@@ -565,6 +631,10 @@
                     }
                 }
 
+                /**
+                 * Remove item from participants list participants list
+                 * @method removeItem
+                 */
                 function removeItem(participant) {
                     var item = tool.participantsList.filter(function (listItem) {
                         return listItem.participant.sid == participant.sid;
@@ -572,9 +642,11 @@
                     item.remove();
                 }
 
+                /**
+                 * Create participants list that is used in popup (on desktop) or modal box (on mobile)
+                 * @method createList
+                 */
                 function createList() {
-                    //var tool = this;
-                    // if(!_isMobile) return;
                     if(tool.participantsList == null) tool.participantsList = [];
                     var participantsListCon = document.createElement('DIV');
                     participantsListCon.className = 'webrtc_tool_popup-participants-list webrtc_tool_popup-box';
@@ -589,7 +661,7 @@
                     }
                     participantsListCon.appendChild(tool.participantListEl)
 
-                    if(!Q.info.isMobile) {
+                    if(!Q.info.isMobile && !Q.info.isTablet) {
                         tool.usersBtn.parentNode.appendChild(participantsListCon);
                     } else {
                         /*var container = tool.usersBtn.parentNode
@@ -598,14 +670,15 @@
                     //tool.participantsList = tool.participantsList;
 
 
-                    if(Q.info.isMobile) {
+                    if(Q.info.isMobile || Q.info.isTablet) {
 
                         tool.usersBtn.addEventListener('touchend', function (e) {
                             //tool.usersBtn.parentNode.classList.toggle('webrtc_tool_hover');
                             Q.Dialogs.push({
                                 title: "Participants",
                                 className: 'webrtc_tool_participants-list',
-                                content: tool.participantListEl
+                                content: tool.participantListEl,
+                                apply: true
                             });
                         });
 

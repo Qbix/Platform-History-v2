@@ -66,7 +66,7 @@ class FacebookRequest
     /**
      * @var array The parameters to send with this request.
      */
-    protected $params = [];
+    protected $params = array();
 
     /**
      * @var array The files to send with this request.
@@ -94,7 +94,7 @@ class FacebookRequest
      * @param string|null             $eTag
      * @param string|null             $graphVersion
      */
-    public function __construct(FacebookApp $app = null, $accessToken = null, $method = null, $endpoint = null, array $params = [], $eTag = null, $graphVersion = null)
+    public function __construct(FacebookApp $app = null, $accessToken = null, $method = null, $endpoint = null, array $params = array(), $eTag = null, $graphVersion = null)
     {
         $this->setApp($app);
         $this->setAccessToken($accessToken);
@@ -326,7 +326,7 @@ class FacebookRequest
      *
      * @throws FacebookSDKException
      */
-    public function setParams(array $params = [])
+    public function setParams(array $params = array())
     {
         if (isset($params['access_token'])) {
             $this->setAccessTokenFromParams($params['access_token']);
@@ -350,7 +350,7 @@ class FacebookRequest
      *
      * @return FacebookRequest
      */
-    public function dangerouslySetParams(array $params = [])
+    public function dangerouslySetParams(array $params = array())
     {
         $this->params = array_merge($this->params, $params);
 
