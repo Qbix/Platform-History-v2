@@ -158,7 +158,7 @@ class FacebookResumableUploader
      *
      * @return array
      */
-    private function sendUploadRequest($endpoint, $params = [])
+    private function sendUploadRequest($endpoint, $params = array())
     {
         $request = new FacebookRequest($this->app, $this->accessToken, 'POST', $endpoint, $params, null, $this->graphVersion);
 
