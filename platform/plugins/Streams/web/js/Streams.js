@@ -4744,11 +4744,11 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
             WebRTCconference.event.on('videoTrackLoaded', function (e) {
                 console.log('%c TWILIO: TRACK LOADED', 'background:blue;color:white;', e)
-                fitScreenToVideo(e.trackEl, e.screen, e.reset)
+                fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
             });
         }
 
-        var fitScreenToVideo = function (videoEl, screen, reset) {
+        var fitScreenToVideo = function (videoEl, screen, reset, oldSize) {
             console.log('LOADED loadedmetadata 1',reset, videoEl, videoEl, videoEl.videoHeight, videoEl.videoWidth);
             console.log('LOADED loadedmetadata 1.1',screen.videoCon.style.width, screen.videoCon.style.height);
 
@@ -4777,7 +4777,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
                 videoEl.parentNode.style.flexDirection = 'column';
             } else {
                 console.log('loadedmetadata if1 else' + '--', elRect);
-                var videoElWidth = videoEl.style.width != '' ? (videoEl.style.width).replace('px', '') : 280;
+                var videoElWidth = oldSize.width != '' ? oldSize.width : 280;
                 elementHeight = parseInt(videoElWidth / ratio0);
                 elementWidth = videoElWidth;
                 videoEl.style.height = '100%';
@@ -5193,6 +5193,10 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         }
 
     }
+
+    module.stop = function () {
+		WebRTCconference.disconnect()
+    };
 
 
 
