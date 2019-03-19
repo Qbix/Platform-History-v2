@@ -3037,7 +3037,7 @@ var WebRTCconference = function app(options){
 
     app.init = function(callback){
         if(options.webrtcMode == 'twilio') {
-            require(['https://www.demoproject.co.ua/video-chat/node_modules/twilio-video/dist/twilio-video.js'], function (TwilioInstance) {
+            require(['//media.twiliocdn.com/sdk/js/video/releases/1.15.2/twilio-video.min.js'], function (TwilioInstance) {
                 Twilio = window.Twilio = TwilioInstance;
                 initWithTwilio(callback);
             });
