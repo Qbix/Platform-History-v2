@@ -701,7 +701,7 @@ var WebRTCconference = function app(options){
                     console.log('track.parentScreen.videoTrack != oldTrack', e.target.videoWidth, track.parentScreen.videoCon.style.width, e.target.videoHeight, track.parentScreen.videoCon.style.height)
                     var shouldReset = track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1);
 
-                    app.event.dispatch('videoTrackLoaded', {screen:track.parentScreen, trackEl: e.target, reset:shouldReset});
+                    app.event.dispatch('videoTrackLoaded', {screen:track.parentScreen, trackEl: e.target, reset:shouldReset, oldSize: {width:videoConWidth, height:videoConHeight}});
                 });
             }
 
@@ -1711,10 +1711,12 @@ var WebRTCconference = function app(options){
             if(!options.useAsLibrary) app.views.switchTo(joinFormView);
             app.conferenceControl.destroyControlBar();
 
-            roomsMedia.innerHTML = '';
+            if(!options.useAsLibrary) roomsMedia.innerHTML = '';
 
             roomScreens = [];
             roomParticipants = [];
+
+            app.event.dispatch('localParticipantDisconnected');
         }
 
         function roomJoined(room) {
@@ -2726,7 +2728,7 @@ var WebRTCconference = function app(options){
         }
 
         function destroyControlBar() {
-            if(controlBar.parentNode != null) controlBar.parentNode.removeChild(controlBar);
+            if(controlBar != null && controlBar.parentNode != null) controlBar.parentNode.removeChild(controlBar);
         }
 
         return {
@@ -3044,6 +3046,9 @@ var WebRTCconference = function app(options){
             console.log('bbbbbbbbbbbbbbbbbbbbb')
             initWithNodeJs(callback);
         }
+    }
+    app.disconnect = function () {
+        window.room.disconnect();
     }
 
     function log(message) {
