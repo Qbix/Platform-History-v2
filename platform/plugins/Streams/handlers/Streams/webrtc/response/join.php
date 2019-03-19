@@ -1,9 +1,5 @@
 <?php
 
-//require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
-
-//use Minishlink\WebPush\WebPush;
-
 function Streams_webrtc_response_join($params = array()) {
     $params = array_merge($_REQUEST, $params);
 
@@ -12,20 +8,9 @@ function Streams_webrtc_response_join($params = array()) {
     $streamName = Q::ifset($params, 'streamName', null);
     $publisherId = Q::ifset($params, 'publisherId', null);
 
-    if($streamName && $publisherId) {
-        $stream = Streams::fetchOne($loggedUserId, $publisherId, $streamName);
-        $participants = $stream->getParticipants(array(
-            "state" => "participating"
-        ));
-        if (!isset($participants[$loggedUserId])) {
-            $stream->join();
-        } else {
 
-            Streams_Message::post(null, $publisherId, $streamName, array(
-                'type' => 'Streams/connected'
-            ), true);
-        }
+    $roomStream = Streams_Webrtc::joinRoom($loggedUserId, $publisherId, $streamName);
 
-        Q_Response::setSlot('join', $stream);
-    }
+    Q_Response::setSlot('join', $roomStream);
+
 }

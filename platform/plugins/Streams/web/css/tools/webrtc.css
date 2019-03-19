@@ -582,8 +582,8 @@
     flex-direction: column;
     border-radius: 6px;
     background-color: #fff;
-    height: 290px;
-    width: 280px;
+    height: auto;
+    width: auto;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     overflow: hidden;
     /*margin: 15px;*/
@@ -965,7 +965,7 @@
 
 .webrtc_tool_resize-handler {
     position: absolute;
-    bottom: 0;
+    bottom: 38px;
     cursor: nesw-resize;
     width: 40px;
     height: 40px;
