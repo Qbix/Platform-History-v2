@@ -544,33 +544,33 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 };
 
 Q.Tool.define({
-	"Users/avatar"		       : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
-	"Streams/chat"		       : "{{Streams}}/js/tools/chat.js",
-	"Streams/comments"	       : "{{Streams}}/js/tools/comments.js",
-	"Streams/photoSelector"    : "{{Streams}}/js/tools/photoSelector.js",
-	"Streams/userChooser"      : "{{Streams}}/js/tools/userChooser.js",
-	"Streams/participants"     : "{{Streams}}/js/tools/participants.js",
-	"Streams/basic"		       : "{{Streams}}/js/tools/basic.js",
-	"Streams/access"	       : "{{Streams}}/js/tools/access.js",
-	"Streams/subscription"     : "{{Streams}}/js/tools/subscription.js",
-	"Streams/interests"	       : "{{Streams}}/js/tools/interests.js",
-	"Streams/lookup"	       : "{{Streams}}/js/tools/lookup.js",
-	"Streams/relate"	       : "{{Streams}}/js/tools/relate.js",
-	"Streams/related"	       : "{{Streams}}/js/tools/related.js",
-	"Streams/inplace"	       : "{{Streams}}/js/tools/inplace.js",
-	"Streams/html"		       : "{{Streams}}/js/tools/html.js",
-	"Streams/preview"  	       : "{{Streams}}/js/tools/preview.js",
-	"Streams/image/preview"    : "{{Streams}}/js/tools/image/preview.js",
-	"Streams/file/preview"     : "{{Streams}}/js/tools/file/preview.js",
+	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
+	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
+	"Streams/comments"	 : "{{Streams}}/js/tools/comments.js",
+	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
+	"Streams/userChooser"  : "{{Streams}}/js/tools/userChooser.js",
+	"Streams/participants" : "{{Streams}}/js/tools/participants.js",
+	"Streams/basic"		: "{{Streams}}/js/tools/basic.js",
+	"Streams/access"	   : "{{Streams}}/js/tools/access.js",
+	"Streams/subscription" : "{{Streams}}/js/tools/subscription.js",
+	"Streams/interests"	: "{{Streams}}/js/tools/interests.js",
+	"Streams/lookup"	   : "{{Streams}}/js/tools/lookup.js",
+	"Streams/relate"	   : "{{Streams}}/js/tools/relate.js",
+	"Streams/related"	  : "{{Streams}}/js/tools/related.js",
+	"Streams/inplace"	  : "{{Streams}}/js/tools/inplace.js",
+	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
+	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
+	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
+	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
 	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
-	"Streams/category"	       : "{{Streams}}/js/tools/category.js",
-	"Streams/form"		       : "{{Streams}}/js/tools/form.js",
-	"Streams/import"	       : "{{Streams}}/js/tools/import.js",
-	"Streams/activity"	       : "{{Streams}}/js/tools/activity.js",
-	"Streams/webrtc"	       : "{{Streams}}/js/tools/webrtc/webrtc.js",
+	"Streams/category"	 : "{{Streams}}/js/tools/category.js",
+	"Streams/form"		 : "{{Streams}}/js/tools/form.js",
+	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
+	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
+	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
-	"Streams/image/album"      : "{{Streams}}/js/tools/album/tool.js",
-	"Streams/default/preview"  : "{{Streams}}/js/tools/default/preview.js",
+	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
+	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/player": function () {
 		// does nothing
 	},
@@ -596,7 +596,7 @@ Q.Tool.define({
  *   @param {Array} [extra.withRelatedFromTotals] an array of relation types to get relatedFromTotals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
- *	   if any fields named in this array are == null
+ *	if any fields named in this array are == null
  *   @param {Mixed} [extra."$Module_$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  */
 Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
@@ -4806,6 +4806,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			console.log('createParticipantScreen', screen);
 			var chatParticipantEl = document.createElement('DIV');
 			chatParticipantEl.className = 'webrtc_tool_chat-participant';
+			if(screen.screensharing == true) chatParticipantEl.classList.add('screensharing');
 			chatParticipantEl.dataset.participantName = screen.sid;
 			var chatParticipantVideoCon = screen.videoCon;
 			chatParticipantVideoCon.className = 'webrtc_tool_chat-participant-video';
@@ -4877,6 +4878,10 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var roomScreens =  WebRTCconference.screens();
 			console.log('roomScreens', roomScreens);
 			console.log('roomScreens.length', roomScreens.length);
+
+			function screenSharingScreen() {
+
+			}
 
 			var prerenderedScreens = document.createDocumentFragment();
 			var num = roomScreens.length;
@@ -6427,5 +6432,6 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 }
 
 _scheduleUpdate.delay = 5000;
+
 
 })(Q, jQuery);
