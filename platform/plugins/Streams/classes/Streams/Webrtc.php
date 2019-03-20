@@ -31,7 +31,7 @@ class Streams_Webrtc
         $twilioRoom = static::createTwilioRoom();
         $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
         $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
-        $stream->save();
+        $stream->changed();
 
         return $stream;
     }
@@ -51,7 +51,12 @@ class Streams_Webrtc
 
         $twilioRoomSid = $stream->getAttribute('twilioRoomSid');
         $twilioRoomName = $stream->getAttribute('twilioRoomName');
-        if(!empty($twilioRoomSid)){
+		if (!$twilioRoomSid) {
+            $twilioRoom = static::createTwilioRoom();
+            $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
+            $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
+            $stream->changed();
+		} else {
             try {
                 $twilioRoom = static::getTwilioRoom($twilioRoomName);
             } catch (Exception $e) {
@@ -59,7 +64,7 @@ class Streams_Webrtc
                 $twilioRoom = static::createTwilioRoom();
                 $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
                 $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
-                $stream->save();
+                $stream->changed();
             }
 
         }
