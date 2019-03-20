@@ -14,42 +14,97 @@ use Twilio\Rest\Client;
  */
 class Streams_Webrtc
 {
-    static function createRoom() {
+    static function createRoom($publisherId, $streamName) {
         $loggedUserId = Users::loggedInUser(true)->id;
 
-        $stream = Streams::create($loggedUserId, $loggedUserId, 'Streams/webrtc');
+        if(isset($publisherId) && !empty($publisherId) && isset($streamName) && !empty($streamName)) {
+            $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', [
+                'name' => 'Streams/webrtc/' . $streamName,
+            ]);
+
+        } else {
+            $stream = Streams::create($loggedUserId, $loggedUserId, 'Streams/webrtc');
+        }
+        //print_r($stream);die;
+
         $roomName = str_replace("Streams/webrtc","", $stream->name);
-        $twilioRoom = static::createTwilioRoom($roomName);
+        $twilioRoom = static::createTwilioRoom();
         $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
+        $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
         $stream->save();
 
         return $stream;
     }
+    static function joinRoom($loggedUserId, $publisherId, $streamName) {
+        $stream = Streams::fetchOne($loggedUserId, $publisherId, $streamName);
+        $participants = $stream->getParticipants(array(
+            "state" => "participating"
+        ));
+        if (!isset($participants[$loggedUserId])) {
+            $stream->join();
+        } else {
 
-    static function createTwilioRoom($roomName) {
+            Streams_Message::post(null, $publisherId, $streamName, array(
+                'type' => 'Streams/connected'
+            ), true);
+        }
+
+        $twilioRoomSid = $stream->getAttribute('twilioRoomSid');
+        $twilioRoomName = $stream->getAttribute('twilioRoomName');
+        if(!empty($twilioRoomSid)){
+            try {
+                $twilioRoom = static::getTwilioRoom($twilioRoomName);
+            } catch (Exception $e) {
+                //die('catch');
+                $twilioRoom = static::createTwilioRoom();
+                $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
+                $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
+                $stream->save();
+            }
+
+        }
+
+        //print_r($twilioRoom);die('1213');
+        return $stream;
+    }
+
+    static function createTwilioRoom() {
+        //die($roomName);
         $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
         $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
         $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
-        $authToken = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
 
 
         $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
+        $roomUniqueName = static::makeRandomName();
+        $room = $twilio->video->v1->rooms->create(array("uniqueName" => $roomUniqueName));
 
-        $room = $twilio->video->v1->rooms->create(array("uniqueName" => $roomName));
         //print_r($room);die;
         return $room;
     }
 
-    static function getTwilioRoom($sid) {
+    static function makeRandomName() {
+        $text = "";
+        $possible = "0123456789";
+        $max = strlen($possible)-1;
+        for ($i = 0; $i < 6; $i++) {
+            $text .= $possible[rand(0,$max)];
+        }
+        return $text;
+    }
+
+    static function getTwilioRoom($sidOrName) {
         $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
         $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
         $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
-        $authToken = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
 
 
         $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
 
-        $room = $twilio->video->v1->rooms($sid)->fetch();
+        $room = $twilio->video->v1->rooms($sidOrName)->fetch();
+
         return $room;
     }
 
@@ -57,7 +112,7 @@ class Streams_Webrtc
         $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
         $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
         $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
-        $authToken = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
 
         $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
         $twilioParticipant = $twilio->video->rooms($sid)->participants->read(array("status" => "connected"));
@@ -69,7 +124,7 @@ class Streams_Webrtc
         $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
         $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
         $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
-        $authToken = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
 
         $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
 

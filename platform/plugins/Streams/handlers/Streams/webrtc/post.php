@@ -10,9 +10,12 @@ function Streams_webrtc_post($params = array())
 {
     $params = array_merge($_REQUEST, $params);
 
-    $roomStream = Streams_Webrtc::createRoom();
-    //var_dump(class_exists('Streams_Webrtc'));die;
-    //var_dump(method_exists('Streams_Webrtc', 'createRoom'));die;
+    $loggedUserId = Users::loggedInUser(true)->id;
+    $communityId = Users::communityId();
+    $streamName = Q::ifset($params, 'streamName', null);
+    $publisherId = Q::ifset($params, 'publisherId', null);
+
+    $roomStream = Streams_Webrtc::createRoom($publisherId, $streamName);
 
     $roomStream->join();
 
