@@ -27,7 +27,8 @@
         {
             bindEvents: function () {
                 var tool = this;
-                var elementToApply = tool.element;
+                var elementToResize = tool.element;
+                var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 
                 var _dragElement = function(){
                     var elementToMove;
@@ -38,7 +39,6 @@
                         elementToMove.style.top = ypos + 'px';
                     }
                     var drag = function(evt){
-
                         if(Q.info.isMobile && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
                         evt = evt || window.event;
@@ -53,11 +53,13 @@
                         move(aX,aY);
                     }
                     var initMoving = function(divid,container,evt){
-                        if(Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
+                        if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
                         elementToMove = divid;
                         var elRect = elementToMove.getBoundingClientRect();
-                        elementToMove.style.width = elRect.width + 'px';
-                        elementToMove.style.height = elRect.height + 'px';
+                        if(elementToMove == elementToResize) {
+                            elementToMove.style.width = elRect.width + 'px';
+                            elementToMove.style.height = elRect.height + 'px';
+                        }
                         elementToMove.style.top = elRect.top + 'px';
                         elementToMove.style.left = elRect.left + 'px';
                         elementToMove.style.transform = '';
@@ -122,7 +124,6 @@
                         _elLeftMargin = +(_elementToResize.style.margin || _elementToResize.style.marginLeft).replace('px', '');
                         _elRightMargin = +(_elementToResize.style.margin || _elementToResize.style.marginRight).replace('px', '');
                         _handler = e.target;
-                        _ratio = elementRect.width / elementRect.height;
 
                         window.addEventListener('mousemove', _startResizing, true);
                         window.addEventListener('mouseup', _stopResizing, true);
@@ -132,12 +133,14 @@
 
                         if(e.pageX >= docRect.right-(docStyles.paddingRight ? docStyles.paddingRight : '0').replace('px', '')) return;
 
+                        var elementRect = _elementToResize.getBoundingClientRect();
+                        if(_ratio == null) _ratio = elementRect.width / elementRect.height;
                         if(_latestWidthValue == null) _latestWidthValue = _elementToResize.offsetWidth;
                         if(_latestHeightValue == null) _latestHeightValue = _elementToResize.offsetHeight;
                         if(_oldx == null) _oldx = e.pageX;
                         if(_oldy == null) _oldy = e.pageY;
 
-                        var elementWidth, elementHeight;
+                        var elementWidth, elementHeight, action;
 
                         if(_handlerPosition == 'right') {
                             console.log('right resize', _latestWidthValue,_latestHeightValue, _oldx, _oldy)
@@ -167,6 +170,7 @@
 
                         }
 
+
                         if(_ratio < 1) {
                             elementWidth = parseInt(elementHeight * _ratio);
 
@@ -175,9 +179,21 @@
                             elementHeight = parseInt(elementWidth / _ratio);
                         }
 
-
+                        if(elementWidth <= _latestWidthValue || elementHeight <= _latestHeightValue) {
+                            action = 'reduce';
+                        } else {
+                            action = 'increase';
+                        }
+                        console.log('action', action)
                         console.log('elementWidth', elementWidth, elementHeight)
                         if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
+                            return
+                        }
+                        console.log('1111', elementToMove != _elementToResize, elementToMove.offsetHeight, document.body.offsetHeight, elementToMove.offsetWidth, document.body.offsetWidth)
+                        console.log('2222', _elementToResize.offsetHeight, document.body.offsetHeight, _elementToResize.offsetWidth, document.body.offsetWidth)
+
+                        if(action == 'increase' && elementToMove != _elementToResize && (elementToMove.offsetHeight >= document.body.offsetHeight || elementToMove.offsetWidth >= document.body.offsetWidth)) {
+                            console.log('OVERSIZE', elementToMove.offsetHeight, document.body.offsetHeight, elementToMove.offsetWidth, document.body.offsetWidth)
                             return
                         }
 
@@ -201,6 +217,7 @@
                         window.removeEventListener('mouseup', _stopResizing, true);
                         _latestWidthValue = null;
                         _latestHeightValue = null;
+                        _ratio = null;
                         _oldx = null;
                         _oldy = null;
                     }
@@ -392,30 +409,30 @@
 
 
                 if(Q.info.isMobile) {
-                    elementToApply.addEventListener('touchstart', function (e) {
+                    elementToMove.addEventListener('touchstart', function (e) {
                         _dragElement.initMoving(e.currentTarget, document.body, e)
                     });
-                    elementToApply.addEventListener('touchend', function (e) {
+                    elementToMove.addEventListener('touchend', function (e) {
                         _dragElement.stopMoving(document.body)
                     });
                 } else {
-                    elementToApply.addEventListener('mousedown', function (e) {
+                    elementToMove.addEventListener('mousedown', function (e) {
                         _dragElement.initMoving(e.currentTarget, document.body, e)
                     });
-                    elementToApply.addEventListener('mouseup', function (e) {
+                    elementToMove.addEventListener('mouseup', function (e) {
                         _dragElement.stopMoving(document.body)
                     });
 
 
-                    elementToApply.addEventListener('mousedown', function (e) {
+                    elementToMove.addEventListener('mousedown', function (e) {
                         _dragElement.initMoving(e.currentTarget, document.body, e)
                     });
-                    elementToApply.addEventListener('mouseup', function (e) {
+                    elementToMove.addEventListener('mouseup', function (e) {
                         _dragElement.stopMoving(document.body)
                     });
                 }
 
-                resizeElement.setHandler(elementToApply);
+                resizeElement.setHandler(elementToResize);
 
 
                 (function(e){
