@@ -4806,6 +4806,7 @@
                 console.log('createParticipantScreen', screen);
                 var chatParticipantEl = document.createElement('DIV');
                 chatParticipantEl.className = 'webrtc_tool_chat-participant';
+                if(screen.screensharing == true) chatParticipantEl.classList.add('screensharing');
                 chatParticipantEl.dataset.participantName = screen.sid;
                 var chatParticipantVideoCon = screen.videoCon;
                 chatParticipantVideoCon.className = 'webrtc_tool_chat-participant-video';
@@ -4877,6 +4878,10 @@
                 var roomScreens =  WebRTCconference.screens();
                 console.log('roomScreens', roomScreens);
                 console.log('roomScreens.length', roomScreens.length);
+
+                function screenSharingScreen() {
+
+                }
 
                 var prerenderedScreens = document.createDocumentFragment();
                 var num = roomScreens.length;

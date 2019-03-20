@@ -103,6 +103,7 @@ var WebRTCconference = function app(options){
     var Track = function () {
         this.sid = null;
         this.kind = null;
+        this.type = null;
         this.parentScreen = null;
         this.trackEl = null;
         this.mediaStreamTrack = null;
@@ -560,6 +561,7 @@ var WebRTCconference = function app(options){
             this.tracks = [];
             this.isMain = null;
             this.isLocal = null;
+            this.screensharing = null;
             this.videoTracks = function () {
                 return this.tracks.filter(function (trackObj) {
                     return trackObj.kind == 'video';
@@ -627,9 +629,9 @@ var WebRTCconference = function app(options){
             if(screenToAttach.videoTrack && screenToAttach.videoTrack.parentNode) screenToAttach.videoTrack.parentNode.removeChild(screenToAttach.videoTrack);
             screenToAttach.videoCon.appendChild(trackEl);
             if(track.kind == 'video') screenToAttach.videoTrack = trackEl;
+            if(track.screensharing == true) screenToAttach.screensharing = true;
 
             track.participant = participant;
-
             track.trackEl = trackEl;
 
             screenToAttach.tracks.push(track);
@@ -695,10 +697,11 @@ var WebRTCconference = function app(options){
                     var videoConHeight= (track.parentScreen.videoCon.style.height).replace('px', '');
                     var currentRation = videoConWidth / videoConHeight;
                     var videoRatio = e.target.videoWidth / e.target.videoHeight;
+                    if(track.screensharing == true) videoConWidth =  window.innerWidth/2;
 
                     console.log('videoConWidth ratio', currentRation, videoRatio, currentRation.toFixed(1) == videoRatio.toFixed(1))
                     console.log('track.parentScreen.videoTrack != oldTrack', e.target.videoWidth, track.parentScreen.videoCon.style.width, e.target.videoHeight, track.parentScreen.videoCon.style.height)
-                    var shouldReset = track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1);
+                    var shouldReset = (track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1)) || track.screensharing == true;
 
                     app.event.dispatch('videoTrackLoaded', {
                         screen: track.parentScreen,
@@ -1510,6 +1513,7 @@ var WebRTCconference = function app(options){
                         var trackToAttach = new Track();
                         trackToAttach.sid = trackPublication.track.sid;
                         trackToAttach.kind = trackPublication.track.kind;
+                        trackToAttach.screensharing = true;
                         trackToAttach.mediaStreamTrack = trackPublication.track.mediaStreamTrack;
                         trackToAttach.twilioReference = trackPublication.track;
 
