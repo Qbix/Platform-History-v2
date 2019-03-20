@@ -1,0 +1,11 @@
+{
+  "name": "q.streams",
+  "version": "1.0.0",
+  "description": "Streams Plugin",
+  "author": "Qbix",
+  "license": "AGPL-1.0",
+  "dependencies": {
+    "requirejs": "^2.3.6",
+    "twilio-video": "^1.15.2"
+  }
+}
