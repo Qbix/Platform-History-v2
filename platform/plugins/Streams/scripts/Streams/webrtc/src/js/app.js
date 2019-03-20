@@ -690,8 +690,7 @@ var WebRTCconference = function app(options){
 
             if(!_isMobile) {
                 remoteStreamEl.addEventListener('loadedmetadata', function (e) {
-                    console.log('track.parentScreen.width', track.parentScreen.width)
-                    if(track.parentScreen.width != '' || track.parentScreen.height != '') return;
+
                     console.log('LOADED loadedmetadata', e.target, e.target.videoHeight, e.target.videoWidth);
                     track.parentScreen.width = e.target.videoWidth;
                     track.parentScreen.height = e.target.videoHeight;
@@ -3194,7 +3193,7 @@ var WebRTCconference = function app(options){
 
             var yyyy = today.getFullYear();
             if (dd < 10) {
-                dd = '0' + dd;eams/signa
+                dd = '0' + dd;
             }
             if (mm < 10) {
                 mm = '0' + mm;
