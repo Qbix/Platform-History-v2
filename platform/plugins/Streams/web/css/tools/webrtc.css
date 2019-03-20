@@ -49,7 +49,7 @@
     justify-content: center;
     padding-top: 15px;
     position: fixed;
-    top: 0;
+    top: 80px;
     z-index: 9999999;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 15px;
@@ -262,6 +262,13 @@
     display: block;
     width:176px;
     height:99px;
+}
+
+.Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+    width: 50vw;
+}
+.Q_verticalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+    width: 100vw;
 }
 
 .webrtc_tool_mobile-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant {
@@ -577,7 +584,7 @@
     background-color: #fff;
     height: auto;
     width: auto;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0 40px 0 rgba(0,0,0,0.5);
     overflow: hidden;
     /*margin: 15px;*/
 }
