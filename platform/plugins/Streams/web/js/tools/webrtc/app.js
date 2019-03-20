@@ -690,7 +690,6 @@ var WebRTCconference = function app(options){
             //remoteStream.srcObject = track.twilioReference != null ? track.twilioReference.mediaStreamTrack : track.MediaStreamTrack;
             console.log('track.width', remoteStreamEl.videoWidth, remoteStreamEl.videoHeight)
             if(!_isMobile && track.kind == 'video') {
-                var oldTrack =  track.parentScreen.videoTrack;
                 remoteStreamEl.addEventListener('loadedmetadata', function (e) {
                     var videoConWidth = (track.parentScreen.videoCon.style.width).replace('px', '');
                     var videoConHeight= (track.parentScreen.videoCon.style.height).replace('px', '');
@@ -701,7 +700,11 @@ var WebRTCconference = function app(options){
                     console.log('track.parentScreen.videoTrack != oldTrack', e.target.videoWidth, track.parentScreen.videoCon.style.width, e.target.videoHeight, track.parentScreen.videoCon.style.height)
                     var shouldReset = track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1);
 
-                    app.event.dispatch('videoTrackLoaded', {screen:track.parentScreen, trackEl: e.target, reset:shouldReset, oldSize: {width:videoConWidth, height:videoConHeight}});
+                    app.event.dispatch('videoTrackLoaded', {
+                        screen: track.parentScreen,
+                        trackEl: e.target, reset:shouldReset,
+                        oldSize: {width:(videoConWidth != '' ? videoConWidth : null), height:(videoConHeight != '' ? videoConHeight : null)}
+                    });
                 });
             }
 
