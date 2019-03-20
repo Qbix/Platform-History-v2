@@ -27,6 +27,10 @@ Options:
 
 --plugins This option installs all the plugins
 
+--composer Run PHP composer when encountered
+
+--npm Run Node.js Package Manager when encountered
+
 -p \$NAME Can be used repeatedly to install one or more plugins
 
 -s \$CONN_NAME
@@ -49,6 +53,7 @@ Options:
 
 --trace
   Print stacktraces on errors 
+
 
 EOT;
 
