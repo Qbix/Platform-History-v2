@@ -599,11 +599,7 @@ var WebRTCconference = function app(options){
 
         function attachTrack(track, participant) {
             console.log('attachTrack participant', participant);
-
-            console.log('attachTrack track', track);
-            console.log('attachTrack track C', track.mediaStreamTrack.getCapabilities());
-            console.log('attachTrack track s', track.mediaStreamTrack.getSettings());
-            console.log('attachTrack track.isLocal', track.isLocal);
+            
             try {
                 var err = (new Error);
                 console.log(err.stack);
