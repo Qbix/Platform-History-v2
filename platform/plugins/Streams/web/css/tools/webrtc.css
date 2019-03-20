@@ -1,9 +1,3 @@
-#page, #content_slot, .Streams_webrtc_tool {
-    overflow: visible;
-}
-.Streams_webrtc_tool {
-    height: 100%;
-}
 #webrtc_tool-room-media {
     position: fixed;
     top: 0;
@@ -117,10 +111,9 @@
 
 
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control{
+    padding-left: 10px;
+    margin-right: 10px;
     z-index: 5;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 5px;
-    border-radius: 7px;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner{
     display: flex;
@@ -621,7 +614,6 @@
     max-width: 100%;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
-    white-space: nowrap;
     padding: 8px 5px 8px 10px;
     background: white;
     color:black;
