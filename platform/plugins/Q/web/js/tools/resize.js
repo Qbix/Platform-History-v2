@@ -53,6 +53,7 @@
                         move(aX,aY);
                     }
                     var initMoving = function(divid,container,evt){
+                        console.log('initMoving')
                         if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
                         elementToMove = divid;
                         var elRect = elementToMove.getBoundingClientRect();
@@ -73,7 +74,7 @@
                             eHe = parseInt(elementToMove.offsetHeight),
                             cWi = parseInt(container.offsetWidth),
                             cHe = parseInt(container.offsetHeight);
-                        container.style.cursor='move';
+                        container.style.cursor='grabbing';
                         divTop = divTop.replace('px','');
                         divLeft = divLeft.replace('px','');
                         diffX = posX - divLeft, diffY = posY - divTop;
@@ -231,7 +232,7 @@
                         resizeHandler.classList.add('webrtc_tool_resize-handler');
                         if(_handlerPosition == 'right') {
                             resizeHandler.style.right = '0';
-                            resizeHandler.style.cursor = 'nw-resize';
+                            resizeHandler.style.cursor = 'nwse-resize';
                         } else resizeHandler.style.left = '0';
                         element.appendChild(resizeHandler);
 
@@ -423,6 +424,13 @@
                         _dragElement.stopMoving(document.body)
                     });
 
+
+                    elementToMove.addEventListener('mouseenter', function (e) {
+                        document.documentElement.style.cursor = 'grab';
+                    });
+                    elementToMove.addEventListener('mouseleave', function (e) {
+                        document.documentElement.style.cursor = '';
+                    });
 
                     elementToMove.addEventListener('mousedown', function (e) {
                         _dragElement.initMoving(e.currentTarget, document.body, e)

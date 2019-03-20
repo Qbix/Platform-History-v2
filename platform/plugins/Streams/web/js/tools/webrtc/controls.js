@@ -288,7 +288,7 @@
                     radioBtn.name = 'cameras';
                     radioBtn.type = 'radio';
                     radioBtn.value = mediaDevice.deviceId;
-                    if(WebRTCconference.conferenceControl.currentCameraDevice().deviceId == mediaDevice.deviceId) {
+                    if(WebRTCconference.conferenceControl.currentCameraDevice() != null && WebRTCconference.conferenceControl.currentCameraDevice().deviceId == mediaDevice.deviceId) {
                         radioBtn.disabled = true;
                         radioBtn.checked = true;
                         radioBtnItem.classList.add('webrtc_tool_disabled-radio');
