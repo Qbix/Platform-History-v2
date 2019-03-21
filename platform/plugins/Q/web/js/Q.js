@@ -3800,8 +3800,10 @@ Q.Tool.beforeRemove = Q.Event.factory(_beforeRemoveToolHandlers, ["", _toolEvent
  * @param {boolean} removeCached
  *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
  *  should be removed.
+ * @param {boolean} [removeElementAfterLastTool=false]
+ *  If true, removes the element if the last tool on it was removed
  */
-Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
+Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLastTool) {
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
@@ -3819,7 +3821,7 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 				continue;
 			}
 
-			toolElement.Q.tools[tn[i]].remove(removeCached);
+			toolElement.Q.tools[tn[i]].remove(removeCached, removeElementAfterLastTool);
 		}
 	});
 };
@@ -4293,12 +4295,14 @@ Tp.siblings = function Q_Tool_prototype_siblings() {
  * You should call Q.Tool.remove unless, for some reason, you plan to
  * remove this exact tool instance, and not its children or siblings.
  * @method remove
- * @param {boolean} removeCached
+ * @param {boolean} [removeCached=false]
  *  Defaults to false. Whether or not to remove the actual tool if its containing element
  *  has a "data-Q-retain" attribute.
+ * @param {boolean} [removeElementAfterLastTool=false]
+ *  If true, removes the element if the last tool on it was removed
  * @return {boolean} Returns whether the tool was removed.
  */
-Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
+Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLastTool) {
 
 	var i;
 	var shouldRemove = removeCached
@@ -4331,7 +4335,9 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
 	if (Q.isEmpty(Q.Tool.active[this.id])) {
-		Q.removeElement(this.element);
+		if (removeElementAfterLastTool) {
+			Q.removeElement(this.element);
+		}
 		delete Q.Tool.active[this.id];
 	}
 
