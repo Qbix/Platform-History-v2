@@ -11,9 +11,20 @@
     z-index: 99999;
 }
 
-.Streams_webrtc_controls_tool {
+.webrtc_tool_desktop-screen .Streams_webrtc_controls_tool {
     display: flex;
     justify-content: center;
+    top:0;
+    z-index: 9999999;
+}
+
+.webrtc_tool_mobile-screen .Streams_webrtc_controls_tool {
+    display: flex;
+    justify-content: center;
+    top: 60px;
+    z-index: 999999;
+    position: fixed;
+    width: 100vw;
 }
 
 .webrtc_tool_hidden {
@@ -54,8 +65,8 @@
     display: flex;
     justify-content: center;
     padding-top: 15px;
+    top:80px;
     position: fixed;
-    top: 80px;
     z-index: 9999999;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 15px;
@@ -117,10 +128,13 @@
 
 
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control{
-    z-index: 5;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 5px;
     border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    z-index: 9999999999999999;
+    position: relative;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner{
     display: flex;
@@ -272,10 +286,12 @@
 }
 
 .Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
-    width: 50vw;
-}
-.Q_verticalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
     width: 100vw;
+    height:50vh;
+}
+.Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+    width: 100vw;
+    height:50vh;
 }
 
 .webrtc_tool_mobile-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant {
@@ -793,7 +809,7 @@
     transition-property: opacity;
     transition: 0.2s;
     opacity: 0;
-    z-index:999;
+    z-index:9999999;
     transform: scaleX(0);
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     -webkit-border-radius: 3px;
