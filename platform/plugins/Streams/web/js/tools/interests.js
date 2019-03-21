@@ -229,7 +229,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						// We should probably design a refresh method instead.
 						var parentElement = tool.element.parentNode;
 						var toolId = tool.id;
-						Q.Tool.remove(tool.element);
+						Q.Tool.remove(tool.element, true, true);
 						$(Q.Tool.setUpElement('div', 'Streams/interests', toolId))
 						.appendTo(parentElement)
 						.activate(state, function () {
