@@ -55,6 +55,10 @@ table { border-spacing:0; border-collapse:collapse; }
 		opacity: 1;
 	}
 }
+@keyframes Q_grayscale {
+	0% {filter:grayscale(0%);}
+	50% {filter:grayscale(100%);}
+}
 
 /* Common Q classes */
 .Q_pagebreak { page-break-after: always; }
@@ -265,7 +269,8 @@ body.Q_preventScroll {
 	width:50px;
 	border-radius: 50%;
 	box-shadow: 0 0 0 rgba(50,200,50, 0.4);
-	animation: Q_wiggle 5s ease-in-out infinite;
+	animation: Q_wiggle 5s ease-in-out infinite, Q_grayscale 5s ease-in-out infinite;
+	animation-delay: 5s;
 }
 .Q_messagebox .Q_big_prompt p {
 	font-weight: bold;

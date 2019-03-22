@@ -409,7 +409,7 @@ abstract class Places extends Base_Places
 		return true;
 	}
 	/**
-	 * Get time zone related to lat, lng
+	 * Get time zone related to latitude, longitude
 	 * @method timezone
 	 * @param {string} $latitude
 	 * @param {string} $longitude
@@ -421,7 +421,8 @@ abstract class Places extends Base_Places
 		$key = Q_Config::expect('Places', 'google', 'keys', 'server');
 		$location = "$latitude,$longitude";
 		$timestamp = time();
-		$query = http_build_query(compact('key', 'location', 'timestamp'));
+		$sensor = 'false';
+		$query = http_build_query(compact('key', 'location', 'timestamp', 'sensor'));
 		$url = "https://maps.googleapis.com/maps/api/timezone/json?$query";
 		$json = self::getRemoteContents($url);
 		$response = json_decode($json, true);
