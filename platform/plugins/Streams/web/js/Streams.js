@@ -4722,7 +4722,11 @@
          */
         var screensRendering = function () {
             var activeScreen;
-            var viewMode = 'maximized';
+            var viewMode;
+            if(Q.info.isMobile){
+                viewMode = 'maximized';
+            } else viewMode = 'regular';
+
             var control = {};
             control.renderScreens = function() {
 
