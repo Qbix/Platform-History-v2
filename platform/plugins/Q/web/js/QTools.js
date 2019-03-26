@@ -2839,6 +2839,7 @@ Q.Contextual = {
 							Q.Contextual.hide();
 						}
 					}
+					Q.Pointer.cancelClick(e);
 				}
 			};
 			$(document.body).on(Q.Pointer.end, Q.Contextual.endEventHandler);
@@ -2874,7 +2875,9 @@ Q.Contextual = {
 				{
 					return;
 				}
-				Q.handle(handler, contextual, [li]);
+				if (!Q.Pointer.canceledClick) {
+					Q.handle(handler, contextual, [li]);
+				}
 
 				Q.Contextual.hide();
 			};
