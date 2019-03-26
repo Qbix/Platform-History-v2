@@ -1424,9 +1424,10 @@ abstract class Users extends Base_Users
 	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
+	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
 	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
-	static function importIcon($user, $urls = array(), $directory = null)
+	static function importIcon($user, $urls = array(), $directory = null, $cookies = null)
 	{
 		$app = Q::app();
 		if (empty($directory)) {
@@ -1440,28 +1441,38 @@ abstract class Users extends Base_Users
 		$largestWidth = 0;
 		$largestHeight = 0;
 		$largestUrl = null;
+		$largestCookie = null;
 		$largestImage = null;
+		$o = array();
 		// get image with largest width and height at the same time
 		foreach ($urls as $basename => $url) {
 			if (!is_string($url)) continue;
 			$filename = $directory.DS.$basename;
 			$info = pathinfo($filename);
-			list($width, $height) = explode('x', $info['filename']);
-			if (!$width) {
-				$width = $height;
-			}
-			if (!$height) {
-				$height = $width;
+			$parts = explode('x', $info['filename']);
+			if (count($parts) === 1) {
+				$width = $height = $parts[0];
+			} else if (!$parts[0]) {
+				$width = $height = $parts[1];
+			} else if (!$parts[1]) {
+				$width = $height = $parts[0];
 			}
 			if ($largestWidth < (int)$width
 			and $largestHeight < (int)$height) {
 				$largestWidth = (int)$width;
 				$largestHeight = (int)$height;
 				$largestUrl = $url;
+				$largestCookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
+				$o = $largestCookie ? array("cookie: $largestCookie") : array();
 			}
 		}
 		if ($largestUrl) {
-			$largestImage = imagecreatefromstring(file_get_contents($largestUrl));
+			if (Q_Valid::url($largestUrl)) {
+				$data = Q_Utils::get($largestUrl, null, true, $o);
+			} else {
+				$data = file_get_contents($largestUrl);
+			}
+			$largestImage = imagecreatefromstring($data);
 			$sw = imagesx($largestImage);
 			$sh = imagesy($largestImage);
 		}
@@ -1469,11 +1480,16 @@ abstract class Users extends Base_Users
 			$filename = $directory.DS.$basename;
 			if (is_string($url)) {
 				$info = pathinfo($filename);
-				$success = false;
 				if ($largestImage) {
 					$source = $largestImage;
 				} else {
-					$data = file_get_contents($url);
+					$cookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
+					$o = $cookie ? array("cookie: $largestCookie") : array();
+					if (Q_Valid::url($url)) {
+						$data = Q_Utils::get($url, null, true, $o);
+					} else {
+						$data = file_get_contents($url);
+					}
 					$source = imagecreatefromstring($data);
 					$sw = imagesx($source);
 					$sh = imagesy($source);
@@ -1482,11 +1498,13 @@ abstract class Users extends Base_Users
 				if (count($parts) === 1) {
 					$w = $h = $parts[0];
 				} else {
-					if (!$parts[0]) {
+					if (!$parts[0] and $parts[1]) {
+						$w = $sw;
+						$h = $sh;
+					} else if (!$parts[0]) {
 						$h = $parts[1];
 						$w = $h / $sh * $sw;
-					}
-					if (!$parts[1]) {
+					} else if (!$parts[1]) {
 						$w = $parts[0];
 						$h = $w / $sw * $sh;
 					}

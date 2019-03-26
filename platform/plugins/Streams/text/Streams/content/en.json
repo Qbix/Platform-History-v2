@@ -2,6 +2,10 @@
 	"preview": {
 		"NewItemTitle": "New Item"
 	},
+	"labels": {
+		"Streams/invited": "People I invited",
+		"Streams/invitedMe": "Who invited me"
+	},
 	"interests": {
 		"Filter": "What do you enjoy?",
 		"CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
