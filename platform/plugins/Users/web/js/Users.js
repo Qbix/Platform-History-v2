@@ -459,15 +459,15 @@
 		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title({
+			var title = Q.text.Users.prompt.title.interpolate({
 				'platform': platform,
 				'Platform': platformCapitalized
 			});
-			var areUsing = Q.text.Users.prompt.areUsing({
+			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
 				'platform': platform,
 				'Platform': platformCapitalized
 			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing({
+			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
 				'platform': platform,
 				'Platform': platformCapitalized
 			});
@@ -478,12 +478,12 @@
 			var fb_xid;
 			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
 				content_div.append(_usingInformation(fb_xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch({
+				caption = Q.text.Users.prompt.doSwitch.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
 				});
 			} else {
-				caption = Q.text.Users.prompt.doAuth({
+				caption = Q.text.Users.prompt.doAuth.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
 				});
