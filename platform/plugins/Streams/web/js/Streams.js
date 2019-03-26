@@ -4481,7 +4481,7 @@
         var _roomStream = null;
         var _renderedScreens = [];
 
-        var updateQueryStringParameter = function updateQueryStringParameter(uri, key, value) {
+        var updateQueryStringParameter = function(uri, key, value) {
             var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
             var separator = uri.indexOf('?') !== -1 ? "&" : "?";
             if (uri.match(re)) {
@@ -4721,19 +4721,25 @@
          * @method screensRendering
          */
         var screensRendering = function () {
-            var renderedScreens;
             var activeScreen;
-            var viewMode = 'regular';
+            var viewMode = 'maximized';
             var control = {};
             control.renderScreens = function() {
-                console.log('control.renderScreens', _renderedScreens)
 
                 _roomsMedia.innerHTML = '';
-                _renderedScreens = [];
                 if(Q.info.isMobile){
-                    if(viewMode == null || viewMode == 'regular'){
+                    var roomScreens = WebRTCconference.screens();
+                    if(viewMode == 'regular'){
                         regularScreensGrid()
-                    } else {
+                    } else if(viewMode == 'maximized') {
+                        if(activeScreen == null && roomScreens.length == 2) {
+                            var i, screen;
+                            for(i = 0; screen = roomScreens[i]; i++) {
+                                if(!screen.isLocal) {
+                                    activeScreen = screen;
+                                }
+                            }
+                        }
                         mainScreenAndThumbsGrid();
                     }
                 } else {
@@ -4822,10 +4828,10 @@
 
                     console.log('videoEl.videoHeight > videoEl.videoWidth', videoEl.videoHeight, videoEl.videoWidth)
                     if(videoEl.videoHeight > videoEl.videoWidth) {
-                        if(viewMode == 'mainAndThumbs' && !videoEl.parentElement.classList.contains('isVertical')) videoEl.parentElement.classList.add('isVertical');
+                        if(viewMode == 'maximized' && !videoEl.parentElement.classList.contains('isVertical')) videoEl.parentElement.classList.add('isVertical');
                         videoEl.className = 'isVertical';
                     } else if(videoEl.videoWidth) {
-                        if(viewMode == 'mainAndThumbs' && !videoEl.parentElement.classList.contains('isHorizontal')) videoEl.parentElement.classList.add('isHorizontal');
+                        if(viewMode == 'maximized' && !videoEl.parentElement.classList.contains('isHorizontal')) videoEl.parentElement.classList.add('isHorizontal');
                         videoEl.className = 'isHorizontal';
                     }
 
@@ -4845,8 +4851,8 @@
                 var elementWidth, elementHeight;
                 if (ratio0 < 1) {
                     console.log('loadedmetadata if1');
-                    if(viewMode == 'mainAndThumbs')  {
-                        console.log(' if(viewMode == mainAndThumbs');
+                    if(viewMode == 'maximized')  {
+                        console.log(' if(viewMode == maximized');
 
                         videoCon.style.width = '';
                         videoCon.style.height = '';
@@ -4860,9 +4866,9 @@
                     videoEl.style.width = '100%';
                     videoEl.parentNode.style.flexDirection = 'column';
                 } else {
-                    console.log('viewMode == \'mainAndThumbs', viewMode)
-                    if(viewMode == 'mainAndThumbs')  {
-                        console.log(' if(viewMode == mainAndThumbs');
+                    console.log('viewMode == \'maximized', viewMode)
+                    if(viewMode == 'maximized')  {
+                        console.log(' if(viewMode == maximized');
 
                         videoCon.style.width = '';
                         videoCon.style.height = '';
@@ -4873,7 +4879,7 @@
 
                     console.log('loadedmetadata if1 else' + '--', elRect);
                     var mainScreenCon = document.querySelector('webrtc_tool_main-screen-stream');
-                    var defaultWidth = viewMode == 'mainAndThumbs' ? mainScreenCon.offsetWidth / 100 * 90 : (viewMode == 'minimized' ? 150 : 280);
+                    var defaultWidth = viewMode == 'maximized' ? mainScreenCon.offsetWidth / 100 * 90 : (viewMode == 'minimized' ? 150 : 280);
                     var videoElWidth = oldSize != null && oldSize.width != null ? oldSize.width : defaultWidth;
                     elementHeight = parseInt(videoElWidth / ratio0);
                     elementWidth = videoElWidth;
@@ -5083,7 +5089,7 @@
             }
 
             function mainScreenAndThumbsGrid() {
-                viewMode = 'mainAndThumbs';
+                viewMode = 'maximized';
                 if(Q.info.isMobile) {
                     mainScreenAndThumbsGridMobile();
                 } else {
@@ -5259,8 +5265,8 @@
                 console.log('toggleViewMode', )
                 var modes;
                 if(Q.info.isMobile)
-                    modes = ['regular', 'mainAndThumbs'];
-                else modes = ['regular', 'mainAndThumbs', 'minimized'];
+                    modes = ['regular', 'maximized'];
+                else modes = ['regular', 'maximized', 'minimized'];
 
                 var i, mode, modeToSwitch;
 
