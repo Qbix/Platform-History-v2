@@ -5646,7 +5646,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 				return callback(subject, params);
 			}
 			if (params[0]) {
-				return callback(this, params);
+				return callback(subject, params);
 			}
 			Streams.construct(subject, {}, function () {
 				params[1] = this;
