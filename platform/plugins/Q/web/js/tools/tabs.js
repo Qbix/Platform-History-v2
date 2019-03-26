@@ -108,6 +108,13 @@
 				var tool = this;
 				var state = this.state;
 				var tab;
+				if (tool.switching) {
+					return;
+				}
+				tool.switching = true;
+				setTimeout(function () {
+					tool.switching = false;
+				}, 300);
 				if (Q.typeOf(name) === 'array') {
 					tab = name[1];
 					name = name[0];
@@ -450,7 +457,8 @@
 
 	function _addListeners(tool, $jq) {
 		var selector = '.Q_tabs_tab';
-		$jq.off(Q.Pointer.fastclick, selector).on(Q.Pointer.fastclick, selector, function (event) {
+		$jq.off(Q.Pointer.fastclick, selector)
+		.on(Q.Pointer.fastclick, selector, function (event) {
 			if (false === tool.state.onClick.handle.call(tool, this.getAttribute('data-name'), this)) {
 				return;
 			}
