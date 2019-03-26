@@ -4733,16 +4733,22 @@
                 _roomsMedia.innerHTML = '';
                 if(Q.info.isMobile){
                     var roomScreens = WebRTCconference.screens();
-                    if(viewMode == 'regular'){
+                    if(viewMode == 'regular' || roomScreens.length == 1){
                         regularScreensGrid()
                     } else if(viewMode == 'maximized') {
+                        console.log('renderScreens activeScreen', activeScreen, roomScreens.length)
+
                         if(activeScreen == null && roomScreens.length == 2) {
+                            console.log('renderScreens screen', roomScreens)
+
                             var i, screen;
                             for(i = 0; screen = roomScreens[i]; i++) {
+                                console.log('renderScreens screen', screen)
                                 if(!screen.isLocal) {
                                     activeScreen = screen;
                                 }
                             }
+
                         }
                         mainScreenAndThumbsGrid();
                     }
@@ -5195,7 +5201,7 @@
                 var x = 0;
                 var i = 0;
 
-                if(activeScreen == null) activeScreen = roomScreens[0];
+                if(activeScreen == null || !document.body.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
                 if(activeScreen.screenEl == null) createRoomScreen(activeScreen)
 
                 rowDiv = document.createElement('DIV');
@@ -5216,7 +5222,7 @@
                 var roomsNumber = roomScreens.length - 1;
                 var participantScreen;
                 for(i = 0; participantScreen = roomScreens[i]; i++) {
-                    if(participantScreen.screenEl == activeScreen.screenEl) continue;
+                    if(participantScreen.sid == activeScreen.sid) continue;
                     console.log('mainScreenAndThumbsGrid participantScreen', participantScreen);
                     var screenEl = createRoomScreen(participantScreen)
 2
