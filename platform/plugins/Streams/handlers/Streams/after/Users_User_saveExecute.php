@@ -20,8 +20,6 @@ function Streams_after_Users_User_saveExecute($params)
 		$updates['icon'] = $modifiedFields['icon'];
 	}
 
-	$skipExistingOnInsert = $user->get('Streams', 'skipExistingOnInsert', null);
-
 	// some standard values
 	if (!empty(Streams::$cache['fullName'])) {
 		$fullName = Streams::$cache['fullName'];
@@ -103,16 +101,21 @@ function Streams_after_Users_User_saveExecute($params)
 	$so = array();
 	$streamsToJoin = array();
 	$streamsToSubscribe = array();
-	$existing = Streams::fetch($user->id, $user->id, $toInsert);
+	$rows = Streams_Stream::select('name')->where(array(
+		'publisherId' => $user->id,
+		'name' => $toInsert
+	))->fetchAll(PDO::FETCH_ASSOC);
+	$existing = array();
+	foreach ($rows as $row) {
+		$existing[$row['name']] = true;
+	}
 	$toCreate = array();
 	foreach ($toInsert as $name) {
-		if (!empty($existing[$name]) and $skipExistingOnInsert) {
+		if (!empty($existing[$name])) {
 			continue;
 			$stream = new Streams_Stream();
 			$stream->publisherId = $user->id;
 			$stream->name = $name;
-		} else if ($skipExistingOnInsert) {
-			continue;
 		}
 		$s = array(
 			'publisherId' => $user->id,
