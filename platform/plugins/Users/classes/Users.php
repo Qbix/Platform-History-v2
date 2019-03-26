@@ -1482,10 +1482,12 @@ abstract class Users extends Base_Users
 				if (count($parts) === 1) {
 					$w = $h = $parts[0];
 				} else {
-					if (!$w) {
+					if (!$parts[0]) {
+						$h = $parts[1];
 						$w = $h / $sh * $sw;
 					}
-					if (!$h) {
+					if (!$parts[1]) {
+						$w = $parts[0];
 						$h = $w / $sw * $sh;
 					}
 				}
