@@ -210,11 +210,14 @@ function Streams_after_Users_User_saveExecute($params)
 				continue;
 			}
 			$stream->content = $value;
+			if ($stream->type === 'Streams/image') {
+				$stream->icon = $value;
+			}
 			if ($name === "Streams/user/icon") {
                 $sizes = Q_Image::getSizes('Users/icon');
 				ksort($sizes);
                 $stream->setAttribute('sizes', $sizes);
-				$stream->icon = $changes['icon'] = $user->icon;
+				$user->icon;
 			}
 			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}

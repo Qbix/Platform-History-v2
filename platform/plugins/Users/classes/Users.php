@@ -1478,29 +1478,29 @@ abstract class Users extends Base_Users
 					$sw = imagesx($source);
 					$sh = imagesy($source);
 				}
-				list($w, $h) = explode('x', $info['filename']);
-				if (!$w) {
-					$w = $h / $sh * $sw;
-				}
-				if (!$h) {
-					$h = $w / $sw * $sh;
+				$parts = explode('x', $info['filename']);
+				if (count($parts) === 1) {
+					$w = $h = $parts[0];
+				} else {
+					if (!$w) {
+						$w = $h / $sh * $sw;
+					}
+					if (!$h) {
+						$h = $w / $sw * $sh;
+					}
 				}
 				if ($sw == $w and $sh == $h) {
 					$image = $largestImage;
 					$success = true;
 				} else {
-					if ($h > $sh) {
-						$w = $w * $sh / $h;
-						$h = $sh;
-					} else if ($w > $sw) {
-						$h = $h * $sw / $w;
-						$w = $sw;
-					}
+					$min = min($sw / $w, $sh / $h);
+					$w2 = $w * $min;
+					$h2 = $h * $min;
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
 					$success = imagecopyresampled(
 						$image, $source, 
-						($sw - $w) / 2, ($sh - $h) / 2,
+						($sw - $w2) / 2, ($sh - $h2) / 2,
 						0, 0, 
 						$w, $h,
 						$sw, $sh
