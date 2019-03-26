@@ -2875,9 +2875,7 @@ Q.Contextual = {
 				{
 					return;
 				}
-				if (!Q.Pointer.canceledClick) {
-					Q.handle(handler, contextual, [li]);
-				}
+				Q.handle(handler, contextual, [li]);
 
 				Q.Contextual.hide();
 			};
