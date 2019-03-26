@@ -215,7 +215,7 @@ class Q_Image
 		$cookie = Q_Config::expect('Q', 'images', 'facebook', 'cookie');
 		$url = 'https://mbasic.facebook.com/search/top/?q='.urlencode($keywords);
 		$html = Q_Utils::get($url, null, true, array("cookie: $cookie"));
-		$pattern = '/\\<img src=\\"([^\\"]*?)\\" class=\\"cg ch/i';
+		$pattern = '/\\<img src=\\"([^\\"]*?)\\" class=\\".*\\" alt=\\"'.$keywords.'\\"/i';
 		$matches = array();
 		preg_match_all($pattern, $html, $matches);
 		$results = array();
