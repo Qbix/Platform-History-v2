@@ -146,7 +146,9 @@
 
 
 
-                cameraBtn.addEventListener('mouseup', function () {
+                cameraBtn.addEventListener('mouseup', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation()
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
                     Q.Dialogs.push({
                         title: "Video Sources",
@@ -157,14 +159,20 @@
                     //tool.toggleVideo()
                 })
 
-                cameraSwitcherBtn.addEventListener('mouseup', function () {
-                    tool.toggleCameras()
+                cameraSwitcherBtn.addEventListener('mouseup', function (e) {
+                    tool.toggleCameras();
+                    e.preventDefault();
+                    e.stopPropagation();
                 })
-                speakerBtn.addEventListener('mouseup', function () {
+                speakerBtn.addEventListener('mouseup', function (e) {
                     tool.toggleAudioOfAll()
+                    e.preventDefault();
+                    e.stopPropagation();
                 })
-                microphoneBtn.addEventListener('mouseup', function () {
+                microphoneBtn.addEventListener('mouseup', function (e) {
                     tool.toggleAudio()
+                    e.preventDefault();
+                    e.stopPropagation();
                 })
 
                 return controlBar;
