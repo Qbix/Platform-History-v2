@@ -1045,7 +1045,7 @@ Sp.subscribe = function(options, callback) {
 							}
 							_insertRule(rule);
 						} else {
-							stream.getSubscriptionTemplate('Rule', userId,
+							stream.getSubscriptionTemplate('SubscriptionRule', userId,
 							function (err, template) {
 								if (err) return callback.call(stream, err);
 								if (template && template.templateType !== 0) {
