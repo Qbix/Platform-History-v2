@@ -581,7 +581,7 @@
 
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
-    height: 100%;
+    width: 100%;
 }
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{

@@ -5014,7 +5014,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
             //chatParticipantEl.addEventListener('mousedown', moveScreenFront, false)
             //chatParticipantEl.addEventListener('touchstart', moveScreenFront, false)
-            chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick);
+            chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick, false);
 
             screen.screenEl = chatParticipantEl;
             screen.nameEl = chatParticipantName;
@@ -5257,6 +5257,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         }
 
         function mainScreenAndThumbsGridMobile() {
+        	if(activeScreen == null) return;
             var roomScreens = WebRTCconference.screens();
             roomScreens.map(function (screen) {
                 screen.screenEl.classList.remove('webrtc_tool_tiled-grid-screen');
@@ -5409,6 +5410,8 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
             var tappedScreen = roomScreens.filter(function (obj) {
                 return obj.screenEl.contains(e.currentTarget);
             })[0];
+            console.log('tappedScreen.nameEl.contains(e.currentTarget)',_controls.contains(e.currentTarget))
+            if(_controls.contains(e.target) || _controls.contains(e.currentTarget)) return;
 
             if(tappedScreen == null) return
             console.log('tappedScreen', tappedScreen)
@@ -5892,7 +5895,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         roomsMedia.id = 'webrtc_tool_room-media';
         var dashboard = document.getElementById('dashboard_slot');
         if(Q.info.isMobile && !Q.info.isTablet) {
-            roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
+            roomsMedia.style.height = 'calc(100vh - ' + dashboard.offsetHeight + 'px)';
             roomsMedia.style.top = dashboard.offsetHeight + 'px';
         }
 
