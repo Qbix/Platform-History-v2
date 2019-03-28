@@ -18,18 +18,49 @@
         },
 
         {
-            editable: false,
+            active: false,
+            appliedRecently: false,
             onCreate: new Q.Event(),
             onUpdate: new Q.Event(),
             onRefresh: new Q.Event()
         },
 
+
         {
+            deactivate:function () {
+                var tool = this;
+                tool.state.active = false;
+
+                var elementToResize = tool.element;
+                var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+
+                elementToMove.style.position = '';
+                elementToMove.style.top = '';
+                elementToMove.style.left = '';
+
+                elementToResize.style.width = '';
+                elementToResize.style.height = '';
+                console.log('deactivate', elementToMove, elementToResize)
+            },
+            getElementToMove: function() {
+                var tool = this;
+                if(tool.state.elementToMove != null) {
+                    console.log('tool.state.elementToMove', tool.state.elementToMove)
+                    var el = tool.element;
+                    while ((el = el.parentElement) && !el.classList.contains(tool.state.elementToMove)) ;
+
+                    return el;
+                    console.log('tool.state.elementToMove2', el)
+
+                } else return tool.element;
+
+            },
             bindEvents: function () {
                 var tool = this;
                 var elementToResize = tool.element;
                 var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 
+                console.log('elementToMove11',elementToMove)
                 var _dragElement = function(){
                     var elementToMove;
                     var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY;
@@ -37,6 +68,8 @@
                         console.log('xpos,ypos', xpos,ypos)
                         elementToMove.style.left = xpos + 'px';
                         elementToMove.style.top = ypos + 'px';
+
+                        tool.state.appliedRecently = true;
                     }
                     var drag = function(evt){
                         if(Q.info.isMobile && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
@@ -53,7 +86,8 @@
                         move(aX,aY);
                     }
                     var initMoving = function(divid,container,evt){
-                        console.log('initMoving')
+                        console.log('initMoving', tool.state.active)
+                        if(!tool.state.active) return;
                         if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
                         elementToMove = divid;
                         var elRect = elementToMove.getBoundingClientRect();
@@ -65,6 +99,8 @@
                         elementToMove.style.left = elRect.left + 'px';
                         elementToMove.style.transform = '';
                         elementToMove.style.position = 'fixed';
+                        elementToMove.style.cursor = 'grabbing';
+
                         evt = evt || window.event;
                         posX = Q.info.isMobile ? evt.touches[0].clientX : evt.clientX,
                             posY = Q.info.isMobile ? evt.touches[0].clientY : evt.clientY,
@@ -74,10 +110,10 @@
                             eHe = parseInt(elementToMove.offsetHeight),
                             cWi = parseInt(container.offsetWidth),
                             cHe = parseInt(container.offsetHeight);
-                        container.style.cursor='grabbing';
                         divTop = divTop.replace('px','');
                         divLeft = divLeft.replace('px','');
                         diffX = posX - divLeft, diffY = posY - divTop;
+
                         if(Q.info.isMobile)
                             window.addEventListener('touchmove', drag);
                         else window.addEventListener('mousemove', drag);
@@ -87,7 +123,11 @@
                             window.removeEventListener('touchmove', drag)
                         else window.removeEventListener('mousemove', drag)
 
-                        container.style.cursor='';
+                        if(elementToMove != null) elementToMove.style.cursor='';
+
+                        setTimeout(function () {
+                            tool.state.appliedRecently = false;
+                        }, 200)
                     }
                     return {
                         initMoving: initMoving,
@@ -101,8 +141,11 @@
                     var _minSize = 100;
 
                     var _elementToResize;
+                    var _elementToMove;
                     var _handler;
-                    var _handlerPosition = 'right';
+                    var _handlerPosition;
+                    var _centerPosition;
+                    var _centerPositionFromTop;
                     var _elLeftBorder;
                     var _elRightBorder;
                     var _elLeftMargin;
@@ -111,15 +154,22 @@
                     var _latestHeightValue;
                     var _latestScaleValue;
                     var _ratio;
+                    var _resetInitPosTimeout
 
                     var _oldx = null;
                     var _oldy = null;
 
                     function initialise(e) {
+                        if(!tool.state.active) return;
                         e.propertyIsEnumerable();
                         e.stopPropagation();
+                        _handlerPosition = e.target.dataset.position;
+                        if(_handlerPosition == null) _handlerPosition = 'bottomright';
                         _elementToResize = e.target.parentNode;
                         var elementRect = _elementToResize.getBoundingClientRect();
+                        _centerPosition = elementRect.left + elementRect.width / 2;
+                        _centerPositionFromTop = elementRect.top + elementRect.height / 2;
+
                         _elLeftBorder = elementRect.left;
                         _elRightBorder = elementRect.right;
                         _elLeftMargin = +(_elementToResize.style.margin || _elementToResize.style.marginLeft).replace('px', '');
@@ -143,8 +193,7 @@
 
                         var elementWidth, elementHeight, action;
 
-                        if(_handlerPosition == 'right') {
-                            console.log('right resize', _latestWidthValue,_latestHeightValue, _oldx, _oldy)
+                        if(_handlerPosition == 'bottomright') {
                             if (e.pageX <= _oldx) {
                                 elementWidth = _latestWidthValue - (_oldx - e.pageX);
                             } else if (e.pageX > _oldx) {
@@ -155,15 +204,39 @@
                             } else if (e.pageY > _oldy) {
                                 elementHeight = _latestHeightValue + (e.pageY - _oldy);
                             }
-                        } else {
-                            console.log('left resize')
-                            if (e.pageX < _oldx) {
+                        } else if(_handlerPosition == 'bottomleft') {
+                            if (e.pageX <= _oldx) {
                                 elementWidth = _latestWidthValue + (_oldx - e.pageX);
                             } else if (e.pageX > _oldx) {
                                 elementWidth = _latestWidthValue - (e.pageX - _oldx);
                             }
 
-                            if (e.pageY < _oldy) {
+                            if (e.pageY <= _oldy) {
+                                elementHeight = _latestHeightValue + (_oldy - e.pageY);
+                            } else if (e.pageY > _oldy) {
+                                elementHeight = _latestHeightValue - (e.pageY - _oldy);
+                            }
+
+                        } else if(_handlerPosition == 'topright') {
+                            if (e.pageX <= _oldx) {
+                                elementWidth = _latestWidthValue - (_oldx - e.pageX);
+                            } else if (e.pageX > _oldx) {
+                                elementWidth = _latestWidthValue + (e.pageX - _oldx);
+                            }
+                            if (e.pageY <= _oldy) {
+                                elementHeight = _latestHeightValue - (_oldy - e.pageY);
+                            } else if (e.pageY > _oldy) {
+                                elementHeight = _latestHeightValue + (e.pageY - _oldy);
+                            }
+
+                        } else if(_handlerPosition == 'topleft') {
+                            if (e.pageX <= _oldx) {
+                                elementWidth = _latestWidthValue + (_oldx - e.pageX);
+                            } else if (e.pageX > _oldx) {
+                                elementWidth = _latestWidthValue - (e.pageX - _oldx);
+                            }
+
+                            if (e.pageY <= _oldy) {
                                 elementHeight = _latestHeightValue + (_oldy - e.pageY);
                             } else if (e.pageY > _oldy) {
                                 elementHeight = _latestHeightValue - (e.pageY - _oldy);
@@ -188,16 +261,21 @@
                         console.log('action', action)
                         console.log('elementWidth', elementWidth, elementHeight)
                         if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
-                            return
+                            return;
                         }
                         console.log('1111', elementToMove != _elementToResize, elementToMove.offsetHeight, document.body.offsetHeight, elementToMove.offsetWidth, document.body.offsetWidth)
                         console.log('2222', _elementToResize.offsetHeight, document.body.offsetHeight, _elementToResize.offsetWidth, document.body.offsetWidth)
 
                         if(action == 'increase' && elementToMove != _elementToResize && (elementToMove.offsetHeight >= document.body.offsetHeight || elementToMove.offsetWidth >= document.body.offsetWidth)) {
                             console.log('OVERSIZE', elementToMove.offsetHeight, document.body.offsetHeight, elementToMove.offsetWidth, document.body.offsetWidth)
-                            return
+                            return;
                         }
 
+                        console.log('RESIZE WILL HAPPEN')
+                        if(elementToMove.style.position == 'fixed') {
+                            elementToMove.style.left = _centerPosition - (elementWidth / 2) + 'px';
+                            elementToMove.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
+                        }
 
                         _elementToResize.style.width = elementWidth + 'px';
                         _elementToResize.style.height = elementHeight + 'px';
@@ -208,6 +286,7 @@
                         _oldx = e.pageX;
                         _oldy = e.pageY;
 
+                        tool.state.appliedRecently = true;
 
                     }
 
@@ -221,6 +300,9 @@
                         _ratio = null;
                         _oldx = null;
                         _oldy = null;
+                        setTimeout(function () {
+                            tool.state.appliedRecently = false;
+                        }, 200)
                     }
 
                     function setHandler(element) {
@@ -230,14 +312,39 @@
                         }
                         var resizeHandler = document.createElement('DIV');
                         resizeHandler.classList.add('webrtc_tool_resize-handler');
-                        if(_handlerPosition == 'right') {
-                            resizeHandler.style.right = '0';
-                            resizeHandler.style.cursor = 'nwse-resize';
-                        } else resizeHandler.style.left = '0';
+                        resizeHandler.style.right = '0';
+                        resizeHandler.style.cursor = 'nwse-resize';
+                        resizeHandler.dataset.position = 'bottomright';
                         element.appendChild(resizeHandler);
+
+                        var leftBottomHandler = document.createElement('DIV');
+                        leftBottomHandler.classList.add('webrtc_tool_resize-handler');
+                        leftBottomHandler.style.cursor = 'nesw-resize';
+                        leftBottomHandler.style.left = '0';
+                        leftBottomHandler.dataset.position = 'bottomleft';
+                        element.appendChild(leftBottomHandler);
+
+                        var topRightHandler = document.createElement('DIV');
+                        topRightHandler.classList.add('webrtc_tool_resize-handler');
+                        topRightHandler.style.cursor = 'nesw-resize';
+                        topRightHandler.style.right = '0';
+                        topRightHandler.style.top = '0';
+                        topRightHandler.dataset.position = 'topright';
+                        element.appendChild(topRightHandler);
+
+                        var topLeftHandler = document.createElement('DIV');
+                        topLeftHandler.classList.add('webrtc_tool_resize-handler');
+                        topLeftHandler.style.cursor = 'nwse-resize';
+                        topLeftHandler.style.left = '0';
+                        topLeftHandler.style.top = '0';
+                        topLeftHandler.dataset.position = 'topleft';
+                        element.appendChild(topLeftHandler);
 
                         bindMouseWheelEvent(element);
                         resizeHandler.addEventListener('mousedown', initialise)
+                        leftBottomHandler.addEventListener('mousedown', initialise)
+                        topRightHandler.addEventListener('mousedown', initialise)
+                        topLeftHandler.addEventListener('mousedown', initialise)
 
                     }
 
@@ -347,6 +454,10 @@
                     }
 
                     function onWheel(e) {
+                        _elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+                        var elRect = _elementToMove.getBoundingClientRect();
+                        if(_centerPosition == null) _centerPosition = elRect.left + elRect.width / 2;
+                        if(_centerPositionFromTop == null) _centerPositionFromTop = elRect.top + elRect.height / 2;
                         //e = e || window.event;
                         //var currentTarget = document.elementFromPoint(e.clientX, e.clientY);
                         //if(_elementToResize == null) _elementToResize = e.target;
@@ -375,6 +486,12 @@
                         }
 
                         var elRect = _elementToResize.getBoundingClientRect();
+                        if(elementToMove.style.position == 'fixed') {
+                            console.log('_centerPosition - (elRect.width / 2), ', _centerPosition);
+                            elementToMove.style.left = _centerPosition - (elRect.width / 2) + 'px';
+                            elementToMove.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';
+                        }
+
                         _elementToResize.style.width = elRect.width + 'px';
                         _elementToResize.style.height = elRect.height + 'px';
                         _elementToResize.style.top = elRect.top + 'px';
@@ -382,10 +499,20 @@
                         _elementToResize.style.transform = '';
                         //}, 100);
                         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+
+                        if(_resetInitPosTimeout != null) {
+                            clearTimeout(_resetInitPosTimeout);
+                            _resetInitPosTimeout = null
+                        }
+                        _resetInitPosTimeout = setTimeout(function () {
+                            _centerPosition = null;
+                            _centerPositionFromTop = null;
+                        }, 1000)
                     }
 
                     function bindMouseWheelEvent(elem) {
                         _elementToResize = elem;
+
                         if (elem.addEventListener) {
                             if ('onwheel' in document) {
                                 // IE9+, FF17+, Ch31+
@@ -408,7 +535,6 @@
                     }
                 }();
 
-
                 if(Q.info.isMobile) {
                     elementToMove.addEventListener('touchstart', function (e) {
                         _dragElement.initMoving(e.currentTarget, document.body, e)
@@ -417,26 +543,16 @@
                         _dragElement.stopMoving(document.body)
                     });
                 } else {
-                    elementToMove.addEventListener('mousedown', function (e) {
-                        _dragElement.initMoving(e.currentTarget, document.body, e)
-                    });
-                    elementToMove.addEventListener('mouseup', function (e) {
-                        _dragElement.stopMoving(document.body)
-                    });
-
-
-                    elementToMove.addEventListener('mouseenter', function (e) {
-                        document.documentElement.style.cursor = 'grab';
-                    });
-                    elementToMove.addEventListener('mouseleave', function (e) {
-                        document.documentElement.style.cursor = '';
-                    });
 
                     elementToMove.addEventListener('mousedown', function (e) {
                         _dragElement.initMoving(e.currentTarget, document.body, e)
+                        //e.preventDefault();
+                        //e.stopPropagation();
                     });
                     elementToMove.addEventListener('mouseup', function (e) {
                         _dragElement.stopMoving(document.body)
+                        //e.preventDefault();
+                        //e.stopPropagation();
                     });
                 }
 
