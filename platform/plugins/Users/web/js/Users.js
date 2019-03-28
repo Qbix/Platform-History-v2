@@ -992,7 +992,9 @@
 	Users.batchFunction.functions = {};
 
 	Q.onActivate.set(function (elem) {
-		$(elem || document).off('click.Users').on('click.Users', 'a', function (e) {
+		$(elem || document)
+		.off('click.Users', 'a')
+		.on('click.Users', 'a', function (e) {
 			var href = $(this).attr('href');
 			if (!Users.requireLogin || !Users.requireLogin[href]) {
 				return;
