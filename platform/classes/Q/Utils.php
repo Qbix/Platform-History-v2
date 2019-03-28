@@ -845,7 +845,7 @@ class Q_Utils
 			$server, self::sign($data), null, true, null, 
 			Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT
 		);
-		if (empty($result)) {
+		if (empty($response)) {
 			throw new Q_Exception("Utils::queryInternal: not sent");
 		}
 		$result = Q::json_decode($response, true);

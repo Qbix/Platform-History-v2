@@ -1079,6 +1079,9 @@ Streams.Dialogs = {
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					className: 'Streams_invite_dialog',
 					onActivate: function (dialog) {
+						if (!Q.info.isTouchscreen) {
+							$('.Streams_invite_submit input[type=text]').focus();
+						}
 						// handle go button
 						$('.Streams_invite_submit').on('submit', function (e) {
 							Q.handle(callback, Streams, [{
