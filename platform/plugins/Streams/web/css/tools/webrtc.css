@@ -551,12 +551,25 @@
 .webrtc_tool_mobile-screen .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_chat-participant-video video,
 .webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant-video video,
 .webrtc_tool_mobile-screen .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant-video video,
-.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video video,
-.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video {
+.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video video {
     position: absolute;
     max-width: 100%;
     max-height: 100%;
 }
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    position: absolute;
+    height: 100%
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    position: absolute;
+    width: 100%
+}
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isVertical {
+    position: absolute;
+    width: 100%
+}
+
 .webrtc_tool_mobile-screen .webrtc_tool_thumbs-screens-grid .webrtc_tool_chat-participant-video {
     flex: 1;
     background: black;
