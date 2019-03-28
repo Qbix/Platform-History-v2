@@ -1077,27 +1077,28 @@ Streams.Dialogs = {
 					title: text.title,
 					content: html,
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
+					className: 'Streams_invite_dialog',
 					onActivate: function (dialog) {
-						// handle "go" button
-						$('.Streams_invite_submit button', dialog)
-							.on(Q.Pointer.fastclick, function () {
-								Q.handle(callback, Streams, [{
-									identifier: $(".Streams_invite_submit input[type=text]", dialog).val()
-								}]);
-								Q.Dialogs.pop(); // close the Dialog
-							});
+						// handle go button
+						$('.Streams_invite_submit').on('submit', function (e) {
+							Q.handle(callback, Streams, [{
+								identifier: $("input[type=text]", this).val()
+							}]);
+							Q.Dialogs.pop(); // close the Dialog
+							e.preventDefault();
+						});
 						// handle social buttons
 						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
-							.on(Q.Pointer.fastclick, function () {
-								var sendBy = $(this).data('sendby');
-								var result = {
-									token: 1,
-									identifier: null,
-									sendBy: sendBy
-								}
-								Q.handle(callback, Streams, [result]);
-								Q.Dialogs.pop(); // close the Dialog
-							});
+						.on(Q.Pointer.fastclick, function () {
+							var sendBy = $(this).data('sendby');
+							var result = {
+								token: 1,
+								identifier: null,
+								sendBy: sendBy
+							}
+							Q.handle(callback, Streams, [result]);
+							Q.Dialogs.pop(); // close the Dialog
+						});
 					},
 				});
 			});
