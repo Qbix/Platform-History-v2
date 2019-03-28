@@ -5375,7 +5375,6 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         }
 
         control.toggleViewMode = function() {
-            console.log('toggleViewMode', )
             var modes;
             if(Q.info.isMobile)
                 modes = ['regular', 'maximized'];
