@@ -27,7 +27,9 @@ var WebRTCconference = function app(options){
     var roomName;
 
     var roomScreens = [];
-    app.screens = function() { return roomScreens; }
+    app.screens = function() { return roomScreens.filter(function (screen) {
+        return (screen.isActive == true);
+    }); }
 
     var roomParticipants = [];
     app.roomParticipants = function() { return roomParticipants; }
@@ -561,6 +563,7 @@ var WebRTCconference = function app(options){
             this.tracks = [];
             this.isMain = null;
             this.isLocal = null;
+            this.isActive = true;
             this.screensharing = null;
             this.getTracksContainer = function() {
                 var chatParticipantVideoCon = document.createElement('DIV');

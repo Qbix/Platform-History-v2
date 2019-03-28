@@ -1040,6 +1040,9 @@ abstract class Streams extends Base_Streams
 		$publisherId, 
 		$fields = array())
 	{
+		if (empty($fields)) {
+			return array();
+		}
 		if (!isset($publisherId)) {
 			foreach ($fields as $f) {
 				if (!isset($f['publisherId'])) {
@@ -2567,6 +2570,9 @@ abstract class Streams extends Base_Streams
 		$streams,
 		$options = array())
 	{
+		if (empty($streams)) {
+			return array();
+		}
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {
@@ -2902,6 +2908,9 @@ abstract class Streams extends Base_Streams
 		$streams, 
 		$options = array())
 	{
+		if (empty($streams)) {
+			return array();
+		}
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {

@@ -84,7 +84,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 		}
 		if (isset($result['accessToken'])) {
 			$defaultAccessToken = $result['accessToken'];
-			if ($longLived and isset($result['expires'])) {
+			if ($longLived) {
 				$accessToken = new Facebook\Authentication\AccessToken(
 					$defaultAccessToken, $result['expires']
 				);
@@ -112,7 +112,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 			$ef->appId = $appId;
 			$ef->xid = $result['userID'];
 			$ef->accessToken = $result['accessToken'];
-			$ef->expires = is_integer($result['expires'])
+			$ef->expires = isset($result['expires']) && is_integer($result['expires'])
 				? $result['expires']
 				: Db::fromDateTime($result['expires']);
 			$ef->facebook = $facebook;
