@@ -531,17 +531,22 @@
 
                     };
                     this.removeScreen = function () {
-                        var screens = WebRTCconference.screens();
+                        var screens = this.participant.screens;
                         for(var i in screens) {
-                            if(this.participant == screens[i].participant && screens[i].screenEl.parentNode != null) {
+                            if(screens[i].screenEl.parentNode != null) {
                                 //screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
                                 console.log('removeScreen')
                                 if(screens[i].screenEl.style.display == 'none') {
                                     screens[i].screenEl.style.display = '';
+                                    screens[i].isActive = true;
                                     this.unmuteVideo();
+                                    Q.Streams.Webrtc.screenRendering.renderScreens();
                                 } else {
                                     screens[i].screenEl.style.display = 'none';
+                                    //if(screens[i].screenEl.parentNode != null) screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
+                                    screens[i].isActive = false;
                                     this.muteVideo();
+                                    Q.Streams.Webrtc.screenRendering.renderScreens();
                                 }
 
                             }
@@ -653,7 +658,13 @@
                 function createList() {
                     if(tool.participantsList == null) tool.participantsList = [];
                     var participantsListCon = document.createElement('DIV');
-                    participantsListCon.className = 'webrtc_tool_popup-participants-list webrtc_tool_popup-box';
+                    //participantsListCon.className = 'webrtc_tool_popup-participants-list webrtc_tool_popup-box';
+
+                    var disconnectbtn = document.createElement('BUTTON');
+                    disconnectbtn.type = 'button';
+                    disconnectbtn.className = 'webrtc_tool_disconnect-btn';
+                    disconnectbtn.innerHTML = icons.endCall;
+                    participantsListCon.appendChild(disconnectbtn);
 
                     tool.participantListEl = document.createElement('UL');
                     tool.participantListEl.className = 'webrtc_tool_participants-list';
@@ -681,8 +692,14 @@
                             Q.Dialogs.push({
                                 title: "Participants",
                                 className: 'webrtc_tool_participants-list',
-                                content: tool.participantListEl,
-                                apply: true
+                                content: participantsListCon,
+                                apply: true,
+                                onActivate: function (dialog) {
+                                    disconnectbtn.addEventListener('click', function () {
+                                        Q.Streams.Webrtc.stop();
+                                        Q.Dialogs.pop();
+                                    });
+                                },
                             });
                         });
 
