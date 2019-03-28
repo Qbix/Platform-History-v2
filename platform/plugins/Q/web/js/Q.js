@@ -12998,7 +12998,19 @@ Q.Camera = {
 			 * @param {object} options object with options to replace default
 			 */
 			instascan: function (audio, callback, options) {
-				var _constructor = function (dialog) {
+				Q.addScript('{{Q}}/js/qrcode/instascan.js', function () {
+					Q.Dialogs.push({
+						title: options.dialog.title,
+						className: "Q_scanning",
+						content: "",
+						fullscreen: true,
+						onActivate: _onActivate,
+						onClose: function () {
+							Q.handle(Q.Camera.Scan.onClose);
+						}
+					});
+				});
+				function _onActivate(dialog) {
 					var $element = $(".Q_dialog_slot", dialog);
 					var $title = $(".Q_title_slot", dialog);
 
@@ -13059,22 +13071,7 @@ Q.Camera = {
 					}).catch(function (e) {
 						console.error(e);
 					});
-				};
-
-				Q.addScript(['{{Q}}/js/qrcode/instascan.js'], function () {
-					Q.Dialogs.push({
-						title: options.dialog.title,
-						className: "Q_scanning",
-						content: "",
-						fullscreen: true,
-						onActivate: function (dialog) {
-							_constructor(dialog);
-						},
-						onClose: function () {
-							Q.handle(Q.Camera.Scan.onClose);
-						}
-					});
-				});
+				}
 			}
 		}
 	}
