@@ -2934,6 +2934,9 @@ abstract class Streams extends Base_Streams
 			$untilTime = $db->toDateTime($options['untilTime']);
 			$shouldUpdate = true;
 		}
+		if (isset($o['rule'])) {
+			$rule = $o['rule']; // we aren't updating rules like this though
+		}
 		$subscriptions = Streams_Subscription::select('*', 'a')
 		->where(array(
 				'a.publisherId' => $publisherId,
@@ -2966,12 +2969,27 @@ abstract class Streams extends Base_Streams
 			))->execute();
 		}
 		$rules = array();
+		$userStreamsTree = Streams::userStreamsTree();
 		if ($streamNamesMissing) {
 			$types = array();
-			foreach ($streamNamesMissing as $sn) {
-				$s = Q::ifset($subscriptions, $sn, null);
-				if (Q::ifset($s, 'type', null)) {
-					$types[$s->type][] = $sn;
+			$rows = Streams_Stream::select(array('name', 'type'))->where(array(
+				'publisherId' => $publisherId,
+				'name' => $streamNamesMissing
+			))->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($rows as $row) {
+				$name = $row['name'];
+				$types[$row['type']][] = $row['name'];
+			}
+			$o = $userStreamsTree->get($name, "subscribe", array());
+			if ($o) {
+				if (isset($o['filter'])) {
+					$filter = Q::json_encode($o['filter']);
+				}
+				if (isset($o['untilTime'])) {
+					$untilTime = $db->toDateTime($o['untilTime']);
+				}
+				if (isset($o['rule'])) {
+					$rule = $o['rule'];
 				}
 			}
 			$subscriptionRows = array();
@@ -3030,9 +3048,7 @@ abstract class Streams extends Base_Streams
 				}
 
 				// insert up to one rule per subscription
-				$rule = null;
-				if (isset($options['rule'])) {
-					$rule = $options['rule'];
+				if (isset($rule)) {
 					if (isset($rule['readyTime'])) {
 						$rule['readyTime'] = $db->toDateTime($rule['readyTime']);
 					}
