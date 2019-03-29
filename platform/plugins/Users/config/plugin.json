@@ -198,6 +198,38 @@
 			"labels": {
 			  /* default labels should be defined individual by each application */
 			}
+		},
+		"communities": {
+			"roles": {
+				"Users/owners": {
+					"title": "Owner",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
+					"canAdd": ["Users/admins", "Users/members", "Users/guests"],
+					"canRemove": ["Users/admins", "Users/members", "Users/guests"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests"]
+				},
+				"Users/admins": {
+					"title": "Admin",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
+					"canAdd": ["Users/members", "Users/guests"],
+					"canRemove": ["Users/members", "Users/guests"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests"]
+				},
+				"Users/members": {
+					"title": "Member",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
+					"canAdd": ["Users/guests"],
+					"canRemove": [],
+					"canSee": ["Users/members", "Users/guests"]
+				},
+				"Users/guests": {
+					"title": "Guest",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/guests",
+					"canAdd": [],
+					"canRemove": [],
+					"canSee": []
+				}
+			}
 		}
 	}
 }

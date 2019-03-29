@@ -175,7 +175,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canAddLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Users", "roles");
+		$roles = Q_Config::expect("Users", "communities", "roles");
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
@@ -198,6 +198,79 @@ class Users_Label extends Base_Users_Label
 		return true;
 	}
 	/**
+	 * Collect permissions user have in community (userLabels, canAddLabels, canRemoveLabels, canManageIcon, ...)
+	 * @method getPermissions
+	 * @param {string} $communityId The community for which need to get permissions
+	 * @param {string} [$userId=null] The user for which permissions requested. If null - logged user.
+	 * @return array
+	 */
+	static function getPermissions($communityId, $userId = null)
+	{
+		if (!$userId) {
+			$userId = Users::loggedInUser(true)->id;
+		}
+
+		$result = array(
+			'userLabels' => array(),
+			'canAddRoles' => array(),
+			'canRemoveRoles' => array(),
+			'canSeeRoles' => array(),
+			'canManageIcon' => false,
+			'canManageEvents' => false
+		);
+		$allLabels = self::ofCommunities();
+		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
+		$labelsCanManageEvents = Q_Config::get("Calendars", "labels", "canManageEvents", array());
+		$contacts = Users_Contact::select()->where(array(
+			'userId' => $communityId,
+			'contactUserId' => $userId
+		))->fetchDbRows();
+		foreach ($contacts as $c) {
+			$result['userLabels'][$c->label] = array();
+
+			// collect roles user can handle
+			foreach ($allLabels as $label) {
+				if (!in_array($label, $result['canAddRoles']) && self::canAddLabel($c->label, $label)) {
+					$result['canAddRoles'][] = $label;
+				}
+				if (!in_array($label, $result['canRemoveRoles']) && self::canRemoveLabel($c->label, $label)) {
+					$result['canRemoveRoles'][] = $label;
+				}
+				if (!in_array($label, $result['canSeeRoles']) && self::canSeeLabel($c->label, $label)) {
+					$result['canSeeRoles'][] = $label;
+				}
+			}
+
+			if (in_array($c->label, $labelsCanManageIcon)) {
+				$result['canManageIcon'] = true;
+			}
+			if (in_array($c->label, $labelsCanManageEvents)) {
+				$result['canManageEvents'] = true;
+			}
+		}
+
+		// get labels info
+		$labelRows = self::select()->where(array(
+			'userId' => $communityId,
+			'label' => array_keys($result['userLabels'])
+		))->fetchDbRows();
+
+		// set labels icon and title
+		foreach ($labelRows as $labelRow) {
+			$result['userLabels'][$labelRow->label]['icon'] = Users::iconUrl($labelRow->icon, "40.png");
+			$result['userLabels'][$labelRow->label]['title'] = $labelRow->title;
+		}
+
+		// remove invalid labels
+		foreach ($result['userLabels'] as $label => $data) {
+			if (empty($data)) {
+				unset($result['userLabels'][$label]);
+			}
+		}
+
+		return $result;
+	}
+	/**
 	 * Whether $label_1 can remove $label_2
 	 * @method canRemoveLabel
 	 * @param {string} $label_1 - Label which request permission for action
@@ -207,7 +280,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function canRemoveLabel($label_1, $label_2)
 	{
-		$roles = Q_Config::expect("Users", "roles");
+		$roles = Q_Config::expect("Users", "communities", "roles");
 		$keyRoles = array_keys($roles);
 
 		// check whether label exist
@@ -228,6 +301,48 @@ class Users_Label extends Base_Users_Label
 		}
 
 		return true;
+	}
+	/**
+	 * Whether $label_1 can see $label_2
+	 * @method canSeeLabel
+	 * @param {string} $label_1 - Label which request permission for action
+	 * @param {string|array} $label_2 - Label need to do action with
+	 * @throws Exception
+	 * @return {bool}
+	 */
+	static function canSeeLabel($label_1, $label_2)
+	{
+		$roles = Q_Config::expect("Users", "communities", "roles");
+		$keyRoles = array_keys($roles);
+
+		// check whether label exist
+		if (!in_array($label_1, $keyRoles)) {
+			return false;
+		}
+
+		if (gettype($label_2) == 'string') {
+			$label_2 = array($label_2);
+		}
+
+		$rolesCanSee = Q::ifset($roles, $label_1, "canSee", array());
+
+		foreach ($label_2 as $label) {
+			if (!in_array($label, $rolesCanSee)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	/**
+	 * Get labels related to communities
+	 * @method ofCommunities
+	 * @return {array}
+	 */
+	static function ofCommunities()
+	{
+		$roles = Q_Config::expect("Users", "communities", "roles");
+		return array_keys($roles);
 	}
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
