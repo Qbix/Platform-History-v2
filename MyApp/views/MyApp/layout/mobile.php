@@ -43,13 +43,13 @@
 </head>
 <body>
 	<div id="status_background" class="Q_dont_hide"></div>
-	<div id="dashboard_slot">
+	<div id="dashboard_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - begin dashboard slot- - - - - - - - - - - - - - - - -->
 <?php echo $dashboard ?> 
 <!-- - - - - - - - - - - - - - end dashboard slot- - - - - - - - - - - - - - - - -->
 	</div>
 	<div id="page">
-		<div id="notices_slot">
+		<div id="notices_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - - begin notices slot- - - - - - - - - - - - - - - - -->
 <?php echo $notices ?> 
 <!-- - - - - - - - - - - - - - end notices slot- - - - - - - - - - - - - - - - - -->
