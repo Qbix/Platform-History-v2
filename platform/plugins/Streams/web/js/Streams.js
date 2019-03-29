@@ -4674,12 +4674,13 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         }
 
 
-        var roomsMedia = document.createElement('DIV');
+        var roomsMedia = document.createElement('div');
         roomsMedia.id = 'webrtc_tool_room-media';
         var dashboard = document.getElementById('dashboard_slot');
         if(Q.info.isMobile && !Q.info.isTablet) {
-            roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
-            roomsMedia.style.top = dashboard.offsetHeight + 'px';
+            roomsMedia.style.top = Q.fixedOffset('top', ['Q_drawers_drawer']) + 'px';
+			roomsMedia.style.bottom = Q.fixedOffset('bottom', ['Q_drawers_drawer']) + 'px';
+			roomsMedia.style.height = 'auto';
         }
         _options.element.appendChild(roomsMedia);
         _roomsMedia = roomsMedia;
