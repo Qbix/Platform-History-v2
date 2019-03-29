@@ -102,6 +102,20 @@ class Q
 		return $ref2;
 	}
 
+	/**
+	 * Reverse the order of the keys
+	 * @method reverseOrder
+	 * @static
+	 * @param {array} $what The array to reverse
+	 * @return {array} The reversed array
+	 */
+	static function reverseOrder(array $what)
+	{
+		return array_combine(
+		   array_reverse(array_keys($what)),
+		   array_reverse(array_values($what))
+		);
+	}
 
 	/**
 	 * Returns the number of milliseconds since the
