@@ -19,8 +19,8 @@
 			"Communities/community/create": ["Assets/after/Community_create"]
 		},
 		"routes": {
-			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"}
+			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
+			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
