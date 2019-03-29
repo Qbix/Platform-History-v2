@@ -112,8 +112,8 @@ class Q
 	static function reverseOrder(array $what)
 	{
 		return array_combine(
-		   array_reverse(array_keys($arr)),
-		   array_reverse(array_values($arr))
+		   array_reverse(array_keys($what)),
+		   array_reverse(array_values($what))
 		);
 	}
 
