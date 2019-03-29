@@ -5798,7 +5798,7 @@ Q.fixedOffset = function (from, filter) {
 				result += rect.width;
 				break;
 			default:
-				return 0;
+				return;
 		}
 	});
 	return result;
