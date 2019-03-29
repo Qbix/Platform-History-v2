@@ -27,7 +27,9 @@ var WebRTCconference = function app(options){
     var roomName;
 
     var roomScreens = [];
-    app.screens = function() { return roomScreens; }
+    app.screens = function() { return roomScreens.filter(function (screen) {
+        return (screen.isActive == true);
+    }); }
 
     var roomParticipants = [];
     app.roomParticipants = function() { return roomParticipants; }
@@ -561,7 +563,20 @@ var WebRTCconference = function app(options){
             this.tracks = [];
             this.isMain = null;
             this.isLocal = null;
+            this.isActive = true;
             this.screensharing = null;
+            this.getTracksContainer = function() {
+                var chatParticipantVideoCon = document.createElement('DIV');
+                chatParticipantVideoCon.className = 'chat-participant-video';
+                var i, track;
+                for (i = 0; track = this.tracks[i]; i++) {
+                    if(track.trackEl.parentNode != null) {
+                        return track.trackEl.parentNode;
+                    }
+                    chatParticipantVideoCon.appendChild(track.trackEl);
+                }
+                return chatParticipantVideoCon;
+            }
             this.videoTracks = function () {
                 return this.tracks.filter(function (trackObj) {
                     return trackObj.kind == 'video';
@@ -599,7 +614,7 @@ var WebRTCconference = function app(options){
 
         function attachTrack(track, participant) {
             console.log('attachTrack participant', participant);
-            
+
             try {
                 var err = (new Error);
                 console.log(err.stack);
@@ -687,7 +702,7 @@ var WebRTCconference = function app(options){
             track.stream = stream;
             //remoteStream.srcObject = track.twilioReference != null ? track.twilioReference.mediaStreamTrack : track.MediaStreamTrack;
             console.log('track.width', remoteStreamEl.videoWidth, remoteStreamEl.videoHeight)
-            if(!_isMobile && track.kind == 'video') {
+            if(track.kind == 'video') {
                 remoteStreamEl.addEventListener('loadedmetadata', function (e) {
                     var videoConWidth = (track.parentScreen.videoCon.style.width).replace('px', '');
                     var videoConHeight= (track.parentScreen.videoCon.style.height).replace('px', '');
@@ -2024,10 +2039,10 @@ var WebRTCconference = function app(options){
             localParticipant.sid = stream.id;
             localParticipant.stream = stream;
 
-           /* if(options.useAsLibrary) {
-                app.views.switchTo(mainView);
-                if(!_isMobile) app.conferenceControl.showControlBar();
-            }*/
+            /* if(options.useAsLibrary) {
+                 app.views.switchTo(mainView);
+                 if(!_isMobile) app.conferenceControl.showControlBar();
+             }*/
 
             //if(!_isMobile) app.conferenceControl.createSettingsPopup();
 
@@ -2133,11 +2148,14 @@ var WebRTCconference = function app(options){
         function loadDevicesList(mediaDevices) {
             var i, device;
             for(i = 0; device = mediaDevices[i]; i++){
+                console.log('loadDevicesList', device);
                 if (device.kind === 'videoinput') {
                     videoInputDevices.push(device);
                     for(var x in localParticipant.tracks) {
                         var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-                        if(mediaStreamTrack.enabled == true && mediaStreamTrack.getSettings().deviceId == device.deviceId) {
+                        console.log('loadDevicesList2',localParticipant.tracks[x]);
+
+                        if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
                             currentCameraDevice = device;
                         }
                     }
@@ -2146,7 +2164,7 @@ var WebRTCconference = function app(options){
                     audioInputDevices.push(device);
                     for(var x in localParticipant.tracks) {
                         var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-                        if(mediaStreamTrack.enabled == true && mediaStreamTrack.getSettings().deviceId == device.deviceId) {
+                        if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
                             currentAudioDevice = device;
                         }
                     }
@@ -3051,7 +3069,7 @@ var WebRTCconference = function app(options){
         }
     }
     app.disconnect = function () {
-        window.room.disconnect();
+        if(window.room != null) window.room.disconnect();
     }
 
     function log(message) {
