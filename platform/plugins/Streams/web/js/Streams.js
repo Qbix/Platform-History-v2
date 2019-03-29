@@ -4738,7 +4738,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
      * Render screens of all participants of the room
      * @method screensRendering
      */
-    var screensRendering = function () {
+    var screensRendering = (function () {
         var activeScreen;
         var viewMode;
         if(Q.info.isMobile){
@@ -5879,7 +5879,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         }
 
         return control;
-    }()
+    })();
 
     var module = {};
     module.screenRendering = screensRendering;
@@ -6022,7 +6022,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 
     return module;
-}();
+};
 
 /**
  * @class Streams
