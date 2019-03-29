@@ -239,7 +239,7 @@ Q.Tool.define("Q/columns", function(options) {
 			titleSlot = $ts[0];
 			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
-			$controls = $('<div class="Q_controls_slot"></div>');
+			$controls = $('<div class="Q_controls_slot" class="Q_fixed_bottom"></div>');
 			controlsSlot = $controls[0];
 			state.container = tool.$('.Q_columns_container')[0];
 			$div.append($title, columnSlot, controlsSlot)
@@ -733,16 +733,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var $columns = $('.Q_columns_column', $te);
 		var $container = $('.Q_columns_container', $te);
 		var $cs = $('.Q_columns_column .Q_column_slot', $te);
-		var top = 0;
-		
-		$te.prevAll()
-		.each(function () {
-			var $this = $(this);
-			if ($this.css('position') === 'fixed'
-			&& !$this.hasClass('Q_drawers_drawer')) {
-				top += $this.outerHeight() + parseInt($this.css('margin-bottom'));
-			}
-		});
+		var top = Q.fixedOffset('top', ['Q_drawers_drawer']);
 		
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');
