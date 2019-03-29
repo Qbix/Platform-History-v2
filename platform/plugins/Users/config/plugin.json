@@ -27,13 +27,13 @@
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"]
 		},
 		"routes": {
-			"e/:emailAddress": { "module": "Users", "action": "activate" },
-			"m/:mobileNumber": { "module": "Users", "action": "activate" },
-			"Q/plugins/Users/:action": {"module": "Users"},
-			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
-			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"login/facebook": {"module": "Users", "action": "facebook"},
 			"Users/session": {"module": "Users", "action": "session"},
-			"login/facebook": {"module": "Users", "action": "facebook"}
+			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
+			"Q/plugins/Users/:action": {"module": "Users"},
+			"m/:mobileNumber": { "module": "Users", "action": "activate" },
+			"e/:emailAddress": { "module": "Users", "action": "activate" }
 		},
 		"session": {
 			"db": {

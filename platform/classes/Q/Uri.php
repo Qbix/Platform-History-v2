@@ -395,6 +395,7 @@ class Q_Uri
 				throw new Q_Exception_MissingRoute(compact('route'));
 			$uri_fields = self::matchSegments($route, $segments);
 		} else {
+			$routes = Q::reverseOrder($routes);
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue; // this provides a way to disable a route via config
@@ -488,6 +489,7 @@ class Q_Uri
 				return self::matchRoute($route, $routes[$route], $controller);
 			}
 		} else {
+			$routes = Q::reverseOrder($routes);
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue;
