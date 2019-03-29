@@ -16,13 +16,13 @@
 	<?php echo Q_Response::styles(true, "\n\t") ?> 
 </head>
 <body>
-	<div id="dashboard_slot">
+	<div id="dashboard_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - begin dashboard slot- - - - - - - - - - - - - - - - -->
 <?php echo $dashboard ?> 
 <!-- - - - - - - - - - - - - - end dashboard slot- - - - - - - - - - - - - - - - -->
 	</div>
 	<div id="page">
-		<div id="notices_slot">
+		<div id="notices_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - - begin notices slot- - - - - - - - - - - - - - - - -->
 <?php echo $notices ?> 
 <!-- - - - - - - - - - - - - - end notices slot- - - - - - - - - - - - - - - - - -->
