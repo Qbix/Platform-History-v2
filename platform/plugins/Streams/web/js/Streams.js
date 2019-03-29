@@ -5894,8 +5894,8 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
         roomsMedia.id = 'webrtc_tool_room-media';
         var dashboard = document.getElementById('dashboard_slot');
         if(Q.info.isMobile && !Q.info.isTablet) {
-            roomsMedia.style.top = Q.fixedOffset('top', ['Q_drawers_drawer']);
-			roomsMedia.style.bottom = Q.fixedOffset('bottom', ['Q_drawers_drawer']);
+            roomsMedia.style.top = Q.fixedOffset('top', ['Q_drawers_drawer']) + 'px';
+			roomsMedia.style.bottom = Q.fixedOffset('bottom', ['Q_drawers_drawer']) + 'px';
 			roomsMedia.style.height = 'auto';
         }
 
