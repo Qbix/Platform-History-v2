@@ -15,9 +15,6 @@ Q.Tool.define('Q/layouts', function (options) {
 
 	var tool = this;
 	var state = this.state;
-	if (!tool.state.total) {
-		throw new Q.Error("options.total is required");
-	}
 
 },
 
