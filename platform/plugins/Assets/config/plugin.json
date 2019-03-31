@@ -18,7 +18,7 @@
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Communities/community/create": ["Assets/after/Community_create"]
 		},
-		"routes": {
+		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
