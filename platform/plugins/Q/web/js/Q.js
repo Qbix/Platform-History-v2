@@ -5770,8 +5770,9 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
  * from the given side of the screen. The elements are found by simply
  * looking for the class 'Q_fixed_' + from, which should have been added to them.
  * @param {String} [from='top'] can also be 'bottom', 'left', 'right'
- * @param {Array|Function} [filter] Can pass an array of class names to avoid,
- *  or function which takes a string and returns Boolean
+ * @param {Array|HTMLElement,Function} [filter]
+ *  Can pass an array of (class names to avoid, and elements to restrict to their siblings)
+ *  or a function which takes a string and returns Boolean of whether to use the element.
  * @return {Number}
  */
 Q.fixedOffset = function (from, filter) {
@@ -5780,7 +5781,21 @@ Q.fixedOffset = function (from, filter) {
 	Q.each(elements, function () {
 		if (Q.isArrayLike(filter)) {
 			var classes = this.className.split(' ');
-			if (classes.indexOf(filter) >= 0) {
+			if (false === Q.each(filter, function (i, item) {
+				if (item instanceof HTMLElement) {
+					if (false !== Q.each(this.parentNode.childNodes, function () {
+						if (this === filter) {
+							return false;
+						}
+					})) {
+						return false;
+					}
+				} else if (typeof item === 'string') {
+					if (classes.indexOf(item) >= 0) {
+						return false;
+					}
+				}
+			})) {
 				return;
 			}
 		}
@@ -7720,12 +7735,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 		}
 	}
 	if (ret !== true) {
-		var children;
-		if ('children' in elem) {
-			children = elem.children;
-		} else {
-			children = elem.childNodes; // more tedious search
-		}
+		var children = ('children' in elem) ? elem.children : elem.childNodes;
 		var c = [];
 		if (children) {
 			for (i=0; i<children.length; ++i) {

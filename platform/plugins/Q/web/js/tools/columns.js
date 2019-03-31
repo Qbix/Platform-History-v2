@@ -733,7 +733,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var $columns = $('.Q_columns_column', $te);
 		var $container = $('.Q_columns_container', $te);
 		var $cs = $('.Q_columns_column .Q_column_slot', $te);
-		var top = Q.fixedOffset('top', ['Q_drawers_drawer']);
+		var top = Q.fixedOffset('top', ['Q_drawers_drawer', tool.element]);
 		
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');
