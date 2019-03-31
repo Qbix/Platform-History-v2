@@ -1,0 +1,111 @@
+.Streams_chat_preview_tool .Streams_participants_tool .Users_avatar_tool {
+	width: 44px;
+}
+
+.Streams_chat_preview_tool .Streams_participants_tool {
+	white-space: nowrap;
+	height: 60px;
+}
+
+.Streams_chat_preview_tool .Streams_participants_tool .Users_avatar_tool {
+	min-height: 50px;
+}
+
+.Streams_chat_preview_tool .Streams_participants_tool .Users_avatar_tool img {
+	width: 33px;
+	height: 33px;
+}
+
+.Streams_chat_preview_tool {
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+.Streams_chat_preview_tool {
+	border-radius: 5px;
+}
+.Streams_chat_preview_tool .Streams_chat_preview_info {
+	position: relative;
+	font-size: 12px;
+	font-weight: normal;
+	color: red;
+	white-space: nowrap;
+}
+.Streams_chat_preview_tool .Streams_chat_preview_info:empty {
+	display: none;
+}
+.Streams_chat_preview_tool .Streams_chat_preview_info:before {
+	font-family: 'qplatform-communities' !important;
+	color: red;
+	content: "\e90d";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 15px;
+	position: relative;
+	top: -1px;
+	vertical-align: middle;
+}
+.Streams_chat_preview_tool .Streams_preview_contents {
+	position: relative;
+}
+.Streams_chat_preview_tool {
+	box-shadow: 0 2px 5px rgba(0,0,0,.1), 0 0 2px rgba(0,0,0,.2);
+	border-radius: 7px;
+	margin-top: 2px;
+	margin-right: 2px;
+	border: none;
+	cursor: pointer;
+}
+.Streams_chat_preview_tool.Streams_chat_preview_noParticipants {
+	display: none;
+}
+.Streams_chat_preview_tool .streams_chat_unseen {
+	display: none;
+	position: absolute;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	height: 30px;
+	min-width: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	background-color: #cc5555;
+	top: 10px;
+	right: 10px;
+}
+.Streams_chat_preview_tool .streams_chat_unseen.Streams_preview_nonzero {
+	display: block;
+}
+.Streams_chat_preview_tool .Users_pile_tool {
+	position: absolute;
+	right: 10px;
+	top: 2px;
+}
+.Streams_chat_preview_tool[data-participants] .streams_chat_unseen {
+	top: 23px;
+	right: 2px;
+	height: 25px;
+	min-width: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	font-weight: normal;
+}
+.Streams_chat_preview_tool .Streams_preview_contents {
+	width: 63%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.Streams_chat_preview_tool .Streams_preview_contents h3 {
+	text-overflow: ellipsis;
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+}
