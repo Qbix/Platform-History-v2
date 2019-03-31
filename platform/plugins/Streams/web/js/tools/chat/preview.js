@@ -118,7 +118,7 @@
 		'	<img alt="icon" class="Streams_preview_icon" src="{{& src}}">' +
 		'	<div class="Streams_preview_contents">' +
 		'		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>' +
-		'		<div class="Streams_chat_preview_info">{{info}}</div>' +
+		'		<div class="Streams_chat_preview_info Streams_aspect_interests">{{info}}</div>' +
 		'	</div>' +
 		'	<div class="streams_chat_participants"></div>' +
 		'	<div class="streams_chat_unseen"></div>' +
