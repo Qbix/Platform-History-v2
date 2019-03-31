@@ -129,6 +129,14 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	z-index: 10;
 }
 
+.Q_columns_column .Q_columns_title {
+	box-shadow: 0 2px 20px 5px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.1);
+}
+
+.Q_columns_column .Q_controls_slot {
+	box-shadow: 0 -2px 20px 5px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.1);
+}
+
 .Q_columns_column .Q_controls_slot {
 	background: #fafafa;
 	height: 50px;
