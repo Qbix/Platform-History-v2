@@ -252,8 +252,8 @@ html.Q_notMobile { height: 100%; }
 .Q_notMobile #dashboard>h1,
 .Q_notMobile #dashboard>h2 { float: none; }
 .Q_notMobile #notices_slot { left: 0; top: 0; width: 100%; }
-.Q_notMobile #dashboard_slot { left: 15%; width: 20%; height: 80%; top: 10%; }
-.Q_notMobile #page { position: absolute; padding: 0; top: 50px; left: 35%; width: 50%; height: 80%; top: 10%; }
+.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; }
+.Q_notMobile #page { position: absolute; padding: 0; left: 25%; width: 70%; height: 90%; top: 5%; }
 .Q_notMobile #content_slot { min-height: 100%; padding: 0; }
 .Q_notMobile #content { padding: 20px; }
 .Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }

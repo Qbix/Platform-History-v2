@@ -1495,7 +1495,7 @@
 			identifierInput.attr('name', 'phone');
 		}
 
-		var $a = $('<a class="Q_button Users_login_go Q_main_button" />')
+		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
 			).on(Q.Pointer.touchclick, function () {
@@ -1512,12 +1512,12 @@
 		).append('<br />').append(
 			identifierInput
 		).append(
-			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />').val(identifierType)
-		).append('&nbsp;')
-			.append($a)
-			.append(
-				$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
-			).submit(function (event) {
+			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
+			.val(identifierType)
+		).append($a)
+		.append(
+			$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
+		).submit(function (event) {
 			$('#Users_login_identifier').attr('name', 'identifier');
 			if (!$(this).is(':visible')) {
 				event.preventDefault();
