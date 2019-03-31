@@ -8,7 +8,7 @@
 				"requires": {"Streams": "1.0.5"}
 			}
 		},
-		"routes": {
+		"routes@start": {
 			"Q/plugins/Places/:action": {"module": "Places"}
 		},
 		"handlersBeforeEvent": {
