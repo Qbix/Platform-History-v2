@@ -90,7 +90,6 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	overflow-y: auto;
 	position: relative;
 	box-sizing: border-box;
-	height: 100%;
 }
 
 .Q_columns_tool.Q_fullscreen {

@@ -16,7 +16,7 @@
 	<?php echo Q_Response::styles(true, "\n\t") ?> 
 </head>
 <body>
-	<div id="dashboard_slot" class="Q_fixed_top">
+	<div id="dashboard_slot">
 <!-- - - - - - - - - - - - - begin dashboard slot- - - - - - - - - - - - - - - - -->
 <?php echo $dashboard ?> 
 <!-- - - - - - - - - - - - - - end dashboard slot- - - - - - - - - - - - - - - - -->

@@ -149,7 +149,7 @@ table { border-spacing:0; border-collapse:collapse; }
 
 /* Clear fix */
 
-.Q_clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+.Q_clearfix:after { content: ""; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 html[xmlns] .Q_clearfix { display: block; }
 
 /* For IE6 only */
