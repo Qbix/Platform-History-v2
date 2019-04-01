@@ -1516,15 +1516,11 @@ abstract class Users extends Base_Users
 					$min = min($sw / $w, $sh / $h);
 					$w2 = $w * $min;
 					$h2 = $h * $min;
+					$sx = ($sw - $w2) / 2;
+					$sy = ($sh - $h2) / 2;
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled(
-						$image, $source, 
-						($sw - $w2) / 2, ($sh - $h2) / 2,
-						0, 0, 
-						$w, $h,
-						$sw, $sh
-					);
+					$success = imagecopyresampled($image, $source, $sx, $sy, 0, 0, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
