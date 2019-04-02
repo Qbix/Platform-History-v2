@@ -100,12 +100,6 @@ Q.Tool.define('Q/layouts', function (options) {
 		}
 
 		this.animation = Q.Animation.play(function (x, y) {
-            var rects = [];
-            var i, element;
-            for(i = 0; element = elements[i]; i++){
-                rects.push(element.getBoundingClientRect());
-            }
-
 			Q.each(elements, function (i) {
 				var rect1 = rects[i];
 				var rect2 = layout[i];
