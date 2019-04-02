@@ -2655,7 +2655,7 @@ var _layoutEvents = [];
  * Call this function to get an event which occurs every time
  * Q.layout() is called on the given element or one of its parents.
  * @param {Element} [element=document.documentElement] 
- * @event onLayout
+ * @return {Q.Event}
  */
 Q.onLayout = function (element) {
 	element = element || document.documentElement;
