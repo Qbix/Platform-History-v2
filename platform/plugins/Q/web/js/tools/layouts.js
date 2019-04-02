@@ -19,6 +19,7 @@ Q.Tool.define('Q/layouts', function (options) {
 },
 
 {
+	elementToWrap: null,
 	filter: null,
 	key: null,
 	onLayout: new Q.Event()
@@ -78,27 +79,26 @@ Q.Tool.define('Q/layouts', function (options) {
 		if (container.computedStyle('position') === 'static') {
 			container.style.position = 'relative';
 		}
-		console.log('animate layout', layout)
 		var rects = [];
 		var i, element;
 		for(i = 0; element = elements[i]; i++){
-            console.log('this element', element, i)
 
             if (!container.contains(element)) {
-                if (element.style.position != 'absolute') {
-                    element.style.position = 'absolute';
-                }
                 container.appendChild(element);
             }
-            console.log('this.getBoundingClientRect()', element.getBoundingClientRect())
+
+            if (element.style.position != 'absolute') {
+                element.style.position = 'absolute';
+            }
+
             rects.push(element.getBoundingClientRect());
 
 
 		}
-		console.log('this.animation', this.animation);
 		if (this.animation) {
 			this.animation.pause();
 		}
+
 		this.animation = Q.Animation.play(function (x, y) {
             var rects = [];
             var i, element;
@@ -111,15 +111,15 @@ Q.Tool.define('Q/layouts', function (options) {
 				var rect2 = layout[i];
 				var ts = elements[i].style;
 
-                var currentLeft = parseInt(ts.left, 10);
-                var currentTop = parseInt(ts.top, 10);
-                var currentWidth = parseInt(ts.width, 10);
-                var currentHeight = parseInt(ts.height, 10);
+                var currentLeft = parseFloat(ts.left);
+                var currentTop = parseFloat(ts.top);
+                var currentWidth = parseFloat(ts.width);
+                var currentHeight = parseFloat(ts.height);
 
-                if(currentLeft != rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
-                if(currentTop != rect2.top) ts.top = rect1.top + (rect2.top - rect1.top) * y + 'px';
-                if(currentWidth != rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
-                if(currentHeight != rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
+                if(currentLeft !== rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
+                if(currentTop !== rect2.top) ts.top = rect1.top + (rect2.top - rect1.top) * y + 'px';
+                if(currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
+                if(currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
 			});
 		}, 500, ease)
 	}
@@ -139,13 +139,13 @@ var _generators = {
 		return rects;
 	},
 	tiledHorizontal: function (container, count) {
-	
+
 	},
 	maximizedVertical: function (container, count) {
-	
+
 	},
-	maximizedHorizontal: function (container, count) {
-	
+	maximizedHorizontal: function (container, count, elementToWrap) {
+
 	},
 
 	tiledVerticalMobile: function (container, count) {
@@ -215,7 +215,7 @@ var _generators = {
 
         return maximizedHorizontalMobile(count, size);
 	}
-}
+};
 
 
     function maximizedMobile(count, size) {
@@ -231,7 +231,6 @@ var _generators = {
         var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
         var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
 
-        console.log('perCol', perCol)
         var isNextNewLast = false;
         var colItemCounter = 1;
         var i;
@@ -239,12 +238,9 @@ var _generators = {
             //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
             var firstRect = new DOMRect(size.parentWidth, size.parentHeight - 66, rectWidth, rectHeight)
             var prevRect = rects.length > 1 ? rects[rects.length - 1] : firstRect;
-            console.log('prevRect', prevRect, firstRect)
             var currentCol = isNextNewLast  ? perRow : Math.ceil(i/perCol);
             var isNextNewCol  = colItemCounter  == perCol;
             isNextNewLast = isNextNewLast == true ? true : isNextNewCol && currentCol + 1 == perRow;
-
-            console.log('currentCol',i, currentCol, perCol, perRow, isNextNewCol, isNextNewLast)
 
             var x,y;
             if(colItemCounter == 1) {
@@ -280,7 +276,6 @@ var _generators = {
         var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
         var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
 
-        console.log('perCol', perCol)
         var isNextNewLast = false;
         var rowItemCounter = 1;
         var i;
@@ -288,12 +283,10 @@ var _generators = {
             //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
             var firstRect = new DOMRect(size.parentWidth, size.parentHeight, rectWidth, rectHeight)
             var prevRect = rects.length > 1 ? rects[rects.length - 1] : firstRect;
-            console.log('prevRect', prevRect, firstRect)
             var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
             var isNextNewRow  = rowItemCounter  == perRow;
             isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
 
-            console.log('currentCol',i, currentRow, perCol, perRow, isNextNewRow, isNextNewLast)
 
             var x,y;
             if(rowItemCounter == 1) {
@@ -356,9 +349,6 @@ var _generators = {
             var isNextNewRow  = rowItemCounter == perRow;
             isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
 
-            console.log('currentRow',i, currentRow, rowsNum, isNextNewRow, isNextNewLast)
-
-
             if(rowItemCounter == 1) {
                 var y = prevRect.height * (currentRow - 1);
                 var x = 0;
@@ -369,10 +359,8 @@ var _generators = {
             var rect = new DOMRect(x, y, rectWidth, rectHeight);
 
             if(isNextNewRow && isNextNewLast) {
-                console.log(rectWidth, perRow)
                 perRow = count - i;
                 rectWidth = parentWidth / perRow;
-                console.log(rectWidth, perRow)
             }
 
 
