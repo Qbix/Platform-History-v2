@@ -1098,6 +1098,9 @@ abstract class Users extends Base_Users
 		}
 		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
+		if ($icon) {
+			$user->set('skipIconSearch', $icon);
+		}
 
 		Users::$cache['user'] = $user;
 
@@ -1516,11 +1519,11 @@ abstract class Users extends Base_Users
 					$min = min($sw / $w, $sh / $h);
 					$w2 = $w * $min;
 					$h2 = $h * $min;
-					$sx = ($sw - $w2) / 2;
-					$sy = ($sh - $h2) / 2;
+					$sx = round(($sw - $w2) / 2);
+					$sy = round(($sh - $h2) / 2);
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled($image, $source, $sx, $sy, 0, 0, $w, $h, $w2, $h2);
+					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
