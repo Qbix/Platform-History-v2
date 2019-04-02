@@ -135,7 +135,7 @@ class Streams_Webrtc
 
         $room = $twilio->video->v1->rooms($sid)->fetch();
 
-        $identity = Users::loggedInUser(true)->displayName(array('short' => false));
+        $identity = Users::loggedInUser(true)->id . "\t" . time();
 
         // Create access token, which we will serialize and send to the client
         $token = new AccessToken($twilioAccountSid, $twilioApiKey, $twilioApiSecret, 3600, $identity);

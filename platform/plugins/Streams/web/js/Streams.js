@@ -4957,7 +4957,9 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var participantNameTextCon = document.createElement("DIV");
 			participantNameTextCon.className = "webrtc_tool_participant-name-text";
 			var participantNameText = document.createElement("DIV");
-			participantNameText.innerHTML = screen.participant.identity;
+			var userId = screen.participant.identity.split('\t')[0];
+			$(participantNameText).tool('Users/avatar', { userId: userId }).activate();
+			//participantNameText.innerHTML = screen.participant.identity;
 
 			chatParticipantEl.appendChild(chatParticipantVideoCon);
 			participantNameTextCon.appendChild(participantNameText);
