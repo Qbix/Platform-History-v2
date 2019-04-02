@@ -140,7 +140,7 @@ class Users_Quota extends Base_Users_Quota
 			}
 			$si = 0;
 			foreach ($results as $r) {
-				if ($r['c'] <= $duration) {
+				if ($r['c'] <= $largest) {
 					$si += $r['si'];
 				}
 			}
