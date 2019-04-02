@@ -37,11 +37,11 @@
 			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
 			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"]
 		},
-		"routes": {
-			"Q/plugins/Streams/:action": {"module": "Streams"},
-			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
+		"routes@start": {
+			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
 			"i/:token": {"module": "Streams", "action": "invited"},
-			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"}
+			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
+			"Q/plugins/Streams/:action": {"module": "Streams"}
 		},
 		"web": {
 			"requireValidNonce": ["Streams"]

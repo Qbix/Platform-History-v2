@@ -35,7 +35,15 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	if (state.canAdd === true) {
 		state.canAdd = Q.text.Users.labels.addLabel;
 	}
+
 	tool.refresh();
+
+	var _callback = function(err, res){
+		if (err) {
+			return Q.alert(err);
+		}
+	};
+
 	$(tool.element).on(Q.Pointer.fastclick, '.Users_labels_label', function () {
 		var $this = $(this), ret;
 		var label = $this.attr('data-label');
@@ -47,12 +55,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 		if (wasSelected) {
 			$this.removeClass('Q_selected');
 			if (state.contactUserId) {
-				Users.Contact.remove(state.userId, label, state.contactUserId);
+				Users.Contact.remove(state.userId, label, state.contactUserId, _callback);
 			}
 		} else {
 			$this.addClass('Q_selected');
 			if (state.contactUserId) {
-				Users.Contact.add(state.userId, label, state.contactUserId);
+				Users.Contact.add(state.userId, label, state.contactUserId, _callback);
 			}
 		}
 	});

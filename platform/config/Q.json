@@ -12,7 +12,7 @@
 			"Q/tool/render": ["Q/after/Q/tool/render"]
 		},
 		"routes": {
-			"": {"module": "Q", "action": "welcome"}
+			
 		},
 		"filename": {
 			"extensions": ["png", "jpeg", "gif", "jpg", "pdf", "js", "ogg", "mp3", "css", "cur"]
