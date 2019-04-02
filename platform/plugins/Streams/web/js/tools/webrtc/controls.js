@@ -29,7 +29,6 @@
             if (!window.WebRTCconference) {
                 throw "Video room should be created";
             }
-            console.log('%c window.WebRTCconference', 'background:green;', window.WebRTCconference.localParticipant());
 
             this.refresh();
 
@@ -46,9 +45,7 @@
             refresh: function() {
                 var tool = this;
 
-                console.log('%c window.WebRTCconference', 'background:yellow;', window.WebRTCconference.localParticipant());
                 var controlBar = tool.createControlBar();
-                console.log('%c window.WebRTCconference', 'background:purple;', controlBar);
 
                 window.WebRTCcontrolBar = controlBar;
                 tool.updateControlBar();
@@ -68,13 +65,9 @@
             bindRTCEvents: function() {
                 var tool = this;
                 WebRTCconference.event.on('participantConnected', function (participant) {
-                    console.log('%c CONTROL BAR: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
-
                     tool.participantsPopup().addItem(participant);
                 });
                 WebRTCconference.event.on('participantDisconnected', function (participant) {
-                    console.log('%c CONTROL BAR: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
-
                     tool.participantsPopup().removeItem(participant);
                 });
             },
@@ -146,9 +139,7 @@
 
 
 
-                cameraBtn.addEventListener('mouseup', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation()
+                cameraBtn.addEventListener('mouseup', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
                     Q.Dialogs.push({
                         title: "Video Sources",
@@ -159,20 +150,14 @@
                     //tool.toggleVideo()
                 })
 
-                cameraSwitcherBtn.addEventListener('mouseup', function (e) {
-                    tool.toggleCameras();
-                    e.preventDefault();
-                    e.stopPropagation();
+                cameraSwitcherBtn.addEventListener('mouseup', function () {
+                    tool.toggleCameras()
                 })
-                speakerBtn.addEventListener('mouseup', function (e) {
+                speakerBtn.addEventListener('mouseup', function () {
                     tool.toggleAudioOfAll()
-                    e.preventDefault();
-                    e.stopPropagation();
                 })
-                microphoneBtn.addEventListener('mouseup', function (e) {
+                microphoneBtn.addEventListener('mouseup', function () {
                     tool.toggleAudio()
-                    e.preventDefault();
-                    e.stopPropagation();
                 })
 
                 return controlBar;
@@ -185,8 +170,6 @@
             toggleVideo: function () {
                 var tool = this;
                 var videoInputDevices = WebRTCconference.conferenceControl.videoInputDevices();
-
-                console.log('toggleVideo', WebRTCconference.conferenceControl.cameraIsEnabled(), WebRTCconference.conferenceControl.currentCameraDevice(), videoInputDevices[videoInputDevices.length-1])
 
                 if(WebRTCconference.conferenceControl.cameraIsEnabled() && WebRTCconference.conferenceControl.currentCameraDevice() == videoInputDevices[videoInputDevices.length-1]) {
                     WebRTCconference.conferenceControl.disableVideo();
@@ -210,7 +193,6 @@
              */
             toggleAudio: function () {
                 var tool = this;
-                console.log('toggleAudio', WebRTCconference.conferenceControl.micIsEnabled())
                 if(WebRTCconference.conferenceControl.micIsEnabled()){
                     WebRTCconference.conferenceControl.disableAudio();
                 } else {
@@ -249,7 +231,6 @@
              */
             updateControlBar: function () {
                 var tool = this;
-                console.log('tool.controlBar', tool.controlBar)
                 if(tool.controlBar == null) return;
                 var conferenceControl = WebRTCconference.conferenceControl;
 
@@ -268,7 +249,6 @@
                     tool.speakerBtn.classList.add('webrtc_tool_hidden');
                 }
 
-                console.log('WebRTCconference.conferenceControl.currentAudioDevice()', WebRTCconference.conferenceControl.currentAudioDevice());
                 if(WebRTCconference.conferenceControl.currentAudioDevice() == null) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
                 } else if(!conferenceControl.micIsEnabled()) {
@@ -294,7 +274,6 @@
                 chooseCameraList.appendChild(title);
                 var count = 1;
                 WebRTCconference.conferenceControl.videoInputDevices().forEach(function(mediaDevice){
-                    console.log('mediaDevice', mediaDevice);
                     var radioBtnItem = document.createElement('LABEL');
                     var radioBtn= document.createElement('INPUT');
                     radioBtn.name = 'cameras';
@@ -318,7 +297,6 @@
                         if(checked) {
                             var allItems = tool.settingsPopupEl.querySelectorAll('input[name="cameras"]');
                             allItems.forEach( function(item) {
-                                console.log('allItems[i]', item)
                                 item.disabled = false;
                                 item.parentNode.classList.remove('webrtc_tool_disabled-radio');
                             })
@@ -365,7 +343,6 @@
                         console.error('startShareScreen', e)
                         var currentCameraId = WebRTCconference.conferenceControl.currentCameraDevice().deviceId;
                         var currentDevice = tool.settingsPopupEl.querySelector('input[value="' + currentCameraId + '"]');
-                        console.log('currentDevice', currentDevice)
                         if(currentDevice != null) {
                             currentDevice.checked = true;
                             currentDevice.disabled = true;
@@ -379,7 +356,6 @@
                     if(checked) {
                         var allItems = tool.settingsPopupEl.querySelectorAll('input[name="cameras"]');
                         allItems.forEach( function(item) {
-                            console.log('allItems[i]', item)
                             item.disabled = false;
                             item.parentNode.classList.remove('webrtc_tool_disabled-radio');
                         })
@@ -398,7 +374,6 @@
 
                 tool.hoverTimeout = {setttingsPopup: null, participantsPopup: null};
                 if(!Q.info.isMobile) {
-                    console.log('usersBtn BINDING')
 
                     tool.cameraBtn.addEventListener('mouseenter', function (e) {
                         if (tool.hoverTimeout.setttingsPopup != null) {
@@ -418,7 +393,6 @@
                     });
 
                     settingsPopup.addEventListener('mouseenter', function (e) {
-                        console.log('usersBtn CANCEL', e.target)
 
                         if(tool.hoverTimeout.setttingsPopup != null) {
                             clearTimeout(tool.hoverTimeout.setttingsPopup);
@@ -539,22 +513,15 @@
 
                     };
                     this.removeScreen = function () {
-                        var screens = this.participant.screens;
+                        var screens = WebRTCconference.screens();
                         for(var i in screens) {
-                            if(screens[i].screenEl.parentNode != null) {
-                                //screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
-                                console.log('removeScreen')
+                            if(this.participant == screens[i].participant && screens[i].screenEl.parentNode != null) {
                                 if(screens[i].screenEl.style.display == 'none') {
                                     screens[i].screenEl.style.display = '';
-                                    screens[i].isActive = true;
                                     this.unmuteVideo();
-                                    Q.Streams.Webrtc.screenRendering.renderScreens();
                                 } else {
                                     screens[i].screenEl.style.display = 'none';
-                                    //if(screens[i].screenEl.parentNode != null) screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
-                                    screens[i].isActive = false;
                                     this.muteVideo();
-                                    Q.Streams.Webrtc.screenRendering.renderScreens();
                                 }
 
                             }
@@ -577,13 +544,6 @@
                  * @method addItem
                  */
                 function addItem(roomParticipant) {
-                    console.log('roomParticipant.identity', roomParticipant.identity)
-                    try {
-                        var err = (new Error);
-                        console.log(err.stack);
-                    } catch (e) {
-
-                    }
                     var isLocal = roomParticipant == localParticipant;
                     var participantItem = document.createElement('LI');
                     var tracksControlBtns = document.createElement('DIV');
@@ -632,7 +592,6 @@
                 function toggleLocalVideo() {
                     if(tool.participantsList == null) return;
 
-                    console.log('toggleLocalVideo',tool.participantsList);
                     var i, listItem;
                     for (i = 0; listItem = tool.participantsList[i]; i++){
                         if(listItem.participant == localParticipant) {
@@ -666,13 +625,7 @@
                 function createList() {
                     if(tool.participantsList == null) tool.participantsList = [];
                     var participantsListCon = document.createElement('DIV');
-                    //participantsListCon.className = 'webrtc_tool_popup-participants-list webrtc_tool_popup-box';
-
-                    var disconnectbtn = document.createElement('BUTTON');
-                    disconnectbtn.type = 'button';
-                    disconnectbtn.className = 'webrtc_tool_disconnect-btn';
-                    disconnectbtn.innerHTML = icons.endCall;
-                    participantsListCon.appendChild(disconnectbtn);
+                    participantsListCon.className = 'webrtc_tool_popup-participants-list webrtc_tool_popup-box';
 
                     tool.participantListEl = document.createElement('UL');
                     tool.participantListEl.className = 'webrtc_tool_participants-list';
@@ -700,14 +653,8 @@
                             Q.Dialogs.push({
                                 title: "Participants",
                                 className: 'webrtc_tool_participants-list',
-                                content: participantsListCon,
-                                apply: true,
-                                onActivate: function (dialog) {
-                                    disconnectbtn.addEventListener('click', function () {
-                                        Q.Streams.Webrtc.stop();
-                                        Q.Dialogs.pop();
-                                    });
-                                },
+                                content: tool.participantListEl,
+                                apply: true
                             });
                         });
 
@@ -720,14 +667,12 @@
                             tool.usersBtn.parentNode.classList.add('webrtc_tool_hover');
                         });
                         tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {
-                            console.log('usersBtn mouseleave', e.target)
                             tool.hoverTimeout.participantsPopup = setTimeout(function () {
                                 tool.usersBtn.parentNode.classList.remove('webrtc_tool_hover');
                             }, 300)
                         });
 
                         participantsListCon.addEventListener('mouseenter', function (e) {
-                            console.log('usersBtn CANCEL', e.target)
 
                             if (tool.hoverTimeout.participantsPopup != null) {
                                 clearTimeout(tool.hoverTimeout.participantsPopup);

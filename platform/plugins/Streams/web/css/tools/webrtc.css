@@ -26,8 +26,10 @@
 .webrtc_tool_mobile-screen .Streams_webrtc_controls_tool {
     display: flex;
     justify-content: center;
-    bottom: 0;
     z-index: 999999;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
 }
 
 .webrtc_tool_hidden {
@@ -152,7 +154,7 @@
 }
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner{
     display: flex;
-    height: 35px;
+    height: 45px;
     max-width: 640px;
 }
 
@@ -171,10 +173,10 @@
     align-items: center;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .additional-menu-con svg{
-    height: 35px;
+    height: 45px;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner svg{
-    height: 35px;
+    height: 45px;
 }
 
 
@@ -518,11 +520,17 @@
     width: 100%;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-small-screen.webrtc_tool_chat-participant {
-    z-index: 1000;
-}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-small-screen.webrtc_tool_chat-participant,
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-small-screen.webrtc_tool_chat-participant {
     z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0px 3px rgba(0, 0, 0, 0.5);
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-small-screen.webrtc_tool_chat-participant {
+
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-small-screen.webrtc_tool_chat-participant {
+
 }
 
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen.webrtc_tool_chat-participant {
@@ -599,6 +607,7 @@
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
     height: 100%;
+    position: absolute;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_thumbs-screens-grid .webrtc_tool_maximized-small-screen .webrtc_tool_chat-participant-video video.isHorizontal {
     height: 100%;
@@ -699,7 +708,7 @@
     height: 99px;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant {
-    display: block;
+    display: flex;
     flex-direction: column;
     border-radius: 6px;
     background-color: #fff;
@@ -741,8 +750,38 @@
     height: 100%;
     max-height: 100%;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-video video{
-    /*max-width: 100%;*/
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-video {
+    height: 100%;
+    max-height: 100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isVertical {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isHorizontal {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-screen .webrtc_tool_chat-participant-video video.isHorizontal{
+    width:100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-screen .webrtc_tool_chat-participant-video video.isVertical{
+    height:100%;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    width:100%;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isVertical {
+    height: 100%;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-video video{
+    width:100%;
+    position: absolute;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
     display: flex;
@@ -752,6 +791,26 @@
     background: white;
     color:black;
 }
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 5px;
+    background: white;
+    color:black;
+    font-size: 14px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-name {
+    padding: 8px 5px 5px 8px;
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    position: absolute;
+    font-size: 14px;
+}
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
     display: flex;
     flex-direction: column;
@@ -760,8 +819,14 @@
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
     display: flex;
 }
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
+    display: none;
+}
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
     height: 30px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
+    height: 25px;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant-name {
     background-color: rgba(0, 0, 0, 0.4);
@@ -1225,4 +1290,10 @@
     width: 40px;
     height: 40px;
     z-index: 3;
+}
+
+.flipped video{
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
 }
