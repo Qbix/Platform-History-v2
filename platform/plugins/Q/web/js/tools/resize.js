@@ -40,18 +40,14 @@
 
                 elementToResize.style.width = '';
                 elementToResize.style.height = '';
-                console.log('deactivate', elementToMove, elementToResize)
             },
             getElementToMove: function() {
                 var tool = this;
                 if(tool.state.elementToMove != null) {
-                    console.log('tool.state.elementToMove', tool.state.elementToMove)
                     var el = tool.element;
                     while ((el = el.parentElement) && !el.classList.contains(tool.state.elementToMove)) ;
 
                     return el;
-                    console.log('tool.state.elementToMove2', el)
-
                 } else return tool.element;
 
             },
@@ -60,16 +56,16 @@
                 var elementToResize = tool.element;
                 var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 
-                console.log('elementToMove11',elementToMove)
                 var _dragElement = function(){
                     var elementToMove;
                     var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY;
                     var move = function(xpos,ypos){
-                        console.log('xpos,ypos', xpos,ypos)
+                        var currentTop = parseInt(elementToMove.style.top, 10)
+                        var currentLeft = parseInt(elementToMove.style.left, 10)
                         elementToMove.style.left = xpos + 'px';
                         elementToMove.style.top = ypos + 'px';
 
-                        tool.state.appliedRecently = true;
+                        if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
                     }
                     var drag = function(evt){
                         if(Q.info.isMobile && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
@@ -86,7 +82,6 @@
                         move(aX,aY);
                     }
                     var initMoving = function(divid,container,evt){
-                        console.log('initMoving', tool.state.active)
                         if(!tool.state.active) return;
                         if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
                         elementToMove = divid;
@@ -258,20 +253,14 @@
                         } else {
                             action = 'increase';
                         }
-                        console.log('action', action)
-                        console.log('elementWidth', elementWidth, elementHeight)
                         if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
                             return;
                         }
-                        console.log('1111', elementToMove != _elementToResize, elementToMove.offsetHeight, document.body.offsetHeight, elementToMove.offsetWidth, document.body.offsetWidth)
-                        console.log('2222', _elementToResize.offsetHeight, document.body.offsetHeight, _elementToResize.offsetWidth, document.body.offsetWidth)
 
                         if(action == 'increase' && elementToMove != _elementToResize && (elementToMove.offsetHeight >= document.body.offsetHeight || elementToMove.offsetWidth >= document.body.offsetWidth)) {
-                            console.log('OVERSIZE', elementToMove.offsetHeight, document.body.offsetHeight, elementToMove.offsetWidth, document.body.offsetWidth)
                             return;
                         }
 
-                        console.log('RESIZE WILL HAPPEN')
                         if(elementToMove.style.position == 'fixed') {
                             elementToMove.style.left = _centerPosition - (elementWidth / 2) + 'px';
                             elementToMove.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
@@ -356,15 +345,12 @@
                     }
 
                     function _startResizingByPinch(e) {
-                        console.log('_startResizingByPinch', _elementToResize)
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
                         window.addEventListener('touchend', _stopResizingByPinch);
                         window.addEventListener('touchmove', resizeByPinch);
                     }
 
                     function _stopResizingByPinch() {
-                        console.log('stopResizing')
-
                         tool.isScreenResizing = false;
                         touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = null;
                         window.removeEventListener('touchend', _stopResizingByPinch);
@@ -417,13 +403,9 @@
                         touch2diff = Math.abs(prevPosOfTouch2.x - touch2.clientX);
 
                         if(Math.abs(touch1.clientX - touch2.clientX) > Math.abs(prevPosOfTouch1.x - prevPosOfTouch2.x)) {
-                            console.log('ZOOM ++++')
-
                             elementHeight = _latestHeightValue + Math.abs(touch1.clientX - prevPosOfTouch1.x) + Math.abs(touch2.clientX - prevPosOfTouch2.x);
                             elementWidth = _latestWidthValue + Math.abs(touch1.clientX - prevPosOfTouch1.x) + Math.abs(touch2.clientX - prevPosOfTouch2.x);
                         } else {
-                            console.log('ZOOM ----')
-
                             elementHeight = _latestHeightValue - Math.abs(touch1.clientX - prevPosOfTouch1.x + touch2.clientX - prevPosOfTouch2.x);
                             elementWidth = _latestWidthValue - Math.abs(touch1.clientX - prevPosOfTouch1.x + touch2.clientX - prevPosOfTouch2.x);
                         }
@@ -463,7 +445,6 @@
                         //if(_elementToResize == null) _elementToResize = e.target;
                         var elRect = _elementToResize.getBoundingClientRect();
                         //if(elRect.height >= window.innerHeight || elRect.width >= window.innerWidth) return;
-                        console.log('_elementToResize', _elementToResize)
                         var delta = e.deltaY || e.detail || e.wheelDelta;
                         if(delta < 0 && (elRect.height < _minSize || elRect.width < _minSize)) return
 
@@ -487,7 +468,6 @@
 
                         var elRect = _elementToResize.getBoundingClientRect();
                         if(elementToMove.style.position == 'fixed') {
-                            console.log('_centerPosition - (elRect.width / 2), ', _centerPosition);
                             elementToMove.style.left = _centerPosition - (elRect.width / 2) + 'px';
                             elementToMove.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';
                         }
