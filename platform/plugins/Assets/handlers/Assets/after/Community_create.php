@@ -5,8 +5,10 @@ function Assets_after_Community_create($params)
 	$userId = $params['userId'];
 	$community = $params['community'];
 	$skipAccess = $params['skipAccess'];
+	$quota = $params['quota'];
 
-	if ($skipAccess || Q::ifset($params, 'isSuperAdmin', false)) {
+	// if for some reason skippAccess or quota not exceeded
+	if ($skipAccess || $quota instanceof Users_Quota) {
 		return;
 	}
 
