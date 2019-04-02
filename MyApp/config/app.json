@@ -24,9 +24,9 @@
 			"Q/configure": ["MyApp/after/Q_configure"]
 		},
 		"routes": {
-			"": {"module": "MyApp", "action": "welcome"},
+			"facebook/:action": {"module": "MyApp", "facebook": 1},
 			":action": {"module": "MyApp"},
-			"facebook/:action": {"module": "MyApp", "facebook": 1}
+			"": {"module": "MyApp", "action": "welcome"}
 		},
 		"response": {
 			"slotNames": ["dashboard", "content", "dialogs", "title", "notices"],

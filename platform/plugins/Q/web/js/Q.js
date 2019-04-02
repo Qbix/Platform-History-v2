@@ -5766,6 +5766,60 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
 };
 
 /**
+ * Calculate the total number of pixels that fixed elements take up
+ * from the given side of the screen. The elements are found by simply
+ * looking for the class 'Q_fixed_' + from, which should have been added to them.
+ * @param {String} [from='top'] can also be 'bottom', 'left', 'right'
+ * @param {Array|HTMLElement,Function} [filter]
+ *  Can pass an array of (class names to avoid, and elements to restrict to their siblings)
+ *  or a function which takes a string and returns Boolean of whether to use the element.
+ * @return {Number}
+ */
+Q.fixedOffset = function (from, filter) {
+	var elements = document.body.getElementsByClassName('Q_fixed_'+from);
+	var result = 0;
+	Q.each(elements, function () {
+		if (Q.isArrayLike(filter)) {
+			var classes = this.className.split(' ');
+			if (false === Q.each(filter, function (i, item) {
+				if (item instanceof HTMLElement) {
+					if (false !== Q.each(this.parentNode.childNodes, function () {
+						if (this === filter) {
+							return false;
+						}
+					})) {
+						return false;
+					}
+				} else if (typeof item === 'string') {
+					if (classes.indexOf(item) >= 0) {
+						return false;
+					}
+				}
+			})) {
+				return;
+			}
+		}
+		if (typeof filter === 'function' && !filter.apply(this)) {
+			return;
+		}
+		var rect = this.getBoundingClientRect();
+		switch (from) {
+			case 'top':
+			case 'bottom':
+				result += rect.height;
+				break;
+			case 'left': 
+			case 'right':
+				result += rect.width;
+				break;
+			default:
+				return;
+		}
+	});
+	return result;
+};
+
+/**
  * Remove an element from the DOM and try to clean up memory as much as possible
  * @static
  * @method removeElement
@@ -7681,12 +7735,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 		}
 	}
 	if (ret !== true) {
-		var children;
-		if ('children' in elem) {
-			children = elem.children;
-		} else {
-			children = elem.childNodes; // more tedious search
-		}
+		var children = ('children' in elem) ? elem.children : elem.childNodes;
 		var c = [];
 		if (children) {
 			for (i=0; i<children.length; ++i) {
@@ -10351,6 +10400,11 @@ if (Q.info.isAndroidStock) {
 if (Q.info.hasNotch) {
 	de.addClass('Q_notch');
 }
+
+Q.ignoreBackwardCompatibility = {
+	dashboard: false,
+	notices: false
+};
 
 Q.Page.onLoad('').set(function () {
 	de.addClass(Q.info.uri.module + '_' + Q.info.uri.action)
@@ -13309,6 +13363,12 @@ Q.beforeInit.addOnce(function () {
 	}
 	if (Q.getObject('Q.info.cookies.indexOf') && Q.info.cookies.indexOf('Q_dpr')) {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
+	}
+	if (!Q.ignoreBackwardCompatibility.dashboard) {
+		document.getElementById('dashboard_slot').addClass('Q_fixed_top');
+	}
+	if (!Q.ignoreBackwardCompatibility.notices) {
+		document.getElementById('notices_slot').addClass('Q_fixed_top');
 	}
 	// This loads bluebird library to enable Promise for browsers which do not
 	// support Promise natively. For example: IE, Opera Mini.

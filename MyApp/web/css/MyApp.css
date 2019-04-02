@@ -204,8 +204,9 @@ input[type=checkbox],
 input[type=radio] { margin-right: 5px; }
 html .Q_inplace_tool_fieldinput { padding: 0px; }
 
+#notices_slot { position: fixed; }
 .Q_mobile #dashboard_slot,
-.Q_mobile #notices_slot { width: 100%; position: fixed; left: 0; }
+.Q_mobile #notices_slot { width: 100%; left: 0; }
 .Q_mobile #dashboard>h2 { display: none; }
 .Q_mobile #dashboard .Q_tabs_tab {
 	border-radius: 5px;
@@ -250,9 +251,9 @@ html.Q_notMobile { height: 100%; }
 .Q_notMobile body { height: 100%; }
 .Q_notMobile #dashboard>h1,
 .Q_notMobile #dashboard>h2 { float: none; }
-.Q_notMobile #notices_slot { position: fixed; left: 0; top: 0; width: 100%; }
-.Q_notMobile #dashboard_slot { position: fixed; left: 15%; width: 20%; height: 80%; top: 10%; }
-.Q_notMobile #page { position: absolute; padding: 0; top: 50px; left: 35%; width: 50%; height: 80%; top: 10%; }
+.Q_notMobile #notices_slot { left: 0; top: 0; width: 100%; }
+.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; }
+.Q_notMobile #page { position: absolute; padding: 0; left: 25%; width: 70%; height: 90%; top: 5%; }
 .Q_notMobile #content_slot { min-height: 100%; padding: 0; }
 .Q_notMobile #content { padding: 20px; }
 .Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }

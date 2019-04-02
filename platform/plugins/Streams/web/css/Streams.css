@@ -953,3 +953,7 @@
 .Streams_unseen_nonzero {
 	display: inline-block !important;
 }
+
+.Streams_chat_preview_tool {
+	background: white;
+}
