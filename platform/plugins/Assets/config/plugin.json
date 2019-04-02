@@ -153,6 +153,7 @@
 		},
 		"browsertab": {
 			"css": []
-		}
+		},
+		"canCheckPaid": ["Users/admoins", "Assets/admins"]
 	}
 }
