@@ -957,3 +957,7 @@
 .Streams_chat_preview_tool {
 	background: white;
 }
+
+.Streams_complete_overlay .Q_dialog_content {
+	padding: 0;
+}

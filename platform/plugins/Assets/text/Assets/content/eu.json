@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ukitu ordaintzeko"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} (r) en prozesatutako arduraduna",
+        "ThankYouForYourPayment": "Eskerrik asko {{call 'publisher.displayName'}} zerbitzura ordaintzeagatik",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} (e) n harpidetu da",
+        "YouSubscribedTo": "{{plan.title}} zerbitzuan harpidetu zara"
+    }
+}

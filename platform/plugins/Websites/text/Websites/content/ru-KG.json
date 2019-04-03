@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Ссылка для продвижения",
+                "startDate": "Дата начала",
+                "startTime": "Начальное время",
+                "endDate": "Дата окончания",
+                "endTime": "Время окончания",
+                "budget": "бюджет"
+            },
+            "interests": {
+                "Title": "Фильтровать по интересам",
+                "FilterInterests": "Начните вводить интерес ..."
+            },
+            "Interest": "Интерес",
+            "Location": "Место нахождения"
+        }
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Mewngofnodi",
+        "LogOut": "allgofnodi"
+    },
+    "activate": {
+        "SetAsPrimary": "Gosod {{1}} fel fy mhrif ysgol {{2}}",
+        "ChoosePassPhrase": "Dewiswch <strong>ymadrodd pasio<\/strong> i mewn iddo. <br> Ymadrodd syml sy&#39;n cynnwys ychydig eiriau y byddwch chi&#39;n eu cofio&#39;n hawdd.",
+        "ChoosePassPhraseSeeSuggestions": "Dewiswch <strong>ymadrodd pasio<\/strong> da i ddiogelu eich cyfrif. Gweler yr awgrymiadau ar gyfer rhai syniadau.",
+        "LogOutAndTryAgain": "Logio Allan a Cheisio Eto",
+        "IfYouFeel": "Os ydych chi&#39;n teimlo bod rhywbeth wedi mynd o&#39;i le, gallwch",
+        "SetIdentifierButtonTitle": "dechrau eto"
+    },
+    "session": {
+        "GetStarted": "Dechrau"
+    },
+    "authorize": {
+        "GetStarted": "Dechrau",
+        "Authorize": "Awdurdodi",
+        "TermsLabel": "Rwyf wedi darllen a chytuno <br> i&#39;r {{link}}",
+        "TermsTitle": "Telerau"
+    },
+    "register": {
+        "TermsLabel": "Rwy&#39;n derbyn y {{link}}",
+        "TermsTitle": "Telerau"
+    },
+    "notifications": {
+        "title": "Caniatâd",
+        "prompt": "Ydych chi eisiau galluogi hysbysiadau? Byddwch yn derbyn diweddariadau amser real am y pethau rydych chi&#39;n gofalu amdanynt.",
+        "yes": "Ydw",
+        "no": "Na",
+        "WelcomePleaseVerifyEmail": "Croeso! Gwiriwch eich cyfeiriad e-bost.",
+        "WelcomeVerifyEmail": "Croeso! Gwiriwch eich cyfeiriad e-bost.",
+        "ForgetPass": "Hei, a wnaethoch chi anghofio&#39;ch ymadrodd?"
+    },
+    "usersContacts": {
+        "selectLabel": "Dewiswch y label.",
+        "inviteUser": "Gwahodd y Defnyddiwr"
+    },
+    "invalidLanguageSelected": "Dewis iaith annilys"
+}

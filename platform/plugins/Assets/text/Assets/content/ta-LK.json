@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "செலுத்த தட்டவும்"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} க்கான கட்டணம்",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} க்கான உங்கள் கட்டணத்திற்கு நன்றி",
+        "SubscribedTo": "{{plan.title}} க்கு சந்தாதாரராக {{call 'user.displayName'}}",
+        "YouSubscribedTo": "நீங்கள் {{plan.title}}"
+    }
+}

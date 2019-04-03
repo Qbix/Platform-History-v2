@@ -1,0 +1,95 @@
+{
+    "preview": {
+        "NewItemTitle": "新商品"
+    },
+    "labels": {
+        "Streams\/invited": "私が招待した人",
+        "Streams\/invitedMe": "誰が私を招待しました"
+    },
+    "interests": {
+        "Filter": "何を楽しんでいますか？",
+        "CanAdd": "それでも探しているものが見つからない場合は、以下に新しい関心を追加できます。",
+        "TrySynonyms": "見えない？同義語をいくつか試してください。",
+        "AddUnderCategory": "カテゴリの下に追加...",
+        "Other": "その他の",
+        "Unlisted": "限定公開"
+    },
+    "chat": {
+        "flaggedForAdminReview": "メッセージに管理者レビュー用のフラグが付けられました。フラグを解除するには、もう一度タップします。",
+        "noOneSaid": "誰も何も言っていない",
+        "closeChatButton": "チャットを閉じる",
+        "closeChatConfirmTitle": "このチャットを閉じますか？",
+        "closeChatConfirm": "このチャットを終了してもよろしいですか？",
+        "closeChatConfirmYes": "はい",
+        "closeChatConfirmNo": "いいえ",
+        "earlierComments": "以前のコメント"
+    },
+    "notifications": {
+        "*": "メッセージ{{& message.fields.type}}から{{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}は言いました：",
+        "Streams\/changed": "{{stream.fields.title}}の変更点",
+        "Streams\/invite": "あなたは{{& stream.fields.title}}に招待されました",
+        "Streams\/announcement": "{{& streams.fields.title}}での発表",
+        "Streams\/access": "{{&call 'avatar.displayName'}}はストリームアクセスを変更しました",
+        "Streams\/chat\/edit": "チャットメッセージを編集しました",
+        "Streams\/chat\/remove": "チャットメッセージを削除しました",
+        "Streams\/closed": "{{stream.fields.title}}は閉鎖されました",
+        "Streams\/task\/progress": "{{stream.fields.title}}の進捗状況",
+        "Streams\/task\/complete": "タスクが完了しました：{{stream.fields.title}}",
+        "Streams\/task\/error": "エラー：{{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}：受信メッセージ"
+    },
+    "invite": {
+        "messageContent": "{{displayName}}はあなたを{{inviteUrl}}に招待しました",
+        "dialog": {
+            "chooseFromContacts": "連絡先から選択する",
+            "selectFromContacts": "連絡先から選択",
+            "photo": "写真を撮る",
+            "photoInstruction": "あなたのQRコードをスキャンした人があなたの前にいる場合は、それらの写真を撮ります",
+            "to": "宛先：{{Stream Title}}",
+            "go": "行く",
+            "title": "招待する",
+            "placeholder": "携帯電話番号またはEメールアドレス",
+            "orInvite": "またはを使用して人々を招待する：",
+            "QR": "QRコードを生成する{{ClickOrTap}}",
+            "QRtitle": "このQRコードをスキャン",
+            "byEmail": "Eメール",
+            "byText": "テキスト",
+            "byFacebook": "フェイスブック",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "こんにちは、これをチェックしてください",
+            "PleaseVisitLink": "次のリンクにアクセスしてください。",
+            "InvitingYou": "{{title}}に招待しています",
+            "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました"
+        },
+        "sms": {
+            "content": "あなたは{{title}}に招待されました。 {{url}}をタップしてください"
+        },
+        "notice": {
+            "text": "あなたが招待されました。ここで{{ClickOrTap}}を受け入れて参加してください。"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}}が{{stream.fields.title}}に<em>{{message.fields.type}}<\/em>メッセージを投稿しました"
+        },
+        "text": {
+            "body": "{{& url}}の{{& call 'avatar.displayName'}}：{{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
+            "confirm": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするよう依頼して、あなたからの招待状があなたからのものであることを知らせるためのクイックテキストをフォローアップしますか。",
+            "check": "こんにちは、私はあなたに{{app}}アプリへの招待状を送信しました。あなたのSMSを確認してリンクをクリックしてください！"
+        },
+        "email": {
+            "alert": "招待状は我々のドメインから送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
+            "confirm": "招待状は我々のドメインから送信されます。あなたの友達はまだ認識していません。リンクをクリックするよう依頼して、あなたからの招待状があなたからのものであることを知らせるためのクイックテキストをフォローアップしますか。",
+            "subject": "あなたは招待を受けましたか？",
+            "body": "こんにちは、私はあなたに{{app}}アプリへの招待状を送ったばかりです。あなたのEメールをチェックしてそこにあるリンクをクリックしてください！"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Pieskarieties, lai samaksātu"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: maksa tiek apstrādāta {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Paldies par maksājumu {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonēja {{plan.title}}",
+        "YouSubscribedTo": "Jūs esat abonējis {{plan.title}}"
+    }
+}

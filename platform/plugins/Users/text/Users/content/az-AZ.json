@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "daxil ol",
+        "LogOut": "çıxış"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} mənim əsas {{2}} kimi təyin et",
+        "ChoosePassPhrase": "Daxil olmaq üçün bir <strong>keçid ifadəsi<\/strong> seçin. <br> Asanlıqla xatırlayacağınız bir neçə sözdən ibarət sadə bir söz.",
+        "ChoosePassPhraseSeeSuggestions": "Hesabınızı qorumaq üçün yaxşı bir <strong>keçid ifadəsi<\/strong> seçin. Bəzi fikirlər üçün təkliflərə baxın.",
+        "LogOutAndTryAgain": "Çıxın və yenidən cəhd edin",
+        "IfYouFeel": "Bir şey yanlış getdi hiss etsəniz, edə bilərsiniz",
+        "SetIdentifierButtonTitle": "yenidən başlamaq"
+    },
+    "session": {
+        "GetStarted": "Başlamaq"
+    },
+    "authorize": {
+        "GetStarted": "Başlamaq",
+        "Authorize": "Səlahiyyət ver",
+        "TermsLabel": "Oxudum və razıyam <br> {{link}} üçün",
+        "TermsTitle": "Şərtlər"
+    },
+    "register": {
+        "TermsLabel": "{{link}}}",
+        "TermsTitle": "Şərtlər"
+    },
+    "notifications": {
+        "title": "İcazə",
+        "prompt": "Bildirişləri aktivləşdirmək istəyirsiniz? Sizi maraqlandıran şeylər haqqında real-time yenilikləri alacaqsınız.",
+        "yes": "Bəli",
+        "no": "Yox",
+        "WelcomePleaseVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı təsdiqləyin.",
+        "WelcomeVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı təsdiqləyin.",
+        "ForgetPass": "Hey, parolunuzu unutdun mu?"
+    },
+    "usersContacts": {
+        "selectLabel": "Xahiş edirik etiket seçin.",
+        "inviteUser": "İstifadəçiləri dəvət edin"
+    },
+    "invalidLanguageSelected": "Yanlış dil seçildi"
+}

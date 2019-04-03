@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "შესვლა",
+        "LogOut": "გამოსვლა"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}}, როგორც ჩემი პირველადი {{2}}",
+        "ChoosePassPhrase": "აირჩიეთ <strong>უღელტეხილის ფრაზა<\/strong> , შეხვიდეთ სისტემაში. <br> მარტივი ფრაზა, რომელიც შედგება რამოდენიმე სიტყვისაგან, რომელიც ადვილად ახსოვთ.",
+        "ChoosePassPhraseSeeSuggestions": "არჩევა კარგი <strong>პასაჟი ფრაზა<\/strong> დაიცვას თქვენი ანგარიში. იხილეთ იდეები ზოგიერთი იდეისთვის.",
+        "LogOutAndTryAgain": "გამოსვლა და სცადეთ თავიდან",
+        "IfYouFeel": "თუ ფიქრობთ, რომ რაღაც არასწორია, შეგიძლია",
+        "SetIdentifierButtonTitle": "თავიდან დაწყება"
+    },
+    "session": {
+        "GetStarted": "Დაიწყე"
+    },
+    "authorize": {
+        "GetStarted": "Დაიწყე",
+        "Authorize": "ავტორიზაცია",
+        "TermsLabel": "წავიკითხე და ვეთანხმები <br> {{link}}",
+        "TermsTitle": "Ვადები"
+    },
+    "register": {
+        "TermsLabel": "მე ვეთანხმები {{link}}",
+        "TermsTitle": "Ვადები"
+    },
+    "notifications": {
+        "title": "ნებართვა",
+        "prompt": "გსურთ შეტყობინებების ჩართვა? თქვენ მიიღებთ რეალურ დროში განახლებების შესახებ ინფორმაციას.",
+        "yes": "დიახ",
+        "no": "არა",
+        "WelcomePleaseVerifyEmail": "გამარჯობა! გთხოვთ, შეამოწმოთ თქვენი ელექტრონული ფოსტის მისამართი.",
+        "WelcomeVerifyEmail": "გამარჯობა! თქვენი ელ.ფოსტის მისამართის შემოწმება.",
+        "ForgetPass": "ჰეი, დაივიწყეთ პაროლი?"
+    },
+    "usersContacts": {
+        "selectLabel": "აირჩიეთ ლეიბლი.",
+        "inviteUser": "მოიწვიეთ მომხმარებელი"
+    },
+    "invalidLanguageSelected": "არჩეული არასწორი ენა"
+}

@@ -1,0 +1,95 @@
+{
+    "preview": {
+        "NewItemTitle": "Нов продукт"
+    },
+    "labels": {
+        "Streams\/invited": "Хората, които поканих",
+        "Streams\/invitedMe": "Кой ме покани"
+    },
+    "interests": {
+        "Filter": "Какво харесваш?",
+        "CanAdd": "Ако все още не можете да намерите това, което търсите, можете да добавите нов интерес по-долу:",
+        "TrySynonyms": "Не го виждате? Изпробвайте някои синоними.",
+        "AddUnderCategory": "Добавяне под категория ...",
+        "Other": "друг",
+        "Unlisted": "Скритите"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Съобщението бе сигнализирано за администраторски преглед. Докоснете отново, за да размачите.",
+        "noOneSaid": "Никой не е казал нищо",
+        "closeChatButton": "Затворете разговора",
+        "closeChatConfirmTitle": "Затворете този разговор?",
+        "closeChatConfirm": "Наистина ли искате да затворите този разговор?",
+        "closeChatConfirmYes": "да",
+        "closeChatConfirmNo": "Не",
+        "earlierComments": "по-ранни коментари"
+    },
+    "notifications": {
+        "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} каза:",
+        "Streams\/changed": "Промени в {{stream.fields.title}}",
+        "Streams\/invite": "Поканени сте в {{& stream.fields.title}}",
+        "Streams\/announcement": "Съобщение в {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} промениха достъпа до потока",
+        "Streams\/chat\/edit": "Съобщението в чата е редактирано",
+        "Streams\/chat\/remove": "Съобщението в чата е премахнато",
+        "Streams\/closed": "{{stream.fields.title}} е затворен",
+        "Streams\/task\/progress": "Напредъкът на {{stream.fields.title}}",
+        "Streams\/task\/complete": "Завършената задача: {{stream.fields.title}}",
+        "Streams\/task\/error": "Грешка по време на: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Входящо съобщение"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ви покани на {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Изберете от контактите си",
+            "selectFromContacts": "Изберете От контакти",
+            "photo": "Направи снимка",
+            "photoInstruction": "Ако лицето, което е сканирало вашия QR код, е пред вас, направете снимка на тях",
+            "to": "До: {{Stream Title}}",
+            "go": "Отивам",
+            "title": "каня",
+            "placeholder": "Мобилен номер или имейл адрес",
+            "orInvite": "Или поканете хора, като използвате:",
+            "QR": "{{ClickOrTap}} за генериране на QR код",
+            "QRtitle": "Сканирайте този QR код",
+            "byEmail": "електронна поща",
+            "byText": "Текст",
+            "byFacebook": "Facebook",
+            "byTwitter": "кикотене"
+        },
+        "email": {
+            "subject": "Хей, провери това",
+            "PleaseVisitLink": "Моля, посетете следната връзка:",
+            "InvitingYou": "Каня ви на {{title}}",
+            "HasInvitedYou": "{{displayName}} ви покани на {{title}}"
+        },
+        "sms": {
+            "content": "Поканени сте в {{title}}. Моля, докоснете {{url}}"
+        },
+        "notice": {
+            "text": "Бяхте поканени. {{ClickOrTap}} тук, за да приеме и да се присъедини."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} публикува <em>{{message.fields.type}}<\/em> съобщение до {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} в {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Поканите се изпращат от нашия номер, които вашите приятели все още не познават. Следвайте бърз текст, за да знаете, че поканата дойде от вас, като ги помолите да кликнат върху връзката.",
+            "confirm": "Поканите се изпращат от нашия номер, които вашите приятели все още не познават. Бихте ли искали да продължите с бърз текст, за да ги уведомите, че поканата е от вас, като ги помолите да кликнат върху връзката.",
+            "check": "Хей, току-що ви изпратих покана за {{app}} приложението. Моля, проверете вашите SMS и кликнете върху връзката!"
+        },
+        "email": {
+            "alert": "Поканите се изпращат от нашия домейн, които вашите приятели все още не разпознават. Следвайте бърз текст, за да знаете, че поканата дойде от вас, като ги помолите да кликнат върху връзката.",
+            "confirm": "Поканите се изпращат от нашия домейн, които вашите приятели все още не разпознават. Бихте ли искали да продължите с бърз текст, за да ги уведомите, че поканата е от вас, като ги помолите да кликнат върху връзката.",
+            "subject": "Получихте ли покана?",
+            "body": "Хей, току-що ви изпратих покана за {{app}} приложението. Моля, проверете електронната си поща и кликнете върху връзката там!"
+        }
+    }
+}

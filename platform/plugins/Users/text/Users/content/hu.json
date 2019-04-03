@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Belépés",
+        "LogOut": "Kijelentkezés"
+    },
+    "activate": {
+        "SetAsPrimary": "Állítsa {{1}} elsődleges {{2}} -ként",
+        "ChoosePassPhrase": "Jelöljön ki egy belépési <strong>kifejezést<\/strong> a bejelentkezéshez. <br> Egy egyszerű kifejezés, amely néhány szóból áll, amit könnyen emlékezni fog.",
+        "ChoosePassPhraseSeeSuggestions": "Válasszon egy jó <strong>átutalási kifejezést,<\/strong> hogy megvédje fiókját. Tekintse meg néhány ötlet javaslatát.",
+        "LogOutAndTryAgain": "Jelentkezzen ki és próbálja újra",
+        "IfYouFeel": "Ha úgy érzi, valami baj van, akkor",
+        "SetIdentifierButtonTitle": "elölről kezdeni"
+    },
+    "session": {
+        "GetStarted": "Fogj neki"
+    },
+    "authorize": {
+        "GetStarted": "Fogj neki",
+        "Authorize": "engedélyez",
+        "TermsLabel": "Elolvastam és egyetértek <br> a {{link}}",
+        "TermsTitle": "feltételek"
+    },
+    "register": {
+        "TermsLabel": "Elfogadom a {{link}}",
+        "TermsTitle": "feltételek"
+    },
+    "notifications": {
+        "title": "Engedély",
+        "prompt": "Szeretné engedélyezni az értesítéseket? Valós idejű frissítéseket fog kapni arról, amit érdekel.",
+        "yes": "Igen",
+        "no": "Nem",
+        "WelcomePleaseVerifyEmail": "Üdvözöljük! Kérem ellenőrizze az email címét.",
+        "WelcomeVerifyEmail": "Üdvözöljük! Erősítsd meg az e-mail címed.",
+        "ForgetPass": "Hé, elfelejtetted a jelszót?"
+    },
+    "usersContacts": {
+        "selectLabel": "Kérjük, válassza ki a címkét.",
+        "inviteUser": "Felhasználó meghívása"
+    },
+    "invalidLanguageSelected": "Érvénytelen nyelv van kiválasztva"
+}

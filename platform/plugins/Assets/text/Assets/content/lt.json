@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Palieskite mokėti"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: apmokestintas {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Dėkojame, kad apmokėjote {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} prenumeravo {{plan.title}}",
+        "YouSubscribedTo": "Jūs prenumeravote {{plan.title}}"
+    }
+}

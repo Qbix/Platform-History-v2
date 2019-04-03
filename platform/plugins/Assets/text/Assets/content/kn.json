@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ಪಾವತಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} ಗಾಗಿ ಚಾರ್ಜ್ ಸಂಸ್ಕರಿಸಲಾಗುತ್ತದೆ",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ಗೆ ನಿಮ್ಮ ಪಾವತಿಯ ಧನ್ಯವಾದಗಳು",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
+        "YouSubscribedTo": "ನೀವು {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿರುವಿರಿ"
+    }
+}

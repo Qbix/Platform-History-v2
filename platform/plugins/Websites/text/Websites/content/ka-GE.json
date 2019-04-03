@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ბმული ხელი შეუწყოს",
+                "startDate": "Დაწყების თარიღი",
+                "startTime": "დაწყების დრო",
+                "endDate": "Დასრულების თარიღი",
+                "endTime": "Დროის დასასრული",
+                "budget": "ბიუჯეტი"
+            },
+            "interests": {
+                "Title": "ინტერესთა დაცვა",
+                "FilterInterests": "დაინტერესდით აკრეფით ..."
+            },
+            "Interest": "ინტერესი",
+            "Location": "მდებარეობა"
+        }
+    }
+}
