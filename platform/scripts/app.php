@@ -168,6 +168,7 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 					$auto_plugins = true;
 					break;
 				case '-p':
+				case '--plugin':
 					if ($i + 1 > $count - 1) {
 						echo "Not enough parameters to $argv[$i] option\n$usage";
 						exit;
