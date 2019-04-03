@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tapez pour payer"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: frais traités pour {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Merci pour votre paiement à {{call 'publisher.displayName'}}.",
+        "SubscribedTo": "{{call 'user.displayName'}} a souscrit à {{plan.title}}",
+        "YouSubscribedTo": "Vous êtes abonné à {{plan.title}}"
+    }
+}

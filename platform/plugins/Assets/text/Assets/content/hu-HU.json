@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Érintse meg a fizetéshez"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: a {{call 'user.displayName'}} -ért feldolgozott díj",
+        "ThankYouForYourPayment": "Köszönjük a {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} feliratkozott a {{plan.title}}",
+        "YouSubscribedTo": "Feliratkozott a {{plan.title}}"
+    }
+}

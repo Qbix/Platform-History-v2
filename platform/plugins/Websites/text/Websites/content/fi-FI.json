@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Linkki edistämiseksi",
+                "startDate": "Aloituspäivämäärä",
+                "startTime": "Aloitusaika",
+                "endDate": "Päättymispäivä",
+                "endTime": "Loppu aika",
+                "budget": "talousarvio"
+            },
+            "interests": {
+                "Title": "Suodata koron mukaan",
+                "FilterInterests": "Aloita kirjoittamalla kiinnostuksen ..."
+            },
+            "Interest": "Kiinnostuksen kohde",
+            "Location": "Sijainti"
+        }
+    }
+}

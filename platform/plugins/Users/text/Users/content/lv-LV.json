@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Pieslēgties",
+        "LogOut": "izlogoties"
+    },
+    "activate": {
+        "SetAsPrimary": "Iestatiet {{1}} kā manu galveno {{2}}",
+        "ChoosePassPhrase": "Izvēlieties pieteikšanās <strong>frāzi,<\/strong> lai pieteiktos. <br> Vienkārša frāze, kas sastāv no dažiem vārdiem, ko jūs viegli atceraties.",
+        "ChoosePassPhraseSeeSuggestions": "Lai aizsargātu savu kontu, izvēlieties labas <strong>caurlaides frāzi<\/strong> . Skatiet ieteikumus dažām idejām.",
+        "LogOutAndTryAgain": "Iziet un mēģiniet vēlreiz",
+        "IfYouFeel": "Ja jūtaties, ka kaut kas noiet greizi, varat",
+        "SetIdentifierButtonTitle": "sākt"
+    },
+    "session": {
+        "GetStarted": "Sāc"
+    },
+    "authorize": {
+        "GetStarted": "Sāc",
+        "Authorize": "Autorizēt",
+        "TermsLabel": "Es izlasīju un piekrītu <br> līdz {{link}}",
+        "TermsTitle": "Noteikumi"
+    },
+    "register": {
+        "TermsLabel": "Es piekrītu {{link}}",
+        "TermsTitle": "Noteikumi"
+    },
+    "notifications": {
+        "title": "Atļauja",
+        "prompt": "Vai vēlaties iespējot paziņojumus? Jūs saņemsiet reāllaika atjauninājumus par lietām, par kurām jums rūp.",
+        "yes": "Jā",
+        "no": "Nē",
+        "WelcomePleaseVerifyEmail": "Laipni lūdzam! Lūdzu, apstipriniet savu e-pasta adresi.",
+        "WelcomeVerifyEmail": "Laipni lūdzam! Pārbaudiet savu e-pasta adresi.",
+        "ForgetPass": "Hei, vai esat aizmirsis savu ieejas frāzi?"
+    },
+    "usersContacts": {
+        "selectLabel": "Lūdzu, atlasiet etiķeti.",
+        "inviteUser": "Uzaicināt lietotāju"
+    },
+    "invalidLanguageSelected": "Izvēlēta nederīga valoda"
+}

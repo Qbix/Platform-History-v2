@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tik om te betaal"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: koste verwerk vir {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Dankie vir jou betaling aan {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ingeteken op {{plan.title}}",
+        "YouSubscribedTo": "Jy is ingeteken op {{plan.title}}"
+    }
+}

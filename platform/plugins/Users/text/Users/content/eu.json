@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "saioa hasi",
+        "LogOut": "Saioa amaitu"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} ezarri nire lehen {{2}} gisa",
+        "ChoosePassPhrase": "Aukeratu <strong>pasahitzarekin<\/strong> saioa hasteko. <br> Esaldi erraz sinple bat gogoratuko duzuen zenbait hitz dituena.",
+        "ChoosePassPhraseSeeSuggestions": "Aukeratu <strong>pasahitz<\/strong> egokia zure kontua babesteko. Ikusi ideia batzuetarako iradokizunak.",
+        "LogOutAndTryAgain": "Itxi saioa eta saiatu berriro",
+        "IfYouFeel": "Zerbait oker zegoela uste baduzu, egin dezakezu",
+        "SetIdentifierButtonTitle": "berriro hasi"
+    },
+    "session": {
+        "GetStarted": "Hasi"
+    },
+    "authorize": {
+        "GetStarted": "Hasi",
+        "Authorize": "baimentzea",
+        "TermsLabel": "Irakurri eta onartzen dut <br> {{link}}",
+        "TermsTitle": "baldintzak"
+    },
+    "register": {
+        "TermsLabel": "Onartzen dut {{link}}}",
+        "TermsTitle": "baldintzak"
+    },
+    "notifications": {
+        "title": "Lizentzia",
+        "prompt": "Jakinarazpenak gaitu nahi al dituzu? Zaintzazko gauzen inguruko denbora errealean eguneratzeak jasoko dituzu.",
+        "yes": "Bai",
+        "no": "Ez",
+        "WelcomePleaseVerifyEmail": "Ongi etorri! Mesedez, egiaztatu zure helbide elektronikoa.",
+        "WelcomeVerifyEmail": "Ongi etorri! Egiaztatu zure helbide elektronikoa.",
+        "ForgetPass": "Hey, ahaztu egin duzu zure pasaesaldia?"
+    },
+    "usersContacts": {
+        "selectLabel": "Hautatu etiketa.",
+        "inviteUser": "Gonbidatu erabiltzailea"
+    },
+    "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da"
+}

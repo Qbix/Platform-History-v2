@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tapikin upang magbayad"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: pinoproseso ang singil para sa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Salamat sa iyong pagbabayad sa {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Nag-subscribe ang {{call 'user.displayName'}} sa {{plan.title}}",
+        "YouSubscribedTo": "Nag-subscribe ka sa {{plan.title}}"
+    }
+}

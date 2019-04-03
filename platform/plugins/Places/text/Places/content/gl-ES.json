@@ -1,0 +1,57 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "dentro de {{1}}"
+    },
+    "units": {
+        "meter": "metro",
+        "meters": "metros",
+        "kilometer": "quilómetro",
+        "kilometers": "kiómetros",
+        "km": "km",
+        "mile": "milla",
+        "miles": "millas",
+        "mi": "mi",
+        "foot": "pé",
+        "feet": "pés",
+        "inches": "pulgadas"
+    },
+    "location": {
+        "interested": "Estou interesado en que as cousas teñan lugar dentro de {{select}}",
+        "update": "Actualiza a miña situación",
+        "prompt": "{{ClickOrTap}} aquí <br> configure o seu <br> localización",
+        "myCurrentLocation": "A miña situación actual",
+        "enterAddress": "Introduza un enderezo",
+        "enterPostcode": "Introduce o teu código postal",
+        "create": {
+            "action": "Engadir localización",
+            "title": "Nova localización",
+            "nameYourLocation": "Nome da súa situación"
+        },
+        "confirm": {
+            "title": "Gardar esta localización?",
+            "message": "¿Pretende empregar esta situación de novo no futuro?",
+            "ok": "Si",
+            "cancel": "Non"
+        },
+        "add": {
+            "title": "Nomear esta localización",
+            "placeholder": "Casa, traballo, etc.",
+            "ok": "Gardar"
+        },
+        "dialog": {
+            "title": "Escolla un lugar"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "¿Hai algunha área dentro desta localización?",
+        "newArea": "Nova área",
+        "promptTitle": "Introduza un nome para a área:",
+        "absent": "Configura o área",
+        "error": "Erro",
+        "exist": "A área xa existe",
+        "addNewArea": "Engadir nova área",
+        "add": "Engadir"
+    }
+}

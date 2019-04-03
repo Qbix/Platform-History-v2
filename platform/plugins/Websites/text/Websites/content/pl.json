@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link do promocji",
+                "startDate": "Data rozpoczęcia",
+                "startTime": "Czas rozpoczęcia",
+                "endDate": "Data zakonczenia",
+                "endTime": "Koniec czasu",
+                "budget": "Budżet"
+            },
+            "interests": {
+                "Title": "Filtruj według odsetek",
+                "FilterInterests": "Zacznij wpisywać zainteresowanie ..."
+            },
+            "Interest": "Zainteresowanie",
+            "Location": "Lokalizacja"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "点按即可付款"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}：已为{{call 'user.displayName'}}处理的费用",
+        "ThankYouForYourPayment": "感谢您付款给{{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}}已订阅{{plan.title}}",
+        "YouSubscribedTo": "您已订阅{{plan.title}}"
+    }
+}

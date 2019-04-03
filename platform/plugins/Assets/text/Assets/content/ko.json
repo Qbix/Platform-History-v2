@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "탭하여 지불"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : {{call 'user.displayName'}}에 청구 된 금액",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}에 지불 해 주셔서 감사합니다.",
+        "SubscribedTo": "{{call 'user.displayName'}}이 (가) {{plan.title}}을 구독했습니다.",
+        "YouSubscribedTo": "{{plan.title}}에 가입했습니다."
+    }
+}

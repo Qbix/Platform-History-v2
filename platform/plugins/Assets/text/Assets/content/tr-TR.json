@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ödemek için hafifçe vurun"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} için ücret işlendi",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} tutarındaki ödemeniz için teşekkür ederiz.",
+        "SubscribedTo": "{{call 'user.displayName'}} abone oldu {{plan.title}}",
+        "YouSubscribedTo": "{{plan.title}} adlı kullanıcıya abone oldunuz."
+    }
+}

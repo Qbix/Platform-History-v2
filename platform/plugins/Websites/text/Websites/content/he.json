@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "קישור לקידום",
+                "startDate": "תאריך התחלה",
+                "startTime": "שעת התחלה",
+                "endDate": "תאריך סיום",
+                "endTime": "שעת סיום",
+                "budget": "תקציב"
+            },
+            "interests": {
+                "Title": "סינון לפי עניין",
+                "FilterInterests": "התחל להקליד עניין ..."
+            },
+            "Interest": "ריבית",
+            "Location": "מקום"
+        }
+    }
+}

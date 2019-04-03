@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Napsauta maksamaan"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: maksun käsittely {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Kiitos maksustasi {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} tilasi {{plan.title}}",
+        "YouSubscribedTo": "Olet tilannut {{plan.title}}"
+    }
+}

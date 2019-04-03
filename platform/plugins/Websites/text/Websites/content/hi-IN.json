@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "बढ़ावा देने के लिए लिंक",
+                "startDate": "आरंभ करने की तिथि",
+                "startTime": "समय शुरू",
+                "endDate": "अंतिम तिथि",
+                "endTime": "अंतिम समय",
+                "budget": "बजट"
+            },
+            "interests": {
+                "Title": "ब्याज द्वारा फ़िल्टर करें",
+                "FilterInterests": "ब्याज लिखना शुरू करें ..."
+            },
+            "Interest": "ब्याज",
+            "Location": "स्थान"
+        }
+    }
+}
