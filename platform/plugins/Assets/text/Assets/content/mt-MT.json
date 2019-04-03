@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tektek biex tħallas"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ħlas ipproċessat għal {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Grazzi tal-ħlas tiegħek lil {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} sottoskritt għal {{plan.title}}",
+        "YouSubscribedTo": "Inti ġejt sottoskritt għal {{plan.title}}"
+    }
+}

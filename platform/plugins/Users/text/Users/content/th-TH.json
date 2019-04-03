@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "เข้าสู่ระบบ",
+        "LogOut": "ออกจากระบบ"
+    },
+    "activate": {
+        "SetAsPrimary": "ตั้ง {{1}} เป็นหลักของฉัน {{1,000}}",
+        "ChoosePassPhrase": "เลือก <strong>วลีรหัสผ่าน<\/strong> เพื่อเข้าสู่ระบบด้วย <br> วลีง่ายๆประกอบด้วยคำสองสามคำที่คุณจะจำได้ง่าย",
+        "ChoosePassPhraseSeeSuggestions": "เลือก <strong>วลีรหัสผ่าน<\/strong> ที่ดีเพื่อปกป้องบัญชีของคุณ ดูคำแนะนำสำหรับแนวคิดบางอย่าง",
+        "LogOutAndTryAgain": "ออกจากระบบแล้วลองอีกครั้ง",
+        "IfYouFeel": "หากคุณรู้สึกว่ามีบางอย่างผิดปกติคุณสามารถ",
+        "SetIdentifierButtonTitle": "เริ่มต้นใหม่"
+    },
+    "session": {
+        "GetStarted": "เริ่ม"
+    },
+    "authorize": {
+        "GetStarted": "เริ่ม",
+        "Authorize": "อนุญาต",
+        "TermsLabel": "ฉันได้อ่านและยอมรับ <br> ถึง {{link}}",
+        "TermsTitle": "ข้อตกลงและเงื่อนไข"
+    },
+    "register": {
+        "TermsLabel": "ฉันยอมรับ {{link}}",
+        "TermsTitle": "ข้อตกลงและเงื่อนไข"
+    },
+    "notifications": {
+        "title": "การอนุญาต",
+        "prompt": "คุณต้องการเปิดใช้งานการแจ้งเตือนหรือไม่? คุณจะได้รับการอัปเดตตามเวลาจริงเกี่ยวกับสิ่งที่คุณสนใจ",
+        "yes": "ใช่",
+        "no": "ไม่",
+        "WelcomePleaseVerifyEmail": "ยินดีต้อนรับ! โปรดยืนยันที่อยู่อีเมลของคุณ",
+        "WelcomeVerifyEmail": "ยินดีต้อนรับ! ยืนยันที่อยู่อีเมลของคุณ.",
+        "ForgetPass": "เฮ้คุณลืมข้อความรหัสผ่านของคุณหรือไม่"
+    },
+    "usersContacts": {
+        "selectLabel": "โปรดเลือกป้ายกำกับ",
+        "inviteUser": "เชิญผู้ใช้"
+    },
+    "invalidLanguageSelected": "เลือกภาษาไม่ถูกต้อง"
+}

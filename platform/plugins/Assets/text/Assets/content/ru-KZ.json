@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Нажмите, чтобы оплатить"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: плата за обработку {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Спасибо за ваш платеж {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} подписан на {{plan.title}}",
+        "YouSubscribedTo": "Вы подписаны на {{plan.title}}"
+    }
+}

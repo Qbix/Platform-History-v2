@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "भुगतान करने के लिए टैप करें"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: शुल्क {{call 'user.displayName'}} के लिए संसाधित",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} आपके भुगतान के लिए धन्यवाद",
+        "SubscribedTo": "{{९९९}} {{१०००}} की सदस्यता ली",
+        "YouSubscribedTo": "आपको {{plan.title}} की सदस्यता दी गई है"
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "log masuk",
+        "LogOut": "log keluar"
+    },
+    "activate": {
+        "SetAsPrimary": "Tetapkan {{1}} sebagai {{2}} utama saya",
+        "ChoosePassPhrase": "Pilih <strong>ungkapan lulus<\/strong> untuk log masuk. <br> Frasa ringkas yang mengandungi beberapa perkataan yang anda akan mudah ingat.",
+        "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa laluan yang<\/strong> baik untuk melindungi akaun anda. Lihat cadangan untuk beberapa idea.",
+        "LogOutAndTryAgain": "Log Keluar dan Cuba Lagi",
+        "IfYouFeel": "Jika anda rasa ada yang salah, anda boleh",
+        "SetIdentifierButtonTitle": "mula semula"
+    },
+    "session": {
+        "GetStarted": "Bermula"
+    },
+    "authorize": {
+        "GetStarted": "Bermula",
+        "Authorize": "Kebenaran",
+        "TermsLabel": "Saya telah membaca dan bersetuju <br> kepada {{link}}",
+        "TermsTitle": "Terma"
+    },
+    "register": {
+        "TermsLabel": "Saya menerima {{link}}",
+        "TermsTitle": "Terma"
+    },
+    "notifications": {
+        "title": "Kebenaran",
+        "prompt": "Adakah anda mahu mendayakan pemberitahuan? Anda akan menerima kemas kini masa nyata mengenai perkara yang anda sayangi.",
+        "yes": "Ya",
+        "no": "Tidak",
+        "WelcomePleaseVerifyEmail": "Selamat datang! Sila sahkan alamat e-mel anda.",
+        "WelcomeVerifyEmail": "Selamat datang! Mengesahkan alamat e-mel anda.",
+        "ForgetPass": "Hei, adakah anda melupakan frasa laluan anda?"
+    },
+    "usersContacts": {
+        "selectLabel": "Sila pilih label.",
+        "inviteUser": "Jemput Pengguna"
+    },
+    "invalidLanguageSelected": "Bahasa tidak sah dipilih"
+}

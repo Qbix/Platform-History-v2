@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "s&#39;identifier",
+        "LogOut": "Connectez - Out"
+    },
+    "activate": {
+        "SetAsPrimary": "Définir {{1}} comme primaire {{2}}",
+        "ChoosePassPhrase": "Choisissez une <strong>phrase de passe<\/strong> avec laquelle vous connecter. <br> Une phrase simple composée de quelques mots dont vous vous souviendrez facilement.",
+        "ChoosePassPhraseSeeSuggestions": "Choisissez une bonne <strong>phrase de passe<\/strong> pour protéger votre compte. Voir les suggestions pour quelques idées.",
+        "LogOutAndTryAgain": "Déconnectez-vous et essayez à nouveau",
+        "IfYouFeel": "Si vous sentez que quelque chose a mal tourné, vous pouvez",
+        "SetIdentifierButtonTitle": "recommencer"
+    },
+    "session": {
+        "GetStarted": "Commencer"
+    },
+    "authorize": {
+        "GetStarted": "Commencer",
+        "Authorize": "Autoriser",
+        "TermsLabel": "J&#39;ai lu et accepté <br> au {{link}}",
+        "TermsTitle": "termes"
+    },
+    "register": {
+        "TermsLabel": "J&#39;accepte les {{link}}",
+        "TermsTitle": "termes"
+    },
+    "notifications": {
+        "title": "Autorisation",
+        "prompt": "Voulez-vous activer les notifications? Vous recevrez des mises à jour en temps réel sur des sujets qui vous intéressent.",
+        "yes": "Oui",
+        "no": "Non",
+        "WelcomePleaseVerifyEmail": "Bienvenue! Veuillez vérifier votre adresse e-mail.",
+        "WelcomeVerifyEmail": "Bienvenue! Vérifiez votre adresse email.",
+        "ForgetPass": "Hé, tu as oublié ton mot de passe?"
+    },
+    "usersContacts": {
+        "selectLabel": "Veuillez sélectionner une étiquette.",
+        "inviteUser": "Inviter un utilisateur"
+    },
+    "invalidLanguageSelected": "Langue invalide sélectionnée"
+}

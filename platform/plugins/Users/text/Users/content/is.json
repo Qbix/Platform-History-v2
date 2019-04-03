@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "skrá inn",
+        "LogOut": "að skrá þig út"
+    },
+    "activate": {
+        "SetAsPrimary": "Setjið {{1}} sem aðal {{2}} minn",
+        "ChoosePassPhrase": "Veldu <strong>lykilorð<\/strong> til að skrá þig inn með. <br> Einföld setning sem samanstendur af nokkrum orðum sem þú munt auðveldlega muna.",
+        "ChoosePassPhraseSeeSuggestions": "Veldu góðan <strong>aðgangsorð<\/strong> til að vernda reikninginn þinn. Sjá tillögur fyrir nokkrar hugmyndir.",
+        "LogOutAndTryAgain": "Skráðu þig út og reyndu aftur",
+        "IfYouFeel": "Ef þér finnst eitthvað fór úrskeiðis geturðu það",
+        "SetIdentifierButtonTitle": "byrja aftur"
+    },
+    "session": {
+        "GetStarted": "Byrja"
+    },
+    "authorize": {
+        "GetStarted": "Byrja",
+        "Authorize": "Leyfa",
+        "TermsLabel": "Ég hef lesið og sammála <br> til {{link}}",
+        "TermsTitle": "Skilmálar"
+    },
+    "register": {
+        "TermsLabel": "Ég samþykki {{link}}",
+        "TermsTitle": "Skilmálar"
+    },
+    "notifications": {
+        "title": "Leyfi",
+        "prompt": "Viltu virkja tilkynningar? Þú færð rauntíma uppfærslur um það sem þér er annt um.",
+        "yes": "Já",
+        "no": "Nr",
+        "WelcomePleaseVerifyEmail": "Velkominn! Vinsamlegast staðfestu netfangið þitt.",
+        "WelcomeVerifyEmail": "Velkominn! Staðfestu netfangið þitt.",
+        "ForgetPass": "Hey, hefur þú gleymt lykilorðinu þínu?"
+    },
+    "usersContacts": {
+        "selectLabel": "Vinsamlegast veldu merkið.",
+        "inviteUser": "Bjóddu notanda"
+    },
+    "invalidLanguageSelected": "Ógilt tungumál valið"
+}

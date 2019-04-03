@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Saite, lai veicinātu",
+                "startDate": "Sākuma datums",
+                "startTime": "Sākuma laiks",
+                "endDate": "Beigu datums",
+                "endTime": "Beigu laiks",
+                "budget": "Budžets"
+            },
+            "interests": {
+                "Title": "Filtrēt pēc procentiem",
+                "FilterInterests": "Sāciet rakstīt interesi ..."
+            },
+            "Interest": "Interese",
+            "Location": "Atrašanās vieta"
+        }
+    }
+}
