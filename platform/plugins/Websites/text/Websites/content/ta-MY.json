@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ஊக்குவிக்க இணைப்பு",
+                "startDate": "தொடக்க தேதி",
+                "startTime": "ஆரம்பிக்கும் நேரம்",
+                "endDate": "கடைசி தேதி",
+                "endTime": "முடிவு நேரம்",
+                "budget": "பட்ஜெட்"
+            },
+            "interests": {
+                "Title": "ஆர்வத்தை வடிகட்டவும்",
+                "FilterInterests": "ஆர்வம் தட்டச்சு செய்யத் தொடங்குங்கள் ..."
+            },
+            "Interest": "ஆர்வம்",
+            "Location": "இருப்பிடம்"
+        }
+    }
+}

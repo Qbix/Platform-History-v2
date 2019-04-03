@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Πατήστε για να πληρώσετε"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: χρέωση που υποβλήθηκε σε επεξεργασία για {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Σας ευχαριστούμε για την πληρωμή σας στην {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} εγγραφεί στο {{plan.title}}",
+        "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}"
+    }
+}

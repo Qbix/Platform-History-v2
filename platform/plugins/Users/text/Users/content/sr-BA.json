@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Пријавите се",
+        "LogOut": "одјавити се"
+    },
+    "activate": {
+        "SetAsPrimary": "Постави {{1}} као моју примарну {{2}}",
+        "ChoosePassPhrase": "Изаберите <strong>лозинку<\/strong> за пријаву са. <br> Једноставна фраза која се састоји од неколико речи које ћете лако запамтити.",
+        "ChoosePassPhraseSeeSuggestions": "Изаберите добру <strong>фразу<\/strong> да бисте заштитили свој налог. Погледајте приједлоге за неке идеје.",
+        "LogOutAndTryAgain": "Одјавите се и покушајте поново",
+        "IfYouFeel": "Ако мислите да је нешто пошло по злу, можете",
+        "SetIdentifierButtonTitle": "почети испочетка"
+    },
+    "session": {
+        "GetStarted": "Почети"
+    },
+    "authorize": {
+        "GetStarted": "Почети",
+        "Authorize": "Аутхоризе",
+        "TermsLabel": "Прочитао сам и слажем се <br> до {{link}}",
+        "TermsTitle": "Услови"
+    },
+    "register": {
+        "TermsLabel": "Прихватам {{link}}",
+        "TermsTitle": "Услови"
+    },
+    "notifications": {
+        "title": "Дозвола",
+        "prompt": "Да ли желите да омогућите обавештења? Примићете ажурирања у стварном времену о стварима до којих вам је стало.",
+        "yes": "да",
+        "no": "Не",
+        "WelcomePleaseVerifyEmail": "Добродошли! Потврдите своју адресу е-поште.",
+        "WelcomeVerifyEmail": "Добродошли! Потврдите Вашу емаил адресу.",
+        "ForgetPass": "Хеј, јеси ли заборавио своју лозинку?"
+    },
+    "usersContacts": {
+        "selectLabel": "Изаберите ознаку.",
+        "inviteUser": "Позови корисника"
+    },
+    "invalidLanguageSelected": "Изабран је неважећи језик"
+}

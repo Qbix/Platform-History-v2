@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Tengill til að kynna",
+                "startDate": "Upphafsdagur",
+                "startTime": "Byrjunartími",
+                "endDate": "Loka dagsetning",
+                "endTime": "Lokatími",
+                "budget": "Fjárhagsáætlun"
+            },
+            "interests": {
+                "Title": "Sía eftir vexti",
+                "FilterInterests": "Byrjaðu að slá inn áhuga ..."
+            },
+            "Interest": "Vextir",
+            "Location": "Staðsetning"
+        }
+    }
+}

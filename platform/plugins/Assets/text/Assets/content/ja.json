@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "支払うためにタップ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}：{{call 'user.displayName'}}の請求処理済み",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}へのお支払いいただきありがとうございます",
+        "SubscribedTo": "{{call 'user.displayName'}}は{{plan.title}}を購読しています",
+        "YouSubscribedTo": "あなたは{{plan.title}}を購読しています"
+    }
+}

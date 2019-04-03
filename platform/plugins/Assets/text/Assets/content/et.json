@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Puudutage maksmiseks"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tasu töödeldi {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Täname teid makse eest {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} tellis {{plan.title}}",
+        "YouSubscribedTo": "Olete tellinud {{plan.title}}"
+    }
+}

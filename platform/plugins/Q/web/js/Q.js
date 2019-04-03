@@ -5726,7 +5726,13 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 				}
 			});
 		}
-	}, {"method": "post", "skipNonce": true});
+	}, {
+		"method": "post",
+		"skipNonce": true,
+		"fields": {
+			"Q.startNewSession": true
+		}
+	});
 };
 
 /**

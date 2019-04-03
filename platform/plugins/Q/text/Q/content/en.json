@@ -6,6 +6,10 @@
 		"404": "Not found: {{url}}",
 		"0": "Request interrupted"
 	},
+	"nonce": {
+		"sameDomain": "Session expired. Refresh the page and try again.",
+		"otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+	},
 	"words": {
 		"tap": "tap",
 		"click": "click",

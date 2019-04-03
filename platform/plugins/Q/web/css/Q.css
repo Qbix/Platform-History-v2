@@ -611,6 +611,9 @@ html.Q_scanning body > .Q_scanning_code {
 	width: 100%;
 	height: 100%;
 	border-sizing: border-box;
+	position: relative;
+	min-width: 50px;
+	min-height: 50px;
 }
 .Q_scanning.Q_fullscreen_dialog .Q_dialog_content {
 	overflow: hidden;

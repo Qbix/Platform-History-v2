@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link om te promoten",
+                "startDate": "Begin datum",
+                "startTime": "Starttijd",
+                "endDate": "Einddatum",
+                "endTime": "Eindtijd",
+                "budget": "Begroting"
+            },
+            "interests": {
+                "Title": "Filteren op interesse",
+                "FilterInterests": "Begin een interesse te typen ..."
+            },
+            "Interest": "Interesseren",
+            "Location": "Plaats"
+        }
+    }
+}

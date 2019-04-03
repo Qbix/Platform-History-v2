@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ödəniş üçün dokunun"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} üçün işlənilən ödəniş",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} üçün ödəniş etdiyiniz üçün təşəkkür edirik",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} səhifəsinə abunə",
+        "YouSubscribedTo": "{{plan.title}} səhifəsinə abunə oldunuz"
+    }
+}

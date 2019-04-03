@@ -1,0 +1,95 @@
+{
+    "preview": {
+        "NewItemTitle": "નવી વસ્તુ"
+    },
+    "labels": {
+        "Streams\/invited": "મેં આમંત્રિત કર્યા છે તે લોકો",
+        "Streams\/invitedMe": "મને કોણ આમંત્રણ આપ્યું"
+    },
+    "interests": {
+        "Filter": "તમે શું માણો છો?",
+        "CanAdd": "જો તમે જે શોધી રહ્યાં છો તે હજી પણ તમને મળી શકતું નથી, તો તમે નીચે નવી રુચિ ઉમેરી શકો છો:",
+        "TrySynonyms": "શું તે જોવા નથી? કેટલાક સમાનાર્થી પ્રયાસ કરો.",
+        "AddUnderCategory": "શ્રેણી હેઠળ ઉમેરો ...",
+        "Other": "અન્ય",
+        "Unlisted": "અસૂચિબદ્ધ"
+    },
+    "chat": {
+        "flaggedForAdminReview": "એડમિન સમીક્ષા માટે સંદેશ ફ્લેગ કરવામાં આવ્યો છે. અનફ્લેગ કરવા માટે ફરીથી ટેપ કરો.",
+        "noOneSaid": "કોઈએ કશું કહ્યું નથી",
+        "closeChatButton": "ચેટ બંધ કરો",
+        "closeChatConfirmTitle": "આ ચેટ બંધ કરીએ?",
+        "closeChatConfirm": "શું તમે ખરેખર આ ચેટ બંધ કરવા માંગો છો?",
+        "closeChatConfirmYes": "હા",
+        "closeChatConfirmNo": "ના",
+        "earlierComments": "અગાઉની ટિપ્પણીઓ"
+    },
+    "notifications": {
+        "*": "સંદેશ {{& message.fields.type}} થી {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} કહ્યું:",
+        "Streams\/changed": "{{stream.fields.title}} માં ફેરફારો",
+        "Streams\/invite": "તમે {{& stream.fields.title}} પર આમંત્રિત થયા હતા",
+        "Streams\/announcement": "{{& streams.fields.title}} માં ઘોષણા",
+        "Streams\/access": "{{&call 'avatar.displayName'}} એ સ્ટ્રિમ એક્સેસ બદલ્યો",
+        "Streams\/chat\/edit": "ચેટ સંદેશ સંપાદિત",
+        "Streams\/chat\/remove": "ચેટ સંદેશ દૂર કર્યો",
+        "Streams\/closed": "{{stream.fields.title}} બંધ કરવામાં આવ્યું છે",
+        "Streams\/task\/progress": "{{stream.fields.title}} પર પ્રગતિ",
+        "Streams\/task\/complete": "કાર્ય પૂર્ણ થયું: {{stream.fields.title}}",
+        "Streams\/task\/error": "દરમિયાન ભૂલ: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: આવનારી સંદેશ"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} તમને {{inviteUrl}} માં આમંત્રિત કર્યા છે",
+        "dialog": {
+            "chooseFromContacts": "તમારા સંપર્કોમાંથી પસંદ કરો",
+            "selectFromContacts": "સંપર્કોમાંથી પસંદ કરો",
+            "photo": "એક ફોટો લો",
+            "photoInstruction": "જો તમારો QR કોડ સ્કેન કરનાર વ્યક્તિ તમારી સામે છે, તો તેનો ફોટો લો",
+            "to": "આના પર: {{Stream Title}}",
+            "go": "જાવ",
+            "title": "આમંત્રિત",
+            "placeholder": "મોબાઇલ નંબર અથવા ઇમેઇલ સરનામું",
+            "orInvite": "અથવા ઉપયોગ કરીને લોકોને આમંત્રિત કરો:",
+            "QR": "ક્યુઆર કોડ જનરેટ કરવા માટે {{ClickOrTap}}",
+            "QRtitle": "આ QR કોડ સ્કેન કરો",
+            "byEmail": "ઇમેઇલ",
+            "byText": "ટેક્સ્ટ",
+            "byFacebook": "ફેસબુક",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "અરે, આ તપાસો",
+            "PleaseVisitLink": "કૃપા કરીને નીચેની લિંકની મુલાકાત લો:",
+            "InvitingYou": "હું તમને {{title}} પર આમંત્રિત કરું છું",
+            "HasInvitedYou": "{{displayName}} એ તમને {{title}} પર આમંત્રિત કર્યા છે"
+        },
+        "sms": {
+            "content": "તમને {{title}} પર આમંત્રિત કરવામાં આવ્યા છે. કૃપા કરીને {{url}} ને ટેપ કરો"
+        },
+        "notice": {
+            "text": "તમને આમંત્રણ આપવામાં આવ્યું છે. {{ClickOrTap}} અહીં સ્વીકારવા અને જોડાવા માટે."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} એ <em>{{message.fields.type}}<\/em> સંદેશ {{stream.fields.title}} પર પોસ્ટ કર્યો"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} માં {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "આમંત્રણો અમારી સંખ્યામાંથી મોકલવામાં આવે છે, જે તમારા મિત્રો હજુ સુધી ઓળખી શકતા નથી. તેમને આમંત્રિત કરવા માટે એક ઝડપી ટેક્સ્ટનો ઉપયોગ કરો, તેમને આમંત્રણ આપો, તેમને લિંક પર ક્લિક કરવા માટે પૂછો.",
+            "confirm": "આમંત્રણો અમારી સંખ્યામાંથી મોકલવામાં આવે છે, જે તમારા મિત્રો હજુ સુધી ઓળખી શકતા નથી. શું તમે કોઈ ઝડપી ટેક્સ્ટને અનુસરવાનું પસંદ કરો છો જેથી તેમને જણાવવામાં આવે કે આમંત્રણ તમારા તરફથી આવ્યું છે, તેમને લિંક પર ક્લિક કરવાનું કહેવાનું છે.",
+            "check": "અરે, મેં હમણાં જ તમને {{app}} એપ્લિકેશન પર આમંત્રણ મોકલ્યું છે. કૃપા કરીને તમારા એસએમએસ તપાસો અને લિંકને ક્લિક કરો!"
+        },
+        "email": {
+            "alert": "આમંત્રણો અમારા ડોમેનથી મોકલવામાં આવે છે, જે તમારા મિત્રો હજુ સુધી ઓળખી શકતા નથી. તેમને આમંત્રિત કરવા માટે એક ઝડપી ટેક્સ્ટનો ઉપયોગ કરો, તેમને આમંત્રણ આપો, તેમને લિંક પર ક્લિક કરવા માટે પૂછો.",
+            "confirm": "આમંત્રણો અમારા ડોમેનથી મોકલવામાં આવે છે, જે તમારા મિત્રો હજુ સુધી ઓળખી શકતા નથી. શું તમે કોઈ ઝડપી ટેક્સ્ટને અનુસરવાનું પસંદ કરો છો જેથી તેમને જણાવવામાં આવે કે આમંત્રણ તમારા તરફથી આવ્યું છે, તેમને લિંક પર ક્લિક કરવાનું કહેવાનું છે.",
+            "subject": "શું તમે આમંત્રણ મેળવ્યું?",
+            "body": "અરે, મેં હમણાં જ તમને {{app}} એપ્લિકેશન પર આમંત્રણ મોકલ્યું છે. કૃપા કરીને તમારું ઇમેઇલ તપાસો અને ત્યાંની લિંકને ક્લિક કરો!"
+        }
+    }
+}

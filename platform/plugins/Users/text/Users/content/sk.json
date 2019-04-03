@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Prihlásiť sa",
+        "LogOut": "odhlásiť sa"
+    },
+    "activate": {
+        "SetAsPrimary": "Nastaviť {{1}} ako môj primárny {{2}}",
+        "ChoosePassPhrase": "Vyberte prihlasovaciu <strong>frázu,<\/strong> do ktorej sa chcete prihlásiť. <br> Jednoduchá fráza pozostávajúca z niekoľkých slov, ktoré si ľahko spomeniete.",
+        "ChoosePassPhraseSeeSuggestions": "Vyberte si dobrú <strong>frázu<\/strong> na ochranu svojho účtu. Pozrite si návrhy na niektoré nápady.",
+        "LogOutAndTryAgain": "Odhláste sa a skúste znova",
+        "IfYouFeel": "Ak máte pocit, že sa niečo pokazilo, môžete",
+        "SetIdentifierButtonTitle": "začať odznova"
+    },
+    "session": {
+        "GetStarted": "Začať"
+    },
+    "authorize": {
+        "GetStarted": "Začať",
+        "Authorize": "Povoliť",
+        "TermsLabel": "Čítal som a súhlasím <br> do {{link}}",
+        "TermsTitle": "podmienky"
+    },
+    "register": {
+        "TermsLabel": "Súhlasím s {{link}}",
+        "TermsTitle": "podmienky"
+    },
+    "notifications": {
+        "title": "dovolenia",
+        "prompt": "Chcete povoliť upozornenia? Dostanete aktuálne informácie o veciach, na ktorých vám záleží.",
+        "yes": "Áno",
+        "no": "žiadny",
+        "WelcomePleaseVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
+        "WelcomeVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
+        "ForgetPass": "Hej, zabudli ste na svoju prístupovú frázu?"
+    },
+    "usersContacts": {
+        "selectLabel": "Vyberte menovku.",
+        "inviteUser": "Pozvať používateľa"
+    },
+    "invalidLanguageSelected": "Vybrali ste neplatný jazyk"
+}
