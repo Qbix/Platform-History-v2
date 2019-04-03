@@ -500,7 +500,7 @@ function _connectSockets(refresh) {
 			});
 		});
 	if (refresh) {
-		Streams.refresh();
+		_debouncedRefresh();
 	}
 }
 
@@ -7408,7 +7408,7 @@ function _scheduleUpdate() {
 			// Streams.refresh.options.minSeconds should prevent the update
 			// from happening too frequently
 			if (!Streams.refresh.options.preventAutomatic) {
-				Streams.refresh();
+				_debouncedRefresh();
 			}
 		}
 		_scheduleUpdate.lastTime = now;

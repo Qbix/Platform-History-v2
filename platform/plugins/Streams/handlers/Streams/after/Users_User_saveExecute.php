@@ -20,6 +20,20 @@ function Streams_after_Users_User_saveExecute($params)
 		$updates['icon'] = $modifiedFields['icon'];
 	}
 
+	// if we only modified some inconsequential fields, no need to proceed
+	$mf = $modifiedFields;
+	unset($mf['updatedTime']);
+	unset($mf['signedUpWith']);
+	unset($mf['pincodeHash']);
+	unset($mf['emailAddressPending']);
+	unset($mf['mobileNumberPending']);
+	unset($mf['sessionId']);
+	unset($mf['sessionCount']);
+	unset($mf['insertedTime']);
+	if (empty($mf)) {
+		return;
+	}
+
 	// some standard values
 	if (!empty(Streams::$cache['fullName'])) {
 		$fullName = Streams::$cache['fullName'];
@@ -33,6 +47,9 @@ function Streams_after_Users_User_saveExecute($params)
 		'Streams/user/firstName' => $firstName,
 		'Streams/user/lastName' => $lastName
 	);
+	if (!empty($updates['icon'])) {
+		$values['Streams/user/icon'] = $modifiedFields['icon'] = $updates['icon'];
+	}
 	if (!$user->get('leaveDefaultIcon', false)
 	and !$user->get('skipIconSearch', false)
 	and $search = Q_Config::get('Users', 'icon', 'search', array())
