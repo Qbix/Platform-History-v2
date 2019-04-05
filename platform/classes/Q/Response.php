@@ -214,6 +214,10 @@ class Q_Response
 	 */
 	static function setNotice($key, $notice, $options = array())
 	{
+		if (empty($notice)) {
+			return;
+		}
+
 		if (!is_array($options)) {
 			$options = array();
 		}
