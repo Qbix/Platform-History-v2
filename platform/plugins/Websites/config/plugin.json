@@ -140,7 +140,7 @@
 				},
 				"defaults": {
 					"title": "Web page",
-					"icon": "{{Streams}}/img/icons/files/_page",
+					"icon": "{{Websites}}/img/icons/Websites/webpage",
 					"writeLevel": 23
 				},
 				"messages": {

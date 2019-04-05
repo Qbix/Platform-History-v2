@@ -75,74 +75,30 @@
 					}
 
 					$button.addClass('Q_working');
-					Q.req('Websites/scrape', "data", function (err, response) {
+					Q.req('Websites/scrape', ['publisherId', 'streamName', 'result'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg) {
 							$button.removeClass('Q_working');
 							return Q.alert(msg);
 						}
 
-						var data = response.slots.data;
+						Q.Streams.get(response.slots.publisherId, response.slots.streamName, function (err) {
+							$button.removeClass('Q_working');
 
-						// get or create interest stream and relate Websites/webpage stream to interest stream
-						var port = Q.getObject(['url', 'port'], data);
-						var interestTitle = "Domains: " + Q.getObject(['url', 'host'], data) + (port ? ':' + port : '');
-						Q.Streams.Interests.add(interestTitle, function (err, response) {
-							var msg = Q.firstErrorMessage(err, response && response.errors);
+							var msg = Q.firstErrorMessage(err);
 							if (msg) {
-								$button.removeClass('Q_working');
 								return Q.alert(msg);
 							}
 
-							var publisherId = response.slots.publisherId;
-							var streamName = response.slots.streamName;
+							state.publisherId = this.fields.publisherId;
+							state.streamName = this.fields.name;
 
-							// create Websites/webpage stream
-							Q.Streams.create({
-								title: data.title || interestTitle,
-								//icon: data.icon,
-								content: data.description,
-								type: 'Websites/webpage',
-								attributes: {
-									url: url,
-									icon: Q.getObject(["icon"], data) || null,
-									host: Q.getObject(["url", "host"], data),
-									port: Q.getObject(["url", "port"], data) || null,
-									copyright: Q.getObject(["copyright"], data) || null,
-									interest: {
-										publisherId: publisherId,
-										streamName: streamName,
-										title: interestTitle
-									},
-									interestTitle: interestTitle // for compatibility with Streams/chat/preview tool
-								}
-							}, function (err) {
-								var msg = Q.firstErrorMessage(err);
-								if (msg) {
-									$button.removeClass('Q_working');
-									return Q.alert(msg);
-								}
+							tool.preview();
 
-								var webpageStream = this;
-
-
-								// relate to interest stream
-								webpageStream.relateTo('Websites/webpage', publisherId, streamName, function (err) {
-									if (err) {
-										console.warn('Error with relate to interest stream', err);
-									}
-
-									state.publisherId = webpageStream.fields.publisherId;
-									state.streamName = webpageStream.fields.name;
-
-									tool.preview();
-
-									Q.handle(state.onCreate, tool, [webpageStream]);
-								});
-							});
-
+							Q.handle(state.onCreate, tool, [this]);
 						});
 					}, {
+						method: 'post',
 						fields: {
 							url: url
 						}
@@ -188,7 +144,7 @@
 						field: 'content',
 						inplaceType: 'textarea'
 					}),
-					interest: Q.getObject('title', stream.getAttribute("interest")),
+					interest: Q.getObject('title', stream.getAttribute("interestTitle")),
 					src: stream.iconUrl('80'),
 					url: '<a href="' + url + '" target="_blank">' + url + '</a>',
 					text: tool.text.webpage
