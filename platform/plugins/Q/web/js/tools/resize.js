@@ -19,6 +19,7 @@
 
         {
             active: false,
+	        keepRatioBasedOnElement: null,
             appliedRecently: false,
             onCreate: new Q.Event(),
             onUpdate: new Q.Event(),
@@ -186,6 +187,7 @@
                         if(_oldx == null) _oldx = e.pageX;
                         if(_oldy == null) _oldy = e.pageY;
 
+
                         var elementWidth, elementHeight, action;
 
                         if(_handlerPosition == 'bottomright') {
@@ -238,27 +240,53 @@
                             }
 
                         }
+	                    console.log('%c resizing1', 'background:green', elementWidth,elementHeight, _ratio);
+	                    if(tool.state.keepRatioBasedOnElement != null) {
+		                    var baseEl = tool.state.keepRatioBasedOnElement;
+		                    var srcWidth = baseEl.videoWidth;
+		                    var srcHeight = baseEl.videoHeight;
+		                    var ratio = srcWidth / srcHeight;
+		                    var currentSize = baseEl.getBoundingClientRect();
+
+		                    if(ratio < 1) {
+			                    elementWidth = Math.floor(elementHeight * ratio);
+		                    } else {
+			                    var newElHeight = Math.floor(elementWidth / ratio);
+			                    console.log('%c resizing1', 'background:green', elementHeight, newElHeight,  currentSize.height, ratio);
+			                    elementHeight = newElHeight + 50;
+
+		                    }
+	                    } else {
+		                    if(_ratio < 1) {
+			                    elementWidth = Math.floor(elementHeight * _ratio);
+
+		                    }
+		                    else {
+			                    elementHeight = Math.floor(elementWidth / _ratio);
+		                    }
+	                    }
 
 
-                        if(_ratio < 1) {
-                            elementWidth = parseInt(elementHeight * _ratio);
 
-                        }
-                        else {
-                            elementHeight = parseInt(elementWidth / _ratio);
-                        }
 
-                        if(elementWidth <= _latestWidthValue || elementHeight <= _latestHeightValue) {
+
+
+
+	                    if(elementWidth <= _latestWidthValue || elementHeight <= _latestHeightValue) {
                             action = 'reduce';
                         } else {
                             action = 'increase';
                         }
+                        console.log('action', action)
                         if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
-                            return;
+	                        console.log('%c STOP', 'background:red;color:white;')
+
+	                        return;
                         }
 
                         if(action == 'increase' && elementToMove != _elementToResize && (elementToMove.offsetHeight >= document.body.offsetHeight || elementToMove.offsetWidth >= document.body.offsetWidth)) {
-                            return;
+	                        console.log('%c STOP2', 'background:red;color:white;')
+	                        return;
                         }
 
                         if(elementToMove.style.position == 'fixed') {
@@ -450,7 +478,9 @@
 
 
                         if(_latestScaleValue == null) _latestScaleValue = 1;
-                        var scale = (delta > 0) ? _latestScaleValue + 0.1 : _latestScaleValue - 0.1
+                        var scale = (delta > 0) ? _latestScaleValue + 0.1 : _latestScaleValue - 0.1;
+
+
                         var oldWidth = elRect.width;
                         var oldHeight = elRect.height;
                         _elementToResize.style.transform = 'scale(' + scale + ')';
@@ -472,8 +502,26 @@
                             elementToMove.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';
                         }
 
-                        _elementToResize.style.width = elRect.width + 'px';
-                        _elementToResize.style.height = elRect.height + 'px';
+                        var elementWidth = Math.floor(elRect.width);
+                        var elementHeight = Math.floor(elRect.height);
+	                    if(tool.state.keepRatioBasedOnElement != null) {
+		                    var baseEl = tool.state.keepRatioBasedOnElement;
+		                    var srcWidth = baseEl.videoWidth;
+		                    var srcHeight = baseEl.videoHeight;
+		                    var ratio = srcWidth / srcHeight;
+
+		                    if(ratio < 1) {
+			                    elementWidth = Math.floor(elementHeight * ratio);
+		                    } else {
+			                    var newElHeight = Math.floor(elementWidth / ratio);
+			                    elementHeight = newElHeight + 50;
+
+		                    }
+	                    }
+	                    console.log('%c resizing1', 'background:green', elementWidth, elementHeight);
+
+                        _elementToResize.style.width = elementWidth + 'px';
+                        _elementToResize.style.height = elementHeight + 'px';
                         _elementToResize.style.top = elRect.top + 'px';
                         _elementToResize.style.left = elRect.left + 'px';
                         _elementToResize.style.transform = '';

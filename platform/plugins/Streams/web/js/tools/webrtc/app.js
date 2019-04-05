@@ -5,7 +5,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || 
 navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 
 
-var WebRTCconference = function app(options){
+var WebRTCconferenceLib = function app(options){
     console.log('options', options);
     var app = {};
     var defaultOptions = {
