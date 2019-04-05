@@ -49,6 +49,8 @@ function Websites_webpage_post($params)
 		'type' => 'Websites/webpage'
 	));
 
+	$stream->subscribe(compact('userId'));
+
 	Q_Response::setSlot('publisherId', $stream->publisherId);
 	Q_Response::setSlot('streamName', $stream->name);
 }
