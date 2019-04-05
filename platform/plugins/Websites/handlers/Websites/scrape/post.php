@@ -1,12 +1,14 @@
 <?php
 	
-function Websites_scrape_response_data($params)
+function Websites_scrape_post($params)
 {
 	Q_Valid::nonce(true);
 
 	$loggedUser = Users::loggedInUser(true);
 
-	$fields = Q::take($_REQUEST, array('url'));
+	$r = array_merge($_REQUEST, $params);
+
+	$fields = Q::take($r, array('url'));
 	$url = $fields['url'];
 
 	if (!filter_var($url, FILTER_VALIDATE_URL)) {
@@ -39,18 +41,18 @@ function Websites_scrape_response_data($params)
 		}
 	}
 
-	$res = array_merge($metas, $ogMetas);
+	$result = array_merge($metas, $ogMetas);
 
 	// get title
 	$title = $doc->getElementsByTagName("title");
 	if($title->length > 0){
-		$res['title'] = $title->item(0)->nodeValue;
+		$result['title'] = $title->item(0)->nodeValue;
 	}
 
 	// get icon
-	$icon = Q::ifset($res, 'image', null);
+	$icon = Q::ifset($result, 'image', null);
 	if ($icon) {
-		$res['icon'] = $icon;
+		$result['icon'] = $icon;
 	} else {
 		$query = $xpath->query('//*/link');
 		$icons = array();
@@ -64,11 +66,16 @@ function Websites_scrape_response_data($params)
 			}
 		}
 
-		$res['icon'] = Q::ifset($icons, 'apple-touch-icon-precomposed', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
+		$result['icon'] = Q::ifset($icons, 'apple-touch-icon-precomposed', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
 	}
 
 	// parse url
-	$res['url'] = parse_url($url);
+	$result['url'] = $url;
 
-	return $res;
+	// if requested slots publisherId and streamName - create stream
+	if (Q_Request::slotName('publisherId') && Q_Request::slotName('streamName')) {
+		Q::Event('Websites/webpage/post', $result);
+	}
+
+	Q_Response::setSlot('result', $result);
 }
