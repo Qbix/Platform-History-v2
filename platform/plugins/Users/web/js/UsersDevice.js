@@ -61,11 +61,13 @@
 						// if the user is undecided with notifications then do call the confirmation
 						var userId = Q.Users.loggedInUserId();
 						var cache = Q.Cache.session('Users.Permissions.notifications');
-						var requested = cache.get(userId);
+						var requested = Q.getObject(['cbpos'], cache.get(userId));
+
 						// if permissions already requested - don't request it again
-						if (Q.getObject(['cbpos'], requested) === true) {
+						if (requested !== undefined && requested !== null) {
 							return Q.handle(callback, null, [null, null]);
 						}
+
 						Q.Text.get('Users/content', function (err, text) {
 							text = Q.copy(Q.getObject(["notifications"], text));
 							if (!text) {
@@ -75,14 +77,27 @@
 							Q.handle(Users.Device.beforeSubscribeConfirm, Users.Device, [
 								options, granted, subscribed, text
 							]);
+
+							// set this to avoid duplicated notices
+							cache.set(userId, 'in progress');
+
 							Q.confirm(text.prompt, function (res) {
+								// set cache to null before device subscription
+								cache.set(userId, null);
+
 								if (!res) {
 									// save to cache that notifications requested
 									// only if user refused, because otherwise - notifications has granted
-									cache.set(userId, true);
+									cache.set(userId, false);
 									return Q.handle(callback, null, [null, null]);
 								}
+
 								adapter.subscribe(function (err, subscribed) {
+									// if device subscribed set cache to true to avoid duplicate questions
+									if (subscribed) {
+										cache.set(userId, true);
+									}
+
 									Q.handle(Users.Device.onSubscribe, [options, granted, subscribed]);
 									Q.handle(callback, null, [err, subscribed]);
 								}, options);
