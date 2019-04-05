@@ -183,10 +183,10 @@ var _generators = {
             case 1:
                 return simpleGrid(count, 1, size);
             case 2:
-                return simpleGrid(count, 1, size);
+                return simpleGrid(count, 2, size);
                 break;
             case 3:
-                return simpleGrid(count, 1, size);
+                return simpleGrid(count, 3, size);
                 break;
             case 4:
                 return simpleGrid(count, 2, size);
