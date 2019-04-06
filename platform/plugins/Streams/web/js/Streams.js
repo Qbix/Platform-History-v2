@@ -4889,6 +4889,11 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 			}
 
+			var resizeTool = Q.Tool.from(screen.screenEl, "Q/resize");
+			if(resizeTool != null) {
+				resizeTool.state.keepRatioBasedOnElement = videoEl;
+			}
+
 
 			if((screen.screenEl.style.width != '' || screen.screenEl.style.height != '') && !reset) return;
 			if(videoEl.videoHeight == null || videoEl.videoWidth == null) return;
@@ -4997,16 +5002,16 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				screensBtns.appendChild(minimizeBtn)
 				chatParticipantName.appendChild(screensBtns);
 
-				maximizeBtn.addEventListener('mousedown', function (e) {
+				maximizeBtn.addEventListener('click', function (e) {
 					e.preventDefault();
 					e.stopPropagation();
 					renderMaximizedScreensGrid(screen);
 				});
 
-				minimizeBtn.addEventListener('mousedown', function (e) {
+				minimizeBtn.addEventListener('click', function (e) {
 					e.preventDefault();
 					e.stopPropagation();
-					renderRegularScreensGrid();
+					renderMinimizedScreensGrid();
 				});
 			}
 
@@ -5244,7 +5249,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				console.log('minimizedOrMaximizedScreenGrid', videoWidth, videoHeight)
 				var mainScreenSize = getElementSizeKeepingRatio({
 					width: videoWidth,
-					height: videoHeight
+					height: videoHeight + 50
 				}, {width: parentWidth / 100 * 90, height: (elementToWrap.top / 100 * 90)})
 				console.log('minimizedOrMaximizedScreenGrid', mainScreenSize)
 
@@ -5377,6 +5382,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		 * @method renderMinimizedScreensGrid
 		 */
 		var renderMinimizedScreensGrid = function() {
+			console.log('renderMinimizedScreensGrid')
 			if(_layoutTool == null || _controls == null) return;
 			var roomScreens = WebRTCconference.screens();
 
@@ -5388,7 +5394,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 			var elements = toggleScreensClass('minimizedScreensGrid');
 			_layoutTool.animate('minimizedScreensGrid', elements, 500, true);
-
+			console.log('renderMinimizedScreensGrid 2222')
 			updateScreensButtons();
 		}
 
@@ -5481,7 +5487,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var modes;
 			if(Q.info.isMobile)
 				modes = ['tiledMobile', 'maximizedMobile'];
-			else modes = ['regular', 'maximized', 'minimized'];
+			else modes = ['regular', 'maximized'];
 
 			var i, mode, modeToSwitch;
 
@@ -5511,6 +5517,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		}
 
 		function toggleViewModeByScreenClick(e) {
+
 			var roomScreens = WebRTCconference.screens();
 
 			e.preventDefault();

@@ -154,24 +154,19 @@ var _generators = {
 
 		switch (count) {
             case 1:
-                return simpleGrid(count, 1, size);
+                return simpleGrid(count, size, 1);
             case 2:
-                return simpleGrid(count, 1, size);
-                break;
+                return simpleGrid(count, size, 1);
             case 3:
-                return simpleGrid(count, 1, size);
-                break;
+                return simpleGrid(count, size, 1, 2);
             case 4:
-                return simpleGrid(count, 2, size);
-                break;
+                return simpleGrid(count, size, 2);
             case 5:
                 return simpleGridBasedOnRowsNum(count, 3, size)
-                break;
             case 6:
-                return simpleGrid(count, 2, size);
-                break;
+                return simpleGrid(count, size, 2);
             default:
-                return simpleGrid(count, 2, size);
+                return simpleGrid(count, size, 2);
 
         }
 	},
@@ -181,24 +176,19 @@ var _generators = {
 
         switch (count) {
             case 1:
-                return simpleGrid(count, 1, size);
+                return simpleGrid(count, size, 1);
             case 2:
-                return simpleGrid(count, 2, size);
-                break;
+                return simpleGrid(count, size, 2);
             case 3:
-                return simpleGrid(count, 3, size);
-                break;
+                return simpleGrid(count, size, 3);
             case 4:
-                return simpleGrid(count, 2, size);
-                break;
+                return simpleGrid(count, size, 2);
             case 5:
                 return simpleGridBasedOnRowsNum(count, 3, size)
-                break;
             case 6:
-                return simpleGrid(count, 2, size);
-                break;
+                return simpleGrid(count, size, 2);
             default:
-                return simpleGrid(count, 2, size);
+                return simpleGrid(count, size, 2);
 
         }
 	},
@@ -222,44 +212,98 @@ var _generators = {
 
         var rects = [];
 
-        var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
-        rects.push(mainScreenRect);
 
-        var rectWidth = 100;
-        var rectHeight = 100;
-        var spaceBetween = 10;
-        var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
-        var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
+	    var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
+	    rects.push(mainScreenRect);
 
-        var isNextNewLast = false;
-        var colItemCounter = 1;
-        var i;
-        for (i = 1; i <= count; i++) {
-            //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-            var firstRect = new DOMRect(size.parentWidth, size.parentHeight - 66, rectWidth, rectHeight)
-            var prevRect = rects.length > 1 ? rects[rects.length - 1] : firstRect;
-            var currentCol = isNextNewLast  ? perRow : Math.ceil(i/perCol);
-            var isNextNewCol  = colItemCounter  == perCol;
-            isNextNewLast = isNextNewLast == true ? true : isNextNewCol && currentCol + 1 == perRow;
+	    var rectWidth = 100;
+	    var rectHeight = 100;
+	    var spaceBetween = 10;
+	    var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
+	    console.log('totalRects',totalRects)
+	    var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
+	    var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
+	    console.log('totalRects2', perCol * perRow)
+	    if((perCol * perRow) < count) {
 
-            var x,y;
-            if(colItemCounter == 1) {
-                y = (size.parentHeight - 60) - (rectHeight + spaceBetween);
-                x = prevRect.x - (rectWidth + spaceBetween);
-            } else {
-                y = prevRect.y - (rectHeight + spaceBetween);
-                x = prevRect.x;
-            }
-            var rect = new DOMRect(x, y, rectWidth, rectHeight);
+	    }
 
-            rects.push(rect);
 
-            if(isNextNewCol) {
-                colItemCounter = 1;
-            } else colItemCounter++
-        }
+	    var side = 'right'
+	    var isNextNewLast = false;
+	    var createNewColOnRight = null;
+	    var createNewColOnLeft = null;
+	    var latestRightRect = null;
+	    var latestLeftRect = null;
+	    var colItemCounter = 1;
+	    var leftSideCounter = 0;
+	    var rightSideCounter = 0;
+	    var i;
+	    for (i = 1; i <= count; i++) {
+		    var firstRect = new DOMRect(size.parentWidth, size.parentHeight - 66, rectWidth, rectHeight)
+		    var prevRect = rects.length > 1 ? rects[rects.length - 2] : firstRect;
+		    var currentCol = isNextNewLast  ? perRow : Math.ceil(i/perCol);
+		    var isNextNewCol = colItemCounter  == perCol;
+		    isNextNewLast = isNextNewLast == true ? true : isNextNewCol && currentCol + 1 == perRow;
 
-        return rects;
+		    var x, y, rect, prevRect;
+		    if(side == "right") {
+			    prevRect = latestRightRect;
+			    if (rightSideCounter > 0 && !createNewColOnRight) {
+				    y = prevRect.y - (rectHeight + spaceBetween);
+				    x = prevRect.x;
+			    } else if(createNewColOnRight) {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = prevRect.x - (rectWidth + spaceBetween);
+				    createNewColOnRight = false;
+			    } else {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = size.parentWidth - (rectWidth + spaceBetween);
+			    }
+			    rightSideCounter++;
+
+			    rect = new DOMRect(x, y, rectWidth, rectHeight);
+			    latestRightRect = rect;
+
+			    side = 'left';
+
+			    if(rightSideCounter % perCol == 0) {
+				    createNewColOnRight = true;
+			    }
+		    } else {
+			    prevRect = latestLeftRect;
+			    if (leftSideCounter > 0 && !createNewColOnLeft) {
+				    y = prevRect.y - (rectHeight + spaceBetween);
+				    x = prevRect.x;
+			    } else if(createNewColOnLeft) {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = prevRect.x + prevRect.width + spaceBetween;
+				    createNewColOnLeft = false;
+			    } else {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = spaceBetween;
+			    }
+			    leftSideCounter++;
+
+			    rect = new DOMRect(x, y, rectWidth, rectHeight);
+			    latestLeftRect = rect;
+
+			    side = 'right';
+
+			    if(leftSideCounter % perCol == 0) {
+				    createNewColOnLeft = true;
+			    }
+		    }
+
+		    rects.push(rect);
+
+		    if(isNextNewCol) {
+			    colItemCounter = 1;
+		    } else colItemCounter++;
+	    }
+
+
+	    return rects;
     }
 
 
@@ -267,68 +311,140 @@ var _generators = {
 
         var rects = [];
 
-        var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
-        rects.push(mainScreenRect);
+	    var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
+	    rects.push(mainScreenRect);
 
-        var rectWidth = 100;
-        var rectHeight = 100;
-        var spaceBetween = 10;
-        var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
-        var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
+	    var rectWidth = 100;
+	    var rectHeight = 100;
+	    var spaceBetween = 10;
+	    var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
+	    console.log('totalRects',totalRects)
+	    var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
+	    var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
+	    console.log('totalRects2', perCol * perRow)
+	    if((perCol * perRow) < count) {
 
-        var isNextNewLast = false;
-        var rowItemCounter = 1;
-        var i;
-        for (i = 1; i <= count; i++) {
-            //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-            var firstRect = new DOMRect(size.parentWidth, size.parentHeight, rectWidth, rectHeight)
-            var prevRect = rects.length > 1 ? rects[rects.length - 1] : firstRect;
-            var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
-            var isNextNewRow  = rowItemCounter  == perRow;
-            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+	    }
 
 
-            var x,y;
-            if(rowItemCounter == 1) {
+	    var side = 'right'
+	    var isNextNewLast = false;
+	    var createNewColOnRight = null;
+	    var createNewColOnLeft = null;
+	    var latestRightRect = null;
+	    var latestLeftRect = null;
+	    var colItemCounter = 1;
+	    var leftSideCounter = 0;
+	    var rightSideCounter = 0;
+	    var i;
+	    for (i = 1; i <= count; i++) {
+		    var firstRect = new DOMRect(size.parentWidth, size.parentHeight - 66, rectWidth, rectHeight)
+		    var prevRect = rects.length > 1 ? rects[rects.length - 2] : firstRect;
+		    var currentCol = isNextNewLast  ? perRow : Math.ceil(i/perCol);
+		    var isNextNewCol = colItemCounter  == perCol;
+		    isNextNewLast = isNextNewLast == true ? true : isNextNewCol && currentCol + 1 == perRow;
 
-                if(currentRow == 1) {
-                    y = (size.parentHeight - 60) - (rectHeight + spaceBetween);
-                } else y =  prevRect.y - (rectHeight + spaceBetween);
-                x = size.parentWidth - (rectWidth + spaceBetween);
-            } else {
-                y = prevRect.y;
-                x = prevRect.x - (rectHeight + spaceBetween);
-            }
-            var rect = new DOMRect(x, y, rectWidth, rectHeight);
+		    var x, y, rect, prevRect;
+		    if(side == "right") {
+			    prevRect = latestRightRect;
+			    if (rightSideCounter > 0 && !createNewColOnRight) {
+				    y = prevRect.y - (rectHeight + spaceBetween);
+				    x = prevRect.x;
+			    } else if(createNewColOnRight) {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = prevRect.x - (rectWidth + spaceBetween);
+				    createNewColOnRight = false;
+			    } else {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = size.parentWidth - (rectWidth + spaceBetween);
+			    }
+			    rightSideCounter++;
 
-            rects.push(rect);
+			    rect = new DOMRect(x, y, rectWidth, rectHeight);
+			    latestRightRect = rect;
 
-            if(isNextNewRow) {
-                rowItemCounter = 1;
-            } else rowItemCounter++
-        }
+			    side = 'left';
 
-        return rects;
+			    if(rightSideCounter % perCol == 0) {
+				    createNewColOnRight = true;
+			    }
+		    } else {
+			    prevRect = latestLeftRect;
+			    if (leftSideCounter > 0 && !createNewColOnLeft) {
+				    y = prevRect.y - (rectHeight + spaceBetween);
+				    x = prevRect.x;
+			    } else if(createNewColOnLeft) {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = prevRect.x + prevRect.width + spaceBetween;
+				    createNewColOnLeft = false;
+			    } else {
+				    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+				    x = spaceBetween;
+			    }
+			    leftSideCounter++;
+
+			    rect = new DOMRect(x, y, rectWidth, rectHeight);
+			    latestLeftRect = rect;
+
+			    side = 'right';
+
+			    if(leftSideCounter % perCol == 0) {
+				    createNewColOnLeft = true;
+			    }
+		    }
+
+		    rects.push(rect);
+
+		    if(isNextNewCol) {
+			    colItemCounter = 1;
+		    } else colItemCounter++;
+	    }
+
+
+	    return rects;
     }
 
-    function simpleGrid(count, perRow, size) {
+    function simpleGrid(count, size, perRow, rowsNum) {
         var rects = [];
+        var rectHeight;
         var rectWidth = size.parentWidth / perRow;
-        var rectHeight = size.parentHeight / (count / perRow);
+        if(rowsNum == null) {
+	        rectHeight = size.parentHeight / Math.ceil(count / perRow);
+	        rowsNum = Math.floor(size.parentHeight / rectHeight);
+        } else {
+	        rectHeight = size.parentHeight / rowsNum;
+        }
+
+
+	    var isNextNewLast = false;
+	    var rowItemCounter = 1;
         var i;
-        for (i = 0; i < count; i++) {
-            var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0) ;
-            var isNewRow  = (i % perRow == 0);
-            var currentRow = Math.ceil(i/perRow);
-            if(isNewRow) {
-                var y = prevRect.height * Math.ceil(i/perRow);
+        for (i = 1; i <= count; i++) {
+	        var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0) ;
+	        var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
+	        var isNextNewRow  = rowItemCounter == perRow;
+	        isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
+
+	        if(rowItemCounter == 1) {
+		        var y = prevRect.height * (currentRow - 1);
                 var x = 0;
             } else {
                 var y = prevRect.y;
                 var x = prevRect.x + prevRect.width;
             }
+
             var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+	        if (isNextNewRow && isNextNewLast) {
+		        perRow = count - i;
+		        rectWidth = size.parentWidth / perRow;
+
+	        }
             rects.push(rect);
+
+	        if (isNextNewRow) {
+		        rowItemCounter = 1;
+	        } else rowItemCounter++;
         }
 
         return rects;
@@ -360,7 +476,7 @@ var _generators = {
 
             if(isNextNewRow && isNextNewLast) {
                 perRow = count - i;
-                rectWidth = parentWidth / perRow;
+                rectWidth = size.parentWidth / perRow;
             }
 
 

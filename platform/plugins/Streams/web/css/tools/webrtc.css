@@ -640,6 +640,9 @@
     color: white;
 }
 
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .Users_avatar_name{
+    margin-left:10px;
+}
 .webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
     overflow: hidden;
     display: flex;
@@ -767,7 +770,8 @@
     position: relative;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal{
-    width:100%;
+    width: 100%;
+    position: absolute;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
     height:100%;
@@ -982,7 +986,7 @@
     text-align: center;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant{
-    display: block;
+    display: flex;
     background-color: #fff;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     overflow: hidden;
@@ -1011,21 +1015,27 @@
     justify-content: center;
     z-index: 1;
     height: 100%;
+    width: 100%;
+    position: relative;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video video{
     width: auto;
     height: 100%;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-name {
-    padding: 8px 5px 8px 10px;
     /* transform: translateY(100%); */
-    position: absolute;
     width: 100%;
     bottom: 0;
     box-sizing: border-box;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 5px;
+    background: white;
+    color: black;
+    font-size: 14px;
+    height: 50px;
 }
 
 /* participants dialog */
