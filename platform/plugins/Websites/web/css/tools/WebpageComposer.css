@@ -1,0 +1,53 @@
+.Websites_webpage_preview_tool {
+	white-space: nowrap;
+	margin: 10px;
+
+	box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 0 2px rgba(0,0,0,0.2);
+	border-radius: 7px;
+	border: none;
+}
+.Websites_webpage_preview_tool .Streams_preview_contents {
+	width: calc(100% - 60px);
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.Websites_webpage_preview_tool h3.Streams_preview_title {
+	font-size: 16px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_description {
+	font-size: 12px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests {
+	font-size: 12px;
+	font-weight: normal;
+	white-space: nowrap;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests:before {
+	font-family: 'qplatform-communities' !important;
+	content: "\e90d";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 15px;
+	position: relative;
+	top: -1px;
+	vertical-align: middle;
+}
+.Websites_webpage_preview_tool input {
+	width: calc(100% - 70px);
+	margin: 5px;
+	display: inline-block;
+	padding: 5px;
+}
+.Websites_webpage_preview_tool input.Q_error {
+	border-bottom-color: red;
+}
+.Websites_webpage_preview_tool .Q_buttons {
+	width: 10%;
+	display: inline-block;
+}
