@@ -285,57 +285,22 @@ class Q_Session
 		try {
 			if ($id) {
 				self::processDbInfo();
-				if (self::$session_db_connection) {
-					$id_field = self::$session_db_id_field;
-					$data_field = self::$session_db_data_field;
-					$updated_field = self::$session_db_updated_field;
-					$duration_field = self::$session_db_duration_field;
-					$platform_field = self::$session_db_platform_field;
-					$class = self::$session_db_row_class;
-					$row = new $class();
-					$row->$id_field = $id;
-					if ($row->retrieve()) {
-						self::$session_db_row = $row;
-					} else if ($throwIfMissingOrInvalid) {
+				self::readHandler($id, $sessionExists);
+				if (!$sessionExists) {
+					if ($throwIfMissingOrInvalid) {
 						self::throwInvalidSession();
-					} else {
-						// Start a new session with our own id
-						$id = $row->$id_field = self::generateId();
-						$row->$data_field = "";
-						$row->$updated_field = date('Y-m-d H:i:s');
-						$row->$duration_field = Q_Config::get(
-							'Q', 'session', 'durations', Q_Request::formFactor(),
-							Q_Config::expect('Q', 'session', 'durations', 'session')
-						);
-						if ($platform_field) {
-							$platform = Q_Request::platform();
-							$row->$platform_field = $platform ? $platform : null;
-						}
-						if (false !== Q::event(
-							'Q/session/save',
-							array(
-								'row' => $row,
-								'id_field' => $id_field,
-								'data_field' => $data_field,
-								'updated_field' => $updated_field,
-								'duration_field' => $duration_field,
-								'platform_field' => $platform_field,
-								'inserting' => true
-							),
-							'before'
-						)) {
-							$row->save();
-							self::$session_db_row = $row;
-						}
 					}
+					self::writeHandler($id, '');
 				}
 				self::id($id);
+				if (!empty($_SERVER['HTTP_HOST'])) {
+					// TODO: Think about session fixation attacks, require nonce.
+					$durationName = self::durationName();
+					$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+					Q_Response::setCookie(self::name(), $id, $duration ? time()+$duration : 0);
+				}
 			}
-			if (!empty($_SERVER['HTTP_HOST'])) {
-				$durationName = self::durationName();
-				$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-				Q_Response::setCookie(self::name(), $id, $duration ? time()+$duration : 0);
-			} else if (empty($_SESSION)) {
+			if (empty($_SERVER['HTTP_HOST']) and empty($_SESSION)) {
 				$_SESSION = array();
 			}
 			ini_set('session.use_cookies', 0); // we are gonna handle the cookies, thanks
@@ -541,9 +506,10 @@ class Q_Session
 	 * @method readHandler
 	 * @static
 	 * @param {string} $id
+	 * @param {boolean} &$sessionExists Reference to a variable to fill with a boolean
 	 * @return {string}
 	 */
-	static function readHandler ($id)
+	static function readHandler ($id, &$sessionExists = null)
 	{
 		/**
 		 * @event Q/session/read {before}
@@ -564,6 +530,7 @@ class Q_Session
 		if (empty(self::$session_save_path)) {
 			self::$session_save_path = self::savePath();
 		}
+		$sessionExists = false;
 		if (! empty(self::$session_db_connection)) {
 			$id_field = self::$session_db_id_field;
 			$data_field = self::$session_db_data_field;
@@ -572,7 +539,9 @@ class Q_Session
 				$class = self::$session_db_row_class;
 				$row = new $class();
 				$row->$id_field = $id;
-				$row->retrieve();
+				if ($row->retrieve()) {
+					$sessionExists = true;
+				}
 				self::$session_db_row = $row;
 			}
 			$result = isset(self::$session_db_row->$data_field)
@@ -586,6 +555,7 @@ class Q_Session
 				$result = '';
 			} else {
 				$result = (string) file_get_contents($sess_file);
+				$sessionExists = true;
 			}
 		}
 		self::$sess_data = $result;
@@ -670,6 +640,9 @@ class Q_Session
 				$updated_field = self::$session_db_updated_field;
 				$duration_field = self::$session_db_duration_field;
 				$platform_field = self::$session_db_platform_field;
+				if (!self::$session_db_row) {
+					self::$session_db_row = new $db_row_class();
+				}
 				$row = self::$session_db_row;
 				$row->$id_field = $id;
 			} else {
