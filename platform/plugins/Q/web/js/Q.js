@@ -12182,8 +12182,8 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
  */
 Q.Audio.speak = function (text, options) {
-	var TTS = Q.getObject("window.TTS"); // cordova
-	var SS = Q.getObject("window.speechSynthesis"); //browsers
+	var TTS = root.TTS; // cordova
+	var SS = root.speechSynthesis; //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
 	o.locale = o.locale ||  Q.Text.languageLocale;
 	if (Q.isArrayLike(text)) {
@@ -12252,7 +12252,7 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
-		if (TTS) {
+		if (root.TTS) {
 			TTS.speak({
 				text: text,
 				locale: o.locale,
@@ -12310,8 +12310,8 @@ Q.Audio.speak.enabled = !Q.info.isTouchscreen;
  * @static
  */
 Q.Audio.stopSpeaking = function () {
-	if (TTS) {
-		TTS.stop();
+	if (root.TTS) {
+		root.TTS.stop();
 	} else if (root.speechSynthesis) {
 		root.speechSynthesis.pause();
 	}
