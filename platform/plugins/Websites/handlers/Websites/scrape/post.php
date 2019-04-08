@@ -27,8 +27,8 @@ function Websites_scrape_post($params)
 		throw new Exception("Server return wrong response!");
 	}
 
-	$headers = $response[0];
-	$document = $response[1];
+	$headers = $response[count($response) - 2];
+	$document = $response[count($response) - 1];
 
 	if (!$document) {
 		throw new Exception("Unable to access the site");
