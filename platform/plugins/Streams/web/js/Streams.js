@@ -1396,8 +1396,14 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case "QR":
 						if (err) return;
 						Q.Dialogs.push({
+							htmlClass: 'Streams_invite_QR',
 							title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
-							content: '<div class="Streams_invite_QR_content"></div>',
+							content: '<div class="Streams_invite_QR_content"></div>'
+								+ '<div class="Q_buttons">'
+								+ '<button class="Q_button">'
+								+ text.invite.dialog.QRscanned
+								+'</button>'
+								+ '</div>',
 							onActivate: function (dialog) {
 								// fill QR code
 								Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
@@ -1410,12 +1416,11 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										colorLight : "#ffffff",
 										correctLevel : QRCode.CorrectLevel.H
 									});
-								});
-
-								Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/invite/accept')
-									.set(function(stream, message) {
+									$('.Q_button', dialog).plugin('Q/clickable')
+									.on(Q.Pointer.click, function () {
 										Q.Dialogs.pop();
 									});
+								});
 							},
 							onClose: function () {
 								Q.Dialogs.push({
