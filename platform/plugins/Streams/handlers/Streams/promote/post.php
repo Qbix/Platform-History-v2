@@ -34,9 +34,9 @@ function Streams_promote_post()
 	$o = array('weight' => $stream->getAttribute('startTime'), 'skipAccess' => true);
 
 	$relations = array();
-	$location = Calendars_Event::getLocation($stream);
-	$latitude = $location['lat'];
-	$longitude = $location['lng'];
+	$location = Places_Location::fromStream($stream);
+	$latitude = $location['latitude'];
+	$longitude = $location['longitude'];
 
 	// NOTE: we need a way to add interests automatically
 	$interests = Calendars_Event::getInterests($stream);
