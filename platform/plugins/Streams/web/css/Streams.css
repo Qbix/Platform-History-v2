@@ -961,3 +961,11 @@
 .Streams_complete_overlay .Q_dialog_content {
 	padding: 0;
 }
+
+.Streams_invite_QR .Q_buttons {
+	padding-bottom: 20px;
+}
+
+.Streams_invite_QR .Q_button {
+	padding: 10px;
+}
