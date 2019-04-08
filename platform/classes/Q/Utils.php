@@ -607,7 +607,7 @@ class Q_Utils
 		$header = null,
 		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return Q_Utils::request('POST', $url, $data, $user_agent, $curl_opts, $header, $res_t);
+		return self::request('POST', $url, $data, $user_agent, $curl_opts, $header, $res_t);
 	}
 
 	/**
@@ -626,7 +626,7 @@ class Q_Utils
 	 */
 	static function get ($url, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return Q_Utils::request('GET', $url, null, $user_agent, $curl_opts, $header, $res_t);
+		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $res_t);
 	}
 
 	/**
