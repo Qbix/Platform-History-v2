@@ -8,20 +8,30 @@ function Websites_webpage_post($params)
 
 	$r = array_merge($_REQUEST, $params);
 
-	$title = Q::ifset($r, 'title', null);
-	if (!isset($title)) {
-		throw new Q_Exception_RequiredField(array('field' => 'title'));
-	}
-
 	$url = Q::ifset($r, 'url', null);
 	if (!filter_var($url, FILTER_VALIDATE_URL)) {
 		throw new Exception("Invalid URL");
 	}
 	$urlParsed = parse_url($url);
 
+	$title = Q::ifset($r, 'title', substr($url, strrpos($url, '/') + 1));
+	$title = $title ?: null;
+
 	$description = Q::ifset($r, 'description', null);
 	$copyright = Q::ifset($r, 'copyright', null);
 	$icon = Q::ifset($r, 'icon', null);
+	$contentType = Q::ifset($r, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
+	$streamIcon = null;
+
+	if ($contentType != 'text/html') {
+		// trying to get icon
+		Q_Config::load(WEBSITES_PLUGIN_CONFIG_DIR.DS.'mime-types.json');
+		$extension = Q_Config::get('mime-types', $contentType, '_blank');
+		$urlPrefix = Q_Request::baseUrl().'/{{Streams}}/img/icons/files';
+		$streamIcon = file_exists(STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files'.DS.$extension)
+			? "$urlPrefix/$extension"
+			: "$urlPrefix/_blank";
+	}
 
 	$interestTitle = 'Domains: '.$urlParsed['host'].($urlParsed['port'] ? ':'.$urlParsed['port'] : '');
 
@@ -32,6 +42,7 @@ function Websites_webpage_post($params)
 	$stream = Streams::create($userId, $userId, 'Websites/webpage', array(
 		'title' => $title,
 		'content' => $description,
+		'icon' => $streamIcon,
 		'attributes' => array(
 			'url' => $url,
 			'urlParsed' => $urlParsed,
@@ -41,7 +52,8 @@ function Websites_webpage_post($params)
 				'streamName' => $interestStreamName,
 			),
 			'icon' => $icon,
-			'copyright' => $copyright
+			'copyright' => $copyright,
+			'contentType' =>$contentType
 		)
 	), array(
 		'publisherId' => $interestPublisherId,

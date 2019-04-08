@@ -15,7 +15,20 @@ function Websites_scrape_post($params)
 		throw new Exception("Invalid URL");
 	}
 
-	$document = file_get_contents($url);
+	// get source with header
+	$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_VERBOSE => true,
+		CURLOPT_HEADER => true
+	));
+
+	$response = explode("\r\n\r\n", $response);
+	if (!is_array($response) || count($response) < 2) {
+		throw new Exception("Server return wrong response!");
+	}
+
+	$headers = $response[0];
+	$document = $response[1];
 
 	if (!$document) {
 		throw new Exception("Unable to access the site");
@@ -42,6 +55,14 @@ function Websites_scrape_post($params)
 	}
 
 	$result = array_merge($metas, $ogMetas);
+
+	// split headers string into array
+	$result['headers'] = array();
+	$data = explode("\n", $headers);
+	foreach ($data as $part) {
+		$middle = explode(":",$part);
+		$result['headers'][trim($middle[0])] = trim($middle[1]);
+	}
 
 	// get title
 	$title = $doc->getElementsByTagName("title");
