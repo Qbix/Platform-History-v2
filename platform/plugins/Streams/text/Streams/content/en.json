@@ -53,6 +53,7 @@
 			"orInvite": "Or invite people by using:",
 			"QR": "{{ClickOrTap}} to generate QR code",
 			"QRtitle": "Scan this QR code",
+			"QRscanned": "They scanned it!",
 			"byEmail": "Email",
 			"byText": "Text",
 			"byFacebook": "Facebook",

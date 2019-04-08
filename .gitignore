@@ -14,6 +14,7 @@ platform/files/Q/sessions/*
 platform/files/sessions/*
 platform/plugins/*/web/img/icons
 platform/plugins/*/files/
+!platform/plugins/Websites/files/
 !platform/plugins/Users/files/
 !platform/plugins/Streams/files/
 platform/plugins/Users/files/Users/icons/*
