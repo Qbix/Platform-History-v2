@@ -593,22 +593,21 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire POST header
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
 	static function post (
-		$url, 
-		$data, 
-		$user_agent = null, 
-		$follow_redirects = true, 
-		$header = null, 
-		$conn_t = Q_UTILS_CONNECTION_TIMEOUT, 
+		$url,
+		$data,
+		$user_agent = null,
+		$curl_opts = array(),
+		$header = null,
 		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return Q_Utils::request('POST', $url, $data, $user_agent, $follow_redirects, $header, $conn_t, $res_t);
+		return Q_Utils::request('POST', $url, $data, $user_agent, $curl_opts, $header, $res_t);
 	}
 
 	/**
@@ -619,15 +618,15 @@ class Q_Utils
 	 *  This can also be an array of ($url, $ip) to send the request
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire GET header
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	static function get ($url, $user_agent = null, $follow_redirects = true, $header = null)
+	static function get ($url, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return Q_Utils::request('GET', $url, null, $user_agent, $follow_redirects, $header);
+		return Q_Utils::request('GET', $url, null, $user_agent, $curl_opts, $header, $res_t);
 	}
 
 	/**
@@ -641,13 +640,13 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire header
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	private static function request($method, $uri, $data, $user_agent = null, $follow_redirects = true, $header = null, $conn_t = 120, $res_t = 120)
+	private static function request($method, $uri, $data, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
@@ -687,7 +686,7 @@ class Q_Utils
 			$headers[] = "User-Agent: $user_agent";
 			if ($data) {
 				if ($method === 'GET') {
-					$url = Q::fixUrl("$url?$data");
+					$url = Q_Uri::fixUrl("$url?$data");
 				} else {
 					$headers[] = "Content-type: application/x-www-form-urlencoded";
 					$headers[] = "Content-length: " . strlen($data);
@@ -703,18 +702,18 @@ class Q_Utils
 		if (function_exists('curl_init')) {
 			// Use CURL if installed...
 			$ch = curl_init();
-			curl_setopt_array($ch, array(
+			$curl_opts = $curl_opts + array(
 				CURLOPT_USERAGENT => $user_agent,
-
 				CURLOPT_RETURNTRANSFER => true,	 // return web page
 				CURLOPT_HEADER		 => false,	// don't return headers
 				CURLOPT_FOLLOWLOCATION => true,	 // follow redirects
 				CURLOPT_ENCODING	   => "",	   // handle all encodings
 				CURLOPT_AUTOREFERER	=> true,	 // set referer on redirect
-				CURLOPT_CONNECTTIMEOUT => $conn_t,	  // timeout on connect
-				CURLOPT_TIMEOUT		=> $res_t,	  // timeout on response
+				CURLOPT_CONNECTTIMEOUT => Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on connect
+				CURLOPT_TIMEOUT		=> Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on response
 				CURLOPT_MAXREDIRS	  => 10,	   // stop after 10 redirects
-			));
+			);
+			curl_setopt_array($ch, $curl_opts);
 			switch ($method) {
 				case 'POST':
 					curl_setopt_array($ch, array(
@@ -738,6 +737,14 @@ class Q_Utils
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 			}
 			$result = curl_exec($ch);
+
+			if (!$result) {
+				$error = curl_error($ch);
+				if ($error) {
+					throw new Exception($error);
+				}
+			}
+
 			curl_close($ch);
 		} else {
 			// Non-CURL based version...
