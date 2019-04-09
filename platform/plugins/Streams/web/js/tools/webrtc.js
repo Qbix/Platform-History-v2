@@ -144,7 +144,7 @@
 
                 Q.addScript([
                     "https://requirejs.org/docs/release/2.2.0/minified/require.js",
-                    "https://www.demoproject.co.ua/video-chat/src/js/app.js?t=" + (+new Date),
+                    "https://www.demoproject.co.ua/video-chat/src/js/app.js",
                 ], function () {
                     console.log('WebRTCconference', WebRTCconference)
 
