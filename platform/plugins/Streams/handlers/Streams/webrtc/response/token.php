@@ -17,7 +17,7 @@ function Streams_webrtc_response_token($params = array()) {
     $sid = $stream->getAttribute('twilioRoomSid', null);
     if($sid && $stream->participant()) {
 
-        $accessToken = Streams_Webrtc::getTwilioAccessToken($sid);
+        $accessToken = Streams_WebRTC::getTwilioAccessToken($sid);
         Q_Response::setSlot('token', $accessToken);
 
     }
