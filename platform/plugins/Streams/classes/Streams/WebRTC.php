@@ -8,11 +8,11 @@ use Twilio\Rest\Client;
  * @module Streams
  */
 /**
- * Class contains common methods for Webrtc tool
+ * Class contains common methods for WebRTC tool
  *
  * @class Streams_WebRTC
  */
-class Streams_Webrtc
+class Streams_WebRTC
 {
     static function createRoom($publisherId, $streamName) {
         $loggedUserId = Users::loggedInUser(true)->id;
