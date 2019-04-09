@@ -547,6 +547,7 @@
 					                screens[i].isActive = true;
 					                this.unmuteVideo();
 					                tool.state.webrtcClass.screenRendering.renderScreens();
+
 				                } else {
 					                screens[i].screenEl.style.display = 'none';
 					                //if(screens[i].screenEl.parentNode != null) screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)

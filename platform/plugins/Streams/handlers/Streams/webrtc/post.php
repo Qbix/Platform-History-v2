@@ -15,7 +15,7 @@ function Streams_webrtc_post($params = array())
     $streamName = Q::ifset($params, 'streamName', null);
     $publisherId = Q::ifset($params, 'publisherId', null);
 
-    $roomStream = Streams_Webrtc::createRoom($publisherId, $streamName);
+    $roomStream = Streams_WebRTC::createRoom($publisherId, $streamName);
 
     $roomStream->join();
 

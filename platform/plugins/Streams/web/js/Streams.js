@@ -4480,11 +4480,11 @@ var Interests = Streams.Interests = {
 
 /**
  * Runs  adapter for Streams/webrtc tools
- * @class Streams.Webrtc
+ * @class Streams.WebRTC
  * @constructor
  * @param {Object} fields
  */
-var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
+var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 	var WebRTCconference;
 	var _options = {};
 	var _controls = null;
