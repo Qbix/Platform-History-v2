@@ -57,7 +57,7 @@
 				var elementToResize = tool.element;
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 
-				var _dragElement = function(){
+				var _dragElement = (function(){
 					var elementToMove;
 					var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY;
 					var move = function(xpos,ypos){
@@ -129,9 +129,9 @@
 						initMoving: initMoving,
 						stopMoving: stopMoving
 					}
-				}();
+				})();
 
-				var resizeElement = function (e) {
+				var resizeElement = (function (e) {
 					var docRect = document.body.getBoundingClientRect();
 					var docStyles = window.getComputedStyle(document.body);
 					var _minSize = 100;
@@ -561,7 +561,7 @@
 						init:initialise,
 						setHandler:setHandler,
 					}
-				}();
+				})();
 
 				if(Q.info.isMobile) {
 					elementToMove.addEventListener('touchstart', function (e) {
