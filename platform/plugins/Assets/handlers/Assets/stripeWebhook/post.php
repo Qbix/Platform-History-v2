@@ -20,11 +20,6 @@ function Assets_stripeWebhook_post()
 			$arr = explode('/', $metadata['streamName']);
 			array_pop($arr);
 			$streamName = implode('/', $arr);
-			switch($streamName) {
-				case 'Calendars/event';
-					break;
-				default:
-			}
 			Q::event('Calendars/event/webhook/Stripe/charge', $event_json);
 		}
 	};

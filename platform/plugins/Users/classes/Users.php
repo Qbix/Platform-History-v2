@@ -1107,11 +1107,11 @@ abstract class Users extends Base_Users
 		}
 		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
-		if (!is_array($icon) and $_SESSION['Users']['register']['icon']) {
+		if (!is_array($icon) and !empty($_SESSION['Users']['register']['icon'])) {
 			$icon = $_SESSION['Users']['register']['icon'];
 			unset($_SESSION['Users']['register']['icon']);
 		}
-		if ($icon) {
+		if (is_array($icon)) {
 			$user->set('skipIconSearch', $icon);
 		}
 

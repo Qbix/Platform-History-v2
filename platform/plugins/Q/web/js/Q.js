@@ -1475,7 +1475,7 @@ Q.isPlainObject = function (x) {
 		return false;
 	}
 	if (root.attachEvent && !root.addEventListener) {
-		// This is just for IE8
+		// This is just for old browsers
 		if (x && x.constructor !== Object) {
 			return false;
 		}
@@ -12169,6 +12169,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
 /**
  * Speak text in various browsers.
  * @method speak
+ * @static
  * @param {String|Array} text Pass the string of text to speak, or an array of
  *  [textSource, pathArray] to the string loaded with Q.Text.get() 
  * @param {Object} [options] An optional hash of options for Q.Audio.speak:
@@ -12181,8 +12182,8 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
  */
 Q.Audio.speak = function (text, options) {
-	var TTS = Q.getObject("window.TTS"); // cordova
-	var SS = Q.getObject("window.speechSynthesis"); //browsers
+	var TTS = root.TTS; // cordova
+	var SS = root.speechSynthesis; //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
 	o.locale = o.locale ||  Q.Text.languageLocale;
 	if (Q.isArrayLike(text)) {
@@ -12251,7 +12252,7 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
-		if (TTS) {
+		if (root.TTS) {
 			TTS.speak({
 				text: text,
 				locale: o.locale,
@@ -12302,6 +12303,19 @@ Q.Audio.speak.options = {
 	locale: null
 };
 Q.Audio.speak.enabled = !Q.info.isTouchscreen;
+
+/**
+ * Stop speaking text, if any
+ * @method stopSpeaking
+ * @static
+ */
+Q.Audio.stopSpeaking = function () {
+	if (root.TTS) {
+		root.TTS.stop();
+	} else if (root.speechSynthesis) {
+		root.speechSynthesis.pause();
+	}
+}
 
 /**
  * Methods for temporarily covering up certain parts of the screen with masks
