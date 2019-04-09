@@ -33,7 +33,7 @@
      */
     Q.Tool.define("Streams/webrtc/controls", function(options) {
 
-            if (!options.webRTClibraryInstance) {
+            if (!options.webRTClibraryInstance || !options.webrtcClass) {
                 throw "Video room should be created";
             }
 
@@ -707,7 +707,7 @@
 				                apply: true,
 				                onActivate: function (dialog) {
 					                disconnectbtn.addEventListener('click', function () {
-						                Q.Streams.Webrtc.stop();
+						                tool.state.webrtcClass.stop();
 						                Q.Dialogs.pop();
 					                });
 				                },
@@ -745,7 +745,7 @@
 		                });
 
 		                disconnectbtn.addEventListener('click', function () {
-			                Q.Streams.Webrtc.stop();
+			                tool.state.webrtcClass.stop();
 		                });
 	                }
                 }
