@@ -190,4 +190,43 @@ class Places_Location
 		}
 		return array($area, $floor, $column);
 	}
+	
+	/**
+	 * Get location from stream in some standard way
+	 * @method getLocation
+	 * @static
+	 * @param Streams_Stream $stream Some stream
+	 * @return array
+	 */
+	static function fromStream($stream)
+	{
+		$location = $stream->getAttribute('location');
+
+		// new approach
+		if (is_array($location)) {
+			return $location;
+		}
+
+		// old approach
+		$communityId = $stream->getAttribute("communityId");
+		$res = array(
+			'publisherId' => $communityId,
+			'name' => $location,
+			'venue' => $stream->getAttribute("venue"),
+			'address' => $stream->getAttribute("address"),
+			'latitude' => $stream->getAttribute("latitude"),
+			'longitude' => $stream->getAttribute("longitude")
+		);
+
+		$area = $stream->getAttribute("area");
+		if ($area) {
+			$res['area'] = array(
+				'publisherId' => $communityId,
+				'name' => $area,
+				'title' => $stream->getAttribute("areaSelected")
+			);
+		}
+
+		return $res;
+	}
 }
