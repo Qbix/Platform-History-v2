@@ -546,13 +546,13 @@
 					                screens[i].screenEl.style.display = '';
 					                screens[i].isActive = true;
 					                this.unmuteVideo();
-					                Q.Streams.Webrtc.screenRendering.renderScreens();
+					                tool.state.webrtcClass.screenRendering.renderScreens();
 				                } else {
 					                screens[i].screenEl.style.display = 'none';
 					                //if(screens[i].screenEl.parentNode != null) screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
 					                screens[i].isActive = false;
 					                this.muteVideo();
-					                Q.Streams.Webrtc.screenRendering.renderScreens();
+					                tool.state.webrtcClass.screenRendering.renderScreens();
 				                }
 
 			                }
