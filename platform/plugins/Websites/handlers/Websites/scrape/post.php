@@ -64,34 +64,62 @@ function Websites_scrape_post($params)
 		$result['headers'][trim($middle[0])] = trim($middle[1]);
 	}
 
+	// collect language from diff mets
+	$result['lang'] = Q::ifset($result, 'language', Q::ifset($result, 'lang', Q::ifset($result, 'locale', null)));
+
+	// if language empty, collect from html tag or headers
+	if (empty($result['lang'])) {
+		// get title
+		$html = $doc->getElementsByTagName("html");
+		if($html->length > 0){
+			$result['lang'] = $html->item(0)->getAttribute('lang');
+		}
+
+		if (empty($result['lang'])) {
+			$result['lang'] = Q::ifset($result, 'headers', 'language', 'en');
+		}
+	}
+
 	// get title
 	$title = $doc->getElementsByTagName("title");
 	if($title->length > 0){
 		$result['title'] = $title->item(0)->nodeValue;
 	}
 
+	$query = $xpath->query('//*/link');
+	$icons = array();
+	$canonicalUrl = null;
+	foreach ($query as $item) {
+		$rel = $item->getAttribute('rel');
+		$href = $item->getAttribute('href');
+
+		if(!empty($rel)){
+			if (preg_match('#icon#', $rel)) {
+				$icons[$rel] = $href;
+			}
+
+			if ($rel == 'canonical') {
+				$canonicalUrl = $href;
+			}
+		}
+	}
+
+	// parse url
+	$result['url'] = $canonicalUrl ?: $url;
+
 	// get icon
 	$icon = Q::ifset($result, 'image', null);
 	if ($icon) {
 		$result['icon'] = $icon;
 	} else {
-		$query = $xpath->query('//*/link');
-		$icons = array();
-		foreach ($query as $item) {
-			$rel = $item->getAttribute('rel');
-			$type = $item->getAttribute('type');
-			$href = $item->getAttribute('href');
-
-			if(!empty($rel) && preg_match('#icon#', $rel)) {
-				$icons[$type] = $href;
-			}
-		}
-
-		$result['icon'] = Q::ifset($icons, 'apple-touch-icon-precomposed', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
+		$result['icon'] = Q::ifset($icons, 'apple-touch-icon', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
 	}
 
-	// parse url
-	$result['url'] = $url;
+	// sometime icons url looks like '//cdn02...'
+	if (preg_match("#^\/\/#", $result['icon'])) {
+		$urlParsed = parse_url($result['url']);
+		$result['icon'] = $urlParsed['scheme'].':'.$result['icon'];
+	}
 
 	// if requested slots publisherId and streamName - create stream
 	if (Q_Request::slotName('publisherId') && Q_Request::slotName('streamName')) {

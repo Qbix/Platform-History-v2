@@ -21,6 +21,7 @@ function Websites_webpage_post($params)
 	$copyright = Q::ifset($r, 'copyright', null);
 	$icon = Q::ifset($r, 'icon', null);
 	$contentType = Q::ifset($r, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
+	$contentType = explode(';', $contentType)[0];
 	$streamIcon = null;
 
 	if ($contentType != 'text/html') {
@@ -33,11 +34,16 @@ function Websites_webpage_post($params)
 			: "$urlPrefix/_blank";
 	}
 
-	$interestTitle = 'Domains: '.$urlParsed['host'].($urlParsed['port'] ? ':'.$urlParsed['port'] : '');
+	$interestTitle = 'Websites: '.$urlParsed['host'].($urlParsed['port'] ? ':'.$urlParsed['port'] : '');
 
 	Q::Event('Streams/interest/post', array('title' => $interestTitle));
 	$interestPublisherId = Q_Response::getSlot('publisherId');
 	$interestStreamName = Q_Response::getSlot('streamName');
+
+	// icon
+	if (Q_Valid::url($icon)) {
+		$iconList = Q_Image::iconArrayWithUrl($icon, 'Streams/image');
+	}
 
 	$stream = Streams::create($userId, $userId, 'Websites/webpage', array(
 		'title' => $title,
@@ -53,7 +59,8 @@ function Websites_webpage_post($params)
 			),
 			'icon' => $icon,
 			'copyright' => $copyright,
-			'contentType' =>$contentType
+			'contentType' =>$contentType,
+			'lang' => Q::ifset($r, 'lang', 'en')
 		)
 	), array(
 		'publisherId' => $interestPublisherId,

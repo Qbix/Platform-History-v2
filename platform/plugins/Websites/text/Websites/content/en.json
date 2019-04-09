@@ -20,7 +20,9 @@
 	"webpage": {
 		"composer": {
 			"Go": "Go",
-			"PasteLinkHere": "Paste a link here"
+			"PasteLinkHere": "Paste a link here",
+			"WriteToStartConversation": "Write your thoughts to start off the conversation",
+			"StartConversation": "Start Conversation"
 		}
 	}
 }
