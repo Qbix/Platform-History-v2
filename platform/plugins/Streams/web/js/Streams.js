@@ -4786,11 +4786,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 
 					mainScreenAndThumbsGrid();
 				}
-				/*var roomScreens = WebRTCconference.screens();
+				var roomScreens = WebRTCconference.screens();
 				var i, screen;
 				for (i = 0; screen = roomScreens[i]; i++) {
 					if(screen.videoTrack != null) screen.videoTrack.play()
-				}*/
+				}
 			} else {
 				//renderMinimizedScreensGrid()
 				if(viewMode == null || viewMode == 'regular'){
@@ -4800,11 +4800,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				} else {
 					renderMaximizedScreensGrid();
 				}
-				/*var roomScreens = WebRTCconference.screens();
+				var roomScreens = WebRTCconference.screens();
 				var i, screen;
 				for (i = 0; screen = roomScreens[i]; i++) {
 					if(screen.videoTrack != null) screen.videoTrack.play()
-				}*/
+				}
 
 			}
 
