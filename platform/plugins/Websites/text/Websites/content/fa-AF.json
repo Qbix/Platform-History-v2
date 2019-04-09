@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "پیوند به ترویج",
+                "startDate": "تاریخ شروع",
+                "startTime": "زمان شروع",
+                "endDate": "تاریخ پایان",
+                "endTime": "زمان پایان",
+                "budget": "بودجه"
+            },
+            "interests": {
+                "Title": "فیلتر با علاقه",
+                "FilterInterests": "شروع به تایپ کردن علاقه ..."
+            },
+            "Interest": "علاقه",
+            "Location": "محل"
+        }
+    }
+}

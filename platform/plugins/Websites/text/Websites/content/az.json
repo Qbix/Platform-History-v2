@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Təşviq etmək üçün əlaqə",
+                "startDate": "Başlanğıc tarixi",
+                "startTime": "Vaxtını başla",
+                "endDate": "Bitmə vaxtı",
+                "endTime": "End Time",
+                "budget": "Büdcə"
+            },
+            "interests": {
+                "Title": "Faizlərə görə Filter",
+                "FilterInterests": "Maraq yazmağa başlayın ..."
+            },
+            "Interest": "Faiz",
+            "Location": "Yer"
+        }
+    }
+}

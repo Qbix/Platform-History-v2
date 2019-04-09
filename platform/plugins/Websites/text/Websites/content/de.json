@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link zu fördern",
+                "startDate": "Anfangsdatum",
+                "startTime": "Startzeit",
+                "endDate": "Endtermin",
+                "endTime": "Endzeit",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Nach Interesse filtern",
+                "FilterInterests": "Beginnen Sie mit der Eingabe eines Interesses ..."
+            },
+            "Interest": "Interesse",
+            "Location": "Ort"
+        }
+    }
+}

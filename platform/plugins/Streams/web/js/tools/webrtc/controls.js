@@ -149,7 +149,7 @@
 
 
 
-                cameraBtn.addEventListener('mouseup', function () {
+                cameraBtn.addEventListener('touchend', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
                     Q.Dialogs.push({
                         title: "Video Sources",
@@ -161,13 +161,13 @@
                 })
 
                 cameraSwitcherBtn.addEventListener('mouseup', function () {
-                    tool.toggleCameras()
+                    tool.toggleCameras();
                 })
                 speakerBtn.addEventListener('mouseup', function () {
-                    tool.toggleAudioOfAll()
+                    tool.toggleAudioOfAll();
                 })
                 microphoneBtn.addEventListener('mouseup', function () {
-                    tool.toggleAudio()
+                    tool.toggleAudio();
                 })
 
                 return controlBar;
@@ -315,7 +315,10 @@
                             checked.checked = true;
                             checked.disabled = true;
                             var cameraId = checked.value;
-                            if (cameraId != null) webRTClib.conferenceControl.toggleCameras(cameraId)
+                            if (cameraId != null) {
+                            	webRTClib.conferenceControl.toggleCameras(cameraId)
+	                            Q.Dialogs.pop();
+                            }
                         }
                     })
                     count++;
@@ -358,6 +361,7 @@
                             currentSelectedItem.classList.remove('webrtc_tool_disabled-radio');
                         }
                         e.target.classList.add('webrtc_tool_disabled-radio');
+	                    Q.Dialogs.pop();
                     }, function (e) {
                         console.error('startShareScreen', e)
                         var currentCameraId = webRTClib.conferenceControl.currentCameraDevice().deviceId;
@@ -382,7 +386,8 @@
                         checked.disabled = true;
                         checked.checked = true;
                         var cameraId = checked.value;
-                        webRTClib.conferenceControl.disableVideo()
+                        webRTClib.conferenceControl.disableVideo();
+	                    Q.Dialogs.pop();
                     }
                 })
 

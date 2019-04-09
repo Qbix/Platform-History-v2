@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Einloggen",
+        "LogOut": "Ausloggen"
+    },
+    "activate": {
+        "SetAsPrimary": "Legen Sie {{1}} als primäres {{2}} fest.",
+        "ChoosePassPhrase": "Wählen Sie eine <strong>Passphrase,<\/strong> um sich mit anzumelden. <br> Eine einfache Phrase, die aus wenigen Wörtern besteht, an die Sie sich leicht erinnern werden.",
+        "ChoosePassPhraseSeeSuggestions": "Wählen Sie eine gute <strong>Passphrase<\/strong> , um Ihr Konto zu schützen. Siehe die Vorschläge für einige Ideen.",
+        "LogOutAndTryAgain": "Abmelden und erneut versuchen",
+        "IfYouFeel": "Wenn Sie das Gefühl haben, dass etwas schief gelaufen ist, können Sie",
+        "SetIdentifierButtonTitle": "Von vorn anfangen"
+    },
+    "session": {
+        "GetStarted": "Loslegen"
+    },
+    "authorize": {
+        "GetStarted": "Loslegen",
+        "Authorize": "Genehmigen",
+        "TermsLabel": "Ich habe gelesen und stimme zu <br> zum {{link}}",
+        "TermsTitle": "Bedingungen"
+    },
+    "register": {
+        "TermsLabel": "Ich akzeptiere die {{link}}",
+        "TermsTitle": "Bedingungen"
+    },
+    "notifications": {
+        "title": "Genehmigung",
+        "prompt": "Möchten Sie Benachrichtigungen aktivieren? Sie erhalten Echtzeit-Updates zu wichtigen Dingen.",
+        "yes": "Ja",
+        "no": "Nein",
+        "WelcomePleaseVerifyEmail": "Herzlich willkommen! Bitte bestätige deine Email Adresse.",
+        "WelcomeVerifyEmail": "Herzlich willkommen! Bestätige deine Email-Adresse.",
+        "ForgetPass": "Hey, hast du deine Passphrase vergessen?"
+    },
+    "usersContacts": {
+        "selectLabel": "Bitte Label auswählen.",
+        "inviteUser": "Benutzer einladen"
+    },
+    "invalidLanguageSelected": "Ungültige Sprache ausgewählt"
+}

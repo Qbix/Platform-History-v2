@@ -328,12 +328,14 @@
 }
 
 .Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
-    width: 100vw;
-    height:50vh;
+    transform: none;
+    -webkit-transform:none;
+    -moz-transform:none;
 }
 .Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
-    width: 100vw;
-    height:50vh;
+    transform: none;
+    -webkit-transform:none;
+    -moz-transform:none;
 }
 
 .webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen.webrtc_tool_chat-participant {
@@ -567,7 +569,7 @@
 
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
     position: absolute;
-    width: 100%
+    height: 100%
 }
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
     position: absolute;
@@ -577,13 +579,18 @@
     position: absolute;
     width: 100%
 }
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
     flex: 1;
     background: black;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
     z-index: 1;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
@@ -593,11 +600,11 @@
 
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isVertical {
-    flex-direction: row;
+    /*flex-direction: row;*/
 }
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isVertical {
-    flex-direction: column;
+    /*flex-direction: column;*/
 }
 
 .webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
@@ -754,9 +761,12 @@
     height: 100%;
     max-height: 100%;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-video {
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video {
     height: 100%;
     max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isVertical {
     height: 100%;
@@ -771,22 +781,28 @@
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal{
     width: 100%;
+    height: auto;
     position: absolute;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
-    height:100%;
+    width: 100%;
+    height: 100%;
     position: absolute;
+    object-fit: cover;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isHorizontal {
     width:100%;
+    height: auto;
     position: absolute;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isVertical {
     height: 100%;
+    width: auto;
     position: absolute;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-video video{
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
     width:100%;
+    height: auto;
     position: absolute;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
@@ -806,9 +822,11 @@
     color:black;
     font-size: 14px;
     height: 50px;
+    width: auto;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-name {
-    padding: 8px 5px 5px 8px;
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
+    height: auto;
+    padding: 5px 5px 7px 8px;
     width: 100%;
     bottom: 0;
     box-sizing: border-box;
@@ -836,7 +854,7 @@
     margin: 0;
     height: 30px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
     display: none;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
@@ -991,7 +1009,8 @@
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     overflow: hidden;
     position: relative;
-    height: 100%;
+    width:auto;
+    height:auto;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant{
    /* position: absolute;*/
@@ -1018,9 +1037,11 @@
     width: 100%;
     position: relative;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video video{
-    width: auto;
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
+    width: 100%;
     height: 100%;
+    position: absolute;
+    object-fit: cover;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-name {
     /* transform: translateY(100%); */
@@ -1032,12 +1053,13 @@
     justify-content: space-between;
     white-space: nowrap;
     padding: 5px;
-    background: white;
     color: black;
     font-size: 14px;
     height: 50px;
 }
-
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
+    position: absolute;
+}
 /* participants dialog */
 .dialog-participants-con {
     padding-top: 20px;

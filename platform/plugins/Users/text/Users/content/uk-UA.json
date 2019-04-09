@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "увійти",
+        "LogOut": "вийти"
+    },
+    "activate": {
+        "SetAsPrimary": "Налаштуйте {{1}} як основний {{2}}",
+        "ChoosePassPhrase": "Виберіть <strong>фразу, з якої<\/strong> потрібно ввійти. <br> Проста фраза, що складається з декількох слів, які ви легко запам&#39;ятаєте.",
+        "ChoosePassPhraseSeeSuggestions": "Виберіть хорошу <strong>фразу,<\/strong> щоб захистити свій обліковий запис. Див. Пропозиції щодо деяких ідей.",
+        "LogOutAndTryAgain": "Вийдіть і спробуйте знову",
+        "IfYouFeel": "Якщо ви відчуваєте, що щось пішло не так, ви можете",
+        "SetIdentifierButtonTitle": "починати наново"
+    },
+    "session": {
+        "GetStarted": "Почати"
+    },
+    "authorize": {
+        "GetStarted": "Почати",
+        "Authorize": "Авторизувати",
+        "TermsLabel": "Я прочитав і згоден <br> до {{link}}",
+        "TermsTitle": "Умови"
+    },
+    "register": {
+        "TermsLabel": "Я приймаю {{link}}",
+        "TermsTitle": "Умови"
+    },
+    "notifications": {
+        "title": "Дозвіл",
+        "prompt": "Увімкнути сповіщення? Ви отримаєте оновлення в реальному часі про речі, які вас цікавлять.",
+        "yes": "Так",
+        "no": "Ні",
+        "WelcomePleaseVerifyEmail": "Ласкаво просимо! Підтвердьте свою адресу електронної пошти.",
+        "WelcomeVerifyEmail": "Ласкаво просимо! Перевірте свою адресу електронної пошти.",
+        "ForgetPass": "Ей, ви забули пароль?"
+    },
+    "usersContacts": {
+        "selectLabel": "Виберіть позначку.",
+        "inviteUser": "Запросити користувача"
+    },
+    "invalidLanguageSelected": "Вибрано недійсну мову"
+}

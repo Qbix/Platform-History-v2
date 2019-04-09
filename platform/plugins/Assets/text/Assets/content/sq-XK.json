@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Prekni për të paguar"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: pagesë të përpunuar për {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Faleminderit për pagesën tuaj në {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} u pajtua për {{plan.title}}",
+        "YouSubscribedTo": "Ju jeni regjistruar në {{plan.title}}"
+    }
+}

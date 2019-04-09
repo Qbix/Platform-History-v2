@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Nhấn để thanh toán"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: phí được xử lý cho {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Cảm ơn bạn đã thanh toán cho {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} đã đăng ký {{plan.title}}",
+        "YouSubscribedTo": "Bạn đã đăng ký {{plan.title}}"
+    }
+}

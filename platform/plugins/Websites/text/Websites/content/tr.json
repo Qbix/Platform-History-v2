@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Tanıtmak için bağlantı",
+                "startDate": "Başlangıç tarihi",
+                "startTime": "Başlama zamanı",
+                "endDate": "Bitiş tarihi",
+                "endTime": "Bitiş zamanı",
+                "budget": "Bütçe"
+            },
+            "interests": {
+                "Title": "İlgi alanına göre filtrele",
+                "FilterInterests": "Bir ilgi yazmaya başlayın ..."
+            },
+            "Interest": "Faiz",
+            "Location": "yer"
+        }
+    }
+}

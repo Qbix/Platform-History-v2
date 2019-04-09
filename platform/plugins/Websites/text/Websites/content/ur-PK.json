@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "فروغ دینے کے لئے لنک",
+                "startDate": "شروع کرنے کی تاریخ",
+                "startTime": "وقت آغاز",
+                "endDate": "آخری تاریخ",
+                "endTime": "آخر وقت",
+                "budget": "بجٹ"
+            },
+            "interests": {
+                "Title": "دلچسپی سے فلٹر",
+                "FilterInterests": "دلچسپی ٹائپ کرنا شروع کریں ..."
+            },
+            "Interest": "دلچسپی",
+            "Location": "مقام"
+        }
+    }
+}

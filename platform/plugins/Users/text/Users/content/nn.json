@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Logg Inn",
+        "LogOut": "Logg ut"
+    },
+    "activate": {
+        "SetAsPrimary": "Sett {{1}} som min primære {{2}}",
+        "ChoosePassPhrase": "Velg et <strong>passord for<\/strong> å logge inn med. <br> Et enkelt uttrykk som består av noen få ord som du lett kan huske.",
+        "ChoosePassPhraseSeeSuggestions": "Velg et godt <strong>passord for<\/strong> å beskytte kontoen din. Se forslagene til noen ideer.",
+        "LogOutAndTryAgain": "Logg ut og prøv igjen",
+        "IfYouFeel": "Hvis du føler at noe gikk galt, kan du",
+        "SetIdentifierButtonTitle": "begynne på nytt"
+    },
+    "session": {
+        "GetStarted": "Kom i gang"
+    },
+    "authorize": {
+        "GetStarted": "Kom i gang",
+        "Authorize": "Autorisere",
+        "TermsLabel": "Jeg har lest og er enig <br> til {{link}}",
+        "TermsTitle": "Vilkår"
+    },
+    "register": {
+        "TermsLabel": "Jeg aksepterer {{link}}",
+        "TermsTitle": "Vilkår"
+    },
+    "notifications": {
+        "title": "Tillatelse",
+        "prompt": "Vil du aktivere varsler? Du mottar sanntids oppdateringer om ting du bryr deg om.",
+        "yes": "Ja",
+        "no": "Nei",
+        "WelcomePleaseVerifyEmail": "Velkommen! Vennligst bekreft e-postadressen din.",
+        "WelcomeVerifyEmail": "Velkommen! Bekreft e-postadressen din.",
+        "ForgetPass": "Hei, har du glemt passordet ditt?"
+    },
+    "usersContacts": {
+        "selectLabel": "Vennligst velg etikett.",
+        "inviteUser": "Inviter bruker"
+    },
+    "invalidLanguageSelected": "Ugyldig språk valgt"
+}
