@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Odkaz na podporu",
+                "startDate": "Dátum začiatku",
+                "startTime": "Doba spustenia",
+                "endDate": "Dátum ukončenia",
+                "endTime": "Čas ukončenia",
+                "budget": "rozpočet"
+            },
+            "interests": {
+                "Title": "Filtrovať podľa záujmu",
+                "FilterInterests": "Začať písať záujem ..."
+            },
+            "Interest": "záujem",
+            "Location": "umiestnenia"
+        }
+    }
+}

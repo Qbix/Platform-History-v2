@@ -1,0 +1,95 @@
+{
+    "preview": {
+        "NewItemTitle": "گزینه جدید"
+    },
+    "labels": {
+        "Streams\/invited": "افرادی که دعوت شدند",
+        "Streams\/invitedMe": "چه کسی مرا دعوت کرد"
+    },
+    "interests": {
+        "Filter": "چه چیزی لذت می برید؟",
+        "CanAdd": "اگر هنوز نمیتوانید آنچه را که دنبال میکنید پیدا کنید، میتوانید یک علاقه جدید را در زیر اضافه کنید:",
+        "TrySynonyms": "آیا آن را نمی بینید؟ برخی از مترادفها را امتحان کنید",
+        "AddUnderCategory": "زیر رده ... اضافه کنید",
+        "Other": "دیگر",
+        "Unlisted": "فهرست نشده"
+    },
+    "chat": {
+        "flaggedForAdminReview": "پیام شده است برای بررسی مدیر برجسته شده است. برای بازنشانی دوباره ضربه بزنید",
+        "noOneSaid": "هیچکس چیزی نگفته است",
+        "closeChatButton": "بستن چت",
+        "closeChatConfirmTitle": "بستن این چت",
+        "closeChatConfirm": "آیا مطمئن هستید که می خواهید این چت را ببندید؟",
+        "closeChatConfirmYes": "بله",
+        "closeChatConfirmNo": "نه",
+        "earlierComments": "نظرات قبلی"
+    },
+    "notifications": {
+        "*": "پیام {{& message.fields.type}} به {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} گفت:",
+        "Streams\/changed": "تغییرات در {{stream.fields.title}}",
+        "Streams\/invite": "شما به {{& stream.fields.title}} دعوت شدید",
+        "Streams\/announcement": "اطلاعیه در {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} دسترسی به جریان را تغییر داد",
+        "Streams\/chat\/edit": "پیام چت ویرایش شده است",
+        "Streams\/chat\/remove": "پیام چت حذف شد",
+        "Streams\/closed": "{{stream.fields.title}} بسته شده است",
+        "Streams\/task\/progress": "پیشرفت در {{stream.fields.title}} انجام شد",
+        "Streams\/task\/complete": "وظیفه تکمیل شده: {{stream.fields.title}}",
+        "Streams\/task\/error": "خطا در طول {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: پیام ورودی"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} شما را به {{inviteUrl}} دعوت کرد",
+        "dialog": {
+            "chooseFromContacts": "از مخاطبین خود انتخاب کنید",
+            "selectFromContacts": "از مخاطبین انتخاب کنید",
+            "photo": "عکس گرفتن",
+            "photoInstruction": "اگر فردی که کد QR خود را اسکن کرده است در مقابل شما باشد، یک عکس از آنها بگیرید",
+            "to": "به {{Stream Title}}",
+            "go": "برو",
+            "title": "دعوت",
+            "placeholder": "شماره تلفن یا آدرس ایمیل",
+            "orInvite": "یا با استفاده از افراد دعوت کنید:",
+            "QR": "{{ClickOrTap}} برای تولید کد QR",
+            "QRtitle": "اسکن این کد QR",
+            "byEmail": "پست الکترونیک",
+            "byText": "متن",
+            "byFacebook": "فیس بوک",
+            "byTwitter": "توییتر"
+        },
+        "email": {
+            "subject": "هی، این را چک کن",
+            "PleaseVisitLink": "لطفا از لینک زیر دیدن کنید:",
+            "InvitingYou": "من از شما دعوت می کنم {{title}}",
+            "HasInvitedYou": "{{displayName}} شما را به {{title}} دعوت کرده است"
+        },
+        "sms": {
+            "content": "شما به {{title}} دعوت شدهاید. لطفا شیر {{url}}"
+        },
+        "notice": {
+            "text": "شما دعوت شده اید {{ClickOrTap}} اینجا برای پذیرش و پیوستن به"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} یک پیام <em>{{message.fields.type}}<\/em> را به {{stream.fields.title}} ارسال کرد"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} در {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "دعوت نامه ها از شماره ما ارسال می شود، که دوستان شما هنوز شناسایی نکرده اند. دنبال کردن با یک متن سریع برای اطلاع از دعوت نامه از طرف شما، از آنها بخواهید روی لینک کلیک کنید.",
+            "confirm": "دعوت نامه ها از شماره ما ارسال می شود، که دوستان شما هنوز شناسایی نکرده اند. آیا می خواهید با یک متن سریع پیگیری کنید تا بفهمید دعوت نامه از شما گرفته شده است، از آنها بخواهید روی لینک کلیک کنند.",
+            "check": "هی، من فقط یک دعوتنامه به برنامه {{app}} فرستادم. لطفا اس ام اس خود را بررسی کنید و روی لینک کلیک کنید!"
+        },
+        "email": {
+            "alert": "دعوت نامه ها از دامنه ما ارسال می شوند، که دوستان شما هنوز شناسایی نمی کنند. دنبال کردن با یک متن سریع برای اطلاع از دعوت نامه از طرف شما، از آنها بخواهید روی لینک کلیک کنید.",
+            "confirm": "دعوت نامه ها از دامنه ما ارسال می شوند، که دوستان شما هنوز شناسایی نمی کنند. آیا می خواهید با یک متن سریع پیگیری کنید تا بفهمید دعوت نامه از شما گرفته شده است، از آنها بخواهید روی لینک کلیک کنند.",
+            "subject": "دعوت کردید؟",
+            "body": "هی، من فقط یک دعوتنامه به برنامه {{app}} فرستادم. لطفا ایمیل خود را بررسی کنید و روی پیوند آن کلیک کنید!"
+        }
+    }
+}

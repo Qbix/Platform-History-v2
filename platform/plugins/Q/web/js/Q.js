@@ -2655,7 +2655,7 @@ var _layoutEvents = [];
  * Call this function to get an event which occurs every time
  * Q.layout() is called on the given element or one of its parents.
  * @param {Element} [element=document.documentElement] 
- * @event onLayout
+ * @return {Q.Event}
  */
 Q.onLayout = function (element) {
 	element = element || document.documentElement;
@@ -5726,7 +5726,13 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 				}
 			});
 		}
-	}, {"method": "post", "skipNonce": true});
+	}, {
+		"method": "post",
+		"skipNonce": true,
+		"fields": {
+			"Q.startNewSession": true
+		}
+	});
 };
 
 /**
@@ -9972,10 +9978,6 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 			return Q.handle(callback, null, options, []);
 		}
 		return this.each(function _jQuery_fn_activate_each(index, element) {
-			if (!$(element).closest('html').length) {
-				console.log("Q.activate: element " + element.id + " is not in the DOM");
-				return false; // avoid doing work if it's not in the DOM
-			}
 			Q.activate(element, options, callback);
 		});
 	};

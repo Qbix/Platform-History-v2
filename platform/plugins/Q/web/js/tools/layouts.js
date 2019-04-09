@@ -82,6 +82,14 @@ Q.Tool.define('Q/layouts', function (options) {
 		var rects = [];
 		var i, element;
 		for(i = 0; element = elements[i]; i++){
+			var layoutRect = layout[i];
+			console.log('animate layoutRect', layoutRect, element);
+
+
+			if(layoutRect.width == 0 &&  layoutRect.height == 0) {
+				element.style.height = 'auto';
+				element.style.width = 'auto';
+			}
 
             if (!container.contains(element)) {
                 container.appendChild(element);
@@ -90,8 +98,12 @@ Q.Tool.define('Q/layouts', function (options) {
             if (element.style.position != 'absolute') {
                 element.style.position = 'absolute';
             }
-
-            rects.push(element.getBoundingClientRect());
+            var elementRect = element.getBoundingClientRect();
+			/*if(elementRect.width != 0 && elementRect.height != 0 && layoutRect.width != 0 && layoutRect.height != 0 && element.style.height == 'auto') {
+				element.style.height = '';
+				element.style.width = '';
+			}*/
+            rects.push(elementRect);
 
 
 		}
@@ -100,12 +112,6 @@ Q.Tool.define('Q/layouts', function (options) {
 		}
 
 		this.animation = Q.Animation.play(function (x, y) {
-            var rects = [];
-            var i, element;
-            for(i = 0; element = elements[i]; i++){
-                rects.push(element.getBoundingClientRect());
-            }
-
 			Q.each(elements, function (i) {
 				var rect1 = rects[i];
 				var rect2 = layout[i];
@@ -116,10 +122,11 @@ Q.Tool.define('Q/layouts', function (options) {
                 var currentWidth = parseFloat(ts.width);
                 var currentHeight = parseFloat(ts.height);
 
+                //console.log('animation', currentWidth, currentHeight);
                 if(currentLeft !== rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
                 if(currentTop !== rect2.top) ts.top = rect1.top + (rect2.top - rect1.top) * y + 'px';
-                if(currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
-                if(currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
+                if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
+                if((rect2.height != 0 && currentWidth != rect2.height) && currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
 			});
 		}, 500, ease)
 	}

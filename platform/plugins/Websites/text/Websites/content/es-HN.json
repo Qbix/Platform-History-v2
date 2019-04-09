@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Enlace para promover",
+                "startDate": "Fecha de inicio",
+                "startTime": "Hora de inicio",
+                "endDate": "Fecha final",
+                "endTime": "Hora de finalización",
+                "budget": "Presupuesto"
+            },
+            "interests": {
+                "Title": "Filtrar por interés",
+                "FilterInterests": "Comience a escribir un interés ..."
+            },
+            "Interest": "Interesar",
+            "Location": "Ubicación"
+        }
+    }
+}

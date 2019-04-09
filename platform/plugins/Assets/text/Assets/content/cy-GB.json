@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tap i dalu"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: prosesu tâl am {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Diolch i chi am eich taliad i {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Tanysgrifiwyd {{call 'user.displayName'}} i {{plan.title}}",
+        "YouSubscribedTo": "Rydych wedi tanysgrifio i {{plan.title}}"
+    }
+}

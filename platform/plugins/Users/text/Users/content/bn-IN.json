@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "লগ ইন করুন",
+        "LogOut": "প্রস্থান"
+    },
+    "activate": {
+        "SetAsPrimary": "আমার {{2}} হিসাবে {{1}} সেট করুন",
+        "ChoosePassPhrase": "লগ ইন করতে একটি <strong>পাস ফ্রেজ<\/strong> চয়ন করুন। <br> আপনি সহজে মনে রাখবেন যে কয়েক শব্দ গঠিত একটি সহজ ফ্রেজ।",
+        "ChoosePassPhraseSeeSuggestions": "আপনার অ্যাকাউন্ট রক্ষা করার জন্য একটি ভাল <strong>পাস ফ্রেজ<\/strong> চয়ন করুন। কিছু ধারনা জন্য পরামর্শ দেখুন।",
+        "LogOutAndTryAgain": "লগ আউট এবং আবার চেষ্টা করুন",
+        "IfYouFeel": "যদি আপনি কিছু ভুল অনুভব করেন, আপনি পারেন",
+        "SetIdentifierButtonTitle": "নতুন করে শুরু কর"
+    },
+    "session": {
+        "GetStarted": "এবার শুরু করা যাক"
+    },
+    "authorize": {
+        "GetStarted": "এবার শুরু করা যাক",
+        "Authorize": "অনুমোদন করা",
+        "TermsLabel": "আমি পড়েছি এবং একমত <br> {{link}}",
+        "TermsTitle": "শর্তাবলী"
+    },
+    "register": {
+        "TermsLabel": "আমি {{link}} গ্রহণ করি",
+        "TermsTitle": "শর্তাবলী"
+    },
+    "notifications": {
+        "title": "অনুমতি",
+        "prompt": "আপনি বিজ্ঞপ্তি সক্রিয় করতে চান? আপনি যে জিনিসগুলি সম্পর্কে যত্নশীল সেগুলি সম্পর্কে আপনি রিয়েল-টাইম আপডেট পাবেন।",
+        "yes": "হাঁ",
+        "no": "না",
+        "WelcomePleaseVerifyEmail": "স্বাগত! আপনার ইমেল ঠিকানা যাচাই করুন.",
+        "WelcomeVerifyEmail": "স্বাগত! আপনার ইমেল ঠিকানা যাচাই করুন.",
+        "ForgetPass": "আরে, আপনি কি আপনার পাসফ্রেজ ভুলে গেছেন?"
+    },
+    "usersContacts": {
+        "selectLabel": "লেবেল নির্বাচন করুন।",
+        "inviteUser": "ব্যবহারকারীকে আমন্ত্রণ জানান"
+    },
+    "invalidLanguageSelected": "অবৈধ ভাষা নির্বাচিত"
+}

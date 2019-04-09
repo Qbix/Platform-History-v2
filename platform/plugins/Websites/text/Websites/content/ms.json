@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Pautan untuk mempromosikan",
+                "startDate": "Tarikh mula",
+                "startTime": "Masa mula",
+                "endDate": "Tarikh tamat",
+                "endTime": "Masa tamat",
+                "budget": "Belanjawan"
+            },
+            "interests": {
+                "Title": "Penapis Dengan Minat",
+                "FilterInterests": "Mula menaip minat ..."
+            },
+            "Interest": "Faedah",
+            "Location": "Lokasi"
+        }
+    }
+}

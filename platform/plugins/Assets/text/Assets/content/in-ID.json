@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ketuk untuk membayar"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tagihan diproses untuk {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Terima kasih atas pembayaran Anda ke {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} berlangganan {{plan.title}}",
+        "YouSubscribedTo": "Anda telah berlangganan {{plan.title}}"
+    }
+}

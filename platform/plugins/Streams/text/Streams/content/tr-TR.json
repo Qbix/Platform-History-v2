@@ -1,0 +1,95 @@
+{
+    "preview": {
+        "NewItemTitle": "Yeni öğe"
+    },
+    "labels": {
+        "Streams\/invited": "Davet ettiğim insanlar",
+        "Streams\/invitedMe": "Beni kim davet etti"
+    },
+    "interests": {
+        "Filter": "Ne yapmaktan hoşlanırsın?",
+        "CanAdd": "Aradığınızı hala bulamıyorsanız, aşağıya yeni bir ilgi ekleyebilirsiniz:",
+        "TrySynonyms": "Görmüyor musun? Bazı eş anlamlıları dene.",
+        "AddUnderCategory": "Kategori altında ekle ...",
+        "Other": "Diğer",
+        "Unlisted": "Liste dışı"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesaj yönetici incelemesi için işaretlendi. Çıkarmak için tekrar dokunun.",
+        "noOneSaid": "Kimse bir şey söylemedi",
+        "closeChatButton": "Sohbeti kapat",
+        "closeChatConfirmTitle": "Bu sohbeti kapat?",
+        "closeChatConfirm": "Bu sohbeti kapatmak istediğinizden emin misiniz?",
+        "closeChatConfirmYes": "Evet",
+        "closeChatConfirmNo": "Yok hayır",
+        "earlierComments": "önceki yorumlar"
+    },
+    "notifications": {
+        "*": "{{& message.fields.type}} mesajına {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dedi ki:",
+        "Streams\/changed": "{{stream.fields.title}} daki değişiklikler",
+        "Streams\/invite": "{{& stream.fields.title}} adresine davet edildiniz",
+        "Streams\/announcement": "{{& streams.fields.title}} Duyurusu",
+        "Streams\/access": "{{&call 'avatar.displayName'}} akış erişimi değiştirildi",
+        "Streams\/chat\/edit": "Sohbet mesajı düzenlendi",
+        "Streams\/chat\/remove": "Sohbet mesajı kaldırıldı",
+        "Streams\/closed": "{{stream.fields.title}} kapatıldı",
+        "Streams\/task\/progress": "{{stream.fields.title}} tarihinde ilerleme kaydedildi",
+        "Streams\/task\/complete": "Görev tamamlandı: {{stream.fields.title}}",
+        "Streams\/task\/error": "Hata sırasında: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Gelen Mesaj"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} seni {{inviteUrl}} davet etti",
+        "dialog": {
+            "chooseFromContacts": "Kişilerinizden seçim yapın",
+            "selectFromContacts": "Rehberden Seç",
+            "photo": "Fotoğraf çekmek",
+            "photoInstruction": "QR kodunuzu tarayan kişi önünüzdeyse, bir fotoğrafını çekin.",
+            "to": "Kime: {{Stream Title}}",
+            "go": "Gitmek",
+            "title": "Davet et",
+            "placeholder": "Cep telefonu numarası veya e-posta adresi",
+            "orInvite": "Veya aşağıdakileri kullanarak insanları davet edin:",
+            "QR": "QR kodunu oluşturmak için {{ClickOrTap}}",
+            "QRtitle": "Bu QR kodunu tara",
+            "byEmail": "E-posta",
+            "byText": "Metin",
+            "byFacebook": "Facebook",
+            "byTwitter": "heyecan"
+        },
+        "email": {
+            "subject": "Hey, şuna bir bak",
+            "PleaseVisitLink": "Lütfen aşağıdaki bağlantıyı ziyaret edin:",
+            "InvitingYou": "Seni {{title}} davet ediyorum",
+            "HasInvitedYou": "{{displayName}} seni {{title}} davet etti"
+        },
+        "sms": {
+            "content": "{{title}} adlı kişiye davet edildiniz. Lütfen {{url}} simgesine dokunun."
+        },
+        "notice": {
+            "text": "Davet edildin. Kabul etmek ve katılmak için {{ClickOrTap}} burada."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}}, {{stream.fields.title}} adresine {{ <em>1000}} bir<\/em> mesaj gönderdi."
+        },
+        "text": {
+            "body": "{{& url}} {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Davetiyeler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için hızlı bir metinle takip edin ve bağlantıyı tıklatmalarını isteyin.",
+            "confirm": "Davetiyeler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek ve bağlantıyı tıklatmalarını istemek için kısa bir metin takip etmek ister misiniz?",
+            "check": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen sms&#39;inizi kontrol edin ve linke tıklayın!"
+        },
+        "email": {
+            "alert": "Davetiyeler, arkadaşlarınızın henüz tanımadığı etki alanımızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için hızlı bir metin izleyin ve bağlantıyı tıklamaları istenir.",
+            "confirm": "Davetiyeler, arkadaşlarınızın henüz tanımadığı etki alanımızdan gönderilir. Davetiyenin sizden geldiğini bildirmek ve bağlantıyı tıklatmalarını istemek için kısa bir metin takip etmek ister misiniz?",
+            "subject": "Davet aldın mı?",
+            "body": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen e-postanızı kontrol edin ve oradaki bağlantıyı tıklayın!"
+        }
+    }
+}

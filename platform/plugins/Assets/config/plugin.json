@@ -110,7 +110,7 @@
 			"amounts": {
 				"Users/insertUser": 20,
 				"Users/inviteUser": 10,
-				"createCommunity": 40
+				"createCommunity": 20
 			},
 			"earn": {
 				"acceptedInvite": 10
@@ -153,6 +153,7 @@
 		},
 		"browsertab": {
 			"css": []
-		}
+		},
+		"canCheckPaid": ["Users/admoins", "Assets/admins"]
 	}
 }

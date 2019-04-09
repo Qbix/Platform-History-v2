@@ -1,0 +1,95 @@
+{
+    "preview": {
+        "NewItemTitle": "Nytt föremål"
+    },
+    "labels": {
+        "Streams\/invited": "Folk jag bjöd in",
+        "Streams\/invitedMe": "Vem bjöd in mig"
+    },
+    "interests": {
+        "Filter": "Vad tycker du om?",
+        "CanAdd": "Om du fortfarande inte hittar det du söker kan du lägga till ett nytt intresse nedan:",
+        "TrySynonyms": "Kan du inte se det? Prova några synonymer.",
+        "AddUnderCategory": "Lägg till under kategori ...",
+        "Other": "Andra",
+        "Unlisted": "onoterade"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Meddelandet har flaggats för administratörsgranskning. Peka igen till unflag.",
+        "noOneSaid": "Ingen har sagt någonting",
+        "closeChatButton": "Stäng chatt",
+        "closeChatConfirmTitle": "Stäng denna chatt?",
+        "closeChatConfirm": "Är du säker på att du vill stänga den här chatten?",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Nej",
+        "earlierComments": "tidigare kommentarer"
+    },
+    "notifications": {
+        "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sa:",
+        "Streams\/changed": "Ändringar i {{stream.fields.title}}",
+        "Streams\/invite": "Du var inbjuden till {{& stream.fields.title}}",
+        "Streams\/announcement": "Meddelande i {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ändrad strömåtkomst",
+        "Streams\/chat\/edit": "Chattmeddelandet har redigerats",
+        "Streams\/chat\/remove": "Chattmeddelandet har tagits bort",
+        "Streams\/closed": "{{stream.fields.title}} har stängts",
+        "Streams\/task\/progress": "Framsteg gjord den {{stream.fields.title}}",
+        "Streams\/task\/complete": "Uppgift slutfört: {{stream.fields.title}}",
+        "Streams\/task\/error": "Fel under: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Inkommande meddelande"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Välj från dina kontakter",
+            "selectFromContacts": "Välj Från Kontakter",
+            "photo": "Ta ett foto",
+            "photoInstruction": "Om personen som skannat din QR-kod ligger framför dig, ta ett foto av dem",
+            "to": "Till: {{Stream Title}}",
+            "go": "Gå",
+            "title": "Inbjudan",
+            "placeholder": "Mobilnummer eller e-postadress",
+            "orInvite": "Eller bjud in personer genom att använda:",
+            "QR": "{{ClickOrTap}} för att generera QR-kod",
+            "QRtitle": "Skanna den här QR-koden",
+            "byEmail": "E-post",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hej, kolla här",
+            "PleaseVisitLink": "Vänligen besök följande länk:",
+            "InvitingYou": "Jag uppmanar dig att {{title}}",
+            "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}"
+        },
+        "sms": {
+            "content": "Du har blivit inbjuden till {{title}}. Var god och tryck på {{url}}"
+        },
+        "notice": {
+            "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} skickade ett <em>{{message.fields.type}}<\/em> meddelande till {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem att klicka på länken.",
+            "confirm": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Vill du följa upp en snabbtext så att de vet att inbjudan kom från dig och ber dem att klicka på länken.",
+            "check": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Kontrollera din sms och klicka på länken!"
+        },
+        "email": {
+            "alert": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem att klicka på länken.",
+            "confirm": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Vill du följa upp en snabbtext så att de vet att inbjudan kom från dig och ber dem att klicka på länken.",
+            "subject": "Fick du en inbjudan?",
+            "body": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Vänligen kolla din email och klicka på länken där inne!"
+        }
+    }
+}

@@ -408,6 +408,17 @@ class Q_Uri
 		$segments = $path ? explode('/', $path) : array();
 		$uri_fields = null;
 
+		if (substr($base_url, -11) === '/action.php') {
+			if (count($segments) < 2) {
+				return Q_Uri::fromArray(array());
+			} else {
+				return Q_Uri::fromArray(array(
+					'module' => $segments[0],
+					'action' => $segments[1]
+				));
+			}
+		}
+
 		if ($route) {
 			if (! array_key_exists($route, $routes)) {
 				throw new Q_Exception_MissingRoute(compact('route'));

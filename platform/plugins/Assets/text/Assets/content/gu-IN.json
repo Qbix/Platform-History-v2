@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ચૂકવવા માટે ટેપ કરો"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} માટે ચાર્જ પ્રક્રિયા",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ની ચુકવણી બદલ આભાર",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} પર સબ્સ્ક્રાઇબ કર્યું",
+        "YouSubscribedTo": "તમે {{plan.title}} પર સબ્સ્ક્રાઇબ કર્યું છે"
+    }
+}

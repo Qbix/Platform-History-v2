@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "oturum aç",
+        "LogOut": "çıkış Yap"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}}, birincil {{2}} olarak ayarla",
+        "ChoosePassPhrase": "İle giriş yapmak için bir <strong>geçiş cümlesi<\/strong> seçin. <br> Kolayca hatırlayacağınız birkaç kelimeden oluşan basit bir cümle.",
+        "ChoosePassPhraseSeeSuggestions": "Hesabınızı korumak için iyi bir <strong>geçiş cümlesi<\/strong> seçin. Bazı fikirler için önerilere bakın.",
+        "LogOutAndTryAgain": "Oturumu Kapatıp Tekrar Dene",
+        "IfYouFeel": "Bir şeylerin yanlış gittiğini düşünüyorsanız,",
+        "SetIdentifierButtonTitle": "baştan başlamak"
+    },
+    "session": {
+        "GetStarted": "Başlamak"
+    },
+    "authorize": {
+        "GetStarted": "Başlamak",
+        "Authorize": "Yetki vermek",
+        "TermsLabel": "okudum ve kabul ediyorum <br> {{link}}",
+        "TermsTitle": "şartlar"
+    },
+    "register": {
+        "TermsLabel": "{{link}} &#39;ı kabul ediyorum",
+        "TermsTitle": "şartlar"
+    },
+    "notifications": {
+        "title": "izin",
+        "prompt": "Bildirimleri etkinleştirmek ister misiniz? İlgilendiğiniz şeyler hakkında gerçek zamanlı güncellemeler alacaksınız.",
+        "yes": "Evet",
+        "no": "Yok hayır",
+        "WelcomePleaseVerifyEmail": "Hoşgeldiniz! Lütfen email adresini doğrula.",
+        "WelcomeVerifyEmail": "Hoşgeldiniz! Email adresinizi doğrulayın.",
+        "ForgetPass": "Hey, parolanızı unuttun mu?"
+    },
+    "usersContacts": {
+        "selectLabel": "Lütfen bir etiket seçiniz.",
+        "inviteUser": "Kullanıcıyı davet et"
+    },
+    "invalidLanguageSelected": "Geçersiz dil seçildi"
+}

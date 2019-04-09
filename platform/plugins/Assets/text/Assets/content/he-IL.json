@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "הקש כדי לשלם"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: החיוב בוצע עבור {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "תודה על התשלום שלך ל- {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} נרשם ל- {{plan.title}}",
+        "YouSubscribedTo": "נרשמת ל- {{plan.title}}"
+    }
+}

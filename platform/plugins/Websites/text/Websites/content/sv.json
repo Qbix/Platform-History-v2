@@ -1,0 +1,20 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Länk för att marknadsföra",
+                "startDate": "Start datum",
+                "startTime": "Starttid",
+                "endDate": "Slutdatum",
+                "endTime": "Sluttid",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filtrera efter intresse",
+                "FilterInterests": "Börja skriva ett intresse ..."
+            },
+            "Interest": "Intressera",
+            "Location": "Plats"
+        }
+    }
+}

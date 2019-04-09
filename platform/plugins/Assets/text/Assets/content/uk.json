@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Натисніть для оплати"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: плату за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Дякуємо за ваш платіж до {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} підписався на {{plan.title}}",
+        "YouSubscribedTo": "Ви підписані на {{plan.title}}"
+    }
+}

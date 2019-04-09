@@ -46,6 +46,7 @@ abstract class Users extends Base_Users
 			false;
 		}
 		return strpos($icon, 'imported') !== false
+		or strpos($icon, 'uploads') !== false
 		or preg_match("/\/icon\/[0-9]+/", $icon);
 	}
 
@@ -65,12 +66,20 @@ abstract class Users extends Base_Users
 	 * Get the name of the main community from the config. Defaults to the app name.
 	 * @method communityName
 	 * @static
+	 * @param {boolean} $includeSuffix Whether to include the community suffix
 	 * @return {string} The name of the main community for the installed app.
 	 */
-	static function communityName()
+	static function communityName($includeSuffix = false)
 	{
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
-		return $communityName ? $communityName : Q::app();
+		$suffix = Q_Config::get('Users', 'community', 'suffix', null);
+		if (!$communityName) {
+			$communityName = Q::app();
+		}
+		if ($suffix) {
+			$communityName .= " $suffix";
+		}
+		return $communityName;
 	}
 	
 	/**
@@ -1098,6 +1107,13 @@ abstract class Users extends Base_Users
 		}
 		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
+		if (!is_array($icon) and $_SESSION['Users']['register']['icon']) {
+			$icon = $_SESSION['Users']['register']['icon'];
+			unset($_SESSION['Users']['register']['icon']);
+		}
+		if ($icon) {
+			$user->set('skipIconSearch', $icon);
+		}
 
 		Users::$cache['user'] = $user;
 
@@ -1118,7 +1134,7 @@ abstract class Users extends Base_Users
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
 		}
-		$user->icon = '{{Users}}/img/icons/default';
+		$user->icon = is_string($icon) ? $icon : '{{Users}}/img/icons/default';
 		$user->passphraseHash = '';
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
@@ -1516,11 +1532,11 @@ abstract class Users extends Base_Users
 					$min = min($sw / $w, $sh / $h);
 					$w2 = $w * $min;
 					$h2 = $h * $min;
-					$sx = ($sw - $w2) / 2;
-					$sy = ($sh - $h2) / 2;
+					$sx = round(($sw - $w2) / 2);
+					$sy = round(($sh - $h2) / 2);
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled($image, $source, $sx, $sy, 0, 0, $w, $h, $w2, $h2);
+					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
