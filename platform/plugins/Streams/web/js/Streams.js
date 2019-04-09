@@ -4590,7 +4590,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 							Q.Tool.setUpElement(
 								"div", // or pass an existing element
 								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference}
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
 							)
 						),
 						{},
@@ -6307,13 +6307,14 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		if(_controls != null) {
 			var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
 			console.log('Streams/webrtc/controls');
-			controlsTool.remove()
+			if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
+			Q.Tool.remove(controlsTool);
 		}
 	};
 
-	
+
 	return module;
-}();
+};
 
 
 /**
