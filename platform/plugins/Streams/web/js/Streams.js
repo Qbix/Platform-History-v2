@@ -4485,6 +4485,7 @@ var Interests = Streams.Interests = {
  * @param {Object} fields
  */
 var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
+	var WebRTCconference;
 	var _options = {};
 	var _controls = null;
 	var _roomsMedia = null;
@@ -4566,7 +4567,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				}
 
 				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
-				window.WebRTCconference = WebRTCconference({
+				WebRTCconference = WebRTCconferenceLib({
 					mode:'twilio',
 					roomName:twilioRoomName,
 					twilioAccessToken: response.slots.token,
@@ -4589,7 +4590,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 							Q.Tool.setUpElement(
 								"div", // or pass an existing element
 								"Streams/webrtc/controls",
-								{}
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
 							)
 						),
 						{},
@@ -4748,8 +4749,8 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		var activeScreen;
 		var viewMode;
 		if(Q.info.isMobile){
-			viewMode = 'maximized';
-		} else viewMode = 'regular';
+			viewMode = 'maximizedMobile';
+		} else viewMode = 'maximized';
 
 		var control = {};
 		control.renderScreens = function() {
@@ -4766,9 +4767,10 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 				var roomScreens = WebRTCconference.screens();
 
-				if(viewMode == 'regular' || roomScreens.length == 1){
-					renderRegularScreensGrid();
-				} else if(viewMode == 'maximized') {
+				console.log('viewMode',viewMode)
+				if(viewMode == 'tiledMobile'){
+					renderTiledScreenGridMobile();
+				} else if(viewMode == 'maximizedMobile') {
 					if(activeScreen == null && roomScreens.length == 2) {
 						var i, screen;
 						for(i = 0; screen = roomScreens[i]; i++) {
@@ -4783,6 +4785,11 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 					}
 
 					mainScreenAndThumbsGrid();
+				}
+				var roomScreens = WebRTCconference.screens();
+				var i, screen;
+				for (i = 0; screen = roomScreens[i]; i++) {
+					if(screen.videoTrack != null) screen.videoTrack.play()
 				}
 			} else {
 				//renderMinimizedScreensGrid()
@@ -4816,14 +4823,14 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 				var resizeTool = Q.Tool.from(participantScreen.screenEl, "Q/resize");
 				if(resizeTool == null) {
-					if(Q.info.isMobile) return;
 					Q.activate(
 						Q.Tool.setUpElement(
 							participantScreen.screenEl, // or pass an existing element
 							"Q/resize",
 							{
 								movable: true,
-								active: viewMode == 'regular' ? true : false
+								active: true,
+								keepRatioBasedOnElement: participantScreen.videoTrack
 							}
 						),
 						{},
@@ -4842,47 +4849,55 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 		}
 
-		var getElementSizeKeepingratio = function (initSize, baseSize) {
+		var getElementSizeKeepingRatio = function (initSize, baseSize) {
 
-			var ratio = initSize.width / initSize.height;
-			var elementWidth, elementHeight;
+			//var ratio = initSize.width / initSize.height;
+			var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
+			/*var elementWidth, elementHeight;
 			if (ratio < 1) {
-				console.log('getElementSizeKeepingratio VERTICLE');
+				console.log('getElementSizeKeepingRatio VERTICLE');
 				elementWidth = parseInt(baseSize.height * ratio);
 				elementHeight = baseSize.height;
 
 			} else {
-				console.log('getElementSizeKeepingratio HORIZONTAL');
+				console.log('getElementSizeKeepingRatio HORIZONTAL');
 				elementHeight = parseInt( baseSize.width / ratio);
 				elementWidth = baseSize.width;
 
-			}
+			}*/
 
 
-			if(elementHeight > baseSize.height) {
-				console.log('getElementSizeKeepingratio OVERSIZE');
+			/*if(baseSize.height != null && elementHeight > baseSize.height) {
+				console.log('getElementSizeKeepingRatio OVERSIZE');
 
 				elementWidth = Math.round(baseSize.height * ratio);
 				elementHeight = ( elementWidth / ratio);
 
-			}
+			}*/
 
-			return {width:elementWidth, height:elementHeight, ratio: ratio};
+			//return {width:elementWidth, height:elementHeight, ratio: ratio};
 
+			return { width: Math.floor(initSize.width*ratio), height: Math.floor(initSize.height*ratio)};
 		}
 
 
 		control.fitScreenToVideo = function (videoEl, screen, reset, oldSize) {
-			if(videoEl.videoHeight != null && videoEl.videoWidth != null && videoEl.videoHeight != 0 && videoEl.videoWidth != 0) {
+			if(videoEl.videoHeight != null && videoEl.videoWidth != null && videoEl.videoHeight != 0 && videoEl.videoWidth != 0 && videoEl.parentNode != null) {
 
+				var videoCon = screen.videoCon;
 				if (videoEl.videoHeight > videoEl.videoWidth) {
-					if ((viewMode == 'maximized' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isVertical')) videoEl.parentNode.classList.add('isVertical');
+					if ((viewMode == 'maximized' || viewMode == 'maximizedMobile' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isVertical')) videoEl.parentNode.classList.add('isVertical');
 					videoEl.className = 'isVertical';
 				} else if (videoEl.videoWidth) {
-					if ((viewMode == 'maximized' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isHorizontal')) videoEl.parentNode.classList.add('isHorizontal');
+					if ((viewMode == 'maximized' || viewMode == 'maximizedMobile' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isHorizontal')) videoEl.parentNode.classList.add('isHorizontal');
 					videoEl.className = 'isHorizontal';
 				}
 
+			}
+
+			var resizeTool = Q.Tool.from(screen.screenEl, "Q/resize");
+			if(resizeTool != null) {
+				resizeTool.state.keepRatioBasedOnElement = videoEl;
 			}
 
 
@@ -4924,7 +4939,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 					return;
 				}*/
 
-				/* var mainScreenCon = document.querySelector('webrtc_tool_maximized-screen');
+				/* var mainScreenCon = document.querySelector('webrtc_tool_maximized-main-screen');
 				 var defaultWidth = 200
 				 var videoElWidth = oldSize != null && oldSize.width != null ? oldSize.width : defaultWidth;
 				 elementHeight = parseInt(videoElWidth / ratio0);
@@ -4934,7 +4949,6 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				videoEl.style.display = '';
 				screensRendering.renderScreens();
 			}
-
 			//videoCon.style.width = elementWidth + 'px';
 			//videoCon.style.height = elementHeight + 'px';
 
@@ -4946,12 +4960,31 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		 * @param {Object} [screen] screen object generated by webrtc WebRTCconference library
 		 */
 		var createRoomScreen = function(screen) {
+			function updateLocalScreenClasses(screen) {
+				if(screen.screensharing == true) {
+					if(!screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.add('screensharing');
+					if(screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.remove('flipped');
+					return;
+				}
+
+
+				var videoInputDevides = WebRTCconference.conferenceControl.videoInputDevices();
+				var currentCameraDevice = WebRTCconference.conferenceControl.currentCameraDevice();
+				if(currentCameraDevice == videoInputDevides[0]) {
+					console.log('updateLocalScreenClasses2')
+					if(screen.videoCon != null && !screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.add('flipped');
+					if(screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.remove('screensharing');
+				} else if(screen.videoCon) {
+					if(screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.remove('flipped');
+				}
+			}
+
 			if(screen.screenEl != null) {
+				if(screen.isLocal) updateLocalScreenClasses(screen);
 				return screen.screenEl;
 			}
 			var chatParticipantEl = document.createElement('DIV');
 			chatParticipantEl.className = 'webrtc_tool_chat-participant';
-			if(screen.screensharing == true) chatParticipantEl.classList.add('screensharing');
 			chatParticipantEl.dataset.participantName = screen.sid;
 			var chatParticipantVideoCon = screen.videoCon;
 			//var chatParticipantVideoCon = document.createElement("DIV");
@@ -4963,33 +4996,38 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			participantNameTextCon.className = "webrtc_tool_participant-name-text";
 			var participantNameText = document.createElement("DIV");
 			var userId = screen.participant.identity.split('\t')[0];
-			$(participantNameText).tool('Users/avatar', { 
-				userId: userId,
-				icon: false
-			}).activate();
-			//participantNameText.innerHTML = screen.participant.identity;
+
+			Q.activate(
+				Q.Tool.setUpElement(
+					participantNameText, // or pass an existing element
+					"Users/avatar",
+					{
+						userId: userId,
+						icon: false
+					}
+				),
+				{},
+				function () {
+					setTimeout(function () {
+						screensRendering.renderScreens();
+					}, 1000);
+
+				}
+			);
 
 			chatParticipantEl.appendChild(chatParticipantVideoCon);
 			participantNameTextCon.appendChild(participantNameText);
 			chatParticipantName.appendChild(participantNameTextCon);
 
-			if(screen.isLocal && Q.info.isMobile) {
-				chatParticipantVideoCon.classList.add('flipped');
-				//if(_controls != null) chatParticipantName.appendChild(_controls);
-
-				//var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
-				//chatParticipantName.appendChild(controlEl).activate();
-
-			}
 
 			if(!Q.info.isMobile) {
 
 				var screensBtns= document.createElement("DIV");
 				screensBtns.className = "webrtc_tool_participant-screen-btns";
-				var maximizeBtn = document.createElement("DIV");
+				var maximizeBtn = document.createElement("BUTTON");
 				maximizeBtn.className = 'webrtc_tool_maximize-btn'
 				maximizeBtn.innerHTML = '<img src="' + Q.url('{{Q}}/img/grow.png') + '">';
-				var minimizeBtn = document.createElement("DIV");
+				var minimizeBtn = document.createElement("BUTTON");
 				minimizeBtn.className = 'webrtc_tool_minimize-btn';
 				minimizeBtn.style.display = 'none';
 				minimizeBtn.innerHTML = '<img src="' + Q.url('{{Q}}/img/shrink.png') + '">';
@@ -4997,31 +5035,40 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				screensBtns.appendChild(minimizeBtn)
 				chatParticipantName.appendChild(screensBtns);
 
-				maximizeBtn.addEventListener('mousedown', function (e) {
+				maximizeBtn.addEventListener('click', function (e) {
 					e.preventDefault();
 					e.stopPropagation();
 					renderMaximizedScreensGrid(screen);
 				});
 
-				minimizeBtn.addEventListener('mousedown', function (e) {
+				minimizeBtn.addEventListener('click', function (e) {
 					e.preventDefault();
 					e.stopPropagation();
-					renderRegularScreensGrid();
+					renderMinimizedScreensGrid();
 				});
 			}
 
 			chatParticipantEl.appendChild(chatParticipantName);
 
-			//chatParticipantEl.addEventListener('mousedown', moveScreenFront, false)
-			//chatParticipantEl.addEventListener('touchstart', moveScreenFront, false)
+			chatParticipantEl.addEventListener('mousedown', moveScreenFront, false)
+			chatParticipantEl.addEventListener('touchstart', moveScreenFront, false)
 			chatParticipantVideoCon.addEventListener('click', function (e) {
 				e.preventDefault();
 			});
-			chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick);
+			if(Q.info.isMobile) {
+				window.addEventListener('touchend', function (e) {
+					var target = e.target;
+					console.log('target', target)
+					if (target == chatParticipantEl || chatParticipantEl.contains(target)) {
+						toggleViewModeByScreenClick(e);
+					}
+				});
+			} else chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick);
 
 			screen.screenEl = chatParticipantEl;
 			screen.nameEl = chatParticipantName;
 
+			if(screen.isLocal) updateLocalScreenClasses(screen);
 
 			_renderedScreens.push(chatParticipantEl);
 			return chatParticipantEl;
@@ -5072,6 +5119,8 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var screens = WebRTCconference.screens();
 			var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
 			screenEl.style.zIndex = currentHighestZIndex+1;
+			console.log('moveScreenFront', screenEl, screenEl.style.zIndex)
+
 		}
 
 		var moveScreenBack = function (screenEl) {
@@ -5082,21 +5131,29 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			}).filter(function (el) {return el != null;}))
 
 			screenEl.style.zIndex = currentLowestZIndex-1;
+			console.log('moveScreenBack', screenEl, screenEl.style.zIndex)
+		}
+
+		var renderTiledScreenGridMobile = function() {
+			var roomScreens = WebRTCconference.screens();
+			if(roomScreens.length <= 1) return;
+
+			if(window.innerHeight > window.innerWidth) {
+				//_roomsMedia.className = 'webrtc_tool_tiled-vertical-grid';
+				var elements = toggleScreensClass('tiledVerticalMobile');
+				_layoutTool.animate('tiledVerticalMobile', elements, 500, true);
+			} else {
+				//_roomsMedia.className = 'webrtc_tool_tiled-horizontal-grid';
+				var elements = toggleScreensClass('tiledHorizontalMobile');
+				_layoutTool.animate('tiledHorizontalMobile', elements, 500, true);
+			}
+			activeScreen = null;
+
 		}
 
 		var renderRegularScreensGrid = function() {
 			if(Q.info.isMobile){
-				var roomScreens = WebRTCconference.screens();
-
-				var elements = toggleScreensClass('regularScreensGrid');
-
-				if(window.innerHeight > window.innerWidth) {
-					_roomsMedia.className = 'webrtc_tool_tiled-vertical-grid';
-					_layoutTool.animate('tiledVerticalMobile', elements, 500, true);
-				} else {
-					_roomsMedia.className = 'webrtc_tool_tiled-horizontal-grid';
-					_layoutTool.animate('tiledHorizontalMobile', elements, 500, true);
-				}
+				renderTiledScreenGridMobile();
 			} else {
 				renderDesktopScreensGrid();
 				updateScreensButtons();
@@ -5134,16 +5191,16 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var size = {parentWidth:parentWidth, parentHeight:parentHeight}
 			var rects = [];
 			var rectWidth = 25;
-			var rectHeight = 140;
+			var rectHeight = 0;
 			var spaceBetween = 10;
 			var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
 			var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
 
 			console.log('a', perRow)
 
-			var minX = Math.min.apply(Math, rects.map(function(o) { return o.x; }));
+			/*var minX = Math.min.apply(Math, rects.map(function(o) { return o.x; }));
 			var maxX = Math.max.apply(Math, rects.map(function(o) { return o.x+o.width; }));
-			var minY = Math.min.apply(Math, rects.map(function(o) { return o.y; }));
+			var minY = Math.min.apply(Math, rects.map(function(o) { return o.y; }));*/
 
 			var roomScreens = WebRTCconference.screens();
 			var isNextNewLast = false;
@@ -5151,14 +5208,42 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var c = 1;
 			var i, screen;
 			for (i = 0; screen = roomScreens[i]; i++) {
-				var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : rectWidth
-				var videoHeight = screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight + 51 : rectHeight;
-				console.log('videoHeight', videoHeight, videoWidth, screen.screenEl);
-				var screenRect = getElementSizeKeepingratio({
-					width: videoWidth,
-					height: videoHeight
-				}, {width: 250, height: 250})
-				console.log('screenRect', screenRect.width, screenRect.height);
+				console.log('regularScreensGridregularScreensGrid nameEl', screen.participant.identity)
+				var nameRect = screen.nameEl.getBoundingClientRect();
+				var screenElRect = screen.screenEl.getBoundingClientRect();
+				var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
+				var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+
+				console.log('regularScreensGridregularScreensGrid nameRect', nameRect, screen.nameEl.scrollWidth);
+				console.log('regularScreensGridregularScreensGrid video', videoHeight, videoWidth, screen.screenEl);
+				console.log('regularScreensGridregularScreensGrid screenel', screen.screenEl.getBoundingClientRect());
+				if(videoWidth != 0 && videoHeight != 0) {
+					var screenRect = getElementSizeKeepingRatio({
+						width: videoWidth,
+						height: videoHeight,
+					}, {width: 250, height: 250})
+				} else if(videoWidth == 0 && videoHeight == 0 && screenElRect.width != 0 && screenElRect.height != 0 ) {
+					//screen.screenEl.style.width = '';
+					//screen.screenEl.style.height = '';
+					console.log('regularScreensGridregularScreensGrid if2');
+					var screenRect = {
+						width: screen.nameEl.firstChild.scrollWidth,
+						height: screen.nameEl.scrollHeight
+					};
+				} else {
+					var rect = new DOMRect(0, 0, 0, 0);
+
+					console.log('regularScreensGrid rect', rect)
+
+					rects.push(rect);
+					continue;
+				}
+
+
+				console.log('regularScreensGridregularScreensGrid screenRect', screenRect.width, screenRect.height);
+
+				if(videoWidth != 0 && videoHeight != 0) screenRect.height = screenRect.height + 50;
+
 
 				var firstRect = new DOMRect(containerRect.left, containerRect.top, rectWidth, rectHeight)
 				var prevRect = rects.length >= 1 ? rects[rects.length - 1] : firstRect;
@@ -5232,11 +5317,17 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				count = count - 1;
 
 				var videoWidth = activeScreen && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480
-				var videoHeight = activeScreen && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight + 51 : 270;
-				var mainScreenSize = getElementSizeKeepingratio({
+				var videoHeight = activeScreen && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
+				console.log('minimizedOrMaximizedScreenGrid video', videoWidth, videoHeight)
+				var mainScreenSize = getElementSizeKeepingRatio({
 					width: videoWidth,
 					height: videoHeight
-				}, {width: parentWidth / 100 * 90, height: (elementToWrap.top / 100 * 90)})
+				}, {width: parentWidth / 100 * 90, height: ((elementToWrap.top - 50) / 100 * 90)})
+				mainScreenSize.height = mainScreenSize.height + 50;
+
+
+				console.log('minimizedOrMaximizedScreenGrid mainScreenSize', mainScreenSize)
+
 				var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, (elementToWrap.top / 2) - mainScreenSize.height / 2, mainScreenSize.width, mainScreenSize.height);
 
 				rects.unshift(maximizedRect);
@@ -5366,6 +5457,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		 * @method renderMinimizedScreensGrid
 		 */
 		var renderMinimizedScreensGrid = function() {
+			console.log('renderMinimizedScreensGrid')
 			if(_layoutTool == null || _controls == null) return;
 			var roomScreens = WebRTCconference.screens();
 
@@ -5377,7 +5469,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 			var elements = toggleScreensClass('minimizedScreensGrid');
 			_layoutTool.animate('minimizedScreensGrid', elements, 500, true);
-
+			console.log('renderMinimizedScreensGrid 2222')
 			updateScreensButtons();
 		}
 
@@ -5415,51 +5507,42 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		function mainScreenAndThumbsGrid() {
 			//viewMode = 'maximized';
 			if(Q.info.isMobile) {
-				mainScreenAndThumbsGridMobile();
+				renderMaximizedScreensGridMobile();
 			} else {
 				renderMaximizedScreensGrid();
 			}
 		}
 
-		function mainScreenAndThumbsGridMobile(screenTomaximize) {
-			if(screenTomaximize != null) activeScreen = screenTomaximize;
-			if(activeScreen == null) return;
+		/**
+		 * Maximazes tapped screen to full, makes another screens small
+		 * @param screenToMaximize
+		 */
+		function renderMaximizedScreensGridMobile(screenToMaximize) {
+			console.log('renderMaximizedScreensGridMobile')
+			if(_layoutTool == null || _controls == null) return;
 			var roomScreens = WebRTCconference.screens();
-			roomScreens.map(function (screen) {
-				screen.screenEl.classList.remove('webrtc_tool_tiled-grid-screen');
-			})
-			var elements =  roomScreens.map(function (screen) {
-				screen.screenEl.classList.remove('webrtc_tool_tiled-grid-screen');
+			if(screenToMaximize != null) activeScreen = screenToMaximize;
+			if(screenToMaximize == null && (activeScreen == null || activeScreen.isLocal) && roomScreens.length == 2) {
 
-				if(screen == activeScreen && !screen.screenEl.classList.contains('webrtc_tool_maximized-main-screen')) {
-					screen.screenEl.classList.remove('webrtc_tool_maximized-small-screen');
-					screen.screenEl.classList.add('webrtc_tool_maximized-main-screen');
+				var i, screen;
+				for(i = 0; screen = roomScreens[i]; i++) {
+					if(!screen.isLocal) {
+						activeScreen = screen;
+					}
 				}
-				if(screen != activeScreen && !screen.screenEl.classList.contains('webrtc_tool_maximized-small-screen')) {
-					screen.screenEl.classList.remove('webrtc_tool_maximized-main-screen');
-					screen.screenEl.classList.add('webrtc_tool_maximized-small-screen');
-				}
+			}
 
-				return screen.screenEl
-			}).filter(function (el) {
-				return el != activeScreen.screenEl;
-			});
+			if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
 
-			elements.unshift(activeScreen.screenEl);
+			console.log('renderMaximizedScreensGridMobile START')
 
 			if(window.innerHeight > window.innerWidth) {
+				var elements = toggleScreensClass('maximizedVerticalMobile');
 				_layoutTool.animate('maximizedVerticalMobile', elements, 500, true);
-			} else _layoutTool.animate('maximizedHorizontalMobile', elements, 500, true);
-
-
-
-			_roomsMedia.className = 'webrtc_tool_thumbs-screens-grid';
-
-
-			return;
-
-			_roomsMedia.className = 'webrtc_tool_thumbs-screens-grid';
-
+			} else {
+				var elements = toggleScreensClass('maximizedHorizontalMobile');
+				_layoutTool.animate('maximizedHorizontalMobile', elements, 500, true);
+			}
 		}
 
 		var resetScreensStyle = function() {
@@ -5478,8 +5561,8 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		control.toggleViewMode = function() {
 			var modes;
 			if(Q.info.isMobile)
-				modes = ['regular', 'maximized'];
-			else modes = ['regular', 'maximized', 'minimized'];
+				modes = ['tiledMobile', 'maximizedMobile'];
+			else modes = ['regular', 'maximized'];
 
 			var i, mode, modeToSwitch;
 
@@ -5494,50 +5577,63 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			viewMode = modeToSwitch;
 
 
+			console.log('toggleViewMode', viewMode)
 			if(viewMode == null || viewMode == 'regular') {
 				renderRegularScreensGrid();
 			} else if(viewMode == 'minimized') {
 				renderMinimizedScreensGrid();
 			} else if(viewMode == 'maximized') {
-				if(Q.info.isMobile) {
-					mainScreenAndThumbsGridMobile(activeScreen);
-				} else renderMaximizedScreensGrid(activeScreen);
+				renderMaximizedScreensGrid(activeScreen);
+			} else if(viewMode == 'tiledMobile') {
+				renderTiledScreenGridMobile();
+			} else if(viewMode == 'maximizedMobile') {
+				renderMaximizedScreensGridMobile(activeScreen);
 			}
 		}
 
 		function toggleViewModeByScreenClick(e) {
+			console.log('toggleViewModeByScreenClick')
+			e.stopImmediatePropagation();
+			e.preventDefault();
 			var roomScreens = WebRTCconference.screens();
 
-			e.preventDefault();
-			e.stopPropagation();
+			/*e.preventDefault();
+			e.stopPropagation();*/
 
 
 			var tappedScreen = roomScreens.filter(function (obj) {
-				return obj.screenEl.contains(e.currentTarget);
+				return obj.screenEl.contains(e.target);
 			})[0];
 
 			if(tappedScreen == null) return
 			var resizeTool = Q.Tool.from(tappedScreen.screenEl, "Q/resize");
+			var videoResizeTool = Q.Tool.from(tappedScreen.videoCon, "Q/resize");
 			if(resizeTool != null) {
+				console.log('toggleViewModeByScreenClick', resizeTool)
 				if(resizeTool.state.appliedRecently) return;
+			}
+			if(videoResizeTool != null) {
+				console.log('toggleViewModeByScreenClick2')
+				if(videoResizeTool.state.appliedRecently) return;
 			}
 
 
-			if(activeScreen && !activeScreen.screenEl.contains(e.currentTarget)) {
+			if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
 				tappedScreen.screenEl.style.zIndex = '';
 
 				console.log('BEFORE renderMaximizedScreensGrid')
 				if(Q.info.isMobile){
-					mainScreenAndThumbsGridMobile(tappedScreen);
+					renderMaximizedScreensGridMobile(tappedScreen);
 				} else renderMaximizedScreensGrid(tappedScreen);
 				return;
 			}
 
 			activeScreen = tappedScreen;
 			control.toggleViewMode();
+			bindScreensEvents();
 			//fullScreenGrid()
 			//if(Q.info.isMobile)
-			//  mainScreenAndThumbsGridMobile()
+			//  renderMaximizedScreensGridMobile()
 			//else mainScreenAndThumbsGrid();
 		}
 
@@ -5736,7 +5832,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 					videoThumbsCon.appendChild(videoThumbs);
 					prerenderedScreens.appendChild(videoThumbsCon);
 					//roomsMedia.className = 'webrtc_tool_webrtc_tool_full-screen-grid';
-					toggleScreensGridClass('webrtc_tool_thumbs-screens-grid');
+					toggleScreensGridClass('webrtc_tool_maximized-screens-grid');
 
 			}
 
@@ -5934,7 +6030,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 					videoThumbsCon.appendChild(videoThumbs);
 					prerenderedScreens.insertBefore(videoThumbsCon, mainScreen);
 					//roomsMedia.className = 'full-screen-grid';
-					_roomsMedia.className = 'webrtc_tool_thumbs-screens-grid';
+					_roomsMedia.className = 'webrtc_tool_maximized-screens-grid';
 
 			}
 
@@ -5948,15 +6044,16 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		 * @param {String} [layout] layout name
 		 */
 		var toggleScreensClass = function (layout) {
+			console.log('toggleScreensClass', layout);
 			var gridClasses = [
 				'webrtc_tool_tiled-screens-grid',
 				'webrtc_tool_maximized-screens-grid',
-				'webrtc_tool_minimized-screens-grid',
+				'webrtc_tool_regular-screens-grid',
 			];
 			var screenClasses = [
 				'webrtc_tool_tiled-grid-screen',
-				'webrtc_tool_minimized-screen',
-				'webrtc_tool_maximized-screen',
+				'webrtc_tool_minimized-small-screen',
+				'webrtc_tool_maximized-main-screen',
 				'webrtc_tool_regular-screen',
 			];
 
@@ -5992,9 +6089,9 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 			}
 
-			if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid') {
-				var screenClass = 'webrtc_tool_minimized-screen';
-				var maximizedScreenClass = 'webrtc_tool_maximized-screen';
+			if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') {
+				var screenClass = 'webrtc_tool_minimized-small-screen';
+				var maximizedScreenClass = 'webrtc_tool_maximized-main-screen';
 				var elements = roomScreens.map(function (screen) {
 					for (var o in screenClasses) {
 						if(screenClasses[o] == screenClass && screen != activeScreen) continue;
@@ -6015,13 +6112,14 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 					return e != null;
 				});
 
-				if(layout == 'maximizedScreensGrid'){
+				if(layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile'){
 					elements.unshift(activeScreen.screenEl)
 					moveScreenBack(activeScreen.screenEl);
 				}
 
 
-				var containerClass = 'webrtc_tool_minimized-screens-grid';
+				var containerClass = 'webrtc_tool_maximized-screens-grid';
+
 				for (var x in gridClasses) {
 					if(gridClasses[x] == containerClass) continue;
 					if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
@@ -6032,11 +6130,17 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 			if(layout == 'regularScreensGrid') {
 				var screenClass = 'webrtc_tool_regular-screen';
-				var maximizedScreenClass = 'webrtc_tool_maximized-screen';
+				var maximizedScreenClass = 'webrtc_tool_maximized-main-screen';
+
 				var elements = roomScreens.map(function (screen) {
+					console.log('screenClasses CURRENT', screen.screenEl.className);
+
 					for (var o in screenClasses) {
+						console.log('screenClasses', screenClasses[o], screen.screenEl.classList.contains(screenClasses[o]));
 						if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
 					}
+					console.log('screenClasses END', screen.screenEl.className);
+
 					if(!screen.screenEl.classList.contains(screenClass)) {
 						screen.screenEl.classList.add(screenClass);
 					}
@@ -6068,7 +6172,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 			var gridClasses = [
 				'webrtc_tool_full-screen-grid',
 				'webrtc_tool_tiled-grid-screen',
-				'webrtc_tool_thumbs-screens-grid'
+				'webrtc_tool_maximized-screens-grid'
 			];
 
 			for(var i in gridClasses){
@@ -6197,14 +6301,22 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 	}
 
 	module.stop = function () {
+		console.log('disconnect');
 		WebRTCconference.disconnect()
 		if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
+		if(_controls != null) {
+			var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
+			console.log('Streams/webrtc/controls');
+			if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
+			Q.Tool.remove(controlsTool);
+		}
 	};
-
 
 
 	return module;
 };
+
+
 /**
  * @class Streams
  */
