@@ -4556,7 +4556,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 
 		Q.addScript([
 			"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-			"{{Streams}}/js/tools/webrtc/app.js?t=" + (+new Date),
+			"{{Streams}}/js/tools/webrtc/app.js",
 		], function () {
 
 			Q.req("Streams/webrtc", ["token"], function (err, response) {
@@ -4717,7 +4717,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 		Q.addScript([
 			"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
 			"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-			"{{Streams}}/js/tools/webrtc/app.js?t=" + (+new Date),
+			"{{Streams}}/js/tools/webrtc/app.js",
 		], function () {
 			var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
 			window.WebRTCconference = WebRTCconference({
