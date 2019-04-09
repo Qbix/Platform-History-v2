@@ -4745,7 +4745,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 	 * Render screens of all participants of the room
 	 * @method screensRendering
 	 */
-	var screensRendering = function () {
+	var screensRendering = (function () {
 		var activeScreen;
 		var viewMode;
 		if(Q.info.isMobile){
@@ -4786,11 +4786,11 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 					mainScreenAndThumbsGrid();
 				}
-				var roomScreens = WebRTCconference.screens();
+				/*var roomScreens = WebRTCconference.screens();
 				var i, screen;
 				for (i = 0; screen = roomScreens[i]; i++) {
 					if(screen.videoTrack != null) screen.videoTrack.play()
-				}
+				}*/
 			} else {
 				//renderMinimizedScreensGrid()
 				if(viewMode == null || viewMode == 'regular'){
@@ -4800,11 +4800,11 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				} else {
 					renderMaximizedScreensGrid();
 				}
-				var roomScreens = WebRTCconference.screens();
+				/*var roomScreens = WebRTCconference.screens();
 				var i, screen;
 				for (i = 0; screen = roomScreens[i]; i++) {
 					if(screen.videoTrack != null) screen.videoTrack.play()
-				}
+				}*/
 
 			}
 
@@ -4964,13 +4964,12 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 				if(screen.screensharing == true) {
 					if(!screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.add('screensharing');
 					if(screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.remove('flipped');
-					return;
 				}
 
 
 				var videoInputDevides = WebRTCconference.conferenceControl.videoInputDevices();
 				var currentCameraDevice = WebRTCconference.conferenceControl.currentCameraDevice();
-				if(currentCameraDevice == videoInputDevides[0]) {
+				if(!screen.screensharing && currentCameraDevice == videoInputDevides[0]) {
 					console.log('updateLocalScreenClasses2')
 					if(screen.videoCon != null && !screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.add('flipped');
 					if(screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.remove('screensharing');
@@ -5050,8 +5049,10 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 			chatParticipantEl.appendChild(chatParticipantName);
 
-			chatParticipantEl.addEventListener('mousedown', moveScreenFront, false)
-			chatParticipantEl.addEventListener('touchstart', moveScreenFront, false)
+			if(Q.info.isMobile) {
+				chatParticipantEl.addEventListener('touchstart', moveScreenFront)
+			} else chatParticipantEl.addEventListener('mousedown', moveScreenFront)
+
 			chatParticipantVideoCon.addEventListener('click', function (e) {
 				e.preventDefault();
 			});
@@ -5062,7 +5063,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 					if (target == chatParticipantEl || chatParticipantEl.contains(target)) {
 						toggleViewModeByScreenClick(e);
 					}
-				});
+				}, false);
 			} else chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick);
 
 			screen.screenEl = chatParticipantEl;
@@ -5602,7 +5603,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 
 
 			var tappedScreen = roomScreens.filter(function (obj) {
-				return obj.screenEl.contains(e.target);
+				return obj.screenEl.contains(e.target) || obj.screenEl == e.target;
 			})[0];
 
 			if(tappedScreen == null) return
@@ -6182,7 +6183,7 @@ var Webrtc = Streams.Webrtc = function Streams_Webrtc() {
 		}
 
 		return control;
-	}()
+	})()
 
 	var module = {};
 	module.screenRendering = screensRendering;
