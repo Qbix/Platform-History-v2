@@ -661,6 +661,11 @@ class Q_Utils
 		} else {
 			$url = $uri;
 		}
+
+		if (!is_array($curl_opts)) {
+			$curl_opts = array();
+		}
+
 		$parts = parse_url($url);		
 		$host = $parts['host'];
 		if (!isset($ip)) $ip = $host;
