@@ -23,7 +23,11 @@
 	font-weight: normal;
 	white-space: nowrap;
 }
-.Websites_webpage_preview_tool .Streams_aspect_interests:before {
+.Websites_webpage_preview_tool .Streams_aspect_interests img {
+	width: 16px;
+	height: auto;
+}
+.Websites_webpage_preview_tool ._Streams_aspect_interests:before {
 	font-family: 'qplatform-communities' !important;
 	content: "\e90d";
 	speak: none;

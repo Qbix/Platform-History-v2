@@ -11,7 +11,7 @@ function Websites_scrape_post($params)
 	$fields = Q::take($r, array('url'));
 	$url = $fields['url'];
 
-	if (!filter_var($url, FILTER_VALIDATE_URL)) {
+	if (!Q_Valid::url($url)) {
 		throw new Exception("Invalid URL");
 	}
 
@@ -95,11 +95,11 @@ function Websites_scrape_post($params)
 
 		if(!empty($rel)){
 			if (preg_match('#icon#', $rel)) {
-				$icons[$rel] = $href;
+				$icons[$rel] = preg_match("#^\/\/#", $href) ? 'http:'.$href : $href;
 			}
 
 			if ($rel == 'canonical') {
-				$canonicalUrl = $href;
+				$canonicalUrl = preg_match("#^\/\/#", $href) ? 'http:'.$href : $href;
 			}
 		}
 	}
@@ -109,16 +109,17 @@ function Websites_scrape_post($params)
 
 	// get icon
 	$icon = Q::ifset($result, 'image', null);
-	if ($icon) {
-		$result['icon'] = $icon;
+	if (Q_Valid::url($icon)) {
+		$result['bigIcon'] = $icon;
 	} else {
-		$result['icon'] = Q::ifset($icons, 'apple-touch-icon', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
+		$result['bigIcon'] = Q::ifset($icons, 'apple-touch-icon', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
 	}
 
-	// sometime icons url looks like '//cdn02...'
-	if (preg_match("#^\/\/#", $result['icon'])) {
-		$urlParsed = parse_url($result['url']);
-		$result['icon'] = $urlParsed['scheme'].':'.$result['icon'];
+	$result['smallIcon'] = Q::ifset($icons, 'icon', Q::ifset($icons, 'shortcut icon', $result['bigIcon']));
+
+	// if big icon empty, set it to small icon
+	if (empty($result['bigIcon']) && !empty($result['smallIcon'])) {
+		$result['bigIcon'] = $result['smallIcon'];
 	}
 
 	// if requested slots publisherId and streamName - create stream
