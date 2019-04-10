@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Länk för att marknadsföra",
+                "link": "L\u00e4nk f\u00f6r att marknadsf\u00f6ra",
                 "startDate": "Start datum",
                 "startTime": "Starttid",
                 "endDate": "Slutdatum",
@@ -11,10 +11,16 @@
             },
             "interests": {
                 "Title": "Filtrera efter intresse",
-                "FilterInterests": "Börja skriva ett intresse ..."
+                "FilterInterests": "B\u00f6rja skriva ett intresse ..."
             },
             "Interest": "Intressera",
             "Location": "Plats"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "G\u00e5",
+            "PasteLinkHere": "Klistra in en l\u00e4nk h\u00e4r"
         }
     }
 }

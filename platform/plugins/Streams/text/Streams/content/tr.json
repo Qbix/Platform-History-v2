@@ -56,7 +56,8 @@
             "byEmail": "E-posta",
             "byText": "Metin",
             "byFacebook": "Facebook",
-            "byTwitter": "heyecan"
+            "byTwitter": "heyecan",
+            "QRscanned": "Taradılar!"
         },
         "email": {
             "subject": "Hey, şuna bir bak",

@@ -3,18 +3,24 @@
         "campaign": {
             "placeholders": {
                 "link": "Nasc le cur chun cinn",
-                "startDate": "Dáta tosaigh",
+                "startDate": "D\u00e1ta tosaigh",
                 "startTime": "Am Tosaigh",
-                "endDate": "Dáta deiridh",
+                "endDate": "D\u00e1ta deiridh",
                 "endTime": "Am Deireadh",
-                "budget": "Buiséad"
+                "budget": "Buis\u00e9ad"
             },
             "interests": {
                 "Title": "Scagaire le Leas",
-                "FilterInterests": "Tosaigh ag clóscríobh spéise ..."
+                "FilterInterests": "Tosaigh ag cl\u00f3scr\u00edobh sp\u00e9ise ..."
             },
-            "Interest": "Ús",
-            "Location": "Suíomh"
+            "Interest": "\u00das",
+            "Location": "Su\u00edomh"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "T\u00e9igh",
+            "PasteLinkHere": "Greamaigh nasc anseo"
         }
     }
 }

@@ -16,5 +16,11 @@
             "Interest": "Interese",
             "Location": "Localización"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Vaia",
+            "PasteLinkHere": "Pegue unha ligazón aquí"
+        }
     }
 }

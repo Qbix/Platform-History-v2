@@ -56,7 +56,8 @@
             "byEmail": "ელ.ფოსტა",
             "byText": "ტექსტი",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "ისინი დასკანერებულნი იყვნენ!"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",

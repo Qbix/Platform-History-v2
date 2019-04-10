@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Errore {{status}} durante la richiesta",
+        "canceled": "Richiesta annullata",
+        "500": "Errore interno del server",
+        "404": "Non trovato: {{url}}",
+        "501": "Richiesta interrotta"
+    },
+    "nonce": {
+        "sameDomain": "Sessione scaduta. Aggiorna la pagina e riprova.",
+        "otherDomain": "Richiesta cross-domain bloccata a dominio straniero a {{baseUrl}}"
+    },
+    "words": {
+        "tap": "rubinetto",
+        "click": "clic",
+        "yes": "sì",
+        "no": "no",
+        "Tap": "Rubinetto",
+        "Click": "Clic",
+        "Yes": "sì",
+        "No": "No"
+    },
+    "months": {
+        "1": "gennaio",
+        "2": "febbraio",
+        "3": "marzo",
+        "4": "aprile",
+        "5": "potrebbe",
+        "6": "giugno",
+        "7": "luglio",
+        "8": "agosto",
+        "9": "settembre",
+        "10": "ottobre",
+        "11": "novembre",
+        "12": "dicembre"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Si prega di consentire l&#39;accesso al microfono",
+        "record": "Disco",
+        "recording": "Registrazione",
+        "remains": "resti",
+        "maximum": "massimo",
+        "playing": "Giocando",
+        "recorded": "Registrato",
+        "clip": "clip",
+        "orupload": "O carica",
+        "usethis": "Usa questo",
+        "discard": "Scartare",
+        "encoding": "Codifica"
+    },
+    "alert": {
+        "title": "Mettere in guardia"
+    },
+    "confirm": {
+        "title": "Confermare",
+        "ok": "sì",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Richiesta",
+        "ok": "Partire"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Errore durante la lettura del file",
+        "cameraCommands": {
+            "prompt": "Cosa ti piacerebbe fare?",
+            "photo": "Scatta nuova foto",
+            "library": "Seleziona dalla biblioteca"
+        },
+        "tooSmall": "Si prega di scegliere un&#39;immagine più grande.",
+        "cropping": {
+            "title": "Regola dimensioni e posizione",
+            "touchscreen": "Usa le dita per ingrandire e trascinare",
+            "notTouchscreen": "Usa il mouse e ruota per ingrandire e trascinare"
+        }
+    }
+}

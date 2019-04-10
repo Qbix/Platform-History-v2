@@ -3,13 +3,13 @@
         "NewItemTitle": "Eitem Newydd"
     },
     "labels": {
-        "Streams\/invited": "Pobl a wahoddais",
-        "Streams\/invitedMe": "Pwy a&#39;m gwahoddodd"
+        "Streams/invited": "Pobl a wahoddais",
+        "Streams/invitedMe": "Pwy a&#39;m gwahoddodd"
     },
     "interests": {
         "Filter": "Beth ydych chi&#39;n ei fwynhau?",
         "CanAdd": "Os na allwch ddod o hyd i&#39;r hyn rydych chi&#39;n chwilio amdano, gallwch ychwanegu llog newydd isod:",
-        "TrySynonyms": "Peidiwch â&#39;i weld? Rhowch gynnig ar rai cyfystyron.",
+        "TrySynonyms": "Peidiwch \u00e2&#39;i weld? Rhowch gynnig ar rai cyfystyron.",
         "AddUnderCategory": "Ychwanegu dan y categori ...",
         "Other": "Arall",
         "Unlisted": "Heb ei restru"
@@ -19,25 +19,25 @@
         "noOneSaid": "Nid oes neb wedi dweud dim",
         "closeChatButton": "Sgwrs agos",
         "closeChatConfirmTitle": "Caewch y sgwrs hon?",
-        "closeChatConfirm": "Ydych chi&#39;n siŵr eich bod am gau&#39;r sgwrs hon?",
+        "closeChatConfirm": "Ydych chi&#39;n si\u0175r eich bod am gau&#39;r sgwrs hon?",
         "closeChatConfirmYes": "Ydw",
         "closeChatConfirmNo": "Na",
         "earlierComments": "sylwadau cynharach"
     },
     "notifications": {
         "*": "Neges {{& message.fields.type}} i {{& stream.fields.title}}",
-        "Streams\/chat\/message": "Dywedodd {{&call 'avatar.displayName'}}:",
-        "Streams\/changed": "Newidiadau yn {{stream.fields.title}}",
-        "Streams\/invite": "Fe&#39;ch gwahoddwyd i {{& stream.fields.title}}",
-        "Streams\/announcement": "Cyhoeddiad yn {{& streams.fields.title}}",
-        "Streams\/access": "Newidiodd {{&call 'avatar.displayName'}} fynediad i nentydd",
-        "Streams\/chat\/edit": "Golygu neges sgwrsio",
-        "Streams\/chat\/remove": "Dileu neges sgwrsio",
-        "Streams\/closed": "Mae {{stream.fields.title}} wedi cau",
-        "Streams\/task\/progress": "Cynnydd wedi&#39;i wneud ar {{stream.fields.title}}",
-        "Streams\/task\/complete": "Cwblhawyd y dasg: {{stream.fields.title}}",
-        "Streams\/task\/error": "Gwall yn ystod: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Neges sy&#39;n dod i mewn"
+        "Streams/chat/message": "Dywedodd {{&call 'avatar.displayName'}}:",
+        "Streams/changed": "Newidiadau yn {{stream.fields.title}}",
+        "Streams/invite": "Fe&#39;ch gwahoddwyd i {{& stream.fields.title}}",
+        "Streams/announcement": "Cyhoeddiad yn {{& streams.fields.title}}",
+        "Streams/access": "Newidiodd {{&call 'avatar.displayName'}} fynediad i nentydd",
+        "Streams/chat/edit": "Golygu neges sgwrsio",
+        "Streams/chat/remove": "Dileu neges sgwrsio",
+        "Streams/closed": "Mae {{stream.fields.title}} wedi cau",
+        "Streams/task/progress": "Cynnydd wedi&#39;i wneud ar {{stream.fields.title}}",
+        "Streams/task/complete": "Cwblhawyd y dasg: {{stream.fields.title}}",
+        "Streams/task/error": "Gwall yn ystod: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Neges sy&#39;n dod i mewn"
     },
     "invite": {
         "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
@@ -56,7 +56,8 @@
             "byEmail": "E-bost",
             "byText": "Testun",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Roedden nhw&#39;n ei sganio!"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} postio neges <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} postio neges <em>{{message.fields.type}}</em> i {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} yn {{& url}}: {{& message.fields.content}}"

@@ -1,79 +1,80 @@
 {
     "preview": {
-        "NewItemTitle": "Új elem"
+        "NewItemTitle": "\u00daj elem"
     },
     "labels": {
-        "Streams\/invited": "Emberek, akit meghívtam",
-        "Streams\/invitedMe": "Ki meghívott engem"
+        "Streams/invited": "Emberek, akit megh\u00edvtam",
+        "Streams/invitedMe": "Ki megh\u00edvott engem"
     },
     "interests": {
-        "Filter": "Mit élvezel?",
-        "CanAdd": "Ha még mindig nem találja, amit keres, az alábbi új érdeklődést teheti fel:",
-        "TrySynonyms": "Nem látod? Próbáljon ki néhány szinonimát.",
-        "AddUnderCategory": "Hozzáadás kategóriában ...",
-        "Other": "Más",
-        "Unlisted": "Nem nyilvános"
+        "Filter": "Mit \u00e9lvezel?",
+        "CanAdd": "Ha m\u00e9g mindig nem tal\u00e1lja, amit keres, az al\u00e1bbi \u00faj \u00e9rdekl\u0151d\u00e9st teheti fel:",
+        "TrySynonyms": "Nem l\u00e1tod? Pr\u00f3b\u00e1ljon ki n\u00e9h\u00e1ny szinonim\u00e1t.",
+        "AddUnderCategory": "Hozz\u00e1ad\u00e1s kateg\u00f3ri\u00e1ban ...",
+        "Other": "M\u00e1s",
+        "Unlisted": "Nem nyilv\u00e1nos"
     },
     "chat": {
-        "flaggedForAdminReview": "Az üzenetet az adminisztrátori felülvizsgálat jelzi. Érintse meg ismét a gombot.",
+        "flaggedForAdminReview": "Az \u00fczenetet az adminisztr\u00e1tori fel\u00fclvizsg\u00e1lat jelzi. \u00c9rintse meg ism\u00e9t a gombot.",
         "noOneSaid": "Senki sem mondott semmit",
-        "closeChatButton": "Csevegés bezárása",
-        "closeChatConfirmTitle": "Zárja be ezt a beszélgetést?",
-        "closeChatConfirm": "Biztosan bezárja ezt a csevegést?",
+        "closeChatButton": "Cseveg\u00e9s bez\u00e1r\u00e1sa",
+        "closeChatConfirmTitle": "Z\u00e1rja be ezt a besz\u00e9lget\u00e9st?",
+        "closeChatConfirm": "Biztosan bez\u00e1rja ezt a cseveg\u00e9st?",
         "closeChatConfirmYes": "Igen",
         "closeChatConfirmNo": "Nem",
-        "earlierComments": "korábbi megjegyzések"
+        "earlierComments": "kor\u00e1bbi megjegyz\u00e9sek"
     },
     "notifications": {
-        "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} mondta:",
-        "Streams\/changed": "A {{stream.fields.title}}",
-        "Streams\/invite": "Meghívást kapott a {{& stream.fields.title}}",
-        "Streams\/announcement": "Hirdetés {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} megváltoztatta az adatfolyam-hozzáférést",
-        "Streams\/chat\/edit": "A csevegésüzenet szerkesztve",
-        "Streams\/chat\/remove": "A csevegésüzenet eltávolítva",
-        "Streams\/closed": "{{stream.fields.title}} lezárult",
-        "Streams\/task\/progress": "A {{stream.fields.title}}",
-        "Streams\/task\/complete": "Feladat kész: {{stream.fields.title}}",
-        "Streams\/task\/error": "Hiba történt a következővel: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Bejövő üzenet"
+        "*": "\u00dczenet {{& message.fields.type}} {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} mondta:",
+        "Streams/changed": "A {{stream.fields.title}}",
+        "Streams/invite": "Megh\u00edv\u00e1st kapott a {{& stream.fields.title}}",
+        "Streams/announcement": "Hirdet\u00e9s {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} megv\u00e1ltoztatta az adatfolyam-hozz\u00e1f\u00e9r\u00e9st",
+        "Streams/chat/edit": "A cseveg\u00e9s\u00fczenet szerkesztve",
+        "Streams/chat/remove": "A cseveg\u00e9s\u00fczenet elt\u00e1vol\u00edtva",
+        "Streams/closed": "{{stream.fields.title}} lez\u00e1rult",
+        "Streams/task/progress": "A {{stream.fields.title}}",
+        "Streams/task/complete": "Feladat k\u00e9sz: {{stream.fields.title}}",
+        "Streams/task/error": "Hiba t\u00f6rt\u00e9nt a k\u00f6vetkez\u0151vel: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Bej\u00f6v\u0151 \u00fczenet"
     },
     "invite": {
-        "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
+        "messageContent": "{{displayName}} megh\u00edvta \u00d6nt a {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Válasszon a Névjegyek közül",
-            "selectFromContacts": "Válasszon a Névjegyek közül",
-            "photo": "Fotózni",
-            "photoInstruction": "Ha a QR-kódot beolvasó személy előtted van, készíts egy fotót",
-            "to": "Címzett: {{Stream Title}}",
+            "chooseFromContacts": "V\u00e1lasszon a N\u00e9vjegyek k\u00f6z\u00fcl",
+            "selectFromContacts": "V\u00e1lasszon a N\u00e9vjegyek k\u00f6z\u00fcl",
+            "photo": "Fot\u00f3zni",
+            "photoInstruction": "Ha a QR-k\u00f3dot beolvas\u00f3 szem\u00e9ly el\u0151tted van, k\u00e9sz\u00edts egy fot\u00f3t",
+            "to": "C\u00edmzett: {{Stream Title}}",
             "go": "Megy",
-            "title": "Meghívás",
-            "placeholder": "Mobilszám vagy e-mail cím",
-            "orInvite": "Vagy hívja meg az embereket a következők használatával:",
-            "QR": "{{ClickOrTap}} QR kód létrehozásához",
-            "QRtitle": "A QR-kód beolvasása",
+            "title": "Megh\u00edv\u00e1s",
+            "placeholder": "Mobilsz\u00e1m vagy e-mail c\u00edm",
+            "orInvite": "Vagy h\u00edvja meg az embereket a k\u00f6vetkez\u0151k haszn\u00e1lat\u00e1val:",
+            "QR": "{{ClickOrTap}} QR k\u00f3d l\u00e9trehoz\u00e1s\u00e1hoz",
+            "QRtitle": "A QR-k\u00f3d beolvas\u00e1sa",
             "byEmail": "Email",
-            "byText": "Szöveg",
+            "byText": "Sz\u00f6veg",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Szkennelt\u00e9k!"
         },
         "email": {
-            "subject": "Hé, nézd meg ezt",
-            "PleaseVisitLink": "Kérjük, látogasson el a következő linkre:",
-            "InvitingYou": "Meghívom Önt {{title}}",
-            "HasInvitedYou": "{{displayName}} meghívta Önt a {{title}}"
+            "subject": "H\u00e9, n\u00e9zd meg ezt",
+            "PleaseVisitLink": "K\u00e9rj\u00fck, l\u00e1togasson el a k\u00f6vetkez\u0151 linkre:",
+            "InvitingYou": "Megh\u00edvom \u00d6nt {{title}}",
+            "HasInvitedYou": "{{displayName}} megh\u00edvta \u00d6nt a {{title}}"
         },
         "sms": {
-            "content": "Meghívást kapott a {{title}} -ra. Kérjük, érintse meg a {{url}}"
+            "content": "Megh\u00edv\u00e1st kapott a {{title}} -ra. K\u00e9rj\u00fck, \u00e9rintse meg a {{url}}"
         },
         "notice": {
-            "text": "Meghívtak. {{ClickOrTap}} itt, hogy elfogadja és csatlakozzon."
+            "text": "Megh\u00edvtak. {{ClickOrTap}} itt, hogy elfogadja \u00e9s csatlakozzon."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> üzenetet küldött {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}</em> \u00fczenetet k\u00fcld\u00f6tt {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
@@ -81,15 +82,15 @@
     },
     "followup": {
         "mobile": {
-            "alert": "A meghívókat a mi számunkból küldjük, melyeket a barátaid még nem ismernek fel. Kövesse nyomon egy gyors szöveget, hogy tudassa velük a meghívást, és kéri őket, hogy kattintson a linkre.",
-            "confirm": "A meghívókat a mi számunkból küldjük, melyeket a barátaid még nem ismernek fel. Gyors szöveggel szeretne nyomon követni, hogy tudja, hogy a meghívó tőled érkezett, és kéri őket, hogy kattintson a linkre.",
-            "check": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze az SMS-t és kattintson a linkre!"
+            "alert": "A megh\u00edv\u00f3kat a mi sz\u00e1munkb\u00f3l k\u00fcldj\u00fck, melyeket a bar\u00e1taid m\u00e9g nem ismernek fel. K\u00f6vesse nyomon egy gyors sz\u00f6veget, hogy tudassa vel\u00fck a megh\u00edv\u00e1st, \u00e9s k\u00e9ri \u0151ket, hogy kattintson a linkre.",
+            "confirm": "A megh\u00edv\u00f3kat a mi sz\u00e1munkb\u00f3l k\u00fcldj\u00fck, melyeket a bar\u00e1taid m\u00e9g nem ismernek fel. Gyors sz\u00f6veggel szeretne nyomon k\u00f6vetni, hogy tudja, hogy a megh\u00edv\u00f3 t\u0151led \u00e9rkezett, \u00e9s k\u00e9ri \u0151ket, hogy kattintson a linkre.",
+            "check": "H\u00e9, csak k\u00fcld\u00f6tt neked egy megh\u00edv\u00f3t a {{app}} alkalmaz\u00e1sra. K\u00e9rj\u00fck, ellen\u0151rizze az SMS-t \u00e9s kattintson a linkre!"
         },
         "email": {
-            "alert": "A meghívókat a mi domainünkről küldjük, melyeket a barátok még nem ismernek fel. Kövesse nyomon egy gyors szöveget, hogy tudassa velük a meghívást, és kéri őket, hogy kattintson a linkre.",
-            "confirm": "A meghívókat a mi domainünkről küldjük, melyeket a barátok még nem ismernek fel. Gyors szöveggel szeretne nyomon követni, hogy tudja, hogy a meghívó tőled érkezett, és kéri őket, hogy kattintson a linkre.",
-            "subject": "Meghívást kapott?",
-            "body": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze e-mailjét, és kattintson az ott található linkre!"
+            "alert": "A megh\u00edv\u00f3kat a mi domain\u00fcnkr\u0151l k\u00fcldj\u00fck, melyeket a bar\u00e1tok m\u00e9g nem ismernek fel. K\u00f6vesse nyomon egy gyors sz\u00f6veget, hogy tudassa vel\u00fck a megh\u00edv\u00e1st, \u00e9s k\u00e9ri \u0151ket, hogy kattintson a linkre.",
+            "confirm": "A megh\u00edv\u00f3kat a mi domain\u00fcnkr\u0151l k\u00fcldj\u00fck, melyeket a bar\u00e1tok m\u00e9g nem ismernek fel. Gyors sz\u00f6veggel szeretne nyomon k\u00f6vetni, hogy tudja, hogy a megh\u00edv\u00f3 t\u0151led \u00e9rkezett, \u00e9s k\u00e9ri \u0151ket, hogy kattintson a linkre.",
+            "subject": "Megh\u00edv\u00e1st kapott?",
+            "body": "H\u00e9, csak k\u00fcld\u00f6tt neked egy megh\u00edv\u00f3t a {{app}} alkalmaz\u00e1sra. K\u00e9rj\u00fck, ellen\u0151rizze e-mailj\u00e9t, \u00e9s kattintson az ott tal\u00e1lhat\u00f3 linkre!"
         }
     }
 }

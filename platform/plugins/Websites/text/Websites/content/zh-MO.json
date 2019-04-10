@@ -2,19 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "链接促进",
-                "startDate": "开始日期",
-                "startTime": "开始时间",
-                "endDate": "结束日期",
-                "endTime": "时间结束",
-                "budget": "预算"
+                "link": "\u94fe\u63a5\u4fc3\u8fdb",
+                "startDate": "\u5f00\u59cb\u65e5\u671f",
+                "startTime": "\u5f00\u59cb\u65f6\u95f4",
+                "endDate": "\u7ed3\u675f\u65e5\u671f",
+                "endTime": "\u65f6\u95f4\u7ed3\u675f",
+                "budget": "\u9884\u7b97"
             },
             "interests": {
-                "Title": "按兴趣过滤",
-                "FilterInterests": "开始输入兴趣..."
+                "Title": "\u6309\u5174\u8da3\u8fc7\u6ee4",
+                "FilterInterests": "\u5f00\u59cb\u8f93\u5165\u5174\u8da3..."
             },
-            "Interest": "利益",
-            "Location": "地点"
+            "Interest": "\u5229\u76ca",
+            "Location": "\u5730\u70b9"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "\u8d70",
+            "PasteLinkHere": "\u5728\u6b64\u5904\u7c98\u8d34\u94fe\u63a5"
         }
     }
 }

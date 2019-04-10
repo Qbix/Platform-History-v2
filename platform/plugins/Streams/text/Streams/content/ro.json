@@ -56,7 +56,8 @@
             "byEmail": "E-mail",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Stare de nervozitate"
+            "byTwitter": "Stare de nervozitate",
+            "QRscanned": "Au scanat-o!"
         },
         "email": {
             "subject": "Hei, verifică asta",
