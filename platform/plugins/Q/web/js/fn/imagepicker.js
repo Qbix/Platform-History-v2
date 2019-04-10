@@ -17,6 +17,12 @@ Q.setObject('Q.text.Q.imagepicker', {
 
 var qtqi = Q.text.Q.imagepicker;
 
+Q.onInit.add(function () {
+	Q.Text.get('Q/content', function (err, text) {
+		Q.extend(Q.text.Q.imagepicker, 10, Q.getObject('Q.imagepicker', text));
+	});
+});
+
 /**
  * Q Tools
  * @module Q-tools
@@ -52,6 +58,12 @@ var qtqi = Q.text.Q.imagepicker;
  * Its "this" object will be a jQuery of the imagepicker element
  * The first parameter is a callback, which should be called with an optional
  * hash of overrides, which can include "data", "path", "subpath", "save", "url", "loader" and "crop"
+ * @param {String} [options.save='x'] name of server config under Q/image/sizes, which
+ *  are an array of {size: basename} pairs
+ *  where the size is of the format "WxH", and either W or H can be empty.
+ *  These are stored in the config for various types of images, 
+ *  and you pass the name of the config, so that e.g. clients can't simply
+ *  specify their own sizes.
  * @param {Array} [options.cameraCommands] cameraCommands the commands that pop up to take a photo
  * @param {Array} [options.cameraCommands.photo]
  * @param {Array} [options.cameraCommands.library]
@@ -185,6 +197,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 {
 	path: 'Q/uploads',
 	subpath: '',
+	save: 'x',
 	saveSizeName: {},
 	showSize: null,
 	useAnySize: false,

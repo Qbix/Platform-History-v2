@@ -3,8 +3,8 @@
         "NewItemTitle": "Barang baru"
     },
     "labels": {
-        "Streams\/invited": "Orang yang saya undang",
-        "Streams\/invitedMe": "Siapa yang mengundang saya"
+        "Streams/invited": "Orang yang saya undang",
+        "Streams/invitedMe": "Siapa yang mengundang saya"
     },
     "interests": {
         "Filter": "Apa yang anda nikmati",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "Pesan {{& message.fields.type}} ke {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} mengatakan:",
-        "Streams\/changed": "Perubahan {{stream.fields.title}}",
-        "Streams\/invite": "Anda diundang ke {{& stream.fields.title}}",
-        "Streams\/announcement": "Pengumuman di {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} mengubah akses aliran",
-        "Streams\/chat\/edit": "Pesan obrolan diedit",
-        "Streams\/chat\/remove": "Pesan obrolan dihapus",
-        "Streams\/closed": "{{stream.fields.title}} telah ditutup",
-        "Streams\/task\/progress": "Kemajuan dibuat pada {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
-        "Streams\/task\/error": "Kesalahan saat: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Pesan Masuk"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} mengatakan:",
+        "Streams/changed": "Perubahan {{stream.fields.title}}",
+        "Streams/invite": "Anda diundang ke {{& stream.fields.title}}",
+        "Streams/announcement": "Pengumuman di {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} mengubah akses aliran",
+        "Streams/chat/edit": "Pesan obrolan diedit",
+        "Streams/chat/remove": "Pesan obrolan dihapus",
+        "Streams/closed": "{{stream.fields.title}} telah ditutup",
+        "Streams/task/progress": "Kemajuan dibuat pada {{stream.fields.title}}",
+        "Streams/task/complete": "Tugas selesai: {{stream.fields.title}}",
+        "Streams/task/error": "Kesalahan saat: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Pesan Masuk"
     },
     "invite": {
         "messageContent": "{{displayName}} mengundang Anda ke {{inviteUrl}}",
@@ -56,7 +56,8 @@
             "byEmail": "E-mail",
             "byText": "Teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Kericau"
+            "byTwitter": "Kericau",
+            "QRscanned": "Mereka memindainya!"
         },
         "email": {
             "subject": "Hei, lihat ini",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} mengeposkan pesan <em>{{message.fields.type}}<\/em> ke {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} mengeposkan pesan <em>{{message.fields.type}}</em> ke {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} dalam {{& url}}: {{& message.fields.content}}"

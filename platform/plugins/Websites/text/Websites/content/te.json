@@ -16,5 +16,11 @@
             "Interest": "వడ్డీ",
             "Location": "స్థానం"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "వెళ్ళండి",
+            "PasteLinkHere": "ఇక్కడ లింక్ను అతికించండి"
+        }
     }
 }

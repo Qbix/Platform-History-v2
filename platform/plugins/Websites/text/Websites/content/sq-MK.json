@@ -2,19 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Lidhje për të promovuar",
+                "link": "Lidhje p\u00ebr t\u00eb promovuar",
                 "startDate": "Data e fillimit",
                 "startTime": "Koha e nisjes",
-                "endDate": "Data e përfundimit",
+                "endDate": "Data e p\u00ebrfundimit",
                 "endTime": "Koha e mbarimit",
                 "budget": "buxhet"
             },
             "interests": {
                 "Title": "Filtro sipas interesit",
-                "FilterInterests": "Filloni të shtypni një interes ..."
+                "FilterInterests": "Filloni t\u00eb shtypni nj\u00eb interes ..."
             },
             "Interest": "interes",
             "Location": "vend"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "shkoj",
+            "PasteLinkHere": "Ngjit nj\u00eb lidhje k\u00ebtu"
         }
     }
 }

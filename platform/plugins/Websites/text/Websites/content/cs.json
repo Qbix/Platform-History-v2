@@ -16,5 +16,11 @@
             "Interest": "Zájem",
             "Location": "Umístění"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Jít",
+            "PasteLinkHere": "Vložte odkaz zde"
+        }
     }
 }

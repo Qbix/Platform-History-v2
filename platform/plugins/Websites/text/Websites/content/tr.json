@@ -16,5 +16,11 @@
             "Interest": "Faiz",
             "Location": "yer"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gitmek",
+            "PasteLinkHere": "Linki buraya yapıştırın"
+        }
     }
 }

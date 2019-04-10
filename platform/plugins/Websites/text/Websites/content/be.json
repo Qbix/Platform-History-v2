@@ -16,5 +16,11 @@
             "Interest": "цікавасць",
             "Location": "размяшчэнне"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ісці",
+            "PasteLinkHere": "Ўставіць спасылку тут"
+        }
     }
 }

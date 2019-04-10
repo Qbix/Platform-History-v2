@@ -56,7 +56,8 @@
             "byEmail": "이메일",
             "byText": "본문",
             "byFacebook": "페이스 북",
-            "byTwitter": "지저귀다"
+            "byTwitter": "지저귀다",
+            "QRscanned": "그들은 그것을 스캔!"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",

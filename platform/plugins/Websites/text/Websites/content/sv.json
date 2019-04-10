@@ -16,5 +16,11 @@
             "Interest": "Intressera",
             "Location": "Plats"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "Klistra in en länk här"
+        }
     }
 }

@@ -2,19 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Saite, lai veicinātu",
-                "startDate": "Sākuma datums",
-                "startTime": "Sākuma laiks",
+                "link": "Saite, lai veicin\u0101tu",
+                "startDate": "S\u0101kuma datums",
+                "startTime": "S\u0101kuma laiks",
                 "endDate": "Beigu datums",
                 "endTime": "Beigu laiks",
-                "budget": "Budžets"
+                "budget": "Bud\u017eets"
             },
             "interests": {
-                "Title": "Filtrēt pēc procentiem",
-                "FilterInterests": "Sāciet rakstīt interesi ..."
+                "Title": "Filtr\u0113t p\u0113c procentiem",
+                "FilterInterests": "S\u0101ciet rakst\u012bt interesi ..."
             },
             "Interest": "Interese",
-            "Location": "Atrašanās vieta"
+            "Location": "Atra\u0161an\u0101s vieta"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Iet",
+            "PasteLinkHere": "Iel\u012bm\u0113jiet saiti \u0161eit"
         }
     }
 }

@@ -56,7 +56,8 @@
             "byEmail": "e-pos",
             "byText": "teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Hulle het dit geskandeer!"
         },
         "email": {
             "subject": "Hey, check dit uit",

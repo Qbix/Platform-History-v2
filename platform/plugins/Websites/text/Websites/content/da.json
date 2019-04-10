@@ -16,5 +16,11 @@
             "Interest": "Interesse",
             "Location": "Beliggenhed"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "Indsæt et link her"
+        }
     }
 }

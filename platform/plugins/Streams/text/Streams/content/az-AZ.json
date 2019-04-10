@@ -1,79 +1,80 @@
 {
     "preview": {
-        "NewItemTitle": "Yeni Mövzu"
+        "NewItemTitle": "Yeni M\u00f6vzu"
     },
     "labels": {
-        "Streams\/invited": "Mən dəvət etdiyim insanlar",
-        "Streams\/invitedMe": "Kim məni dəvət etdi"
+        "Streams/invited": "M\u0259n d\u0259v\u0259t etdiyim insanlar",
+        "Streams/invitedMe": "Kim m\u0259ni d\u0259v\u0259t etdi"
     },
     "interests": {
-        "Filter": "Nə xoşunuza gəlir?",
-        "CanAdd": "Aradığınız şeyi hələ də tapa bilmirsəniz, yeni bir maraq əlavə edə bilərsiniz:",
-        "TrySynonyms": "Görmürsənmi? Bəzi sinonimlər cəhd edin.",
+        "Filter": "N\u0259 xo\u015funuza g\u0259lir?",
+        "CanAdd": "Arad\u0131\u011f\u0131n\u0131z \u015feyi h\u0259l\u0259 d\u0259 tapa bilmirs\u0259niz, yeni bir maraq \u0259lav\u0259 ed\u0259 bil\u0259rsiniz:",
+        "TrySynonyms": "G\u00f6rm\u00fcrs\u0259nmi? B\u0259zi sinoniml\u0259r c\u0259hd edin.",
         "AddUnderCategory": "Kateqoriya daxil edin ...",
-        "Other": "Digərləri",
-        "Unlisted": "Listelenmemiş"
+        "Other": "Dig\u0259rl\u0259ri",
+        "Unlisted": "Listelenmemi\u015f"
     },
     "chat": {
-        "flaggedForAdminReview": "Mesaj administrator baxış üçün qeyd olundu. Sürüşmək üçün yenidən vurun.",
-        "noOneSaid": "Heç kim heç nə demədi",
-        "closeChatButton": "Çatdırın",
-        "closeChatConfirmTitle": "Bu söhbəti bağlayın?",
-        "closeChatConfirm": "Bu söhbəti bağlamaq istəyirsiniz?",
-        "closeChatConfirmYes": "Bəli",
+        "flaggedForAdminReview": "Mesaj administrator bax\u0131\u015f \u00fc\u00e7\u00fcn qeyd olundu. S\u00fcr\u00fc\u015fm\u0259k \u00fc\u00e7\u00fcn yenid\u0259n vurun.",
+        "noOneSaid": "He\u00e7 kim he\u00e7 n\u0259 dem\u0259di",
+        "closeChatButton": "\u00c7atd\u0131r\u0131n",
+        "closeChatConfirmTitle": "Bu s\u00f6hb\u0259ti ba\u011flay\u0131n?",
+        "closeChatConfirm": "Bu s\u00f6hb\u0259ti ba\u011flamaq ist\u0259yirsiniz?",
+        "closeChatConfirmYes": "B\u0259li",
         "closeChatConfirmNo": "Yox",
-        "earlierComments": "əvvəllər şərhlər"
+        "earlierComments": "\u0259vv\u0259ll\u0259r \u015f\u0259rhl\u0259r"
     },
     "notifications": {
         "*": "{{& message.fields.type}} - {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dedi:",
-        "Streams\/changed": "{{stream.fields.title}} səhifəsində dəyişikliklər",
-        "Streams\/invite": "{{& stream.fields.title}} üçün dəvət olunmuşdunuz",
-        "Streams\/announcement": "{{& streams.fields.title}} səhifəsində elan",
-        "Streams\/access": "{{&call 'avatar.displayName'}} axının dəyişməsi",
-        "Streams\/chat\/edit": "Sohbet mesajı redaktə edildi",
-        "Streams\/chat\/remove": "Sohbet mesajı silindi",
-        "Streams\/closed": "{{stream.fields.title}} bağlanıb",
-        "Streams\/task\/progress": "{{stream.fields.title}} səhifəsində edilən tərəqqi",
-        "Streams\/task\/complete": "Task tamamlandı: {{stream.fields.title}}",
-        "Streams\/task\/error": "Hata: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Daxil olan mesaj"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} dedi:",
+        "Streams/changed": "{{stream.fields.title}} s\u0259hif\u0259sind\u0259 d\u0259yi\u015fiklikl\u0259r",
+        "Streams/invite": "{{& stream.fields.title}} \u00fc\u00e7\u00fcn d\u0259v\u0259t olunmu\u015fdunuz",
+        "Streams/announcement": "{{& streams.fields.title}} s\u0259hif\u0259sind\u0259 elan",
+        "Streams/access": "{{&call 'avatar.displayName'}} ax\u0131n\u0131n d\u0259yi\u015fm\u0259si",
+        "Streams/chat/edit": "Sohbet mesaj\u0131 redakt\u0259 edildi",
+        "Streams/chat/remove": "Sohbet mesaj\u0131 silindi",
+        "Streams/closed": "{{stream.fields.title}} ba\u011flan\u0131b",
+        "Streams/task/progress": "{{stream.fields.title}} s\u0259hif\u0259sind\u0259 edil\u0259n t\u0259r\u0259qqi",
+        "Streams/task/complete": "Task tamamland\u0131: {{stream.fields.title}}",
+        "Streams/task/error": "Hata: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Daxil olan mesaj"
     },
     "invite": {
         "messageContent": "{{displayName}} sizi {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Əlaqələrinizdən seçin",
-            "selectFromContacts": "Əlaqələrdən seçin",
-            "photo": "Bir şəkil çəkin",
-            "photoInstruction": "QR kodunuzu skanladığınız şəxs qarşınızda olsa, onlardan bir şəkil çəkin",
-            "to": "Kimə: {{Stream Title}}",
+            "chooseFromContacts": "\u018flaq\u0259l\u0259rinizd\u0259n se\u00e7in",
+            "selectFromContacts": "\u018flaq\u0259l\u0259rd\u0259n se\u00e7in",
+            "photo": "Bir \u015f\u0259kil \u00e7\u0259kin",
+            "photoInstruction": "QR kodunuzu skanlad\u0131\u011f\u0131n\u0131z \u015f\u0259xs qar\u015f\u0131n\u0131zda olsa, onlardan bir \u015f\u0259kil \u00e7\u0259kin",
+            "to": "Kim\u0259: {{Stream Title}}",
             "go": "Gedin",
             "title": "Davet et",
-            "placeholder": "Mobil nömrəniz və ya e-poçt ünvanı",
-            "orInvite": "Və ya istifadə edərək insanları dəvət edin:",
-            "QR": "QR kodu yaratmaq üçün {{ClickOrTap}}",
-            "QRtitle": "Bu QR kodu tarayın",
-            "byEmail": "E-poçt",
-            "byText": "Mətn",
+            "placeholder": "Mobil n\u00f6mr\u0259niz v\u0259 ya e-po\u00e7t \u00fcnvan\u0131",
+            "orInvite": "V\u0259 ya istifad\u0259 ed\u0259r\u0259k insanlar\u0131 d\u0259v\u0259t edin:",
+            "QR": "QR kodu yaratmaq \u00fc\u00e7\u00fcn {{ClickOrTap}}",
+            "QRtitle": "Bu QR kodu taray\u0131n",
+            "byEmail": "E-po\u00e7t",
+            "byText": "M\u0259tn",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Onlar bunu skanlad\u0131lar!"
         },
         "email": {
-            "subject": "Hey, bunu yoxlayın",
-            "PleaseVisitLink": "Xahiş edirik aşağıdakı linkə müraciət edin:",
-            "InvitingYou": "{{title}} səhifəsinə dəvət edirəm",
-            "HasInvitedYou": "{{displayName}} sizi {{title}} səhifəsinə dəvət etdi"
+            "subject": "Hey, bunu yoxlay\u0131n",
+            "PleaseVisitLink": "Xahi\u015f edirik a\u015fa\u011f\u0131dak\u0131 link\u0259 m\u00fcraci\u0259t edin:",
+            "InvitingYou": "{{title}} s\u0259hif\u0259sin\u0259 d\u0259v\u0259t edir\u0259m",
+            "HasInvitedYou": "{{displayName}} sizi {{title}} s\u0259hif\u0259sin\u0259 d\u0259v\u0259t etdi"
         },
         "sms": {
-            "content": "{{title}} dəvət olunmuşdunuz. Xahiş edirik, {{url}}"
+            "content": "{{title}} d\u0259v\u0259t olunmu\u015fdunuz. Xahi\u015f edirik, {{url}}"
         },
         "notice": {
-            "text": "Siz dəvət olundu. {{ClickOrTap}} burada qəbul etmək və qoşulmaq."
+            "text": "Siz d\u0259v\u0259t olundu. {{ClickOrTap}} burada q\u0259bul etm\u0259k v\u0259 qo\u015fulmaq."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} üçün <em>{{message.fields.type}}<\/em> mesaj nümayiş {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} \u00fc\u00e7\u00fcn <em>{{message.fields.type}}</em> mesaj n\u00fcmayi\u015f {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& url}} &#39;da {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
@@ -81,15 +82,15 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
-            "confirm": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Sizdən dəvətnaməni göndərdiyini bildirmək üçün onlara tez bir mətn ilə baxın və onlara link basın.",
-            "check": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. Xahiş edirik SMS-lərinizi yoxlayın və linki vurun!"
+            "alert": "Arkada\u015flar\u0131n\u0131z h\u0259l\u0259 tan\u0131mad\u0131\u011f\u0131n\u0131z n\u00f6mr\u0259l\u0259rimizd\u0259n d\u0259v\u0259t g\u00f6nd\u0259rilir. D\u0259v\u0259tin siz\u0259 g\u0259ldikl\u0259rini bildirm\u0259k \u00fc\u00e7\u00fcn onlara tez bir m\u0259tnl\u0259 bax\u0131n v\u0259 linkd\u0259n istifad\u0259 etm\u0259l\u0259rini xahi\u015f edin.",
+            "confirm": "Arkada\u015flar\u0131n\u0131z h\u0259l\u0259 tan\u0131mad\u0131\u011f\u0131n\u0131z n\u00f6mr\u0259l\u0259rimizd\u0259n d\u0259v\u0259t g\u00f6nd\u0259rilir. Sizd\u0259n d\u0259v\u0259tnam\u0259ni g\u00f6nd\u0259rdiyini bildirm\u0259k \u00fc\u00e7\u00fcn onlara tez bir m\u0259tn il\u0259 bax\u0131n v\u0259 onlara link bas\u0131n.",
+            "check": "Hey, yaln\u0131z siz\u0259 {{app}} t\u0259tbiqin\u0259 d\u0259v\u0259t g\u00f6nd\u0259rdim. Xahi\u015f edirik SMS-l\u0259rinizi yoxlay\u0131n v\u0259 linki vurun!"
         },
         "email": {
-            "alert": "Dostlarınız hələ tanış olmayan domenlərdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
-            "confirm": "Dostlarınız hələ tanış olmayan domenlərdən dəvət göndərilir. Sizdən dəvətnaməni göndərdiyini bildirmək üçün onlara tez bir mətn ilə baxın və onlara link basın.",
-            "subject": "Bir dəvət aldınız mı?",
-            "body": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. E-poçtunuzu yoxlayın və orada olan linki vurun!"
+            "alert": "Dostlar\u0131n\u0131z h\u0259l\u0259 tan\u0131\u015f olmayan domenl\u0259rd\u0259n d\u0259v\u0259t g\u00f6nd\u0259rilir. D\u0259v\u0259tin siz\u0259 g\u0259ldikl\u0259rini bildirm\u0259k \u00fc\u00e7\u00fcn onlara tez bir m\u0259tnl\u0259 bax\u0131n v\u0259 linkd\u0259n istifad\u0259 etm\u0259l\u0259rini xahi\u015f edin.",
+            "confirm": "Dostlar\u0131n\u0131z h\u0259l\u0259 tan\u0131\u015f olmayan domenl\u0259rd\u0259n d\u0259v\u0259t g\u00f6nd\u0259rilir. Sizd\u0259n d\u0259v\u0259tnam\u0259ni g\u00f6nd\u0259rdiyini bildirm\u0259k \u00fc\u00e7\u00fcn onlara tez bir m\u0259tn il\u0259 bax\u0131n v\u0259 onlara link bas\u0131n.",
+            "subject": "Bir d\u0259v\u0259t ald\u0131n\u0131z m\u0131?",
+            "body": "Hey, yaln\u0131z siz\u0259 {{app}} t\u0259tbiqin\u0259 d\u0259v\u0259t g\u00f6nd\u0259rdim. E-po\u00e7tunuzu yoxlay\u0131n v\u0259 orada olan linki vurun!"
         }
     }
 }

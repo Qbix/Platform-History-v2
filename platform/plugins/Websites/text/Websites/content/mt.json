@@ -16,5 +16,11 @@
             "Interest": "Interess",
             "Location": "Post"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mur",
+            "PasteLinkHere": "Paste link hawn"
+        }
     }
 }

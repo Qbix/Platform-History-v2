@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "{{status}} hiba történt a kérés során",
+        "canceled": "A kérés törölve",
+        "500": "Belső Szerverhiba",
+        "404": "Nem található: {{url}}",
+        "501": "A kérés megszakadt"
+    },
+    "nonce": {
+        "sameDomain": "A munkamenet ideje lejárt. Frissítse az oldalt, és próbálja újra.",
+        "otherDomain": "A {{baseUrl}}"
+    },
+    "words": {
+        "tap": "Koppintson a",
+        "click": "kettyenés",
+        "yes": "Igen",
+        "no": "nem",
+        "Tap": "Koppintson a",
+        "Click": "Kattints",
+        "Yes": "Igen",
+        "No": "Nem"
+    },
+    "months": {
+        "1": "január",
+        "2": "február",
+        "3": "március",
+        "4": "április",
+        "5": "Lehet",
+        "6": "június",
+        "7": "július",
+        "8": "augusztus",
+        "9": "szeptember",
+        "10": "október",
+        "11": "november",
+        "12": "december"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Kérjük, engedélyezze a mikrofonhoz való hozzáférést",
+        "record": "Rekord",
+        "recording": "Felvétel",
+        "remains": "maradványok",
+        "maximum": "maximális",
+        "playing": "Játék",
+        "recorded": "feljegyzett",
+        "clip": "csipesz",
+        "orupload": "Vagy Feltöltés",
+        "usethis": "Használd ezt",
+        "discard": "Dobja",
+        "encoding": "kódolás"
+    },
+    "alert": {
+        "title": "Éber"
+    },
+    "confirm": {
+        "title": "megerősít",
+        "ok": "Igen",
+        "cancel": "Nem"
+    },
+    "prompt": {
+        "title": "Gyors",
+        "ok": "Megy"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Hiba a fájl olvasása közben",
+        "cameraCommands": {
+            "prompt": "Mit szeretnél csinálni?",
+            "photo": "Új fotó készítése",
+            "library": "Válasszon a könyvtárból"
+        },
+        "tooSmall": "Kérjük, válasszon nagyobb képet.",
+        "cropping": {
+            "title": "Állítsa be a méretet és a pozíciót",
+            "touchscreen": "Használja az ujjait nagyításhoz és húzáshoz",
+            "notTouchscreen": "Használja az egeret és a kereket a nagyításhoz és a húzáshoz"
+        }
+    }
+}

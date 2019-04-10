@@ -16,5 +16,11 @@
             "Interest": "belangstelling",
             "Location": "plek"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gaan",
+            "PasteLinkHere": "Plak &#39;n skakel hier"
+        }
     }
 }

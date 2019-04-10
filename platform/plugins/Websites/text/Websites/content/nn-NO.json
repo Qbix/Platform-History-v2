@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link for å fremme",
+                "link": "Link for \u00e5 fremme",
                 "startDate": "Startdato",
                 "startTime": "Starttid",
                 "endDate": "Sluttdato",
@@ -11,10 +11,16 @@
             },
             "interests": {
                 "Title": "Filtrer etter interesse",
-                "FilterInterests": "Begynn å skrive en interesse ..."
+                "FilterInterests": "Begynn \u00e5 skrive en interesse ..."
             },
             "Interest": "Renter",
             "Location": "plassering"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "G\u00e5",
+            "PasteLinkHere": "Lim inn en lenke her"
         }
     }
 }

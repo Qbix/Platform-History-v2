@@ -16,5 +16,11 @@
             "Interest": "ஆர்வம்",
             "Location": "இருப்பிடம்"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "போய்",
+            "PasteLinkHere": "இங்கே ஒரு இணைப்பை ஒட்டுக"
+        }
     }
 }

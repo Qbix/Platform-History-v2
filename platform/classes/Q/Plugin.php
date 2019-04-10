@@ -763,7 +763,7 @@ EOT;
 		}
 
 		// Push plugin name into Q/plugins array
-		if (!in_array($plugin_name, $current_plugins = Q_Config::get('Q', 'plugins', array()))) {
+		if (!in_array($plugin_name, $current_plugins = Q::plugins())) {
 			$current_plugins[] = $plugin_name;
 			Q_Config::set('Q', 'plugins', $current_plugins); //TODO: When do we save Q/plugins to disk?
 		}

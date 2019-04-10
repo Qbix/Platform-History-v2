@@ -56,7 +56,8 @@
             "byEmail": "Email",
             "byText": "Teksto",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Ini-scan nila ito!"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",

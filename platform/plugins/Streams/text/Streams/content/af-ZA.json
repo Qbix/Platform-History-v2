@@ -3,8 +3,8 @@
         "NewItemTitle": "Nuwe item"
     },
     "labels": {
-        "Streams\/invited": "Mense wat ek genooi het",
-        "Streams\/invitedMe": "Wie het my genooi"
+        "Streams/invited": "Mense wat ek genooi het",
+        "Streams/invitedMe": "Wie het my genooi"
     },
     "interests": {
         "Filter": "Wat geniet jy?",
@@ -16,7 +16,7 @@
     },
     "chat": {
         "flaggedForAdminReview": "Boodskap is gemerk vir admin review. Tik weer aan unflag.",
-        "noOneSaid": "Niemand het iets gesê nie",
+        "noOneSaid": "Niemand het iets ges\u00ea nie",
         "closeChatButton": "Sluit klets",
         "closeChatConfirmTitle": "Sluit hierdie klets?",
         "closeChatConfirm": "Is jy seker jy wil hierdie klets sluit?",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} na {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} het gesê:",
-        "Streams\/changed": "Wysigings in {{stream.fields.title}}",
-        "Streams\/invite": "U is genooi na {{& stream.fields.title}}",
-        "Streams\/announcement": "Aankondiging in {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} verander stroom toegang",
-        "Streams\/chat\/edit": "Kletsboodskap gewysig",
-        "Streams\/chat\/remove": "Kletsboodskap verwyder",
-        "Streams\/closed": "{{stream.fields.title}} is gesluit",
-        "Streams\/task\/progress": "Vordering gemaak op {{stream.fields.title}}",
-        "Streams\/task\/complete": "Taak voltooi: {{stream.fields.title}}",
-        "Streams\/task\/error": "Fout tydens: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Inkomende Boodskap"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} het ges\u00ea:",
+        "Streams/changed": "Wysigings in {{stream.fields.title}}",
+        "Streams/invite": "U is genooi na {{& stream.fields.title}}",
+        "Streams/announcement": "Aankondiging in {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} verander stroom toegang",
+        "Streams/chat/edit": "Kletsboodskap gewysig",
+        "Streams/chat/remove": "Kletsboodskap verwyder",
+        "Streams/closed": "{{stream.fields.title}} is gesluit",
+        "Streams/task/progress": "Vordering gemaak op {{stream.fields.title}}",
+        "Streams/task/complete": "Taak voltooi: {{stream.fields.title}}",
+        "Streams/task/error": "Fout tydens: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Inkomende Boodskap"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -56,7 +56,8 @@
             "byEmail": "e-pos",
             "byText": "teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Hulle het dit geskandeer!"
         },
         "email": {
             "subject": "Hey, check dit uit",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} het &#39;n <em>{{message.fields.type}}<\/em> boodskap na {{stream.fields.title}} geplaas."
+            "posted": "{{call 'avatar.displayName'}} het &#39;n <em>{{message.fields.type}}</em> boodskap na {{stream.fields.title}} geplaas."
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"

@@ -3,77 +3,78 @@
         "NewItemTitle": "Jauns vienums"
     },
     "labels": {
-        "Streams\/invited": "Cilvēki, kurus es uzaicināju",
-        "Streams\/invitedMe": "Kas mani uzaicināja"
+        "Streams/invited": "Cilv\u0113ki, kurus es uzaicin\u0101ju",
+        "Streams/invitedMe": "Kas mani uzaicin\u0101ja"
     },
     "interests": {
-        "Filter": "Kas jums patīk?",
-        "CanAdd": "Ja jūs joprojām nevarat atrast meklēto, varat pievienot jaunu interesi:",
-        "TrySynonyms": "Neredziet to? Izmēģiniet sinonīmus.",
-        "AddUnderCategory": "Pievienot kategorijā ...",
+        "Filter": "Kas jums pat\u012bk?",
+        "CanAdd": "Ja j\u016bs joproj\u0101m nevarat atrast mekl\u0113to, varat pievienot jaunu interesi:",
+        "TrySynonyms": "Neredziet to? Izm\u0113\u0123iniet sinon\u012bmus.",
+        "AddUnderCategory": "Pievienot kategorij\u0101 ...",
         "Other": "Citi",
-        "Unlisted": "Sarakstā neiekļautie"
+        "Unlisted": "Sarakst\u0101 neiek\u013cautie"
     },
     "chat": {
-        "flaggedForAdminReview": "Ziņojums ir atzīmēts ar administratora pārskatīšanu. Pieskarieties vēlreiz, lai noņemtu.",
+        "flaggedForAdminReview": "Zi\u0146ojums ir atz\u012bm\u0113ts ar administratora p\u0101rskat\u012b\u0161anu. Pieskarieties v\u0113lreiz, lai no\u0146emtu.",
         "noOneSaid": "Neviens neko nav teicis",
-        "closeChatButton": "Aizvērt tērzēšanu",
-        "closeChatConfirmTitle": "Aizvērt šo tērzēšanu?",
-        "closeChatConfirm": "Vai tiešām vēlaties aizvērt šo tērzēšanu?",
-        "closeChatConfirmYes": "Jā",
-        "closeChatConfirmNo": "Nē",
-        "earlierComments": "iepriekšējie komentāri"
+        "closeChatButton": "Aizv\u0113rt t\u0113rz\u0113\u0161anu",
+        "closeChatConfirmTitle": "Aizv\u0113rt \u0161o t\u0113rz\u0113\u0161anu?",
+        "closeChatConfirm": "Vai tie\u0161\u0101m v\u0113laties aizv\u0113rt \u0161o t\u0113rz\u0113\u0161anu?",
+        "closeChatConfirmYes": "J\u0101",
+        "closeChatConfirmNo": "N\u0113",
+        "earlierComments": "iepriek\u0161\u0113jie koment\u0101ri"
     },
     "notifications": {
-        "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} teica:",
-        "Streams\/changed": "Izmaiņas {{stream.fields.title}}",
-        "Streams\/invite": "Jūs uzaicināja uz {{& stream.fields.title}}",
-        "Streams\/announcement": "Paziņojums {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} mainīja plūsmas piekļuvi",
-        "Streams\/chat\/edit": "Tērzēšanas ziņojums ir rediģēts",
-        "Streams\/chat\/remove": "Tērzēšanas ziņojums ir noņemts",
-        "Streams\/closed": "{{stream.fields.title}} ir aizvērts",
-        "Streams\/task\/progress": "Panākumi {{stream.fields.title}}",
-        "Streams\/task\/complete": "Uzdevums pabeigts: {{stream.fields.title}}",
-        "Streams\/task\/error": "Kļūda laikā: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ienākošais ziņojums"
+        "*": "Zi\u0146ojums {{& message.fields.type}} uz {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} teica:",
+        "Streams/changed": "Izmai\u0146as {{stream.fields.title}}",
+        "Streams/invite": "J\u016bs uzaicin\u0101ja uz {{& stream.fields.title}}",
+        "Streams/announcement": "Pazi\u0146ojums {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} main\u012bja pl\u016bsmas piek\u013cuvi",
+        "Streams/chat/edit": "T\u0113rz\u0113\u0161anas zi\u0146ojums ir redi\u0123\u0113ts",
+        "Streams/chat/remove": "T\u0113rz\u0113\u0161anas zi\u0146ojums ir no\u0146emts",
+        "Streams/closed": "{{stream.fields.title}} ir aizv\u0113rts",
+        "Streams/task/progress": "Pan\u0101kumi {{stream.fields.title}}",
+        "Streams/task/complete": "Uzdevums pabeigts: {{stream.fields.title}}",
+        "Streams/task/error": "K\u013c\u016bda laik\u0101: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Ien\u0101ko\u0161ais zi\u0146ojums"
     },
     "invite": {
-        "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
+        "messageContent": "{{displayName}} uzaicin\u0101ja j\u016bs uz {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Izvēlieties no saviem kontaktiem",
-            "selectFromContacts": "Izvēlieties No Contacts",
-            "photo": "Uzņemt fotogrāfiju",
-            "photoInstruction": "Ja persona, kas skenēja jūsu QR kodu, ir priekšā, fotografējiet to",
+            "chooseFromContacts": "Izv\u0113lieties no saviem kontaktiem",
+            "selectFromContacts": "Izv\u0113lieties No Contacts",
+            "photo": "Uz\u0146emt fotogr\u0101fiju",
+            "photoInstruction": "Ja persona, kas sken\u0113ja j\u016bsu QR kodu, ir priek\u0161\u0101, fotograf\u0113jiet to",
             "to": "Kam: {{Stream Title}}",
             "go": "Iet",
-            "title": "Uzaicināt",
-            "placeholder": "Mobilā tālruņa numurs vai e-pasta adrese",
-            "orInvite": "Vai aiciniet cilvēkus, izmantojot:",
-            "QR": "{{ClickOrTap}}, lai ģenerētu QR kodu",
-            "QRtitle": "Skenējiet šo QR kodu",
+            "title": "Uzaicin\u0101t",
+            "placeholder": "Mobil\u0101 t\u0101lru\u0146a numurs vai e-pasta adrese",
+            "orInvite": "Vai aiciniet cilv\u0113kus, izmantojot:",
+            "QR": "{{ClickOrTap}}, lai \u0123ener\u0113tu QR kodu",
+            "QRtitle": "Sken\u0113jiet \u0161o QR kodu",
             "byEmail": "E-pasts",
             "byText": "Teksts",
             "byFacebook": "Facebook",
-            "byTwitter": "Čivināt"
+            "byTwitter": "\u010civin\u0101t",
+            "QRscanned": "Vi\u0146i sken\u0113ja to!"
         },
         "email": {
-            "subject": "Hei, pārbaudiet to",
-            "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
-            "InvitingYou": "Es aicinu jūs uz {{title}}",
-            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}"
+            "subject": "Hei, p\u0101rbaudiet to",
+            "PleaseVisitLink": "L\u016bdzu, apmekl\u0113jiet \u0161o saiti:",
+            "InvitingYou": "Es aicinu j\u016bs uz {{title}}",
+            "HasInvitedYou": "{{displayName}} uzaicin\u0101ja j\u016bs uz {{title}}"
         },
         "sms": {
-            "content": "Jūs esat uzaicināts uz {{title}}. Lūdzu, pieskarieties {{url}}"
+            "content": "J\u016bs esat uzaicin\u0101ts uz {{title}}. L\u016bdzu, pieskarieties {{url}}"
         },
         "notice": {
-            "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
+            "text": "J\u016bs esat uzaicin\u0101ts. {{ClickOrTap}} \u0161eit, lai pie\u0146emtu un pievienotos."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} publicēja <em>{{message.fields.type}}<\/em> ziņojumu uz {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} public\u0113ja <em>{{message.fields.type}}</em> zi\u0146ojumu uz {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
@@ -81,15 +82,15 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "confirm": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "check": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu SMS un noklikšķiniet uz saites!"
+            "alert": "Uzaicin\u0101jumi tiek nos\u016bt\u012bti no m\u016bsu numura, ko j\u016bsu draugi v\u0113l neatpaz\u012bst. Sekojiet l\u012bdzi \u0101tram tekstam, lai \u013cautu vi\u0146iem uzzin\u0101t, ka iel\u016bgums ir no jums, l\u016bdzot tos noklik\u0161\u0137in\u0101t uz saites.",
+            "confirm": "Uzaicin\u0101jumi tiek nos\u016bt\u012bti no m\u016bsu numura, ko j\u016bsu draugi v\u0113l neatpaz\u012bst. Vai v\u0113laties sekot l\u012bdzi \u0101tram tekstam, lai \u013cautu vi\u0146iem uzzin\u0101t, ka iel\u016bgums ir no jums, l\u016bdzot tos noklik\u0161\u0137in\u0101t uz saites.",
+            "check": "Hei, es tikai nos\u016bt\u012bju jums uzaicin\u0101jumu uz {{app}} lietotni. L\u016bdzu, p\u0101rbaudiet savu SMS un noklik\u0161\u0137iniet uz saites!"
         },
         "email": {
-            "alert": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "confirm": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "subject": "Vai jūs saņēmāt uzaicinājumu?",
-            "body": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!"
+            "alert": "Uzaicin\u0101jumi tiek nos\u016bt\u012bti no m\u016bsu dom\u0113na, ko j\u016bsu draugi v\u0113l neatpaz\u012bst. Sekojiet l\u012bdzi \u0101tram tekstam, lai \u013cautu vi\u0146iem uzzin\u0101t, ka iel\u016bgums ir no jums, l\u016bdzot tos noklik\u0161\u0137in\u0101t uz saites.",
+            "confirm": "Uzaicin\u0101jumi tiek nos\u016bt\u012bti no m\u016bsu dom\u0113na, ko j\u016bsu draugi v\u0113l neatpaz\u012bst. Vai v\u0113laties sekot l\u012bdzi \u0101tram tekstam, lai \u013cautu vi\u0146iem uzzin\u0101t, ka iel\u016bgums ir no jums, l\u016bdzot tos noklik\u0161\u0137in\u0101t uz saites.",
+            "subject": "Vai j\u016bs sa\u0146\u0113m\u0101t uzaicin\u0101jumu?",
+            "body": "Hei, es tikai nos\u016bt\u012bju jums uzaicin\u0101jumu uz {{app}} lietotni. L\u016bdzu, p\u0101rbaudiet savu e-pastu un noklik\u0161\u0137iniet uz saites!"
         }
     }
 }

@@ -16,5 +16,11 @@
             "Interest": "興味",
             "Location": "ロケーション"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "行く",
+            "PasteLinkHere": "ここにリンクを貼り付けてください"
+        }
     }
 }

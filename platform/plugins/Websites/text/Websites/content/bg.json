@@ -16,5 +16,11 @@
             "Interest": "интерес",
             "Location": "местоположение"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Отивам",
+            "PasteLinkHere": "Поставете връзка тук"
+        }
     }
 }

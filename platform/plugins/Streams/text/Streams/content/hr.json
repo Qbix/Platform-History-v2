@@ -56,7 +56,8 @@
             "byEmail": "E-mail",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Cvrkut"
+            "byTwitter": "Cvrkut",
+            "QRscanned": "Skenirali su ga!"
         },
         "email": {
             "subject": "Hej, vidi ovo",

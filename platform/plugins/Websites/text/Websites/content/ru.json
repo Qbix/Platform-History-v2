@@ -16,5 +16,11 @@
             "Interest": "Интерес",
             "Location": "Место нахождения"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Идти",
+            "PasteLinkHere": "Вставьте ссылку сюда"
+        }
     }
 }
