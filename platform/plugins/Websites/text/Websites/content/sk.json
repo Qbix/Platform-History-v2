@@ -16,5 +16,11 @@
             "Interest": "záujem",
             "Location": "umiestnenia"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ísť",
+            "PasteLinkHere": "Vložte tu odkaz"
+        }
     }
 }

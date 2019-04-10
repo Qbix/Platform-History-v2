@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link zu fördern",
+                "link": "Link zu f\u00f6rdern",
                 "startDate": "Anfangsdatum",
                 "startTime": "Startzeit",
                 "endDate": "Endtermin",
@@ -15,6 +15,12 @@
             },
             "Interest": "Interesse",
             "Location": "Ort"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gehen",
+            "PasteLinkHere": "F\u00fcgen Sie hier einen Link ein"
         }
     }
 }

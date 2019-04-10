@@ -16,5 +16,11 @@
             "Interest": "Interès",
             "Location": "Ubicació"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Vés",
+            "PasteLinkHere": "Enganxa un enllaç aquí"
+        }
     }
 }

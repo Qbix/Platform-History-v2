@@ -56,7 +56,8 @@
             "byEmail": "E-naslov",
             "byText": "Besedilo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Skenirali so ga!"
         },
         "email": {
             "subject": "Hej, poglej to",

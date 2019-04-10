@@ -56,7 +56,8 @@
             "byEmail": "E-poçt",
             "byText": "Mətn",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Onlar bunu skanladılar!"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",

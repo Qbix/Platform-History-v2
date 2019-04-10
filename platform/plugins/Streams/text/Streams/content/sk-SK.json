@@ -1,79 +1,80 @@
 {
     "preview": {
-        "NewItemTitle": "Nová vec"
+        "NewItemTitle": "Nov\u00e1 vec"
     },
     "labels": {
-        "Streams\/invited": "Ľudia, ktorých som pozval",
-        "Streams\/invitedMe": "Kto ma pozval"
+        "Streams/invited": "\u013dudia, ktor\u00fdch som pozval",
+        "Streams/invitedMe": "Kto ma pozval"
     },
     "interests": {
-        "Filter": "Čo vás baví?",
-        "CanAdd": "Ak stále nemôžete nájsť to, čo hľadáte, môžete pridať nový záujem nižšie:",
-        "TrySynonyms": "Nevidíte to? Vyskúšajte niektoré synonymá.",
-        "AddUnderCategory": "Pridať do kategórie ...",
-        "Other": "ostatné",
-        "Unlisted": "neregistrovaný"
+        "Filter": "\u010co v\u00e1s bav\u00ed?",
+        "CanAdd": "Ak st\u00e1le nem\u00f4\u017eete n\u00e1js\u0165 to, \u010do h\u013ead\u00e1te, m\u00f4\u017eete prida\u0165 nov\u00fd z\u00e1ujem ni\u017e\u0161ie:",
+        "TrySynonyms": "Nevid\u00edte to? Vysk\u00fa\u0161ajte niektor\u00e9 synonym\u00e1.",
+        "AddUnderCategory": "Prida\u0165 do kateg\u00f3rie ...",
+        "Other": "ostatn\u00e9",
+        "Unlisted": "neregistrovan\u00fd"
     },
     "chat": {
-        "flaggedForAdminReview": "Správa bola označená správcom na posúdenie správcom. Opätovným ťuknutím znovu rozviňte.",
-        "noOneSaid": "Nikto nič nepovedal",
+        "flaggedForAdminReview": "Spr\u00e1va bola ozna\u010den\u00e1 spr\u00e1vcom na pos\u00fadenie spr\u00e1vcom. Op\u00e4tovn\u00fdm \u0165uknut\u00edm znovu rozvi\u0148te.",
+        "noOneSaid": "Nikto ni\u010d nepovedal",
         "closeChatButton": "Zatvorte chat",
         "closeChatConfirmTitle": "Zatvorte tento chat?",
-        "closeChatConfirm": "Naozaj chcete ukončiť tento rozhovor?",
-        "closeChatConfirmYes": "Áno",
-        "closeChatConfirmNo": "žiadny",
-        "earlierComments": "predchádzajúce pripomienky"
+        "closeChatConfirm": "Naozaj chcete ukon\u010di\u0165 tento rozhovor?",
+        "closeChatConfirmYes": "\u00c1no",
+        "closeChatConfirmNo": "\u017eiadny",
+        "earlierComments": "predch\u00e1dzaj\u00face pripomienky"
     },
     "notifications": {
-        "*": "Správa {{& message.fields.type}} až {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} povedal:",
-        "Streams\/changed": "Zmeny v {{stream.fields.title}}",
-        "Streams\/invite": "Boli ste pozvaní na {{& stream.fields.title}}",
-        "Streams\/announcement": "Oznámenie v {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} zmenil prístup k prúdom",
-        "Streams\/chat\/edit": "Správa chatu bola upravená",
-        "Streams\/chat\/remove": "Správa chatu bola odstránená",
-        "Streams\/closed": "{{stream.fields.title}} bolo zatvorené",
-        "Streams\/task\/progress": "Pokrok dosiahnutý {{stream.fields.title}}",
-        "Streams\/task\/complete": "Úloha bola dokončená: {{stream.fields.title}}",
-        "Streams\/task\/error": "Chyba počas: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Prichádzajúca správa"
+        "*": "Spr\u00e1va {{& message.fields.type}} a\u017e {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} povedal:",
+        "Streams/changed": "Zmeny v {{stream.fields.title}}",
+        "Streams/invite": "Boli ste pozvan\u00ed na {{& stream.fields.title}}",
+        "Streams/announcement": "Ozn\u00e1menie v {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} zmenil pr\u00edstup k pr\u00fadom",
+        "Streams/chat/edit": "Spr\u00e1va chatu bola upraven\u00e1",
+        "Streams/chat/remove": "Spr\u00e1va chatu bola odstr\u00e1nen\u00e1",
+        "Streams/closed": "{{stream.fields.title}} bolo zatvoren\u00e9",
+        "Streams/task/progress": "Pokrok dosiahnut\u00fd {{stream.fields.title}}",
+        "Streams/task/complete": "\u00daloha bola dokon\u010den\u00e1: {{stream.fields.title}}",
+        "Streams/task/error": "Chyba po\u010das: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Prich\u00e1dzaj\u00faca spr\u00e1va"
     },
     "invite": {
-        "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
+        "messageContent": "{{displayName}} v\u00e1s pozvalo na {{inviteUrl}}",
         "dialog": {
             "chooseFromContacts": "Vyberte si z kontaktov",
-            "selectFromContacts": "Vyberte položku Z kontaktov",
-            "photo": "Odfoť",
-            "photoInstruction": "Ak osoba, ktorá naskenovala váš kód QR, je pred vami, odfotografujte ich",
+            "selectFromContacts": "Vyberte polo\u017eku Z kontaktov",
+            "photo": "Odfo\u0165",
+            "photoInstruction": "Ak osoba, ktor\u00e1 naskenovala v\u00e1\u0161 k\u00f3d QR, je pred vami, odfotografujte ich",
             "to": "Komu: {{Stream Title}}",
-            "go": "ísť",
-            "title": "vyzvať",
-            "placeholder": "Mobilné číslo alebo e-mailová adresa",
-            "orInvite": "Alebo pozvať ľudí pomocou:",
-            "QR": "{{ClickOrTap}} na generovanie QR kódu",
-            "QRtitle": "Naskenujte tento QR kód",
+            "go": "\u00eds\u0165",
+            "title": "vyzva\u0165",
+            "placeholder": "Mobiln\u00e9 \u010d\u00edslo alebo e-mailov\u00e1 adresa",
+            "orInvite": "Alebo pozva\u0165 \u013eud\u00ed pomocou:",
+            "QR": "{{ClickOrTap}} na generovanie QR k\u00f3du",
+            "QRtitle": "Naskenujte tento QR k\u00f3d",
             "byEmail": "e-mail",
             "byText": "text",
             "byFacebook": "Facebook",
-            "byTwitter": "cvrlikání"
+            "byTwitter": "cvrlik\u00e1n\u00ed",
+            "QRscanned": "Skenovali to!"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",
-            "PleaseVisitLink": "Navštívte nasledujúci odkaz:",
-            "InvitingYou": "Pozývam vás na adresu {{title}}",
-            "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}"
+            "PleaseVisitLink": "Nav\u0161t\u00edvte nasleduj\u00faci odkaz:",
+            "InvitingYou": "Poz\u00fdvam v\u00e1s na adresu {{title}}",
+            "HasInvitedYou": "{{displayName}} v\u00e1s pozvalo na {{title}}"
         },
         "sms": {
-            "content": "Boli ste pozvaní na {{title}}. Kliknite na {{url}}"
+            "content": "Boli ste pozvan\u00ed na {{title}}. Kliknite na {{url}}"
         },
         "notice": {
-            "text": "Boli ste pozvaní. {{ClickOrTap}} tu prijať a pripojiť sa."
+            "text": "Boli ste pozvan\u00ed. {{ClickOrTap}} tu prija\u0165 a pripoji\u0165 sa."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} uverejnil <em>{{message.fields.type}}<\/em> správu pre {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} uverejnil <em>{{message.fields.type}}</em> spr\u00e1vu pre {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
@@ -81,15 +82,15 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
-            "confirm": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Chceli by ste nadviazať rýchly text, aby ste vedeli, že pozvanie prišlo od vás a požiadali ich, aby klikli na odkaz.",
-            "check": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoje SMS a kliknite na odkaz!"
+            "alert": "Pozv\u00e1nky sa odosielaj\u00fa z n\u00e1\u0161ho \u010d\u00edsla, ktor\u00e9 va\u0161i priatelia e\u0161te nepoznaj\u00fa. Nasledujte r\u00fdchly text, aby ste vedeli, \u017ee pozvanie pri\u0161lo od v\u00e1s, a po\u017eiadajte ich, aby klikli na odkaz.",
+            "confirm": "Pozv\u00e1nky sa odosielaj\u00fa z n\u00e1\u0161ho \u010d\u00edsla, ktor\u00e9 va\u0161i priatelia e\u0161te nepoznaj\u00fa. Chceli by ste nadviaza\u0165 r\u00fdchly text, aby ste vedeli, \u017ee pozvanie pri\u0161lo od v\u00e1s a po\u017eiadali ich, aby klikli na odkaz.",
+            "check": "Hej, pr\u00e1ve som v\u00e1m poslal pozv\u00e1nku na aplik\u00e1ciu {{app}}. Skontrolujte svoje SMS a kliknite na odkaz!"
         },
         "email": {
-            "alert": "Pozvánky sa odosielajú z našej domény, ktorú vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
-            "confirm": "Pozvánky sa odosielajú z našej domény, ktorú vaši priatelia ešte nepoznajú. Chceli by ste nadviazať rýchly text, aby ste vedeli, že pozvanie prišlo od vás a požiadali ich, aby klikli na odkaz.",
+            "alert": "Pozv\u00e1nky sa odosielaj\u00fa z na\u0161ej dom\u00e9ny, ktor\u00fa va\u0161i priatelia e\u0161te nepoznaj\u00fa. Nasledujte r\u00fdchly text, aby ste vedeli, \u017ee pozvanie pri\u0161lo od v\u00e1s, a po\u017eiadajte ich, aby klikli na odkaz.",
+            "confirm": "Pozv\u00e1nky sa odosielaj\u00fa z na\u0161ej dom\u00e9ny, ktor\u00fa va\u0161i priatelia e\u0161te nepoznaj\u00fa. Chceli by ste nadviaza\u0165 r\u00fdchly text, aby ste vedeli, \u017ee pozvanie pri\u0161lo od v\u00e1s a po\u017eiadali ich, aby klikli na odkaz.",
             "subject": "Dostali ste pozvanie?",
-            "body": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoj e-mail a kliknite na odkaz."
+            "body": "Hej, pr\u00e1ve som v\u00e1m poslal pozv\u00e1nku na aplik\u00e1ciu {{app}}. Skontrolujte svoj e-mail a kliknite na odkaz."
         }
     }
 }

@@ -481,25 +481,12 @@ class Q_Tree
 	 */
 	protected static function merge_internal ($array1 = array(), $array2 = array())
 	{
-		$first_is_json_array = $second_is_json_array = true;
-		foreach ($array1 as $key => $value) {
-			if (!is_int($key)) {
-				$first_is_json_array = false;
-				break;
-			}
-		}
-		if ($first_is_json_array and isset($array2['replace'])) {
+		if (!Q::isAssociative($array1) and isset($array2['replace'])) {
 			return $array2['replace'];
-		}
-		foreach ($array2 as $key => $value) {
-			if (!is_int($key)) {
-				$second_is_json_array = false;
-				break;
-			}
 		}
 		$result = $array1;
 		foreach ($array2 as $key => $value) {
-			if ($second_is_json_array) {
+			if (!Q::isAssociative($array2)) {
 				// merge in values if they are not in array yet
 				// if array contains scalar values only unique values are kept
 				if (!in_array($value, $result)) {

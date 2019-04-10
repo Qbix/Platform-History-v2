@@ -3,41 +3,41 @@
         "NewItemTitle": "Uusi kohde"
     },
     "labels": {
-        "Streams\/invited": "Ihmiset, joita olen kutsunut",
-        "Streams\/invitedMe": "Kuka kutsui minut"
+        "Streams/invited": "Ihmiset, joita olen kutsunut",
+        "Streams/invitedMe": "Kuka kutsui minut"
     },
     "interests": {
-        "Filter": "Mistä nautit?",
-        "CanAdd": "Jos et vieläkään löydä etsimääsi, voit lisätä alla olevan uuden kiinnostuksen:",
-        "TrySynonyms": "Älä näe sitä? Kokeile synonyymejä.",
-        "AddUnderCategory": "Lisää luokkaan ...",
+        "Filter": "Mist\u00e4 nautit?",
+        "CanAdd": "Jos et viel\u00e4k\u00e4\u00e4n l\u00f6yd\u00e4 etsim\u00e4\u00e4si, voit lis\u00e4t\u00e4 alla olevan uuden kiinnostuksen:",
+        "TrySynonyms": "\u00c4l\u00e4 n\u00e4e sit\u00e4? Kokeile synonyymej\u00e4.",
+        "AddUnderCategory": "Lis\u00e4\u00e4 luokkaan ...",
         "Other": "muut",
         "Unlisted": "noteeraamaton"
     },
     "chat": {
-        "flaggedForAdminReview": "Viesti on merkitty järjestelmänvalvojan tarkistukseen. Napauta uudelleen, jos haluat avata.",
-        "noOneSaid": "Kukaan ei ole sanonut mitään",
+        "flaggedForAdminReview": "Viesti on merkitty j\u00e4rjestelm\u00e4nvalvojan tarkistukseen. Napauta uudelleen, jos haluat avata.",
+        "noOneSaid": "Kukaan ei ole sanonut mit\u00e4\u00e4n",
         "closeChatButton": "Sulje keskustelu",
-        "closeChatConfirmTitle": "Sulje tämä keskustelu?",
-        "closeChatConfirm": "Haluatko varmasti sulkea tämän chatin?",
+        "closeChatConfirmTitle": "Sulje t\u00e4m\u00e4 keskustelu?",
+        "closeChatConfirm": "Haluatko varmasti sulkea t\u00e4m\u00e4n chatin?",
         "closeChatConfirmYes": "Joo",
         "closeChatConfirmNo": "Ei",
         "earlierComments": "aiemmat huomautukset"
     },
     "notifications": {
         "*": "Viesti {{& message.fields.type}} kohtaan {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sanoi:",
-        "Streams\/changed": "Muutokset {{stream.fields.title}}",
-        "Streams\/invite": "Sinut kutsuttiin {{& stream.fields.title}}",
-        "Streams\/announcement": "Ilmoitus {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} muutti virrankäyttöoikeutta",
-        "Streams\/chat\/edit": "Chat-viesti muokattu",
-        "Streams\/chat\/remove": "Chat-viesti poistettu",
-        "Streams\/closed": "{{stream.fields.title}} on suljettu",
-        "Streams\/task\/progress": "Edistyminen {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tehtävä on valmis: {{stream.fields.title}}",
-        "Streams\/task\/error": "Virhe aikana: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Saapuva viesti"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} sanoi:",
+        "Streams/changed": "Muutokset {{stream.fields.title}}",
+        "Streams/invite": "Sinut kutsuttiin {{& stream.fields.title}}",
+        "Streams/announcement": "Ilmoitus {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} muutti virrank\u00e4ytt\u00f6oikeutta",
+        "Streams/chat/edit": "Chat-viesti muokattu",
+        "Streams/chat/remove": "Chat-viesti poistettu",
+        "Streams/closed": "{{stream.fields.title}} on suljettu",
+        "Streams/task/progress": "Edistyminen {{stream.fields.title}}",
+        "Streams/task/complete": "Teht\u00e4v\u00e4 on valmis: {{stream.fields.title}}",
+        "Streams/task/error": "Virhe aikana: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Saapuva viesti"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
@@ -45,22 +45,23 @@
             "chooseFromContacts": "Valitse yhteystiedoista",
             "selectFromContacts": "Valitse yhteystiedoista",
             "photo": "Ottaa valokuva",
-            "photoInstruction": "Jos QR-koodisi skannannut henkilö on edessäsi, ota valokuva niistä",
+            "photoInstruction": "Jos QR-koodisi skannannut henkil\u00f6 on edess\u00e4si, ota valokuva niist\u00e4",
             "to": "Vastaanottaja: {{Stream Title}}",
-            "go": "Mennä",
+            "go": "Menn\u00e4",
             "title": "kutsu",
-            "placeholder": "Matkapuhelinnumero tai sähköpostiosoite",
-            "orInvite": "Tai kutsua ihmisiä käyttämällä:",
+            "placeholder": "Matkapuhelinnumero tai s\u00e4hk\u00f6postiosoite",
+            "orInvite": "Tai kutsua ihmisi\u00e4 k\u00e4ytt\u00e4m\u00e4ll\u00e4:",
             "QR": "{{ClickOrTap}} luoda QR-koodi",
-            "QRtitle": "Skannaa tämä QR-koodi",
-            "byEmail": "Sähköposti",
+            "QRtitle": "Skannaa t\u00e4m\u00e4 QR-koodi",
+            "byEmail": "S\u00e4hk\u00f6posti",
             "byText": "Teksti",
             "byFacebook": "Facebook",
-            "byTwitter": "Viserrys"
+            "byTwitter": "Viserrys",
+            "QRscanned": "He skannasi sen!"
         },
         "email": {
-            "subject": "Hei, tarkista tämä",
-            "PleaseVisitLink": "Käy seuraavassa linkissä:",
+            "subject": "Hei, tarkista t\u00e4m\u00e4",
+            "PleaseVisitLink": "K\u00e4y seuraavassa linkiss\u00e4:",
             "InvitingYou": "Kutsun sinut {{title}}",
             "HasInvitedYou": "{{displayName}} on kutsunut sinut {{title}}"
         },
@@ -68,12 +69,12 @@
             "content": "Sinut on kutsuttu {{title}}. Napauta {{url}}"
         },
         "notice": {
-            "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
+            "text": "Sinut on kutsuttu. {{ClickOrTap}} t\u00e4\u00e4ll\u00e4 hyv\u00e4ksy\u00e4 ja liitty\u00e4."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} julkaisi <em>{{message.fields.type}}<\/em> -viestin osoitteeseen {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} julkaisi <em>{{message.fields.type}}</em> -viestin osoitteeseen {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
@@ -81,15 +82,15 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "confirm": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "check": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sms ja napsauta linkkiä!"
+            "alert": "Kutsut l\u00e4hetet\u00e4\u00e4n numerostamme, jota yst\u00e4v\u00e4si eiv\u00e4t viel\u00e4 tunnista. Seuraa nopeaa teksti\u00e4, jotta he tiet\u00e4v\u00e4t, ett\u00e4 kutsu tuli sinulta, pyyt\u00e4en heit\u00e4 napsauttamaan linkki\u00e4.",
+            "confirm": "Kutsut l\u00e4hetet\u00e4\u00e4n numerostamme, jota yst\u00e4v\u00e4si eiv\u00e4t viel\u00e4 tunnista. Haluatko seurata nopeaa teksti\u00e4, jotta he tiet\u00e4v\u00e4t, ett\u00e4 kutsu tuli sinulta, pyyt\u00e4en heit\u00e4 napsauttamaan linkki\u00e4.",
+            "check": "L\u00e4hetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sms ja napsauta linkki\u00e4!"
         },
         "email": {
-            "alert": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "confirm": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
+            "alert": "Kutsut l\u00e4hetet\u00e4\u00e4n verkkotunnuksestamme, jota yst\u00e4v\u00e4si eiv\u00e4t viel\u00e4 tunnista. Seuraa nopeaa teksti\u00e4, jotta he tiet\u00e4v\u00e4t, ett\u00e4 kutsu tuli sinulta, pyyt\u00e4en heit\u00e4 napsauttamaan linkki\u00e4.",
+            "confirm": "Kutsut l\u00e4hetet\u00e4\u00e4n verkkotunnuksestamme, jota yst\u00e4v\u00e4si eiv\u00e4t viel\u00e4 tunnista. Haluatko seurata nopeaa teksti\u00e4, jotta he tiet\u00e4v\u00e4t, ett\u00e4 kutsu tuli sinulta, pyyt\u00e4en heit\u00e4 napsauttamaan linkki\u00e4.",
             "subject": "Saitko kutsun?",
-            "body": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sähköpostiosoitteesi ja napsauta siellä olevaa linkkiä!"
+            "body": "L\u00e4hetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista s\u00e4hk\u00f6postiosoitteesi ja napsauta siell\u00e4 olevaa linkki\u00e4!"
         }
     }
 }

@@ -1,95 +1,96 @@
 {
     "preview": {
-        "NewItemTitle": "新商品"
+        "NewItemTitle": "\u65b0\u5546\u54c1"
     },
     "labels": {
-        "Streams\/invited": "私が招待した人",
-        "Streams\/invitedMe": "誰が私を招待しました"
+        "Streams/invited": "\u79c1\u304c\u62db\u5f85\u3057\u305f\u4eba",
+        "Streams/invitedMe": "\u8ab0\u304c\u79c1\u3092\u62db\u5f85\u3057\u307e\u3057\u305f"
     },
     "interests": {
-        "Filter": "何を楽しんでいますか？",
-        "CanAdd": "それでも探しているものが見つからない場合は、以下に新しい関心を追加できます。",
-        "TrySynonyms": "見えない？同義語をいくつか試してください。",
-        "AddUnderCategory": "カテゴリの下に追加...",
-        "Other": "その他の",
-        "Unlisted": "限定公開"
+        "Filter": "\u4f55\u3092\u697d\u3057\u3093\u3067\u3044\u307e\u3059\u304b\uff1f",
+        "CanAdd": "\u305d\u308c\u3067\u3082\u63a2\u3057\u3066\u3044\u308b\u3082\u306e\u304c\u898b\u3064\u304b\u3089\u306a\u3044\u5834\u5408\u306f\u3001\u4ee5\u4e0b\u306b\u65b0\u3057\u3044\u95a2\u5fc3\u3092\u8ffd\u52a0\u3067\u304d\u307e\u3059\u3002",
+        "TrySynonyms": "\u898b\u3048\u306a\u3044\uff1f\u540c\u7fa9\u8a9e\u3092\u3044\u304f\u3064\u304b\u8a66\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+        "AddUnderCategory": "\u30ab\u30c6\u30b4\u30ea\u306e\u4e0b\u306b\u8ffd\u52a0...",
+        "Other": "\u305d\u306e\u4ed6\u306e",
+        "Unlisted": "\u9650\u5b9a\u516c\u958b"
     },
     "chat": {
-        "flaggedForAdminReview": "メッセージに管理者レビュー用のフラグが付けられました。フラグを解除するには、もう一度タップします。",
-        "noOneSaid": "誰も何も言っていない",
-        "closeChatButton": "チャットを閉じる",
-        "closeChatConfirmTitle": "このチャットを閉じますか？",
-        "closeChatConfirm": "このチャットを終了してもよろしいですか？",
-        "closeChatConfirmYes": "はい",
-        "closeChatConfirmNo": "いいえ",
-        "earlierComments": "以前のコメント"
+        "flaggedForAdminReview": "\u30e1\u30c3\u30bb\u30fc\u30b8\u306b\u7ba1\u7406\u8005\u30ec\u30d3\u30e5\u30fc\u7528\u306e\u30d5\u30e9\u30b0\u304c\u4ed8\u3051\u3089\u308c\u307e\u3057\u305f\u3002\u30d5\u30e9\u30b0\u3092\u89e3\u9664\u3059\u308b\u306b\u306f\u3001\u3082\u3046\u4e00\u5ea6\u30bf\u30c3\u30d7\u3057\u307e\u3059\u3002",
+        "noOneSaid": "\u8ab0\u3082\u4f55\u3082\u8a00\u3063\u3066\u3044\u306a\u3044",
+        "closeChatButton": "\u30c1\u30e3\u30c3\u30c8\u3092\u9589\u3058\u308b",
+        "closeChatConfirmTitle": "\u3053\u306e\u30c1\u30e3\u30c3\u30c8\u3092\u9589\u3058\u307e\u3059\u304b\uff1f",
+        "closeChatConfirm": "\u3053\u306e\u30c1\u30e3\u30c3\u30c8\u3092\u7d42\u4e86\u3057\u3066\u3082\u3088\u308d\u3057\u3044\u3067\u3059\u304b\uff1f",
+        "closeChatConfirmYes": "\u306f\u3044",
+        "closeChatConfirmNo": "\u3044\u3044\u3048",
+        "earlierComments": "\u4ee5\u524d\u306e\u30b3\u30e1\u30f3\u30c8"
     },
     "notifications": {
-        "*": "メッセージ{{& message.fields.type}}から{{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}は言いました：",
-        "Streams\/changed": "{{stream.fields.title}}の変更点",
-        "Streams\/invite": "あなたは{{& stream.fields.title}}に招待されました",
-        "Streams\/announcement": "{{& streams.fields.title}}での発表",
-        "Streams\/access": "{{&call 'avatar.displayName'}}はストリームアクセスを変更しました",
-        "Streams\/chat\/edit": "チャットメッセージを編集しました",
-        "Streams\/chat\/remove": "チャットメッセージを削除しました",
-        "Streams\/closed": "{{stream.fields.title}}は閉鎖されました",
-        "Streams\/task\/progress": "{{stream.fields.title}}の進捗状況",
-        "Streams\/task\/complete": "タスクが完了しました：{{stream.fields.title}}",
-        "Streams\/task\/error": "エラー：{{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}：受信メッセージ"
+        "*": "\u30e1\u30c3\u30bb\u30fc\u30b8{{& message.fields.type}}\u304b\u3089{{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}}\u306f\u8a00\u3044\u307e\u3057\u305f\uff1a",
+        "Streams/changed": "{{stream.fields.title}}\u306e\u5909\u66f4\u70b9",
+        "Streams/invite": "\u3042\u306a\u305f\u306f{{& stream.fields.title}}\u306b\u62db\u5f85\u3055\u308c\u307e\u3057\u305f",
+        "Streams/announcement": "{{& streams.fields.title}}\u3067\u306e\u767a\u8868",
+        "Streams/access": "{{&call 'avatar.displayName'}}\u306f\u30b9\u30c8\u30ea\u30fc\u30e0\u30a2\u30af\u30bb\u30b9\u3092\u5909\u66f4\u3057\u307e\u3057\u305f",
+        "Streams/chat/edit": "\u30c1\u30e3\u30c3\u30c8\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u7de8\u96c6\u3057\u307e\u3057\u305f",
+        "Streams/chat/remove": "\u30c1\u30e3\u30c3\u30c8\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u524a\u9664\u3057\u307e\u3057\u305f",
+        "Streams/closed": "{{stream.fields.title}}\u306f\u9589\u9396\u3055\u308c\u307e\u3057\u305f",
+        "Streams/task/progress": "{{stream.fields.title}}\u306e\u9032\u6357\u72b6\u6cc1",
+        "Streams/task/complete": "\u30bf\u30b9\u30af\u304c\u5b8c\u4e86\u3057\u307e\u3057\u305f\uff1a{{stream.fields.title}}",
+        "Streams/task/error": "\u30a8\u30e9\u30fc\uff1a{{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}\uff1a\u53d7\u4fe1\u30e1\u30c3\u30bb\u30fc\u30b8"
     },
     "invite": {
-        "messageContent": "{{displayName}}はあなたを{{inviteUrl}}に招待しました",
+        "messageContent": "{{displayName}}\u306f\u3042\u306a\u305f\u3092{{inviteUrl}}\u306b\u62db\u5f85\u3057\u307e\u3057\u305f",
         "dialog": {
-            "chooseFromContacts": "連絡先から選択する",
-            "selectFromContacts": "連絡先から選択",
-            "photo": "写真を撮る",
-            "photoInstruction": "あなたのQRコードをスキャンした人があなたの前にいる場合は、それらの写真を撮ります",
-            "to": "宛先：{{Stream Title}}",
-            "go": "行く",
-            "title": "招待する",
-            "placeholder": "携帯電話番号またはEメールアドレス",
-            "orInvite": "またはを使用して人々を招待する：",
-            "QR": "QRコードを生成する{{ClickOrTap}}",
-            "QRtitle": "このQRコードをスキャン",
-            "byEmail": "Eメール",
-            "byText": "テキスト",
-            "byFacebook": "フェイスブック",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "\u9023\u7d61\u5148\u304b\u3089\u9078\u629e\u3059\u308b",
+            "selectFromContacts": "\u9023\u7d61\u5148\u304b\u3089\u9078\u629e",
+            "photo": "\u5199\u771f\u3092\u64ae\u308b",
+            "photoInstruction": "\u3042\u306a\u305f\u306eQR\u30b3\u30fc\u30c9\u3092\u30b9\u30ad\u30e3\u30f3\u3057\u305f\u4eba\u304c\u3042\u306a\u305f\u306e\u524d\u306b\u3044\u308b\u5834\u5408\u306f\u3001\u305d\u308c\u3089\u306e\u5199\u771f\u3092\u64ae\u308a\u307e\u3059",
+            "to": "\u5b9b\u5148\uff1a{{Stream Title}}",
+            "go": "\u884c\u304f",
+            "title": "\u62db\u5f85\u3059\u308b",
+            "placeholder": "\u643a\u5e2f\u96fb\u8a71\u756a\u53f7\u307e\u305f\u306fE\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9",
+            "orInvite": "\u307e\u305f\u306f\u3092\u4f7f\u7528\u3057\u3066\u4eba\u3005\u3092\u62db\u5f85\u3059\u308b\uff1a",
+            "QR": "QR\u30b3\u30fc\u30c9\u3092\u751f\u6210\u3059\u308b{{ClickOrTap}}",
+            "QRtitle": "\u3053\u306eQR\u30b3\u30fc\u30c9\u3092\u30b9\u30ad\u30e3\u30f3",
+            "byEmail": "E\u30e1\u30fc\u30eb",
+            "byText": "\u30c6\u30ad\u30b9\u30c8",
+            "byFacebook": "\u30d5\u30a7\u30a4\u30b9\u30d6\u30c3\u30af",
+            "byTwitter": "Twitter",
+            "QRscanned": "\u5f7c\u3089\u306f\u305d\u308c\u3092\u30b9\u30ad\u30e3\u30f3\u3057\u307e\u3057\u305f\uff01"
         },
         "email": {
-            "subject": "こんにちは、これをチェックしてください",
-            "PleaseVisitLink": "次のリンクにアクセスしてください。",
-            "InvitingYou": "{{title}}に招待しています",
-            "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました"
+            "subject": "\u3053\u3093\u306b\u3061\u306f\u3001\u3053\u308c\u3092\u30c1\u30a7\u30c3\u30af\u3057\u3066\u304f\u3060\u3055\u3044",
+            "PleaseVisitLink": "\u6b21\u306e\u30ea\u30f3\u30af\u306b\u30a2\u30af\u30bb\u30b9\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+            "InvitingYou": "{{title}}\u306b\u62db\u5f85\u3057\u3066\u3044\u307e\u3059",
+            "HasInvitedYou": "{{displayName}}\u304c\u3042\u306a\u305f\u3092{{title}}\u306b\u62db\u5f85\u3057\u307e\u3057\u305f"
         },
         "sms": {
-            "content": "あなたは{{title}}に招待されました。 {{url}}をタップしてください"
+            "content": "\u3042\u306a\u305f\u306f{{title}}\u306b\u62db\u5f85\u3055\u308c\u307e\u3057\u305f\u3002 {{url}}\u3092\u30bf\u30c3\u30d7\u3057\u3066\u304f\u3060\u3055\u3044"
         },
         "notice": {
-            "text": "あなたが招待されました。ここで{{ClickOrTap}}を受け入れて参加してください。"
+            "text": "\u3042\u306a\u305f\u304c\u62db\u5f85\u3055\u308c\u307e\u3057\u305f\u3002\u3053\u3053\u3067{{ClickOrTap}}\u3092\u53d7\u3051\u5165\u308c\u3066\u53c2\u52a0\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}}が{{stream.fields.title}}に<em>{{message.fields.type}}<\/em>メッセージを投稿しました"
+            "posted": "{{call 'avatar.displayName'}}\u304c{{stream.fields.title}}\u306b<em>{{message.fields.type}}</em>\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u6295\u7a3f\u3057\u307e\u3057\u305f"
         },
         "text": {
-            "body": "{{& url}}の{{& call 'avatar.displayName'}}：{{& message.fields.content}}"
+            "body": "{{& url}}\u306e{{& call 'avatar.displayName'}}\uff1a{{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
-            "confirm": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするよう依頼して、あなたからの招待状があなたからのものであることを知らせるためのクイックテキストをフォローアップしますか。",
-            "check": "こんにちは、私はあなたに{{app}}アプリへの招待状を送信しました。あなたのSMSを確認してリンクをクリックしてください！"
+            "alert": "\u62db\u5f85\u72b6\u306f\u79c1\u305f\u3061\u306e\u756a\u53f7\u304b\u3089\u9001\u4fe1\u3055\u308c\u307e\u3059\u3002\u3042\u306a\u305f\u306e\u53cb\u9054\u306f\u307e\u3060\u8a8d\u8b58\u3057\u3066\u3044\u307e\u305b\u3093\u3002\u30ea\u30f3\u30af\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3088\u3046\u306b\u4f9d\u983c\u3057\u3066\u3001\u3042\u306a\u305f\u304b\u3089\u306e\u62db\u5f85\u72b6\u304c\u5c4a\u3044\u305f\u3053\u3068\u3092\u7c21\u5358\u306a\u30c6\u30ad\u30b9\u30c8\u3067\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u307e\u3059\u3002",
+            "confirm": "\u62db\u5f85\u72b6\u306f\u79c1\u305f\u3061\u306e\u756a\u53f7\u304b\u3089\u9001\u4fe1\u3055\u308c\u307e\u3059\u3002\u3042\u306a\u305f\u306e\u53cb\u9054\u306f\u307e\u3060\u8a8d\u8b58\u3057\u3066\u3044\u307e\u305b\u3093\u3002\u30ea\u30f3\u30af\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3088\u3046\u4f9d\u983c\u3057\u3066\u3001\u3042\u306a\u305f\u304b\u3089\u306e\u62db\u5f85\u72b6\u304c\u3042\u306a\u305f\u304b\u3089\u306e\u3082\u306e\u3067\u3042\u308b\u3053\u3068\u3092\u77e5\u3089\u305b\u308b\u305f\u3081\u306e\u30af\u30a4\u30c3\u30af\u30c6\u30ad\u30b9\u30c8\u3092\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u307e\u3059\u304b\u3002",
+            "check": "\u3053\u3093\u306b\u3061\u306f\u3001\u79c1\u306f\u3042\u306a\u305f\u306b{{app}}\u30a2\u30d7\u30ea\u3078\u306e\u62db\u5f85\u72b6\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f\u3002\u3042\u306a\u305f\u306eSMS\u3092\u78ba\u8a8d\u3057\u3066\u30ea\u30f3\u30af\u3092\u30af\u30ea\u30c3\u30af\u3057\u3066\u304f\u3060\u3055\u3044\uff01"
         },
         "email": {
-            "alert": "招待状は我々のドメインから送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
-            "confirm": "招待状は我々のドメインから送信されます。あなたの友達はまだ認識していません。リンクをクリックするよう依頼して、あなたからの招待状があなたからのものであることを知らせるためのクイックテキストをフォローアップしますか。",
-            "subject": "あなたは招待を受けましたか？",
-            "body": "こんにちは、私はあなたに{{app}}アプリへの招待状を送ったばかりです。あなたのEメールをチェックしてそこにあるリンクをクリックしてください！"
+            "alert": "\u62db\u5f85\u72b6\u306f\u6211\u3005\u306e\u30c9\u30e1\u30a4\u30f3\u304b\u3089\u9001\u4fe1\u3055\u308c\u307e\u3059\u3002\u3042\u306a\u305f\u306e\u53cb\u9054\u306f\u307e\u3060\u8a8d\u8b58\u3057\u3066\u3044\u307e\u305b\u3093\u3002\u30ea\u30f3\u30af\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3088\u3046\u306b\u4f9d\u983c\u3057\u3066\u3001\u3042\u306a\u305f\u304b\u3089\u306e\u62db\u5f85\u72b6\u304c\u5c4a\u3044\u305f\u3053\u3068\u3092\u7c21\u5358\u306a\u30c6\u30ad\u30b9\u30c8\u3067\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u307e\u3059\u3002",
+            "confirm": "\u62db\u5f85\u72b6\u306f\u6211\u3005\u306e\u30c9\u30e1\u30a4\u30f3\u304b\u3089\u9001\u4fe1\u3055\u308c\u307e\u3059\u3002\u3042\u306a\u305f\u306e\u53cb\u9054\u306f\u307e\u3060\u8a8d\u8b58\u3057\u3066\u3044\u307e\u305b\u3093\u3002\u30ea\u30f3\u30af\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3088\u3046\u4f9d\u983c\u3057\u3066\u3001\u3042\u306a\u305f\u304b\u3089\u306e\u62db\u5f85\u72b6\u304c\u3042\u306a\u305f\u304b\u3089\u306e\u3082\u306e\u3067\u3042\u308b\u3053\u3068\u3092\u77e5\u3089\u305b\u308b\u305f\u3081\u306e\u30af\u30a4\u30c3\u30af\u30c6\u30ad\u30b9\u30c8\u3092\u30d5\u30a9\u30ed\u30fc\u30a2\u30c3\u30d7\u3057\u307e\u3059\u304b\u3002",
+            "subject": "\u3042\u306a\u305f\u306f\u62db\u5f85\u3092\u53d7\u3051\u307e\u3057\u305f\u304b\uff1f",
+            "body": "\u3053\u3093\u306b\u3061\u306f\u3001\u79c1\u306f\u3042\u306a\u305f\u306b{{app}}\u30a2\u30d7\u30ea\u3078\u306e\u62db\u5f85\u72b6\u3092\u9001\u3063\u305f\u3070\u304b\u308a\u3067\u3059\u3002\u3042\u306a\u305f\u306eE\u30e1\u30fc\u30eb\u3092\u30c1\u30a7\u30c3\u30af\u3057\u3066\u305d\u3053\u306b\u3042\u308b\u30ea\u30f3\u30af\u3092\u30af\u30ea\u30c3\u30af\u3057\u3066\u304f\u3060\u3055\u3044\uff01"
         }
     }
 }

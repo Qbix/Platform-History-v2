@@ -16,5 +16,11 @@
             "Interest": "ब्याज",
             "Location": "स्थान"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "चले जाओ",
+            "PasteLinkHere": "यहां एक लिंक पेस्ट करें"
+        }
     }
 }

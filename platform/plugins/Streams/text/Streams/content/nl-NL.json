@@ -3,8 +3,8 @@
         "NewItemTitle": "Nieuw item"
     },
     "labels": {
-        "Streams\/invited": "Mensen die ik heb uitgenodigd",
-        "Streams\/invitedMe": "Wie heeft mij uitgenodigd"
+        "Streams/invited": "Mensen die ik heb uitgenodigd",
+        "Streams/invitedMe": "Wie heeft mij uitgenodigd"
     },
     "interests": {
         "Filter": "Wat vind je leuk?",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} zei:",
-        "Streams\/changed": "Wijzigingen in {{stream.fields.title}}",
-        "Streams\/invite": "U bent uitgenodigd voor {{& stream.fields.title}}",
-        "Streams\/announcement": "Aankondiging in {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} heeft toegang tot de stream gewijzigd",
-        "Streams\/chat\/edit": "Chatbericht bewerkt",
-        "Streams\/chat\/remove": "Chatbericht verwijderd",
-        "Streams\/closed": "{{stream.fields.title}} is gesloten",
-        "Streams\/task\/progress": "Voortgang gemaakt op {{stream.fields.title}}",
-        "Streams\/task\/complete": "Taak voltooid: {{stream.fields.title}}",
-        "Streams\/task\/error": "Fout tijdens: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: inkomend bericht"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} zei:",
+        "Streams/changed": "Wijzigingen in {{stream.fields.title}}",
+        "Streams/invite": "U bent uitgenodigd voor {{& stream.fields.title}}",
+        "Streams/announcement": "Aankondiging in {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} heeft toegang tot de stream gewijzigd",
+        "Streams/chat/edit": "Chatbericht bewerkt",
+        "Streams/chat/remove": "Chatbericht verwijderd",
+        "Streams/closed": "{{stream.fields.title}} is gesloten",
+        "Streams/task/progress": "Voortgang gemaakt op {{stream.fields.title}}",
+        "Streams/task/complete": "Taak voltooid: {{stream.fields.title}}",
+        "Streams/task/error": "Fout tijdens: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: inkomend bericht"
     },
     "invite": {
         "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
@@ -56,10 +56,11 @@
             "byEmail": "E-mail",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "tjilpen"
+            "byTwitter": "tjilpen",
+            "QRscanned": "Ze hebben het gescand!"
         },
         "email": {
-            "subject": "Hé, kijk hier eens",
+            "subject": "H\u00e9, kijk hier eens",
             "PleaseVisitLink": "Ga naar de volgende link:",
             "InvitingYou": "Ik nodig u uit voor {{title}}",
             "HasInvitedYou": "{{displayName}} heeft u uitgenodigd voor {{title}}"
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} heeft een <em>{{message.fields.type}}<\/em> bericht gepost naar {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} heeft een <em>{{message.fields.type}}</em> bericht gepost naar {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"

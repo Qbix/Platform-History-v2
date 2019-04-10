@@ -79,7 +79,7 @@ if (!empty($options['google-format'])) {
 	$options['google-format'] = 'html';
 }
 if (isset($options['plugins'])) {
-	$plugins = Q_Config::get('Q', 'plugins', array());
+	$plugins = Q::plugins();
 	foreach ($plugins as $plugin) {
 		$PLUGIN = strtoupper($plugin);
 		$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');

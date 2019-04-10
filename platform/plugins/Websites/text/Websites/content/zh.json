@@ -16,5 +16,11 @@
             "Interest": "利益",
             "Location": "地点"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "走",
+            "PasteLinkHere": "在此处粘贴链接"
+        }
     }
 }

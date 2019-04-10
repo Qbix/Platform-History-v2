@@ -56,7 +56,8 @@
             "byEmail": "البريد الإلكتروني",
             "byText": "نص",
             "byFacebook": "فيس بوك",
-            "byTwitter": "تغريد"
+            "byTwitter": "تغريد",
+            "QRscanned": "قاموا بمسحها ضوئيًا!"
         },
         "email": {
             "subject": "مهلا ، تحقق من ذلك",

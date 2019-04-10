@@ -2,19 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "ஊக்குவிக்க இணைப்பு",
-                "startDate": "தொடக்க தேதி",
-                "startTime": "ஆரம்பிக்கும் நேரம்",
-                "endDate": "கடைசி தேதி",
-                "endTime": "முடிவு நேரம்",
-                "budget": "பட்ஜெட்"
+                "link": "\u0b8a\u0b95\u0bcd\u0b95\u0bc1\u0bb5\u0bbf\u0b95\u0bcd\u0b95 \u0b87\u0ba3\u0bc8\u0baa\u0bcd\u0baa\u0bc1",
+                "startDate": "\u0ba4\u0bca\u0b9f\u0b95\u0bcd\u0b95 \u0ba4\u0bc7\u0ba4\u0bbf",
+                "startTime": "\u0b86\u0bb0\u0bae\u0bcd\u0baa\u0bbf\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0ba8\u0bc7\u0bb0\u0bae\u0bcd",
+                "endDate": "\u0b95\u0b9f\u0bc8\u0b9a\u0bbf \u0ba4\u0bc7\u0ba4\u0bbf",
+                "endTime": "\u0bae\u0bc1\u0b9f\u0bbf\u0bb5\u0bc1 \u0ba8\u0bc7\u0bb0\u0bae\u0bcd",
+                "budget": "\u0baa\u0b9f\u0bcd\u0b9c\u0bc6\u0b9f\u0bcd"
             },
             "interests": {
-                "Title": "ஆர்வத்தை வடிகட்டவும்",
-                "FilterInterests": "ஆர்வம் தட்டச்சு செய்யத் தொடங்குங்கள் ..."
+                "Title": "\u0b86\u0bb0\u0bcd\u0bb5\u0ba4\u0bcd\u0ba4\u0bc8 \u0bb5\u0b9f\u0bbf\u0b95\u0b9f\u0bcd\u0b9f\u0bb5\u0bc1\u0bae\u0bcd",
+                "FilterInterests": "\u0b86\u0bb0\u0bcd\u0bb5\u0bae\u0bcd \u0ba4\u0b9f\u0bcd\u0b9f\u0b9a\u0bcd\u0b9a\u0bc1 \u0b9a\u0bc6\u0baf\u0bcd\u0baf\u0ba4\u0bcd \u0ba4\u0bca\u0b9f\u0b99\u0bcd\u0b95\u0bc1\u0b99\u0bcd\u0b95\u0bb3\u0bcd ..."
             },
-            "Interest": "ஆர்வம்",
-            "Location": "இருப்பிடம்"
+            "Interest": "\u0b86\u0bb0\u0bcd\u0bb5\u0bae\u0bcd",
+            "Location": "\u0b87\u0bb0\u0bc1\u0baa\u0bcd\u0baa\u0bbf\u0b9f\u0bae\u0bcd"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "\u0baa\u0bc7\u0bbe\u0baf\u0bcd",
+            "PasteLinkHere": "\u0b87\u0b99\u0bcd\u0b95\u0bc7 \u0b92\u0bb0\u0bc1 \u0b87\u0ba3\u0bc8\u0baa\u0bcd\u0baa\u0bc8 \u0b92\u0b9f\u0bcd\u0b9f\u0bc1\u0b95"
         }
     }
 }

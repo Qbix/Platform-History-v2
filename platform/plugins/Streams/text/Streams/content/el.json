@@ -56,7 +56,8 @@
             "byEmail": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
             "byText": "Κείμενο",
             "byFacebook": "Facebook",
-            "byTwitter": "Κελάδημα"
+            "byTwitter": "Κελάδημα",
+            "QRscanned": "Το έλεγξαν!"
         },
         "email": {
             "subject": "Ελέγξτε αυτό",
