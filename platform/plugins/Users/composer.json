@@ -6,7 +6,7 @@
 		}
 	],
 	"require": {
-		"minishlink/web-push": "1.0.1",
+		"minishlink/web-push": "^1.4",
 		"lordelph/icofileloader": "1.*"
 	}
 }
