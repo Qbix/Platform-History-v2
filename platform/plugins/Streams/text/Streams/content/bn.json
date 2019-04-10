@@ -56,7 +56,8 @@
             "byEmail": "ইমেইল",
             "byText": "পাঠ",
             "byFacebook": "ফেসবুক",
-            "byTwitter": "টুইটার"
+            "byTwitter": "টুইটার",
+            "QRscanned": "তারা এটা স্ক্যান!"
         },
         "email": {
             "subject": "আরে, এই চেক আউট",

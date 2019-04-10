@@ -16,5 +16,11 @@
             "Interest": "Interes",
             "Location": "Locație"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Merge",
+            "PasteLinkHere": "Inserați aici un link"
+        }
     }
 }

@@ -16,5 +16,11 @@
             "Interest": "دلچسپی",
             "Location": "مقام"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "جاؤ",
+            "PasteLinkHere": "یہاں ایک لنک چسپاں کریں"
+        }
     }
 }

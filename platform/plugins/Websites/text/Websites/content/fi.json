@@ -16,5 +16,11 @@
             "Interest": "Kiinnostuksen kohde",
             "Location": "Sijainti"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mennä",
+            "PasteLinkHere": "Liitä linkki tähän"
+        }
     }
 }

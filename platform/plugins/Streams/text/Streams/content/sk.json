@@ -56,7 +56,8 @@
             "byEmail": "e-mail",
             "byText": "text",
             "byFacebook": "Facebook",
-            "byTwitter": "cvrlikání"
+            "byTwitter": "cvrlikání",
+            "QRscanned": "Skenovali to!"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",

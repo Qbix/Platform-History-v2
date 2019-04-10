@@ -16,5 +16,11 @@
             "Interest": "관심",
             "Location": "위치"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "가기",
+            "PasteLinkHere": "여기에 링크 붙여 넣기"
+        }
     }
 }

@@ -35,7 +35,7 @@ if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h
 	die($help);
 
 $connections = array_keys(Q_Config::get('Db', 'connections', array()));
-$plugins = Q_Config::get('Q', 'plugins', array());
+$plugins = Q::plugins();
 
 if (!isset($argv[1]) or $argv[1] != '--all')
 	$connections = array_diff($connections, $plugins);

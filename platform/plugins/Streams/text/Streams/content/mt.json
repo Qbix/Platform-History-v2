@@ -56,7 +56,8 @@
             "byEmail": "Email",
             "byText": "Test",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Huma skannjati!"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",

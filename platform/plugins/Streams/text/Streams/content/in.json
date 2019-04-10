@@ -56,7 +56,8 @@
             "byEmail": "E-mail",
             "byText": "Teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Kericau"
+            "byTwitter": "Kericau",
+            "QRscanned": "Mereka memindainya!"
         },
         "email": {
             "subject": "Hei, lihat ini",

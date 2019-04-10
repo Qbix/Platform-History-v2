@@ -75,7 +75,7 @@ class Q_Mustache_Loader implements Mustache_Loader {
 		}
 
 		// search plugin views
-		$plugins = Q_Config::get('Q', 'plugins', array());
+		$plugins = Q::plugins();
 		foreach ($plugins as $k => $v) {
 			$plugin = is_numeric($k) ? $v : $k;
 			$PLUGIN = strtoupper($plugin);

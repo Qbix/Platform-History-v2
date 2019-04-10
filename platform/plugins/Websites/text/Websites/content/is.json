@@ -16,5 +16,11 @@
             "Interest": "Vextir",
             "Location": "Staðsetning"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Fara",
+            "PasteLinkHere": "Límdu tengil hér"
+        }
     }
 }
