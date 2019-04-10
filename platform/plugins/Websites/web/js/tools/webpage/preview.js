@@ -152,14 +152,10 @@
 				});
 			}*/
 
-			Q.Streams.get(state.publisherId, state.streamName, function (err) {
-				var msg = Q.firstErrorMessage(err);
-				if (msg) {
-					return Q.alert(msg);
-				}
-
-				var stream = this;
-				var url = stream.getAttribute("url");
+			var pipe = new Q.Pipe(['interest', 'webpage'], function (params) {
+				var interestStream = params.interest[0];
+				var webpageStream = params.webpage[0];
+				var url = webpageStream.getAttribute("url");
 
 				Q.Template.render('Websites/webpage/preview', {
 					title: $.inArray('title', state.editable) >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
@@ -167,15 +163,18 @@
 						streamName: state.streamName,
 						field: 'title',
 						inplaceType: 'text'
-					}) : stream.fields.title,
+					}) : webpageStream.fields.title,
 					description: $.inArray('description', state.editable) >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: state.publisherId,
 						streamName: state.streamName,
 						field: 'content',
 						inplaceType: 'textarea'
-					}) : stream.fields.content,
-					interest: Q.getObject('title', stream.getAttribute("interestTitle")).replace('Websites:',''),
-					src: stream.iconUrl('80'),
+					}) : webpageStream.fields.content,
+					interest: {
+						title: Q.getObject(['fields', 'title'], interestStream).replace('Websites:',''),
+						icon: interestStream.iconUrl(interestStream.getAttribute('iconSize')),
+					},
+					src: webpageStream.iconUrl('80'),
 					url: '<a href="' + url + '" target="_blank">' + url + '</a>',
 					text: tool.text.webpage
 				}, function (err, html) {
@@ -188,6 +187,32 @@
 					}
 
 					Q.activate(tool);
+				});
+			});
+
+			Q.Streams.get(state.publisherId, state.streamName, function (err) {
+				var msg = Q.firstErrorMessage(err);
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+				pipe.fill('webpage')(this);
+
+				var interestPublisherId = Q.getObject(["publisherId"], this.getAttribute('interest'));
+				var interestStreamName = Q.getObject(["streamName"], this.getAttribute('interest'));
+
+				if (!interestPublisherId || !interestStreamName) {
+					pipe.fill('interest')(null);
+				}
+
+				// get interest stream
+				Q.Streams.get(interestPublisherId, interestStreamName, function (err) {
+					var msg = Q.firstErrorMessage(err);
+					if (msg) {
+						return Q.alert(msg);
+					}
+
+					pipe.fill('interest')(this);
 				});
 			});
 		}
@@ -204,7 +229,7 @@
 		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
 		'	<div class="Streams_aspect_url">{{& url}}</div>' +
 		'	<div class="Streams_aspect_description">{{& description}}</div>' +
-		'	<div class="Streams_aspect_interests">{{& interest}}</div>' +
+		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}">{{& interest.title}}</div>' +
 		'</div>'
 	);
 })(Q, Q.$, window);

@@ -19,10 +19,11 @@ function Websites_webpage_post($params)
 
 	$description = Q::ifset($r, 'description', null);
 	$copyright = Q::ifset($r, 'copyright', null);
-	$icon = Q::ifset($r, 'icon', null);
+	$bigIcon = Q::ifset($r, 'bigIcon', null);
+	$smallIcon = Q::ifset($r, 'smallIcon', null);
 	$contentType = Q::ifset($r, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 	$contentType = explode(';', $contentType)[0];
-	$streamIcon = null;
+	$streamIcon = Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
 
 	if ($contentType != 'text/html') {
 		// trying to get icon
@@ -40,9 +41,26 @@ function Websites_webpage_post($params)
 	$interestPublisherId = Q_Response::getSlot('publisherId');
 	$interestStreamName = Q_Response::getSlot('streamName');
 
-	// icon
-	if (Q_Valid::url($icon)) {
-		$iconList = Q_Image::iconArrayWithUrl($icon, 'Streams/image');
+	$interestStream = Streams::fetchOne(null, $interestPublisherId, $interestStreamName);
+
+	// set interest icon
+	if ($interestStream instanceof Streams_Stream && !Users::isCustomIcon($interestStream->icon)) {
+		$result = null;
+
+		if (Q_Valid::url($smallIcon)) {
+			$result = Users::importIcon($interestStream, array(
+				'32.png' => $smallIcon
+			), $interestStream->iconDirectory());
+		}
+
+		if (empty($result)) {
+			$interestStream->icon = $streamIcon;
+			$interestStream->setAttribute('iconSize', 40);
+		} else {
+			$interestStream->setAttribute('iconSize', 32);
+		}
+
+		$interestStream->save();
 	}
 
 	$stream = Streams::create($userId, $userId, 'Websites/webpage', array(
@@ -57,7 +75,7 @@ function Websites_webpage_post($params)
 				'publisherId' => $interestPublisherId,
 				'streamName' => $interestStreamName,
 			),
-			'icon' => $icon,
+			'icon' => $bigIcon,
 			'copyright' => $copyright,
 			'contentType' =>$contentType,
 			'lang' => Q::ifset($r, 'lang', 'en')
@@ -67,6 +85,15 @@ function Websites_webpage_post($params)
 		'streamName' => $interestStreamName,
 		'type' => 'Websites/webpage'
 	));
+
+	// set icon
+	if (Q_Valid::url($bigIcon)) {
+		$result = Users::importIcon($stream, Q_Image::iconArrayWithUrl($bigIcon, 'Streams/image'), $stream->iconDirectory());
+
+		if (!empty($result)) {
+			$stream->save();
+		}
+	}
 
 	$stream->subscribe(compact('userId'));
 
