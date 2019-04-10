@@ -1506,7 +1506,13 @@ abstract class Users extends Base_Users
 					} else {
 						$data = file_get_contents($url);
 					}
-					$source = imagecreatefromstring($data);
+					if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+						require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+						$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
+						$source = $icoFileService->extractIcon($data, 32, 32);
+					} else {
+						$source = imagecreatefromstring($data);
+					}
 					$sw = imagesx($source);
 					$sh = imagesy($source);
 				}
