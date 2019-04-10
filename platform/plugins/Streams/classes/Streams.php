@@ -4563,7 +4563,32 @@ abstract class Streams extends Base_Streams
 
 		return $stream;
 	}
-		/**
+
+	/**
+	 * Get the directory to import the icon into, for a stream.
+	 * Use this with Users::importIcon().
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} [$extra] You can pass time() here or something,
+	 *  if you don't want to overwrite old values.
+	 * @return {string}
+	 */
+	static function iconDirectory($publisherId, $streamName, $extra = null)
+	{
+		$splitId = Q_Utils::splitId($publisherId);
+		$sn = implode(DS, explode('/', $streamName));
+		$path = APP_WEB_DIR . DS . 'Q' . DS . 'uploads' . DS . 'Streams';
+		if ($realpath = realpath($path)) {
+			$path = $realpath;
+		}
+		$subpath = $splitId . DS . $sn . DS . 'icon';
+		if ($extra) {
+			$subpath .= DS . $extra;
+		}
+		return $realpath . DS . $subpath;
+	}
+
+	/**
 	 * Remove streams from system
 	 * @method removeStream
 	 * @static
