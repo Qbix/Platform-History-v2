@@ -120,7 +120,7 @@ class Websites_Webpage
 		if (Q_Valid::url($icon)) {
 			$result['bigIcon'] = $icon;
 		} else {
-			$result['bigIcon'] = Q::ifset($icons, 'apple-touch-icon', Q::ifset($icons, 'image/png', Q::ifset($icons, 'image/gif', Q::ifset($icons, 'image/x-icon', null))));
+			$result['bigIcon'] = Q::ifset($icons, 'apple-touch-icon', Q::ifset($icons, 'apple-touch-icon-precomposed', Q::ifset($icons, 'icon', null)));
 		}
 
 		$result['smallIcon'] = Q::ifset($icons, 'icon', Q::ifset($icons, 'shortcut icon', $result['bigIcon']));
