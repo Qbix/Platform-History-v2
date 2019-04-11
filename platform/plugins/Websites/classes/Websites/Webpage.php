@@ -161,6 +161,18 @@ class Websites_Webpage
 		return $href;
 	}
 	/**
+	 * If Websites/webpage stream for this $url already exists - return one.
+	 * @method streamExists
+	 * @static
+	 * @param string $url
+	 * @return Streams_Stream
+	 */
+	static function streamExists ($url) {
+		return Streams_Stream::select()->where(array(
+			'attributes like ' => '%'.$url.'%'
+		))->fetchDbRow();
+	}
+		/**
 	 * Create Websites/webpage stream from params
 	 * @method createStream
 	 * @static
@@ -229,6 +241,13 @@ class Websites_Webpage
 			}
 
 			$interestStream->save();
+		}
+
+		// check if stream for this url already created
+		// and if yes, return one
+		$webpageStream = self::streamExists($url);
+		if ($webpageStream) {
+			return $webpageStream;
 		}
 
 		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
