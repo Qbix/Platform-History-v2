@@ -82,7 +82,8 @@
 					}, {
 						fields: {
 							publisherId: state.publisherId,
-							streamName: state.streamName
+							streamName: state.streamName,
+							message: $message.val()
 						}
 					});
 
