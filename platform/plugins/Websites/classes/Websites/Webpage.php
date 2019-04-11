@@ -109,11 +109,11 @@ class Websites_Webpage
 
 			if(!empty($rel)){
 				if (preg_match('#icon#', $rel)) {
-					$icons[$rel] = $href;
+					$icons[$rel] = self::normaliseHref($href, $url);
 				}
 
 				if ($rel == 'canonical') {
-					$canonicalUrl = $href;
+					$canonicalUrl = self::normaliseHref($href, $url);
 				}
 			}
 		}
