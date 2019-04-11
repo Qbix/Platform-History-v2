@@ -35,8 +35,14 @@ class Websites_Webpage
 			throw new Exception("Server return wrong response!");
 		}
 
-		$headers = $response[count($response) - 2];
-		$document = $response[count($response) - 1];
+		$headers = $document = '';
+		foreach ($response as $i => $item) {
+			if (strpos($item, 'HTTP/') === 0 && empty($document)) {
+				$headers = $item;
+			} else {
+				$document .= $item;
+			}
+		}
 
 		if (!$document) {
 			throw new Exception("Unable to access the site");
@@ -143,14 +149,13 @@ class Websites_Webpage
 	 */
 	static function normaliseHref ($href, $baseUrl) {
 		$parts = parse_url($baseUrl);
-		$baseUrl = $parts['scheme'] . '://' . $parts['host'] . $parts['path'];
 
 		if (preg_match("#^\/\/#", $href)) {
 			return $parts['scheme'].':'.$href;
 		}
 
 		if (preg_match("#^\/#", $href)) {
-			return $baseUrl.$href;
+			return $parts['scheme'] . '://' . $parts['host'] . $href;
 		}
 
 		return $href;
