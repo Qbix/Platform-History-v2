@@ -16,5 +16,11 @@
             "Interest": "Interes",
             "Location": "Kokalekua"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "joan",
+            "PasteLinkHere": "Itsatsi esteka hemen"
+        }
     }
 }

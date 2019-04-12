@@ -45,7 +45,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 				$subpath .= DS;
 			}
 			$paths[] = APP_DIR.$subpath;
-			foreach (Q_Config::get('Q', 'plugins', array()) as $plugin) {
+			foreach (Q::plugins() as $plugin) {
 				$c = strtoupper($plugin).'_PLUGIN_DIR';
 				if (defined($c)) {
 					$paths[] = constant($c).$subpath;

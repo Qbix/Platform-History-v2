@@ -2,11 +2,11 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Ligazón para promocionar",
+                "link": "Ligaz\u00f3n para promocionar",
                 "startDate": "Data de inicio",
                 "startTime": "Hora de inicio",
-                "endDate": "Data de finalización",
-                "endTime": "Hora de finalización",
+                "endDate": "Data de finalizaci\u00f3n",
+                "endTime": "Hora de finalizaci\u00f3n",
                 "budget": "Orzamento"
             },
             "interests": {
@@ -14,7 +14,13 @@
                 "FilterInterests": "Comece a escribir un interese ..."
             },
             "Interest": "Interese",
-            "Location": "Localización"
+            "Location": "Localizaci\u00f3n"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Vaia",
+            "PasteLinkHere": "Pegue unha ligaz\u00f3n aqu\u00ed"
         }
     }
 }

@@ -16,5 +16,11 @@
             "Interest": "فائدة",
             "Location": "موقعك"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "اذهب",
+            "PasteLinkHere": "الصق رابط هنا"
+        }
     }
 }

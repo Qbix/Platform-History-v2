@@ -56,7 +56,8 @@
             "byEmail": "E-pasts",
             "byText": "Teksts",
             "byFacebook": "Facebook",
-            "byTwitter": "Čivināt"
+            "byTwitter": "Čivināt",
+            "QRscanned": "Viņi skenēja to!"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",

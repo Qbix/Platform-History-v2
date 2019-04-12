@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Erreur {{status}} lors de la demande",
+        "canceled": "Demande annulée",
+        "500": "Erreur Interne du Serveur",
+        "404": "Pas trouvé: {{url}}",
+        "501": "Demande interrompue"
+    },
+    "nonce": {
+        "sameDomain": "La session a expiré. Actualisez la page et réessayez.",
+        "otherDomain": "Demande interdomaine bloquée au domaine étranger à {{baseUrl}}"
+    },
+    "words": {
+        "tap": "robinet",
+        "click": "Cliquez sur",
+        "yes": "Oui",
+        "no": "non",
+        "Tap": "Robinet",
+        "Click": "Cliquez sur",
+        "Yes": "Oui",
+        "No": "Non"
+    },
+    "months": {
+        "1": "janvier",
+        "2": "février",
+        "3": "Mars",
+        "4": "avril",
+        "5": "Peut",
+        "6": "juin",
+        "7": "juillet",
+        "8": "août",
+        "9": "septembre",
+        "10": "octobre",
+        "11": "novembre",
+        "12": "décembre"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Veuillez autoriser l&#39;accès à votre microphone",
+        "record": "Record",
+        "recording": "Enregistrement",
+        "remains": "restes",
+        "maximum": "maximum",
+        "playing": "En jouant",
+        "recorded": "Enregistré",
+        "clip": "agrafe",
+        "orupload": "Ou télécharger",
+        "usethis": "Utilisez ceci",
+        "discard": "Jeter",
+        "encoding": "Codage"
+    },
+    "alert": {
+        "title": "Alerte"
+    },
+    "confirm": {
+        "title": "Confirmer",
+        "ok": "Oui",
+        "cancel": "Non"
+    },
+    "prompt": {
+        "title": "Rapide",
+        "ok": "Aller"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Erreur de lecture du fichier",
+        "cameraCommands": {
+            "prompt": "Qu&#39;est-ce que tu aimerais faire?",
+            "photo": "Prendre une nouvelle photo",
+            "library": "Choisir dans la bibliothèque"
+        },
+        "tooSmall": "Veuillez choisir une image plus grande.",
+        "cropping": {
+            "title": "Ajuster la taille et la position",
+            "touchscreen": "Utilisez vos doigts pour zoomer et faire glisser",
+            "notTouchscreen": "Utilisez votre souris et votre molette pour zoomer et faire glisser"
+        }
+    }
+}

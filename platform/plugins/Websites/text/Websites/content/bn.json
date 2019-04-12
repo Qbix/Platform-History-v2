@@ -16,5 +16,11 @@
             "Interest": "স্বার্থ",
             "Location": "অবস্থান"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "যাওয়া",
+            "PasteLinkHere": "এখানে একটি লিঙ্ক পেস্ট করুন"
+        }
     }
 }

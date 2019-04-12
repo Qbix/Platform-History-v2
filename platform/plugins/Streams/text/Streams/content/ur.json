@@ -56,7 +56,8 @@
             "byEmail": "ای میل",
             "byText": "متن",
             "byFacebook": "فیس بک",
-            "byTwitter": "ٹویٹر"
+            "byTwitter": "ٹویٹر",
+            "QRscanned": "انہوں نے اسے سکین کیا!"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",

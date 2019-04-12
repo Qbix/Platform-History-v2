@@ -16,5 +16,11 @@
             "Interest": "Ús",
             "Location": "Suíomh"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Téigh",
+            "PasteLinkHere": "Greamaigh nasc anseo"
+        }
     }
 }

@@ -56,7 +56,8 @@
             "byEmail": "Correu electrònic",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "El van escanejar!"
         },
         "email": {
             "subject": "Hola, comprova-ho",

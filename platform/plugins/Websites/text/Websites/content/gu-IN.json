@@ -2,19 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "પ્રમોટ કરવા માટે લિંક",
-                "startDate": "પ્રારંભ તારીખ",
-                "startTime": "પ્રારંભ સમય",
-                "endDate": "અંતિમ તારીખ",
-                "endTime": "સમાપ્તિ સમય",
-                "budget": "બજેટ"
+                "link": "\u0aaa\u0acd\u0ab0\u0aae\u0acb\u0a9f \u0a95\u0ab0\u0ab5\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0ab2\u0abf\u0a82\u0a95",
+                "startDate": "\u0aaa\u0acd\u0ab0\u0abe\u0ab0\u0a82\u0aad \u0aa4\u0abe\u0ab0\u0ac0\u0a96",
+                "startTime": "\u0aaa\u0acd\u0ab0\u0abe\u0ab0\u0a82\u0aad \u0ab8\u0aae\u0aaf",
+                "endDate": "\u0a85\u0a82\u0aa4\u0abf\u0aae \u0aa4\u0abe\u0ab0\u0ac0\u0a96",
+                "endTime": "\u0ab8\u0aae\u0abe\u0aaa\u0acd\u0aa4\u0abf \u0ab8\u0aae\u0aaf",
+                "budget": "\u0aac\u0a9c\u0ac7\u0a9f"
             },
             "interests": {
-                "Title": "રસ દ્વારા ફિલ્ટર કરો",
-                "FilterInterests": "રસ લખવાનું શરૂ કરો ..."
+                "Title": "\u0ab0\u0ab8 \u0aa6\u0acd\u0ab5\u0abe\u0ab0\u0abe \u0aab\u0abf\u0ab2\u0acd\u0a9f\u0ab0 \u0a95\u0ab0\u0acb",
+                "FilterInterests": "\u0ab0\u0ab8 \u0ab2\u0a96\u0ab5\u0abe\u0aa8\u0ac1\u0a82 \u0ab6\u0ab0\u0ac2 \u0a95\u0ab0\u0acb ..."
             },
-            "Interest": "રસ",
-            "Location": "સ્થાન"
+            "Interest": "\u0ab0\u0ab8",
+            "Location": "\u0ab8\u0acd\u0aa5\u0abe\u0aa8"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "\u0a9c\u0abe\u0ab5",
+            "PasteLinkHere": "\u0a85\u0ab9\u0ac0\u0a82 \u0a8f\u0a95 \u0ab2\u0abf\u0a82\u0a95 \u0aaa\u0ac7\u0ab8\u0acd\u0a9f \u0a95\u0ab0\u0acb"
         }
     }
 }

@@ -16,5 +16,11 @@
             "Interest": "Interesar",
             "Location": "Ubicación"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ir",
+            "PasteLinkHere": "Pega un enlace aquí"
+        }
     }
 }

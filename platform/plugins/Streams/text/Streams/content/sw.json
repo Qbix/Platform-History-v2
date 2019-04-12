@@ -56,7 +56,8 @@
             "byEmail": "Barua pepe",
             "byText": "Nakala",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Walichunguza!"
         },
         "email": {
             "subject": "Hey, angalia hii nje",
