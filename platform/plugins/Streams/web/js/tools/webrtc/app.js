@@ -3063,9 +3063,7 @@ var WebRTCconferenceLib = function app(options){
                 Twilio = window.Twilio = TwilioInstance;
                 initWithTwilio(callback);
             });
-            console.log('aaaaaaaaaaa')
         } else {
-            console.log('bbbbbbbbbbbbbbbbbbbbb')
             initWithNodeJs(callback);
         }
     }
