@@ -16,5 +16,11 @@
             "Interest": "Bunga",
             "Location": "Lokasi"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pergi",
+            "PasteLinkHere": "Tempel tautan di sini"
+        }
     }
 }

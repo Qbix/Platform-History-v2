@@ -3,8 +3,8 @@
         "NewItemTitle": "Ncha mpya"
     },
     "labels": {
-        "Streams\/invited": "Watu niliowaalika",
-        "Streams\/invitedMe": "Ni nani aliyenialika"
+        "Streams/invited": "Watu niliowaalika",
+        "Streams/invitedMe": "Ni nani aliyenialika"
     },
     "interests": {
         "Filter": "Unafurahia nini?",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "Ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} alisema:",
-        "Streams\/changed": "Mabadiliko katika {{stream.fields.title}}",
-        "Streams\/invite": "Umealikwa {{& stream.fields.title}}",
-        "Streams\/announcement": "Tangazo katika {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} imebadilisha upatikanaji wa mkondo",
-        "Streams\/chat\/edit": "Ujumbe wa mazungumzo uliohaririwa",
-        "Streams\/chat\/remove": "Ujumbe wa mazungumzo umeondolewa",
-        "Streams\/closed": "{{stream.fields.title}} imefungwa",
-        "Streams\/task\/progress": "Maendeleo yaliyotolewa kwenye {{stream.fields.title}}",
-        "Streams\/task\/complete": "Kazi imekamilika: {{stream.fields.title}}",
-        "Streams\/task\/error": "Hitilafu wakati: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ujumbe usioingia"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} alisema:",
+        "Streams/changed": "Mabadiliko katika {{stream.fields.title}}",
+        "Streams/invite": "Umealikwa {{& stream.fields.title}}",
+        "Streams/announcement": "Tangazo katika {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} imebadilisha upatikanaji wa mkondo",
+        "Streams/chat/edit": "Ujumbe wa mazungumzo uliohaririwa",
+        "Streams/chat/remove": "Ujumbe wa mazungumzo umeondolewa",
+        "Streams/closed": "{{stream.fields.title}} imefungwa",
+        "Streams/task/progress": "Maendeleo yaliyotolewa kwenye {{stream.fields.title}}",
+        "Streams/task/complete": "Kazi imekamilika: {{stream.fields.title}}",
+        "Streams/task/error": "Hitilafu wakati: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Ujumbe usioingia"
     },
     "invite": {
         "messageContent": "{{displayName}} alikualika {{inviteUrl}}",
@@ -56,7 +56,8 @@
             "byEmail": "Barua pepe",
             "byText": "Nakala",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Walichunguza!"
         },
         "email": {
             "subject": "Hey, angalia hii nje",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} imesa ujumbe <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} imesa ujumbe <em>{{message.fields.type}}</em> kwa {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} katika {{& url}}: {{& message.fields.content}}"

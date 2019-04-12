@@ -56,7 +56,8 @@
             "byEmail": "Emaila",
             "byText": "Testua",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Eskaneatu zuten!"
         },
         "email": {
             "subject": "Hey, begiratu hau",

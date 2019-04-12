@@ -56,7 +56,8 @@
             "byEmail": "Email",
             "byText": "Szöveg",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Szkennelték!"
         },
         "email": {
             "subject": "Hé, nézd meg ezt",

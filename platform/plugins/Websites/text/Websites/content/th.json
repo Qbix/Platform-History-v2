@@ -16,5 +16,11 @@
             "Interest": "ดอกเบี้ย",
             "Location": "ที่ตั้ง"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ไป",
+            "PasteLinkHere": "วางลิงค์ที่นี่"
+        }
     }
 }

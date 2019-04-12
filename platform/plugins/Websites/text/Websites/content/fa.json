@@ -16,5 +16,11 @@
             "Interest": "علاقه",
             "Location": "محل"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "برو",
+            "PasteLinkHere": "یک پیوند را در اینجا بگذارید"
+        }
     }
 }

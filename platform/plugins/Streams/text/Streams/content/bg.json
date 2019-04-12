@@ -56,7 +56,8 @@
             "byEmail": "електронна поща",
             "byText": "Текст",
             "byFacebook": "Facebook",
-            "byTwitter": "кикотене"
+            "byTwitter": "кикотене",
+            "QRscanned": "Те го сканираха!"
         },
         "email": {
             "subject": "Хей, провери това",

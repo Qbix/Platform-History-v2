@@ -9,7 +9,7 @@ function Streams_webrtc_response_join($params = array()) {
     $publisherId = Q::ifset($params, 'publisherId', null);
 
 
-    $roomStream = Streams_Webrtc::joinRoom($loggedUserId, $publisherId, $streamName);
+    $roomStream = Streams_WebRTC::joinRoom($loggedUserId, $publisherId, $streamName);
 
     Q_Response::setSlot('join', $roomStream);
 

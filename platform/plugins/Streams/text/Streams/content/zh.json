@@ -56,7 +56,8 @@
             "byEmail": "电子邮件",
             "byText": "文本",
             "byFacebook": "Facebook的",
-            "byTwitter": "推特"
+            "byTwitter": "推特",
+            "QRscanned": "他们扫描了一下！"
         },
         "email": {
             "subject": "嘿，看看这个",

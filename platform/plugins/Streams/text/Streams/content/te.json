@@ -56,7 +56,8 @@
             "byEmail": "ఇమెయిల్",
             "byText": "టెక్స్ట్",
             "byFacebook": "ఫేస్బుక్",
-            "byTwitter": "ట్విట్టర్"
+            "byTwitter": "ట్విట్టర్",
+            "QRscanned": "వారు దానిని స్కాన్ చేశారు!"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",

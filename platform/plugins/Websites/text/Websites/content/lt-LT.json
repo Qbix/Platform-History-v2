@@ -3,18 +3,24 @@
         "campaign": {
             "placeholders": {
                 "link": "Nuoroda, skirta reklamuoti",
-                "startDate": "Pradžios data",
-                "startTime": "Pradžios laikas",
+                "startDate": "Prad\u017eios data",
+                "startTime": "Prad\u017eios laikas",
                 "endDate": "Pabaigos data",
                 "endTime": "Pabaigos laikas",
-                "budget": "Biudžetas"
+                "budget": "Biud\u017eetas"
             },
             "interests": {
-                "Title": "Filtruoti pagal palūkanas",
-                "FilterInterests": "Pradėkite rašyti susidomėjimą ..."
+                "Title": "Filtruoti pagal pal\u016bkanas",
+                "FilterInterests": "Prad\u0117kite ra\u0161yti susidom\u0117jim\u0105 ..."
             },
-            "Interest": "Palūkanos",
+            "Interest": "Pal\u016bkanos",
             "Location": "Vieta"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Eik",
+            "PasteLinkHere": "\u012eklijuokite nuorod\u0105 \u010dia"
         }
     }
 }

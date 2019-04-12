@@ -3,18 +3,24 @@
         "campaign": {
             "placeholders": {
                 "link": "Lien pour promouvoir",
-                "startDate": "Date de début",
-                "startTime": "Heure de début",
+                "startDate": "Date de d\u00e9but",
+                "startTime": "Heure de d\u00e9but",
                 "endDate": "Date de fin",
                 "endTime": "Heure de fin",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtrer par intérêt",
-                "FilterInterests": "Commencez à taper un intérêt ..."
+                "Title": "Filtrer par int\u00e9r\u00eat",
+                "FilterInterests": "Commencez \u00e0 taper un int\u00e9r\u00eat ..."
             },
-            "Interest": "Intérêt",
+            "Interest": "Int\u00e9r\u00eat",
             "Location": "Emplacement"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Aller",
+            "PasteLinkHere": "Collez un lien ici"
         }
     }
 }

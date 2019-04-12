@@ -56,7 +56,8 @@
             "byEmail": "E-post",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "De skannade det!"
         },
         "email": {
             "subject": "Hej, kolla här",

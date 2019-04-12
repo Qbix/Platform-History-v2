@@ -763,7 +763,7 @@ EOT;
 		}
 
 		// Push plugin name into Q/plugins array
-		if (!in_array($plugin_name, $current_plugins = Q_Config::get('Q', 'plugins', array()))) {
+		if (!in_array($plugin_name, $current_plugins = Q::plugins())) {
 			$current_plugins[] = $plugin_name;
 			Q_Config::set('Q', 'plugins', $current_plugins); //TODO: When do we save Q/plugins to disk?
 		}
@@ -813,7 +813,14 @@ EOT;
 	}
 
 	static function commandExists($cmd) {
-		$return = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
+		// check which command exist "which" (linux) or "where" (win)
+		$command = shell_exec("which") ? "which" : shell_exec("where") ? "where" : null;
+
+		if (!$command) {
+			return false;
+		}
+
+		$return = shell_exec(sprintf("%s %s", $command, escapeshellarg($cmd)));
 		return !empty($return);
 	}
 

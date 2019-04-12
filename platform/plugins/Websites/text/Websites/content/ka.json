@@ -16,5 +16,11 @@
             "Interest": "ინტერესი",
             "Location": "მდებარეობა"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "წადი",
+            "PasteLinkHere": "ჩასმა ბმული აქ"
+        }
     }
 }

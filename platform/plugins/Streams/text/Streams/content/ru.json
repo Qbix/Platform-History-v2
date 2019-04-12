@@ -56,7 +56,8 @@
             "byEmail": "Эл. адрес",
             "byText": "Текст",
             "byFacebook": "facebook",
-            "byTwitter": "щебет"
+            "byTwitter": "щебет",
+            "QRscanned": "Они сканировали это!"
         },
         "email": {
             "subject": "Эй, проверь это",

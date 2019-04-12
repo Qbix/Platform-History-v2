@@ -56,7 +56,8 @@
             "byEmail": "Email",
             "byText": "Texti",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Þeir skannaðu það!"
         },
         "email": {
             "subject": "Hey, athugaðu þetta út",

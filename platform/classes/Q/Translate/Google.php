@@ -13,7 +13,11 @@ class Q_Translate_Google {
 		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
 			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
-				if (($fromLang == $toLang) && ($this->parent->options['in'] === $this->parent->options['out'])) {
+				if (($fromLang == $toLang)
+				&& ($this->parent->options['in'] === $this->parent->options['out'])) {
+					foreach ($localeNames as $localeName) {
+						$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+					}
 					continue;
 				}
 			}
@@ -40,8 +44,9 @@ class Q_Translate_Google {
 			$localeFile = $directory . DS . "$lang-$locale.json";
 			if (file_exists($localeFile)) {
 				$arr = $content;
-				$tree = new Q_Tree($arr);
+				$tree = new Q_Tree();
 				$tree->load($localeFile);
+				$tree->merge($arr);
 				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT);
 			} else {
 				copy($langFile, $localeFile);
@@ -59,7 +64,8 @@ class Q_Translate_Google {
 				$arr = array();
 			}
 			array_push($d['key'], $d['value']);
-			$jsonFiles[$dirname] = array_merge_recursive($arr, $this->parent->arrayToBranch($d['key']));
+			$tree = new Q_Tree($arr);
+			$tree->merge($this->parent->arrayToBranch($d['key']));
 		}
 		$filenames = array();
 		foreach ($jsonFiles as $dirname => $content) {

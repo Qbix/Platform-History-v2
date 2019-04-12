@@ -3,8 +3,8 @@
         "NewItemTitle": "Bagong Item"
     },
     "labels": {
-        "Streams\/invited": "Mga taong inanyayahan ko",
-        "Streams\/invitedMe": "Sino ang nag-imbita sa akin"
+        "Streams/invited": "Mga taong inanyayahan ko",
+        "Streams/invitedMe": "Sino ang nag-imbita sa akin"
     },
     "interests": {
         "Filter": "Ano ang iyong kinaliligayahan?",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "Sinabi ni {{&call 'avatar.displayName'}}:",
-        "Streams\/changed": "Ang mga pagbabago sa {{stream.fields.title}}",
-        "Streams\/invite": "Inanyayahan ka sa {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunsyo sa {{& streams.fields.title}}",
-        "Streams\/access": "Ang {{&call 'avatar.displayName'}} ay nagbago ng access sa stream",
-        "Streams\/chat\/edit": "Na-edit ang mensahe ng chat",
-        "Streams\/chat\/remove": "Inalis ang mensahe ng chat",
-        "Streams\/closed": "Isinara ang {{stream.fields.title}}",
-        "Streams\/task\/progress": "Ang pag-unlad na ginawa sa {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tapos na ang gawain: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error sa panahon ng: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Papasok na Mensahe"
+        "Streams/chat/message": "Sinabi ni {{&call 'avatar.displayName'}}:",
+        "Streams/changed": "Ang mga pagbabago sa {{stream.fields.title}}",
+        "Streams/invite": "Inanyayahan ka sa {{& stream.fields.title}}",
+        "Streams/announcement": "Anunsyo sa {{& streams.fields.title}}",
+        "Streams/access": "Ang {{&call 'avatar.displayName'}} ay nagbago ng access sa stream",
+        "Streams/chat/edit": "Na-edit ang mensahe ng chat",
+        "Streams/chat/remove": "Inalis ang mensahe ng chat",
+        "Streams/closed": "Isinara ang {{stream.fields.title}}",
+        "Streams/task/progress": "Ang pag-unlad na ginawa sa {{stream.fields.title}}",
+        "Streams/task/complete": "Tapos na ang gawain: {{stream.fields.title}}",
+        "Streams/task/error": "Error sa panahon ng: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Papasok na Mensahe"
     },
     "invite": {
         "messageContent": "Inimbitahan ka ni {{displayName}} na {{inviteUrl}}",
@@ -56,7 +56,8 @@
             "byEmail": "Email",
             "byText": "Teksto",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Ini-scan nila ito!"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} nai-post ang isang <em>{{message.fields.type}} na<\/em> mensahe sa {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} nai-post ang isang <em>{{message.fields.type}} na</em> mensahe sa {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} sa {{& url}}: {{& message.fields.content}}"

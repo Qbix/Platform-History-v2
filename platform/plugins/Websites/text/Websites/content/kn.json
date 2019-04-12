@@ -16,5 +16,11 @@
             "Interest": "ಆಸಕ್ತಿ",
             "Location": "ಸ್ಥಳ"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ಹೋಗಿ",
+            "PasteLinkHere": "ಲಿಂಕ್ ಅನ್ನು ಇಲ್ಲಿ ಅಂಟಿಸಿ"
+        }
     }
 }

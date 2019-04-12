@@ -1,79 +1,80 @@
 {
     "preview": {
-        "NewItemTitle": "Punt ġdid"
+        "NewItemTitle": "Punt \u0121did"
     },
     "labels": {
-        "Streams\/invited": "Nies li stiedejt",
-        "Streams\/invitedMe": "Min stiedenni"
+        "Streams/invited": "Nies li stiedejt",
+        "Streams/invitedMe": "Min stiedenni"
     },
     "interests": {
-        "Filter": "Xi tħobb?",
-        "CanAdd": "Jekk xorta ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
+        "Filter": "Xi t\u0127obb?",
+        "CanAdd": "Jekk xorta ma tistax issib dak li qed tfittex, tista &#39;\u017c\u017cid interess \u0121did hawn ta\u0127t:",
         "TrySynonyms": "Ma narahiex? Ipprova xi sinonimi.",
-        "AddUnderCategory": "Żid taħt il-kategorija ...",
-        "Other": "Oħrajn",
+        "AddUnderCategory": "\u017bid ta\u0127t il-kategorija ...",
+        "Other": "O\u0127rajn",
         "Unlisted": "Mhux elenkati"
     },
     "chat": {
-        "flaggedForAdminReview": "Messaġġ ġie mmarkat għal reviżjoni admin. Tektek għal darb&#39;oħra biex toħroġ.",
-        "noOneSaid": "Ħadd ma qal xejn",
+        "flaggedForAdminReview": "Messa\u0121\u0121 \u0121ie mmarkat g\u0127al revi\u017cjoni admin. Tektek g\u0127al darb&#39;o\u0127ra biex to\u0127ro\u0121.",
+        "noOneSaid": "\u0126add ma qal xejn",
         "closeChatButton": "Chat mill-qrib",
-        "closeChatConfirmTitle": "Agħlaq dan iċ-chat?",
-        "closeChatConfirm": "Inti żgur li trid tagħlaq dan iċ-chat?",
+        "closeChatConfirmTitle": "Ag\u0127laq dan i\u010b-chat?",
+        "closeChatConfirm": "Inti \u017cgur li trid tag\u0127laq dan i\u010b-chat?",
         "closeChatConfirmYes": "Iva",
         "closeChatConfirmNo": "Le",
-        "earlierComments": "kummenti preċedenti"
+        "earlierComments": "kummenti pre\u010bedenti"
     },
     "notifications": {
-        "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} qal:",
-        "Streams\/changed": "Bidliet f &#39;{{stream.fields.title}}",
-        "Streams\/invite": "Ġejt mistiedna għal {{& stream.fields.title}}",
-        "Streams\/announcement": "Avviż f &#39;{{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} biddel l-aċċess għan-nixxiegħa",
-        "Streams\/chat\/edit": "Messaġġ taċ-chat editjat",
-        "Streams\/chat\/remove": "Messaġġ taċ-chat jitneħħa",
-        "Streams\/closed": "{{stream.fields.title}} ingħalaq",
-        "Streams\/task\/progress": "Progress magħmul fi {{stream.fields.title}}",
-        "Streams\/task\/complete": "Kompitu komplut: {{stream.fields.title}}",
-        "Streams\/task\/error": "Żball waqt: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Messaġġ li Jidħol"
+        "*": "Messa\u0121\u0121 {{& message.fields.type}} lil {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} qal:",
+        "Streams/changed": "Bidliet f &#39;{{stream.fields.title}}",
+        "Streams/invite": "\u0120ejt mistiedna g\u0127al {{& stream.fields.title}}",
+        "Streams/announcement": "Avvi\u017c f &#39;{{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} biddel l-a\u010b\u010bess g\u0127an-nixxieg\u0127a",
+        "Streams/chat/edit": "Messa\u0121\u0121 ta\u010b-chat editjat",
+        "Streams/chat/remove": "Messa\u0121\u0121 ta\u010b-chat jitne\u0127\u0127a",
+        "Streams/closed": "{{stream.fields.title}} ing\u0127alaq",
+        "Streams/task/progress": "Progress mag\u0127mul fi {{stream.fields.title}}",
+        "Streams/task/complete": "Kompitu komplut: {{stream.fields.title}}",
+        "Streams/task/error": "\u017bball waqt: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Messa\u0121\u0121 li Jid\u0127ol"
     },
     "invite": {
         "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Agħżel mill-Kuntatti tiegħek",
-            "selectFromContacts": "Agħżel Minn Kuntatti",
-            "photo": "Ħu ritratt",
-            "photoInstruction": "Jekk il-persuna li skannjat il-kodiċi QR tiegħek tkun quddiemek, ħu ritratt tagħhom",
+            "chooseFromContacts": "Ag\u0127\u017cel mill-Kuntatti tieg\u0127ek",
+            "selectFromContacts": "Ag\u0127\u017cel Minn Kuntatti",
+            "photo": "\u0126u ritratt",
+            "photoInstruction": "Jekk il-persuna li skannjat il-kodi\u010bi QR tieg\u0127ek tkun quddiemek, \u0127u ritratt tag\u0127hom",
             "to": "Lil: {{Stream Title}}",
             "go": "Mur",
             "title": "Tistieden",
             "placeholder": "Numru tal-mobile jew indirizz tal-email",
-            "orInvite": "Jew tistieden lin-nies billi tuża:",
-            "QR": "{{ClickOrTap}} biex jiġġenera kodiċi QR",
-            "QRtitle": "Scan dan il-kodiċi QR",
+            "orInvite": "Jew tistieden lin-nies billi tu\u017ca:",
+            "QR": "{{ClickOrTap}} biex ji\u0121\u0121enera kodi\u010bi QR",
+            "QRtitle": "Scan dan il-kodi\u010bi QR",
             "byEmail": "Email",
             "byText": "Test",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Huma skannjati!"
         },
         "email": {
-            "subject": "Ħej, iċċekkja dan",
-            "PleaseVisitLink": "Jekk jogħġbok żur il-link li ġejja:",
-            "InvitingYou": "Qed nistiednek għal {{title}}",
+            "subject": "\u0126ej, i\u010b\u010bekkja dan",
+            "PleaseVisitLink": "Jekk jog\u0127\u0121bok \u017cur il-link li \u0121ejja:",
+            "InvitingYou": "Qed nistiednek g\u0127al {{title}}",
             "HasInvitedYou": "{{displayName}} stiednek biex {{title}}"
         },
         "sms": {
-            "content": "Int ġejt mistiedna għal {{title}}. Jekk jogħġbok vit {{url}}"
+            "content": "Int \u0121ejt mistiedna g\u0127al {{title}}. Jekk jog\u0127\u0121bok vit {{url}}"
         },
         "notice": {
-            "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
+            "text": "Int \u0121ejt mistiedna. {{ClickOrTap}} hawn biex ta\u010b\u010betta u tissie\u0127eb."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} bagħat messaġġ <em>{{message.fields.type}}<\/em> lil {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} bag\u0127at messa\u0121\u0121 <em>{{message.fields.type}}</em> lil {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} f &#39;{{& url}}: {{& message.fields.content}}"
@@ -81,15 +82,15 @@
     },
     "followup": {
         "mobile": {
-            "alert": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
-            "confirm": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi test rapidu biex tgħarrafhom dwar l-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
-            "check": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!"
+            "alert": "L-istediniet jintbag\u0127tu min-numru tag\u0127na, li l-\u0127bieb tieg\u0127ek g\u0127adhom ma jag\u0127rfux. Segwitu b&#39;test rapidu biex tg\u0127arrafhom mill-istedina \u0121iet ming\u0127andek, u titlobhom ikklikkja l-link.",
+            "confirm": "L-istediniet jintbag\u0127tu min-numru tag\u0127na, li l-\u0127bieb tieg\u0127ek g\u0127adhom ma jag\u0127rfux. Tixtieq issegwi test rapidu biex tg\u0127arrafhom dwar l-istedina \u0121iet ming\u0127andek, u titlobhom ikklikkja l-link.",
+            "check": "\u0126ej, jien bg\u0127attlek biss invit g\u0127all-app {{app}}. Jekk jog\u0127\u0121bok i\u010b\u010bekkja l-sms tieg\u0127ek u kklikkja l-link!"
         },
         "email": {
-            "alert": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
-            "confirm": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi test rapidu biex tgħarrafhom dwar l-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
-            "subject": "Irċivejt stedina?",
-            "body": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemm!"
+            "alert": "L-istediniet jintbag\u0127tu mid-dominju tag\u0127na, li l-\u0127bieb tieg\u0127ek g\u0127adhom ma jag\u0127rfux. Segwitu b&#39;test rapidu biex tg\u0127arrafhom mill-istedina \u0121iet ming\u0127andek, u titlobhom ikklikkja l-link.",
+            "confirm": "L-istediniet jintbag\u0127tu mid-dominju tag\u0127na, li l-\u0127bieb tieg\u0127ek g\u0127adhom ma jag\u0127rfux. Tixtieq issegwi test rapidu biex tg\u0127arrafhom dwar l-istedina \u0121iet ming\u0127andek, u titlobhom ikklikkja l-link.",
+            "subject": "Ir\u010bivejt stedina?",
+            "body": "\u0126ej, jien bg\u0127attlek biss invit g\u0127all-app {{app}}. Jekk jog\u0127\u0121bok i\u010b\u010bekkja l-email tieg\u0127ek u kklikkja l-link hemm!"
         }
     }
 }

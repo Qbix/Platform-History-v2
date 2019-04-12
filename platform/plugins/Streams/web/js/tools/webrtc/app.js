@@ -5,7 +5,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || 
 navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 
 
-var WebRTCconference = function app(options){
+var WebRTCconferenceLib = function app(options){
     console.log('options', options);
     var app = {};
     var defaultOptions = {
@@ -107,10 +107,11 @@ var WebRTCconference = function app(options){
         this.kind = null;
         this.type = null;
         this.parentScreen = null;
-        this.trackEl = null;
-        this.mediaStreamTrack = null;
-        this.twilioReference = null;
-        this.remove = function () {
+	    this.trackEl = null;
+	    this.mediaStreamTrack = null;
+	    this.twilioReference = null;
+	    this.screensharing = null;
+	    this.remove = function () {
 
             var index = this.parentScreen.tracks.map(function(e) { return e.mediaStreamTrack.id; }).indexOf(this.mediaStreamTrack.id);
             this.parentScreen.tracks[index] = null;
@@ -640,7 +641,7 @@ var WebRTCconference = function app(options){
             if(screenToAttach.videoTrack && screenToAttach.videoTrack.parentNode) screenToAttach.videoTrack.parentNode.removeChild(screenToAttach.videoTrack);
             screenToAttach.videoCon.appendChild(trackEl);
             if(track.kind == 'video') screenToAttach.videoTrack = trackEl;
-            if(track.screensharing == true) screenToAttach.screensharing = true;
+            screenToAttach.screensharing = track.screensharing == true ? true : false;
 
             track.participant = participant;
             track.trackEl = trackEl;
@@ -716,7 +717,8 @@ var WebRTCconference = function app(options){
 
                     app.event.dispatch('videoTrackLoaded', {
                         screen: track.parentScreen,
-                        trackEl: e.target, reset:shouldReset,
+                        trackEl: e.target,
+	                    reset:shouldReset,
                         oldSize: {width:(videoConWidth != '' ? videoConWidth : null), height:(videoConHeight != '' ? videoConHeight : null)}
                     });
                 });
@@ -2774,7 +2776,6 @@ var WebRTCconference = function app(options){
             createSettingsPopup: createSettingsPopup,
             videoInputDevices: getVideoDevices,
             audioInputDevices: getAudioDevices,
-            videoInputDevices: getVideoDevices,
             currentCameraDevice: getCurrentCameraDevice,
             currentAudioDevice: getCurrentAudioDevice,
         }
@@ -3062,9 +3063,7 @@ var WebRTCconference = function app(options){
                 Twilio = window.Twilio = TwilioInstance;
                 initWithTwilio(callback);
             });
-            console.log('aaaaaaaaaaa')
         } else {
-            console.log('bbbbbbbbbbbbbbbbbbbbb')
             initWithNodeJs(callback);
         }
     }

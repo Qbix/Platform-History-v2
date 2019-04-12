@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Błąd {{status}} podczas żądania",
+        "canceled": "Żądanie anulowane",
+        "500": "Wewnętrzny błąd serwera",
+        "404": "Nie znaleziono: {{url}}",
+        "501": "Żądanie zostało przerwane"
+    },
+    "nonce": {
+        "sameDomain": "Sesja wygasła. Odśwież stronę i spróbuj ponownie.",
+        "otherDomain": "Zablokowane żądanie między domenami do domeny zagranicznej w {{baseUrl}}"
+    },
+    "words": {
+        "tap": "kran",
+        "click": "Kliknij",
+        "yes": "tak",
+        "no": "Nie",
+        "Tap": "Kran",
+        "Click": "Kliknij",
+        "Yes": "tak",
+        "No": "Nie"
+    },
+    "months": {
+        "1": "styczeń",
+        "2": "luty",
+        "3": "Marsz",
+        "4": "kwiecień",
+        "5": "Może",
+        "6": "czerwiec",
+        "7": "lipiec",
+        "8": "sierpień",
+        "9": "wrzesień",
+        "10": "październik",
+        "11": "listopad",
+        "12": "grudzień"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Proszę pozwolić na dostęp do swojego mikrofonu",
+        "record": "Rekord",
+        "recording": "Nagranie",
+        "remains": "szczątki",
+        "maximum": "maksymalny",
+        "playing": "Gra",
+        "recorded": "Nagrany",
+        "clip": "spinacz",
+        "orupload": "Lub Prześlij",
+        "usethis": "Użyj tego",
+        "discard": "Odrzucać",
+        "encoding": "Kodowanie"
+    },
+    "alert": {
+        "title": "Alarm"
+    },
+    "confirm": {
+        "title": "Potwierdzać",
+        "ok": "tak",
+        "cancel": "Nie"
+    },
+    "prompt": {
+        "title": "Skłonić",
+        "ok": "Udać się"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Błąd odczytu pliku",
+        "cameraCommands": {
+            "prompt": "Co chciałbyś robić?",
+            "photo": "Zrób nowe zdjęcie",
+            "library": "Wybierz z biblioteki"
+        },
+        "tooSmall": "Wybierz większy obraz.",
+        "cropping": {
+            "title": "Dostosuj rozmiar i pozycję",
+            "touchscreen": "Użyj palców, aby powiększyć i przeciągnąć",
+            "notTouchscreen": "Użyj myszki i koła, aby powiększyć i przeciągnąć"
+        }
+    }
+}

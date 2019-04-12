@@ -3,18 +3,24 @@
         "campaign": {
             "placeholders": {
                 "link": "Link reklaamimiseks",
-                "startDate": "Algus kuupäev",
+                "startDate": "Algus kuup\u00e4ev",
                 "startTime": "Algusaeg",
-                "endDate": "Lõppkuupäev",
-                "endTime": "Lõpuaeg",
+                "endDate": "L\u00f5ppkuup\u00e4ev",
+                "endTime": "L\u00f5puaeg",
                 "budget": "Eelarve"
             },
             "interests": {
-                "Title": "Filtreeri intressi järgi",
+                "Title": "Filtreeri intressi j\u00e4rgi",
                 "FilterInterests": "Alustage huvi kirjutamist ..."
             },
             "Interest": "Huvi",
             "Location": "Asukoht"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mine",
+            "PasteLinkHere": "Kleebi link siia"
         }
     }
 }

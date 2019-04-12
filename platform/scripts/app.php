@@ -230,10 +230,7 @@ if (!file_exists($web_views_path)) {
 }
 
 if ($auto_plugins) {
-	$plugins = Q_Config::get('Q', 'plugins', array());
-	if (!in_array("Q", $plugins)) {
-		array_unshift($plugins, "Q");
-	}
+	$plugins = Q::plugins();
 }
 
 if (in_array('Q', $plugins) !== false) {

@@ -16,5 +16,11 @@
             "Interest": "Renter",
             "Location": "plassering"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "Lim inn en lenke her"
+        }
     }
 }
