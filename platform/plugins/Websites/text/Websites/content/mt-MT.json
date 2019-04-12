@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Rabta g\u0127all-promozzjoni",
+                "startDate": "Data tal-bidu",
+                "startTime": "\u0126in tal-bidu",
+                "endDate": "Data tat-Tmiem",
+                "endTime": "\u0126in tat-Tmiem",
+                "budget": "Ba\u0121it"
+            },
+            "interests": {
+                "Title": "Iffiltra Skond l-Interess",
+                "FilterInterests": "Ibda ittajpja interess ..."
+            },
+            "Interest": "Interess",
+            "Location": "Post"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mur",
+            "PasteLinkHere": "Paste link hawn"
+        }
+    }
+}

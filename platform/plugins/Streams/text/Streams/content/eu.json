@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Elementu berria"
+    },
+    "labels": {
+        "Streams\/invited": "Gonbidatu nituen jendea",
+        "Streams\/invitedMe": "Nork gonbidatu ninduen"
+    },
+    "interests": {
+        "Filter": "Zer gustatzen zaizu?",
+        "CanAdd": "Oraindik oraindik bilatzen ez baduzu aurkitu dezakezu interes gehiago nahi izanez gero:",
+        "TrySynonyms": "Ez al duzu ikusten? Saiatu sinonimo batzuk.",
+        "AddUnderCategory": "Gehitu kategorian ...",
+        "Other": "Beste",
+        "Unlisted": "Zerrendatu gabeko"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mezua administratzaile berrikusteko markatu da. Sakatu berriro unflag.",
+        "noOneSaid": "Inork ez du ezer esan",
+        "closeChatButton": "Itxi berriketa",
+        "closeChatConfirmTitle": "Itxi txata hau?",
+        "closeChatConfirm": "Ziur zaude txata hau itxi nahi duzula?",
+        "closeChatConfirmYes": "Bai",
+        "closeChatConfirmNo": "Ez",
+        "earlierComments": "lehenago egindako iruzkinak"
+    },
+    "notifications": {
+        "*": "{{& message.fields.type}} mezua {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} esan du:",
+        "Streams\/changed": "{{stream.fields.title}} -ko aldaketak",
+        "Streams\/invite": "{{& stream.fields.title}} gonbidatu zaituzte",
+        "Streams\/announcement": "Iragarkia {{& streams.fields.title}} zerbitzuan",
+        "Streams\/access": "{{&call 'avatar.displayName'}} (e) k zuzeneko sarbidea aldatu du",
+        "Streams\/chat\/edit": "Txat mezu bat editatu da",
+        "Streams\/chat\/remove": "Txat mezuak kendu dira",
+        "Streams\/closed": "{{stream.fields.title}} itxi egin da",
+        "Streams\/task\/progress": "{{stream.fields.title}} egunean egindako aurrerapenak",
+        "Streams\/task\/complete": "Zeregina osatu da: {{stream.fields.title}}",
+        "Streams\/task\/error": "Errorea: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Sarrerako mezua"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} gonbidatu zaitu {{inviteUrl}} zerbitzura",
+        "dialog": {
+            "chooseFromContacts": "Aukeratu zure kontaktuetatik",
+            "selectFromContacts": "Aukeratu Kontaktuetatik",
+            "photo": "Argazkia atera",
+            "photoInstruction": "Zure QR kodea eskaneatzen duen pertsona zure aurrean badago, argazki bat atera",
+            "to": "To: {{Stream Title}}",
+            "go": "joan",
+            "title": "gonbidatu",
+            "placeholder": "Mugikorraren zenbakia edo helbide elektronikoa",
+            "orInvite": "Edo gonbidatu jendea erabiliz:",
+            "QR": "{{ClickOrTap}} QR kodea sortzeko",
+            "QRtitle": "Eskaneatu QR kodea",
+            "byEmail": "Emaila",
+            "byText": "Testua",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Eskaneatu zuten!"
+        },
+        "email": {
+            "subject": "Hey, begiratu hau",
+            "PleaseVisitLink": "Bisitatu hurrengo esteka:",
+            "InvitingYou": "{{title}}}-ra gonbidatzen zaitut",
+            "HasInvitedYou": "{{displayName}} erabiltzaileak {{title}} zerbitzura gonbidatu zaitu"
+        },
+        "sms": {
+            "content": "{{title}} gonbidatu zaituzte. Sakatu {1000}}"
+        },
+        "notice": {
+            "text": "Gonbidatu zaitu. {{ClickOrTap}} hemen onartzeko eta elkartzeko."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} -ek <em>{{message.fields.type}}<\/em> mezu {{stream.fields.title}}-ri bidali dio"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}} zerbitzuan: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Zure lagunek oraindik ez dute ezagutzen gonbidatuak bidaltzen dira. Jarrai ezazu testu azkar batekin, gonbidapena zuretzako etorri zitzaizun jakin dezaten, estekan klik eginez.",
+            "confirm": "Zure lagunek oraindik ez dute ezagutzen gonbidatuak bidaltzen dira. Nahi al duzu testu azkar baten jarraipena egitea, gonbidapena zuretzako etorri zena jakinarazteko.",
+            "check": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu zure sms eta egin klik estekan!"
+        },
+        "email": {
+            "alert": "Gonbidapenak gure domeinutik bidaltzen dira eta oraindik zure lagunek ez dute ezagutzen. Jarrai ezazu testu azkar batekin, gonbidapena zuretzako etorri zitzaizun jakin dezaten, estekan klik eginez.",
+            "confirm": "Gonbidapenak gure domeinutik bidaltzen dira eta oraindik zure lagunek ez dute ezagutzen. Nahi al duzu testu azkar baten jarraipena egitea, gonbidapena zuretzako etorri zena jakinarazteko.",
+            "subject": "Gonbidapen bat lortu al duzu?",
+            "body": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu mezu elektronikoa eta egin klik estekan dagoen estekan."
+        }
+    }
+}

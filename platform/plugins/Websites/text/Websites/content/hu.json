@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link az előmozdításhoz",
+                "startDate": "Kezdő dátum",
+                "startTime": "Kezdési idő",
+                "endDate": "Befejezés dátuma",
+                "endTime": "Idő vége",
+                "budget": "Költségvetés"
+            },
+            "interests": {
+                "Title": "Szűrés érdeklődés szerint",
+                "FilterInterests": "Kezdje el gépelni egy érdeklődést ..."
+            },
+            "Interest": "Érdeklődés",
+            "Location": "Elhelyezkedés"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Megy",
+            "PasteLinkHere": "Illessze be a linket ide"
+        }
+    }
+}

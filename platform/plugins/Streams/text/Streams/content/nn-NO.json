@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Ny gjenstand"
+    },
+    "labels": {
+        "Streams/invited": "Folk jeg inviterte",
+        "Streams/invitedMe": "Hvem inviterte meg"
+    },
+    "interests": {
+        "Filter": "Hva liker du?",
+        "CanAdd": "Hvis du fortsatt ikke finner det du leter etter, kan du legge til en ny interesse nedenfor:",
+        "TrySynonyms": "Ser du ikke? Pr\u00f8v noen synonymer.",
+        "AddUnderCategory": "Legg til under kategori ...",
+        "Other": "Annen",
+        "Unlisted": "Unoterte"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Meldingen er flagget for admin gjennomgang. Pek p\u00e5 nytt til unflag.",
+        "noOneSaid": "Ingen har sagt noe",
+        "closeChatButton": "Lukk chat",
+        "closeChatConfirmTitle": "Lukk denne chatten?",
+        "closeChatConfirm": "Er du sikker p\u00e5 at du vil lukke denne chatten?",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Nei",
+        "earlierComments": "tidligere kommentarer"
+    },
+    "notifications": {
+        "*": "Melding {{& message.fields.type}} til {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} sa:",
+        "Streams/changed": "Endringer i {{stream.fields.title}}",
+        "Streams/invite": "Du ble invitert til {{& stream.fields.title}}",
+        "Streams/announcement": "Kunngj\u00f8ring i {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} endret str\u00f8mtilgang",
+        "Streams/chat/edit": "Chat-melding redigert",
+        "Streams/chat/remove": "Chat-melding fjernet",
+        "Streams/closed": "{{stream.fields.title}} er stengt",
+        "Streams/task/progress": "Fremskritt gjort p\u00e5 {{stream.fields.title}}",
+        "Streams/task/complete": "Oppgave fullf\u00f8rt: {{stream.fields.title}}",
+        "Streams/task/error": "Feil under: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Innkommende melding"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} inviterte deg til {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Velg fra kontaktene dine",
+            "selectFromContacts": "Velg Fra Kontakter",
+            "photo": "Ta et bilde",
+            "photoInstruction": "Hvis personen som har skannet QR-koden, er foran deg, ta et bilde av dem",
+            "to": "Til: {{Stream Title}}",
+            "go": "G\u00e5",
+            "title": "Invitere",
+            "placeholder": "Mobilnummer eller e-postadresse",
+            "orInvite": "Eller invitere folk ved \u00e5 bruke:",
+            "QR": "{{ClickOrTap}} for \u00e5 generere QR-kode",
+            "QRtitle": "Skann denne QR-koden",
+            "byEmail": "e-post",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "De skannet det!"
+        },
+        "email": {
+            "subject": "Hei, sjekk dette ut",
+            "PleaseVisitLink": "Vennligst bes\u00f8k f\u00f8lgende lenke:",
+            "InvitingYou": "Jeg inviterer deg til {{title}}",
+            "HasInvitedYou": "{{displayName}} har invitert deg til {{title}}"
+        },
+        "sms": {
+            "content": "Du har blitt invitert til {{title}}. Vennligst trykk p\u00e5 {{url}}"
+        },
+        "notice": {
+            "text": "Du har blitt invitert. {{ClickOrTap}} her for \u00e5 godta og bli med."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} postet en <em>{{message.fields.type}}</em> melding til {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} p\u00e5 {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invitasjoner sendes fra v\u00e5rt nummer, som vennene dine ikke kjenner igjen. F\u00f8lg med en rask tekst for \u00e5 fortelle dem at invitasjonen kom fra deg, og be dem om \u00e5 klikke p\u00e5 linken.",
+            "confirm": "Invitasjoner sendes fra v\u00e5rt nummer, som vennene dine ikke kjenner igjen. Vil du f\u00f8lge opp med en rask tekst for \u00e5 fortelle dem at invitasjonen kom fra deg, og be dem om \u00e5 klikke p\u00e5 linken.",
+            "check": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk sms og klikk p\u00e5 linken!"
+        },
+        "email": {
+            "alert": "Invitasjoner sendes fra v\u00e5rt domene, som vennene dine ikke kjenner igjen. F\u00f8lg med en rask tekst for \u00e5 fortelle dem at invitasjonen kom fra deg, og be dem om \u00e5 klikke p\u00e5 linken.",
+            "confirm": "Invitasjoner sendes fra v\u00e5rt domene, som vennene dine ikke kjenner igjen. Vil du f\u00f8lge opp med en rask tekst for \u00e5 fortelle dem at invitasjonen kom fra deg, og be dem om \u00e5 klikke p\u00e5 linken.",
+            "subject": "Fikk du en invitasjon?",
+            "body": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk e-posten din og klikk p\u00e5 linken der inne!"
+        }
+    }
+}

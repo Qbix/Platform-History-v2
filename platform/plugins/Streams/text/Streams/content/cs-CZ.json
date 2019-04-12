@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Nov\u00fd p\u0159edm\u011bt"
+    },
+    "labels": {
+        "Streams/invited": "Lid\u00e9, kter\u00e9 jsem pozval",
+        "Streams/invitedMe": "Kdo m\u011b pozval"
+    },
+    "interests": {
+        "Filter": "Co v\u00e1s bav\u00ed?",
+        "CanAdd": "Pokud st\u00e1le nem\u016f\u017eete naj\u00edt to, co hled\u00e1te, m\u016f\u017eete p\u0159idat nov\u00fd z\u00e1jem n\u00ed\u017ee:",
+        "TrySynonyms": "Nevid\u00ed\u0161 to? Vyzkou\u0161ejte n\u011bkter\u00e1 synonyma.",
+        "AddUnderCategory": "P\u0159idat do kategorie ...",
+        "Other": "jin\u00fd",
+        "Unlisted": "Nevypln\u011bno"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Zpr\u00e1va byla pro kontrolu u\u017eivatele ozna\u010dena p\u0159\u00edznakem. Op\u011btovn\u00fdm \u0165uknut\u00edm znovu rozbal\u00edte.",
+        "noOneSaid": "Nikdo nic ne\u0159ekl",
+        "closeChatButton": "Zav\u0159ete chat",
+        "closeChatConfirmTitle": "Zav\u0159ete tento chat?",
+        "closeChatConfirm": "Opravdu chcete tento chat zav\u0159\u00edt?",
+        "closeChatConfirmYes": "Ano",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "d\u0159\u00edv\u011bj\u0161\u00edch p\u0159ipom\u00ednek"
+    },
+    "notifications": {
+        "*": "Zpr\u00e1va {{& message.fields.type}} a\u017e {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} \u0159ekl:",
+        "Streams/changed": "Zm\u011bny v {{stream.fields.title}}",
+        "Streams/invite": "Byli jste pozv\u00e1ni na adresu {{& stream.fields.title}}",
+        "Streams/announcement": "Ozn\u00e1men\u00ed v {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} zm\u011bnil p\u0159\u00edstup k dat\u016fm",
+        "Streams/chat/edit": "Zpr\u00e1va chatu byla upravena",
+        "Streams/chat/remove": "Zpr\u00e1va chatu byla odstran\u011bna",
+        "Streams/closed": "{{stream.fields.title}} bylo zav\u0159eno",
+        "Streams/task/progress": "Pokrok proveden\u00fd {{stream.fields.title}}",
+        "Streams/task/complete": "\u00dakol dokon\u010den: {{stream.fields.title}}",
+        "Streams/task/error": "Chyba b\u011bhem: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: P\u0159\u00edchoz\u00ed zpr\u00e1va"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} v\u00e1s pozvalo na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Vyberte si z kontakt\u016f",
+            "selectFromContacts": "Vyberte mo\u017enost Z kontakt\u016f",
+            "photo": "Vyfo\u0165",
+            "photoInstruction": "Pokud je osoba, kter\u00e1 naskenovala v\u00e1\u0161 QR k\u00f3d, p\u0159ed v\u00e1mi, po\u0159i\u010fte si je",
+            "to": "Komu: {{Stream Title}}",
+            "go": "J\u00edt",
+            "title": "Pozvat",
+            "placeholder": "Mobiln\u00ed \u010d\u00edslo nebo e-mailov\u00e1 adresa",
+            "orInvite": "Nebo pozvat lidi pomoc\u00ed:",
+            "QR": "{{ClickOrTap}} pro generov\u00e1n\u00ed QR k\u00f3du",
+            "QRtitle": "Naskenujte tento QR k\u00f3d",
+            "byEmail": "E-mailem",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Cvrlik\u00e1n\u00ed",
+            "QRscanned": "Prohledali to!"
+        },
+        "email": {
+            "subject": "Hej, pod\u00edvejte se na to",
+            "PleaseVisitLink": "Nav\u0161tivte n\u00e1sleduj\u00edc\u00ed odkaz:",
+            "InvitingYou": "Zvu v\u00e1s na {{title}}",
+            "HasInvitedYou": "{{displayName}} v\u00e1s pozvalo na {{title}}"
+        },
+        "sms": {
+            "content": "Byli jste pozv\u00e1ni na adresu {{title}}. Klepn\u011bte na {{url}}"
+        },
+        "notice": {
+            "text": "Byli jste pozv\u00e1ni. {{ClickOrTap}} zde p\u0159ijm\u011bte a p\u0159ipojte se."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} odeslala <em>{{message.fields.type}}</em> zpr\u00e1vu {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Pozv\u00e1nky jsou zas\u00edl\u00e1ny z na\u0161eho \u010d\u00edsla, kter\u00e9 va\u0161i p\u0159\u00e1tel\u00e9 je\u0161t\u011b nepoznaj\u00ed. N\u00e1sledujte rychl\u00fd text a dejte jim v\u011bd\u011bt, \u017ee pozv\u00e1n\u00ed p\u0159i\u0161lo od v\u00e1s, a po\u017e\u00e1dejte je, aby klikli na odkaz.",
+            "confirm": "Pozv\u00e1nky jsou zas\u00edl\u00e1ny z na\u0161eho \u010d\u00edsla, kter\u00e9 va\u0161i p\u0159\u00e1tel\u00e9 je\u0161t\u011b nepoznaj\u00ed. Chcete n\u00e1sledovat rychl\u00fd text a informovat je, \u017ee pozv\u00e1n\u00ed p\u0159i\u0161lo od v\u00e1s, a po\u017e\u00e1dat je, aby klikli na odkaz.",
+            "check": "Hej, pr\u00e1v\u011b jsem v\u00e1m poslal pozv\u00e1nku do aplikace {{app}}. Zkontrolujte pros\u00edm sms a klikn\u011bte na odkaz!"
+        },
+        "email": {
+            "alert": "Pozv\u00e1nky jsou odes\u00edl\u00e1ny z na\u0161\u00ed dom\u00e9ny, kterou va\u0161i p\u0159\u00e1tel\u00e9 je\u0161t\u011b nepoznaj\u00ed. N\u00e1sledujte rychl\u00fd text a dejte jim v\u011bd\u011bt, \u017ee pozv\u00e1n\u00ed p\u0159i\u0161lo od v\u00e1s, a po\u017e\u00e1dejte je, aby klikli na odkaz.",
+            "confirm": "Pozv\u00e1nky jsou odes\u00edl\u00e1ny z na\u0161\u00ed dom\u00e9ny, kterou va\u0161i p\u0159\u00e1tel\u00e9 je\u0161t\u011b nepoznaj\u00ed. Chcete n\u00e1sledovat rychl\u00fd text a informovat je, \u017ee pozv\u00e1n\u00ed p\u0159i\u0161lo od v\u00e1s, a po\u017e\u00e1dat je, aby klikli na odkaz.",
+            "subject": "Dostali jste pozv\u00e1n\u00ed?",
+            "body": "Hej, pr\u00e1v\u011b jsem v\u00e1m poslal pozv\u00e1nku do aplikace {{app}}. Zkontrolujte pros\u00edm sv\u016fj e-mail a klikn\u011bte na odkaz!"
+        }
+    }
+}

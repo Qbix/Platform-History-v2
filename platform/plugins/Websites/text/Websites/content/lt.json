@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Nuoroda, skirta reklamuoti",
+                "startDate": "Pradžios data",
+                "startTime": "Pradžios laikas",
+                "endDate": "Pabaigos data",
+                "endTime": "Pabaigos laikas",
+                "budget": "Biudžetas"
+            },
+            "interests": {
+                "Title": "Filtruoti pagal palūkanas",
+                "FilterInterests": "Pradėkite rašyti susidomėjimą ..."
+            },
+            "Interest": "Palūkanos",
+            "Location": "Vieta"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Eik",
+            "PasteLinkHere": "Įklijuokite nuorodą čia"
+        }
+    }
+}

@@ -49,7 +49,7 @@ Q.Tool.define("Places/location", function (options) {
 
 			if (Q.isEmpty(location)) {
 				if (Q.typeOf(placesAreas) === "Q.Tool") {
-					Q.Tool.remove(placesAreas.element);
+					Q.Tool.remove(placesAreas.element, true, true);
 				}
 
 				return false;

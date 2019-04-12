@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "I-link upang itaguyod",
+                "startDate": "Simulan ang Petsa",
+                "startTime": "Oras ng simula",
+                "endDate": "Petsa ng Pagtatapos",
+                "endTime": "Oras ng Pagtatapos",
+                "budget": "Badyet"
+            },
+            "interests": {
+                "Title": "I-filter Ayon sa Interes",
+                "FilterInterests": "Simulan ang pag-type ng interes ..."
+            },
+            "Interest": "Interes",
+            "Location": "Lokasyon"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pumunta",
+            "PasteLinkHere": "Mag-paste ng isang link dito"
+        }
+    }
+}

@@ -18,7 +18,7 @@
 		"web": {
 			"requireValidNonce": ["Websites"]
 		},
-		"routes": {
+		"routes@start": {
 			"Websites/:action/:articleId": {"module": "Websites"}
 		}
 	},
@@ -126,6 +126,27 @@
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0
+				}
+			},
+			"Websites/webpage": {
+				"description": "Represents a website whose metadata was scraped",
+				"create": false, /* only PHP scrape method can create it */
+				"edit": ["title", "content"], /* cannot edit everything */
+				"participating": ["Websites/participating/webpages"],
+				"relatedFrom": {
+					"Websites/webpage": {
+						"url": "{{fromUrl}}"
+					}
+				},
+				"defaults": {
+					"title": "Web page",
+					"icon": "{{Websites}}/img/icons/Websites/webpage",
+					"writeLevel": 23
+				},
+				"messages": {
+					"Streams/chat/message": {
+						"post": true
+					}
 				}
 			}
 		}

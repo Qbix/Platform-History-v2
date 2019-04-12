@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.4",
+				"version": "1.0.5",
 				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -26,14 +26,14 @@
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"]
 		},
-		"routes": {
-			"e/:emailAddress": { "module": "Users", "action": "activate" },
-			"m/:mobileNumber": { "module": "Users", "action": "activate" },
-			"Q/plugins/Users/:action": {"module": "Users"},
-			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
-			"Users/authorize": {"module": "Users", "action": "authorize"},
+		"routes@start": {
+			"login/facebook": {"module": "Users", "action": "facebook"},
 			"Users/session": {"module": "Users", "action": "session"},
-			"login/facebook": {"module": "Users", "action": "facebook"}
+			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
+			"Q/plugins/Users/:action": {"module": "Users"},
+			"m/:mobileNumber": { "module": "Users", "action": "activate" },
+			"e/:emailAddress": { "module": "Users", "action": "activate" }
 		},
 		"session": {
 			"db": {
@@ -197,6 +197,38 @@
 		"onInsert": {
 			"labels": {
 			  /* default labels should be defined individual by each application */
+			}
+		},
+		"communities": {
+			"roles": {
+				"Users/owners": {
+					"title": "Owner",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
+					"canAdd": ["Users/admins", "Users/members", "Users/guests"],
+					"canRemove": ["Users/admins", "Users/members", "Users/guests"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests"]
+				},
+				"Users/admins": {
+					"title": "Admin",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
+					"canAdd": ["Users/members", "Users/guests"],
+					"canRemove": ["Users/members", "Users/guests"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests"]
+				},
+				"Users/members": {
+					"title": "Member",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
+					"canAdd": ["Users/guests"],
+					"canRemove": [],
+					"canSee": ["Users/members", "Users/guests"]
+				},
+				"Users/guests": {
+					"title": "Guest",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/guests",
+					"canAdd": [],
+					"canRemove": [],
+					"canSee": []
+				}
 			}
 		}
 	}

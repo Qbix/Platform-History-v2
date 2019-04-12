@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Cyswllt i hyrwyddo",
+                "startDate": "Dyddiad cychwyn",
+                "startTime": "Amser Cychwyn",
+                "endDate": "Dyddiad Gorffen",
+                "endTime": "Amser Gorffen",
+                "budget": "Cyllideb"
+            },
+            "interests": {
+                "Title": "Hidlo trwy Ddiddordeb",
+                "FilterInterests": "Dechreuwch deipio diddordeb ..."
+            },
+            "Interest": "Diddordeb",
+            "Location": "Lleoliad"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ewch",
+            "PasteLinkHere": "Gludwch ddolen yma"
+        }
+    }
+}

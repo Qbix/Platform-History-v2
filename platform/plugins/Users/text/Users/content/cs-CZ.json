@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "přihlásit se",
+        "LogOut": "odhlásit se"
+    },
+    "activate": {
+        "SetAsPrimary": "Nastavit {{1}} jako primární {{2}}",
+        "ChoosePassPhrase": "Zvolte <strong>heslo<\/strong> pro přihlášení. <br> Jednoduchá fráze skládající se z několika slov, která si snadno zapamatujete.",
+        "ChoosePassPhraseSeeSuggestions": "Chcete-li svůj účet chránit, vyberte dobrou <strong>frázi<\/strong> . Podívejte se na návrhy pro některé nápady.",
+        "LogOutAndTryAgain": "Odhlaste se a zkuste to znovu",
+        "IfYouFeel": "Pokud máte pocit, že se něco pokazilo, můžete",
+        "SetIdentifierButtonTitle": "začít znovu"
+    },
+    "session": {
+        "GetStarted": "Začít"
+    },
+    "authorize": {
+        "GetStarted": "Začít",
+        "Authorize": "Povolit",
+        "TermsLabel": "Četl jsem a souhlasím <br> do {{link}}",
+        "TermsTitle": "Podmínky"
+    },
+    "register": {
+        "TermsLabel": "Souhlasím s {{link}}",
+        "TermsTitle": "Podmínky"
+    },
+    "notifications": {
+        "title": "Povolení",
+        "prompt": "Chcete povolit upozornění? Dostanete aktuální informace o věcech, na kterých vám záleží.",
+        "yes": "Ano",
+        "no": "Ne",
+        "WelcomePleaseVerifyEmail": "Vítejte! Zkontrolujte prosím svou e-mailovou adresu.",
+        "WelcomeVerifyEmail": "Vítejte! Ověřte svou e-mailovou adresu.",
+        "ForgetPass": "Hej, zapomněl jsi na své heslo?"
+    },
+    "usersContacts": {
+        "selectLabel": "Vyberte prosím popisek.",
+        "inviteUser": "Pozvěte uživatele"
+    },
+    "invalidLanguageSelected": "Byl vybrán neplatný jazyk"
+}

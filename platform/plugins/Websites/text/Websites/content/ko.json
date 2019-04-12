@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "홍보 링크",
+                "startDate": "시작 날짜",
+                "startTime": "시작 시간",
+                "endDate": "종료일",
+                "endTime": "종료 시간",
+                "budget": "예산"
+            },
+            "interests": {
+                "Title": "관심 분야별 필터링",
+                "FilterInterests": "관심 분야를 입력하기 시작합니다 ..."
+            },
+            "Interest": "관심",
+            "Location": "위치"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "가기",
+            "PasteLinkHere": "여기에 링크 붙여 넣기"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Ligaz\u00f3n para promocionar",
+                "startDate": "Data de inicio",
+                "startTime": "Hora de inicio",
+                "endDate": "Data de finalizaci\u00f3n",
+                "endTime": "Hora de finalizaci\u00f3n",
+                "budget": "Orzamento"
+            },
+            "interests": {
+                "Title": "Filtrar por intereses",
+                "FilterInterests": "Comece a escribir un interese ..."
+            },
+            "Interest": "Interese",
+            "Location": "Localizaci\u00f3n"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Vaia",
+            "PasteLinkHere": "Pegue unha ligaz\u00f3n aqu\u00ed"
+        }
+    }
+}

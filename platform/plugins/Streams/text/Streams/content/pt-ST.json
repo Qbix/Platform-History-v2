@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Novo item"
+    },
+    "labels": {
+        "Streams/invited": "Pessoas que eu convidei",
+        "Streams/invitedMe": "Quem me convidou"
+    },
+    "interests": {
+        "Filter": "O que voc\u00ea gosta?",
+        "CanAdd": "Se voc\u00ea ainda n\u00e3o encontrou o que est\u00e1 procurando, adicione um novo interesse abaixo:",
+        "TrySynonyms": "N\u00e3o v\u00ea isso? Tente alguns sin\u00f4nimos.",
+        "AddUnderCategory": "Adicionar na categoria ...",
+        "Other": "De outros",
+        "Unlisted": "N\u00e3o-listado"
+    },
+    "chat": {
+        "flaggedForAdminReview": "A mensagem foi sinalizada para an\u00e1lise do administrador. Toque novamente para desmarcar.",
+        "noOneSaid": "Ningu\u00e9m tinha dito nada",
+        "closeChatButton": "Fechar conversa",
+        "closeChatConfirmTitle": "Fechar este chat?",
+        "closeChatConfirm": "Tem certeza de que deseja fechar este bate-papo?",
+        "closeChatConfirmYes": "sim",
+        "closeChatConfirmNo": "N\u00e3o",
+        "earlierComments": "coment\u00e1rios anteriores"
+    },
+    "notifications": {
+        "*": "Mensagem {{& message.fields.type}} para {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} disse:",
+        "Streams/changed": "Altera\u00e7\u00f5es em {{stream.fields.title}}",
+        "Streams/invite": "Voc\u00ea foi convidado para {{& stream.fields.title}}",
+        "Streams/announcement": "An\u00fancio em {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} alterou o acesso ao fluxo",
+        "Streams/chat/edit": "Mensagem de bate-papo editada",
+        "Streams/chat/remove": "Mensagem de bate-papo removida",
+        "Streams/closed": "{{stream.fields.title}} foi fechado",
+        "Streams/task/progress": "Progresso feito em {{stream.fields.title}}",
+        "Streams/task/complete": "Tarefa conclu\u00edda: {{stream.fields.title}}",
+        "Streams/task/error": "Erro durante: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Mensagem recebida"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} convidou voc\u00ea para {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Escolha entre seus contatos",
+            "selectFromContacts": "Selecione de contatos",
+            "photo": "Tire uma foto",
+            "photoInstruction": "Se a pessoa que digitalizou o seu c\u00f3digo QR estiver \u00e0 sua frente, tire uma foto deles",
+            "to": "Para: {{Stream Title}}",
+            "go": "Vai",
+            "title": "Convite",
+            "placeholder": "N\u00famero de telem\u00f3vel ou endere\u00e7o de email",
+            "orInvite": "Ou convide pessoas usando:",
+            "QR": "{{ClickOrTap}} para gerar c\u00f3digo QR",
+            "QRtitle": "Digitalize este c\u00f3digo QR",
+            "byEmail": "O email",
+            "byText": "Texto",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Eles escanearam!"
+        },
+        "email": {
+            "subject": "Ei, veja isso",
+            "PleaseVisitLink": "Por favor, visite o seguinte link:",
+            "InvitingYou": "Estou convidando voc\u00ea para {{title}}",
+            "HasInvitedYou": "{{displayName}} convidou voc\u00ea para {{title}}"
+        },
+        "sms": {
+            "content": "Voc\u00ea foi convidado para {{title}}. Por favor, toque em {{url}}"
+        },
+        "notice": {
+            "text": "Voc\u00ea foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} postou uma mensagem <em>{{message.fields.type}}</em> para {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} em {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Convites s\u00e3o enviados do nosso n\u00famero, que seus amigos ainda n\u00e3o reconhecem. Fa\u00e7a um acompanhamento com um texto r\u00e1pido para que eles saibam que o convite veio de voc\u00ea, pedindo que eles cliquem no link.",
+            "confirm": "Convites s\u00e3o enviados do nosso n\u00famero, que seus amigos ainda n\u00e3o reconhecem. Gostaria de acompanhar com um texto r\u00e1pido para que eles saibam que o convite veio de voc\u00ea, pedindo que eles cliquem no link.",
+            "check": "Ei, acabei de enviar um convite para o aplicativo {{app}}. Por favor, verifique seu sms e clique no link!"
+        },
+        "email": {
+            "alert": "Convites s\u00e3o enviados do nosso dom\u00ednio, que seus amigos ainda n\u00e3o reconhecem. Fa\u00e7a um acompanhamento com um texto r\u00e1pido para que eles saibam que o convite veio de voc\u00ea, pedindo que eles cliquem no link.",
+            "confirm": "Convites s\u00e3o enviados do nosso dom\u00ednio, que seus amigos ainda n\u00e3o reconhecem. Gostaria de acompanhar com um texto r\u00e1pido para que eles saibam que o convite veio de voc\u00ea, pedindo que eles cliquem no link.",
+            "subject": "Voc\u00ea recebeu um convite?",
+            "body": "Ei, acabei de enviar um convite para o aplicativo {{app}}. Por favor, verifique seu e-mail e clique no link l\u00e1!"
+        }
+    }
+}

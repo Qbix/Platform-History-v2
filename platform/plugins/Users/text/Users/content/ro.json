@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "Logare",
+        "LogOut": "ieșiți"
+    },
+    "activate": {
+        "SetAsPrimary": "Setați {{1}} ca principalul meu {{2}}",
+        "ChoosePassPhrase": "Alegeți o <strong>expresie de acces<\/strong> pentru a vă conecta. <br> O simplă expresie constând din câteva cuvinte pe care le veți aminti cu ușurință.",
+        "ChoosePassPhraseSeeSuggestions": "Alegeți o <strong>expresie<\/strong> bună pentru a vă proteja contul. Vedeți sugestiile pentru câteva idei.",
+        "LogOutAndTryAgain": "Deconectați-vă și încercați din nou",
+        "IfYouFeel": "Dacă simțiți că ceva a mers prost, puteți",
+        "SetIdentifierButtonTitle": "începe peste"
+    },
+    "session": {
+        "GetStarted": "Incepe"
+    },
+    "authorize": {
+        "GetStarted": "Incepe",
+        "Authorize": "Autoriza",
+        "TermsLabel": "Am citit și sunt de acord <br> la {{link}}",
+        "TermsTitle": "Termeni"
+    },
+    "register": {
+        "TermsLabel": "Accept din {{link}}",
+        "TermsTitle": "Termeni"
+    },
+    "notifications": {
+        "title": "Permisiune",
+        "prompt": "Doriți să activați notificările? Veți primi actualizări în timp real despre lucrurile care vă interesează.",
+        "yes": "da",
+        "no": "Nu",
+        "WelcomePleaseVerifyEmail": "Bine ati venit! Vă rog să vă verificați adresa de email.",
+        "WelcomeVerifyEmail": "Bine ati venit! Verifică-ți adresa de email.",
+        "ForgetPass": "Hei, ai uitat expresia ta de acces?"
+    },
+    "usersContacts": {
+        "selectLabel": "Selectați eticheta.",
+        "inviteUser": "Invitați utilizatorul"
+    },
+    "invalidLanguageSelected": "Limba nevalidă selectată"
+}

@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "M\u00edr Nua"
+    },
+    "labels": {
+        "Streams/invited": "Daoine a thug cuireadh dom",
+        "Streams/invitedMe": "C\u00e9 a thug cuireadh dom"
+    },
+    "interests": {
+        "Filter": "Cad \u00e9 a thaitn\u00edonn leat?",
+        "CanAdd": "Mura f\u00e9idir leat teacht ar na ruda\u00ed at\u00e1 uait, is f\u00e9idir leas nua a chur leis th\u00edos:",
+        "TrySynonyms": "N\u00e1 f\u00e9ach air? Bain triail as roinnt comhchiallaigh.",
+        "AddUnderCategory": "Cuir faoi chatag\u00f3ir ...",
+        "Other": "Eile",
+        "Unlisted": "Neamhliostaithe"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Cuireadh an teachtaireacht in i\u00fal le haghaidh athbhreithnithe riarach\u00e1in. Tap\u00e1il ar\u00eds go neamhshuim.",
+        "noOneSaid": "N\u00ed dhearna aon duine rud ar bith",
+        "closeChatButton": "D\u00fan comhr\u00e1",
+        "closeChatConfirmTitle": "D\u00fan an comhr\u00e1 seo?",
+        "closeChatConfirm": "An bhfuil t\u00fa cinnte gur mian leat an comhr\u00e1 seo a dh\u00fanadh?",
+        "closeChatConfirmYes": "Is f\u00e9idir",
+        "closeChatConfirmNo": "N\u00edl",
+        "earlierComments": "tuairim\u00ed n\u00edos luaithe"
+    },
+    "notifications": {
+        "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
+        "Streams/chat/message": "D\u00fairt {{&call 'avatar.displayName'}}:",
+        "Streams/changed": "Athruithe i {{stream.fields.title}}",
+        "Streams/invite": "Tugadh cuireadh duit {{& stream.fields.title}}",
+        "Streams/announcement": "F\u00f3gra i {{& streams.fields.title}}",
+        "Streams/access": "D&#39;athraigh {{&call 'avatar.displayName'}} rochtain srutha",
+        "Streams/chat/edit": "Eagarth\u00f3ireacht ar an teachtaireacht chainte",
+        "Streams/chat/remove": "Cuireadh an teachtaireacht comhr\u00e1",
+        "Streams/closed": "D\u00fanadh {{stream.fields.title}}",
+        "Streams/task/progress": "Dul chun cinn d\u00e9anta ar {{stream.fields.title}}",
+        "Streams/task/complete": "Tasc cr\u00edochnaithe: {{stream.fields.title}}",
+        "Streams/task/error": "Earr\u00e1id le linn: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Teachtaireacht Isteach"
+    },
+    "invite": {
+        "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Roghnaigh \u00f3 do Teagmh\u00e1lacha",
+            "selectFromContacts": "Roghnaigh \u00d3 Teagmh\u00e1lacha",
+            "photo": "T\u00f3g grianghraf",
+            "photoInstruction": "M\u00e1 t\u00e1 an duine a rinne scanadh ar do ch\u00f3d QR os do chomhair, t\u00f3g grianghraf d\u00edobh",
+            "to": "Go: {{Stream Title}}",
+            "go": "T\u00e9igh",
+            "title": "Tabhair cuireadh duit",
+            "placeholder": "Uimhir ghuth\u00e1in n\u00f3 seoladh r\u00edomhphoist",
+            "orInvite": "N\u00f3 cuir cuireadh ar dhaoine tr\u00ed:",
+            "QR": "{{ClickOrTap}} chun c\u00f3d QR a ghini\u00faint",
+            "QRtitle": "Scan an c\u00f3d QR seo",
+            "byEmail": "R\u00edomhphost",
+            "byText": "T\u00e9acs",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Scanadh siad \u00e9!"
+        },
+        "email": {
+            "subject": "Hey, seice\u00e1il seo amach",
+            "PleaseVisitLink": "Tabhair cuairt ar an nasc seo a leanas:",
+            "InvitingYou": "T\u00e1im ag tabhairt cuireadh duit {{title}}",
+            "HasInvitedYou": "Thug {{displayName}} cuireadh duit {{title}}"
+        },
+        "sms": {
+            "content": "Tugadh cuireadh duit {{title}}. Le do thoil bain \u00fas\u00e1id as {{url}}"
+        },
+        "notice": {
+            "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh agus p\u00e1irt a ghlacadh."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "Cuireadh {{call 'avatar.displayName'}} teachtaireacht <em>{{message.fields.type}}</em> chuig {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Seoltar cuireadh\u00ed \u00f3n\u00e1r n-uimhir, nach n-aithn\u00edonn do chairde go f\u00f3ill iad. Lean ort le t\u00e9acs tapaidh chun a chur in i\u00fal d\u00f3ibh gur th\u00e1inig an cuireadh uait, ag iarraidh orthu clice\u00e1il ar an nasc.",
+            "confirm": "Seoltar cuireadh\u00ed \u00f3n\u00e1r n-uimhir, nach n-aithn\u00edonn do chairde go f\u00f3ill iad. Ar mhaith leat t\u00e9acs tapaidh a lean\u00faint chun a chur in i\u00fal d\u00f3ibh gur th\u00e1inig an cuireadh uait, ag iarraidh orthu clice\u00e1il ar an nasc.",
+            "check": "Hey, chuir m\u00e9 cuireadh chugat chuig an aip {{app}}. Seice\u00e1il le do thoil do chuid SMS agus clice\u00e1il ar an nasc!"
+        },
+        "email": {
+            "alert": "Seoltar cuireadh\u00ed \u00f3n\u00e1r bhfearann, nach n-aithn\u00edonn do chairde go f\u00f3ill iad. Lean ort le t\u00e9acs tapaidh chun a chur in i\u00fal d\u00f3ibh gur th\u00e1inig an cuireadh uait, ag iarraidh orthu an nasc a chlice\u00e1il.",
+            "confirm": "Seoltar cuireadh\u00ed \u00f3n\u00e1r bhfearann, nach n-aithn\u00edonn do chairde go f\u00f3ill iad. Ar mhaith leat t\u00e9acs tapaidh a lean\u00faint chun a chur in i\u00fal d\u00f3ibh gur th\u00e1inig an cuireadh uait, ag iarraidh orthu clice\u00e1il ar an nasc.",
+            "subject": "An bhfuair t\u00fa cuireadh?",
+            "body": "Hey, chuir m\u00e9 cuireadh chugat chuig an aip {{app}}. Seice\u00e1il do r\u00edomhphost agus clice\u00e1il ar an nasc ann!"
+        }
+    }
+}

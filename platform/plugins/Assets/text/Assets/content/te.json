@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "చెల్లించడానికి నొక్కండి"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} కోసం ప్రాసెస్ చెయ్యబడింది",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} కు మీ చెల్లింపుకు ధన్యవాదాలు",
+        "SubscribedTo": "{{plan.title}} కు చందా చేసారు {{call 'user.displayName'}}",
+        "YouSubscribedTo": "మీరు {{plan.title}} కు చందా చేసారు"
+    }
+}

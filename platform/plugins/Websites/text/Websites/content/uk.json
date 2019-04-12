@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Посилання для просування",
+                "startDate": "Дата початку",
+                "startTime": "Час початку",
+                "endDate": "Дата закінчення",
+                "endTime": "Час завершення",
+                "budget": "Бюджет"
+            },
+            "interests": {
+                "Title": "Фільтрувати за інтересами",
+                "FilterInterests": "Почніть вводити інтерес ..."
+            },
+            "Interest": "Інтерес",
+            "Location": "Розташування"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ідіть",
+            "PasteLinkHere": "Вставте посилання тут"
+        }
+    }
+}

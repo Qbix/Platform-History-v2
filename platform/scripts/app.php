@@ -27,6 +27,10 @@ Options:
 
 --plugins This option installs all the plugins
 
+--composer Run PHP composer when encountered
+
+--npm Run Node.js Package Manager when encountered
+
 -p \$NAME Can be used repeatedly to install one or more plugins
 
 -s \$CONN_NAME
@@ -49,6 +53,7 @@ Options:
 
 --trace
   Print stacktraces on errors 
+
 
 EOT;
 
@@ -163,6 +168,7 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 					$auto_plugins = true;
 					break;
 				case '-p':
+				case '--plugin':
 					if ($i + 1 > $count - 1) {
 						echo "Not enough parameters to $argv[$i] option\n$usage";
 						exit;
@@ -203,7 +209,8 @@ echo "Q Platform installer for $app app".PHP_EOL;
 $uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
 	$web_uploads_path = APP_WEB_DIR.DS.'Q'.DS.'uploads';
-	if (!file_exists($web_uploads_path)) {
+	if (!file_exists($web_uploads_path)
+	and !is_link($web_uploads_path)) {
 		Q_Utils::symlink($uploads_dir, $web_uploads_path);
 	}
 }
@@ -211,7 +218,8 @@ if (is_dir($uploads_dir)) {
 $text_dir = APP_TEXT_DIR;
 if (is_dir($text_dir)) {
 	$web_text_path = APP_WEB_DIR.DS.'Q'.DS.'text';
-	if (!file_exists($web_text_path)) {
+	if (!file_exists($web_text_path)
+	and !is_link($web_text_path)) {
 		Q_Utils::symlink($text_dir, $web_text_path);
 	}
 }
@@ -222,10 +230,7 @@ if (!file_exists($web_views_path)) {
 }
 
 if ($auto_plugins) {
-	$plugins = Q_Config::get('Q', 'plugins', array());
-	if (!in_array("Q", $plugins)) {
-		array_unshift($plugins, "Q");
-	}
+	$plugins = Q::plugins();
 }
 
 if (in_array('Q', $plugins) !== false) {

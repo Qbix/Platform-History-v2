@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Novo elemento"
+    },
+    "labels": {
+        "Streams/invited": "Persoas que invitou",
+        "Streams/invitedMe": "Quen me convidou?"
+    },
+    "interests": {
+        "Filter": "Que che gusta?",
+        "CanAdd": "Se a\u00ednda non atopas o que buscas, podes engadir un novo interese a continuaci\u00f3n:",
+        "TrySynonyms": "Non o ves? Proba alg\u00fans sin\u00f3nimos.",
+        "AddUnderCategory": "Engadir baixo categor\u00eda ...",
+        "Other": "Outra",
+        "Unlisted": "Non listado"
+    },
+    "chat": {
+        "flaggedForAdminReview": "A mensaxe foi marcada para a revisi\u00f3n do administrador. Toque de novo para desabrochar.",
+        "noOneSaid": "Ningu\u00e9n dixo nada",
+        "closeChatButton": "Pechar o chat",
+        "closeChatConfirmTitle": "Pechar este chat?",
+        "closeChatConfirm": "Est\u00e1 seguro de que quere pechar este chat?",
+        "closeChatConfirmYes": "Si",
+        "closeChatConfirmNo": "Non",
+        "earlierComments": "comentarios anteriores"
+    },
+    "notifications": {
+        "*": "Mensaxe {{& message.fields.type}} para {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} dixo:",
+        "Streams/changed": "Cambios en {{stream.fields.title}}",
+        "Streams/invite": "Foi invitado a {{& stream.fields.title}}",
+        "Streams/announcement": "Anuncio en {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} cambiou o acceso ao fluxo",
+        "Streams/chat/edit": "Editaron un mensaje de chat",
+        "Streams/chat/remove": "Eliminouse a mensaxe de chat",
+        "Streams/closed": "Pechouse {{stream.fields.title}}",
+        "Streams/task/progress": "Avances realizados en {{stream.fields.title}}",
+        "Streams/task/complete": "Tarefa completada: {{stream.fields.title}}",
+        "Streams/task/error": "Erro durante: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Mensaxe de entrada"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} invitoute a {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Elixe entre os teus contactos",
+            "selectFromContacts": "Seleccione Entre os contactos",
+            "photo": "Sacar unha foto",
+            "photoInstruction": "Se a persoa que explorou o c\u00f3digo QR est\u00e1 diante de ti, fai unha foto delas",
+            "to": "Para: {{Stream Title}}",
+            "go": "Vaia",
+            "title": "Invitar",
+            "placeholder": "N\u00famero de tel\u00e9fono m\u00f3bil ou enderezo de correo electr\u00f3nico",
+            "orInvite": "Ou invitar \u00e1 xente a usar:",
+            "QR": "{{ClickOrTap}} para xerar c\u00f3digo QR",
+            "QRtitle": "Escanear este c\u00f3digo QR",
+            "byEmail": "Correo electr\u00f3nico",
+            "byText": "Texto",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Dixitaliz\u00e1ronse!"
+        },
+        "email": {
+            "subject": "Oe, mira isto",
+            "PleaseVisitLink": "Visite a seguinte ligaz\u00f3n:",
+            "InvitingYou": "Estou invitado a {{title}}",
+            "HasInvitedYou": "{{displayName}} convidoute a {{title}}"
+        },
+        "sms": {
+            "content": "Foi invitado a {{title}}. Toca {{url}}"
+        },
+        "notice": {
+            "text": "Foi invitado. {{ClickOrTap}} aqu\u00ed para aceptar e unirse."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} publicou unha mensaxe <em>{{message.fields.type}}</em> en {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} en {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "As invitaci\u00f3ns son enviadas a partir do noso n\u00famero, que os teus amigos a\u00ednda non reco\u00f1ecen. Fai un seguimento cun texto r\u00e1pido para que saiban de que che veu a invitaci\u00f3n, ped\u00edndolles que fagan clic na ligaz\u00f3n.",
+            "confirm": "As invitaci\u00f3ns son enviadas a partir do noso n\u00famero, que os teus amigos a\u00ednda non reco\u00f1ecen. Quere facer un seguimento cun texto r\u00e1pido para que saiban que a invitaci\u00f3n chegou de ti, ped\u00edndolles que fagan clic na ligaz\u00f3n.",
+            "check": "Hey, acabo de enviarte unha invitaci\u00f3n \u00e1 aplicaci\u00f3n {{app}}. Comproba o teu sms e fai clic na ligaz\u00f3n."
+        },
+        "email": {
+            "alert": "As invitaci\u00f3ns son enviadas desde o noso dominio, que os teus amigos a\u00ednda non reco\u00f1ecen. Fai un seguimento cun texto r\u00e1pido para que saiban de que che veu a invitaci\u00f3n, ped\u00edndolles que fagan clic na ligaz\u00f3n.",
+            "confirm": "As invitaci\u00f3ns son enviadas desde o noso dominio, que os teus amigos a\u00ednda non reco\u00f1ecen. Quere facer un seguimento cun texto r\u00e1pido para que saiban que a invitaci\u00f3n chegou de ti, ped\u00edndolles que fagan clic na ligaz\u00f3n.",
+            "subject": "\u00bfRecibiu unha invitaci\u00f3n?",
+            "body": "Hey, acabo de enviarte unha invitaci\u00f3n \u00e1 aplicaci\u00f3n {{app}}. Comproba o teu correo electr\u00f3nico e fai clic na ligaz\u00f3n al\u00ed."
+        }
+    }
+}

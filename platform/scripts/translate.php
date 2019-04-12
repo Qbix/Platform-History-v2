@@ -3,52 +3,7 @@ if (!defined('RUNNING_FROM_APP') or !defined('CONFIGURE_ORIGINAL_APP_NAME')) {
 	die("This script can only be run from an app template.\n");
 }
 
-Q_Cache::clear(true, false, 'Q_Text::get');
-
-// get all CLI options
-$params = array(
-	'h::' => 'help::',
-	's::' => 'source::',
-	'i::' => 'in::',
-	'o::' => 'out::',
-	'n::' => 'null::',
-	'f::' => 'format::',
-	'g::' => 'google-format::',
-	'r:' => 'retranslate:',
-	'l:' => 'locales:'
-);
-$options = getopt(implode('', array_keys($params)), $params);
-$textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
-if (empty($options['in'])) {
-	$options['in'] = $textFolder;
-} else {
-	// relative path
-	if (substr($options['in'], 0, 1) === '.') {
-		$options['in'] = APP_SCRIPTS_DIR . DS . 'Q' . DS .$options['in'];
-	}
-}
-if (empty($options['out'])) {
-	$options['out'] = $textFolder;
-} else {
-	// relative path
-	if (substr($options['in'], 0, 1) === '.') {
-		$options['out'] = APP_SCRIPTS_DIR . DS . 'Q' . DS .$options['out'];
-	}
-};
-if (empty($options['source'])) {
-	$options['source'] = 'en';
-};
-if (empty($options['format'])) {
-	$options['format'] = 'google';
-};
-if (!empty($options['google-format'])) {
-	$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
-} else {
-	$options['google-format'] = 'html';
-}
-
-if (isset($options['help'])) {
-		$help = <<<EOT
+$help = <<<EOT
 
 This script automatically translates app interface into various languages or prepares json files for human translators.
 		
@@ -70,6 +25,10 @@ Options include:
                   Default value APP_DIR/text, where APP_DIR is your application folder.
                   Example:
                   --out=/home/user/output
+				  
+--app             Translate the text in the app
+
+--plugins         Translate the text in all the plugins
        
 --format          Can be "google" or "human".
                   "google" automatically translates files using Google Translation API.
@@ -96,9 +55,60 @@ Options include:
 --locales         Use this to indicate the alternative filename to config/Q/locales.json
 
 EOT;
+
+// get all CLI options
+$opts = array( 'h::', 's::', 'i::', 'o::', 'n::', 'f::', 'g::', 'r:', 'l:', 'p:');
+$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate:', 'locales:', 'plugins');
+$options = getopt(implode('', $opts), $longopts);
+if (isset($options['help'])) {
 	echo $help;
 	exit;
 }
 
-$translate = new Q_Translate($options);
-$translate->saveAll();
+Q_Cache::clear(true, false, 'Q_Text::get');
+
+if (empty($options['source'])) {
+	$options['source'] = 'en';
+};
+if (empty($options['format'])) {
+	$options['format'] = 'google';
+};
+if (!empty($options['google-format'])) {
+	$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
+} else {
+	$options['google-format'] = 'html';
+}
+if (isset($options['plugins'])) {
+	$plugins = Q::plugins();
+	foreach ($plugins as $plugin) {
+		$PLUGIN = strtoupper($plugin);
+		$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');
+		foreach (glob($PLUGIN_DIR . DS . 'text' . DS . '*') as $textFolder) {
+			$options['in'] = $options['out'] = $textFolder;
+			echo "Translating $textFolder\n";
+			$translate = new Q_Translate($options);
+			$translate->saveAll();
+		}
+	}
+} else {
+	$textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
+	if (empty($options['in'])) {
+		$options['in'] = $textFolder;
+	} else {
+		// relative path
+		if (substr($options['in'], 0, 1) === '.') {
+			$options['in'] = APP_SCRIPTS_DIR . DS . 'Q' . DS .$options['in'];
+		}
+	}
+	if (empty($options['out'])) {
+		$options['out'] = $textFolder;
+	} else {
+		// relative path
+		if (substr($options['in'], 0, 1) === '.') {
+			$options['out'] = APP_SCRIPTS_DIR . DS . 'Q' . DS .$options['out'];
+		}
+	};
+
+	$translate = new Q_Translate($options);
+	$translate->saveAll();
+}

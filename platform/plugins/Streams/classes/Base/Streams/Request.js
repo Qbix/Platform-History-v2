@@ -21,9 +21,9 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
  * @param {integer} [$fields.readLevel] defaults to 0
  * @param {integer} [$fields.writeLevel] defaults to 0
  * @param {integer} [$fields.adminLevel] defaults to 0
@@ -40,12 +40,6 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property userId
- * @type String|Buffer
- * @default ""
- * id of user who is requesting access to the stream
- */
-/**
  * @property publisherId
  * @type String|Buffer
  * @default ""
@@ -56,6 +50,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * local to shard of publisherId
+ */
+/**
+ * @property userId
+ * @type String|Buffer
+ * @default ""
+ * id of user who is requesting access to the stream
  */
 /**
  * @property readLevel
@@ -292,9 +292,9 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"userId",
 		"publisherId",
-		"streamName"
+		"streamName",
+		"userId"
 	];
 };
 
@@ -315,9 +315,9 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"userId",
 		"publisherId",
 		"streamName",
+		"userId",
 		"readLevel",
 		"writeLevel",
 		"adminLevel",
@@ -327,44 +327,6 @@ Base.fieldNames = function () {
 		"insertedTime",
 		"expireTime"
 	];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_userId
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_userId = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
-		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the userId field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_userId = function () {
-
-		return 31;
-};
-
-	/**
-	 * Returns schema information for userId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_userId = function () {
-
-return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -441,6 +403,44 @@ Base.prototype.maxSize_streamName = function () {
 Base.column_streamName = function () {
 
 return [["varbinary","255","",false],false,"PRI",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_userId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_userId = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_userId = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_userId = function () {
+
+return [["varbinary","31","",false],false,"PRI",null];
 };
 
 /**
@@ -706,7 +706,7 @@ return [["timestamp","255","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['userId','publisherId','streamName'], i;
+	var fields = ['publisherId','streamName','userId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

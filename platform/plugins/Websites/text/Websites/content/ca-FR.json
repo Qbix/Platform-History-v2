@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Enlla\u00e7 per promocionar",
+                "startDate": "Data d&#39;inici",
+                "startTime": "L&#39;hora d&#39;inici",
+                "endDate": "Data de finalitzaci\u00f3",
+                "endTime": "Fi del temps",
+                "budget": "Pressupost"
+            },
+            "interests": {
+                "Title": "Filtrar per interessos",
+                "FilterInterests": "Comenceu a escriure un inter\u00e8s ..."
+            },
+            "Interest": "Inter\u00e8s",
+            "Location": "Ubicaci\u00f3"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "V\u00e9s",
+            "PasteLinkHere": "Enganxa un enlla\u00e7 aqu\u00ed"
+        }
+    }
+}

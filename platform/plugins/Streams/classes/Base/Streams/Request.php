@@ -16,9 +16,9 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
  * @param {integer} [$fields.readLevel] defaults to 0
  * @param {integer} [$fields.writeLevel] defaults to 0
  * @param {integer} [$fields.adminLevel] defaults to 0
@@ -31,12 +31,6 @@
 abstract class Base_Streams_Request extends Db_Row
 {
 	/**
-	 * @property $userId
-	 * @type string
-	 * @default ""
-	 * id of user who is requesting access to the stream
-	 */
-	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
@@ -47,6 +41,12 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @type string
 	 * @default ""
 	 * local to shard of publisherId
+	 */
+	/**
+	 * @property $userId
+	 * @type string
+	 * @default ""
+	 * id of user who is requesting access to the stream
 	 */
 	/**
 	 * @property $readLevel
@@ -107,9 +107,9 @@ abstract class Base_Streams_Request extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
-			  1 => 'publisherId',
-			  2 => 'streamName',
+			  0 => 'publisherId',
+			  1 => 'streamName',
+			  2 => 'userId',
 			)
 		);
 	}
@@ -303,60 +303,6 @@ abstract class Base_Streams_Request extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_userId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_userId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('userId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".userId");
-		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
-		return array('userId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the userId field
-	 * @return {integer}
-	 */
-	function maxSize_userId()
-	{
-
-		return 31;			
-	}
-
-	/**
-	 * Returns schema information for userId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_userId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_publisherId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -453,6 +399,60 @@ return array (
   array (
     0 => 'varbinary',
     1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_userId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_userId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('userId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
+		return array('userId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+	function maxSize_userId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -885,7 +885,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('userId','publisherId','streamName') as $name) {
+			foreach (array('publisherId','streamName','userId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -904,7 +904,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'publisherId', 'streamName', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'actions', 'insertedTime', 'expireTime');
+		$field_names = array('publisherId', 'streamName', 'userId', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'actions', 'insertedTime', 'expireTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

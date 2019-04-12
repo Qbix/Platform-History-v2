@@ -38,7 +38,7 @@ Q.text.Streams = {
 		prompt: "Let friends recognize you:",
 		picTooltip: "You can change this picture later"
 	},
-	
+
 	complete: {
 		// this is just a fallback, see Streams/types/*/invite/dialog config
 		prompt: "Let friends recognize you:"
@@ -47,7 +47,7 @@ Q.text.Streams = {
 	chat: {
 		noMessages: ""
 	},
-	
+
 	followup: {
 		mobile: {
 			title: 'Follow up'
@@ -120,7 +120,7 @@ Streams.READ_LEVEL = {
 	'relations':	25,	// can see relations to other streams
 	'participants':	30, // can see participants in the stream
 	'messages':		40, // can play stream in a player
-	'max':      	40  // max read level
+	'max':	  	40  // max read level
 };
 
 /**
@@ -216,17 +216,17 @@ Streams.READ_LEVEL = {
 Streams.WRITE_LEVEL = {
 	'none':			0,		// cannot affect stream or participants list
 	'join':			10,		// can become a participant, chat, and leave
-	'vote':         13,		// can vote for a relation message posted to the stream
+	'vote':		 13,		// can vote for a relation message posted to the stream
 	'postPending':	18,		// can post messages which require manager's approval
 	'post':			20,		// can post messages which take effect immediately
-	'relate':       23,		// can relate other streams to this one
-	'relations':    25,		// can update properties of relations directly
-	'suggest':      28,		// can suggest edits of stream
+	'relate':	   23,		// can relate other streams to this one
+	'relations':	25,		// can update properties of relations directly
+	'suggest':	  28,		// can suggest edits of stream
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream
-							// however, joining and leaving is still ok
-	'max':      	40  	// max write level
+	// however, joining and leaving is still ok
+	'max':	  	40  	// max write level
 };
 
 /**
@@ -283,7 +283,7 @@ Streams.ADMIN_LEVEL = {
 	'invite':		20,		// able to create invitations for others, granting access
 	'manage':		30,		// can approve posts and give people any adminLevel < 30
 	'own':	 		40,		// can give people any adminLevel <= 40
-	'max':          40  	// max admin level
+	'max':		  40  	// max admin level
 };
 
 Streams.defined = {};
@@ -318,7 +318,7 @@ Streams.define = function (type, ctor, methods) {
 		ctor.apply(this, arguments);
 	}
 	Q.mixin(CustomStreamConstructor, Streams.Stream);
-	Q.extend(CustomStreamConstructor.prototype, methods);	
+	Q.extend(CustomStreamConstructor.prototype, methods);
 	return Streams.defined[type] = CustomStreamConstructor;
 };
 
@@ -388,7 +388,7 @@ Streams.key = function (publisherId, streamName) {
  * @event onError
  */
 Streams.onError = new Q.Event(function (err, data) {
-	
+
 	var code = Q.getObject([0, 'errors', 0, 'code'], data)
 		|| Q.getObject([1, 'errors', 0, 'code'], data);
 	if (!code && !err) {
@@ -487,20 +487,20 @@ function _connectSockets(refresh) {
 		return false;
 	}
 	Streams.retainWith('Streams')
-	.get(Users.loggedInUser.id, 'Streams/participating', function () {
-		Q.each(_retainedByStream, function _connectRetainedNodes(ps) {
-			var stream = _retainedStreams[ps];
-			if (stream && stream.participant) {
-				var parts = ps.split("\t");
-				Users.Socket.connect(Q.nodeUrl({
-					publisherId: parts[0],
-					streamName: parts[1]
-				}));
-			}
+		.get(Users.loggedInUser.id, 'Streams/participating', function () {
+			Q.each(_retainedByStream, function _connectRetainedNodes(ps) {
+				var stream = _retainedStreams[ps];
+				if (stream && stream.participant) {
+					var parts = ps.split("\t");
+					Users.Socket.connect(Q.nodeUrl({
+						publisherId: parts[0],
+						streamName: parts[1]
+					}));
+				}
+			});
 		});
-	});
 	if (refresh) {
-		Streams.refresh();
+		_debouncedRefresh();
 	}
 }
 
@@ -530,43 +530,45 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 		what = 'stream';
 	}
 	switch (what) {
-	case 'stream':
-	case 'message':
-	case 'relation':
-		return Q.action("Streams/"+what, {
-			'publisherId': publisherId,
-			'name': streamName,
-			'Q.clientId': Q.clientId()
-		});
-	default:
-		return null;
+		case 'stream':
+		case 'message':
+		case 'relation':
+			return Q.action("Streams/"+what, {
+				'publisherId': publisherId,
+				'name': streamName,
+				'Q.clientId': Q.clientId()
+			});
+		default:
+			return null;
 	}
 };
 
 Q.Tool.define({
-	"Users/avatar"         : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
-	"Streams/chat"         : "{{Streams}}/js/tools/chat.js",
-	"Streams/comments"     : "{{Streams}}/js/tools/comments.js",
+	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
+	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
+	"Streams/comments"	 : "{{Streams}}/js/tools/comments.js",
 	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
 	"Streams/userChooser"  : "{{Streams}}/js/tools/userChooser.js",
 	"Streams/participants" : "{{Streams}}/js/tools/participants.js",
-	"Streams/basic"        : "{{Streams}}/js/tools/basic.js",
-	"Streams/access"       : "{{Streams}}/js/tools/access.js",
+	"Streams/basic"		: "{{Streams}}/js/tools/basic.js",
+	"Streams/access"	   : "{{Streams}}/js/tools/access.js",
 	"Streams/subscription" : "{{Streams}}/js/tools/subscription.js",
-	"Streams/interests"    : "{{Streams}}/js/tools/interests.js",
-	"Streams/lookup"       : "{{Streams}}/js/tools/lookup.js",
-	"Streams/relate"       : "{{Streams}}/js/tools/relate.js",
-	"Streams/related"      : "{{Streams}}/js/tools/related.js",
-	"Streams/inplace"      : "{{Streams}}/js/tools/inplace.js",
-	"Streams/html"         : "{{Streams}}/js/tools/html.js",
+	"Streams/interests"	: "{{Streams}}/js/tools/interests.js",
+	"Streams/lookup"	   : "{{Streams}}/js/tools/lookup.js",
+	"Streams/relate"	   : "{{Streams}}/js/tools/relate.js",
+	"Streams/related"	  : "{{Streams}}/js/tools/related.js",
+	"Streams/inplace"	  : "{{Streams}}/js/tools/inplace.js",
+	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
 	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
 	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
 	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
-	"Streams/category"     : "{{Streams}}/js/tools/category.js",
-	"Streams/form"         : "{{Streams}}/js/tools/form.js",
-	"Streams/import"       : "{{Streams}}/js/tools/import.js",
-	"Streams/activity"     : "{{Streams}}/js/tools/activity.js",
+	"Streams/category"	 : "{{Streams}}/js/tools/category.js",
+	"Streams/form"		 : "{{Streams}}/js/tools/form.js",
+	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
+	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
+	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
+	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/player": function () {
@@ -574,6 +576,7 @@ Q.Tool.define({
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
+	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
 
 /**
@@ -594,7 +597,7 @@ Q.Tool.define({
  *   @param {Array} [extra.withRelatedFromTotals] an array of relation types to get relatedFromTotals for in the returned stream object
  *   @param {Boolean} [extra.cacheIfMissing] defaults to false. If true, caches the "missing stream" result.
  *   @param {Array} [extra.fields] the stream is obtained again from the server
- *    if any fields named in this array are == null
+ *	if any fields named in this array are == null
  *   @param {Mixed} [extra."$Module_$fieldname"] any other fields you would like can be added, to be passed to your hooks on the back end
  */
 Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
@@ -633,68 +636,68 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 		streamName: streamName
 	}));
 	func.call(this, 'stream', slotNames, publisherId, streamName,
-	function Streams_get_response_handler (err, data) {
-		var msg = Q.firstErrorMessage(err, data);
-		if (!msg && (!data || !data.stream)) {
-			msg = "Streams.get: data.stream is missing";
-		}
-		if (msg) {
-			var forget = false;
-			if (err && err[0] && err[0].classname === "Q_Exception_MissingRow") {
-				if (!extra || !extra.cacheIfMissing) {
+		function Streams_get_response_handler (err, data) {
+			var msg = Q.firstErrorMessage(err, data);
+			if (!msg && (!data || !data.stream)) {
+				msg = "Streams.get: data.stream is missing";
+			}
+			if (msg) {
+				var forget = false;
+				if (err && err[0] && err[0].classname === "Q_Exception_MissingRow") {
+					if (!extra || !extra.cacheIfMissing) {
+						forget = true;
+					}
+				} else {
 					forget = true;
 				}
-			} else {
-				forget = true;
-			}
-			if (forget && Streams.get.forget) {
-				Streams.get.forget.apply(this, args);
-				setTimeout(function () {
+				if (forget && Streams.get.forget) {
 					Streams.get.forget.apply(this, args);
-				}, 0);
+					setTimeout(function () {
+						Streams.get.forget.apply(this, args);
+					}, 0);
+				}
+				Streams.onError.handle.call(this, err, data);
+				Streams.get.onError.handle.call(this, err, data);
+				return callback && callback.call(this, err, data);
 			}
-			Streams.onError.handle.call(this, err, data);
-			Streams.get.onError.handle.call(this, err, data);
-			return callback && callback.call(this, err, data);
-		}
-		if (Q.isEmpty(data.stream)) {
-			var msg = "Stream " + publisherId + " " + streamName + " is not available";
-			var err = msg;
-			Streams.onError.handle(err, [err, data, null]);
-			return callback && callback.call(null, err, null, extra);
-		}
-		Streams.construct(
-			data.stream,
-			{ 
-				messages: data.messages, 
-				participants: data.participants 
-			}, 
-			function Streams_get_construct_handler(err, stream, extra) {
-				var msg;
-				if (msg = Q.firstErrorMessage(err)) {
-					Streams.onError.handle(msg, [err, data, stream]);
-				}
-				var ret = callback && callback.call(stream, err, stream, extra);
-				if (ret === false) {
-					return false;
-				}
-				if (msg) return;
-				
-				// The onRefresh handlers occur after the other callbacks
-				var f = stream.fields;
-				var handler = Q.getObject([f.type], _refreshHandlers);
-				Q.handle(handler, stream, []);
-				handler = Q.getObject(
-					[f.publisherId, f.name], 
-					_streamRefreshHandlers
-				);
-				Q.handle(handler, stream, []);
-				Streams.get.onStream.handle.call(stream);
-				return ret;
-			},
-			true // so the callback will already have the cache set
-		);
-	}, extra);
+			if (Q.isEmpty(data.stream)) {
+				var msg = "Stream " + publisherId + " " + streamName + " is not available";
+				var err = msg;
+				Streams.onError.handle(err, [err, data, null]);
+				return callback && callback.call(null, err, null, extra);
+			}
+			Streams.construct(
+				data.stream,
+				{
+					messages: data.messages,
+					participants: data.participants
+				},
+				function Streams_get_construct_handler(err, stream, extra) {
+					var msg;
+					if (msg = Q.firstErrorMessage(err)) {
+						Streams.onError.handle(msg, [err, data, stream]);
+					}
+					var ret = callback && callback.call(stream, err, stream, extra);
+					if (ret === false) {
+						return false;
+					}
+					if (msg) return;
+
+					// The onRefresh handlers occur after the other callbacks
+					var f = stream.fields;
+					var handler = Q.getObject([f.type], _refreshHandlers);
+					Q.handle(handler, stream, []);
+					handler = Q.getObject(
+						[f.publisherId, f.name],
+						_streamRefreshHandlers
+					);
+					Q.handle(handler, stream, []);
+					Streams.get.onStream.handle.call(stream);
+					return ret;
+				},
+				true // so the callback will already have the cache set
+			);
+		}, extra);
 	_retain = undefined;
 };
 
@@ -749,7 +752,7 @@ var _Streams_batchFunction_options = {
  *  Should contain at least the publisherId and type of the stream.
  *  Fields are passed to the Streams/stream POST handler.
  *  The attributes field can be an object.
- * @param {Function} callback 
+ * @param {Function} callback
  *	if there were errors, first parameter is the error message
  *  otherwise, first parameter is null and second parameter is a Streams.Stream object
  * @param {Object} [related] Optional information to add a relation from the newly created stream to another one. Can include:
@@ -760,14 +763,14 @@ var _Streams_batchFunction_options = {
  *   @param {Object} [options.fields] Used to override any fields passed in the request
  *   @param {String} [options.filename] Overrides the default filename for file uploads
  *   @param {HTMLElement} [options.form] If you want to upload a file or an icon, pass
- *    a form element here which includes input elements of type "file", named "file" or "icon".
- *    If they have files selected in them, they will be passed along with the rest of the
- *    fields. Setting this option will cause a call to Q.formPost which will load the result
- *    in an iframe. That resulting webpage must contain javascript to call the resultFunction.
+ *	a form element here which includes input elements of type "file", named "file" or "icon".
+ *	If they have files selected in them, they will be passed along with the rest of the
+ *	fields. Setting this option will cause a call to Q.formPost which will load the result
+ *	in an iframe. That resulting webpage must contain javascript to call the resultFunction.
  * @param {String} [options.resultFunction=null] The path to the function to handle inside the
- *    contentWindow of the resulting iframe, e.g. "Foo.result". 
- *    Your document is supposed to define this function if it wants to return results to the
- *    callback's second parameter, otherwise it will be undefined
+ *	contentWindow of the resulting iframe, e.g. "Foo.result".
+ *	Your document is supposed to define this function if it wants to return results to the
+ *	callback's second parameter, otherwise it will be undefined
  */
 Streams.create = function (fields, callback, related, options) {
 	var slotNames = ['stream'];
@@ -814,39 +817,39 @@ Streams.create = function (fields, callback, related, options) {
 			Streams.related.cache.removeEach([related.publisherId, related.streamName]);
 		}
 		Streams.construct(data.slots.stream, {},
-		function Stream_create_construct_handler (err, stream) {
-			var msg = Q.firstErrorMessage(err);
-			if (msg) {
-				return callback && callback.call(stream, msg, stream, data.slots.icon);
-			}
-			if (_r) {
-				stream.retain(_r);
-			}
-			var extra = {};
-			extra.icon = data.slots.icon;
-			if (related && data.slots.messageTo) {
-				var m = extra.messageTo = Streams.Message.construct(data.slots.messageTo, true);
-				extra.related = {
-					publisherId: related.publisherId,
-					streamName: related.streamName,
-					type: related.type,
-					weight: m.getInstruction('weight')
-				};
-			}
-			callback && callback.call(stream, null, stream, extra, data.slots);
-			// process various messages posted to Streams/participating
-			_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
-			if (related) {
-				// process possible relatedTo messages posted
-				_refreshUnlessSocket(related.publisherId, related.streamName);
-			}
-			return;
-		}, true);
-	}, { 
-		method: 'post', 
-		fields: fields, 
-		baseUrl: baseUrl, 
-		form: options.form, 
+			function Stream_create_construct_handler (err, stream) {
+				var msg = Q.firstErrorMessage(err);
+				if (msg) {
+					return callback && callback.call(stream, msg, stream, data.slots.icon);
+				}
+				if (_r) {
+					stream.retain(_r);
+				}
+				var extra = {};
+				extra.icon = data.slots.icon;
+				if (related && data.slots.messageTo) {
+					var m = extra.messageTo = Streams.Message.construct(data.slots.messageTo, true);
+					extra.related = {
+						publisherId: related.publisherId,
+						streamName: related.streamName,
+						type: related.type,
+						weight: m.getInstruction('weight')
+					};
+				}
+				callback && callback.call(stream, null, stream, extra, data.slots);
+				// process various messages posted to Streams/participating
+				_refreshUnlessSocket(Users.loggedInUserId(), 'Streams/participating');
+				if (related) {
+					// process possible relatedTo messages posted
+					_refreshUnlessSocket(related.publisherId, related.streamName);
+				}
+				return;
+			}, true);
+	}, {
+		method: 'post',
+		fields: fields,
+		baseUrl: baseUrl,
+		form: options.form,
 		resultFunction: options.resultFunction
 	});
 	_retain = undefined;
@@ -903,12 +906,12 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 			if (!fields) return;
 			for (var k in fields) {
 				if ((k in this.fields)
-				|| k === 'messageTotals'
-				|| k === 'relatedToTotals'
-				|| k === 'relatedFromTotals'
-				|| k === 'participant'
-				|| k === 'access'
-				|| k === 'isRequired') continue;
+					|| k === 'messageTotals'
+					|| k === 'relatedToTotals'
+					|| k === 'relatedFromTotals'
+					|| k === 'participant'
+					|| k === 'access'
+					|| k === 'isRequired') continue;
 				this.fields[k] = Q.copy(fields[k]);
 			}
 		};
@@ -932,16 +935,16 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 			streamFunc.streamConstructor = function Streams_Stream(fields) {
 				// run any constructors
 				streamFunc.streamConstructor.constructors.apply(this, arguments);
-				
+
 				var f = this.fields;
 				if (updateCache) { // update the Streams.get cache
 					if (f.publisherId && f.name) {
 						Streams.get.cache
-						.removeEach([f.publisherId, f.name])
-						.set(
-							[f.publisherId, f.name], 0,
-							this, [null, this]
-						);
+							.removeEach([f.publisherId, f.name])
+							.set(
+								[f.publisherId, f.name], 0,
+								this, [null, this]
+							);
 					}
 				}
 
@@ -960,9 +963,9 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 		}
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
-		
+
 		updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
-		
+
 		if (extra && extra.messages) {
 			Q.each(extra.messages, function (ordinal, message) {
 				if (Q.typeOf(message) !== 'Q.Streams.Message') {
@@ -983,7 +986,7 @@ Streams.construct = function _Streams_construct(fields, extra, callback, updateC
 				);
 			});
 		}
-		
+
 		Q.handle(callback, stream, [null, stream, {
 			messages: messages,
 			participants: participants
@@ -1075,7 +1078,9 @@ Streams.Dialogs = {
 					title: text.title,
 					content: html,
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
+					className: 'Streams_invite_dialog',
 					onActivate: function (dialog) {
+
 						// handle "choose from contacts" button
 						$('.Streams_invite_choose_contact', dialog)
 							.on(Q.Pointer.fastclick, function () {
@@ -1100,26 +1105,31 @@ Streams.Dialogs = {
 									$this.text(text.chooseAgainFromContacts);
 								})
 							});
-						// handle "go" button
-						$('.Streams_invite_submit button', dialog)
-							.on(Q.Pointer.fastclick, function () {
-								Q.handle(callback, Streams, [{
-									identifier: $(".Streams_invite_submit input[type=text]", dialog).val()
-								}]);
-								Q.Dialogs.pop(); // close the Dialog
-							});
+
+						if (!Q.info.isTouchscreen) {
+							$('.Streams_invite_submit input[type=text]').focus();
+						}
+						// handle go button
+						$('.Streams_invite_submit').on('submit', function (e) {
+							Q.handle(callback, Streams, [{
+								identifier: $("input[type=text]", this).val()
+							}]);
+							Q.Dialogs.pop(); // close the Dialog
+							e.preventDefault();
+						});
+
 						// handle social buttons
 						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
-							.on(Q.Pointer.fastclick, function () {
-								var sendBy = $(this).data('sendby');
-								var result = {
-									token: 1,
-									identifier: null,
-									sendBy: sendBy
-								}
-								Q.handle(callback, Streams, [result]);
-								Q.Dialogs.pop(); // close the Dialog
-							});
+						.on(Q.Pointer.fastclick, function () {
+							var sendBy = $(this).data('sendby');
+							var result = {
+								token: 1,
+								identifier: null,
+								sendBy: sendBy
+							}
+							Q.handle(callback, Streams, [result]);
+							Q.Dialogs.pop(); // close the Dialog
+						});
 					},
 				});
 			});
@@ -1248,16 +1258,16 @@ Streams.release = function (key) {
  * Invite other users to a stream. Must be logged in first.
  * @static
  * @method invite
- * @param {String} publisherId The user id of the publisher of the stream 
+ * @param {String} publisherId The user id of the publisher of the stream
  * @param {String} streamName The name of the stream you are inviting to
  * @param {Object} [options] More options that are passed to the API, which can include:
  *   @param {String|Array} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet. Can also be an array of identifiers.
  *   @param {boolean} [options.token=false] Pass true here to generate an invite
- *    which you can then send to anyone however you like. When they show up with the token
- *    and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
- *    will accept this invite either right away, or as soon as they log in.
- *    They will then be added to the list of Streams_Invited for this stream, thus
- *    keeping track of who accepted whose invite.
+ *	which you can then send to anyone however you like. When they show up with the token
+ *	and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
+ *	will accept this invite either right away, or as soon as they log in.
+ *	They will then be added to the list of Streams_Invited for this stream, thus
+ *	keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
  *   @param {string} [options.platform] platform for which xids are passed
@@ -1294,7 +1304,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		uri: 'Streams/invite'
 	}, Streams.invite.options, options);
 	o.publisherId = publisherId,
-	o.streamName = streamName;
+		o.streamName = streamName;
 	o.displayName = o.displayName || Users.loggedInUser.displayName;
 	function _request() {
 		return Q.req(o.uri, ['data'], function (err, response) {
@@ -1318,7 +1328,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				}
 				var status = rsd.statuses[i];
 				var shouldFollowup = (o.followup === true)
-				|| (o.followup !== false && status === 'future');
+					|| (o.followup !== false && status === 'future');
 				if (!shouldFollowup) {
 					return; // next one
 				}
@@ -1328,9 +1338,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case 'userId': break;
 					case 'email': emailAddresses.push(identifier); break;
 					case 'mobile': mobileNumbers.push(identifier); break;
-					case 'facebook': 
+					case 'facebook':
 						if (shouldFollowup === true) {
-							fb_xids.push(identifier[i]); 
+							fb_xids.push(identifier[i]);
 						}
 						break;
 					case 'label':
@@ -1364,8 +1374,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				var args = [err, response];
 				return Streams.onError.handle.call(this, msg, args);
 			}
-			Participant.get.cache.removeEach([publisherId, streamName]);
-			Streams.get.cache.removeEach([publisherId, streamName]);
 			var rsd = response.slots.data;
 			var rss = response.slots.stream;
 			Q.handle(o && o.callback, null, [err, rsd]);
@@ -1379,12 +1387,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							title: rss.title
 						}, 10, text);
 						Q.Template.render("Streams/templates/invite/email", t,
-						function (err, body) {
-							if (err) return;
-							var subject = Q.getObject(['invite', 'email', 'subject'], text);
-							var url = Q.Links.email(subject, body);
-							window.location = url;
-						});
+							function (err, body) {
+								if (err) return;
+								var subject = Q.getObject(['invite', 'email', 'subject'], text);
+								var url = Q.Links.email(subject, body);
+								window.location = url;
+							});
 						break;
 					case "text":
 						var content = Q.getObject(['invite', 'sms', 'content'], text)
@@ -1398,11 +1406,11 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							title: streamName
 						}, 10, text);
 						Q.Template.render("Streams/templates/invite/sms", t,
-						function (err, text) {
-							if (err) return;
-							var url = Q.Links.sms(text);
-							window.location = url;
-						});
+							function (err, text) {
+								if (err) return;
+								var url = Q.Links.sms(text);
+								window.location = url;
+							});
 						break;
 					case "facebook":
 						window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url);
@@ -1413,8 +1421,14 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case "QR":
 						if (err) return;
 						Q.Dialogs.push({
+							htmlClass: 'Streams_invite_QR',
 							title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
-							content: '<div class="Streams_invite_QR_content"></div>',
+							content: '<div class="Streams_invite_QR_content"></div>'
+								+ '<div class="Q_buttons">'
+								+ '<button class="Q_button">'
+								+ text.invite.dialog.QRscanned
+								+'</button>'
+								+ '</div>',
 							onActivate: function (dialog) {
 								// fill QR code
 								Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
@@ -1427,11 +1441,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										colorLight : "#ffffff",
 										correctLevel : QRCode.CorrectLevel.H
 									});
-								});
-
-								Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/invite/accept')
-								.set(function(stream, message) {
-									Q.Dialogs.pop();
+									$('.Q_button', dialog).plugin('Q/clickable')
+									.on(Q.Pointer.click, function () {
+										Q.Dialogs.pop();
+									});
 								});
 							},
 							onClose: function () {
@@ -1439,12 +1452,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 									title: Q.getObject(['invite', 'dialog', 'photo'], text),
 									apply: true,
 									content:
-										'<div class="Streams_invite_photo_dialog">' +
-										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
-											'<div class="Streams_invite_photo_camera">' +
-												'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
-											'</div>' +
-										'</div>',
+									'<div class="Streams_invite_photo_dialog">' +
+									'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
+									'<div class="Streams_invite_photo_camera">' +
+									'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+									'</div>' +
+									'</div>',
 									onActivate: function (dialog) {
 										// handle "photo" button
 										var photo = null;
@@ -1657,7 +1670,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	var cached = Streams.get.cache.get([publisherId, streamName]);
 	if (!cached || options.stream) {
 		if (typeof streamName === 'string'
-		&& streamName[streamName.length-1] !== '/') {
+			&& streamName[streamName.length-1] !== '/') {
 			slotNames.push('stream');
 		} else {
 			slotNames.push('streams');
@@ -1700,7 +1713,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 				var args = [err, stream];
 				return callback && callback.call(this, msg, args);
 			}
-			
+
 			// Construct related streams from data that has been returned
 			var p = new Q.Pipe(), keys = [], keys2 = {}, streams = {};
 			Q.each(data.slots.relatedStreams, function (k, fields) {
@@ -1713,7 +1726,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 					p.fill(key)();
 				}, true);
 			});
-			
+
 			// Now process all the relations
 			Q.each(data.slots.relations, function (j, relation) {
 				relation[near] = stream;
@@ -1736,7 +1749,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 					relation[far] = streams[key];
 				}
 			});
-			
+
 			// Finish setting up the pipe
 			if (keys.length) {
 				p.add(keys, _callback);
@@ -1756,9 +1769,9 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 					}
 				}
 				callback && callback.call({
-					relatedStreams: streams, 
-					relations: data.slots.relations, 
-					stream: stream, 
+					relatedStreams: streams,
+					relations: data.slots.relations,
+					stream: stream,
 					errors: params
 				}, null);
 			}
@@ -1859,7 +1872,7 @@ Stream.define = Streams.define;
  * When a stream is retained, it is refreshed when Streams.refresh() or
  * stream.refresh() are called. You can release the stream with stream.release().
  * This method also opens a socket to the stream's node, if one isn't already open.
- * 
+ *
  * @static
  * @method retain
  * @param {String} publisherId the publisher of the stream(s)
@@ -1897,7 +1910,7 @@ Stream.retain = function _Stream_retain (publisherId, streamName, key, callback)
  * Releases a stream from being retained. See Streams.Stream.retain()
  * This method also closes a socket to the stream's node,
  * if it was the last stream released on that node.
- * 
+ *
  * @static
  * @method release
  * @param {String} publisherId
@@ -1951,8 +1964,7 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
-	if (!Q.isOnline()
-	|| (notRetained && !(options && options.evenIfNotRetained))) {
+	if ((notRetained && !(options && options.evenIfNotRetained))) {
 		callback && callback.call(this, false);
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
@@ -1962,11 +1974,11 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		// If the stream was retained, fetch latest messages,
 		// and replay their being "posted" to trigger the right events
 		var result = Message.wait(publisherId, streamName, -1,
-		function (ordinals) {
-			Q.Streams.get(publisherId, streamName, function (err) {
-				callback && callback.apply(this, [err, ordinals]);
-			});
-		}, options);
+			function (ordinals) {
+				Q.Streams.get(publisherId, streamName, function (err) {
+					callback && callback.apply(this, [err, ordinals]);
+				});
+			}, options);
 		if (result == null || result instanceof Q.Pipe) {
 			// We didn't even try to wait for messages,
 			// The socket will deliver them.
@@ -2012,7 +2024,7 @@ var Sp = Stream.prototype;
  * stream.refresh() are called. You can release it with stream.release().
  * Call this function in a chain before calling stream.related, etc.
  * in order to set the key for retaining the streams those functions obtain.
- * 
+ *
  * @method retainWith
  * @param {String} key
  * @return {Object} returns Streams object for chaining with .get() or .related()
@@ -2043,7 +2055,7 @@ Sp.fileUrl = function() {
 
 /**
  * Get all stream fields
- * 
+ *
  * @method getAll
  * @param {Boolean} usePending
  * @return {Object}
@@ -2054,7 +2066,7 @@ Sp.getAll = function _Stream_prototype_getAll (usePending) {
 
 /**
  * Get the value of a field
- * 
+ *
  * @method get
  * @param {String} fieldName the name of the field to get
  * @param {Boolean} usePending if true, and there is a value pending to be saved, get that instead
@@ -2069,7 +2081,7 @@ Sp.get = function _Stream_prototype_get (fieldName, usePending) {
 /**
  * Set the value of a field, pending to be saved to the server with the stream
  * May cause some validators to run and throw a validation exception on the value.
- * 
+ *
  * @method set
  * @param {String} fieldName
  * @param {Mixed} value
@@ -2101,7 +2113,7 @@ Sp.set = function _Stream_prototype_set (fieldName, value) {
 
 /**
  * Get all stream attributes
- * 
+ *
  * @method getAllAttributes
  * @param {Boolean} usePending
  * @return {Object}
@@ -2112,7 +2124,7 @@ Sp.getAllAttributes = function _Stream_prototype_getAllAttributes (usePending) {
 
 /**
  * Get the value of an attribute
- * 
+ *
  * @method getAttribute
  * @param {String} attributeName the name of the attribute to get
  * @param {Boolean} usePending if true, and there is a value pending to be saved, get that instead
@@ -2126,7 +2138,7 @@ Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePen
 
 /**
  * Set the value of an attribute, pending to be saved to the server with the stream
- * 
+ *
  * @method setAttribute
  * @param {String} attributeName
  * @param {Mixed} value
@@ -2158,7 +2170,7 @@ Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value)
 
 /**
  * Remove an attribute from the stream, pending to be saved to the server
- * 
+ *
  * @method clearAttribute
  * @param {String} attributeName
  */
@@ -2267,7 +2279,7 @@ Sp.url = function (messageOrdinal, baseUrl)
 };
 /**
  * Save a stream to the server
- * 
+ *
  * @method save
  * @param {Object} [options] A hash of options for the subsequent refresh.
  *   See Q.Streams.Stream.refresh
@@ -2281,7 +2293,7 @@ Sp.save = function _Stream_prototype_save (options) {
 	var stream = this;
 	var slotName = "stream";
 	var f = stream.fields;
-	var pf = stream.pendingFields; 
+	var pf = stream.pendingFields;
 	pf.publisherId = f.publisherId;
 	pf.name = f.name;
 	pf["Q.clientId"] = Q.clientId();
@@ -2315,7 +2327,7 @@ Sp.save = function _Stream_prototype_save (options) {
 
 /**
  * Closes a stream in the database, and marks it for removal unless it is required.
- * 
+ *
  * @method remove
  * @param {Function} callback
  */
@@ -2325,7 +2337,7 @@ Sp.close = function _Stream_prototype_remove (callback) {
 
 /**
  * Reopens a stream in the database that was previously closed, but not yet removed.
- * 
+ *
  * @static
  * @method reopen
  */
@@ -2337,7 +2349,7 @@ Sp.reopen = function _Stream_remove () {
 /**
  * Retain the stream in the client under a certain key.
  * Retained streams are refreshed during Streams.refresh()
- * 
+ *
  * @method retain
  * @param {String} key
  * @return {Q.Streams.Stream}
@@ -2355,7 +2367,7 @@ Sp.retain = function _Stream_prototype_retain (key) {
 	var stream = _retainedStreams[ps];
 	if (stream && stream.participant) {
 		Users.Socket.connect(nodeUrl, function () {
-			Q.setObject([nodeUrl, ps], true, _retainedNodes);	
+			Q.setObject([nodeUrl, ps], true, _retainedNodes);
 		});
 	}
 	Q.setObject([ps, key], true, _retainedByStream);
@@ -2369,7 +2381,7 @@ Sp.retain = function _Stream_prototype_retain (key) {
  * it is no longer refreshed during Streams.refresh()
  * This method also closes a socket to the stream's node,
  * if it was the last stream released on that node.
- * 
+ *
  * @method release
  * @return {Q.Streams.Stream}
  */
@@ -2380,7 +2392,7 @@ Sp.release = function _Stream_prototype_release () {
 
 /**
  * Retrieves a Streams.Message object, by using Message.get
- * 
+ *
  * @method getMessage
  * @param {Number} ordinal the ordinal of the message
  * @param {Function} callback arguments = (err) and this = the message
@@ -2391,7 +2403,7 @@ Sp.getMessage = function _Stream_prototype_getMessage (ordinal, callback) {
 
 /**
  * Retrieves a Streams.Participant object, by using Participant.get
- * 
+ *
  * @method getParticipant
  * @param {String} userId
  * @param {Function} callback arguments = (err) and this = the message
@@ -2594,7 +2606,7 @@ Sp.onUpdated = Sp.onAttribute;
 
 /**
  * Event factory for listening for changed stream fields based on name.
- * 
+ *
  * @event onFieldChanged
  * @param {String} field can be "" to get triggered for on all fields
  */
@@ -2604,7 +2616,7 @@ Sp.onFieldChanged = function _Stream_prototype_onFieldChanged (field) {
 
 /**
  * Event factory for listening for changed stream fields based on name.
- * 
+ *
  * @event onClosed
  */
 Sp.onClosed = function _Stream_prototype_onClosed () {
@@ -2614,7 +2626,7 @@ Sp.onClosed = function _Stream_prototype_onClosed () {
 /**
  * Event factory for validation hooks that run when setting stream fields.
  * Have the hooks throw a Q.Error on validation errors.
- * 
+ *
  * @event beforeSet
  */
 Sp.beforeSet = function _Stream_prototype_onSet () {
@@ -2624,7 +2636,7 @@ Sp.beforeSet = function _Stream_prototype_onSet () {
 /**
  * Event factory for validation hooks that run when setting stream attributes
  * Have the hooks throw a Q.Error on validation errors.
- * 
+ *
  * @event beforeSetAttribute
  */
 Sp.beforeSetAttribute = function _Stream_prototype_onSetAttribute () {
@@ -2642,7 +2654,7 @@ Sp.onRelatedFrom = function _Stream_prototype_onRelatedFrom () {
 
 /**
  * Event factory for listening to streams being related to this stream
- * 
+ *
  * @event onRelatedTo
  */
 Sp.onRelatedTo = function _Stream_prototype_onRelatedTo () {
@@ -2651,7 +2663,7 @@ Sp.onRelatedTo = function _Stream_prototype_onRelatedTo () {
 
 /**
  * Event factory for listening to this stream becoming un-related to other streams
- * 
+ *
  * @event onUnrelatedFrom
  */
 Sp.onUnrelatedFrom = function _Stream_prototype_onUnrelatedFrom () {
@@ -2660,7 +2672,7 @@ Sp.onUnrelatedFrom = function _Stream_prototype_onUnrelatedFrom () {
 
 /**
  * Event factory for listening to other streams becoming un-related to this stream
- * 
+ *
  * @event onUnrelatedTo
  */
 Sp.onUnrelatedTo = function  _Stream_prototype_onUnrelatedTo () {
@@ -2669,7 +2681,7 @@ Sp.onUnrelatedTo = function  _Stream_prototype_onUnrelatedTo () {
 
 /**
  * Event factory for listening to changes in relations from this stream to others
- * 
+ *
  * @event onUnrelatedFrom
  */
 Sp.onUpdatedRelateFrom = function  _Stream_prototype_onUpdatedRelateFrom () {
@@ -2678,7 +2690,7 @@ Sp.onUpdatedRelateFrom = function  _Stream_prototype_onUpdatedRelateFrom () {
 
 /**
  * Event factory for listening to changes in relations of other streams to this stream
- * 
+ *
  * @event onUnrelatedTo
  */
 Sp.onUpdatedRelateTo = function _Stream_prototype_onUpdatedRelateTo () {
@@ -2687,7 +2699,7 @@ Sp.onUpdatedRelateTo = function _Stream_prototype_onUpdatedRelateTo () {
 
 /**
  * Post a message to this stream.
- * 
+ *
  * @method post
  * @param {Object} [data] A Streams.Message object or a hash of fields to post. This stream's publisherId and streamName are added to it.
  *   @param {String} [data.publisherId]
@@ -2704,7 +2716,7 @@ Sp.post = function  _Stream_prototype_post (data, callback) {
 
 /**
  * Join a stream as a participant, so you get realtime messages through socket events.
- * 
+ *
  * @method join
  * @param {Function} callback receives (err, participant) as parameters
  */
@@ -2714,7 +2726,7 @@ Sp.join = function _Stream_prototype_join (callback) {
 
 /**
  * Leave a stream that you previously joined, so that you don't get realtime messages anymore.
- * 
+ *
  * @method leave
  * @param {Function} callback Receives (err, participant) as parameters
  */
@@ -2724,7 +2736,7 @@ Sp.leave = function _Stream_prototype_leave (callback) {
 
 /**
  * Subscribe to a stream, so you get realtime messages and offline notifications.
- * 
+ *
  * @method subscribe
  * @param {Function} callback receives (err, participant) as parameters
  */
@@ -2734,7 +2746,7 @@ Sp.subscribe = function _Stream_prototype_subscribe (callback) {
 
 /**
  * Unsubscribe from a stream that you previously subscribed to
- * 
+ *
  * @method unsubscribe
  * @param {Function} callback Receives (err, participant) as parameters
  */
@@ -2746,7 +2758,7 @@ Sp.unsubscribe = function _Stream_prototype_unsubscribe (callback) {
  * Start observing a stream as an anonymous observer,
  * so you get realtime messages through socket events
  * but you don't join as a participant.
- * 
+ *
  * @method observe
  * @param {Function} callback receives (err, participant) as parameters
  */
@@ -2757,7 +2769,7 @@ Sp.observe = function _Stream_prototype_observe (callback) {
 /**
  * Stop observing a stream which you previously started observing,
  * so that you don't get realtime messages anymore.
- * 
+ *
  * @method neglect
  * @param {Function} callback Receives (err, participant) as parameters
  */
@@ -2767,7 +2779,7 @@ Sp.neglect = function _Stream_prototype_neglect (callback) {
 
 /**
  * Test whether the user has enough access rights when it comes to reading from the stream
- * 
+ *
  * @method testReadLevel
  * @param {String} level One of the values in Streams.READ_LEVEL
  * @return {Boolean} Returns true if the user has at least this level of access
@@ -2784,7 +2796,7 @@ Sp.testReadLevel = function _Stream_prototype_testReadLevel (level) {
 
 /**
  * Test whether the user has enough access rights when it comes to writing to the stream
- * 
+ *
  * @method testWriteLevel
  * @param {String} level One of the values in Streams.WRITE_LEVEL
  * @return {Boolean} Returns true if the user has at least this level of access
@@ -2801,7 +2813,7 @@ Sp.testWriteLevel = function _Stream_prototype_testWriteLevel (level) {
 
 /**
  * Test whether the user has enough access rights when it comes to administering the stream
- * 
+ *
  * @method testAdminLevel
  * @param {String} level One of the values in Streams.ADMIN_LEVEL
  * @return {Boolean} Returns true if the user has at least this level of access
@@ -2818,7 +2830,7 @@ Sp.testAdminLevel = function _Stream_prototype_testAdminLevel (level) {
 
 /**
  * A convenience method to get the URL of the streams-related action
- * 
+ *
  * @method actionUrl
  * @param {String} [what='stream'] Can be one of 'stream', 'message', 'relation', etc.
  * @return {String} The corresponding URL
@@ -2829,16 +2841,16 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
 
 /**
  * Invite other users to this stream. Must be logged in first.
- * 
+ *
  * @method invite
  * @param {Object} [options] More options that are passed to the API, which can include:
  *   @param {String} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet.
  *   @param {boolean} [options.token=false] Pass true here to generate an invite
- *    which you can then send to anyone however you like. When they show up with the token
- *    and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
- *    will accept this invite either right away, or as soon as they log in.
- *    They will then be added to the list of Streams_Invited for this stream, thus
- *    keeping track of who accepted whose invite.
+ *	which you can then send to anyone however you like. When they show up with the token
+ *	and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
+ *	will accept this invite either right away, or as soon as they log in.
+ *	They will then be added to the list of Streams_Invited for this stream, thus
+ *	keeping track of who accepted whose invite.
  *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.userId] user id or an array of user ids to invite
  *   @param {string} [options.platform] platform for which xids are passed
@@ -2863,7 +2875,7 @@ Sp.invite = function (options, callback) {
 /**
  * Waits for the latest messages to be posted to a given stream.
  * If your app is using socket.io, then calling this manually is largely unnecessary.
- * 
+ *
  * @method refresh
  * @param {Function} callback This is called when the stream has been refreshed, or if Streams has determined it won't send a refresh request, it will get null as the first parameter.
  * @param {Object} [options] A hash of options, including:
@@ -2891,7 +2903,7 @@ Sp.retainedByKey = function () {
 
 /**
  * Returns all the streams this stream is related to
- * 
+ *
  * @method relatedFrom
  * @param {String} relationType the type of the relation
  * @param {Object} [options] optional object that can include:
@@ -2907,7 +2919,7 @@ Sp.relatedFrom = function _Stream_prototype_relatedFrom (relationType, options, 
 
 /**
  * Returns all the streams related to this stream
- * 
+ *
  * @method relatedTo
  * @param {String} relationType the type of the relation
  * @param {Object} [options] optional object that can include:
@@ -2925,7 +2937,7 @@ Sp.relatedTo = function _Stream_prototype_relatedTo (relationType, options, call
 
 /**
  * Relates this stream to another stream
- * 
+ *
  * @method relateTo
  * @param {String} type the type of the relation
  * @param {String} toPublisherId d of publisher of the stream
@@ -2939,7 +2951,7 @@ Sp.relateTo = function _Stream_prototype_relateTo (type, toPublisherId, toStream
 
 /**
  * Relates another stream to this stream
- * 
+ *
  * @method relate
  * @param {String} type the type of the relation
  * @param {String} fromPublisherId id of publisher of the stream
@@ -2953,7 +2965,7 @@ Sp.relate = Sp.relateFrom = function _Stream_prototype_relate (type, fromPublish
 
 /**
  * Removes a relation from this stream to another stream
- * 
+ *
  * @method unrelateTo
  * @param {String} toPublisherId id of publisher which is publishing the stream
  * @param {String} toStreamName name of stream which the being unrelated
@@ -2967,7 +2979,7 @@ Sp.unrelateTo = function _Stream_prototype_unrelateTo (toPublisherId, toStreamNa
 
 /**
  * Removes a relation from another stream to this stream
- * 
+ *
  * @method unrelateFrom
  * @param {String} fromPublisherId id of publisher which is publishing the stream
  * @param {String} fromStreamName name of stream which is being unrelated
@@ -2982,7 +2994,7 @@ Sp.unrelate = Sp.unrelateFrom = function _Stream_prototype_unrelateFrom (fromPub
 /**
  * Join a stream as a participant, so messages start arriving in real time via sockets.
  * May call Streams.join.onError if an error occurs.
- * 
+ *
  * @static
  * @method join
  * @param {String} publisherId id of publisher which is publishing the stream
@@ -3027,7 +3039,7 @@ Stream.join.onError = new Q.Event();
  * Leave a stream that you previously joined,
  * so that you don't get realtime socket messages for that stream anymore.
  * May call Stream.leave.onError if an error occurs.
- * 
+ *
  * @static
  * @method leave
  * @param {String} publisherId
@@ -3040,7 +3052,7 @@ Stream.leave = function _Stream_leave (publisherId, streamName, callback) {
 	}
 	var slotName = "participant";
 	var fields = {
-		"publisherId": publisherId, 
+		"publisherId": publisherId,
 		"name": streamName,
 		"Q.clientId": Q.clientId()
 	};
@@ -3074,7 +3086,7 @@ Stream.leave.onError = new Q.Event();
 /**
  * Subscribe to a stream, to start getting offline notifications
  * May call Streams.subscribe.onError if an error occurs.
- * 
+ *
  * @static
  * @method subscribe
  * @param {String} publisherId id of publisher which is publishing the stream
@@ -3137,7 +3149,8 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
  */
 Stream.subscribe.onError = new Q.Event();
 
-/** default options for  Stream.subscribe class.
+/**
+ * Default options for Stream.subscribe function.
  * @param {bool} device Whether to subscribe device when user subscribed to some stream
  */
 Stream.subscribe.options = {
@@ -3147,7 +3160,7 @@ Stream.subscribe.options = {
 /**
  * Unsubscribe from a stream you previously subscribed to
  * May call Stream.unsubscribe.onError if an error occurs.
- * 
+ *
  * @static
  * @method unsubscribe
  * @param {String} publisherId
@@ -3160,7 +3173,7 @@ Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, call
 	}
 	var slotName = "participant";
 	var fields = {
-		"publisherId": publisherId, 
+		"publisherId": publisherId,
 		"name": streamName,
 		"Q.clientId": Q.clientId()
 	};
@@ -3195,7 +3208,7 @@ Stream.unsubscribe.onError = new Q.Event();
  * Start observing a stream as an anonymous observer,
  * so you get realtime messages through socket events
  * but you don't join as a participant.
- * 
+ *
  * @static
  * @method observe
  * @param {String} publisherId id of publisher which is publishing the stream
@@ -3209,7 +3222,7 @@ Stream.observe = function _Stream_observe (publisherId, streamName, callback) {
 /**
  * Stop observing a stream which you previously started observing,
  * so that you don't get realtime messages anymore.
- * 
+ *
  * @static
  * @method neglect
  * @param {String} publisherId id of publisher which is publishing the stream
@@ -3222,7 +3235,7 @@ Stream.neglect = function _Stream_neglect (publisherId, streamName, callback) {
 
 /**
  * Closes a stream in the database, and marks it for removal unless it is required.
- * 
+ *
  * @static
  * @method remove
  * @param {String} publisherId
@@ -3373,7 +3386,7 @@ Streams.unrelate = function _Stream_prototype_unrelate (publisherId, streamName,
 /**
  * Later we will probably make Streams.Relation objects which will provide easier access to this functionality.
  * For now, use this to update weights of relations, etc.
- * 
+ *
  * @method updateRelation
  * @param {String} toPublisherId
  * @param {String} toStreamName
@@ -3500,7 +3513,7 @@ Message.define = function (type, ctor, methods) {
 		throw new Q.Error("Q.Streams.Message.define requires ctor to be a function");
 	}
 	Q.mixin(CustomMessageConstructor, Message);
-	Q.extend(CustomMessageConstructor.prototype, methods);	
+	Q.extend(CustomMessageConstructor.prototype, methods);
 	return Message.defined[type] = CustomMessageConstructor;
 };
 
@@ -3508,7 +3521,7 @@ var Mp = Message.prototype;
 
 /**
  * Get all the instructions from a message.
- * 
+ *
  * @method getAllInstructions
  * @return {Object}
  */
@@ -3522,7 +3535,7 @@ Mp.getAllInstructions = function _Message_prototype_getAllInstructions () {
 
 /**
  * Get the value of an instruction in the message
- * 
+ *
  * @method getInstruction
  * @param {String} instructionName
  */
@@ -3533,7 +3546,7 @@ Mp.getInstruction = function _Message_prototype_getInstruction (instructionName)
 
 /**
  * Mark the message as seen, updating the messageTotals
- * 
+ *
  * @method seen
  * @param {Number|Boolean} [messageTotal] Pass the total messages seen of this type.
  *  Or, pass true to set the latest messageTotal if any was cached, otherwise do nothing.
@@ -3549,7 +3562,7 @@ Mp.seen = function _Message_seen (messageTotal) {
 /**
  * Get one or more messages, which may result in batch requests to the server.
  * May call Message.get.onError if an error occurs.
- * 
+ *
  * @static
  * @method get
  * @param {String} publisherId
@@ -3587,36 +3600,36 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 		streamName: streamName
 	}));
 	func.call(this, 'message', slotName, publisherId, streamName, criteria,
-	function (err, data) {
-		var msg = Q.firstErrorMessage(err, data);
-		if (msg) {
-			var args = [err, data];
-			Streams.onError.handle.call(this, msg, args);
-			Message.get.onError.handle.call(this, msg, args);
-			return callback && callback.call(this, msg, args);
-		}
-		var messages = {};
-		if ('messages' in data) {
-			messages = data.messages;
-			if (data.messageTotals) {
-				updateMessageTotalsCache(publisherId, streamName, data.messageTotals);
+		function (err, data) {
+			var msg = Q.firstErrorMessage(err, data);
+			if (msg) {
+				var args = [err, data];
+				Streams.onError.handle.call(this, msg, args);
+				Message.get.onError.handle.call(this, msg, args);
+				return callback && callback.call(this, msg, args);
 			}
-		} else if ('message' in data) {
-			messages[ordinal] = data.message;
-		}
-		Q.each(messages, function (ordinal, message) {
-			if (Q.typeOf(message) !== 'Q.Streams.Message') {
-				message = Message.construct(message, true);
+			var messages = {};
+			if ('messages' in data) {
+				messages = data.messages;
+				if (data.messageTotals) {
+					updateMessageTotalsCache(publisherId, streamName, data.messageTotals);
+				}
+			} else if ('message' in data) {
+				messages[ordinal] = data.message;
 			}
-			messages[ordinal] = message;
+			Q.each(messages, function (ordinal, message) {
+				if (Q.typeOf(message) !== 'Q.Streams.Message') {
+					message = Message.construct(message, true);
+				}
+				messages[ordinal] = message;
+			});
+			if (Q.isPlainObject(ordinal)) {
+				callback && callback.call(this, err, messages || null);
+			} else {
+				var message = Q.first(messages);
+				callback && callback.call(message, err, message || null);
+			}
 		});
-		if (Q.isPlainObject(ordinal)) {
-			callback && callback.call(this, err, messages || null);
-		} else {
-			var message = Q.first(messages);
-			callback && callback.call(message, err, message || null);
-		}
-	});
 	return true;
 };
 /**
@@ -3662,7 +3675,7 @@ Message.post.onError = new Q.Event();
 /**
  * Gets the latest ordinal as long as there is a cache for that stream or that stream's messages.
  * Otherwise it returns 0.
- * 
+ *
  * @static
  * @method latestOrdinal
  * @param {String} publisherId
@@ -3697,7 +3710,7 @@ Message.latestOrdinal = function _Message_latestOrdinal (publisherId, streamName
  * Wait until a particular message is posted.
  * Used by Streams plugin to make sure messages arrive in order.
  * Call this with ordinal = -1 to load the latest messages.
- * 
+ *
  * @static
  * @method wait
  * @param {String} publisherId
@@ -3783,52 +3796,52 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		return true;
 	}).run();
 	return p;
-	
+
 	function _tryLoading() {
 		// forget waiting, we'll request them again
-		
+
 		// We could have requested just the remaining ones, like this:
 		// var filled = Q.Object(pipe.subjects),
 		//	 remaining = Q.diff(ordinals, filled);
 		// but we are going to request the entire range.
-		
+
 		if (ordinal < 0) {
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
 		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
-		function (err, messages) {
-			if (err) {
-				return Q.handle(callback, this, [null, err]);
-			}
-			// Go through the messages and simulate the posting
-			// NOTE: the messages will arrive a lot quicker than they were posted,
-			// and moreover without browser refresh cycles in between,
-			// which may cause confusion in some visual representations
-			// until things settle down on the screen
-			ordinal = parseInt(ordinal);
-			Q.each(messages, function (ordinal, message) {
-				if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
-					return; // it was already processed
+			function (err, messages) {
+				if (err) {
+					return Q.handle(callback, this, [null, err]);
 				}
-				Users.Socket.onEvent('Streams/post').handle(message, messages);
-			}, {ascending: true, numeric: true});
-			
-			// if any new messages were encountered, updateMessageCache removed all the cached
-			// results where max < 0, so future calls to Streams.Message.get with max < 0 will
-			// make a request to the server
+				// Go through the messages and simulate the posting
+				// NOTE: the messages will arrive a lot quicker than they were posted,
+				// and moreover without browser refresh cycles in between,
+				// which may cause confusion in some visual representations
+				// until things settle down on the screen
+				ordinal = parseInt(ordinal);
+				Q.each(messages, function (ordinal, message) {
+					if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
+						return; // it was already processed
+					}
+					Users.Socket.onEvent('Streams/post').handle(message, messages);
+				}, {ascending: true, numeric: true});
 
-			// Do we have this message now?
-			if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
-				// remove any event handlers still waiting for the event to be posted
-				Q.each(waiting, function (i, w) {
-					w[0].remove(w[1]);
-				});
-				if (!alreadyCalled) {
-					Q.handle(callback, this, [Object.keys(messages)]);
+				// if any new messages were encountered, updateMessageCache removed all the cached
+				// results where max < 0, so future calls to Streams.Message.get with max < 0 will
+				// make a request to the server
+
+				// Do we have this message now?
+				if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
+					// remove any event handlers still waiting for the event to be posted
+					Q.each(waiting, function (i, w) {
+						w[0].remove(w[1]);
+					});
+					if (!alreadyCalled) {
+						Q.handle(callback, this, [Object.keys(messages)]);
+					}
+					alreadyCalled = true;
 				}
-				alreadyCalled = true;
-			}
-		});
+			});
 	}
 };
 Message.wait.options = {
@@ -3859,7 +3872,7 @@ var MTotal = Streams.Message.Total = {
 	/**
 	 * Get one or more messageTotals, which may result in batch requests to the server.
 	 * May call Streams.Message.Total.get.onError if an error occurs.
-	 * 
+	 *
 	 * @static
 	 * @method get
 	 * @param {String} publisherId
@@ -3875,19 +3888,19 @@ var MTotal = Streams.Message.Total = {
 			streamName: streamName
 		}));
 		func.call(this, 'messageTotal', 'messageTotals', publisherId, streamName, messageType,
-		function (err, data) {
-			var msg = Q.firstErrorMessage(err, data);
-			if (msg) {
-				var args = [err, data];
-				Streams.onError.handle.call(this, msg, args);
-				MTotal.get.onError.handle.call(this, msg, args);
-				return callback && callback.call(this, msg, args);
-			}
-			var messageTotals = Q.isArrayLike(messageType)
-				? Q.copy(data.messageTotals)
-				: data.messageTotals[messageType];
-			callback && callback.call(MTotal, err, messageTotals || 0);
-		});
+			function (err, data) {
+				var msg = Q.firstErrorMessage(err, data);
+				if (msg) {
+					var args = [err, data];
+					Streams.onError.handle.call(this, msg, args);
+					MTotal.get.onError.handle.call(this, msg, args);
+					return callback && callback.call(this, msg, args);
+				}
+				var messageTotals = Q.isArrayLike(messageType)
+					? Q.copy(data.messageTotals)
+					: data.messageTotals[messageType];
+				callback && callback.call(MTotal, err, messageTotals || 0);
+			});
 	},
 	/**
 	 * Returns the latest total number of messages (of a certain type) posted to the stream
@@ -3964,7 +3977,7 @@ var MTotal = Streams.Message.Total = {
 		}
 		return t;
 	},
-	
+
 	/**
 	 * Sets up an element to show the total number of unseen messages (of a certain type)
 	 * from a stream, and update the display in real time.
@@ -3998,7 +4011,7 @@ var MTotal = Streams.Message.Total = {
 			element.setClass(unseenClass, c);
 		}
 	},
-	
+
 	/**
 	 * Occurs when MTotal.seen is called to update the number of seen messages.
 	 * The first parameter passed is the new messageTotal.
@@ -4031,7 +4044,7 @@ var Participant = Streams.Participant = function Streams_Participant(fields) {
 
 /**
  * Get one or more participants, sorted by insertedTime
- * 
+ *
  * @static
  * @method get
  * @param {String} publisherId
@@ -4099,7 +4112,7 @@ var Pp = Participant.prototype;
 
 /**
  * Get all extra attributes
- * 
+ *
  * @method getAllExtras
  * @return {Object}
  */
@@ -4113,7 +4126,7 @@ Pp.getAllExtras = function _Participant_prototype_getAllExtras () {
 
 /**
  * Get the value of an extra
- * 
+ *
  * @method getExtra
  * @param {String} extraName the name of the extra to get
  * @return {Mixed}
@@ -4136,7 +4149,7 @@ var Avatar = Streams.Avatar = function Streams_Avatar (fields) {
 
 /**
  * Avatar batch getter.
- * 
+ *
  * @static
  * @method get
  * @param {String|Object} userId The id of the user whose avatar we are requesting.
@@ -4168,7 +4181,7 @@ Avatar.get.onError = new Q.Event();
 
 /**
  * Get avatars by prefix
- * 
+ *
  * @static
  * @method byPrefix
  * @param prefix {string}
@@ -4213,7 +4226,7 @@ var Ap = Avatar.prototype;
 
 /**
  * Get the display name from a Streams.Avatar
- * 
+ *
  * @method displayName
  * @param {Object} [options] A bunch of options which can include:
  *   @param {Boolean} [options.short] Show one part of the name only
@@ -4254,15 +4267,15 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		for (var i=0, l=show.length; i<l; ++i) {
 			var s = show[i];
 			switch (s) {
-			case 'f': parts.push(fn2); break;
-			case 'l': parts.push(ln2); break;
-			case 'u': parts.push(u2); break;
-			case 'fu': parts.push(fn2 ? fn2 : u2); break;
-			case 'lu': parts.push(ln2 ? ln2 : u2); break;
-			case 'flu':
-			default:
-				parts.push(fn2 || ln2 ? [fn2, ln2].join(' ') : u2);
-				break;
+				case 'f': parts.push(fn2); break;
+				case 'l': parts.push(ln2); break;
+				case 'u': parts.push(u2); break;
+				case 'fu': parts.push(fn2 ? fn2 : u2); break;
+				case 'lu': parts.push(ln2 ? ln2 : u2); break;
+				case 'flu':
+				default:
+					parts.push(fn2 || ln2 ? [fn2, ln2].join(' ') : u2);
+					break;
 			}
 		}
 		return parts.join(' ').trim() || f2;
@@ -4330,16 +4343,16 @@ var Interests = Streams.Interests = {
 			}
 		}
 		Q.req('Streams/interest', ['publisherId', 'streamName'],
-		function (err, response) {
-			Q.handle(callback, this, arguments);
-			var s = response && response.slots;
-			if (s) {
-				_refreshUnlessSocket(s.publisherId, s.streamName);
-			}
-		}, Q.extend({
-			method: 'post', 
-			fields: fields
-		}, options));
+			function (err, response) {
+				Q.handle(callback, this, arguments);
+				var s = response && response.slots;
+				if (s) {
+					_refreshUnlessSocket(s.publisherId, s.streamName);
+				}
+			}, Q.extend({
+				method: 'post',
+				fields: fields
+			}, options));
 	},
 	/**
 	 * Remove an interest from the logged-in user in the main community
@@ -4363,16 +4376,16 @@ var Interests = Streams.Interests = {
 			}
 		}
 		Q.req('Streams/interest', ['publisherId', 'streamName'],
-		function (err, response) {
-			Q.handle(callback, this, arguments);
-			var s = response && response.slots;
-			if (s) {
-				_refreshUnlessSocket(s.publisherId, s.streamName);
-			}
-		}, {
-			method: 'delete', 
-			fields: fields
-		});
+			function (err, response) {
+				Q.handle(callback, this, arguments);
+				var s = response && response.slots;
+				if (s) {
+					_refreshUnlessSocket(s.publisherId, s.streamName);
+				}
+			}, {
+				method: 'delete',
+				fields: fields
+			});
 	},
 	/**
 	 * Load interests for a user
@@ -4461,10 +4474,1948 @@ var Interests = Streams.Interests = {
 			+ style + '/' + cn + '.png'
 		);
 	},
+	/**
+	 * Find the name of the category whose "drilldown" info is
+	 * equal to the normalized string passed here ("category_interest")
+	 * @method drilldownCategory
+	 * @static
+	 * @param {String} communityId
+	 * @param {String} normalized
+	 * @return {String|null} the name of the category, if anuy
+	 */
+	drilldownCategory: function (communityId, normalized) {
+		var n = Q.normalize(normalized);
+		var infos = Q.Streams.Interests.info[communityId];
+		for (var category in infos) {
+			var info = infos[category];
+			if (!info.drilldown) {
+				continue;
+			}
+			if (Q.normalize(info.drilldown) === n) {
+				return category;
+			}
+		}
+		return null;
+	},
 	all: {},
 	info: {},
 	my: null
 };
+
+
+/**
+ * Runs  adapter for Streams/webrtc tools
+ * @class Streams.WebRTC
+ * @constructor
+ * @param {Object} fields
+ */
+var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
+	var WebRTCconference;
+	var _options = {};
+	var _controls = null;
+	var _roomsMedia = null;
+	var _layoutTool = null;
+	var _roomStream = null;
+	var _renderedScreens = [];
+
+	var updateQueryStringParameter = function(uri, key, value) {
+		var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
+		var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+		if (uri.match(re)) {
+			return uri.replace(re, '$1' + key + "=" + value + '$2');
+		}
+		else {
+			return uri + separator + key + "=" + value;
+		}
+	}
+
+	/**
+	 * Bind events that are needed for negotiating process to init WebRTC without using twilio
+	 * @method bindStreamsEvents
+	 * @param {Object} [stream] stream that represents room
+	 */
+	var bindStreamsEvents = function(stream) {
+		var tool = this;
+
+		stream.onMessage('Streams/join').set(function (stream, message) {
+			console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
+		});
+		stream.onMessage('Streams/connected').set(function (stream, message) {
+			console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
+		});
+	}
+
+	/**
+	 * Bind events that are triggered by twilio-video library
+	 * @method bindConferenceEvents
+	 */
+	var bindConferenceEvents = function() {
+		var tool = this;
+		WebRTCconference.event.on('participantConnected', function (participant) {
+			console.log('%c TWILIO: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
+
+			screensRendering.renderScreens();
+		});
+		WebRTCconference.event.on('participantDisconnected', function (participant) {
+			console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+
+			screensRendering.renderScreens();
+		});
+		WebRTCconference.event.on('trackAdded', function (participant) {
+			console.log('%c TWILIO: TRACK ADDED', 'background:blue;color:white;', participant)
+			screensRendering.renderScreens();
+		});
+
+		WebRTCconference.event.on('videoTrackLoaded', function (e) {
+			console.log('%c TWILIO: TRACK LOADED', 'background:blue;color:white;', e)
+			screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
+		});
+	}
+
+	/**
+	 * Connect webrtc room using twilio.
+	 * @method startTwilioRoom
+	 */
+	var startTwilioRoom = function(roomId) {
+		Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
+
+		Q.addScript([
+			"https://requirejs.org/docs/release/2.2.0/minified/require.js",
+			"{{Streams}}/js/tools/webrtc/app.js",
+		], function () {
+
+			Q.req("Streams/webrtc", ["token"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
+				WebRTCconference = WebRTCconferenceLib({
+					mode:'twilio',
+					roomName:twilioRoomName,
+					twilioAccessToken: response.slots.token,
+					useAsLibrary: true,
+				});
+				WebRTCconference.init(function () {
+					bindConferenceEvents();
+					screensRendering.renderScreens();
+					updateParticipantData();
+
+					/*if(!Q.info.isMobile) {
+						var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
+						$(controlEl).appendTo(document.querySelector('body')).activate(function () {
+							screensRendering.renderScreens();
+						});
+					}
+*/
+					Q.activate(
+						document.body.appendChild(
+							Q.Tool.setUpElement(
+								"div", // or pass an existing element
+								"Streams/webrtc/controls",
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+							)
+						),
+						{},
+						function () {
+							_controls = this.element;
+							screensRendering.renderScreens();
+						}
+					);
+
+					/* Q.activate(
+						 Q.Tool.setUpElement('DIV', "Q/resize", {}),
+						 {},
+						 function () {
+							 var tool = this;
+							 _controls = tool.element;
+						 }
+					 );*/
+				});
+
+			}, {
+				method: 'get',
+				fields: {
+					streamName: _roomStream.fields.name,
+					publisherId: _options.roomPublisherId,
+				}
+			});
+		});
+	}
+	var updateParticipantData = function() {
+		Q.req("Streams/webrtc", ["updateParticipantSid"], function (err, response) {
+			var msg = Q.firstErrorMessage(err, response && response.errors);
+
+			if (msg) {
+				return Q.alert(msg);
+			}
+
+		}, {
+			method: 'put',
+			fields: {
+				streamName: _roomStream.fields.name,
+				publisherId: _options.roomPublisherId,
+				twilioParticipantSid: WebRTCconference.localParticipant().sid,
+			}
+		})
+	}
+
+	var startNodeJsRoom = function() {
+		var tool = this;
+
+		var roomId = _options.roomId != null ? _options.roomId : null;
+
+		if(roomId == null) {
+
+			Q.req("Streams/webrtc", ["stream"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+
+				if (msg) {
+					return console.error(msg);
+				}
+
+				roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
+
+				Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+
+					bindStreamsEvents(stream);
+					_roomStream = stream;
+				});
+
+			}, {
+				method: 'post'
+			});
+
+		} else {
+			Q.req("Streams/webrtc", ["join"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+
+				if (msg) {
+					return console.error(msg);
+				}
+
+				Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+					bindStreamsEvents(stream);
+				});
+			}, {
+				method: 'get',
+				fields: {
+					streamName: 'Streams/webrtc/' + roomId
+				}
+			});
+		}
+
+
+		var roomsMedia = document.createElement('DIV');
+		roomsMedia.id = 'webrtc_tool_room-media';
+		var dashboard = document.getElementById('dashboard_slot');
+		if(Q.info.isMobile && !Q.info.isTablet) {
+			roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
+			roomsMedia.style.top = dashboard.offsetHeight + 'px';
+		}
+		_options.element.appendChild(roomsMedia);
+		_roomsMedia = roomsMedia;
+
+		Q.activate(
+			Q.Tool.setUpElement(
+				participantScreen.videoCon, // or pass an existing element
+				"Q/layouts",
+				{}
+			),
+			{},
+			function () {
+				_layoutTool = this;
+			}
+		);
+	}
+
+	/**
+	 * Init conference using own node.js server.
+	 * @method initWithStreams
+	 */
+	var initWithNodeServer = function() {
+		var tool = this;
+		Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
+
+		Q.addScript([
+			"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
+			"https://requirejs.org/docs/release/2.2.0/minified/require.js",
+			"{{Streams}}/js/tools/webrtc/app.js",
+		], function () {
+			var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+			window.WebRTCconference = WebRTCconference({
+				webrtcMode:'nodejs',
+				useAsLibrary: true,
+				nodeServer: _options.nodeServer,
+				roomName: roomId,
+				sid:  Q.Users.loggedInUser.id,
+				username:  Q.Users.loggedInUser.displayName,
+			});
+			WebRTCconference.init(function () {
+				bindConferenceEvents();
+				startNodeJsRoom();
+				screensRendering.renderScreens();
+
+				var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
+				$(controlEl).appendTo(document.querySelector('body')).activate(function () {
+					screensRendering.renderScreens();
+				});
+			});
+		});
+	}
+
+	/**
+	 * Render screens of all participants of the room
+	 * @method screensRendering
+	 */
+	var screensRendering = (function () {
+		var activeScreen;
+		var viewMode;
+		if(Q.info.isMobile){
+			viewMode = 'maximizedMobile';
+		} else viewMode = 'maximized';
+
+		var control = {};
+		control.renderScreens = function() {
+			if(WebRTCconference == null) return;
+			//_roomsMedia.innerHTML = '';
+			var roomScreens = WebRTCconference.screens();
+			var i, participantScreen;
+			for(i = 0; participantScreen = roomScreens[i]; i++) {
+				createRoomScreen(participantScreen);
+			}
+
+
+			if(Q.info.isMobile){
+
+				var roomScreens = WebRTCconference.screens();
+
+				console.log('viewMode',viewMode)
+				if(viewMode == 'tiledMobile'){
+					renderTiledScreenGridMobile();
+				} else if(viewMode == 'maximizedMobile') {
+					if(activeScreen == null && roomScreens.length == 2) {
+						var i, screen;
+						for(i = 0; screen = roomScreens[i]; i++) {
+							if(!screen.isLocal) {
+								activeScreen = screen;
+							}
+						}
+					}
+
+					if(activeScreen != null && !_roomsMedia.contains(activeScreen.screenEl)) {
+						activeScreen = roomScreens[0];
+					}
+
+					mainScreenAndThumbsGrid();
+				}
+				var roomScreens = WebRTCconference.screens();
+				var i, screen;
+				for (i = 0; screen = roomScreens[i]; i++) {
+					if(screen.videoTrack != null) screen.videoTrack.play()
+				}
+			} else {
+				//renderMinimizedScreensGrid()
+				if(viewMode == null || viewMode == 'regular'){
+					renderRegularScreensGrid();
+				} else if(viewMode == 'minimized'){
+					renderMinimizedScreensGrid();
+				} else {
+					renderMaximizedScreensGrid();
+				}
+				var roomScreens = WebRTCconference.screens();
+				var i, screen;
+				for (i = 0; screen = roomScreens[i]; i++) {
+					if(screen.videoTrack != null) screen.videoTrack.play()
+				}
+
+			}
+
+			bindScreensEvents();
+		}
+
+		/**
+		 * Make screens resizible and movable
+		 * @method bindScreensEvents
+		 */
+		var bindScreensEvents = function () {
+
+			var screens = WebRTCconference.screens();
+			var i, participantScreen;
+			for(i = 0; participantScreen = screens[i]; i++) {
+
+				var resizeTool = Q.Tool.from(participantScreen.screenEl, "Q/resize");
+				if(resizeTool == null) {
+					Q.activate(
+						Q.Tool.setUpElement(
+							participantScreen.screenEl, // or pass an existing element
+							"Q/resize",
+							{
+								movable: true,
+								active: true,
+								keepRatioBasedOnElement: participantScreen.videoTrack
+							}
+						),
+						{},
+						function () {
+							var tool = this;
+							console.log('Q/resize randomNum', tool.randomNum)
+							/*if(viewMode != 'regular')
+								tool.deactivate()
+							else tool.state.active = true;*/
+						}
+					);
+				}
+
+			}
+
+
+
+		}
+
+		var getElementSizeKeepingRatio = function (initSize, baseSize) {
+
+			//var ratio = initSize.width / initSize.height;
+			var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
+			/*var elementWidth, elementHeight;
+			if (ratio < 1) {
+				console.log('getElementSizeKeepingRatio VERTICLE');
+				elementWidth = parseInt(baseSize.height * ratio);
+				elementHeight = baseSize.height;
+
+			} else {
+				console.log('getElementSizeKeepingRatio HORIZONTAL');
+				elementHeight = parseInt( baseSize.width / ratio);
+				elementWidth = baseSize.width;
+
+			}*/
+
+
+			/*if(baseSize.height != null && elementHeight > baseSize.height) {
+				console.log('getElementSizeKeepingRatio OVERSIZE');
+
+				elementWidth = Math.round(baseSize.height * ratio);
+				elementHeight = ( elementWidth / ratio);
+
+			}*/
+
+			//return {width:elementWidth, height:elementHeight, ratio: ratio};
+
+			return { width: Math.floor(initSize.width*ratio), height: Math.floor(initSize.height*ratio)};
+		}
+
+
+		control.fitScreenToVideo = function (videoEl, screen, reset, oldSize) {
+			if(videoEl.videoHeight != null && videoEl.videoWidth != null && videoEl.videoHeight != 0 && videoEl.videoWidth != 0 && videoEl.parentNode != null) {
+
+				var videoCon = screen.videoCon;
+				if (videoEl.videoHeight > videoEl.videoWidth) {
+					if ((viewMode == 'maximized' || viewMode == 'maximizedMobile' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isVertical')) videoEl.parentNode.classList.add('isVertical');
+					videoEl.className = 'isVertical';
+				} else if (videoEl.videoWidth) {
+					if ((viewMode == 'maximized' || viewMode == 'maximizedMobile' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isHorizontal')) videoEl.parentNode.classList.add('isHorizontal');
+					videoEl.className = 'isHorizontal';
+				}
+
+			}
+
+			var resizeTool = Q.Tool.from(screen.screenEl, "Q/resize");
+			if(resizeTool != null) {
+				resizeTool.state.keepRatioBasedOnElement = videoEl;
+			}
+
+
+			if((screen.screenEl.style.width != '' || screen.screenEl.style.height != '') && !reset) return;
+			if(videoEl.videoHeight == null || videoEl.videoWidth == null) return;
+
+			var videoCon = screen.videoCon;
+			var elRect = screen.screenEl.getBoundingClientRect();
+			var nameElRect = screen.nameEl.getBoundingClientRect();
+
+			var videoElWidth;
+			var videoElHeight;
+			var ratio0 = videoEl.videoWidth / videoEl.videoHeight;
+			var elementWidth, elementHeight;
+			if (ratio0 < 1) {
+				/* if(viewMode == 'maximized')  {
+					 videoCon.style.width = '';
+					 videoCon.style.height = '';
+					 videoEl.style.width = '';
+					 videoEl.style.height = '';
+					 return;
+				 }*/
+
+				/* elementWidth = parseInt(290 * ratio0);
+				 elementHeight = 290;
+				 videoEl.style.width = '100%';
+				 videoEl.parentNode.style.flexDirection = 'column';*/
+				videoEl.style.display = '';
+
+
+				screensRendering.renderScreens();
+
+			} else {
+				/*if(viewMode == 'maximized')  {
+					videoCon.style.width = '';
+					videoCon.style.height = '';
+					videoEl.style.height = '';
+					videoEl.style.width = '';
+					return;
+				}*/
+
+				/* var mainScreenCon = document.querySelector('webrtc_tool_maximized-main-screen');
+				 var defaultWidth = 200
+				 var videoElWidth = oldSize != null && oldSize.width != null ? oldSize.width : defaultWidth;
+				 elementHeight = parseInt(videoElWidth / ratio0);
+				 elementWidth = videoElWidth;*/
+
+				// videoEl.style.width = '100%';
+				videoEl.style.display = '';
+				screensRendering.renderScreens();
+			}
+			//videoCon.style.width = elementWidth + 'px';
+			//videoCon.style.height = elementHeight + 'px';
+
+		}
+
+		/**
+		 * Create participamt's screen element that will be rendered one the page
+		 * @method createRoomScreen
+		 * @param {Object} [screen] screen object generated by webrtc WebRTCconference library
+		 */
+		var createRoomScreen = function(screen) {
+			function updateLocalScreenClasses(screen) {
+				if(screen.screensharing == true) {
+					if(!screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.add('screensharing');
+					if(screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.remove('flipped');
+				}
+
+
+				var videoInputDevides = WebRTCconference.conferenceControl.videoInputDevices();
+				var currentCameraDevice = WebRTCconference.conferenceControl.currentCameraDevice();
+				if(!screen.screensharing && currentCameraDevice == videoInputDevides[0]) {
+					console.log('updateLocalScreenClasses2')
+					if(screen.videoCon != null && !screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.add('flipped');
+					if(screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.remove('screensharing');
+				} else if(screen.videoCon) {
+					if(screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.remove('flipped');
+				}
+			}
+
+			if(screen.screenEl != null) {
+				if(screen.isLocal) updateLocalScreenClasses(screen);
+				return screen.screenEl;
+			}
+			var chatParticipantEl = document.createElement('DIV');
+			chatParticipantEl.className = 'webrtc_tool_chat-participant';
+			chatParticipantEl.dataset.participantName = screen.sid;
+			var chatParticipantVideoCon = screen.videoCon;
+			//var chatParticipantVideoCon = document.createElement("DIV");
+			//chatParticipantVideoCon.className = 'webrtc_tool_chat-participant-video Q_tool Q_resize_tool';
+			chatParticipantVideoCon.className = 'webrtc_tool_chat-participant-video';
+			var chatParticipantName = document.createElement('DIV');
+			chatParticipantName.className = 'webrtc_tool_chat-participant-name';
+			var participantNameTextCon = document.createElement("DIV");
+			participantNameTextCon.className = "webrtc_tool_participant-name-text";
+			var participantNameText = document.createElement("DIV");
+			var userId = screen.participant.identity.split('\t')[0];
+
+			Q.activate(
+				Q.Tool.setUpElement(
+					participantNameText, // or pass an existing element
+					"Users/avatar",
+					{
+						userId: userId,
+						icon: false
+					}
+				),
+				{},
+				function () {
+					setTimeout(function () {
+						screensRendering.renderScreens();
+					}, 1000);
+
+				}
+			);
+
+
+			participantNameTextCon.appendChild(participantNameText);
+			chatParticipantName.appendChild(participantNameTextCon);
+			chatParticipantEl.appendChild(chatParticipantName);
+
+			if(!Q.info.isMobile) {
+
+				var screensBtns= document.createElement("DIV");
+				screensBtns.className = "webrtc_tool_participant-screen-btns";
+				var maximizeBtn = document.createElement("BUTTON");
+				maximizeBtn.className = 'webrtc_tool_maximize-btn'
+				maximizeBtn.innerHTML = '<img src="' + Q.url('{{Q}}/img/grow.png') + '">';
+				var minimizeBtn = document.createElement("BUTTON");
+				minimizeBtn.className = 'webrtc_tool_minimize-btn';
+				minimizeBtn.style.display = 'none';
+				minimizeBtn.innerHTML = '<img src="' + Q.url('{{Q}}/img/shrink.png') + '">';
+				screensBtns.appendChild(maximizeBtn)
+				screensBtns.appendChild(minimizeBtn)
+				chatParticipantName.appendChild(screensBtns);
+
+				maximizeBtn.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					renderMaximizedScreensGrid(screen);
+				});
+
+				minimizeBtn.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					renderMinimizedScreensGrid();
+				});
+			}
+
+
+
+
+			chatParticipantEl.appendChild(chatParticipantVideoCon);
+
+
+			if(Q.info.isMobile) {
+				chatParticipantEl.addEventListener('touchstart', moveScreenFront)
+			} else chatParticipantEl.addEventListener('mousedown', moveScreenFront)
+
+			chatParticipantVideoCon.addEventListener('click', function (e) {
+				e.preventDefault();
+			});
+			if(Q.info.isMobile) {
+				window.addEventListener('touchend', function (e) {
+					var target = e.target;
+					console.log('target', target)
+					if (target == chatParticipantEl || chatParticipantEl.contains(target)) {
+						toggleViewModeByScreenClick(e);
+					}
+				}, false);
+			} else chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick);
+
+			screen.screenEl = chatParticipantEl;
+			screen.nameEl = chatParticipantName;
+
+			if(screen.isLocal) updateLocalScreenClasses(screen);
+
+			_renderedScreens.push(chatParticipantEl);
+			return chatParticipantEl;
+		}
+
+		var updateScreensButtons = function () {
+			if(Q.info.isMobile) return;
+			var screens = WebRTCconference.screens();
+
+			if(viewMode == 'regular') {
+				var i, screen;
+				for (i = 0; screen = screens[i]; i++) {
+					var maximizeBtn = screen.nameEl.querySelector('.webrtc_tool_maximize-btn');
+					var minimizeBtn = screen.nameEl.querySelector('.webrtc_tool_minimize-btn');
+					maximizeBtn.style.display = '';
+					minimizeBtn.style.display = 'none';
+				}
+
+			} else if(viewMode == 'maximized') {
+				var i, screen;
+				for (i = 0; screen = screens[i]; i++) {
+
+					var maximizeBtn = screen.nameEl.querySelector('.webrtc_tool_maximize-btn');
+					var minimizeBtn = screen.nameEl.querySelector('.webrtc_tool_minimize-btn');
+					if(screen == activeScreen) {
+						maximizeBtn.style.display = 'none';
+						minimizeBtn.style.display = '';
+					} else {
+						maximizeBtn.style.display = '';
+						minimizeBtn.style.display = 'none';
+					}
+				}
+
+			} else if(viewMode == 'minimized') {
+				var i, screen;
+				for (i = 0; screen = screens[i]; i++) {
+					var maximizeBtn = screen.nameEl.querySelector('.webrtc_tool_maximize-btn');
+					var minimizeBtn = screen.nameEl.querySelector('.webrtc_tool_minimize-btn');
+					maximizeBtn.style.display = '';
+					minimizeBtn.style.display = 'none';
+				}
+			}
+
+		}
+
+		var moveScreenFront = function (e) {
+			var screenEl = this;
+			var screens = WebRTCconference.screens();
+			var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
+			screenEl.style.zIndex = currentHighestZIndex+1;
+			console.log('moveScreenFront', screenEl, screenEl.style.zIndex)
+
+		}
+
+		var moveScreenBack = function (screenEl) {
+			var screens = WebRTCconference.screens();
+
+			var currentLowestZIndex = Math.min.apply(Math, screens.map(function(o) {
+				return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 100;
+			}).filter(function (el) {return el != null;}))
+
+			screenEl.style.zIndex = currentLowestZIndex-1;
+			console.log('moveScreenBack', screenEl, screenEl.style.zIndex)
+		}
+
+		var renderTiledScreenGridMobile = function() {
+			var roomScreens = WebRTCconference.screens();
+			if(roomScreens.length <= 1) return;
+
+			if(window.innerHeight > window.innerWidth) {
+				//_roomsMedia.className = 'webrtc_tool_tiled-vertical-grid';
+				var elements = toggleScreensClass('tiledVerticalMobile');
+				_layoutTool.animate('tiledVerticalMobile', elements, 500, true);
+			} else {
+				//_roomsMedia.className = 'webrtc_tool_tiled-horizontal-grid';
+				var elements = toggleScreensClass('tiledHorizontalMobile');
+				_layoutTool.animate('tiledHorizontalMobile', elements, 500, true);
+			}
+			activeScreen = null;
+
+		}
+
+		var renderRegularScreensGrid = function() {
+			if(Q.info.isMobile){
+				renderTiledScreenGridMobile();
+			} else {
+				renderDesktopScreensGrid();
+				updateScreensButtons();
+			}
+
+		}
+
+		/**
+		 * Render participants' screens on desktop's screen
+		 * @method renderDesktopScreensGrid
+		 */
+		var renderDesktopScreensGrid = function() {
+			if(_layoutTool == null || _controls == null) return;
+			var roomScreens = WebRTCconference.screens();
+			activeScreen = null;
+
+			var elements = toggleScreensClass('regularScreensGrid');
+
+			if(!_layoutTool.getLayoutGenerator('regularScreensGrid')) _layoutTool.setLayoutGenerator('regularScreensGrid', function (container, count) {
+				return regularScreensGrid(document.body, count, elements);
+			});
+
+			var roomScreens = WebRTCconference.screens();
+			console.log('renderDesktopScreensGrid', roomScreens, elements);
+			_layoutTool.animate('regularScreensGrid', elements, 500, true);
+		}
+
+
+		var regularScreensGrid = function (container, count, elements) {
+
+
+			var container = document.body
+
+			var containerRect = container.getBoundingClientRect()
+			var parentWidth = containerRect.width;
+			var parentHeight = containerRect.height;
+			var centerX = containerRect.width / 2;
+			var centerY = containerRect.height / 2;
+			var rectsRows = [];
+			var currentRow = [];
+
+			var spaceBetween = 10;
+
+			var roomScreens = WebRTCconference.screens();
+			var count = roomScreens.length;
+			var i, screen;
+			for (i = 0; i < count; i++) {
+				var screen = roomScreens[i];
+
+				var nameRect = screen.nameEl.getBoundingClientRect();
+				var screenElRect = screen.screenEl.getBoundingClientRect();
+				var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
+				var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+
+				var newRectSize = null;
+				if(videoWidth != 0 && videoHeight != 0) {
+					newRectSize = getElementSizeKeepingRatio({
+						width: videoWidth,
+						height: videoHeight,
+					}, {width: 250, height: 250})
+				} else if(videoWidth == 0 && videoHeight == 0 && screenElRect.width != 0 && screenElRect.height != 0 ) {
+					newRectSize = {
+						width: screen.nameEl.firstChild.scrollWidth,
+						height: screen.nameEl.scrollHeight
+					};
+				} else {
+					var rect = new DOMRect(centerX, centerY, 0, 0);
+					currentRow.push(rect);
+					continue;
+				}
+
+
+				if(videoWidth != 0 && videoHeight != 0) newRectSize.height = newRectSize.height + 50;
+
+
+				var prevRect = currentRow[currentRow.length - 1];
+				var prevRow = rectsRows[rectsRows.length - 1];
+
+				if(currentRow.length == 0) {
+					if(rectsRows.length == 0) {
+						var x = centerX - (newRectSize.width / 2);
+						var y = centerY - (newRectSize.height / 2);
+						var domRect = new DOMRect(x, y, newRectSize.width, newRectSize.height);
+						currentRow.push(domRect);
+					} else {
+						var minY = Math.min.apply(Math, rectsRows[0].map(function(r) { return r.top; }));
+						var maxY = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function(r) { return r.top + r.height;}));
+						var freeRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
+
+						if(freeRoom >= (newRectSize.height + spaceBetween))  {
+							var startXPosition = centerX - (newRectSize.width / 2);
+							var topPosition = maxY + spaceBetween;
+							var domRect = new DOMRect(centerX - (newRectSize.width / 2), topPosition, newRectSize.width, newRectSize.height);
+
+							var newMaxY = domRect.top + domRect.height;
+							var newTopPosition = centerY - ((newMaxY - minY) / 2);
+							var moveAllRectsOn = minY - newTopPosition;
+							for(var x in rectsRows) {
+
+								var row = rectsRows[x];
+								var s;
+								for(s = 0; s < row.length; s++) {
+									row[s] = new DOMRect(row[s].left, row[s].top - moveAllRectsOn, row[s].width, row[s].height);
+								}
+							}
+							var domRect = new DOMRect(centerX - (newRectSize.width / 2), topPosition - moveAllRectsOn, newRectSize.width, newRectSize.height);
+							currentRow.push(domRect);
+						}
+
+					}
+				} else {
+
+					var minX = Math.min.apply(Math, currentRow.map(function (r) {
+						return r.left;
+					}));
+					var maxX = Math.max.apply(Math, currentRow.map(function (r) {
+						return r.left + r.width;
+					}));
+					var freeRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+					if (freeRoom >= (newRectSize.width + spaceBetween * 2)) {
+						var xPosition = prevRect.left + (prevRect.width + spaceBetween);
+						var topPosition;
+						if (prevRow == null) {
+							var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+								return r.top;
+							}));
+							var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+								return r.top + r.height;
+							}));
+							topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+						} else {
+							var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+								return r.top;
+							}));
+							var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+								return r.top + r.height;
+							}));
+							topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+						}
+						var domRect = new DOMRect(prevRect.left + (prevRect.width + spaceBetween), topPosition, newRectSize.width, newRectSize.height);
+						currentRow.push(domRect);
+						var minX = Math.min.apply(Math, currentRow.map(function (r) {
+							return r.left;
+						}));
+						var maxX = Math.max.apply(Math, currentRow.map(function (r) {
+							return r.left + r.width;
+						}));
+
+						var newLeftPosition = centerX - ((maxX - minX) / 2);
+						var moveAllRectsOn = minX - newLeftPosition;
+
+						if (prevRow != null) {
+							var maxYOfAllPrevRow = Math.max.apply(Math, prevRow.map(function (r) {
+								return r.top + r.height;
+							}));
+							var minYOfAllCurRow = Math.min.apply(Math, currentRow.map(function (r) {
+								return r.top;
+							}));
+							if (minYOfAllCurRow <= maxYOfAllPrevRow) {
+								var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+									return r.top;
+								}));
+								var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+									return r.top + r.height;
+								}));
+
+								var newTop = (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween;
+								var x, screen;
+								var rowLength = currentRow.length;
+								for (x = 0; x < rowLength; x++) {
+									var topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (currentRow[x].height / 2) + (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween
+									currentRow[x] = new DOMRect(currentRow[x].left, topPosition, currentRow[x].width, currentRow[x].height);
+
+								}
+							}
+						}
+
+
+						for (var x in currentRow) {
+							var newXPosition = currentRow[x].left - moveAllRectsOn;
+							currentRow[x] = new DOMRect(newXPosition, currentRow[x].top, currentRow[x].width, currentRow[x].height);
+						}
+					}
+				}
+
+				if(i+1 == roomScreens.length || freeRoom < newRectSize.width){
+					rectsRows.push(currentRow);
+					currentRow = [];
+				}
+
+
+			}
+
+			var rects = [];
+			var i, row;
+			for(i = 0; row = rectsRows[i]; i++) {
+				rects = rects.concat(row);
+			}
+
+			return rects;
+		}
+
+		var minimizedOrMaximizedScreenGrid = function (container, count, elementToWrap, maximized) {
+
+			var elementToWrap = elementToWrap.getBoundingClientRect();
+			var containerRect = container.getBoundingClientRect();
+			var parentWidth = containerRect.width;
+			var parentHeight = containerRect.height;
+			var size = {parentWidth:parentWidth, parentHeight:parentHeight}
+			var rects = [];
+
+			var rectWidth = 90;
+			var rectHeight = 90;
+			var spaceBetween = 10;
+			var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
+			var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+
+			var startX = (size.parentWidth / 2) - (elementToWrap.width / 2);
+			var startY = (size.parentHeight - (elementToWrap.height));
+			var startingRect = new DOMRect(startX, startY-10, 200, 100);
+			var widthToTheLeft = startX;
+			var widthToTheRight = size.parentWidth - (startingRect.x + startingRect.width);
+
+			var rectsOnLeftSide = Math.floor(widthToTheLeft / (rectWidth + spaceBetween));
+			var rectsOnRightSide = Math.floor(widthToTheRight / (rectWidth + spaceBetween));
+			var rectsToTheTop = Math.floor((startingRect.height + spaceBetween) / (rectWidth + spaceBetween));
+			var totalRectsOnSides = (rectsOnLeftSide * rectsToTheTop) + (rectsOnRightSide * rectsToTheTop);
+
+			if(maximized) {
+				count = count - 1;
+
+				var videoWidth = activeScreen && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480
+				var videoHeight = activeScreen && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
+				console.log('minimizedOrMaximizedScreenGrid video', videoWidth, videoHeight)
+				var mainScreenSize = getElementSizeKeepingRatio({
+					width: videoWidth,
+					height: videoHeight
+				}, {width: parentWidth / 100 * 90, height: ((elementToWrap.top - 50) / 100 * 90)})
+				mainScreenSize.height = mainScreenSize.height + 50;
+
+
+				console.log('minimizedOrMaximizedScreenGrid mainScreenSize', mainScreenSize)
+
+				var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, (elementToWrap.top / 2) - mainScreenSize.height / 2, mainScreenSize.width, mainScreenSize.height);
+
+				rects.unshift(maximizedRect);
+			}
+			if(count < totalRectsOnSides) totalRectsOnSides = count;
+
+			var isNextNewLast = false;
+			var side = 'right';
+			var rowItemCounter = 1;
+			var leftSideCounter = 0;
+			var rightSideCounter = 0;
+			var createNewRowOnLeft = false;
+			var createNewRowOnRight = false;
+			var i;
+			for (i = 0; i < totalRectsOnSides; i++) {
+				var firstRect = new DOMRect(startingRect.x, startingRect.y, null, null)
+				var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+				var isNextNewRow  = rowItemCounter == perRow;
+
+				var x, y, prevRect;
+				if(side == "right") {
+					if(rightSideCounter >= 1) {
+						prevRect = rects[rects.length - 2];
+
+						y = prevRect.y;
+						x = prevRect.x + (rectWidth + spaceBetween);
+					} else if(createNewRowOnRight) {
+
+						prevRect = rects[rects.length - 2];
+
+						y = prevRect.y - (rectHeight + spaceBetween);
+						x = startingRect.x + (rectWidth + spaceBetween);
+						createNewRowOnRight = false;
+					} else {
+
+						y = startingRect.y
+						x = startingRect.x + (startingRect.width + spaceBetween);
+					}
+					rightSideCounter++;
+					side = 'left';
+
+					if(rightSideCounter == rectsOnRightSide) {
+						createNewRowOnRight = true;
+						rightSideCounter = 0;
+					}
+				} else if(side == "left") {
+					if(leftSideCounter >= 1 ) {
+						prevRect = rects[rects.length - 2];
+
+						y = prevRect.y;
+						x = prevRect.x - (rectWidth + spaceBetween);
+					} else if(createNewRowOnLeft) {
+
+						prevRect = rects[rects.length - 2];
+
+						y = prevRect.y - (rectHeight + spaceBetween);
+						x = startingRect.x - (rectWidth + spaceBetween);
+						createNewRowOnLeft = false;
+					} else {
+
+						y = startingRect.y;
+						x = startingRect.x - (rectWidth + spaceBetween);
+					}
+					leftSideCounter++;
+					side = 'right';
+
+					if(leftSideCounter == rectsOnLeftSide) {
+						createNewRowOnLeft = true;
+						leftSideCounter = 0;
+					}
+				}
+
+				var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+				rects.push(rect);
+
+				if(isNextNewRow) {
+					rowItemCounter = 1;
+				} else rowItemCounter++;
+				count = count - 1;
+			}
+			var minX = Math.min.apply(Math, rects.map(function(o) { return o.x; }));
+			var maxX = Math.max.apply(Math, rects.map(function(o) { return o.x+o.width; }));
+			var minY = Math.min.apply(Math, rects.map(function(o) { return o.y; }));
+
+			var rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
+			rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
+
+
+
+			var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
+			var perRow =  Math.ceil(rectsNum);
+
+			var isNextNewLast = false;
+			var rowItemCounter = 1;
+			var i;
+			for (i = 1; i <= count; i++) {
+				//var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+				var firstRect = new DOMRect(maxX - rectWidth, minY, rectWidth, rectHeight)
+				var prevRect = i > 1 ? rects[rects.length - 1] : firstRect;
+				var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+				var isNextNewRow  = rowItemCounter  == perRow;
+				isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+
+				var x,y
+				if(rowItemCounter == 1) {
+					y =  prevRect.y - (rectHeight + spaceBetween);
+					x = maxX - rectWidth;
+				} else {
+					y = prevRect.y;
+					x = prevRect.x - (rectWidth + spaceBetween);
+				}
+				var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+				rects.push(rect);
+
+				if(isNextNewRow) {
+					rowItemCounter = 1;
+				} else rowItemCounter++;
+			}
+
+			return rects;
+		}
+
+		/**
+		 * Render participants' screens on desktop's screen
+		 * @method renderMinimizedScreensGrid
+		 */
+		var renderMinimizedScreensGrid = function() {
+			console.log('renderMinimizedScreensGrid')
+			if(_layoutTool == null || _controls == null) return;
+			var roomScreens = WebRTCconference.screens();
+
+			activeScreen = null;
+
+			if(!_layoutTool.getLayoutGenerator('minimizedScreensGrid')) _layoutTool.setLayoutGenerator('minimizedScreensGrid', function (container, count) {
+				return minimizedOrMaximizedScreenGrid(document.body, count, _controls.querySelector('.webrtc_tool_conference-control'), false);
+			});
+
+			var elements = toggleScreensClass('minimizedScreensGrid');
+			_layoutTool.animate('minimizedScreensGrid', elements, 500, true);
+			console.log('renderMinimizedScreensGrid 2222')
+			updateScreensButtons();
+		}
+
+		/**
+		 * Render participants' screens on desktop's screen
+		 * @method renderMaximizedScreensGrid
+		 */
+		var renderMaximizedScreensGrid = function(screenToMaximize) {
+			if(_layoutTool == null || _controls == null) return;
+			var roomScreens = WebRTCconference.screens();
+
+			if(screenToMaximize != null) activeScreen = screenToMaximize;
+			if(screenToMaximize == null && (activeScreen == null || activeScreen.isLocal) && roomScreens.length == 2) {
+
+				var i, screen;
+				for(i = 0; screen = roomScreens[i]; i++) {
+					if(!screen.isLocal) {
+						activeScreen = screen;
+					}
+				}
+			}
+
+			if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
+
+			if(!_layoutTool.getLayoutGenerator('maximizedScreensGrid')) _layoutTool.setLayoutGenerator('maximizedScreensGrid', function (container, count) {
+				return minimizedOrMaximizedScreenGrid(document.body, count, _controls.querySelector('.webrtc_tool_conference-control'), true);
+			});
+
+			var elements = toggleScreensClass('maximizedScreensGrid');
+			_layoutTool.animate('maximizedScreensGrid', elements, 500, true);
+
+			updateScreensButtons();
+		}
+
+		function mainScreenAndThumbsGrid() {
+			//viewMode = 'maximized';
+			if(Q.info.isMobile) {
+				renderMaximizedScreensGridMobile();
+			} else {
+				renderMaximizedScreensGrid();
+			}
+		}
+
+		/**
+		 * Maximazes tapped screen to full, makes another screens small
+		 * @param screenToMaximize
+		 */
+		function renderMaximizedScreensGridMobile(screenToMaximize) {
+			console.log('renderMaximizedScreensGridMobile')
+			if(_layoutTool == null || _controls == null) return;
+			var roomScreens = WebRTCconference.screens();
+			if(screenToMaximize != null) activeScreen = screenToMaximize;
+			if(screenToMaximize == null && (activeScreen == null || activeScreen.isLocal) && roomScreens.length == 2) {
+
+				var i, screen;
+				for(i = 0; screen = roomScreens[i]; i++) {
+					if(!screen.isLocal) {
+						activeScreen = screen;
+					}
+				}
+			}
+
+			if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
+
+			console.log('renderMaximizedScreensGridMobile START')
+
+			if(window.innerHeight > window.innerWidth) {
+				var elements = toggleScreensClass('maximizedVerticalMobile');
+				_layoutTool.animate('maximizedVerticalMobile', elements, 500, true);
+			} else {
+				var elements = toggleScreensClass('maximizedHorizontalMobile');
+				_layoutTool.animate('maximizedHorizontalMobile', elements, 500, true);
+			}
+		}
+
+		var resetScreensStyle = function() {
+			var roomScreens = WebRTCconference.screens();
+			var i, roomScreen;
+			for(i = 0; roomScreen = roomScreens[i]; i++) {
+				roomScreen.screenEl.style.position = '';
+				roomScreen.screenEl.style.left = '';
+				roomScreen.screenEl.style.top = '';
+
+				roomScreen.videoCon.style.width = '';
+				roomScreen.videoCon.style.height = ''
+			}
+		}
+
+		control.toggleViewMode = function() {
+			var modes;
+			if(Q.info.isMobile)
+				modes = ['tiledMobile', 'maximizedMobile'];
+			else modes = ['regular', 'maximized'];
+
+			var i, mode, modeToSwitch;
+
+			for(i = 0; mode = modes[i]; i++){
+				if(mode == viewMode || viewMode == null) {
+					if(i != modes.length-1){
+						modeToSwitch = modes[i+1];
+					} else modeToSwitch = modes[0];
+					break;
+				}
+			};
+			viewMode = modeToSwitch;
+
+
+			console.log('toggleViewMode', viewMode)
+			if(viewMode == null || viewMode == 'regular') {
+				renderRegularScreensGrid();
+			} else if(viewMode == 'minimized') {
+				renderMinimizedScreensGrid();
+			} else if(viewMode == 'maximized') {
+				renderMaximizedScreensGrid(activeScreen);
+			} else if(viewMode == 'tiledMobile') {
+				renderTiledScreenGridMobile();
+			} else if(viewMode == 'maximizedMobile') {
+				renderMaximizedScreensGridMobile(activeScreen);
+			}
+		}
+
+		function toggleViewModeByScreenClick(e) {
+			console.log('toggleViewModeByScreenClick')
+			e.stopImmediatePropagation();
+			e.preventDefault();
+			var roomScreens = WebRTCconference.screens();
+
+			/*e.preventDefault();
+			e.stopPropagation();*/
+
+
+			var tappedScreen = roomScreens.filter(function (obj) {
+				return obj.screenEl.contains(e.target) || obj.screenEl == e.target;
+			})[0];
+
+			if(tappedScreen == null) return
+			var resizeTool = Q.Tool.from(tappedScreen.screenEl, "Q/resize");
+			var videoResizeTool = Q.Tool.from(tappedScreen.videoCon, "Q/resize");
+			if(resizeTool != null) {
+				console.log('toggleViewModeByScreenClick', resizeTool)
+				if(resizeTool.state.appliedRecently) return;
+			}
+			if(videoResizeTool != null) {
+				console.log('toggleViewModeByScreenClick2')
+				if(videoResizeTool.state.appliedRecently) return;
+			}
+
+
+			if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
+				tappedScreen.screenEl.style.zIndex = '';
+
+				console.log('BEFORE renderMaximizedScreensGrid')
+				if(Q.info.isMobile){
+					renderMaximizedScreensGridMobile(tappedScreen);
+				} else renderMaximizedScreensGrid(tappedScreen);
+				return;
+			}
+
+			activeScreen = tappedScreen;
+			control.toggleViewMode();
+			bindScreensEvents();
+			//fullScreenGrid()
+			//if(Q.info.isMobile)
+			//  renderMaximizedScreensGridMobile()
+			//else mainScreenAndThumbsGrid();
+		}
+
+		/**
+		 * Render participants' screens on mobile
+		 * @method portraitMobileScreensGrid
+		 */
+		var portraitMobileScreensGrid = function() {
+
+			var elements = [];
+			var roomScreens = WebRTCconference.screens();
+
+			var i, screen;
+			for(i = 0; screen = roomScreens[i]; i++){
+				elements.push(screen.screenEl)
+			}
+
+			_layoutTool.animate('tiledVerticalMobile', elements, 500, true);
+
+			return;
+			var roomScreens =  WebRTCconference.screens();
+
+			var prerenderedScreens = document.createDocumentFragment();
+			var num = roomScreens.length;
+			switch (num) {
+				case 1:
+
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+						rowDiv = document.createElement('DIV');
+						rowDiv.className = 'webrtc_tool_full-screen-stream';
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+						prerenderedScreens.appendChild(rowDiv);
+					}
+
+					toggleScreensGridClass('webrtc_tool_full-screen-grid');
+					break;
+				case 2:
+
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+						rowDiv = document.createElement('DIV');
+						rowDiv.className = 'webrtc_tool_full-width-row';
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+						prerenderedScreens.appendChild(rowDiv);
+					}
+					toggleScreensGridClass('webrtc_tool_two-rows-grid');
+
+					break;
+				case 3:
+
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+						if(i == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_full-width-row';
+							var screenEl = createRoomScreen(participantScreen);
+							rowDiv.appendChild(screenEl);
+							prerenderedScreens.appendChild(rowDiv)
+						} else {
+							if(x == 0) {
+								rowDiv = document.createElement('DIV');
+								rowDiv.className = 'webrtc_tool_half-width-row';
+								prerenderedScreens.appendChild(rowDiv)
+							}
+							var screenEl = createRoomScreen(participantScreen);
+							rowDiv.appendChild(screenEl);
+							if(x == 0)
+								x++;
+							else
+								x = 0;
+						}
+					}
+					toggleScreensGridClass('webrtc_tool_two-rows-grid');
+
+					break;
+				case 4:
+					var rowDiv;
+					var perRow = 2;
+					var x = 0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+
+						if(x == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_half-width-row';
+
+						}
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+						if(x == perRow-1) {
+							prerenderedScreens.appendChild(rowDiv);
+							x = 0;
+						} else x++;
+
+
+					}
+					toggleScreensGridClass('webrtc_tool_two-rows-grid');
+
+					break;
+				case 5:
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+
+						if(i == 2){
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_full-width-row';
+							prerenderedScreens.appendChild(rowDiv)
+
+							var screenEl = createRoomScreen(participantScreen);
+							rowDiv.appendChild(screenEl);
+							continue;
+						}
+
+						if(x == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_half-width-row';
+						}
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+						if(x == 1) {
+							prerenderedScreens.appendChild(rowDiv);
+							x = 0;
+						} else x++;
+
+					}
+					toggleScreensGridClass('webrtc_tool_three-rows-grid');
+
+					break;
+				case 6:
+					var rowDiv;
+					var perRow = 2;
+					var x = 0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+
+						if(x == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_half-width-row';
+
+						}
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+						if(x == perRow-1) {
+							prerenderedScreens.appendChild(rowDiv);
+							x = 0;
+						} else x++;
+
+					}
+					toggleScreensGridClass('webrtc_tool_three-rows-grid');
+
+					break;
+				default:
+					var rowDiv;
+					var x = 0;
+					var i = 0;
+
+					rowDiv = document.createElement('DIV');
+					rowDiv.className = 'webrtc_tool_main-screen-stream';
+					rowDiv.appendChild(createRoomScreen(roomScreens[0]))
+					prerenderedScreens.appendChild(rowDiv);
+					var mainScreen = rowDiv;
+
+					var videoThumbsCon = document.createElement('div');
+					videoThumbsCon.className = 'webrtc_tool_video-thumbs-wrapper';
+					var videoThumbs = document.createElement('div');
+					videoThumbs.className = 'webrtc_tool_video-thumbs-inner';
+
+					var participantScreen;
+					for(i = 1; participantScreen = roomScreens[i]; i++) {
+
+
+						rowDiv = document.createElement('DIV');
+						rowDiv.className = 'webrtc_tool_flex-row-item';
+
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+						videoThumbs.appendChild(rowDiv);
+
+
+
+					}
+					videoThumbsCon.appendChild(videoThumbs);
+					prerenderedScreens.appendChild(videoThumbsCon);
+					//roomsMedia.className = 'webrtc_tool_webrtc_tool_full-screen-grid';
+					toggleScreensGridClass('webrtc_tool_maximized-screens-grid');
+
+			}
+
+			_roomsMedia.innerHTML = '';
+			_roomsMedia.appendChild(prerenderedScreens);
+		}
+
+		function landscapeMobileScreenGrid(num) {
+
+			var elements = [];
+			var roomScreens = WebRTCconference.screens();
+
+			var i, screen;
+			for(i = 0; screen = roomScreens[i]; i++){
+				elements.push(screen.screenEl)
+			}
+
+			_layoutTool.animate('tiledHorizontalMobile', elements, 500, true);
+			return;
+			var roomScreens = WebRTCconference.screens();
+			var prerenderedScreens = document.createDocumentFragment();
+			num = roomScreens.length;
+			switch (num) {
+				case 1:
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+						rowDiv = document.createElement('DIV');
+						rowDiv.className = 'webrtc_tool_full-screen-stream';
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+						prerenderedScreens.appendChild(rowDiv);
+					}
+					_roomsMedia.className = 'webrtc_tool_full-screen-grid';
+
+					break;
+				case 2:
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+						rowDiv = document.createElement('DIV');
+						rowDiv.className = 'webrtc_tool_full-height-col';
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+						prerenderedScreens.appendChild(rowDiv);
+					}
+					_roomsMedia.className = 'webrtc_tool_two-cols-grid';
+
+					break;
+				case 3:
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+						if(i == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_full-height-col';
+							var screenEl = createRoomScreen(participantScreen);
+							rowDiv.appendChild(screenEl);
+							prerenderedScreens.appendChild(rowDiv)
+						} else {
+							if(x == 0) {
+								rowDiv = document.createElement('DIV');
+								rowDiv.className = 'webrtc_tool_half-height-col';
+								prerenderedScreens.appendChild(rowDiv)
+							}
+							var screenEl = createRoomScreen(participantScreen);
+							rowDiv.appendChild(screenEl);
+
+							if(x == 0)
+								x++;
+							else
+								x = 0;
+						}
+					}
+					_roomsMedia.className = 'webrtc_tool_two-cols-grid';
+
+					break;
+				case 4:
+					var rowDiv;
+					var perRow = 2;
+					var x = 0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+
+						if(x == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_half-height-col';
+
+						}
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+						if(x == perRow-1) {
+							prerenderedScreens.appendChild(rowDiv);
+							x = 0;
+						} else x++;
+
+
+					}
+					_roomsMedia.className = 'webrtc_tool_two-cols-grid';
+
+					break;
+				case 5:
+					var rowDiv;
+					var x=0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+
+						if(i == 2){
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_full-height-col';
+							prerenderedScreens.appendChild(rowDiv)
+
+							var screenEl = createRoomScreen(participantScreen);
+							rowDiv.appendChild(screenEl);
+							continue;
+						}
+
+						if(x == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_half-height-col';
+						}
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+						if(x == 1) {
+							prerenderedScreens.appendChild(rowDiv);
+							x = 0;
+						} else x++;
+
+					}
+					_roomsMedia.className = 'webrtc_tool_three-cols-grid';
+
+					break;
+				case 6:
+					var rowDiv;
+					var perRow = 2;
+					var x = 0;
+					var i, participantScreen;
+					for(i = 0; participantScreen = roomScreens[i]; i++) {
+
+						if(x == 0) {
+							rowDiv = document.createElement('DIV');
+							rowDiv.className = 'webrtc_tool_half-height-col';
+
+						}
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+						if(x == perRow-1) {
+							prerenderedScreens.appendChild(rowDiv);
+							x = 0;
+						} else x++;
+
+					}
+					_roomsMedia.className = 'webrtc_tool_three-cols-grid';
+
+					break;
+				default:
+					var rowDiv;
+					var x = 0;
+					var i = 0;
+
+					rowDiv = document.createElement('DIV');
+					rowDiv.className = 'webrtc_tool_main-screen-stream';
+					var screenEl = createRoomScreen(roomScreens[0]);
+					rowDiv.appendChild(screenEl)
+					prerenderedScreens.appendChild(rowDiv);
+					var mainScreen = rowDiv;
+
+					var videoThumbsCon = document.createElement('div');
+					videoThumbsCon.className = 'webrtc_tool_video-thumbs-wrapper';
+					var videoThumbs = document.createElement('div');
+					videoThumbs.className = 'webrtc_tool_video-thumbs-inner';
+
+					var participantScreen;
+					for(i = 1; participantScreen = roomScreens[i]; i++) {
+
+
+						rowDiv = document.createElement('DIV');
+						rowDiv.className = 'webrtc_tool_flex-row-item';
+
+						var screenEl = createRoomScreen(participantScreen);
+						rowDiv.appendChild(screenEl);
+
+
+						videoThumbs.appendChild(rowDiv);
+
+
+
+					}
+					videoThumbsCon.appendChild(videoThumbs);
+					prerenderedScreens.insertBefore(videoThumbsCon, mainScreen);
+					//roomsMedia.className = 'full-screen-grid';
+					_roomsMedia.className = 'webrtc_tool_maximized-screens-grid';
+
+			}
+
+			_roomsMedia.innerHTML = '';
+			_roomsMedia.appendChild(prerenderedScreens);
+		}
+
+		/**
+		 * Changes class of screens and its container depending on passed layout
+		 * @method toggleScreensClass
+		 * @param {String} [layout] layout name
+		 */
+		var toggleScreensClass = function (layout) {
+			console.log('toggleScreensClass', layout);
+			var gridClasses = [
+				'webrtc_tool_tiled-screens-grid',
+				'webrtc_tool_maximized-screens-grid',
+				'webrtc_tool_regular-screens-grid',
+			];
+			var screenClasses = [
+				'webrtc_tool_tiled-grid-screen',
+				'webrtc_tool_minimized-small-screen',
+				'webrtc_tool_maximized-main-screen',
+				'webrtc_tool_regular-screen',
+			];
+
+			var roomScreens = WebRTCconference.screens();
+
+			if(layout == 'tiledVerticalMobile' || layout == 'tiledHorizontalMobile') {
+				var screenClass = 'webrtc_tool_tiled-grid-screen';
+				var elements =  roomScreens.map(function (screen) {
+					for (var o in screenClasses) {
+						if(screenClasses[o] == screenClass) continue;
+						if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
+					}
+					if(!screen.screenEl.classList.contains(screenClass)) screen.screenEl.classList.add(screenClass);
+
+					/*if(!_roomsMedia.contains(screen.screenEl)) {
+						screen.videoCon.style.display = 'none';
+					} else {
+						screen.videoCon.style.display = '';
+					}*/
+
+					return screen.screenEl;
+				});
+
+
+				var containerClass = 'webrtc_tool_tiled-screens-grid';
+				for (var x in gridClasses) {
+					if(gridClasses[x] == containerClass) continue;
+					if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
+				}
+				_roomsMedia.classList.add(containerClass);
+
+				return elements;
+
+			}
+
+			if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') {
+				var screenClass = 'webrtc_tool_minimized-small-screen';
+				var maximizedScreenClass = 'webrtc_tool_maximized-main-screen';
+				var elements = roomScreens.map(function (screen) {
+					for (var o in screenClasses) {
+						if(screenClasses[o] == screenClass && screen != activeScreen) continue;
+						if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
+					}
+					if(!screen.screenEl.classList.contains(screenClass) && screen != activeScreen) {
+						screen.screenEl.classList.add(screenClass);
+					} else if (!screen.screenEl.classList.contains(maximizedScreenClass) && screen == activeScreen) {
+						screen.screenEl.classList.add(maximizedScreenClass);
+					}
+
+					if(!_roomsMedia.contains(screen.screenEl)) {
+						if(screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoheight == 0) screen.videoTrack.style.display = 'none';
+					}
+
+					return screen != activeScreen ? screen.screenEl : null;
+				}).filter(function (e) {
+					return e != null;
+				});
+
+				if(layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile'){
+					elements.unshift(activeScreen.screenEl)
+					moveScreenBack(activeScreen.screenEl);
+				}
+
+
+				var containerClass = 'webrtc_tool_maximized-screens-grid';
+
+				for (var x in gridClasses) {
+					if(gridClasses[x] == containerClass) continue;
+					if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
+				}
+				_roomsMedia.classList.add(containerClass);
+				return elements;
+			}
+
+			if(layout == 'regularScreensGrid') {
+				var screenClass = 'webrtc_tool_regular-screen';
+				var maximizedScreenClass = 'webrtc_tool_maximized-main-screen';
+
+				var elements = roomScreens.map(function (screen) {
+					console.log('screenClasses CURRENT', screen.screenEl.className);
+
+					for (var o in screenClasses) {
+						console.log('screenClasses', screenClasses[o], screen.screenEl.classList.contains(screenClasses[o]));
+						if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
+					}
+					console.log('screenClasses END', screen.screenEl.className);
+
+					if(!screen.screenEl.classList.contains(screenClass)) {
+						screen.screenEl.classList.add(screenClass);
+					}
+
+					if(!_roomsMedia.contains(screen.screenEl)) {
+						if(screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoheight == 0) screen.videoTrack.style.display = 'none';
+					}
+
+					return screen.screenEl;
+				})
+
+
+				var containerClass = 'webrtc_tool_regular-screens-grid';
+				for (var x in gridClasses) {
+					if(gridClasses[x] == containerClass) continue;
+					if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
+				}
+				_roomsMedia.classList.add(containerClass);
+				return elements;
+			}
+		}
+
+		/**
+		 * Change type of screens grid according to the number of participants
+		 * @method toggleScreensGridClass
+		 * @param {Object} [classToSwitch] className that defines style of grid
+		 */
+		var toggleScreensGridClass = function (classToSwitch) {
+			var gridClasses = [
+				'webrtc_tool_full-screen-grid',
+				'webrtc_tool_tiled-grid-screen',
+				'webrtc_tool_maximized-screens-grid'
+			];
+
+			for(var i in gridClasses){
+				if(_roomsMedia.classList.contains(gridClasses[i])) _roomsMedia.classList.remove(gridClasses[i])
+			}
+			_roomsMedia.classList.add(classToSwitch);
+		}
+
+		return control;
+	})()
+
+	var module = {};
+	module.screenRendering = screensRendering;
+	module.start = function(options) {
+		_options = Q.extend({}, _options, options);
+
+		var roomId = _options.roomId != null ? _options.roomId : null;
+		if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
+		if(roomId != null) _options.roomId = roomId;
+
+		var roomsMedia = document.createElement('DIV');
+		roomsMedia.id = 'webrtc_tool_room-media';
+		var dashboard = document.getElementById('dashboard_slot');
+		if(Q.info.isMobile && !Q.info.isTablet) {
+			roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
+			roomsMedia.style.top = dashboard.offsetHeight + 'px';
+		}
+
+		window.addEventListener("resize", function() {
+			setTimeout(function () {
+				screensRendering.renderScreens();
+			}, 1000)
+		});
+
+		_options.element.appendChild(roomsMedia);
+		_roomsMedia = roomsMedia;
+		Q.activate(
+			Q.Tool.setUpElement(
+				_roomsMedia, // or pass an existing element
+				"Q/layouts",
+				{}
+			),
+			{},
+			function () {
+				_layoutTool = this;
+			}
+		);
+
+
+		var createRoomStream = function (roomId, asPublisherId) {
+			Q.req("Streams/webrtc", ["stream"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+				roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
+
+				var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
+				connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
+				Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+					_roomStream = stream;
+					bindStreamsEvents(stream);
+					if(_options.mode == 'twilio') {
+						startTwilioRoom(roomId);
+					} else initWithNodeServer();
+
+				});
+
+			}, {
+				method: 'post',
+				fields: {
+					streamName: roomId,
+					publisherId: asPublisherId
+				}
+			});
+		}
+
+		var joinRoomStream = function (roomId, roomPublisherId) {
+			Q.req("Streams/webrtc", ["join"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+
+				if(msg) {
+					return Q.alert(msg);
+				}
+
+				Q.Streams.get(roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+					_roomStream = stream;
+
+					bindStreamsEvents(stream);
+					if(_options.mode == 'twilio') {
+						startTwilioRoom(roomId);
+					} else initWithNodeServer();
+
+				});
+			}, {
+				method: 'get',
+				fields: {
+					streamName: 'Streams/webrtc/' + roomId,
+					publisherId: roomPublisherId
+				}
+			});
+		}
+
+		if(roomId != null && _options.roomPublisherId != null) {
+			Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+				if(stream != null){
+					joinRoomStream(roomId, _options.roomPublisherId);
+				} else {
+					createRoomStream(roomId, _options.roomPublisherId);
+				}
+
+
+
+			});
+			return;
+		}
+
+		if(roomId == null) {
+			createRoomStream(roomId, _options.roomPublisherId);
+		} else {
+			joinRoomStream(roomId, _options.roomPublisherId);
+		}
+
+	}
+
+	module.stop = function () {
+		console.log('disconnect');
+		WebRTCconference.disconnect()
+		if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
+		if(_controls != null) {
+			var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
+			console.log('Streams/webrtc/controls');
+			if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
+			Q.Tool.remove(controlsTool);
+		}
+	};
+
+
+	return module;
+};
+
 
 /**
  * @class Streams
@@ -4547,33 +6498,33 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 	$formContent.append(
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
-		.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
-		.attr('placeholder', Q.text.Users.login.placeholders.fullName)
-		.val(firstName+(lastName ? ' ' : '')+lastName)
+			.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
+			.attr('placeholder', Q.text.Users.login.placeholders.fullName)
+			.val(firstName+(lastName ? ' ' : '')+lastName)
 	)
 	var register_form = $('<form method="post" class="Users_register_form" />')
-	.attr('action', Q.action("Streams/register"))
-	.data('form-type', 'register')
-	.append($('<div class="Streams_login_appear" />'));
+		.attr('action', Q.action("Streams/register"))
+		.data('form-type', 'register')
+		.append($('<div class="Streams_login_appear" />'));
 
 	var $b = $('<button />', {
 		"type": "submit",
 		"class": "Q_button Q_main_button Streams_login_start "
 	}).html(Q.text.Users.login.registerButton)
-	.on(Q.Pointer.touchclick, function (e) {
-		Users.submitClosestForm.apply(this, arguments);
-	}).on(Q.Pointer.click, function (e) {
-		e.preventDefault(); // prevent automatic submit on click
-	});
+		.on(Q.Pointer.touchclick, function (e) {
+			Users.submitClosestForm.apply(this, arguments);
+		}).on(Q.Pointer.click, function (e) {
+			e.preventDefault(); // prevent automatic submit on click
+		});
 
 	register_form.append($formContent)
-	.append($('<input type="hidden" name="identifier" />').val(identifier))
-	.append($('<input type="hidden" name="icon" />'))
-	.append($('<input type="hidden" name="Q.method" />').val('post'))
-	.append(
-		$('<div class="Streams_login_get_started">&nbsp;</div>')
-		.append($b)
-	).submit(Q.throttle(function (e) {
+		.append($('<input type="hidden" name="identifier" />').val(identifier))
+		.append($('<input type="hidden" name="icon" />'))
+		.append($('<input type="hidden" name="Q.method" />').val('post'))
+		.append(
+			$('<div class="Streams_login_get_started">&nbsp;</div>')
+				.append($b)
+		).submit(Q.throttle(function (e) {
 		var $this = $(this);
 		$this.removeData('cancelSubmit');
 		document.activeElement.blur();
@@ -4612,8 +6563,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 				for (var k in authResponse) {
 					register_form.append(
 						$('<input type="hidden" />')
-						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-						.attr('value', authResponse[k])
+							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+							.attr('value', authResponse[k])
 					);
 				}
 			}
@@ -4636,8 +6587,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 				for (k in authResponse) {
 					register_form.append(
 						$('<input type="hidden" />')
-						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-						.attr('value', authResponse[k])
+							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+							.attr('value', authResponse[k])
 					);
 				}
 			}
@@ -4695,15 +6646,15 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 	}
 	for (var type in messageTotals) {
 		MTotal.get.cache.each([publisherId, streamName, type],
-		function (k, v) {
-			var args = JSON.parse(k);
-			var result = v.params[1];
-			if (Q.isInteger(result)) {
-				v.params[1] = messageTotals[type];
-			} else if (Q.isPlainObject[result] && (type in result)) {
-				result[type] = messageTotals[type];
-			}
-		});
+			function (k, v) {
+				var args = JSON.parse(k);
+				var result = v.params[1];
+				if (Q.isInteger(result)) {
+					v.params[1] = messageTotals[type];
+				} else if (Q.isPlainObject[result] && (type in result)) {
+					result[type] = messageTotals[type];
+				}
+			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
 		);
@@ -4712,7 +6663,7 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 
 function updateStreamCache(stream) {
 	Streams.get.cache.each(
-		[stream.fields.publisherId, stream.fields.name], 
+		[stream.fields.publisherId, stream.fields.name],
 		function (k) {
 			var params = Streams.get.cache.get(k).params;
 			this.set(k, 0, stream, [null, stream].concat(params.slice(2)));
@@ -4727,12 +6678,12 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 	var publisherId = stream.fields.publisherId;
 	var streamName = stream.fields.name;
 	var updated = {}, cleared = [], k;
-	
+
 	// events about updated fields
 	for (k in fields) {
 		if (onlyChangedFields
-		&& fields[k] === stream.fields[k]
-		&& !Q.has(onlyChangedFields, k)) {
+			&& fields[k] === stream.fields[k]
+			&& !Q.has(onlyChangedFields, k)) {
 			continue;
 		}
 		Q.handle(
@@ -4770,12 +6721,12 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 		);
 	}
 	if (('attributes' in fields)
-	&& (!onlyChangedFields || fields.attributes != stream.fields.attributes)) {
+		&& (!onlyChangedFields || fields.attributes != stream.fields.attributes)) {
 		var attributes = JSON.parse(fields.attributes || "{}");
 		var obj;
 		updated = {};
 		cleared = [];
-		
+
 		// events about cleared attributes
 		var streamAttributes = stream.getAllAttributes();
 		for (k in streamAttributes) {
@@ -4792,7 +6743,7 @@ Stream.update = function _Streams_Stream_update(stream, fields, onlyChangedField
 			updated[k] = undefined;
 			cleared.push(k);
 		}
-		
+
 		// events about updated attributes
 		var currentAttributes = JSON.parse(stream.fields.attributes || "{}");
 		for (k in attributes) {
@@ -4857,7 +6808,7 @@ function prepareStream(stream) {
 	}
 	try {
 		stream.pendingAttributes = stream.attributes
-		= stream.fields.attributes ? JSON.parse(stream.fields.attributes) : {};
+			= stream.fields.attributes ? JSON.parse(stream.fields.attributes) : {};
 	} catch (e) {
 		stream.pendingAttributes = stream.attributes = {};
 	}
@@ -4897,14 +6848,14 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
-		cache: Q.Cache[where]("Streams.get", 1000), 
+		cache: Q.Cache[where]("Streams.get", 1000),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Q.typeOf(subject) === 'Q.Streams.Stream') {
 				return callback(subject, params);
 			}
 			if (params[0]) {
-				return callback(this, params);
+				return callback(subject, params);
 			}
 			Streams.construct(subject, {}, function () {
 				params[1] = this;
@@ -4914,7 +6865,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Streams.related = Q.getter(Streams.related, {
-		cache: Q.Cache[where]("Streams.related", 1000), 
+		cache: Q.Cache[where]("Streams.related", 1000),
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
 			if (params[0]) { // some error
@@ -4938,7 +6889,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Message.get = Q.getter(Message.get, {
-		cache: Q.Cache[where]("Streams.Message.get", 10000), 
+		cache: Q.Cache[where]("Streams.Message.get", 10000),
 		throttle: 'Streams.Message.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -4956,14 +6907,14 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			callback(params[1], params);
 		}
 	});
-	
+
 	MTotal.get = Q.getter(MTotal.get, {
 		cache: Q.Cache[where]("Streams.Message.Total.get", 10000),
 		throttle: 'Streams.Message.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
-		cache: Q.Cache[where]("Streams.Participant.get", 10000), 
+		cache: Q.Cache[where]("Streams.Participant.get", 10000),
 		throttle: 'Streams.Participant.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -4983,7 +6934,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.get = Q.getter(Avatar.get, {
-		cache: Q.Cache[where]("Streams.Avatar.get", 10000), 
+		cache: Q.Cache[where]("Streams.Avatar.get", 10000),
 		throttle: 'Streams.Avatar.get',
 		prepare: function (subject, params, callback) {
 			if (params[0]) {
@@ -4998,12 +6949,12 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 10000),
 		throttle: 'Streams.Avatar.byPrefix'
 	});
-	
+
 	Q.each([Streams.get, Streams.related], function () {
 		this.onCalled.set(_onCalledHandler, 'Streams');
 		this.onResult.set(_onResultHandler, 'Streams');
 	});
-	
+
 }, 'Streams');
 
 Q.onInit.add(function _Streams_onInit() {
@@ -5032,7 +6983,7 @@ Q.onInit.add(function _Streams_onInit() {
 		_connectSockets(true); // refresh streams
 		_notificationsToNotice();
 	}
-	
+
 	// handle resign/resume application in Cordova
 	if (Q.info.isCordova) {
 		Q.addEventListener(document, ['resign', 'pause'], _disconnectSockets);
@@ -5080,44 +7031,44 @@ Q.onInit.add(function _Streams_onInit() {
 				}
 
 				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType,
-				function () {
-					var stream = this;
+					function () {
+						var stream = this;
 
-					Streams.Avatar.get(byUserId, function (err, avatar) {
-						var templateName;
+						Streams.Avatar.get(byUserId, function (err, avatar) {
+							var templateName;
 
-						if (Q.getObject("showSubject", noticeOptions) !== false) {
-							templateName = text + content;
-						} else {
-							templateName = content;
-						}
-
-						if (!templateName) {
-							return;
-						}
-
-						Q.Template.set(templateName, templateName);
-						Q.Template.render(templateName, {
-							stream: stream,
-							avatar: avatar,
-							message: message
-						}, function (err, html) {
-							var msg;
-							if (msg = Q.firstErrorMessage(err)) {
-								return console.error(msg);
+							if (Q.getObject("showSubject", noticeOptions) !== false) {
+								templateName = text + content;
+							} else {
+								templateName = content;
 							}
 
-							if (!html) {
+							if (!templateName) {
 								return;
 							}
 
-							Q.Notices.add(Q.extend(noticeOptions, {
-								content: html,
-								handler: messageUrl || stream.url()
-							}));
+							Q.Template.set(templateName, templateName);
+							Q.Template.render(templateName, {
+								stream: stream,
+								avatar: avatar,
+								message: message
+							}, function (err, html) {
+								var msg;
+								if (msg = Q.firstErrorMessage(err)) {
+									return console.error(msg);
+								}
+
+								if (!html) {
+									return;
+								}
+
+								Q.Notices.add(Q.extend(noticeOptions, {
+									content: html,
+									handler: messageUrl || stream.url()
+								}));
+							});
 						});
 					});
-				});
 			});
 		}, 'Streams.notifications.notice');
 	}
@@ -5141,7 +7092,7 @@ Q.onInit.add(function _Streams_onInit() {
 			Users.loggedInUser.id, "Streams/user/username", "content"), key, key
 		).debounce(50, false, key).set(_updateDisplayName, 'Streams');
 	}
-	
+
 	// handle going online after being offline
 	Q.onOnline.set(function () {
 		_connectSockets(true);
@@ -5173,93 +7124,93 @@ Q.onInit.add(function _Streams_onInit() {
 				params.stream = this;
 				params.communityId = Q.Users.communityId;
 				params.communityName = Q.Users.communityName;
-				Q.Template.render(templateName, params, 
-				function(err, html) {
-					var dialog = $(html);
-					var interval;
-					Q.Dialogs.push({
-						dialog: dialog,
-						className: 'Streams_completeInvited_dialog',
-						mask: true,
-						noClose: true,
-						closeOnEsc: false, 
-						beforeClose: function () {
-							if (interval) {
-								clearInterval(interval);
-							}
-						},
-						onActivate: {'Streams.completeInvited': function _Streams_completeInvited() {
-							Streams.onInvitedDialog.handle.call(Streams, [dialog]);
-							var l = Q.text.Users.login;
-							dialog.find('#Streams_login_fullname')
-								.attr('maxlength', l.maxlengths.fullName)
-								.attr('placeholder', l.placeholders.fullName)
-								.plugin('Q/placeholders');
-							if (!Q.info.isTouchscreen) {
-								var $input = $('input', dialog).eq(0);
-								$input.plugin('Q/clickfocus');
-								interval = setInterval(function () {
-									if ($input.val() || $input[0] === document.activeElement) {
-										return clearInterval(interval);
-									}
-									$input.plugin('Q/clickfocus');
-								}, 100);
-							}
-							var $complete_form = dialog.find('form')
-							.plugin('Q/validator')
-							.submit(function(e) {
-								e.preventDefault();
-								var baseUrl = Q.baseUrl({
-									publisherId: Q.plugins.Users.loggedInUser.id,
-									streamName: "Streams/user/firstName"
-								});
-								var url = 'Streams/basic?' + $(this).serialize();
-								Q.req(url, ['data'], function _Streams_basic(err, data) {
-									var msg = Q.firstErrorMessage(err, data);
-									if (data && data.errors) {
-										$complete_form.plugin('validator', 'invalidate',
-											Q.ajaxErrors(data.errors, ['fullName'])
-										);
-										$('input', $complete_form).eq(0)
-										.plugin('Q/clickfocus');
-										return;
-									} else if (msg) {
-										return alert(msg);
-									}
-									$complete_form.plugin('Q/validator', 'reset');
-									dialog.data('Q/dialog').close();
-									var params = {
-										evenIfNotRetained: true,
-										unlessSocket: true
-									};
-									var p = new Q.Pipe(['first', 'last'], function (params) {
-										Q.handle(Streams.onInviteComplete, data, 
-											[ params.first[0], params.last[0] ]
-										);
-									});
-									Stream.refresh(Users.loggedInUser.id, 
-										'Streams/user/firstName', p.fill('first'), params
-									);
-									Stream.refresh(Users.loggedInUser.id, 
-										'Streams/user/lastName', p.fill('last'), params
-									);
-								}, {method: "post", quietly: true, baseUrl: baseUrl});
-							}).on('submit keydown', Q.debounce(function (e) {
-								if (e.type === 'keydown'
-								&& (e.keyCode || e.which) !== 13) {
-									return;
+				Q.Template.render(templateName, params,
+					function(err, html) {
+						var dialog = $(html);
+						var interval;
+						Q.Dialogs.push({
+							dialog: dialog,
+							className: 'Streams_completeInvited_dialog',
+							mask: true,
+							noClose: true,
+							closeOnEsc: false,
+							beforeClose: function () {
+								if (interval) {
+									clearInterval(interval);
 								}
-								var val = dialog.find('#Streams_login_fullname').val();
-								Streams.onInvitedUserAction.handle.call(
-									[val, dialog]
-								);
-							}, 0));
-							$('button', $complete_form).on('touchstart', function () {
-								$(this).submit();
-							});
-						}}
+							},
+							onActivate: {'Streams.completeInvited': function _Streams_completeInvited() {
+									Streams.onInvitedDialog.handle.call(Streams, [dialog]);
+									var l = Q.text.Users.login;
+									dialog.find('#Streams_login_fullname')
+										.attr('maxlength', l.maxlengths.fullName)
+										.attr('placeholder', l.placeholders.fullName)
+										.plugin('Q/placeholders');
+									if (!Q.info.isTouchscreen) {
+										var $input = $('input', dialog).eq(0);
+										$input.plugin('Q/clickfocus');
+										interval = setInterval(function () {
+											if ($input.val() || $input[0] === document.activeElement) {
+												return clearInterval(interval);
+											}
+											$input.plugin('Q/clickfocus');
+										}, 100);
+									}
+									var $complete_form = dialog.find('form')
+										.plugin('Q/validator')
+										.submit(function(e) {
+											e.preventDefault();
+											var baseUrl = Q.baseUrl({
+												publisherId: Q.plugins.Users.loggedInUser.id,
+												streamName: "Streams/user/firstName"
+											});
+											var url = 'Streams/basic?' + $(this).serialize();
+											Q.req(url, ['data'], function _Streams_basic(err, data) {
+												var msg = Q.firstErrorMessage(err, data);
+												if (data && data.errors) {
+													$complete_form.plugin('validator', 'invalidate',
+														Q.ajaxErrors(data.errors, ['fullName'])
+													);
+													$('input', $complete_form).eq(0)
+														.plugin('Q/clickfocus');
+													return;
+												} else if (msg) {
+													return alert(msg);
+												}
+												$complete_form.plugin('Q/validator', 'reset');
+												dialog.data('Q/dialog').close();
+												var params = {
+													evenIfNotRetained: true,
+													unlessSocket: true
+												};
+												var p = new Q.Pipe(['first', 'last'], function (params) {
+													Q.handle(Streams.onInviteComplete, data,
+														[ params.first[0], params.last[0] ]
+													);
+												});
+												Stream.refresh(Users.loggedInUser.id,
+													'Streams/user/firstName', p.fill('first'), params
+												);
+												Stream.refresh(Users.loggedInUser.id,
+													'Streams/user/lastName', p.fill('last'), params
+												);
+											}, {method: "post", quietly: true, baseUrl: baseUrl});
+										}).on('submit keydown', Q.debounce(function (e) {
+											if (e.type === 'keydown'
+												&& (e.keyCode || e.which) !== 13) {
+												return;
+											}
+											var val = dialog.find('#Streams_login_fullname').val();
+											Streams.onInvitedUserAction.handle.call(
+												[val, dialog]
+											);
+										}, 0));
+									$('button', $complete_form).on('touchstart', function () {
+										$(this).submit();
+									});
+								}}
+						});
 					});
-				});
 			}, true);
 		}
 	}, "Streams");
@@ -5270,11 +7221,11 @@ Q.onInit.add(function _Streams_onInit() {
 
 	// if stream was edited or removed - invalidate cache
 	Users.Socket.onEvent('Streams/remove').set(function _Streams_remove_handler (stream) {
-		Streams.get.cache.each([msg.publisherId, msg.streamName], 
-		function (k, v) {
-			this.remove(k);
-			updateAvatarCache(v.subject);
-		});
+		Streams.get.cache.each([msg.publisherId, msg.streamName],
+			function (k, v) {
+				this.remove(k);
+				updateAvatarCache(v.subject);
+			});
 	}, 'Streams');
 
 	Users.Socket.onEvent('Streams/join').set(function _Streams_join_handler (p) {
@@ -5318,7 +7269,7 @@ Q.onInit.add(function _Streams_onInit() {
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
-			
+
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (Q.typeOf(msg) === 'Q.Streams.Message')
@@ -5345,10 +7296,10 @@ Q.onInit.add(function _Streams_onInit() {
 				_updateMessageTotalsCache(msg);
 				// now update the message cache
 				_updateMessageCache(msg);
-				
+
 				var latest = MTotal.latest(msg.publisherId, msg.streamName, msg.type);
 				var params = [stream, message, messages, latest];
-				
+
 				// Handlers for below events might call message.seen() to update latest messageTotals.
 				// Otherwise, if no one updated them, synchronously, fire an event.
 				var unseen = MTotal.unseen(msg.publisherId, msg.streamName, msg.type);
@@ -5358,87 +7309,87 @@ Q.onInit.add(function _Streams_onInit() {
 						Q.handle(Streams.onMessageUnseen, Streams, params);
 					}, 0);
 				}
-				
+
 				var streamType = stream.fields.type;
 				var instructions = msg.instructions && JSON.parse(msg.instructions);
 				var updatedParticipants = true;
 				var prevState;
 				switch (msg.type) {
-				case 'Streams/join':
-					prevState = message.getInstruction('prevState');
-					_updateParticipantCache(msg, 'participating', prevState, usingCached);
-					break;
-				case 'Streams/leave':
-					prevState = message.getInstruction('prevState');
-					_updateParticipantCache(msg, 'left', prevState, usingCached);
-					break;
-				case 'Streams/changed':
-					if (Q.isEmpty(instructions.changes)) {
-						return;
-					}
-					var doRefresh = false;
-					for (var f in instructions.changes) {
-						if (instructions.changes[f] == null) {
-							// One of the extended fields has changed, but we don't
-							// know the new value. 
-							doRefresh = true;
-							break;
+					case 'Streams/join':
+						prevState = message.getInstruction('prevState');
+						_updateParticipantCache(msg, 'participating', prevState, usingCached);
+						break;
+					case 'Streams/leave':
+						prevState = message.getInstruction('prevState');
+						_updateParticipantCache(msg, 'left', prevState, usingCached);
+						break;
+					case 'Streams/changed':
+						if (Q.isEmpty(instructions.changes)) {
+							return;
 						}
-					}
-					if (doRefresh) {
-						// Refresh the stream, this will trigger Stream.update on success
-						Stream.refresh(stream.fields.publisherId, stream.fields.name, null, {
-							evenIfNotRetained: true
-						});
-					} else {
-						Stream.update(stream, instructions.changes, null);
-					}
-					break;
-				case 'Streams/progress':
-					Stream.update(stream, instructions, null);
-					break;
-				case 'Streams/relatedFrom':
-					_updateRelatedCache(msg, instructions);
-					_updateRelatedTotalsCache(msg, instructions, 'From', 1);
-					_relationHandlers(_streamRelatedFromHandlers, msg, stream, instructions);
-					break;
-				case 'Streams/relatedTo':
-					_updateRelatedCache(msg, instructions);
-					_updateRelatedTotalsCache(msg, instructions, 'To', 1);
-					_relationHandlers(_streamRelatedToHandlers, msg, stream, instructions);
-					break;
-				case 'Streams/unrelatedFrom':
-					_updateRelatedCache(msg, instructions);
-					_updateRelatedTotalsCache(msg, instructions, 'From', -1);
-					_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, instructions);
-					break;
-				case 'Streams/unrelatedTo':
-					_updateRelatedCache(msg, instructions);
-					_updateRelatedTotalsCache(msg, instructions, 'To', -1);
-					_relationHandlers(_streamUnrelatedToHandlers, msg, stream, instructions);
-					break;
-				case 'Streams/updatedRelateFrom':
-					_updateRelatedCache(msg, instructions);
-					_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, instructions);
-					break;
-				case 'Streams/updatedRelateTo':
-					_updateRelatedCache(msg, instructions);
-					_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, instructions);
-					break;
-				case 'Streams/closed':
-					Stream.update(stream, instructions, null);
-					var sf = stream.fields;
-					var Qh = Q.handle;
-					var Qgo = Q.getObject;
-					Qh(Qgo([sf.publisherId, sf.name], _streamClosedHandlers), stream, [instructions]);
-					Qh(Qgo([sf.publisherId, ''], _streamClosedHandlers), stream, [instructions]);
-					Qh(Qgo(['', sf.name], _streamClosedHandlers), stream, [instructions]);
-					Qh(Qgo(['', ''], _streamClosedHandlers), stream, [instructions]);
-					break;
-				default:
-					break;
+						var doRefresh = false;
+						for (var f in instructions.changes) {
+							if (instructions.changes[f] == null) {
+								// One of the extended fields has changed, but we don't
+								// know the new value.
+								doRefresh = true;
+								break;
+							}
+						}
+						if (doRefresh) {
+							// Refresh the stream, this will trigger Stream.update on success
+							Stream.refresh(stream.fields.publisherId, stream.fields.name, null, {
+								evenIfNotRetained: true
+							});
+						} else {
+							Stream.update(stream, instructions.changes, null);
+						}
+						break;
+					case 'Streams/progress':
+						Stream.update(stream, instructions, null);
+						break;
+					case 'Streams/relatedFrom':
+						_updateRelatedCache(msg, instructions);
+						_updateRelatedTotalsCache(msg, instructions, 'From', 1);
+						_relationHandlers(_streamRelatedFromHandlers, msg, stream, instructions);
+						break;
+					case 'Streams/relatedTo':
+						_updateRelatedCache(msg, instructions);
+						_updateRelatedTotalsCache(msg, instructions, 'To', 1);
+						_relationHandlers(_streamRelatedToHandlers, msg, stream, instructions);
+						break;
+					case 'Streams/unrelatedFrom':
+						_updateRelatedCache(msg, instructions);
+						_updateRelatedTotalsCache(msg, instructions, 'From', -1);
+						_relationHandlers(_streamUnrelatedFromHandlers, msg, stream, instructions);
+						break;
+					case 'Streams/unrelatedTo':
+						_updateRelatedCache(msg, instructions);
+						_updateRelatedTotalsCache(msg, instructions, 'To', -1);
+						_relationHandlers(_streamUnrelatedToHandlers, msg, stream, instructions);
+						break;
+					case 'Streams/updatedRelateFrom':
+						_updateRelatedCache(msg, instructions);
+						_relationHandlers(_streamUpdatedRelateFromHandlers, msg, stream, instructions);
+						break;
+					case 'Streams/updatedRelateTo':
+						_updateRelatedCache(msg, instructions);
+						_relationHandlers(_streamUpdatedRelateToHandlers, msg, stream, instructions);
+						break;
+					case 'Streams/closed':
+						Stream.update(stream, instructions, null);
+						var sf = stream.fields;
+						var Qh = Q.handle;
+						var Qgo = Q.getObject;
+						Qh(Qgo([sf.publisherId, sf.name], _streamClosedHandlers), stream, [instructions]);
+						Qh(Qgo([sf.publisherId, ''], _streamClosedHandlers), stream, [instructions]);
+						Qh(Qgo(['', sf.name], _streamClosedHandlers), stream, [instructions]);
+						Qh(Qgo(['', ''], _streamClosedHandlers), stream, [instructions]);
+						break;
+					default:
+						break;
 				}
-				
+
 				_messageHandlers[streamType] &&
 				_messageHandlers[streamType][msg.type] &&
 				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
@@ -5474,10 +7425,10 @@ Q.onInit.add(function _Streams_onInit() {
 						);
 					});
 				});
-				
+
 				if (usingCached && _messageShouldRefreshStream[msg.type]) {
 					_debouncedRefresh(
-						stream.fields.publisherId, 
+						stream.fields.publisherId,
 						stream.fields.name,
 						null,
 						{evenIfNotRetained: true}
@@ -5500,10 +7451,10 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 		}
 	}, 'Streams');
-		
+
 	Q.beforeActivate.add(_preloadedStreams, 'Streams');
 	Q.loadUrl.options.onResponse.add(_preloadedStreams, 'Streams');
-	
+
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
 
@@ -5542,60 +7493,60 @@ function _preloadedStreams(elem) {
 
 function _updateMessageCache(msg) {
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
-	function (k, v) {
-		var stream = (v && !v.params[0]) ? v.subject : null;
-		if (!stream) {
-			return;
-		}
-		var args = JSON.parse(k), extra = args[2];
-		if (extra && extra.messages) {
-			this.remove(k);
-		}
-	});
+		function (k, v) {
+			var stream = (v && !v.params[0]) ? v.subject : null;
+			if (!stream) {
+				return;
+			}
+			var args = JSON.parse(k), extra = args[2];
+			if (extra && extra.messages) {
+				this.remove(k);
+			}
+		});
 	Message.get.cache.each([msg.publisherId, msg.streamName],
-	function (k, v) {
-		var args = JSON.parse(k), ordinal = args[2];
-		if (ordinal && ordinal.max && ordinal.max < 0) {
-			this.remove(k); 
-		}
-	});
+		function (k, v) {
+			var args = JSON.parse(k), ordinal = args[2];
+			if (ordinal && ordinal.max && ordinal.max < 0) {
+				this.remove(k);
+			}
+		});
 }
 
 function _updateRelatedTotalsCache(msg, instructions, which, change) {
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
-	function (k, v) {
-		var stream = (v && !v.params[0]) ? v.subject : null;
-		if (!stream) {
-			return;
-		}
-		var f = 'related' + which + 'Totals';
-		if (stream[f] && stream[f][instructions.type]) {
-			stream[f][instructions.type] += change;
-		}
-	});
+		function (k, v) {
+			var stream = (v && !v.params[0]) ? v.subject : null;
+			if (!stream) {
+				return;
+			}
+			var f = 'related' + which + 'Totals';
+			if (stream[f] && stream[f][instructions.type]) {
+				stream[f][instructions.type] += change;
+			}
+		});
 }
 
 function _updateMessageTotalsCache(msg) {
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
-	function (k, v) {
-		var stream = (v && !v.params[0]) ? v.subject : null;
-		if (!stream) {
-			return;
-		}
-		if (stream.messageTotals && stream.messageTotals[msg.type]) {
-			++stream.messageTotals[msg.type];
-		}
-	});
+		function (k, v) {
+			var stream = (v && !v.params[0]) ? v.subject : null;
+			if (!stream) {
+				return;
+			}
+			if (stream.messageTotals && stream.messageTotals[msg.type]) {
+				++stream.messageTotals[msg.type];
+			}
+		});
 	MTotal.get.cache.each([msg.publisherId, msg.streamName, msg.type],
-	function (k, v) {
-		var args = JSON.parse(k);
-		var result = v.params[1];
-		if (Q.isInteger(result)) {
-			++v.params[1];
-		} else if (Q.isPlainObject[result] && (type in result)) {
-			++result[type];
-		}
-	});
+		function (k, v) {
+			var args = JSON.parse(k);
+			var result = v.params[1];
+			if (Q.isInteger(result)) {
+				++v.params[1];
+			} else if (Q.isPlainObject[result] && (type in result)) {
+				++result[type];
+			}
+		});
 }
 
 function _updateParticipantCache(msg, newState, prevState, usingCached) {
@@ -5605,25 +7556,25 @@ function _updateParticipantCache(msg, newState, prevState, usingCached) {
 	}
 	var sawStreams = [];
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
-	function (k, v) {
-		var stream = (v && !v.params[0]) ? v.subject : null;
-		if (!stream) {
-			return;
-		}
-		var args = JSON.parse(k);
-		var extra = args[2];
-		if (extra && extra.participants) {
-			this.remove(k);
-		}
-		if (sawStreams.indexOf(stream) >= 0) {
-			return;
-		}
-		sawStreams.push(stream);
-		if (prevState) {
-			--stream.fields[prevState+'Count'];
-		}
-		++stream.fields[newState+'Count'];
-	});
+		function (k, v) {
+			var stream = (v && !v.params[0]) ? v.subject : null;
+			if (!stream) {
+				return;
+			}
+			var args = JSON.parse(k);
+			var extra = args[2];
+			if (extra && extra.participants) {
+				this.remove(k);
+			}
+			if (sawStreams.indexOf(stream) >= 0) {
+				return;
+			}
+			sawStreams.push(stream);
+			if (prevState) {
+				--stream.fields[prevState+'Count'];
+			}
+			++stream.fields[newState+'Count'];
+		});
 }
 
 function _updateRelatedCache(msg, instructions) {
@@ -5633,7 +7584,7 @@ function _updateRelatedCache(msg, instructions) {
 			[instructions.toPublisherId, instructions.toStreamName]
 		);
 		Streams.Stream.refresh(
-			instructions.toPublisherId, instructions.toStreamName, 
+			instructions.toPublisherId, instructions.toStreamName,
 			null, { messages: true, unlessSocket: true }
 		);
 	} else if (instructions.fromPublisherId) {
@@ -5669,12 +7620,12 @@ function _scheduleUpdate() {
 	_scheduleUpdate.timeout = setTimeout(function () {
 		var now = Date.now();
 		if (_scheduleUpdate.lastTime !== undefined
-		&& now - _scheduleUpdate.lastTime - ms > _scheduleUpdate.delay) {
+			&& now - _scheduleUpdate.lastTime - ms > _scheduleUpdate.delay) {
 			// The timer was delayed for too long. Something might have changed.
 			// Streams.refresh.options.minSeconds should prevent the update
 			// from happening too frequently
 			if (!Streams.refresh.options.preventAutomatic) {
-				Streams.refresh();
+				_debouncedRefresh();
 			}
 		}
 		_scheduleUpdate.lastTime = now;
@@ -5690,5 +7641,6 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 }
 
 _scheduleUpdate.delay = 5000;
+
 
 })(Q, jQuery);

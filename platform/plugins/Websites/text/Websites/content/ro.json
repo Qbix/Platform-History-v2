@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link pentru a promova",
+                "startDate": "Data de început",
+                "startTime": "Timpul de începere",
+                "endDate": "Data de încheiere",
+                "endTime": "Ora de terminare",
+                "budget": "Buget"
+            },
+            "interests": {
+                "Title": "Filtrați după interes",
+                "FilterInterests": "Începe să dai un interes ..."
+            },
+            "Interest": "Interes",
+            "Location": "Locație"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Merge",
+            "PasteLinkHere": "Inserați aici un link"
+        }
+    }
+}

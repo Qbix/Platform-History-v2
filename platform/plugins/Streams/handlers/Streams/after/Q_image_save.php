@@ -6,7 +6,8 @@ function Streams_after_Q_image_save($params)
 	if (!$user) {
 		return;
 	}
-	$path = $subpath = $data = $save = null;
+	$path = $subpath = null;
+	$data = $save = array();
 	extract($params, EXTR_OVERWRITE);
 	if (isset(Users::$cache['iconUrlWasChanged'])
 	and (Users::$cache['iconUrlWasChanged'] === false)) {
@@ -21,12 +22,16 @@ function Streams_after_Q_image_save($params)
 	}
 	$url = $data[''];
 	$stream->icon = Q_Valid::url($url) ? $url : Q_Request::baseUrl().'/'.$url;
-	$sizes = array();
-	foreach ($save as $k => $v) {
-		$sizes[] = "$k";
+
+	if (is_array($save) && !empty($save)) {
+		$sizes = array();
+		foreach ($save as $k => $v) {
+			$sizes[] = "$k";
+		}
+		sort($sizes);
+		$stream->setAttribute('sizes', $sizes);
 	}
-	sort($sizes);
-	$stream->setAttribute('sizes', $sizes);
+
 	if (empty(Streams::$beingSavedQuery)) {
 		$stream->changed($user->id);
 	} else {

@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "İstek zamanı {{status}} hatası",
+        "canceled": "İstək ləğv edildi",
+        "500": "Daxili server səhvi",
+        "404": "Tapılmadı: {{url}}",
+        "501": "İstək müdaxilə etdi"
+    },
+    "nonce": {
+        "sameDomain": "Sessiya başa çatıb. Sayfayı yeniləyin və yenidən cəhd edin.",
+        "otherDomain": "{{baseUrl}} saytında xarici domain üçün cross-domain sorğusunu blokladı"
+    },
+    "words": {
+        "tap": "vurun",
+        "click": "klikləyin",
+        "yes": "bəli",
+        "no": "yox",
+        "Tap": "Tap",
+        "Click": "Basın",
+        "Yes": "Bəli",
+        "No": "Yox"
+    },
+    "months": {
+        "1": "yanvar",
+        "2": "Fevral",
+        "3": "mart",
+        "4": "Aprel",
+        "5": "Bilər",
+        "6": "İyun",
+        "7": "İyul",
+        "8": "Avqust",
+        "9": "Sentyabr",
+        "10": "oktyabr",
+        "11": "Noyabr",
+        "12": "Dekabr"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Mikrofonunuza girişə icazə verin",
+        "record": "Record",
+        "recording": "Qeydiyyat",
+        "remains": "qalır",
+        "maximum": "maksimum",
+        "playing": "Oynayan",
+        "recorded": "Qeyd edildi",
+        "clip": "klip",
+        "orupload": "Və ya yükləyin",
+        "usethis": "Bunu istifadə et",
+        "discard": "Rədd etmək",
+        "encoding": "Kodlaşdırma"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Təsdiq edin",
+        "ok": "Bəli",
+        "cancel": "Yox"
+    },
+    "prompt": {
+        "title": "Sövq et",
+        "ok": "Gedin"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Fayl oxuması səhvi",
+        "cameraCommands": {
+            "prompt": "Nə istəyirsiniz?",
+            "photo": "Yeni şəkil çəkin",
+            "library": "Kitabxanadan seçin"
+        },
+        "tooSmall": "Daha böyük bir şəkil seçin.",
+        "cropping": {
+            "title": "Ölçü və mövqeyi seçin",
+            "touchscreen": "Zənginləşdirmək və sürükləmək üçün barmaqlarınızdan istifadə edin",
+            "notTouchscreen": "Zənginləşdirmək və sürükləmək üçün siçanınızı və təkərdən istifadə edin"
+        }
+    }
+}

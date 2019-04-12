@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Линк за промовирање",
+                "startDate": "Почетен датум",
+                "startTime": "Започни време",
+                "endDate": "Крајна дата",
+                "endTime": "Крај време",
+                "budget": "Буџет"
+            },
+            "interests": {
+                "Title": "Филтрирај по интереси",
+                "FilterInterests": "Започнете да пишувате интерес ..."
+            },
+            "Interest": "Интерес",
+            "Location": "Локација"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Оди",
+            "PasteLinkHere": "Вметнете врска тука"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Povezava za promocijo",
+                "startDate": "Začetni datum",
+                "startTime": "Začetni čas",
+                "endDate": "Končni datum",
+                "endTime": "Čas konca",
+                "budget": "Proračun"
+            },
+            "interests": {
+                "Title": "Filtriraj po zanimanju",
+                "FilterInterests": "Začnite vnašati interes ..."
+            },
+            "Interest": "Zanimanje",
+            "Location": "Lokacija"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pojdi",
+            "PasteLinkHere": "Prilepite povezavo tukaj"
+        }
+    }
+}

@@ -8,7 +8,7 @@ $argv = $_SERVER['argv'];
 $count = count($argv);
 
 #Usage strings
-$usage = "Usage: php {$argv[0]} " . "<desired_app_name>\n";
+$usage = "Usage: php {$argv[0]} " . "[<original_app_name>] <desired_app_name>\n";
 
 $help = <<<EOT
 This script automatically does the proper steps to configure an app template into an app that you name.
@@ -27,10 +27,15 @@ if ($count < 2)
 #Read primary arguments
 $LOCAL_DIR = APP_DIR;
 
-$AppName = CONFIGURE_ORIGINAL_APP_NAME;
+if ($count > 1) {
+	$AppName = $argv[1];
+	$Desired = $argv[2];
+} else {
+	$AppName = CONFIGURE_ORIGINAL_APP_NAME;
+	$Desired = $argv[1];
+}
 $APPNAME = strtoupper($AppName);
 $appname = strtolower($AppName);
-$Desired = $argv[1];
 $DESIRED = strtoupper($Desired);
 $desired = strtolower($Desired);
 $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
@@ -65,11 +70,15 @@ do {
 	}
 } while($go_again);
 
+$maxFileSize = pow(2, 20);
 if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	$it = new RecursiveDirectoryIterator(APP_DIR);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)) continue;
 		$contents = file_get_contents($filename);
+		if (count($contents) > $maxFileSize) {
+			continue;
+		}
 		$contents = preg_replace("/$APPNAME/", $DESIRED, $contents);
 		$contents = preg_replace("/$AppName/", $Desired, $contents);
 		$contents = preg_replace("/$appname/", $desired, $contents);

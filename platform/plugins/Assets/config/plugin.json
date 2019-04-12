@@ -14,11 +14,13 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
-			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"]
+			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
+			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
+			"Communities/community/create": ["Assets/after/Community_create"]
 		},
-		"routes": {
-			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"}
+		"routes@start": {
+			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
+			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
@@ -107,7 +109,11 @@
 		"credits": {
 			"amounts": {
 				"Users/insertUser": 20,
-				"Users/inviteUser": 10
+				"Users/inviteUser": 10,
+				"createCommunity": 20
+			},
+			"earn": {
+				"acceptedInvite": 10
 			}
 		},
 		"currencies": {
@@ -147,6 +153,7 @@
 		},
 		"browsertab": {
 			"css": []
-		}
+		},
+		"canCheckPaid": ["Users/admoins", "Assets/admins"]
 	}
 }

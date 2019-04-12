@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "প্রচার লিঙ্ক",
+                "startDate": "শুরুর তারিখ",
+                "startTime": "সময় শুরু",
+                "endDate": "শেষ তারিখ",
+                "endTime": "শেষ সময়",
+                "budget": "বাজেট"
+            },
+            "interests": {
+                "Title": "সুদ দ্বারা ফিল্টার করুন",
+                "FilterInterests": "একটি আগ্রহ টাইপ শুরু করুন ..."
+            },
+            "Interest": "স্বার্থ",
+            "Location": "অবস্থান"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "যাওয়া",
+            "PasteLinkHere": "এখানে একটি লিঙ্ক পেস্ট করুন"
+        }
+    }
+}

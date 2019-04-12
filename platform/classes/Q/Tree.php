@@ -62,7 +62,7 @@ class Q_Tree
 				// $keys = '["' . implode('"]["', $key_array) . '"]';
 				// throw new Q_Exception_NotArray(compact('keys', 'key'));
 			}
-			if (!isset($key) or !array_key_exists($key, $result)) {
+			if (!isset($key) || !(is_string($key) || is_integer($key)) || !array_key_exists($key, $result)) {
 				return $default;
 			}
 			if ($i == $args_count - 2) {
@@ -329,7 +329,6 @@ class Q_Tree
 			}
 		}
 		if (!isset($arr)) {
-			echo $json; exit;
 			throw new Q_Exception_InvalidInput(array('source' => $filename));
 		}
 		if (!is_array($arr)) {
@@ -482,25 +481,12 @@ class Q_Tree
 	 */
 	protected static function merge_internal ($array1 = array(), $array2 = array())
 	{
-		$first_is_json_array = $second_is_json_array = true;
-		foreach ($array1 as $key => $value) {
-			if (!is_int($key)) {
-				$first_is_json_array = false;
-				break;
-			}
-		}
-		if ($first_is_json_array and isset($array2['replace'])) {
+		if (!Q::isAssociative($array1) and isset($array2['replace'])) {
 			return $array2['replace'];
-		}
-		foreach ($array2 as $key => $value) {
-			if (!is_int($key)) {
-				$second_is_json_array = false;
-				break;
-			}
 		}
 		$result = $array1;
 		foreach ($array2 as $key => $value) {
-			if ($second_is_json_array) {
+			if (!Q::isAssociative($array2)) {
 				// merge in values if they are not in array yet
 				// if array contains scalar values only unique values are kept
 				if (!in_array($value, $result)) {

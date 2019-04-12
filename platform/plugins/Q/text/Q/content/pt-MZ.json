@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Erro {{status}} durante a solicitação",
+        "canceled": "Pedido cancelado",
+        "500": "Erro do Servidor Interno",
+        "404": "Não encontrado: {{url}}",
+        "501": "Pedido interrompido"
+    },
+    "nonce": {
+        "sameDomain": "Sessão expirada. Atualize a página e tente novamente.",
+        "otherDomain": "Solicitação de domínio cruzado bloqueado para domínio estrangeiro em {{baseUrl}}"
+    },
+    "words": {
+        "tap": "toque",
+        "click": "clique",
+        "yes": "sim",
+        "no": "não",
+        "Tap": "Toque",
+        "Click": "Clique",
+        "Yes": "sim",
+        "No": "Não"
+    },
+    "months": {
+        "1": "janeiro",
+        "2": "fevereiro",
+        "3": "Março",
+        "4": "abril",
+        "5": "Maio",
+        "6": "Junho",
+        "7": "Julho",
+        "8": "agosto",
+        "9": "setembro",
+        "10": "Outubro",
+        "11": "novembro",
+        "12": "dezembro"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Por favor, permita o acesso ao seu microfone",
+        "record": "Registro",
+        "recording": "Gravação",
+        "remains": "permanece",
+        "maximum": "máximo",
+        "playing": "Jogando",
+        "recorded": "Gravado",
+        "clip": "grampo",
+        "orupload": "Ou carregar",
+        "usethis": "Usa isto",
+        "discard": "Descartar",
+        "encoding": "Codificação"
+    },
+    "alert": {
+        "title": "Alerta"
+    },
+    "confirm": {
+        "title": "confirme",
+        "ok": "sim",
+        "cancel": "Não"
+    },
+    "prompt": {
+        "title": "Pronto",
+        "ok": "Vai"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Erro ao ler o arquivo",
+        "cameraCommands": {
+            "prompt": "O que você gostaria de fazer?",
+            "photo": "Tire uma foto nova",
+            "library": "Selecione da biblioteca"
+        },
+        "tooSmall": "Por favor, escolha uma imagem maior.",
+        "cropping": {
+            "title": "Ajustar tamanho e posição",
+            "touchscreen": "Use os dedos para ampliar e arrastar",
+            "notTouchscreen": "Use o mouse e a roda para ampliar e arrastar"
+        }
+    }
+}

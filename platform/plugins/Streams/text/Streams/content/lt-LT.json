@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Naujas daiktas"
+    },
+    "labels": {
+        "Streams/invited": "\u017dmon\u0117s, kuriuos pakvietiau",
+        "Streams/invitedMe": "Kas mane pakviet\u0117"
+    },
+    "interests": {
+        "Filter": "K\u0105 jums patinka?",
+        "CanAdd": "Jei vis dar negalite rasti to, ko ie\u0161kote, galite prid\u0117ti nauj\u0105 susidom\u0117jim\u0105 toliau:",
+        "TrySynonyms": "Ne\u017ei\u016br\u0117kite? I\u0161bandykite kelet\u0105 sinonim\u0173.",
+        "AddUnderCategory": "Prid\u0117ti prie kategorijos ...",
+        "Other": "Kita",
+        "Unlisted": "Ne\u012ftraukta"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Prane\u0161imas pa\u017eym\u0117tas administratoriaus per\u017ei\u016brai. Palieskite dar kart\u0105, kad atlaisvintum\u0117te.",
+        "noOneSaid": "Niekas nieko sak\u0117",
+        "closeChatButton": "U\u017edaryti pokalb\u012f",
+        "closeChatConfirmTitle": "U\u017edaryti \u0161\u012f pokalb\u012f?",
+        "closeChatConfirm": "Ar tikrai norite u\u017edaryti \u0161\u012f pokalb\u012f?",
+        "closeChatConfirmYes": "Taip",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "ankstesnes pastabas"
+    },
+    "notifications": {
+        "*": "Prane\u0161imas {{& message.fields.type}} \u012f {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} sak\u0117:",
+        "Streams/changed": "Pakeitimai {{stream.fields.title}}",
+        "Streams/invite": "Jus pakviet\u0117 \u012f {{& stream.fields.title}}",
+        "Streams/announcement": "Skelbimas {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} pakeit\u0117 sraut\u0105",
+        "Streams/chat/edit": "Redaguotas pokalbio prane\u0161imas",
+        "Streams/chat/remove": "Pokalbio prane\u0161imas pa\u0161alintas",
+        "Streams/closed": "{{stream.fields.title}} buvo u\u017edaryta",
+        "Streams/task/progress": "{{stream.fields.title}} pasiekta pa\u017eanga",
+        "Streams/task/complete": "U\u017eduotis baigta: {{stream.fields.title}}",
+        "Streams/task/error": "Klaida: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: gaunamas prane\u0161imas"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} pakviet\u0117 jus \u012f {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Pasirinkite i\u0161 savo kontakt\u0173",
+            "selectFromContacts": "Pasirinkite I\u0161 adresat\u0173",
+            "photo": "Nufotografuoti",
+            "photoInstruction": "Jei asmuo, kuris nuskaito j\u016bs\u0173 QR kod\u0105, yra prie\u0161ais jus, nufotografuokite juos",
+            "to": "\u012e: {{Stream Title}}",
+            "go": "Eik",
+            "title": "Pakviesti",
+            "placeholder": "Mobiliojo telefono numeris arba el. Pa\u0161to adresas",
+            "orInvite": "Arba pakvieskite \u017emones naudodami:",
+            "QR": "{{ClickOrTap}} generuoti QR kod\u0105",
+            "QRtitle": "Nuskaitykite \u0161\u012f QR kod\u0105",
+            "byEmail": "El. Pa\u0161tas",
+            "byText": "Tekstas",
+            "byFacebook": "Facebook",
+            "byTwitter": "\u201eTwitter\u201c",
+            "QRscanned": "Jie nuskaito j\u012f!"
+        },
+        "email": {
+            "subject": "Ei, patikrinkite tai",
+            "PleaseVisitLink": "Apsilankykite \u0161ioje nuorodoje:",
+            "InvitingYou": "Kvie\u010diu jus {{title}}",
+            "HasInvitedYou": "{{displayName}} pakviet\u0117 jus \u012f {{title}}"
+        },
+        "sms": {
+            "content": "J\u016bs esate pakviestas \u012f {{title}}. Palieskite {{url}}"
+        },
+        "notice": {
+            "text": "J\u016bs esate pakviestas. {{ClickOrTap}} \u010dia priimti ir prisijungti."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} paskelb\u0117 <em>{{message.fields.type}}</em> prane\u0161im\u0105 {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Kvietimai siun\u010diami i\u0161 m\u016bs\u0173 numerio, kur\u012f j\u016bs\u0173 draugai dar neatpa\u017e\u012fsta. Atlikite greit\u0105 tekst\u0105, kad jiems b\u016bt\u0173 \u017einoma, kad kvietimas buvo gautas i\u0161 j\u016bs\u0173, pra\u0161ydamas j\u0173 spustel\u0117ti nuorod\u0105.",
+            "confirm": "Kvietimai siun\u010diami i\u0161 m\u016bs\u0173 numerio, kur\u012f j\u016bs\u0173 draugai dar neatpa\u017e\u012fsta. Ar nor\u0117tum\u0117te su\u017einoti greit\u0105 tekst\u0105, kad jie \u017einot\u0173, kad kvietimas buvo gautas i\u0161 j\u016bs\u0173, papra\u0161ydamas j\u0173 spustel\u0117ti nuorod\u0105.",
+            "check": "Ei, a\u0161 tiesiog atsiunt\u0117 jums kvietim\u0105 \u012f {{app}} program\u0105. Patikrinkite SMS ir spustel\u0117kite nuorod\u0105!"
+        },
+        "email": {
+            "alert": "Kvietimai siun\u010diami i\u0161 m\u016bs\u0173 domeno, kur\u012f j\u016bs\u0173 draugai dar neatpa\u017e\u012fsta. Atlikite greit\u0105 tekst\u0105, kad jiems b\u016bt\u0173 \u017einoma, kad kvietimas buvo gautas i\u0161 j\u016bs\u0173, pra\u0161ydamas j\u0173 spustel\u0117ti nuorod\u0105.",
+            "confirm": "Kvietimai siun\u010diami i\u0161 m\u016bs\u0173 domeno, kur\u012f j\u016bs\u0173 draugai dar neatpa\u017e\u012fsta. Ar nor\u0117tum\u0117te su\u017einoti greit\u0105 tekst\u0105, kad jie \u017einot\u0173, kad kvietimas buvo gautas i\u0161 j\u016bs\u0173, papra\u0161ydamas j\u0173 spustel\u0117ti nuorod\u0105.",
+            "subject": "Ar gavote kvietim\u0105?",
+            "body": "Ei, a\u0161 tiesiog atsiunt\u0117 jums kvietim\u0105 \u012f {{app}} program\u0105. Patikrinkite el. Pa\u0161t\u0105 ir spustel\u0117kite ten esan\u010di\u0105 nuorod\u0105!"
+        }
+    }
+}

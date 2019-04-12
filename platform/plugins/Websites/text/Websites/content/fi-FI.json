@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Linkki edist\u00e4miseksi",
+                "startDate": "Aloitusp\u00e4iv\u00e4m\u00e4\u00e4r\u00e4",
+                "startTime": "Aloitusaika",
+                "endDate": "P\u00e4\u00e4ttymisp\u00e4iv\u00e4",
+                "endTime": "Loppu aika",
+                "budget": "talousarvio"
+            },
+            "interests": {
+                "Title": "Suodata koron mukaan",
+                "FilterInterests": "Aloita kirjoittamalla kiinnostuksen ..."
+            },
+            "Interest": "Kiinnostuksen kohde",
+            "Location": "Sijainti"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Menn\u00e4",
+            "PasteLinkHere": "Liit\u00e4 linkki t\u00e4h\u00e4n"
+        }
+    }
+}

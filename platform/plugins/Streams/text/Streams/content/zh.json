@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "新物品"
+    },
+    "labels": {
+        "Streams\/invited": "我邀请的人",
+        "Streams\/invitedMe": "谁邀请了我"
+    },
+    "interests": {
+        "Filter": "你喜欢什么？",
+        "CanAdd": "如果您仍然无法找到所需内容，可以在下方添加新兴趣：",
+        "TrySynonyms": "看不到了吗？尝试一些同义词。",
+        "AddUnderCategory": "在类别下添加...",
+        "Other": "其他",
+        "Unlisted": "不公开"
+    },
+    "chat": {
+        "flaggedForAdminReview": "消息已被标记为管理员审核。再次点按即可取消标记。",
+        "noOneSaid": "没有人说过什么",
+        "closeChatButton": "关闭聊天",
+        "closeChatConfirmTitle": "关闭此聊天？",
+        "closeChatConfirm": "您确定要关闭此聊天吗？",
+        "closeChatConfirmYes": "是",
+        "closeChatConfirmNo": "没有",
+        "earlierComments": "早先的评论"
+    },
+    "notifications": {
+        "*": "消息{{& message.fields.type}}至{{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}说：",
+        "Streams\/changed": "{{stream.fields.title}}中的更改",
+        "Streams\/invite": "你被邀请到{{& stream.fields.title}}",
+        "Streams\/announcement": "{{& streams.fields.title}}中的公告",
+        "Streams\/access": "{{&call 'avatar.displayName'}}更改了流访问权限",
+        "Streams\/chat\/edit": "聊天消息已编辑",
+        "Streams\/chat\/remove": "聊天消息已删除",
+        "Streams\/closed": "{{stream.fields.title}}已被关闭",
+        "Streams\/task\/progress": "{{stream.fields.title}}取得的进展",
+        "Streams\/task\/complete": "任务已完成：{{stream.fields.title}}",
+        "Streams\/task\/error": "错误期间：{{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}：传入消息"
+    },
+    "invite": {
+        "messageContent": "{{displayName}}邀请您{{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "从联系人中选择",
+            "selectFromContacts": "选择来自联系人",
+            "photo": "拍张照片",
+            "photoInstruction": "如果扫描您的QR码的人在您面前，请拍下他们的照片",
+            "to": "收件人：{{Stream Title}}",
+            "go": "走",
+            "title": "邀请",
+            "placeholder": "手机号码或电子邮件地址",
+            "orInvite": "或者通过使用以下方式邀请",
+            "QR": "{{ClickOrTap}}生成QR码",
+            "QRtitle": "扫描此二维码",
+            "byEmail": "电子邮件",
+            "byText": "文本",
+            "byFacebook": "Facebook的",
+            "byTwitter": "推特",
+            "QRscanned": "他们扫描了一下！"
+        },
+        "email": {
+            "subject": "嘿，看看这个",
+            "PleaseVisitLink": "请访问以下链接：",
+            "InvitingYou": "我邀请你{{title}}",
+            "HasInvitedYou": "{{displayName}}已邀请您{{title}}"
+        },
+        "sms": {
+            "content": "您已受邀{{title}}。请点按{{url}}"
+        },
+        "notice": {
+            "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}}向{{stream.fields.title}}发布了<em>{{message.fields.type}}条<\/em>消息"
+        },
+        "text": {
+            "body": "{{& url}}中的{{& call 'avatar.displayName'}}：{{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "邀请是从我们的号码发送的，您的朋友尚未认出。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
+            "confirm": "邀请是从我们的号码发送的，您的朋友尚未认出。您想跟进一个快速文本，让他们知道您的邀请，请他们点击链接。",
+            "check": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的短信，然后单击链接！"
+        },
+        "email": {
+            "alert": "邀请是从我们的域发送的，您的朋友尚未识别。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
+            "confirm": "邀请是从我们的域发送的，您的朋友尚未识别。您想跟进一个快速文本，让他们知道您的邀请，请他们点击链接。",
+            "subject": "你有邀请吗？",
+            "body": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的电子邮件，然后单击其中的链接！"
+        }
+    }
+}

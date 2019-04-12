@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Nou article"
+    },
+    "labels": {
+        "Streams/invited": "Persones que he convidat",
+        "Streams/invitedMe": "Qui em va convidar"
+    },
+    "interests": {
+        "Filter": "Qu\u00e8 us agrada?",
+        "CanAdd": "Si encara no trobeu el que busqueu, podeu afegir un nou inter\u00e8s a continuaci\u00f3:",
+        "TrySynonyms": "No ho veieu? Proveu alguns sin\u00f2nims.",
+        "AddUnderCategory": "Afegeix a la categoria ...",
+        "Other": "Altres",
+        "Unlisted": "Sense llista"
+    },
+    "chat": {
+        "flaggedForAdminReview": "S&#39;ha marcat el missatge per a la revisi\u00f3 de l\u2019administrador. Toqueu de nou per desfer-se.",
+        "noOneSaid": "Ning\u00fa ha dit res",
+        "closeChatButton": "Tanca el xat",
+        "closeChatConfirmTitle": "Tanca aquest xat?",
+        "closeChatConfirm": "Esteu segur que voleu tancar aquest xat?",
+        "closeChatConfirmYes": "S\u00ed",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "comentaris anteriors"
+    },
+    "notifications": {
+        "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} va dir:",
+        "Streams/changed": "Canvis a {{stream.fields.title}}",
+        "Streams/invite": "Us han convidat a {{& stream.fields.title}}",
+        "Streams/announcement": "Anunci en {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} ha canviat l\u2019acc\u00e9s al flux",
+        "Streams/chat/edit": "S&#39;ha editat un missatge de xat",
+        "Streams/chat/remove": "S&#39;ha eliminat el missatge de xat",
+        "Streams/closed": "{{stream.fields.title}} s&#39;ha tancat",
+        "Streams/task/progress": "Progr\u00e9s realitzat a {{stream.fields.title}}",
+        "Streams/task/complete": "Tasca completada: {{stream.fields.title}}",
+        "Streams/task/error": "Error durant: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Missatge entrant"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Trieu un dels vostres contactes",
+            "selectFromContacts": "Seleccioneu De contactes",
+            "photo": "Fer una foto",
+            "photoInstruction": "Si la persona que va escanejar el seu codi QR \u00e9s davant vostre, feu una foto",
+            "to": "A: {{Stream Title}}",
+            "go": "Vagi",
+            "title": "Convidar",
+            "placeholder": "N\u00famero de m\u00f2bil o adre\u00e7a de correu electr\u00f2nic",
+            "orInvite": "O convideu persones utilitzant:",
+            "QR": "{{ClickOrTap}} per generar codi QR",
+            "QRtitle": "Escaneja aquest codi QR",
+            "byEmail": "Correu electr\u00f2nic",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "El van escanejar!"
+        },
+        "email": {
+            "subject": "Hola, comprova-ho",
+            "PleaseVisitLink": "Visiteu l\u2019enlla\u00e7 seg\u00fcent:",
+            "InvitingYou": "Us convido a {{title}}",
+            "HasInvitedYou": "{{displayName}} t&#39;ha convidat a {{title}}"
+        },
+        "sms": {
+            "content": "Heu estat convidat a {{title}}. Toqueu {{url}}"
+        },
+        "notice": {
+            "text": "Has estat convidat. {{ClickOrTap}} aqu\u00ed per acceptar i unir-se."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ha publicat un missatge <em>{{message.fields.type}}</em> a {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} a {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Les invitacions s&#39;envien des del nostre n\u00famero, que els teus amics encara no reconeixen. Feu un seguiment amb un text r\u00e0pid per fer-los saber que la vostra invitaci\u00f3 va venir, demanant-los que facin clic a l&#39;enlla\u00e7.",
+            "confirm": "Les invitacions s&#39;envien des del nostre n\u00famero, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text r\u00e0pid per fer-los saber que la vostra invitaci\u00f3 va venir, demanant-los que faci clic a l\u2019enlla\u00e7.",
+            "check": "Hola, acabo de enviar-te una invitaci\u00f3 a l&#39;aplicaci\u00f3 {{app}}. Comproveu els vostres sms i feu clic a l\u2019enlla\u00e7."
+        },
+        "email": {
+            "alert": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Feu un seguiment amb un text r\u00e0pid per fer-los saber que la vostra invitaci\u00f3 va venir, demanant-los que facin clic a l&#39;enlla\u00e7.",
+            "confirm": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text r\u00e0pid per fer-los saber que la vostra invitaci\u00f3 va venir, demanant-los que faci clic a l\u2019enlla\u00e7.",
+            "subject": "Heu rebut una invitaci\u00f3?",
+            "body": "Hola, acabo de enviar-te una invitaci\u00f3 a l&#39;aplicaci\u00f3 {{app}}. Comproveu el vostre correu electr\u00f2nic i feu clic a l\u2019enlla\u00e7 all\u00e0."
+        }
+    }
+}

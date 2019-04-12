@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link reklaamimiseks",
+                "startDate": "Algus kuupäev",
+                "startTime": "Algusaeg",
+                "endDate": "Lõppkuupäev",
+                "endTime": "Lõpuaeg",
+                "budget": "Eelarve"
+            },
+            "interests": {
+                "Title": "Filtreeri intressi järgi",
+                "FilterInterests": "Alustage huvi kirjutamist ..."
+            },
+            "Interest": "Huvi",
+            "Location": "Asukoht"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mine",
+            "PasteLinkHere": "Kleebi link siia"
+        }
+    }
+}

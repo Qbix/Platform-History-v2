@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "დააგროვეთ გადახდა"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: დამუშავებული {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "გმადლობთ, რომ გადაიხადოთ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{9}} {{plan.title}}",
+        "YouSubscribedTo": "თქვენ გამოწერილი ხართ {{plan.title}}"
+    }
+}

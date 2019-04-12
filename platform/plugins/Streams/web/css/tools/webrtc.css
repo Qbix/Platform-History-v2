@@ -1,0 +1,1390 @@
+#page, #content_slot, .Streams_webrtc_tool {
+    overflow: visible;
+}
+#content_slot {
+    padding: 0;
+}
+.Streams_webrtc_tool {
+    height: 100%;
+}
+#webrtc_tool_room-media {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+
+.webrtc_tool_desktop-screen .Streams_webrtc_controls_tool {
+    display: flex;
+    justify-content: center;
+    bottom:0;
+    position: fixed;
+    width:100%;
+    z-index: 9999999;
+}
+
+.webrtc_tool_mobile-screen .Streams_webrtc_controls_tool {
+    display: flex;
+    justify-content: center;
+    z-index: 999999;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.webrtc_tool_hidden {
+    display: none !important;
+}
+
+#main-webrtc-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+#main-webrtc-container.active {
+    display: flex;
+}
+
+#join-form-view {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#join-form-view.active {
+    display: flex;
+}
+
+#room-controls {
+    display: none;
+    z-index: 3;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+}
+
+
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control{
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    bottom:0;
+    position: fixed;
+    z-index: 9999999;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner{
+    display: flex;
+    height: 50px;
+    max-width: 640px;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner > div{
+    margin-right: 10px;
+    height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner > div:last-child{
+    margin-right: 0;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .additional-menu-con{
+    display: flex;
+    align-items: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .additional-menu-con svg{
+    height: 35px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner svg{
+    height: 50px;
+    pointer-events: all;
+}
+
+
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_camera-control-btn {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_manage-users-btn-btn {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+}
+.webrtc_tool_toggle-view-mode {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom:10px;
+    right:10px;
+    background:rgba(0, 0, 0, 0.5);
+    padding:5px;
+    color:white;
+    border-radius:4px;
+    z-index: 99999999999;
+}
+
+#button-leave {
+    display: block;
+    background: none;
+    border: 1px solid red;
+    border-radius: 3px;
+    color: red;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+}
+
+
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control{
+    padding: 5px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    z-index: 9999999999999999;
+    position: relative;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner{
+    display: flex;
+    height: 45px;
+    max-width: 640px;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner > div{
+    margin-right: 10px;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner > div:last-child{
+    margin-right: 0;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .additional-menu-con{
+    display: flex;
+    align-items: center;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .additional-menu-con svg{
+    height: 45px;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner svg{
+    height: 45px;
+}
+
+
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_camera-control-btn {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_manage-users-btn-btn {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation #webrtc_tool_room-media {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+}
+
+.webrtc_tool_mobile-screen.Q_horizontalOrientation #webrtc_tool_room-media {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: black;
+    flex: 1;
+    min-height: 0;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background: black;
+    position:relative;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_full-screen-stream {
+    width: 100vw;
+    height: 100%;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_full-width-row {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_full-height-col {
+
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_half-width-row {
+    display: flex;
+    width: 100vw;
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_two-rows-grid .webrtc_tool_full-width-row,
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_two-rows-grid .webrtc_tool_half-width-row {
+    height:50%;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_full-width-row,
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_half-width-row {
+    height:33.3333333333%;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_full-height-col,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_half-height-col {
+    width:50%;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_three-cols-grid .webrtc_tool_full-height-col,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_three-cols-grid .webrtc_tool_half-height-col {
+    width:33.3333333333%;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_video-thumbs-wrapper {
+    height: 99px;
+    max-width: 100vw;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    position: absolute;
+    bottom: 66px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 999999999;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_video-thumbs-wrapper {
+    max-height: 100%;
+    width: 24vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    right: 5px;
+    bottom: 66px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 999999999;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-inner{
+    height: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-inner{
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant{
+    position: static;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant-video video{
+    max-width: 100%;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_full-screen-stream {
+    /*width:auto;*/
+}
+.webrtc_tool_mobile-screen .video-thumbs-row {
+    width:100%;
+    height:100%;
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_flex-row-item{
+    display: inline-block;
+    width:100%;
+    height:100px;
+    margin-bottom: 5px;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_flex-row-item{
+    display: block;
+    width:100px;
+    height:100px;
+    margin-right:5px;
+}
+
+.Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+    transform: none;
+    -webkit-transform:none;
+    -moz-transform:none;
+}
+.Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+    transform: none;
+    -webkit-transform:none;
+    -moz-transform:none;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen.webrtc_tool_chat-participant {
+    width:100%;
+    height:100%;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen.webrtc_tool_chat-participant {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+    flex: 1;
+    position: absolute;
+    border-radius: 0;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_full-width-row .webrtc_tool_chat-participant {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_full-height-col .webrtc_tool_chat-participant {
+    height: 100%;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_half-width-row .webrtc_tool_chat-participant {
+    width:50%;
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_half-height-col .webrtc_tool_chat-participant {
+    height:50%;
+}
+
+.webrtc_tool_mobile-screen .app-view .view-header {
+    display: flex;
+    height: 55px;
+    border-bottom: 1px solid #cccccc;
+}
+.webrtc_tool_mobile-screen .app-view .back-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 15px;
+}
+.webrtc_tool_mobile-screen .app-view .back-arrow svg{
+    height: 25px;
+}
+.webrtc_tool_mobile-screen .app-view .view-title {
+    display: flex;
+    align-items: center;
+}
+.webrtc_tool_mobile-screen .app-view .view-title span{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+/*participants list*/
+.webrtc_tool_mobile-screen #participants-list-view {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+.webrtc_tool_mobile-screen #participants-list-view.active {
+    display:block;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list {
+    margin:0;
+    padding: 0;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list li {
+    display: flex;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+    width:100%;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control {
+    display: flex;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control div {
+    margin-right:10px;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control svg{
+    height:50px;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-video-btn.webrtc_tool_isLocal .camera-icon path,
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-audio-btn.webrtc_tool_isLocal .microphone-icon path {
+    fill: #C12337;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity{
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity span{
+    font-weight: bold;
+    color: #000;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_popup-box {
+    display: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background:white;
+
+    position: absolute;
+    bottom: 170%;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background: white;
+    width: 90vw;
+    z-index: 9999999999;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box {
+    display: block;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0);
+    border-top-color: #ffffff;
+    border-width: 20px;
+    margin-left: -20px;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box ul li:last-child{
+    border: 0;
+}
+
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list li {
+    display: flex;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control {
+    display: flex;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control div {
+    margin-right: 10px;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control svg {
+    height: 50px;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-video-btn.webrtc_tool_isLocal .camera-icon path,
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-audio-btn.webrtc_tool_isLocal .microphone-icon path {
+    fill: #C12337;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity span {
+    font-weight: bold;
+}
+
+
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant,
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_chat-participant {
+    display: block;
+    background-color: lightgrey;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant {
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 0 40px 0 rgba(0,0,0,0.5);
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant {
+
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant {
+
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen.webrtc_tool_chat-participant {
+    overflow: hidden;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_two-rows-grid .webrtc_tool_chat-participant-video,
+.webrtc_tool_mobile-screen .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_chat-participant-video,
+.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant-video,
+.webrtc_tool_mobile-screen .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant-video,
+.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video,
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    height: 100%;
+    overflow: hidden;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video.isHorizontal {
+    justify-content: normal;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_two-rows-grid .webrtc_tool_chat-participant-video video,
+.webrtc_tool_mobile-screen .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_chat-participant-video video,
+.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant-video video,
+.webrtc_tool_mobile-screen .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant-video video,
+.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video video {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    position: absolute;
+    height: 100%
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    position: absolute;
+    height: 100%
+}
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isVertical {
+    position: absolute;
+    width: 100%
+}
+.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
+    height: 100%;
+    width:100%;
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isVertical {
+    /*flex-direction: row;*/
+}
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isVertical {
+    /*flex-direction: column;*/
+}
+
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+    width: 100%;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+    height: 100%;
+    position: absolute;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    height: 100%;
+    position: absolute;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isVertical {
+    width: 100%;
+    position: absolute;
+}
+/*
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-video video.isVertical{
+    width: 100%;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-video video.isHorizontal{
+    height: 100%;
+}*/
+
+
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name {
+    padding: 8px 5px 8px 10px;
+    /* transform: translateY(100%); */
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .Users_avatar_name{
+    margin-left:10px;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    white-space: nowrap
+}
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+/*desktop version*/
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    overflow: hidden;
+    max-height:100vh;
+    max-width:100vw;
+    cursor: pointer;
+    /* margin: 15px; */
+    /* overflow: hidden; */
+    position: absolute;
+    z-index: 1000;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    /* z-index: 1; */
+    /* border: 5px solid transparent; */
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* max-height: 82%; */
+    z-index: 1;
+    /* border: 5px solid transparent; */
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
+    padding: 8px 5px 8px 10px;
+    /* transform: translateY(100%);
+    position: absolute;*/
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+
+.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_flex-row-item {
+    display: inline-block;
+    width: 176px;
+    height: 99px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    background-color: #fff;
+    height: auto;
+    width: auto;
+    box-shadow: 0 0 40px 0 rgba(0,0,0,0.5);
+    overflow: hidden;
+    /*margin: 15px;*/
+}
+.webrtc_tool_desktop-screen .desktop-screen-grid .webrtc_tool_chat-participant:hover {
+    cursor:grab;
+}
+.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_flex-row-item .webrtc_tool_chat-participant {
+    height: 100%;
+    width: auto;
+    margin: 0;
+    border-radius: 0;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*max-height: 82%;*/
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex: 1;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant-video {
+    max-height: 100%;
+}
+.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_chat-participant-video {
+    height: 100%;
+    max-height: 100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video {
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isVertical {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isHorizontal {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal{
+    width: 100%;
+    height: auto;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    width:100%;
+    height: auto;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isVertical {
+    height: 100%;
+    width: auto;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
+    width:100%;
+    height: auto;
+    position: absolute;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 8px 5px 8px 10px;
+    background: white;
+    color:black;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 5px;
+    background: white;
+    color:black;
+    font-size: 14px;
+    height: 50px;
+    width: auto;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
+    height: auto;
+    padding: 5px 5px 7px 8px;
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: white;
+    color: black;
+    position: absolute;
+    font-size: 14px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
+    display: flex;
+    align-items: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns button{
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    height: 30px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
+    display: none;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
+    height: 100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
+    height: 100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant-name {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_chat-participant-name {
+    width: 100%;
+    padding: 3px 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+/*minimized/screen grid*/
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_video-thumbs-wrapper {
+    position: static;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_video-thumbs-row .webrtc_tool_flex-row-item{
+    display: inline-block;
+    width:176px;
+    height:99px;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_chat-participant {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: absolute;
+    /* margin: 15px; */
+    /* overflow: hidden; */
+    position: relative;
+    margin-left:10px;
+    /* z-index: 1; */
+    /* border: 5px solid transparent; */
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* max-height: 82%; */
+    z-index: 1;
+    /* border: 5px solid transparent; */
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_chat-participant-name {
+    padding: 8px 5px 8px 10px;
+    /* transform: translateY(100%);
+    position: absolute;*/
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: white;
+    color: black;
+}
+
+
+.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_video-thumbs-row .webrtc_tool_flex-row-item {
+    display: inline-block;
+    width: 176px;
+    height: 99px;
+}
+
+
+
+
+/*desktop main screen and thumbs grid*/
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper {
+    overflow-y: auto;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-inner {
+    overflow: hidden;
+    height:80px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right,
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left {
+    height:80px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left {
+    text-align: right;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right {
+   text-align: left;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_flex-row-item {
+    display: block;
+    width: 105px;
+    height: 80px;
+    display: inline-block;
+    /*position:absolute;*/
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left .webrtc_tool_flex-row-item{
+    margin-right:5px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left .webrtc_tool_flex-row-item:last-child{
+    margin-right:0;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right .webrtc_tool_flex-row-item{
+    margin-left: 5px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right .webrtc_tool_flex-row-item:first-child{
+    margin-left: 0;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_flex-row-item.loudest-screen-btn-con {
+    height: auto;
+    text-align: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant{
+    display: flex;
+    background-color: #fff;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+    width:auto;
+    height:auto;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant{
+   /* position: absolute;*/
+    height: 100%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream .webrtc_tool_chat-participant {
+    height: auto;
+    position: absolute;
+    height: 95%;
+}
+
+
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-name {
+    /* transform: translateY(100%); */
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 5px;
+    color: black;
+    font-size: 14px;
+    height: 50px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
+    position: static;
+}
+/* participants dialog */
+.dialog-participants-con {
+    padding-top: 20px;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list {
+    padding: 0;
+    margin: 0;
+    min-width: 400px;
+    background: white;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control .webrtc_tool_popup-box {
+    display: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background:white;
+    bottom: 150%;
+    left: -175px;
+    width:400px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box {
+    display: block;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box::after{
+    content: "";
+    position: absolute;
+    top: 99%;
+    left: 50%;
+    margin-left: -20px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list li {
+    display: flex;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control {
+    display: flex;
+    min-width: 120px;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control div {
+    margin-right: 10px;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control svg {
+    height: 50px;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-video-btn.webrtc_tool_isLocal .camera-icon path,
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-audio-btn.webrtc_tool_isLocal .microphone-icon path {
+    fill: #C12337;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_tool {
+    display: flex;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_tool .Users_avatar_name {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity span {
+    font-weight: bold;
+}
+
+
+.notice-container {
+    position:absolute;
+    right:0;
+    top:20px;
+    background: #18aa8d;
+    padding: 10px 20px 10px 10px;
+    color: white;
+    transition-timing-function: ease-in;
+    transition-property: opacity;
+    transition: 0.2s;
+    opacity: 0;
+    z-index:9999999;
+    transform: scaleX(0);
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.notice-container.shown {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.dialog-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9000000;
+}
+.dialog-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999990;
+    overflow: hidden;
+}
+.dialog-box {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    position: relative;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 4px;
+    z-index: 999999;
+    overflow-y: scroll;
+    background-color: white;
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+.dialog-box.select-camera {
+    padding: 0;
+}
+.dialog-box .close-dialog-sign {
+    position: absolute;
+    color: black;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+}
+.dialog-box .close-dialog-sign:before {
+    content: "\02715";
+    color: white;
+}
+.dialog-box .dialog-inner {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.dialog-box h3.dialog-header {
+    margin: 0;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #ccc;
+    color: white;
+    /* background: #ccc;
+     background: #4e5adc;
+     background: -moz-linear-gradient(left, #4e5adc 1%, #146ada 100%);
+     background: -webkit-linear-gradient(left, #4e5adc 1%,#146ada 100%);
+     background: linear-gradient(to right, #4e5adc 1%,#146ada 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e5adc', endColorstr='#146ada',GradientType=1 );*/
+    background: #18aa8d;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device,
+.dialog-box .webrtc_tool_choose-device {
+    padding: 15px;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device h4,
+.dialog-box .webrtc_tool_choose-device h4{
+    margin: 10px 0;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device select,
+.dialog-box .webrtc_tool_choose-device select{
+    display: block;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device label,
+.dialog-box .webrtc_tool_choose-device label{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    padding-top: 2px;
+    margin-top: 7px;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio,
+.dialog-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio{
+    color: #a7a7a7;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device input,
+.dialog-box .webrtc_tool_choose-device input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark,
+.dialog-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg path,
+.dialog-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg path {
+    fill:#8c8c8c;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device input:checked ~ .webrtc_tool_radio-checkmark svg path,
+.dialog-box .webrtc_tool_choose-device input:checked ~ .webrtc_tool_radio-checkmark svg path {
+    fill:green;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg,
+.dialog-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg{
+    height: 25px;
+}
+.webrtc_tool_popup-box .dialog-btns-group,
+.dialog-box .dialog-btns-group {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.webrtc_tool_popup-box .button,
+.dialog-box .button{
+    border-radius: 5px;
+    border: solid 1px #2aa48b;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.webrtc_tool_popup-box .button[disabled],
+.dialog-box .button[disabled]{
+    opacity: 0.6;
+}
+.webrtc_tool_popup-box .button.btn-blue,
+.dialog-box .button.btn-blue{
+    box-shadow: 0 7px 20px -5px #b2b4d1;
+    /*background: #4e5adc;
+    background: -moz-linear-gradient(left, #4e5adc 1%, #146ada 100%);
+    background: -webkit-linear-gradient(left, #4e5adc 1%, #146ada 100%);
+    background: linear-gradient(to right, #4e5adc 1%, #146ada 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e5adc', endColorstr='#146ada', GradientType=1);*/
+    background: #18aa8d;
+}
+.webrtc_tool_popup-box .button.btn-gray,
+.dialog-box .button.btn-gray {
+    background: -moz-linear-gradient(left, #e2e2e2 1%,#f3f3f3 100%);
+    background: -webkit-linear-gradient(left, #e2e2e2 1%,#f3f3f3 100%);
+    background: linear-gradient(to right, #e2e2e2 1%,#f3f3f3 100%);
+    color: #333;
+    box-shadow: 0 7px 20px -5px #b2b4d1;
+    border: 1px solid #e4e4e4;
+}
+.webrtc_tool_popup-box .dialog-btns-group button:first-child,
+.dialog-box .dialog-btns-group button:first-child{
+    margin-right: 20px;
+}
+
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con button{
+    position: absolute;
+    margin: 0;
+}
+
+.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con {
+    height: auto;
+    text-align: center;
+}
+
+.loudest-screen-btn {
+    border-radius: 5px;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background: -moz-linear-gradient(left, #e2e2e2 1%,#f3f3f3 100%);
+    background: -webkit-linear-gradient(left, #e2e2e2 1%,#f3f3f3 100%);
+    background: linear-gradient(to right, #e2e2e2 1%,#f3f3f3 100%);
+    color: #333;
+    box-shadow: 0 7px 20px -5px #b2b4d1;
+    border: 1px solid #e4e4e4;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.webrtc_tool_disconnect-btn,
+.Q_touchscreen .Q_button.webrtc_tool_disconnect-btn {
+    border: 0;
+    margin: 15px;
+    padding: 7px 10px 7px 10px;
+    float: left;
+    display: flex;
+    align-items: center;
+    background: #c12236;
+}
+.webrtc_tool_disconnect-btn span {
+    margin-left:10px;
+}
+
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_disconnect-btn svg,
+.webrtc_tool_disconnect-btn svg{
+    height: 30px;
+    width: 30px;
+}
+
+.webrtc_tool_resize-handler {
+    position: absolute;
+    bottom: 0;
+    cursor: nesw-resize;
+    width: 40px;
+    height: 40px;
+    z-index: 3;
+}
+
+.flipped video{
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
+}

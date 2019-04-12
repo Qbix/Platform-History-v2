@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Klaida {{status}} užklausos metu",
+        "canceled": "Prašymas atšauktas",
+        "500": "Vidinė serverio klaida",
+        "404": "Nerasta: {{url}}",
+        "501": "Prašymas nutrauktas"
+    },
+    "nonce": {
+        "sameDomain": "Sesija baigėsi. Atnaujinkite puslapį ir bandykite dar kartą.",
+        "otherDomain": "Užblokuotas tarp domenų prašymas užsienio domene {{baseUrl}}"
+    },
+    "words": {
+        "tap": "bakstelėkite",
+        "click": "spustelėkite",
+        "yes": "taip",
+        "no": "ne",
+        "Tap": "Bakstelėkite",
+        "Click": "Spustelėkite",
+        "Yes": "Taip",
+        "No": "Ne"
+    },
+    "months": {
+        "1": "Sausio mėn",
+        "2": "Vasario mėn",
+        "3": "Kovas",
+        "4": "Balandis",
+        "5": "Gegužė",
+        "6": "Birželio mėn",
+        "7": "Liepos mėn",
+        "8": "Rugpjūtis",
+        "9": "Rugsėjo mėn",
+        "10": "Spalio mėn",
+        "11": "Lapkričio mėn",
+        "12": "Gruodžio mėn"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Leiskite prieiti prie mikrofono",
+        "record": "Įrašai",
+        "recording": "Įrašymas",
+        "remains": "lieka",
+        "maximum": "maksimaliai",
+        "playing": "Žaidžia",
+        "recorded": "Įrašyta",
+        "clip": "klipas",
+        "orupload": "Arba įkelti",
+        "usethis": "Naudok tai",
+        "discard": "Išmeskite",
+        "encoding": "Kodavimas"
+    },
+    "alert": {
+        "title": "Budrus"
+    },
+    "confirm": {
+        "title": "Patvirtinti",
+        "ok": "Taip",
+        "cancel": "Ne"
+    },
+    "prompt": {
+        "title": "Spustelėkite",
+        "ok": "Eik"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Klaida skaitant failą",
+        "cameraCommands": {
+            "prompt": "Ką tu norėtum veikti?",
+            "photo": "Paimkite naują nuotrauką",
+            "library": "Pasirinkite iš bibliotekos"
+        },
+        "tooSmall": "Pasirinkite didesnį vaizdą.",
+        "cropping": {
+            "title": "Nustatykite dydį ir padėtį",
+            "touchscreen": "Padidinkite ir vilkite pirštus",
+            "notTouchscreen": "Naudokite pelę ir ratą, kad padidintumėte ir vilkite"
+        }
+    }
+}

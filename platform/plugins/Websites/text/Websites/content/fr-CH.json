@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Lien pour promouvoir",
+                "startDate": "Date de d\u00e9but",
+                "startTime": "Heure de d\u00e9but",
+                "endDate": "Date de fin",
+                "endTime": "Heure de fin",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filtrer par int\u00e9r\u00eat",
+                "FilterInterests": "Commencez \u00e0 taper un int\u00e9r\u00eat ..."
+            },
+            "Interest": "Int\u00e9r\u00eat",
+            "Location": "Emplacement"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Aller",
+            "PasteLinkHere": "Collez un lien ici"
+        }
+    }
+}

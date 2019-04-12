@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link do promocji",
+                "startDate": "Data rozpocz\u0119cia",
+                "startTime": "Czas rozpocz\u0119cia",
+                "endDate": "Data zakonczenia",
+                "endTime": "Koniec czasu",
+                "budget": "Bud\u017cet"
+            },
+            "interests": {
+                "Title": "Filtruj wed\u0142ug odsetek",
+                "FilterInterests": "Zacznij wpisywa\u0107 zainteresowanie ..."
+            },
+            "Interest": "Zainteresowanie",
+            "Location": "Lokalizacja"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Uda\u0107 si\u0119",
+            "PasteLinkHere": "Wklej link tutaj"
+        }
+    }
+}

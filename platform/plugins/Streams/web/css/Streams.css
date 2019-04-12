@@ -218,10 +218,6 @@
 	display: none;
 }
 
-.Streams_invite_dialog p {
-	text-align: center;
-}
-
 .Streams_participants_invite img {
 	width: 40px;
 	height: 40px;
@@ -538,8 +534,8 @@
 	background-size: contain;
 	background-image: url("../img/chat/message-post.png");
 	background-repeat: no-repeat;
-	width: 36px;
-	height: 36px;
+	width: 40px;
+	height: 40px;
 	border: none;
 	margin: 0;
 	padding: 0;
@@ -956,4 +952,20 @@
 
 .Streams_unseen_nonzero {
 	display: inline-block !important;
+}
+
+.Streams_chat_preview_tool {
+	background: white;
+}
+
+.Streams_complete_overlay .Q_dialog_content {
+	padding: 0;
+}
+
+.Streams_invite_QR .Q_buttons {
+	padding-bottom: 20px;
+}
+
+.Streams_invite_QR .Q_button {
+	padding: 10px;
 }

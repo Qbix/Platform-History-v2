@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link til fremme",
+                "startDate": "Start dato",
+                "startTime": "Starttidspunkt",
+                "endDate": "Slutdato",
+                "endTime": "Sluttid",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filtrer efter interesse",
+                "FilterInterests": "Begynd at skrive en interesse ..."
+            },
+            "Interest": "Interesse",
+            "Location": "Beliggenhed"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "Indsæt et link her"
+        }
+    }
+}

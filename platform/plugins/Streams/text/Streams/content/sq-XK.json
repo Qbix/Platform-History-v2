@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Artikulli i ri"
+    },
+    "labels": {
+        "Streams/invited": "Njer\u00ebzit q\u00eb kam ftuar",
+        "Streams/invitedMe": "Kush m\u00eb ftoi"
+    },
+    "interests": {
+        "Filter": "\u00c7far\u00eb g\u00ebzon?",
+        "CanAdd": "N\u00ebse ende nuk mund t\u00eb gjesh at\u00eb q\u00eb k\u00ebrkon, mund t\u00eb shtosh nj\u00eb interes t\u00eb ri m\u00eb posht\u00eb:",
+        "TrySynonyms": "Mos e shihni? Provoni disa sinonime.",
+        "AddUnderCategory": "Shto n\u00ebn kategorin\u00eb ...",
+        "Other": "tjet\u00ebr",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesazhi \u00ebsht\u00eb sh\u00ebnuar p\u00ebr shqyrtim nga admin. Trokit s\u00ebrish p\u00ebr t\u00eb zhvendosur.",
+        "noOneSaid": "Askush nuk ka th\u00ebn\u00eb asgj\u00eb",
+        "closeChatButton": "Mbyll chat",
+        "closeChatConfirmTitle": "Mbyll k\u00ebt\u00eb chat?",
+        "closeChatConfirm": "Jeni i sigurt se doni ta mbyllni k\u00ebt\u00eb chat?",
+        "closeChatConfirmYes": "po",
+        "closeChatConfirmNo": "jo",
+        "earlierComments": "Komentet e m\u00ebhershme"
+    },
+    "notifications": {
+        "*": "Mesazhi {{& message.fields.type}} n\u00eb {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} ka th\u00ebn\u00eb:",
+        "Streams/changed": "Ndryshimet n\u00eb {{stream.fields.title}}",
+        "Streams/invite": "Ju u ftuat te {{& stream.fields.title}}",
+        "Streams/announcement": "Njoftim n\u00eb {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} ndryshoi qasjen e transmetimit",
+        "Streams/chat/edit": "Mesazhi i mesazhit u ndryshua",
+        "Streams/chat/remove": "Mesazhi i bised\u00ebs u hoq",
+        "Streams/closed": "{{stream.fields.title}} \u00ebsht\u00eb mbyllur",
+        "Streams/task/progress": "Progresi i b\u00ebr\u00eb n\u00eb {{stream.fields.title}}",
+        "Streams/task/complete": "Detyra e p\u00ebrfunduar: {{stream.fields.title}}",
+        "Streams/task/error": "Gabim gjat\u00eb: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Mesazhi i ardhur"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ju ftoi p\u00ebr t\u00eb {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Zgjidhni nga Kontaktet tuaja",
+            "selectFromContacts": "Zgjidhni Nga Kontaktet",
+            "photo": "Bej nje foto",
+            "photoInstruction": "N\u00ebse personi q\u00eb skanon kodin tuaj QR \u00ebsht\u00eb para jush, merrni nj\u00eb fotografi prej tyre",
+            "to": "P\u00ebr: {{Stream Title}}",
+            "go": "shkoj",
+            "title": "ftoj",
+            "placeholder": "Numri i celularit ose adresa e post\u00ebs elektronike",
+            "orInvite": "Ose ftoj njer\u00ebzit duke p\u00ebrdorur:",
+            "QR": "{{ClickOrTap}} p\u00ebr t\u00eb gjeneruar kodin QR",
+            "QRtitle": "Skano k\u00ebt\u00eb QR kod",
+            "byEmail": "Email",
+            "byText": "tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Cic\u00ebroj",
+            "QRscanned": "Ata e skanuan at\u00eb!"
+        },
+        "email": {
+            "subject": "Hej, shiko k\u00ebt\u00eb",
+            "PleaseVisitLink": "Ju lutemi vizitoni lidhjen e m\u00ebposhtme:",
+            "InvitingYou": "Un\u00eb jam duke ju ftuar p\u00ebr t\u00eb {{title}}",
+            "HasInvitedYou": "{{displayName}} ju ka ftuar p\u00ebr t\u00eb {{title}}"
+        },
+        "sms": {
+            "content": "Ju jeni ftuar p\u00ebr {{title}}. P\u00ebrzgjidhni {{url}}"
+        },
+        "notice": {
+            "text": "Ju keni qen\u00eb t\u00eb ftuar. {{ClickOrTap}} k\u00ebtu p\u00ebr t\u00eb pranuar dhe p\u00ebr t&#39;u bashkuar."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ka postuar nj\u00eb <em>{{message.fields.type}}</em> mesazhe p\u00ebr {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} n\u00eb {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ftesat jan\u00eb d\u00ebrguar nga numri yn\u00eb, t\u00eb cilin miqt\u00eb tuaj ende nuk e njohin. Ndiqni me nj\u00eb tekst t\u00eb shpejt\u00eb p\u00ebr t&#39;u b\u00ebr\u00eb t\u00eb ditur se ftesa erdhi nga ju, duke u k\u00ebrkuar atyre t\u00eb klikonin lidhjen.",
+            "confirm": "Ftesat jan\u00eb d\u00ebrguar nga numri yn\u00eb, t\u00eb cilin miqt\u00eb tuaj ende nuk e njohin. Do t\u00eb d\u00ebshironit t\u00eb p\u00ebrcillni me nj\u00eb tekst t\u00eb shpejt\u00eb p\u00ebr t&#39;u b\u00ebr\u00eb t\u00eb ditur se ftesa erdhi nga ju, duke u k\u00ebrkuar atyre t\u00eb klikonin lidhjen.",
+            "check": "Hej, sapo kam d\u00ebrguar nj\u00eb ftes\u00eb n\u00eb aplikacionin {{app}}. Ju lutemi kontrolloni sms-in tuaj dhe klikoni lidhjen!"
+        },
+        "email": {
+            "alert": "Ftesat d\u00ebrgohen nga domenin ton\u00eb, t\u00eb cilin miqt\u00eb tuaj ende nuk e njohin. Ndiqni me nj\u00eb tekst t\u00eb shpejt\u00eb p\u00ebr t&#39;u b\u00ebr\u00eb t\u00eb ditur se ftesa erdhi nga ju, duke u k\u00ebrkuar atyre t\u00eb klikonin lidhjen.",
+            "confirm": "Ftesat d\u00ebrgohen nga domenin ton\u00eb, t\u00eb cilin miqt\u00eb tuaj ende nuk e njohin. Do t\u00eb d\u00ebshironit t\u00eb p\u00ebrcillni me nj\u00eb tekst t\u00eb shpejt\u00eb p\u00ebr t&#39;u b\u00ebr\u00eb t\u00eb ditur se ftesa erdhi nga ju, duke u k\u00ebrkuar atyre t\u00eb klikonin lidhjen.",
+            "subject": "A keni marr\u00eb nj\u00eb ftes\u00eb?",
+            "body": "Hej, sapo kam d\u00ebrguar nj\u00eb ftes\u00eb n\u00eb aplikacionin {{app}}. Ju lutemi kontrolloni email-in tuaj dhe klikoni lidhjen atje!"
+        }
+    }
+}

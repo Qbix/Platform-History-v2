@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "\u05e7\u05d9\u05e9\u05d5\u05e8 \u05dc\u05e7\u05d9\u05d3\u05d5\u05dd",
+                "startDate": "\u05ea\u05d0\u05e8\u05d9\u05da \u05d4\u05ea\u05d7\u05dc\u05d4",
+                "startTime": "\u05e9\u05e2\u05ea \u05d4\u05ea\u05d7\u05dc\u05d4",
+                "endDate": "\u05ea\u05d0\u05e8\u05d9\u05da \u05e1\u05d9\u05d5\u05dd",
+                "endTime": "\u05e9\u05e2\u05ea \u05e1\u05d9\u05d5\u05dd",
+                "budget": "\u05ea\u05e7\u05e6\u05d9\u05d1"
+            },
+            "interests": {
+                "Title": "\u05e1\u05d9\u05e0\u05d5\u05df \u05dc\u05e4\u05d9 \u05e2\u05e0\u05d9\u05d9\u05df",
+                "FilterInterests": "\u05d4\u05ea\u05d7\u05dc \u05dc\u05d4\u05e7\u05dc\u05d9\u05d3 \u05e2\u05e0\u05d9\u05d9\u05df ..."
+            },
+            "Interest": "\u05e8\u05d9\u05d1\u05d9\u05ea",
+            "Location": "\u05de\u05e7\u05d5\u05dd"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "\u05dc\u05dc\u05db\u05ea",
+            "PasteLinkHere": "\u05d4\u05d3\u05d1\u05e7 \u05e7\u05d9\u05e9\u05d5\u05e8 \u05db\u05d0\u05df"
+        }
+    }
+}

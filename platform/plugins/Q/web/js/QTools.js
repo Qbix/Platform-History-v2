@@ -2839,6 +2839,7 @@ Q.Contextual = {
 							Q.Contextual.hide();
 						}
 					}
+					Q.Pointer.cancelClick(e);
 				}
 			};
 			$(document.body).on(Q.Pointer.end, Q.Contextual.endEventHandler);

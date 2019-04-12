@@ -459,15 +459,15 @@
 		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title({
+			var title = Q.text.Users.prompt.title.interpolate({
 				'platform': platform,
 				'Platform': platformCapitalized
 			});
-			var areUsing = Q.text.Users.prompt.areUsing({
+			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
 				'platform': platform,
 				'Platform': platformCapitalized
 			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing({
+			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
 				'platform': platform,
 				'Platform': platformCapitalized
 			});
@@ -478,12 +478,12 @@
 			var fb_xid;
 			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
 				content_div.append(_usingInformation(fb_xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch({
+				caption = Q.text.Users.prompt.doSwitch.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
 				});
 			} else {
-				caption = Q.text.Users.prompt.doAuth({
+				caption = Q.text.Users.prompt.doAuth.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
 				});
@@ -992,7 +992,9 @@
 	Users.batchFunction.functions = {};
 
 	Q.onActivate.set(function (elem) {
-		$(elem || document).off('click.Users').on('click.Users', 'a', function (e) {
+		$(elem || document)
+		.off('click.Users', 'a')
+		.on('click.Users', 'a', function (e) {
 			var href = $(this).attr('href');
 			if (!Users.requireLogin || !Users.requireLogin[href]) {
 				return;
@@ -1493,7 +1495,7 @@
 			identifierInput.attr('name', 'phone');
 		}
 
-		var $a = $('<a class="Q_button Users_login_go Q_main_button" />')
+		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
 			).on(Q.Pointer.touchclick, function () {
@@ -1510,12 +1512,12 @@
 		).append('<br />').append(
 			identifierInput
 		).append(
-			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />').val(identifierType)
-		).append('&nbsp;')
-			.append($a)
-			.append(
-				$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
-			).submit(function (event) {
+			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
+			.val(identifierType)
+		).append($a)
+		.append(
+			$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
+		).submit(function (event) {
 			$('#Users_login_identifier').attr('name', 'identifier');
 			if (!$(this).is(':visible')) {
 				event.preventDefault();

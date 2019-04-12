@@ -1,4 +1,4 @@
-.Streams_invite_dialog {
+.Streams_invite_dialog .Q_dialog_slot {
 	padding: 10px;
 }
 
@@ -14,6 +14,18 @@
 
 .Streams_invite_dialog .Streams_invite_contacts div:not(:last-child) {
 	margin-bottom: 5px;
+}
+
+.Q_notMobile .Streams_invite_dialog {
+	min-width: 400px;
+}
+
+.Streams_invite_submit input {
+	margin-right: 5px;
+}
+
+.Streams_invite_dialog p {
+	text-align: center;
 }
 
 .Streams_invite_dialog .Streams_invite_choose_contact {

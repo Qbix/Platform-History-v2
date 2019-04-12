@@ -1,0 +1,12 @@
+{
+	"name": "qbix/users",
+	"authors": [
+		{
+			"name": "Qbix"
+		}
+	],
+	"require": {
+		"minishlink/web-push": "^1.4",
+		"twilio/sdk": "5.29.1"
+	}
+}
