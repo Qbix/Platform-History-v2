@@ -16,5 +16,11 @@
             "Interest": "Hamu",
             "Location": "Eneo"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Nenda",
+            "PasteLinkHere": "Weka kiungo hapa"
+        }
     }
 }

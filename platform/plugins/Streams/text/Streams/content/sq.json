@@ -56,7 +56,8 @@
             "byEmail": "Email",
             "byText": "tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Cicëroj"
+            "byTwitter": "Cicëroj",
+            "QRscanned": "Ata e skanuan atë!"
         },
         "email": {
             "subject": "Hej, shiko këtë",

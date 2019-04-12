@@ -16,5 +16,11 @@
             "Interest": "Interese",
             "Location": "Atrašanās vieta"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Iet",
+            "PasteLinkHere": "Ielīmējiet saiti šeit"
+        }
     }
 }

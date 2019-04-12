@@ -3,8 +3,8 @@
         "NewItemTitle": "Elementu berria"
     },
     "labels": {
-        "Streams\/invited": "Gonbidatu nituen jendea",
-        "Streams\/invitedMe": "Nork gonbidatu ninduen"
+        "Streams/invited": "Gonbidatu nituen jendea",
+        "Streams/invitedMe": "Nork gonbidatu ninduen"
     },
     "interests": {
         "Filter": "Zer gustatzen zaizu?",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "{{& message.fields.type}} mezua {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} esan du:",
-        "Streams\/changed": "{{stream.fields.title}} -ko aldaketak",
-        "Streams\/invite": "{{& stream.fields.title}} gonbidatu zaituzte",
-        "Streams\/announcement": "Iragarkia {{& streams.fields.title}} zerbitzuan",
-        "Streams\/access": "{{&call 'avatar.displayName'}} (e) k zuzeneko sarbidea aldatu du",
-        "Streams\/chat\/edit": "Txat mezu bat editatu da",
-        "Streams\/chat\/remove": "Txat mezuak kendu dira",
-        "Streams\/closed": "{{stream.fields.title}} itxi egin da",
-        "Streams\/task\/progress": "{{stream.fields.title}} egunean egindako aurrerapenak",
-        "Streams\/task\/complete": "Zeregina osatu da: {{stream.fields.title}}",
-        "Streams\/task\/error": "Errorea: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Sarrerako mezua"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} esan du:",
+        "Streams/changed": "{{stream.fields.title}} -ko aldaketak",
+        "Streams/invite": "{{& stream.fields.title}} gonbidatu zaituzte",
+        "Streams/announcement": "Iragarkia {{& streams.fields.title}} zerbitzuan",
+        "Streams/access": "{{&call 'avatar.displayName'}} (e) k zuzeneko sarbidea aldatu du",
+        "Streams/chat/edit": "Txat mezu bat editatu da",
+        "Streams/chat/remove": "Txat mezuak kendu dira",
+        "Streams/closed": "{{stream.fields.title}} itxi egin da",
+        "Streams/task/progress": "{{stream.fields.title}} egunean egindako aurrerapenak",
+        "Streams/task/complete": "Zeregina osatu da: {{stream.fields.title}}",
+        "Streams/task/error": "Errorea: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Sarrerako mezua"
     },
     "invite": {
         "messageContent": "{{displayName}} gonbidatu zaitu {{inviteUrl}} zerbitzura",
@@ -56,7 +56,8 @@
             "byEmail": "Emaila",
             "byText": "Testua",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Eskaneatu zuten!"
         },
         "email": {
             "subject": "Hey, begiratu hau",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} -ek <em>{{message.fields.type}}<\/em> mezu {{stream.fields.title}}-ri bidali dio"
+            "posted": "{{call 'avatar.displayName'}} -ek <em>{{message.fields.type}}</em> mezu {{stream.fields.title}}-ri bidali dio"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} {{& url}} zerbitzuan: {{& message.fields.content}}"

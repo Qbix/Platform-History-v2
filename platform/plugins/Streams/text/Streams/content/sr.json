@@ -56,7 +56,8 @@
             "byEmail": "Емаил",
             "byText": "Текст",
             "byFacebook": "Фацебоок",
-            "byTwitter": "Твиттер"
+            "byTwitter": "Твиттер",
+            "QRscanned": "Скенирали су га!"
         },
         "email": {
             "subject": "Хеј, види ово",

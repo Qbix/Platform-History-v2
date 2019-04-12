@@ -16,5 +16,11 @@
             "Interest": "Interes",
             "Location": "Lokasyon"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pumunta",
+            "PasteLinkHere": "Mag-paste ng isang link dito"
+        }
     }
 }

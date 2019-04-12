@@ -1,95 +1,96 @@
 {
     "preview": {
-        "NewItemTitle": "새로운 물품"
+        "NewItemTitle": "\uc0c8\ub85c\uc6b4 \ubb3c\ud488"
     },
     "labels": {
-        "Streams\/invited": "내가 초대 한 사람들",
-        "Streams\/invitedMe": "누가 나를 초대 했어?"
+        "Streams/invited": "\ub0b4\uac00 \ucd08\ub300 \ud55c \uc0ac\ub78c\ub4e4",
+        "Streams/invitedMe": "\ub204\uac00 \ub098\ub97c \ucd08\ub300 \ud588\uc5b4?"
     },
     "interests": {
-        "Filter": "당신은 무엇을 즐기시나요?",
-        "CanAdd": "여전히 원하는 것을 찾을 수없는 경우 아래에 새로운 관심 분야를 추가 할 수 있습니다.",
-        "TrySynonyms": "보지 마? 동의어를 사용해보십시오.",
-        "AddUnderCategory": "카테고리 아래에 추가 ...",
-        "Other": "다른",
-        "Unlisted": "비공개"
+        "Filter": "\ub2f9\uc2e0\uc740 \ubb34\uc5c7\uc744 \uc990\uae30\uc2dc\ub098\uc694?",
+        "CanAdd": "\uc5ec\uc804\ud788 \uc6d0\ud558\ub294 \uac83\uc744 \ucc3e\uc744 \uc218\uc5c6\ub294 \uacbd\uc6b0 \uc544\ub798\uc5d0 \uc0c8\ub85c\uc6b4 \uad00\uc2ec \ubd84\uc57c\ub97c \ucd94\uac00 \ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+        "TrySynonyms": "\ubcf4\uc9c0 \ub9c8? \ub3d9\uc758\uc5b4\ub97c \uc0ac\uc6a9\ud574\ubcf4\uc2ed\uc2dc\uc624.",
+        "AddUnderCategory": "\uce74\ud14c\uace0\ub9ac \uc544\ub798\uc5d0 \ucd94\uac00 ...",
+        "Other": "\ub2e4\ub978",
+        "Unlisted": "\ube44\uacf5\uac1c"
     },
     "chat": {
-        "flaggedForAdminReview": "관리자 검토를 위해 메시지가 표시되었습니다. 알림을 해제하려면 다시 살짝 누르십시오.",
-        "noOneSaid": "아무도 아무 말도하지 않았다.",
-        "closeChatButton": "채팅 종료",
-        "closeChatConfirmTitle": "채팅을 닫으시겠습니까?",
-        "closeChatConfirm": "채팅을 닫으시겠습니까?",
-        "closeChatConfirmYes": "예",
-        "closeChatConfirmNo": "아니",
-        "earlierComments": "이전 댓글"
+        "flaggedForAdminReview": "\uad00\ub9ac\uc790 \uac80\ud1a0\ub97c \uc704\ud574 \uba54\uc2dc\uc9c0\uac00 \ud45c\uc2dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uc54c\ub9bc\uc744 \ud574\uc81c\ud558\ub824\uba74 \ub2e4\uc2dc \uc0b4\uc9dd \ub204\ub974\uc2ed\uc2dc\uc624.",
+        "noOneSaid": "\uc544\ubb34\ub3c4 \uc544\ubb34 \ub9d0\ub3c4\ud558\uc9c0 \uc54a\uc558\ub2e4.",
+        "closeChatButton": "\ucc44\ud305 \uc885\ub8cc",
+        "closeChatConfirmTitle": "\ucc44\ud305\uc744 \ub2eb\uc73c\uc2dc\uaca0\uc2b5\ub2c8\uae4c?",
+        "closeChatConfirm": "\ucc44\ud305\uc744 \ub2eb\uc73c\uc2dc\uaca0\uc2b5\ub2c8\uae4c?",
+        "closeChatConfirmYes": "\uc608",
+        "closeChatConfirmNo": "\uc544\ub2c8",
+        "earlierComments": "\uc774\uc804 \ub313\uae00"
     },
     "notifications": {
-        "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}이 (가) 말했다 :",
-        "Streams\/changed": "{{stream.fields.title}}의 변화",
-        "Streams\/invite": "{{& stream.fields.title}}에 초대되었습니다.",
-        "Streams\/announcement": "{{& streams.fields.title}}에 발표",
-        "Streams\/access": "{{&call 'avatar.displayName'}} 스트림 액세스가 변경되었습니다.",
-        "Streams\/chat\/edit": "채팅 메시지가 수정되었습니다.",
-        "Streams\/chat\/remove": "채팅 메시지가 삭제되었습니다.",
-        "Streams\/closed": "{{stream.fields.title}}이 폐쇄되었습니다.",
-        "Streams\/task\/progress": "{{stream.fields.title}}에 진행됨",
-        "Streams\/task\/complete": "완료된 작업 : {{stream.fields.title}}",
-        "Streams\/task\/error": "동안 오류 : {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}} : 수신 메시지"
+        "*": "\uba54\uc2dc\uc9c0 {{& message.fields.type}} ~ {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}}\uc774 (\uac00) \ub9d0\ud588\ub2e4 :",
+        "Streams/changed": "{{stream.fields.title}}\uc758 \ubcc0\ud654",
+        "Streams/invite": "{{& stream.fields.title}}\uc5d0 \ucd08\ub300\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+        "Streams/announcement": "{{& streams.fields.title}}\uc5d0 \ubc1c\ud45c",
+        "Streams/access": "{{&call 'avatar.displayName'}} \uc2a4\ud2b8\ub9bc \uc561\uc138\uc2a4\uac00 \ubcc0\uacbd\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+        "Streams/chat/edit": "\ucc44\ud305 \uba54\uc2dc\uc9c0\uac00 \uc218\uc815\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+        "Streams/chat/remove": "\ucc44\ud305 \uba54\uc2dc\uc9c0\uac00 \uc0ad\uc81c\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+        "Streams/closed": "{{stream.fields.title}}\uc774 \ud3d0\uc1c4\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+        "Streams/task/progress": "{{stream.fields.title}}\uc5d0 \uc9c4\ud589\ub428",
+        "Streams/task/complete": "\uc644\ub8cc\ub41c \uc791\uc5c5 : {{stream.fields.title}}",
+        "Streams/task/error": "\ub3d9\uc548 \uc624\ub958 : {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}} : \uc218\uc2e0 \uba54\uc2dc\uc9c0"
     },
     "invite": {
-        "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
+        "messageContent": "{{displayName}} \ub2d8\uc774 {{inviteUrl}}\uc5d0 \ub2f9\uc2e0\uc744 \ucd08\ub300\ud588\uc2b5\ub2c8\ub2e4.",
         "dialog": {
-            "chooseFromContacts": "연락처에서 선택하십시오.",
-            "selectFromContacts": "연락처에서 선택",
-            "photo": "사진을 찍다",
-            "photoInstruction": "QR 코드를 스캔 한 사람이 앞에 있으면 사진을 찍으십시오.",
-            "to": "받는 사람 : {{Stream Title}}",
-            "go": "가기",
-            "title": "초대",
-            "placeholder": "휴대 전화 번호 또는 이메일 주소",
-            "orInvite": "또는 다음을 사용하여 사람들을 초대하십시오.",
-            "QR": "QR 코드 생성을위한 {{ClickOrTap}}",
-            "QRtitle": "이 QR 코드 스캔",
-            "byEmail": "이메일",
-            "byText": "본문",
-            "byFacebook": "페이스 북",
-            "byTwitter": "지저귀다"
+            "chooseFromContacts": "\uc5f0\ub77d\ucc98\uc5d0\uc11c \uc120\ud0dd\ud558\uc2ed\uc2dc\uc624.",
+            "selectFromContacts": "\uc5f0\ub77d\ucc98\uc5d0\uc11c \uc120\ud0dd",
+            "photo": "\uc0ac\uc9c4\uc744 \ucc0d\ub2e4",
+            "photoInstruction": "QR \ucf54\ub4dc\ub97c \uc2a4\uce94 \ud55c \uc0ac\ub78c\uc774 \uc55e\uc5d0 \uc788\uc73c\uba74 \uc0ac\uc9c4\uc744 \ucc0d\uc73c\uc2ed\uc2dc\uc624.",
+            "to": "\ubc1b\ub294 \uc0ac\ub78c : {{Stream Title}}",
+            "go": "\uac00\uae30",
+            "title": "\ucd08\ub300",
+            "placeholder": "\ud734\ub300 \uc804\ud654 \ubc88\ud638 \ub610\ub294 \uc774\uba54\uc77c \uc8fc\uc18c",
+            "orInvite": "\ub610\ub294 \ub2e4\uc74c\uc744 \uc0ac\uc6a9\ud558\uc5ec \uc0ac\ub78c\ub4e4\uc744 \ucd08\ub300\ud558\uc2ed\uc2dc\uc624.",
+            "QR": "QR \ucf54\ub4dc \uc0dd\uc131\uc744\uc704\ud55c {{ClickOrTap}}",
+            "QRtitle": "\uc774 QR \ucf54\ub4dc \uc2a4\uce94",
+            "byEmail": "\uc774\uba54\uc77c",
+            "byText": "\ubcf8\ubb38",
+            "byFacebook": "\ud398\uc774\uc2a4 \ubd81",
+            "byTwitter": "\uc9c0\uc800\uadc0\ub2e4",
+            "QRscanned": "\uadf8\ub4e4\uc740 \uadf8\uac83\uc744 \uc2a4\uce94!"
         },
         "email": {
-            "subject": "헤이, 이것 좀 봐.",
-            "PleaseVisitLink": "다음 링크를 방문하십시오 :",
-            "InvitingYou": "{{title}}에 초대합니다.",
-            "HasInvitedYou": "{{displayName}} 님이 {{title}}에 초대했습니다."
+            "subject": "\ud5e4\uc774, \uc774\uac83 \uc880 \ubd10.",
+            "PleaseVisitLink": "\ub2e4\uc74c \ub9c1\ud06c\ub97c \ubc29\ubb38\ud558\uc2ed\uc2dc\uc624 :",
+            "InvitingYou": "{{title}}\uc5d0 \ucd08\ub300\ud569\ub2c8\ub2e4.",
+            "HasInvitedYou": "{{displayName}} \ub2d8\uc774 {{title}}\uc5d0 \ucd08\ub300\ud588\uc2b5\ub2c8\ub2e4."
         },
         "sms": {
-            "content": "당신은 {{title}}에 초대되었습니다. {{url}}을 탭하십시오."
+            "content": "\ub2f9\uc2e0\uc740 {{title}}\uc5d0 \ucd08\ub300\ub418\uc5c8\uc2b5\ub2c8\ub2e4. {{url}}\uc744 \ud0ed\ud558\uc2ed\uc2dc\uc624."
         },
         "notice": {
-            "text": "초대되었습니다. {{ClickOrTap}} 여기에 동의하고 참여하십시오."
+            "text": "\ucd08\ub300\ub418\uc5c8\uc2b5\ub2c8\ub2e4. {{ClickOrTap}} \uc5ec\uae30\uc5d0 \ub3d9\uc758\ud558\uace0 \ucc38\uc5ec\ud558\uc2ed\uc2dc\uc624."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}}이 (가) <em>{{message.fields.type}}<\/em> 메시지를 {{stream.fields.title}}에 게시했습니다."
+            "posted": "{{call 'avatar.displayName'}}\uc774 (\uac00) <em>{{message.fields.type}}</em> \uba54\uc2dc\uc9c0\ub97c {{stream.fields.title}}\uc5d0 \uac8c\uc2dc\ud588\uc2b5\ub2c8\ub2e4."
         },
         "text": {
-            "body": "{{& url}}의 {{& call 'avatar.displayName'}} : {{& message.fields.content}}"
+            "body": "{{& url}}\uc758 {{& call 'avatar.displayName'}} : {{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
-            "confirm": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트로 후속 조치하여 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청 하시겠습니까?",
-            "check": "방금 {{app}} 앱에 초대장을 보냈습니다. 귀하의 SMS를 확인하고 링크를 클릭하십시오!"
+            "alert": "\ucd08\ub300\uc7a5\uc740 \uadc0\ud558\uc758 \uce5c\uad6c\uac00 \uc544\uc9c1 \uc778\uc2dd\ud558\uc9c0 \ubabb\ud558\ub294 \ubc88\ud638\uc5d0\uc11c \uc804\uc1a1\ub429\ub2c8\ub2e4. \ube60\ub978 \ud14d\uc2a4\ud2b8\ub97c \ud1b5\ud574 \ucd08\ub300\uc7a5\uc774 \uadc0\ud558\uc5d0\uac8c\uc11c \uc654\uc74c\uc744 \uc54c\ub9ac\uace0 \ub9c1\ud06c\ub97c \ud074\ub9ad\ud558\ub3c4\ub85d \uc694\uccad\ud558\uc2ed\uc2dc\uc624.",
+            "confirm": "\ucd08\ub300\uc7a5\uc740 \uadc0\ud558\uc758 \uce5c\uad6c\uac00 \uc544\uc9c1 \uc778\uc2dd\ud558\uc9c0 \ubabb\ud558\ub294 \ubc88\ud638\uc5d0\uc11c \uc804\uc1a1\ub429\ub2c8\ub2e4. \ube60\ub978 \ud14d\uc2a4\ud2b8\ub85c \ud6c4\uc18d \uc870\uce58\ud558\uc5ec \ucd08\ub300\uc7a5\uc774 \uadc0\ud558\uc5d0\uac8c\uc11c \uc654\uc74c\uc744 \uc54c\ub9ac\uace0 \ub9c1\ud06c\ub97c \ud074\ub9ad\ud558\ub3c4\ub85d \uc694\uccad \ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?",
+            "check": "\ubc29\uae08 {{app}} \uc571\uc5d0 \ucd08\ub300\uc7a5\uc744 \ubcf4\ub0c8\uc2b5\ub2c8\ub2e4. \uadc0\ud558\uc758 SMS\ub97c \ud655\uc778\ud558\uace0 \ub9c1\ud06c\ub97c \ud074\ub9ad\ud558\uc2ed\uc2dc\uc624!"
         },
         "email": {
-            "alert": "친구가 아직 알지 못하는 도메인에서 초대장을 보냅니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
-            "confirm": "친구가 아직 알지 못하는 도메인에서 초대장을 보냅니다. 빠른 텍스트로 후속 조치하여 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청 하시겠습니까?",
-            "subject": "초대 받았어?",
-            "body": "방금 {{app}} 앱에 초대장을 보냈습니다. 이메일을 확인하고 거기에있는 링크를 클릭하십시오!"
+            "alert": "\uce5c\uad6c\uac00 \uc544\uc9c1 \uc54c\uc9c0 \ubabb\ud558\ub294 \ub3c4\uba54\uc778\uc5d0\uc11c \ucd08\ub300\uc7a5\uc744 \ubcf4\ub0c5\ub2c8\ub2e4. \ube60\ub978 \ud14d\uc2a4\ud2b8\ub97c \ud1b5\ud574 \ucd08\ub300\uc7a5\uc774 \uadc0\ud558\uc5d0\uac8c\uc11c \uc654\uc74c\uc744 \uc54c\ub9ac\uace0 \ub9c1\ud06c\ub97c \ud074\ub9ad\ud558\ub3c4\ub85d \uc694\uccad\ud558\uc2ed\uc2dc\uc624.",
+            "confirm": "\uce5c\uad6c\uac00 \uc544\uc9c1 \uc54c\uc9c0 \ubabb\ud558\ub294 \ub3c4\uba54\uc778\uc5d0\uc11c \ucd08\ub300\uc7a5\uc744 \ubcf4\ub0c5\ub2c8\ub2e4. \ube60\ub978 \ud14d\uc2a4\ud2b8\ub85c \ud6c4\uc18d \uc870\uce58\ud558\uc5ec \ucd08\ub300\uc7a5\uc774 \uadc0\ud558\uc5d0\uac8c\uc11c \uc654\uc74c\uc744 \uc54c\ub9ac\uace0 \ub9c1\ud06c\ub97c \ud074\ub9ad\ud558\ub3c4\ub85d \uc694\uccad \ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?",
+            "subject": "\ucd08\ub300 \ubc1b\uc558\uc5b4?",
+            "body": "\ubc29\uae08 {{app}} \uc571\uc5d0 \ucd08\ub300\uc7a5\uc744 \ubcf4\ub0c8\uc2b5\ub2c8\ub2e4. \uc774\uba54\uc77c\uc744 \ud655\uc778\ud558\uace0 \uac70\uae30\uc5d0\uc788\ub294 \ub9c1\ud06c\ub97c \ud074\ub9ad\ud558\uc2ed\uc2dc\uc624!"
         }
     }
 }

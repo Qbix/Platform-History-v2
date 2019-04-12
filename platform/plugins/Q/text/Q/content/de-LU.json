@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Fehler {{status}} während der Anforderung",
+        "canceled": "Anfrage storniert",
+        "500": "Interner Serverfehler",
+        "404": "Nicht gefunden: {{url}}",
+        "501": "Anfrage unterbrochen"
+    },
+    "nonce": {
+        "sameDomain": "Sitzung abgelaufen. Aktualisieren Sie die Seite und versuchen Sie es erneut.",
+        "otherDomain": "Blockierte domänenübergreifende Anforderung an eine fremde Domäne um {{baseUrl}}"
+    },
+    "words": {
+        "tap": "Zapfhahn",
+        "click": "klicken",
+        "yes": "Ja",
+        "no": "Nein",
+        "Tap": "Zapfhahn",
+        "Click": "Klicken",
+        "Yes": "Ja",
+        "No": "Nein"
+    },
+    "months": {
+        "1": "Januar",
+        "2": "Februar",
+        "3": "März",
+        "4": "April",
+        "5": "Kann",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "August",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "Dezember"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Bitte erlauben Sie den Zugriff auf Ihr Mikrofon",
+        "record": "Aufzeichnung",
+        "recording": "Aufzeichnung",
+        "remains": "Überreste",
+        "maximum": "maximal",
+        "playing": "Spielen",
+        "recorded": "Verzeichnet",
+        "clip": "Clip",
+        "orupload": "Oder hochladen",
+        "usethis": "Benutze das",
+        "discard": "Verwerfen",
+        "encoding": "Codierung"
+    },
+    "alert": {
+        "title": "Warnen"
+    },
+    "confirm": {
+        "title": "Bestätigen",
+        "ok": "Ja",
+        "cancel": "Nein"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Gehen"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Fehler beim Lesen der Datei",
+        "cameraCommands": {
+            "prompt": "Was würdest du gern tun?",
+            "photo": "Nehmen Sie ein neues Foto auf",
+            "library": "Wählen Sie aus der Bibliothek"
+        },
+        "tooSmall": "Bitte wählen Sie ein größeres Bild.",
+        "cropping": {
+            "title": "Passen Sie Größe und Position an",
+            "touchscreen": "Mit den Fingern zoomen und ziehen",
+            "notTouchscreen": "Zoomen und ziehen Sie mit der Maus und dem Rad"
+        }
+    }
+}

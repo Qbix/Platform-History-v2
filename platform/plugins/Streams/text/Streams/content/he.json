@@ -56,7 +56,8 @@
             "byEmail": "דוא&quot;ל",
             "byText": "טקסט",
             "byFacebook": "פייסבוק",
-            "byTwitter": "טוויטר"
+            "byTwitter": "טוויטר",
+            "QRscanned": "הם סרקו את זה!"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",

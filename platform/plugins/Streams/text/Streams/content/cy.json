@@ -56,7 +56,8 @@
             "byEmail": "E-bost",
             "byText": "Testun",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Roedden nhw&#39;n ei sganio!"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",

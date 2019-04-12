@@ -16,5 +16,11 @@
             "Interest": "interes",
             "Location": "vend"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "shkoj",
+            "PasteLinkHere": "Ngjit një lidhje këtu"
+        }
     }
 }

@@ -56,7 +56,8 @@
             "byEmail": "อีเมล์",
             "byText": "ข้อความ",
             "byFacebook": "Facebook",
-            "byTwitter": "พูดเบาและรวดเร็ว"
+            "byTwitter": "พูดเบาและรวดเร็ว",
+            "QRscanned": "พวกเขาสแกนมัน!"
         },
         "email": {
             "subject": "เฮ้ลองดูนี่สิ",

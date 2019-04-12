@@ -23,6 +23,19 @@ class Q
 	}
 	
 	/**
+	 * Returns the names of all the plugins, including "Q" at the beginning
+	 * @return {string}
+	 */
+	static function plugins()
+	{
+		$plugins = Q_Config::expect('Q', 'plugins');
+		if (!in_array("Q", $plugins)) {
+			array_unshift($plugins, "Q");
+		}
+		return $plugins;
+	}
+	
+	/**
 	 * Used for shorthand for avoiding when you don't want to write
 	 * (isset($some_long_expression) ? $some_long_expression: null)
 	 * when you want to avoid possible "undefined variable" errors.

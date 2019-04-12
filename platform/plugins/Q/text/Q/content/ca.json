@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Error {{status}} durant la sol·licitud",
+        "canceled": "S&#39;ha cancel·lat la sol·licitud",
+        "500": "Error del servidor intern",
+        "404": "No s&#39;ha trobat: {{url}}",
+        "501": "Sol·licitud interrompuda"
+    },
+    "nonce": {
+        "sameDomain": "Sessió expirada. Actualitzeu la pàgina i torneu-ho a provar.",
+        "otherDomain": "Sol·licitud de domini creuat bloquejada a un domini estranger a {{baseUrl}}"
+    },
+    "words": {
+        "tap": "aixeta",
+        "click": "feu clic",
+        "yes": "Sí",
+        "no": "no",
+        "Tap": "Aixeta",
+        "Click": "Feu clic a",
+        "Yes": "Sí",
+        "No": "No"
+    },
+    "months": {
+        "1": "Gener",
+        "2": "Febrer",
+        "3": "Març",
+        "4": "Abril",
+        "5": "Maig",
+        "6": "juny",
+        "7": "Juliol",
+        "8": "Agost",
+        "9": "Setembre",
+        "10": "Octubre",
+        "11": "de novembre",
+        "12": "Desembre"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Permeteu l’accés al vostre micròfon",
+        "record": "Registre",
+        "recording": "Gravació",
+        "remains": "restes",
+        "maximum": "màxim",
+        "playing": "Jugant",
+        "recorded": "Gravat",
+        "clip": "clip",
+        "orupload": "O penja",
+        "usethis": "Usa aixó",
+        "discard": "Descartar",
+        "encoding": "Codificació"
+    },
+    "alert": {
+        "title": "Alerta"
+    },
+    "confirm": {
+        "title": "Confirmeu",
+        "ok": "Sí",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Pregunta",
+        "ok": "Vés"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Error en llegir el fitxer",
+        "cameraCommands": {
+            "prompt": "Què t&#39;agradaria fer?",
+            "photo": "Feu una foto nova",
+            "library": "Seleccioneu de la biblioteca"
+        },
+        "tooSmall": "Trieu una imatge més gran.",
+        "cropping": {
+            "title": "Ajusteu la mida i la posició",
+            "touchscreen": "Utilitzeu els dits per ampliar i arrossegar",
+            "notTouchscreen": "Utilitzeu el ratolí i la roda per ampliar i arrossegar"
+        }
+    }
+}

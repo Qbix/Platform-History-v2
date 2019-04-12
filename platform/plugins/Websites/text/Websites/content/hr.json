@@ -16,5 +16,11 @@
             "Interest": "Interes",
             "Location": "Mjesto"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ići",
+            "PasteLinkHere": "Ovdje zalijepite vezu"
+        }
     }
 }

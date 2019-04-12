@@ -16,5 +16,11 @@
             "Interest": "રસ",
             "Location": "સ્થાન"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "જાવ",
+            "PasteLinkHere": "અહીં એક લિંક પેસ્ટ કરો"
+        }
     }
 }

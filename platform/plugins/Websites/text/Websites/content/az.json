@@ -16,5 +16,11 @@
             "Interest": "Faiz",
             "Location": "Yer"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gedin",
+            "PasteLinkHere": "Burada bir keçid qoyun"
+        }
     }
 }

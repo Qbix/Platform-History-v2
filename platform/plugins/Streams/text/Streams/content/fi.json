@@ -56,7 +56,8 @@
             "byEmail": "Sähköposti",
             "byText": "Teksti",
             "byFacebook": "Facebook",
-            "byTwitter": "Viserrys"
+            "byTwitter": "Viserrys",
+            "QRscanned": "He skannasi sen!"
         },
         "email": {
             "subject": "Hei, tarkista tämä",

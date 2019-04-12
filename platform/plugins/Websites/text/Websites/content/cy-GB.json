@@ -16,5 +16,11 @@
             "Interest": "Diddordeb",
             "Location": "Lleoliad"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ewch",
+            "PasteLinkHere": "Gludwch ddolen yma"
+        }
     }
 }

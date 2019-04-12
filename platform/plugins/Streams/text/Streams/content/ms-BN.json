@@ -3,8 +3,8 @@
         "NewItemTitle": "Item baru"
     },
     "labels": {
-        "Streams\/invited": "Orang yang saya jemput",
-        "Streams\/invitedMe": "Siapa menjemput saya"
+        "Streams/invited": "Orang yang saya jemput",
+        "Streams/invitedMe": "Siapa menjemput saya"
     },
     "interests": {
         "Filter": "Apa yang anda nikmati?",
@@ -26,18 +26,18 @@
     },
     "notifications": {
         "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} berkata:",
-        "Streams\/changed": "Perubahan dalam {{stream.fields.title}}",
-        "Streams\/invite": "Anda telah dijemput untuk {{& stream.fields.title}}",
-        "Streams\/announcement": "Pengumuman di {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} menukar akses strim",
-        "Streams\/chat\/edit": "Mesej sembang diedit",
-        "Streams\/chat\/remove": "Mesej sembang dikeluarkan",
-        "Streams\/closed": "{{stream.fields.title}} telah ditutup",
-        "Streams\/task\/progress": "Kemajuan yang dibuat pada {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
-        "Streams\/task\/error": "Ralat semasa: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesej Masuk"
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} berkata:",
+        "Streams/changed": "Perubahan dalam {{stream.fields.title}}",
+        "Streams/invite": "Anda telah dijemput untuk {{& stream.fields.title}}",
+        "Streams/announcement": "Pengumuman di {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} menukar akses strim",
+        "Streams/chat/edit": "Mesej sembang diedit",
+        "Streams/chat/remove": "Mesej sembang dikeluarkan",
+        "Streams/closed": "{{stream.fields.title}} telah ditutup",
+        "Streams/task/progress": "Kemajuan yang dibuat pada {{stream.fields.title}}",
+        "Streams/task/complete": "Tugas selesai: {{stream.fields.title}}",
+        "Streams/task/error": "Ralat semasa: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Mesej Masuk"
     },
     "invite": {
         "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
@@ -56,7 +56,8 @@
             "byEmail": "E-mel",
             "byText": "Teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Mereka mengimbasnya!"
         },
         "email": {
             "subject": "Hei, periksa ini",
@@ -73,7 +74,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} menyiarkan mesej <em>{{message.fields.type}}<\/em> kepada {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} menyiarkan mesej <em>{{message.fields.type}}</em> kepada {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} dalam {{& url}}: {{& message.fields.content}}"

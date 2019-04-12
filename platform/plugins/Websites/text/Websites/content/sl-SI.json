@@ -3,18 +3,24 @@
         "campaign": {
             "placeholders": {
                 "link": "Povezava za promocijo",
-                "startDate": "Začetni datum",
-                "startTime": "Začetni čas",
-                "endDate": "Končni datum",
-                "endTime": "Čas konca",
-                "budget": "Proračun"
+                "startDate": "Za\u010detni datum",
+                "startTime": "Za\u010detni \u010das",
+                "endDate": "Kon\u010dni datum",
+                "endTime": "\u010cas konca",
+                "budget": "Prora\u010dun"
             },
             "interests": {
                 "Title": "Filtriraj po zanimanju",
-                "FilterInterests": "Začnite vnašati interes ..."
+                "FilterInterests": "Za\u010dnite vna\u0161ati interes ..."
             },
             "Interest": "Zanimanje",
             "Location": "Lokacija"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pojdi",
+            "PasteLinkHere": "Prilepite povezavo tukaj"
         }
     }
 }

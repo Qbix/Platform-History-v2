@@ -1060,7 +1060,7 @@ class Q_Utils
 			}
 		}
 		$paths = array(APP_FILES_DIR);
-		foreach (Q_Config::get('Q', 'plugins', array()) as $plugin) {
+		foreach (Q::plugins() as $plugin) {
 			$c = strtoupper($plugin).'_PLUGIN_FILES_DIR';
 			if (defined($c)) {
 				$paths[] = constant($c);
