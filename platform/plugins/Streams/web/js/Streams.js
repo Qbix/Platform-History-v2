@@ -4834,6 +4834,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 						{},
 						function () {
 							var tool = this;
+							console.log('Q/resize randomNum', tool.randomNum)
 							/*if(viewMode != 'regular')
 								tool.deactivate()
 							else tool.state.active = true;*/
@@ -5012,10 +5013,10 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				}
 			);
 
-			chatParticipantEl.appendChild(chatParticipantVideoCon);
+
 			participantNameTextCon.appendChild(participantNameText);
 			chatParticipantName.appendChild(participantNameTextCon);
-
+			chatParticipantEl.appendChild(chatParticipantName);
 
 			if(!Q.info.isMobile) {
 
@@ -5045,7 +5046,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				});
 			}
 
-			chatParticipantEl.appendChild(chatParticipantName);
+
+
+
+			chatParticipantEl.appendChild(chatParticipantVideoCon);
+
 
 			if(Q.info.isMobile) {
 				chatParticipantEl.addEventListener('touchstart', moveScreenFront)
@@ -5182,105 +5187,174 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 
 
 		var regularScreensGrid = function (container, count, elements) {
-			console.log('regularScreensGrid', count)
 
-			var containerRect = container.getBoundingClientRect();
+
+			var container = document.body
+
+			var containerRect = container.getBoundingClientRect()
 			var parentWidth = containerRect.width;
 			var parentHeight = containerRect.height;
-			var size = {parentWidth:parentWidth, parentHeight:parentHeight}
-			var rects = [];
-			var rectWidth = 25;
-			var rectHeight = 0;
+			var centerX = containerRect.width / 2;
+			var centerY = containerRect.height / 2;
+			var rectsRows = [];
+			var currentRow = [];
+
 			var spaceBetween = 10;
-			var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
-			var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
-
-			console.log('a', perRow)
-
-			/*var minX = Math.min.apply(Math, rects.map(function(o) { return o.x; }));
-			var maxX = Math.max.apply(Math, rects.map(function(o) { return o.x+o.width; }));
-			var minY = Math.min.apply(Math, rects.map(function(o) { return o.y; }));*/
 
 			var roomScreens = WebRTCconference.screens();
-			var isNextNewLast = false;
-			var rowItemCounter = 1;
-			var c = 1;
+			var count = roomScreens.length;
 			var i, screen;
-			for (i = 0; screen = roomScreens[i]; i++) {
-				console.log('regularScreensGridregularScreensGrid nameEl', screen.participant.identity)
+			for (i = 0; i < count; i++) {
+				var screen = roomScreens[i];
+
 				var nameRect = screen.nameEl.getBoundingClientRect();
 				var screenElRect = screen.screenEl.getBoundingClientRect();
 				var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
 				var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
 
-				console.log('regularScreensGridregularScreensGrid nameRect', nameRect, screen.nameEl.scrollWidth);
-				console.log('regularScreensGridregularScreensGrid video', videoHeight, videoWidth, screen.screenEl);
-				console.log('regularScreensGridregularScreensGrid screenel', screen.screenEl.getBoundingClientRect());
+				var newRectSize = null;
 				if(videoWidth != 0 && videoHeight != 0) {
-					var screenRect = getElementSizeKeepingRatio({
+					newRectSize = getElementSizeKeepingRatio({
 						width: videoWidth,
 						height: videoHeight,
 					}, {width: 250, height: 250})
 				} else if(videoWidth == 0 && videoHeight == 0 && screenElRect.width != 0 && screenElRect.height != 0 ) {
-					//screen.screenEl.style.width = '';
-					//screen.screenEl.style.height = '';
-					console.log('regularScreensGridregularScreensGrid if2');
-					var screenRect = {
+					newRectSize = {
 						width: screen.nameEl.firstChild.scrollWidth,
 						height: screen.nameEl.scrollHeight
 					};
 				} else {
-					var rect = new DOMRect(0, 0, 0, 0);
-
-					console.log('regularScreensGrid rect', rect)
-
-					rects.push(rect);
+					var rect = new DOMRect(centerX, centerY, 0, 0);
+					currentRow.push(rect);
 					continue;
 				}
 
 
-				console.log('regularScreensGridregularScreensGrid screenRect', screenRect.width, screenRect.height);
-
-				if(videoWidth != 0 && videoHeight != 0) screenRect.height = screenRect.height + 50;
+				if(videoWidth != 0 && videoHeight != 0) newRectSize.height = newRectSize.height + 50;
 
 
-				var firstRect = new DOMRect(containerRect.left, containerRect.top, rectWidth, rectHeight)
-				var prevRect = rects.length >= 1 ? rects[rects.length - 1] : firstRect;
-				console.log('prevRect', prevRect, firstRect)
-				var currentRow = isNextNewLast  ? perRow : Math.ceil(c/perRow);
-				var isNextNewRow  = rowItemCounter  == perRow;
-				isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+				var prevRect = currentRow[currentRow.length - 1];
+				var prevRow = rectsRows[rectsRows.length - 1];
 
-				console.log('currentCol',i, c, currentRow, perCol, perRow, isNextNewRow, isNextNewLast)
+				if(currentRow.length == 0) {
+					if(rectsRows.length == 0) {
+						var x = centerX - (newRectSize.width / 2);
+						var y = centerY - (newRectSize.height / 2);
+						var domRect = new DOMRect(x, y, newRectSize.width, newRectSize.height);
+						currentRow.push(domRect);
+					} else {
+						var minY = Math.min.apply(Math, rectsRows[0].map(function(r) { return r.top; }));
+						var maxY = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function(r) { return r.top + r.height;}));
+						var freeRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
 
-				var x,y;
-				if(rowItemCounter == 1) {
-					if(currentRow == 1) {
-						y = prevRect.y + spaceBetween;
-					} else y =  prevRect.y + (screenRect.height + spaceBetween);
-					x = 0 + spaceBetween;
-					console.log('regularScreensGrid if1', x, y, prevRect)
+						if(freeRoom >= (newRectSize.height + spaceBetween))  {
+							var startXPosition = centerX - (newRectSize.width / 2);
+							var topPosition = maxY + spaceBetween;
+							var domRect = new DOMRect(centerX - (newRectSize.width / 2), topPosition, newRectSize.width, newRectSize.height);
 
+							var newMaxY = domRect.top + domRect.height;
+							var newTopPosition = centerY - ((newMaxY - minY) / 2);
+							var moveAllRectsOn = minY - newTopPosition;
+							for(var x in rectsRows) {
+
+								var row = rectsRows[x];
+								var s;
+								for(s = 0; s < row.length; s++) {
+									row[s] = new DOMRect(row[s].left, row[s].top - moveAllRectsOn, row[s].width, row[s].height);
+								}
+							}
+							var domRect = new DOMRect(centerX - (newRectSize.width / 2), topPosition - moveAllRectsOn, newRectSize.width, newRectSize.height);
+							currentRow.push(domRect);
+						}
+
+					}
 				} else {
 
-					y = prevRect.y;
-					x = prevRect.x + (prevRect.width + spaceBetween);
+					var minX = Math.min.apply(Math, currentRow.map(function (r) {
+						return r.left;
+					}));
+					var maxX = Math.max.apply(Math, currentRow.map(function (r) {
+						return r.left + r.width;
+					}));
+					var freeRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+					if (freeRoom >= (newRectSize.width + spaceBetween * 2)) {
+						var xPosition = prevRect.left + (prevRect.width + spaceBetween);
+						var topPosition;
+						if (prevRow == null) {
+							var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+								return r.top;
+							}));
+							var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+								return r.top + r.height;
+							}));
+							topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+						} else {
+							var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+								return r.top;
+							}));
+							var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+								return r.top + r.height;
+							}));
+							topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+						}
+						var domRect = new DOMRect(prevRect.left + (prevRect.width + spaceBetween), topPosition, newRectSize.width, newRectSize.height);
+						currentRow.push(domRect);
+						var minX = Math.min.apply(Math, currentRow.map(function (r) {
+							return r.left;
+						}));
+						var maxX = Math.max.apply(Math, currentRow.map(function (r) {
+							return r.left + r.width;
+						}));
 
-					console.log('regularScreensGrid if1 else', x, y, prevRect);
+						var newLeftPosition = centerX - ((maxX - minX) / 2);
+						var moveAllRectsOn = minX - newLeftPosition;
 
+						if (prevRow != null) {
+							var maxYOfAllPrevRow = Math.max.apply(Math, prevRow.map(function (r) {
+								return r.top + r.height;
+							}));
+							var minYOfAllCurRow = Math.min.apply(Math, currentRow.map(function (r) {
+								return r.top;
+							}));
+							if (minYOfAllCurRow <= maxYOfAllPrevRow) {
+								var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+									return r.top;
+								}));
+								var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+									return r.top + r.height;
+								}));
+
+								var newTop = (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween;
+								var x, screen;
+								var rowLength = currentRow.length;
+								for (x = 0; x < rowLength; x++) {
+									var topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (currentRow[x].height / 2) + (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween
+									currentRow[x] = new DOMRect(currentRow[x].left, topPosition, currentRow[x].width, currentRow[x].height);
+
+								}
+							}
+						}
+
+
+						for (var x in currentRow) {
+							var newXPosition = currentRow[x].left - moveAllRectsOn;
+							currentRow[x] = new DOMRect(newXPosition, currentRow[x].top, currentRow[x].width, currentRow[x].height);
+						}
+					}
 				}
-				var rect = new DOMRect(x, y, screenRect.width, screenRect.height);
 
-				console.log('regularScreensGrid rect', rect)
+				if(i+1 == roomScreens.length || freeRoom < newRectSize.width){
+					rectsRows.push(currentRow);
+					currentRow = [];
+				}
 
-				rects.push(rect);
-				console.log('regularScreensGrid rects', rects)
 
+			}
 
-				if(isNextNewRow) {
-					rowItemCounter = 1;
-				} else rowItemCounter++;
-				c++;
+			var rects = [];
+			var i, row;
+			for(i = 0; row = rectsRows[i]; i++) {
+				rects = rects.concat(row);
 			}
 
 			return rects;
@@ -5295,15 +5369,15 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			var size = {parentWidth:parentWidth, parentHeight:parentHeight}
 			var rects = [];
 
-			var rectWidth = 100;
-			var rectHeight = 70;
+			var rectWidth = 90;
+			var rectHeight = 90;
 			var spaceBetween = 10;
 			var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
 			var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
 
 			var startX = (size.parentWidth / 2) - (elementToWrap.width / 2);
 			var startY = (size.parentHeight - (elementToWrap.height));
-			var startingRect = new DOMRect(startX, startY, 200, 100);
+			var startingRect = new DOMRect(startX, startY-10, 200, 100);
 			var widthToTheLeft = startX;
 			var widthToTheRight = size.parentWidth - (startingRect.x + startingRect.width);
 
