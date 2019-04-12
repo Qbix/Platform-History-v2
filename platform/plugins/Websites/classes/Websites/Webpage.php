@@ -176,18 +176,19 @@ class Websites_Webpage
 	 * Create Websites/webpage stream from params
 	 * @method createStream
 	 * @static
+	 * @param string $publisherId
 	 * @param array $params
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */
-	static function createStream ($params) {
+	static function createStream ($publisherId, $params) {
 		$url = Q::ifset($params, 'url', null);
 		if (!filter_var($url, FILTER_VALIDATE_URL)) {
 			throw new Exception("Invalid URL");
 		}
 		$urlParsed = parse_url($url);
 
-		$userId = Q::ifset($params, 'userId', Users::loggedInUser(true)->id);
+		$userId = $publisherId ?: Users::loggedInUser(true)->id;
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ?: null;
