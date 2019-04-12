@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Beartaíonn tú a íoc"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: muirear próiseáilte do {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Go raibh maith agat as d&#39;íocaíocht le {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Liostáladh {{call 'user.displayName'}} le {{plan.title}}",
+        "YouSubscribedTo": "Tá suibscríobh agat le {{plan.title}}"
+    }
+}

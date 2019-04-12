@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Uus element"
+    },
+    "labels": {
+        "Streams/invited": "Inimesed, keda ma kutsusin",
+        "Streams/invitedMe": "Kes kutsus mind"
+    },
+    "interests": {
+        "Filter": "Mida sa naudid?",
+        "CanAdd": "Kui te ikka ei leia seda, mida otsite, saate lisada uue huvi:",
+        "TrySynonyms": "\u00c4ra seda n\u00e4e? Proovige m\u00f5ningaid s\u00fcnon\u00fc\u00fcme.",
+        "AddUnderCategory": "Lisa kategooriasse ...",
+        "Other": "Muu",
+        "Unlisted": "Loetlemata"
+    },
+    "chat": {
+        "flaggedForAdminReview": "S\u00f5num on t\u00e4histatud administraatori \u00fclevaatuse jaoks. Puudutage uuesti, et eemaldada.",
+        "noOneSaid": "Keegi pole midagi \u00f6elnud",
+        "closeChatButton": "Sule vestlus",
+        "closeChatConfirmTitle": "Sulge see vestlus?",
+        "closeChatConfirm": "Kas soovite kindlasti selle vestluse sulgeda?",
+        "closeChatConfirmYes": "Jah",
+        "closeChatConfirmNo": "Ei",
+        "earlierComments": "varasemad m\u00e4rkused"
+    },
+    "notifications": {
+        "*": "S\u00f5num {{& message.fields.type}} {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} \u00fctles:",
+        "Streams/changed": "Muudatused {{stream.fields.title}}",
+        "Streams/invite": "Teid kutsuti {{& stream.fields.title}}",
+        "Streams/announcement": "Teade {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} muutis voo juurdep\u00e4\u00e4su",
+        "Streams/chat/edit": "Vestluss\u00f5num muudetud",
+        "Streams/chat/remove": "Vestluss\u00f5num eemaldati",
+        "Streams/closed": "{{stream.fields.title}} on suletud",
+        "Streams/task/progress": "{{stream.fields.title}} tehtud edusammud",
+        "Streams/task/complete": "\u00dclesanne on l\u00f5petatud: {{stream.fields.title}}",
+        "Streams/task/error": "Viga: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Sissetulev s\u00f5num"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Valige oma kontaktidest",
+            "selectFromContacts": "Valige men\u00fc\u00fcst Kontaktid",
+            "photo": "Pildista",
+            "photoInstruction": "Kui teie QR-koodi skaneeriv isik on teie ees, pildistage neist",
+            "to": "Kuni: {{Stream Title}}",
+            "go": "Mine",
+            "title": "Kutsu",
+            "placeholder": "Mobiilinumber v\u00f5i e-posti aadress",
+            "orInvite": "V\u00f5i kutsuge inimesi, kasutades j\u00e4rgmist:",
+            "QR": "QR-koodi genereerimiseks {{ClickOrTap}}",
+            "QRtitle": "Skannige see QR-kood",
+            "byEmail": "E-post",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Nad skaneerisid seda!"
+        },
+        "email": {
+            "subject": "Hei, vaata seda",
+            "PleaseVisitLink": "Palun k\u00fclastage j\u00e4rgmist linki:",
+            "InvitingYou": "Kutsun teid {{title}}",
+            "HasInvitedYou": "{{displayName}} kutsus teid {{title}}"
+        },
+        "sms": {
+            "content": "Teid kutsuti {{title}}. Palun puudutage {{url}}"
+        },
+        "notice": {
+            "text": "Teid on kutsutud. {{ClickOrTap}} siin, et n\u00f5ustuda ja liituda."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} postitas <em>{{message.fields.type}}</em> s\u00f5numi {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Kutsed saadetakse meie numbrist, mida teie s\u00f5brad veel ei tunne. J\u00e4lgige kiiret teksti, et teada saada, et kutse tuli sinult, paludes neil linki kl\u00f5psata.",
+            "confirm": "Kutsed saadetakse meie numbrist, mida teie s\u00f5brad veel ei tunne. Kas soovite kiiret teksti j\u00e4lgida, et anda neile teada, et kutse tuli sinult, paludes neil linki kl\u00f5psata.",
+            "check": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma SMS-i ja kl\u00f5psake linki!"
+        },
+        "email": {
+            "alert": "Kutsed saadetakse meie domeenist, mida teie s\u00f5brad veel ei tunne. J\u00e4lgige kiiret teksti, et teada saada, et kutse tuli sinult, paludes neil linki kl\u00f5psata.",
+            "confirm": "Kutsed saadetakse meie domeenist, mida teie s\u00f5brad veel ei tunne. Kas soovite kiiret teksti j\u00e4lgida, et anda neile teada, et kutse tuli sinult, paludes neil linki kl\u00f5psata.",
+            "subject": "Kas sa said kutse?",
+            "body": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma e-posti ja kl\u00f5psake seal olevat linki!"
+        }
+    }
+}

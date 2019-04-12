@@ -23,6 +23,19 @@ class Q
 	}
 	
 	/**
+	 * Returns the names of all the plugins, including "Q" at the beginning
+	 * @return {string}
+	 */
+	static function plugins()
+	{
+		$plugins = Q_Config::expect('Q', 'plugins');
+		if (!in_array("Q", $plugins)) {
+			array_unshift($plugins, "Q");
+		}
+		return $plugins;
+	}
+	
+	/**
 	 * Used for shorthand for avoiding when you don't want to write
 	 * (isset($some_long_expression) ? $some_long_expression: null)
 	 * when you want to avoid possible "undefined variable" errors.
@@ -81,7 +94,7 @@ class Q
 			}
 			if (is_array($ref2)) {
 				foreach ($key as $k) {
-					if (array_key_exists($k, $ref2)) {
+					if (isset($ref2[$k])) {
 						$ref2 = $ref2[$k];
 						continue 2;
 					}
@@ -102,6 +115,20 @@ class Q
 		return $ref2;
 	}
 
+	/**
+	 * Reverse the order of the keys
+	 * @method reverseOrder
+	 * @static
+	 * @param {array} $what The array to reverse
+	 * @return {array} The reversed array
+	 */
+	static function reverseOrder(array $what)
+	{
+		return array_combine(
+		   array_reverse(array_keys($what)),
+		   array_reverse(array_values($what))
+		);
+	}
 
 	/**
 	 * Returns the number of milliseconds since the

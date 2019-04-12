@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Toqueu per pagar"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: càrrec processat per {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Gràcies pel vostre pagament a {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} s&#39;ha subscrit a {{plan.title}}",
+        "YouSubscribedTo": "Heu estat subscrit a {{plan.title}}"
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Napaka {{status}} med zahtevo",
+        "canceled": "Zahteva je bila preklicana",
+        "500": "Napaka notranjega strežnika",
+        "404": "Ni bilo mogoče najti: {{url}}",
+        "501": "Zahteva je bila prekinjena"
+    },
+    "nonce": {
+        "sameDomain": "Seja je potekla. Osvežite stran in poskusite znova.",
+        "otherDomain": "Blokirana zahteva za več domen na tujo domeno {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tapnite",
+        "click": "kliknite",
+        "yes": "da",
+        "no": "ne",
+        "Tap": "Tapnite",
+        "Click": "Kliknite",
+        "Yes": "Da",
+        "No": "Ne"
+    },
+    "months": {
+        "1": "Januar",
+        "2": "Februar",
+        "3": "Marec",
+        "4": "April",
+        "5": "May",
+        "6": "Junij",
+        "7": "Julij",
+        "8": "Avgust",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "December"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Dovolite dostop do mikrofona",
+        "record": "Zapiši",
+        "recording": "Snemanje",
+        "remains": "ostanki",
+        "maximum": "največ",
+        "playing": "Igranje",
+        "recorded": "Posneto",
+        "clip": "posnetek",
+        "orupload": "Ali naložite",
+        "usethis": "Uporabi to",
+        "discard": "Zavrzi",
+        "encoding": "Kodiranje"
+    },
+    "alert": {
+        "title": "Opozorilo"
+    },
+    "confirm": {
+        "title": "Potrdite",
+        "ok": "Da",
+        "cancel": "Ne"
+    },
+    "prompt": {
+        "title": "Poziv",
+        "ok": "Pojdi"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Napaka pri branju datoteke",
+        "cameraCommands": {
+            "prompt": "Kaj bi rad počel?",
+            "photo": "Posnemite novo fotografijo",
+            "library": "Izberite iz knjižnice"
+        },
+        "tooSmall": "Izberite večjo sliko.",
+        "cropping": {
+            "title": "Prilagodite velikost in položaj",
+            "touchscreen": "S prsti lahko povečate in povlečete",
+            "notTouchscreen": "Uporabite miško in kolesce za povečavo in povlecite"
+        }
+    }
+}

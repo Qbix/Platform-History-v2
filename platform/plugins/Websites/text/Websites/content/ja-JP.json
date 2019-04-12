@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "\u4fc3\u9032\u3059\u308b\u305f\u3081\u306e\u30ea\u30f3\u30af",
+                "startDate": "\u958b\u59cb\u65e5",
+                "startTime": "\u59cb\u307e\u308b\u6642\u9593",
+                "endDate": "\u7d42\u4e86\u65e5",
+                "endTime": "\u7d42\u4e86\u6642\u9593",
+                "budget": "\u4e88\u7b97"
+            },
+            "interests": {
+                "Title": "\u95a2\u5fc3\u3067\u7d5e\u308a\u8fbc\u3080",
+                "FilterInterests": "\u8208\u5473\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044..."
+            },
+            "Interest": "\u8208\u5473",
+            "Location": "\u30ed\u30b1\u30fc\u30b7\u30e7\u30f3"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "\u884c\u304f",
+            "PasteLinkHere": "\u3053\u3053\u306b\u30ea\u30f3\u30af\u3092\u8cbc\u308a\u4ed8\u3051\u3066\u304f\u3060\u3055\u3044"
+        }
+    }
+}

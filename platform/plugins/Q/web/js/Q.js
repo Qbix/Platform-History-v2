@@ -1475,7 +1475,7 @@ Q.isPlainObject = function (x) {
 		return false;
 	}
 	if (root.attachEvent && !root.addEventListener) {
-		// This is just for IE8
+		// This is just for old browsers
 		if (x && x.constructor !== Object) {
 			return false;
 		}
@@ -2655,7 +2655,7 @@ var _layoutEvents = [];
  * Call this function to get an event which occurs every time
  * Q.layout() is called on the given element or one of its parents.
  * @param {Element} [element=document.documentElement] 
- * @event onLayout
+ * @return {Q.Event}
  */
 Q.onLayout = function (element) {
 	element = element || document.documentElement;
@@ -3800,8 +3800,10 @@ Q.Tool.beforeRemove = Q.Event.factory(_beforeRemoveToolHandlers, ["", _toolEvent
  * @param {boolean} removeCached
  *  Defaults to false. Whether the tools whose containing elements have the "data-Q-retain" attribute
  *  should be removed.
+ * @param {boolean} [removeElementAfterLastTool=false]
+ *  If true, removes the element if the last tool on it was removed
  */
-Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
+Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLastTool) {
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
@@ -3819,7 +3821,7 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached) {
 				continue;
 			}
 
-			toolElement.Q.tools[tn[i]].remove(removeCached);
+			toolElement.Q.tools[tn[i]].remove(removeCached, removeElementAfterLastTool);
 		}
 	});
 };
@@ -4293,12 +4295,14 @@ Tp.siblings = function Q_Tool_prototype_siblings() {
  * You should call Q.Tool.remove unless, for some reason, you plan to
  * remove this exact tool instance, and not its children or siblings.
  * @method remove
- * @param {boolean} removeCached
+ * @param {boolean} [removeCached=false]
  *  Defaults to false. Whether or not to remove the actual tool if its containing element
  *  has a "data-Q-retain" attribute.
+ * @param {boolean} [removeElementAfterLastTool=false]
+ *  If true, removes the element if the last tool on it was removed
  * @return {boolean} Returns whether the tool was removed.
  */
-Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
+Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLastTool) {
 
 	var i;
 	var shouldRemove = removeCached
@@ -4331,7 +4335,9 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached) {
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
 	if (Q.isEmpty(Q.Tool.active[this.id])) {
-		Q.removeElement(this.element);
+		if (removeElementAfterLastTool) {
+			Q.removeElement(this.element);
+		}
 		delete Q.Tool.active[this.id];
 	}
 
@@ -5720,7 +5726,13 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 				}
 			});
 		}
-	}, {"method": "post", "skipNonce": true});
+	}, {
+		"method": "post",
+		"skipNonce": true,
+		"fields": {
+			"Q.startNewSession": true
+		}
+	});
 };
 
 /**
@@ -5757,6 +5769,60 @@ Q.beforeUnload = function _Q_beforeUnload(notice) {
 		}
 		return notice; // For Safari and Chrome
 	};
+};
+
+/**
+ * Calculate the total number of pixels that fixed elements take up
+ * from the given side of the screen. The elements are found by simply
+ * looking for the class 'Q_fixed_' + from, which should have been added to them.
+ * @param {String} [from='top'] can also be 'bottom', 'left', 'right'
+ * @param {Array|HTMLElement,Function} [filter]
+ *  Can pass an array of (class names to avoid, and elements to restrict to their siblings)
+ *  or a function which takes a string and returns Boolean of whether to use the element.
+ * @return {Number}
+ */
+Q.fixedOffset = function (from, filter) {
+	var elements = document.body.getElementsByClassName('Q_fixed_'+from);
+	var result = 0;
+	Q.each(elements, function () {
+		if (Q.isArrayLike(filter)) {
+			var classes = this.className.split(' ');
+			if (false === Q.each(filter, function (i, item) {
+				if (item instanceof HTMLElement) {
+					if (false !== Q.each(this.parentNode.childNodes, function () {
+						if (this === filter) {
+							return false;
+						}
+					})) {
+						return false;
+					}
+				} else if (typeof item === 'string') {
+					if (classes.indexOf(item) >= 0) {
+						return false;
+					}
+				}
+			})) {
+				return;
+			}
+		}
+		if (typeof filter === 'function' && !filter.apply(this)) {
+			return;
+		}
+		var rect = this.getBoundingClientRect();
+		switch (from) {
+			case 'top':
+			case 'bottom':
+				result += rect.height;
+				break;
+			case 'left': 
+			case 'right':
+				result += rect.width;
+				break;
+			default:
+				return;
+		}
+	});
+	return result;
 };
 
 /**
@@ -6080,7 +6146,8 @@ Q.isReady = function _Q_isReady() {
 };
 
 /**
- * Returns whether the client is currently connected to the 'net
+ * Returns whether the client is currently connected to the Internet.
+ * In the future, this will not be a binary thing ;-)
  * @static
  * @method isOnline
  * @return {boolean}
@@ -6940,7 +7007,7 @@ Q.formPost = function _Q_formPost(action, fields, method, options) {
 	form.submit();
 	setTimeout(function () {
 		if (!o.form) {
-			Q.removeElement(form);
+			Q.removeElement(form, true);
 		} else {
 			for (var i=hiddenFields.length-1; i>=0; --i) {
 				Q.removeElement(hiddenFields[i]);
@@ -7674,12 +7741,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 		}
 	}
 	if (ret !== true) {
-		var children;
-		if ('children' in elem) {
-			children = elem.children;
-		} else {
-			children = elem.childNodes; // more tedious search
-		}
+		var children = ('children' in elem) ? elem.children : elem.childNodes;
 		var c = [];
 		if (children) {
 			for (i=0; i<children.length; ++i) {
@@ -9916,10 +9978,6 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 			return Q.handle(callback, null, options, []);
 		}
 		return this.each(function _jQuery_fn_activate_each(index, element) {
-			if (!$(element).closest('html').length) {
-				console.log("Q.activate: element " + element.id + " is not in the DOM");
-				return false; // avoid doing work if it's not in the DOM
-			}
 			Q.activate(element, options, callback);
 		});
 	};
@@ -10344,6 +10402,11 @@ if (Q.info.isAndroidStock) {
 if (Q.info.hasNotch) {
 	de.addClass('Q_notch');
 }
+
+Q.ignoreBackwardCompatibility = {
+	dashboard: false,
+	notices: false
+};
 
 Q.Page.onLoad('').set(function () {
 	de.addClass(Q.info.uri.module + '_' + Q.info.uri.action)
@@ -10897,6 +10960,8 @@ Q.Pointer = {
 	 * @param {Object} [options] possible options, which can include:
 	 * @param {String} [options.src] the url of the hint pointer image
 	 * @param {Point} [options.hotspot={x:0.5,y:0.3}] "x" and "y" represent the location of the hotspot within the image, using fractions between 0 and 1
+	 * @param {String} [options.classes=""] Additional CSS classes to add to hint images
+	 * @param {Object} [options.styles=""] Additional CSS styles to add to hint images
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
@@ -10913,6 +10978,7 @@ Q.Pointer = {
 	 * @param {Integer} [options.show.initialScale=10] The initial scale of the hint pointer image in the show animation
 	 * @param {Integer} [options.show.duration=500] The duration of the hint show animation
 	 * @param {Function} [options.show.ease=Q.Animation.ease.smooth]
+	 * @param {Integer} [options.hide.after=null] Set an integer here to hide the hint animation after the specified number of milliseconds
 	 * @param {Integer} [options.hide.duration=500] The duration of the hint hide animation
 	 * @param {Function} [options.hide.ease=Q.Animation.ease.smooth]
 	 */
@@ -10941,10 +11007,14 @@ Q.Pointer = {
 		img1.style.display = 'block';
 		img1.style.pointerEvents = 'none';
 		img1.setAttribute('class', 'Q_hint');
+		if (options.classes) {
+			img1.addClass(options.classes);
+		}
 		img1.style.opacity = 0;
 		img1.hide = o.hide;
 		img1.dontStopBeforeShown = o.dontStopBeforeShown;
 		qphi.push(img1);
+		img1.style.visibility = 'hidden';
 		document.body.appendChild(img1);
 		hintEvent.add(Q.once(function _hintReady() {
 			img1.timeout = setTimeout(function () {
@@ -10956,6 +11026,7 @@ Q.Pointer = {
 				if (Q.isEmpty(targets)) {
 					return;
 				}
+				img1.style.visibility = 'visible';
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
@@ -11000,7 +11071,12 @@ Q.Pointer = {
 					var width = parseInt(img.style.width);
 					var height = parseInt(img.style.height);
 					Q.Animation.play(function (x, y) {
-						img.style.opacity = y;
+						if (options.styles) {
+							Q.extend(img.style, options.styles);
+						}
+						if (!options.styles || !options.styles.opacity) {
+							img.style.opacity = y;
+						}
 						if (o.show.initialScale !== 1) {
 							var z = 1 + (o.show.initialScale - 1) * (1 - y);
 							var w = width * z;
@@ -11011,6 +11087,11 @@ Q.Pointer = {
 							img.style.top = point.y - h * o.hotspot.y + 'px';
 						}
 					}, o.show.duration, o.show.ease);
+					if (options.hide && options.hide.after) {
+						setTimeout(function () {
+							_stopHint(img);
+						}, options.hide.after);
+					}
 				});
 			}, o.show.delay);
 		}));
@@ -11061,30 +11142,61 @@ Q.Pointer = {
 		var imgs = Q.Pointer.hint.imgs;
 		var imgs2 = [];
 		Q.each(imgs, function (i, img) {
-			var outside = (
-				Q.instanceOf(container, Element)
-				&& !container.contains(img.target)
-			);
-			if ((img.timeout !== false && img.dontStopBeforeShown)
-			|| outside) {
+			if (_stopHint(img, container)) {
 				imgs2.push(img);
-				return;
 			}
-			if (img.audio) {
-				img.audio.pause();
-			}
-			clearTimeout(img.timeout);
-			img.timeout = null;
-			Q.Animation.play(function (x, y) {
-				img.style.opacity = 1-y;
-			}, img.hide.duration, img.hide.ease)
-			.onComplete.set(function () {
-				if (img.parentNode) {
-					img.parentNode.removeChild(img);
-				}
-			});
 		});
 		Q.Pointer.hint.imgs = imgs2;
+	},
+	/**
+	 * Start showing touchlabels on elements with data-touchlabel="Label text"
+	 * to help people who touch an element know what it's going to do if they release
+	 * their finger on it.
+	 * @method startTouchlabels
+	 * @param {Element} [element=document.body] The element in which to activate touchlabels.
+	 * @param {Boolean} [onlyTouchscreen=false] Whether to only do it on a touchscreen
+	 * @static
+	 */
+	activateTouchlabels: function (element, onlyTouchscreen) {
+		if (onlyTouchscreen && !Q.info.isTouchscreen) {
+			return;
+		}
+		element = element || document.body;
+		var div = document.createElement('div');
+		div.addClass('Q_touchlabel');
+		document.body.appendChild(div);
+		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
+			var x = Q.Pointer.getX(e);
+			var y = Q.Pointer.getY(e);
+			var t = document.elementFromPoint(x, y);
+			while (t) {
+				if (!t.hasAttribute || !t.hasAttribute('data-touchlabel')) {
+					t = t.parentNode
+					continue;
+				}
+				div.innerHTML = t.getAttribute('data-touchlabel');
+				var erect = element.getBoundingClientRect();
+				var rect = div.getBoundingClientRect();
+				var trect = t.getBoundingClientRect();
+				var r = Q.getObject(['touches', 0, 'radiusY'], e) || 10;
+				var left1 = Math.min(
+					x - rect.width / 2,
+					erect.left + erect.width - rect.width
+				);
+				var top1 = Q.info.isTouchscreen
+					? y - r - rect.height
+					: trect.bottom;
+				div.style.left = Math.max(erect.left, left1) + 'px';
+				div.style.top = Math.max(erect.top, top1) + 'px';
+				div.addClass('Q_touchlabel_show');
+				return;
+			}
+			// if we are here, nothing matched
+			div.removeClass('Q_touchlabel_show');
+		}, false, true);
+		Q.addEventListener(document.body, 'touchend mouseup', function () {
+			div.removeClass('Q_touchlabel_show');
+		}, false, true);
 	},
 	/**
 	 * Consistently prevents the default behavior of an event across browsers
@@ -11228,6 +11340,32 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+function _stopHint(img, container) {
+	var outside = (
+		Q.instanceOf(container, Element)
+		&& !container.contains(img.target)
+	);
+	if ((img.timeout !== false && img.dontStopBeforeShown)
+	|| outside) {
+		return img;
+	}
+	if (img.audio) {
+		img.audio.pause();
+	}
+	clearTimeout(img.timeout);
+	img.timeout = null;
+	var initialOpacity = parseFloat(img.style.opacity);
+	Q.Animation.play(function (x, y) {
+		img.style.opacity = initialOpacity * (1-y);
+	}, img.hide.duration, img.hide.ease)
+	.onComplete.set(function () {
+		if (img.parentNode) {
+			img.parentNode.removeChild(img);
+		}
+	});
+	return null;
+}
 
 var _isTouchscreen = Q.info.isTouchscreen;
 Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
@@ -12031,6 +12169,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
 /**
  * Speak text in various browsers.
  * @method speak
+ * @static
  * @param {String|Array} text Pass the string of text to speak, or an array of
  *  [textSource, pathArray] to the string loaded with Q.Text.get() 
  * @param {Object} [options] An optional hash of options for Q.Audio.speak:
@@ -12043,13 +12182,10 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
  */
 Q.Audio.speak = function (text, options) {
-	var TTS = Q.getObject("window.TTS"); // cordova
-	var SS = Q.getObject("window.speechSynthesis"); //browsers
+	var TTS = root.TTS; // cordova
+	var SS = root.speechSynthesis; //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
 	o.locale = o.locale ||  Q.Text.languageLocale;
-	if (typeof text !== "string") {
-		throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
-	}
 	if (Q.isArrayLike(text)) {
 		var source = text[0];
 		var pathArray = text[1];
@@ -12113,7 +12249,10 @@ Q.Audio.speak = function (text, options) {
 		return voice;
 	}
 	function _proceed(text) {
-		if (TTS) {
+		if (typeof text !== "string") {
+			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
+		}
+		if (root.TTS) {
 			TTS.speak({
 				text: text,
 				locale: o.locale,
@@ -12125,7 +12264,7 @@ Q.Audio.speak = function (text, options) {
 			});
 		} else if (SS) {
 			if (SS.speaking) {
-				return;
+				SS.cancel();
 			}
 			Q.Audio.loadVoices(function (err, voices) {
 				var msg = Q.firstErrorMessage(err, voices);
@@ -12164,6 +12303,19 @@ Q.Audio.speak.options = {
 	locale: null
 };
 Q.Audio.speak.enabled = !Q.info.isTouchscreen;
+
+/**
+ * Stop speaking text, if any
+ * @method stopSpeaking
+ * @static
+ */
+Q.Audio.stopSpeaking = function () {
+	if (root.TTS) {
+		root.TTS.stop();
+	} else if (root.speechSynthesis) {
+		root.speechSynthesis.pause();
+	}
+}
 
 /**
  * Methods for temporarily covering up certain parts of the screen with masks
@@ -12431,6 +12583,8 @@ Q.onInit.add(function () {
 
 Q.onJQuery.add(function ($) {
 	
+	Q.$ = $;
+	
 	Q.Tool.define({
 		"Q/inplace": "{{Q}}/js/tools/inplace.js",
 		"Q/tabs": "{{Q}}/js/tools/tabs.js",
@@ -12446,7 +12600,9 @@ Q.onJQuery.add(function ($) {
 		"Q/rating": "{{Q}}/js/tools/rating.js",
 		"Q/paging": "{{Q}}/js/tools/paging.js",
 		"Q/pie": "{{Q}}/js/tools/pie.js",
-		"Q/badge": "{{Q}}/js/tools/badge.js"
+		"Q/badge": "{{Q}}/js/tools/badge.js",
+		"Q/resize": "{{Q}}/js/tools/resize.js",
+		"Q/layouts": "{{Q}}/js/tools/layouts.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -12920,7 +13076,19 @@ Q.Camera = {
 			 * @param {object} options object with options to replace default
 			 */
 			instascan: function (audio, callback, options) {
-				var _constructor = function (dialog) {
+				Q.addScript('{{Q}}/js/qrcode/instascan.js', function () {
+					Q.Dialogs.push({
+						title: options.dialog.title,
+						className: "Q_scanning",
+						content: "",
+						fullscreen: true,
+						onActivate: _onActivate,
+						onClose: function () {
+							Q.handle(Q.Camera.Scan.onClose);
+						}
+					});
+				});
+				function _onActivate(dialog) {
 					var $element = $(".Q_dialog_slot", dialog);
 					var $title = $(".Q_title_slot", dialog);
 
@@ -12981,22 +13149,7 @@ Q.Camera = {
 					}).catch(function (e) {
 						console.error(e);
 					});
-				};
-
-				Q.addScript(['{{Q}}/js/qrcode/instascan.js'], function () {
-					Q.Dialogs.push({
-						title: options.dialog.title,
-						className: "Q_scanning",
-						content: "",
-						fullscreen: true,
-						onActivate: function (dialog) {
-							_constructor(dialog);
-						},
-						onClose: function () {
-							Q.handle(Q.Camera.Scan.onClose);
-						}
-					});
-				});
+				}
 			}
 		}
 	}
@@ -13234,6 +13387,12 @@ Q.beforeInit.addOnce(function () {
 	}
 	if (Q.getObject('Q.info.cookies.indexOf') && Q.info.cookies.indexOf('Q_dpr')) {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
+	}
+	if (!Q.ignoreBackwardCompatibility.dashboard) {
+		document.getElementById('dashboard_slot').addClass('Q_fixed_top');
+	}
+	if (!Q.ignoreBackwardCompatibility.notices) {
+		document.getElementById('notices_slot').addClass('Q_fixed_top');
 	}
 	// This loads bluebird library to enable Promise for browsers which do not
 	// support Promise natively. For example: IE, Opera Mini.

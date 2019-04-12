@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link zu f\u00f6rdern",
+                "startDate": "Anfangsdatum",
+                "startTime": "Startzeit",
+                "endDate": "Endtermin",
+                "endTime": "Endzeit",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Nach Interesse filtern",
+                "FilterInterests": "Beginnen Sie mit der Eingabe eines Interesses ..."
+            },
+            "Interest": "Interesse",
+            "Location": "Ort"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gehen",
+            "PasteLinkHere": "F\u00fcgen Sie hier einen Link ein"
+        }
+    }
+}

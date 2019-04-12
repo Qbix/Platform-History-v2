@@ -2,6 +2,12 @@
 
 function Streams_after_Users_User_saveExecute($params)
 {
+	static $processing;
+	if ($processing) {
+		return;
+	}
+	$processing = true;
+
 	// If the username or icon was somehow modified,
 	// update all the avatars for this publisher
 	$modifiedFields = $params['modifiedFields'];
@@ -14,7 +20,19 @@ function Streams_after_Users_User_saveExecute($params)
 		$updates['icon'] = $modifiedFields['icon'];
 	}
 
-	$skipExistingOnInsert = $user->get('Streams', 'skipExistingOnInsert', null);
+	// if we only modified some inconsequential fields, no need to proceed
+	$mf = $modifiedFields;
+	unset($mf['updatedTime']);
+	unset($mf['signedUpWith']);
+	unset($mf['pincodeHash']);
+	unset($mf['emailAddressPending']);
+	unset($mf['mobileNumberPending']);
+	unset($mf['sessionId']);
+	unset($mf['sessionCount']);
+	unset($mf['insertedTime']);
+	if (empty($mf)) {
+		return;
+	}
 
 	// some standard values
 	if (!empty(Streams::$cache['fullName'])) {
@@ -25,30 +43,41 @@ function Streams_after_Users_User_saveExecute($params)
 		$firstName = null;
 		$lastName = null;
 	}
+	$values = array(
+		'Streams/user/firstName' => $firstName,
+		'Streams/user/lastName' => $lastName
+	);
+	if (!empty($updates['icon'])) {
+		$values['Streams/user/icon'] = $modifiedFields['icon'] = $updates['icon'];
+	}
 	if (!$user->get('leaveDefaultIcon', false)
+	and !$user->get('skipIconSearch', false)
 	and $search = Q_Config::get('Users', 'icon', 'search', array())
 	and !Users::isCustomIcon($user->icon)) {
 		foreach ($search as $service) {
 			try {
-				$fullName = Streams::$cache['fullName'];
+				$fullName = Q::ifset(Streams::$cache, 'fullName', null);
+
+				if (!$fullName) {
+					continue;
+				}
+
 				$query = $fullName['first'] . ' ' . $fullName['last'];
 				$results = call_user_func(
 					array('Q_Image', $service), $query, array(), false
 				);
 				if ($src = reset($results)) {
 					$icon = Q_Image::iconArrayWithUrl($src, 'Users/icon');
-					Users::importIcon($user, $icon);
+					$cookie = Q_Config::get('Q', 'images', $service, 'cookie', null);
+					Users::importIcon($user, $icon, null, $cookie);
 					$user->save();
+					$values['Streams/user/icon'] = $modifiedFields['icon'] = $user->icon;
 					break;
 				}
 			} catch (Exception $e) {
 			}
 		}
 	}
-	$values = array(
-		'Streams/user/firstName' => $firstName,
-		'Streams/user/lastName' => $lastName
-	);
 	$toInsert = $params['inserted']
 		? Q_Config::get('Streams', 'onInsert', 'Users_User', array())
 		: array();
@@ -90,16 +119,21 @@ function Streams_after_Users_User_saveExecute($params)
 	$so = array();
 	$streamsToJoin = array();
 	$streamsToSubscribe = array();
-	$existing = Streams::fetch($user->id, $user->id, $toInsert);
+	$rows = Streams_Stream::select('name')->where(array(
+		'publisherId' => $user->id,
+		'name' => $toInsert
+	))->fetchAll(PDO::FETCH_ASSOC);
+	$existing = array();
+	foreach ($rows as $row) {
+		$existing[$row['name']] = true;
+	}
 	$toCreate = array();
 	foreach ($toInsert as $name) {
-		if (!empty($existing[$name]) and $skipExistingOnInsert) {
+		if (!empty($existing[$name])) {
 			continue;
 			$stream = new Streams_Stream();
 			$stream->publisherId = $user->id;
 			$stream->name = $name;
-		} else if ($skipExistingOnInsert) {
-			continue;
 		}
 		$s = array(
 			'publisherId' => $user->id,
@@ -120,9 +154,11 @@ function Streams_after_Users_User_saveExecute($params)
 			$s['attributes']['sizes'] = $sizes;
 			$s['attributes']['icon'] = $user->icon;
 		}
-		$stream = $existing[$name];
 		if (isset($values[$name])) {
 			$s['content'] = $values[$name];
+			if ($s['type'] === 'Streams/image') {
+				$s['icon'] = $s['content'];
+			}
 		}
 		$toCreate[$name] = $s;
 		if ($so[$name] = $p->get($name, "subscribe", array())) {
@@ -144,19 +180,23 @@ function Streams_after_Users_User_saveExecute($params)
 		if (!$stream) {
 			Streams::create($user->id, $user->id, "Streams/greeting", compact('name'));
 
+			$text = Q_Text::get('Streams/content', array(
+				'language' => Q::ifset($user, 'preferredLanguage', null)
+			));
+
 			// Create some standard labels
 			$label = new Users_Label();
 			$label->userId = $user->id;
 			$label->label = 'Streams/invited';
 			$label->icon = 'labels/Streams/invited';
-			$label->title = 'People I invited';
+			$label->title = $text['labels']['Streams/invited'];
 			$label->save(true);
 
 			$label2 = new Users_Label();
 			$label2->userId = $user->id;
 			$label2->label = 'Streams/invitedMe';
 			$label2->icon = 'labels/Streams/invitedMe';
-			$label2->title = 'Who invited me';
+			$label2->title = $text['labels']['Streams/invitedMe'];
 			$label2->save(true);
 
 			// By default, users they invite should see their full name
@@ -194,7 +234,7 @@ function Streams_after_Users_User_saveExecute($params)
 				->where(array('publisherId' => $user->id))
 				->execute();
 		}
-		
+
 		foreach ($modifiedFields as $field => $value) {
 			$name = Q_Config::get('Streams', 'onUpdate', 'Users_User', $field, null);
 			if (!$name) continue;
@@ -205,13 +245,17 @@ function Streams_after_Users_User_saveExecute($params)
 				continue;
 			}
 			$stream->content = $value;
+			if ($stream->type === 'Streams/image') {
+				$stream->icon = $value;
+			}
 			if ($name === "Streams/user/icon") {
                 $sizes = Q_Image::getSizes('Users/icon');
 				ksort($sizes);
                 $stream->setAttribute('sizes', $sizes);
-				$stream->icon = $changes['icon'] = $user->icon;
 			}
 			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}
 	}
+
+	$processing = false;
 }

@@ -215,7 +215,7 @@ class Q_Image
 		$cookie = Q_Config::expect('Q', 'images', 'facebook', 'cookie');
 		$url = 'https://mbasic.facebook.com/search/top/?q='.urlencode($keywords);
 		$html = Q_Utils::get($url, null, true, array("cookie: $cookie"));
-		$pattern = '/\\<img src=\\"([^\\"]*?)\\" class=\\"cf cg/i';
+		$pattern = '/\\<img src=\\"([^\\"]*?)\\" class=\\".*\\" alt=\\"'.$keywords.'\\"/i';
 		$matches = array();
 		preg_match_all($pattern, $html, $matches);
 		$results = array();
@@ -408,21 +408,15 @@ class Q_Image
 				}
 				// calculate the origin point of source image
 				// we have a cropped image of dimension $sw, $sh and need to make new with dimension $dw, $dh
-				if ($dw/$sw < $dh/$sh) {
-					// source is wider then destination
-					$new = $dw/$dh * $sh;
-					$sx += round(($sw - $new)/2);
-					$sw = round($new);
-				} else {
-					// source is narrower then destination
-					$new = $dh/$dw * $sw;
-					$sy += round(($sh - $new)/2);
-					$sh = round($new);
-				}
+				$min = min($sw / $dw, $sh / $dh);
+				$w2 = round($dw * $min);
+				$h2 = round($dh * $min);
+				$sx = round($sx + ($sw - $w2) / 2);
+				$sy = round($sy + ($sh - $h2) / 2);
 			} else {
 				$size = '';
-				$dw = $sw;
-				$dh = $sh;
+				$dw = $w2 = $sw;
+				$dh = $h2 = $sh;
 			}
 			// create destination image
 			$maxWidth = Q_Config::get('Q', 'images', 'maxWidth', null);
@@ -436,9 +430,9 @@ class Q_Image
 			$thumb = imagecreatetruecolor($dw, $dh);
 			imagesavealpha($thumb, true);
 			imagealphablending($thumb, false);
-			$res = ($sw === $dw && $sh === $dh)
-				? imagecopy($thumb, $image, 0, 0, $sx, $sy, $sw, $sh)
-				: imagecopyresampled($thumb, $image, 0, 0, $sx, $sy, $dw, $dh, $sw, $sh);
+			$res = ($w2 === $dw && $h2 === $dh)
+				? imagecopy($thumb, $image, 0, 0, $sx, $sy, $w2, $h2)
+				: imagecopyresampled($thumb, $image, 0, 0, $sx, $sy, $dw, $dh, $w2, $h2);
 			if (!$res) {
 				throw new Q_Exception("Failed to save image file of type '$ext'");
 			}

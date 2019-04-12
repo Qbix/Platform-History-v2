@@ -214,6 +214,14 @@ class Q_Response
 	 */
 	static function setNotice($key, $notice, $options = array())
 	{
+		if (empty($notice)) {
+			return;
+		}
+
+		if (!is_array($options)) {
+			$options = array();
+		}
+
 		if (!isset($options['closeable'])) {
 			$options['closeable'] = true;
 		}
@@ -1602,15 +1610,28 @@ class Q_Response
 			list($value, $expires, $path) = $args;
 			self::_cookie($name, $value, $expires, $path);
 		}
-		// A reasonable P3P policy for old IE to allow 3rd party cookies.
-		// Consider overriding it with a real P3P policy for your app.
-		$header = 'P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"';
-		$header = Q::event('Q/Response/setCookie',
+		$header = '';
+		$header = Q::event('Q/Response/sendCookieHeaders',
 			compact('name', 'value', 'expires', 'path', 'header'),
 			'before', false, $header
 		);
 		header($header);
 		self::$cookies = array();
+	}
+
+	static function flushAndContinue($timeLimit = 30)
+	{
+		self::setIgnoreUserAbort(true);
+		set_time_limit($timeLimit);
+		ob_start();
+		header('Connection: close');
+		header('Content-Length: '.ob_get_length());
+		ob_end_flush();
+		$level = ob_get_level();
+		while (--$level >= 0) {
+			ob_flush();
+		}
+		flush();
 	}
 	
 	protected static function _cookie($name, $value, $expires, $path)

@@ -229,7 +229,8 @@ Q.Tool.define("Q/columns", function(options) {
 		if (!div) {
 			createdNewDiv = true;
 			div = document.createElement('div').addClass('Q_columns_column');
-			div.style.display = 'none';
+			// div.style.display = 'none';
+			div.style.visibility = 'hidden';
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
@@ -238,7 +239,7 @@ Q.Tool.define("Q/columns", function(options) {
 			titleSlot = $ts[0];
 			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
-			$controls = $('<div class="Q_controls_slot"></div>');
+			$controls = $('<div class="Q_controls_slot" class="Q_fixed_bottom"></div>');
 			controlsSlot = $controls[0];
 			state.container = tool.$('.Q_columns_container')[0];
 			$div.append($title, columnSlot, controlsSlot)
@@ -303,6 +304,8 @@ Q.Tool.define("Q/columns", function(options) {
 		if ($div.css('position') === 'static') {
 			$div.css('position', 'relative');
 		}
+		var _position = $div.css('position');
+		$div.css('position', 'absolute');
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
 		if (options.name) {
@@ -392,6 +395,7 @@ Q.Tool.define("Q/columns", function(options) {
 			p.add(waitFor, function () {
 				var data = tool.data(index);
 				if ($(div).closest('html').length) {
+					$div.css('position', _position);
 					var name = $(div).attr('data-name');
 					var js = state.handlers && state.handlers[name];
 					if (js) {
@@ -524,6 +528,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$mask = $('<div class="Q_columns_mask" />')
 				.appendTo($div);
 				$div.show()
+				.css('visibility', 'visible')
 				.addClass('Q_columns_opening')
 				.css(o.animation.css.hide)
 				.stop()
@@ -688,7 +693,9 @@ Q.Tool.define("Q/columns", function(options) {
 
 			var data = tool.data(index);
 			var $sc = $(state.container);
-			$sc.width($sc.width() - w);
+			if (!Q.info.isMobile) {
+				$sc.width($sc.width() - w);
+			}
 			presentColumn(tool);
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
@@ -726,16 +733,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var $columns = $('.Q_columns_column', $te);
 		var $container = $('.Q_columns_container', $te);
 		var $cs = $('.Q_columns_column .Q_column_slot', $te);
-		var top = 0;
-		
-		$te.prevAll()
-		.each(function () {
-			var $this = $(this);
-			if ($this.css('position') === 'fixed'
-			&& !$this.hasClass('Q_drawers_drawer')) {
-				top += $this.outerHeight() + parseInt($this.css('margin-bottom'));
-			}
-		});
+		var top = Q.fixedOffset('top', ['Q_drawers_drawer', tool.element]);
 		
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');

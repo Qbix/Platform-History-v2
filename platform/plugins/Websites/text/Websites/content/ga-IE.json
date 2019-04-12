@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Nasc le cur chun cinn",
+                "startDate": "D\u00e1ta tosaigh",
+                "startTime": "Am Tosaigh",
+                "endDate": "D\u00e1ta deiridh",
+                "endTime": "Am Deireadh",
+                "budget": "Buis\u00e9ad"
+            },
+            "interests": {
+                "Title": "Scagaire le Leas",
+                "FilterInterests": "Tosaigh ag cl\u00f3scr\u00edobh sp\u00e9ise ..."
+            },
+            "Interest": "\u00das",
+            "Location": "Su\u00edomh"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "T\u00e9igh",
+            "PasteLinkHere": "Greamaigh nasc anseo"
+        }
+    }
+}

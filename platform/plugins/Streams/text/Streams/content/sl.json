@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Nov element"
+    },
+    "labels": {
+        "Streams\/invited": "Ljudje, ki sem jih povabil",
+        "Streams\/invitedMe": "Kdo me je povabil"
+    },
+    "interests": {
+        "Filter": "Kaj uživate?",
+        "CanAdd": "Če še vedno ne najdete tistega, kar iščete, spodaj lahko dodate novo zanimanje:",
+        "TrySynonyms": "Ne vidiš? Poskusite nekaj sinonimov.",
+        "AddUnderCategory": "Dodaj pod kategorijo ...",
+        "Other": "Drugo",
+        "Unlisted": "Neobjavljeno"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Sporočilo je bilo označeno za skrbniško oceno. Znova se dotaknite, da zavlačite.",
+        "noOneSaid": "Nihče ni rekel ničesar",
+        "closeChatButton": "Zapri klepet",
+        "closeChatConfirmTitle": "Zapri ta klepet?",
+        "closeChatConfirm": "Ali ste prepričani, da želite zapreti ta klepet?",
+        "closeChatConfirmYes": "Da",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "prejšnjih pripomb"
+    },
+    "notifications": {
+        "*": "Sporočilo {{& message.fields.type}} do {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} je rekel:",
+        "Streams\/changed": "Spremembe v {{stream.fields.title}}",
+        "Streams\/invite": "Povabljeni ste bili na {{& stream.fields.title}}",
+        "Streams\/announcement": "Obvestilo v {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} je spremenil dostop do toka",
+        "Streams\/chat\/edit": "Urejeno sporočilo za klepet",
+        "Streams\/chat\/remove": "Sporočilo klepeta je odstranjeno",
+        "Streams\/closed": "{{stream.fields.title}} je bil zaprt",
+        "Streams\/task\/progress": "Napredek, dosežen {{stream.fields.title}}",
+        "Streams\/task\/complete": "Naloga je končana: {{stream.fields.title}}",
+        "Streams\/task\/error": "Napaka med: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Dohodno sporočilo"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} vas je povabil na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Izberite iz imenika",
+            "selectFromContacts": "Izberite Iz imenika",
+            "photo": "Fotografirati",
+            "photoInstruction": "Če je oseba, ki je skenirala vašo QR kodo pred vami, posnemite fotografijo",
+            "to": "V: {{Stream Title}}",
+            "go": "Pojdi",
+            "title": "Povabi",
+            "placeholder": "Številka mobilnega telefona ali e-poštni naslov",
+            "orInvite": "Ali povabite osebe z:",
+            "QR": "{{ClickOrTap}} za ustvarjanje QR kode",
+            "QRtitle": "Skenirajte to kodo QR",
+            "byEmail": "E-naslov",
+            "byText": "Besedilo",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Skenirali so ga!"
+        },
+        "email": {
+            "subject": "Hej, poglej to",
+            "PleaseVisitLink": "Obiščite naslednjo povezavo:",
+            "InvitingYou": "Vabim vas na {{title}}",
+            "HasInvitedYou": "{{displayName}} vas je povabil na {{title}}"
+        },
+        "sms": {
+            "content": "Povabljeni ste bili na {{title}}. Pritisnite {{url}}"
+        },
+        "notice": {
+            "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} je objavil sporočilo <em>{{message.fields.type}}<\/em> za {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Povabila so poslana iz naše številke, ki jih vaši prijatelji še ne prepoznajo. Nadaljujte s hitrim besedilom, da jim sporočite, da je povabilo prišlo od vas, in jih prosili, da kliknejo povezavo.",
+            "confirm": "Povabila so poslana iz naše številke, ki jih vaši prijatelji še ne prepoznajo. Želite nadaljevati s hitrim besedilom in jim sporočiti, da je povabilo prišlo od vas, in jih prosili, naj klikne povezavo.",
+            "check": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Prosimo, preverite sms in kliknite povezavo!"
+        },
+        "email": {
+            "alert": "Povabila so poslana iz naše domene, ki jih vaši prijatelji še ne prepoznajo. Nadaljujte s hitrim besedilom, da jim sporočite, da je povabilo prišlo od vas, in jih prosili, da kliknejo povezavo.",
+            "confirm": "Povabila so poslana iz naše domene, ki jih vaši prijatelji še ne prepoznajo. Želite nadaljevati s hitrim besedilom in jim sporočiti, da je povabilo prišlo od vas, in jih prosili, naj klikne povezavo.",
+            "subject": "Si dobil povabilo?",
+            "body": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Preverite vaš e-poštni naslov in kliknite povezavo tam!"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ادا کرنے کے لئے ٹپ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} کے لئے عملدرآمد چارج",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} کی ادائیگی کے لئے آپ کا شکریہ",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} کو سبسکرائب کیا",
+        "YouSubscribedTo": "آپ {{plan.title}} کو سبسکرائب کیا گیا ہے"
+    }
+}

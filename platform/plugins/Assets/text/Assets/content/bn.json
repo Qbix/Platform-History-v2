@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "বেতন দিতে আলতো চাপুন"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} এর জন্য প্রক্রিয়াকৃত চার্জ",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} এ আপনার প্রদানের জন্য আপনাকে ধন্যবাদ",
+        "SubscribedTo": "{{call 'user.displayName'}} সাবস্ক্রাইব {{plan.title}}",
+        "YouSubscribedTo": "আপনি {{plan.title}} সাবস্ক্রাইব করেছেন"
+    }
+}

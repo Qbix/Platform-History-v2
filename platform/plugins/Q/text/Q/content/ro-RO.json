@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Eroare {{status}} în timpul solicitării",
+        "canceled": "Cererea a fost anulată",
+        "500": "Eroare interna a serverului",
+        "404": "Nu a fost găsit: {{url}}",
+        "501": "Cererea a fost întreruptă"
+    },
+    "nonce": {
+        "sameDomain": "Sesiunea a expirat. Actualizați pagina și încercați din nou.",
+        "otherDomain": "A blocat cererea de domeniu încrucișat în domeniul străin la {{baseUrl}}"
+    },
+    "words": {
+        "tap": "Atingeți",
+        "click": "clic",
+        "yes": "da",
+        "no": "Nu",
+        "Tap": "Atingeți",
+        "Click": "Clic",
+        "Yes": "da",
+        "No": "Nu"
+    },
+    "months": {
+        "1": "ianuarie",
+        "2": "februarie",
+        "3": "Martie",
+        "4": "Aprilie",
+        "5": "Mai",
+        "6": "iunie",
+        "7": "iulie",
+        "8": "August",
+        "9": "Septembrie",
+        "10": "octombrie",
+        "11": "noiembrie",
+        "12": "decembrie"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Permiteți accesul la microfon",
+        "record": "Record",
+        "recording": "Înregistrare",
+        "remains": "rămășițe",
+        "maximum": "maxim",
+        "playing": "Joc",
+        "recorded": "Înregistrate",
+        "clip": "clamă",
+        "orupload": "Sau încărcați",
+        "usethis": "Foloseste asta",
+        "discard": "decarta",
+        "encoding": "Codare"
+    },
+    "alert": {
+        "title": "Alerta"
+    },
+    "confirm": {
+        "title": "A confirma",
+        "ok": "da",
+        "cancel": "Nu"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Merge"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Eroare la citirea fișierului",
+        "cameraCommands": {
+            "prompt": "Ce ai vrea sa faci?",
+            "photo": "Luați o fotografie nouă",
+            "library": "Selectați din bibliotecă"
+        },
+        "tooSmall": "Alegeți o imagine mai mare.",
+        "cropping": {
+            "title": "Reglați mărimea și poziția",
+            "touchscreen": "Utilizați degetele pentru a mări și a mări",
+            "notTouchscreen": "Utilizați mouse-ul și rotița pentru a mări și a mări"
+        }
+    }
+}

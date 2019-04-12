@@ -1040,6 +1040,9 @@ abstract class Streams extends Base_Streams
 		$publisherId, 
 		$fields = array())
 	{
+		if (empty($fields)) {
+			return array();
+		}
 		if (!isset($publisherId)) {
 			foreach ($fields as $f) {
 				if (!isset($f['publisherId'])) {
@@ -1060,6 +1063,7 @@ abstract class Streams extends Base_Streams
 		$toCreate = array();
 		$p = Streams::userStreamsTree();
 		$streams = array();
+		$messages = array();
 		foreach ($fields as $k => &$f) {
 			if (!isset($f['type'])) {
 				throw new Q_Exception_RequiredField(array('name' => 'type'));
@@ -1110,7 +1114,10 @@ abstract class Streams extends Base_Streams
 		}
 
 		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
-		Streams_Message::postMessages($asUserId, $messages, true);
+
+		if (!empty($messages)) {
+			Streams_Message::postMessages($asUserId, $messages, true);
+		}
 
 		foreach ($streams as $name => $s) {
 			$modifiedFields = $s->fields;
@@ -2563,6 +2570,9 @@ abstract class Streams extends Base_Streams
 		$streams,
 		$options = array())
 	{
+		if (empty($streams)) {
+			return array();
+		}
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {
@@ -2898,6 +2908,9 @@ abstract class Streams extends Base_Streams
 		$streams, 
 		$options = array())
 	{
+		if (empty($streams)) {
+			return array();
+		}
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {
@@ -2920,6 +2933,9 @@ abstract class Streams extends Base_Streams
 		if (isset($options['untilTime'])) {
 			$untilTime = $db->toDateTime($options['untilTime']);
 			$shouldUpdate = true;
+		}
+		if (isset($o['rule'])) {
+			$rule = $o['rule']; // we aren't updating rules like this though
 		}
 		$subscriptions = Streams_Subscription::select('*', 'a')
 		->where(array(
@@ -2953,11 +2969,28 @@ abstract class Streams extends Base_Streams
 			))->execute();
 		}
 		$rules = array();
+		$userStreamsTree = Streams::userStreamsTree();
 		if ($streamNamesMissing) {
 			$types = array();
-			foreach ($streamNamesMissing as $sn) {
-				$s = $subscriptions[$sn];
-				$types[$s->type][] = $sn;
+			$rows = Streams_Stream::select(array('name', 'type'))->where(array(
+				'publisherId' => $publisherId,
+				'name' => $streamNamesMissing
+			))->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($rows as $row) {
+				$name = $row['name'];
+				$types[$row['type']][] = $row['name'];
+			}
+			$o = $userStreamsTree->get($name, "subscribe", array());
+			if ($o) {
+				if (isset($o['filter'])) {
+					$filter = Q::json_encode($o['filter']);
+				}
+				if (isset($o['untilTime'])) {
+					$untilTime = $db->toDateTime($o['untilTime']);
+				}
+				if (isset($o['rule'])) {
+					$rule = $o['rule'];
+				}
 			}
 			$subscriptionRows = array();
 			$ruleRows = array();
@@ -3015,9 +3048,7 @@ abstract class Streams extends Base_Streams
 				}
 
 				// insert up to one rule per subscription
-				$rule = null;
-				if (isset($options['rule'])) {
-					$rule = $options['rule'];
+				if (isset($rule)) {
 					if (isset($rule['readyTime'])) {
 						$rule['readyTime'] = $db->toDateTime($rule['readyTime']);
 					}
@@ -4078,7 +4109,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($accessLabels)) {
 			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
 		}
-		$defaults = Streams_Stream::getConfigField($type, 'defaults', Streams_Stream::$DEFAULTS);
+		$defaults = Streams_Stream::getConfigField($streamType, 'defaults', Streams_Stream::$DEFAULTS);
 		$templateName = $streamType . '/';
 		$template = new Streams_Stream();
 		$template->publisherId = $publisherId;
@@ -4532,7 +4563,32 @@ abstract class Streams extends Base_Streams
 
 		return $stream;
 	}
-		/**
+
+	/**
+	 * Get the directory to import the icon into, for a stream.
+	 * Use this with Users::importIcon().
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} [$extra] You can pass time() here or something,
+	 *  if you don't want to overwrite old values.
+	 * @return {string}
+	 */
+	static function iconDirectory($publisherId, $streamName, $extra = null)
+	{
+		$splitId = Q_Utils::splitId($publisherId);
+		$sn = implode(DS, explode('/', $streamName));
+		$path = APP_WEB_DIR . DS . 'Q' . DS . 'uploads' . DS . 'Streams';
+		if ($realpath = realpath($path)) {
+			$path = $realpath;
+		}
+		$subpath = $splitId . DS . $sn . DS . 'icon';
+		if ($extra) {
+			$subpath .= DS . $extra;
+		}
+		return $realpath . DS . $subpath;
+	}
+
+	/**
 	 * Remove streams from system
 	 * @method removeStream
 	 * @static

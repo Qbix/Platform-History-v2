@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "\u65b0\u7269\u54c1"
+    },
+    "labels": {
+        "Streams/invited": "\u6211\u9080\u8bf7\u7684\u4eba",
+        "Streams/invitedMe": "\u8c01\u9080\u8bf7\u4e86\u6211"
+    },
+    "interests": {
+        "Filter": "\u4f60\u559c\u6b22\u4ec0\u4e48\uff1f",
+        "CanAdd": "\u5982\u679c\u60a8\u4ecd\u7136\u65e0\u6cd5\u627e\u5230\u6240\u9700\u5185\u5bb9\uff0c\u53ef\u4ee5\u5728\u4e0b\u65b9\u6dfb\u52a0\u65b0\u5174\u8da3\uff1a",
+        "TrySynonyms": "\u770b\u4e0d\u5230\u4e86\u5417\uff1f\u5c1d\u8bd5\u4e00\u4e9b\u540c\u4e49\u8bcd\u3002",
+        "AddUnderCategory": "\u5728\u7c7b\u522b\u4e0b\u6dfb\u52a0...",
+        "Other": "\u5176\u4ed6",
+        "Unlisted": "\u4e0d\u516c\u5f00"
+    },
+    "chat": {
+        "flaggedForAdminReview": "\u6d88\u606f\u5df2\u88ab\u6807\u8bb0\u4e3a\u7ba1\u7406\u5458\u5ba1\u6838\u3002\u518d\u6b21\u70b9\u6309\u5373\u53ef\u53d6\u6d88\u6807\u8bb0\u3002",
+        "noOneSaid": "\u6ca1\u6709\u4eba\u8bf4\u8fc7\u4ec0\u4e48",
+        "closeChatButton": "\u5173\u95ed\u804a\u5929",
+        "closeChatConfirmTitle": "\u5173\u95ed\u6b64\u804a\u5929\uff1f",
+        "closeChatConfirm": "\u60a8\u786e\u5b9a\u8981\u5173\u95ed\u6b64\u804a\u5929\u5417\uff1f",
+        "closeChatConfirmYes": "\u662f",
+        "closeChatConfirmNo": "\u6ca1\u6709",
+        "earlierComments": "\u65e9\u5148\u7684\u8bc4\u8bba"
+    },
+    "notifications": {
+        "*": "\u6d88\u606f{{& message.fields.type}}\u81f3{{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}}\u8bf4\uff1a",
+        "Streams/changed": "{{stream.fields.title}}\u4e2d\u7684\u66f4\u6539",
+        "Streams/invite": "\u4f60\u88ab\u9080\u8bf7\u5230{{& stream.fields.title}}",
+        "Streams/announcement": "{{& streams.fields.title}}\u4e2d\u7684\u516c\u544a",
+        "Streams/access": "{{&call 'avatar.displayName'}}\u66f4\u6539\u4e86\u6d41\u8bbf\u95ee\u6743\u9650",
+        "Streams/chat/edit": "\u804a\u5929\u6d88\u606f\u5df2\u7f16\u8f91",
+        "Streams/chat/remove": "\u804a\u5929\u6d88\u606f\u5df2\u5220\u9664",
+        "Streams/closed": "{{stream.fields.title}}\u5df2\u88ab\u5173\u95ed",
+        "Streams/task/progress": "{{stream.fields.title}}\u53d6\u5f97\u7684\u8fdb\u5c55",
+        "Streams/task/complete": "\u4efb\u52a1\u5df2\u5b8c\u6210\uff1a{{stream.fields.title}}",
+        "Streams/task/error": "\u9519\u8bef\u671f\u95f4\uff1a{{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}\uff1a\u4f20\u5165\u6d88\u606f"
+    },
+    "invite": {
+        "messageContent": "{{displayName}}\u9080\u8bf7\u60a8{{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "\u4ece\u8054\u7cfb\u4eba\u4e2d\u9009\u62e9",
+            "selectFromContacts": "\u9009\u62e9\u6765\u81ea\u8054\u7cfb\u4eba",
+            "photo": "\u62cd\u5f20\u7167\u7247",
+            "photoInstruction": "\u5982\u679c\u626b\u63cf\u60a8\u7684QR\u7801\u7684\u4eba\u5728\u60a8\u9762\u524d\uff0c\u8bf7\u62cd\u4e0b\u4ed6\u4eec\u7684\u7167\u7247",
+            "to": "\u6536\u4ef6\u4eba\uff1a{{Stream Title}}",
+            "go": "\u8d70",
+            "title": "\u9080\u8bf7",
+            "placeholder": "\u624b\u673a\u53f7\u7801\u6216\u7535\u5b50\u90ae\u4ef6\u5730\u5740",
+            "orInvite": "\u6216\u8005\u901a\u8fc7\u4f7f\u7528\u4ee5\u4e0b\u65b9\u5f0f\u9080\u8bf7",
+            "QR": "{{ClickOrTap}}\u751f\u6210QR\u7801",
+            "QRtitle": "\u626b\u63cf\u6b64\u4e8c\u7ef4\u7801",
+            "byEmail": "\u7535\u5b50\u90ae\u4ef6",
+            "byText": "\u6587\u672c",
+            "byFacebook": "Facebook\u7684",
+            "byTwitter": "\u63a8\u7279",
+            "QRscanned": "\u4ed6\u4eec\u626b\u63cf\u4e86\u4e00\u4e0b\uff01"
+        },
+        "email": {
+            "subject": "\u563f\uff0c\u770b\u770b\u8fd9\u4e2a",
+            "PleaseVisitLink": "\u8bf7\u8bbf\u95ee\u4ee5\u4e0b\u94fe\u63a5\uff1a",
+            "InvitingYou": "\u6211\u9080\u8bf7\u4f60{{title}}",
+            "HasInvitedYou": "{{displayName}}\u5df2\u9080\u8bf7\u60a8{{title}}"
+        },
+        "sms": {
+            "content": "\u60a8\u5df2\u53d7\u9080{{title}}\u3002\u8bf7\u70b9\u6309{{url}}"
+        },
+        "notice": {
+            "text": "\u4f60\u88ab\u9080\u8bf7\u4e86\u3002 {{ClickOrTap}}\u5728\u8fd9\u91cc\u63a5\u53d7\u5e76\u52a0\u5165\u3002"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}}\u5411{{stream.fields.title}}\u53d1\u5e03\u4e86<em>{{message.fields.type}}\u6761</em>\u6d88\u606f"
+        },
+        "text": {
+            "body": "{{& url}}\u4e2d\u7684{{& call 'avatar.displayName'}}\uff1a{{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u53f7\u7801\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8ba4\u51fa\u3002\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8981\u6c42\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
+            "confirm": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u53f7\u7801\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8ba4\u51fa\u3002\u60a8\u60f3\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8bf7\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
+            "check": "\u563f\uff0c\u6211\u521a\u7ed9\u4f60\u53d1\u4e86\u4e00\u4e2a{{app}}\u5e94\u7528\u9080\u8bf7\u51fd\u3002\u8bf7\u68c0\u67e5\u60a8\u7684\u77ed\u4fe1\uff0c\u7136\u540e\u5355\u51fb\u94fe\u63a5\uff01"
+        },
+        "email": {
+            "alert": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u57df\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8bc6\u522b\u3002\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8981\u6c42\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
+            "confirm": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u57df\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8bc6\u522b\u3002\u60a8\u60f3\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8bf7\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
+            "subject": "\u4f60\u6709\u9080\u8bf7\u5417\uff1f",
+            "body": "\u563f\uff0c\u6211\u521a\u7ed9\u4f60\u53d1\u4e86\u4e00\u4e2a{{app}}\u5e94\u7528\u9080\u8bf7\u51fd\u3002\u8bf7\u68c0\u67e5\u60a8\u7684\u7535\u5b50\u90ae\u4ef6\uff0c\u7136\u540e\u5355\u51fb\u5176\u4e2d\u7684\u94fe\u63a5\uff01"
+        }
+    }
+}

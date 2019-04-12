@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "رابط لتعزيز",
+                "startDate": "تاريخ البدء",
+                "startTime": "وقت البدء",
+                "endDate": "تاريخ الانتهاء",
+                "endTime": "وقت النهاية",
+                "budget": "ميزانية"
+            },
+            "interests": {
+                "Title": "تصفية حسب الفائدة",
+                "FilterInterests": "ابدأ في كتابة اهتمام ..."
+            },
+            "Interest": "فائدة",
+            "Location": "موقعك"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "اذهب",
+            "PasteLinkHere": "الصق رابط هنا"
+        }
+    }
+}

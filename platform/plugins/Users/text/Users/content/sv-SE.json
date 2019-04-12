@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "logga in",
+        "LogOut": "logga ut"
+    },
+    "activate": {
+        "SetAsPrimary": "Ange {{1}} som min primära {{2}}",
+        "ChoosePassPhrase": "Välj en <strong>lösenordsfras för<\/strong> att logga in med. <br> En enkel fras som består av några ord som du lätt kommer ihåg.",
+        "ChoosePassPhraseSeeSuggestions": "Välj en bra <strong>lösenordsfras för<\/strong> att skydda ditt konto. Se förslag till några idéer.",
+        "LogOutAndTryAgain": "Logga ut och försök igen",
+        "IfYouFeel": "Om du känner att något gick fel kan du",
+        "SetIdentifierButtonTitle": "börja om"
+    },
+    "session": {
+        "GetStarted": "Komma igång"
+    },
+    "authorize": {
+        "GetStarted": "Komma igång",
+        "Authorize": "Godkänna",
+        "TermsLabel": "Jag har läst och godkänt <br> till {{link}}",
+        "TermsTitle": "Villkor"
+    },
+    "register": {
+        "TermsLabel": "Jag accepterar {{link}}",
+        "TermsTitle": "Villkor"
+    },
+    "notifications": {
+        "title": "Lov",
+        "prompt": "Vill du aktivera anmälningar? Du får uppdateringar i realtid om saker du bryr dig om.",
+        "yes": "Ja",
+        "no": "Nej",
+        "WelcomePleaseVerifyEmail": "Välkommen! Vänligen verifiera din email adress.",
+        "WelcomeVerifyEmail": "Välkommen! Verifiera din e-postadress.",
+        "ForgetPass": "Hej, glömde du ditt lösenord?"
+    },
+    "usersContacts": {
+        "selectLabel": "Var god välj etikett.",
+        "inviteUser": "Bjud in användaren"
+    },
+    "invalidLanguageSelected": "Ogiltigt språk valt"
+}

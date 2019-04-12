@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tapnite za plačilo"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: bremenitev za {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Zahvaljujemo se vam za plačilo do {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} je naročen na {{plan.title}}",
+        "YouSubscribedTo": "Naročeni ste na {{plan.title}}"
+    }
+}

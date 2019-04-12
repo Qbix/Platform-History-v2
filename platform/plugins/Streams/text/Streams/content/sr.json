@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Нова ставка"
+    },
+    "labels": {
+        "Streams\/invited": "Људи које сам позвао",
+        "Streams\/invitedMe": "Ко ме је позвао"
+    },
+    "interests": {
+        "Filter": "Шта уживаш?",
+        "CanAdd": "Ако и даље не можете да пронађете оно што тражите, у наставку можете додати нови интерес:",
+        "TrySynonyms": "Не видите га? Испробајте неке синониме.",
+        "AddUnderCategory": "Додај под категорију ...",
+        "Other": "Друго",
+        "Unlisted": "Унлистед"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Порука је означена за преглед администратора. Додирните поново да бисте одбацили ознаку.",
+        "noOneSaid": "Нико није ништа рекао",
+        "closeChatButton": "Затвори ћаскање",
+        "closeChatConfirmTitle": "Затвори овај разговор?",
+        "closeChatConfirm": "Јесте ли сигурни да желите да затворите овај разговор?",
+        "closeChatConfirmYes": "да",
+        "closeChatConfirmNo": "Не",
+        "earlierComments": "ранији коментари"
+    },
+    "notifications": {
+        "*": "Порука {{& message.fields.type}} до {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} је рекао:",
+        "Streams\/changed": "Промене у {{stream.fields.title}}",
+        "Streams\/invite": "Позвани сте на {{& stream.fields.title}}",
+        "Streams\/announcement": "Обавештење у {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} је променио ток приступа",
+        "Streams\/chat\/edit": "Измењена порука за ћаскање",
+        "Streams\/chat\/remove": "Порука за ћаскање је уклоњена",
+        "Streams\/closed": "{{stream.fields.title}} је затворен",
+        "Streams\/task\/progress": "Напредак остварен {{stream.fields.title}}",
+        "Streams\/task\/complete": "Задатак је завршен: {{stream.fields.title}}",
+        "Streams\/task\/error": "Грешка током: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Долазна порука"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} вас је позвао на {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Изаберите из контаката",
+            "selectFromContacts": "Изаберите Из контаката",
+            "photo": "Сликати",
+            "photoInstruction": "Ако је особа која је скенирала ваш КР код испред вас, направите фотографију",
+            "to": "За: {{Stream Title}}",
+            "go": "Иди",
+            "title": "Позови",
+            "placeholder": "Број мобилног телефона или адреса е-поште",
+            "orInvite": "Или позовите људе помоћу:",
+            "QR": "{{ClickOrTap}} за генерисање КР кода",
+            "QRtitle": "Скенирајте овај КР код",
+            "byEmail": "Емаил",
+            "byText": "Текст",
+            "byFacebook": "Фацебоок",
+            "byTwitter": "Твиттер",
+            "QRscanned": "Скенирали су га!"
+        },
+        "email": {
+            "subject": "Хеј, види ово",
+            "PleaseVisitLink": "Посетите следећу везу:",
+            "InvitingYou": "Позивам вас на {{title}}",
+            "HasInvitedYou": "{{displayName}} вас је позвао на {{title}}"
+        },
+        "sms": {
+            "content": "Позвани сте на {{title}}. Додирните {{url}}"
+        },
+        "notice": {
+            "text": "Позвани сте. {{ClickOrTap}} овде да прихватим и придружим се."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} је поставио <em>{{message.fields.type}}<\/em> поруку на {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} у {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Позиви се шаљу из нашег броја, које ваши пријатељи још не препознају. Наставите са кратким текстом да бисте сазнали да је позив стигао од вас, тражећи од њих да кликну на везу.",
+            "confirm": "Позиви се шаљу из нашег броја, које ваши пријатељи још не препознају. Желите ли да наставите са кратким текстом да бисте сазнали да је позив стигао од вас, тражећи да кликну на везу.",
+            "check": "Хеј, управо сам ти послао позивницу у {{app}} апликацију. Молимо Вас да погледате смс и кликнете на линк!"
+        },
+        "email": {
+            "alert": "Позиви се шаљу из нашег домена, које ваши пријатељи још не препознају. Наставите са кратким текстом да бисте сазнали да је позив стигао од вас, тражећи од њих да кликну на везу.",
+            "confirm": "Позиви се шаљу из нашег домена, које ваши пријатељи још не препознају. Желите ли да наставите са брзим текстом да бисте сазнали да је позив стигао од вас, тражећи да кликну на везу",
+            "subject": "Јеси ли добио позивницу?",
+            "body": "Хеј, управо сам ти послао позивницу у {{app}} апликацију. Молимо Вас да проверите своју е-пошту и кликнете на линк тамо!"
+        }
+    }
+}

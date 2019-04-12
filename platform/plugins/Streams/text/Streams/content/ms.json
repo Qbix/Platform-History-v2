@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Item baru"
+    },
+    "labels": {
+        "Streams\/invited": "Orang yang saya jemput",
+        "Streams\/invitedMe": "Siapa menjemput saya"
+    },
+    "interests": {
+        "Filter": "Apa yang anda nikmati?",
+        "CanAdd": "Jika anda masih tidak dapat mencari apa yang anda cari, anda boleh menambah minat baru di bawah:",
+        "TrySynonyms": "Tidak melihatnya? Cuba beberapa sinonim.",
+        "AddUnderCategory": "Tambah di bawah kategori ...",
+        "Other": "Lain-lain",
+        "Unlisted": "Tidak tersenarai"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesej telah ditandakan untuk semakan pentadbir. Ketik lagi untuk unflag.",
+        "noOneSaid": "Tiada siapa yang mengatakan apa-apa",
+        "closeChatButton": "Tutup sembang",
+        "closeChatConfirmTitle": "Tutup sembang ini?",
+        "closeChatConfirm": "Adakah anda pasti mahu menutup sembang ini?",
+        "closeChatConfirmYes": "Ya",
+        "closeChatConfirmNo": "Tidak",
+        "earlierComments": "komen awal"
+    },
+    "notifications": {
+        "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} berkata:",
+        "Streams\/changed": "Perubahan dalam {{stream.fields.title}}",
+        "Streams\/invite": "Anda telah dijemput untuk {{& stream.fields.title}}",
+        "Streams\/announcement": "Pengumuman di {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} menukar akses strim",
+        "Streams\/chat\/edit": "Mesej sembang diedit",
+        "Streams\/chat\/remove": "Mesej sembang dikeluarkan",
+        "Streams\/closed": "{{stream.fields.title}} telah ditutup",
+        "Streams\/task\/progress": "Kemajuan yang dibuat pada {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
+        "Streams\/task\/error": "Ralat semasa: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Mesej Masuk"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Pilih dari Kenalan anda",
+            "selectFromContacts": "Pilih Dari Kenalan",
+            "photo": "Ambil gambar",
+            "photoInstruction": "Jika orang yang mengimbas kod QR anda di hadapan anda, ambil gambar mereka",
+            "to": "Kepada: {{Stream Title}}",
+            "go": "Pergi",
+            "title": "Jemput",
+            "placeholder": "Nombor mudah alih atau alamat e-mel",
+            "orInvite": "Atau undang orang dengan menggunakan:",
+            "QR": "{{ClickOrTap}} untuk menjana kod QR",
+            "QRtitle": "Imbas kod QR ini",
+            "byEmail": "E-mel",
+            "byText": "Teks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Mereka mengimbasnya!"
+        },
+        "email": {
+            "subject": "Hei, periksa ini",
+            "PleaseVisitLink": "Sila lawati pautan berikut:",
+            "InvitingYou": "Saya menjemput anda ke {{title}}",
+            "HasInvitedYou": "{{displayName}} telah menjemput anda ke {{title}}"
+        },
+        "sms": {
+            "content": "Anda telah dijemput ke {{title}}. Sila ketik {{url}}"
+        },
+        "notice": {
+            "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} menyiarkan mesej <em>{{message.fields.type}}<\/em> kepada {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} dalam {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Undangan dihantar dari nombor kami, yang rakan anda belum mengenali. Ikuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan.",
+            "confirm": "Undangan dihantar dari nombor kami, yang rakan anda belum mengenali. Adakah anda ingin menindaklanjuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan tersebut.",
+            "check": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila periksa sms anda dan klik pautan!"
+        },
+        "email": {
+            "alert": "Jemputan dihantar dari domain kami, yang rakan anda belum mengenali. Ikuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan.",
+            "confirm": "Jemputan dihantar dari domain kami, yang rakan anda belum mengenali. Adakah anda ingin menindaklanjuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan tersebut.",
+            "subject": "Adakah anda mendapat jemputan?",
+            "body": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila semak e-mel anda dan klik pautan di sana!"
+        }
+    }
+}

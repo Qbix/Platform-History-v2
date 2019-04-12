@@ -46,6 +46,7 @@ abstract class Users extends Base_Users
 			false;
 		}
 		return strpos($icon, 'imported') !== false
+		or strpos($icon, 'uploads') !== false
 		or preg_match("/\/icon\/[0-9]+/", $icon);
 	}
 
@@ -65,12 +66,20 @@ abstract class Users extends Base_Users
 	 * Get the name of the main community from the config. Defaults to the app name.
 	 * @method communityName
 	 * @static
+	 * @param {boolean} $includeSuffix Whether to include the community suffix
 	 * @return {string} The name of the main community for the installed app.
 	 */
-	static function communityName()
+	static function communityName($includeSuffix = false)
 	{
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
-		return $communityName ? $communityName : Q::app();
+		$suffix = Q_Config::get('Users', 'community', 'suffix', null);
+		if (!$communityName) {
+			$communityName = Q::app();
+		}
+		if ($suffix) {
+			$communityName .= " $suffix";
+		}
+		return $communityName;
 	}
 	
 	/**
@@ -1098,6 +1107,13 @@ abstract class Users extends Base_Users
 		}
 		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
+		if (!is_array($icon) and !empty($_SESSION['Users']['register']['icon'])) {
+			$icon = $_SESSION['Users']['register']['icon'];
+			unset($_SESSION['Users']['register']['icon']);
+		}
+		if (is_array($icon)) {
+			$user->set('skipIconSearch', $icon);
+		}
 
 		Users::$cache['user'] = $user;
 
@@ -1118,7 +1134,7 @@ abstract class Users extends Base_Users
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
 		}
-		$user->icon = '{{Users}}/img/icons/default';
+		$user->icon = is_string($icon) ? $icon : '{{Users}}/img/icons/default';
 		$user->passphraseHash = '';
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
@@ -1424,9 +1440,10 @@ abstract class Users extends Base_Users
 	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
+	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
 	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
-	static function importIcon($user, $urls = array(), $directory = null)
+	static function importIcon($user, $urls = array(), $directory = null, $cookies = null)
 	{
 		$app = Q::app();
 		if (empty($directory)) {
@@ -1437,57 +1454,101 @@ abstract class Users extends Base_Users
 			return $directory;
 		}
 		Q_Utils::canWriteToPath($directory, null, true);
-		$largestSize = 0;
+		$largestWidth = 0;
+		$largestHeight = 0;
 		$largestUrl = null;
+		$largestCookie = null;
 		$largestImage = null;
+		$o = array();
+		// get image with largest width and height at the same time
 		foreach ($urls as $basename => $url) {
 			if (!is_string($url)) continue;
 			$filename = $directory.DS.$basename;
 			$info = pathinfo($filename);
-			$size = $info['filename'];
-			if ((string)(int)$size !== $size) continue;
-			if ($largestSize < (int)$size) {
-				$largestSize = (int)$size;
+			$parts = explode('x', $info['filename']);
+			if (count($parts) === 1) {
+				$width = $height = $parts[0];
+			} else if (!$parts[0]) {
+				$width = $height = $parts[1];
+			} else if (!$parts[1]) {
+				$width = $height = $parts[0];
+			}
+			if ($largestWidth < (int)$width
+			and $largestHeight < (int)$height) {
+				$largestWidth = (int)$width;
+				$largestHeight = (int)$height;
 				$largestUrl = $url;
+				$largestCookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
+				$o = $largestCookie ? array("cookie: $largestCookie") : array();
 			}
 		}
-		if ($largestSize) {
-			$largestImage = imagecreatefromstring(file_get_contents($largestUrl));
-			$liw = imagesx($largestImage);
-			$lih = imagesy($largestImage);
+		if ($largestUrl) {
+			if (Q_Valid::url($largestUrl)) {
+				$data = Q_Utils::get($largestUrl, null, true, $o);
+			} else {
+				$data = file_get_contents($largestUrl);
+			}
+			if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+				require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+				$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
+				$largestImage = $icoFileService->extractIcon($data, 32, 32);
+			} else {
+				$largestImage = imagecreatefromstring($data);
+			}
+			$sw = imagesx($largestImage);
+			$sh = imagesy($largestImage);
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
 			if (is_string($url)) {
 				$info = pathinfo($filename);
-				$size = $info['filename'];
-				$success = false;
-				if ($largestImage and (string)(int)$size === $size) {
-					if ($size == $largestSize
-					and $liw == $largestSize
-					and $lih == $largestSize) {
-						$image = $largestImage;
-						$success = true;
+				if ($largestImage) {
+					$source = $largestImage;
+				} else {
+					$cookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
+					$o = $cookie ? array("cookie: $largestCookie") : array();
+					if (Q_Valid::url($url)) {
+						$data = Q_Utils::get($url, null, true, $o);
 					} else {
-						$image = imagecreatetruecolor($size, $size);
-						imagealphablending($image, false);
-						$success = imagecopyresampled(
-							$image, $largestImage, 
-							0, 0, 
-							0, 0, 
-							$size, $size, 
-							$liw, $lih
-						);
+						$data = file_get_contents($url);
+					}
+					if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+						require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+						$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
+						$source = $icoFileService->extractIcon($data, 32, 32);
+					} else {
+						$source = imagecreatefromstring($data);
+					}
+					$sw = imagesx($source);
+					$sh = imagesy($source);
+				}
+				$parts = explode('x', $info['filename']);
+				if (count($parts) === 1) {
+					$w = $h = $parts[0];
+				} else {
+					if (!$parts[0] and $parts[1]) {
+						$w = $sw;
+						$h = $sh;
+					} else if (!$parts[0]) {
+						$h = $parts[1];
+						$w = $h / $sh * $sw;
+					} else if (!$parts[1]) {
+						$w = $parts[0];
+						$h = $w / $sw * $sh;
 					}
 				}
-				if (!$success) {
-					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, $url);
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-					$data = curl_exec($ch);
-					curl_close($ch);
-					$image = imagecreatefromstring($data);
+				if ($sw == $w and $sh == $h) {
+					$image = $largestImage;
+					$success = true;
+				} else {
+					$min = min($sw / $w, $sh / $h);
+					$w2 = $w * $min;
+					$h2 = $h * $min;
+					$sx = round(($sw - $w2) / 2);
+					$sy = round(($sh - $h2) / 2);
+					$image = imagecreatetruecolor($w, $h);
+					imagealphablending($image, false);
+					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {

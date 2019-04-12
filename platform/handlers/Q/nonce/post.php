@@ -2,5 +2,5 @@
 
 function Q_nonce_post()
 {
-	Q_Session::setNonce();
+	Q_Session::setNonce(false, true);
 }

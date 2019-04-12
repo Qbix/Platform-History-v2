@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Новий елемент"
+    },
+    "labels": {
+        "Streams\/invited": "Людей, яких я запросив",
+        "Streams\/invitedMe": "Хто мене запросив"
+    },
+    "interests": {
+        "Filter": "Що вам подобається?",
+        "CanAdd": "Якщо ви все ще не можете знайти те, що шукаєте, можна додати новий інтерес нижче:",
+        "TrySynonyms": "Не бачите? Спробуйте деякі синоніми.",
+        "AddUnderCategory": "Додати під категорію ...",
+        "Other": "Інший",
+        "Unlisted": "Не вказано"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Повідомлення позначено для перегляду адміністратором. Натисніть ще раз, щоб розблокувати.",
+        "noOneSaid": "Ніхто нічого не сказав",
+        "closeChatButton": "Закрити чат",
+        "closeChatConfirmTitle": "Закрити цей чат?",
+        "closeChatConfirm": "Ви впевнені, що хочете закрити цей чат?",
+        "closeChatConfirmYes": "Так",
+        "closeChatConfirmNo": "Ні",
+        "earlierComments": "попередні коментарі"
+    },
+    "notifications": {
+        "*": "Повідомлення {{& message.fields.type}} до {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} сказав:",
+        "Streams\/changed": "Зміни в {{stream.fields.title}}",
+        "Streams\/invite": "Вас запросили до {{& stream.fields.title}}",
+        "Streams\/announcement": "Оголошення в {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} змінив доступ до потоку",
+        "Streams\/chat\/edit": "Редагується повідомлення чату",
+        "Streams\/chat\/remove": "Видалено повідомлення чату",
+        "Streams\/closed": "{{stream.fields.title}} закрито",
+        "Streams\/task\/progress": "Прогрес досягнутий {{stream.fields.title}}",
+        "Streams\/task\/complete": "Завдання виконано: {{stream.fields.title}}",
+        "Streams\/task\/error": "Помилка під час: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Вхідне повідомлення"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} запросив вас до {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Виберіть з контактів",
+            "selectFromContacts": "Виберіть З контактів",
+            "photo": "Зробіть фотографію",
+            "photoInstruction": "Якщо людина, яка сканувала ваш QR-код, знаходиться перед вами, сфотографуйте їх",
+            "to": "До: {{Stream Title}}",
+            "go": "Ідіть",
+            "title": "Запросити",
+            "placeholder": "Номер мобільного телефону або адреса електронної пошти",
+            "orInvite": "Або запросити користувачів за допомогою:",
+            "QR": "{{ClickOrTap}} для створення QR-коду",
+            "QRtitle": "Скануйте цей QR-код",
+            "byEmail": "Електронна пошта",
+            "byText": "Текст",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Вони сканували його!"
+        },
+        "email": {
+            "subject": "Ей, перевірте це",
+            "PleaseVisitLink": "Перейдіть за таким посиланням:",
+            "InvitingYou": "Я запрошую вас до {{title}}",
+            "HasInvitedYou": "{{displayName}} запросив вас до {{title}}"
+        },
+        "sms": {
+            "content": "Вас запрошено до {{title}}. Натисніть {{url}}"
+        },
+        "notice": {
+            "text": "Вас запросили. {{ClickOrTap}} тут, щоб прийняти і приєднатися."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} опублікував повідомлення <em>{{message.fields.type}}<\/em> до {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} у {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Запрошення надсилаються з нашого номера, який ваші друзі ще не розпізнають. Слідкуйте за швидким текстом, щоб повідомити про те, що запрошення прийшло від вас, просивши їх натиснути на посилання.",
+            "confirm": "Запрошення надсилаються з нашого номера, який ваші друзі ще не розпізнають. Чи хотіли б ви скористатися швидким текстом, щоб повідомити про те, що запрошення прийшло від вас, просивши їх натиснути на посилання.",
+            "check": "Гей, я щойно надіслав вам запрошення до програми {{app}}. Будь ласка, перевірте ваші sms і натисніть на посилання!"
+        },
+        "email": {
+            "alert": "Запрошення надсилаються з нашого домену, які ваші друзі ще не розпізнають. Слідкуйте за швидким текстом, щоб повідомити про те, що запрошення прийшло від вас, просивши їх натиснути на посилання.",
+            "confirm": "Запрошення надсилаються з нашого домену, які ваші друзі ще не розпізнають. Чи хотіли б ви скористатися швидким текстом, щоб повідомити про те, що запрошення прийшло від вас, просивши їх натиснути на посилання.",
+            "subject": "Ви отримали запрошення?",
+            "body": "Гей, я щойно надіслав вам запрошення до програми {{app}}. Перевірте свою електронну пошту та натисніть посилання там!"
+        }
+    }
+}

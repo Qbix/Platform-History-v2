@@ -251,7 +251,8 @@ abstract class Assets extends Base_Assets
 
 	static function checkPaid(& $stream, $user) {
 		$communityId = $stream->getAttribute("communityId");
-		$roles = Users::roles($communityId, array(Q::app()."/admins", "Calendars/admins"));
+		$allowed = Q_Config::expect('Assets', 'canCheckPaid');
+		$roles = Users::roles($communityId, $allowed);
 
 		// if current user is a publisher or participant of app/admins or Calendars/admin
 		if ($stream->publisherId === $user->id || count($roles)) {

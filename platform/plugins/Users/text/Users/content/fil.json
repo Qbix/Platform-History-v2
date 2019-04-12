@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "mag log in",
+        "LogOut": "mag-log out"
+    },
+    "activate": {
+        "SetAsPrimary": "Itakda ang {{1}} bilang aking pangunahing {{2}}",
+        "ChoosePassPhrase": "Pumili ng <strong>pass phrase<\/strong> upang mag-log in gamit. <br> Ang isang simpleng parirala na binubuo ng ilang mga salita na madali mong matandaan.",
+        "ChoosePassPhraseSeeSuggestions": "Pumili ng isang mahusay na <strong>pass phrase<\/strong> upang protektahan ang iyong account. Tingnan ang mga mungkahi para sa ilang mga ideya.",
+        "LogOutAndTryAgain": "Mag-log Out at Subukan muli",
+        "IfYouFeel": "Kung sa tingin mo may nangyaring mali, maaari mo",
+        "SetIdentifierButtonTitle": "magsimula"
+    },
+    "session": {
+        "GetStarted": "Magsimula"
+    },
+    "authorize": {
+        "GetStarted": "Magsimula",
+        "Authorize": "Pahintulutan",
+        "TermsLabel": "Nabasa at sumasang-ayon ako <br> sa {{link}}",
+        "TermsTitle": "Mga Tuntunin"
+    },
+    "register": {
+        "TermsLabel": "Tinatanggap ko ang {{link}}",
+        "TermsTitle": "Mga Tuntunin"
+    },
+    "notifications": {
+        "title": "Pahintulot",
+        "prompt": "Gusto mo bang paganahin ang mga notification? Makakatanggap ka ng mga update sa real-time tungkol sa mga bagay na mahalaga sa iyo.",
+        "yes": "Oo",
+        "no": "Hindi",
+        "WelcomePleaseVerifyEmail": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
+        "WelcomeVerifyEmail": "Maligayang pagdating! I-verify ang iyong email address.",
+        "ForgetPass": "Hey, nakalimutan mo ba ang iyong passphrase?"
+    },
+    "usersContacts": {
+        "selectLabel": "Mangyaring piliin ang label.",
+        "inviteUser": "Anyayahan ang Gumagamit"
+    },
+    "invalidLanguageSelected": "Napili ang di-wastong wika"
+}

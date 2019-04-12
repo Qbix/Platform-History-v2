@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Jauns vienums"
+    },
+    "labels": {
+        "Streams\/invited": "Cilvēki, kurus es uzaicināju",
+        "Streams\/invitedMe": "Kas mani uzaicināja"
+    },
+    "interests": {
+        "Filter": "Kas jums patīk?",
+        "CanAdd": "Ja jūs joprojām nevarat atrast meklēto, varat pievienot jaunu interesi:",
+        "TrySynonyms": "Neredziet to? Izmēģiniet sinonīmus.",
+        "AddUnderCategory": "Pievienot kategorijā ...",
+        "Other": "Citi",
+        "Unlisted": "Sarakstā neiekļautie"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Ziņojums ir atzīmēts ar administratora pārskatīšanu. Pieskarieties vēlreiz, lai noņemtu.",
+        "noOneSaid": "Neviens neko nav teicis",
+        "closeChatButton": "Aizvērt tērzēšanu",
+        "closeChatConfirmTitle": "Aizvērt šo tērzēšanu?",
+        "closeChatConfirm": "Vai tiešām vēlaties aizvērt šo tērzēšanu?",
+        "closeChatConfirmYes": "Jā",
+        "closeChatConfirmNo": "Nē",
+        "earlierComments": "iepriekšējie komentāri"
+    },
+    "notifications": {
+        "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} teica:",
+        "Streams\/changed": "Izmaiņas {{stream.fields.title}}",
+        "Streams\/invite": "Jūs uzaicināja uz {{& stream.fields.title}}",
+        "Streams\/announcement": "Paziņojums {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} mainīja plūsmas piekļuvi",
+        "Streams\/chat\/edit": "Tērzēšanas ziņojums ir rediģēts",
+        "Streams\/chat\/remove": "Tērzēšanas ziņojums ir noņemts",
+        "Streams\/closed": "{{stream.fields.title}} ir aizvērts",
+        "Streams\/task\/progress": "Panākumi {{stream.fields.title}}",
+        "Streams\/task\/complete": "Uzdevums pabeigts: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kļūda laikā: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Ienākošais ziņojums"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Izvēlieties no saviem kontaktiem",
+            "selectFromContacts": "Izvēlieties No Contacts",
+            "photo": "Uzņemt fotogrāfiju",
+            "photoInstruction": "Ja persona, kas skenēja jūsu QR kodu, ir priekšā, fotografējiet to",
+            "to": "Kam: {{Stream Title}}",
+            "go": "Iet",
+            "title": "Uzaicināt",
+            "placeholder": "Mobilā tālruņa numurs vai e-pasta adrese",
+            "orInvite": "Vai aiciniet cilvēkus, izmantojot:",
+            "QR": "{{ClickOrTap}}, lai ģenerētu QR kodu",
+            "QRtitle": "Skenējiet šo QR kodu",
+            "byEmail": "E-pasts",
+            "byText": "Teksts",
+            "byFacebook": "Facebook",
+            "byTwitter": "Čivināt",
+            "QRscanned": "Viņi skenēja to!"
+        },
+        "email": {
+            "subject": "Hei, pārbaudiet to",
+            "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
+            "InvitingYou": "Es aicinu jūs uz {{title}}",
+            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}"
+        },
+        "sms": {
+            "content": "Jūs esat uzaicināts uz {{title}}. Lūdzu, pieskarieties {{url}}"
+        },
+        "notice": {
+            "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} publicēja <em>{{message.fields.type}}<\/em> ziņojumu uz {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
+            "confirm": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
+            "check": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu SMS un noklikšķiniet uz saites!"
+        },
+        "email": {
+            "alert": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
+            "confirm": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
+            "subject": "Vai jūs saņēmāt uzaicinājumu?",
+            "body": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!"
+        }
+    }
+}

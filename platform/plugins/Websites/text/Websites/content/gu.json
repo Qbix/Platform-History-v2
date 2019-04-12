@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "પ્રમોટ કરવા માટે લિંક",
+                "startDate": "પ્રારંભ તારીખ",
+                "startTime": "પ્રારંભ સમય",
+                "endDate": "અંતિમ તારીખ",
+                "endTime": "સમાપ્તિ સમય",
+                "budget": "બજેટ"
+            },
+            "interests": {
+                "Title": "રસ દ્વારા ફિલ્ટર કરો",
+                "FilterInterests": "રસ લખવાનું શરૂ કરો ..."
+            },
+            "Interest": "રસ",
+            "Location": "સ્થાન"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "જાવ",
+            "PasteLinkHere": "અહીં એક લિંક પેસ્ટ કરો"
+        }
+    }
+}

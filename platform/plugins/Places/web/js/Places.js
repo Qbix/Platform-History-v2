@@ -502,7 +502,7 @@ Cp.geocode = function (callback, options) {
 
 	Places.loadGoogleMaps(function () {
 		var param = {};
-		var p = "Places.Location.geocode: ";
+		var p = "Places.Coordinates.geocode: ";
 		if (c.placeId) {
 			param.placeId = c.placeId;
 		} else if (c.latitude || c.longitude) {
@@ -570,6 +570,45 @@ Cp.geocode = function (callback, options) {
 Cp.geocode.options = {
 	platform: Places.options.platform,
 	basic: false
+};
+
+Places.Location = {
+	/**
+	 * Get location from some stream (for back compatibility)
+	 * @method getLocation
+	 * @static
+	 * @param {Streams_Stream} stream
+	 */
+	fromStream: function(stream){
+		var location = stream.getAttribute('location');
+
+		// new approach
+		if (Q.isPlainObject(location)) {
+			return location;
+		}
+
+		// old approach
+		var communityId = stream.getAttribute("communityId");
+		var res = {
+			publisherId: communityId,
+			name: location,
+			venue: stream.getAttribute("venue"),
+			address: stream.getAttribute("address"),
+			latitude: stream.getAttribute("latitude"),
+			longitude: stream.getAttribute("longitude")
+		};
+
+		var area = stream.getAttribute("area");
+		if (area) {
+			res.area = {
+				publisherId: communityId,
+				name: area,
+				title: stream.getAttribute("areaSelected")
+			};
+		}
+
+		return res;
+	}
 };
 
 var _geocodeCache = new Q.Cache({max: 100});

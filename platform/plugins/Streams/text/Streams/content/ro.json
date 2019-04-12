@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "Articol nou"
+    },
+    "labels": {
+        "Streams\/invited": "Oameni pe care i-am invitat",
+        "Streams\/invitedMe": "Cine ma invitat"
+    },
+    "interests": {
+        "Filter": "Ce iti place?",
+        "CanAdd": "Dacă tot nu puteți găsi ceea ce căutați, puteți adăuga un interes nou mai jos:",
+        "TrySynonyms": "Nu-l vezi? Încercați unele sinonime.",
+        "AddUnderCategory": "Adăugați în categoria ...",
+        "Other": "Alte",
+        "Unlisted": "necatalogat"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesajul a fost marcat pentru revizuirea administratorului. Atingeți din nou pentru a dezaburi.",
+        "noOneSaid": "Nimeni nu a spus nimic",
+        "closeChatButton": "Închideți chatul",
+        "closeChatConfirmTitle": "Închideți acest chat?",
+        "closeChatConfirm": "Sigur doriți să închideți acest chat?",
+        "closeChatConfirmYes": "da",
+        "closeChatConfirmNo": "Nu",
+        "earlierComments": "comentariile anterioare"
+    },
+    "notifications": {
+        "*": "Mesaj {{& message.fields.type}} până la {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} a spus:",
+        "Streams\/changed": "Schimbări în {{stream.fields.title}}",
+        "Streams\/invite": "Ai fost invitat (ă) {{& stream.fields.title}}",
+        "Streams\/announcement": "Anunț în {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} a schimbat accesul la flux",
+        "Streams\/chat\/edit": "Mesaj de chat redactat",
+        "Streams\/chat\/remove": "Mesajul de chat a fost eliminat",
+        "Streams\/closed": "{{stream.fields.title}} a fost închisă",
+        "Streams\/task\/progress": "Progresele înregistrate pe {{stream.fields.title}}",
+        "Streams\/task\/complete": "Sarcina a fost finalizată: {{stream.fields.title}}",
+        "Streams\/task\/error": "Eroare în timpul: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: mesajul primit"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Alegeți din Contacte",
+            "selectFromContacts": "Selectați din Contacte",
+            "photo": "Fă o poză",
+            "photoInstruction": "Dacă persoana care ți-a scanat codul QR este în fața ta, ia o fotografie cu ei",
+            "to": "Către: {{Stream Title}}",
+            "go": "Merge",
+            "title": "A invita",
+            "placeholder": "Număr mobil sau adresă de e-mail",
+            "orInvite": "Sau invitați persoane utilizând:",
+            "QR": "{{ClickOrTap}} pentru a genera cod QR",
+            "QRtitle": "Scanați acest cod QR",
+            "byEmail": "E-mail",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Stare de nervozitate",
+            "QRscanned": "Au scanat-o!"
+        },
+        "email": {
+            "subject": "Hei, verifică asta",
+            "PleaseVisitLink": "Vă rugăm să vizitați următorul link:",
+            "InvitingYou": "Vă invit să {{title}}",
+            "HasInvitedYou": "{{displayName}} te-a invitat la {{title}}"
+        },
+        "sms": {
+            "content": "Ați fost invitat la {{title}}. Atingeți {{url}}"
+        },
+        "notice": {
+            "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} a trimis un mesaj <em>{{message.fields.type}}<\/em> la {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} în {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
+            "confirm": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Doriți să continuați cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
+            "check": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați SMS-ul dvs. și faceți clic pe link-ul!"
+        },
+        "email": {
+            "alert": "Invitațiile sunt trimise de la domeniul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
+            "confirm": "Invitațiile sunt trimise de la domeniul nostru, pe care prietenii dvs. încă nu îl recunosc. Doriți să continuați cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
+            "subject": "Ai primit o invitație?",
+            "body": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați adresa de e-mail și faceți clic pe link-ul de acolo!"
+        }
+    }
+}

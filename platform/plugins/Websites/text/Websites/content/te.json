@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ప్రోత్సహించడానికి లింక్",
+                "startDate": "ప్రారంబపు తేది",
+                "startTime": "సమయం ప్రారంభించండి",
+                "endDate": "ఆఖరి తేది",
+                "endTime": "ముగింపు సమయం",
+                "budget": "బడ్జెట్"
+            },
+            "interests": {
+                "Title": "ఆసక్తితో వడపోత",
+                "FilterInterests": "ఆసక్తిని టైప్ చేయడాన్ని ప్రారంభించండి ..."
+            },
+            "Interest": "వడ్డీ",
+            "Location": "స్థానం"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "వెళ్ళండి",
+            "PasteLinkHere": "ఇక్కడ లింక్ను అతికించండి"
+        }
+    }
+}

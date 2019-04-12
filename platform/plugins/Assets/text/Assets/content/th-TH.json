@@ -1,0 +1,12 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "แตะเพื่อชำระ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ประมวลผลการเรียกเก็บเงินสำหรับ {{1,000}}",
+        "ThankYouForYourPayment": "ขอบคุณสำหรับการชำระเงินถึง {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} สมัครรับข้อมูล {{1,000}}",
+        "YouSubscribedTo": "คุณสมัครรับข้อมูลจาก {{plan.title}}"
+    }
+}

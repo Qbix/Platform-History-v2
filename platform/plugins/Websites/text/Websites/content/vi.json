@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Liên kết để quảng bá",
+                "startDate": "Ngày bắt đầu",
+                "startTime": "Thời gian bắt đầu",
+                "endDate": "Ngày cuối",
+                "endTime": "Thời gian kết thúc",
+                "budget": "Ngân sách"
+            },
+            "interests": {
+                "Title": "Lọc theo sở thích",
+                "FilterInterests": "Bắt đầu nhập một sở thích ..."
+            },
+            "Interest": "Quan tâm",
+            "Location": "Vị trí"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Đi",
+            "PasteLinkHere": "Dán một liên kết ở đây"
+        }
+    }
+}

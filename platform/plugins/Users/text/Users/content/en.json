@@ -26,7 +26,7 @@
 	},
 	"notifications": {
 		"title": "Permission",
-		"prompt": "Do you want to enable notifications?",
+		"prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
 		"yes": "Yes",
 		"no": "No",
 		"WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",

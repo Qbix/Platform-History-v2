@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Erro {{status}} durante a solicitude",
+        "canceled": "Solicitude cancelada",
+        "500": "Error interno do servidor",
+        "404": "Non atopado: {{url}}",
+        "501": "Solicitude interrompida"
+    },
+    "nonce": {
+        "sameDomain": "A sesión caducou. Actualizar a páxina e ténteo de novo.",
+        "otherDomain": "Solicitude de dominio cruzado bloqueada a dominio estranxeiro en {{baseUrl}}"
+    },
+    "words": {
+        "tap": "toque",
+        "click": "faga clic",
+        "yes": "si",
+        "no": "non",
+        "Tap": "Toque",
+        "Click": "Fai clic",
+        "Yes": "Si",
+        "No": "Non"
+    },
+    "months": {
+        "1": "xaneiro",
+        "2": "Febreiro",
+        "3": "Marzo",
+        "4": "Abril",
+        "5": "Maio",
+        "6": "xuño",
+        "7": "Xullo",
+        "8": "Agosto",
+        "9": "Setembro",
+        "10": "Outubro",
+        "11": "Novembro",
+        "12": "Decembro"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Permita o acceso ao teu micrófono",
+        "record": "Grava",
+        "recording": "Gravación",
+        "remains": "permanece",
+        "maximum": "máximo",
+        "playing": "Xogando",
+        "recorded": "Gravado",
+        "clip": "clip",
+        "orupload": "Ou subir",
+        "usethis": "Use This",
+        "discard": "Descartar",
+        "encoding": "Codificación"
+    },
+    "alert": {
+        "title": "Alerta"
+    },
+    "confirm": {
+        "title": "Confirmar",
+        "ok": "Si",
+        "cancel": "Non"
+    },
+    "prompt": {
+        "title": "Preguntar",
+        "ok": "Vaia"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Erro ao ler o ficheiro",
+        "cameraCommands": {
+            "prompt": "Que che gustaría facer?",
+            "photo": "Toma unha foto nova",
+            "library": "Seleccione unha biblioteca"
+        },
+        "tooSmall": "Escolle unha imaxe máis grande.",
+        "cropping": {
+            "title": "Axuste o tamaño ea posición",
+            "touchscreen": "Usa os dedos para facer zoom e arrastrar",
+            "notTouchscreen": "Usa o rato e a roda para facer zoom e arrastrar"
+        }
+    }
+}

@@ -28,5 +28,5 @@ function Streams_participant_response_participants()
 	}
 
 	$participants = $stream->getParticipants(compact('limit', 'offset', 'state'));
-	Db::exportArray($participants);
+	return Db::exportArray($participants);
 }

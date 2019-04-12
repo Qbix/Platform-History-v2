@@ -1,0 +1,96 @@
+{
+    "preview": {
+        "NewItemTitle": "عنصر جديد"
+    },
+    "labels": {
+        "Streams\/invited": "الناس الذين دعوتهم",
+        "Streams\/invitedMe": "من دعاني"
+    },
+    "interests": {
+        "Filter": "ماذا تستمتع",
+        "CanAdd": "إذا كنت لا تزال غير قادر على العثور على ما تبحث عنه ، فيمكنك إضافة اهتمام جديد أدناه:",
+        "TrySynonyms": "لا ترى ذلك؟ جرب بعض المرادفات.",
+        "AddUnderCategory": "إضافة تحت فئة ...",
+        "Other": "آخر",
+        "Unlisted": "غير مدرج"
+    },
+    "chat": {
+        "flaggedForAdminReview": "تم وضع علامة على الرسالة لمراجعة المشرف. اضغط مرة أخرى لإلغاء تحديد.",
+        "noOneSaid": "لا أحد قال أي شيء",
+        "closeChatButton": "إغلاق الدردشة",
+        "closeChatConfirmTitle": "أغلق هذه الدردشة؟",
+        "closeChatConfirm": "هل أنت متأكد من أنك تريد إغلاق هذه الدردشة؟",
+        "closeChatConfirmYes": "نعم فعلا",
+        "closeChatConfirmNo": "لا",
+        "earlierComments": "التعليقات السابقة"
+    },
+    "notifications": {
+        "*": "رسالة {{& message.fields.type}} إلى {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} قال:",
+        "Streams\/changed": "التغييرات في {{stream.fields.title}}",
+        "Streams\/invite": "تمت دعوتك إلى {{& stream.fields.title}}",
+        "Streams\/announcement": "إعلان في {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} تم تغيير دخول الدفق",
+        "Streams\/chat\/edit": "تم تعديل رسالة الدردشة",
+        "Streams\/chat\/remove": "تمت إزالة رسالة الدردشة",
+        "Streams\/closed": "تم إغلاق {{stream.fields.title}}",
+        "Streams\/task\/progress": "التقدم المحرز في {{stream.fields.title}}",
+        "Streams\/task\/complete": "المهمة مكتملة: {{stream.fields.title}}",
+        "Streams\/task\/error": "خطأ أثناء: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: رسالة واردة"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} دعاك إلى {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "اختر من جهات الاتصال الخاصة بك",
+            "selectFromContacts": "اختر من جهات الاتصال",
+            "photo": "التقاط صورة",
+            "photoInstruction": "إذا كان الشخص الذي قام بمسح رمز QR ضوئيًا أمامك ، فاخذ صورة منه",
+            "to": "إلى: {{Stream Title}}",
+            "go": "اذهب",
+            "title": "دعا",
+            "placeholder": "رقم الجوال أو عنوان البريد الإلكتروني",
+            "orInvite": "أو دعوة أشخاص باستخدام:",
+            "QR": "{{ClickOrTap}} لإنشاء رمز الاستجابة السريعة",
+            "QRtitle": "مسح رمز الاستجابة السريعة هذا",
+            "byEmail": "البريد الإلكتروني",
+            "byText": "نص",
+            "byFacebook": "فيس بوك",
+            "byTwitter": "تغريد",
+            "QRscanned": "قاموا بمسحها ضوئيًا!"
+        },
+        "email": {
+            "subject": "مهلا ، تحقق من ذلك",
+            "PleaseVisitLink": "يرجى زيارة الرابط التالي:",
+            "InvitingYou": "أنا أدعوك إلى {{title}}",
+            "HasInvitedYou": "دعاك {{displayName}} إلى {{title}}"
+        },
+        "sms": {
+            "content": "تمت دعوتك إلى {{title}}. يرجى النقر {{url}}"
+        },
+        "notice": {
+            "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} نشر رسالة <em>{{message.fields.type}}<\/em> إلى {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} في {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
+            "confirm": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. هل ترغب في المتابعة بنص سريع لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر على الرابط.",
+            "check": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من الرسائل القصيرة الخاصة بك وانقر على الرابط!"
+        },
+        "email": {
+            "alert": "يتم إرسال الدعوات من نطاقنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
+            "confirm": "يتم إرسال الدعوات من نطاقنا ، والتي لم يتعرف عليها أصدقاؤك بعد. هل ترغب في المتابعة بنص سريع لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر على الرابط.",
+            "subject": "هل تلقيت دعوة؟",
+            "body": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط هناك!"
+        }
+    }
+}

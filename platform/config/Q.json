@@ -12,7 +12,7 @@
 			"Q/tool/render": ["Q/after/Q/tool/render"]
 		},
 		"routes": {
-			"": {"module": "Q", "action": "welcome"}
+			
 		},
 		"filename": {
 			"extensions": ["png", "jpeg", "gif", "jpg", "pdf", "js", "ogg", "mp3", "css", "cur"]
@@ -84,10 +84,6 @@
 			},
 			"gc": false,
 			"maxlength": 4095,
-			"nonceMessages": {
-				"sameDomain": "Session expired. Refresh the page and try again.",
-				"otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
-			},
 			"userAgentInfo": ["formFactor", "platform", "version"],
 			"allowHijack": true
 		},

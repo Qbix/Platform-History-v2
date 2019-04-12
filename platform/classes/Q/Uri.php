@@ -313,6 +313,24 @@ class Q_Uri
 	{
 		return isset($this->fields[$field_name]);
 	}
+
+	/**
+	 * Get the routes that should be tried in the order returned.
+	 * Merges routes from Q/routes@start, Q/routes and Q/routes@end.
+	 * Within each one, routes are sorted in reverse order,
+	 * so that later plugins can override earlier ones.
+	 * The earlier plugins can use "routes@start" and "routes@end"
+	 * to declare the priority of their routes.
+	 * @return {array} The array of $route => $info pairs.
+	 */
+	static function getRoutes()
+	{
+		$config = Q_Config::get('Q', array());
+		$routesStart = Q::reverseOrder(Q::ifset($config, 'routes@start', array()));
+		$routes = Q::reverseOrder(Q::ifset($config, 'routes', array()));
+		$routesEnd = Q::reverseOrder(Q::ifset($config, 'routes@end', array()));
+		return array_merge($routesStart, $routes, $routesEnd);
+	}
 	
 	//
 	// Internal
@@ -353,7 +371,7 @@ class Q_Uri
 			$routed_cache[$url] = $uri;
 			return $uri;
 		}
-		$routes = Q_Config::get('Q', 'routes', array());
+		$routes = self::getRoutes();
 		if (empty($routes)) {
 			return self::fromArray(array(
 				'module' => 'Q', 
@@ -390,9 +408,21 @@ class Q_Uri
 		$segments = $path ? explode('/', $path) : array();
 		$uri_fields = null;
 
+		if (substr($base_url, -11) === '/action.php') {
+			if (count($segments) < 2) {
+				return Q_Uri::fromArray(array());
+			} else {
+				return Q_Uri::fromArray(array(
+					'module' => $segments[0],
+					'action' => $segments[1]
+				));
+			}
+		}
+
 		if ($route) {
-			if (! array_key_exists($route, $routes))
+			if (! array_key_exists($route, $routes)) {
 				throw new Q_Exception_MissingRoute(compact('route'));
+			}
 			$uri_fields = self::matchSegments($route, $segments);
 		} else {
 			foreach ($routes as $pattern => $fields) {
@@ -478,7 +508,7 @@ class Q_Uri
 			return null;
 		}
 		
-		$routes = Q_Config::get('Q', 'routes', array());
+		$routes = self::getRoutes();
 		if (empty($routes)) {
 			$url = Q_Request::baseUrl($controller);
 		} else if ($route) {

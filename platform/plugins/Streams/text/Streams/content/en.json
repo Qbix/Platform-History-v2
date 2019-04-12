@@ -2,11 +2,17 @@
 	"preview": {
 		"NewItemTitle": "New Item"
 	},
+	"labels": {
+		"Streams/invited": "People I invited",
+		"Streams/invitedMe": "Who invited me"
+	},
 	"interests": {
 		"Filter": "What do you enjoy?",
 		"CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
 		"TrySynonyms": "Don't see it? Try some synonyms.",
-		"Other": "Other"
+		"AddUnderCategory": "Add under category...",
+		"Other": "Other",
+		"Unlisted": "Unlisted"
 	},
 	"chat": {
 		"flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
@@ -48,6 +54,7 @@
 			"orInvite": "Or invite people by using:",
 			"QR": "{{ClickOrTap}} to generate QR code",
 			"QRtitle": "Scan this QR code",
+			"QRscanned": "They scanned it!",
 			"byEmail": "Email",
 			"byText": "Text",
 			"byFacebook": "Facebook",

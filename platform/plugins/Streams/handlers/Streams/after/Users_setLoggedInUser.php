@@ -11,7 +11,7 @@ function Streams_after_Users_setLoggedInUser($params)
 			'subscribe' => true
 		)));
 		unset($_SESSION['Streams']['invite']['token']);
-		$splitId = Q_Utils::splitId($invite->publisherId);
+		$splitId = Q_Utils::splitId($invite->invitingUserId);
 		$path = 'Q/uploads/Users';
 		$subpath = $splitId.'/invited/'.$token;
 		$pathToToken = APP_DIR.'/web/'.$path.DS.$subpath;

@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Tengill til a\u00f0 kynna",
+                "startDate": "Upphafsdagur",
+                "startTime": "Byrjunart\u00edmi",
+                "endDate": "Loka dagsetning",
+                "endTime": "Lokat\u00edmi",
+                "budget": "Fj\u00e1rhags\u00e1\u00e6tlun"
+            },
+            "interests": {
+                "Title": "S\u00eda eftir vexti",
+                "FilterInterests": "Byrja\u00f0u a\u00f0 sl\u00e1 inn \u00e1huga ..."
+            },
+            "Interest": "Vextir",
+            "Location": "Sta\u00f0setning"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Fara",
+            "PasteLinkHere": "L\u00edmdu tengil h\u00e9r"
+        }
+    }
+}

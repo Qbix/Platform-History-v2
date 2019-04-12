@@ -318,7 +318,7 @@ class Q_Bootstrap
 	static function checkRequirements($plugins = null)
 	{
 		if (!isset($plugins)) {
-			$plugins = Q_Config::get('Q', 'plugins', array());
+			$plugins = Q::plugins();
 		}
 		$infos = Q_Config::get('Q', 'pluginInfo', array());
 		$local = Q_Config::get('Q', 'pluginLocal', array());

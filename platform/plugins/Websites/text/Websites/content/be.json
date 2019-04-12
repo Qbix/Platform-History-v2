@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Спасылка для садзейнічання",
+                "startDate": "Дата пачатку",
+                "startTime": "Час пачатку",
+                "endDate": "Калі выбегла",
+                "endTime": "час заканчэння",
+                "budget": "бюджэт"
+            },
+            "interests": {
+                "Title": "Фільтр па інтарэсам",
+                "FilterInterests": "Пачніце ўводзіць цікавасць ..."
+            },
+            "Interest": "цікавасць",
+            "Location": "размяшчэнне"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ісці",
+            "PasteLinkHere": "Ўставіць спасылку тут"
+        }
+    }
+}

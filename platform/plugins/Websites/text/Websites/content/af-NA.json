@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Skakel om te bevorder",
+                "startDate": "Begindatum",
+                "startTime": "Begin Tyd",
+                "endDate": "Einddatum",
+                "endTime": "Eind tyd",
+                "budget": "begroting"
+            },
+            "interests": {
+                "Title": "Filter volgens rente",
+                "FilterInterests": "Begin tik &#39;n belangstelling ..."
+            },
+            "Interest": "belangstelling",
+            "Location": "plek"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gaan",
+            "PasteLinkHere": "Plak &#39;n skakel hier"
+        }
+    }
+}

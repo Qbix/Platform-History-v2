@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Saite, lai veicin\u0101tu",
+                "startDate": "S\u0101kuma datums",
+                "startTime": "S\u0101kuma laiks",
+                "endDate": "Beigu datums",
+                "endTime": "Beigu laiks",
+                "budget": "Bud\u017eets"
+            },
+            "interests": {
+                "Title": "Filtr\u0113t p\u0113c procentiem",
+                "FilterInterests": "S\u0101ciet rakst\u012bt interesi ..."
+            },
+            "Interest": "Interese",
+            "Location": "Atra\u0161an\u0101s vieta"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Iet",
+            "PasteLinkHere": "Iel\u012bm\u0113jiet saiti \u0161eit"
+        }
+    }
+}

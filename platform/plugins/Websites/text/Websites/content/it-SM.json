@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link per promuovere",
+                "startDate": "Data d&#39;inizio",
+                "startTime": "Orario di inizio",
+                "endDate": "Data di fine",
+                "endTime": "Fine del tempo",
+                "budget": "bilancio"
+            },
+            "interests": {
+                "Title": "Filtra per interesse",
+                "FilterInterests": "Inizia a digitare un interesse ..."
+            },
+            "Interest": "Interesse",
+            "Location": "Posizione"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Partire",
+            "PasteLinkHere": "Incolla un link qui"
+        }
+    }
+}

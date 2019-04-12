@@ -1,0 +1,26 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link for å fremme",
+                "startDate": "Startdato",
+                "startTime": "Starttid",
+                "endDate": "Sluttdato",
+                "endTime": "Sluttid",
+                "budget": "Budsjett"
+            },
+            "interests": {
+                "Title": "Filtrer etter interesse",
+                "FilterInterests": "Begynn å skrive en interesse ..."
+            },
+            "Interest": "Renter",
+            "Location": "plassering"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "Lim inn en lenke her"
+        }
+    }
+}
