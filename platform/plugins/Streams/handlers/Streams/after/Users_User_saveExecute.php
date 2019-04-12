@@ -31,6 +31,7 @@ function Streams_after_Users_User_saveExecute($params)
 	unset($mf['sessionCount']);
 	unset($mf['insertedTime']);
 	if (empty($mf)) {
+		$processing = false;
 		return;
 	}
 
