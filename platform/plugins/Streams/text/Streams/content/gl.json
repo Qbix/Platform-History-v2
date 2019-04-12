@@ -56,7 +56,8 @@
             "byEmail": "Correo electrónico",
             "byText": "Texto",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Dixitalizáronse!"
         },
         "email": {
             "subject": "Oe, mira isto",

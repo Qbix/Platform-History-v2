@@ -56,7 +56,8 @@
             "byEmail": "மின்னஞ்சல்",
             "byText": "உரை",
             "byFacebook": "முகநூல்",
-            "byTwitter": "ட்விட்டர்"
+            "byTwitter": "ட்விட்டர்",
+            "QRscanned": "அவர்கள் அதை ஸ்கேன்!"
         },
         "email": {
             "subject": "ஏய், இதை பாருங்கள்",

@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Gwall {{status}} yn ystod y cais",
+        "canceled": "Cais wedi ei ganslo",
+        "500": "Gwall gweinydd mewnol",
+        "404": "Heb ei ddarganfod: {{url}}",
+        "501": "Cais wedi torri"
+    },
+    "nonce": {
+        "sameDomain": "Daeth y sesiwn i ben. Adnewyddwch y dudalen a cheisiwch eto.",
+        "otherDomain": "Cais wedi&#39;i drawsgludo wedi&#39;i blocio i barth tramor yn {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tap",
+        "click": "cliciwch",
+        "yes": "ie",
+        "no": "na",
+        "Tap": "Tap",
+        "Click": "Cliciwch",
+        "Yes": "Ydw",
+        "No": "Na"
+    },
+    "months": {
+        "1": "Ionawr",
+        "2": "Chwefror",
+        "3": "Mawrth",
+        "4": "Ebrill",
+        "5": "Mai",
+        "6": "Mehefin",
+        "7": "Gorffennaf",
+        "8": "Awst",
+        "9": "Medi",
+        "10": "Hydref",
+        "11": "Tachwedd",
+        "12": "Rhagfyr"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Caniatewch fynediad i&#39;ch meicroffon",
+        "record": "Cofnodwch",
+        "recording": "Cofnodi",
+        "remains": "olion",
+        "maximum": "uchafswm",
+        "playing": "Chwarae",
+        "recorded": "Wedi&#39;i recordio",
+        "clip": "clip",
+        "orupload": "Neu Llwythwch i fyny",
+        "usethis": "Defnyddiwch hyn",
+        "discard": "Dileu",
+        "encoding": "Amgodio"
+    },
+    "alert": {
+        "title": "Rhybudd"
+    },
+    "confirm": {
+        "title": "Cadarnhewch",
+        "ok": "Ydw",
+        "cancel": "Na"
+    },
+    "prompt": {
+        "title": "Yn barod",
+        "ok": "Ewch"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Gwall wrth ddarllen y ffeil",
+        "cameraCommands": {
+            "prompt": "Beth hoffech chi ei wneud?",
+            "photo": "Tynnwch lun newydd",
+            "library": "Dewiswch o&#39;r llyfrgell"
+        },
+        "tooSmall": "Dewiswch ddelwedd fwy.",
+        "cropping": {
+            "title": "Addaswch faint a lleoliad",
+            "touchscreen": "Defnyddiwch eich bysedd i chwyddo a llusgo",
+            "notTouchscreen": "Defnyddiwch eich llygoden a&#39;ch olwyn i chwyddo a llusgo"
+        }
+    }
+}

@@ -16,5 +16,11 @@
             "Interest": "Érdeklődés",
             "Location": "Elhelyezkedés"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Megy",
+            "PasteLinkHere": "Illessze be a linket ide"
+        }
     }
 }

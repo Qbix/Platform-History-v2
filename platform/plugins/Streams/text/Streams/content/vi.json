@@ -56,7 +56,8 @@
             "byEmail": "E-mail",
             "byText": "Bản văn",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Họ đã quét nó!"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",

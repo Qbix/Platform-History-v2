@@ -16,5 +16,11 @@
             "Interest": "Zanimanje",
             "Location": "Lokacija"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pojdi",
+            "PasteLinkHere": "Prilepite povezavo tukaj"
+        }
     }
 }

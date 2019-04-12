@@ -16,5 +16,11 @@
             "Interest": "Huvi",
             "Location": "Asukoht"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mine",
+            "PasteLinkHere": "Kleebi link siia"
+        }
     }
 }

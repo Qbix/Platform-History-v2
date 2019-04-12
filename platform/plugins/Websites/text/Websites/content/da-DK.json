@@ -16,5 +16,11 @@
             "Interest": "Interesse",
             "Location": "Beliggenhed"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "G\u00e5",
+            "PasteLinkHere": "Inds\u00e6t et link her"
+        }
     }
 }

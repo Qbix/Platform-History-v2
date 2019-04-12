@@ -16,5 +16,11 @@
             "Interest": "Faedah",
             "Location": "Lokasi"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pergi",
+            "PasteLinkHere": "Tampalkan pautan di sini"
+        }
     }
 }

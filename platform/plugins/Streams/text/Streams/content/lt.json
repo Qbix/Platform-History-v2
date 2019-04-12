@@ -56,7 +56,8 @@
             "byEmail": "El. Paštas",
             "byText": "Tekstas",
             "byFacebook": "Facebook",
-            "byTwitter": "„Twitter“"
+            "byTwitter": "„Twitter“",
+            "QRscanned": "Jie nuskaito jį!"
         },
         "email": {
             "subject": "Ei, patikrinkite tai",

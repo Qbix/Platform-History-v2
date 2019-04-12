@@ -16,5 +16,11 @@
             "Interest": "Quan tâm",
             "Location": "Vị trí"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Đi",
+            "PasteLinkHere": "Dán một liên kết ở đây"
+        }
     }
 }

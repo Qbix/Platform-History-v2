@@ -2,19 +2,25 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Tanıtmak için bağlantı",
-                "startDate": "Başlangıç tarihi",
-                "startTime": "Başlama zamanı",
-                "endDate": "Bitiş tarihi",
-                "endTime": "Bitiş zamanı",
-                "budget": "Bütçe"
+                "link": "Tan\u0131tmak i\u00e7in ba\u011flant\u0131",
+                "startDate": "Ba\u015flang\u0131\u00e7 tarihi",
+                "startTime": "Ba\u015flama zaman\u0131",
+                "endDate": "Biti\u015f tarihi",
+                "endTime": "Biti\u015f zaman\u0131",
+                "budget": "B\u00fct\u00e7e"
             },
             "interests": {
-                "Title": "İlgi alanına göre filtrele",
-                "FilterInterests": "Bir ilgi yazmaya başlayın ..."
+                "Title": "\u0130lgi alan\u0131na g\u00f6re filtrele",
+                "FilterInterests": "Bir ilgi yazmaya ba\u015flay\u0131n ..."
             },
             "Interest": "Faiz",
             "Location": "yer"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gitmek",
+            "PasteLinkHere": "Linki buraya yap\u0131\u015ft\u0131r\u0131n"
         }
     }
 }

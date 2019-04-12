@@ -16,5 +16,11 @@
             "Interest": "Інтерес",
             "Location": "Розташування"
         }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ідіть",
+            "PasteLinkHere": "Вставте посилання тут"
+        }
     }
 }

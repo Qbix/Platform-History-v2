@@ -1347,8 +1347,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				var args = [err, response];
 				return Streams.onError.handle.call(this, msg, args);
 			}
-			Participant.get.cache.removeEach([publisherId, streamName]);
-			Streams.get.cache.removeEach([publisherId, streamName]);
 			var rsd = response.slots.data;
 			var rss = response.slots.stream;
 			Q.handle(o && o.callback, null, [err, rsd]);

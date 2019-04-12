@@ -56,7 +56,8 @@
             "byEmail": "Ríomhphost",
             "byText": "Téacs",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "QRscanned": "Scanadh siad é!"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",
