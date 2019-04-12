@@ -831,8 +831,8 @@
     bottom: 0;
     box-sizing: border-box;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
+    background-color: white;
+    color: black;
     position: absolute;
     font-size: 14px;
 }
@@ -1058,7 +1058,7 @@
     height: 50px;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
-    position: absolute;
+    position: static;
 }
 /* participants dialog */
 .dialog-participants-con {
@@ -1376,7 +1376,7 @@
 
 .webrtc_tool_resize-handler {
     position: absolute;
-    bottom: 38px;
+    bottom: 0;
     cursor: nesw-resize;
     width: 40px;
     height: 40px;
