@@ -813,7 +813,14 @@ EOT;
 	}
 
 	static function commandExists($cmd) {
-		$return = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
+		// check which command exist "which" (linux) or "where" (win)
+		$command = @shell_exec("where") ? "where" : "which";
+
+		if (!$command) {
+			return false;
+		}
+
+		$return = shell_exec(sprintf("%s %s", $command, escapeshellarg($cmd)));
 		return !empty($return);
 	}
 
