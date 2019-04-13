@@ -27,7 +27,7 @@
     display: flex;
     justify-content: center;
     z-index: 999999;
-    position: absolute;
+    position: fixed;
     right: 5px;
     bottom: 5px;
 }
@@ -494,9 +494,24 @@
     display: flex;
     align-items: center;
     padding-left: 10px;
+    overflow: hidden;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity span {
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_tool {
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_name {
     font-weight: bold;
+    margin-left: 5px;
+    flex: 1;
+    overflow: hidden;
+}
+.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_name span{
+    display: inline-block;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 
@@ -647,9 +662,6 @@
     color: white;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .Users_avatar_name{
-    margin-left:10px;
-}
 .webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
     overflow: hidden;
     display: flex;
@@ -1354,12 +1366,15 @@
     margin-top:10px;
     margin-bottom:10px;
 }
+.participants-list-btns {
+    justify-content: center;
+    display: flex;
+}
 .webrtc_tool_disconnect-btn,
 .Q_touchscreen .Q_button.webrtc_tool_disconnect-btn {
     border: 0;
     margin: 15px;
     padding: 7px 10px 7px 10px;
-    float: left;
     display: flex;
     align-items: center;
     background: #c12236;
@@ -1378,9 +1393,15 @@
     position: absolute;
     bottom: 0;
     cursor: nesw-resize;
-    width: 40px;
-    height: 40px;
+    width: 10%;
+    height: 10%;
     z-index: 3;
+}
+.webrtc_tool_maximized-main-screen .webrtc_tool_resize-handler[data-position="topright"],
+.webrtc_tool_regular-screen .webrtc_tool_resize-handler[data-position="topright"] {
+    cursor: nesw-resize;
+    right: -7% !important;
+    top: -7% !important;
 }
 
 .flipped video{
