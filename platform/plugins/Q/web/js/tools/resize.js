@@ -28,7 +28,9 @@
 
 
 		{
-			randomNum: Math.floor(Math.random() * 11),
+			unbindEvents: function () {
+				
+			},
 			deactivate:function () {
 				var tool = this;
 				tool.state.active = false;
@@ -609,7 +611,7 @@
 							elementToMove.addEventListener('mouseup', _dragElement.stopMoving);
 						}
 
-						tool.unbind = function () {
+						tool.unbindEvents = function () {
 							elementToMove.removeEventListener('mousedown', _dragElement.initMoving);
 							elementToMove.removeEventListener('mouseup', _dragElement.stopMoving);
 							elementToMove.removeEventListener('mousedown', _dragElement.initMoving);
