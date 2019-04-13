@@ -718,3 +718,11 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_notTouchscreen .Q_touchlabel {
 	transition: opacity 0.01s linear;
 }
+.Q_disabled {
+	background-color: grey;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter: alpha(opacity=90);
+	-moz-opacity: 0.9;
+	opacity: 0.9;
+	pointer-events: none;
+}

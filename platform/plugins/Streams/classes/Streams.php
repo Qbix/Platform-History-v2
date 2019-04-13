@@ -4573,7 +4573,7 @@ abstract class Streams extends Base_Streams
 	 *  if you don't want to overwrite old values.
 	 * @return {string}
 	 */
-	function iconDirectory($publisherId, $streamName, $extra = null)
+	static function iconDirectory($publisherId, $streamName, $extra = null)
 	{
 		$splitId = Q_Utils::splitId($publisherId);
 		$sn = implode(DS, explode('/', $streamName));
