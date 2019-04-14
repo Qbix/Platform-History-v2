@@ -2144,6 +2144,7 @@ var WebRTCconferenceLib = function app(options){
         var videoInputDevices = [];
         var currentCameraDevice;
         var currentAudioDevice;
+        var frontCameraDevice;
 
         var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
@@ -2158,7 +2159,7 @@ var WebRTCconferenceLib = function app(options){
                         console.log('loadDevicesList2',localParticipant.tracks[x]);
 
                         if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
-                            currentCameraDevice = device;
+	                        frontCameraDevice = currentCameraDevice = device;
                         }
                     }
                 }
@@ -2188,6 +2189,10 @@ var WebRTCconferenceLib = function app(options){
 
         function getCurrentCameraDevice() {
             return currentCameraDevice;
+        }
+
+        function getFrontCameraDevice() {
+            return frontCameraDevice;
         }
 
         function getCurrentAudioDevice() {
@@ -2516,7 +2521,7 @@ var WebRTCconferenceLib = function app(options){
 
         }
 
-        function toggleCameras(cameraId) {
+        function toggleCameras(cameraId, callback) {
             var i, device, deviceToSwitch;
 
             console.log('deviceToSwitch', deviceToSwitch)
@@ -2553,6 +2558,7 @@ var WebRTCconferenceLib = function app(options){
                                         var videoSender = localParticipant.videoTracks().filter(function (sender) {
                                             return sender.track && sender.track.kind == 'video';
                                         })[0];
+                                        if(callback != null) callback();
                                         console.log("Flip! (notice change in dimensions & framerate!)")
                                     })
                                     .catch(function (e) {
@@ -2615,8 +2621,10 @@ var WebRTCconferenceLib = function app(options){
                 app.screensInterface.generateScreensGrid();
                 app.conferenceControl.enableVideo();
                 app.views.closeAllDialogues();
+                console.log('togglecameras', deviceToSwitch == frontCameraDevice)
 
                 currentCameraDevice = deviceToSwitch;
+                if(callback != null) callback();
             });
         }
 
@@ -2777,6 +2785,7 @@ var WebRTCconferenceLib = function app(options){
             videoInputDevices: getVideoDevices,
             audioInputDevices: getAudioDevices,
             currentCameraDevice: getCurrentCameraDevice,
+	        frontCameraDevice: getFrontCameraDevice,
             currentAudioDevice: getCurrentAudioDevice,
         }
     }())
