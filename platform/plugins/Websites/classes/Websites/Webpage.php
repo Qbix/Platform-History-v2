@@ -145,7 +145,7 @@ class Websites_Webpage
 
 		// additional handler for youtube.com
 		if ($parsedUrl['host'] == 'www.youtube.com') {
-			$googleapisKey = Q_Config::expect('Google', 'youtube', 'key');
+			$googleapisKey = Q_Config::expect('Websites', 'google', 'youtube', 'key');
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
 			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
 			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
@@ -190,15 +190,15 @@ class Websites_Webpage
 	}
 	/**
 	 * If Websites/webpage stream for this $url already exists - return one.
-	 * @method streamExists
+	 * @method fetchStream
 	 * @static
-	 * @param string $url
+	 * @param {string} $publisherId
+	 * @param {string} $url
 	 * @return Streams_Stream
 	 */
-	static function streamExists ($url) {
-		return Streams_Stream::select()->where(array(
-			'attributes like ' => '%'.$url.'%'
-		))->fetchDbRow();
+	static function fetchStream($publisherId, $url) {
+		$normalized = substr(Q::normalize($url), 0, 20);
+		return Streams::fetchOne($publisherId, $publisherId, "Websites/website/$normalized");
 	}
 		/**
 	 * Create Websites/webpage stream from params
@@ -277,13 +277,13 @@ class Websites_Webpage
 			$interestStream->save();
 		}
 
-		// check if stream for this url already created
-		// and if yes, return one
-		$webpageStream = self::streamExists($url);
-		if ($webpageStream) {
+		// check if stream for this url has been already created
+		// and if yes, return it
+		if ($webpageStream = self::fetchStream($userId, $url)) {
 			return $webpageStream;
 		}
 
+		$normalized = substr(Q_Utils::normalize($url), 0, 200);
 		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
 			'title' => $title,
 			'content' => $description,
@@ -301,7 +301,8 @@ class Websites_Webpage
 				'contentType' =>$contentType,
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
-			'skipAccess' => true
+			'skipAccess' => true,
+			'name' => "Websites/website/$normalized"
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,
