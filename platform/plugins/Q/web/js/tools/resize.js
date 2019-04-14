@@ -13,7 +13,7 @@
 
 			var tool = this;
 			tool.state = Q.extend({}, tool.state, options);
-			this.bindEvents();
+			this.eventBinding().bind();
 
 		},
 
@@ -28,6 +28,9 @@
 
 
 		{
+			unbindEvents: function () {
+				
+			},
 			deactivate:function () {
 				var tool = this;
 				tool.state.active = false;
@@ -52,14 +55,19 @@
 				} else return tool.element;
 
 			},
-			bindEvents: function () {
+			bindDraggingEvenets: function(){
+
+			},
+			eventBinding: function () {
 				var tool = this;
+				console.log('tooltool', tool)
 				var elementToResize = tool.element;
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+				var moveWithinEl = document.body;
 
-				var _dragElement = (function(){
-					var elementToMove;
+				var _dragElement = (function (){
 					var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY;
+
 					var move = function(xpos,ypos){
 						var currentTop = parseInt(elementToMove.style.top, 10)
 						var currentLeft = parseInt(elementToMove.style.left, 10)
@@ -68,6 +76,7 @@
 
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
 					}
+
 					var drag = function(evt){
 						if(Q.info.isMobile && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
@@ -82,10 +91,10 @@
 						if (aY + eHe > cHe) aY = cHe -eHe;
 						move(aX,aY);
 					}
-					var initMoving = function(divid,container,evt){
+
+					var initMoving = function(evt){
 						if(!tool.state.active) return;
 						if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
-						elementToMove = divid;
 						var elRect = elementToMove.getBoundingClientRect();
 						if(elementToMove == elementToResize) {
 							elementToMove.style.width = elRect.width + 'px';
@@ -104,8 +113,8 @@
 							divLeft = elementToMove.style.left,
 							eWi = parseInt(elementToMove.offsetWidth),
 							eHe = parseInt(elementToMove.offsetHeight),
-							cWi = parseInt(container.offsetWidth),
-							cHe = parseInt(container.offsetHeight);
+							cWi = parseInt(moveWithinEl.offsetWidth),
+							cHe = parseInt(moveWithinEl.offsetHeight);
 						divTop = divTop.replace('px','');
 						divLeft = divLeft.replace('px','');
 						diffX = posX - divLeft, diffY = posY - divTop;
@@ -114,7 +123,9 @@
 							window.addEventListener('touchmove', drag);
 						else window.addEventListener('mousemove', drag);
 					}
+
 					var stopMoving = function(container){
+						console.log('stopMoving')
 						if(Q.info.isMobile)
 							window.removeEventListener('touchmove', drag)
 						else window.removeEventListener('mousemove', drag)
@@ -125,11 +136,13 @@
 							tool.state.appliedRecently = false;
 						}, 200)
 					}
+
 					return {
 						initMoving: initMoving,
 						stopMoving: stopMoving
 					}
-				})();
+				}())
+
 
 				var resizeElement = (function (e) {
 					var docRect = document.body.getBoundingClientRect();
@@ -142,6 +155,7 @@
 					var _handlerPosition;
 					var _centerPosition;
 					var _centerPositionFromTop;
+					var _elementPosition;
 					var _elLeftBorder;
 					var _elRightBorder;
 					var _elLeftMargin;
@@ -162,9 +176,21 @@
 						_handlerPosition = e.target.dataset.position;
 						if(_handlerPosition == null) _handlerPosition = 'bottomright';
 						_elementToResize = e.target.parentNode;
+						_elementPosition = _elementToResize.style.position;
 						var elementRect = _elementToResize.getBoundingClientRect();
-						_centerPosition = elementRect.left + elementRect.width / 2;
-						_centerPositionFromTop = elementRect.top + elementRect.height / 2;
+
+						if(_elementPosition == 'fixed'){
+							_centerPosition = elementRect.left + elementRect.width / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPosition = _elementToResize.offsetLeft + elementRect.width / 2;
+						}
+
+
+						if(_elementPosition == 'fixed'){
+							_centerPositionFromTop = elementRect.top + elementRect.height / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPositionFromTop = _elementToResize.offsetTop + elementRect.height / 2;
+						}
 
 						_elLeftBorder = elementRect.left;
 						_elRightBorder = elementRect.right;
@@ -240,7 +266,7 @@
 							}
 
 						}
-						console.log('%c resizing1', 'background:green', elementWidth,elementHeight, _ratio);
+
 						if(tool.state.keepRatioBasedOnElement != null) {
 							var baseEl = tool.state.keepRatioBasedOnElement;
 							var srcWidth = baseEl.videoWidth;
@@ -277,19 +303,16 @@
 						} else {
 							action = 'increase';
 						}
-						console.log('action', action)
-						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
-							console.log('%c STOP', 'background:red;color:white;')
 
+						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
 							return;
 						}
 
 						if(action == 'increase' && elementToMove != _elementToResize && (elementToMove.offsetHeight >= document.body.offsetHeight || elementToMove.offsetWidth >= document.body.offsetWidth)) {
-							console.log('%c STOP2', 'background:red;color:white;')
 							return;
 						}
 
-						if(elementToMove.style.position == 'fixed') {
+						if(_elementPosition == 'fixed' || _elementPosition == 'absolute') {
 							elementToMove.style.left = _centerPosition - (elementWidth / 2) + 'px';
 							elementToMove.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
 						}
@@ -466,8 +489,22 @@
 					function onWheel(e) {
 						_elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 						var elRect = _elementToMove.getBoundingClientRect();
-						if(_centerPosition == null) _centerPosition = elRect.left + elRect.width / 2;
-						if(_centerPositionFromTop == null) _centerPositionFromTop = elRect.top + elRect.height / 2;
+						var elementPosition = elementToMove.style.position;
+						if(_centerPosition == null) {
+							if(elementPosition == 'fixed'){
+								_centerPosition = elRect.left + elRect.width / 2;
+							} else if (elementPosition == 'absolute') {
+								_centerPosition = _elementToMove.offsetLeft + elRect.width / 2;
+							}
+						}
+						if(_centerPositionFromTop == null){
+							if(elementPosition == 'fixed'){
+								_centerPositionFromTop = elRect.top + elRect.height / 2;
+							} else if (elementPosition == 'absolute') {
+								_centerPositionFromTop = _elementToMove.offsetTop + elRect.height / 2;
+							}
+
+						}
 						//e = e || window.event;
 						//var currentTarget = document.elementFromPoint(e.clientX, e.clientY);
 						//if(_elementToResize == null) _elementToResize = e.target;
@@ -497,7 +534,7 @@
 						}
 
 						var elRect = _elementToResize.getBoundingClientRect();
-						if(elementToMove.style.position == 'fixed') {
+						if(elementPosition == 'fixed' || elementPosition == 'absolute') {
 							elementToMove.style.left = _centerPosition - (elRect.width / 2) + 'px';
 							elementToMove.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';
 						}
@@ -563,46 +600,41 @@
 					}
 				})();
 
-				if(Q.info.isMobile) {
-					elementToMove.addEventListener('touchstart', function (e) {
-						_dragElement.initMoving(e.currentTarget, document.body, e)
-					});
-					elementToMove.addEventListener('touchend', function (e) {
-						_dragElement.stopMoving(document.body)
-					});
-				} else {
+				return {
+					bind: function () {
+						if(Q.info.isMobile) {
+							elementToMove.addEventListener('touchstart', _dragElement.initMoving);
+							elementToMove.addEventListener('touchend', _dragElement.stopMoving);
+						} else {
 
-					elementToMove.addEventListener('mousedown', function (e) {
-						_dragElement.initMoving(e.currentTarget, document.body, e)
-						//e.preventDefault();
-						//e.stopPropagation();
-					});
-					elementToMove.addEventListener('mouseup', function (e) {
-						_dragElement.stopMoving(document.body)
-						//e.preventDefault();
-						//e.stopPropagation();
-					});
-				}
-
-				resizeElement.setHandler(elementToResize);
-
-
-				(function(e){
-					e.closest = e.closest || function(css){
-						var node = this;
-
-						while (node) {
-							if (node.matches(css)) return node;
-							else node = node.parentElement;
+							elementToMove.addEventListener('mousedown', _dragElement.initMoving);
+							elementToMove.addEventListener('mouseup', _dragElement.stopMoving);
 						}
-						return null;
-					}
-				})(Element.prototype);
 
+						tool.unbindEvents = function () {
+							elementToMove.removeEventListener('mousedown', _dragElement.initMoving);
+							elementToMove.removeEventListener('mouseup', _dragElement.stopMoving);
+							elementToMove.removeEventListener('mousedown', _dragElement.initMoving);
+							elementToMove.removeEventListener('mouseup', _dragElement.stopMoving);
+						}
+						resizeElement.setHandler(elementToResize);
+					}
+				}
 			},
 		}
 
 	);
 
+	(function(e){
+		e.closest = e.closest || function(css){
+			var node = this;
+
+			while (node) {
+				if (node.matches(css)) return node;
+				else node = node.parentElement;
+			}
+			return null;
+		}
+	})(Element.prototype);
 
 })(window.jQuery, window);
