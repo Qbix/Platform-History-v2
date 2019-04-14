@@ -846,6 +846,8 @@ Q.Tool.define('Streams/chat', function(options) {
 					evenIfNotRetained: true
 				});
 			});
+		}, {
+			withParticipant: true
 		});
 	}
 });
