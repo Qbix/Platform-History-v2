@@ -145,7 +145,7 @@ class Websites_Webpage
 
 		// additional handler for youtube.com
 		if ($parsedUrl['host'] == 'www.youtube.com') {
-			$googleapisKey = Q_Config::expect('Websites', 'google', 'youtube', 'key');
+			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
 			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
 			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
