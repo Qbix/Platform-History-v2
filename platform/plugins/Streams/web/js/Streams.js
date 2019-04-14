@@ -2368,7 +2368,7 @@ Sp.release = function _Stream_prototype_release () {
  *
  * @method getMessage
  * @param {Number} ordinal the ordinal of the message
- * @param {Function} callback arguments = (err) and this = the message
+ * @param {Function} callback arguments = (err) and this = the Streams.Message
  */
 Sp.getMessage = function _Stream_prototype_getMessage (ordinal, callback) {
 	return Message.get(this.fields.publisherId, this.fields.name, ordinal, callback);
@@ -2379,7 +2379,7 @@ Sp.getMessage = function _Stream_prototype_getMessage (ordinal, callback) {
  *
  * @method getParticipant
  * @param {String} userId
- * @param {Function} callback arguments = (err) and this = the message
+ * @param {Function} callback arguments = (err) and this = the Streams.Participant
  */
 Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback) {
 	return Participant.get(this.fields.publisherId, this.fields.name, userId, callback);
