@@ -21,7 +21,7 @@
 			active: false,
 			keepRatioBasedOnElement: null,
 			appliedRecently: false,
-			onCreate: new Q.Event(),
+			onMoved: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event()
 		},
@@ -132,9 +132,14 @@
 
 						if(elementToMove != null) elementToMove.style.cursor='';
 
-						setTimeout(function () {
-							tool.state.appliedRecently = false;
-						}, 200)
+						if (tool.state.appliedRecently) {
+							tool.state.onMoved.handle.call(tool);
+
+							setTimeout(function () {
+								tool.state.appliedRecently = false;
+							}, 200)
+						}
+
 					}
 
 					return {
