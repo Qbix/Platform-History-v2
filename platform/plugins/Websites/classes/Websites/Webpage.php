@@ -23,6 +23,8 @@ class Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 
+		$parsedUrl = parse_url($url);
+
 		// get source with header
 		$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
 			CURLOPT_RETURNTRANSFER => true,
@@ -48,8 +50,13 @@ class Websites_Webpage
 			throw new Exception("Unable to access the site");
 		}
 
-		$doc = new DOMDocument();
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		// set error level
+		$internalErrors = libxml_use_internal_errors(true);
 		$doc->loadHTML($document);
+		// Restore error level
+		libxml_use_internal_errors($internalErrors);
+
 		$xpath = new DOMXPath($doc);
 		$query = $xpath->query('//*/meta');
 
@@ -75,10 +82,10 @@ class Websites_Webpage
 		$data = explode("\n", $headers);
 		foreach ($data as $part) {
 			$middle = explode(":",$part);
-			$result['headers'][trim($middle[0])] = trim($middle[1]);
+			$result['headers'][trim($middle[0])] = trim(Q::ifset($middle, 1, null));
 		}
 
-		// collect language from diff mets
+		// collect language from diff metas
 		$result['lang'] = Q::ifset($result, 'language', Q::ifset($result, 'lang', Q::ifset($result, 'locale', null)));
 
 		// if language empty, collect from html tag or headers
@@ -136,6 +143,27 @@ class Websites_Webpage
 			$result['bigIcon'] = $result['smallIcon'];
 		}
 
+		// additional handler for youtube.com
+		if ($parsedUrl['host'] == 'www.youtube.com') {
+			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
+			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
+			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
+			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
+			// if json is valid
+			if (json_last_error() == JSON_ERROR_NONE) {
+				if ($googleapisSnippet = Q::ifset($googleapisRes, 'items', 0, 'snippet', null)) {
+					$result['title'] = Q::ifset($googleapisSnippet, 'title', Q::ifset($result, 'title', null));
+					$result['description'] = Q::ifset($googleapisSnippet, 'description', Q::ifset($result, 'description', null));
+					$result['bigIcon'] = Q::ifset($googleapisSnippet, 'thumbnails', 'high', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'medium', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'default', 'url', Q::ifset($result, 'bigIcon', null))));
+
+					$googleapisTags = Q::ifset($googleapisSnippet, 'tags', null);
+					if (is_array($googleapisTags) && count($googleapisTags)) {
+						$result['keywords'] = implode(',', $googleapisTags);
+					}
+				}
+			}
+		}
+
 		return $result;
 	}
 	/**
@@ -162,15 +190,15 @@ class Websites_Webpage
 	}
 	/**
 	 * If Websites/webpage stream for this $url already exists - return one.
-	 * @method streamExists
+	 * @method fetchStream
 	 * @static
-	 * @param string $url
+	 * @param {string} $publisherId
+	 * @param {string} $url
 	 * @return Streams_Stream
 	 */
-	static function streamExists ($url) {
-		return Streams_Stream::select()->where(array(
-			'attributes like ' => '%'.$url.'%'
-		))->fetchDbRow();
+	static function fetchStream($publisherId, $url) {
+		$normalized = substr(Q::normalize($url), 0, 20);
+		return Streams::fetchOne($publisherId, $publisherId, "Websites/website/$normalized");
 	}
 		/**
 	 * Create Websites/webpage stream from params
@@ -183,7 +211,7 @@ class Websites_Webpage
 	 */
 	static function createStream ($publisherId, $params) {
 		$url = Q::ifset($params, 'url', null);
-		if (!filter_var($url, FILTER_VALIDATE_URL)) {
+		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
 		}
 		$urlParsed = parse_url($url);
@@ -191,10 +219,14 @@ class Websites_Webpage
 		$userId = $publisherId ?: Users::loggedInUser(true)->id;
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
-		$title = $title ?: null;
+		if ($title) {
+			$title = substr(Q::ifset($params, 'title', ''), 0, 255);
+		} else {
+			$title = $title ?: '';
+		}
 
 		$keywords = Q::ifset($params, 'keywords', null);
-		$description = Q::ifset($params, 'description', null);
+		$description = substr(Q::ifset($params, 'description', ''), 0, 1023);
 		$copyright = Q::ifset($params, 'copyright', null);
 		$bigIcon = self::normaliseHref(Q::ifset($params, 'bigIcon', null), $url);
 		$smallIcon = self::normaliseHref(Q::ifset($params, 'smallIcon', null), $url);
@@ -213,7 +245,8 @@ class Websites_Webpage
 		}
 
 		// special interest stream for websites/webpage stream
-		$interestTitle = 'Websites: '.$urlParsed['host'].($urlParsed['port'] ? ':'.$urlParsed['port'] : '');
+		$port = Q::ifset($urlParsed, 'port', null);
+		$interestTitle = 'Websites: '.$urlParsed['host'].($port ? ':'.$port : '');
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
 		Q::Event('Streams/interest/post', array(
 			'title' => $interestTitle,
@@ -244,13 +277,13 @@ class Websites_Webpage
 			$interestStream->save();
 		}
 
-		// check if stream for this url already created
-		// and if yes, return one
-		$webpageStream = self::streamExists($url);
-		if ($webpageStream) {
+		// check if stream for this url has been already created
+		// and if yes, return it
+		if ($webpageStream = self::fetchStream($userId, $url)) {
 			return $webpageStream;
 		}
 
+		$normalized = substr(Q_Utils::normalize($url), 0, 200);
 		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
 			'title' => $title,
 			'content' => $description,
@@ -267,7 +300,9 @@ class Websites_Webpage
 				'copyright' => $copyright,
 				'contentType' =>$contentType,
 				'lang' => Q::ifset($params, 'lang', 'en')
-			)
+			),
+			'skipAccess' => true,
+			'name' => "Websites/website/$normalized"
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,

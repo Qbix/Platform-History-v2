@@ -185,7 +185,8 @@
 					},
 					"Streams/chat/message": {
 						"description": "A chat message was posted",
-						"subject": ["Streams/content", ["notifications", "Streams/chat/message"]]
+						"subject": ["Streams/content", ["notifications", "Streams/chat/message"]],
+						"autosubscribe": true
 					},
 					"Streams/chat/edit": {
 						"description": "A chat message was edited",
