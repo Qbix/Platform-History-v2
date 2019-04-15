@@ -27,7 +27,7 @@ function Websites_webpage_response_start($params)
 
 	$communitiesId = Users::communityId();
 	$mainChatCategory = 'Streams/chats/main';
-	$chatRelationType = 'Streams/chat';
+	$chatRelationType = 'Websites/webpage';
 
 	// if this stream already related, exit
 	if (Streams_RelatedTo::select()->where(array(
