@@ -1,0 +1,59 @@
+.Websites_webpage_preview_tool {
+	white-space: nowrap;
+	margin: 2px 2px 10px 0;
+	padding: 0;
+
+	box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 0 2px rgba(0,0,0,0.2);
+	border-radius: 7px;
+	border: none;
+}
+.Websites_webpage_preview_tool .Streams_aspect_url a:link,
+.Websites_webpage_preview_tool .Streams_aspect_url a:visited,
+.Websites_webpage_preview_tool .Streams_aspect_url a:focus {
+	color: blue;
+	text-decoration: underline;
+	font-size: 14px;
+}
+.Websites_webpage_preview_tool .Streams_preview_contents {
+	width: calc(100% - 60px);
+}
+.Websites_webpage_preview_tool .Streams_preview_contents,
+.Websites_webpage_preview_tool .Streams_preview_contents > * {
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.Websites_webpage_preview_tool h3.Streams_preview_title {
+	font-size: 16px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_description {
+	font-size: 12px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests {
+	font-size: 12px;
+	font-weight: normal;
+	white-space: nowrap;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests img {
+	width: 16px;
+	height: auto;
+}
+.Websites_webpage_preview_tool ._Streams_aspect_interests:before {
+	font-family: 'qplatform-communities' !important;
+	content: "\e90d";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 15px;
+	position: relative;
+	top: -1px;
+	vertical-align: middle;
+}
+.Websites_webpage_preview_tool .Streams_preview_icon {
+	margin: 0 10px 0 0;
+	vertical-align: top;
+}
