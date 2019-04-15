@@ -1018,7 +1018,6 @@
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant{
     display: flex;
     background-color: #fff;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     overflow: hidden;
     position: relative;
     width:auto;
