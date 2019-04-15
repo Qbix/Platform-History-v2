@@ -189,6 +189,17 @@ class Websites_Webpage
 		return $href;
 	}
 	/**
+	 * Normalize url to use as part of stream name like Websites/webpage/[normalized]
+	 * @method normalizeUrl
+	 * @static
+	 * @param {string} $url
+	 * @return string
+	 */
+	static function normalizeUrl($url) {
+		// we have "name" field max size 255, Websites/webpage/ = 18 chars
+		return substr(Q_Utils::normalize($url), 0, 230);
+	}
+	/**
 	 * If Websites/webpage stream for this $url already exists - return one.
 	 * @method fetchStream
 	 * @static
@@ -197,8 +208,7 @@ class Websites_Webpage
 	 * @return Streams_Stream
 	 */
 	static function fetchStream($publisherId, $url) {
-		$normalized = substr(Q::normalize($url), 0, 20);
-		return Streams::fetchOne($publisherId, $publisherId, "Websites/website/$normalized");
+		return Streams::fetchOne($publisherId, $publisherId, "Websites/webpage/".self::normalizeUrl($url));
 	}
 		/**
 	 * Create Websites/webpage stream from params
@@ -283,10 +293,9 @@ class Websites_Webpage
 			return $webpageStream;
 		}
 
-		$normalized = substr(Q_Utils::normalize($url), 0, 200);
 		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
 			'title' => $title,
-			'content' => $description,
+			'content' => $description ?: "",
 			'icon' => $streamIcon,
 			'attributes' => array(
 				'url' => $url,
@@ -302,7 +311,7 @@ class Websites_Webpage
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
 			'skipAccess' => true,
-			'name' => "Websites/website/$normalized"
+			'name' => "Websites/webpage/".self::normalizeUrl($url)
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,
