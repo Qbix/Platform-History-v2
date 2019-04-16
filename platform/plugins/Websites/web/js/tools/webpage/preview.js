@@ -3,12 +3,15 @@
 	 * @class Websites/webpage/preview
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
-	 *   @param {string} [options.editable=["title"]] Array of editable fields (by default only title). Can be ["title", "description"]
+	 *   @param {array} [options.editable=["title"]] Array of editable fields (by default only title). Can be ["title", "description"]
+	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Q.Event} [options.onInvoke] fires when the user click on preview element
 	 */
 	Q.Tool.define("Websites/webpage/preview", "Streams/preview", function (options, preview) {
 		var tool = this;
 		tool.preview = preview;
+
+		$(tool.element).attr('data-mode', this.state.mode);
 
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
@@ -32,14 +35,24 @@
 	},
 
 	{
-		editable: ["title"],
-		onInvoke: new Q.Event()
+		editable: ['title'],
+		mode: 'document',
+		onInvoke: new Q.Event(),
+		hideIfNoParticipants: false
 	},
 
 	{
 		refresh: function (stream) {
 			var tool = this;
 			var state = this.state;
+			var $te = $(tool.element);
+
+			if (state.hideIfNoParticipants
+				&& stream.fields.participatingCount === 0) {
+				$te.addClass('Streams_chat_preview_noParticipants');
+			} else {
+				$te.removeClass('Streams_chat_preview_noParticipants');
+			}
 
 			var pipe = new Q.Pipe(['interest', 'webpage'], function (params) {
 				var interestStream = params.interest[0];
@@ -73,9 +86,60 @@
 					Q.activate(tool);
 
 					// set onInvoke handler
-					$(tool.element).on(Q.Pointer.fastclick, function () {
+					$te.on(Q.Pointer.fastclick, function () {
 						Q.handle(state.onInvoke, tool, [tool.oPreview]);
 					});
+
+					// setup unseen element
+					Q.Streams.Message.Total.setUpElement(
+						$(".streams_chat_unseen", $te)[0],
+						webpageStream.fields.publisherId,
+						webpageStream.fields.name,
+						'Streams/chat/message',
+						tool,
+						{ unseenClass: 'Streams_preview_nonzero' }
+					);
+
+					// get participants and create Users/pale
+					Q.Streams.Participant.get.force(
+						webpageStream.fields.publisherId,
+						webpageStream.fields.name,
+						{
+							limit: 3,
+							offset: 0,
+							state: 'participating'
+						},
+						function (err, participants) {
+							var msg = Q.firstErrorMessage(err);
+							if (msg) {
+								console.warn("Websites/webpage/preview tool: " + msg);
+								return;
+							}
+
+							var userIds = [];
+							Q.each(participants, function (userId) {
+								if (userId === Q.Users.loggedInUserId()) {
+									return;
+								}
+
+								userIds.push(userId);
+							});
+
+							var $participantsElement = $(".streams_chat_participants", tool.element);
+							if (userIds.length) {
+								$participantsElement.tool("Users/pile", {
+									avatar: {
+										contents: false
+									},
+									userIds: userIds
+								}).activate(function () {
+									$te.attr('data-participants', 1);
+								});
+							} else {
+								$participantsElement.remove();
+							}
+						}
+					);
 				});
 			});
 
@@ -111,9 +175,11 @@
 		'<img alt="icon" class="Streams_preview_icon" src="{{& src}}">' +
 		'<div class="Streams_preview_contents">' +
 		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
-		'	<div class="Streams_aspect_url">{{& url}}</div>' +
+		//'	<div class="Streams_aspect_url">{{& url}}</div>' +
 		'	<div class="Streams_aspect_description">{{& description}}</div>' +
 		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}">{{& interest.title}}</div>' +
+		'	<div class="streams_chat_participants"></div>' +
+		'	<div class="streams_chat_unseen"></div>' +
 		'</div>'
 	);
 })(Q, Q.$, window);
