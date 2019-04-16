@@ -11004,6 +11004,8 @@ Q.Pointer = {
 		img1.style.position = 'absolute';
 		img1.style.width = o.width;
 		img1.style.height = o.height;
+		img1.style.left = 0;
+		img1.style.top = 0;
 		img1.style.display = 'block';
 		img1.style.pointerEvents = 'none';
 		img1.setAttribute('class', 'Q_hint');
