@@ -13380,11 +13380,14 @@ Q.beforeInit.addOnce(function () {
 	if (Q.getObject('Q.info.cookies.indexOf') && Q.info.cookies.indexOf('Q_dpr')) {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
 	}
+	var e;
 	if (!Q.ignoreBackwardCompatibility.dashboard) {
-		document.getElementById('dashboard_slot').addClass('Q_fixed_top');
+		e = document.getElementById('dashboard_slot');
+		e && e.addClass('Q_fixed_top');
 	}
 	if (!Q.ignoreBackwardCompatibility.notices) {
-		document.getElementById('notices_slot').addClass('Q_fixed_top');
+		e = document.getElementById('notices_slot');
+		e && e.addClass('Q_fixed_top');
 	}
 	// This loads bluebird library to enable Promise for browsers which do not
 	// support Promise natively. For example: IE, Opera Mini.
