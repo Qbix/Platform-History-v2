@@ -1,3 +1,15 @@
+.Streams_chat_preview_tool[data-mode=title] {
+	margin: 0;
+	box-shadow: none;
+}
+.Streams_chat_preview_tool[data-mode=title] .Streams_preview_contents {
+	height: 55px;
+}
+.Streams_chat_preview_tool[data-mode=title] .Users_pile_tool,
+.Streams_chat_preview_tool[data-mode=title] .streams_chat_unseen {
+	display: none;
+}
+
 .Streams_chat_preview_tool .Streams_participants_tool .Users_avatar_tool {
 	width: 44px;
 }

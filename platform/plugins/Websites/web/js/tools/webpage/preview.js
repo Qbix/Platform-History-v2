@@ -95,7 +95,7 @@
 							return;
 						}
 
-						Q.handle(state.onInvoke, tool, [tool.oPreview]);
+						Q.handle(state.onInvoke, tool, [tool.preview]);
 					});
 
 					// setup unseen element
