@@ -2,10 +2,53 @@
 	white-space: nowrap;
 	margin: 2px 2px 10px 0;
 	padding: 0;
-
+	position: relative;
 	box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 0 2px rgba(0,0,0,0.2);
 	border-radius: 7px;
 	border: none;
+}
+.Websites_webpage_preview_tool[data-mode=document] .Streams_aspect_description {
+	display: none;
+}
+.Websites_webpage_preview_tool[data-mode=title] .Users_pile_tool,
+.Websites_webpage_preview_tool[data-mode=title] .streams_chat_unseen {
+	display: none;
+}
+.Websites_webpage_preview_tool.Streams_chat_preview_noParticipants {
+	display: none;
+}
+.Websites_webpage_preview_tool .streams_chat_unseen {
+	display: none;
+	position: absolute;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	height: 30px;
+	min-width: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	background-color: #cc5555;
+	top: 10px;
+	right: 10px;
+}
+.Websites_webpage_preview_tool .streams_chat_unseen.Streams_preview_nonzero {
+	display: block;
+}
+.Websites_webpage_preview_tool[data-participants] .streams_chat_unseen {
+	top: 23px;
+	right: 2px;
+	height: 25px;
+	min-width: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	font-weight: normal;
+}
+.Websites_webpage_preview_tool .Users_pile_tool {
+	position: absolute;
+	right: 10px;
+	top: 2px;
 }
 .Websites_webpage_preview_tool .Streams_aspect_url a:link,
 .Websites_webpage_preview_tool .Streams_aspect_url a:visited,
@@ -16,6 +59,9 @@
 }
 .Websites_webpage_preview_tool .Streams_preview_contents {
 	width: calc(100% - 60px);
+}
+.Websites_webpage_preview_tool[data-participants] .Streams_preview_contents {
+	width: calc(100% - 100px);
 }
 .Websites_webpage_preview_tool .Streams_preview_contents,
 .Websites_webpage_preview_tool .Streams_preview_contents > * {

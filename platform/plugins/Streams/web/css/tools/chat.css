@@ -49,9 +49,6 @@
 	top: -1px;
 	vertical-align: middle;
 }
-.Streams_chat_preview_tool .Streams_preview_contents {
-	position: relative;
-}
 .Streams_chat_preview_tool {
 	box-shadow: 0 0px 1px rgba(0,0,0,0.1), 0 0 2px rgba(0,0,0,0.2);
 	border-radius: 7px;
@@ -97,6 +94,7 @@
 	font-weight: normal;
 }
 .Streams_chat_preview_tool .Streams_preview_contents {
+	position: relative;
 	width: 63%;
 	overflow: hidden;
 	text-overflow: ellipsis;
