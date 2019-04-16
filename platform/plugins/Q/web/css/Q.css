@@ -700,6 +700,8 @@ html.Q_scanning body > .Q_scanning_code {
 }
 .Q_touchlabel {
 	position: absolute;
+	left: 0;
+	top: 0;
 	padding: 10px;
 	white-space: nowrap;
 	background: rgba(0, 0, 0, 0.8);
