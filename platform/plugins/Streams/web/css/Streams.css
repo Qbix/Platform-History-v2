@@ -969,3 +969,7 @@
 .Streams_invite_QR .Q_button {
 	padding: 10px;
 }
+
+.Streams_complete_overlay .Communities_onboarding_tool {
+	zoom: 0.8;
+}
