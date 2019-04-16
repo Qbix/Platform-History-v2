@@ -76,6 +76,8 @@ Q.Tool.define('Q/layouts', function (options) {
 		var tool = this;
 		var container = tool.element;
 		var layout = g(container, elements.length);
+		console.log('animate rects', layout)
+
 		if (container.computedStyle('position') === 'static') {
 			container.style.position = 'relative';
 		}
@@ -165,7 +167,7 @@ var _generators = {
             case 2:
                 return simpleGrid(count, size, 1);
             case 3:
-                return simpleGrid(count, size, 1, 2);
+                return simpleGrid(count, size, 2);
             case 4:
                 return simpleGrid(count, size, 2);
             case 5:
