@@ -77,7 +77,7 @@
 						icon: interestStream.iconUrl(interestStream.getAttribute('iconSize')),
 					},
 					src: webpageStream.iconUrl('80'),
-					url: '<a href="' + url + '" target="_blank">' + url + '</a>',
+					url: url,
 					text: tool.text.webpage
 				}, function (err, html) {
 
@@ -85,8 +85,16 @@
 
 					Q.activate(tool);
 
+					if (state.mode === 'title') {
+						return;
+					}
+
 					// set onInvoke handler
 					$te.on(Q.Pointer.fastclick, function () {
+						if ($te.closest('.Websites_webpage_composer_tool').length) {
+							return;
+						}
+
 						Q.handle(state.onInvoke, tool, [tool.oPreview]);
 					});
 
@@ -176,8 +184,8 @@
 		'<div class="Streams_preview_contents">' +
 		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
 		//'	<div class="Streams_aspect_url">{{& url}}</div>' +
-		'	<div class="Streams_aspect_description">{{& description}}</div>' +
-		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}">{{& interest.title}}</div>' +
+		//'	<div class="Streams_aspect_description">{{& description}}</div>' +
+		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}"><a href="{{& url}}" target="_blank">{{& interest.title}}</a></div>' +
 		'	<div class="streams_chat_participants"></div>' +
 		'	<div class="streams_chat_unseen"></div>' +
 		'</div>'
