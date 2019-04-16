@@ -5185,16 +5185,22 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			var elements = toggleScreensClass('regularScreensGrid');
 
 			if(!_layoutTool.getLayoutGenerator('regularScreensGrid')) _layoutTool.setLayoutGenerator('regularScreensGrid', function (container, count) {
-				return regularScreensGrid(document.body, count, elements);
+				return regularScreensGrid(document.body, count);
 			});
 
 			var roomScreens = WebRTCconference.screens();
+			try {
+				var err = (new Error);
+				console.log('renderDesktopScreensGridStack', err.stack);
+			} catch (e) {
+
+			}
 			console.log('renderDesktopScreensGrid', roomScreens, elements);
 			_layoutTool.animate('regularScreensGrid', elements, 500, true);
 		}
 
 
-		var regularScreensGrid = function (container, count, elements) {
+		var regularScreensGrid = function (container, count) {
 
 
 			var container = document.body
@@ -5210,10 +5216,15 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			var spaceBetween = 10;
 
 			var roomScreens = WebRTCconference.screens();
+			roomScreens = roomScreens.filter(function (s) {
+				return s.excludeFromRendering != true;
+			});
 			var count = roomScreens.length;
+			console.log('regularScreensGrid', count)
 			var i, screen;
 			for (i = 0; i < count; i++) {
 				var screen = roomScreens[i];
+				console.log('regularScreensGrid currentRow', currentRow)
 
 				var nameRect = screen.nameEl.getBoundingClientRect();
 				var screenElRect = screen.screenEl.getBoundingClientRect();
@@ -5234,6 +5245,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				} else {
 					var rect = new DOMRect(centerX, centerY, 0, 0);
 					currentRow.push(rect);
+
+					if(i+1 == roomScreens.length){
+						rectsRows.push(currentRow);
+						currentRow = [];
+					}
 					continue;
 				}
 
@@ -5245,6 +5261,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				var prevRow = rectsRows[rectsRows.length - 1];
 
 				if(currentRow.length == 0) {
+
 					if(rectsRows.length == 0) {
 						var x = centerX - (newRectSize.width / 2);
 						var y = centerY - (newRectSize.height / 2);
@@ -5348,8 +5365,14 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 							var newXPosition = currentRow[x].left - moveAllRectsOn;
 							currentRow[x] = new DOMRect(newXPosition, currentRow[x].top, currentRow[x].width, currentRow[x].height);
 						}
+					} else {
+						i = i - 1;
+						rectsRows.push(currentRow);
+						currentRow = [];
+						continue;
 					}
 				}
+
 
 				if(i+1 == roomScreens.length || freeRoom < newRectSize.width){
 					rectsRows.push(currentRow);
@@ -5683,15 +5706,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			e.preventDefault();
 			var roomScreens = WebRTCconference.screens();
 
-			/*e.preventDefault();
-			e.stopPropagation();*/
-
-
 			var tappedScreen = roomScreens.filter(function (obj) {
 				return obj.screenEl.contains(e.target) || obj.screenEl == e.target;
 			})[0];
 
-			if(tappedScreen == null) return
+			if(tappedScreen == null) return;
 			var resizeTool = Q.Tool.from(tappedScreen.screenEl, "Q/resize");
 			var videoResizeTool = Q.Tool.from(tappedScreen.videoCon, "Q/resize");
 			if(resizeTool != null) {
@@ -5703,17 +5722,38 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				if(videoResizeTool.state.appliedRecently) return;
 			}
 
+			function enableAllScreenToRender() {
+				roomScreens.map(function (obj) {
+					obj.excludeFromRendering = false;
+					return obj;
+				});
+			}
 
 			if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
+
+				enableAllScreenToRender();
+
 				tappedScreen.screenEl.style.zIndex = '';
 
-				console.log('BEFORE renderMaximizedScreensGrid')
+				console.log('toggleViewModeByScreenClick3')
+				if(Q.info.isMobile){
+					renderMaximizedScreensGridMobile(tappedScreen);
+				} else renderMaximizedScreensGrid(tappedScreen);
+				return;
+			} else if (activeScreen && activeScreen.excludeFromRendering && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
+				enableAllScreenToRender();
+				console.log('toggleViewModeByScreenClick4')
+
 				if(Q.info.isMobile){
 					renderMaximizedScreensGridMobile(tappedScreen);
 				} else renderMaximizedScreensGrid(tappedScreen);
 				return;
 			}
+			if(activeScreen) {
+				console.log('toggleViewModeByScreenClick5', activeScreen, activeScreen.excludeFromRendering, activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)
+			} else console.log('toggleViewModeByScreenClick5');
 
+			enableAllScreenToRender();
 			activeScreen = tappedScreen;
 			toggleViewMode();
 			bindScreensEvents();
@@ -5778,6 +5818,10 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				var screenClass = 'webrtc_tool_minimized-small-screen';
 				var maximizedScreenClass = 'webrtc_tool_maximized-main-screen';
 				var elements = roomScreens.map(function (screen) {
+					if(screen.excludeFromRendering == true) {
+						return null;
+					}
+
 					for (var o in screenClasses) {
 						if(screenClasses[o] == screenClass && screen != activeScreen) continue;
 						if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
@@ -5818,7 +5862,10 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				var maximizedScreenClass = 'webrtc_tool_maximized-main-screen';
 
 				var elements = roomScreens.map(function (screen) {
-					console.log('screenClasses CURRENT', screen.screenEl.className);
+					if(screen.excludeFromRendering == true) {
+						console.log('screenClasses MOVED', screen);
+						return null;
+					}
 
 					for (var o in screenClasses) {
 						console.log('screenClasses', screenClasses[o], screen.screenEl.classList.contains(screenClasses[o]));
@@ -5835,8 +5882,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 					}
 
 					return screen.screenEl;
-				})
+				}).filter(function (e) {
+					return e != null;
+				});
 
+				console.log('regularScreensGridElements', elements);
 
 				var containerClass = 'webrtc_tool_regular-screens-grid';
 				for (var x in gridClasses) {
@@ -5846,24 +5896,6 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				_roomsMedia.classList.add(containerClass);
 				return elements;
 			}
-		}
-
-		/**
-		 * Change type of screens grid according to the number of participants
-		 * @method toggleScreensGridClass
-		 * @param {Object} [classToSwitch] className that defines style of grid
-		 */
-		var toggleScreensGridClass = function (classToSwitch) {
-			var gridClasses = [
-				'webrtc_tool_full-screen-grid',
-				'webrtc_tool_tiled-grid-screen',
-				'webrtc_tool_maximized-screens-grid'
-			];
-
-			for(var i in gridClasses){
-				if(_roomsMedia.classList.contains(gridClasses[i])) _roomsMedia.classList.remove(gridClasses[i])
-			}
-			_roomsMedia.classList.add(classToSwitch);
 		}
 
 		return {

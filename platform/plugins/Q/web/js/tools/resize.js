@@ -345,9 +345,13 @@
 						_ratio = null;
 						_oldx = null;
 						_oldy = null;
-						setTimeout(function () {
-							tool.state.appliedRecently = false;
-						}, 200)
+
+						if(tool.state.appliedRecently) {
+							tool.state.onMoved.handle.call(tool);
+							setTimeout(function () {
+								tool.state.appliedRecently = false;
+							}, 200)
+						}
 					}
 
 					function setHandler(element) {
@@ -411,6 +415,7 @@
 						touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = null;
 						window.removeEventListener('touchend', _stopResizingByPinch);
 						window.removeEventListener('touchmove', resizeByPinch);
+						tool.state.onMoved.handle.call(tool);
 					}
 
 					var touch1, touch2, prevPosOfTouch1, prevPosOfTouch2, ratio;
@@ -476,7 +481,7 @@
 
 
 						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
-							return
+							return;
 						}
 
 						_elementToResize.style.width = elementWidth + 'px';
@@ -577,6 +582,7 @@
 						_resetInitPosTimeout = setTimeout(function () {
 							_centerPosition = null;
 							_centerPositionFromTop = null;
+							tool.state.onMoved.handle.call(tool);
 						}, 1000)
 					}
 
