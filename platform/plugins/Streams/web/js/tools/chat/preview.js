@@ -8,22 +8,22 @@
 	 * @class Streams chat preview
 	 * @constructor
 	 * @param {Object} [options] options to pass besides the ones to Streams/preview tool
+	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Boolean} [options.hideIfNoParticipants] If there are no participants in the chat, hide this preview.
 	 */
 	Q.Tool.define("Streams/chat/preview", "Streams/preview", function _Streams_chat_preview(options, preview) {
 		var tool = this;
 		tool.preview = preview;
 
-		Q.addStylesheet('{{Streams}}/css/tools/chat.css');
+		$(tool.element).attr('data-mode', this.state.mode);
 
-		$(tool.element).on(Q.Pointer.click, tool, function () {
-				Q.handle(tool.state.onInvoke, tool, [preview]);
-		});
+		Q.addStylesheet('{{Streams}}/css/tools/chat.css');
 
 		preview.state.onRefresh.add(this.refresh.bind(this));
 	},
 
 	{
+		mode: 'document',
 		hideIfNoParticipants: false,
 		onInvoke: new Q.Event()
 	},
@@ -55,6 +55,14 @@
 				if (err) return;
 
 				tool.element.innerHTML = html;
+
+				if (state.mode === 'title') {
+					return;
+				}
+
+				$te.on(Q.Pointer.click, tool, function () {
+					Q.handle(tool.state.onInvoke, tool, [tool.preview]);
+				});
 
 				// setup unseen element
 				Q.Streams.Message.Total.setUpElement(
