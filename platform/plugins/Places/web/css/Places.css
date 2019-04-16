@@ -8,8 +8,6 @@
 	background-repeat: no-repeat;
 	font-size: 30px;
 	font-weight: bold;
-	animation: Places_user_location_set 1s ease-in-out infinite alternate;
-	-webkit-animation: Places_user_location_set 1s ease-in-out infinite alternate;
 	padding-top: 30px;
 }
 

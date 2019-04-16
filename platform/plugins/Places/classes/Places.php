@@ -154,7 +154,7 @@ abstract class Places extends Base_Places
 		// otherwise return standard file_get_contents
 		return file_get_contents($url);
 	}
-		/**
+	/**
 	 * Use this to calculate the haversine distance between two sets of lat/long coordinates on the Earth
 	 * @method distance
 	 * @static
