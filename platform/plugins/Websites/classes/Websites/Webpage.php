@@ -301,8 +301,8 @@ class Websites_Webpage
 		}
 
 		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
-			'title' => utf8_decode(trim($title)),
-			'content' => utf8_decode(trim($description)) ?: "",
+			'title' => trim($title),
+			'content' => trim($description) ?: "",
 			'icon' => $streamIcon,
 			'attributes' => array(
 				'url' => $url,
