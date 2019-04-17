@@ -588,7 +588,6 @@
 
 					function bindMouseWheelEvent(elem) {
 						_elementToResize = elem;
-
 						if (elem.addEventListener) {
 							if ('onwheel' in document) {
 								// IE9+, FF17+, Ch31+

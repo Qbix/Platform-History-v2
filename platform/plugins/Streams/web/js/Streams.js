@@ -4748,7 +4748,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 		var viewMode;
 		if(Q.info.isMobile){
 			viewMode = 'maximizedMobile';
-		} else viewMode = 'maximized';
+		} else viewMode = 'tiled';
 
 		var renderScreens = function() {
 			if(WebRTCconference == null) return;
@@ -4794,8 +4794,11 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 					renderRegularScreensGrid();
 				} else if(viewMode == 'minimized'){
 					renderMinimizedScreensGrid();
-				} else {
+				} else if(viewMode == 'minimized'){
 					renderMaximizedScreensGrid();
+				} else if(viewMode == 'tiled'){
+					console.log('renderTiledScreenGridDesktop')
+					renderTiledScreenGridDesktop();
 				}
 				var roomScreens = WebRTCconference.screens();
 				var i, screen;
@@ -5114,7 +5117,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 					}
 				}
 
-			} else if(viewMode == 'minimized') {
+			} else if(viewMode == 'minimized' || viewMode == 'tiled') {
 				var i, screen;
 				for (i = 0; screen = screens[i]; i++) {
 					var maximizeBtn = screen.nameEl.querySelector('.webrtc_tool_maximize-btn');
@@ -5161,6 +5164,23 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			}
 			activeScreen = null;
 
+		}
+
+		var renderTiledScreenGridDesktop = function() {
+			var roomScreens = WebRTCconference.screens();
+			console.log('renderTiledScreenGridDesktop')
+			if(window.innerHeight > window.innerWidth) {
+				//_roomsMedia.className = 'webrtc_tool_tiled-vertical-grid';
+				var elements = toggleScreensClass('tiledVertical');
+				_layoutTool.animate('tiledVertical', elements, 500, true);
+			} else {
+				//_roomsMedia.className = 'webrtc_tool_tiled-horizontal-grid';
+				var elements = toggleScreensClass('tiledHorizontal');
+				_layoutTool.animate('tiledHorizontal', elements, 500, true);
+			}
+			activeScreen = null;
+
+			updateScreensButtons();
 		}
 
 		var renderRegularScreensGrid = function() {
@@ -5669,7 +5689,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			var modes;
 			if(Q.info.isMobile)
 				modes = ['tiledMobile', 'maximizedMobile'];
-			else modes = ['regular', 'maximized'];
+			else modes = ['regular', 'maximized', 'tiled'];
 
 			var i, mode, modeToSwitch;
 
@@ -5695,6 +5715,8 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				renderTiledScreenGridMobile();
 			} else if(modeToSwitch == 'maximizedMobile') {
 				renderMaximizedScreensGridMobile(activeScreen);
+			} else if(modeToSwitch == 'tiled') {
+				renderTiledScreenGridDesktop();
 			}
 
 			viewMode = modeToSwitch;
@@ -5783,6 +5805,36 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			];
 
 			var roomScreens = WebRTCconference.screens();
+
+			if(layout == 'tiledVertical' || layout == 'tiledHorizontal') {
+				var screenClass = 'webrtc_tool_tiled-grid-screen';
+				var elements =  roomScreens.map(function (screen) {
+					for (var o in screenClasses) {
+						if(screenClasses[o] == screenClass) continue;
+						if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
+					}
+					if(!screen.screenEl.classList.contains(screenClass)) screen.screenEl.classList.add(screenClass);
+
+					/*if(!_roomsMedia.contains(screen.screenEl)) {
+						screen.videoCon.style.display = 'none';
+					} else {
+						screen.videoCon.style.display = '';
+					}*/
+
+					return screen.screenEl;
+				});
+
+
+				var containerClass = 'webrtc_tool_tiled-screens-grid';
+				for (var x in gridClasses) {
+					if(gridClasses[x] == containerClass) continue;
+					if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
+				}
+				_roomsMedia.classList.add(containerClass);
+
+				return elements;
+
+			}
 
 			if(layout == 'tiledVerticalMobile' || layout == 'tiledHorizontalMobile') {
 				var screenClass = 'webrtc_tool_tiled-grid-screen';
@@ -5935,7 +5987,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			Q.Tool.setUpElement(
 				_roomsMedia, // or pass an existing element
 				"Q/layouts",
-				{}
+				{alternativeContainer: Q.info.isMobile ? null : document.body}
 			),
 			{},
 			function () {
