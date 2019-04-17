@@ -20,6 +20,7 @@ Q.Tool.define('Q/layouts', function (options) {
 
 {
 	elementToWrap: null,
+	alternativeContainer: null,
 	filter: null,
 	key: null,
 	onLayout: new Q.Event()
@@ -75,8 +76,8 @@ Q.Tool.define('Q/layouts', function (options) {
 		}
 		var tool = this;
 		var container = tool.element;
-		var layout = g(container, elements.length);
-		console.log('animate rects', layout)
+		var wrappingContainer = tool.state.alternativeContainer != null ? tool.state.alternativeContainer : tool.element;
+		var layout = g(wrappingContainer, elements.length);
 
 		if (container.computedStyle('position') === 'static') {
 			container.style.position = 'relative';
@@ -85,8 +86,6 @@ Q.Tool.define('Q/layouts', function (options) {
 		var i, element;
 		for(i = 0; element = elements[i]; i++){
 			var layoutRect = layout[i];
-			console.log('animate layoutRect', layoutRect, element);
-
 
 			if(layoutRect.width == 0 &&  layoutRect.height == 0) {
 				element.style.height = 'auto';
@@ -124,7 +123,6 @@ Q.Tool.define('Q/layouts', function (options) {
                 var currentWidth = parseFloat(ts.width);
                 var currentHeight = parseFloat(ts.height);
 
-                //console.log('animation', currentWidth, currentHeight);
                 if(currentLeft !== rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
                 if(currentTop !== rect2.top) ts.top = rect1.top + (rect2.top - rect1.top) * y + 'px';
                 if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
@@ -136,19 +134,14 @@ Q.Tool.define('Q/layouts', function (options) {
 
 var _generators = {
 	tiledVertical: function (container, count) {
-		// TODO: implement based on element.clientWidth and element.clientHeight
-		// see the photos I sent you, layout is different depending on count
-		// The container may have margins, depending on the CSS of the app.
-		// What we care about here is the client width and client height.
-		var w = container.clientWidth;
-		var h = container.clientHeight;
-		var rects = [];
-		var rect = new DOMRect(1, 2, 3, 4);
-		rects.push(rect);
-		return rects;
+		var containerRect = container.getBoundingClientRect()
+
+		return tiledDesktopGrid(count, containerRect);
 	},
 	tiledHorizontal: function (container, count) {
+		var containerRect = container.getBoundingClientRect()
 
+		return tiledDesktopGrid(count, containerRect);
 	},
 	maximizedVertical: function (container, count) {
 
@@ -229,14 +222,9 @@ var _generators = {
 	    var rectHeight = 100;
 	    var spaceBetween = 10;
 	    var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
-	    console.log('totalRects',totalRects)
 	    var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
 	    var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
-	    console.log('totalRects2', perCol * perRow)
-	    if((perCol * perRow) < count) {
-
-	    }
-
+	 
 
 	    var side = 'right'
 	    var isNextNewLast = false;
@@ -327,14 +315,8 @@ var _generators = {
 	    var rectHeight = 100;
 	    var spaceBetween = 10;
 	    var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
-	    console.log('totalRects',totalRects)
 	    var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
 	    var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
-	    console.log('totalRects2', perCol * perRow)
-	    if((perCol * perRow) < count) {
-
-	    }
-
 
 	    var side = 'right'
 	    var isNextNewLast = false;
@@ -413,6 +395,100 @@ var _generators = {
 	    return rects;
     }
 
+	function getElementSizeKeepingRatio(initSize, baseSize) {
+		var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
+
+		var width = Math.floor(initSize.width*ratio);
+		var height = Math.floor(initSize.height*ratio);
+
+		return { width: width, height: height};
+	}
+
+    function tiledDesktopGrid(count, parentRect) {
+	    var rects = [];
+
+	    var aspectRatio, perRow;
+	    if (count == 1) {
+		    aspectRatio = {width:4, height:3};
+		    perRow = 1;
+	    } else if (count == 2){
+		    aspectRatio = {width:3, height:4};
+		    perRow = 2;
+	    } else if (count == 3){
+		    aspectRatio = {width:3, height:4};
+		    perRow = 3;
+	    } else if (count == 4){
+		    aspectRatio = {width:3, height:3};
+		    perRow = 2;
+	    } else if (count == 5){
+		    aspectRatio = {width:4, height:3};
+		    perRow = 3;
+	    } else {
+		    aspectRatio = {width:4, height:3};
+		    perRow = 4;
+	    }
+
+	    var centerX = parentRect.width / 2;
+	    var centerY = parentRect.height / 2;
+
+	    var spaceBetween = 10;
+	    var rectHeight;
+	    var rowsNum = null;
+	    if(rowsNum == null) {
+		    rowsNum = Math.ceil(count / perRow);
+		    rectHeight = (parentRect.height - spaceBetween * (rowsNum + 1)) / rowsNum;
+	    } else {
+		    rectHeight = (parentRect.height - spaceBetween * (rowsNum + 1)) / rowsNum;
+	    }
+
+	    var rectWidth = rectHeight / aspectRatio.height * aspectRatio.width;
+
+	    var widthLimit = (parentRect.width - spaceBetween * (perRow + 1)) / perRow;
+	    var heightLimit = (parentRect.height - spaceBetween * (rowsNum + 1)) / rowsNum;
+	    if(rectWidth > widthLimit || rectHeight > heightLimit) {
+		    var fittingSize = getElementSizeKeepingRatio({width: rectWidth, height:rectHeight}, {width: widthLimit, height:heightLimit})
+		    rectWidth = fittingSize.width;
+		    rectHeight = fittingSize.height;
+	    }
+
+	    var isNextNewLast = false;
+	    var rowItemCounter = 1;
+	    var i;
+	    for (i = 0; i < count; i++) {
+		    var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : null;
+		    var currentRow = isNextNewLast  ? rowsNum : Math.ceil((i + 1)/perRow);
+		    var isNextNewRow  = rowItemCounter == perRow;
+		    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
+
+		    var x, y;
+		    if(rowItemCounter == 1) {
+			    if (i == 0) {
+				    y = centerY - ((rectHeight * rowsNum + spaceBetween * (rowsNum - 1)) / 2);
+				    x = centerX - (rectWidth * perRow + spaceBetween * (perRow - 1)) / 2;
+			    } else if(currentRow == rowsNum) {
+				    y = prevRect.y + prevRect.height + spaceBetween;
+				    x = centerX - (rectWidth * (count - i) + spaceBetween * ((count - i) - 1)) / 2;
+			    } else {
+				    y = prevRect.y + prevRect.height + spaceBetween;
+				    x = centerX - (rectWidth * perRow + spaceBetween * (perRow - 1)) / 2;
+			    }
+		    } else {
+			    y = prevRect.y;
+			    x = (prevRect.x + prevRect.width) + spaceBetween;
+		    }
+
+		    var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+		    rects.push(rect);
+
+		    if (isNextNewRow) {
+			    rowItemCounter = 1;
+		    } else rowItemCounter++;
+	    }
+
+	    return rects;
+    }
+
     function simpleGrid(count, size, perRow, rowsNum) {
         var rects = [];
         var rectHeight;
@@ -456,6 +532,7 @@ var _generators = {
 	        } else rowItemCounter++;
         }
 
+        console.log('simpleGrid', rects)
         return rects;
     }
 
