@@ -1036,7 +1036,6 @@
     height: 95%;
 }
 
-
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
     flex: 1;
     background: black;
@@ -1070,6 +1069,24 @@
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
     position: static;
+}
+
+.webrtc_tool_desktop-screen ..webrtc_tool_tiled-screens-grid .webrtc_tool_chat-participant-video {
+    flex: 1;
+    background: black;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_tiled-screens-grid .webrtc_tool_chat-participant-video video{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
 }
 /* participants dialog */
 .dialog-participants-con {
@@ -1397,6 +1414,7 @@
     z-index: 3;
 }
 .webrtc_tool_maximized-main-screen .webrtc_tool_resize-handler[data-position="topright"],
+.webrtc_tool_tiled-screens-grid .webrtc_tool_resize-handler[data-position="topright"],
 .webrtc_tool_regular-screen .webrtc_tool_resize-handler[data-position="topright"] {
     cursor: nesw-resize;
     right: -7% !important;
