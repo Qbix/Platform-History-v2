@@ -26,17 +26,16 @@ class Websites_Webpage
 		$parsedUrl = parse_url($url);
 
 		// get source with header
-		$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
+		// "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
+		/*$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_VERBOSE => true,
 			CURLOPT_HEADER => true
 		));
-
 		$response = explode("\r\n\r\n", $response);
 		if (!is_array($response) || count($response) < 2) {
 			throw new Exception("Server return wrong response!");
 		}
-
 		$headers = $document = '';
 		foreach ($response as $i => $item) {
 			if (strpos($item, 'HTTP/') === 0 && empty($document)) {
@@ -44,7 +43,11 @@ class Websites_Webpage
 			} else {
 				$document .= $item;
 			}
-		}
+		}*/
+
+
+		$document = file_get_contents($url);
+		$headers = $http_response_header;
 
 		if (!$document) {
 			throw new Exception("Unable to access the site");
@@ -79,7 +82,11 @@ class Websites_Webpage
 
 		// split headers string into array
 		$result['headers'] = array();
-		$data = explode("\n", $headers);
+		if (is_string($headers)) {
+			$data = explode("\n", $headers);
+		} else {
+			$data = $headers;
+		}
 		foreach ($data as $part) {
 			$middle = explode(":",$part);
 			$result['headers'][trim($middle[0])] = trim(Q::ifset($middle, 1, null));
@@ -97,7 +104,7 @@ class Websites_Webpage
 			}
 
 			if (empty($result['lang'])) {
-				$result['lang'] = Q::ifset($result, 'headers', 'language', 'en');
+				$result['lang'] = Q::ifset($result, 'headers', 'language', Q::ifset($result, 'headers', 'content-language', 'en'));
 			}
 		}
 
