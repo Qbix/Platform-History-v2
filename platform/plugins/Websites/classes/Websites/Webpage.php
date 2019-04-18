@@ -53,10 +53,10 @@ class Websites_Webpage
 			throw new Exception("Unable to access the site");
 		}
 
-		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc = new DOMDocument();
 		// set error level
 		$internalErrors = libxml_use_internal_errors(true);
-		$doc->loadHTML($document);
+		$doc->loadHTML(mb_convert_encoding($document, 'HTML-ENTITIES', 'UTF-8'));
 		// Restore error level
 		libxml_use_internal_errors($internalErrors);
 
@@ -109,10 +109,7 @@ class Websites_Webpage
 		}
 
 		// get title
-		$title = $doc->getElementsByTagName("title");
-		if($title->length > 0){
-			$result['title'] = $title->item(0)->nodeValue;
-		}
+		$result['title'] = $xpath->query('//title')->item(0)->textContent;
 
 		$query = $xpath->query('//*/link');
 		$icons = array();
