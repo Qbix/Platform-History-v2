@@ -4748,7 +4748,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 		var viewMode;
 		if(Q.info.isMobile){
 			viewMode = 'maximizedMobile';
-		} else viewMode = 'tiled';
+		} else viewMode = 'maximized';
 
 		var renderScreens = function() {
 			if(WebRTCconference == null) return;
@@ -4794,7 +4794,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 					renderRegularScreensGrid();
 				} else if(viewMode == 'minimized'){
 					renderMinimizedScreensGrid();
-				} else if(viewMode == 'minimized'){
+				} else if(viewMode == 'maximized'){
 					renderMaximizedScreensGrid();
 				} else if(viewMode == 'tiled'){
 					console.log('renderTiledScreenGridDesktop')
@@ -5046,13 +5046,28 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 				maximizeBtn.addEventListener('click', function (e) {
 					e.preventDefault();
 					e.stopPropagation();
-					renderMaximizedScreensGrid(screen);
 				});
 
 				minimizeBtn.addEventListener('click', function (e) {
 					e.preventDefault();
 					e.stopPropagation();
+				});
+
+				$(minimizeBtn).plugin('Q/clickable', {
+					className: 'webrtc_tool_minimize-btn',
+					press: {size: 1.2},
+					release: {size: 1.2}
+				}).on(Q.Pointer.fastclick, function () {
 					renderMinimizedScreensGrid();
+				});
+
+				$(maximizeBtn).plugin('Q/clickable', {
+					className: 'webrtc_tool_maximize-btn',
+					press: {size: 1.2},
+					release: {size: 1.2}
+				}).on(Q.Pointer.fastclick, function () {
+					renderMaximizedScreensGrid(screen);
+
 				});
 			}
 
@@ -5603,8 +5618,7 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 		 */
 		var renderMaximizedScreensGrid = function(screenToMaximize) {
 			console.log('renderMaximizedScreensGrid')
-
-			if(_layoutTool == null || _controls == null) return;
+			if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 			var roomScreens = WebRTCconference.screens();
 
 			if(screenToMaximize != null) activeScreen = screenToMaximize;
@@ -5955,6 +5969,8 @@ var WebRTC = Streams.WebRTC = function Streams_WebRTC() {
 			fitScreenToVideo:fitScreenToVideo,
 			toggleViewMode:toggleViewMode,
 			updateLocalScreenClasses:updateLocalScreenClasses,
+			renderMaximizedScreensGrid:renderMaximizedScreensGrid,
+			renderMaximizedScreensGridMobile:renderMaximizedScreensGridMobile,
 		};
 	})()
 

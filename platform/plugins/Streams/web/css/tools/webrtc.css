@@ -628,8 +628,10 @@
 }
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+    width: 100%;
     height: 100%;
     position: absolute;
+    object-fit: cover;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isHorizontal {
     height: 100%;
@@ -856,6 +858,9 @@
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
     display: flex;
     align-items: center;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns span{
+    display: block;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns button{
     background: transparent;
@@ -1403,6 +1408,61 @@
 .webrtc_tool_disconnect-btn svg{
     height: 30px;
     width: 30px;
+}
+.loudest-options-con select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #4aaa4e;
+    background-image: none;
+}
+/* Custom Select */
+.loudest-options-con {
+    position: relative;
+    display: block;
+    width: 150px;
+    height: 44px;
+    margin:15px;
+    background: #4aaa4e;
+    overflow: hidden;
+    border-radius: 0.3em;
+    box-shadow: 0 5px 20px -5px #0048b5;
+}
+.loudest-options-con select {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 0 0 .5em;
+    color: #fff;
+    cursor: pointer;
+}
+.loudest-options-con select::-ms-expand {
+    display: none;
+}
+/* Arrow */
+.loudest-options-con::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 10px;
+    line-height: 3;
+    background: #4aaa4e;
+    pointer-events: none;
+}
+/* Transition */
+.loudest-options-con:hover::after {
+    color: #fff;
+}
+.loudest-options-con::after {
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
 }
 
 .webrtc_tool_resize-handler {
