@@ -120,11 +120,11 @@ class Websites_Webpage
 
 			if(!empty($rel)){
 				if (preg_match('#icon#', $rel)) {
-					$icons[$rel] = self::normaliseHref($href, $url);
+					$icons[$rel] = self::normalizeHref($href, $url);
 				}
 
 				if ($rel == 'canonical') {
-					$canonicalUrl = self::normaliseHref($href, $url);
+					$canonicalUrl = self::normalizeHref($href, $url);
 				}
 			}
 		}
@@ -172,14 +172,14 @@ class Websites_Webpage
 	}
 	/**
 	 * Normalize href like '//path/to' or '/path/to' to valid URL
-	 * @method normaliseHref
+	 * @method normalizeHref
 	 * @static
 	 * @param string $href
 	 * @param string $baseUrl
 	 * @throws Exception
 	 * @return string
 	 */
-	static function normaliseHref ($href, $baseUrl) {
+	static function normalizeHref ($href, $baseUrl) {
 		$parts = parse_url($baseUrl);
 
 		if (preg_match("#^\/\/#", $href)) {
@@ -242,8 +242,8 @@ class Websites_Webpage
 		$keywords = Q::ifset($params, 'keywords', null);
 		$description = substr(Q::ifset($params, 'description', ''), 0, 1023);
 		$copyright = Q::ifset($params, 'copyright', null);
-		$bigIcon = self::normaliseHref(Q::ifset($params, 'bigIcon', null), $url);
-		$smallIcon = self::normaliseHref(Q::ifset($params, 'smallIcon', null), $url);
+		$bigIcon = self::normalizeHref(Q::ifset($params, 'bigIcon', null), $url);
+		$smallIcon = self::normalizeHref(Q::ifset($params, 'smallIcon', null), $url);
 		$contentType = Q::ifset($params, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
 		$streamIcon = Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
