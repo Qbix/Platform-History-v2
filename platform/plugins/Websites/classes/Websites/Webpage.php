@@ -276,9 +276,13 @@ class Websites_Webpage
 			$result = null;
 
 			if (Q_Valid::url($smallIcon)) {
-				$result = Users::importIcon($interestStream, array(
-					'32.png' => $smallIcon
-				), $interestStream->iconDirectory());
+				try {
+					$result = Users::importIcon($interestStream, array(
+						'32.png' => $smallIcon
+					), $interestStream->iconDirectory());
+				} catch (Exception $e) {
+
+				}
 			}
 
 			if (empty($result)) {
@@ -324,10 +328,13 @@ class Websites_Webpage
 
 		// set custom icon for Websites/webpage stream
 		if (Q_Valid::url($bigIcon)) {
-			$result = Users::importIcon($webpageStream, Q_Image::iconArrayWithUrl($bigIcon, 'Streams/image'), $webpageStream->iconDirectory());
+			try {
+				$result = Users::importIcon($webpageStream, Q_Image::iconArrayWithUrl($bigIcon, 'Streams/image'), $webpageStream->iconDirectory());
+				if (!empty($result)) {
+					$webpageStream->save();
+				}
+			} catch (Exception $e) {
 
-			if (!empty($result)) {
-				$webpageStream->save();
 			}
 		}
 
