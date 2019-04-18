@@ -62,6 +62,7 @@
 
                 tool.createSettingsPopup();
                 tool.participantsPopup().createList();
+                //if(!Q.info.isMobile) tool.participantsPopup().enableLoudesScreenMode();
 
                 tool.element.appendChild(controlBar);
                 tool.bindRTCEvents();
@@ -686,7 +687,37 @@
 	                disconnectbtn.className = 'Q_button webrtc_tool_disconnect-btn';
 	                disconnectbtn.innerHTML = icons.endCall + '<span>Disconnect</span>';
 
+	                var loudestSelectCon = document.createElement('DIV');
+	                loudestSelectCon.className = 'loudest-options-con'
+	                var loudestSelect = document.createElement('SELECT');
+	                loudestSelect.className = 'loudest-options'
+	                var option1 = document.createElement('OPTION');
+	                option1.innerHTML = 'Maximize loudest';
+	                option1.value = 'all';
+	                var option2 = document.createElement('OPTION');
+	                option2.innerHTML = 'Maximize loudest except me';
+	                option2.value = 'allButMe';
+	                var option3 = document.createElement('OPTION');
+	                option3.value = 'disabled';
+	                option3.selected = true;
+	                option3.innerHTML = 'Disabled';
+	                loudestSelect.addEventListener('change', function (e) {
+		                var value = loudestSelect.options[loudestSelect.selectedIndex].value;
+		                if(value == 'disabled') {
+			                disableLoudesScreenMode();
+		                } else {
+			                disableLoudesScreenMode();
+			                enableLoudesScreenMode(value);
+		                }
+	                })
+	                loudestSelect.appendChild(option1);
+	                loudestSelect.appendChild(option2);
+	                loudestSelect.appendChild(option3);
+	                loudestSelectCon.appendChild(loudestSelect);
+	                tool.loudestSelect = loudestSelect;
+
 	                topBtns.appendChild(disconnectbtn);
+	                topBtns.appendChild(loudestSelectCon);
 	                participantsListCon.appendChild(topBtns);
 
 	                tool.participantListEl = document.createElement('UL');
@@ -718,7 +749,10 @@
 				                content: participantsListCon,
 				                apply: true,
 				                onActivate: function (dialog) {
-					                disconnectbtn.addEventListener('click', function () {
+					                $(disconnectbtn).plugin('Q/clickable', {
+						                press: {size: 1.2},
+						                release: {size: 1.2}
+					                }).on(Q.Pointer.fastclick, function () {
 						                tool.state.webrtcClass.stop();
 						                Q.Dialogs.pop();
 					                });
@@ -756,9 +790,33 @@
 
 		                });
 
-		                disconnectbtn.addEventListener('click', function () {
+		                $(disconnectbtn).plugin('Q/clickable', {
+			                press: {size: 1.2},
+			                release: {size: 1.2}
+		                }).on(Q.Pointer.fastclick, function () {
 			                tool.state.webrtcClass.stop();
 		                });
+	                }
+                }
+
+	            var loudestModeInterval;
+                function enableLoudesScreenMode(mode) {
+                	if(loudestModeInterval != null) return;
+                	loudestModeInterval = setInterval(function () {
+		                webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
+			                //console.log('loudesScreenMode', loudestScreen);
+			                if(Q.info.isMobile)
+			                	tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen);
+			                else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen);
+
+		                });
+	                }, 1000);
+
+                }
+                function disableLoudesScreenMode() {
+                	if(loudestModeInterval != null) {
+                		clearInterval(loudestModeInterval);
+		                loudestModeInterval = null;
 	                }
                 }
 
@@ -767,6 +825,8 @@
                     toggleLocalVideo:toggleLocalVideo,
                     addItem:addItem,
                     removeItem:removeItem,
+	                enableLoudesScreenMode:enableLoudesScreenMode,
+	                disableLoudesScreenMode:disableLoudesScreenMode,
                 }
             },
         }
