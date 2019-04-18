@@ -103,8 +103,9 @@
 						elementToMove.style.top = elRect.top + 'px';
 						elementToMove.style.left = elRect.left + 'px';
 						elementToMove.style.transform = '';
-						elementToMove.style.position = 'fixed';
+						elementToMove.style.position = 'absolute';
 						elementToMove.style.cursor = 'grabbing';
+						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
 
 						evt = evt || window.event;
 						posX = Q.info.isMobile ? evt.touches[0].clientX : evt.clientX,
@@ -131,6 +132,8 @@
 						else window.removeEventListener('mousemove', drag)
 
 						if(elementToMove != null) elementToMove.style.cursor='';
+
+						tool.element.style.boxShadow = '';
 
 						if (tool.state.appliedRecently) {
 							tool.state.onMoved.handle.call(tool);

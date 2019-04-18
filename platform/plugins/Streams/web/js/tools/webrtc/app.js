@@ -1264,93 +1264,93 @@ var WebRTCconferenceLib = function app(options){
             roomsMedia.appendChild(prerenderedScreens);
         }
 
-        var processes = []
-        var results = [];
-        var stop;
-        function createAnalyser(track, screen, last) {
-            if(track.isLocal) return;
-            //setTimeout(function(){
-            console.log('setLoudestScreenAsMainScreen track', last)
-            console.log('setLoudestScreenAsMainScreen track', track)
-            let context = new AudioContext();
-            let analyser = context.createScriptProcessor(1024, 1, 1);
-            let source = context.createMediaStreamSource(track.stream);
-            source.connect(analyser);
-            source.connect(context.destination); // connect the source to the destination
-
-            analyser.connect(context.destination); // chrome needs the analyser to be connected too...
+       ;
 
 
-            console.log('source', source)
+	    var getLoudestScreen = function (mode, callback) {
+		    var results = [];
+		    var processes = [];
+	        function createAnalyser(track, screen, last) {
+		        //if(track.isLocal) return;
+		        //console.log('setLoudestScreenAsMainScreen track', last)
+		        //console.log('setLoudestScreenAsMainScreen track', track)
+		        let context = new AudioContext();
+		        let analyser = context.createScriptProcessor(1024, 1, 1);
+		        let source = context.createMediaStreamSource(track.stream);
+		        source.connect(analyser);
+		        source.connect(context.destination); // connect the source to the destination
+
+		        analyser.connect(context.destination); // chrome needs the analyser to be connected too...
+
+		        //console.log('source', source)
 
 
-            analyser.onaudioprocess = (function(e) {
-                //////if(stop) return;
-                console.log('analyser')
-                // no need to get the output buffer anymore
-                var int = e.inputBuffer.getChannelData(0);
-                //var max = 0;
-                /*for (var i = 0; i < int.length; i++) {
-                    max = int[i] > max ? int[i] : max;
-                }*/
-                //console.log('createMediaElementSource', max);
-                results.push({
-                    screen:screen,
-                    volume:int[0],
-                });
-                console.log('analyser int', int[0], track.sid)
+		        analyser.onaudioprocess = (function(e) {
+			        //console.log('analyser')
+			        const getChannelData = async () => {
+				        return await e.inputBuffer.getChannelData(0);
+			        };
+
+			        getChannelData().then(int => {
+				       var int = e.inputBuffer.getChannelData(0);
+				        results.push({
+					        screen:screen,
+					        volume:Math.abs(int[0]),
+				        })
 
 
 
-                if(last) {
-                    //stop = true;
-                    var loudestScreen = results.reduce(function(prev, curr) {
-                        return  curr.volume > prev.volume ? curr : prev;
-                    });
-                    console.log('loudestScreen',loudestScreen)
-                    console.log('processes',processes)
+				        //console.log('analyser int', Math.abs(int[0]), screen.participant.identity)
+				        //console.log('%c SUCCESS', 'background:green;color:white;')
 
-                    activeScreen = loudestScreen.screen;
+				        setTimeout(function () {
+					        source.disconnect();
+					        analyser.disconnect();
+				        }, 100)
 
-                    viewMode = 'mainAndThumbs';
+				        if(last) {
+					        var loudestScreen = results.reduce(function(prev, curr) {
+						        return  curr.volume > prev.volume ? curr : prev;
+					        });
+					        //console.log('loudestScreen',loudestScreen)
+					        //console.log('processes',processes)
 
-                    mainScreenAndThumbsGrid();
-                }
+					        if(callback != null && loudestScreen.volume > 0.1) callback(loudestScreen.screen);
+				        }
 
-                setTimeout(function () {
 
-                    source.disconnect();
-                    analyser.disconnect();
+			        }).catch(err => console.error('%c ERROR', 'background:red;color:white;', err))
 
-                }, 100)
 
-            }).bind(last);
 
-            console.log('setLoudestScreenAsMainScreen end int', track)
+			        //console.log('analyser last', last)
 
-            processes.push({analyser:analyser,source:source})
-            //},0)
-        }
-        function setLoudestScreenAsMainScreen() {
-            results = [];
-            processes = [];
+
+
+		        }).bind(last);
+
+		        //console.log('setLoudestScreenAsMainScreen end int', track)
+
+		        processes.push({analyser:analyser,source:source});
+	        }
+
+	        var screenToAnalyze = roomScreens;
+	        if(mode == 'allButMe') screenToAnalyze.filter(function (s) {
+		        return !s.isLocal;
+	        });
             var i, screenItem;
             for(i = 0; screenItem = roomScreens[i]; i++){
                 var audioTracks = screenItem.audioTracks();
                 var x, trackItem;
                 for(x = 0; trackItem = audioTracks[x]; x++) {
 
-                    console.log('latest', i, roomScreens.length-1, x, audioTracks.length-1)
-                    createAnalyser(trackItem, screenItem, i == roomScreens.length-1 && x == audioTracks.length-1 )
+                	var isLast = i == roomScreens.length-1 && x == audioTracks.length-1;
+                    //console.log('latest', i, roomScreens.length-1, x, audioTracks.length-1)
+                    createAnalyser(trackItem, screenItem,  isLast)
 
                 }
             }
 
-            setTimeout(function () {
-                //stop = true;
-
-
-            }, 100)
         }
 
         function mainScreenAndThumbsGrid() {
@@ -1440,6 +1440,7 @@ var WebRTCconferenceLib = function app(options){
             createParticipantScreen: createRoomScreen,
             removeScreensByParticipant: removeScreensByParticipant,
             generateScreensGrid: generateScreensGrid,
+	        getLoudestScreen: getLoudestScreen,
         }
     }())
 
