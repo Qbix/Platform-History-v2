@@ -53,10 +53,10 @@ class Websites_Webpage
 			throw new Exception("Unable to access the site");
 		}
 
-		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc = new DOMDocument();
 		// set error level
 		$internalErrors = libxml_use_internal_errors(true);
-		$doc->loadHTML($document);
+		$doc->loadHTML(mb_convert_encoding($document, 'HTML-ENTITIES', 'UTF-8'));
 		// Restore error level
 		libxml_use_internal_errors($internalErrors);
 
@@ -109,10 +109,7 @@ class Websites_Webpage
 		}
 
 		// get title
-		$title = $doc->getElementsByTagName("title");
-		if($title->length > 0){
-			$result['title'] = $title->item(0)->nodeValue;
-		}
+		$result['title'] = $xpath->query('//title')->item(0)->textContent;
 
 		$query = $xpath->query('//*/link');
 		$icons = array();
@@ -123,11 +120,11 @@ class Websites_Webpage
 
 			if(!empty($rel)){
 				if (preg_match('#icon#', $rel)) {
-					$icons[$rel] = self::normaliseHref($href, $url);
+					$icons[$rel] = self::normalizeHref($href, $url);
 				}
 
 				if ($rel == 'canonical') {
-					$canonicalUrl = self::normaliseHref($href, $url);
+					$canonicalUrl = self::normalizeHref($href, $url);
 				}
 			}
 		}
@@ -175,14 +172,14 @@ class Websites_Webpage
 	}
 	/**
 	 * Normalize href like '//path/to' or '/path/to' to valid URL
-	 * @method normaliseHref
+	 * @method normalizeHref
 	 * @static
 	 * @param string $href
 	 * @param string $baseUrl
 	 * @throws Exception
 	 * @return string
 	 */
-	static function normaliseHref ($href, $baseUrl) {
+	static function normalizeHref ($href, $baseUrl) {
 		$parts = parse_url($baseUrl);
 
 		if (preg_match("#^\/\/#", $href)) {
@@ -245,8 +242,8 @@ class Websites_Webpage
 		$keywords = Q::ifset($params, 'keywords', null);
 		$description = substr(Q::ifset($params, 'description', ''), 0, 1023);
 		$copyright = Q::ifset($params, 'copyright', null);
-		$bigIcon = self::normaliseHref(Q::ifset($params, 'bigIcon', null), $url);
-		$smallIcon = self::normaliseHref(Q::ifset($params, 'smallIcon', null), $url);
+		$bigIcon = self::normalizeHref(Q::ifset($params, 'bigIcon', null), $url);
+		$smallIcon = self::normalizeHref(Q::ifset($params, 'smallIcon', null), $url);
 		$contentType = Q::ifset($params, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
 		$streamIcon = Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
@@ -265,7 +262,7 @@ class Websites_Webpage
 		$port = Q::ifset($urlParsed, 'port', null);
 		$interestTitle = 'Websites: '.$urlParsed['host'].($port ? ':'.$port : '');
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
-		Q::Event('Streams/interest/post', array(
+		Q::event('Streams/interest/post', array(
 			'title' => $interestTitle,
 			'userId' => $userId
 		));
@@ -279,9 +276,13 @@ class Websites_Webpage
 			$result = null;
 
 			if (Q_Valid::url($smallIcon)) {
-				$result = Users::importIcon($interestStream, array(
-					'32.png' => $smallIcon
-				), $interestStream->iconDirectory());
+				try {
+					$result = Users::importIcon($interestStream, array(
+						'32.png' => $smallIcon
+					), $interestStream->iconDirectory());
+				} catch (Exception $e) {
+
+				}
 			}
 
 			if (empty($result)) {
@@ -327,10 +328,13 @@ class Websites_Webpage
 
 		// set custom icon for Websites/webpage stream
 		if (Q_Valid::url($bigIcon)) {
-			$result = Users::importIcon($webpageStream, Q_Image::iconArrayWithUrl($bigIcon, 'Streams/image'), $webpageStream->iconDirectory());
+			try {
+				$result = Users::importIcon($webpageStream, Q_Image::iconArrayWithUrl($bigIcon, 'Streams/image'), $webpageStream->iconDirectory());
+				if (!empty($result)) {
+					$webpageStream->save();
+				}
+			} catch (Exception $e) {
 
-			if (!empty($result)) {
-				$webpageStream->save();
 			}
 		}
 
