@@ -262,7 +262,7 @@ class Websites_Webpage
 		$port = Q::ifset($urlParsed, 'port', null);
 		$interestTitle = 'Websites: '.$urlParsed['host'].($port ? ':'.$port : '');
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
-		Q::Event('Streams/interest/post', array(
+		Q::event('Streams/interest/post', array(
 			'title' => $interestTitle,
 			'userId' => $userId
 		));
