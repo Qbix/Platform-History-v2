@@ -609,7 +609,31 @@ class Q_Utils
 	{
 		return self::request('POST', $url, $data, $user_agent, $curl_opts, $header, $res_t);
 	}
-
+	/**
+	 * Issues a PUT request, and returns the response
+	 * @method put
+	 * @static
+	 * @param {string|array} $url The URL to post to
+	 *  This can also be an array of ($url, $ip) to send the request
+	 *  to a particular IP, while retaining the hostname and request URI
+	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
+	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
+	 * @param {string} [$header=null] Optional string to replace the entire POST header
+	 * @return {string|false} The response, or false if not received
+	 *
+	 * **NOTE:** *The function waits for it, which might take a while!*
+	 */
+	static function put (
+		$url,
+		$data,
+		$user_agent = null,
+		$curl_opts = array(),
+		$header = null,
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
+	{
+		return self::request('PUT', $url, $data, $user_agent, $curl_opts, $header, $res_t);
+	}
 	/**
 	 * Issues a GET request, and returns the response
 	 * @method get
@@ -732,7 +756,12 @@ class Q_Utils
 					curl_setopt($ch, CURLOPT_URL, $url);
 					break;
 				case 'PUT':
-					// not supported
+					curl_setopt_array($ch, array(
+						CURLOPT_URL => $url,
+						CURLOPT_POSTFIELDS => $data,
+						CURLOPT_CUSTOMREQUEST => 'PUT'
+					));
+					break;
 				case 'DELETE':
 					// not supported
 				default:
