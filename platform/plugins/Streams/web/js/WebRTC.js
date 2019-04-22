@@ -1452,6 +1452,7 @@
 
 			_options.element.appendChild(roomsMedia);
 			_roomsMedia = roomsMedia;
+			if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
 			Q.activate(
 				Q.Tool.setUpElement(
 					_roomsMedia, // or pass an existing element
