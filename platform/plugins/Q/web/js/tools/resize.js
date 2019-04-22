@@ -60,7 +60,6 @@
 			},
 			eventBinding: function () {
 				var tool = this;
-				console.log('tooltool', tool)
 				var elementToResize = tool.element;
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 				var moveWithinEl = document.body;
@@ -126,7 +125,7 @@
 					}
 
 					var stopMoving = function(container){
-						console.log('stopMoving')
+						//console.log('stopMoving')
 						if(Q.info.isMobile)
 							window.removeEventListener('touchmove', drag)
 						else window.removeEventListener('mousemove', drag)
@@ -286,7 +285,6 @@
 								elementWidth = Math.floor(elementHeight * ratio);
 							} else {
 								var newElHeight = Math.floor(elementWidth / ratio);
-								console.log('%c resizing1', 'background:green', elementHeight, newElHeight,  currentSize.height, ratio);
 								elementHeight = newElHeight + 50;
 
 							}
@@ -568,7 +566,6 @@
 
 							}
 						}
-						console.log('%c resizing1', 'background:green', elementWidth, elementHeight);
 
 						_elementToResize.style.width = elementWidth + 'px';
 						_elementToResize.style.height = elementHeight + 'px';
