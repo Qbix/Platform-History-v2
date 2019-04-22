@@ -62,7 +62,7 @@
 
                 tool.createSettingsPopup();
                 tool.participantsPopup().createList();
-                //if(!Q.info.isMobile) tool.participantsPopup().enableLoudesScreenMode();
+                tool.participantsPopup().enableLoudesScreenMode('allButMe');
 
                 tool.element.appendChild(controlBar);
                 tool.bindRTCEvents();
@@ -316,7 +316,6 @@
                             checked.checked = true;
                             checked.disabled = true;
                             var cameraId = checked.value;
-                            console.log('toggleCameras', cameraId)
                             if (cameraId != null) {
                             	webRTClib.conferenceControl.toggleCameras(cameraId, function () {
 		                            var localScreens = webRTClib.localParticipant().screens;
@@ -550,19 +549,18 @@
 		                for(var i in screens) {
 			                if(screens[i].screenEl.parentNode != null) {
 				                //screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
-				                console.log('removeScreen')
 				                if(screens[i].screenEl.style.display == 'none') {
 					                screens[i].screenEl.style.display = '';
 					                screens[i].isActive = true;
 					                this.unmuteVideo();
-					                tool.state.webrtcClass.screenRendering.renderScreens();
+					                tool.state.webrtcClass.screenRendering.updateLayout();
 
 				                } else {
 					                screens[i].screenEl.style.display = 'none';
 					                //if(screens[i].screenEl.parentNode != null) screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
 					                screens[i].isActive = false;
 					                this.muteVideo();
-					                tool.state.webrtcClass.screenRendering.renderScreens();
+					                tool.state.webrtcClass.screenRendering.updateLayout();
 				                }
 
 			                }
@@ -600,7 +598,6 @@
                     participantIdentity.className = 'webrtc_tool_participants-identity';
                     var participantIdentityText = document.createElement('DIV');
 	                var userId = roomParticipant.identity.split('\t')[0];
-	                console.log('userId', userId)
 	                Q.activate(
 		                Q.Tool.setUpElement(
 			                participantIdentityText, // or pass an existing element
@@ -692,15 +689,15 @@
 	                var loudestSelect = document.createElement('SELECT');
 	                loudestSelect.className = 'loudest-options'
 	                var option1 = document.createElement('OPTION');
-	                option1.innerHTML = 'Maximize loudest';
+	                option1.innerHTML = 'Maximize Loudest';
 	                option1.value = 'all';
 	                var option2 = document.createElement('OPTION');
-	                option2.innerHTML = 'Maximize loudest except me';
+	                option2.innerHTML = 'Loudest Except Me';
 	                option2.value = 'allButMe';
+	                option2.selected = true;
 	                var option3 = document.createElement('OPTION');
 	                option3.value = 'disabled';
-	                option3.selected = true;
-	                option3.innerHTML = 'Disabled';
+	                option3.innerHTML = 'Loudest Mode Off';
 	                loudestSelect.addEventListener('change', function (e) {
 		                var value = loudestSelect.options[loudestSelect.selectedIndex].value;
 		                if(value == 'disabled') {
@@ -769,14 +766,12 @@
 			                tool.usersBtn.parentNode.classList.add('webrtc_tool_hover');
 		                });
 		                tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {
-			                console.log('usersBtn mouseleave', e.target)
 			                tool.hoverTimeout.participantsPopup = setTimeout(function () {
 				                tool.usersBtn.parentNode.classList.remove('webrtc_tool_hover');
 			                }, 300)
 		                });
 
 		                participantsListCon.addEventListener('mouseenter', function (e) {
-			                console.log('usersBtn CANCEL', e.target)
 
 			                if (tool.hoverTimeout.participantsPopup != null) {
 				                clearTimeout(tool.hoverTimeout.participantsPopup);
@@ -799,12 +794,10 @@
 	                }
                 }
 
-	            var loudestModeInterval;
                 function enableLoudesScreenMode(mode) {
-                	if(loudestModeInterval != null) return;
-                	loudestModeInterval = setInterval(function () {
+                	if(tool.loudestModeInterval != null) return;
+	                tool.loudestModeInterval = setInterval(function () {
 		                webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
-			                //console.log('loudesScreenMode', loudestScreen);
 			                if(Q.info.isMobile)
 			                	tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen);
 			                else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen);
@@ -814,9 +807,9 @@
 
                 }
                 function disableLoudesScreenMode() {
-                	if(loudestModeInterval != null) {
-                		clearInterval(loudestModeInterval);
-		                loudestModeInterval = null;
+                	if(tool.loudestModeInterval != null) {
+                		clearInterval(tool.loudestModeInterval);
+		                tool.loudestModeInterval = null;
 	                }
                 }
 
