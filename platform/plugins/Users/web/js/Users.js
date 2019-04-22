@@ -501,7 +501,7 @@
 		}
 		Q.Dialogs.push({
 			dialog: Users.prompt.overlay,
-			alignByParent: true,
+			alignByParent: false,
 			doNotRemove: true,
 			onActivate: function () {
 				Users.initFacebook(function () {
@@ -1615,7 +1615,7 @@
 			.append(dialogSlot)
 			.prependTo(dialogContainer)
 			.plugin('Q/dialog', {
-				alignByParent: true,
+				alignByParent: false,
 				fullscreen: false,
 				beforeLoad: function () {
 					$('#Users_login_step1').css('opacity', 1).nextAll().hide();
@@ -1750,7 +1750,7 @@
 		var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">').append(step1_div);
 		dialog.append(titleSlot).append(dialogSlot).prependTo(options.dialogContainer);
 		dialog.plugin('Q/dialog', {
-			alignByParent: true,
+			alignByParent: false,
 			fullscreen: false,
 			beforeLoad: function () {
 				$('input[type!=hidden]', dialog).val('');
