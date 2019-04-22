@@ -501,7 +501,7 @@
 		}
 		Q.Dialogs.push({
 			dialog: Users.prompt.overlay,
-			alignByParent: true,
+			alignByParent: false,
 			doNotRemove: true,
 			onActivate: function () {
 				Users.initFacebook(function () {
