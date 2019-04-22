@@ -50,7 +50,6 @@ Q.Tool.define('Q/layouts', function (options) {
 	 * @param {Number} count How many elements
 	 */
 	layout: function (key, count) {
-        console.log('_generators[key]', key, count, _generators[key])
         var layout = _generators[key];;
 		return layout != null
 			? layout(this.element, count)
@@ -67,7 +66,6 @@ Q.Tool.define('Q/layouts', function (options) {
 	 * @return {Boolean} Whether the layout generator existed
 	 */
 	animate: function (generator, elements, duration, ease) {
-		console.log('elements', elements)
 		var g = (typeof generator === 'function')
 			? generator
 			: _generators[generator];
@@ -128,18 +126,18 @@ Q.Tool.define('Q/layouts', function (options) {
                 if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
                 if((rect2.height != 0 && currentWidth != rect2.height) && currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
 			});
-		}, 500, ease)
+		}, duration, ease)
 	}
 });
 
 var _generators = {
 	tiledVertical: function (container, count) {
-		var containerRect = container.getBoundingClientRect()
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
 
 		return tiledDesktopGrid(count, containerRect);
 	},
 	tiledHorizontal: function (container, count) {
-		var containerRect = container.getBoundingClientRect()
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
 
 		return tiledDesktopGrid(count, containerRect);
 	},
@@ -151,7 +149,7 @@ var _generators = {
 	},
 
 	tiledVerticalMobile: function (container, count) {
-		var containerRect = container.getBoundingClientRect()
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
 		var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
 		switch (count) {
@@ -173,7 +171,7 @@ var _generators = {
         }
 	},
 	tiledHorizontalMobile: function (container, count) {
-        var containerRect = container.getBoundingClientRect()
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
         switch (count) {
@@ -195,14 +193,14 @@ var _generators = {
         }
 	},
 	maximizedVerticalMobile: function (container, count) {
-        var containerRect = container.getBoundingClientRect()
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
         return maximizedMobile(count, size);
         },
 
 	maximizedHorizontalMobile: function (container, count) {
-        var containerRect = container.getBoundingClientRect()
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
         return maximizedHorizontalMobile(count, size);
@@ -532,7 +530,6 @@ var _generators = {
 	        } else rowItemCounter++;
         }
 
-        console.log('simpleGrid', rects)
         return rects;
     }
 
