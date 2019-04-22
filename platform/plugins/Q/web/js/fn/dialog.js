@@ -213,6 +213,11 @@ Q.Tool.jQuery('Q/overlay',
 			},
 			close: function(e)
 			{
+				if (e) {
+					$.Event(e).preventDefault();
+				}
+				Q.Pointer.stopHints($this[0]);
+				Q.Pointer.cancelClick();
 				dialogs.pop();
 				var data = $this.data('Q/overlay');
 				var $html = $('html');
@@ -256,9 +261,6 @@ Q.Tool.jQuery('Q/overlay',
 					}
 					Q.handle(data.options.onClose, $this, [$this]);
 				}
-				if (e) $.Event(e).preventDefault();
-				Q.Pointer.stopHints($this[0]);
-				Q.Pointer.cancelClick();
 			},
 			calculatePosition: function () {
 				calculatePosition($this);

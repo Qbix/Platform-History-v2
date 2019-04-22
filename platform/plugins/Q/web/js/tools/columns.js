@@ -105,6 +105,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
+		this.startAdjustingPositions();
 		Q.onLayout(tool).set(function () {
 			tool.refresh();
 		}, tool);
@@ -844,6 +845,26 @@ Q.Tool.define("Q/columns", function(options) {
 		return $controlsSlot[0];
 	},
 	
+	startAdjustingPositions: function (milliseconds) {
+		milliseconds = milliseconds || 300;
+		this.startAdjustingPositions.interval = setInterval(function () {
+			var top = $(state.container).offset().top;
+			if (this.startAdjustingPositions.top === top) {
+				return;
+			}
+			var diff = this.startAdjustingPositions.top - top;
+			this.startAdjustingPositions.top = top;
+			Q.each(state.columns, function (i, column) {
+				var rect = column.getBoundingClientRect();
+				$(column).css('top', rect.top + diff);
+			});
+		});
+	},
+	
+	stopAdjustingPositions: function () {
+		clearInterval(this.startAdjustingPositions.interval);
+	},
+	
 	Q: {
 		onRetain: function(newOptions, incomingElement) {
 			Q.replace(this.element, incomingElement);
@@ -860,6 +881,7 @@ Q.Tool.define("Q/columns", function(options) {
 					this.style.maxWidth = $(this).data('Q/columns maxWidth');
 				});
 			}
+			this.stopAdjustingPositions();
 		}
 	}
 }
